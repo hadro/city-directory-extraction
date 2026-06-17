@@ -1,0 +1,23 @@
+# data + model artifacts (large; regenerate or download)
+data/
+models/
+outputs/
+*.jsonl
+*.parquet
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# secrets / env
+.env
+*.env
+
+# os / editor
+.DS_Store
+.vscode/
+.idea/
+/preds*.txt

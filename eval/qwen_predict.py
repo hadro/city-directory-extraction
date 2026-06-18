@@ -101,20 +101,68 @@ def predict(net, tok, examples, target, batch_size, max_new_tokens):
             yield parse_completion(tok.decode(row, skip_special_tokens=True), target)
 
 
+def _load_model(model_id: str):
+    """Load a Qwen3.5 checkpoint with the SAME class TRL/SFTTrainer used at train time.
+
+    Qwen3.5 is multimodal (it carries a vision tower). When SFTTrainer is handed the model
+    *id string*, it auto-loads the full vision-language model, so LoRA (target_modules=
+    "all-linear") wraps both the text decoder AND the vision tower, and the adapter's keys are
+    nested under that multimodal wrapper. Loading AutoModelForCausalLM here gives a text-only
+    module tree with a DIFFERENT nesting -> PeftModel reports "missing adapter keys" and the
+    trained text adapter is silently NOT applied (eval then scores at the base-model floor).
+    Mirror training: try the image-text-to-text class first, fall back to causal LM."""
+    try:
+        from transformers import AutoModelForImageTextToText
+        net = AutoModelForImageTextToText.from_pretrained(model_id, torch_dtype="auto", device_map="auto")
+        print(f"  loaded {model_id} as AutoModelForImageTextToText (multimodal, matches training)", file=sys.stderr)
+        return net
+    except Exception as e:                              # genuinely text-only / merged checkpoint
+        print(f"  multimodal load failed ({type(e).__name__}: {e}); using AutoModelForCausalLM", file=sys.stderr)
+        from transformers import AutoModelForCausalLM
+        return AutoModelForCausalLM.from_pretrained(model_id, torch_dtype="auto", device_map="auto")
+
+
 def load(model_id: str, base_model: Optional[str]):
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(base_model or model_id)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     tok.padding_side = "left"                          # decoder-only batched generation
     if base_model:
         from peft import PeftModel
-        base = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype="auto", device_map="auto")
+        base = _load_model(base_model)
         net = PeftModel.from_pretrained(base, model_id)
     else:
-        net = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype="auto", device_map="auto")
+        net = _load_model(model_id)
     net.eval()
     return net, tok
+
+
+def load_examples(path: str):
+    """Read example JSONL from a local path, http(s) URL, or hf://datasets/<repo>/<file> (the
+    last lets this run as an HF Job so the 5GB model downloads in the datacenter, not over your
+    wifi). hf:// + private repos authenticate via the job's HF_TOKEN."""
+    if path.startswith("hf://datasets/"):
+        from huggingface_hub import hf_hub_download
+        parts = path[len("hf://datasets/"):].split("/")
+        path = hf_hub_download(repo_id="/".join(parts[:2]), filename="/".join(parts[2:]), repo_type="dataset")
+        text = open(path, encoding="utf-8").read()
+    elif path.startswith(("http://", "https://")):
+        import urllib.request
+        with urllib.request.urlopen(path) as r:
+            text = r.read().decode("utf-8")
+    else:
+        text = open(path, encoding="utf-8").read()
+    return [json.loads(ln) for ln in text.splitlines() if ln.strip()]
+
+
+def push_preds(local_path: str, dest: str) -> None:
+    """Upload the (tiny) preds file to hf://datasets/<repo>/<file> so a Job's output comes back
+    without the model ever touching your machine."""
+    from huggingface_hub import upload_file
+    parts = dest[len("hf://datasets/"):].split("/")
+    upload_file(path_or_fileobj=local_path, path_in_repo="/".join(parts[2:]),
+                repo_id="/".join(parts[:2]), repo_type="dataset")
 
 
 # --- offline self-test: prompt + parse, NO model / heavy deps ---------------------------------
@@ -140,6 +188,10 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--gold", help="eval JSONL ({raw_line, context, record}) to predict on")
     ap.add_argument("--out", default="data/preds_qwen.txt",
                     help="predictions file, one record per gold line (default under git-ignored data/)")
+    ap.add_argument("--push-out", default=None,
+                    help="also upload preds to hf://datasets/<repo>/<file> — use when running this "
+                         "as an HF Job so the model stays in the datacenter; then download the tiny "
+                         "preds and score locally")
     ap.add_argument("--target", choices=["pipe", "yaml"], default="pipe",
                     help="MUST match the format sft_qwen.py was trained with")
     ap.add_argument("--batch-size", type=int, default=16)
@@ -153,8 +205,7 @@ def main(argv: Optional[list] = None) -> int:
     if not args.model or not args.gold:
         ap.error("--model and --gold are required (or use --self-test)")
 
-    with open(args.gold, encoding="utf-8") as f:
-        examples = [json.loads(ln) for ln in f if ln.strip()]
+    examples = load_examples(args.gold)
     if args.limit:
         examples = examples[:args.limit]
 
@@ -169,7 +220,14 @@ def main(argv: Optional[list] = None) -> int:
                 print(f"  ... {n}/{len(examples)}", file=sys.stderr)
 
     print(f"wrote {n} predictions ({args.model}, {args.target}) -> {args.out}", file=sys.stderr)
-    print(f"score with: python3 eval/evaluate.py --gold {args.gold} --pred {args.out} --target {args.target}",
+    if args.push_out:
+        push_preds(args.out, args.push_out)
+        print(f"uploaded preds -> {args.push_out}", file=sys.stderr)
+    # Point the hint at the file you'll actually score: the pushed hf:// target when --push-out is
+    # set (evaluate.py reads hf:// too), else the local --out. Avoids suggesting the stale local
+    # default after a Job that only pushed remotely.
+    pred_for_hint = args.push_out or args.out
+    print(f"score with: python3 eval/evaluate.py --gold {args.gold} --pred {pred_for_hint} --target {args.target}",
           file=sys.stderr)
     return 0
 

@@ -111,6 +111,9 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--hub-model-id", default=None)
     ap.add_argument("--output-dir", default="out_sft")
     ap.add_argument("--epochs", type=float, default=3.0)
+    ap.add_argument("--max-train-samples", type=int, default=0,
+                    help="cap training examples after a shuffle (0 = all). This task converges in "
+                         "well under one epoch, so a small cap + --epochs 1 trains in minutes.")
     ap.add_argument("--batch-size", type=int, default=16)
     ap.add_argument("--grad-accum", type=int, default=1)
     ap.add_argument("--lr", type=float, default=2e-4)
@@ -137,6 +140,9 @@ def main(argv: Optional[list] = None) -> int:
     from trl import SFTConfig, SFTTrainer
 
     ds = load_dataset("json", data_files=args.train_file, split="train")
+    if args.max_train_samples and args.max_train_samples < len(ds):
+        ds = ds.shuffle(seed=42).select(range(args.max_train_samples))
+        print(f"capped training set to {args.max_train_samples} examples (shuffled)", file=sys.stderr)
     target = args.target
 
     def fmt(ex):
@@ -156,7 +162,14 @@ def main(argv: Optional[list] = None) -> int:
         peft_config = LoraConfig(
             r=16, lora_alpha=32, lora_dropout=0.05, bias="none",
             task_type="CAUSAL_LM",
-            target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+            # "all-linear" adapts every linear layer, so it maps cleanly onto Qwen3.5's hybrid
+            # (attention + linear-attention) layers — naming q/k/v/o_proj left ~1/4 of layers
+            # un-adapted (the "missing adapter keys" warning).
+            target_modules="all-linear",
+            # ...but Qwen3.5 is multimodal: all-linear otherwise also adapts the vision tower
+            # (visual.*, ~half the saved tensors) which we never use for text -> wasted capacity
+            # AND a train/eval load-class mismatch footgun. Exclude it so the adapter is text-only.
+            exclude_modules="(?i).*visual.*",
         )
 
     model_init_kwargs = None
@@ -166,13 +179,17 @@ def main(argv: Optional[list] = None) -> int:
             load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
             bnb_4bit_compute_dtype=torch.bfloat16 if use_bf16 else torch.float16)}
 
-    cfg = SFTConfig(
+    # TRL's config API drifts between versions; build kwargs, then keep only what THIS
+    # SFTConfig accepts (e.g. max_seq_length was renamed to max_length) so a minor version
+    # bump can't crash the run on remote infra.
+    from dataclasses import fields as _dc_fields
+    cfg_fields = {f.name for f in _dc_fields(SFTConfig)}
+    cfg_kwargs = dict(
         output_dir=args.output_dir,
         num_train_epochs=args.epochs,
         per_device_train_batch_size=args.batch_size,
         gradient_accumulation_steps=args.grad_accum,
         learning_rate=args.lr,
-        max_seq_length=args.max_seq_len,
         logging_steps=25,
         save_strategy="epoch",
         bf16=use_bf16,
@@ -184,7 +201,21 @@ def main(argv: Optional[list] = None) -> int:
         hub_model_id=args.hub_model_id,
         report_to="none",
     )
-    trainer = SFTTrainer(model=args.model, args=cfg, train_dataset=ds, peft_config=peft_config)
+    cfg_kwargs["max_length" if "max_length" in cfg_fields else "max_seq_length"] = args.max_seq_len
+    for k in [k for k in cfg_kwargs if k not in cfg_fields]:
+        print(f"note: this TRL's SFTConfig has no '{k}'; skipping it", file=sys.stderr)
+        cfg_kwargs.pop(k)
+    cfg = SFTConfig(**cfg_kwargs)
+    # Hand the trainer a TEXT tokenizer explicitly. Newer TRL otherwise calls AutoProcessor,
+    # which for Qwen checkpoints pulls in a vision image-processor (needs PIL/torchvision we
+    # don't ship). Kwarg is `processing_class` on new TRL, `tokenizer` on older.
+    import inspect
+    from transformers import AutoTokenizer
+    tokenizer = AutoTokenizer.from_pretrained(args.model)
+    tok_kw = ("processing_class" if "processing_class" in inspect.signature(SFTTrainer.__init__).parameters
+              else "tokenizer")
+    trainer = SFTTrainer(model=args.model, args=cfg, train_dataset=ds, peft_config=peft_config,
+                         **{tok_kw: tokenizer})
     trainer.train()
     trainer.save_model(args.output_dir)
     if args.push_to_hub:

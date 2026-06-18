@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.9"
-# dependencies = []
+# dependencies = ["huggingface_hub"]   # only used to resolve hf:// paths; local files need no network
 # ///
 """
 Field-level evaluation for the city-directory extractor.
@@ -133,18 +133,27 @@ def save_run(path: str, args, res: dict) -> None:
     print(f"saved metrics ({rec['label']}) -> {path}", file=sys.stderr)
 
 
+def _read_text(path: str) -> str:
+    """Read a local path, http(s) URL, or hf://datasets/<repo>/<file>. Mirrors qwen_predict.py's
+    loader so the 'score with:' hint it prints (which may reference an hf:// --push-out file) works
+    verbatim. The huggingface_hub import is lazy — local files need no network or that dep."""
+    if path.startswith("hf://datasets/"):
+        from huggingface_hub import hf_hub_download
+        parts = path[len("hf://datasets/"):].split("/")
+        path = hf_hub_download(repo_id="/".join(parts[:2]), filename="/".join(parts[2:]), repo_type="dataset")
+    elif path.startswith(("http://", "https://")):
+        import urllib.request
+        with urllib.request.urlopen(path) as r:
+            return r.read().decode("utf-8")
+    return open(path, encoding="utf-8").read()
+
+
 def load_gold(path: str) -> list:
-    out = []
-    with open(path, encoding="utf-8") as fh:
-        for line in fh:
-            line = line.strip()
-            if line:
-                out.append(json.loads(line)["record"])
-    return out
+    return [json.loads(ln)["record"] for ln in _read_text(path).splitlines() if ln.strip()]
 
 
 def load_pred(path: str, target: str) -> list:
-    text = open(path, encoding="utf-8").read()
+    text = _read_text(path)
     if target == "yaml":
         blocks = [b for b in re.split(r"\n\s*\n", text) if b.strip()]
         return [parse_yaml(b) for b in blocks]

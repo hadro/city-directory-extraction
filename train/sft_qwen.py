@@ -122,6 +122,12 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--qlora", action="store_true",
                     help="4-bit QLoRA — fits e.g. 4B on a free 16GB T4 (Colab); LoRA-only, not with --full")
     ap.add_argument("--push-to-hub", action="store_true")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="build the LoRA-wrapped model and print which modules get adapters "
+                         "(verifies exclude_modules), then exit — no training, no GPU needed")
+    ap.add_argument("--packing", action="store_true",
+                    help="pack short examples to fill max_seq_len (HF's efficiency default); big "
+                         "throughput win for our short directory lines, no kernels needed")
     args = ap.parse_args(argv)
 
     # ---- lightweight path: inspect the data without importing torch/trl ----
@@ -172,6 +178,30 @@ def main(argv: Optional[list] = None) -> int:
             exclude_modules="(?i).*visual.*",
         )
 
+    if args.dry_run:
+        if peft_config is None:
+            sys.exit("--dry-run inspects LoRA targeting; not meaningful with --full")
+        import collections, re as _re
+        from transformers import AutoModelForImageTextToText
+        from peft import get_peft_model
+        print(f"[dry-run] loading {args.model} (multimodal, as SFTTrainer would) on CPU...", file=sys.stderr)
+        base = AutoModelForImageTextToText.from_pretrained(args.model, torch_dtype="auto")
+        pm = get_peft_model(base, peft_config)
+        mods, visual = collections.Counter(), 0
+        for pname, _ in pm.named_parameters():
+            if ".lora_" in pname:
+                mods[pname.split(".lora_")[0].split(".")[-1]] += 1
+                if "visual" in pname:
+                    visual += 1
+        print("[dry-run] adapted submodule types (count of lora_A/B tensors):", file=sys.stderr)
+        for k, v in sorted(mods.items()):
+            print(f"    {k}: {v}", file=sys.stderr)
+        pm.print_trainable_parameters()
+        print(f"[dry-run] adapter params touching 'visual': {visual}", file=sys.stderr)
+        print("[dry-run] OK — exclude_modules working (no vision adapters)" if visual == 0
+              else "[dry-run] WARNING — vision tower still being adapted!", file=sys.stderr)
+        return 0
+
     model_init_kwargs = None
     if args.qlora:
         from transformers import BitsAndBytesConfig
@@ -194,7 +224,8 @@ def main(argv: Optional[list] = None) -> int:
         save_strategy="epoch",
         bf16=use_bf16,
         fp16=not use_bf16,
-        packing=False,
+        packing=args.packing,
+        packing_strategy="wrapped",   # TRL 0.20+ needs this for packing; filtered out on older TRL
         assistant_only_loss=True,
         model_init_kwargs=model_init_kwargs,
         push_to_hub=args.push_to_hub,

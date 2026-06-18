@@ -22,6 +22,8 @@ Usage
 -----
     python3 harvest_own.py --dir ../directory-pipeline/output/tulsa_1921 --out data/tulsa_eval.jsonl
     python3 harvest_own.py --dir ../directory-pipeline/output/tulsa_1922 --out data/tulsa22_eval.jsonl --limit 1000
+    # Lain-1897 is the Brooklyn directory -> tag it nyc (NOT tulsa, the default):
+    python3 harvest_own.py --dir ../directory-pipeline/output/lain_1897 --out data/lain_eval.jsonl --dialect nyc
 """
 from __future__ import annotations
 
@@ -109,6 +111,9 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--out", default=None, help="output .jsonl (default: stdout)")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--year", default=None, help="directory_year (else inferred from --dir)")
+    ap.add_argument("--dialect", default="tulsa",
+                    help="dialect tag for context (a directory is one dialect). Use 'nyc' for the "
+                         "Lain-1897 Brooklyn directory — it's NYC-area, not Tulsa.")
     ap.add_argument("--keep-unrecoverable", action="store_true",
                     help="keep rows whose gold name/address isn't present in the recovered OCR "
                          "line (default: drop them so the eval is fair to a text-only model)")
@@ -159,7 +164,7 @@ def main(argv: Optional[list] = None) -> int:
                     continue
                 ex = {
                     "raw_line": raw,
-                    "context": {"dialect": "tulsa",
+                    "context": {"dialect": args.dialect,
                                 "alphabetical_range": (r.get("alphabetical_range") or "").strip(),
                                 "directory_year": year, "image": img},
                     "record": record,

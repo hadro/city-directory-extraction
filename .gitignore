@@ -5,6 +5,11 @@ outputs/
 *.jsonl
 *.parquet
 
+# generated locally from pipeline output (census surnames.tsv IS committed as the seed)
+data_prep/names/surnames_harvested.tsv
+data_prep/names/given_harvested.tsv
+data_prep/master_directories.pending.csv
+
 # python
 __pycache__/
 *.py[cod]

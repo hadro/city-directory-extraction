@@ -28,7 +28,9 @@ import os
 import sys
 from typing import Optional
 
-METRICS = {"macro_f1": "macro-F1", "row_exact_pct": "whole-row EM%"}
+METRICS = {"macro_f1": "macro-F1 (avg over present fields)",
+           "micro_f1": "micro-F1 (frequency-weighted)",
+           "row_exact_pct": "whole-row EM%"}
 
 
 def eval_name(gold: str) -> str:
@@ -54,7 +56,7 @@ def build_table(records, metric: str) -> str:
     def fmt(v):
         if v is None:
             return "—"
-        return f"{v:.3f}" if metric == "macro_f1" else f"{v:.1f}"
+        return f"{v:.1f}" if metric == "row_exact_pct" else f"{v:.3f}"
 
     head = "| eval set | " + " | ".join(labels) + " |"
     sep = "|" + "---|" * (len(labels) + 1)
@@ -90,7 +92,8 @@ def main(argv: Optional[list] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--in", dest="inp", default="results/scores.jsonl", help="metrics log from evaluate.py --save")
     ap.add_argument("--out", default=None, help="write Markdown here (default: stdout)")
-    ap.add_argument("--metric", choices=list(METRICS), default="macro_f1")
+    ap.add_argument("--metric", choices=[*METRICS, "all"], default="all",
+                    help="'all' (default) stacks macro-F1, micro-F1 and whole-row exact-match")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
 
@@ -99,7 +102,11 @@ def main(argv: Optional[list] = None) -> int:
     if not os.path.exists(args.inp):
         sys.exit(f"no metrics log at {args.inp} (run eval/evaluate.py --save {args.inp} first)")
 
-    md = build_table(load(args.inp), args.metric)
+    recs = load(args.inp)
+    if args.metric == "all":
+        md = "\n".join(build_table(recs, m) for m in METRICS)
+    else:
+        md = build_table(recs, args.metric)
     if args.out:
         if os.path.dirname(args.out):
             os.makedirs(os.path.dirname(args.out), exist_ok=True)

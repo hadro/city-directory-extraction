@@ -56,7 +56,9 @@ Usage
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
+import os
 import random
 import re
 import sys
@@ -90,8 +92,51 @@ GIVEN_ABBREV = {
     "William": "Wm", "Charles": "Chas", "James": "Jas", "John": "Jno", "George": "Geo",
     "Samuel": "Saml", "Joseph": "Jos", "Robert": "Robt", "Thomas": "Thos",
     "Frederick": "Fredk", "Daniel": "Danl", "Patrick": "Patk", "Cornelius": "Cornls",
-    "Margaret": "Margt", "Catherine": "Cath", "Elizabeth": "Eliza",
+    "Margaret": "Margt", "Catherine": "Cath", "Elizabeth": "Eliza", "Benjamin": "Benj",
+    "Richard": "Richd", "Edward": "Edwd", "Alexander": "Alexr", "Theodore": "Theo",
+    "Nicholas": "Nichs", "Augustus": "Augs", "Christopher": "Chris",
 }
+
+# Surname pool = census variety (data_prep/fetch_names.py) + real names harvested from the target
+# directories (data_prep/harvest_names.py), merged:
+#   * census `surnames.tsv` is TEMPERED (count**0.3) so common names stay common but the long tail
+#     is well represented -> the model learns to COPY arbitrary surnames, not regularise them to the
+#     handful it saw (the biggest measured error).
+#   * `surnames_harvested.tsv` (authentic era/place names) is BOOSTED so the synthetic distribution
+#     leans real (fixes census anachronisms like "Woldemariam" in 1855) while keeping census variety.
+# Falls back to the small inline SURNAMES if neither file is present.
+_NAMES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "names")
+HARVEST_BOOST = 8.0
+
+
+def _load_surname_pool():
+    weight: dict = {}
+    census = os.path.join(_NAMES_DIR, "surnames.tsv")
+    try:
+        with open(census, encoding="utf-8") as fh:
+            for ln in fh:
+                n, w = ln.rstrip("\n").split("\t")
+                weight[n] = int(w) ** 0.3                  # temper toward variety
+    except (FileNotFoundError, ValueError):
+        pass
+    harvested = os.path.join(_NAMES_DIR, "surnames_harvested.tsv")
+    if os.path.exists(harvested):
+        for ln in open(harvested, encoding="utf-8"):
+            n, w = ln.rstrip("\n").split("\t")
+            weight[n] = weight.get(n, 0.0) + HARVEST_BOOST * int(w) ** 0.5   # lean real
+    if not weight:
+        return None, None
+    names = list(weight)
+    return names, list(itertools.accumulate(weight[n] for n in names))
+
+
+_SUR_POOL, _SUR_CUM = _load_surname_pool()
+
+
+def _surname(rng) -> str:
+    if _SUR_POOL:
+        return rng.choices(_SUR_POOL, cum_weights=_SUR_CUM, k=1)[0]
+    return rng.choice(SURNAMES)                     # fallback: small inline pool
 
 
 def _wchoice(rng, items):
@@ -192,7 +237,7 @@ def _tul_address(rng, greenwood=False, rear_boost=False) -> str:
 
 
 def _tul_name(rng, female: bool) -> str:
-    surname = rng.choice(SURNAMES)
+    surname = _surname(rng)
     title = ""
     if female and rng.random() < 0.20:
         title = rng.choice(["Mrs", "Miss"]) + " "
@@ -219,7 +264,7 @@ def make_tulsa(rng) -> dict:
         p = 0.55 if occ in TUL_EMP_LIKELY else 0.10
         if rng.random() < p:
             emp = rng.choice(TUL_EMPLOYERS) if rng.random() < 0.75 else \
-                f"{rng.choice(SURNAMES)} {rng.choice(['Oil Co', '& Co', 'Drug Co', 'Bros'])}"
+                f"{_surname(rng)} {rng.choice(['Oil Co', '& Co', 'Drug Co', 'Bros'])}"
     spouse = ""
     if not female and rng.random() < 0.45:
         spouse = _given(rng, True, abbrev_p=0) + (f" {rng.choice('ABEHJLMRS')}" if rng.random() < 0.25 else "")
@@ -234,10 +279,10 @@ def make_tulsa(rng) -> dict:
 
 
 def _tul_business(rng) -> dict:
-    n = rng.choice(SURNAMES).upper()
+    n = _surname(rng).upper()
     roll = rng.random()
     if roll < 0.4:
-        name = f"{n} {rng.choice(SURNAMES).upper()} {rng.choice(TUL_BIZ_SUFFIX).upper()}"
+        name = f"{n} {_surname(rng).upper()} {rng.choice(TUL_BIZ_SUFFIX).upper()}"
     elif roll < 0.7:
         name = f"{n} {rng.choice(TUL_BIZ_SUFFIX).upper()}"
     else:
@@ -332,16 +377,16 @@ def _nyc_address(rng) -> str:
 
 
 def _nyc_name(rng, female: bool) -> str:
-    surname = rng.choice(SURNAMES)
+    surname = _surname(rng)
     mid = f" {rng.choice('ABCDEFGHJLMRSTW')}" if rng.random() < 0.30 else ""
     return f"{surname} {_given(rng, female)}{mid}"
 
 
 def make_nyc(rng) -> dict:
     if rng.random() < 0.03:                           # occasional business listing
-        n = rng.choice(SURNAMES)
+        n = _surname(rng)
         rec = {
-            "name": f"{n} & {rng.choice(SURNAMES)}", "is_business": True, "spouse_name": "",
+            "name": f"{n} & {_surname(rng)}", "is_business": True, "spouse_name": "",
             "race_designation": "", "occupation_role": rng.choice(["merchants", "grocers",
             "tailors", "segars", "liquors", "druggists"]), "employer": "",
             "address": _nyc_address(rng), "home_address": "",

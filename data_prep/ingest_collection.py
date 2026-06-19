@@ -17,6 +17,8 @@ Source detection
             -> https://api-collections.nypl.org/manifests/collection/<uuid>  (IIIF v3 Collection)
     ia    : archive.org/details/<collection_id>             (or a bare IA identifier)
             -> advancedsearch.php?q=collection:<id> ...      (paginated JSON)
+            A within-collection search (the IA UI's `?query=` / `?q=`, or `--query`) narrows to
+            `collection:<id> AND (<query>)` — e.g. .../details/durstoldyorklibrary?query=directory.
     iiif  : any IIIF Collection or Manifest URL (BPL, Columbia, CONTENTdm, ...)
 
 Enrichment is best-effort: we parse year/publisher when confident, leave the rest blank, and put
@@ -189,8 +191,13 @@ def _ia_search(query: str) -> list[dict]:
     return rows
 
 
-def extract_ia(coll_id: str) -> list[dict]:
-    """Treat the identifier as a collection; if that's empty, fall back to a single item."""
+def extract_ia(coll_id: str, query: str = "") -> list[dict]:
+    """Treat the identifier as a collection; if that's empty, fall back to a single item.
+    With a `query`, narrow to a within-collection search (no single-item fallback then)."""
+    if query:
+        q = f"collection:{coll_id} AND ({query})"
+        print(f"  IA within-collection search: {q!r}", file=sys.stderr)
+        return _ia_search(q)
     rows = _ia_search(f"collection:{coll_id}")
     if not rows:
         print(f"  no collection members for {coll_id!r}; trying as a single item",
@@ -438,6 +445,9 @@ def main(argv=None) -> int:
     ap.add_argument("--print", dest="print_only", action="store_true",
                     help="print candidate rows to stdout; do not write the pending file")
     ap.add_argument("--limit", type=int, default=0, help="cap extracted rows (0=all)")
+    ap.add_argument("--query", default="",
+                    help="(IA) narrow to a within-collection search: collection:<id> AND (<query>). "
+                         "Also auto-parsed from a ?query= / ?q= in the URL")
     ap.add_argument("--enrich", action="store_true",
                     help="(NYPL) fetch per-item metadata to fill publisher/year; archive every "
                          "response to nypl_api_archive/ (API deprecated 2026-08-01)")
@@ -457,7 +467,15 @@ def main(argv=None) -> int:
 
     kind, ident = detect_source(args.url)
     print(f"detected source={kind} ident={ident}", file=sys.stderr)
-    rows = {"nypl": extract_nypl, "ia": extract_ia, "iiif": extract_iiif}[kind](ident)
+    if kind == "ia":
+        from urllib.parse import parse_qs, urlparse
+        qs = parse_qs(urlparse(args.url).query)
+        query = (args.query or qs.get("query", [""])[0] or qs.get("q", [""])[0]).strip()
+        rows = extract_ia(ident, query)
+    elif kind == "nypl":
+        rows = extract_nypl(ident)
+    else:
+        rows = extract_iiif(ident)
     if args.limit:
         rows = rows[:args.limit]
 

@@ -19,6 +19,8 @@ Source detection
             -> advancedsearch.php?q=collection:<id> ...      (paginated JSON)
             A within-collection search (the IA UI's `?query=` / `?q=`, or `--query`) narrows to
             `collection:<id> AND (<query>)` — e.g. .../details/durstoldyorklibrary?query=directory.
+    loc   : a loc.gov /item/<lccn>/ URL, or a faceted search/browse URL (loc.gov/books/?fa=...&q=...)
+            -> fetched with fo=json, paginated; row id = the bare LCCN.
     iiif  : any IIIF Collection or Manifest URL (BPL, Columbia, CONTENTdm, ...)
 
 Enrichment is best-effort: we parse year/publisher when confident, leave the rest blank, and put
@@ -75,8 +77,10 @@ UUID_RE = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{
 # ---------------------------------------------------------------- source detection
 
 def detect_source(url: str) -> tuple[str, str]:
-    """Return (kind, ident). kind in {nypl, ia, iiif}."""
+    """Return (kind, ident). kind in {nypl, ia, loc, iiif}."""
     u = url.strip()
+    if "loc.gov" in u:                             # LoC item or faceted search URL (use as-is)
+        return "loc", u
     if "digitalcollections.nypl.org" in u or "api-collections.nypl.org" in u:
         m = UUID_RE.search(u)
         if not m:
@@ -203,6 +207,52 @@ def extract_ia(coll_id: str, query: str = "") -> list[dict]:
         print(f"  no collection members for {coll_id!r}; trying as a single item",
               file=sys.stderr)
         rows = _ia_search(f"identifier:{coll_id}")
+    return rows
+
+
+def _loc_item_id(url: str) -> str:
+    m = re.search(r"loc\.gov/(?:item|resource)/([^/?#]+)", str(url))
+    return m.group(1) if m else ""
+
+
+def extract_loc(url: str) -> list[dict]:
+    """Library of Congress: a single /item/<lccn>/ URL, or a faceted search/browse URL
+    (loc.gov/books/?fa=...&q=...). Appends fo=json and paginates the `results` array. The row
+    `id` is the bare LCCN — the sibling sample_directories.py builds the manifest URL from it."""
+    from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+
+    inst = "Library of Congress"
+    if "/item/" in url:                                 # single item
+        iid = _loc_item_id(url)
+        r = _SESSION.get(f"https://www.loc.gov/item/{iid}/", params={"fo": "json"}, timeout=60)
+        r.raise_for_status()
+        item = r.json().get("item", {})
+        return [make_row("loc", iid, title=str(item.get("title", "")),
+                         year_hint=str(item.get("date") or ""), institution=inst)]
+
+    parts = urlsplit(url)                                # faceted search -> paginate
+    q = dict(parse_qsl(parts.query))
+    q["fo"] = "json"
+    q.setdefault("c", "100")
+    rows, page, per = [], 1, int(q["c"])
+    while True:
+        q["sp"] = str(page)
+        u2 = urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(q), ""))
+        r = _SESSION.get(u2, timeout=60)
+        r.raise_for_status()
+        results = r.json().get("results", [])
+        for it in results:
+            iid = _loc_item_id(it.get("id") or it.get("url") or "")
+            if not iid:                                 # skip collections / web-page hits
+                continue
+            if it.get("type") and "text" not in [t.lower() for t in it["type"]]:
+                continue                                # books/texts only (skip maps, audio, …)
+            rows.append(make_row("loc", iid, title=str(it.get("title", "")),
+                                 year_hint=str(it.get("date") or ""), institution=inst))
+        if len(results) < per:                          # short page -> last page (LoC `of` = #hits)
+            break
+        page += 1
+        time.sleep(1.0)                                 # LoC throttles aggressively (429s)
     return rows
 
 
@@ -474,6 +524,8 @@ def main(argv=None) -> int:
         rows = extract_ia(ident, query)
     elif kind == "nypl":
         rows = extract_nypl(ident)
+    elif kind == "loc":
+        rows = extract_loc(ident)
     else:
         rows = extract_iiif(ident)
     if args.limit:

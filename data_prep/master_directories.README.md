@@ -16,14 +16,15 @@ volumes) for the pipeline to OCR/extract.
 | `id` | **yes** | the source-specific identifier (see below) |
 | `publisher` | rec. | Trow, Lain, Polk, Doggett, Sampson, Boyd, … |
 | `city` | rec. | New York, Brooklyn, Chicago, … |
-| `borough` | rec. | Manhattan \| Brooklyn \| Queens \| Bronx \| Staten Island \| "" |
+| `borough` | rec. | Manhattan \| Brooklyn \| Queens \| Bronx \| Staten Island \| "" — auto-filled by `ingest_collection.py` **only when a single borough is named in the title**; multi-borough volumes stay blank with a `covers X, Y` note |
 | `year` | rec. | `1875` or `1875/76` |
 | `start_page` | opt. | first **printed** listing page (skips front matter). Blank → sampler uses the middle ~80% of canvases |
 | `end_page` | opt. | last printed listing page |
 | `column_count` | opt. | print layout columns (1–5); useful later for style tagging |
 | `sample_page` | opt. | a known-good listing page number (sanity reference) |
 | `holding_institution` | rec. | NYPL, BPL, Columbia, LoC, Internet Archive, … (provenance) |
-| `notes` | opt. | anything (e.g. microform, condition, "Greater NY") |
+| `title` | rec. | the volume's title (MODS primary title / manifest label); auto-filled by `ingest_collection.py` |
+| `notes` | opt. | anything (e.g. microform, condition, "Greater NY", `PHONEBOOK`, `covers …`) |
 
 ### What goes in `id`, per `source`
 - **`nypl`** — the item **UUID** (e.g. `4b4b2b90-317a-0134-6800-00505686a51c`). Resolves to

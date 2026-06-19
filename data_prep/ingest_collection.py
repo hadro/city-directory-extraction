@@ -27,8 +27,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
+import os
 import re
 import sys
+import time
 from pathlib import Path
 
 import requests
@@ -36,11 +39,17 @@ import requests
 HERE = Path(__file__).resolve().parent
 MASTER = HERE / "master_directories.csv"
 PENDING = HERE / "master_directories.pending.csv"
+ARCHIVE_DIR = HERE / "nypl_api_archive"
+NYPL_API = "https://api.repo.nypl.org/api/v2"           # deprecated 2026-08-01 — archive while we can
+NYPL_IIIF_ITEM = "https://api-collections.nypl.org/manifests/{}"
 FIELDS = [
     "source", "id", "publisher", "city", "borough", "year",
     "start_page", "end_page", "column_count", "sample_page",
-    "holding_institution", "notes",
+    "holding_institution", "title", "notes",
 ]
+
+# NYC boroughs, for filling `borough` from MODS subject.geographic / titles when unambiguous.
+BOROUGHS = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"]
 
 _SESSION = requests.Session()
 _SESSION.headers.update({"User-Agent": "city-directory-ingest/1.0 (+research)"})
@@ -109,22 +118,25 @@ def eval_flag(publisher: str, year: str) -> str:
     return ""
 
 
+def boroughs_in_title(title: str) -> list:
+    """Boroughs explicitly named in the title. The title is the reliable borough signal; MODS
+    subject.geographic is noisy (catalogers cross-reference e.g. a Brooklyn subject onto a
+    Manhattan 'New York City directory'), so we deliberately do NOT use subjects here."""
+    low = (title or "").lower()
+    return [b for b in BOROUGHS if b.lower() in low]
+
+
 def make_row(source: str, ident: str, *, title: str = "", year_hint: str = "",
              city: str = "", institution: str = "") -> dict:
     title = (title or "").strip()
     year = parse_year(f"{year_hint} {title}".strip())
     publisher = parse_publisher(title)
-    notes = []
     flag = eval_flag(publisher, year)
-    if flag:
-        notes.append(flag)
-    if title:
-        notes.append(f'title: "{title[:160]}"')
     return {
         "source": source, "id": ident,
         "publisher": publisher, "city": city, "borough": "", "year": year,
         "start_page": "", "end_page": "", "column_count": "", "sample_page": "",
-        "holding_institution": institution, "notes": " | ".join(notes),
+        "holding_institution": institution, "title": title[:200], "notes": flag,
     }
 
 
@@ -213,6 +225,165 @@ def extract_iiif(url: str) -> list[dict]:
     return [make_row("iiif", url, title=str(label))]
 
 
+# ---------------------------------------------------------------- NYPL enrichment + archival
+# The NYPL Digital Collections API (api.repo.nypl.org) is being deprecated 2026-08-01. We use it
+# while it lives to pull clean MODS metadata, and archive every response to nypl_api_archive/ so the
+# metadata survives the shutdown. Without a token we fall back to scraping the IIIF item manifests.
+
+def _ensure_list(obj) -> list:                          # ported from directory-pipeline nypl_utils
+    if obj is None:
+        return []
+    return obj if isinstance(obj, list) else [obj]
+
+
+def _unwrap_text(obj) -> str:                           # MODS values are {'$': value}-wrapped
+    if isinstance(obj, dict):
+        return str(obj.get("$", ""))
+    return str(obj) if obj else ""
+
+
+def _strip_html(text: str) -> str:
+    return re.sub(r"<[^>]+>", " ", text or "")
+
+
+def _apply_enrichment(row: dict, publisher_text: str, year_text: str, title: str = "") -> None:
+    """Fill publisher/year/title/borough from extracted metadata, then re-check the held-out eval
+    flag (publisher is blank at extraction time, so this is the first point the Trow-1850 /
+    Lain-1897 check can fire). Only fills blanks — never overwrites curated values."""
+    pub = parse_publisher(publisher_text) or publisher_text.strip()
+    if pub and not row["publisher"]:
+        row["publisher"] = pub
+    yr = parse_year(year_text)
+    if yr and not row["year"]:
+        row["year"] = yr
+    if title and not row.get("title"):
+        row["title"] = title[:200]
+    if not row["borough"]:
+        named = boroughs_in_title(row.get("title") or title)
+        if len(named) == 1:
+            row["borough"] = named[0]
+        elif len(named) > 1 and "covers " not in row["notes"]:
+            span = "covers " + ", ".join(sorted(set(named)))
+            row["notes"] = f"{row['notes']} | {span}" if row["notes"] else span
+    flag = eval_flag(row["publisher"], row["year"])
+    if flag and not row["notes"].startswith("REVIEW"):
+        row["notes"] = f"{flag} | {row['notes']}" if row["notes"] else flag
+
+
+def _mods_extract(mods: dict) -> dict:
+    """Pull publisher / year / primary title / geographic subjects out of a MODS record."""
+    pub = year = title = ""
+    for oi in _ensure_list(mods.get("originInfo")):
+        if not isinstance(oi, dict):
+            continue
+        pub = pub or _unwrap_text(oi.get("publisher"))
+        di = oi.get("dateIssued")
+        year = year or _unwrap_text(_ensure_list(di)[0] if isinstance(di, list) else di)
+    titles = _ensure_list(mods.get("titleInfo"))
+    primary = next((t for t in titles if isinstance(t, dict) and t.get("usage") == "primary"),
+                   titles[0] if titles else None)
+    if isinstance(primary, dict):
+        title = _unwrap_text(primary.get("title"))
+        part = _unwrap_text(primary.get("partNumber"))
+        if part and part not in title:
+            title = f"{title}, {part}"
+    geos = []
+    for s in _ensure_list(mods.get("subject")):
+        if isinstance(s, dict):
+            for g in _ensure_list(s.get("geographic")):
+                geos.append(_unwrap_text(g) if isinstance(g, (dict, str)) else str(g))
+    return {"publisher": pub, "year": year, "title": title, "geos": geos}
+
+
+def enrich_nypl_api(new_rows, all_rows, coll_uuid, token, delay, archive_known) -> None:
+    """Preferred path. Fetch item_details for each NYPL item, archive the JSON, and fill publisher/
+    year on the *new* rows. Archives all items (unless archive_known is False) since the API is dying."""
+    sess = requests.Session()
+    sess.headers.update(_SESSION.headers)
+    sess.headers["Authorization"] = f'Token token="{token.strip()}"'   # tolerate CRLF .env files
+    ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+
+    # archive the collection-level response once, while we can
+    cpath = ARCHIVE_DIR / f"_collection_{coll_uuid}.json"
+    if not cpath.exists():
+        try:
+            r = sess.get(f"{NYPL_API}/collections/{coll_uuid}",
+                         params={"page": 1, "per_page": 500}, timeout=30)
+            r.raise_for_status()
+            cpath.write_text(json.dumps(r.json(), ensure_ascii=False), encoding="utf-8")
+            time.sleep(delay)
+        except Exception as e:
+            print(f"  [api] collection archive FAILED: {type(e).__name__}: {e}", file=sys.stderr)
+
+    by_id = {r["id"]: r for r in new_rows}
+    targets = (all_rows if archive_known else new_rows)
+    nypl = [r for r in targets if r["source"] == "nypl"]
+    total = len(nypl)
+    for i, r in enumerate(nypl, 1):
+        uuid = r["id"]
+        apath = ARCHIVE_DIR / f"{uuid}.json"
+        try:
+            if apath.exists():                          # idempotent: reuse archive, skip the fetch
+                data = json.loads(apath.read_text(encoding="utf-8"))
+            else:
+                resp = sess.get(f"{NYPL_API}/items/item_details/{uuid}",
+                                params={"page": 1, "per_page": 1}, timeout=30)
+                resp.raise_for_status()
+                data = resp.json()
+                apath.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+                time.sleep(delay)                       # only pause when we actually hit NYPL
+            target = by_id.get(uuid)
+            if target is not None:                      # only the new pending rows get enriched
+                mods = data.get("nyplAPI", {}).get("response", {}).get("mods") or {}
+                m = _mods_extract(mods)
+                _apply_enrichment(target, m["publisher"], m["year"], m["title"])
+        except Exception as e:
+            print(f"\n  [api] {uuid} FAILED: {type(e).__name__}: {e}", file=sys.stderr)
+            t = by_id.get(uuid)
+            if t is not None and "enrich failed" not in t["notes"]:
+                t["notes"] = ("enrich failed | " + t["notes"]).strip(" |")
+        print(f"  [api] {i}/{total} items archived/enriched", end="\r", file=sys.stderr)
+    print(file=sys.stderr)
+
+
+def enrich_nypl_iiif(new_rows, delay) -> None:
+    """Fallback path (no token). Scrape publisher/year out of the IIIF item manifest metadata and
+    archive each manifest to nypl_api_archive/{uuid}.iiif.json (clearly labeled vs. the API JSON)."""
+    ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+    nypl = [r for r in new_rows if r["source"] == "nypl"]
+    total = len(nypl)
+    for i, r in enumerate(nypl, 1):
+        uuid = r["id"]
+        apath = ARCHIVE_DIR / f"{uuid}.iiif.json"
+        try:
+            if apath.exists():
+                man = json.loads(apath.read_text(encoding="utf-8"))
+            else:
+                resp = _SESSION.get(NYPL_IIIF_ITEM.format(uuid), timeout=30)
+                resp.raise_for_status()
+                man = resp.json()
+                apath.write_text(json.dumps(man, ensure_ascii=False), encoding="utf-8")
+                time.sleep(delay)
+            text_parts = []
+            for entry in man.get("metadata", []):
+                val = entry.get("value", {})
+                if isinstance(val, dict):
+                    val = " ".join(x for v in val.values() for x in (v if isinstance(v, list) else [v]))
+                text_parts.append(_strip_html(str(val)))
+            text = " ".join(text_parts)
+            m = re.search(r"Publisher:\s*([^|<]+)", text)
+            pub = m.group(1).strip() if m else ""
+            ym = re.search(r"Date Issued:\s*(\d{4}[^|<]*)", text)
+            label = man.get("label", "")
+            if isinstance(label, dict):
+                label = " ".join(v[0] for v in label.values() if v)
+            _apply_enrichment(r, pub, ym.group(1) if ym else text, title=str(label))
+        except Exception as e:
+            print(f"\n  [iiif] {uuid} FAILED: {type(e).__name__}: {e}", file=sys.stderr)
+        print(f"  [iiif] {i}/{total} items archived/enriched", end="\r", file=sys.stderr)
+    print(file=sys.stderr)
+
+
 # ---------------------------------------------------------------- csv io / dedup
 
 def read_keys(path: Path) -> set[tuple[str, str]]:
@@ -267,6 +438,16 @@ def main(argv=None) -> int:
     ap.add_argument("--print", dest="print_only", action="store_true",
                     help="print candidate rows to stdout; do not write the pending file")
     ap.add_argument("--limit", type=int, default=0, help="cap extracted rows (0=all)")
+    ap.add_argument("--enrich", action="store_true",
+                    help="(NYPL) fetch per-item metadata to fill publisher/year; archive every "
+                         "response to nypl_api_archive/ (API deprecated 2026-08-01)")
+    ap.add_argument("--token", default=os.environ.get("NYPL_API_TOKEN", ""),
+                    help="NYPL Digital Collections API token (or set NYPL_API_TOKEN). "
+                         "Absent -> fall back to IIIF-manifest scraping")
+    ap.add_argument("--delay", type=float, default=1.0,
+                    help="seconds between NYPL item fetches (politeness throttle)")
+    ap.add_argument("--no-archive-known", action="store_true",
+                    help="only fetch/archive the new rows, not the full collection")
     args = ap.parse_args(argv)
 
     if args.merge:
@@ -292,6 +473,19 @@ def main(argv=None) -> int:
         fresh.append(r)
 
     print(f"extracted {len(rows)} items; {len(fresh)} new, {dupes} already known", file=sys.stderr)
+
+    if args.enrich and kind == "nypl":
+        if args.token:
+            print(f"enriching via NYPL API (delay={args.delay}s); archiving -> {ARCHIVE_DIR}",
+                  file=sys.stderr)
+            enrich_nypl_api(fresh, rows, ident, args.token, args.delay,
+                            archive_known=not args.no_archive_known)
+        else:
+            print("no NYPL_API_TOKEN — falling back to IIIF-manifest scraping", file=sys.stderr)
+            enrich_nypl_iiif(fresh, args.delay)
+    elif args.enrich:
+        print(f"--enrich only applies to NYPL sources (this is {kind}); skipping", file=sys.stderr)
+
     flagged = sum(1 for r in fresh if r["notes"].startswith("REVIEW"))
     if flagged:
         print(f"  {flagged} flagged for review (held-out eval signature)", file=sys.stderr)

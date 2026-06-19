@@ -56,6 +56,35 @@ Verbatim samples (canvas 0561, RIP–ROA, printed p.555):
 
 Abbreviations are sparse and mostly spelled out (old style, c.1839).
 
+## NYPL annual run 1797–1843 (sampled 2026-06-19)
+The NYPL set is a near-complete annual run (48 rows, `New York City directory, 18xx-xx`,
+IDs `…-00505686a51c`). Three representatives sampled across the range (`--front 20 -k 2`)
+confirm the card generalizes to the whole cohort:
+
+| Year | NYPL ID (head) | column_count | page_offset | notes |
+|---|---|---|---|---|
+| 1797 | `9c27dfc0` | 1 | **+19 constant** | c164=p.145, c281=p.262 |
+| 1820/21 | `d0c00950` | 1 | **−5 → +7 (drift)** | c151=p.156, c355=p.348 |
+| 1842/43 | `5a28bac0` | 1 | **−9 constant** | c226=p.235, c530=p.539 |
+
+- **`column_count` = 1 holds across the entire 1797–1843 run** (verified at both extremes; the run
+  predates the ~1845 two-column transition seen in Doggett). `column_count=1` was backfilled for all
+  61 Longworth rows (NYPL + IA) on this basis.
+- **`page_offset` is per-volume — no cohort constant.** Values range from +19 (1797) to −9 (1842) and
+  some drift mid-volume (1820: −5→+7). Each volume's front matter is an almanac/register block of
+  different length, and unpaginated plates drift the offset. Only the 3 sampled NYPL volumes have
+  `page_offset` recorded; the other 45 NYPL + 10 IA rows need per-volume sampling to measure it.
+- **Negative offsets** occur in later/larger volumes (1842: −9): the printed page number runs *ahead*
+  of the canvas index, so `canvas_index = printed_page + offset`. (Same formula as positive offsets,
+  just a negative constant.)
+- **No TOC reached** in the 20-canvas front sample for any NYPL volume — the front matter is almanac
+  calendar pages (monthly tables, e.g. Feb/Mar 1821) with no directory TOC, so `start_page`/`end_page`
+  were left blank (would need a deeper front scan or the alphabetical-section boundaries).
+- **Entry-format evolution:** 1797 uses a comma after the *surname*
+  (`Cheeseman, Furman, shipwright, 71 Catharine-street.`) with `do.` = ditto for a repeated street.
+  By 1820+ the comma moves to after the given name(s) (`DeWitt Peter, attorney and not. 37 Cedar`),
+  matching the 1839 representative below. Single full-width column throughout.
+
 ## Genre
 Residential persons directory — Manhattan (KEEP shape). Publisher: David Longworth.
 Also contains almanac section (the "New-York Register" portion) before the directory body.

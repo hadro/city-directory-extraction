@@ -65,8 +65,27 @@ patterns (`hf jobs ps *`, `hf jobs logs *`, `hf auth whoami`, `hf download *`). 
 basic Bash commands (`ls`, `grep`, etc.) are auto-allowed for subagents already; HF CLI was the
 only gap. Subagent delegation has not yet been tested in practice.
 
-**Current CSV state:** 90 rows now have `column_count`; 5 rows have `page_offset`. ~359 rows
-(of 449 total) still need at least `column_count` backfilled.
+**Longworth cohort backfilled** (2026-06-19, session 3): sampled 3 representative NYPL volumes
+across the 1797–1843 run (1797 `9c27dfc0`, 1820/21 `d0c00950`, 1842/43 `5a28bac0`) at
+`--front 20 -k 2`. **All 61 Longworth rows (NYPL + IA) got `column_count=1`** — verified single
+column at both extremes; the run predates the ~1845 two-column transition. `page_offset` recorded
+for the 3 sampled volumes only (it is **per-volume, no cohort constant**: +19 const / −5→+7 drift /
+−9 const). The other 45 NYPL + 10 IA Longworth rows still need per-volume sampling for `page_offset`
+(and `start_page`/`end_page` — no TOC reached in the front sample; front matter is almanac calendar
+pages). Card `longworth_manhattan_1830s.md` extended with the NYPL run table + findings. NOTE:
+negative offsets appear in later volumes (`canvas_index = printed_page + offset`).
+
+**Doggett cohort backfilled** (2026-06-19, session 3): sampled 4 representatives across 1842–1855
+(nypl 1842/43 `8ca2a950`, nypl 1846/47 `88fe6240`, nypl 1854/55 `a4b1de40`, ia 1847). **All 11
+uncarded Doggett rows got `column_count=2`** — Doggett was two-column from its first (1842/43)
+volume, unlike the Longworth single-column directories it replaced. `page_offset` recorded for the 4
+sampled (per-volume, mostly drifting: +5 const / +17→+29 / +6→+8 / +3→−3). Card
+`doggett_manhattan_1840s.md` extended with the cohort table. Remaining 7 Doggett rows need
+per-volume offset sampling.
+
+**Current CSV state:** **157 rows** now have `column_count` (was 88; +58 Longworth, +11 Doggett);
+**12 rows** have `page_offset` (was 5; +3 Longworth, +4 Doggett). ~292 rows (of 449 total) still
+need `column_count` backfilled.
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash
@@ -136,8 +155,8 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
    |---|---|---|
    | Lain Brooklyn (1884–1897) | 6 | Extend `lain_brooklyn_1880s.md`; measure offset per vol |
    | Hearnes Brooklyn | 7 | Sample 1 → new card → backfill 6 |
-   | Doggett 1846–48 | 3 | Extend `doggett_manhattan_1840s.md` |
-   | Longworth (IA, 11 vols) | 11 | Extend `longworth_manhattan_1830s.md` |
+   | ~~Doggett (12 vols)~~ | ~~done~~ | ✅ col=2 backfilled for all 11; offset done for 4 (1842/43, 1846/47, 1854/55 nypl + ia 1847). Remaining: per-volume offset for 7 |
+   | ~~Longworth (61 vols)~~ | ~~done~~ | ✅ col=1 backfilled for all 61; offset done for 3 (NYPL 1797/1820/1842). Remaining: per-volume `page_offset` for 45 NYPL + 10 IA (low priority — offset is per-volume, no shortcut) |
    | Trow (51 vols) | 51 | Have card; sample each → measure offset only |
    | Blank-publisher IA rows | ~172 | Identify first (read title pages) — some may be SKIP |
 

@@ -66,5 +66,29 @@ No explicit legend in front matter; conventions inferred from entries:
 
 Occupations and descriptors generally spelled out (less compressed than later Lain/Trow style).
 
+## Cohort 1842–1855 (sampled 2026-06-19)
+Doggett published the NYC directory from 1842 (taking over from Longworth). The cohort is 12 rows
+(4 IA `doggettsnewyorkc18xx`, 8 NYPL `…-00505686a51c` + later UUIDs), 1842/43–1854/55. Four
+representatives sampled across the range (`--front 20 -k 2`):
+
+| Year | ID (head) | column_count | page_offset |
+|---|---|---|---|
+| 1842/43 | nypl `8ca2a950` | 2 | **+5 constant** (c117=p.112, c275=p.270) |
+| 1845 | ia `…1845dogg` (this card) | 2 | +10→+16 drift |
+| 1846/47 | nypl `88fe6240` | 2 | **+17→+29 drift** (c159=p.142, c373=p.344) |
+| 1847 | ia `…1847dogg` | 2 | **+6→+8 ~const** (jp2 158=p.152, 368=p.360) |
+| 1854/55 | nypl `a4b1de40` | 2 | **+3→−3 drift** (c294=p.291, c686=p.689) |
+
+- **`column_count` = 2 across the entire 1842–1855 run** — Doggett was already two-column in its
+  first (1842/43) volume, unlike the Longworth single-column directories it replaced (Doggett was the
+  denser "61,333 names" product). `column_count=2` backfilled for all 11 uncarded Doggett rows.
+- **`page_offset` is per-volume and mostly drifts** (interspersed unnumbered ad leaves): values span
+  +3 to +17 near listing start and drift up to +29 or down past 0 by volume end. NYPL 1842/43 is the
+  only sampled volume with a constant offset. Only the 4 sampled volumes have `page_offset` recorded;
+  the remaining 7 (1843/44, 1844/45, 1845/46, 1848/49, 1851, 1854/55 IA n/a, + IA 1846/1848) need
+  per-volume sampling to measure it.
+- Entry format and ALL-CAPS prominent-name convention are stable across the run (1842/43 listing
+  matches the 1845 samples below: `Surname Firstname, occupation, address`; widow = `widow of X`).
+
 ## Genre
 Residential persons directory — Manhattan (KEEP shape). Publisher: John Doggett Jr.

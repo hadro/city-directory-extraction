@@ -47,3 +47,43 @@ volumes) for the pipeline to OCR/extract.
 ## Seeded from
 NYPL Space/Time `DIRECTORIES.md` (81 volumes, 1786–1921/22): every row is `source=nypl`. Extend by
 appending rows from BPL / Columbia / Internet Archive / LoC and other cities.
+
+## Sources surveyed (provenance log)
+What we've already mined, so we don't re-walk it. All ingested via `ingest_collection.py`.
+
+| source / search | what it is | result |
+|---|---|---|
+| NYPL "New York City directories" (collection UUID `f7533140-…`) | NYPL's NYC directory set | **156 `nypl` rows** (seed + full ingest) |
+| IA Trow gap-fill (item ids) | later Trow vols NYPL lacks | **+4 `ia`**: Trow general 1915/1917/1922-23 |
+| IA `brooklyncitydirectoriesonmicrofiche` (BPL) | Brooklyn dirs + NYC phone books | **+186 `ia`**: 79 residential + **107 `PHONEBOOK`** |
+| IA `durstoldyorklibrary?query=directory` | Durst Old York Library | **+27 `ia`** (KEEP-NYC-only; 69 hits, heavy noise) |
+| IA `allen_county?query=directory` | Allen County PL genealogy (nationwide) | **+74 `ia`** NYC residential (of 1803 hits) |
+| LoC `location:new york\|brooklyn & q=city directory` | LoC faceted search | **+2 `loc`** (22 hits, mostly guidebooks) |
+| LoC `location:new york\|new york city & q=city directory` | LoC faceted search | **0** (127 hits, all noise) |
+| LoC `fa=subject:directories \| location:new york` | LoC subject facet (the *right* facet) | 50 hits but ~all **upstate-county**; 0 net-new NYC |
+
+**Query lessons:** on LoC use `fa=subject:directories`, never `q=city directory` (full-text → guides/
+histories/fiction). IA `?query=` within a collection works but is full-text too → always curate.
+
+## Leads not yet ingested (areas of interest left untouched)
+Deliberately out of the current **NYC-residential** scope, but catalogued here as known, ready leads:
+
+- **National / other-city directories** (for the future *other-cities / cross-city transfer* goal):
+  `allen_county` has **~1700 unreviewed non-NYC** directories (US-wide); LoC `subject:directories`
+  surfaces **~24 upstate-NY county** gazetteer/business directories. `allen_county` is the richest lead.
+- **Business / trade / copartnership / mercantile directories** (the "BIZ" shape — firms, not
+  residents; a candidate *separate* model track). Seen but skipped: Wilson's business, Goulding's,
+  Jones's mercantile, Trow business/copartnership, NY State business directory, Phillips' business.
+- **Biographical / social / élite registers** (persons data, not residential dirs): "Prominent
+  families of NY", "Makers of New York", "Men of affairs", "Notable New Yorkers", Phillips' élite,
+  Lain & Healy's élite, "The list" (visiting/shopping).
+- **Street / number directories & guidebooks** (no persons): Rand McNally street-number guides,
+  "Miller's New York as it is", Wilson's street & avenue directory, etc. — not useful, don't ingest.
+- **Telephone directories** — already in (`PHONEBOOK`-tagged, BPL 1909–1967) as a separate track;
+  **post-1928 are likely in copyright**, and they're out of the 1786–1925 training era.
+- **IIIF holders not yet walked**: Columbia (`ldpd_*` copartnership / Lain street dirs) and BPL's own
+  IIIF — ingest via `source=iiif` with a manifest URL.
+- **Known gap**: Trow **1898/99** is absent from both NYPL and IA — try HathiTrust / Google Books / LoC.
+- **Data cleanup leads**: the Durst `longworthsameric*` rows have **blank years** (the allen_county
+  Longworths *have* years — cross-fill candidate); duplicate scans + p1/p2/p3 parts exist across IA
+  collections (dedupe at sample time); `trowsgeneraldire1853trow` year is `REVIEW`-flagged.

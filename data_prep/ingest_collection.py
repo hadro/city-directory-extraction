@@ -49,6 +49,7 @@ NYPL_IIIF_ITEM = "https://api-collections.nypl.org/manifests/{}"
 FIELDS = [
     "source", "id", "publisher", "city", "borough", "year",
     "start_page", "end_page", "column_count", "sample_page",
+    "key_page", "page_offset",
     "holding_institution", "title", "notes",
 ]
 

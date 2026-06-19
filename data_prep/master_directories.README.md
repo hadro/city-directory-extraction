@@ -22,6 +22,8 @@ volumes) for the pipeline to OCR/extract.
 | `end_page` | opt. | last printed listing page |
 | `column_count` | opt. | print layout columns (1–5); useful later for style tagging |
 | `sample_page` | opt. | a known-good listing page number (sanity reference) |
+| `key_page` | opt. | page of the "Explanation of abbreviations" key (the volume's ground-truth legend); from visual sampling. See `style_profiles/` |
+| `page_offset` | opt. | `canvas_index − printed_page` near the listing start (maps a printed/TOC page number to a scan canvas). Drifts across a volume — local anchor, not a global constant |
 | `holding_institution` | rec. | NYPL, BPL, Columbia, LoC, Internet Archive, … (provenance) |
 | `title` | rec. | the volume's title (MODS primary title / manifest label); auto-filled by `ingest_collection.py` |
 | `notes` | opt. | anything (e.g. microform, condition, "Greater NY", `PHONEBOOK`, `covers …`) |

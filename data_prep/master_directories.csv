@@ -1,5 +1,5 @@
 source,id,publisher,city,borough,year,start_page,end_page,column_count,sample_page,key_page,page_offset,holding_institution,title,notes
-nypl,b14662b0-81a8-0134-2a18-00505686a51c,Franks/Kollock,New York,Manhattan,1786,20,52,1,40,,,NYPL,The New-York directory,
+nypl,b14662b0-81a8-0134-2a18-00505686a51c,Franks/Kollock,New York,Manhattan,1786,20,52,1,40,,8,NYPL,The New-York directory,
 nypl,7764cfe0-81aa-0134-faa5-00505686a51c,Hodge/Allen,New York,Manhattan,1789,5,100,1,6,,,NYPL,New York City directory,
 nypl,614e2e50-81ad-0134-e971-00505686a51c,Hodge/Allen,New York,Manhattan,1790,5,113,1,7,,,NYPL,New York City directory,
 nypl,f554e950-81ae-0134-b4cf-00505686a51c,Duncan/Greenleaf,New York,Manhattan,1791,1,146,1,4,,,NYPL,New York City directory,
@@ -166,7 +166,7 @@ ia,micro_IABROOKLYN_0017,,Brooklyn,Brooklyn,1840/41,,,,,,,Internet Archive,Brook
 ia,micro_IABROOKLYN_0021,,Brooklyn,Brooklyn,1845,,,,,,,Internet Archive,Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1845 & 1846,
 ia,micro_IABROOKLYN_0028,Hearnes,Brooklyn,Brooklyn,1850/51,,,,,,,Internet Archive,Hearnes' Brooklyn City Directory for 1850-1851,
 ia,micro_IABROOKLYN_0005,Spooner,Brooklyn,Brooklyn,1826,,,,,,,Internet Archive,Spooner's Brooklyn Directory for the year 1826,
-ia,newyorkcityincl1917newy_1,,New York,,1917,,,,,,,Internet Archive,New York City (including all boroughs) Telephone Directory,PHONEBOOK
+ia,newyorkcityincl1917newy_1,,New York,,1917,,,,,,,Internet Archive,New York City (including all boroughs) Telephone Directory,"PHONEBOOK; sampled 2026-06-19 — canvases 0-11 = classified business ad sections; listing pages (frames 147/344) = 4-5 narrow cols with embedded ads (Donnelley-style telephone directory); NOT residential persons format"
 ia,brooklynqueenss1927newy_0,,New York,,1927,,,,,,,Internet Archive,"Brooklyn, Queens, Staten Island; New York City Telephone Directory",PHONEBOOK
 ia,brooklynnewyorkc1932newy,,New York,,1932,,,,,,,Internet Archive,"Brooklyn, New York City, Telephone Directory",PHONEBOOK
 ia,brooklynnewyorkc1937newy,,New York,,1937,,,,,,,Internet Archive,"Brooklyn, New York City, Telephone Directory",PHONEBOOK
@@ -365,15 +365,15 @@ ia,newyorkbrooklynd00durs,,New York,,1786/96,,,,,,,Internet Archive,"New York an
 ia,newyorkcitydirec00rode,Rode,New York,Manhattan,1851,,,,,,,Internet Archive,"The New York City directory, for ..",
 ia,newyorkdirectory00dunc,Duncan,New York,Manhattan,1794,,,,,,,Internet Archive,"New-York directory, and register, for the year 1794. Illustrated with a new and accurate plan of the city and part of Long-Island, exactly laid down,",
 ia,newyorkdirectory00durs,,New York,Manhattan,1910,,,,,,,Internet Archive,New York directory.,year = IA catalog date (spine title only; publisher unidentified)
-ia,newyorkdirectory00durs_0,Franks,New York,Manhattan,1786,,,,,,,Internet Archive,New York directory : containing a valuable and well calculated almanack ... /,1874 F.B. Patterson reprint of the 1786 first edition (Durst/Avery); 3rd copy of the 1786 directory
-ia,newyorkdirectory00fran,Franks,New York,Manhattan,1786,,,,,,,Internet Archive,The New York directory for 1786,
-ia,newyorkdirectory00fran_0,Franks,New York,Manhattan,1786,,,,,,,Internet Archive,"New York directory for 1786,",
+ia,newyorkdirectory00durs_0,Franks,New York,Manhattan,1786,,,1,,,,Internet Archive,New York directory : containing a valuable and well calculated almanack ... /,1874 F.B. Patterson reprint of the 1786 first edition (Durst/Avery); 3rd copy of the 1786 directory
+ia,newyorkdirectory00fran,Franks,New York,Manhattan,1786,,,1,,,,Internet Archive,The New York directory for 1786,
+ia,newyorkdirectory00fran_0,Franks,New York,Manhattan,1786,,,1,,,,Internet Archive,"New York directory for 1786,",
 ia,trowsnewyorkcity1857trow,Trow,New York,Manhattan,1857,,,,,,,Internet Archive,Trow's New York city directory.,
 ia,trowsnewyorkcity1859trow,Trow,New York,Manhattan,1859,,,,,,,Internet Archive,Trow's New York city directory.,
 ia,trowsnewyorkcity1863trow,Trow,New York,Manhattan,1863,,,,,,,Internet Archive,Trow's New York city directory.,
 ia,trowsnewyorkcity1876trow,Trow,New York,Manhattan,1876,,,,,,,Internet Archive,Trow's New York city directory.,
 loc,01015253,Spooner,Brooklyn,Brooklyn,,,,,,,,Library of Congress,The Brooklyn city directory,"serial (18--c1912); sampled volume = Lain 1881 (24th annual) - no persons listing page captured; resample needed"
-loc,96203733,Franks,New York,Manhattan,1786,,,,,,,Library of Congress,"The New-York directory for 1786 : containing, a valuable and well calculated almanack, tables of the different coins",1876 Disturnell reprint; same work as IA newyorkdirectory00fran
+loc,96203733,Franks,New York,Manhattan,1786,,,1,,,,Library of Congress,"The New-York directory for 1786 : containing, a valuable and well calculated almanack, tables of the different coins",1876 Disturnell reprint; same work as IA newyorkdirectory00fran
 ia,trowsgeneraldir1903p3trow,Trow,New York,,1903,,,,,,,Internet Archive,"Trow's general directory of the boroughs of Manhattan and Bronx, city of New York","covers Bronx, Manhattan | part 3"
 ia,trowsgeneraldir1913p2trow,Trow,New York,,1913,,,,,,,Internet Archive,"Trow's general directory of the boroughs of Manhattan and Bronx, city of New York","covers Bronx, Manhattan | part 2"
 ia,trowsgeneraldir1914p2trow,Trow,New York,,1914,,,,,,,Internet Archive,"Trow's general directory of the boroughs of Manhattan and Bronx, city of New York","covers Bronx, Manhattan | part 2"

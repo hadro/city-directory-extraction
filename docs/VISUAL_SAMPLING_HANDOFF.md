@@ -28,8 +28,45 @@ confirmed it generalizes (Doggett 1845 TOC found). Committed:
 
 Pilot downloads live in `directory-pipeline/output/<slug>/` (gitignored): 7 volumes
 (nypl Trow, ia Lain/Doggett/Longworth/Flushing/phonebook, loc Spooner) sampled at `--front 12 -k 2`
-(Trow re-pulled at `--front 27`). Only Trow's card is written; the other 6 dirs are downloaded but
-not yet carded.
+(Trow re-pulled at `--front 27`).
+
+## Status — Phase 1 (scale-out) STARTED 2026-06-19
+
+**Completed so far (2 sessions):**
+
+**Pilot volumes — all 6 un-carded downloads are now carded** (`e1f5b46`, 2026-06-19):
+
+| Style card | Source/ID | col | key_page | page_offset |
+|---|---|---|---|---|
+| `lain_brooklyn_1880s.md` | `ia/1885BPL` | 2 | 1 | 0→+50 (drift) |
+| `doggett_manhattan_1840s.md` | `ia/doggettsnewyorkc1845dogg` | 2 | — | +10→+16 |
+| `longworth_manhattan_1830s.md` | `ia/longworthsameric1839newy` | 1 | — | +6 (constant) |
+| `boyd_flushing_1880s.md` | `ia/flushingnewyork188586boyd` | 1 | — | +15 persons / +64 biz |
+| `lain_brooklyn_1881_loc.md` | `loc/01015253` | — | — | stub — resample needed |
+
+The `loc/01015253` row is the Lain 1881 serial (LCCN): both `--front 12 -k 2` samples landed in
+front-matter index blocks — no persons listing page captured. Resample: `--front 5` targeting
+the persons section (which starts well past the index block in a large volume).
+
+**Already-downloaded un-carded volumes** (`d775172`, 2026-06-19):
+
+- `nypl/b14662b0` (Franks/Kollock 1786): carded as `franks_newyork_1786.md` — first NYC
+  directory ever published; 1 col; page_offset **+8 constant** (measured from IIIF canvas labels
+  25/36/47 vs printed pp. 17/28/39); format `Surname Firstname, occupation, Number, Street`.
+  Covers 5 CSV rows (1 NYPL original + 2 IA originals + 2 reprints — column_count=1 backfilled
+  for all; page_offset only set for the NYPL copy; others need sampling to measure their offset).
+- `ia/newyorkcityincl1917newy_1` ("New York City Inclusive"): confirmed **PHONEBOOK** — all
+  sampled canvases are classified business ad sections; listing pages are 4–5 narrow columns with
+  embedded ads (Donnelley-style telephone directory); NOT a residential persons training target.
+  Notes updated in CSV.
+
+**Permissions** (`d775172`, 2026-06-19): `.claude/settings.json` created with HF CLI read
+patterns (`hf jobs ps *`, `hf jobs logs *`, `hf auth whoami`, `hf download *`). Note: `Read` and
+basic Bash commands (`ls`, `grep`, etc.) are auto-allowed for subagents already; HF CLI was the
+only gap. Subagent delegation has not yet been tested in practice.
+
+**Current CSV state:** 90 rows now have `column_count`; 5 rows have `page_offset`. ~359 rows
+(of 449 total) still need at least `column_count` backfilled.
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash
@@ -49,7 +86,7 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
 # 4. backfill the row(s) in $MASTER and write data_prep/style_profiles/<publisher>_<era>.md
 ```
 
-## Lessons / gotchas (hard-won in the pilot)
+## Lessons / gotchas (hard-won in the pilot and Phase 1)
 - **Abbreviations key = ground truth**; in some volumes (Trow) it doubles as the listing-start page.
 - **`detect_columns` under-counts** dense listings (Trow: detector said 2; the preface says **3**).
   Trust the preface / your eye for `column_count`; treat the detector as a hint.
@@ -57,32 +94,63 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
   14 behind ads + a foldout map + the advertiser index).
 - **`page_offset` drifts** across a volume (Trow: ≈ −1 at front, ≈ +9 by p.353) due to unpaginated
   plates → record a *local* value near the listing start, not a global constant.
+- **`page_offset` can be constant** in older volumes where ads are a fixed front block with no
+  interspersed pages (Longworth 1839: exactly +6 at both measured points; Franks 1786: exactly +8).
+- **Section-boundary jumps** are huge: Boyd Flushing 1885/86 jumps +49 between persons and
+  classified-business sections (a large unnumbered ad insert). Always note which section an offset
+  measurement applies to.
+- **LoC serial records** cover a multi-decade run; the specific digitized volume may differ from the
+  catalog publisher. Always read the title page (sampled as a front-matter canvas) before assuming
+  the master-list publisher matches the physical volume.
+- **Donnelley/telephone directories** look like persons directories at first glance but have 4-5
+  narrow columns with ads embedded in listing pages — unmistakable once you see a listing page.
+  The IA "New York City Inclusive" series is one of these. Already-PHONEBOOK rows in the CSV are
+  often these.
+- **Publisher clustering** is the efficiency lever: once you sample one volume from a publisher/era
+  and write the card, other volumes in that cohort only need page_offset measured (not a new card).
+  Sample one Hearnes, cover all 7; extend the Lain card for each subsequent Lain year.
+- **Reprints** (Patterson 1874 of Franks 1786; Disturnell 1876) have the same entry format but
+  potentially different page_offsets (different digitizing institution adds different front matter).
+  Backfill `column_count` from the original's card; leave `page_offset` blank until sampled.
 - **Microfilm (BPL) volumes** are often double-page **spreads** + degraded (`detect_spreads` flags
   them; a spread = 2 printed pages per canvas, which complicates `page_offset`).
 - **Bonus:** Trow's preface prints **spelling-variant name clusters** (Bauer/Baur/Bower,
   Schafer/Schaffer/Schaefer…) — a candidate seed for name generation vs. surname regularization.
-- **Subagent permission sandbox:** a delegated agent could NOT use Read/Bash (blocked), so it
-  couldn't open images. To fan out **cheap Haiku/Sonnet agents** for the bulk visual passes you must
-  first allowlist Read/Bash for subagents (run `/fewer-permission-prompts`, or edit
-  `.claude/settings.json`). Otherwise the main (Opus) thread does the visual reads — pricier.
+- **Subagent permissions:** `Read` and basic Bash (`ls`, `grep`, etc.) are auto-allowed for
+  subagents. HF CLI commands (`hf jobs ps`, `hf jobs logs`, etc.) are NOT — added to
+  `.claude/settings.json` via `/fewer-permission-prompts` (2026-06-19). Subagent visual-read
+  delegation not yet tested in practice.
 
-## NEXT — Phase 1: backfill at scale (~290 non-NYPL rows)
-1. **(Prereq for cheap delegation)** allowlist Read/Bash for subagents (`/fewer-permission-prompts`),
-   then dispatch Haiku/Sonnet agents (`Agent` tool, `model:` param) batched N volumes each:
-   Haiku/Sonnet for locate-TOC/key + read columns; Sonnet for legend transcription (small print).
-   Reserve Opus for ambiguous rows + the heuristic + the `synth_persons.py` code.
-2. Sample `--front 20 -k 2` across non-NYPL rows (batch by `--source`/`--publisher`; `--dry-run`
-   first). **Skip eval-heldout** volumes (Lain 1897 `1885BPL` is fine, but the held-out `1897BPL`
-   and NYU Trow 1850 stay OUT).
-3. Run `detect_columns` + `detect_spreads` over all dirs.
+## NEXT — Phase 1 (continued): backfill at scale (~359 remaining rows)
+
+✅ **Done:** step 1 (permissions), step 7 (pilot volumes + already-downloaded).
+
+**Remaining steps:**
+
+2. Sample `--front 20 -k 2` across non-NYPL rows **in publisher batches** (same publisher/era →
+   share a card; only measure page_offset per volume). `--dry-run` first. **Skip eval-heldout**
+   volumes (`1897BPL` Lain and NYU Trow 1850 stay OUT).
+
+   High-leverage batches to do next (ordered by ROI):
+   | Publisher | Remaining vols | Action |
+   |---|---|---|
+   | Lain Brooklyn (1884–1897) | 6 | Extend `lain_brooklyn_1880s.md`; measure offset per vol |
+   | Hearnes Brooklyn | 7 | Sample 1 → new card → backfill 6 |
+   | Doggett 1846–48 | 3 | Extend `doggett_manhattan_1840s.md` |
+   | Longworth (IA, 11 vols) | 11 | Extend `longworth_manhattan_1830s.md` |
+   | Trow (51 vols) | 51 | Have card; sample each → measure offset only |
+   | Blank-publisher IA rows | ~172 | Identify first (read title pages) — some may be SKIP |
+
+   Also: resample `loc/01015253` (Lain 1881) with `--front 5` targeting persons section to
+   complete the stub card `lain_brooklyn_1881_loc.md`.
+
+3. Run `detect_columns` + `detect_spreads` over downloaded dirs.
 4. Per volume: fill `column_count`, `start_page`/`end_page` (from TOC + `page_offset`), `key_page`;
    transcribe each distinct publisher/era legend once.
 5. **Test the "consistent fraction" hypothesis:** log `key_page_idx/total` and `toc_idx/total`; if it
    clusters per publisher/era, derive a heuristic so later volumes skip the full front scan.
 6. Targeted QA (Opus): the 7 blank-year Longworth rows (read title pages), `trowsgeneraldire1853trow`
    REVIEW, Spooner serial, reprints.
-7. Commit per-source. Finish the 5 un-carded pilot volumes (Lain/Doggett/Longworth/Flushing/phonebook)
-   as the first style cards.
 
 ## THEN — Phase 2: style profiles → synth generator
 - Consolidate `data_prep/style_profiles/*.md` + a machine-readable `style_profiles.json` (legends +

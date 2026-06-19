@@ -81,8 +81,11 @@ Deliberately out of the current **NYC-residential** scope, but catalogued here a
   "Miller's New York as it is", Wilson's street & avenue directory, etc. — not useful, don't ingest.
 - **Telephone directories** — already in (`PHONEBOOK`-tagged, BPL 1909–1967) as a separate track;
   **post-1928 are likely in copyright**, and they're out of the 1786–1925 training era.
-- **IIIF holders not yet walked**: Columbia (`ldpd_*` copartnership / Lain street dirs) and BPL's own
-  IIIF — ingest via `source=iiif` with a manifest URL.
+- **IIIF holders not yet walked**: **Columbia** (`ldpd_*`) runs a real IIIF endpoint — ingest via
+  `source=iiif` with a manifest URL; but the Columbia directories seen so far skew copartnership/
+  business/street (Lain street dir), not residential. (Checked 2026: **BPL has *no* public IIIF** —
+  its Digital Collections is a custom Drupal app of CBH photos/maps, and its city directories were
+  digitized straight to IA, already ingested. No separate BPL trove to walk.)
 - **Known gap**: Trow **1898/99** is absent from both NYPL and IA — try HathiTrust / Google Books / LoC.
 - **Data cleanup leads**: the Durst `longworthsameric*` rows have **blank years** (the allen_county
   Longworths *have* years — cross-fill candidate); duplicate scans + p1/p2/p3 parts exist across IA

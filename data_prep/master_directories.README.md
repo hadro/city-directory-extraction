@@ -81,11 +81,17 @@ Deliberately out of the current **NYC-residential** scope, but catalogued here a
   "Miller's New York as it is", Wilson's street & avenue directory, etc. — not useful, don't ingest.
 - **Telephone directories** — already in (`PHONEBOOK`-tagged, BPL 1909–1967) as a separate track;
   **post-1928 are likely in copyright**, and they're out of the 1786–1925 training era.
-- **IIIF holders not yet walked**: **Columbia** (`ldpd_*`) runs a real IIIF endpoint — ingest via
-  `source=iiif` with a manifest URL; but the Columbia directories seen so far skew copartnership/
-  business/street (Lain street dir), not residential. (Checked 2026: **BPL has *no* public IIIF** —
-  its Digital Collections is a custom Drupal app of CBH photos/maps, and its city directories were
-  digitized straight to IA, already ingested. No separate BPL trove to walk.)
+- **IIIF holders — both settled (2026), little left to walk):**
+  - **Columbia** — the IA `durstoldyorklibrary` collection (already ingested) is a **sub-collection of
+    the larger `ColumbiaUniversityLibraries`** collection. Diffed them: Columbia parent has 173
+    "directory" items vs Durst's 69, i.e. **104 in Columbia but not Durst — but ~all non-city-directory**
+    (~57 *Medical directory of NY* vols, ~25 missionary/student/church directories, trade/institutional).
+    The only city-directory items outside Durst are **business** (`ldpd_6943151` Polk's/Trow's
+    copartnership, `ldpd_10754283` Mercantile Union — BIZ, excluded) and a **third copy of the 1786 NY
+    directory** (`ldpd_5684790`, already held ×2). So for *residential* NYC directories, Durst already
+    covered Columbia; no need to walk Columbia's IIIF separately.
+  - **BPL** — **no public IIIF**. Its Digital Collections is a custom Drupal app of CBH photos/maps,
+    and its city directories were digitized straight to IA (already ingested). No separate trove.
 - **Known gap**: Trow **1898/99** is absent from both NYPL and IA — try HathiTrust / Google Books / LoC.
 - **Data cleanup leads**: the Durst `longworthsameric*` rows have **blank years** (the allen_county
   Longworths *have* years — cross-fill candidate); duplicate scans + p1/p2/p3 parts exist across IA

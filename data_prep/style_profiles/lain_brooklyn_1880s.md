@@ -58,5 +58,32 @@ Notable persons appear in ALL CAPS:
 `treas'r` treasurer · `u.s.a.` United States Army · `u.s.n.` United States Navy ·
 `Vand't` Vanderbilt · `Wash'n` Washington · `W.` west · `wf` wharf · `wid.` widow
 
+## Cohort 1884–1899 (sampled 2026-06-19)
+Five more IA BPL volumes sampled (`--front 20 -k 2`) to extend this card. All confirm the 1885BPL
+structure — **2 columns** with marginal vertical ad strips, full surname repeated, same legend:
+
+| Volume | year | column_count | page_offset (at sample point) |
+|---|---|---|---|
+| `1884BPL` | 1884 | 2 | +54 @ p.402 → +82 @ p.984 (heavy drift) |
+| `1885BPL` | 1884/85 | 2 | ≈0 near start → +50 @ p.1044 *(this card's rep)* |
+| `1886BPL` | 1886 | 2 | +60 @ p.336 |
+| `1887BPL` | 1887 | 2 | +53 @ p.367 |
+| `1889BPL` | 1889 | 2 | +20 @ p.422 |
+| `1899xBPL` | 1899 | 2 | +52 @ p.542 (Lain & Healy imprint) |
+
+- **`column_count` = 2 across 1884–1899** — backfilled for all 5 newly-sampled rows.
+- **`page_offset` drifts heavily and per-volume** (unnumbered colour-ad pages throughout): by ⅓ of
+  the way in, offsets are already +20 to +60, and 1884 reaches +82 by p.984. The recorded CSV
+  `page_offset` is the value **at the first sample point (~⅓ through), not near the listing start** —
+  the leaf/page anchor is in each row's notes. (Unlike 1885BPL where the near-start value ≈0 was
+  measurable because it had a modern BPL cover; the raw IA scans here lead with ad pages.)
+- **Front matter differs from 1885BPL:** these IA scans open with advertisement pages (leaf 1 = ad
+  page, running head "BROOKLYN CITY & BUSINESS DIRECTORY" / "LAIN'S BROOKLYN DIRECTORY"), so the
+  abbreviations key + (A) listing start sit deeper than the `--front 20` sample reaches. The legend
+  is already transcribed above (from 1885BPL) — not re-transcribed per volume. `key_page` left blank
+  for the cohort rows.
+- **1899 is "Lain & Healy"** (the imprint changed) but the format/legend are unchanged.
+- **HELD-OUT:** `1897BPL` (Lain & Healy) is an eval held-out volume — deliberately NOT sampled.
+
 ## Genre
 Residential persons directory — Brooklyn (KEEP shape). Publisher: Lain and Company.

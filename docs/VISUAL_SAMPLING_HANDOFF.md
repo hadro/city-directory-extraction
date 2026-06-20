@@ -91,9 +91,17 @@ on both regular IA and microfilm). KEY: the `micro_IABROOKLYN` scans are **singl
 NOT double-page spreads** (contra the microfilm-spread warning) — just darker/degraded. `page_offset`
 recorded for the 4 sampled (per-volume drift: +16→+22 / +12→+16 / +8 / +6).
 
-**Current CSV state:** **164 rows** now have `column_count` (was 88; +58 Longworth, +11 Doggett,
-+7 Hearne); **16 rows** have `page_offset` (was 5; +3 Longworth, +4 Doggett, +4 Hearne). ~285 rows
-(of 449 total) still need `column_count` backfilled.
+**Lain (Brooklyn) cohort extended** (2026-06-19, session 3): sampled 5 IA BPL volumes (1884, 1886,
+1887, 1889, 1899) — all 2-column, same Lain style/legend. `column_count=2` + `page_offset` backfilled
+for all 5; card `lain_brooklyn_1880s.md` extended with the cohort table. Offsets drift heavily and
+per-volume (+20 to +60 by ⅓ in; 1884 hits +82) — recorded value is at the sample point, anchor in
+notes. `1897BPL` left OUT (eval held-out). The `loc/01015253` Lain-1881 stub
+(`lain_brooklyn_1881_loc.md`) is still NOT done — note that CSV row is catalog-attributed to
+**Spooner**, not Lain (the digitized volume may be an 1881 Lain; needs title-page read + `--front 5`).
+
+**Current CSV state:** **169 rows** now have `column_count` (was 88; +58 Longworth, +11 Doggett,
++7 Hearne, +5 Lain); **21 rows** have `page_offset` (was 5; +3 Longworth, +4 Doggett, +4 Hearne,
++5 Lain). ~280 rows (of 449 total) still need `column_count` backfilled.
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash
@@ -161,7 +169,7 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
    High-leverage batches to do next (ordered by ROI):
    | Publisher | Remaining vols | Action |
    |---|---|---|
-   | Lain Brooklyn (1884–1897) | 6 | Extend `lain_brooklyn_1880s.md`; measure offset per vol |
+   | ~~Lain Brooklyn (1884–1899)~~ | ~~done~~ | ✅ col=2 + offset backfilled for 5 (1884/86/87/89/99); card extended. 1897BPL stays OUT (eval). Still TODO: loc/01015253 stub |
    | ~~Hearne Brooklyn (7 vols)~~ | ~~done~~ | ✅ new card `hearne_brooklyn_1850s.md`; col=1 backfilled for all 7; offset done for 4 (2 IA + 2 micro). Remaining: per-volume offset for 3 |
    | ~~Doggett (12 vols)~~ | ~~done~~ | ✅ col=2 backfilled for all 11; offset done for 4 (1842/43, 1846/47, 1854/55 nypl + ia 1847). Remaining: per-volume offset for 7 |
    | ~~Longworth (61 vols)~~ | ~~done~~ | ✅ col=1 backfilled for all 61; offset done for 3 (NYPL 1797/1820/1842). Remaining: per-volume `page_offset` for 45 NYPL + 10 IA (low priority — offset is per-volume, no shortcut) |

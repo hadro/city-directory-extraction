@@ -32,9 +32,9 @@ Pilot downloads live in `directory-pipeline/output/<slug>/` (gitignored): 7 volu
 
 ## Status — Phase 1 (scale-out) STARTED 2026-06-19
 
-**Completed so far (2 sessions):**
+**Completed so far (3 sessions):**
 
-**Pilot volumes — all 6 un-carded downloads are now carded** (`e1f5b46`, 2026-06-19):
+**Sessions 1–2 — pilot volumes carded** (`e1f5b46`, 2026-06-19):
 
 | Style card | Source/ID | col | key_page | page_offset |
 |---|---|---|---|---|
@@ -42,11 +42,11 @@ Pilot downloads live in `directory-pipeline/output/<slug>/` (gitignored): 7 volu
 | `doggett_manhattan_1840s.md` | `ia/doggettsnewyorkc1845dogg` | 2 | — | +10→+16 |
 | `longworth_manhattan_1830s.md` | `ia/longworthsameric1839newy` | 1 | — | +6 (constant) |
 | `boyd_flushing_1880s.md` | `ia/flushingnewyork188586boyd` | 1 | — | +15 persons / +64 biz |
-| `lain_brooklyn_1881_loc.md` | `loc/01015253` | — | — | stub — resample needed |
+| `lain_brooklyn_1881_loc.md` | `loc/01015253` | 2* | — | n/a (partial scan) |
 
-The `loc/01015253` row is the Lain 1881 serial (LCCN): both `--front 12 -k 2` samples landed in
-front-matter index blocks — no persons listing page captured. Resample: `--front 5` targeting
-the persons section (which starts well past the index block in a large volume).
+*The `loc/01015253` Lain-1881 stub is **RESOLVED in session 3** (see below): the LoC item is a
+20-canvas partial scan with no persons listing, so `column_count=2` is inferred from the Lain
+identity and `page_offset`/`key_page` are unmeasurable.
 
 **Already-downloaded un-carded volumes** (`d775172`, 2026-06-19):
 
@@ -65,46 +65,40 @@ patterns (`hf jobs ps *`, `hf jobs logs *`, `hf auth whoami`, `hf download *`). 
 basic Bash commands (`ls`, `grep`, etc.) are auto-allowed for subagents already; HF CLI was the
 only gap. Subagent delegation has not yet been tested in practice.
 
-**Longworth cohort backfilled** (2026-06-19, session 3): sampled 3 representative NYPL volumes
-across the 1797–1843 run (1797 `9c27dfc0`, 1820/21 `d0c00950`, 1842/43 `5a28bac0`) at
-`--front 20 -k 2`. **All 61 Longworth rows (NYPL + IA) got `column_count=1`** — verified single
-column at both extremes; the run predates the ~1845 two-column transition. `page_offset` recorded
-for the 3 sampled volumes only (it is **per-volume, no cohort constant**: +19 const / −5→+7 drift /
-−9 const). The other 45 NYPL + 10 IA Longworth rows still need per-volume sampling for `page_offset`
-(and `start_page`/`end_page` — no TOC reached in the front sample; front matter is almanac calendar
-pages). Card `longworth_manhattan_1830s.md` extended with the NYPL run table + findings. NOTE:
-negative offsets appear in later volumes (`canvas_index = printed_page + offset`).
+### Session 3 (2026-06-19) — 4 cohorts cleared + stub resolved
 
-**Doggett cohort backfilled** (2026-06-19, session 3): sampled 4 representatives across 1842–1855
-(nypl 1842/43 `8ca2a950`, nypl 1846/47 `88fe6240`, nypl 1854/55 `a4b1de40`, ia 1847). **All 11
-uncarded Doggett rows got `column_count=2`** — Doggett was two-column from its first (1842/43)
-volume, unlike the Longworth single-column directories it replaced. `page_offset` recorded for the 4
-sampled (per-volume, mostly drifting: +5 const / +17→+29 / +6→+8 / +3→−3). Card
-`doggett_manhattan_1840s.md` extended with the cohort table. Remaining 7 Doggett rows need
-per-volume offset sampling.
+Each cohort sampled at `--front 20 -k 2`, a few representatives across the date range; `column_count`
+backfilled for the **whole** cohort once verified, `page_offset` measured only on the sampled volumes.
 
-**Hearne (Brooklyn) cohort carded** (2026-06-19, session 3): sampled 4 reps (regular IA 1850 & 1852,
-microfilm `micro_IABROOKLYN_0028`/`_0032`). **New card `hearne_brooklyn_1850s.md`** written
-(publisher Henry R. & William J. Hearne; distinctive Brooklyn `NY h` commuter notation +
-`n`/`c`/`b`/`op` street-relation grammar). **All 7 Hearne rows got `column_count=1`** (single column
-on both regular IA and microfilm). KEY: the `micro_IABROOKLYN` scans are **single-page single-column,
-NOT double-page spreads** (contra the microfilm-spread warning) — just darker/degraded. `page_offset`
-recorded for the 4 sampled (per-volume drift: +16→+22 / +12→+16 / +8 / +6).
+| Cohort | Rows backfilled | col | Reps sampled | page_offset (per-vol) | Card |
+|---|---|---|---|---|---|
+| **Longworth** (NYPL+IA, 1797–1843) | 58 → col=1 | 1 | 1797 `9c27dfc0`, 1820/21 `d0c00950`, 1842/43 `5a28bac0` | +19 const / −5→+7 / −9 const | extended `longworth_manhattan_1830s.md` |
+| **Doggett** (NYPL+IA, 1842–1855) | 11 → col=2 | 2 | 1842/43 `8ca2a950`, 1846/47 `88fe6240`, 1854/55 `a4b1de40`, ia 1847 | +5 / +17→+29 / +3→−3 / +6→+8 | extended `doggett_manhattan_1840s.md` |
+| **Hearne** (Brooklyn, 1850–55) | 7 → col=1 | 1 | ia 1850 & 1852, micro `_0028`/`_0032` | +16→+22 / +12→+16 / +8 / +6 | **new** `hearne_brooklyn_1850s.md` |
+| **Lain** (Brooklyn BPL, 1884–99) | 5 → col=2 | 2 | 1884/86/87/89/99 BPL | +54→+82 / +60 / +53 / +20 / +52 | extended `lain_brooklyn_1880s.md` |
+| **loc stub** `01015253` | 1 → col=2* | 2* | full manifest pulled (20 canvases) | n/a — partial scan | closed `lain_brooklyn_1881_loc.md` |
 
-**Lain (Brooklyn) cohort extended** (2026-06-19, session 3): sampled 5 IA BPL volumes (1884, 1886,
-1887, 1889, 1899) — all 2-column, same Lain style/legend. `column_count=2` + `page_offset` backfilled
-for all 5; card `lain_brooklyn_1880s.md` extended with the cohort table. Offsets drift heavily and
-per-volume (+20 to +60 by ⅓ in; 1884 hits +82) — recorded value is at the sample point, anchor in
-notes. `1897BPL` left OUT (eval held-out). The `loc/01015253` Lain-1881 stub
-(`lain_brooklyn_1881_loc.md`) is now RESOLVED: pulled the full LoC manifest — it has **only 20
-canvases, all front matter + business-directory index/ads, NO persons listing** (a partial scan of a
-~1411-page volume). Not a sampling problem; the persons pages aren't digitized in the LoC item. Set
-`column_count=2` by inference from the confirmed Lain-1881 identity; `page_offset`/`key_page` left
-blank (unmeasurable). Stub card updated to document this.
+Commits: `efd4786` (Longworth+Doggett), `6045953` (Hearne), `72841e7` (Lain), `df31ebb` (loc stub).
 
-**Current CSV state:** **170 rows** now have `column_count` (was 88; +58 Longworth, +11 Doggett,
-+7 Hearne, +5 Lain, +1 loc-stub); **21 rows** have `page_offset` (was 5; +3 Longworth, +4 Doggett,
-+4 Hearne, +5 Lain). ~279 rows (of 449 total) still need `column_count` backfilled.
+**Cross-cutting findings (apply to all future cohorts):**
+- **`column_count` IS clusterable per publisher/era; `page_offset` is NOT.** A whole cohort's column
+  count can be backfilled from a few sampled extremes, but every volume's offset must be measured
+  individually (front-matter/ad-block length varies per digitization). So the cheap win is col-count;
+  offsets are optional per-volume follow-up.
+- **Verify col-count at the date-range extremes** to catch the ~1845 1→2-column transition. Doggett
+  was already 2-col in 1842; Longworth stayed 1-col through 1843 — the transition is publisher-, not
+  just year-dependent.
+- **Negative `page_offset` is normal** in later/denser volumes (printed page runs ahead of canvas):
+  `canvas_index = printed_page + offset` holds for any sign.
+- **`micro_IABROOKLYN` microfilm scans are single-page single-column, NOT spreads** (refines the old
+  microfilm-spread warning below) — just darker/degraded, fully readable.
+- **LoC items can be partial scans** (front matter + business index only). Pull the full manifest and
+  check the canvas count before assuming a persons listing exists to sample.
+
+**Current CSV state:** **170 rows** have `column_count` (was 88; +58 Longworth, +11 Doggett, +7
+Hearne, +5 Lain, +1 loc-stub); **21 rows** have `page_offset` (was 5; +3/+4/+4/+5 across the four
+cohorts). ~279 rows (of 449) still need `column_count`. Remaining per-volume `page_offset` for the
+sampled cohorts (45 NYPL + 10 IA Longworth, 7 Doggett, 3 Hearne) is low-priority follow-up.
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash
@@ -139,7 +133,9 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
   measurement applies to.
 - **LoC serial records** cover a multi-decade run; the specific digitized volume may differ from the
   catalog publisher. Always read the title page (sampled as a front-matter canvas) before assuming
-  the master-list publisher matches the physical volume.
+  the master-list publisher matches the physical volume. **And check the manifest canvas count** —
+  some LoC items are *partial* scans (e.g. `loc/01015253` = only 20 canvases: front matter + business
+  index, no persons listing at all), so no `--front N` will ever surface a listing page.
 - **Donnelley/telephone directories** look like persons directories at first glance but have 4-5
   narrow columns with ads embedded in listing pages — unmistakable once you see a listing page.
   The IA "New York City Inclusive" series is one of these. Already-PHONEBOOK rows in the CSV are
@@ -150,8 +146,10 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
 - **Reprints** (Patterson 1874 of Franks 1786; Disturnell 1876) have the same entry format but
   potentially different page_offsets (different digitizing institution adds different front matter).
   Backfill `column_count` from the original's card; leave `page_offset` blank until sampled.
-- **Microfilm (BPL) volumes** are often double-page **spreads** + degraded (`detect_spreads` flags
-  them; a spread = 2 printed pages per canvas, which complicates `page_offset`).
+- **Microfilm volumes** *can* be double-page **spreads** + degraded (`detect_spreads` flags them; a
+  spread = 2 printed pages per canvas, complicating `page_offset`) — but **not always**: the
+  `micro_IABROOKLYN` Hearne scans turned out to be single-page single-column, just dark. Confirm by
+  eye rather than assuming microfilm ⇒ spread.
 - **Bonus:** Trow's preface prints **spelling-variant name clusters** (Bauer/Baur/Bower,
   Schafer/Schaffer/Schaefer…) — a candidate seed for name generation vs. surname regularization.
 - **Subagent permissions:** `Read` and basic Bash (`ls`, `grep`, etc.) are auto-allowed for
@@ -159,9 +157,11 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
   `.claude/settings.json` via `/fewer-permission-prompts` (2026-06-19). Subagent visual-read
   delegation not yet tested in practice.
 
-## NEXT — Phase 1 (continued): backfill at scale (~359 remaining rows)
+## NEXT — Phase 1 (continued): backfill at scale (~279 rows still need `column_count`)
 
-✅ **Done:** step 1 (permissions), step 7 (pilot volumes + already-downloaded).
+✅ **Done:** permissions; pilot volumes + already-downloaded; **session-3 cohorts (Longworth,
+Doggett, Hearne, Lain + loc stub)**. Biggest remaining buckets: **Trow (51)** and the
+**~172 blank-publisher IA rows** (triage first — some are PHONEBOOK/SKIP).
 
 **Remaining steps:**
 
@@ -187,8 +187,9 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
    transcribe each distinct publisher/era legend once.
 5. **Test the "consistent fraction" hypothesis:** log `key_page_idx/total` and `toc_idx/total`; if it
    clusters per publisher/era, derive a heuristic so later volumes skip the full front scan.
-6. Targeted QA (Opus): the 7 blank-year Longworth rows (read title pages), `trowsgeneraldire1853trow`
-   REVIEW, Spooner serial, reprints.
+6. Targeted QA (Opus): `trowsgeneraldire1853trow` REVIEW; reprints (Patterson 1874 of Franks 1786,
+   Disturnell 1876); the blank-publisher IA triage. *(Longworth blank-year rows and the loc/Spooner
+   serial were resolved in session 3.)*
 
 ## THEN — Phase 2: style profiles → synth generator
 - Consolidate `data_prep/style_profiles/*.md` + a machine-readable `style_profiles.json` (legends +

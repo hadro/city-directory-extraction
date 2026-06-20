@@ -1,4 +1,4 @@
-# Lain — Brooklyn City Directory, 1880s
+# Lain — Brooklyn City Directory, 1858–1899
 
 **Representative volume:** `ia/1885BPL` — *Lain's Brooklyn City Directory, 1884-85*
 (Lain and Company). Visually sampled 2026-06-19.
@@ -85,5 +85,24 @@ structure — **2 columns** with marginal vertical ad strips, full surname repea
 - **1899 is "Lain & Healy"** (the imprint changed) but the format/legend are unchanged.
 - **HELD-OUT:** `1897BPL` (Lain & Healy) is an eval held-out volume — deliberately NOT sampled.
 
+## Earlier Lain Brooklyn run, 1858–1883 (backfilled session 4, 2026-06-19)
+Lain published the Brooklyn directory **from at least 1858** — far earlier than the 1880s rep above.
+Two title pages confirm the lineage:
+- **1858** (`ia/1858BPL`): *"THE BROOKLYN CITY DIRECTORY, (CONSOLIDATED,) … 1858. COMPILED BY
+  J. LAIN. PUBLISHED BY J. LAIN AND COMPANY."* — Lain emerged as publisher of the post-1856
+  "consolidation" of competing Brooklyn directories.
+- **1869** (`ia/1869BPL`): *"BROOKLYN CITY AND BUSINESS DIRECTORY … 1869 … COMPILED BY
+  GEO. T. LAIN. PUBLISHED BY LAIN & COMPANY."*
+
+Both are **2-column** with marginal vertical ad strips — layout identical to the 1880s volumes.
+`column_count=2` + `publisher=Lain` backfilled for the **16 `18xxBPL` rows 1858–1883** (1858, 1862–69,
+1871, 1875, 1876, 1878, 1879, 1880, 1883). `page_offset` is per-volume, not yet measured.
+
+This pins the Brooklyn **col 1→2 transition to 1855–1858** (Hearne still col-1 in 1855 ↔ Lain col-2 in
+1858) and extends this card's coverage to **1858–1899**. The 1857–1860 "Consolidated" microfilm rows
+(`micro_0037/0039/0040/0042`) are col=2 by this bracket (publisher unverified per-volume; `micro_0037`
+may duplicate `1858BPL`).
+
 ## Genre
-Residential persons directory — Brooklyn (KEEP shape). Publisher: Lain and Company.
+Residential persons directory — Brooklyn (KEEP shape). Publisher: Lain and Company (J. Lain 1858 →
+Geo. T. Lain 1869 → Lain & Co. → Lain & Healy 1890s).

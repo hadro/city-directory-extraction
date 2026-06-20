@@ -32,7 +32,7 @@ Pilot downloads live in `directory-pipeline/output/<slug>/` (gitignored): 7 volu
 
 ## Status — Phase 1 (scale-out) STARTED 2026-06-19
 
-**Completed so far (3 sessions):**
+**Completed so far (4 sessions):**
 
 **Sessions 1–2 — pilot volumes carded** (`e1f5b46`, 2026-06-19):
 
@@ -100,6 +100,44 @@ Hearne, +5 Lain, +1 loc-stub); **21 rows** have `page_offset` (was 5; +3/+4/+4/+
 cohorts). ~279 rows (of 449) still need `column_count`. Remaining per-volume `page_offset` for the
 sampled cohorts (45 NYPL + 10 IA Longworth, 7 Doggett, 3 Hearne) is low-priority follow-up.
 
+### Session 4 (2026-06-19) — E (fraction test) + Brooklyn-run triage/backfill (option B)
+
+**E — "consistent fraction" hypothesis: TESTED & REJECTED.** Full verdict in step 5 below — no
+fraction heuristic is viable; key/TOC landmarks are *absolute* near-front (first ~15–25 canvases),
+not a fraction of total, and the feature is absent in 5/7 carded publishers. Net: keep `--front 20`.
+
+**B — blank-publisher IA triage (172 rows).** 103 were already PHONEBOOK (settled). Triaged the
+remaining **69 from titles**: they are essentially the **entire Brooklyn residential run, 1830–1912**
+— overwhelmingly KEEP, only **1 SKIP** (`micro_IABROOKLYN_0038` = a pure *Business* Directory, flagged
+BIZ). Sampled 4 anchors (`1858BPL`, `1869BPL`, `brooklynnewyorkc1906geor`, `micro_0026`=1848/49) to
+lock col-count + publishers, then backfilled **63 rows** of `column_count` (+ `publisher` on 36):
+
+| Cohort | Rows | Backfilled | Verified by |
+|---|---|---|---|
+| **Lain Brooklyn** `18xxBPL` 1858–1883 | 16 | publisher=Lain, col=2 | 1858 (J. Lain) + 1869 (Geo. T. Lain) title pages; 2-col listings |
+| **Upington Brooklyn** `*geor` 1903–1910 | 18 | publisher=Upington, col=2 | 1906 title page (Geo. Upington, vol. LXXXIII); 2-col listing |
+| **Spooner/Teale early Bklyn** micro 1830–1849 (+2 reg-IA) | 23 | col=1 (pub=Spooner on the 2 confirmed 1848 rows) | 1848/49 title (Teale/Spooner) + single-col listing |
+| **Lain-era Consolidated** micro 1857–1860 | 4 | col=2 (publisher unverified) | bracket (1858 col-2 ↔ 1862 Lain) |
+| **Williamsburgh** `micro_0043` 1849/50 | 1 | col=1 | era bracket |
+| **1786-96 compilation** `…durs` | 1 | col=1 | 18th-C style |
+
+New/updated cards: **`upington_brooklyn_1900s.md`** (new publisher), **`spooner_brooklyn_1840s.md`**
+(new), and **`lain_brooklyn_1880s.md` extended to 1858–1899** (Lain's Brooklyn run is ~26 yrs longer
+than carded). **Key structural finding: the Brooklyn col 1→2 transition is 1855–1858** (Hearne col-1
+in 1855 ↔ Lain col-2 in 1858) — earlier + publisher-specific vs. the ~1845 Manhattan transition.
+
+**Duplicates found** (dedupe at sample time): `micro_0026`≡`brooklyncitydire1848teal` (1848-49);
+`brooklynalphabet1843unse`≈`micro_0019` (1843); `micro_0037`≈`1858BPL` (Consolidated 1858); plus the
+`*geor` 1903–1910 set has many intra-year copies + p1/p2/p3 parts.
+
+**Still open in this bucket (6 rows):** the BIZ skip (`micro_0038`, intentional); `newyorkdirectory00durs`
+(1910 Manhattan, Trow-era? needs sample); 4× `*broo` 1912 Brooklyn (Upington-successor? needs sample).
+
+**Current CSV state (after session 4):** **233 rows** have `column_count` (was 170; +63 Brooklyn run);
+**313 rows** have `publisher` (+36); **21 rows** have `page_offset` (unchanged — B measured no offsets).
+**216 rows (of 449) still need `column_count`** — biggest bucket now **Trow (51)**; the blank-publisher
+IA bucket is essentially cleared (6 rows left, listed above).
+
 ## The workflow (all FREE — no Gemini/API)
 ```bash
 PY=/Users/joshhadro/github/directory-pipeline/.venv/bin/python   # has requests/numpy/PIL
@@ -157,11 +195,12 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
   `.claude/settings.json` via `/fewer-permission-prompts` (2026-06-19). Subagent visual-read
   delegation not yet tested in practice.
 
-## NEXT — Phase 1 (continued): backfill at scale (~279 rows still need `column_count`)
+## NEXT — Phase 1 (continued): backfill at scale (~216 rows still need `column_count`)
 
 ✅ **Done:** permissions; pilot volumes + already-downloaded; **session-3 cohorts (Longworth,
-Doggett, Hearne, Lain + loc stub)**. Biggest remaining buckets: **Trow (51)** and the
-**~172 blank-publisher IA rows** (triage first — some are PHONEBOOK/SKIP).
+Doggett, Hearne, Lain + loc stub)**; **session-4 (E fraction test; B blank-publisher IA triage +
+Brooklyn-run backfill — see above)**. Biggest remaining bucket now: **Trow (51)**. The ~172
+blank-publisher IA rows are triaged + backfilled (only 6 residual rows left).
 
 **Remaining steps:**
 
@@ -177,7 +216,7 @@ Doggett, Hearne, Lain + loc stub)**. Biggest remaining buckets: **Trow (51)** an
    | ~~Doggett (12 vols)~~ | ~~done~~ | ✅ col=2 backfilled for all 11; offset done for 4 (1842/43, 1846/47, 1854/55 nypl + ia 1847). Remaining: per-volume offset for 7 |
    | ~~Longworth (61 vols)~~ | ~~done~~ | ✅ col=1 backfilled for all 61; offset done for 3 (NYPL 1797/1820/1842). Remaining: per-volume `page_offset` for 45 NYPL + 10 IA (low priority — offset is per-volume, no shortcut) |
    | Trow (51 vols) | 51 | Have card; sample each → measure offset only |
-   | Blank-publisher IA rows | ~172 | Identify first (read title pages) — some may be SKIP |
+   | ~~Blank-publisher IA rows~~ | ~~172~~ | ✅ s4: 103 PHONEBOOK + 68 Brooklyn KEEP (col backfilled, 3 publishers ID'd: Lain/Upington/Spooner) + 1 BIZ. 6 residual: durs-1910, 4× broo-1912, the BIZ skip |
 
    ~~Also: resample `loc/01015253` (Lain 1881)~~ ✅ RESOLVED — LoC item is a 20-canvas partial scan
    (no persons listing digitized); col=2 inferred from Lain identity, stub card closed.
@@ -185,8 +224,26 @@ Doggett, Hearne, Lain + loc stub)**. Biggest remaining buckets: **Trow (51)** an
 3. Run `detect_columns` + `detect_spreads` over downloaded dirs.
 4. Per volume: fill `column_count`, `start_page`/`end_page` (from TOC + `page_offset`), `key_page`;
    transcribe each distinct publisher/era legend once.
-5. **Test the "consistent fraction" hypothesis:** log `key_page_idx/total` and `toc_idx/total`; if it
-   clusters per publisher/era, derive a heuristic so later volumes skip the full front scan.
+5. ✅ **"Consistent fraction" hypothesis — TESTED & REJECTED (session 4, 2026-06-19).** Logged
+   `key_page_idx/total` and `toc_idx/total` across all 7 carded representatives (totals from live IIIF
+   manifests). Verdict: **no fraction heuristic is viable — the fraction is the wrong frame.**
+   - **Structurally too sparse.** Only **2 of 7** volumes have a locatable abbreviations key (Trow
+     key=canvas 14, Lain key=canvas 1) and only **1** has an original TOC (Doggett, canvas 8); the
+     other ~15 cohort volumes added zero key/TOC sightings. Most pre-1880 directories (Longworth,
+     Doggett, Hearne, Boyd, Franks) have **no collected key page at all** — older style embeds
+     conventions in the entries; the standalone "Explanation of Abbreviations" is a later Trow/Lain
+     (1880s+) feature. n=2 (key) and n=1 (TOC) cannot define a per-publisher cluster.
+   - **Doesn't cluster where it exists.** Trow `key/total`=0.0090 vs Lain 0.0006 — **15× apart at
+     near-identical totals** (1558 vs 1564 canvases). The spread is driven entirely by front-matter
+     depth (Trow: 13 canvases of foldout-map+ads+advertiser-index before the key; Lain BPL scan: 1),
+     which the cards already proved is **per-digitization, not per-publisher** — the same quantity that
+     makes `page_offset` un-clusterable. And where a key exists it sits **on the listing-start page**,
+     not a separate front-matter page.
+   - **Only invariant is absolute, not fractional:** every key/TOC/title landmark lands in the **first
+     ~15–25 canvases**, which `--front 20` already captures. So there is **no scan cost to save** — the
+     cheap front window already finds the front-matter landmarks; the expensive deep quantity
+     (`page_offset`) is exactly the one that won't cluster. **Keep `--front 20`; do not build a fraction
+     predictor.** The efficiency lever stays publisher-clustering of `column_count` (already established).
 6. Targeted QA (Opus): `trowsgeneraldire1853trow` REVIEW; reprints (Patterson 1874 of Franks 1786,
    Disturnell 1876); the blank-publisher IA triage. *(Longworth blank-year rows and the loc/Spooner
    serial were resolved in session 3.)*

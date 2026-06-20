@@ -169,9 +169,20 @@ in its notes — needs fixing; prep now skips blank-id rows); (b) the sampler **
 same-year "part" volumes** (p1/p2/p3 share a slug → overwrite) — per-part reads need a sampler slugify
 fix that includes the id. Neither blocked the col backfill (parts are uniformly post-1900 col=3).
 
-**Current CSV state: 284/449 `column_count`** (was 233; +5 pilot +46 Trow); **25/449 `page_offset`**;
-**~165 rows still need `column_count`** — the remaining buckets are smaller NYPL/IA tails with no
-single dominant publisher left.
+**Title-triage of the tail (s4 cont.):** of the ~165 still-blank rows, **112 are PHONEBOOK** (SKIP,
+separate track), leaving 52 non-phonebook. **Backfilled 32 from publisher/era alone** (early
+Manhattan/Brooklyn col=1; Upington BPL col=2; flagged Boyd-1860 BIZ + Lain-1897 eval-holdout). Sampled
+the 14 transition-era rows via a **2nd cheap-tier gated fan-out** (7 mixed-publisher Sonnet agents) +
+Opus audit of the degraded/inverted scans — **reconfirmed col is publisher-dependent**: Groot&Elston
+1845/46 + Rode 1851 stayed **col=1** (vs Doggett's col=2 same era); **Smith Brooklyn transitions within
+its own run, 1854 (col=1) → 1857 (col=2)**; Hope&Henderson 1856/57 col=2; broo-1912 col=2. The
+REVIEW-flagged `trowsgeneraldire1853trow` resolved → col=2, so **Trow is now 100% done**. The 2nd
+fan-out again showed the cheap tier self-flagging low confidence on inverted/faded scans (→ Opus audit).
+**2 residuals** left: `micro_IABROOKLYN_0034` (Smith 1855, mid-transition) + `newyorkdirectory00durs`
+(1910, IIIF fetch failed ×2). 6 post-1925 Polk/M&B rows deferred (out of training era).
+
+**Current CSV state: 326/449 `column_count`** (was 170 at session start); **29/449 `page_offset`**.
+The ~123 still-blank = 112 PHONEBOOK (SKIP) + 6 post-1925 Polk/M&B (deferred) + ~5 residual/REVIEW.
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash
@@ -231,7 +242,7 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
   delegation **tested in s4** (Trow pilot, Sonnet tier): reliable for `column_count`; for
   `page_offset` it needs an arithmetic gate (ad banners over the page number cause misreads).
 
-## NEXT — Phase 1 (continued): backfill at scale (~165 rows still need `column_count`)
+## NEXT — Phase 1 (continued): backfill at scale (326/449 `column_count`; tail triaged)
 
 ✅ **Done:** permissions; pilot volumes + already-downloaded; **session-3 cohorts (Longworth,
 Doggett, Hearne, Lain + loc stub)**; **session-4 (E fraction test; B blank-publisher IA triage +

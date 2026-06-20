@@ -96,12 +96,15 @@ recorded for the 4 sampled (per-volume drift: +16→+22 / +12→+16 / +8 / +6).
 for all 5; card `lain_brooklyn_1880s.md` extended with the cohort table. Offsets drift heavily and
 per-volume (+20 to +60 by ⅓ in; 1884 hits +82) — recorded value is at the sample point, anchor in
 notes. `1897BPL` left OUT (eval held-out). The `loc/01015253` Lain-1881 stub
-(`lain_brooklyn_1881_loc.md`) is still NOT done — note that CSV row is catalog-attributed to
-**Spooner**, not Lain (the digitized volume may be an 1881 Lain; needs title-page read + `--front 5`).
+(`lain_brooklyn_1881_loc.md`) is now RESOLVED: pulled the full LoC manifest — it has **only 20
+canvases, all front matter + business-directory index/ads, NO persons listing** (a partial scan of a
+~1411-page volume). Not a sampling problem; the persons pages aren't digitized in the LoC item. Set
+`column_count=2` by inference from the confirmed Lain-1881 identity; `page_offset`/`key_page` left
+blank (unmeasurable). Stub card updated to document this.
 
-**Current CSV state:** **169 rows** now have `column_count` (was 88; +58 Longworth, +11 Doggett,
-+7 Hearne, +5 Lain); **21 rows** have `page_offset` (was 5; +3 Longworth, +4 Doggett, +4 Hearne,
-+5 Lain). ~280 rows (of 449 total) still need `column_count` backfilled.
+**Current CSV state:** **170 rows** now have `column_count` (was 88; +58 Longworth, +11 Doggett,
++7 Hearne, +5 Lain, +1 loc-stub); **21 rows** have `page_offset` (was 5; +3 Longworth, +4 Doggett,
++4 Hearne, +5 Lain). ~279 rows (of 449 total) still need `column_count` backfilled.
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash
@@ -176,8 +179,8 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
    | Trow (51 vols) | 51 | Have card; sample each → measure offset only |
    | Blank-publisher IA rows | ~172 | Identify first (read title pages) — some may be SKIP |
 
-   Also: resample `loc/01015253` (Lain 1881) with `--front 5` targeting persons section to
-   complete the stub card `lain_brooklyn_1881_loc.md`.
+   ~~Also: resample `loc/01015253` (Lain 1881)~~ ✅ RESOLVED — LoC item is a 20-canvas partial scan
+   (no persons listing digitized); col=2 inferred from Lain identity, stub card closed.
 
 3. Run `detect_columns` + `detect_spreads` over downloaded dirs.
 4. Per volume: fill `column_count`, `start_page`/`end_page` (from TOC + `page_offset`), `key_page`;

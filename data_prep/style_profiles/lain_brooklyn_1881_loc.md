@@ -7,14 +7,22 @@ May 1, 1881**, compiled and published by **Geo. T. Lain / Lain & Company, 213 Mo
 Brooklyn**. The master list row (`loc/01015253`) carries publisher=Spooner as the originating
 publisher of the serial; the sampled volume is Lain. Visually sampled 2026-06-19.
 
-## Critical note — no persons listing page captured
+## RESOLVED — this LoC item is a PARTIAL scan; no persons listing exists here
 
-The `--front 12 -k 2` sample exhausted its 12 front-matter canvases within the extensive
-roman-numbered index section, and both "random" listing pages also landed in the front-matter
-block (canvases 6–10 = Index to Advertisements, canvas 15 = Index to Business Directory).
-**No persons listing page was captured.** To build a full profile, **resample with `--front 5`
-targeting specifically the persons section** (large volume — persons listing begins well past
-the front-matter + classified directory indexes).
+**Settled 2026-06-19 (full manifest pulled).** The LoC IIIF manifest for `gdc:00531550882`
+resolves to **only 20 canvases total** — and all 20 are front matter + the classified business
+section: title/preface/élite-directory insert (canvases 0–5), **Index to Advertisements**
+(canvases 6–10), and **Index to Business Directory** pp. iii–vi (canvases 15–18, referencing
+business pages up to 1411) + a **Business Register** advertiser page (canvas 20). There is **no
+residential persons listing page anywhere in this digitization** — it is a ~20-leaf partial scan of
+a ~1411-page volume. This is **not** a sampling problem (no `--front N` value will surface a persons
+page that isn't digitized); the earlier "resample with `--front 5`" suggestion is therefore moot.
+
+**Consequence:** a persons-listing profile cannot be built from the LoC source. `column_count=2` is
+set in the CSV by inference from the confirmed Lain-1881 identity (identical era/publisher to
+`lain_brooklyn_1880s.md`); `page_offset` and `key_page` are left blank (unmeasurable here). If a
+persons profile for this exact volume is ever needed, find a fuller scan (IA/NYPL) of the Lain
+1880-81 volume instead.
 
 ## Structure (canvas indices, 0-based, as sampled)
 - Canvases 0–1: Worn cover + blank endpaper (physical artifact).

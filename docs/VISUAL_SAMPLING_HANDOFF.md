@@ -83,9 +83,17 @@ sampled (per-volume, mostly drifting: +5 const / +17→+29 / +6→+8 / +3→−3
 `doggett_manhattan_1840s.md` extended with the cohort table. Remaining 7 Doggett rows need
 per-volume offset sampling.
 
-**Current CSV state:** **157 rows** now have `column_count` (was 88; +58 Longworth, +11 Doggett);
-**12 rows** have `page_offset` (was 5; +3 Longworth, +4 Doggett). ~292 rows (of 449 total) still
-need `column_count` backfilled.
+**Hearne (Brooklyn) cohort carded** (2026-06-19, session 3): sampled 4 reps (regular IA 1850 & 1852,
+microfilm `micro_IABROOKLYN_0028`/`_0032`). **New card `hearne_brooklyn_1850s.md`** written
+(publisher Henry R. & William J. Hearne; distinctive Brooklyn `NY h` commuter notation +
+`n`/`c`/`b`/`op` street-relation grammar). **All 7 Hearne rows got `column_count=1`** (single column
+on both regular IA and microfilm). KEY: the `micro_IABROOKLYN` scans are **single-page single-column,
+NOT double-page spreads** (contra the microfilm-spread warning) — just darker/degraded. `page_offset`
+recorded for the 4 sampled (per-volume drift: +16→+22 / +12→+16 / +8 / +6).
+
+**Current CSV state:** **164 rows** now have `column_count` (was 88; +58 Longworth, +11 Doggett,
++7 Hearne); **16 rows** have `page_offset` (was 5; +3 Longworth, +4 Doggett, +4 Hearne). ~285 rows
+(of 449 total) still need `column_count` backfilled.
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash
@@ -154,7 +162,7 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
    | Publisher | Remaining vols | Action |
    |---|---|---|
    | Lain Brooklyn (1884–1897) | 6 | Extend `lain_brooklyn_1880s.md`; measure offset per vol |
-   | Hearnes Brooklyn | 7 | Sample 1 → new card → backfill 6 |
+   | ~~Hearne Brooklyn (7 vols)~~ | ~~done~~ | ✅ new card `hearne_brooklyn_1850s.md`; col=1 backfilled for all 7; offset done for 4 (2 IA + 2 micro). Remaining: per-volume offset for 3 |
    | ~~Doggett (12 vols)~~ | ~~done~~ | ✅ col=2 backfilled for all 11; offset done for 4 (1842/43, 1846/47, 1854/55 nypl + ia 1847). Remaining: per-volume offset for 7 |
    | ~~Longworth (61 vols)~~ | ~~done~~ | ✅ col=1 backfilled for all 61; offset done for 3 (NYPL 1797/1820/1842). Remaining: per-volume `page_offset` for 45 NYPL + 10 IA (low priority — offset is per-volume, no shortcut) |
    | Trow (51 vols) | 51 | Have card; sample each → measure offset only |

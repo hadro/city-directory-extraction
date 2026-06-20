@@ -179,10 +179,19 @@ its own run, 1854 (col=1) → 1857 (col=2)**; Hope&Henderson 1856/57 col=2; broo
 REVIEW-flagged `trowsgeneraldire1853trow` resolved → col=2, so **Trow is now 100% done**. The 2nd
 fan-out again showed the cheap tier self-flagging low confidence on inverted/faded scans (→ Opus audit).
 **2 residuals** left: `micro_IABROOKLYN_0034` (Smith 1855, mid-transition) + `newyorkdirectory00durs`
-(1910, IIIF fetch failed ×2). 6 post-1925 Polk/M&B rows deferred (out of training era).
+(1910, IIIF fetch failed ×2).
 
-**Current CSV state: 326/449 `column_count`** (was 170 at session start); **29/449 `page_offset`**.
-The ~123 still-blank = 112 PHONEBOOK (SKIP) + 6 post-1925 Polk/M&B (deferred) + ~5 residual/REVIEW.
+**Scope clarified (s4): include 1920s+ *city* directories (not phone books).** The 6 post-1925 Polk/M&B
+city directories — initially deferred — are **now INCLUDED**: sampled via a 3rd cheap-tier fan-out, all
+**residential (KEEP)**, with borough-dependent density — Polk NYC 1925 = **col=6** (1920/21 were col=5),
+1931 M&B = col=4, the four 1933/34 Polk borough vols = col 2 (Staten Island) / 3 (Brooklyn) / 4 / 4.
+The 100 PHONEBOOK rows ≥1920 were **verified genuine telephone directories** (every title reads
+"…Telephone Directory" / "Classified Telephone" — Donnelley/BPL) → correctly SKIP. So the year boundary
+is no longer the filter; **genre (city-directory vs telephone-directory) is.**
+
+**Current CSV state: 332/449 `column_count`** (was 170 at session start); **29/449 `page_offset`**.
+The ~117 still-blank = 112 PHONEBOOK (verified telephone directories, SKIP) + 2 residuals + ~3 REVIEW —
+i.e. **every in-scope residential volume now has a column count.**
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash

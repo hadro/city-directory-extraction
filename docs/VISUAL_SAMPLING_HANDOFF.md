@@ -136,7 +136,42 @@ in 1855 ↔ Lain col-2 in 1858) — earlier + publisher-specific vs. the ~1845 M
 **Current CSV state (after session 4):** **233 rows** have `column_count` (was 170; +63 Brooklyn run);
 **313 rows** have `publisher` (+36); **21 rows** have `page_offset` (unchanged — B measured no offsets).
 **216 rows (of 449) still need `column_count`** — biggest bucket now **Trow (51)**; the blank-publisher
-IA bucket is essentially cleared (6 rows left, listed above).
+IA bucket is essentially cleared (6 rows left, listed above). *(Trow cleared next — see below.)*
+
+### Session 4 (cont., 2026-06-20) — Trow cheap-agent pilot + bucket CLEARED
+
+First real test of **lower-model (Sonnet) sub-agent delegation** (was "not tested"), then used it to
+clear the Trow `column_count` bucket.
+
+**Pilot — 5 Sonnet agents, 1 per volume, isolated contexts, structured-output schema, Opus-audited:**
+- **`column_count` via cheap tier = reliable.** 5/5 high-confidence + plausible; Opus eye-checked 1857
+  (2-col) and 1907 (3-col) — both correct, ad banners correctly excluded.
+- **`page_offset` via cheap tier = needs a sanity gate.** Correct when the page number is clean, but
+  the model grabs the WRONG number when an ad banner covers it (1907 returned a bottom-ad-strip "1414"
+  → impossible offset −1035; 1915 similar). An arithmetic gate (`offset = leaf − printed`; reject if
+  `printed > total` or `offset ∉ [−25,+60]`) auto-quarantines these → escalate/re-read. Offsets are
+  low-priority anyway, so they're deferred.
+
+**Finding: Trow's col 2→3 transition is 1857→1859** (1857 = 2-col, 1859 = 3-col — both eye-verified).
+Every Trow from 1859 on is col=3 — confirmed at 1859/1863/1876/1907/1915 + the 1890s card. So the
+bucket needed only the one ambiguous read (1859), not a 47-way fan-out.
+
+**Trow bucket CLEARED:** `column_count` backfilled for **all 52 remaining Trow** — 1857=2 (pilot),
+1859–1922/23 + 1898/99 + all part-volumes = 3 (bracketed). Only `trowsgeneraldire1853trow` left out
+(REVIEW-flagged, pre-transition — likely col ≤2; leave for manual). `page_offset` recorded for the
+gate-passers (1857 +6, 1859 +6, 1863 +12, 1876 +14); the rest deferred.
+
+**Reusable gated harness built** (for future cohorts / offset re-reads / a `/schedule` routine):
+`data_prep/trow_fanout_prep.py` (picks next N un-done Trow → samples → emits a read packet) +
+`data_prep/trow_fanout.workflow.js` (gated Sonnet fan-out; `args` = packet). Two issues the demo batch
+surfaced, now handled/noted: (a) one NYPL Trow 1898/99 row has a **blank `id`** in the master (flagged
+in its notes — needs fixing; prep now skips blank-id rows); (b) the sampler **collides output dirs for
+same-year "part" volumes** (p1/p2/p3 share a slug → overwrite) — per-part reads need a sampler slugify
+fix that includes the id. Neither blocked the col backfill (parts are uniformly post-1900 col=3).
+
+**Current CSV state: 284/449 `column_count`** (was 233; +5 pilot +46 Trow); **25/449 `page_offset`**;
+**~165 rows still need `column_count`** — the remaining buckets are smaller NYPL/IA tails with no
+single dominant publisher left.
 
 ## The workflow (all FREE — no Gemini/API)
 ```bash
@@ -193,14 +228,17 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
 - **Subagent permissions:** `Read` and basic Bash (`ls`, `grep`, etc.) are auto-allowed for
   subagents. HF CLI commands (`hf jobs ps`, `hf jobs logs`, etc.) are NOT — added to
   `.claude/settings.json` via `/fewer-permission-prompts` (2026-06-19). Subagent visual-read
-  delegation not yet tested in practice.
+  delegation **tested in s4** (Trow pilot, Sonnet tier): reliable for `column_count`; for
+  `page_offset` it needs an arithmetic gate (ad banners over the page number cause misreads).
 
-## NEXT — Phase 1 (continued): backfill at scale (~216 rows still need `column_count`)
+## NEXT — Phase 1 (continued): backfill at scale (~165 rows still need `column_count`)
 
 ✅ **Done:** permissions; pilot volumes + already-downloaded; **session-3 cohorts (Longworth,
 Doggett, Hearne, Lain + loc stub)**; **session-4 (E fraction test; B blank-publisher IA triage +
-Brooklyn-run backfill — see above)**. Biggest remaining bucket now: **Trow (51)**. The ~172
-blank-publisher IA rows are triaged + backfilled (only 6 residual rows left).
+Brooklyn-run backfill; Trow cheap-agent pilot + bucket cleared — see above)**. **Trow is now cleared**
+(2→3 transition = 1857→1859, rest col=3) and the ~172 blank-publisher IA rows are triaged + backfilled
+(6 residual). Remaining **~165** are smaller NYPL/IA tails with **no dominant publisher** — triage by
+title, cluster what clusters, sample representatives.
 
 **Remaining steps:**
 
@@ -215,7 +253,7 @@ blank-publisher IA rows are triaged + backfilled (only 6 residual rows left).
    | ~~Hearne Brooklyn (7 vols)~~ | ~~done~~ | ✅ new card `hearne_brooklyn_1850s.md`; col=1 backfilled for all 7; offset done for 4 (2 IA + 2 micro). Remaining: per-volume offset for 3 |
    | ~~Doggett (12 vols)~~ | ~~done~~ | ✅ col=2 backfilled for all 11; offset done for 4 (1842/43, 1846/47, 1854/55 nypl + ia 1847). Remaining: per-volume offset for 7 |
    | ~~Longworth (61 vols)~~ | ~~done~~ | ✅ col=1 backfilled for all 61; offset done for 3 (NYPL 1797/1820/1842). Remaining: per-volume `page_offset` for 45 NYPL + 10 IA (low priority — offset is per-volume, no shortcut) |
-   | Trow (51 vols) | 51 | Have card; sample each → measure offset only |
+   | ~~Trow (51 vols)~~ | ~~51~~ | ✅ s4-cont: col=3 backfilled for all (2→3 transition = 1857→1859; only 1857=col2). Only REVIEW-1853 left. Offsets gated/deferred. Cheap-agent harness in `data_prep/trow_fanout*` |
    | ~~Blank-publisher IA rows~~ | ~~172~~ | ✅ s4: 103 PHONEBOOK + 68 Brooklyn KEEP (col backfilled, 3 publishers ID'd: Lain/Upington/Spooner) + 1 BIZ. 6 residual: durs-1910, 4× broo-1912, the BIZ skip |
 
    ~~Also: resample `loc/01015253` (Lain 1881)~~ ✅ RESOLVED — LoC item is a 20-canvas partial scan

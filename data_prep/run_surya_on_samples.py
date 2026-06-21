@@ -1,7 +1,8 @@
-# /// script
-# requires-python = ">=3.11"
-# dependencies = ["surya-ocr", "pillow"]
-# ///
+# NOTE: deliberately NO PEP 723 (`# /// script`) inline-dependency header.
+# Surya must come from the directory-pipeline gpu venv (a pinned version that has
+# `surya.foundation`); `uv run script.py` with an inline header would instead build
+# a throwaway env with the latest PyPI surya-ocr (different module layout → ImportError).
+# Run it with that venv's python — see "Usage" below.
 """
 Run Surya OCR across ALL sampled gold volumes in one pass — loads the models ONCE
 and processes every selected dir, instead of paying the model-load cost per volume
@@ -17,20 +18,26 @@ from), detecting them as the pages after the contiguous front-matter block (the
 sampler downloads `--front N` front canvases 0..N-1, then `-k` listing pages sampled
 from deeper in the book → a big canvas-index gap). Pass --all-pages to OCR everything.
 
-MUST run in the gpu env where Surya is installed:
-    cd ../directory-pipeline && uv sync --extra gpu
-    python ../city-directory-extraction/data_prep/run_surya_on_samples.py
+MUST run with the directory-pipeline gpu venv (where the pinned Surya lives).
+Do NOT use `uv run <this script>` — the inline-header trap above. Instead:
+
+    cd ../directory-pipeline && uv sync --extra gpu          # one-time install
+    # then either of:
+    .venv/bin/python ../city-directory-extraction/data_prep/run_surya_on_samples.py
+    uv run python ../city-directory-extraction/data_prep/run_surya_on_samples.py
 
 Usage
 -----
-    # all 42 worklist volumes, listing pages only, resumable:
-    python3 data_prep/run_surya_on_samples.py
+    # all 42 worklist volumes, listing pages only, resumable (default):
+    .venv/bin/python ../city-directory-extraction/data_prep/run_surya_on_samples.py
 
     # every sampled dir under output/ (ignore the worklist), all pages, re-OCR:
-    python3 data_prep/run_surya_on_samples.py --no-worklist --all-pages --force
+    .venv/bin/python ../city-directory-extraction/data_prep/run_surya_on_samples.py \
+        --no-worklist --all-pages --force
 
     # a few specific dirs:
-    python3 data_prep/run_surya_on_samples.py --dirs ../directory-pipeline/output/ia_lain_1884_1884bpl
+    .venv/bin/python ../city-directory-extraction/data_prep/run_surya_on_samples.py \
+        --dirs output/ia_lain_1884_1884bpl
 """
 from __future__ import annotations
 

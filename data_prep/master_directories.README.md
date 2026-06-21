@@ -63,9 +63,14 @@ What we've already mined, so we don't re-walk it. All ingested via `ingest_colle
 | LoC `location:new york\|brooklyn & q=city directory` | LoC faceted search | **+2 `loc`** (22 hits, mostly guidebooks) |
 | LoC `location:new york\|new york city & q=city directory` | LoC faceted search | **0** (127 hits, all noise) |
 | LoC `fa=subject:directories \| location:new york` | LoC subject facet (the *right* facet) | 50 hits but ~all **upstate-county**; 0 net-new NYC |
+| Wikipedia *Brooklyn directories* article (2026-06) | cross-check vs the published Brooklyn bibliography | **0 net-new**: the residential run (Spooner→Hearne→Smith→Lain→Upington→Brooklyn Directory Co., 1822–1912) is already held; the rest is BIZ/élite/blue-book/almanac/guidebook (excluded). Notably we **already hold** its "Not found online" Hope&Henderson *consolidated* series 1856–68 (LCCN 01-15253 = `loc/01015253` + `micro_IABROOKLYN_0035/0037/0039/0040/0042`). **1901 Upington confirmed absent from IA** (FamilySearch-only). |
 
 **Query lessons:** on LoC use `fa=subject:directories`, never `q=city directory` (full-text → guides/
 histories/fiction). IA `?query=` within a collection works but is full-text too → always curate.
+**Aggregator / bibliography pages** (ldsgenealogy.com, the Wikipedia *Brooklyn directories* article)
+are coverage cross-checks, not ingest sources — most of their links are paywalled (Ancestry/MyHeritage)
+or out-of-scope specialty dirs; only the Internet Archive links resolve to IIIF. All cross-checks so
+far return **0 net-new residential** volumes.
 
 ## Leads not yet ingested (areas of interest left untouched)
 Deliberately out of the current **NYC-residential** scope, but catalogued here as known, ready leads:

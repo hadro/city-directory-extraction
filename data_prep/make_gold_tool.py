@@ -89,26 +89,25 @@ def _load_master(path: Path) -> dict:
 
 
 def _master_row(d: Path, meta: dict, master: dict):
-    """Match this sample dir to a master row by identifier, then by id-in-dirname."""
-    ident = meta.get("identifier") or ""
-    if ident in master:
-        return master[ident]
-    name = d.name
-    # longest id that appears in the dir slug wins (avoids short-id false hits)
-    cands = [rid for rid in master if rid and rid in name]
+    """Match this sample dir to a master row. Search a haystack of the IIIF identifier,
+    the manifest top-level id URL (carries the full NYPL UUID / IA slug / LoC id), and
+    the dir slug — longest matching id wins (avoids short-id false hits)."""
+    hay = " ".join([meta.get("identifier", ""), meta.get("manifest_id", ""), d.name]).lower()
+    cands = [rid for rid in master if rid and rid.lower() in hay]
     return master[max(cands, key=len)] if cands else None
 
 
 def _manifest_meta(d: Path) -> dict:
     """Pull year/title/identifier from _sample_manifest.json (IIIF v3)."""
     mf = d / "_sample_manifest.json"
-    meta = {"year": "", "title": "", "identifier": ""}
+    meta = {"year": "", "title": "", "identifier": "", "manifest_id": ""}
     if not mf.exists():
         return meta
     try:
         m = json.load(open(mf, encoding="utf-8"))
     except Exception:
         return meta
+    meta["manifest_id"] = str(m.get("id") or m.get("@id") or "")
     meta["title"] = _iiif_text(m.get("label"))
     for entry in m.get("metadata", []) or []:
         lab = _iiif_text(entry.get("label")).lower()

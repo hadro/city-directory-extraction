@@ -78,18 +78,21 @@ def _iiif_text(v) -> str:
     return ""
 
 
-def manifest_identifier(d: Path) -> str:
+def _manifest_haystack(d: Path) -> str:
+    """Lowercased blob to match a worklist id against: manifest top-level id URL
+    (carries the full NYPL UUID / IA slug / LoC id) + IIIF identifier metadata + dirname."""
+    parts = [d.name]
     mf = d / "_sample_manifest.json"
-    if not mf.exists():
-        return ""
-    try:
-        m = json.load(open(mf, encoding="utf-8"))
-    except Exception:
-        return ""
-    for entry in m.get("metadata", []) or []:
-        if _iiif_text(entry.get("label")).lower() == "identifier":
-            return _iiif_text(entry.get("value"))
-    return ""
+    if mf.exists():
+        try:
+            m = json.load(open(mf, encoding="utf-8"))
+        except Exception:
+            m = {}
+        parts.append(str(m.get("id") or m.get("@id") or ""))
+        for entry in m.get("metadata", []) or []:
+            if _iiif_text(entry.get("label")).lower() == "identifier":
+                parts.append(_iiif_text(entry.get("value")))
+    return " ".join(parts).lower()
 
 
 def worklist_ids(path: Path) -> set:
@@ -100,10 +103,8 @@ def worklist_ids(path: Path) -> set:
 
 
 def dir_matches_worklist(d: Path, ids: set) -> bool:
-    ident = manifest_identifier(d)
-    if ident and ident in ids:
-        return True
-    return any(rid and rid in d.name for rid in ids)
+    hay = _manifest_haystack(d)
+    return any(rid and rid.lower() in hay for rid in ids)
 
 
 def page_jpgs(d: Path) -> list:

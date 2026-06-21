@@ -25,12 +25,39 @@ Verbatim samples (printed p.353):
 - `— Chas. cooper, h 5205, 3d av.`  *(— = repeats "Duppler")*
 - `Dupre Felton, books, 549, 5th av.`
 
-## Abbreviations legend (from the key page, canvas 14 — partial; refine on a hi-res re-read)
-`h.` house · `r.` rear/resides · `bds.` boards · `av.` avenue · `bet.` between · `cor.` corner ·
-`st.` street · `pl.` place · `opp.` opposite · `wid.` widow · `clk` clerk · `mfr` manufacturer ·
-`B'klyn` Brooklyn · `N./S./E./W.` North/South/East/West · `wks` works · `R.R.` railroad ·
-`U.S.` United States · `Prot.` Protestant. *(Full legend is ~6 mini-columns; transcribe completely
-when building the production profile.)*
+## Abbreviations legend — FULLY TRANSCRIBED 2026-06-20 (printed "ABBREVIATIONS" block, canvas 15)
+**Important:** the volume's printed **ABBREVIATIONS** block (on the title / "A"-listing-start page)
+is a **places / streets / trade-category** key — **not** the h/r/bds entry-marker glossary. The
+entry markers below come from reading listing lines; some terms (corner, opposite, house, widow)
+appear in both.
+
+*Entry markers (from listing lines):* `h` house · `r` rear · `bds` boards · `av` avenue ·
+`bet` between · `cor`/`c` corner · `st` street · `opp` opposite · `wid.` widow · `clk` clerk ·
+`mfr` manufacturer · `wks` works.
+
+*Printed key (verbatim, 4 columns ≈ 110 entries):* `ag. implts.` agricultural implements ·
+`al.` alley · `Am.` American · `assn.` association · `asst.` assistant · `Att'y` Attorney ·
+`bdgh.` boarding house · `bkbinder` bookbinder · `bot. meds.` botanic medicines · `B'klyn` Brooklyn ·
+`bldg.` building · `bldr.` builder · `Cath.` Catharine · `(Rev.)` clergyman · `commr.` commissioner ·
+`cons.` consolidated · `Cotton Ex.` Cotton Exchange · `ct.` court · `C. H.` Court House · `Dist.` District ·
+`eatingh.` eating-house · `E.` East · `E. R.` East River · `elec. insts.` electrical instruments ·
+`embdr.` embroiderer · `embds.` embroideries · `eng.` engineer · `Exch.` Exchange · `fcy.` fancy ·
+`fwdg.` forwarding · `ft.` foot · `gds.` goods · `Gt.` Great · `gr.` green · `hdkfs.` handkerchiefs ·
+`hgr.` hanger · `hts.` heights · `h. furng.` house furnishing · `impr.` importer · `ins.` insurance ·
+`insp.` inspector · `Jeff.` Jefferson · `J. C.` Jersey City · `Laf.` Lafayette · `la.` lane ·
+`Lex.` Lexington · `(Ltd.)` limited · `L. I.` Long Island · `mfg.` manufacturing · `mkt` market ·
+`matls` materials · `math. insts.` mathematical instruments · `mkr.` maker · `mech` mechanical ·
+`men's furng.` men's furnishing · `mer.` merchant · `Mt.` Mount · `mus. insts.` musical instruments ·
+`n` near · `N.` North · `N. R.` North River · `pk.` park · `pat. meds.` patent medicines ·
+`phil. insts.` philosophical instruments · `phot. matls.` photographic materials · `pl` place ·
+`pktbk.` pocket book · `Pt.` Point · `pres.` president · `Produce Ex.` Produce Exchange ·
+`prof.` professor · `provns.` provisions · `pub. acct.` public accountant · `Pub.` Publishing ·
+`P. G.` Purchasers' Guide · `R.R.` Railroad · `Scher.` Schermerhorn · `sec.` secretary · `sl.` slip ·
+`soc.` society · `S.` South · `sq.` square · `Sta.` Station · `S. I.` Staten Island · `supt.` superintendent ·
+`surg. insts.` surgical instruments · `tel. insts.` telegraph instruments · `ter.` terrace ·
+`Tomp.` Tompkins · `trans.` transportation · `treas.` treasurer · `u. s. a.` United States Army ·
+`u. s. n.` United States Navy · `Vand'b't` Vanderbilt · `v. pres.` vice president ·
+`vet. surg.` veterinary surgeon · `W.` West · `Wil'by.` Willoughby · `wkr.` worker.
 
 ## Bonus resource (preface, canvas 8)
 The preface prints **spelling-variant name clusters** ("TO FIND A NAME YOU MUST KNOW HOW IT IS

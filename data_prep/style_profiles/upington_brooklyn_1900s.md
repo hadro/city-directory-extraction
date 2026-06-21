@@ -16,11 +16,21 @@ Publisher; Office 317 Washington St., Brooklyn). Visually sampled 2026-06-19 (se
 - `page_offset`: not measured (ad-block length varies). Listing sampled at leaf 367 (CANNELL–CANTLER)
   and leaf 855.
 
-## Entry format
-`Surname Firstname, occupation[, employer/work addr], h HomeAddr` — full surname repeated per line;
-dense 2-column urban listing. (Sample fragments from leaf 367, CANNELL–CANTLER, approximate:
-`Canter Carl, candy 206 …`; `Cannella Antonio, contractor h 1159 …`.) Transcribe the abbreviations
-key fully when building the production profile — not reached in the `--front 20` sample (ads lead).
+## Entry format — CORRECTED 2026-06-20 (hi-res read of leaves 367 & 855)
+`Surname Given occupation [employer/work addr] h HomeAddr` — **NO commas between fields**
+(space-delimited), unlike Lain (which is comma-delimited). Three corrections to the session-4 guess:
+1. **No commas.** `Cannell Jos clk h 379 Gold` · `Canning And'w shoes 960 Myrtle av` ·
+   `Hugh engineer h 448 Carlton av`.
+2. **Ditto = a leading `"`** that repeats the bold-caps headword surname (so the full surname is
+   **not** repeated each line): `Greenberg Jacob tailor 559 Marcy av` → `" Louis hfurng 82 Belmont av`
+   → `" Nathan tailor h 752 H'pkson`.
+3. **Given names abbreviated** (Jos, Edw'd, And'w, H'y, Dan'l, Cath). Prominent headword surnames
+   in bold caps.
+
+Markers seen: `h` house · `clk` clerk · `carp'r` carpenter · `hfurng` house furnishings ·
+`av` avenue · `B'way` Broadway · `Mhtn` Manhattan. **Abbreviations key STILL not reached** — front
+matter is all ads through leaf 19; the widow form (`wid. {hf}`, inferred from Lain) is **unconfirmed**
+and needs a deeper front scan.
 
 ## Cohort 1903–1910 (18 master rows backfilled, session 4)
 The `brooklynnewyork*geor` IA ids are the Upington Brooklyn directory, **1903–1910, all 2-column**.

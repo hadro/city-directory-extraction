@@ -59,6 +59,22 @@ CROP_MAXH = 70          # px: displayed/encoded height of each line strip
 CROP_PAD = 6            # px padding around each bbox before cropping
 
 
+def _iiif_text(v) -> str:
+    """Flatten an IIIF label/value: v2 plain string, or v3 {lang:[str]} / lists."""
+    if isinstance(v, str):
+        return v
+    if isinstance(v, dict):
+        for vals in v.values():
+            if isinstance(vals, list) and vals:
+                return str(vals[0])
+            if isinstance(vals, str):
+                return vals
+        return ""
+    if isinstance(v, list) and v:
+        return _iiif_text(v[0])
+    return ""
+
+
 def _load_master(path: Path) -> dict:
     """id -> row, for auto-resolving column_count / year from the manifest identifier."""
     if not path.exists():
@@ -93,14 +109,10 @@ def _manifest_meta(d: Path) -> dict:
         m = json.load(open(mf, encoding="utf-8"))
     except Exception:
         return meta
-    label = m.get("label", {})
-    for v in label.values():
-        if v:
-            meta["title"] = v[0]
-            break
+    meta["title"] = _iiif_text(m.get("label"))
     for entry in m.get("metadata", []) or []:
-        lab = next(iter(entry.get("label", {}).values()), [""])[0].lower()
-        val = next(iter(entry.get("value", {}).values()), [""])[0]
+        lab = _iiif_text(entry.get("label")).lower()
+        val = _iiif_text(entry.get("value"))
         if lab == "date" and not meta["year"]:
             meta["year"] = val
         if lab == "identifier" and not meta["identifier"]:

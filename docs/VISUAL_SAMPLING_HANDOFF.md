@@ -314,6 +314,56 @@ title, cluster what clusters, sample representatives.
   + retrain + re-run the eval panel (existing Wave-1 procedure in HANDOFF.md) to confirm the
   `name`/EM lift, esp. on Lain.
 
+## Gold-ground-truth editor (`data_prep/make_gold_tool.py`, 2026-06-21)
+Self-contained HTML tool to hand-build eval gold from the sampled pages. Reads Surya
+line-level OCR (`{stem}_surya.json`: bbox+text+confidence) + `_sample_manifest.json`,
+crops each line, and emits one portable `.html`: per row = **[line crop] · [raw_line,
+editable] · [8 field cells]**, column-ordered, low-confidence (<0.7) rows tinted, junk
+rows skippable. Export button → `gold.jsonl` in the EXACT `eval/evaluate.py` schema
+(`raw_line` + `context{dialect,alphabetical_range,directory_year,image}` + `record{8 FIELDS}`),
+drop into `data/`, scored unchanged. `raw_line` is pre-filled from Surya for free; the
+8-field split stays human (true gold, no parser anchoring).
+The full loop is **selector → sampler → surya → editor → validator**:
+```bash
+PY=/Users/joshhadro/github/directory-pipeline/.venv/bin/python   # has pillow
+# 0. pick a representative panel + worklist (this repo):
+python3 data_prep/sample_volumes.py            # -> data_prep/gold_sample/{worklist.csv,WORKLIST.md}
+# 1. sample pages for the whole chosen set (one run, in directory-pipeline):
+$PY ../directory-pipeline/sources/sample_directories.py \
+      data_prep/gold_sample/worklist.csv --front 20 -k 2 --width 1800
+# 2. OCR the listing pages (NEEDS the gpu env — surya not in the default venv):
+#    in directory-pipeline:  uv sync --extra gpu  &&  python pipeline/run_surya_ocr.py output/<slug>
+# 3. build the editor — column_count + year auto-resolve from master_directories.csv
+#    via the manifest identifier (override with --cols only if a row is blank):
+$PY data_prep/make_gold_tool.py ../directory-pipeline/output/<slug> \
+      -o gold_<slug>.html            # --min-conf 0.5 to drop OCR noise; --cols N to override
+# 4. correct in browser, Export -> data/gold_<slug>.jsonl, then validate:
+python3 data_prep/validate_gold.py data/gold_<slug>.jsonl --images ../directory-pipeline/output --strict
+```
+**Validated** against existing Surya output (`directory-pipeline/output/greenbook:88`):
+payload parses, crops decode, export schema matches `data/lain_eval.jsonl`; auto-cols matched
+a faked `1876BPL` dir → col=2 from master. **Gotcha:** Surya needs the `gpu` extra
+(transformers <5.0, conflicts with the `local-ocr` Chandra/Qwen env) and `uv`; it's a GPU/Colab
+step, not the Apple-Silicon default venv. The builder itself only needs Pillow. Embeds crops as
+base64 → keep Surya to the few `-k` listing pages per volume (88-page greenbook = 51 MB; a 2-page
+sample ≈ 0.6 MB).
+
+**`data_prep/sample_volumes.py`** — stratified representative selector. Strata default to
+`(publisher, column_count)`; spreads picks across each stratum's year range (catches the
+1→2→3-col transitions). Excludes PHONEBOOK/BIZ, eval holdouts, blank-id rows. Default run =
+**42 volumes** (every publisher; Smith 1→2, Trow 2/3/4, Polk borough-dependent 2/3/4/5/6).
+Writes a master-format `worklist.csv` (feed straight to the sampler) + `WORKLIST.md` checklist.
+Tune with `--per N` / `--max M` / `--by publisher,column_count,decade`.
+
+**`data_prep/validate_gold.py`** — QA on returned gold before it joins the panel. **ERRORS**
+(break `evaluate.py`): bad JSON, missing/extra/`|`-containing/​newline fields, non-bool
+is_business, empty name, missing context keys. **WARNINGS** (human glance): field tokens absent
+from raw_line (typo/drift — *also fires on legit abbreviation expansion, e.g. `insur`→`insurance`,
+~1% on real gold*), occupation that looks like an address, numberless address, firm-name with
+is_business=False, bad year/dialect, duplicate rows, image-not-found, year-vs-master mismatch.
+Prints field fill-rates + business ratio + lines/image. `--strict` exits 1 on any ERROR (CI-able).
+Ran clean on `data/lain_eval.jsonl` (0 errors, 9 warnings — all genuine).
+
 ## Key paths
 - Master list: `data_prep/master_directories.csv` (schema in `master_directories.README.md`).
 - Style cards: `data_prep/style_profiles/` (`README.md` = card schema + build recipe + lessons).

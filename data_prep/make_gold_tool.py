@@ -324,6 +324,11 @@ _TEMPLATE = r"""<!DOCTYPE html>
         <code>h</code>/<code>r</code>/<code>bds</code> prefix. Use <code>home_address</code> ONLY for
         a <i>second</i>, separate <code>h.</code> home when the entry lists both a work address and a
         home. A lone <code>h 449 Clason av</code> goes in <code>address</code>, not home_address.</li>
+    <li><b>Widows → the <code>wid</code>/<code>widow</code> marker always goes in <code>spouse_name</code></b>
+        (verbatim). <code>widow of John</code> / <code>wid. John</code> → John is the husband →
+        spouse_name <code>widow of John</code> (her own given name, if any, stays in name; if none,
+        name is just the surname). <code>widow Ann</code> (no "of", a female given name) → Ann is
+        her own name → name <code>White Ann</code>, spouse_name bare <code>widow</code>.</li>
     <li><b>Ditto marks → verbatim.</b> Copy <code>do</code> / <code>〃</code> / <code>''</code>
         as printed — don't resolve to the street/value from the row above (the per-line model
         can't see it). <code>White, John, butcher, 13 do</code> → address <code>13 do</code>.

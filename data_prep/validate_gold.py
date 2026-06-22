@@ -50,8 +50,11 @@ FIELDS = ["name", "is_business", "spouse_name", "race_designation",
           "occupation_role", "employer", "address", "home_address"]
 KNOWN_DIALECTS = {"nyc", "tulsa", "minneapolis", "ftd-fr", "nyu"}
 
-# residence/street tokens common in NYC-style directories (h=house, r=resides, bds=boards…)
-ADDR_TOK = re.compile(r"\b(h|r|bds|b|res|rear|cor|c|n|s|e|w|av|ave|st|pl|ter|rd|sq)\b\.?", re.I)
+# residence/street tokens common in NYC-style directories (h=house, r=resides, bds=boards…);
+# include full street-type words, hyphenated forms (Bowery-lane), and ditto (do = number repeated)
+ADDR_TOK = re.compile(
+    r"\b(h|r|bds|b|res|rear|cor|c|n|s|e|w|av|ave|avenue|st|street|pl|place|ter|terrace|"
+    r"rd|road|sq|square|la|lane|ct|court|row|slip|wharf|al|alley|do)\b\.?", re.I)
 FIRM_RE = re.compile(r"&|\bco\b|\bbros\b|\bbro\b|\bsons\b|\bmfg\b|\bworks\b|\b& co\b|\bcompany\b", re.I)
 OCC_AS_ADDR = re.compile(r"\b(h|r|bds)\s+\d|\b\d+\s+[A-Z]")
 WORD = re.compile(r"[A-Za-z0-9]+")

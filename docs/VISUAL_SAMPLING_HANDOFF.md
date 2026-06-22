@@ -212,6 +212,20 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
 ```
 
 ## Lessons / gotchas (hard-won in the pilot and Phase 1)
+- **Surya on the Mac (MPS) is slow** — the gold panel's listing pages are the densest pages
+  (~150–200 text lines each; Surya cost ∝ line count), and `run_surya_on_samples` does *only*
+  those, so it grinds. Surya is meant for **GPU/Colab** (per `directory-pipeline/pyproject.toml`);
+  the whole panel is only ~113 listing images → minutes on a T4. On the Mac, bump
+  `RECOGNITION_BATCH_SIZE`/`DETECTOR_BATCH_SIZE`, or do one volume at a time with `--dirs`.
+- **Blank-verso scans** — some volumes (Boyd Flushing 1890) alternate content (odd canvas) with
+  **blank versos** (even); the sampler can land its `-k` listing picks on blanks → blank crops +
+  hallucinated low-conf OCR on white paper. Fixed: `--blank-std` skip in `run_surya_on_samples`
+  + a skip in `make_gold_tool`. Recovery: re-sample with a **larger `-k`** (e.g. 12) so some picks
+  hit content, re-OCR (blanks auto-skipped). Detect via grayscale std (<7 ≈ blank).
+- **Truncated downloads happen** — `download_images --resume` skips by *existence*, not integrity,
+  so a partial JPEG (e.g. an exact 65536-byte stub) lingers and crashes decode. `verify()` misses
+  end-of-data truncation; only a full `.load()` catches it. Delete the stub + re-sample to re-fetch.
+  `run_surya_on_samples` now loads per-image so one bad file doesn't sink its batch.
 - **Abbreviations key = ground truth**; in some volumes (Trow) it doubles as the listing-start page.
 - **`detect_columns` under-counts** dense listings (Trow: detector said 2; the preface says **3**).
   Trust the preface / your eye for `column_count`; treat the detector as a hint.
@@ -393,8 +407,24 @@ Export → `validate_gold.py` → drop in `data/<slug>_eval.jsonl` (note: `data/
 all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the export's
 `{raw_line,context,record}` schema is consumed directly as `--gold`); predictions from
 `eval/{gliner,gemini,qwen_predict}.py` → `results_table.py`. Depth: ~40 lines/volume, ~100 on the
-14 deep-flagged (Lain + col-transition publishers). First slice: Lain-1876, 49 lines, harness
-green.
+14 deep-flagged (Lain + col-transition publishers).
+
+**Progress (2026-06-22):**
+- **Lain-1876 DONE** — first finished real-OCR eval set: `data/lain1876_eval.jsonl`, **103 lines**
+  (deep target met), validator-clean, `evaluate.py --self-test` green. (gitignored — back up out-of-band.)
+- **First real-data numbers** = the GLiNER *floor* on Lain-1876 (`results/scores.jsonl`, label
+  `gliner-lain1876`): macro-F1 **0.33**, whole-row EM **3.9%**; weakest field **`address` F1 0.16**
+  (extractive GLiNER can't rebuild the `h` prefix / work-vs-home split), `name` F1 0.54. Rare fields
+  (spouse/employer/home_address) found 0 → **read F1, not EM, for sparse fields** (high EM there is
+  just empty-matches-empty). These are the floor; the Qwen-fine-tune and Gemini-bar runs are the
+  signal — still TODO (need checkpoint/GPU + `GEMINI_API_KEY`).
+- **New tooling flags since 2026-06-21:** editor focus-mode jump-to-next-column/page; autosave +
+  Import; `make_gold_tool --max-lines N`; `validate_gold` address/home_address check;
+  `run_surya_on_samples --blank-std` (skip blank versos) + per-image batch loading (one corrupt jpg
+  no longer sinks the batch).
+- **Next:** Boyd-1890 (std, in progress), then down `WORKLIST.md`. Most std volumes are OCR'd;
+  the deep NYPL ones (Polk ×5, Trow 1884/1913, M&B, Longworth) still need a Surya pass — do on
+  Colab/CUDA (MPS is slow; see lessons).
 
 ## Phase 2 — retrain loop (eval-driven; uses the real gold above)
 *(Operational companion to "THEN — Phase 2" above, which lists the synth changes.)*

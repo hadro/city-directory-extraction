@@ -149,6 +149,15 @@ def select_dirs(args) -> list:
     return dirs
 
 
+def _is_blank(p: Path, thr: float) -> bool:
+    """True for a near-white page (blank verso). Std of grayscale < thr ~= no ink."""
+    try:
+        from PIL import Image, ImageStat
+        return ImageStat.Stat(Image.open(p).convert("L")).stddev[0] < thr
+    except Exception:
+        return False
+
+
 def collect_targets(dirs: list, args) -> list:
     targets = []
     for d in dirs:
@@ -166,7 +175,11 @@ def collect_targets(dirs: list, args) -> list:
                 chosen = jpgs
         todo = [p for p in chosen
                 if args.force or not (p.parent / f"{p.stem}_surya.json").exists()]
-        done = len(chosen) - len(todo)
+        blanks = [p for p in todo if _is_blank(p, args.blank_std)]
+        if blanks:
+            todo = [p for p in todo if p not in blanks]
+            print(f"  {d.name}: skipped {len(blanks)} blank/verso page(s)", file=sys.stderr)
+        done = len(chosen) - len(todo) - len(blanks)
         print(f"  {d.name}: {len(todo)} to OCR ({done} done, {len(jpgs)} pages total)",
               file=sys.stderr)
         targets.extend(todo)
@@ -199,6 +212,8 @@ def main(argv=None) -> int:
     ap.add_argument("--no-worklist", action="store_true", help="OCR every sampled dir, ignore worklist")
     ap.add_argument("--dirs", nargs="+", help="explicit sample dirs (overrides discovery)")
     ap.add_argument("--all-pages", action="store_true", help="OCR every sampled page, not just listings")
+    ap.add_argument("--blank-std", type=float, default=7.0,
+                    help="skip pages whose grayscale std is below this (blank versos; 0 disables)")
     ap.add_argument("--force", action="store_true", help="re-OCR pages that already have _surya.json")
     ap.add_argument("--batch-size", "-b", type=int, default=4, help="images per inference batch")
     ap.add_argument("--dry-run", action="store_true", help="list targets, do not load models / OCR")

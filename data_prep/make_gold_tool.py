@@ -186,6 +186,10 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines
             width = data.get("image_width") or 0
             lines = data.get("lines", [])
             img = Image.open(jpg)
+            from PIL import ImageStat
+            if ImageStat.Stat(img.convert("L")).stddev[0] < 7:   # blank verso — skip
+                print(f"  ~ {jpg.name}: blank page, skipped", file=sys.stderr)
+                continue
             if not width:
                 width = img.size[0]
             order = _order_lines(lines, width, cols)

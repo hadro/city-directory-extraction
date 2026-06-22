@@ -168,8 +168,11 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines
             cols, src = int(row["column_count"]), f"master({row['id']})"
         else:
             cols, src = 1, "default"
-        if row and not meta["year"]:
-            meta["year"] = row.get("year") or ""
+        # master year is the canonical key the eval panel joins/groups on — prefer it
+        # over the manifest date (IA dates a two-year volume by its first year, e.g.
+        # Doggett "1845 & 1846" -> manifest 1845 but master/id 1846)
+        if row and (row.get("year") or "").strip():
+            meta["year"] = row["year"].strip()
         print(f"  {d.name}: cols={cols} [{src}]", file=sys.stderr)
         sjsons = sorted(d.glob("*_surya.json"))
         if not sjsons:

@@ -368,9 +368,10 @@ realism) is **half done — tooling built & committed; awaiting data + retrain**
 > new gold toolchain — see [VISUAL_SAMPLING_HANDOFF.md](VISUAL_SAMPLING_HANDOFF.md)
 > (`data_prep/{sample_volumes,make_gold_tool,run_surya_on_samples,validate_gold}.py`,
 > 42-volume `gold_sample/worklist.csv`). **Surya OCR complete for all 42** (labeling is now
-> browser-only). **3 volumes labeled = 215 lines:** lain1876 (103), boyd1890 (75), doggett1846 (37),
-> all validator-clean. GLiNER floor scored on lain1876 (macro-F1 0.33, `address` weakest). The
-> address/home_address convention there is the same contract as synth + this panel. Next: more
+> browser-only). **4 volumes labeled = 273 lines:** lain1876 (103), boyd1890 (75), doggett1846 (37),
+> duncan1794 (58), all validator-clean. GLiNER floor scored on lain1876 (macro-F1 0.33, `address`
+> weakest). Conventions are a fixed gold/synth/model contract (key one: `raw_line` verbatim, the 8
+> record fields canonical — e.g. surname comma kept in raw_line, dropped from `name`). Next: more
 > volumes down the worklist, then Qwen + Gemini predictions on the panel.
 
 To re-run an eval (note: `qwen_predict.py` now auto-loads the multimodal class — verify the log

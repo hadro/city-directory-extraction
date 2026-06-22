@@ -304,13 +304,18 @@ _TEMPLATE = r"""<!DOCTYPE html>
 <details id="conv">
   <summary>Transcription conventions <span class="hint">(click to collapse)</span></summary>
   <ul>
-    <li><b>Verbatim.</b> Type each field as printed — don't expand abbreviations
+    <li><b>raw_line = verbatim · the 8 fields = canonical.</b> Leave <code>raw_line</code> exactly as
+        printed (every comma, prefix, ditto). The split-out fields use the project's canonical form
+        — drop the line's separating commas <i>and</i> the surname/given comma. E.g.
+        <code>Graves, Benjamin, accountant, 71 Dey</code> → raw_line keeps it as-is, but
+        name = <code>Graves Benjamin</code> (no comma — matches the model's output format).</li>
+    <li><b>Verbatim values.</b> Type each field as printed — don't expand abbreviations
         (<code>insur</code> stays <code>insur</code>, not "insurance"). Keep
         <code>h</code> / <code>r</code> / <code>bds</code> / <code>wid.</code> / <code>clk.</code> as-is.</li>
-    <li><b>No delimiter commas.</b> The line's separating commas aren't field content.
-        <code>Gibson Thomas, clk. h 38 Prospect</code> →
+    <li><b>No commas in fields.</b> Neither the field-separating commas nor the surname/given comma
+        belong in a field value. <code>Gibson Thomas, clk. h 38 Prospect</code> →
         name <code>Gibson Thomas</code>, occupation <code>clk.</code>, address <code>h 38 Prospect</code>.
-        A trailing comma scores as wrong.</li>
+        A leftover comma scores as wrong.</li>
     <li><b>Fractions as ASCII.</b> Write <code>1/2</code>, not the <code>½</code> glyph
         (e.g. <code>870 1/2 De Kalb av</code>). Fix the raw_line too if OCR misread it.</li>
     <li><b>Titles/honorifics go in <code>name</code></b>, verbatim — <code>Rev.</code>,

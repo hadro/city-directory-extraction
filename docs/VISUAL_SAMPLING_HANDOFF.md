@@ -389,10 +389,18 @@ guiding rule: **gold must match how the model represents things** (van Strien ev
 the *same* convention governs `synth_persons.py` (train), every `data/*_eval.jsonl` (eval), and
 the model's output. Do **not** redefine fields just because you're retraining; a change means
 migrating synth + all 7.5k existing eval rows + new gold at once.
-- **Verbatim** — never expand abbreviations (`insur` stays `insur`, `clk.`, `wid.`, `(Rev.)`).
+- **`raw_line` = verbatim, the 8 record fields = canonical.** raw_line keeps everything as OCR'd
+  (commas, prefixes, dittos); the split-out fields use the project's canonical form. This is the
+  frame for every rule below. E.g. older directories print `Graves, Benjamin, accountant, 71 Dey` —
+  raw_line keeps the surname comma, but `name = "Graves Benjamin"` (no comma). The model's *output*
+  format (synth `_nyc_name` = `"{surname} {given}"`, no comma) is canonical; gold name must match it,
+  not the OCR substring. *(The surname comma is itself part of the synth→real gap — synth never emits
+  it, so the model must learn to strip it; the eval can only measure that if gold is canonical.)*
+- **Verbatim values** — never expand abbreviations (`insur` stays `insur`, `clk.`, `wid.`, `(Rev.)`).
   Expansion is a *separate, reversible* downstream step keyed off the `style_profiles/` legends.
-- **No delimiter commas** — the line's separating commas aren't field content (a trailing comma
-  scores wrong; the scorer strips trailing periods + case + space, but not commas).
+- **No commas in fields** — neither the field-separating commas nor the surname/given comma belong
+  in a field value (a leftover comma scores wrong; the scorer strips trailing periods + case + space,
+  but not commas). *(Duncan-1794 needed 42/58 surname commas stripped — the `Surname, Given` format.)*
 - **Fractions as ASCII** — `1/2`, not the `½` glyph (encoding/tokenization robustness).
 - **Titles/honorifics → `name`** (`Rev.`/`Dr.`/`Capt.`/`Mrs.`/`Miss`), verbatim, per
   `synth_persons.py` which generates them into the name string.
@@ -404,6 +412,14 @@ migrating synth + all 7.5k existing eval rows + new gold at once.
   goes in `address`. *(Caught + fixed 39/49 inverted rows in the first Lain-1876 gold this way;
   the role-based "work→address / home→home_address" split is rejected — it's undecidable for the
   common single combined-use address.)*
+- **Widows → the `wid`/`widow` marker always → `spouse_name`** (verbatim). `widow of John` / `wid.
+  John` → John is the husband (→ spouse_name; her own given name, if any, stays in name; if none,
+  name is just the surname). `widow Ann` (no "of", a female given name) → Ann is her own name (→
+  name), spouse_name is the bare marker. *(Disambiguator = the word "of".)*
+- **Ditto marks → verbatim** — copy `do` / `〃` / `''`; don't resolve to the row above (per-line
+  model can't see it). Matches the pipeline default (`--expand-dittos` off); resolution is downstream.
+- **Long-s (ſ) → `s`** everywhere (raw_line + fields) — OCR misreads it as `f` (`fexton`→`sexton`,
+  `hofier`→`hosier`, `Roofevelt`→`Roosevelt`); it's a typographic form of s, like `½`→`1/2`.
 
 ### Phase-1.5 — building the real-OCR eval panel (started 2026-06-21)
 The 42-volume panel (`gold_sample/worklist.csv`) is the **eval** set, kept OUT of training.
@@ -418,10 +434,13 @@ all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the
 - **Surya pass COMPLETE for all 42 worklist volumes** (`run_surya_on_samples.py --dry-run` → 0 to
   OCR everywhere), incl. the dense Polk/Trow/M&B pages (got them past MPS OOM with small batches;
   see lessons). **Everything left is browser-only labeling — no more MPS/GPU step.**
-- **3 volumes labeled so far → 215 gold lines:** `data/lain1876_eval.jsonl` (103, deep target met),
+- **4 volumes labeled so far → 273 gold lines:** `data/lain1876_eval.jsonl` (103, deep target met),
   `data/boyd1890_eval.jsonl` (75; topped up from 27 via Import after the verso resample — Boyd is
-  the lone Flushing/Queens rep), `data/doggett1846_eval.jsonl` (37, std). All validator-clean +
-  `--self-test` green. (gitignored — back up out-of-band.)
+  the lone Flushing/Queens rep), `data/doggett1846_eval.jsonl` (37, std), `data/duncan1794_eval.jsonl`
+  (58, std; the `Surname, Given` format — needed a batch comma-strip + 3 widow-inversion fixes + long-s
+  modernization, all now convention). All validator-clean + `--self-test` green. (gitignored — back up
+  out-of-band.) **QA tip:** re-run `validate_gold` after each export; the convention slips it caught
+  (commas, inverted widows, year mismatch) are the recurring ones.
 - **First real-data numbers** = the GLiNER *floor* on Lain-1876 (`results/scores.jsonl`, label
   `gliner-lain1876`): macro-F1 **0.33**, whole-row EM **3.9%**; weakest field **`address` F1 0.16**
   (extractive GLiNER can't rebuild the `h` prefix / work-vs-home split), `name` F1 0.54. Rare fields

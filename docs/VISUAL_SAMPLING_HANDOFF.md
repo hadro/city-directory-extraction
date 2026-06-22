@@ -231,6 +231,16 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
   so a partial JPEG (e.g. an exact 65536-byte stub) lingers and crashes decode. `verify()` misses
   end-of-data truncation; only a full `.load()` catches it. Delete the stub + re-sample to re-fetch.
   `run_surya_on_samples` now loads per-image so one bad file doesn't sink its batch.
+- **Early volumes mix in non-listing sections** — Franks 1786 sampled an **almanac** (moon-phase
+  lines), a **subscriber roll**, and an **officials list** (`ALEXANDER M'Dougall, Esq: President`)
+  alongside real listings; the default middle-80% window straddles them. These aren't blank (the
+  std/blank-guard won't catch them) — spot them by content (long prose, or no `Surname, occ, addr`
+  structure). **Bounded-resample recipe:** find a known listing canvas (here 79 = P-names), estimate
+  the A–Z span, then sample only that window — `pick_indices` uses `start_page`/`end_page` as the
+  **canvas** window when set. Copy the volume's worklist row into a temp CSV with `start_page`/
+  `end_page` (e.g. 36/110), `sample_directories.py <tmp.csv> --front 0 -k 8`, re-OCR, then **delete
+  the surya json of any non-listing page** so it's excluded from the editor (pages load in canvas
+  order, so a 164-line almanac at the front would otherwise eat the whole `--max-lines` cap).
 - **Abbreviations key = ground truth**; in some volumes (Trow) it doubles as the listing-start page.
 - **`detect_columns` under-counts** dense listings (Trow: detector said 2; the preface says **3**).
   Trust the preface / your eye for `column_count`; treat the detector as a hint.

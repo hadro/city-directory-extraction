@@ -127,13 +127,47 @@ def write_subset(picked, fieldnames, out_csv):
             w.writerow(r)
 
 
-def write_worklist(picked, why, out_md, out_csv):
+DEEP_TARGET = 100   # high-value volumes: aim ~100 gold lines
+STD_TARGET = 40     # everything else: ~40 is enough to catch style failures
+
+
+def depth_map(picked, all_rows):
+    """Recommend which volumes to label deeper. Rule (see VISUAL_SAMPLING_HANDOFF):
+    deepen Lain (known synth->real gap) and any publisher whose run spans a
+    column-count transition (layout change is where the model breaks)."""
+    pub_cols = defaultdict(set)
+    for r in all_rows:
+        p = (r.get("publisher") or "unknown").strip() or "unknown"
+        c = (r.get("column_count") or "").strip()
+        if c.isdigit():
+            pub_cols[p].add(int(c))
+    out = {}
+    for r in picked:
+        p = (r.get("publisher") or "unknown").strip() or "unknown"
+        cols = sorted(pub_cols.get(p, set()))
+        if "lain" in p.lower():
+            out[(r["source"], r["id"])] = ("deep", DEEP_TARGET, "synth→real gap (Lain)")
+        elif p.lower() != "unknown" and len(cols) > 1:   # skip the spurious catch-all bucket
+            out[(r["source"], r["id"])] = ("deep", DEEP_TARGET,
+                                           f"col-transition ({'→'.join(map(str, cols))})")
+        else:
+            out[(r["source"], r["id"])] = ("std", STD_TARGET, "")
+    return out
+
+
+def write_worklist(picked, why, depth, out_md, out_csv):
     rel_csv = out_csv.relative_to(REPO)
+    deep = [r for r in picked if depth[(r["source"], r["id"])][0] == "deep"]
     lines = [
         "# Gold-creation worklist",
         "",
         f"{len(picked)} representative volumes selected from `master_directories.csv`.",
         "Work top-to-bottom; check each off as its `gold.jsonl` lands in `data/`.",
+        "",
+        f"**Depth:** aim ~{STD_TARGET} gold lines per volume; go deeper (~{DEEP_TARGET}) on the "
+        f"**{len(deep)} `deep`-flagged** rows below (Lain's synth→real gap + column-transition "
+        "publishers, where layout change breaks the model). Pass the target to the editor with "
+        "`--max-lines`.",
         "",
         "## Run once — sample pages for the whole set",
         "```bash",
@@ -147,22 +181,24 @@ def write_worklist(picked, why, out_md, out_csv):
         "# surya needs the gpu env (uv sync --extra gpu); see VISUAL_SAMPLING_HANDOFF.md",
         "$PY pipeline/run_surya_ocr.py output/<slug>            # 1) line OCR + bboxes",
         "$PY ../city-directory-extraction/data_prep/make_gold_tool.py \\",
-        "      output/<slug> -o gold_<slug>.html                 # 2) cols auto-read from master CSV",
+        "      output/<slug> -o gold_<slug>.html --max-lines 40   # use the row's target below",
         "# 3) open gold_<slug>.html, correct fields, Export -> drop in city-directory-extraction/data/",
         "# 4) validate:  python3 data_prep/validate_gold.py data/gold_<slug>.jsonl",
         "```",
         "",
         "## Volumes",
         "",
-        "| ☐ | source/id | publisher | year | col | borough | stratum |",
-        "|---|---|---|---|---|---|---|",
+        "| ☐ | depth | target | source/id | publisher | year | col | borough | stratum / why |",
+        "|---|---|---|---|---|---|---|---|---|",
     ]
     for r in picked:
         rid = (r["source"], r["id"])
+        dlevel, target, dwhy = depth[rid]
+        note = dwhy or why.get(rid, "")
         lines.append(
-            f"| ☐ | `{r['source']}/{r['id']}` | {r.get('publisher','')} | "
-            f"{r.get('year','')} | {r.get('column_count','')} | {r.get('borough','')} | "
-            f"{why.get(rid,'')} |"
+            f"| ☐ | {'**deep**' if dlevel == 'deep' else 'std'} | ~{target} | "
+            f"`{r['source']}/{r['id']}` | {r.get('publisher','')} | "
+            f"{r.get('year','')} | {r.get('column_count','')} | {r.get('borough','')} | {note} |"
         )
     out_md.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -185,15 +221,17 @@ def main(argv=None) -> int:
         rows = [r for r in rd if in_scope(r)]
 
     picked, why = select(rows, by, args.per, args.max)
+    depth = depth_map(picked, rows)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     out_csv = out_dir / "worklist.csv"
     out_md = out_dir / "WORKLIST.md"
     write_subset(picked, fieldnames, out_csv)
-    write_worklist(picked, why, out_md, out_csv)
+    write_worklist(picked, why, depth, out_md, out_csv)
 
-    print(f"in-scope volumes: {len(rows)} | strata by {by} | selected: {len(picked)}",
-          file=sys.stderr)
+    n_deep = sum(1 for v in depth.values() if v[0] == "deep")
+    print(f"in-scope volumes: {len(rows)} | strata by {by} | selected: {len(picked)} "
+          f"({n_deep} deep, {len(picked) - n_deep} std)", file=sys.stderr)
     print(f"  -> {out_csv}\n  -> {out_md}", file=sys.stderr)
     return 0
 

@@ -55,8 +55,10 @@ except ImportError:
 FIELDS = ["name", "is_business", "spouse_name", "race_designation",
           "occupation_role", "employer", "address", "home_address"]
 
-CROP_MAXH = 70          # px: displayed/encoded height of each line strip
-CROP_PAD = 6            # px padding around each bbox before cropping
+CROP_MAXH = 170         # px: cap on encoded crop height (downscale only above this)
+CROP_PAD_X = 8          # px horizontal padding around the bbox
+CROP_PAD_TOP = 8        # px context above the line
+CROP_EXTEND_BELOW = 1.05  # extend below by this * line-height to catch wrapped continuations
 
 
 def _iiif_text(v) -> str:
@@ -136,8 +138,9 @@ def _order_lines(lines: list, width: int, cols: int) -> list:
 def _crop_b64(img: Image.Image, bbox: list) -> str:
     x1, y1, x2, y2 = bbox
     W, H = img.size
-    box = (max(0, x1 - CROP_PAD), max(0, y1 - CROP_PAD),
-           min(W, x2 + CROP_PAD), min(H, y2 + CROP_PAD))
+    lh = max(1, y2 - y1)
+    box = (max(0, x1 - CROP_PAD_X), max(0, y1 - CROP_PAD_TOP),
+           min(W, x2 + CROP_PAD_X), min(H, int(y2 + lh * CROP_EXTEND_BELOW)))
     crop = img.crop(box)
     if crop.height > CROP_MAXH:
         scale = CROP_MAXH / crop.height
@@ -149,9 +152,11 @@ def _crop_b64(img: Image.Image, bbox: list) -> str:
     return base64.b64encode(buf.getvalue()).decode("ascii")
 
 
-def _collect(dirs: list, cols_override, min_conf: float, master: dict) -> list:
-    """-> list of page dicts: {image, year, lines:[{raw,conf,crop}...]}."""
+def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines: int = 0) -> list:
+    """-> list of page dicts: {image, year, lines:[{raw,conf,crop}...]}.
+    max_lines caps total candidate lines across the volume (0 = all)."""
     pages = []
+    taken = 0
     for d in dirs:
         d = Path(d)
         meta = _manifest_meta(d)
@@ -185,6 +190,8 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict) -> list:
             order = _order_lines(lines, width, cols)
             rows = []
             for i in order:
+                if max_lines and taken >= max_lines:
+                    break
                 ln = lines[i]
                 if (ln.get("confidence") or 0) < min_conf:
                     continue
@@ -193,154 +200,405 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict) -> list:
                     continue
                 rows.append({"raw": txt, "conf": round(ln.get("confidence") or 0, 3),
                              "crop": _crop_b64(img, ln["bbox"])})
-            pages.append({"image": jpg.name, "year": meta["year"],
-                          "title": meta["title"], "rows": rows})
-            print(f"  + {jpg.name}: {len(rows)} lines", file=sys.stderr)
+                taken += 1
+            if rows:
+                pages.append({"image": jpg.name, "year": meta["year"],
+                              "title": meta["title"], "rows": rows})
+                print(f"  + {jpg.name}: {len(rows)} lines", file=sys.stderr)
+            if max_lines and taken >= max_lines:
+                break
     return pages
 
 
 def build_html(pages: list, dialect: str) -> str:
     payload = json.dumps({"pages": pages, "dialect": dialect, "fields": FIELDS})
     title = "City-directory gold editor"
-    # NOTE: braces in the <script>/<style> are doubled for str.format.
-    return _TEMPLATE.format(payload=payload, title=html.escape(title))
+    # token replacement (not str.format) so JS/CSS braces stay literal
+    return _TEMPLATE.replace("__TITLE__", html.escape(title)).replace("__PAYLOAD__", payload)
 
 
 _TEMPLATE = r"""<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>{title}</title>
+<html lang="en"><head><meta charset="utf-8"><title>__TITLE__</title>
 <style>
-  body {{ font: 13px/1.4 -apple-system, system-ui, sans-serif; margin: 0; background:#f4f4f4; color:#222; }}
-  header {{ position: sticky; top:0; background:#1d2b3a; color:#fff; padding:10px 16px; z-index:10;
-            display:flex; gap:16px; align-items:center; flex-wrap:wrap; }}
-  header h1 {{ font-size:15px; margin:0; }}
-  header .stat {{ font-size:12px; opacity:.85; }}
-  button {{ font-size:13px; padding:6px 12px; border:0; border-radius:5px; cursor:pointer; }}
-  .primary {{ background:#2e8b57; color:#fff; }}
-  .pagehdr {{ background:#dce4ec; padding:6px 16px; font-weight:600; position:sticky; top:42px; }}
-  table {{ border-collapse:collapse; width:100%; background:#fff; }}
-  th, td {{ border:1px solid #e0e0e0; padding:3px 5px; vertical-align:middle; }}
-  th {{ background:#f0f3f6; font-size:11px; position:sticky; top:74px; z-index:5; }}
-  tr.lowconf td {{ background:#fff6e6; }}
-  tr.skip td {{ opacity:.35; }}
-  td img {{ display:block; max-height:64px; }}
-  input[type=text] {{ width:100%; border:1px solid #ccc; border-radius:3px; padding:2px 4px; font:12px monospace; box-sizing:border-box; }}
-  input.raw {{ background:#fafafa; }}
-  .narrow {{ width:90px; }}
-  .biz {{ text-align:center; }}
-  .conf {{ font-size:10px; color:#888; text-align:center; }}
-  td.cropc {{ min-width:240px; max-width:340px; }}
+  body { font: 13px/1.45 -apple-system, system-ui, sans-serif; margin: 0; background:#eef1f4; color:#222; }
+  header { position: sticky; top:0; background:#1d2b3a; color:#fff; padding:9px 16px; z-index:20;
+           display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:14px; margin:0; font-weight:600; }
+  header .stat { font-size:12px; opacity:.85; }
+  header input[type=text] { border:0; border-radius:4px; padding:3px 6px; font:12px monospace; }
+  button { font-size:13px; padding:6px 11px; border:0; border-radius:5px; cursor:pointer; background:#3a4a5c; color:#fff; }
+  button:hover { filter:brightness(1.12); }
+  button.primary { background:#2e8b57; }
+  button.ghost { background:#e7ebef; color:#33414f; }
+  .filebtn { font-size:13px; padding:6px 11px; border-radius:5px; cursor:pointer; background:#e7ebef; color:#33414f; }
+  .filebtn:hover { filter:brightness(1.06); }
+  .filebtn input { display:none; }
+  #saved { color:#9fe0b5; font-size:11px; }
+  .nocrop { color:#b08; font-size:11px; font-style:italic; }
+  #conv { max-width:1080px; margin:12px auto 0; background:#fffdf3; border:1px solid #e9e2c5;
+          border-radius:7px; padding:8px 14px; font-size:12px; }
+  #conv summary { cursor:pointer; font-weight:600; color:#6b5d20; }
+  #conv summary .hint { font-weight:400; color:#a99; font-size:11px; }
+  #conv ul { margin:8px 0 4px; padding-left:18px; }
+  #conv li { margin:3px 0; line-height:1.5; }
+  #conv code { background:#f1edda; border-radius:3px; padding:0 4px; font:11px monospace; }
+  #root { padding:14px 16px 80px; max-width:1080px; margin:0 auto; }
+  .pagehdr { font-weight:600; color:#33414f; margin:18px 0 8px; padding-bottom:5px;
+             border-bottom:2px solid #cdd6df; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .pagehdr .sub { font-weight:400; font-size:12px; color:#7a8794; }
+  .card { background:#fff; border:1px solid #dfe4e9; border-radius:7px; padding:9px 11px;
+          margin:0 0 9px; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+  .card.skip { opacity:.4; }
+  .card.lowconf { border-left:4px solid #f0ad4e; }
+  /* line crop: its own full-width row, scrolls horizontally — never under the fields */
+  .strip { overflow-x:auto; overflow-y:hidden; background:#fcfbf6; border:1px solid #ece8da;
+           border-radius:4px; padding:5px 6px; margin-bottom:8px; }
+  .strip img { display:block; height:auto; max-height:92px; width:auto; max-width:none; }
+  .metarow { display:flex; gap:14px; align-items:center; font-size:11px; color:#94a0ac; margin-bottom:7px; }
+  .metarow label { color:#5a6b7b; cursor:pointer; user-select:none; }
+  .rawrow input { width:100%; font:13px/1.3 monospace; padding:5px 7px; border:1px solid #cfd6dd;
+                  border-radius:4px; box-sizing:border-box; background:#fafbfc; margin-bottom:8px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:7px 12px; }
+  .fc { display:flex; flex-direction:column; gap:2px; }
+  .fc label { font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:#6a7886; }
+  .fc input[type=text] { font:12px monospace; padding:4px 6px; border:1px solid #ccd3da;
+                         border-radius:3px; box-sizing:border-box; }
+  .fc.biz { flex-direction:row; align-items:center; gap:7px; padding-top:14px; }
+  .fc.biz label { font-size:11px; text-transform:none; }
+  /* focus mode */
+  .focusbar { position:sticky; top:40px; z-index:15; background:#e9eef3; border:1px solid #d3dce4;
+              border-radius:7px; padding:9px 12px; margin-bottom:12px; display:flex; gap:14px;
+              align-items:center; flex-wrap:wrap; }
+  .focusbar .count { font-weight:600; font-size:13px; min-width:120px; }
+  .bar { height:6px; background:#cfd8e0; border-radius:3px; flex:1; min-width:140px; overflow:hidden; }
+  .bar > i { display:block; height:100%; background:#2e8b57; transition:width .12s; }
+  .keys { font-size:11px; color:#566; }
+  kbd { background:#fff; border:1px solid #b9c2cb; border-bottom-width:2px; border-radius:3px;
+        padding:0 4px; font:11px monospace; }
+  body.focus .card { max-width:880px; margin:0 auto 9px; }
+  body.focus .card .strip img { max-height:130px; }
+  .ctx { max-width:880px; margin:0 auto; opacity:.5; }
+  .ctx .strip img { height:40px; }
+  .ctx .lbl { font-size:10px; color:#8a96a2; margin:0 4px 2px; }
 </style></head>
 <body>
 <header>
-  <h1>{title}</h1>
+  <h1>__TITLE__</h1>
+  <button id="modeBtn" class="ghost" onclick="setMode(mode==='list'?'focus':'list')"></button>
   <span class="stat" id="stat"></span>
+  <span class="stat">dialect <input type="text" id="dialect" style="width:64px" /></span>
+  <button class="ghost" onclick="toggleAllSkip()">Toggle all skip</button>
+  <label class="filebtn">⬆ Import<input type="file" id="importFile" accept=".jsonl,.json,.txt" /></label>
   <button class="primary" onclick="exportGold()">⬇ Export gold.jsonl</button>
-  <button onclick="toggleAllSkip()">Toggle all skip</button>
-  <span class="stat">dialect: <input type="text" id="dialect" style="width:70px" /></span>
+  <span class="stat" id="saved"></span>
 </header>
+<details id="conv">
+  <summary>Transcription conventions <span class="hint">(click to collapse)</span></summary>
+  <ul>
+    <li><b>Verbatim.</b> Type each field as printed — don't expand abbreviations
+        (<code>insur</code> stays <code>insur</code>, not "insurance"). Keep
+        <code>h</code> / <code>r</code> / <code>bds</code> / <code>wid.</code> / <code>clk.</code> as-is.</li>
+    <li><b>No delimiter commas.</b> The line's separating commas aren't field content.
+        <code>Gibson Thomas, clk. h 38 Prospect</code> →
+        name <code>Gibson Thomas</code>, occupation <code>clk.</code>, address <code>h 38 Prospect</code>.
+        A trailing comma scores as wrong.</li>
+    <li><b>Fractions as ASCII.</b> Write <code>1/2</code>, not the <code>½</code> glyph
+        (e.g. <code>870 1/2 De Kalb av</code>). Fix the raw_line too if OCR misread it.</li>
+    <li><b>Titles/honorifics go in <code>name</code></b>, verbatim — <code>Rev.</code>,
+        <code>Dr.</code>, <code>Capt.</code>, <code>Mrs.</code>, <code>Miss</code>
+        (e.g. <code>Gibert Lyman (Rev.)</code>). Don't expand to an occupation.</li>
+    <li><b>Wrapped entries are one record.</b> Join a continuation line into the entry
+        (raw_line + the right field) and <b>skip</b> the leftover fragment card —
+        e.g. <code>… h 343</code> + <code>Kosciusko</code> → address <code>h 343 Kosciusko</code>.</li>
+    <li><b>Spacing &amp; case don't matter</b> — fields are trimmed on export and the scorer
+        ignores extra spaces, case, and trailing periods. Just don't add commas.</li>
+    <li><b>Skip non-entries</b> — page numbers, running heads (<code>GIB-GIF</code>), ads.
+        A gold line needs a <code>name</code>; nameless / skipped rows are excluded on export.</li>
+  </ul>
+</details>
 <div id="root"></div>
 <script>
-const DATA = {payload};
+const DATA = __PAYLOAD__;
+const PAGES = DATA.pages;
 const FIELDS = DATA.fields;
-document.getElementById('dialect').value = DATA.dialect;
 
-function el(tag, attrs, kids) {{
+// ---- state ----
+const entries = [];
+PAGES.forEach((pg, pi) => pg.rows.forEach((r, ri) => entries.push({
+  pi, ri, raw: r.raw, conf: r.conf, crop: r.crop, skip: false,
+  rec: Object.fromEntries(FIELDS.map(f => [f, f === 'is_business' ? false : '']))
+})));
+const arState = {};           // page index -> alphabetical_range
+let dialect = DATA.dialect;
+let mode = 'list';
+let cursor = 0;
+let ctxOn = false;
+
+// ---- dom helper ----
+function el(tag, attrs, kids) {
   const e = document.createElement(tag);
-  for (const k in (attrs||{{}})) {{
+  for (const k in (attrs||{})) {
     if (k === 'class') e.className = attrs[k];
     else if (k.startsWith('on')) e[k] = attrs[k];
     else e.setAttribute(k, attrs[k]);
-  }}
+  }
   (kids||[]).forEach(c => e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
   return e;
-}}
-
+}
 const root = document.getElementById('root');
-DATA.pages.forEach((pg, pi) => {{
-  root.appendChild(el('div', {{class:'pagehdr'}},
-    [`${{pg.image}}  —  ${{pg.title||''}} (${{pg.year||'?'}})  ·  alpha-range: `]));
-  const ar = el('input', {{type:'text', id:`ar_${{pi}}`, style:'width:90px'}});
-  root.lastChild.appendChild(ar);
+const dialectInput = document.getElementById('dialect');
+dialectInput.value = dialect;
+dialectInput.oninput = () => { dialect = dialectInput.value; scheduleSave(); };
 
-  const tbl = el('table');
-  tbl.appendChild(el('tr', {{}}, [
-    el('th', {{}}, ['skip']), el('th', {{}}, ['line image']), el('th', {{}}, ['raw_line']),
-    ...FIELDS.map(f => el('th', {{}}, [f])), el('th', {{}}, ['conf'])
+// ---- card (shared by both modes) ----
+function card(en) {
+  const wrap = el('div', {class: 'card' + (en.skip ? ' skip' : '') + (en.conf < 0.7 ? ' lowconf' : '')});
+
+  const strip = el('div', {class: 'strip'});
+  if (en.crop) strip.appendChild(el('img', {src: 'data:image/jpeg;base64,' + en.crop}));
+  else strip.appendChild(el('span', {class: 'nocrop'}, ['(imported — no line image)']));
+  wrap.appendChild(strip);
+
+  const skipBox = el('input', {type: 'checkbox'});
+  skipBox.checked = en.skip;
+  skipBox.onchange = () => { en.skip = skipBox.checked; wrap.classList.toggle('skip', en.skip); updateStat(); };
+  wrap.appendChild(el('div', {class: 'metarow'}, [
+    el('label', {}, [skipBox, ' skip (not an entry)']),
+    `conf ${en.conf}`,
+    `${PAGES[en.pi].image}`
   ]));
-  pg.rows.forEach((r, ri) => {{
-    const tr = el('tr', {{class: r.conf < 0.7 ? 'lowconf' : ''}});
-    tr.dataset.page = pi; tr.dataset.row = ri;
-    const skip = el('input', {{type:'checkbox', onchange:(e)=>{{
-      tr.classList.toggle('skip', e.target.checked); updateStat();
-    }}}});
-    tr.appendChild(el('td', {{class:'biz'}}, [skip]));
-    tr.appendChild(el('td', {{class:'cropc'}},
-      [el('img', {{src:'data:image/jpeg;base64,'+r.crop}})]));
-    const raw = el('input', {{type:'text', class:'raw', value:r.raw}});
-    tr.appendChild(el('td', {{}}, [raw]));
-    FIELDS.forEach(f => {{
-      const td = el('td', {{class: f==='is_business'?'biz':''}});
-      if (f === 'is_business') td.appendChild(el('input', {{type:'checkbox'}}));
-      else td.appendChild(el('input', {{type:'text', class:'narrow', 'data-f':f}}));
-      tr.appendChild(td);
-    }});
-    tr.appendChild(el('td', {{class:'conf'}}, [String(r.conf)]));
-    tbl.appendChild(tr);
-  }});
-  root.appendChild(tbl);
-}});
 
-function rowRecord(tr) {{
-  const cells = tr.querySelectorAll('td');
-  const rec = {{}};
-  // cells: [skip, crop, raw, ...8 fields, conf]
-  const raw = cells[2].querySelector('input').value.trim();
-  FIELDS.forEach((f, i) => {{
-    const inp = cells[3+i].querySelector('input');
-    rec[f] = (f === 'is_business') ? inp.checked : inp.value.trim();
-  }});
-  return {{raw, rec}};
-}}
+  const raw = el('input', {type: 'text', value: en.raw});
+  raw.oninput = () => en.raw = raw.value;
+  wrap.appendChild(el('div', {class: 'rawrow'}, [raw]));
 
-function exportGold() {{
-  const dialect = document.getElementById('dialect').value.trim();
+  const grid = el('div', {class: 'grid'});
+  FIELDS.forEach(f => {
+    if (f === 'is_business') {
+      const cb = el('input', {type: 'checkbox'});
+      cb.checked = en.rec[f];
+      cb.onchange = () => en.rec[f] = cb.checked;
+      grid.appendChild(el('div', {class: 'fc biz'}, [cb, el('label', {}, [f])]));
+    } else {
+      const inp = el('input', {type: 'text', value: en.rec[f]});
+      inp.oninput = () => en.rec[f] = inp.value;
+      const cell = el('div', {class: 'fc'}, [el('label', {}, [f]), inp]);
+      if (f === 'name') inp.dataset.name = '1';
+      grid.appendChild(cell);
+    }
+  });
+  wrap.appendChild(grid);
+  return wrap;
+}
+
+function pageHeader(pi) {
+  const pg = PAGES[pi];
+  const ar = el('input', {type: 'text', placeholder: 'A–B', style: 'width:90px', value: arState[pi] || ''});
+  ar.oninput = () => arState[pi] = ar.value;
+  return el('div', {class: 'pagehdr'}, [
+    `${pg.title || pg.image}`,
+    el('span', {class: 'sub'}, [`${pg.image} · ${pg.year || '?'} · alpha-range:`]),
+    ar
+  ]);
+}
+
+function ctxCrop(en, label) {
+  if (!en.crop) return el('div', {class: 'ctx'}, []);
+  const strip = el('div', {class: 'strip'});
+  strip.appendChild(el('img', {src: 'data:image/jpeg;base64,' + en.crop}));
+  return el('div', {class: 'ctx'}, [el('div', {class: 'lbl'}, [label]), strip]);
+}
+
+// ---- render ----
+function render() {
+  root.innerHTML = '';
+  document.body.classList.toggle('focus', mode === 'focus');
+  document.getElementById('modeBtn').textContent = mode === 'list' ? '⊟ Focus mode' : '☰ List mode';
+  if (mode === 'list') {
+    let pi = -1;
+    entries.forEach(en => {
+      if (en.pi !== pi) { pi = en.pi; root.appendChild(pageHeader(pi)); }
+      root.appendChild(card(en));
+    });
+  } else {
+    cursor = Math.max(0, Math.min(cursor, entries.length - 1));
+    const en = entries[cursor];
+    root.appendChild(focusBar(en));
+    if (ctxOn && cursor > 0) root.appendChild(ctxCrop(entries[cursor - 1], '↑ previous line'));
+    root.appendChild(card(en));
+    if (ctxOn && cursor < entries.length - 1) root.appendChild(ctxCrop(entries[cursor + 1], '↓ next line'));
+    setTimeout(() => { const n = root.querySelector('input[data-name]'); if (n) n.focus(); }, 0);
+  }
+  updateStat();
+}
+
+function focusBar(en) {
+  const pct = entries.length ? Math.round((cursor + 1) / entries.length * 100) : 0;
+  const ar = el('input', {type: 'text', placeholder: 'A–B', style: 'width:80px', value: arState[en.pi] || ''});
+  ar.oninput = () => arState[en.pi] = ar.value;
+  const ctxBox = el('input', {type: 'checkbox'});
+  ctxBox.checked = ctxOn;
+  ctxBox.onchange = () => { ctxOn = ctxBox.checked; render(); };
+  return el('div', {class: 'focusbar'}, [
+    el('span', {class: 'count'}, [`${cursor + 1} / ${entries.length}`]),
+    el('div', {class: 'bar'}, [el('i', {style: `width:${pct}%`})]),
+    el('button', {class: 'ghost', onclick: () => go(-1)}, ['◀ prev']),
+    el('button', {class: 'ghost', onclick: () => go(1)}, ['next ▶']),
+    el('button', {class: 'ghost', onclick: () => { en.skip = !en.skip; go(1); }}, ['skip ▶']),
+    el('label', {class: 'keys'}, [ctxBox, ' context']),
+    el('span', {style: 'font-size:12px;color:#5a6b7b'}, ['alpha:']), ar,
+    el('span', {class: 'keys'}, ['  ', kbd('↵'), ' next · ', kbd('⇧↵'), ' prev · ', kbd('Esc'), ' skip · ', kbd('⌘/⌃B'), ' biz'])
+  ]);
+}
+function kbd(t) { return el('kbd', {}, [t]); }
+
+function go(delta) {
+  cursor = Math.max(0, Math.min(cursor + delta, entries.length - 1));
+  render();
+  scheduleSave();
+}
+
+function setMode(m) {
+  if (m === 'focus') {            // jump focus to the first not-yet-touched entry
+    const first = entries.findIndex(e => !e.skip && !e.rec.name.trim());
+    cursor = first >= 0 ? first : 0;
+  }
+  mode = m;
+  render();
+}
+
+// Mac-safe: Enter/Shift+Enter/Esc work inside inputs and don't collide with the OS;
+// use e.code (physical key) for the modifier combo since Option/Alt rewrites e.key.
+document.addEventListener('keydown', e => {
+  if (mode !== 'focus') return;
+  const mod = e.ctrlKey || e.metaKey;
+  if (e.code === 'Enter' && e.shiftKey) { e.preventDefault(); go(-1); }       // prev
+  else if (e.code === 'Enter' && !mod) { e.preventDefault(); go(1); }          // next
+  else if (e.code === 'Escape') { e.preventDefault(); entries[cursor].skip = true; go(1); }  // skip + next
+  else if (mod && e.code === 'KeyB') { e.preventDefault(); const en = entries[cursor]; en.rec.is_business = !en.rec.is_business; render(); scheduleSave(); }  // toggle biz
+});
+
+// ---- export / bulk / stats ----
+function exportGold() {
   const lines = [];
-  document.querySelectorAll('table tr[data-page]').forEach(tr => {{
-    if (tr.classList.contains('skip')) return;
-    const pi = +tr.dataset.page;
-    const pg = DATA.pages[pi];
-    const {{raw, rec}} = rowRecord(tr);
-    if (!rec.name) return;   // a gold line needs at least a name
-    lines.push(JSON.stringify({{
-      raw_line: raw,
-      context: {{
-        dialect: dialect,
-        alphabetical_range: document.getElementById('ar_'+pi).value.trim(),
-        directory_year: String(pg.year||''),
-        image: pg.image
-      }},
+  entries.forEach(en => {
+    if (en.skip || !en.rec.name.trim()) return;   // a gold line needs a name
+    const rec = {};
+    FIELDS.forEach(f => rec[f] = (f === 'is_business') ? en.rec[f] : String(en.rec[f]).trim());
+    lines.push(JSON.stringify({
+      raw_line: en.raw.trim(),
+      context: {
+        dialect: dialect.trim(),
+        alphabetical_range: (arState[en.pi] || '').trim(),
+        directory_year: String(PAGES[en.pi].year || ''),
+        image: PAGES[en.pi].image
+      },
       record: rec
-    }}));
-  }});
-  const blob = new Blob([lines.join('\n')+'\n'], {{type:'application/jsonl'}});
-  const a = el('a', {{href:URL.createObjectURL(blob), download:'gold.jsonl'}});
+    }));
+  });
+  const blob = new Blob([lines.join('\n') + '\n'], {type: 'application/jsonl'});
+  const a = el('a', {href: URL.createObjectURL(blob), download: 'gold.jsonl'});
   document.body.appendChild(a); a.click(); a.remove();
-  alert(`Exported ${{lines.length}} gold lines (rows with a name, not skipped).`);
-}}
+  alert(`Exported ${lines.length} gold lines (not skipped, has a name).`);
+}
 
-function toggleAllSkip() {{
-  const boxes = document.querySelectorAll('table tr[data-page] td:first-child input');
-  const target = ![...boxes].every(b => b.checked);
-  boxes.forEach(b => {{ b.checked = target; b.dispatchEvent(new Event('change')); }});
-}}
+function toggleAllSkip() {
+  const target = !entries.every(e => e.skip);
+  entries.forEach(e => e.skip = target);
+  render();
+  scheduleSave();
+}
 
-function updateStat() {{
-  const all = document.querySelectorAll('table tr[data-page]').length;
-  const skipped = document.querySelectorAll('table tr[data-page].skip').length;
+function updateStat() {
+  const total = entries.length;
+  const skipped = entries.filter(e => e.skip).length;
+  const ready = entries.filter(e => !e.skip && e.rec.name.trim()).length;
   document.getElementById('stat').textContent =
-    `${{DATA.pages.length}} pages · ${{all}} lines · ${{all-skipped}} active`;
-}}
-updateStat();
+    `${PAGES.length} pages · ${total} lines · ${skipped} skipped · ${ready} ready`;
+}
+
+// ---- persistence: autosave to localStorage, keyed per volume ----
+const STORE_KEY = 'goldtool:' + (PAGES[0] ? PAGES[0].image : 'x') + ':' + entries.length;
+let saveTimer = null;
+function fieldsFrom(r) {
+  const o = {};
+  FIELDS.forEach(f => o[f] = (f === 'is_business') ? !!(r && r[f]) : ((r && r[f]) || ''));
+  return o;
+}
+function setSaved(msg) { const s = document.getElementById('saved'); if (s) s.textContent = msg; }
+function save() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify({
+      v: 1, dialect, cursor, mode, ar: arState,
+      entries: entries.map(e => ({ raw: e.raw, skip: e.skip, rec: e.rec, pi: e.pi }))
+    }));
+    setSaved('saved ✓');
+  } catch (err) { setSaved('autosave off (storage blocked)'); }
+}
+function scheduleSave() { clearTimeout(saveTimer); saveTimer = setTimeout(save, 400); }
+function restore() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (!d || !d.entries) return false;
+    d.entries.forEach((s, i) => {
+      if (i < entries.length) { entries[i].raw = s.raw; entries[i].skip = !!s.skip; entries[i].rec = fieldsFrom(s.rec); }
+      else entries.push({ pi: s.pi || 0, ri: -1, raw: s.raw || '', conf: 1, crop: '', skip: !!s.skip, rec: fieldsFrom(s.rec) });
+    });
+    Object.assign(arState, d.ar || {});
+    if (d.dialect) { dialect = d.dialect; dialectInput.value = dialect; }
+    if (typeof d.cursor === 'number') cursor = d.cursor;
+    if (d.mode) mode = d.mode;
+    return true;
+  } catch (err) { return false; }
+}
+
+// ---- import a gold.jsonl: fuzzy-match each record back onto its entry ----
+function toks(s) { return new Set(String(s || '').toLowerCase().match(/[a-z0-9]+/g) || []); }
+function jac(a, b) { if (!a.size || !b.size) return 0; let n = 0; a.forEach(x => { if (b.has(x)) n++; }); return n / (a.size + b.size - n); }
+function importGold(text) {
+  const recs = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean)
+    .map(l => { try { return JSON.parse(l); } catch (e) { return null; } }).filter(Boolean);
+  const N = entries.length, claimed = new Set();          // match only against original OCR entries
+  let matched = 0, added = 0;
+  recs.forEach(g => {
+    if (!g.record) return;
+    const img = g.context && g.context.image, gt = toks(g.raw_line || '');
+    let best = -1, bs = 0;
+    for (let i = 0; i < N; i++) {
+      if (claimed.has(i)) continue;
+      if (img && PAGES[entries[i].pi].image !== img) continue;
+      const s = jac(gt, toks(entries[i].raw));
+      if (s > bs) { bs = s; best = i; }
+    }
+    let pi;
+    if (best >= 0 && bs >= 0.2) {
+      const en = entries[best]; claimed.add(best); pi = en.pi;
+      en.raw = g.raw_line || en.raw; en.rec = fieldsFrom(g.record); en.skip = false; matched++;
+    } else {
+      pi = Math.max(0, PAGES.findIndex(p => p.image === img));
+      entries.push({ pi, ri: -1, raw: g.raw_line || '', conf: 1, crop: '', skip: false, rec: fieldsFrom(g.record) });
+      added++;
+    }
+    if (g.context && g.context.alphabetical_range) arState[pi] = g.context.alphabetical_range;
+    if (g.context && g.context.dialect) { dialect = g.context.dialect; dialectInput.value = dialect; }
+  });
+  save(); render();
+  alert(`Imported ${matched} matched + ${added} added (no crop) = ${matched + added} record(s).`);
+}
+document.getElementById('importFile').addEventListener('change', ev => {
+  const f = ev.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => importGold(String(rd.result));
+  rd.readAsText(f);
+  ev.target.value = '';
+});
+
+// ---- startup ----
+const restored = restore();
+render();
+root.addEventListener('input', scheduleSave);
+root.addEventListener('change', scheduleSave);
+if (restored) setSaved('restored from autosave ✓');
 </script>
 </body></html>
 """
@@ -358,10 +616,12 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--dialect", default="nyc", help="context.dialect (default nyc)")
     ap.add_argument("--min-conf", type=float, default=0.0,
                     help="drop OCR lines below this confidence")
+    ap.add_argument("--max-lines", type=int, default=0,
+                    help="cap total candidate lines across the volume (0 = all; e.g. 40 std / 100 deep)")
     args = ap.parse_args(argv)
 
     master = _load_master(Path(args.master))
-    pages = _collect(args.dirs, args.cols, args.min_conf, master)
+    pages = _collect(args.dirs, args.cols, args.min_conf, master, args.max_lines)
     if not pages:
         return "no OCR'd pages found — run run_surya_ocr.py on the dir(s) first."
     Path(args.out).write_text(build_html(pages, args.dialect), encoding="utf-8")

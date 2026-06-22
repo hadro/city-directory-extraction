@@ -307,6 +307,10 @@ _TEMPLATE = r"""<!DOCTYPE html>
     <li><b>Titles/honorifics go in <code>name</code></b>, verbatim — <code>Rev.</code>,
         <code>Dr.</code>, <code>Capt.</code>, <code>Mrs.</code>, <code>Miss</code>
         (e.g. <code>Gibert Lyman (Rev.)</code>). Don't expand to an occupation.</li>
+    <li><b>Role vs employer.</b> The job word → <code>occupation_role</code>; an
+        institution/company worked <i>at</i> → <code>employer</code> (both verbatim).
+        <code>Scudder Ephraim, c. h. clk. h 76 Nassau</code> → occupation <code>clk.</code>,
+        employer <code>c. h.</code>, address <code>h 76 Nassau</code>.</li>
     <li><b>Wrapped entries are one record.</b> Join a continuation line into the entry
         (raw_line + the right field) and <b>skip</b> the leftover fragment card —
         e.g. <code>… h 343</code> + <code>Kosciusko</code> → address <code>h 343 Kosciusko</code>.</li>

@@ -311,6 +311,10 @@ _TEMPLATE = r"""<!DOCTYPE html>
         institution/company worked <i>at</i> → <code>employer</code> (both verbatim).
         <code>Scudder Ephraim, c. h. clk. h 76 Nassau</code> → occupation <code>clk.</code>,
         employer <code>c. h.</code>, address <code>h 76 Nassau</code>.</li>
+    <li><b>address vs home_address.</b> The listed address → <code>address</code>, keeping its
+        <code>h</code>/<code>r</code>/<code>bds</code> prefix. Use <code>home_address</code> ONLY for
+        a <i>second</i>, separate <code>h.</code> home when the entry lists both a work address and a
+        home. A lone <code>h 449 Clason av</code> goes in <code>address</code>, not home_address.</li>
     <li><b>Wrapped entries are one record.</b> Join a continuation line into the entry
         (raw_line + the right field) and <b>skip</b> the leftover fragment card —
         e.g. <code>… h 343</code> + <code>Kosciusko</code> → address <code>h 343 Kosciusko</code>.</li>

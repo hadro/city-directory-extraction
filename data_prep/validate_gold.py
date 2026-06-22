@@ -113,6 +113,9 @@ def check_record(rec: dict, raw: str, where: str, rep: Report):
     addr = _norm(str(rec.get("address", "")))
     if addr and not any(ch.isdigit() for ch in addr) and not ADDR_TOK.search(addr):
         rep.warn(where, f"address has no number or street token: {addr!r}")
+    # home_address is only for a SECOND address; a lone address belongs in `address`
+    if _norm(str(rec.get("home_address", ""))) and not addr:
+        rep.warn(where, "home_address set but address empty — a single address belongs in `address`")
     name = _norm(str(rec.get("name", "")))
     if name and FIRM_RE.search(name) and not rec.get("is_business"):
         rep.warn(where, f"name looks like a firm but is_business=False: {name!r}")

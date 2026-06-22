@@ -237,19 +237,25 @@ def main(argv=None) -> int:
     t0 = time.monotonic()
     for start in range(0, total, args.batch_size):
         batch = targets[start:start + args.batch_size]
-        try:
-            imgs = [Image.open(p).convert("RGB") for p in batch]
-        except Exception as exc:
-            print(f"  FAILED loading batch @{start}: {exc}", file=sys.stderr)
-            fail += len(batch)
+        # load per-image so ONE corrupt/truncated file doesn't sink the whole batch
+        imgs, paths = [], []
+        for p in batch:
+            try:
+                imgs.append(Image.open(p).convert("RGB"))
+                paths.append(p)
+            except Exception as exc:
+                print(f"  SKIP corrupt image {p.parent.name}/{p.name}: {exc} "
+                      f"(delete it + re-run the sampler to re-fetch)", file=sys.stderr)
+                fail += 1
+        if not imgs:
             continue
         try:
             results = rec(imgs, det_predictor=det, sort_lines=True)
         except Exception as exc:
             print(f"  FAILED inference batch @{start}: {exc}", file=sys.stderr)
-            fail += len(batch)
+            fail += len(imgs)
             continue
-        for p, im, res in zip(batch, imgs, results):
+        for p, im, res in zip(paths, imgs, results):
             try:
                 n = write_result(p, im, res)
                 ok += 1

@@ -364,6 +364,48 @@ is_business=False, bad year/dialect, duplicate rows, image-not-found, year-vs-ma
 Prints field fill-rates + business ratio + lines/image. `--strict` exits 1 on any ERROR (CI-able).
 Ran clean on `data/lain_eval.jsonl` (0 errors, 9 warnings — all genuine).
 
+### Transcription conventions (DECIDED 2026-06-21 — the gold/synth/model contract)
+These are baked into the editor's conventions panel and enforced by `validate_gold.py`. The
+guiding rule: **gold must match how the model represents things** (van Strien eval-realism) — so
+the *same* convention governs `synth_persons.py` (train), every `data/*_eval.jsonl` (eval), and
+the model's output. Do **not** redefine fields just because you're retraining; a change means
+migrating synth + all 7.5k existing eval rows + new gold at once.
+- **Verbatim** — never expand abbreviations (`insur` stays `insur`, `clk.`, `wid.`, `(Rev.)`).
+  Expansion is a *separate, reversible* downstream step keyed off the `style_profiles/` legends.
+- **No delimiter commas** — the line's separating commas aren't field content (a trailing comma
+  scores wrong; the scorer strips trailing periods + case + space, but not commas).
+- **Fractions as ASCII** — `1/2`, not the `½` glyph (encoding/tokenization robustness).
+- **Titles/honorifics → `name`** (`Rev.`/`Dr.`/`Capt.`/`Mrs.`/`Miss`), verbatim, per
+  `synth_persons.py` which generates them into the name string.
+- **Role vs employer** — job word → `occupation_role`; an institution/company worked *at* →
+  `employer` (e.g. `c. h. clk.` → occ `clk.`, employer `c. h.`).
+- **`address` vs `home_address`** — the listed address → `address` (keep the `h`/`r`/`bds`
+  prefix; the prefix already encodes work-vs-home). `home_address` is **only** for a *second*,
+  separate `h.` home when an entry lists both a work address and a home. A lone `h 449 Clason av`
+  goes in `address`. *(Caught + fixed 39/49 inverted rows in the first Lain-1876 gold this way;
+  the role-based "work→address / home→home_address" split is rejected — it's undecidable for the
+  common single combined-use address.)*
+
+### Phase-1.5 — building the real-OCR eval panel (started 2026-06-21)
+The 42-volume panel (`gold_sample/worklist.csv`) is the **eval** set, kept OUT of training.
+Per volume: sample → `run_surya_on_samples.py` → `make_gold_tool.py` (label, autosave/import) →
+Export → `validate_gold.py` → drop in `data/<slug>_eval.jsonl` (note: `data/` is gitignored, like
+all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the export's
+`{raw_line,context,record}` schema is consumed directly as `--gold`); predictions from
+`eval/{gliner,gemini,qwen_predict}.py` → `results_table.py`. Depth: ~40 lines/volume, ~100 on the
+14 deep-flagged (Lain + col-transition publishers). First slice: Lain-1876, 49 lines, harness
+green.
+
+## Phase 2 — retrain loop (eval-driven; uses the real gold above)
+*(Operational companion to "THEN — Phase 2" above, which lists the synth changes.)*
+**The real gold is the measuring stick, never training data.** The loop:
+1. Run the current model on the real gold → see *which* fields/styles/abbreviations fail
+   (per publisher/era — that's the signal the breadth was for).
+2. Parameterize `synth_persons.py` with the per-publisher/era legends + layouts from
+   `style_profiles/` so synthetic lines carry the real patterns the model misses.
+3. Regenerate synth → retrain → **re-eval on the same gold** to confirm lift (esp. Lain).
+4. Convention stays fixed throughout (see contract above) so score deltas mean real change.
+
 ## Key paths
 - Master list: `data_prep/master_directories.csv` (schema in `master_directories.README.md`).
 - Style cards: `data_prep/style_profiles/` (`README.md` = card schema + build recipe + lessons).

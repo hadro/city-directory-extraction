@@ -217,6 +217,11 @@ $PY pipeline/detect_spreads.py output/<slug> --csv output/<slug>/spreads_report.
   those, so it grinds. Surya is meant for **GPU/Colab** (per `directory-pipeline/pyproject.toml`);
   the whole panel is only ~113 listing images → minutes on a T4. On the Mac, bump
   `RECOGNITION_BATCH_SIZE`/`DETECTOR_BATCH_SIZE`, or do one volume at a time with `--dirs`.
+  **MPS OOM on dense pages:** Trow/Polk listing pages have 250–300+ text lines; the default
+  `--batch-size 4` queues ~1000+ line-crops and blows the ~18 GB MPS cap (`MPS backend out of
+  memory`). Fix = shrink batches: `RECOGNITION_BATCH_SIZE=32 DETECTOR_BATCH_SIZE=4 … --batch-size 1`
+  (resumable, so only the failed pages re-run). Do **not** set `PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0`
+  (removes the safety cap → can hard-crash the machine). The full 42-volume pass got through this way.
 - **Blank-verso scans** — some volumes (Boyd Flushing 1890) alternate content (odd canvas) with
   **blank versos** (even); the sampler can land its `-k` listing picks on blanks → blank crops +
   hallucinated low-conf OCR on white paper. Fixed: `--blank-std` skip in `run_surya_on_samples`
@@ -410,21 +415,32 @@ all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the
 14 deep-flagged (Lain + col-transition publishers).
 
 **Progress (2026-06-22):**
-- **Lain-1876 DONE** — first finished real-OCR eval set: `data/lain1876_eval.jsonl`, **103 lines**
-  (deep target met), validator-clean, `evaluate.py --self-test` green. (gitignored — back up out-of-band.)
+- **Surya pass COMPLETE for all 42 worklist volumes** (`run_surya_on_samples.py --dry-run` → 0 to
+  OCR everywhere), incl. the dense Polk/Trow/M&B pages (got them past MPS OOM with small batches;
+  see lessons). **Everything left is browser-only labeling — no more MPS/GPU step.**
+- **3 volumes labeled so far → 215 gold lines:** `data/lain1876_eval.jsonl` (103, deep target met),
+  `data/boyd1890_eval.jsonl` (75; topped up from 27 via Import after the verso resample — Boyd is
+  the lone Flushing/Queens rep), `data/doggett1846_eval.jsonl` (37, std). All validator-clean +
+  `--self-test` green. (gitignored — back up out-of-band.)
 - **First real-data numbers** = the GLiNER *floor* on Lain-1876 (`results/scores.jsonl`, label
   `gliner-lain1876`): macro-F1 **0.33**, whole-row EM **3.9%**; weakest field **`address` F1 0.16**
   (extractive GLiNER can't rebuild the `h` prefix / work-vs-home split), `name` F1 0.54. Rare fields
   (spouse/employer/home_address) found 0 → **read F1, not EM, for sparse fields** (high EM there is
   just empty-matches-empty). These are the floor; the Qwen-fine-tune and Gemini-bar runs are the
   signal — still TODO (need checkpoint/GPU + `GEMINI_API_KEY`).
-- **New tooling flags since 2026-06-21:** editor focus-mode jump-to-next-column/page; autosave +
-  Import; `make_gold_tool --max-lines N`; `validate_gold` address/home_address check;
-  `run_surya_on_samples --blank-std` (skip blank versos) + per-image batch loading (one corrupt jpg
-  no longer sinks the batch).
-- **Next:** Boyd-1890 (std, in progress), then down `WORKLIST.md`. Most std volumes are OCR'd;
-  the deep NYPL ones (Polk ×5, Trow 1884/1913, M&B, Longworth) still need a Surya pass — do on
-  Colab/CUDA (MPS is slow; see lessons).
+- **New tooling since 2026-06-21:** editor focus-mode jump-to-next-column/page; autosave + Import;
+  `make_gold_tool --max-lines N`; **`make_gold_tool` now prefers the master year over the manifest
+  date** (IA dates two-year volumes by the first year → was tripping the validator on every Doggett
+  row); `validate_gold` address/home_address + year-vs-master checks; `run_surya_on_samples
+  --blank-std` (skip blank versos) + per-image batch loading (one corrupt jpg no longer sinks the batch).
+- **Finalize recipe per export** (`gold(N).jsonl` → `data/<slug>_eval.jsonl`): home_address fix
+  (move sole-home → address), then `validate_gold --strict`, then `evaluate.py --self-test`. New gold
+  needs ~0 fixes now that the conventions panel is in the tool (Lain needed 39 home moves; Boyd/Doggett
+  needed 0).
+- **Next:** work down `WORKLIST.md` — all browser-only now. Std ~40 (`--max-lines 40`), deep ~100
+  (`--max-lines 100`). Ready std `ia_*`: Duncan 1794, Franks 1786, Mercein 1820, Ogden 1839, Rode
+  1851, Hearne 1852, Hope&Henderson 1856, Reynolds 1852, Smith 1854/55/56. Deep: Polk ×5, Trow
+  1884/1907/1913, M&B 1931, Spooner. Skip `loc_spooner_01015253` (partial scan, no listing).
 
 ## Phase 2 — retrain loop (eval-driven; uses the real gold above)
 *(Operational companion to "THEN — Phase 2" above, which lists the synth changes.)*

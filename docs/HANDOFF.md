@@ -367,9 +367,11 @@ realism) is **half done — tooling built & committed; awaiting data + retrain**
 > **Wave-2 underway (2026-06-22):** the real eval panel is being built from sampled OCR pages via a
 > new gold toolchain — see [VISUAL_SAMPLING_HANDOFF.md](VISUAL_SAMPLING_HANDOFF.md)
 > (`data_prep/{sample_volumes,make_gold_tool,run_surya_on_samples,validate_gold}.py`,
-> 42-volume `gold_sample/worklist.csv`). First set done: `data/lain1876_eval.jsonl` (103 lines);
-> GLiNER floor scored (macro-F1 0.33, `address` weakest). The address/home_address convention there
-> is the same contract as synth + this panel. Next: Qwen + Gemini on lain1876, then down the worklist.
+> 42-volume `gold_sample/worklist.csv`). **Surya OCR complete for all 42** (labeling is now
+> browser-only). **3 volumes labeled = 215 lines:** lain1876 (103), boyd1890 (75), doggett1846 (37),
+> all validator-clean. GLiNER floor scored on lain1876 (macro-F1 0.33, `address` weakest). The
+> address/home_address convention there is the same contract as synth + this panel. Next: more
+> volumes down the worklist, then Qwen + Gemini predictions on the panel.
 
 To re-run an eval (note: `qwen_predict.py` now auto-loads the multimodal class — verify the log
 prints `AutoModelForImageTextToText` and has NO "missing adapter keys" warning):

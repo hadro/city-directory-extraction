@@ -121,18 +121,19 @@ def _manifest_meta(d: Path) -> dict:
     return meta
 
 
+def _colidx(bbox: list, width: int, cols: int) -> int:
+    if cols <= 1 or not width:
+        return 0
+    x1, _, x2, _ = bbox
+    return max(0, min(cols - 1, int(((x1 + x2) / 2) / (width / cols))))
+
+
 def _order_lines(lines: list, width: int, cols: int) -> list:
     """Column-bucket by bbox x-center, then top-to-bottom within a column."""
     if cols <= 1:
         return sorted(range(len(lines)), key=lambda i: lines[i]["bbox"][1])
-    colw = width / cols
-
-    def colidx(i):
-        x1, _, x2, _ = lines[i]["bbox"]
-        c = int(((x1 + x2) / 2) / colw)
-        return max(0, min(cols - 1, c))
-
-    return sorted(range(len(lines)), key=lambda i: (colidx(i), lines[i]["bbox"][1]))
+    return sorted(range(len(lines)),
+                  key=lambda i: (_colidx(lines[i]["bbox"], width, cols), lines[i]["bbox"][1]))
 
 
 def _crop_b64(img: Image.Image, bbox: list) -> str:
@@ -199,6 +200,7 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines
                 if not txt:
                     continue
                 rows.append({"raw": txt, "conf": round(ln.get("confidence") or 0, 3),
+                             "col": _colidx(ln["bbox"], width, cols),
                              "crop": _crop_b64(img, ln["bbox"])})
                 taken += 1
             if rows:
@@ -333,7 +335,7 @@ const FIELDS = DATA.fields;
 // ---- state ----
 const entries = [];
 PAGES.forEach((pg, pi) => pg.rows.forEach((r, ri) => entries.push({
-  pi, ri, raw: r.raw, conf: r.conf, crop: r.crop, skip: false,
+  pi, ri, col: r.col || 0, raw: r.raw, conf: r.conf, crop: r.crop, skip: false,
   rec: Object.fromEntries(FIELDS.map(f => [f, f === 'is_business' ? false : '']))
 })));
 const arState = {};           // page index -> alphabetical_range
@@ -447,12 +449,16 @@ function focusBar(en) {
   const ctxBox = el('input', {type: 'checkbox'});
   ctxBox.checked = ctxOn;
   ctxBox.onchange = () => { ctxOn = ctxBox.checked; render(); };
+  const npages = new Set(entries.map(e => e.pi)).size;
   return el('div', {class: 'focusbar'}, [
-    el('span', {class: 'count'}, [`${cursor + 1} / ${entries.length}`]),
+    el('span', {class: 'count'}, [`${cursor + 1} / ${entries.length}  ·  p${en.pi + 1} c${en.col + 1}`]),
     el('div', {class: 'bar'}, [el('i', {style: `width:${pct}%`})]),
     el('button', {class: 'ghost', onclick: () => go(-1)}, ['◀ prev']),
     el('button', {class: 'ghost', onclick: () => go(1)}, ['next ▶']),
     el('button', {class: 'ghost', onclick: () => { en.skip = !en.skip; go(1); }}, ['skip ▶']),
+    el('button', {class: 'ghost', onclick: () => jumpTo(nextColStart())}, ['↦ col']),
+    el('button', {class: 'ghost', onclick: () => jumpTo(nextPageStart())},
+       [npages > 1 ? '↦ page' : '↦ page (1 only)']),
     el('label', {class: 'keys'}, [ctxBox, ' context']),
     el('span', {style: 'font-size:12px;color:#5a6b7b'}, ['alpha:']), ar,
     el('span', {class: 'keys'}, ['  ', kbd('↵'), ' next · ', kbd('⇧↵'), ' prev · ', kbd('Esc'), ' skip · ', kbd('⌘/⌃B'), ' biz'])
@@ -464,6 +470,19 @@ function go(delta) {
   cursor = Math.max(0, Math.min(cursor + delta, entries.length - 1));
   render();
   scheduleSave();
+}
+
+function jumpTo(i) { if (i >= 0) { cursor = i; render(); scheduleSave(); } }
+function nextColStart() {                       // first entry of the next column (or next page)
+  const c = entries[cursor];
+  for (let i = cursor + 1; i < entries.length; i++)
+    if (entries[i].pi !== c.pi || entries[i].col !== c.col) return i;
+  return -1;
+}
+function nextPageStart() {
+  const c = entries[cursor];
+  for (let i = cursor + 1; i < entries.length; i++) if (entries[i].pi !== c.pi) return i;
+  return -1;
 }
 
 function setMode(m) {

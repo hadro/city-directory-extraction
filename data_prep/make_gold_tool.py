@@ -324,6 +324,10 @@ _TEMPLATE = r"""<!DOCTYPE html>
         <code>h</code>/<code>r</code>/<code>bds</code> prefix. Use <code>home_address</code> ONLY for
         a <i>second</i>, separate <code>h.</code> home when the entry lists both a work address and a
         home. A lone <code>h 449 Clason av</code> goes in <code>address</code>, not home_address.</li>
+    <li><b>Ditto marks → verbatim.</b> Copy <code>do</code> / <code>〃</code> / <code>''</code>
+        as printed — don't resolve to the street/value from the row above (the per-line model
+        can't see it). <code>White, John, butcher, 13 do</code> → address <code>13 do</code>.
+        Resolving dittos is a separate downstream step.</li>
     <li><b>Wrapped entries are one record.</b> Join a continuation line into the entry
         (raw_line + the right field) and <b>skip</b> the leftover fragment card —
         e.g. <code>… h 343</code> + <code>Kosciusko</code> → address <code>h 343 Kosciusko</code>.</li>

@@ -309,6 +309,10 @@ _TEMPLATE = r"""<!DOCTYPE html>
         — drop the line's separating commas <i>and</i> the surname/given comma. E.g.
         <code>Graves, Benjamin, accountant, 71 Dey</code> → raw_line keeps it as-is, but
         name = <code>Graves Benjamin</code> (no comma — matches the model's output format).</li>
+    <li><b>raw_line = the corrected PAGE, not the literal OCR.</b> Fix OCR misreads in
+        <code>raw_line</code> too, not just the fields — long-s read as <code>f</code>
+        (<code>Brewsler</code>→<code>Brewster</code>, <code>George-It.</code>→<code>George-st.</code>),
+        dropped letters, etc. raw_line and the fields should tell the same (corrected) story.</li>
     <li><b>Verbatim values.</b> Type each field as printed — don't expand abbreviations
         (<code>insur</code> stays <code>insur</code>, not "insurance"). Keep
         <code>h</code> / <code>r</code> / <code>bds</code> / <code>wid.</code> / <code>clk.</code> as-is.</li>
@@ -317,7 +321,7 @@ _TEMPLATE = r"""<!DOCTYPE html>
         name <code>Gibson Thomas</code>, occupation <code>clk.</code>, address <code>h 38 Prospect</code>.
         A leftover comma scores as wrong.</li>
     <li><b>Fractions as ASCII.</b> Write <code>1/2</code>, not the <code>½</code> glyph
-        (e.g. <code>870 1/2 De Kalb av</code>). Fix the raw_line too if OCR misread it.</li>
+        (e.g. <code>870 1/2 De Kalb av</code>).</li>
     <li><b>Titles/honorifics go in <code>name</code></b>, verbatim — <code>Rev.</code>,
         <code>Dr.</code>, <code>Capt.</code>, <code>Mrs.</code>, <code>Miss</code>
         (e.g. <code>Gibert Lyman (Rev.)</code>). Don't expand to an occupation.</li>

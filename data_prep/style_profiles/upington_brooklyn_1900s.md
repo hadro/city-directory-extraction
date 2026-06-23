@@ -27,10 +27,30 @@ Publisher; Office 317 Washington St., Brooklyn). Visually sampled 2026-06-19 (se
 3. **Given names abbreviated** (Jos, Edw'd, And'w, H'y, Dan'l, Cath). Prominent headword surnames
    in bold caps.
 
-Markers seen: `h` house · `clk` clerk · `carp'r` carpenter · `hfurng` house furnishings ·
-`av` avenue · `B'way` Broadway · `Mhtn` Manhattan. **Abbreviations key STILL not reached** — front
-matter is all ads through leaf 19; the widow form (`wid. {hf}`, inferred from Lain) is **unconfirmed**
-and needs a deeper front scan.
+## Abbreviations legend — FOUND + FULLY TRANSCRIBED 2026-06-21 (paragraph key, leaf 37 = printed p.19)
+The front-20 sample missed it because front matter is **all ads through ~leaf 36**; the key is a
+**paragraph-form "ABBREVIATIONS" block on the persons listing-start page** (under the "UPINGTON'S
+General Directory OF BROOKLYN 1906 / ABBREVIATIONS" header, immediately above the `(A) AARON…`
+listings) — the same Lain-family pattern (key on the listing-start page), just deeper in the volume.
+Resampled with `--front 55`.
+
+Verbatim (~73 entries, Brooklyn place/street-heavy): `Acct.` accountant · `agl.` agricultural ·
+`art.` artificial · `asst.` assistant · `av` avenue · `B'way` Broadway · `Bklyn` Brooklyn ·
+`B'wick` Bushwick · `Cen'l` Central · `Chris'topher` Christopher · `Com'l` Commercial · `c` corner ·
+`clk` clerk · `com.` commission · `comm'r` commissioner · `dept.` department · `depy` deputy ·
+`E.` east · `East'n Parkway` Eastern Parkway · `elec.` electrical · `eng` engineer · `fwdg` forwarding ·
+`furng` furnishing · `H'pkson` Hopkinson · `h` house · `hgts` heights · `impr` importer ·
+`imps` implements · `(inc.)` incorporated · `insts` instruments · `Jef.` Jefferson · `kpr` keeper ·
+`Knick'r` Knickerbocker · `Kosc'ko` Kosciusko · `la` lane · `lab.` laborer · `Laf` Lafayette ·
+`Mhtn` Manhattan · `mfr` manufacturer · `mtls` materials · `mech` mechanical · `mer` merchant ·
+`Met.` Metropolitan · `mkr` maker · `mkt` market · `n` near · `N.` north · `N.J.` New Jersey ·
+`N.Y.` New York · `opp` opposite · `oper` operator · `Pa.` Pennsylvania · `pl` place ·
+`pres't` president · `r` rear · `R.R.` railroad · `rd` road · `Roch'r` Rochester · `R'kway` Rockaway ·
+`S.` south · `Sch'y` Schenectady · `sec` secretary · `sq` square · `Stuy't` Stuyvesant ·
+`tel.` telegraph · `ter` terrace · `T'pkins` Tompkins · `Vand't` Vanderbilt ·
+`vet. surg.` veterinary surgeon · `Wash'n` Washington · `W.` west · `whf` wharf · `wid` widow ·
+`Wil'by` Willoughby. **`wid` widow is confirmed** (the `wid. {hf}` rendering follows Lain).
+*Verified-absent (checked, not in key):* building/builder, Flatbush, foot, goods, Greenpoint.
 
 ## Cohort 1903–1910 (18 master rows backfilled, session 4)
 The `brooklynnewyork*geor` IA ids are the Upington Brooklyn directory, **1903–1910, all 2-column**.

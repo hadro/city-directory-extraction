@@ -338,6 +338,11 @@ _TEMPLATE = r"""<!DOCTYPE html>
         spouse_name <code>widow of John</code> (her own given name, if any, stays in name; if none,
         name is just the surname). <code>widow Ann</code> (no "of", a female given name) → Ann is
         her own name → name <code>White Ann</code>, spouse_name bare <code>widow</code>.</li>
+    <li><b>Race marker → <code>race_designation</code></b> (verbatim) — the mark is volume-specific,
+        set on the volume's key page: Tulsa <code>(c)</code>, Ogden 1839 <code>*</code>
+        ("names having an <code>*</code> are the names of colored people"). Drop it from
+        <code>name</code>, store as printed (not "colored"). E.g. <code>*Abrams William, mariner 74
+        Jay</code> → name <code>Abrams William</code>, race_designation <code>*</code>.</li>
     <li><b>Ditto marks → verbatim.</b> Copy <code>do</code> / <code>〃</code> / <code>''</code>
         as printed — don't resolve to the street/value from the row above (the per-line model
         can't see it). <code>White, John, butcher, 13 do</code> → address <code>13 do</code>.

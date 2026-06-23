@@ -368,12 +368,12 @@ realism) is **half done — tooling built & committed; awaiting data + retrain**
 > new gold toolchain — see [VISUAL_SAMPLING_HANDOFF.md](VISUAL_SAMPLING_HANDOFF.md)
 > (`data_prep/{sample_volumes,make_gold_tool,run_surya_on_samples,validate_gold}.py`,
 > 42-volume `gold_sample/worklist.csv`). **Surya OCR complete for all 42** (labeling is now
-> browser-only). **5 volumes labeled = 329 lines:** lain1876 (103), boyd1890 (75), doggett1846 (37),
-> duncan1794 (58), franks1786 (56), all validator-clean (Rode 1851 in progress). GLiNER floor scored
-> on lain1876 (macro-F1 0.33, `address` weakest). Conventions are a fixed gold/synth/model contract
-> (key one: `raw_line` = verbatim *page* — OCR misreads fixed — vs the 8 record fields canonical;
-> e.g. surname comma kept in raw_line, dropped from `name`). Next: more volumes, then Qwen + Gemini
-> predictions on the panel.
+> browser-only). **7 volumes labeled = 442 lines** (era coverage 1786–1890): lain1876 (103),
+> boyd1890 (75), doggett1846 (37), duncan1794 (58), franks1786 (56), rode1851 (53), mercein1820 (60),
+> all validator-clean (Ogden 1839 in progress — first race-marked volume, `*`=colored →
+> `race_designation`). GLiNER floor scored on lain1876 (macro-F1 0.33, `address` weakest). Conventions
+> are a fixed gold/synth/model contract (key one: `raw_line` = verbatim *page* — OCR misreads fixed —
+> vs the 8 record fields canonical). Next: more volumes, then Qwen + Gemini predictions on the panel.
 
 To re-run an eval (note: `qwen_predict.py` now auto-loads the multimodal class — verify the log
 prints `AutoModelForImageTextToText` and has NO "missing adapter keys" warning):

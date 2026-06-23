@@ -433,6 +433,10 @@ migrating synth + all 7.5k existing eval rows + new gold at once.
   name), spouse_name is the bare marker. *(Disambiguator = the word "of".)*
 - **Ditto marks → verbatim** — copy `do` / `〃` / `''`; don't resolve to the row above (per-line
   model can't see it). Matches the pipeline default (`--expand-dittos` off); resolution is downstream.
+- **Race marker → `race_designation`** (verbatim) — the mark is **volume-specific**, defined on the
+  volume's key page: Tulsa `(c)`, **Ogden 1839 Brooklyn `*`** ("Names having an `*` are the names of
+  colored people"). Drop the mark from `name`, store it as printed in `race_designation` (not
+  "colored"); empty when absent. *Check the volume's explanation-of-marks page before assuming.*
 - **Long-s (ſ) → `s`** everywhere (raw_line + fields) — OCR misreads it as `f` (`fexton`→`sexton`,
   `hofier`→`hosier`, `Roofevelt`→`Roosevelt`); it's a typographic form of s, like `½`→`1/2`.
 
@@ -449,14 +453,15 @@ all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the
 - **Surya pass COMPLETE for all 42 worklist volumes** (`run_surya_on_samples.py --dry-run` → 0 to
   OCR everywhere), incl. the dense Polk/Trow/M&B pages (got them past MPS OOM with small batches;
   see lessons). **Everything left is browser-only labeling — no more MPS/GPU step.**
-- **5 volumes labeled so far → 329 gold lines:** `data/lain1876_eval.jsonl` (103, deep target met),
-  `data/boyd1890_eval.jsonl` (75; topped up from 27 via Import after the verso resample — Boyd is
-  the lone Flushing/Queens rep), `data/doggett1846_eval.jsonl` (37, std), `data/duncan1794_eval.jsonl`
-  (58, std; `Surname, Given` format — batch comma-strip + 3 widow-inversions + long-s),
-  `data/franks1786_eval.jsonl` (56, std; bounded-resampled past almanac/officials — see lessons).
-  In progress: **Rode 1851** (dense Manhattan, clean). All validator-clean + `--self-test` green.
-  (gitignored — back up out-of-band.) **QA tip:** re-run `validate_gold` after each export; the slips
-  it caught (commas, inverted widows, year mismatch, raw_line↔field OCR-fix drift) are the recurring ones.
+- **7 volumes labeled → 442 gold lines** (era coverage 1786–1890): `lain1876` (103, deep),
+  `boyd1890` (75; topped up via Import after verso resample — lone Flushing/Queens rep),
+  `doggett1846` (37), `duncan1794` (58; `Surname, Given` → batch comma-strip + 3 widow-inversions +
+  long-s), `franks1786` (56; bounded-resampled past almanac/officials), `rode1851` (53; 3 wrapped
+  advertiser raw_lines completed), `mercein1820` (60). In progress: **Ogden 1839** (Brooklyn) — the
+  **first race-marked volume** (`*` = colored; see contract + `ogden_brooklyn_1830s.md`). All
+  `data/*_eval.jsonl` validator-clean + `--self-test` green. (gitignored — back up out-of-band.)
+  **QA tip:** re-run `validate_gold` after each export; the slips it caught (commas, inverted widows,
+  year mismatch, raw_line↔field OCR-fix drift) are the recurring ones.
 - **First real-data numbers** = the GLiNER *floor* on Lain-1876 (`results/scores.jsonl`, label
   `gliner-lain1876`): macro-F1 **0.33**, whole-row EM **3.9%**; weakest field **`address` F1 0.16**
   (extractive GLiNER can't rebuild the `h` prefix / work-vs-home split), `name` F1 0.54. Rare fields

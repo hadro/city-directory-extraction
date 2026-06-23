@@ -54,7 +54,8 @@ KNOWN_DIALECTS = {"nyc", "tulsa", "minneapolis", "ftd-fr", "nyu"}
 # include full street-type words, hyphenated forms (Bowery-lane), and ditto (do = number repeated)
 ADDR_TOK = re.compile(
     r"\b(h|r|bds|b|res|rear|cor|c|n|s|e|w|av|ave|avenue|st|street|pl|place|ter|terrace|"
-    r"rd|road|sq|square|la|lane|ct|court|row|slip|wharf|al|alley|do)\b\.?", re.I)
+    r"rd|road|sq|square|la|lane|ct|court|row|slip|wharf|al|alley|"
+    r"hall|hook|market|mkt|house|exchange|bank|dock|park|do)\b\.?", re.I)
 FIRM_RE = re.compile(r"&|\bco\b|\bbros\b|\bbro\b|\bsons\b|\bmfg\b|\bworks\b|\b& co\b|\bcompany\b", re.I)
 OCC_AS_ADDR = re.compile(r"\b(h|r|bds)\s+\d|\b\d+\s+[A-Z]")
 WORD = re.compile(r"[A-Za-z0-9]+")

@@ -17,7 +17,10 @@ Visually sampled 2026-06-19.
 
 ## Entry format
 `Surname Given[, occupation][, employer/business][, h <home address>]` — with a leading `—` as a
-**ditto** for the repeated surname on continuation lines.
+**ditto** for the repeated surname on continuation lines. **In gold: keep it verbatim as a plain
+hyphen `-`** (what OCR emits — `-Michl h 1773 1st av` under Juarez → name `-Michl`, NOT "Juarez
+Michl"); don't resolve the surname (downstream step). Heavy in this dense col-3 format — whole runs
+of `-Given` entries.
 
 Verbatim samples (printed p.353):
 - `Dupp Wm. painter, h 305 E. 29th`

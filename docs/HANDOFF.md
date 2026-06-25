@@ -368,11 +368,12 @@ realism) is **half done — tooling built & committed; awaiting data + retrain**
 > new gold toolchain — see [VISUAL_SAMPLING_HANDOFF.md](VISUAL_SAMPLING_HANDOFF.md)
 > (`data_prep/{sample_volumes,make_gold_tool,run_surya_on_samples,validate_gold}.py`,
 > 42-volume `gold_sample/worklist.csv`). **Surya OCR complete for all 42** (labeling is now
-> browser-only). **10 volumes labeled = 620 lines** (continuous era coverage 1786–1890, all 8 fields
-> now exercised): lain1876 (103), boyd1890 (75), doggett1846 (37), duncan1794 (58), franks1786 (56),
+> browser-only). **11 volumes labeled = 688 lines** (era coverage 1786–1907, all 8 fields exercised,
+> layout col 1→3): lain1876 (103), boyd1890 (75), doggett1846 (37), duncan1794 (58), franks1786 (56),
 > rode1851 (53), mercein1820 (60), ogden1839 (66 — `*`=colored → `race_designation`), hearne1852 (52),
-> hopehenderson1856 (60 — `*`=Eastern-District counter-case), all validator-clean (Trow 1907, first
-> deep col-3, in progress). GLiNER floor scored on lain1876 (macro-F1 0.33, `address` weakest). Conventions
+> hopehenderson1856 (60 — `*`=Eastern-District counter-case), trow1907 (68 — first deep col-3,
+> surname-dash dittos), all validator-clean (Trow 1913 col-4 in progress). GLiNER floor scored on
+> lain1876 (macro-F1 0.33, `address` weakest). Conventions
 > are a fixed gold/synth/model contract (key one: `raw_line` = verbatim *page* — OCR misreads fixed —
 > vs the 8 record fields canonical). Next: more volumes, then Qwen + Gemini predictions on the panel.
 

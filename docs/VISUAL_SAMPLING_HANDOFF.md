@@ -456,17 +456,18 @@ all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the
 - **Surya pass COMPLETE for all 42 worklist volumes** (`run_surya_on_samples.py --dry-run` → 0 to
   OCR everywhere), incl. the dense Polk/Trow/M&B pages (got them past MPS OOM with small batches;
   see lessons). **Everything left is browser-only labeling — no more MPS/GPU step.**
-- **10 volumes labeled → 620 gold lines** (continuous era coverage 1786–1890; all 8 fields now
-  exercised — race via Ogden, employer via Hearne): `lain1876` (103, deep), `boyd1890` (75; topped up
+- **11 volumes labeled → 688 gold lines** (continuous era coverage 1786–1907; all 8 fields exercised;
+  layout col 1→3): `lain1876` (103, deep), `boyd1890` (75; topped up
   via Import after verso resample — lone Flushing/Queens rep), `doggett1846` (37), `duncan1794` (58;
   `Surname, Given` → batch comma-strip + 3 widow-inversions + long-s), `franks1786` (56;
   bounded-resampled past almanac/officials), `rode1851` (53; 3 wrapped advertiser raw_lines completed),
   `mercein1820` (60), `ogden1839` (66; **first race-marked volume** — `*`=colored → `race_designation`),
   `hearne1852` (52; Brooklyn micro; `employer` signal), `hopehenderson1856` (60; Brooklyn 2-col — the
-  `*`=Eastern-District counter-case, all dropped correctly). In progress: **Trow 1907** (Manhattan,
-  **col 3 — first deep multi-column volume**). All `data/*_eval.jsonl` validator-clean + `--self-test`
-  green. (gitignored — back up out-of-band.) Still all-std/2-col so far; deep col-3→6 (Trow/Polk/M&B)
-  now starting.
+  `*`=Eastern-District counter-case, all dropped correctly), `trow1907` (68; **first deep multi-column**,
+  Manhattan col 3 — 40 surname-dash `-Given` entries, 10 business rows, column ordering held). In
+  progress: **Trow 1913/14** (Manhattan, col 4 — climbing the density ladder). All `data/*_eval.jsonl`
+  validator-clean + `--self-test` green. (gitignored — back up out-of-band.) Layout spectrum now
+  col 1 → 2 → 3 covered; col 4→6 (Trow/Polk/M&B) next.
   **QA tip:** re-run `validate_gold` after each export; the slips it caught (commas, inverted widows,
   year mismatch, raw_line↔field OCR-fix drift) are the recurring ones.
 - **First real-data numbers** = the GLiNER *floor* on Lain-1876 (`results/scores.jsonl`, label

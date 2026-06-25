@@ -436,7 +436,10 @@ migrating synth + all 7.5k existing eval rows + new gold at once.
 - **Race marker → `race_designation`** (verbatim) — the mark is **volume-specific**, defined on the
   volume's key page: Tulsa `(c)`, **Ogden 1839 Brooklyn `*`** ("Names having an `*` are the names of
   colored people"). Drop the mark from `name`, store it as printed in `race_designation` (not
-  "colored"); empty when absent. *Check the volume's explanation-of-marks page before assuming.*
+  "colored"); empty when absent. **ALWAYS read the volume's explanation-of-marks page — the same symbol
+  diverges:** in **Hope & Henderson 1856** `*` = *Eastern District* (geographic, NOT race — and has no
+  schema field, so it's dropped entirely), while colored there is `col'd`. (See `ogden_brooklyn_1830s.md`
+  and `hope_henderson_brooklyn_1850s.md`.)
 - **Long-s (ſ) → `s`** everywhere (raw_line + fields) — OCR misreads it as `f` (`fexton`→`sexton`,
   `hofier`→`hosier`, `Roofevelt`→`Roosevelt`); it's a typographic form of s, like `½`→`1/2`.
 

@@ -13,6 +13,10 @@ Quoted verbatim:
 - **`*` (leading) → `race_designation`** — marks "colored" (Black) residents. This is the panel's first
   race-marked volume. Handle like Tulsa's `(c)`: **drop the `*` from `name`, store `*` verbatim in
   `race_designation`** (do NOT expand to "colored"); empty for unstarred entries.
+  - ⚠️ **Volume-specific — do NOT generalize the `*`.** In **Hope & Henderson 1856** (also Brooklyn)
+    the leading `*` means *Eastern District* (geographic, NOT race; dropped — no schema field), and
+    colored is `col'd`. Same symbol, opposite meaning — always read each volume's own key page.
+    See `hope_henderson_brooklyn_1850s.md`.
 - `h` = house · `n` = near · `c` = corner · `op` = opposite (all verbatim in gold).
 
 ## Entry format

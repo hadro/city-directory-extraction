@@ -453,13 +453,14 @@ all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the
 - **Surya pass COMPLETE for all 42 worklist volumes** (`run_surya_on_samples.py --dry-run` → 0 to
   OCR everywhere), incl. the dense Polk/Trow/M&B pages (got them past MPS OOM with small batches;
   see lessons). **Everything left is browser-only labeling — no more MPS/GPU step.**
-- **8 volumes labeled → 508 gold lines** (continuous era coverage 1786–1890; 7 of 8 fields exercised,
-  only `employer` still thin): `lain1876` (103, deep), `boyd1890` (75; topped up via Import after verso
-  resample — lone Flushing/Queens rep), `doggett1846` (37), `duncan1794` (58; `Surname, Given` → batch
-  comma-strip + 3 widow-inversions + long-s), `franks1786` (56; bounded-resampled past almanac/
-  officials), `rode1851` (53; 3 wrapped advertiser raw_lines completed), `mercein1820` (60),
+- **9 volumes labeled → 560 gold lines** (continuous era coverage 1786–1890; 7 of 8 fields exercised,
+  `employer` now has real signal too): `lain1876` (103, deep), `boyd1890` (75; topped up via Import
+  after verso resample — lone Flushing/Queens rep), `doggett1846` (37), `duncan1794` (58; `Surname,
+  Given` → batch comma-strip + 3 widow-inversions + long-s), `franks1786` (56; bounded-resampled past
+  almanac/officials), `rode1851` (53; 3 wrapped advertiser raw_lines completed), `mercein1820` (60),
   `ogden1839` (66; **first race-marked volume** — 7 `*`=colored entries → `race_designation`; see
-  `ogden_brooklyn_1830s.md`). In progress: **Hearne 1852** (Brooklyn). All `data/*_eval.jsonl`
+  `ogden_brooklyn_1830s.md`), `hearne1852` (52; Brooklyn micro scan; `employer` signal — pastor/church,
+  foreman/factory). In progress: **Hope & Henderson 1856/57** (Brooklyn, 2-col). All `data/*_eval.jsonl`
   validator-clean + `--self-test` green. (gitignored — back up out-of-band.)
   **QA tip:** re-run `validate_gold` after each export; the slips it caught (commas, inverted widows,
   year mismatch, raw_line↔field OCR-fix drift) are the recurring ones.

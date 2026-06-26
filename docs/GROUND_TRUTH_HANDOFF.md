@@ -108,7 +108,7 @@ combine roles/addresses with `&`), out-of-town firms with NYC agents (drop the a
 = Room, neighborhood abbreviations (`WNB`=West New Brighton, `Stap`, `Tomp`) → kept verbatim in
 `address`.
 
-## Panel status — 15 volumes / 949 lines (1786–1933/34; col 1→6 complete; all 8 fields; first outer borough)
+## Panel status — 16 volumes / 998 lines (1786–1933/34; col 1→6 complete; all 8 fields; first outer borough)
 
 | volume | lines | era / layout / note |
 |---|---|---|
@@ -127,14 +127,15 @@ combine roles/addresses with `&`), out-of-town firms with NYC agents (drop the a
 | polk1917 | 72 | 1917 Manhattan, **col 5** — employer-rich |
 | polk1925 | 40 | 1925 Manhattan, **col 6** (density ladder topped) |
 | polk1933si | 56 | 1933/34 **Staten Island**, col 2 — first **outer borough** + 1930s; neighborhood codes (WNB/Stap/Tomp/NB) |
+| polk1933bk | 49 | 1933/34 **Brooklyn**, col 3 — Kings County residential |
 
-**Deep: 5 of 15** (lain1876, trow1907, trow1913, polk1917, polk1925). **First real numbers** = GLiNER
+**Deep: 5 of 16** (lain1876, trow1907, trow1913, polk1917, polk1925). **First real numbers** = GLiNER
 floor on lain1876 (`results/scores.jsonl`, label `gliner-lain1876`): macro-F1 **0.33**, whole-row EM
 **3.9%**, weakest `address` F1 0.16. The Qwen-fine-tune + Gemini-bar runs on the panel are still TODO.
 
 **Next priority = breadth, not depth** — the layout (col 1–6) and all 8 fields are covered. Done:
-**Polk 1933/34 Staten Island** (col 2, first **outer borough** + 1930s; 56 lines). Next: the other
-Polk-1933 borough vols (Brooklyn/Bronx/Queens), M&B 1931, and the std tail (Smith col-transition,
+**Polk 1933/34 Staten Island** (col 2, first **outer borough** + 1930s; 56 lines) and **Brooklyn**
+(col 3; 49 lines). Next: the remaining Polk-1933 borough vols (Bronx/Queens), M&B 1931, and the std tail (Smith col-transition,
 Spooner, Reynolds, the NYPL early-Manhattan run).
 
 ## Reading F1 vs EM (for scoring runs)

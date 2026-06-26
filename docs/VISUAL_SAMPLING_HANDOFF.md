@@ -456,8 +456,8 @@ all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the
 - **Surya pass COMPLETE for all 42 worklist volumes** (`run_surya_on_samples.py --dry-run` → 0 to
   OCR everywhere), incl. the dense Polk/Trow/M&B pages (got them past MPS OOM with small batches;
   see lessons). **Everything left is browser-only labeling — no more MPS/GPU step.**
-- **13 volumes labeled → 853 gold lines** (era coverage 1786–1917; all 8 fields exercised;
-  layout col 1→5): `lain1876` (103, deep), `boyd1890` (75; topped up
+- **14 volumes labeled → 893 gold lines** (era coverage 1786–1925; all 8 fields exercised;
+  **layout col 1→6 complete**): `lain1876` (103, deep), `boyd1890` (75; topped up
   via Import after verso resample — lone Flushing/Queens rep), `doggett1846` (37), `duncan1794` (58;
   `Surname, Given` → batch comma-strip + 3 widow-inversions + long-s), `franks1786` (56;
   bounded-resampled past almanac/officials), `rode1851` (53; 3 wrapped advertiser raw_lines completed),
@@ -465,12 +465,15 @@ all other eval sets — back up out-of-band). Score with `eval/evaluate.py` (the
   `hearne1852` (52; Brooklyn micro; `employer` signal), `hopehenderson1856` (60; Brooklyn 2-col — the
   `*`=Eastern-District counter-case, all dropped correctly), `trow1907` (68; first deep multi-column,
   Manhattan col 3 — surname-dash `-Given` dittos), `trow1913` (93; col 4),
-  `polk1917` (72; **col 5** — Polk surname-ditto is `"` not `-`; `employer` well-populated incl. the
-  parenthetical-firm pattern). In progress: **Polk 1925** (Manhattan, **col 6** — densest layout).
-  All `data/*_eval.jsonl` validator-clean + `--self-test` green. (gitignored — back up out-of-band.)
-  Layout col 1→5 covered; col 6 closes the density ladder. Deep progress: 4 of 14 (lain1876, trow1907,
-  trow1913, polk1917). **Parenthetical rule:** person `(firm)` → firm to `employer`; firm `(person)` →
-  person stays in `name`.
+  `polk1917` (72; col 5 — Polk surname-ditto is `"` not `-`; `employer`-rich),
+  `polk1925` (40; **col 6** — density ladder topped; kept short by design — dense-1920s-Polk style
+  already covered by 1917, so no value deepening the same style at col-6 labeling cost). In progress:
+  **Polk 1933/34 Staten Island** (`bc958330`, col 2 — first **outer-borough** volume + 1930s era; new
+  strata, not more dense-Manhattan). All `data/*_eval.jsonl` validator-clean + `--self-test` green.
+  (gitignored — back up out-of-band.) **Layout col 1→6 complete.** Deep progress: 5 of 14 (lain1876,
+  trow1907, trow1913, polk1917, polk1925). **Parenthetical rule:** person `(firm)` → firm to
+  `employer`; firm `(person)` → person stays in `name`. **Next priority = breadth (boroughs / std
+  tail), not depth** — the layout + field spectrum is covered.
   **QA tip:** re-run `validate_gold` after each export; the slips it caught (commas, inverted widows,
   year mismatch, raw_line↔field OCR-fix drift) are the recurring ones.
 - **First real-data numbers** = the GLiNER *floor* on Lain-1876 (`results/scores.jsonl`, label

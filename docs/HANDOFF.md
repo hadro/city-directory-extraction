@@ -368,13 +368,13 @@ realism) is **half done — tooling built & committed; awaiting data + retrain**
 > new gold toolchain — see [VISUAL_SAMPLING_HANDOFF.md](VISUAL_SAMPLING_HANDOFF.md)
 > (`data_prep/{sample_volumes,make_gold_tool,run_surya_on_samples,validate_gold}.py`,
 > 42-volume `gold_sample/worklist.csv`). **Surya OCR complete for all 42** (labeling is now
-> browser-only). **13 volumes labeled = 853 lines** (era coverage 1786–1917, all 8 fields exercised,
-> layout col 1→5): lain1876 (103), boyd1890 (75), doggett1846 (37), duncan1794 (58), franks1786 (56),
-> rode1851 (53), mercein1820 (60), ogden1839 (66 — `*`=colored → `race_designation`), hearne1852 (52),
-> hopehenderson1856 (60 — `*`=Eastern-District counter-case), trow1907 (68 — first deep col-3,
-> surname-dash dittos), trow1913 (93 — col-4), polk1917 (72 — col-5, employer-rich), all
-> validator-clean (Polk 1925 col-6 in progress). GLiNER floor scored on lain1876 (macro-F1 0.33,
-> `address` weakest). Conventions
+> browser-only). **14 volumes labeled = 893 lines** (era coverage 1786–1925, all 8 fields exercised,
+> **layout col 1→6 complete**): lain1876 (103), boyd1890 (75), doggett1846 (37), duncan1794 (58),
+> franks1786 (56), rode1851 (53), mercein1820 (60), ogden1839 (66 — `*`=colored → `race_designation`),
+> hearne1852 (52), hopehenderson1856 (60 — `*`=Eastern-District counter-case), trow1907 (68),
+> trow1913 (93), polk1917 (72), polk1925 (40 — col-6), all validator-clean (Polk 1933 Staten Island,
+> first outer-borough, in progress). Next priority = breadth (boroughs/std tail), not depth. GLiNER
+> floor scored on lain1876 (macro-F1 0.33, `address` weakest). Conventions
 > are a fixed gold/synth/model contract (key one: `raw_line` = verbatim *page* — OCR misreads fixed —
 > vs the 8 record fields canonical). Next: more volumes, then Qwen + Gemini predictions on the panel.
 

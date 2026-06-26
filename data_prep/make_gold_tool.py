@@ -329,6 +329,12 @@ _TEMPLATE = r"""<!DOCTYPE html>
         institution/company worked <i>at</i> → <code>employer</code> (both verbatim).
         <code>Scudder Ephraim, c. h. clk. h 76 Nassau</code> → occupation <code>clk.</code>,
         employer <code>c. h.</code>, address <code>h 76 Nassau</code>.</li>
+    <li><b>Parenthetical firm vs principal.</b> A firm in parens after a <i>person</i> → that firm is
+        the <code>employer</code> (drop the parens): <code>Emmons Jas M (F R Emmons & Bro) 32 Warren</code>
+        → name <code>Emmons Jas M</code>, employer <code>F R Emmons & Bro</code>, is_business False.
+        A person in parens after a <i>firm</i> → that person is the principal, kept in <code>name</code>:
+        <code>Emmons J C & Co (Jno C Emmitt)</code> → name <code>Emmons J C & Co (Jno C Emmitt)</code>,
+        is_business True.</li>
     <li><b>address vs home_address.</b> The listed address → <code>address</code>, keeping its
         <code>h</code>/<code>r</code>/<code>bds</code> prefix. Use <code>home_address</code> ONLY for
         a <i>second</i>, separate <code>h.</code> home when the entry lists both a work address and a

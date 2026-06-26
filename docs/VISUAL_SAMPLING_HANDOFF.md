@@ -343,6 +343,12 @@ title, cluster what clusters, sample representatives.
   + retrain + re-run the eval panel (existing Wave-1 procedure in HANDOFF.md) to confirm the
   `name`/EM lift, esp. on Lain.
 
+> **⚠️ The gold-building work below (editor, conventions contract, panel status, gold-OCR lessons,
+> Phase-2 loop) is now consolidated and maintained in [GROUND_TRUTH_HANDOFF.md](GROUND_TRUTH_HANDOFF.md)
+> — that is canonical going forward (esp. the full conventions list + live panel count). The sections
+> below are retained as the origin/history; this doc stays focused on the catalog backfill
+> (column_count/page_offset/key_page) it grew out of.**
+
 ## Gold-ground-truth editor (`data_prep/make_gold_tool.py`, 2026-06-21)
 Self-contained HTML tool to hand-build eval gold from the sampled pages. Reads Surya
 line-level OCR (`{stem}_surya.json`: bbox+text+confidence) + `_sample_manifest.json`,

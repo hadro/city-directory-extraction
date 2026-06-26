@@ -18,10 +18,12 @@ directories** and releasing the results to the community:
 > that workstream (B) relies on.
 >
 > **Current working state lives in the handoff docs, not in the original plan:**
-> [docs/HANDOFF.md](docs/HANDOFF.md) (the model) and
-> [docs/VISUAL_SAMPLING_HANDOFF.md](docs/VISUAL_SAMPLING_HANDOFF.md) (the catalog). The
-> [docs/plan.md](docs/plan.md) is the original rationale and data landscape, but predates the
-> scope changes below — read it for background, the handoffs for truth.
+> [docs/HANDOFF.md](docs/HANDOFF.md) (the model),
+> [docs/GROUND_TRUTH_HANDOFF.md](docs/GROUND_TRUTH_HANDOFF.md) (the real-OCR gold eval panel,
+> labeling conventions, gold toolchain, and style profiles), and
+> [docs/VISUAL_SAMPLING_HANDOFF.md](docs/VISUAL_SAMPLING_HANDOFF.md) (the catalog backfill it grew
+> out of). The [docs/plan.md](docs/plan.md) is the original rationale and data landscape, but
+> predates the scope changes below — read it for background, the handoffs for truth.
 
 ## Scope (current)
 
@@ -59,6 +61,12 @@ data_prep/
   ftd_to_eval.py          # ✅ French Trade Directories (SODUCO) -> cross-lingual transfer eval
   harvest_own.py          # ✅ pipeline output -> in-domain eval (Tulsa + Lain; --dialect; real OCR)
   harvest_minneapolis.py  # ✅ Minneapolis 1900 (MIT) transcription -> union-schema SILVER eval (review)
+  # --- real-OCR GOLD eval panel (hand-labeled; see GROUND_TRUTH_HANDOFF.md) ---
+  sample_volumes.py       # ✅ stratified selector -> gold_sample/{worklist.csv,WORKLIST.md} (42 reps)
+  run_surya_on_samples.py # ✅ batch Surya OCR over worklist dirs (gpu env; listing-only; resumable)
+  make_gold_tool.py       # ✅ build self-contained HTML labeling editor from Surya JSON (autosave/import; --max-lines)
+  validate_gold.py        # ✅ QA the export: ERRORS (break evaluate.py) + WARNINGS (drift/convention slips)
+  gold_sample/            # ✅ worklist.csv (subset of master) + WORKLIST.md checklist
   # --- workstream B: NYC directory catalog + style profiles ---
   master_directories.csv  # ✅ 449-row multi-source (nypl|ia|loc|iiif) catalog; schema in its README
   master_directories.README.md  # ✅ catalog schema + provenance log + leads
@@ -159,9 +167,21 @@ From those visual samples we build **style profiles** (`data_prep/style_profiles
 catalog (`column_count` is ~332/449 done) **and** are the Phase-2 lever to parameterize
 `synth_persons.py` so synthetic lines match real layout/abbreviations.
 
-See [docs/VISUAL_SAMPLING_HANDOFF.md](docs/VISUAL_SAMPLING_HANDOFF.md) for the full workflow,
-the per-cohort backfill log, and the hard-won gotchas (microfilm spreads, page-offset drift,
+See [docs/VISUAL_SAMPLING_HANDOFF.md](docs/VISUAL_SAMPLING_HANDOFF.md) for the full catalog-backfill
+workflow, the per-cohort log, and the hard-won gotchas (microfilm spreads, page-offset drift,
 phonebook vs city-directory genre, cheap-tier sub-agent delegation with arithmetic gating).
+
+### Real-OCR gold eval panel
+
+A separate, hand-labeled **gold eval panel** is built from the cataloged volumes via a dedicated
+toolchain (`sample_volumes.py` → `run_surya_on_samples.py` → `make_gold_tool.py` → `validate_gold.py`):
+Surya-OCR a few listing pages per volume, label each entry into the 8-field schema in a browser
+editor, validate, and drop the result into `data/<slug>_eval.jsonl`. It is **eval-only**, governed by
+a fixed gold/synth/model labeling **contract** (raw_line = verbatim page; the 8 fields = canonical),
+and consumed directly by `eval/evaluate.py`. The labeling conventions (~16 rules — verbatim,
+no-field-commas, widows, race/district marks, surname-dash dittos, parenthetical firm/principal,
+drop-what-has-no-field…) and the panel status live in
+[docs/GROUND_TRUTH_HANDOFF.md](docs/GROUND_TRUTH_HANDOFF.md).
 
 ## Data sources
 
@@ -199,10 +219,13 @@ awaiting a regenerate + retrain. *(An earlier eval-loader bug made the trained m
 base-model floor; root-caused and fixed — see the handoff. Symptom: a trained model scoring like
 an untrained one.)*
 
-**Workstream B (catalog):** `master_directories.csv` grown to 449 rows across NYPL/IA/LoC; NYPL
-API archived; ~332/449 rows have `column_count` (every in-scope residential volume); ~10
-publisher×era style cards written. Phase 2 (style profiles → generator) is the next integration
-point with workstream A.
+**Workstream B (catalog + gold):** `master_directories.csv` grown to 449 rows across NYPL/IA/LoC;
+NYPL API archived; ~332/449 rows have `column_count` (every in-scope residential volume); 13
+publisher×era style cards written. The **real-OCR gold eval panel is underway: 14 volumes / ~890
+hand-labeled lines** (continuous 1786–1925, layout col 1→6, all 8 fields exercised incl. race &
+employer), all validator-clean — see [docs/GROUND_TRUTH_HANDOFF.md](docs/GROUND_TRUTH_HANDOFF.md).
+Phase 2 (style profiles → generator → retrain → re-eval on this gold) is the next integration point
+with workstream A.
 
 **Next:** regenerate synthetic data with the real-name pools + a publisher/era context tag,
 retrain on `rtx-pro-6000` batch 64 + `--packing` (~$6), re-run the eval panel, and confirm the

@@ -49,6 +49,51 @@ from the actual directories (was 54). Remaining: (a) your other agent expands `m
 (c) add a publisher/era context tag, regenerate, retrain (`rtx-pro-6000` b64 + `--packing` +
 `exclude_modules=["visual"]`, ~$6), re-run the eval panel. See §"Next steps".
 
+## Full-panel scores — first run (2026-06-29)
+
+First time the `qwen-0.8b-yaml` adapter (`hadro/city-dir-08b-yaml`) was scored across **all 18
+per-volume gold sets** (1786–1933/34). Ran **locally on a 16 GB M2** — base `Qwen/Qwen3.5-0.8B`
+was already cached (1.6 GB); `uv run eval/qwen_predict.py --target yaml` loads it as
+`AutoModelForImageTextToText` (the multimodal class — avoids the silent eval-loader bug), MPS with
+`PYTORCH_ENABLE_MPS_FALLBACK=1`. ~1.5 h for 17 vols (per-file model reload dominates). Raw per-row
+metrics in `results/scores.jsonl` (label `qwen-0.8b-yaml`); macro table in `results/eval_table.md`.
+
+**Panel-wide per-field F1** (recall-weighted by gold occurrences — the two highest-volume fields are
+both the weakest, which is why overall scores stall):
+
+| field | F1 | gold n | note |
+|---|---|---|---|
+| is_business | 0.89 | 1669 | fine |
+| occupation_role | 0.70 | 1321 | ok |
+| employer | 0.53 | 66 | weak (sparse) |
+| **name** | **0.52** | **1669** | major drag — highest-volume field |
+| spouse_name | 0.37 | 200 | weak |
+| **address** | **0.44** | **1666** | major drag — highest-volume field |
+| **home_address** | **0.07** | **303** | near-total failure |
+| race_designation | 0.00 | 13 | never emitted |
+
+**Per-volume spread:** best = `mb1931` macro **0.77** (terse M&B style: *no* ditto/spouse/home — the
+model wins exactly where the hard features are absent). Worst = dense late-Polk Manhattan `polk1917`
+**0.336** / `polk1925` **0.339** (name F1 .04/.00, address .08/.03). Every **EM=0%** volume
+(polk1917, polk1925, polk1933bk, polk1933si, queens1933, trow1913, duncan1794) is ditto-heavy.
+
+**Four systematic gaps — coverage, not capacity (priority order):**
+1. **Surname-repeat ditto marks kill `name`.** Confirmed by spot-check: the model strips the leading
+   `"`/`-` from every continuation row (`" Jno H`→`Jno H`, `" Louis`→`Louis`). name is exact-match, so
+   every ditto row scores 0 → name F1 .00–.26 and **whole-row EM=0** on all dense Polk/Trow volumes.
+   `synth_persons.py` never emits ditto names (rule #12 in GROUND_TRUTH_HANDOFF). **Biggest lever.**
+2. **`home_address` near-zero (0.07, n=303)** — model collapses the second `h.` into `address`;
+   generator under-produces the two-address pattern.
+3. **`address` weakest on 1930s + earliest eras** — hyphenated outer-borough house nos (`24-12`) +
+   neighborhood codes (`LIC`/`JH`) and 1786-era formats are out-of-distribution (polk1933*/queens1933
+   address .02–.12; franks1786 .11).
+4. **`race_designation` = 0** — never emitted (small n; clean synth fix).
+
+**Conclusion — stop adding breadth; fix synth coverage.** The failures repeat across volumes and map
+to specific missing synthetic features (ditto entries, home_address density, hyphenated/neighborhood
+addresses, race marks), not to model capacity. Next: inject these into `synth_persons.py` (start with
+ditto), regenerate, retrain, re-score this panel. The 18-volume panel is now the regression harness.
+
 ## Project in one paragraph
 
 Replace the Gemini NER step in the sibling `directory-pipeline` repo for the city-directory

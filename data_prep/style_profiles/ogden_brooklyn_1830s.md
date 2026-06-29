@@ -49,5 +49,7 @@ Field separator: comma (inconsistent — often dropped before occupation/address
 ## Status
 
 First pass from front matter + 2 listing pages; building `data/ogden1839_eval.jsonl`.
-`page_offset`/`key_page` printed-number not measured (key note is at canvas 0009 = p.1).
+**`page_offset` now measured (2026-06-29):** canvas 0010 = printed **p.4** → `page_offset = +6`, so the
+key/listing-start at canvas 0009 is **printed p.3** (not p.1 as first estimated). Master row updated to
+`start_page=3, key_page=3, page_offset=6`.
 Per the gold contract, expansion of marks (`*`→colored, `n`→near) is a downstream step — keep verbatim.

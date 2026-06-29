@@ -36,5 +36,30 @@ the 1856-57 "Consolidated" is Hope & Henderson (already in CSV); Lain takes over
 **Duplicates noted:** `micro_IABROOKLYN_0026` ≡ `brooklyncitydire1848teal` (1848-49);
 `brooklynalphabet1843unse` (1843) likely ≡ `micro_IABROOKLYN_0019` (1843). Dedupe at sample time.
 
+## Key pages — measured per-volume (2026-06-29 visual sampling)
+
+Two members of this cohort were front-matter–sampled and **do** carry a printed legend at the head of
+the A-listing (confirming the cohort's `n/c/op` grammar as ground truth):
+
+- **`ia/micro_IABROOKLYN_0005` — Spooner's Brooklyn Directory, 1826** (Spooner's *own* earliest volume).
+  Structure: title (c1) → foldout map (c2) → almanac (c3) → contents (c4) → **listing + key at printed
+  p.5 (canvas 4)**, `page_offset` −1. Legend verbatim:
+  > BROOKLYN DIRECTORY. 1826. **N.B. h. stands for house, n. for near, and c. for corner.**
+
+  A-start `ABBOT DANIEL, tavern & livery stable 16`. No race mark yet in 1826.
+
+- **`ia/micro_IABROOKLYN_0017` — Brooklyn Directory and Yearly Advertiser, 1840–41.** Structure: title
+  (c4) → Additions & Corrections (c7) → **listing + key at printed p.5 (canvas 7)**, `page_offset` +2.
+  Legend verbatim:
+  > BROOKLYN DIRECTORY. For 1840-1. **NOTE.—Names having an `*` are the names of colored people.**
+  > Abbreviations—h. stands for house, n. for near, c. for corner, op. for opposite, b. for between, &c.
+
+  A-start `Abbot Daniel, 25 Front and 76 Water`; `*Abram Thos. laborer 13 Chapel` → `*` =
+  `race_designation` (same convention as Ogden 1839 — see [ogden_brooklyn_1830s.md]; **note the opposite
+  meaning of `*` in Hope & Henderson 1856**, [hope_henderson_brooklyn_1850s.md]).
+
+The legend grows across the run: 1826 = `h/n/c` only → 1840 adds `*`=colored + `op`/`b`. This is the
+real abbreviation-vocabulary progression the synth generator should model per era.
+
 ## Genre
 Residential persons directory — Brooklyn (KEEP shape), pre-Lain. Compiler Teale / publisher Spooner.

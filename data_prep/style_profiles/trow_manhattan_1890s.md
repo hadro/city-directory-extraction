@@ -68,5 +68,21 @@ SPELLED"): Allan/Allen/Allyn, Auld/Old, Ayers/Ayres, Bauer/Baur/Bower, Bergen/Be
 Bigelow/Biglow, Cohen/Cohn/Kohn, Reis/Reiss/Rice, Schafer/Schaffer/Schaefer/Schaeffer/Shaffer… —
 directly relevant to the model's surname-regularization failure; candidate seed for name generation.
 
+## Other panel Trow volumes — key page confirmed (2026-06-29)
+
+The "**ABBREVIATIONS block = A-listing-start page**" pattern holds across the whole Trow run; each
+volume's key page is its `start_page`, with the same places/streets/trade legend family (length grows
+over time). Measured this session:
+
+| volume | master id | key/start (printed) | key at canvas | offset | legend note |
+|---|---|---|---|---|---|
+| Trow/Wilson 1865-66 | `nypl/4b119360-…9131` | p24 | c24 | 0 | shorter legend (`al`,`b.mds`=boarding house,`E.R`=East River,`frwg`,`junc`,`mer`…); preceded by Commercial-Register index + "names refused" + nurses |
+| Trow 1884-85 | `nypl/4b69a410-…a570` | p17 | c19 | +2 | `ag.imple`,`al`,`Am`,`asso`,`ass't`,`b'gh`,`bldsmkr`… ; A-start "Aab Elizabeth, wid Louis" |
+| **Trow 1890-91 (rep)** | `nypl/4b984650-…f64d` | p15 | c15 | −1 (front) | the fully-transcribed legend above |
+| Trow 1913-14 | `nypl/4bfc3730-…db31` | p17 | c24 | +7 | legend grown to a **full page**; titled "TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX 1913, ending Aug 1 1914"; `column_count=4` |
+
+Takeaway for synth: the Trow abbreviations vocabulary is a stable, era-growing places/streets/trade
+key — distinct from the h/r/bds **entry-marker** glossary — usable as the Trow-family style layer.
+
 ## Genre
 Residential persons directory (KEEP shape).

@@ -114,7 +114,7 @@ combine roles/addresses with `&`), out-of-town firms with NYC agents (drop the a
 = Room, neighborhood abbreviations (`WNB`=West New Brighton, `Stap`, `Tomp`) → kept verbatim in
 `address`.
 
-## Panel status — 17 volumes / 1107 lines (1786–1933/34; col 1→6 complete; all 8 fields; first outer borough)
+## Panel status — 18 volumes / 1169 lines (1786–1933/34; col 1→6 complete; all 8 fields; all 5 boroughs)
 
 | volume | lines | era / layout / note |
 |---|---|---|
@@ -135,15 +135,17 @@ combine roles/addresses with `&`), out-of-town firms with NYC agents (drop the a
 | polk1933si | 56 | 1933/34 **Staten Island**, col 2 — first **outer borough** + 1930s; neighborhood codes (WNB/Stap/Tomp/NB) |
 | polk1933bk | 49 | 1933/34 **Brooklyn**, col 3 — Kings County residential |
 | mb1931 | 109 | 1931 **Manhattan & Bronx**, col 4 — new publisher (M&B Directory Co.); terse style (no spouse, no `h`/`r`); **Bronx**-rich |
+| queens1933 | 62 | 1933/34 **Queens**, col 4 — Polk Queens/SI; commuter work-borough tags (`(Mhn)`, conv #17); hyphenated house nos + nbhd codes (LIC/JH/RH/Rdgwd/Flush) |
 
-**Deep: 5 of 17** (lain1876, trow1907, trow1913, polk1917, polk1925). **First real numbers** = GLiNER
+**Deep: 5 of 18** (lain1876, trow1907, trow1913, polk1917, polk1925). **First real numbers** = GLiNER
 floor on lain1876 (`results/scores.jsonl`, label `gliner-lain1876`): macro-F1 **0.33**, whole-row EM
 **3.9%**, weakest `address` F1 0.16. The Qwen-fine-tune + Gemini-bar runs on the panel are still TODO.
 
-**Next priority = breadth, not depth** — the layout (col 1–6) and all 8 fields are covered. Done:
-**Polk 1933/34 Staten Island** (col 2, first **outer borough** + 1930s; 56 lines) and **Brooklyn**
-(col 3; 49 lines), and **M&B 1931** (M&B Directory Co., col 4; 109 lines — new publisher + terse style, Bronx coverage). Next: **Queens 1933/34** (`f60eb200`, needs OCR), then the std tail (Smith col-transition,
-Spooner, Reynolds, the NYPL early-Manhattan run).
+**Next priority = breadth, not depth** — the layout (col 1–6), all 8 fields, and **all 5 boroughs**
+are covered. Done: the full **Polk 1933/34** outer-borough set — Staten Island (col 2; 56), Brooklyn
+(col 3; 49), Queens (col 4; 62) — plus **M&B 1931** (M&B Directory Co., col 4; 109 — new publisher,
+terse style, Bronx-rich). Next: the std tail (Smith col-transition, Spooner, Reynolds, the NYPL
+early-Manhattan run), or shift to **depth** (more lines/volume) now that breadth is broad.
 
 ## Reading F1 vs EM (for scoring runs)
 For **sparse fields** (spouse/employer/race/home), read **F1 (non-empty), not EM** — high EM there

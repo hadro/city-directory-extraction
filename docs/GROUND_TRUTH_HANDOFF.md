@@ -102,6 +102,12 @@ eval rows + new gold at once. The master split:
     notes, periodical/agent metadata. Map the core to the 8 fields; never invent a field or cram into
     the wrong one. **Skip an entry only when the *source* is genuinely garbled** (e.g. `Anothor,
     Reasen`), not when it's just long/complex.
+17. **Work-borough parenthetical → stays in `occupation_role`, verbatim** (with parens) — a
+    cross-borough work tag after the trade (`truck driver (Mhn)` → occupation_role `truck driver
+    (Mhn)`). It modifies the occupation (*where* the work is), so unlike rule 16's orthogonal drops it
+    stays attached to the role — **not** dropped, **not** in `employer` (it's a location, not an
+    institution), **not** in `address` (that's the home). A downstream expansion step splits it out.
+    Common in Greater-NY commuter volumes (Polk Queens/SI, M&B). Spouse `(wife)` parens still drop (#9).
 
 Edge cases that recur in dense commercial volumes: multi-office businessmen (`v pres … & pres …` →
 combine roles/addresses with `&`), out-of-town firms with NYC agents (drop the agent line), `R`/`r`

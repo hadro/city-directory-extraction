@@ -30,27 +30,34 @@
 ```bash
 PY=python3   # plain stdlib; no venv needed
 cd /Users/joshhadro/github/city-directory-extraction/data_prep
-# list first N canvases (idx | label | image URL):
-$PY inspect_frontmatter.py list  <nypl|ia|loc|iiif> <id> [N]
-# download canvas idx i..j-1 as <tag>_<idx>.jpg into the script's dir:
-$PY inspect_frontmatter.py get   <nypl|ia|loc|iiif> <id> i j [tag]
+$PY inspect_frontmatter.py list  <nypl|ia|loc|iiif> <id> [N]   # first N canvases (idx|label|url)
+$PY inspect_frontmatter.py get   <nypl|ia|loc|iiif> <id> i j   # download canvas idx i..j-1
+$PY inspect_frontmatter.py sheet <nypl|ia|loc|iiif> <id> i j   # get + build a labeled contact sheet
+$PY inspect_frontmatter.py dir   <nypl|ia|loc|iiif> <id>       # print this volume's cache dir
 ```
 Resolvers: `nypl`→`api-collections.nypl.org/manifests/{id}` (v3), `ia`→`iiif.archive.org/iiif/{id}/manifest.json`,
 `loc`→loc.gov item, `iiif`→manifest URL. Handles IIIF v2 and v3.
 
+**Pages cache to a PERSISTENT, git-ignored dir** keyed by (source,id) — default
+`../directory-pipeline/output/_frontmatter/<src>_<id>/` (override with `$FM_OUT`; falls back to this
+repo's `data/fm_cache/`). Files are `p<idx>.jpg`; the **manifest JSON is cached too**. `get`/`sheet`
+**skip pages already present + complete** (JPEG-EOI verified) and **retry each fetch 3×**, so a re-run
+only refetches what's missing/truncated — no re-downloading whole ranges, and downloads survive across
+sessions. IA is slow/flaky; NYPL is fast.
+
 ### Recipe (per volume)
-1. `get <src> <id> 0 18 <tag>` → contact sheet: `montage <tag>_0*.jpg -tile 5x4 -geometry 250x340+3+3 -label '%f' <tag>_sheet.jpg` → `Read` it to locate title / TOC / key / listing-start.
-2. Confirm the exact listing-start + key page by **`Read`-ing the specific canvas full-res** (filename = canvas idx — unambiguous).
+1. `sheet <src> <id> 0 18` → prints the sheet path → `Read` it to locate title / TOC / key / listing-start.
+2. Confirm the exact listing-start + key page by **`Read`-ing the specific page** `…/<src>_<id>/p<idx>.jpg` (filename = canvas idx — unambiguous).
 3. Read a **printed page number** on a numbered listing page near the start → compute `page_offset`.
 4. Record printed start/key + offset + canvas-in-notes; transcribe the legend into the style card.
 
 ### Pitfalls (cost real time — heed them)
 - **Montage grid-position drift:** with blank versos / plates, "row×col counting" mis-assigns tiles by
-  ±2. **Trust the `%f` filename label or do a targeted single-canvas Read** for the start/key decision.
+  ±2. **Trust the `%f` filename label (= `p<idx>`) or do a targeted single-page Read** for the start/key decision.
 - **`page_offset` needs verification:** ad banners sit over page numbers → misreads. Read the printed
   number directly; if a listing page shows a *signature* mark (e.g. "5*", "B") that's NOT the page no.
-- **IA downloads are slow / occasionally drop:** ranges sometimes return fewer files than asked —
-  re-run the `get`. NYPL is fast/reliable.
+- **IA is slow/flaky** but the tool now caches + retries; if a `sheet` still shows gaps, just re-run it
+  (cached pages are skipped). NYPL is fast/reliable.
 - **Blank-verso volumes** (Boyd Flushing): content on odd canvas, blank on even → printed pN = canvas
   12+2N, not a constant offset.
 - **Ad-heavy volumes** (Brooklyn business dirs, Polk, Trow): the residential A-listing sits *behind* a

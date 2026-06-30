@@ -1,4 +1,4 @@
-# Handoff — front-matter / key-page / listing-start sampling (42-panel)
+# Handoff — front-matter / key-page / listing-start sampling (41-panel)
 
 > Working state as of 2026-06-29. This is the **funding-independent** workstream: visually identify,
 > for each gold-panel volume, its **front matter**, its **abbreviations key page**, and the **page
@@ -63,7 +63,10 @@ sessions. IA is slow/flaky; NYPL is fast.
 - **Ad-heavy volumes** (Brooklyn business dirs, Polk, Trow): the residential A-listing sits *behind* a
   large advertising + business-directory block — the listing start can be canvas 150–250, not the front.
 
-## DONE — 13 / 42 (committed d2662ea)
+## DONE — 25 / 41 (commits d2662ea, d5133f7, ed3e2d6)
+
+_The table below is the first inline batch of 13; +5 IA-early/Doggett (Cohort B) and +7 early-NY NYPL (Cohort A) followed — see those commits. Panel is 41 after dropping `durst`._
+
 | volume | id | start(p) | key(p) | offset | legend / note |
 |---|---|---|---|---|---|
 | Boyd Flushing 1890 | `flushingnewyorkc00boyd` | 1 | none | (blank-verso) | simple village fmt |
@@ -100,18 +103,13 @@ enriched `ogden_brooklyn_1830s` (offset), `spooner_brooklyn_1840s` (1826+1840 le
   `year=1851, column_count=1` are both wrong; the gold set labeled `rode1851` is mislabeled by ~3 yrs.
   Recorded as a `REVIEW:` note (not overwritten) — decide whether to relabel the gold set.
 
-## REMAINING — 29 volumes, by cohort
-**Mechanical (delegated to subagents 2026-06-29 — mostly "no key page, just start+offset"):**
-- *Cohort A — early-NY faded NYPL:* Duncan/Greenleaf 1791 `f554e950…b4cf`, Elliot 1812
-  `e9592bb0…f2a6`, Elliot&Crissy 1811 `7cd3acc0…12ab`, Long 1814 `6d811c30…6f98` (listing deep, >c29),
-  Longworth 1818/19 `69fdfa80…e574`, Low/Buell/Bull 1796 `2dfca400…7dee`, Franks/Kollock 1786
-  `b14662b0…2a18` (listing ~c28, has card).
-- *Cohort B — IA early + Doggett:* Duncan 1794 `newyorkdirectory00dunc`, Franks 1786
-  `newyorkdirectory00fran_0`, Mercein 1820 `merceinscitydire00merc` (card exists), durst 1910
-  `newyorkdirectory00durs` (also needs publisher ID), Doggett 1846 `doggettsnewyorkc1846dogg`,
-  Doggett 1850/51 `nypl/4adf9ec0…03ad` (start=21 already).
+## REMAINING — 16 volumes (deep scans, kept inline)
+> **Cohorts A & B DONE** (subagents, 2026-06-29; commits d5133f7, ed3e2d6). 7 early-NY NYPL + 5 IA
+> early/Doggett merged. `durst` dropped from the panel (guidebook, not a directory → panel now **41**).
+> New corrections from the agents: **Elliot 1812 is col 2** (not 1); the **1810s Elliot/Longworth
+> volumes DO carry a key** ("street-implied" legend) — the "no key" rule is only 1786–1796 + Long 1814.
 
-**Deep scans (kept inline — need offset/data-quality judgment):**
+**Deep scans (need offset/data-quality judgment):**
 - *Brooklyn ad-heavy:* Hearnes 1852 `micro_IABROOKLYN_0030`, Smith 1854/55/56 `micro_IABROOKLYN_0033/
   0034/0036`, Lain 1876 `1876BPL` (title c16), Hope&Henderson 1856 `micro_IABROOKLYN_0035` (offset+31).
 - *Polk A-starts:* 1920/21 `4c11d740…5877` (start=201), 1925 `bf529e00…6597`, 1933×3 `c2afe390…72be` /
@@ -124,4 +122,4 @@ Process a volume with the recipe above → write to `master_directories.csv` (pr
 canvas+offset+legend in notes) → create/extend the matching `data_prep/style_profiles/*.md` card →
 commit. Re-run baseline tally any time:
 `python3 -c "import csv;rows=list(csv.DictReader(open('data_prep/master_directories.csv')));print('key',sum(1 for r in rows if r['key_page'].strip()),'offset',sum(1 for r in rows if r['page_offset'].strip()),'start',sum(1 for r in rows if r['start_page'].strip()))"`
-(baseline 2026-06-29 post-13: key 10, offset 40, start 90 / 449).
+(baseline 2026-06-29 post-25: key 15, offset 51, start 98 / 449; panel 41).

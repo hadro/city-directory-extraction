@@ -20,10 +20,18 @@ Visually sampled 2026-06-19.
   - *Persons listing is not separately titled in the TOC — it is the main body of the work.*
 - Canvases 9–10: Almanac pages (July 1845–June 1846).
 - Canvas 11: Ad leaf (C.B. Hatch, 97 William St).
-- **No explicit abbreviations key page found** in the sampled 12 front-matter canvases. Older
-  style: conventions are sparse and embedded in entries rather than collected in a legend.
-  Would need a resample at `--front 15` starting around canvas 12 to confirm whether a key
-  page exists between the almanac/TOC and the listing start.
+- **Abbreviations key page = the A-listing-start page (FOUND 2026-06-29).** The earlier "no key
+  found" was just too shallow a front sample — the legend sits *on* the first listing page (after the
+  almanac/TOC/ad block), printed under the "NOTICE … ABBREVIATIONS" head. Confirmed on the 1846 vol
+  (canvas 22 = printed p.1) and the 1850/51 vol (canvas 20 = printed p.21); the 1845 rep almost
+  certainly matches. Verbatim legend (1846, identical family in 1850/51):
+  > al. for alley, b. between, bldgs. buildings, c. corner, com. commission, ct. court, **e. r. east
+  > river**, ex. exchange, forwdg. forwarding, h. house, la. lane, mer. merchant, mkr. maker,
+  > manf. manufacturer, **n. r. north river**, op. opposite, pl. place, shipg. shipping, sq. square.
+
+  This is the **shared mid-century NYC legend family** — the *same* key (down to `e.r`/`n.r` =
+  east/north river) appears in Rode 1854 ([rode_manhattan_1850s.md]) and Groot & Elston 1845/46;
+  Doggett is the lineage root ("late Doggett & Rode"). A single abbreviations layer serves all three.
 - `column_count` = **2** (counted visually from listing pages; no preface statement found).
 - `page_offset` (canvas_index − printed_page): **+10** at canvas 145 / printed p.135;
   **+16** at canvas 337 / printed p.321. Interpolated estimate near listing start (p.~13): **~+6**
@@ -89,6 +97,11 @@ representatives sampled across the range (`--front 20 -k 2`):
   per-volume sampling to measure it.
 - Entry format and ALL-CAPS prominent-name convention are stable across the run (1842/43 listing
   matches the 1845 samples below: `Surname Firstname, occupation, address`; widow = `widow of X`).
+
+**Key page + offset measured per-volume (2026-06-29):**
+`ia/doggettsnewyorkc1846dogg` (1846&47) — key/start printed **p1** = canvas c22, offset **+21**.
+`nypl/4adf9ec0…03ad` (1850/51) — key/start printed **p21** = canvas c20, offset **−1** (the foot "1"
+on that page is a too-late-addenda section mark, not the page number — read the running pagination).
 
 ## Genre
 Residential persons directory — Manhattan (KEEP shape). Publisher: John Doggett Jr.

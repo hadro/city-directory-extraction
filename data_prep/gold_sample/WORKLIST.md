@@ -1,7 +1,12 @@
 # Gold-creation worklist
 
-42 representative volumes selected from `master_directories.csv`.
+41 representative volumes selected from `master_directories.csv`.
 Work top-to-bottom; check each off as its `gold.jsonl` lands in `data/`.
+
+> **Removed 2026-06-29:** `ia/newyorkdirectory00durs` — front-matter sampling found it is an
+> illustrated NYC **guidebook**, not a city directory (no persons listing anywhere, no readable title
+> page; IA lists publisher "not identified"). Dropped from the panel. See its `master_directories.csv`
+> notes. Panel is now **41**.
 
 **Depth:** aim ~40 gold lines per volume; go deeper (~100) on the **14 `deep`-flagged** rows below (Lain's synth→real gap + column-transition publishers, where layout change breaks the model). Pass the target to the editor with `--max-lines`.
 
@@ -66,5 +71,4 @@ $PY ../city-directory-extraction/data_prep/make_gold_tool.py \
 | ☐ | std | ~40 | `nypl/4b119360-317a-0134-9131-00505686a51c` | Trow/Wilson | 1865/66 | 2 | Manhattan | publisher=Trow/Wilson · column_count=2 |
 | ☐ | std | ~40 | `ia/brooklynnewyorkc19062geor` | Upington | 1906 | 2 | Brooklyn | publisher=Upington · column_count=2 |
 | ☐ | std | ~40 | `ia/micro_IABROOKLYN_0017` |  | 1840/41 | 1 | Brooklyn | publisher=unknown · column_count=1 |
-| ☐ | std | ~40 | `ia/newyorkdirectory00durs` |  | 1910 |  | Manhattan | publisher=unknown · column_count=∅ |
 | ☐ | std | ~40 | `ia/brooklynnewyor1912p3broo` |  | 1912 | 2 | Brooklyn | publisher=unknown · column_count=2 |

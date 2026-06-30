@@ -49,12 +49,26 @@ Verbatim samples (canvas 0561, RIP–ROA, printed p.555):
 - `Rivers widow Rachel, 45 Carmine`  *(widow in middle position — unusual variant)*
 - `Roach William S. hairdresser 512½ Grand`
 
-## Abbreviations (inferred; no explicit legend page found)
-`h.` / `h` house/home · `c.` corner · `m. d.` physician · `w. of` / `widow of` widow ·
-`cot.` cotton · `b. b.` boards (tentative) · `paperst.` paper stationer ·
-`a. t. s.` (unknown — likely an organization abbreviation)
+## Abbreviations
 
-Abbreviations are sparse and mostly spelled out (old style, c.1839).
+The **1839 rep volume** has no explicit legend page (marks inferred): `h.`/`h` house/home ·
+`c.` corner · `m. d.` physician · `w. of`/`widow of` widow · `cot.` cotton · `b. b.` boards
+(tentative) · `paperst.` paper stationer. Sparse, mostly spelled out (old style).
+
+But the **earlier Longworth 1818/19 volume DOES print an explicit legend** at the head of the
+A-listing (`nypl/69fdfa80-5d88-0134-e574-00505686a51c`, listing-start printed p.29 = canvas 30,
+`page_offset` +1; sampled 2026-06-29). Verbatim — note the **widow/firm ordering rule**:
+
+> Where a blank is left after the name in this Directory, it is always to be understood as a street;
+> as Abraham Moses, 115 Broad is Broad-street. The lanes, alleys, slips, &c. always mentioned.
+> **h. stands for house — n. near — c. for corner.** … the christian names of those where there are
+> more than one of the same surname are correctly alphabeted. **The firms are always placed at the
+> last of those of the same name; where females are known to be widows, they are so designated, and
+> placed immediately preceding the firms.**
+
+So the same **"street-implied" 1810s house-style** as Elliot 1811/12 ([elliot_newyork_1810s.md]),
+plus an explicit **same-surname ordering rule** (individuals alphabetized by given name → widows →
+firms last) — useful for synth ordering of a surname cluster.
 
 ## NYPL annual run 1797–1843 (sampled 2026-06-19)
 The NYPL set is a near-complete annual run (48 rows, `New York City directory, 18xx-xx`,

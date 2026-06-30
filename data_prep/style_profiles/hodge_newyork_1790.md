@@ -42,6 +42,20 @@ Residential persons directory bundled with a **Register** (almanac-like referenc
 shape as Franks 1786 and the early Longworth run. The Register precedes the alphabetical listing and is
 excluded from the persons-extraction target. See `franks_newyork_1786.md`, `longworth_manhattan_1830s.md`.
 
+## Cohort — the 1790s register-era directories (no key page)
+The same shape (register/almanac front matter → listing, no abbreviations key, comma-after-surname,
+`do.`=ditto, relations spelled out) holds across the earliest NYC directories. Measured 2026-06-29:
+
+| volume | id | start (printed) | A-start canvas | offset |
+|---|---|---|---|---|
+| Hodge/Allen 1790 (this card) | `nypl/614e2e50…e971` | 5 | 12 | +7 |
+| Duncan/Greenleaf 1791 | `nypl/f554e950…b4cf` | 1 | 16 | +15 |
+| Duncan/McComb 1794 | `nypl/dc1b4800…cf90` | 1 | 16 | +15 |
+| Low/Buell/Bull 1796 | `nypl/2dfca400…7dee` | 1 | 16 | +15 |
+
+(Franks 1786 too — see [franks_newyork_1786.md].) All `column_count=1`, no key page. By the 1810s a
+printed "street-implied" legend appears — see [elliot_newyork_1810s.md] / [longworth_manhattan_1830s.md].
+
 ## Status
 
 First pass from front matter + the listing-start page. Confirms the master's existing `start_page=5`

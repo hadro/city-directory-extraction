@@ -91,8 +91,10 @@ enriched `ogden_brooklyn_1830s` (offset), `spooner_brooklyn_1840s` (1826+1840 le
 - **Trow:** ABBREVIATIONS block is always **on** the A-listing-start page → `key_page = start_page`.
 - **Polk:** **no dedicated key page**; the alpha section just begins; conventions are standard Polk
   (h=home, r=rear, bds=boards, wid=widow) and ditto-heavy. Listing starts deep (~printed p229+).
-- **Early NY (1786–1820):** no key page (era-typical); `do.`=ditto, comma-after-surname, relations
-  spelled out ("corner of"); long almanac/register/city-description front matter precedes the listing.
+- **Early NY:** splits by decade. **1786–1796 + Long 1814** = NO key page; `do.`=ditto,
+  comma-after-surname, relations spelled out ("corner of"). **1810s Elliot/Longworth** DO print a key
+  — the "street-implied" legend (bare number = that street; `h`/`n`/`c`), on the A-start page. All have
+  long almanac/register/city-description front matter before the listing (so the A-start is deep).
 - **Mid-century NYC (Doggett / Rode / Groot & Elston):** share one abbreviations legend family
   (`al/b/c/ct/e=east river/ex/frwrg/h/la/mer/mkr/manf/n.r=north river/op/pl/shpg/sq/ter`) — all
   "late Doggett" lineage. A single style layer can serve the cohort.

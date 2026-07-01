@@ -149,6 +149,18 @@ data/                     # gitignored: all eval sets, synth data, preds
    `harvest_minneapolis.py` silver eval, needs review); SODUCO/FTD already used; geographie-cites
    23M = silver French geocoding (skip). See plan.md "External sources evaluated".
 4. **GLiNER vs GLiNER2:** use original `urchade/GLiNER` (v0.2.27) — added as the extractive baseline.
+5. **Stay on LoRA — MiCA (arXiv 2604.01694) considered & rejected.** "MiCA Learns More Knowledge
+   Than LoRA" (Rüdiger & Raschka) freezes the adapter's `B` to the *minor* singular vectors of `W`
+   and trains only `A`; claims up to 5.9× / +9.8pp on knowledge recall at 6–60% of LoRA's params.
+   **Doesn't apply to us:** it optimizes *knowledge integration* (baking facts into weights), not
+   our axis. Our task is structural instruction-following + verbatim span-copying, and our actual
+   bottleneck is data coverage (surname pool), not adapter capacity. The authors explicitly scope
+   it out: "MiCA in the current setup is **not designed for instruction fine-tuning** … tasks that
+   primarily require structural instruction-following rather than knowledge integration may not
+   benefit." Also untested in our regime — only 7B models (no sub-3B), only factual MC-QA (no
+   extraction/IE/format tasks), and neutral-to-slightly-worse on general benchmarks (TruthfulQA
+   35.29 vs LoRA 35.47). Don't A/B it; revisit only if the roadmap ever pivots to weight-baked
+   domain facts. (Reviewed 2026-06-29.)
 
 ## Qwen3.5 GOTCHAS (critical — these cost us several failed runs)
 

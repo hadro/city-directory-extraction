@@ -78,10 +78,13 @@ eval rows + new gold at once. The master split:
    already encodes work-vs-home). `home_address` is **only** a second, separate `h.` home. A lone
    `h 449 Clason av` goes in `address`. (The role-based work→address/home→home split is rejected —
    undecidable for the common single combined-use address.) **`home_address` stores the BARE
-   address — strip its leading `h`/`h.`/`bds` marker** (there it is the field *separator*, not part
-   of the value; `h do` → `do`). Reconciled 2026-07-19: 159 rows across 16 sets swept to this rule
-   (all three scored systems had home_address F1 ≈ 0.00 against the mixed labels; 0.64–0.73 after).
-   TODO: add the matching `validate_gold.py` check (ERROR on marker-leading home_address).
+   address — strip its leading `h`/`h.`/`bds` marker, whether spaced OR print-fused** (there it is
+   the field *separator*, not part of the value; `h do` → `do`, `h502 W149th` → `502 W149th`).
+   Reconciled 2026-07-19 in two sweeps: 159 spaced-marker rows across 16 sets, then 29 fused-marker
+   rows across 5 late sets (trow1913 21, polk1925 4, polk1917 2, queens1933 1, polk1933bk 1 r-fused).
+   `validate_gold.py` now enforces this: ERROR on leading `h`/`h.`/`bds`/`b` (spaced or fused);
+   leading `r` only WARNs — it can be the resides marker (strip) or `rear` (keep, part of the
+   address) — decide from the raw_line.
 9. **Widows → `wid`/`widow` marker always → `spouse_name`** (verbatim). `widow of John` / `wid. John`
    → John is the husband (her own given name, if any, stays in name; if none, name is just surname).
    `widow Ann` (no "of") → Ann is her own name (→ name), `spouse_name` is the bare marker. **`of`
@@ -101,7 +104,12 @@ eval rows + new gold at once. The master split:
     stays False with the company in `employer`.
 15. **Wrapped entries are one record** — join continuation lines into both the entry's fields and its
     `raw_line` (incl. hyphenated word-breaks: `Bar-`/`clay` → `Barclay`). Surya truncates wrapped
-    advertiser entries — complete the raw_line.
+    advertiser entries — complete the raw_line. **Join wraps with a SPACE** (only hyphenated breaks
+    close up): three polk1933bk raw_lines had glued wrap-joins (`avand`, `Lexav`, `r640`) creating
+    fake fused tokens — fixed 2026-07-19 against the page images; the validator's token-drift
+    warning catches this class. Genuine print fusion is volume-specific: polk1933bk fuses
+    marker+number (`r2025`, `h5518`) but spaces direction+ordinal (`E 26th`); trow1913 fuses both
+    (`h502 W149th`).
 16. **No schema field → drop it** — telephone (`Tel. 5550 Beekman`), Eastern-District `*`, district
     notes, periodical/agent metadata. Map the core to the 8 fields; never invent a field or cram into
     the wrong one. **Skip an entry only when the *source* is genuinely garbled** (e.g. `Anothor,

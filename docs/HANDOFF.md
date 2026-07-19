@@ -124,17 +124,27 @@ read: (1) gold home_address reconciliation, (2) address realism is the next synt
 (late-Polk especially), (3) name/verbatim-copying is the fine-tune's durable edge.
 
 **Gold home_address reconciliation DONE (2026-07-19):** 159 rows across 16 gold sets stripped
-to the bare-address rule (conv #8 amended in GROUND_TRUTH_HANDOFF; validator check still TODO).
+to the bare-address rule (conv #8 amended in GROUND_TRUTH_HANDOFF).
 Re-scored all existing preds against the corrected gold (predictions unchanged — scorer only).
-**Corrected panel aggregates: qwen-v2 macro 0.731 / micro 0.777 / EM 44.6% / home F1 0.64;
-primed Gemini 0.774 / 0.844 / 55.9% / 0.73** (volume wins 15-3 gemini). The fix lifted BOTH
-systems ~+0.08 macro exactly as predicted; relative standing unchanged. Gold sets are
-gitignored — the corrected copies live only in `data/` (back them up out-of-band).
+The fix lifted BOTH systems ~+0.08 macro exactly as predicted; relative standing unchanged.
+**Completed same day (cycle-three session): the FUSED-marker tail** — the first sweep only
+caught spaced markers; 29 fused rows (`h502 W149th`-style; trow1913 21, polk1925 4, polk1917 2,
+queens1933 1, polk1933bk 1 `r`-fused) swept to bare, and `validate_gold.py` now ERRORs on
+marker-leading home_address (leading `r` = WARNING only; may be `rear`). Also fixed 4
+polk1933bk rows verified against the page images: 3 raw_line wrap-joins glued without a space
+(`avand`/`Lexav`/`r640` — fake fusions; conv #15 amended) + 1 field slip (`E26th`→`E 26th`).
+**Final corrected panel aggregates (cite these): qwen-v2 macro 0.736 / micro 0.779 / EM 44.6% /
+home F1 0.69 / addr 0.54; primed Gemini 0.794 / 0.849 / 56.8% / home 0.89 / addr 0.77.** The
+fused sweep widened primed Gemini's lead (its residual home penalty was gold-side); qwen's home
+gap is now content errors on dense fused lines — same root as the address gap. Panel gold is
+validator-clean (0 errors, 11 benign warnings). Gold sets are gitignored — corrected copies in
+`data/` (user keeps Time Machine backups; pre-sweep copies in session scratchpad).
 
 ## RESUME HERE — cycle three: address realism + publisher tag (2026-07-19)
 
-**State:** v2 trained/scored ($7.23); primed-Gemini bar established (0.774/0.844/55.9% vs qwen-v2
-0.731/0.777/44.6% on corrected gold); address (0.54 vs 0.77) is the one proven model gap.
+**State:** v2 trained/scored ($7.23); primed-Gemini bar established (0.794/0.849/56.8% vs qwen-v2
+0.736/0.779/44.6% on fully-corrected gold — fused-marker sweep landed 2026-07-19); address
+(0.54 vs 0.77) + home content on dense lines (0.69 vs 0.89) are the proven model gaps.
 **Address error analysis done** (over `data/preds_v2_*` on the 7 worst volumes) — failure modes:
 1. **Fused-token spacing = the dominant miss** (~283 "other-rewrite" rows): late-Polk print jams
    marker+number and direction+ordinal together (`r205 W141st`, `h2378 Bathgate av`); gold keeps
@@ -146,15 +156,17 @@ gitignored — the corrected copies live only in `data/` (back them up out-of-ba
 4. split-into-home is ~solved (6 rows).
 
 **Cycle-three `synth_persons.py` worklist:** fused marker+number (`r205`,`h2378`) + fused
-direction+ordinal (`W141st`) at high p in late-era addresses; franks-era number forms; room
-codes; out-of-town home values; PLUS the deferred batch: publisher/era context tag (generator +
-gold contexts + BOTH predictor prompts in one migration — retire `dialect`), NYC employer
-patterns (conv #7/#13), `*` race markers (safe once tag exists), census given-name pool
-(Philenah→Philip), `--mix-weight 0.75`. Then regenerate (`--stats` gate), retrain
-(rtx-pro-6000 ~$7 or Modal free — see TRAINING_OPTIONS.md), re-score panel + primed Gemini.
-Target: address 0.54→0.70+, panel aggregate within reach of the primed bar.
-**Also pending:** `validate_gold.py` marker-leading-home_address check (conv #8 TODO);
-out-of-band backup of corrected `data/*_eval.jsonl`; NYU = secondary external check only.
+direction+ordinal (`W141st`) at high p in late-era addresses — **fusion is publisher-specific**
+(page-verified: polk1933bk fuses marker+number but spaces `E 26th`; trow1913 fuses both), so key
+it off the context tag; franks-era number forms; room codes; out-of-town home values; PLUS the
+deferred batch: publisher/era context tag (generator + gold contexts + BOTH predictor prompts in
+one migration — retire `dialect`), NYC employer patterns (conv #7/#13), `*` race markers (safe
+once tag exists), census given-name pool (Philenah→Philip), `--mix-weight 0.75`. Then regenerate
+(`--stats` gate), retrain (rtx-pro-6000 ~$7 or Modal free — see TRAINING_OPTIONS.md), re-score
+panel + primed Gemini. Target: address 0.54→0.70+, panel aggregate within reach of the primed bar.
+**Done this session (2026-07-19): validator conv-#8 check + fused-marker sweep + polk1933bk
+page-verified fixes** (see the reconciliation section above); corrected gold backed up via the
+user's Time Machine. NYU = secondary external check only.
 
 ## Full-panel scores — first run (2026-06-29)
 

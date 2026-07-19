@@ -21,6 +21,8 @@ ERRORS
   * a field contains "|"  -> breaks the pipe serialization evaluate.py scores on
   * raw_line / any field contains a newline
   * context missing dialect|directory_year|image
+  * home_address starts with a residence marker (h/h./bds/b, spaced or fused "h502")
+    -> conv #8: home_address stores the BARE address; the marker is the separator
 WARNINGS
   * field text whose tokens don't appear in raw_line (transcription drift / typo)
   * occupation_role that looks like an address (has "h /r /bds " or a street number)
@@ -58,6 +60,12 @@ ADDR_TOK = re.compile(
     r"hall|hook|market|mkt|house|exchange|bank|dock|park|do)\b\.?", re.I)
 FIRM_RE = re.compile(r"&|\bco\b|\bbros\b|\bbro\b|\bsons\b|\bmfg\b|\bworks\b|\b& co\b|\bcompany\b", re.I)
 OCC_AS_ADDR = re.compile(r"\b(h|r|bds)\s+\d|\b\d+\s+[A-Z]")
+# conv #8: home_address stores the BARE address — the leading residence marker is the
+# field separator, not the value. h/h./bds/b are unambiguous (ERROR), spaced or fused
+# (`h502 W149th`). Leading r/r. is ambiguous — resides marker (strip) vs "rear" (keep,
+# it's part of the address) — so it only WARNs; decide from the raw_line.
+HOME_MARKER_ERR = re.compile(r"^(?:(?:h|bds|b)\.?\s+\S|[hb]\d)")
+HOME_MARKER_WARN = re.compile(r"^(?:r\.?\s+\S|r\d)")
 WORD = re.compile(r"[A-Za-z0-9]+")
 
 
@@ -118,8 +126,14 @@ def check_record(rec: dict, raw: str, where: str, rep: Report):
     if addr and not any(ch.isdigit() for ch in addr) and not ADDR_TOK.search(addr):
         rep.warn(where, f"address has no number or street token: {addr!r}")
     # home_address is only for a SECOND address; a lone address belongs in `address`
-    if _norm(str(rec.get("home_address", ""))) and not addr:
+    home = _norm(str(rec.get("home_address", "")))
+    if home and not addr:
         rep.warn(where, "home_address set but address empty — a single address belongs in `address`")
+    if home and HOME_MARKER_ERR.match(home):
+        rep.err(where, f"home_address starts with residence marker (conv #8: store the BARE address): {home!r}")
+    elif home and HOME_MARKER_WARN.match(home):
+        rep.warn(where, f"home_address starts with 'r' — resides marker (strip, conv #8) or 'rear' (keep)? "
+                        f"check raw_line: {home!r}")
     name = _norm(str(rec.get("name", "")))
     if name and FIRM_RE.search(name) and not rec.get("is_business"):
         rep.warn(where, f"name looks like a firm but is_business=False: {name!r}")

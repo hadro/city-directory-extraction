@@ -123,6 +123,14 @@ three systems — the gold marker wobble reconfirmed a third way; fix the gold f
 read: (1) gold home_address reconciliation, (2) address realism is the next synth target
 (late-Polk especially), (3) name/verbatim-copying is the fine-tune's durable edge.
 
+**Gold home_address reconciliation DONE (2026-07-19):** 159 rows across 16 gold sets stripped
+to the bare-address rule (conv #8 amended in GROUND_TRUTH_HANDOFF; validator check still TODO).
+Re-scored all existing preds against the corrected gold (predictions unchanged — scorer only).
+**Corrected panel aggregates: qwen-v2 macro 0.731 / micro 0.777 / EM 44.6% / home F1 0.64;
+primed Gemini 0.774 / 0.844 / 55.9% / 0.73** (volume wins 15-3 gemini). The fix lifted BOTH
+systems ~+0.08 macro exactly as predicted; relative standing unchanged. Gold sets are
+gitignored — the corrected copies live only in `data/` (back them up out-of-band).
+
 ## Full-panel scores — first run (2026-06-29)
 
 First time the `qwen-0.8b-yaml` adapter (`hadro/city-dir-08b-yaml`) was scored across **all 18

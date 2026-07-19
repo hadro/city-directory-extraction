@@ -77,7 +77,11 @@ eval rows + new gold at once. The master split:
 8. **`address` vs `home_address`** — the listed address → `address` (keep `h`/`r`/`bds` prefix; it
    already encodes work-vs-home). `home_address` is **only** a second, separate `h.` home. A lone
    `h 449 Clason av` goes in `address`. (The role-based work→address/home→home split is rejected —
-   undecidable for the common single combined-use address.)
+   undecidable for the common single combined-use address.) **`home_address` stores the BARE
+   address — strip its leading `h`/`h.`/`bds` marker** (there it is the field *separator*, not part
+   of the value; `h do` → `do`). Reconciled 2026-07-19: 159 rows across 16 sets swept to this rule
+   (all three scored systems had home_address F1 ≈ 0.00 against the mixed labels; 0.64–0.73 after).
+   TODO: add the matching `validate_gold.py` check (ERROR on marker-leading home_address).
 9. **Widows → `wid`/`widow` marker always → `spouse_name`** (verbatim). `widow of John` / `wid. John`
    → John is the husband (her own given name, if any, stays in name; if none, name is just surname).
    `widow Ann` (no "of") → Ann is her own name (→ name), `spouse_name` is the bare marker. **`of`

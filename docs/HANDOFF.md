@@ -131,6 +131,31 @@ primed Gemini 0.774 / 0.844 / 55.9% / 0.73** (volume wins 15-3 gemini). The fix 
 systems ~+0.08 macro exactly as predicted; relative standing unchanged. Gold sets are
 gitignored — the corrected copies live only in `data/` (back them up out-of-band).
 
+## RESUME HERE — cycle three: address realism + publisher tag (2026-07-19)
+
+**State:** v2 trained/scored ($7.23); primed-Gemini bar established (0.774/0.844/55.9% vs qwen-v2
+0.731/0.777/44.6% on corrected gold); address (0.54 vs 0.77) is the one proven model gap.
+**Address error analysis done** (over `data/preds_v2_*` on the 7 worst volumes) — failure modes:
+1. **Fused-token spacing = the dominant miss** (~283 "other-rewrite" rows): late-Polk print jams
+   marker+number and direction+ordinal together (`r205 W141st`, `h2378 Bathgate av`); gold keeps
+   it VERBATIM, the model re-spaces (`r 205 W 141st`) or mangles (`h2378`→`237-8`). The synth
+   generator only ever emits spaced forms. Same lesson as dittos, at the character level.
+2. house-number errors n=50 (franks1786 alone 23/56 — the 1786 number style needs its own look).
+3. Room/office codes (`R2`, `R 309` → dropped or `Rd`) + out-of-town homes (`h Schenectady N Y`
+   truncated) — small counts, easy synth adds.
+4. split-into-home is ~solved (6 rows).
+
+**Cycle-three `synth_persons.py` worklist:** fused marker+number (`r205`,`h2378`) + fused
+direction+ordinal (`W141st`) at high p in late-era addresses; franks-era number forms; room
+codes; out-of-town home values; PLUS the deferred batch: publisher/era context tag (generator +
+gold contexts + BOTH predictor prompts in one migration — retire `dialect`), NYC employer
+patterns (conv #7/#13), `*` race markers (safe once tag exists), census given-name pool
+(Philenah→Philip), `--mix-weight 0.75`. Then regenerate (`--stats` gate), retrain
+(rtx-pro-6000 ~$7 or Modal free — see TRAINING_OPTIONS.md), re-score panel + primed Gemini.
+Target: address 0.54→0.70+, panel aggregate within reach of the primed bar.
+**Also pending:** `validate_gold.py` marker-leading-home_address check (conv #8 TODO);
+out-of-band backup of corrected `data/*_eval.jsonl`; NYU = secondary external check only.
+
 ## Full-panel scores — first run (2026-06-29)
 
 First time the `qwen-0.8b-yaml` adapter (`hadro/city-dir-08b-yaml`) was scored across **all 18

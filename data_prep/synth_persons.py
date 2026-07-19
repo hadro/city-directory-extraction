@@ -13,6 +13,12 @@ Generates (raw_line -> structured_record) training pairs. `--profile {tulsa,nyc,
 selects which dialect(s) to emit; `mix` (default) interleaves both so one fine-tune
 generalises and BOTH gold benchmarks are in-distribution.
 
+Context tag (2026-07-19 migration): `context` carries `publisher` + `directory_year`
+(`dialect` retired) — the prompt tag is `[publisher=trow; year=1913/14]`. NYC rows draw
+an era-consistent publisher (`_nyc_publisher`); the tulsa profile tags `publisher=polk`
+(it IS a Polk directory), sharing the tag with late-NYC Polk volumes so the old
+"dialects" dissolve into publisher×era. Gold sets tag the volume's real publisher.
+
 Union schema (one fixed column set covering both dialects; empty where a dialect
 doesn't use a field):
     name, is_business, spouse_name, race_designation, occupation_role,
@@ -303,7 +309,7 @@ def make_tulsa(rng) -> dict:
         "race_designation": race, "occupation_role": occ, "employer": emp,
         "address": _tul_address(rng, greenwood, rear_boost=greenwood), "home_address": "",
     }
-    return _finish(rng, rec, "tulsa", "1921")
+    return _finish(rng, rec, "tulsa", "polk", "1921")
 
 
 def _tul_business(rng) -> dict:
@@ -322,7 +328,7 @@ def _tul_business(rng) -> dict:
         "employer": "", "address": _tul_address(rng, greenwood=(race == "(c)")),
         "home_address": "",
     }
-    return _finish(rng, rec, "tulsa", "1921")
+    return _finish(rng, rec, "tulsa", "polk", "1921")
 
 
 def render_tulsa(rng, rec, hints=None) -> str:
@@ -469,14 +475,44 @@ def _nyc_year_era(rng):
     else:
         y, era = rng.randint(1891, 1933), "late"
     if era == "mid" or (era == "late" and rng.random() < 0.4):
-        year = f"{y}-{str(y + 1)[-2:]}"
+        year = f"{y}/{str(y + 1)[-2:]}"                # slash form matches the gold panel tags
     else:
         year = str(y)
     return year, era, y
 
 
+def _nyc_publisher(rng, ynum: int) -> str:
+    """Era-consistent publisher for the context tag, truthful to the master catalog
+    (each gold volume's (publisher, year) pair is reachable). Wave 1 will differentiate
+    per-publisher STYLE; this cycle the tag conditions the new publisher-keyed features
+    (fused address tokens) and teaches the tag vocabulary itself."""
+    if ynum <= 1787:
+        return "franks" if rng.random() < 0.5 else "duncan"
+    if ynum <= 1796:
+        return "duncan"
+    if ynum <= 1817:
+        return "longworth"
+    if ynum <= 1841:                                  # Longworth-era Manhattan + Brooklyn starts
+        return _wchoice(rng, [("longworth", 6), ("mercein", 2 if 1818 <= ynum <= 1826 else 0),
+                              ("ogden", 2 if ynum >= 1839 else 0)])
+    if ynum <= 1851:
+        return _wchoice(rng, [("doggett", 7), ("rode", 3 if ynum >= 1850 else 0)])
+    if ynum <= 1861:                                  # Trow begins 1852; Brooklyn trio
+        return _wchoice(rng, [("trow", 6), ("hearne", 1 if ynum <= 1855 else 0),
+                              ("hopehenderson", 1 if ynum >= 1855 else 0), ("smith", 1)])
+    if ynum <= 1897:
+        return _wchoice(rng, [("trow", 6), ("lain", 3),
+                              ("boyd", 1 if 1885 <= ynum <= 1895 else 0)])
+    if ynum <= 1914:
+        return _wchoice(rng, [("trow", 8), ("upington", 2)])
+    if ynum <= 1930:
+        return _wchoice(rng, [("polk", 8), ("trow", 2 if ynum <= 1922 else 0)])
+    return _wchoice(rng, [("polk", 7), ("mb", 3)])
+
+
 def make_nyc(rng) -> dict:
     year, era, ynum = _nyc_year_era(rng)
+    publisher = _nyc_publisher(rng, ynum)
 
     if rng.random() < 0.03:                           # occasional business listing
         n = _surname(rng)
@@ -499,7 +535,7 @@ def make_nyc(rng) -> dict:
             "tailors", "segars", "liquors", "druggists"]), "employer": "",
             "address": _nyc_address(rng, era, ynum), "home_address": "",
         }
-        return _finish(rng, rec, "nyc", year, arange=n)
+        return _finish(rng, rec, "nyc", publisher, year, arange=n)
 
     female = rng.random() < 0.28
     widow = female and rng.random() < 0.30            # ~8% of all entries
@@ -575,7 +611,7 @@ def make_nyc(rng) -> dict:
         "widow_own_name": widow_own_name,
         "space_delim": era == "late" and rng.random() < 0.15,
     }
-    return _finish(rng, rec, "nyc", year, arange=parent_surname, hints=hints)
+    return _finish(rng, rec, "nyc", publisher, year, arange=parent_surname, hints=hints)
 
 
 def render_nyc(rng, rec, hints=None) -> str:
@@ -615,18 +651,22 @@ def render_nyc(rng, rec, hints=None) -> str:
 # Shared finish / dispatch
 # ======================================================================================
 
-def _finish(rng, record: dict, dialect: str, year: str,
+def _finish(rng, record: dict, profile: str, publisher: str, year: str,
             arange: Optional[str] = None, hints: Optional[dict] = None) -> dict:
+    """profile picks the renderer (tulsa|nyc); publisher goes into the context tag.
+    They differ: the tulsa profile is a Polk directory, so it tags publisher=polk —
+    same tag as late-NYC Polk volumes (one publisher, two cities)."""
     if arange is None:                                # ditto rows pass the parent surname instead
         m = re.search(r"[A-Za-z]{3}", record["name"])
         arange = (m.group(0).upper() if m else record["name"][:3].upper())
     else:
         arange = arange[:3].upper()
-    render = render_tulsa if dialect == "tulsa" else render_nyc
+    render = render_tulsa if profile == "tulsa" else render_nyc
     return {
         "raw_line": render(rng, record, hints),
-        "context": {"dialect": dialect, "alphabetical_range": arange, "directory_year": year},
+        "context": {"publisher": publisher, "alphabetical_range": arange, "directory_year": year},
         "record": record,
+        "_profile": profile,                          # stats grouping only; stripped before output
     }
 
 
@@ -704,15 +744,18 @@ _SURNAME_COMMA_RE = re.compile(r"^[A-Z][A-Za-z'-]+,")
 
 
 def _stats_new() -> dict:
-    return {"n": 0, "dialects": {}, "examples": {}}
+    return {"n": 0, "profiles": {}, "examples": {}}
 
 
 def _stats_update(stats: dict, ex: dict) -> None:
-    """Tally style features for one PRE-NOISE example (noise would eat commas etc.)."""
+    """Tally style features for one PRE-NOISE example (noise would eat commas etc.).
+    Grouped by generator PROFILE (feature rates stay comparable across runs); the
+    publisher tag mix is tallied as pub= rows within each profile."""
     stats["n"] += 1
-    d = ex["context"]["dialect"]
-    c = stats["dialects"].setdefault(d, {"_rows": 0})
+    d = ex.get("_profile", "?")
+    c = stats["profiles"].setdefault(d, {"_rows": 0})
     c["_rows"] += 1
+    c["pub=" + ex["context"]["publisher"]] = c.get("pub=" + ex["context"]["publisher"], 0) + 1
     rec, raw = ex["record"], ex["raw_line"]
 
     def hit(key, example=True):
@@ -759,10 +802,13 @@ def _stats_update(stats: dict, ex: dict) -> None:
 def _stats_print(stats: dict, fh=None) -> None:
     fh = fh or sys.stderr
     print(f"\n--stats over {stats['n']} generated entries (pre-noise)", file=fh)
-    for d in sorted(stats["dialects"]):
-        counts = dict(stats["dialects"][d])
+    for d in sorted(stats["profiles"]):
+        counts = dict(stats["profiles"][d])
         rows = counts.pop("_rows")
-        print(f"[{d}] {rows} rows", file=fh)
+        pubs = {k[4:]: counts.pop(k) for k in [k for k in counts if k.startswith("pub=")]}
+        pub_mix = "  ".join(f"{p}:{100 * n / rows:.0f}%"
+                            for p, n in sorted(pubs.items(), key=lambda kv: -kv[1]))
+        print(f"[{d}] {rows} rows   publishers: {pub_mix}", file=fh)
         for key, cnt in sorted(counts.items(), key=lambda kv: -kv[1]):
             example = stats["examples"].get((d, key), "")
             tail = f"   e.g. {example[:58]}" if example else ""
@@ -802,7 +848,7 @@ def main(argv: Optional[list] = None) -> int:
                 _stats_update(stats, ex)
             noisy = add_noise(rng, ex["raw_line"], args.noise)
             print("─" * 78)
-            print(f"  INPUT  [{ex['context']['dialect']} {ex['context']['directory_year']} "
+            print(f"  INPUT  [{ex['context']['publisher']} {ex['context']['directory_year']} "
                   f"{ex['context']['alphabetical_range']}]: {noisy}")
             for ln in ser(ex["record"]).splitlines():
                 print(f"      {ln}")
@@ -816,6 +862,7 @@ def main(argv: Optional[list] = None) -> int:
             ex = make_record(rng, args.profile, args.mix_weight)
             if stats:
                 _stats_update(stats, ex)                # pre-noise: the generator's true rates
+            ex.pop("_profile", None)                    # internal stats key, not training data
             ex["raw_line"] = add_noise(rng, ex["raw_line"], args.noise)
             fh.write(json.dumps(ex, ensure_ascii=False) + "\n")
     finally:

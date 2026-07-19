@@ -46,7 +46,7 @@ def to_yaml(record):
 
 def build_messages(ex):
     ctx = ex.get("context", {})
-    tag = f"[dialect={ctx.get('dialect', '?')}; year={ctx.get('directory_year', '?')}]"
+    tag = f"[publisher={ctx.get('publisher', '?')}; year={ctx.get('directory_year', '?')}]"
     return [
         {"role": "system", "content": SYSTEM_YAML},
         {"role": "user", "content": f"{tag} {ex['raw_line']}"},

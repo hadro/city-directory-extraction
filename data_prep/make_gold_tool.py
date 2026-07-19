@@ -13,7 +13,7 @@ Output : a single .html file (no server, no deps) that shows, per OCR'd line:
          ordered column-then-top-to-bottom, low-confidence lines tinted.
          An "Export gold.jsonl" button downloads JSONL in the EXACT schema that
          eval/evaluate.py consumes (see data/lain_eval.jsonl):
-             {"raw_line", "context":{dialect,alphabetical_range,directory_year,image},
+             {"raw_line", "context":{publisher,alphabetical_range,directory_year,image},
               "record":{name,is_business,spouse_name,race_designation,
                         occupation_role,employer,address,home_address}}
 
@@ -29,7 +29,7 @@ Usage
     PY=/Users/joshhadro/github/directory-pipeline/.venv/bin/python   # has pillow
     $PY data_prep/make_gold_tool.py \
         ../directory-pipeline/output/ia_lain_1884_1884bpl \
-        -o gold_lain_1884.html --cols 2 --dialect nyc
+        -o gold_lain_1884.html --cols 2 --publisher lain
 
     # then: run surya first if not done -
     $PY ../directory-pipeline/pipeline/run_surya_ocr.py ../directory-pipeline/output/<slug>
@@ -41,6 +41,7 @@ import base64
 import html
 import io
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Optional
@@ -77,8 +78,19 @@ def _iiif_text(v) -> str:
     return ""
 
 
+def _publisher_slug(raw: str) -> str:
+    """Master-CSV publisher string -> context.publisher tag slug.
+    'Trow/Wilson' -> trow (printer before compiler), \"Doggett's\" -> doggett,
+    'Hope & Henderson' -> hopehenderson, 'M&B Directory Co.' -> mb."""
+    s = (raw or "").strip().lower().split("/")[0].strip()
+    s = re.sub(r"\b[a-z]\.\s*", "", s)                 # dotted initials: 'R.L. Polk' -> 'polk'
+    s = re.sub(r"'s\b", "", s)
+    s = re.sub(r"\b(directory|co|company|inc)\b\.?", "", s)
+    return re.sub(r"[^a-z]+", "", s)
+
+
 def _load_master(path: Path) -> dict:
-    """id -> row, for auto-resolving column_count / year from the manifest identifier."""
+    """id -> row, for auto-resolving column_count / year / publisher from the manifest identifier."""
     if not path.exists():
         return {}
     import csv
@@ -173,7 +185,8 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines
         # Doggett "1845 & 1846" -> manifest 1845 but master/id 1846)
         if row and (row.get("year") or "").strip():
             meta["year"] = row["year"].strip()
-        print(f"  {d.name}: cols={cols} [{src}]", file=sys.stderr)
+        meta["publisher"] = _publisher_slug(row.get("publisher", "")) if row else ""
+        print(f"  {d.name}: cols={cols} [{src}] publisher={meta['publisher'] or '?'}", file=sys.stderr)
         sjsons = sorted(d.glob("*_surya.json"))
         if not sjsons:
             print(f"  ! no *_surya.json in {d} (run run_surya_ocr.py first)", file=sys.stderr)
@@ -212,6 +225,7 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines
                 taken += 1
             if rows:
                 pages.append({"image": jpg.name, "year": meta["year"],
+                              "publisher": meta.get("publisher", ""),
                               "title": meta["title"], "rows": rows})
                 print(f"  + {jpg.name}: {len(rows)} lines", file=sys.stderr)
             if max_lines and taken >= max_lines:
@@ -219,8 +233,8 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines
     return pages
 
 
-def build_html(pages: list, dialect: str) -> str:
-    payload = json.dumps({"pages": pages, "dialect": dialect, "fields": FIELDS})
+def build_html(pages: list, publisher: str) -> str:
+    payload = json.dumps({"pages": pages, "publisher": publisher, "fields": FIELDS})
     title = "City-directory gold editor"
     # token replacement (not str.format) so JS/CSS braces stay literal
     return _TEMPLATE.replace("__TITLE__", html.escape(title)).replace("__PAYLOAD__", payload)
@@ -295,7 +309,7 @@ _TEMPLATE = r"""<!DOCTYPE html>
   <h1>__TITLE__</h1>
   <button id="modeBtn" class="ghost" onclick="setMode(mode==='list'?'focus':'list')"></button>
   <span class="stat" id="stat"></span>
-  <span class="stat">dialect <input type="text" id="dialect" style="width:64px" /></span>
+  <span class="stat">publisher <input type="text" id="publisher" style="width:96px" /></span>
   <button class="ghost" onclick="toggleAllSkip()">Toggle all skip</button>
   <label class="filebtn">⬆ Import<input type="file" id="importFile" accept=".jsonl,.json,.txt" /></label>
   <button class="primary" onclick="exportGold()">⬇ Export gold.jsonl</button>
@@ -382,7 +396,7 @@ PAGES.forEach((pg, pi) => pg.rows.forEach((r, ri) => entries.push({
   rec: Object.fromEntries(FIELDS.map(f => [f, f === 'is_business' ? false : '']))
 })));
 const arState = {};           // page index -> alphabetical_range
-let dialect = DATA.dialect;
+let publisher = DATA.publisher;
 let mode = 'list';
 let cursor = 0;
 let ctxOn = false;
@@ -399,9 +413,9 @@ function el(tag, attrs, kids) {
   return e;
 }
 const root = document.getElementById('root');
-const dialectInput = document.getElementById('dialect');
-dialectInput.value = dialect;
-dialectInput.oninput = () => { dialect = dialectInput.value; scheduleSave(); };
+const publisherInput = document.getElementById('publisher');
+publisherInput.value = publisher;
+publisherInput.oninput = () => { publisher = publisherInput.value; scheduleSave(); };
 
 // ---- card (shared by both modes) ----
 function card(en) {
@@ -558,7 +572,7 @@ function exportGold() {
     lines.push(JSON.stringify({
       raw_line: en.raw.trim(),
       context: {
-        dialect: dialect.trim(),
+        publisher: publisher.trim(),
         alphabetical_range: (arState[en.pi] || '').trim(),
         directory_year: String(PAGES[en.pi].year || ''),
         image: PAGES[en.pi].image
@@ -599,7 +613,7 @@ function setSaved(msg) { const s = document.getElementById('saved'); if (s) s.te
 function save() {
   try {
     localStorage.setItem(STORE_KEY, JSON.stringify({
-      v: 1, dialect, cursor, mode, ar: arState,
+      v: 1, publisher, cursor, mode, ar: arState,
       entries: entries.map(e => ({ raw: e.raw, skip: e.skip, rec: e.rec, pi: e.pi }))
     }));
     setSaved('saved ✓');
@@ -615,7 +629,8 @@ function restore() {
       else entries.push({ pi: s.pi || 0, ri: -1, raw: s.raw || '', conf: 1, crop: '', skip: !!s.skip, rec: fieldsFrom(s.rec) });
     });
     Object.assign(arState, d.ar || {});
-    if (d.dialect) { dialect = d.dialect; dialectInput.value = dialect; }
+    const pub = d.publisher || d.dialect;   // old autosaves stored `dialect`
+    if (pub) { publisher = pub; publisherInput.value = publisher; }
     if (typeof d.cursor === 'number') cursor = d.cursor;
     if (d.mode) mode = d.mode;
     return true;
@@ -650,7 +665,8 @@ function importGold(text) {
       added++;
     }
     if (g.context && g.context.alphabetical_range) arState[pi] = g.context.alphabetical_range;
-    if (g.context && g.context.dialect) { dialect = g.context.dialect; dialectInput.value = dialect; }
+    const gpub = g.context && (g.context.publisher || g.context.dialect);  // old exports: `dialect`
+    if (gpub) { publisher = gpub; publisherInput.value = publisher; }
   });
   save(); render();
   alert(`Imported ${matched} matched + ${added} added (no crop) = ${matched + added} record(s).`);
@@ -683,7 +699,9 @@ def main(argv: Optional[list] = None) -> int:
                     help="override column count (default: auto from master_directories.csv)")
     ap.add_argument("--master", default=str(Path(__file__).resolve().parent / "master_directories.csv"),
                     help="master CSV used to auto-resolve column_count / year")
-    ap.add_argument("--dialect", default="nyc", help="context.dialect (default nyc)")
+    ap.add_argument("--publisher", default="",
+                    help="context.publisher tag (default: auto from master_directories.csv "
+                         "publisher column; the editor header shows/overrides it)")
     ap.add_argument("--min-conf", type=float, default=0.0,
                     help="drop OCR lines below this confidence")
     ap.add_argument("--max-lines", type=int, default=0,
@@ -694,7 +712,11 @@ def main(argv: Optional[list] = None) -> int:
     pages = _collect(args.dirs, args.cols, args.min_conf, master, args.max_lines)
     if not pages:
         return "no OCR'd pages found — run run_surya_ocr.py on the dir(s) first."
-    Path(args.out).write_text(build_html(pages, args.dialect), encoding="utf-8")
+    publisher = args.publisher or next((p["publisher"] for p in pages if p.get("publisher")), "")
+    if not publisher:
+        print("  ! no publisher resolved — fill the editor's publisher box before exporting",
+              file=sys.stderr)
+    Path(args.out).write_text(build_html(pages, publisher), encoding="utf-8")
     total = sum(len(p["rows"]) for p in pages)
     print(f"\nwrote {args.out}  ({len(pages)} pages, {total} candidate lines)", file=sys.stderr)
     print("Open it in a browser, correct fields, click Export.", file=sys.stderr)

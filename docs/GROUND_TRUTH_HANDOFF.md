@@ -16,8 +16,9 @@ volume's print conventions (abbreviations key, column count, marks).
 
 **Union schema (8 fields):** `name · is_business · spouse_name · race_designation · occupation_role
 · employer · address · home_address`. Export format (consumed directly by `eval/evaluate.py` as
-`--gold`): one JSON line `{raw_line, context:{dialect,alphabetical_range,directory_year,image},
-record:{…8 fields}}`.
+`--gold`): one JSON line `{raw_line, context:{publisher,alphabetical_range,directory_year,image},
+record:{…8 fields}}`. (`context.dialect` retired 2026-07-19: every set now tags the volume's real
+publisher — the prompt tag is `[publisher=trow; year=1913/14]`; the validator errors on `dialect`.)
 
 ## The toolchain (`data_prep/`)
 

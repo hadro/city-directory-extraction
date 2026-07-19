@@ -193,7 +193,7 @@ def iter_examples(lines, surname0: str, forced: bool, year: str, source: str):
             continue
         yield {
             "raw_line": _norm(ln),
-            "context": {"dialect": "minneapolis", "alphabetical_range": "",
+            "context": {"publisher": "davison", "alphabetical_range": "",
                         "directory_year": year, "source": source},
             "record": rec,
         }

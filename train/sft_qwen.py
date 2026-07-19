@@ -79,7 +79,7 @@ def to_yaml(record):
 
 def user_prompt(ex: dict) -> str:
     ctx = ex.get("context", {})
-    tag = f"[dialect={ctx.get('dialect', '?')}; year={ctx.get('directory_year', '?')}]"
+    tag = f"[publisher={ctx.get('publisher', '?')}; year={ctx.get('directory_year', '?')}]"
     return f"{tag} {ex['raw_line']}"
 
 

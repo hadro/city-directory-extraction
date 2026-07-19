@@ -63,7 +63,7 @@ def system_for(target: str) -> str:
 
 def user_prompt(ex: dict) -> str:
     ctx = ex.get("context", {})
-    tag = f"[dialect={ctx.get('dialect', '?')}; year={ctx.get('directory_year', '?')}]"
+    tag = f"[publisher={ctx.get('publisher', '?')}; year={ctx.get('directory_year', '?')}]"
     return f"{tag} {ex['raw_line']}"
 
 
@@ -168,8 +168,8 @@ def push_preds(local_path: str, dest: str) -> None:
 # --- offline self-test: prompt + parse, NO model / heavy deps ---------------------------------
 def _self_test() -> int:
     assert system_for("pipe") == SYSTEM_PIPE and system_for("yaml") == SYSTEM_YAML
-    up = user_prompt({"raw_line": "Smith John, clk, 12 Pine", "context": {"dialect": "nyc", "directory_year": "1860"}})
-    assert up == "[dialect=nyc; year=1860] Smith John, clk, 12 Pine", up
+    up = user_prompt({"raw_line": "Smith John, clk, 12 Pine", "context": {"publisher": "trow", "directory_year": "1860"}})
+    assert up == "[publisher=trow; year=1860] Smith John, clk, 12 Pine", up
     row = "Smith John|False|||clk||12 Pine|"
     for c in (row, f"```\n{row}\n```", f"sure:\n{row}"):
         got = parse_completion(c, "pipe")

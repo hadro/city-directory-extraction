@@ -132,7 +132,9 @@ def to_record(rec: dict, use_corrected: bool) -> Optional[dict]:
     }
     return {
         "raw_line": complete,
-        "context": {"dialect": "nyc", "alphabetical_range": _alpha_range(name),
+        # publisher: the eval slice is the 1850 file, NYPL uuid 4adf9ec0-317a-0134-03ad-… =
+        # "Doggett's, Manhattan, 1850/51" in master_directories.csv (not Trow — Trow starts 1852/53)
+        "context": {"publisher": "doggett", "alphabetical_range": _alpha_range(name),
                     "directory_year": rec.get("directory_year", "")},
         "record": record,
     }

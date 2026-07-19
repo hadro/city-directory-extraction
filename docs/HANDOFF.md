@@ -164,9 +164,20 @@ one migration — retire `dialect`), NYC employer patterns (conv #7/#13), `*` ra
 once tag exists), census given-name pool (Philenah→Philip), `--mix-weight 0.75`. Then regenerate
 (`--stats` gate), retrain (rtx-pro-6000 ~$7 or Modal free — see TRAINING_OPTIONS.md), re-score
 panel + primed Gemini. Target: address 0.54→0.70+, panel aggregate within reach of the primed bar.
-**Done this session (2026-07-19): validator conv-#8 check + fused-marker sweep + polk1933bk
-page-verified fixes** (see the reconciliation section above); corrected gold backed up via the
-user's Time Machine. NYU = secondary external check only.
+**Done this session (2026-07-19):** (a) validator conv-#8 check + fused-marker sweep + polk1933bk
+page-verified fixes (see the reconciliation section above); corrected gold backed up via the
+user's Time Machine; (b) **the publisher/era tag migration LANDED** — prompt tag is now
+`[publisher=trow; year=1913/14]` in all four builders (sft_qwen, sft_unsloth_smoke, qwen_predict,
+gemini_baseline + a FIELD_GUIDE line), `context.publisher` in the generator (era-consistent
+`_nyc_publisher`; tulsa profile tags `polk`; split years now slash-form matching gold), all 23
+`data/*_eval.jsonl` migrated (panel by volume; tulsa→polk, nyu→**doggett** — the 1850 file's NYPL
+uuid matches Doggett's 1850/51 in the master, not Trow; lain→lain, minneapolis→davison,
+ftd→bottin), validate_gold requires `publisher` + ERRORs on retired `dialect`, make_gold_tool
+auto-resolves publisher from the master CSV, harvest_own `--publisher` is now REQUIRED (no
+default → no more lain-style mislabels). **Caveat:** v1/v2 adapters trained on the old
+`[dialect=…]` tag — never re-predict them against migrated gold (their existing preds files
+remain the canonical v1/v2 numbers); v3 onward uses the new tag. NYU = secondary external
+check only.
 
 ## Full-panel scores — first run (2026-06-29)
 

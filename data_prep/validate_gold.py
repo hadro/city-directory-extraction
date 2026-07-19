@@ -20,7 +20,7 @@ ERRORS
   * empty `name` (a gold line must have a name)
   * a field contains "|"  -> breaks the pipe serialization evaluate.py scores on
   * raw_line / any field contains a newline
-  * context missing dialect|directory_year|image
+  * context missing publisher|directory_year|image
   * home_address starts with a residence marker (h/h./bds/b, spaced or fused "h502")
     -> conv #8: home_address stores the BARE address; the marker is the separator
 WARNINGS
@@ -28,7 +28,7 @@ WARNINGS
   * occupation_role that looks like an address (has "h /r /bds " or a street number)
   * address with no digit AND no street/residence token (likely mis-split)
   * is_business=False but name looks like a firm (& Co / Bros / Mfg / Works / Sons)
-  * directory_year not a 4-digit year; dialect not in the known set
+  * directory_year not a 4-digit year; publisher not in the known set
   * duplicate (image, raw_line) rows
   * image file not found under --images root (if given)
   * year/​col mismatch vs master_directories.csv (if --master resolvable via image)
@@ -50,7 +50,11 @@ from pathlib import Path
 
 FIELDS = ["name", "is_business", "spouse_name", "race_designation",
           "occupation_role", "employer", "address", "home_address"]
-KNOWN_DIALECTS = {"nyc", "tulsa", "minneapolis", "ftd-fr", "nyu"}
+# context.publisher vocabulary (2026-07-19 migration; `dialect` retired): the panel volumes'
+# publishers + the generator's era table + the external sets' attributions.
+KNOWN_PUBLISHERS = {"franks", "duncan", "longworth", "mercein", "ogden", "doggett", "rode",
+                    "trow", "hearne", "hopehenderson", "smith", "lain", "boyd", "upington",
+                    "polk", "mb", "davison", "bottin"}
 
 # residence/street tokens common in NYC-style directories (h=house, r=resides, bds=boards…);
 # include full street-type words, hyphenated forms (Bowery-lane), and ditto (do = number repeated)
@@ -140,15 +144,17 @@ def check_record(rec: dict, raw: str, where: str, rep: Report):
 
 
 def check_context(ctx: dict, where: str, rep: Report):
-    for k in ("dialect", "directory_year", "image"):
+    for k in ("publisher", "directory_year", "image"):
         if k not in ctx:
             rep.err(where, f"context missing {k!r}")
+    if "dialect" in ctx:
+        rep.err(where, "context has retired key 'dialect' (migrate to 'publisher')")
     dy = str(ctx.get("directory_year", ""))
     if dy and not re.search(r"\b(1[789]\d\d|20\d\d)\b", dy):
         rep.warn(where, f"directory_year not a 4-digit year: {dy!r}")
-    dia = ctx.get("dialect", "")
-    if dia and dia not in KNOWN_DIALECTS:
-        rep.warn(where, f"unusual dialect {dia!r} (known: {sorted(KNOWN_DIALECTS)})")
+    pub = ctx.get("publisher", "")
+    if pub and pub not in KNOWN_PUBLISHERS:
+        rep.warn(where, f"unusual publisher {pub!r} (known: {sorted(KNOWN_PUBLISHERS)})")
 
 
 def load_master(path: Path):

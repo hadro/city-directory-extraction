@@ -67,6 +67,9 @@ SYSTEM_PIPE = (
 # taught the stale NYU-era rules (notably "drop the NYC h. label"), penalizing Gemini on the panel.
 FIELD_GUIDE = (
     "Field guide:\n"
+    "- The line starts with a metadata prefix like '[publisher=trow; year=1913/14]' naming the "
+    "directory volume it came from. Use it to interpret the volume's conventions; never copy it "
+    "into any field.\n"
     "- name: person or business name as printed (surname-first). A leading surname-repeat "
     "ditto mark stays in name verbatim ('-Michl', '\" Jno H') -- do NOT resolve it to the "
     "surname above. ALL-CAPS entries can be persons, not firms.\n"
@@ -102,7 +105,7 @@ def system_for(target: str) -> str:
 def user_prompt(ex: dict) -> str:
     """Verbatim from train/sft_qwen.py: page-level context is fed in, not predicted."""
     ctx = ex.get("context", {})
-    tag = f"[dialect={ctx.get('dialect', '?')}; year={ctx.get('directory_year', '?')}]"
+    tag = f"[publisher={ctx.get('publisher', '?')}; year={ctx.get('directory_year', '?')}]"
     return f"{tag} {ex['raw_line']}"
 
 
@@ -145,8 +148,8 @@ def predict(client, model, examples, target, sleep, retries=4):
 # --- offline self-test: prompt construction + response parsing, NO API / heavy deps -----------
 def _self_test() -> int:
     up = user_prompt({"raw_line": "Smith John, clk, 12 Pine, h 34 Elm",
-                      "context": {"dialect": "nyc", "directory_year": "1860"}})
-    assert up == "[dialect=nyc; year=1860] Smith John, clk, 12 Pine, h 34 Elm", up
+                      "context": {"publisher": "trow", "directory_year": "1860"}})
+    assert up == "[publisher=trow; year=1860] Smith John, clk, 12 Pine, h 34 Elm", up
     row = "Smith John|False|||clk||12 Pine|34 Elm"
     cases = [row, f"```\n{row}\n```", f"Here is the row:\n{row}", f"```text\n{row}```"]
     for c in cases:

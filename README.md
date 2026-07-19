@@ -181,9 +181,11 @@ python3 data_prep/synth_persons.py --n 8 --preview --profile nyc    # or --profi
 python3 data_prep/synth_persons.py --n 100000 --out data/synth_train.jsonl --seed 13
 ```
 
-Each JSONL row is `{raw_line, context:{dialect, alphabetical_range, directory_year},
+Each JSONL row is `{raw_line, context:{publisher, alphabetical_range, directory_year},
 record:{…8 fields…}}`. `raw_line` carries optional OCR noise (the model input); `record` is the
-clean target; `context` is page-level metadata fed in the prompt rather than predicted. Names
+clean target; `context` is page-level metadata fed in the prompt rather than predicted — the
+prompt tag is `[publisher=trow; year=1913/14]` (`dialect` retired 2026-07-19; the tulsa profile
+tags `publisher=polk`, the same Polk as late-NYC volumes). Names
 draw from 40k census surnames + harvested real-name pools (the original inline ~54-surname list
 was the documented root cause of the model regularizing unseen surnames).
 

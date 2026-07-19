@@ -69,7 +69,7 @@ def to_record(e: dict, ocr: str) -> Optional[dict]:
     }
     return {
         "raw_line": _norm(text),
-        "context": {"dialect": "ftd-fr", "alphabetical_range": "",
+        "context": {"publisher": "bottin", "alphabetical_range": "",
                     "directory_year": str(e.get("book", "")), "page": e.get("page")},
         "record": record,
     }

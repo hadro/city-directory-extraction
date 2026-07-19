@@ -62,18 +62,27 @@ SYSTEM_PIPE = (
 )
 
 # Union-schema conventions the SFT model learns from training data; given to Gemini in-prompt so
-# the comparison is of capability, not of who-knows-the-schema. Drawn from synth_persons.py.
+# the comparison is of capability, not of who-knows-the-schema. Updated 2026-07-19 to the CURRENT
+# gold contract (GROUND_TRUTH_HANDOFF conventions + synth_persons.py v2) -- the earlier guide
+# taught the stale NYU-era rules (notably "drop the NYC h. label"), penalizing Gemini on the panel.
 FIELD_GUIDE = (
     "Field guide:\n"
-    "- name: person or business name as printed (surname-first for NYC).\n"
-    "- is_business: True if the entry is a firm/company rather than a person.\n"
-    "- spouse_name: e.g. 'wid John' for a widow; else empty.\n"
-    "- race_designation: period marker as printed ('(c)', \"col'd\"); else empty.\n"
-    "- occupation_role: occupation/trade as printed (abbreviations kept).\n"
-    "- employer: employer/company (Tulsa); empty for NYC, which folds it into occupation.\n"
-    "- address: the primary printed address, verbatim (keep a Tulsa r/b/rms prefix; "
-    "drop the NYC 'h.' label).\n"
-    "- home_address: a SEPARATE home address only when the line lists two (the NYC 'h.' home)."
+    "- name: person or business name as printed (surname-first). A leading surname-repeat "
+    "ditto mark stays in name verbatim ('-Michl', '\" Jno H') -- do NOT resolve it to the "
+    "surname above. ALL-CAPS entries can be persons, not firms.\n"
+    "- is_business: True only when the NAME is a firm ('& Co', 'Bros'); never from typography.\n"
+    "- spouse_name: the widow/wife marker as printed ('wid John', 'wid. John', 'widow of John'). "
+    "'widow Ann' with no 'of' means Ann is her OWN name (put it in name); spouse_name keeps "
+    "the bare marker.\n"
+    "- race_designation: period marker as printed ('(c)', \"col'd\", \"(co'd)\"); else empty.\n"
+    "- occupation_role: occupation/trade as printed (abbreviations and periods kept; a "
+    "work-borough tag like '(Mhn)' stays here).\n"
+    "- employer: the institution/company worked at/of, when the line names one (drop the "
+    "connecting 'of'); else empty.\n"
+    "- address: the printed address verbatim, INCLUDING a leading residency marker "
+    "(h/r/b/bds/rms/rear) when it is the line's only address; keep 'do'/'do.' dittos as printed.\n"
+    "- home_address: ONLY a second, separate 'h.'-marked home when the line lists two "
+    "addresses (that marker itself is dropped)."
 )
 # Verbatim from train/sft_qwen.py. YAML names every key, so a model that drops an *empty* field
 # can't column-shift the rest -- which is exactly how the pipe format loses ~half of Gemini's

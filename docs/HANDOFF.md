@@ -107,6 +107,22 @@ a qwen-specific gap. Honest caveat for the writeup: our model *trained on* the l
 contract while Gemini is zero-shot on it, so part of the gap is contract knowledge — which is
 also the point of the fine-tune, and matches how each would actually run in the pipeline.
 
+**PRIMED re-run (same day) — the caveat above was load-bearing; the headline flips.** The old
+FIELD_GUIDE taught Gemini the stale NYU-era contract (worst: "drop the NYC 'h.' label", no ditto
+rule). Updated it to the current gold contract (`gemini_baseline.py`, label
+`gemini-3.1-flash-lite-primed`) and re-ran: **macro 0.691 / micro 0.821 / EM 48.5% — primed
+Gemini retakes the panel lead** (14/18 volumes) over qwen-v2 (0.656/0.754/38.6%). So the 17/18
+result was substantially a stale-prompt artifact; **cite only the primed bar**. The
+contract-parity field split is the real story: **qwen-v2 still wins name (0.76 vs 0.72) and
+spouse (0.90 vs 0.85)** and the earliest volumes (franks/duncan/hearne/boyd); **primed Gemini
+wins address 0.77-vs-0.54** (the info IS in the lines — qwen's address gap is real capability,
+now the #1 model gap), occupation (0.94 vs 0.82), employer (0.58 vs 0.51). In-prompt ditto
+compliance largely works zero-shot (lain1876 EM 6→76%; trow1913 0→53%) and primed Gemini even
+cracks the late-Polk core best (polk1917 EM 12%, macro 0.518). home_address ≈0.00 for ALL
+three systems — the gold marker wobble reconfirmed a third way; fix the gold first. Roadmap
+read: (1) gold home_address reconciliation, (2) address realism is the next synth target
+(late-Polk especially), (3) name/verbatim-copying is the fine-tune's durable edge.
+
 ## Full-panel scores — first run (2026-06-29)
 
 First time the `qwen-0.8b-yaml` adapter (`hadro/city-dir-08b-yaml`) was scored across **all 18

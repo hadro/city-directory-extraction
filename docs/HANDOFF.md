@@ -1,6 +1,6 @@
 # Handoff — city-directory-extraction
 
-> Working state as of 2026-06-18. Read this first if resuming in a new session.
+> Working state as of 2026-07-19. Read this first if resuming in a new session.
 > Companion docs: [plan.md](plan.md) (full rationale/roadmap), [../README.md](../README.md) (how-to).
 
 ## TL;DR — where we are right now
@@ -48,6 +48,51 @@ from the actual directories (was 54). Remaining: (a) your other agent expands `m
 (b) run the page-sampler → pipeline OCR/extract → `harvest_names.py` to fold real names in;
 (c) add a publisher/era context tag, regenerate, retrain (`rtx-pro-6000` b64 + `--packing` +
 `exclude_modules=["visual"]`, ~$6), re-run the eval panel. See §"Next steps".
+
+## Full-panel scores — v2 run (2026-07-19): the coverage fixes landed
+
+**`hadro/city-dir-08b-yaml-v2`** = 0.8B / 100k **regenerated** synth (era-gated NYC features
+measured from the gold panel + style cards — dittos, marker-kept sole addresses, widow variety,
+abbreviation periods, surname commas, 1920s addresses, ALL-CAPS persons; commit `69826ac`) /
+yaml / 3 epochs / batch 64 / **unpacked** (config-identical to v1 so deltas are attributable to
+the data) / rtx-pro-6000 / **$7.23, 2.63 h** (`exclude_modules` verified — 0 visual adapters,
+the adapter is finally text-only). Scored panel + externals locally on the M2 (~2.5 h, label
+`qwen-0.8b-yaml-v2`; per-set preds `data/preds_v2_*.txt`; v1-matched row counts).
+
+**Panel-wide field F1 (weighted by gold non-empty n), v1 → v2:**
+
+| field | v1 | v2 | Δ |
+|---|---|---|---|
+| name (n=1169) | 0.45 | **0.76** | **+0.32** |
+| spouse_name (162) | 0.63 | **0.90** | +0.27 |
+| address (1166) | 0.43 | 0.54 | +0.11 |
+| occupation_role (851) | 0.77 | 0.82 | +0.04 |
+| home_address (164) | 0.00 | 0.00 | gold wobble — see below |
+
+- **Trow dittos SOLVED** (the predicted #1 lever): trow1913 name 0.02→**0.90**, trow1907
+  0.19→**0.90** (EM 6→41%). Whole-row EM rose on 14/18 volumes (duncan1794 0→66%, mercein1820
+  18→70%, boyd1890 47→79%, hope&henderson 2→45%).
+- **Externals:** lain 0.675→**0.849** macro (the original name-gap poster child), tulsa
+  0.791→0.851 (**no** NYC-focus regression), minneapolis 0.592→0.611, ftd ~flat. **NYU micro
+  0.755→0.827, EM 26→44%** (Gemini bar: 0.910 / 70% — gap roughly halved); NYU macro
+  0.760→0.659 — a convention conflict, not a capability loss (below).
+
+**Three leftovers, precisely diagnosed:**
+1. **home_address 0.00 = gold-side convention wobble, NOT a model failure.** NYU gold strips
+   the `h` marker (model matches it → 0.69 there); panel gold mostly KEEPS it → every panel row
+   mismatches. Reconcile via `validate_gold` + a convention decision **before** the next
+   retrain — it's a free lift on n=164.
+2. **NYU spouse 0.60→0.00 = verbatim vs normalized; v2 is arguably right.** Raw `widow of
+   Joseph` → v2 copies verbatim (panel contract conv #1/#9); NYU's labels normalize to `wid
+   Joseph`. v1 only "won" because its generator could emit nothing but `wid X`. Same class as
+   the employer conflict; fix = publisher/context tag or a scoring-time translation for the
+   NYU set. This (n=38) plus race (n=6) is the entire NYU macro drop.
+3. **Dense late-Polk is the remaining hard core:** polk1917/1925 + queens1933 at name ≤0.37,
+   address ≤0.13, EM 0% — quote-ditto training helped only marginally; the terse,
+   abbreviation-dense, employer-rich style is Wave-1 publisher-parameterization territory.
+
+Also observed: rare **given** names still regularize (`Philenah`→`Philip`) — give the
+given-name pool the census treatment next cycle, like the surname fix.
 
 ## Full-panel scores — first run (2026-06-29)
 

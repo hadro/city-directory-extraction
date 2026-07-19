@@ -36,7 +36,8 @@ Per-dialect field use
          gold conv #8). race_designation "col'd"/"colored"/"col"/"(co'd)" (rare),
          widow forms vary by era ("widow of John" early -> "wid. John" late; "widow Ann"
          with no "of" = her OWN name -> name, bare marker -> spouse_name); employer
-         empty (NYC lumps employer into the occupation list).
+         publisher-keyed (polk-late/hearne-mid emit one; most other NYC rows lump the
+         employer into the occupation list -> empty).
 
 NYC era gating (features measured from the 18-volume gold panel + style cards)
 ------------------------------------------------------------------------------
@@ -50,11 +51,24 @@ NYC era gating (features measured from the 18-volume gold panel + style cards)
     kept verbatim in the record (conv #1).
   * raw-line surname comma "Graves, Benjamin, ..." (early-heavy); record drops it (conv #3).
   * early: "corner of X and Y" spelled out, "71 Dey-street" hyphenated suffixes,
-    "27 Ann do." street dittos. late: hyphenated outer-borough house nos ("24-12") +
-    neighborhood codes (LIC/JH/WNB/...), "clk (Mhn)" commuter tags kept in
-    occupation_role (conv #17), Upington space-delimited rendering, "Edw'd" contractions.
-  * NO '*' race marker yet -- it flips meaning per volume (Ogden=colored vs
-    Hope&Henderson=Eastern District); needs the publisher context tag first.
+    ABBREVIATED street names ("19 Wm. street", "16 Wat.st.", "36 Han. squ." -- franks1786),
+    "27 Ann do." street dittos (dominant for publisher=duncan, incl. bare "Mott do.").
+    late: hyphenated outer-borough house nos ("24-12") + neighborhoods coded AND spelled
+    (LIC/JH/Ozone Pk/Maspeth), "clk (Mhn)" commuter tags in occupation_role (conv #17,
+    polk/mb 1931+ only), Upington space-delimited rendering, "Edw'd" contractions.
+  * DENSE volumes (trow/polk 1905+, mb): fused marker+number ("r205 W141st", "h2378
+    Bathgate av", cap "H804") in sole addresses AND raw-side home markers ("h502 W149th"
+    with the record home BARE, conv #8); fused direction+ordinal ("W141st" ~3/4, spaced
+    "E 26th" else); room codes ("309 Bway R801", "R 309", bare "1 Bway 203"); "215, 4th av"
+    number-comma quirk; " Bkn" cross-borough tags; out-of-town values ("h Schenectady N Y");
+    homes get "apt 35A", never office R-codes. Publisher-keyed per the page-verified
+    fusion differences (polk1933bk fuses markers but spaces ordinals).
+  * '*' race marker is publisher-keyed (the reason the tag exists): ogden -> race "*"
+    (star fused to the name in raw); hopehenderson -> raw-only star, record DROPS it
+    (Eastern District, conv #16) and colored prints col'd.
+  * employer (conv #7/#13): polk-late "v-p Genl Electric Co" / "tchr P S" + principal
+    "(Emmons & Roberts)" paren-firms; hearne-mid "foreman white lead factory" /
+    "pastor of 1st Unitarian Church" (raw keeps "of"; employer field drops it).
 
 Why grounded this way (sources):
   * Tulsa residency codes + grid + employer + "(c)": the directory's ABBREVIATIONS page
@@ -130,6 +144,26 @@ GIVEN_CONTRACT = {
     "Edward": "Edw'd", "Daniel": "Dan'l", "Andrew": "And'w", "Henry": "H'y",
     "Samuel": "Sam'l", "Margaret": "Marg't", "Catherine": "Cath",
 }
+# rare period given names (the census tail): the model must learn to COPY an unfamiliar
+# given name verbatim, not regularise it to a common one — the measured error class
+# ("Philenah" -> "Philip"). Same fix as the surname pool, inline (given names are a
+# closed-ish period vocabulary; no fetch needed).
+RARE_GIVEN_M = [
+    "Zophar", "Ichabod", "Ezekiel", "Barzillai", "Obadiah", "Zebulon", "Jehiel",
+    "Alonzo", "Erastus", "Hezekiah", "Jabez", "Lemuel", "Seymour", "Thaddeus", "Philo",
+    "Rensselaer", "Gershom", "Elnathan", "Increase", "Epaphras", "Zenas", "Selah",
+    "Uriah", "Asahel", "Eliakim", "Japhet", "Mordecai", "Shadrach", "Cephas", "Lorenzo",
+    "Corydon", "Osgood", "Leander", "Adoniram", "Eliphalet", "Simeon", "Abijah",
+    "Zadock", "Ephraim", "Amasa", "Elihu", "Josiah", "Nehemiah", "Othniel", "Peleg",
+]
+RARE_GIVEN_F = [
+    "Philenah", "Thankful", "Mehitable", "Keziah", "Zilpah", "Achsah", "Lodema",
+    "Experience", "Temperance", "Jerusha", "Huldah", "Tryphena", "Sophronia", "Philura",
+    "Roxana", "Lovina", "Almira", "Zeruiah", "Charity", "Mercy", "Patience", "Freelove",
+    "Waitstill", "Desire", "Electa", "Orpha", "Vashti", "Drusilla", "Barbary", "Dorcas",
+    "Hepzibah", "Lavinia", "Cynthia", "Arletta", "Manerva", "Philinda", "Submit",
+    "Deliverance", "Parnel", "Asenath", "Bathsheba", "Content", "Hulda", "Sylvia",
+]
 
 # Surname pool = census variety (data_prep/fetch_names.py) + real names harvested from the target
 # directories (data_prep/harvest_names.py), merged:
@@ -189,6 +223,8 @@ def _ordinal(n: int) -> str:
 
 
 def _given(rng, female: bool, abbrev_p: float = 0.25) -> str:
+    if rng.random() < 0.05:                           # census-tail names: copy, don't regularise
+        return rng.choice(RARE_GIVEN_F if female else RARE_GIVEN_M)
     g = rng.choice(GIVEN_F if female else GIVEN_M)
     if rng.random() < abbrev_p and g in GIVEN_ABBREV:
         g = GIVEN_ABBREV[g]
@@ -384,8 +420,55 @@ NYC_OCC_ABBREV = {
     "clerk": "clk", "laborer": "lab", "carpenter": "carp", "machinist": "mach",
     "merchant": "mer", "bookkeeper": "bkpr", "engineer": "eng",
 }
-# 1920s/30s outer-borough neighborhood codes (Polk Queens/SI; kept verbatim in address)
-NYC_NBHD = ["LIC", "JH", "RH", "Rdgwd", "Flush", "WNB", "Stap", "Tomp", "NB"]
+# 1920s/30s outer-borough neighborhoods (Polk Queens/SI; kept verbatim in address):
+# coded AND spelled forms both appear on the queens1933 gold pages
+NYC_NBHD = ["LIC", "JH", "RH", "Rdgwd", "Flush", "WNB", "Stap", "Tomp", "NB",
+            "Maspeth", "Ozone Pk", "S Ozone Pk", "Howard Bch", "Jam", "Cor", "Glen",
+            "Whitestone", "Corona", "Woodhaven"]
+# dense late Manhattan/Bronx streets (trow1907/13 + polk1917/25 gold pages): heavy
+# abbreviation (Bway, Washn pl, Gd blvd, Lex av) is the volume style, kept verbatim
+NYC_LATE_STREETS = [
+    "Bway", "Amsterdam av", "Madison av", "Park av", "Columbus av", "Lexington av",
+    "Lex av", "West End av", "W End av", "Riverside dr", "St Marks pl", "St Marks av",
+    "Convent av", "Bathgate av", "Webster av", "Anderson av", "Walton av", "Theriot av",
+    "Pinehurst av", "Morningside dr", "Shakespeare av", "Wythe pl", "Washn pl",
+    "Gd blvd", "Nassau", "Barclay", "Bowery", "Stanton", "Norfolk", "Simpson",
+    "Monterey av", "Halsey", "Union av", "Prospect av", "Tremont av", "Ft Washn av",
+]
+# commuter home/work places printed as the whole address value ("h Schenectady N Y");
+# marker stays SPACED (no house number to fuse with) and is kept in a sole address
+NYC_OUT_OF_TOWN = [
+    "Schenectady N Y", "New Milford Conn", "E Orange", "Perth Amboy N J", "Newark N J",
+    "Yonkers", "Jersey City N J", "Stamford Conn", "White Plains", "Mt Vernon",
+    "Nyack N Y", "Tarrytown N Y", "Hoboken N J", "Elizabeth N J", "Greenwich Conn",
+]
+# 1780s-90s street-name contractions (franks1786 gold: Wat.st., Wm. street, Q. street,
+# Han. squ.) — the printer abbreviated NAMES, not just suffixes
+NYC_EARLY_ST_ABBREV = {
+    "Water": "Wat.", "William": "Wm.", "George": "Geo.", "Queen": "Q.", "Hanover": "Han.",
+    "Broad": "Br.", "Cherry": "Cher.", "Greenwich": "Greenw.", "Chatham": "Chat.",
+}
+NYC_EARLY_STREETS = ["Water", "Wall", "Cherry", "Broad", "Queen", "William", "George",
+                     "Hanover", "Pearl", "Dock", "Smith", "King", "Beekman", "Maiden",
+                     "Nassau", "John", "Fair", "Ann", "Chatham", "Greenwich"]
+# NYC employer signal (conv #7/#13), measured from the gold: polk1917-style late columns
+# ("v-p Genl Electric Co", "tchr P S", principal "(Emmons & Roberts)") + hearne1852-style
+# mid institutions ("foreman white lead factory", "pastor of 1st Unitarian Church")
+NYC_EMPLOYERS_LATE = [
+    "Genl Electric Co", "Thos A Edison Inc", "N Y Tel Co", "Con Gas Co",
+    "Met Life Ins Co", "N Y Edison Co", "Am Ry Ex Co", "Adams Ex Co", "U S Rubber Co",
+    "Standard Oil Co", "Postal Tel Cable Co", "Western Union Tel Co", "Nat City Bank",
+    "Corn Ex Bank", "Equitable Life Assur Soc", "P S", "B'way Sav Bank",
+    "Interboro R T Co", "N Y C R R", "Erie R R", "Am Sug Ref Co", "Otis Elev Co",
+    "Singer Mnfg Co", "Public Library", "Dept Pub Welfare", "Bd of Educ",
+]
+NYC_EMP_OCC_LATE = ["clk", "tchr", "v-p", "pres", "sec", "treas", "mgr", "supt", "eng",
+                    "insp", "bkpr", "com mer", "asst mgr", "slsmn", "recording expert"]
+NYC_CHURCHES = ["1st Unitarian Church", "2d Presb Church", "St Anns Church",
+                "Plymouth Church", "St Pauls M E Church", "1st Baptist Church"]
+NYC_WORKS_MID = ["white lead factory", "sugar refinery", "Atlantic dock", "Navy Yard",
+                 "Fulton market", "glass works", "iron foundry", "rope walk",
+                 "distillery", "gas works", "Court House", "Custom House"]
 
 
 def _nyc_street(rng) -> str:
@@ -402,9 +485,75 @@ def _nyc_street(rng) -> str:
     return f"{name}{(' ' + stype) if stype else ''}".strip()
 
 
-def _nyc_address(rng, era: str = "mid", ynum: int = 0) -> str:
-    # forms + abbreviations confirmed against real Hearne's Brooklyn 1852 OCR + style cards
+def _nyc_street_dense(rng) -> str:
+    """Dense late Manhattan/Bronx street forms (trow1907/13 + polk1917/25 gold):
+    direction+ordinal fused ~3/4 of the time (W141st vs W 141st), lettered avenues
+    (Av A / fused AvA), and heavily abbreviated named streets — kept verbatim."""
     roll = rng.random()
+    if roll < 0.42:
+        d, o = rng.choice("WE"), _ordinal(rng.randint(1, 180))
+        return f"{d}{o}" if rng.random() < 0.75 else f"{d} {o}"
+    if roll < 0.50:
+        return rng.choice(["Av A", "AvA", "Av B", "Av C", "Av D", "1st av", "2d av",
+                           "3d av", "4th av", "5th av", "7th av", "8th av", "19th av"])
+    return rng.choice(NYC_LATE_STREETS)
+
+
+def _nyc_address_dense(rng, home: bool = False) -> str:
+    num = rng.randint(1, 3600)
+    street = _nyc_street_dense(rng)
+    # Polk quirk: a comma may separate the house number from a NUMERIC street ("215, 4th av")
+    comma = "," if street[0].isdigit() and rng.random() < 0.22 else ""
+    addr = f"{num}{comma} {street}"
+    if home:
+        if rng.random() < 0.06:                        # homes get apartments, not office rooms
+            addr += f" apt {rng.randint(1, 40)}{rng.choice('ABCDEFGH')}"
+        return addr
+    roll = rng.random()
+    if roll < 0.09:
+        addr += f" R{rng.randint(1, 1400)}"            # office/room code, R fused ("309 Bway R801")
+    elif roll < 0.115:
+        addr += f" R {rng.randint(1, 40)}"             # occasionally spaced ("R 309")
+    elif roll < 0.135:
+        addr += f" {rng.randint(2, 1400)}"             # bare room number ("1 Bway 203")
+    if rng.random() < 0.04:
+        addr += " Bkn"                                 # cross-borough tag on the address itself
+    return addr
+
+
+def _nyc_address_early(rng, num: int, publisher: str = "") -> str:
+    """1780s-1810s print forms measured from franks1786/duncan1794 gold: hyphenated
+    AND abbreviated street names ('19 Wm. street', '16 Wat.st.', '36 Han. squ.'),
+    ' do.' street dittos (dominant on Duncan's run-on pages, incl. bare 'Mott do.'),
+    and trailing periods — all verbatim in the record."""
+    street = rng.choice(NYC_EARLY_STREETS)
+    ditto_p = 0.45 if publisher == "duncan" else 0.10
+    roll = rng.random()
+    if roll < ditto_p:                                # "27 Ann do." / bare "Mott do."
+        head = f"{num} {street}" if rng.random() < 0.8 else street
+        return f"{head} do."
+    if roll < ditto_p + 0.16:                         # "71 Dey-street" / "63 Cherry-st."
+        suf = _wchoice(rng, [("-street", 5), ("-st", 2), ("-st.", 2), ("-lane", 1)])
+        tail = "." if not suf.endswith(".") and rng.random() < 0.30 else ""
+        return f"{num} {street}{suf}{tail}"
+    if roll < ditto_p + 0.28:                         # abbreviated street NAME (franks style)
+        ab = NYC_EARLY_ST_ABBREV.get(street, street[:3] + ".")
+        if street == "Hanover":
+            return f"{num} {ab} {rng.choice(['squ.', 'square'])}"
+        form = _wchoice(rng, [(f"{ab} street", 4), (f"{ab}st.", 3), (f"{ab} st.", 2)])
+        return f"{num} {form}"
+    tail = "." if rng.random() < 0.30 else ""
+    return f"{num} {_nyc_street(rng)}{tail}"
+
+
+def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
+                 home: bool = False) -> str:
+    # forms + abbreviations confirmed against real gold pages (Hearne 1852, franks1786,
+    # duncan1794, trow1907/13, polk1917/25, queens1933) + style cards
+    dense = (publisher in ("trow", "polk") and 1900 <= ynum <= 1930) or publisher == "mb"
+    roll = rng.random()
+    if dense and roll < 0.88:
+        return _nyc_address_dense(rng, home=home)
     if roll < 0.05:                                   # rear / foot qualifier
         return f"{rng.choice(['rear', 'ft'])} {rng.randint(1, 600)} {_nyc_street(rng)}"
     if roll < 0.08:                                   # corner ("cor" or single-letter "c")
@@ -419,21 +568,30 @@ def _nyc_address(rng, era: str = "mid", ynum: int = 0) -> str:
         return f"{rng.choice(NYC_STREETS)} {rng.choice(['c', 'n'])} {rng.choice(NYC_STREETS)}"
     num = rng.randint(1, 600)
     if era == "early":
-        if rng.random() < 0.20:                       # hyphenated suffix: "71 Dey-street"
-            return f"{num} {rng.choice(NYC_STREETS)}-{rng.choice(['street', 'lane'])}"
-        if rng.random() < 0.07:                       # street ditto off the row above: "27 Ann do."
-            return f"{num} {rng.choice(NYC_STREETS)} do."
-        return f"{num} {_nyc_street(rng)}"
-    if era == "late" and ynum >= 1915:                # hyphenated nos + nbhd codes are 1920s/30s
-        addr_num = f"{num}-{rng.randint(1, 40)}" if rng.random() < 0.28 else str(num)
-        addr = f"{addr_num} {_nyc_street(rng)}"       # outer-borough hyphenated house nos
-        if rng.random() < 0.30:
+        return _nyc_address_early(rng, num, publisher)
+    if era == "late" and ynum >= 1915:                # hyphenated nos + nbhds are 1920s/30s
+        # Polk outer-borough volumes (Queens/SI/Bklyn 1931+) run hyphenated + neighborhood
+        # heavy (queens1933 style); mid-1910s-20s Manhattan only lightly
+        outer_p = 0.65 if (publisher == "polk" and ynum >= 1931) else 0.24
+        if rng.random() < outer_p:
+            addr_num = f"{num}-{rng.randint(1, 64)}"
+            street = (f"{_ordinal(rng.randint(1, 180))}" + (" av" if rng.random() < 0.45 else "")
+                      ) if rng.random() < 0.55 else _nyc_street(rng)
+            addr = f"{addr_num} {street}"             # bare-ordinal streets: "25-53 47th LIC"
+            if rng.random() < 0.75:
+                addr += f" {rng.choice(NYC_NBHD)}"
+            return addr
+        addr = f"{num} {_nyc_street(rng)}"
+        if rng.random() < 0.25:
             addr += f" {rng.choice(NYC_NBHD)}"
         return addr
     return f"{num} {_nyc_street(rng)}"
 
 
 def _nyc_given(rng, female: bool, era: str) -> str:
+    rare_p = {"early": 0.12, "mid": 0.08, "late": 0.05}[era]
+    if rng.random() < rare_p:                         # heavier early: pre-1850 names are odder
+        return rng.choice(RARE_GIVEN_F if female else RARE_GIVEN_M)
     g = rng.choice(GIVEN_F if female else GIVEN_M)
     if era == "late" and g in GIVEN_CONTRACT and rng.random() < 0.12:
         return GIVEN_CONTRACT[g]                      # Upington-style "Edw'd"
@@ -493,13 +651,15 @@ def _nyc_publisher(rng, ynum: int) -> str:
     if ynum <= 1817:
         return "longworth"
     if ynum <= 1841:                                  # Longworth-era Manhattan + Brooklyn starts
+        # ogden boosted: its '*'=colored is a rare publisher-CONDITIONED behavior the
+        # model can only learn from enough tagged rows (panel volume: ogden1839)
         return _wchoice(rng, [("longworth", 6), ("mercein", 2 if 1818 <= ynum <= 1826 else 0),
-                              ("ogden", 2 if ynum >= 1839 else 0)])
+                              ("ogden", 5 if ynum >= 1838 else 0)])
     if ynum <= 1851:
         return _wchoice(rng, [("doggett", 7), ("rode", 3 if ynum >= 1850 else 0)])
     if ynum <= 1861:                                  # Trow begins 1852; Brooklyn trio
-        return _wchoice(rng, [("trow", 6), ("hearne", 1 if ynum <= 1855 else 0),
-                              ("hopehenderson", 1 if ynum >= 1855 else 0), ("smith", 1)])
+        return _wchoice(rng, [("trow", 6), ("hearne", 2 if ynum <= 1855 else 0),
+                              ("hopehenderson", 2 if ynum >= 1855 else 0), ("smith", 1)])
     if ynum <= 1897:
         return _wchoice(rng, [("trow", 6), ("lain", 3),
                               ("boyd", 1 if 1885 <= ynum <= 1895 else 0)])
@@ -513,6 +673,7 @@ def _nyc_publisher(rng, ynum: int) -> str:
 def make_nyc(rng) -> dict:
     year, era, ynum = _nyc_year_era(rng)
     publisher = _nyc_publisher(rng, ynum)
+    dense = publisher in ("trow", "polk") and ynum >= 1905   # fused-print, employer-rich volumes
 
     if rng.random() < 0.03:                           # occasional business listing
         n = _surname(rng)
@@ -533,17 +694,29 @@ def make_nyc(rng) -> dict:
             "name": name, "is_business": True, "spouse_name": "",
             "race_designation": "", "occupation_role": rng.choice(["merchants", "grocers",
             "tailors", "segars", "liquors", "druggists"]), "employer": "",
-            "address": _nyc_address(rng, era, ynum), "home_address": "",
+            "address": _nyc_address(rng, era, ynum, publisher), "home_address": "",
         }
         return _finish(rng, rec, "nyc", publisher, year, arange=n)
 
     female = rng.random() < 0.28
     widow = female and rng.random() < 0.30            # ~8% of all entries
-    # textual race markers only; the ambiguous '*' waits on the publisher context tag
-    race = ""
-    race_p = 0.015 if (era in ("early", "mid") and ynum >= 1839) else 0.004
-    if rng.random() < race_p:
-        race = _wchoice(rng, [("col'd", 4), ("colored", 2), ("col", 2), ("(co'd)", 2)])
+    # race marks are volume-specific (conv #10) — the publisher tag disambiguates '*':
+    # Ogden 1839 '*' = colored -> race_designation "*" (star stays OFF the name field);
+    # Hope & Henderson '*' = Eastern District (geographic — raw-only, DROPPED from the
+    # record, conv #16) and colored prints as col'd. Elsewhere textual markers.
+    race, star_raw = "", False
+    if publisher == "ogden":
+        if rng.random() < 0.22:                       # real page rate ~11%; boosted for signal
+            race, star_raw = "*", True
+    elif publisher == "hopehenderson":
+        if rng.random() < 0.12:
+            star_raw = True
+        elif rng.random() < 0.012:
+            race = "col'd"
+    else:
+        race_p = 0.015 if (era in ("early", "mid") and ynum >= 1839) else 0.004
+        if rng.random() < race_p:
+            race = _wchoice(rng, [("col'd", 4), ("colored", 2), ("col", 2), ("(co'd)", 2)])
 
     ditto = era != "early" and rng.random() < (0.05 if era == "mid" else 0.14)
     parent_surname = _surname(rng)                    # anchors alphabetical_range for dittos
@@ -573,8 +746,29 @@ def make_nyc(rng) -> dict:
             occ = _wchoice(rng, NYC_OCC)
         if occ and era == "late" and occ in NYC_OCC_ABBREV and rng.random() < 0.5:
             occ = NYC_OCC_ABBREV[occ] + ("." if rng.random() < 0.6 else "")
-    if occ and era == "late" and rng.random() < 0.06:
-        occ += " (Mhn)"                               # commuter work-borough tag (conv #17)
+
+    # NYC employer signal (conv #7/#13) — publisher-keyed, measured from the gold panel
+    employer, paren_firm, emp_of = "", False, False
+    if not widow:
+        if dense and rng.random() < 0.05:             # principal "(Emmons & Roberts)" (conv #13)
+            employer = f"{_surname(rng)} & {rng.choice([_surname(rng), 'Co', 'Bros'])}"
+            paren_firm = True
+            if rng.random() < 0.7:
+                occ = ""                              # usually no trade word on principal rows
+        elif occ and dense and rng.random() < 0.20:   # polk1917-style employer-rich column
+            occ = rng.choice(NYC_EMP_OCC_LATE)
+            employer = (rng.choice(NYC_EMPLOYERS_LATE) if rng.random() < 0.8
+                        else f"{_surname(rng)} & Co")
+        elif occ and era == "mid" and rng.random() < (0.25 if publisher == "hearne" else 0.04):
+            if rng.random() < 0.30:                   # "pastor of 1st Unitarian Church"
+                occ, employer, emp_of = "pastor", rng.choice(NYC_CHURCHES), True
+            else:                                     # "foreman white lead factory"
+                occ = rng.choice(["foreman", "supt", "clk", "eng", "watchman"])
+                employer = rng.choice(NYC_WORKS_MID)
+    if occ and not employer and publisher in ("polk", "mb") and ynum >= 1931 \
+            and rng.random() < 0.18:
+        occ += " (Mhn)"                               # commuter work-borough tag (conv #17) —
+                                                      # outer-borough/M&B volumes only
 
     if ditto:
         name = _nyc_ditto_name(rng, female, era)
@@ -588,21 +782,38 @@ def make_nyc(rng) -> dict:
         name = name.upper()                           # notable PERSON in caps (conv #14: caps != business)
 
     # most NYC entries list ONE address (combined work+home); a minority add an "h." home
-    primary = _nyc_address(rng, era, ynum)
+    primary = _nyc_address(rng, era, ynum, publisher)
     home = ""
     if rng.random() < (0.15 if era == "early" else 0.35):
-        home = "do" if rng.random() < 0.03 else _nyc_address(rng, era, ynum)
+        home = "do" if rng.random() < 0.03 else _nyc_address(rng, era, ynum, publisher, home=True)
+        if dense and home != "do":
+            if rng.random() < 0.05:                   # commuter home out of town
+                home = rng.choice(NYC_OUT_OF_TOWN)
+            elif rng.random() < 0.15 and not home.endswith("Bkn"):
+                home += " Bkn"                        # "h318 Senator Bkn" cross-borough home
     if rng.random() < 0.03:                           # works across the river ("merchant NY h ...")
         primary = "NY" if era == "early" else rng.choice(["NY", "N Y", "N. Y."])
-        home = home or _nyc_address(rng, era, ynum)
-    if not home and rng.random() < (0.10 if era == "early" else 0.30):
-        # sole address KEEPS its residency marker in the record (conv #8: "h 449 Clason av")
-        marker = _wchoice(rng, [("h", 55), ("h.", 15), ("bds", 15), ("r", 8), ("b", 7)])
-        primary = f"{marker} {primary}"
+        home = home or _nyc_address(rng, era, ynum, publisher, home=True)
+    # dense residential volumes mark nearly EVERY sole address (r/h fused); mid-era ~30%
+    sole_marker_p = 0.75 if dense else (0.10 if era == "early" else 0.30)
+    if not home and publisher != "mb" and rng.random() < sole_marker_p:
+        # sole address KEEPS its residency marker in the record (conv #8: "h 449 Clason av");
+        # in dense late Trow/Polk print the marker often FUSES to the house number
+        # ("r205 W141st", "h2378 Bathgate av", cap "H804 W180th") — record verbatim.
+        # (mb1931 prints no residency markers at all — style card.)
+        if dense and rng.random() < 0.10:
+            primary = rng.choice(NYC_OUT_OF_TOWN)     # "h Schenectady N Y" (no number -> spaced)
+        if dense:
+            marker = _wchoice(rng, [("h", 55), ("r", 25), ("H", 8), ("b", 5), ("bds", 7)])
+        else:
+            marker = _wchoice(rng, [("h", 55), ("h.", 15), ("bds", 15), ("r", 8), ("b", 7)])
+        fuse = dense and primary[:1].isdigit() and marker in ("h", "r", "H", "b") \
+            and rng.random() < 0.72
+        primary = f"{marker}{primary}" if fuse else f"{marker} {primary}"
 
     rec = {
         "name": name, "is_business": False, "spouse_name": spouse,
-        "race_designation": race, "occupation_role": occ, "employer": "",
+        "race_designation": race, "occupation_role": occ, "employer": employer,
         "address": primary, "home_address": home,
     }
     hints = {
@@ -610,6 +821,12 @@ def make_nyc(rng) -> dict:
                           rng.random() < {"early": 0.5, "mid": 0.15, "late": 0.04}[era]),
         "widow_own_name": widow_own_name,
         "space_delim": era == "late" and rng.random() < 0.15,
+        # dense-print raw lines fuse the home marker to the house number ("h502 W149th");
+        # the record's home_address stays BARE (conv #8) so the model learns to un-fuse it
+        "fuse_home_marker": dense and rng.random() < 0.70,
+        "paren_firm": paren_firm,                     # raw shows "(Firm & Co)" after the name
+        "emp_of": emp_of,                             # raw keeps the "of" connector (conv #7)
+        "star_prefix": star_raw and not ditto,        # raw shows "*Name ..." (conv #10)
     }
     return _finish(rng, rec, "nyc", publisher, year, arange=parent_surname, hints=hints)
 
@@ -623,15 +840,21 @@ def render_nyc(rng, rec, hints=None) -> str:
     if hints.get("widow_own_name") and rec["spouse_name"] and " " in rec["name"]:
         s, given = rec["name"].split(" ", 1)          # raw: "Gray, widow Abigail"
         head = f"{s}{', ' if rng.random() < 0.6 else ' '}{rec['spouse_name']} {given}"
+    if hints.get("star_prefix"):
+        head = f"*{head}"                             # star fused to the name ("*Simmons Aaron")
     race = rec["race_designation"]
-    if race and not race.startswith("("):
-        head += f" {race}"
+    if race and race != "*" and not race.startswith("("):
+        head += f" {race}"                            # '*' renders as the fused prefix instead
+    if hints.get("paren_firm") and rec["employer"]:
+        head += f" ({rec['employer']})"               # principal (firm) — conv #13
     parts = [head]
     if rec["spouse_name"] and not hints.get("widow_own_name"):
         parts.append(rec["spouse_name"])              # "wid John" / "widow of John"
     occ = rec["occupation_role"]
     if race.startswith("("):
         occ = f"{race} {occ}".strip()                 # Doggett: "Fox Charles, (co'd) seamn, ..."
+    if rec["employer"] and not hints.get("paren_firm"):
+        occ = f"{occ}{' of ' if hints.get('emp_of') else ' '}{rec['employer']}".strip()
     if occ:
         parts.append(occ)
     sep = " " if hints.get("space_delim") else ", "   # Upington 1900s: space-delimited fields
@@ -640,9 +863,13 @@ def render_nyc(rng, rec, hints=None) -> str:
     if rec["address"]:
         line += (" " if (hints.get("space_delim") or rng.random() >= 0.6) else ", ") + rec["address"]
     if rec["home_address"]:                           # home marker varies: h / h. / b / r / bds
-        marker = _wchoice(rng, [("h", 40), ("h.", 28), ("b", 12), ("r", 8), ("bds", 12)])
-        line += (" " if (hints.get("space_delim") or rng.random() >= 0.5) else ", ") + \
-                f"{marker} {rec['home_address']}"
+        if hints.get("fuse_home_marker") and rec["home_address"][:1].isdigit():
+            marker = _wchoice(rng, [("h", 75), ("r", 18), ("H", 7)])
+            joined = f"{marker}{rec['home_address']}"  # fused: "h502 W149th"
+        else:
+            marker = _wchoice(rng, [("h", 40), ("h.", 28), ("b", 12), ("r", 8), ("bds", 12)])
+            joined = f"{marker} {rec['home_address']}"
+        line += (" " if (hints.get("space_delim") or rng.random() >= 0.5) else ", ") + joined
     if rng.random() < 0.55 and not line.endswith("."):
         line += "."
     return line
@@ -670,13 +897,12 @@ def _finish(rng, record: dict, profile: str, publisher: str, year: str,
     }
 
 
-def make_record(rng, profile: str, nyc_weight: float = 0.5) -> dict:
+def make_record(rng, profile: str, nyc_weight: float = 0.75) -> dict:
     if profile == "tulsa":
         return make_tulsa(rng)
     if profile == "nyc":
         return make_nyc(rng)
-    # mix: branch on (1 - nyc_weight) so the default 0.5 keeps the historical RNG
-    # stream byte-identical (tulsa on roll < 0.5)
+    # mix: tulsa on roll < (1 - nyc_weight); default 0.75 NYC-first (cycle three)
     return make_tulsa(rng) if rng.random() < (1.0 - nyc_weight) else make_nyc(rng)
 
 # ======================================================================================
@@ -741,6 +967,10 @@ def to_yaml(record) -> str:
 _NBHD_RE = re.compile(r" (" + "|".join(NYC_NBHD) + r")\b")
 _HOUSE_HYPHEN_RE = re.compile(r"\b\d+-\d+ ")
 _SURNAME_COMMA_RE = re.compile(r"^[A-Z][A-Za-z'-]+,")
+_FUSED_MARKER_RE = re.compile(r"^[hrbH]\d")
+_FUSED_ORD_RE = re.compile(r"\b[WE]\d+(?:st|d|th)\b")
+_ROOM_RE = re.compile(r" R ?\d")
+_EARLY_ABBREV_RE = re.compile(r"\b[A-Z][a-z]{0,5}\.\s?(?:st\.?|street|squ)")
 
 
 def _stats_new() -> dict:
@@ -784,8 +1014,25 @@ def _stats_update(stats: dict, ex: dict) -> None:
     if s in ("widow", "wid."): hit("widow-own-name (bare marker)")
     elif s.startswith(("widow of", "w. of")): hit("widow of X")
     elif s: hit("wid/widow X", example=False)
-    if addr.split() and addr.split()[0].rstrip(".") in ("h", "bds", "r", "b"):
+    if addr.split() and addr.split()[0].rstrip(".") in ("h", "bds", "r", "b", "H"):
         hit("marker kept in sole address")
+    if _FUSED_MARKER_RE.match(addr):
+        hit("fused marker+number (addr)")
+    if _FUSED_ORD_RE.search(addr) or _FUSED_ORD_RE.search(rec["home_address"]):
+        hit("fused W/E ordinal")
+    if _ROOM_RE.search(addr):
+        hit("room code R#")
+    if addr.endswith(" Bkn") or rec["home_address"].endswith(" Bkn"):
+        hit("Bkn cross-borough tag")
+    if (rec["home_address"] in NYC_OUT_OF_TOWN
+            or any(addr.endswith(p) for p in NYC_OUT_OF_TOWN)):
+        hit("out-of-town value")
+    if _EARLY_ABBREV_RE.search(addr):
+        hit("abbrev early street name")
+    if rec["employer"]:
+        hit("employer (paren firm)" if f"({rec['employer']})" in raw else "employer (nyc)")
+    if raw.startswith("*"):
+        hit("race '*' (ogden)" if rec["race_designation"] == "*" else "star dropped (E Dist)")
     if rec["home_address"]: hit("two addresses", example=False)
     if rec["home_address"] == "do": hit("home ditto 'do'")
     if _HOUSE_HYPHEN_RE.search(addr): hit("hyphenated house no", example=False)
@@ -829,10 +1076,10 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--preview", action="store_true")
     ap.add_argument("--stats", action="store_true",
                     help="print a feature-frequency table to stderr after generating")
-    ap.add_argument("--mix-weight", type=float, default=0.5, metavar="P",
-                    help="NYC share when --profile mix (default 0.5; e.g. 0.75 = 75/25 "
-                         "NYC/Tulsa). Tulsa still carries the Polk-style employer/spouse-"
-                         "paren signal the late-NYC gold needs -- rebalance, don't zero it.")
+    ap.add_argument("--mix-weight", type=float, default=0.75, metavar="P",
+                    help="NYC share when --profile mix (default 0.75 -- NYC-first, cycle three; "
+                         "was 0.5 through v2). Tulsa still carries Polk-style spouse-paren + "
+                         "grid-address signal -- rebalance, don't zero it.")
     args = ap.parse_args(argv)
     if not 0.0 <= args.mix_weight <= 1.0:
         ap.error("--mix-weight must be between 0 and 1")

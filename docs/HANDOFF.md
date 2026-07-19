@@ -94,6 +94,19 @@ the adapter is finally text-only). Scored panel + externals locally on the M2 (~
 Also observed: rare **given** names still regularize (`Philenah`→`Philip`) — give the
 given-name pool the census treatment next cycle, like the surname fix.
 
+**Gemini bar on the panel (2026-07-19, first time):** gemini-3.1-flash-lite, same
+lines/schema/prompt, all 18 volumes (preds `data/preds_gemini_*.txt`). **qwen-v2 wins 17/18
+volumes on macro** and every line-weighted aggregate: macro **0.656 vs 0.555**, micro **0.754
+vs 0.695**, whole-row EM **38.6% vs 23.2%**. The NYU story INVERTS on our contract: Gemini's
+EM collapses on convention-heavy volumes it was never told about (boyd 4% vs 79, lain1876 6%
+vs 54, hope&h 2% vs 45 — it resolves dittos/normalizes instead of copying verbatim). Gemini
+still wins occupation_role (0.90 vs 0.82) and the one dense volume doggett1846. Both score
+0.00 on home_address (more evidence the gold marker wobble penalizes everyone — fix the gold)
+and 0.00 race (n=7). Both are EM=0 on the late-Polk core — that floor is task difficulty, not
+a qwen-specific gap. Honest caveat for the writeup: our model *trained on* the labeling
+contract while Gemini is zero-shot on it, so part of the gap is contract knowledge — which is
+also the point of the fine-tune, and matches how each would actually run in the pipeline.
+
 ## Full-panel scores — first run (2026-06-29)
 
 First time the `qwen-0.8b-yaml` adapter (`hadro/city-dir-08b-yaml`) was scored across **all 18

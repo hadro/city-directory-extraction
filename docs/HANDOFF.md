@@ -140,7 +140,20 @@ gap is now content errors on dense fused lines — same root as the address gap.
 validator-clean (0 errors, 11 benign warnings). Gold sets are gitignored — corrected copies in
 `data/` (user keeps Time Machine backups; pre-sweep copies in session scratchpad).
 
-## RESUME HERE — cycle three: address realism + publisher tag (2026-07-19)
+## RESUME HERE — cycle three (2026-07-19): everything before the retrain is DONE
+
+**Cycle-three state:** gold fully reconciled + validator-enforced (`6d3928b`); publisher tag
+migrated end-to-end (`b486a43`); all synth features landed (`1a6e9bf`, `34ba841`); **v3 data
+regenerated** (100k train seed 13 / 1k dev seed 99 / 3k smoke seed 7, mix 0.75, stats gate
+passed — table in the session scratchpad; verbatim audit 0/20k violations; publisher-consistent
+ditto marks 0 bad/100k) and `sft_qwen.py --dry-run` passes on it (0 visual adapters).
+**NEXT = the paid steps:** upload v3 train file to `hadro/city-directory-synth` (version the
+filename, e.g. `synth_train_v3.jsonl`), retrain on rtx-pro-6000 b64 (~$7, config-identical to
+v2 so deltas attribute to data) or Modal free tier (TRAINING_OPTIONS.md), then re-score the
+panel with qwen-v3 AND a fresh primed-Gemini run (the tag changed its prompt). Targets:
+address 0.54→0.70+, home 0.69→0.80+, aggregate vs the primed bar (0.794/0.849/56.8%).
+
+## Original cycle-three worklist (all pre-retrain items complete)
 
 **State:** v2 trained/scored ($7.23); primed-Gemini bar established (0.794/0.849/56.8% vs qwen-v2
 0.736/0.779/44.6% on fully-corrected gold — fused-marker sweep landed 2026-07-19); address

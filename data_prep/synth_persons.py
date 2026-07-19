@@ -616,11 +616,17 @@ def _nyc_name(rng, female: bool, era: str) -> str:
     return f"{surname} {_nyc_given(rng, female, era)}{mid}{suffix}"
 
 
-def _nyc_ditto_name(rng, female: bool, era: str) -> str:
-    """Surname-repeat continuation row: Trow leading '-' (no space), Polk '\" ' (with space)."""
+def _nyc_ditto_name(rng, female: bool, era: str, publisher: str = "") -> str:
+    """Surname-repeat continuation row: Trow leading '-' (no space), Polk '\" ' (with
+    space) — publisher-keyed now that the tag exists (trow1913 vs polk1917 gold)."""
     given = _nyc_given(rng, female, era)
     mid = f" {rng.choice('ABCDEFGHJLMRSTW')}" if rng.random() < 0.45 else ""
-    mark = "-" if (era == "mid" or rng.random() < 0.4) else '" '
+    if publisher == "polk":
+        mark = '" '
+    elif publisher == "trow":
+        mark = "-"
+    else:
+        mark = "-" if (era == "mid" or rng.random() < 0.4) else '" '
     return f"{mark}{given}{mid}"
 
 
@@ -686,8 +692,9 @@ def make_nyc(rng) -> dict:
             name = f"{n} Bros"
         else:
             name = f"{n} & Son"
-        if era == "late" and rng.random() < 0.10:     # Polk-style firm continuation row
-            name = f'" {rng.choice("ABCDEFGHJLMRSTW")} {rng.choice("ABCEFHJLMW")} & Co'
+        if era == "late" and rng.random() < 0.10:     # firm continuation row, mark by publisher
+            mark = "-" if publisher == "trow" else '" '
+            name = f'{mark}{rng.choice("ABCDEFGHJLMRSTW")} {rng.choice("ABCEFHJLMW")} & Co'
         elif rng.random() < 0.30:                     # Doggett/Lain print firms in caps
             name = name.upper()
         rec = {
@@ -771,7 +778,7 @@ def make_nyc(rng) -> dict:
                                                       # outer-borough/M&B volumes only
 
     if ditto:
-        name = _nyc_ditto_name(rng, female, era)
+        name = _nyc_ditto_name(rng, female, era, publisher)
     elif widow_own_name:
         name = f"{parent_surname} {_nyc_given(rng, True, era)}"
     else:

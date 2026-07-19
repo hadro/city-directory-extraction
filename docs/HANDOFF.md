@@ -234,7 +234,7 @@ examples, l4x1, batch 8, 1 epoch — compare `train_runtime` (baseline = stock T
 ## HF Jobs workflow & gotchas
 
 Jobs work on account **`hadro`** (user has ~$5 PAYG credits; it ran despite docs implying Pro-only).
-- Launch: `hf jobs uv run --flavor <f> --timeout <t> --secrets HF_TOKEN=$(hf auth token) <local_script.py> <args>`
+- Launch: `hf jobs uv run --flavor <f> --timeout <t> --secrets HF_TOKEN <local_script.py> <args>`
   — uploads the LOCAL script and installs its PEP-723 deps via uv. (So local edits take effect on re-run.)
 - **Jobs are ASYNC** — the command returns immediately. You MUST wait for training to finish
   (`done -> <repo>`) before evaluating, or the eval 404s on `adapter_config.json`. Use
@@ -439,7 +439,7 @@ To re-run an eval (note: `qwen_predict.py` now auto-loads the multimodal class �
 prints `AutoModelForImageTextToText` and has NO "missing adapter keys" warning):
 
 ```bash
-hf jobs uv run --flavor l4x1 --timeout 30m --secrets HF_TOKEN=$(hf auth token) \
+hf jobs uv run --flavor l4x1 --timeout 30m --secrets HF_TOKEN \
   eval/qwen_predict.py --base-model Qwen/Qwen3.5-0.8B --model hadro/city-dir-08b-yaml \
   --gold hf://datasets/hadro/cde-evals/nyu_eval.jsonl --target yaml --limit 500 \
   --push-out hf://datasets/hadro/cde-evals/preds_08b_nyu_fix.txt

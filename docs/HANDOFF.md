@@ -140,18 +140,47 @@ gap is now content errors on dense fused lines — same root as the address gap.
 validator-clean (0 errors, 11 benign warnings). Gold sets are gitignored — corrected copies in
 `data/` (user keeps Time Machine backups; pre-sweep copies in session scratchpad).
 
-## RESUME HERE — cycle three (2026-07-19): everything before the retrain is DONE
+## RESUME HERE — cycle four (2026-07-19 late): v3 SCORED — first macro lead; two 1-line fixes queued
 
-**Cycle-three state:** gold fully reconciled + validator-enforced (`6d3928b`); publisher tag
-migrated end-to-end (`b486a43`); all synth features landed (`1a6e9bf`, `34ba841`); **v3 data
-regenerated** (100k train seed 13 / 1k dev seed 99 / 3k smoke seed 7, mix 0.75, stats gate
-passed — table in the session scratchpad; verbatim audit 0/20k violations; publisher-consistent
-ditto marks 0 bad/100k) and `sft_qwen.py --dry-run` passes on it (0 visual adapters).
-**NEXT = the paid steps:** upload v3 train file to `hadro/city-directory-synth` (version the
-filename, e.g. `synth_train_v3.jsonl`), retrain on rtx-pro-6000 b64 (~$7, config-identical to
-v2 so deltas attribute to data) or Modal free tier (TRAINING_OPTIONS.md), then re-score the
-panel with qwen-v3 AND a fresh primed-Gemini run (the tag changed its prompt). Targets:
-address 0.54→0.70+, home 0.69→0.80+, aggregate vs the primed bar (0.794/0.849/56.8%).
+**Cycle three completed end-to-end.** `hadro/city-dir-08b-yaml-v3` = 100k v3 synth
+(`synth_train_v3.jsonl` on the hub; publisher tags + all cycle-three features) / yaml / 3 ep /
+b64 / unpacked / rtx-pro-6000 / **$7.35, 2h40m** (job `6a5d262e…`, `done ->` verified;
+loss 0.0035). Panel + externals scored locally (preds `data/preds_v3_*`); **fresh primed-Gemini
+bar re-run under the new publisher-tag prompts** (label `gemini-3.1-flash-lite-primed-pub`,
+preds `data/preds_gemini_pub_*`): 0.790/0.844/58.0% — statistically identical to the old primed
+bar, so the tag gives Gemini nothing (it's conditioning leverage for the fine-tune only).
+
+**The v3 board (18 vols / 1169 lines, line-weighted; cite this):**
+| | macro | micro | EM | name | addr | home | occ | spouse | emp |
+|---|---|---|---|---|---|---|---|---|---|
+| qwen-v2 | 0.736 | 0.779 | 44.6% | 0.76 | 0.54 | 0.69 | 0.82 | 0.90 | 0.51 |
+| primed-pub Gemini | 0.790 | **0.844** | **58.0%** | 0.73 | **0.78** | **0.87** | **0.91** | 0.75 | **0.55** |
+| **qwen-v3** | **0.798** | 0.840 | 54.8% | **0.78** | 0.74 | 0.83 | 0.84 | **0.91** | 0.54 |
+
+**First fine-tune macro lead on a current-contract bar; micro a tie; Gemini keeps EM + volume
+wins (13–5).** Address +0.20 (fused-token volumes 0.82–0.94: trow1913 0.93, polk1917 0.82,
+polk1925 0.93), home +0.14. Publisher-conditioned features all landed: ogden `*` → macro 0.93 /
+EM 89%; duncan `do.` → EM 71%; mb1931 EM 89%. **Externals up despite NYC-first mix:** tulsa
+0.851→**0.889**, lain 0.849→0.864, minneapolis 0.611→**0.795** (unseen-city transfer — the
+anti-overfit signal), synth_dev 0.992, NYU 0.594/0.830/44.6% (secondary; known spouse/race
+convention conflict). **FTD 0.527/0.485/6.5% — DECISION: milestone-only from now on** (2k rows
+≈ ⅓ of local scoring wall-clock for a number the loop never acts on; keep for the release card).
+
+**Cycle-four worklist, in order of ROI:**
+1. **Two one-line generator fixes, then regen+retrain (~$7):** (a) early-era year draw starts
+   at 1790 so `publisher=franks` (gated ≤1787) NEVER generated — franks1786 stayed broken
+   (addr 0.16); draw from 1786. (b) **neighborhood-comma convention**: real pages print
+   `47th, LIC` / `av, NB`; gold drops the comma (conv #3); synth raw never had it → the model
+   copies it verbatim. 44/54 polk1933si + most queens1933 address misses are comma-only —
+   their addr 0.02/0.07 is convention, not capability. Render `, {nbhd}` in raw at high p,
+   record without. Together these should flip two EM=0 volumes and add panel EM.
+2. **Occupation vocab harvest** (0.84 vs Gemini 0.91): extend `harvest_names.py` to
+   trades/streets from sampled pipeline OCR — automated, pennies, no hand-labeling.
+3. **Targeted gold** (user, in parallel): deepen polk1917/polk1925/queens1933 (per-set home
+   n=3–6 → de-noise the exact fields cycles are steering on); ONE Longworth volume (12% of
+   NYC training rows, zero eval coverage 1797–1817); a second Trow year as overfit guard.
+4. Small gold QA: polk1933si `h33 LaForge Av PR` capitalizes `Av` against its raw (drift
+   warning class); ~10 si OCR-copy slips (Benzer/Benziger) worth a page-image pass someday.
 
 ## Original cycle-three worklist (all pre-retrain items complete)
 

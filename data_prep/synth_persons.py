@@ -633,7 +633,9 @@ def _nyc_ditto_name(rng, female: bool, era: str, publisher: str = "") -> str:
 def _nyc_year_era(rng):
     roll = rng.random()
     if roll < 0.18:
-        y, era = rng.randint(1790, 1849), "early"
+        y, era = rng.randint(1786, 1849), "early"     # from 1786: franks (<=1787) must generate
+                                                      # (the v3 bug: draw started 1790 -> zero
+                                                      # franks rows; franks1786 addr stayed 0.16)
     elif roll < 0.68:
         y, era = rng.randint(1850, 1890), "mid"
     else:
@@ -651,7 +653,7 @@ def _nyc_publisher(rng, ynum: int) -> str:
     per-publisher STYLE; this cycle the tag conditions the new publisher-keyed features
     (fused address tokens) and teaches the tag vocabulary itself."""
     if ynum <= 1787:
-        return "franks" if rng.random() < 0.5 else "duncan"
+        return "franks"                               # 1786/87 = Franks only (Duncan starts ~1791)
     if ynum <= 1796:
         return "duncan"
     if ynum <= 1817:
@@ -834,6 +836,7 @@ def make_nyc(rng) -> dict:
         "paren_firm": paren_firm,                     # raw shows "(Firm & Co)" after the name
         "emp_of": emp_of,                             # raw keeps the "of" connector (conv #7)
         "star_prefix": star_raw and not ditto,        # raw shows "*Name ..." (conv #10)
+        "nbhd_comma": rng.random() < 0.80,            # page comma before a trailing nbhd (v3 miss)
     }
     return _finish(rng, rec, "nyc", publisher, year, arange=parent_surname, hints=hints)
 
@@ -866,16 +869,20 @@ def render_nyc(rng, rec, hints=None) -> str:
         parts.append(occ)
     sep = " " if hints.get("space_delim") else ", "   # Upington 1900s: space-delimited fields
     line = sep.join(parts)
+    addr_txt, home_txt = rec["address"], rec["home_address"]
+    if hints.get("nbhd_comma"):                       # page prints "47th, LIC"; the record drops
+        addr_txt = _NBHD_END_RE.sub(r", \1", addr_txt)    # the comma (conv #3) — raw-side only
+        home_txt = _NBHD_END_RE.sub(r", \1", home_txt)
     # real directories drop the comma before the address ~40% of the time
-    if rec["address"]:
-        line += (" " if (hints.get("space_delim") or rng.random() >= 0.6) else ", ") + rec["address"]
-    if rec["home_address"]:                           # home marker varies: h / h. / b / r / bds
-        if hints.get("fuse_home_marker") and rec["home_address"][:1].isdigit():
+    if addr_txt:
+        line += (" " if (hints.get("space_delim") or rng.random() >= 0.6) else ", ") + addr_txt
+    if home_txt:                                      # home marker varies: h / h. / b / r / bds
+        if hints.get("fuse_home_marker") and home_txt[:1].isdigit():
             marker = _wchoice(rng, [("h", 75), ("r", 18), ("H", 7)])
-            joined = f"{marker}{rec['home_address']}"  # fused: "h502 W149th"
+            joined = f"{marker}{home_txt}"            # fused: "h502 W149th"
         else:
             marker = _wchoice(rng, [("h", 40), ("h.", 28), ("b", 12), ("r", 8), ("bds", 12)])
-            joined = f"{marker} {rec['home_address']}"
+            joined = f"{marker} {home_txt}"
         line += (" " if (hints.get("space_delim") or rng.random() >= 0.5) else ", ") + joined
     if rng.random() < 0.55 and not line.endswith("."):
         line += "."
@@ -978,6 +985,11 @@ _FUSED_MARKER_RE = re.compile(r"^[hrbH]\d")
 _FUSED_ORD_RE = re.compile(r"\b[WE]\d+(?:st|d|th)\b")
 _ROOM_RE = re.compile(r" R ?\d")
 _EARLY_ABBREV_RE = re.compile(r"\b[A-Z][a-z]{0,5}\.\s?(?:st\.?|street|squ)")
+# outer-borough pages print a comma before the neighborhood ("47th, LIC"); gold drops it
+# (conv #3). Raw-side insertion only — 44/54 polk1933si v3 address misses were this comma.
+_NBHD_ALT = "|".join(sorted(NYC_NBHD, key=len, reverse=True))
+_NBHD_END_RE = re.compile(r" (" + _NBHD_ALT + r")$")
+_NBHD_COMMA_RAW_RE = re.compile(r", (" + _NBHD_ALT + r")\b")
 
 
 def _stats_new() -> dict:
@@ -1036,6 +1048,8 @@ def _stats_update(stats: dict, ex: dict) -> None:
         hit("out-of-town value")
     if _EARLY_ABBREV_RE.search(addr):
         hit("abbrev early street name")
+    if _NBHD_COMMA_RAW_RE.search(raw):
+        hit("nbhd comma raw-only")
     if rec["employer"]:
         hit("employer (paren firm)" if f"({rec['employer']})" in raw else "employer (nyc)")
     if raw.startswith("*"):

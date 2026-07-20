@@ -167,13 +167,15 @@ convention conflict). **FTD 0.527/0.485/6.5% — DECISION: milestone-only from n
 ≈ ⅓ of local scoring wall-clock for a number the loop never acts on; keep for the release card).
 
 **Cycle-four worklist, in order of ROI:**
-1. **Two one-line generator fixes, then regen+retrain (~$7):** (a) early-era year draw starts
-   at 1790 so `publisher=franks` (gated ≤1787) NEVER generated — franks1786 stayed broken
-   (addr 0.16); draw from 1786. (b) **neighborhood-comma convention**: real pages print
-   `47th, LIC` / `av, NB`; gold drops the comma (conv #3); synth raw never had it → the model
-   copies it verbatim. 44/54 polk1933si + most queens1933 address misses are comma-only —
-   their addr 0.02/0.07 is convention, not capability. Render `, {nbhd}` in raw at high p,
-   record without. Together these should flip two EM=0 volumes and add panel EM.
+1. **DONE (fixes + regen; RETRAIN PENDING): the two one-line generator fixes.** (a) early-era
+   year draw now starts 1786 and ≤1787 is 100% franks (Duncan starts ~1791) — 408 franks rows
+   in the v4 100k (was ZERO in v3: the draw started 1790 so the ≤1787 gate was unreachable;
+   franks1786 addr stayed 0.16). (b) **neighborhood-comma**: raw now prints `, {nbhd}` at 0.8p
+   (render-side only; record stays comma-free per conv #3) — 800 comma raws in the v4 100k.
+   44/54 polk1933si + most queens1933 v3 address misses were this comma; expect both EM=0
+   volumes to flip. v4 data regenerated (same seeds 13/99/7), stats-gated, verbatim audit
+   0/20k (comma-tolerant). **Next: upload `synth_train_v4.jsonl` + retrain (~$7, same config)
+   + re-score panel (Gemini bar does NOT need re-running — its prompt is unchanged).**
 2. **Occupation vocab harvest** (0.84 vs Gemini 0.91): extend `harvest_names.py` to
    trades/streets from sampled pipeline OCR — automated, pennies, no hand-labeling.
 3. **Targeted gold** (user, in parallel): deepen polk1917/polk1925/queens1933 (per-set home

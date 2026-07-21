@@ -140,49 +140,59 @@ gap is now content errors on dense fused lines — same root as the address gap.
 validator-clean (0 errors, 11 benign warnings). Gold sets are gitignored — corrected copies in
 `data/` (user keeps Time Machine backups; pre-sweep copies in session scratchpad).
 
-## RESUME HERE — cycle four (2026-07-19 late): v3 SCORED — first macro lead; two 1-line fixes queued
+## RESUME HERE — cycle five (2026-07-21): v4 SCORED — leads Gemini on macro, micro, AND volume wins
 
-**Cycle three completed end-to-end.** `hadro/city-dir-08b-yaml-v3` = 100k v3 synth
-(`synth_train_v3.jsonl` on the hub; publisher tags + all cycle-three features) / yaml / 3 ep /
-b64 / unpacked / rtx-pro-6000 / **$7.35, 2h40m** (job `6a5d262e…`, `done ->` verified;
-loss 0.0035). Panel + externals scored locally (preds `data/preds_v3_*`); **fresh primed-Gemini
-bar re-run under the new publisher-tag prompts** (label `gemini-3.1-flash-lite-primed-pub`,
-preds `data/preds_gemini_pub_*`): 0.790/0.844/58.0% — statistically identical to the old primed
-bar, so the tag gives Gemini nothing (it's conditioning leverage for the fine-tune only).
+**Cycle four completed end-to-end.** `hadro/city-dir-08b-yaml-v4` = 100k v4 synth (franks
+year-range fix + raw-only neighborhood comma; commit `6bc8b06`) / yaml / 3 ep / b64 / unpacked /
+rtx-pro-6000 / **~$7.35, 2h37m** (job `6a5e86a5…`, `done ->` verified via `hf jobs logs` — the
+launch's local stream disconnected mid-run and under-reported progress, so don't trust a
+truncated local capture over the authoritative remote log). **First attempt at this job was
+externally CANCELED at 97%** by an HF prepaid-credit exhaustion (402 on relaunch confirmed the
+cause) — user topped up $10, clean relaunch succeeded. Scored panel + synth_dev + externals
+locally (preds `data/preds_v4_*`); Gemini NOT re-run (prompt unchanged since the primed-pub bar).
 
-**The v3 board (18 vols / 1169 lines, line-weighted; cite this):**
+**The v4 board (18 vols / 1169 lines, line-weighted; cite this — supersedes the v3 board above):**
 | | macro | micro | EM | name | addr | home | occ | spouse | emp |
 |---|---|---|---|---|---|---|---|---|---|
 | qwen-v2 | 0.736 | 0.779 | 44.6% | 0.76 | 0.54 | 0.69 | 0.82 | 0.90 | 0.51 |
-| primed-pub Gemini | 0.790 | **0.844** | **58.0%** | 0.73 | **0.78** | **0.87** | **0.91** | 0.75 | **0.55** |
-| **qwen-v3** | **0.798** | 0.840 | 54.8% | **0.78** | 0.74 | 0.83 | 0.84 | **0.91** | 0.54 |
+| qwen-v3 | 0.798 | 0.840 | 54.8% | 0.78 | 0.74 | 0.83 | 0.84 | 0.91 | 0.54 |
+| primed-pub Gemini | 0.790 | 0.844 | **58.0%** | 0.73 | 0.78 | 0.87 | **0.91** | 0.75 | 0.55 |
+| **qwen-v4** | **0.816** | **0.861** | 57.8% | **0.78** | **0.82** | **0.85** | 0.84 | **0.92** | **0.59** |
 
-**First fine-tune macro lead on a current-contract bar; micro a tie; Gemini keeps EM + volume
-wins (13–5).** Address +0.20 (fused-token volumes 0.82–0.94: trow1913 0.93, polk1917 0.82,
-polk1925 0.93), home +0.14. Publisher-conditioned features all landed: ogden `*` → macro 0.93 /
-EM 89%; duncan `do.` → EM 71%; mb1931 EM 89%. **Externals up despite NYC-first mix:** tulsa
-0.851→**0.889**, lain 0.849→0.864, minneapolis 0.611→**0.795** (unseen-city transfer — the
-anti-overfit signal), synth_dev 0.992, NYU 0.594/0.830/44.6% (secondary; known spouse/race
-convention conflict). **FTD 0.527/0.485/6.5% — DECISION: milestone-only from now on** (2k rows
-≈ ⅓ of local scoring wall-clock for a number the loop never acts on; keep for the release card).
+**qwen-v4 leads Gemini on macro, micro, AND volume wins (10–8, first time) — EM is a 0.2pt
+statistical tie.** Both targeted fixes confirmed exactly as diagnosed: **franks1786** addr
+0.16→**0.68**, EM 12%→52%, macro 0.72→0.84 (was zero training rows in v3, now real coverage).
+**polk1933si / queens1933** addr 0.02/0.07→**0.71/0.69**, both former EM=0% volumes now
+14–16% — the comma-convention thesis was correct, not a capability gap. `synth_dev` 0.996 (no
+in-dist cost). Panel-wide gains beyond the two targets: occ carried the employer lift to 0.59
+(from 0.54); NYU macro jumped 0.594→0.739 (fixes generalizing to non-panel forms).
 
-**Cycle-four worklist, in order of ROI:**
-1. **DONE (fixes + regen; RETRAIN PENDING): the two one-line generator fixes.** (a) early-era
-   year draw now starts 1786 and ≤1787 is 100% franks (Duncan starts ~1791) — 408 franks rows
-   in the v4 100k (was ZERO in v3: the draw started 1790 so the ≤1787 gate was unreachable;
-   franks1786 addr stayed 0.16). (b) **neighborhood-comma**: raw now prints `, {nbhd}` at 0.8p
-   (render-side only; record stays comma-free per conv #3) — 800 comma raws in the v4 100k.
-   44/54 polk1933si + most queens1933 v3 address misses were this comma; expect both EM=0
-   volumes to flip. v4 data regenerated (same seeds 13/99/7), stats-gated, verbatim audit
-   0/20k (comma-tolerant). **Next: upload `synth_train_v4.jsonl` + retrain (~$7, same config)
-   + re-score panel (Gemini bar does NOT need re-running — its prompt is unchanged).**
-2. **Occupation vocab harvest** (0.84 vs Gemini 0.91): extend `harvest_names.py` to
-   trades/streets from sampled pipeline OCR — automated, pennies, no hand-labeling.
-3. **Targeted gold** (user, in parallel): deepen polk1917/polk1925/queens1933 (per-set home
-   n=3–6 → de-noise the exact fields cycles are steering on); ONE Longworth volume (12% of
-   NYC training rows, zero eval coverage 1797–1817); a second Trow year as overfit guard.
+**One regression to watch, not yet root-caused:** minneapolis (silver, secondary) dipped
+0.795→0.757. Spot-check (6 rows) shows two distinct effects: (a) the new neighborhood-comma
+pattern over-generalizing to superficially similar Minneapolis address forms that aren't
+NYC-neighborhood-coded (`r 816 s 5th`→`r 816, 5th`) — comma inserted by analogy, not by the
+`_NBHD_END_RE` gate (Minneapolis streets aren't in `NYC_NBHD`); (b) the new employer branch
+occasionally swallowing a correctly-identified employer into occupation_role on bare "with
+{Company}" forms (`mngr American Standard Food Co` — v3 got occ=mngr/emp=Co right, v4 emits
+occ={company}/emp=""). Small n (28 home rows total on this set) — plausible noise, but the two
+mechanisms are real and worth a look if cycle five needs a lever.
+
+**Cycle-five worklist, in order of ROI:**
+1. **Occupation vocab harvest** (0.84 vs Gemini 0.91, now the largest single-field gap):
+   extend `harvest_names.py` to trades/streets from sampled pipeline OCR — automated, pennies,
+   no hand-labeling.
+2. **Minneapolis regression** — low urgency (silver/secondary set) but cheap to check: does
+   gating `nbhd_comma` more tightly (require an actual NYC_NBHD match, not just "ends the
+   address") fix it without costing the polk1933si/queens1933 win back?
+3. **Targeted gold** (user, in parallel — unchanged from cycle four): deepen
+   polk1917/polk1925/queens1933 (per-set home n=3–6); ONE Longworth volume (12% of NYC training
+   rows, zero eval coverage 1797–1817); a second Trow year as overfit guard.
 4. Small gold QA: polk1933si `h33 LaForge Av PR` capitalizes `Av` against its raw (drift
    warning class); ~10 si OCR-copy slips (Benzer/Benziger) worth a page-image pass someday.
+5. **Diminishing-returns check:** two consecutive cycles (+0.06, +0.02 net after the Gemini
+   bar's own +0.05 shift) have moved the needle; if cycle five's fixes land <0.02 macro, that's
+   the signal to stop iterating composition at 100k and either scale (the 250k A/B discussed
+   2026-07-19) or move to Wave 1 (publisher/era style parameterization) instead.
 
 ## Original cycle-three worklist (all pre-retrain items complete)
 
@@ -407,12 +417,27 @@ examples, l4x1, batch 8, 1 epoch — compare `train_runtime` (baseline = stock T
 
 ## HF Jobs workflow & gotchas
 
-Jobs work on account **`hadro`** (user has ~$5 PAYG credits; it ran despite docs implying Pro-only).
+Jobs work on account **`hadro`** (PAYG prepaid credits — **has hit $0 once already** (v4's
+first attempt, 2026-07-20): the job ran healthy for 2h33m then was externally CANCELED with no
+app-level error, and the relaunch immediately 402'd ("Pre-paid credit balance is insufficient").
+`canPay: false` on this account — HF will NOT auto-charge past the balance, it just kills/blocks
+jobs. **Check balance before a retrain if it's been a few cycles**; topping up requires the user
+directly at huggingface.co/settings/billing, it's not something a job/token can do.
 - Launch: `hf jobs uv run --flavor <f> --timeout <t> --secrets HF_TOKEN <local_script.py> <args>`
   — uploads the LOCAL script and installs its PEP-723 deps via uv. (So local edits take effect on re-run.)
 - **Jobs are ASYNC** — the command returns immediately. You MUST wait for training to finish
   (`done -> <repo>`) before evaluating, or the eval 404s on `adapter_config.json`. Use
   `hf jobs logs <id>` (streams until done); `hf jobs ps` / `ps -a` to list running/all.
+  **The streaming CLI can silently disconnect mid-run while the remote job keeps training** —
+  v4's relaunch showed this: the local capture stopped at 33% with no error, but `hf jobs ps -a`
+  independently reported COMPLETED, and `hf jobs logs <id>` (re-fetched fresh from HF, not the
+  stale local capture) had the real `done -> <repo>` line. **Always verify via a fresh
+  `hf jobs logs <id>` or `hf jobs ps -a` status, never trust a local stream that went quiet.**
+  Also: `push_to_hub=True` + `save_strategy="epoch"` auto-pushes a checkpoint to the target repo
+  at EVERY epoch boundary, not just at the end — if a job is externally canceled mid-run (as
+  above), the model repo can be left holding a partially-trained checkpoint under the FULL run's
+  name. Check `lastModified` on the HF repo against expected epoch-completion timing before
+  trusting an existing checkpoint after any non-`done`-confirmed run.
 - **`--timeout` is mandatory** (default **30 min** silently kills training). Set generously; you pay
   for actual runtime, not the cap.
 - Flavors: `l4x1` $0.80/hr (24 GB), `a10g-large` $1.50, `a100-large` $2.50 (80 GB),
@@ -436,6 +461,13 @@ Jobs work on account **`hadro`** (user has ~$5 PAYG credits; it ran despite docs
   NYU macro **0.760** / micro 0.755 / EM 26%; synth_dev ~1.0 (fixed eval loader). Full eval panel
   in `results/eval_table.md`. Adapter wastes ~half its tensors on the vision tower (`all-linear`);
   a clean retrain with `exclude_modules=["visual"]` would shrink it.
+- `hadro/city-dir-08b-yaml-v2/-v3/-v4` — same config (0.8B, 100k, yaml, 3 ep, rtx-pro-6000
+  b64, `exclude_modules=["visual"]`), each a pure data-composition delta over the last so score
+  deltas attribute to the data. Panel (18 vols): v2 0.736/0.779/44.6% → v3 0.798/0.840/54.8% →
+  **v4 0.816/0.861/57.8%** (current — first to lead Gemini on macro+micro+volume-wins). Full
+  per-field breakdown + diagnosis in the "RESUME HERE" section at the top of this doc. **v4
+  survived an infra-canceled first attempt** (HF credit exhaustion, not a code/data bug) —
+  see the HF Jobs gotchas above before assuming a job's fate from a local log alone.
 
 **Local `data/` (gitignored):** `synth_train.jsonl` (100k), `synth_smoke.jsonl` (3k),
 `synth_dev.jsonl` (1k), `nyu_eval.jsonl` (3000), `ftd_eval.jsonl`, `tulsa_eval.jsonl`,

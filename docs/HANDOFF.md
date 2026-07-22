@@ -140,7 +140,34 @@ gap is now content errors on dense fused lines — same root as the address gap.
 validator-clean (0 errors, 11 benign warnings). Gold sets are gitignored — corrected copies in
 `data/` (user keeps Time Machine backups; pre-sweep copies in session scratchpad).
 
-## RESUME HERE — cycle five (2026-07-21): v4 SCORED — leads Gemini on macro, micro, AND volume wins
+## RESUME HERE — cycle five (2026-07-21): occupation realism DONE, v5 data ready — RETRAIN IS THE NEXT STEP
+
+**Everything up to the v5 retrain is complete (commit `324be43`).** Cycle five attacked the
+occupation gap (v4 0.84 vs Gemini 0.91 — the largest remaining single-field gap). Three fixes,
+all from the 145 real v4 occupation misses:
+1. **Compound occupation forms** the generator never emitted (measured in gold): goods-conjunction
+   (`wines & liquors`), maker-compound (`clock & watch-maker`), dual-role (`undertaker & notary`),
+   church-officer-of-church (`sexton of St George's Chapel`, church=employer) + civic-officer-of-class
+   (`inspector of customs`).
+2. **All-era abbreviations** — dict 7→~20 entries (`mercht.`/`mak.`/`manf.`/`imp.`), fixing the
+   early-era over-expansion (`shoemak.`→`shoemaker`) the old late-only gate caused.
+3. **Harvested real occupation vocabulary** — NEW `harvest_occupations.py` reuses `gemini_baseline.py`
+   as the extractor over 1740 listing lines from 9 SAFE non-eval volumes (Longworth/Elliot/Hodge/
+   Low/Long/Groot + off-year Trow, 1790–1885) → **458 distinct occupations, 412 outside the curated
+   ~50** (the exact OOV misses: `taylor`,`labourer`,`carman`,`shipwright`,`boardinghouse`,`com. mer.`).
+   `synth_persons` merges them weighted (~26% of NYC occ picks are harvested long-tail).
+   `occupations_harvested.tsv` is COMMITTED (needs out-of-repo pipeline data + paid Gemini to
+   reproduce). v5 data regenerated (seeds 13/99/7); pre-noise verbatim audit 0/15k; dry-run clean.
+
+**NEXT = the v5 retrain** (identical config, ~$7 — CHECK HF CREDIT BALANCE FIRST, it hit $0 during
+v4; user topped up $10 on 2026-07-20, a v5 train + the wasted-partial may have eaten into it):
+upload `synth_train_v5.jsonl`, train `hadro/city-dir-08b-yaml-v5`, score panel + externals (NO
+Gemini re-run — prompt unchanged; NO FTD — milestone-only). Target: occupation 0.84→0.90+, and
+watch that the harvested long-tail doesn't hurt name/address. If the aggregate gain is <0.02 macro,
+that's the diminishing-returns signal (see item 5 below) to stop composition-tuning and scale or
+move to Wave 1.
+
+## Prior cycle-five worklist (item 1 now DONE; the rest still open)
 
 **Cycle four completed end-to-end.** `hadro/city-dir-08b-yaml-v4` = 100k v4 synth (franks
 year-range fix + raw-only neighborhood comma; commit `6bc8b06`) / yaml / 3 ep / b64 / unpacked /
@@ -178,9 +205,10 @@ occ={company}/emp=""). Small n (28 home rows total on this set) — plausible no
 mechanisms are real and worth a look if cycle five needs a lever.
 
 **Cycle-five worklist, in order of ROI:**
-1. **Occupation vocab harvest** (0.84 vs Gemini 0.91, now the largest single-field gap):
-   extend `harvest_names.py` to trades/streets from sampled pipeline OCR — automated, pennies,
-   no hand-labeling.
+1. ~~**Occupation vocab harvest**~~ **DONE (commit `324be43`, see the RESUME section above)** —
+   turned out to be 3 fixes not 1 (compound forms + all-era abbreviations + the actual harvest);
+   `harvest_names.py` was NEVER run (its `surnames_harvested.tsv` doesn't exist — all name gains
+   to date came from census alone), so a fresh `harvest_occupations.py` was written instead.
 2. **Minneapolis regression** — low urgency (silver/secondary set) but cheap to check: does
    gating `nbhd_comma` more tightly (require an actual NYC_NBHD match, not just "ends the
    address") fix it without costing the polk1933si/queens1933 win back?
@@ -295,7 +323,8 @@ data_prep/
   synth_persons.py        # (line->record) generator; --profile {tulsa,nyc,mix} --target --n --seed
                           #   names now from census+harvested pools (was 54 inline); --packing-safe
   fetch_names.py          # build names/surnames.tsv (40k era-skewed US-Census surnames); --self-test
-  harvest_names.py        # pipeline entries CSVs -> names/surnames_harvested.tsv (real names); merged
+  harvest_names.py        # pipeline entries CSVs -> names/surnames_harvested.tsv (real names). NOTE: never run; TSV absent
+  harvest_occupations.py  # surya listing lines -> gemini_baseline extract -> names/occupations_harvested.tsv (COMMITTED); --self-test
   names/surnames.tsv      # committed census surname pool (surnames_harvested.tsv is generated, gitignored)
   master_directories.csv  # multi-source (nypl|ia|loc|iiif) catalog for sampling; see its README
   ingest_collection.py    # BUILT: turn a collection link -> master rows (review-then-append).

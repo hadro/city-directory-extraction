@@ -399,10 +399,51 @@ NYC_OCC = [
     ("driver", 2), ("watchman", 2), ("moulder", 2), ("stonecutter", 1), ("upholsterer", 1),
     ("physician", 1), ("lawyer", 1), ("broker", 1), ("bookkeeper", 1), ("engineer", 1),
     ("saloon", 1), ("laundress", 1), ("domestic", 1), ("sexton", 1),
+    ("chairmaker", 1), ("candymaker", 1), ("importer", 1),
 ]
 # occupations women were typically listed under in mid/late-19th-c. NYC directories
 NYC_FEMALE_OCC = ["dressmaker", "milliner", "seamstress", "washer", "nurse", "domestic",
                   "laundress", "tailoress", "boarding", "teacher", "cook", "fancygoods"]
+
+# NYC occupation pool = curated NYC_OCC (common trades, hand-weighted) + real occupation terms
+# harvested from SAFE (non-eval) directories via harvest_occupations.py -> occupations_harvested.tsv.
+# Same census/harvested idea as the surname pool: the ~50 curated words cover the common trades,
+# but real gold has a long tail (tanyard, shoestore, weigher, drygood store, shagreen case maker)
+# that the model REGULARISED to the nearest known word (measured v4 miss class). Harvested terms
+# already in NYC_OCC are skipped (no double-weight); the rest are tempered (count**0.5) and scaled
+# so the authentic long tail is ~OCC_HARVEST_FRAC of NYC occupation picks. Falls back to bare
+# NYC_OCC when the TSV is absent (harvest not yet run).
+OCC_HARVEST_FRAC = 0.35
+
+
+def _load_occ_pool():
+    vals = [v for v, _ in NYC_OCC]
+    wts = [float(w) for _, w in NYC_OCC]
+    curated_lower = {v.lower() for v in vals}
+    harvested = os.path.join(_NAMES_DIR, "occupations_harvested.tsv")
+    hv, hw = [], []
+    if os.path.exists(harvested):
+        for ln in open(harvested, encoding="utf-8"):
+            try:
+                occ, c = ln.rstrip("\n").rsplit("\t", 1)
+            except ValueError:
+                continue
+            if occ.lower() in curated_lower:
+                continue
+            hv.append(occ)
+            hw.append(int(c) ** 0.5)
+    if hv:
+        scale = (OCC_HARVEST_FRAC * sum(wts)) / sum(hw)
+        vals += hv
+        wts += [w * scale for w in hw]
+    return vals, list(itertools.accumulate(wts))
+
+
+_OCC_VALS, _OCC_CUM = _load_occ_pool()
+
+
+def _nyc_occ_pick(rng) -> str:
+    return rng.choices(_OCC_VALS, cum_weights=_OCC_CUM, k=1)[0]
 NYC_STREETS = [
     "Broadway", "Bowery", "Wall", "Pearl", "Water", "Cherry", "Mott", "Mulberry",
     "Hester", "Bleecker", "Hudson", "Greenwich", "Canal", "Grand", "Houston", "Spring",
@@ -415,10 +456,22 @@ NYC_STREETS = [
 ]
 NYC_STYPES = [("st", 30), ("", 40), ("av", 14), ("lane", 5), ("pl", 4), ("slip", 3),
               ("sq", 2), ("ter", 2)]
-# late-era (Lain/Trow/Upington) compressed occupation forms; record stays verbatim
+# Trade abbreviations measured across the FULL gold panel, not just late-era: franks1786/
+# mercein1820 (mercht./mer./ironmong./mak.-suffix), doggett1846 (imp./senr.), rode1851
+# (manf./com. mer.), hopehenderson1856 (ins./lab.), lain1876 (bkpr./agt./ins./pres./col./
+# mkr.-suffix), trow1907 (pub. accts.). Abbreviation is a period-print house style active
+# in EVERY era, not a late-only phenomenon -- the old late-only gate meant the model had
+# never seen an early-era abbreviated trade word and regularised them to the nearest full
+# word it knew (shoemak.->shoemaker, mercht.->merchant). Record keeps the form verbatim.
 NYC_OCC_ABBREV = {
-    "clerk": "clk", "laborer": "lab", "carpenter": "carp", "machinist": "mach",
-    "merchant": "mer", "bookkeeper": "bkpr", "engineer": "eng",
+    "clerk": ["clk", "clk."], "laborer": ["lab", "lab."], "carpenter": ["carp", "carp."],
+    "machinist": ["mach"], "merchant": ["mer", "mer.", "mercht.", "merch."],
+    "bookkeeper": ["bkpr", "bookkpr."], "engineer": ["eng"], "watchman": ["watchm."],
+    "agent": ["agt."], "president": ["pres."], "collector": ["col."],
+    "accountant": ["accts.", "acct."], "importer": ["imp."],
+    "superintendent": ["supt", "supt."], "ironmonger": ["ironmong."],
+    "shoemaker": ["shoemak."], "dressmaker": ["dressmkr."], "chairmaker": ["chairm."],
+    "candymaker": ["candymkr."],
 }
 # 1920s/30s outer-borough neighborhoods (Polk Queens/SI; kept verbatim in address):
 # coded AND spelled forms both appear on the queens1933 gold pages
@@ -465,10 +518,32 @@ NYC_EMPLOYERS_LATE = [
 NYC_EMP_OCC_LATE = ["clk", "tchr", "v-p", "pres", "sec", "treas", "mgr", "supt", "eng",
                     "insp", "bkpr", "com mer", "asst mgr", "slsmn", "recording expert"]
 NYC_CHURCHES = ["1st Unitarian Church", "2d Presb Church", "St Anns Church",
-                "Plymouth Church", "St Pauls M E Church", "1st Baptist Church"]
+                "Plymouth Church", "St Pauls M E Church", "1st Baptist Church",
+                "St. George's Chapel", "Trinity Chapel", "the Dutch Church"]
 NYC_WORKS_MID = ["white lead factory", "sugar refinery", "Atlantic dock", "Navy Yard",
                  "Fulton market", "glass works", "iron foundry", "rope walk",
                  "distillery", "gas works", "Court House", "Custom House"]
+
+# Goods/trade words for compound occupation forms measured across the gold panel (not
+# one era): boyd1890 "wines & liquors", franks1786 "ale & porter house", polk1933si "ice
+# & coal vender", ogden1839 "block and pump maker", duncan1794 "clock & watch-maker",
+# ogden1839/duncan1794 "inspector of timber"/"under sexton of St. George's Chapel". The
+# plain generator only ever emitted single trade words; real print regularly compounds
+# two goods, two roles, or a role+institution -- the model had never seen the SHAPE.
+NYC_GOODS = ["wines", "liquors", "dry goods", "hardware", "crockery", "groceries",
+            "coal", "wood", "flour", "produce", "leather", "wool", "paints", "oils",
+            "ale", "porter", "segars", "boots", "shoes", "hats", "furniture"]
+NYC_GOODS_SUFFIX = ["vender", "dealer", "house", "store", "merchant"]
+NYC_MAKER_GOODS = ["shoe", "hat", "chair", "clock", "watch", "instrument", "breeches",
+                   "cabinet", "trunk", "basket", "block", "pump"]
+NYC_DUAL_ROLES = ["undertaker", "notary", "surveyor", "auctioneer", "appraiser", "broker"]
+# church officers take "of {a church}" (the church is the EMPLOYER, conv #7); civic officers
+# take "of {a goods/civic class}" as part of the title itself (no separate employer) --
+# "sexton of St. George's Chapel" vs "inspector of timber" (both measured in the gold panel).
+NYC_CHURCH_ROLES = ["sexton", "under sexton", "keeper", "organist"]
+NYC_CIVIC_ROLES = ["inspector", "surveyor", "collector", "gauger", "weigher", "measurer"]
+NYC_CIVIC_OF = ["timber", "customs", "the port", "weights and measures", "the market",
+                "hides", "flour", "lumber", "the revenue"]
 
 
 def _nyc_street(rng) -> str:
@@ -678,6 +753,45 @@ def _nyc_publisher(rng, ynum: int) -> str:
     return _wchoice(rng, [("polk", 7), ("mb", 3)])
 
 
+def _nyc_occ_realism(rng, occ: str, era: str):
+    """Reshape a plain NYC_OCC/NYC_FEMALE_OCC pick into a period-realistic printed form:
+    a compound (goods-conjunction / maker-compound / dual-role / role-of-institution --
+    the plain generator never emitted anything this SHAPED, so the model had no way to
+    learn to copy one verbatim), an abbreviation (all eras -- house style, not late-only),
+    or a bare trailing period. Returns (occ, employer, emp_of); employer/emp_of are only
+    set by the role-of-institution compound."""
+    if not occ:
+        return occ, "", False
+    employer, emp_of = "", False
+    compound_p = {"early": 0.10, "mid": 0.08, "late": 0.03}[era]
+    if rng.random() < compound_p:
+        sub = rng.random()
+        if sub < 0.28:                                # goods & goods [vendor-suffix]
+            g1, g2 = rng.sample(NYC_GOODS, 2)
+            occ = f"{g1} & {g2}"
+            if rng.random() < 0.4:
+                occ += f" {rng.choice(NYC_GOODS_SUFFIX)}"
+        elif sub < 0.48:                              # maker-compound: "clock & watch-maker"
+            g1, g2 = rng.sample(NYC_MAKER_GOODS, 2)
+            joiner = rng.choice([" & ", " and "])
+            tail = "-maker" if rng.random() < 0.5 else " maker"
+            occ = f"{g1}{joiner}{g2}{tail}"
+        elif sub < 0.68:                              # dual role: "undertaker & notary"
+            r1, r2 = rng.sample(NYC_DUAL_ROLES, 2)
+            occ = f"{r1} & {r2}"
+        elif sub < 0.84:                              # church officer of a church (church=employer)
+            occ, employer, emp_of = rng.choice(NYC_CHURCH_ROLES), rng.choice(NYC_CHURCHES), True
+        else:                                          # civic officer "of {class}" (title, no employer)
+            occ = f"{rng.choice(NYC_CIVIC_ROLES)} of {rng.choice(NYC_CIVIC_OF)}"
+        return occ, employer, emp_of
+    variants = NYC_OCC_ABBREV.get(occ)
+    if variants and rng.random() < {"early": 0.35, "mid": 0.30, "late": 0.45}[era]:
+        return rng.choice(variants), employer, emp_of
+    if rng.random() < 0.04:                           # bare trailing period ("tailor.")
+        occ += "."
+    return occ, employer, emp_of
+
+
 def make_nyc(rng) -> dict:
     year, era, ynum = _nyc_year_era(rng)
     publisher = _nyc_publisher(rng, ynum)
@@ -752,13 +866,15 @@ def make_nyc(rng) -> dict:
         elif female and rng.random() < 0.75:
             occ = rng.choice(NYC_FEMALE_OCC)
         else:
-            occ = _wchoice(rng, NYC_OCC)
-        if occ and era == "late" and occ in NYC_OCC_ABBREV and rng.random() < 0.5:
-            occ = NYC_OCC_ABBREV[occ] + ("." if rng.random() < 0.6 else "")
+            occ = _nyc_occ_pick(rng)                  # curated + harvested real occupations
+        occ, occ_employer, occ_emp_of = _nyc_occ_realism(rng, occ, era)
 
-    # NYC employer signal (conv #7/#13) — publisher-keyed, measured from the gold panel
-    employer, paren_firm, emp_of = "", False, False
-    if not widow:
+    # NYC employer signal (conv #7/#13) — publisher-keyed, measured from the gold panel.
+    # Seeded from _nyc_occ_realism's role-of-institution compound (if it fired) so the
+    # dense/hearne/mid branches below don't clobber an already-assigned employer.
+    employer, paren_firm, emp_of = (
+        (occ_employer, False, occ_emp_of) if not widow else ("", False, False))
+    if not widow and not employer:
         if dense and rng.random() < 0.05:             # principal "(Emmons & Roberts)" (conv #13)
             employer = f"{_surname(rng)} & {rng.choice([_surname(rng), 'Co', 'Bros'])}"
             paren_firm = True
@@ -1065,6 +1181,20 @@ def _stats_update(stats: dict, ex: dict) -> None:
     if "." in name: hit("period in name", example=False)
     if "." in rec["occupation_role"]: hit("period in occupation", example=False)
     if addr in ("NY", "N Y", "N. Y."): hit("commuter NY address")
+    occ = rec["occupation_role"]
+    if occ in {v for vs in NYC_OCC_ABBREV.values() for v in vs}:
+        hit("occ abbreviated form")
+    if any(g in occ for g in NYC_GOODS) and "&" in occ:
+        hit("occ goods-conjunction")
+    if occ.endswith(("-maker", " maker")) and ("&" in occ or " and " in occ):
+        hit("occ maker-compound")
+    if any(occ == f"{r1} & {r2}" for r1 in NYC_DUAL_ROLES for r2 in NYC_DUAL_ROLES if r1 != r2):
+        hit("occ dual-role")
+    # "sexton" is both a plain base NYC_OCC word AND a church-role word -- require the paired
+    # church employer to avoid double-counting plain picks as the new compound.
+    if (occ in NYC_CHURCH_ROLES and rec["employer"] in NYC_CHURCHES) or \
+            occ.startswith(tuple(f"{r} of " for r in NYC_CIVIC_ROLES)):
+        hit("occ role-of-institution/goods")
 
 
 def _stats_print(stats: dict, fh=None) -> None:

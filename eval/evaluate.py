@@ -51,10 +51,17 @@ def parse_pipe(line: str) -> dict:
 
 
 def parse_yaml(block: str) -> dict:
+    """First-key-wins. Was last-key-wins, which silently corrupted scores when a model failed to
+    stop generating: the block then held the correct record followed by a TRUNCATED second copy,
+    and the truncated copy overwrote good values (`"117 Front do"` -> `"11"`, `"shoe-maker"` ->
+    `"sh"`). On the v5 run that cost ~12 points of whole-row EM and looked exactly like a model
+    regression. The first occurrence is the model's actual answer; anything after it is overrun."""
     rec = {f: "" for f in FIELDS}
+    seen = set()
     for ln in block.splitlines():
         m = re.match(r'\s*([a-z_]+):\s*"?(.*?)"?\s*$', ln)
-        if m and m.group(1) in rec:
+        if m and m.group(1) in rec and m.group(1) not in seen:
+            seen.add(m.group(1))
             rec[m.group(1)] = m.group(2)
     return rec
 
@@ -66,7 +73,10 @@ def norm(s: str, strict: bool) -> str:
     return re.sub(r"\s+", " ", s).strip().rstrip(".").strip().lower()
 
 
-def score(gold: list, pred: list, strict: bool = False) -> dict:
+def score(gold: list, pred: list, strict: bool = False, exclude: Optional[set] = None) -> dict:
+    """`exclude` also removes fields from WHOLE-ROW EM — a row must not be marked wrong over a
+    field we've decided isn't real ground truth (see metrics())."""
+    exclude = exclude or set()
     n = min(len(gold), len(pred))
     per = {f: {"em": 0, "gold_ne": 0, "pred_ne": 0, "correct_ne": 0} for f in FIELDS}
     row_exact = 0
@@ -78,7 +88,8 @@ def score(gold: list, pred: list, strict: bool = False) -> dict:
             gv, pv = norm(g[f], strict), norm(p[f], strict)
             eq = gv == pv
             per[f]["em"] += eq
-            all_eq &= eq
+            if f not in exclude:
+                all_eq &= eq
             if g[f].strip():
                 per[f]["gold_ne"] += 1
             if p[f].strip():
@@ -89,7 +100,7 @@ def score(gold: list, pred: list, strict: bool = False) -> dict:
     return {"n": n, "row_exact": row_exact, "per": per}
 
 
-def metrics(res: dict) -> dict:
+def metrics(res: dict, exclude: Optional[set] = None) -> dict:
     """Turn the raw score() tallies into a machine-readable metrics dict (used by both the
     printed report and --save, so they can never diverge).
 
@@ -97,11 +108,25 @@ def metrics(res: dict) -> dict:
     absent from this gold (e.g. employer in NYU) isn't a failure, so it shouldn't drag the score
     to 0. micro_f1 pools TP/FP/FN across fields (frequency-weighted overall number). A field that
     is absent from gold but still PREDICTED is flagged 'spurious' so dropping it from macro can't
-    hide a hallucination (it still costs precision in micro_f1)."""
+    hide a hallucination (it still costs precision in micro_f1).
+
+    `exclude` drops fields from scoring ENTIRELY — not counted in macro, micro, whole-row EM, or
+    'spurious'. Use it when a gold set has no real ground truth for a field. The motivating case is
+    NYU: its source has no race/spouse/business labels at all (only 0/1 flags), so
+    nyu_to_eval.py SYNTHESIZES those three with regexes/heuristics. Scoring against them measures
+    agreement with our own heuristic, not accuracy — and because the heuristic normalizes while the
+    task contract says copy verbatim, a model that got MORE faithful scored WORSE. That misfired
+    twice (v2 spouse, v5 race). See docs/GROUND_TRUTH_HANDOFF.md "Derived vs transcribed gold"."""
+    exclude = exclude or set()
     n = res["n"] or 1
     per, applic_f1s, spurious = {}, [], []
     tot_correct = tot_pred = tot_gold = 0
     for f in FIELDS:
+        if f in exclude:
+            per[f] = {"em": None, "p": None, "r": None, "f1": None,
+                      "gold_ne": res["per"][f]["gold_ne"], "pred_ne": res["per"][f]["pred_ne"],
+                      "applicable": False, "excluded": True}
+            continue
         d = res["per"][f]
         prec = d["correct_ne"] / d["pred_ne"] if d["pred_ne"] else 0.0
         rec = d["correct_ne"] / d["gold_ne"] if d["gold_ne"] else 0.0
@@ -118,10 +143,13 @@ def metrics(res: dict) -> dict:
     mp = tot_correct / tot_pred if tot_pred else 0.0
     mr = tot_correct / tot_gold if tot_gold else 0.0
     micro = 2 * mp * mr / (mp + mr) if (mp + mr) else 0.0
-    return {"n": res["n"], "row_exact_pct": round(100 * res["row_exact"] / n, 1),
-            "macro_f1": round(sum(applic_f1s) / len(applic_f1s), 3) if applic_f1s else 0.0,
-            "micro_f1": round(micro, 3), "fields_scored": len(applic_f1s),
-            "spurious_fields": spurious, "per_field": per}
+    out = {"n": res["n"], "row_exact_pct": round(100 * res["row_exact"] / n, 1),
+           "macro_f1": round(sum(applic_f1s) / len(applic_f1s), 3) if applic_f1s else 0.0,
+           "micro_f1": round(micro, 3), "fields_scored": len(applic_f1s),
+           "spurious_fields": spurious, "per_field": per}
+    if exclude:
+        out["excluded_fields"] = sorted(exclude)      # recorded in --save so a number is never
+    return out                                        # silently comparable to an unrestricted one
 
 
 def _bar(x: float) -> str:
@@ -130,8 +158,8 @@ def _bar(x: float) -> str:
     return "#" * k + "." * (5 - k)
 
 
-def report(res: dict) -> dict:
-    m = metrics(res)
+def report(res: dict, exclude=None) -> dict:
+    m = metrics(res, exclude)
     print(f"\n{'field':<18} {'EM%':>6} {'P':>6} {'R':>6} {'F1':>6}  {'':<5}  gold")
     print("-" * 60)
     for f in FIELDS:
@@ -139,6 +167,9 @@ def report(res: dict) -> dict:
         if pf["applicable"]:
             print(f"{f:<18} {pf['em']:>6.1f} {pf['p']:>6.2f} {pf['r']:>6.2f} {pf['f1']:>6.2f}  "
                   f"{_bar(pf['f1'])}  {pf['gold_ne']}")
+        elif pf.get("excluded"):
+            print(f"{f:<18} {'':>6} {'':>6} {'':>6} {'':>6}  EXCLUDED (no real ground truth; "
+                  f"gold_ne={pf['gold_ne']})")
         else:
             tag = f"n/a (spurious: {pf['pred_ne']} pred)" if pf["pred_ne"] else "n/a (not in gold)"
             print(f"{f:<18} {'':>6} {'':>6} {'':>6} {'':>6}  {tag}")
@@ -148,6 +179,9 @@ def report(res: dict) -> dict:
           f"micro-F1={m['micro_f1']:.3f}")
     if m["spurious_fields"]:
         print(f"  note: model predicted fields absent from this gold: {', '.join(m['spurious_fields'])}")
+    if m.get("excluded_fields"):
+        print(f"  note: EXCLUDED from all metrics: {', '.join(m['excluded_fields'])} "
+              f"— not comparable to an unrestricted score on this set")
     return m
 
 
@@ -157,7 +191,7 @@ def save_run(path: str, args, res: dict) -> None:
         "timestamp": datetime.datetime.now().isoformat(timespec="seconds"),
         "label": args.label or (os.path.basename(args.pred) if args.pred else ""),
         "gold": args.gold, "pred": args.pred, "strict": bool(args.strict),
-        **metrics(res),
+        **metrics(res, set(getattr(args, "exclude_fields", "").split(",")) - {""}),
     }
     if os.path.dirname(path):
         os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -203,6 +237,13 @@ def main(argv: Optional[list] = None) -> int:
                     "(e.g. results/scores.jsonl) -> feeds eval/results_table.py")
     ap.add_argument("--label", default=None, help="run label for --save (e.g. gliner-medium, "
                     "gemini-3.1-flash-lite, qwen-0.8b); defaults to the --pred filename")
+    ap.add_argument("--exclude-fields", default="",
+                    help="comma-separated fields to drop from scoring entirely (macro, micro, "
+                         "whole-row EM and 'spurious'). Use where a gold set has no real ground "
+                         "truth for a field. REQUIRED FOR NYU: pass "
+                         "--exclude-fields spouse_name,race_designation,is_business (those three "
+                         "are synthesized by nyu_to_eval.py regexes, not transcribed — see "
+                         "docs/GROUND_TRUTH_HANDOFF.md).")
     ap.add_argument("--self-test", action="store_true", help="score gold-vs-gold and a corrupted copy to verify the harness")
     args = ap.parse_args(argv)
 
@@ -227,8 +268,12 @@ def main(argv: Optional[list] = None) -> int:
     if len(pred) != len(gold):
         print(f"WARNING: {len(pred)} predictions vs {len(gold)} gold rows; scoring first {min(len(pred), len(gold))}",
               file=sys.stderr)
-    res = score(gold, pred, args.strict)
-    report(res)
+    excl = set(args.exclude_fields.split(",")) - {""}
+    bad = excl - set(FIELDS)
+    if bad:
+        sys.exit(f"--exclude-fields: unknown field(s) {sorted(bad)}; valid: {FIELDS}")
+    res = score(gold, pred, args.strict, excl)
+    report(res, excl)
     if args.save:
         save_run(args.save, args, res)
     return 0

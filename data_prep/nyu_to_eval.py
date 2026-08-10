@@ -13,6 +13,32 @@ AS PRINTED) and `corrected_entry` (cleaned + per-token confidence scores 1-15). 
 targets — and use the **corrected** scores only as a quality gate. Output rows look like
 synth_persons.py: {raw_line, context, record}.
 
+!! THREE FIELDS HERE ARE SYNTHESIZED, NOT TRANSCRIBED — DO NOT SCORE AGAINST THEM !!
+NYU's `labeled_entry` has NO race, spouse or business field; it carries only `labeled_black` and
+`labeled_widow` as 0/1 FLAGS. So this script MANUFACTURES those three from `complete_entry`:
+  * race_designation  <- _COL_RE, whose \\b...\\b boundaries STRIP the printed parentheses:
+                         page `(col'd)` -> stored `col'd`
+  * spouse_name       <- _WID_RE, which NORMALIZES: page `widow of Jeremy` -> stored `wid Jeremy`
+  * is_business       <- _looks_business(), a pure heuristic
+Both normalizations were verified WRONG against the source volume. The NYU set is Doggett
+1850/51 (`directory_uuid 4adf9ec0-…-03ad`), and our own visually-sampled style profile
+(data_prep/style_profiles/doggett_manhattan_1840s.md, which catalogues that exact uuid) records
+the printed forms: `Fox Charles, (co'd) seamn, 139 W. Fifteenth` and `Fox Ann, widow of Jeremy,
+17 pl` ("spelled out 'widow of' — no abbreviation in this volume").
+
+Scoring a model against these measures agreement with OUR regex, not accuracy — and since the
+regexes normalize while the task contract says copy verbatim, a model that gets MORE faithful
+scores WORSE. That misfired twice: v2's spouse 0.60->0.00 and v5's race 1.00->0.00 (the latter
+alone faked a -0.136 macro "regression"). ALWAYS score this set with:
+
+    eval/evaluate.py --gold data/nyu_eval.jsonl --pred ... --target yaml \\
+        --exclude-fields spouse_name,race_designation,is_business
+
+Also note `raw_line` here is NYU's UNCORRECTED OCR (verified: 500/500 match `complete_entry`
+byte-for-byte), unlike the hand-built panel gold whose convention is verbatim-page-with-OCR-
+misreads-fixed. NYU is a third-party CRF parse, not project-transcribed gold — a secondary
+external check, not a panel peer. See docs/GROUND_TRUTH_HANDOFF.md "Derived vs transcribed gold".
+
 Field mapping (NYU -> union schema):
   name            <- labeled_entry.subjects (joined)
   occupation_role <- labeled_entry.occupations (joined with ", ")

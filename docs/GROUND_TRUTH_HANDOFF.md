@@ -58,6 +58,59 @@ eval rows + new gold at once. The master split:
   to the page, not to Surya's output).
 - **The 8 record fields = canonical** (the model's output form).
 
+## Derived vs transcribed gold — NOT every `data/*_eval.jsonl` is gold (added 2026-08-04)
+
+The panel sets are **transcribed**: a human read the page image and wrote down what is printed.
+Some external sets are **derived**: a program produced the labels. Derived labels are only as good
+as the program, and **a field a program invented is not ground truth at all** — scoring against it
+measures agreement with your own heuristic, not model accuracy.
+
+| set | provenance | `raw_line` | verdict |
+|---|---|---|---|
+| 18 panel volumes | hand-labeled from page images (this project) | verbatim page, OCR misreads fixed | **gold** |
+| tulsa, lain | pipeline output, human-reviewed (`harvest_own.py`) | verbatim page | gold-ish |
+| minneapolis | third-party transcription (MIT) | as supplied | **silver** — labelled so already |
+| **nyu** | **third-party CRF parse over uncorrected OCR** | **NYU's raw OCR, unfixed** | **secondary check, NOT a panel peer** |
+| ftd | third-party (SODUCO), cross-lingual | as supplied | transfer probe only |
+
+### The NYU case, in full (this cost two false "regressions")
+
+NYU's records carry `complete_entry` (raw OCR) + `labeled_entry` (their CRF parse, as printed).
+**`labeled_entry` has no race, spouse or business field** — only `labeled_black` / `labeled_widow`
+as 0/1 flags. So `nyu_to_eval.py` *manufactures* three fields from the raw line:
+
+| field | how | page prints | we stored |
+|---|---|---|---|
+| `race_designation` | `_COL_RE`, whose `\b…\b` strips the parens | `(col'd)` | `col'd` |
+| `spouse_name` | `_WID_RE`, which normalizes | `widow of Jeremy` | `wid Jeremy` |
+| `is_business` | `_looks_business()` heuristic | *(not a NYU field at all)* | inferred |
+
+Both normalizations are **verifiably wrong against the source volume.** NYU is Doggett 1850/51
+(`directory_uuid 4adf9ec0-…-03ad`), and our own visually-sampled style card
+[`doggett_manhattan_1840s.md`](../data_prep/style_profiles/doggett_manhattan_1840s.md) —
+which catalogues that exact uuid — records the printed forms:
+> `Fox Charles, (co'd) seamn, 139 W. Fifteenth`  *(co'd = colored — race designation)*
+> `Fox Ann, widow of Jeremy, 17 pl` — *"spelled out 'widow of' — no abbreviation in this volume"*
+
+Because our regexes normalize while the contract says **copy verbatim**, a model that got *more*
+faithful scored *worse*. It misfired twice: **v2 spouse 0.60→0.00** and **v5 race 1.00→0.00** (the
+latter, on n=6, single-handedly faked a −0.136 NYU macro "regression" while micro and EM both rose).
+
+**Rule: always score NYU with**
+```bash
+eval/evaluate.py --gold data/nyu_eval.jsonl --pred ... --target yaml \
+    --exclude-fields spouse_name,race_designation,is_business
+```
+`--exclude-fields` drops fields from macro, micro, whole-row EM and the spurious check, and records
+`excluded_fields` in `--save` so a restricted number can never be silently compared to an
+unrestricted one. NYU keeps its value for **name / occupation_role / address / home_address**,
+which are genuine NYU CRF labels — 3000 rows of real signal.
+
+**If you ever want real race/spouse coverage for this publisher, hand-label it.** Fixing the
+regexes to emit `(col'd)` would still be regex output — silver dressed as gold, and it would break
+again the next time the model shifts. The panel already has `doggett1846`, and the style card is
+detailed enough to guide a proper Doggett 1850/51 gold set.
+
 ## Conventions (the full set — also in the editor's panel)
 
 1. **Verbatim values** — never expand abbreviations (`insur` stays `insur`; keep `h`/`r`/`bds`/`clk.`/

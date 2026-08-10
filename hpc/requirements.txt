@@ -1,0 +1,24 @@
+# Pinned dependency set for the HPC fine-tune.
+#
+# These are floors, not exact pins, because sft_qwen.py is deliberately version-tolerant: it
+# filters SFTConfig kwargs against the installed TRL and picks processing_class vs tokenizer by
+# signature (see the "Qwen3.5 GOTCHAS" section of docs/HANDOFF.md — TRL renamed max_seq_length
+# to max_length mid-project and that robustness is what survived it).
+#
+# If you want a frozen environment for reproducibility, run this once after 00_setup_env.sh:
+#     run_in_env "pip freeze > $PROJECT/requirements.lock.txt"
+# and install from the lock file on any rebuild.
+
+# torch: install FIRST and from the CUDA index (00_setup_env.sh does this). Listing it here
+# without an index URL would pull whatever wheel PyPI defaults to.
+torch>=2.4
+
+transformers>=4.46
+trl>=0.12
+peft>=0.13
+accelerate>=1.0
+datasets>=3.0
+bitsandbytes>=0.43        # only needed for --qlora; harmless otherwise
+huggingface_hub>=0.26
+sentencepiece
+protobuf

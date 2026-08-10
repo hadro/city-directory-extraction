@@ -68,12 +68,33 @@ def user_prompt(ex: dict) -> str:
 
 
 def parse_completion(text: str, target: str) -> str:
-    """Extract the serialized record from the model's generated text (tolerate fences)."""
+    """Extract the serialized record from the model's generated text (tolerate fences).
+
+    Takes the FIRST complete record and stops. A model that fails to emit its stop token keeps
+    generating -- a replayed `user` turn, the next prompt, `<think></think>`, then a truncated
+    second copy of the record. Keeping all of it fed a corrupted block to evaluate.py, whose YAML
+    parse is last-key-wins, so the truncated copy silently overwrote correct values
+    (`"117 Front do"` -> `"11"`). That cost ~12 points of whole-row EM on the v5 run and read as a
+    model regression rather than a parsing artifact. First-record-wins is the honest reading of
+    "the model's answer" and is a no-op for well-behaved output.
+    """
     if not text:
         return ""
     t = re.sub(r"^```[a-zA-Z]*\n?|\n?```\s*$", "", text.strip()).strip()
     if target == "yaml":
-        return "\n".join(ln for ln in t.splitlines() if ln.strip())
+        rec, seen = [], set()
+        for ln in t.splitlines():
+            if not ln.strip():
+                continue
+            m = re.match(r"\s*([a-z_]+):", ln)
+            if m:
+                if m.group(1) in seen:          # second copy of the record begins -> stop
+                    break
+                seen.add(m.group(1))
+                rec.append(ln)
+            elif rec:                            # non-field line after the record -> stop
+                break
+        return "\n".join(rec)
     for line in t.splitlines():
         if "|" in line:
             return line.strip()

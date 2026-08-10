@@ -1,9 +1,43 @@
 # Blog notes — Fine-tuning a tiny open model to structure historical city directories
 
-> Notes toward a post, drafted 2026-06-18. Focus: the broad strokes of how we went from *no data*
-> to a small open model that gets within striking distance of a frontier API on this task — and how
-> careful evaluation kept us honest about the gap. Written so others can do the same. Not final
-> prose. Companion: [HANDOFF.md](HANDOFF.md), [plan.md](plan.md).
+> Notes toward a post, drafted 2026-06-18. Companion: [HANDOFF.md](HANDOFF.md), [plan.md](plan.md).
+
+> # ⚠️ STALE AS OF 2026-08-04 — DO NOT PUBLISH ANY NUMBER BELOW
+>
+> Every figure in this draft is from **v1** scored on **NYU only** against an **unprimed** Gemini,
+> and NYU was scored including three fields that turned out not to be ground truth. Four things
+> have since changed, and they invert the conclusion:
+>
+> 1. **The model is five cycles newer.** Panel-wide (18 volumes, 1169 lines): **v5 = 0.826 macro /
+>    0.875 micro / 61.5% EM**, versus the v1 NYU figures quoted below (0.760 / 0.755 / 26%).
+> 2. **The Gemini bar below is the *unprimed* one** (0.672 / 0.910 / 70%). It had been given a
+>    stale labeling contract. Re-primed with the current contract Gemini scores **0.790 / 0.844 /
+>    58.0%** on the panel — the only bar that should ever be cited.
+> 3. **The headline conclusion is now false.** "Gemini still leads decisively on micro-F1 and
+>    whole-row EM" was true of v1; **v5 leads the primed bar on all three aggregates.**
+> 4. **NYU's `spouse_name`, `race_designation` and `is_business` are synthesized by our own
+>    regexes**, not transcribed, and disagree with the printed page. NYU must be scored with
+>    `--exclude-fields`. Restricted NYU macro: v5 **0.810** vs v4 0.797.
+>
+> **What survives, and is arguably the better post:** the *method* — fix the data, not the model —
+> and the measurement lessons, which are now much sharper than when this was drafted. Every
+> remaining gap in v1 was closed by changing the **generator** and retraining, with no change to
+> model size or architecture (`name` 0.52→0.77, `address` 0.44→0.85, `home_address` 0.07→0.84,
+> `occupation_role` 0.70→0.89).
+>
+> **Four real war stories worth writing up, all with the same shape — a metric that lied:**
+> - the **eval-loader bug**: train and eval loaded different model classes, so the LoRA adapter
+>   silently didn't apply and a trained model scored at the untrained floor;
+> - the **stale-prompt baseline**: our "we beat Gemini 17/18 volumes" result was mostly an artifact
+>   of testing Gemini against a labeling contract we'd since changed;
+> - the **runaway-generation bug**: v5 trained to loss 0.009 / token-acc 0.998 and still never
+>   learned to emit its stop token; combined with a last-key-wins YAML parser this faked a
+>   12-point EM *regression* that never happened;
+> - the **derived-gold trap**: we scored a model against labels our own regex had invented, so a
+>   model that got *more* faithful to the page scored *worse*.
+>
+> Rewrite from [HANDOFF.md](HANDOFF.md) and
+> [GROUND_TRUTH_HANDOFF.md](GROUND_TRUTH_HANDOFF.md); do not copy figures from below.
 
 ## Working title ideas
 - "Getting a 0.8B model within striking distance of Gemini at reading 1880s city directories"

@@ -29,38 +29,58 @@ that seam, and [The future split](#the-future-split) documents the interface bet
 > listing-start / page-offset sampling). [docs/plan.md](docs/plan.md) is the original rationale
 > and data landscape — read it for background, the handoffs for truth.
 
-## Where things stand (2026-07)
+## Where things stand (2026-08)
 
-**Model (A):** first full fine-tune trained, eval-loader bug fixed, and scored twice — on NYU gold
-and across the whole 18-volume gold panel.
+**Model (A):** five data-composition cycles trained and scored on the 18-volume gold panel
+(1786–1933/34, 1169 hand-labeled lines) — the project's regression harness.
 
-`hadro/city-dir-08b-yaml` (0.8B, 100k synthetic, 3 epochs, YAML) on NYU gold (500 rows):
+**`hadro/city-dir-08b-yaml-v5`** (0.8B, 100k synthetic, 3 epochs, YAML, LoRA) — panel-wide,
+line-weighted:
 
 | model | macro-F1 | micro-F1 | whole-row EM |
 |---|---|---|---|
-| GLiNER zero-shot (floor) | 0.381 | 0.594 | 8% |
-| **qwen-0.8b-yaml (ours)** | **0.760** | 0.755 | 26% |
-| Gemini 3.1-flash-lite (bar) | 0.672 | **0.910** | **70%** |
+| Gemini 3.1-flash-lite (**prompt-primed** bar) | 0.790 | 0.844 | 58.0% |
+| qwen-v4 | 0.816 | 0.861 | 57.8% |
+| **qwen-v5 (ours)** | **0.826** | **0.875** | **61.5%** |
 
-**Honest read:** we edge Gemini on macro-F1 (rare fields like spouse/race), but Gemini leads
-micro-F1 and whole-row EM — the high-volume `name`/`address` fields and complete rows, which are
-what matter for replacing it in the pipeline.
+**Honest read:** the fine-tune now leads the Gemini bar on all three aggregates. Two caveats that
+matter more than the headline:
+1. **Cite the *primed* Gemini bar.** An earlier version of this table showed us winning by a much
+   larger margin against a Gemini prompt that had been given a stale labeling contract. Re-priming
+   Gemini with the current contract moved it +0.05 macro and erased most of the gap. Part of our
+   remaining lead is *contract knowledge* — which is the point of fine-tuning, but say so.
+2. **We trained on the labeling contract; Gemini is zero-shot on it.** That is how each would
+   actually run in the pipeline, so it's a fair comparison — but it is not a claim about raw
+   capability.
 
-The **first full-panel run** (all 18 gold volumes, 1786–1933) sharpened that into four systematic
-gaps, all *training-coverage* problems, not capacity problems (panel-wide field F1: name 0.52,
-address 0.44, home_address 0.07, race 0.00):
+Earlier revisions of this README reported **NYU-only** numbers against an **unprimed** Gemini and
+concluded Gemini led decisively. Both halves of that were measurement artifacts — see
+[docs/HANDOFF.md](docs/HANDOFF.md) for the primed-bar correction and the NYU derived-label problem.
 
-1. **Ditto marks** — the generator never emits surname-repeat dittos (`"`/`-`), so the model strips
-   them; every ditto row scores 0 on `name` → EM=0% on all dense Polk/Trow volumes. Biggest lever.
-2. **`home_address`** — the two-address pattern is under-produced; the model collapses `h.` into
-   `address`.
-3. **Address styles** — 1930s hyphenated outer-borough house numbers (`24-12`, `LIC`/`JH`) and
-   1786-era formats are out-of-distribution.
-4. **`race_designation`** — never emitted (small n; clean synthetic fix).
+The **first full-panel run** diagnosed four systematic gaps — all *training-coverage* problems, not
+capacity problems. That thesis held: every one was closed by fixing the **generator** and
+retraining, with no change to model size or architecture.
 
-**Conclusion: stop adding breadth; fix synthetic coverage, retrain, re-score.** The 18-volume
-panel is now the regression harness. Full numbers and diagnosis in
-[docs/HANDOFF.md](docs/HANDOFF.md); table in [results/eval_table.md](results/eval_table.md).
+| gap (v1) | fix | field F1, v1 → v5 |
+|---|---|---|
+| **Ditto marks** — generator never emitted surname-repeat `"`/`-`, so the model stripped them; EM=0% on every dense Polk/Trow volume | emit dittos, keyed to publisher | `name` **0.52 → 0.77** |
+| **`home_address`** — two-address pattern under-produced; `h.` collapsed into `address` | more two-address rows + a gold marker reconciliation | **0.07 → 0.84** |
+| **Address styles** — 1930s hyphenated outer-borough numbers (`24-12`, `LIC`/`JH`), 1786-era forms, fused `r205 W141st` | era/publisher-gated address forms | `address` **0.44 → 0.85** |
+| **`race_designation`** — never emitted | added to the generator | emitted; see the NYU caveat below |
+
+Later cycles added occupation realism (`occupation_role` 0.70 → **0.89**) from vocabulary harvested
+out of non-eval volumes.
+
+**The method is the takeaway: fix the data, not the model.** The 18-volume panel is the regression
+harness. Full numbers and diagnosis in [docs/HANDOFF.md](docs/HANDOFF.md); table in
+[results/eval_table.md](results/eval_table.md).
+
+> **Evaluation caveat worth reading before trusting any number here:** `data/nyu_eval.jsonl` is a
+> third-party CRF parse, and three of its fields (`spouse_name`, `race_designation`,
+> `is_business`) are **synthesized by our own regexes**, not transcribed — they disagree with the
+> printed page. Always score NYU with
+> `--exclude-fields spouse_name,race_designation,is_business`. See
+> [docs/GROUND_TRUTH_HANDOFF.md](docs/GROUND_TRUTH_HANDOFF.md) §"Derived vs transcribed gold".
 
 **Data (B):** `master_directories.csv` at **449 rows** (NYPL / IA / LoC; NYPL API responses
 archived before the 2026-08-01 deprecation). `column_count` backfilled for **332/449** — every

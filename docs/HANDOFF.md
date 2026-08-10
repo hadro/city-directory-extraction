@@ -7,8 +7,14 @@
 
 We're fine-tuning a small **Qwen3.5** model to turn one historical city-directory line into a
 structured 8-field record (synthetic-train / real-gold-eval), aiming to match a Gemini baseline,
-then release to HF. **The 0.8B run is competitive with Gemini per-field but Gemini still leads
-overall** (see the metric nuance below) — after fixing an eval-loader bug.
+then release to HF.
+
+> **CURRENT STATE (2026-08-04): `hadro/city-dir-08b-yaml-v5` is the best model and beats the
+> primed Gemini bar on macro (0.826 vs 0.790), micro (0.875 vs 0.844) AND whole-row EM (61.5% vs
+> 58.0%)** on the 18-volume panel. **Jump to the "RESUME HERE" section** — it has the current
+> board, the v5 eval-corruption bug, and the diminishing-returns gate that has now tripped.
+> Everything below this box is historical context, and the NYU-only table immediately following
+> is from **v1** — do not cite it.
 
 **Measured on NYU gold (500 rows, YAML).** Scoring note: `macro-F1` = avg over fields the gold
 actually has; `micro-F1` = frequency-weighted overall (see `evaluate.py`). Both matter — and they
@@ -140,9 +146,194 @@ gap is now content errors on dense fused lines — same root as the address gap.
 validator-clean (0 errors, 11 benign warnings). Gold sets are gitignored — corrected copies in
 `data/` (user keeps Time Machine backups; pre-sweep copies in session scratchpad).
 
-## RESUME HERE — cycle five (2026-07-21): occupation realism DONE, v5 data ready — RETRAIN IS THE NEXT STEP
+## RESUME HERE — cycle five COMPLETE (2026-08-04): v5 trained + scored; v5 is the current best model
 
-**Everything up to the v5 retrain is complete (commit `324be43`).** Cycle five attacked the
+**v5 is done and it leads on every aggregate.** `hadro/city-dir-08b-yaml-v5` = 0.8B / 100k v5 synth /
+yaml / 3 ep / b64 / **unpacked** (config-identical to v2–v4 so the delta attributes to the data) /
+rtx-pro-6000 / **2h40m, ~$7** (job `6a715148…`, `done ->` verified). Scored panel + externals
+locally (preds `data/preds_v5_*`). **No Gemini re-run** — its prompt is unchanged.
+
+**The v5 board (18 vols / 1169 lines, line-weighted — CITE THIS, supersedes the v4 board):**
+| | macro | micro | EM | name | addr | home | occ | spouse | emp |
+|---|---|---|---|---|---|---|---|---|---|
+| primed-pub Gemini | 0.790 | 0.844 | 58.0% | 0.73 | 0.78 | **0.87** | 0.91 | 0.75 | 0.55 |
+| qwen-v3 | 0.798 | 0.840 | 54.8% | 0.78 | 0.74 | 0.83 | 0.84 | 0.91 | 0.54 |
+| qwen-v4 | 0.816 | 0.861 | 57.8% | **0.78** | 0.82 | 0.85 | 0.84 | 0.92 | 0.59 |
+| **qwen-v5** | **0.826** | **0.875** | **61.5%** | 0.77 | **0.85** | 0.84 | **0.89** | **0.93** | **0.65** |
+
+**Cycle five hit its target:** occupation **0.84 → 0.89** (goal was 0.90+), and it did NOT cost
+name/address as feared — address went *up* 0.82→0.85, employer 0.59→0.65. Externals mostly
+improved: **minneapolis 0.757→0.812** (the v4 regression recovered without a targeted fix),
+lain 0.865→0.904, tulsa 0.887→0.903, `synth_dev` holds at 0.994.
+
+**NYU macro 0.739 → 0.603 (−0.136) — ROOT-CAUSED 2026-08-04, and it is NOT a regression.**
+It is **entirely `race_designation`, n=6**, going 1.00 → 0.00. Macro averages over the 7 present
+fields, so one field collapsing costs exactly 1/7 = 0.143 — the whole drop. On the same set
+**micro ROSE 0.833→0.844 and whole-row EM ROSE 46.6%→49.0%**, and occupation rose +0.06.
+~~**Cite NYU micro/EM, not NYU macro.**~~ **Superseded by the upstream fix below — the restricted
+NYU macro is now sound and v5 leads there too (0.810 vs v4 0.797). Just never score NYU without
+`--exclude-fields`.**
+
+The 6 rows are one clean pattern — raw `Clark Edward (col'd) steward, 56 W. Broadway`:
+| | v4 | v5 | gold |
+|---|---|---|---|
+| race_designation | `col'd` | `(col'd)` | `col'd` |
+
+v5 copies the source **verbatim including the parentheses**; NYU gold strips them. **This is a
+gold-convention inconsistency, not a model error** — and the conventions genuinely disagree
+across sets:
+
+| set | race n | raw form | gold form | marker |
+|---|---|---|---|---|
+| nyu | 6 (33 total) | `(col'd)` | `col'd` | **STRIPPED** |
+| tulsa | 131 | `(c)` | `(c)` | KEPT |
+| ogden1839 | 7 | `*` | `*` | KEPT |
+| synth_dev (generator) | 20 | — | emits `(c)`, `(co'd)`, `col`, `col'd`, `colored` | **BOTH** |
+
+No model can satisfy both conventions. v4 stripped (matched NYU, n=6); v5 keeps (matches Tulsa,
+n=131). **Weighted across all 164 race rows the field is essentially flat: 0.95 → 0.93**, and on
+Tulsa alone v5 is *better* (0.94 → 0.96). So v5's behavior is the better trade, and it also
+follows the project's own "copy verbatim" contract more literally.
+
+**RESOLVED UPSTREAM the same day — the NYU labels were never ground truth.** Traced into
+`nyu_to_eval.py`: **NYU's source has no race, spouse or business field at all**, only
+`labeled_black`/`labeled_widow` as 0/1 flags. Our script *manufactures* all three from the raw
+line, and its `_COL_RE` (`\b(col'd|colored|col)\b`) strips the printed parentheses while `_WID_RE`
+normalizes `widow of Jeremy` → `wid Jeremy`. Both are **wrong against the source volume**: NYU is
+Doggett 1850/51 (`4adf9ec0-…-03ad`) and our own style card for that exact uuid records the printed
+forms `Fox Charles, (co'd) seamn, …` and `Fox Ann, widow of Jeremy, …` ("no abbreviation in this
+volume"). So we were scoring the model against our own regex — and because the regex normalizes
+while the contract says copy verbatim, **a more faithful model scored worse**. Same root cause as
+the v2 spouse collapse, which was diagnosed then as a "convention conflict" but never traced here.
+
+**Fix shipped:** `evaluate.py` gained **`--exclude-fields`** (drops fields from macro, micro,
+whole-row EM and the spurious check; records `excluded_fields` in `--save` so a restricted score
+can never be silently compared to an unrestricted one). **NYU must now always be scored with
+`--exclude-fields spouse_name,race_designation,is_business`.** Full write-up:
+[GROUND_TRUTH_HANDOFF.md](GROUND_TRUTH_HANDOFF.md) §"Derived vs transcribed gold".
+
+**All NYU numbers were re-scored 2026-08-04 (predictions unchanged — scorer only).** The whole
+qwen series moved; cite the RIGHT column:
+
+| label | macro old→new | micro old→new | EM old→new |
+|---|---|---|---|
+| qwen-0.8b-yaml | 0.358 → **0.464** | 0.473 → **0.486** | 4.0% → **4.6%** |
+| qwen-0.8b-yaml-fixed | 0.760 → **0.686** | 0.755 → **0.688** | 25.8% → **26.2%** |
+| qwen-v2 | 0.659 → **0.783** | 0.827 → **0.801** | 44.4% → **45.2%** |
+| qwen-v3 | 0.594 → **0.793** | 0.830 → **0.805** | 44.6% → **45.4%** |
+| qwen-v4 | 0.739 → **0.797** | 0.833 → **0.807** | 46.6% → **47.2%** |
+| **qwen-v5** | 0.603 → **0.810** | 0.844 → **0.823** | 49.0% → **49.8%** |
+
+**The v5 "regression" fully inverts: on honest NYU, v5 (0.810) BEATS v4 (0.797).** Micro drops for
+everyone because `is_business` — scoring ~0.98 on 500 rows against our own heuristic — was
+inflating it. **`gliner-medium`, `gemini-3.1-flash-lite` and `qwen-2b` keep UNRESTRICTED NYU
+numbers** (their preds no longer exist to re-score); do not compare those to the table above.
+
+**Still open — and the artifact propagated INTO the training data.** `synth_persons.py` emits five
+race forms indiscriminately (`(c)`, `(co'd)`, `col`, `col'd`, `colored`), and its NYC vocabulary
+(`col'd`/`colored`/`col`, generator docstring line ~79, "10,277 of 7.9M ~ 0.13%") is grounded on
+**NYU** — i.e. on the paren-stripped derived labels. Meanwhile our own page-verified Doggett card
+records the printed form as `(co'd)`. So the regex artifact reached the generator, the model
+learned both forms, and it now disagrees with whichever gold set it meets. Gate the race form on
+the publisher/era context tag in a future cycle — the `*` marker already is (ogden vs
+hopehenderson), so the mechanism exists. Same playbook as dittos/fusion/neighborhood-comma.
+Flagged in [cards/DATASET_CARD.md](../cards/DATASET_CARD.md) too.
+
+### ⚠️ DIMINISHING-RETURNS GATE TRIPPED — read this before starting cycle six
+
+The cycle-five worklist (item 5 below) pre-registered: *"if cycle five's fixes land <0.02 macro,
+that's the signal to stop iterating composition at 100k."* **v5 landed +0.009 macro.** Micro
+(+0.015), EM (+3.7pts) and the targeted occupation field (+0.05) are stronger, so it's arguable —
+but the trend across cycles is **+0.06 → +0.02 → +0.009**, which is the curve the gate exists to
+detect. **Do not start another 100k composition cycle without a reason that beats these two:**
+1. **Longworth gold** — measured: longworth is **8.5% of v5 training rows with ZERO eval coverage**
+   (also upington 1.9%, smith 1.0% — ~11% of the training distribution is unmeasured). Trow is
+   34% of training measured on **161 gold lines** from two adjacent late years (1907, 1913).
+   One Longworth volume is the cheapest, highest-value gold work available.
+
+   > ### ✅ NO SETUP NEEDED — the pages are already sampled AND Surya-OCR'd. Start labeling.
+   > Verified 2026-08-04 against `../directory-pipeline/output/`. The slow parts (download,
+   > sample, Surya — slow on Mac MPS) are **done** for all three targets below; each is still
+   > unchecked (☐) in `data_prep/gold_sample/WORKLIST.md`. Labeling is browser-only from here.
+   >
+   > | target | dir under `directory-pipeline/output/` | surya pages | worklist | why |
+   > |---|---|---|---|---|
+   > | **Longworth 1818/19** | `nypl_longworth_1818_19_69fdfa80` | 2 | ☐ std ~40, col 1 | **do this first** — closes the 8.5% blind spot |
+   > | Trow/Wilson 1865/66 | `nypl_trow_wilson_1865_66_4b119360` | **1** (thin) | ☐ std ~40, col 2 | mid-era Trow overfit guard |
+   > | Trow 1884/85 | `nypl_trow_1884_85_4b69a410` | 2 | ☐ deep ~100, col 2 | alt guard; also a col-transition rep |
+   >
+   > ```bash
+   > PY=/Users/joshhadro/github/directory-pipeline/.venv/bin/python
+   > cd /Users/joshhadro/github/directory-pipeline
+   > $PY ../city-directory-extraction/data_prep/make_gold_tool.py \
+   >     output/nypl_longworth_1818_19_69fdfa80 -o gold_longworth1818.html --max-lines 80
+   > # → label in the browser → Export gold.jsonl → then:
+   > cd ../city-directory-extraction
+   > python3 data_prep/validate_gold.py ~/Downloads/gold.jsonl \
+   >     --images ../directory-pipeline/output --strict
+   > cp ~/Downloads/gold.jsonl data/longworth1818_eval.jsonl
+   > python3 eval/evaluate.py --gold data/longworth1818_eval.jsonl --self-test
+   > ```
+   > Full conventions + the finalize recipe (home_address fix → validate → fix slips → self-test):
+   > [GROUND_TRUTH_HANDOFF.md](GROUND_TRUTH_HANDOFF.md). Style card:
+   > [`longworth_manhattan_1830s.md`](../data_prep/style_profiles/longworth_manhattan_1830s.md).
+   > Then add the volume to the panel lists in `hpc/30_eval.sbatch` and any local eval script.
+   >
+   > **Also already sampled but NOT yet OCR'd** (would need a Surya pass first): Longworth
+   > **1797**, **1820/21**, **1839**, **1842/43** — a second Longworth year is the natural
+   > follow-up once 1818/19 proves the era out.
+2. **Wave 1** — publisher/era style parameterization.
+Both matter more before any 2B/4B scale-up, where you'd be scaling a model you can't fully measure.
+
+### THE v5 EVAL-CORRUPTION BUG (2026-08-04) — same class as the 2026-06-18 eval-loader bug
+
+**v5 first scored as a REGRESSION: macro 0.795 / micro 0.831 / EM 45.9% — 12 points of EM below
+v4. That was wrong. It was a parsing artifact, not the model.**
+
+Root cause: **the v5 model never learned to emit its stop token.** It generates a correct record,
+then keeps going — a replayed `user` turn, the next prompt, `assistant`, `<think></think>`, then a
+*truncated* second copy of the record. `evaluate.py`'s YAML parse was **last-key-wins**, so the
+truncated copy silently overwrote good values (`"117 Front do"`→`"11"`, `"shoe-maker"`→`"sh"`).
+Measured on duncan1794: 59 think-tags and 61 runaway turns across 58 rows.
+
+**Both parsers are now hardened (this is the durable fix):**
+- `qwen_predict.py:parse_completion` stops at the FIRST complete record.
+- `evaluate.py:parse_yaml` is **first-key-wins**, not last.
+Re-scoring the *same* preds with the fix: duncan1794 0.851/48.3% → 0.880/70.7%; panel-wide the
+board above. `synth_dev` 0.935→0.994 confirms the model itself was always healthy.
+
+**Diagnosis trail (so nobody redoes it):**
+- NOT the eval environment — v4 re-scored on the same day/stack is clean (0 think-tags).
+- NOT the adapter shape — target_modules are byte-identical to v4 (an apparent diff was JSON list
+  ordering). Only `peft_version` 0.19.1→0.20.0 differs.
+- NOT the base model — `Qwen/Qwen3.5-0.8B` untouched since 2026-03-02 (README edits only).
+- NOT the data — two 3k×3 smokes trained the same day, one on v4 data one on v5 data
+  (`hadro/cde-smoke-v4data` / `-v5data`), **both terminate cleanly**. Same data at 4689 steps
+  runs away; at 141 steps it doesn't. So it needs training length to manifest.
+- **REJECTED HYPOTHESIS (don't rerun it):** "the chat template's assistant mask broke, so EOS was
+  never supervised." Twice wrong. (a) The raw mask IS empty
+  (`apply_chat_template(return_assistant_tokens_mask=True)` → 0 of 26 supervised) — but it is
+  empty on transformers **4.55.4 AND 5.14.1**, so it is a *constant, not the variable*, and cannot
+  explain v4-vs-v5. (b) The follow-on worry that `assistant_only_loss` is therefore a no-op is
+  **also wrong** — TRL doesn't use that call's result; see the GOTCHAS entry for the step-count
+  proof. The raw-mask probe is a red herring on both counts.
+
+**OPEN QUESTION: the mechanism was never identified.** The empirical facts point at the training
+stack (unpinned deps resolved fresh weeks apart), but no specific change was pinned down. If the
+defect reappears under the now-pinned deps, that is important information.
+
+**Two guards added so it cannot recur silently:**
+- `sft_qwen.py` deps are **pinned EXACTLY** (were `>=` floors; that is what let two runs weeks
+  apart be different experiments). Plus `--revision` for the base model and dependency-version
+  logging — the v5 job log contained **no** version info at all, so the key diagnostic was
+  unrecoverable.
+- **`--check-termination N`** (default 8): after training, before pushing, generate N examples and
+  fail loudly if the model runs past its own answer. v5 had loss 0.009 / token-acc 0.998 and was
+  still broken — **no training-side metric can see this; only generating can.**
+
+### Cycle-five data work (commit `324be43`) — what produced v5
+
+Cycle five attacked the
 occupation gap (v4 0.84 vs Gemini 0.91 — the largest remaining single-field gap). Three fixes,
 all from the 145 real v4 occupation misses:
 1. **Compound occupation forms** the generator never emitted (measured in gold): goods-conjunction
@@ -159,13 +350,40 @@ all from the 145 real v4 occupation misses:
    `occupations_harvested.tsv` is COMMITTED (needs out-of-repo pipeline data + paid Gemini to
    reproduce). v5 data regenerated (seeds 13/99/7); pre-noise verbatim audit 0/15k; dry-run clean.
 
-**NEXT = the v5 retrain** (identical config, ~$7 — CHECK HF CREDIT BALANCE FIRST, it hit $0 during
-v4; user topped up $10 on 2026-07-20, a v5 train + the wasted-partial may have eaten into it):
-upload `synth_train_v5.jsonl`, train `hadro/city-dir-08b-yaml-v5`, score panel + externals (NO
-Gemini re-run — prompt unchanged; NO FTD — milestone-only). Target: occupation 0.84→0.90+, and
-watch that the harvested long-tail doesn't hurt name/address. If the aggregate gain is <0.02 macro,
-that's the diminishing-returns signal (see item 5 below) to stop composition-tuning and scale or
-move to Wave 1.
+**NEW COMPUTE OPTION (2026-08-03): NYU HPC — the cluster is TORCH, not Greene.** A center at NYU
+Law may be able to provide time, which would make retrains free. **Greene was decommissioned
+2026-01-30**; Torch replaced it ([docs](https://services.rt.nyu.edu/docs/hpc/)). This matters
+operationally — every Greene-era tutorial online will mislead you on four points: **Apptainer**
+not Singularity, images at **`/share/apps/`** not `/scratch/work/public/`, **`--account` is
+mandatory** (needs an active allocation in the HPC projects portal — this is the actual gate),
+and GPUs come from **`--constraint=h200`**, not the typed `--gres=gpu:a100:1`.
+
+**The bundle is built and tested: `hpc/`** (see [../hpc/README.md](../hpc/README.md)) —
+`bash hpc/make_bundle.sh` → ~6 MB self-contained tarball (scripts + synth data + gold panel +
+docs) → `00_setup_env` / `01_prefetch` / `sbatch 10_smoke` / `sbatch 20_train` / `sbatch 30_eval` /
+`40_push_adapter`. Handles the three real differences from HF Jobs: inode quota (`/home` is 30K
+inodes → Apptainer ext3 overlay), assume-no-internet compute nodes (pre-staged model +
+`HF_HUB_OFFLINE=1`, Hub push moved to the login node), and wall-clock limits.
+**`sft_qwen.py` gained `--save-steps` / `--save-total-limit` / `--resume-from-checkpoint auto`**
+for that last one — all default-off, so the HF Jobs path is unchanged. 0.8B/100k est. ~1.6h on an
+H200, ~3.3h A100, ~6h L40S. Details + cost comparison in TRAINING_OPTIONS.md §0.
+
+**The real case for HPC is the 2B/4B family, not the 0.8B** (§0b): 500k×3 costs ~$310 rented,
+of which ~$280 is the 2B+4B. Three findings from `hpc/estimate_run.py`, which reproduces both
+measured 0.8B runs: (1) **Qwen3.5's vocab is 248,320**, so the loss path's
+`[batch × 512 × 248320]` logits tensor is ~57 GB at batch 64 — bigger than any of these models'
+weights, and the true cause of the batch-16-on-L4 OOM. It does NOT scale with model size, so 4B
+fits a 48 GB L40S at batch 16; **batch, not parameters, sets the VRAM wall.** (2) Therefore the
+**H200's 141 GB converts into speed, not just fit** — 4B at full batch 64. (3) The binding
+constraint is wall clock, and Torch's hardware mostly dissolves it: **4B/500k is a single ~42h job
+on an H200** (inside one 48h allocation) versus a 3–4 link `hpc/50_chain_train.sh` chain and a
+week+ of *calendar* time on A100/L40S. **So: ask the Law center for H200 access specifically**
+(232 of them on the cluster). Torch also has 16× RTX-Pro-6000 — the exact card our $6 reference
+run was measured on. `MODEL_SIZE=0.8B|2B|4B` in `hpc/env.sh` sets everything else.
+
+~~**NEXT = the v5 retrain**~~ **DONE 2026-08-04 — see the RESUME HERE section at the top.** Target
+was occupation 0.84→0.90+; landed **0.89**. The harvested long-tail did *not* hurt name/address
+(address rose 0.82→0.85). The <0.02-macro diminishing-returns signal **did** trip (+0.009).
 
 ## Prior cycle-five worklist (item 1 now DONE; the rest still open)
 
@@ -194,7 +412,7 @@ statistical tie.** Both targeted fixes confirmed exactly as diagnosed: **franks1
 in-dist cost). Panel-wide gains beyond the two targets: occ carried the employer lift to 0.59
 (from 0.54); NYU macro jumped 0.594→0.739 (fixes generalizing to non-panel forms).
 
-**One regression to watch, not yet root-caused:** minneapolis (silver, secondary) dipped
+**One regression to watch** (never root-caused — **closed by v5, see the box below**): minneapolis (silver, secondary) dipped
 0.795→0.757. Spot-check (6 rows) shows two distinct effects: (a) the new neighborhood-comma
 pattern over-generalizing to superficially similar Minneapolis address forms that aren't
 NYC-neighborhood-coded (`r 816 s 5th`→`r 816, 5th`) — comma inserted by analogy, not by the
@@ -203,18 +421,26 @@ occasionally swallowing a correctly-identified employer into occupation_role on 
 {Company}" forms (`mngr American Standard Food Co` — v3 got occ=mngr/emp=Co right, v4 emits
 occ={company}/emp=""). Small n (28 home rows total on this set) — plausible noise, but the two
 mechanisms are real and worth a look if cycle five needs a lever.
+> **CLOSED 2026-08-04 without a targeted fix: v5 scores minneapolis 0.812**, above both v4 (0.757)
+> and the v3 baseline (0.795). Cycle five never touched `nbhd_comma` or the employer branch, so
+> either the dip was noise on a small silver set, or the occupation-vocabulary work incidentally
+> fixed the employer/occupation confusion (mechanism b). Don't spend a cycle-six lever here.
 
 **Cycle-five worklist, in order of ROI:**
 1. ~~**Occupation vocab harvest**~~ **DONE (commit `324be43`, see the RESUME section above)** —
    turned out to be 3 fixes not 1 (compound forms + all-era abbreviations + the actual harvest);
    `harvest_names.py` was NEVER run (its `surnames_harvested.tsv` doesn't exist — all name gains
    to date came from census alone), so a fresh `harvest_occupations.py` was written instead.
-2. **Minneapolis regression** — low urgency (silver/secondary set) but cheap to check: does
-   gating `nbhd_comma` more tightly (require an actual NYC_NBHD match, not just "ends the
-   address") fix it without costing the polk1933si/queens1933 win back?
-3. **Targeted gold** (user, in parallel — unchanged from cycle four): deepen
-   polk1917/polk1925/queens1933 (per-set home n=3–6); ONE Longworth volume (12% of NYC training
-   rows, zero eval coverage 1797–1817); a second Trow year as overfit guard.
+2. ~~**Minneapolis regression**~~ **CLOSED 2026-08-04 — self-resolved in v5 (0.812).** No lever
+   needed; see the note above.
+3. **Targeted gold** (user, in parallel) — **NOW THE TOP-PRIORITY ITEM** since the
+   diminishing-returns gate tripped. Re-measured against the v5 training mix 2026-08-04:
+   **longworth = 8.5% of training rows with ZERO eval coverage** (the older "12%" was of NYC-only
+   rows; 8.5% is of all rows), plus upington 1.9% and smith 1.0% — **~11% of the training
+   distribution is unmeasured**. Separately, **trow is 34.2% of training measured on only 161
+   gold lines**, both from late years (1907, 1913), leaving 1850s–1890s Trow trained-but-unseen.
+   Order: ONE Longworth volume (1797–1817) → a mid-era Trow year as overfit guard → deepen
+   polk1917/polk1925/queens1933 (per-set home n=3–6).
 4. Small gold QA: polk1933si `h33 LaForge Av PR` capitalizes `Av` against its raw (drift
    warning class); ~10 si OCR-copy slips (Benzer/Benziger) worth a page-image pass someday.
 5. **Diminishing-returns check:** two consecutive cycles (+0.06, +0.02 net after the Gemini
@@ -337,13 +563,19 @@ data_prep/
   # sibling repo: directory-pipeline/sources/sample_directories.py  -> sample K pages/volume, download
   #   ONLY those (never whole volumes), ready for `pipeline ocr/extract` -> feeds harvest_names.py
 train/sft_qwen.py         # TRL SFT; --target pipe|yaml, LoRA/--qlora/--full, --max-train-samples,
-                          #   --batch-size, --epochs; runs locally OR via `hf jobs uv run`
+                          #   --batch-size, --epochs; runs locally OR via `hf jobs uv run`.
+                          #   DEPS ARE PINNED EXACTLY (2026-08-04) — do not relax to ">=".
+                          #   --revision pins the base repo; --check-termination catches a model
+                          #   that trains perfectly but never learns to stop (see the v5 bug).
 eval/evaluate.py          # field-level P/R/F1/EM; --save <jsonl> --label <name> --target
 eval/gliner_baseline.py   # urchade/GLiNER zero-shot extractive baseline -> preds
 eval/gemini_baseline.py   # Gemini baseline (the "bar"); defaults --target yaml
 eval/qwen_predict.py      # run fine-tuned Qwen -> preds; remote --gold (hf://) + --push-out (for Jobs)
 eval/results_table.py     # pivot results/scores.jsonl -> model x eval-set Markdown table
 notebooks/colab_finetune.ipynb   # free-Colab T4 training path (no paid plan)
+hpc/                      # SLURM/NYU-Torch bundle: env.sh + make_bundle.sh + estimate_run.py
+                          #   + 00..50 scripts; see hpc/README.md (Apptainer overlay, offline
+                          #   compute nodes, checkpoint-resume, 2B/4B chained runs)
 cards/                    # MODEL_CARD.md + DATASET_CARD.md templates
 results/                  # eval_table.md (tracked); scores.jsonl (gitignored log)
 data/                     # gitignored: all eval sets, synth data, preds
@@ -401,6 +633,25 @@ processor**. Fixes already applied in `sft_qwen.py` / `qwen_predict.py`:
 - **YAML targets are longer than pipe → OOM** on L4 at batch 16 (in `entropy_from_logits`). Fix:
   smaller `--batch-size` or a bigger GPU (a100-large 80 GB handles 0.8B at batch 64 fine).
 - Precision auto-selects bf16 (Ampere+) / fp16 (T4). `--qlora` = 4-bit for fitting 4B on a T4.
+- **A trained model may not learn to STOP, and nothing in training will tell you.** v5 hit loss
+  0.009 / token-acc 0.998 and still ran past its own answer into a replayed `user` turn +
+  `<think></think>` + a truncated second record. Combined with a last-key-wins YAML parse this
+  read as a 12-point EM *model regression* that never happened. Guards now in place:
+  `--check-termination` in `sft_qwen.py` (generates before pushing), first-record-wins in
+  `qwen_predict.py`, first-key-wins in `evaluate.py`. **Symptom to recognize:** a fresh model
+  scoring worse than its predecessor with truncated field values (`"117 Front do"`→`"11"`).
+- **Pin your dependencies.** `sft_qwen.py` used `>=` floors until 2026-08-04, so `uv run` resolved
+  whatever was current that day — v4 and v5 were literally different experiments (peft 0.19.1 vs
+  0.20.0 at minimum). The job log recorded no versions at all, making it undiagnosable after the
+  fact. Deps are now exact and versions are logged to stderr.
+- **`assistant_only_loss=True` — RESOLVED 2026-08-04, it is NOT a no-op.** The scare: a raw
+  `apply_chat_template(..., return_assistant_tokens_mask=True)` returns an ALL-ZERO mask for
+  Qwen3.5 on transformers 4.55.4 *and* 5.14.1 (4.x warns the template lacks `{% generation %}`).
+  **But TRL does not use that call's result.** Proof by arithmetic: TRL runs a "Dropping fully
+  masked examples" stage, so an all-zero mask would have emptied the dataset. v5 ran
+  **4689 optimizer steps**, and `ceil(100,000 / 64) x 3 = 4689` exactly — every one of the 100k
+  examples survived. Nothing was dropped, so TRL's internal mask is non-empty and differs from the
+  raw tokenizer call. Don't chase this again; the raw-mask probe is a red herring.
 - Harmless noise to ignore: `[ERROR] loss/logits ... not documented` (transformers docstring lint);
   `fast path not available` (the kernel fallback above).
 
@@ -490,13 +741,20 @@ directly at huggingface.co/settings/billing, it's not something a job/token can 
   NYU macro **0.760** / micro 0.755 / EM 26%; synth_dev ~1.0 (fixed eval loader). Full eval panel
   in `results/eval_table.md`. Adapter wastes ~half its tensors on the vision tower (`all-linear`);
   a clean retrain with `exclude_modules=["visual"]` would shrink it.
-- `hadro/city-dir-08b-yaml-v2/-v3/-v4` — same config (0.8B, 100k, yaml, 3 ep, rtx-pro-6000
+- `hadro/city-dir-08b-yaml-v2/-v3/-v4/-v5` — same config (0.8B, 100k, yaml, 3 ep, rtx-pro-6000
   b64, `exclude_modules=["visual"]`), each a pure data-composition delta over the last so score
   deltas attribute to the data. Panel (18 vols): v2 0.736/0.779/44.6% → v3 0.798/0.840/54.8% →
-  **v4 0.816/0.861/57.8%** (current — first to lead Gemini on macro+micro+volume-wins). Full
-  per-field breakdown + diagnosis in the "RESUME HERE" section at the top of this doc. **v4
-  survived an infra-canceled first attempt** (HF credit exhaustion, not a code/data bug) —
+  v4 0.816/0.861/57.8% → **v5 0.826/0.875/61.5% (CURRENT BEST** — leads primed Gemini on macro,
+  micro AND EM). Full per-field breakdown + diagnosis in the "RESUME HERE" section at the top.
+  **v4 survived an infra-canceled first attempt** (HF credit exhaustion, not a code/data bug) —
   see the HF Jobs gotchas above before assuming a job's fate from a local log alone.
+  **v5 carries a known cosmetic defect: it does not emit its stop token** (runs on into a replayed
+  turn). Harmless *provided* you use the hardened `qwen_predict.py`/`evaluate.py` parsers — but any
+  external consumer of this adapter must truncate at the first record. Fix it in the next
+  substantive retrain rather than standalone; the weights themselves are good.
+- `hadro/cde-smoke-v4data` / `hadro/cde-smoke-v5data` — 3k×3 throwaway smokes from the
+  2026-08-04 termination investigation. Both terminate cleanly. Keep as the controls; delete if
+  the namespace gets noisy.
 
 **Local `data/` (gitignored):** `synth_train.jsonl` (100k), `synth_smoke.jsonl` (3k),
 `synth_dev.jsonl` (1k), `nyu_eval.jsonl` (3000), `ftd_eval.jsonl`, `tulsa_eval.jsonl`,
@@ -705,7 +963,10 @@ python3 eval/results_table.py --out results/eval_table.md && cat results/eval_ta
 - **Cost (measured, not estimated):** the slow kernels make this ~3× pricier than first assumed.
   **0.8B / 100k×3 = ~4 h ≈ $10** on a100-large (confirmed twice). Scaling to **500k×3 ≈ 5× ≈ ~$50
   for the 0.8B alone**; the full 0.8B/2B/4B family is realistically **~$150–250**, not the ~$10–25
-  once guessed. Levers (see "Training speed — what we tried" for measured numbers): switch to
+  once guessed. **[REVISED 2026-08-03 — see TRAINING_OPTIONS.md §0b: `hpc/estimate_run.py`
+  re-derives this from the measured throughputs and lands at 500k×3 = $30 (0.8B) / $99 (2B) /
+  $183 (4B) = ~$310 family on rtx-pro-6000. The estimator reproduces both measured 0.8B runs, so
+  trust it over the hand-extrapolated $150–250. On NYU HPC the same work is free — ~170 A100-hours.]** Levers (see "Training speed — what we tried" for measured numbers): switch to
   **`rtx-pro-6000` batch 64** (~$7.30/run — 26% cheaper + 1.5× faster than the a100 we used) +
   **`--packing`** (~20% more → ~$6), and stay on 0.8B (Mattingly got 94–96% on it; ours is already
   competitive on macro-F1). Bigger batch, h200, fast kernels, and Unsloth did NOT pay off at this

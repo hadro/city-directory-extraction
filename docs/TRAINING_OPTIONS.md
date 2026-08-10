@@ -1,6 +1,9 @@
 # Training options — cheap/free paths for the fine-tune
 
 > Researched 2026-07-18 (web-verified pricing + issue-tracker state; flagged where estimated).
+> **Cost caveat added 2026-08-04:** the reference run below is real, but `sft_qwen.py`'s deps are
+> now **pinned exactly** — budget one extra smoke run per dependency bump to re-validate
+> `--check-termination` before trusting a full run. See HANDOFF "the v5 eval-corruption bug".
 > Reference workload: **Qwen3.5-0.8B LoRA, 100k synthetic × 3 epochs, YAML target, packed**
 > (~45M tokens seen, ~300k samples). Proven baseline: **HF Jobs `rtx-pro-6000` batch 64
 > `--packing` ≈ $6 / ~2.7h** (measured — see HANDOFF.md "Training speed").
@@ -13,6 +16,7 @@
 
 | path | new $ | wall-clock | setup | verdict |
 |---|---|---|---|---|
+| **NYU HPC (Torch), H200 / A100 / L40S** | **$0** | ~1.6h (H200) / ~3.3h (A100) / ~6h (L40S) + queue | medium (one-off) | **best path IF the NYU Law center access materializes** — see `hpc/`. Needs a project allocation. |
 | HF Jobs `rtx-pro-6000` b64 + packing | ~$6 | ~2.7h | zero (proven) | the reliable paid path |
 | **Colab credits, A100 (existing notebook)** | **$0 new** (~60–85 of your CUs) | ~4–5h | low | **best next-retrain path** |
 | **Modal free tier ($30/mo credit)** | **$0, renews monthly** | ~3–4h | medium (wrapper) | **best recurring free path** |
@@ -20,6 +24,73 @@
 | vast.ai / RunPod RTX 4090 | ~$3–4 | ~5–8h | medium | cheapest paid, more ops |
 | MLX on the 16GB M2 Air | $0 | ~2–4 days continuous | high (new stack) | experiment, not workhorse |
 | HF Jobs t4/L4/a10g "cheap" tiers | ~$4–10 | 9–13h+ | zero | **don't bother** (see below) |
+
+## 0b. Family-scaling costs, RE-DERIVED (2026-08-03) — the $150–250 estimate was low
+
+The "~$150–250 for the 0.8B/2B/4B family" figure below was extrapolated by hand ("~5× the
+0.8B"). `hpc/estimate_run.py` now derives it from the two throughputs we actually measured plus
+the architecture, and **reproduces both measured runs** (0.8B/100k on a100: predicts 3.9 h vs
+measured 3.9 h; on rtx-pro-6000: ~$6 vs measured $6–7). At **500k × 3 epochs**, rented
+rtx-pro-6000 at $2.75/hr:
+
+| model | samp/s | hours | $ |
+|---|---|---|---|
+| 0.8B | 37.7 | ~11 | **$30** |
+| 2B | 11.6 | ~36 | **$99** |
+| 4B | 6.3 | ~67 | **$183** |
+| | | | **~$310 family** |
+
+So: ~$30–50 for the 0.8B at 500k, ~$310 for the full family — the top of the old range, not the
+middle. On NYU Torch the same work is **~73 H200-hours** (or ~170 A100-hours) at $0.
+
+**The architectural fact that matters for the port:** Qwen3.5's vocab is **248,320**, so the
+loss path's `[batch × 512 × 248320]` logits tensor is ~57 GB at batch 64 — bigger than any of
+these models' weights, and the real cause of the batch-16-on-L4 OOM. It does **not** scale with
+model size, so 4B needs barely more VRAM than 2B and fits on a 48 GB L40S at batch 16.
+**Batch, not parameters, sets the VRAM wall — and wall-clock, not memory, is what makes 4B hard.**
+Corollary: the H200's 141 GB converts directly into *speed* here (full batch 64 at 4B), not
+merely into "it fits".
+
+## 0. NYU HPC — free institutional compute, if the access lands
+
+> **Corrected 2026-08-03 (same day): the cluster is TORCH, not Greene.** Greene was decommissioned
+> **2026-01-30**. The first version of this section and of `hpc/` targeted Greene; both have been
+> rewritten for Torch ([docs](https://services.rt.nyu.edu/docs/hpc/)). Four things differ and all
+> of them break a Greene-era script: **Apptainer** not Singularity; images at **`/share/apps/`**
+> not `/scratch/work/public/`; **`--account` is mandatory** (an active allocation in the HPC
+> projects portal is required to submit anything); and GPUs are requested with
+> **`--constraint=h200`**, not the typed `--gres=gpu:a100:1`. Beware Greene-era tutorials online.
+
+A center at NYU Law may be able to give us time on Torch. This workload is *small* for HPC — one
+GPU, no multi-node anything — so it fits easily, and the marginal cost of a run drops to zero.
+**The full bundle is built: `hpc/`** (see [hpc/README.md](../hpc/README.md)) — `make_bundle.sh`
+produces a ~6 MB self-contained tarball (scripts + synth data + gold panel + docs); on the cluster
+it's `00_setup_env.sh` → `01_prefetch.sh` → `sbatch 10_smoke` → `sbatch 20_train` →
+`sbatch 30_eval` → `40_push_adapter.sh`.
+
+**Torch's GPU inventory changes the calculus** (spec sheet): **232× H200 (141 GB)**, 272× L40S
+(48 GB), 172× A100 (80 GB), 60× H100, and **16× RTX-Pro-6000 — the exact card our $6 reference run
+was measured on**. Estimated 500k×3 wall-clock: H200 8 h (0.8B) / 23 h (2B) / **42 h (4B)**; L40S
+30 / 98 / 181 h.
+
+The port is about three environment differences, all handled in the bundle: (a) **inode quotas** —
+`/home` allows only 30K inodes and a naive `pip install torch` exceeds that alone, so deps install
+into an Apptainer ext3 overlay (one file, not 150k); (b) **compute-node internet** — NYU doesn't
+document Torch's policy, so the base model is pre-staged on the login node and jobs run
+`HF_HUB_OFFLINE=1`, with the Hub push moved to a separate login-node step (safe either way);
+(c) **wall-clock limits** — `sft_qwen.py` gained `--save-steps` / `--resume-from-checkpoint auto`
+(default-off) so a `--requeue` after a timeout resumes instead of restarting.
+
+**Caveat:** the queue is the cost, and Torch adds a gate before it — you cannot submit at all
+without an allocation. Keep HF Jobs as the "I need this run to finish tonight" path; $7 buys
+certainty about *when*, which a shared queue can't.
+
+**Where the split should fall:** rent the 0.8B iteration loop (~$7/cycle, same-day), and put the
+**2B/4B 500k runs on Torch** — that's ~$280 of the ~$310 family bill (§0b) and they're one-off
+runs where queue latency doesn't hurt. **Ask for H200 access specifically:** on an H200 the
+4B/500k run is a *single* ~42 h job inside one 48 h allocation, where on A100/L40S it's a 3–4 link
+chain (`hpc/50_chain_train.sh`, N `--dependency=afterany` jobs each resuming the last 500-step
+checkpoint) spanning a week or more of *calendar* time.
 
 ## 1. Colab credits + the existing notebook — spend what's already sunk
 

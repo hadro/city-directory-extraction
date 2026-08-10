@@ -5,6 +5,9 @@ outputs/
 *.jsonl
 *.parquet
 
+# the HPC shipping tarball (rebuild with `bash hpc/make_bundle.sh`)
+cde-hpc-bundle-*.tar.gz
+
 # generated locally from pipeline output (census surnames.tsv IS committed as the seed)
 data_prep/names/surnames_harvested.tsv
 data_prep/names/given_harvested.tsv

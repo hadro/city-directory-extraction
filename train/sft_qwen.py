@@ -1,12 +1,22 @@
 # /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#   "trl>=0.12",
-#   "transformers>=4.46",
-#   "datasets>=3.0",
-#   "accelerate>=1.0",
-#   "peft>=0.13",
-#   "bitsandbytes>=0.43",
+#   # PINNED EXACTLY, deliberately. These were floors (">=") until 2026-08-04, which meant
+#   # `uv run` resolved whatever was current on the day and two runs weeks apart were not the
+#   # same experiment. v4 (2026-07-20) and v5 (2026-08-03) differed by at least peft
+#   # 0.19.1 -> 0.20.0 (read from their adapter_config.json), and v5 came back with a
+#   # generation-termination defect v4 did not have. The mechanism was never identified — which
+#   # is exactly the point: an unreproducible training script cannot be debugged.
+#   #
+#   # To move a pin: bump it, run the 3k smoke, and confirm --check-termination still passes.
+#   # Record the versions in the model card. Do NOT relax these back to ">=".
+#   "trl==1.9.2",
+#   "transformers==5.14.1",
+#   "datasets==5.0.1",
+#   "accelerate==1.14.0",
+#   "peft==0.20.0",
+#   "bitsandbytes==0.50.0",
+#   "torch==2.13.0",
 # ]
 # ///
 """
@@ -108,6 +118,17 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--preview-prompts", type=int, default=0,
                     help="print N formatted training examples and exit (no ML deps needed)")
     ap.add_argument("--model", default="Qwen/Qwen3.5-0.8B")
+    ap.add_argument("--revision", default=None,
+                    help="pin the base-model repo revision (commit sha) for reproducibility. The "
+                         "deps are pinned exactly above; this pins the other half of the "
+                         "environment, since a base repo's chat template or tokenizer can change "
+                         "under you between runs.")
+    ap.add_argument("--check-termination", type=int, default=8, metavar="N",
+                    help="after training, generate N held-out examples and FAIL if the model does "
+                         "not stop cleanly (0 to skip). v5 trained perfectly by every training "
+                         "metric — loss 0.009, token-acc 0.998 — yet never learned to emit its "
+                         "stop token, so it ran on into a replayed 'user' turn. Nothing in the "
+                         "training loop noticed. This is the check that would have.")
     ap.add_argument("--hub-model-id", default=None)
     ap.add_argument("--output-dir", default="out_sft")
     ap.add_argument("--epochs", type=float, default=3.0)
@@ -128,6 +149,15 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--packing", action="store_true",
                     help="pack short examples to fill max_seq_len (HF's efficiency default); big "
                          "throughput win for our short directory lines, no kernels needed")
+    ap.add_argument("--save-steps", type=int, default=0,
+                    help="checkpoint every N steps instead of once per epoch. Needed wherever a run "
+                         "can be cut short by a wall-clock limit or preemption (SLURM/HPC, Kaggle) — "
+                         "epoch checkpoints are ~1h+ apart. 0 = keep save_strategy='epoch'.")
+    ap.add_argument("--save-total-limit", type=int, default=2,
+                    help="keep only the N most recent step checkpoints (disk hygiene on shared FS)")
+    ap.add_argument("--resume-from-checkpoint", default=None,
+                    help="resume from a checkpoint dir, or 'auto' to pick the latest in --output-dir "
+                         "(no-op if none exists yet, so a requeued job can use it unconditionally)")
     args = ap.parse_args(argv)
 
     # ---- lightweight path: inspect the data without importing torch/trl ----
@@ -144,6 +174,21 @@ def main(argv: Optional[list] = None) -> int:
     import torch
     from datasets import load_dataset
     from trl import SFTConfig, SFTTrainer
+
+    # Record the resolved dependency versions. The PEP-723 block above pins only FLOORS, so
+    # `uv run` resolves whatever is current on the day — and two runs weeks apart are not
+    # necessarily the same experiment. When v5 came back with a generation-termination defect
+    # that v4 didn't have, the job log turned out to contain no version information at all
+    # (uv's download lines omit them), so the one thing needed to diagnose it was unrecoverable.
+    # Print them where `hf jobs logs` will keep them.
+    import importlib.metadata as _md
+    _vers = {}
+    for _p in ("torch", "transformers", "trl", "peft", "accelerate", "datasets", "tokenizers"):
+        try:
+            _vers[_p] = _md.version(_p)
+        except Exception:
+            _vers[_p] = "?"
+    print("dependency versions: " + "  ".join(f"{k}=={v}" for k, v in _vers.items()), file=sys.stderr)
 
     ds = load_dataset("json", data_files=args.train_file, split="train")
     if args.max_train_samples and args.max_train_samples < len(ds):
@@ -221,7 +266,9 @@ def main(argv: Optional[list] = None) -> int:
         gradient_accumulation_steps=args.grad_accum,
         learning_rate=args.lr,
         logging_steps=25,
-        save_strategy="epoch",
+        save_strategy="steps" if args.save_steps else "epoch",
+        save_steps=args.save_steps or 500,             # ignored when save_strategy="epoch"
+        save_total_limit=args.save_total_limit,
         bf16=use_bf16,
         fp16=not use_bf16,
         packing=args.packing,
@@ -242,13 +289,65 @@ def main(argv: Optional[list] = None) -> int:
     # don't ship). Kwarg is `processing_class` on new TRL, `tokenizer` on older.
     import inspect
     from transformers import AutoTokenizer
-    tokenizer = AutoTokenizer.from_pretrained(args.model)
+    tokenizer = AutoTokenizer.from_pretrained(args.model, revision=args.revision)
     tok_kw = ("processing_class" if "processing_class" in inspect.signature(SFTTrainer.__init__).parameters
               else "tokenizer")
     trainer = SFTTrainer(model=args.model, args=cfg, train_dataset=ds, peft_config=peft_config,
                          **{tok_kw: tokenizer})
-    trainer.train()
+
+    # 'auto' = resume the latest checkpoint if one is there, else start fresh. That lets a SLURM
+    # script pass the flag unconditionally: first submission trains from scratch, a requeue after
+    # a wall-clock kill picks up where it left off.
+    resume = args.resume_from_checkpoint
+    if resume == "auto":
+        from transformers.trainer_utils import get_last_checkpoint
+        import os
+        resume = get_last_checkpoint(args.output_dir) if os.path.isdir(args.output_dir) else None
+        print(f"resume: {resume or 'no checkpoint found — starting fresh'}", file=sys.stderr)
+    trainer.train(resume_from_checkpoint=resume)
     trainer.save_model(args.output_dir)
+
+    # ---- termination check: does the model actually STOP? -------------------------------------
+    # Run BEFORE the push, so a broken model is never published. Every training-side metric can
+    # look perfect while the model has not learned to emit its stop token; the only way to know is
+    # to generate and look. Warn-don't-die by default is deliberate: a 2.6h run should not be
+    # thrown away over a check, but the failure must be impossible to miss in the log.
+    if args.check_termination:
+        n = min(args.check_termination, len(ds))
+        print(f"\n=== termination check: generating {n} examples ===", file=sys.stderr)
+        bad = []
+        try:
+            import torch as _t
+            m = trainer.model.eval()
+            for i in range(n):
+                msgs = ds[i]["messages"][:2]                     # system + user only
+                text = tokenizer.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+                enc = tokenizer(text, return_tensors="pt").to(m.device)
+                with _t.no_grad():
+                    out = m.generate(**enc, max_new_tokens=160, do_sample=False,
+                                     pad_token_id=tokenizer.pad_token_id or tokenizer.eos_token_id)
+                gen = out[0][enc["input_ids"].shape[1]:]
+                txt = tokenizer.decode(gen, skip_special_tokens=True)
+                # A healthy completion is ONE record and then stop. These markers mean the model
+                # ran past its own answer into a replayed conversation turn.
+                stopped = gen[-1].item() in (tokenizer.eos_token_id, tokenizer.pad_token_id)
+                runaway = any(k in txt for k in ("<think>", "\nuser\n", "\nassistant\n")) \
+                    or txt.count("name:") > 1
+                if runaway or not stopped:
+                    bad.append((i, txt[:160].replace("\n", " | ")))
+            if bad:
+                print(f"*** TERMINATION CHECK FAILED: {len(bad)}/{n} completions ran away or "
+                      f"never emitted a stop token.", file=sys.stderr)
+                for i, t in bad[:3]:
+                    print(f"    [{i}] {t}", file=sys.stderr)
+                print("*** The adapter will still be saved/pushed, but DO NOT trust its eval "
+                      "numbers: a runaway completion corrupts YAML parsing downstream. Re-check "
+                      "the dependency pins at the top of this file before using it.", file=sys.stderr)
+            else:
+                print(f"termination check OK — {n}/{n} completions stopped cleanly", file=sys.stderr)
+        except Exception as e:                      # never let the check itself kill a good run
+            print(f"termination check could not run ({type(e).__name__}: {e})", file=sys.stderr)
+
     if args.push_to_hub:
         trainer.push_to_hub()
     print(f"done -> {args.hub_model_id or args.output_dir}", file=sys.stderr)

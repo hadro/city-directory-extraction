@@ -50,7 +50,7 @@ FIELDS = [
     "source", "id", "publisher", "city", "borough", "year",
     "start_page", "end_page", "column_count", "sample_page",
     "key_page", "page_offset",
-    "holding_institution", "title", "notes",
+    "holding_institution", "contributing_institution", "title", "notes",
 ]
 
 # NYC boroughs, for filling `borough` from MODS subject.geographic / titles when unambiguous.
@@ -143,7 +143,10 @@ def make_row(source: str, ident: str, *, title: str = "", year_hint: str = "",
         "source": source, "id": ident,
         "publisher": publisher, "city": city, "borough": "", "year": year,
         "start_page": "", "end_page": "", "column_count": "", "sample_page": "",
-        "holding_institution": institution, "title": title[:200], "notes": flag,
+        # `contributing_institution` is left blank here — for `ia` rows it needs the metadata API.
+        # Run `backfill_contributor.py` after ingesting.
+        "holding_institution": institution, "contributing_institution": "",
+        "title": title[:200], "notes": flag,
     }
 
 

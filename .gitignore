@@ -12,6 +12,8 @@ cde-hpc-bundle-*.tar.gz
 data_prep/names/surnames_harvested.tsv
 data_prep/names/given_harvested.tsv
 data_prep/master_directories.pending.csv
+# IA metadata API cache for backfill_contributor.py (re-fetchable, ~10s)
+data_prep/.ia_contributor_cache.json
 
 # python
 __pycache__/

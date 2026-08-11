@@ -24,7 +24,8 @@ volumes) for the pipeline to OCR/extract.
 | `sample_page` | opt. | a known-good listing page number (sanity reference) |
 | `key_page` | opt. | page of the "Explanation of abbreviations" key (the volume's ground-truth legend); from visual sampling. See `style_profiles/` |
 | `page_offset` | opt. | `canvas_index − printed_page` near the listing start (maps a printed/TOC page number to a scan canvas). Drifts across a volume — local anchor, not a global constant |
-| `holding_institution` | rec. | NYPL, BPL, Columbia, LoC, Internet Archive, … (provenance) |
+| `holding_institution` | rec. | where the scan is **hosted**: NYPL, Internet Archive, LoC, … |
+| `contributing_institution` | rec. | who **digitized** it — the credit line. Distinct from the above: all 291 `ia` rows are *hosted* by Internet Archive but were contributed by BPL (186), Allen County (78), or Columbia (27). Backfilled from the IA metadata API by `backfill_contributor.py`; re-run it after any `ia` ingest |
 | `title` | rec. | the volume's title (MODS primary title / manifest label); auto-filled by `ingest_collection.py` |
 | `notes` | opt. | anything (e.g. microform, condition, "Greater NY", `PHONEBOOK`, `covers …`) |
 

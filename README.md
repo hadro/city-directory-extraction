@@ -291,5 +291,5 @@ Brooklyn 1897) are kept OUT of the sampling/harvest set and `REVIEW:`-flagged in
 ## Hugging Face resources (namespace `hadro`)
 
 - `hadro/city-directory-synth` — synthetic train (100k) + smoke (3k). PUBLIC.
-- `hadro/cde-evals` — NYU + synth-dev eval sets + preds. PRIVATE (respects NYU CC-BY-SA-NC).
+- `hadro/cde-evals` — the full gold panel: 18 NYC volumes (1,169 lines) + NYU/FTD/Tulsa/Lain/Minneapolis + synth_dev. PRIVATE (NYU is CC-BY-SA-NC; also keeps the panel out of training crawls).
 - `hadro/city-dir-08b-yaml` — the good 0.8B run (see Status). Earlier runs documented in the handoff.

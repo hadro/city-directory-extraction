@@ -324,15 +324,27 @@ def main(argv: Optional[list] = None) -> int:
                 text = tokenizer.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
                 enc = tokenizer(text, return_tensors="pt").to(m.device)
                 with _t.no_grad():
+                    # Stop on BOTH <|im_end|> (tokenizer.eos, what the SFT trained) and
+                    # <|endoftext|> (tokenizer.pad, what the base config declares). Without this
+                    # generate() honours only the config EOS and runs past the model's own answer
+                    # — which makes this probe report a runaway that generation settings caused.
+                    # Keep in sync with eval/qwen_predict.py, or the probe is not testing eval.
+                    stops = [t for t in {tokenizer.eos_token_id, tokenizer.pad_token_id}
+                             if t is not None]
                     out = m.generate(**enc, max_new_tokens=160, do_sample=False,
+                                     eos_token_id=stops,
                                      pad_token_id=tokenizer.pad_token_id or tokenizer.eos_token_id)
                 gen = out[0][enc["input_ids"].shape[1]:]
                 txt = tokenizer.decode(gen, skip_special_tokens=True)
                 # A healthy completion is ONE record and then stop. These markers mean the model
                 # ran past its own answer into a replayed conversation turn.
                 stopped = gen[-1].item() in (tokenizer.eos_token_id, tokenizer.pad_token_id)
+                # Count records by lines that START with "name:". A bare substring count also
+                # matches "spouse_name:", so every correct record for a married person looked
+                # like a runaway and the check fired on healthy models.
+                n_records = sum(1 for ln in txt.splitlines() if ln.startswith("name:"))
                 runaway = any(k in txt for k in ("<think>", "\nuser\n", "\nassistant\n")) \
-                    or txt.count("name:") > 1
+                    or n_records > 1
                 if runaway or not stopped:
                     bad.append((i, txt[:160].replace("\n", " | ")))
             if bad:

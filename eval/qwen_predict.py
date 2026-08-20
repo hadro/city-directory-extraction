@@ -116,7 +116,14 @@ def predict(net, tok, examples, target, batch_size, max_new_tokens):
             tokenize=False, add_generation_prompt=True) for ex in batch]
         enc = tok(texts, return_tensors="pt", padding=True).to(net.device)
         with torch.no_grad():
-            out = net.generate(**enc, max_new_tokens=max_new_tokens,
+            # Stop on BOTH the chat end-of-turn (<|im_end|>, tok.eos) and the base config's EOS
+            # (<|endoftext|>, tok.pad). Qwen3.5-0.8B ships no generation_config.json and its
+            # config.json declares eos=<|endoftext|>, so generate() defaults to that and runs
+            # straight past the <|im_end|> the SFT actually trained the model to emit. The
+            # first-record-wins guard in parse_completion() salvages the output either way, but
+            # without this every row burns the full max_new_tokens budget.
+            stops = [t for t in {tok.eos_token_id, tok.pad_token_id} if t is not None]
+            out = net.generate(**enc, max_new_tokens=max_new_tokens, eos_token_id=stops,
                                do_sample=False, pad_token_id=tok.pad_token_id)
         for row in out[:, enc["input_ids"].shape[1]:]:
             yield parse_completion(tok.decode(row, skip_special_tokens=True), target)

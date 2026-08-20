@@ -40,7 +40,9 @@ cp train/sft_qwen.py                    "$STAGE/train/"
 cp eval/qwen_predict.py eval/evaluate.py eval/results_table.py "$STAGE/eval/"
 cp data_prep/synth_persons.py           "$STAGE/data_prep/"
 cp data_prep/names/*.tsv                "$STAGE/data_prep/names/"
-cp docs/HANDOFF.md docs/TRAINING_OPTIONS.md "$STAGE/docs/" 2>/dev/null || true
+# GROUND_TRUTH_HANDOFF documents the labeling conventions behind the gold panel — needed to
+# interpret eval output, not just to reproduce it.
+cp docs/HANDOFF.md docs/TRAINING_OPTIONS.md docs/GROUND_TRUTH_HANDOFF.md "$STAGE/docs/" 2>/dev/null || true
 cp README.md                            "$STAGE/REPO_README.md"
 cp cards/MODEL_CARD.md cards/DATASET_CARD.md "$STAGE/docs/" 2>/dev/null || true
 

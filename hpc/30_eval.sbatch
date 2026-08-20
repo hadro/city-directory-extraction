@@ -46,7 +46,7 @@ echo "  adapter $ADAPTER"
 nvidia-smi
 
 score_one() {
-  local set_name="$1" gold="$2" limit_arg="$3"
+  local set_name="$1" gold="$2" limit_arg="$3" excl_arg="${4:-}"
   [ -f "$gold" ] || { echo "  skip $set_name (no $gold)"; return 0; }
   local pred="$DATA/preds_${RUN_NAME}_${set_name}.txt"
   echo
@@ -62,7 +62,7 @@ score_one() {
       --batch-size 32 $limit_arg"
   run_in_env "python eval/evaluate.py \
       --gold '$gold' --pred '$pred' --target yaml \
-      --save results/scores.jsonl --label 'qwen-0.8b-yaml-$RUN_NAME' " \
+      --save results/scores.jsonl --label 'qwen-0.8b-yaml-$RUN_NAME' $excl_arg" \
     || echo "  (scoring failed for $set_name)"
 }
 
@@ -72,7 +72,15 @@ for v in $EXTERNALS; do
   [ "$v" = "synth_dev" ] && g="$DATA/synth_dev.jsonl" || g="$DATA/${v}_eval.jsonl"
   score_one "$v" "$g" ""
 done
-score_one nyu "$DATA/nyu_eval.jsonl" "--limit 500"
+# NYU MUST be scored with --exclude-fields. spouse_name / race_designation / is_business are
+# synthesized by nyu_to_eval.py regexes rather than transcribed, in a form the model does not
+# emit, so they score a hard 0.00 and drag macro down by ~0.20 for reasons that have nothing to
+# do with the model. Every board entry from v2 onward carries this exclusion (check
+# `excluded_fields` in results/scores.jsonl) — omitting it here produces a number that silently
+# is not comparable to anything. See eval/evaluate.py --exclude-fields and
+# docs/GROUND_TRUTH_HANDOFF.md.
+score_one nyu "$DATA/nyu_eval.jsonl" "--limit 500" \
+  "--exclude-fields spouse_name,race_designation,is_business"
 
 echo
 echo "=== pivot table ==="

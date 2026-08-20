@@ -272,6 +272,16 @@ def main(argv: Optional[list] = None) -> int:
     bad = excl - set(FIELDS)
     if bad:
         sys.exit(f"--exclude-fields: unknown field(s) {sorted(bad)}; valid: {FIELDS}")
+    # NYU's spouse_name / race_designation / is_business are synthesized by nyu_to_eval.py regexes,
+    # not transcribed, in a form the model does not emit — they score a hard 0.00 and cost ~0.20
+    # macro for reasons unrelated to the model. Every board entry carries this exclusion, so an
+    # unrestricted NYU number is silently not comparable to any of them. This fired for real:
+    # hpc/30_eval.sbatch shipped without the flag and wrote 0.608 where 0.817 belonged.
+    if "nyu" in os.path.basename(args.gold).lower() and not excl:
+        print("WARNING: scoring NYU without --exclude-fields. The board uses "
+              "--exclude-fields spouse_name,race_designation,is_business; this number will NOT be "
+              "comparable to it (expect ~0.20 lower macro). See docs/GROUND_TRUTH_HANDOFF.md.",
+              file=sys.stderr)
     res = score(gold, pred, args.strict, excl)
     report(res, excl)
     if args.save:

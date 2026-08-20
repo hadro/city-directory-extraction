@@ -15,6 +15,12 @@ then release to HF.
 > board, the v5 eval-corruption bug, and the diminishing-returns gate that has now tripped.
 > Everything below this box is historical context, and the NYU-only table immediately following
 > is from **v1** — do not cite it.
+>
+> **UPDATE (2026-08-19): v5 REPLICATED on NYU Torch** (`v5-torch`, L40S, 0.819/0.873/61.0% vs
+> 0.826/0.875/61.5% — net −0.007 macro, all divergence in near-empty fields). The board is
+> hardware-portable and the Torch pipeline works end to end. That run also exposed three harness
+> bugs, fixed in `d476deb` — the important one is that `30_eval.sbatch` was scoring NYU *without*
+> `--exclude-fields`. See "v5 REPLICATED ON INDEPENDENT HARDWARE".
 
 **Measured on NYU gold (500 rows, YAML).** Scoring note: `macro-F1` = avg over fields the gold
 actually has; `micro-F1` = frequency-weighted overall (see `evaluate.py`). Both matter — and they
@@ -227,7 +233,33 @@ qwen series moved; cite the RIGHT column:
 **The v5 "regression" fully inverts: on honest NYU, v5 (0.810) BEATS v4 (0.797).** Micro drops for
 everyone because `is_business` — scoring ~0.98 on 500 rows against our own heuristic — was
 inflating it. **`gliner-medium`, `gemini-3.1-flash-lite` and `qwen-2b` keep UNRESTRICTED NYU
-numbers** (their preds no longer exist to re-score); do not compare those to the table above.
+numbers**; do not compare those to the table above.
+
+> **CORRECTION (2026-08-20): the preds DO still exist** — `data/preds_gliner.txt`,
+> `data/preds_gemini.txt`, `data/preds_qwen_2b.txt` — so the stated blocker for re-scoring is gone.
+> Re-scored restricted, **the NYU ordering inverts**: Gemini **0.889** macro / 0.912 micro / 71.4% EM
+> vs v5 0.810, and GLiNER 0.442 (was 0.381). The unrestricted 0.672 in the pivot is what makes qwen
+> look like it wins NYU macro by ~0.14; consistently scored it *loses* by ~0.08. **This does not
+> touch the headline claim**, which is the 18-volume panel (v5 0.826 vs primed-pub Gemini 0.790) —
+> those volumes have real hand-labeled gold for every field and involve no exclusion.
+>
+> **DONE 2026-08-20 — the NYU column is now internally consistent.** All three re-scored restricted
+> and appended under the same labels (`results_table.py` is last-run-wins, so the pivot
+> self-corrected; the old unrestricted rows remain in `scores.jsonl` for audit). Final NYU macro,
+> all restricted, 500 rows unless noted:
+>
+> | | macro | micro | was (unrestricted) |
+> |---|---|---|---|
+> | gemini-3.1-flash-lite | **0.889** | 0.912 | 0.672 |
+> | qwen-0.8b-yaml-v5 | 0.810 | 0.823 | — |
+> | gliner-medium | 0.442 | 0.500 | 0.381 |
+> | qwen-2b (n=3000) | 0.416 | 0.459 | 0.281 |
+>
+> **So: Gemini leads NYU, and the panel is where our claim lives.** Two residuals: `qwen-2b` is
+> still n=3000 where everything else is 500 (deprecated baseline — only the exclusion was changed,
+> one variable at a time), and `preds_gliner.txt` / `preds_qwen_2b.txt` are **pipe**-target, not
+> yaml, if you ever re-run them. `evaluate.py` now **warns** when it is handed an NYU gold file
+> without `--exclude-fields`, so this cannot silently recur from any caller.
 
 **Still open — and the artifact propagated INTO the training data.** `synth_persons.py` emits five
 race forms indiscriminately (`(c)`, `(co'd)`, `col`, `col'd`, `colored`), and its NYC vocabulary
@@ -238,6 +270,49 @@ learned both forms, and it now disagrees with whichever gold set it meets. Gate 
 the publisher/era context tag in a future cycle — the `*` marker already is (ogden vs
 hopehenderson), so the mechanism exists. Same playbook as dittos/fusion/neighborhood-comma.
 Flagged in [cards/DATASET_CARD.md](../cards/DATASET_CARD.md) too.
+
+### ✅ v5 REPLICATED ON INDEPENDENT HARDWARE — `v5-torch`, NYU Torch (2026-08-19)
+
+**v5 reproduces on a different cluster, a different GPU and a fully re-pinned stack.** Run by a
+collaborator on **NYU Torch** (train job `15966832`, L40S, 4 h 14 m; eval job `16023946`). Config
+matched to v5: 0.8B, LoRA with vision excluded, 100k v5 synth × 3 epochs, **unpacked**, effective
+batch 64 (32 × 2), lr 2e-4, YAML. **4689 steps** — i.e. `ceil(100000/64) × 3`, the same arithmetic
+that proves nothing was dropped. Final loss 0.0037, token-acc 0.9994.
+
+| 18-vol panel (line-weighted, n=1169) | macro | micro | EM |
+|---|---|---|---|
+| v5 (reference, rtx-pro-6000) | 0.826 | 0.875 | 61.5% |
+| **v5-torch** (L40S) | **0.819** | **0.873** | **61.0%** |
+
+**Net −0.007 macro.** Both aggregates were recomputed from the raw `scores.jsonl`, not taken from
+the collaborator's summary, and row counts match on all 18 volumes. Four volumes moved >0.05 and
+**every one is a near-empty field amplified by unweighted macro**: mb1931 −0.089 is *entirely*
+`employer` (7 gold rows of 109); doggett1846 −0.061 is `spouse_name` with **2 gold rows**, i.e. one
+row flipping; polk1925 −0.053 and polk1933bk **+0.051** are both `employer` (8 and 5 rows). Runs in
+both directions — this is reproduction noise, not drift. Externals: synth_dev 0.994, tulsa 0.901,
+lain 0.902, minneapolis 0.788, NYU (restricted) 0.817 — which slightly *beats* v5's 0.810.
+
+**Takeaway: the board is hardware-portable and the Torch pipeline is proven end to end** (setup →
+prefetch → train → 23-set eval). Pins used: torch 2.13.0 / transformers 5.14.1 / trl 1.9.2 / peft
+0.20.0 / accelerate 1.14.0 / datasets 5.0.1.
+
+**The run exposed three real bugs in THIS repo — all fixed in `d476deb`:**
+1. **`hpc/30_eval.sbatch` never passed `--exclude-fields` for NYU**, so the shipped script wrote the
+   *unrestricted* 0.608 into `scores.jsonl` under the main label — despite `evaluate.py --help`
+   saying "REQUIRED FOR NYU" and this doc saying "never score NYU without it". Verified fix:
+   rescoring the same preds gives 0.608 → **0.817 / 0.828 / 51.2%**. This is the one that would have
+   silently handed the next person a phantom 20-point regression.
+2. **`eval/qwen_predict.py` didn't pass `eos_token_id`.** Qwen3.5-0.8B ships no
+   `generation_config.json` and its `config.json` declares eos=`<|endoftext|>`, so `generate()` ran
+   past the `<|im_end|>` the SFT trained. The first-record-wins guard salvaged the output (which is
+   why no past number was wrong), but every row burned the full `max_new_tokens`.
+3. **The termination check false-positived on healthy models.** `txt.count("name:") > 1` also matches
+   `spouse_name:`, so any correct record for a married person read as a runaway. Now counts lines
+   that *start* with `name:`. Same `eos_token_id` fix applied to the probe, or it isn't testing eval.
+
+**Also confirmed:** `hpc/20_train.sbatch` shipped `--packing`, but **v5 was unpacked** — so the
+default path did NOT reproduce the board. The collaborator correctly stripped it. **Fixed
+2026-08-20:** packing is now opt-in (`PACKING=1`), default off. See "Training speed".
 
 ### ⚠️ DIMINISHING-RETURNS GATE TRIPPED — read this before starting cycle six
 
@@ -672,6 +747,16 @@ examples, l4x1, batch 8, 1 epoch — compare `train_runtime` (baseline = stock T
 - **Adopt `--packing`** (HF's default for SFT). ~20% on the smoke likely *understates* it — short
   examples + real length variance pack better on the full 100k. Caveat: packing changed the loss
   curve, so eyeball quality on the first real packed run before trusting it.
+
+  > **DECIDED 2026-08-20 — packing is OPT-IN, default OFF.** `hpc/20_train.sbatch` shipped with
+  > `--packing` hard-coded, but **v2–v5 were all trained unpacked**, so the default path did not
+  > reproduce the board — the v5-torch run had to strip the flag to match v5. The caveat above
+  > (packing changes the loss curve; validate the first packed run) was never discharged, so an
+  > unvalidated change was sitting in the default path. It is now gated:
+  > `--export=ALL,RUN_NAME=v6,PACKING=1`. The recommendation stands; it just has to be a choice.
+  > The speed case is weak anyway right now — ~50 min on a ~4 h job, and the project is
+  > gold-bound, not compute-bound. When you do take it, score a packed run against an unpacked one
+  > before either goes on the board.
 - **Kernels / Unsloth are NOT worth it at 0.8B / modest batch.** Manual kernels = build hell +
   no engagement; Unsloth's wins need large batch / VRAM-bound regimes (2B/4B) to amortize.
 - **The real cost lever is the GPU** — and we measured it. Same 0.8B / batch 64 / YAML smoke

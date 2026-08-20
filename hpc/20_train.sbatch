@@ -52,6 +52,27 @@ nvidia-smi
 # fresh process, so `srun run_in_env ...` fails with "command not found". This is a single-node,
 # single-task, single-GPU job — sbatch already runs the script on the allocated node, and
 # `apptainer exec --nv` sees the GPU fine without a step launcher.
+# PACKING IS OFF BY DEFAULT, AND THAT IS DELIBERATE. Every board entry from v2 through v5 was
+# trained UNPACKED, and the board's whole value rests on the runs being config-identical so a
+# score delta attributes to the data. Turning packing on by default would silently break that —
+# it already did: the v5-torch reproduction on NYU Torch had to strip this flag to match v5.
+#
+# The ~20% speed win is real and still worth taking (see "Training speed" in docs/HANDOFF.md),
+# but that same note says packing CHANGES THE LOSS CURVE and to eyeball quality on the first real
+# packed run before trusting it. That run has never happened. So make it an explicit choice:
+#
+#     sbatch $(slurm_gpu_args) --export=ALL,RUN_NAME=v6,PACKING=1 hpc/20_train.sbatch
+#
+# and when you do, score it against an unpacked run before it goes on the board.
+PACKING="${PACKING:-0}"
+if [ "$PACKING" = "1" ]; then
+  PACK_ARG="--packing"
+  echo "  packing: ON — this run is NOT config-identical to v2-v5; validate before boarding it"
+else
+  PACK_ARG=""
+  echo "  packing: off (board-comparable; set PACKING=1 to enable)"
+fi
+
 run_in_env "python train/sft_qwen.py \
     --train-file '$TRAIN_FILE' \
     --target yaml \
@@ -61,7 +82,7 @@ run_in_env "python train/sft_qwen.py \
     --batch-size $BATCH_SIZE \
     --grad-accum $GRAD_ACCUM \
     --lr 2e-4 \
-    --packing \
+    $PACK_ARG \
     --save-steps 500 \
     --save-total-limit 2 \
     --resume-from-checkpoint auto"

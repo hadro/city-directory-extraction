@@ -546,12 +546,53 @@ NYC_CIVIC_OF = ["timber", "customs", "the port", "weights and measures", "the ma
                 "hides", "flour", "lumber", "the revenue"]
 
 
-def _nyc_street(rng) -> str:
+# Publishers whose volumes are OUTER-borough (Brooklyn/Queens/SI). Numbered streets there carry a
+# directional far less often than in Manhattan -- measured on the gold panel below.
+NYC_OUTER_PUBLISHERS = {"ogden", "hearne", "hopehenderson", "lain", "smith", "spooner",
+                        "boyd", "upington", "queens"}
+
+
+def _nyc_directional(rng, ynum: int = 0, publisher: str = "") -> str:
+    """Directional prefix for a NUMBERED street ("E. 79th" / "E 79th" / "").
+
+    THE PERIOD IS ERA-CONDITIONED AND IT MATTERS. Measured over every panel volume, counting
+    addresses that contain an ordinal street and asking how many carry a directional and in
+    which form:
+
+        doggett1846       3/5   100% period      trow1907    35/41    0% period (all BARE)
+        rode1851          9/10   100% period     trow1913     1/12    0% period
+        trowwilson1865   78/79    87% period     polk1925     2/5     0% period
+        trow1884         70/70   100% period     queens1933   0/45    (none at all)
+        lain1876 (Bklyn)  2/14   100% period     hopehenderson 3/3   100% period (Bklyn, n=3)
+
+    So: Manhattan numbered streets almost always take a directional; the form flips from
+    PERIOD to BARE around 1900; outer-borough volumes use them far less often (lain1876
+    14% of ordinal addresses vs trow1884 100%).
+
+    Before this existed the generator emitted ONLY the bare Tulsa form (TUL_DIRECTIONS), so
+    the model learned "E 79th" everywhere and lost a full row on every 19th-century
+    period-directional address. Measured cost on the 21-volume panel (v5-torch, 2026-08-31,
+    `evaluate.py --report-normalized`): +18.0 whole-row EM across the 19th century, exactly
+    +0.0 across the 20th -- ~12 EM points of the whole panel. See docs/HANDOFF.md CYCLE-SIX.
+    """
+    # ynum==0 means the caller did not thread the year: emit nothing rather than guess a form.
+    # Every real path passes it; `--self-test` asserts the rates, which catches a missed one.
+    if ynum < 1830:                                   # the numbered grid barely reaches the city yet
+        return ""
+    outer = publisher in NYC_OUTER_PUBLISHERS
+    if rng.random() >= (0.15 if outer else 0.93):    # gold: Mhtn 97.5%, outer 31% (n=16, noisy)
+        return ""
+    d = rng.choice("NSEW" if outer else "EW")         # Bklyn runs N./S. (Williamsburg), Mhtn E./W.
+    return f"{d}. " if ynum < 1900 else f"{d} "
+
+
+def _nyc_street(rng, ynum: int = 0, publisher: str = "") -> str:
     roll = rng.random()
-    if roll < 0.16:                                   # numbered avenue
+    if roll < 0.16:                                   # numbered avenue -- NO directional (gold:
+        # "344 Sixth av.", "215, 4th av", "32 Eighth av." -- the directional rides the street)
         return f"{_ordinal(rng.randint(1, 12))} av" if rng.random() < 0.6 else f"av {rng.choice('ABCD')}"
-    if roll < 0.34:                                   # numbered street
-        return f"{_ordinal(rng.randint(1, 50))} st"
+    if roll < 0.34:                                   # numbered street -- takes the directional
+        return f"{_nyc_directional(rng, ynum, publisher)}{_ordinal(rng.randint(1, 50))} st"
     name = rng.choice(NYC_STREETS)
     stype = _wchoice(rng, NYC_STYPES)
     # "Avy." abbreviation occasionally stands in for avenue
@@ -596,7 +637,7 @@ def _nyc_address_dense(rng, home: bool = False) -> str:
     return addr
 
 
-def _nyc_address_early(rng, num: int, publisher: str = "") -> str:
+def _nyc_address_early(rng, num: int, publisher: str = "", ynum: int = 0) -> str:
     """1780s-1810s print forms measured from franks1786/duncan1794 gold: hyphenated
     AND abbreviated street names ('19 Wm. street', '16 Wat.st.', '36 Han. squ.'),
     ' do.' street dittos (dominant on Duncan's run-on pages, incl. bare 'Mott do.'),
@@ -618,7 +659,7 @@ def _nyc_address_early(rng, num: int, publisher: str = "") -> str:
         form = _wchoice(rng, [(f"{ab} street", 4), (f"{ab}st.", 3), (f"{ab} st.", 2)])
         return f"{num} {form}"
     tail = "." if rng.random() < 0.30 else ""
-    return f"{num} {_nyc_street(rng)}{tail}"
+    return f"{num} {_nyc_street(rng, ynum, publisher)}{tail}"
 
 
 def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
@@ -630,7 +671,7 @@ def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
     if dense and roll < 0.88:
         return _nyc_address_dense(rng, home=home)
     if roll < 0.05:                                   # rear / foot qualifier
-        return f"{rng.choice(['rear', 'ft'])} {rng.randint(1, 600)} {_nyc_street(rng)}"
+        return f"{rng.choice(['rear', 'ft'])} {rng.randint(1, 600)} {_nyc_street(rng, ynum, publisher)}"
     if roll < 0.08:                                   # corner ("cor" or single-letter "c")
         if era == "early" and rng.random() < 0.5:     # 1790s-1830s spell relations out
             return f"corner of {rng.choice(NYC_STREETS)} and {rng.choice(NYC_STREETS)}"
@@ -643,7 +684,7 @@ def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
         return f"{rng.choice(NYC_STREETS)} {rng.choice(['c', 'n'])} {rng.choice(NYC_STREETS)}"
     num = rng.randint(1, 600)
     if era == "early":
-        return _nyc_address_early(rng, num, publisher)
+        return _nyc_address_early(rng, num, publisher, ynum)
     if era == "late" and ynum >= 1915:                # hyphenated nos + nbhds are 1920s/30s
         # Polk outer-borough volumes (Queens/SI/Bklyn 1931+) run hyphenated + neighborhood
         # heavy (queens1933 style); mid-1910s-20s Manhattan only lightly
@@ -651,16 +692,16 @@ def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
         if rng.random() < outer_p:
             addr_num = f"{num}-{rng.randint(1, 64)}"
             street = (f"{_ordinal(rng.randint(1, 180))}" + (" av" if rng.random() < 0.45 else "")
-                      ) if rng.random() < 0.55 else _nyc_street(rng)
+                      ) if rng.random() < 0.55 else _nyc_street(rng, ynum, publisher)
             addr = f"{addr_num} {street}"             # bare-ordinal streets: "25-53 47th LIC"
             if rng.random() < 0.75:
                 addr += f" {rng.choice(NYC_NBHD)}"
             return addr
-        addr = f"{num} {_nyc_street(rng)}"
+        addr = f"{num} {_nyc_street(rng, ynum, publisher)}"
         if rng.random() < 0.25:
             addr += f" {rng.choice(NYC_NBHD)}"
         return addr
-    return f"{num} {_nyc_street(rng)}"
+    return f"{num} {_nyc_street(rng, ynum, publisher)}"
 
 
 def _nyc_given(rng, female: bool, era: str) -> str:
@@ -1216,6 +1257,37 @@ def _stats_print(stats: dict, fh=None) -> None:
 # CLI
 # ======================================================================================
 
+def _self_test() -> int:
+    """Guard the directional contract. This bug was invisible for months: the generator emitted
+    ONLY the bare Tulsa form, which cost ~12 whole-row EM points across the panel and read as a
+    model failure. Cheap to assert, expensive to rediscover."""
+    import random as _r
+    def sample(ynum, publisher, n=4000):
+        rng = _r.Random(7)
+        out = [_nyc_directional(rng, ynum, publisher) for _ in range(n)]
+        dot = sum(1 for x in out if x.endswith(". "))
+        bare = sum(1 for x in out if x and not x.endswith(". "))
+        return dot / n, bare / n
+
+    d, b = sample(1884, "trow")                       # 19th-c Manhattan -> PERIOD, ~93%
+    assert 0.88 <= d <= 0.98 and b == 0, f"19c manhattan: dot={d} bare={b}"
+    d, b = sample(1913, "trow")                       # 20th-c Manhattan -> BARE, ~93%
+    assert 0.88 <= b <= 0.98 and d == 0, f"20c manhattan: dot={d} bare={b}"
+    d, b = sample(1876, "lain")                       # outer borough -> much rarer, still period
+    assert 0.10 <= d <= 0.22 and b == 0, f"19c outer: dot={d} bare={b}"
+    d, b = sample(1818, "longworth")                  # pre-1830: the numbered grid barely exists
+    assert d == 0 and b == 0, f"pre-1830 emitted a directional: dot={d} bare={b}"
+    d, b = sample(0, "trow")                          # year not threaded -> emit nothing, never guess
+    assert d == 0 and b == 0, f"unknown year must be silent: dot={d} bare={b}"
+    # the numbered AVENUE branch must stay bare (gold: "344 Sixth av.", "215, 4th av")
+    rng = _r.Random(3)
+    avs = [_nyc_street(rng, 1884, "trow") for _ in range(4000)]
+    bad = [a for a in avs if " av" in a and re.search(r"[NSEW]\.", a)]
+    assert not bad, f"directional leaked onto an avenue: {bad[:3]}"
+    print("[self-test] directional era/borough contract OK")
+    return 0
+
+
 def main(argv: Optional[list] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--n", type=int, default=1000)
@@ -1225,6 +1297,8 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--profile", choices=["tulsa", "nyc", "mix"], default="mix")
     ap.add_argument("--target", choices=["pipe", "yaml"], default="pipe", help="--preview format")
     ap.add_argument("--preview", action="store_true")
+    ap.add_argument("--self-test", action="store_true",
+                    help="assert the directional era/borough contract (no model, no I/O)")
     ap.add_argument("--stats", action="store_true",
                     help="print a feature-frequency table to stderr after generating")
     ap.add_argument("--mix-weight", type=float, default=0.75, metavar="P",
@@ -1232,6 +1306,10 @@ def main(argv: Optional[list] = None) -> int:
                          "was 0.5 through v2). Tulsa still carries Polk-style spouse-paren + "
                          "grid-address signal -- rebalance, don't zero it.")
     args = ap.parse_args(argv)
+
+    if args.self_test:
+        return _self_test()
+
     if not 0.0 <= args.mix_weight <= 1.0:
         ap.error("--mix-weight must be between 0 and 1")
 

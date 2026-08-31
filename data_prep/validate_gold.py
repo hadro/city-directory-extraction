@@ -52,7 +52,11 @@ FIELDS = ["name", "is_business", "spouse_name", "race_designation",
           "occupation_role", "employer", "address", "home_address"]
 # context.publisher vocabulary (2026-07-19 migration; `dialect` retired): the panel volumes'
 # publishers + the generator's era table + the external sets' attributions.
+# "polk" is NYC Polk; "polk-tulsa" is the Tulsa 1921 volume. They were BOTH tagged "polk"
+# until 2026-08-31, which made [publisher=polk; year=1917] and [publisher=polk; year=1921]
+# identical in the prompt -- see the _finish docstring in synth_persons.py.
 KNOWN_PUBLISHERS = {"franks", "duncan", "longworth", "mercein", "ogden", "doggett", "rode",
+                    "polk-tulsa",
                     "trow", "hearne", "hopehenderson", "smith", "lain", "boyd", "upington",
                     "polk", "mb", "davison", "bottin"}
 

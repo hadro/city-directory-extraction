@@ -345,7 +345,7 @@ def make_tulsa(rng) -> dict:
         "race_designation": race, "occupation_role": occ, "employer": emp,
         "address": _tul_address(rng, greenwood, rear_boost=greenwood), "home_address": "",
     }
-    return _finish(rng, rec, "tulsa", "polk", "1921")
+    return _finish(rng, rec, "tulsa", "polk-tulsa", "1921")
 
 
 def _tul_business(rng) -> dict:
@@ -364,7 +364,7 @@ def _tul_business(rng) -> dict:
         "employer": "", "address": _tul_address(rng, greenwood=(race == "(c)")),
         "home_address": "",
     }
-    return _finish(rng, rec, "tulsa", "polk", "1921")
+    return _finish(rng, rec, "tulsa", "polk-tulsa", "1921")
 
 
 def render_tulsa(rng, rec, hints=None) -> str:
@@ -442,7 +442,13 @@ def _load_occ_pool():
 _OCC_VALS, _OCC_CUM = _load_occ_pool()
 
 
-def _nyc_occ_pick(rng) -> str:
+def _nyc_occ_pick(rng, era: str = "mid") -> str:
+    # "st." = STORE, not street: "looking glass st. 5 Park", "china & glass st. 112 Broadway"
+    # (both Longworth 1818/19, same page). Position disambiguates -- st. BEFORE the house number
+    # is a store, st. AFTER a street name is street. Early-era only, and the trade keeps the
+    # abbreviation verbatim (conv #1), so the model must learn to read it as an occupation.
+    if era == "early" and rng.random() < 0.03:
+        return f"{rng.choice(NYC_STORE_TRADES)} st."
     return rng.choices(_OCC_VALS, cum_weights=_OCC_CUM, k=1)[0]
 NYC_STREETS = [
     "Broadway", "Bowery", "Wall", "Pearl", "Water", "Cherry", "Mott", "Mulberry",
@@ -501,6 +507,22 @@ NYC_EARLY_ST_ABBREV = {
     "Water": "Wat.", "William": "Wm.", "George": "Geo.", "Queen": "Q.", "Hanover": "Han.",
     "Broad": "Br.", "Cherry": "Cher.", "Greenwich": "Greenw.", "Chatham": "Chat.",
 }
+# Out-of-town HOME addresses -- Manhattan commuters. Measured share of non-empty home_address
+# in the gold: rode1851 25%, doggett1846 23%, trowwilson1865 38%, trow1884 41%, trow1907 18%
+# -- and lain1876 (Brooklyn) 0%. Brooklyn residents do not commute out, so this is Manhattan-only.
+NYC_OUT_OF_TOWN = ["Brooklyn", "B'klyn", "Bklyn", "N. J.", "New Jersey", "J. C.", "Orange, N. J.",
+                   "Englewood, N. J.", "Nyack, N. Y.", "White Plains, N. Y.", "Yonkers",
+                   "Rye", "Astoria", "Staten Island", "Conn.", "R. I.", "W. I.", "Mass.", "Pa"]
+# Named buildings stand in for a street address ("h B'way h." = Broadway House, verified on
+# Trow/Wilson 1865/66 p.815; "51 Astor h." = Astor House). The trailing "h." is HOUSE, not the
+# residence marker -- it stays in the value (conv #1, verbatim).
+NYC_NAMED_BUILDINGS = ["B'way h.", "Astor h.", "Metropolitan h.", "St. Nicholas h.",
+                       "Girard h.", "Everett h.", "Lovejoy's h."]
+# Trade + "st." = STORE, not street ("looking glass st. 5 Park", "china & glass st. 112 Broadway"
+# -- Longworth 1818/19). Position disambiguates: st. BEFORE the house number is a store.
+NYC_STORE_TRADES = ["looking glass", "china & glass", "hat", "shoe", "grocery", "drug",
+                    "hardware", "crockery", "tobacco", "book", "dry goods"]
+
 NYC_EARLY_STREETS = ["Water", "Wall", "Cherry", "Broad", "Queen", "William", "George",
                      "Hanover", "Pearl", "Dock", "Smith", "King", "Beekman", "Maiden",
                      "Nassau", "John", "Fair", "Ann", "Chatham", "Greenwich"]
@@ -662,11 +684,31 @@ def _nyc_address_early(rng, num: int, publisher: str = "", ynum: int = 0) -> str
     return f"{num} {_nyc_street(rng, ynum, publisher)}{tail}"
 
 
+def _nyc_out_of_town_home(rng, publisher: str) -> str:
+    """A Manhattan commuter's HOME, measured as a share of non-empty home_address in the gold:
+    rode1851 25%, doggett1846 23%, trowwilson1865 38%, trow1884 41%, trow1907 18% -- and
+    lain1876 (Brooklyn) 0%. Brooklyn residents do not commute out, so this is Manhattan-only.
+    Forms seen: bare place ("Rye"), place+state ("Orange, N. J."), bare region ("N. J.", "W. I."),
+    and street+borough ("117 S. Oxford, B'klyn")."""
+    place = rng.choice(NYC_OUT_OF_TOWN)
+    if rng.random() < 0.28 and "," not in place:      # "117 S. Oxford, B'klyn"
+        return f"{rng.randint(1, 600)} {_nyc_street(rng)}, {place}"
+    return place
+
+
 def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
                  home: bool = False) -> str:
     # forms + abbreviations confirmed against real gold pages (Hearne 1852, franks1786,
     # duncan1794, trow1907/13, polk1917/25, queens1933) + style cards
     dense = (publisher in ("trow", "polk") and 1900 <= ynum <= 1930) or publisher == "mb"
+    manhattan = publisher not in NYC_OUTER_PUBLISHERS
+    if home and manhattan and ynum >= 1840 and rng.random() < 0.30:
+        return _nyc_out_of_town_home(rng, publisher)
+    # A named building stands in for a street address ("h B'way h." = Broadway House). Rare, and
+    # 19th-century Manhattan only -- verified on Trow/Wilson 1865/66 and Trow 1884/85.
+    if manhattan and 1840 <= ynum < 1900 and rng.random() < 0.015:
+        b = rng.choice(NYC_NAMED_BUILDINGS)
+        return b if rng.random() < 0.5 else f"{rng.randint(1, 90)} {b}"
     roll = rng.random()
     if dense and roll < 0.88:
         return _nyc_address_dense(rng, home=home)
@@ -678,6 +720,15 @@ def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
         return f"{rng.choice(['cor', 'c'])} {rng.choice(NYC_STREETS)} and {rng.choice(NYC_STREETS)}"
     if roll < 0.10:                                   # near ("nr"/"n"), no number
         return f"{rng.choice(['nr', 'n'])} {rng.choice(NYC_STREETS)}"
+    if era == "early" and roll < 0.125:               # positional qualifier, no house number --
+        # "Duke Joseph, upper end Mulberry" (Longworth 1818/19). Same class as "n"/"c": it says
+        # WHERE on the street, and stays in `address` verbatim (it is not a residence marker).
+        return f"{rng.choice(['upper end', 'lower end', 'foot of', 'head of'])} " \
+               f"{rng.choice(NYC_STREETS)}"
+    if era == "early" and roll < 0.14:                # street + DISTRICT, still no number --
+        # "Rice Nahum, painter Grand, Corl.-hook". The comma is internal to the address and is
+        # KEPT (conv #3 drops only field-separating commas).
+        return f"{rng.choice(NYC_STREETS)}, {rng.choice(['Corl.-hook', 'Corlears hook', 'Bowery', 'Chelsea', 'Greenwich'])}"
     if roll < 0.115:                                  # between two streets
         return f"bet {rng.choice(NYC_STREETS)} and {rng.choice(NYC_STREETS)}"
     if roll < 0.15:                                   # bare street relation ("Jay c Myrtle")
@@ -884,13 +935,38 @@ def make_nyc(rng) -> dict:
 
     ditto = era != "early" and rng.random() < (0.05 if era == "mid" else 0.14)
     parent_surname = _surname(rng)                    # anchors alphabetical_range for dittos
-    widow_own_name = widow and not ditto and rng.random() < 0.15
+    # Era-conditioned, measured over every gold widow row ON THESE ERA BOUNDARIES
+    # (early <=1849 / mid <=1890 / late): the marker + HER given name shape ("Gray, widow
+    # Abigail") is 73.3% of early widows, 23.4% of mid, and 0% of late. It was a flat 15%,
+    # which badly under-generated the early form -- and early is where longworth1818,
+    # franks1786, duncan1794, mercein1820, ogden1839 and doggett1846 all live.
+    widow_own_name = widow and not ditto and rng.random() < {"early": 0.73, "mid": 0.23,
+                                                             "late": 0.02}[era]
 
     spouse = ""
     if widow:
         h = rng.choice(GIVEN_M)
         if widow_own_name:                            # "Gray, widow Abigail" -- her OWN name
-            spouse = rng.choice(["widow", "wid."])    # bare marker -> spouse_name (conv #9)
+            # THIRD widow shape, found labeling Longworth 1818/19 and absent from all 18 earlier
+            # volumes: marker + HER given name + "of" + husband ("Dugan widow Mary of James").
+            # Her given name still goes to `name`; spouse_name is the marker + husband with the
+            # given name lifted out (conv #9 -- `of` is the disambiguator). v5 scored spouse F1
+            # 0.61 on longworth1818 because it had never seen this: it truncated to "widow",
+            # spilled "of James" into address and pushed the real address into home_address --
+            # one unseen form corrupting three fields.
+            # EARLY ONLY: 9.1% of the early own-name widows take a husband too; the shape is
+            # absent from every mid and late gold row.
+            # SOFT TARGET: gold has exactly 2 rows of this shape (both longworth1818), 9.1% of
+            # early own-name widows -- far too few to calibrate tightly. 0.15 lands it near 9-10%.
+            # Over-generating a rare-but-real form is much safer here than never emitting it:
+            # at zero coverage v5 scored spouse F1 0.61 on longworth1818 and corrupted three
+            # fields per occurrence. Note the special rendering needs a given name in `name`;
+            # surname-only widows fall through to the generic "Surname, widow of X" path.
+            if era == "early" and rng.random() < 0.15:
+                spouse = f"widow of {h}"
+                widow_own_name = "of"                 # renderer inserts the given name before "of"
+            else:
+                spouse = rng.choice(["widow", "wid."])  # bare marker -> spouse_name (conv #9)
         elif era == "early":
             spouse = _wchoice(rng, [(f"widow of {h}", 5), (f"widow {h}", 2),
                                     (f"wid. {h}", 2), (f"w. of {h}", 1)])
@@ -907,7 +983,7 @@ def make_nyc(rng) -> dict:
         elif female and rng.random() < 0.75:
             occ = rng.choice(NYC_FEMALE_OCC)
         else:
-            occ = _nyc_occ_pick(rng)                  # curated + harvested real occupations
+            occ = _nyc_occ_pick(rng, era)             # curated + harvested real occupations
         occ, occ_employer, occ_emp_of = _nyc_occ_realism(rng, occ, era)
 
     # NYC employer signal (conv #7/#13) — publisher-keyed, measured from the gold panel.
@@ -1006,7 +1082,12 @@ def render_nyc(rng, rec, hints=None) -> str:
         head = f"{s}, {rest}"                         # the comma (conv #3)
     if hints.get("widow_own_name") and rec["spouse_name"] and " " in rec["name"]:
         s, given = rec["name"].split(" ", 1)          # raw: "Gray, widow Abigail"
-        head = f"{s}{', ' if rng.random() < 0.6 else ' '}{rec['spouse_name']} {given}"
+        sp = rec["spouse_name"]
+        if hints.get("widow_own_name") == "of" and " of " in sp:
+            marker, husband = sp.split(" of ", 1)     # "Dugan widow Mary of James"
+            head = f"{s} {marker} {given} of {husband}"
+        else:
+            head = f"{s}{', ' if rng.random() < 0.6 else ' '}{sp} {given}"
     if hints.get("star_prefix"):
         head = f"*{head}"                             # star fused to the name ("*Simmons Aaron")
     race = rec["race_designation"]
@@ -1052,8 +1133,16 @@ def render_nyc(rng, rec, hints=None) -> str:
 def _finish(rng, record: dict, profile: str, publisher: str, year: str,
             arange: Optional[str] = None, hints: Optional[dict] = None) -> dict:
     """profile picks the renderer (tulsa|nyc); publisher goes into the context tag.
-    They differ: the tulsa profile is a Polk directory, so it tags publisher=polk —
-    same tag as late-NYC Polk volumes (one publisher, two cities)."""
+
+    THE TULSA PROFILE TAGS `polk-tulsa`, NOT `polk` (changed 2026-08-31). It used to tag
+    `polk` -- the same tag as the five NYC Polk volumes -- so `[publisher=polk; year=1917]`
+    (Manhattan) and `[publisher=polk; year=1921]` (Tulsa) were indistinguishable in the
+    prompt, four years apart with opposite conventions. The 34% `polk` slice was calibrated
+    to Tulsa (employer 28.8%, race 6.3%) while EVERY NYC Polk gold volume has race 0.0%, so
+    the model was trained to hallucinate race markers on NYC lines. polk1917 (0.609) and
+    polk1925 (0.725) are the two weakest volumes on the 21-vol panel, and their
+    --report-normalized gap is +0.0: real semantic failure, not a convention artifact.
+    NOTE: data/tulsa_eval.jsonl must carry publisher=polk-tulsa to match."""
     if arange is None:                                # ditto rows pass the parent surname instead
         m = re.search(r"[A-Za-z]{3}", record["name"])
         arange = (m.group(0).upper() if m else record["name"][:3].upper())

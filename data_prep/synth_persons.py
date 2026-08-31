@@ -1026,7 +1026,17 @@ def make_nyc(rng) -> dict:
     # most NYC entries list ONE address (combined work+home); a minority add an "h." home
     primary = _nyc_address(rng, era, ynum, publisher)
     home = ""
-    if rng.random() < (0.15 if era == "early" else 0.35):
+    # Rate is era- AND publisher-keyed. Measured share of rows with a non-empty home_address
+    # across the 21-volume gold panel:
+    #     early  39/383  = 10.2%   (franks/duncan 0%, longworth 10%, doggett 35%)
+    #     mid   139/651  = 21.4%
+    #     late   trow 47/161 = 29.2% | polk 23/279 = 8.2% | mb 0/109 = 0.0%
+    # It was a flat 0.35 for mid AND late, which put NYC polk at ~34% against a gold 8% -- the
+    # same miscalibration class as the race marker, and the same cause: one dial serving
+    # publishers whose real rates differ by 4x. mb1931 lists no separate home at all.
+    home_p = (0.10 if era == "early" else 0.21 if era == "mid"
+              else {"trow": 0.29, "polk": 0.08, "mb": 0.0}.get(publisher, 0.10))
+    if rng.random() < home_p:
         home = "do" if rng.random() < 0.03 else _nyc_address(rng, era, ynum, publisher, home=True)
         if dense and home != "do":
             if rng.random() < 0.05:                   # commuter home out of town

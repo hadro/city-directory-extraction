@@ -321,7 +321,14 @@ that's the signal to stop iterating composition at 100k."* **v5 landed +0.009 ma
 (+0.015), EM (+3.7pts) and the targeted occupation field (+0.05) are stronger, so it's arguable —
 but the trend across cycles is **+0.06 → +0.02 → +0.009**, which is the curve the gate exists to
 detect. **Do not start another 100k composition cycle without a reason that beats these two:**
-1. **Longworth gold** — measured: longworth is **8.5% of v5 training rows with ZERO eval coverage**
+1. ~~**Longworth gold**~~ **✅ DONE 2026-08-20 — `longworth1818_eval.jsonl`, 106 lines, in the panel.**
+   Validator-clean under `--strict`; pushed to `hadro/cde-evals`; `hpc/30_eval.sbatch` PANEL now
+   lists 19 volumes / 1275 lines. It turned up four surface forms with zero precedent in the other
+   18 (`widow <Given> of <Husband>`, `st.`=store, `upper end`, street+district with no number) —
+   concrete evidence the blind spot was real. **Scores are not comparable across the panel-size
+   change:** the v5 board (0.826/0.875/61.5%) is 18 vols / 1169 lines. Remaining from this item:
+   upington (1.9%) and smith (1.0%) are still unmeasured. Original note follows.
+   Measured: longworth is **8.5% of v5 training rows with ZERO eval coverage**
    (also upington 1.9%, smith 1.0% — ~11% of the training distribution is unmeasured). Trow is
    34% of training measured on **161 gold lines** from two adjacent late years (1907, 1913).
    One Longworth volume is the cheapest, highest-value gold work available.

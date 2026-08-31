@@ -15,7 +15,7 @@
 #     sbatch $(slurm_gpu_args) \
 #            --export=ALL,RUN_NAME=v6 hpc/30_eval.sbatch
 #
-# Runs the 18-volume NYC panel (1786-1933) plus the external sets, then the scorer, then the
+# Runs the 21-volume NYC panel (1786-1933) plus the external sets, then the scorer, then the
 # pivot table. Predictions land in $DATA/preds_<run>_<set>.txt and metrics append to
 # results/scores.jsonl — same layout as every previous cycle, so the numbers drop straight
 # into the comparison board in docs/HANDOFF.md.
@@ -33,10 +33,16 @@ export TOKENIZERS_PARALLELISM=false
 [ -f "$ADAPTER/adapter_config.json" ] || { echo "no adapter at $ADAPTER" >&2; exit 1; }
 mkdir -p results
 
-# The 18-volume gold panel — this is the regression harness, not a sample.
-PANEL="franks1786 duncan1794 mercein1820 ogden1839 doggett1846 rode1851 hearne1852
-       hopehenderson1856 lain1876 boyd1890 trow1907 trow1913 polk1917 polk1925 mb1931
-       polk1933bk polk1933si queens1933"
+# The 21-volume gold panel — this is the regression harness, not a sample. Chronological.
+# trow1884 added 2026-08-30 (col-transition rep + second mid-era Trow guard).
+# trowwilson1865 added 2026-08-25 (mid-era Trow overfit guard: Trow was 34% of training
+# measured on only 161 gold lines from two adjacent late years, 1907+1913).
+# longworth1818 added 2026-08-20: Longworth was 8.5% of v5 training rows with ZERO eval
+# coverage. Scores before/after are NOT comparable across the panel-size change — the v5 board
+# (0.826/0.875/61.5%) is 18 volumes / 1169 lines; anything scored from here is 21 / 1583.
+PANEL="franks1786 duncan1794 longworth1818 mercein1820 ogden1839 doggett1846 rode1851
+       hearne1852 trowwilson1865 hopehenderson1856 lain1876 trow1884 boyd1890 trow1907
+       trow1913 polk1917 polk1925 mb1931 polk1933bk polk1933si queens1933"
 # Externals + in-distribution control. NYU is scored at --limit 500 for comparability with
 # every earlier baseline (the file has 3000 rows; the published numbers are all on the first 500).
 EXTERNALS="synth_dev lain tulsa minneapolis"

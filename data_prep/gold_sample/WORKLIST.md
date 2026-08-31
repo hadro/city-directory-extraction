@@ -47,7 +47,7 @@ $PY ../city-directory-extraction/data_prep/make_gold_tool.py \
 | ☐ | std | ~40 | `ia/micro_IABROOKLYN_0035` | Hope & Henderson | 1856/57 | 2 | Brooklyn | publisher=Hope & Henderson · column_count=2 |
 | ☐ | **deep** | ~100 | `ia/1876BPL` | Lain | 1876 | 2 | Brooklyn | synth→real gap (Lain) |
 | ☐ | std | ~40 | `nypl/6d811c30-5d84-0134-6f98-00505686a51c` | Long | 1814 | 1 | Manhattan | publisher=Long · column_count=1 |
-| ☐ | std | ~40 | `nypl/69fdfa80-5d88-0134-e574-00505686a51c` | Longworth | 1818/19 | 1 | Manhattan | publisher=Longworth · column_count=1 |
+| ☑ | std | **106 done** | `nypl/69fdfa80-5d88-0134-e574-00505686a51c` | Longworth | 1818/19 | 1 | Manhattan | publisher=Longworth · column_count=1 · **DONE 2026-08-20** → `data/longworth1818_eval.jsonl`, in panel |
 | ☐ | std | ~40 | `nypl/2dfca400-81bd-0134-7dee-00505686a51c` | Low/Buell/Bull | 1796 | 1 | Manhattan | publisher=Low/Buell/Bull · column_count=1 |
 | ☐ | std | ~40 | `nypl/b97ce630-644a-0137-0b6f-0fb82113de91` | Manhattan & Bronx Directory Co. | 1931 | 4 |  | publisher=Manhattan & Bronx Directory Co. · column_count=4 |
 | ☐ | std | ~40 | `ia/merceinscitydire00merc` | Mercein | 1820 | 1 | Manhattan | publisher=Mercein · column_count=1 |
@@ -65,10 +65,10 @@ $PY ../city-directory-extraction/data_prep/make_gold_tool.py \
 | ☐ | **deep** | ~100 | `ia/micro_IABROOKLYN_0036` | Smith | 1856 | 2 | Brooklyn | col-transition (1→2) |
 | ☐ | **deep** | ~100 | `loc/01015253` | Spooner |  | 2 | Brooklyn | col-transition (1→2) |
 | ☐ | **deep** | ~100 | `ia/micro_IABROOKLYN_0005` | Spooner | 1826 | 1 | Brooklyn | col-transition (1→2) |
-| ☐ | **deep** | ~100 | `nypl/4b69a410-317a-0134-a570-00505686a51c` | Trow | 1884/85 | 2 | Manhattan | col-transition (2→3→4) |
+| ☑ | **deep** | ~100 | `nypl/4b69a410-317a-0134-a570-00505686a51c` | Trow | 1884/85 | 2 | Manhattan | col-transition (2→3→4) · **DONE 2026-08-30** → `data/trow1884_eval.jsonl`, in panel |
 | ☐ | **deep** | ~100 | `ia/trowsgeneraldir1907p2trow` | Trow | 1907 | 3 |  | col-transition (2→3→4) |
 | ☐ | **deep** | ~100 | `nypl/4bfc3730-317a-0134-db31-00505686a51c` | Trow | 1913/14 | 4 | Manhattan | col-transition (2→3→4) |
-| ☐ | std | ~40 | `nypl/4b119360-317a-0134-9131-00505686a51c` | Trow/Wilson | 1865/66 | 2 | Manhattan | publisher=Trow/Wilson · column_count=2 |
+| ☑ | std | ~40 | `nypl/4b119360-317a-0134-9131-00505686a51c` | Trow/Wilson | 1865/66 | 2 | Manhattan | publisher=Trow/Wilson · column_count=2 · **DONE 2026-08-25** → `data/trowwilson1865_eval.jsonl`, in panel |
 | ☐ | std | ~40 | `ia/brooklynnewyorkc19062geor` | Upington | 1906 | 2 | Brooklyn | publisher=Upington · column_count=2 |
 | ☐ | std | ~40 | `ia/micro_IABROOKLYN_0017` |  | 1840/41 | 1 | Brooklyn | publisher=unknown · column_count=1 |
 | ☐ | std | ~40 | `ia/brooklynnewyor1912p3broo` |  | 1912 | 2 | Brooklyn | publisher=unknown · column_count=2 |

@@ -34,3 +34,5 @@ venv/
 
 # Claude
 .claude/
+# generated labeling tools (3 MB each, rebuild with data_prep/make_gold_tool.py)
+gold_*.html

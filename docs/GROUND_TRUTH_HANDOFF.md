@@ -117,6 +117,12 @@ detailed enough to guide a proper Doggett 1850/51 gold set.
    `wid.`). Expansion is a separate downstream step keyed off the `style_profiles/` legends.
 2. **raw_line = corrected page** — fix OCR misreads in raw_line too (long-s `f`→`s`: `fexton`→`sexton`;
    `Brewsler`→`Brewster`), so raw_line and fields tell the same story. `validate_gold` token-drift flags one-sided fixes.
+   **2a. A printer's error is NOT an OCR error.** If the *page* is wrong, keep it verbatim in both
+   `raw_line` and the field — the model has to learn what is actually printed. Only fix what the OCR
+   got wrong. **Decide from the line crop, never from plausibility.** Both look identical in the
+   exported JSONL, and the rule points opposite ways. From one Longworth 1818/19 page:
+   `Rice Mahum` is a genuine printed oddity (verified against the image — kept, even though `Nahum`
+   is the plausible name), while `Dunbam Lewis W.` was Surya misreading `Dunham` (fixed in both).
 3. **No commas in fields** — drop both the field-separating commas *and* the surname/given comma.
    `Graves, Benjamin, accountant, 71 Dey` → name `Graves Benjamin` (raw_line keeps the comma; synth
    `_nyc_name` is `"{surname} {given}"`, no comma).
@@ -139,10 +145,22 @@ detailed enough to guide a proper Doggett 1850/51 gold set.
    `validate_gold.py` now enforces this: ERROR on leading `h`/`h.`/`bds`/`b` (spaced or fused);
    leading `r` only WARNs — it can be the resides marker (strip) or `rear` (keep, part of the
    address) — decide from the raw_line.
+   **8a. A LONE `h`-address keeps its marker and stays in `address`.** `home_address` is used only
+   when a row has a *second*, h-marked address; then the marker comes off (the field name carries
+   that meaning). `Gibbs Thomas, clk. h 256 Fulton` → `address='h 256 Fulton'`, `home_address=''`.
+   **2,523 of 8,800 gold addresses retain a marker** — this is the norm, not a slip. `validate_gold`
+   only ERRORs on a marker in `home_address`, so it will not flag the lone-`h` case either way.
+
 9. **Widows → `wid`/`widow` marker always → `spouse_name`** (verbatim). `widow of John` / `wid. John`
    → John is the husband (her own given name, if any, stays in name; if none, name is just surname).
    `widow Ann` (no "of") → Ann is her own name (→ name), `spouse_name` is the bare marker. **`of`
    is the disambiguator.** `(Hazel W)` after a man → wife → `spouse_name = Hazel W` (drop parens).
+    **9a. Wrapped entries → ONE row.** A printed entry that overflows its column continues on an
+    indented next line, and Surya emits it as two lines. Join them into a single `raw_line` and
+    label once — gold already does this (tulsa keeps the mid-word break, `rear 10 Wil- son`).
+    Verified case: `DURRIE & McCARTY, hardware, 97 Chambers &` + `81 Reade` (Trow 1884/85, one
+    entry). The tool shows the two crops separately, so watch for a line ending mid-phrase.
+
 10. **Race marker → `race_designation`** (verbatim), **volume-specific — read each volume's key page**:
     Tulsa `(c)`, **Ogden 1839 `*`** = colored; **Hope & Henderson 1856 `*`** = *Eastern District*
     (geographic, NOT race → dropped, no field) and colored is `col'd`. Same symbol, opposite meaning.
@@ -180,19 +198,22 @@ combine roles/addresses with `&`), out-of-town firms with NYC agents (drop the a
 = Room, neighborhood abbreviations (`WNB`=West New Brighton, `Stap`, `Tomp`) → kept verbatim in
 `address`.
 
-## Panel status — 18 volumes / 1169 lines (1786–1933/34; col 1→6 complete; all 8 fields; all 5 boroughs)
+## Panel status — 21 volumes / 1583 lines (1786–1933/34; col 1→6 complete; all 8 fields; all 5 boroughs)
 
 | volume | lines | era / layout / note |
 |---|---|---|
 | franks1786 | 56 | 1786 Manhattan, col 1 (bounded-resampled past almanac/officials) |
 | duncan1794 | 58 | 1794 Manhattan, col 1 (`Surname, Given`) |
+| longworth1818 | 106 | 1818/19 Manhattan, col 1 (deep) — **closes the Longworth blind spot** (8.5% of v5 training rows, zero eval coverage). Four surface forms with NO precedent in the other 18: `widow <Given> of <Husband>`, `st.`=**store** (not street), `upper end <Street>`, street+district with no house number (`Grand, Corl.-hook`) |
 | mercein1820 | 60 | 1820 Manhattan, col 1 |
 | ogden1839 | 66 | 1839 Brooklyn, col 1 — **race** (`*`=colored) |
 | doggett1846 | 37 | 1846 Manhattan, col 2 |
 | rode1851 | 53 | 1851 Manhattan, col 1 |
 | hearne1852 | 52 | 1852 Brooklyn micro, col 1 — **employer** signal |
+| trowwilson1865 | 167 | 1865/66 Manhattan, **col 2** (deep, single page) — **mid-era Trow guard**: Trow was 34% of training measured only on 1907+1913. `wid.`/`wid` both printed; race `(col'd)` **parens kept**; lone `h`-address stays in `address` with the marker; home as a *named building* (`B'way h.` = Broadway House, verified on page 815) |
 | hopehenderson1856 | 60 | 1856 Brooklyn, col 2 — `*`=Eastern District |
 | lain1876 | 103 | 1876 Brooklyn, col 2 (deep) |
+| trow1884 | 141 | 1884/85 Manhattan, col 2 (deep) — col-transition rep (the 2 end of Trow's 2→3→4 ladder) + 2nd mid-era Trow guard. Commuter suburbs in `home_address` (`Orange, N. J.`, `J. C.`, `White Plains, N. Y.`, `B'klyn`); home as a named building (`51 Astor h.` = Astor House); **wrapped entries** — one printed entry spanning two OCR lines, joined in `raw_line` (`97 Chambers & 81 Reade`); three printed spellings of one surname on one page (`Dusenbery`/`Dusenbury`/`Duryea`) |
 | boyd1890 | 75 | 1890 Flushing/**Queens**, col 1 |
 | trow1907 | 68 | 1907 Manhattan, **col 3** (first deep multi-column) |
 | trow1913 | 93 | 1913 Manhattan, **col 4** |
@@ -203,7 +224,7 @@ combine roles/addresses with `&`), out-of-town firms with NYC agents (drop the a
 | mb1931 | 109 | 1931 **Manhattan & Bronx**, col 4 — new publisher (M&B Directory Co.); terse style (no spouse, no `h`/`r`); **Bronx**-rich |
 | queens1933 | 62 | 1933/34 **Queens**, col 4 — Polk Queens/SI; commuter work-borough tags (`(Mhn)`, conv #17); hyphenated house nos + nbhd codes (LIC/JH/RH/Rdgwd/Flush) |
 
-**Deep: 5 of 18** (lain1876, trow1907, trow1913, polk1917, polk1925). **First real numbers** = GLiNER
+**Deep: 8 of 21** (longworth1818, trowwilson1865, lain1876, trow1884, trow1907, trow1913, polk1917, polk1925). **First real numbers** = GLiNER
 floor on lain1876 (`results/scores.jsonl`, label `gliner-lain1876`): macro-F1 **0.33**, whole-row EM
 **3.9%**, weakest `address` F1 0.16. The Qwen-fine-tune + Gemini-bar runs on the panel are still TODO.
 

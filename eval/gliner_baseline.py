@@ -32,6 +32,12 @@ Why this is a BASELINE, not the plan's headline model (see docs/plan.md):
   right person -- a natural next step if a denser source needs it.
 
 Default model is English; for the French FTD transfer eval pass --model urchade/gliner_multi-v2.1.
+
+SUCCESSOR (2026-08-31): see eval/gliner2_baseline.py. GLiNER2 (fastino-ai, a different lineage)
+takes a record schema directly, so it does NOT have the two seams described above. Measured on
+lain1876: GLiNER1 0.331 macro -> GLiNER2-large 0.491. A fairer floor, but still ~0.30 behind the
+fine-tune, and DEFERRED until after cycle six. All the numbers and the reasoning are in that
+file's docstring — read it before re-probing.
 """
 from __future__ import annotations
 

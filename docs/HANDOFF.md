@@ -501,6 +501,21 @@ that NYC Polk 1917 genuinely uses at 30.6%. **Do not cut it blind.**
   `h Eleventh av. n W. 42d` vs `h Eleventh av. n. W. 42d`. Those penalise the model for our
   inconsistency. Worth a `validate_gold.py` check; no board implications.
 
+**DEFERRED — GLiNER2 as a refreshed floor (probed 2026-08-31, do NOT re-probe from scratch).**
+`gliner2` 2.0.0 (2026-08-24, Apache-2.0, fastino-ai — a *different lineage* from urchade/GLiNER) is
+schema-driven, so it removes the two assembly seams that make our current GLiNER1 floor artificially
+low. Measured on lain1876 (n=103, same set as the board's `gliner-lain1876`): GLiNER1 **0.331** →
+gliner2.5-base **0.421** → gliner2-large **0.491**, vs qwen-v5 **0.796** and primed Gemini **0.826**.
+103 rows in 18 s on an M2; CPU-servable.
+
+**A real floor correction, not a contender** — and the plateau is structural, not tuning: thresholds
+0.5/0.3/0.15 were flat, and `address` F1 is 0.12–0.27 because it cannot split work from home on the
+`h` marker. `--report-normalized` gap is **+0.000**, so unlike the qwen directional problem none of it
+is a convention artifact. **Add it as the floor column after cycle six** — a more honest floor
+strengthens the fine-tune's value claim. Full numbers, the failure examples, the repro venv caveats
+and four specific "try this first" notes are in the docstring of **`eval/gliner2_baseline.py`**
+(PEP-723, `uv run`-able, has `--self-test`). Nothing from it is on the board.
+
 ### THE v5 EVAL-CORRUPTION BUG (2026-08-04) — same class as the 2026-06-18 eval-loader bug
 
 **v5 first scored as a REGRESSION: macro 0.795 / micro 0.831 / EM 45.9% — 12 points of EM below

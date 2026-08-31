@@ -227,6 +227,36 @@ def load_pred(path: str, target: str) -> list:
     return [parse_pipe(ln) for ln in text.splitlines() if ln.strip()]
 
 
+# WHY VERBATIM STAYS THE SCORE (2026-08-31). `norm()` above already ignores TRAILING periods and
+# case, so `clk.` == `clk`. Internal periods stay strict, and that is deliberate:
+#   - Convention #1 makes expansion a separate downstream step keyed off style_profiles/. Internal
+#     periods are part of what it keys on - `st.` after a trade is a STORE, after a street name it
+#     is STREET.
+#   - The bar is demonstrably fair: Gemini reproduced the printed form on 52 of 57 affected NYU
+#     fields and dropped it 0 times; qwen-v5 kept 3 and dropped 33. That gap is real model quality.
+#   - Internal periods are meaning-bearing across the gold: `N. J.`/`R. I.` (132 rows), `h.` = House
+#     inside a value (72), `do.` ditto (44), `st.` store-vs-street (22). Relaxing would hide a model
+#     that started mangling them.
+#   - Relaxing retroactively would require re-scoring every board entry back to v2.
+# So: report BOTH, score ONE. The gap is the diagnostic - it showed the trow1884 address F1 of 0.50
+# was ~90% a missing period, not a comprehension failure. See docs/HANDOFF.md CYCLE-SIX WORKLIST.
+_INNER_DOT = re.compile(r"\.(?=\s)")
+
+
+def report_normalized(gold, pred, strict, excl, verbatim_res) -> None:
+    """Diagnostic: re-score with internal abbreviation periods stripped from BOTH sides."""
+    strip = lambda r: {f: _INNER_DOT.sub("", str(_cell(r, f))) for f in FIELDS}
+    nres = score([strip(g) for g in gold], [strip(p) for p in pred], strict, excl)
+    a, b = metrics(verbatim_res, excl), metrics(nres, excl)
+    print()
+    print("  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):")
+    print(f"    {'':14s} {'verbatim':>9s} {'normalized':>11s} {'gap':>8s}")
+    for k, lbl in (("macro_f1", "macro-F1"), ("micro_f1", "micro-F1"), ("row_exact_pct", "whole-row EM")):
+        av, bv = a[k], b[k]
+        print(f"    {lbl:14s} {av:9.3f} {bv:11.3f} {bv - av:+8.3f}")
+    print("    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.")
+
+
 def main(argv: Optional[list] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--gold", required=True, help="gold JSONL ({record:...} per line)")
@@ -244,6 +274,11 @@ def main(argv: Optional[list] = None) -> int:
                          "--exclude-fields spouse_name,race_designation,is_business (those three "
                          "are synthesized by nyu_to_eval.py regexes, not transcribed — see "
                          "docs/GROUND_TRUTH_HANDOFF.md).")
+    ap.add_argument("--report-normalized", action="store_true",
+                    help="ALSO print a punctuation-normalized score (internal abbreviation periods "
+                         "stripped from both sides: 'E. 79th' == 'E 79th'). DIAGNOSTIC ONLY - never "
+                         "written by --save and must not go on the board. The gap between the two "
+                         "numbers separates CONVENTION error from SEMANTIC error.")
     ap.add_argument("--self-test", action="store_true", help="score gold-vs-gold and a corrupted copy to verify the harness")
     args = ap.parse_args(argv)
 
@@ -284,8 +319,10 @@ def main(argv: Optional[list] = None) -> int:
               file=sys.stderr)
     res = score(gold, pred, args.strict, excl)
     report(res, excl)
+    if args.report_normalized:
+        report_normalized(gold, pred, args.strict, excl, res)
     if args.save:
-        save_run(args.save, args, res)
+        save_run(args.save, args, res)          # verbatim only - the normalized pass never saves
     return 0
 
 

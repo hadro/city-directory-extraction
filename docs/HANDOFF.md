@@ -21,6 +21,11 @@ then release to HF.
 > hardware-portable and the Torch pipeline works end to end. That run also exposed three harness
 > bugs, fixed in `d476deb` — the important one is that `30_eval.sbatch` was scoring NYU *without*
 > `--exclude-fields`. See "v5 REPLICATED ON INDEPENDENT HARDWARE".
+>
+> **UPDATE (2026-08-31): panel is 21 volumes / 1583 lines and the diminishing-returns gate is
+> SATISFIED.** Longworth + two Trow volumes labeled; scoring them found two *generator* bugs
+> (directional periods; `publisher=polk` conflating Tulsa with NYC Polk). See **CYCLE-SIX
+> WORKLIST**. The fixes are targeted generator work — **not** a composition rebalance.
 
 **Measured on NYU gold (500 rows, YAML).** Scoring note: `macro-F1` = avg over fields the gold
 actually has; `micro-F1` = frequency-weighted overall (see `evaluate.py`). Both matter — and they
@@ -316,6 +321,10 @@ default path did NOT reproduce the board. The collaborator correctly stripped it
 
 ### ⚠️ DIMINISHING-RETURNS GATE TRIPPED — read this before starting cycle six
 
+> **SATISFIED 2026-08-31 — see "CYCLE-SIX WORKLIST" below.** Item 1 (Longworth gold) is done,
+> and it surfaced two measured generator defects that beat the bar this gate sets. The section
+> below is retained for the reasoning, which still applies to any *composition* cycle.
+
 The cycle-five worklist (item 5 below) pre-registered: *"if cycle five's fixes land <0.02 macro,
 that's the signal to stop iterating composition at 100k."* **v5 landed +0.009 macro.** Micro
 (+0.015), EM (+3.7pts) and the targeted occupation field (+0.05) are stronger, so it's arguable —
@@ -366,6 +375,131 @@ detect. **Do not start another 100k composition cycle without a reason that beat
    > follow-up once 1818/19 proves the era out.
 2. **Wave 1** — publisher/era style parameterization.
 Both matter more before any 2B/4B scale-up, where you'd be scaling a model you can't fully measure.
+
+### ✅ CYCLE-SIX WORKLIST (2026-08-31) — the gate above is now SATISFIED. Generator fixes, not a rebalance.
+
+**The gate asked for a reason that beats "another 100k composition cycle." There are now four, each
+a measured defect with a known fix.** Longworth gold is done (item 1 of the gate), and scoring the
+three new volumes surfaced two *generator* bugs that no amount of rebalancing would fix.
+
+> **Provenance of the numbers below:** local MPS run of the **v5-torch** adapter, 2026-08-30. Not on
+> the board — nothing was written to `results/scores.jsonl`. The setup was validated first: three
+> control volumes (mercein1820, doggett1846, rode1851) reproduced the collaborator's CUDA/L40S
+> numbers **exactly, to three decimals, on all three metrics**, so MPS↔CUDA is not a confound.
+> Repro: `scratchpad/evalenv` (torch 2.13.0 / transformers 5.14.1 / peft 0.20.0) + a patched
+> `qwen_predict.py` — `device_map="auto"` **SIGSEGVs on MPS**; load to CPU then `.to("mps")`.
+
+**Where the new volumes actually failed** (`name` 0.91–0.99, `is_business` 0.99–1.00,
+`occupation_role` 0.95–0.98 — the model understands these directories fine):
+
+| volume | macro | micro | EM | address F1 |
+|---|---|---|---|---|
+| longworth1818 | 0.854 | 0.905 | 74.5% | 0.83 |
+| trowwilson1865 | 0.715 | 0.868 | 50.3% | **0.57** |
+| trow1884 | 0.804 | 0.820 | 37.6% | **0.50** |
+
+---
+
+**1. DIRECTIONAL PERIODS — the big one. `E. 79th` vs `E 79th`.**
+`synth_persons.py:270` `TUL_DIRECTIONS = ["N","S","E","W"]` — **no periods**, correct for Tulsa 1921,
+wrong for every 19th-century NYC volume. Period-directionals are ~0% of ALL training profiles
+(trow 0.9%, lain 1.0%, longworth 0.0%), so the model never sees the form.
+
+**88 of 96** address errors on trowwilson1865 and **83 of 91** on trow1884 are punctuation-only.
+Normalising *only* that period, on both sides:
+
+| volume | EM before → after | macro before → after |
+|---|---|---|
+| trow1884 | 37.6% → **79.4%** | 0.804 → **0.923** |
+| trowwilson1865 | 50.3% → **82.6%** | 0.715 → 0.791 |
+| longworth1818 | 74.5% → 74.5% | 0.854 → 0.854 (1818 has almost no numbered directionals) |
+
+**The convention flips ~1900**: period in longworth1818/ogden1839/doggett1846/rode1851/
+hopehenderson1856/trowwilson1865/lain1876/trow1884 **and NYU**; bare in trow1907/trow1913/polk1925/
+mb1931/polk1933bk **and tulsa/minneapolis**. Exposure: **54/1169 (4.6%)** of the old board,
+**197/1583 (12.4%)** of the 21-volume panel, **55/500 (11.0%)** of the NYU scored slice.
+
+**Gemini does NOT share this bias** — of 57 affected NYU fields it kept the period 52× and dropped
+it **0×**; qwen-v5 kept 3× and dropped **33×**. Cost on NYU (500, restricted): qwen
+0.810→**0.833** macro, 49.8→**54.0%** EM under normalisation; Gemini is flat (0.889→0.886). So this
+closes ~a quarter of the NYU gap — **it does not overturn it.** Gemini still leads; the remaining
+gap (21 genuinely-wrong qwen rows vs Gemini's 5) is real model quality.
+→ **FIX: era/publisher-gate the directional form.** The mechanism exists — the `*` race marker is
+already era-gated (ogden vs hopehenderson).
+
+**2. `publisher=polk` CONFLATES TULSA 1921 WITH FIVE NYC POLK VOLUMES.**
+The prompt tag is `[publisher=polk; year=1917]` for NYC and `[publisher=polk; year=1921]` for Tulsa
+— same label, four years apart, opposite conventions. The 34.2% `polk` training slice is calibrated
+to Tulsa:
+
+| feature | synth `polk` | tulsa gold | NYC Polk gold |
+|---|---|---|---|
+| employer | 28.8% | 38.6% | 6.4–30.6% |
+| **race_designation** | **6.3%** | 8.7% | **0.0% in ALL five volumes** |
+| spouse_name | 30.2% | 41.5% | 0–63% (era-dependent) |
+| home_address | 9.8% | 0.0% | 0–12.5% |
+
+The model is trained to emit race markers on NYC-Polk-tagged lines whose gold has none — pure
+false positives, which macro-F1 punishes. **polk1917 (0.609) and polk1925 (0.725) are the two
+weakest volumes on the whole panel**, and the NYC Polk family is **6 volumes / 388 lines ≈ 25% of
+the panel**.
+→ **FIX: split the tag** (`polk-tulsa` / `polk-nyc`, or add city to the context tag), then calibrate
+`polk-nyc` to its gold: **race 0%**, spouse split by era (mb1931/polk1925 ≈ 0%; the 1933 volumes
+47–63%). **Do this BEFORE any share question** — today you cannot reduce Tulsa without also
+reducing NYC Polk, because they are the same label.
+
+**3. SURFACE FORMS with zero training coverage** (found while labeling; see
+GROUND_TRUTH_HANDOFF conventions 2a/8a/9a):
+`widow <Given> of <Husband>` (spouse F1 **0.61** on longworth1818 — the model truncates to `widow`,
+spills `of James` into `address`, cascades the real address into `home_address`: one unseen form
+corrupting three fields); `st.` = **store** not street; `upper end <Street>`; home as a **named
+building** (`B'way h.` = Broadway House, `51 Astor h.` = Astor House); commuter suburbs in
+`home_address` (`Orange, N. J.`, `J. C.`, `White Plains, N. Y.`); street+district with no house
+number (`Grand, Corl.-hook`).
+
+**4. THEN, and only then, the Tulsa share question.** Once the labels are honest it becomes
+answerable. Arguments both ways: the goal is ONE NYC-comprehensive model with cross-city transfer
+as a *measured stretch* on held-out data, which argues for less Tulsa; but Tulsa is the
+best-grounded profile we have (48k real published rows) and it is what teaches the `employer` field
+that NYC Polk 1917 genuinely uses at 30.6%. **Do not cut it blind.**
+
+---
+
+**PRE-REGISTERED (state these before running, as the cycle-five worklist did):**
+- Fix 1 should lift 19th-century volumes substantially and 20th-century ones **≈ not at all**. If
+  20th-century volumes move materially, the diagnosis is wrong.
+- Fix 2 should show up first as `race_designation` spurious-prediction count → 0 on the five NYC
+  Polk volumes, and as polk1917/polk1925 rising off the bottom of the panel.
+- **Scores are NOT comparable across the panel change**: the v5 board is 18 vols / 1169 lines; the
+  panel is now 21 / 1583. Re-baseline v5-torch on the 21-volume panel before claiming any delta.
+- **DECIDED 2026-08-31 — verbatim stays the score; report both.** The question looked open, but
+  `evaluate.py:norm()` **already** ignores trailing periods and case (`clk.` == `clk`); only
+  *internal* periods are strict, which is why `E. 79th` vs `E 79th` bites. Keep it that way:
+  (a) convention #1 makes expansion a downstream step keyed off `style_profiles/`, and internal
+  periods are part of what it keys on (`st.` after a trade = STORE, after a street name = STREET);
+  (b) the bar is demonstrably fair — Gemini kept the printed form 52/57 and dropped it **0** times,
+  qwen-v5 kept 3 and dropped 33, so that gap is real model quality and relaxing would delete the
+  signal; (c) internal periods are meaning-bearing across the gold — `N. J.`/`R. I.` (132 rows),
+  `h.`=House inside a value (72), `do.` ditto (44), `st.` store-vs-street (22); (d) relaxing
+  retroactively means re-scoring every board entry back to v2.
+
+  **Instead: `eval/evaluate.py --report-normalized`** (added 2026-08-31) prints a second, punctuation-
+  normalized figure beside the verbatim one and the gap between them. It is **never written by
+  `--save`** and is not on `hpc/30_eval.sbatch`, so the board cannot be contaminated. The gap is the
+  diagnostic — **large gap = convention error (fix the generator); small gap = semantic error**:
+
+  | volume | verbatim EM | normalized EM | gap | reading |
+  |---|---|---|---|---|
+  | trow1884 | 37.6% | 86.5% | **+48.9** | almost entirely convention |
+  | longworth1818 | 74.5% | 84.0% | +9.5 | mostly genuine |
+
+  Note the flag strips **all** internal periods, not just directionals, so treat it as an *upper
+  bound* on convention error (the directional-only figure for trow1884 was +41.8, not +48.9).
+
+- **Separate small cleanup:** stripping periods collapses 28 pairs of distinct gold values, and the
+  internal-period ones are our own labeling drift, not page variation — `wid. Jno` vs `wid. Jno.`,
+  `h Eleventh av. n W. 42d` vs `h Eleventh av. n. W. 42d`. Those penalise the model for our
+  inconsistency. Worth a `validate_gold.py` check; no board implications.
 
 ### THE v5 EVAL-CORRUPTION BUG (2026-08-04) — same class as the 2026-06-18 eval-loader bug
 

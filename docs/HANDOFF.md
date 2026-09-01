@@ -9,7 +9,12 @@ We're fine-tuning a small **Qwen3.5** model to turn one historical city-director
 structured 8-field record (synthetic-train / real-gold-eval), aiming to match a Gemini baseline,
 then release to HF.
 
-> **CURRENT STATE (2026-08-04): `hadro/city-dir-08b-yaml-v5` is the best model and beats the
+> **CURRENT STATE (2026-09-01): `v6` is the best model — 0.853 macro / 74.9% EM on the 21-volume
+> panel, +7.6 EM over v5-torch.** Every number printed below this box predates the 2026-09-01
+> `parse_yaml` unescape fix and is UNDERSTATED; see the corrected table in the cycle-six
+> section. Jump to **RESUME HERE — cycle SIX COMPLETE**.
+>
+> **(historical) CURRENT STATE (2026-08-04): `hadro/city-dir-08b-yaml-v5` is the best model and beats the
 > primed Gemini bar on macro (0.826 vs 0.790), micro (0.875 vs 0.844) AND whole-row EM (61.5% vs
 > 58.0%)** on the 18-volume panel. **Jump to the "RESUME HERE" section** — it has the current
 > board, the v5 eval-corruption bug, and the diminishing-returns gate that has now tripped.
@@ -157,7 +162,85 @@ gap is now content errors on dense fused lines — same root as the address gap.
 validator-clean (0 errors, 11 benign warnings). Gold sets are gitignored — corrected copies in
 `data/` (user keeps Time Machine backups; pre-sweep copies in session scratchpad).
 
-## RESUME HERE — cycle five COMPLETE (2026-08-04): v5 trained + scored; v5 is the current best model
+## RESUME HERE — cycle SIX COMPLETE (2026-09-01): v6 works, and a scoring bug was hiding a third of the panel
+
+**Two things happened. Read both — the second is bigger than the retrain.**
+
+### 1. v6 landed: the generator fixes were worth +7.6 EM
+
+`v6` = same config as v5-torch, trained on v6 synth (era/borough-gated directionals, `polk-tulsa`
+split, six new surface forms). Train job 16704017 (4h12m, L40S, 4689 steps), eval 16709719.
+26/26 sets loaded `AutoModelForImageTextToText`, zero missing-adapter-keys.
+
+| 21-vol panel (n=1583) | macro | micro | EM |
+|---|---|---|---|
+| v5-torch (corrected) | 0.826 | 0.897 | 67.3% |
+| **v6 (with the parser fix)** | **0.853** | — | **74.9%** |
+
+**+0.027 macro / +7.6 EM.** Largest cycle gain since v2 (prior cycles: +0.06 → +0.02 → +0.009).
+The delta is the same before and after the parser fix (+0.026 / +7.8 pre-fix), so the generator
+work is worth this **independently** of the scoring bug.
+
+**The directional prediction held exactly**: trow1884 EM **37.6 → 81.6** (+44.0), trowwilson1865
+**50.3 → 85.6** (+35.3), rode1851 **39.6 → 66.0** (+26.4). 19th-c normalization gap **+18.0 → +5.5**;
+20th-c stayed **+0.2**. The pre-registered falsifier did not fire.
+
+### 2. ⚠️ THE POLK FLOOR WAS A SCORING BUG — the THIRD silent scoring artifact in this project
+
+`to_yaml.q()` escapes quotes in training targets; `parse_yaml` stripped the outer quotes and
+**never unescaped**. Polk NYC gold keeps the printed ditto marker (a leading `"`), so the model
+emitted correct escaped YAML and the scorer read back `\" Jno H` — a guaranteed miss on **60-90%
+of the rows in all five NYC Polk volumes** (206 rows = 13% of the panel). Fixed in `7f456d2`
+(round-trip over all 1583 rows: 206 failures → 0).
+
+**This joins the eval-loader class mismatch (2026-06-18) and last-key-wins parsing (2026-08-04).
+All three produced numbers that looked exactly like model failures.** The lesson is now three for
+three: when a volume or a field scores absurdly low, verify the round trip before blaming the model.
+
+**The historical board was understated. Corrected, 18-vol panel (175 entries re-scored from stored
+preds; 34 changed):**
+
+| label | corrected | as published |
+|---|---|---|
+| **qwen-v5** | **0.850 / 0.913 / 72.9%** | 0.826 / 0.875 / 61.5% |
+| qwen-v4 | 0.840 / 0.897 / 68.8% | 0.816 / 0.861 / 57.8% |
+| qwen-v3 | 0.822 / 0.878 / 61.8% | 0.798 / 0.840 / 54.8% |
+| primed-pub Gemini | 0.797 / 0.856 / 61.7% | 0.790 / 0.844 / 58.0% |
+
+**The Gemini comparison gets STRONGER: macro lead +0.036 → +0.053, EM lead +3.5 → +11.1 points.**
+Gemini was partly affected too (primed-pub polk1925 7.5→52.5), so the correction is not one-sided.
+
+**A pre-registered prediction of mine was WRONG.** Cycle six claimed the Polk floor was the
+`publisher=polk` tag conflation. It was not: `race_designation` false positives were already ZERO
+at eval, so that fix was vacuous *for the floor*. The tag split is still defensible on distribution
+grounds (polk1925 macro 0.725→0.787) but it did not cause the floor. Stated too confidently.
+
+### 3. franks1786 regressed 50.0 → 12.5 EM, and the root cause predates v6
+
+v6 added a legitimate comma-retaining address form (`Grand, Corl.-hook`, Longworth) and the model
+generalised it to franks's house-number comma, which the gold strips. But the generator had emitted
+franks's signature form **zero times in v5 AND v6** — 96.4% of franks1786 gold raw lines read
+`95, Water-street` and 0% keep that comma. **v5 was only ACCIDENTALLY right**: it never produced
+commas in early addresses, so it never wrongly kept one. Now taught explicitly (`num_comma` hint,
+raw-side only, gated to `franks`, the only volume that prints it). Fixed in `7f456d2`, untested by
+a retrain.
+
+### 4. CYCLE-SEVEN SPEC — diagnosed by NYU from the v6 preds, not yet built
+
+- **The surviving +5.5 gap is abbreviation periods on ADDRESS-GRAMMAR tokens**, not directionals:
+  `r.` `n.` `c./cor.` `bet.` `av.` `st.` `ft.` `b.` — 1810s-1850s gold prints them WITH periods and
+  the model emits them bare (gold `r. 213 W. 40th` vs pred `r 213 W. 40th`). Counts match the
+  per-volume gaps exactly (doggett 8 rows ≈ +21.6). **Era/publisher-gate these the same way
+  directionals were gated**, and align the `h`/`h.` marker per volume (there is a small reverse
+  clash: the model writes `h.` where doggett/hopehenderson print bare `h`).
+- **Residual Polk failures after the parser fix (EM 57-80%) are dense-abbreviation mangling**:
+  hlpr→helper, fctywkr→factwkr, pntr→ptr, firemn→firm, blksmith→blocksmith. Real generator
+  coverage, much smaller than the floor made it look.
+- **`hf download` of the gated `cde-evals` exits silently with no files** — NYU nearly scored v6
+  against the v5 `synth_dev`. `30_eval.sbatch` should fail loudly on a missing gold file.
+- Adapters for v5-torch and v6 are STILL not pushed to the Hub (write token pending).
+
+## Cycle five (2026-08-04): v5 trained + scored — SUPERSEDED by cycle six above; numbers here are PRE-parser-fix
 
 **v5 is done and it leads on every aggregate.** `hadro/city-dir-08b-yaml-v5` = 0.8B / 100k v5 synth /
 yaml / 3 ep / b64 / **unpacked** (config-identical to v2–v4 so the delta attributes to the data) /

@@ -1080,6 +1080,9 @@ def make_nyc(rng) -> dict:
         "emp_of": emp_of,                             # raw keeps the "of" connector (conv #7)
         "star_prefix": star_raw and not ditto,        # raw shows "*Name ..." (conv #10)
         "nbhd_comma": rng.random() < 0.80,            # page comma before a trailing nbhd (v3 miss)
+        # franks1786 only: 96.4% of its gold raw lines print "95, Water-street"; every other
+        # early volume is 0-0.9%. Record drops the comma (conv #3) -- see render_nyc.
+        "num_comma": publisher == "franks" and rng.random() < 0.95,
     }
     return _finish(rng, rec, "nyc", publisher, year, arange=parent_surname, hints=hints)
 
@@ -1121,6 +1124,14 @@ def render_nyc(rng, rec, hints=None) -> str:
     if hints.get("nbhd_comma"):                       # page prints "47th, LIC"; the record drops
         addr_txt = _NBHD_END_RE.sub(r", \1", addr_txt)    # the comma (conv #3) — raw-side only
         home_txt = _NBHD_END_RE.sub(r", \1", home_txt)
+    if hints.get("num_comma"):                        # FRANKS 1786 prints "95, Water-street" --
+        # 54 of its 56 gold rows (96.4%), and the record NEVER keeps that comma (0/56, conv #3).
+        # Raw-side only, exactly like nbhd_comma. The generator emitted this form 0% of the time
+        # in v5 AND v6, so v5 was only ACCIDENTALLY right: it never produced commas in early
+        # addresses at all, so it never wrongly kept one. v6 added a legitimate comma form
+        # ("Grand, Corl.-hook", Longworth) and the accidental correctness broke -- franks1786 EM
+        # fell 50.0 -> 12.5. Teaching the rule beats relying on comma-absence.
+        addr_txt = re.sub(r"^(\d+)\s+", r"\1, ", addr_txt)
     # real directories drop the comma before the address ~40% of the time
     if addr_txt:
         line += (" " if (hints.get("space_delim") or rng.random() >= 0.6) else ", ") + addr_txt

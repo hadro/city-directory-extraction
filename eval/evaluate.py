@@ -59,10 +59,22 @@ def parse_yaml(block: str) -> dict:
     rec = {f: "" for f in FIELDS}
     seen = set()
     for ln in block.splitlines():
-        m = re.match(r'\s*([a-z_]+):\s*"?(.*?)"?\s*$', ln)
-        if m and m.group(1) in rec and m.group(1) not in seen:
-            seen.add(m.group(1))
-            rec[m.group(1)] = m.group(2)
+        m = re.match(r'\s*([a-z_]+):\s*(.*?)\s*$', ln)
+        if not (m and m.group(1) in rec and m.group(1) not in seen):
+            continue
+        seen.add(m.group(1))
+        val = m.group(2)
+        # UNESCAPE, and only for a genuinely quoted scalar. This is the exact inverse of
+        # train/sft_qwen.py to_yaml.q(), which writes '"' + v.replace("\\","\\\\").replace('"','\\"') + '"'.
+        # Without it the round trip is ASYMMETRIC: Polk NYC gold keeps the printed ditto marker
+        # (a leading double-quote, '" Jno H'), so the training target is  name: "\" Jno H"  and the
+        # model reproduces it correctly -- but stripping the outer quotes without unescaping left
+        # '\" Jno H', which never matches the gold. That scored 60-90% of the rows in all five NYC
+        # Polk volumes as name failures and WAS the "Polk floor" (polk1925 EM 7.5%). Found on the
+        # v6 run, 2026-09-01. It has depressed every YAML run since those volumes joined the panel.
+        if len(val) >= 2 and val[0] == '"' and val[-1] == '"':
+            val = re.sub(r'\\(.)', r'\1', val[1:-1])   # single pass: \" -> " and \\ -> \
+        rec[m.group(1)] = val
     return rec
 
 

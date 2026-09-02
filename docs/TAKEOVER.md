@@ -13,20 +13,44 @@ Deeper context: [HANDOFF.md](HANDOFF.md) (long, start at "RESUME HERE"),
 18-volume board, `qwen-v5` leads primed-pub Gemini by **+0.053 macro / +11.1 whole-row EM**. That
 was true since v4; nobody knew because three scoring bugs were suppressing it.
 
-**The best model is `v6`** — trained on NYU Torch 2026-09-01, 21-volume panel.
+**The best model is `v6`** — trained on NYU Torch 2026-09-01, 21-volume panel. **Officially scored
+and on the board as of 2026-09-02** (`b90c8fa`); the earlier "simulation" caveat is retired.
 
-| | macro | micro | EM |
+| 21-vol panel, n=1583 | macro | micro | EM |
 |---|---|---|---|
 | v5-torch (corrected) | 0.826 | 0.897 | 67.3% |
-| **v6** | **0.853** | — | **74.9%** |
+| **v6 (official)** | **0.854** | **0.921** | **75.2%** |
 
-⚠️ **v6's numbers are a SIMULATION, not a scored run.** NYU scored v6 before the `parse_yaml`
-unescape fix landed and before the gold-quality pass; the figures above are their hand-computed
-projection. **v6 is not on the board.** Closing that is open item #1.
+Run artifacts: `results/runs/v6-21vol/`. Authoritative scores are `scores-parserfix.jsonl`;
+the `-oldparser` copies are kept ONLY for the parser-fix-vs-gold-edit decomposition.
 
-**Do not use verbatim whole-row EM as the headline.** Use `evaluate.py --report-normalized`. Cycle
-six's +7.8 verbatim EM was **−0.3** normalized — i.e. no real improvement. See the
-"⛔ STOP CHASING PUNCTUATION" section in HANDOFF.md before proposing any convention work.
+### ⚠️ v6 is NOT semantically better than v5-torch. The whole gain is punctuation.
+
+Measured 2026-09-02 by regenerating v6 predictions locally and scoring both models
+`--report-normalized` on the 693 panel rows where both prediction sets exist:
+
+| v6 − v5-torch | verbatim | normalized |
+|---|---|---|
+| whole-row EM | **+17.8** | **+0.9** |
+| macro-F1 | +0.057 | +0.010 |
+
+`trow1884` is the clearest case: v5-torch scored **37.6 verbatim but 86.5 normalized** — it already
+had the content right and merely printed the directional period differently. v6 prints it the gold
+way (82.3) and is **1.4 points WORSE semantically** (85.1). The +44 EM on that volume is pure
+typography. The panel arithmetic closes exactly: v5-torch's punctuation gap was +11.7, v6's is
++3.3, so 8.0 points of gap were converted — and the verbatim gain was +7.9.
+
+**Consequences, before you plan anything:**
+- **Do not use verbatim whole-row EM as the headline for MODEL COMPARISONS.** Use
+  `evaluate.py --report-normalized`. Publish the verbatim number (it is what a consumer of the
+  gold convention actually gets); judge model *changes* on the normalized one.
+- **The punctuation lever is spent.** Total headroom left on the panel is **+3.3 EM**, and 2.5 of
+  that sits in four mid-century volumes (doggett1846 +21.6, hopehenderson1856 +18.4, rode1851
+  +17.0, longworth1818 +10.4). Three convention cycles bought +0.003 normalized macro combined.
+- v6 vs primed Gemini on the 18 volumes Gemini has been scored on is **+0.047 macro / +11.1 EM** —
+  versus v5-torch's +0.045 / +10.9. The competitive claim did not move.
+
+See "⛔ STOP CHASING PUNCTUATION" in HANDOFF.md before proposing any convention work.
 
 ---
 
@@ -56,16 +80,22 @@ alongside, per convention) and `synth_dev.jsonl` to the private `hadro/cde-evals
 
 ## Open items, in priority order
 
-1. **Get v6 onto the board.** NYU re-runs *only the scoring step* over their existing v6 predictions
-   — no GPU, seconds of CPU. They need to `git pull` (fixed `evaluate.py` + round-trip guard) and
-   re-download gold from `hadro/cde-evals` on the **login node** (six volumes changed 2026-09-01).
-   Their simulation and the real score will not match exactly; the gold moved under them.
-2. **Push the adapters.** `v5-torch` and `v6` are both still only on `/scratch` (purged after ~60
-   days) and in `~/Downloads`. v5-torch is the baseline v6 is measured against. Pending a write
-   token on their side.
-3. **One more retrain**, carrying `8d5c438` (ditto) + `7f456d2` (franks) and nothing else. This is
-   the last generator change with a measured case. **Judge it on the normalized metric.** If `name`
-   does not move, the model is done — say so and stop.
+1. ~~Get v6 onto the board.~~ **DONE 2026-09-02** (`b90c8fa`). NYU re-scored on CPU; entries are in
+   `results/scores.jsonl` and `results/eval_table.md`.
+2. **Push the adapters.** `v5-torch` and `v6` are only on `/scratch` (purged after ~60 days) and in
+   `~/Downloads`. **The v6 adapter (60 MB) is now on Josh's Mac** in the delivered results folder,
+   so this no longer needs NYU's write token — Josh can push v6 himself. v5-torch is the baseline v6
+   is measured against and is still NYU-side only.
+3. **One retrain (v7), then stop.** THREE un-shipped generator changes have accumulated; ship them
+   together, since none has been scored:
+     * `8d5c438` surname-repeat ditto rate — untested, targets `name`
+     * `7f456d2` franks `num_comma` — **the one bankable item.** v6 regressed franks1786 by
+       −37.5 EM; 48 of its 56 rows fail on a single inserted comma after the house number. Worth
+       ≈ +1.3 EM panel-weighted on its own.
+     * the harvested surname pool (gitignored, picked up automatically) — untested hypothesis;
+       see the name-harvest section in HANDOFF.md, whose headline result was negative.
+   **Judge it on the normalized metric**, and remember the franks recovery is a convention fix, so
+   it will show up verbatim and not normalized. If `name` does not move normalized, stop.
 4. **Gold labelling** — tools are generated and gitignored in the repo root:
    `gold_doggetts1850.html` (**do this first** — hand-labelled spouse/race/is_business for the
    publisher NYU is drawn from would retire the `--exclude-fields` workaround on the external
@@ -79,6 +109,25 @@ alongside, per convention) and `synth_dev.jsonl` to the private `hadro/cde-evals
 - scaling synthetic data or training 2B/4B — `synth_dev` is macro 0.992 / EM 96.0%, the model has
   saturated its own distribution; capacity and volume are not the constraint
 - re-probing GLiNER2 — done and documented in `eval/gliner2_baseline.py`
+- harvesting more surnames — run 2026-09-02, moved the miss rate 49.2% → 48.8%. 99.3% of directory
+  surnames appear on exactly one page, so that metric mostly detects whether you sampled the gold
+  page itself. See HANDOFF.md.
+- more punctuation/convention cycles — **+3.3 EM of headroom left on the whole panel**, and it does
+  not register on the normalized metric at all.
+
+**A metric caveat that changes which volumes look weak.** Macro-F1 averages over *present* fields,
+so a field with one gold instance weighs as much as `name` with 103. `employer` scores F1 0.000 on
+doggett1846, rode1851 and trow1913 — from 1, 1 and 2 instances. Excluding fields with fewer than 10
+gold instances: polk1917 macro **0.691 → 0.859**, trow1913 **0.786 → 0.929**, panel
+**0.854 → 0.917**. The much-discussed "Polk floor" is substantially this artifact; polk1917's EM of
+56.9 is genuinely low, but its macro was never the story. Consider reporting macro with a minimum
+support threshold, or leaning on micro-F1, before diagnosing another volume as broken.
+
+**The one real capability gap is mid-century.** Primed Gemini still beats v6 on rode1851 (−32.1),
+doggett1846 (−29.7) and hopehenderson1856 (−20.0) whole-row EM. Part is punctuation, but not all:
+rode1851 at FULL punctuation credit is 83.0 against Gemini's 98.1 verbatim. Gemini gets it from a
+prompt description, so the convention is learnable and describable — this is the most promising
+remaining lever if anyone wants one, and it is not the same thing as the spent punctuation lever.
 
 ---
 
@@ -115,7 +164,12 @@ four survived it.
 **When a volume or field scores absurdly low, verify the round trip before blaming the model.**
 Four for four.
 
-**Local eval works and reproduces CUDA exactly.** You do not need the cluster to score:
+**Local eval works and reproduces CUDA to within one row per volume.** You do not need the cluster
+to score — this is how the v6 normalized numbers above were obtained. Regenerating all 21 panel
+volumes with the v6 adapter on an M2 (MPS) gave panel EM **75.3 vs NYU's official 75.2**: 18 of 21
+volumes matched exactly, and trow1884 / boyd1890 / mb1931 each differed by exactly one row
+(generation nondeterminism between MPS and the L40S). Close enough for diagnosis; **do not use a
+local run to update the board** — score there, publish from the cluster.
 
 ```bash
 uv venv evalenv --python 3.12

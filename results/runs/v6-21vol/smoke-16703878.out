@@ -1,0 +1,79 @@
+=== node gl048.hpc.nyu.edu | job 16703878 | Tue Sep  1 01:32:58 EDT 2026 ===
+Tue Sep  1 01:32:58 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.82.07              Driver Version: 580.82.07      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    On  |   00000000:47:00.0 Off |                    0 |
+| N/A   33C    P8             34W /  350W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+=== dry-run: which modules get LoRA adapters? ===
+dependency versions: torch==2.13.0  transformers==5.14.1  trl==1.9.2  peft==0.20.0  accelerate==1.14.0  datasets==5.0.1  tokenizers==0.22.2
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 3000 examples [00:00, 74507.12 examples/s]
+Map:   0%|          | 0/3000 [00:00<?, ? examples/s]Map:  57%|█████▋    | 1716/3000 [00:00<00:00, 17000.64 examples/s]Map: 100%|██████████| 3000/3000 [00:00<00:00, 16158.70 examples/s]
+[dry-run] loading Qwen/Qwen3.5-0.8B (multimodal, as SFTTrainer would) on CPU...
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   1%|          | 3/473 [00:00<00:46, 10.17it/s]Loading weights:  12%|█▏        | 56/473 [00:00<00:02, 145.86it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 996.52it/s]
+[dry-run] adapted submodule types (count of lora_A/B tensors):
+    down_proj: 48
+    gate_proj: 48
+    in_proj_a: 36
+    in_proj_b: 36
+    in_proj_qkv: 36
+    in_proj_z: 36
+    k_proj: 12
+    o_proj: 12
+    out_proj: 36
+    q_proj: 12
+    up_proj: 48
+    v_proj: 12
+[dry-run] adapter params touching 'visual': 0
+[dry-run] OK — exclude_modules working (no vision adapters)
+trainable params: 10,822,656 || all params: 863,808,576 || trainable%: 1.2529
+
+=== smoke train: 3k x 1 epoch on h200 (batch 32) ===
+dependency versions: torch==2.13.0  transformers==5.14.1  trl==1.9.2  peft==0.20.0  accelerate==1.14.0  datasets==5.0.1  tokenizers==0.22.2
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<03:33,  2.21it/s]Loading weights:  42%|████▏     | 199/473 [00:00<00:00, 470.73it/s]Loading weights:  66%|██████▌   | 310/473 [00:00<00:00, 554.90it/s]Loading weights:  92%|█████████▏| 436/473 [00:00<00:00, 724.26it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 556.01it/s]
+Tokenizing train dataset:   0%|          | 0/3000 [00:00<?, ? examples/s]Tokenizing train dataset:   5%|▌         | 164/3000 [00:00<00:01, 1619.27 examples/s]Tokenizing train dataset:  11%|█▏        | 339/3000 [00:00<00:01, 1690.36 examples/s]Tokenizing train dataset:  17%|█▋        | 518/3000 [00:00<00:01, 1732.29 examples/s]Tokenizing train dataset:  24%|██▎       | 707/3000 [00:00<00:01, 1787.88 examples/s]Tokenizing train dataset:  30%|██▉       | 893/3000 [00:00<00:01, 1811.36 examples/s]Tokenizing train dataset:  36%|███▋      | 1091/3000 [00:00<00:01, 1506.85 examples/s]Tokenizing train dataset:  43%|████▎     | 1278/3000 [00:00<00:01, 1605.97 examples/s]Tokenizing train dataset:  49%|████▉     | 1466/3000 [00:00<00:00, 1681.56 examples/s]Tokenizing train dataset:  55%|█████▌    | 1655/3000 [00:00<00:00, 1736.60 examples/s]Tokenizing train dataset:  61%|██████▏   | 1843/3000 [00:01<00:00, 1775.55 examples/s]Tokenizing train dataset:  70%|██████▉   | 2092/3000 [00:01<00:00, 1704.61 examples/s]Tokenizing train dataset:  76%|███████▌  | 2278/3000 [00:01<00:00, 1745.42 examples/s]Tokenizing train dataset:  82%|████████▏ | 2465/3000 [00:01<00:00, 1775.74 examples/s]Tokenizing train dataset:  88%|████████▊ | 2652/3000 [00:01<00:00, 1800.13 examples/s]Tokenizing train dataset:  95%|█████████▍| 2842/3000 [00:01<00:00, 1824.17 examples/s]Tokenizing train dataset: 100%|██████████| 3000/3000 [00:01<00:00, 1697.10 examples/s]
+Building labels for train dataset:   0%|          | 0/3000 [00:00<?, ? examples/s]Building labels for train dataset:  33%|███▎      | 1000/3000 [00:00<00:00, 9100.92 examples/s]Building labels for train dataset:  73%|███████▎  | 2199/3000 [00:00<00:00, 10728.43 examples/s]Building labels for train dataset: 100%|██████████| 3000/3000 [00:00<00:00, 9839.92 examples/s] 
+Packing train dataset:   0%|          | 0/3000 [00:00<?, ? examples/s]Packing train dataset: 100%|██████████| 3000/3000 [00:00<00:00, 60260.10 examples/s]
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 248046, 'pad_token_id': 248044}.
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:13<03:37, 13.60s/it] 12%|█▏        | 2/17 [00:24<02:55, 11.73s/it] 18%|█▊        | 3/17 [00:34<02:36, 11.18s/it] 24%|██▎       | 4/17 [00:44<02:21, 10.88s/it] 29%|██▉       | 5/17 [00:55<02:09, 10.75s/it] 35%|███▌      | 6/17 [01:05<01:56, 10.63s/it] 41%|████      | 7/17 [01:16<01:45, 10.57s/it] 47%|████▋     | 8/17 [01:26<01:35, 10.56s/it] 53%|█████▎    | 9/17 [01:37<01:24, 10.53s/it] 59%|█████▉    | 10/17 [01:47<01:13, 10.54s/it] 65%|██████▍   | 11/17 [01:58<01:03, 10.52s/it] 71%|███████   | 12/17 [02:08<00:52, 10.49s/it] 76%|███████▋  | 13/17 [02:19<00:41, 10.50s/it] 82%|████████▏ | 14/17 [02:29<00:31, 10.48s/it] 88%|████████▊ | 15/17 [02:40<00:21, 10.52s/it] 94%|█████████▍| 16/17 [02:50<00:10, 10.49s/it]100%|██████████| 17/17 [02:53<00:00,  8.22s/it]/scratch/mw4227/city-directory-extraction/venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:438: UserWarning: Could not find a config file in Qwen/Qwen3.5-0.8B - will assume that the vocabulary was not modified.
+  warnings.warn(
+                                               100%|██████████| 17/17 [02:54<00:00,  8.22s/it]100%|██████████| 17/17 [02:54<00:00, 10.26s/it]
+/scratch/mw4227/city-directory-extraction/venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:438: UserWarning: Could not find a config file in Qwen/Qwen3.5-0.8B - will assume that the vocabulary was not modified.
+  warnings.warn(
+
+=== termination check: generating 8 examples ===
+termination check OK — 8/8 completions stopped cleanly
+done -> /scratch/mw4227/city-directory-extraction/out/smoke
+{'train_runtime': '174.4', 'train_samples_per_second': '5.992', 'train_steps_per_second': '0.097', 'train_loss': '0.258', 'entropy': '0.265', 'num_tokens': '5.338e+05', 'mean_token_accuracy': '0.9471', 'epoch': '1'}
+
+=== adapter written? ===
+total 61870
+drwxr-xr-x. 2 mw4227 mw4227     4096 Sep  1 01:38 .
+drwxr-xr-x. 2 mw4227 mw4227     4096 Aug 18 14:52 ..
+-rw-r--r--. 1 mw4227 mw4227     1430 Sep  1 01:38 README.md
+-rw-r--r--. 1 mw4227 mw4227     1312 Sep  1 01:38 adapter_config.json
+-rw-------. 1 mw4227 mw4227 43346432 Sep  1 01:38 adapter_model.safetensors
+-rw-r--r--. 1 mw4227 mw4227     7755 Sep  1 01:38 chat_template.jinja
+drwxr-xr-x. 2 mw4227 mw4227     4096 Aug 18 14:25 checkpoint-16
+drwxr-xr-x. 2 mw4227 mw4227     4096 Sep  1 01:38 checkpoint-17
+-rw-r--r--. 1 mw4227 mw4227 19989325 Sep  1 01:38 tokenizer.json
+-rw-r--r--. 1 mw4227 mw4227     1124 Sep  1 01:38 tokenizer_config.json
+-rw-r--r--. 1 mw4227 mw4227     5713 Sep  1 01:38 training_args.bin
+SMOKE PASSED — adapter_config.json present. Next: sbatch hpc/20_train.sbatch

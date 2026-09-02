@@ -900,7 +900,9 @@ def make_nyc(rng) -> dict:
             name = f"{n} Bros"
         else:
             name = f"{n} & Son"
-        if era == "late" and rng.random() < 0.10:     # firm continuation row, mark by publisher
+        # Same gate as the person-row ditto above: only trow/polk after 1900 print the
+        # continuation mark. mb1931, boyd1890 and upington gold have none at all.
+        if ynum >= 1900 and publisher in ("trow", "polk") and rng.random() < 0.10:
             mark = "-" if publisher == "trow" else '" '
             name = f'{mark}{rng.choice("ABCDEFGHJLMRSTW")} {rng.choice("ABCEFHJLMW")} & Co'
         elif rng.random() < 0.30:                     # Doggett/Lain print firms in caps
@@ -933,7 +935,23 @@ def make_nyc(rng) -> dict:
         if rng.random() < race_p:
             race = _wchoice(rng, [("col'd", 4), ("colored", 2), ("col", 2), ("(co'd)", 2)])
 
-    ditto = era != "early" and rng.random() < (0.05 if era == "mid" else 0.14)
+    # SURNAME-REPEAT DITTO RATE — publisher-keyed and hard-gated at 1900. Measured over the
+    # 21-volume panel (rows whose `name` starts with the mark; conv #12 keeps it verbatim):
+    #
+    #     trow1907  40/68  58.8%   |  polk1917    61/72  84.7%   |  trow1884       0/141  0%
+    #     trow1913  91/93  97.8%   |  polk1925    36/40  90.0%   |  trowwilson1865 0/167  0%
+    #                              |  polk1933bk  35/49  71.4%   |  lain1876       0/103  0%
+    #     trow-late 131/161 81.4%  |  polk1933si  37/56  66.1%   |  boyd1890       0/ 75  0%
+    #                              |  queens1933  37/62  59.7%   |  mb1931         0/109  0%
+    #                              |  polk-late  206/279 73.8%
+    #
+    # It was a flat era rate (5% mid / 14% late, publisher-blind), which BOTH over-generated the
+    # form before 1900 (gold: 0/308 trow, 0/103 lain, 0/75 boyd — the dense two-line layout does
+    # not exist yet) and under-generated it after by 5x. The mark is 337 panel rows, 21% of the
+    # panel, and it is SEMANTIC not typographic: it means "same surname as the row above", so a
+    # miss makes the NAME wrong. It is the dominant cluster in v5/v6 name failures (`-Bernhard`,
+    # `-Adolph A` -> `Adolph A`, `-Anna` -> `Anna Isidor`). mb never dittos, in any year.
+    ditto = (ynum >= 1900 and rng.random() < {"trow": 0.81, "polk": 0.74}.get(publisher, 0.0))
     parent_surname = _surname(rng)                    # anchors alphabetical_range for dittos
     # Era-conditioned, measured over every gold widow row ON THESE ERA BOUNDARIES
     # (early <=1849 / mid <=1890 / late): the marker + HER given name shape ("Gray, widow

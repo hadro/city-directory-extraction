@@ -101,8 +101,9 @@ Then cross-check anything you pick against the `REVIEW:` column before using it.
 
 ### 2. Run the pipeline
 
-⚠️ **The command in `data_prep/gold_sample/WORKLIST.md` is STALE** — it calls
-`sources/sample_directories.py`, which no longer exists. Use `main.py` instead.
+> `sources/sample_directories.py` no longer exists. Both `gold_sample/WORKLIST.md` and the
+> `sample_volumes.py` generator that emits it were fixed on 2026-09-01 (`56c2f97`) to point at
+> `main.py` instead — but check `main.py --help` anyway, the stage flags have changed before.
 
 ```bash
 cd $PIPE

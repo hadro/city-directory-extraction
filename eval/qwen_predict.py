@@ -139,15 +139,29 @@ def _load_model(model_id: str):
     module tree with a DIFFERENT nesting -> PeftModel reports "missing adapter keys" and the
     trained text adapter is silently NOT applied (eval then scores at the base-model floor).
     Mirror training: try the image-text-to-text class first, fall back to causal LM."""
+    # device_map="auto" (accelerate dispatch) SIGSEGVs on Apple MPS -- a hard crash, exit 139, NO
+    # Python traceback, so it looks like the script silently did nothing. Use it only on CUDA;
+    # elsewhere load on CPU and move. This makes local eval on a Mac work, which matters when the
+    # cluster is not available: an M2 scores the 21-volume panel in ~50 min and reproduces the
+    # CUDA numbers EXACTLY (verified 2026-08-30 on three control volumes, all three metrics).
+    import torch
+    kw = {"torch_dtype": "auto"}
+    if torch.cuda.is_available():
+        kw["device_map"] = "auto"                       # unchanged path for the HPC runs
+    dev = None if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
     try:
         from transformers import AutoModelForImageTextToText
-        net = AutoModelForImageTextToText.from_pretrained(model_id, torch_dtype="auto", device_map="auto")
-        print(f"  loaded {model_id} as AutoModelForImageTextToText (multimodal, matches training)", file=sys.stderr)
+        net = AutoModelForImageTextToText.from_pretrained(model_id, **kw)
+        if dev:
+            net = net.to(dev)
+        print(f"  loaded {model_id} as AutoModelForImageTextToText (multimodal, matches training)"
+              + (f" on {dev}" if dev else ""), file=sys.stderr)
         return net
     except Exception as e:                              # genuinely text-only / merged checkpoint
         print(f"  multimodal load failed ({type(e).__name__}: {e}); using AutoModelForCausalLM", file=sys.stderr)
         from transformers import AutoModelForCausalLM
-        return AutoModelForCausalLM.from_pretrained(model_id, torch_dtype="auto", device_map="auto")
+        net = AutoModelForCausalLM.from_pretrained(model_id, **kw)
+        return net.to(dev) if dev else net
 
 
 def load(model_id: str, base_model: Optional[str]):

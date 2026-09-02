@@ -1,5 +1,8 @@
 # Handoff — city-directory-extraction
 
+> **Picking this up cold? Read [TAKEOVER.md](TAKEOVER.md) first** — three-minute orientation,
+> current state, open items, and the four scoring artifacts that each cost a cycle.
+>
 > Working state as of 2026-07-19. Read this first if resuming in a new session.
 > Companion docs: [plan.md](plan.md) (full rationale/roadmap), [../README.md](../README.md) (how-to).
 

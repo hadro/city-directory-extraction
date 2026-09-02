@@ -29,6 +29,9 @@ that seam, and [The future split](#the-future-split) documents the interface bet
 > listing-start / page-offset sampling). [docs/plan.md](docs/plan.md) is the original rationale
 > and data landscape — read it for background, the handoffs for truth.
 
+> **New to this repo, or taking it over?** Start with **[docs/TAKEOVER.md](docs/TAKEOVER.md)** —
+> where the project stands, what to do next, and the mistakes that have cost the most time.
+
 ## Where things stand (2026-08)
 
 **Model (A):** five data-composition cycles trained and scored on the 18-volume gold panel

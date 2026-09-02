@@ -76,8 +76,28 @@ Choose 2–3 NYC volumes whose publisher/era matches where names fail. Good cand
 - a **Polk NYC** (1917/1925/1933) — the 1930s immigrant-cluster names the census pool misses worst
 - an **early Manhattan** (Longworth/Mercein 1810s–20s) — Dutch colonial names
 
-Get their IIIF/IA identifiers from `master_directories.csv` (columns: source, id, publisher, city,
-borough, year, …). **Cross-check each against the `REVIEW:` column before using it.**
+**Use `data_prep/sample_volumes.py` rather than hand-picking.** It reads
+`master_directories.csv`, stratifies by publisher × era × column_count, and — importantly here —
+**already excludes eval holdouts automatically** (`EXCLUDE_NOTE` matches
+`phonebook|biz|eval|holdout|held-out|keep out` in the notes column). That is the leakage rule
+implemented, so you inherit it instead of re-deriving it.
+
+```bash
+cd $CDE
+python3 data_prep/sample_volumes.py --by publisher,decade --per 1 --max 12 \
+    --out-dir data_prep/harvest_sample
+```
+
+Writes `worklist.csv` (master-format subset of just those volumes) and `WORKLIST.md`. A run on
+2026-09-01 gave 332 in-scope volumes → 12 selected, spanning Longworth 1804/05–1835, Doggett
+1846/47 and Trow 1885/86–1912 — exactly the era spread the missing surnames come from.
+
+**One thing its exclusion does NOT do:** it drops the two `REVIEW:`-flagged holdouts, not the 21
+panel volumes. That is correct for this task — harvesting *different pages* of a panel volume is
+allowed and preferred — but if you decide to harvest whole non-panel volumes instead, filter the
+21 out yourself.
+
+Then cross-check anything you pick against the `REVIEW:` column before using it.
 
 ### 2. Run the pipeline
 

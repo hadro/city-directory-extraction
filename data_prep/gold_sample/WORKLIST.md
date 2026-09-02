@@ -11,10 +11,19 @@ Work top-to-bottom; check each off as its `gold.jsonl` lands in `data/`.
 **Depth:** aim ~40 gold lines per volume; go deeper (~100) on the **14 `deep`-flagged** rows below (Lain's synth→real gap + column-transition publishers, where layout change breaks the model). Pass the target to the editor with `--max-lines`.
 
 ## Run once — sample pages for the whole set
+
+> NOTE (2026-09-01): this used to call `sources/sample_directories.py`, which NO LONGER EXISTS.
+> Page selection now lives in `main.py --select-pages` (interactive browser UI; writes
+> `selection.txt` per volume, and later stages refuse to run without it). `--guided` is the
+> shorthand for `--download --select-pages --surya-ocr --gemini-ocr`. Run `main.py --help` first —
+> the stage flags have changed before.
+
 ```bash
 PY=/Users/joshhadro/github/directory-pipeline/.venv/bin/python
 cd /Users/joshhadro/github/directory-pipeline
-$PY sources/sample_directories.py "/Users/joshhadro/github/city-directory-extraction/data_prep/gold_sample/worklist.csv" --front 20 -k 2 --width 1800
+$PY main.py --help                    # confirm the stage flags
+$PY main.py <source-args> --guided    # download + select-pages + surya + gemini
+# worklist: /Users/joshhadro/github/city-directory-extraction/data_prep/gold_sample/worklist.csv
 ```
 
 ## Then per volume — OCR + build the editor

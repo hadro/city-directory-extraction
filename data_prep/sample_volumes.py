@@ -156,7 +156,10 @@ def depth_map(picked, all_rows):
 
 
 def write_worklist(picked, why, depth, out_md, out_csv):
-    rel_csv = out_csv.relative_to(REPO)
+    try:
+        rel_csv = out_csv.relative_to(REPO)               # pretty path when inside the repo
+    except ValueError:                                    # --out-dir elsewhere: absolute is fine
+        rel_csv = out_csv
     deep = [r for r in picked if depth[(r["source"], r["id"])][0] == "deep"]
     lines = [
         "# Gold-creation worklist",
@@ -170,10 +173,19 @@ def write_worklist(picked, why, depth, out_md, out_csv):
         "`--max-lines`.",
         "",
         "## Run once — sample pages for the whole set",
+        "",
+        "> NOTE (2026-09-01): this used to call `sources/sample_directories.py`, which NO LONGER",
+        "> EXISTS. Page selection now lives in `main.py --select-pages` (interactive browser UI,",
+        "> writes `selection.txt` per volume; later stages refuse to run without it). `--guided` is",
+        "> the shorthand for `--download --select-pages --surya-ocr --gemini-ocr`. Run `main.py",
+        "> --help` first — the stage flags have changed before.",
+        "",
         "```bash",
         "PY=/Users/joshhadro/github/directory-pipeline/.venv/bin/python",
         "cd /Users/joshhadro/github/directory-pipeline",
-        f'$PY sources/sample_directories.py "{REPO / rel_csv}" --front 20 -k 2 --width 1800',
+        "$PY main.py --help                    # confirm the stage flags",
+        "$PY main.py <source-args> --guided    # download + select-pages + surya + gemini",
+        f'# worklist: {rel_csv if rel_csv.is_absolute() else REPO / rel_csv}',
         "```",
         "",
         "## Then per volume — OCR + build the editor",

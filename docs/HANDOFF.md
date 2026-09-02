@@ -250,10 +250,12 @@ This is **semantic, not typographic** — the mark means "same surname as the ro
 it wrong makes the name wrong. It is exactly the failure cluster seen in the preds (`-Bernhard
 clerk`, `-Adolph A` → `Adolph A`, `-Anna` → `Anna Isidor`).
 
-**Fix:** raise the ditto rate for late trow/polk to the measured per-volume rates, the same
-publisher×era table shape used for directionals. No new data required. **This is the only
-remaining generator change I would spend a retrain on** — and it should ride with the untested
-franks `num_comma` fix from `7f456d2`.
+**✅ DONE `8d5c438`.** Keyed on (publisher, ynum>=1900): trow 0.81, polk 0.74, everything else
+0.0 — including all pre-1900 (gold: trow 0/308, lain 0/103, boyd 0/75; the dense two-line layout
+does not exist yet) and mb in any year (0/109). The flat era rate was wrong in BOTH directions:
+~6% pre-1900 where gold is 0, and ~14% late where gold is 74-81%. Applied to the firm-continuation
+row too, which had the same publisher-blind gate. After: trow-late 79.7%, polk-late 70.6%.
+**Not yet trained** — it ships with the untested franks `num_comma` fix from `7f456d2`.
 
 **B. Harvest real NYC names — blocked on pipeline output, not on code.**
 
@@ -268,7 +270,7 @@ run through the pipeline's OCR+extract. So this needs:
   2. `python3 data_prep/harvest_names.py ../directory-pipeline/output/<slug>/entries_*.csv`
   3. regenerate; the generator picks the harvested pools up automatically
 
-Worth doing only if (A) does not close the gap. Note the earlier "model regularises unseen surnames
+**Full runbook for another agent: [NAME_HARVEST_PLAN.md](NAME_HARVEST_PLAN.md).** Worth doing only if (A) does not close the gap. Note the earlier "model regularises unseen surnames
 to the ~54 it was trained on" problem was already fixed by the 40k census pool; the failures now
 are dittos and OCR-form differences (`Gibeney`/`Gibney`), not missing vocabulary.
 

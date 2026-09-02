@@ -162,6 +162,131 @@ gap is now content errors on dense fused lines — same root as the address gap.
 validator-clean (0 errors, 11 benign warnings). Gold sets are gitignored — corrected copies in
 `data/` (user keeps Time Machine backups; pre-sweep copies in session scratchpad).
 
+## ⛔ STOP CHASING PUNCTUATION — decided 2026-09-01. Read this before starting any cycle seven.
+
+**Measured, not argued.** Cycle six's headline was +7.8 whole-row EM. On the punctuation-normalized
+metric it was **−0.3**:
+
+| metric | v5-torch | v6 | verbatim delta | **normalized delta** |
+|---|---|---|---|---|
+| whole-row EM | 58.7% | 66.5% | **+7.8** | **−0.3** |
+| macro-F1 | 0.809 | 0.835 | +0.026 | **+0.003** |
+| micro-F1 | 0.870 | 0.892 | +0.022 | **−0.001** |
+
+**Once you stop counting periods, v6 and v5-torch are the same model.** A 4-hour retrain, a
+regenerated 100k corpus and three generator fixes bought +0.003 macro of extraction ability.
+The three convention cycles combined produced ~+0.003 normalized macro.
+
+**And the punctuation does not carry meaning.** `av.`/`av`, `n.`/`n`, `c.`/`c`, `r.`/`r`, `E.`/`E`
+are typographic house style with zero semantic content — that is the entire cycle-seven backlog.
+The cases that DO look meaning-bearing are a different thing: `st.` = store vs street is
+disambiguated by POSITION (both forms are `st.`); `N. J.` and `N J` are equally unambiguous;
+`B'way h.` reads the same without the stop. The one genuinely load-bearing mark, the ditto quote
+in Polk gold, turned out to be a SCORER bug, not a model problem.
+
+**The earlier argument for verbatim scoring (2026-08-31) was overstated.** Of its four reasons only
+one survives: fidelity to the page is a scholarly value for a GLAM transcription tool. That
+justifies keeping periods in the GOLD and in the OUTPUT. It does **not** justify a metric where
+`av` for `av.` fails an otherwise-perfect row.
+
+**DECIDED:**
+- **Do not run cycle seven** (era/publisher-gate abbreviation periods on `r. n. c./cor. bet. av.
+  st. ft. b.`). Its ceiling was measured at +5.5 EM — all typography, ~zero extraction.
+- **Report punctuation-normalized as the headline** (`evaluate.py --report-normalized`, already in
+  the harness), verbatim as the secondary fidelity check. The real board is ~70% EM and has been
+  since v5-torch.
+- **Do not scale the synthetic data and do not train 2B/4B.** `synth_dev` is macro **0.992**,
+  EM **96.0%** — the model has SATURATED its own synthetic distribution. More of the same data
+  trains harder on a distribution it already answers at 99%, and capacity is not the binding
+  constraint when in-distribution is 99%. The bottleneck is synthetic→real REALISM.
+
+### Where the residual actually is (v6, panel, support-weighted F1)
+
+| field | F1 | support |
+|---|---|---|
+| employer | 0.608 | 66 |
+| **name** | **0.821** | **1583** |
+| address | 0.852 | 1580 |
+| home_address | 0.856 | 248 |
+| occupation_role | 0.915 | 1199 |
+| is_business | 0.992 | 1583 |
+
+`name` is the lever — weakest field with full support. But categorising its failures shows it is
+not "the model cannot read names": surname-repeat dash handling (conv #12), a few genuine OCR-form
+differences, and **our own gold typos** (the model's `Gibney James` was right; the gold said
+`Gibney james`).
+
+### ✅ Gold-quality pass — DONE 2026-09-01
+
+16 rows across the panel were penalising a CORRECT model. All fixed, all volumes re-validated
+under `--strict`, round-trip guard clean:
+- **6 casing slips** where the raw line has the right capitalisation and the record does not
+  (`Gray mary`→`Gray Mary`, `Fitzgerald mary`, `Gibney james`, `-ELizabeth M`).
+- **10 unsupported periods** where the record normalises a mark the page prints bare
+  (`h. 449 Clason av.` → `h 449 Clason av`, `wid. Louis` → `wid Louis`). Conv #1 is verbatim.
+- `data_prep/validate_gold.py` now checks both, so this cannot drift again. The casing test is
+  "does the token appear in raw_line as written" — NOT "does it look odd" — so legitimate
+  lowercase honorifics (`esq.`, `jr`) and Dutch surnames (`DeNyse`) pass.
+
+### NAME REALISM — the one modelling item with a measured case (spec, 2026-09-01)
+
+`name` is F1 **0.821** on full panel support (1583) — the weakest field that matters. Categorising
+its failures shows it is NOT a vocabulary problem. Two components, and the first is cheap:
+
+**A. The surname-repeat ditto rate is 4-5x too low. Do this one.**
+
+Dense volumes replace a repeated surname with a leading mark (`" Jno H`, `-Bernhard`) — conv #12,
+verbatim. It is **337 panel rows, 21% of the panel**, and the generator badly under-emits it:
+
+| publisher-era | generator | GOLD |
+|---|---|---|
+| trow-late | 14.7% | **81%** (131/161) |
+| polk-late | 13.5% | **61%** (169/279) |
+
+Per-volume gold: trow1913 **97.8%**, polk1925 90.0%, polk1917 84.7%, polk1933bk 71.4%,
+polk1933si 66.1%, queens1933 59.7%, trow1907 58.8%.
+
+This is **semantic, not typographic** — the mark means "same surname as the row above", so getting
+it wrong makes the name wrong. It is exactly the failure cluster seen in the preds (`-Bernhard
+clerk`, `-Adolph A` → `Adolph A`, `-Anna` → `Anna Isidor`).
+
+**Fix:** raise the ditto rate for late trow/polk to the measured per-volume rates, the same
+publisher×era table shape used for directionals. No new data required. **This is the only
+remaining generator change I would spend a retrain on** — and it should ride with the untested
+franks `num_comma` fix from `7f456d2`.
+
+**B. Harvest real NYC names — blocked on pipeline output, not on code.**
+
+`data_prep/harvest_names.py` exists and works, and `synth_persons.py` already boosts
+`surnames_harvested.tsv` when present. But **that file does not exist** — the generator has only
+ever used the 40k census surname seed. The harvest was planned in cycle five and never run.
+
+The blocker is source data: `../directory-pipeline/output/*/entries_*.csv` currently holds only
+**Tulsa 1921/1922** (plus travel guides and the Goldsborough papers) — no NYC directory has been
+run through the pipeline's OCR+extract. So this needs:
+  1. page-sample + Surya + Gemini-extract one or two NYC volumes in `directory-pipeline`
+  2. `python3 data_prep/harvest_names.py ../directory-pipeline/output/<slug>/entries_*.csv`
+  3. regenerate; the generator picks the harvested pools up automatically
+
+Worth doing only if (A) does not close the gap. Note the earlier "model regularises unseen surnames
+to the ~54 it was trained on" problem was already fixed by the 40k census pool; the failures now
+are dittos and OCR-form differences (`Gibeney`/`Gibney`), not missing vocabulary.
+
+### What is worth doing next, in order
+
+1. **Doggett's 1850/51 gold** — `gold_doggetts1850.html` (2pg, 346 candidates, col 2). The ONE
+   new volume with a real payoff: it gives hand-labelled `spouse_name`/`race_designation`/
+   `is_business` for the publisher **NYU** is drawn from, retiring the `--exclude-fields`
+   workaround. NYU is the external benchmark carrying the Gemini comparison and is currently
+   scored on 4 of 8 fields.
+2. **Upington 1906 + Smith 1854/55/56** — `gold_upington1906.html`, `gold_smith185{4,5,6}.html`.
+   Closes the named gate item (1.9% + 1.0% of training unmeasured). Completeness, not capability.
+   **Hold new volumes OUT of `PANEL`** until the next model is scored on the current 21.
+3. **Name realism** — the only modelling work with a measured case. See the section below.
+4. **Release.** The stated goal (match/beat Gemini) has been met since v4 and the corrected board
+   understated it: qwen-v5 leads primed-pub Gemini by **+0.053 macro / +11.1 EM**. The model and
+   dataset cards still carry the pre-fix numbers.
+
 ## RESUME HERE — cycle SIX COMPLETE (2026-09-01): v6 works, and a scoring bug was hiding a third of the panel
 
 **Two things happened. Read both — the second is bigger than the retrain.**

@@ -55,6 +55,12 @@ FIELDS = ["name", "is_business", "spouse_name", "race_designation",
 # "polk" is NYC Polk; "polk-tulsa" is the Tulsa 1921 volume. They were BOTH tagged "polk"
 # until 2026-08-31, which made [publisher=polk; year=1917] and [publisher=polk; year=1921]
 # identical in the prompt -- see the _finish docstring in synth_persons.py.
+# tokens that are legitimately lowercase inside a name (conv #6 keeps titles verbatim)
+_NAME_LOWER_OK = {"and", "de", "van", "von", "du", "jr", "jr.", "sr", "sr.", "jun", "jun.",
+                  "sen", "sen.", "esq", "esq.", "gen", "gen.", "col", "col.", "capt", "capt.",
+                  "rev", "rev.", "dr", "dr.", "hon", "hon.", "brothers", "bros", "bros.",
+                  "widow", "wid", "wid."}
+
 KNOWN_PUBLISHERS = {"franks", "duncan", "longworth", "mercein", "ogden", "doggett", "rode",
                     "polk-tulsa",
                     "trow", "hearne", "hopehenderson", "smith", "lain", "boyd", "upington",
@@ -145,6 +151,36 @@ def check_record(rec: dict, raw: str, where: str, rep: Report):
     name = _norm(str(rec.get("name", "")))
     if name and FIRM_RE.search(name) and not rec.get("is_business"):
         rep.warn(where, f"name looks like a firm but is_business=False: {name!r}")
+
+    # --- gold-QUALITY checks (2026-09-01). These catch OUR labelling drift, not the model's.
+    # They exist because a mis-cased or over-punctuated gold value silently marks a CORRECT
+    # prediction wrong, and that loss lands on `name`/`address` -- the two fields the board is
+    # most sensitive to. Six casing slips and ten unsupported periods were found across the
+    # 21-volume panel the first time this ran.
+    #
+    # 1. casing the raw line does not support. Honorifics and particles are legitimately
+    #    lowercase, and Dutch surnames legitimately carry an internal capital (DeNyse), so the
+    #    test is whether the TOKEN APPEARS IN raw_line as written -- not whether it looks odd.
+    for tok in str(rec.get("name", "")).split():
+        t = tok.lstrip('-"')
+        if not t or t.lower() in _NAME_LOWER_OK:
+            continue
+        odd = (re.match(r"^[a-z]", t)
+               or (re.match(r"^[A-Z][a-z]*[A-Z]", t) and not t.startswith(("Mc", "Mac", "O'"))
+                   and not t.isupper()))
+        if odd and t not in raw:
+            rep.warn(where, f"name token {t!r} is not in raw_line as written — casing slip? "
+                            f"(name={rec.get('name')!r})")
+    # 2. a period the page does not print. Conv #1 is verbatim: if raw has a bare `av`, the
+    #    record must not normalise it to `av.`.
+    for f in ("address", "home_address", "spouse_name", "occupation_role"):
+        val = str(rec.get(f, ""))
+        for tok in re.findall(r"(?<![A-Za-z])([a-z]{1,3})\.(?=\s|$)", val):
+            if re.search(rf"(?<![A-Za-z]){tok}\.", raw):
+                continue                              # page prints it dotted -- fine
+            if re.search(rf"(?<![A-Za-z]){tok}(?![.\w])", raw):
+                rep.warn(where, f"{f} writes {tok + '.'!r} but raw_line prints it bare "
+                                f"(conv #1 verbatim): {val!r}")
 
 
 def check_context(ctx: dict, where: str, rep: Report):

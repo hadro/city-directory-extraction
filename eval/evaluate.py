@@ -28,6 +28,7 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
 from typing import Optional
 
 # Must match data_prep/synth_persons.py FIELDS
@@ -269,6 +270,57 @@ def report_normalized(gold, pred, strict, excl, verbatim_res) -> None:
     print("    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.")
 
 
+def _roundtrip_check(gold: list, target: str) -> int:
+    """SERIALIZE THE GOLD AND READ IT BACK. Anything that does not survive is a score the model
+    can never earn, no matter how right it is.
+
+    This project has now hit FOUR silent serialization/scoring artifacts, every one of which
+    looked exactly like a model failure:
+      2026-06-18  eval loaded AutoModelForCausalLM vs training's multimodal class -> adapter
+                  silently not applied; NYU macro read 0.358 instead of 0.760.
+      2026-08-04  parse_yaml was last-key-wins, so a runaway completion's truncated second copy
+                  overwrote good values; ~12 points of whole-row EM.
+      2026-09-01  parse_yaml stripped quotes but never UNESCAPED, so the correctly-escaped ditto
+                  marker in Polk gold ('" Jno H') could not match; 60-90% of the rows in five
+                  volumes, and it read as a "Polk floor" in the model.
+      2026-09-01  pipe target: a gold value containing the '|' delimiter is truncated on read.
+    The old --self-test compared gold against gold as PYTHON DICTS, so it never exercised a
+    serializer at all -- which is precisely why three of the four survived it. This does.
+
+    Returns 0 if the gold survives a round trip in `target`, 1 otherwise (non-fatal for the other
+    format, which is reported but does not fail the run)."""
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "train"))
+        from sft_qwen import to_yaml                  # the REAL training serializer
+    except Exception as e:                            # keep the check honest about what it skipped
+        print(f"[self-test] round trip SKIPPED (cannot import train/sft_qwen.to_yaml: {e})",
+              file=sys.stderr)
+        return 0
+
+    def to_pipe(rec):                                 # what every pipe emitter does
+        return "|".join(_cell(rec, f) for f in FIELDS)
+
+    rc = 0
+    for fmt, enc, dec in (("yaml", to_yaml, parse_yaml), ("pipe", to_pipe, parse_pipe)):
+        bad = []
+        for g in gold:
+            back = dec(enc(g))
+            diff = [f for f in FIELDS if back[f] != _cell(g, f)]
+            if diff:
+                bad.append((diff[0], _cell(g, diff[0]), back[diff[0]]))
+        if not bad:
+            print(f"[self-test] {fmt} round trip OK — all {len(gold)} gold rows survive")
+            continue
+        marker = "FAIL" if fmt == target else "warn"
+        print(f"[self-test] {marker}: {fmt} round trip LOSES {len(bad)}/{len(gold)} gold rows — "
+              f"these can never be scored correctly", file=sys.stderr)
+        for f, want, got in bad[:3]:
+            print(f"    {f}: gold={want!r} -> read back {got!r}", file=sys.stderr)
+        if fmt == target:
+            rc = 1
+    return rc
+
+
 def main(argv: Optional[list] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--gold", required=True, help="gold JSONL ({record:...} per line)")
@@ -297,6 +349,7 @@ def main(argv: Optional[list] = None) -> int:
     gold = load_gold(args.gold)
 
     if args.self_test:
+        rc = _roundtrip_check(gold, args.target)
         print(f"[self-test] perfect predictions (expect ~100% everywhere), n={len(gold)}")
         report(score(gold, [dict(g) for g in gold], args.strict))
         corrupted = []
@@ -307,6 +360,8 @@ def main(argv: Optional[list] = None) -> int:
             corrupted.append(c)
         print("\n[self-test] occupation blanked in half (expect occupation R~0.50):")
         report(score(gold, corrupted, args.strict))
+        if rc:
+            return rc
         return 0
 
     if not args.pred:

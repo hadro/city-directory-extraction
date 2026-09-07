@@ -96,10 +96,13 @@ alongside, per convention) and `synth_dev.jsonl` to the private `hadro/cde-evals
        see the name-harvest section in HANDOFF.md, whose headline result was negative.
    **Judge it on the normalized metric**, and remember the franks recovery is a convention fix, so
    it will show up verbatim and not normalized. If `name` does not move normalized, stop.
-4. **Gold labelling** — tools are generated and gitignored in the repo root:
-   `gold_doggetts1850.html` (**do this first** — hand-labelled spouse/race/is_business for the
-   publisher NYU is drawn from would retire the `--exclude-fields` workaround on the external
-   benchmark), then `gold_upington1906.html`, `gold_smith185{4,5,6}.html`.
+4. **Gold labelling** — tools are generated and gitignored in the repo root.
+   ✅ `gold_doggetts1850.html` **DONE 2026-09-07** → `data/doggetts1850_eval.jsonl`, 303 rows,
+   2 pages, validator clean. Doggett is the publisher NYU is drawn from, so its hand-labelled
+   spouse/race/is_business is what would retire the `--exclude-fields` workaround on the external
+   benchmark — but note this volume is 1850/51 and thin on those fields (is_business 7%,
+   spouse 10%, race 1%), so it weakens the case for excluding rather than settling it.
+   Remaining: `gold_upington1906.html`, `gold_smith185{4,5,6}.html`.
    **Hold new volumes OUT of `PANEL` in `hpc/30_eval.sbatch`** until the next model is scored on the
    current 21, or you lose the clean A/B again.
 5. **Release.** `cards/MODEL_CARD.md` and `cards/DATASET_CARD.md` still carry pre-fix numbers.

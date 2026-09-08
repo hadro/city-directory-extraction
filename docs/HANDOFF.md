@@ -260,16 +260,22 @@ does not exist yet) and mb in any year (0/109). The flat era rate was wrong in B
 row too, which had the same publisher-blind gate. After: trow-late 79.7%, polk-late 70.6%.
 **Not yet trained** — it ships with the untested franks `num_comma` fix from `7f456d2`.
 
-**B. Harvest real NYC names — blocked on pipeline output, not on code.**
+**B. Harvest real NYC names — DONE 2026-09-02, and it did not close the coverage gap.**
+
+> ⚠ The paragraph below described the state before the harvest ran. It is kept for context, but
+> the harvest has since been executed: 83 pages / 9 volumes / 4,288 surnames, and the gold-surname
+> miss rate moved only 49.2% → 48.8%. **See "⛔ THE NAME HARVEST DOES NOT CLOSE THE COVERAGE GAP"
+> above for the result and, more importantly, for why the metric itself is mis-specified.**
 
 `data_prep/harvest_names.py` exists and works, and `synth_persons.py` already boosts
-`surnames_harvested.tsv` when present. But **that file does not exist** — the generator has only
-ever used the 40k census surname seed. The harvest was planned in cycle five and never run.
+`surnames_harvested.tsv` when present. (Historical: that file did not exist — the generator had
+only ever used the 40k census surname seed. The harvest was planned in cycle five and never run.)
 
-The blocker is source data: `../directory-pipeline/output/*/entries_*.csv` currently holds only
-**Tulsa 1921/1922** (plus travel guides and the Goldsborough papers) — no NYC directory has been
-run through the pipeline's OCR+extract. So this needs:
-  1. page-sample + Surya + Gemini-extract one or two NYC volumes in `directory-pipeline`
+The blocker was source data: `../directory-pipeline/output/*/entries_*.csv` held only
+**Tulsa 1921/1922** (plus travel guides and the Goldsborough papers) — no NYC directory had been
+run through the pipeline's OCR+extract. So this needed:
+  1. page-sample + Gemini OCR + extract one or two NYC volumes in `directory-pipeline`
+     (Surya is not required — `extract_entries.py` falls back to raw Gemini text)
   2. `python3 data_prep/harvest_names.py ../directory-pipeline/output/<slug>/entries_*.csv`
   3. regenerate; the generator picks the harvested pools up automatically
 
@@ -291,6 +297,104 @@ are dittos and OCR-form differences (`Gibeney`/`Gibney`), not missing vocabulary
 4. **Release.** The stated goal (match/beat Gemini) has been met since v4 and the corrected board
    understated it: qwen-v5 leads primed-pub Gemini by **+0.053 macro / +11.1 EM**. The model and
    dataset cards still carry the pre-fix numbers.
+
+## ⛔ THE NAME HARVEST DOES NOT CLOSE THE COVERAGE GAP — measured 2026-09-02
+
+**[NAME_HARVEST_PLAN.md](NAME_HARVEST_PLAN.md) was executed. The headline result is negative, and
+its definition of done is not achievable without leakage.** Read this before spending another
+cycle on surname coverage.
+
+### What was run
+
+83 pages sampled from 9 NYC volumes (all outside the eval panel), Gemini OCR + NER via
+`directory-pipeline`, then `harvest_names.py`. `names/surnames_harvested.tsv` (4,288) and
+`given_harvested.tsv` (2,753) now exist for the first time.
+
+| volume | pages | entries | surnames | absent from census |
+|---|---:|---:|---:|---:|
+| Polk Staten Island 1933/34 | 21 | 3,327 | 990 | 66% |
+| Trow NYC 1907 part 1 | 11 | 1,633 | 122 | 61% |
+| Longworth NYC 1820/21 | 10 | 520 | 159 | 45% |
+| Polk Manhattan & Bronx 1933/34 | 10 | 5,569 | 546 | 86% |
+| Boyd Flushing 1885/86 | 8 | 121 | 42 | 29% |
+| Manhattan & Bronx Dir Co 1931 | 6 | 3,045 | 834 | 83% |
+| Polk Brooklyn 1933/34 | 6 | 4,290 | 424 | 79% |
+| Polk Queens & S.I. 1933/34 | 6 | 3,212 | 829 | 84% |
+| Polk NYC (Manhattan) 1917 | 5 | 2,795 | 356 | 79% |
+| **total** | **83** | **24,512** | **4,288 pooled** | **3,276 (76%)** |
+
+### Before / after
+
+| metric | before | after |
+|---|---|---|
+| gold-surname miss rate (the plan's target) | 49.2% (221/449) | **48.8% (219/449)** |
+| surnames recovered | — | **2** (`Greacen`, `Ostreich`) |
+| net-new vocabulary vs census pool | 0 | **3,276 surnames (76% of the pool)** |
+
+**+0.4 pts. The plan wanted "measurably below 49.2%". This is not that.**
+
+### Why — and why no amount of extra sampling fixes it
+
+**99.3% of directory surnames appear on exactly one page** (4,256 of 4,285, measured across every
+multi-page slice). `Durrenberger`, `DeNunzio`, `Dentlinger` exist on one page of one volume and
+nowhere else in the book.
+
+This was tested directly, not assumed. After a broad sample moved nothing, a second round targeted
+the pages immediately adjacent to six gold pages, landing on the *same alphabet windows*
+(`Fol-For` vs gold `For-For`; `D'E-Den` vs `DeN-Mil`; `O'R-Ost` vs `O'S-Otn`). ~2,700 surnames from
+the correct windows recovered nothing.
+
+**So the gold-surname miss rate mostly measures whether you sampled the gold page itself.** It is a
+leakage detector wearing a coverage metric's clothes. Treat the plan's success criterion as
+mis-specified. The plan's own mechanism paragraph already says the pool teaches robust *copying*,
+not memorised vocabulary — the 76% net-new figure is the honest measure of what the harvest bought.
+
+**A leak proved the point.** NYPL image ids are not perfectly contiguous, so canvas arithmetic
+drifted one page and pulled the polk1917 gold page into a harvest slice. It inflated the result to
+7 recovered surnames — all five `Emm*` came from that one page. Removing it took the result back to
+2. **Never trust canvas arithmetic to exclude a gold page; verify after downloading.**
+
+### What is still worth having
+
+The pool gained 3,276 era/place-authentic surnames the census pool lacks — `DeRosa`, `Mangieri`,
+`Foppiano`, `Manzione`, `Fortgang`, `Engelberg`, `Trautner`, `Groesbeeck`, `Le Conte`, `Guerineau`.
+Whether that helps the model is **untested**: it is the plan's original hypothesis (a richer pool
+teaches robust copying of unfamiliar strings), now with data behind it but still no score.
+
+### State left behind
+
+- `names/surnames_harvested.tsv` + `given_harvested.tsv` **exist and are gitignored**.
+  `synth_persons.py` picks them up automatically (`HARVEST_BOOST = 8.0`), so **the next
+  generation will produce different names**. `--self-test` passes. Delete both files to revert.
+- Nothing was regenerated, uploaded, or retrained — the plan gates that on the ditto-rate retrain
+  being scored first, which has not happened.
+- Sampled pages live in `../directory-pipeline/output/harvest_*` (25 slices).
+- New: `prompts/harvest/ner_prompt.md` in **directory-pipeline** — minimal
+  `surname/given_name/is_business/occupation` schema that feeds `harvest_names.py` natively and
+  resolves surname dittos.
+
+### Two data-quality traps found (both cost real money and nearly polluted the pool)
+
+1. **Degenerate OCR that the repetition guard misses.** Four Trow p1 pages (leaves 0906, 0452,
+   0454, 0456) emitted a fake surname `Edgey` 627 times and 89 phantom `Brown John` rows,
+   inflating `Brown` to 1,349. The model dropped given names and enumerated street addresses;
+   because every line differed, `run_gemini_ocr.py`'s exact-line repetition check passed them all.
+   Two cheap detectors, both validated on this data:
+   - **at OCR time**, normalise digit runs to `#` before the repetition count. Leaf 0456 scores
+     1% on the current exact-line check and **92%** digit-normalised. No false positives across
+     the other 82 pages.
+   - **at harvest time**, drop a page where one `(surname, given_name)` pair exceeds ~20% of its
+     person rows (leaf 0456 = 99%; next-highest legitimate page = 14%), or where >50% of person
+     rows have an empty `given_name` (bad pages = 100%; everything else ≤8%).
+2. **The `[blank]` sentinel is a repetition attractor.** See the token-burn note in
+   "Watch items" below.
+
+### Reproduce / re-check
+
+```bash
+python3 data_prep/measure_name_coverage.py        # before/after coverage + net-new vocabulary
+python3 data_prep/verify_harvest_leakage.py       # exits 1 if any harvested page is in an eval set
+```
 
 ## RESUME HERE — cycle SIX COMPLETE (2026-09-01): v6 works, and a scoring bug was hiding a third of the panel
 
@@ -993,7 +1097,11 @@ data_prep/
   synth_persons.py        # (line->record) generator; --profile {tulsa,nyc,mix} --target --n --seed
                           #   names now from census+harvested pools (was 54 inline); --packing-safe
   fetch_names.py          # build names/surnames.tsv (40k era-skewed US-Census surnames); --self-test
-  harvest_names.py        # pipeline entries CSVs -> names/surnames_harvested.tsv (real names). NOTE: never run; TSV absent
+  harvest_names.py        # pipeline entries CSVs -> names/surnames_harvested.tsv (real names)
+                          #   RUN 2026-09-02 over 83 harvested pages: 4,288 surnames / 2,753 given.
+                          #   MERGES across runs — delete the TSVs before re-running or counts double.
+  measure_name_coverage.py # gold-surname coverage + net-new vocabulary, before/after a harvest; --self-test
+  verify_harvest_leakage.py # proves harvested pages are not in any eval set; exits 1 on a leak; --self-test
   harvest_occupations.py  # surya listing lines -> gemini_baseline extract -> names/occupations_harvested.tsv (COMMITTED); --self-test
   names/surnames.tsv      # committed census surname pool (surnames_harvested.tsv is generated, gitignored)
   master_directories.csv  # multi-source (nypl|ia|loc|iiif) catalog for sampling; see its README
@@ -1400,6 +1508,42 @@ python3 eval/results_table.py --out results/eval_table.md && cat results/eval_ta
 
 ## Watch items / open questions
 
+- **Gemini OCR burns most of its output budget on degenerate retries — fix lives in
+  `directory-pipeline`, not here.** Measured on the 2026-09-02 harvest: ~1.7M output tokens for
+  83 pages, of which **more than half was spent on transcripts that were then correctly discarded**
+  (~$0.40 of a ~$0.75 run; the run is cheap, but this scales with every future harvest). Four
+  changes, in value order, all in `pipeline/run_gemini_ocr.py` unless noted:
+  1. **Set `max_output_tokens`.** `_call_gemini()`'s `GenerateContentConfig` sets none, so a
+     degenerate page runs to the model ceiling (~65k tokens; observed as 32,758 lines of
+     `[blank]` at `FinishReason.MAX_TOKENS`). `extract_entries.py:227` already caps at 65536 and
+     `analysis/review_entries.py:86` at 8192 — the OCR stage is simply missing the parameter. The
+     largest *legitimate* page in this corpus was ~29KB ≈ 7k tokens, so a 16384 cap gives >2×
+     headroom and cuts every wasted attempt by ~75%. Make it a flag, not a hardcode: the code
+     already warns-and-accepts on MAX_TOKENS, so an over-tight cap would truncate quietly.
+  2. **Gate the retry ladder by failure type.** Every failure currently walks 3 temperatures +
+     2 simple-prompt attempts + 1 model escalation = up to 6 extra calls. For a *repetition loop*
+     none of the 6 observed cases was rescued by a temperature retry — they all walked the full
+     ladder and still failed. Go straight from one retry to model escalation for `repetition
+     loop`, and keep the full ladder for `RECITATION`, where prompt/temperature genuinely varies
+     the outcome. 6 calls → 2.
+  3. **Catch template repetition, not just identical lines** (`_output_issue`, line ~173). This is
+     the change that also fixes the data-quality bug above — see the digit-normalisation note in
+     the harvest section. It pays twice: fewer poisoned pages *and* an earlier abort.
+  4. **Scope the `[blank]` sentinel** in `prompts/ocr_prompt.md:13`. Inviting a per-region
+     `[blank]` hands a degenerating model a 2-token line to loop on — that is literally what the
+     32,758-line runs were made of. Do **not** delete it (it is a documented machine contract:
+     `prompts/README.md`, `analysis/fix_entries.py:589`, `tests/test_fix_entries.py`). Re-scope to
+     page level: "if the entire page contains no text, output `[blank]` once and nothing else;
+     never repeat it line after line." Same for `[illegible]`.
+
+  Also worth knowing: `--flex` (~50% cheaper, 1–15 min latency, on by default in `main.py`) was
+  disabled for the harvest to keep wall-clock sane. For a large unattended harvest, turn it back on.
+
+  **Evidence pack for whoever fixes this:**
+  `../directory-pipeline/docs/evidence/2026-09-02-ocr-token-burn/` — the degenerate page images
+  and transcripts, the raw run logs (MAX_TOKENS warnings, the full retry ladder), and a runnable
+  `check_repetition.py` that scores the current detector against the proposed one. Zero false
+  positives across all 83 harvested pages.
 - ~~**`is_business` weak (~0.55)**~~ **RESOLVED** — the 0.8B run scores **0.98** on NYU / 1.00
   in-dist once the adapter actually loads. It was never a data problem; it was the eval-loader bug
   making everything look weak.

@@ -44,6 +44,36 @@ Two fields moved enough to note: `home_address` −0.052 and `employer` −0.069
 Run artifacts: `results/runs/v7-21vol/` (includes normalized reports for all three runs) and
 `results/runs/v6-21vol/`.
 
+### The stop was replicated on 717 rows NEITHER model was scored on
+
+NYU froze the panel, so the three new volumes were never scored. Run locally 2026-09-08 (v7 and
+v6, MPS, all 717 rows):
+
+| held-out group, n=717 | EM verbatim | EM normalized | punct gap |
+|---|---|---|---|
+| v6 | 55.5 | **79.2** | +23.7 |
+| v7 | **65.7** | **78.7** | +13.0 |
+| v7 − v6 | **+10.1** | **−0.6** | |
+
+Same signature as the panel (verbatim −0.7, normalized −1.0): **big verbatim movement, no
+normalized movement.** The stop rule holds on data neither model was tuned against.
+
+Two things here are worth more than the stop itself:
+
+1. **Extraction generalizes; only convention does not.** Normalized EM on three unseen volumes —
+   including `smith`, a publisher that is 0.97% of training — is **79**, statistically the same as
+   the 21-volume panel's 78. The model reads directories it has effectively never seen as well as
+   ones it was tuned on. The entire deficit on new material is untaught typography, which the
+   punct gap shows directly: +23.7 for v6 against +3.3 on the panel.
+2. **v7 is arguably the better RELEASE checkpoint, which is the opposite of the panel's verdict.**
+   On fresh volumes v7 is +10.1 verbatim because it nearly halved the convention gap
+   (+23.7 → +13.0); on the panel it could only reshuffle, because v6 had already closed those
+   conventions. If the deliverable is gold-convention-matching output on arbitrary new directories,
+   that is a real advantage. **Caveat, and it cuts the other way:** on `smith1855` — the only one
+   of the three that did NOT inform v7's generator calibration — v7 is +8.1 verbatim but **−4.9
+   normalized**. Extraction is not better and may be slightly worse. Decide on which property the
+   release actually needs; do not assume the panel settles it.
+
 ### ⚠️ v6 is NOT semantically better than v5-torch either. The whole gain is punctuation.
 
 Measured 2026-09-02 by regenerating v6 predictions locally and scoring both models

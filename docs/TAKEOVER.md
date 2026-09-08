@@ -65,14 +65,31 @@ Two things here are worth more than the stop itself:
    the 21-volume panel's 78. The model reads directories it has effectively never seen as well as
    ones it was tuned on. The entire deficit on new material is untaught typography, which the
    punct gap shows directly: +23.7 for v6 against +3.3 on the panel.
-2. **v7 is arguably the better RELEASE checkpoint, which is the opposite of the panel's verdict.**
-   On fresh volumes v7 is +10.1 verbatim because it nearly halved the convention gap
-   (+23.7 → +13.0); on the panel it could only reshuffle, because v6 had already closed those
-   conventions. If the deliverable is gold-convention-matching output on arbitrary new directories,
-   that is a real advantage. **Caveat, and it cuts the other way:** on `smith1855` — the only one
-   of the three that did NOT inform v7's generator calibration — v7 is +8.1 verbatim but **−4.9
-   normalized**. Extraction is not better and may be slightly worse. Decide on which property the
-   release actually needs; do not assume the panel settles it.
+2. **v7 initially looked like the better RELEASE checkpoint. It is not — release `v6`.** The
+   +10.1 on this group is *targeted calibration, not generalization*, and the externals prove it.
+
+### Release decision: `v6`. Settled 2026-09-08 on the largest held-out evidence.
+
+Three independent measurements, ordered by how uncontaminated they are:
+
+| evidence | n | winner | margin |
+|---|---|---|---|
+| **externals** (nyu, tulsa, lain, minneapolis — other cities/publishers, zero influence on any generator tuning) | **3030** | **v6** | **+0.8 EM** |
+| 21-volume panel (both models tuned around it) | 1583 | v6 | +0.7 EM |
+| 3 new gold volumes | 717 | v7 | +10.1 EM |
+
+**v6 wins on 4,613 rows; v7 wins on 717 — and those 717 are the ones v7's generator was tuned
+against.** `doggetts1850` set the `&` two-premises rate, `smith1856` set the race-marker forms, and
+`smith1855` is the same publisher and era as `smith1856`. v7 was taught those volumes' conventions,
+so scoring well there is the training objective working, not evidence of transfer.
+
+The externals are the honest test — Tulsa, Minneapolis and Brooklyn-Lain had no input to any
+generator change in this cycle — and there v6 wins 3 of 4 (nyu −0.8, tulsa −1.3, lain −1.4,
+minneapolis +5.2). Normalized figures do not exist for externals; NYU's reports cover the panel
+only. If someone wants to strengthen this, that is the run to do.
+
+**So: ship `v6`** (panel verbatim 75.2 / normalized 78.6). v7 stays archived; it is the cycle that
+proved the stop rule, and franks1786's 12.5 → 71.4 is its result worth citing.
 
 ### ⚠️ v6 is NOT semantically better than v5-torch either. The whole gain is punctuation.
 

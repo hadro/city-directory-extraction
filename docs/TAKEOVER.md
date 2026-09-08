@@ -105,7 +105,11 @@ alongside, per convention) and `synth_dev.jsonl` to the private `hadro/cde-evals
    ✅ `gold_smith1855.html` **DONE 2026-09-07** → `data/smith1855_eval.jsonl`, 185 rows, 2 pages,
    validator clean. Brooklyn 1855, a NEW publisher (`smith`), chosen to thicken the 1846-1856
    band where primed Gemini still beats the fine-tune.
-   Remaining: `gold_upington1906.html`, `gold_smith1854.html`, `gold_smith1856.html`.
+   ✅ `gold_smith1856.html` **DONE 2026-09-07** → `data/smith1856_eval.jsonl`, 229 rows, 2 pages,
+   validator clean, and the cleanest export yet — 0 errors on arrival, address markers 2/2, both
+   firms correctly flagged, and 6 verbatim race designations (`colored`, `col'd`, `cold.`), the
+   first Brooklyn volume in the set to carry any.
+   Remaining: `gold_upington1906.html`, `gold_smith1854.html`.
 
    **Both exports so far got convention #8 wrong in OPPOSITE directions**, so state it explicitly
    when generating the next tool: `address` KEEPS its `h`/`r`/`bds` prefix (a lone h-address lives

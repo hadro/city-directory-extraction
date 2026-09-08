@@ -13,18 +13,38 @@ Deeper context: [HANDOFF.md](HANDOFF.md) (long, start at "RESUME HERE"),
 18-volume board, `qwen-v5` leads primed-pub Gemini by **+0.053 macro / +11.1 whole-row EM**. That
 was true since v4; nobody knew because three scoring bugs were suppressing it.
 
-**The best model is `v6`** — trained on NYU Torch 2026-09-01, 21-volume panel. **Officially scored
-and on the board as of 2026-09-02** (`b90c8fa`); the earlier "simulation" caveat is retired.
+## 🛑 THE STOP RULE FIRED. Generator iteration is finished — do not start cycle eight.
 
-| 21-vol panel, n=1583 | macro | micro | EM |
-|---|---|---|---|
-| v5-torch (corrected) | 0.826 | 0.897 | 67.3% |
-| **v6 (official)** | **0.854** | **0.921** | **75.2%** |
+**v7 was run 2026-09-08 and the pre-registered stop condition was met.** The rule set before the
+run was: *"judge it on the normalized metric — if `name` does not move normalized, the model is
+done, say so and stop."* It did not move.
 
-Run artifacts: `results/runs/v6-21vol/`. Authoritative scores are `scores-parserfix.jsonl`;
-the `-oldparser` copies are kept ONLY for the parser-fix-vs-gold-edit decomposition.
+| 21-vol panel, n=1583 | EM verbatim | **EM normalized** | punct gap | name-F1 |
+|---|---|---|---|---|
+| v5-torch | 67.5 | **79.0** | +11.5 | 0.943 |
+| **v6 — best checkpoint** | **75.2** | **78.6** | +3.3 | 0.943 |
+| v7 | 74.5 | **77.6** | +3.0 | 0.938 |
 
-### ⚠️ v6 is NOT semantically better than v5-torch. The whole gain is punctuation.
+Three data compositions, and normalized extraction is flat-to-declining: **79.0 → 78.6 → 77.6**.
+Every verbatim gain since v5-torch is convention closure (the punctuation gap falling 11.5 → 3.0),
+not extraction ability. I reproduced all six figures from NYU's raw score files; they are exact.
+
+**`v6` remains the best single checkpoint** (verbatim 75.2 / normalized 78.6) and is what should
+ship. v7 is not a regression worth reverting — it is simply not an improvement.
+
+**v7 did produce the one bankable win, and traded it away.** franks1786 went **12.5 → 71.4% EM**
+(+58.9), beating the ~50% target, confirming the `num_comma` diagnosis outright — and with a
+normalized gap of +0.000, exactly as predicted for a convention fix. But the panel netted
+**−0.7 EM**, because it gave back trowwilson1865 (−8.4), polk1925 (−7.5), mb1931 (−6.4) and
+lain1876 (−5.8). *Convention fixes now reshuffle EM between volumes instead of adding to it.*
+That is the signature of a saturated model, and it is why the stop rule exists.
+
+Two fields moved enough to note: `home_address` −0.052 and `employer` −0.069 support-weighted F1.
+
+Run artifacts: `results/runs/v7-21vol/` (includes normalized reports for all three runs) and
+`results/runs/v6-21vol/`.
+
+### ⚠️ v6 is NOT semantically better than v5-torch either. The whole gain is punctuation.
 
 Measured 2026-09-02 by regenerating v6 predictions locally and scoring both models
 `--report-normalized` on the 693 panel rows where both prediction sets exist:
@@ -86,16 +106,19 @@ alongside, per convention) and `synth_dev.jsonl` to the gated `hadro/cde-evals`.
    `~/Downloads`. **The v6 adapter (60 MB) is now on Josh's Mac** in the delivered results folder,
    so this no longer needs NYU's write token — Josh can push v6 himself. v5-torch is the baseline v6
    is measured against and is still NYU-side only.
-3. **One retrain (v7), then stop.** THREE un-shipped generator changes have accumulated; ship them
-   together, since none has been scored:
-     * `8d5c438` surname-repeat ditto rate — untested, targets `name`
-     * `7f456d2` franks `num_comma` — **the one bankable item.** v6 regressed franks1786 by
-       −37.5 EM; 48 of its 56 rows fail on a single inserted comma after the house number. Worth
-       ≈ +1.3 EM panel-weighted on its own.
-     * the harvested surname pool (gitignored, picked up automatically) — untested hypothesis;
-       see the name-harvest section in HANDOFF.md, whose headline result was negative.
-   **Judge it on the normalized metric**, and remember the franks recovery is a convention fix, so
-   it will show up verbatim and not normalized. If `name` does not move normalized, stop.
+3. ~~One retrain (v7), then stop.~~ **DONE 2026-09-08 — and the stop rule fired.** All four
+   accumulated generator changes shipped (ditto `8d5c438`, franks `7f456d2`, harvested surnames,
+   `&` two-premises `d2eb264`, plus the `(co'd)` and self-crossing fixes). franks1786 recovered
+   12.5 → 71.4% EM exactly as predicted, but the panel netted −0.7 EM and normalized extraction
+   fell 78.6 → 77.6. **Do not start cycle eight.** See the stop section at the top.
+
+   The two pre-registered variables that remain UNTESTED, in NYU's preferred order:
+     * **DATA VOLUME** — the 250k A/B (~10h, free on an L40S). The cheapest remaining question,
+       and the only one that isolates volume from composition. It is a genuine test: every cycle
+       so far changed *what* the 100k contained, never *how much*.
+     * **CAPACITY** — the 2B/4B family, which was the original case for having cluster access.
+   Neither is a generator change. If both come back flat, the 0.8B result stands as the finding
+   and the project is about writing it up, not training again.
 4. **Gold labelling** — tools are generated and gitignored in the repo root.
    ✅ `gold_doggetts1850.html` **DONE 2026-09-07** → `data/doggetts1850_eval.jsonl`, 303 rows,
    2 pages, validator clean. Doggett is the publisher NYU is drawn from, so its hand-labelled
@@ -120,8 +143,16 @@ alongside, per convention) and `synth_dev.jsonl` to the gated `hadro/cde-evals`.
    current 21, or you lose the clean A/B again.
 5. **Release.** `cards/MODEL_CARD.md` and `cards/DATASET_CARD.md` still carry pre-fix numbers.
 
+**The Brooklyn h/r/bds question is CLOSED.** NYU ran it on both cycles 2026-09-08, recovering the
+v6 comparison that was lost to a cleared scratchpad: v6 matched gold marker rates almost exactly
+(trowwilson1865 65.9% predicted vs 65.9% gold; worst case boyd1890 −5.3). It is **not** a
+franks-comma-class fix, and the flat ~20% training rate does not matter — the model copies the
+marker from the raw line rather than sampling a learned prior, as hypothesised. v7 drifted slightly
+worse (trowwilson 59.3 vs 65.9), consistent with its general give-back on Trow-era volumes.
+
 **Explicitly NOT worth doing** (each measured, not assumed):
-- cycle-seven punctuation work (ceiling +5.5 EM, all typography)
+- **cycle eight, or any further generator/composition work** — v7 settled this empirically, not by
+  argument: three compositions, normalized 79.0 → 78.6 → 77.6
 - scaling synthetic data or training 2B/4B — `synth_dev` is macro 0.992 / EM 96.0%, the model has
   saturated its own distribution; capacity and volume are not the constraint
 - re-probing GLiNER2 — done and documented in `eval/gliner2_baseline.py`

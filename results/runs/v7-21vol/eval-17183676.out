@@ -1,0 +1,742 @@
+=== node gl038.hpc.nyu.edu | job 17183676 | Tue Sep  8 06:18:50 EDT 2026 ===
+  adapter /scratch/mw4227/city-directory-extraction/out/v7
+Tue Sep  8 06:18:50 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.82.07              Driver Version: 580.82.07      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    On  |   00000000:C2:00.0 Off |                    0 |
+| N/A   38C    P8             34W /  350W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+--- franks1786 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:06,  7.13it/s]Loading weights:  18%|█▊        | 84/473 [00:00<00:01, 381.76it/s]Loading weights:  39%|███▊      | 183/473 [00:00<00:00, 616.45it/s]Loading weights:  58%|█████▊    | 273/473 [00:00<00:00, 714.17it/s]Loading weights:  85%|████████▍ | 401/473 [00:00<00:00, 904.98it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 782.76it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 56 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_franks1786.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/franks1786_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_franks1786.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 85.7   0.86   0.86   0.86  ####.  56
+is_business          94.6   0.95   0.95   0.95  #####  56
+spouse_name                                     n/a (not in gold)
+race_designation                                n/a (not in gold)
+occupation_role      89.3   0.89   0.94   0.91  #####  49
+employer                                        n/a (not in gold)
+address              87.5   0.89   0.88   0.88  ####.  56
+home_address                                    n/a (not in gold)
+------------------------------------------------------------
+rows=56  whole-row EM=71.4%
+OVERALL  macro-F1=0.899 (over 4 present fields)   micro-F1=0.899
+
+--- duncan1794 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:03,  7.49it/s]Loading weights:  20%|█▉        | 93/473 [00:00<00:00, 467.34it/s]Loading weights:  38%|███▊      | 182/473 [00:00<00:00, 643.45it/s]Loading weights:  57%|█████▋    | 268/473 [00:00<00:00, 723.36it/s]Loading weights:  84%|████████▎ | 396/473 [00:00<00:00, 916.85it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 815.65it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 58 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_duncan1794.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/duncan1794_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_duncan1794.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 91.4   0.91   0.91   0.91  #####  58
+is_business          93.1   0.93   0.93   0.93  #####  58
+spouse_name          98.3   0.89   0.89   0.89  ####.  9
+race_designation                                n/a (not in gold)
+occupation_role      89.7   0.88   0.90   0.89  ####.  50
+employer                                        n/a (spurious: 1 pred)
+address              91.4   0.91   0.91   0.91  #####  58
+home_address                                    n/a (not in gold)
+------------------------------------------------------------
+rows=58  whole-row EM=75.9%
+OVERALL  macro-F1=0.908 (over 5 present fields)   micro-F1=0.910
+  note: model predicted fields absent from this gold: employer
+
+--- longworth1818 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:04,  7.27it/s]Loading weights:  19%|█▉        | 90/473 [00:00<00:00, 455.19it/s]Loading weights:  36%|███▌      | 168/473 [00:00<00:00, 586.76it/s]Loading weights:  54%|█████▍    | 256/473 [00:00<00:00, 695.03it/s]Loading weights:  85%|████████▍ | 401/473 [00:00<00:00, 948.50it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 822.10it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/106
+wrote 106 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_longworth1818.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/longworth1818_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_longworth1818.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 91.5   0.92   0.92   0.92  #####  106
+is_business          96.2   0.96   0.96   0.96  #####  106
+spouse_name          97.2   0.77   0.77   0.77  ####.  13
+race_designation                                n/a (not in gold)
+occupation_role      97.2   0.96   0.96   0.96  #####  78
+employer                                        n/a (not in gold)
+address              85.8   0.86   0.86   0.86  ####.  106
+home_address         99.1   0.91   0.91   0.91  #####  11
+------------------------------------------------------------
+rows=106  whole-row EM=75.5%
+OVERALL  macro-F1=0.896 (over 6 present fields)   micro-F1=0.917
+
+--- mercein1820 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:04,  7.27it/s]Loading weights:  19%|█▉        | 89/473 [00:00<00:00, 425.20it/s]Loading weights:  41%|████      | 193/473 [00:00<00:00, 662.11it/s]Loading weights:  57%|█████▋    | 269/473 [00:00<00:00, 696.41it/s]Loading weights:  87%|████████▋ | 412/473 [00:00<00:00, 942.72it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 816.41it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 60 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_mercein1820.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/mercein1820_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_mercein1820.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 90.0   0.90   0.90   0.90  ####.  60
+is_business          98.3   0.98   0.98   0.98  #####  60
+spouse_name          98.3   0.67   0.67   0.67  ###..  3
+race_designation                                n/a (not in gold)
+occupation_role      96.7   0.95   0.95   0.95  #####  43
+employer                                        n/a (not in gold)
+address              91.7   0.92   0.92   0.92  #####  60
+home_address        100.0   1.00   1.00   1.00  #####  4
+------------------------------------------------------------
+rows=60  whole-row EM=86.7%
+OVERALL  macro-F1=0.903 (over 6 present fields)   micro-F1=0.935
+
+--- ogden1839 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:02,  7.50it/s]Loading weights:  19%|█▉        | 90/473 [00:00<00:00, 441.67it/s]Loading weights:  40%|███▉      | 187/473 [00:00<00:00, 653.72it/s]Loading weights:  58%|█████▊    | 276/473 [00:00<00:00, 738.77it/s]Loading weights:  85%|████████▌ | 403/473 [00:00<00:00, 903.15it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 810.55it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 66 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_ogden1839.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/ogden1839_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_ogden1839.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 95.5   0.95   0.95   0.95  #####  66
+is_business         100.0   1.00   1.00   1.00  #####  66
+spouse_name          98.5   0.67   0.67   0.67  ###..  3
+race_designation    100.0   1.00   1.00   1.00  #####  7
+occupation_role      98.5   0.98   0.98   0.98  #####  41
+employer                                        n/a (not in gold)
+address              92.4   0.92   0.92   0.92  #####  66
+home_address         98.5   1.00   0.91   0.95  #####  11
+------------------------------------------------------------
+rows=66  whole-row EM=89.4%
+OVERALL  macro-F1=0.925 (over 7 present fields)   micro-F1=0.960
+
+--- doggett1846 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<00:59,  7.91it/s]Loading weights:  18%|█▊        | 86/473 [00:00<00:00, 413.51it/s]Loading weights:  38%|███▊      | 181/473 [00:00<00:00, 604.34it/s]Loading weights:  61%|██████    | 287/473 [00:00<00:00, 747.68it/s]Loading weights:  94%|█████████▎| 443/473 [00:00<00:00, 1006.97it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 830.16it/s] 
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 37 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_doggett1846.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/doggett1846_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_doggett1846.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 91.9   0.92   0.92   0.92  #####  37
+is_business         100.0   1.00   1.00   1.00  #####  37
+spouse_name          97.3   0.50   0.50   0.50  ##...  2
+race_designation                                n/a (not in gold)
+occupation_role      91.9   0.94   0.94   0.94  #####  33
+employer             97.3   0.00   0.00   0.00  .....  1
+address              75.7   0.76   0.76   0.76  ####.  37
+home_address         91.9   0.77   0.77   0.77  ####.  13
+------------------------------------------------------------
+rows=37  whole-row EM=62.2%
+OVERALL  macro-F1=0.698 (over 7 present fields)   micro-F1=0.884
+
+--- rode1851 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<00:52,  8.94it/s]Loading weights:  18%|█▊        | 86/473 [00:00<00:00, 479.05it/s]Loading weights:  40%|████      | 191/473 [00:00<00:00, 710.89it/s]Loading weights:  63%|██████▎   | 296/473 [00:00<00:00, 828.04it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 947.46it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 53 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_rode1851.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/rode1851_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_rode1851.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 98.1   0.98   0.98   0.98  #####  53
+is_business         100.0   1.00   1.00   1.00  #####  53
+spouse_name         100.0   1.00   1.00   1.00  #####  5
+race_designation                                n/a (not in gold)
+occupation_role      94.3   0.94   0.94   0.94  #####  47
+employer             98.1   0.00   0.00   0.00  .....  1
+address              75.5   0.76   0.76   0.76  ####.  53
+home_address         94.3   0.83   0.94   0.88  ####.  16
+------------------------------------------------------------
+rows=53  whole-row EM=66.0%
+OVERALL  macro-F1=0.793 (over 7 present fields)   micro-F1=0.915
+
+--- hearne1852 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:01,  7.68it/s]Loading weights:  19%|█▉        | 91/473 [00:00<00:00, 450.48it/s]Loading weights:  38%|███▊      | 182/473 [00:00<00:00, 639.69it/s]Loading weights:  56%|█████▌    | 266/473 [00:00<00:00, 695.13it/s]Loading weights:  89%|████████▉ | 423/473 [00:00<00:00, 992.34it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 820.42it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 52 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_hearne1852.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/hearne1852_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_hearne1852.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 96.2   0.96   0.96   0.96  #####  52
+is_business         100.0   1.00   1.00   1.00  #####  52
+spouse_name         100.0   1.00   1.00   1.00  #####  3
+race_designation                                n/a (not in gold)
+occupation_role      90.4   0.89   0.95   0.92  #####  42
+employer             92.3   0.50   0.50   0.50  ##...  4
+address              84.6   0.85   0.85   0.85  ####.  52
+home_address         96.2   0.88   1.00   0.94  #####  15
+------------------------------------------------------------
+rows=52  whole-row EM=75.0%
+OVERALL  macro-F1=0.881 (over 7 present fields)   micro-F1=0.926
+
+--- trowwilson1865 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:03,  7.46it/s]Loading weights:  20%|█▉        | 93/473 [00:00<00:00, 473.74it/s]Loading weights:  38%|███▊      | 181/473 [00:00<00:00, 635.75it/s]Loading weights:  56%|█████▌    | 263/473 [00:00<00:00, 702.56it/s]Loading weights:  76%|███████▌  | 358/473 [00:00<00:00, 776.83it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 820.33it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/167
+wrote 167 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_trowwilson1865.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/trowwilson1865_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_trowwilson1865.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 97.6   0.98   0.98   0.98  #####  167
+is_business         100.0   1.00   1.00   1.00  #####  167
+spouse_name          98.2   0.84   0.84   0.84  ####.  19
+race_designation    100.0   1.00   1.00   1.00  #####  1
+occupation_role      97.0   0.96   0.97   0.97  #####  142
+employer                                        n/a (not in gold)
+address              85.0   0.85   0.85   0.85  ####.  167
+home_address         90.4   0.60   0.83   0.70  ###..  29
+------------------------------------------------------------
+rows=167  whole-row EM=78.4%
+OVERALL  macro-F1=0.905 (over 7 present fields)   micro-F1=0.933
+
+--- hopehenderson1856 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:01,  7.72it/s]Loading weights:  18%|█▊        | 86/473 [00:00<00:00, 408.51it/s]Loading weights:  38%|███▊      | 182/473 [00:00<00:00, 622.60it/s]Loading weights:  59%|█████▊    | 277/473 [00:00<00:00, 735.38it/s]Loading weights:  92%|█████████▏| 437/473 [00:00<00:00, 1017.17it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 827.35it/s] 
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 60 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_hopehenderson1856.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/hopehenderson1856_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_hopehenderson1856.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                100.0   1.00   1.00   1.00  #####  60
+is_business         100.0   1.00   1.00   1.00  #####  60
+spouse_name         100.0   1.00   1.00   1.00  #####  7
+race_designation                                n/a (not in gold)
+occupation_role     100.0   1.00   1.00   1.00  #####  53
+employer                                        n/a (not in gold)
+address              63.3   0.63   0.63   0.63  ###..  60
+home_address         90.0   0.72   0.81   0.77  ####.  16
+------------------------------------------------------------
+rows=60  whole-row EM=60.0%
+OVERALL  macro-F1=0.900 (over 6 present fields)   micro-F1=0.899
+
+--- lain1876 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<00:47,  9.88it/s]Loading weights:  19%|█▉        | 92/473 [00:00<00:00, 536.25it/s]Loading weights:  43%|████▎     | 204/473 [00:00<00:00, 791.31it/s]Loading weights:  64%|██████▍   | 304/473 [00:00<00:00, 859.87it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 978.35it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/103
+wrote 103 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_lain1876.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/lain1876_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_lain1876.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 96.1   0.96   0.96   0.96  #####  103
+is_business         100.0   1.00   1.00   1.00  #####  103
+spouse_name          99.0   0.92   0.92   0.92  #####  13
+race_designation                                n/a (not in gold)
+occupation_role      93.2   0.92   0.96   0.94  #####  82
+employer             96.1   0.00   0.00   0.00  .....  4
+address              80.6   0.81   0.81   0.81  ####.  103
+home_address         93.2   0.65   0.93   0.77  ####.  14
+------------------------------------------------------------
+rows=103  whole-row EM=72.8%
+OVERALL  macro-F1=0.771 (over 7 present fields)   micro-F1=0.915
+
+--- trow1884 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:03,  7.42it/s]Loading weights:  18%|█▊        | 84/473 [00:00<00:01, 380.42it/s]Loading weights:  41%|████      | 195/473 [00:00<00:00, 667.48it/s]Loading weights:  58%|█████▊    | 272/473 [00:00<00:00, 699.71it/s]Loading weights:  86%|████████▌ | 406/473 [00:00<00:00, 916.15it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 807.01it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/141
+wrote 141 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_trow1884.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/trow1884_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_trow1884.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 94.3   0.94   0.94   0.94  #####  141
+is_business          99.3   0.99   0.99   0.99  #####  141
+spouse_name         100.0   1.00   1.00   1.00  #####  9
+race_designation                                n/a (not in gold)
+occupation_role      96.5   0.96   0.98   0.97  #####  128
+employer                                        n/a (not in gold)
+address              86.5   0.86   0.86   0.86  ####.  141
+home_address         92.2   0.77   0.84   0.80  ####.  44
+------------------------------------------------------------
+rows=141  whole-row EM=78.0%
+OVERALL  macro-F1=0.930 (over 6 present fields)   micro-F1=0.933
+
+--- boyd1890 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:02,  7.53it/s]Loading weights:  20%|█▉        | 93/473 [00:00<00:00, 477.44it/s]Loading weights:  38%|███▊      | 180/473 [00:00<00:00, 639.23it/s]Loading weights:  56%|█████▌    | 263/473 [00:00<00:00, 706.46it/s]Loading weights:  85%|████████▌ | 403/473 [00:00<00:00, 946.45it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 826.78it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 75 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_boyd1890.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/boyd1890_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_boyd1890.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 94.7   0.95   0.95   0.95  #####  75
+is_business         100.0   1.00   1.00   1.00  #####  75
+spouse_name         100.0   1.00   1.00   1.00  #####  8
+race_designation                                n/a (not in gold)
+occupation_role      90.7   0.87   0.89   0.88  ####.  54
+employer             98.7   0.50   1.00   0.67  ###..  1
+address              90.7   0.91   0.91   0.91  #####  75
+home_address         93.3   0.50   1.00   0.67  ###..  5
+------------------------------------------------------------
+rows=75  whole-row EM=85.3%
+OVERALL  macro-F1=0.867 (over 7 present fields)   micro-F1=0.931
+
+--- trow1907 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:03,  7.42it/s]Loading weights:  19%|█▉        | 89/473 [00:00<00:00, 455.27it/s]Loading weights:  35%|███▍      | 165/473 [00:00<00:00, 581.80it/s]Loading weights:  50%|█████     | 238/473 [00:00<00:00, 635.12it/s]Loading weights:  80%|████████  | 380/473 [00:00<00:00, 908.57it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 814.92it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 68 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_trow1907.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/trow1907_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_trow1907.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 94.1   0.94   0.94   0.94  #####  68
+is_business          92.6   0.93   0.93   0.93  #####  68
+spouse_name          98.5   0.75   0.75   0.75  ####.  4
+race_designation                                n/a (not in gold)
+occupation_role      95.6   0.94   0.94   0.94  #####  55
+employer                                        n/a (spurious: 1 pred)
+address              89.7   0.90   0.90   0.90  ####.  68
+home_address         89.7   0.76   0.73   0.74  ####.  22
+------------------------------------------------------------
+rows=68  whole-row EM=76.5%
+OVERALL  macro-F1=0.867 (over 6 present fields)   micro-F1=0.909
+  note: model predicted fields absent from this gold: employer
+
+--- trow1913 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:03,  7.46it/s]Loading weights:  18%|█▊        | 86/473 [00:00<00:00, 439.94it/s]Loading weights:  36%|███▋      | 172/473 [00:00<00:00, 615.85it/s]Loading weights:  54%|█████▍    | 255/473 [00:00<00:00, 683.30it/s]Loading weights:  79%|███████▊  | 372/473 [00:00<00:00, 848.79it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 805.29it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 93 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_trow1913.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/trow1913_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_trow1913.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 88.2   0.88   0.88   0.88  ####.  93
+is_business          97.8   0.98   0.98   0.98  #####  93
+spouse_name          98.9   0.86   0.86   0.86  ####.  7
+race_designation                                n/a (not in gold)
+occupation_role      92.5   0.91   0.94   0.92  #####  77
+employer             98.9   1.00   0.50   0.67  ###..  2
+address              94.6   0.95   0.95   0.95  #####  93
+home_address         94.6   0.84   0.84   0.84  ####.  25
+------------------------------------------------------------
+rows=93  whole-row EM=79.6%
+OVERALL  macro-F1=0.870 (over 7 present fields)   micro-F1=0.924
+
+--- polk1917 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:02,  7.58it/s]Loading weights:  19%|█▉        | 90/473 [00:00<00:00, 465.81it/s]Loading weights:  37%|███▋      | 174/473 [00:00<00:00, 610.72it/s]Loading weights:  56%|█████▌    | 266/473 [00:00<00:00, 725.92it/s]Loading weights:  78%|███████▊  | 370/473 [00:00<00:00, 825.18it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 820.39it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 72 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_polk1917.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/polk1917_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_polk1917.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 86.1   0.86   0.86   0.86  ####.  72
+is_business          97.2   0.97   0.97   0.97  #####  72
+spouse_name          90.3   0.00   0.00   0.00  .....  5
+race_designation                                n/a (not in gold)
+occupation_role      86.1   0.82   0.82   0.82  ####.  49
+employer             90.3   0.79   0.68   0.73  ####.  22
+address              81.9   0.82   0.83   0.82  ####.  71
+home_address         94.4   0.43   0.75   0.55  ###..  4
+------------------------------------------------------------
+rows=72  whole-row EM=52.8%
+OVERALL  macro-F1=0.679 (over 7 present fields)   micro-F1=0.840
+
+--- polk1925 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:03,  7.47it/s]Loading weights:  19%|█▉        | 90/473 [00:00<00:00, 442.29it/s]Loading weights:  38%|███▊      | 182/473 [00:00<00:00, 621.41it/s]Loading weights:  52%|█████▏    | 248/473 [00:00<00:00, 623.34it/s]Loading weights:  92%|█████████▏| 436/473 [00:00<00:00, 1042.27it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 816.98it/s] 
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 40 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_polk1925.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/polk1925_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_polk1925.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 97.5   0.97   0.97   0.97  #####  40
+is_business         100.0   1.00   1.00   1.00  #####  40
+spouse_name                                     n/a (not in gold)
+race_designation                                n/a (not in gold)
+occupation_role      92.5   0.90   0.90   0.90  ####.  29
+employer             85.0   0.33   0.25   0.29  #....  8
+address              90.0   0.90   0.90   0.90  ####.  40
+home_address         97.5   0.83   1.00   0.91  #####  5
+------------------------------------------------------------
+rows=40  whole-row EM=72.5%
+OVERALL  macro-F1=0.828 (over 6 present fields)   micro-F1=0.916
+
+--- mb1931 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:01,  7.68it/s]Loading weights:  19%|█▊        | 88/473 [00:00<00:01, 380.51it/s]Loading weights:  43%|████▎     | 204/473 [00:00<00:00, 678.26it/s]Loading weights:  60%|█████▉    | 283/473 [00:00<00:00, 661.63it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 817.44it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/109
+wrote 109 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_mb1931.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/mb1931_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_mb1931.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 97.2   0.97   0.97   0.97  #####  109
+is_business         100.0   1.00   1.00   1.00  #####  109
+spouse_name                                     n/a (not in gold)
+race_designation                                n/a (not in gold)
+occupation_role      99.1   0.92   0.92   0.92  #####  13
+employer             95.4   0.50   0.29   0.36  ##...  7
+address              89.0   0.89   0.90   0.89  ####.  108
+home_address                                    n/a (spurious: 1 pred)
+------------------------------------------------------------
+rows=109  whole-row EM=85.3%
+OVERALL  macro-F1=0.831 (over 5 present fields)   micro-F1=0.944
+  note: model predicted fields absent from this gold: home_address
+
+--- polk1933bk ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:04,  7.37it/s]Loading weights:  19%|█▉        | 90/473 [00:00<00:00, 441.90it/s]Loading weights:  38%|███▊      | 181/473 [00:00<00:00, 633.93it/s]Loading weights:  55%|█████▍    | 259/473 [00:00<00:00, 678.63it/s]Loading weights:  87%|████████▋ | 412/473 [00:00<00:00, 964.81it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 808.87it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 49 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_polk1933bk.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/polk1933bk_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_polk1933bk.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 93.9   0.94   0.94   0.94  #####  49
+is_business         100.0   1.00   1.00   1.00  #####  49
+spouse_name          98.0   0.97   1.00   0.98  #####  31
+race_designation                                n/a (not in gold)
+occupation_role      83.7   0.80   0.82   0.81  ####.  39
+employer             95.9   0.67   0.80   0.73  ####.  5
+address              89.8   0.90   0.90   0.90  ####.  49
+home_address         98.0   0.86   1.00   0.92  #####  6
+------------------------------------------------------------
+rows=49  whole-row EM=69.4%
+OVERALL  macro-F1=0.897 (over 7 present fields)   micro-F1=0.922
+
+--- polk1933si ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:03,  7.48it/s]Loading weights:  20%|█▉        | 93/473 [00:00<00:00, 476.23it/s]Loading weights:  38%|███▊      | 179/473 [00:00<00:00, 636.88it/s]Loading weights:  55%|█████▌    | 262/473 [00:00<00:00, 708.50it/s]Loading weights:  79%|███████▉  | 376/473 [00:00<00:00, 828.35it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 814.13it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 56 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_polk1933si.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/polk1933si_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_polk1933si.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 92.9   0.93   0.93   0.93  #####  56
+is_business         100.0   1.00   1.00   1.00  #####  56
+spouse_name         100.0   1.00   1.00   1.00  #####  33
+race_designation                                n/a (not in gold)
+occupation_role      78.6   0.73   0.75   0.74  ####.  44
+employer             92.9   0.60   0.43   0.50  ##...  7
+address              75.0   0.74   0.74   0.74  ####.  55
+home_address         91.1   0.44   0.80   0.57  ###..  5
+------------------------------------------------------------
+rows=56  whole-row EM=64.3%
+OVERALL  macro-F1=0.784 (over 7 present fields)   micro-F1=0.862
+
+--- queens1933 ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<00:59,  7.98it/s]Loading weights:  19%|█▉        | 89/473 [00:00<00:00, 465.42it/s]Loading weights:  39%|███▉      | 186/473 [00:00<00:00, 670.98it/s]Loading weights:  60%|██████    | 284/473 [00:00<00:00, 717.18it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 863.37it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+wrote 62 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_queens1933.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/queens1933_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_queens1933.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 91.9   0.92   0.92   0.92  #####  62
+is_business         100.0   1.00   1.00   1.00  #####  62
+spouse_name          98.4   0.97   0.97   0.97  #####  29
+race_designation                                n/a (not in gold)
+occupation_role      72.6   0.67   0.69   0.68  ###..  51
+employer             98.4   0.80   1.00   0.89  ####.  4
+address              83.9   0.84   0.84   0.84  ####.  62
+home_address         96.8   0.60   1.00   0.75  ####.  3
+------------------------------------------------------------
+rows=62  whole-row EM=58.1%
+OVERALL  macro-F1=0.863 (over 7 present fields)   micro-F1=0.876
+
+--- synth_dev ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:03,  7.43it/s]Loading weights:  17%|█▋        | 80/473 [00:00<00:01, 367.78it/s]Loading weights:  41%|████      | 192/473 [00:00<00:00, 663.42it/s]Loading weights:  59%|█████▉    | 279/473 [00:00<00:00, 734.70it/s]Loading weights:  95%|█████████▍| 448/473 [00:00<00:00, 1053.33it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 817.92it/s] 
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/1000
+  ... 200/1000
+  ... 300/1000
+  ... 400/1000
+  ... 500/1000
+  ... 600/1000
+  ... 700/1000
+  ... 800/1000
+  ... 900/1000
+  ... 1000/1000
+wrote 1000 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_synth_dev.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/synth_dev.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_synth_dev.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 98.6   0.99   0.99   0.99  #####  1000
+is_business         100.0   1.00   1.00   1.00  #####  1000
+spouse_name         100.0   1.00   1.00   1.00  #####  156
+race_designation    100.0   1.00   1.00   1.00  #####  27
+occupation_role      99.8   1.00   1.00   1.00  #####  775
+employer             99.9   0.99   0.99   0.99  #####  127
+address              99.8   1.00   1.00   1.00  #####  1000
+home_address        100.0   1.00   1.00   1.00  #####  150
+------------------------------------------------------------
+rows=1000  whole-row EM=98.1%
+OVERALL  macro-F1=0.997 (over 8 present fields)   micro-F1=0.996
+
+--- lain ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:01,  7.72it/s]Loading weights:  19%|█▉        | 90/473 [00:00<00:00, 433.56it/s]Loading weights:  41%|████      | 194/473 [00:00<00:00, 674.53it/s]Loading weights:  59%|█████▉    | 278/473 [00:00<00:00, 733.53it/s]Loading weights:  91%|█████████ | 431/473 [00:00<00:00, 950.56it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 828.65it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/800
+  ... 200/800
+  ... 300/800
+  ... 400/800
+  ... 500/800
+  ... 600/800
+  ... 700/800
+  ... 800/800
+wrote 800 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_lain.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/lain_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_lain.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 95.2   0.95   0.95   0.95  #####  800
+is_business          98.4   0.98   0.98   0.98  #####  800
+spouse_name                                     n/a (spurious: 57 pred)
+race_designation                                n/a (not in gold)
+occupation_role      88.6   0.96   0.88   0.92  #####  744
+employer                                        n/a (spurious: 3 pred)
+address              75.0   0.75   0.75   0.75  ####.  800
+home_address                                    n/a (spurious: 104 pred)
+------------------------------------------------------------
+rows=800  whole-row EM=63.5%
+OVERALL  macro-F1=0.901 (over 4 present fields)   micro-F1=0.878
+  note: model predicted fields absent from this gold: spouse_name, employer, home_address
+
+--- tulsa ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:02,  7.61it/s]Loading weights:  19%|█▉        | 89/473 [00:00<00:00, 442.19it/s]Loading weights:  38%|███▊      | 180/473 [00:00<00:00, 615.69it/s]Loading weights:  58%|█████▊    | 274/473 [00:00<00:00, 733.54it/s]Loading weights:  85%|████████▍ | 402/473 [00:00<00:00, 907.23it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 814.25it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/1500
+  ... 200/1500
+  ... 300/1500
+  ... 400/1500
+  ... 500/1500
+  ... 600/1500
+  ... 700/1500
+  ... 800/1500
+  ... 900/1500
+  ... 1000/1500
+  ... 1100/1500
+  ... 1200/1500
+  ... 1300/1500
+  ... 1400/1500
+  ... 1500/1500
+wrote 1500 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_tulsa.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/tulsa_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_tulsa.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 97.1   0.97   0.97   0.97  #####  1500
+is_business          97.4   0.97   0.97   0.97  #####  1500
+spouse_name          92.5   0.85   0.99   0.91  #####  623
+race_designation     99.3   0.94   0.99   0.96  #####  131
+occupation_role      86.1   0.92   0.84   0.88  ####.  1271
+employer             89.6   0.79   0.85   0.82  ####.  579
+address              79.3   0.79   0.79   0.79  ####.  1500
+home_address                                    n/a (spurious: 207 pred)
+------------------------------------------------------------
+rows=1500  whole-row EM=61.4%
+OVERALL  macro-F1=0.902 (over 7 present fields)   micro-F1=0.887
+  note: model predicted fields absent from this gold: home_address
+
+--- minneapolis ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   1%|▏         | 6/473 [00:00<00:07, 59.06it/s]Loading weights:  24%|██▍       | 113/473 [00:00<00:00, 625.52it/s]Loading weights:  44%|████▍     | 208/473 [00:00<00:00, 770.04it/s]Loading weights:  66%|██████▌   | 311/473 [00:00<00:00, 852.16it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 950.84it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/230
+  ... 200/230
+wrote 230 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_minneapolis.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/minneapolis_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_minneapolis.txt --target yaml
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 50.9   0.51   0.51   0.51  ###..  230
+is_business          95.7   0.96   0.96   0.96  #####  230
+spouse_name          97.8   0.72   0.93   0.81  ####.  14
+race_designation                                n/a (not in gold)
+occupation_role      89.6   0.90   0.93   0.92  #####  182
+employer             81.7   0.73   0.74   0.74  ####.  100
+address              77.0   0.78   0.77   0.77  ####.  230
+home_address         92.2   0.59   0.79   0.68  ###..  28
+------------------------------------------------------------
+rows=230  whole-row EM=31.3%
+OVERALL  macro-F1=0.769 (over 7 present fields)   micro-F1=0.775
+
+--- nyu ---
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:   0%|          | 1/473 [00:00<01:00,  7.82it/s]Loading weights:  19%|█▉        | 92/473 [00:00<00:00, 470.00it/s]Loading weights:  38%|███▊      | 178/473 [00:00<00:00, 628.33it/s]Loading weights:  56%|█████▌    | 263/473 [00:00<00:00, 704.35it/s]Loading weights:  83%|████████▎ | 391/473 [00:00<00:00, 877.44it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 811.88it/s]
+  loaded Qwen/Qwen3.5-0.8B as AutoModelForImageTextToText (multimodal, matches training)
+  ... 100/500
+  ... 200/500
+  ... 300/500
+  ... 400/500
+  ... 500/500
+wrote 500 predictions (/scratch/mw4227/city-directory-extraction/out/v7, yaml) -> /scratch/mw4227/city-directory-extraction/data/preds_v7_nyu.txt
+score with: python3 eval/evaluate.py --gold /scratch/mw4227/city-directory-extraction/data/nyu_eval.jsonl --pred /scratch/mw4227/city-directory-extraction/data/preds_v7_nyu.txt --target yaml
+WARNING: 500 predictions vs 3000 gold rows; scoring first 500
+saved metrics (qwen-0.8b-yaml-v7) -> results/scores.jsonl
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 93.8   0.94   0.94   0.94  #####  500
+is_business                                     EXCLUDED (no real ground truth; gold_ne=500)
+spouse_name                                     EXCLUDED (no real ground truth; gold_ne=38)
+race_designation                                EXCLUDED (no real ground truth; gold_ne=6)
+occupation_role      85.2   0.91   0.85   0.88  ####.  470
+employer                                        n/a (not in gold)
+address              72.0   0.72   0.72   0.72  ####.  500
+home_address         93.0   0.76   0.81   0.78  ####.  139
+------------------------------------------------------------
+rows=500  whole-row EM=54.4%
+OVERALL  macro-F1=0.830 (over 4 present fields)   micro-F1=0.839
+  note: EXCLUDED from all metrics: is_business, race_designation, spouse_name — not comparable to an unrestricted score on this set
+
+=== pivot table ===
+wrote table -> results/eval_table.md
+### Eval comparison — macro-F1 (avg over present fields) (higher is better)
+| eval set | qwen-0.8b-yaml-v6 | qwen-0.8b-yaml-v7 |
+|---|---|---|
+| boyd1890 | 0.869 | 0.867 |
+| doggett1846 | 0.757 | 0.698 |
+| duncan1794 | 0.915 | 0.908 |
+| franks1786 | 0.726 | 0.899 |
+| hearne1852 | 0.877 | 0.881 |
+| hopehenderson1856 | 0.910 | 0.900 |
+| lain | 0.905 | 0.901 |
+| lain1876 | 0.794 | 0.771 |
+| longworth1818 | 0.896 | 0.896 |
+| mb1931 | 0.895 | 0.831 |
+| mercein1820 | 0.907 | 0.903 |
+| minneapolis | 0.752 | 0.769 |
+| nyu | 0.847 | 0.830 |
+| ogden1839 | 0.922 | 0.925 |
+| polk1917 | 0.691 | 0.679 |
+| polk1925 | 0.937 | 0.828 |
+| polk1933bk | 0.869 | 0.897 |
+| polk1933si | 0.850 | 0.784 |
+| queens1933 | 0.819 | 0.863 |
+| rode1851 | 0.793 | 0.793 |
+| synth_dev | 0.995 | 0.997 |
+| trow1884 | 0.945 | 0.930 |
+| trow1907 | 0.921 | 0.867 |
+| trow1913 | 0.786 | 0.870 |
+| trowwilson1865 | 0.814 | 0.905 |
+| tulsa | 0.908 | 0.902 |
+
+### Eval comparison — micro-F1 (frequency-weighted) (higher is better)
+| eval set | qwen-0.8b-yaml-v6 | qwen-0.8b-yaml-v7 |
+|---|---|---|
+| boyd1890 | 0.934 | 0.931 |
+| doggett1846 | 0.871 | 0.884 |
+| duncan1794 | 0.919 | 0.910 |
+| franks1786 | 0.720 | 0.899 |
+| hearne1852 | 0.930 | 0.926 |
+| hopehenderson1856 | 0.912 | 0.899 |
+| lain | 0.881 | 0.878 |
+| lain1876 | 0.934 | 0.915 |
+| longworth1818 | 0.917 | 0.917 |
+| mb1931 | 0.970 | 0.944 |
+| mercein1820 | 0.941 | 0.935 |
+| minneapolis | 0.751 | 0.775 |
+| nyu | 0.847 | 0.839 |
+| ogden1839 | 0.962 | 0.960 |
+| polk1917 | 0.852 | 0.840 |
+| polk1925 | 0.951 | 0.916 |
+| polk1933bk | 0.894 | 0.922 |
+| polk1933si | 0.895 | 0.862 |
+| queens1933 | 0.869 | 0.876 |
+| rode1851 | 0.915 | 0.915 |
+| synth_dev | 0.994 | 0.996 |
+| trow1884 | 0.950 | 0.933 |
+| trow1907 | 0.921 | 0.909 |
+| trow1913 | 0.932 | 0.924 |
+| trowwilson1865 | 0.963 | 0.933 |
+| tulsa | 0.896 | 0.887 |
+
+### Eval comparison — whole-row EM% (higher is better)
+| eval set | qwen-0.8b-yaml-v6 | qwen-0.8b-yaml-v7 |
+|---|---|---|
+| boyd1890 | 86.7 | 85.3 |
+| doggett1846 | 56.8 | 62.2 |
+| duncan1794 | 81.0 | 75.9 |
+| franks1786 | 12.5 | 71.4 |
+| hearne1852 | 76.9 | 75.0 |
+| hopehenderson1856 | 63.3 | 60.0 |
+| lain | 64.9 | 63.5 |
+| lain1876 | 78.6 | 72.8 |
+| longworth1818 | 74.5 | 75.5 |
+| mb1931 | 91.7 | 85.3 |
+| mercein1820 | 85.0 | 86.7 |
+| minneapolis | 26.1 | 31.3 |
+| nyu | 55.2 | 54.4 |
+| ogden1839 | 89.4 | 89.4 |
+| polk1917 | 56.9 | 52.8 |
+| polk1925 | 80.0 | 72.5 |
+| polk1933bk | 65.3 | 69.4 |
+| polk1933si | 67.9 | 64.3 |
+| queens1933 | 56.5 | 58.1 |
+| rode1851 | 66.0 | 66.0 |
+| synth_dev | 97.6 | 98.1 |
+| trow1884 | 81.6 | 78.0 |
+| trow1907 | 80.9 | 76.5 |
+| trow1913 | 80.6 | 79.6 |
+| trowwilson1865 | 86.8 | 78.4 |
+| tulsa | 62.7 | 61.4 |
+
+=== done Tue Sep  8 06:46:20 EDT 2026 ===
+Copy results/eval_table.md + results/scores.jsonl back to your laptop:
+  scp -r <netid>@<torch-login-host>:/scratch/mw4227/city-directory-extraction/results .

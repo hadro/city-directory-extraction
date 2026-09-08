@@ -33,7 +33,7 @@ Per-dialect field use
          home_address = a SEPARATE "h."-marked home (only when the entry lists two
          addresses -- most list one; the marker is stripped from home_address). A SOLE
          address sometimes KEEPS its residency marker in the record ("h 449 Clason av",
-         gold conv #8). race_designation "col'd"/"colored"/"col"/"(co'd)" (rare),
+         gold conv #8). race_designation "col'd"/"(col'd)"/"colored"/"col" (rare),
          widow forms vary by era ("widow of John" early -> "wid. John" late; "widow Ann"
          with no "of" = her OWN name -> name, bare marker -> spouse_name); employer
          publisher-keyed (polk-late/hearne-mid emit one; most other NYC rows lump the
@@ -1048,7 +1048,13 @@ def make_nyc(rng) -> dict:
     else:
         race_p = 0.015 if (era in ("early", "mid") and ynum >= 1839) else 0.004
         if rng.random() < race_p:
-            race = _wchoice(rng, [("col'd", 4), ("colored", 2), ("col", 2), ("(co'd)", 2)])
+            # Forms and weights follow the corpus, counted over all 29 eval sets (raw lines and
+            # record fields): col'd 39 raw / 33 rec, (col'd) 37 raw / 2 rec, colored 3/3, col 2 rec,
+            # then the one-offs cold. and (col.d). The parenthesised form was previously spelled
+            # "(co'd)", which occurs ZERO times anywhere in the corpus -- a dropped "l" that had
+            # the generator teaching a token the printers never set (~135 rows per 100k).
+            race = _wchoice(rng, [("col'd", 4), ("(col'd)", 4), ("colored", 2), ("col", 2),
+                                  ("cold.", 1), ("(col.d)", 1)])
 
     # SURNAME-REPEAT DITTO RATE — publisher-keyed and hard-gated at 1900. Measured over the
     # 21-volume panel (rows whose `name` starts with the mark; conv #12 keeps it verbatim):
@@ -1258,7 +1264,7 @@ def render_nyc(rng, rec, hints=None) -> str:
         parts.append(rec["spouse_name"])              # "wid John" / "widow of John"
     occ = rec["occupation_role"]
     if race.startswith("("):
-        occ = f"{race} {occ}".strip()                 # Doggett: "Fox Charles, (co'd) seamn, ..."
+        occ = f"{race} {occ}".strip()                 # Doggett: "Fox Charles, (col'd) seamn, ..."
     if rec["employer"] and not hints.get("paren_firm"):
         occ = f"{occ}{' of ' if hints.get('emp_of') else ' '}{rec['employer']}".strip()
     if occ:

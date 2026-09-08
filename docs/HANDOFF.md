@@ -1508,6 +1508,33 @@ python3 eval/results_table.py --out results/eval_table.md && cat results/eval_ta
 
 ## Watch items / open questions
 
+- **Answer this WHEN v7 IS SCORED — it is free then and expensive later.** The generator emits
+  residency markers (`h`/`r`/`bds`) on `address` at a flat ~20% for every publisher. Gold is not
+  flat, and Brooklyn is where it diverges hardest:
+
+  | | fraction of `address` values starting with a marker |
+  |---|---|
+  | gold, Brooklyn | smith1855 82%, boyd1890 88%, lain1876 80%, hopehenderson1856 70%, trowwilson1865 65% |
+  | gold, Manhattan | doggett1846 14%, doggetts1850 16%, rode1851 28%, polk1917 11% |
+  | gold, zero | hearne1852 0%, mb1931 0% |
+  | v7 generator | flat ~20% everywhere (doggett 14%, smith 22%, lain 22%, boyd 22%, trow 20%, polk 24%, mb 0%) |
+
+  Structurally this is the same shape as the franks number-comma and the ditto rate: a
+  city/publisher-keyed printed form the generator treats as uniform. **But do not fix it yet —
+  there is real evidence it does not matter.** On hopehenderson1856 v6 emits the marker correctly
+  and gets only the *period* wrong (gold `h 8 Raymond`, pred `h. 8 Raymond`), which suggests the
+  model COPIES the marker off the raw line rather than sampling a learned prior. If so the
+  training rate is irrelevant for this feature and the question closes for good.
+
+  **The check:** on the v7 scoring run, compare the fraction of *predicted* `address` values
+  starting with `h`/`r`/`bds` against gold on the Brooklyn subset — hopehenderson1856, lain1876,
+  boyd1890, trowwilson1865, and smith1855 once it joins the panel. Match gold ⇒ close the
+  question. Undershoot ⇒ it is the franks-comma class, and worth a publisher-keyed rate. It is a
+  one-line check over predictions that already exist, so it costs nothing on top of a scoring run
+  that is happening anyway. (Raised by the eval-set session 2026-09-07; it could not be settled
+  then because the v6 predictions lived in a scratchpad that has since been cleared — which is
+  the reason to catch it while v7's predictions are still on disk.)
+
 - **Gemini OCR burns most of its output budget on degenerate retries — fix lives in
   `directory-pipeline`, not here.** Measured on the 2026-09-02 harvest: ~1.7M output tokens for
   83 pages, of which **more than half was spent on transcripts that were then correctly discarded**

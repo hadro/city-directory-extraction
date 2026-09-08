@@ -696,8 +696,8 @@ def _nyc_out_of_town_home(rng, publisher: str) -> str:
     return place
 
 
-def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
-                 home: bool = False) -> str:
+def _nyc_address_base(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
+                      home: bool = False) -> str:
     # forms + abbreviations confirmed against real gold pages (Hearne 1852, franks1786,
     # duncan1794, trow1907/13, polk1917/25, queens1933) + style cards
     dense = (publisher in ("trow", "polk") and 1900 <= ynum <= 1930) or publisher == "mb"
@@ -717,7 +717,11 @@ def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
     if roll < 0.08:                                   # corner ("cor" or single-letter "c")
         if era == "early" and rng.random() < 0.5:     # 1790s-1830s spell relations out
             return f"corner of {rng.choice(NYC_STREETS)} and {rng.choice(NYC_STREETS)}"
-        return f"{rng.choice(['cor', 'c'])} {rng.choice(NYC_STREETS)} and {rng.choice(NYC_STREETS)}"
+        # The joiner prints as "&" about a quarter of the time from ~1840 on
+        # ("c Beekman & Cliff NY" -- hearne1852). Early volumes spell it out, and homes
+        # never take it (no gold home_address carries an "&").
+        j = "&" if not home and _amp_address_p(ynum, publisher) and rng.random() < 0.15 else "and"
+        return f"{rng.choice(['cor', 'c'])} {rng.choice(NYC_STREETS)} {j} {rng.choice(NYC_STREETS)}"
     if roll < 0.10:                                   # near ("nr"/"n"), no number
         return f"{rng.choice(['nr', 'n'])} {rng.choice(NYC_STREETS)}"
     if era == "early" and roll < 0.125:               # positional qualifier, no house number --
@@ -730,7 +734,10 @@ def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
         # KEPT (conv #3 drops only field-separating commas).
         return f"{rng.choice(NYC_STREETS)}, {rng.choice(['Corl.-hook', 'Corlears hook', 'Bowery', 'Chelsea', 'Greenwich'])}"
     if roll < 0.115:                                  # between two streets
-        return f"bet {rng.choice(NYC_STREETS)} and {rng.choice(NYC_STREETS)}"
+        # "E. 11th bet. Av. A & B" (doggett1846), "W. 25th bet. Av. 6 & 7" -- the "&" form
+        # is the one that pairs with lettered/numbered avenues. Homes never take it.
+        j = "&" if not home and _amp_address_p(ynum, publisher) and rng.random() < 0.15 else "and"
+        return f"bet {rng.choice(NYC_STREETS)} {j} {rng.choice(NYC_STREETS)}"
     if roll < 0.15:                                   # bare street relation ("Jay c Myrtle")
         return f"{rng.choice(NYC_STREETS)} {rng.choice(['c', 'n'])} {rng.choice(NYC_STREETS)}"
     num = rng.randint(1, 600)
@@ -753,6 +760,95 @@ def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
             addr += f" {rng.choice(NYC_NBHD)}"
         return addr
     return f"{num} {_nyc_street(rng, ynum, publisher)}"
+
+
+# A trader with TWO business premises prints both in one address field, joined by "&":
+#     "Rice Philip, butcher, 491 Av. 6 & Av. 6 n. W. 33d, h. W. 25th, n. Av. 6"  (doggetts1850)
+#
+# Why it matters more than its ~2.5% suggests: "&" is common in the synthetic data (firm names,
+# "wines & liquors" occupations, employers) but before this it appeared inside `address` exactly
+# ZERO times, against 25% of the gold's "&" rows. The model was being taught that "&" is a
+# name/occupation/employer signal and never an address one -- a FIELD-ASSIGNMENT error waiting
+# to happen, not a typography one.
+#
+# Rate is YEAR- and publisher-keyed. Measured over 23 gold volumes (2071 rows), 2026-09-07:
+#     before 1845            0/346  = 0.00%   franks, duncan, longworth, mercein, ogden
+#     1845-1890            25/1176  = 2.13%   doggett 8.1%, rode 7.6%, hearne 5.8%, doggetts1850 3.3%
+#     1891+ trow             4/161  = 2.48%
+#     1891+ polk / mb        0/388  = 0.00%   dense volumes never print a second premises
+# Note the era BUCKETS do not work here: doggett1846 sits in the generator's "early" bucket
+# (1786-1849) yet has the highest rate of any volume, so this gates on ynum, not era.
+#
+# The 0.025 below runs slightly hot against the 1845-1890 band (2.13%) and is left there on
+# purpose: the band moves as volumes land (it was 2.52% before smith1855, a 0%-Brooklyn volume,
+# was added on 2026-09-07) and 0.025 sits inside its range. The deeper pattern is that this is a
+# MANHATTAN MERCANTILE form -- outer-borough volumes are 0% across hopehenderson, lain1876,
+# boyd1890, ogden and smith1855 -- but hearne1852 (Brooklyn, 5.8%) breaks a clean outer->0 rule,
+# because its "&" rows are Brooklyn residents with Manhattan business addresses. Revisit if more
+# outer-borough gold lands and hearne stays the lone exception.
+#
+# Gold keeps the whole expression verbatim in `address`; only the "h."-marked part splits off to
+# `home_address` (bare, per conv #8). Role words in the second chunk are dropped by the gold
+# convention ("15 W28th & pres 74 E92d" -> "15 W28th & 74 E92d"), so we never emit them. Home
+# addresses are excluded: the single "&" home in the corpus is an OCR artifact in held-out NYU.
+
+
+def _amp_address_p(ynum: int, publisher: str) -> float:
+    """Share of business addresses carrying a second premises."""
+    if ynum and ynum < 1845:
+        return 0.0
+    if publisher in ("polk", "mb"):
+        return 0.0
+    return 0.025
+
+
+def _nyc_second_premises(rng, era: str, ynum: int, publisher: str) -> str:
+    """The right-hand side of an "X & Y" address: another premises, no residence marker."""
+    num = rng.randint(1, 600)
+    roll = rng.random()
+    if roll < 0.15:                                   # relative, no house number --
+        # "491 Av. 6 & Av. 6 n. W. 33d" (doggett 1850): the second chunk locates itself off a
+        # cross street instead of carrying its own number.
+        return f"{rng.choice(NYC_STREETS)} {rng.choice(['n', 'n.', 'c'])} {rng.choice(NYC_STREETS)}"
+    if roll < 0.25 and era == "late":                 # "299 Bway R417 & 61 Park row R302"
+        return f"{num} {_nyc_street(rng, ynum, publisher)} R{rng.randint(1, 1400)}"
+    return f"{num} {_nyc_street(rng, ynum, publisher)}"
+
+
+def _nyc_join_premises(rng, addr: str, era: str, ynum: int, publisher: str) -> str:
+    """Fuse a second premises onto a business address with '&'. Three measured forms."""
+    head = addr.split(" ", 1)
+    # Form 1 -- number pair on ONE street: "64 & 66 John", "109 & 111 Atlantic", "95 & 97 Cliff."
+    # Usually two adjacent lots, but 5 of the gold pairs are further apart ("21 & 29 Chatham",
+    # "19 & 20 City Hall"), so the gap is not always small. Needs a leading house number.
+    if rng.random() < 0.30 and len(head) == 2 and head[0].isdigit():
+        n1 = int(head[0])
+        gap = rng.choice([1, 2, 2, 2, 2, 4, 4, rng.randint(3, 12)])
+        return f"{n1} & {n1 + gap} {head[1]}"
+    # Forms 2 and 3 -- two premises side by side. The first may carry a qualifier
+    # ("ft. E. 35th & 258 Cherry", trow1884) or be a plain numbered address
+    # ("97 Chambers & 81 Reade", "36 Cherry & 15 Monroe", "15 W28th & 74 E92d").
+    out = f"{addr} & {_nyc_second_premises(rng, era, ynum, publisher)}"
+    # A THIRD premises, comma-then-ampersand: "725 & 727 Broadway, & 207 Av. 6" (doggetts1850).
+    # 3 of the 29 gold "&" addresses run to three premises; all are mid-era Manhattan retail.
+    if rng.random() < 0.10:
+        out += f", & {_nyc_second_premises(rng, era, ynum, publisher)}"
+    return out
+
+
+def _nyc_address(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
+                 home: bool = False, pair_ok: bool = False) -> str:
+    """`pair_ok` allows a second "& ..." premises. Callers set it only for an address that
+    will NOT end up carrying a residency marker: in the gold, a two-premises address is always
+    a place of business, so it either sits beside a separate "h." home or stands alone -- it is
+    never itself marked as the residence."""
+    addr = _nyc_address_base(rng, era, ynum, publisher, home=home)
+    # Never stack on an address that already carries a relation ("bet A & B", "c X & Y") --
+    # the gold never doubles those up.
+    if pair_ok and not home and "&" not in addr \
+            and rng.random() < _amp_address_p(ynum, publisher):
+        return _nyc_join_premises(rng, addr, era, ynum, publisher)
+    return addr
 
 
 def _nyc_given(rng, female: bool, era: str) -> str:
@@ -911,7 +1007,8 @@ def make_nyc(rng) -> dict:
             "name": name, "is_business": True, "spouse_name": "",
             "race_designation": "", "occupation_role": rng.choice(["merchants", "grocers",
             "tailors", "segars", "liquors", "druggists"]), "employer": "",
-            "address": _nyc_address(rng, era, ynum, publisher), "home_address": "",
+            # firms print two premises too ("DURRIE & McCARTY, hardware, 97 Chambers & 81 Reade")
+            "address": _nyc_address(rng, era, ynum, publisher, pair_ok=True), "home_address": "",
         }
         return _finish(rng, rec, "nyc", publisher, year, arange=n)
 
@@ -1066,7 +1163,9 @@ def make_nyc(rng) -> dict:
         home = home or _nyc_address(rng, era, ynum, publisher, home=True)
     # dense residential volumes mark nearly EVERY sole address (r/h fused); mid-era ~30%
     sole_marker_p = 0.75 if dense else (0.10 if era == "early" else 0.30)
+    sole_marked = False
     if not home and publisher != "mb" and rng.random() < sole_marker_p:
+        sole_marked = True
         # sole address KEEPS its residency marker in the record (conv #8: "h 449 Clason av");
         # in dense late Trow/Polk print the marker often FUSES to the house number
         # ("r205 W141st", "h2378 Bathgate av", cap "H804 W180th") — record verbatim.
@@ -1080,6 +1179,16 @@ def make_nyc(rng) -> dict:
         fuse = dense and primary[:1].isdigit() and marker in ("h", "r", "H", "b") \
             and rng.random() < 0.72
         primary = f"{marker}{primary}" if fuse else f"{marker} {primary}"
+
+    # A second business premises ("15 New & 112 Troy", "36 Cherry & 15 Monroe"). Applied last,
+    # and only to an address that carries no residency marker: in the gold these rows either
+    # sit beside a separate "h." home or stand alone, and none is itself marked as a residence.
+    # "NY"/"N. Y." is a works-across-the-river marker, not a premises, so it never pairs.
+    if not sole_marked and "&" not in primary \
+            and primary not in NYC_OUT_OF_TOWN \
+            and primary not in ("NY", "N Y", "N. Y.") \
+            and rng.random() < _amp_address_p(ynum, publisher):
+        primary = _nyc_join_premises(rng, primary, era, ynum, publisher)
 
     rec = {
         "name": name, "is_business": False, "spouse_name": spouse,

@@ -85,8 +85,27 @@ so scoring well there is the training objective working, not evidence of transfe
 
 The externals are the honest test — Tulsa, Minneapolis and Brooklyn-Lain had no input to any
 generator change in this cycle — and there v6 wins 3 of 4 (nyu −0.8, tulsa −1.3, lain −1.4,
-minneapolis +5.2). Normalized figures do not exist for externals; NYU's reports cover the panel
-only. If someone wants to strengthen this, that is the run to do.
+minneapolis +5.2).
+
+**The normalized gap in that evidence is now closed** (2026-09-08; NYU's reports cover the panel
+only, so v6 and v7 predictions were regenerated locally for all four externals, 6,060 rows on MPS):
+
+| externals, n=3030 | verbatim | normalized | punct gap |
+|---|---|---|---|
+| v6 | **59.3** | **59.4** | +0.2 |
+| v7 | 58.6 | 58.7 | +0.1 |
+| v7 − v6 | **−0.7** | **−0.7** | |
+
+**Verbatim and normalized agree exactly.** v6's lead is extraction, not typography — the one thing
+that could have overturned the release decision, and it does not. Control: the local run reproduces
+NYU's cluster figures within 0.4 EM on every set. Full report:
+`results/runs/v7-21vol/report_normalized_EXTERNALS_v6_v7.txt`.
+
+Note *why* the externals behave differently from the panel: their punctuation gap is ~+0.2 against
+the panel's +3.3 (and v5-torch's +11.5). Tulsa, Minneapolis and Lain were built to the same
+labelling contract the generator teaches, so normalization has nothing to forgive. The gap is a
+property of how far a gold set's printed conventions sit from the contract — mid-century NYC is
+where they diverge, which is exactly where the panel's remaining gap lives.
 
 **So: ship `v6`** (panel verbatim 75.2 / normalized 78.6). v7 stays archived; it is the cycle that
 proved the stop rule, and franks1786's 12.5 → 71.4 is its result worth citing.

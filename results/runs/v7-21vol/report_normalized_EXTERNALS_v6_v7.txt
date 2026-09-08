@@ -1,0 +1,198 @@
+Externals scored --report-normalized, v6 and v7, generated locally on MPS 2026-09-08.
+NYU's reports cover the 21-volume panel only; this fills the gap that was left open
+when the v6-vs-v7 release decision was made on verbatim externals alone.
+
+Control — local verbatim vs NYU's cluster figures (max deviation 0.4 EM):
+  minneapolis  v6 26.1/26.1   v7 31.7/31.3
+  nyu          v6 55.2/55.2   v7 54.6/54.4
+  lain         v6 65.1/64.9   v7 63.4/63.5
+  tulsa        v6 62.6/62.7   v7 61.5/61.4
+
+AGGREGATE (n=3030)        verbatim  normalized   gap
+  v6                          59.3        59.4  +0.2
+  v7                          58.6        58.7  +0.1
+  v7 - v6                     -0.7        -0.7
+
+== v6 minneapolis
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 44.3   0.44   0.44   0.44  ##...  230
+is_business          96.1   0.96   0.96   0.96  #####  230
+spouse_name          97.8   0.71   0.86   0.77  ####.  14
+race_designation                                n/a (not in gold)
+occupation_role      75.7   0.84   0.76   0.80  ####.  182
+employer             84.8   0.76   0.84   0.80  ####.  100
+address              80.9   0.81   0.81   0.81  ####.  230
+home_address         93.9   0.67   0.71   0.69  ###..  28
+------------------------------------------------------------
+rows=230  whole-row EM=26.1%
+OVERALL  macro-F1=0.753 (over 7 present fields)   micro-F1=0.754
+
+  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):
+                    verbatim  normalized      gap
+    macro-F1           0.753       0.753   +0.000
+    micro-F1           0.754       0.754   +0.000
+    whole-row EM      26.100      26.100   +0.000
+    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.
+== v6 nyu
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 93.8   0.94   0.94   0.94  #####  500
+is_business                                     EXCLUDED (no real ground truth; gold_ne=500)
+spouse_name                                     EXCLUDED (no real ground truth; gold_ne=38)
+race_designation                                EXCLUDED (no real ground truth; gold_ne=6)
+occupation_role      86.6   0.92   0.86   0.89  ####.  470
+employer                                        n/a (spurious: 2 pred)
+address              72.2   0.72   0.72   0.72  ####.  500
+home_address         95.2   0.83   0.83   0.83  ####.  139
+------------------------------------------------------------
+rows=500  whole-row EM=55.2%
+OVERALL  macro-F1=0.846 (over 4 present fields)   micro-F1=0.847
+  note: model predicted fields absent from this gold: employer
+  note: EXCLUDED from all metrics: is_business, race_designation, spouse_name — not comparable to an unrestricted score on this set
+
+  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):
+                    verbatim  normalized      gap
+    macro-F1           0.846       0.848   +0.002
+    micro-F1           0.847       0.850   +0.003
+    whole-row EM      55.200      56.000   +0.800
+    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.
+== v6 lain
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 92.5   0.93   0.93   0.93  #####  800
+is_business          99.5   0.99   0.99   0.99  #####  800
+spouse_name                                     n/a (spurious: 57 pred)
+race_designation                                n/a (not in gold)
+occupation_role      89.1   0.97   0.89   0.93  #####  744
+employer                                        n/a (spurious: 9 pred)
+address              77.9   0.78   0.78   0.78  ####.  800
+home_address                                    n/a (spurious: 100 pred)
+------------------------------------------------------------
+rows=800  whole-row EM=65.1%
+OVERALL  macro-F1=0.906 (over 4 present fields)   micro-F1=0.882
+  note: model predicted fields absent from this gold: spouse_name, employer, home_address
+
+  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):
+                    verbatim  normalized      gap
+    macro-F1           0.906       0.908   +0.002
+    micro-F1           0.882       0.884   +0.002
+    whole-row EM      65.100      65.200   +0.100
+    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.
+== v6 tulsa
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 96.7   0.97   0.97   0.97  #####  1500
+is_business          98.6   0.99   0.99   0.99  #####  1500
+spouse_name          91.9   0.84   0.98   0.90  #####  623
+race_designation     99.4   0.94   0.99   0.97  #####  131
+occupation_role      85.9   0.90   0.84   0.87  ####.  1271
+employer             90.4   0.79   0.91   0.85  ####.  579
+address              82.1   0.82   0.82   0.82  ####.  1500
+home_address                                    n/a (spurious: 188 pred)
+------------------------------------------------------------
+rows=1500  whole-row EM=62.6%
+OVERALL  macro-F1=0.908 (over 7 present fields)   micro-F1=0.895
+  note: model predicted fields absent from this gold: home_address
+
+  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):
+                    verbatim  normalized      gap
+    macro-F1           0.908       0.909   +0.001
+    micro-F1           0.895       0.896   +0.001
+    whole-row EM      62.600      62.600   +0.000
+    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.
+== v7 minneapolis
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 50.9   0.51   0.51   0.51  ###..  230
+is_business          95.7   0.96   0.96   0.96  #####  230
+spouse_name          97.8   0.72   0.93   0.81  ####.  14
+race_designation                                n/a (not in gold)
+occupation_role      89.6   0.90   0.93   0.92  #####  182
+employer             81.7   0.73   0.74   0.74  ####.  100
+address              77.4   0.78   0.77   0.78  ####.  230
+home_address         91.7   0.57   0.75   0.65  ###..  28
+------------------------------------------------------------
+rows=230  whole-row EM=31.7%
+OVERALL  macro-F1=0.765 (over 7 present fields)   micro-F1=0.775
+
+  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):
+                    verbatim  normalized      gap
+    macro-F1           0.765       0.765   +0.000
+    micro-F1           0.775       0.775   +0.000
+    whole-row EM      31.700      31.700   +0.000
+    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.
+== v7 nyu
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 93.8   0.94   0.94   0.94  #####  500
+is_business                                     EXCLUDED (no real ground truth; gold_ne=500)
+spouse_name                                     EXCLUDED (no real ground truth; gold_ne=38)
+race_designation                                EXCLUDED (no real ground truth; gold_ne=6)
+occupation_role      85.4   0.91   0.85   0.88  ####.  470
+employer                                        n/a (not in gold)
+address              72.0   0.72   0.72   0.72  ####.  500
+home_address         93.0   0.76   0.81   0.78  ####.  139
+------------------------------------------------------------
+rows=500  whole-row EM=54.6%
+OVERALL  macro-F1=0.830 (over 4 present fields)   micro-F1=0.839
+  note: EXCLUDED from all metrics: is_business, race_designation, spouse_name — not comparable to an unrestricted score on this set
+
+  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):
+                    verbatim  normalized      gap
+    macro-F1           0.830       0.831   +0.001
+    micro-F1           0.839       0.840   +0.001
+    whole-row EM      54.600      54.800   +0.200
+    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.
+== v7 lain
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 94.9   0.95   0.95   0.95  #####  800
+is_business          98.4   0.98   0.98   0.98  #####  800
+spouse_name                                     n/a (spurious: 57 pred)
+race_designation                                n/a (not in gold)
+occupation_role      88.4   0.96   0.88   0.92  #####  744
+employer                                        n/a (spurious: 3 pred)
+address              75.4   0.75   0.75   0.75  ####.  800
+home_address                                    n/a (spurious: 104 pred)
+------------------------------------------------------------
+rows=800  whole-row EM=63.4%
+OVERALL  macro-F1=0.901 (over 4 present fields)   micro-F1=0.877
+  note: model predicted fields absent from this gold: spouse_name, employer, home_address
+
+  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):
+                    verbatim  normalized      gap
+    macro-F1           0.901       0.902   +0.001
+    micro-F1           0.877       0.879   +0.002
+    whole-row EM      63.400      63.600   +0.200
+    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.
+== v7 tulsa
+
+field                 EM%      P      R     F1         gold
+------------------------------------------------------------
+name                 97.1   0.97   0.97   0.97  #####  1500
+is_business          97.5   0.97   0.97   0.97  #####  1500
+spouse_name          92.5   0.85   0.99   0.91  #####  623
+race_designation     99.3   0.94   0.99   0.96  #####  131
+occupation_role      86.1   0.92   0.84   0.88  ####.  1271
+employer             89.7   0.79   0.85   0.82  ####.  579
+address              79.4   0.79   0.79   0.79  ####.  1500
+home_address                                    n/a (spurious: 206 pred)
+------------------------------------------------------------
+rows=1500  whole-row EM=61.5%
+OVERALL  macro-F1=0.902 (over 7 present fields)   micro-F1=0.888
+  note: model predicted fields absent from this gold: home_address
+
+  punctuation-normalized (DIAGNOSTIC - not saved, not board-comparable):
+                    verbatim  normalized      gap
+    macro-F1           0.902       0.902   +0.000
+    micro-F1           0.888       0.888   +0.000
+    whole-row EM      61.500      61.600   +0.100
+    large gap = CONVENTION error (fix the generator); small gap = SEMANTIC error.

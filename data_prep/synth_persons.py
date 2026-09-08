@@ -608,6 +608,20 @@ def _nyc_directional(rng, ynum: int = 0, publisher: str = "") -> str:
     return f"{d}. " if ynum < 1900 else f"{d} "
 
 
+def _two_streets(rng) -> "tuple[str, str]":
+    """Two DIFFERENT streets, for the corner / between / near forms.
+
+    Picking twice from a 64-name pool collides about 1 time in 64, which printed
+    nonsense like "cor Delancey & Delancey" and "Norfolk n. Norfolk" -- a crossing of a
+    street with itself. No such row exists in any gold volume.
+    """
+    s1 = rng.choice(NYC_STREETS)
+    s2 = rng.choice(NYC_STREETS)
+    while s2 == s1:
+        s2 = rng.choice(NYC_STREETS)
+    return s1, s2
+
+
 def _nyc_street(rng, ynum: int = 0, publisher: str = "") -> str:
     roll = rng.random()
     if roll < 0.16:                                   # numbered avenue -- NO directional (gold:
@@ -715,13 +729,14 @@ def _nyc_address_base(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
     if roll < 0.05:                                   # rear / foot qualifier
         return f"{rng.choice(['rear', 'ft'])} {rng.randint(1, 600)} {_nyc_street(rng, ynum, publisher)}"
     if roll < 0.08:                                   # corner ("cor" or single-letter "c")
+        s1, s2 = _two_streets(rng)
         if era == "early" and rng.random() < 0.5:     # 1790s-1830s spell relations out
-            return f"corner of {rng.choice(NYC_STREETS)} and {rng.choice(NYC_STREETS)}"
+            return f"corner of {s1} and {s2}"
         # The joiner prints as "&" about a quarter of the time from ~1840 on
         # ("c Beekman & Cliff NY" -- hearne1852). Early volumes spell it out, and homes
         # never take it (no gold home_address carries an "&").
         j = "&" if not home and _amp_address_p(ynum, publisher) and rng.random() < 0.15 else "and"
-        return f"{rng.choice(['cor', 'c'])} {rng.choice(NYC_STREETS)} {j} {rng.choice(NYC_STREETS)}"
+        return f"{rng.choice(['cor', 'c'])} {s1} {j} {s2}"
     if roll < 0.10:                                   # near ("nr"/"n"), no number
         return f"{rng.choice(['nr', 'n'])} {rng.choice(NYC_STREETS)}"
     if era == "early" and roll < 0.125:               # positional qualifier, no house number --
@@ -737,9 +752,11 @@ def _nyc_address_base(rng, era: str = "mid", ynum: int = 0, publisher: str = "",
         # "E. 11th bet. Av. A & B" (doggett1846), "W. 25th bet. Av. 6 & 7" -- the "&" form
         # is the one that pairs with lettered/numbered avenues. Homes never take it.
         j = "&" if not home and _amp_address_p(ynum, publisher) and rng.random() < 0.15 else "and"
-        return f"bet {rng.choice(NYC_STREETS)} {j} {rng.choice(NYC_STREETS)}"
+        s1, s2 = _two_streets(rng)
+        return f"bet {s1} {j} {s2}"
     if roll < 0.15:                                   # bare street relation ("Jay c Myrtle")
-        return f"{rng.choice(NYC_STREETS)} {rng.choice(['c', 'n'])} {rng.choice(NYC_STREETS)}"
+        s1, s2 = _two_streets(rng)
+        return f"{s1} {rng.choice(['c', 'n'])} {s2}"
     num = rng.randint(1, 600)
     if era == "early":
         return _nyc_address_early(rng, num, publisher, ynum)
@@ -809,7 +826,8 @@ def _nyc_second_premises(rng, era: str, ynum: int, publisher: str) -> str:
     if roll < 0.15:                                   # relative, no house number --
         # "491 Av. 6 & Av. 6 n. W. 33d" (doggett 1850): the second chunk locates itself off a
         # cross street instead of carrying its own number.
-        return f"{rng.choice(NYC_STREETS)} {rng.choice(['n', 'n.', 'c'])} {rng.choice(NYC_STREETS)}"
+        s1, s2 = _two_streets(rng)
+        return f"{s1} {rng.choice(['n', 'n.', 'c'])} {s2}"
     if roll < 0.25 and era == "late":                 # "299 Bway R417 & 61 Park row R302"
         return f"{num} {_nyc_street(rng, ynum, publisher)} R{rng.randint(1, 1400)}"
     return f"{num} {_nyc_street(rng, ynum, publisher)}"

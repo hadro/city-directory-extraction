@@ -151,8 +151,18 @@ alongside, per convention) and `synth_dev.jsonl` to the gated `hadro/cde-evals`.
    `results/scores.jsonl` and `results/eval_table.md`.
 2. **Push the adapters.** `v5-torch` and `v6` are only on `/scratch` (purged after ~60 days) and in
    `~/Downloads`. **The v6 adapter (60 MB) is now on Josh's Mac** in the delivered results folder,
-   so this no longer needs NYU's write token — Josh can push v6 himself. v5-torch is the baseline v6
-   is measured against and is still NYU-side only.
+   so this no longer needs NYU's write token — Josh can push v6 himself.
+   **v5-torch is NOT NYU-side only** (corrected 2026-09-08): a full backup sits at
+   `~/Downloads/Hadro/torch-runs/v5-torch/` — the 60 MB adapter, `RESULTS.md`, a
+   `patches/torch-local-changes.diff`, and **24 stored prediction files** covering the whole panel
+   plus every external (nyu 500, tulsa 1500, lain 800, minneapolis 230, synth_dev, synth_smoke).
+   Those predictions are worth more than they look: they let you re-score v5-torch against any new
+   metric on CPU in seconds, with no GPU and no regeneration. That is how the external
+   punctuation-gap question was answered (see the release-decision section).
+   **No v6 or v7 predictions exist anywhere locally** — only their adapters — so any new metric on
+   those two costs a ~3.5 h MPS regeneration for the externals. If NYU still has v6/v7 preds on
+   `/scratch`, getting copies is far cheaper than recomputing them, and `/scratch` purges ~60 days
+   after each run.
 3. ~~One retrain (v7), then stop.~~ **DONE 2026-09-08 — and the stop rule fired.** All four
    accumulated generator changes shipped (ditto `8d5c438`, franks `7f456d2`, harvested surnames,
    `&` two-premises `d2eb264`, plus the `(co'd)` and self-crossing fixes). franks1786 recovered

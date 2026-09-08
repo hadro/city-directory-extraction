@@ -102,7 +102,16 @@ alongside, per convention) and `synth_dev.jsonl` to the private `hadro/cde-evals
    spouse/race/is_business is what would retire the `--exclude-fields` workaround on the external
    benchmark — but note this volume is 1850/51 and thin on those fields (is_business 7%,
    spouse 10%, race 1%), so it weakens the case for excluding rather than settling it.
-   Remaining: `gold_upington1906.html`, `gold_smith185{4,5,6}.html`.
+   ✅ `gold_smith1855.html` **DONE 2026-09-07** → `data/smith1855_eval.jsonl`, 185 rows, 2 pages,
+   validator clean. Brooklyn 1855, a NEW publisher (`smith`), chosen to thicken the 1846-1856
+   band where primed Gemini still beats the fine-tune.
+   Remaining: `gold_upington1906.html`, `gold_smith1854.html`, `gold_smith1856.html`.
+
+   **Both exports so far got convention #8 wrong in OPPOSITE directions**, so state it explicitly
+   when generating the next tool: `address` KEEPS its `h`/`r`/`bds` prefix (a lone h-address lives
+   there, marker and all, verbatim as printed); `home_address` stores the BARE address with the
+   marker stripped. doggetts1850 kept the marker in `home_address` (74 rows); smith1855 dropped it
+   from `address` (87 rows). Existing volumes keep it on lone-h rows 97.5-100% of the time.
    **Hold new volumes OUT of `PANEL` in `hpc/30_eval.sbatch`** until the next model is scored on the
    current 21, or you lose the clean A/B again.
 5. **Release.** `cards/MODEL_CARD.md` and `cards/DATASET_CARD.md` still carry pre-fix numbers.

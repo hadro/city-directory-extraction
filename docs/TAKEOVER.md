@@ -74,7 +74,7 @@ python3 data_prep/synth_persons.py --profile mix --n 3000  --seed 7  --target ya
 python3 data_prep/synth_persons.py --profile mix --n 1000  --seed 99 --target yaml --out data/synth_dev.jsonl
 ```
 Then upload train/smoke to `hadro/city-directory-synth` (archive a versioned `synth_train_v7.jsonl`
-alongside, per convention) and `synth_dev.jsonl` to the private `hadro/cde-evals`.
+alongside, per convention) and `synth_dev.jsonl` to the gated `hadro/cde-evals`.
 
 ---
 

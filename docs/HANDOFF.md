@@ -1293,7 +1293,7 @@ directly at huggingface.co/settings/billing, it's not something a job/token can 
 
 **Datasets:**
 - `hadro/city-directory-synth` — `synth_train.jsonl` (100k), `synth_smoke.jsonl` (3k). PUBLIC.
-- `hadro/cde-evals` — `nyu_eval.jsonl` (3000 rows!), `synth_dev.jsonl` (1k, seed 99), + `preds_*.txt`. PRIVATE (respects NYU CC-BY-SA-NC).
+- `hadro/cde-evals` — `nyu_eval.jsonl` (3000 rows!), `synth_dev.jsonl` (1k, seed 99), + `preds_*.txt`. **GATED** (`private=False`, `gated="manual"`) — intended; approval-only access respects NYU's CC-BY-SA-NC. Do NOT describe it as private.
 
 **Models trained so far:**
 - `hadro/city-directory-extractor-2b` — 2B, **pipe**, 20k×1 → 0.246 NYU (bad; pipe+undertrained).

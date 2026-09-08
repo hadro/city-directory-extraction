@@ -185,7 +185,7 @@ The generator picks the harvested pools up automatically — no code change.
 
 Then ship: upload `synth_train.jsonl` / `synth_smoke.jsonl` to `hadro/city-directory-synth`
 (archive a versioned `synth_train_v8.jsonl` alongside, per convention), and `synth_dev.jsonl` to the
-private `hadro/cde-evals`.
+gated `hadro/cde-evals`.
 
 ---
 

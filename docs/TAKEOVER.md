@@ -13,7 +13,51 @@ Deeper context: [HANDOFF.md](HANDOFF.md) (long, start at "RESUME HERE"),
 18-volume board, `qwen-v5` leads primed-pub Gemini by **+0.053 macro / +11.1 whole-row EM**. That
 was true since v4; nobody knew because three scoring bugs were suppressing it.
 
-## 🛑 THE STOP RULE FIRED. Generator iteration is finished — do not start cycle eight.
+## ⚡ CAPACITY WAS THE CONSTRAINT. The release candidate is `4b-100k`, not v6.
+
+**Scale runs completed 2026-09-09, and they overturned the previous conclusion.** Every figure
+below was reproduced from NYU's shipped predictions before landing.
+
+| run | EM verb | **EM norm** | name-F1 norm | externals norm agg |
+|---|---|---|---|---|
+| v6 (was the release bar) | 75.2 | 78.6 | 0.943 | 59.5 |
+| v7 | 74.5 | 77.6 | 0.939 | 58.7 |
+| **2b-100k** | 77.8 | **81.1** | 0.942 | 61.0 |
+| **4b-100k** | **78.4** | **82.0** | **0.952** | **62.8** |
+| v8-250k (0.8B, 250k) | 71.8 | **74.8** | 0.937 | 54.4 |
+
+**Volume: NEGATIVE, and decisively.** 2.5× the data made the 0.8B *worse* — v8-250k trails v7 by
+2.8 normalized points on the panel and loses on all four externals (minneapolis 31.3 → 21.3). The
+`synth_dev`-at-98% reading was right about volume. **This is now measured, not inferred.**
+
+**Capacity: POSITIVE, and monotone.** 0.8B → 2B → 4B climbs **78.6 → 81.1 → 82.0** normalized, and
+externals 59.5 → 61.0 → 62.8. Critically, the 4B moves **`name` (0.943 → 0.952)** — the field that
+stayed flat through three 0.8B generator cycles and was the basis of the whole stop rule.
+
+**Release rule fires.** It was stated in advance: displace v6 only on a normalized win across the
+panel *and* every external. 4b-100k wins all five — panel 82.0 vs 78.6, nyu 56.2 vs 56.0, tulsa
+67.5 vs 62.8, lain 65.9 vs 65.2, minneapolis 35.2 vs 26.1. **`4b-100k` is the release candidate.**
+`2b-100k` captures most of the gain at half the parameters (81.1 vs 82.0 normalized) and is the
+sensible choice if inference cost matters — that is a product decision, not a scoring one.
+
+### What was wrong before, and what survives
+
+**I recommended against running these** ("my recommendation: don't"), reasoning that `synth_dev` at
+0.997/98.1 proved the model had saturated and the remaining gap was distributional. Half right: it
+was distributional *with respect to volume*, and simply wrong about capacity. NYU wanted the runs
+partly to characterise their own hardware and pushed for them; that judgement was better than mine.
+**The generalisable error: `synth_dev` measures how well the model fits the generator's
+distribution, which says nothing about whether a bigger model would fit the REAL one better.**
+
+What survives unchanged:
+- Generator/composition iteration is still finished — v7 settled that, and v8-250k reconfirms that
+  more of the same distribution does not help.
+- The copying-vs-sampling mechanism below still holds and still explains why field-rate tuning is
+  pointless.
+- The metric discipline still holds: judge on normalized. It is what makes this result credible —
+  the 4B's gain is +3.4 normalized, not a verbatim/typography artifact.
+
+### 🛑 The old stop rule (superseded for capacity; still binding for the generator)
 
 **v7 was run 2026-09-08 and the pre-registered stop condition was met.** The rule set before the
 run was: *"judge it on the normalized metric — if `name` does not move normalized, the model is
@@ -68,7 +112,8 @@ Two things here are worth more than the stop itself:
 2. **v7 initially looked like the better RELEASE checkpoint. It is not — release `v6`.** The
    +10.1 on this group is *targeted calibration, not generalization*, and the externals prove it.
 
-### Release decision: `v6`. Settled 2026-09-08 on the largest held-out evidence.
+### ~~Release decision: `v6`~~ — SUPERSEDED 2026-09-09 by `4b-100k` (see the top of this file).
+### The v6-vs-v7 reasoning below is retained because its METHOD is what the 4B decision reused.
 
 Three independent measurements, ordered by how uncontaminated they are:
 
@@ -107,8 +152,9 @@ labelling contract the generator teaches, so normalization has nothing to forgiv
 property of how far a gold set's printed conventions sit from the contract — mid-century NYC is
 where they diverge, which is exactly where the panel's remaining gap lives.
 
-**So: ship `v6`** (panel verbatim 75.2 / normalized 78.6). v7 stays archived; it is the cycle that
-proved the stop rule, and franks1786's 12.5 → 71.4 is its result worth citing.
+**So: ship `v6`** — *superseded; `4b-100k` now holds the release rule on all five measurements.*
+v7 stays archived; it is the cycle that proved the generator stop rule, and franks1786's
+12.5 → 71.4 is its result worth citing.
 
 ### ⚠️ v6 is NOT semantically better than v5-torch either. The whole gain is punctuation.
 
@@ -268,8 +314,11 @@ v7 showed even that lever now reshuffles rather than adds (franks +58.9, but −
 **Explicitly NOT worth doing** (each measured, not assumed):
 - **cycle eight, or any further generator/composition work** — v7 settled this empirically, not by
   argument: three compositions, normalized 79.0 → 78.6 → 77.6
-- scaling synthetic data or training 2B/4B — **INFERRED, NOT MEASURED. Flagged 2026-09-08 as the
-  one entry in this list that does not meet the bar the list claims.** The inference: `synth_dev`
+- ~~scaling synthetic data or training 2B/4B~~ — **RESOLVED 2026-09-09, and the entry was half
+  wrong.** Volume: confirmed useless (250k is worse). Capacity: **wrong — 2B and 4B both beat every
+  0.8B, monotonically.** The flag below was right that this entry was inferred rather than measured;
+  running it changed the release candidate. Kept as a worked example of the failure mode.
+  Original text: The inference: `synth_dev`
   is now macro 0.997 / EM 98.1% (v7), so the model reproduces its own training distribution almost
   perfectly, and the ~20-point gap to real gold (normalized ~78) is a DISTRIBUTION gap, which
   neither more rows of the same distribution nor more parameters can close. That is a strong

@@ -109,24 +109,21 @@ def _chunks(seq, n):
 def predict(net, tok, examples, target, batch_size, max_new_tokens):
     """Yield one serialized record per example, in input order (greedy / deterministic)."""
     import torch
-    # enable_thinking=False — REQUIRED for 4B, harmless below it. Qwen3.5-4B's chat template ends
-    # the generation prompt with an OPEN `<think>`, so the base model's chain-of-thought habit
-    # floods the completion with reasoning prose instead of the record; the 0.8B/2B templates emit
-    # a CLOSED empty think block and are unaffected. Verified 2026-09-09: for 0.8B the kwarg is a
-    # byte-identical no-op (both render `...<|im_start|>assistant\n<think>\n\n</think>\n\n`), so
-    # this harmonises all sizes rather than changing the small-model prompt. Found by NYU on the
-    # first 4B run. Older tokenizers reject the kwarg, hence the probe.
-    tmpl_kw = {"enable_thinking": False}
-    try:
-        tok.apply_chat_template([{"role": "user", "content": "probe"}],
-                                tokenize=False, add_generation_prompt=True, **tmpl_kw)
-    except TypeError:
-        tmpl_kw = {}
     for batch in _chunks(examples, batch_size):
+        # enable_thinking=False: the 4B's template otherwise ends the generation prompt with an
+        # OPEN <think> (0.8B/2B templates emit a closed empty think block), and the base model's
+        # chain-of-thought habit floods the completion with reasoning prose instead of the record.
+        # For 0.8B/2B the kwarg is a byte-identical no-op, so this harmonizes all sizes.
+        _tmpl_kw = {"enable_thinking": False}
+        try:
+            tok.apply_chat_template([{"role": "user", "content": "x"}],
+                                    tokenize=False, add_generation_prompt=True, **_tmpl_kw)
+        except (TypeError, Exception):
+            _tmpl_kw = {}
         texts = [tok.apply_chat_template(
             [{"role": "system", "content": system_for(target)},
              {"role": "user", "content": user_prompt(ex)}],
-            tokenize=False, add_generation_prompt=True, **tmpl_kw) for ex in batch]
+            tokenize=False, add_generation_prompt=True, **_tmpl_kw) for ex in batch]
         enc = tok(texts, return_tensors="pt", padding=True).to(net.device)
         with torch.no_grad():
             # Stop on BOTH the chat end-of-turn (<|im_end|>, tok.eos) and the base config's EOS

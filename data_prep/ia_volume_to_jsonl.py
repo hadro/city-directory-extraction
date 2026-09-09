@@ -682,9 +682,16 @@ def main(argv=None) -> int:
     if dropped_fh:
         print(f"rejected lines -> {args.dump_dropped}  (READ THIS: the geometry stage is "
               f"uncalibrated and can cut real entries)", file=sys.stderr)
+    # 4b-100k is the release candidate (SCALE_RUNS.md), so it is what the hint recommends -- but
+    # say what it costs. Only the 0.8B and 2B bases are cached locally; the 4B directory in the HF
+    # cache is a 24 KB stub with no safetensors, so this line starts an ~8 GB download, and on a
+    # 16 GB machine the 4B then has almost no headroom. 2b-100k is the cheap comparable.
     print(f"\nnext: python3 eval/qwen_predict.py --base-model Qwen/Qwen3.5-4B \\\n"
           f"        --model ~/Downloads/scale-runs/adapters/4b-100k \\\n"
-          f"        --gold {out_path} --target yaml --batch-size 128", file=sys.stderr)
+          f"        --gold {out_path} --target yaml --batch-size 128\n"
+          f"      (4B base is NOT cached -- ~8 GB download. For a quick look swap in\n"
+          f"       Qwen/Qwen3.5-2B + adapters/2b-100k, which is cached and ~1 point behind.)",
+          file=sys.stderr)
     return 0
 
 

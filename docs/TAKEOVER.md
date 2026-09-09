@@ -230,6 +230,41 @@ franks-comma-class fix, and the flat ~20% training rate does not matter — the 
 marker from the raw line rather than sampling a learned prior, as hypothesised. v7 drifted slightly
 worse (trowwilson 59.3 vs 65.9), consistent with its general give-back on Trow-era volumes.
 
+## Why further generator tuning does not work — the mechanism, measured four ways
+
+Asked 2026-09-08: "are there further adjustments we should make to the synth data?" The answer is
+**no**, and the reason is more useful than the answer. **The model conditions on the input line, not
+on a learned prior over field rates.** Every attempt to find a distribution mismatch that matters
+has failed, in the same way:
+
+| mismatch in training data | what happened at eval |
+|---|---|
+| `race_designation` at 6.3% (v5 era) | **0** false positives on all five NYC Polk volumes |
+| residence marker in `address` ~20% vs gold 65–88% (Brooklyn) | v6 matched gold almost exactly — trowwilson1865 **65.9% predicted vs 65.9% gold** |
+| `employer` at 12.7% vs gold 4.2% (3× over) | model **under**-predicts: pred_ne/gold_ne = 0.89 (v6), 0.82 (v7) |
+| `same` as an address value: **0 occurrences** in 100k | model emits `home_address: 'same'` correctly anyway |
+
+That last one is the cleanest: the generator produces `do`/`do.` 2,237 times and `same` zero times,
+yet the model handles `same` fine on tulsa and minneapolis. It is copying, not sampling.
+
+**So marginal rates are not a lever, and never were.** Do not spend a cycle re-weighting how often
+the generator emits a field or a form.
+
+**The one thing that IS a lever — and it is nearly exhausted:** cases where the gold performs a
+TRANSFORMATION on the printed line that the generator never demonstrates. Copying cannot teach
+those, because the answer is not in the input. franks1786 is the proof: the page prints
+`95, Water-street`, gold stores `95 Water-street`, and the model had to learn to *strip* a comma —
+which it could not infer, and could not do, until the generator showed it (12.5 → 71.4% EM). The
+`(co'd)` fix and the `h`/`r`/`bds` marker rules are the same shape.
+
+Diagnostic that distinguishes them: **if the correct output is a substring of the raw line, the
+model will get it from copying and the generator rate is irrelevant. If the correct output requires
+deleting, re-casing, or re-ordering what the page prints, the generator must demonstrate it.**
+
+v7 showed even that lever now reshuffles rather than adds (franks +58.9, but −0.7 net on the panel).
+
+---
+
 **Explicitly NOT worth doing** (each measured, not assumed):
 - **cycle eight, or any further generator/composition work** — v7 settled this empirically, not by
   argument: three compositions, normalized 79.0 → 78.6 → 77.6

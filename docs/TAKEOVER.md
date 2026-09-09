@@ -188,6 +188,10 @@ alongside, per convention) and `synth_dev.jsonl` to the gated `hadro/cde-evals`.
    12.5 → 71.4% EM exactly as predicted, but the panel netted −0.7 EM and normalized extraction
    fell 78.6 → 77.6. **Do not start cycle eight.** See the stop section at the top.
 
+   **Both are now teed up: see [SCALE_RUNS.md](SCALE_RUNS.md)** — data generated, designs fixed,
+   commands written, pre-flight steps and expected outcomes recorded. NYU wants to run them partly
+   to characterise their own hardware, which is a good reason independent of the score.
+
    The two pre-registered variables that remain UNTESTED, in NYU's preferred order:
      * **DATA VOLUME** — the 250k A/B (~10h, free on an L40S). The cheapest remaining question,
        and the only one that isolates volume from composition. It is a genuine test: every cycle

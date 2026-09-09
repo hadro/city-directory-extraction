@@ -229,8 +229,15 @@ worse (trowwilson 59.3 vs 65.9), consistent with its general give-back on Trow-e
 **Explicitly NOT worth doing** (each measured, not assumed):
 - **cycle eight, or any further generator/composition work** — v7 settled this empirically, not by
   argument: three compositions, normalized 79.0 → 78.6 → 77.6
-- scaling synthetic data or training 2B/4B — `synth_dev` is macro 0.992 / EM 96.0%, the model has
-  saturated its own distribution; capacity and volume are not the constraint
+- scaling synthetic data or training 2B/4B — **INFERRED, NOT MEASURED. Flagged 2026-09-08 as the
+  one entry in this list that does not meet the bar the list claims.** The inference: `synth_dev`
+  is now macro 0.997 / EM 98.1% (v7), so the model reproduces its own training distribution almost
+  perfectly, and the ~20-point gap to real gold (normalized ~78) is a DISTRIBUTION gap, which
+  neither more rows of the same distribution nor more parameters can close. That is a strong
+  argument and I believe it. It is still an argument. Nobody has run a 250k A/B or a 2B fine-tune.
+  NYU's v7 SUMMARY recommends exactly these two as the "pre-registered next variables", so the
+  project currently holds both positions at once — resolve it explicitly rather than by whichever
+  document someone reads first.
 - re-probing GLiNER2 — done and documented in `eval/gliner2_baseline.py`
 - harvesting more surnames — run 2026-09-02, moved the miss rate 49.2% → 48.8%. 99.3% of directory
   surnames appear on exactly one page, so that metric mostly detects whether you sampled the gold

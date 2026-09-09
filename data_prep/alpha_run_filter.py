@@ -57,10 +57,17 @@ sequence; it does not prove the dropped ones deserved it. A listing page whose m
 misread drops out and takes real entries with it. So `--apply` is opt-in, the default is a
 report, and `--dump-cut` writes a sample from every excised range for eyeballing.
 
-One known-ambiguous edge on 1906BPL, inherited from the original probe and NOT resolved: the A
-block begins at leaf 9, but sustained A entries look like they start nearer leaf 38. Leaf 9 is
-probably an abbreviations key or an ad index that happens to start with A. One page read
-settles it; until someone does that, treat the head of the first block as unverified.
+RESOLVED, and recorded because the guess was wrong: 1906BPL's A block really does begin at leaf
+9. `sub-agent-csv-work` read the pages -- leaves 9-38 are a sustained A run (share 0.50-0.87,
+leaf 30 at 0.87) while leaves 0-8 have no dominant letter at all (all <= 0.33). The earlier
+suspicion that leaf 9 was an abbreviations key or ad index was unfounded.
+
+**An ad page can carry a high modal letter, so confidence does NOT mean "listing".** Ad copy is
+full of business names, so a page of advertising often has one letter dominating just as a
+listing page does -- their B/M/S "second alphabet" clusters (B also 137..162, M also 736..752,
+S also 1029..1077) all spot-check as advertising rather than a second alphabetical sequence,
+and leaf 130 here is prose at confidence 0.96. This is the deeper reason the confidence floor
+below cannot work: the two classes overlap on the axis it measures.
 """
 from __future__ import annotations
 
@@ -68,6 +75,7 @@ import argparse
 import bisect
 import collections
 import json
+import re
 import string
 import sys
 from pathlib import Path
@@ -80,8 +88,7 @@ MIN_ALPHA_LINES = 15
 # measured reason is that a floor does not do what it looks like it should:
 #
 #   min-conf   cut on 1906BPL          what happens
-#   0.0        73 leaves / 14,582 ln   finds the real ad runs; 2 ditto-heavy listing leaves (26, 76)
-#                                      are wrongly cut
+#   0.0        78 leaves / 15,138 ln   finds the real ad runs (incl. the 8,127-line trade-ad run)
 #   0.70        2 leaves /    312 ln   near-inert -- ad pages ABSTAIN instead of being cut, and
 #   0.85        2 leaves /    312 ln   abstaining means kept, so the 8,127-line trade-ad run at
 #                                      leaves 1218-1251 survives
@@ -94,8 +101,9 @@ MIN_ALPHA_LINES = 15
 # that do not exist yet.
 MIN_CONFIDENCE = 0.0
 
-# Leading junk the OCR puts before a surname: ditto marks, quotes, bullets, stray rules.
-_LEAD_JUNK = "\"'`*|.,:;!-–—_ \t“”‘’()[]{}<>=+/\\~^&#$%@"
+# A sortable surname: an ANCHORED capital plus two lowercase. See first_letter() for why each
+# half is load-bearing. Credit: sub-agent-csv-work / detect_listing_bounds.py.
+_SORT_KEY_RE = re.compile(r"([A-Za-z])[a-z]{2,}")
 
 
 def first_letter(raw_line: str):
@@ -114,15 +122,26 @@ def first_letter(raw_line: str):
     Ditto marks are pervasive in this corpus (the gold convention has them: `" Julius r 131 Av A`),
     so this is not an edge case.
 
-    The rule that fixes it is that a surname-initial entry starts with a capital letter and
-    nothing else. Anything with leading punctuation, a ditto, or an OCR digit is a continuation
-    carrying no sort key, and a leaf with too few real votes abstains via MIN_ALPHA_LINES rather
-    than being judged on its dittos.
+    The rule is an ANCHORED capital followed by at least two lowercase letters. Anchoring kills
+    the ditto (leading punctuation or an OCR digit never matches); the two-lowercase tail kills
+    two further classes this volume is full of.
+
+    That tail came from `sub-agent-csv-work`'s `detect_listing_bounds.py` and replaced a bare
+    `raw_line[0].isupper()` here. I had claimed their version carried the ditto bug; it never
+    did, and on 1906BPL theirs abstains on 4,097 lines mine wrongly counted:
+
+        MAIN OFFICE, 1232 Fulton St.      ALL-CAPS ad banner -> must abstain
+        W. E. Murdock, Boston.            initials-first ad copy -> must abstain
+        H'y grocer 213 Prince             "Henry" -- a GIVEN name on a ditto entry whose
+        Wm elk h 149% Division av         ditto mark the OCR dropped -> must abstain
+
+    Those last two are the same failure as the ditto in a different costume, and they were the
+    largest buckets (852 M, 643 W). The apostrophe-surname worry that argued against `{2,}`
+    (O'Brien, O'Connor) does not appear in this volume's data at all -- every apostrophe hit was
+    an abbreviated given name.
     """
-    if not raw_line:
-        return None
-    c = raw_line[0]
-    return c.upper() if c.isalpha() and c.isupper() else None
+    m = _SORT_KEY_RE.match(raw_line or "")
+    return m.group(1).upper() if m else None
 
 
 def leaf_letters(rows, min_confidence=MIN_CONFIDENCE):
@@ -208,11 +227,17 @@ def cut_ranges(all_leaves, kept):
 
 def _self_test() -> int:
     assert first_letter("Kramer Aaron furs 56 Bond") == "K"
+    assert first_letter("MacDonald John grocer") == "M"
     # every ditto form in this corpus must ABSTAIN, not vote its given name
     for ditto in ('" Julius r 131 Av A', "44 Geo cigars 611 Hart", "“ Anna wid Louis h 622 Marcy",
                   "*' A grocer 989 Myrtle av", "| 'Shis state, entrusted to their", ""):
         assert first_letter(ditto) is None, ditto
-    assert first_letter("brooklyn lowercase running head") is None
+    # a dropped ditto leaves an abbreviated GIVEN name behind -- same failure, no punctuation
+    for given in ("H'y grocer 213 Prince", "Wm elk h 149% Division av"):
+        assert first_letter(given) is None, given
+    # ALL-CAPS banners and initials-first ad copy carry no sort key either
+    for ad in ("MAIN OFFICE, 1232 Fulton St.", "W. E. Murdock, Boston.", "ALL CAPS HEADING"):
+        assert first_letter(ad) is None, ad
 
     # non-decreasing keeps every repeat of a letter; a lone spike costs one leaf, not the tail
     assert longest_nondecreasing([0, 0, 1, 1, 2]) == [0, 1, 2, 3, 4]

@@ -32,21 +32,38 @@ that seam, and [The future split](#the-future-split) documents the interface bet
 > **New to this repo, or taking it over?** Start with **[docs/TAKEOVER.md](docs/TAKEOVER.md)** —
 > where the project stands, what to do next, and the mistakes that have cost the most time.
 
-## Where things stand (2026-08)
+## Where things stand (2026-09)
 
-**Model (A):** five data-composition cycles trained and scored on the 18-volume gold panel
-(1786–1933/34, 1169 hand-labeled lines) — the project's regression harness.
+**Model (A):** seven data-composition cycles plus a volume A/B and a 2B/4B capacity sweep, all
+scored on a frozen **21-volume** gold panel (1786–1933/34, **1,583** hand-labeled lines) with four
+external sets (3,030 rows) held alongside it.
 
-**`hadro/city-dir-08b-yaml-v5`** (0.8B, 100k synthetic, 3 epochs, YAML, LoRA) — panel-wide,
-line-weighted:
+**Two metrics, and the distinction decides everything here.** `whole-row EM` is verbatim string
+match. `evaluate.py --report-normalized` re-scores with abbreviation periods stripped from both
+sides. **Publish verbatim; judge model changes on normalized** — this project spent three cycles
+learning that a verbatim gain which vanishes under normalization is typography, not extraction.
 
-| model | macro-F1 | micro-F1 | whole-row EM |
-|---|---|---|---|
-| Gemini 3.1-flash-lite (**prompt-primed** bar) | 0.790 | 0.844 | 58.0% |
-| qwen-v4 | 0.816 | 0.861 | 57.8% |
-| **qwen-v5 (ours)** | **0.826** | **0.875** | **61.5%** |
+| run | EM verbatim | **EM normalized** | `name` F1 norm | externals (n=3030) |
+|---|---|---|---|---|
+| Gemini 3.1-flash-lite (**prompt-primed** bar) | 61.7 | — | — | — |
+| qwen 0.8B v6 | 75.2 | 78.6 | 0.943 | 59.5 |
+| qwen 0.8B v7 | 74.5 | 77.6 | 0.939 | 58.7 |
+| qwen 0.8B, **250k** data | 71.8 | 74.8 | 0.937 | 54.4 |
+| qwen **2B**, 100k | 77.8 | 81.1 | 0.942 | 61.0 |
+| **qwen 4B, 100k — release candidate** | **78.4** | **82.0** | **0.952** | **62.8** |
 
-**Honest read:** the fine-tune now leads the Gemini bar on all three aggregates. Two caveats that
+**The headline finding is a reversal.** For five cycles the thesis was "fix the data, not the
+model," and it held — until it was tested. **More data made the 0.8B worse** (250k: −2.8
+normalized, and it lost all four externals). **More capacity helped monotonically**
+(0.8B → 2B → 4B = 78.6 → 81.1 → 82.0 normalized), and the 4B moved `name`, the field that had
+stayed flat through three generator cycles. Volume is not the constraint; **capacity was.**
+
+Worth stating plainly because the project nearly skipped these runs: the argument against them was
+that `synth_dev` sat at 0.997 macro / 98.1% EM, so the model had clearly saturated. That reasoning
+was half wrong. **`synth_dev` measures fit to the *generator's* distribution, which says nothing
+about whether a larger model would fit the *real* one better.**
+
+**Honest read:** the fine-tune leads the primed Gemini bar on all three aggregates. Two caveats that
 matter more than the headline:
 1. **Cite the *primed* Gemini bar.** An earlier version of this table showed us winning by a much
    larger margin against a Gemini prompt that had been given a stale labeling contract. Re-priming
@@ -60,9 +77,8 @@ Earlier revisions of this README reported **NYU-only** numbers against an **unpr
 concluded Gemini led decisively. Both halves of that were measurement artifacts — see
 [docs/HANDOFF.md](docs/HANDOFF.md) for the primed-bar correction and the NYU derived-label problem.
 
-The **first full-panel run** diagnosed four systematic gaps — all *training-coverage* problems, not
-capacity problems. That thesis held: every one was closed by fixing the **generator** and
-retraining, with no change to model size or architecture.
+The **first full-panel run** diagnosed four systematic gaps — all *training-coverage* problems. Each
+was closed by fixing the **generator** and retraining, with no change to model size:
 
 | gap (v1) | fix | field F1, v1 → v5 |
 |---|---|---|
@@ -74,9 +90,28 @@ retraining, with no change to model size or architecture.
 Later cycles added occupation realism (`occupation_role` 0.70 → **0.89**) from vocabulary harvested
 out of non-eval volumes.
 
-**The method is the takeaway: fix the data, not the model.** The 18-volume panel is the regression
-harness. Full numbers and diagnosis in [docs/HANDOFF.md](docs/HANDOFF.md); table in
-[results/eval_table.md](results/eval_table.md).
+**The method got the project most of the way, and then ran out — that is the takeaway.** Fixing the
+generator closed every coverage gap above and carried the 0.8B past the primed Gemini bar. But by
+cycle seven the same lever had stopped working: convention fixes began *reshuffling* whole-row EM
+between volumes instead of adding to it (v7 recovered franks1786 by +58.9 EM and still netted −0.7
+on the panel), and normalized extraction had gone flat at 79.0 → 78.6 → 77.6 across three
+compositions. **"Fix the data, not the model" was right until it was measurably exhausted, and the
+next real gain came from capacity.** Both halves are the finding.
+
+One mechanism is worth carrying to any similar project: **the model conditions on the input line,
+not on a learned prior over field rates.** Four separate distribution mismatches between generator
+and gold — `race_designation` 6.3% vs 0.5%, `employer` 12.7% vs 4.2%, residence markers ~20% vs
+65–88%, and `same` at literally 0 occurrences in 100k — *none* propagated to predictions. So
+re-weighting how often the generator emits something is not a lever. What IS a lever is a
+**transformation** the gold performs on the printed line that the generator never demonstrates:
+franks1786 prints `95, Water-street` and gold stores `95 Water-street`, and the model could not
+learn to delete that comma until the generator showed it (12.5 → 71.4% EM). *If the correct output
+is a substring of the raw line, copying handles it and the rate is irrelevant; if it requires
+deleting, re-casing or re-ordering, the generator must demonstrate it.*
+
+The 21-volume panel is the regression harness. Full numbers and diagnosis in
+[docs/HANDOFF.md](docs/HANDOFF.md); scale-run design and outcomes in
+[docs/SCALE_RUNS.md](docs/SCALE_RUNS.md); table in [results/eval_table.md](results/eval_table.md).
 
 > **Evaluation caveat worth reading before trusting any number here:** `data/nyu_eval.jsonl` is a
 > third-party CRF parse, and three of its fields (`spouse_name`, `race_designation`,
@@ -88,7 +123,9 @@ harness. Full numbers and diagnosis in [docs/HANDOFF.md](docs/HANDOFF.md); table
 **Data (B):** `master_directories.csv` at **449 rows** (NYPL / IA / LoC; NYPL API responses
 archived before the 2026-08-01 deprecation). `column_count` backfilled for **332/449** — every
 in-scope residential volume. **17 publisher×era style cards** written. The gold panel stands at
-**18 volumes / 1,169 hand-labeled lines** (continuous 1786–1933, layout columns 1–6, all five
+**21 volumes / 1,583 hand-labeled lines**, with a further **3 volumes / 717 lines**
+(`doggetts1850`, `smith1855`, `smith1856`) labeled and deliberately **held out** of the panel so
+model-to-model comparisons stay stable (continuous 1786–1933, layout columns 1–6, all five
 boroughs, all 8 fields exercised) from a 41-volume worklist, all validator-clean. The
 front-matter/key-page pass (listing `start_page`, abbreviations `key_page`, `page_offset`) is
 **25/41 done**; the remaining 16 need deep scans.
@@ -271,8 +308,8 @@ A hand-labeled **gold eval panel** built from the cataloged volumes via a dedica
 (`sample_volumes.py` → `run_surya_on_samples.py` → `make_gold_tool.py` → `validate_gold.py`):
 Surya-OCR a few listing pages per volume, label each entry into the 8-field schema in a browser
 editor, validate, drop the result into `data/<slug>_eval.jsonl` for `eval/evaluate.py`. It is
-**eval-only** and governed by the labeling contract. Status: **18 volumes / 1,169 lines**, all
-validator-clean. Conventions + per-volume log:
+**eval-only** and governed by the labeling contract. Status: **21 volumes / 1,583 lines** in the
+frozen panel, plus **3 volumes / 717 lines** held out of it, all validator-clean. Conventions + per-volume log:
 [docs/GROUND_TRUTH_HANDOFF.md](docs/GROUND_TRUTH_HANDOFF.md).
 
 ## Data sources
@@ -280,7 +317,7 @@ validator-clean. Conventions + per-volume log:
 | Source | Role | License |
 |---|---|---|
 | Synthetic (`synth_persons.py`) | **Training** | ours → permissive |
-| Real-OCR gold panel (18 vols, ours) | Eval / regression harness | ours |
+| Real-OCR gold panel (21 vols in-panel + 3 held out, ours) | Eval / regression harness | ours |
 | [NYU NYC directories 1850–1890](https://archive.nyu.edu/handle/2451/61521) | Eval / benchmark | CC-BY-SA-**NC** ⚠ |
 | [French Trade Directories](https://zenodo.org/records/8167628) | Transfer eval | open (CC) |
 | [Minneapolis 1900 (DirCity)](https://github.com/adamrangwala/DirCity_Directory_Crop-out-with-Key-Lines) | In-domain US eval (silver) | MIT |

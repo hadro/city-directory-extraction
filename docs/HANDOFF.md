@@ -12,10 +12,17 @@ We're fine-tuning a small **Qwen3.5** model to turn one historical city-director
 structured 8-field record (synthetic-train / real-gold-eval), aiming to match a Gemini baseline,
 then release to HF.
 
-> **CURRENT STATE (2026-09-01): `v6` is the best model — 0.853 macro / 74.9% EM on the 21-volume
-> panel, +7.6 EM over v5-torch.** Every number printed below this box predates the 2026-09-01
-> `parse_yaml` unescape fix and is UNDERSTATED; see the corrected table in the cycle-six
-> section. Jump to **RESUME HERE — cycle SIX COMPLETE**.
+> **CURRENT STATE (2026-09-09): the release candidate is `4b-100k`, and CAPACITY was the
+> constraint.** The scale runs reversed the standing conclusion. On the frozen 21-volume panel,
+> normalized whole-row EM: v6 78.6 → v7 77.6 → **2B 81.1 → 4B 82.0**, while 250k data made the
+> 0.8B *worse* (74.8). The 4B is the first run to move `name` (0.943 → 0.952) — the field that
+> stayed flat through three 0.8B generator cycles. Full record: **SCALE RUNS** section below, and
+> [SCALE_RUNS.md](SCALE_RUNS.md) for the experiment design.
+>
+> **(historical) CURRENT STATE (2026-09-01): `v6` is the best model — 0.853 macro / 74.9% EM on the
+> 21-volume panel, +7.6 EM over v5-torch.** Every number printed below this box predates the
+> 2026-09-01 `parse_yaml` unescape fix and is UNDERSTATED; see the corrected table in the cycle-six
+> section.
 >
 > **(historical) CURRENT STATE (2026-08-04): `hadro/city-dir-08b-yaml-v5` is the best model and beats the
 > primed Gemini bar on macro (0.826 vs 0.790), micro (0.875 vs 0.844) AND whole-row EM (61.5% vs
@@ -1079,6 +1086,88 @@ model wins exactly where the hard features are absent). Worst = dense late-Polk 
 to specific missing synthetic features (ditto entries, home_address density, hyphenated/neighborhood
 addresses, race marks), not to model capacity. Next: inject these into `synth_persons.py` (start with
 ditto), regenerate, retrain, re-score this panel. The 18-volume panel is now the regression harness.
+
+## SCALE RUNS — volume and capacity, 2026-09-09 (the conclusion-reversing cycle)
+
+Ran per [SCALE_RUNS.md](SCALE_RUNS.md) on NYU Torch. Two pre-registered experiments, both with
+outcome interpretations fixed in advance. Every figure below was independently reproduced from
+NYU's shipped prediction files before it was entered here.
+
+### The board (frozen 21-volume panel, n=1583; externals n=3030)
+
+| run | EM verb | **EM norm** | punct gap | `name` F1 norm | nyu | tulsa | lain | minn | ext agg |
+|---|---|---|---|---|---|---|---|---|---|
+| v6 | 75.2 | 78.6 | +3.3 | 0.943 | 56.0 | 62.8 | 65.2 | 26.1 | 59.5 |
+| v7 | 74.5 | 77.6 | +3.0 | 0.939 | 54.6 | 61.5 | 63.8 | 31.3 | 58.7 |
+| v8-250k | 71.8 | **74.8** | +3.0 | 0.937 | 53.2 | 57.7 | 58.6 | 21.3 | 54.4 |
+| 2b-100k | 77.8 | **81.1** | +3.4 | 0.942 | 55.0 | 64.1 | 66.4 | 34.8 | 61.0 |
+| **4b-100k** | **78.4** | **82.0** | +3.6 | **0.952** | 56.2 | 67.5 | 65.9 | 35.2 | **62.8** |
+
+### Experiment 1 — volume: NEGATIVE, decisively
+
+`synth_train_250k.jsonl` was generated at the same generator commit and seed as v7's 100k, and its
+first 100,000 rows are **byte-identical** to v7's training file — a strict superset, so `n` was the
+only variable. 2.5× the data cost **2.8 normalized panel points** and lost every external, worst on
+minneapolis (31.3 → 21.3). More of the same synthetic distribution over-commits the small model to
+that distribution. **Volume is not the constraint — now measured, not inferred.**
+
+### Experiment 2 — capacity: POSITIVE, monotone, and it reversed the project's thesis
+
+Same 100k as v7, `MODEL_SIZE` the only variable. Normalized EM climbs **78.6 → 81.1 → 82.0** and the
+externals aggregate **59.5 → 61.0 → 62.8**. The 4B is the first run in the project's history to move
+`name` on the normalized metric (0.943 → 0.952) — the exact field whose flatness across three 0.8B
+composition cycles was the entire basis of the stop rule.
+
+**Release rule (stated in advance): displace v6 only on a normalized win across the panel AND every
+external individually.** 4b-100k wins all five. It is the release candidate. `2b-100k` captures most
+of the gain at half the parameters (81.1 vs 82.0) — a cost/latency decision, not a scoring one.
+
+### Why the project nearly skipped this, and the generalisable error
+
+The argument against running these was that `synth_dev` sat at 0.997 macro / 98.1% EM, so the model
+had saturated its training distribution and the ~20-point residual gap to real gold had to be
+*distributional* — closable by neither more rows nor more parameters. That was recommended against
+in TAKEOVER's anti-goals, then flagged as inferred-rather-than-measured, then run because NYU wanted
+the hardware characterisation anyway.
+
+**Half right. Correct about volume; wrong about capacity.** The error is worth naming because it is
+easy to repeat: **`synth_dev` measures how well the model fits the GENERATOR's distribution. That
+says nothing about whether a larger model would fit the REAL one better.** A saturation reading on
+synthetic held-out data is not evidence about capacity on real data.
+
+### What survives from the earlier conclusion
+
+- **Generator/composition iteration is still finished.** v7 settled it and v8-250k reconfirms it.
+- **The copying-vs-sampling mechanism still holds** — field-rate mismatches do not propagate.
+- **Metric discipline is what makes this result trustworthy.** The 4B's win is +3.4 *normalized*,
+  not a verbatim artifact. Had it been verbatim-only it would have been typography, like cycle six.
+
+### Harness findings from this cycle
+
+1. **Qwen3.5-4B's chat template ends the generation prompt with an OPEN `<think>`** (0.8B/2B emit a
+   *closed* empty block), so untreated the 4B produces chain-of-thought prose instead of records.
+   Fixed in `eval/qwen_predict.py` by passing `enable_thinking=False`. **Verified this is a
+   byte-identical no-op for 0.8B** and that v6 on franks1786 still scores exactly 0.726 / 12.5%
+   through the patched path — i.e. the patch removes an artifact that *penalised* the 4B rather
+   than granting it an advantage. The same kwarg should go into `sft_qwen.py`'s
+   `--check-termination` generation; its 8/8 FAIL on the 4B was this, not a stop-token problem.
+2. **`hpc/10_smoke.sbatch`'s dry-run step never passes `--model`**, so it validates the 0.8B no
+   matter what `MODEL_ID` says — scale smokes are not checking the model they train. NYU ran the
+   2B/4B dry-runs by hand instead; the `exclude_modules` regex holds and adapts 0 visual modules.
+3. **An inherited `MODEL_ID` silently overrides `MODEL_SIZE`.** NYU's first smoke pair trained the
+   0.8B twice. Guard by exporting `MODEL_ID` explicitly and checking weight-tensor counts in the
+   log: **0.8B = 473, 2B = 617, 4B = 723.**
+4. `hpc/20_train.sbatch` echoes `GPU_TYPE` rather than the actual device (cosmetic).
+5. Preemption handling worked: the 4B trained across 3 stints with 2 preemptions, resumed from
+   checkpoints, no babysitting. Measured: 2B ~17 samp/s on an L40S (4h54m/100k); v8-250k 10h28m.
+
+### Artifacts
+
+`results/runs/scale-runs/` — SUMMARY, eval table, normalized reports for all four runs, gzipped
+train/eval/smoke logs, and **`preds/` with all 104 prediction files (3.9 MB)**. NYU retained the
+predictions per the standing request, and that is the only reason every number above could be
+verified independently rather than taken on trust. Five adapters (v5-torch, v6, v7, 2b, 4b,
+v8-250k) are backed up on NYU's machine; Hub pushes still deferred to launch.
 
 ## Project in one paragraph
 

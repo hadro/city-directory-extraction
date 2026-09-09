@@ -1,6 +1,38 @@
 # Scale runs — the 250k A/B and the 2B/4B family
 
-**Written 2026-09-08, after v7 and the stop rule.** Two experiments, teed up for NYU Torch.
+**Written 2026-09-08. RUN 2026-09-09 — results below the design.** Two experiments, teed up for
+NYU Torch.
+
+---
+
+## ✅ RESULTS — volume negative, capacity positive
+
+| run | EM verb | **EM norm** | `name` F1 norm | externals agg |
+|---|---|---|---|---|
+| v6 | 75.2 | 78.6 | 0.943 | 59.5 |
+| v7 | 74.5 | 77.6 | 0.939 | 58.7 |
+| v8-250k | 71.8 | **74.8** | 0.937 | 54.4 |
+| 2b-100k | 77.8 | **81.1** | 0.942 | 61.0 |
+| **4b-100k** | **78.4** | **82.0** | **0.952** | **62.8** |
+
+**Experiment 1 (volume): NEGATIVE.** 2.5× the data made the 0.8B worse — −2.8 normalized, lost all
+four externals. Matches the pre-registered "250k flat" row, and then some.
+
+**Experiment 2 (capacity): POSITIVE and monotone**, hitting the pre-registered row *"the 0.8B is
+capacity-limited after all, and the release decision changes."* **`4b-100k` displaces v6** — it wins
+the normalized panel and all four externals individually, which was the stated bar.
+
+**The prediction written into this document was wrong**, and deliberately so — it said "we expect
+both to come back flat" and gave that as a reason to run rather than skip. Volume was flat-to-worse
+as expected; capacity was not. The reasoning error is recorded in HANDOFF.md's SCALE RUNS section:
+`synth_dev` saturation measures fit to the *generator's* distribution and says nothing about
+capacity on the *real* one.
+
+Full record: `docs/HANDOFF.md` → "SCALE RUNS", artifacts under `results/runs/scale-runs/`.
+
+---
+
+## The original design (kept — it is why the results are interpretable)
 
 > **Read this first.** Generator/composition iteration is finished — v7 settled it (three
 > compositions, normalized EM 79.0 → 78.6 → 77.6). These two runs test the only pre-registered

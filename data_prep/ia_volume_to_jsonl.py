@@ -381,6 +381,56 @@ def margin_reject(box, margins, tol):
 # ==============================================================================================
 # Volume sweep
 # ==============================================================================================
+# The `[publisher=X]` tokens actually present in the SFT data (data/synth_train_250k.jsonl).
+# Source of truth for the whole repo -- data_prep/backfill_publisher.py imports this set to audit
+# the catalog column against it, so the list lives in one place.
+TRAINED_VOCAB = {
+    "trow", "polk-tulsa", "lain", "polk", "longworth", "doggett", "upington",
+    "duncan", "hopehenderson", "smith", "boyd", "hearne", "rode", "mb",
+    "mercein", "franks", "ogden",
+}
+
+# Catalog spellings that are a trained token wearing a possessive or an extra "s".
+_TAG_ALIASES = {"hearnes": "hearne", "doggetts": "doggett",
+                "hope & henderson": "hopehenderson", "hope&henderson": "hopehenderson"}
+
+
+def tag_publisher(publisher: str):
+    """(tag, why) -- the trained token to put in the [publisher=X] tag for a catalog publisher.
+
+    `publisher` is catalog truth and is often out of vocabulary: `spooner` is a real Brooklyn
+    publisher the model has simply never seen, and `trow/wilson` is a partnership recorded under
+    both names. Emitting either verbatim tags the volume with a token that was never trained,
+    which is a *different* failure from a wrong-but-trained tag rather than a lesser one -- and
+    since the tag is interpolated as free text, both pass silently.
+
+        exact trained token                      -> itself
+        possessive or spelling variant           -> the trained token   ("hearnes"     -> hearne)
+        partnership with a trained partner       -> that partner        ("trow/wilson" -> trow)
+        anything else                            -> "trow", and say so
+
+    The last case is a fallback, not an answer: picking a trained stand-in for a genuinely unseen
+    publisher (spooner, reynolds, donnelley) needs an A/B, not an assumption.
+    """
+    raw = (publisher or "").strip().lower()
+    if not raw:
+        return "trow", "no publisher in the catalog"
+    if raw in TRAINED_VOCAB:
+        return raw, ""
+
+    alias = _TAG_ALIASES.get(raw) or re.sub(r"['’]s$|s['’]$|['’]$", "", raw)
+    alias = _TAG_ALIASES.get(alias, alias)
+    if alias in TRAINED_VOCAB:
+        return alias, f"{raw!r} normalised to the trained token {alias!r}"
+
+    for atom in re.split(r"[/&]", raw):
+        atom = _TAG_ALIASES.get(atom.strip(), atom.strip())
+        if atom in TRAINED_VOCAB:
+            return atom, f"{raw!r} tagged as its trained partner {atom!r}"
+
+    return "trow", f"{raw!r} is not in the trained vocabulary -- falling back to 'trow'"
+
+
 def lookup_master(ident: str):
     """(publisher, year) from master_directories.csv, or ('', '') if the volume is not listed."""
     if not MASTER.exists():
@@ -438,7 +488,7 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
             out_fh.write(json.dumps({
                 "raw_line": text,
                 "context": {
-                    "publisher": publisher or "trow",
+                    "publisher": publisher,          # already a trained token (tag_publisher)
                     "directory_year": year or "",
                     "ia_id": item.ident,
                     "leaf": leaf,
@@ -568,16 +618,23 @@ def main(argv=None) -> int:
     item = Item(args.ident, Path(args.cache))
 
     pub, yr = lookup_master(args.ident)
-    publisher = args.publisher if args.publisher is not None else pub
+    catalog_publisher = args.publisher if args.publisher is not None else pub
     year = args.year if args.year is not None else yr
-    if not publisher or not year:
-        missing = ", ".join(k for k, v in (("publisher", publisher), ("year", year)) if not v)
+
+    # The catalog records who actually published the volume; the tag has to be one of the 17
+    # tokens the model was trained on. They are usually but not always the same string.
+    publisher, why = tag_publisher(catalog_publisher)
+    if why:
+        print(f"  ! {args.ident}: tagging [publisher={publisher}] -- {why}.", file=sys.stderr)
+    if not catalog_publisher or not year:
+        missing = ", ".join(k for k, v in (("publisher", catalog_publisher), ("year", year)) if not v)
         print(f"  ! {args.ident}: no {missing} in master_directories.csv "
-              f"(publisher={publisher or 'BLANK -> defaults to trow'}, year={year or 'BLANK'}). "
+              f"(publisher={catalog_publisher or 'BLANK'}, year={year or 'BLANK'}). "
               f"The model was trained with a [publisher=X; year=Y] tag, so pass --publisher/--year "
               f"if you know them -- a wrong tag is a silent quality loss, not an error. The 'trow' "
               f"default matches harvest_occupations.py, but on an 1830s Brooklyn volume it is "
-              f"simply the wrong publisher.", file=sys.stderr)
+              f"simply the wrong publisher. `python3 data_prep/backfill_publisher.py` fills many "
+              f"blanks from the catalog's own title/notes.", file=sys.stderr)
 
     idx = item.index
     if args.leaves:
@@ -589,7 +646,7 @@ def main(argv=None) -> int:
     else:
         leaves = [i for i, e in enumerate(idx) if e[1] - e[0] > args.min_chars]
     print(f"{args.ident}: {len(idx)} leaves, {len(leaves)} with text "
-          f"(>{args.min_chars} chars) | publisher={publisher or 'trow'} year={year or '?'}",
+          f"(>{args.min_chars} chars) | publisher={publisher} year={year or '?'}",
           file=sys.stderr)
 
     if not args.range_only:

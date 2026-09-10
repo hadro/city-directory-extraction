@@ -101,9 +101,11 @@ MIN_ALPHA_LINES = 15
 # that do not exist yet.
 MIN_CONFIDENCE = 0.0
 
-# A sortable surname: an ANCHORED capital plus two lowercase. See first_letter() for why each
-# half is load-bearing. Credit: sub-agent-csv-work / detect_listing_bounds.py.
-_SORT_KEY_RE = re.compile(r"([A-Za-z])[a-z]{2,}")
+# A sortable surname: an ANCHORED capital, then EITHER two lowercase (Kramer) OR an apostrophe
+# and a capital (O'Brien, D'Ambra). Both apostrophe characters, because this corpus is 4:1 curly.
+# See first_letter() for why every piece is load-bearing.
+# Credit: sub-agent-csv-work / detect_listing_bounds.py, extended here for `’`.
+_SORT_KEY_RE = re.compile(r"([A-Za-z])(?:[a-z]{2,}|['’][A-Z][a-z])")
 
 
 def first_letter(raw_line: str):
@@ -136,9 +138,20 @@ def first_letter(raw_line: str):
         Wm elk h 149% Division av         ditto mark the OCR dropped -> must abstain
 
     Those last two are the same failure as the ditto in a different costume, and they were the
-    largest buckets (852 M, 643 W). The apostrophe-surname worry that argued against `{2,}`
-    (O'Brien, O'Connor) does not appear in this volume's data at all -- every apostrophe hit was
-    an abbreviated given name.
+    largest buckets (852 M, 643 W).
+
+    **The apostrophe alternative is NOT a special case -- it is the same distinction.** I first
+    concluded that apostrophe surnames "do not appear in this volume's data at all", having looked
+    at 5 of 321 apostrophe hits and found them all abbreviations. Wrong: 1906BPL has 54 surnames
+    of the `O'Brien` / `D'Ambra` shape, and a bare `[a-z]{2,}` abstains on every one.
+    `sub-agent-csv-work` caught it by writing the assertion instead of trusting my sentence.
+
+    What separates them is capitalisation after the apostrophe: a SURNAME capitalises (`D'Ambra`),
+    an abbreviated GIVEN name does not (`H'y`, `W'm`). That is the same rule the H'y finding rests
+    on, not an exception to it.
+
+    Both apostrophe characters are in the class because **this corpus is 4:1 curly** -- 44 of those
+    54 use `’`, so a straight-quote-only fix catches 10 of 54 and looks like it works.
     """
     m = _SORT_KEY_RE.match(raw_line or "")
     return m.group(1).upper() if m else None
@@ -228,12 +241,18 @@ def cut_ranges(all_leaves, kept):
 def _self_test() -> int:
     assert first_letter("Kramer Aaron furs 56 Bond") == "K"
     assert first_letter("MacDonald John grocer") == "M"
+    # apostrophe SURNAMES vote (capital after the apostrophe); this corpus is 4:1 curly
+    assert first_letter("O'Brien Patrick h 12 Pine") == "O"
+    assert first_letter("D\u2019Ambra Barthole barber 766 3d av") == "D"
+    assert first_letter("D'Agrosa Vincent Interpreter h 263 Gold") == "D"
     # every ditto form in this corpus must ABSTAIN, not vote its given name
     for ditto in ('" Julius r 131 Av A', "44 Geo cigars 611 Hart", "“ Anna wid Louis h 622 Marcy",
                   "*' A grocer 989 Myrtle av", "| 'Shis state, entrusted to their", ""):
         assert first_letter(ditto) is None, ditto
     # a dropped ditto leaves an abbreviated GIVEN name behind -- same failure, no punctuation
-    for given in ("H'y grocer 213 Prince", "Wm elk h 149% Division av"):
+    # ...while abbreviated GIVEN names do NOT capitalise after it, so they still abstain
+    for given in ("H'y grocer 213 Prince", "Wm elk h 149% Division av",
+                  "H\u2019y drugs 1872 Fulton h 970 Herkimer", "W\u2019m bkpr h 12 Pine"):
         assert first_letter(given) is None, given
     # ALL-CAPS banners and initials-first ad copy carry no sort key either
     for ad in ("MAIN OFFICE, 1232 Fulton St.", "W. E. Murdock, Boston.", "ALL CAPS HEADING"):

@@ -1626,19 +1626,79 @@ this Mac (51× slower), so this says nothing about the release candidate. And 19
 training at all. The publisher A/B found the tag inert on both 2B and 4B, so it is recorded as a
 caveat, not a confound.
 
+### Ditto marks DO NOT GENERALIZE across volumes — the correction that matters most here
+
+**Asked whether the normalizer would hold up on other volumes' OCR errors, I checked, and the
+answer was no.** The first version admitted punctuation on shape, reasoning that a directory line
+never legitimately begins with `**` or `“`. That was wrong in both directions.
+
+**Wrong direction 1 — over-firing.** Shape says nothing about whether a mark introduces an *entry*.
+On 1906BPL `“` is followed by a name on 98% of its lines; `—` on **27%** (`— ■ Telephone Call:`,
+`— Bay Ridge` are headings) and `*` on **43%**. Shape-only rewrote ~518 heading/junk lines as
+dittos.
+
+**Wrong direction 2 — and this is the dangerous one. The same glyph is a ditto in one volume and an
+OCR speck on a COMPLETE entry in another.** From the gold panel, which is a different OCR engine
+across 1786–1933:
+
+| volume | line | the mark is |
+|---|---|---|
+| 1906BPL | `«* Peter ironwkr h 1355 St Mark s av` | **ditto** — given name follows |
+| nyu | `« Douglas Charles. mer. 80 Elm` | **speck** — real surname follows |
+| nyu | `\| Devlin Jeremiah, clothier, 33 John` | **speck** |
+| nyu | `'Clark Bernard, liquors, 183 Varick` | **speck** |
+| polk1917 | `" Jno H r205 W141st` | **ditto** |
+
+Rewriting `'Clark Bernard` → `" Clark Bernard` marks a complete entry as a ditto, and then the
+cross-line pass **overwrites `Clark` with the previous line's surname**. A correct record becomes a
+confidently wrong one, silently, and it propagates through the carry.
+
+**The obvious repair does not work.** Looking the follower up in this repo's own name vocabularies
+(43,235 surnames, 2,739 given) is **ambiguous on 188 of the panel's 380 non-letter-leading gold
+rows (52%)**, because `Clark`, `Dick`, `Thomas`, `Henry` are both.
+
+**So the rule rests on the one property that IS volume-general: a ditto convention is
+high-frequency by construction.** It exists to save column inches, so a volume that uses one uses
+it a lot. A mark leading 0.02% of lines is not that volume's convention — it is noise or a speck.
+That single threshold rejects the NYU-style specks and the ambiguous tail at once, without having
+to classify either.
+
+**The trade is real and is NOT pure gain.** Tightening avoids ~518 wrong rewrites and gives up
+~1,258 correct ones (`'*`, `*'`, `4‘`, `”` are genuine dittos that miss on frequency), against +306
+newly-correct from speck stripping. That is the right side of an **asymmetric** bet — a missed
+ditto leaves the line exactly as the model already saw it, while a wrong rewrite corrupts a record
+*and* propagates — but it is a bet, and the review queue is how the give-up gets recovered per
+volume rather than guessed at globally.
+
+**Speck stripping is the safe half of the tail** (306 lines): `! 44 Philip meat` → `44 Philip meat`.
+It needs no judgement about the speck, because the mark *behind* it is one the volume already
+proved. That is exactly the inference the ambiguous tail does not support.
+
+**`--ditto-marks` closes the loop.** A human reads the review queue and confirms a mark; that
+bypasses the share floor for those tokens only. **It cannot override the follower ratio** — `—` at
+27% stays refused however firmly it is typed on the command line, because that ratio is a property
+of the data, not a judgement call.
+
+⚠️ **Calibrate on the whole volume.** The gates are shares, so a `--leaves` subset calibrates on its
+own sample: on full 1906BPL `"` is 1.25% and admitted, on a 21-leaf slice it is 0.42% and falls to
+review. Subset runs are for inspection; only the whole-volume run ships.
+
 ### 1906BPL RE-INGESTED 2026-09-10 — what changed, and what provably did not
 
-`data/1906BPL_lines.jsonl` was rebuilt with normalization on. **131,235 of 199,012 lines (65.9%)
-had their leading ditto rewritten to `"`**; `44` alone accounted for 42.2% of leading tokens and was
-the only digit form to clear the gate. The pre-normalization file is kept as
-`data/1906BPL_lines.prenorm.jsonl` — it is the provenance for everything in the table below, and is
-regenerable with `--no-ditto-normalize`.
+`data/1906BPL_lines.jsonl` was rebuilt with normalization on, then rebuilt again under the
+corrected rule above. Current state: **129,810 of 199,012 lines (65.2%) had their leading ditto
+rewritten to `"`**, 306 of them after a leading speck was stripped. Four marks were admitted —
+`44` (42.2% of leading tokens / 98% name-followed), `“` (22.2%/98%), `"` (1.2%/97%), `**`
+(0.6%/98%) — and 40 further candidates went to `results/ditto_review_1906BPL.tsv`. The
+pre-normalization file is kept as `data/1906BPL_lines.prenorm.jsonl` — it is the provenance for
+everything in the table below, and is regenerable with `--no-ditto-normalize`.
 
 **The re-ingest reproduced the documented pipeline stats exactly** — 1,240 leaves, 329,989 hOCR
 lines, 37,196 wrap-joins, 292,793 candidates, **199,012 kept (68.0%)**, same drop reasons. That is
 the designed result of normalizing at emission: the filters never saw the change. Verified
 row-by-row against the old file: 0 misalignments, 0 rows where the preserved original differs from
-the old line, **0 rows where anything but the leading token changed.**
+the old line, **0 rows where anything but the leading token changed** (129,504 plain mark swaps +
+306 speck-strip-then-swap, and nothing else).
 
 **An artifact derived from the old file was produced from input the model parses measurably
 worse.** That does not make those numbers wrong — they were correctly measured on what was fed in —
@@ -1704,19 +1764,23 @@ Two behaviour changes from the same commit, noted so they do not read as bugs:
   parked deliberately: two sessions were editing both files in the same hour, and coupling them
   then traded a ~15-line duplication for an invisible shared breakage surface. Revisit when both
   are still; the shared half is `leaf_letters` + `blocks`/`analyse`, pure over the JSONL.
-- ~~IMPLEMENT the `44` normalization in `ia_volume_to_jsonl.py`~~ **DONE 2026-09-10** — on by
-  default, `--no-ditto-normalize` to disable. **The glyph set is not hard-coded: it is derived per
-  volume.** Punctuation forms (`**`, `“`, `"`, `*`, `—`) are admitted on shape, because a
-  directory line never legitimately begins with one. **Digit forms must clear a >5% leading-token
-  frequency gate**, which is the only thing separating an OCR'd ditto from a house number — what
-  proves `44` is a ditto in 1906BPL is that it leads 42% of lines, and no volume has 42% of its
-  entries at house number 44. Verified on leaves 60–80: 2,371/3,551 lines normalized, `44` at
-  45.5% cleared the gate, and zero rows had anything but the leading token change. The gate
-  correctly fires on nothing for micro13, where `44` never leads a line.
+- ~~IMPLEMENT the `44` normalization in `ia_volume_to_jsonl.py`~~ **DONE 2026-09-10**, then
+  **CORRECTED the same day — see "Ditto marks do not generalize" below.** The first version
+  admitted punctuation on shape and was wrong in both directions. Current rule: a mark is admitted
+  only if its **share of leading tokens** clears a floor (5% for digit forms, 0.5% for punctuation)
+  **and** ≥70% of its lines are followed by a name-shaped token. On 1906BPL that admits exactly
+  `44`, `“`, `"`, `**` and sends 40 other candidates to a review queue.
   **Known gap:** Trow glues its ditto to the given name (`-Michl`, no space), so it is not a
   separate token and nothing fires on it. Safe (the line passes through untouched) but a Trow
   volume gets no benefit. Splitting it needs a rule that does not also split real hyphenated
   surnames — a different measurement than the one that justified this.
+- **Work the ditto review queue** (`results/ditto_review_1906BPL.tsv`, and `--ditto-review PATH`
+  on any volume). 40 candidates, sorted, each with count / share / name-follower ratio and a sample
+  line. The strong ones are obvious on sight — `'*` (316 lines, 99% name-followed,
+  `'* Peroxide & Chemical Co 356 13th`), `*'` (279, 98%), `4‘` (133, 99%), `”` (91, 92%) — and
+  promoting them is `--ditto-marks "'*,*'"`. That is worth ~800 lines on this volume. **Promote per
+  volume and record which volume it was decided for**; the whole point of the finding below is that
+  a mark's meaning is not portable.
 - **`alpha_run_filter --apply` breaks ditto expansion and must not be used before it.** A ditto
   whose parent surname was cut has nothing to point at. The filter should mark, not drop, if it
   runs upstream of `postprocess/resolve_dittos.py`. (HANDOFF already concludes `--apply` does not

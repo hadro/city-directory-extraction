@@ -468,27 +468,118 @@ EMPTY_RECORD = {"name": "", "is_business": False, "spouse_name": "", "race_desig
 # visible rather than buried. On micro_IABROOKLYN_0013 (tesseract) `44` never leads a line at all
 # and the gate correctly fires on nothing.
 #
-# Punctuation forms need no gate: a directory line never legitimately begins with `**` or `“`.
-DITTO_PUNCT = re.compile(r"^(?:[\"“”'‘’]+|\*+|['’]\*|\*['’]|〃|—)$")
-DITTO_DIGIT = re.compile(r"^\d{1,3}['‘]?$")
-DITTO_FREQ_GATE = 0.05          # a leading token on >5% of lines is not a house number
+# ⚠️ AN EARLIER VERSION ADMITTED PUNCTUATION ON SHAPE ALONE, arguing that a directory line never
+# legitimately begins with `**` or `“`. **That was wrong in BOTH directions and the gold panel
+# proves it.** Corrected 2026-09-10 after the tail was actually looked at.
+#
+# WRONG DIRECTION 1 -- over-firing. Shape says nothing about whether a mark introduces an ENTRY.
+# On 1906BPL, `“` is followed by a name on 98% of its lines; `—` on 27% (`— ■ Telephone Call:`,
+# `— Bay Ridge` are headings) and `*` on 43%. Shape-only rewrote ~430 heading/junk lines as dittos.
+#
+# WRONG DIRECTION 2 -- and this is the dangerous one. **The same glyph is a ditto in one volume and
+# an OCR speck on a COMPLETE entry in another.** From the gold panel, which is a different OCR
+# engine across 1786-1933:
+#
+#     1906BPL   `«* Peter ironwkr h 1355 St Mark s av`      ditto  (given name follows)
+#     nyu       `« Douglas Charles. mer. 80 Elm`            SPECK  (surname follows)
+#     nyu       `| Devlin Jeremiah, clothier, 33 John`      SPECK
+#     nyu       `'Clark Bernard, liquors, 183 Varick`       SPECK
+#     polk1917  `" Jno H r205 W141st`                       ditto
+#
+# Rewriting `'Clark Bernard` to `" Clark Bernard` marks a complete entry as a ditto, and then the
+# cross-line pass in postprocess/resolve_dittos.py OVERWRITES `Clark` with the previous line's
+# surname. A correct record becomes a confidently wrong one, silently, at scale.
+#
+# The obvious repair -- look the follower up in the repo's name vocabularies -- does not work
+# either: on the panel's 380 non-letter-leading gold rows it is AMBIGUOUS on 188 (52%), because
+# `Clark`, `Dick`, `Thomas`, `Henry` are both surnames and given names.
+#
+# SO THE RULE IS DELIBERATELY CONSERVATIVE, and rests on the one property that IS volume-general:
+# **a ditto convention is high-frequency by construction.** It exists to save column inches, so a
+# volume that uses one uses it on a large share of lines. A mark leading 0.02% of lines is not that
+# volume's convention -- it is OCR noise or a speck. That single threshold rejects the NYU-style
+# specks and the ambiguous long tail at once, without needing to classify either.
+#
+# Measured separation on 1906BPL (share of lines / fraction followed by a name-shaped token):
+#
+#     44  42.24% 98%  ADMIT      *    0.21% 43%  review      —   0.13% 27%  review
+#     “   22.22% 98%  ADMIT      '*   0.16% 99%  review      ‘   0.10% 84%  review
+#     "    1.25% 97%  ADMIT      *'   0.14% 98%  review      ”   0.05% 92%  review
+#     **   0.61% 98%  ADMIT      4    0.70% 62%  review      .   0.04% 14%  review
+#
+# THE TRADE IS REAL AND IS NOT PURE GAIN: tightening avoids ~430 wrong rewrites and also gives up
+# ~900 correct ones (`'*`, `*'`, `4‘`, `”` are genuine dittos that miss on frequency). That is the
+# right side of an asymmetric bet -- a missed ditto leaves the line exactly as the model saw it
+# before, while a wrong rewrite corrupts a record AND propagates through the surname carry -- but
+# it is a bet, not a free lunch. The near-misses go to the review queue rather than being lost.
+DITTO_SHAPE = re.compile(r"^(?:[^\w\s]+|\d{1,3}[^\w\s]?|[^\w\s]?\d{1,3})$")
+NAME_FOLLOWER = re.compile(r"^(?:[A-Z][a-z’'.]*|[A-Z])$")
+DITTO_FREQ_GATE = 0.05        # digit forms: a leading token on >5% of lines is not a house number
+DITTO_MIN_SHARE = 0.005       # punctuation forms: below this it is not a volume's convention
+DITTO_MIN_FOLLOWER = 0.70     # and it must actually introduce entries, not headings
 
 
-def ditto_lead_candidates(texts, gate=DITTO_FREQ_GATE):
-    """Which leading tokens in THIS volume are ditto marks. Returns (punct_set, digit_set).
+def ditto_lead_candidates(texts, gate=DITTO_FREQ_GATE, min_share=DITTO_MIN_SHARE,
+                          min_follower=DITTO_MIN_FOLLOWER, confirmed=()):
+    """Which leading tokens in THIS volume are ditto marks.
 
-    Punctuation forms are admitted on shape. Digit forms must additionally clear the frequency
-    gate, because that is the only thing separating an OCR'd ditto from a house number.
+    Returns `(admitted, review, stats, n)`. `review` is every token that looks like a mark but
+    missed a threshold -- the queue for later refinement, so a near-miss is deferred rather than
+    silently dropped. `stats[token] = (count, share, follower_ratio)`.
+
+    ⚠️ CALIBRATE ON THE WHOLE VOLUME. The gates are shares, so a `--leaves` subset calibrates on
+    its own sample and admits a different set. Measured: on the full 1906BPL `"` is 1.25% and is
+    admitted; on a 21-leaf slice it is 0.42% and falls to review. Neither answer is a bug -- the
+    slice genuinely has less evidence -- but only the whole-volume run is the one to ship. A
+    subset run is for inspection.
     """
-    counts, n = {}, 0
+    counts, follow, n = {}, {}, 0
     for t in texts:
         toks = t.split()
-        if toks:
-            counts[toks[0]] = counts.get(toks[0], 0) + 1
-            n += 1
-    punct = {w for w in counts if DITTO_PUNCT.match(w)}
-    digit = {w for w in counts if DITTO_DIGIT.match(w) and counts[w] / max(n, 1) > gate}
-    return punct, digit, counts, n
+        if not toks:
+            continue
+        n += 1
+        w = toks[0]
+        counts[w] = counts.get(w, 0) + 1
+        if len(toks) > 1 and NAME_FOLLOWER.match(toks[1]):
+            follow[w] = follow.get(w, 0) + 1
+    admitted, review, stats = set(), {}, {}
+    for w, c in counts.items():
+        if not DITTO_SHAPE.match(w):
+            continue
+        share, ratio = c / max(n, 1), follow.get(w, 0) / c
+        stats[w] = (c, share, ratio)
+        floor = gate if any(ch.isdigit() for ch in w) else min_share
+        # `confirmed` is a human's verdict from a previous run's review queue. It bypasses the
+        # SHARE floor (the protection against rare specks, which a person has now ruled out for
+        # this volume) but NOT the follower ratio, because that is a property of the data rather
+        # than a judgement call -- nobody should be able to promote `—` at 27% by hand.
+        if (share > floor or w in confirmed) and ratio >= min_follower:
+            admitted.add(w)
+        else:
+            review[w] = (c, share, ratio)
+    return admitted, review, stats, n
+
+
+def strip_ditto_speck(text, marks):
+    """Drop a leading OCR speck when the REAL ditto mark sits right behind it.
+
+        `! 44 Philip meat Wallabout mkt h 687 Quincy`  ->  `44 Philip meat ...`
+        `| 44 Sam'l pictures 1092 Bedford av`          ->  `44 Sam'l pictures ...`
+
+    1,021 lines of 1906BPL (0.51%) look like this, and the leading-token rule cannot see any of
+    them: position 1 is the speck, position 2 is the mark. They were previously the worst case in
+    the file -- no normalization AND two junk tokens into the model.
+
+    This is the SAFE half of the tail, and only because it needs no judgement about the speck
+    itself: the mark behind it is one the volume has already proven, so the speck is whatever is
+    in front of a known ditto. That is exactly the inference the ambiguous tail does not support.
+    """
+    toks = text.split(None, 2)
+    if len(toks) >= 2 and toks[1] in marks and DITTO_SHAPE.match(toks[0]) \
+            and toks[0] not in marks and len(toks[0]) <= 2:
+        return " ".join(toks[1:])
+    return text
 
 
 def normalize_ditto_lead(text, marks):
@@ -511,7 +602,7 @@ def normalize_ditto_lead(text, marks):
 
 
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
-          normalize_dittos=True):
+          normalize_dittos=True, confirmed_marks=()):
     """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
 
     Kept lines are buffered rather than streamed so the ditto-lead frequency gate can see the
@@ -563,13 +654,28 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
 
     marks, ditto_report = set(), None
     if normalize_dittos:
-        punct, digit, counts, total = ditto_lead_candidates(t for t, _, _, _ in buffered)
-        marks = punct | digit
-        ditto_report = {"punct": sorted(punct), "digit": sorted(digit), "applied": 0,
-                        "shares": {w: counts[w] / max(total, 1) for w in sorted(marks)}}
+        marks, review, mark_stats, _total = ditto_lead_candidates(
+            (t for t, _, _, _ in buffered), confirmed=confirmed_marks)
+        ditto_report = {"marks": sorted(marks), "applied": 0, "despecked": 0,
+                        "stats": {w: mark_stats[w] for w in sorted(marks)},
+                        "review": dict(sorted(review.items(), key=lambda kv: -kv[1][0])[:40])}
+        # one real sample per review token, so a human can judge ditto-vs-speck by reading
+        samples = {}
+        for text, _, _, _ in buffered:
+            tok = text.split()[0] if text.split() else ""
+            if tok in ditto_report["review"] and tok not in samples:
+                samples[tok] = text[:90]
+        ditto_report["samples"] = samples
 
     for text, leaf, box, dims in buffered:
-        out = normalize_ditto_lead(text, marks) if marks else text
+        out = text
+        if marks:
+            # De-speck FIRST: `! 44 Philip ...` only becomes normalizable once the speck is gone.
+            out = strip_ditto_speck(out, marks)
+            despecked = out != text
+            out = normalize_ditto_lead(out, marks)
+            if despecked:
+                ditto_report["despecked"] += 1
         ctx = {
             "publisher": publisher,                  # already a trained token (tag_publisher)
             "directory_year": year or "",
@@ -664,27 +770,70 @@ def _self_test() -> int:
     # A volume where `44` leads 40% of lines: it is the ditto, and the gate says so.
     dense = (["44 Wm elk h 86 Laf av"] * 40 + ["** Louis clothing 288 Atlantic ay"] * 5
              + [f"Ackerman{i} lab h 1 Main" for i in range(55)])
-    punct, digit, _, _ = ditto_lead_candidates(dense)
-    assert digit == {"44"}, digit
-    assert "**" in punct, punct
-    assert normalize_ditto_lead("44 Wm elk h 86 Laf av", punct | digit) == '" Wm elk h 86 Laf av'
-    assert normalize_ditto_lead("** Louis clothing 288 Atlantic ay", punct | digit) == \
+    marks, review, _, _ = ditto_lead_candidates(dense)
+    assert marks == {"44", "**"}, marks
+    assert normalize_ditto_lead("44 Wm elk h 86 Laf av", marks) == '" Wm elk h 86 Laf av'
+    assert normalize_ditto_lead("** Louis clothing 288 Atlantic ay", marks) == \
         '" Louis clothing 288 Atlantic ay'
     # A volume where 44 is a house number: it is RARE, so the gate must not fire. Without the
     # frequency test this line would silently become a ditto and lose its address.
     sparse = ["44 Broadway grocer"] + [f"Ackerman{i} lab h 1 Main" for i in range(99)]
-    _, digit_sparse, _, _ = ditto_lead_candidates(sparse)
-    assert digit_sparse == set(), digit_sparse
+    marks_sparse, _, _, _ = ditto_lead_candidates(sparse)
+    assert marks_sparse == set(), marks_sparse
     assert normalize_ditto_lead("44 Broadway grocer", set()) == "44 Broadway grocer"
     # LEADING token only -- a 44 inside the line is a house number in every volume
     assert normalize_ditto_lead("Ackerman Jos lab h 44 Main", {"44"}) == "Ackerman Jos lab h 44 Main"
     # a real surname is never a mark, whatever the gate decided
     assert normalize_ditto_lead("Ackerman Jos lab h 1 Main", {"44"}) == "Ackerman Jos lab h 1 Main"
     # micro13 (tesseract) has NO 44-lead lines at all; the gate must fire on nothing
-    _, digit_micro, _, _ = ditto_lead_candidates([f"Brady John{i}, tavern Jackson" for i in range(50)])
-    assert digit_micro == set(), digit_micro
+    marks_micro, _, _, _ = ditto_lead_candidates([f"Brady John{i}, tavern Jackson" for i in range(50)])
+    assert marks_micro == set(), marks_micro
     # a bare mark with nothing after it does not crash
     assert normalize_ditto_lead('44', {"44"}) == '"'
+
+    # ---- the NAME-FOLLOWER test, which is what stops a heading mark being read as a ditto.
+    # `—` leads 254 lines of 1906BPL and only 27% introduce an entry (`— Bay Ridge` is a section
+    # heading). Shape alone admitted it; the ratio must not.
+    headings = ["— Bay Ridge"] * 3 + ["— ■ Telephone Call:"] * 12 + \
+               [f"Ackerman{i} lab h 1 Main" for i in range(85)]
+    m_h, rev_h, _, _ = ditto_lead_candidates(headings)
+    assert "—" not in m_h, "a mark that mostly introduces headings is not a ditto"
+    assert "—" in rev_h, "and it belongs in the review queue, not silently dropped"
+
+    # ---- THE CASE THE GOLD PANEL TAUGHT: the same glyph is a ditto in one volume and an OCR
+    # speck on a COMPLETE entry in another. These are real nyu_eval lines. Rewriting them would
+    # mark a full entry as a ditto and the surname carry would then overwrite `Clark`/`Devlin`.
+    nyu = (["'Clark Bernard, liquors, 183 Varick, h. 183 Varick",
+            "| Devlin Jeremiah, clothier, 33 John",
+            "« Douglas Charles. mer. 80 Elm"]
+           + [f"Ackerman{i} lab h 1 Main" for i in range(300)])
+    m_nyu, _, _, _ = ditto_lead_candidates(nyu)
+    assert m_nyu == set(), f"rare specks must never be admitted as marks: {m_nyu}"
+
+    # ---- speck stripping: safe ONLY because the mark behind it is already proven for the volume
+    assert strip_ditto_speck("! 44 Philip meat Wallabout mkt", {"44"}) == "44 Philip meat Wallabout mkt"
+    assert strip_ditto_speck("| 44 Sam'l pictures 1092 Bedford av", {"44"}) == \
+        "44 Sam'l pictures 1092 Bedford av"
+    # nothing behind the speck that is a known mark -> untouched
+    assert strip_ditto_speck("| Devlin Jeremiah, clothier", {"44"}) == "| Devlin Jeremiah, clothier"
+    # the speck must be short and mark-shaped; a real leading word is never stripped
+    assert strip_ditto_speck("No. 44 Philip meat", {"44"}) == "No. 44 Philip meat"
+    # and de-specking then normalizing composes to the intended end state
+    assert normalize_ditto_lead(strip_ditto_speck("! 44 Philip meat", {"44"}), {"44"}) == \
+        '" Philip meat'
+
+    # ---- --ditto-marks: a human promoting a mark from the review queue. `'*` is 0.16% of
+    # 1906BPL (below the share floor) but 99% name-followed, so it is a real ditto the gate
+    # gives up. Confirming it must work...
+    rare = (["'* Peroxide & Chemical Co 356 13th"]                    # 1 of 401 = 0.25%
+            + [f"Ackerman{i} lab h 1 Main" for i in range(400)])
+    assert "'*" not in ditto_lead_candidates(rare)[0], "rare mark is not admitted by default"
+    assert "'*" in ditto_lead_candidates(rare, confirmed=("'*",))[0], "a human can confirm it"
+    # ...but confirming must NOT be able to override the follower ratio, which is a property of
+    # the data rather than a judgement. `—` introduces headings 73% of the time on 1906BPL.
+    heads = ["— ■ Telephone Call:"] * 30 + [f"Ackerman{i} lab h 1 Main" for i in range(70)]
+    assert "—" not in ditto_lead_candidates(heads, confirmed=("—",))[0], \
+        "a heading mark must not be promotable by hand"
 
     print("self-test OK", file=sys.stderr)
     return 0
@@ -721,6 +870,15 @@ def main(argv=None) -> int:
                          "occupation into the name (results/ab_ditto44_1906BPL_2b100k*). Digit "
                          "forms must clear a >5%% leading-token frequency gate, so a real house "
                          "number is never touched. Originals go to context.raw_line_original.")
+    ap.add_argument("--ditto-marks", default=None,
+                    help="comma-separated marks a HUMAN confirmed from a previous run's "
+                         "--ditto-review queue. Bypasses the share floor for those tokens only; "
+                         "the name-follower ratio still applies, so a heading mark cannot be "
+                         "promoted by hand. Record the volume it was decided for.")
+    ap.add_argument("--ditto-review", default=None,
+                    help="write the mark-shaped tokens that were NOT rewritten, with counts, "
+                         "share, name-follower ratio and a sample line each. The queue for "
+                         "refining coverage later without guessing at glyphs.")
     ap.add_argument("--dump-dropped", default=None,
                     help="write every rejected line with its reason. READ THIS before trusting a run.")
     ap.add_argument("--range-only", action="store_true",
@@ -783,7 +941,8 @@ def main(argv=None) -> int:
     with open(out_path, "w", encoding="utf-8") as out_fh:
         stats, reasons, ad_scores, ditto_report = sweep(
             item, publisher, year, leaves, not args.no_geometry, args.drop_off_margin,
-            not args.no_join, dropped_fh, out_fh, not args.no_ditto_normalize)
+            not args.no_join, dropped_fh, out_fh, not args.no_ditto_normalize,
+            confirmed_marks=tuple(args.ditto_marks.split(",")) if args.ditto_marks else ())
     if dropped_fh:
         dropped_fh.close()
 
@@ -795,19 +954,33 @@ def main(argv=None) -> int:
     for why, n in sorted(reasons.items(), key=lambda kv: -kv[1]):
         print(f"    dropped {n:>7,}  {why}", file=sys.stderr)
     if ditto_report is not None:
-        marks = ditto_report["punct"] + ditto_report["digit"]
-        if marks:
-            shares = ", ".join(f"{w!r} {ditto_report['shares'][w]:.1%}" for w in marks)
+        if ditto_report["marks"]:
+            adm = ", ".join(f"{w!r} {ditto_report['stats'][w][1]:.1%}/{ditto_report['stats'][w][2]:.0%}"
+                            for w in ditto_report["marks"])
             print(f"  ditto-lead normalized -> '\"' on {ditto_report['applied']:,} lines "
-                  f"({ditto_report['applied']/max(stats['kept'],1):.1%}); marks: {shares}",
+                  f"({ditto_report['applied']/max(stats['kept'],1):.1%}), of which "
+                  f"{ditto_report['despecked']:,} needed a leading speck stripped first",
                   file=sys.stderr)
-            if ditto_report["digit"]:
-                print(f"    digit forms {ditto_report['digit']} cleared the "
-                      f">{DITTO_FREQ_GATE:.0%} frequency gate -- they are too common to be house "
-                      f"numbers. Originals kept in context.raw_line_original.", file=sys.stderr)
+            print(f"    admitted (share/name-follower): {adm}", file=sys.stderr)
+            print(f"    originals kept in context.raw_line_original", file=sys.stderr)
         else:
-            print("  ditto-lead normalization: no marks cleared the gate (nothing changed)",
+            print("  ditto-lead normalization: no mark cleared the gates (nothing changed)",
                   file=sys.stderr)
+        if args.ditto_review and ditto_report["review"]:
+            with open(args.ditto_review, "w", encoding="utf-8") as fh:
+                fh.write("token\tlines\tshare\tname_follower\tsample_line\n")
+                for w, (c, s, r) in ditto_report["review"].items():
+                    fh.write(f"{w}\t{c}\t{s:.4f}\t{r:.2f}\t"
+                             f"{ditto_report['samples'].get(w,'')}\n")
+            print(f"  ditto review queue -> {args.ditto_review}", file=sys.stderr)
+        if ditto_report["review"]:
+            top = list(ditto_report["review"].items())[:6]
+            shown = ", ".join(f"{w!r} {c:,} ({s:.2%}/{r:.0%})" for w, (c, s, r) in top)
+            print(f"  ⚠ REVIEW QUEUE — {len(ditto_report['review'])} mark-shaped tokens missed a "
+                  f"threshold and were NOT rewritten:\n      {shown}", file=sys.stderr)
+            print(f"      Deliberate: a ditto convention is high-frequency, so a rare mark is more "
+                  f"likely an OCR speck on a complete entry (see the module comment). "
+                  f"--ditto-review PATH dumps all of them with samples.", file=sys.stderr)
     if ad_scores:
         worst = sorted(ad_scores, key=lambda kv: -kv[1])[:8]
         print(f"  highest ad-scores (leaf, big%+wide%): {worst}", file=sys.stderr)

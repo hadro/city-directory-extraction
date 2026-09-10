@@ -51,7 +51,7 @@ entry detector, and it happily passes advertising copy ("Seventh Ave. and Union 
 **Geometry** (new here): the hOCR carries boxes, and historical-ocr-eval established they are
 trustworthy for this corpus (`under% 0.0`, IoU 0.724). Display ads and section headings are set
 in larger type and run wider than body entries, so per page we drop lines taller than 2x the
-page's own median line height (`bigtype`) or wider than 2.5x its median line width (`banner`).
+page's own median line height (`bigtype`) or wider than 1.5x its median line width (`banner`).
 Both are judged against the page's own medians, so no column count is needed and the same
 thresholds work on an 1786 single-column folio and a 1933 six-column Polk.
 
@@ -113,8 +113,13 @@ _PAGE_NUM = re.compile(r"^\W*\d{1,4}\W*$")
 _HAS_LOWER = re.compile(r"[a-z]")
 
 # --- geometry thresholds (find_ad_pages.py) ---------------------------------------------------
-BIG_RATIO = 2.0          # a line this many times the median height reads as display type
-WIDE_RATIO = 1.5         # a line this many times the COLUMN width crosses columns
+BIG_RATIO = 2.0          # a line this many times the page's median line HEIGHT is display type
+# ...and this many times the page's median line WIDTH is a banner. Not a column width -- no column
+# width is computed anywhere here, and page_geometry() explains at length why column detection was
+# tried and removed. On a listing page a body line spans one column, so the median line width IS
+# about one column wide in practice, which is what makes the threshold mean "crosses columns"
+# without ever needing to find one.
+WIDE_RATIO = 1.5
 MIN_CHARS_LEAF = 200     # below this a leaf is a blank verso or a plate, not a listing page
 
 

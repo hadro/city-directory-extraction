@@ -13,6 +13,23 @@ Deeper context: [HANDOFF.md](HANDOFF.md) (long, start at "RESUME HERE"),
 18-volume board, `qwen-v5` leads primed-pub Gemini by **+0.053 macro / +11.1 whole-row EM**. That
 was true since v4; nobody knew because three scoring bugs were suppressing it.
 
+## ⚠️ If you are about to cite a 1906BPL quality number, read this first (2026-09-10)
+
+**`entry_rate.py`'s 10.4% not-real-entry figure for 1906 is STALE**, along with
+`data/1906BPL_sample500_eval.jsonl` and its predictions. All three were built before ditto
+normalization landed. The volume has been re-ingested; those three were not regenerated.
+
+The cause is worth knowing even if you never touch that volume: **`44` is ABBYY's reading of the
+ditto mark `"`, it leads 42% of the lines in this book, and the generator never emitted it.** Fed
+the raw form the model runs the `name` field too far and swallows the occupation
+(`name='44 Wm elk'`, occupation empty); fed `"` it splits correctly and *also* applies the
+contract's OCR fix (`elk`→`clk`). n=500 paired, McNemar exact **p=0.0010**. Ingest now normalizes
+it, gated by per-volume frequency so a real house number is never rewritten.
+
+Re-deriving the stale artifacts is ~15 min on the 2B. **Do not compare the new figure to 10.4%** —
+different input, not a better model. Full record: HANDOFF, "DITTO RESOLUTION" and "1906BPL
+RE-INGESTED".
+
 ## ⚡ CAPACITY WAS THE CONSTRAINT. The release candidate is `4b-100k`, not v6.
 
 **Scale runs completed 2026-09-09, and they overturned the previous conclusion.** Every figure

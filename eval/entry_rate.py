@@ -11,6 +11,17 @@ advertising, prose or page furniture turned into people.
                                --preds data/preds_2b-100k_1906BPL_sample500.txt
     python3 eval/entry_rate.py --self-test
 
+⚠️ THE 1906 FIGURE (10.4% not-real) IS STALE AS OF 2026-09-10, and the two files in the example
+above are the reason. Both were built from `1906BPL_lines.jsonl` BEFORE ditto normalization landed
+in `ia_volume_to_jsonl.py`, so 105 of that sample's 500 rows carry a raw `44` -- a leading token the
+model parses measurably worse (n=500 paired, McNemar p=0.0010: it swallows the occupation into the
+name). The volume was re-ingested; those two files were not regenerated.
+
+The number was correctly measured on what was fed in. It is simply **not comparable** to anything
+scored after today, and re-measuring is expected to improve it. Re-sample, re-predict, re-run --
+and do NOT report the new figure against 10.4% as if it were the same measurement. See HANDOFF,
+"1906BPL RE-INGESTED".
+
 Why a separate instrument
 -------------------------
 There is no gold for a whole volume, so volume-scale quality cannot be scored with

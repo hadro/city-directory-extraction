@@ -25,6 +25,15 @@ then release to HF.
 > lines. See **WHOLE-VOLUME EXTRACTION** below — especially that **the model never refuses**, so
 > any non-entry surviving the filter becomes a fabricated person in the output.
 >
+> **DITTO RESOLUTION exists, and 1906BPL was RE-INGESTED (2026-09-10, branch `ditto-resolution`).**
+> 67.3% of that volume's lines are ditto-lead, so this decides the `name` field for two thirds of
+> it. `postprocess/resolve_dittos.py` expands them downstream (the model emits them verbatim by
+> contract — resolving in the model would burn the panel). Separately, the OCR'd ditto `44` was
+> measured to make the model swallow the occupation into the name (n=500 paired, **p=0.0010**), so
+> `ia_volume_to_jsonl.py` now rewrites it to `"` at ingest, gated by per-volume frequency.
+> **⚠️ `data/1906BPL_sample500_eval.jsonl`, its predictions, and `entry_rate.py`'s 10.4% figure all
+> predate that and are STALE** — see **1906BPL RE-INGESTED** below before citing them.
+>
 > **(historical) CURRENT STATE (2026-09-01): `v6` is the best model — 0.853 macro / 74.9% EM on the
 > 21-volume panel, +7.6 EM over v5-torch.** Every number printed below this box predates the
 > 2026-09-01 `parse_yaml` unescape fix and is UNDERSTATED; see the corrected table in the cycle-six
@@ -1615,8 +1624,51 @@ this Mac (51× slower), so this says nothing about the release candidate. And 19
 training at all. The publisher A/B found the tag inert on both 2B and 4B, so it is recorded as a
 caveat, not a confound.
 
+### ⚠️ 1906BPL RE-INGESTED 2026-09-10 — artifacts built before today are STALE
+
+`data/1906BPL_lines.jsonl` was rebuilt with normalization on. **131,235 of 199,012 lines (65.9%)
+had their leading ditto rewritten to `"`**; `44` alone accounted for 42.2% of leading tokens and was
+the only digit form to clear the gate. The pre-normalization file is kept as
+`data/1906BPL_lines.prenorm.jsonl` — it is the provenance for everything in the table below, and is
+regenerable with `--no-ditto-normalize`.
+
+**The re-ingest reproduced the documented pipeline stats exactly** — 1,240 leaves, 329,989 hOCR
+lines, 37,196 wrap-joins, 292,793 candidates, **199,012 kept (68.0%)**, same drop reasons. That is
+the designed result of normalizing at emission: the filters never saw the change. Verified
+row-by-row against the old file: 0 misalignments, 0 rows where the preserved original differs from
+the old line, **0 rows where anything but the leading token changed.**
+
+**An artifact derived from the old file was produced from input the model parses measurably
+worse.** That does not make those numbers wrong — they were correctly measured on what was fed in —
+but it makes them **not comparable** to anything produced after today.
+
+| artifact | status |
+|---|---|
+| `data/1906BPL_sample500_eval.jsonl` | **stale** — 105 of its 500 rows carry a raw `44` |
+| `data/preds_2b-100k_1906BPL_sample500.txt` | **stale** — predictions on un-normalized input |
+| `entry_rate.py`'s **10.4%** not-real-entry figure for 1906 | **stale, and expected to IMPROVE** |
+| the frozen 21-volume gold panel | **unaffected** — Surya on sampled images, zero `44` rows |
+| `results/ab_ditto44_1906BPL_2b100k*` | **correct as-is — do NOT regenerate.** The un-normalized arm *is* the experiment |
+
+Re-deriving the stale ones is cheap and should happen **before the next quality claim about this
+volume**: re-sample 500 rows, re-run `qwen_predict` (~15 min on the 2B locally), re-run
+`entry_rate.py`. Expect the not-real-entry rate to fall. **Do not compare the new figure to 10.4%
+as though it were the same measurement** — it is a different input, not a better model.
+
+Two behaviour changes from the same commit, noted so they do not read as bugs:
+
+- **The output JSONL now stays empty until the sweep ends.** Kept lines are buffered so the
+  frequency gate can see the whole volume before deciding. Watching the file grow is no longer a
+  progress indicator — watch the `... n/1240 leaves` lines on stderr.
+- **`context` gained an optional `raw_line_original`**, present only on changed lines (+7.6 MB on
+  this volume). Consumers that enumerate context keys should tolerate it.
+
 ### Open
 
+- **Re-derive the stale 1906BPL artifacts** listed in the table above, and re-measure
+  `entry_rate.py` on normalized input. This is the highest-value cheap follow-up: the current 10.4%
+  is the headline quality number for the clean tier and it was measured on input we have since
+  improved.
 - **Front-matter `--apply` decision** — read `data/1906BPL_alphacut.txt` first. Cut is 7.5%
   (1906BPL) / 9.8% (micro13). Measured against model output on micro13 above: do NOT apply there.
   Residual known-wrong: ditto-heavy leaves 26 and 76.

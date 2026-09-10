@@ -1236,6 +1236,30 @@ normal width, on a common left margin. It passes every shape test because it loo
    metadata" does NOT fix the tag — it swaps a wrong-but-trained token for an unseen one. Keep
    catalog truth and the tag separate; `tag_publisher()` does.
 
+### Two ways to get a confident wrong number about your own corpus
+
+Both happened on one regex in one afternoon, in opposite directions, and neither was caught by
+being careful. Recorded because the remedy is a concrete habit, not an attitude.
+
+**Under-sampling real data.** I checked 5 of 321 apostrophe-initial lines in 1906BPL, found every
+one an abbreviated given name (`H'y`, `W'm`), and wrote that apostrophe surnames "do not appear in
+this volume's data at all". There are 54 of them (`D'Ambra`, `D'Addio`, `O'Brien`), and the regex
+abstained on every one. The sample was real; it was just too small and I stopped at the first
+pattern that agreed with me.
+
+**Never touching real data.** `sub-agent-csv-work` then fixed it — and validated the fix with a
+probe that used a straight-quote-only pattern, so the probe shared the fix's defect and returned
+"11 lines affected", which was the correct count of the cases the broken regex could see. The
+`--self-test` they added at the same time made it worse rather than catching it: the assertions
+used `O'Brien` and `D'Ambra` typed with STRAIGHT quotes, because that is how a person types an
+example. **A test written from imagination confirms the imagined case.** This corpus is 4:1 curly
+(`’`), so the straight-only fix caught 10 of 54 and looked like it worked.
+
+**Remedy, both cases:** draw test cases from the corpus rather than from your head, and grep the
+corpus for the character class you just wrote before trusting it. `grep -c "[’']" ` would have
+caught this from either side in seconds. This is the same discipline as `--dump-dropped` and as
+keeping prediction files: look at what you excluded, not only at what you kept.
+
 ### The publisher tag appears not to matter much (2b-100k, n=52)
 
 `eval/publisher_ab.py` on hearne1852, six tags: **two distinct outputs, differing on one row of

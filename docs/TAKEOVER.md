@@ -13,22 +13,24 @@ Deeper context: [HANDOFF.md](HANDOFF.md) (long, start at "RESUME HERE"),
 18-volume board, `qwen-v5` leads primed-pub Gemini by **+0.053 macro / +11.1 whole-row EM**. That
 was true since v4; nobody knew because three scoring bugs were suppressing it.
 
-## ⚠️ If you are about to cite a 1906BPL quality number, read this first (2026-09-10)
+## ⚠️ `entry_rate.py`'s 10.4% is NOT a record-quality number (measured 2026-09-10)
 
-**`entry_rate.py`'s 10.4% not-real-entry figure for 1906 is STALE**, along with
-`data/1906BPL_sample500_eval.jsonl` and its predictions. All three were built before ditto
-normalization landed. The volume has been re-ingested; those three were not regenerated.
+Worth knowing even if you never touch 1906BPL. **`44` is ABBYY's reading of the ditto mark `"`, it
+leads 42% of the lines in that book, and the generator never emitted it.** Fed the raw form the
+model runs the `name` field too far and swallows the occupation (`name='44 Wm elk'`, occupation
+empty); fed `"` it splits correctly and *also* applies the contract's OCR fix (`elk`→`clk`). n=500
+paired, McNemar exact **p=0.0010**. Ingest now normalizes it, gated by per-volume frequency so a
+real house number is never rewritten.
 
-The cause is worth knowing even if you never touch that volume: **`44` is ABBYY's reading of the
-ditto mark `"`, it leads 42% of the lines in this book, and the generator never emitted it.** Fed
-the raw form the model runs the `name` field too far and swallows the occupation
-(`name='44 Wm elk'`, occupation empty); fed `"` it splits correctly and *also* applies the
-contract's OCR fix (`elk`→`clk`). n=500 paired, McNemar exact **p=0.0010**. Ingest now normalizes
-it, gated by per-volume frequency so a real house number is never rewritten.
+**Then the re-measurement came back identical, and that is the part to remember.** Paired on the
+same 500 lines with 299 inputs changed: 448/500 real before, 448/500 after, **zero rows changed
+classification** — while 3 records recovered an occupation. `is_entry` is `name` non-empty AND an
+address-shaped string, so `44 Wm` and `" Wm` both pass and the metric never looks at the
+name/occupation boundary.
 
-Re-deriving the stale artifacts is ~15 min on the 2B. **Do not compare the new figure to 10.4%** —
-different input, not a better model. Full record: HANDOFF, "DITTO RESOLUTION" and "1906BPL
-RE-INGESTED".
+**Cite 10.4% as a fabrication / page-type proxy — never as record quality.** A volume could have
+every occupation swallowed into the name and still score 89.6% real. Full record: HANDOFF,
+"DITTO RESOLUTION" and "1906BPL RE-INGESTED".
 
 ## ⚡ CAPACITY WAS THE CONSTRAINT. The release candidate is `4b-100k`, not v6.
 

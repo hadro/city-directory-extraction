@@ -31,8 +31,10 @@ then release to HF.
 > contract — resolving in the model would burn the panel). Separately, the OCR'd ditto `44` was
 > measured to make the model swallow the occupation into the name (n=500 paired, **p=0.0010**), so
 > `ia_volume_to_jsonl.py` now rewrites it to `"` at ingest, gated by per-volume frequency.
-> **⚠️ `data/1906BPL_sample500_eval.jsonl`, its predictions, and `entry_rate.py`'s 10.4% figure all
-> predate that and are STALE** — see **1906BPL RE-INGESTED** below before citing them.
+> The sample and its predictions were rebuilt; **`entry_rate.py`'s 10.4% came back IDENTICAL, with
+> zero of 500 rows changing classification.** That metric cannot see the name/occupation boundary,
+> so **⚠️ cite 10.4% as a fabrication/page-type proxy, never as record quality** — see
+> **1906BPL RE-INGESTED** below.
 >
 > **(historical) CURRENT STATE (2026-09-01): `v6` is the best model — 0.853 macro / 74.9% EM on the
 > 21-volume panel, +7.6 EM over v5-torch.** Every number printed below this box predates the
@@ -1624,7 +1626,7 @@ this Mac (51× slower), so this says nothing about the release candidate. And 19
 training at all. The publisher A/B found the tag inert on both 2B and 4B, so it is recorded as a
 caveat, not a confound.
 
-### ⚠️ 1906BPL RE-INGESTED 2026-09-10 — artifacts built before today are STALE
+### 1906BPL RE-INGESTED 2026-09-10 — what changed, and what provably did not
 
 `data/1906BPL_lines.jsonl` was rebuilt with normalization on. **131,235 of 199,012 lines (65.9%)
 had their leading ditto rewritten to `"`**; `44` alone accounted for 42.2% of leading tokens and was
@@ -1644,16 +1646,35 @@ but it makes them **not comparable** to anything produced after today.
 
 | artifact | status |
 |---|---|
-| `data/1906BPL_sample500_eval.jsonl` | **stale** — 105 of its 500 rows carry a raw `44` |
-| `data/preds_2b-100k_1906BPL_sample500.txt` | **stale** — predictions on un-normalized input |
-| `entry_rate.py`'s **10.4%** not-real-entry figure for 1906 | **stale, and expected to IMPROVE** |
+| `data/1906BPL_sample500_eval.jsonl` | rebuilt as `..._sample500_norm_eval.jsonl` (same 500 lines, matched by leaf+bbox) |
+| `data/preds_2b-100k_1906BPL_sample500.txt` | re-predicted as `..._sample500_norm.txt` |
+| `entry_rate.py`'s **10.4%** not-real-entry figure for 1906 | **UNCHANGED at 10.4% — see below** |
 | the frozen 21-volume gold panel | **unaffected** — Surya on sampled images, zero `44` rows |
 | `results/ab_ditto44_1906BPL_2b100k*` | **correct as-is — do NOT regenerate.** The un-normalized arm *is* the experiment |
 
-Re-deriving the stale ones is cheap and should happen **before the next quality claim about this
-volume**: re-sample 500 rows, re-run `qwen_predict` (~15 min on the 2B locally), re-run
-`entry_rate.py`. Expect the not-real-entry rate to fall. **Do not compare the new figure to 10.4%
-as though it were the same measurement** — it is a different input, not a better model.
+#### The re-measurement came back identical, and that is the useful result
+
+**I predicted this figure would improve, and it did not. It did not move at all.** Re-run paired on
+the same 500 lines (`results/entry_rate_1906BPL_norm_vs_prenorm.json`):
+
+    un-normalized  448/500 real = 89.6%   (NOT entries 10.4%)
+    normalized     448/500 real = 89.6%   (NOT entries 10.4%)
+    became an entry 0 · stopped being 0 · unchanged 500   (input differed on 299/500 rows)
+
+**Zero rows changed classification** — not offsetting flips, literally none, out of 500 rows of
+which 299 had different input. Meanwhile the records really did change: 18/500 differ in a non-name
+field and **3 recovered an occupation, 0 lost one** (2.9%, matching the powered A/B's 2.8%).
+
+**Why: `entry_rate.py` cannot see this axis.** `is_entry` is `name` non-empty AND the address
+carries a digit / street word / connector. Both `44 Wm` and `" Wm` are non-empty names, so a record
+with `name='44 Wm elk'` and an empty `occupation_role` scores as a perfectly good entry. The metric
+never examines the name/occupation boundary, which is exactly what normalization fixes.
+
+**So 10.4% is not stale — it is confirmed robust to this change, and it is also narrower than it
+looks.** It is a fabrication / page-type proxy, which is what it was built for. **It is not a
+general record-quality number and must not be cited as one**: a volume could have every occupation
+swallowed into the name and still score 89.6% real. Judging field quality needs gold, or a
+boundary-sensitive proxy that does not exist yet.
 
 Two behaviour changes from the same commit, noted so they do not read as bugs:
 

@@ -11,16 +11,25 @@ advertising, prose or page furniture turned into people.
                                --preds data/preds_2b-100k_1906BPL_sample500.txt
     python3 eval/entry_rate.py --self-test
 
-⚠️ THE 1906 FIGURE (10.4% not-real) IS STALE AS OF 2026-09-10, and the two files in the example
-above are the reason. Both were built from `1906BPL_lines.jsonl` BEFORE ditto normalization landed
-in `ia_volume_to_jsonl.py`, so 105 of that sample's 500 rows carry a raw `44` -- a leading token the
-model parses measurably worse (n=500 paired, McNemar p=0.0010: it swallows the occupation into the
-name). The volume was re-ingested; those two files were not regenerated.
+⚠️ WHAT THIS NUMBER IS NOT (measured 2026-09-10, and it surprised me)
 
-The number was correctly measured on what was fed in. It is simply **not comparable** to anything
-scored after today, and re-measuring is expected to improve it. Re-sample, re-predict, re-run --
-and do NOT report the new figure against 10.4% as if it were the same measurement. See HANDOFF,
-"1906BPL RE-INGESTED".
+**This metric cannot see field-boundary quality, and the 1906 figure proves it.** Ditto
+normalization landed in `ia_volume_to_jsonl.py` (a leading OCR'd `44` makes the model swallow the
+occupation into the name -- n=500 paired, McNemar p=0.0010). Re-running this scorer paired on the
+SAME 500 lines, 299 of which had different input:
+
+    un-normalized  448/500 real = 89.6%      normalized  448/500 real = 89.6%
+    became an entry 0 · stopped being 0 · unchanged 500
+
+**Zero rows changed classification**, while 18/500 records really did change and 3 recovered an
+occupation (0 lost). The reason is `is_entry` itself: `name` non-empty AND an address-shaped
+string. `44 Wm` and `" Wm` are both non-empty, so a record reading `name='44 Wm elk'` with an EMPTY
+occupation scores as a perfectly good entry.
+
+So the 10.4% is confirmed robust to that change -- and it is narrower than it looks. **Cite it as a
+fabrication / page-type proxy, which is what it was built for. Do NOT cite it as record quality:**
+a volume could have every occupation swallowed into the name and still score 89.6% real. Field
+quality needs gold, or a boundary-sensitive proxy that does not exist yet.
 
 Why a separate instrument
 -------------------------

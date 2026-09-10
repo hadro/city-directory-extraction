@@ -1579,7 +1579,11 @@ project got two confident wrong numbers already.
 
 **The pre-registered decision rule fires: normalize `44`/`**` -> `"` in
 `data_prep/ia_volume_to_jsonl.py`, keeping the original in `context.raw_line_original` so the audit
-trail against the page bbox survives.** (NOT YET IMPLEMENTED — see Open.)
+trail against the page bbox survives.** **IMPLEMENTED 2026-09-10**, on by default
+(`--no-ditto-normalize` opts out) — with a per-volume frequency gate rather than a hard-coded `44`,
+because `44` is also a real house number and only its *distribution* proves it is a ditto here.
+Applied at emission, after every filter has run on the original text, so the documented text and
+geometry keep-rates are unchanged. See Open for the verification numbers and the Trow gap.
 
 The mechanism, in 14 instances, is the one the pilot showed twice:
 
@@ -1627,11 +1631,19 @@ caveat, not a confound.
   parked deliberately: two sessions were editing both files in the same hour, and coupling them
   then traded a ~15-line duplication for an invisible shared breakage surface. Revisit when both
   are still; the shared half is `leaf_letters` + `blocks`/`analyse`, pure over the JSONL.
-- **IMPLEMENT the `44` normalization in `ia_volume_to_jsonl.py`** — measured, pre-registered,
-  p=0.0010, ~2,350 recovered occupation fields in 1906BPL alone. Substitute a LEADING `44`/`**`
-  with `"`, keep the original in `context.raw_line_original`. Leading token only: `44` elsewhere in
-  a line is a house number. Re-derive the glyph set per volume (`resolve_dittos.py --inventory`)
-  rather than assuming `44` everywhere — it is one OCR engine's artifact on one book.
+- ~~IMPLEMENT the `44` normalization in `ia_volume_to_jsonl.py`~~ **DONE 2026-09-10** — on by
+  default, `--no-ditto-normalize` to disable. **The glyph set is not hard-coded: it is derived per
+  volume.** Punctuation forms (`**`, `“`, `"`, `*`, `—`) are admitted on shape, because a
+  directory line never legitimately begins with one. **Digit forms must clear a >5% leading-token
+  frequency gate**, which is the only thing separating an OCR'd ditto from a house number — what
+  proves `44` is a ditto in 1906BPL is that it leads 42% of lines, and no volume has 42% of its
+  entries at house number 44. Verified on leaves 60–80: 2,371/3,551 lines normalized, `44` at
+  45.5% cleared the gate, and zero rows had anything but the leading token change. The gate
+  correctly fires on nothing for micro13, where `44` never leads a line.
+  **Known gap:** Trow glues its ditto to the given name (`-Michl`, no space), so it is not a
+  separate token and nothing fires on it. Safe (the line passes through untouched) but a Trow
+  volume gets no benefit. Splitting it needs a rule that does not also split real hyphenated
+  surnames — a different measurement than the one that justified this.
 - **`alpha_run_filter --apply` breaks ditto expansion and must not be used before it.** A ditto
   whose parent surname was cut has nothing to point at. The filter should mark, not drop, if it
   runs upstream of `postprocess/resolve_dittos.py`. (HANDOFF already concludes `--apply` does not

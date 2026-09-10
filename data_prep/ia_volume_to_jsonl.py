@@ -446,10 +446,81 @@ EMPTY_RECORD = {"name": "", "is_business": False, "spouse_name": "", "race_desig
                 "occupation_role": "", "employer": "", "address": "", "home_address": ""}
 
 
-def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh):
-    """Walk leaves, emit kept lines, return (stats, reasons, ad_scores)."""
+# ---------------------------------------------------------------------------------------------
+# DITTO-LEAD NORMALIZATION -- measured, not assumed (2026-09-10)
+#
+# A surname-repeat ditto is printed as `"` and ABBYY reads it as `44`. The generator never emits
+# `44` (trained forms are `-` and `" `), so it is out of distribution for every adapter here, and
+# it is not cosmetic: it makes the model run the `name` field too far and swallow the occupation.
+#
+#     44 Wm elk h 86 Laf av   ->  name='44 Wm elk'   occupation=''
+#      " Wm elk h 86 Laf av   ->  name='" Wm'        occupation='clk'
+#
+# n=500 paired rows on 2b-100k, pre-registered: 14 rows where the raw form swallows the occupation
+# and the substituted form does not, against 1 the other way. McNemar exact p=0.0010. Non-name
+# fields move on 8.2% of rows. Full record: results/ab_ditto44_1906BPL_2b100k*.
+#
+# WHY A FREQUENCY GATE RATHER THAN A HARD-CODED `44`. `44` is a real house number, so substituting
+# it blind would corrupt any line that legitimately starts with one. What proves it is a ditto in
+# 1906BPL is the DISTRIBUTION: it leads 84,053 of 199,012 lines (42%). No volume has 42% of its
+# entries at house number 44. So a digit form is treated as a ditto only when its share of leading
+# tokens is implausibly high for a real address, and the threshold is reported so the call is
+# visible rather than buried. On micro_IABROOKLYN_0013 (tesseract) `44` never leads a line at all
+# and the gate correctly fires on nothing.
+#
+# Punctuation forms need no gate: a directory line never legitimately begins with `**` or `“`.
+DITTO_PUNCT = re.compile(r"^(?:[\"“”'‘’]+|\*+|['’]\*|\*['’]|〃|—)$")
+DITTO_DIGIT = re.compile(r"^\d{1,3}['‘]?$")
+DITTO_FREQ_GATE = 0.05          # a leading token on >5% of lines is not a house number
+
+
+def ditto_lead_candidates(texts, gate=DITTO_FREQ_GATE):
+    """Which leading tokens in THIS volume are ditto marks. Returns (punct_set, digit_set).
+
+    Punctuation forms are admitted on shape. Digit forms must additionally clear the frequency
+    gate, because that is the only thing separating an OCR'd ditto from a house number.
+    """
+    counts, n = {}, 0
+    for t in texts:
+        toks = t.split()
+        if toks:
+            counts[toks[0]] = counts.get(toks[0], 0) + 1
+            n += 1
+    punct = {w for w in counts if DITTO_PUNCT.match(w)}
+    digit = {w for w in counts if DITTO_DIGIT.match(w) and counts[w] / max(n, 1) > gate}
+    return punct, digit, counts, n
+
+
+def normalize_ditto_lead(text, marks):
+    """Replace a LEADING ditto mark with `"`, the trained form. Leading token only.
+
+    `44` anywhere else in a line is a house number and is never touched. Returns the text
+    unchanged when nothing applies, so the caller can test identity to know whether to record
+    the original.
+
+    KNOWN GAP, stated rather than guessed at: Trow prints its ditto GLUED to the given name
+    (`-Michl`, no space), so it is not a separate leading token and nothing here fires on it.
+    That is safe -- the line passes through untouched -- but a Trow volume gets no benefit from
+    this. Splitting `-Michl` would need a rule that does not also split real hyphenated surnames,
+    which is a different measurement than the one that justified this function.
+    """
+    toks = text.split(None, 1)
+    if not toks or toks[0] not in marks:
+        return text
+    return '" ' + toks[1] if len(toks) > 1 else '"'
+
+
+def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
+          normalize_dittos=True):
+    """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
+
+    Kept lines are buffered rather than streamed so the ditto-lead frequency gate can see the
+    whole volume before deciding which leading tokens are dittos (~50 MB for a 200k-line book).
+    Normalization is applied at EMISSION, after every filter has run on the original text, so the
+    text/geometry keep-rates documented above stay exactly as measured.
+    """
     stats = {"leaves": 0, "raw": 0, "joins": 0, "kept": 0}
-    reasons, ad_scores = {}, []
+    reasons, ad_scores, buffered = {}, [], []
     for n, leaf in enumerate(leaves, 1):
         markup = item.hocr_page(leaf)
         if not markup:
@@ -485,23 +556,37 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
                 if dropped_fh:
                     dropped_fh.write(f"{leaf}\t{why}\t{box}\t{text}\n")
                 continue
-            out_fh.write(json.dumps({
-                "raw_line": text,
-                "context": {
-                    "publisher": publisher,          # already a trained token (tag_publisher)
-                    "directory_year": year or "",
-                    "ia_id": item.ident,
-                    "leaf": leaf,
-                    # hOCR/jp2 pixel space -- scale to any JPEG you download before using as #xywh=
-                    "bbox": list(box),
-                    "page_size": list(dims) if dims else None,
-                },
-                "record": EMPTY_RECORD,
-            }, ensure_ascii=False) + "\n")
+            buffered.append((text, leaf, list(box), list(dims) if dims else None))
             stats["kept"] += 1
         if n % 50 == 0:
             print(f"  ... {n}/{len(leaves)} leaves, {stats['kept']:,} lines kept", file=sys.stderr)
-    return stats, reasons, ad_scores
+
+    marks, ditto_report = set(), None
+    if normalize_dittos:
+        punct, digit, counts, total = ditto_lead_candidates(t for t, _, _, _ in buffered)
+        marks = punct | digit
+        ditto_report = {"punct": sorted(punct), "digit": sorted(digit), "applied": 0,
+                        "shares": {w: counts[w] / max(total, 1) for w in sorted(marks)}}
+
+    for text, leaf, box, dims in buffered:
+        out = normalize_ditto_lead(text, marks) if marks else text
+        ctx = {
+            "publisher": publisher,                  # already a trained token (tag_publisher)
+            "directory_year": year or "",
+            "ia_id": item.ident,
+            "leaf": leaf,
+            # hOCR/jp2 pixel space -- scale to any JPEG you download before using as #xywh=
+            "bbox": box,
+            "page_size": dims,
+        }
+        if out != text:
+            # The audit trail against the page image. Stored only when something changed, so an
+            # unnormalized volume costs nothing, and `raw_line` still means "what we fed the model".
+            ctx["raw_line_original"] = text
+            ditto_report["applied"] += 1
+        out_fh.write(json.dumps({"raw_line": out, "context": ctx, "record": EMPTY_RECORD},
+                                ensure_ascii=False) + "\n")
+    return stats, reasons, ad_scores, ditto_report
 
 
 # ==============================================================================================
@@ -571,6 +656,36 @@ def _self_test() -> int:
     got = hocr_lines(markup)
     assert got == [((100, 100, 400, 118), "Smith John")], got
     assert page_dims(markup) == (2000, 3000)
+
+    # ---- ditto-lead normalization. Cases are REAL LINES from 1906BPL and micro13, not invented;
+    # the apostrophe post-mortem in HANDOFF is about exactly this (a test written from
+    # imagination confirms the imagined case).
+    #
+    # A volume where `44` leads 40% of lines: it is the ditto, and the gate says so.
+    dense = (["44 Wm elk h 86 Laf av"] * 40 + ["** Louis clothing 288 Atlantic ay"] * 5
+             + [f"Ackerman{i} lab h 1 Main" for i in range(55)])
+    punct, digit, _, _ = ditto_lead_candidates(dense)
+    assert digit == {"44"}, digit
+    assert "**" in punct, punct
+    assert normalize_ditto_lead("44 Wm elk h 86 Laf av", punct | digit) == '" Wm elk h 86 Laf av'
+    assert normalize_ditto_lead("** Louis clothing 288 Atlantic ay", punct | digit) == \
+        '" Louis clothing 288 Atlantic ay'
+    # A volume where 44 is a house number: it is RARE, so the gate must not fire. Without the
+    # frequency test this line would silently become a ditto and lose its address.
+    sparse = ["44 Broadway grocer"] + [f"Ackerman{i} lab h 1 Main" for i in range(99)]
+    _, digit_sparse, _, _ = ditto_lead_candidates(sparse)
+    assert digit_sparse == set(), digit_sparse
+    assert normalize_ditto_lead("44 Broadway grocer", set()) == "44 Broadway grocer"
+    # LEADING token only -- a 44 inside the line is a house number in every volume
+    assert normalize_ditto_lead("Ackerman Jos lab h 44 Main", {"44"}) == "Ackerman Jos lab h 44 Main"
+    # a real surname is never a mark, whatever the gate decided
+    assert normalize_ditto_lead("Ackerman Jos lab h 1 Main", {"44"}) == "Ackerman Jos lab h 1 Main"
+    # micro13 (tesseract) has NO 44-lead lines at all; the gate must fire on nothing
+    _, digit_micro, _, _ = ditto_lead_candidates([f"Brady John{i}, tavern Jackson" for i in range(50)])
+    assert digit_micro == set(), digit_micro
+    # a bare mark with nothing after it does not crash
+    assert normalize_ditto_lead('44', {"44"}) == '"'
+
     print("self-test OK", file=sys.stderr)
     return 0
 
@@ -600,6 +715,12 @@ def main(argv=None) -> int:
                          "points of cut). OFF by default because it also cuts outdented "
                          "column-leading entries -- see margin_reject(). Optional px tolerance, "
                          "default 40.")
+    ap.add_argument("--no-ditto-normalize", action="store_true",
+                    help="do NOT rewrite a leading ditto mark to '\"'. Default is to rewrite it: "
+                         "measured p=0.0010 that the OCR'd form makes the model swallow the "
+                         "occupation into the name (results/ab_ditto44_1906BPL_2b100k*). Digit "
+                         "forms must clear a >5%% leading-token frequency gate, so a real house "
+                         "number is never touched. Originals go to context.raw_line_original.")
     ap.add_argument("--dump-dropped", default=None,
                     help="write every rejected line with its reason. READ THIS before trusting a run.")
     ap.add_argument("--range-only", action="store_true",
@@ -660,9 +781,9 @@ def main(argv=None) -> int:
 
     dropped_fh = open(args.dump_dropped, "w", encoding="utf-8") if args.dump_dropped else None
     with open(out_path, "w", encoding="utf-8") as out_fh:
-        stats, reasons, ad_scores = sweep(item, publisher, year, leaves,
-                                          not args.no_geometry, args.drop_off_margin,
-                                          not args.no_join, dropped_fh, out_fh)
+        stats, reasons, ad_scores, ditto_report = sweep(
+            item, publisher, year, leaves, not args.no_geometry, args.drop_off_margin,
+            not args.no_join, dropped_fh, out_fh, not args.no_ditto_normalize)
     if dropped_fh:
         dropped_fh.close()
 
@@ -673,6 +794,20 @@ def main(argv=None) -> int:
           f"-> {stats['kept']:,} kept ({pct:.1f}% of candidates)", file=sys.stderr)
     for why, n in sorted(reasons.items(), key=lambda kv: -kv[1]):
         print(f"    dropped {n:>7,}  {why}", file=sys.stderr)
+    if ditto_report is not None:
+        marks = ditto_report["punct"] + ditto_report["digit"]
+        if marks:
+            shares = ", ".join(f"{w!r} {ditto_report['shares'][w]:.1%}" for w in marks)
+            print(f"  ditto-lead normalized -> '\"' on {ditto_report['applied']:,} lines "
+                  f"({ditto_report['applied']/max(stats['kept'],1):.1%}); marks: {shares}",
+                  file=sys.stderr)
+            if ditto_report["digit"]:
+                print(f"    digit forms {ditto_report['digit']} cleared the "
+                      f">{DITTO_FREQ_GATE:.0%} frequency gate -- they are too common to be house "
+                      f"numbers. Originals kept in context.raw_line_original.", file=sys.stderr)
+        else:
+            print("  ditto-lead normalization: no marks cleared the gate (nothing changed)",
+                  file=sys.stderr)
     if ad_scores:
         worst = sorted(ad_scores, key=lambda kv: -kv[1])[:8]
         print(f"  highest ad-scores (leaf, big%+wide%): {worst}", file=sys.stderr)

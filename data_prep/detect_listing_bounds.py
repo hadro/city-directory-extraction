@@ -88,9 +88,10 @@ LETTERS = [chr(c) for c in range(ord("A"), ord("Z") + 1)]
 # special case, it is the same rule: a surname capitalises after the apostrophe, an abbreviated
 # GIVEN name does not, and the abbreviated given names are the ditto failure in disguise --
 # they appear where OCR dropped the ditto mark, so voting them would score the wrong column.
-# Worth only 11 lines in 199,012 on 1906BPL (surnames repeat under ditto marks, so each one is
-# line-initial about once), but it costs nothing and volumes heavier in Irish surnames exist.
-FIRST_WORD_RE = re.compile(r"([A-Za-z])(?:[a-z]{2,}|'[A-Z][a-z])")
+# BOTH apostrophe characters, because this corpus is 4:1 CURLY: of 55 apostrophe-surname lines in
+# 1906BPL, 44 use ’ and 11 use '. A straight-only class catches 20% of them and looks like it
+# works, because the obvious test cases (O'Brien, D'Ambra) are the ones a person types straight.
+FIRST_WORD_RE = re.compile(r"([A-Za-z])(?:[a-z]{2,}|['’][A-Z][a-z])")
 
 
 def leaf_letters_from_jsonl(path, min_lines):
@@ -228,9 +229,15 @@ def _self_test():
     assert key("do. Ann C wid") is None, "'do.' ditto must abstain"
     assert key("MAIN OFFICE, 1232 Fulton St.") is None, "ALL-CAPS banner must abstain"
     assert key("W. E. Murdock, Boston.") is None, "initials-first ad copy must abstain"
-    assert key("O'Brien Michael lab h 12 Pine") == "O", "apostrophe surnames must still vote"
-    assert key("D'Ambra Luigi lab h 44 Union") == "D", "so must D'-surnames"
-    assert key("H'y grocer 213 Prince") is None, "abbreviated GIVEN name must still abstain"
+    # Both apostrophe characters on BOTH sides of the distinction. The corpus is 4:1 curly, so a
+    # straight-only test passes while missing 80% of the real cases -- which is exactly what the
+    # first version of this test did, because a person typing an example types it straight.
+    assert key("O'Brien Michael lab h 12 Pine") == "O", "straight-quote surname must vote"
+    assert key("O’Brien Michael lab h 12 Pine") == "O", "CURLY-quote surname must vote"
+    assert key("D'Ambra Luigi lab h 44 Union") == "D", "straight D'-surname must vote"
+    assert key("D’Addio Luigi lab h 44 Union") == "D", "curly D’-surname must vote"
+    assert key("H'y grocer 213 Prince") is None, "abbreviated GIVEN name must abstain"
+    assert key("H’y grocer 213 Prince") is None, "curly abbreviation must abstain too"
     assert key("Wm elk h 149 Division av") is None, "so must Wm -- the ditto in another costume"
 
     assert clusters([1, 2, 3, 20, 21], 6) == [[1, 2, 3], [20, 21]], "gap must split runs"

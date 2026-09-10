@@ -1700,6 +1700,36 @@ row-by-row against the old file: 0 misalignments, 0 rows where the preserved ori
 the old line, **0 rows where anything but the leading token changed** (129,504 plain mark swaps +
 306 speck-strip-then-swap, and nothing else).
 
+#### The alphacut and dropped files did NOT need redoing — checked, not assumed
+
+Both predate normalization, so the question is fair. Both are unaffected, for different reasons.
+
+**`data/1906BPL_dropped.txt` — provably identical, no regeneration needed.** The reject path
+`continue`s before a line ever reaches the emission buffer, so a dropped line cannot be
+normalized. Confirmed against the Sep-9 file: **93,781 lines** (= 292,793 candidates − 199,012
+kept) and every drop reason matching exactly — short 73,555 · banner 9,492 · allcaps 6,526 ·
+bigtype 3,676 · nonascii 517 · pagenum 15. It also *should* show original text: those lines were
+never normalized, so it is correct as it stands.
+
+**`data/1906BPL_alphacut.txt` — decisions identical, but regenerated for legibility.** Running
+`alpha_run_filter` on the pre-norm and normalized files gives byte-identical reports (bar the
+filenames) and an identical cut-leaf set. The reason is that `first_letter`'s anchored sort-key
+rule abstains on the leading token both before (`44`, `“`, `**`, a speck) and after (`"`) — no
+vote changes, which is the same abstention property that made normalizing at emission safe for the
+filters generally.
+
+It was still worth rewriting: **396 of its 532 sample lines displayed `44`/`“` while the shipped
+JSONL now holds `"`**, so anyone comparing the two would have seen a mismatch that is not real.
+Regenerated 2026-09-10; the cut ranges are unchanged (leaves 26, 76, 115, 136 et al).
+
+**`detect_listing_bounds --from-jsonl` — also verified identical** on both files (bounds 9–1215,
+1,041 leaves in the letter blocks, same 166 excluded), for the same abstention reason.
+
+**The general rule this establishes:** normalization is applied at emission, so anything computed
+from the *pre-filter* text (drop dumps) or from the *sort key* (`alpha_run_filter`,
+`detect_listing_bounds`) is untouched by it — all three checked, not assumed. Only artifacts that
+read `raw_line` itself — page samples, model predictions, anything fed to the model — need redoing.
+
 **An artifact derived from the old file was produced from input the model parses measurably
 worse.** That does not make those numbers wrong — they were correctly measured on what was fed in —
 but it makes them **not comparable** to anything produced after today.

@@ -121,11 +121,12 @@ def main(argv=None):
 
     net, tok = qp.load(args.model, args.base_model)
 
-    results = {}
+    results, preds_by_tag = {}, {}
     for tag in tags:
         print(f"\n[{tag}] predicting {len(rows)} rows...", file=sys.stderr)
         m, preds = run_tag(net, tok, rows, tag, args.target, args.batch_size, args.max_new_tokens)
         results[tag] = m
+        preds_by_tag[tag] = [json.dumps(p, sort_keys=True) for p in preds]
         print(f"[{tag}] row EM {m['row_exact_pct']}%  macro F1 {m['macro_f1']}  "
               f"micro F1 {m['micro_f1']}", file=sys.stderr)
         if args.save_preds:
@@ -148,6 +149,34 @@ def main(argv=None):
             note.append("OOV")
         print(f"{tag:<14} {m['row_exact_pct']:>7}% {m['macro_f1']:>9.3f} {m['micro_f1']:>9.3f}  "
               f"{delta:>8}  {' '.join(note)}")
+
+    # Before ranking anything, ask whether the tag moved the model at all. Ranking six tags by
+    # macro F1 is meaningless if they produced the same text: the ordering would be one or two
+    # lines of noise dressed up as a finding. Greedy decode makes this an exact check.
+    distinct = {}
+    for tag in tags:
+        distinct.setdefault(tuple(preds_by_tag[tag]), []).append(tag)
+    n_rows = len(rows)
+    max_diff = max(
+        sum(1 for x, y in zip(preds_by_tag[a], preds_by_tag[b]) if x != y)
+        for a in tags for b in tags) if len(tags) > 1 else 0
+
+    print(f"\n{len(distinct)} distinct output(s) across {len(tags)} tags; at most "
+          f"{max_diff}/{n_rows} rows differ between any two.")
+    for outs, group in distinct.items():
+        if len(group) > 1:
+            print(f"  identical: {', '.join(group)}")
+
+    material = max_diff >= max(3, 0.05 * n_rows)
+    if not material:
+        print("\nreading: NO MEASURABLE EFFECT. The publisher tag did not change this model's\n"
+              "output on this volume, so the table above ranks noise -- do not read an ordering\n"
+              "into it, and do not use it to justify changing the fallback. What this does say is\n"
+              "that a wrong tag is cheap here, which is itself the answer to 'how bad is trow on a\n"
+              "Spooner volume': on this model, not measurably bad. Before concluding the tag never\n"
+              "matters, re-run on a stronger model and on a volume whose publisher style is\n"
+              "distinctive -- a null on one 52-row volume is not a null everywhere.")
+        return 0
 
     oov = [t for t in tags if t not in TRAINED_VOCAB]
     trained_wrong = [t for t in tags if t in TRAINED_VOCAB and t != truth]

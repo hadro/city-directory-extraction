@@ -86,6 +86,44 @@ LETTERS = [chr(c) for c in range(ord("A"), ord("Z") + 1)]
 FIRST_WORD_RE = re.compile(r"([A-Za-z])[a-z]{2,}")
 
 
+def leaf_letters_from_jsonl(path, min_lines):
+    """Same signal, read from an already-built *_lines.jsonl instead of the hOCR.
+
+    Cheaper when the file exists, and usually cleaner. ia_volume_to_jsonl.py has already fetched
+    and parsed the hOCR, so re-doing it here is pure waste -- and its text/geometry filters have
+    already dropped the ALL-CAPS banners and display type that would otherwise vote.
+
+    Measured on 1906BPL: 199,012 lines over 1,237 leaves in 0.8 s, no network, reproducing the
+    hOCR bounds exactly (leaves 9..1215, 25/26 letters, zero violations) with fewer spurious gaps
+    (6 vs 10) because the banners never got a vote.
+
+    The two sources are NOT guaranteed identical, and on the thin tier they are not. On
+    micro_IABROOKLYN_0013 (tesseract-on-microfilm, ~100 content leaves) the JSONL reads the start
+    as leaf 14 against the hOCR's 18, and swaps which sparse letters clear the threshold. With so
+    few lines per leaf, dropping a handful moves the modal share across the line either way.
+    Prefer this path, but on a thin volume check the other before trusting a boundary.
+    """
+    votes = collections.defaultdict(list)
+    with open(path, encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            row = json.loads(line)
+            m = FIRST_WORD_RE.match(row.get("raw_line", "").strip())
+            if m:
+                votes[row.get("context", {}).get("leaf")].append(m.group(1).upper())
+
+    out = {}
+    for leaf, seen in votes.items():
+        if leaf is None or len(seen) < min_lines:
+            continue
+        counts = collections.Counter(seen)
+        letter, n = counts.most_common(1)[0]
+        out[leaf] = (letter, n / len(seen), len(seen))
+    return out
+
+
 def leaf_letters(item, idx, min_chars, min_lines):
     """-> {leaf: (modal_letter, share, n_lines)} for every leaf with enough text."""
     out = {}
@@ -170,6 +208,11 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--ident", required=True, help="IA identifier")
+    ap.add_argument("--from-jsonl", nargs="?", const="auto", default=None,
+                    help="read an existing data/<ident>_lines.jsonl instead of the hOCR. Bare "
+                         "flag looks for the default path. Faster, needs no network, and gets "
+                         "the benefit of the ingest's own filters -- prefer it when the file "
+                         "exists.")
     ap.add_argument("--cache", default=str(REPO / "data" / "ia_cache"))
     ap.add_argument("--min-chars", type=int, default=400,
                     help="skip leaves whose pageindex census is below this")
@@ -193,11 +236,23 @@ def main(argv=None):
     ap.add_argument("--verbose", action="store_true", help="print the per-leaf modal letters")
     args = ap.parse_args(argv)
 
-    item = Item(args.ident, Path(args.cache))
-    idx = item.index
-    print(f"{args.ident}: {len(idx)} leaves", file=sys.stderr)
-
-    letters = leaf_letters(item, idx, args.min_chars, args.min_lines)
+    if args.from_jsonl:
+        path = Path(args.from_jsonl) if args.from_jsonl != "auto" \
+            else REPO / "data" / f"{args.ident}_lines.jsonl"
+        if not path.exists():
+            ap.error(f"no lines JSONL at {path} -- build it with ia_volume_to_jsonl.py, or drop "
+                     f"--from-jsonl to read the hOCR")
+        print(f"{args.ident}: reading {path}", file=sys.stderr)
+        letters = leaf_letters_from_jsonl(path, args.min_lines)
+        n_leaves = (max(letters) + 1) if letters else 0     # the JSONL knows only what it kept
+        source = str(path)
+    else:
+        item = Item(args.ident, Path(args.cache))
+        idx = item.index
+        print(f"{args.ident}: {len(idx)} leaves", file=sys.stderr)
+        letters = leaf_letters(item, idx, args.min_chars, args.min_lines)
+        n_leaves = len(idx)
+        source = "hocr"
     print(f"  {len(letters)} leaves with a readable modal letter", file=sys.stderr)
     if args.verbose:
         for leaf, (L, share, n) in sorted(letters.items()):
@@ -259,7 +314,8 @@ def main(argv=None):
     print(f"\n{len(kept)} leaves in the letter blocks, vs {swept} in a plain {start}-{end} range: "
           f"{dropped} {what} ({100 * dropped // swept}%).")
 
-    result = {"ident": args.ident, "leaves": len(idx), "start_leaf": start, "end_leaf": end,
+    result = {"ident": args.ident, "source": source, "leaves": n_leaves,
+              "start_leaf": start, "end_leaf": end,
               "kept_leaves": len(kept),
               "letters_present": present, "missing_letters": missing,
               "blocks": {L: {"start_leaf": b["span"][0], "end_leaf": b["span"][1],

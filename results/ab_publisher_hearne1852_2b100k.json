@@ -1,0 +1,500 @@
+{
+ "gold": "/Users/joshhadro/github/city-directory-extraction/data/hearne1852_eval.jsonl",
+ "n": 52,
+ "truth": "hearne",
+ "model": "/Users/joshhadro/Downloads/scale-runs/adapters/2b-100k",
+ "results": {
+  "hearne": {
+   "n": 52,
+   "row_exact_pct": 76.9,
+   "macro_f1": 0.871,
+   "micro_f1": 0.924,
+   "fields_scored": 7,
+   "spurious_fields": [],
+   "per_field": {
+    "name": {
+     "em": 96.2,
+     "p": 0.962,
+     "r": 0.962,
+     "f1": 0.962,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "is_business": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "spouse_name": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 3,
+     "pred_ne": 3,
+     "applicable": true
+    },
+    "race_designation": {
+     "em": 100.0,
+     "p": 0.0,
+     "r": 0.0,
+     "f1": 0.0,
+     "gold_ne": 0,
+     "pred_ne": 0,
+     "applicable": false
+    },
+    "occupation_role": {
+     "em": 90.4,
+     "p": 0.889,
+     "r": 0.952,
+     "f1": 0.92,
+     "gold_ne": 42,
+     "pred_ne": 45,
+     "applicable": true
+    },
+    "employer": {
+     "em": 92.3,
+     "p": 0.5,
+     "r": 0.5,
+     "f1": 0.5,
+     "gold_ne": 4,
+     "pred_ne": 4,
+     "applicable": true
+    },
+    "address": {
+     "em": 86.5,
+     "p": 0.865,
+     "r": 0.865,
+     "f1": 0.865,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "home_address": {
+     "em": 92.3,
+     "p": 0.778,
+     "r": 0.933,
+     "f1": 0.848,
+     "gold_ne": 15,
+     "pred_ne": 18,
+     "applicable": true
+    }
+   }
+  },
+  "trow": {
+   "n": 52,
+   "row_exact_pct": 76.9,
+   "macro_f1": 0.881,
+   "micro_f1": 0.926,
+   "fields_scored": 7,
+   "spurious_fields": [],
+   "per_field": {
+    "name": {
+     "em": 96.2,
+     "p": 0.962,
+     "r": 0.962,
+     "f1": 0.962,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "is_business": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "spouse_name": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 3,
+     "pred_ne": 3,
+     "applicable": true
+    },
+    "race_designation": {
+     "em": 100.0,
+     "p": 0.0,
+     "r": 0.0,
+     "f1": 0.0,
+     "gold_ne": 0,
+     "pred_ne": 0,
+     "applicable": false
+    },
+    "occupation_role": {
+     "em": 90.4,
+     "p": 0.889,
+     "r": 0.952,
+     "f1": 0.92,
+     "gold_ne": 42,
+     "pred_ne": 45,
+     "applicable": true
+    },
+    "employer": {
+     "em": 94.2,
+     "p": 0.667,
+     "r": 0.5,
+     "f1": 0.571,
+     "gold_ne": 4,
+     "pred_ne": 3,
+     "applicable": true
+    },
+    "address": {
+     "em": 86.5,
+     "p": 0.865,
+     "r": 0.865,
+     "f1": 0.865,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "home_address": {
+     "em": 92.3,
+     "p": 0.778,
+     "r": 0.933,
+     "f1": 0.848,
+     "gold_ne": 15,
+     "pred_ne": 18,
+     "applicable": true
+    }
+   }
+  },
+  "lain": {
+   "n": 52,
+   "row_exact_pct": 76.9,
+   "macro_f1": 0.881,
+   "micro_f1": 0.926,
+   "fields_scored": 7,
+   "spurious_fields": [],
+   "per_field": {
+    "name": {
+     "em": 96.2,
+     "p": 0.962,
+     "r": 0.962,
+     "f1": 0.962,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "is_business": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "spouse_name": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 3,
+     "pred_ne": 3,
+     "applicable": true
+    },
+    "race_designation": {
+     "em": 100.0,
+     "p": 0.0,
+     "r": 0.0,
+     "f1": 0.0,
+     "gold_ne": 0,
+     "pred_ne": 0,
+     "applicable": false
+    },
+    "occupation_role": {
+     "em": 90.4,
+     "p": 0.889,
+     "r": 0.952,
+     "f1": 0.92,
+     "gold_ne": 42,
+     "pred_ne": 45,
+     "applicable": true
+    },
+    "employer": {
+     "em": 94.2,
+     "p": 0.667,
+     "r": 0.5,
+     "f1": 0.571,
+     "gold_ne": 4,
+     "pred_ne": 3,
+     "applicable": true
+    },
+    "address": {
+     "em": 86.5,
+     "p": 0.865,
+     "r": 0.865,
+     "f1": 0.865,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "home_address": {
+     "em": 92.3,
+     "p": 0.778,
+     "r": 0.933,
+     "f1": 0.848,
+     "gold_ne": 15,
+     "pred_ne": 18,
+     "applicable": true
+    }
+   }
+  },
+  "smith": {
+   "n": 52,
+   "row_exact_pct": 76.9,
+   "macro_f1": 0.871,
+   "micro_f1": 0.924,
+   "fields_scored": 7,
+   "spurious_fields": [],
+   "per_field": {
+    "name": {
+     "em": 96.2,
+     "p": 0.962,
+     "r": 0.962,
+     "f1": 0.962,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "is_business": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "spouse_name": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 3,
+     "pred_ne": 3,
+     "applicable": true
+    },
+    "race_designation": {
+     "em": 100.0,
+     "p": 0.0,
+     "r": 0.0,
+     "f1": 0.0,
+     "gold_ne": 0,
+     "pred_ne": 0,
+     "applicable": false
+    },
+    "occupation_role": {
+     "em": 90.4,
+     "p": 0.889,
+     "r": 0.952,
+     "f1": 0.92,
+     "gold_ne": 42,
+     "pred_ne": 45,
+     "applicable": true
+    },
+    "employer": {
+     "em": 92.3,
+     "p": 0.5,
+     "r": 0.5,
+     "f1": 0.5,
+     "gold_ne": 4,
+     "pred_ne": 4,
+     "applicable": true
+    },
+    "address": {
+     "em": 86.5,
+     "p": 0.865,
+     "r": 0.865,
+     "f1": 0.865,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "home_address": {
+     "em": 92.3,
+     "p": 0.778,
+     "r": 0.933,
+     "f1": 0.848,
+     "gold_ne": 15,
+     "pred_ne": 18,
+     "applicable": true
+    }
+   }
+  },
+  "longworth": {
+   "n": 52,
+   "row_exact_pct": 76.9,
+   "macro_f1": 0.871,
+   "micro_f1": 0.924,
+   "fields_scored": 7,
+   "spurious_fields": [],
+   "per_field": {
+    "name": {
+     "em": 96.2,
+     "p": 0.962,
+     "r": 0.962,
+     "f1": 0.962,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "is_business": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "spouse_name": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 3,
+     "pred_ne": 3,
+     "applicable": true
+    },
+    "race_designation": {
+     "em": 100.0,
+     "p": 0.0,
+     "r": 0.0,
+     "f1": 0.0,
+     "gold_ne": 0,
+     "pred_ne": 0,
+     "applicable": false
+    },
+    "occupation_role": {
+     "em": 90.4,
+     "p": 0.889,
+     "r": 0.952,
+     "f1": 0.92,
+     "gold_ne": 42,
+     "pred_ne": 45,
+     "applicable": true
+    },
+    "employer": {
+     "em": 92.3,
+     "p": 0.5,
+     "r": 0.5,
+     "f1": 0.5,
+     "gold_ne": 4,
+     "pred_ne": 4,
+     "applicable": true
+    },
+    "address": {
+     "em": 86.5,
+     "p": 0.865,
+     "r": 0.865,
+     "f1": 0.865,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "home_address": {
+     "em": 92.3,
+     "p": 0.778,
+     "r": 0.933,
+     "f1": 0.848,
+     "gold_ne": 15,
+     "pred_ne": 18,
+     "applicable": true
+    }
+   }
+  },
+  "spooner": {
+   "n": 52,
+   "row_exact_pct": 76.9,
+   "macro_f1": 0.871,
+   "micro_f1": 0.924,
+   "fields_scored": 7,
+   "spurious_fields": [],
+   "per_field": {
+    "name": {
+     "em": 96.2,
+     "p": 0.962,
+     "r": 0.962,
+     "f1": 0.962,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "is_business": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "spouse_name": {
+     "em": 100.0,
+     "p": 1.0,
+     "r": 1.0,
+     "f1": 1.0,
+     "gold_ne": 3,
+     "pred_ne": 3,
+     "applicable": true
+    },
+    "race_designation": {
+     "em": 100.0,
+     "p": 0.0,
+     "r": 0.0,
+     "f1": 0.0,
+     "gold_ne": 0,
+     "pred_ne": 0,
+     "applicable": false
+    },
+    "occupation_role": {
+     "em": 90.4,
+     "p": 0.889,
+     "r": 0.952,
+     "f1": 0.92,
+     "gold_ne": 42,
+     "pred_ne": 45,
+     "applicable": true
+    },
+    "employer": {
+     "em": 92.3,
+     "p": 0.5,
+     "r": 0.5,
+     "f1": 0.5,
+     "gold_ne": 4,
+     "pred_ne": 4,
+     "applicable": true
+    },
+    "address": {
+     "em": 86.5,
+     "p": 0.865,
+     "r": 0.865,
+     "f1": 0.865,
+     "gold_ne": 52,
+     "pred_ne": 52,
+     "applicable": true
+    },
+    "home_address": {
+     "em": 92.3,
+     "p": 0.778,
+     "r": 0.933,
+     "f1": 0.848,
+     "gold_ne": 15,
+     "pred_ne": 18,
+     "applicable": true
+    }
+   }
+  }
+ }
+}

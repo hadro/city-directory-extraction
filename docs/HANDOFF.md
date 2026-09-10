@@ -1288,10 +1288,49 @@ standing keep-the-predictions rule, so the one-row claim cannot be re-checked.
   --no-deps peft accelerate transformers tokenizers huggingface_hub safetensors`, then
   `PYTORCH_ENABLE_MPS_FALLBACK=1 PYTHONPATH=<dir> $VP eval/qwen_predict.py …`.
 
+### First full volume through the model, and what it says about `--apply` (2026-09-09)
+
+`micro_IABROOKLYN_0013`, all **2,889 lines** through `2b-100k` on an M2 Air: 5,828 s, **0.496
+rows/s**. Run UNFILTERED on purpose — predictions align 1:1 with input lines, so the alpha
+filter's value could be measured after the fact instead of assumed. Artifacts:
+`data/preds_2b-100k_micro_IABROOKLYN_0013.txt`.
+
+Proxy for a fabricated record: the predicted `name` does not look like a surname
+(`[A-Z](?:[a-z]{2,}|['’][A-Z][a-z])`). Crude — a dittoed entry scores as fabricated — but the
+bias is common-mode across buckets, so the comparison holds even though the absolute rate is
+overstated.
+
+| leaf status | leaves | records | non-surname | rate |
+|---|---|---|---|---|
+| KEPT (on the A→Z walk) | 61 | 2,227 | 321 | **14.4%** |
+| CUT (off the walk) | 8 | 284 | 131 | **46.1%** |
+| ABSTAIN (too thin to vote) | 30 | 378 | 198 | **52.4%** |
+
+**The filter aims correctly — cut leaves are 3.2× more fabrication-dense than kept ones.**
+
+**But `--apply` is NOT justified on this volume, and the reason is the trade, not the aim.**
+Applying it removes 131 likely-bad records and 153 likely-good ones — leaf 76 is real entries
+wrecked by microfilm OCR (`Clure John, Jaborerrear 107.Gold)) |. .`), degraded but not invented.
+Roughly break-even, slightly negative. **Report-only stays the default.**
+
+**The largest pool of fabrication is in ABSTAIN leaves, which the current design KEEPS** — 52.4%,
+worse than the cut leaves. Leaf 3 is a druggist's advertisement (`CUPPING performed and LEECHES
+applied.`) that abstained because it is too thin to vote, and sailed straight into the output.
+The "abstaining is the safe direction" reasoning behind `MIN_ALPHA_LINES` is backwards for
+quality, and the obvious fix is not clean either: cutting all abstains would remove ~198 bad and
+~180 good.
+
+**Do not generalise this to 1906BPL.** micro13 is the thin microfilm tier — the worst case, where
+every bucket is mixed. On 1906BPL the same filter cuts a genuine 8,127-line trade-advertising run.
+The `--apply` decision is per-volume-class, not global.
+
 ### Open
 
-- **Front-matter `--apply` decision** — read `data/1906BPL_alphacut.txt` first. Cut is 7.6%
-  (1906BPL) / 9.8% (micro13). Residual known-wrong: ditto-heavy leaves 26 and 76.
+- **Front-matter `--apply` decision** — read `data/1906BPL_alphacut.txt` first. Cut is 7.5%
+  (1906BPL) / 9.8% (micro13). Measured against model output on micro13 above: do NOT apply there.
+  Residual known-wrong: ditto-heavy leaves 26 and 76.
+- **ABSTAIN leaves are the worst bucket and are currently kept** — see the table above. Needs a
+  better rule than either "keep" or "cut", since both lose roughly as much as they gain.
 - **`start_page`/`end_page` units** — those columns are PRINTED pages while `--leaves` takes leaf
   numbers, `page_offset` is 9% filled, and 1884BPL's offset drifts +54 to +82 within one volume.
   Storing leaf bounds is probably cleaner than backfilling the existing columns.

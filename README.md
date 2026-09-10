@@ -291,6 +291,14 @@ responses are archived under `nypl_api_archive/` because that API deprecates **2
 sibling `directory-pipeline/sources/sample_directories.py` resolves each row to a IIIF manifest
 and downloads **only** a few sampled pages per volume (never whole volumes).
 
+**Whole volumes, as of 2026-09-09** (branch `ia-volume-ingest`): sampling is for building gold.
+To process an *entire* volume, `data_prep/ia_volume_to_jsonl.py --ident <IA id>` reads IA's own
+hOCR — no images downloaded, no OCR run, no GPU, because 291 of these rows are already OCR'd and
+that OCR was measured good enough to use. 1906BPL yields 199,012 model-ready lines in minutes.
+Pair it with `alpha_run_filter.py`, which cuts advertising and front matter by alphabetical order
+rather than typography. **Read the HANDOFF section before trusting the output: the model never
+refuses, so any non-entry that survives the filter becomes a fabricated person.**
+
 From those samples we build **style profiles** (`data_prep/style_profiles/`): 17 per-publisher×era
 cards capturing column count, the abbreviations legend (ground truth), entry format, and
 page-offset behavior. They backfill structural metadata in the catalog (`column_count` 332/449;

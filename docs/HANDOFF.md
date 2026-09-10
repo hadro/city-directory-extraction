@@ -19,6 +19,12 @@ then release to HF.
 > stayed flat through three 0.8B generator cycles. Full record: **SCALE RUNS** section below, and
 > [SCALE_RUNS.md](SCALE_RUNS.md) for the experiment design.
 >
+> **WHOLE-VOLUME EXTRACTION now exists (2026-09-09, branch `ia-volume-ingest`).** The project
+> could score a panel but not process a volume; `data_prep/ia_volume_to_jsonl.py` turns an IA
+> identifier into model-ready JSONL with no images, no OCR run and no GPU. 1906BPL → 199,012
+> lines. See **WHOLE-VOLUME EXTRACTION** below — especially that **the model never refuses**, so
+> any non-entry surviving the filter becomes a fabricated person in the output.
+>
 > **(historical) CURRENT STATE (2026-09-01): `v6` is the best model — 0.853 macro / 74.9% EM on the
 > 21-volume panel, +7.6 EM over v5-torch.** Every number printed below this box predates the
 > 2026-09-01 `parse_yaml` unescape fix and is UNDERSTATED; see the corrected table in the cycle-six
@@ -1169,6 +1175,109 @@ predictions per the standing request, and that is the only reason every number a
 verified independently rather than taken on trust. Five adapters (v5-torch, v6, v7, 2b, 4b,
 v8-250k) are backed up on NYU's machine; Hub pushes still deferred to launch.
 
+## WHOLE-VOLUME EXTRACTION — 2026-09-09, branch `ia-volume-ingest`
+
+The project could score a 21-volume panel and could not process a single volume. This closes
+that: an IA identifier now becomes model-ready JSONL with **no images downloaded, no OCR run and
+no GPU**, because IA already OCR'd 291 of our volumes and `historical-ocr-eval` measured that its
+hOCR is good enough to use as-is (CER-all 0.067 excluding one dead volume, `under% 0.0` on boxes).
+
+Two sessions built this in parallel (`city-directory-extraction-5e`, `sub-agent-csv-work`), which
+is why some findings below are cross-attributed.
+
+### What exists
+
+| script | does | run it |
+|---|---|---|
+| `data_prep/ia_volume_to_jsonl.py` | IA ident → `{raw_line, context, record}` JSONL | `--ident 1906BPL` |
+| `data_prep/alpha_run_filter.py` | cuts ads/front matter from that JSONL by alphabetical order | `--lines … --apply` |
+| `data_prep/detect_listing_bounds.py` | leaf bounds + order violations (feeds `start_page`/`end_page`) | `--from-jsonl …` |
+| `data_prep/backfill_publisher.py` | audits the catalog publisher column against the trained vocab | |
+| `eval/publisher_ab.py` | measures what a wrong `[publisher=X]` tag costs | |
+
+Measured end to end: **1906BPL → 199,012 lines** (292,793 candidates, 68.0% kept) and
+**micro_IABROOKLYN_0013 → 2,889 lines** (83.5%), the second in under a minute. Outputs are
+`data/<ident>_lines.jsonl` (gitignored). Cache is `data/ia_cache/`, ~291 MB per volume against
+~1 MB of output — **discard it per volume for a corpus sweep**; 291 volumes would be 50–60 GB.
+
+### The finding that matters most: the model does not refuse
+
+Fed a page of law-office prose from micro_IABROOKLYN_0013's front matter, `2b-100k` emitted
+confident fabricated people (`address: "entrusted to their care"`). **Every non-entry that
+survives filtering becomes a fake person in the output.** That makes page-type detection a
+CORRECTNESS problem, not a cost problem — the opposite of how this was first scoped.
+
+No line-level rule catches it: `courts of law or equity in` is lowercase, ASCII, normal height,
+normal width, on a common left margin. It passes every shape test because it looks like an entry.
+
+### Five things that were wrong first — do not re-derive these
+
+1. **Wrapped entries must be joined, and joined BEFORE filtering** (conventions 9a/15). 12.8% of
+   hOCR lines are continuations. Joining first also cut `short` drops 359 → 261 — ~98
+   continuations were being discarded, each taking an address off the entry above it.
+2. **Column detection does NOT transfer from Surya region boxes to hOCR line boxes.**
+   `detection_recall.py:columns_from_boxes` works on a handful of region boxes per page; hOCR
+   gives ~260 line boxes whose left edges are legitimately multi-modal (1906BPL leaf 606: body
+   columns at x=428/1049, wrapped-line indents at 516/1018 dense enough to read as column starts).
+   The filter inverted — dropped 64% of the page including clean entries, kept ad copy. Removed.
+3. **A ditto line must abstain from the alphabetical vote.** Dittoed entries (ABBYY reads the
+   ditto as `44`) otherwise vote their GIVEN name, so a page of Ackermans votes "A" wherever it
+   sits — cut 1,724 good lines and inflated the cut 7.3% → 19.2%. Same failure with no
+   punctuation at all: `H'y grocer 213 Prince`, `Wm elk h 149% Division av`. Rule is an anchored
+   `([A-Za-z])[a-z]{2,}`, which also drops ALL-CAPS banners and initials-first ad copy for free.
+4. **No confidence floor can separate ad pages from listing pages, because the classes OVERLAP on
+   that axis.** Ad copy is full of business names, so an ad page carries its own dominant letter
+   (leaf 130 is prose at 0.96). A 0.70 floor collapsed the cut to 0.2% and lost the 8,127-line
+   trade-ad run. Voter share fails too: genuine listing leaf 200 carries sort keys on 17% of
+   lines, LOWER than ad leaf 26 at 28%. This rules out the whole family of threshold fixes.
+5. **The `[publisher=X]` tag is a closed set of 17 tokens** from `synth_train_250k.jsonl`
+   (`trow polk-tulsa lain polk longworth doggett upington duncan hopehenderson smith boyd hearne
+   rode mb mercein franks ogden`). `spooner` is not in it, so "backfill publisher from IA
+   metadata" does NOT fix the tag — it swaps a wrong-but-trained token for an unseen one. Keep
+   catalog truth and the tag separate; `tag_publisher()` does.
+
+### The publisher tag appears not to matter much (2b-100k, n=52)
+
+`eval/publisher_ab.py` on hearne1852, six tags: **two distinct outputs, differing on one row of
+52.** `row_exact` identical at 76.9 across all six; only macro/micro move (0.010/0.002). `spooner`
+(OOV) scores identically to the true `hearne`, and `trow`/`lain` land fractionally ABOVE truth —
+the spread is noise. The harness initially read "drop the fallback" out of it and now refuses to
+rank below a divergence floor.
+
+**Caveat, load-bearing:** one 52-row volume on **2b-100k**, the model `4b-100k` displaced. A null
+on the 2B is not a null on the 4B, and hearne1852 may be unusually unambiguous. Treat this as a
+reason to DEPRIORITISE the spooner question, not to conclude the tag is inert. Re-run needs
+`--tags hearne,trow,spooner` on the 4B. **The A/B stored metrics only, no preds** — against the
+standing keep-the-predictions rule, so the one-row claim cannot be re-checked.
+
+### Local inference on a Mac (measured 2026-09-09)
+
+**0.38 lines/s**, 2b-100k on an M2 Air 16 GB, batch 16, weights cached. So 2,889 lines ≈ 2 h and
+199,012 lines ≈ 6 days — a rented GPU is hours. Two setup facts that cost time:
+
+- **`Qwen3.5-4B` is NOT cached locally** — a 24 KB stub, no safetensors. 0.8B (1.6 G) and 2B
+  (4.3 G) are real. Running `4b-100k` means an ~8 GB download, and on 16 GB it has almost no
+  headroom.
+- **transformers must be ≥5.x for `qwen3_5`.** System python has 4.36.2, `directory-pipeline`'s
+  venv has 4.57.6; neither knows the architecture. Recipe that works without touching any shared
+  env: `VP=~/github/directory-pipeline/.venv/bin/python; $VP -m pip install --target <dir>
+  --no-deps peft accelerate transformers tokenizers huggingface_hub safetensors`, then
+  `PYTORCH_ENABLE_MPS_FALLBACK=1 PYTHONPATH=<dir> $VP eval/qwen_predict.py …`.
+
+### Open
+
+- **Front-matter `--apply` decision** — read `data/1906BPL_alphacut.txt` first. Cut is 7.6%
+  (1906BPL) / 9.8% (micro13). Residual known-wrong: ditto-heavy leaves 26 and 76.
+- **`start_page`/`end_page` units** — those columns are PRINTED pages while `--leaves` takes leaf
+  numbers, `page_offset` is 9% filled, and 1884BPL's offset drifts +54 to +82 within one volume.
+  Storing leaf bounds is probably cleaner than backfilling the existing columns.
+- **Thin-tier volumes are the weak case for both tools.** micro13 reads start=14 from the JSONL
+  vs 18 from the hOCR; ~100 content leaves means a few dropped lines move the modal share.
+- Duplicate alphabetical detection in `alpha_run_filter.py` and `detect_listing_bounds.py`,
+  parked deliberately: two sessions were editing both files in the same hour, and coupling them
+  then traded a ~15-line duplication for an invisible shared breakage surface. Revisit when both
+  are still; the shared half is `leaf_letters` + `blocks`/`analyse`, pure over the JSONL.
+
 ## Project in one paragraph
 
 Replace the Gemini NER step in the sibling `directory-pipeline` repo for the city-directory
@@ -1193,6 +1302,13 @@ data_prep/
   verify_harvest_leakage.py # proves harvested pages are not in any eval set; exits 1 on a leak; --self-test
   harvest_occupations.py  # surya listing lines -> gemini_baseline extract -> names/occupations_harvested.tsv (COMMITTED); --self-test
   names/surnames.tsv      # committed census surname pool (surnames_harvested.tsv is generated, gitignored)
+  ia_volume_to_jsonl.py   # WHOLE VOLUME: IA ident -> {raw_line,context,record} JSONL from IA's own
+                          #   hOCR. No images, no OCR, no GPU. Joins wrapped entries (conv 9a/15);
+                          #   filters by text rules + page-median geometry. --self-test
+  alpha_run_filter.py     # cuts ads/front matter from that JSONL by ALPHABETICAL order, not
+                          #   typography. Report-only until --apply; --dump-cut first. --self-test
+  detect_listing_bounds.py # leaf bounds + alphabet-order violations; --from-jsonl reads the above
+  backfill_publisher.py   # audits the catalog publisher column against the 17 trained tokens
   master_directories.csv  # multi-source (nypl|ia|loc|iiif) catalog for sampling; see its README
   ingest_collection.py    # BUILT: turn a collection link -> master rows (review-then-append).
                           #   nypl|ia|iiif source detect; --enrich (NYPL API+archive); see big section below

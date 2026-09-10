@@ -299,6 +299,17 @@ Pair it with `alpha_run_filter.py`, which cuts advertising and front matter by a
 rather than typography. **Read the HANDOFF section before trusting the output: the model never
 refuses, so any non-entry that survives the filter becomes a fabricated person.**
 
+**Then resolve the dittos** (`postprocess/resolve_dittos.py`, 2026-09-10). The model copies ditto
+marks verbatim *by contract* — conventions 11/12 govern the generator, all 21 gold volumes and
+`evaluate.py` at once, so resolving them in the model would burn the panel. That makes expansion a
+post-model step, and a big one: **67.3% of 1906BPL's 199,012 lines are ditto-lead**, so two thirds
+of a dense volume has no surname on the line. The within-line channel (`h do` → this record's own
+address) is deterministic — 17 hits across 9,830 gold records, zero false positives. The cross-line
+surname carry is not: it finds an antecedent for every ditto but **23.5% of them are disputed** by
+at least one independent check, so those go to a review queue instead of being silently resolved.
+Run `--inventory` on any new volume first — the ditto glyphs are a property of one OCR engine on
+one book (`44` alone is 42% of 1906BPL's lines).
+
 From those samples we build **style profiles** (`data_prep/style_profiles/`): 17 per-publisher×era
 cards capturing column count, the abbreviations legend (ground truth), entry format, and
 page-offset behavior. They backfill structural metadata in the catalog (`column_count` 332/449;

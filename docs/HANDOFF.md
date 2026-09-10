@@ -1425,6 +1425,192 @@ quality, and the obvious fix is not clean either: cutting all abstains would rem
 every bucket is mixed. On 1906BPL the same filter cuts a genuine 8,127-line trade-advertising run.
 The `--apply` decision is per-volume-class, not global.
 
+## DITTO RESOLUTION — where it belongs, and what it costs (2026-09-10)
+
+**The question that started this:** where in the pipeline should ditto leaders be cleaned up, and
+where should dittos be expanded to real values? **Answer: both downstream of the model, in
+`postprocess/resolve_dittos.py`, and they are three separate passes with different risk profiles —
+not one step.**
+
+**Not in the model, and this is not a preference.** Conventions 11/12 (dittos verbatim) govern
+`synth_persons.py`, all 21 gold volumes and `evaluate.py` simultaneously. Resolving in the model
+means relabelling every dittoed gold row, which means the frozen panel stops being a measuring
+stick. Expansion also needs the *previous* line, which the model never sees. A 40-line
+deterministic function does not justify burning the panel.
+
+**Not in `raw_line` at ingest either** — that is the audit trail against the page bbox. One
+possible exception is under test; see the `44` experiment below.
+
+### Scale first, because it is larger than the 68.8% figure suggested
+
+Measured on `data/1906BPL_lines.jsonl` (199,012 lines):
+
+| | |
+|---|---|
+| lines carrying a surname of their own | **50,225 (25%)** |
+| ditto-lead lines | **133,902 (67.3%)** |
+| ditto run length | mean 7.1, p90 15, **max 180** |
+
+Three quarters of a dense volume has no surname on the line. One wrong antecedent poisons up to
+180 records.
+
+### THREE SCOPES, and only one of them is line-local
+
+The first write-up of this said two, and collapsed a line-local operation into the sequential one.
+Corrected from the gold:
+
+| scope | example | antecedent | needs order? |
+|---|---|---|---|
+| **within-line**, `address`→`home_address` | `h do`, `h910 do` | the SAME record's `address` | **NO** |
+| **cross-line**, name prefix | `" Jos`, `44 John C`, `-Michl` | previous entry's surname | yes |
+| **cross-line**, address slots (Duncan/early) | `71 do. do.` | previous line's address | yes |
+
+The within-line channel is deterministic from one record — no ordering, no leaf boundary, no
+interaction with `alpha_run_filter`, and it cannot orphan. Keeping it separate from the sequential
+pass is the point: the cross-line channels carry a ~23% dispute rate and this one carries none, and
+merging them would hide that behind a single accuracy number.
+
+**The Duncan address ditto is a positional SLOT GRAMMAR, not a suffix rule.** Read duncan1794 in
+file order:
+
+    13 Warren do.     do. = the street TYPE        ("13 Warren street")
+    30 do.            do. = street NAME + type     (inherits "Warren street")
+    71 do. do.        TWO independent slots        (row 53, after "73 Roosevelt-street")
+    do.               the ENTIRE address           (row 51, after "Bowery-lane")
+
+`71 do. do.` is decisive: one `do.` cannot mean two things, so the slots resolve separately and a
+single "strip the trailing do." rule is wrong on 44 of duncan1794's 58 rows. **Documented but NOT
+implemented** — it is ~45 rows in one volume and genuinely harder than the name channel.
+
+### Within-line resolver: built, and validated against the whole corpus
+
+Run over **9,830 gold records across every `data/*_eval.jsonl`**: fires on exactly **17**, zero
+false positives, all 17 correct by hand. Two forms only — `do` (x16, full copy) and `910 do` (x1,
+partial: house number given, street inherited).
+
+**The corpus grep earned its keep before a line was written.** A naive `\bdo\b` matches
+`12 Do-minick` (nyu_eval: `Drummond Samuel, druggist, 52 Reade, h. 12 Do-minick`) — Dominick
+Street, hyphenated across a column break, and a hyphen is a word boundary. Anchoring the pattern
+against the whole field is the fix. polk1933si has a person named `" Dominick (Angelina)`, so the
+collision class is live in this corpus, not hypothetical.
+
+**Free find:** polk1933bk labels the same address two ways — `151 5th av` on one row and `5th av`
+on another, same street, same block of entries. The resolver faithfully propagates the slip.
+Possible `validate_gold.py` check.
+
+### Cross-line name pass: use EMISSION order, and report both disputes
+
+**Do not reconstruct columns.** In hOCR emission order the surname sequence is **93.6%
+alphabetically non-decreasing** within a leaf, and the 6.4% backward jumps run ~2.6 per leaf —
+about what legitimate column wraps predict on a multi-column page. Emission order *is* reading
+order here. This is HANDOFF #2 (column detection from hOCR line boxes actively fails, because
+wrapped-line indents make left edges multi-modal) arriving from the other side.
+
+**The carry is not free, and one check is not enough.** Walking back to the nearest surname-shaped
+line finds an antecedent for 84.9% of dittos within the leaf and 100% if the carry crosses leaves —
+but "found" is not "correct":
+
+    cross-leaf carry (structural, page boundary)          20,268
+    carried surname != the leaf's own modal letter        20,190
+    overlap                                                8,958   <- only 28% of the union
+    DISPUTED by at least one                              31,500   (23.5% of all dittos)
+
+**They are not the same rows.** Either check alone misses about half the disputed set, which is why
+both are computed and why disputed rows go to a review queue rather than being silently resolved.
+23.5% is the honest precision of a naive carry on this volume — the number to drive down, not hide.
+
+The modal-letter check caught a real defect on its first run: `TcumoRC`, OCR garbage that satisfies
+the anchored sort-key rule (`T` + `cumo`), became an antecedent and poisoned a run on leaf 10.
+
+**The leader inventory is per-volume and must be re-derived.** `--inventory` dumps the leading-token
+distribution. On 1906BPL: `44` (84,053 — the most common leading token in the book), `“` (44,230),
+`"` (2,478), **`**` (1,221)**, `*`, `'*`, `*'`, `—`, `4‘`. **`**` appears in none of this repo's
+existing ditto lists** and was found only by dumping the distribution; `** Edwin eom'l trav h 588
+11th` is a real entry. Digit forms other than `44` (`4`, `41`, `14`) are deliberately NOT on by
+default — they are also real house numbers.
+
+**What it does not do:** detect non-entries. On micro13 leaf 3 (a known druggist advertisement) it
+resolves `- With a variety of choice ps…` to `panerc`, correctly, because the input is an ad. Page
+type is `entry_rate.py` / `alpha_run_filter`'s problem; the resolver inherits it.
+
+### The `44` experiment — does an OOV leading token corrupt the REST of the line?
+
+`44` is ABBYY's reading of `"`, it is 42% of all lines in 1906BPL, and **the generator never emits
+it** (trained forms are `-` and `" `). The uninteresting half is settled: `44` lands in `name` and
+downstream normalization fixes it for free. The question is whether it perturbs the other seven
+fields.
+
+**A panel A/B cannot answer this and would have been a wasted run.** The frozen 21-volume panel is
+Surya-OCR'd from sampled images and contains **zero** `44`-leading rows; the only file that has them
+(`1906BPL_sample500_eval.jsonl`) has **0 of 500 rows with a gold record**. The answerable version is
+a **paired** diff — same lines, twice, with and without the substitution — scored *excluding*
+`name`, which needs no gold at all.
+
+**Pilot, n=105 (`results/ab_ditto44_1906BPL_2b100k_preds/`):** 101/105 differ in `name` only.
+**4/105** differ in another field, and 2 of those are one legible mechanism:
+
+    44 Wm C tools h 256 Decatur   ->  name='44 Wm C tools'  occupation=''
+     " Wm C tools h 256 Decatur   ->  name='" Wm C'         occupation='tools'
+
+The leading `44` runs the `name` field too far and swallows the occupation; the trained `"` closes
+it. Paired, so row selection is not a confound. The other two rows are apostrophe/decoding drift
+that moved in **both** directions.
+
+**But it is 2 events, and the pilot evidence is equivocal.** An independent free check agrees in
+direction (`44`-lead 2/101 vs `“`-lead **0/196**, one-tailed p≈0.11) — while a looser metric (empty
+occupation + long name) shows **no difference at all** (8%/8% vs 5%/11%). The obvious confound was
+checked and rejected: both failures are `44 Wm`, but abbreviated-given rows do not differ from
+full-given rows.
+
+**Powered run: n=500 paired, pre-registered in
+`results/ab_ditto44_1906BPL_2b100k_PREREGISTRATION.md` before launch** — metric, lexicon
+derivation, McNemar decision rule and the "a null must be persisted with its predictions" clause all
+fixed in advance, because a strict and a loose metric disagreed and picking afterwards is how this
+project got two confident wrong numbers already.
+
+### ✅ RESULT: the leading `44` DOES corrupt the rest of the line. Normalize at ingest.
+
+    n = 500 paired rows, 2b-100k                    (results/ab_ditto44_1906BPL_2b100k.json)
+      swallowed the occupation in BOTH arms  :  50
+      swallowed in A only  (raw `44`)        :  14      <- 44 hurts
+      swallowed in B only  (substituted `"`) :   1
+      neither                                : 435
+      McNemar exact, two-sided               : p = 0.0010
+
+**The pre-registered decision rule fires: normalize `44`/`**` -> `"` in
+`data_prep/ia_volume_to_jsonl.py`, keeping the original in `context.raw_line_original` so the audit
+trail against the page bbox survives.** (NOT YET IMPLEMENTED — see Open.)
+
+The mechanism, in 14 instances, is the one the pilot showed twice:
+
+    44 Wm elk h 86 Laf av   ->  name='44 Wm elk'   occupation=''
+     " Wm elk h 86 Laf av   ->  name='" Wm'        occupation='clk'
+
+**And the benefit compounds.** In arm B the model reaches the occupation field and *also* applies
+the contract's OCR fix (`elk` -> `clk`); in arm A it never gets there, so the record loses the field
+AND the correction. Same for `44 D tailor`, `44 H C manager`, `44 Fred'k ins`.
+
+**The effect is bigger than the pilot suggested.** Non-`name` fields moved on **41/500 (8.2%)**
+against the pilot's 3.8% — `occupation_role` 23, `address` 19, `home_address` 2, `spouse_name` 2,
+`is_business` 1. So this is not solely an occupation-boundary story; the address fields move too.
+
+Scale: 14/500 = 2.8% of `44`-lead rows recover an occupation. 1906BPL has 84,053 `44`-lead lines,
+so **~2,350 records in this volume alone**, before counting the address effects.
+
+**One honest caveat about the single row that went the other way.** `44 E wid h 56 T'kins av`:
+arm A put `wid` in `occupation_role`, arm B left it empty. `wid` is a *widow marker*, not an
+occupation — it belongs in `spouse_name` by convention 8 — so arm B is arguably right and the
+metric scored it backwards. `wid` is in the lexicon because it appears in gold `occupation_role`.
+Left as scored rather than re-run, because the metric was pre-registered and relitigating it after
+seeing the data is exactly the move this section exists to prevent. Correcting it would only
+strengthen the result (15 vs 0).
+
+**What this does not establish:** one volume, one OCR engine, one adapter. `4b-100k` is unusable on
+this Mac (51× slower), so this says nothing about the release candidate. And 1906BPL's tag is
+`upington`, which `synth_persons.py` gives a **0.0** ditto rate — the tag saw no ditto rows in
+training at all. The publisher A/B found the tag inert on both 2B and 4B, so it is recorded as a
+caveat, not a confound.
+
 ### Open
 
 - **Front-matter `--apply` decision** — read `data/1906BPL_alphacut.txt` first. Cut is 7.5%
@@ -1441,6 +1627,24 @@ The `--apply` decision is per-volume-class, not global.
   parked deliberately: two sessions were editing both files in the same hour, and coupling them
   then traded a ~15-line duplication for an invisible shared breakage surface. Revisit when both
   are still; the shared half is `leaf_letters` + `blocks`/`analyse`, pure over the JSONL.
+- **IMPLEMENT the `44` normalization in `ia_volume_to_jsonl.py`** — measured, pre-registered,
+  p=0.0010, ~2,350 recovered occupation fields in 1906BPL alone. Substitute a LEADING `44`/`**`
+  with `"`, keep the original in `context.raw_line_original`. Leading token only: `44` elsewhere in
+  a line is a house number. Re-derive the glyph set per volume (`resolve_dittos.py --inventory`)
+  rather than assuming `44` everywhere — it is one OCR engine's artifact on one book.
+- **`alpha_run_filter --apply` breaks ditto expansion and must not be used before it.** A ditto
+  whose parent surname was cut has nothing to point at. The filter should mark, not drop, if it
+  runs upstream of `postprocess/resolve_dittos.py`. (HANDOFF already concludes `--apply` does not
+  pay on micro13 for unrelated reasons; this is a second, structural reason.)
+- **Wrapped-line joining must precede the ditto pass**, same as it precedes filtering (conv 9a,
+  whole-volume finding #1). A continuation line carries no name and would corrupt the carry.
+- **The 23.5% cross-line dispute rate is the number to attack**, and it is concentrated at
+  leaf/column boundaries. Better boundary handling — not a better regex — is what moves it.
+- **Duncan/early address slot grammar is unimplemented.** Grammar is documented in
+  `postprocess/resolve_dittos.py`; ~45 rows in duncan1794, more across the early volumes.
+- **`entry_rate.py` should be re-run on RESOLVED records** once the cross-line pass is trusted.
+  Its 10.4% / 20.7% figures were measured on records where 67% of names are bare ditto marks, so
+  its behaviour changes on two thirds of a dense volume.
 
 ## Project in one paragraph
 
@@ -1473,6 +1677,14 @@ data_prep/
                           #   filters by text rules + page-median geometry. --self-test
   alpha_run_filter.py     # cuts ads/front matter from that JSONL by ALPHABETICAL order, not
                           #   typography. Report-only until --apply; --dump-cut first. --self-test
+  ../postprocess/resolve_dittos.py
+                          # POST-MODEL: expand ditto marks the model emits verbatim by contract.
+                          #   --records/--preds = within-line (address->home_address); deterministic,
+                          #   17/9830 gold rows, 0 false positives. --lines = cross-line surname
+                          #   carry (67.3% of 1906BPL); flags cross_leaf + letter_conflict, which
+                          #   overlap only 28%, so BOTH are reported. --inventory dumps a volume's
+                          #   leading-token distribution — run it before trusting the glyph set.
+                          #   Never overwrites: adds *_resolved + status. --self-test
   detect_listing_bounds.py # leaf bounds + alphabet-order violations; --from-jsonl reads the above
   backfill_publisher.py   # audits the catalog publisher column against the 17 trained tokens
   master_directories.csv  # multi-source (nypl|ia|loc|iiif) catalog for sampling; see its README

@@ -1274,6 +1274,50 @@ reason to DEPRIORITISE the spooner question, not to conclude the tag is inert. R
 `--tags hearne,trow,spooner` on the 4B. **The A/B stored metrics only, no preds** — against the
 standing keep-the-predictions rule, so the one-row claim cannot be re-checked.
 
+### The publisher tag: null CONFIRMED on the 4B, and the 4B is unusable on this Mac (2026-09-10)
+
+`4b-100k`, hearne1852, tags hearne/trow/spooner: **one distinct output across all three, zero rows
+differing.** All three score identically (78.8 row-exact / 0.887 macro / 0.935 micro). The 2B had
+two outputs differing on one row; the 4B has one output differing on none — **the null is stronger
+on the bigger model, not weaker.** Tagging a Spooner volume `trow` costs nothing measurable, the
+`tag_publisher()` fallback stands, and the 44 normalised rows are correct without being a quality
+win. Side note worth keeping: the 4B's 78.8 row-exact beats the 2B's 76.9 on this volume, so
+capacity still helps even where the tag does not.
+
+A pre-registered reading — "tag sensitivity scales with capacity" — was **falsified in the
+opposite direction**, which is the outcome that actually closes the question.
+
+**⚠️ Qwen3.5-4B DOES NOT FIT THIS 16 GB MACHINE. 83.2 min/tag against the 2B's 97 s on the same 52
+rows — 51× slower, not the ~2× parameter count predicts** (0.0104 rows/s vs ~0.5). At that rate
+`micro_IABROOKLYN_0013` would take ~3 days and 1906BPL ~7 months. **The 2B is the only locally
+runnable adapter; 4B at any real scale needs the HPC.**
+
+The dangerous part is how invisible it was. **Neither RSS nor `vm.swapusage` ever showed anything**
+— a 9 GB MPS model reports 0.03 GB RSS because Metal buffers never enter the resident set, and
+swap sat at 22 G of 23 G used for reasons mostly pre-existing. **Throughput against a known
+baseline is the only honest instrument on this box**, and even knowing that, "4 minutes into tag 1,
+a little over 2×" read as fine when it was already 51×. Check rows/s against a baseline within the
+first ten minutes of any MPS run.
+
+### A fourth way to lose a result: the guard against a reasoning error caused a persistence error
+
+The A/B's materiality guard — added specifically to stop the harness overclaiming from noise —
+`return`ed early on the null path, and the save sat downstream of it. **4.16 h of compute printed a
+result and persisted nothing.** The null is exactly the case worth keeping, and the guard against
+misreading it is what discarded it.
+
+That is the **third** time this project has paid for the SCALE_RUNS keep-the-predictions rule, by
+three distinct mechanisms: v6/v7 never saved at all; a later run saved to a scratch dir that did
+not travel with the artifact; and now a branch returned before the save. The fix is structural
+rather than another reminder — **persist before you interpret, and keep the save unreachable from
+any branch**, because writing an artifact is not part of reading it.
+
+What was actually lost: `distinct_outputs: 1` and `max_rows_differing: 0` were computed from the
+predictions before they vanished, so the claim is sound — but identical metrics alone *cannot*
+prove byte-identical output (two different outputs can score the same), and the files that could
+are gone. Metrics are in `results/ab_publisher_hearne1852_4b100k.json`, flagged RECONSTRUCTED. Not
+re-run: 4.16 h to recover predictions for a confirmed null is a bad trade.
+
 ### Local inference on a Mac (measured 2026-09-09)
 
 **0.38 lines/s**, 2b-100k on an M2 Air 16 GB, batch 16, weights cached. So 2,889 lines ≈ 2 h and
@@ -1287,6 +1331,35 @@ standing keep-the-predictions rule, so the one-row claim cannot be re-checked.
   env: `VP=~/github/directory-pipeline/.venv/bin/python; $VP -m pip install --target <dir>
   --no-deps peft accelerate transformers tokenizers huggingface_hub safetensors`, then
   `PYTORCH_ENABLE_MPS_FALLBACK=1 PYTHONPATH=<dir> $VP eval/qwen_predict.py …`.
+
+### Fabrication is driven by PAGE TYPE, not OCR quality (measured 2026-09-10)
+
+Josh's hypothesis was that micro13's error rate is a microfilm-OCR artifact and the clean ABBYY
+tier would do much better. **Half right, and the half that fails is the useful half.**
+
+Scored on kept leaves, restricted to lines that carry a sort key — dittos excluded, because
+1906BPL is 68.8% ditto-initial against micro13's 3.0% and comparing raw rates would measure ditto
+density rather than quality:
+
+| | 1836 tesseract microfilm | 1906 ABBYY scan |
+|---|---|---|
+| non-ASCII garbage (curly punctuation excluded) | 13.3% | **1.0%** |
+| fabricated records | 6.1% (119/1,937) | 5.1% (8/156) |
+| 95% CI | 5.2–7.3% | 2.6–9.8% |
+
+**The OCR is 13× cleaner and the fabrication rate does not follow it** — the CIs overlap, so the
+difference is not resolvable at this sample size. And all eight 1906 failures are ADVERTISING
+COPY, not OCR damage: `act as Executor, Administrator, Guardian, Trus-`, `Sole Agent in the United
+States and Canada`, `upon Request`, `what Title`.
+
+**So the two problems are independent. Better scanning does not reduce fabrication; it produces
+cleanly-rendered fiction.** Page/line-type detection is the only lever. Note `upon Request` and
+`what Title` appear on BOTH leaf 512 and 612 — a recurring margin ad on pages otherwise full of
+real listings, which is the interleaved-interior-ad case a leaf-level filter cannot catch.
+
+Method note: the ditto-free restriction also **corrected the micro13 number from 14.4% to 6.1%** —
+over half of what the first pass called fabrication was the proxy penalising dittoed entries for
+having `"` or `44` in the name field, which is the model copying correctly.
 
 ### First full volume through the model, and what it says about `--apply` (2026-09-09)
 

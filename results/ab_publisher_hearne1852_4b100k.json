@@ -1,0 +1,40 @@
+{
+ "gold": "data/hearne1852_eval.jsonl",
+ "n": 52,
+ "truth": "hearne",
+ "model": "~/Downloads/scale-runs/adapters/4b-100k",
+ "base_model": "Qwen/Qwen3.5-4B",
+ "target": "yaml",
+ "batch_size": 8,
+ "distinct_outputs": 1,
+ "max_rows_differing": 0,
+ "material": false,
+ "identical_groups": [
+  [
+   "hearne",
+   "trow",
+   "spooner"
+  ]
+ ],
+ "results": {
+  "hearne": {
+   "row_exact_pct": 78.8,
+   "macro_f1": 0.887,
+   "micro_f1": 0.935
+  },
+  "trow": {
+   "row_exact_pct": 78.8,
+   "macro_f1": 0.887,
+   "micro_f1": 0.935
+  },
+  "spooner": {
+   "row_exact_pct": 78.8,
+   "macro_f1": 0.887,
+   "micro_f1": 0.935
+  }
+ },
+ "wall_clock_seconds": 14978,
+ "rows_per_second": 0.0104,
+ "RECONSTRUCTED": "Metrics transcribed from the run log. PREDICTIONS WERE LOST: the materiality guard returned early on the null path, before the save. 4.16 h of compute, no preds. Fixed so the save runs before any interpretation and cannot sit behind a branch; a re-run would cost another 4.16 h and is not justified by a clean null.",
+ "throughput_note": "83.2 min/tag vs 97 s/tag for 2B on the same 52 rows -- 51x slower, not the ~2x predicted from parameter count. Qwen3.5-4B does not fit this 16 GB machine. RSS and vm.swapusage both failed to show it (Metal allocations are not in the resident set); only throughput revealed it."
+}

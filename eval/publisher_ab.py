@@ -73,6 +73,36 @@ def run_tag(net, tok, rows, tag, target, batch_size, max_new_tokens):
     return ev.metrics(ev.score(gold, preds)), preds
 
 
+def save_run(args, rows, tags, truth, results, preds_by_tag, distinct, max_diff, material):
+    """Write metrics AND per-tag predictions. Called before any interpretation, unconditionally.
+
+    SCALE_RUNS.md: "Keep the prediction files, not just the adapter... stored predictions let you
+    re-score against a metric you think of later, on CPU, in seconds" -- v6/v7 not keeping theirs
+    cost a 3.5 h regeneration. This project has now paid for that rule twice more: once by
+    writing preds to a scratch dir that did not travel with the result, and once by returning
+    early on the null path so a 4.16 h run persisted nothing at all.
+    """
+    if not (args.save or args.save_preds):
+        return
+    out = Path(args.save) if args.save else None
+    preds_dir = Path(args.save_preds) if args.save_preds else out.with_name(out.stem + "_preds")
+    preds_dir.mkdir(parents=True, exist_ok=True)
+    for tag in tags:
+        (preds_dir / f"preds_{tag}.txt").write_text("\n".join(preds_by_tag[tag]) + "\n",
+                                                    encoding="utf-8")
+    if out is None:
+        print(f"\nwrote {len(tags)} prediction files to {preds_dir}/")
+        return
+    out.write_text(json.dumps(
+        {"gold": args.gold, "n": len(rows), "truth": truth, "model": args.model,
+         "base_model": args.base_model, "target": args.target,
+         "distinct_outputs": len(distinct), "max_rows_differing": max_diff,
+         "material": material, "preds_dir": str(preds_dir),
+         "identical_groups": [g for g in distinct.values() if len(g) > 1],
+         "results": results}, indent=1), encoding="utf-8")
+    print(f"\nwrote {out} and {len(tags)} prediction files to {preds_dir}/")
+
+
 def _self_test():
     """Pin the materiality guard. This is the logic that was WRONG in the first version: it
     ranked six tags by macro F1 when they had produced two distinct outputs differing on one row
@@ -99,6 +129,23 @@ def _self_test():
         distinct.setdefault(tuple(preds[t]), []).append(t)
     assert len(distinct) == 2, "a and b are identical and must group"
     assert ["a", "b"] in distinct.values(), "grouping must name the identical tags"
+
+    # The null path must still persist. This is the case that wrote nothing after 4.16 h of GPU:
+    # the save sat downstream of the interpretation, and the interpretation returned early.
+    import argparse as _ap
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        fake = _ap.Namespace(save=str(Path(td) / "r.json"), save_preds=None, gold="g",
+                             model="m", base_model="b", target="yaml")
+        preds = {"hearne": ["a"], "trow": ["a"]}          # identical -> the null path
+        save_run(fake, [{}], ["hearne", "trow"], "hearne", {"hearne": {}, "trow": {}},
+                 preds, {("a",): ["hearne", "trow"]}, 0, False)
+        saved = json.loads((Path(td) / "r.json").read_text())
+        assert saved["material"] is False, "a null must be recorded as a null, not omitted"
+        assert saved["max_rows_differing"] == 0
+        for tag in ("hearne", "trow"):
+            assert (Path(td) / "r_preds" / f"preds_{tag}.txt").exists(), \
+                f"{tag} predictions must be written even when the result is null"
 
     print("self-test OK", file=sys.stderr)
     return 0
@@ -196,6 +243,14 @@ def main(argv=None):
             print(f"  identical: {', '.join(group)}")
 
     material = max_diff >= max(3, 0.05 * n_rows)
+
+    # SAVE BEFORE READING, and never behind a branch. The first version returned early on the
+    # null path, so a 4.16 h 4B run printed its result and wrote nothing -- the null being
+    # exactly the case worth keeping, and the guard added to prevent overclaiming being what
+    # discarded it. Persisting the artifact is not part of the interpretation and must not sit
+    # downstream of it.
+    save_run(args, rows, tags, truth, results, preds_by_tag, distinct, max_diff, material)
+
     if not material:
         print("\nreading: NO MEASURABLE EFFECT. The publisher tag did not change this model's\n"
               "output on this volume, so the table above ranks noise -- do not read an ordering\n"
@@ -221,30 +276,6 @@ def main(argv=None):
             "an OOV tag is worse than every wrong-but-trained tag -- keep the fallback, and pick "
             "the stand-in by borrowing the best trained contemporary."))
 
-    if args.save or args.save_preds:
-        # Predictions ride along with the metrics, always. SCALE_RUNS.md: "Keep the prediction
-        # files, not just the adapter... stored predictions let you re-score against a metric you
-        # think of later, on CPU, in seconds" -- v6/v7 not keeping theirs cost a 3.5 h
-        # regeneration. The first run of this tool saved metrics that proved a one-row difference
-        # nobody else could then re-check, which is the same mistake in miniature.
-        out = Path(args.save) if args.save else None
-        preds_dir = Path(args.save_preds) if args.save_preds \
-            else out.with_name(out.stem + "_preds")
-        preds_dir.mkdir(parents=True, exist_ok=True)
-        for tag in tags:
-            (preds_dir / f"preds_{tag}.txt").write_text("\n".join(preds_by_tag[tag]) + "\n",
-                                                        encoding="utf-8")
-        if out is None:
-            print(f"\nwrote {len(tags)} prediction files to {preds_dir}/")
-            return 0
-        out.write_text(json.dumps(
-            {"gold": args.gold, "n": len(rows), "truth": truth, "model": args.model,
-             "base_model": args.base_model, "target": args.target,
-             "distinct_outputs": len(distinct), "max_rows_differing": max_diff,
-             "material": material, "preds_dir": str(preds_dir),
-             "identical_groups": [g for g in distinct.values() if len(g) > 1],
-             "results": results}, indent=1), encoding="utf-8")
-        print(f"\nwrote {out} and {len(tags)} prediction files to {preds_dir}/")
     return 0
 
 

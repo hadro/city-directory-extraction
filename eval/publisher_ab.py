@@ -73,9 +73,43 @@ def run_tag(net, tok, rows, tag, target, batch_size, max_new_tokens):
     return ev.metrics(ev.score(gold, preds)), preds
 
 
+def _self_test():
+    """Pin the materiality guard. This is the logic that was WRONG in the first version: it
+    ranked six tags by macro F1 when they had produced two distinct outputs differing on one row
+    out of 52, and printed 'drop the fallback' off that. Offline, no model."""
+    assert retag([{"raw_line": "x", "context": {"publisher": "trow"}}], "spooner"
+                 )[0]["context"]["publisher"] == "spooner", "retag must replace the publisher"
+    src = [{"raw_line": "x", "context": {"publisher": "trow"}}]
+    assert src[0]["context"]["publisher"] == "trow", "retag must not mutate its input"
+
+    def guard(n_rows, max_diff):
+        return max_diff >= max(3, 0.05 * n_rows)
+
+    # The real hearne1852 run: 52 rows, one row differed. Must NOT be called material.
+    assert not guard(52, 1), "52 rows / 1 differing is noise and must not be ranked"
+    assert not guard(52, 2), "two rows in 52 is still under the floor"
+    assert guard(52, 3), "the absolute floor is 3 rows"
+    assert not guard(1000, 40), "40/1000 is under the 5% relative floor"
+    assert guard(1000, 50), "50/1000 meets the 5% relative floor"
+
+    # Identical outputs must collapse into one group regardless of tag count.
+    preds = {"a": ["1", "2"], "b": ["1", "2"], "c": ["1", "3"]}
+    distinct = {}
+    for t in ("a", "b", "c"):
+        distinct.setdefault(tuple(preds[t]), []).append(t)
+    assert len(distinct) == 2, "a and b are identical and must group"
+    assert ["a", "b"] in distinct.values(), "grouping must name the identical tags"
+
+    print("self-test OK", file=sys.stderr)
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
+    if argv is not None and "--self-test" in argv or "--self-test" in sys.argv[1:]:
+        return _self_test()
+    ap.add_argument("--self-test", action="store_true", help="offline; no model")
     ap.add_argument("--gold", required=True, help="eval JSONL ({raw_line, context, record})")
     ap.add_argument("--tags", required=True,
                     help="comma-separated publisher tags to sweep. Include the volume's true "
@@ -129,12 +163,6 @@ def main(argv=None):
         preds_by_tag[tag] = [json.dumps(p, sort_keys=True) for p in preds]
         print(f"[{tag}] row EM {m['row_exact_pct']}%  macro F1 {m['macro_f1']}  "
               f"micro F1 {m['micro_f1']}", file=sys.stderr)
-        if args.save_preds:
-            d = Path(args.save_preds)
-            d.mkdir(parents=True, exist_ok=True)
-            (d / f"preds_{tag}.txt").write_text("\n".join(
-                ev.to_pipe(p) if args.target == "pipe" else json.dumps(p) for p in preds),
-                encoding="utf-8")
 
     base = results.get(truth)
     print(f"\n{'tag':<14} {'row EM':>8} {'macro F1':>9} {'micro F1':>9}  "
@@ -193,11 +221,30 @@ def main(argv=None):
             "an OOV tag is worse than every wrong-but-trained tag -- keep the fallback, and pick "
             "the stand-in by borrowing the best trained contemporary."))
 
-    if args.save:
-        Path(args.save).write_text(json.dumps(
+    if args.save or args.save_preds:
+        # Predictions ride along with the metrics, always. SCALE_RUNS.md: "Keep the prediction
+        # files, not just the adapter... stored predictions let you re-score against a metric you
+        # think of later, on CPU, in seconds" -- v6/v7 not keeping theirs cost a 3.5 h
+        # regeneration. The first run of this tool saved metrics that proved a one-row difference
+        # nobody else could then re-check, which is the same mistake in miniature.
+        out = Path(args.save) if args.save else None
+        preds_dir = Path(args.save_preds) if args.save_preds \
+            else out.with_name(out.stem + "_preds")
+        preds_dir.mkdir(parents=True, exist_ok=True)
+        for tag in tags:
+            (preds_dir / f"preds_{tag}.txt").write_text("\n".join(preds_by_tag[tag]) + "\n",
+                                                        encoding="utf-8")
+        if out is None:
+            print(f"\nwrote {len(tags)} prediction files to {preds_dir}/")
+            return 0
+        out.write_text(json.dumps(
             {"gold": args.gold, "n": len(rows), "truth": truth, "model": args.model,
+             "base_model": args.base_model, "target": args.target,
+             "distinct_outputs": len(distinct), "max_rows_differing": max_diff,
+             "material": material, "preds_dir": str(preds_dir),
+             "identical_groups": [g for g in distinct.values() if len(g) > 1],
              "results": results}, indent=1), encoding="utf-8")
-        print(f"\nwrote {args.save}")
+        print(f"\nwrote {out} and {len(tags)} prediction files to {preds_dir}/")
     return 0
 
 

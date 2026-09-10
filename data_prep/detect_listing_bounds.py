@@ -81,9 +81,16 @@ from ia_volume_to_jsonl import Item, hocr_lines          # noqa: E402
 REPO = HERE.parent
 LETTERS = [chr(c) for c in range(ord("A"), ord("Z") + 1)]
 
-# A word-shaped leading token: at least 3 letters, so page numbers, initials and stray marks
-# do not vote. The surname is the first word of a directory entry, which is what carries the sort.
-FIRST_WORD_RE = re.compile(r"([A-Za-z])[a-z]{2,}")
+# A word-shaped leading token: at least 3 letters, so page numbers, initials and stray marks do
+# not vote. The surname is the first word of a directory entry, which is what carries the sort.
+#
+# The alternation admits O'Brien / D'Ambra while still abstaining on H'y and W'm. That is not a
+# special case, it is the same rule: a surname capitalises after the apostrophe, an abbreviated
+# GIVEN name does not, and the abbreviated given names are the ditto failure in disguise --
+# they appear where OCR dropped the ditto mark, so voting them would score the wrong column.
+# Worth only 11 lines in 199,012 on 1906BPL (surnames repeat under ditto marks, so each one is
+# line-initial about once), but it costs nothing and volumes heavier in Irish surnames exist.
+FIRST_WORD_RE = re.compile(r"([A-Za-z])(?:[a-z]{2,}|'[A-Z][a-z])")
 
 
 def leaf_letters_from_jsonl(path, min_lines):
@@ -204,9 +211,59 @@ def analyse(block_map):
     return block_map[present[0]]["span"][0], block_map[present[-1]]["span"][1], present, violations, gaps
 
 
+def _self_test():
+    """Offline; no network, no cache. Pins the two things measurement actually corrected here:
+    the ditto forms must abstain, and a letter's block must be its member leaves rather than its
+    span (interior ad pages sat inside the O block until that was fixed)."""
+    # Ditto marks vote the GIVEN name if the sort key is not anchored. These exact lines are the
+    # ones the parallel session hit on 1906BPL.
+    def key(line):
+        m = FIRST_WORD_RE.match(line.strip())
+        return m.group(1).upper() if m else None
+
+    assert key("Ackerman And'w J foreman h 460 Ralph av") == "A", "a real surname must vote"
+    assert key('"        Ann C wid David h 518 Madison') is None, "ditto mark must abstain"
+    assert key("44       Anna costumes 760 B'way") is None, "OCR'd ditto must abstain"
+    assert key('" Julius r 131 Av A') is None, "gold-convention ditto must abstain"
+    assert key("do. Ann C wid") is None, "'do.' ditto must abstain"
+    assert key("MAIN OFFICE, 1232 Fulton St.") is None, "ALL-CAPS banner must abstain"
+    assert key("W. E. Murdock, Boston.") is None, "initials-first ad copy must abstain"
+    assert key("O'Brien Michael lab h 12 Pine") == "O", "apostrophe surnames must still vote"
+    assert key("D'Ambra Luigi lab h 44 Union") == "D", "so must D'-surnames"
+    assert key("H'y grocer 213 Prince") is None, "abbreviated GIVEN name must still abstain"
+    assert key("Wm elk h 149 Division av") is None, "so must Wm -- the ditto in another costume"
+
+    assert clusters([1, 2, 3, 20, 21], 6) == [[1, 2, 3], [20, 21]], "gap must split runs"
+    assert clusters([1, 5, 9], 6) == [[1, 5, 9]], "gaps within tolerance must not split"
+    assert clusters([], 6) == [], "empty input must not raise"
+
+    # A block keeps its members, not its span: leaf 5 voted B, leaf 6 did not, leaf 7 voted B.
+    letters = {5: ("B", 0.9, 40), 6: ("Z", 0.1, 30), 7: ("B", 0.9, 40)}
+    bm = blocks(letters, 0.40, 6)
+    assert bm["B"]["leaves"] == [5, 7], "a non-voting interior leaf must not join the block"
+    assert bm["B"]["span"] == (5, 7), "the span still reports the outer bound"
+    assert "Z" not in bm, "a leaf below min_share must not form a block"
+
+    # Ordering and gap bookkeeping.
+    bm2 = blocks({1: ("A", .9, 9), 2: ("A", .9, 9), 9: ("B", .9, 9)}, 0.40, 6)
+    start, end, present, viol, gaps = analyse(bm2)
+    assert (start, end) == (1, 9) and present == ["A", "B"], "bounds span first to last letter"
+    assert viol == [], "A before B is not a violation"
+    assert gaps == [("A", "B", 3, 8, 6)], "the run between blocks must be reported as a gap"
+
+    back = analyse(blocks({1: ("B", .9, 9), 9: ("A", .9, 9)}, 0.40, 6))
+    assert back[3] == [("A", "B")], "B starting before A must be flagged as a violation"
+
+    print("self-test OK", file=sys.stderr)
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
+    if "--self-test" in (argv if argv is not None else sys.argv[1:]):
+        return _self_test()
+    ap.add_argument("--self-test", action="store_true", help="offline; no network, no cache")
     ap.add_argument("--ident", required=True, help="IA identifier")
     ap.add_argument("--from-jsonl", nargs="?", const="auto", default=None,
                     help="read an existing data/<ident>_lines.jsonl instead of the hOCR. Bare "

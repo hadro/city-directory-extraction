@@ -129,9 +129,12 @@ def infer(row, known):
         match = re.search(rf"\b{re.escape(name)}-era\b", notes, re.I)
         if not match:
             continue
-        # "matches Upington-era" / "Trow-era?" are guesses, not attributions.
-        window = notes[max(0, match.start() - 40):match.end() + 2]
-        if QUALIFIER_RE.search(window) or window.rstrip().endswith("?"):
+        # "matches Upington-era" / "Trow-era?" are guesses, not attributions. The question mark
+        # is checked at the match itself, not at the end of the window: notes are
+        # semicolon-delimited, so "Trow-era?; needs sample" leaves "?;" trailing and an
+        # endswith() on the window silently misses it.
+        window = notes[max(0, match.start() - 40):match.end()]
+        if QUALIFIER_RE.search(window) or notes[match.end():match.end() + 1] == "?":
             return None, f"era mention is qualified: {window.strip()[:44]!r}"
         return name, f"notes era: {match.group(0)}"
 
@@ -164,8 +167,57 @@ def render(fieldnames, rows):
     return buf.getvalue()
 
 
+def _self_test():
+    """Offline. Pins the assertion-vs-hedge distinction, which is the whole reason this fills 21
+    rows instead of 33: the notes column records guesses in the same prose as attributions, and
+    filling a guess is worse than leaving the field blank."""
+    known = {"spooner", "hearne", "lain", "smith", "trow", "upington", "franks", "reynolds"}
+
+    def infer_row(title, notes):
+        return infer({"title": title, "notes": notes}, known)[0]
+
+    # Attributions -- fill these.
+    assert infer_row("Brooklyn Directory for 1836-1837",
+                     "Spooner-era Brooklyn; col=1 verified 1848/49 sample (s4)") == "spooner"
+    assert infer_row("Hearnes' Brooklyn City Directory for 1850-1851", "") == "hearne"
+    assert infer_row("Smith's Brooklyn City Directory for 1854 & 1855", "") == "smith"
+
+    # Hedges -- must NOT fill. Each of these appears verbatim in master_directories.csv.
+    assert infer_row("The Brooklyn City Directory for the year ending May 1st, 1859",
+                     "Lain-era Consolidated; col=2; publisher unverified (s4)") is None, \
+        "'publisher unverified' must veto an era attribution in the same note"
+    assert infer_row("Williamsburgh Directory, Register, and Yearly Advertiser",
+                     "Williamsburgh, pre-Lain; col=1 (s4)") is None, \
+        "'pre-Lain' asserts the opposite of Lain"
+    assert infer_row("Brooklyn, New York, city directory",
+                     "post-1900 Brooklyn 1912; matches Upington-era; publisher unverified") is None
+    assert infer_row("New York directory.", "1910 Manhattan; Trow-era?; needs sample") is None, \
+        "a trailing question mark marks a guess"
+    assert infer_row("New York and Brooklyn directory, 1786-1796",
+                     "1786-96 compilation; col=1 18thC; overlaps Franks era (s4)") is None, \
+        "'overlaps' is a qualifier, not an attribution"
+    assert infer_row("Brooklyn Business Directory 1858-1859",
+                     "BIZ -- business directory (firms, not residents)") is None
+
+    # Possessive handling must not eat a trailing s that belongs to the name.
+    assert canonical("franks") == "franks", "franks must not become frank"
+    assert canonical("doggett's") == "doggett"
+    assert canonical("hearnes") == "hearne"
+
+    assert classify_oov("hearnes") == ("variant", "hearne")
+    assert classify_oov("trow/wilson") == ("compound", "trow")
+    assert classify_oov("franks/kollock") == ("compound", "franks")
+    assert classify_oov("spooner") == ("unseen", None)
+
+    print("self-test OK", file=sys.stderr)
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
+    if "--self-test" in sys.argv[1:]:
+        return _self_test()
+    ap.add_argument("--self-test", action="store_true", help="offline; no network")
     ap.add_argument("--write", action="store_true", help="apply changes (default: diff only)")
     ap.add_argument("--all", action="store_true",
                     help="include telephone directories (skipped by default: different genre)")

@@ -1332,7 +1332,35 @@ re-run: 4.16 h to recover predictions for a confirmed null is a bad trade.
   --no-deps peft accelerate transformers tokenizers huggingface_hub safetensors`, then
   `PYTORCH_ENABLE_MPS_FALLBACK=1 PYTHONPATH=<dir> $VP eval/qwen_predict.py …`.
 
-### Fabrication is driven by PAGE TYPE, not OCR quality (measured 2026-09-10)
+### ⚠️ SUPERSEDED — the section below was measured with a broken instrument
+
+**Corrected 2026-09-10 by `eval/entry_rate.py`, which is hand-validated. Use these numbers:**
+
+| kept leaves | 1836 tesseract microfilm | 1906 ABBYY scan |
+|---|---|---|
+| records that are NOT real entries | **20.7%** (n=2,227) | **10.4%** (n=500) |
+
+**Josh's hypothesis was right and the earlier write-up said otherwise.** The clean ABBYY tier is
+**2× better**, not indistinguishable. Whole-volume micro13 is 30.1% junk against the 1906 sample's
+10.4%.
+
+The error was the proxy, not the data. Scoring "does the predicted `name` look like a surname" is
+**67.5% accurate** on a hand-labelled set: it calls advertising real (`name: "Pamphlet"`,
+`name: "Telephone"` are surname-shaped) and calls correct ditto-copying fabricated. Those two
+errors ran in opposite directions and happened to cancel to a null. `eval/entry_rate.py` scores
+name + a Brooklyn-shaped address and is **97.5%** accurate on the same labels, 0.0% on a known ad
+page and 88.7% on known body pages.
+
+**The methodological point is the durable one: I validated the first proxy by checking that it
+SEPARATED cut from kept leaves, which it does, and never checked whether it agreed with a human on
+what a real entry is.** A proxy that discriminates is not therefore correct. Forty hand-read lines
+settled it; nothing cheaper would have.
+
+By leaf status, corrected: KEPT 20.7% not-entries · CUT 66.9% · ABSTAIN 58.2%. The
+kept/cut/abstain ordering from the original analysis survives — the filter does aim correctly —
+but every absolute number in it was wrong.
+
+### (superseded) Fabrication is driven by PAGE TYPE, not OCR quality (measured 2026-09-10)
 
 Josh's hypothesis was that micro13's error rate is a microfilm-OCR artifact and the clean ABBYY
 tier would do much better. **Half right, and the half that fails is the useful half.**
@@ -1438,6 +1466,8 @@ data_prep/
   verify_harvest_leakage.py # proves harvested pages are not in any eval set; exits 1 on a leak; --self-test
   harvest_occupations.py  # surya listing lines -> gemini_baseline extract -> names/occupations_harvested.tsv (COMMITTED); --self-test
   names/surnames.tsv      # committed census surname pool (surnames_harvested.tsv is generated, gitignored)
+  ../eval/entry_rate.py   # what %% of extracted records are REAL entries vs advertising turned
+                          #   into people. Hand-validated 97.5%%; the obvious proxy is 67.5%%. --self-test
   ia_volume_to_jsonl.py   # WHOLE VOLUME: IA ident -> {raw_line,context,record} JSONL from IA's own
                           #   hOCR. No images, no OCR, no GPU. Joins wrapped entries (conv 9a/15);
                           #   filters by text rules + page-median geometry. --self-test

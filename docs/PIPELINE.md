@@ -5,7 +5,8 @@ out. Every number here is measured on this corpus, and where a stage is *not* ca
 
 Companion docs: [HANDOFF.md](HANDOFF.md) is the working record and the reason each decision is what
 it is; [TAKEOVER.md](TAKEOVER.md) is the cold-start orientation; [GROUND_TRUTH_HANDOFF.md](GROUND_TRUTH_HANDOFF.md)
-is the labeling contract that governs the model's output shape.
+is the labeling contract that governs the model's output shape;
+[PAGE_TYPE_CLASSIFIER.md](PAGE_TYPE_CLASSIFIER.md) is the plan for next-step #11, phase 0 run.
 
 > **The one thing to internalize before running anything: the model never refuses.** Feed it a line
 > of advertising and it returns a confidently structured fake person (`address: "entrusted to their
@@ -361,7 +362,13 @@ currently measured with proxies or on sampled pages. This is the highest-value e
 becomes a fabricated person. No line-level rule catches it — `courts of law or equity in` is
 lowercase, ASCII, normal height, normal width, on a common left margin. This probably needs a
 page-level classifier or a VLM pass on the leaf image, and it is the largest remaining correctness
-gap.
+gap. The plan is [PAGE_TYPE_CLASSIFIER.md](PAGE_TYPE_CLASSIFIER.md); phase 0 has run, and it found
+that **advertising in 1906BPL is banded, not paginated — 94% of listing-span leaves are an ad strip,
+a clean listing body, and an ad strip.** Ditto-lead density is 0.7% in the top decile of the page,
+45% through the middle eight, 0.0% in the bottom decile
+([`results/leaf_band_structure_1906BPL.py`](../results/leaf_band_structure_1906BPL.py)). So the unit
+is a band within a leaf, not the leaf — and `--interior drop`'s recorded cost of ~172 leaves is
+~172 *clean listing bodies* discarded to remove their strips.
 
 **12. Run a whole volume on the 4B, on the HPC.** The release candidate has never processed a
 volume; every whole-volume number in this repo is from the 2B. Rented GPU, hours not days.

@@ -1,0 +1,307 @@
+<meta charset="utf-8">
+<title>Band labeller</title>
+<style>
+  :root {
+    --ink:#1a1a1a; --dim:#6b7280; --line:#d4d4d8; --bg:#f6f6f4; --panel:#fff;
+    --body:#2563eb; --head:#dc2626; --ditto:#16a34a;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+         color:var(--ink); background:var(--bg); display:flex; height:100vh; overflow:hidden; }
+
+  /* ---- page image + band overlay ---- */
+  #stage { flex:1; display:flex; align-items:center; justify-content:center;
+           padding:12px; overflow:auto; }
+  #wrap { position:relative; display:inline-block; line-height:0;
+          box-shadow:0 1px 6px rgba(0,0,0,.25); }
+  #page { display:block; max-height:calc(100vh - 24px); width:auto; }
+  #wrap.nobody #page { filter:grayscale(1) brightness(1.08); }
+
+  .shade { position:absolute; left:0; right:0; background:rgba(220,38,38,.22);
+           pointer-events:none; }
+  #shadeTop { top:0; } #shadeBot { bottom:0; }
+  #wrap.nobody .shade { background:rgba(220,38,38,.34); }
+
+  .handle { position:absolute; left:0; right:0; height:13px; margin-top:-6px;
+            cursor:ns-resize; z-index:5; }
+  .handle::after { content:""; position:absolute; left:0; right:0; top:6px; height:2px;
+                   background:var(--body); box-shadow:0 0 0 1px rgba(255,255,255,.7); }
+  .handle:hover::after, .handle.drag::after { height:4px; top:5px; }
+  #wrap.nobody .handle { display:none; }
+
+  .tick { position:absolute; right:3px; transform:translateY(-50%); z-index:6;
+          background:var(--body); color:#fff; font-size:10px; font-weight:600;
+          padding:1px 5px; border-radius:3px; pointer-events:none; }
+
+  .lbox { position:absolute; border:1px solid rgba(37,99,235,.30); pointer-events:none; }
+  .lbox.d { border-color:rgba(22,163,74,.85); background:rgba(22,163,74,.12); }
+  #overlay.off { display:none; }
+
+  /* ---- sidebar ---- */
+  #side { width:292px; flex:none; background:var(--panel); border-left:1px solid var(--line);
+          display:flex; flex-direction:column; overflow-y:auto; }
+  #side > div { padding:11px 14px; border-bottom:1px solid var(--line); }
+  h2 { margin:0 0 3px; font-size:14px; }
+  .sub { color:var(--dim); font-size:11px; }
+  .blind { background:#fef3c7; color:#92400e; font-weight:600; padding:2px 7px;
+           border-radius:3px; font-size:10.5px; display:inline-block; }
+
+  .row { display:flex; gap:6px; align-items:center; margin:5px 0; }
+  .row label { width:46px; color:var(--dim); font-size:11px; }
+  .val { font-variant-numeric:tabular-nums; font-weight:600; }
+
+  button { font:inherit; padding:4px 9px; border:1px solid var(--line); background:#fff;
+           border-radius:4px; cursor:pointer; }
+  button:hover { background:#f0f0ef; }
+  button.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  button.warn.on { background:#dc2626; border-color:#dc2626; }
+  .cls { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
+  .cls button { font-size:11px; padding:3px 7px; }
+  .cls button.def { opacity:.55; font-style:italic; }
+
+  kbd { font:11px ui-monospace,Menlo,monospace; background:#eee; border:1px solid var(--line);
+        border-bottom-width:2px; border-radius:3px; padding:0 4px; }
+  #prog { height:5px; background:#e5e5e3; border-radius:3px; overflow:hidden; margin-top:6px; }
+  #progbar { height:100%; background:var(--body); width:0; }
+  #status { font-size:11px; color:var(--dim); min-height:15px; }
+  .keys { font-size:11px; color:var(--dim); line-height:1.9; }
+  #btnSave { width:100%; padding:7px; font-weight:600; }
+</style>
+
+<div id="stage">
+  <div id="wrap">
+    <img id="page" alt="">
+    <div id="overlay"></div>
+    <div class="shade" id="shadeTop"></div>
+    <div class="shade" id="shadeBot"></div>
+    <div class="handle" id="hTop"></div>
+    <div class="handle" id="hBot"></div>
+    <div class="tick" id="tTop"></div>
+    <div class="tick" id="tBot"></div>
+  </div>
+</div>
+
+<div id="side">
+  <div>
+    <h2 id="ttl">leaf —</h2>
+    <div class="sub" id="meta"></div>
+    <div id="blindTag" style="margin-top:6px"></div>
+    <div id="prog"><div id="progbar"></div></div>
+    <div class="sub" id="progtxt" style="margin-top:4px"></div>
+  </div>
+
+  <div>
+    <div class="row"><label>body</label>
+      <span class="val" id="vTop">—</span><span class="sub">to</span>
+      <span class="val" id="vBot">—</span></div>
+    <div class="row">
+      <button id="btnBody">has body</button>
+      <button id="btnIrr" class="warn">irregular</button>
+    </div>
+    <div class="sub" id="prefillNote"></div>
+  </div>
+
+  <div>
+    <div class="sub">head strip <kbd>1</kbd>–<kbd>5</kbd></div>
+    <div class="cls" id="clsHead"></div>
+    <div class="sub" style="margin-top:9px">foot strip <kbd>shift</kbd>+<kbd>1</kbd>–<kbd>5</kbd></div>
+    <div class="cls" id="clsFoot"></div>
+  </div>
+
+  <div>
+    <div class="row">
+      <button id="btnPrev">← prev</button>
+      <button id="btnNext" style="flex:1">next →</button>
+    </div>
+    <button id="btnSave" style="margin-top:7px">Save</button>
+    <div id="status" style="margin-top:6px"></div>
+  </div>
+
+  <div class="keys">
+    <kbd>←</kbd> <kbd>→</kbd> prev / next &nbsp;·&nbsp; <kbd>w</kbd> <kbd>s</kbd> top edge<br>
+    <kbd>↑</kbd> <kbd>↓</kbd> bottom edge &nbsp;·&nbsp; <kbd>b</kbd> has body<br>
+    <kbd>i</kbd> irregular &nbsp;·&nbsp; <kbd>o</kbd> boxes &nbsp;·&nbsp; <kbd>Enter</kbd> save
+  </div>
+</div>
+
+<script>
+const CFG = __PAYLOAD__;
+const CLASSES = ["advertising","running-head","front-matter","index-or-back-matter","empty"];
+const SHORT   = ["ad","head","front","index","empty"];
+
+let i = 0, dirty = false;
+const S = CFG.leaves.map(L => ({
+  leaf: L.leaf,
+  has_body: L.prefill_top !== null,
+  irregular: false,
+  body_top: L.prefill_top !== null ? L.prefill_top : 0.10,
+  body_bottom: L.prefill_bottom !== null ? L.prefill_bottom : 0.90,
+  head_class: "advertising", head_class_defaulted: true,
+  foot_class: "advertising", foot_class_defaulted: true,
+  visited: false,
+}));
+
+const $ = id => document.getElementById(id);
+const cur = () => S[i];
+const clamp = v => Math.max(0, Math.min(1, v));
+
+function mkClassRow(el, which) {
+  el.innerHTML = "";
+  CLASSES.forEach((c, n) => {
+    const b = document.createElement("button");
+    b.textContent = (n + 1) + " " + SHORT[n];
+    b.onclick = () => setClass(which, c);
+    el.appendChild(b);
+  });
+}
+mkClassRow($("clsHead"), "head");
+mkClassRow($("clsFoot"), "foot");
+
+function setClass(which, c) {
+  const s = cur();
+  s[which + "_class"] = c;
+  s[which + "_class_defaulted"] = false;
+  dirty = true; render();
+}
+
+function render() {
+  const L = CFG.leaves[i], s = cur();
+  $("ttl").textContent = "leaf " + L.leaf;
+  $("meta").textContent = L.n_lines + " hOCR lines · " + L.page_size[0] + "×" + L.page_size[1]
+                        + " · " + (i + 1) + " of " + S.length;
+  $("blindTag").innerHTML = CFG.blind
+    ? '<span class="blind">BLIND — no prefill, no overlay</span>' : "";
+  $("prefillNote").textContent = CFG.blind
+    ? "Edges start at 0.10 / 0.90, not at a guess."
+    : (L.prefill_top === null ? "No ditto lines found — prefill unavailable."
+       : "Prefilled from ditto extent " + L.prefill_top.toFixed(3) + "–" + L.prefill_bottom.toFixed(3));
+
+  const img = $("page");
+  if (img.dataset.leaf !== String(L.leaf)) {
+    img.dataset.leaf = String(L.leaf);
+    img.src = CFG.img_base + L.leaf + ".jpg";
+    drawBoxes(L);
+  }
+
+  $("wrap").classList.toggle("nobody", !s.has_body);
+  $("btnBody").classList.toggle("on", s.has_body);
+  $("btnBody").textContent = s.has_body ? "has body" : "NO body (full-page)";
+  $("btnIrr").classList.toggle("on", s.irregular);
+
+  const t = s.body_top, b = s.body_bottom;
+  $("shadeTop").style.height = (t * 100) + "%";
+  $("shadeBot").style.height = ((1 - b) * 100) + "%";
+  $("hTop").style.top = (t * 100) + "%";
+  $("hBot").style.top = (b * 100) + "%";
+  $("tTop").style.top = (t * 100) + "%"; $("tTop").textContent = t.toFixed(3);
+  $("tBot").style.top = (b * 100) + "%"; $("tBot").textContent = b.toFixed(3);
+  $("vTop").textContent = t.toFixed(3); $("vBot").textContent = b.toFixed(3);
+
+  [["head", $("clsHead")], ["foot", $("clsFoot")]].forEach(([w, el]) => {
+    [...el.children].forEach((btn, n) => {
+      btn.classList.toggle("on", s[w + "_class"] === CLASSES[n]);
+      btn.classList.toggle("def", s[w + "_class"] === CLASSES[n] && s[w + "_class_defaulted"]);
+    });
+  });
+
+  const done = S.filter(x => x.visited).length;
+  $("progbar").style.width = (100 * done / S.length) + "%";
+  $("progtxt").textContent = done + " of " + S.length + " visited"
+                           + (dirty ? " · unsaved" : "");
+}
+
+function drawBoxes(L) {
+  const ov = $("overlay");
+  ov.innerHTML = "";
+  ov.classList.toggle("off", CFG.blind);
+  if (CFG.blind) return;                       // overlay would bias a blind label
+  const [W, H] = L.page_size;
+  L.boxes.forEach(([x0, y0, x1, y1, isDitto]) => {
+    const d = document.createElement("div");
+    d.className = "lbox" + (isDitto ? " d" : "");
+    d.style.left = (100 * x0 / W) + "%";  d.style.width  = (100 * (x1 - x0) / W) + "%";
+    d.style.top  = (100 * y0 / H) + "%";  d.style.height = (100 * (y1 - y0) / H) + "%";
+    ov.appendChild(d);
+  });
+}
+
+// ---- dragging ----
+let dragging = null;
+function startDrag(which) {
+  return e => { dragging = which; $(which === "top" ? "hTop" : "hBot").classList.add("drag");
+                e.preventDefault(); };
+}
+$("hTop").addEventListener("mousedown", startDrag("top"));
+$("hBot").addEventListener("mousedown", startDrag("bot"));
+window.addEventListener("mousemove", e => {
+  if (!dragging) return;
+  const r = $("page").getBoundingClientRect();
+  const f = clamp((e.clientY - r.top) / r.height), s = cur();
+  if (dragging === "top") s.body_top = Math.min(f, s.body_bottom - 0.01);
+  else                    s.body_bottom = Math.max(f, s.body_top + 0.01);
+  dirty = true; render();
+});
+window.addEventListener("mouseup", () => {
+  if (!dragging) return;
+  dragging = null;
+  document.querySelectorAll(".handle").forEach(h => h.classList.remove("drag"));
+});
+
+// ---- navigation ----
+function go(n) {
+  cur().visited = true;
+  i = Math.max(0, Math.min(S.length - 1, n));
+  cur().visited = true;
+  render();
+}
+$("btnPrev").onclick = () => go(i - 1);
+$("btnNext").onclick = () => go(i + 1);
+$("btnBody").onclick = () => { cur().has_body = !cur().has_body; dirty = true; render(); };
+$("btnIrr").onclick  = () => { cur().irregular = !cur().irregular; dirty = true; render(); };
+
+document.addEventListener("keydown", e => {
+  const step = e.shiftKey && !/^[1-5]$/.test(e.key) ? 0.05 : 0.005;
+  const s = cur();
+  if (/^[1-5]$/.test(e.key)) { setClass(e.shiftKey ? "foot" : "head", CLASSES[+e.key - 1]); }
+  else if (e.key === "ArrowLeft")  go(i - 1);
+  else if (e.key === "ArrowRight") go(i + 1);
+  else if (e.key === "w") { s.body_top = clamp(s.body_top - step); dirty = true; render(); }
+  else if (e.key === "s") { s.body_top = Math.min(clamp(s.body_top + step), s.body_bottom - .01); dirty = true; render(); }
+  else if (e.key === "ArrowUp")   { s.body_bottom = Math.max(clamp(s.body_bottom - step), s.body_top + .01); dirty = true; render(); }
+  else if (e.key === "ArrowDown") { s.body_bottom = clamp(s.body_bottom + step); dirty = true; render(); }
+  else if (e.key === "b") { s.has_body = !s.has_body; dirty = true; render(); }
+  else if (e.key === "i") { s.irregular = !s.irregular; dirty = true; render(); }
+  else if (e.key === "o") { $("overlay").classList.toggle("off"); return; }
+  else if (e.key === "Enter") { save(); return; }
+  else return;
+  e.preventDefault();
+});
+
+// ---- save ----
+function save() {
+  const rows = S.map((s, n) => {
+    const L = CFG.leaves[n];
+    return {
+      ident: CFG.ident, leaf: s.leaf, blind: CFG.blind, visited: s.visited,
+      has_body: s.has_body, irregular: s.irregular,
+      body_top: s.has_body ? +s.body_top.toFixed(4) : null,
+      body_bottom: s.has_body ? +s.body_bottom.toFixed(4) : null,
+      head_class: s.head_class, head_class_defaulted: s.head_class_defaulted,
+      foot_class: s.foot_class, foot_class_defaulted: s.foot_class_defaulted,
+      prefill_top: L.prefill_top, prefill_bottom: L.prefill_bottom,
+      n_lines: L.n_lines, page_size: L.page_size,
+    };
+  });
+  $("status").textContent = "saving…";
+  fetch(CFG.save_url, { method:"POST", headers:{"Content-Type":"application/json"},
+                        body: JSON.stringify({ rows }) })
+    .then(r => r.json())
+    .then(j => { dirty = false;
+                 $("status").textContent = "saved " + j.n + " rows → " + j.path; render(); })
+    .catch(err => { $("status").textContent = "SAVE FAILED: " + err; });
+}
+$("btnSave").onclick = save;
+window.addEventListener("beforeunload", e => { if (dirty) e.preventDefault(); });
+
+render();
+</script>

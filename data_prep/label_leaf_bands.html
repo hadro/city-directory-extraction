@@ -198,8 +198,13 @@
     <kbd>o</kbd> hide/show boxes &nbsp;·&nbsp; <kbd>Enter</kbd> save &nbsp;·&nbsp;
     <kbd>?</kbd> this help
   </p>
-  <p class="sub"><b>Save early and often.</b> Only pages you have actually visited are written, so
-  saving part-way through is safe and never loses work.</p>
+  <h3>Saving</h3>
+  <p><b>You do not save page by page.</b> One save writes every page you have visited, so there is
+  nothing to remember — and it <b>autosaves every 8 seconds</b> whenever something has changed.
+  The sidebar says <i>all saved</i> with a time, or <i>unsaved changes</i>.</p>
+  <p class="sub">Each save rewrites the whole file from what is on screen, so saving often costs
+  nothing. <kbd>Enter</kbd> forces one. Stopping part-way is fine: re-run the same command with
+  <code>--resume</code> and your labels come back.</p>
 
   <button class="close" id="helpClose">Got it</button>
 </div>
@@ -288,17 +293,30 @@ let i = 0, dirty = false;
 // Which edge the arrow keys move. Starts on "top" because that is the edge the ditto prefill
 // systematically places too low — see the surname-header note in the help.
 let activeEdge = "top";
-const S = CFG.leaves.map(L => ({
-  leaf: L.leaf,
-  has_body: L.prefill_top !== null,
-  irregular: false,
-  body_top:    L.prefill_top    !== null ? L.prefill_top    : 0.10,
-  body_bottom: L.prefill_bottom !== null ? L.prefill_bottom : 0.90,
-  head: ["advertising"], head_touched: false,
-  foot: ["advertising"], foot_touched: false,
-  page_type: null,
-  visited: false,
-}));
+const S = CFG.leaves.map(L => {
+  const fresh = {
+    leaf: L.leaf,
+    has_body: L.prefill_top !== null,
+    irregular: false,
+    body_top:    L.prefill_top    !== null ? L.prefill_top    : 0.10,
+    body_bottom: L.prefill_bottom !== null ? L.prefill_bottom : 0.90,
+    head: ["advertising"], head_touched: false,
+    foot: ["advertising"], foot_touched: false,
+    page_type: null,
+    visited: false,
+  };
+  const p = CFG.prior[L.leaf];
+  if (!p) return fresh;
+  return Object.assign(fresh, {          // --resume: a previous session's label wins
+    has_body: p.has_body, irregular: p.irregular,
+    body_top:    p.body_top    !== null ? p.body_top    : fresh.body_top,
+    body_bottom: p.body_bottom !== null ? p.body_bottom : fresh.body_bottom,
+    head: p.head_contents || fresh.head, head_touched: !!p.head_touched,
+    foot: p.foot_contents || fresh.foot, foot_touched: !!p.foot_touched,
+    page_type: p.page_type || null,
+    visited: true,
+  });
+});
 
 const $ = id => document.getElementById(id);
 const cur = () => S[i];
@@ -403,7 +421,8 @@ function render() {
   const done = S.filter(x => x.visited).length;
   $("progbar").style.width = (100 * done / S.length) + "%";
   $("progtxt").textContent = done + " of " + S.length + " visited"
-                           + (dirty ? " · unsaved" : "");
+                           + (dirty ? " · unsaved changes"
+                                    : lastSaved ? " · all saved " + lastSaved : "");
 }
 
 function drawBoxes(L) {
@@ -505,7 +524,13 @@ document.addEventListener("keydown", e => {
 });
 
 // ---- save ----
-function save() {
+// Autosave. Each save rewrites the whole file from in-memory state, so saving often is free and
+// saving rarely risks an hour. A manual Enter still works and does exactly the same thing.
+let saving = false, lastSaved = null;
+setInterval(() => { if (dirty && !saving) save(true); }, 8000);
+
+function save(auto) {
+  if (saving) return;
   const rows = S.map((s, n) => {
     const L = CFG.leaves[n];
     return {
@@ -520,15 +545,23 @@ function save() {
       n_lines: L.n_lines, page_size: L.page_size,
     };
   });
-  $("status").textContent = "saving…";
+  saving = true;
+  if (!auto) $("status").textContent = "saving…";
   fetch(CFG.save_url, { method:"POST", headers:{"Content-Type":"application/json"},
                         body: JSON.stringify({ rows }) })
     .then(r => r.json())
-    .then(j => { dirty = false;
-                 $("status").textContent = "saved " + j.n + " rows → " + j.path; render(); })
-    .catch(err => { $("status").textContent = "SAVE FAILED: " + err; });
+    .then(j => {
+      saving = false; dirty = false;
+      lastSaved = new Date().toLocaleTimeString();
+      $("status").textContent = (auto ? "autosaved " : "saved ") + j.n + " rows at " + lastSaved;
+      render();
+    })
+    .catch(err => {
+      saving = false;                          // leave dirty set so the next tick retries
+      $("status").textContent = "SAVE FAILED: " + err + " — keep this tab open";
+    });
 }
-$("btnSave").onclick = save;
+$("btnSave").onclick = () => save(false);
 window.addEventListener("beforeunload", e => { if (dirty) e.preventDefault(); });
 
 render();

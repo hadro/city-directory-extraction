@@ -73,6 +73,7 @@ import argparse
 import functools
 import http.server
 import json
+import os
 import random
 import re
 import socketserver
@@ -204,13 +205,20 @@ class _Handler(http.server.BaseHTTPRequestHandler):
                 body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
                 stamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
                 rows = [r for r in body["rows"] if r.get("visited")]
-                with open(cls.out_path, "w", encoding="utf-8") as fh:
+                # Every save rewrites the whole file, and it is the only copy of an hour's work,
+                # so write a sibling temp and rename. A crash mid-write then loses the save, not
+                # the session.
+                tmp = cls.out_path.with_suffix(cls.out_path.suffix + ".tmp")
+                with open(tmp, "w", encoding="utf-8") as fh:
                     for r in rows:
                         r["labeled_at"] = stamp
                         fh.write(json.dumps(r, ensure_ascii=False) + "\n")
+                    fh.flush()
+                    os.fsync(fh.fileno())
+                os.replace(tmp, cls.out_path)
                 print(f"  saved {len(rows)} rows → {cls.out_path}", file=sys.stderr)
                 return self._send(200, "application/json",
-                                  json.dumps({"n": len(rows),
+                                  json.dumps({"n": len(rows), "at": stamp,
                                               "path": str(cls.out_path)}).encode())
             except Exception as exc:                        # noqa: BLE001 - reported to the page
                 return self.send_error(500, str(exc))
@@ -224,8 +232,31 @@ class _Handler(http.server.BaseHTTPRequestHandler):
         pass
 
 
-def build_html(ident, leaves, blind, save_url):
-    payload = {"ident": ident, "blind": blind, "leaves": leaves,
+def load_prior(out_path, blind):
+    """Rows already labelled in `out_path`, keyed by leaf, for --resume.
+
+    Refuses to mix modes. A blind evaluation row and a prefilled training row are not the same
+    kind of evidence, and silently merging them would put a prefill-influenced label into the set
+    whose whole purpose is to be free of one.
+    """
+    path = Path(out_path)
+    if not path.exists():
+        return {}
+    prior = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        if bool(row.get("blind")) != bool(blind):
+            raise SystemExit(
+                f"{path} holds blind={row.get('blind')} rows but this run is blind={blind}. "
+                "Resume it in the mode it was written in, or choose a different --out.")
+        prior[row["leaf"]] = row
+    return prior
+
+
+def build_html(ident, leaves, blind, save_url, prior=None):
+    payload = {"ident": ident, "blind": blind, "leaves": leaves, "prior": prior or {},
                "img_base": "/img/", "save_url": save_url}
     tmpl = TEMPLATE.read_text(encoding="utf-8")
     if "__PAYLOAD__" not in tmpl:
@@ -296,6 +327,8 @@ def main(argv=None) -> int:
                     help="a previous bands JSONL whose leaves must not be re-sampled")
     ap.add_argument("--blind", action="store_true",
                     help="REQUIRED for evaluation sets: no prefill, no box overlay")
+    ap.add_argument("--resume", action="store_true",
+                    help="reload labels already in --out and carry on (same --seed and --n)")
     ap.add_argument("--width", type=int, default=900)
     ap.add_argument("--cache", default=str(CACHE))
     ap.add_argument("--no-open", action="store_true")
@@ -310,6 +343,10 @@ def main(argv=None) -> int:
     cache = Path(args.cache)
     item = Item(args.ident, cache)
     item.prefetch_hocr()
+
+    prior = load_prior(args.out, args.blind) if args.resume else {}
+    if prior:
+        print(f"  resuming: {len(prior)} leaves already labelled in {args.out}", file=sys.stderr)
 
     if args.leaves:
         leaf_ids = [int(x) for x in args.leaves.split(",")]
@@ -346,6 +383,7 @@ def main(argv=None) -> int:
     with socketserver.TCPServer(("127.0.0.1", 0), functools.partial(_Handler)) as server:
         port = server.server_address[1]
         _Handler.render_args = {"ident": args.ident, "leaves": leaves, "blind": args.blind,
+                                "prior": prior,
                                 "save_url": f"http://127.0.0.1:{port}/save"}
         build_html(**_Handler.render_args)          # fail loudly here, not in the browser
         url = f"http://127.0.0.1:{port}/"

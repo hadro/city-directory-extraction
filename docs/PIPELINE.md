@@ -337,6 +337,17 @@ normalization is now on by default for every volume.
 fix is better boundary handling, not a better regex. Concretely: use the bbox x-coordinate to detect
 a column break *within* a leaf and reset the carry there, then re-measure the dispute rate.
 
+> **Look at surname block headers first.** A shared surname is printed once as an ALL-CAPS header
+> and dittoed beneath, and **100% of them are dropped at ingest** — 123/156 as `short` (under 8
+> chars), 33/156 as `allcaps`, ~1,255 per volume
+> ([`results/surname_headers_dropped_1906BPL.py`](../results/surname_headers_dropped_1906BPL.py)).
+> `resolve_dittos.py` reads the kept-line JSONL, so it never sees one; at a block boundary the
+> nearest preceding kept line belongs to the *previous* surname, so the carry has a confidently
+> wrong antecedent rather than no antecedent. **The mechanism is measured; the share of the 23.5%
+> it explains is not** — that is the measurement to run before writing any fix. Detecting a header
+> needs no new idea: ALL-CAPS alphabetic followed by a ditto-lead line is the follower test the
+> ditto glyph gate already uses.
+
 **7. Feed the model the resolved surname.** Currently dittos are resolved *after* the model, so the
 model sees `" Wm` and emits `" Wm`. What if the input said `Ackerman Wm`? That is a different and
 possibly larger version of the `44` result — the same "give the model in-distribution input"

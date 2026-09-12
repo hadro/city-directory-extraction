@@ -1,0 +1,92 @@
+{
+  "ident": "1906BPL",
+  "seed": 20260910,
+  "span": [
+    9,
+    1216
+  ],
+  "n_sampled": 150,
+  "n_allcaps_single_word": 373,
+  "n_surname_headers": 156,
+  "n_dropped_at_ingest": 156,
+  "share_dropped": 1.0,
+  "drop_reasons": {
+    "short": 123,
+    "allcaps": 33
+  },
+  "extrapolated_headers_in_span": 1255,
+  "examples": [
+    {
+      "leaf": 13,
+      "header": "ACME",
+      "drop_reason": "short",
+      "antecedent_for": "\u201c Hall 828 7th av"
+    },
+    {
+      "leaf": 13,
+      "header": "ADAMS",
+      "drop_reason": "short",
+      "antecedent_for": "\u201c Frank lumber Van Brunt c Bowne h"
+    },
+    {
+      "leaf": 25,
+      "header": "ANDERSON",
+      "drop_reason": "allcaps",
+      "antecedent_for": "\u201c Albert carp\u2019r h 536 45th"
+    },
+    {
+      "leaf": 31,
+      "header": "APEL",
+      "drop_reason": "short",
+      "antecedent_for": "\u201c H\u2019y R wagonmkr 690 Bedford ay h"
+    },
+    {
+      "leaf": 31,
+      "header": "APPGEGATE",
+      "drop_reason": "allcaps",
+      "antecedent_for": "44 John mechanic h 95 Franklin av"
+    },
+    {
+      "leaf": 71,
+      "header": "BEHRENS",
+      "drop_reason": "short",
+      "antecedent_for": "\" Marr.in coal h 64 Franklin av"
+    },
+    {
+      "leaf": 86,
+      "header": "BETTER",
+      "drop_reason": "short",
+      "antecedent_for": "44 Philip H civil eng 1123 B\u2019way Mhtn"
+    },
+    {
+      "leaf": 90,
+      "header": "BIRD",
+      "drop_reason": "short",
+      "antecedent_for": "\u201c Elizabeth wid Jos h 571 Quincy"
+    },
+    {
+      "leaf": 103,
+      "header": "BOLEY",
+      "drop_reason": "short",
+      "antecedent_for": "\u201c Jacob hardware 169 Grand"
+    },
+    {
+      "leaf": 138,
+      "header": "BROWER",
+      "drop_reason": "short",
+      "antecedent_for": "\u201c Geo E lawyer 44 Court h 1084 Park pi"
+    },
+    {
+      "leaf": 141,
+      "header": "BROWN",
+      "drop_reason": "short",
+      "antecedent_for": "\u201c H\u2019y W h 1 3d pi"
+    },
+    {
+      "leaf": 141,
+      "header": "BROWN",
+      "drop_reason": "short",
+      "antecedent_for": "\u201c John electrician 438 6th av h 86"
+    }
+  ]
+}

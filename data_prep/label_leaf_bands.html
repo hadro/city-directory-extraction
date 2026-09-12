@@ -116,12 +116,21 @@
     <b>The edges come pre-positioned, and they are slightly wrong in a predictable way.</b>
     The guess is the extent of <span class="swatch" style="background:rgba(22,163,74,.5)"></span>
     green boxes — lines starting with a ditto mark (<code>"</code> or OCR'd <code>44</code>), which
-    are nearly always real entries. But a surname block opens with the un-dittoed surname itself
-    (<span class="eg">ACME</span>, <span class="eg">ADAMS</span>), which sits <i>above</i> the first
-    ditto. <b>So the top edge usually needs nudging up a line or two</b>, and entries sometimes run
-    below the bottom guess too. Confirming the guess uncritically is the one way to make these
-    labels worthless.
+    are nearly always real entries. But a surname block opens with the un-dittoed surname itself,
+    which sits <i>above</i> the first ditto. <b>So the top edge usually needs nudging up a line or
+    two</b>, and entries sometimes run below the bottom guess too. Confirming the guess
+    uncritically is the one way to make these labels worthless.
   </div>
+
+  <h3>Surname headers are part of the body — include them</h3>
+  <p>The ALL-CAPS surnames heading each block <span class="eg">CALDWELL · CALLAHAN · ACME ·
+  ADAMS</span> go <b>inside</b> the blue edges, even though they are not entries themselves.</p>
+  <p>They are the <b>antecedent</b> for every dittoed entry beneath them: <span class="eg">"&nbsp;Harry
+  A reporter h 67 Woodbine</span> only means <i>Callahan</i> Harry A because <span class="eg">CALLAHAN</span>
+  sits above it. Cut the header and the whole block below loses its surname — the same failure that
+  keeps <code>alpha_run_filter --apply</code> switched off.</p>
+  <p class="sub">So: top edge above the surname, not above the first <code>"</code> line. If a
+  column's first thing is a surname header, that is where the body starts.</p>
 
   <h3>What is in the strips <span class="sub">— tick all that apply</span></h3>
   <dl>

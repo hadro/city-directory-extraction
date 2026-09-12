@@ -85,11 +85,27 @@ repeats by indentation alone and prints no glyph at all.
 Practical shape: harvest per volume where possible, union with a corpus-wide lexicon, and re-run
 the ratio per volume so a token may be a given name in one book and a surname in another.
 
-WHAT IS NOT ESTABLISHED HERE
-----------------------------
-- **No gold validation.** The ratio's behaviour is the evidence, not a labelled precision number.
-  `data/1906BPL_sample500_eval.jsonl` can settle it and has not been used here.
-- **One volume, one OCR engine, one publisher.** Same caveat the ditto glyph list carries.
+VALIDATED, AND THE RESULT CHANGED TWO THINGS
+--------------------------------------------
+`implied_surname_validation.py` runs this lexicon against the 21-volume panel gold. Read it before
+using this detector; the short version:
+
+- **It must be gated on whether the volume uses implied surnames at all.** Applied blind it throws
+  242 false positives on rows whose gold surname IS the leading token (`Harvey Andrew`,
+  `Dudley Charles` -- names that are both). Gated, that is 1. Blind application is the error, not
+  the lexicon.
+- **Recall is not measurable from the gold we hold**, and no recall number should be quoted. The
+  panel holds 6 clean instances, all trow1913. 1906BPL, where the phenomenon is abundant, has no
+  labelled gold -- and `data/1906BPL_sample500_eval.jsonl` cannot help: it is the A/B input sample
+  and 0 of its 500 rows carry a name.
+- **The production gate misses the Trow family.** Trow glues its dash (`-Adolph`), so nothing
+  tokenises as a mark and both the gate and the harvest read 0.0% against a gold-implied share of
+  58.8% / 97.9%. This detector is blocked on next-step #9 there.
+
+WHAT IS STILL NOT ESTABLISHED
+-----------------------------
+- **One volume, one OCR engine, one publisher** for the 5,491 and the 6.45%. Same caveat the ditto
+  glyph list carries.
 - **The 0.90 threshold is chosen from this book**, from the separation printed above. It is not
   transferred from anywhere and should not be trusted on a new volume without re-running.
 - **The overlap with next-step #6 is NOT measured.** A wrong carry running 137 lines is a

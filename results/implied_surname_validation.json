@@ -1,0 +1,742 @@
+{
+  "lexicon_source": "data/1906BPL_lines.jsonl",
+  "lexicon_size": 595,
+  "fp_blind": 242,
+  "fp_gated": 1,
+  "fp_rate_blind": 0.05685,
+  "n_gold_rows_surname_differs": 142,
+  "n_mark_absent_instances": 6,
+  "recall_measurable": false,
+  "recall_note": "6 clean mark-absent instances in the panel, all trow1913; the volume where the phenomenon is abundant (1906BPL) has no labelled gold",
+  "gate_share": 0.05,
+  "gate_disagreements": [
+    "trow1907",
+    "trow1913"
+  ],
+  "per_volume": {
+    "boyd1890": {
+      "rows": 75,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 1,
+      "tn": 74
+    },
+    "doggett1846": {
+      "rows": 37,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 37
+    },
+    "doggetts1850": {
+      "rows": 303,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 19,
+      "tn": 284
+    },
+    "duncan1794": {
+      "rows": 58,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 58
+    },
+    "franks1786": {
+      "rows": 56,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 3,
+      "tn": 53
+    },
+    "hearne1852": {
+      "rows": 52,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 52
+    },
+    "hopehenderson1856": {
+      "rows": 60,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 60
+    },
+    "lain1876": {
+      "rows": 103,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 103
+    },
+    "lain": {
+      "rows": 800,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0025,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 21,
+      "tn": 777
+    },
+    "longworth1818": {
+      "rows": 106,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 9,
+      "tn": 97
+    },
+    "mb1931": {
+      "rows": 109,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 1,
+      "fp": 8,
+      "tn": 100
+    },
+    "mercein1820": {
+      "rows": 60,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 3,
+      "tn": 57
+    },
+    "ogden1839": {
+      "rows": 66,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 66
+    },
+    "polk1917": {
+      "rows": 72,
+      "gold_implied_share": 0.8472,
+      "raw_ditto_share": 0.8333,
+      "gate_applies_gold": true,
+      "gate_applies_production": true,
+      "tp": 0,
+      "fn": 1,
+      "fp": 0,
+      "tn": 11
+    },
+    "polk1925": {
+      "rows": 40,
+      "gold_implied_share": 0.9,
+      "raw_ditto_share": 0.925,
+      "gate_applies_gold": true,
+      "gate_applies_production": true,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 3
+    },
+    "polk1933bk": {
+      "rows": 49,
+      "gold_implied_share": 0.7143,
+      "raw_ditto_share": 0.7143,
+      "gate_applies_gold": true,
+      "gate_applies_production": true,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 14
+    },
+    "polk1933si": {
+      "rows": 56,
+      "gold_implied_share": 0.6607,
+      "raw_ditto_share": 0.5536,
+      "gate_applies_gold": true,
+      "gate_applies_production": true,
+      "tp": 0,
+      "fn": 6,
+      "fp": 0,
+      "tn": 19
+    },
+    "queens1933": {
+      "rows": 62,
+      "gold_implied_share": 0.5968,
+      "raw_ditto_share": 0.5806,
+      "gate_applies_gold": true,
+      "gate_applies_production": true,
+      "tp": 0,
+      "fn": 1,
+      "fp": 1,
+      "tn": 24
+    },
+    "rode1851": {
+      "rows": 53,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 53
+    },
+    "smith1855": {
+      "rows": 185,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 3,
+      "tn": 182
+    },
+    "smith1856": {
+      "rows": 229,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 5,
+      "tn": 224
+    },
+    "trow1884": {
+      "rows": 141,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 141
+    },
+    "trow1907": {
+      "rows": 68,
+      "gold_implied_share": 0.5882,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": true,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 40,
+      "fp": 0,
+      "tn": 28
+    },
+    "trow1913": {
+      "rows": 93,
+      "gold_implied_share": 0.9785,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": true,
+      "gate_applies_production": false,
+      "tp": 6,
+      "fn": 85,
+      "fp": 0,
+      "tn": 2
+    },
+    "trowwilson1865": {
+      "rows": 167,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 0,
+      "fp": 0,
+      "tn": 167
+    },
+    "tulsa": {
+      "rows": 1500,
+      "gold_implied_share": 0.0,
+      "raw_ditto_share": 0.0,
+      "gate_applies_gold": false,
+      "gate_applies_production": false,
+      "tp": 0,
+      "fn": 2,
+      "fp": 169,
+      "tn": 1329
+    }
+  },
+  "examples": {
+    "TP": [
+      {
+        "volume": "trow1913",
+        "raw": "Adolph A salesman h68 Lenox av",
+        "gold_name": "-Adolph A"
+      },
+      {
+        "volume": "trow1913",
+        "raw": "Anna wid Isidor h68 Lenox av",
+        "gold_name": "-Anna"
+      },
+      {
+        "volume": "trow1913",
+        "raw": "Arnold neckties 110 5th av h19 Pinehurst av",
+        "gold_name": "-Arnold"
+      },
+      {
+        "volume": "trow1913",
+        "raw": "Arthur F, Mfg Co novelties 309 Bway R801",
+        "gold_name": "-Arthur F, Mfg Co"
+      },
+      {
+        "volume": "trow1913",
+        "raw": "Arthur J clerk h463 W 166th",
+        "gold_name": "-Arthur J"
+      },
+      {
+        "volume": "trow1913",
+        "raw": "Benj B oils 170 W65th",
+        "gold_name": "-Benj B"
+      }
+    ],
+    "FN": [
+      {
+        "volume": "mb1931",
+        "raw": "Otev Wm 221 W 133",
+        "gold_name": "Otey Wm"
+      },
+      {
+        "volume": "polk1917",
+        "raw": "n Dora Mrs h115 Washn pl",
+        "gold_name": "\" Dora Mrs"
+      },
+      {
+        "volume": "polk1933si",
+        "raw": "\"Thos (Marcella) h26 Sheridan av, Stap",
+        "gold_name": "\" Thos"
+      },
+      {
+        "volume": "polk1933si",
+        "raw": "\"Wm A (Lillian) statistician h252 Armstrong av, Gr Kls",
+        "gold_name": "\" Wm A"
+      },
+      {
+        "volume": "polk1933si",
+        "raw": "\"Thos trackmn r69 Swan, Stap",
+        "gold_name": "\" Thos"
+      },
+      {
+        "volume": "polk1933si",
+        "raw": "\"Jas V (Eva) electn h222 Fingerbd rd, Rsbk",
+        "gold_name": "\" Jas V"
+      },
+      {
+        "volume": "polk1933si",
+        "raw": "\"Louis F (Helen) police h77 Rugby av, Tomp",
+        "gold_name": "\" Louis F"
+      },
+      {
+        "volume": "polk1933si",
+        "raw": "\"Henry C (Viva) pilot h28 Lawrence av, WNB",
+        "gold_name": "\" Henry C"
+      },
+      {
+        "volume": "queens1933",
+        "raw": "\"Louis (Mary) lab h25-53 47th, LIC",
+        "gold_name": "\" Louis"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Michi h 1773 1st av",
+        "gold_name": "-Michi"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-John P & Co carriage matls 97 Bowery",
+        "gold_name": "-John P & Co"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Wm U carriage matls 97 Bowery h E Orange N J",
+        "gold_name": "-Wm U"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Jos candy 216 E 28th",
+        "gold_name": "-Jos"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Joel neckwear 42 Wooster h 69 W 97th",
+        "gold_name": "-Joel"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Lazar meat 753 Columbus av h 69 W 97th",
+        "gold_name": "-Lazar"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Morris conductor h 69 E 103d",
+        "gold_name": "-Morris"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Simon janitor h 244 Clinton",
+        "gold_name": "-Simon"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Benj A lawyer 25 Broad R 1906 h The Waldorf-Astoria",
+        "gold_name": "-Benj A"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Chas B treas 100 Bway h Pa",
+        "gold_name": "-Chas B"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Chas F painter h 1991 Clinton av",
+        "gold_name": "-Chas F"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Edwd K h 523 W 151st",
+        "gold_name": "-Edwd K"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Edwd P typewriter h 414 W 124th",
+        "gold_name": "-Edwd P"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Emerson W 68 William h 522 W 123d",
+        "gold_name": "-Emerson W"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Frank h 125 W 115th",
+        "gold_name": "-Frank"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Fred H manager 260 W 125th",
+        "gold_name": "-Fred H"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Geo M lawyer 170 Bway R 1709 h 1 W 87th",
+        "gold_name": "-Geo M"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Geo W fruit 278 Washn h Bklyn",
+        "gold_name": "-Geo W"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-H B physician Blackwells Island",
+        "gold_name": "-H B"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Harriet B music h 104 E 85th",
+        "gold_name": "-Harriet B"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Ida Benfey elocutionist h 1 W 87th",
+        "gold_name": "-Ida Benfey"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Irving clerk h 2736 Marion av",
+        "gold_name": "-Irving"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-John h 986 Tinton av",
+        "gold_name": "-John"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Jos clerk h 139 W 116th",
+        "gold_name": "-Jos"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Lewis S librarian 429 Lafayette h 60 W 38th",
+        "gold_name": "-Lewis S"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Maude E h 2333 Bway",
+        "gold_name": "-Maude E"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Orange, Co publishers 439 Lafayette",
+        "gold_name": "-Orange, Co."
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Orange Farmer (periodical) 439 Lafayette",
+        "gold_name": "-Orange Farmer"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Orrin R pub acct 140 Nassau R 912 & notary 66 Bway h 22 Har",
+        "gold_name": "-Orrin R"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Paper Co 346 Bway R 525",
+        "gold_name": "-Paper Co"
+      },
+      {
+        "volume": "trow1907",
+        "raw": "-Robt h 139 W 116th",
+        "gold_name": "-Robt"
+      }
+    ],
+    "FP": [
+      {
+        "volume": "boyd1890",
+        "raw": "Harvey Andrew, cabinet maker, h 162 Linden ave",
+        "gold_name": "Harvey Andrew"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley Charles, lumber, h. 158 Mott",
+        "gold_name": "Dudley Charles"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley Edmd. T. express, 2 Centre, h. 117 Barrow",
+        "gold_name": "Dudley Edmd. T."
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley Ellis W. saddler, 398 Pearl, h. 188 Ludlow",
+        "gold_name": "Dudley Ellis W."
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley Gilman, marblecutter, 584 Hudson, h. Yonkers",
+        "gold_name": "Dudley Gilman"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley John, painter, Av. 8 n. 18th, h. 183 W. 17th",
+        "gold_name": "Dudley John"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley Jonas G. merchant, 9 Old slip & 102 Pearl,",
+        "gold_name": "Dudley Jonas G."
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley Richard, painter, Av. 8 n. W. 18th, h. Av. 8 n. W. 18",
+        "gold_name": "Dudley Richard"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley Ward, eagle saloon, 177 Broadway",
+        "gold_name": "Dudley Ward"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley William, hatpresser, 179 W. 20th",
+        "gold_name": "Dudley William"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley W. J. brushmaker, 36 Hamersley, h. 36 Hamersley",
+        "gold_name": "Dudley W. J."
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley William S. lumber, h. 98 Greene",
+        "gold_name": "Dudley William S."
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley & Emmons, eagle saloon, 177 Broadway",
+        "gold_name": "Dudley & Emmons"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Dudley & See, marble, 584 Hudson",
+        "gold_name": "Dudley & See"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Richard Charles B. agent, 85 G wich, h. 85 G.wich.",
+        "gold_name": "Richard Charles B."
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Richard Frederick E. stationr, Thompson c. Fourth",
+        "gold_name": "Richard Frederick E."
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Richard Henry J. lawyer, 184 Fulton, h. 19 Hammond",
+        "gold_name": "Richard Henry J."
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Richard Lewis, carpenter, 44 Rose, h. 102 Gold",
+        "gold_name": "Richard Lewis"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Richard Thomas, painter, 308 Ninth",
+        "gold_name": "Richard Thomas"
+      },
+      {
+        "volume": "doggetts1850",
+        "raw": "Richard William, weaver. 57 Factory",
+        "gold_name": "Richard William"
+      },
+      {
+        "volume": "franks1786",
+        "raw": "Harry Peters, 3, William-street",
+        "gold_name": "Harry Peters"
+      },
+      {
+        "volume": "franks1786",
+        "raw": "Rose Joseph, distiller, 135, Water-street",
+        "gold_name": "Rose Joseph"
+      },
+      {
+        "volume": "franks1786",
+        "raw": "Rose J. hair-dresser, 141, Water-street",
+        "gold_name": "Rose J."
+      },
+      {
+        "volume": "lain",
+        "raw": "Marx Philip, clk. h 292 Degraw",
+        "gold_name": "Marx Philip"
+      },
+      {
+        "volume": "lain",
+        "raw": "Abraham Abraham, drygds. 422 Fulton, h 800 St Mark's av",
+        "gold_name": "Abraham Abraham"
+      },
+      {
+        "volume": "lain",
+        "raw": "Adam Andrew, painter, h 287 S 1st",
+        "gold_name": "Adam Andrew"
+      },
+      {
+        "volume": "lain",
+        "raw": "Adam Rob't, painter, h 461 Bergen",
+        "gold_name": "Adam Rob't"
+      },
+      {
+        "volume": "lain",
+        "raw": "Addison Hamilton B. hostler, h 365 Hudson av",
+        "gold_name": "Addison Hamilton B."
+      },
+      {
+        "volume": "lain",
+        "raw": "Adolph August, h 118 N 8th",
+        "gold_name": "Adolph August"
+      },
+      {
+        "volume": "lain",
+        "raw": "Addison Mathew, h 315 Madison",
+        "gold_name": "Addison Mathew"
+      },
+      {
+        "volume": "lain",
+        "raw": "Albert Abraham, driver, h 834 Park av WM-H-JACKSON-&CO HEADQ",
+        "gold_name": "Albert Abraham"
+      },
+      {
+        "volume": "lain",
+        "raw": "Albert Adam, packer, h 223 Stagg",
+        "gold_name": "Albert Adam"
+      },
+      {
+        "volume": "lain",
+        "raw": "Alex Anna C. wid. Nicholas, Stone c Blake av",
+        "gold_name": "Alex Anna C"
+      },
+      {
+        "volume": "lain",
+        "raw": "Alfred Abraham, caterer, h 412 S 4th",
+        "gold_name": "Alfred Abraham"
+      },
+      {
+        "volume": "lain",
+        "raw": "Allan Alex. machinist, h 226 Wyckoff",
+        "gold_name": "Allan Alex."
+      },
+      {
+        "volume": "lain",
+        "raw": "Allen Abraham jr. broker, h 131 Halsey",
+        "gold_name": "Allen Abraham jr."
+      },
+      {
+        "volume": "lain",
+        "raw": "Allen Mary A. wid. Wm. T. h 504 Bedford av",
+        "gold_name": "Allen Mary A."
+      },
+      {
+        "volume": "lain",
+        "raw": "Allen Howard M. stencils, 90 Fulton N. Y. h 52d n 14th av",
+        "gold_name": "Allen Howard M."
+      },
+      {
+        "volume": "lain",
+        "raw": "Allen Wm. H. agt. h 1379 Pacific",
+        "gold_name": "Allen Wm. H."
+      },
+      {
+        "volume": "lain",
+        "raw": "Alonzo Paul, mechanic, h 140 Degraw",
+        "gold_name": "Alonzo Paul"
+      }
+    ]
+  }
+}

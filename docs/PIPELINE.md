@@ -379,8 +379,18 @@ a column break *within* a leaf and reset the carry there, then re-measure the di
 > `n(given position) / (n(given position) + n(leading position))`; ≥0.90 yields 595 types. The
 > 0.50–0.90 band is exactly the names that are genuinely both (`Charlotte`, `Lewis`, `Lawrence`,
 > `Morgan`), which is the reason to trust the ends. **5,491 is a floor** — the test declines
-> `Isaac` (0.88) and `Lewis` (0.89), both real here. Not gold-validated, and the overlap with the
-> 23.5% is not measured.
+> `Isaac` (0.88) and `Lewis` (0.89), both real here.
+>
+> **Validated against the panel gold, and it is mostly a negative result**
+> ([`results/implied_surname_validation.py`](../results/implied_surname_validation.py)). Three
+> things to carry: (a) the detector **must be gated** on the volume using implied surnames at all —
+> applied blind it throws **242 false positives**, gated it throws **1**, and the panel is bimodal
+> (0.0% vs 58.8–97.9%) so the threshold is not delicate; (b) **recall is not measurable** from the
+> gold we hold and no recall figure should be quoted — the panel holds **6** clean instances, all
+> trow1913, and `1906BPL_sample500_eval.jsonl` cannot help because **0 of its 500 rows carry a
+> name**; (c) the production gate **misses both Trow volumes** — their dash is glued (`-Adolph`),
+> so raw ditto-lead reads 0.0% against 58.8%/97.9% gold-implied. **This work is blocked on #9 for
+> the Trow family**, which is a better reason to do #9 than the one recorded against it.
 
 **7. Feed the model the resolved surname.** Currently dittos are resolved *after* the model, so the
 model sees `" Wm` and emits `" Wm`. What if the input said `Ackerman Wm`? That is a different and

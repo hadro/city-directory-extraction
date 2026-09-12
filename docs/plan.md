@@ -257,3 +257,14 @@ The repo **reads from** `directory-pipeline/output/` through the curated
 - GLiNER (extractive baseline): <https://github.com/urchade/GLiNER> (v0.2.27, Apache-2.0) · checkpoints `urchade/gliner_medium-v2.1`, `urchade/gliner_multi-v2.1`
 - Minneapolis 1900 (US, MIT): <https://github.com/adamrangwala/DirCity_Directory_Crop-out-with-Key-Lines>
 - Anchor doc (sibling repo): `directory-pipeline/docs/huggingface-uv-scripts.md`
+- Bourne, *CLOCR-C: Context Leveraging OCR Correction with PLMs*: <https://arxiv.org/abs/2408.17428>
+  — assessed 2026-09-11. **A generic correction pass is deprioritized** (it would expand our
+  verbatim abbreviations, resolve dittos silently, and add a fabrication surface upstream); its
+  skew finding and its CoNES/NER framing are taken up as PIPELINE.md next-steps #14 and #15.
+  CoNES itself is rejected — `eval/evaluate.py` has field-aligned gold, which is strictly more
+  information than position-agnostic entity similarity.
+- Bourne, Simbeye & Nockels, *The Character Error Vector*: <https://arxiv.org/abs/2604.06160>
+  — assessed 2026-09-11. Its `d_ocr/d_total` ratio is **adopted** in the sibling bench as the
+  `recog%` column; SpACER and the Jensen-Shannon character distribution are blocked by our
+  partial-coverage gold. Full record: `historical-ocr-eval/docs/plan.md`, "Method borrowings
+  from the literature".

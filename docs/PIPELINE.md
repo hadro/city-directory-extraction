@@ -305,6 +305,10 @@ under normalization is typography, not extraction.
 
 Roughly ordered by value per unit of effort. Each says what it would settle, not just what it is.
 
+> **The numbers are stable identifiers, not reading order.** `PAGE_TYPE_CLASSIFIER.md` cites #3, #6
+> and #11 by number, so items added later take the next free number and sit in whichever effort
+> section they belong to. Do not renumber.
+
 ## Cheap and clearly worth doing
 
 **1. Work the ditto review queue.** `results/ditto_review_1906BPL.tsv` — 40 candidates with count,
@@ -325,6 +329,17 @@ expansion and makes `--apply` safe to reconsider on its own merits.
 **4. Re-measure `entry_rate` on the thin tier after normalization.** The 20.7%/10.4% comparison was
 taken pre-normalization. It probably will not move (see stage 6), but confirming that on a
 *different OCR engine* is the cheap generalization check.
+
+**14. Report a median and a per-volume tail in `evaluate.py`.** It currently pools TP/FP/FN across
+the whole panel and prints macro/micro F1 and whole-row EM — one number per field, no distribution.
+CLOCR-C (arXiv 2408.17428) reports that pooled means hide catastrophic per-document failure:
+individual documents collapsed into complete hallucination or word repetition while the mean stayed
+respectable, because the distribution is heavily skewed. That is precisely this pipeline's exposure
+— **the model never refuses**, and a volume whose page-type filter let ad copy through produces
+confidently structured fake people rather than an obvious error. Nothing currently catches one
+volume of 21 collapsing, and `entry_rate` cannot (it is a fabrication/page-type proxy, blind to
+record quality). Cheap: the per-field accumulators already exist; add a per-volume breakdown, print
+median alongside mean, and flag any volume more than some margin below it.
 
 ## Medium effort, high information
 
@@ -363,6 +378,21 @@ across the early volumes. Small but it is currently a known-wrong output on thos
 that does not also split real hyphenated surnames — measure how many `-Xxx` leading tokens are
 hyphenated surnames before writing it.
 
+**15. Lexicon-constrained abbreviation repair on IA hOCR.** IA's measured weakness is `abbr%`
+**84.8% against Gemini's 95.3%** (`historical-ocr-eval`, 10 panel volumes), and since stage 1 now
+ingests IA hOCR that gap sits directly upstream of the model. CER does not show it and the NER
+layer depends on it: `bds`/`wid`/`h`/`r` are what carry residence and spouse structure.
+
+The repair is **not** an LLM pass (see "Explicitly deprioritized"). IA is classical ABBYY — it
+*misreads* abbreviations rather than expanding them — so this is edit-distance correction over a
+closed set: the `ABBREVIATIONS` set in `historical-ocr-eval/ocreval/metrics.py` plus the
+per-volume `style_profiles` legends. No generation, so no fabrication surface, and a token that
+does not match the lexicon within the edit budget is left alone.
+
+Pass/fail is already instrumented and needs no new gold: `score_ocr.py --engine ia-hocr` reports
+`abbr%` and `CER-m` directly, so the test is **"does abbr% move 84.8 → ~95 with CER-m unchanged"**.
+A CER-m that rises means the repair is firing on tokens that were not abbreviations.
+
 ## Larger, and the ones that unblock claims
 
 **10. A whole-volume gold slice.** Hand-label ~200 lines sampled across one volume's *listing*
@@ -396,3 +426,21 @@ carried through. This is what makes the output usable by anyone outside the repo
   distribution does not help. The model copies, it does not sample.
 - **More training volume.** Measured negative — 250k made the 0.8B worse on the panel and lost all
   four externals. Capacity was the constraint, not volume.
+- **A generic LLM post-OCR correction pass between stages 1 and 4.** Assessed 2026-09-11 against
+  CLOCR-C (arXiv 2408.17428), which reports >60% CER reduction and large downstream NER gains from
+  exactly this step. It is the wrong step *for this corpus*, for three reasons already measured here:
+  - **It would expand the abbreviations the contract requires verbatim.** CLOCR-C's prompts are
+    "recover the most likely original text", which turns `bds` into `boards` and `wid` into `widow`.
+    `historical-ocr-eval` maintains an `abbr%` metric and a dedicated self-test *because* silent
+    expansion is a defect — it corrupts the input to NER and breaks the verbatim link to the page.
+  - **It would resolve ditto marks silently.** The model emits `" Wm` verbatim by contract and
+    `postprocess/resolve_dittos.py` expands it downstream, where the antecedent is auditable and the
+    23.5% cross-line dispute rate is visible. A correction LLM would resolve them invisibly and
+    burn the panel (same reason resolving inside the model was rejected).
+  - **It adds a fabrication surface upstream, where it is hardest to see.** The model never refuses;
+    a hallucinated *corrected line* looks clean rather than garbled, so the existing shape-based
+    filters would pass it. CLOCR-C's own failure mode is hallucination on degraded input.
+
+  Cost is the minor objection: 199,012 lines for 1906BPL means running the expensive stage twice.
+  What does transfer from the paper is next-step **#14** (its skew finding) and the motivation for
+  **#15** — a narrow, non-generative version of the same repair.

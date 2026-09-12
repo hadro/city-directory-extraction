@@ -25,13 +25,17 @@
   .handle { position:absolute; left:0; right:0; height:13px; margin-top:-6px;
             cursor:ns-resize; z-index:5; }
   .handle::after { content:""; position:absolute; left:0; right:0; top:6px; height:2px;
-                   background:var(--body); box-shadow:0 0 0 1px rgba(255,255,255,.7); }
+                   background:#93b4f5; box-shadow:0 0 0 1px rgba(255,255,255,.7); }
   .handle:hover::after, .handle.drag::after { height:4px; top:5px; }
+  /* The ACTIVE edge is the one the arrow keys move. Never leave this ambiguous on screen. */
+  .handle.active::after { background:var(--body); height:4px; top:5px; }
   #wrap.nobody .handle, #wrap.nobody .tick { display:none; }
 
   .tick { position:absolute; right:3px; transform:translateY(-50%); z-index:6;
-          background:var(--body); color:#fff; font-size:10px; font-weight:600;
+          background:#93b4f5; color:#fff; font-size:10px; font-weight:600;
           padding:1px 5px; border-radius:3px; pointer-events:none; }
+  .tick.active { background:var(--body); box-shadow:0 0 0 2px rgba(37,99,235,.25); }
+  .tick.active::before { content:"▸ "; }
 
   .lbox { position:absolute; border:1px solid rgba(37,99,235,.30); pointer-events:none; }
   .lbox.d { border-color:rgba(22,163,74,.85); background:rgba(22,163,74,.12); }
@@ -174,11 +178,21 @@
   <p>Within a line or two is fine. What is being measured is whether the strips get found at all,
   not whether you agreed with yourself to the pixel. Steady pace beats precision here.</p>
 
+  <h3>Moving the edges</h3>
+  <p>One edge at a time is <b>active</b> — it is the solid blue one, with a <code>▸</code> on its
+  number. <kbd>↑</kbd><kbd>↓</kbd> move that edge; <kbd>Tab</kbd> (or the button in the sidebar)
+  switches to the other. Dragging an edge with the mouse also makes it active, so you can drag
+  roughly and then fine-tune with the arrows.</p>
+  <p class="sub">It starts on the <b>top</b> edge, because that is the one the prefill reliably
+  places too low. <kbd>w</kbd> and <kbd>s</kbd> always move the top edge whatever is active, if you
+  prefer that to switching.</p>
+
   <h3>Keys</h3>
   <p class="sub">
     <kbd>←</kbd> <kbd>→</kbd> prev / next &nbsp;·&nbsp;
-    <kbd>w</kbd> <kbd>s</kbd> move top edge &nbsp;·&nbsp;
-    <kbd>↑</kbd> <kbd>↓</kbd> move bottom edge &nbsp;·&nbsp;
+    <kbd>↑</kbd> <kbd>↓</kbd> move the active edge &nbsp;·&nbsp;
+    <kbd>Tab</kbd> switch which edge &nbsp;·&nbsp;
+    <kbd>w</kbd> <kbd>s</kbd> top edge directly &nbsp;·&nbsp;
     <kbd>shift</kbd> with any of those = coarse<br>
     <kbd>b</kbd> no body &nbsp;·&nbsp; <kbd>i</kbd> irregular &nbsp;·&nbsp;
     <kbd>o</kbd> hide/show boxes &nbsp;·&nbsp; <kbd>Enter</kbd> save &nbsp;·&nbsp;
@@ -219,6 +233,12 @@
       <span class="val" id="vTop">—</span><span class="sub">to</span>
       <span class="val" id="vBot">—</span></div>
     <div class="row">
+      <button id="btnEdge" style="flex:1" title="Switch which edge ↑ ↓ moves (Tab)">
+        ▸ moving TOP edge</button>
+    </div>
+    <div class="sub"><kbd>↑</kbd><kbd>↓</kbd> move it · <kbd>Tab</kbd> switches edge ·
+      <kbd>shift</kbd> = coarse</div>
+    <div class="row" style="margin-top:8px">
       <button id="btnBody">has body</button>
       <button id="btnIrr" class="warn">irregular</button>
     </div>
@@ -249,10 +269,12 @@
   </div>
 
   <div class="keys">
-    <kbd>←</kbd> <kbd>→</kbd> prev / next &nbsp;·&nbsp; <kbd>w</kbd> <kbd>s</kbd> top edge<br>
-    <kbd>↑</kbd> <kbd>↓</kbd> bottom edge &nbsp;·&nbsp; <kbd>shift</kbd> = coarse<br>
-    <kbd>b</kbd> no body &nbsp;·&nbsp; <kbd>i</kbd> irregular &nbsp;·&nbsp;
-    <kbd>o</kbd> boxes &nbsp;·&nbsp; <kbd>Enter</kbd> save
+    <kbd>←</kbd> <kbd>→</kbd> prev / next &nbsp;·&nbsp;
+    <kbd>↑</kbd> <kbd>↓</kbd> move active edge<br>
+    <kbd>Tab</kbd> switch edge &nbsp;·&nbsp; <kbd>w</kbd> <kbd>s</kbd> top edge directly<br>
+    <kbd>shift</kbd> = coarse &nbsp;·&nbsp; <kbd>b</kbd> no body &nbsp;·&nbsp;
+    <kbd>i</kbd> irregular<br>
+    <kbd>o</kbd> boxes &nbsp;·&nbsp; <kbd>Enter</kbd> save &nbsp;·&nbsp; <kbd>?</kbd> help
   </div>
 </div>
 
@@ -263,6 +285,9 @@ const PAGE  = [["advertising","1 ad"],["front-matter","2 front"],
                ["index-or-back-matter","3 index"],["blank-or-plate","4 blank"]];
 
 let i = 0, dirty = false;
+// Which edge the arrow keys move. Starts on "top" because that is the edge the ditto prefill
+// systematically places too low — see the surname-header note in the help.
+let activeEdge = "top";
 const S = CFG.leaves.map(L => ({
   leaf: L.leaf,
   has_body: L.prefill_top !== null,
@@ -357,6 +382,13 @@ function render() {
   $("vTop").textContent = s.has_body ? t.toFixed(3) : "—";
   $("vBot").textContent = s.has_body ? b.toFixed(3) : "—";
 
+  const topActive = activeEdge === "top";
+  $("hTop").classList.toggle("active",  topActive);
+  $("hBot").classList.toggle("active", !topActive);
+  $("tTop").classList.toggle("active",  topActive);
+  $("tBot").classList.toggle("active", !topActive);
+  $("btnEdge").textContent = topActive ? "▸ moving TOP edge" : "▸ moving BOTTOM edge";
+
   [["head", $("clsHead")], ["foot", $("clsFoot")]].forEach(([w, el]) => {
     [...el.children].forEach((btn, n) => {
       const on = s[w].includes(STRIP[n][0]);
@@ -393,7 +425,9 @@ function drawBoxes(L) {
 let dragging = null;
 const startDrag = which => e => {
   dragging = which;
+  activeEdge = which;                          // dragging an edge also selects it for the keys
   $(which === "top" ? "hTop" : "hBot").classList.add("drag");
+  render();
   e.preventDefault();
 };
 $("hTop").addEventListener("mousedown", startDrag("top"));
@@ -419,6 +453,15 @@ function go(n) {
   cur().visited = true;
   render();
 }
+// The two edges may never cross: each is clamped against the other, not against 0/1 alone.
+function moveEdge(which, delta) {
+  const s = cur();
+  if (which === "top") s.body_top = Math.min(clamp(s.body_top + delta), s.body_bottom - 0.01);
+  else                 s.body_bottom = Math.max(clamp(s.body_bottom + delta), s.body_top + 0.01);
+  dirty = true; render();
+}
+
+$("btnEdge").onclick = () => { activeEdge = activeEdge === "top" ? "bot" : "top"; render(); };
 $("btnPrev").onclick = () => go(i - 1);
 $("btnNext").onclick = () => go(i + 1);
 $("btnBody").onclick = () => { cur().has_body = !cur().has_body; dirty = true; render(); };
@@ -448,10 +491,11 @@ document.addEventListener("keydown", e => {
   }
   else if (e.key === "ArrowLeft")  go(i - 1);
   else if (e.key === "ArrowRight") go(i + 1);
-  else if (letter === "w") { s.body_top = clamp(s.body_top - step); dirty = true; render(); }
-  else if (letter === "s") { s.body_top = Math.min(clamp(s.body_top + step), s.body_bottom - .01); dirty = true; render(); }
-  else if (e.key === "ArrowUp")   { s.body_bottom = Math.max(clamp(s.body_bottom - step), s.body_top + .01); dirty = true; render(); }
-  else if (e.key === "ArrowDown") { s.body_bottom = clamp(s.body_bottom + step); dirty = true; render(); }
+  else if (e.key === "Tab")       { activeEdge = activeEdge === "top" ? "bot" : "top"; render(); }
+  else if (e.key === "ArrowUp")   moveEdge(activeEdge, -step);
+  else if (e.key === "ArrowDown") moveEdge(activeEdge, +step);
+  else if (letter === "w") { activeEdge = "top"; moveEdge("top", -step); }
+  else if (letter === "s") { activeEdge = "top"; moveEdge("top", +step); }
   else if (letter === "b") { s.has_body = !s.has_body; dirty = true; render(); }
   else if (letter === "i") { s.irregular = !s.irregular; dirty = true; render(); }
   else if (letter === "o") { $("overlay").classList.toggle("off"); return; }

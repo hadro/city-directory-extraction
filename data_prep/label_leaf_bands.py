@@ -32,9 +32,30 @@ kept -- in a new costume.
 mode is written into **every row** as `blind: true|false` so a mixed file cannot silently be
 analysed as one thing.
 
-Strip classes default to `advertising`, because on 1906BPL that is what they usually are, and each
-row records `head_class_defaulted` / `foot_class_defaulted`. A default a labeller never looked at
-is weaker evidence than one they chose, and the analysis gets to know which is which.
+WHAT A ROW RECORDS
+------------------
+`has_body` + `body_top` / `body_bottom` (fractions of THIS leaf's page height), and then either:
+
+  * body present -> `head_contents` and `foot_contents`, each a LIST, from
+    {advertising, furniture, empty}
+  * no body      -> `page_type`, one of
+    {advertising, front-matter, index-or-back-matter, blank-or-plate}
+
+**The strips are lists because they are routinely more than one thing, and a single-select label
+was simply wrong.** Measured on the two leaves this plan keeps citing: leaf 13's foot carries the
+Joseph Ryan advertisement AND the page number `25`; leaf 200's carries an Upington advertisement,
+the running head `Brooklyn Street Directory,` AND the page number `202`. Forcing one class would
+have thrown away whichever the labeller did not pick, and the class that matters -- advertising,
+the one that becomes fabricated people -- is exactly the one a page number would mask.
+
+Contents default to `["advertising"]` because that is the common case, and each row records
+`head_touched` / `foot_touched`. A default a labeller never looked at is weaker evidence than one
+they chose, and the analysis gets to know which is which.
+
+The prefill is also biased in a known direction, which the in-app instructions state: it is the
+extent of ditto lines, but a surname block OPENS with the un-dittoed surname (`ACME`, `ADAMS`)
+sitting above the first ditto, so the top edge starts a line or two low. Leaf 13 has a real entry
+at y=0.870 below the prefilled bottom, too. Labellers are told to nudge rather than confirm.
 
 IMAGES
 ------
@@ -152,7 +173,7 @@ def read_excluded(paths):
 # Server
 # ==============================================================================================
 class _Handler(http.server.BaseHTTPRequestHandler):
-    html: bytes
+    render_args: dict
     images: dict
     out_path: Path
     done: "threading.Event"
@@ -167,7 +188,10 @@ class _Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         cls = type(self)
         if self.path in ("/", "/index.html"):
-            return self._send(200, "text/html; charset=utf-8", cls.html)
+            # Re-render from the template on every load, so editing the HTML and hitting reload
+            # is enough -- no restart, and no re-fetching 250 page images to see a CSS change.
+            return self._send(200, "text/html; charset=utf-8",
+                              build_html(**cls.render_args).encode("utf-8"))
         m = re.fullmatch(r"/img/(\d+)\.jpg", self.path)
         if m and int(m.group(1)) in cls.images:
             return self._send(200, "image/jpeg", cls.images[int(m.group(1))].read_bytes())
@@ -248,6 +272,13 @@ def _self_test() -> int:
     html = build_html("X", [p], False, "/save")
     assert "__PAYLOAD__" not in html and '"ident": "X"' in html
 
+    # The vocabularies live in the template; assert they match this docstring rather than let
+    # the two drift silently apart.
+    for v in ("advertising", "furniture", "empty",
+              "front-matter", "index-or-back-matter", "blank-or-plate"):
+        assert f'"{v}"' in html, f"template is missing the {v} option"
+    assert "head_contents" in html and "page_type" in html, "template/save schema drift"
+
     print("self-test OK", file=sys.stderr)
     return 0
 
@@ -314,11 +345,13 @@ def main(argv=None) -> int:
 
     with socketserver.TCPServer(("127.0.0.1", 0), functools.partial(_Handler)) as server:
         port = server.server_address[1]
-        _Handler.html = build_html(args.ident, leaves, args.blind,
-                                   f"http://127.0.0.1:{port}/save").encode("utf-8")
+        _Handler.render_args = {"ident": args.ident, "leaves": leaves, "blind": args.blind,
+                                "save_url": f"http://127.0.0.1:{port}/save"}
+        build_html(**_Handler.render_args)          # fail loudly here, not in the browser
         url = f"http://127.0.0.1:{port}/"
         print(f"\nServing {url}  ({len(leaves)} leaves)", file=sys.stderr)
-        print("Drag the two edges. Save writes only VISITED leaves. Ctrl+C when done.",
+        print("Instructions open on first visit; '?' reopens them.", file=sys.stderr)
+        print("Save writes only VISITED leaves, so saving part-way is safe. Ctrl+C when done.",
               file=sys.stderr)
         if args.no_open:
             return 0

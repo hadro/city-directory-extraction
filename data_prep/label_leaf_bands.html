@@ -3,7 +3,7 @@
 <style>
   :root {
     --ink:#1a1a1a; --dim:#6b7280; --line:#d4d4d8; --bg:#f6f6f4; --panel:#fff;
-    --body:#2563eb; --head:#dc2626; --ditto:#16a34a;
+    --body:#2563eb; --cut:#dc2626; --ditto:#16a34a;
   }
   * { box-sizing:border-box; }
   body { margin:0; font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -27,7 +27,7 @@
   .handle::after { content:""; position:absolute; left:0; right:0; top:6px; height:2px;
                    background:var(--body); box-shadow:0 0 0 1px rgba(255,255,255,.7); }
   .handle:hover::after, .handle.drag::after { height:4px; top:5px; }
-  #wrap.nobody .handle { display:none; }
+  #wrap.nobody .handle, #wrap.nobody .tick { display:none; }
 
   .tick { position:absolute; right:3px; transform:translateY(-50%); z-index:6;
           background:var(--body); color:#fff; font-size:10px; font-weight:600;
@@ -38,7 +38,7 @@
   #overlay.off { display:none; }
 
   /* ---- sidebar ---- */
-  #side { width:292px; flex:none; background:var(--panel); border-left:1px solid var(--line);
+  #side { width:300px; flex:none; background:var(--panel); border-left:1px solid var(--line);
           display:flex; flex-direction:column; overflow-y:auto; }
   #side > div { padding:11px 14px; border-bottom:1px solid var(--line); }
   h2 { margin:0 0 3px; font-size:14px; }
@@ -47,26 +47,139 @@
            border-radius:3px; font-size:10.5px; display:inline-block; }
 
   .row { display:flex; gap:6px; align-items:center; margin:5px 0; }
-  .row label { width:46px; color:var(--dim); font-size:11px; }
   .val { font-variant-numeric:tabular-nums; font-weight:600; }
 
   button { font:inherit; padding:4px 9px; border:1px solid var(--line); background:#fff;
            border-radius:4px; cursor:pointer; }
   button:hover { background:#f0f0ef; }
   button.on { background:var(--ink); color:#fff; border-color:var(--ink); }
-  button.warn.on { background:#dc2626; border-color:#dc2626; }
+  button.warn.on { background:var(--cut); border-color:var(--cut); }
   .cls { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
   .cls button { font-size:11px; padding:3px 7px; }
-  .cls button.def { opacity:.55; font-style:italic; }
+  .cls button.untouched.on { background:#9ca3af; border-color:#9ca3af; }
 
   kbd { font:11px ui-monospace,Menlo,monospace; background:#eee; border:1px solid var(--line);
-        border-bottom-width:2px; border-radius:3px; padding:0 4px; }
+        border-bottom-width:2px; border-radius:3px; padding:0 4px; white-space:nowrap; }
   #prog { height:5px; background:#e5e5e3; border-radius:3px; overflow:hidden; margin-top:6px; }
   #progbar { height:100%; background:var(--body); width:0; }
   #status { font-size:11px; color:var(--dim); min-height:15px; }
   .keys { font-size:11px; color:var(--dim); line-height:1.9; }
   #btnSave { width:100%; padding:7px; font-weight:600; }
+  .hide { display:none !important; }
+
+  /* ---- help ---- */
+  #backdrop { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:50; }
+  #help { position:fixed; inset:4vh 50% 4vh 50%; width:min(760px,92vw);
+          transform:translateX(-50%); left:50%; right:auto; background:var(--panel);
+          border-radius:8px; z-index:51; overflow-y:auto; padding:24px 30px 30px;
+          box-shadow:0 10px 40px rgba(0,0,0,.3); line-height:1.6; }
+  #help h1 { font-size:19px; margin:0 0 4px; }
+  #help h3 { font-size:13px; margin:20px 0 5px; text-transform:uppercase;
+             letter-spacing:.05em; color:var(--dim); }
+  #help ol, #help ul { margin:6px 0; padding-left:20px; }
+  #help li { margin:4px 0; }
+  #help dl { margin:6px 0; display:grid; grid-template-columns:auto 1fr; gap:5px 12px; }
+  #help dt { font-weight:600; font-family:ui-monospace,Menlo,monospace; font-size:12px;
+             white-space:nowrap; }
+  #help dd { margin:0; }
+  #help .eg { color:var(--dim); font-style:italic; }
+  #help .warn { background:#fef3c7; border-left:3px solid #d97706; padding:9px 13px;
+                margin:12px 0; border-radius:0 4px 4px 0; }
+  #help .close { position:sticky; bottom:-30px; float:right; margin-top:16px;
+                 padding:7px 18px; font-weight:600; background:var(--ink); color:#fff;
+                 border-color:var(--ink); }
+  .swatch { display:inline-block; width:11px; height:11px; vertical-align:-1px;
+            border-radius:2px; margin-right:2px; }
 </style>
+
+<div id="backdrop" class="hide"></div>
+<div id="help" class="hide">
+  <h1>What you are labelling</h1>
+  <p>The <b>vertical extent of the residential listing</b> on this page — where the real
+  name-and-address entries start, and where they stop.</p>
+
+  <p class="sub">Why it matters: the extraction model never refuses. Feed it a line of advertising
+  and it returns a confidently structured fake person. Knowing where the listing really begins and
+  ends is how we stop that, and your labels are what teach it.</p>
+
+  <h3>The job, in four steps</h3>
+  <ol>
+    <li>Find the dense two-column block of entries. That is the <b>body</b>.</li>
+    <li>Drag the <b style="color:#2563eb">blue edges</b> to just outside the first and last real
+        entry. Everything <span class="swatch" style="background:rgba(220,38,38,.45)"></span>
+        shaded red is "not listing".</li>
+    <li>Tick what is actually <i>in</i> those red strips.</li>
+    <li><kbd>→</kbd> for the next page.</li>
+  </ol>
+
+  <div class="warn">
+    <b>The edges come pre-positioned, and they are slightly wrong in a predictable way.</b>
+    The guess is the extent of <span class="swatch" style="background:rgba(22,163,74,.5)"></span>
+    green boxes — lines starting with a ditto mark (<code>"</code> or OCR'd <code>44</code>), which
+    are nearly always real entries. But a surname block opens with the un-dittoed surname itself
+    (<span class="eg">ACME</span>, <span class="eg">ADAMS</span>), which sits <i>above</i> the first
+    ditto. <b>So the top edge usually needs nudging up a line or two</b>, and entries sometimes run
+    below the bottom guess too. Confirming the guess uncritically is the one way to make these
+    labels worthless.
+  </div>
+
+  <h3>What is in the strips <span class="sub">— tick all that apply</span></h3>
+  <dl>
+    <dt>1 · ad</dt>
+    <dd>Display advertising. Somebody selling something.
+        <span class="eg">WILKINSON'S DETECTIVE AGENCY · JOSEPH RYAN, PAINTER AND DECORATOR</span><br>
+        <b>This is the one that matters</b> — ad copy is what becomes fabricated people.</dd>
+    <dt>2 · furniture</dt>
+    <dd>The book's own page furniture: page number, volume title, section head.
+        <span class="eg">202 · Brooklyn Street Directory · UPINGTON'S DIRECTORY OFFICE</span><br>
+        Mostly harmless — the text filter already removes most of it.</dd>
+    <dt>3 · empty</dt>
+    <dd>Nothing there: white space, a rule, OCR noise. Exclusive — ticking it clears the others.</dd>
+  </dl>
+
+  <p><b>Both an ad and a page number?</b> Tick both. That is the normal case, not an edge case:
+  leaf 13's foot carries the Joseph Ryan ad <i>and</i> the page number 25. The label records what
+  is there; it is not a single verdict.</p>
+
+  <p class="sub">Head and foot are labelled separately. <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> set the
+  head, <kbd>shift</kbd>+ the same keys set the foot. Until you touch them they show grey, meaning
+  "defaulted, nobody looked" — that is recorded in the data.</p>
+
+  <h3>No listing on the page at all</h3>
+  <p>Press <kbd>b</kbd>. The page greys out and you say what the <i>whole leaf</i> is instead:</p>
+  <dl>
+    <dt>1 · ad</dt><dd>A full page of display advertising.</dd>
+    <dt>2 · front</dt><dd>Front matter — title page, preface, almanac, contents. Before the
+        listing starts.</dd>
+    <dt>3 · index</dt><dd>Back matter — the business directory, the street directory, an appendix.
+        After the listing, or between its letter blocks.</dd>
+    <dt>4 · blank</dt><dd>Blank leaf, a plate, or too damaged to read.</dd>
+  </dl>
+
+  <h3>Irregular <span class="sub">— <kbd>i</kbd></span></h3>
+  <p>Ads woven <i>through</i> the body rather than banded above and below it, so no pair of edges
+  can separate them. Should be rare. Flag it and move on — these are excluded from scoring, and if
+  they turn out common that is itself the finding.</p>
+
+  <h3>Do not overthink it</h3>
+  <p>Within a line or two is fine. What is being measured is whether the strips get found at all,
+  not whether you agreed with yourself to the pixel. Steady pace beats precision here.</p>
+
+  <h3>Keys</h3>
+  <p class="sub">
+    <kbd>←</kbd> <kbd>→</kbd> prev / next &nbsp;·&nbsp;
+    <kbd>w</kbd> <kbd>s</kbd> move top edge &nbsp;·&nbsp;
+    <kbd>↑</kbd> <kbd>↓</kbd> move bottom edge &nbsp;·&nbsp;
+    <kbd>shift</kbd> with any of those = coarse<br>
+    <kbd>b</kbd> no body &nbsp;·&nbsp; <kbd>i</kbd> irregular &nbsp;·&nbsp;
+    <kbd>o</kbd> hide/show boxes &nbsp;·&nbsp; <kbd>Enter</kbd> save &nbsp;·&nbsp;
+    <kbd>?</kbd> this help
+  </p>
+  <p class="sub"><b>Save early and often.</b> Only pages you have actually visited are written, so
+  saving part-way through is safe and never loses work.</p>
+
+  <button class="close" id="helpClose">Got it</button>
+</div>
 
 <div id="stage">
   <div id="wrap">
@@ -83,15 +196,17 @@
 
 <div id="side">
   <div>
-    <h2 id="ttl">leaf —</h2>
-    <div class="sub" id="meta"></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div><h2 id="ttl">leaf —</h2><div class="sub" id="meta"></div></div>
+      <button id="btnHelp" title="Instructions (?)">? help</button>
+    </div>
     <div id="blindTag" style="margin-top:6px"></div>
     <div id="prog"><div id="progbar"></div></div>
     <div class="sub" id="progtxt" style="margin-top:4px"></div>
   </div>
 
   <div>
-    <div class="row"><label>body</label>
+    <div class="row"><span class="sub">body</span>
       <span class="val" id="vTop">—</span><span class="sub">to</span>
       <span class="val" id="vBot">—</span></div>
     <div class="row">
@@ -101,11 +216,18 @@
     <div class="sub" id="prefillNote"></div>
   </div>
 
-  <div>
-    <div class="sub">head strip <kbd>1</kbd>–<kbd>5</kbd></div>
+  <div id="secStrips">
+    <div class="sub">head strip — what is in it? <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd></div>
     <div class="cls" id="clsHead"></div>
-    <div class="sub" style="margin-top:9px">foot strip <kbd>shift</kbd>+<kbd>1</kbd>–<kbd>5</kbd></div>
+    <div class="sub" style="margin-top:9px">foot strip
+      <kbd>shift</kbd>+<kbd>1</kbd><kbd>2</kbd><kbd>3</kbd></div>
     <div class="cls" id="clsFoot"></div>
+  </div>
+
+  <div id="secPage" class="hide">
+    <div class="sub">no listing body — what is this whole leaf?
+      <kbd>1</kbd>–<kbd>4</kbd></div>
+    <div class="cls" id="clsPage"></div>
   </div>
 
   <div>
@@ -119,25 +241,28 @@
 
   <div class="keys">
     <kbd>←</kbd> <kbd>→</kbd> prev / next &nbsp;·&nbsp; <kbd>w</kbd> <kbd>s</kbd> top edge<br>
-    <kbd>↑</kbd> <kbd>↓</kbd> bottom edge &nbsp;·&nbsp; <kbd>b</kbd> has body<br>
-    <kbd>i</kbd> irregular &nbsp;·&nbsp; <kbd>o</kbd> boxes &nbsp;·&nbsp; <kbd>Enter</kbd> save
+    <kbd>↑</kbd> <kbd>↓</kbd> bottom edge &nbsp;·&nbsp; <kbd>shift</kbd> = coarse<br>
+    <kbd>b</kbd> no body &nbsp;·&nbsp; <kbd>i</kbd> irregular &nbsp;·&nbsp;
+    <kbd>o</kbd> boxes &nbsp;·&nbsp; <kbd>Enter</kbd> save
   </div>
 </div>
 
 <script>
 const CFG = __PAYLOAD__;
-const CLASSES = ["advertising","running-head","front-matter","index-or-back-matter","empty"];
-const SHORT   = ["ad","head","front","index","empty"];
+const STRIP = [["advertising","1 ad"],["furniture","2 furniture"],["empty","3 empty"]];
+const PAGE  = [["advertising","1 ad"],["front-matter","2 front"],
+               ["index-or-back-matter","3 index"],["blank-or-plate","4 blank"]];
 
 let i = 0, dirty = false;
 const S = CFG.leaves.map(L => ({
   leaf: L.leaf,
   has_body: L.prefill_top !== null,
   irregular: false,
-  body_top: L.prefill_top !== null ? L.prefill_top : 0.10,
+  body_top:    L.prefill_top    !== null ? L.prefill_top    : 0.10,
   body_bottom: L.prefill_bottom !== null ? L.prefill_bottom : 0.90,
-  head_class: "advertising", head_class_defaulted: true,
-  foot_class: "advertising", foot_class_defaulted: true,
+  head: ["advertising"], head_touched: false,
+  foot: ["advertising"], foot_touched: false,
+  page_type: null,
   visited: false,
 }));
 
@@ -145,36 +270,59 @@ const $ = id => document.getElementById(id);
 const cur = () => S[i];
 const clamp = v => Math.max(0, Math.min(1, v));
 
-function mkClassRow(el, which) {
+// ---- help ----
+function showHelp(on) {
+  $("help").classList.toggle("hide", !on);
+  $("backdrop").classList.toggle("hide", !on);
+  try { localStorage.setItem("bandHelpSeen", "1"); } catch (e) {}
+}
+$("btnHelp").onclick = () => showHelp(true);
+$("helpClose").onclick = () => showHelp(false);
+$("backdrop").onclick = () => showHelp(false);
+let seen = false;
+try { seen = localStorage.getItem("bandHelpSeen") === "1"; } catch (e) {}
+if (!seen) showHelp(true);
+
+// ---- class rows ----
+function mkRow(el, opts, onPick) {
   el.innerHTML = "";
-  CLASSES.forEach((c, n) => {
+  opts.forEach(([val, label]) => {
     const b = document.createElement("button");
-    b.textContent = (n + 1) + " " + SHORT[n];
-    b.onclick = () => setClass(which, c);
+    b.textContent = label;
+    b.onclick = () => onPick(val);
     el.appendChild(b);
   });
 }
-mkClassRow($("clsHead"), "head");
-mkClassRow($("clsFoot"), "foot");
+mkRow($("clsHead"), STRIP, v => toggleStrip("head", v));
+mkRow($("clsFoot"), STRIP, v => toggleStrip("foot", v));
+mkRow($("clsPage"), PAGE,  v => { cur().page_type = v; dirty = true; render(); });
 
-function setClass(which, c) {
+function toggleStrip(which, val) {
   const s = cur();
-  s[which + "_class"] = c;
-  s[which + "_class_defaulted"] = false;
+  let set = s[which];
+  if (val === "empty") {
+    set = set.includes("empty") ? [] : ["empty"];
+  } else {
+    set = set.filter(x => x !== "empty");
+    set = set.includes(val) ? set.filter(x => x !== val) : set.concat([val]);
+  }
+  s[which] = set;
+  s[which + "_touched"] = true;
   dirty = true; render();
 }
 
 function render() {
   const L = CFG.leaves[i], s = cur();
   $("ttl").textContent = "leaf " + L.leaf;
-  $("meta").textContent = L.n_lines + " hOCR lines · " + L.page_size[0] + "×" + L.page_size[1]
-                        + " · " + (i + 1) + " of " + S.length;
+  $("meta").textContent = L.n_lines + " lines · " + (i + 1) + " of " + S.length;
   $("blindTag").innerHTML = CFG.blind
     ? '<span class="blind">BLIND — no prefill, no overlay</span>' : "";
   $("prefillNote").textContent = CFG.blind
-    ? "Edges start at 0.10 / 0.90, not at a guess."
-    : (L.prefill_top === null ? "No ditto lines found — prefill unavailable."
-       : "Prefilled from ditto extent " + L.prefill_top.toFixed(3) + "–" + L.prefill_bottom.toFixed(3));
+    ? "Edges start at 0.10 / 0.90 — not a guess, on purpose."
+    : (L.prefill_top === null
+        ? "No ditto lines found, so no prefill — likely a full-page ad."
+        : "Prefilled from ditto extent " + L.prefill_top.toFixed(3) + "–"
+          + L.prefill_bottom.toFixed(3) + ". Nudge the top up past the surname head.");
 
   const img = $("page");
   if (img.dataset.leaf !== String(L.leaf)) {
@@ -185,8 +333,10 @@ function render() {
 
   $("wrap").classList.toggle("nobody", !s.has_body);
   $("btnBody").classList.toggle("on", s.has_body);
-  $("btnBody").textContent = s.has_body ? "has body" : "NO body (full-page)";
+  $("btnBody").textContent = s.has_body ? "has body" : "NO body";
   $("btnIrr").classList.toggle("on", s.irregular);
+  $("secStrips").classList.toggle("hide", !s.has_body);
+  $("secPage").classList.toggle("hide", s.has_body);
 
   const t = s.body_top, b = s.body_bottom;
   $("shadeTop").style.height = (t * 100) + "%";
@@ -195,13 +345,18 @@ function render() {
   $("hBot").style.top = (b * 100) + "%";
   $("tTop").style.top = (t * 100) + "%"; $("tTop").textContent = t.toFixed(3);
   $("tBot").style.top = (b * 100) + "%"; $("tBot").textContent = b.toFixed(3);
-  $("vTop").textContent = t.toFixed(3); $("vBot").textContent = b.toFixed(3);
+  $("vTop").textContent = s.has_body ? t.toFixed(3) : "—";
+  $("vBot").textContent = s.has_body ? b.toFixed(3) : "—";
 
   [["head", $("clsHead")], ["foot", $("clsFoot")]].forEach(([w, el]) => {
     [...el.children].forEach((btn, n) => {
-      btn.classList.toggle("on", s[w + "_class"] === CLASSES[n]);
-      btn.classList.toggle("def", s[w + "_class"] === CLASSES[n] && s[w + "_class_defaulted"]);
+      const on = s[w].includes(STRIP[n][0]);
+      btn.classList.toggle("on", on);
+      btn.classList.toggle("untouched", !s[w + "_touched"]);
     });
+  });
+  [...$("clsPage").children].forEach((btn, n) => {
+    btn.classList.toggle("on", s.page_type === PAGE[n][0]);
   });
 
   const done = S.filter(x => x.visited).length;
@@ -227,10 +382,11 @@ function drawBoxes(L) {
 
 // ---- dragging ----
 let dragging = null;
-function startDrag(which) {
-  return e => { dragging = which; $(which === "top" ? "hTop" : "hBot").classList.add("drag");
-                e.preventDefault(); };
-}
+const startDrag = which => e => {
+  dragging = which;
+  $(which === "top" ? "hTop" : "hBot").classList.add("drag");
+  e.preventDefault();
+};
 $("hTop").addEventListener("mousedown", startDrag("top"));
 $("hBot").addEventListener("mousedown", startDrag("bot"));
 window.addEventListener("mousemove", e => {
@@ -260,9 +416,19 @@ $("btnBody").onclick = () => { cur().has_body = !cur().has_body; dirty = true; r
 $("btnIrr").onclick  = () => { cur().irregular = !cur().irregular; dirty = true; render(); };
 
 document.addEventListener("keydown", e => {
-  const step = e.shiftKey && !/^[1-5]$/.test(e.key) ? 0.05 : 0.005;
+  if (e.key === "?" || (e.key === "/" && e.shiftKey)) { showHelp(true); e.preventDefault(); return; }
+  if (!$("help").classList.contains("hide")) {
+    if (e.key === "Escape" || e.key === "Enter") { showHelp(false); e.preventDefault(); }
+    return;                                    // help is open: swallow everything else
+  }
   const s = cur();
-  if (/^[1-5]$/.test(e.key)) { setClass(e.shiftKey ? "foot" : "head", CLASSES[+e.key - 1]); }
+  const digit = /^[1-9]$/.test(e.key) ? +e.key : null;
+  const step = e.shiftKey ? 0.05 : 0.005;
+
+  if (digit !== null) {
+    if (!s.has_body) { if (PAGE[digit - 1]) { s.page_type = PAGE[digit - 1][0]; dirty = true; render(); } }
+    else if (STRIP[digit - 1]) toggleStrip(e.shiftKey ? "foot" : "head", STRIP[digit - 1][0]);
+  }
   else if (e.key === "ArrowLeft")  go(i - 1);
   else if (e.key === "ArrowRight") go(i + 1);
   else if (e.key === "w") { s.body_top = clamp(s.body_top - step); dirty = true; render(); }
@@ -284,10 +450,11 @@ function save() {
     return {
       ident: CFG.ident, leaf: s.leaf, blind: CFG.blind, visited: s.visited,
       has_body: s.has_body, irregular: s.irregular,
-      body_top: s.has_body ? +s.body_top.toFixed(4) : null,
+      body_top:    s.has_body ? +s.body_top.toFixed(4)    : null,
       body_bottom: s.has_body ? +s.body_bottom.toFixed(4) : null,
-      head_class: s.head_class, head_class_defaulted: s.head_class_defaulted,
-      foot_class: s.foot_class, foot_class_defaulted: s.foot_class_defaulted,
+      head_contents: s.has_body ? s.head : null, head_touched: s.head_touched,
+      foot_contents: s.has_body ? s.foot : null, foot_touched: s.foot_touched,
+      page_type: s.has_body ? null : s.page_type,
       prefill_top: L.prefill_top, prefill_bottom: L.prefill_bottom,
       n_lines: L.n_lines, page_size: L.page_size,
     };

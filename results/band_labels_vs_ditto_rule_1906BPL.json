@@ -1,0 +1,199 @@
+{
+  "ident": "1906BPL",
+  "labels": "data/bands_1906BPL_train.jsonl",
+  "n_rows": 197,
+  "n_body": 193,
+  "n_no_body": 4,
+  "n_irregular": 0,
+  "n_scored": 190,
+  "n_lines": 50480,
+  "no_body_missing_page_type": [
+    39,
+    129,
+    134,
+    165
+  ],
+  "strip_labels_touched": {
+    "head": 0,
+    "foot": 0,
+    "of": 193
+  },
+  "edge_delta": {
+    "top": {
+      "median": -0.015,
+      "min": -0.065,
+      "max": 0.165,
+      "modal": [
+        -0.015,
+        130
+      ]
+    },
+    "bottom": {
+      "median": 0.015,
+      "min": 0.01,
+      "max": 0.12,
+      "modal": [
+        0.015,
+        131
+      ]
+    }
+  },
+  "rules": {
+    "prefill+/-0.000": {
+      "lost": 1016,
+      "admitted": 63,
+      "exact_leaves": 0,
+      "clean_leaves": 183,
+      "worst_6": [
+        {
+          "leaf": 904,
+          "admitted": 20,
+          "lost": 1
+        },
+        {
+          "leaf": 1098,
+          "admitted": 8,
+          "lost": 2
+        },
+        {
+          "leaf": 86,
+          "admitted": 7,
+          "lost": 1
+        },
+        {
+          "leaf": 118,
+          "admitted": 7,
+          "lost": 1
+        },
+        {
+          "leaf": 288,
+          "admitted": 7,
+          "lost": 2
+        },
+        {
+          "leaf": 416,
+          "admitted": 7,
+          "lost": 0
+        }
+      ],
+      "admitted_share_from_worst_6": 0.8889
+    },
+    "prefill+/-0.010": {
+      "lost": 179,
+      "admitted": 73,
+      "exact_leaves": 133,
+      "clean_leaves": 183,
+      "worst_6": [
+        {
+          "leaf": 904,
+          "admitted": 21,
+          "lost": 0
+        },
+        {
+          "leaf": 118,
+          "admitted": 9,
+          "lost": 0
+        },
+        {
+          "leaf": 416,
+          "admitted": 9,
+          "lost": 0
+        },
+        {
+          "leaf": 678,
+          "admitted": 9,
+          "lost": 0
+        },
+        {
+          "leaf": 1098,
+          "admitted": 9,
+          "lost": 0
+        },
+        {
+          "leaf": 86,
+          "admitted": 8,
+          "lost": 0
+        }
+      ],
+      "admitted_share_from_worst_6": 0.8904
+    },
+    "prefill+/-0.015": {
+      "lost": 131,
+      "admitted": 80,
+      "exact_leaves": 150,
+      "clean_leaves": 183,
+      "worst_6": [
+        {
+          "leaf": 904,
+          "admitted": 22,
+          "lost": 0
+        },
+        {
+          "leaf": 118,
+          "admitted": 10,
+          "lost": 0
+        },
+        {
+          "leaf": 416,
+          "admitted": 10,
+          "lost": 0
+        },
+        {
+          "leaf": 678,
+          "admitted": 10,
+          "lost": 0
+        },
+        {
+          "leaf": 1098,
+          "admitted": 10,
+          "lost": 0
+        },
+        {
+          "leaf": 86,
+          "admitted": 9,
+          "lost": 0
+        }
+      ],
+      "admitted_share_from_worst_6": 0.8875
+    },
+    "prefill+/-0.020": {
+      "lost": 76,
+      "admitted": 114,
+      "exact_leaves": 152,
+      "clean_leaves": 168,
+      "worst_6": [
+        {
+          "leaf": 904,
+          "admitted": 24,
+          "lost": 0
+        },
+        {
+          "leaf": 118,
+          "admitted": 12,
+          "lost": 0
+        },
+        {
+          "leaf": 416,
+          "admitted": 12,
+          "lost": 0
+        },
+        {
+          "leaf": 678,
+          "admitted": 12,
+          "lost": 0
+        },
+        {
+          "leaf": 1098,
+          "admitted": 12,
+          "lost": 0
+        },
+        {
+          "leaf": 86,
+          "admitted": 11,
+          "lost": 0
+        }
+      ],
+      "admitted_share_from_worst_6": 0.7281
+    }
+  }
+}

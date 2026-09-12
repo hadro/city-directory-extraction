@@ -68,6 +68,69 @@ draggable edges, not a band with two. Checked before building it, and it is a no
 So the existing geometry filter handles margin advertising, the UI needs two edges rather than
 four, and this is recorded here so nobody re-derives it from the page images a third time.
 
+---
+
+## STATUS 2 — 197 leaves labelled, and the model may not be needed
+
+**2026-09-12.** First labelled batch: `data/bands_1906BPL_train.jsonl`, 197 leaves — 193 with a
+body, 4 without, **0 irregular** (the band assumption holds on this volume). Analysis persisted in
+[`results/band_labels_vs_ditto_rule_1906BPL.py`](../results/band_labels_vs_ditto_rule_1906BPL.py).
+
+The labeller moved both edges on every leaf, by a near-constant amount: **top median −0.0150,
+bottom median +0.0150**, with 68% / 69% landing on exactly those values. So the deterministic rule
+to beat is not the bare ditto extent but the ditto extent *expanded by a constant*:
+
+| rule | admits no ad | exact both ways | listing lost | ad admitted |
+|---|---|---|---|---|
+| bare ditto extent | 183/190 | 0/190 | 1,016 | 63 |
+| extent ± 0.010 | 183/190 | 133/190 | 179 | 73 |
+| **extent ± 0.015** | **183/190** | **150/190** | **131** | **80** |
+| extent ± 0.020 | 168/190 | 152/190 | 76 | 114 |
+
+0.42% total line disagreement. **On the aggregate, a trained band model has essentially no room to
+earn its keep** — which is exactly what the pre-registered bar existed to find out.
+
+### But the aggregate hides the failure that matters
+
+Of the 80 non-listing lines the ±0.015 rule admits, **71 (89%) come from 6 leaves**. Leaf 904 alone
+admits 22 lines of pure advertising — `Law of Real Property`, `Mammoth Storage Warehouses and Moving
+Vans`, `PETER F. REILLY, Proprietor`. Each one becomes a fabricated person. The rule is not "96%
+right"; it is exactly right nearly everywhere and catastrophically wrong on ~4% of leaves. This is
+the same shape of error `entry_rate.py` is documented as having, found again by looking at the
+distribution instead of the total.
+
+**The cause is one line, and it is diagnosable.** `44` is ABBYY's reading of the ditto mark *and* a
+literal street number. The recurring Temple Bar advertisement carries `44 COURT ST.`, the ditto
+regex matches it, and the "first ditto line" lands inside the advertisement. Measured independently
+on a fresh 300-leaf sample: a ditto-matching line that is really a bare street address appears on
+**3.3% of leaves**, 8 of the 10 found being that same advertisement — agreeing with the 3.7%
+failure rate seen against the labels.
+
+### What that means for the instrument
+
+**Do not train a band regressor.** 96% of edges need no model, and the residual is not a geometry
+problem: separating `44 COURT ST.` from `44 Wm elk h 86 Laf av` requires *reading the line*, which
+no threshold on position or extent can do. The sharp target is a much smaller one — **decide whether
+a ditto-matching line is actually a ditto** — and it is the same question the per-volume glyph gate
+already asks at volume scale, asked per line.
+
+That also makes it useful beyond this plan: the same decision governs stage 5's cross-line
+resolution, where a false ditto gets a surname carried into it.
+
+### Two gaps in this batch, and one that cannot be closed from it
+
+- **Strip contents carry no information.** `head_touched`/`foot_touched` are false on all 193 body
+  leaves — every strip label is the untouched default `["advertising"]`. This is precisely what the
+  `_touched` bookkeeping was added for. Do not count, analyse or train on the strip fields here.
+- **Leaves 39, 129, 134, 165** are marked `has_body: false` with `page_type: null`. All four read as
+  full-page advertising, but the file does not say so and it is not inferred.
+- **Anchoring, and it is the important one.** These labels were made with the prefill on screen, so
+  "human agrees with prefill plus a constant" is partly circular — it measures how the labeller
+  adjusted a starting guess, not whether the guess was right. The seven large deliberate corrections
+  argue against pure anchoring but do not dispose of it. **The `--blind` evaluation set is now the
+  load-bearing measurement rather than an optional rigour step**, and until it exists none of the
+  agreement numbers above should be quoted as accuracy.
+
 Phases below are revised accordingly. The strategy — small model, agent-proposed labels, human-read
 holdout, ship as a queue — is unchanged; the unit and the metric are not.
 

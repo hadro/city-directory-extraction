@@ -1,0 +1,300 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0025",
+ "book_says": {
+  "year": {
+   "value": 1848,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0025/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "*\n' BROOKLYN, NEW YORK\n1848-9 |\na\u201c\nBrooklyn Directory and Yearly Ad",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1848,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "*\n' BROOKLYN, NEW YORK\n1848-9 |\na\u201c\nBrooklyn Directory and Yearly Ad"
+   },
+   {
+    "year": 1848,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "yn Directory and Yearly Advertiser, for 1848-9.\nCompiled and Published by H(enry) R."
+   },
+   {
+    "year": 1848,
+    "how": "digits",
+    "leaf": 9,
+    "quote": "e\n*\n\u2014\n1\nBROOKLYN\nYEARLY ADVERTISER,\nFOR 1848\u20149.\nCONTAINING THE USUAL ARRANGEMENT OF"
+   },
+   {
+    "year": 1848,
+    "how": "digits",
+    "leaf": 8,
+    "quote": "OOKLYN\nDIRECTORY\nYEARLY ADVERTISER,\nFOR 1848\u20149,\nVeRO\nwes Terreares per rors 4 * 3 me"
+   },
+   {
+    "year": 1848,
+    "how": "digits",
+    "leaf": 8,
+    "quote": "ublishers of the Brooklyn Directory for 1848-9 have the\npleasure to inform the publi"
+   }
+  ],
+  "publisher": {
+   "value": "H",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0025/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "Published by H",
+   "method": "hocr-text",
+   "confidence": "low",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "BROOKLYN DIRECTORY YEARLY ADVERTISER,",
+   "leaf": 8,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$8/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0025/page/n8_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN / DIRECTORY / YEARLY ADVERTISER,",
+   "method": "hocr-text",
+   "confidence": "low"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 13454049,
+  "hocr_sha1": "7f220edcebcec1c9ea18f1d1e8f33ba424e6d78d",
+  "hocr_mtime": "1708623236",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 92,
+  "leaves": 413,
+  "filled": 397,
+  "high_confidence": 101,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1848/49",
+   "title": "Brooklyn Directory and Yearly Advertiser for 1848-1849",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Spooner-era Brooklyn; col=1 verified 1848/49 sample (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn Directory and Yearly Advertiser for 1848-1849",
+   "date": "1848-1849",
+   "year": null,
+   "publisher": "Lees & Foulkes",
+   "creator": "Hearnes, Henry R. and William J.",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "413",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126040404",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "target_card",
+    "lines": 8,
+    "chars": 208
+   },
+   "2": {
+    "class": "other",
+    "lines": 27,
+    "chars": 953
+   },
+   "3": {
+    "class": "other",
+    "lines": 42,
+    "chars": 2328
+   },
+   "4": {
+    "class": "other",
+    "lines": 63,
+    "chars": 591
+   },
+   "5": {
+    "class": "other",
+    "lines": 45,
+    "chars": 2375
+   },
+   "6": {
+    "class": "other",
+    "lines": 45,
+    "chars": 2074
+   },
+   "7": {
+    "class": "other",
+    "lines": 21,
+    "chars": 663
+   },
+   "8": {
+    "class": "title_page",
+    "lines": 24,
+    "chars": 855
+   },
+   "9": {
+    "class": "title_page",
+    "lines": 28,
+    "chars": 749
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 1146
+   },
+   "12": {
+    "class": "other",
+    "lines": 17,
+    "chars": 187
+   },
+   "13": {
+    "class": "other",
+    "lines": 16,
+    "chars": 569
+   },
+   "14": {
+    "class": "other",
+    "lines": 24,
+    "chars": 634
+   },
+   "15": {
+    "class": "other",
+    "lines": 21,
+    "chars": 627
+   },
+   "16": {
+    "class": "other",
+    "lines": 16,
+    "chars": 362
+   },
+   "17": {
+    "class": "other",
+    "lines": 17,
+    "chars": 395
+   },
+   "18": {
+    "class": "other",
+    "lines": 22,
+    "chars": 849
+   },
+   "19": {
+    "class": "other",
+    "lines": 13,
+    "chars": 190
+   },
+   "20": {
+    "class": "other",
+    "lines": 23,
+    "chars": 384
+   },
+   "21": {
+    "class": "other",
+    "lines": 11,
+    "chars": 208
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 18,
+    "chars": 383
+   },
+   "23": {
+    "class": "other",
+    "lines": 37,
+    "chars": 1102
+   },
+   "24": {
+    "class": "other",
+    "lines": 6,
+    "chars": 116
+   },
+   "25": {
+    "class": "other",
+    "lines": 31,
+    "chars": 823
+   },
+   "26": {
+    "class": "other",
+    "lines": 6,
+    "chars": 28
+   },
+   "27": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1100
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 48,
+    "chars": 1560
+   },
+   "29": {
+    "class": "other",
+    "lines": 16,
+    "chars": 372
+   }
+  },
+  "title_page_leaf": 9,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 1,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "weak_title_page": 3,
+  "image_read_candidates": [
+   1,
+   9,
+   8
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0025/page/n1_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0025/page/n9_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0025/page/n8_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

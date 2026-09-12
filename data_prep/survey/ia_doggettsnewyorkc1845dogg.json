@@ -1,0 +1,296 @@
+{
+ "source": "ia",
+ "id": "doggettsnewyorkc1845dogg",
+ "book_says": {
+  "year": {
+   "value": 1845,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$5/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1845dogg/page/n5_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "DOGGETT'S\nNEW-YORK\nCITY DIRECTORY,\nFOR\n1845 & 1846.\nNEW-YORK:\nJOHN DOGGETT, JR. PUB",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1844,
+    1845,
+    1846
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1845,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "DOGGETT'S\nNEW-YORK\nCITY DIRECTORY,\nFOR\n1845 & 1846.\nNEW-YORK:\nJOHN DOGGETT, JR. PUB"
+   },
+   {
+    "year": 1846,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "T'S\nNEW-YORK\nCITY DIRECTORY,\nFOR\n1845 & 1846.\nNEW-YORK:\nJOHN DOGGETT, JR. PUBLISHER"
+   },
+   {
+    "year": 1845,
+    "how": "digits",
+    "leaf": 8,
+    "quote": "tablishment, 156 Broadway, )\nJune 30th, 1845. $\nNote. \u2014 Several names, new firms, &c"
+   },
+   {
+    "year": 1844,
+    "how": "digits",
+    "leaf": 8,
+    "quote": "al number of names in the Directory for 1844, was - - - 60,188\nAdditional names this"
+   },
+   {
+    "year": 1845,
+    "how": "digits",
+    "leaf": 8,
+    "quote": "- - 60,188\nAdditional names this year, (1845,) 1,145\nTotal number,\n61,333"
+   }
+  ],
+  "legend": {
+   "value": "present",
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$19/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1845dogg/page/n19_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "insertion, which are placed in the front part of this work,\nABBREVIATIONS,\nal. for alley, b. between, bldgs. buildings, c. corner, com. commission, ct. court, e. r. east river, ex. exchange,\nfo.-wdg. ",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 73603447,
+  "hocr_sha1": "d48bbf19a5ed1a4b9eac751c4ad4e48ff71e52fd",
+  "hocr_mtime": "1699533964",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 85,
+  "leaves": 482,
+  "filled": 419,
+  "high_confidence": 12,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Doggett",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1845",
+   "title": "Doggett's New-York City directory, for ...",
+   "column_count": "2",
+   "start_page": "13",
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": null
+  },
+  "ia": {
+   "title": "Doggett's New-York City directory, for ...",
+   "date": "1845",
+   "year": null,
+   "publisher": "New-York : J. Doggett, Jr.",
+   "creator": "Doggett, John, 1809-1852",
+   "contributor": "Columbia University Libraries",
+   "imagecount": "484",
+   "ocr": null,
+   "scandate": "20131203190827",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 39,
+    "chars": 1016
+   },
+   "2": {
+    "class": "other",
+    "lines": 62,
+    "chars": 1989
+   },
+   "3": {
+    "class": "other",
+    "lines": 33,
+    "chars": 2089
+   },
+   "4": {
+    "class": "other",
+    "lines": 18,
+    "chars": 670
+   },
+   "5": {
+    "class": "target_card",
+    "lines": 10,
+    "chars": 207
+   },
+   "6": {
+    "class": "other",
+    "lines": 10,
+    "chars": 352
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 34,
+    "chars": 2419
+   },
+   "8": {
+    "class": "title_page",
+    "lines": 32,
+    "chars": 1797
+   },
+   "9": {
+    "class": "contents",
+    "lines": 56,
+    "chars": 1353
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 655,
+    "chars": 4560
+   },
+   "11": {
+    "class": "other",
+    "lines": 892,
+    "chars": 5670
+   },
+   "12": {
+    "class": "other",
+    "lines": 48,
+    "chars": 1150
+   },
+   "13": {
+    "class": "other",
+    "lines": 144,
+    "chars": 4262
+   },
+   "14": {
+    "class": "other",
+    "lines": 45,
+    "chars": 648
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 14,
+    "chars": 519
+   },
+   "16": {
+    "class": "other",
+    "lines": 75,
+    "chars": 2934
+   },
+   "17": {
+    "class": "other",
+    "lines": 31,
+    "chars": 1430
+   },
+   "18": {
+    "class": "other",
+    "lines": 35,
+    "chars": 924
+   },
+   "19": {
+    "class": "legend",
+    "lines": 117,
+    "chars": 4591
+   },
+   "20": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6683
+   },
+   "21": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6725
+   },
+   "22": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6980
+   },
+   "23": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6677
+   },
+   "24": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6610
+   },
+   "25": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6908
+   },
+   "26": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6722
+   },
+   "27": {
+    "class": "other",
+    "lines": 170,
+    "chars": 6670
+   },
+   "28": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6575
+   },
+   "29": {
+    "class": "other",
+    "lines": 164,
+    "chars": 6605
+   }
+  },
+  "title_page_leaf": 8,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 5,
+  "contents_leaf": 9,
+  "legend_leaves": [
+   19
+  ],
+  "image_read_candidates": [
+   5,
+   8,
+   7
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/doggettsnewyorkc1845dogg/page/n5_w1400.jpg",
+   "https://archive.org/download/doggettsnewyorkc1845dogg/page/n8_w1400.jpg",
+   "https://archive.org/download/doggettsnewyorkc1845dogg/page/n7_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

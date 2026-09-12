@@ -1,0 +1,262 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldire19073trow",
+ "book_says": {
+  "year": {
+   "value": 1907,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19073trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldire19073trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "X.\nFOR THE V li A R ENDING . /;\nJULY 1, 1907\n\u25a0C^N\nPFBLISHED AXNUALLY\nTROW DIRECTORY,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1907,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "X.\nFOR THE V li A R ENDING . /;\nJULY 1, 1907\n\u25a0C^N\nPFBLISHED AXNUALLY\nTROW DIRECTORY,"
+   }
+  ],
+  "volume_number": {
+   "value": 120,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19073trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldire19073trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOL. CXX",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "TROWS '\"\u25a0 GENERAL DIRECTORY OF THE Bor.oi'fiiis of MANHATTAN AND BRONX -^ \" ' \u25a0 CITY Ol^ ^E^V YOr^K",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19073trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldire19073trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "TROWS '\"\u25a0 / GENERAL DIRECTORY / OF THE Bor.oi'fiiis of / MANHATTAN AND BRONX / -^ \" ' \u25a0 / CITY Ol^ ^E^V YOr^K",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 70599027,
+  "hocr_sha1": "2c9375a975f3de4364dc7285862a3e264bcd4f41",
+  "hocr_mtime": "1633879499",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 1260,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1907",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan; Trow; col=3 (pilot s4); offset unreadable (top-banner ad obscures page no.)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1853",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1264",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20090106203221",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": "NOT_IN_COPYRIGHT",
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 8,
+    "chars": 73
+   },
+   "3": {
+    "class": "other",
+    "lines": 1,
+    "chars": 15
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 20,
+    "chars": 493
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 165,
+    "chars": 3309
+   },
+   "10": {
+    "class": "other",
+    "lines": 1,
+    "chars": 6
+   },
+   "11": {
+    "class": "other",
+    "lines": 171,
+    "chars": 3437
+   },
+   "12": {
+    "class": "other",
+    "lines": 1,
+    "chars": 11
+   },
+   "13": {
+    "class": "other",
+    "lines": 182,
+    "chars": 4198
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 167,
+    "chars": 3458
+   },
+   "16": {
+    "class": "other",
+    "lines": 1,
+    "chars": 23
+   },
+   "17": {
+    "class": "other",
+    "lines": 226,
+    "chars": 4371
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 114,
+    "chars": 2931
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 170,
+    "chars": 4481
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 148,
+    "chars": 3597
+   },
+   "24": {
+    "class": "other",
+    "lines": 2,
+    "chars": 35
+   },
+   "25": {
+    "class": "other",
+    "lines": 167,
+    "chars": 3229
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 101,
+    "chars": 2183
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 212,
+    "chars": 3971
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

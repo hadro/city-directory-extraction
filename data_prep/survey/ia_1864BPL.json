@@ -1,0 +1,257 @@
+{
+ "source": "ia",
+ "id": "1864BPL",
+ "book_says": {
+  "publisher": {
+   "value": "J. LAIN AND COMPANY",
+   "leaf": 4,
+   "canvas": "https://iiif.archive.org/iiif/1864BPL$4/canvas",
+   "image": "https://archive.org/download/1864BPL/page/n4_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY J. LAIN AND COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 8,
+   "canvas": "https://iiif.archive.org/iiif/1864BPL$8/canvas",
+   "image": "https://archive.org/download/1864BPL/page/n8_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "in their vocations in the cities of Brooklyn and New York.\nABBREVIATIONS, ETC.\nal. alley; av. avenue; bldg. building; c. h. customhouse; (col.) colored; com. commission; c. corner;\nct. court; E. east;",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 4,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 78607766,
+  "hocr_sha1": "554cdd4bf63c4a7b82d2a2543b7610753bd151fc",
+  "hocr_mtime": "1635639116",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 94.12903225806451,
+  "leaves": 651,
+  "filled": 644,
+  "high_confidence": 603,
+  "ocr_value_leaves": 640,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1864",
+   "title": "Brooklyn City Directory for the year ending May 1, 1864",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain; col=2 verified via 1858/1869 title pages (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn City Directory for the year ending May 1, 1864",
+   "date": "1864-05-01",
+   "year": null,
+   "publisher": null,
+   "creator": "J. Lain and Company",
+   "contributor": null,
+   "imagecount": "652",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 30,
+    "chars": 1247
+   },
+   "1": {
+    "class": "other",
+    "lines": 23,
+    "chars": 699
+   },
+   "2": {
+    "class": "other",
+    "lines": 26,
+    "chars": 845
+   },
+   "3": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1397
+   },
+   "4": {
+    "class": "title_page",
+    "lines": 9,
+    "chars": 227
+   },
+   "5": {
+    "class": "copyright_page",
+    "lines": 6,
+    "chars": 285
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 23,
+    "chars": 1529
+   },
+   "7": {
+    "class": "other",
+    "lines": 80,
+    "chars": 1307
+   },
+   "8": {
+    "class": "legend",
+    "lines": 71,
+    "chars": 2863
+   },
+   "9": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4834
+   },
+   "10": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4774
+   },
+   "11": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4764
+   },
+   "12": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4808
+   },
+   "13": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4873
+   },
+   "14": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4913
+   },
+   "15": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4773
+   },
+   "16": {
+    "class": "other",
+    "lines": 142,
+    "chars": 4967
+   },
+   "17": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4804
+   },
+   "18": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4861
+   },
+   "19": {
+    "class": "other",
+    "lines": 140,
+    "chars": 4698
+   },
+   "20": {
+    "class": "other",
+    "lines": 139,
+    "chars": 4613
+   },
+   "21": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4840
+   },
+   "22": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4834
+   },
+   "23": {
+    "class": "other",
+    "lines": 141,
+    "chars": 5029
+   },
+   "24": {
+    "class": "other",
+    "lines": 142,
+    "chars": 4832
+   },
+   "25": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4836
+   },
+   "26": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4817
+   },
+   "27": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4882
+   },
+   "28": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4850
+   },
+   "29": {
+    "class": "other",
+    "lines": 141,
+    "chars": 5182
+   }
+  },
+  "title_page_leaf": 4,
+  "copyright_page_leaf": 5,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   8
+  ],
+  "image_read_candidates": [
+   5,
+   4
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/1864BPL/page/n5_w1400.jpg",
+   "https://archive.org/download/1864BPL/page/n4_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

@@ -1,0 +1,268 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldir1912p2trow",
+ "book_says": {
+  "year": {
+   "value": 1912,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1912p2trow$5/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1912p2trow/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "L. CXXV.\nEOR THE YEAR ENDING-\nAUGUST 1, 1912\nt\nPUBLISHED ANNUALLY\nBT\nTROW DIRECTORY,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1911,
+    1912
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1912,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "L. CXXV.\nEOR THE YEAR ENDING-\nAUGUST 1, 1912\nt\nPUBLISHED ANNUALLY\nBT\nTROW DIRECTORY,"
+   },
+   {
+    "year": 1911,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "CTORY, PRINTING AND BOOKBINDING COMPANY\n1911\nHi '<\n9 10 3:3 2"
+   }
+  ],
+  "volume_number": {
+   "value": 125,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1912p2trow$5/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1912p2trow/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOL. CXXV",
+   "method": "hocr-text",
+   "confidence": "high"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 226953266,
+  "hocr_sha1": "b0b0cadfc6a380cb88984b30add5d4a3a9273412",
+  "hocr_mtime": "1633880085",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 19,
+  "leaves": 1278,
+  "filled": 116,
+  "high_confidence": 22,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1912",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan | part 2; Trow; col=3 (s4: bracketed 1859-1915 all 3-col + 1890s card)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1912",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1280",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130423171047",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 7,
+    "chars": 56
+   },
+   "3": {
+    "class": "other",
+    "lines": 1,
+    "chars": 17
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "title_page",
+    "lines": 23,
+    "chars": 386
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "other",
+    "lines": 395,
+    "chars": 10772
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 379,
+    "chars": 11141
+   },
+   "10": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "11": {
+    "class": "other",
+    "lines": 384,
+    "chars": 10976
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 367,
+    "chars": 10766
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 392,
+    "chars": 10732
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "other",
+    "lines": 383,
+    "chars": 11149
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 400,
+    "chars": 10958
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 374,
+    "chars": 10847
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 391,
+    "chars": 10930
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 380,
+    "chars": 11253
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 381,
+    "chars": 10489
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "other",
+    "lines": 376,
+    "chars": 10962
+   }
+  },
+  "title_page_leaf": 5,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   5
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/trowsgeneraldir1912p2trow/page/n5_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

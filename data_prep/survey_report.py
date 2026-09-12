@@ -44,12 +44,35 @@ def tokens(s: str):
 
 
 def publisher_agrees(catalog: str, book: str) -> bool:
-    """True when the two name the same house. Containment either way -- the catalog holds a short
-    label and the page holds the full legal imprint."""
+    """True when the two name the same house.
+
+    Three passes, each answering a different way the same name can look different:
+
+    1. a shared significant token -- the catalog holds a short label ("Trow") and the page holds
+       the full legal imprint ("THE TROW CITY DIRECTORY COMPANY").
+    2. de-spaced containment -- OCR splits words. "THOMAS LONG WORTH" is Longworth, and it showed
+       up four separate ways across the Longworth volumes (LONGWOIITH, LOKCWORTH, L0NGW0RTH,
+       LONG WORTH). Comparing letters-only defeats the split without defeating anything else.
+    3. token prefix -- "Hearnes" against "HENRY R. & WILLIAM J. HEARNE".
+
+    What it deliberately does NOT try to fix is character-level OCR damage: "GEORGE UHNUTON" and
+    "GEORGE TTBiNfiTriM" are both Upington, and both stay conflicts. That is correct. Anything
+    loose enough to match them would match unrelated houses, and a name the OCR mangled that badly
+    is exactly what an image read is for.
+    """
     a, b = tokens(catalog), tokens(book)
     if not a or not b:
         return False
-    return bool(a & b)
+    if a & b:
+        return True
+    na = re.sub(r"[^a-z]", "", (catalog or "").lower())
+    nb = re.sub(r"[^a-z]", "", (book or "").lower())
+    if len(na) >= 5 and na in nb:
+        return True
+    if len(nb) >= 5 and nb in na:
+        return True
+    return any(len(x) >= 5 and len(y) >= 5 and (x.startswith(y) or y.startswith(x))
+               for x in a for y in b)
 
 
 def year_of(s):
@@ -71,6 +94,60 @@ def year_agrees(catalog, book) -> bool:
         tail = cy - (cy % 100) + tail if tail < 100 else tail
         return abs(tail - book) <= 1
     return False
+
+
+ID_YEAR = re.compile(r"(1[78]\d\d|19[0-4]\d)")
+
+
+def id_year(ident: str):
+    """A year embedded in the IA identifier -- a free THIRD witness, independent of both the
+    catalog metadata and the page.
+
+    `doggettsnewyorkc1847dogg`, `brooklynnewyork1907p1geor`, `longworthsameric1839newy` all name
+    their year, and it repeatedly sides with the printed page against IA's `date` field. Bounded
+    to plausible directory years so sequence numbers do not parse: `longworthsameric3818long`
+    contains "3818" and yields nothing, which is the correct answer.
+
+    Returns None when the identifier names more than one candidate year -- ambiguity is not a vote.
+    """
+    found = {int(m) for m in ID_YEAR.findall(ident or "")}
+    return found.pop() if len(found) == 1 else None
+
+
+def adjudicate(ident, csv_year, ia_date, book_year):
+    """-> (verdict, witnesses, outliers). Find the odd one out among four INDEPENDENT witnesses.
+
+    There are four, not two, and an earlier version of this lost the signal by lumping the CSV in
+    with IA's metadata as one "catalog" voice. `longworthsameric1839newy` is the case that showed
+    it: the CSV says 1839, the page says 1839, the identifier says 1839, and only IA's `date`
+    field says 1816. That is a clean 3-1 against IA, not a stand-off.
+
+    This is what turns a list of conflicts into a work queue:
+      * `book` alone outside the majority -> the read is probably wrong; send the image.
+      * `ia` (or `csv`) alone outside it   -> the catalog is wrong and the page proves it.
+    """
+    w = {}
+    for k, v in (("csv", year_of(csv_year)), ("ia", year_of(ia_date)),
+                 ("id", id_year(ident)), ("book", book_year)):
+        if v is not None:
+            w[k] = v
+    if len(w) < 3:
+        return "too-few-witnesses", w, []
+
+    # The majority cluster: the witness the most others agree with, within a year.
+    best_k = max(w, key=lambda k: sum(1 for v in w.values() if abs(w[k] - v) <= 1))
+    best_n = sum(1 for v in w.values() if abs(w[best_k] - v) <= 1)
+    if best_n * 2 <= len(w):
+        return "split -- no majority", w, []
+
+    outliers = sorted(k for k, v in w.items() if abs(v - w[best_k]) > 1)
+    if not outliers:
+        return "agree", w, []
+    if outliers == ["book"]:
+        return "the READ is the outlier (send the image)", w, outliers
+    if "book" not in outliers:
+        return f"the CATALOG is the outlier ({'+'.join(outliers)} wrong)", w, outliers
+    return "split -- no majority", w, outliers
 
 
 def load():
@@ -118,6 +195,17 @@ def main(argv=None):
         assert publisher_agrees("Upington", "GEORGE UPINGTON")
         assert publisher_agrees("Spooner", "Alden Spooner")
         assert not publisher_agrees("Trow", "Alden Spooner"), "different houses must conflict"
+        # OCR splits words; letters-only containment defeats that without loosening anything else.
+        assert publisher_agrees("Longworth", "THOMAS LONG WORTH")
+        assert publisher_agrees("Longworth", "D. LONG WORTH")
+        assert publisher_agrees("Hearnes", "HENRY R. Sc WILLIAM J. HEARNE"), "prefix, not equality"
+        assert publisher_agrees("Spooner", "E. B. SPOONER")
+        # Character-level damage must NOT be papered over -- these are what an image read is for.
+        assert not publisher_agrees("Upington", "GEORGE UHNUTON"), "mangled OCR stays a conflict"
+        assert not publisher_agrees("Upington", "GEORGE TTBiNfiTriM")
+        # ... and the loosening must not start matching genuinely different houses.
+        assert not publisher_agrees("Smith", "CHARLES JENKINS"), "a real finding must survive"
+        assert not publisher_agrees("Boyd", "JOHN J. BRENNAN")
         # Generic words must not manufacture agreement between unrelated imprints.
         assert not publisher_agrees("New York Directory Co", "City Directory Publishing Co"), \
             "stopwords must not match two different houses to each other"
@@ -126,6 +214,30 @@ def main(argv=None):
         assert year_agrees("1899/00", 1900), "a two-digit tail crossing the century rolls over"
         assert not year_agrees("1845", 1899), "a real conflict must survive the slack"
         assert not year_agrees("", 1906) and not year_agrees("1906", None)
+
+        # The third witness. Bounded so sequence numbers do not parse as years.
+        assert id_year("doggettsnewyorkc1847dogg") == 1847
+        assert id_year("longworthsameric1839newy") == 1839
+        assert id_year("longworthsameric3818long") is None, "3818 is not a year"
+        assert id_year("1906BPL") == 1906
+        assert id_year("newyorkdirectory00fran") is None, "no year named"
+        # A slash-year identifier yields its first year, which is the right answer: matching is
+        # non-overlapping, so "190607" (the 1906/07 volume) reads 1906 and the trailing 07 is not
+        # a second candidate.
+        assert id_year("brooklynnewyork190607geor") == 1906
+        assert id_year("reprint1889of1786directory") is None, "two real candidates is not a vote"
+
+        # Longworth: csv + page + identifier all say 1839, only IA's `date` says 1816. Lumping
+        # csv in with ia as one "catalog" voice reported this as a stand-off; it is 3-1.
+        v, w, out = adjudicate("longworthsameric1839newy", "1839", "1816", 1839)
+        assert out == ["ia"] and v.startswith("the CATALOG is the outlier"), (v, w, out)
+        # 1856BPL: the read came off an ad ("ESTABLISHED 1837"); csv, ia and id all say 1856.
+        v, _w, out = adjudicate("1856BPL", "1856", "1856", 1837)
+        assert out == ["book"] and v.startswith("the READ is the outlier"), (v, out)
+        # Only two witnesses -- not enough to adjudicate, so say so rather than pick.
+        assert adjudicate("newyorkdirectory00fran", None, "1889", 1786)[0] == "too-few-witnesses"
+        # Everyone agrees; not a conflict at all once the identifier is counted.
+        assert adjudicate("doggettsnewyorkc1847dogg", "1847", "1845", 1847)[2] == ["ia"]
         print("self-test OK", file=sys.stderr)
         return 0
 
@@ -180,14 +292,32 @@ def main(argv=None):
     if not conflicts:
         print("no conflicts.")
         return 0
-    print(f"CONFLICTS ({len(conflicts)}) -- catalog vs the printed page, with the leaf that says so:")
-    for d, (field, cv, bv, _v, cit) in sorted(conflicts, key=lambda r: r[1][0]):
-        print(f"\n  {d['id']}  [{field}]")
-        print(f"    catalog : {cv!r}")
-        print(f"    book    : {bv!r}   (leaf {cit['leaf']}, {cit['evidence_type']}, "
-              f"{cit.get('attestation', cit.get('evidence_detail', cit['method']))})")
-        print(f"    quote   : {cit['quote'][:100]!r}")
-        print(f"    settle  : {cit['image']}")
+    # Group by what the third witness says, so the list is a work queue rather than a list.
+    buckets = {}
+    for d, c in conflicts:
+        field, cv, bv, _v, cit = c
+        if field.startswith("year"):
+            verdict, w, _out = adjudicate(
+                d["id"], (d.get("catalog_says", {}).get("csv") or {}).get("year"),
+                (d.get("catalog_says", {}).get("ia") or {}).get("date"), bv)
+        else:
+            verdict, w = "publisher (no year witness)", {}
+        buckets.setdefault(verdict, []).append((d, c, w))
+
+    print(f"CONFLICTS ({len(conflicts)}) -- catalog vs the printed page, with the leaf that says "
+          f"so.\nYear conflicts are adjudicated by four independent witnesses: the CSV, IA's "
+          f"metadata,\na year embedded in the IA identifier, and the page itself.\n")
+    for verdict in sorted(buckets, key=lambda k: -len(buckets[k])):
+        print(f"\n{'=' * 78}\n{verdict.upper()}  ({len(buckets[verdict])})\n{'=' * 78}")
+        for d, (field, cv, bv, _v, cit), w in sorted(buckets[verdict], key=lambda r: r[0]["id"]):
+            print(f"\n  {d['id']}  [{field}]"
+                  + (f"   witnesses: {', '.join(f'{k}={v}' for k, v in sorted(w.items()))}"
+                     if w else ""))
+            print(f"    catalog : {cv!r}")
+            print(f"    book    : {bv!r}   (leaf {cit['leaf']}, {cit['evidence_type']}, "
+                  f"{cit.get('attestation', cit.get('evidence_detail', cit['method']))})")
+            print(f"    quote   : {cit['quote'][:100]!r}")
+            print(f"    settle  : {cit['image']}")
     return 0
 
 

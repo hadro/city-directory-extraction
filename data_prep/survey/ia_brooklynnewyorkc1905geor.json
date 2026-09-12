@@ -1,0 +1,274 @@
+{
+ "source": "ia",
+ "id": "brooklynnewyorkc1905geor",
+ "book_says": {
+  "year": {
+   "value": 1905,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1905geor/page/n7_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "IN THE YEAR NINETEEN HUNDRED AND FIVE,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words"
+  },
+  "year_attestations": [
+   {
+    "year": 1905,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "EW YORK CITY\nVOLUME LXXXII\nFOR THE YEAR\n1905\nGEORGE UPINGTON; Publisher\nOFFICE\n317 W"
+   },
+   {
+    "year": 1905,
+    "how": "words",
+    "leaf": 7,
+    "quote": "IN THE YEAR NINETEEN HUNDRED AND FIVE,"
+   }
+  ],
+  "year_published": {
+   "value": 1905,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1905geor/page/n7_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "EW YORK CITY\nVOLUME LXXXII\nFOR THE YEAR\n1905\nGEORGE UPINGTON; Publisher\nOFFICE\n317 W",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "volume_number": {
+   "value": 82,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1905geor/page/n7_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "VOLUME LXXXII",
+   "method": "hocr-text",
+   "confidence": "high"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 138137906,
+  "hocr_sha1": "5c32e716b5e8607dd8021b5a0e92d982fc07a015",
+  "hocr_mtime": "1632666344",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 17,
+  "leaves": 1238,
+  "filled": 166,
+  "high_confidence": 1,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1905",
+   "title": "Brooklyn, New York, city directory",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "Upington Gen.Dir. of Brooklyn; col=2 verified 1906 title page (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn, New York, city directory",
+   "date": "1905",
+   "year": null,
+   "publisher": "George Upington",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1240",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130503193057",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 6,
+    "chars": 60
+   },
+   "3": {
+    "class": "other",
+    "lines": 1,
+    "chars": 17
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 93
+   },
+   "7": {
+    "class": "copyright_page",
+    "lines": 18,
+    "chars": 391
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 296,
+    "chars": 6454
+   },
+   "10": {
+    "class": "other",
+    "lines": 1,
+    "chars": 9
+   },
+   "11": {
+    "class": "other",
+    "lines": 384,
+    "chars": 6510
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 271,
+    "chars": 6006
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 269,
+    "chars": 6009
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "other",
+    "lines": 247,
+    "chars": 5875
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 244,
+    "chars": 6274
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 296,
+    "chars": 6385
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 292,
+    "chars": 6109
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 300,
+    "chars": 6465
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 260,
+    "chars": 5754
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "other",
+    "lines": 238,
+    "chars": 6141
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": 7,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   7
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/brooklynnewyorkc1905geor/page/n7_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

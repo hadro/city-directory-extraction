@@ -1,0 +1,244 @@
+{
+ "source": "ia",
+ "id": "longworthsameric1813newy",
+ "book_says": {
+  "publisher": {
+   "value": "D. LONGWORTH",
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1813newy$9/canvas",
+   "image": "https://archive.org/download/longworthsameric1813newy/page/n9_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY D. LONGWORTH",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "i LONGWORTH'S NEW-YORK ALMANAC,",
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1813newy$9/canvas",
+   "image": "https://archive.org/download/longworthsameric1813newy/page/n9_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "i / LONGWORTH'S NEW-YORK / ALMANAC,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 22309474,
+  "hocr_sha1": "2658327c998f1c722983324bcdfaebe879891588",
+  "hocr_mtime": "1637798562",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 848,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Longworth",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1813",
+   "title": "Longworth's American almanac, New-York register and city directory",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": null
+  },
+  "ia": {
+   "title": "Longworth's American almanac, New-York register and city directory",
+   "date": "1813",
+   "year": null,
+   "publisher": "New York : T. Longworth",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "850",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130508172516",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 6,
+    "chars": 33
+   },
+   "2": {
+    "class": "other",
+    "lines": 6,
+    "chars": 44
+   },
+   "3": {
+    "class": "collection-stamp",
+    "lines": 2,
+    "chars": 45
+   },
+   "4": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 93
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 20,
+    "chars": 372
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 1159
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "title_page",
+    "lines": 23,
+    "chars": 692
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 73,
+    "chars": 1060
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 37,
+    "chars": 1573
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 304,
+    "chars": 1392
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "other",
+    "lines": 191,
+    "chars": 1178
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 177,
+    "chars": 2277
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 280,
+    "chars": 2557
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 368,
+    "chars": 2442
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 267,
+    "chars": 2488
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 254,
+    "chars": 2788
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "other",
+    "lines": 292,
+    "chars": 2995
+   }
+  },
+  "title_page_leaf": 9,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

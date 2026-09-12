@@ -1,0 +1,263 @@
+{
+ "source": "ia",
+ "id": "newyorkdirectory00dunc",
+ "book_says": {
+  "year": {
+   "value": 1794,
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$13/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00dunc/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "W-YORK DIRECTORY\nREGISTER,\nFOR THE YEAR\n1794.\nIllufirated with a new and accurate Pl",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1794,
+    "how": "digits",
+    "leaf": 13,
+    "quote": "W-YORK DIRECTORY\nREGISTER,\nFOR THE YEAR\n1794.\nIllufirated with a new and accurate Pl"
+   }
+  ],
+  "year_covered": {
+   "value": 1794,
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$13/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00dunc/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "W-YORK DIRECTORY\nREGISTER,\nFOR THE YEAR\n1794.\nIllufirated with a new and accurate Pl",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "THE NEW-YORK DIRECTORY REGISTER,",
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$13/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00dunc/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE / NEW-YORK DIRECTORY / REGISTER,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 10212756,
+  "hocr_sha1": "68c2009fc5e5e5d5e90dda51bc745031bbd09edf",
+  "hocr_mtime": "1702051067",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 86,
+  "leaves": 314,
+  "filled": 289,
+  "high_confidence": 60,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Duncan",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1794",
+   "title": "New-York directory, and register, for the year 1794. Illustrated with a new and accurate plan of the city and part of Long-Island, exactly laid down,",
+   "column_count": "1",
+   "start_page": "1",
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "21",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "col=1 (pre-transition single-col era; title-triage s4) | FM 2026-06-29 (agent): IA copy of Duncan 1794 (same edition as nypl/dc1b4800). title c12; listing A-start printed p1 = canvas c22 'THE NEW-YORK DIRECTORY. A - AARON, John, ship-carpenter, 41 Rose-street' (c23=printed p2 -> offset +21); NO key page (register era); comma-after-surname, full-word occ/addr; col1"
+  },
+  "ia": {
+   "title": "New-York directory, and register, for the year 1794. Illustrated with a new and accurate plan of the city and part of Long-Island, exactly laid down,",
+   "date": "1794",
+   "year": null,
+   "publisher": "New-York : Printed for the editor, by T. and J. Swords, no. 167, William-Street",
+   "creator": "Duncan, William.",
+   "contributor": "Columbia University Libraries",
+   "imagecount": "316",
+   "ocr": null,
+   "scandate": "20140806181910",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 4,
+    "chars": 63
+   },
+   "2": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "other",
+    "lines": 1,
+    "chars": 5
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 1,
+    "chars": 2
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 8,
+    "chars": 84
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "title_page",
+    "lines": 33,
+    "chars": 1174
+   },
+   "14": {
+    "class": "other",
+    "lines": 3,
+    "chars": 14
+   },
+   "15": {
+    "class": "contents",
+    "lines": 30,
+    "chars": 1004
+   },
+   "16": {
+    "class": "other",
+    "lines": 40,
+    "chars": 1340
+   },
+   "17": {
+    "class": "contents",
+    "lines": 39,
+    "chars": 1361
+   },
+   "18": {
+    "class": "other",
+    "lines": 14,
+    "chars": 477
+   },
+   "19": {
+    "class": "other",
+    "lines": 24,
+    "chars": 780
+   },
+   "20": {
+    "class": "other",
+    "lines": 42,
+    "chars": 1659
+   },
+   "21": {
+    "class": "other",
+    "lines": 37,
+    "chars": 1615
+   },
+   "22": {
+    "class": "title_page",
+    "lines": 27,
+    "chars": 1228
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 989
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1658
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1617
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1650
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1696
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1650
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1652
+   }
+  },
+  "title_page_leaf": 13,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 15,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

@@ -1,0 +1,234 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0032",
+ "book_says": {},
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 15138602,
+  "hocr_sha1": "3c6c39573b92c72ea2791767d4fb8e114548a193",
+  "hocr_mtime": "1708633612",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 87,
+  "leaves": 646,
+  "filled": 633,
+  "high_confidence": 172,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Hearnes",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1854/55",
+   "title": "Hearnes' Brooklyn City Directory for 1854-1855",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "6",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "offset +6 (leaf196=p.190); 1 col; microfilm single-page (not spread); visually sampled 2026-06-19"
+  },
+  "ia": {
+   "title": "Hearnes' Brooklyn City Directory for 1854-1855",
+   "date": "1854-1855",
+   "year": null,
+   "publisher": "Henry R. & William J. Hearnes",
+   "creator": "Hearnes, Henry R. & William J.",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "646",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126203544",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 6,
+    "chars": 169
+   },
+   "2": {
+    "class": "other",
+    "lines": 4,
+    "chars": 85
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 7,
+    "chars": 65
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "other",
+    "lines": 29,
+    "chars": 284
+   },
+   "6": {
+    "class": "other",
+    "lines": 39,
+    "chars": 137
+   },
+   "7": {
+    "class": "other",
+    "lines": 19,
+    "chars": 455
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 876
+   },
+   "9": {
+    "class": "other",
+    "lines": 16,
+    "chars": 655
+   },
+   "10": {
+    "class": "other",
+    "lines": 17,
+    "chars": 330
+   },
+   "11": {
+    "class": "other",
+    "lines": 9,
+    "chars": 197
+   },
+   "12": {
+    "class": "other",
+    "lines": 15,
+    "chars": 348
+   },
+   "13": {
+    "class": "other",
+    "lines": 14,
+    "chars": 407
+   },
+   "14": {
+    "class": "other",
+    "lines": 15,
+    "chars": 311
+   },
+   "15": {
+    "class": "other",
+    "lines": 11,
+    "chars": 277
+   },
+   "16": {
+    "class": "other",
+    "lines": 16,
+    "chars": 51
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 10,
+    "chars": 67
+   },
+   "18": {
+    "class": "other",
+    "lines": 22,
+    "chars": 303
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 420
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 290
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 23,
+    "chars": 654
+   },
+   "22": {
+    "class": "other",
+    "lines": 19,
+    "chars": 686
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1479
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1598
+   },
+   "25": {
+    "class": "other",
+    "lines": 14,
+    "chars": 343
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 40,
+    "chars": 1508
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 48,
+    "chars": 1631
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1461
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 1032
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   1,
+   2,
+   5
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0032/page/n1_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0032/page/n2_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0032/page/n5_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

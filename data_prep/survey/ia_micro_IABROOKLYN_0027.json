@@ -1,0 +1,277 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0027",
+ "book_says": {
+  "year": {
+   "value": 1849,
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$6/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0027/page/n6_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ROOKLYN\nDIRECTORY\nYEARLY ADVERTISER\nFOR 1849 & 50,\nCONTAINING THE USUAL ARRANGEMENT",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1849,
+    "how": "digits",
+    "leaf": 6,
+    "quote": "ROOKLYN\nDIRECTORY\nYEARLY ADVERTISER\nFOR 1849 & 50,\nCONTAINING THE USUAL ARRANGEMENT"
+   },
+   {
+    "year": 1849,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "Se Pa ee\n2\nBROOKLYN, U ron\n1849-50 |\nBrooklyn Directory and Yearly Regi"
+   },
+   {
+    "year": 1849,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "oklyn Directory and Yearly Register for 1849 &\n30. Compiled and Published by Henry R"
+   }
+  ],
+  "title": {
+   "value": "ie ee ee BROOKLYN DIRECTORY YEARLY ADVERTISER",
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$6/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0027/page/n6_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ie ee ee / BROOKLYN / DIRECTORY / YEARLY ADVERTISER",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "publisher": {
+   "value": "Ballard Rev J",
+   "leaf": 29,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$29/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0027/page/n29_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "Ballard Rev J, publisher",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "evidence_detail": "imprint"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 14912716,
+  "hocr_sha1": "307828531a3069ebfec84719d90c37da221cc704",
+  "hocr_mtime": "1708626901",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 72,
+  "leaves": 400,
+  "filled": 375,
+  "high_confidence": 32,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1849",
+   "title": "Brooklyn Directory and Yearly Register for 1849 & 1850",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Spooner-era Brooklyn; col=1 verified 1848/49 sample (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn Directory and Yearly Register for 1849 & 1850",
+   "date": "1849-1850",
+   "year": null,
+   "publisher": "Lees & Foulkes",
+   "creator": "Hearnes, Henry R. & William J.",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "400",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126041627",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "target_card",
+    "lines": 8,
+    "chars": 207
+   },
+   "2": {
+    "class": "other",
+    "lines": 40,
+    "chars": 904
+   },
+   "3": {
+    "class": "other",
+    "lines": 44,
+    "chars": 2481
+   },
+   "4": {
+    "class": "other",
+    "lines": 51,
+    "chars": 1830
+   },
+   "5": {
+    "class": "other",
+    "lines": 28,
+    "chars": 830
+   },
+   "6": {
+    "class": "title_page",
+    "lines": 10,
+    "chars": 195
+   },
+   "7": {
+    "class": "other",
+    "lines": 37,
+    "chars": 509
+   },
+   "8": {
+    "class": "other",
+    "lines": 14,
+    "chars": 309
+   },
+   "9": {
+    "class": "other",
+    "lines": 19,
+    "chars": 446
+   },
+   "10": {
+    "class": "other",
+    "lines": 16,
+    "chars": 365
+   },
+   "11": {
+    "class": "other",
+    "lines": 29,
+    "chars": 831
+   },
+   "12": {
+    "class": "other",
+    "lines": 14,
+    "chars": 356
+   },
+   "13": {
+    "class": "other",
+    "lines": 17,
+    "chars": 565
+   },
+   "14": {
+    "class": "other",
+    "lines": 14,
+    "chars": 375
+   },
+   "15": {
+    "class": "other",
+    "lines": 24,
+    "chars": 617
+   },
+   "16": {
+    "class": "other",
+    "lines": 21,
+    "chars": 540
+   },
+   "17": {
+    "class": "other",
+    "lines": 12,
+    "chars": 160
+   },
+   "18": {
+    "class": "other",
+    "lines": 17,
+    "chars": 160
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 447
+   },
+   "20": {
+    "class": "other",
+    "lines": 4,
+    "chars": 112
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 777
+   },
+   "22": {
+    "class": "other",
+    "lines": 9,
+    "chars": 335
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 1395
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 930
+   },
+   "25": {
+    "class": "other",
+    "lines": 40,
+    "chars": 1408
+   },
+   "26": {
+    "class": "other",
+    "lines": 33,
+    "chars": 972
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 1436
+   },
+   "28": {
+    "class": "other",
+    "lines": 26,
+    "chars": 645
+   },
+   "29": {
+    "class": "target_card",
+    "lines": 11,
+    "chars": 356
+   }
+  },
+  "title_page_leaf": 6,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 29,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

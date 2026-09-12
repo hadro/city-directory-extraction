@@ -1,0 +1,234 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0017",
+ "book_says": {},
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 7278923,
+  "hocr_sha1": "3cea7248e254945433544084c40d4d8c06bde484",
+  "hocr_mtime": "1708576050",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 47,
+  "leaves": 314,
+  "filled": 267,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1840/41",
+   "title": "Brooklyn Directory and Yearly Advertiser for 1840-1841",
+   "column_count": "1",
+   "start_page": "5",
+   "end_page": null,
+   "key_page": "5",
+   "page_offset": "2",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Spooner-era Brooklyn; col=1 verified 1848/49 sample (s4) | FM 2026-06-29: title c4, Additions&Corrections c7; KEY+listing-start printed p5 = canvas c7 (c8=printed p6 -> offset +2), 'For 1840-1': 'Names having an * = colored people; h.=house n.=near c.=corner op.=opposite b.=between'; A-start 'Abbot Daniel'; col1"
+  },
+  "ia": {
+   "title": "Brooklyn Directory and Yearly Advertiser for 1840-1841",
+   "date": "1840-1841",
+   "year": null,
+   "publisher": "Stationers' Hall Works",
+   "creator": "Leslie, Thomas and Henry R. & William J. Hearnes",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "314",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126025132",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 7,
+    "chars": 187
+   },
+   "2": {
+    "class": "other",
+    "lines": 8,
+    "chars": 39
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "other",
+    "lines": 6,
+    "chars": 86
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "other",
+    "lines": 14,
+    "chars": 125
+   },
+   "7": {
+    "class": "other",
+    "lines": 9,
+    "chars": 91
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 24,
+    "chars": 567
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 6,
+    "chars": 101
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 723
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 23,
+    "chars": 290
+   },
+   "12": {
+    "class": "other",
+    "lines": 17,
+    "chars": 291
+   },
+   "13": {
+    "class": "other",
+    "lines": 4,
+    "chars": 137
+   },
+   "14": {
+    "class": "other",
+    "lines": 12,
+    "chars": 373
+   },
+   "15": {
+    "class": "other",
+    "lines": 5,
+    "chars": 75
+   },
+   "16": {
+    "class": "other",
+    "lines": 25,
+    "chars": 418
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 19,
+    "chars": 314
+   },
+   "18": {
+    "class": "other",
+    "lines": 8,
+    "chars": 36
+   },
+   "19": {
+    "class": "other",
+    "lines": 3,
+    "chars": 8
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 48,
+    "chars": 1393
+   },
+   "21": {
+    "class": "other",
+    "lines": 22,
+    "chars": 300
+   },
+   "22": {
+    "class": "other",
+    "lines": 55,
+    "chars": 1107
+   },
+   "23": {
+    "class": "other",
+    "lines": 36,
+    "chars": 955
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 761
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1080
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1000
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 489
+   },
+   "28": {
+    "class": "other",
+    "lines": 33,
+    "chars": 701
+   },
+   "29": {
+    "class": "other",
+    "lines": 2,
+    "chars": 23
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   1,
+   4,
+   6
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0017/page/n1_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0017/page/n4_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0017/page/n6_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

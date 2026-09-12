@@ -1,0 +1,273 @@
+{
+ "source": "ia",
+ "id": "brooklynnewyorkc1907geor",
+ "book_says": {
+  "year": {
+   "value": 1907,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1907geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1907geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "IN THE YEAR NINETEEN HUNDRED AND SEVEN,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words"
+  },
+  "year_attestations": [
+   {
+    "year": 1907,
+    "how": "words",
+    "leaf": 7,
+    "quote": "IN THE YEAR NINETEEN HUNDRED AND SEVEN,"
+   }
+  ],
+  "publisher": {
+   "value": "GEORGE ' UPINGTON",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1907geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1907geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ACT OF CONGRESS IN THE YEAR NINETEEN HUNDRED AND SEVEN, BY GEORGE ' UPINGTON",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "volume_number": {
+   "value": 84,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1907geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1907geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXXIV",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "v1^?* UPINGTON'S GENERAL DIRECTORY OF THE BOROUGH OF BROOKLYN CITY OF NEW YORK",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1907geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1907geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "v1^?* / UPINGTON'S / GENERAL DIRECTORY / OF THE BOROUGH OF / BROOKLYN / CITY OF NEW YORK",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 134307250,
+  "hocr_sha1": "b47cbe773453210bdb080f216e9215739d54eeac",
+  "hocr_mtime": "1632665419",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 13,
+  "leaves": 1196,
+  "filled": 34,
+  "high_confidence": 3,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1907",
+   "title": "Brooklyn, New York, city directory",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "Upington Gen.Dir. of Brooklyn; col=2 verified 1906 title page (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn, New York, city directory",
+   "date": "1907",
+   "year": null,
+   "publisher": "George Upington",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1198",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130503172922",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 7,
+    "chars": 71
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 44
+   },
+   "4": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 93
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 17,
+    "chars": 438
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 282,
+    "chars": 6329
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 221,
+    "chars": 6137
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 269,
+    "chars": 5932
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 286,
+    "chars": 6385
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 250,
+    "chars": 6333
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 268,
+    "chars": 6532
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 290,
+    "chars": 6353
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 328,
+    "chars": 6065
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 269,
+    "chars": 5849
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 241,
+    "chars": 5993
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 224,
+    "chars": 6163
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

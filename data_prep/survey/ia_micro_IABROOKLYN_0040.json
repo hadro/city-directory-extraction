@@ -1,0 +1,290 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0040",
+ "book_says": {
+  "year": {
+   "value": 1860,
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0040/page/n6_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "DIRECTORY,\nFOR\nTHE YEAR ENDING MAY Ist,\n1860.\nCOMPILED BY F. LAIN.\nPUBLISHED BY J. L",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1860,
+    "how": "digits",
+    "leaf": 6,
+    "quote": "DIRECTORY,\nFOR\nTHE YEAR ENDING MAY Ist,\n1860.\nCOMPILED BY F. LAIN.\nPUBLISHED BY J. L"
+   }
+  ],
+  "publisher": {
+   "value": "J. LAIN AND COMPANY",
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0040/page/n6_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY J. LAIN AND COMPANY",
+   "method": "hocr-text",
+   "confidence": "low",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "y THE * BROOKLYVN CITY DIRECTORY, FOR THE YEAR ENDING MAY Ist,",
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0040/page/n6_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "y THE / * / BROOKLYVN CITY / DIRECTORY, / FOR / THE YEAR ENDING MAY Ist,",
+   "method": "hocr-text",
+   "confidence": "low"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 10,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$10/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0040/page/n10_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "n their vocations in the cities ef Brooklyn and New York. e\nABBREVIATIONS, ETC,\nmarket; n. near; N. north; off. office; Op. opposite ; pl. place; # rear (Rev.) clergyman\nroad; S. south; sq. square; wi",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 2,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 19943763,
+  "hocr_sha1": "0d498651f5ace72e5673070981fa26a39c8cf3d4",
+  "hocr_mtime": "1709585450",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 473,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": null,
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1859",
+   "title": "The Brooklyn Directory for the year ending May 1st, 1860",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain-era Consolidated; col=2 (bracketed 1858/1862); publisher unverified (s4)"
+  },
+  "ia": {
+   "title": "The Brooklyn Directory for the year ending May 1st, 1860",
+   "date": "1859-1860",
+   "year": null,
+   "publisher": "J. Lain and Company",
+   "creator": "Lain, Jonathan",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "482",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126232534",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 2,
+    "chars": 26
+   },
+   "2": {
+    "class": "other",
+    "lines": 26,
+    "chars": 462
+   },
+   "3": {
+    "class": "title_page",
+    "lines": 30,
+    "chars": 1229
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 1568
+   },
+   "5": {
+    "class": "other",
+    "lines": 29,
+    "chars": 1380
+   },
+   "6": {
+    "class": "title_page",
+    "lines": 14,
+    "chars": 269
+   },
+   "7": {
+    "class": "other",
+    "lines": 11,
+    "chars": 125
+   },
+   "8": {
+    "class": "title_page",
+    "lines": 30,
+    "chars": 1049
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 23,
+    "chars": 961
+   },
+   "10": {
+    "class": "legend",
+    "lines": 32,
+    "chars": 1084
+   },
+   "11": {
+    "class": "other",
+    "lines": 64,
+    "chars": 2587
+   },
+   "12": {
+    "class": "other",
+    "lines": 53,
+    "chars": 1102
+   },
+   "13": {
+    "class": "other",
+    "lines": 65,
+    "chars": 3285
+   },
+   "14": {
+    "class": "other",
+    "lines": 56,
+    "chars": 2088
+   },
+   "15": {
+    "class": "other",
+    "lines": 34,
+    "chars": 719
+   },
+   "16": {
+    "class": "other",
+    "lines": 51,
+    "chars": 1339
+   },
+   "17": {
+    "class": "other",
+    "lines": 67,
+    "chars": 812
+   },
+   "18": {
+    "class": "other",
+    "lines": 48,
+    "chars": 991
+   },
+   "19": {
+    "class": "other",
+    "lines": 82,
+    "chars": 2120
+   },
+   "20": {
+    "class": "other",
+    "lines": 51,
+    "chars": 1376
+   },
+   "21": {
+    "class": "other",
+    "lines": 40,
+    "chars": 616
+   },
+   "22": {
+    "class": "other",
+    "lines": 13,
+    "chars": 85
+   },
+   "23": {
+    "class": "other",
+    "lines": 68,
+    "chars": 3744
+   },
+   "24": {
+    "class": "other",
+    "lines": 62,
+    "chars": 2707
+   },
+   "25": {
+    "class": "other",
+    "lines": 67,
+    "chars": 1766
+   },
+   "26": {
+    "class": "other",
+    "lines": 13,
+    "chars": 97
+   },
+   "27": {
+    "class": "other",
+    "lines": 69,
+    "chars": 3483
+   },
+   "28": {
+    "class": "other",
+    "lines": 43,
+    "chars": 708
+   },
+   "29": {
+    "class": "other",
+    "lines": 28,
+    "chars": 653
+   }
+  },
+  "title_page_leaf": 6,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   10
+  ],
+  "weak_title_page": 3,
+  "image_read_candidates": [
+   6,
+   8,
+   3
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0040/page/n6_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0040/page/n8_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0040/page/n3_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

@@ -1,0 +1,260 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0030",
+ "book_says": {
+  "year": {
+   "value": 1852,
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$6/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0030/page/n6_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "cording to Act of Congress, in the year 1852, by 1\nHENRY R. & WILLIAM J, HEARNE, ?\nI",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1852,
+    "how": "digits",
+    "leaf": 6,
+    "quote": "cording to Act of Congress, in the year 1852, by 1\nHENRY R. & WILLIAM J, HEARNE, ?\nI"
+   }
+  ],
+  "year_published": {
+   "value": 1852,
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$6/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0030/page/n6_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "cording to Act of Congress, in the year 1852, by 1\nHENRY R. & WILLIAM J, HEARNE, ?\nI",
+   "method": "hocr-text",
+   "confidence": "high"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 21065097,
+  "hocr_sha1": "c56659ca3042b1e5fb59633cd4b0032ad5481a1d",
+  "hocr_mtime": "1709581465",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 91,
+  "leaves": 571,
+  "filled": 562,
+  "high_confidence": 198,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Hearnes",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1852/53",
+   "title": "Hearnes' Brooklyn City Directory for 1852-1853",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": null
+  },
+  "ia": {
+   "title": "Hearnes' Brooklyn City Directory for 1852-1853",
+   "date": "1852-1853",
+   "year": null,
+   "publisher": "Henry R. & William J. Hearnes",
+   "creator": "Hearnes, Henry R. & William J.",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "571",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126044119",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 13,
+    "chars": 114
+   },
+   "2": {
+    "class": "other",
+    "lines": 1,
+    "chars": 5
+   },
+   "3": {
+    "class": "other",
+    "lines": 17,
+    "chars": 373
+   },
+   "4": {
+    "class": "other",
+    "lines": 2,
+    "chars": 5
+   },
+   "5": {
+    "class": "other",
+    "lines": 4,
+    "chars": 27
+   },
+   "6": {
+    "class": "copyright_page",
+    "lines": 13,
+    "chars": 284
+   },
+   "7": {
+    "class": "other",
+    "lines": 27,
+    "chars": 626
+   },
+   "8": {
+    "class": "other",
+    "lines": 12,
+    "chars": 98
+   },
+   "9": {
+    "class": "other",
+    "lines": 11,
+    "chars": 327
+   },
+   "10": {
+    "class": "other",
+    "lines": 11,
+    "chars": 614
+   },
+   "11": {
+    "class": "other",
+    "lines": 18,
+    "chars": 399
+   },
+   "12": {
+    "class": "other",
+    "lines": 14,
+    "chars": 376
+   },
+   "13": {
+    "class": "other",
+    "lines": 21,
+    "chars": 714
+   },
+   "14": {
+    "class": "other",
+    "lines": 29,
+    "chars": 1035
+   },
+   "15": {
+    "class": "other",
+    "lines": 24,
+    "chars": 532
+   },
+   "16": {
+    "class": "other",
+    "lines": 14,
+    "chars": 420
+   },
+   "17": {
+    "class": "other",
+    "lines": 14,
+    "chars": 366
+   },
+   "18": {
+    "class": "other",
+    "lines": 26,
+    "chars": 770
+   },
+   "19": {
+    "class": "other",
+    "lines": 19,
+    "chars": 444
+   },
+   "20": {
+    "class": "other",
+    "lines": 9,
+    "chars": 182
+   },
+   "21": {
+    "class": "other",
+    "lines": 22,
+    "chars": 297
+   },
+   "22": {
+    "class": "other",
+    "lines": 37,
+    "chars": 680
+   },
+   "23": {
+    "class": "other",
+    "lines": 25,
+    "chars": 480
+   },
+   "24": {
+    "class": "other",
+    "lines": 32,
+    "chars": 682
+   },
+   "25": {
+    "class": "other",
+    "lines": 45,
+    "chars": 873
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 32,
+    "chars": 1024
+   },
+   "27": {
+    "class": "other",
+    "lines": 35,
+    "chars": 1105
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 775
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1301
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": 6,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   6
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0030/page/n6_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

@@ -1,0 +1,275 @@
+{
+ "source": "ia",
+ "id": "longworthsameric1839newy",
+ "book_says": {
+  "year": {
+   "value": 1839,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1839newy$17/canvas",
+   "image": "https://archive.org/download/longworthsameric1839newy/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "SIXTY-FOURTH YEAR\nOF\nAMERICAN INDEPENDENCE",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "independence-formula"
+  },
+  "year_attestations": [
+   {
+    "year": 1839,
+    "how": "digits",
+    "leaf": 17,
+    "quote": "BY THOMAS LONGWORTH,\nUS NASSAU STREET,\n1839,"
+   },
+   {
+    "year": 1839,
+    "how": "independence-formula",
+    "leaf": 17,
+    "quote": "SIXTY-FOURTH YEAR\nOF\nAMERICAN INDEPENDENCE"
+   },
+   {
+    "year": 1839,
+    "how": "independence-formula",
+    "leaf": 17,
+    "quote": "sixty-fourth year of American Independence"
+   }
+  ],
+  "publisher": {
+   "value": "THOMAS LONGWORTH",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1839newy$17/canvas",
+   "image": "https://archive.org/download/longworthsameric1839newy/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY THOMAS LONGWORTH",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "LONGWORTH'S AMERICAN ALMANAC, NEW-YORK REGISTER, AND CITY DIRECTORY, FOR THE SIXTY-FOURTH YEAR OF AMERICAN INDEPENDENCE CONTAINING",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1839newy$17/canvas",
+   "image": "https://archive.org/download/longworthsameric1839newy/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "LONGWORTH'S / AMERICAN ALMANAC, / NEW-YORK REGISTER, / AND / CITY DIRECTORY, / FOR / THE SIXTY-FOURTH YEAR / OF / AMERICAN INDEPENDENCE / CONTAINING",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 45920373,
+  "hocr_sha1": "f2ae88526d70fe25498f0828aaa2c6446d433869",
+  "hocr_mtime": "1637798018",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 100,
+  "leaves": 800,
+  "filled": 761,
+  "high_confidence": 273,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Longworth",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1839",
+   "title": "Longworth's American almanac, New-York register and city directory",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "6",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": null
+  },
+  "ia": {
+   "title": "Longworth's American almanac, New-York register and city directory",
+   "date": "1816",
+   "year": null,
+   "publisher": "New York : T. Longworth",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "804",
+   "ocr": null,
+   "scandate": "20081002134508",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": "NOT_IN_COPYRIGHT",
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 5,
+    "chars": 48
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 45
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 13,
+    "chars": 420
+   },
+   "12": {
+    "class": "other",
+    "lines": 3,
+    "chars": 63
+   },
+   "13": {
+    "class": "other",
+    "lines": 45,
+    "chars": 2659
+   },
+   "14": {
+    "class": "other",
+    "lines": 44,
+    "chars": 1378
+   },
+   "15": {
+    "class": "other",
+    "lines": 60,
+    "chars": 2698
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "title_page",
+    "lines": 27,
+    "chars": 1065
+   },
+   "18": {
+    "class": "contents",
+    "lines": 35,
+    "chars": 980
+   },
+   "19": {
+    "class": "other",
+    "lines": 217,
+    "chars": 1861
+   },
+   "20": {
+    "class": "other",
+    "lines": 233,
+    "chars": 1939
+   },
+   "21": {
+    "class": "other",
+    "lines": 283,
+    "chars": 1877
+   },
+   "22": {
+    "class": "other",
+    "lines": 205,
+    "chars": 1642
+   },
+   "23": {
+    "class": "other",
+    "lines": 176,
+    "chars": 1797
+   },
+   "24": {
+    "class": "other",
+    "lines": 196,
+    "chars": 2028
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 196,
+    "chars": 1888
+   },
+   "26": {
+    "class": "other",
+    "lines": 182,
+    "chars": 1853
+   },
+   "27": {
+    "class": "other",
+    "lines": 264,
+    "chars": 1831
+   },
+   "28": {
+    "class": "other",
+    "lines": 257,
+    "chars": 1954
+   },
+   "29": {
+    "class": "other",
+    "lines": 169,
+    "chars": 1921
+   }
+  },
+  "title_page_leaf": 17,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 18,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

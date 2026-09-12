@@ -1,0 +1,264 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldir1913p1trow",
+ "book_says": {
+  "year": {
+   "value": 1909,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$9/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1913p1trow/page/n9_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "N 28, COPYEIGHT LAW,\n. IN FORCE JULY 1, 1909.\nThat any person who willfully and for",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits",
+   "conflicts_with_catalog": [
+    "1913",
+    "1913"
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1909,
+    "how": "digits",
+    "leaf": 9,
+    "quote": "N 28, COPYEIGHT LAW,\n. IN FORCE JULY 1, 1909.\nThat any person who willfully and for"
+   }
+  ],
+  "year_published": {
+   "value": 1909,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$9/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1913p1trow/page/n9_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "N 28, COPYEIGHT LAW,\n. IN FORCE JULY 1, 1909.\nThat any person who willfully and for",
+   "method": "hocr-text",
+   "confidence": "high"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 76157656,
+  "hocr_sha1": "299e4d18061a361bb6d20a4bed5328f30fc011c8",
+  "hocr_mtime": "1638698537",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 828,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1913",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan | part 1; Trow; col=3 (s4: bracketed 1859-1915 all 3-col + 1890s card)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1913",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "830",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130425135013",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 7,
+    "chars": 53
+   },
+   "3": {
+    "class": "other",
+    "lines": 1,
+    "chars": 17
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "other",
+    "lines": 2,
+    "chars": 4
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 9,
+    "chars": 255
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "copyright_page",
+    "lines": 12,
+    "chars": 528
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 15,
+    "chars": 275
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 255,
+    "chars": 5934
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 345,
+    "chars": 6684
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 328,
+    "chars": 6394
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 334,
+    "chars": 6627
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "title_page",
+    "lines": 332,
+    "chars": 7565
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 240,
+    "chars": 3495
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 330,
+    "chars": 6720
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 333,
+    "chars": 6468
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   }
+  },
+  "title_page_leaf": 21,
+  "copyright_page_leaf": 9,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   9,
+   21
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/trowsgeneraldir1913p1trow/page/n9_w1400.jpg",
+   "https://archive.org/download/trowsgeneraldir1913p1trow/page/n21_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

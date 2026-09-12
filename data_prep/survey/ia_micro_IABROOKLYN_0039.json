@@ -1,0 +1,246 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0039",
+ "book_says": {
+  "legend": {
+   "value": "present",
+   "leaf": 11,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$11/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0039/page/n11_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "t in ht\nvocations in the Cities of Brooklyn and New York.\n| ABBREVIATIONS, ETO.\nal. alley ; av. avenue ; bldg. bi bel Semmens ds Bi\nh. house; la. lane; manf. manufacturer; mer. merchant ; mkr. maker; ",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 2,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 19954659,
+  "hocr_sha1": "a6a2caefd129d52d7adb48175a2c69a42a25596b",
+  "hocr_mtime": "1709588921",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 30,
+  "leaves": 568,
+  "filled": 219,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": null,
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1858",
+   "title": "The Brooklyn City Directory for the year ending May 1st, 1859",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain-era Consolidated; col=2 (bracketed 1858/1862); publisher unverified (s4)"
+  },
+  "ia": {
+   "title": "The Brooklyn City Directory for the year ending May 1st, 1859",
+   "date": "1858-1859",
+   "year": null,
+   "publisher": "J. Lain and Company",
+   "creator": "Lain, Jonathan",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "568",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126231614",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 2,
+    "chars": 25
+   },
+   "2": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 1757
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1327
+   },
+   "5": {
+    "class": "other",
+    "lines": 29,
+    "chars": 973
+   },
+   "6": {
+    "class": "other",
+    "lines": 70,
+    "chars": 424
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 15,
+    "chars": 293
+   },
+   "8": {
+    "class": "other",
+    "lines": 6,
+    "chars": 97
+   },
+   "9": {
+    "class": "other",
+    "lines": 25,
+    "chars": 384
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 1283
+   },
+   "11": {
+    "class": "legend",
+    "lines": 29,
+    "chars": 1067
+   },
+   "12": {
+    "class": "other",
+    "lines": 59,
+    "chars": 2013
+   },
+   "13": {
+    "class": "other",
+    "lines": 49,
+    "chars": 1370
+   },
+   "14": {
+    "class": "other",
+    "lines": 81,
+    "chars": 2402
+   },
+   "15": {
+    "class": "other",
+    "lines": 34,
+    "chars": 974
+   },
+   "16": {
+    "class": "other",
+    "lines": 33,
+    "chars": 2021
+   },
+   "17": {
+    "class": "other",
+    "lines": 53,
+    "chars": 558
+   },
+   "18": {
+    "class": "other",
+    "lines": 34,
+    "chars": 853
+   },
+   "19": {
+    "class": "other",
+    "lines": 51,
+    "chars": 1288
+   },
+   "20": {
+    "class": "other",
+    "lines": 84,
+    "chars": 2410
+   },
+   "21": {
+    "class": "other",
+    "lines": 50,
+    "chars": 1550
+   },
+   "22": {
+    "class": "other",
+    "lines": 80,
+    "chars": 2832
+   },
+   "23": {
+    "class": "other",
+    "lines": 49,
+    "chars": 1027
+   },
+   "24": {
+    "class": "other",
+    "lines": 70,
+    "chars": 1921
+   },
+   "25": {
+    "class": "other",
+    "lines": 39,
+    "chars": 1637
+   },
+   "26": {
+    "class": "title_page",
+    "lines": 84,
+    "chars": 2086
+   },
+   "27": {
+    "class": "other",
+    "lines": 54,
+    "chars": 459
+   },
+   "28": {
+    "class": "other",
+    "lines": 31,
+    "chars": 364
+   },
+   "29": {
+    "class": "other",
+    "lines": 22,
+    "chars": 576
+   }
+  },
+  "title_page_leaf": 26,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   11
+  ],
+  "weak_title_page": 1,
+  "image_read_candidates": [
+   26
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0039/page/n26_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

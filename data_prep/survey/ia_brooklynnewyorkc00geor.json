@@ -1,0 +1,290 @@
+{
+ "source": "ia",
+ "id": "brooklynnewyorkc00geor",
+ "book_says": {
+  "year": {
+   "value": 1906,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc00geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc00geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "IN THE YEAR NINETEEN HUNDRED AND SIX,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words",
+   "other_years_on_page": [
+    1804,
+    1820,
+    1906
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1906,
+    "how": "words",
+    "leaf": 7,
+    "quote": "IN THE YEAR NINETEEN HUNDRED AND SIX,"
+   },
+   {
+    "year": 1804,
+    "how": "digits",
+    "leaf": 23,
+    "quote": "grocer 2313 Pitkin av\n\" Sarn'l tailor h 1804 St John's pi\n\" Theo W ins h 024 Cth\n\" T"
+   },
+   {
+    "year": 1820,
+    "how": "digits",
+    "leaf": 23,
+    "quote": "E printer h 0 Covert\n\" John watchmkr h 1820 79th\n\" Mich'l carp'r h Hemlock n Glen-"
+   }
+  ],
+  "publisher": {
+   "value": "GEORGE UHNUTON",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc00geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc00geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ACT OF CONGRESS IN THE YEAR NINETEEN HUNDRED AND SIX, BY GEORGE UHNUTON",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "volume_number": {
+   "value": 83,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc00geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc00geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXXIII",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Y^f- U PING TON'S GENERAL DIRECTORY OF THE BOROUGH OF BROOKLYN CITY OF NEW YORK",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc00geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc00geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Y^f- / U PING TON'S / GENERAL DIRECTORY / OF THE BOROUGH OF / BROOKLYN / CITY OF NEW YORK",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 148358133,
+  "hocr_sha1": "eab598e320052f3b7c316e941d76026456e89102",
+  "hocr_mtime": "1632667202",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 16,
+  "leaves": 1342,
+  "filled": 153,
+  "high_confidence": 3,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1906",
+   "title": "Brooklyn, New York, city directory",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "Upington Gen.Dir. of Brooklyn; col=2 verified 1906 title page (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn, New York, city directory",
+   "date": "1906",
+   "year": null,
+   "publisher": "George Upington",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1344",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130502185756",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 7,
+    "chars": 74
+   },
+   "3": {
+    "class": "collection-stamp",
+    "lines": 2,
+    "chars": 46
+   },
+   "4": {
+    "class": "other",
+    "lines": 5,
+    "chars": 21
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 18,
+    "chars": 426
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 244,
+    "chars": 5945
+   },
+   "10": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 91
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 254,
+    "chars": 6259
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 260,
+    "chars": 6782
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 249,
+    "chars": 6576
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "other",
+    "lines": 303,
+    "chars": 6267
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 284,
+    "chars": 6059
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 232,
+    "chars": 6550
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "title_page",
+    "lines": 247,
+    "chars": 5766
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 259,
+    "chars": 5912
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 215,
+    "chars": 5620
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "other",
+    "lines": 241,
+    "chars": 6150
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

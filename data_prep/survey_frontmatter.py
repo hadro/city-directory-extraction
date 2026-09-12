@@ -60,6 +60,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 SIDECAR = HERE / "survey"
 CACHE = REPO / "data" / "ia_cache"
+TEXT_CACHE = REPO / "data" / "survey_fm_text"     # extracted front-matter lines; makes re-extraction free
 
 sys.path.insert(0, str(HERE))
 from ia_volume_to_jsonl import Item, hocr_lines         # noqa: E402
@@ -111,6 +112,7 @@ PUBLISHER_CUE = re.compile(r"\b(published|printed|publisher|proprietor)\b", re.I
 COPYRIGHT_CUE = re.compile(r"entered according to act|copyright|librarian of congress", re.I)
 # What a title page says when OCR has eaten the display type that says "DIRECTORY".
 TITLE_CUE = re.compile(r"compiled by|for the year ending|containing\b.{0,30}\bnames", re.I)
+ASSOCIATION_RX = re.compile(r"association of american directory publishers", re.I)
 TOC_CUE = re.compile(r"^\s*(table of )?contents\b|^\s*index to\b", re.I)
 LEGEND_CUE = re.compile(
     r"\bstands? for\b|\bsignifies\b|abbreviation|explanation of|\bexplanations?\b", re.I)
@@ -131,6 +133,13 @@ def classify(text: str, n_lines: int) -> str:
     # "Entered according to Act of Congress, in the year one thousand eight hundred and sixty-two,
     # By J. LAIN AND COMPANY" and scored `other`. It carries the year in words, the publisher AND
     # the printer, so it is first-class evidence in its own right.
+    # The Association of American Directory Publishers roster. It names the directory and its
+    # publisher, so it classifies as a title page -- and it is dated "Organized November, 1898",
+    # which it then hands to the volume as its year. Measured stealing the year from at least
+    # three Upington volumes (1905, 1906, and 1906BPL's leaf 3). Part of the book, but never its
+    # title statement.
+    if ASSOCIATION_RX.search(low):
+        return "trade-association-page"
     if COPYRIGHT_CUE.search(low):
         return "title_page" if DIRECTORY_WORD.search(low) else "copyright_page"
     # A title page need not print the word "directory" in readable type -- it is the largest
@@ -221,9 +230,21 @@ def years_from(text: str):
 # The keyword half of each pattern is case-insensitive; the captured NAME is not. A blanket re.I
 # would let `[A-Z]` match a lowercase word, so these use scoped `(?i:...)` groups instead and the
 # name must still start with a capital -- which is what distinguishes an imprint from prose.
+# An imprint name, INITIALS INCLUDED. The previous pattern terminated on the first period, so
+# "PUBLISHED BY R. L. Polk" captured "R. L" -- 10 of 97 publishers came out truncated mid-initial
+# (E. B. Spooner, H. R. Hearne, Wm. J. Spooner, William A. Mercein). A period after a single
+# capital is part of the name, not the end of it.
+#
+# Matched against the text WITH newlines and using [^\S\n] between words, so a name cannot run
+# off the end of its line and swallow the next one ("GEORGE UPINGTON\nOFFICE\n317 Washington").
+_W = r"[^\S\n]"
+# An abbreviated forename, not just a single initial: this corpus is full of Wm., Chas., Jos.,
+# Geo. A single-letter rule reads "Published by Wm. J. Spooner" as "Wm".
+_INIT = r"[A-Z][a-z]{0,3}\."
+NAME = (rf"(?:{_INIT}{_W}*)*[A-Z][\w'&\-]*"
+        rf"(?:{_W}+(?:&{_W}+)?(?:{_INIT}{_W}*)*[A-Z][\w'&\-]*){{0,4}}")
 PUBLISHED_BY = re.compile(
-    r"(?i:(?:published|printed)\s+(?:and\s+\w+\s+)?by)\s+"
-    r"([A-Z][\w'&.\- ]{2,50}?)(?:[,.]|\s+at\s|\s+in\s|$)")
+    rf"(?i:(?:published|printed)\s+(?:and\s+\w+\s+)?by){_W}+({NAME})")
 PUBLISHER_SUFFIX = re.compile(r"^([A-Z][\w'&.\- ]{2,50}?),\s*(?i:publisher|proprietor)\b", re.M)
 ENTERED_BY = re.compile(
     r"(?i:act of congress[^,]*,?\s*in the year[^,]*,\s*by)\s+([A-Z][\w'&.\- ]{2,60})")
@@ -288,7 +309,8 @@ def roman_to_int(s: str):
 
 # ---------------------------------------------------------------------------- hOCR fetch
 
-def front_hocr(ident: str, n_leaves: int = FRONT_LEAVES, cache: Path = CACHE):
+def front_hocr(ident: str, n_leaves: int = FRONT_LEAVES, cache: Path = CACHE,
+               refresh: bool = False):
     """-> [(leaf, [line, ...]), ...] for leaves 0..n-1, in ONE http Range request.
 
     Item.hocr_page() would issue one request per leaf; at 30 leaves x 184 volumes that is 5,520
@@ -300,6 +322,21 @@ def front_hocr(ident: str, n_leaves: int = FRONT_LEAVES, cache: Path = CACHE):
     the socket and the connection is dropped. That is safe precisely because the front matter
     starts at byte ~583, so the first `end` bytes of the whole file contain the same span.
     """
+    # The extracted TEXT is cached, not just the bytes. Every tweak to a regex or a classifier
+    # otherwise costs another full network sweep -- ~1 min/volume, 3 hours for the tier, and this
+    # file was rewritten three times before the cache existed. With it, re-extraction is instant
+    # and offline, so the expensive half (fetching) happens exactly once per volume.
+    TEXT_CACHE.mkdir(parents=True, exist_ok=True)
+    cpath = TEXT_CACHE / f"{ident}.json"
+    if cpath.exists() and not refresh:
+        try:
+            d = json.loads(cpath.read_text(encoding="utf-8"))
+            if d.get("n_leaves", 0) >= n_leaves:
+                return [(int(k), v) for k, v in
+                        sorted(d["leaves"].items(), key=lambda kv: int(kv[0]))][:n_leaves]
+        except Exception:                               # noqa: BLE001 - corrupt cache, refetch
+            pass
+
     item = Item(ident, cache)
     idx = item.index
     n = min(n_leaves, len(idx))
@@ -315,12 +352,24 @@ def front_hocr(ident: str, n_leaves: int = FRONT_LEAVES, cache: Path = CACHE):
         blob.close()
         base = 0
     else:
-        req = urllib.request.Request(f"{DL}/{ident}/{ident}_hocr.html", headers=dict(UA))
-        req.add_header("Range", f"bytes={start}-{end - 1}")
-        with urllib.request.urlopen(req, timeout=300) as r:
-            partial = r.status == 206
-            buf = r.read(end if not partial else end - start)
-        base = start if partial else 0
+        # IA answers a transient 500 often enough to matter: 4 of 184 volumes failed on one
+        # sweep and ALL FOUR succeeded on a plain retry. Without this the failures look like
+        # dead volumes and land in the register as such.
+        last = None
+        for attempt in range(3):
+            try:
+                req = urllib.request.Request(f"{DL}/{ident}/{ident}_hocr.html", headers=dict(UA))
+                req.add_header("Range", f"bytes={start}-{end - 1}")
+                with urllib.request.urlopen(req, timeout=300) as r:
+                    partial = r.status == 206
+                    buf = r.read(end if not partial else end - start)
+                base = start if partial else 0
+                break
+            except Exception as e:                      # noqa: BLE001 - retried, then raised
+                last = e
+                time.sleep(2 * (attempt + 1))
+        else:
+            raise RuntimeError(f"fetch failed after 3 attempts: {type(last).__name__}: {last}")
 
     out = []
     for leaf in range(n):
@@ -330,6 +379,8 @@ def front_hocr(ident: str, n_leaves: int = FRONT_LEAVES, cache: Path = CACHE):
         markup = buf[a:b].decode("utf-8", "replace")
         lines = [t.strip() for _box, t in hocr_lines(markup) if t.strip()]
         out.append((leaf, lines))
+    cpath.write_text(json.dumps({"ident": ident, "n_leaves": n,
+                                 "leaves": {str(l): ls for l, ls in out}}), encoding="utf-8")
     return out
 
 
@@ -422,7 +473,9 @@ def survey_volume(ident: str, n_leaves: int = FRONT_LEAVES, verbose: bool = Fals
         if "publisher" not in book:
             for rx, ev in ((ENTERED_BY, "copyright-line"), (PUBLISHED_BY, "imprint"),
                            (PUBLISHER_SUFFIX, "imprint")):
-                m = rx.search(flat if rx is not PUBLISHER_SUFFIX else text)
+                # ENTERED_BY reads `flat` because the copyright formula wraps across lines;
+                # the other two read `text` because a line break bounds an imprint name.
+                m = rx.search(flat if rx is ENTERED_BY else text)
                 if m:
                     book["publisher"] = cite(ident, leaf, m.group(1).strip(" .,"), m.group(0),
                                              kind, conf_for.get(kind, "medium"))
@@ -582,8 +635,24 @@ def _self_test():
           "Brooklyn, N.Y. Published by Alden Spooner, at the office of the Star, "
           "No. 55 Fulton-street. June, 1826.")
     assert classify(tc, 6) == "target_card", "a short imprint leaf is a target card"
-    m = PUBLISHED_BY.search(re.sub(r"\s+", " ", tc))
-    assert m and m.group(1).strip() == "Alden Spooner", f"got {m and m.group(1)!r}"
+    assert PUBLISHED_BY.search(tc).group(1) == "Alden Spooner"
+
+    # -- imprint names must survive initials and abbreviated forenames. 10 of 97 publishers came
+    # out truncated mid-initial before this: "PUBLISHED BY R. L." is R. L. Polk.
+    for src, want in (("PUBLISHED BY E. B. SPOONER,", "E. B. SPOONER"),
+                      ("PUBLISHED BY R. L. POLK & CO.", "R. L. POLK & CO"),
+                      ("Published by Wm. J. Spooner", "Wm. J. Spooner"),
+                      ("Printed by William A. Mercein", "William A. Mercein"),
+                      ("Published by Henry R. Worthington", "Henry R. Worthington")):
+        got = PUBLISHED_BY.search(src)
+        assert got and got.group(1) == want, f"{src!r} -> {got and got.group(1)!r}, want {want!r}"
+    # A name must not run off the end of its line and swallow the next.
+    assert PUBLISHED_BY.search("PUBLISHED BY GEORGE UPINGTON\nOFFICE\n317 Washington St") \
+        .group(1) == "GEORGE UPINGTON", "a newline bounds an imprint"
+
+    # -- the trade-association roster, which handed at least three Upington volumes the year 1898
+    assert classify("Association of American Directory Publishers\nOrganized November, 1898\n"
+                    "OFFICERS\nPresident, W. H. LEE, New Haven.", 14) == "trade-association-page"
 
     # -- longworthsameric1798newy leaf 7: digits unreadable, the regnal formula is not
     lw = "AMERICAN ALMANACK, NEW-YORK REGISTER, CITY DIRECTORY, FOR THE " \

@@ -1,0 +1,263 @@
+{
+ "source": "ia",
+ "id": "newyorkdirectory00fran_0",
+ "book_says": {
+  "year": {
+   "value": 1786,
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$13/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00fran_0/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "st Directory\nTHE\nNew York Directory\nFOR\n1786\nILLUSTRATED WITH A PLAN OF THE CITY\nPRE",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1786,
+    "how": "digits",
+    "leaf": 13,
+    "quote": "st Directory\nTHE\nNew York Directory\nFOR\n1786\nILLUSTRATED WITH A PLAN OF THE CITY\nPRE"
+   },
+   {
+    "year": 1786,
+    "how": "digits",
+    "leaf": 13,
+    "quote": "X CONSISTING OF\nANNALS OF NEW YORK CITY 1786\nCompiled for this WorK\nPUBLISHED BY\nTHE"
+   }
+  ],
+  "title": {
+   "value": "3Fac=5imUe iRepcint of JFirst Directory THE New York Directory FOR",
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$13/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00fran_0/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "3Fac=5imUe iRepcint of JFirst Directory / THE / New York Directory / FOR",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 10712940,
+  "hocr_sha1": "7033546a2a35dc41f71e4c9496f2c9b3b9c2d34e",
+  "hocr_mtime": "1702051342",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 65,
+  "leaves": 264,
+  "filled": 148,
+  "high_confidence": 45,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Franks",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1786",
+   "title": "New York directory for 1786,",
+   "column_count": "1",
+   "start_page": "21",
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "35",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "FM 2026-06-29 (agent): FACSIMILE REPRINT (Trow City Directory Co.) - canvases 0-35 modern wrapper (ads + Webster 'Description of NY in 1786' + map c34), original 1786 title at c36; listing A-start printed p21 = canvas c56 'Arding Charles, doctor, 13, corner William and Beekman streets' (offset +35); NOT fully alphabetized within letters; NO key page (almanac/eclipses/coin tables c38-54 precede); col1"
+  },
+  "ia": {
+   "title": "New York directory for 1786,",
+   "date": "1889",
+   "year": null,
+   "publisher": "N[ew] Y[ork] The Trow City Directory Co",
+   "creator": [
+    "Franks, David C",
+    "Webster, Noah, 1758-1843",
+    "Kelby, William, 1841-1898"
+   ],
+   "contributor": "Columbia University Libraries",
+   "imagecount": "266",
+   "ocr": null,
+   "scandate": "20140109170259",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "bookplate",
+    "lines": 2,
+    "chars": 83
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "other",
+    "lines": 1,
+    "chars": 1
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "other",
+    "lines": 1,
+    "chars": 1
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 4,
+    "chars": 57
+   },
+   "8": {
+    "class": "other",
+    "lines": 54,
+    "chars": 2912
+   },
+   "9": {
+    "class": "other",
+    "lines": 17,
+    "chars": 475
+   },
+   "10": {
+    "class": "other",
+    "lines": 19,
+    "chars": 850
+   },
+   "11": {
+    "class": "other",
+    "lines": 23,
+    "chars": 782
+   },
+   "12": {
+    "class": "other",
+    "lines": 9,
+    "chars": 271
+   },
+   "13": {
+    "class": "title_page",
+    "lines": 16,
+    "chars": 329
+   },
+   "14": {
+    "class": "other",
+    "lines": 17,
+    "chars": 295
+   },
+   "15": {
+    "class": "other",
+    "lines": 24,
+    "chars": 1178
+   },
+   "16": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1540
+   },
+   "17": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1540
+   },
+   "18": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1561
+   },
+   "19": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1517
+   },
+   "20": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1465
+   },
+   "21": {
+    "class": "other",
+    "lines": 31,
+    "chars": 1235
+   },
+   "22": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1510
+   },
+   "23": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1538
+   },
+   "24": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1595
+   },
+   "25": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1531
+   },
+   "26": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1565
+   },
+   "27": {
+    "class": "other",
+    "lines": 34,
+    "chars": 1708
+   },
+   "28": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1486
+   },
+   "29": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1566
+   }
+  },
+  "title_page_leaf": 13,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

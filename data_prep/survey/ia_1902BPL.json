@@ -1,0 +1,304 @@
+{
+ "source": "ia",
+ "id": "1902BPL",
+ "book_says": {
+  "year": {
+   "value": 1902,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/1902BPL$7/canvas",
+   "image": "https://archive.org/download/1902BPL/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "IN THE YEAR NINETEEN HUNDRED AND TWO,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words"
+  },
+  "year_attestations": [
+   {
+    "year": 1902,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "W YORK CITY,\nVOLUME LXXIX,\nFOR THE YEAR\n1902.\n-V'\nGEORGE UPINGTON, Publisher.\nOFFICE"
+   },
+   {
+    "year": 1902,
+    "how": "words",
+    "leaf": 7,
+    "quote": "IN THE YEAR NINETEEN HUNDRED AND TWO,"
+   }
+  ],
+  "year_covered": {
+   "value": 1902,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/1902BPL$7/canvas",
+   "image": "https://archive.org/download/1902BPL/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "W YORK CITY,\nVOLUME LXXIX,\nFOR THE YEAR\n1902.\n-V'\nGEORGE UPINGTON, Publisher.\nOFFICE",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "GEORGE UPINGTON",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/1902BPL$7/canvas",
+   "image": "https://archive.org/download/1902BPL/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ACT OF CONGRESS IN THE YEAR NINETEEN HUNDRED AND TWO, BY GEORGE UPINGTON",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "volume_number": {
+   "value": 79,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/1902BPL$7/canvas",
+   "image": "https://archive.org/download/1902BPL/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXIX",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "UPINQTON'S GENERAL DIRECTORY OF BROOKLYN, ? NEW YORK CITY,",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/1902BPL$7/canvas",
+   "image": "https://archive.org/download/1902BPL/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "UPINQTON'S / GENERAL DIRECTORY / OF BROOKLYN, ? / NEW YORK CITY,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 15,
+   "canvas": "https://iiif.archive.org/iiif/1902BPL$15/canvas",
+   "image": "https://archive.org/download/1902BPL/page/n15_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "Advertising Patrons may be found by referring to the Index.\nABBREVIATIONS.\nAcct. accountant; agl. agricultural ; agt agent; Ala. Alabama; al oi!\u00ab/; art. artificial;\nasst. assistant; av otJOTwe; bldg b",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 19,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 220404877,
+  "hocr_sha1": "4f061331cde70442e1d8eb5214a4b694a93d0819",
+  "hocr_mtime": "1632344688",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 73,
+  "leaves": 1100,
+  "filled": 1059,
+  "high_confidence": 7,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1902",
+   "title": "Upington's General Directory of Brooklyn, New York City, for the year 1902",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Upington col=2 (BPL scan, see upington card; likely dup of *geor copy; s4)"
+  },
+  "ia": {
+   "title": "Upington's General Directory of Brooklyn, New York City, for the year 1902",
+   "date": "1902",
+   "year": null,
+   "publisher": null,
+   "creator": "George Upington",
+   "contributor": null,
+   "imagecount": "1100",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 29,
+    "chars": 1182
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 782
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 7,
+    "chars": 115
+   },
+   "3": {
+    "class": "other",
+    "lines": 35,
+    "chars": 1144
+   },
+   "4": {
+    "class": "other",
+    "lines": 44,
+    "chars": 1434
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 499
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 680
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 15,
+    "chars": 402
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 35,
+    "chars": 860
+   },
+   "9": {
+    "class": "trade-association-page",
+    "lines": 30,
+    "chars": 1137
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 12,
+    "chars": 160
+   },
+   "11": {
+    "class": "contents",
+    "lines": 115,
+    "chars": 3949
+   },
+   "12": {
+    "class": "contents",
+    "lines": 143,
+    "chars": 4761
+   },
+   "13": {
+    "class": "contents",
+    "lines": 80,
+    "chars": 2745
+   },
+   "14": {
+    "class": "other",
+    "lines": 59,
+    "chars": 1883
+   },
+   "15": {
+    "class": "legend",
+    "lines": 168,
+    "chars": 4588
+   },
+   "16": {
+    "class": "other",
+    "lines": 258,
+    "chars": 6015
+   },
+   "17": {
+    "class": "other",
+    "lines": 262,
+    "chars": 6255
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 270,
+    "chars": 6144
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 256,
+    "chars": 5978
+   },
+   "20": {
+    "class": "other",
+    "lines": 213,
+    "chars": 6049
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 216,
+    "chars": 6169
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 248,
+    "chars": 6359
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 259,
+    "chars": 6175
+   },
+   "24": {
+    "class": "other",
+    "lines": 244,
+    "chars": 6420
+   },
+   "25": {
+    "class": "other",
+    "lines": 259,
+    "chars": 6648
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 231,
+    "chars": 6304
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 276,
+    "chars": 6129
+   },
+   "28": {
+    "class": "other",
+    "lines": 231,
+    "chars": 5680
+   },
+   "29": {
+    "class": "other",
+    "lines": 252,
+    "chars": 6346
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 11,
+  "legend_leaves": [
+   15
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

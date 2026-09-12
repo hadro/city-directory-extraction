@@ -1,0 +1,286 @@
+{
+ "source": "ia",
+ "id": "merceinscitydire00merc",
+ "book_says": {
+  "year": {
+   "value": 1820,
+   "leaf": 29,
+   "canvas": "https://iiif.archive.org/iiif/merceinscitydire00merc$29/canvas",
+   "image": "https://archive.org/download/merceinscitydire00merc/page/n29_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ALMANAC,\nFOR THE YEARS OF OUR LORD 1820-21.\nBeing the 45th year of American Ind",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1820,
+    "how": "digits",
+    "leaf": 29,
+    "quote": "ALMANAC,\nFOR THE YEARS OF OUR LORD 1820-21.\nBeing the 45th year of American Ind"
+   },
+   {
+    "year": 1820,
+    "how": "digits",
+    "leaf": 29,
+    "quote": "UNE, begins on Thursday , hath 30 days, 1820\nft\n$10\nftr\nMl.-,\n\u00a723\n\u00a725\n&26\n&27\n\u00ae28\nK?"
+   },
+   {
+    "year": 1820,
+    "how": "independence-formula",
+    "leaf": 5,
+    "quote": "FORTY-FIFTH YEAR OF\nAMERICAN INDEPENDENCE"
+   }
+  ],
+  "year_covered": {
+   "value": 1820,
+   "leaf": 29,
+   "canvas": "https://iiif.archive.org/iiif/merceinscitydire00merc$29/canvas",
+   "image": "https://archive.org/download/merceinscitydire00merc/page/n29_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ALMANAC,\nFOR THE YEARS OF OUR LORD 1820-21.\nBeing the 45th year of American Ind",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "William A. Mercein",
+   "leaf": 29,
+   "canvas": "https://iiif.archive.org/iiif/merceinscitydire00merc$29/canvas",
+   "image": "https://archive.org/download/merceinscitydire00merc/page/n29_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Printed by William A. Mercein",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "ALMANAC,",
+   "leaf": 29,
+   "canvas": "https://iiif.archive.org/iiif/merceinscitydire00merc$29/canvas",
+   "image": "https://archive.org/download/merceinscitydire00merc/page/n29_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ALMANAC,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 25242082,
+  "hocr_sha1": "0fd1e040510ff5c0ac298d1e59eea82d1a9b6901",
+  "hocr_mtime": "1700929580",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 93,
+  "leaves": 452,
+  "filled": 406,
+  "high_confidence": 97,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Mercein",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1820",
+   "title": "Mercein's city directory, New-York register, and almanac, for the forty-fifth year of American independence. Containing, beside the list of duties, ba",
+   "column_count": "1",
+   "start_page": "105",
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "-5",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "col=1 (pre-transition single-col era; title-triage s4) | FM 2026-06-29 (agent): DEEP listing - ~100 canvases of NY Register (govt/tax tables) + almanac + advertiser section first. title c10; first clean directory page printed p106 = canvas c101 'Acheson Hugh, cartman 39 Lombardy' (c102=printed p107 -> offset -5); nominal A-start p105 ('A/Aaron' + style card) is INTERLEAVED among advertiser leaves, not cleanly isolated; 'h.'=house; col1. Has style card mercein_manhattan_1820s.md"
+  },
+  "ia": {
+   "title": "Mercein's city directory, New-York register, and almanac, for the forty-fifth year of American independence. Containing, beside the list of duties, ba",
+   "date": "1820",
+   "year": null,
+   "publisher": "New-York: W.A. Mercein",
+   "creator": null,
+   "contributor": "Columbia University Libraries",
+   "imagecount": "454",
+   "ocr": null,
+   "scandate": "20140731120522",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 58,
+    "chars": 1740
+   },
+   "3": {
+    "class": "bookplate",
+    "lines": 7,
+    "chars": 198
+   },
+   "4": {
+    "class": "bookplate",
+    "lines": 2,
+    "chars": 83
+   },
+   "5": {
+    "class": "title_page",
+    "lines": 14,
+    "chars": 362
+   },
+   "6": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1480
+   },
+   "7": {
+    "class": "contents",
+    "lines": 102,
+    "chars": 2425
+   },
+   "8": {
+    "class": "title_page",
+    "lines": 40,
+    "chars": 1171
+   },
+   "9": {
+    "class": "other",
+    "lines": 46,
+    "chars": 2468
+   },
+   "10": {
+    "class": "other",
+    "lines": 54,
+    "chars": 3444
+   },
+   "11": {
+    "class": "other",
+    "lines": 23,
+    "chars": 1333
+   },
+   "12": {
+    "class": "other",
+    "lines": 22,
+    "chars": 919
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 137,
+    "chars": 1167
+   },
+   "14": {
+    "class": "other",
+    "lines": 47,
+    "chars": 2036
+   },
+   "15": {
+    "class": "title_page",
+    "lines": 70,
+    "chars": 2280
+   },
+   "16": {
+    "class": "other",
+    "lines": 79,
+    "chars": 2241
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 55,
+    "chars": 1669
+   },
+   "18": {
+    "class": "other",
+    "lines": 49,
+    "chars": 1966
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1759
+   },
+   "20": {
+    "class": "other",
+    "lines": 47,
+    "chars": 1733
+   },
+   "21": {
+    "class": "other",
+    "lines": 30,
+    "chars": 1146
+   },
+   "22": {
+    "class": "other",
+    "lines": 92,
+    "chars": 2845
+   },
+   "23": {
+    "class": "other",
+    "lines": 126,
+    "chars": 3378
+   },
+   "24": {
+    "class": "other",
+    "lines": 84,
+    "chars": 2615
+   },
+   "25": {
+    "class": "other",
+    "lines": 41,
+    "chars": 456
+   },
+   "26": {
+    "class": "other",
+    "lines": 22,
+    "chars": 853
+   },
+   "27": {
+    "class": "other",
+    "lines": 64,
+    "chars": 1780
+   },
+   "28": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1771
+   },
+   "29": {
+    "class": "title_page",
+    "lines": 166,
+    "chars": 1472
+   }
+  },
+  "title_page_leaf": 29,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 7,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

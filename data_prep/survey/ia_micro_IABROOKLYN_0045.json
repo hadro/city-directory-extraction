@@ -1,0 +1,231 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0045",
+ "book_says": {},
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 6583203,
+  "hocr_sha1": "7d3a02d17b99ea92e10bb7df72d9f7818f46e558",
+  "hocr_mtime": "1708712293",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 295,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Reynolds",
+   "city": "Williamsburgh",
+   "borough": "Brooklyn",
+   "year": "1851/52",
+   "title": "Reynolds' Williamsburgh Directory, Village Register and Business Advertiser for 1851-1852",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "col=1 (pre-transition single-col era; title-triage s4)"
+  },
+  "ia": {
+   "title": "Reynolds' Williamsburgh Directory, Village Register and Business Advertiser for 1851-1852",
+   "date": "1851-1852",
+   "year": null,
+   "publisher": "L. Darbee & Son",
+   "creator": "Reynolds, Samuel & Thomas F.",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "295",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240127002155",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 8,
+    "chars": 189
+   },
+   "2": {
+    "class": "other",
+    "lines": 29,
+    "chars": 1076
+   },
+   "3": {
+    "class": "other",
+    "lines": 13,
+    "chars": 305
+   },
+   "4": {
+    "class": "other",
+    "lines": 30,
+    "chars": 1381
+   },
+   "5": {
+    "class": "other",
+    "lines": 2,
+    "chars": 4
+   },
+   "6": {
+    "class": "other",
+    "lines": 31,
+    "chars": 335
+   },
+   "7": {
+    "class": "other",
+    "lines": 6,
+    "chars": 89
+   },
+   "8": {
+    "class": "title_page",
+    "lines": 42,
+    "chars": 3070
+   },
+   "9": {
+    "class": "other",
+    "lines": 45,
+    "chars": 1866
+   },
+   "10": {
+    "class": "other",
+    "lines": 46,
+    "chars": 638
+   },
+   "11": {
+    "class": "other",
+    "lines": 18,
+    "chars": 479
+   },
+   "12": {
+    "class": "other",
+    "lines": 13,
+    "chars": 344
+   },
+   "13": {
+    "class": "other",
+    "lines": 21,
+    "chars": 364
+   },
+   "14": {
+    "class": "other",
+    "lines": 41,
+    "chars": 2165
+   },
+   "15": {
+    "class": "other",
+    "lines": 15,
+    "chars": 468
+   },
+   "16": {
+    "class": "other",
+    "lines": 13,
+    "chars": 435
+   },
+   "17": {
+    "class": "other",
+    "lines": 12,
+    "chars": 232
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 19,
+    "chars": 381
+   },
+   "20": {
+    "class": "other",
+    "lines": 43,
+    "chars": 1228
+   },
+   "21": {
+    "class": "other",
+    "lines": 17,
+    "chars": 650
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 7,
+    "chars": 94
+   },
+   "24": {
+    "class": "other",
+    "lines": 10,
+    "chars": 30
+   },
+   "25": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "26": {
+    "class": "other",
+    "lines": 12,
+    "chars": 203
+   },
+   "27": {
+    "class": "other",
+    "lines": 26,
+    "chars": 745
+   },
+   "28": {
+    "class": "other",
+    "lines": 26,
+    "chars": 892
+   },
+   "29": {
+    "class": "other",
+    "lines": 26,
+    "chars": 748
+   }
+  },
+  "title_page_leaf": 8,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "weak_title_page": -2,
+  "image_read_candidates": [
+   8
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0045/page/n8_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

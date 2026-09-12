@@ -1,0 +1,290 @@
+{
+ "source": "ia",
+ "id": "1883BPL",
+ "book_says": {
+  "year": {
+   "value": 1882,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1883BPL$5/canvas",
+   "image": "https://archive.org/download/1883BPL/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "in the year eighteen hundred and eighty-two,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words",
+   "other_years_on_page": [
+    1863,
+    1882
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1882,
+    "how": "words",
+    "leaf": 5,
+    "quote": "in the year eighteen hundred and eighty-two,"
+   },
+   {
+    "year": 1863,
+    "how": "digits",
+    "leaf": 21,
+    "quote": "r<:, SOUTH liJiOOKLyjV.\niBstablisbed In 1863- First rne in the BJock).\nFarms, llauiC"
+   },
+   {
+    "year": 1882,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "ation of the citizens.\nBEOOKLYif, June, 1882."
+   }
+  ],
+  "publisher": {
+   "value": "LAIN & COMPANY",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1883BPL$5/canvas",
+   "image": "https://archive.org/download/1883BPL/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY LAIN & COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "THE EBQOELTN BIBECTOIY FOR <=5-J The Year Ending Mai 1st. CONTAINING ALPHABETICAL LIST OF HOUSEHOLDERS AND BUSINESS HOUSES, A BUSINESS DIRECTORY, WITH EACH BUSI",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1883BPL$5/canvas",
+   "image": "https://archive.org/download/1883BPL/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE EBQOELTN / BIBECTOIY / FOR <=5-J / The Year Ending Mai 1st. / CONTAINING ALPHABETICAL LIST OF HOUSEHOLDERS AND BUSINESS HOUSES, / A BUSINESS DIRECTORY, / WITH EACH BUSINESS AND PSOFESSION CIASSIFI",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "volume_number": {
+   "value": 26,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/1883BPL$7/canvas",
+   "image": "https://archive.org/download/1883BPL/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "twenty-sixth annual",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 207105551,
+  "hocr_sha1": "859b086a79d420ff851c9a77c0201ef2a0f98b2c",
+  "hocr_mtime": "1632344080",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 59,
+  "leaves": 1642,
+  "filled": 1560,
+  "high_confidence": 48,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1883",
+   "title": "Brooklyn Directory for the year ending May 1883",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain; col=2 verified via 1858/1869 title pages (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn Directory for the year ending May 1883",
+   "date": "1883",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1642",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 31,
+    "chars": 1284
+   },
+   "1": {
+    "class": "other",
+    "lines": 19,
+    "chars": 620
+   },
+   "2": {
+    "class": "other",
+    "lines": 41,
+    "chars": 1302
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 18,
+    "chars": 460
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 930
+   },
+   "5": {
+    "class": "title_page",
+    "lines": 17,
+    "chars": 626
+   },
+   "6": {
+    "class": "other",
+    "lines": 27,
+    "chars": 1095
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 49,
+    "chars": 3082
+   },
+   "8": {
+    "class": "contents",
+    "lines": 158,
+    "chars": 3507
+   },
+   "9": {
+    "class": "contents",
+    "lines": 178,
+    "chars": 4192
+   },
+   "10": {
+    "class": "other",
+    "lines": 176,
+    "chars": 4125
+   },
+   "11": {
+    "class": "contents",
+    "lines": 260,
+    "chars": 4151
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 176,
+    "chars": 4043
+   },
+   "13": {
+    "class": "contents",
+    "lines": 168,
+    "chars": 3999
+   },
+   "14": {
+    "class": "contents",
+    "lines": 103,
+    "chars": 3217
+   },
+   "15": {
+    "class": "contents",
+    "lines": 138,
+    "chars": 4594
+   },
+   "16": {
+    "class": "other",
+    "lines": 138,
+    "chars": 4494
+   },
+   "17": {
+    "class": "contents",
+    "lines": 137,
+    "chars": 4516
+   },
+   "18": {
+    "class": "other",
+    "lines": 138,
+    "chars": 4505
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 799
+   },
+   "20": {
+    "class": "other",
+    "lines": 102,
+    "chars": 3562
+   },
+   "21": {
+    "class": "title_page",
+    "lines": 24,
+    "chars": 863
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 59,
+    "chars": 1867
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 57,
+    "chars": 1773
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 64,
+    "chars": 2320
+   },
+   "25": {
+    "class": "title_page",
+    "lines": 69,
+    "chars": 2267
+   },
+   "26": {
+    "class": "other",
+    "lines": 69,
+    "chars": 2466
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 1563
+   },
+   "28": {
+    "class": "other",
+    "lines": 30,
+    "chars": 772
+   },
+   "29": {
+    "class": "other",
+    "lines": 18,
+    "chars": 352
+   }
+  },
+  "title_page_leaf": 5,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 8,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

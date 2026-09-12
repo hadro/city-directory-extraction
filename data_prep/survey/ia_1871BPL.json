@@ -1,0 +1,287 @@
+{
+ "source": "ia",
+ "id": "1871BPL",
+ "book_says": {
+  "year": {
+   "value": 1871,
+   "leaf": 11,
+   "canvas": "https://iiif.archive.org/iiif/1871BPL$11/canvas",
+   "image": "https://archive.org/download/1871BPL/page/n11_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "d Business\nFOR\nTHE YEAR ENDING MAY 1ST,\n1871.\nCONT-A-INI^G- ALSO A.\nSTREET AND AVENU",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1871,
+    "how": "digits",
+    "leaf": 11,
+    "quote": "d Business\nFOR\nTHE YEAR ENDING MAY 1ST,\n1871.\nCONT-A-INI^G- ALSO A.\nSTREET AND AVENU"
+   }
+  ],
+  "publisher": {
+   "value": "LAIN & COMPANY",
+   "leaf": 11,
+   "canvas": "https://iiif.archive.org/iiif/1871BPL$11/canvas",
+   "image": "https://archive.org/download/1871BPL/page/n11_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "PUBLISHED BY LAIN & COMPANY",
+   "method": "hocr-text",
+   "confidence": "low",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "BROOKLYN DIRECTORY ADVERTISER. s CLARK'S BRYANT & STRATTON Brooklyn Business College, o fi.VGKtsn 77,v//.v/.Vi7 School. .Von. 13 to 16 Court St., (opp. City Hal",
+   "leaf": 3,
+   "canvas": "https://iiif.archive.org/iiif/1871BPL$3/canvas",
+   "image": "https://archive.org/download/1871BPL/page/n3_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY ADVERTISER. / s / CLARK'S BRYANT & STRATTON / Brooklyn Business College, / o fi.VGKtsn 77,v//.v/.Vi7 School. / .Von. 13 to 16 Court St., (opp. City Hall,) Brooklyn. / BUSINES8 DEPAR",
+   "method": "hocr-text",
+   "confidence": "low"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/1871BPL$13/canvas",
+   "image": "https://archive.org/download/1871BPL/page/n13_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "in their vocations in the cities of Brooklyn and New York.\nABBREVIATIONS, ETC.\nacct. accountant ; agl. agricultural ; agt. agent; &\\. alley ; art. artificial ; nr. avenue; ssat.assist-\nant; bldg. buil",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 9,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 135616675,
+  "hocr_sha1": "f6fd89ab1de8a16856d77f1d378a51de20604de7",
+  "hocr_mtime": "1632343807",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 32,
+  "leaves": 1016,
+  "filled": 362,
+  "high_confidence": 12,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1871",
+   "title": "Brooklyn City and Business Directory for the year ending May 1, 1871",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain; col=2 verified via 1858/1869 title pages (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn City and Business Directory for the year ending May 1, 1871",
+   "date": "1871",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1016",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 34,
+    "chars": 1411
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 1257
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 808
+   },
+   "3": {
+    "class": "title_page",
+    "lines": 37,
+    "chars": 1626
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 676
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 9,
+    "chars": 203
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 12,
+    "chars": 329
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 20,
+    "chars": 567
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 58,
+    "chars": 1352
+   },
+   "9": {
+    "class": "other",
+    "lines": 36,
+    "chars": 1127
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1506
+   },
+   "11": {
+    "class": "target_card",
+    "lines": 12,
+    "chars": 262
+   },
+   "12": {
+    "class": "other",
+    "lines": 31,
+    "chars": 1367
+   },
+   "13": {
+    "class": "legend",
+    "lines": 66,
+    "chars": 2814
+   },
+   "14": {
+    "class": "other",
+    "lines": 140,
+    "chars": 4926
+   },
+   "15": {
+    "class": "other",
+    "lines": 142,
+    "chars": 4668
+   },
+   "16": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4619
+   },
+   "17": {
+    "class": "other",
+    "lines": 142,
+    "chars": 4666
+   },
+   "18": {
+    "class": "other",
+    "lines": 158,
+    "chars": 5079
+   },
+   "19": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4690
+   },
+   "20": {
+    "class": "other",
+    "lines": 151,
+    "chars": 4933
+   },
+   "21": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4558
+   },
+   "22": {
+    "class": "other",
+    "lines": 144,
+    "chars": 4755
+   },
+   "23": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4672
+   },
+   "24": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4746
+   },
+   "25": {
+    "class": "other",
+    "lines": 140,
+    "chars": 4739
+   },
+   "26": {
+    "class": "other",
+    "lines": 142,
+    "chars": 4688
+   },
+   "27": {
+    "class": "other",
+    "lines": 135,
+    "chars": 4279
+   },
+   "28": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4547
+   },
+   "29": {
+    "class": "other",
+    "lines": 139,
+    "chars": 4746
+   }
+  },
+  "title_page_leaf": 3,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 11,
+  "contents_leaf": null,
+  "legend_leaves": [
+   13
+  ],
+  "weak_title_page": 3,
+  "image_read_candidates": [
+   11,
+   3
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/1871BPL/page/n11_w1400.jpg",
+   "https://archive.org/download/1871BPL/page/n3_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

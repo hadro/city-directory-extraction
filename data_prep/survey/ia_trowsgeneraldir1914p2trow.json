@@ -1,0 +1,272 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldir1914p2trow",
+ "book_says": {
+  "year": {
+   "value": 1914,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1914p2trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": ". CXXVII.\nEOR THE YEAR ENDING\nAUGUST 1, 1914\nPUBLISHED ANNUALLY\nBT\nTROW DIRECTORY, P",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1913,
+    1914
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1914,
+    "how": "digits",
+    "leaf": 7,
+    "quote": ". CXXVII.\nEOR THE YEAR ENDING\nAUGUST 1, 1914\nPUBLISHED ANNUALLY\nBT\nTROW DIRECTORY, P"
+   },
+   {
+    "year": 1913,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "CTORY, PRINTING AND BOOKBINDING COMPANY\n1913\n179 10 322 V ~!!"
+   }
+  ],
+  "volume_number": {
+   "value": 127,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1914p2trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOL. CXXVII",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "\u25a0 TROWS GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX CITY OF NEW YORK",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1914p2trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "\u25a0 / TROWS / GENERAL DIRECTORY / OF THE BOROUGHS OF / MANHATTAN AND BRONX / CITY OF NEW YORK",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 207975126,
+  "hocr_sha1": "2a8ac123c27d7c7cf3c3ca0e87dcd4b6ef20035c",
+  "hocr_mtime": "1633879264",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 1054,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1914",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan | part 2; Trow; col=3 (s4: bracketed 1859-1915 all 3-col + 1890s card)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1914",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1056",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130425125635",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 7,
+    "chars": 64
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 20
+   },
+   "4": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 19,
+    "chars": 364
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 437,
+    "chars": 13617
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 451,
+    "chars": 13641
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 457,
+    "chars": 14617
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 462,
+    "chars": 13638
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "other",
+    "lines": 449,
+    "chars": 12942
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 453,
+    "chars": 13614
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 458,
+    "chars": 13848
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 447,
+    "chars": 12979
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 438,
+    "chars": 13068
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 455,
+    "chars": 13867
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "other",
+    "lines": 460,
+    "chars": 13879
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

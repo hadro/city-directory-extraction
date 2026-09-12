@@ -1,0 +1,289 @@
+{
+ "source": "ia",
+ "id": "newyorkdirectory00durs",
+ "book_says": {
+  "year": {
+   "value": 1906,
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs$19/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00durs/page/n19_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "THE TRINITY BUILDING.\nPhoto copyright, 1906, by Irving Underhill.",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1901,
+    1906
+   ],
+   "conflicts_with_catalog": [
+    "1910",
+    "1910"
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1906,
+    "how": "digits",
+    "leaf": 19,
+    "quote": "THE TRINITY BUILDING.\nPhoto copyright, 1906, by Irving Underhill."
+   },
+   {
+    "year": 1901,
+    "how": "digits",
+    "leaf": 29,
+    "quote": "\u2014 LIBERTY STREET.\nFrom photo copyright, 1901, by James B. Baker, Archt.\nin width and"
+   }
+  ],
+  "year_published": {
+   "value": 1906,
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs$19/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00durs/page/n19_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "THE TRINITY BUILDING.\nPhoto copyright, 1906, by Irving Underhill.",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 14,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs$14/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00durs/page/n14_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "y past, the globe is the sphere of empire,\nthe ships' prows stand for daring exploration.\nAmerica, seated on a stone covered with barbaric inscriptions, holds\nin one hand the lighted torch of progress",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 2,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 10621580,
+  "hocr_sha1": "209d0885ec2c7e2af604051da2493a3f639ab3ce",
+  "hocr_mtime": "1702051063",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 72,
+  "leaves": 234,
+  "filled": 184,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": null,
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1910",
+   "title": "New York directory.",
+   "column_count": null,
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "year = IA catalog date (spine title only; publisher unidentified); 1910 Manhattan; Trow-era?; needs sample (s4); RESIDUAL: needs sample (IIIF manifest fetch failed x2); 1910 Manhattan, likely Trow col2/3 | FM 2026-06-29 (agent): REVIEW - NOT A CITY DIRECTORY. Illustrated NYC guidebook/'Ready Reference Guide' (essays+photos: Statue of Liberty, Custom House, Trinity Church; hack/cab fares; resort-hotel + LIRR ads). NO persons listing anywhere in 234 canvases (probed c60/90/120/150/180/210/230). No readable title page (scan opens at printed p31). IA metadata: publisher 'not identified', 1910 estimated (one ad 'opened June 1 1910'). Master hint '1910 Manhattan/Trow' UNSUPPORTED - recommend dropping from directory panel"
+  },
+  "ia": {
+   "title": "New York directory.",
+   "date": "1910",
+   "year": null,
+   "publisher": "[New York?] : [publisher not identified]",
+   "creator": null,
+   "contributor": "Columbia University Libraries",
+   "imagecount": "236",
+   "ocr": null,
+   "scandate": "20140311180043",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "bookplate",
+    "lines": 8,
+    "chars": 233
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 92
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "other",
+    "lines": 36,
+    "chars": 2339
+   },
+   "8": {
+    "class": "other",
+    "lines": 64,
+    "chars": 3099
+   },
+   "9": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "10": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3011
+   },
+   "11": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "12": {
+    "class": "other",
+    "lines": 49,
+    "chars": 2901
+   },
+   "13": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "14": {
+    "class": "legend",
+    "lines": 39,
+    "chars": 2419
+   },
+   "15": {
+    "class": "other",
+    "lines": 45,
+    "chars": 3063
+   },
+   "16": {
+    "class": "other",
+    "lines": 47,
+    "chars": 2779
+   },
+   "17": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "18": {
+    "class": "other",
+    "lines": 49,
+    "chars": 2961
+   },
+   "19": {
+    "class": "copyright_page",
+    "lines": 2,
+    "chars": 65
+   },
+   "20": {
+    "class": "other",
+    "lines": 48,
+    "chars": 2721
+   },
+   "21": {
+    "class": "other",
+    "lines": 46,
+    "chars": 2624
+   },
+   "22": {
+    "class": "other",
+    "lines": 53,
+    "chars": 3671
+   },
+   "23": {
+    "class": "other",
+    "lines": 1,
+    "chars": 36
+   },
+   "24": {
+    "class": "other",
+    "lines": 15,
+    "chars": 893
+   },
+   "25": {
+    "class": "other",
+    "lines": 19,
+    "chars": 1232
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 1401
+   },
+   "27": {
+    "class": "other",
+    "lines": 50,
+    "chars": 3274
+   },
+   "28": {
+    "class": "other",
+    "lines": 17,
+    "chars": 907
+   },
+   "29": {
+    "class": "copyright_page",
+    "lines": 13,
+    "chars": 740
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": 19,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   14
+  ],
+  "image_read_candidates": [
+   19,
+   29
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/newyorkdirectory00durs/page/n19_w1400.jpg",
+   "https://archive.org/download/newyorkdirectory00durs/page/n29_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

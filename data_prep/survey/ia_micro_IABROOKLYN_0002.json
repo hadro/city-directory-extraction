@@ -1,0 +1,250 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0002",
+ "book_says": {
+  "legend": {
+   "value": "present",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0002$5/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0002/page/n5_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "Brooklyn Directory.\n1335.\n\u2014\n?\nN. B. h. stands for house, u. for near, and c. for corner.\nAsso Daniel, tavern & livery stable 12 Main e.\nAbbot John, shoemaker 76 Jay [Water\nAbrahams, Austin, hostler,",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 1905816,
+  "hocr_sha1": "68f20b5612595b0b90a377be521c3a1487c640c3",
+  "hocr_mtime": "1708550468",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 81,
+  "leaves": 60,
+  "filled": 50,
+  "high_confidence": 10,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1823",
+   "title": "Spooner's Brooklyn Directory for the year 1823",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "col=1 (pre-transition single-col era; title-triage s4)"
+  },
+  "ia": {
+   "title": "Spooner's Brooklyn Directory for the year 1823",
+   "date": "1823",
+   "year": null,
+   "publisher": "Alden Spooner at the office of the Long-Island Star",
+   "creator": "Spooner, Alden",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "60",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126020049",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 9,
+    "chars": 170
+   },
+   "2": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "legend",
+    "lines": 41,
+    "chars": 1140
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1267
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1461
+   },
+   "8": {
+    "class": "other",
+    "lines": 43,
+    "chars": 1508
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 35,
+    "chars": 728
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 1512
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 963
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1511
+   },
+   "13": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1164
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1462
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 1136
+   },
+   "16": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1459
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1468
+   },
+   "18": {
+    "class": "other",
+    "lines": 34,
+    "chars": 1267
+   },
+   "19": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1041
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 1360
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1253
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1441
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 1535
+   },
+   "24": {
+    "class": "other",
+    "lines": 40,
+    "chars": 1362
+   },
+   "25": {
+    "class": "other",
+    "lines": 39,
+    "chars": 1126
+   },
+   "26": {
+    "class": "other",
+    "lines": 42,
+    "chars": 1527
+   },
+   "27": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1076
+   },
+   "28": {
+    "class": "other",
+    "lines": 41,
+    "chars": 1527
+   },
+   "29": {
+    "class": "other",
+    "lines": 19,
+    "chars": 591
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   5
+  ],
+  "weak_title_page": 0,
+  "image_read_candidates": [
+   1,
+   5,
+   6
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0002/page/n1_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0002/page/n5_w1400.jpg",
+   "https://archive.org/download/micro_IABROOKLYN_0002/page/n6_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

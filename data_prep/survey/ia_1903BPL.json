@@ -1,0 +1,284 @@
+{
+ "source": "ia",
+ "id": "1903BPL",
+ "book_says": {
+  "year": {
+   "value": 1903,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1903BPL$1/canvas",
+   "image": "https://archive.org/download/1903BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "EW YORK CITY.\nVOLUME LXXX.\nFOR THE YEAR\n1903.\nGEORGE UPINGTON, Publisher.\nOFFICE :\n3",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1903,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "EW YORK CITY.\nVOLUME LXXX.\nFOR THE YEAR\n1903.\nGEORGE UPINGTON, Publisher.\nOFFICE :\n3"
+   }
+  ],
+  "year_covered": {
+   "value": 1903,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1903BPL$1/canvas",
+   "image": "https://archive.org/download/1903BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "EW YORK CITY.\nVOLUME LXXX.\nFOR THE YEAR\n1903.\nGEORGE UPINGTON, Publisher.\nOFFICE :\n3",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "GEORGE UPINGTON",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1903BPL$1/canvas",
+   "image": "https://archive.org/download/1903BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "GEORGE UPINGTON, Publisher",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "volume_number": {
+   "value": 80,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1903BPL$1/canvas",
+   "image": "https://archive.org/download/1903BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXX",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "UPINGTON'S GENERAL DIRECTORY OF BROOKLYN, NEW YORK CITY.",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1903BPL$1/canvas",
+   "image": "https://archive.org/download/1903BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "UPINGTON'S / GENERAL DIRECTORY / OF BROOKLYN, / NEW YORK CITY.",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 221101120,
+  "hocr_sha1": "2ebedb9c49e228edf82b753afd91648617312580",
+  "hocr_mtime": "1632344925",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 2.867383512544803,
+  "leaves": 1116,
+  "filled": 1106,
+  "high_confidence": 32,
+  "ocr_value_leaves": 1100,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1903",
+   "title": "Upington's General Directory of Brooklyn, New York City, for the year 1903",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Upington col=2 (BPL scan, see upington card; likely dup of *geor copy; s4)"
+  },
+  "ia": {
+   "title": "Upington's General Directory of Brooklyn, New York City, for the year 1903",
+   "date": "1903",
+   "year": null,
+   "publisher": null,
+   "creator": "George Upington",
+   "contributor": null,
+   "imagecount": "1117",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 28,
+    "chars": 1160
+   },
+   "1": {
+    "class": "title_page",
+    "lines": 14,
+    "chars": 397
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 65,
+    "chars": 1253
+   },
+   "3": {
+    "class": "trade-association-page",
+    "lines": 29,
+    "chars": 1121
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 795
+   },
+   "5": {
+    "class": "contents",
+    "lines": 115,
+    "chars": 4074
+   },
+   "6": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4910
+   },
+   "7": {
+    "class": "contents",
+    "lines": 148,
+    "chars": 4840
+   },
+   "8": {
+    "class": "other",
+    "lines": 49,
+    "chars": 1522
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 146,
+    "chars": 4413
+   },
+   "10": {
+    "class": "other",
+    "lines": 238,
+    "chars": 5964
+   },
+   "11": {
+    "class": "other",
+    "lines": 255,
+    "chars": 6242
+   },
+   "12": {
+    "class": "other",
+    "lines": 252,
+    "chars": 5945
+   },
+   "13": {
+    "class": "other",
+    "lines": 252,
+    "chars": 6268
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 178,
+    "chars": 4523
+   },
+   "15": {
+    "class": "other",
+    "lines": 264,
+    "chars": 5984
+   },
+   "16": {
+    "class": "other",
+    "lines": 229,
+    "chars": 6051
+   },
+   "17": {
+    "class": "other",
+    "lines": 253,
+    "chars": 6432
+   },
+   "18": {
+    "class": "other",
+    "lines": 252,
+    "chars": 6203
+   },
+   "19": {
+    "class": "other",
+    "lines": 254,
+    "chars": 6486
+   },
+   "20": {
+    "class": "other",
+    "lines": 211,
+    "chars": 6296
+   },
+   "21": {
+    "class": "other",
+    "lines": 295,
+    "chars": 6594
+   },
+   "22": {
+    "class": "other",
+    "lines": 185,
+    "chars": 4153
+   },
+   "23": {
+    "class": "other",
+    "lines": 201,
+    "chars": 4825
+   },
+   "24": {
+    "class": "other",
+    "lines": 220,
+    "chars": 5439
+   },
+   "25": {
+    "class": "other",
+    "lines": 256,
+    "chars": 6260
+   },
+   "26": {
+    "class": "other",
+    "lines": 271,
+    "chars": 6334
+   },
+   "27": {
+    "class": "other",
+    "lines": 258,
+    "chars": 6139
+   },
+   "28": {
+    "class": "other",
+    "lines": 179,
+    "chars": 4497
+   },
+   "29": {
+    "class": "other",
+    "lines": 211,
+    "chars": 6359
+   }
+  },
+  "title_page_leaf": 1,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 5,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

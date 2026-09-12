@@ -1,0 +1,292 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0012",
+ "book_says": {
+  "year": {
+   "value": 1835,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0012$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0012/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "BROOKLYN, NEW YORK \u00a9 *\n1835-36\nBrooklyn Directory, for 1835-36. Pub",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1835,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "BROOKLYN, NEW YORK \u00a9 *\n1835-36\nBrooklyn Directory, for 1835-36. Pub"
+   },
+   {
+    "year": 1835,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "ORK \u00a9 *\n1835-36\nBrooklyn Directory, for 1835-36. Published by\nLewis Nichols. For sal"
+   },
+   {
+    "year": 1835,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "ed by Lewis\nNichols, 112 Bridge-street. 1835."
+   }
+  ],
+  "publisher": {
+   "value": "Lewis",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0012$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0012/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "Printed by Lewis",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "BROOKLYN DIRECTORY, Li } FOR o 1835236. . \u00bb",
+   "leaf": 4,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0012$4/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0012/page/n4_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN / DIRECTORY, / Li } / FOR / o / 1835236. . / \u00bb",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 14,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0012$14/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0012/page/n14_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "\u2014,\nNote.\u2014h. stands for house, 0. for near, and \u00a2. for comer.\nNames having an * are of colored people.\nBBOT DANIEL, tavern and livery\nAbbot, widow, Joralemon n Fulton.\nAbel",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 4919866,
+  "hocr_sha1": "8f5ec198cab2abcaefa973f976ed3213bab7958b",
+  "hocr_mtime": "1708555577",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 53,
+  "leaves": 108,
+  "filled": 74,
+  "high_confidence": 5,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1835/36",
+   "title": "Brooklyn Directory for 1835-1836",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Spooner-era Brooklyn; col=1 verified 1848/49 sample (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn Directory for 1835-1836",
+   "date": "1835-1836",
+   "year": null,
+   "publisher": "Lewis Nichols",
+   "creator": "Nichols, Lewis",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "108",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126023231",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "target_card",
+    "lines": 7,
+    "chars": 249
+   },
+   "2": {
+    "class": "other",
+    "lines": 1,
+    "chars": 17
+   },
+   "3": {
+    "class": "other",
+    "lines": 21,
+    "chars": 674
+   },
+   "4": {
+    "class": "title_page",
+    "lines": 16,
+    "chars": 250
+   },
+   "5": {
+    "class": "other",
+    "lines": 2,
+    "chars": 41
+   },
+   "6": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1130
+   },
+   "7": {
+    "class": "other",
+    "lines": 35,
+    "chars": 1375
+   },
+   "8": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1325
+   },
+   "9": {
+    "class": "other",
+    "lines": 36,
+    "chars": 1588
+   },
+   "10": {
+    "class": "other",
+    "lines": 36,
+    "chars": 1510
+   },
+   "11": {
+    "class": "other",
+    "lines": 25,
+    "chars": 733
+   },
+   "12": {
+    "class": "other",
+    "lines": 50,
+    "chars": 2354
+   },
+   "13": {
+    "class": "other",
+    "lines": 22,
+    "chars": 599
+   },
+   "14": {
+    "class": "legend",
+    "lines": 12,
+    "chars": 372
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 48,
+    "chars": 1456
+   },
+   "16": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1330
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1244
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1340
+   },
+   "19": {
+    "class": "other",
+    "lines": 37,
+    "chars": 1288
+   },
+   "20": {
+    "class": "other",
+    "lines": 35,
+    "chars": 1296
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 913
+   },
+   "22": {
+    "class": "other",
+    "lines": 37,
+    "chars": 1227
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1396
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1329
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 24,
+    "chars": 794
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1291
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1284
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1322
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1331
+   }
+  },
+  "title_page_leaf": 4,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 1,
+  "contents_leaf": null,
+  "legend_leaves": [
+   14
+  ]
+ },
+ "frontmatter_read": "2026-09-12",
+ "error": "HTTPError: HTTP Error 500: Internal Server Error"
+}

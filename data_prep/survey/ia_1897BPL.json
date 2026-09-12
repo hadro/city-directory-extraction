@@ -1,0 +1,288 @@
+{
+ "source": "ia",
+ "id": "1897BPL",
+ "book_says": {
+  "year": {
+   "value": 1896,
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/1897BPL$21/canvas",
+   "image": "https://archive.org/download/1897BPL/page/n21_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "in the year eighteen hundred and ninety-six,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words",
+   "other_years_on_page": [
+    1896,
+    1897
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1897,
+    "how": "digits",
+    "leaf": 21,
+    "quote": "KLYN\nDIRECTORY\nTHE YEAR ENDIId MAY 1st,\n1897.\nPUBLISHED BY LAIN & HEALY.\nK. C. LAIN."
+   },
+   {
+    "year": 1896,
+    "how": "words",
+    "leaf": 21,
+    "quote": "in the year eighteen hundred and ninety-six,"
+   }
+  ],
+  "publisher": {
+   "value": "LAIN & HEALY",
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/1897BPL$21/canvas",
+   "image": "https://archive.org/download/1897BPL/page/n21_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Act of Congress, in the year eighteen hundred and ninety-six, By LAIN & HEALY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "title": {
+   "value": "LAIN & HEALY'S BROOKLYN DIRECTORY THE YEAR ENDIId MAY 1st,",
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/1897BPL$21/canvas",
+   "image": "https://archive.org/download/1897BPL/page/n21_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "LAIN & HEALY'S / BROOKLYN / DIRECTORY / THE YEAR ENDIId MAY 1st,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 29,
+   "canvas": "https://iiif.archive.org/iiif/1897BPL$29/canvas",
+   "image": "https://archive.org/download/1897BPL/page/n29_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "rtising Patrofc8\"Blj#j\u00ab IwiiMiocUbyjsaterring to the Index.\nABBREVIATIONS, ETC.\nAcct. accountant ; agl. agricultural ; agt. agent ; Ala Alabama ; al aZZey ; art. artificial;\nasst. assistant ; av auemu",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 19,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 299935522,
+  "hocr_sha1": "e4ffbfb0d8fd59b40837d41e039f2f54f51c604e",
+  "hocr_mtime": "1632345168",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 93,
+  "leaves": 1764,
+  "filled": 1689,
+  "high_confidence": 498,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1897",
+   "title": "Lain & Healy's Brooklyn Directory for the year ending May 1, 1897",
+   "column_count": null,
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "REVIEW: matches held-out eval signature \u2014 keep OUT of harvest set or confirm; EVAL HELDOUT \u2014 Lain & Healy 1897, do not sample/backfill (title-triage s4)"
+  },
+  "ia": {
+   "title": "Lain & Healy's Brooklyn Directory for the year ending May 1, 1897",
+   "date": "1897",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Healy",
+   "contributor": null,
+   "imagecount": "1764",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 31,
+    "chars": 1263
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 782
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 664
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 10,
+    "chars": 399
+   },
+   "5": {
+    "class": "other",
+    "lines": 18,
+    "chars": 607
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 15,
+    "chars": 399
+   },
+   "7": {
+    "class": "other",
+    "lines": 16,
+    "chars": 605
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1336
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 13,
+    "chars": 549
+   },
+   "10": {
+    "class": "other",
+    "lines": 12,
+    "chars": 399
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 32,
+    "chars": 1315
+   },
+   "12": {
+    "class": "other",
+    "lines": 51,
+    "chars": 1073
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 18,
+    "chars": 593
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 779
+   },
+   "15": {
+    "class": "other",
+    "lines": 35,
+    "chars": 653
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 316,
+    "chars": 5905
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 340,
+    "chars": 6570
+   },
+   "19": {
+    "class": "other",
+    "lines": 17,
+    "chars": 946
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 10,
+    "chars": 282
+   },
+   "21": {
+    "class": "title_page",
+    "lines": 14,
+    "chars": 458
+   },
+   "22": {
+    "class": "other",
+    "lines": 41,
+    "chars": 1507
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 2632
+   },
+   "24": {
+    "class": "contents",
+    "lines": 144,
+    "chars": 4897
+   },
+   "25": {
+    "class": "contents",
+    "lines": 174,
+    "chars": 5839
+   },
+   "26": {
+    "class": "other",
+    "lines": 44,
+    "chars": 1493
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 11,
+    "chars": 219
+   },
+   "28": {
+    "class": "other",
+    "lines": 97,
+    "chars": 3270
+   },
+   "29": {
+    "class": "legend",
+    "lines": 100,
+    "chars": 3508
+   }
+  },
+  "title_page_leaf": 21,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 24,
+  "legend_leaves": [
+   29
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

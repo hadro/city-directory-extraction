@@ -1,0 +1,283 @@
+{
+ "source": "ia",
+ "id": "brooklynnewyork1903p1geor",
+ "book_says": {
+  "year": {
+   "value": 1903,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1903p1geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyork1903p1geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "EW YORK CITY.\nVOLUME LXXX.\nFOR THE YEAR\n1903.\nPa,/\nGEORGE UPINGTON, Publisher.\n' .-",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1903,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "EW YORK CITY.\nVOLUME LXXX.\nFOR THE YEAR\n1903.\nPa,/\nGEORGE UPINGTON, Publisher.\n' .-"
+   }
+  ],
+  "year_covered": {
+   "value": 1903,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1903p1geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyork1903p1geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "EW YORK CITY.\nVOLUME LXXX.\nFOR THE YEAR\n1903.\nPa,/\nGEORGE UPINGTON, Publisher.\n' .-",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "GEORGE UPINGTON",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1903p1geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyork1903p1geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "GEORGE UPINGTON, Publisher",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "volume_number": {
+   "value": 80,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1903p1geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyork1903p1geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXX",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "vv^ UPINGTON'5 GENERAL DIRECTORY OF BROOKLYN NEW YORK CITY.",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1903p1geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyork1903p1geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "vv^ / UPINGTON'5 / GENERAL DIRECTORY / OF BROOKLYN / NEW YORK CITY.",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 119563214,
+  "hocr_sha1": "aca2039dc04b70c5b25ee4e60fc392f531e49139",
+  "hocr_mtime": "1632665870",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 12,
+  "leaves": 1164,
+  "filled": 50,
+  "high_confidence": 1,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1903",
+   "title": "Brooklyn, New York, city directory",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "part 1; Upington Gen.Dir. of Brooklyn; col=2 verified 1906 title page (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn, New York, city directory",
+   "date": "1903",
+   "year": null,
+   "publisher": "George Upington",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1166",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130501150905",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 2,
+    "chars": 34
+   },
+   "3": {
+    "class": "collection-stamp",
+    "lines": 2,
+    "chars": 45
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 19,
+    "chars": 432
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 49,
+    "chars": 942
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 922
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 15,
+    "chars": 218
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 1102
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 40,
+    "chars": 1419
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 509
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 22,
+    "chars": 527
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 71,
+    "chars": 1496
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "trade-association-page",
+    "lines": 32,
+    "chars": 1143
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 806
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

@@ -1,0 +1,268 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldir1909p3trow",
+ "book_says": {
+  "year": {
+   "value": 1909,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1909p3trow/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "OL. CXXIL\nFOR THE YEAR ENDING\nAUGUST 1, 1909\nPUBLISHED ANNUALLY\nBY\nTROW DIRECTORY, P",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1909,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "OL. CXXIL\nFOR THE YEAR ENDING\nAUGUST 1, 1909\nPUBLISHED ANNUALLY\nBY\nTROW DIRECTORY, P"
+   }
+  ],
+  "year_covered": {
+   "value": 1909,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1909p3trow/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "OL. CXXIL\nFOR THE YEAR ENDING\nAUGUST 1, 1909\nPUBLISHED ANNUALLY\nBY\nTROW DIRECTORY, P",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "volume_number": {
+   "value": 129,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1909p3trow/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOL. CXXIL",
+   "method": "hocr-text",
+   "confidence": "high"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 198728735,
+  "hocr_sha1": "81b24f06b75b62db84e4845f7deea2c1899c8b6f",
+  "hocr_mtime": "1633878694",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 9,
+  "leaves": 1214,
+  "filled": 33,
+  "high_confidence": 1,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1909",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan | part 3; Trow; col=3 (s4: bracketed 1859-1915 all 3-col + 1890s card)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1909",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1216",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130424125048",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 1,
+    "chars": 16
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 4,
+    "chars": 46
+   },
+   "3": {
+    "class": "other",
+    "lines": 1,
+    "chars": 17
+   },
+   "4": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "5": {
+    "class": "title_page",
+    "lines": 21,
+    "chars": 372
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "other",
+    "lines": 394,
+    "chars": 9425
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 374,
+    "chars": 9738
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 374,
+    "chars": 9398
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 384,
+    "chars": 10322
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 373,
+    "chars": 9047
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "other",
+    "lines": 370,
+    "chars": 9673
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 366,
+    "chars": 8404
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 358,
+    "chars": 8723
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 369,
+    "chars": 9171
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 376,
+    "chars": 9646
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 379,
+    "chars": 10270
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "other",
+    "lines": 377,
+    "chars": 9455
+   }
+  },
+  "title_page_leaf": 5,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   5
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/trowsgeneraldir1909p3trow/page/n5_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

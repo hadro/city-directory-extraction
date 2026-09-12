@@ -1,0 +1,304 @@
+{
+ "source": "ia",
+ "id": "1906BPL",
+ "book_says": {
+  "year": {
+   "value": 1906,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1906BPL$1/canvas",
+   "image": "https://archive.org/download/1906BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "IN THE YEAR NINETEEN HUNDRED AND SIX,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words"
+  },
+  "year_attestations": [
+   {
+    "year": 1906,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "OF NEW YORK\nVOLUME LXXXIII\nFOR THE YEAR\n1906\nGEORGE UPINGTON, Publisher\nOFFICE\n31T W"
+   },
+   {
+    "year": 1906,
+    "how": "words",
+    "leaf": 1,
+    "quote": "IN THE YEAR NINETEEN HUNDRED AND SIX,"
+   }
+  ],
+  "year_covered": {
+   "value": 1906,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1906BPL$1/canvas",
+   "image": "https://archive.org/download/1906BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "OF NEW YORK\nVOLUME LXXXIII\nFOR THE YEAR\n1906\nGEORGE UPINGTON, Publisher\nOFFICE\n31T W",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "GEORGE UPINGTON",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1906BPL$1/canvas",
+   "image": "https://archive.org/download/1906BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "GEORGE UPINGTON, Publisher",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "volume_number": {
+   "value": 83,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1906BPL$1/canvas",
+   "image": "https://archive.org/download/1906BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXXIII",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "U PI NGTON\u2019S GENERAL DIRECTORY OF THE BOROUGH OF BROOKLYN CITY OF NEW YORK",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1906BPL$1/canvas",
+   "image": "https://archive.org/download/1906BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "U PI NGTON\u2019S / GENERAL DIRECTORY / OF THE BOROUGH OF / BROOKLYN / CITY OF NEW YORK",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/1906BPL$9/canvas",
+   "image": "https://archive.org/download/1906BPL/page/n9_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "Advertising Patrons may be found by referring to thejtndex.\nABBREVIATIONS\nAcct. accountant; agl. agricultural; agt. agent; Ala. Alabama; al alley; art.\nartificial; asst, assistant; av avenue; bldg bui",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 20,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 305071912,
+  "hocr_sha1": "b27f18d6fe48d69ecf9d2809c1326b027b06dcaa",
+  "hocr_mtime": "1632344408",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 96.2609736632083,
+  "leaves": 1253,
+  "filled": 1245,
+  "high_confidence": 1203,
+  "ocr_value_leaves": 1221,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1906",
+   "title": "Upington's General Directory for the Borough of Brooklyn, City of New York, for the year 1906",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Upington col=2 (BPL scan, see upington card; likely dup of *geor copy; s4)"
+  },
+  "ia": {
+   "title": "Upington's General Directory for the Borough of Brooklyn, City of New York, for the year 1906",
+   "date": "1906",
+   "year": null,
+   "publisher": null,
+   "creator": "George Upington",
+   "contributor": null,
+   "imagecount": "1254",
+   "ocr": "ABBYY FineReader 11.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 35,
+    "chars": 1170
+   },
+   "1": {
+    "class": "title_page",
+    "lines": 15,
+    "chars": 404
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 971
+   },
+   "3": {
+    "class": "trade-association-page",
+    "lines": 32,
+    "chars": 1161
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 412
+   },
+   "5": {
+    "class": "contents",
+    "lines": 133,
+    "chars": 4263
+   },
+   "6": {
+    "class": "other",
+    "lines": 150,
+    "chars": 4617
+   },
+   "7": {
+    "class": "contents",
+    "lines": 126,
+    "chars": 3643
+   },
+   "8": {
+    "class": "other",
+    "lines": 68,
+    "chars": 2089
+   },
+   "9": {
+    "class": "legend",
+    "lines": 157,
+    "chars": 4584
+   },
+   "10": {
+    "class": "other",
+    "lines": 217,
+    "chars": 6428
+   },
+   "11": {
+    "class": "other",
+    "lines": 264,
+    "chars": 5813
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 280,
+    "chars": 6201
+   },
+   "13": {
+    "class": "other",
+    "lines": 222,
+    "chars": 6575
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 254,
+    "chars": 6229
+   },
+   "15": {
+    "class": "other",
+    "lines": 320,
+    "chars": 6519
+   },
+   "16": {
+    "class": "other",
+    "lines": 251,
+    "chars": 6180
+   },
+   "17": {
+    "class": "other",
+    "lines": 321,
+    "chars": 6558
+   },
+   "18": {
+    "class": "other",
+    "lines": 219,
+    "chars": 6417
+   },
+   "19": {
+    "class": "other",
+    "lines": 309,
+    "chars": 6459
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 257,
+    "chars": 6042
+   },
+   "21": {
+    "class": "other",
+    "lines": 313,
+    "chars": 6618
+   },
+   "22": {
+    "class": "other",
+    "lines": 291,
+    "chars": 6389
+   },
+   "23": {
+    "class": "other",
+    "lines": 234,
+    "chars": 6325
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 235,
+    "chars": 5356
+   },
+   "25": {
+    "class": "other",
+    "lines": 278,
+    "chars": 6524
+   },
+   "26": {
+    "class": "other",
+    "lines": 330,
+    "chars": 6474
+   },
+   "27": {
+    "class": "other",
+    "lines": 304,
+    "chars": 6353
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 232,
+    "chars": 6128
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 239,
+    "chars": 6340
+   }
+  },
+  "title_page_leaf": 1,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 5,
+  "legend_leaves": [
+   9
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

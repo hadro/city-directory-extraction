@@ -1,0 +1,269 @@
+{
+ "source": "ia",
+ "id": "brooklynnewyorkc19123broo",
+ "book_says": {
+  "year": {
+   "value": 1911,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc19123broo$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc19123broo/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ion of this book\npublished for the year 1911\n1912\nBROOKLYN DIRECTORY CO.\nPUBLISHERS",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1911,
+    1912
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1911,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "ion of this book\npublished for the year 1911\n1912\nBROOKLYN DIRECTORY CO.\nPUBLISHERS"
+   },
+   {
+    "year": 1912,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "f this book\npublished for the year 1911\n1912\nBROOKLYN DIRECTORY CO.\nPUBLISHERS\n317 W"
+   }
+  ],
+  "year_covered": {
+   "value": 1911,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc19123broo$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc19123broo/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ion of this book\npublished for the year 1911\n1912\nBROOKLYN DIRECTORY CO.\nPUBLISHERS",
+   "method": "hocr-text",
+   "confidence": "high"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 31139383,
+  "hocr_sha1": "5251e492f01521fca836bdf7d920864d8b7bb3bf",
+  "hocr_mtime": "1632665101",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 1070,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": null,
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1912",
+   "title": "Brooklyn, New York, city directory",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "post-1900 Brooklyn 1912; needs sample (publisher+col); dup w/ geor set (s4); post-1900 Brooklyn city dir col=2 (s4: per 1912broo sample); publisher unverified"
+  },
+  "ia": {
+   "title": "Brooklyn, New York, city directory",
+   "date": "1912",
+   "year": null,
+   "publisher": "Brooklyn Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1074",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20090105194117",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": "NOT_IN_COPYRIGHT",
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 7,
+    "chars": 80
+   },
+   "3": {
+    "class": "other",
+    "lines": 1,
+    "chars": 17
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 14,
+    "chars": 249
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 113,
+    "chars": 2086
+   },
+   "10": {
+    "class": "other",
+    "lines": 1,
+    "chars": 11
+   },
+   "11": {
+    "class": "other",
+    "lines": 39,
+    "chars": 604
+   },
+   "12": {
+    "class": "other",
+    "lines": 1,
+    "chars": 8
+   },
+   "13": {
+    "class": "other",
+    "lines": 130,
+    "chars": 2733
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 205,
+    "chars": 6996
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 64,
+    "chars": 1295
+   },
+   "18": {
+    "class": "other",
+    "lines": 1,
+    "chars": 6
+   },
+   "19": {
+    "class": "other",
+    "lines": 139,
+    "chars": 2998
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 119,
+    "chars": 2322
+   },
+   "22": {
+    "class": "other",
+    "lines": 1,
+    "chars": 8
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 134,
+    "chars": 3861
+   },
+   "24": {
+    "class": "other",
+    "lines": 2,
+    "chars": 12
+   },
+   "25": {
+    "class": "other",
+    "lines": 81,
+    "chars": 730
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 184,
+    "chars": 3754
+   },
+   "28": {
+    "class": "other",
+    "lines": 2,
+    "chars": 8
+   },
+   "29": {
+    "class": "other",
+    "lines": 42,
+    "chars": 597
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "weak_title_page": 3,
+  "image_read_candidates": [
+   7
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/brooklynnewyorkc19123broo/page/n7_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

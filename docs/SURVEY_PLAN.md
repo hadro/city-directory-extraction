@@ -171,6 +171,57 @@ for, Jenkins is who published it. 1906BPL's title page names *GEORGE UPINGTON* a
 the OCR). These want separate fields: `compiler`, `publisher`, `printer`. Until they exist, the
 report treats surname containment as agreement so the genuinely different houses stand out.
 
+### Phase 0 results (run 2026-09-12, all 184 IA volumes)
+
+| | |
+|---|---:|
+| `frontmatter-done` | **103** |
+| `needs-image-read` | **81** |
+| field confirmations | **312 agree** |
+| conflicts | **61** |
+| claims extracted | year 141 · title 104 · publisher 93 · volume_number 61 · legend 60 |
+| `year_covered` / `year_published` recorded separately | 42 / 21 |
+| legend location | dedicated key page 20 · inline at listing head 40 |
+
+Cells the survey can now fill: **86** `start/end_page` + `page_offset` (free, tier A/B), **61**
+`volume_number` (a new column), **55** `key_page`.
+
+**Twice as many legends are inline as are on a dedicated page (40 vs 20).** The `key_page` column
+assumes a page; it needs a companion `legend_location`.
+
+### Four witnesses, not two — and the CSV is not IA
+
+Year conflicts are adjudicated by **four independent witnesses**: the CSV, IA's `date`, a year
+embedded in the IA identifier, and the page. Counting the CSV as part of "the catalog" destroys
+the signal — `longworthsameric1839newy` has csv 1839, page 1839, identifier 1839 and IA 1816,
+which is 3-1, not a stand-off. The 61 conflicts sort into a work queue:
+
+- **the READ is the outlier → send the image (22)**
+- **publisher, no year witness (19)**
+- **the CATALOG is the outlier, IA wrong (16)** — findings, below
+- split, no majority (4)
+
+**All 16 catalog-outlier cases are IA metadata errors the page disproves**, and they cluster:
+
+- **IA dates an entire series from its first volume.** Every `longworthsameric*` volume is dated
+  **1797**; the books say 1814, 1816, 1835, 1836, 1839, 1840 — attested by `YEAR OF OUR LORD 1814`
+  and by the regnal formula (`Sixty-first Year of American Independence` = 1836). Same pattern on
+  Trow: `trowsgeneraldire19032trow` and `19073trow` are both dated **1853** by IA against printed
+  `JULY 1, 1903` and `JULY 1, 1907`. This resolves the README's "Durst `longworthsameric*` rows
+  have blank years" cleanup lead — the volumes identify themselves.
+- **`newyorkbrooklynd00durs`: IA `date` 1876, page `For 1786`** — a digit transposition.
+- **`newyorkdirectory00fran` and `_0`: IA 1889, page 1786** — 1889 is the facsimile reprint date,
+  and the imprint on one of them names `THE TROW CITY DIRECTORY COMPANY`, confirming which row is
+  the reprint rather than the original.
+- **Upington 1906/1907 are both dated 1903 by IA**; the pages say 1906 and 1907, and the printed
+  volume numbers corroborate independently — LXXXIII then LXXXIV.
+
+Two operational notes. **IA returns transient 500s**: 4 of 184 volumes failed on one sweep and all
+four succeeded on a plain retry, so the Range fetch retries 3× — without it, live volumes land in
+the failure register as dead. And the extracted front-matter **text** is cached in
+`data/survey_fm_text/` (12 MB, 181 volumes), so re-running the extraction is instant and offline;
+this file was rewritten three times at ~3 network-hours each before that existed.
+
 ### Negative results — do not re-derive these
 
 - **Voting the running head across a volume does not confirm the title.** Expected ~1,200

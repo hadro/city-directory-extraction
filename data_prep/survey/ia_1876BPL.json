@@ -1,0 +1,305 @@
+{
+ "source": "ia",
+ "id": "1876BPL",
+ "book_says": {
+  "year": {
+   "value": 1875,
+   "leaf": 15,
+   "canvas": "https://iiif.archive.org/iiif/1876BPL$15/canvas",
+   "image": "https://archive.org/download/1876BPL/page/n15_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "in the year eighteen hundred and seventy -five,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words",
+   "other_years_on_page": [
+    1840,
+    1847,
+    1872,
+    1875,
+    1876
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1876,
+    "how": "digits",
+    "leaf": 15,
+    "quote": "d Business\nFOR\nTHE YEAR ENDING MAY 1st,\n1876.\nooasTTA-HTiisro also a.\n1TREET AND AVE"
+   },
+   {
+    "year": 1875,
+    "how": "words",
+    "leaf": 15,
+    "quote": "in the year eighteen hundred and seventy -five,"
+   },
+   {
+    "year": 1847,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "ed circular and prico Hit.\nAddress, Box 1847, New York Post-Office.\nH. W. COLLENDER,"
+   },
+   {
+    "year": 1872,
+    "how": "digits",
+    "leaf": 8,
+    "quote": "ater Apparatus,\n1 1* \\ i kntkh Skit. 7, 1872. |\nFor Warming nml Ventilating Itwellin"
+   },
+   {
+    "year": 1840,
+    "how": "digits",
+    "leaf": 18,
+    "quote": "e Brooklyn Directory of each year, from 1840 to\ndate, and Directories of the princip"
+   }
+  ],
+  "year_published": {
+   "value": 1847,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1876BPL$1/canvas",
+   "image": "https://archive.org/download/1876BPL/page/n1_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "ed circular and prico Hit.\nAddress, Box 1847, New York Post-Office.\nH. W. COLLENDER,",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "LAIN & COMPANY",
+   "leaf": 15,
+   "canvas": "https://iiif.archive.org/iiif/1876BPL$15/canvas",
+   "image": "https://archive.org/download/1876BPL/page/n15_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "act of Congress, in the year eighteen hundred and seventy -five, By LAIN & COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "title": {
+   "value": "s I.AIN's BROOKLYN DIRECTORY. JOHN A. SCOLLAY, [MPROV BD Hot Water Apparatus,",
+   "leaf": 8,
+   "canvas": "https://iiif.archive.org/iiif/1876BPL$8/canvas",
+   "image": "https://archive.org/download/1876BPL/page/n8_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "s / I.AIN's BROOKLYN DIRECTORY. / JOHN A. SCOLLAY, / [MPROV BD / Hot Water Apparatus,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 169506380,
+  "hocr_sha1": "ae104c123c25d88772bda455ba4825f45fb2ac10",
+  "hocr_mtime": "1632344514",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 20,
+  "leaves": 1248,
+  "filled": 182,
+  "high_confidence": 11,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1876",
+   "title": "The Brooklyn City and Business Directory for the year ending May 1, 1876",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain; col=2 verified via 1858/1869 title pages (s4)"
+  },
+  "ia": {
+   "title": "The Brooklyn City and Business Directory for the year ending May 1, 1876",
+   "date": "1876",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1248",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 32,
+    "chars": 1331
+   },
+   "1": {
+    "class": "copyright_page",
+    "lines": 28,
+    "chars": 1607
+   },
+   "2": {
+    "class": "other",
+    "lines": 20,
+    "chars": 554
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 757
+   },
+   "4": {
+    "class": "other",
+    "lines": 31,
+    "chars": 1143
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 19,
+    "chars": 480
+   },
+   "6": {
+    "class": "other",
+    "lines": 21,
+    "chars": 740
+   },
+   "7": {
+    "class": "other",
+    "lines": 60,
+    "chars": 927
+   },
+   "8": {
+    "class": "title_page",
+    "lines": 32,
+    "chars": 1088
+   },
+   "9": {
+    "class": "other",
+    "lines": 25,
+    "chars": 871
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 2143
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 5,
+    "chars": 146
+   },
+   "12": {
+    "class": "other",
+    "lines": 33,
+    "chars": 840
+   },
+   "13": {
+    "class": "other",
+    "lines": 18,
+    "chars": 732
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 35,
+    "chars": 1590
+   },
+   "15": {
+    "class": "title_page",
+    "lines": 18,
+    "chars": 533
+   },
+   "16": {
+    "class": "other",
+    "lines": 40,
+    "chars": 1452
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 2361
+   },
+   "18": {
+    "class": "title_page",
+    "lines": 33,
+    "chars": 1632
+   },
+   "19": {
+    "class": "contents",
+    "lines": 103,
+    "chars": 3481
+   },
+   "20": {
+    "class": "other",
+    "lines": 134,
+    "chars": 4417
+   },
+   "21": {
+    "class": "contents",
+    "lines": 134,
+    "chars": 4185
+   },
+   "22": {
+    "class": "contents",
+    "lines": 133,
+    "chars": 4208
+   },
+   "23": {
+    "class": "other",
+    "lines": 78,
+    "chars": 1100
+   },
+   "24": {
+    "class": "other",
+    "lines": 107,
+    "chars": 3509
+   },
+   "25": {
+    "class": "other",
+    "lines": 49,
+    "chars": 1501
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 17,
+    "chars": 521
+   },
+   "27": {
+    "class": "other",
+    "lines": 4,
+    "chars": 96
+   },
+   "28": {
+    "class": "other",
+    "lines": 7,
+    "chars": 169
+   },
+   "29": {
+    "class": "other",
+    "lines": 26,
+    "chars": 1499
+   }
+  },
+  "title_page_leaf": 15,
+  "copyright_page_leaf": 1,
+  "target_card_leaf": null,
+  "contents_leaf": 19,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

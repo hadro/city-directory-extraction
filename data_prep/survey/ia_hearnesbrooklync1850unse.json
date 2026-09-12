@@ -1,0 +1,277 @@
+{
+ "source": "ia",
+ "id": "hearnesbrooklync1850unse",
+ "book_says": {
+  "year": {
+   "value": 1850,
+   "leaf": 10,
+   "canvas": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$10/canvas",
+   "image": "https://archive.org/download/hearnesbrooklync1850unse/page/n10_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "cording to Act of Congress, in the year 1850, hy\nHENRY R. & WILLIAM J. HEARNE,\nIn th",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1850,
+    "how": "digits",
+    "leaf": 10,
+    "quote": "cording to Act of Congress, in the year 1850, hy\nHENRY R. & WILLIAM J. HEARNE,\nIn th"
+   }
+  ],
+  "year_published": {
+   "value": 1850,
+   "leaf": 10,
+   "canvas": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$10/canvas",
+   "image": "https://archive.org/download/hearnesbrooklync1850unse/page/n10_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "cording to Act of Congress, in the year 1850, hy\nHENRY R. & WILLIAM J. HEARNE,\nIn th",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "BROOKLYN DIRECTORY. 21 Allison John P, builder Cottage place 106 Columbia Allison William, salesman Wyckoff n Bond Alshelsky Theodore, furrier Bergen n Powers A",
+   "leaf": 29,
+   "canvas": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$29/canvas",
+   "image": "https://archive.org/download/hearnesbrooklync1850unse/page/n29_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY. / 21 / Allison John P, builder Cottage place 106 Columbia / Allison William, salesman Wyckoff n Bond / Alshelsky Theodore, furrier Bergen n Powers / Althiser William, carpenter DeK",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 25,
+   "canvas": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$25/canvas",
+   "image": "https://archive.org/download/hearnesbrooklync1850unse/page/n25_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "NOTE. \u2014 Names having a * are the names of colored people. \u2014\nAbbreviations : h. stands for house, n, for near, c. for corner, op. for\nopposite, b. for between. The precise location of residences thus d",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 21080670,
+  "hocr_sha1": "bb40a07647cb81626320d11ffaab9eae9b2cbd77",
+  "hocr_mtime": "1699798157",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 100,
+  "leaves": 486,
+  "filled": 468,
+  "high_confidence": 359,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Hearnes",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1850",
+   "title": "Hearnes' Brooklyn city directory for ...",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "16",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "offset drifts +16->+22 (leaf152=p.136, leaf352=p.330); 1 col; visually sampled 2026-06-19"
+  },
+  "ia": {
+   "title": "Hearnes' Brooklyn city directory for ...",
+   "date": "1851",
+   "year": null,
+   "publisher": "Brooklyn [N.Y.] : H.R. Hearne and W.H. Hearne",
+   "creator": null,
+   "contributor": "Columbia University Libraries",
+   "imagecount": "488",
+   "ocr": null,
+   "scandate": "20131203160349",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "bookplate",
+    "lines": 10,
+    "chars": 285
+   },
+   "3": {
+    "class": "bookplate",
+    "lines": 2,
+    "chars": 83
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "other",
+    "lines": 39,
+    "chars": 722
+   },
+   "8": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 93
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 10,
+    "chars": 176
+   },
+   "10": {
+    "class": "copyright_page",
+    "lines": 10,
+    "chars": 267
+   },
+   "11": {
+    "class": "other",
+    "lines": 29,
+    "chars": 951
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 68,
+    "chars": 351
+   },
+   "14": {
+    "class": "other",
+    "lines": 20,
+    "chars": 823
+   },
+   "15": {
+    "class": "other",
+    "lines": 25,
+    "chars": 965
+   },
+   "16": {
+    "class": "other",
+    "lines": 9,
+    "chars": 314
+   },
+   "17": {
+    "class": "other",
+    "lines": 14,
+    "chars": 454
+   },
+   "18": {
+    "class": "other",
+    "lines": 16,
+    "chars": 479
+   },
+   "19": {
+    "class": "other",
+    "lines": 21,
+    "chars": 684
+   },
+   "20": {
+    "class": "other",
+    "lines": 23,
+    "chars": 871
+   },
+   "21": {
+    "class": "other",
+    "lines": 19,
+    "chars": 588
+   },
+   "22": {
+    "class": "other",
+    "lines": 26,
+    "chars": 1498
+   },
+   "23": {
+    "class": "other",
+    "lines": 19,
+    "chars": 491
+   },
+   "24": {
+    "class": "other",
+    "lines": 5,
+    "chars": 154
+   },
+   "25": {
+    "class": "legend",
+    "lines": 33,
+    "chars": 1235
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 1870
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 1812
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 1786
+   },
+   "29": {
+    "class": "title_page",
+    "lines": 44,
+    "chars": 1659
+   }
+  },
+  "title_page_leaf": 29,
+  "copyright_page_leaf": 10,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   25
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

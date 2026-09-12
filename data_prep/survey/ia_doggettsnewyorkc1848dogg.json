@@ -1,0 +1,288 @@
+{
+ "source": "ia",
+ "id": "doggettsnewyorkc1848dogg",
+ "book_says": {
+  "year": {
+   "value": 1848,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1848dogg$5/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1848dogg/page/n5_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "TED\nWITH\nMAPS OF NEW YORK AND BROOKLYN.\n1848 -1849.\nScucntl) Publication.\nNew York;",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1848,
+    1849
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1848,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "TED\nWITH\nMAPS OF NEW YORK AND BROOKLYN.\n1848 -1849.\nScucntl) Publication.\nNew York;"
+   },
+   {
+    "year": 1849,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "TH\nMAPS OF NEW YORK AND BROOKLYN.\n1848 -1849.\nScucntl) Publication.\nNew York;\nJOHN D"
+   }
+  ],
+  "publisher": {
+   "value": "JOHN DOGGETT JR",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1848dogg$5/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1848dogg/page/n5_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "JOHN DOGGETT JR., PUBLISHER",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "TO THE PUBLIC. A disappointment respecting the new type intended for this Directory, has delayed the present issue about ten days beyond the expected time of pu",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1848dogg$7/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1848dogg/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "TO THE PUBLIC. / A disappointment respecting the new type intended for this Directory, has delayed the present issue / about ten days beyond the expected time of publication. Considering the dilemma i",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 25,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1848dogg$25/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1848dogg/page/n25_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "ECEIVED TOO LATE FOR REGULAR INSERTION ON A PRECEDING PAGE.\nABBREVIATIONS.\nal. for alley, b. between, bldgs. buildings, c. corner, com. commission, ct. court, e. r. east river, ex. exchange*\nforwdg. f",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 83426655,
+  "hocr_sha1": "69cade13d866d3b90e7a41ea474d4265906a508d",
+  "hocr_mtime": "1636503031",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 79,
+  "leaves": 524,
+  "filled": 445,
+  "high_confidence": 20,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Doggett",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1848",
+   "title": "Doggett's New-York City directory, for ...",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": null
+  },
+  "ia": {
+   "title": "Doggett's New-York City directory, for ...",
+   "date": "1845",
+   "year": null,
+   "publisher": "New-York : J. Doggett, Jr.",
+   "creator": "Doggett, John, 1809-1852",
+   "contributor": "Columbia University Libraries",
+   "imagecount": "526",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": "20131217124142",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 55,
+    "chars": 1911
+   },
+   "2": {
+    "class": "bookplate",
+    "lines": 32,
+    "chars": 1107
+   },
+   "3": {
+    "class": "other",
+    "lines": 52,
+    "chars": 3253
+   },
+   "4": {
+    "class": "other",
+    "lines": 118,
+    "chars": 3591
+   },
+   "5": {
+    "class": "target_card",
+    "lines": 12,
+    "chars": 240
+   },
+   "6": {
+    "class": "copyright_page",
+    "lines": 10,
+    "chars": 356
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 38,
+    "chars": 2505
+   },
+   "8": {
+    "class": "other",
+    "lines": 75,
+    "chars": 6690
+   },
+   "9": {
+    "class": "contents",
+    "lines": 56,
+    "chars": 2212
+   },
+   "10": {
+    "class": "other",
+    "lines": 50,
+    "chars": 662
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 644,
+    "chars": 5569
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 556,
+    "chars": 4836
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 576,
+    "chars": 4964
+   },
+   "14": {
+    "class": "other",
+    "lines": 44,
+    "chars": 1812
+   },
+   "15": {
+    "class": "other",
+    "lines": 64,
+    "chars": 2372
+   },
+   "16": {
+    "class": "other",
+    "lines": 25,
+    "chars": 1333
+   },
+   "17": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "18": {
+    "class": "other",
+    "lines": 40,
+    "chars": 682
+   },
+   "19": {
+    "class": "other",
+    "lines": 52,
+    "chars": 1104
+   },
+   "20": {
+    "class": "other",
+    "lines": 20,
+    "chars": 681
+   },
+   "21": {
+    "class": "other",
+    "lines": 42,
+    "chars": 2385
+   },
+   "22": {
+    "class": "title_page",
+    "lines": 61,
+    "chars": 1507
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 68,
+    "chars": 1839
+   },
+   "24": {
+    "class": "other",
+    "lines": 55,
+    "chars": 3145
+   },
+   "25": {
+    "class": "legend",
+    "lines": 120,
+    "chars": 4831
+   },
+   "26": {
+    "class": "other",
+    "lines": 173,
+    "chars": 6798
+   },
+   "27": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "other",
+    "lines": 173,
+    "chars": 6776
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": 6,
+  "target_card_leaf": 5,
+  "contents_leaf": 9,
+  "legend_leaves": [
+   25
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

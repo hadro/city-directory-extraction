@@ -1,0 +1,264 @@
+{
+ "source": "ia",
+ "id": "1886BPL",
+ "book_says": {
+  "year": {
+   "value": 1885,
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/1886BPL$19/canvas",
+   "image": "https://archive.org/download/1886BPL/page/n19_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "in the year eighteen hundred and eighty-five,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words"
+  },
+  "year_attestations": [
+   {
+    "year": 1885,
+    "how": "words",
+    "leaf": 19,
+    "quote": "in the year eighteen hundred and eighty-five,"
+   }
+  ],
+  "publisher": {
+   "value": "LAIN & COMPANY",
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/1886BPL$19/canvas",
+   "image": "https://archive.org/download/1886BPL/page/n19_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY LAIN & COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "LAIN'S BROOKLYN DIRECTORY The Year Ending Mai 1st, HAROLD anAS^SwAN CONTAINING ALPHABETICAL LIST OF HOUSEHOLDERS AND BUSINESS HOUSES, Ji Street Guide, Municipal",
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/1886BPL$19/canvas",
+   "image": "https://archive.org/download/1886BPL/page/n19_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "LAIN'S / BROOKLYN / DIRECTORY / The Year Ending Mai 1st, / HAROLD anAS^SwAN / CONTAINING / ALPHABETICAL LIST OF HOUSEHOLDERS / AND BUSINESS HOUSES, / Ji Street Guide, Municipal Register, and Map of th",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 206672422,
+  "hocr_sha1": "1b021e2f73cb76084d7e16e81dc662cda4b6e807",
+  "hocr_mtime": "1632344994",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 14,
+  "leaves": 1320,
+  "filled": 106,
+  "high_confidence": 3,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1886",
+   "title": "Lain's Brooklyn Directory for the year ending May 1, 1886",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "60",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "offset +60 at p.336 (leaf396); 2 col; visually sampled 2026-06-19"
+  },
+  "ia": {
+   "title": "Lain's Brooklyn Directory for the year ending May 1, 1886",
+   "date": "1886",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1320",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 30,
+    "chars": 1248
+   },
+   "1": {
+    "class": "other",
+    "lines": 21,
+    "chars": 1245
+   },
+   "2": {
+    "class": "other",
+    "lines": 8,
+    "chars": 464
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 319
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 907
+   },
+   "5": {
+    "class": "other",
+    "lines": 20,
+    "chars": 561
+   },
+   "6": {
+    "class": "other",
+    "lines": 65,
+    "chars": 1926
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1498
+   },
+   "8": {
+    "class": "other",
+    "lines": 25,
+    "chars": 730
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 1239
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 1240
+   },
+   "11": {
+    "class": "other",
+    "lines": 44,
+    "chars": 1730
+   },
+   "12": {
+    "class": "other",
+    "lines": 28,
+    "chars": 1253
+   },
+   "13": {
+    "class": "other",
+    "lines": 16,
+    "chars": 465
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 55,
+    "chars": 1218
+   },
+   "15": {
+    "class": "copyright_page",
+    "lines": 41,
+    "chars": 2357
+   },
+   "16": {
+    "class": "front_matter",
+    "lines": 122,
+    "chars": 4207
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 10,
+    "chars": 339
+   },
+   "18": {
+    "class": "other",
+    "lines": 11,
+    "chars": 307
+   },
+   "19": {
+    "class": "title_page",
+    "lines": 20,
+    "chars": 603
+   },
+   "20": {
+    "class": "other",
+    "lines": 16,
+    "chars": 725
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 1792
+   },
+   "22": {
+    "class": "contents",
+    "lines": 157,
+    "chars": 5458
+   },
+   "23": {
+    "class": "contents",
+    "lines": 175,
+    "chars": 5535
+   },
+   "24": {
+    "class": "other",
+    "lines": 176,
+    "chars": 5741
+   },
+   "25": {
+    "class": "contents",
+    "lines": 176,
+    "chars": 5717
+   },
+   "26": {
+    "class": "other",
+    "lines": 37,
+    "chars": 1282
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 1060
+   },
+   "28": {
+    "class": "other",
+    "lines": 66,
+    "chars": 2128
+   },
+   "29": {
+    "class": "other",
+    "lines": 59,
+    "chars": 2273
+   }
+  },
+  "title_page_leaf": 19,
+  "copyright_page_leaf": 15,
+  "target_card_leaf": null,
+  "contents_leaf": 22,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

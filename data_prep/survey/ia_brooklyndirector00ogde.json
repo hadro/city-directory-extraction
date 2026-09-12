@@ -1,0 +1,253 @@
+{
+ "source": "ia",
+ "id": "brooklyndirector00ogde",
+ "book_says": {
+  "title": {
+   "value": "C- BROOKLYN DIRECTORY. y | Birch Geo. L. 90 Navy Bird John, shingle shaver 134 Prospect Bird James, Wallabout Road n Kent av Birdsall Edward N. shipwright 135 N",
+   "leaf": 29,
+   "canvas": "https://iiif.archive.org/iiif/brooklyndirector00ogde$29/canvas",
+   "image": "https://archive.org/download/brooklyndirector00ogde/page/n29_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "C- / BROOKLYN DIRECTORY. y | / Birch Geo. L. 90 Navy / Bird John, shingle shaver 134 Prospect / Bird James, Wallabout Road n Kent av / Birdsall Edward N. shipwright 135 Nassau / Birdsall Henry, carpen",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/brooklyndirector00ogde$9/canvas",
+   "image": "https://archive.org/download/brooklyndirector00ogde/page/n9_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "0.\nNore.\u2014Nomes having an * are the names of colored peopie.\nAbbreviations\u2014h. stands for house, n. for near, c, for corner, op. for\nopposite, &c. ~\nAbbot Daniel, 25 Front\nAbbot Francis H. merchant 8 Ba",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 13404446,
+  "hocr_sha1": "ee876abd870c484ab6b365e3b0566e523eb654ef",
+  "hocr_mtime": "1699146529",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 338,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Ogden",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1839",
+   "title": "Brooklyn directory, for the years 1839-40",
+   "column_count": "1",
+   "start_page": "3",
+   "end_page": null,
+   "key_page": "3",
+   "page_offset": "6",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "col=1 (pre-transition single-col era; title-triage s4) | FM 2026-06-29: title c9; KEY+listing-start printed p3 = canvas c9 (c10=printed p4 -> offset +6): 'Names having an * = colored people; h.=house n.=near c.=corner opp.=opposite'; A-start 'Abbot Daniel'; col1"
+  },
+  "ia": {
+   "title": "Brooklyn directory, for the years 1839-40",
+   "date": "1839",
+   "year": null,
+   "publisher": "Brooklyn, Arnold & Van Anden",
+   "creator": "Ogden, Henry L., comp",
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "340",
+   "ocr": "tesseract 5.3.0-3-g9920",
+   "scandate": "20150915174022",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 20,
+    "chars": 272
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 6,
+    "chars": 62
+   },
+   "3": {
+    "class": "other",
+    "lines": 4,
+    "chars": 34
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 93
+   },
+   "7": {
+    "class": "other",
+    "lines": 14,
+    "chars": 291
+   },
+   "8": {
+    "class": "other",
+    "lines": 5,
+    "chars": 28
+   },
+   "9": {
+    "class": "legend",
+    "lines": 40,
+    "chars": 1418
+   },
+   "10": {
+    "class": "other",
+    "lines": 16,
+    "chars": 482
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 56,
+    "chars": 1750
+   },
+   "12": {
+    "class": "other",
+    "lines": 19,
+    "chars": 310
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 1688
+   },
+   "14": {
+    "class": "other",
+    "lines": 17,
+    "chars": 332
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1352
+   },
+   "16": {
+    "class": "other",
+    "lines": 12,
+    "chars": 169
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1525
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1454
+   },
+   "20": {
+    "class": "other",
+    "lines": 13,
+    "chars": 247
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1387
+   },
+   "22": {
+    "class": "other",
+    "lines": 40,
+    "chars": 809
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1433
+   },
+   "24": {
+    "class": "other",
+    "lines": 12,
+    "chars": 124
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1454
+   },
+   "26": {
+    "class": "other",
+    "lines": 89,
+    "chars": 1612
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1497
+   },
+   "28": {
+    "class": "other",
+    "lines": 6,
+    "chars": 78
+   },
+   "29": {
+    "class": "title_page",
+    "lines": 44,
+    "chars": 1578
+   }
+  },
+  "title_page_leaf": 29,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   9
+  ],
+  "image_read_candidates": [
+   29
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/brooklyndirector00ogde/page/n29_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

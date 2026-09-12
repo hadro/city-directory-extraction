@@ -1,0 +1,250 @@
+{
+ "source": "ia",
+ "id": "brooklynnewyork1905p1geor",
+ "book_says": {
+  "publisher": {
+   "value": "GEORGE UPINGTON",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyork1905p1geor/page/n7_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "GEORGE UPINGTON, Publisher",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "volume_number": {
+   "value": 82,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyork1905p1geor/page/n7_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "VOLUME LXXXII",
+   "method": "hocr-text",
+   "confidence": "high"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 121700150,
+  "hocr_sha1": "8cf877783e880a9258d26c705c9b44726f423a5e",
+  "hocr_mtime": "1632665630",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 17,
+  "leaves": 1135,
+  "filled": 160,
+  "high_confidence": 1,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1905",
+   "title": "Brooklyn, New York, city directory",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "part 1; Upington Gen.Dir. of Brooklyn; col=2 verified 1906 title page (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn, New York, city directory",
+   "date": "1905",
+   "year": null,
+   "publisher": "George Upington",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1137",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130509192856",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 7,
+    "chars": 75
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 44
+   },
+   "4": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "copyright_page",
+    "lines": 15,
+    "chars": 401
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "10": {
+    "class": "other",
+    "lines": 1,
+    "chars": 3
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 55,
+    "chars": 943
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 15,
+    "chars": 319
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 19,
+    "chars": 271
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 12,
+    "chars": 249
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 1452
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 491
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 651
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 848
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "trade-association-page",
+    "lines": 28,
+    "chars": 1123
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 830
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": 7,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   7
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/brooklynnewyork1905p1geor/page/n7_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

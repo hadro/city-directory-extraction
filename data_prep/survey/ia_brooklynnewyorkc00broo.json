@@ -1,0 +1,284 @@
+{
+ "source": "ia",
+ "id": "brooklynnewyorkc00broo",
+ "book_says": {
+  "year": {
+   "value": 1911,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc00broo/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ion of this book\npublished for the year 1911\n1912\nt.i\nBROOKLYN DIRECTORY CO.\nPUBLISH",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1911,
+    1912
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1911,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "ion of this book\npublished for the year 1911\n1912\nt.i\nBROOKLYN DIRECTORY CO.\nPUBLISH"
+   },
+   {
+    "year": 1912,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "f this book\npublished for the year 1911\n1912\nt.i\nBROOKLYN DIRECTORY CO.\nPUBLISHERS\n3"
+   }
+  ],
+  "year_covered": {
+   "value": 1911,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc00broo/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ion of this book\npublished for the year 1911\n1912\nt.i\nBROOKLYN DIRECTORY CO.\nPUBLISH",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 15,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$15/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc00broo/page/n15_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "reliable people.\nPhone Main 594 :: 317 WASHINGTON ST.\nO\nO\nW\nABBREVIATIONS\nAcct accountant; agl agricultural; agt agent; Ala Alabama; al alley; art\nartificial; asst assistant; av avenue; bldg building;",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 21,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 108454287,
+  "hocr_sha1": "e9157ff2a279f1dc8796d85d84d1c38a5d8dc7f9",
+  "hocr_mtime": "1632666699",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 11,
+  "leaves": 1086,
+  "filled": 56,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": null,
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1912",
+   "title": "Brooklyn, New York, city directory",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "post-1900 Brooklyn 1912; needs sample (publisher+col); dup w/ geor set (s4); post-1900 Brooklyn city dir col=2 (s4: per 1912broo sample); publisher unverified"
+  },
+  "ia": {
+   "title": "Brooklyn, New York, city directory",
+   "date": "1912",
+   "year": null,
+   "publisher": "Brooklyn Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1088",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130429132228",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 6,
+    "chars": 55
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 46
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 91
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 14,
+    "chars": 265
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "copyright_page",
+    "lines": 13,
+    "chars": 506
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "contents",
+    "lines": 85,
+    "chars": 2937
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "contents",
+    "lines": 43,
+    "chars": 1459
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "legend",
+    "lines": 112,
+    "chars": 3674
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 242,
+    "chars": 5757
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 255,
+    "chars": 5217
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 213,
+    "chars": 5477
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 257,
+    "chars": 5746
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 258,
+    "chars": 5822
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 278,
+    "chars": 5802
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 240,
+    "chars": 5746
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": 9,
+  "target_card_leaf": null,
+  "contents_leaf": 11,
+  "legend_leaves": [
+   15
+  ],
+  "image_read_candidates": [
+   9,
+   7
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/brooklynnewyorkc00broo/page/n9_w1400.jpg",
+   "https://archive.org/download/brooklynnewyorkc00broo/page/n7_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

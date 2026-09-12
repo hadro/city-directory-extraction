@@ -1,0 +1,268 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0020",
+ "book_says": {
+  "year": {
+   "value": 1844,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0020$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0020/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "a\nBROOKLYN, NEW YORK\n1844-5 \u00b0\nBrooklyn Alphabetical & Street Dire",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1844,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "a\nBROOKLYN, NEW YORK\n1844-5 \u00b0\nBrooklyn Alphabetical & Street Dire"
+   },
+   {
+    "year": 1844,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "t Directory, and\nYearly Advertiser, for 1844 & 5. Compiled and\nPublished by Henry R."
+   }
+  ],
+  "publisher": {
+   "value": "Henry R",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0020$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0020/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "Published by Henry R",
+   "method": "hocr-text",
+   "confidence": "low",
+   "evidence_detail": "imprint"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 11220281,
+  "hocr_sha1": "b4b10b357cdcc63f900fabc2297dd2dbb09da52c",
+  "hocr_mtime": "1708580752",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 81,
+  "leaves": 270,
+  "filled": 266,
+  "high_confidence": 20,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1844",
+   "title": "Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1844 & 1845",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Spooner-era Brooklyn; col=1 verified 1848/49 sample (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1844 & 1845",
+   "date": "1844-1845",
+   "year": null,
+   "publisher": "Stationers' Hall Works",
+   "creator": "Hearnes, Henry R. & William J",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "270",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126032947",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "target_card",
+    "lines": 8,
+    "chars": 239
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 573
+   },
+   "3": {
+    "class": "other",
+    "lines": 13,
+    "chars": 131
+   },
+   "4": {
+    "class": "other",
+    "lines": 15,
+    "chars": 185
+   },
+   "5": {
+    "class": "other",
+    "lines": 14,
+    "chars": 245
+   },
+   "6": {
+    "class": "other",
+    "lines": 54,
+    "chars": 1139
+   },
+   "7": {
+    "class": "other",
+    "lines": 46,
+    "chars": 1123
+   },
+   "8": {
+    "class": "other",
+    "lines": 39,
+    "chars": 386
+   },
+   "9": {
+    "class": "other",
+    "lines": 22,
+    "chars": 581
+   },
+   "10": {
+    "class": "other",
+    "lines": 23,
+    "chars": 465
+   },
+   "11": {
+    "class": "other",
+    "lines": 29,
+    "chars": 755
+   },
+   "12": {
+    "class": "other",
+    "lines": 12,
+    "chars": 127
+   },
+   "13": {
+    "class": "other",
+    "lines": 20,
+    "chars": 539
+   },
+   "14": {
+    "class": "other",
+    "lines": 42,
+    "chars": 1278
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1471
+   },
+   "16": {
+    "class": "other",
+    "lines": 47,
+    "chars": 1690
+   },
+   "17": {
+    "class": "other",
+    "lines": 42,
+    "chars": 1524
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1572
+   },
+   "19": {
+    "class": "other",
+    "lines": 53,
+    "chars": 1779
+   },
+   "20": {
+    "class": "other",
+    "lines": 45,
+    "chars": 1572
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1463
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 1637
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 55,
+    "chars": 1729
+   },
+   "24": {
+    "class": "other",
+    "lines": 45,
+    "chars": 1651
+   },
+   "25": {
+    "class": "other",
+    "lines": 40,
+    "chars": 1416
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 52,
+    "chars": 1730
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 1697
+   },
+   "28": {
+    "class": "other",
+    "lines": 39,
+    "chars": 1465
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 57,
+    "chars": 1629
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 1,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "weak_title_page": 3,
+  "image_read_candidates": [
+   1
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0020/page/n1_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

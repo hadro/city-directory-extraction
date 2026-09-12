@@ -1,0 +1,316 @@
+{
+ "source": "ia",
+ "id": "1857BPL",
+ "book_says": {
+  "year": {
+   "value": 1858,
+   "leaf": 28,
+   "canvas": "https://iiif.archive.org/iiif/1857BPL$28/canvas",
+   "image": "https://archive.org/download/1857BPL/page/n28_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "cording to Act of Congress, in the year 1858, by\nCHARLES JENKINS,\nIn the Clerk's Off",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1837,
+    1852,
+    1856,
+    1857,
+    1858
+   ],
+   "note": "published 1858 (leaf 28), covers 1857 (leaf 27) -- not a conflict"
+  },
+  "year_attestations": [
+   {
+    "year": 1858,
+    "how": "digits",
+    "leaf": 28,
+    "quote": "cording to Act of Congress, in the year 1858, by\nCHARLES JENKINS,\nIn the Clerk's Off"
+   },
+   {
+    "year": 1857,
+    "how": "digits",
+    "leaf": 27,
+    "quote": "DIRECTORY,\nFOR THE YEAR ENDING\nMAY 1st, 1857.\nGENERAL DIRECTORY OF THE INHABITANTS,"
+   },
+   {
+    "year": 1856,
+    "how": "digits",
+    "leaf": 27,
+    "quote": "JENKINS.\nOffice, Room 6, Montague Hall.\n1856."
+   },
+   {
+    "year": 1837,
+    "how": "digits",
+    "leaf": 4,
+    "quote": "prietor and Principal.\nEstablished May, 1837, at an outlay of 130,000.\nHas two Depar"
+   },
+   {
+    "year": 1852,
+    "how": "digits",
+    "leaf": 4,
+    "quote": "Eighth street, E. District.\nEstablished 1852.\nThe School year commences the first Mo"
+   }
+  ],
+  "year_published": {
+   "value": 1858,
+   "leaf": 28,
+   "canvas": "https://iiif.archive.org/iiif/1857BPL$28/canvas",
+   "image": "https://archive.org/download/1857BPL/page/n28_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "cording to Act of Congress, in the year 1858, by\nCHARLES JENKINS,\nIn the Clerk's Off",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "year_covered": {
+   "value": 1857,
+   "leaf": 27,
+   "canvas": "https://iiif.archive.org/iiif/1857BPL$27/canvas",
+   "image": "https://archive.org/download/1857BPL/page/n27_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "DIRECTORY,\nFOR THE YEAR ENDING\nMAY 1st, 1857.\nGENERAL DIRECTORY OF THE INHABITANTS,",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "CHARLES JENKINS",
+   "leaf": 28,
+   "canvas": "https://iiif.archive.org/iiif/1857BPL$28/canvas",
+   "image": "https://archive.org/download/1857BPL/page/n28_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "Act of Congress, in the year 1858, by CHARLES JENKINS",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "title": {
+   "value": "SMITH'S BROOKLYN DIRECTORY,",
+   "leaf": 27,
+   "canvas": "https://iiif.archive.org/iiif/1857BPL$27/canvas",
+   "image": "https://archive.org/download/1857BPL/page/n27_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "SMITH'S / BROOKLYN DIRECTORY,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 60508938,
+  "hocr_sha1": "7741de6a1653f285be55e1a7c7b01c68ffa22d47",
+  "hocr_mtime": "1635639319",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 93.87155963302752,
+  "leaves": 545,
+  "filled": 545,
+  "high_confidence": 514,
+  "ocr_value_leaves": 539,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Smith",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1857",
+   "title": "Smith's Brooklyn Directory for the year ending May 1, 1857",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "8",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Smith col=2 (s4 fan-out: 2-col residential, Hoffman-Holmes p155); offset +8"
+  },
+  "ia": {
+   "title": "Smith's Brooklyn Directory for the year ending May 1, 1857",
+   "date": "1857",
+   "year": null,
+   "publisher": null,
+   "creator": "William H. Smith",
+   "contributor": null,
+   "imagecount": "546",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 30,
+    "chars": 1345
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 24,
+    "chars": 675
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 2602
+   },
+   "3": {
+    "class": "other",
+    "lines": 1,
+    "chars": 29
+   },
+   "4": {
+    "class": "title_page",
+    "lines": 23,
+    "chars": 1075
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 17,
+    "chars": 601
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 813
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 35,
+    "chars": 1405
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 732
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 856
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 24,
+    "chars": 600
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 1088
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 20,
+    "chars": 561
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 1261
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 17,
+    "chars": 595
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 19,
+    "chars": 452
+   },
+   "16": {
+    "class": "front_matter",
+    "lines": 32,
+    "chars": 1796
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 19,
+    "chars": 847
+   },
+   "18": {
+    "class": "title_page",
+    "lines": 19,
+    "chars": 691
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 950
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 820
+   },
+   "21": {
+    "class": "target_card",
+    "lines": 12,
+    "chars": 485
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 1055
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 18,
+    "chars": 670
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 6,
+    "chars": 180
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 1003
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 351
+   },
+   "27": {
+    "class": "title_page",
+    "lines": 16,
+    "chars": 412
+   },
+   "28": {
+    "class": "copyright_page",
+    "lines": 5,
+    "chars": 230
+   },
+   "29": {
+    "class": "title_page",
+    "lines": 32,
+    "chars": 2085
+   }
+  },
+  "title_page_leaf": 27,
+  "copyright_page_leaf": 28,
+  "target_card_leaf": 21,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

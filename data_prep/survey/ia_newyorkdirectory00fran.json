@@ -1,0 +1,263 @@
+{
+ "source": "ia",
+ "id": "newyorkdirectory00fran",
+ "book_says": {
+  "year": {
+   "value": 1786,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00fran$7/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00fran/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "st Directory\nTHE\nNew York Directory\nFOB\n1786\nILLUSTRATED WITH A PLAN OF THE CITY\nPRE",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1786,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "st Directory\nTHE\nNew York Directory\nFOB\n1786\nILLUSTRATED WITH A PLAN OF THE CITY\nPRE"
+   },
+   {
+    "year": 1786,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "X CONSISTING OF\nANNALS OF NEW YORK CITY 1786\nCompiled for this WorJc\nPUBLISHED BY\nTH"
+   }
+  ],
+  "title": {
+   "value": "ffaoSimilc \"Keprint of ffiist Directory THE New York Directory FOB",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00fran$7/canvas",
+   "image": "https://archive.org/download/newyorkdirectory00fran/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ffaoSimilc \"Keprint of ffiist Directory / THE / New York Directory / FOB",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 11007337,
+  "hocr_sha1": "0a19e6f4a16f1f956c258dc57e507f00df2ff897",
+  "hocr_mtime": "1702051378",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 78,
+  "leaves": 256,
+  "filled": 158,
+  "high_confidence": 59,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Franks",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1786",
+   "title": "The New York directory for 1786",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": null
+  },
+  "ia": {
+   "title": "The New York directory for 1786",
+   "date": "1889",
+   "year": null,
+   "publisher": "N[ew] Y[ork] The Trow City Directory Co",
+   "creator": [
+    "Franks, David C",
+    "Webster, Noah, 1758-1843",
+    "Kelby, William, 1841-1898"
+   ],
+   "contributor": "Columbia University Libraries",
+   "imagecount": "258",
+   "ocr": null,
+   "scandate": "20130828174443",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 7,
+    "chars": 90
+   },
+   "2": {
+    "class": "other",
+    "lines": 3,
+    "chars": 66
+   },
+   "3": {
+    "class": "bookplate",
+    "lines": 7,
+    "chars": 197
+   },
+   "4": {
+    "class": "bookplate",
+    "lines": 2,
+    "chars": 83
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 91
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 16,
+    "chars": 330
+   },
+   "8": {
+    "class": "other",
+    "lines": 15,
+    "chars": 329
+   },
+   "9": {
+    "class": "other",
+    "lines": 24,
+    "chars": 1179
+   },
+   "10": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1539
+   },
+   "11": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1540
+   },
+   "12": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1560
+   },
+   "13": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1517
+   },
+   "14": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1476
+   },
+   "15": {
+    "class": "other",
+    "lines": 31,
+    "chars": 1234
+   },
+   "16": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1512
+   },
+   "17": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1539
+   },
+   "18": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1595
+   },
+   "19": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1532
+   },
+   "20": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1565
+   },
+   "21": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1706
+   },
+   "22": {
+    "class": "other",
+    "lines": 32,
+    "chars": 1487
+   },
+   "23": {
+    "class": "other",
+    "lines": 21,
+    "chars": 696
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1568
+   },
+   "26": {
+    "class": "other",
+    "lines": 30,
+    "chars": 1209
+   },
+   "27": {
+    "class": "other",
+    "lines": 51,
+    "chars": 700
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

@@ -1,0 +1,274 @@
+{
+ "source": "ia",
+ "id": "1887BPL",
+ "book_says": {
+  "year": {
+   "value": 1887,
+   "leaf": 14,
+   "canvas": "https://iiif.archive.org/iiif/1887BPL$14/canvas",
+   "image": "https://archive.org/download/1887BPL/page/n14_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "TORY\nFor *=s_>\nThe Year Ending May 1st,\n1887.\nCONTAINING\nALPHABETICAL LIST OE HOUSEH",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1840,
+    1887
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1887,
+    "how": "digits",
+    "leaf": 14,
+    "quote": "TORY\nFor *=s_>\nThe Year Ending May 1st,\n1887.\nCONTAINING\nALPHABETICAL LIST OE HOUSEH"
+   },
+   {
+    "year": 1840,
+    "how": "digits",
+    "leaf": 24,
+    "quote": "ES OH FILE. THE BROOKLYN DIRECTORY FROM 1840 TO DATE.\nLAIN'S DIRECTORY OFFICE,\n17 -W"
+   }
+  ],
+  "publisher": {
+   "value": "LAIN & COMPANY",
+   "leaf": 14,
+   "canvas": "https://iiif.archive.org/iiif/1887BPL$14/canvas",
+   "image": "https://archive.org/download/1887BPL/page/n14_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY LAIN & COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "This Book Is A Gift Of HAROLD and CEL1A BAKERMAN LAIN'S BEOOKLYN DIRECTORY For *=s_> The Year Ending May 1st,",
+   "leaf": 14,
+   "canvas": "https://iiif.archive.org/iiif/1887BPL$14/canvas",
+   "image": "https://archive.org/download/1887BPL/page/n14_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "This Book Is A Gift Of / HAROLD and CEL1A BAKERMAN / LAIN'S / BEOOKLYN / DIRECTORY / For *=s_> / The Year Ending May 1st,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 225653958,
+  "hocr_sha1": "c90c06defa7acaf230e834de142f9878ae834fa5",
+  "hocr_mtime": "1632345534",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 65,
+  "leaves": 1401,
+  "filled": 1143,
+  "high_confidence": 1,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1887",
+   "title": "Lain's Brooklyn Directory for the year ending May 1, 1887",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "53",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "offset +53 at p.367 (leaf420); 2 col; visually sampled 2026-06-19"
+  },
+  "ia": {
+   "title": "Lain's Brooklyn Directory for the year ending May 1, 1887",
+   "date": "1887",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1401",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 28,
+    "chars": 1188
+   },
+   "1": {
+    "class": "other",
+    "lines": 8,
+    "chars": 474
+   },
+   "2": {
+    "class": "other",
+    "lines": 35,
+    "chars": 1170
+   },
+   "3": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1104
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 8,
+    "chars": 252
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 623
+   },
+   "6": {
+    "class": "other",
+    "lines": 32,
+    "chars": 739
+   },
+   "7": {
+    "class": "other",
+    "lines": 55,
+    "chars": 1993
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 79,
+    "chars": 967
+   },
+   "9": {
+    "class": "other",
+    "lines": 28,
+    "chars": 819
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 18,
+    "chars": 668
+   },
+   "11": {
+    "class": "title_page",
+    "lines": 44,
+    "chars": 1382
+   },
+   "12": {
+    "class": "other",
+    "lines": 41,
+    "chars": 1545
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 142,
+    "chars": 2673
+   },
+   "14": {
+    "class": "title_page",
+    "lines": 24,
+    "chars": 692
+   },
+   "15": {
+    "class": "other",
+    "lines": 22,
+    "chars": 810
+   },
+   "16": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 2160
+   },
+   "17": {
+    "class": "contents",
+    "lines": 155,
+    "chars": 5196
+   },
+   "18": {
+    "class": "other",
+    "lines": 172,
+    "chars": 5391
+   },
+   "19": {
+    "class": "other",
+    "lines": 175,
+    "chars": 5956
+   },
+   "20": {
+    "class": "contents",
+    "lines": 132,
+    "chars": 4460
+   },
+   "21": {
+    "class": "other",
+    "lines": 35,
+    "chars": 1265
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 28,
+    "chars": 973
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 48,
+    "chars": 1731
+   },
+   "24": {
+    "class": "title_page",
+    "lines": 53,
+    "chars": 1716
+   },
+   "25": {
+    "class": "title_page",
+    "lines": 54,
+    "chars": 1850
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 42,
+    "chars": 1083
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1102
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 768
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 644
+   }
+  },
+  "title_page_leaf": 14,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 17,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

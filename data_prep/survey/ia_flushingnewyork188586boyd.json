@@ -1,0 +1,258 @@
+{
+ "source": "ia",
+ "id": "flushingnewyork188586boyd",
+ "book_says": {
+  "year": {
+   "value": 1885,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyork188586boyd$7/canvas",
+   "image": "https://archive.org/download/flushingnewyork188586boyd/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ide Division L, I. R, R.\nfor ttte years\n1885-6\nCOMPILED AND PUBLISHED BY\nW. ANDREW B",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1885,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "ide Division L, I. R, R.\nfor ttte years\n1885-6\nCOMPILED AND PUBLISHED BY\nW. ANDREW B"
+   },
+   {
+    "year": 1885,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "is & Co., {Steam Book and Job Printers.\n1885.\nEntered accenting to act of Congress,"
+   }
+  ],
+  "title": {
+   "value": "BOYD'S FLUSHING, /i. DIRECTORY. CONTAINING A GENERAL DIRECTORY OF ^TiiTJSH:iisr& TOGETHEK WITH A Complete Business and Farmers' Directory of the North Side Divi",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyork188586boyd$7/canvas",
+   "image": "https://archive.org/download/flushingnewyork188586boyd/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "BOYD'S / FLUSHING, /i. / DIRECTORY. / CONTAINING A GENERAL DIRECTORY OF / ^TiiTJSH:iisr& / TOGETHEK WITH A / Complete Business and Farmers' Directory / of the North Side Division L, I. R, R. / for ttt",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 5321074,
+  "hocr_sha1": "b90d89d5f932fed5c1b1eb7fb42e2afe09c806bf",
+  "hocr_mtime": "1699717262",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 244,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Boyd",
+   "city": "Flushing",
+   "borough": "Queens",
+   "year": "1885",
+   "title": "Flushing, New York, city directory",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "15",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "page_offset +15 is persons section only; business section offset +64 (large ad insert between)"
+  },
+  "ia": {
+   "title": "Flushing, New York, city directory",
+   "date": "1885-1886",
+   "year": null,
+   "publisher": "Boyd's",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "246",
+   "ocr": null,
+   "scandate": "20130509175135",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 5,
+    "chars": 60
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 50
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 20,
+    "chars": 484
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 56,
+    "chars": 660
+   },
+   "10": {
+    "class": "other",
+    "lines": 1,
+    "chars": 1
+   },
+   "11": {
+    "class": "other",
+    "lines": 19,
+    "chars": 559
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 18,
+    "chars": 601
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 30,
+    "chars": 356
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "contents",
+    "lines": 28,
+    "chars": 1038
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 31,
+    "chars": 184
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 29,
+    "chars": 1236
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 34,
+    "chars": 1277
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1696
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 48,
+    "chars": 1945
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1930
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 17,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

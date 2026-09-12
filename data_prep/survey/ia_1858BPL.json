@@ -1,0 +1,288 @@
+{
+ "source": "ia",
+ "id": "1858BPL",
+ "book_says": {
+  "year": {
+   "value": 1857,
+   "leaf": 4,
+   "canvas": "https://iiif.archive.org/iiif/1858BPL$4/canvas",
+   "image": "https://archive.org/download/1858BPL/page/n4_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "in the year one thousand eight hundred and fifty-seven,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words"
+  },
+  "year_attestations": [
+   {
+    "year": 1857,
+    "how": "words",
+    "leaf": 4,
+    "quote": "in the year one thousand eight hundred and fifty-seven,"
+   }
+  ],
+  "year_published": {
+   "value": 1857,
+   "leaf": 4,
+   "canvas": "https://iiif.archive.org/iiif/1858BPL$4/canvas",
+   "image": "https://archive.org/download/1858BPL/page/n4_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "in the year one thousand eight hundred and fifty-seven,",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "J. LAIN AND COMPANY",
+   "leaf": 4,
+   "canvas": "https://iiif.archive.org/iiif/1858BPL$4/canvas",
+   "image": "https://archive.org/download/1858BPL/page/n4_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "Act of Congress, in the year one thousand eight hundred and fifty-seven, by J. LAIN AND COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "title": {
+   "value": "THE BROOKLYN CITY This Book Is A Gift Of HAROLD and CELIA BAKERMAN DIRECTORY, (COSSOLIDATED,)",
+   "leaf": 3,
+   "canvas": "https://iiif.archive.org/iiif/1858BPL$3/canvas",
+   "image": "https://archive.org/download/1858BPL/page/n3_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE / BROOKLYN CITY / This Book Is A Gift Of / HAROLD and CELIA BAKERMAN / DIRECTORY, / (COSSOLIDATED,)",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/1858BPL$7/canvas",
+   "image": "https://archive.org/download/1858BPL/page/n7_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "n their voca-\ntions in the Cities of Brooklyn and New York.\nABBREVIATIONS, ETC\nal. alley; av. avenue ; bldg. building ; col. colored; com. commission; c. corner; ct. court; E. east; ex. exchange;\nh. h",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 3,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 65994735,
+  "hocr_sha1": "c7d5cccb83ca5349cccae8d830426b46102cba45",
+  "hocr_mtime": "1635638947",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 96.57458563535911,
+  "leaves": 543,
+  "filled": 537,
+  "high_confidence": 526,
+  "ocr_value_leaves": 535,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1858",
+   "title": "Brooklyn City Directory, for the year ending May 1, 1858",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain; col=2 verified via 1858/1869 title pages (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn City Directory, for the year ending May 1, 1858",
+   "date": "1858",
+   "year": null,
+   "publisher": null,
+   "creator": "J. Lain and Company",
+   "contributor": null,
+   "imagecount": "544",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 28,
+    "chars": 1218
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 2241
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 77,
+    "chars": 2139
+   },
+   "3": {
+    "class": "title_page",
+    "lines": 13,
+    "chars": 258
+   },
+   "4": {
+    "class": "copyright_page",
+    "lines": 7,
+    "chars": 277
+   },
+   "5": {
+    "class": "other",
+    "lines": 89,
+    "chars": 3014
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 52,
+    "chars": 3088
+   },
+   "7": {
+    "class": "legend",
+    "lines": 101,
+    "chars": 3882
+   },
+   "8": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4966
+   },
+   "9": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5160
+   },
+   "10": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5028
+   },
+   "11": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5041
+   },
+   "12": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5020
+   },
+   "13": {
+    "class": "other",
+    "lines": 142,
+    "chars": 4848
+   },
+   "14": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5018
+   },
+   "15": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4774
+   },
+   "16": {
+    "class": "other",
+    "lines": 140,
+    "chars": 4969
+   },
+   "17": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4946
+   },
+   "18": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4837
+   },
+   "19": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5030
+   },
+   "20": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4996
+   },
+   "21": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4851
+   },
+   "22": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5118
+   },
+   "23": {
+    "class": "other",
+    "lines": 144,
+    "chars": 5072
+   },
+   "24": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5230
+   },
+   "25": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4930
+   },
+   "26": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5254
+   },
+   "27": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4960
+   },
+   "28": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5161
+   },
+   "29": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5080
+   }
+  },
+  "title_page_leaf": 3,
+  "copyright_page_leaf": 4,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   7
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

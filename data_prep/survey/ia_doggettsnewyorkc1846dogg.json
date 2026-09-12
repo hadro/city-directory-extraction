@@ -1,0 +1,278 @@
+{
+ "source": "ia",
+ "id": "doggettsnewyorkc1846dogg",
+ "book_says": {
+  "year": {
+   "value": 1846,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$5/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1846dogg/page/n5_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "D'OGGETT'S\nNEW-YORK\nCITY DIRECTORY,\nFOR\n1846 and 184 7.\nJFtftfi $tt*Uc\u00bbtfotu\nNEW-YOR",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1846,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "D'OGGETT'S\nNEW-YORK\nCITY DIRECTORY,\nFOR\n1846 and 184 7.\nJFtftfi $tt*Uc\u00bbtfotu\nNEW-YOR"
+   }
+  ],
+  "publisher": {
+   "value": "JOHN DOGGETT JR",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$5/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1846dogg/page/n5_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "JOHN DOGGETT JR., PUBLISHER",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "HOTELS WHERE THIS DIRECTORY MAY BE SEEN. &y The intimate business connection which exists between New York and the principal Cities and Towns of the Union, woul",
+   "leaf": 12,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$12/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1846dogg/page/n12_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "HOTELS WHERE THIS DIRECTORY MAY BE SEEN. / &y The intimate business connection which exists between New York and the principal Cities and Towns of / the Union, would seem to render it desirable that t",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 23,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$23/canvas",
+   "image": "https://archive.org/download/doggettsnewyorkc1846dogg/page/n23_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "regular insertion, which are placed on the preceding page.\nABBREVIATIONS.\nal. for alley, b. between, bldgs. building?, c. corner, com. commission, ct. court, e. r. east river, ex. exchange\nforwdg. for",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 81153101,
+  "hocr_sha1": "d47b4b517bfca70ef09edaca350a28c31ae4aaed",
+  "hocr_mtime": "1636502824",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 73,
+  "leaves": 516,
+  "filled": 482,
+  "high_confidence": 5,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Doggett",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1846",
+   "title": "Doggett's New-York City directory, for ...",
+   "column_count": "2",
+   "start_page": "1",
+   "end_page": null,
+   "key_page": "1",
+   "page_offset": "21",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "FM 2026-06-29 (agent): title c4; KEY+listing-start printed p1 = canvas c22 (c23=printed p2 -> offset +21) 'NEW-YORK CITY DIRECTORY FOR 1846 & 1847. NOTICE... ABBREVIATIONS: al=alley b=between bldgs c=corner com=commission ct=court e.r=east river ex=exchange forwdg=forwarding h=house la=lane mer=merchant mkr=maker manf=manufacturer n.r=north river op=opposite pl=place shipg=shipping sq=square'; A-start 'Aaron Elias E. com. mer. 91 Maiden l. h. 161 Allen'; col2; Doggett/Rode/Groot legend family"
+  },
+  "ia": {
+   "title": "Doggett's New-York City directory, for ...",
+   "date": "1845",
+   "year": null,
+   "publisher": "New-York : J. Doggett, Jr.",
+   "creator": "Doggett, John, 1809-1852",
+   "contributor": "Columbia University Libraries",
+   "imagecount": "518",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": "20131203193500",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 28,
+    "chars": 704
+   },
+   "2": {
+    "class": "other",
+    "lines": 27,
+    "chars": 1297
+   },
+   "3": {
+    "class": "other",
+    "lines": 16,
+    "chars": 870
+   },
+   "4": {
+    "class": "other",
+    "lines": 74,
+    "chars": 1899
+   },
+   "5": {
+    "class": "target_card",
+    "lines": 10,
+    "chars": 171
+   },
+   "6": {
+    "class": "bookplate",
+    "lines": 12,
+    "chars": 395
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 1515
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 169,
+    "chars": 2157
+   },
+   "9": {
+    "class": "other",
+    "lines": 41,
+    "chars": 2661
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 647,
+    "chars": 4818
+   },
+   "11": {
+    "class": "other",
+    "lines": 541,
+    "chars": 5224
+   },
+   "12": {
+    "class": "title_page",
+    "lines": 145,
+    "chars": 3385
+   },
+   "13": {
+    "class": "other",
+    "lines": 139,
+    "chars": 4820
+   },
+   "14": {
+    "class": "other",
+    "lines": 36,
+    "chars": 538
+   },
+   "15": {
+    "class": "other",
+    "lines": 88,
+    "chars": 1647
+   },
+   "16": {
+    "class": "other",
+    "lines": 61,
+    "chars": 2501
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 263,
+    "chars": 2527
+   },
+   "18": {
+    "class": "other",
+    "lines": 418,
+    "chars": 2995
+   },
+   "19": {
+    "class": "other",
+    "lines": 422,
+    "chars": 3125
+   },
+   "20": {
+    "class": "other",
+    "lines": 137,
+    "chars": 1081
+   },
+   "21": {
+    "class": "other",
+    "lines": 105,
+    "chars": 1637
+   },
+   "22": {
+    "class": "other",
+    "lines": 22,
+    "chars": 687
+   },
+   "23": {
+    "class": "legend",
+    "lines": 116,
+    "chars": 4579
+   },
+   "24": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6836
+   },
+   "25": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6679
+   },
+   "26": {
+    "class": "other",
+    "lines": 167,
+    "chars": 6824
+   },
+   "27": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6774
+   },
+   "28": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6759
+   },
+   "29": {
+    "class": "other",
+    "lines": 169,
+    "chars": 6695
+   }
+  },
+  "title_page_leaf": 12,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 5,
+  "contents_leaf": null,
+  "legend_leaves": [
+   23
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

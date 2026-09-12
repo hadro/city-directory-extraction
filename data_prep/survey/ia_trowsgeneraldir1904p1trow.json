@@ -1,0 +1,272 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldir1904p1trow",
+ "book_says": {
+  "year": {
+   "value": 1847,
+   "leaf": 11,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$11/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1904p1trow/page/n11_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ORF\nTROW BUSINESS DIRECTORY Established 1847 DIRECTORY .... Establ\nFIRST NEW YORK DI",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1786,
+    1847
+   ],
+   "conflicts_with_catalog": [
+    "1904",
+    "1904"
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1847,
+    "how": "digits",
+    "leaf": 11,
+    "quote": "ORF\nTROW BUSINESS DIRECTORY Established 1847 DIRECTORY .... Establ\nFIRST NEW YORK DI"
+   },
+   {
+    "year": 1786,
+    "how": "digits",
+    "leaf": 11,
+    "quote": "Establ\nFIRST NEW YORK DIRECTORY Printed 1786\nEnvelopes Addressed, Wrappers Addressi"
+   }
+  ],
+  "title": {
+   "value": "PURCHASERS' GUIDE AND COMMERCIAL REGISTER. ADVERTISING SIGNS. C. SCOTT FORENGTON THE SIGN MAN Gliding on Class and Class Signs 154 Duaie Street, Cor. West Broad",
+   "leaf": 25,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$25/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1904p1trow/page/n25_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PURCHASERS' GUIDE AND COMMERCIAL REGISTER. / ADVERTISING SIGNS. / C. SCOTT FORENGTON / THE SIGN MAN / Gliding on Class and Class Signs / 154 Duaie Street, Cor. West Broadway, New York / Trow Business ",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 179624508,
+  "hocr_sha1": "967bcc8177831476a6a98300df0359a586a581f4",
+  "hocr_mtime": "1633878454",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 1200,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1904",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan | part 1; Trow; col=3 (s4: bracketed 1859-1915 all 3-col + 1890s card)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1904",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1202",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130422143848",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 3,
+    "chars": 22
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 42
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 644
+   },
+   "8": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "9": {
+    "class": "other",
+    "lines": 51,
+    "chars": 403
+   },
+   "10": {
+    "class": "other",
+    "lines": 1,
+    "chars": 1
+   },
+   "11": {
+    "class": "title_page",
+    "lines": 25,
+    "chars": 999
+   },
+   "12": {
+    "class": "other",
+    "lines": 1,
+    "chars": 7
+   },
+   "13": {
+    "class": "other",
+    "lines": 29,
+    "chars": 632
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 9,
+    "chars": 256
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "contents",
+    "lines": 198,
+    "chars": 4004
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 590
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1080
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "title_page",
+    "lines": 34,
+    "chars": 970
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 56,
+    "chars": 1361
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1539
+   }
+  },
+  "title_page_leaf": 25,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 19,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   11
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/trowsgeneraldir1904p1trow/page/n11_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

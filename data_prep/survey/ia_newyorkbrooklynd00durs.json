@@ -1,0 +1,264 @@
+{
+ "source": "ia",
+ "id": "newyorkbrooklynd00durs",
+ "book_says": {
+  "year": {
+   "value": 1786,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$9/canvas",
+   "image": "https://archive.org/download/newyorkbrooklynd00durs/page/n9_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE\nNEW-YORK DIRECTORY\nFor 1786,\nCONTAINING,\nA Valuable and well Calcul",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1786,
+    "how": "digits",
+    "leaf": 9,
+    "quote": "THE\nNEW-YORK DIRECTORY\nFor 1786,\nCONTAINING,\nA Valuable and well Calcul"
+   }
+  ],
+  "publisher": {
+   "value": "SHEPARD KOLLOCK",
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$9/canvas",
+   "image": "https://archive.org/download/newyorkbrooklynd00durs/page/n9_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Printed by SHEPARD KOLLOCK",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "THE NEW-YORK DIRECTORY",
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$9/canvas",
+   "image": "https://archive.org/download/newyorkbrooklynd00durs/page/n9_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE / NEW-YORK DIRECTORY",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 4095351,
+  "hocr_sha1": "909efcdb21b0f6d61a0fbb30683d967d062f85d2",
+  "hocr_mtime": "1702050435",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 112,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": null,
+   "city": "New York",
+   "borough": null,
+   "year": "1786/96",
+   "title": "New York and Brooklyn directory, 1786-1796",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "covers Brooklyn, Manhattan; 1786-96 compilation; col=1 18thC; overlaps Franks era (s4)"
+  },
+  "ia": {
+   "title": "New York and Brooklyn directory, 1786-1796",
+   "date": "1876",
+   "year": null,
+   "publisher": "[New York : J. Disturnell]",
+   "creator": null,
+   "contributor": "Columbia University Libraries",
+   "imagecount": "114",
+   "ocr": null,
+   "scandate": "20131118184451",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 5,
+    "chars": 45
+   },
+   "2": {
+    "class": "bookplate",
+    "lines": 8,
+    "chars": 232
+   },
+   "3": {
+    "class": "other",
+    "lines": 3,
+    "chars": 12
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "8": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 91
+   },
+   "9": {
+    "class": "title_page",
+    "lines": 56,
+    "chars": 1181
+   },
+   "10": {
+    "class": "contents",
+    "lines": 37,
+    "chars": 1374
+   },
+   "11": {
+    "class": "other",
+    "lines": 329,
+    "chars": 1536
+   },
+   "12": {
+    "class": "other",
+    "lines": 300,
+    "chars": 1481
+   },
+   "13": {
+    "class": "other",
+    "lines": 283,
+    "chars": 1460
+   },
+   "14": {
+    "class": "other",
+    "lines": 297,
+    "chars": 1428
+   },
+   "15": {
+    "class": "other",
+    "lines": 363,
+    "chars": 1491
+   },
+   "16": {
+    "class": "other",
+    "lines": 325,
+    "chars": 1518
+   },
+   "17": {
+    "class": "other",
+    "lines": 335,
+    "chars": 1598
+   },
+   "18": {
+    "class": "other",
+    "lines": 316,
+    "chars": 1544
+   },
+   "19": {
+    "class": "other",
+    "lines": 260,
+    "chars": 1407
+   },
+   "20": {
+    "class": "other",
+    "lines": 285,
+    "chars": 1544
+   },
+   "21": {
+    "class": "other",
+    "lines": 276,
+    "chars": 1448
+   },
+   "22": {
+    "class": "other",
+    "lines": 197,
+    "chars": 1254
+   },
+   "23": {
+    "class": "other",
+    "lines": 49,
+    "chars": 1301
+   },
+   "24": {
+    "class": "other",
+    "lines": 444,
+    "chars": 1189
+   },
+   "25": {
+    "class": "other",
+    "lines": 374,
+    "chars": 1245
+   },
+   "26": {
+    "class": "other",
+    "lines": 244,
+    "chars": 1199
+   },
+   "27": {
+    "class": "other",
+    "lines": 264,
+    "chars": 757
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 20,
+    "chars": 622
+   },
+   "29": {
+    "class": "other",
+    "lines": 30,
+    "chars": 1043
+   }
+  },
+  "title_page_leaf": 9,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 10,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

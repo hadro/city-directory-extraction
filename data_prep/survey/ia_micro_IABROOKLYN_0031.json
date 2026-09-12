@@ -1,0 +1,241 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0031",
+ "book_says": {
+  "title": {
+   "value": "BROOKLYN CITY DIRECTORY. 23 11 1 ; f F 3 f",
+   "leaf": 27,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$27/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0031/page/n27_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN CITY DIRECTORY. 23 / 11 / 1 / ; / f / F / 3 / f",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 11632948,
+  "hocr_sha1": "af24664ff788cc117d8813bb2545823c701a2256",
+  "hocr_mtime": "1708635213",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 81,
+  "leaves": 669,
+  "filled": 579,
+  "high_confidence": 66,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Hearnes",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1853/54",
+   "title": "Hearnes' Brooklyn City Directory for 1853-1854",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": null
+  },
+  "ia": {
+   "title": "Hearnes' Brooklyn City Directory for 1853-1854",
+   "date": "1853-1854",
+   "year": null,
+   "publisher": "Henry R. & William J. Hearnes",
+   "creator": "Hearnes, Henry R. & William J.",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "669",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126202514",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 8,
+    "chars": 195
+   },
+   "2": {
+    "class": "other",
+    "lines": 3,
+    "chars": 71
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 481
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 15,
+    "chars": 147
+   },
+   "6": {
+    "class": "other",
+    "lines": 19,
+    "chars": 259
+   },
+   "7": {
+    "class": "other",
+    "lines": 5,
+    "chars": 33
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 16,
+    "chars": 183
+   },
+   "10": {
+    "class": "other",
+    "lines": 13,
+    "chars": 514
+   },
+   "11": {
+    "class": "other",
+    "lines": 8,
+    "chars": 84
+   },
+   "12": {
+    "class": "other",
+    "lines": 8,
+    "chars": 160
+   },
+   "13": {
+    "class": "other",
+    "lines": 7,
+    "chars": 52
+   },
+   "14": {
+    "class": "other",
+    "lines": 7,
+    "chars": 111
+   },
+   "15": {
+    "class": "other",
+    "lines": 14,
+    "chars": 274
+   },
+   "16": {
+    "class": "other",
+    "lines": 13,
+    "chars": 371
+   },
+   "17": {
+    "class": "other",
+    "lines": 15,
+    "chars": 140
+   },
+   "18": {
+    "class": "other",
+    "lines": 15,
+    "chars": 243
+   },
+   "19": {
+    "class": "other",
+    "lines": 16,
+    "chars": 138
+   },
+   "20": {
+    "class": "other",
+    "lines": 25,
+    "chars": 255
+   },
+   "21": {
+    "class": "other",
+    "lines": 26,
+    "chars": 333
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 4,
+    "chars": 41
+   },
+   "23": {
+    "class": "other",
+    "lines": 14,
+    "chars": 138
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 8,
+    "chars": 264
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 49,
+    "chars": 1412
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 12,
+    "chars": 131
+   },
+   "27": {
+    "class": "title_page",
+    "lines": 17,
+    "chars": 206
+   },
+   "28": {
+    "class": "other",
+    "lines": 16,
+    "chars": 458
+   },
+   "29": {
+    "class": "other",
+    "lines": 23,
+    "chars": 581
+   }
+  },
+  "title_page_leaf": 27,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   27
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0031/page/n27_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

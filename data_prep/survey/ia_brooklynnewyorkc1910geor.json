@@ -1,0 +1,299 @@
+{
+ "source": "ia",
+ "id": "brooklynnewyorkc1910geor",
+ "book_says": {
+  "year": {
+   "value": 1910,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1910geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "OF NEW YORK\nVOLUME LXXXVII\nFOR THE YEAR\n1910\nV\ninnnMBeBH\u00bbnM9\u00abwa\u00bbw -- \u25a0\u25a0'\nGEORGE UPIN",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1909,
+    1910
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1910,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "OF NEW YORK\nVOLUME LXXXVII\nFOR THE YEAR\n1910\nV\ninnnMBeBH\u00bbnM9\u00abwa\u00bbw -- \u25a0\u25a0'\nGEORGE UPIN"
+   },
+   {
+    "year": 1910,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "ork\nPRICE, $10.00\n79 10650 14\nCOPYRIGHT 1910\nBy Estate of George Upington v"
+   },
+   {
+    "year": 1909,
+    "how": "digits",
+    "leaf": 21,
+    "quote": "ion 28 Copyright Law\nin Force July 1st, 1909\n\u00ae & &\nThat any person who willfully and"
+   }
+  ],
+  "year_covered": {
+   "value": 1910,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1910geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "OF NEW YORK\nVOLUME LXXXVII\nFOR THE YEAR\n1910\nV\ninnnMBeBH\u00bbnM9\u00abwa\u00bbw -- \u25a0\u25a0'\nGEORGE UPIN",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "GEORGE UPINGTON",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1910geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "GEORGE UPINGTON, Publisher",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "volume_number": {
+   "value": 87,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1910geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXXVII",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "UPINGTO&'S \u00bb GENERAL DIRECTORY OF THE BOROUGH OF BROOKLYN wn iiiwtlii'niiifiifl\"n\"r'' ' r\"\" CITY OF NEW YORK",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$7/canvas",
+   "image": "https://archive.org/download/brooklynnewyorkc1910geor/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "UPINGTO&'S / \u00bb / GENERAL DIRECTORY / OF THE BOROUGH OF / BROOKLYN / wn iiiwtlii'niiifiifl\"n\"r'' ' r\"\" / CITY OF NEW YORK",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 134570732,
+  "hocr_sha1": "d1752bf56aa3048793a65d6cfab61d4d1b116a60",
+  "hocr_mtime": "1632666317",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 17,
+  "leaves": 1318,
+  "filled": 144,
+  "high_confidence": 10,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "New York",
+   "borough": "Brooklyn",
+   "year": "1910",
+   "title": "Brooklyn, New York, city directory",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "Upington Gen.Dir. of Brooklyn; col=2 verified 1906 title page (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn, New York, city directory",
+   "date": "1910",
+   "year": null,
+   "publisher": "George Upington",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1320",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130503152815",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 7,
+    "chars": 76
+   },
+   "3": {
+    "class": "other",
+    "lines": 1,
+    "chars": 17
+   },
+   "4": {
+    "class": "other",
+    "lines": 5,
+    "chars": 19
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 93
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 20,
+    "chars": 342
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 22,
+    "chars": 593
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 51,
+    "chars": 697
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 35,
+    "chars": 591
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 34,
+    "chars": 1054
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 893
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 651
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "title_page",
+    "lines": 29,
+    "chars": 1066
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "trade-association-page",
+    "lines": 32,
+    "chars": 1496
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 20,
+    "chars": 481
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "contents",
+    "lines": 150,
+    "chars": 4915
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "contents",
+    "lines": 109,
+    "chars": 3690
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 27,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

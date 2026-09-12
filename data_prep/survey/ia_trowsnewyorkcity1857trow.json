@@ -1,0 +1,288 @@
+{
+ "source": "ia",
+ "id": "trowsnewyorkcity1857trow",
+ "book_says": {
+  "year": {
+   "value": 1857,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1857trow$7/canvas",
+   "image": "https://archive.org/download/trowsnewyorkcity1857trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Y\nH. WILSON.\nFOR THE YEAR ENDING\nMAY 1, 1857.\nNEW YOKE :\nJOHN F. TROW, PUBLISHER, 37",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1857,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "Y\nH. WILSON.\nFOR THE YEAR ENDING\nMAY 1, 1857.\nNEW YOKE :\nJOHN F. TROW, PUBLISHER, 37"
+   }
+  ],
+  "year_covered": {
+   "value": 1857,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1857trow$7/canvas",
+   "image": "https://archive.org/download/trowsnewyorkcity1857trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Y\nH. WILSON.\nFOR THE YEAR ENDING\nMAY 1, 1857.\nNEW YOKE :\nJOHN F. TROW, PUBLISHER, 37",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "H. WILSON AND JOHN F. TROW",
+   "leaf": 8,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1857trow$8/canvas",
+   "image": "https://archive.org/download/trowsnewyorkcity1857trow/page/n8_w1400.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "Act of Congress, in the year 1S56, by H. WILSON AND JOHN F. TROW",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "title": {
+   "value": "TROWS NEW YORK CITY \u20221* DIRECTORY. COMPILED BY H. WILSON.",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1857trow$7/canvas",
+   "image": "https://archive.org/download/trowsnewyorkcity1857trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "TROWS / NEW YORK CITY / \u20221* / DIRECTORY. / COMPILED BY / H. WILSON.",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 23,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1857trow$23/canvas",
+   "image": "https://archive.org/download/trowsnewyorkcity1857trow/page/n23_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "ECEIVED TOO LATE FOR REGULAR INSERTION ON A PRECEDING PAGE.\nABBREVIATIONS.\nal. for alley, b. or bet. between, bdzs. buildings, c. or cor. corner, com. commission, ct. court, E east, e. r.\neast river, ",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 182666380,
+  "hocr_sha1": "fc6fb694514003ecf239169ac2dc28fc8b65a533",
+  "hocr_mtime": "1633878498",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 88,
+  "leaves": 1054,
+  "filled": 1006,
+  "high_confidence": 447,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1857",
+   "title": "Trow's New York city directory.",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "6",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "Trow; col=2 (pilot s4: Sonnet read+Opus audit; early Trow is 2-col); offset +6 @ leaf316/p310"
+  },
+  "ia": {
+   "title": "Trow's New York city directory.",
+   "date": "1857",
+   "year": null,
+   "publisher": "New York, J.F. Trow",
+   "creator": "Trow, John Fowler, 1810-1886",
+   "contributor": "Columbia University Libraries",
+   "imagecount": "1056",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": "20140311112458",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 23,
+    "chars": 682
+   },
+   "3": {
+    "class": "other",
+    "lines": 27,
+    "chars": 959
+   },
+   "4": {
+    "class": "other",
+    "lines": 51,
+    "chars": 1869
+   },
+   "5": {
+    "class": "bookplate",
+    "lines": 2,
+    "chars": 84
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 11,
+    "chars": 161
+   },
+   "8": {
+    "class": "copyright_page",
+    "lines": 7,
+    "chars": 286
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 2634
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 47,
+    "chars": 3290
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 2122
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 153,
+    "chars": 3261
+   },
+   "14": {
+    "class": "contents",
+    "lines": 150,
+    "chars": 2378
+   },
+   "15": {
+    "class": "contents",
+    "lines": 108,
+    "chars": 1699
+   },
+   "16": {
+    "class": "other",
+    "lines": 697,
+    "chars": 4792
+   },
+   "17": {
+    "class": "other",
+    "lines": 556,
+    "chars": 4969
+   },
+   "18": {
+    "class": "other",
+    "lines": 613,
+    "chars": 4891
+   },
+   "19": {
+    "class": "other",
+    "lines": 248,
+    "chars": 4115
+   },
+   "20": {
+    "class": "other",
+    "lines": 268,
+    "chars": 4237
+   },
+   "21": {
+    "class": "other",
+    "lines": 157,
+    "chars": 6106
+   },
+   "22": {
+    "class": "other",
+    "lines": 115,
+    "chars": 4278
+   },
+   "23": {
+    "class": "legend",
+    "lines": 108,
+    "chars": 4193
+   },
+   "24": {
+    "class": "other",
+    "lines": 183,
+    "chars": 6912
+   },
+   "25": {
+    "class": "other",
+    "lines": 183,
+    "chars": 6941
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 183,
+    "chars": 6741
+   },
+   "27": {
+    "class": "other",
+    "lines": 183,
+    "chars": 6984
+   },
+   "28": {
+    "class": "other",
+    "lines": 183,
+    "chars": 7036
+   },
+   "29": {
+    "class": "other",
+    "lines": 183,
+    "chars": 6896
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": 8,
+  "target_card_leaf": null,
+  "contents_leaf": 14,
+  "legend_leaves": [
+   23
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

@@ -1,0 +1,274 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0035",
+ "book_says": {
+  "year": {
+   "value": 1856,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0035/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "BROOKLYN, NEW YORK\n1856-7\nHope & Henderson's (Consolidated) Bro",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1856,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "BROOKLYN, NEW YORK\n1856-7\nHope & Henderson's (Consolidated) Bro"
+   },
+   {
+    "year": 1856,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "nsolidated) Brooklyn City\nDirectory for 1856-7. G. Clarke Henderson, Compiler.\nBrook"
+   },
+   {
+    "year": 1856,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "& Henderson; Office,\n181 Fulton Street. 1856."
+   }
+  ],
+  "publisher": {
+   "value": "Hope & Henderson",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0035/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "Published by Hope & Henderson",
+   "method": "hocr-text",
+   "confidence": "low",
+   "evidence_detail": "imprint"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 44667814,
+  "hocr_sha1": "5f68e90104729eca5f48943410e9356287e98066",
+  "hocr_mtime": "1708649351",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 69,
+  "leaves": 676,
+  "filled": 538,
+  "high_confidence": 1,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Hope & Henderson",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1856/57",
+   "title": "Hope & Henderson's (Consolidated) Brooklyn City Directory for 1856-1857",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "31",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Hope&Henderson col=2 (s4 fan-out: 2-col residential HAG-HAL/VAN); offset +31 @ leaf205/p174"
+  },
+  "ia": {
+   "title": "Hope & Henderson's (Consolidated) Brooklyn City Directory for 1856-1857",
+   "date": "1856-1857",
+   "year": null,
+   "publisher": "Hope & Henderson",
+   "creator": "Henderson, G. Clarke",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "686",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126221814",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "target_card",
+    "lines": 6,
+    "chars": 200
+   },
+   "2": {
+    "class": "other",
+    "lines": 21,
+    "chars": 243
+   },
+   "3": {
+    "class": "other",
+    "lines": 22,
+    "chars": 569
+   },
+   "4": {
+    "class": "other",
+    "lines": 15,
+    "chars": 292
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 438
+   },
+   "6": {
+    "class": "other",
+    "lines": 15,
+    "chars": 283
+   },
+   "7": {
+    "class": "other",
+    "lines": 20,
+    "chars": 302
+   },
+   "8": {
+    "class": "other",
+    "lines": 22,
+    "chars": 307
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 767
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 701
+   },
+   "11": {
+    "class": "other",
+    "lines": 31,
+    "chars": 671
+   },
+   "12": {
+    "class": "other",
+    "lines": 30,
+    "chars": 461
+   },
+   "13": {
+    "class": "other",
+    "lines": 27,
+    "chars": 381
+   },
+   "14": {
+    "class": "other",
+    "lines": 16,
+    "chars": 222
+   },
+   "15": {
+    "class": "other",
+    "lines": 24,
+    "chars": 520
+   },
+   "16": {
+    "class": "other",
+    "lines": 22,
+    "chars": 462
+   },
+   "17": {
+    "class": "other",
+    "lines": 18,
+    "chars": 559
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 15,
+    "chars": 475
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 703
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 509
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 9,
+    "chars": 292
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 5,
+    "chars": 113
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 20,
+    "chars": 441
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1371
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 32,
+    "chars": 1049
+   },
+   "26": {
+    "class": "other",
+    "lines": 19,
+    "chars": 422
+   },
+   "27": {
+    "class": "other",
+    "lines": 33,
+    "chars": 848
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 859
+   },
+   "29": {
+    "class": "other",
+    "lines": 24,
+    "chars": 422
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 1,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "weak_title_page": 3,
+  "image_read_candidates": [
+   1
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/micro_IABROOKLYN_0035/page/n1_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

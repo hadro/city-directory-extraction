@@ -1,0 +1,288 @@
+{
+ "source": "ia",
+ "id": "1878BPL",
+ "book_says": {
+  "year": {
+   "value": 1877,
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/1878BPL$13/canvas",
+   "image": "https://archive.org/download/1878BPL/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "in the year eighteen hundred and seventy-seven\nBy",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words",
+   "other_years_on_page": [
+    1877,
+    1878
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1878,
+    "how": "digits",
+    "leaf": 13,
+    "quote": "OKLYN\nCITY\nFOR\nTHE YEAR ENDING MAY 1st,\n1878.\nCONTAINING ALSO\nA STREET AND AVENUE DI"
+   },
+   {
+    "year": 1877,
+    "how": "words",
+    "leaf": 13,
+    "quote": "in the year eighteen hundred and seventy-seven\nBy"
+   }
+  ],
+  "publisher": {
+   "value": "LAIN & COMPANY",
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/1878BPL$13/canvas",
+   "image": "https://archive.org/download/1878BPL/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY LAIN & COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "LA1N S BROOKLYN DIRECTORY. F. SCHULER SQUARE & UPRIGHT PIANO-FORTES. Warerooms, 26 East 14th St.; Bet. University Place & Fifth Ave., NEW YORK. For Sale at a ve",
+   "leaf": 3,
+   "canvas": "https://iiif.archive.org/iiif/1878BPL$3/canvas",
+   "image": "https://archive.org/download/1878BPL/page/n3_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "LA1N S BROOKLYN DIRECTORY. / F. SCHULER / SQUARE & / UPRIGHT / PIANO-FORTES. / Warerooms, 26 East 14th St.; / Bet. University Place & Fifth Ave., NEW YORK. / For Sale at a very moderate price for Cash",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 25,
+   "canvas": "https://iiif.archive.org/iiif/1878BPL$25/canvas",
+   "image": "https://archive.org/download/1878BPL/page/n25_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "in their vocations in the cities of Brooklyn and New York.\nABBREVIATIONS, ETC.\naoct. accountant ; agl. agricultural ; agt. agent; al. alley; art. artificial ; ay. avenue; asst. atiist\nant; bldg. build",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 10,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 150704959,
+  "hocr_sha1": "38455acd215266ab642295e0fc1f2a70694e7a10",
+  "hocr_mtime": "1632343874",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 65,
+  "leaves": 1126,
+  "filled": 1027,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1878",
+   "title": "Brooklyn City Directory for the year ending May 1, 1878",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain; col=2 verified via 1858/1869 title pages (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn City Directory for the year ending May 1, 1878",
+   "date": "1878",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1126",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 29,
+    "chars": 1207
+   },
+   "1": {
+    "class": "other",
+    "lines": 22,
+    "chars": 333
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 47,
+    "chars": 1483
+   },
+   "3": {
+    "class": "title_page",
+    "lines": 37,
+    "chars": 668
+   },
+   "4": {
+    "class": "other",
+    "lines": 12,
+    "chars": 360
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 482
+   },
+   "6": {
+    "class": "other",
+    "lines": 27,
+    "chars": 1814
+   },
+   "7": {
+    "class": "other",
+    "lines": 37,
+    "chars": 1447
+   },
+   "8": {
+    "class": "other",
+    "lines": 28,
+    "chars": 829
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 8,
+    "chars": 194
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1023
+   },
+   "11": {
+    "class": "other",
+    "lines": 26,
+    "chars": 707
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 49,
+    "chars": 1035
+   },
+   "13": {
+    "class": "title_page",
+    "lines": 19,
+    "chars": 511
+   },
+   "14": {
+    "class": "other",
+    "lines": 42,
+    "chars": 1207
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 80,
+    "chars": 2583
+   },
+   "16": {
+    "class": "other",
+    "lines": 19,
+    "chars": 477
+   },
+   "17": {
+    "class": "contents",
+    "lines": 99,
+    "chars": 3172
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 138,
+    "chars": 4723
+   },
+   "19": {
+    "class": "contents",
+    "lines": 123,
+    "chars": 4057
+   },
+   "20": {
+    "class": "other",
+    "lines": 11,
+    "chars": 370
+   },
+   "21": {
+    "class": "other",
+    "lines": 12,
+    "chars": 304
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 17,
+    "chars": 436
+   },
+   "23": {
+    "class": "other",
+    "lines": 21,
+    "chars": 531
+   },
+   "24": {
+    "class": "other",
+    "lines": 18,
+    "chars": 468
+   },
+   "25": {
+    "class": "legend",
+    "lines": 81,
+    "chars": 2970
+   },
+   "26": {
+    "class": "other",
+    "lines": 154,
+    "chars": 4774
+   },
+   "27": {
+    "class": "other",
+    "lines": 157,
+    "chars": 4905
+   },
+   "28": {
+    "class": "other",
+    "lines": 147,
+    "chars": 4393
+   },
+   "29": {
+    "class": "other",
+    "lines": 167,
+    "chars": 4822
+   }
+  },
+  "title_page_leaf": 13,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 17,
+  "legend_leaves": [
+   25
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

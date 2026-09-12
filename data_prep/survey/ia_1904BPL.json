@@ -1,0 +1,274 @@
+{
+ "source": "ia",
+ "id": "1904BPL",
+ "book_says": {
+  "year": {
+   "value": 1904,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1904BPL$1/canvas",
+   "image": "https://archive.org/download/1904BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "IN THE YEAR NINETEEN HUNDRED AND FOUR,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words"
+  },
+  "year_attestations": [
+   {
+    "year": 1904,
+    "how": "words",
+    "leaf": 1,
+    "quote": "IN THE YEAR NINETEEN HUNDRED AND FOUR,"
+   }
+  ],
+  "publisher": {
+   "value": "GKOItCh UPINGTON",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1904BPL$1/canvas",
+   "image": "https://archive.org/download/1904BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "ACT OF CONGRESS IN THE YEAR NINETEEN HUNDRED AND FOUR, BY GKOItCh UPINGTON",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "volume_number": {
+   "value": 81,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1904BPL$1/canvas",
+   "image": "https://archive.org/download/1904BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXXI",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "UPINGTON'S GENERAL DIRECTORY OF BROOKLYN, NEW YORK CITY.",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1904BPL$1/canvas",
+   "image": "https://archive.org/download/1904BPL/page/n1_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "UPINGTON'S / GENERAL DIRECTORY / OF BROOKLYN, / NEW YORK CITY.",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 208230485,
+  "hocr_sha1": "9d21321e4d28ef30ac65cf8e0883d20dacccdc2f",
+  "hocr_mtime": "1632344522",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 95.60649474689589,
+  "leaves": 1047,
+  "filled": 1047,
+  "high_confidence": 975,
+  "ocr_value_leaves": 1016,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Upington",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1904",
+   "title": "Upington's General Directory of Brooklyn, New York City, for the year 1904",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Upington col=2 (BPL scan, see upington card; likely dup of *geor copy; s4)"
+  },
+  "ia": {
+   "title": "Upington's General Directory of Brooklyn, New York City, for the year 1904",
+   "date": "1904",
+   "year": "1904",
+   "publisher": null,
+   "creator": "George Upington",
+   "contributor": null,
+   "imagecount": "1048",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 31,
+    "chars": 1089
+   },
+   "1": {
+    "class": "title_page",
+    "lines": 14,
+    "chars": 381
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 48,
+    "chars": 1218
+   },
+   "3": {
+    "class": "trade-association-page",
+    "lines": 28,
+    "chars": 1129
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 780
+   },
+   "5": {
+    "class": "contents",
+    "lines": 103,
+    "chars": 3864
+   },
+   "6": {
+    "class": "other",
+    "lines": 143,
+    "chars": 5076
+   },
+   "7": {
+    "class": "contents",
+    "lines": 98,
+    "chars": 3527
+   },
+   "8": {
+    "class": "other",
+    "lines": 50,
+    "chars": 1656
+   },
+   "9": {
+    "class": "title_page",
+    "lines": 157,
+    "chars": 4484
+   },
+   "10": {
+    "class": "other",
+    "lines": 267,
+    "chars": 6073
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 221,
+    "chars": 6002
+   },
+   "12": {
+    "class": "other",
+    "lines": 216,
+    "chars": 4474
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 271,
+    "chars": 6038
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 251,
+    "chars": 6334
+   },
+   "15": {
+    "class": "other",
+    "lines": 215,
+    "chars": 5841
+   },
+   "16": {
+    "class": "other",
+    "lines": 236,
+    "chars": 5964
+   },
+   "17": {
+    "class": "other",
+    "lines": 259,
+    "chars": 6315
+   },
+   "18": {
+    "class": "other",
+    "lines": 243,
+    "chars": 6049
+   },
+   "19": {
+    "class": "other",
+    "lines": 250,
+    "chars": 6197
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 210,
+    "chars": 6048
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 334,
+    "chars": 6339
+   },
+   "22": {
+    "class": "other",
+    "lines": 199,
+    "chars": 5795
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 217,
+    "chars": 4702
+   },
+   "24": {
+    "class": "other",
+    "lines": 242,
+    "chars": 5890
+   },
+   "25": {
+    "class": "other",
+    "lines": 244,
+    "chars": 6112
+   },
+   "26": {
+    "class": "other",
+    "lines": 257,
+    "chars": 6447
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 255,
+    "chars": 5726
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 241,
+    "chars": 5825
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 253,
+    "chars": 6206
+   }
+  },
+  "title_page_leaf": 1,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 5,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

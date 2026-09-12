@@ -1,0 +1,275 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldir1912p1trow",
+ "book_says": {
+  "year": {
+   "value": 1912,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1912p1trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "L. GXXV.\nEOR THE YEAR ENDING-\nAUGUST 1, 1912\n\u25a0\nV\n-\n\u25a0\nPUBLISHED ANNUALLY\nBY\nTROW DIRE",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1907,
+    1911,
+    1912
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1912,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "L. GXXV.\nEOR THE YEAR ENDING-\nAUGUST 1, 1912\n\u25a0\nV\n-\n\u25a0\nPUBLISHED ANNUALLY\nBY\nTROW DIRE"
+   },
+   {
+    "year": 1911,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "CTORY, PRINTING AND BOOKBINDING COMPANY\n1911\n73"
+   },
+   {
+    "year": 1911,
+    "how": "digits",
+    "leaf": 9,
+    "quote": "ith\nofficial maps on hie up to Jan. 1st 1911.\nEXPLANATION\nRailroads :\nElevated Railr"
+   },
+   {
+    "year": 1907,
+    "how": "digits",
+    "leaf": 9,
+    "quote": "Ferries:\nWard Boundaries:\n10\nCopyright, 1907, By The J. N. Matthews Co., Buffalo, N."
+   }
+  ],
+  "title": {
+   "value": "- 1 \u25a0 *\u00a33f\u00a5 TROWS GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX CITY OF NEW YORK VOL. GXXV. EOR THE YEAR ENDING-",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1912p1trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "- / 1 \u25a0 / *\u00a33f\u00a5 / TROWS / GENERAL DIRECTORY / OF THE BOROUGHS OF / MANHATTAN AND BRONX / CITY OF NEW YORK / VOL. GXXV. / EOR THE YEAR ENDING-",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 229729912,
+  "hocr_sha1": "a428d8072dbcb6540671258e3ed2412ab1ca8038",
+  "hocr_mtime": "1633879415",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 15,
+  "leaves": 1314,
+  "filled": 30,
+  "high_confidence": 10,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1912",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan | part 1; Trow; col=3 (s4: bracketed 1859-1915 all 3-col + 1890s card)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1912",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1316",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130423173342",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 1,
+    "chars": 5
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 28
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 26,
+    "chars": 366
+   },
+   "8": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "9": {
+    "class": "title_page",
+    "lines": 50,
+    "chars": 795
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 24,
+    "chars": 129
+   },
+   "12": {
+    "class": "other",
+    "lines": 1,
+    "chars": 29
+   },
+   "13": {
+    "class": "other",
+    "lines": 1,
+    "chars": 7
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 48,
+    "chars": 505
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "other",
+    "lines": 42,
+    "chars": 830
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 21,
+    "chars": 341
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 14,
+    "chars": 273
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "other",
+    "lines": 29,
+    "chars": 1419
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 19,
+    "chars": 432
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 1095
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "trade-association-page",
+    "lines": 101,
+    "chars": 2209
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

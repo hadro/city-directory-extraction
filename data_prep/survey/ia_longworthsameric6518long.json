@@ -1,0 +1,287 @@
+{
+ "source": "ia",
+ "id": "longworthsameric6518long",
+ "book_says": {
+  "year": {
+   "value": 1840,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric6518long$7/canvas",
+   "image": "https://archive.org/download/longworthsameric6518long/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "sixty-fifth year of American Independence",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "independence-formula"
+  },
+  "year_attestations": [
+   {
+    "year": 1840,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "Y THOMAS LONG WORTH,\n118 NASSAU STREET.\n1840."
+   },
+   {
+    "year": 1840,
+    "how": "independence-formula",
+    "leaf": 7,
+    "quote": "sixty-fifth year of American Independence"
+   },
+   {
+    "year": 1840,
+    "how": "digits",
+    "leaf": 8,
+    "quote": "Table of Distances\nCharter Officers for 1840\nBoard of Health and Health Commissioner"
+   },
+   {
+    "year": 1840,
+    "how": "digits",
+    "leaf": 8,
+    "quote": "cording to Act of Congress, in the year 1840, by Thomas\nLongworth, in the Clerk's Of"
+   }
+  ],
+  "publisher": {
+   "value": "THOMAS LONG WORTH",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric6518long$7/canvas",
+   "image": "https://archive.org/download/longworthsameric6518long/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY THOMAS LONG WORTH",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "LONGWORTH'S AMERICAN ALMANAC, NEW-YORK REGISTER, AND CITY DIRECTORY, FOk THE SIXTY-FIFTH YEAR OP- AMERICAN INDEPENDENCE : CONTAINING",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric6518long$7/canvas",
+   "image": "https://archive.org/download/longworthsameric6518long/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "LONGWORTH'S / AMERICAN ALMANAC, / NEW-YORK REGISTER, / AND / CITY DIRECTORY, / FOk / THE SIXTY-FIFTH YEAR / OP- / AMERICAN INDEPENDENCE : / CONTAINING",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 43991367,
+  "hocr_sha1": "bca61853ac3c08f2dbf4bae9b9c3cc5452aed1ed",
+  "hocr_mtime": "1637797742",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 100,
+  "leaves": 770,
+  "filled": 735,
+  "high_confidence": 421,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Longworth",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1840",
+   "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of American independence.",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "year from IA volume no. (Nth yr of independence=1775+N); IA year field is placeholder 1797. Confirmed via metadata for vols 26/40/60/61/65; 38/48 by same arithmetic. Alternate scan \u2014 year also held via NYPL run."
+  },
+  "ia": {
+   "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of American independence.",
+   "date": "1797",
+   "year": null,
+   "publisher": "New-York: : Printed and published ... by David Longworth.",
+   "creator": [
+    "Longworth, David, 1765?-1821",
+    "Longworth, Thomas",
+    "Beers, Andrew, 1749-1824",
+    "Shoemaker, Abraham. Astronomical calculations for the ... year of American independence"
+   ],
+   "contributor": "Columbia University Libraries",
+   "imagecount": "772",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": "20131205140404",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "other",
+    "lines": 8,
+    "chars": 85
+   },
+   "2": {
+    "class": "other",
+    "lines": 2,
+    "chars": 11
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 27,
+    "chars": 1065
+   },
+   "8": {
+    "class": "title_page",
+    "lines": 42,
+    "chars": 1093
+   },
+   "9": {
+    "class": "other",
+    "lines": 47,
+    "chars": 1214
+   },
+   "10": {
+    "class": "other",
+    "lines": 6,
+    "chars": 128
+   },
+   "11": {
+    "class": "other",
+    "lines": 173,
+    "chars": 1722
+   },
+   "12": {
+    "class": "other",
+    "lines": 201,
+    "chars": 1590
+   },
+   "13": {
+    "class": "other",
+    "lines": 170,
+    "chars": 1587
+   },
+   "14": {
+    "class": "other",
+    "lines": 192,
+    "chars": 1659
+   },
+   "15": {
+    "class": "other",
+    "lines": 116,
+    "chars": 1652
+   },
+   "16": {
+    "class": "other",
+    "lines": 152,
+    "chars": 1756
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 151,
+    "chars": 1788
+   },
+   "18": {
+    "class": "other",
+    "lines": 100,
+    "chars": 1569
+   },
+   "19": {
+    "class": "other",
+    "lines": 140,
+    "chars": 1702
+   },
+   "20": {
+    "class": "other",
+    "lines": 177,
+    "chars": 1960
+   },
+   "21": {
+    "class": "other",
+    "lines": 151,
+    "chars": 1776
+   },
+   "22": {
+    "class": "other",
+    "lines": 159,
+    "chars": 1848
+   },
+   "23": {
+    "class": "other",
+    "lines": 39,
+    "chars": 1822
+   },
+   "24": {
+    "class": "other",
+    "lines": 50,
+    "chars": 2977
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 2452
+   },
+   "26": {
+    "class": "other",
+    "lines": 71,
+    "chars": 1150
+   },
+   "27": {
+    "class": "other",
+    "lines": 47,
+    "chars": 2065
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1838
+   },
+   "29": {
+    "class": "other",
+    "lines": 44,
+    "chars": 1847
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

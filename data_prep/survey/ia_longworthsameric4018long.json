@@ -1,0 +1,269 @@
+{
+ "source": "ia",
+ "id": "longworthsameric4018long",
+ "book_says": {
+  "year": {
+   "value": 1816,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4018long$17/canvas",
+   "image": "https://archive.org/download/longworthsameric4018long/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "YORK\nALMANAC,\nroii the\nYEAR OF OUR LORD\n1816.\nHEING BISSEXTILE..\nOR\nLEAP YEAR,\nAND (",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1816,
+    "how": "digits",
+    "leaf": 17,
+    "quote": "YORK\nALMANAC,\nroii the\nYEAR OF OUR LORD\n1816.\nHEING BISSEXTILE..\nOR\nLEAP YEAR,\nAND ("
+   }
+  ],
+  "publisher": {
+   "value": "D LONG WORTH",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4018long$17/canvas",
+   "image": "https://archive.org/download/longworthsameric4018long/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY D LONG WORTH",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "LONG WORTH'S NKW-YORK ALMANAC, roii the YEAR OF OUR LORD",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4018long$17/canvas",
+   "image": "https://archive.org/download/longworthsameric4018long/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "LONG WORTH'S NKW-YORK / ALMANAC, / roii the / YEAR OF OUR LORD",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 24917751,
+  "hocr_sha1": "5b4a03f03920371189359ff992bc2b58b4eb3c42",
+  "hocr_mtime": "1700337680",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 92,
+  "leaves": 488,
+  "filled": 425,
+  "high_confidence": 114,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Longworth",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1815",
+   "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of American independence.",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "year from IA volume no. (Nth yr of independence=1775+N); IA year field is placeholder 1797. Confirmed via metadata for vols 26/40/60/61/65; 38/48 by same arithmetic. Alternate scan \u2014 year also held via NYPL run."
+  },
+  "ia": {
+   "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of American independence.",
+   "date": "1797",
+   "year": null,
+   "publisher": "New-York: : Printed and published ... by David Longworth.",
+   "creator": [
+    "Longworth, David, 1765?-1821",
+    "Longworth, Thomas",
+    "Beers, Andrew, 1749-1824",
+    "Shoemaker, Abraham. Astronomical calculations for the ... year of American independence"
+   ],
+   "contributor": "Columbia University Libraries",
+   "imagecount": "490",
+   "ocr": null,
+   "scandate": "20131205145240",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "bookplate",
+    "lines": 7,
+    "chars": 196
+   },
+   "3": {
+    "class": "bookplate",
+    "lines": 2,
+    "chars": 83
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "other",
+    "lines": 2,
+    "chars": 4
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "8": {
+    "class": "other",
+    "lines": 70,
+    "chars": 2686
+   },
+   "9": {
+    "class": "other",
+    "lines": 53,
+    "chars": 3287
+   },
+   "10": {
+    "class": "other",
+    "lines": 47,
+    "chars": 1953
+   },
+   "11": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1627
+   },
+   "12": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1211
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 23,
+    "chars": 717
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 2685
+   },
+   "15": {
+    "class": "other",
+    "lines": 47,
+    "chars": 2500
+   },
+   "16": {
+    "class": "other",
+    "lines": 48,
+    "chars": 2772
+   },
+   "17": {
+    "class": "title_page",
+    "lines": 22,
+    "chars": 589
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 59,
+    "chars": 1231
+   },
+   "19": {
+    "class": "other",
+    "lines": 13,
+    "chars": 406
+   },
+   "20": {
+    "class": "other",
+    "lines": 258,
+    "chars": 1204
+   },
+   "21": {
+    "class": "other",
+    "lines": 228,
+    "chars": 1053
+   },
+   "22": {
+    "class": "other",
+    "lines": 78,
+    "chars": 2723
+   },
+   "23": {
+    "class": "other",
+    "lines": 299,
+    "chars": 1584
+   },
+   "24": {
+    "class": "other",
+    "lines": 190,
+    "chars": 1475
+   },
+   "25": {
+    "class": "other",
+    "lines": 142,
+    "chars": 1282
+   },
+   "26": {
+    "class": "other",
+    "lines": 364,
+    "chars": 1791
+   },
+   "27": {
+    "class": "other",
+    "lines": 304,
+    "chars": 1868
+   },
+   "28": {
+    "class": "other",
+    "lines": 172,
+    "chars": 1714
+   },
+   "29": {
+    "class": "other",
+    "lines": 64,
+    "chars": 835
+   }
+  },
+  "title_page_leaf": 17,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

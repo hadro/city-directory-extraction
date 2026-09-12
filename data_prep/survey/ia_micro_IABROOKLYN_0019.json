@@ -1,0 +1,261 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0019",
+ "book_says": {
+  "year": {
+   "value": 1843,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0019$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0019/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "BROOKLYN, NEW YORK\n1843-4 5\nBrooklyn Alphabetical and Street Di",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1843,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "BROOKLYN, NEW YORK\n1843-4 5\nBrooklyn Alphabetical and Street Di"
+   },
+   {
+    "year": 1843,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "t Directory, and\nYearly Advertiser, for 1843 & 4. Compiled and\nPublished by Thomas L"
+   }
+  ],
+  "publisher": {
+   "value": "Thomas Leslie",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0019$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0019/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "Published by Thomas Leslie",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "evidence_detail": "imprint"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 10214627,
+  "hocr_sha1": "62ee3a2403a32eeb6b3f1ee952c4b0fc80bb37d8",
+  "hocr_mtime": "1708577801",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 76,
+  "leaves": 222,
+  "filled": 209,
+  "high_confidence": 5,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1843",
+   "title": "Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1843 & 1844",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Spooner-era Brooklyn; col=1 verified 1848/49 sample (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1843 & 1844",
+   "date": "1843-1844",
+   "year": null,
+   "publisher": "Stationers' Hall Works",
+   "creator": "Leslie, Thomas and Henry R. & William J. Hearnes",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "222",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126030359",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "target_card",
+    "lines": 7,
+    "chars": 236
+   },
+   "2": {
+    "class": "other",
+    "lines": 14,
+    "chars": 210
+   },
+   "3": {
+    "class": "other",
+    "lines": 4,
+    "chars": 37
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 24,
+    "chars": 330
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "other",
+    "lines": 22,
+    "chars": 355
+   },
+   "7": {
+    "class": "other",
+    "lines": 26,
+    "chars": 536
+   },
+   "8": {
+    "class": "other",
+    "lines": 11,
+    "chars": 216
+   },
+   "9": {
+    "class": "other",
+    "lines": 45,
+    "chars": 802
+   },
+   "10": {
+    "class": "other",
+    "lines": 16,
+    "chars": 241
+   },
+   "11": {
+    "class": "other",
+    "lines": 24,
+    "chars": 507
+   },
+   "12": {
+    "class": "other",
+    "lines": 12,
+    "chars": 200
+   },
+   "13": {
+    "class": "other",
+    "lines": 32,
+    "chars": 841
+   },
+   "14": {
+    "class": "other",
+    "lines": 30,
+    "chars": 465
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1211
+   },
+   "16": {
+    "class": "other",
+    "lines": 55,
+    "chars": 1346
+   },
+   "17": {
+    "class": "other",
+    "lines": 62,
+    "chars": 1296
+   },
+   "18": {
+    "class": "other",
+    "lines": 51,
+    "chars": 1359
+   },
+   "19": {
+    "class": "other",
+    "lines": 15,
+    "chars": 330
+   },
+   "20": {
+    "class": "other",
+    "lines": 29,
+    "chars": 963
+   },
+   "21": {
+    "class": "other",
+    "lines": 28,
+    "chars": 705
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1219
+   },
+   "23": {
+    "class": "other",
+    "lines": 14,
+    "chars": 388
+   },
+   "24": {
+    "class": "other",
+    "lines": 42,
+    "chars": 1206
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1595
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 412
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 1811
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 9,
+    "chars": 193
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 19,
+    "chars": 592
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 1,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

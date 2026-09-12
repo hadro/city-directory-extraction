@@ -1,0 +1,245 @@
+{
+ "source": "ia",
+ "id": "1899xBPL",
+ "book_says": {
+  "title": {
+   "value": "8 LAIN\u2019S BROOKLYN DIRECTORY. LAIN'S Brooklyn Street Guide Contains List of all the STREETS, AVENUES, and PLACES, Every Corner Number, and all the Railroad Route",
+   "leaf": 8,
+   "canvas": "https://iiif.archive.org/iiif/1899xBPL$8/canvas",
+   "image": "https://archive.org/download/1899xBPL/page/n8_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "8 / LAIN\u2019S BROOKLYN DIRECTORY. / LAIN'S / Brooklyn Street Guide / Contains List of all the STREETS, AVENUES, and PLACES, Every Corner / Number, and all the Railroad Routes.",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "publisher": {
+   "value": "CEO. H. CLARKE",
+   "leaf": 10,
+   "canvas": "https://iiif.archive.org/iiif/1899xBPL$10/canvas",
+   "image": "https://archive.org/download/1899xBPL/page/n10_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "CEO. H. CLARKE, Proprietor",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 384111168,
+  "hocr_sha1": "9510527e655714ed45d252e14effda2694676156",
+  "hocr_mtime": "1632345686",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 95.0100857286939,
+  "leaves": 1983,
+  "filled": 1983,
+  "high_confidence": 1870,
+  "ocr_value_leaves": 1915,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1899",
+   "title": "Lain & Healy's Brooklyn Directory for the year ending May 1, 1899",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "52",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "offset +52 at p.542 (leaf594); 2 col; Lain & Healy imprint; visually sampled 2026-06-19"
+  },
+  "ia": {
+   "title": "Lain & Healy's Brooklyn Directory for the year ending May 1, 1899",
+   "date": "1899",
+   "year": "1899",
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1984",
+   "ocr": "ABBYY FineReader 11.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 38,
+    "chars": 1187
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 18,
+    "chars": 831
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 16,
+    "chars": 556
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 19,
+    "chars": 375
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 916
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 511
+   },
+   "6": {
+    "class": "other",
+    "lines": 65,
+    "chars": 1899
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 630
+   },
+   "8": {
+    "class": "title_page",
+    "lines": 19,
+    "chars": 648
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 23,
+    "chars": 1275
+   },
+   "10": {
+    "class": "title_page",
+    "lines": 20,
+    "chars": 819
+   },
+   "11": {
+    "class": "other",
+    "lines": 28,
+    "chars": 1402
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 1246
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 14,
+    "chars": 461
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 58,
+    "chars": 1261
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 1874
+   },
+   "16": {
+    "class": "contents",
+    "lines": 117,
+    "chars": 4047
+   },
+   "17": {
+    "class": "contents",
+    "lines": 138,
+    "chars": 4405
+   },
+   "18": {
+    "class": "other",
+    "lines": 138,
+    "chars": 4569
+   },
+   "19": {
+    "class": "contents",
+    "lines": 138,
+    "chars": 4708
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 112,
+    "chars": 3713
+   },
+   "21": {
+    "class": "title_page",
+    "lines": 19,
+    "chars": 583
+   },
+   "22": {
+    "class": "other",
+    "lines": 21,
+    "chars": 636
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 32,
+    "chars": 1039
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 62,
+    "chars": 1839
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 54,
+    "chars": 1773
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 71,
+    "chars": 2545
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 47,
+    "chars": 1438
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 41,
+    "chars": 1532
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 28,
+    "chars": 1274
+   }
+  },
+  "title_page_leaf": 8,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 16,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

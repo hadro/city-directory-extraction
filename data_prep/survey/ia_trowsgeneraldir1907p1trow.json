@@ -1,0 +1,283 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldir1907p1trow",
+ "book_says": {
+  "year": {
+   "value": 1907,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1907p1trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1907p1trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "K\nVOL. CXX.\nFOR THB YEAR ENDING\nJULY 1, 1907\nV-\n~- '&\nPUBLISHED ANNUALLY\nTROW DIRECT",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1906,
+    1907
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1907,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "K\nVOL. CXX.\nFOR THB YEAR ENDING\nJULY 1, 1907\nV-\n~- '&\nPUBLISHED ANNUALLY\nTROW DIRECT"
+   },
+   {
+    "year": 1906,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "cording to Act of Congress, In the year 1906, by\nTROW DIRECTORY, PRINTING AND BOOKBI"
+   }
+  ],
+  "publisher": {
+   "value": "TROW DIRECTORY",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1907p1trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1907p1trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Act of Congress, In the year 1906, by TROW DIRECTORY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "volume_number": {
+   "value": 120,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1907p1trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1907p1trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOL. CXX",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "trplwis: GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX CITY OF NEW YORK",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1907p1trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1907p1trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "trplwis: / GENERAL DIRECTORY / OF THE BOROUGHS OF / MANHATTAN AND BRONX / CITY OF NEW YORK",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 191625241,
+  "hocr_sha1": "dab6fbb888e8fc5cefd6315ac3fc063818ad2af0",
+  "hocr_mtime": "1633878671",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 1226,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1907",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan | part 1; Trow; col=3 (s4: bracketed 1859-1915 all 3-col + 1890s card)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1907",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1228",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130423150514",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 8,
+    "chars": 73
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 35
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 94
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 19,
+    "chars": 453
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 2,
+    "chars": 7
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 49,
+    "chars": 800
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 47,
+    "chars": 1735
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 3,
+    "chars": 44
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 8,
+    "chars": 253
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "contents",
+    "lines": 154,
+    "chars": 3227
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 673
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 58,
+    "chars": 3258
+   },
+   "24": {
+    "class": "other",
+    "lines": 1,
+    "chars": 1
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1058
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 62,
+    "chars": 1060
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 44,
+    "chars": 1521
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 19,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

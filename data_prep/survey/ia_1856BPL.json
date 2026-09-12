@@ -1,0 +1,264 @@
+{
+ "source": "ia",
+ "id": "1856BPL",
+ "book_says": {
+  "year": {
+   "value": 1837,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/1856BPL$9/canvas",
+   "image": "https://archive.org/download/1856BPL/page/n9_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "CTORY\nIN THE UNITED STATES.\nESTABLISHED 1837.\nFrom the long Experience and the vario",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits",
+   "conflicts_with_catalog": [
+    "1856",
+    "1856"
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1837,
+    "how": "digits",
+    "leaf": 9,
+    "quote": "CTORY\nIN THE UNITED STATES.\nESTABLISHED 1837.\nFrom the long Experience and the vario"
+   }
+  ],
+  "title": {
+   "value": "BROOKLYN DIRECTORY ADVERTISER. 11 LOOKING GLASSES AND . P I C TORE Fill THE LARGEST AND MOST EXTENSIVE MANUFACTORY IN THE UNITED STATES.",
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/1856BPL$9/canvas",
+   "image": "https://archive.org/download/1856BPL/page/n9_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY ADVERTISER. 11 / LOOKING GLASSES / AND . / P I C TORE Fill / THE LARGEST AND MOST EXTENSIVE MANUFACTORY / IN THE UNITED STATES.",
+   "method": "hocr-text",
+   "confidence": "low"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 66403440,
+  "hocr_sha1": "f76e671098fc440adb731b5f4d27faa3a6ef2544",
+  "hocr_mtime": "1635639948",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 98,
+  "leaves": 640,
+  "filled": 597,
+  "high_confidence": 275,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Smith",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1856",
+   "title": "Smith's Brooklyn Directory for the year ending May 1, 1856",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Smith col=2 interp (Brooklyn 2-col by 1856: H&H 1856 + Smith 1857 confirmed; 1854 was col1)"
+  },
+  "ia": {
+   "title": "Smith's Brooklyn Directory for the year ending May 1, 1856",
+   "date": "1856",
+   "year": null,
+   "publisher": null,
+   "creator": "William H. Smith",
+   "contributor": null,
+   "imagecount": "640",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 31,
+    "chars": 1212
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 35,
+    "chars": 2048
+   },
+   "2": {
+    "class": "front_matter",
+    "lines": 10,
+    "chars": 262
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 1170
+   },
+   "5": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 492
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 944
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1283
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 19,
+    "chars": 450
+   },
+   "9": {
+    "class": "title_page",
+    "lines": 19,
+    "chars": 633
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 1154
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 918
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 942
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 28,
+    "chars": 932
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 25,
+    "chars": 858
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 508
+   },
+   "16": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 692
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 981
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 24,
+    "chars": 790
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 2079
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 17,
+    "chars": 538
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 31,
+    "chars": 1132
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 1166
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1291
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 28,
+    "chars": 970
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 673
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 1049
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 1034
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 1126
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 23,
+    "chars": 582
+   }
+  },
+  "title_page_leaf": 9,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "weak_title_page": 1,
+  "image_read_candidates": [
+   9
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/1856BPL/page/n9_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

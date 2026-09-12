@@ -1,0 +1,297 @@
+{
+ "source": "ia",
+ "id": "longworthsameric00newy",
+ "book_says": {
+  "year": {
+   "value": 1839,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
+   "image": "https://archive.org/download/longworthsameric00newy/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "SIXTY-FOURTH YEAR\nOF\nAMERICAN INDEPENDENCE",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "independence-formula",
+   "conflicts_with_catalog": [
+    "1816",
+    "1816"
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1839,
+    "how": "digits",
+    "leaf": 17,
+    "quote": "Y THOMAS LONG WORTH,\n118 NASSAU STREET,\n1839,"
+   },
+   {
+    "year": 1839,
+    "how": "independence-formula",
+    "leaf": 17,
+    "quote": "SIXTY-FOURTH YEAR\nOF\nAMERICAN INDEPENDENCE"
+   },
+   {
+    "year": 1839,
+    "how": "independence-formula",
+    "leaf": 17,
+    "quote": "sixty-fourth year of American Independence"
+   },
+   {
+    "year": 1839,
+    "how": "digits",
+    "leaf": 18,
+    "quote": "able of Distances\nCharter Officer's for 1839\nBoard of Health and Health Commissioner"
+   },
+   {
+    "year": 1839,
+    "how": "digits",
+    "leaf": 18,
+    "quote": "ording to Act of Congress, in\" the year 1839, by Thomas\nLongworth, in the Clerk's Of"
+   }
+  ],
+  "publisher": {
+   "value": "THOMAS LONG WORTH",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
+   "image": "https://archive.org/download/longworthsameric00newy/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY THOMAS LONG WORTH",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "LONGWORTH'S AMERICAN ALMANAC, NEW-YORK REGISTER, AND CITY DIRECTORY, FOR THE SIXTY-FOURTH YEAR OF AMERICAN INDEPENDENCE : CONTAINING",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
+   "image": "https://archive.org/download/longworthsameric00newy/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "LONGWORTH'S / AMERICAN ALMANAC, / NEW-YORK REGISTER, / AND / CITY DIRECTORY, / FOR / THE SIXTY-FOURTH YEAR / OF / AMERICAN INDEPENDENCE : / CONTAINING",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 46037053,
+  "hocr_sha1": "c362d7346e4236bb94594a1bc5c9f9a2916f56d8",
+  "hocr_mtime": "1637799713",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 100,
+  "leaves": 800,
+  "filled": 778,
+  "high_confidence": 277,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Longworth",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1816",
+   "title": "Longworth's American almanac, New-York register and city directory",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": null
+  },
+  "ia": {
+   "title": "Longworth's American almanac, New-York register and city directory",
+   "date": "1816",
+   "year": null,
+   "publisher": "New York : T. Longworth",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "802",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130501192244",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 5,
+    "chars": 53
+   },
+   "3": {
+    "class": "collection-stamp",
+    "lines": 2,
+    "chars": 42
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "ia-digitization-notice",
+    "lines": 4,
+    "chars": 93
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "other",
+    "lines": 1,
+    "chars": 1
+   },
+   "8": {
+    "class": "other",
+    "lines": 1,
+    "chars": 1
+   },
+   "9": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 14,
+    "chars": 440
+   },
+   "12": {
+    "class": "other",
+    "lines": 4,
+    "chars": 82
+   },
+   "13": {
+    "class": "other",
+    "lines": 45,
+    "chars": 2653
+   },
+   "14": {
+    "class": "other",
+    "lines": 44,
+    "chars": 1370
+   },
+   "15": {
+    "class": "other",
+    "lines": 59,
+    "chars": 2706
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "title_page",
+    "lines": 27,
+    "chars": 1068
+   },
+   "18": {
+    "class": "title_page",
+    "lines": 35,
+    "chars": 1067
+   },
+   "19": {
+    "class": "other",
+    "lines": 211,
+    "chars": 1688
+   },
+   "20": {
+    "class": "other",
+    "lines": 206,
+    "chars": 1566
+   },
+   "21": {
+    "class": "other",
+    "lines": 243,
+    "chars": 1597
+   },
+   "22": {
+    "class": "other",
+    "lines": 215,
+    "chars": 1628
+   },
+   "23": {
+    "class": "other",
+    "lines": 221,
+    "chars": 1681
+   },
+   "24": {
+    "class": "other",
+    "lines": 173,
+    "chars": 1820
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 267,
+    "chars": 2054
+   },
+   "26": {
+    "class": "other",
+    "lines": 154,
+    "chars": 1910
+   },
+   "27": {
+    "class": "other",
+    "lines": 216,
+    "chars": 1478
+   },
+   "28": {
+    "class": "other",
+    "lines": 217,
+    "chars": 1740
+   },
+   "29": {
+    "class": "other",
+    "lines": 62,
+    "chars": 1011
+   }
+  },
+  "title_page_leaf": 17,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   17
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/longworthsameric00newy/page/n17_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

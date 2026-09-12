@@ -1,0 +1,278 @@
+{
+ "source": "ia",
+ "id": "brooklynalphabet1843unse",
+ "book_says": {
+  "year": {
+   "value": 1843,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$7/canvas",
+   "image": "https://archive.org/download/brooklynalphabet1843unse/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "DIRECTORY,\nAND\nYEARLY ADVERTISER\",\nFOR 1843 & 4.\nCONTAINING THE USUAL ARRANGEMENT O",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1843,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "DIRECTORY,\nAND\nYEARLY ADVERTISER\",\nFOR 1843 & 4.\nCONTAINING THE USUAL ARRANGEMENT O"
+   }
+  ],
+  "title": {
+   "value": "BROOKL\" ALPHABETICAL AND SI DIRECTORY, AND YEARLY ADVERTISER\",",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$7/canvas",
+   "image": "https://archive.org/download/brooklynalphabet1843unse/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKL\" / ALPHABETICAL AND SI / DIRECTORY, / AND / YEARLY ADVERTISER\",",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "publisher": {
+   "value": "Betts Burrell",
+   "leaf": 28,
+   "canvas": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$28/canvas",
+   "image": "https://archive.org/download/brooklynalphabet1843unse/page/n28_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Betts Burrell, proprietor",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$17/canvas",
+   "image": "https://archive.org/download/brooklynalphabet1843unse/page/n17_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "g a * are the names of colored people. Ab-\nbreviations.\u2014 h. stands for house, n. for near, c. for corner, op. for\nopposite, b. for between, &c. The precise location of residences thus\ndescribed may be",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 10670289,
+  "hocr_sha1": "fa9f685b97dc98b294c93a0a91faed95b7630855",
+  "hocr_mtime": "1699144238",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "A",
+  "vol_confidence": 97,
+  "leaves": 266,
+  "filled": 250,
+  "high_confidence": 164,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1843",
+   "title": "Brooklyn alphabetical and street directory, and yearly advertiser.",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "Spooner-era Brooklyn; col=1 verified 1848/49 sample (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn alphabetical and street directory, and yearly advertiser.",
+   "date": "1846",
+   "year": null,
+   "publisher": "Brooklyn [N.Y.], Brooklyn directory co.",
+   "creator": null,
+   "contributor": "Columbia University Libraries",
+   "imagecount": "268",
+   "ocr": null,
+   "scandate": "20131217130633",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 1041
+   },
+   "2": {
+    "class": "bookplate",
+    "lines": 6,
+    "chars": 147
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "other",
+    "lines": 1,
+    "chars": 4
+   },
+   "6": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 93
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 27,
+    "chars": 821
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 840
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 1712
+   },
+   "10": {
+    "class": "other",
+    "lines": 46,
+    "chars": 1659
+   },
+   "11": {
+    "class": "other",
+    "lines": 29,
+    "chars": 942
+   },
+   "12": {
+    "class": "other",
+    "lines": 35,
+    "chars": 1448
+   },
+   "13": {
+    "class": "other",
+    "lines": 30,
+    "chars": 1044
+   },
+   "14": {
+    "class": "other",
+    "lines": 19,
+    "chars": 624
+   },
+   "15": {
+    "class": "other",
+    "lines": 36,
+    "chars": 1105
+   },
+   "16": {
+    "class": "other",
+    "lines": 33,
+    "chars": 1212
+   },
+   "17": {
+    "class": "legend",
+    "lines": 36,
+    "chars": 1347
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1692
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1665
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1801
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1674
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1667
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 1786
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1700
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1776
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1645
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1601
+   },
+   "28": {
+    "class": "title_page",
+    "lines": 45,
+    "chars": 1677
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 1767
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   17
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

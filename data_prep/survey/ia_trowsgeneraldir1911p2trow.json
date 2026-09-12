@@ -1,0 +1,272 @@
+{
+ "source": "ia",
+ "id": "trowsgeneraldir1911p2trow",
+ "book_says": {
+  "year": {
+   "value": 1911,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1911p2trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "XXIV.\nEOR THE YEAR ENDING\n\u25a0\n\u25a0\nAUGUST M, 1911\n,\n1\nPUBLISHED ANNUALLY\nTROW DIRECTORY,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits",
+   "other_years_on_page": [
+    1910,
+    1911
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1911,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "XXIV.\nEOR THE YEAR ENDING\n\u25a0\n\u25a0\nAUGUST M, 1911\n,\n1\nPUBLISHED ANNUALLY\nTROW DIRECTORY,"
+   },
+   {
+    "year": 1910,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "CTORY, PRINTING AND BOOKBINDING COMPANY\n1910\n0 2 7 3 6\nHK"
+   }
+  ],
+  "volume_number": {
+   "value": 124,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1911p2trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOL. CXXIV",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "\\ ty **?;.\u20ac: X TRow;s GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX .-:.,, ; :..\u25a0:\u25a0.;,..\u2022\u25a0 ,.: \" \u2014 \u2122 \" 4 \"^\" ~\" CITY OF ^JEW YORK",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$7/canvas",
+   "image": "https://archive.org/download/trowsgeneraldir1911p2trow/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "\\ / ty **?;.\u20ac: / X / TRow;s / GENERAL DIRECTORY / OF THE BOROUGHS OF / MANHATTAN AND BRONX / .-:.,, ; :..\u25a0:\u25a0.;,..\u2022\u25a0 ,.: \" \u2014 \u2122 \" 4 \"^\" ~\" / CITY OF ^JEW YORK",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 215500351,
+  "hocr_sha1": "ab98626e576484ced60724a3686d3e87996e6d36",
+  "hocr_mtime": "1633882690",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 11,
+  "leaves": 1224,
+  "filled": 23,
+  "high_confidence": 1,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Trow",
+   "city": "New York",
+   "borough": null,
+   "year": "1911",
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "column_count": "3",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "covers Bronx, Manhattan | part 2; Trow; col=3 (s4: bracketed 1859-1915 all 3-col + 1890s card)"
+  },
+  "ia": {
+   "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+   "date": "1911",
+   "year": null,
+   "publisher": "Trow Directory Co",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "1226",
+   "ocr": "ABBYY FineReader 8.0",
+   "scandate": "20130423183832",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "collection-stamp",
+    "lines": 8,
+    "chars": 69
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 43
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 26,
+    "chars": 418
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 401,
+    "chars": 11150
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 376,
+    "chars": 11134
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "other",
+    "lines": 393,
+    "chars": 11076
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "other",
+    "lines": 390,
+    "chars": 11363
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 391,
+    "chars": 11628
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "other",
+    "lines": 392,
+    "chars": 10962
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "other",
+    "lines": 382,
+    "chars": 10867
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 384,
+    "chars": 11041
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "other",
+    "lines": 393,
+    "chars": 10933
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "other",
+    "lines": 383,
+    "chars": 11062
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "other",
+    "lines": 385,
+    "chars": 11173
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

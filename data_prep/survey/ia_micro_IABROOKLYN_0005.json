@@ -1,0 +1,291 @@
+{
+ "source": "ia",
+ "id": "micro_IABROOKLYN_0005",
+ "book_says": {
+  "year": {
+   "value": 1826,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0005/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "BROOKLYN, NEW YORK\n1826\nSpooner's Brooklyn Directory,for the ye",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1826,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "BROOKLYN, NEW YORK\n1826\nSpooner's Brooklyn Directory,for the ye"
+   },
+   {
+    "year": 1826,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "ooner's Brooklyn Directory,for the year 1826.\nBrooklyn, N.Y. Published by Alden Spoo"
+   },
+   {
+    "year": 1826,
+    "how": "digits",
+    "leaf": 1,
+    "quote": "f the Star, No. 55 Fulton-street. June,\n1826. 3"
+   }
+  ],
+  "year_covered": {
+   "value": 1826,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0005/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "ooner's Brooklyn Directory,for the year 1826.\nBrooklyn, N.Y. Published by Alden Spoo",
+   "method": "hocr-text",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Alden Spooner",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$1/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0005/page/n1_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "Published by Alden Spooner",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "evidence_detail": "imprint"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/canvas",
+   "image": "https://archive.org/download/micro_IABROOKLYN_0005/page/n5_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "BROOKLYN DIRECTORY.\n1826.\nLF\u2014\nN. B. h. stands for house, n. for near, and c. for corner.\nAssor DANIEL, tavern & livery stable 16\nAbbot John, shoemaker, 114 Jay [Main\nAbrahams James, carpenter, High n",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 0,
+   "legend_location": "inline-at-listing-head"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 2732448,
+  "hocr_sha1": "dbc0a9f6986ce57b7d024a8b3111ec59e5285f65",
+  "hocr_mtime": "1708551246",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 80,
+  "leaves": 79,
+  "filled": 69,
+  "high_confidence": 9,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Spooner",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1826",
+   "title": "Spooner's Brooklyn Directory for the year 1826",
+   "column_count": "1",
+   "start_page": "5",
+   "end_page": null,
+   "key_page": "5",
+   "page_offset": "-1",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "col=1 (pre-transition single-col era; title-triage s4) | FM 2026-06-29: title c1, map c2, almanac c3, contents c4; KEY+listing-start printed p5 = canvas c4 (offset -1): 'N.B. h.=house, n.=near, c.=corner'; A-start 'ABBOT DANIEL'; col1"
+  },
+  "ia": {
+   "title": "Spooner's Brooklyn Directory for the year 1826",
+   "date": "1826",
+   "year": null,
+   "publisher": "Alden Spooner at the office of the Long-Island Star",
+   "creator": "Spooner, Alden",
+   "contributor": "Brooklyn Public Library",
+   "imagecount": "79",
+   "ocr": "tesseract 5.3.0-6-g76ae",
+   "scandate": "20240126020704",
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana",
+    "microfiche"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "target_card",
+    "lines": 6,
+    "chars": 177
+   },
+   "2": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "3": {
+    "class": "other",
+    "lines": 58,
+    "chars": 486
+   },
+   "4": {
+    "class": "contents",
+    "lines": 38,
+    "chars": 821
+   },
+   "5": {
+    "class": "legend",
+    "lines": 30,
+    "chars": 863
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1383
+   },
+   "7": {
+    "class": "other",
+    "lines": 35,
+    "chars": 1309
+   },
+   "8": {
+    "class": "other",
+    "lines": 14,
+    "chars": 287
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1300
+   },
+   "10": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1331
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 40,
+    "chars": 1280
+   },
+   "12": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1370
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1443
+   },
+   "14": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1240
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1422
+   },
+   "16": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1288
+   },
+   "17": {
+    "class": "front_matter",
+    "lines": 24,
+    "chars": 700
+   },
+   "18": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1361
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1263
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 35,
+    "chars": 1294
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1249
+   },
+   "22": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1243
+   },
+   "23": {
+    "class": "other",
+    "lines": 34,
+    "chars": 1219
+   },
+   "24": {
+    "class": "front_matter",
+    "lines": 33,
+    "chars": 1151
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 34,
+    "chars": 1181
+   },
+   "26": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1340
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1450
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 37,
+    "chars": 1380
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 36,
+    "chars": 1268
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 1,
+  "contents_leaf": 4,
+  "legend_leaves": [
+   5
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

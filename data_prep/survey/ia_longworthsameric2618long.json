@@ -1,0 +1,250 @@
+{
+ "source": "ia",
+ "id": "longworthsameric2618long",
+ "book_says": {
+  "publisher": {
+   "value": "D. LONG WORTH",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric2618long$5/canvas",
+   "image": "https://archive.org/download/longworthsameric2618long/page/n5_w1400.jpg",
+   "evidence_type": "target_card",
+   "quote": "PRINTED AND PUBLISHED BY D. LONG WORTH",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "NEW-YORK REGISTER American of the U. States, except teas, China ware, and ail other articles liable to higher duties Goods, warts, and merchandize, intended to ",
+   "leaf": 23,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric2618long$23/canvas",
+   "image": "https://archive.org/download/longworthsameric2618long/page/n23_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "NEW-YORK REGISTER / American / of the U. States, except teas, China ware, and / ail other articles liable to higher duties / Goods, warts, and merchandize, intended to U / exported to a foreign port o",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 17187658,
+  "hocr_sha1": "a256d1e014181e6ec2b4f9e5fc5ec67e5d731fb0",
+  "hocr_mtime": "1700337638",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 74,
+  "leaves": 336,
+  "filled": 298,
+  "high_confidence": 39,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Longworth",
+   "city": "New York",
+   "borough": "Manhattan",
+   "year": "1801",
+   "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of American independence.",
+   "column_count": "1",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Columbia University Libraries",
+   "notes": "year from IA volume no. (Nth yr of independence=1775+N); IA year field is placeholder 1797. Confirmed via metadata for vols 26/40/60/61/65; 38/48 by same arithmetic. Alternate scan \u2014 year also held via NYPL run."
+  },
+  "ia": {
+   "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of American independence.",
+   "date": "1797",
+   "year": null,
+   "publisher": "New-York: : Printed and published ... by David Longworth.",
+   "creator": [
+    "Longworth, David, 1765?-1821",
+    "Longworth, Thomas",
+    "Beers, Andrew, 1749-1824",
+    "Shoemaker, Abraham. Astronomical calculations for the ... year of American independence"
+   ],
+   "contributor": "Columbia University Libraries",
+   "imagecount": "338",
+   "ocr": null,
+   "scandate": "20131217124512",
+   "language": "eng",
+   "collection": [
+    "durstoldyorklibrary",
+    "ColumbiaUniversityLibraries",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "3": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "target_card",
+    "lines": 11,
+    "chars": 226
+   },
+   "6": {
+    "class": "other",
+    "lines": 16,
+    "chars": 398
+   },
+   "7": {
+    "class": "other",
+    "lines": 23,
+    "chars": 509
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 114,
+    "chars": 1827
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 240,
+    "chars": 2675
+   },
+   "10": {
+    "class": "other",
+    "lines": 242,
+    "chars": 2801
+   },
+   "11": {
+    "class": "other",
+    "lines": 253,
+    "chars": 2519
+   },
+   "12": {
+    "class": "other",
+    "lines": 302,
+    "chars": 2564
+   },
+   "13": {
+    "class": "other",
+    "lines": 291,
+    "chars": 2371
+   },
+   "14": {
+    "class": "other",
+    "lines": 308,
+    "chars": 2666
+   },
+   "15": {
+    "class": "other",
+    "lines": 317,
+    "chars": 2557
+   },
+   "16": {
+    "class": "other",
+    "lines": 236,
+    "chars": 2521
+   },
+   "17": {
+    "class": "other",
+    "lines": 108,
+    "chars": 1860
+   },
+   "18": {
+    "class": "other",
+    "lines": 247,
+    "chars": 2671
+   },
+   "19": {
+    "class": "other",
+    "lines": 246,
+    "chars": 2556
+   },
+   "20": {
+    "class": "other",
+    "lines": 287,
+    "chars": 2399
+   },
+   "21": {
+    "class": "other",
+    "lines": 69,
+    "chars": 1044
+   },
+   "22": {
+    "class": "other",
+    "lines": 136,
+    "chars": 1874
+   },
+   "23": {
+    "class": "title_page",
+    "lines": 121,
+    "chars": 2005
+   },
+   "24": {
+    "class": "other",
+    "lines": 141,
+    "chars": 1633
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 125,
+    "chars": 1150
+   },
+   "26": {
+    "class": "other",
+    "lines": 121,
+    "chars": 1832
+   },
+   "27": {
+    "class": "front_matter",
+    "lines": 51,
+    "chars": 2013
+   },
+   "28": {
+    "class": "other",
+    "lines": 81,
+    "chars": 1297
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 46,
+    "chars": 2735
+   }
+  },
+  "title_page_leaf": 23,
+  "copyright_page_leaf": null,
+  "target_card_leaf": 5,
+  "contents_leaf": null,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

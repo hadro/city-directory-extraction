@@ -1,0 +1,273 @@
+{
+ "source": "ia",
+ "id": "flushingnewyorkc00boyd",
+ "book_says": {
+  "year": {
+   "value": 1800,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/canvas",
+   "image": "https://archive.org/download/flushingnewyorkc00boyd/page/n7_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "echnto- JOTT^nsr-^-iL-.\nFLUSHING, N. Y.\n1800.\nEntered according to Act of Congress,",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits",
+   "conflicts_with_catalog": [
+    "1890",
+    "1890"
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1800,
+    "how": "digits",
+    "leaf": 7,
+    "quote": "echnto- JOTT^nsr-^-iL-.\nFLUSHING, N. Y.\n1800.\nEntered according to Act of Congress,"
+   }
+  ],
+  "title": {
+   "value": "GEO B. ROE & CO., LUMBER, LIME, LATH, COAL AND WOOD. Office, 9 MAIN STREET, Yard, Foot of BRIDGE ST., FLUSHING, L. I. wjj Z FLUSHING VILLAGE DIRECTORY. .iS Ames",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$17/canvas",
+   "image": "https://archive.org/download/flushingnewyorkc00boyd/page/n17_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "GEO B. ROE & CO., / LUMBER, LIME, LATH, COAL AND WOOD. / Office, 9 MAIN STREET, / Yard, Foot of BRIDGE ST., FLUSHING, L. I. / wjj Z FLUSHING VILLAGE DIRECTORY. / .iS Ames Chas W, waiter, h 140 Farring",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "publisher": {
+   "value": "JOHN J. BRENNAN",
+   "leaf": 27,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$27/canvas",
+   "image": "https://archive.org/download/flushingnewyorkc00boyd/page/n27_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "JOHN J. BRENNAN, PROPRIETOR",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 5549401,
+  "hocr_sha1": "9ba7d421879680cc854f2eabe574fd5522c113ec",
+  "hocr_mtime": "1699716587",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "D",
+  "vol_confidence": 0,
+  "leaves": 226,
+  "filled": 0,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Boyd",
+   "city": "Flushing",
+   "borough": "Queens",
+   "year": "1890",
+   "title": "Flushing, New York, city directory",
+   "column_count": "1",
+   "start_page": "1",
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Allen County Public Library",
+   "notes": "Boyd Flushing col=1 (see boyd_flushing card; title-triage s4) | FM 2026-06-29: title c7; listing A-start '1890-91 Flushing Village' printed p1 = canvas c14 (blank versos: printed pN = canvas 12+2N, e.g. p2=c16); no abbrev key (simple village dir); fmt 'Surname Given, occ, [h] addr', widow spelled out, no ditto"
+  },
+  "ia": {
+   "title": "Flushing, New York, city directory",
+   "date": "1890",
+   "year": null,
+   "publisher": "Boyd's",
+   "creator": null,
+   "contributor": "Allen County Public Library Genealogy Center",
+   "imagecount": "228",
+   "ocr": null,
+   "scandate": "20130509171454",
+   "language": "eng",
+   "collection": [
+    "allen_county",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "1": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "2": {
+    "class": "other",
+    "lines": 5,
+    "chars": 26
+   },
+   "3": {
+    "class": "other",
+    "lines": 2,
+    "chars": 49
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "ia-digitization-notice",
+    "lines": 3,
+    "chars": 91
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "title_page",
+    "lines": 24,
+    "chars": 499
+   },
+   "8": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "9": {
+    "class": "other",
+    "lines": 20,
+    "chars": 500
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 15,
+    "chars": 381
+   },
+   "12": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 1296
+   },
+   "14": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 39,
+    "chars": 1434
+   },
+   "16": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "17": {
+    "class": "title_page",
+    "lines": 44,
+    "chars": 1559
+   },
+   "18": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "19": {
+    "class": "front_matter",
+    "lines": 50,
+    "chars": 1954
+   },
+   "20": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 45,
+    "chars": 1728
+   },
+   "22": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 51,
+    "chars": 1949
+   },
+   "24": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 51,
+    "chars": 1780
+   },
+   "26": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "27": {
+    "class": "title_page",
+    "lines": 47,
+    "chars": 1815
+   },
+   "28": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 49,
+    "chars": 2035
+   }
+  },
+  "title_page_leaf": 7,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   7
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/flushingnewyorkc00boyd/page/n7_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

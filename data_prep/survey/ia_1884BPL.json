@@ -1,0 +1,300 @@
+{
+ "source": "ia",
+ "id": "1884BPL",
+ "book_says": {
+  "year": {
+   "value": 1883,
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/1884BPL$13/canvas",
+   "image": "https://archive.org/download/1884BPL/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "in the year eighteen hundred and eighty-three,",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "words",
+   "other_years_on_page": [
+    1879,
+    1880,
+    1883,
+    1884
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1884,
+    "how": "digits",
+    "leaf": 13,
+    "quote": "CTORY\nFOR s^-j\nThe Year Ending May 1st,\n1884.\nCONTAINING\nALPHABETICAL LIST OF HOUSEH"
+   },
+   {
+    "year": 1883,
+    "how": "words",
+    "leaf": 13,
+    "quote": "in the year eighteen hundred and eighty-three,"
+   },
+   {
+    "year": 1879,
+    "how": "digits",
+    "leaf": 15,
+    "quote": "made distinct publications of each. In 1879, the\nprice of the complete Directory -w"
+   },
+   {
+    "year": 1879,
+    "how": "digits",
+    "leaf": 15,
+    "quote": "It then contained 125,440 names. Since 1879\nthe names have increased by 26,S40. Thi"
+   },
+   {
+    "year": 1880,
+    "how": "digits",
+    "leaf": 15,
+    "quote": "tter for the same price than we gave in 1880, which was tho first year the price\nwas"
+   },
+   {
+    "year": 1883,
+    "how": "digits",
+    "leaf": 15,
+    "quote": "our City aud vicinity.\nBrooklyn, June, 1883."
+   }
+  ],
+  "publisher": {
+   "value": "LAIN & CO",
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/1884BPL$13/canvas",
+   "image": "https://archive.org/download/1884BPL/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "Act of Congress, in the year eighteen hundred and eighty-three, By LAIN & CO.",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "copyright-line"
+  },
+  "title": {
+   "value": "LAIN'S BROOKLYN DIRECTORY FOR s^-j The Year Ending May 1st,",
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/1884BPL$13/canvas",
+   "image": "https://archive.org/download/1884BPL/page/n13_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "LAIN'S / BROOKLYN / DIRECTORY / FOR s^-j / The Year Ending May 1st,",
+   "method": "hocr-text",
+   "confidence": "medium"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 194927082,
+  "hocr_sha1": "785fa1da83254bd07cd6de45fe1b3a6252a5cfb3",
+  "hocr_mtime": "1632344224",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 10,
+  "leaves": 1524,
+  "filled": 27,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1884",
+   "title": "Lain's Brooklyn Directory for the year ending May 1, 1884",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": "54",
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "offset +54 at p.402 (leaf456) drifting to +82 at p.984 (leaf1066); 2 col; heavy ad-page drift; visually sampled 2026-06-19"
+  },
+  "ia": {
+   "title": "Lain's Brooklyn Directory for the year ending May 1, 1884",
+   "date": "1884",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1524",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 26,
+    "chars": 1148
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 7,
+    "chars": 359
+   },
+   "2": {
+    "class": "other",
+    "lines": 15,
+    "chars": 488
+   },
+   "3": {
+    "class": "other",
+    "lines": 18,
+    "chars": 543
+   },
+   "4": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 414
+   },
+   "5": {
+    "class": "other",
+    "lines": 26,
+    "chars": 616
+   },
+   "6": {
+    "class": "title_page",
+    "lines": 23,
+    "chars": 860
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 8,
+    "chars": 280
+   },
+   "8": {
+    "class": "front_matter",
+    "lines": 9,
+    "chars": 366
+   },
+   "9": {
+    "class": "front_matter",
+    "lines": 22,
+    "chars": 1286
+   },
+   "10": {
+    "class": "other",
+    "lines": 18,
+    "chars": 858
+   },
+   "11": {
+    "class": "other",
+    "lines": 29,
+    "chars": 1530
+   },
+   "12": {
+    "class": "other",
+    "lines": 29,
+    "chars": 781
+   },
+   "13": {
+    "class": "title_page",
+    "lines": 21,
+    "chars": 588
+   },
+   "14": {
+    "class": "other",
+    "lines": 25,
+    "chars": 915
+   },
+   "15": {
+    "class": "title_page",
+    "lines": 46,
+    "chars": 3798
+   },
+   "16": {
+    "class": "contents",
+    "lines": 117,
+    "chars": 3904
+   },
+   "17": {
+    "class": "other",
+    "lines": 137,
+    "chars": 4638
+   },
+   "18": {
+    "class": "other",
+    "lines": 138,
+    "chars": 4669
+   },
+   "19": {
+    "class": "contents",
+    "lines": 138,
+    "chars": 4535
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 78,
+    "chars": 2450
+   },
+   "21": {
+    "class": "front_matter",
+    "lines": 27,
+    "chars": 1242
+   },
+   "22": {
+    "class": "other",
+    "lines": 124,
+    "chars": 2559
+   },
+   "23": {
+    "class": "front_matter",
+    "lines": 32,
+    "chars": 981
+   },
+   "24": {
+    "class": "other",
+    "lines": 70,
+    "chars": 1789
+   },
+   "25": {
+    "class": "front_matter",
+    "lines": 64,
+    "chars": 2090
+   },
+   "26": {
+    "class": "title_page",
+    "lines": 60,
+    "chars": 2072
+   },
+   "27": {
+    "class": "other",
+    "lines": 71,
+    "chars": 2150
+   },
+   "28": {
+    "class": "front_matter",
+    "lines": 64,
+    "chars": 1918
+   },
+   "29": {
+    "class": "front_matter",
+    "lines": 38,
+    "chars": 1353
+   }
+  },
+  "title_page_leaf": 13,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 16,
+  "legend_leaves": []
+ },
+ "frontmatter_read": "2026-09-12"
+}

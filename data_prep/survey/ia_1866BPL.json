@@ -1,0 +1,288 @@
+{
+ "source": "ia",
+ "id": "1866BPL",
+ "book_says": {
+  "year": {
+   "value": 1863,
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/1866BPL$21/canvas",
+   "image": "https://archive.org/download/1866BPL/page/n21_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "about\nseven thousand more than the year 1863-4'.\nThis is accounted for from the fact",
+   "method": "hocr-text",
+   "confidence": "low",
+   "attestation": "digits",
+   "conflicts_with_catalog": [
+    "1866",
+    "1866"
+   ]
+  },
+  "year_attestations": [
+   {
+    "year": 1863,
+    "how": "digits",
+    "leaf": 21,
+    "quote": "about\nseven thousand more than the year 1863-4'.\nThis is accounted for from the fact"
+   }
+  ],
+  "title": {
+   "value": "PREFACE. The canvass for this year's Brooklyn Directory, lias shown a very different result frofis\" that obtained last year. The canvass last year took place wh",
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/1866BPL$21/canvas",
+   "image": "https://archive.org/download/1866BPL/page/n21_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PREFACE. / The canvass for this year's Brooklyn Directory, lias shown a very different result frofis\" / that obtained last year. / The canvass last year took place while the Craft was goiflg on', whil",
+   "method": "hocr-text",
+   "confidence": "medium"
+  },
+  "publisher": {
+   "value": "J. LAIN AND COMPANY",
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/1866BPL$19/canvas",
+   "image": "https://archive.org/download/1866BPL/page/n19_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY J. LAIN AND COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 23,
+   "canvas": "https://iiif.archive.org/iiif/1866BPL$23/canvas",
+   "image": "https://archive.org/download/1866BPL/page/n23_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "in t.heir vocations in the cities of Brooklyn and New York.\nABBREVIATIONS, ETC.\na,\\. alley ; av. avenue', bldg. building; Ww^y, Sroadway ; col. colored; com. commission ; o.\ncorner ; ct. court; E. eaa",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 4,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 90263343,
+  "hocr_sha1": "b26e459d833837b1d4e1821d6d2821b07bc50d02",
+  "hocr_mtime": "1635638998",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 68,
+  "leaves": 719,
+  "filled": 632,
+  "high_confidence": 0,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1866",
+   "title": "Brooklyn City Directory for the year ending May 1, 1866",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain; col=2 verified via 1858/1869 title pages (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn City Directory for the year ending May 1, 1866",
+   "date": "1866",
+   "year": null,
+   "publisher": null,
+   "creator": "J. Lain and Company",
+   "contributor": null,
+   "imagecount": "719",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 32,
+    "chars": 1302
+   },
+   "1": {
+    "class": "other",
+    "lines": 14,
+    "chars": 338
+   },
+   "2": {
+    "class": "other",
+    "lines": 29,
+    "chars": 688
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 29,
+    "chars": 625
+   },
+   "4": {
+    "class": "other",
+    "lines": 17,
+    "chars": 606
+   },
+   "5": {
+    "class": "other",
+    "lines": 25,
+    "chars": 1123
+   },
+   "6": {
+    "class": "other",
+    "lines": 15,
+    "chars": 301
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 14,
+    "chars": 474
+   },
+   "8": {
+    "class": "other",
+    "lines": 1,
+    "chars": 40
+   },
+   "9": {
+    "class": "other",
+    "lines": 30,
+    "chars": 1022
+   },
+   "10": {
+    "class": "other",
+    "lines": 44,
+    "chars": 2212
+   },
+   "11": {
+    "class": "front_matter",
+    "lines": 20,
+    "chars": 489
+   },
+   "12": {
+    "class": "other",
+    "lines": 18,
+    "chars": 579
+   },
+   "13": {
+    "class": "other",
+    "lines": 34,
+    "chars": 2011
+   },
+   "14": {
+    "class": "other",
+    "lines": 11,
+    "chars": 219
+   },
+   "15": {
+    "class": "other",
+    "lines": 15,
+    "chars": 412
+   },
+   "16": {
+    "class": "other",
+    "lines": 12,
+    "chars": 520
+   },
+   "17": {
+    "class": "other",
+    "lines": 9,
+    "chars": 293
+   },
+   "18": {
+    "class": "other",
+    "lines": 12,
+    "chars": 346
+   },
+   "19": {
+    "class": "title_page",
+    "lines": 11,
+    "chars": 280
+   },
+   "20": {
+    "class": "copyright_page",
+    "lines": 6,
+    "chars": 279
+   },
+   "21": {
+    "class": "title_page",
+    "lines": 23,
+    "chars": 1579
+   },
+   "22": {
+    "class": "other",
+    "lines": 34,
+    "chars": 1819
+   },
+   "23": {
+    "class": "legend",
+    "lines": 85,
+    "chars": 2955
+   },
+   "24": {
+    "class": "other",
+    "lines": 148,
+    "chars": 5014
+   },
+   "25": {
+    "class": "other",
+    "lines": 141,
+    "chars": 4955
+   },
+   "26": {
+    "class": "other",
+    "lines": 149,
+    "chars": 5028
+   },
+   "27": {
+    "class": "other",
+    "lines": 145,
+    "chars": 5127
+   },
+   "28": {
+    "class": "other",
+    "lines": 145,
+    "chars": 5096
+   },
+   "29": {
+    "class": "other",
+    "lines": 141,
+    "chars": 5075
+   }
+  },
+  "title_page_leaf": 21,
+  "copyright_page_leaf": 20,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [
+   23
+  ],
+  "image_read_candidates": [
+   21
+  ],
+  "image_read_urls": [
+   "https://archive.org/download/1866BPL/page/n21_w1400.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

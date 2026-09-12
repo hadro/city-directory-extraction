@@ -1,0 +1,268 @@
+{
+ "source": "ia",
+ "id": "1880BPL",
+ "book_says": {
+  "year": {
+   "value": 1880,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1880BPL$5/canvas",
+   "image": "https://archive.org/download/1880BPL/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "E\nBROOKLYN\nFOR\nTHE YEAR ENDING MAY 1st,\n1880.\nCONTAINING ALSO\nA STREET AND AVENUE DI",
+   "method": "hocr-text",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_attestations": [
+   {
+    "year": 1880,
+    "how": "digits",
+    "leaf": 5,
+    "quote": "E\nBROOKLYN\nFOR\nTHE YEAR ENDING MAY 1st,\n1880.\nCONTAINING ALSO\nA STREET AND AVENUE DI"
+   }
+  ],
+  "publisher": {
+   "value": "LAIN & COMPANY",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1880BPL$5/canvas",
+   "image": "https://archive.org/download/1880BPL/page/n5_w1400.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY LAIN & COMPANY",
+   "method": "hocr-text",
+   "confidence": "high",
+   "evidence_detail": "imprint"
+  },
+  "legend": {
+   "value": "present",
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/1880BPL$21/canvas",
+   "image": "https://archive.org/download/1880BPL/page/n21_w1400.jpg",
+   "evidence_type": "legend",
+   "quote": "in their vocations in the cities of Brooklyn and New York.\nABBREVIATIONS, ETC.\nticcl. cKcovmtant ; a,g\\, agrUiuUural ; agt, agent; a\\. alley; a,rt. art^oial ; av, avenue; asat. assist,\nant; \\Mg. iuild",
+   "method": "hocr-text",
+   "confidence": "medium",
+   "gloss_lines": 10,
+   "legend_location": "dedicated-page"
+  }
+ },
+ "survey_status": "frontmatter-done",
+ "derivatives": {
+  "hocr_bytes": 177098098,
+  "hocr_sha1": "8ae19d652dd49ae78f1fbe1bfce32e04a4e92407",
+  "hocr_mtime": "1632343959",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-12"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "C",
+  "vol_confidence": 28,
+  "leaves": 1426,
+  "filled": 303,
+  "high_confidence": 12,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "hocr-margin-regression"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": "Lain",
+   "city": "Brooklyn",
+   "borough": "Brooklyn",
+   "year": "1880",
+   "title": "Brooklyn City and Business Directory for the year ending May 1, 1880",
+   "column_count": "2",
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "Brooklyn Public Library",
+   "notes": "Lain; col=2 verified via 1858/1869 title pages (s4)"
+  },
+  "ia": {
+   "title": "Brooklyn City and Business Directory for the year ending May 1, 1880",
+   "date": "1880",
+   "year": null,
+   "publisher": null,
+   "creator": "Lain and Company",
+   "contributor": null,
+   "imagecount": "1426",
+   "ocr": "ABBYY FineReader 9.0",
+   "scandate": null,
+   "language": "eng",
+   "collection": [
+    "brooklyncitydirectoriesonmicrofiche",
+    "brooklynpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": null,
+   "licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "modern-scan-coversheet",
+    "lines": 33,
+    "chars": 1364
+   },
+   "1": {
+    "class": "other",
+    "lines": 17,
+    "chars": 963
+   },
+   "2": {
+    "class": "other",
+    "lines": 37,
+    "chars": 1296
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 26,
+    "chars": 545
+   },
+   "4": {
+    "class": "other",
+    "lines": 41,
+    "chars": 1610
+   },
+   "5": {
+    "class": "title_page",
+    "lines": 18,
+    "chars": 514
+   },
+   "6": {
+    "class": "front_matter",
+    "lines": 43,
+    "chars": 1393
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 30,
+    "chars": 2188
+   },
+   "8": {
+    "class": "contents",
+    "lines": 98,
+    "chars": 3072
+   },
+   "9": {
+    "class": "contents",
+    "lines": 137,
+    "chars": 4489
+   },
+   "10": {
+    "class": "other",
+    "lines": 137,
+    "chars": 4416
+   },
+   "11": {
+    "class": "contents",
+    "lines": 76,
+    "chars": 2263
+   },
+   "12": {
+    "class": "other",
+    "lines": 75,
+    "chars": 1995
+   },
+   "13": {
+    "class": "front_matter",
+    "lines": 48,
+    "chars": 1305
+   },
+   "14": {
+    "class": "other",
+    "lines": 56,
+    "chars": 1991
+   },
+   "15": {
+    "class": "front_matter",
+    "lines": 56,
+    "chars": 2028
+   },
+   "16": {
+    "class": "other",
+    "lines": 28,
+    "chars": 1106
+   },
+   "17": {
+    "class": "other",
+    "lines": 60,
+    "chars": 1698
+   },
+   "18": {
+    "class": "other",
+    "lines": 79,
+    "chars": 2202
+   },
+   "19": {
+    "class": "other",
+    "lines": 14,
+    "chars": 377
+   },
+   "20": {
+    "class": "front_matter",
+    "lines": 13,
+    "chars": 381
+   },
+   "21": {
+    "class": "legend",
+    "lines": 70,
+    "chars": 2839
+   },
+   "22": {
+    "class": "other",
+    "lines": 142,
+    "chars": 4645
+   },
+   "23": {
+    "class": "other",
+    "lines": 146,
+    "chars": 4774
+   },
+   "24": {
+    "class": "other",
+    "lines": 145,
+    "chars": 4775
+   },
+   "25": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4695
+   },
+   "26": {
+    "class": "other",
+    "lines": 143,
+    "chars": 4678
+   },
+   "27": {
+    "class": "other",
+    "lines": 140,
+    "chars": 4697
+   },
+   "28": {
+    "class": "other",
+    "lines": 144,
+    "chars": 4898
+   },
+   "29": {
+    "class": "other",
+    "lines": 18,
+    "chars": 370
+   }
+  },
+  "title_page_leaf": 5,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": 8,
+  "legend_leaves": [
+   21
+  ]
+ },
+ "frontmatter_read": "2026-09-12"
+}

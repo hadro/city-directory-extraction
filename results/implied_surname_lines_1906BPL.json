@@ -1,0 +1,171 @@
+{
+  "n_lines": 199012,
+  "n_ditto_lead": 134142,
+  "min_count": 5,
+  "min_ratio": 0.9,
+  "lexicon_size": 595,
+  "n_flagged": 5491,
+  "n_taken_as_surname_today": 4813,
+  "share_taken": 0.8765,
+  "n_ditto_inheriting_wrong_carry": 8017,
+  "n_total_wrong_surname": 12830,
+  "share_of_volume_wrong": 0.0645,
+  "worst_inherited_run": 137,
+  "n_runs": 2012,
+  "longest_run": 40,
+  "lines_in_runs_ge_3": 3718,
+  "ratio_bands": {
+    "0.00-0.50": {
+      "types": 14,
+      "unmarked_lines": 863,
+      "examples": [
+        "Telephone",
+        "Van",
+        "De",
+        "St",
+        "La",
+        "Le",
+        "Brooklyn",
+        "Beach"
+      ]
+    },
+    "0.50-0.90": {
+      "types": 292,
+      "unmarked_lines": 952,
+      "examples": [
+        "Charlotte",
+        "Isaac",
+        "Lawrence",
+        "Lewis",
+        "Franklin",
+        "Harris",
+        "Hamilton",
+        "Hyman"
+      ]
+    },
+    "0.90-0.95": {
+      "types": 222,
+      "unmarked_lines": 2305,
+      "examples": [
+        "Jas",
+        "Geo",
+        "Thos",
+        "Patrick",
+        "Harry",
+        "Mich\u2019l",
+        "Jacob",
+        "Peter"
+      ]
+    },
+    "0.95-1.01": {
+      "types": 373,
+      "unmarked_lines": 3186,
+      "examples": [
+        "John",
+        "Wm",
+        "Jos",
+        "H\u2019y",
+        "Chas",
+        "Edw\u2019d",
+        "Frank",
+        "Mary"
+      ]
+    }
+  },
+  "top_flagged_tokens": [
+    [
+      "John",
+      625
+    ],
+    [
+      "Wm",
+      488
+    ],
+    [
+      "Jas",
+      336
+    ],
+    [
+      "Geo",
+      317
+    ],
+    [
+      "Thos",
+      223
+    ],
+    [
+      "Jos",
+      182
+    ],
+    [
+      "H\u2019y",
+      176
+    ],
+    [
+      "Chas",
+      160
+    ],
+    [
+      "Edw\u2019d",
+      127
+    ],
+    [
+      "Frank",
+      114
+    ],
+    [
+      "Patrick",
+      110
+    ],
+    [
+      "Harry",
+      109
+    ],
+    [
+      "Mary",
+      102
+    ],
+    [
+      "Fred\u2019k",
+      97
+    ],
+    [
+      "Rob\u2019t",
+      84
+    ],
+    [
+      "Mich\u2019l",
+      83
+    ],
+    [
+      "Jacob",
+      82
+    ],
+    [
+      "Louis",
+      79
+    ],
+    [
+      "Peter",
+      75
+    ],
+    [
+      "Sam\u2019l",
+      73
+    ]
+  ],
+  "longest_run_sample": [
+    "Jacob h 11 Ditmars",
+    "Jacob collector h 61 Lewis av",
+    "Jacob ferryman h 250 Berry",
+    "Jacob D h 8200 18th av",
+    "Jas carp\u2019r h 324 40th",
+    "Jas com\u2019l trav h 364 Laf av",
+    "Jas farmer Miller av c New Lotts av",
+    "Jas liquors 82 Hamilton av",
+    "Jas A elk h 257 Putnam av",
+    "Jas A salesman h 643 58th",
+    "Jas G fireman h 104 Somers",
+    "Jas H upholsterer 341 Bedford av"
+  ]
+}

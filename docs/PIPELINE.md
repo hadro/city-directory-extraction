@@ -363,6 +363,25 @@ a column break *within* a leaf and reset the carry there, then re-measure the di
 > needs no new idea: ALL-CAPS alphabetic followed by a ditto-lead line is the follower test the
 > ditto glyph gate already uses.
 
+> **And the unmarked given-name entry, which is the same wound from the other side.** Sometimes the
+> mark is simply absent — printer or ABBYY — and the entry begins at the given name: `Geo C bookkpr
+> h 1.18 McDonough` sits in the same block, on the same page, as `" Geo C electrician h 118
+> McDonough`. Measured on 1906BPL
+> ([`results/implied_surname_lines_1906BPL.py`](../results/implied_surname_lines_1906BPL.py)):
+> **5,491 such lines, 87.6% of which `surname_token()` accepts as a new surname**, poisoning the
+> carry for **8,017** ditto lines downstream — **12,830 lines, 6.45% of the volume, with a wrong
+> surname**, worst single case 137 consecutive lines. Alphabetical position cannot find these:
+> entries inside a block are sorted by *given* name, so `Jas`/`John`/`Jos` under a `J` surname vote
+> for the leaf's own modal letter. `first_letter` already abstains on `Wm` and `H'y`; it cannot
+> abstain on `Jas`, `Geo`, `Thos`, `Chas`, `Edw'd` from shape alone — **the rule needs a
+> vocabulary, and the volume supplies one**: a ditto line's second token is a given name by
+> construction, and there are 134,142 of them. Score each token by
+> `n(given position) / (n(given position) + n(leading position))`; ≥0.90 yields 595 types. The
+> 0.50–0.90 band is exactly the names that are genuinely both (`Charlotte`, `Lewis`, `Lawrence`,
+> `Morgan`), which is the reason to trust the ends. **5,491 is a floor** — the test declines
+> `Isaac` (0.88) and `Lewis` (0.89), both real here. Not gold-validated, and the overlap with the
+> 23.5% is not measured.
+
 **7. Feed the model the resolved surname.** Currently dittos are resolved *after* the model, so the
 model sees `" Wm` and emits `" Wm`. What if the input said `Ackerman Wm`? That is a different and
 possibly larger version of the `44` result — the same "give the model in-distribution input"

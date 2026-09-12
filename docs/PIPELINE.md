@@ -388,9 +388,10 @@ a column break *within* a leaf and reset the carry there, then re-measure the di
 > (0.0% vs 58.8–97.9%) so the threshold is not delicate; (b) **recall is not measurable** from the
 > gold we hold and no recall figure should be quoted — the panel holds **6** clean instances, all
 > trow1913, and `1906BPL_sample500_eval.jsonl` cannot help because **0 of its 500 rows carry a
-> name**; (c) the production gate **misses both Trow volumes** — their dash is glued (`-Adolph`),
-> so raw ditto-lead reads 0.0% against 58.8%/97.9% gold-implied. **This work is blocked on #9 for
-> the Trow family**, which is a better reason to do #9 than the one recorded against it.
+> name**; (c) the production gate **used to miss both Trow volumes** — their dash is glued
+> (`-Adolph`), so raw ditto-lead read 0.0% against 58.8%/97.9% gold-implied. **Fixed by #9 on
+> 2026-09-12**: `classify_glued_marks` identifies the mark per volume and the gate now agrees with
+> gold on every panel volume (trow1907 0.0%→60.3%, trow1913 0.0%→93.5%). (a) and (b) stand.
 
 **7. Feed the model the resolved surname.** Currently dittos are resolved *after* the model, so the
 model sees `" Wm` and emits `" Wm`. What if the input said `Ackerman Wm`? That is a different and
@@ -403,9 +404,33 @@ the dispute rate down first (item 6).
 grammar is documented in `resolve_dittos.py` but not implemented. ~45 rows in duncan1794, more
 across the early volumes. Small but it is currently a known-wrong output on those books.
 
-**9. Trow's glued ditto (`-Michl`).** Not a separate token, so nothing fires on it. Needs a rule
-that does not also split real hyphenated surnames — measure how many `-Xxx` leading tokens are
-hyphenated surnames before writing it.
+**9. Trow's glued ditto (`-Michl`). DONE 2026-09-12.** `resolve_dittos.py` now has
+`split_glued_mark`, `classify_glued_marks` and a `--glued-marks` flag; `is_ditto_lead` takes an
+opt-in `glued` set and **defaults to empty, so every number recorded before this date reproduces**
+(1906BPL re-checked: 67.4% ditto-lead, 23.5% dispute rate, unchanged).
+
+The measurement this item asked for came back **zero**: there are no hyphenated surnames among
+line-initial `-Xxx` in the panel. The risk was real but in a different costume — **ogden1839
+prints `*` glued to the surname as a RACE DESIGNATION** (gold: `race_designation='*'`,
+`name='Simmons Aaron'`), and `*` is in `DITTO_LEADERS`, so a blind glued-split would have
+destroyed the marker and promoted a surname to a given name on 7 of 7 rows. That is why the mark
+set is per-volume and empty by default.
+
+Which glued marks are dittos is **measured, not declared**, by alphabetical coherence: take the
+leaf's modal letter from unmarked lines, then ask what follows the mark. A ditto is followed by a
+*given* name, which does not sort; a marker is followed by the *surname*, which does. The
+separation is total — ogden `*` 100% → MARKER, polk `"` 0%, trow1907 `-` 12%, trow1913 `-` 15% →
+DITTO. A token-level test was tried first and rejected at 78.2%: requiring a known given name
+fails on Trow's orthography (`Edwd`/`Robt` vs 1906BPL's `Edw'd`/`Rob't`) and on business
+continuations (`-Paper Co`, `-& Co`). **It needs a whole volume, not a window** — inside one
+surname block the given names are contiguous and vote with the modal letter; the self-test pins
+both behaviours.
+
+Effect: on trow1913's 93 gold rows the carry produced **0** surnames before and **86** after. The
+failure was silence, not error — `first_letter` anchors at position 0, so a leading dash abstains
+from the sort key and the row was neither a surname nor a ditto. It carried nothing and poisoned
+nothing. This also unblocks the implied-surname gate (see #6): the production gate now agrees with
+gold on **every** panel volume, where it previously missed both Trow books at 0.0%.
 
 **15. Lexicon-constrained abbreviation repair on IA hOCR.** IA's measured weakness is `abbr%`
 **84.8% against Gemini's 95.3%** (`historical-ocr-eval`, 10 panel volumes), and since stage 1 now

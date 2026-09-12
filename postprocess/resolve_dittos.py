@@ -68,6 +68,7 @@ import argparse
 import json
 import re
 import sys
+from collections import Counter
 
 FIELDS = ["name", "is_business", "spouse_name", "race_designation",
           "occupation_role", "employer", "address", "home_address"]
@@ -212,9 +213,105 @@ def surname_token(raw_line: str):
 DITTO_LEADERS = re.compile(r"^(?:44|[\"“”'‘’]+|\*+|['’]\*|\*['’]|4['‘]|〃|—|-|do\.?)$", re.IGNORECASE)
 
 
-def is_ditto_lead(raw_line: str) -> bool:
+# A mark GLUED to the token after it: Trow prints `-Adolph`, Polk sometimes `"Thos`. Nothing
+# tokenises as a mark, so `is_ditto_lead` cannot see it and the whole ditto machinery reads the
+# volume as having no dittos at all -- trow1913 measures 0.0% ditto-lead against a gold-implied
+# share of 97.9%.
+GLUED_MARK = re.compile(r"^(?P<mark>[-\"“”'‘’*〃—«]+)\s*(?P<rest>\S.*)$")
+
+
+def split_glued_mark(raw_line: str, marks=()):
+    """('-', 'Adolph A salesman...') when the line opens with a glued mark in `marks`, else None.
+
+    `marks` is PER VOLUME and empty by default, so nothing changes for a caller that does not opt
+    in. That default is not timidity: the same character means different things in different
+    books, and `classify_glued_marks` below is how you find out which. Splitting blind corrupts
+    ogden1839 (see there).
+    """
+    if not marks:
+        return None
+    m = GLUED_MARK.match(raw_line or "")
+    if not m or m.group("mark") not in marks:
+        return None
+    return m.group("mark"), m.group("rest")
+
+
+def is_ditto_lead(raw_line: str, glued=()) -> bool:
+    """Does this line open with a ditto mark? `glued` opts in to marks printed without a space.
+
+    Default `glued=()` reproduces every number recorded before 2026-09-12 exactly.
+    """
     toks = raw_line.split()
-    return bool(toks) and bool(DITTO_LEADERS.match(toks[0]))
+    if toks and DITTO_LEADERS.match(toks[0]):
+        return True
+    return split_glued_mark(raw_line, glued) is not None
+
+
+def classify_glued_marks(rows, min_n=3):
+    """Per volume, is a glued leading mark a DITTO or a semantic MARKER? Measured, not assumed.
+
+    `rows` = [(leaf, raw_line), ...]. Returns {mark: {...}} with the evidence and a verdict.
+
+    The discriminator is alphabetical coherence, which costs nothing because `first_letter` is
+    already the anchored sort-key rule. Take the leaf's modal letter from lines that carry NO
+    leading mark, then ask what the token after the mark does:
+
+      a DITTO is followed by a GIVEN name, which does not sort -- so its initial disagrees with
+      the leaf's modal letter, and counting it would scatter the page across the alphabet;
+      a MARKER is followed by the SURNAME itself, which IS the sort key -- so it agrees.
+
+    Measured on the panel gold, and the separation is total:
+
+        ogden1839    *   n=7   follower matches modal 100%  -> MARKER   (gold: real surname)
+        polk1933si   "   n=6                            0%  -> DITTO    (gold: ditto)
+        trow1907     -   n=41                          12%  -> DITTO    (gold: ditto)
+        trow1913     -   n=87                          15%  -> DITTO    (gold: ditto)
+
+    ogden1839's `*` is a RACE DESIGNATION -- gold records `race_designation: '*'` and
+    `name: 'Simmons Aaron'` -- and `*` is in DITTO_LEADERS. So a blind glued-split would both
+    destroy the marker and promote a surname to a given name, on 7 of 7 rows. That volume is the
+    reason this function exists and the reason `marks` defaults to empty.
+
+    A token-level test was tried first and rejected at 78.2%: requiring the follower to be a known
+    given name fails on Trow's orthography (`Edwd`/`Robt`/`Alfd` where 1906BPL prints `Edw'd`/
+    `Rob't`) and on business continuations (`-Paper Co`, `-& Co`), which are dittos with no given
+    name in them at all. Coherence needs no lexicon and so has neither failure.
+
+    **It DOES need the given names to span the alphabet, so run it over a volume, never a window.**
+    Inside one surname block the given names are sorted and contiguous, so a short slice of
+    `-Adolph`/`-Anna`/`-Arnold` under `Aarons` votes A three times, matches the modal letter and
+    reads as MARKER. At leaf scale a page spans several blocks and the followers scatter -- which
+    is why the real volumes land at 12-15% and the self-test pins both behaviours.
+    """
+    votes = {}
+    for leaf, raw in rows:
+        if GLUED_MARK.match(raw or ""):
+            continue                                   # a marked line cannot vote for the modal
+        letter = _first_letter(raw)
+        if letter:
+            votes.setdefault(leaf, Counter())[letter] += 1
+    modal = {lf: c.most_common(1)[0][0] for lf, c in votes.items() if c}
+
+    seen = {}
+    for leaf, raw in rows:
+        m = GLUED_MARK.match(raw or "")
+        if not m or leaf not in modal:
+            continue
+        d = seen.setdefault(m.group("mark"), {"n": 0, "follower_is_sort_key": 0, "examples": []})
+        d["n"] += 1
+        d["follower_is_sort_key"] += (_first_letter(m.group("rest")) == modal[leaf])
+        if len(d["examples"]) < 5:
+            d["examples"].append(raw[:60])
+    out = {}
+    for mark, d in seen.items():
+        if d["n"] < min_n:
+            d["verdict"] = "UNDECIDED"                 # too few to call; report, do not guess
+        else:
+            share = d["follower_is_sort_key"] / d["n"]
+            d["share_follower_is_sort_key"] = round(share, 3)
+            d["verdict"] = "MARKER" if share >= 0.5 else "DITTO"
+        out[mark] = d
+    return out
 
 
 def inventory(rows, top=30):
@@ -255,8 +352,12 @@ def modal_letters(rows):
     return out
 
 
-def resolve_cross_line(rows):
+def resolve_cross_line(rows, glued=()):
     """Sequential surname carry over `rows` = [(leaf, raw_line), ...] in reading order.
+
+    `glued` is the per-volume set of marks printed without a space (Trow's `-`), empty by default
+    so every number recorded before 2026-09-12 reproduces. Get it from `classify_glued_marks`,
+    never by assumption -- ogden1839's `*` is a race designation, not a ditto.
 
     Yields one dict per row: the verbatim leading token, the resolved surname, and FLAGS. It
     never drops a row and never silently picks between candidates.
@@ -275,18 +376,24 @@ def resolve_cross_line(rows):
     modal = modal_letters(rows)
     prev, prev_leaf = None, None
     for leaf, raw in rows:
-        sur = surname_token(raw)
+        # The glued test runs FIRST so an opted-in mark is never re-read as something else.
+        # Without it a Trow line is INERT rather than wrong: `first_letter` anchors at position 0,
+        # the dash is not a letter, so surname_token abstains and is_ditto_lead sees no mark --
+        # the row falls through as not_ditto with an empty resolution and the carry is untouched.
+        # Measured on trow1913's 93 gold rows: 0 surnames carried without `glued`, 86 with it.
+        gl = split_glued_mark(raw, glued)
+        sur = None if gl else surname_token(raw)
         if sur is not None:
             prev, prev_leaf = sur, leaf
             yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": sur,
                    "status": "not_ditto", "flags": []}
             continue
-        if not is_ditto_lead(raw):
+        if not gl and not is_ditto_lead(raw):
             yield {"leaf": leaf, "raw_line": raw, "lead": raw.split()[0] if raw.split() else "",
                    "resolved": "", "status": "not_ditto", "flags": []}
             continue
 
-        lead = raw.split()[0]
+        lead = gl[0] if gl else raw.split()[0]
         flags = []
         if prev is None:
             yield {"leaf": leaf, "raw_line": raw, "lead": lead, "resolved": "",
@@ -406,6 +513,52 @@ def self_test() -> int:
     check("real entry is not a ditto lead", is_ditto_lead("Ackerman Jos lab h 12 Union"), False)
     check("house number is not a ditto lead", is_ditto_lead("140 Broadway, Borough of Manhattan"), False)
 
+    # --- glued marks (Trow `-Adolph`, Polk `"Thos`). Opt-in: the default must not move. ---
+    check("glued mark invisible by default", is_ditto_lead("-Adolph A salesman h68 Lenox av"), False)
+    check("glued mark seen when opted in",
+          is_ditto_lead("-Adolph A salesman h68 Lenox av", glued=("-",)), True)
+    check("glued split", split_glued_mark('"Thos trackmn r69 Swan', ('"',)),
+          ('"', "Thos trackmn r69 Swan"))
+    check("a mark not in the volume's set stays glued",
+          split_glued_mark("*Simmons Aaron, 171 Corcord", ("-",)), None)
+    # A glued mark makes the line INERT, not wrong: first_letter anchors at position 0, the dash
+    # is not a letter, so the sort key abstains -- and with no mark token there is no ditto
+    # either. The row carries nothing and poisons nothing. On trow1913's 93 gold rows that is 0
+    # surnames carried; with glued=('-',) it is 86.
+    check("glued dash abstains from the sort key",
+          surname_token("-Adolph A salesman h68 Lenox av"), None)
+    trow = [(1, "Aarons Isaac clothing 27 Ave A"),
+            (1, "-Adolph A salesman h68 Lenox av"),
+            (1, "-Anna wid Isidor h68 Lenox av")]
+    check("inert without the opt-in", [r["status"] for r in resolve_cross_line(trow)],
+          ["not_ditto", "not_ditto", "not_ditto"])
+    got = list(resolve_cross_line(trow, glued=("-",)))
+    check("trow row0 anchors", got[0]["resolved"], "Aarons")
+    check("trow glued ditto resolves", (got[1]["status"], got[1]["resolved"]),
+          ("resolved", "Aarons"))
+    check("trow second glued ditto resolves", got[2]["resolved"], "Aarons")
+
+    # THE REGRESSION THIS DESIGN EXISTS FOR: ogden1839 prints `*` as a RACE DESIGNATION and the
+    # surname follows it directly. Gold: race_designation='*', name='Simmons Aaron'. Splitting it
+    # as a ditto would destroy the marker AND promote a surname to a given name, 7 of 7 rows.
+    ogden = [(1, "Sands Wm. 102 Sands"),
+             (1, "*Simmons Aaron, 171 Corcord"),
+             (1, "*Simmons James, Weeksville, Bedford")]
+    verdicts = classify_glued_marks(ogden, min_n=2)
+    check("ogden `*` classified MARKER, not ditto", verdicts["*"]["verdict"], "MARKER")
+    # Given names must SPAN the alphabet for the test to work. A contiguous slice of one surname
+    # block does not -- `-Adolph`/`-Anna`/`-Arnold` under `Aarons` all vote A and read as MARKER.
+    # That is the documented small-sample failure, not a bug; a real leaf spans several blocks.
+    trow_v = classify_glued_marks(
+        [(1, "Aarons Isaac clothing 27 Ave A"), (1, "Abbott Chas grocer 12 Main"),
+         (1, "-Benj B oils 170 W65th"), (1, "-Fred L rugs 303 5th av"),
+         (1, "-Maude E h 2333 Bway")], min_n=2)
+    check("trow `-` classified DITTO", trow_v["-"]["verdict"], "DITTO")
+    narrow = classify_glued_marks(
+        [(1, "Aarons Isaac clothing 27 Ave A"), (1, "-Adolph A salesman h68 Lenox av"),
+         (1, "-Anna wid Isidor h68 Lenox av")], min_n=2)
+    check("a one-block window is NOT enough to classify", narrow["-"]["verdict"], "MARKER")
+
     seq = [(1, "Ackerman And'w J foreman h 460 Ralph av"),
            (1, '"        Ann C wid David h 518 Madison'),
            (1, "44       Anna costumes 760 B'way"),
@@ -428,7 +581,7 @@ def self_test() -> int:
     return 0
 
 
-def cross_line_report(lines_path: str, want_inventory: bool, out_path=None) -> int:
+def cross_line_report(lines_path: str, want_inventory: bool, out_path=None, glued=()) -> int:
     """Run the name carry over a whole volume and report what it did, honestly.
 
     Prints the two dispute rates side by side rather than a single accuracy number, because on
@@ -448,9 +601,24 @@ def cross_line_report(lines_path: str, want_inventory: bool, out_path=None) -> i
         for tok, n in inventory([r for _, r in rows]):
             mark = "  <- ditto?" if tok != "<SURNAME-SHAPED>" and DITTO_LEADERS.match(tok) else ""
             print(f"  {n:>8,}  {tok!r}{mark}")
+        gl = classify_glued_marks(rows)
+        print("\nGLUED leading marks (printed with no space, so nothing tokenises as a mark):")
+        if not gl:
+            print("  none")
+        for mk, d in sorted(gl.items(), key=lambda kv: -kv[1]["n"]):
+            share = d.get("share_follower_is_sort_key")
+            print(f"  {mk!r:>6}  n={d['n']:<6} follower is the sort key "
+                  f"{'--' if share is None else format(share, '.0%'):>4}  -> {d['verdict']}")
+            for ex in d["examples"][:2]:
+                print(f"          {ex!r}")
+        if any(d["verdict"] == "DITTO" for d in gl.values()):
+            marks = " ".join(m for m, d in gl.items() if d["verdict"] == "DITTO")
+            print(f"\n  re-run with --glued-marks '{marks}' to carry these. A MARKER verdict "
+                  "means the\n  follower IS the surname (ogden1839's `*` is a race designation) "
+                  "-- do not pass it.")
         return 0
 
-    res = list(resolve_cross_line(rows))
+    res = list(resolve_cross_line(rows, glued))
     dittos = [r for r in res if r["status"] in ("resolved", "orphan")]
     cross = [r for r in dittos if "cross_leaf" in r["flags"]]
     conflict = [r for r in dittos if "letter_conflict" in r["flags"]]
@@ -487,6 +655,10 @@ def main() -> int:
     ap.add_argument("--records", help="JSONL with a `record` key (any data/*_eval.jsonl)")
     ap.add_argument("--preds", help="qwen_predict.py YAML predictions")
     ap.add_argument("--lines", help="a *_lines.jsonl (raw_line + context.leaf) for the CROSS-LINE pass")
+    ap.add_argument("--glued-marks", default="",
+                    help="space- or comma-separated marks this volume glues to the next token "
+                         "(Trow: '-'). Run --inventory FIRST: a mark the classifier calls MARKER "
+                         "is not a ditto and must not be passed here.")
     ap.add_argument("--inventory", action="store_true",
                     help="with --lines: dump the leading-token distribution and exit. Run this on "
                          "any new volume before trusting DITTO_LEADERS.")
@@ -497,7 +669,8 @@ def main() -> int:
     if args.self_test:
         return self_test()
     if args.lines:
-        return cross_line_report(args.lines, args.inventory, args.out)
+        glued = tuple(m for m in re.split(r"[,\s]+", args.glued_marks) if m)
+        return cross_line_report(args.lines, args.inventory, args.out, glued)
     if not (args.records or args.preds):
         ap.error("need --records, --preds, --lines or --self-test")
 

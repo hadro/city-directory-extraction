@@ -46,23 +46,24 @@ glued or misread, so `is_ditto_lead` never sees it --
 Those belong to next-step #9 (mark detection), not here (mark absent). Conflating them is how a
 recall number for this detector gets manufactured, and it is why the two are separated above.
 
-**3. The production gate fails on exactly the volumes with glued marks.** The gate above reads
-gold, which production does not have; the production signal is the raw ditto-lead share, and it
-agrees with gold on five of seven volumes and inverts on both Trow books:
+**3. The production gate used to fail on exactly the volumes with glued marks. FIXED 2026-09-12.**
+The gate above reads gold, which production does not have; the production signal is the raw
+ditto-lead share, and it read 0.0% on both Trow books because Trow glues its dash to the given
+name (`-Adolph`), so nothing tokenised as a mark. `resolve_dittos.classify_glued_marks` now
+identifies glued marks per volume and this script passes them to `is_ditto_lead`:
 
-    volume        gold implied%   raw ditto-lead%
-    polk1917           84.7%           83.3%      agree
-    polk1925           90.0%           92.5%      agree
-    polk1933bk         71.4%           71.4%      agree
-    polk1933si         66.1%           55.4%      agree
-    queens1933         59.7%           58.1%      agree
-    trow1907           58.8%            0.0%      MISSED
-    trow1913           97.8%            0.0%      MISSED
+    volume        gold implied%   raw, before   raw, after
+    polk1917           84.7%          83.3%        83.3%
+    polk1925           90.0%          92.5%        92.5%
+    polk1933bk         71.4%          71.4%        71.4%
+    polk1933si         66.1%          55.4%        66.1%
+    queens1933         59.7%          58.1%        59.7%
+    trow1907           58.8%           0.0%        60.3%   <- was MISSED
+    trow1913           97.9%           0.0%        93.5%   <- was MISSED
 
-Trow glues its dash to the given name (`-Adolph`), so nothing tokenises as a mark. Both the gate
-AND the harvest read zero there. **So the detector is blocked on next-step #9 for the Trow family**
--- which is the concrete form of the portability caveat the companion file states in the abstract,
-and a better reason to do #9 than the one recorded against it.
+The gate now agrees with gold on every volume, and two that already agreed became exact.
+ogden1839's `*` is classified MARKER and stays out of the ditto set, so `race_designation`
+survives. What this does NOT change: recall is still unmeasurable (point 2).
 
 HOW GROUND TRUTH IS DEFINED, AND THREE WAYS IT WAS GOT WRONG FIRST
 ------------------------------------------------------------------
@@ -91,7 +92,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "postprocess"))
 
-from resolve_dittos import is_ditto_lead                          # noqa: E402
+from resolve_dittos import classify_glued_marks, is_ditto_lead    # noqa: E402
 
 NAMEY = re.compile(r"^[A-Z][A-Za-z’'.]*$")
 # Glued or standalone. `-Adolph` and `" Thos` both say "same surname as above".
@@ -146,7 +147,15 @@ def measure(gold_glob, given):
         name = Path(p).name.replace("_eval.jsonl", "")
         gold_implied = sum(1 for r in rows
                            if ((r.get("record") or {}).get("name") or "")[:1] in DITTO_CHARS)
-        raw_ditto = sum(1 for r in rows if is_ditto_lead(r["raw_line"]))
+        # The production gate has no gold, so it reads the raw ditto-lead share -- which is 0.0%
+        # on a volume that glues its mark until the glued forms are classified. That is exactly
+        # how both Trow books used to be missed.
+        leafed = [(r["context"].get("leaf") or r["context"].get("image", "?"), r["raw_line"])
+                  for r in rows]
+        glued = tuple(m for m, d in classify_glued_marks(leafed).items()
+                      if d["verdict"] == "DITTO")
+        raw_ditto_naive = sum(1 for r in rows if is_ditto_lead(r["raw_line"]))
+        raw_ditto = sum(1 for r in rows if is_ditto_lead(r["raw_line"], glued=glued))
         tp = fp = tn = fn = 0
         for r in rows:
             raw = r["raw_line"]
@@ -167,6 +176,8 @@ def measure(gold_glob, given):
             "rows": len(rows),
             "gold_implied_share": round(gold_implied / len(rows), 4),
             "raw_ditto_share": round(raw_ditto / len(rows), 4),
+            "raw_ditto_share_before_glued_fix": round(raw_ditto_naive / len(rows), 4),
+            "glued_ditto_marks": list(glued),
             "gate_applies_gold": gold_implied / len(rows) >= GATE_SHARE,
             "gate_applies_production": raw_ditto / len(rows) >= GATE_SHARE,
             "tp": tp, "fn": fn, "fp": fp, "tn": tn,
@@ -228,8 +239,8 @@ def main(argv=None) -> int:
     for k in disagree:
         v = per[k]
         print(f"    {k:<12} gold implied {v['gold_implied_share']:.1%}  "
-              f"raw ditto-lead {v['raw_ditto_share']:.1%}  <- glued mark, blocked on next-step #9",
-              file=e)
+              f"raw ditto-lead {v['raw_ditto_share']:.1%}  <- classify_glued_marks found no "
+              "DITTO mark here; run --inventory on it", file=e)
     print(f"  wrote {args.out}", file=e)
     return 0
 

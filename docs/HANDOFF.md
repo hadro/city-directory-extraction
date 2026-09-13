@@ -25,6 +25,16 @@ then release to HF.
 > lines. See **WHOLE-VOLUME EXTRACTION** below — especially that **the model never refuses**, so
 > any non-entry surviving the filter becomes a fabricated person in the output.
 >
+> **⚠️ THE `banner` FILTER WAS WRONG AND IS NOW FIXED (2026-09-13).** It normalized by a plain
+> median over a bimodal line-width distribution and was cutting real entries at about the rate it
+> cut advertising — 1,038 entry-shaped lines killed against 951 non-entries caught per 300 leaves.
+> 1906BPL now keeps **205,103 (70.1%)**, not 199,012 (68.0%): **+6,091 lines, disproportionately
+> real entries**. `data/1906BPL_lines.jsonl` was NOT regenerated, so every figure in this document
+> remains exact against the artifact it was measured on — but that artifact is no longer what the
+> code produces. **Read [BANNER_CORRECTION.md](BANNER_CORRECTION.md) before re-running stage 1 or
+> trusting a 1906BPL denominator**, including entry_rate's 97.5%, the band A/B, and the 23.5%
+> dispute rate.
+>
 > **DITTO RESOLUTION exists, and 1906BPL was RE-INGESTED (2026-09-10, branch `ditto-resolution`).**
 > 67.3% of that volume's lines are ditto-lead, so this decides the `name` field for two thirds of
 > it. `postprocess/resolve_dittos.py` expands them downstream (the model emits them verbatim by

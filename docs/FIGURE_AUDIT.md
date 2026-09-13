@@ -8,22 +8,34 @@ artifacts in this repo** and compared against the published value.
 Method: recompute, do not re-read. A figure that cannot be recomputed is listed as such, which is
 itself a finding.
 
+> ⚠️ **SUPERSEDED IN PART, LATER THE SAME DAY.** This audit checked whether each figure was *scoped*
+> the way it was cited, and it was right on its own terms. It could not have caught what came next:
+> the `banner` geometry rule itself was wrong, so several figures verified below are exact
+> reproductions of a number that should never have been that value. 1906BPL keeps **205,103
+> (70.1%)** under the corrected rule, not 199,012 (68.0%); micro13 keeps **2,899 (83.8%)**, not
+> 2,889 (83.5%). `data/1906BPL_lines.jsonl` was not regenerated, so every "recomputed" cell below
+> is still exact *against that artifact*. See **[BANNER_CORRECTION.md](BANNER_CORRECTION.md)**.
+>
+> The lesson generalizes this document's own: a figure can be correctly scoped, correctly
+> recomputed, and still be measuring a broken filter. A keep rate cannot tell you whether what was
+> cut was advertising or people. Only `--dump-dropped` can.
+
 ---
 
 ## Verified exactly — no action
 
 | figure | published | recomputed |
 |---|---|---|
-| 1906BPL kept lines | 199,012 | **199,012** |
-| 1906BPL candidates | 292,793 | **292,793** |
-| combined keep rate | 68.0% | **68.0%** |
+| 1906BPL kept lines | 199,012 | **199,012** (superseded: 205,103) |
+| 1906BPL candidates | 292,793 | **292,793** (unchanged by the correction) |
+| combined keep rate | 68.0% | **68.0%** (superseded: 70.1%) |
 | `44` leading tokens | 84,053 (42%) | **84,053 (42.2%)** |
 | listing bounds | leaves 9–1215 | **9–1215** |
 | leaves in letter blocks vs plain range | 1,041 / 1,207 → 166 ad-run leaves (13%) | **1,041 / 1,207 → 166 (13%)** |
 | alpha-run cut | 7.5% | **14,965 lines = 7.5%** |
 | cross-line dispute rate | 23.5% | **31,564 = 23.5%** |
 | cross_leaf / letter_conflict | ~20k each | **20,302 / 20,228** |
-| micro13 kept | 2,889 (83.5%) | **2,889 (83.5%)** |
+| micro13 kept | 2,889 (83.5%) | **2,889 (83.5%)** (superseded: 2,899 / 83.8%) |
 | ditto-lead share | 67.3% | 67.4% — trivial drift from re-ingest |
 | wrapped continuations | 12.8% | 12.7% of candidates (11.3% of raw hOCR lines — denominator is candidates) |
 

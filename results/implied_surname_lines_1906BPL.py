@@ -111,6 +111,18 @@ WHAT IS STILL NOT ESTABLISHED
 - **The overlap with next-step #6 is NOT measured.** A wrong carry running 137 lines is a
   plausible contributor to that 23.5% cross-line dispute rate, and this file does not claim it.
   That is a separate measurement.
+
+⚠️ PINNED TO THE PRE-`banner`-CORRECTION ARTIFACT (flagged 2026-09-13)
+---------------------------------------------------------------------
+This result was measured on `data/1906BPL_lines.jsonl` as shipped: 199,012 lines, produced before
+the `banner` geometry rule was corrected. It **still reproduces exactly against that file** and is
+not retracted. But the file is no longer what `ia_volume_to_jsonl.py` produces -- the corrected
+rule keeps 205,103 lines (+6,091, disproportionately real entries) -- so re-running this over a
+REGENERATED volume measures a different population than the one quoted here.
+The denominator moves.
+
+Read docs/BANNER_CORRECTION.md before regenerating or re-quoting these numbers.
+
 """
 
 import argparse

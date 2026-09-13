@@ -26,6 +26,12 @@ whether **body lines lower down a page** behave like body lines at the top.
 
 ## Design
 
+> ⚠️ **The draw below is pinned to the pre-`banner`-correction artifact (flagged 2026-09-13).**
+> It was drawn from `data/1906BPL_lines.jsonl` at 199,012 lines. The corrected rule keeps 205,103,
+> so **this pre-registration is void against a regenerated volume** — the band shares that define
+> the strata move. Re-stratify and re-pre-register before re-running.
+> See [../docs/BANNER_CORRECTION.md](../docs/BANNER_CORRECTION.md).
+
 **Stratified, 150 lines per band, 600 total**, drawn from `data/1906BPL_lines.jsonl` (199,012 kept
 lines, whole volume — not restricted to the listing span, because the question is what fraction of
 *what we feed the model* becomes a fake person).

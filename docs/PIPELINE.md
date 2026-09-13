@@ -89,10 +89,19 @@ elements. Same words, 4.5× the error, purely from line segmentation.
 
 ### Measured throughput
 
-| volume | leaves | hOCR lines | joins | candidates | kept |
-|---|---|---|---|---|---|
-| 1906BPL (ABBYY scan) | 1,240 | 329,989 | 37,196 | 292,793 | **199,012 (68.0%)** |
-| micro_IABROOKLYN_0013 (tesseract microfilm) | ~100 | 3,676 | — | 3,460 | **2,889 (83.5%)** |
+> ⚠️ **These kept-counts are PRE-CORRECTION and the code no longer produces them.** The `banner`
+> geometry rule was normalizing by a plain median over a bimodal width distribution and was cutting
+> real entries at roughly the rate it cut advertising (1,038 entry-shaped killed / 951 non-entries
+> caught per 300 leaves). Fixed 2026-09-13 — **1906BPL now keeps 205,103 (70.1%)** and micro13
+> **2,899 (83.8%)**. `data/1906BPL_lines.jsonl` was deliberately NOT regenerated, so the 199,012
+> figures below remain exact *for that artifact* and for everything measured on it.
+> Full record, and the list of what is pinned to the old file:
+> **[BANNER_CORRECTION.md](BANNER_CORRECTION.md)**.
+
+| volume | leaves | hOCR lines | joins | candidates | kept (as shipped) | kept (current code) |
+|---|---|---|---|---|---|---|
+| 1906BPL (ABBYY scan) | 1,240 | 329,989 | 37,196 | 292,793 | **199,012 (68.0%)** | **205,103 (70.1%)** |
+| micro_IABROOKLYN_0013 (tesseract microfilm) | ~100 | 3,676 | — | 3,460 | **2,889 (83.5%)** | **2,899 (83.8%)** |
 
 Cache is `data/ia_cache/`, **~291 MB per volume** against ~1 MB of output. **Discard it per volume
 on a corpus sweep** — 291 volumes would be 50–60 GB.

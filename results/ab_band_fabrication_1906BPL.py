@@ -92,6 +92,18 @@ WHAT THIS DOES NOT SETTLE
   of the two numbers PIPELINE.md had been comparing was a whole-volume rate.
 - **150 per stratum** resolves roughly +/-8 points at 50%. Head vs foot (76.0% vs 55.3%) is outside
   that and looks real; smaller differences would not be.
+
+⚠️ PINNED TO THE PRE-`banner`-CORRECTION ARTIFACT (flagged 2026-09-13)
+---------------------------------------------------------------------
+This result was measured on `data/1906BPL_lines.jsonl` as shipped: 199,012 lines, produced before
+the `banner` geometry rule was corrected. It **still reproduces exactly against that file** and is
+not retracted. But the file is no longer what `ia_volume_to_jsonl.py` produces -- the corrected
+rule keeps 205,103 lines (+6,091, disproportionately real entries) -- so re-running this over a
+REGENERATED volume measures a different population than the one quoted here.
+The pre-registered stratified draw is void against a regenerated file -- re-stratify first.
+
+Read docs/BANNER_CORRECTION.md before regenerating or re-quoting these numbers.
+
 """
 
 import argparse

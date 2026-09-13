@@ -54,6 +54,20 @@ WHAT THIS DOES NOT SETTLE
   crossed a leaf or conflicts with the leaf's modal letter. A header-orphaned row can be silently
   wrong WITHOUT being flagged, so 58.0% is a floor on how badly those rows do, not an estimate.
 - The reverse also holds volume-wide: the 23.5% is a review-queue rate, not an error rate.
+
+⚠️ PINNED TO THE PRE-`banner`-CORRECTION ARTIFACT (flagged 2026-09-13)
+---------------------------------------------------------------------
+This result was measured on `data/1906BPL_lines.jsonl` as shipped: 199,012 lines, produced before
+the `banner` geometry rule was corrected. It **still reproduces exactly against that file** and is
+not retracted. But the file is no longer what `ia_volume_to_jsonl.py` produces -- the corrected
+rule keeps 205,103 lines (+6,091, disproportionately real entries) -- so re-running this over a
+REGENERATED volume measures a different population than the one quoted here.
+WORST CASE HERE: this script imports `page_geometry`/`geom_reject` LIVE while reading the old
+JSONL, so re-running it TODAY already mixes a pre-correction file with post-correction code.
+Its orphan counts move even with no regeneration.
+
+Read docs/BANNER_CORRECTION.md before regenerating or re-quoting these numbers.
+
 """
 
 import argparse

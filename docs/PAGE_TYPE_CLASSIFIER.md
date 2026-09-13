@@ -330,7 +330,14 @@ signal from the classifier.
 
 The union is free from artifacts that already exist — `data/1906BPL_lines.jsonl` (199,012 kept,
 `context.leaf` on every row) ∪ `data/1906BPL_dropped.txt` (93,781 rows, leaf in column 1, drop
-reason in column 2) reconstructs all 292,793 candidate lines across 1,240 leaves. Reading the hOCR
+reason in column 2) reconstructs all 292,793 candidate lines across 1,240 leaves.
+
+> ⚠️ **Both artifacts are pre-`banner`-correction (2026-09-13).** The union still reconstructs
+> 292,793 candidates exactly — candidates are unaffected — but the kept/dropped SPLIT moved:
+> 6,091 lines shift from `banner` to kept under the corrected rule. If you rebuild leaf docs from
+> a regenerated volume, the split differs. Note also that `build_leaf_docs.py`'s `share_banner`
+> feature was **deliberately left on the old statistic** so the 239 hand labels stay valid.
+> See [BANNER_CORRECTION.md](BANNER_CORRECTION.md). Reading the hOCR
 directly is the independent path and should be used for at least one volume as a cross-check, the
 same way stage 2 checks both.
 

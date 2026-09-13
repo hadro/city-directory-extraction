@@ -97,6 +97,18 @@ WHAT THIS DOES NOT SETTLE
   a choice. Do not read "79 are OCR garbage" as "only 8 are advertising". The
   `business-directory` tag is clean and is the one to trust.
 - `is_entry` sees only the predicted record, so this measures the metric, never the model.
+
+⚠️ PINNED TO THE PRE-`banner`-CORRECTION ARTIFACT (flagged 2026-09-13)
+---------------------------------------------------------------------
+This result was measured on `data/1906BPL_lines.jsonl` as shipped: 199,012 lines, produced before
+the `banner` geometry rule was corrected. It **still reproduces exactly against that file** and is
+not retracted. But the file is no longer what `ia_volume_to_jsonl.py` produces -- the corrected
+rule keeps 205,103 lines (+6,091, disproportionately real entries) -- so re-running this over a
+REGENERATED volume measures a different population than the one quoted here.
+The 140 hand labels were drawn from the old file, so re-draw and re-label before re-running.
+
+Read docs/BANNER_CORRECTION.md before regenerating or re-quoting these numbers.
+
 """
 
 import argparse

@@ -267,6 +267,44 @@ def build_html(ident, leaves, blind, save_url, prior=None):
 
 
 # ==============================================================================================
+def _assert_js_initial_state(blind, expect_body, payload):
+    """Evaluate the template's real `const S = ...` initialiser and check what a leaf starts as.
+
+    Extracted from the generated page rather than restated here, so the test cannot drift from
+    the code it is checking. Uses JavaScriptCore via osascript, which is present on macOS; where
+    it is not, this degrades to a skip rather than a false pass.
+    """
+    import subprocess
+    import tempfile
+
+    html = build_html("T", [payload], blind, "/save")
+    src = html[html.index("const CFG ="):html.index("const $ = id =>")]
+    src = src.replace("const CFG", "var CFG").replace("const S", "var S")
+    script = src + '\nJSON.stringify({body:S[0].has_body, top:S[0].body_top, bot:S[0].body_bottom});'
+
+    with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as fh:
+        fh.write(script)
+        path = fh.name
+    try:
+        proc = subprocess.run(
+            ["osascript", "-l", "JavaScript", "-e",
+             'ObjC.import("Foundation");'
+             f'eval($.NSString.stringWithContentsOfFileEncodingError("{path}",4,null).js)'],
+            capture_output=True, text=True, timeout=60)
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        print("  (skipped JS state check: no JavaScriptCore here)", file=sys.stderr)
+        return
+    finally:
+        os.unlink(path)
+
+    if proc.returncode != 0:
+        raise AssertionError(f"could not evaluate the initialiser: {proc.stderr.strip()[:200]}")
+    state = json.loads(proc.stdout.strip())
+    assert state["body"] is expect_body, \
+        f"blind={blind}: leaf starts has_body={state['body']}, expected {expect_body}"
+    assert 0.0 <= state["top"] < state["bot"] <= 1.0, f"blind={blind}: bad edges {state}"
+
+
 def _self_test() -> int:
     markup = (
         '<div class="ocr_page" title="bbox 0 0 2000 3000">'
@@ -309,6 +347,13 @@ def _self_test() -> int:
               "front-matter", "index-or-back-matter", "blank-or-plate"):
         assert f'"{v}"' in html, f"template is missing the {v} option"
     assert "head_contents" in html and "page_type" in html, "template/save schema drift"
+
+    # Run the page's OWN state initialiser under both modes. This exists because deriving
+    # has_body from the prefill marked every --blind leaf "no body" -- the page greyed out, both
+    # handles hid, and 49 leaves of hand labelling recorded nothing at all. A Python-side check
+    # could not have caught it: leaf_payload was correct, and the damage was in the JS.
+    _assert_js_initial_state(blind=False, expect_body=True,  payload=p)
+    _assert_js_initial_state(blind=True,  expect_body=True,  payload=leaf_payload(_Stub(), 7, True))
 
     print("self-test OK", file=sys.stderr)
     return 0

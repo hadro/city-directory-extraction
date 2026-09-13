@@ -296,7 +296,11 @@ let activeEdge = "top";
 const S = CFG.leaves.map(L => {
   const fresh = {
     leaf: L.leaf,
-    has_body: L.prefill_top !== null,
+    // A missing prefill means "fewer than 20 ditto lines", which is good evidence of a full-page
+    // ad -- but ONLY when a prefill was possible. In --blind there is never one by design, so
+    // deriving has_body from it marked every leaf "no body", greyed the page, hid both handles,
+    // and silently recorded nothing. Blind mode starts WITH a body and neutral 0.10/0.90 edges.
+    has_body: CFG.blind ? true : (L.prefill_top !== null),
     irregular: false,
     body_top:    L.prefill_top    !== null ? L.prefill_top    : 0.10,
     body_bottom: L.prefill_bottom !== null ? L.prefill_bottom : 0.90,

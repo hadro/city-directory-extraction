@@ -1,199 +1,482 @@
 {
   "ident": "1906BPL",
-  "labels": "data/bands_1906BPL_train.jsonl",
-  "n_rows": 197,
-  "n_body": 193,
-  "n_no_body": 4,
-  "n_irregular": 0,
-  "n_scored": 190,
-  "n_lines": 50480,
-  "no_body_missing_page_type": [
-    39,
-    129,
-    134,
-    165
-  ],
-  "strip_labels_touched": {
-    "head": 0,
-    "foot": 0,
-    "of": 193
-  },
-  "edge_delta": {
-    "top": {
-      "median": -0.015,
-      "min": -0.065,
-      "max": 0.165,
-      "modal": [
-        -0.015,
-        130
-      ]
+  "sets": {
+    "train": {
+      "path": "data/bands_1906BPL_train.jsonl",
+      "n_rows": 197,
+      "n_body": 193,
+      "n_irregular": 0,
+      "no_body_missing_page_type": [
+        39,
+        129,
+        134,
+        165
+      ],
+      "strip_touched": {
+        "head": 0,
+        "foot": 0
+      },
+      "rules": {
+        "all/0.000": {
+          "n": 190,
+          "clean_leaves": 183,
+          "exact_leaves": 0,
+          "listing_lost": 809,
+          "ad_admitted": 66,
+          "worst": [
+            {
+              "leaf": 904,
+              "admitted": 20
+            },
+            {
+              "leaf": 118,
+              "admitted": 8
+            },
+            {
+              "leaf": 416,
+              "admitted": 8
+            },
+            {
+              "leaf": 678,
+              "admitted": 8
+            },
+            {
+              "leaf": 1098,
+              "admitted": 8
+            },
+            {
+              "leaf": 86,
+              "admitted": 7
+            }
+          ]
+        },
+        "all/0.010": {
+          "n": 190,
+          "clean_leaves": 183,
+          "exact_leaves": 133,
+          "listing_lost": 179,
+          "ad_admitted": 73,
+          "worst": [
+            {
+              "leaf": 904,
+              "admitted": 21
+            },
+            {
+              "leaf": 118,
+              "admitted": 9
+            },
+            {
+              "leaf": 416,
+              "admitted": 9
+            },
+            {
+              "leaf": 678,
+              "admitted": 9
+            },
+            {
+              "leaf": 1098,
+              "admitted": 9
+            },
+            {
+              "leaf": 86,
+              "admitted": 8
+            }
+          ]
+        },
+        "all/0.015": {
+          "n": 190,
+          "clean_leaves": 183,
+          "exact_leaves": 150,
+          "listing_lost": 131,
+          "ad_admitted": 80,
+          "worst": [
+            {
+              "leaf": 904,
+              "admitted": 22
+            },
+            {
+              "leaf": 118,
+              "admitted": 10
+            },
+            {
+              "leaf": 416,
+              "admitted": 10
+            },
+            {
+              "leaf": 678,
+              "admitted": 10
+            },
+            {
+              "leaf": 1098,
+              "admitted": 10
+            },
+            {
+              "leaf": 86,
+              "admitted": 9
+            }
+          ]
+        },
+        "all/0.020": {
+          "n": 190,
+          "clean_leaves": 169,
+          "exact_leaves": 153,
+          "listing_lost": 76,
+          "ad_admitted": 113,
+          "worst": [
+            {
+              "leaf": 904,
+              "admitted": 24
+            },
+            {
+              "leaf": 118,
+              "admitted": 12
+            },
+            {
+              "leaf": 416,
+              "admitted": 12
+            },
+            {
+              "leaf": 678,
+              "admitted": 12
+            },
+            {
+              "leaf": 1098,
+              "admitted": 12
+            },
+            {
+              "leaf": 86,
+              "admitted": 11
+            }
+          ]
+        },
+        "all/0.025": {
+          "n": 190,
+          "clean_leaves": 53,
+          "exact_leaves": 46,
+          "listing_lost": 46,
+          "ad_admitted": 280,
+          "worst": [
+            {
+              "leaf": 904,
+              "admitted": 25
+            },
+            {
+              "leaf": 118,
+              "admitted": 13
+            },
+            {
+              "leaf": 1098,
+              "admitted": 13
+            },
+            {
+              "leaf": 416,
+              "admitted": 12
+            },
+            {
+              "leaf": 678,
+              "admitted": 12
+            },
+            {
+              "leaf": 86,
+              "admitted": 11
+            }
+          ]
+        },
+        "kept/0.000": {
+          "n": 190,
+          "clean_leaves": 190,
+          "exact_leaves": 0,
+          "listing_lost": 839,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "kept/0.010": {
+          "n": 190,
+          "clean_leaves": 190,
+          "exact_leaves": 136,
+          "listing_lost": 189,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "kept/0.015": {
+          "n": 190,
+          "clean_leaves": 190,
+          "exact_leaves": 155,
+          "listing_lost": 137,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "kept/0.020": {
+          "n": 190,
+          "clean_leaves": 175,
+          "exact_leaves": 158,
+          "listing_lost": 78,
+          "ad_admitted": 21,
+          "worst": [
+            {
+              "leaf": 283,
+              "admitted": 3
+            },
+            {
+              "leaf": 196,
+              "admitted": 2
+            },
+            {
+              "leaf": 251,
+              "admitted": 2
+            },
+            {
+              "leaf": 510,
+              "admitted": 2
+            },
+            {
+              "leaf": 1059,
+              "admitted": 2
+            },
+            {
+              "leaf": 28,
+              "admitted": 1
+            }
+          ]
+        },
+        "kept/0.025": {
+          "n": 190,
+          "clean_leaves": 55,
+          "exact_leaves": 48,
+          "listing_lost": 46,
+          "ad_admitted": 187,
+          "worst": [
+            {
+              "leaf": 196,
+              "admitted": 6
+            },
+            {
+              "leaf": 283,
+              "admitted": 6
+            },
+            {
+              "leaf": 31,
+              "admitted": 3
+            },
+            {
+              "leaf": 468,
+              "admitted": 3
+            },
+            {
+              "leaf": 9,
+              "admitted": 2
+            },
+            {
+              "leaf": 13,
+              "admitted": 2
+            }
+          ]
+        }
+      }
     },
-    "bottom": {
-      "median": 0.015,
-      "min": 0.01,
-      "max": 0.12,
-      "modal": [
-        0.015,
-        131
-      ]
+    "blind": {
+      "path": "data/bands_1906BPL_eval.jsonl",
+      "n_rows": 49,
+      "n_body": 49,
+      "n_irregular": 0,
+      "no_body_missing_page_type": [],
+      "strip_touched": {
+        "head": 0,
+        "foot": 0
+      },
+      "rules": {
+        "all/0.000": {
+          "n": 49,
+          "clean_leaves": 49,
+          "exact_leaves": 0,
+          "listing_lost": 203,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "all/0.010": {
+          "n": 49,
+          "clean_leaves": 49,
+          "exact_leaves": 35,
+          "listing_lost": 40,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "all/0.015": {
+          "n": 49,
+          "clean_leaves": 49,
+          "exact_leaves": 40,
+          "listing_lost": 28,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "all/0.020": {
+          "n": 49,
+          "clean_leaves": 46,
+          "exact_leaves": 42,
+          "listing_lost": 12,
+          "ad_admitted": 4,
+          "worst": [
+            {
+              "leaf": 988,
+              "admitted": 2
+            },
+            {
+              "leaf": 154,
+              "admitted": 1
+            },
+            {
+              "leaf": 315,
+              "admitted": 1
+            }
+          ]
+        },
+        "all/0.025": {
+          "n": 49,
+          "clean_leaves": 18,
+          "exact_leaves": 17,
+          "listing_lost": 2,
+          "ad_admitted": 42,
+          "worst": [
+            {
+              "leaf": 154,
+              "admitted": 2
+            },
+            {
+              "leaf": 507,
+              "admitted": 2
+            },
+            {
+              "leaf": 605,
+              "admitted": 2
+            },
+            {
+              "leaf": 681,
+              "admitted": 2
+            },
+            {
+              "leaf": 740,
+              "admitted": 2
+            },
+            {
+              "leaf": 753,
+              "admitted": 2
+            }
+          ]
+        },
+        "kept/0.000": {
+          "n": 49,
+          "clean_leaves": 49,
+          "exact_leaves": 0,
+          "listing_lost": 203,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "kept/0.010": {
+          "n": 49,
+          "clean_leaves": 49,
+          "exact_leaves": 35,
+          "listing_lost": 40,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "kept/0.015": {
+          "n": 49,
+          "clean_leaves": 49,
+          "exact_leaves": 40,
+          "listing_lost": 28,
+          "ad_admitted": 0,
+          "worst": []
+        },
+        "kept/0.020": {
+          "n": 49,
+          "clean_leaves": 46,
+          "exact_leaves": 42,
+          "listing_lost": 12,
+          "ad_admitted": 4,
+          "worst": [
+            {
+              "leaf": 988,
+              "admitted": 2
+            },
+            {
+              "leaf": 154,
+              "admitted": 1
+            },
+            {
+              "leaf": 315,
+              "admitted": 1
+            }
+          ]
+        },
+        "kept/0.025": {
+          "n": 49,
+          "clean_leaves": 18,
+          "exact_leaves": 17,
+          "listing_lost": 2,
+          "ad_admitted": 42,
+          "worst": [
+            {
+              "leaf": 154,
+              "admitted": 2
+            },
+            {
+              "leaf": 507,
+              "admitted": 2
+            },
+            {
+              "leaf": 605,
+              "admitted": 2
+            },
+            {
+              "leaf": 681,
+              "admitted": 2
+            },
+            {
+              "leaf": 740,
+              "admitted": 2
+            },
+            {
+              "leaf": 753,
+              "admitted": 2
+            }
+          ]
+        }
+      }
     }
   },
-  "rules": {
-    "prefill+/-0.000": {
-      "lost": 1016,
-      "admitted": 63,
-      "exact_leaves": 0,
-      "clean_leaves": 183,
-      "worst_6": [
-        {
-          "leaf": 904,
-          "admitted": 20,
-          "lost": 1
-        },
-        {
-          "leaf": 1098,
-          "admitted": 8,
-          "lost": 2
-        },
-        {
-          "leaf": 86,
-          "admitted": 7,
-          "lost": 1
-        },
-        {
-          "leaf": 118,
-          "admitted": 7,
-          "lost": 1
-        },
-        {
-          "leaf": 288,
-          "admitted": 7,
-          "lost": 2
-        },
-        {
-          "leaf": 416,
-          "admitted": 7,
-          "lost": 0
-        }
-      ],
-      "admitted_share_from_worst_6": 0.8889
+  "offsets": {
+    "train": {
+      "top": {
+        "n": 190,
+        "median": -0.015,
+        "q1": -0.02,
+        "q3": -0.015,
+        "on_0.015": 0.6842
+      },
+      "bottom": {
+        "n": 190,
+        "median": 0.015,
+        "q1": 0.015,
+        "q3": 0.02,
+        "on_0.015": 0.6895
+      }
     },
-    "prefill+/-0.010": {
-      "lost": 179,
-      "admitted": 73,
-      "exact_leaves": 133,
-      "clean_leaves": 183,
-      "worst_6": [
-        {
-          "leaf": 904,
-          "admitted": 21,
-          "lost": 0
-        },
-        {
-          "leaf": 118,
-          "admitted": 9,
-          "lost": 0
-        },
-        {
-          "leaf": 416,
-          "admitted": 9,
-          "lost": 0
-        },
-        {
-          "leaf": 678,
-          "admitted": 9,
-          "lost": 0
-        },
-        {
-          "leaf": 1098,
-          "admitted": 9,
-          "lost": 0
-        },
-        {
-          "leaf": 86,
-          "admitted": 8,
-          "lost": 0
-        }
-      ],
-      "admitted_share_from_worst_6": 0.8904
-    },
-    "prefill+/-0.015": {
-      "lost": 131,
-      "admitted": 80,
-      "exact_leaves": 150,
-      "clean_leaves": 183,
-      "worst_6": [
-        {
-          "leaf": 904,
-          "admitted": 22,
-          "lost": 0
-        },
-        {
-          "leaf": 118,
-          "admitted": 10,
-          "lost": 0
-        },
-        {
-          "leaf": 416,
-          "admitted": 10,
-          "lost": 0
-        },
-        {
-          "leaf": 678,
-          "admitted": 10,
-          "lost": 0
-        },
-        {
-          "leaf": 1098,
-          "admitted": 10,
-          "lost": 0
-        },
-        {
-          "leaf": 86,
-          "admitted": 9,
-          "lost": 0
-        }
-      ],
-      "admitted_share_from_worst_6": 0.8875
-    },
-    "prefill+/-0.020": {
-      "lost": 76,
-      "admitted": 114,
-      "exact_leaves": 152,
-      "clean_leaves": 168,
-      "worst_6": [
-        {
-          "leaf": 904,
-          "admitted": 24,
-          "lost": 0
-        },
-        {
-          "leaf": 118,
-          "admitted": 12,
-          "lost": 0
-        },
-        {
-          "leaf": 416,
-          "admitted": 12,
-          "lost": 0
-        },
-        {
-          "leaf": 678,
-          "admitted": 12,
-          "lost": 0
-        },
-        {
-          "leaf": 1098,
-          "admitted": 12,
-          "lost": 0
-        },
-        {
-          "leaf": 86,
-          "admitted": 11,
-          "lost": 0
-        }
-      ],
-      "admitted_share_from_worst_6": 0.7281
+    "blind": {
+      "top": {
+        "n": 49,
+        "median": -0.0163,
+        "q1": -0.0181,
+        "q3": -0.0151,
+        "on_0.015": 0.0
+      },
+      "bottom": {
+        "n": 49,
+        "median": 0.016,
+        "q1": 0.0143,
+        "q3": 0.0212,
+        "on_0.015": 0.0
+      }
     }
-  }
+  },
+  "headline_offset": 0.015
 }

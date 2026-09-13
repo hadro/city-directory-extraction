@@ -129,7 +129,69 @@ resolution, where a false ditto gets a surname carried into it.
   adjusted a starting guess, not whether the guess was right. The seven large deliberate corrections
   argue against pure anchoring but do not dispose of it. **The `--blind` evaluation set is now the
   load-bearing measurement rather than an optional rigour step**, and until it exists none of the
-  agreement numbers above should be quoted as accuracy.
+  agreement numbers above should be quoted as accuracy. → **Settled below.**
+
+---
+
+## STATUS 3 — phase 1 is done, and the answer is no model
+
+**2026-09-13.** 49 blind leaves labelled (`data/bands_1906BPL_eval.jsonl`), disjoint from training.
+239 labelled leaves in total. Full analysis in
+[`results/band_labels_vs_ditto_rule_1906BPL.py`](../results/band_labels_vs_ditto_rule_1906BPL.py).
+
+### Anchoring: disposed of
+
+| | train median | blind median | landing on ±0.0150 |
+|---|---|---|---|
+| top offset | −0.0150 | −0.0163 | train **68%** / blind **0%** |
+| bottom offset | +0.0150 | +0.0160 | train **69%** / blind **0%** |
+
+The two labelling processes fail in different ways — anchored keyboard nudges quantise onto
+multiples of 0.005, free mouse drags from a neutral 0.10/0.90 start do not. **0% of blind labels
+sit on the values 68% of anchored labels sit on, and the medians still agree to 0.0013**, with
+overlapping IQRs. The constant is a property of the page layout, not of the starting guess.
+
+### The instrument, and it is three words of change
+
+Take the extent of ditto-lead lines **computed over the lines `text_reject` keeps**, expand by
+0.015 of page height at each end.
+
+| label set | extent over | no ad admitted | exact | listing lost | ad admitted |
+|---|---|---|---|---|---|
+| train | all ditto lines | 183/190 | 150/190 | 131 | 80 |
+| train | **filter-surviving ditto lines** | **190/190** | 155/190 | 137 | **0** |
+| blind | all ditto lines | 49/49 | 40/49 | 28 | 0 |
+| blind | **filter-surviving ditto lines** | **49/49** | 40/49 | 28 | **0** |
+
+**Zero advertising lines admitted across all 239 labelled leaves**, costing 137 lost listing lines
+in ~63,000 (0.2%) — the harmless direction, since a lost line is a lost record while an admitted ad
+line is a fabricated person.
+
+The `44 COURT ST.` failure closes because `text_reject` **already** calls it `allcaps` and drops it.
+No new rule, no threshold, no model, no training data beyond what was needed to *check*.
+
+**The distinction that makes it safe is case, and it took looking rather than reasoning.** Two of
+the nine `44 <Street>`-shaped training lines are not advertising at all — `44 Montauk av` (leaf 251)
+and `44 Crooke av` (leaf 574) are wrapped continuations indented under an entry ending in `h`, whose
+leading `44` is a house number. `text_reject` keeps both, being mixed case. A regex on
+`44 <Word> <StreetType>` would have excluded them and been wrong.
+
+### What phase 1 does not settle
+
+- **The blind set contains no ad-intrusion case** — 0 of 49 leaves carry a `44 <Street>` line
+  against 9 of 190 in train (P(zero in 49) = 0.09, so chance rather than evidence of absence). It
+  independently validates the **offset**; the **fix** is measured only on the training leaves, which
+  is where the failures live and is the weaker of the two designs.
+- **One volume, one engine, one publisher, one labeller.** `44` is 1906BPL's mark under a per-volume
+  gate; whether the 0.015 offset transfers is untested. Phase 2 is now the whole remaining question.
+
+### Phases 3 and 4, revised
+
+Phase 3 (full-page ad leaves) survives: 4 train leaves were marked `has_body: false` and the rule
+needs a stated behaviour when a leaf has fewer than 20 filter-surviving ditto lines. Phase 4 still
+stands, but what ships is a rule, not a model — so `band` can be written at ingest in
+`ia_volume_to_jsonl.py` rather than bolted on, and the queue is for leaves where the extent is
+undefined rather than for low-confidence predictions.
 
 Phases below are revised accordingly. The strategy — small model, agent-proposed labels, human-read
 holdout, ship as a queue — is unchanged; the unit and the metric are not.

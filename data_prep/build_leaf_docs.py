@@ -92,6 +92,13 @@ def leaf_features(boxes, texts, page_size):
         "share_allcaps": _share(lambda t: t.isupper() and len(t) > 3, texts),
         "share_prose": _share(lambda t: len(t) > PROSE_CHARS, texts),
         "share_bigtype": _share(lambda h: h > 2.0 * med_h, heights),
+        # DELIBERATELY still 1.5 x the PLAIN median, which is no longer what the filter uses:
+        # ia_volume_to_jsonl.body_width() showed the plain median is dragged into the body by a
+        # page's short-fragment mode, and that file now normalizes by the body median at 1.4.
+        # This one is a recorded FEATURE, not a rule -- the 239 hand-labelled leaves behind the
+        # page-type work were labelled against these values, so changing it silently would move
+        # the ground under that labelling. Change it only together with a relabel, and if you do,
+        # take body_width() rather than inventing a third statistic.
         "share_banner": _share(lambda w: w > 1.5 * med_w, widths),
         "modal_letter": modal_letter,
         "modal_letter_share": round(modal_n / n, 4),

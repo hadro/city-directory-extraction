@@ -52,23 +52,31 @@ entry detector, and it happily passes advertising copy ("Seventh Ave. and Union 
 **Geometry** (new here): the hOCR carries boxes, and historical-ocr-eval established they are
 trustworthy for this corpus (`under% 0.0`, IoU 0.724). Display ads and section headings are set
 in larger type and run wider than body entries, so per page we drop lines taller than 2x the
-page's own median line height (`bigtype`) or wider than 1.5x its median line width (`banner`).
-Both are judged against the page's own medians, so no column count is needed and the same
-thresholds work on an 1786 single-column folio and a 1933 six-column Polk.
+page's own median line height (`bigtype`) or wider than 1.4x its own BODY line width
+(`banner`). Both are judged against the page's own distribution, so no column count is needed
+and the same thresholds work on an 1786 single-column folio and a 1933 six-column Polk.
 
-Measured on six 1906BPL leaves: 32 drops, every one inspected a running head, an ad headline, or
-OCR garbage. No false positives found.
+`banner` was measured on six leaves as "32 drops, no false positives found" and that was wrong.
+At 300 leaves it was killing 1,038 entry-shaped lines to catch 951 non-entries -- a coin flip --
+because its normalizer was a plain median over a BIMODAL width distribution, dragged down into
+the body by the page's own short fragments. Corrected 2026-09-13; `body_width` carries the
+measurement, and `geom_reject` carries the post-mortem on how six leaves hid it.
 
-**Wrapped entries are joined first** (see `join_wraps`) -- 199 joins in those 1,557 lines. End to
-end: 1,557 hOCR lines -> 1,358 candidate entries -> **1,035 kept (76.2%)**.
+**Wrapped entries are joined first** (see `join_wraps`) -- 37,196 joins in 1906BPL's 329,989
+lines. End to end, WHOLE VOLUME: 329,989 hOCR lines -> 292,793 candidate entries ->
+**205,103 kept (70.1%)**. Before the `body_width` correction that was 199,012 (68.0%), so the
+fix returned **6,091 lines**, disproportionately real entries -- `banner` drops fell 9,492 ->
+3,401 with advertising retention unchanged.
 
 Checked on a deliberately opposite volume, `micro_IABROOKLYN_0013` (1836/37 Brooklyn, SINGLE
 column, tesseract-on-microfilm rather than ABBYY-on-scan -- the thin tier). Whole volume, 100
-content leaves: 3,676 lines -> 3,460 candidates -> **2,889 kept (83.5%)**, in under a minute.
-`banner` there caught the volume's display advertising ("IMPORTER of CHINA, GLASS & ...",
-"SHEFFIELD & BIRMINGHAM SILVER PLATED"); `bigtype` and `short` caught tesseract noise. The
-thresholds are ratios against each page's own medians, which is why one setting spans a
-single-column 1836 microfilm and a two-column 1906 scan without tuning.
+content leaves: 3,676 lines -> 3,460 candidates -> **2,899 kept (83.8%)** (2,889 / 83.5% before
+the correction), in under a minute. `banner` there caught the volume's display advertising
+("IMPORTER of CHINA, GLASS & ...", "SHEFFIELD & BIRMINGHAM SILVER PLATED") and still does --
+keeping those two is why the winning normalizer is a body median and not a p90. `bigtype` and
+`short` caught tesseract noise. The thresholds are ratios against each page's own distribution,
+which is why one setting spans a single-column 1836 microfilm and a two-column 1906 scan without
+tuning.
 
 **Two things this deliberately does NOT do.** It does not detect columns -- see `page_geometry`
 for the measured reason that failed. And `--drop-off-margin` is opt-in rather than default,
@@ -123,12 +131,18 @@ _HAS_LOWER = re.compile(r"[a-z]")
 
 # --- geometry thresholds (find_ad_pages.py) ---------------------------------------------------
 BIG_RATIO = 2.0          # a line this many times the page's median line HEIGHT is display type
-# ...and this many times the page's median line WIDTH is a banner. Not a column width -- no column
+# ...and this many times the page's BODY line width is a banner. Not a column width -- no column
 # width is computed anywhere here, and page_geometry() explains at length why column detection was
-# tried and removed. On a listing page a body line spans one column, so the median line width IS
+# tried and removed. On a listing page a body line spans one column, so the body line width IS
 # about one column wide in practice, which is what makes the threshold mean "crosses columns"
 # without ever needing to find one.
-WIDE_RATIO = 1.5
+#
+# 1.5x THE PLAIN MEDIAN WAS THE ORIGINAL SETTING AND IT WAS A COIN FLIP. Measured 2026-09-13 on 300
+# random content leaves of 1906BPL (49,918 lines surviving text+bigtype): it killed 1,038
+# entry-shaped lines to catch 951 non-entries -- a 1:0.9 ratio. The rule was not mis-tuned, its
+# NORMALIZER was contaminated; see page_geometry.body_width(). Against `body_width` the same
+# separation needs only 1.4. See BODY_WIDTH_FLOOR for the measurement table.
+WIDE_RATIO = 1.4
 MIN_CHARS_LEAF = 200     # below this a leaf is a blank verso or a plate, not a listing page
 
 
@@ -316,11 +330,79 @@ def join_wraps(lines, med_h):
     return out, joins
 
 
-def page_geometry(lines):
-    """(median_height, median_width, ad_score) for one page's [(box, text, height)].
+BODY_WIDTH_FLOOR = 0.5   # a line under this share of the median width is a fragment, not a body line
 
-    Everything is judged against the PAGE'S OWN medians, so the rules are self-calibrating
+
+def body_width(widths):
+    """The width of this page's BODY lines -- the normalizer `banner` is judged against.
+
+    NOT the plain median, and the difference is the single largest correctness bug this filter
+    has had. Line widths on a listing page are BIMODAL: a short-fragment mode (wrap tails, ditto
+    stubs, gutter noise, OCR specks) and the body mode. On 1906BPL leaf 83, 124 of 312 lines sit
+    under 150px against a body cluster at 350-600px, so the plain median lands at 400 -- the LOW
+    EDGE of the body -- and `1.5 x median = 600` falls inside the body's own upper tail, whose
+    max is 599. The rule was cutting real entries at almost exactly the rate it cut advertising.
+
+    So: drop the fragment mode, then take a MEDIAN of what remains. The median (rather than a high
+    percentile) is the second half of the fix. `p90 x 1.15` scores better than anything else on
+    1906BPL -- 3 entry-kills against 560 catches -- and was rejected anyway, because where
+    advertising is a large share of a page's lines p90 IS the ad width: it lets
+    `SHEFFIELD & BIRMINGHAM SILVER PLATED` and `IMPORTER of CHINA, GLASS &` through on
+    micro_IABROOKLYN_0013. A statistic that the junk mode cannot drag down and the ad tail cannot
+    drag up is what the threshold needs, and on a page whose body is most of the page that is a
+    median over the body.
+
+    Measured 2026-09-13, three volumes spanning both OCR tiers and 1798-1906, as
+    (entry-shaped lines killed / non-entry lines caught) per volume sample:
+
+                            1906BPL       micro13    longworth1798   ad-marker lines kept
+        median  x 1.5     1,038 / 951     16 / 87      84 / 589           87 (78%)
+        body    x 1.4       101 / 723     19 / 80      36 / 330           87 (78%)
+
+    Identical advertising retention, a tenth of the entry kills on the thick tier. Hand-read:
+    1906BPL 0 newly-killed and 937 rescued per 300 leaves (~3,900 volume-wide, `44 Mich'l carp'r
+    h 2727 Fort Hamilton P'kway`); longworth 1 newly-killed against 49 rescued. The one
+    regression is micro13, 4 newly-killed against 1 rescued in 2,840 lines, and all four are real
+    entries with OCR trash appended that makes them wide (`Mason Nehemiah, merchant 116 High
+    iple |`) -- a wash, accepted for the thick-tier gain.
+
+    ⚠️ THE ENTRY-SHAPED COUNTS ABOVE ARE A REGEX PROXY, not gold: an occupation token plus a digit
+    plus 4+ words. That proxy missed `roofer`, `tinsmith` and `cloakmkr` during the measurement,
+    so it UNDERCOUNTS entries and the true rescue is larger than 937. The direction was confirmed
+    by reading samples of every delta cell, which is the evidence that matters here; treat the
+    absolute numbers as estimates. Scoring this against data/entry_labels_1906BPL.jsonl would
+    need a labelling pass aimed at wide lines -- the 140 existing labels are a general sample and
+    almost none land on them.
+
+    UNCHANGED FAILURE MODE, stated so it is not mistaken for a fix: a leaf that is ENTIRELY one
+    display advertisement has no body mode to find, so this calibrates to the ad exactly as the
+    plain median did. That is what `context.band` and the page-type classifier are for.
+
+    Whole-volume effect: 1906BPL 199,012 -> 205,103 kept (+6,091), `banner` drops 9,492 -> 3,401;
+    micro_IABROOKLYN_0013 2,889 -> 2,899, `banner` 109 -> 99.
+
+    ⚠️ `data/1906BPL_lines.jsonl` WAS NOT REGENERATED and still holds the 199,012-line version.
+    Everything measured on it still reproduces against it; nothing is retracted. But it is no
+    longer what this script produces, so entry_rate's 97.5%, the band A/B (pre-registered), the
+    implied-surname counts and the 23.5% dispute rate are all pinned to a population that a
+    re-run replaces. docs/BANNER_CORRECTION.md is the canonical record and lists every one.
+    """
+    if not widths:
+        return 1.0
+    m = statistics.median(widths) or 1.0
+    body = [w for w in widths if w >= BODY_WIDTH_FLOOR * m]
+    return (statistics.median(body) if body else m) or 1.0
+
+
+def page_geometry(lines):
+    """(median_height, body_width, ad_score) for one page's [(box, text, height)].
+
+    Everything is judged against the PAGE'S OWN distribution, so the rules are self-calibrating
     across a 1786 single-column folio and a 1933 six-column Polk without a column count.
+
+    The width statistic is `body_width`, NOT a plain median -- read that docstring before
+    changing it, and note that `ad_score`'s `wide` term moved with it, so ad-score values are
+    not comparable across that change.
 
     Column detection was tried here first and removed. `detection_recall.py:columns_from_boxes`
     clusters left edges and works well on Surya REGION boxes -- a handful of big blocks per
@@ -337,7 +419,7 @@ def page_geometry(lines):
     heights = [h for _, _, h in lines]                     # printed line height, not union height
     widths = [b[2] - b[0] for b, _, _ in lines]
     med_h = statistics.median(heights) or 1.0
-    med_w = statistics.median(widths) or 1.0
+    med_w = body_width(widths)
     areas = [w * h for w, h in zip(widths, heights)]
     total = sum(areas) or 1
     big = sum(a for a, h in zip(areas, heights) if h > med_h * BIG_RATIO) / total
@@ -348,10 +430,23 @@ def page_geometry(lines):
 def geom_reject(box, height, med_h, med_w):
     """Reason this line's geometry says it is not a body entry, or None to keep it.
 
-    Measured on six 1906BPL leaves: 28 drops in 1,557 lines, and every one inspected was a
-    running head, an ad headline, or OCR garbage -- no false positives found. Combined with the
-    text filter this keeps 73.1% (text alone keeps 76.0%). Whole-volume those are 68.0% and
-    72.5%; the six- and fourteen-leaf samples both run ~3.5 points optimistic.
+    `med_w` must come from page_geometry, i.e. be a `body_width` and not a plain median.
+
+    ⚠️ THE SIX-LEAF "NO FALSE POSITIVES FOUND" CLAIM WAS WRONG, and it is worth knowing how it
+    got made. The original note here read: 28 drops in 1,557 lines, every one inspected a running
+    head, an ad headline, or OCR garbage, no false positives. That was six leaves. At 300 leaves
+    the false-positive class is unmissable -- `banner` alone was killing 1,038 entry-shaped lines
+    per 300 leaves, 58% of them single-segment lines that no join had touched
+    (`Passiglia Jos barber h 708 DeKalb av`). Six leaves could not have shown it and a bigger
+    sample was never run. The keep-rate figures below were the only thing being watched, and a
+    keep-rate cannot distinguish cutting advertising from cutting people.
+
+    It was found by reading --dump-dropped, which is the whole reason that flag exists.
+
+    Keep-rates, text+geometry, whole volume: 1906BPL **70.1%** (199,012 -> 205,103 lines, +6,091)
+    and micro_IABROOKLYN_0013 **83.8%** (2,889 -> 2,899). The pre-correction figures were 68.0%
+    and 83.5%; the six-leaf 73.1% that used to be quoted here is not comparable to either and has
+    been dropped. Text alone keeps 72.5% whole-volume, which the correction does not change.
     """
     if height > med_h * BIG_RATIO:
         return "bigtype"
@@ -816,6 +911,25 @@ def _self_test() -> int:
     assert geom_reject((100, 50, 400, 140), 90, med_h, med_w) == "bigtype"
     # a normal-height line running far wider than the page's own body lines
     assert geom_reject((100, 50, 1180, 68), 18, med_h, med_w) == "banner"
+
+    # ---- body_width: the BIMODAL page, which is what a real listing leaf looks like and what
+    # the plain median got wrong. Proportions are 1906BPL leaf 83: ~40% short fragments (wrap
+    # tails like "Laf av", ditto stubs, gutter specks) against a body cluster of full entries.
+    frag, body = [40] * 124, [350 + 2 * i for i in range(188)]     # body 350..724, median 537
+    ws = frag + body
+    assert statistics.median(ws) == 413.0, statistics.median(ws)   # dragged BELOW the body
+    assert body_width(ws) == 537.0, body_width(ws)                 # the body's own middle
+    # the bug in one line: a full-width body entry, inside the body cluster, that the old
+    # `1.5 x plain median` cut (threshold 619) and the new `1.4 x body width` keeps (751).
+    entry = (100, 50, 100 + 700, 68)
+    assert 700 > 1.5 * statistics.median(ws), "the old rule cut this real entry"
+    assert geom_reject(entry, 18, 20.0, body_width(ws)) is None
+    # ...and a genuine banner, wider than any body line on the page, is still cut
+    assert geom_reject((100, 50, 100 + 1200, 68), 18, 20.0, body_width(ws)) == "banner"
+    # a page with no fragment mode is unchanged: body_width IS the median there
+    assert body_width(body) == statistics.median(body) == 537.0
+    # degenerate pages must not divide by zero or crash
+    assert body_width([]) == 1.0 and body_width([0, 0, 0]) == 1.0
 
     # --- wrapped entries (GROUND_TRUTH_HANDOFF 9a/15) -----------------------------------------
     wrapped = [((100, 100, 400, 118), "Kramer Aaron furs 56 Bond Mihtn h"),

@@ -74,10 +74,22 @@ WHAT THIS DOES NOT SETTLE
 -------------------------
 - **Proxy, not gold.** `is_entry` cannot see field-boundary quality; `name='44 Wm elk'` with an
   empty occupation scores as a perfect entry. This is fabrication, never record quality (#10).
-- **One volume, one engine, one adapter.** The thin tesseract tier has no bands at all, and its
-  20.7% was measured on all 2,889 lines, so it is NOT subject to this sampling bias -- meaning the
-  old "clean tier is 2x better" comparison was not like-for-like in the direction assumed. Against
-  5.6% the real gap is ~3.7x, and re-measuring the microfilm volume the same way is the check.
+- **One volume, one engine, one adapter.** The thin tesseract tier has no bands at all.
+
+  **Correction, 2026-09-13, to an earlier version of this file.** It said the microfilm volume's
+  20.7% "was measured on all 2,889 lines, so it is NOT subject to this sampling bias", and put the
+  corrected gap at ~3.7x. That was wrong: **20.7% is the rate on KEPT LEAVES only, n=2,227**
+  (HANDOFF, "By leaf status, corrected: KEPT 20.7% · CUT 66.9% · ABSTAIN 58.2%"), so it excludes
+  precisely the leaves `alpha_run_filter` judged worst. The whole-volume figure was already
+  recorded in HANDOFF and is **30.1%**, reproduced here by re-scoring all 2,889 predictions.
+
+  Like-for-like, both as a fraction of kept lines over a whole volume:
+
+      1836 tesseract microfilm   30.1%   (all 2,889 lines)
+      1906 ABBYY dense            5.6%   (stratified, this run)
+
+  **A 5.4x gap**, not the 2x originally published nor the 3.7x this file briefly claimed. Neither
+  of the two numbers PIPELINE.md had been comparing was a whole-volume rate.
 - **150 per stratum** resolves roughly +/-8 points at 50%. Head vs foot (76.0% vs 55.3%) is outside
   that and looks real; smaller differences would not be.
 """

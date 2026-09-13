@@ -221,9 +221,11 @@ holdout, ship as a queue — is unchanged; the unit and the metric are not.
 ## Why this problem and not one of the others
 
 The model never refuses. Every non-entry line that survives stages 1 and 3 becomes a confidently
-structured fake person. `entry_rate.py` puts that at **10.4% on 1906BPL (ABBYY) and 20.7% on 1836
-microfilm (tesseract)** — call it **~20,700 fabricated records in one volume**, at a proxy
-hand-validated to 97.5% on 40 read lines.
+structured fake person. `entry_rate.py` puts that at **5.6% on 1906BPL (ABBYY, stratified) and
+30.1% on 1836 microfilm (tesseract, whole volume)**, at a proxy hand-validated to 97.5% on 40 read
+lines. **Both figures were restated on 2026-09-13** — the numbers this plan opened with, 10.4% and
+20.7%, were a top-of-page sample and a kept-leaves-only subset respectively, and were never
+like-for-like (PIPELINE.md stage 6).
 
 Two facts make this the right place to spend a classifier, and they are the reason to do it here
 rather than on the ditto dispute rate or the missing quality proxy:
@@ -453,11 +455,12 @@ cheaply than expected, and in a sharper form: it is not the *engine* that breaks
 *density* of the book. Any volume whose per-volume glyph gate admits no mark is outside this rule's
 reach by construction.
 
-**The uncomfortable corollary:** `entry_rate` measures fabrication at **20.7% on the thin tesseract
-tier against 10.4% on the dense ABBYY tier**. The cheap rule solves page-type for the tier that was
-already twice as good, and the tier that needs help most is exactly the one it cannot touch. **That
-is where a learned classifier becomes the right instrument again** — on thin volumes, against a
-harder problem, with no ditto signal to lean on.
+**The uncomfortable corollary, and it got worse on re-measurement:** fabrication is **30.1% on the
+thin tesseract tier against a stratified 5.6% on the dense ABBYY tier** — a **5.4× gap**, not the 2×
+long published. The cheap rule solves page-type for the tier that was already far the better of the
+two, and cannot touch the one that needs it most. **That is where a learned classifier becomes the
+right instrument again** — on thin volumes, against a harder problem, with no ditto signal to lean
+on, and with 5.4× more to gain than anyone thought.
 
 A bug surfaced in the process: `page_dims` anchored on `title="bbox`, which is ABBYY's form.
 tesseract writes the image path first, so **`context.page_size` was null on 2,889/2,889 lines (100%)

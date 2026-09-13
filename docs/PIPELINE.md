@@ -158,9 +158,9 @@ unbanded.
 ⚠️ **This rule is tier-specific and silently inapplicable on thin volumes.** `micro_IABROOKLYN_0013`
 (tesseract, 1836/37) has **0 of 108 leaves** with enough ditto lines — an 1836 directory prints every
 surname in full, so there is no extent to bound. The run says so explicitly rather than emitting
-nothing. Note the irony: `entry_rate` measures fabrication at **20.7% on that thin tier against a
-stratified 5.6% on the dense one** (stage 6), so this solves page-type for the tier that was already
-the better of the two — by a wider margin than was thought. See
+nothing. Note the irony: `entry_rate` measures fabrication at **30.1% whole-volume on that thin tier
+against a stratified 5.6% on the dense one** (stage 6) — a 5.4× gap — so this solves page-type for
+the tier that was already far the better of the two. See
 [PAGE_TYPE_CLASSIFIER.md](PAGE_TYPE_CLASSIFIER.md).
 
 ### Gotchas
@@ -343,11 +343,27 @@ misses include `Abraham & Straus, dry goods` and `Federal Audit Co., public acco
 genuine *business-directory* entries scored not-real only because `is_entry` wants an address-shaped
 string. That is real directory content of a different kind, not fabricated people.
 
-⚠️ **The old 10.4% was inflated twice over, and the tier comparison was never like-for-like.**
-The same `body` band measures 4.7% on top-of-page lines against 0.7% uniform — a 6.7× positional
-effect *within one band*. And the microfilm volume's **20.7%** was measured on all 2,889 lines, so
-it is *not* subject to this bias: against 5.6% the real gap is ~3.7×, not 2×. Re-measure the
-microfilm volume the same way before citing either.
+⚠️ **The old 10.4% was inflated twice over.** The same `body` band measures 4.7% on top-of-page
+lines against 0.7% uniform — a 6.7× positional effect *within one band*.
+
+### The tier comparison, on the same footing at last
+
+**Neither number PIPELINE.md was comparing was a whole-volume rate.** The microfilm **20.7%** is the
+rate on **kept leaves only, n=2,227** — it excludes exactly the leaves `alpha_run_filter` judged
+worst (CUT 66.9%, ABSTAIN 58.2%). HANDOFF recorded the whole-volume figure at the time and it is
+**30.1%**, reproduced by re-scoring all 2,889 predictions.
+
+| | 1836 tesseract microfilm | 1906 ABBYY dense |
+|---|---|---|
+| not-real, whole volume | **30.1%** (all 2,889 lines) | **5.6%** (stratified) |
+
+**A 5.4× gap**, not the 2× long published. The thin tier is far worse than anyone claimed, and the
+dense tier far better. Two separately-scoped numbers had been sitting next to each other in a table.
+
+The original worry behind next-step #4 — that the microfilm figure predated ditto normalization —
+**dissolves**: no mark clears the gates on that volume (`ditto-lead normalization: no mark cleared
+the gates (nothing changed)`), so normalization cannot have moved it, and `raw_line` is untouched.
+The existing 2,889 predictions remain valid.
 
 ⚠️ **Why the 10.4% is a top-of-page number.**
 `data/1906BPL_sample500_eval.jsonl` is 25 leaves × **the first 20 kept lines of each** (verified:
@@ -420,16 +436,11 @@ promoting it to a real instrument is a small job with high leverage on every fut
 **3. Make `alpha_run_filter` mark rather than drop.** Removes the structural conflict with ditto
 expansion and makes `--apply` safe to reconsider on its own merits.
 
-**4. Re-measure `entry_rate` on the thin tier, band-stratified.** Now the *first* item of the four,
-not the fourth: the dense tier is 5.6% stratified while the thin tier's 20.7% is an all-lines number,
-so the two are not like-for-like and the tier comparison cannot be quoted until this is run. The
-original reason stands too — the 20.7% was taken pre-normalization, and confirming that on a
-*different OCR engine* is the cheap generalization check.
-
-⚠️ The thin tier has **no bands at all** (0 of 108 leaves clear the ditto threshold), so this cannot
-be a band-stratified re-measure in the same sense. What it can be: an all-lines re-measure of
-1906BPL to put both volumes on the same footing, which is cheap — 199,012 lines is 6 days locally,
-so use the existing 2,889-line microfilm predictions and sample 1906BPL uniformly instead.
+**4. ~~Re-measure `entry_rate` on the thin tier.~~ DONE 2026-09-13 — and it needed no compute.**
+The two published figures were differently scoped: 20.7% was kept-leaves-only (n=2,227) and 10.4%
+was a top-of-page sample. Whole-volume against stratified, the gap is **30.1% vs 5.6% = 5.4×**, not
+2×. The normalization worry dissolved too: no ditto mark clears the gates on that volume, so
+`raw_line` is untouched and the existing predictions stand. See stage 6.
 
 **14. Report a median and a per-volume tail in `evaluate.py`.** It currently pools TP/FP/FN across
 the whole panel and prints macro/micro F1 and whole-row EM — one number per field, no distribution.

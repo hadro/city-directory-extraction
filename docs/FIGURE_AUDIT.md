@@ -60,6 +60,14 @@ gate, and not applied to the filter three paragraphs above it.
 
 ## Finding 2 — the 97.5% that justifies the QA stage rests on 40 lines nobody kept
 
+> **CLOSED 2026-09-14.** 140 labels collected and committed
+> (`data/entry_labels_1906BPL.jsonl`, `results/entry_rate_validation_1906BPL.py`). The 97.5% is
+> approximately confirmed volume-wide at **96.6%** — it was not wrong, it was uninformative. The
+> balanced view shows what it hid: **every error runs one way** (21 junk called entries, 0 entries
+> called junk), so an `entry_rate` fabrication figure is a **floor**, and the misses are
+> concentrated in telephone numbers, which satisfy the "address contains a digit" test. The
+> `surname-shape 67.5%` comparator stays unverifiable and should be deleted, not re-quoted.
+
 `entry_rate.py` is the only instrument this project has for fabrication, and its licence to exist
 is one sentence in its docstring:
 

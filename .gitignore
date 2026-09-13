@@ -47,3 +47,4 @@ notes.md
 # Everything else under data/ can be rebuilt from IA; this cannot. Negations must come last,
 # since the final matching pattern wins and both `data/*` and `*.jsonl` match these.
 !data/bands_*.jsonl
+!data/entry_labels_*.jsonl

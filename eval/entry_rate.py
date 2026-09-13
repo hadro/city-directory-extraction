@@ -55,19 +55,47 @@ form (the 1840/41 legend gives `h.=house n.=near c.=corner b.=between`, and thos
 bare street names with no number at all; without that clause the proxy rejects real 1836 entries
 at ~30%).
 
-Accuracy, against 40 lines from 1906BPL hand-labelled by reading them:
+Accuracy, re-validated 2026-09-14 against **140 committed hand labels** --
+`data/entry_labels_1906BPL.jsonl`, 35 per band, collected with `eval/label_entries.py`, which
+withholds both this function's verdict and the line's band from the labeller. Full analysis in
+`results/entry_rate_validation_1906BPL.py`. 3 rows marked `unsure` are excluded.
 
-    surname-shape (the first proxy)   67.5%    13 ads called entries
-    raw line contains a digit         95.0%
-    THIS (name + street-y address)    97.5%     1 ad called an entry, 0 entries called ads
+    balanced across bands (35 each)   84.7%   (116/137)
+    re-weighted by volume band mix    96.6%
+
+The second is the like-for-like figure and it **approximately confirms the 97.5% this docstring
+used to claim**. That older number was not wrong, it was uninformative: a volume-weighted sample is
+94% body, and body is the easy class (97.1%). The balanced view is what shows the failure.
+
+**EVERY ERROR RUNS ONE WAY, and this is the property to rely on:**
+
+    junk called a real entry   21        precision on "not an entry"  100.0%
+    real entry called junk      0        recall    on "not an entry"   78.3%
+
+This function **never destroys a real entry** and misses about a fifth of the junk. So a
+fabrication rate from `entry_rate` is a **FLOOR, never an over-estimate**. By band: body 97.1%,
+unbanded 94.3%, head 85.3%, **foot 60.6%**.
+
+**What it gets wrong is telephone numbers.** Ten of the 21 misses are lines like
+`Telephone 3004 Main` or `Telephome Call, 269 Bedford`. `is_entry` wants a name plus an address
+containing a digit -- and a phone number is digits, so an advertisement's telephone line satisfies
+it exactly. Rejecting `telephone|phone|call` lifts the balanced figure to 93.4% with no new false
+negatives, but **that was fitted on the same 137 rows and must not ship without a fresh sample.**
+
+Comparators, rebuilt (the previously published ones had neither labels nor surviving code):
+
+    raw line contains a digit     66.4%    <- docstring claimed 95.0%
+    name non-empty only           53.3%
+    surname-shape                 NOT REBUILT -- definition never recorded; the old 67.5% is
+                                  unverifiable and should be deleted rather than re-quoted
 
 Cross-checked on the 1836 tesseract volume, whose conventions differ: leaf 3 (a druggist's
 advertisement) scores 0.0% entries, body leaves 60-62 score 88.7%.
 
-**It is a proxy, not gold.** n=40 for the accuracy figure, and it is validated on two volumes of
-the ~291 in the catalog. Report it as a rate with that caveat attached, and re-validate by hand
-before trusting it on a new publisher or era -- the 1836 clause exists precisely because one era's
-conventions broke it.
+**It is a proxy, not gold.** Validated on two volumes of the ~291 in the catalog, one publisher and
+one labeller. The telephone failure is a property of Upington's advertising as ABBYY read it.
+Re-validate by hand before trusting it on a new publisher or era -- the 1836 clause exists
+precisely because one era's conventions broke it.
 """
 from __future__ import annotations
 

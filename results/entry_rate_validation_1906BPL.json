@@ -1,0 +1,203 @@
+{
+  "labels": "data/entry_labels_1906BPL.jsonl",
+  "n_labels": 140,
+  "n_scored": 137,
+  "n_unsure": 3,
+  "label_mix": {
+    "not-entry": 97,
+    "entry": 40,
+    "unsure": 3
+  },
+  "category_mix": {
+    "advertising": 8,
+    "ocr-garbage": 79,
+    "business-directory": 10
+  },
+  "balanced_agreement": 0.8467,
+  "volume_weighted_agreement": 0.9664,
+  "published_claim": 0.975,
+  "per_band": {
+    "None": {
+      "agree": 33,
+      "n": 35,
+      "rate": 0.9429
+    },
+    "body": {
+      "agree": 34,
+      "n": 35,
+      "rate": 0.9714
+    },
+    "foot": {
+      "agree": 20,
+      "n": 33,
+      "rate": 0.6061
+    },
+    "head": {
+      "agree": 29,
+      "n": 34,
+      "rate": 0.8529
+    }
+  },
+  "proxies": {
+    "is_entry (shipped)": {
+      "n": 137,
+      "agreement": 0.8467,
+      "junk_called_entry": 21,
+      "entry_called_junk": 0,
+      "precision_not_entry": 1.0,
+      "recall_not_entry": 0.7835
+    },
+    "raw line contains a digit": {
+      "n": 137,
+      "agreement": 0.6642,
+      "junk_called_entry": 45,
+      "entry_called_junk": 1,
+      "precision_not_entry": 0.9811,
+      "recall_not_entry": 0.5361
+    },
+    "name non-empty only": {
+      "n": 137,
+      "agreement": 0.5328,
+      "junk_called_entry": 64,
+      "entry_called_junk": 0,
+      "precision_not_entry": 1.0,
+      "recall_not_entry": 0.3402
+    },
+    "is_entry + reject telephone (FITTED)": {
+      "n": 137,
+      "agreement": 0.9343,
+      "junk_called_entry": 9,
+      "entry_called_junk": 0,
+      "precision_not_entry": 1.0,
+      "recall_not_entry": 0.9072
+    }
+  },
+  "errors": [
+    {
+      "band": "body",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "\" H\u2019y elk h 120 3d pi"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "business-directory",
+      "raw": "Aurora Grata Club 1160 Bedford av"
+    },
+    {
+      "band": "head",
+      "human": "not-entry",
+      "category": "business-directory",
+      "raw": "GATES D. FAHNESTOCK, 2d-Vice-Pres."
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "advertising",
+      "raw": "Telephone 3004 Main 264"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "advertising",
+      "raw": "Riding Lessons given dally from 8 a. m. to 6 p. m."
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "Telephone 3004 Main 480"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "advertising",
+      "raw": "Riding Lessons given daily front 8 a. m. to 6 p. m\u201e"
+    },
+    {
+      "band": "head",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "Telephone 3418 Vain"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "Telephome Call, 269 Bedford Brooklyn, N.Y, 58S"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "Telephone 3004 Main"
+    },
+    {
+      "band": "head",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "Telephone, 2813 WILUAMSBURQfl"
+    },
+    {
+      "band": "head",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "GEO. H. SOUTHARD. Jr., 3d-Vice-Pres."
+    },
+    {
+      "band": "head",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "GATES D. FAHNESTOCK, 2d-Vice-Pret."
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "business-directory",
+      "raw": "Telephone 3004 Main 976"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "business-directory",
+      "raw": "Telephone 3004 Main 992"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "business-directory",
+      "raw": "New York, 21-27 New Chambers St. TELEPHONE 4346 FRANKLIN"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "business-directory",
+      "raw": "Telephone, 3004 Main."
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "business-directory",
+      "raw": "-Telephone Call: Store, 924 Bedford-"
+    },
+    {
+      "band": "foot",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "Telephone 3004 Main 1200"
+    },
+    {
+      "band": "None",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "901 902 Coney I si. av"
+    },
+    {
+      "band": "None",
+      "human": "not-entry",
+      "category": "ocr-garbage",
+      "raw": "\u2014 Classon av"
+    }
+  ]
+}

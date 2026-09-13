@@ -433,7 +433,38 @@ by complexity that bought nothing.
 baselines, the strip-class confusion matrix, the hard-subset score, and the encoder-vs-ablation
 delta.
 
-## Phase 2 — Does it survive a change of engine and publisher? (~1 day)
+## Phase 2 — **RUN, and the answer is no: the rule is tier-specific**
+
+**2026-09-13.** The cheap half needed no labelling and no download — the second OCR tier was already
+cached. `micro_IABROOKLYN_0013` (tesseract microfilm, 1836/37, spooner), 108 leaves with lines:
+
+| | 1906BPL (ABBYY, dense) | micro13 (tesseract, thin) |
+|---|---|---|
+| leaves with ≥20 filter-surviving ditto lines | ~all | **0 of 108** |
+| ditto density in the body band | **45%** | 0.2%, flat, no band |
+| most common leading tokens | `44`, `“`, `"` | `Smith` (37), `Van` (29) |
+
+**The band rule cannot run on this volume at all** — not because the 0.015 offset is wrong, but
+because there is no ditto extent to offset from. An 1836 directory is thin enough to print every
+surname in full, so the ditto convention the whole instrument rests on simply is not used.
+
+That is the pre-registered outcome "it must be retrained per OCR tier", arrived at earlier and more
+cheaply than expected, and in a sharper form: it is not the *engine* that breaks it, it is the
+*density* of the book. Any volume whose per-volume glyph gate admits no mark is outside this rule's
+reach by construction.
+
+**The uncomfortable corollary:** `entry_rate` measures fabrication at **20.7% on the thin tesseract
+tier against 10.4% on the dense ABBYY tier**. The cheap rule solves page-type for the tier that was
+already twice as good, and the tier that needs help most is exactly the one it cannot touch. **That
+is where a learned classifier becomes the right instrument again** — on thin volumes, against a
+harder problem, with no ditto signal to lean on.
+
+A bug surfaced in the process: `page_dims` anchored on `title="bbox`, which is ABBYY's form.
+tesseract writes the image path first, so **`context.page_size` was null on 2,889/2,889 lines (100%)
+of the tesseract volume** — an unscalable box across a whole tier. Fixed in `34d6ace`; kept/dropped
+decisions were never affected, and existing tesseract JSONL needs a re-ingest to pick it up.
+
+### The original phase 2 plan, still unrun for the dense tier
 
 The `44` finding is measured on one volume, one engine, one adapter, and PIPELINE.md flags that as
 the most load-bearing untested assumption in the pipeline. Do not repeat the pattern.

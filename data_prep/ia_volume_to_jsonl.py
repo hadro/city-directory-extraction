@@ -105,7 +105,15 @@ WORD_RE = re.compile(
     r'<span class="ocrx_word"[^>]*title="bbox (\d+) (\d+) (\d+) (\d+); x_wconf (\d+)[^"]*"[^>]*>(.*?)</span>',
     re.S,
 )
-PAGE_BBOX_RE = re.compile(r'<div class="ocr_page"[^>]*title="bbox (\d+) (\d+) (\d+) (\d+)')
+# `bbox` need not be the FIRST property of the title. ABBYY writes title="bbox 0 0 2550 3301",
+# but tesseract writes title="image &quot;/tmp/x.jp2&quot;; bbox 0 0 2572 4507; ppageno 0; ...".
+# Anchoring on title="bbox silently returned None for every leaf of every tesseract volume, so
+# `context.page_size` was null on all 2,889 lines of micro_IABROOKLYN_0013 -- and page_size is
+# what makes a stored box scalable to a downloaded JPEG. An unscaled box is a plausible-looking
+# lie, so this was that lie across a whole OCR tier. The geometry filter was unaffected: it uses
+# per-page medians of the line boxes themselves and never reads page dims.
+PAGE_BBOX_RE = re.compile(
+    r'<div class="ocr_page"[^>]*?title="[^"]*?\bbbox (\d+) (\d+) (\d+) (\d+)')
 TAG_RE = re.compile(r"<[^>]+>")
 
 # --- text filter (harvest_occupations.py:gather_lines) ----------------------------------------
@@ -767,6 +775,13 @@ def _self_test() -> int:
     got = hocr_lines(markup)
     assert got == [((100, 100, 400, 118), "Smith John")], got
     assert page_dims(markup) == (2000, 3000)
+
+    # Both hOCR dialects this corpus actually contains. The tesseract form is verbatim from
+    # micro_IABROOKLYN_0013 leaf 20; reading it as None left page_size null on that whole volume.
+    tess = ('<div class="ocr_page" id="page_000020" title="image '
+            '&quot;/tmp/micro_IABROOKLYN_0013_jp2/micro_IABROOKLYN_0013_0020.jp2&quot;; '
+            'bbox 0 0 2572 4507; ppageno 0; scan_res 400 400">')
+    assert page_dims(tess) == (2572, 4507), page_dims(tess)
 
     # ---- ditto-lead normalization. Cases are REAL LINES from 1906BPL and micro13, not invented;
     # the apostrophe post-mortem in HANDOFF is about exactly this (a test written from

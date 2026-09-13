@@ -319,6 +319,31 @@ python3 eval/evaluate.py --gold <gold.jsonl> --pred <preds.txt> --target yaml --
 against 40 read lines (the obvious surname-shape proxy scores 67.5%). Measured: 1836 tesseract
 microfilm **20.7%** not-real vs 1906 ABBYY **10.4%** — the clean tier is 2× better.
 
+⚠️ **The 10.4% is a top-of-page number, not a volume number.**
+`data/1906BPL_sample500_eval.jsonl` is 25 leaves × **the first 20 kept lines of each** (verified:
+sampled positions are exactly 0–19 on leaves holding ~166 kept lines), so it reads only the top
+~12% of every page — which is where the ad strip lives. The band mix proves it: 36 `head` rows
+observed against **3.6 expected** under a uniform draw, and **zero** `foot` or unbanded rows against
+3.8 and 24.1 expected. Head lines are 83.3% not-real, so the figure is biased **upward** by
+construction, and the "clean tier is 2× better" comparison inherits the bias unless the microfilm
+number was drawn the same way.
+
+Re-weighting the measured per-band rates by the volume's actual band mix gives **~5.0%** across the
+94.4% of lines those rates cover ([`results/band_vs_fabrication_1906BPL.py`](../results/band_vs_fabrication_1906BPL.py)).
+**Cite 10.4% only as "top-of-page", and prefer a uniform band-stratified re-measurement before
+citing anything volume-wide.**
+
+**What that same analysis establishes, and it is the reason `context.band` exists:**
+
+| band | n | not-real | rate |
+|---|---|---|---|
+| head | 36 | 30 | **83.3%** |
+| body | 464 | 22 | **4.7%** |
+
+A **17.7× separation**. The band was validated against 239 hand-labelled leaves as *geometry*; this
+is the first evidence it lands on the lines the model actually turns into fake people. The per-band
+rates are conditional on band, so the sampling bias changes the mix, not these rates.
+
 ⚠️ **It cannot see field-boundary quality.** `is_entry` is `name` non-empty AND an address-shaped
 string, so `name='44 Wm elk'` with an empty occupation scores as a perfect entry. Proved by paired
 re-measurement: 299 of 500 inputs changed, 3 records recovered an occupation, and **zero rows

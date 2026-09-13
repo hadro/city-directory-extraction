@@ -1,0 +1,64 @@
+{
+  "sample": "data/1906BPL_sample500_eval.jsonl",
+  "preds": "data/preds_2b-100k_1906BPL_sample500.txt",
+  "n": 500,
+  "observed_rate": 0.104,
+  "by_band": {
+    "head": {
+      "n": 36,
+      "not_real": 30,
+      "rate": 0.8333
+    },
+    "body": {
+      "n": 464,
+      "not_real": 22,
+      "rate": 0.0474
+    }
+  },
+  "volume_band_mix": {
+    "None": {
+      "n": 9603,
+      "share": 0.048253
+    },
+    "head": {
+      "n": 1414,
+      "share": 0.007105
+    },
+    "body": {
+      "n": 186470,
+      "share": 0.936979
+    },
+    "foot": {
+      "n": 1525,
+      "share": 0.007663
+    }
+  },
+  "volume_lines": 199012,
+  "sample_position_in_leaf": {
+    "min": 0,
+    "max": 19,
+    "n": 500
+  },
+  "expected_under_uniform": {
+    "None": 24.1,
+    "head": 3.6,
+    "body": 468.5,
+    "foot": 3.8
+  },
+  "reweighted_rate_over_covered_bands": 0.0503,
+  "volume_share_covered_by_measured_bands": 0.9441,
+  "examples_not_real": {
+    "head": [
+      "Authorized by Law to",
+      "act as Executor, Administrator, Guardian, Trus-",
+      "tee, Committee, or Agent.",
+      "*s O g- *"
+    ],
+    "body": [
+      "w* 13 cJ",
+      "3 n a >,",
+      "Near Borough Hall, - BROOKLYN, N. Y.",
+      "Sole Agent in the United States and Canada"
+    ]
+  }
+}

@@ -1,5 +1,8 @@
 # data + model artifacts (large; regenerate or download)
-data/
+# `data/*` rather than `data/`: git cannot re-include a file whose parent DIRECTORY is excluded,
+# and the hand-labelled bands at the bottom of this file are the one thing in here that is not
+# regenerable. Everything else under data/ is still ignored exactly as before.
+data/*
 models/
 outputs/
 *.jsonl
@@ -36,3 +39,11 @@ venv/
 .claude/
 # generated labeling tools (3 MB each, rebuild with data_prep/make_gold_tool.py)
 gold_*.html
+
+# Local
+notes.md
+
+# Hand-labelled band data — 239 leaves, ~90 minutes of human labelling, NOT regenerable.
+# Everything else under data/ can be rebuilt from IA; this cannot. Negations must come last,
+# since the final matching pattern wins and both `data/*` and `*.jsonl` match these.
+!data/bands_*.jsonl

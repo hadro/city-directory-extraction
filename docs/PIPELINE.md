@@ -397,10 +397,25 @@ a column break *within* a leaf and reset the carry there, then re-measure the di
 > ([`results/surname_headers_dropped_1906BPL.py`](../results/surname_headers_dropped_1906BPL.py)).
 > `resolve_dittos.py` reads the kept-line JSONL, so it never sees one; at a block boundary the
 > nearest preceding kept line belongs to the *previous* surname, so the carry has a confidently
-> wrong antecedent rather than no antecedent. **The mechanism is measured; the share of the 23.5%
-> it explains is not** — that is the measurement to run before writing any fix. Detecting a header
-> needs no new idea: ALL-CAPS alphabetic followed by a ditto-lead line is the follower test the
-> ditto glyph gate already uses.
+> wrong antecedent rather than no antecedent.
+>
+> **Measured 2026-09-13, and the answer is: this is not why.**
+> ([`results/header_orphan_dispute_share_1906BPL.py`](../results/header_orphan_dispute_share_1906BPL.py))
+>
+> | | n | disputed | rate |
+> |---|---|---|---|
+> | ditto right after a dropped header | 1,392 | 807 | **58.0%** |
+> | every other ditto | 132,750 | 30,757 | 23.2% |
+>
+> The mechanism is real — **2.5× the dispute rate** — but those rows are 1.0% of dittos and carry
+> **2.6% of all disputes**. Repairing every one moves the headline from **23.5% to 22.9%**. A fix
+> justified as "this is why the carry disputes 23.5%" would be justified wrongly; the column-break
+> reset above is still where that number has to come from.
+>
+> Worth fixing on *different* grounds: 1,392 rows get a wrong surname more than half the time.
+> Detection needs no new idea — ALL-CAPS alphabetic followed by a ditto-lead line is the follower
+> test the glyph gate already uses. And 58.0% is a **floor**: a header-orphaned row can be silently
+> wrong without being flagged.
 
 > **And the unmarked given-name entry, which is the same wound from the other side.** Sometimes the
 > mark is simply absent — printer or ABBYY — and the entry begins at the given name: `Geo C bookkpr

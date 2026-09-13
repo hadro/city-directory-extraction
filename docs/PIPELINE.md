@@ -82,6 +82,7 @@ elements. Same words, 4.5× the error, purely from line segmentation.
    gold exists.
 4. **Ditto normalization** (see below), applied *at emission*, after every filter has seen the
    original text.
+5. **Band marking** — `context.band` = `head` / `body` / `foot` / `null`. See below.
 
 ### Measured throughput
 
@@ -122,6 +123,44 @@ are for inspection; only whole-volume runs ship.
 
 `--ditto-marks "'*,*'"` promotes a mark a human confirmed from the review queue. It bypasses the
 share floor only — it **cannot** override the follower ratio, so a heading mark stays refused.
+
+### Band marking — where the listing actually sits on the leaf
+
+**Advertising in a dense directory is sold as a strip across the head and foot of ordinary listing
+pages, not by the page.** On 1906BPL, ditto-lead density is 0.7% in the top decile of the page, 45%
+through the middle eight, and 0.0% in the bottom — and **94% of listing-span leaves have that shape**
+(`results/leaf_band_structure_1906BPL.py`). So the body is bounded by the extent of the volume's own
+ditto-lead lines, padded by **0.015 of page height** at each end.
+
+Measured against **239 hand-labelled leaves** — 190 labelled with the guess visible, 49 blind:
+
+| | |
+|---|---|
+| leaves admitting **no** non-listing line | **239/239** |
+| leaves exact in both directions | 214/239 |
+| listing lines marked strip (cost) | 84 |
+| non-listing lines marked body (**the failure that matters**) | **0** |
+
+Whole-volume 1906BPL: 1,158 leaves bounded, 186,470 body / 1,414 head / 1,525 foot, 9,603 lines
+unbanded.
+
+- **It marks, it never drops.** Cutting here would strand dittos exactly as `alpha_run_filter
+  --apply` does. Downstream decides; `--no-band` turns the field off.
+- **The extent is computed over lines that already passed the text filter, and that is the whole
+  fix, not an optimization.** `44` is ABBYY's ditto mark *and* a literal street number: the
+  recurring Temple Bar ad carries `44 COURT ST.`, which dragged the top edge into the advertisement
+  and admitted 22 lines of ad copy on leaf 904 alone. `text_reject` already calls it `allcaps`.
+- **A leaf with fewer than 20 ditto lines gets `band: null`**, not a guess. Those are the review
+  queue — full-page ads, and anything the rule cannot speak to.
+- **The glyph set is the volume's own admitted marks**, never hard-coded, so this inherits the
+  per-volume calibration below.
+
+⚠️ **This rule is tier-specific and silently inapplicable on thin volumes.** `micro_IABROOKLYN_0013`
+(tesseract, 1836/37) has **0 of 108 leaves** with enough ditto lines — an 1836 directory prints every
+surname in full, so there is no extent to bound. The run says so explicitly rather than emitting
+nothing. Note the irony: `entry_rate` measures fabrication at **20.7% on that thin tier against 10.4%
+on the dense one**, so this solves page-type for the tier that was already twice as good. See
+[PAGE_TYPE_CLASSIFIER.md](PAGE_TYPE_CLASSIFIER.md).
 
 ### Gotchas
 

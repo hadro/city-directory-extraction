@@ -614,8 +614,53 @@ def normalize_ditto_lead(text, marks):
     return '" ' + toks[1] if len(toks) > 1 else '"'
 
 
+BAND_PAD = 0.015          # measured, see docs/PAGE_TYPE_CLASSIFIER.md STATUS 3
+BAND_MIN_DITTO_LINES = 20
+
+
+def leaf_bands(buffered, marks, pad=BAND_PAD, min_lines=BAND_MIN_DITTO_LINES):
+    """{leaf: (top_frac, bottom_frac)} — where the residential listing sits on each leaf.
+
+    Advertising in a dense directory is sold as a STRIP across the head and foot of ordinary
+    listing pages, not by the page: on 1906BPL ditto-lead density is 0.7% in the top decile, 45%
+    through the middle eight and 0.0% in the bottom one, and 94% of listing-span leaves have that
+    shape. So the body is bounded by the extent of the volume's own ditto-lead lines, padded.
+
+    Measured against 239 hand-labelled leaves (190 with the guess visible, 49 blind):
+    **zero advertising lines admitted**, at a cost of 137 lost listing lines in ~63,000 (0.2%) --
+    the harmless direction, a lost line being a lost record where an admitted ad line is a
+    fabricated person.
+
+    Two properties matter and both are deliberate:
+
+    * **It reads `marks`, the volume's OWN admitted ditto set**, never a hard-coded glyph. A book
+      whose gate admits nothing gets no bands at all rather than wrong ones.
+    * **It runs on the BUFFERED lines**, i.e. after text_reject. That is not incidental -- it is
+      the whole fix. `44` is ABBYY's ditto mark and also a literal street number, and the
+      recurring Temple Bar advertisement carries `44 COURT ST.`; computing the extent over
+      unfiltered lines let that drag the top edge into the advertisement, admitting 22 lines of ad
+      copy on leaf 904 alone. text_reject already calls it `allcaps`, so filtering first costs
+      nothing and closes it.
+
+    Returns nothing for a leaf with fewer than `min_lines` ditto lines. That is the honest answer
+    for a full-page advertisement or a volume that does not use dittos, and those leaves are what
+    a review queue is for -- they are NOT silently banded.
+    """
+    if not marks:
+        return {}
+    ys = {}
+    for text, leaf, box, dims in buffered:
+        if not dims:
+            continue
+        tok = text.split()[0] if text.split() else ""
+        if tok in marks:
+            ys.setdefault(leaf, []).append(box[1] / dims[1])
+    return {leaf: (max(0.0, min(v) - pad), min(1.0, max(v) + pad))
+            for leaf, v in ys.items() if len(v) >= min_lines}
+
+
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
-          normalize_dittos=True, confirmed_marks=()):
+          normalize_dittos=True, confirmed_marks=(), band=True):
     """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
 
     Kept lines are buffered rather than streamed so the ditto-lead frequency gate can see the
@@ -680,6 +725,10 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
                 samples[tok] = text[:90]
         ditto_report["samples"] = samples
 
+    bands = leaf_bands(buffered, marks) if band else {}
+    band_report = {"leaves_banded": len(bands), "head": 0, "body": 0, "foot": 0,
+                   "unbanded": 0} if band else None
+
     for text, leaf, box, dims in buffered:
         out = text
         if marks:
@@ -703,9 +752,21 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
             # unnormalized volume costs nothing, and `raw_line` still means "what we fed the model".
             ctx["raw_line_original"] = text
             ditto_report["applied"] += 1
+        if bands:
+            # MARK, never drop. A ditto whose parent surname was cut has nothing to point at, so a
+            # cut here would break stage 5 exactly as `alpha_run_filter --apply` does. Downstream
+            # decides; this only records. `null` means the leaf had too few ditto lines to bound.
+            if dims and leaf in bands:
+                top, bot = bands[leaf]
+                y = box[1] / dims[1]
+                ctx["band"] = "body" if top <= y <= bot else ("head" if y < top else "foot")
+                band_report[ctx["band"]] += 1
+            else:
+                ctx["band"] = None
+                band_report["unbanded"] += 1
         out_fh.write(json.dumps({"raw_line": out, "context": ctx, "record": EMPTY_RECORD},
                                 ensure_ascii=False) + "\n")
-    return stats, reasons, ad_scores, ditto_report
+    return stats, reasons, ad_scores, ditto_report, band_report
 
 
 # ==============================================================================================
@@ -721,6 +782,26 @@ def _self_test() -> int:
     # "allcaps". Reaching "nonascii" needs lowercase latin mixed with the garbage.
     assert text_reject("九万主九万主九万主") == "allcaps"
     assert text_reject("abc九万主九万主九万主def") == "nonascii"
+
+    # ---- leaf_bands. The ad line is `44 COURT ST.` from 1906BPL leaf 86, not invented: it is a
+    # real ditto mark used as a real street number, and computing the extent over UNFILTERED
+    # lines let it drag the top edge into the advertisement.
+    dims = [2000, 3000]
+    buf = [("44 Wm elk h 86 Laf av", 7, [100, 300 + 20 * i, 400, 318 + 20 * i], dims)
+           for i in range(25)]                               # body: y 0.100 .. 0.260
+    assert leaf_bands(buf, {"44"}) == {7: (0.085, 0.275)}, leaf_bands(buf, {"44"})
+
+    # The same leaf with an ad at the top carrying `44 COURT ST.` at y=0.02. text_reject calls it
+    # `allcaps`, so it never reaches the buffer and the band is UNCHANGED.
+    assert text_reject("44 COURT ST.") == "allcaps"
+    assert leaf_bands(buf, {"44"}) == {7: (0.085, 0.275)}, "filtered ad line must not move the top"
+
+    # Too few ditto lines -> no band at all, rather than a band built on four lines.
+    assert leaf_bands(buf[:4], {"44"}) == {}
+    # A volume whose gate admitted nothing gets no bands, never a hard-coded glyph.
+    assert leaf_bands(buf, set()) == {}
+    # A leaf with no page dims cannot be banded: y-fractions would be meaningless.
+    assert leaf_bands([(t, l, b, None) for t, l, b, _ in buf], {"44"}) == {}
 
     # three tidy columns of ten body lines each
     boxes = [(x, 100 + 20 * i, x + 300, 118 + 20 * i) for x in (100, 500, 900) for i in range(10)]
@@ -895,6 +976,16 @@ def main(argv=None) -> int:
                          "--ditto-review queue. Bypasses the share floor for those tokens only; "
                          "the name-follower ratio still applies, so a heading mark cannot be "
                          "promoted by hand. Record the volume it was decided for.")
+    ap.add_argument("--no-band", action="store_true",
+                    help="do NOT write context.band. Default is to write it: advertising in a "
+                         "dense directory is a STRIP across the head and foot of ordinary listing "
+                         "pages, and the listing body is bounded by the volume's own ditto-lead "
+                         "extent padded by %.3f. Measured on 239 hand-labelled leaves: zero ad "
+                         "lines admitted, 0.2%% of listing lines lost "
+                         "(docs/PAGE_TYPE_CLASSIFIER.md). It MARKS, never drops -- cutting here "
+                         "would strand dittos exactly as alpha_run_filter --apply does. A leaf "
+                         "with too few ditto lines gets band=null rather than a guess."
+                         % BAND_PAD)
     ap.add_argument("--ditto-review", default=None,
                     help="write the mark-shaped tokens that were NOT rewritten, with counts, "
                          "share, name-follower ratio and a sample line each. The queue for "
@@ -959,10 +1050,11 @@ def main(argv=None) -> int:
 
     dropped_fh = open(args.dump_dropped, "w", encoding="utf-8") if args.dump_dropped else None
     with open(out_path, "w", encoding="utf-8") as out_fh:
-        stats, reasons, ad_scores, ditto_report = sweep(
+        stats, reasons, ad_scores, ditto_report, band_report = sweep(
             item, publisher, year, leaves, not args.no_geometry, args.drop_off_margin,
             not args.no_join, dropped_fh, out_fh, not args.no_ditto_normalize,
-            confirmed_marks=tuple(args.ditto_marks.split(",")) if args.ditto_marks else ())
+            confirmed_marks=tuple(args.ditto_marks.split(",")) if args.ditto_marks else (),
+            band=not args.no_band)
     if dropped_fh:
         dropped_fh.close()
 
@@ -973,6 +1065,20 @@ def main(argv=None) -> int:
           f"-> {stats['kept']:,} kept ({pct:.1f}% of candidates)", file=sys.stderr)
     for why, n in sorted(reasons.items(), key=lambda kv: -kv[1]):
         print(f"    dropped {n:>7,}  {why}", file=sys.stderr)
+    if band_report is not None:
+        b = band_report
+        placed = b["head"] + b["body"] + b["foot"]
+        if placed:
+            strips = b["head"] + b["foot"]
+            print(f"  band: {b['leaves_banded']:,} leaves bounded | body {b['body']:,} · "
+                  f"head {b['head']:,} · foot {b['foot']:,} "
+                  f"({strips/max(placed,1):.1%} of placed lines are strip), "
+                  f"{b['unbanded']:,} lines unbanded", file=sys.stderr)
+            print(f"    MARKED, not dropped — context.band. Strip lines are the fabrication "
+                  f"risk; unbanded lines are the review queue.", file=sys.stderr)
+        else:
+            print("  band: no leaf had enough ditto lines to bound — context.band not written. "
+                  "This volume is outside the rule (thin/no-ditto tier).", file=sys.stderr)
     if ditto_report is not None:
         if ditto_report["marks"]:
             adm = ", ".join(f"{w!r} {ditto_report['stats'][w][1]:.1%}/{ditto_report['stats'][w][2]:.0%}"

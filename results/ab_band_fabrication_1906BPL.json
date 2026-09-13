@@ -1,0 +1,82 @@
+{
+  "preregistration": "results/ab_band_fabrication_1906BPL_PREREGISTRATION.md",
+  "adapter": "2b-100k",
+  "seed": 20260913,
+  "n": 600,
+  "by_band": {
+    "body": {
+      "n": 150,
+      "not_real": 1,
+      "rate": 0.0067,
+      "ci95": [
+        0.0012,
+        0.0368
+      ],
+      "volume_share": 0.936979
+    },
+    "head": {
+      "n": 150,
+      "not_real": 114,
+      "rate": 0.76,
+      "ci95": [
+        0.6857,
+        0.8213
+      ],
+      "volume_share": 0.007105
+    },
+    "foot": {
+      "n": 150,
+      "not_real": 83,
+      "rate": 0.5533,
+      "ci95": [
+        0.4734,
+        0.6306
+      ],
+      "volume_share": 0.007663
+    },
+    "None": {
+      "n": 150,
+      "not_real": 126,
+      "rate": 0.84,
+      "ci95": [
+        0.773,
+        0.8901
+      ],
+      "volume_share": 0.048253
+    }
+  },
+  "strip_rate": 0.6567,
+  "strip_vs_body_ratio": 98.0,
+  "stratified_volume_estimate": 0.0564,
+  "published_top_of_page_rate": 0.104,
+  "if_strip_and_unbanded_cut": {
+    "remaining_fabrication": 0.0063,
+    "real_lines_lost": 0.0128
+  },
+  "examples_not_real": {
+    "None": [
+      "Abraham & Straus, dry goods",
+      "Federal Audit Co., public accountants",
+      "Flagler F. W., carriages, .left side ( inside )",
+      "daily by the best element of Brooklyn\u2019s great",
+      "EVENING SESSION. For the benefit of those who may be unable to"
+    ],
+    "foot": [
+      "GEORGE H. WILLERS, Proprietor",
+      "Gates av",
+      "French and American, all flavors.",
+      "rich and delicious.",
+      "French and American, all flavors."
+    ],
+    "head": [
+      "act as Executor, ''Administrator, Guardian, Trus-",
+      "FREDERICK W. RICHT, - Asst. Sec\u2019y",
+      "HENRY C. LOW, Jr., - - Asst. Sec\u2019y",
+      "Allows Interest on Depos-",
+      "upon Request"
+    ],
+    "body": [
+      "Evkrslkt Childs"
+    ]
+  }
+}

@@ -158,8 +158,9 @@ unbanded.
 ⚠️ **This rule is tier-specific and silently inapplicable on thin volumes.** `micro_IABROOKLYN_0013`
 (tesseract, 1836/37) has **0 of 108 leaves** with enough ditto lines — an 1836 directory prints every
 surname in full, so there is no extent to bound. The run says so explicitly rather than emitting
-nothing. Note the irony: `entry_rate` measures fabrication at **20.7% on that thin tier against 10.4%
-on the dense one**, so this solves page-type for the tier that was already twice as good. See
+nothing. Note the irony: `entry_rate` measures fabrication at **20.7% on that thin tier against a
+stratified 5.6% on the dense one** (stage 6), so this solves page-type for the tier that was already
+the better of the two — by a wider margin than was thought. See
 [PAGE_TYPE_CLASSIFIER.md](PAGE_TYPE_CLASSIFIER.md).
 
 ### Gotchas
@@ -316,10 +317,39 @@ python3 eval/evaluate.py --gold <gold.jsonl> --pred <preds.txt> --target yaml --
 ```
 
 **`entry_rate.py` — a fabrication / page-type proxy, and NOTHING more.** Hand-validated at 97.5%
-against 40 read lines (the obvious surname-shape proxy scores 67.5%). Measured: 1836 tesseract
-microfilm **20.7%** not-real vs 1906 ABBYY **10.4%** — the clean tier is 2× better.
+against 40 read lines (the obvious surname-shape proxy scores 67.5%).
 
-⚠️ **The 10.4% is a top-of-page number, not a volume number.**
+### 1906BPL is 5.6% not-real, not 10.4% — and it is concentrated
+
+Stratified, 150 lines per band, seed 20260913, 2b-100k, pre-registered before the sample was drawn
+([`ab_band_fabrication_1906BPL_PREREGISTRATION.md`](../results/ab_band_fabrication_1906BPL_PREREGISTRATION.md)
+· [result](../results/ab_band_fabrication_1906BPL.py)):
+
+| band | n | not-real | rate | 95% CI | volume share |
+|---|---|---|---|---|---|
+| **body** | 150 | 1 | **0.7%** | 0.1–3.7% | 93.70% |
+| head | 150 | 114 | **76.0%** | 68.6–82.1% | 0.71% |
+| foot | 150 | 83 | **55.3%** | 47.3–63.1% | 0.77% |
+| unbanded | 150 | 126 | **84.0%** | 77.3–89.0% | 4.83% |
+
+**Strip vs body is 98×.** The stratified volume estimate is **5.6%**. Cutting strip and unbanded
+lines would take fabrication to **0.63%** — an 88% reduction — at a cost of **1.28% of kept lines**
+that are real. That trade is measured, not assumed. It is still not licence to cut at ingest: a
+ditto whose parent surname was cut has nothing to point at, the same reason `alpha_run_filter
+--apply` stays off.
+
+**Unbanded is the worst stratum and the largest one — but read it before calling it junk.** Its
+misses include `Abraham & Straus, dry goods` and `Federal Audit Co., public accountants`, which are
+genuine *business-directory* entries scored not-real only because `is_entry` wants an address-shaped
+string. That is real directory content of a different kind, not fabricated people.
+
+⚠️ **The old 10.4% was inflated twice over, and the tier comparison was never like-for-like.**
+The same `body` band measures 4.7% on top-of-page lines against 0.7% uniform — a 6.7× positional
+effect *within one band*. And the microfilm volume's **20.7%** was measured on all 2,889 lines, so
+it is *not* subject to this bias: against 5.6% the real gap is ~3.7×, not 2×. Re-measure the
+microfilm volume the same way before citing either.
+
+⚠️ **Why the 10.4% is a top-of-page number.**
 `data/1906BPL_sample500_eval.jsonl` is 25 leaves × **the first 20 kept lines of each** (verified:
 sampled positions are exactly 0–19 on leaves holding ~166 kept lines), so it reads only the top
 ~12% of every page — which is where the ad strip lives. The band mix proves it: 36 `head` rows
@@ -390,9 +420,16 @@ promoting it to a real instrument is a small job with high leverage on every fut
 **3. Make `alpha_run_filter` mark rather than drop.** Removes the structural conflict with ditto
 expansion and makes `--apply` safe to reconsider on its own merits.
 
-**4. Re-measure `entry_rate` on the thin tier after normalization.** The 20.7%/10.4% comparison was
-taken pre-normalization. It probably will not move (see stage 6), but confirming that on a
+**4. Re-measure `entry_rate` on the thin tier, band-stratified.** Now the *first* item of the four,
+not the fourth: the dense tier is 5.6% stratified while the thin tier's 20.7% is an all-lines number,
+so the two are not like-for-like and the tier comparison cannot be quoted until this is run. The
+original reason stands too — the 20.7% was taken pre-normalization, and confirming that on a
 *different OCR engine* is the cheap generalization check.
+
+⚠️ The thin tier has **no bands at all** (0 of 108 leaves clear the ditto threshold), so this cannot
+be a band-stratified re-measure in the same sense. What it can be: an all-lines re-measure of
+1906BPL to put both volumes on the same footing, which is cheap — 199,012 lines is 6 days locally,
+so use the existing 2,889-line microfilm predictions and sample 1906BPL uniformly instead.
 
 **14. Report a median and a per-volume tail in `evaluate.py`.** It currently pools TP/FP/FN across
 the whole panel and prints macro/micro F1 and whole-row EM — one number per field, no distribution.

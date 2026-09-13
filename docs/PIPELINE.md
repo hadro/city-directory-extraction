@@ -5,7 +5,8 @@ out. Every number here is measured on this corpus, and where a stage is *not* ca
 
 Companion docs: [HANDOFF.md](HANDOFF.md) is the working record and the reason each decision is what
 it is; [TAKEOVER.md](TAKEOVER.md) is the cold-start orientation; [GROUND_TRUTH_HANDOFF.md](GROUND_TRUTH_HANDOFF.md)
-is the labeling contract that governs the model's output shape;
+is the labeling contract that governs the model's output shape; [FIGURE_AUDIT.md](FIGURE_AUDIT.md)
+records which published figures were re-derived and which were mis-scoped;
 [PAGE_TYPE_CLASSIFIER.md](PAGE_TYPE_CLASSIFIER.md) is the plan for next-step #11, phase 0 run.
 
 > **The one thing to internalize before running anything: the model never refuses.** Feed it a line
@@ -75,7 +76,9 @@ elements. Same words, 4.5× the error, purely from line segmentation.
    filtering matters — a continuation like `259 Himrod` is short enough that the text filter would
    drop it, taking the address off the entry above.
 2. **Text filter** — page numbers, ALL-CAPS running heads, sub-8-char fragments, non-ASCII garbage.
-   Calibrated: keeps 76% on 1906BPL. **It is not an entry detector** and happily passes ad copy.
+   **Keeps 72.5% whole-volume on 1906BPL** (the 76% in the script's docstring is a 14-leaf sample;
+   see [FIGURE_AUDIT.md](FIGURE_AUDIT.md)). **It is not an entry detector** and happily passes ad
+   copy.
 3. **Geometry filter** — drops lines >2× the page's median line height (`bigtype`) or >1.5× the
    median width (`banner`). Judged against each page's own medians, so one setting spans an 1786
    single-column folio and a 1933 six-column Polk. **Not validated against gold** — no box-level
@@ -297,7 +300,9 @@ python3 postprocess/resolve_dittos.py --lines data/1906BPL_lines.jsonl --invento
 | cross-line, name prefix | `" Jos`, `44 John C` | previous entry's surname | yes |
 | cross-line, address slots (Duncan) | `71 do. do.` | previous line's address | yes — **unimplemented** |
 
-**Within-line is deterministic**: 17 hits across 9,830 gold records, zero false positives.
+**Within-line is deterministic**: 17 hits, zero false positives. The published denominator of
+9,830 was a glob over `data/*_eval.jsonl`, which has since grown to 11,119 rows and now includes
+1,000 non-gold ingest stubs — name the panel before re-quoting it ([FIGURE_AUDIT.md](FIGURE_AUDIT.md)).
 
 **Cross-line is not.** It finds an antecedent for every ditto, but two independent checks each
 dispute ~20k of 133,902, overlapping only 28% — **31,500 (23.5%) are disputed by at least one**.

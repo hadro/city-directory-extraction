@@ -44,7 +44,8 @@ Two stages, and the honest summary is that only the first one is calibrated.
 
 **Text** (ported from `harvest_occupations.py:gather_lines`): drops page numbers, ALL-CAPS
 running heads, sub-8-char fragments, and non-ASCII garbage. Measured on 14 seeded-random
-leaves of 1906BPL: keeps **76%**. That is a deliberately permissive filter -- it was built to
+leaves of 1906BPL: keeps **76%** -- and whole-volume it keeps **72.5%**, so quote the second
+number, not the first (docs/FIGURE_AUDIT.md). That is a deliberately permissive filter -- built to
 feed Gemini, which then discarded non-entries by returning an empty occupation. It is NOT an
 entry detector, and it happily passes advertising copy ("Seventh Ave. and Union St.,").
 
@@ -349,7 +350,8 @@ def geom_reject(box, height, med_h, med_w):
 
     Measured on six 1906BPL leaves: 28 drops in 1,557 lines, and every one inspected was a
     running head, an ad headline, or OCR garbage -- no false positives found. Combined with the
-    text filter this keeps 73.1% (text alone keeps 76.0%).
+    text filter this keeps 73.1% (text alone keeps 76.0%). Whole-volume those are 68.0% and
+    72.5%; the six- and fourteen-leaf samples both run ~3.5 points optimistic.
     """
     if height > med_h * BIG_RATIO:
         return "bigtype"

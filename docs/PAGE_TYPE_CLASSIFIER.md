@@ -139,17 +139,35 @@ resolution, where a false ditto gets a surname carried into it.
 239 labelled leaves in total. Full analysis in
 [`results/band_labels_vs_ditto_rule_1906BPL.py`](../results/band_labels_vs_ditto_rule_1906BPL.py).
 
-### Anchoring: disposed of
+### Anchoring: the top edge is confirmed, the bottom edge is not
 
-| | train median | blind median | landing on ±0.0150 |
-|---|---|---|---|
-| top offset | −0.0150 | −0.0163 | train **68%** / blind **0%** |
-| bottom offset | +0.0150 | +0.0160 | train **69%** / blind **0%** |
+> **Retracted, and kept because the mistake is instructive.** This section first argued that 68% of
+> anchored offsets landing on exactly ±0.0150 against 0% of blind ones showed two processes with
+> different artefacts converging. **That statistic is an artefact of the starting points and is
+> evidence of nothing.** Anchored edges start at the prefill, a continuous value, so the *offset* is
+> a whole number of 0.005 keypresses and the *value* is continuous (5/193 on the step). Blind edges
+> start at a round 0.100/0.900, so the *value* is quantised (49/49) and the *offset* is continuous.
+> The 0% was guaranteed before anything was labelled. The labeller used the keyboard for both sets;
+> the claim that blind labels were mouse drags was asserted and never checked — by me, and it was
+> the labeller who caught it.
 
-The two labelling processes fail in different ways — anchored keyboard nudges quantise onto
-multiples of 0.005, free mouse drags from a neutral 0.10/0.90 start do not. **0% of blind labels
-sit on the values 68% of anchored labels sit on, and the medians still agree to 0.0013**, with
-overlapping IQRs. The constant is a property of the page layout, not of the starting guess.
+The test that settles it is whether a blind label **tracks that leaf's ditto extent**, which the
+labeller could not see:
+
+| | label sd | extent sd | r | extent range |
+|---|---|---|---|---|
+| **blind top** | 0.0508 | 0.0505 | **+0.998** | 0.116–0.387 |
+| blind bottom | 0.0030 | 0.0071 | +0.406 | 0.841–0.876 |
+
+**The top edge is independently confirmed.** Its true position moves over a quarter of the page
+across these 49 leaves, and the blind labels follow it at r = +0.998 with matching spread — which
+anchoring on a fixed 0.100 default cannot produce. It is also the edge that matters, being where
+advertising intrudes.
+
+**The bottom edge is not.** Blind labels there are nearly constant (sd 0.0030) against a true spread
+of 0.0071, so they do not track per-leaf variation. The true range is only 0.035 of page height, so
+a constant is close to right and the measured cost below is real — but **the +0.015 bottom offset
+rests on the anchored set alone.**
 
 ### The instrument, and it is three words of change
 
@@ -182,6 +200,8 @@ leading `44` is a house number. `text_reject` keeps both, being mixed case. A re
   against 9 of 190 in train (P(zero in 49) = 0.09, so chance rather than evidence of absence). It
   independently validates the **offset**; the **fix** is measured only on the training leaves, which
   is where the failures live and is the weaker of the two designs.
+- **The bottom offset is not independently confirmed** (r = +0.406, see above). It rests on the
+  anchored set, where the labeller could see the prefill.
 - **One volume, one engine, one publisher, one labeller.** `44` is 1906BPL's mark under a per-volume
   gate; whether the 0.015 offset transfers is untested. Phase 2 is now the whole remaining question.
 

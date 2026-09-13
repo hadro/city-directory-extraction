@@ -32,18 +32,35 @@ ad line is a fabricated person.
 2. THE ANCHORING CHECK, WHICH IS WHY THE BLIND SET EXISTED
 ----------------------------------------------------------
 The `train` labels were made with the prefill drawn on screen, so their agreement with a
-prefill-derived rule is partly circular. The blind set breaks that, and the two processes fail in
-completely different ways -- anchored keyboard nudges quantise onto multiples of 0.005, free mouse
-drags from a neutral start do not:
+prefill-derived rule is partly circular. The blind set is what breaks that.
 
-                    train median   blind median        train IQR             blind IQR
-    top offset          -0.0150       -0.0163    [-0.0200, -0.0150]   [-0.0181, -0.0151]
-    bottom offset       +0.0150       +0.0160    [+0.0150, +0.0200]   [+0.0143, +0.0212]
-    landing exactly on +/-0.0150:  train 68% / 69%     blind 0% / 0%
+**A retracted argument, kept because it was wrong in an instructive way.** The first version of
+this file argued that the offsets agreed despite the two sets quantising differently -- 68% of
+`train` offsets landing exactly on +/-0.0150 against 0% of `blind` ones -- and read that as two
+processes with different artefacts converging. That statistic is an artefact of the starting
+points and is evidence of nothing. `train` edges begin at the prefill, a continuous value, so the
+OFFSET is a whole number of 0.005 keypresses while the value is continuous (5/193 edges are
+multiples of 0.005). `blind` edges begin at a round 0.100/0.900, so the VALUE is quantised (49/49)
+and the offset is continuous. The 0% was guaranteed before anyone labelled anything. The labeller
+used the keyboard for both sets; the claim that blind labels were mouse drags was never checked.
 
-**0% of blind labels sit on the values 68% of anchored labels sit on, and the medians still agree
-to 0.0013.** Two labelling processes with different artefacts converge on the same offset, so the
-constant is a property of the page layout and not of the starting guess. Anchoring is disposed of.
+**The test that actually settles it** is whether a blind label tracks that leaf's ditto extent
+across leaves, which the labeller could not see:
+
+                label sd   extent sd        r
+    top edge      0.0508      0.0505    +0.998      <- extent ranges 0.116-0.387
+    bottom edge   0.0030      0.0071    +0.406      <- extent ranges 0.841-0.876
+
+**The top edge is independently confirmed.** Its true position varies over a quarter of the page
+across these 49 leaves, and the blind labels follow it at r = +0.998 with matching spread. That is
+not something anchoring on a fixed 0.100 default can produce, and the top edge is the one that
+matters, being where advertising intrudes.
+
+**The bottom edge is NOT confirmed.** The blind labels there are nearly constant (sd 0.0030)
+against a true spread of sd 0.0071, so they do not track per-leaf variation and r is weak. The
+saving grace is that the true variation is small -- the whole range is 0.035 of page height -- so a
+constant is close to right and the measured cost below is real. But the +0.015 bottom offset rests
+on the anchored set, and only the top offset survives the blind check.
 
 3. THE FAILURE, AND WHY IT NEEDED NO NEW CODE
 ----------------------------------------------
@@ -141,9 +158,26 @@ def score(rows, item, filtered, offset):
             "listing_lost": lost, "ad_admitted": admitted, "worst": worst[:6]}
 
 
+def _pearson(a, b):
+    ma, mb = statistics.mean(a), statistics.mean(b)
+    num = sum((x - ma) * (y - mb) for x, y in zip(a, b))
+    den = (sum((x - ma) ** 2 for x in a) * sum((y - mb) ** 2 for y in b)) ** 0.5
+    return round(num / den, 4) if den else None
+
+
 def offsets_used(rows, item):
-    """Each label's distance from the (unfiltered) ditto extent — the anchoring comparison."""
-    top, bot = [], []
+    """How each label relates to that leaf's ditto extent.
+
+    The decision-bearing number here is `r`, NOT the offset median: it asks whether the label
+    follows the extent as the extent moves across leaves. A labeller who never saw the extent and
+    still tracks it at r~1 is agreeing independently. The offset median alone cannot distinguish
+    that from a labeller who applied one constant to every page -- which is exactly the mistake
+    the first version of this analysis made.
+
+    `quantised` records what fraction of raw edge VALUES are multiples of the 0.005 keyboard
+    step, which is how each batch was produced. It is bookkeeping, not evidence.
+    """
+    top, bot, etop, ebot, vals = [], [], [], [], []
     for r in rows:
         geo = leaf_geometry(item, r["leaf"])
         if geo is None:
@@ -153,12 +187,25 @@ def offsets_used(rows, item):
             continue
         top.append(round(r["body_top"] - min(raw), 4))
         bot.append(round(r["body_bottom"] - max(raw), 4))
-    def summary(d):
-        q = sorted(d)
-        return {"n": len(d), "median": round(statistics.median(d), 4),
+        etop.append(min(raw))
+        ebot.append(max(raw))
+        vals += [r["body_top"], r["body_bottom"]]
+
+    def summary(offs, labels, extents):
+        q = sorted(offs)
+        return {"n": len(offs), "median": round(statistics.median(offs), 4),
                 "q1": q[len(q) // 4], "q3": q[3 * len(q) // 4],
-                "on_0.015": round(sum(abs(abs(x) - 0.015) < 1e-9 for x in d) / len(d), 4)}
-    return {"top": summary(top), "bottom": summary(bot)}
+                "label_sd": round(statistics.pstdev(labels), 4),
+                "extent_sd": round(statistics.pstdev(extents), 4),
+                "extent_range": [round(min(extents), 4), round(max(extents), 4)],
+                "tracks_extent_r": _pearson(labels, extents)}
+
+    return {
+        "top": summary(top, [o + e for o, e in zip(top, etop)], etop),
+        "bottom": summary(bot, [o + e for o, e in zip(bot, ebot)], ebot),
+        "quantised_to_keystep": round(
+            sum(abs(round(v / 0.005) - v / 0.005) < 1e-6 for v in vals) / len(vals), 4),
+    }
 
 
 def load(path):
@@ -212,14 +259,19 @@ def main(argv=None) -> int:
                 print(f"       worst: "
                       + ", ".join(f"{d['leaf']}({d['admitted']})" for d in v["worst"]), file=e)
 
-    print(f"\n{'':10}{'train median':>14}{'blind median':>14}{'train on .015':>15}"
-          f"{'blind on .015':>15}", file=e)
-    for edge in ("top", "bottom"):
-        t = res["offsets"].get("train", {}).get(edge)
-        b = res["offsets"].get("blind", {}).get(edge)
-        if t and b:
-            print(f"{edge:<10}{t['median']:>+14.4f}{b['median']:>+14.4f}"
-                  f"{t['on_0.015']:>15.0%}{b['on_0.015']:>15.0%}", file=e)
+    print(f"\ndoes the label track that leaf's ditto extent, which blind labelling cannot see?",
+          file=e)
+    print(f"{'':16}{'offset median':>15}{'label sd':>11}{'extent sd':>11}{'r':>9}"
+          f"{'extent range':>18}", file=e)
+    for name in res["offsets"]:
+        for edge in ("top", "bottom"):
+            v = res["offsets"][name][edge]
+            print(f"{name + ' ' + edge:<16}{v['median']:>+15.4f}{v['label_sd']:>11.4f}"
+                  f"{v['extent_sd']:>11.4f}{v['tracks_extent_r']:>+9.3f}"
+                  f"{str(v['extent_range']):>18}", file=e)
+    for name in res["offsets"]:
+        print(f"  {name}: {res['offsets'][name]['quantised_to_keystep']:.0%} of edge values sit on "
+              f"the 0.005 keyboard step (bookkeeping, not evidence)", file=e)
 
     for name, s in res["sets"].items():
         t = s["strip_touched"]

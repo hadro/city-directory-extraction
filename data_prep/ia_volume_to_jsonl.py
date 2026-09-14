@@ -797,11 +797,24 @@ def normalize_ditto_lead(text, marks):
     unchanged when nothing applies, so the caller can test identity to know whether to record
     the original.
 
-    KNOWN GAP, stated rather than guessed at: Trow prints its ditto GLUED to the given name
-    (`-Michl`, no space), so it is not a separate leading token and nothing here fires on it.
-    That is safe -- the line passes through untouched -- but a Trow volume gets no benefit from
-    this. Splitting `-Michl` would need a rule that does not also split real hyphenated surnames,
-    which is a different measurement than the one that justified this function.
+    KNOWN GAP, and it is NARROWER than this docstring used to claim. The old text said "Trow
+    prints its ditto GLUED to the given name (`-Michl`, no space) ... a Trow volume gets no
+    benefit from this." That came from `style_profiles/trow_manhattan_1890s.md`, which observed it
+    on an 1890s volume, and it was generalized to "Trow" without measurement.
+
+    MEASURED 2026-09-13 on trowsgeneraldire1915trow, 1,484,446 kept lines: the 1915 ditto IS a
+    separate leading token and this function normalized **128,911 lines (8.7%)**. The glued
+    dash+word form leads 271 lines (0.018%) and those are institutional ad copy, not dittos. So
+    the gap is real for the 1890s volume the card read, and false for 1915 -- a per-VOLUME fact
+    that was recorded as a per-PUBLISHER one. `data_prep/reconcile_style_profiles.py` is the
+    instrument that caught it.
+
+    The 1915 ditto instead FRAGMENTS across OCR variants, which is a different and more useful
+    gap: one printed mark reads as `,,` `..` `„` `11` `.1` `,1`, and each variant is gated
+    independently, so a convention that is collectively ~9% of lines is admitted only in the parts
+    that individually clear a floor. `.1` (0.72% of lines, 98% name-followed) and `,1` (0.24%,
+    99%) both miss the 5% DIGIT gate purely because they contain a digit. Promoting them with
+    `--ditto-marks .1,,1` after review adds 21,289 lines; that is what the review queue is for.
     """
     toks = text.split(None, 1)
     if not toks or toks[0] not in marks:

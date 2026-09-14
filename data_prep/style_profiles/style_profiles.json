@@ -13,119 +13,686 @@
       "entry_template": "human-readable field order (for reference / few-shot), NOT a format string.",
       "samples": "verbatim lines from the actual volume (validation + optional few-shot anchors)."
     },
-    "legend_completeness_values": ["full", "partial", "inferred", "sparse"]
+    "legend_completeness_values": [
+      "full",
+      "partial",
+      "inferred",
+      "sparse"
+    ]
   },
   "profiles": {
     "longworth_manhattan_1830s": {
-      "publisher": "Longworth", "city": "New York", "borough": "Manhattan",
-      "year_range": [1797, 1843], "column_count": 1, "source_volume": "ia/longworthsameric1839newy",
+      "publisher": "Longworth",
+      "city": "New York",
+      "borough": "Manhattan",
+      "year_range": [
+        1797,
+        1843
+      ],
+      "column_count": 1,
+      "source_volume": "ia/longworthsameric1839newy",
       "entry_template": "Surname Given[s], [occupation WorkplaceAddr] [h. HomeAddr]",
-      "flags": {"caps_prominent_names": false, "full_surname_repeated": true, "street_relation_grammar": false, "comma_between_occ_and_workaddr": false},
-      "markers": {"home": "h.", "home_alt": "h", "rear": "r.", "works_in_manhattan": null, "ditto": "do."},
-      "widow_forms": [["widow of {hf}", 5], ["w. of {hf}", 3], ["widow {hf}", 2], ["widow", 1]],
-      "abbreviations": {"house": "h.", "corner": "c.", "physician": "m. d.", "cotton": "cot.", "widow_of": "w. of", "boards": "b. b.", "ditto": "do."},
+      "flags": {
+        "caps_prominent_names": false,
+        "full_surname_repeated": true,
+        "street_relation_grammar": false,
+        "comma_between_occ_and_workaddr": false
+      },
+      "markers": {
+        "home": "h.",
+        "home_alt": "h",
+        "rear": "r.",
+        "works_in_manhattan": null,
+        "ditto": "do."
+      },
+      "widow_forms": [
+        [
+          "widow of {hf}",
+          5
+        ],
+        [
+          "w. of {hf}",
+          3
+        ],
+        [
+          "widow {hf}",
+          2
+        ],
+        [
+          "widow",
+          1
+        ]
+      ],
+      "abbreviations": {
+        "house": "h.",
+        "corner": "c.",
+        "physician": "m. d.",
+        "cotton": "cot.",
+        "widow_of": "w. of",
+        "boards": "b. b.",
+        "ditto": "do."
+      },
       "legend_completeness": "inferred",
-      "samples": ["Earnest James, sign painter 206 Pearl h. 19 Cherry", "Easton Charles cot. broker 63 Wall c. Pearl h. 62 Rivington", "East Ann widow of Josiah, 171 Division", "Rivers Augusta, w. of Jas. R. boardng. 368 Broome", "Rivers widow Rachel, 45 Carmine"],
+      "samples": [
+        "Earnest James, sign painter 206 Pearl h. 19 Cherry",
+        "Easton Charles cot. broker 63 Wall c. Pearl h. 62 Rivington",
+        "East Ann widow of Josiah, 171 Division",
+        "Rivers Augusta, w. of Jas. R. boardng. 368 Broome",
+        "Rivers widow Rachel, 45 Carmine"
+      ],
       "notes": "Comma after given name(s) but NOT between occupation and workplace address (distinct from Doggett/Lain). 1797 put the comma after the SURNAME with do.=ditto street; by 1820 it moved to after the given name. Sparse abbreviations, mostly spelled out (old style)."
     },
     "franks_newyork_1786": {
-      "publisher": "Franks (compiler) / Kollock (printer)", "city": "New York", "borough": "Manhattan",
-      "year_range": [1786, 1786], "column_count": 1, "source_volume": "nypl/b14662b0-81a8-0134-2a18-00505686a51c",
+      "publisher": "Franks (compiler) / Kollock (printer)",
+      "city": "New York",
+      "borough": "Manhattan",
+      "year_range": [
+        1786,
+        1786
+      ],
+      "column_count": 1,
+      "source_volume": "nypl/b14662b0-81a8-0134-2a18-00505686a51c",
       "entry_template": "Surname Given[s], [occupation[, &c.],] Street-number, Street-name",
-      "flags": {"caps_prominent_names": false, "full_surname_repeated": true, "street_relation_grammar": false, "single_address": true},
-      "markers": {"home": null, "rear": null, "works_in_manhattan": null, "ditto": null},
+      "flags": {
+        "caps_prominent_names": false,
+        "full_surname_repeated": true,
+        "street_relation_grammar": false,
+        "single_address": true
+      },
+      "markers": {
+        "home": null,
+        "rear": null,
+        "works_in_manhattan": null,
+        "ditto": null
+      },
       "widow_forms": [],
-      "abbreviations": {"merchant": "merch.", "merchant_alt": "mer.", "etcetera": "&c.", "gentleman": "gent.", "junior": "jun.", "doctor": "Dr.", "Broadway": "Broadw.", "Queen-street": "Q. st."},
+      "abbreviations": {
+        "merchant": "merch.",
+        "merchant_alt": "mer.",
+        "etcetera": "&c.",
+        "gentleman": "gent.",
+        "junior": "jun.",
+        "doctor": "Dr.",
+        "Broadway": "Broadw.",
+        "Queen-street": "Q. st."
+      },
       "legend_completeness": "sparse",
-      "samples": ["Dewint John, merchant, 12, Duke-street", "Draper Geo. doctor, &c. 47, Han.-square", "Douglass Geo. & S. merchants, 233, Q. st.", "Franks D. conveyancer, &c. 66, Broadw."],
+      "samples": [
+        "Dewint John, merchant, 12, Duke-street",
+        "Draper Geo. doctor, &c. 47, Han.-square",
+        "Douglass Geo. & S. merchants, 233, Q. st.",
+        "Franks D. conveyancer, &c. 66, Broadw."
+      ],
       "notes": "First NYC directory ever (82pp). ONE address per entry (no home/work split, no 'h' marker). Street NUMBER precedes street NAME. No abbreviations key, no ditto; loose conventions (some entries drop commas, some lack occupation)."
     },
     "doggett_manhattan_1840s": {
-      "publisher": "Doggett", "city": "New York", "borough": "Manhattan",
-      "year_range": [1842, 1855], "column_count": 2, "source_volume": "ia/doggettsnewyorkc1845dogg",
+      "publisher": "Doggett",
+      "city": "New York",
+      "borough": "Manhattan",
+      "year_range": [
+        1842,
+        1855
+      ],
+      "column_count": 2,
+      "source_volume": "ia/doggettsnewyorkc1845dogg",
       "entry_template": "Surname Given, occupation[, WorkplaceAddr], [h HomeAddr]",
-      "flags": {"caps_prominent_names": true, "full_surname_repeated": true, "street_relation_grammar": false, "comma_between_occ_and_workaddr": true},
-      "markers": {"home": "h", "home_alt": "h.", "rear": "r", "works_in_manhattan": null, "ditto": null},
-      "widow_forms": [["widow of {hf}", 1]],
-      "abbreviations": {"house": "h", "corner": "cor", "avenue": "av", "near": "n", "place": "pl", "street": "st", "rear": "r", "merchant": "mer", "commission": "com", "colored": "(co'd)"},
+      "flags": {
+        "caps_prominent_names": true,
+        "full_surname_repeated": true,
+        "street_relation_grammar": false,
+        "comma_between_occ_and_workaddr": true
+      },
+      "markers": {
+        "home": "h",
+        "home_alt": "h.",
+        "rear": "r",
+        "works_in_manhattan": null,
+        "ditto": null
+      },
+      "widow_forms": [
+        [
+          "widow of {hf}",
+          1
+        ]
+      ],
+      "abbreviations": {
+        "house": "h",
+        "corner": "cor",
+        "avenue": "av",
+        "near": "n",
+        "place": "pl",
+        "street": "st",
+        "rear": "r",
+        "merchant": "mer",
+        "commission": "com",
+        "colored": "(co'd)"
+      },
       "legend_completeness": "inferred",
-      "samples": ["Fowler N. Hill, drygoods, 167 Pearl, h 46 Fourth", "FOX BALDWIN N. grocer, 32 Water, h 147 ch'ry", "Fox Ann, widow of Jeremy, 17 pl", "Fox Charles, (co'd) seamn, 139 W. Fifteenth", "SCHRODER HENRY, engraver"],
+      "samples": [
+        "Fowler N. Hill, drygoods, 167 Pearl, h 46 Fourth",
+        "FOX BALDWIN N. grocer, 32 Water, h 147 ch'ry",
+        "Fox Ann, widow of Jeremy, 17 pl",
+        "Fox Charles, (co'd) seamn, 139 W. Fifteenth",
+        "SCHRODER HENRY, engraver"
+      ],
       "notes": "Prominent/notable persons (and firms) in ALL CAPS. Widow spelled out 'widow of <husband first>'. Race designation '(co'd)' = colored, in parens after the name. Denser '61,333 names' product; no explicit abbreviations key found in front matter."
     },
     "hearne_brooklyn_1850s": {
-      "publisher": "Hearne", "city": "Brooklyn", "borough": "Brooklyn",
-      "year_range": [1850, 1855], "column_count": 1, "source_volume": "ia/hearnesbrooklync1852unse",
+      "publisher": "Hearne",
+      "city": "Brooklyn",
+      "borough": "Brooklyn",
+      "year_range": [
+        1850,
+        1855
+      ],
+      "column_count": 1,
+      "source_volume": "ia/hearnesbrooklync1852unse",
       "entry_template": "Surname Given, occupation [StreetRelation] [NY] [h HomeAddr]",
-      "flags": {"caps_prominent_names": true, "full_surname_repeated": true, "street_relation_grammar": true, "office_in_parens": true, "star_prefix_uncertain": true},
-      "markers": {"home": "h", "rear": "r", "works_in_manhattan": "NY", "works_in_manhattan_alt": "N Y", "ditto": null},
-      "widow_forms": [["widow of {hf}", 3], ["widow", 2]],
-      "abbreviations": {"near": "n", "corner": "c", "between": "b", "opposite": "op", "rear": "r", "avenue": "av", "place": "pl", "house": "h", "works_in_new_york": "NY"},
+      "flags": {
+        "caps_prominent_names": true,
+        "full_surname_repeated": true,
+        "street_relation_grammar": true,
+        "office_in_parens": true,
+        "star_prefix_uncertain": true
+      },
+      "markers": {
+        "home": "h",
+        "rear": "r",
+        "works_in_manhattan": "NY",
+        "works_in_manhattan_alt": "N Y",
+        "ditto": null
+      },
+      "widow_forms": [
+        [
+          "widow of {hf}",
+          3
+        ],
+        [
+          "widow",
+          2
+        ]
+      ],
+      "abbreviations": {
+        "near": "n",
+        "corner": "c",
+        "between": "b",
+        "opposite": "op",
+        "rear": "r",
+        "avenue": "av",
+        "place": "pl",
+        "house": "h",
+        "works_in_new_york": "NY"
+      },
       "legend_completeness": "inferred",
-      "samples": ["Evans Ira P, grocer 79 Front NY h Union c Court", "EVANS MARTIN, druggist (Alderman 7th ward) Myrtle c ...", "Fitzpatrick Mary, widow of Michael, 197 York", "Slade John, widow 58 Fulton", "*Flood Alvy, barber 82 Atlantic h 177 Adams"],
+      "samples": [
+        "Evans Ira P, grocer 79 Front NY h Union c Court",
+        "EVANS MARTIN, druggist (Alderman 7th ward) Myrtle c ...",
+        "Fitzpatrick Mary, widow of Michael, 197 York",
+        "Slade John, widow 58 Fulton",
+        "*Flood Alvy, barber 82 Atlantic h 177 Adams"
+      ],
       "notes": "Brooklyn street-relation grammar: many entries give location relative to cross/named streets (n/c/b/op) instead of a house number. 'NY' = works in Manhattan (commuter), usually + 'h' Brooklyn home. Officials in ALL CAPS with office in parens. '*' prefix on some names = uncertain (late-add/removed?)."
     },
     "spooner_brooklyn_1840s": {
-      "publisher": "Spooner (publisher) / Teale (compiler)", "city": "Brooklyn", "borough": "Brooklyn",
-      "year_range": [1822, 1849], "column_count": 1, "source_volume": "ia/brooklyncitydire1848teal",
+      "publisher": "Spooner (publisher) / Teale (compiler)",
+      "city": "Brooklyn",
+      "borough": "Brooklyn",
+      "year_range": [
+        1822,
+        1849
+      ],
+      "column_count": 1,
+      "source_volume": "ia/brooklyncitydire1848teal",
       "entry_template": "Surname Given, occupation [StreetRelation] [N Y] [h HomeAddr]",
-      "flags": {"caps_prominent_names": false, "full_surname_repeated": true, "street_relation_grammar": true},
-      "markers": {"home": "h", "rear": "r", "works_in_manhattan": "N Y", "ditto": null},
-      "widow_forms": [["widow of {hf}", 2], ["widow", 2]],
-      "abbreviations": {"near": "n", "corner": "c", "rear": "r", "house": "h", "works_in_new_york": "N Y"},
+      "flags": {
+        "caps_prominent_names": false,
+        "full_surname_repeated": true,
+        "street_relation_grammar": true
+      },
+      "markers": {
+        "home": "h",
+        "rear": "r",
+        "works_in_manhattan": "N Y",
+        "ditto": null
+      },
+      "widow_forms": [
+        [
+          "widow of {hf}",
+          2
+        ],
+        [
+          "widow",
+          2
+        ]
+      ],
+      "abbreviations": {
+        "near": "n",
+        "corner": "c",
+        "rear": "r",
+        "house": "h",
+        "works_in_new_york": "N Y"
+      },
       "legend_completeness": "sparse",
-      "samples": ["Millan John, candy store Fulton c Fleet", "Mullen Mary, widow 5 Halls alley r Furman st", "Murray Joseph, shipping merchant N Y h 79 Pierrepont", "Nally John, foundry man Myrtle n Clinton"],
+      "samples": [
+        "Millan John, candy store Fulton c Fleet",
+        "Mullen Mary, widow 5 Halls alley r Furman st",
+        "Murray Joseph, shipping merchant N Y h 79 Pierrepont",
+        "Nally John, foundry man Myrtle n Clinton"
+      ],
       "notes": "Same Brooklyn street-relation grammar as Hearne (adjacent era) -- the early-Brooklyn predecessor. Pre-Lain. Cross-references [hearne_brooklyn_1850s]."
     },
     "trow_manhattan_1890s": {
-      "publisher": "Trow", "city": "New York", "borough": "Manhattan",
-      "year_range": [1859, 1922], "column_count": 3, "source_volume": "nypl/4b984650-317a-0134-f64d-00505686a51c",
+      "publisher": "Trow",
+      "city": "New York",
+      "borough": "Manhattan",
+      "year_range": [
+        1859,
+        1922
+      ],
+      "column_count": 3,
+      "source_volume": "nypl/4b984650-317a-0134-f64d-00505686a51c",
       "entry_template": "Surname Given[, occupation][, employer/business][, h HomeAddr]",
-      "flags": {"caps_prominent_names": false, "full_surname_repeated": false, "street_relation_grammar": false, "ad_strips_top_bottom": true},
-      "markers": {"home": "h", "rear": "r", "boards": "bds", "works_in_manhattan": null, "ditto": "—"},
-      "widow_forms": [["wid. {hf}", 1]],
-      "abbreviations": {"_entry_markers": "from listing-line observation (NOT all in the printed key): the h/r/bds family", "house": "h", "rear": "r", "boards": "bds", "avenue": "av", "between": "bet", "corner": "cor", "street": "st", "widow": "wid.", "clerk": "clk", "manufacturer": "mfr", "works": "wks",
+      "flags": {
+        "caps_prominent_names": false,
+        "full_surname_repeated": false,
+        "street_relation_grammar": false,
+        "ad_strips_top_bottom": true
+      },
+      "markers": {
+        "home": "h",
+        "rear": "r",
+        "boards": "bds",
+        "works_in_manhattan": null,
+        "ditto": "—"
+      },
+      "widow_forms": [
+        [
+          "wid. {hf}",
+          1
+        ]
+      ],
+      "abbreviations": {
+        "_entry_markers": "from listing-line observation (NOT all in the printed key): the h/r/bds family",
+        "house": "h",
+        "rear": "r",
+        "boards": "bds",
+        "avenue": "av",
+        "between": "bet",
+        "corner": "cor",
+        "street": "st",
+        "widow": "wid.",
+        "clerk": "clk",
+        "manufacturer": "mfr",
+        "works": "wks",
         "_printed_key": "the volume's printed ABBREVIATIONS block (canvas 15 = title/listing-start page) is a places/streets/trade-category key, transcribed in full below (2026-06-20)",
-        "agricultural_implements": "ag. implts.", "alley": "al.", "American": "Am.", "association": "assn.", "assistant": "asst.", "attorney": "Att'y", "boarding_house": "bdgh.", "bookbinder": "bkbinder", "botanic_medicines": "bot. meds.", "Brooklyn": "B'klyn", "building": "bldg.", "builder": "bldr.", "Catharine": "Cath.", "clergyman": "(Rev.)", "commissioner": "commr.", "consolidated": "cons.", "corner_alt": "c", "Cotton_Exchange": "Cotton Ex.", "court": "ct.", "Court_House": "C. H.", "District": "Dist.", "East": "E.", "East_River": "E. R.", "eating_house": "eatingh.", "electrical_instruments": "elec. insts.", "embroiderer": "embdr.", "embroideries": "embds.", "engineer": "eng.", "Exchange": "Exch.", "fancy": "fcy.", "forwarding": "fwdg.", "foot": "ft.", "goods": "gds.", "Great": "Gt.", "green": "gr.", "handkerchiefs": "hdkfs.", "hanger": "hgr.", "heights": "hts.", "house_furnishing": "h. furng.", "importer": "impr.", "insurance": "ins.", "inspector": "insp.", "Jefferson": "Jeff.", "Jersey_City": "J. C.", "Lafayette": "Laf.", "lane": "la.", "Lexington": "Lex.", "limited": "(Ltd.)", "Long_Island": "L. I.", "manufacturing": "mfg.", "market": "mkt", "materials": "matls", "mathematical_instruments": "math. insts.", "maker": "mkr.", "mechanical": "mech", "mens_furnishing": "men's furng.", "merchant": "mer.", "Mount": "Mt.", "musical_instruments": "mus. insts.", "near": "n", "North": "N.", "North_River": "N. R.", "opposite": "opp", "park": "pk.", "patent_medicines": "pat. meds.", "philosophical_instruments": "phil. insts.", "photographic_materials": "phot. matls.", "place": "pl", "pocket_book": "pktbk.", "Point": "Pt.", "president": "pres.", "Produce_Exchange": "Produce Ex.", "professor": "prof.", "provisions": "provns.", "public_accountant": "pub. acct.", "Publishing": "Pub.", "Purchasers_Guide": "P. G.", "railroad": "R.R.", "Schermerhorn": "Scher.", "secretary": "sec.", "slip": "sl.", "society": "soc.", "South": "S.", "square": "sq.", "Station": "Sta.", "Staten_Island": "S. I.", "superintendent": "supt.", "surgical_instruments": "surg. insts.", "telegraph_instruments": "tel. insts.", "terrace": "ter.", "Tompkins": "Tomp.", "transportation": "trans.", "treasurer": "treas.", "United_States_Army": "u. s. a.", "United_States_Navy": "u. s. n.", "Vanderbilt": "Vand'b't", "vice_president": "v. pres.", "veterinary_surgeon": "vet. surg.", "West": "W.", "Willoughby": "Wil'by.", "worker": "wkr."},
+        "agricultural_implements": "ag. implts.",
+        "alley": "al.",
+        "American": "Am.",
+        "association": "assn.",
+        "assistant": "asst.",
+        "attorney": "Att'y",
+        "boarding_house": "bdgh.",
+        "bookbinder": "bkbinder",
+        "botanic_medicines": "bot. meds.",
+        "Brooklyn": "B'klyn",
+        "building": "bldg.",
+        "builder": "bldr.",
+        "Catharine": "Cath.",
+        "clergyman": "(Rev.)",
+        "commissioner": "commr.",
+        "consolidated": "cons.",
+        "corner_alt": "c",
+        "Cotton_Exchange": "Cotton Ex.",
+        "court": "ct.",
+        "Court_House": "C. H.",
+        "District": "Dist.",
+        "East": "E.",
+        "East_River": "E. R.",
+        "eating_house": "eatingh.",
+        "electrical_instruments": "elec. insts.",
+        "embroiderer": "embdr.",
+        "embroideries": "embds.",
+        "engineer": "eng.",
+        "Exchange": "Exch.",
+        "fancy": "fcy.",
+        "forwarding": "fwdg.",
+        "foot": "ft.",
+        "goods": "gds.",
+        "Great": "Gt.",
+        "green": "gr.",
+        "handkerchiefs": "hdkfs.",
+        "hanger": "hgr.",
+        "heights": "hts.",
+        "house_furnishing": "h. furng.",
+        "importer": "impr.",
+        "insurance": "ins.",
+        "inspector": "insp.",
+        "Jefferson": "Jeff.",
+        "Jersey_City": "J. C.",
+        "Lafayette": "Laf.",
+        "lane": "la.",
+        "Lexington": "Lex.",
+        "limited": "(Ltd.)",
+        "Long_Island": "L. I.",
+        "manufacturing": "mfg.",
+        "market": "mkt",
+        "materials": "matls",
+        "mathematical_instruments": "math. insts.",
+        "maker": "mkr.",
+        "mechanical": "mech",
+        "mens_furnishing": "men's furng.",
+        "merchant": "mer.",
+        "Mount": "Mt.",
+        "musical_instruments": "mus. insts.",
+        "near": "n",
+        "North": "N.",
+        "North_River": "N. R.",
+        "opposite": "opp",
+        "park": "pk.",
+        "patent_medicines": "pat. meds.",
+        "philosophical_instruments": "phil. insts.",
+        "photographic_materials": "phot. matls.",
+        "place": "pl",
+        "pocket_book": "pktbk.",
+        "Point": "Pt.",
+        "president": "pres.",
+        "Produce_Exchange": "Produce Ex.",
+        "professor": "prof.",
+        "provisions": "provns.",
+        "public_accountant": "pub. acct.",
+        "Publishing": "Pub.",
+        "Purchasers_Guide": "P. G.",
+        "railroad": "R.R.",
+        "Schermerhorn": "Scher.",
+        "secretary": "sec.",
+        "slip": "sl.",
+        "society": "soc.",
+        "South": "S.",
+        "square": "sq.",
+        "Station": "Sta.",
+        "Staten_Island": "S. I.",
+        "superintendent": "supt.",
+        "surgical_instruments": "surg. insts.",
+        "telegraph_instruments": "tel. insts.",
+        "terrace": "ter.",
+        "Tompkins": "Tomp.",
+        "transportation": "trans.",
+        "treasurer": "treas.",
+        "United_States_Army": "u. s. a.",
+        "United_States_Navy": "u. s. n.",
+        "Vanderbilt": "Vand'b't",
+        "vice_president": "v. pres.",
+        "veterinary_surgeon": "vet. surg.",
+        "West": "W.",
+        "Willoughby": "Wil'by.",
+        "worker": "wkr."
+      },
       "legend_completeness": "full",
-      "samples": ["Dupp Wm. painter, h 305 E. 29th", "Duppler Chas. tngr. 33, 3d av. h 240 E. 10th", "— Chas. cooper, h 5205, 3d av.", "Dupre Felton, books, 549, 5th av."],
-      "notes": "DITTO DASH: a leading '—' repeats the prior surname on continuation lines (unlike Lain, which repeats the full surname). 3 columns (preface-stated). col 2->3 transition was 1857->1859 (1857 vols are 2-col). Listing pages carry ad strips top & bottom. LEGEND FULLY TRANSCRIBED 2026-06-20 from the printed 'ABBREVIATIONS' block on canvas 15 (the title/listing-start page) -- it is a places/streets/trade-category key (Schermerhorn, Tompkins, Cotton/Produce Exchange, Staten Island, agricultural/musical/surgical instruments, etc.), NOT the h/r/bds entry-marker glossary; those markers (kept under _entry_markers) come from reading listing lines. Overlap terms present in BOTH: corner (c / cor), opposite (opp), house (h), widow (wid.)."
+      "samples": [
+        "Dupp Wm. painter, h 305 E. 29th",
+        "Duppler Chas. tngr. 33, 3d av. h 240 E. 10th",
+        "— Chas. cooper, h 5205, 3d av.",
+        "Dupre Felton, books, 549, 5th av."
+      ],
+      "notes": "DITTO DASH: a leading '—' repeats the prior surname on continuation lines (unlike Lain, which repeats the full surname). 3 columns (preface-stated). col 2->3 transition was 1857->1859 (1857 vols are 2-col). Listing pages carry ad strips top & bottom. LEGEND FULLY TRANSCRIBED 2026-06-20 from the printed 'ABBREVIATIONS' block on canvas 15 (the title/listing-start page) -- it is a places/streets/trade-category key (Schermerhorn, Tompkins, Cotton/Produce Exchange, Staten Island, agricultural/musical/surgical instruments, etc.), NOT the h/r/bds entry-marker glossary; those markers (kept under _entry_markers) come from reading listing lines. Overlap terms present in BOTH: corner (c / cor), opposite (opp), house (h), widow (wid.).\n\nMEASURED DISAGREEMENT 2026-09-13 (data_prep/reconcile_style_profiles.py): this card's markers.ditto='—' and its glued '-Michl' form were observed on the 1890s volume it sampled and are NOT what Trow 1915 prints. On trowsgeneraldire1915trow (1,484,446 kept lines) the ditto is a SEPARATE leading token in a low-double-quote family — ',,' 14,866 · '..' 13,493 · '„' 9,085 · '11' 91,431 · '.1' 10,633 · ',1' 3,502 — while a leading em-dash leads just 97 lines, all advertising copy, and the glued dash+word form leads 271 (0.018%). The card is not wrong about the volume it read; its year_range [1859,1922] over-generalizes a single-volume observation across 63 years. Narrow the range or add a 1910s card before anything consumes markers.ditto for a Trow volume."
     },
     "lain_brooklyn_1880s": {
-      "publisher": "Lain", "city": "Brooklyn", "borough": "Brooklyn",
-      "year_range": [1858, 1899], "column_count": 2, "source_volume": "ia/1885BPL",
+      "publisher": "Lain",
+      "city": "Brooklyn",
+      "borough": "Brooklyn",
+      "year_range": [
+        1858,
+        1899
+      ],
+      "column_count": 2,
+      "source_volume": "ia/1885BPL",
       "entry_template": "Surname Given[s][, wid. SpouseGiven][, Occupation][, Employer/WorkAddr][, h HomeAddr]",
-      "flags": {"caps_prominent_names": true, "full_surname_repeated": true, "street_relation_grammar": false, "marginal_ad_strips": true},
-      "markers": {"home": "h", "rear": "r.", "works_in_manhattan": "N.Y.", "ditto": null},
-      "widow_forms": [["wid. {hf}", 1]],
-      "abbreviations": {"accountant": "acct.", "agent": "agt.", "avenue": "av", "assistant": "asst", "Broadway": "B'way", "corner": "c", "clerk": "clk.", "commission": "com.", "commissioner": "comm.", "court": "ct.", "department": "dept.", "deputy": "depty.", "east": "E.", "foot": "ft", "goods": "gds.", "house": "h", "heights": "hgts.", "importer": "impr.", "insurance": "ins.", "inspector": "insp.", "keeper": "kpr.", "lane": "la", "laborer": "lab.", "manufacturer": "mfr.", "merchant": "mer.", "market": "mkt.", "near": "n", "north": "N.", "new_york": "N.Y.", "operator": "oper.", "opposite": "opp", "place": "pl.", "president": "pres't", "rear": "r.", "road": "rd.", "south": "S.", "secretary": "sec.", "square": "sq", "superintendent": "supt.", "telegraph": "tel.", "treasurer": "treas'r", "west": "W.", "wharf": "wf", "widow": "wid."},
+      "flags": {
+        "caps_prominent_names": true,
+        "full_surname_repeated": true,
+        "street_relation_grammar": false,
+        "marginal_ad_strips": true
+      },
+      "markers": {
+        "home": "h",
+        "rear": "r.",
+        "works_in_manhattan": "N.Y.",
+        "ditto": null
+      },
+      "widow_forms": [
+        [
+          "wid. {hf}",
+          1
+        ]
+      ],
+      "abbreviations": {
+        "accountant": "acct.",
+        "agent": "agt.",
+        "avenue": "av",
+        "assistant": "asst",
+        "Broadway": "B'way",
+        "corner": "c",
+        "clerk": "clk.",
+        "commission": "com.",
+        "commissioner": "comm.",
+        "court": "ct.",
+        "department": "dept.",
+        "deputy": "depty.",
+        "east": "E.",
+        "foot": "ft",
+        "goods": "gds.",
+        "house": "h",
+        "heights": "hgts.",
+        "importer": "impr.",
+        "insurance": "ins.",
+        "inspector": "insp.",
+        "keeper": "kpr.",
+        "lane": "la",
+        "laborer": "lab.",
+        "manufacturer": "mfr.",
+        "merchant": "mer.",
+        "market": "mkt.",
+        "near": "n",
+        "north": "N.",
+        "new_york": "N.Y.",
+        "operator": "oper.",
+        "opposite": "opp",
+        "place": "pl.",
+        "president": "pres't",
+        "rear": "r.",
+        "road": "rd.",
+        "south": "S.",
+        "secretary": "sec.",
+        "square": "sq",
+        "superintendent": "supt.",
+        "telegraph": "tel.",
+        "treasurer": "treas'r",
+        "west": "W.",
+        "wharf": "wf",
+        "widow": "wid."
+      },
       "legend_completeness": "full",
-      "samples": ["Aab George, machinist, h 294 Stockton", "Abbey Westminster S. grocer, 61 Front N.Y. h 229 Union", "Adams Mary, wid. Philip, h 343 Pacific", "Adams Ellen, wid. Thomas, grocer, 71 N. 7th", "ADAMS HENRY H. county treas'r, 13 Court"],
+      "samples": [
+        "Aab George, machinist, h 294 Stockton",
+        "Abbey Westminster S. grocer, 61 Front N.Y. h 229 Union",
+        "Adams Mary, wid. Philip, h 343 Pacific",
+        "Adams Ellen, wid. Thomas, grocer, 71 N. 7th",
+        "ADAMS HENRY H. county treas'r, 13 Court"
+      ],
       "notes": "FULL legend transcribed from the abbreviations key (canvas 1, = listing-start page). Widow = 'wid. <husband given>' (the original synth→real failure case). Full surname repeated every line (NO ditto dash, unlike Trow). Prominent persons ALL CAPS. 'N.Y.' after a work address = commutes to Manhattan. Imprint: J. Lain 1858 -> Geo. T. Lain 1869 -> Lain & Co. -> Lain & Healy 1890s. Held-out eval volume: 1897BPL."
     },
     "boyd_flushing_1880s": {
-      "publisher": "Boyd", "city": "Flushing", "borough": "Queens",
-      "year_range": [1885, 1892], "column_count": 1, "source_volume": "ia/flushingnewyork188586boyd",
+      "publisher": "Boyd",
+      "city": "Flushing",
+      "borough": "Queens",
+      "year_range": [
+        1885,
+        1892
+      ],
+      "column_count": 1,
+      "source_volume": "ia/flushingnewyork188586boyd",
       "entry_template": "Surname Given[s], [occupation][, WorkAddr], h HomeAddr",
-      "flags": {"caps_prominent_names": false, "full_surname_repeated": true, "street_relation_grammar": false, "small_town_addresses": true},
-      "markers": {"home": "h", "rear": null, "works_in_manhattan": "(N.Y.)", "ditto": "do"},
-      "widow_forms": [["widow {hf}", 3], ["widow", 1]],
-      "abbreviations": {"house": "h", "near": "nr", "corner": "cor", "avenue": "ave", "ditto": "do", "works_in_new_york": "(N.Y.)", "widow": "widow"},
+      "flags": {
+        "caps_prominent_names": false,
+        "full_surname_repeated": true,
+        "street_relation_grammar": false,
+        "small_town_addresses": true
+      },
+      "markers": {
+        "home": "h",
+        "rear": null,
+        "works_in_manhattan": "(N.Y.)",
+        "ditto": "do"
+      },
+      "widow_forms": [
+        [
+          "widow {hf}",
+          3
+        ],
+        [
+          "widow",
+          1
+        ]
+      ],
+      "abbreviations": {
+        "house": "h",
+        "near": "nr",
+        "corner": "cor",
+        "avenue": "ave",
+        "ditto": "do",
+        "works_in_new_york": "(N.Y.)",
+        "widow": "widow"
+      },
       "legend_completeness": "inferred",
-      "samples": ["Hallett William D, undertaker, h 25 Main", "Halliday Augusta, widow George, h 53 Main", "Hamilton James C (clerk, N.Y.), h Sandford ave nr Union", "Harvey Andrew, carpenter, 87 West Amity, h do", "Harris Deborah, widow, h 129 Washington"],
+      "samples": [
+        "Hallett William D, undertaker, h 25 Main",
+        "Halliday Augusta, widow George, h 53 Main",
+        "Hamilton James C (clerk, N.Y.), h Sandford ave nr Union",
+        "Harvey Andrew, carpenter, 87 West Amity, h do",
+        "Harris Deborah, widow, h 129 Washington"
+      ],
       "notes": "Small-town: addresses frequently OMIT house numbers (street name only). Widow = 'widow <husband given>' (no 'of'). 'h do' = ditto (home repeats the line above). '(N.Y.)' in parens after occupation = works in NYC. Volume's 2nd half is a classified BUSINESS directory (not a persons target)."
     },
     "upington_brooklyn_1900s": {
-      "publisher": "Upington (George Upington)", "city": "Brooklyn", "borough": "Brooklyn",
-      "year_range": [1902, 1912], "column_count": 2, "source_volume": "ia/brooklynnewyorkc1906geor",
+      "publisher": "Upington (George Upington)",
+      "city": "Brooklyn",
+      "borough": "Brooklyn",
+      "year_range": [
+        1902,
+        1912
+      ],
+      "column_count": 2,
+      "source_volume": "ia/brooklynnewyorkc1906geor",
       "entry_template": "Surname Given occupation [employer/work addr] h HomeAddr  (NO commas -- space-delimited)",
-      "flags": {"caps_prominent_names": true, "full_surname_repeated": false, "no_commas_between_fields": true, "street_relation_grammar": false, "marginal_ad_strips": true},
-      "markers": {"home": "h", "rear": "r", "works_in_manhattan": "N.Y.", "manhattan_alt": "Mhtn", "ditto": "\""},
-      "widow_forms": [["wid. {hf}", 1]],
-      "abbreviations": {"house": "h", "rear": "r", "avenue": "av", "corner": "c", "near": "n", "north": "N.", "south": "S.", "east": "E.", "west": "W.", "carpenter": "carp'r", "house_furnishings": "hfurng",
+      "flags": {
+        "caps_prominent_names": true,
+        "full_surname_repeated": false,
+        "no_commas_between_fields": true,
+        "street_relation_grammar": false,
+        "marginal_ad_strips": true
+      },
+      "markers": {
+        "home": "h",
+        "rear": "r",
+        "works_in_manhattan": "N.Y.",
+        "manhattan_alt": "Mhtn",
+        "ditto": "\""
+      },
+      "widow_forms": [
+        [
+          "wid. {hf}",
+          1
+        ]
+      ],
+      "abbreviations": {
+        "house": "h",
+        "rear": "r",
+        "avenue": "av",
+        "corner": "c",
+        "near": "n",
+        "north": "N.",
+        "south": "S.",
+        "east": "E.",
+        "west": "W.",
+        "carpenter": "carp'r",
+        "house_furnishings": "hfurng",
         "_printed_key": "FULLY TRANSCRIBED 2026-06-21 from the paragraph 'ABBREVIATIONS' block on the persons listing-start page (leaf 37 = printed p.19); ~73 entries, Brooklyn place/street-heavy (like Trow's key but Brooklyn-specific)",
-        "accountant": "Acct.", "agricultural": "agl.", "artificial": "art.", "assistant": "asst.", "Broadway": "B'way", "Brooklyn": "Bklyn", "Bushwick": "B'wick", "Central": "Cen'l", "Christopher": "Chris'topher", "Commercial": "Com'l", "clerk": "clk", "commission": "com.", "commissioner": "comm'r", "department": "dept.", "deputy": "depy", "Eastern_Parkway": "East'n Parkway", "electrical": "elec.", "engineer": "eng", "forwarding": "fwdg", "furnishing": "furng", "Hopkinson": "H'pkson", "heights": "hgts", "importer": "impr", "implements": "imps", "incorporated": "(inc.)", "instruments": "insts", "Jefferson": "Jef.", "keeper": "kpr", "Knickerbocker": "Knick'r", "Kosciusko": "Kosc'ko", "lane": "la", "laborer": "lab.", "Lafayette": "Laf", "Manhattan": "Mhtn", "manufacturer": "mfr", "materials": "mtls", "mechanical": "mech", "merchant": "mer", "Metropolitan": "Met.", "maker": "mkr", "market": "mkt", "New_Jersey": "N.J.", "new_york": "N.Y.", "opposite": "opp", "operator": "oper", "Pennsylvania": "Pa.", "place": "pl", "president": "pres't", "railroad": "R.R.", "road": "rd", "Rochester": "Roch'r", "Rockaway": "R'kway", "Schenectady": "Sch'y", "secretary": "sec", "square": "sq", "Stuyvesant": "Stuy't", "telegraph": "tel.", "terrace": "ter", "Tompkins": "T'pkins", "Vanderbilt": "Vand't", "veterinary_surgeon": "vet. surg.", "Washington": "Wash'n", "wharf": "whf", "widow": "wid", "Willoughby": "Wil'by"},
+        "accountant": "Acct.",
+        "agricultural": "agl.",
+        "artificial": "art.",
+        "assistant": "asst.",
+        "Broadway": "B'way",
+        "Brooklyn": "Bklyn",
+        "Bushwick": "B'wick",
+        "Central": "Cen'l",
+        "Christopher": "Chris'topher",
+        "Commercial": "Com'l",
+        "clerk": "clk",
+        "commission": "com.",
+        "commissioner": "comm'r",
+        "department": "dept.",
+        "deputy": "depy",
+        "Eastern_Parkway": "East'n Parkway",
+        "electrical": "elec.",
+        "engineer": "eng",
+        "forwarding": "fwdg",
+        "furnishing": "furng",
+        "Hopkinson": "H'pkson",
+        "heights": "hgts",
+        "importer": "impr",
+        "implements": "imps",
+        "incorporated": "(inc.)",
+        "instruments": "insts",
+        "Jefferson": "Jef.",
+        "keeper": "kpr",
+        "Knickerbocker": "Knick'r",
+        "Kosciusko": "Kosc'ko",
+        "lane": "la",
+        "laborer": "lab.",
+        "Lafayette": "Laf",
+        "Manhattan": "Mhtn",
+        "manufacturer": "mfr",
+        "materials": "mtls",
+        "mechanical": "mech",
+        "merchant": "mer",
+        "Metropolitan": "Met.",
+        "maker": "mkr",
+        "market": "mkt",
+        "New_Jersey": "N.J.",
+        "new_york": "N.Y.",
+        "opposite": "opp",
+        "operator": "oper",
+        "Pennsylvania": "Pa.",
+        "place": "pl",
+        "president": "pres't",
+        "railroad": "R.R.",
+        "road": "rd",
+        "Rochester": "Roch'r",
+        "Rockaway": "R'kway",
+        "Schenectady": "Sch'y",
+        "secretary": "sec",
+        "square": "sq",
+        "Stuyvesant": "Stuy't",
+        "telegraph": "tel.",
+        "terrace": "ter",
+        "Tompkins": "T'pkins",
+        "Vanderbilt": "Vand't",
+        "veterinary_surgeon": "vet. surg.",
+        "Washington": "Wash'n",
+        "wharf": "whf",
+        "widow": "wid",
+        "Willoughby": "Wil'by"
+      },
       "legend_completeness": "full",
-      "samples": ["Cannell Jos clk h 379 Gold", "Stephen mason h 81A Hull", "Canning And'w shoes 960 Myrtle av", "Hugh engineer h 448 Carlton av", "Greenberg Jacob tailor 559 Marcy av", "\" Louis hfurng 82 Belmont av", "\" Nathan tailor h 752 H'pkson"],
+      "samples": [
+        "Cannell Jos clk h 379 Gold",
+        "Stephen mason h 81A Hull",
+        "Canning And'w shoes 960 Myrtle av",
+        "Hugh engineer h 448 Carlton av",
+        "Greenberg Jacob tailor 559 Marcy av",
+        "\" Louis hfurng 82 Belmont av",
+        "\" Nathan tailor h 752 H'pkson"
+      ],
       "notes": "Post-1900 Brooklyn, dense 2-col with marginal vertical ad strips (same layout family as Lain). STYLE from listing reads (canvases 367 & 855, 2026-06-20): (1) NO COMMAS between fields -- space-delimited ('Cannell Jos clk h 379 Gold'), unlike Lain which is comma-delimited; (2) DITTO via a leading '\"' that repeats the bold-caps headword surname (GREENBERG -> '\" Jacob tailor...'), so the full surname is NOT repeated each line; (3) given names abbreviated (Jos, Edw'd, And'w, H'y, Dan'l, Cath). KEY FOUND + FULLY TRANSCRIBED 2026-06-21: it sits on the persons listing-start page (leaf 37 = p.19), paragraph form, NOT in the front-20 (front matter is all ads through ~leaf 36). The key confirms 'wid widow' (the widow form 'wid. {hf}' is rendered like Lain) and is Brooklyn place/street-heavy (Bushwick, Eastern Parkway, Hopkinson/Kosciusko/Knickerbocker/Stuyvesant/Tompkins/Willoughby streets). Verified-absent (checked, not in key): building/builder, Flatbush, foot, goods, Greenpoint. 'Volume LXXXIII' in 1906 (long-running series, distinct from Lain). Heavy duplicate scans across the master list."
     }
   }

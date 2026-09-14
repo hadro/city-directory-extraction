@@ -22,6 +22,15 @@ hyphen `-`** (what OCR emits — `-Michl h 1773 1st av` under Juarez → name `-
 Michl"); don't resolve the surname (downstream step). Heavy in this dense col-3 format — whole runs
 of `-Given` entries.
 
+> ⚠️ **This holds for the 1890s volume sampled here, NOT for Trow 1915.** Measured 2026-09-13 over
+> all 1,484,446 kept lines of `trowsgeneraldire1915trow` (`data_prep/reconcile_style_profiles.py`):
+> the 1915 ditto is a **separate leading token** in a low-double-quote family — `,,` 14,866 · `..`
+> 13,493 · `„` 9,085 · `11` 91,431 · `.1` 10,633 · `,1` 3,502 — and a leading em-dash appears on
+> only **97** lines, every one advertising copy. The glued `-Given` form leads **271** lines
+> (0.018%). Nothing above is retracted; the card's `year_range` [1859, 1922] is what
+> over-generalizes it. **Narrow the range or add a 1910s card before anything consumes
+> `markers.ditto` for a Trow volume.**
+
 Verbatim samples (printed p.353):
 - `Dupp Wm. painter, h 305 E. 29th`
 - `Duppler Chas. tngr. 33, 3d av. h 240 E. 10th`

@@ -28,10 +28,12 @@ then release to HF.
 > **⚠️ THE `banner` FILTER WAS WRONG AND IS NOW FIXED (2026-09-13).** It normalized by a plain
 > median over a bimodal line-width distribution and was cutting real entries at about the rate it
 > cut advertising — 1,038 entry-shaped lines killed against 951 non-entries caught per 300 leaves.
-> 1906BPL now keeps **205,103 (70.1%)**, not 199,012 (68.0%): **+6,091 lines, disproportionately
-> real entries**. `data/1906BPL_lines.jsonl` was NOT regenerated, so every figure in this document
-> remains exact against the artifact it was measured on — but that artifact is no longer what the
-> code produces. **Read [BANNER_CORRECTION.md](BANNER_CORRECTION.md) before re-running stage 1 or
+> 1906BPL now keeps **205,590 (70.0%)**, not 199,012 (68.0%) — +6,091 from the banner fix and a
+> further +487 from the opt-in `--deep-indent-gate`, which also un-merges ~310 fabricated composite
+> people into ~620 correct records. **`data/1906BPL_lines.jsonl` HAS been regenerated**; the
+> pre-correction artifact is preserved as `data/1906BPL_lines.prebanner.jsonl` (199,012 lines) and
+> `data/1906BPL_dropped.prebanner.txt`, because `data/` is git-ignored and those were the only
+> copies every published 1906BPL figure was measured against. **Read [BANNER_CORRECTION.md](BANNER_CORRECTION.md) before re-running stage 1 or
 > trusting a 1906BPL denominator**, including entry_rate's 97.5%, the band A/B, and the 23.5%
 > dispute rate.
 >

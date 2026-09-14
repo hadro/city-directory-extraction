@@ -177,12 +177,56 @@ The 37 newly-surviving ones are triples — three people in one record:
 'Coleman Adolphine wid Davis h 137 Penn Annie wid h 28 Fleet pi Arthur elk h 199 Cornelia'
 ```
 
-**Not yet implemented, and two things must happen first.** The gate's `DEEP_INDENT = 4.4` is
-calibrated on 1906BPL's indent bimodality *alone*, and Trow prints its ditto glued to the given
-name (`-Michl`, no space — see `normalize_ditto_lead`'s KNOWN GAP), so the parent classifier would
-read a Trow ditto line as a full-surname parent and fire the gate on **genuine** wraps. Confirm the
-two-mode structure on a Trow and one further publisher. And the 310 rests on the same regex proxy
-flagged above; it wants ~80 targeted labels.
+### Implemented as `--deep-indent-gate`, OPT-IN, and the reason is the interesting part
+
+The cross-volume check was run before shipping it, and it changed the answer.
+
+**The control group is free and needs no labels**: a parent ending in `-` is unambiguous proof of
+a wrap. Share of those PROVEN wraps sitting *below* the 4.4 threshold:
+
+| volume | proven wraps | below 4.4 |
+|---|---|---|
+| 1906BPL | 909 | **38%** |
+| 1856BPL (Smith) | 1,120 | **61%** |
+| longworth1798 | 6 | 33% |
+
+**Indent alone does not separate wraps from merges on any volume.** On 1906BPL the gate is safe
+anyway, because `word_parent` exempts hyphen parents and that volume's remaining non-hyphen wraps
+are rare in the band. On 1856BPL it is not — Smith breaks addresses at word boundaries, with no
+hyphen to protect them:
+
+```
+'Wood Jonathan, gardener, h. Pacific st. n.'      + 'Washington av.'
+'Farrar Charles, liquors, 91 South, N. Y. h. 67'  + 'Hicks'
+```
+
+Trow 1915 was probed **first**, because it glues its ditto to the given name (`-Michl`) and was the
+expected failure case. It was not: 5 blocked joins in 298, four of them ad copy. The failure came
+from the volume nobody suspected — which is the argument for opt-in rather than for a better guess
+at the constant. (Incidentally: that Trow volume's hOCR is **1.47 GB**, 5x 1906BPL. The storage node
+ignored the Range request and returned the whole file. PIPELINE.md's "~291 MB per volume, 291
+volumes would be 50–60 GB" is low by a lot for Trow NYC.)
+
+### How this was nearly missed — the same error twice in one file
+
+The first hand-check sampled the composites the gate **caught**, selected on
+both-halves-entry-shaped, and scored 14/14. That is precision on the caught set and says nothing
+about what is cut. The uniform sample of the **cut** — 30 blocked joins on 1906BPL — is the number
+that matters: **17 false merges, 13 ad/OCR fragments, ZERO real wraps.** Good, but it had to be
+measured rather than assumed, and the first number could not have shown it.
+
+Selecting on what a rule keeps and never looking at what it removes is precisely what
+`--dump-dropped` exists to prevent, and it happened anyway, in the same session that found the
+`banner` bug by doing the opposite.
+
+### The principled fix, not implemented
+
+Calibrate `DEEP_INDENT` per volume from that volume's own hyphen-break distribution — free, no
+labels. Not done here because on 1906BPL a threshold below the hyphen p25 (3.91) would gate almost
+nothing and give up most of the 310. **The constant and the control group disagree about 1906BPL
+itself**, and that has to be resolved before a self-calibrating version can be trusted.
+
+The 310 also still rests on the regex proxy flagged above; it wants ~80 targeted labels.
 
 Two fixes measured alongside it were **rejected** and should not be retried without new evidence:
 

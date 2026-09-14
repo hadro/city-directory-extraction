@@ -290,9 +290,47 @@ def text_reject(line: str):
 INDENT_RATIO = 3.0       # a next line starting this many median-heights right = a continuation
 VGAP_RATIO = 2.5         # ...and no further than this below the line it continues
 OVERLAP_FRAC = 0.3       # ...and horizontally overlapping it, i.e. the same column
+# ...but under --deep-indent-gate a FULL-SURNAME parent needs this much. OPT-IN, and the reason is
+# in join_wraps: 4.4 is calibrated on 1906BPL and is NOT volume-general. It is safe there (a
+# uniform sample of 30 blocked joins: 17 false merges, 13 ad/OCR junk, ZERO real wraps) and unsafe
+# on 1856BPL, which wraps addresses at word boundaries with no hyphen to protect them.
+DEEP_INDENT = 4.4
 
 
-def join_wraps(lines, med_h):
+def word_parent(text):
+    """True when this line begins with a real surname rather than a ditto mark.
+
+    The continuation indent is bimodal BY PARENT TYPE, which is the whole basis of the deep-indent
+    gate in join_wraps. A ditto-led parent's left edge sits slightly right of the column margin
+    (the mark is a narrow glyph), so its continuations measure a SMALLER indent than a
+    full-surname parent's. Measured over 9,097 joins on 300 1906BPL leaves:
+
+        mark-parent (ditto entry)    indent median 3.87   p05 3.48
+        word-parent (full surname)   indent median 5.22   p05 3.70   p10 4.65
+
+    `INDENT_RATIO = 3.0` admits both, and the word-parent lines below ~4.4 are overwhelmingly not
+    continuations at all -- they are THE NEXT ENTRY, a ditto line whose mark ABBYY dropped.
+
+    Uses DITTO_SHAPE, defined further down with the ditto-lead machinery: resolved at call time,
+    and shared ON PURPOSE so the two places that ask "is this token a mark?" cannot drift apart.
+
+    Two exclusions, both measured, both load-bearing:
+
+    * **A first token under 2 chars is a MANGLED MARK, not a surname.** `w Patrick liquors 101
+      Nassau ay h 603` + `Morgan av` is a real wrap whose ditto ABBYY read as `w`; without this
+      the gate blocked it. 12.4% of the raw cell.
+    * **A parent ending in `-` is a hyphenated word-break**, which is unambiguous proof of a wrap,
+      so the gate never applies to one. 12.7% of the raw cell had one -- ABOVE the 10.8% base rate
+      among all joins, so these were guaranteed real wraps being blocked. A 22-line eyeball sample
+      showed none of them; the rate only appeared when it was counted. That is the second time in
+      this file's history that reading a small sample agreed with the wrong answer.
+    """
+    t = text.split()
+    return (bool(t) and len(t[0]) >= 2 and any(c.isalpha() for c in t[0])
+            and not DITTO_SHAPE.match(t[0]) and not text.rstrip().endswith("-"))
+
+
+def join_wraps(lines, med_h, deep_indent=False):
     """Join wrapped entries into one line. Returns ([(box, text, height)], n_joins).
 
     GROUND_TRUTH_HANDOFF conventions 9a and 15: a printed entry that overflows its column
@@ -306,19 +344,79 @@ def join_wraps(lines, med_h):
     a continuation like "259 Himrod" is short enough to look like page furniture on its own,
     which is why joining has to happen BEFORE filtering.
 
-    Deliberately local: it compares each line only with the one before it, so it needs no
-    column model. That is what makes it survive the multi-modal left edges that defeated column
-    detection (see page_geometry).
+    Deliberately local: it compares each line only with the ACCUMULATED entry before it (not the
+    previous raw line), so it needs no column model. That is what makes it survive the multi-modal
+    left edges that defeated column detection (see page_geometry), and it is also why a third
+    printed line can join at all. The vgap is measured from the FIRST segment's top, which caps an
+    entry at ~3 printed lines: line 4 lands past `VGAP_RATIO` and is emitted separately, leaving a
+    dangling hyphen on 416 lines of 1906BPL (0.21%) plus an orphan tail line each. Measuring the
+    vgap from the previous segment instead was tried and REJECTED -- it does what it intends
+    (3+ segment joins 104 -> 199, dangling hyphens -18%) and loses 475 kept lines doing it,
+    because the longer union boxes trip `banner` more often.
+
+    THE DEEP-INDENT GATE (`deep_indent=True`, CLI `--deep-indent-gate`) is OPT-IN, and the
+    reason it is not a default is the most useful thing in this docstring -- see the end.
+    With it, a full-surname parent must clear `DEEP_INDENT` rather than `INDENT_RATIO`. Without
+    it the rule merges CONSECUTIVE ENTRIES whose ditto mark the OCR dropped, producing a
+    confidently wrong composite person:
+
+        'Faye Alfred M h 249 Prospect pi' + 'Edwin M elk h 174 Johnson'
+        'Olmer Jos restaurant 51 Broad Mhtn h 143 Himrod' + 'Mary wid August h 143 Himrod'
+
+    Measured whole-volume on 1906BPL: 754 joins in the gated cell, of which **310 survived every
+    filter as a fabricated composite**, and 311 split into two separately-surviving records when
+    blocked -- so the gate converts ~310 fabrications into ~620 correct entries. Fourteen random
+    survivors were hand-read and all fourteen were two entries glued; 37 are triples
+    (`Coleman Adolphine wid Davis h 137 Penn Annie wid h 28 Fleet pi Arthur elk h 199 Cornelia`).
+
+    The composite count rose 273 -> 310 when the `banner` normalizer was fixed, because a false
+    merge that used to be dropped as over-wide now survives as a record. The two bugs were
+    partially masking each other.
+
+    ⚠️ WHY IT IS OPT-IN: 4.4 IS CALIBRATED ON 1906BPL AND DOES NOT TRANSFER. The honest control
+    group is a parent ending in `-`, unambiguous proof of a wrap, needing no judgement. Share of
+    those PROVEN wraps sitting BELOW the 4.4 threshold:
+
+        1906BPL  38% of 909      1856BPL  61% of 1,120      longworth1798  33% of 6
+
+    So indent alone does not separate wraps from merges on ANY volume. On 1906BPL the gate is
+    safe regardless, because `word_parent` exempts hyphen parents and this volume's remaining
+    non-hyphen wraps are rare in the band -- a UNIFORM sample of 30 blocked joins found 17 false
+    merges, 13 ad/OCR fragments and ZERO real wraps. On 1856BPL it is not safe: Smith breaks
+    addresses at word boundaries with no hyphen to protect them, so real wraps land in the band --
+
+        'Wood Jonathan, gardener, h. Pacific st. n.'     + 'Washington av.'
+        'Farrar Charles, liquors, 91 South, N. Y. h. 67' + 'Hicks'
+
+    Trow 1915 was probed FIRST because it glues its ditto to the given name (`-Michl`) and was the
+    expected failure case. It was not -- 5 blocked joins in 298, four of them ad copy. The failure
+    came from the volume nobody suspected, which is the argument for opt-in rather than for a
+    better guess at the constant.
+
+    HOW THIS WAS NEARLY MISSED, the same error twice in one file: the first hand-check sampled the
+    composites the gate CAUGHT (selected on both-halves-entry-shaped) and scored 14/14. That is
+    precision on the caught set and says nothing about what is cut. The uniform sample of the CUT
+    is the number above. Selecting on what a rule keeps and never looking at what it removes is
+    exactly what `--dump-dropped` exists to prevent, and it still happened.
+
+    THE PRINCIPLED FIX, not implemented: calibrate `DEEP_INDENT` per volume from that volume's own
+    hyphen-break distribution -- free, and no labels. Not done here because on 1906BPL a threshold
+    below the hyphen p25 (3.91) would gate almost nothing and give up most of the 310. The
+    constant and the control group disagree about 1906BPL itself, and that has to be resolved
+    before a self-calibrating version can be trusted.
 
     `height` is carried separately because the joined box spans two printed lines and would
     otherwise trip the `bigtype` rule. Geometry tests use the first segment's height; the union
-    box is kept for provenance.
+    box is kept for provenance. The union WIDTH is deliberately NOT corrected the same way:
+    testing `banner` against the widest segment instead recovers 4 lines per 300 leaves, because
+    58% of banner drops are single-segment and joining is not what makes lines wide.
     """
     out, joins = [], 0
     for box, text in lines:
         if out:
             pb, pt, ph = out[-1]
-            if (box[0] - pb[0] > INDENT_RATIO * med_h
+            floor = DEEP_INDENT if (deep_indent and word_parent(pt)) else INDENT_RATIO
+            if (box[0] - pb[0] > floor * med_h
                     and 0 < box[1] - pb[1] < VGAP_RATIO * med_h
                     and min(box[2], pb[2]) - max(box[0], pb[0]) > OVERLAP_FRAC * (box[2] - box[0])):
                 sep = "" if pt.endswith("-") else " "
@@ -757,7 +855,7 @@ def leaf_bands(buffered, marks, pad=BAND_PAD, min_lines=BAND_MIN_DITTO_LINES):
 
 
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
-          normalize_dittos=True, confirmed_marks=(), band=True):
+          normalize_dittos=True, confirmed_marks=(), band=True, deep_indent=False):
     """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
 
     Kept lines are buffered rather than streamed so the ditto-lead frequency gate can see the
@@ -782,7 +880,7 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
         # filter would discard it, and the entry it belongs to would silently lose its address.
         med_h_raw = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
         if join:
-            lines, joins = join_wraps(raw, med_h_raw)
+            lines, joins = join_wraps(raw, med_h_raw, deep_indent)
             stats["joins"] += joins
         else:
             lines = [(b, t, b[3] - b[1]) for b, t in raw]
@@ -953,6 +1051,52 @@ def _self_test() -> int:
            ((190, 300, 380, 318), "Smith John clk 12 Pine")]
     assert join_wraps(far, 18)[1] == 0
 
+    # --- the DEEP-INDENT gate (word_parent). Cases are real 1906BPL lines. ---------------------
+    # A full-surname parent plus a SHALLOW indent is the next entry, not a continuation: a ditto
+    # line whose mark the OCR dropped. Joining them fabricates a composite person.
+    assert word_parent("Faye Alfred M h 249 Prospect pi")
+    merge = [((400, 100, 800, 118), "Faye Alfred M h 249 Prospect pi"),
+             ((472, 122, 860, 140), "Edwin M elk h 174 Johnson")]      # indent 72/18 = 4.0
+    # OFF BY DEFAULT: the unguarded rule merges the next entry, which is the bug the flag fixes.
+    assert join_wraps(merge, 18)[1] == 1, "default must stay the pre-gate behaviour"
+    assert join_wraps(merge, 18, deep_indent=True)[1] == 0, \
+        "with the gate, a shallow-indent word parent must NOT absorb the next entry"
+    # ...and the same parent DOES take a genuine continuation at the deeper wrap indent
+    wrap = [((400, 100, 800, 118), "Faye Alfred M h 249 Prospect"),
+            ((490, 122, 700, 140), "pi cor Sixth av")]                 # indent 90/18 = 5.0
+    assert join_wraps(wrap, 18, deep_indent=True)[1] == 1
+
+    # A ditto-led parent keeps the shallow INDENT_RATIO -- its left edge already sits right of the
+    # column margin, so its real continuations measure a smaller indent (3.87 median vs 5.22).
+    assert not word_parent('44 Rob’t J jeweler 31 Gold Mhtn h 83')
+    ditto = [((430, 100, 800, 118), "44 Rob’t J jeweler 31 Gold Mhtn h 83"),
+             ((502, 122, 640, 140), "Garfield pi")]                    # indent 72/18 = 4.0
+    assert join_wraps(ditto, 18, deep_indent=True)[1] == 1, "a ditto parent's real wrap must join"
+
+    # A 1-char leading token is a MANGLED mark, not a surname: `w` here was a ditto ABBYY misread.
+    assert not word_parent("w Patrick liquors 101 Nassau ay h 603")
+    mangled = [((400, 100, 800, 118), "w Patrick liquors 101 Nassau ay h 603"),
+               ((472, 122, 620, 140), "Morgan av")]
+    assert join_wraps(mangled, 18, deep_indent=True)[1] == 1, \
+        "a mangled mark must not be read as a surname"
+
+    # A hyphenated word-break is unambiguous proof of a wrap, so the gate never applies to it.
+    # This exemption is load-bearing: 38% of 1906BPL's PROVEN wraps sit below DEEP_INDENT.
+    assert not word_parent("Petersen Andreas foreman h 294 Hem-")
+    brk = [((400, 100, 800, 118), "Petersen Andreas foreman h 294 Hem-"),
+           ((472, 122, 600, 140), "street")]                           # shallow, but hyphenated
+    assert join_wraps(brk, 18, deep_indent=True)[0][0][1] == \
+        "Petersen Andreas foreman h 294 Hemstreet"
+
+    # The 1856BPL failure that made this opt-in: Smith wraps addresses at a word boundary, so a
+    # REAL continuation lands in the gated band with no hyphen to protect it. Recorded as a known
+    # false positive of the flag, not as a passing case.
+    smith = [((400, 100, 800, 118), "Wood Jonathan, gardener, h. Pacific st. n."),
+             ((462, 122, 700, 140), "Washington av.")]                 # indent 62/18 = 3.4
+    assert join_wraps(smith, 18)[1] == 1, "default keeps Smith's real wrap"
+    assert join_wraps(smith, 18, deep_indent=True)[1] == 0, \
+        "and the flag destroys it -- this is why it is not a default"
+
     # margins: three dense clusters; junk in the gutter matches none of them
     ms = left_margins(boxes)
     assert ms == [(100, 100), (500, 500), (900, 900)], ms
@@ -1081,6 +1225,16 @@ def main(argv=None) -> int:
                          "points of cut). OFF by default because it also cuts outdented "
                          "column-leading entries -- see margin_reject(). Optional px tolerance, "
                          "default 40.")
+    ap.add_argument("--deep-indent-gate", action="store_true",
+                    help="stop join_wraps merging the NEXT ENTRY into the one above it when a "
+                         "ditto mark was dropped by the OCR. On 1906BPL this blocks 779 joins and "
+                         "converts ~310 fabricated composite people into ~620 correct records; a "
+                         "uniform sample of 30 blocked joins found ZERO real wraps. OPT-IN because "
+                         "the %.1f threshold is calibrated on that volume and does NOT transfer -- "
+                         "on 1856BPL it destroys real wraps, because Smith breaks addresses at word "
+                         "boundaries with no hyphen to protect them. Read join_wraps before turning "
+                         "this on for a volume it has not been checked against, and check it with "
+                         "--no-join as the comparison." % DEEP_INDENT)
     ap.add_argument("--no-ditto-normalize", action="store_true",
                     help="do NOT rewrite a leading ditto mark to '\"'. Default is to rewrite it: "
                          "measured p=0.0010 that the OCR'd form makes the model swallow the "
@@ -1170,7 +1324,7 @@ def main(argv=None) -> int:
             item, publisher, year, leaves, not args.no_geometry, args.drop_off_margin,
             not args.no_join, dropped_fh, out_fh, not args.no_ditto_normalize,
             confirmed_marks=tuple(args.ditto_marks.split(",")) if args.ditto_marks else (),
-            band=not args.no_band)
+            band=not args.no_band, deep_indent=args.deep_indent_gate)
     if dropped_fh:
         dropped_fh.close()
 

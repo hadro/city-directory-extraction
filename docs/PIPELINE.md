@@ -58,10 +58,15 @@ produced *one* distinct output across all three, zero rows differing. Don't spen
 
 ```bash
 python3 data_prep/ia_volume_to_jsonl.py --ident 1906BPL \
+    --deep-indent-gate \
     --out data/1906BPL_lines.jsonl \
     --dump-dropped data/1906BPL_dropped.txt \
     --ditto-review results/ditto_review_1906BPL.tsv
 ```
+
+`--deep-indent-gate` is OPT-IN and is shown here because 1906BPL is the volume it was validated
+on. **Do not copy it to a new volume without reading `join_wraps` first** — the threshold is
+calibrated on this book and destroys real wraps on 1856BPL.
 
 No images downloaded, no OCR run, no GPU — IA already OCR'd 291 of the catalog's volumes and that
 OCR was measured good enough to use (CER-all 0.067 excluding one dead volume).
@@ -72,36 +77,44 @@ elements. Same words, 4.5× the error, purely from line segmentation.
 
 ### What it does, in order
 
-1. **Joins wrapped entries first.** 12.8% of hOCR lines are continuations. Joining *before*
+1. **Joins wrapped entries first.** 11.0% of hOCR lines are continuations (36,417 of 329,989 with
+   `--deep-indent-gate`; 12.7% of *candidates*, and 12.8% without the gate). Joining *before*
    filtering matters — a continuation like `259 Himrod` is short enough that the text filter would
    drop it, taking the address off the entry above.
 2. **Text filter** — page numbers, ALL-CAPS running heads, sub-8-char fragments, non-ASCII garbage.
    **Keeps 72.5% whole-volume on 1906BPL** (the 76% in the script's docstring is a 14-leaf sample;
    see [FIGURE_AUDIT.md](FIGURE_AUDIT.md)). **It is not an entry detector** and happily passes ad
    copy.
-3. **Geometry filter** — drops lines >2× the page's median line height (`bigtype`) or >1.5× the
-   median width (`banner`). Judged against each page's own medians, so one setting spans an 1786
-   single-column folio and a 1933 six-column Polk. **Not validated against gold** — no box-level
-   gold exists.
+3. **Geometry filter** — drops lines >2× the page's median line height (`bigtype`) or >1.4× its
+   **body line width** (`banner`). Judged against each page's own distribution, so one setting spans
+   an 1786 single-column folio and a 1933 six-column Polk. `banner` normalizes by `body_width()`,
+   **not** a plain median: widths are bimodal and the plain median sits inside the body cluster,
+   which is the bug fixed on 2026-09-13. **Still not validated against gold** — no box-level gold
+   exists.
 4. **Ditto normalization** (see below), applied *at emission*, after every filter has seen the
    original text.
 5. **Band marking** — `context.band` = `head` / `body` / `foot` / `null`. See below.
 
 ### Measured throughput
 
-> ⚠️ **These kept-counts are PRE-CORRECTION and the code no longer produces them.** The `banner`
-> geometry rule was normalizing by a plain median over a bimodal width distribution and was cutting
-> real entries at roughly the rate it cut advertising (1,038 entry-shaped killed / 951 non-entries
-> caught per 300 leaves). Fixed 2026-09-13 — **1906BPL now keeps 205,103 (70.1%)** and micro13
-> **2,899 (83.8%)**. `data/1906BPL_lines.jsonl` was deliberately NOT regenerated, so the 199,012
-> figures below remain exact *for that artifact* and for everything measured on it.
-> Full record, and the list of what is pinned to the old file:
+> ⚠️ **`data/1906BPL_lines.jsonl` WAS REGENERATED on 2026-09-13** and now holds 205,590 lines, not
+> 199,012. The `banner` rule was normalizing by a plain median over a bimodal width distribution and
+> was cutting real entries at about the rate it cut advertising (1,038 entry-shaped killed / 951
+> non-entries caught per 300 leaves). The pre-correction artifact is preserved as
+> `data/1906BPL_lines.prebanner.jsonl` + `data/1906BPL_dropped.prebanner.txt` — `data/` is
+> git-ignored, and those were the only copies every published 1906BPL figure was measured against.
+> **Any figure quoted elsewhere against 199,012 is still exact for the `.prebanner.` file and is now
+> measuring a population the pipeline no longer produces.** Full record and the pinned-figure list:
 > **[BANNER_CORRECTION.md](BANNER_CORRECTION.md)**.
 
-| volume | leaves | hOCR lines | joins | candidates | kept (as shipped) | kept (current code) |
-|---|---|---|---|---|---|---|
-| 1906BPL (ABBYY scan) | 1,240 | 329,989 | 37,196 | 292,793 | **199,012 (68.0%)** | **205,103 (70.1%)** |
-| micro_IABROOKLYN_0013 (tesseract microfilm) | ~100 | 3,676 | — | 3,460 | **2,889 (83.5%)** | **2,899 (83.8%)** |
+| volume | leaves | hOCR lines | joins | candidates | kept |
+|---|---|---|---|---|---|
+| 1906BPL — **current artifact** (banner fix + `--deep-indent-gate`) | 1,240 | 329,989 | 36,417 | 293,572 | **205,590 (70.0%)** |
+| 1906BPL — banner fix only, no gate | 1,240 | 329,989 | 37,196 | 292,793 | 205,103 (70.1%) |
+| 1906BPL — pre-correction (`*.prebanner.*`) | 1,240 | 329,989 | 37,196 | 292,793 | 199,012 (68.0%) |
+| micro_IABROOKLYN_0013 (tesseract microfilm) | ~100 | 3,676 | 216 | 3,460 | **2,899 (83.8%)** (was 2,889) |
+
+The gate blocks 779 joins, which is why candidates rise 292,793 → 293,572 while joins fall.
 
 Cache is `data/ia_cache/`, **~291 MB per volume** against ~1 MB of output. **Discard it per volume
 on a corpus sweep** — 291 volumes would be 50–60 GB.
@@ -109,7 +122,7 @@ on a corpus sweep** — 291 volumes would be 50–60 GB.
 ### Ditto normalization — on by default, and the part most worth understanding
 
 A surname-repeat ditto is printed `"`, and ABBYY reads it as `44`. On 1906BPL **`44` is the single
-most common leading token in the book — 84,053 of 199,012 lines (42%)** — and the generator never
+most common leading token in the book — 41.5% of the 205,590 kept lines** — and the generator never
 emitted it, so it is out of distribution for every adapter.
 
 It is not cosmetic. Measured n=500 paired rows, McNemar exact **p=0.0010**:

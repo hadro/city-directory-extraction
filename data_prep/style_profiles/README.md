@@ -32,6 +32,12 @@ the lever for closing the synth→real gap.
   trust the preface / your eye over the detector for `column_count`.
 - **`--front 12` is too shallow** for ad-heavy volumes; use ~**20** (Trow's key page sits ~canvas 14
   behind a wall of ad pages + a foldout map + an index-to-advertisers).
+- **`--front 20` is also too shallow, and "front matter" is the wrong place to look.** Hearne 1852's
+  key page is **leaf 27** — and it is not front matter at all: the legend is printed at the *head of
+  the "A" listings*, with the first entries following it on the same page. The card sat on
+  "no legend reached / meaning uncertain" for ~3 months because the sample stopped at 20. **If a
+  front sample finds no legend, sample the listing-start page before recording the conventions as
+  inferred** — a legend that resolves a marker is worth more than the leaves it costs to reach.
 - **`page_offset` drifts** (Trow: ≈ −1 near the front, ≈ +9 by p.353) because of unpaginated plates;
   record it as a local anchor near the listing start, not a global constant.
 

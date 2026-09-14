@@ -193,7 +193,7 @@
         "full_surname_repeated": true,
         "street_relation_grammar": true,
         "office_in_parens": true,
-        "star_prefix_uncertain": true
+        "star_prefix_race_colored": true
       },
       "markers": {
         "home": "h",
@@ -223,7 +223,7 @@
         "house": "h",
         "works_in_new_york": "NY"
       },
-      "legend_completeness": "inferred",
+      "legend_completeness": "key_page",
       "samples": [
         "Evans Ira P, grocer 79 Front NY h Union c Court",
         "EVANS MARTIN, druggist (Alderman 7th ward) Myrtle c ...",
@@ -231,7 +231,20 @@
         "Slade John, widow 58 Fulton",
         "*Flood Alvy, barber 82 Atlantic h 177 Adams"
       ],
-      "notes": "Brooklyn street-relation grammar: many entries give location relative to cross/named streets (n/c/b/op) instead of a house number. 'NY' = works in Manhattan (commuter), usually + 'h' Brooklyn home. Officials in ALL CAPS with office in parens. '*' prefix on some names = uncertain (late-add/removed?)."
+      "notes": "Brooklyn street-relation grammar: many entries give location relative to cross/named streets (n/c/b/op) instead of a house number. 'NY' = works in Manhattan (commuter), usually + 'h' Brooklyn home. Officials in ALL CAPS with office in parens. '*' prefix = COLORED (race marker), resolved from the key page at leaf 27 -- the legend sits at the head of the 'A' listings, not in front matter, which is why a --front 20 sample missed it. Ogden sense, NOT the Hope & Henderson Eastern-District sense. Legend prints abbreviations with periods (h. n. c. op. b.) but the listings never do (h 3216 bare / 0 dotted; n 6277/0; c 2468/1) -- follow the listings.",
+      "key_page_leaf": 27,
+      "legend_verbatim": "NOTE.-Names having a * are the names of colored people.- Abbreviations: h. stands for house, n. for near, c. for corner, op. for opposite, b. for between. The precise location of residences thus described, may be ascertained by reference to the STREET DIRECTORY.",
+      "race_marker": {
+        "printed": "*",
+        "means": "colored",
+        "field": "race_designation",
+        "value": "*",
+        "keep_off_name": true,
+        "measured_rate": 0.013,
+        "measured": "312 asterisked lines on 151 of 584 pages (hearnesbrooklync1852unse, full pipeline run)",
+        "same_sense_as": "publisher tag 'ogden' (Ogden 1839; no consolidated profile -- see synth_persons.py)",
+        "opposite_sense_to": "publisher tag 'hopehenderson' (Eastern District, geographic -> dropped)"
+      }
     },
     "spooner_brooklyn_1840s": {
       "publisher": "Spooner (publisher) / Teale (compiler)",

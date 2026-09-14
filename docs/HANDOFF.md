@@ -2282,6 +2282,72 @@ no benefit from this" — 1915 got 8.7% of lines normalized), and surfaced a rea
 `.1` (98% name-followed) and `,1` (99%) miss the 5% digit gate purely for containing a digit.
 Next-steps #18, #19, #20.
 
+## HEARNE 1852 `*` = COLORED — the key page was there all along (2026-09-14)
+
+A full 584-page run of `hearnesbrooklync1852unse` exists in the sibling **`directory-pipeline`**
+project (`~/github/directory-pipeline/output/hearnes_brooklyn_city_directory_for_hearnesbrooklync1852/`,
+≈2 GB, **not** copied into this repo). Reading its OCR settles a marker this repo had recorded as
+unresolved for ~3 months.
+
+**Leaf 27 is Hearne 1852's abbreviations key page**, and it prints:
+
+> NOTE.—Names having a `*` are the names of colored people.— Abbreviations: h. stands for house,
+> n. for near, c. for corner, op. for opposite, b. for between. The precise location of residences
+> thus described, may be ascertained by reference to the STREET DIRECTORY.
+
+The card had `*` as "**uncertain** (possibly late addition or 'removed')". It is a **race marker**,
+in the **Ogden sense**, not the Hope & Henderson Eastern-District sense. Why it was missed: the
+legend is **not front matter** — it sits at the head of the "A" listings (leaf 26 is still a
+full-page ad), so the `--front 20` sample stopped 7 leaves short. Lesson recorded in
+`style_profiles/README.md`: *if a front sample finds no legend, sample the listing-start page.*
+
+Measured over the volume: **312 asterisked entry lines on 151 of 584 pages, ≈1.3%** of
+entry-shaped lines (Ogden 1839 runs ≈11%). Asterisked households cluster (107 Navy, 31 Chapel,
+103 Concord). This is the only racial identification the volume carries.
+
+**Landed:** `style_profiles/hearne_brooklyn_1850s.md` (legend verbatim, key page, `*` resolved,
+measured offset curve, the pipeline-output pointer + its two join traps),
+`style_profiles/style_profiles.json` (`star_prefix_uncertain` → `star_prefix_race_colored`,
+`legend_completeness: inferred → key_page`, new `race_marker` block),
+`master_directories.csv` (`key_page=27`, `start_page=28`, offset `12→10`, notes),
+`GROUND_TRUTH_HANDOFF.md` conv #10 (Hearne added), `style_profiles/README.md` (the sampling lesson).
+
+**Two things this opens — both still OPEN:**
+
+1. **The generator emits the wrong printed form for `hearne` rows.** `synth_persons.py` keys `*` by
+   publisher (`~line 1040`): `ogden` → `race_designation="*"`, `hopehenderson` → raw-only star
+   dropped, **`else` → textual `col'd`/`(col'd)`/`colored`/`col` at 1.5%**. `hearne` is an active
+   tag (weight 2 for year ≤1855, and in `NYC_OUTER_PUBLISHERS`) and falls in that `else`. Measured
+   over `synth_train.jsonl` + `synth_train_250k.jsonl` (350k rows):
+
+   | publisher | rows | race forms emitted |
+   |---|---|---|
+   | `ogden` | 1323 | `*` ×266, raw starts `*` ×265 — **correct** |
+   | `hearne` | 2617 | `col'd` ×18, `(col'd)` ×5, `colored` ×4, `col` ×4, `cold.` ×1 — **`*` ×0** |
+   | `hopehenderson` | 4838 | raw starts `*` ×595 (dropped from record), `col'd` ×44 — **correct** |
+
+   So every generated hearne row expresses race as a textual token the volume **never prints**, and
+   never as the `*` it actually sets. The *rate* is right by accident — 32/2617 = **1.22%**
+   generated vs **1.3%** measured real — so **aggregate field stats hide this completely**; only the
+   surface form is wrong. Fix = give `hearne` the `ogden` branch.
+   Note this makes the `*` split **2-vs-1 and all-Brooklyn** (ogden + hearne = race,
+   hopehenderson = geographic): city cannot disambiguate `*`, only the publisher tag can.
+2. **`data/hearne1852_eval.jsonl` gives zero signal on it.** 52 lines, drawn from the *microfilm*
+   `micro_IABROOKLYN_0030`, with **0 asterisked `raw_line`s and 0 populated `race_designation`**.
+   Whatever the generator fix does to hearne race handling, the current eval cannot see it. The
+   584-page run is a ready-made harvest source for the missing rows (312 candidates, with
+   line-level bboxes + IIIF canvas fragments already aligned).
+
+**The ingest path that would make item 2 routine is planned but not built:**
+[PIPELINE_INGEST_PLAN.md](PIPELINE_INGEST_PLAN.md) — `directory-pipeline` output →
+`{raw_line, context, record}` JSONL, the sibling of `ia_volume_to_jsonl.py`. That output tree holds
+**94 dirs / 19,748 aligned pages / 9 OCR engines** this repo currently cannot read, including full
+sweeps of **Tulsa 1921 + 1922** (a panel volume with no IA identifier, so the IA path can never
+reach it). The plan carries the measured traps — the filename prefix is not the leaf, `bbox` is in
+JPEG space while `canvas_width/height` is the jp2 canvas (9.9% apart), and Hearne's 235
+bracket-overflow lines attach in **both** directions — plus a page-level leakage guard, which is not
+optional: the `lain_eval.jsonl` gold page is sitting in that tree, aligned three times over.
+
 ## Next steps
 
 Following the approved plan (`~/.claude/plans/i-want-to-slightly-golden-frog.md`). Wave 0 (name

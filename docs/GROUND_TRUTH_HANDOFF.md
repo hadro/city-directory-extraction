@@ -162,8 +162,12 @@ detailed enough to guide a proper Doggett 1850/51 gold set.
     entry). The tool shows the two crops separately, so watch for a line ending mid-phrase.
 
 10. **Race marker → `race_designation`** (verbatim), **volume-specific — read each volume's key page**:
-    Tulsa `(c)`, **Ogden 1839 `*`** = colored; **Hope & Henderson 1856 `*`** = *Eastern District*
-    (geographic, NOT race → dropped, no field) and colored is `col'd`. Same symbol, opposite meaning.
+    Tulsa `(c)`, **Ogden 1839 `*`** = colored, **Hearne 1852 `*`** = colored ("Names having a \* are
+    the names of colored people", key page leaf 27); **Hope & Henderson 1856 `*`** = *Eastern
+    District* (geographic, NOT race → dropped, no field) and colored is `col'd`. Same symbol,
+    opposite meaning — and all three are **Brooklyn**, so the city does not disambiguate it; only the
+    publisher tag does. Where `*` is a race marker it goes to `race_designation` as `"*"` and stays
+    **off** the `name` field.
 11. **Ditto marks → verbatim** — copy `do`/`〃`/`''`; don't resolve to the row above.
 12. **Surname-repeat dash → verbatim** — dense volumes replace a repeated surname with a leading mark:
     Trow `-` (`-Michl` = "Juarez Michl"), Polk `"` (`" J C & Co`). Keep the mark; don't write out the

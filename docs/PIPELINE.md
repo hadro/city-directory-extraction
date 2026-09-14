@@ -7,7 +7,9 @@ Companion docs: [HANDOFF.md](HANDOFF.md) is the working record and the reason ea
 it is; [TAKEOVER.md](TAKEOVER.md) is the cold-start orientation; [GROUND_TRUTH_HANDOFF.md](GROUND_TRUTH_HANDOFF.md)
 is the labeling contract that governs the model's output shape; [FIGURE_AUDIT.md](FIGURE_AUDIT.md)
 records which published figures were re-derived and which were mis-scoped;
-[PAGE_TYPE_CLASSIFIER.md](PAGE_TYPE_CLASSIFIER.md) is the plan for next-step #11, phase 0 run.
+[PAGE_TYPE_CLASSIFIER.md](PAGE_TYPE_CLASSIFIER.md) is the plan for next-step #11, phase 0 run;
+[BANNER_CORRECTION.md](BANNER_CORRECTION.md) records the 2026-09-13 `banner` fix, the regenerated
+1906BPL artifact, and **which published figures are pinned to the pre-correction file**.
 
 > **The one thing to internalize before running anything: the model never refuses.** Feed it a line
 > of advertising and it returns a confidently structured fake person (`address: "entrusted to their
@@ -116,8 +118,31 @@ elements. Same words, 4.5× the error, purely from line segmentation.
 
 The gate blocks 779 joins, which is why candidates rise 292,793 → 293,572 while joins fall.
 
-Cache is `data/ia_cache/`, **~291 MB per volume** against ~1 MB of output. **Discard it per volume
-on a corpus sweep** — 291 volumes would be 50–60 GB.
+Three more volumes were ingested 2026-09-13 to check the filters across publishers and eras. All
+three ran **without** `--deep-indent-gate`:
+
+| volume | publisher | leaves | hOCR lines | joins | candidates | kept |
+|---|---|---|---|---|---|---|
+| `1856BPL` | Smith 1856 | 635 | 77,278 | 3,007 | 74,271 | **61,439 (82.7%)** |
+| `trowsgeneraldire1915trow` | Trow 1915 | 2,466 | 1,690,064 | 36,230 | 1,653,834 | **1,484,446 (89.8%)** |
+| `longworthsameric1798newy` | Longworth 1798 | 186 | — | — | — | **12,002** |
+
+**Trow 1915 is the scale reality check**: 1.48M candidate lines, ~7× 1906BPL. At the 0.38–0.6
+lines/s measured below that is **weeks** of local compute, not days — it is an HPC job or nothing.
+
+**Smith 1856 has no ditto convention at all** (`no mark cleared the gates`, `no leaf had enough
+ditto lines to bound`), so it gets no `context.band` either. That is the honest answer for a volume
+outside the rule, and it is also the precondition that makes `--deep-indent-gate` unsafe there.
+
+Cache is `data/ia_cache/`, and **291 MB per volume is the Brooklyn figure, not the ceiling**.
+Measured 2026-09-13: 1906BPL 291 MB, 1856BPL 63 MB, longworth1798 14 MB — but
+`trowsgeneraldire1915trow` is **1.47 GB**. The Trow NYC volumes are far larger than the Brooklyn
+ones, so "291 volumes ≈ 50–60 GB" is low for any sweep that includes them. **Discard the cache per
+volume on a corpus sweep.**
+
+Note also that IA's storage node sometimes **ignores a Range request and returns the whole file**
+(`_range_get` handles this and caches the result). On a 1.47 GB volume a `--leaves` subset probe
+therefore costs the full download once, not the 22 pages you asked for.
 
 ### Ditto normalization — on by default, and the part most worth understanding
 
@@ -454,6 +479,14 @@ share, name-follower ratio and a sample line. The strong ones are obvious on sig
 `--ditto-marks` recovers **~800 lines** the conservative gate gave up. Per volume, and record which
 volume it was decided for.
 
+> **Trow 1915 is the bigger prize and the candidates are already identified.**
+> `results/ditto_review_trow1915.tsv`: `.1` (10,633 lines, 0.72% share, **98%** name-followed) and
+> `,1` (3,502, 0.24%, **99%**) both miss the 5% *digit* gate purely for containing a digit.
+> `--ditto-marks .1,,1` admits them plus `"` and recovers **21,289 lines**. Eyeball the samples
+> first — this is a human review call, which is the whole point of the queue.
+> Queues also exist now for `1856BPL` (nothing worth promoting; that volume has no ditto
+> convention) and `longworth1798`.
+
 **2. A boundary-sensitive quality proxy.** `entry_rate` is blind to the failure that normalization
 fixes, which means **the pipeline currently has no instrument for field-boundary quality at all**.
 A proxy scoring "line contains an occupation token AND `occupation_role` is populated" already
@@ -462,6 +495,25 @@ promoting it to a real instrument is a small job with high leverage on every fut
 
 **3. Make `alpha_run_filter` mark rather than drop.** Removes the structural conflict with ditto
 expansion and makes `--apply` safe to reconsider on its own merits.
+
+**16. Re-run the pinned 1906BPL figures against the regenerated artifact.** `data/1906BPL_lines.jsonl`
+is now 205,590 lines; the figures below it were measured on 199,012 (preserved as
+`data/1906BPL_lines.prebanner.jsonl`). Nothing is retracted — each still reproduces against the
+`.prebanner.` file — but `entry_rate`'s 97.5%, the implied-surname counts and the 23.5% dispute rate
+now describe a population the pipeline no longer produces. **`results/ab_band_fabrication_1906BPL`
+is the urgent one: its stratified draw is pre-registered and is void against a new file**, so
+re-stratify and re-pre-register rather than re-running it. Full list:
+[BANNER_CORRECTION.md](BANNER_CORRECTION.md). *Cheap only because the decisions are already written
+down; the labelling inside #16 is not.*
+
+**17. Guard `--deep-indent-gate` on whether the volume has a ditto convention at all.** The gate is
+safe on 1906BPL (uniform sample of 30 blocked joins: 17 false merges, 13 ad/OCR fragments, zero real
+wraps) and destroys real wraps on 1856BPL. The distinguishing fact is not the threshold — it is that
+**Smith 1856 has no ditto convention, so a shallow indent there is always a real wrap.** Guarding on
+a non-empty admitted mark set makes it safe by construction on that class of volume. ⚠️ **Not as
+cheap as it looks**: marks are calibrated *after* the sweep loop on buffered lines, while joining
+happens *inside* it, so this needs a pre-pass or a second pass. And it would still let the gate fire
+on Trow, where it is unvalidated.
 
 **4. ~~Re-measure `entry_rate` on the thin tier.~~ DONE 2026-09-13 — and it needed no compute.**
 The two published figures were differently scoped: 20.7% was kept-leaves-only (n=2,227) and 10.4%
@@ -486,6 +538,38 @@ median alongside mean, and flag any volume more than some margin below it.
 The paired design is cheap to repeat — pick a Polk or Trow volume with a *different* dominant ditto
 glyph and re-run. **This is the single most load-bearing untested assumption in the pipeline**, since
 normalization is now on by default for every volume.
+
+> **The volume this asks for now exists and the glyphs are known (2026-09-13).**
+> `trowsgeneraldire1915trow` is ingested at 1,484,446 lines with a dominant ditto family that is
+> genuinely different from `44` — `11` (91,431), `,,` (14,866), `..` (13,493), `„` (9,085). The
+> A/B needs no new ingest, only GPU time on a paired sample. Note the scale: run it on a sample,
+> not the volume.
+
+**18. Group ditto OCR variants before gating them.** The gate is per *variant*, but a printed mark
+shatters into several OCR readings and each is gated alone. On 1906BPL the dominant reading `44` is
+41.5% and sails through, which is why this never surfaced; on Trow 1915 one mark scatters six ways
+(`11` `,,` `..` `„` `.1` `,1`) and only four clear their floors. Summing variants that are the same
+glyph would fix it — but that needs a volume where the grouping can be *checked*, not inferred, so
+this is a measurement before it is a change. Found by #19.
+
+**19. Extend the style-card reconciliation.** `data_prep/reconcile_style_profiles.py` compares each
+volume's runtime-derived ditto against its style card. Its first run agreed on 1906BPL, caught the
+Trow card over-generalizing an 1890s observation across [1859, 1922], falsified a claim in
+`normalize_ditto_lead`'s own docstring, and surfaced #18. Two things it wants next: **cards for the
+8 publishers that have a markdown card but no JSON profile** (9 of 17 are consolidated), and a
+**narrowed Trow `year_range` or a 1910s Trow card**. ⚠️ If this is ever wired into anything that
+*decides*, match on the **catalog** publisher, never the trained tag — `micro_IABROOKLYN_0013` is
+tagged `publisher=trow` by `tag_publisher`'s out-of-vocabulary fallback and is an 1836/37 Brooklyn
+volume; only a year mismatch stopped it being compared against a Trow card.
+
+**20. Label the deep-indent gate's blocked joins.** The ~310 fabricated composites it prevents rest
+on a regex proxy for "entry-shaped", which was caught missing `roofer`, `tinsmith` and `cloakmkr`
+during the measurement. ~80 targeted labels over the blocked cell would convert that estimate into a
+figure, and is the precondition for calibrating `DEEP_INDENT` per volume rather than shipping a
+constant. The self-calibrating idea — derive it from each volume's own hyphen-break distribution —
+is blocked on a real conflict: on 1906BPL a threshold below the hyphen p25 (3.91) gates almost
+nothing and gives up most of the 310, so **the constant and the control group disagree about the one
+volume where the gate is validated.**
 
 **6. Attack the 23.5% cross-line dispute rate.** It is concentrated at leaf/column boundaries. The
 fix is better boundary handling, not a better regex. Concretely: use the bbox x-coordinate to detect

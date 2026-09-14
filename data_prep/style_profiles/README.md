@@ -34,3 +34,48 @@ the lever for closing the synth→real gap.
   behind a wall of ad pages + a foldout map + an index-to-advertisers).
 - **`page_offset` drifts** (Trow: ≈ −1 near the front, ≈ +9 by p.353) because of unpaginated plates;
   record it as a local anchor near the listing start, not a global constant.
+
+## Status: nothing consumes these yet (checked 2026-09-13)
+
+Both apparent Python consumers are prose in comments (`nyu_to_eval.py:25`, `eval/evaluate.py:245`);
+`synth_persons.py` does **not** read `style_profiles.json`, despite that file's own `_meta` naming
+it as the consumer. 9 of the 17 markdown cards are consolidated into the JSON, against 449 catalog
+rows.
+
+**They should not be wired into the ingest filters.** Those rules self-calibrate against each
+page's own distribution, which is what lets one setting span an 1786 single-column folio and a 1933
+six-column Polk; a card is per publisher × era, a volume can depart from its family, and 17 cards
+do not cover 449 volumes. `ia_volume_to_jsonl.leaf_bands` reading *"the volume's OWN admitted ditto
+set, never a hard-coded glyph"* is a deliberate stance.
+
+**What they are good for is an outside check, and a precondition for opt-in rules.**
+
+### `data_prep/reconcile_style_profiles.py`
+
+Compares each ingested volume's runtime-derived ditto mark against its card. Two independent
+derivations — a human reading the printed page, and a frequency inference that knows nothing about
+the publisher — that had never been compared.
+
+```bash
+python3 data_prep/reconcile_style_profiles.py data/*_lines.jsonl \
+    --json results/reconcile_style_profiles.json
+```
+
+First run (5 volumes): **1906BPL agrees**, which is the load-bearing result since every published
+figure rests on it — and the card supplies what the run structurally cannot, namely that `44` is
+ABBYY's misreading of `"`. It also found:
+
+- **`trow_manhattan_1890s` over-generalizes.** Its `—` and glued `-Michl` were read off the 1890s
+  volume at printed p.353 and are not what Trow **1915** prints; `year_range` [1859, 1922] projects
+  one volume across 63 years. Annotated in place, not overwritten — it is a human reading of a real
+  page. **Narrow the range or add a 1910s card.**
+- **Longworth and Boyd print a *word* ditto (`do.` / `do`)**, which `DITTO_SHAPE` cannot match at
+  any frequency — structurally invisible, never even reaching the review queue. On the cached 1798
+  Longworth, `do`-variants lead 7 of 13,280 lines (0.05%), so the gap is real but unexercised.
+  **Do not widen `DITTO_SHAPE` until a volume that actually uses it is in hand.**
+
+⚠️ **If a card is ever wired into something that *decides*, match on the CATALOG publisher, never
+the trained tag.** `micro_IABROOKLYN_0013` carries `publisher=trow` from `tag_publisher`'s
+out-of-vocabulary fallback and is an 1836/37 Brooklyn volume; only a year mismatch stopped it being
+compared against a Trow card.
+

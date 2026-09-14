@@ -2216,6 +2216,72 @@ directories** `PHONEBOOK` (separate-model candidate per the user). **Schema gain
 - Possible cleanup: `ingest_collection.py` depends on `requests` (pipeline venv only) — could be made
   stdlib-`urllib` to run standalone from this repo.
 
+## INGEST FILTERS — the `banner` correction and what it dragged out (2026-09-13)
+
+Started as a long-tail question: what happens to a directory entry that runs to three printed
+lines? Ended with two filter bugs, a regenerated volume, three new volumes and a new instrument.
+Canonical record: **[BANNER_CORRECTION.md](BANNER_CORRECTION.md)**. Commits `dcba61e`, `6f6333f`,
+`9ca3ed5`, `4bd2cfc`.
+
+**`banner` was a coin flip.** It normalized by a plain median over a **bimodal** line-width
+distribution — a short-fragment mode (wrap tails, ditto stubs, gutter specks) and the body mode —
+so the median landed at the body's low edge and `1.5 ×` it fell *inside* the body's upper tail.
+Measured on 300 leaves: **1,038 entry-shaped lines killed to catch 951 non-entries.** Fixed with
+`body_width()` (drop the fragment mode, then take a median) at `WIDE_RATIO` 1.4. Identical
+advertising retention on three volumes spanning both OCR tiers and 1798–1906; a tenth of the entry
+kills. **1906BPL 199,012 → 205,590 kept.**
+
+**It hid because only the keep rate was watched at volume scale, and a keep rate cannot
+distinguish cutting advertising from cutting people.** Both look like 68.0%. The docstring's
+"measured on six leaves, no false positives found" was true and useless. Found by reading
+`--dump-dropped`.
+
+**`data/1906BPL_lines.jsonl` was regenerated, and the old one preserved.** `data/` is git-ignored
+and only three label files are tracked, so it was the **only copy** every published 1906BPL figure
+was measured against — now `data/1906BPL_lines.prebanner.jsonl` (199,012) + the matching dropped
+file. Every pinned figure still reproduces against it; each affected results script and doc now
+says so in place. **`ab_band_fabrication`'s stratified draw is pre-registered and is void against
+the new file** — re-stratify, do not just re-run (next-step #16).
+
+**A second bug, opt-in because it does not transfer.** `join_wraps` was merging the *next entry*
+into the one above whenever the OCR dropped a ditto mark, producing composite people
+(`'Faye Alfred M h 249 Prospect pi'` + `'Edwin M elk h 174 Johnson'`). `--deep-indent-gate` blocks
+779 such joins on 1906BPL and converts **~310 fabricated composites into ~620 correct records**.
+It is **off by default**: the 4.4 threshold is calibrated on this volume and destroys real wraps on
+1856BPL, which breaks addresses at word boundaries with no hyphen to protect them. Trow was probed
+*first* as the expected failure case and was fine; the failure came from the volume nobody
+suspected.
+
+⚠️ **The near-miss worth remembering.** The gate's first hand-check sampled the composites it
+*caught*, selected on both-halves-entry-shaped, and scored 14/14. That is precision on the caught
+set and says nothing about what is cut. A **uniform sample of the cut** — 30 blocked joins — is 17
+false merges, 13 ad/OCR fragments, zero real wraps. Same conclusion, but it had to be measured, and
+this happened in the same session that found the `banner` bug by doing exactly the opposite.
+
+**Two fixes measured and REJECTED**, recorded so they are not retried: `banner` on the widest
+segment rather than the union box (4 lines per 300 leaves — 58% of banner drops are single-segment,
+so joining is not what makes lines wide), and measuring the wrap vgap from the previous segment
+instead of the first (does what it intends — 3+ segment joins 104 → 199, dangling hyphens −18% —
+and loses 475 kept lines doing it).
+
+**Three volumes ingested** to check the filters across publishers and eras: `1856BPL` Smith
+(61,439 kept, 82.7%, and **no ditto convention at all**), `trowsgeneraldire1915trow`
+(**1,484,446** kept, 89.8%, from 1.69M hOCR lines — weeks of local compute, an HPC job or nothing)
+and `longworthsameric1798newy` (12,002).
+
+**The style cards were never used by anything, and now have an instrument.**
+`data_prep/reconcile_style_profiles.py` compares each volume's runtime-derived ditto against its
+card — two independent derivations of the same fact that had never been compared. They should NOT
+be wired into the filters (the rules self-calibrate per page, which is what spans 1786→1933; 17
+cards cover 449 rows), but they are the right outside check. First run: **1906BPL agrees** — the
+load-bearing case — and the card supplies what the run structurally cannot, that `44` is ABBYY's
+misreading of `"`. It caught the **Trow card over-generalizing an 1890s observation across
+[1859, 1922]**, **falsified a claim in `normalize_ditto_lead`'s own docstring** ("a Trow volume gets
+no benefit from this" — 1915 got 8.7% of lines normalized), and surfaced a real mechanism:
+**the ditto convention fragments across OCR variants and each is gated independently**, so Trow's
+`.1` (98% name-followed) and `,1` (99%) miss the 5% digit gate purely for containing a digit.
+Next-steps #18, #19, #20.
+
 ## Next steps
 
 Following the approved plan (`~/.claude/plans/i-want-to-slightly-golden-frog.md`). Wave 0 (name

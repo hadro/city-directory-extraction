@@ -1,0 +1,118 @@
+indexed 56,895 surya keys under ../directory-pipeline/output
+  ! 1906BPL_sample500: no surya pages matched its 500 gold rows, skipped
+  ! 1906BPL_sample500_norm: no surya pages matched its 500 gold rows, skipped
+  ! bands_1906BPL: no surya pages matched its 49 gold rows, skipped
+  ! ftd: no surya pages matched its 2000 gold rows, skipped
+  ! micro13_body: no surya pages matched its 120 gold rows, skipped
+  ! micro13_frontmatter: no surya pages matched its 120 gold rows, skipped
+  ! minneapolis: no surya pages matched its 230 gold rows, skipped
+  ! nyu: no surya pages matched its 3000 gold rows, skipped
+
+volume                 gold  align  wrap  changed     CER
+--------------------------------------------------------
+boyd1890                 75     66     1     1.5%  0.0004
+doggett1846              37     37     0     5.4%  0.0038
+doggetts1850            303    303     0    12.9%  0.0416
+duncan1794               58     58     4    10.3%  0.0068
+franks1786               56     56     1    19.6%  0.0087
+hearne1852               52     52     2    11.5%  0.0185
+hopehenderson1856        60     60     3    48.3%  0.0802
+lain1876                103    103     2    17.5%  0.0487
+lain                    800    789    10    26.1%  0.0770
+longworth1818           106    106     0     3.8%  0.0010
+mb1931                  109    106     0    31.1%  0.1853
+mercein1820              60     60     0     3.3%  0.0024
+ogden1839                66     66     1     7.6%  0.0064
+polk1917                 72     68     1    60.3%  0.2552
+polk1925                 40     38     2    68.4%  0.3856
+polk1933bk               49     18     0    94.4%  0.4478
+polk1933si               56     56     1    32.1%  0.0825
+queens1933               62     50     3    96.0%  0.5352
+rode1851                 53     53     0    24.5%  0.0610
+smith1855               185    185     3    43.8%  0.0865
+smith1856               229    229     1    22.7%  0.0724
+trow1884                141    141     2    22.0%  0.0561
+trow1907                 68     68     0    32.4%  0.1059
+trow1913                 93     93     0    81.7%  0.0286
+trowwilson1865          167    167     0    15.6%  0.0190
+tulsa                 1,500  1,297   222    87.3%  0.3557
+--------------------------------------------------------
+ALL                   4,600  4,325   259    45.0%  0.1829
+
+unaligned: 275 gold rows (275 no match >= 0.55, 0 no context.image, 0 page not found)
+  a high no-match count means the OCR is worse than --min-sim allows for, which BIASES
+  the CER downward -- the worst lines are the ones that drop out.
+
+where the OCR damage lands (gold rows with a damaged token in that field):
+  address             1,102   56.7% of changed rows
+  name                  370   19.0% of changed rows
+  home_address          172    8.8% of changed rows
+  occupation_role       154    7.9% of changed rows
+  employer              138    7.1% of changed rows
+  spouse_name             6    0.3% of changed rows
+  race_designation        2    0.1% of changed rows
+
+top confusions (ocr -> printed):
+      '\n' -> ' '        276
+        '' -> '-'         74
+       '.' -> ','         57
+        '' -> ' '         41
+        '' -> ' av.'      36
+      '- ' -> ''          18
+       '*' -> ''          16
+        '' -> ' av'       13
+       'e' -> 'c'         11
+       '½' -> ' 1/2'      11
+        '' -> '" '        11
+       'i' -> 'l'         10
+     '-\n' -> ''          10
+        '' -> '/2'         9
+       ',' -> '.'          8
+      '11' -> '"'          8
+       'e' -> ''           7
+        '' -> '.'          7
+       '.' -> ''           5
+       'i' -> ''           5
+
+corrections the labellers actually made:
+  [boyd1890]
+    ocr : HARRIS E F, N S Coal Co, coal, Main st, and Lawrence ave, h 184 Amity
+    page: HARRIS E F, N S Coal Co, coal, Main st, and Lawrence ave. h 184 Amity
+  [doggett1846]
+    ocr : Foster John T. machinist, r. 29 Ann, h. 270 Stanton]
+    page: Foster John T. machinist, r. 29 Ann, h. 270 Stanton
+  [doggett1846]
+    ocr : Foster Samuel C. porterhouse, 31 Bowery, h. 75 Mul-
+    page: Foster Samuel C. porterhouse, 31 Bowery, h. 75 Mulberry
+  [doggetts1850]
+    ocr : Duffy James A. & Co. drygoods, 520 Grand, h. 520
+    page: Duffy James A. & Co. drygoods, 520 Grand, h. 520 Grand
+
+wrote 4,325 pairs -> data/ocr_pairs.jsonl
+
+_NOISE_SUBS = [   # measured by data_prep/ocr_delta.py --noise-table; (clean, ocr)
+    (' ', '\n'),   # seen 276x
+    (',', '.'),   # seen 57x
+    ('c', 'e'),   # seen 11x
+    (' 1/2', '½'),   # seen 11x
+    ('l', 'i'),   # seen 10x
+    ('.', ','),   # seen 8x
+    ('"', '11'),   # seen 8x
+    ('"', 'n'),   # seen 5x
+    ('s', 'f'),   # seen 4x
+    ('st', 'A'),   # seen 4x
+    ('e', 'c'),   # seen 4x
+    ('i', 'l'),   # seen 4x
+    ('o', 'e'),   # seen 4x
+    ('ton.', '-'),   # seen 4x
+    ('9', '3'),   # seen 3x
+    ('s', 'I'),   # seen 3x
+    ('l', 't'),   # seen 3x
+    ('e', 'a'),   # seen 3x
+    ('h', 'b'),   # seen 3x
+    ('8', '3'),   # seen 3x
+    ('n', 'a'),   # seen 3x
+    ('a', 'e'),   # seen 3x
+    ('e', 'o'),   # seen 3x
+    (' ', '\n\n'),   # seen 3x
+]

@@ -24,7 +24,9 @@ that seam, and [The future split](#the-future-split) documents the interface bet
 > **Current working state lives in the handoff docs, not in the original plan:**
 > [docs/HANDOFF.md](docs/HANDOFF.md) (the model: results, gotchas, next steps),
 > [docs/GROUND_TRUTH_HANDOFF.md](docs/GROUND_TRUTH_HANDOFF.md) (gold panel, labeling contract),
-> [docs/VISUAL_SAMPLING_HANDOFF.md](docs/VISUAL_SAMPLING_HANDOFF.md) (catalog backfill), and
+> [docs/VISUAL_SAMPLING_HANDOFF.md](docs/VISUAL_SAMPLING_HANDOFF.md) (catalog backfill),
+> [docs/POST_OCR_CORRECTION.md](docs/POST_OCR_CORRECTION.md) (whether OCR correction belongs in
+> the pipeline; measured 2026-09-20, and it reversed its own top two recommendations), and
 > [docs/FRONTMATTER_KEYPAGE_HANDOFF.md](docs/FRONTMATTER_KEYPAGE_HANDOFF.md) (key-page /
 > listing-start / page-offset sampling). [docs/plan.md](docs/plan.md) is the original rationale
 > and data landscape — read it for background, the handoffs for truth.
@@ -179,9 +181,16 @@ data_prep/
   run_surya_on_samples.py       # batch Surya OCR over worklist dirs (listing-only; resumable)
   make_gold_tool.py             # self-contained HTML labeling editor from Surya JSON
   validate_gold.py              # QA: ERRORS (break evaluate.py) + WARNINGS (convention slips)
+  ocr_delta.py                  # gold raw_line vs the Surya text it was corrected FROM:
+                                #   recovers the post-OCR parallel corpus and measures it.
+                                #   4,325 pairs; the confusion table is NOT usable as-is --
+                                #   see docs/POST_OCR_CORRECTION.md §5
   gold_sample/                  # 41-volume worklist + labeling checklist
   # training data: synthetic generator + name pools
   synth_persons.py              # (line -> record) generator; --profile {tulsa,nyc,mix}
+  measure_synth_noise.py        # --noise knob -> input CER, so train-time and production OCR
+                                #   quality sit on one axis. Run before AND after any change
+                                #   to add_noise. See docs/POST_OCR_CORRECTION.md §2
   fetch_names.py                # build names/surnames.tsv (40k era-skewed census surnames)
   harvest_names.py              # pipeline entries CSVs -> harvested real-surname pool
   names/surnames.tsv            # committed census pool (harvested pool is generated, gitignored)

@@ -1,0 +1,75 @@
+{
+  "_doc": [
+    "Human verdicts on cells where the printed page disagrees with the catalog.",
+    "",
+    "WHY THIS FILE EXISTS. `apply_survey.py --conflicts` regenerates the queue from the sidecars",
+    "every run, so without a decision record it reprints the same items forever and nobody can",
+    "tell 'not yet reviewed' from 'reviewed, catalog was right'. The queue is derived; the verdict",
+    "is not. This is the verdict. `results/ditto_review_*.tsv` has the same missing half --",
+    "PIPELINE.md #1 asks to 'record which volume it was decided for' and nothing ever did.",
+    "",
+    "VERDICTS",
+    "  book-wins     the page is right and the CSV is wrong. THE ONLY verdict that overwrites a",
+    "                non-empty cell, and it needs a reason naming the evidence.",
+    "  catalog-wins  the CSV is right and the read is wrong. Retires the conflict.",
+    "  both-right    both are true of different things -- a compiler vs the house that published.",
+    "                Retires the conflict and marks the row as wanting a field split.",
+    "  needs-image   text cannot settle it; hand to phase 3. Retires it from THIS queue only.",
+    "  wontfix       not worth resolving; say why.",
+    "",
+    "A decision is keyed (source, id, column) and is matched only against a conflict. It cannot",
+    "invent a cell, and a `book-wins` on a cell that no longer conflicts is a no-op.",
+    "",
+    "Seeded only with verdicts docs/SURVEY_PLAN.md ALREADY establishes. The open calls -- the",
+    "9-row `spooner` cluster, and the 9 year reads that grabbed boilerplate or listing text --",
+    "are deliberately left undecided: the spooner cluster needs a human, and recording",
+    "`catalog-wins` on the year reads would paper over an extractor bug that should be fixed at",
+    "the source instead."
+  ],
+  "decisions": [
+    {
+      "source": "ia", "id": "1857BPL", "column": "publisher",
+      "verdict": "both-right",
+      "reason": "Smith is the compiler the title is named for (SMITH'S BROOKLYN DIRECTORY); Charles Jenkins is the house that published it, per the copyright line on leaf 28. SURVEY_PLAN.md: these want separate `compiler` / `publisher` / `printer` fields.",
+      "wants_field_split": true,
+      "by": "survey-plan", "date": "2026-09-12"
+    },
+    {
+      "source": "ia", "id": "micro_IABROOKLYN_0036", "column": "publisher",
+      "verdict": "both-right",
+      "reason": "Same Smith/Jenkins split as 1857BPL, attested by the target card on leaf 1 ('Published by Charles Jenkins').",
+      "wants_field_split": true,
+      "by": "survey-plan", "date": "2026-09-12"
+    },
+    {
+      "source": "ia", "id": "1908BPL", "column": "publisher",
+      "verdict": "needs-image",
+      "reason": "Read is OCR-damaged ('GEORGE TTBiNfiTriM' for Upington). SURVEY_PLAN.md is explicit that character-level damage must stay a conflict rather than be matched loosely -- anything loose enough to match this would match unrelated houses.",
+      "by": "survey-plan", "date": "2026-09-12"
+    },
+    {
+      "source": "ia", "id": "brooklynnewyorkc00geor", "column": "publisher",
+      "verdict": "needs-image",
+      "reason": "OCR-damaged read ('GEORGE UHNUTON' for Upington); same rule as 1908BPL.",
+      "by": "survey-plan", "date": "2026-09-12"
+    },
+    {
+      "source": "ia", "id": "longworthsameric3818long", "column": "publisher",
+      "verdict": "needs-image",
+      "reason": "OCR-damaged read ('D. L0NGW0RTH' -- zeros for O's, which defeats the letters-only containment pass on purpose).",
+      "by": "survey-plan", "date": "2026-09-12"
+    },
+    {
+      "source": "ia", "id": "longworthsameric6118long", "column": "publisher",
+      "verdict": "needs-image",
+      "reason": "OCR-damaged read ('THOMAS LONGWOIITH').",
+      "by": "survey-plan", "date": "2026-09-12"
+    },
+    {
+      "source": "ia", "id": "longworthsameric1826newy", "column": "publisher",
+      "verdict": "needs-image",
+      "reason": "OCR-damaged read ('THOMAS LOKCWORTH').",
+      "by": "survey-plan", "date": "2026-09-12"
+    }
+  ]
+}

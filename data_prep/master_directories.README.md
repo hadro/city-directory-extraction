@@ -42,13 +42,24 @@ IIIF image URL and verbatim quote. Do not hand-edit these; edit the sidecar and 
 | `year_published` | 21 | the year of the imprint/copyright line. Routinely **differs** from `year_covered`: Trow volumes were published the autumn before their nominal year, and `micro_IABROOKLYN_0022` is a title page reading "for 1845 and 1846" |
 | `legend_leaf` | 60 | **leaf index** (0-based canvas) of the abbreviations key. Deliberately *not* `key_page` — see below |
 | `legend_location` | 60 | `dedicated-page` (20) \| `inline-at-listing-head` (40) |
+| `key_page` | +11 | the **printed page** of the legend, converted from `legend_leaf` by `survey_pagenumbers.py`. Written only from a `method: ia-page-numbers` claim at confidence high/medium |
+
+⚠️ **`key_page` and `start_page` hold printed pages, and at least one row has a LEAF in them.**
+`hearnesbrooklync1852unse` carries `key_page=27`, which is the leaf — commit `94fe7fe`'s own
+message says "Leaf 27 … prints the legend". Its printed page is **17** (`page_offset` 10, and
+IA's page-number file agrees independently). `start_page=28` on that row is likely the same
+mistake. The survey flagged it rather than overwriting it; it is in the undecided queue.
 
 Two traps this encodes, both measured:
 
 - **`legend_leaf` is a leaf; `key_page` is a printed page.** They differ by `page_offset`, which
-  drifts within a volume, and the `leafNum − 1` off-by-one is real. Writing a leaf into `key_page`
-  would corrupt a column that is currently correct, so the survey keeps its own unit and leaves
-  `key_page` to Phase 2, which converts via `_page_numbers.json`.
+  drifts within a volume, and the `leafNum − 1` off-by-one is real. `survey_pagenumbers.py` is the
+  only thing allowed to convert between them, via `_page_numbers.json`.
+- **A legend leaf often has no printed number at all.** Of the 45 tier-A/B volumes with a
+  `legend_leaf`, **28 sit on an unnumbered leaf** — front matter frequently isn't paginated. That
+  is not a missing value, it is a page with no number, and it is never extrapolated from
+  neighbours: for those volumes the key page must be cited by **leaf**, which is why
+  `legend_leaf` exists as its own column rather than as a staging area for `key_page`.
 - **Twice as many legends are inline as are on a dedicated page (40 vs 20).** `key_page` assumes a
   page exists; for 40 volumes the answer is not a missing value but a different shape, which is
   what `legend_location` records.

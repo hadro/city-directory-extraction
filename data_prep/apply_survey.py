@@ -73,6 +73,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "data_prep" / "master_directories.csv"
 SIDECAR = ROOT / "data_prep" / "survey"
+DECISIONS = ROOT / "data_prep" / "survey_decisions.json"
+
+# Only `book-wins` writes. The rest retire a conflict from the queue without touching the cell,
+# which is the point: "reviewed, the catalog was right" must be distinguishable from "not yet
+# reviewed", and a regenerated queue cannot tell you which.
+VERDICTS = {"book-wins", "catalog-wins", "both-right", "needs-image", "wontfix"}
 
 
 def read_csv_raw() -> str:
@@ -96,11 +102,47 @@ NEW_COLUMNS = ["volume_number", "year_covered", "year_published", "legend_leaf",
 # Columns this script must never write, and why. Enforced in `propose()` rather than left to
 # reviewer memory -- rule 2 above.
 FORBIDDEN = {
-    "key_page": "sidecar holds a leaf, column holds a printed page (see rule 2)",
     "start_page": "needs phase 2 (detect_listing_bounds), not measured by phase 0",
     "end_page": "needs phase 2 (detect_listing_bounds), not measured by phase 0",
     "page_offset": "needs phase 2 (the per-leaf curve), not measured by phase 0",
 }
+
+# `key_page` was forbidden until 2026-09-21 and is now conditional, which is the honest form of
+# the rule: the column was never the problem, the UNIT was. A leaf may not be written there; a
+# printed page converted from one by `survey_pagenumbers.py` may. That converter is the only
+# producer of `book_says.key_page`, and every claim it makes carries `method: ia-page-numbers`,
+# so the two units cannot meet again by accident.
+KEY_PAGE_METHOD = "ia-page-numbers"
+
+# ... and a low-confidence conversion is not CSV-grade. 4 of the 17 conversions sit on volumes
+# where IA scored the leaf 0 (1869BPL carries 147 backward steps in 924 numbered leaves). Those
+# stay in the sidecar with their confidence and surface for review rather than landing in a
+# column that reads as settled.
+CSV_GRADE = {"high", "medium"}
+
+
+def load_decisions():
+    """-> {(source, id, column): decision}. Absent file is fine -- nothing has been decided yet."""
+    if not DECISIONS.exists():
+        return {}
+    try:
+        doc = json.loads(DECISIONS.read_text(encoding="utf-8"))
+    except Exception as e:                               # noqa: BLE001 - loud, not silent
+        print(f"unreadable {DECISIONS.name}: {e}", file=sys.stderr)
+        return {}
+    out = {}
+    for d in doc.get("decisions") or []:
+        verdict = d.get("verdict")
+        if verdict not in VERDICTS:
+            print(f"unknown verdict {verdict!r} on {d.get('id')}/{d.get('column')} -- ignored",
+                  file=sys.stderr)
+            continue
+        if verdict == "book-wins" and not (d.get("reason") or "").strip():
+            print(f"book-wins with no reason on {d.get('id')}/{d.get('column')} -- ignored",
+                  file=sys.stderr)
+            continue
+        out[(d.get("source"), d.get("id"), d.get("column"))] = d
+    return out
 
 
 def propose(row: dict, doc: dict):
@@ -121,6 +163,15 @@ def propose(row: dict, doc: dict):
         out.append(("legend_leaf", str(legend["leaf"]), legend))
         if legend.get("legend_location"):
             out.append(("legend_location", legend["legend_location"], legend))
+
+    # The conditional `key_page`. Both guards are required: a claim that did not come from the
+    # converter is a leaf wearing the wrong name, and a low-confidence conversion is not
+    # CSV-grade. `legend.leaf` above can never route here -- it is a different claim.
+    kp = book.get("key_page")
+    if (kp and kp.get("value") is not None
+            and kp.get("method") == KEY_PAGE_METHOD
+            and kp.get("confidence") in CSV_GRADE):
+        out.append(("key_page", str(kp["value"]), kp))
 
     # Existing columns. Same offer; the empty-cell rule is what keeps them safe.
     for col in ("publisher", "year"):
@@ -171,11 +222,13 @@ def run(write: bool, show_conflicts: bool):
     body = [r for r in reader]
 
     docs = load_sidecars()
+    decisions = load_decisions()
     out_header = header + [c for c in NEW_COLUMNS if c not in header]
     idx = {c: i for i, c in enumerate(out_header)}
 
     counts = Counter()
     conflicts = []
+    decided = []
     rows_out = []
     matched = 0
 
@@ -190,11 +243,20 @@ def run(write: bool, show_conflicts: bool):
         matched += 1
         for col, value, claim in propose(rec, doc):
             verdict = classify(col, row[idx[col]], value)
+            if verdict == "conflict":
+                d = decisions.get((rec["source"], rec["id"], col))
+                if d is not None:
+                    counts[f"decided ({d['verdict']}): {col}"] += 1
+                    decided.append((rec["source"], rec["id"], col, row[idx[col]], value, d))
+                    # The one path that overwrites a non-empty cell, and only ever by an
+                    # explicit human verdict carrying a reason.
+                    if d["verdict"] == "book-wins":
+                        row[idx[col]] = value
+                    continue
+                conflicts.append((rec["source"], rec["id"], col, row[idx[col]], value, claim))
             counts[f"{verdict}: {col}"] += 1
             if verdict == "fill":
                 row[idx[col]] = value
-            elif verdict == "conflict":
-                conflicts.append((rec["source"], rec["id"], col, row[idx[col]], value, claim))
         rows_out.append(row)
 
     buf = io.StringIO()
@@ -212,10 +274,21 @@ def run(write: bool, show_conflicts: bool):
         print(f"  {n:4d}  {k.split(': ', 1)[1]}")
     agrees = sum(n for k, n in counts.items() if k.startswith("agree"))
     print(f"\nconfirmations (cell already correct): {agrees}")
-    print(f"conflicts (left untouched): {len(conflicts)}")
+    print(f"conflicts UNDECIDED (left untouched): {len(conflicts)}")
+    if decided:
+        vd = Counter(d["verdict"] for *_x, d in decided)
+        print(f"conflicts decided ({len(decided)}): "
+              + ", ".join(f"{v} {n}" for v, n in vd.most_common()))
+
+    if show_conflicts and decided:
+        print("\ndecided, per survey_decisions.json:")
+        for src, ident, col, cur, prop, d in decided:
+            arrow = "-> WROTE book value" if d["verdict"] == "book-wins" else "-> kept csv"
+            print(f"  {src}/{ident[:32]:32} {col:11} {d['verdict']:13} {arrow}")
+            print(f"      {d.get('reason', '')[:100]}")
 
     if show_conflicts and conflicts:
-        print("\ncells the survey refused to overwrite:")
+        print("\ncells the survey refused to overwrite (UNDECIDED -- add to survey_decisions.json):")
         for src, ident, col, cur, prop, claim in conflicts:
             print(f"  {src}/{ident[:34]:34} {col:14} csv={cur[:28]!r:30} book={prop[:28]!r}")
             print(f"      leaf {claim.get('leaf')}  {claim.get('evidence_type')}  "
@@ -264,10 +337,33 @@ def self_test():
     }}
     offered = {c for c, _v, _cl in propose({}, doc)}
     assert offered == {"volume_number", "legend_leaf", "legend_location", "year_covered"}, offered
-    assert not (offered & set(FORBIDDEN)), "key_page/start_page must never be offered"
+    assert not (offered & set(FORBIDDEN)), "start_page/end_page/page_offset must never be offered"
+    assert "key_page" not in offered, "a legend LEAF must never route to key_page"
+
+    # key_page is conditional, not forbidden. Both guards must hold.
+    def kp(method, conf):
+        return propose({}, {"book_says": {"key_page": {"value": 21, "leaf": 9,
+                                                       "method": method, "confidence": conf}}})
+    assert [c for c, _v, _cl in kp("ia-page-numbers", "high")] == ["key_page"]
+    assert [c for c, _v, _cl in kp("ia-page-numbers", "medium")] == ["key_page"]
+    assert kp("ia-page-numbers", "low") == [], "a low-confidence conversion is not CSV-grade"
+    assert kp("hocr-text", "high") == [], "only the converter may produce a key_page"
+    assert kp("agent-read", "high") == [], "an agent leaf-read is still not a printed page"
 
     # A legend with no leaf is not a claim (the plan's citation rule) and yields no legend_leaf.
     assert not propose({}, {"book_says": {"legend": {"legend_location": "inline-at-listing-head"}}})
+
+    # The decisions file must parse, and every verdict in it must be one this tool honours --
+    # a typo'd verdict silently retiring a conflict is exactly the failure this guards.
+    decs = load_decisions()
+    assert all(d["verdict"] in VERDICTS for d in decs.values())
+    assert all(d.get("reason") for d in decs.values() if d["verdict"] == "book-wins"), \
+        "book-wins overwrites a human-entered cell; it must say why"
+    if DECISIONS.exists():
+        doc = json.loads(DECISIONS.read_text(encoding="utf-8"))
+        for d in doc.get("decisions") or []:
+            assert (d.get("source"), d.get("id"), d.get("column")) in decs, \
+                f"decision dropped on load: {d.get('id')}/{d.get('column')}"
 
     # The CSV must round-trip byte-identically, or every run would produce a reformat diff that
     # buries the real change.

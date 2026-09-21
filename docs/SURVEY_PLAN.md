@@ -210,8 +210,45 @@ Nothing was in hand to write.
 **`key_page` was the near-miss.** The CSV column is a *printed page*; `book_says.legend` carries a
 *leaf*. On the 6 volumes where both exist, `key_page + page_offset` reproduces the sidecar leaf
 exactly twice and is off by one on three more — the `leafNum − 1` trap, not a wobble. The leaf went
-to a new `legend_leaf` column instead; `key_page` stays Phase 2's job. `FORBIDDEN` in
-`apply_survey.py` enforces this in code rather than leaving it to reviewer memory.
+to a new `legend_leaf` column instead. **Resolved 2026-09-21** (below): the column was never the
+problem, the unit was, so `key_page` is now *conditional* rather than forbidden — writable only
+from a `method: ia-page-numbers` claim, which only the converter produces.
+
+### `key_page`, converted — and the yield is 17, not 40
+
+`survey_pagenumbers.py` (2026-09-21) does the leaf→printed-page lookup. Predicted 40 conversions;
+**the real number is 17, and 11 of those reached the CSV.**
+
+| of 45 tier-A/B volumes with a `legend_leaf` | |
+|---|---:|
+| leaf carries a printed number → claim | **17** |
+| leaf is **unnumbered** → no claim | **28** |
+
+**Front matter is frequently not paginated, and that is a fact about the books, not a gap in the
+data.** `micro_IABROOKLYN_0002` leaf 5 and 1879BPL leaf 27 are blank, with their volumes' numbering
+starting at leaves 8 and 29. Extrapolating backwards (leaf 29 = page 3, so leaf 27 "=" page 1)
+would manufacture a number that **is not printed on the page** — in the one region where the offset
+is least stable, since front matter routinely carries its own roman sequence or restarts at the
+listing head. So a blank leaf yields nothing, and for those 28 volumes the key page must be cited
+by leaf. That is the argument for `legend_leaf` being a real column rather than a staging area.
+
+Of the 17, **2 are high confidence, 11 medium, 4 low**; only high/medium are CSV-grade, and 2 of
+the 13 hit existing values and became conflicts. Two calibration errors were found and fixed in the
+first cut, both of which had silently downgraded almost everything:
+
+- **`confidence: None` is UNSCORED, not zero.** IA omits the per-leaf score on whole classes of
+  volume — 10 of the 17, including perfectly monotone ones like `micro_IABROOKLYN_0012` (0 breaks
+  in 74 numbered leaves). Grading those alongside 1869BPL, which really does carry confidence 0
+  across 147 backward steps in 924 leaves, throws away the distinction that matters.
+- **Monotone breaks must be a RATE.** These volumes hold several alphabets and legitimately restart
+  their numbering, so 1906BPL shows 11 backward steps in 1,245 leaves (0.9%) at leaf confidence
+  100. Gating `high` on zero breaks downgraded every dense volume in the corpus.
+
+**And the conversion found a live contamination in the column it was built to protect.**
+`hearnesbrooklync1852unse` carries `key_page=27` — a **leaf**, written by commit `94fe7fe`, whose
+own message says "Leaf 27 … prints the legend". Its printed page is **17**, agreed independently by
+that row's `page_offset` of 10 and by IA's page-number file. `start_page=28` on the same row is
+likely the same error. Both are in the undecided queue rather than overwritten.
 
 **The 32 refusals are a work queue, not noise.** 19 `publisher` + 13 `year`:
 
@@ -347,10 +384,10 @@ Per volume, from the JSONL + pageindex + `_page_numbers.json`:
 
 - `detect_listing_bounds --from-jsonl` → start/end leaf, letter blocks, gaps, order violations,
   ambiguous edges
-- printed `start_page` / `end_page` via the cascade above. **`survey_pagenumbers.py` does not exist
-  yet** — `survey_census.py`'s docstring names it as the tier-C/D fallback, so it reads as built
-  and is not. It is the first thing Phase 2 needs, along with the leaf→printed-page conversion that
-  finally lets `key_page` and `legend_leaf` be reconciled.
+- printed `start_page` / `end_page` via the cascade above. **`survey_pagenumbers.py` now exists
+  (2026-09-21) but only its tier-A/B half** — the direct `_page_numbers.json` lookup. The tier-C/D
+  bottom-margin regression, which `survey_census.py`'s docstring has described since 2026-09-12,
+  is still unwritten.
 - **`page_offset` as a per-leaf curve**, not a scalar. The README's "drifts across a volume —
   local anchor, not a global constant" stops being a limitation: the sidecar stores the curve, the
   CSV keeps one human-readable local anchor near the listing start.
@@ -407,9 +444,26 @@ report. Reviewable git diffs, no concurrent-write corruption, safe to re-run nig
 
 `apply_survey.py` exists as of 2026-09-20 and holds three rules: a sidecar fills an **empty** cell
 and never overwrites a full one; a value is only written into a column that **means the same
-thing** (`FORBIDDEN` names the four columns it must not touch, with the reason); and a second run
+thing** (`FORBIDDEN` names the columns it must not touch, with the reason); and a second run
 writes nothing. Dry-run by default — `--write` commits, `--conflicts` prints every refused cell
 with its citation and image URL.
+
+### The decision record — `survey_decisions.json` (2026-09-21)
+
+A regenerated queue cannot tell *"not yet reviewed"* from *"reviewed, the catalog was right"*, so
+without this the same 32 conflicts reprint forever. The queue is derived; the verdict is not.
+(`results/ditto_review_*.tsv` has the identical missing half — PIPELINE.md #1 asks to "record which
+volume it was decided for" and nothing ever did.)
+
+Keyed `(source, id, column)`, five verdicts: **`book-wins`** — the only path that overwrites a
+non-empty cell, and it is refused without a `reason` — plus `catalog-wins`, `both-right`,
+`needs-image` and `wontfix`, which retire a conflict without touching the cell. `--conflicts` then
+shows the undecided queue and the decided list separately.
+
+Seeded with the 7 verdicts this plan already establishes (2 `both-right` for the Smith/Jenkins
+compiler split, 5 `needs-image` for OCR-mangled publishers). **The `spooner` cluster is left
+undecided on purpose** — it needs a human. So are the 9 bad-year reads: recording `catalog-wins`
+on those would paper over an extractor bug that should be fixed at the source.
 
 The CSV stays the human-facing summary. The sidecar holds the citations, the offset curve, the
 section inventory and the confidence — anything that would explode the column count.

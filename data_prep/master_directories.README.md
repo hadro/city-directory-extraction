@@ -42,13 +42,15 @@ IIIF image URL and verbatim quote. Do not hand-edit these; edit the sidecar and 
 | `year_published` | 21 | the year of the imprint/copyright line. Routinely **differs** from `year_covered`: Trow volumes were published the autumn before their nominal year, and `micro_IABROOKLYN_0022` is a title page reading "for 1845 and 1846" |
 | `legend_leaf` | 60 | **leaf index** (0-based canvas) of the abbreviations key. Deliberately *not* `key_page` — see below |
 | `legend_location` | 60 | `dedicated-page` (20) \| `inline-at-listing-head` (40) |
-| `key_page` | +11 | the **printed page** of the legend, converted from `legend_leaf` by `survey_pagenumbers.py`. Written only from a `method: ia-page-numbers` claim at confidence high/medium |
+| `key_page` | +3 | the **printed page** of the legend, converted from `legend_leaf` by `survey_pagenumbers.py`. Written only from a `method: ia-page-numbers` claim that IA actually **read** (`attestation: read`) at confidence high/medium — never from one it interpolated |
 
 ⚠️ **`key_page` and `start_page` hold printed pages, and at least one row has a LEAF in them.**
 `hearnesbrooklync1852unse` carries `key_page=27`, which is the leaf — commit `94fe7fe`'s own
-message says "Leaf 27 … prints the legend". Its printed page is **17** (`page_offset` 10, and
-IA's page-number file agrees independently). `start_page=28` on that row is likely the same
-mistake. The survey flagged it rather than overwriting it; it is in the undecided queue.
+message says "Leaf 27 … prints the legend". That page prints **no folio at all** (its `2` is a
+printer's signature mark); its position in the sequence is 17. `start_page=28` is likely the same
+mistake. `apply_survey.py` reports this as a **unit suspect** on every run — it flags any
+`key_page` equal to that volume's `legend_leaf` — and never auto-corrects one, because a human
+entered it. Decide these in `survey_decisions.json`.
 
 Two traps this encodes, both measured:
 

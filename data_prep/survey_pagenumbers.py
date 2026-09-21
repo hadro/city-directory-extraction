@@ -43,10 +43,32 @@ its own roman sequence, or restarts at the listing head. So a blank leaf yields 
 reported as `unnumbered`, which is the true answer and is useful: it tells Phase 3 that this
 volume's key page must be cited by leaf, not by page.
 
-CONFIDENCE. IA scores each leaf 0-100. `1864BPL` leaf 8 carries a value at confidence **0**, which
-is not the same kind of fact as 1906BPL's confidence 100. Claims inherit it: >= 90 and monotone
--> high, >= 50 -> medium, below that -> low and the volume goes to the read queue rather than the
-column.
+CONFIDENCE, AND THE ONE THAT IS NOT A CONFIDENCE AT ALL
+
+IA scores each leaf 0-100, and `1864BPL` leaf 8 carries a value at confidence **0** -- not the
+same kind of fact as 1906BPL's 100. Claims inherit it: >= 90 and monotone -> high, >= 50 ->
+medium, else low.
+
+**`confidence: null` is not a low score, it is a different thing: IA INTERPOLATED that number.**
+Verified on `hearnesbrooklync1852unse`, whose leaves read 24->'14' and 25->'15' at confidence 100,
+then 26/27/28 -> '16'/'17'/'18' at null, then 29->'19' and 30->'20' at 100 again. The nulls are
+arithmetic between confident anchors. Leaf 27 is the directory's opening page -- caption title,
+the NOTE about `*`, then the A listings -- and it **prints no folio at all** (the `2` at its foot
+is a printer's signature mark). IA asserts 17 for a page that prints nothing.
+
+So an interpolated number is marked `attestation: interpolated` and is **never CSV-grade**,
+however coherent its volume. It is weaker evidence than a read number, not neutral, and the
+survey's founding rule is that a field is confirmed only by something printed in the volume. A
+volume whose legend leaf is interpolated cites its key page by LEAF.
+
+An earlier cut of this module read null as "unscored, so fall back to the volume's coherence" and
+graded it `medium`. That put 8 interpolated folios into `master_directories.csv`; they were
+retracted by `apply_survey.py --retract`.
+
+⚠️ SEPARATE, STILL OPEN: **the `page/nNN` image-URL index is not globally aligned with `leafNum`.**
+1906BPL's `n9` is leafNum 9 (verified by eye: its ABBREVIATIONS page prints 21), but Hearne's
+`n27` is leafNum 28. SURVEY_PLAN.md asserts one global join verified on a single volume; the
+alignment is per-volume. Every `image` URL in every sidecar is therefore suspect by one leaf.
 """
 from __future__ import annotations
 
@@ -175,27 +197,38 @@ def claim_for(ident: str, leaf: int, doc: dict) -> tuple:
     except (TypeError, ValueError):
         return "unnumbered", None
 
-    # Two distinctions the first cut of this got wrong, both visible in the measured run:
+    # `confidence: None` means IA INTERPOLATED this number, not that it declined to score a
+    # number it read. Proven on hearnesbrooklync1852unse, whose leaves run
     #
-    #   * `confidence: None` is UNSCORED, not zero. IA omits the per-leaf score on whole classes
-    #     of volume -- 10 of the 17 conversions, including perfectly monotone ones like
-    #     micro_IABROOKLYN_0012 (0 breaks in 74 numbered leaves). Scoring those "low" alongside
-    #     1869BPL, which really does carry confidence 0, throws away the distinction that matters.
-    #     Where IA gives no opinion, the volume's own coherence is the evidence.
-    #   * breaks must be a RATE. These volumes hold several alphabets and legitimately restart
-    #     their numbering, so dense volumes always show some backward steps: 1906BPL has 11 in
-    #     1,245 numbered leaves (0.9%) at leaf confidence 100. Gating `high` on breaks == 0
-    #     downgraded every dense volume in the corpus.
+    #     24 -> '14' conf 100   25 -> '15' conf 100   <- read
+    #     26 -> '16' conf None  27 -> '17' conf None  28 -> '18' conf None   <- filled in
+    #     29 -> '19' conf 100   30 -> '20' conf 100   <- read
+    #
+    # -- arithmetic between confident anchors. Leaf 27 is the directory's opening page: caption
+    # title, the NOTE, then the A listings, and it PRINTS NO FOLIO AT ALL (the `2` at its foot is
+    # a printer's signature mark). IA asserts 17 for a page that prints nothing.
+    #
+    # An earlier cut of this read `None` as "unscored, so fall back to the volume's coherence"
+    # and graded it `medium`, which is CSV-grade; that put 8 interpolated numbers into the CSV.
+    # An interpolated folio is WEAKER evidence than a read one, not neutral, and the survey's
+    # founding rule is that a field is confirmed only by something printed in the volume. So it
+    # is recorded, marked, and never CSV-grade.
+    #
+    # The other half of the rule is real: breaks must be a RATE. These volumes hold several
+    # alphabets and legitimately restart their numbering, so 1906BPL shows 11 backward steps in
+    # 1,245 numbered leaves (0.9%) at leaf confidence 100 -- verified by eye as a genuine printed
+    # `21` at the foot of its ABBREVIATIONS page. Gating `high` on zero breaks downgraded every
+    # dense volume in the corpus.
     rate = breaks / filled if filled else 1.0
     conf = entry.get("confidence")
     if not isinstance(conf, (int, float)):
-        level = "medium" if rate <= 0.02 else "low"
+        attestation, level = "interpolated", "low"
     elif conf >= 90 and rate <= 0.05:
-        level = "high"
+        attestation, level = "read", "high"
     elif conf >= 50:
-        level = "medium"
+        attestation, level = "read", "medium"
     else:
-        level = "low"
+        attestation, level = "read", "low"
 
     return "hit", {
         "value": page,
@@ -203,9 +236,11 @@ def claim_for(ident: str, leaf: int, doc: dict) -> tuple:
         "canvas": f"https://iiif.archive.org/iiif/{ident}${leaf}/canvas",
         "image": f"https://archive.org/download/{ident}/page/n{leaf}_w1400.jpg",
         "evidence_type": "legend",
-        "quote": f"printed page number {page} on leaf {leaf}",
+        "quote": (f"printed page number {page} on leaf {leaf}" if attestation == "read"
+                  else f"page {page} INTERPOLATED by IA for leaf {leaf}; not read from the page"),
         "method": "ia-page-numbers",
         "confidence": level,
+        "attestation": attestation,
         "ia_leaf_confidence": conf,
         "volume_monotone_breaks": breaks,
         "volume_numbered_leaves": filled,
@@ -301,24 +336,22 @@ def self_test():
     o, c = claim_for("1864BPL", 8, low)
     assert o == "hit" and c["confidence"] == "low", c
 
-    # `None` is UNSCORED, not zero -- and must not be graded as if IA had said "0". A monotone
-    # volume IA declined to score is medium, not low (micro_IABROOKLYN_0012: 0 breaks in 74).
-    unscored = {"pages": [{"leafNum": i, "pageNumber": str(i), "confidence": None}
-                          for i in range(1, 60)]}
-    assert claim_for("x", 14, unscored)[1]["confidence"] == "medium", "unscored != zero"
-
-    # ... but an unscored volume that is ALSO incoherent stays low.
-    messy = {"pages": [{"leafNum": i, "pageNumber": str(i % 7), "confidence": None}
-                       for i in range(1, 60)]}
-    o, c = claim_for("x", 14, messy)
-    assert o == "non-monotone" or c["confidence"] == "low", (o, c)
+    # `None` means IA INTERPOLATED the number. Never CSV-grade, however coherent the volume --
+    # hearnesbrooklync1852unse leaf 27 is interpolated '17' on a page that prints no folio at all.
+    interp = {"pages": [{"leafNum": i, "pageNumber": str(i), "confidence": None}
+                        for i in range(1, 60)]}
+    o, c = claim_for("x", 14, interp)
+    assert c["attestation"] == "interpolated" and c["confidence"] == "low", c
+    assert "INTERPOLATED" in c["quote"], "the quote must not claim the page prints this"
 
     # breaks are a RATE: 1906BPL is leaf-confidence 100 with 11 backward steps in 1,245 numbered
     # leaves, because the volume holds several alphabets. That is high, not medium.
     dense = {"pages": [{"leafNum": i, "pageNumber": str(i), "confidence": 100}
                        for i in range(1, 200)]
              + [{"leafNum": 200 + i, "pageNumber": str(i), "confidence": 100} for i in range(1, 6)]}
-    assert claim_for("x", 9, dense)[1]["confidence"] == "high", "a few restarts must stay high"
+    d = claim_for("x", 9, dense)[1]
+    assert d["confidence"] == "high" and d["attestation"] == "read", d
+    assert "printed page number" in d["quote"]
 
     # A badly non-monotone volume is refused whole rather than emitting a plausible wrong page.
     scrambled = {"pages": [{"leafNum": i, "pageNumber": str(100 - i), "confidence": 99}

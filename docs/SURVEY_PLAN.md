@@ -232,23 +232,62 @@ is least stable, since front matter routinely carries its own roman sequence or 
 listing head. So a blank leaf yields nothing, and for those 28 volumes the key page must be cited
 by leaf. That is the argument for `legend_leaf` being a real column rather than a staging area.
 
-Of the 17, **2 are high confidence, 11 medium, 4 low**; only high/medium are CSV-grade, and 2 of
-the 13 hit existing values and became conflicts. Two calibration errors were found and fixed in the
-first cut, both of which had silently downgraded almost everything:
+**Of the 17, only 3 reached the CSV**, and getting there took one wrong turn that is worth keeping
+on the record.
 
-- **`confidence: None` is UNSCORED, not zero.** IA omits the per-leaf score on whole classes of
-  volume — 10 of the 17, including perfectly monotone ones like `micro_IABROOKLYN_0012` (0 breaks
-  in 74 numbered leaves). Grading those alongside 1869BPL, which really does carry confidence 0
-  across 147 backward steps in 924 leaves, throws away the distinction that matters.
-- **Monotone breaks must be a RATE.** These volumes hold several alphabets and legitimately restart
-  their numbering, so 1906BPL shows 11 backward steps in 1,245 leaves (0.9%) at leaf confidence
-  100. Gating `high` on zero breaks downgraded every dense volume in the corpus.
+**`confidence: null` does not mean "unscored". It means IA INTERPOLATED the number.** Proven by
+opening the page. `hearnesbrooklync1852unse` runs:
+
+```
+leaf 24 -> '14' conf 100     leaf 25 -> '15' conf 100      <- read off the page
+leaf 26 -> '16' conf null    27 -> '17' null    28 -> '18' null   <- filled in arithmetically
+leaf 29 -> '19' conf 100     leaf 30 -> '20' conf 100      <- read off the page
+```
+
+The nulls are arithmetic between confident anchors. And leaf 27 is the directory's **opening
+page** — caption title, the `*` NOTE, then the A listings — which **prints no folio at all**; the
+`2` at its foot is a printer's signature mark. IA asserts page 17 for a page that prints nothing.
+
+The first cut read null as "IA gave no opinion, so fall back to the volume's coherence" and graded
+it `medium`, which is CSV-grade. **That put 8 interpolated folios into the CSV.** They were
+retracted by `apply_survey.py --retract`. An interpolated folio is *weaker* evidence than a read
+one, not neutral, and a volume whose legend leaf is interpolated cites its key page by **leaf**.
+
+| of the 17 conversions | | |
+|---|---:|---|
+| `attestation: read`, CSV-grade | **3** | 1906BPL (IA conf 100), 1907BPL (99), `micro_IABROOKLYN_0004` (84) |
+| `attestation: read`, confidence 0 | 4 | a real score, and a bad one |
+| `attestation: interpolated` | 10 | never CSV-grade, however coherent the volume |
+
+The other half of the original calibration fix stands: **monotone breaks must be a RATE.** These
+volumes hold several alphabets and legitimately restart their numbering, so 1906BPL shows 11
+backward steps in 1,245 leaves (0.9%) at leaf confidence 100 — and its ABBREVIATIONS page was
+checked by eye and does print **21** at the foot. Gating `high` on zero breaks downgraded every
+dense volume in the corpus.
+
+### ⚠️ The `page/nNN` image URL is not globally aligned with `leafNum`
+
+**This plan asserts one global join verified on one volume, and it does not hold corpus-wide.**
+1906BPL's `n9` is leafNum 9 (its legend page, printing 21). `hearnesbrooklync1852unse`'s `n27` is
+leafNum **28** — its legend sits at `n26`. The `_page_numbers.json` files differ in whether they
+start at leafNum 0 or 1, and Hearne's has gaps (584 entries spanning 1..588).
+
+Every `image` URL in every sidecar is therefore suspect by one leaf, including the ones cited in
+the Phase 0 conflict queue above. **Unresolved** — it needs a per-volume alignment check, not a
+constant.
 
 **And the conversion found a live contamination in the column it was built to protect.**
 `hearnesbrooklync1852unse` carries `key_page=27` — a **leaf**, written by commit `94fe7fe`, whose
-own message says "Leaf 27 … prints the legend". Its printed page is **17**, agreed independently by
-that row's `page_offset` of 10 and by IA's page-number file. `start_page=28` on the same row is
-likely the same error. Both are in the undecided queue rather than overwritten.
+own message says "Leaf 27 … prints the legend". The page itself prints no folio; its position in
+the sequence is 17. `start_page=28` on the same row is likely the same error.
+
+Once that volume's own claim dropped below CSV grade it stopped being *proposed*, so it stopped
+appearing as a conflict too — a known-bad cell silently leaving the queue. `unit_suspects()` in
+`apply_survey.py` now catches the bug class directly by asking whether a printed-page column holds
+a value equal to the **legend leaf**. It flags 3: `hearnesbrooklync1852unse` (27, against its own
+claim of 17), plus `micro_IABROOKLYN_0005` (5) and `1885BPL` (1) — the latter two may be
+coincidence, since a legend really can sit at leaf 1 on printed page 1. None is auto-corrected; a
+human entered them.
 
 **The 32 refusals are a work queue, not noise.** 19 `publisher` + 13 `year`:
 

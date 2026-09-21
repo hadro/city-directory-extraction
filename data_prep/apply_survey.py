@@ -1,0 +1,296 @@
+#!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.9"
+# dependencies = []
+# ///
+"""The survey's only writer: merge `data_prep/survey/*.json` into master_directories.csv.
+
+See docs/SURVEY_PLAN.md, "Writeback discipline". Nothing else in the survey touches the CSV.
+Scripts and agents write per-volume sidecars; this merges them in one idempotent pass with a
+diff report, so the result is a reviewable git diff rather than a concurrent-write mess.
+
+Offline. No network, no IA calls -- everything it writes is already in the committed sidecars.
+
+    python3 data_prep/apply_survey.py                 # diff report, writes nothing
+    python3 data_prep/apply_survey.py --write         # commit the fills
+    python3 data_prep/apply_survey.py --conflicts     # only the cells it refused to touch
+    python3 data_prep/apply_survey.py --self-test     # offline
+
+THREE RULES, and the second is the one that matters
+
+1. **A sidecar fills an EMPTY cell. It never overwrites a full one.** A populated cell is prior
+   human or agent work; the survey's job is to disagree out loud, not to win. Every collision is
+   reported (`--conflicts`) and left on disk exactly as it was. That is the plan's conflict gate:
+   when the page disagrees with the catalog it is more often an ad misread as a title page than a
+   genuine catalog error, so the disagreement goes to a human, not into the column.
+
+2. **A value is only written into a column that means the same thing.** Two Phase-0 results look
+   ready and are NOT, and writing them would silently corrupt columns that are currently correct:
+
+   * `key_page` -- the CSV column is a **printed page number** ("page of the abbreviations key",
+     master_directories.README.md); the sidecar's `book_says.legend` carries a **leaf index**.
+     Those are different units and differ by the page_offset, which drifts within a volume. On the
+     6 volumes where the CSV and a sidecar both have a legend, `key_page + page_offset` reproduces
+     the sidecar leaf exactly twice (1885BPL, brooklyndirector00ogde) and is off by one on three
+     more -- which is the `leafNum - 1` trap the plan documents, not a rounding wobble. So the
+     leaf is written to its own new `legend_leaf` column and `key_page` is left for Phase 2 to
+     fill through `_page_numbers.json`.
+   * `start_page` / `end_page` / `page_offset` -- `survey_report.py --gaps` counts 86 of these as
+     "free, tier A/B", and that is a count of volumes whose **route** is free, not of values in
+     hand. It is computed from `page_numbers.tier` alone. Phase 0 never looked for where the
+     listings start; `detect_listing_bounds --from-jsonl` does, and it needs the Phase-1 OCR
+     harvest first. There is nothing to write yet.
+
+3. **Idempotent.** Re-running writes nothing new: every fill from the last run now reads as
+   `agree`. The CSV round-trips byte-identically through `csv` (CRLF, QUOTE_MINIMAL), so any diff
+   this produces is a real change and not a reformat.
+
+WHAT IT WRITES (measured over the 336 committed sidecars, 2026-09-20)
+
+    new columns          volume_number 61 · legend_leaf 60 · legend_location 60
+                         year_covered 42 · year_published 21
+    existing, empty only publisher 3 · year 1
+
+`year_covered` / `year_published` exist because volumes routinely disagree with themselves --
+`micro_IABROOKLYN_0022` is CSV 1845 against a title page reading "for 1845 and 1846", and Trow
+volumes were published the autumn before their nominal year. The CSV's single `year` stays the
+human-facing summary and is never rewritten from these.
+
+`legend_location` exists because **twice as many legends are inline as are on a dedicated page**
+(40 vs 20). `key_page` assumes a page; 40 volumes do not have one, and for those the answer is
+not a missing value but a different shape.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import io
+import json
+import sys
+from collections import Counter
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+CSV_PATH = ROOT / "data_prep" / "master_directories.csv"
+SIDECAR = ROOT / "data_prep" / "survey"
+
+
+def read_csv_raw() -> str:
+    """Read with newline='' so the file's CRLF survives verbatim. `Path.read_text` grew a
+    `newline` argument only in 3.13; this script targets 3.9."""
+    with open(CSV_PATH, "r", encoding="utf-8", newline="") as fh:
+        return fh.read()
+
+
+def write_csv_raw(text: str) -> None:
+    with open(CSV_PATH, "w", encoding="utf-8", newline="") as fh:
+        fh.write(text)
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from survey_report import publisher_agrees, year_agrees  # noqa: E402  (same-dir sibling)
+
+# New columns, appended to the header in this order. Each is a unit the CSV did not previously
+# carry -- none of them redefines an existing column.
+NEW_COLUMNS = ["volume_number", "year_covered", "year_published", "legend_leaf", "legend_location"]
+
+# Columns this script must never write, and why. Enforced in `propose()` rather than left to
+# reviewer memory -- rule 2 above.
+FORBIDDEN = {
+    "key_page": "sidecar holds a leaf, column holds a printed page (see rule 2)",
+    "start_page": "needs phase 2 (detect_listing_bounds), not measured by phase 0",
+    "end_page": "needs phase 2 (detect_listing_bounds), not measured by phase 0",
+    "page_offset": "needs phase 2 (the per-leaf curve), not measured by phase 0",
+}
+
+
+def propose(row: dict, doc: dict):
+    """-> list of (column, new_value, citation_dict). What this sidecar offers for this row.
+
+    Offers only. `classify()` decides what survives contact with the cell already there.
+    """
+    book = doc.get("book_says") or {}
+    out = []
+
+    for col in ("volume_number", "year_covered", "year_published"):
+        claim = book.get(col)
+        if claim and claim.get("value") is not None:
+            out.append((col, str(claim["value"]), claim))
+
+    legend = book.get("legend")
+    if legend and legend.get("leaf") is not None:
+        out.append(("legend_leaf", str(legend["leaf"]), legend))
+        if legend.get("legend_location"):
+            out.append(("legend_location", legend["legend_location"], legend))
+
+    # Existing columns. Same offer; the empty-cell rule is what keeps them safe.
+    for col in ("publisher", "year"):
+        claim = book.get(col)
+        if claim and claim.get("value") is not None:
+            out.append((col, str(claim["value"]), claim))
+
+    assert not any(c in FORBIDDEN for c, _v, _cl in out), "rule 2 violated"
+    return out
+
+
+def classify(col: str, current: str, proposed: str):
+    """-> 'fill' | 'agree' | 'conflict'.
+
+    `agree` is what makes the script idempotent AND what keeps the report honest: a cell the
+    survey would have written anyway is not a silent no-op, it is a confirmation.
+    """
+    if not (current or "").strip():
+        return "fill"
+    if current.strip() == proposed.strip():
+        return "agree"
+    if col == "publisher":
+        return "agree" if publisher_agrees(current, proposed) else "conflict"
+    if col in ("year", "year_covered", "year_published"):
+        try:
+            return "agree" if year_agrees(current, int(proposed)) else "conflict"
+        except (TypeError, ValueError):
+            return "conflict"
+    return "conflict"
+
+
+def load_sidecars():
+    docs = {}
+    for p in sorted(SIDECAR.glob("*.json")):
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:                                # noqa: BLE001 - report, don't die
+            print(f"unreadable sidecar: {p}", file=sys.stderr)
+            continue
+        docs[(d.get("source"), d.get("id"))] = d
+    return docs
+
+
+def run(write: bool, show_conflicts: bool):
+    raw = read_csv_raw()
+    reader = csv.reader(io.StringIO(raw))
+    header = next(reader)
+    body = [r for r in reader]
+
+    docs = load_sidecars()
+    out_header = header + [c for c in NEW_COLUMNS if c not in header]
+    idx = {c: i for i, c in enumerate(out_header)}
+
+    counts = Counter()
+    conflicts = []
+    rows_out = []
+    matched = 0
+
+    for r in body:
+        row = r + [""] * (len(out_header) - len(r))
+        rec = dict(zip(out_header, row))
+        doc = docs.get((rec["source"], rec["id"]))
+        if doc is None:
+            counts["row without sidecar"] += 1
+            rows_out.append(row)
+            continue
+        matched += 1
+        for col, value, claim in propose(rec, doc):
+            verdict = classify(col, row[idx[col]], value)
+            counts[f"{verdict}: {col}"] += 1
+            if verdict == "fill":
+                row[idx[col]] = value
+            elif verdict == "conflict":
+                conflicts.append((rec["source"], rec["id"], col, row[idx[col]], value, claim))
+        rows_out.append(row)
+
+    buf = io.StringIO()
+    w = csv.writer(buf, lineterminator="\r\n")
+    w.writerow(out_header)
+    w.writerows(rows_out)
+    new_raw = buf.getvalue()
+
+    print(f"csv rows {len(body)}  |  sidecars {len(docs)}  |  joined {matched}")
+    print(f"new columns: {', '.join(c for c in NEW_COLUMNS if c not in header) or '(none)'}\n")
+
+    fills = {k: n for k, n in counts.items() if k.startswith("fill")}
+    print(f"fills ({sum(fills.values())}):")
+    for k, n in sorted(fills.items(), key=lambda kv: -kv[1]):
+        print(f"  {n:4d}  {k.split(': ', 1)[1]}")
+    agrees = sum(n for k, n in counts.items() if k.startswith("agree"))
+    print(f"\nconfirmations (cell already correct): {agrees}")
+    print(f"conflicts (left untouched): {len(conflicts)}")
+
+    if show_conflicts and conflicts:
+        print("\ncells the survey refused to overwrite:")
+        for src, ident, col, cur, prop, claim in conflicts:
+            print(f"  {src}/{ident[:34]:34} {col:14} csv={cur[:28]!r:30} book={prop[:28]!r}")
+            print(f"      leaf {claim.get('leaf')}  {claim.get('evidence_type')}  "
+                  f"{(claim.get('quote') or '')[:70]!r}")
+            if claim.get("image"):
+                print(f"      {claim['image']}")
+
+    changed = new_raw != raw
+    if not write:
+        print("\n(dry run -- nothing written; pass --write)" if changed
+              else "\nno changes: the CSV already matches the sidecars")
+        return 0
+    if not changed:
+        print("\nno changes: the CSV already matches the sidecars")
+        return 0
+    write_csv_raw(new_raw)
+    print(f"\nwrote {CSV_PATH.relative_to(ROOT)}")
+    return 0
+
+
+def self_test():
+    # Rule 1: an empty cell fills, a full cell never gets overwritten by a different value.
+    assert classify("volume_number", "", "83") == "fill"
+    assert classify("volume_number", "83", "83") == "agree"
+    assert classify("volume_number", "82", "83") == "conflict"
+    assert classify("legend_location", "  ", "dedicated-page") == "fill"
+
+    # Idempotency is exactly "a second run reads as agree", so it is worth asserting directly.
+    assert classify("legend_leaf", "9", "9") == "agree"
+
+    # The fuzzy comparators are shared with survey_report so a cell cannot be "agree" in one
+    # tool and "conflict" in the other.
+    assert classify("publisher", "Trow", "THE TROW CITY DIRECTORY COMPANY") == "agree"
+    assert classify("publisher", "Smith", "CHARLES JENKINS") == "conflict", \
+        "the 1857BPL finding must survive the merge"
+    assert classify("year", "1845", "1846") == "agree", "one year of slack"
+    assert classify("year", "1845", "1899") == "conflict"
+    assert classify("year_covered", "1852/53", "1853") == "agree"
+    assert classify("year", "1845", "not-a-year") == "conflict"
+
+    # Rule 2, enforced rather than remembered: propose() must never offer a forbidden column.
+    doc = {"book_says": {
+        "volume_number": {"value": 83, "leaf": 1},
+        "legend": {"leaf": 9, "legend_location": "dedicated-page"},
+        "year_covered": {"value": 1906, "leaf": 1},
+    }}
+    offered = {c for c, _v, _cl in propose({}, doc)}
+    assert offered == {"volume_number", "legend_leaf", "legend_location", "year_covered"}, offered
+    assert not (offered & set(FORBIDDEN)), "key_page/start_page must never be offered"
+
+    # A legend with no leaf is not a claim (the plan's citation rule) and yields no legend_leaf.
+    assert not propose({}, {"book_says": {"legend": {"legend_location": "inline-at-listing-head"}}})
+
+    # The CSV must round-trip byte-identically, or every run would produce a reformat diff that
+    # buries the real change.
+    raw = read_csv_raw()
+    buf = io.StringIO()
+    csv.writer(buf, lineterminator="\r\n").writerows(csv.reader(io.StringIO(raw)))
+    assert buf.getvalue() == raw, "csv dialect drift -- a merge would reformat the whole file"
+
+    print("self-test OK", file=sys.stderr)
+    return 0
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--write", action="store_true", help="commit the fills (default: dry run)")
+    ap.add_argument("--conflicts", action="store_true", help="show every refused cell with its citation")
+    ap.add_argument("--self-test", action="store_true")
+    args = ap.parse_args(argv)
+    if args.self_test:
+        return self_test()
+    return run(args.write, args.conflicts)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

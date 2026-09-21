@@ -34,6 +34,23 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SIDECAR = HERE / "survey"
+CSV_PATH = HERE / "master_directories.csv"
+
+
+def live_csv():
+    """-> {(source, id): row}. The CSV as it is NOW, not as phase 0 found it.
+
+    `--gaps` must read this rather than the sidecar's `catalog_says.csv`, which is a snapshot
+    frozen when the sidecar was written. Once `apply_survey.py` has run, the snapshot still shows
+    those cells empty, so a sidecar-only `--gaps` would report the same 61 `volume_number` cells as
+    fillable forever and read as "nothing was ever applied".
+    """
+    import csv as _csv
+    try:
+        with open(CSV_PATH, "r", encoding="utf-8", newline="") as fh:
+            return {(r["source"], r["id"]): r for r in _csv.DictReader(fh)}
+    except OSError:
+        return {}
 
 STOP = {"the", "and", "of", "co", "company", "corp", "inc", "son", "sons", "bros", "brothers",
         "publisher", "publishers", "publishing", "directory", "city", "general", "new", "york"}
@@ -261,9 +278,11 @@ def main(argv=None):
         return 0
 
     if args.gaps:
+        live = live_csv()
         fill = Counter()
         for d in ia:
-            cat = (d.get("catalog_says") or {}).get("csv") or {}
+            snapshot = (d.get("catalog_says") or {}).get("csv") or {}
+            cat = live.get((d.get("source"), d.get("id")), snapshot)
             book = d.get("book_says") or {}
             st = d.get("structure") or {}
             if not cat.get("key_page") and st.get("legend_leaves"):
@@ -274,13 +293,17 @@ def main(argv=None):
                 fill["publisher"] += 1
             if not cat.get("title") and "title" in book:
                 fill["title"] += 1
-            if "volume_number" in book:
-                fill["volume_number (new column)"] += 1
+            if not cat.get("volume_number") and "volume_number" in book:
+                fill["volume_number"] += 1
             if (d.get("page_numbers") or {}).get("tier") in ("A", "B"):
-                fill["start/end_page + page_offset (free, tier A/B)"] += 1
-        print("\ncells this survey can now fill:")
+                fill["start/end_page + page_offset (tier A/B ROUTE is free -- needs phase 2)"] += 1
+        print("\ncells this survey can now fill (against the LIVE csv):")
         for k, n in fill.most_common():
             print(f"  {n:4d}  {k}")
+        if not fill:
+            print("  (none -- apply_survey.py has merged everything phase 0 can offer)")
+        print("\nNote: the start/end_page line counts volumes whose page-number ROUTE is free,")
+        print("not values in hand. Phase 0 never located the listings; phase 2 does.")
         return 0
 
     rows = [(d, c) for d in ia for c in compare(d)]

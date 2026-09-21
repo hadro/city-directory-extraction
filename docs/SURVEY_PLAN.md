@@ -189,6 +189,67 @@ Cells the survey can now fill: **86** `start/end_page` + `page_offset` (free, ti
 **Twice as many legends are inline as are on a dedicated page (40 vs 20).** The `key_page` column
 assumes a page; it needs a companion `legend_location`.
 
+### Phase 0 writeback — done 2026-09-20, and two of those cells were not ready
+
+`apply_survey.py` merged the sidecars into `master_directories.csv`: **248 fills, 198
+confirmations, 32 conflicts left untouched**, and a second run writes nothing.
+
+| written | | not written | |
+|---|---:|---|---|
+| `volume_number` | 61 | `start_page` / `end_page` / `page_offset` | needs Phase 2 |
+| `legend_leaf` | 60 | `key_page` | unit mismatch — see below |
+| `legend_location` | 60 | | |
+| `year_covered` | 42 | | |
+| `year_published` | 21 | | |
+| `publisher`, `year` (empty cells only) | 4 | | |
+
+**The `--gaps` line "86 start/end_page + page_offset (free, tier A/B)" counts routes, not values.**
+It is computed from `page_numbers.tier` alone; Phase 0 never looked for where the listings start.
+Nothing was in hand to write.
+
+**`key_page` was the near-miss.** The CSV column is a *printed page*; `book_says.legend` carries a
+*leaf*. On the 6 volumes where both exist, `key_page + page_offset` reproduces the sidecar leaf
+exactly twice and is off by one on three more — the `leafNum − 1` trap, not a wobble. The leaf went
+to a new `legend_leaf` column instead; `key_page` stays Phase 2's job. `FORBIDDEN` in
+`apply_survey.py` enforces this in code rather than leaving it to reviewer memory.
+
+**The 32 refusals are a work queue, not noise.** 19 `publisher` + 13 `year`:
+
+| class | n | |
+|---|---:|---|
+| `publisher` = `spooner` across the microfilm set | 9 | **the biggest single finding** |
+| the read is OCR-damaged | 5 | `GEORGE TTBiNfiTriM`, `D. L0NGW0RTH`, `THOMAS LONGWOIITH` — Phase 3 |
+| genuinely a different house | 3 | Lain→`CEO. H. CLARKE`, Franks→`SHEPARD KOLLOCK`, Boyd→`JOHN J. BRENNAN` |
+| compiler vs publisher | 2 | Smith/`CHARLES JENKINS`, on 1857BPL *and* `micro_IABROOKLYN_0036` |
+| the year read is not the volume's year | 9 | see below |
+| the page contradicts the catalog for real | 3 | |
+| OCR garbage | 1 | `flushingnewyorkc00boyd` reads 1800 against CSV 1890 |
+
+**The `spooner` cluster is worth looking at first.** `micro_IABROOKLYN_0010/0012/0015/0019/0020/
+0024/0025/0027` and `brooklynalphabet1843unse` all carry lowercase `spooner` in the CSV, against
+target cards naming Lewis, Wm. J. Hearne, Henry R. Hearne, A. G. Stevens & Wm. H. Marschalk,
+Thomas Leslie and Betts Burrell. Uniform, lowercase, and contradicted by nine different cards:
+that reads as a collection-level default that was never revisited, not as nine assertions.
+
+**Nine of the thirteen year conflicts are the extractor grabbing a year that isn't the volume's**,
+and the *sources* of the bad year are more varied than the plan anticipated — it is not only ads:
+
+- founding dates — `Established 1870`, `ESTABLISHED 1837`, `Established 1847` (3)
+- **copyright-statute boilerplate** — `IN FORCE JULY 1, 1909` on two 1913 Trow volumes (2)
+- **listing text bleeding into the front matter** — `R 1801 — A. E. Humphrey, Sec.` and
+  `h 1853 1st av` are directory *entries*, house numbers read as years (2)
+- prose discussing another year — 1866BPL's `more than the year 1863-4` (1)
+- a photo credit — `Photo copyright, 1906, by Irving Underhill` (1)
+
+The last two classes are new. A year-claim gate that required the year to sit near an imprint or
+copyright *verb* would kill most of these.
+
+Three are the *catalog* being wrong and the page proving it: `newyorkcitydirec00rode` (copyright
+`in the year 1854` vs CSV 1851), `newyorkdirectory00durs_0` (a `1851` imprint vs CSV 1786 — the
+reprint/original tangle again), and `longworthsameric00newy` (CSV 1816 against `SIXTY-FOURTH YEAR
+OF AMERICAN INDEPENDENCE` = 1775 + 64 = **1839**). The gate refused all three anyway, which is the
+design — they go to a human, not into the column.
+
 ### Four witnesses, not two — and the CSV is not IA
 
 Year conflicts are adjudicated by **four independent witnesses**: the CSV, IA's `date`, a year
@@ -286,7 +347,10 @@ Per volume, from the JSONL + pageindex + `_page_numbers.json`:
 
 - `detect_listing_bounds --from-jsonl` → start/end leaf, letter blocks, gaps, order violations,
   ambiguous edges
-- printed `start_page` / `end_page` via the cascade above
+- printed `start_page` / `end_page` via the cascade above. **`survey_pagenumbers.py` does not exist
+  yet** — `survey_census.py`'s docstring names it as the tier-C/D fallback, so it reads as built
+  and is not. It is the first thing Phase 2 needs, along with the leaf→printed-page conversion that
+  finally lets `key_page` and `legend_leaf` be reconciled.
 - **`page_offset` as a per-leaf curve**, not a scalar. The README's "drifts across a volume —
   local anchor, not a global constant" stops being a limitation: the sidecar stores the curve, the
   CSV keeps one human-readable local anchor near the listing start.
@@ -340,6 +404,12 @@ NYPL's existing fill is already partial (`start_page` ~86/151 from earlier visua
 **Nothing in this survey writes `master_directories.csv` directly.** Agents and scripts write
 per-volume sidecars; a single idempotent `apply_survey.py` merges them in one pass with a diff
 report. Reviewable git diffs, no concurrent-write corruption, safe to re-run nightly.
+
+`apply_survey.py` exists as of 2026-09-20 and holds three rules: a sidecar fills an **empty** cell
+and never overwrites a full one; a value is only written into a column that **means the same
+thing** (`FORBIDDEN` names the four columns it must not touch, with the reason); and a second run
+writes nothing. Dry-run by default — `--write` commits, `--conflicts` prints every refused cell
+with its citation and image URL.
 
 The CSV stays the human-facing summary. The sidecar holds the citations, the offset curve, the
 section inventory and the confidence — anything that would explode the column count.

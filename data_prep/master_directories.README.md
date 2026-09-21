@@ -29,6 +29,34 @@ volumes) for the pipeline to OCR/extract.
 | `title` | rec. | the volume's title (MODS primary title / manifest label); auto-filled by `ingest_collection.py` |
 | `notes` | opt. | anything (e.g. microform, condition, "Greater NY", `PHONEBOOK`, `covers …`) |
 
+### Survey columns (written only by `apply_survey.py`, from `survey/*.json`)
+
+Added 2026-09-20 from the Phase-0 corpus survey (`docs/SURVEY_PLAN.md`). Every value here is
+attested by something **printed in the volume**, and the sidecar holds the citation — leaf, canvas,
+IIIF image URL and verbatim quote. Do not hand-edit these; edit the sidecar and re-run the merge.
+
+| column | filled | meaning |
+|---|---:|---|
+| `volume_number` | 61 | the volume's own sequence number, as printed (`VOLUME LXXXIII` → `83`) |
+| `year_covered` | 42 | the year the listings describe — "for the year ending May 1st, 1857" → 1857 |
+| `year_published` | 21 | the year of the imprint/copyright line. Routinely **differs** from `year_covered`: Trow volumes were published the autumn before their nominal year, and `micro_IABROOKLYN_0022` is a title page reading "for 1845 and 1846" |
+| `legend_leaf` | 60 | **leaf index** (0-based canvas) of the abbreviations key. Deliberately *not* `key_page` — see below |
+| `legend_location` | 60 | `dedicated-page` (20) \| `inline-at-listing-head` (40) |
+
+Two traps this encodes, both measured:
+
+- **`legend_leaf` is a leaf; `key_page` is a printed page.** They differ by `page_offset`, which
+  drifts within a volume, and the `leafNum − 1` off-by-one is real. Writing a leaf into `key_page`
+  would corrupt a column that is currently correct, so the survey keeps its own unit and leaves
+  `key_page` to Phase 2, which converts via `_page_numbers.json`.
+- **Twice as many legends are inline as are on a dedicated page (40 vs 20).** `key_page` assumes a
+  page exists; for 40 volumes the answer is not a missing value but a different shape, which is
+  what `legend_location` records.
+
+`year` stays the single human-facing summary and is never rewritten from `year_covered` /
+`year_published`. `start_page`, `end_page`, `page_offset` and `key_page` are **not** survey-written
+yet — they need the Phase-1 OCR harvest and Phase-2 bounds detection.
+
 ### What goes in `id`, per `source`
 - **`nypl`** — the item **UUID** (e.g. `4b4b2b90-317a-0134-6800-00505686a51c`). Resolves to
   `https://api-collections.nypl.org/manifests/{id}` (the API host — the `digitalcollections.nypl.org`

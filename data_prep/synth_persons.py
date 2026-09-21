@@ -1341,10 +1341,39 @@ def make_record(rng, profile: str, nyc_weight: float = 0.75) -> dict:
 # OCR noise (INPUT line only)
 # ======================================================================================
 
+# Hand-written generic OCR confusions, NOT derived from this corpus -- see
+# docs/POST_OCR_CORRECTION.md. `data_prep/ocr_delta.py --noise-table` emits a measured
+# replacement from the hand-corrected gold; prefer that once it has been run and reviewed.
+# ("ii", "n") was removed 2026-09-20: it requires `ii` in the line, which in clean directory
+# text essentially only occurs if ("u", "ii") already fired, so it was measured firing on
+# 0.0% of lines. Do not re-add it without a measurement.
 _NOISE_SUBS = [
     ("m", "rn"), ("rn", "m"), ("l", "1"), ("1", "l"), ("O", "0"), ("0", "O"),
-    ("S", "5"), ("B", "8"), ("cl", "d"), ("ii", "n"), ("u", "ii"),
+    ("S", "5"), ("B", "8"), ("cl", "d"), ("u", "ii"),
 ]
+
+
+def _substitute(rng, out: str) -> str:
+    """One confusion substitution, at a RANDOM occurrence of an APPLICABLE pair.
+
+    Two deliberate differences from the original, both measured defects:
+
+    * choose only among pairs the line can actually host. The old code picked uniformly from
+      all eleven and then `find()` returned -1, so the edit was silently dropped -- which is
+      why `--noise 0.35` touched 25.8% of lines rather than 35%.
+    * substitute at a random occurrence, not the first. `find()` always took the leftmost
+      match, skewing edits toward the start of the line (27.0% in the first quarter vs 16.8%
+      in the last) for reasons of implementation, not of any scanner.
+
+    Returns `out` unchanged when no pair applies, which is now rare rather than routine.
+    """
+    applicable = [(frm, to) for frm, to in _NOISE_SUBS if frm in out]
+    if not applicable:
+        return out
+    frm, to = rng.choice(applicable)
+    starts = [i for i in range(len(out) - len(frm) + 1) if out.startswith(frm, i)]
+    idx = rng.choice(starts)
+    return out[:idx] + to + out[idx + len(frm):]
 
 
 def add_noise(rng, line: str, p: float) -> str:
@@ -1354,12 +1383,12 @@ def add_noise(rng, line: str, p: float) -> str:
     for _ in range(rng.randint(1, 2)):
         roll = rng.random()
         if roll < 0.5:
-            frm, to = rng.choice(_NOISE_SUBS)
-            idx = out.find(frm)
-            if idx != -1:
-                out = out[:idx] + to + out[idx + len(frm):]
+            out = _substitute(rng, out)
         elif roll < 0.7 and "," in out:
-            out = out.replace(",", "", 1)
+            # random comma, not the first -- same first-match artifact as the old _substitute
+            commas = [i for i, ch in enumerate(out) if ch == ","]
+            i = rng.choice(commas)
+            out = out[:i] + out[i + 1:]
         elif roll < 0.85 and len(out) > 4:
             i = rng.randint(0, len(out) - 2)
             out = out[:i] + out[i + 1] + out[i] + out[i + 2:]

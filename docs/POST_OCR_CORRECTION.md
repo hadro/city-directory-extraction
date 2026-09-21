@@ -237,6 +237,11 @@ evidence that the rate is not the part that is wrong.
 3. **The measurement to justify it still does not exist.** §5 was supposed to produce it and
    produced a conflated corpus instead.
 
+None of the three is a statement about the corrector's *architecture*, so a better corrector does
+not answer them. Asked specifically about diffusion LMs on 2026-09-20 — see §8, where a benchmark
+at this corpus's exact input-noise level finds the diffusion model both worse than its
+autoregressive twin and the **most** over-correcting of the three models tested.
+
 If tier 3 is ever run, the design that fits this corpus is **constrained, not generative**: use
 correction as a candidate generator and let something else adjudicate. Two adjudicators are already
 in the repo — the **alphabetical walk** (`alpha_run_filter.py`; a corrected surname must sort
@@ -317,6 +322,65 @@ either direction, something other than the noise model changed; diagnose rather 
   remains the closest methodological template (byte-level, historical, explicitly handles `ſ`), and
   `jvdzwaan` is error *detection* rather than correction, which is arguably the more useful half
   here given that detection plus abstention is the low-risk design.
+
+### Diffusion LMs as OCR denoisers — asked 2026-09-20, and the benchmark answers it
+
+The intuition is attractive: a discrete diffusion LM generates by iteratively *denoising*, OCR
+correction *is* denoising, so the architecture should fit. **The name is a pun on two different
+noises** — the diffusion model denoises its own masked generation canvas, not your corrupted
+input, which is only conditioning. The non-pun version of the argument is real but narrower: a
+non-autoregressive model that revises tokens in place suits a task whose output is ~95% a copy of
+its input, and it is much faster.
+
+There is now a benchmark, and it is unusually transferable. `davanstrien`'s Space
+[`diffusiongemma-ocr-correction`](https://huggingface.co/spaces/davanstrien/diffusiongemma-ocr-correction)
+ran 75 BLN600 passages (19th-c. British Library newspapers, human transcriptions) through three
+models, zero-shot, on an A100, 2026-06-11, measuring **over-correction rate** and **fix rate** —
+the two metrics this document cares about most. From its `results/summary.md` (verified):
+
+| model | CER | WER | rel. CER reduction | **over-correction** | fix rate | s/passage |
+|---|---|---|---|---|---|---|
+| OCR input, uncorrected | **0.066** | 0.215 | — | — | — | — |
+| DiffusionGemma 26B-A4B-it | 0.035 | 0.073 | 49.5% | **1.5%** | 86.0% | **1.69** |
+| Gemma-4-E4B-it | 0.042 | 0.107 | 45.9% | **0.4%** | 61.5% | 15.33 |
+| Gemma-4-26B-A4B-it (the AR twin) | **0.027** | 0.061 | 62.4% | 0.9% | 87.5% | 16.31 |
+
+**Note the first row: BLN600's uncorrected CER is 0.066, against this corpus's IA hOCR 0.067.**
+The input-noise regime is effectively identical, which is what makes the table worth reading at
+all.
+
+**Three readings, and none of them favours adopting this:**
+
+1. **The diffusion advantage did not survive a fair comparison.** The first result was against
+   `Gemma-4-E4B` (~4.5B effective) and read as "diffusion beats autoregressive". Re-run against its
+   **parameter-matched twin** — same 26B MoE, same ~3.8B active — the twin wins on quality (0.027
+   vs 0.035) and diffusion keeps only the ~10× speed. This is precisely the shape of the mistakes
+   [TAKEOVER.md](TAKEOVER.md) catalogues, the unprimed Gemini bar most of all: a favourable number
+   produced by an unmatched comparison.
+2. **It is the WORST of the three on over-correction, which is the axis that matters here.**
+   The Space set out to test whether diffusion might be "faster and less prone to over-correction".
+   It is faster and it is *more* prone — 1.5% against 0.9% and 0.4%. For a corpus where conv #2a
+   requires **preserving** a printer's error and roughly half the volumes are the clean ABBYY tier,
+   over-correction is the whole risk, and Huynh/Hamdi/Doucet put the harm threshold below 3% CER.
+   The table also shows the trade plainly: the smallest model has the lowest over-correction
+   (0.4%) *and* the lowest fix rate (61.5%). Abstention is not free, but it is purchasable.
+3. **The task shape does not transfer.** BLN600 passages are newspaper prose capped at 220 tokens
+   — roughly 5× a directory line, and prose is exactly the linguistic context these models exploit.
+   A 43-character directory line is near-pure named entity with none. A strong BLN600 number says
+   little about the input this pipeline actually has, and §6 tier 3 reason 1 is unchanged by it.
+
+Cost, for completeness: MoE saves compute, not memory — 25.2B weights must be resident whatever
+the 3.8B active figure suggests, and the 4B release candidate already *"does not fit this Mac"*
+([HANDOFF.md](HANDOFF.md)). This is rented-GPU or HPC work, as a second expensive pass over
+205,590 lines (1906BPL) or 1,484,446 (Trow 1915).
+
+**Verdict: worth having read, not worth building on.** It does not move tier 3, because tier 3 is
+blocked on reasons that are indifferent to the corrector's architecture — no context in the input,
+a contract that requires preserving errors, a fabrication null that caps the upside (§4), and no
+way to score the result yet (§5). The one thing in it that *is* live is architectural rather than
+diffusional, and it belongs to the lead below: **DiffusionGemma is multimodal (text + image +
+video, 256K context)**, so it is one concrete instance of the image-conditioned option — which is
+the lever this project has actually left on the table.
 
 ### The one lead worth re-reading if this is ever picked up
 

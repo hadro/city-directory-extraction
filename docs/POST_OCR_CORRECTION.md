@@ -178,6 +178,63 @@ above) is the raw material for the **degraded-input panel** that any noise-model
 before it can be scored. That was always the more important of its two purposes. It is now the
 only one.
 
+### 5a. The three edit types, separated — measured 2026-09-20
+
+[`results/ocr_edit_types.py`](../results/ocr_edit_types.py) →
+[`results/ocr_edit_types.json`](../results/ocr_edit_types.json). Attribution is **per edit, not
+per row**, over `SequenceMatcher` opcodes: an insert or replace touching the start or end of the
+line is segmentation (a truncated OCR line, a joined continuation, a column break); everything
+interior is an OCR edit, after convention normalisation is applied to both sides. Row-level
+bucketing is not good enough because **141 rows are both** — `Barnett Eliabeth E (wid Geo W), r`
+→ `Barnett Elizabeth E (wid Geo W), r 111 E Cameron.` is one substitution plus a 16-character
+tail, and charging the tail to OCR inflates CER most on exactly the volumes that wrap most.
+
+| bucket | n | share |
+|---|---|---|
+| A pass-through (identical) | 2,380 | 55.0% |
+| B wrap / segmentation | 1,370 | 31.7% |
+| C convention-only | 93 | 2.2% |
+| **D OCR fix** | **423** | **9.8%** |
+| E alignment failure | 59 | 1.4% |
+
+**So the 45.0% "changed" is 9.8% OCR.** The rest is the page being read back correctly across a
+line break (769 rows where gold merely appends, 237 multi-line matches, 174 trailing hyphens) or
+a hand-applied convention (93 rows, essentially all `½`→`1/2`).
+
+**The corpus-wide CER straddles the decision threshold, so there is no corpus-wide answer:**
+
+| | CER |
+|---|---|
+| interior edits only — **floor** | **0.0207** |
+| whole changed rows — **ceiling** | **0.0674** |
+| `ocr_delta.py`'s unseparated figure | 0.1829 |
+| Huynh/Hamdi/Doucet net-harm threshold | 0.03 |
+
+The floor sits below the threshold and the ceiling above it. **Per volume it is not close, and it
+is bimodal:**
+
+| above the 0.03 floor | | everything else | |
+|---|---|---|---|
+| polk1925 | 0.1071 | franks1786 | 0.0082 |
+| queens1933 | 0.0912 | smith1855 | 0.0060 |
+| tulsa | 0.0671 | lain | 0.0057 |
+| mb1931 | 0.0448 | doggetts1850 | 0.0008 |
+| | | trow1884 | 0.0002 |
+| | | hearne1852, doggett1846, hopehenderson1856 | 0.0000 |
+
+**Four volumes out of 25 are candidates for correction. On the other twenty-one the cited
+literature predicts correction does net harm**, and three of them have no interior OCR edit at
+all across the whole labelled sample. That converts "abstention is a requirement" from a
+principle into a volume list, and it is the strongest argument in this document for **per-volume
+gating over any global correction pass.**
+
+Two things that bound this. `tulsa` carries 1,898 of the 2,431 interior edits — 78% of the total
+on 24% of the characters — and it is the CONTENTdm spread-scan set with known segmentation
+trouble, so its 0.0671 is the least trustworthy number in the table. And the engine caveat
+outranks everything: **this is Surya. Production ingests IA hOCR.** The bimodality is probably
+a property of the material (late microfilm vs letterpress) rather than of Surya, which is why it
+is worth reporting at all — but the *values* do not transfer.
+
 ## 6. The options, re-ranked after the run
 
 ### ~~Tier 1 — normalise at ingest, "do this regardless"~~ — REJECTED 2026-09-20
@@ -402,15 +459,17 @@ two of them came back negative.
 
 1. **DONE 2026-09-20.** Both self-tests pass; `add_noise`'s three (four) bugs are fixed (`f3e2bf8`);
    `ocr_delta.py` has been run and its report is committed (`eb71e47`).
-2. **Separate the edit types in `data/ocr_pairs.jsonl`** — OCR fix vs labelling convention vs wrap
-   completion. Everything downstream is blocked on this and nothing else. A wrap completion is
-   detectable (the OCR side ends in `-` or the gold side is strictly longer at a line boundary);
-   conventions are enumerable from `GROUND_TRUTH_HANDOFF.md`. What is left after removing both is
-   the only honest OCR-error measurement this project has.
-3. **Then re-state the §7 gate** over that residue, on listing lines, and decide tier 2 against it.
-   Expect the residual CER to be far below 0.1829 and quite possibly below the 3% floor at which
-   Huynh/Hamdi/Doucet predict correction does net harm — in which case the answer is *stop*, and
-   that is a real and useful outcome, not a failure.
+2. **DONE 2026-09-20 — §5a.** The edit types are separated: 9.8% OCR fix, 31.7% wrap, 2.2%
+   convention, 55.0% untouched, with CER bracketed at **[0.0207, 0.0674]** against a 0.03
+   threshold. The corpus-wide question has no answer; the per-volume one has a clean bimodal
+   answer, and **four volumes of 25 are above the floor.**
+3. **Re-state the §7 gate per volume, not corpus-wide** — that is the change §5a forces, and it is
+   the most useful thing to come out of this document. A global correction pass is now
+   affirmatively contraindicated: on 21 of 25 labelled volumes the cited literature predicts net
+   harm, and three show no interior OCR damage at all. If correction is ever built it must be
+   **gated on a per-volume damage estimate**, which is a measurement the pipeline does not
+   currently produce for unlabelled volumes — that gap, not the corrector, is the next real
+   problem.
 4. **Independently of all of the above: build the degraded-input panel.** It is the fix for §3,
    which is a live measurement defect whatever happens to the noise model — the panel currently
    flatters the model and nobody can say by how much.

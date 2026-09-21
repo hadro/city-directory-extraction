@@ -1,0 +1,148 @@
+{
+  "pairs": 4325,
+  "buckets": {
+    "  .D also carries a wrap": 141,
+    "  .boundary edit only": 72,
+    "  .gold appends": 769,
+    "  .gold prepends": 118,
+    "  .newline": 237,
+    "  .trailing hyphen": 174,
+    "A pass-through": 2380,
+    "B wrap / segmentation": 1370,
+    "C convention-only": 93,
+    "D OCR fix": 423,
+    "E alignment failure": 59
+  },
+  "cer_interior_floor": 0.020685,
+  "cer_whole_row_ceiling": 0.0674,
+  "ocr_delta_reported_cer": 0.1829,
+  "net_harm_floor": 0.03,
+  "per_volume": {
+    "boyd1890": {
+      "cer_interior": 0.000368,
+      "interior_edits": 1,
+      "gold_chars": 2720
+    },
+    "doggett1846": {
+      "cer_interior": 0.0,
+      "interior_edits": 0,
+      "gold_chars": 1466
+    },
+    "doggetts1850": {
+      "cer_interior": 0.00077,
+      "interior_edits": 8,
+      "gold_chars": 10384
+    },
+    "duncan1794": {
+      "cer_interior": 0.001377,
+      "interior_edits": 3,
+      "gold_chars": 2179
+    },
+    "franks1786": {
+      "cer_interior": 0.008234,
+      "interior_edits": 18,
+      "gold_chars": 2186
+    },
+    "hearne1852": {
+      "cer_interior": 0.0,
+      "interior_edits": 0,
+      "gold_chars": 1929
+    },
+    "hopehenderson1856": {
+      "cer_interior": 0.0,
+      "interior_edits": 0,
+      "gold_chars": 1308
+    },
+    "lain": {
+      "cer_interior": 0.005669,
+      "interior_edits": 130,
+      "gold_chars": 22933
+    },
+    "lain1876": {
+      "cer_interior": 0.003038,
+      "interior_edits": 10,
+      "gold_chars": 3292
+    },
+    "longworth1818": {
+      "cer_interior": 0.000787,
+      "interior_edits": 3,
+      "gold_chars": 3810
+    },
+    "mb1931": {
+      "cer_interior": 0.044822,
+      "interior_edits": 103,
+      "gold_chars": 2298
+    },
+    "mercein1820": {
+      "cer_interior": 0.000499,
+      "interior_edits": 1,
+      "gold_chars": 2006
+    },
+    "ogden1839": {
+      "cer_interior": 0.003126,
+      "interior_edits": 7,
+      "gold_chars": 2239
+    },
+    "polk1917": {
+      "cer_interior": 0.006459,
+      "interior_edits": 6,
+      "gold_chars": 929
+    },
+    "polk1925": {
+      "cer_interior": 0.107084,
+      "interior_edits": 65,
+      "gold_chars": 607
+    },
+    "polk1933si": {
+      "cer_interior": 0.002608,
+      "interior_edits": 4,
+      "gold_chars": 1534
+    },
+    "queens1933": {
+      "cer_interior": 0.09116,
+      "interior_edits": 66,
+      "gold_chars": 724
+    },
+    "rode1851": {
+      "cer_interior": 0.003989,
+      "interior_edits": 7,
+      "gold_chars": 1755
+    },
+    "smith1855": {
+      "cer_interior": 0.005998,
+      "interior_edits": 30,
+      "gold_chars": 5002
+    },
+    "smith1856": {
+      "cer_interior": 0.002311,
+      "interior_edits": 16,
+      "gold_chars": 6924
+    },
+    "trow1884": {
+      "cer_interior": 0.000228,
+      "interior_edits": 1,
+      "gold_chars": 4388
+    },
+    "trow1907": {
+      "cer_interior": 0.003067,
+      "interior_edits": 5,
+      "gold_chars": 1630
+    },
+    "trow1913": {
+      "cer_interior": 0.003559,
+      "interior_edits": 2,
+      "gold_chars": 562
+    },
+    "trowwilson1865": {
+      "cer_interior": 0.003033,
+      "interior_edits": 19,
+      "gold_chars": 6265
+    },
+    "tulsa": {
+      "cer_interior": 0.067074,
+      "interior_edits": 1898,
+      "gold_chars": 28297
+    }
+  },
+  "engine": "surya (NOT the IA hOCR production ingests)"
+}

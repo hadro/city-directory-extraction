@@ -3,19 +3,15 @@
  "id": "flushingnewyorkc00boyd",
  "book_says": {
   "year": {
-   "value": 1800,
+   "value": 1890,
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/canvas",
    "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "echnto- JOTT^nsr-^-iL-.\nFLUSHING, N. Y.\n1800.\nEntered according to Act of Congress,",
-   "method": "hocr-text",
-   "confidence": "low",
-   "attestation": "digits",
-   "conflicts_with_catalog": [
-    "1890",
-    "1890"
-   ]
+   "quote": "1890-91. Flushing Village Directory ... PRINTED AND PUBLISHED AT THE OFFICE OF THE FLUSHING JOURNAL, FLUSHING, N. Y. 1890. Entered according to Act of Congress, in the year 1890, by C. W. SMITH.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
   },
   "year_attestations": [
    {
@@ -26,28 +22,61 @@
    }
   ],
   "title": {
-   "value": "GEO B. ROE & CO., LUMBER, LIME, LATH, COAL AND WOOD. Office, 9 MAIN STREET, Yard, Foot of BRIDGE ST., FLUSHING, L. I. wjj Z FLUSHING VILLAGE DIRECTORY. .iS Ames",
-   "leaf": 17,
-   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$17/canvas",
-   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$17/full/1400,/0/default.jpg",
+   "value": "Flushing Village Directory",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/canvas",
+   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "GEO B. ROE & CO., / LUMBER, LIME, LATH, COAL AND WOOD. / Office, 9 MAIN STREET, / Yard, Foot of BRIDGE ST., FLUSHING, L. I. / wjj Z FLUSHING VILLAGE DIRECTORY. / .iS Ames Chas W, waiter, h 140 Farring",
-   "method": "hocr-text",
-   "confidence": "medium"
+   "quote": "1890-91. Flushing Village Directory",
+   "method": "agent-read",
+   "confidence": "high"
   },
   "publisher": {
-   "value": "JOHN J. BRENNAN",
-   "leaf": 27,
-   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$27/canvas",
-   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$27/full/1400,/0/default.jpg",
+   "value": "The Flushing Journal",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/canvas",
+   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "JOHN J. BRENNAN, PROPRIETOR",
-   "method": "hocr-text",
+   "quote": "PRINTED AND PUBLISHED AT THE OFFICE OF THE FLUSHING JOURNAL, FLUSHING, N. Y. 1890.",
+   "method": "agent-read",
    "confidence": "high",
-   "evidence_detail": "imprint"
+   "csv_label": "Flushing Journal",
+   "role": "printed and published; copyright entered by C. W. Smith"
+  },
+  "year_covered": {
+   "value": 1890,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/canvas",
+   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "1890-91.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1890,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/canvas",
+   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Entered according to Act of Congress, in the year 1890, by C. W. SMITH, in the Office of the Librarian of Congress, at Washington, D. C.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "TWO CONFLICTS SETTLED FROM ONE PAGE. Leaf 7 is the true title page and prints '1890' clearly, so phase 0b's 1800 was an OCR misread of 1890 and the CATALOG YEAR IS RIGHT. But the publisher is NOT Boyd: the volume is 'PRINTED AND PUBLISHED AT THE OFFICE OF THE FLUSHING JOURNAL' and copyrighted by C. W. Smith. The 'JOHN J. BRENNAN, PROPRIETOR' phase 0b found on leaf 27 is neither -- it is somewhere else in the front matter. Residential in scope: 'a complete and correct compilation of the residents of Flushing, N.Y., together with a business and official directory'."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 5549401,
   "hocr_sha1": "9ba7d421879680cc854f2eabe574fd5522c113ec",

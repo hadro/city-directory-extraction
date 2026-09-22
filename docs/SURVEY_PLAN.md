@@ -390,8 +390,24 @@ back to ~1787/88 would start, allowing for the early gaps.
 Trow asserting descent from the 1786 directory. **A bad year and a real fact in the same line**,
 which is a good argument for the veto *skipping* a claim rather than deleting the text.
 
-Two independent series, then, each numbering itself from its city's first directory: Brooklyn
-from Spooner's 1822, Manhattan from Franks' 1786.
+**A third series, and this one prints its own origin outright.** `newyorkcitydirec00rode` leaf 17:
+
+> THE NEW-YORK CITY DIRECTORY, FOR 1854–1855. **Thirteenth Publication. ESTABLISHED IN 1842.**
+> NEW-YORK: CHARLES R. RODE, 161 BROADWAY, **LATE DOGGETT & RODE.**
+
+| | vol | for | implies vol 1 in |
+|---|---:|---:|---:|
+| Doggett | 4 | 1845 | 1842 |
+| Doggett | 6 | 1847 | 1842 |
+| Rode | 13 | 1854 | 1842 |
+
+Three volumes, two publishers, one answer — **and the page states "ESTABLISHED IN 1842" rather than
+leaving it to be inferred**, while "LATE DOGGETT & RODE" names the succession. So Doggett and Rode
+are one series, exactly as Spooner→Nichols→Hearne→Upington is one and Trow is one. That also
+settles a year conflict: the catalog's 1851 is wrong.
+
+So: three independent series, each numbering itself continuously from its origin — Brooklyn from
+Spooner's 1822, Manhattan from Franks' 1786, and Doggett/Rode from an 1842 the book prints itself.
 
 ### 🎯 Some volumes PRINT THEIR OWN ENTRY COUNT, which `entry_rate` has never had
 

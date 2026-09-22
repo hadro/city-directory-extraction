@@ -4,18 +4,14 @@
  "book_says": {
   "year": {
    "value": 1854,
-   "leaf": 18,
-   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$18/canvas",
-   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$18/full/1400,/0/default.jpg",
-   "evidence_type": "copyright_page",
-   "quote": "cording to Act of Congress, in the year 1854, by\nCHARLES R. RODE,\nIn tlie Clerk's Of",
-   "method": "hocr-text",
-   "confidence": "low",
-   "attestation": "digits",
-   "conflicts_with_catalog": [
-    "1851",
-    "1851"
-   ]
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE NEW-YORK CITY DIRECTORY, FOR 1854-1855. Thirteenth Publication. ESTABLISHED IN 1842. NEW-YORK: CHARLES R. RODE, 161 BROADWAY, LATE DOGGETT & RODE. PRICE EIGHTEEN SHILLINGS, ($2,25.)",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
   },
   "year_attestations": [
    {
@@ -36,15 +32,16 @@
    "confidence": "high"
   },
   "publisher": {
-   "value": "CHARLES R. RODE",
-   "leaf": 18,
-   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$18/canvas",
-   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$18/full/1400,/0/default.jpg",
-   "evidence_type": "copyright_page",
-   "quote": "Act of Congress, in the year 1854, by CHARLES R. RODE",
-   "method": "hocr-text",
+   "value": "Charles R. Rode",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "CHARLES R. RODE, 161 BROADWAY, LATE DOGGETT & RODE.",
+   "method": "agent-read",
    "confidence": "high",
-   "evidence_detail": "copyright-line"
+   "csv_label": "Rode",
+   "role": "publisher; successor to Doggett & Rode"
   },
   "legend": {
    "value": "present",
@@ -71,9 +68,63 @@
    "ia_leaf_confidence": null,
    "volume_monotone_breaks": 4,
    "volume_numbered_leaves": 974
+  },
+  "year_covered": {
+   "value": 1854,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR 1854-1855.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "volume_number": {
+   "value": 13,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Thirteenth Publication.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "The New-York City Directory",
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE NEW-YORK CITY DIRECTORY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "series_established": {
+   "value": 1842,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "ESTABLISHED IN 1842.",
+   "method": "agent-read",
+   "confidence": "high",
+   "note": "the series origin PRINTED rather than inferred; matches the Doggett volume numbers exactly"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "series_established",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered"
+   ],
+   "note": "YEAR CONFLICT SETTLED, and it closes a third series. Title page leaf 17 reads 'THE NEW-YORK CITY DIRECTORY, FOR 1854-1855. Thirteenth Publication. ESTABLISHED IN 1842. NEW-YORK: CHARLES R. RODE, 161 BROADWAY, LATE DOGGETT & RODE.' The catalog's 1851 is wrong. This volume PRINTS ITS OWN SERIES ORIGIN -- 'ESTABLISHED IN 1842' -- and the arithmetic matches Doggett exactly: Doggett's 4th is 1845, his 6th is 1847, Rode's 13th is 1854, and all three imply vol 1 in 1842. 'LATE DOGGETT & RODE' names the succession outright, so Doggett and Rode are ONE series. Leaf 16 is a Durst/Avery bookplate, which is why phase 0b's candidates missed this."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 142015863,
   "hocr_sha1": "e71a912638832357d14213374aa8e38e02e126c8",

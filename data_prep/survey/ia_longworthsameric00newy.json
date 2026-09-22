@@ -8,14 +8,10 @@
    "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric00newy$17/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "SIXTY-FOURTH YEAR\nOF\nAMERICAN INDEPENDENCE",
-   "method": "hocr-text",
-   "confidence": "low",
-   "attestation": "independence-formula",
-   "conflicts_with_catalog": [
-    "1816",
-    "1816"
-   ]
+   "quote": "LONGWORTH'S AMERICAN ALMANAC, NEW-YORK REGISTER, AND CITY DIRECTORY, FOR THE SIXTY-FOURTH YEAR OF AMERICAN INDEPENDENCE ... NEW-YORK: PUBLISHED BY THOMAS LONGWORTH, 118 NASSAU STREET. 1839.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits+independence-formula"
   },
   "year_attestations": [
    {
@@ -50,28 +46,72 @@
    }
   ],
   "publisher": {
-   "value": "THOMAS LONG WORTH",
+   "value": "Thomas Longworth",
    "leaf": 17,
    "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric00newy$17/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "PUBLISHED BY THOMAS LONG WORTH",
-   "method": "hocr-text",
+   "quote": "PUBLISHED BY THOMAS LONGWORTH, 118 NASSAU STREET. 1839.",
+   "method": "agent-read",
    "confidence": "high",
-   "evidence_detail": "imprint"
+   "csv_label": "Longworth"
   },
   "title": {
-   "value": "LONGWORTH'S AMERICAN ALMANAC, NEW-YORK REGISTER, AND CITY DIRECTORY, FOR THE SIXTY-FOURTH YEAR OF AMERICAN INDEPENDENCE : CONTAINING",
+   "value": "Longworth's American Almanac, New-York Register, and City Directory",
    "leaf": 17,
    "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric00newy$17/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "LONGWORTH'S / AMERICAN ALMANAC, / NEW-YORK REGISTER, / AND / CITY DIRECTORY, / FOR / THE SIXTY-FOURTH YEAR / OF / AMERICAN INDEPENDENCE : / CONTAINING",
-   "method": "hocr-text",
-   "confidence": "medium"
+   "quote": "LONGWORTH'S AMERICAN ALMANAC, NEW-YORK REGISTER, AND CITY DIRECTORY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_covered": {
+   "value": 1839,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric00newy$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE SIXTY-FOURTH YEAR OF AMERICAN INDEPENDENCE",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1839,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric00newy$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY THOMAS LONGWORTH, 118 NASSAU STREET. 1839.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "stated_name_count": {
+   "value": 39000,
+   "leaf": 17,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$17/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric00newy$17/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "the names, occupation, and place of Residence of all heads of families, firms, and those doing business in the city, amounting to near thirty-nine thousand in correct alphabetical arrangement",
+   "method": "agent-read",
+   "confidence": "high",
+   "note": "APPROXIMATE -- 'near thirty-nine thousand', not an exact count like Doggett's"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "stated_name_count",
+    "title",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "YEAR CONFLICT SETTLED, and decisively -- the title page carries TWO independent attestations of the same year. 'FOR THE SIXTY-FOURTH YEAR OF AMERICAN INDEPENDENCE' is 1775+64 = 1839, and the imprint prints '1839' outright. The catalog's 1816 is wrong. The page also states an approximate entry count ('amounting to near thirty-nine thousand') and an inclusion policy ('all heads of families, firms, and those doing business in the city'). It closes with an Othello parody: 'Who steals my purse steals trash; But he who BORROWS my DIRECTORY filches me Most villanously.'"
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 46037053,
   "hocr_sha1": "c362d7346e4236bb94594a1bc5c9f9a2916f56d8",

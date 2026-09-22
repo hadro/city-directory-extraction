@@ -3,35 +3,24 @@
  "id": "trowsgeneraldire1915trow",
  "book_says": {
   "year": {
-   "value": 1870,
-   "leaf": 4,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$4/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$4/full/1400,/0/default.jpg",
+   "value": 1915,
+   "leaf": 10,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$10/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$10/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "row Building) New York City\nEstablished 1870\nV- rdaen, B l>\nBaltimore. Mil\nMi.l.\nIll",
+   "quote": "oroughs of Manhattari and the Bronx\nfor 1915.\nFor the past 127 years the New York Ci",
    "method": "hocr-text",
-   "confidence": "low",
+   "confidence": "high",
    "attestation": "digits",
    "other_years_on_page": [
     1786,
     1832,
-    1870,
     1913,
     1914,
     1915
-   ],
-   "conflicts_with_catalog": [
-    "1915",
-    "1915"
    ]
   },
   "year_attestations": [
-   {
-    "year": 1870,
-    "how": "digits",
-    "leaf": 4,
-    "quote": "row Building) New York City\nEstablished 1870\nV- rdaen, B l>\nBaltimore. Mil\nMi.l.\nIll"
-   },
    {
     "year": 1915,
     "how": "digits",
@@ -144,7 +133,7 @@
    "confidence": "medium"
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 1470184092,
   "hocr_sha1": "f1fbc2105c816b1227c32eccb2345b76ecc70e77",
@@ -358,13 +347,7 @@
   "copyright_page_leaf": null,
   "target_card_leaf": null,
   "contents_leaf": null,
-  "legend_leaves": [],
-  "image_read_candidates": [
-   4
-  ],
-  "image_read_urls": [
-   "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$4/full/1400,/0/default.jpg"
-  ]
+  "legend_leaves": []
  },
  "frontmatter_read": "2026-09-22",
  "error": "HTTPError: HTTP Error 500: Internal Server Error"

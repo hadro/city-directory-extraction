@@ -190,6 +190,44 @@ ORDINALS = {"first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth
             "thirtieth": 30, "fortieth": 40, "fiftieth": 50, "sixtieth": 60}
 
 YEAR_DIGITS = re.compile(r"\b(1[78]\d\d|19[0-4]\d)\b")
+
+# A four-digit number on a directory's front matter is very often NOT the volume's year, and
+# nothing here used to check. Measured over the 141 year claims the corpus produced: 13 conflicted
+# with the CSV, and 9 of those were this -- a real year, printed on the right page, meaning
+# something else entirely. The veto is checked against a WINDOW around the digits, never the whole
+# leaf, or one advertisement would suppress every year on the page.
+#
+#   founding dates      "Established 1870" · "ESTABLISHED 1837" · "Established 1847"   (3)
+#   statute boilerplate "SECTION 28, COPYRIGHT LAW, IN FORCE JULY 1, 1909"             (2)
+#   listing text        "foreman h 1853 1st av" · "R 1801 - A. E. Humphrey, Sec."      (2)
+#   a photo credit      "Photo copyright, 1906, by Irving Underhill"                   (1)
+#   comparative prose   "seven thousand more than the year 1863-4"                     (1)
+#
+# It vetoes 9 of 9 and harms 0 of the 128 claims that agree with the catalog. It deliberately does
+# NOT fire on the four conflicts that remain, because those are the ones worth having: a genuine
+# copyright line ("in the year 1854, by CHARLES R. RODE"), the regnal formula on
+# longworthsameric00newy, and two imprints. Suppressing a real conflict is the expensive error --
+# the catalog is what the survey exists to check.
+#
+# Note `copyright law` and `in force` are vetoed while plain `copyright` is not: the statute's own
+# preamble is boilerplate, but "Entered according to Act of Congress ... in the year 1854" is the
+# strongest year evidence a volume carries.
+# `establ`, not `establish`: the OCR truncates it. trowsgeneraldir1904p1trow's advertisement reads
+# "Establ FIRST NEW YORK DIRECTORY Printed 1786", boasting about a directory from 118 years before.
+#
+# The address rule has to cover a STREET NAME, not just an ordinal. Three of these are listing
+# addresses and only one of them is "1853 1st av"; the others are "1785 Bway" and "1828 Lex av".
+# Two only surfaced after the first veto removed the year that had been masking them -- a queue
+# that shrinks can also uncover, so this was measured twice.
+YEAR_VETO = re.compile(r"""
+      establ | organiz | organis | founded | incorporat | \bsince\b
+    | \bin\s+force\b | copyright\s+law | \bsection\s+\d+
+    | \bphoto
+    | \b(?:more|less|fewer)\s+than\b
+    | \b[hrbnc]\s+1[789]\d\d\b                                        # "h 1853" -- house number
+    | \b1[789]\d\d\s+(?:\w{1,10}\s+)?(?:av|ave|st|pl|ter|blvd|bway|rd)\b   # "1828 Lex av"
+""", re.I | re.X)
+YEAR_WINDOW = 45
 INDEPENDENCE = re.compile(
     r"([a-z]+(?:[-\s][a-z]+)?)\s+year\s+of\s+(?:american\s+)?independence", re.I)
 
@@ -224,6 +262,9 @@ def years_from(text: str):
     """-> [(year, method, quote)] -- every independent attestation on this leaf."""
     out = []
     for m in YEAR_DIGITS.finditer(text):
+        window = text[max(0, m.start() - YEAR_WINDOW):m.end() + YEAR_WINDOW]
+        if YEAR_VETO.search(window):
+            continue                      # a real year, meaning something other than this volume
         out.append((int(m.group(1)), "digits", text[max(0, m.start() - 40):m.end() + 40]))
 
     # Spelled out, as in a copyright line. Anchored on `in the year` so a stray "eighteen" in
@@ -811,6 +852,31 @@ def _self_test():
     # -- longworthsameric1798newy leaf 7: digits unreadable, the regnal formula is not
     lw = "AMERICAN ALMANACK, NEW-YORK REGISTER, CITY DIRECTORY, FOR THE " \
          "Twenty-third Year of American Independence"
+    # -- a four-digit year that means something OTHER than this volume's date. All nine measured
+    # shapes, each from a real leaf; see YEAR_VETO.
+    for src in ("BROOKLYN DIRECTORY. Established 1837. From the long Experience",
+                "TROW BUSINESS DIRECTORY Established 1847 DIRECTORY",
+                "(Trow Building) New York City Established 1870 Baltimore",
+                "SECTION 28, COPYRIGHT LAW, IN FORCE JULY 1, 1909. That any person",
+                "THE TRINITY BUILDING. Photo copyright, 1906, by Irving Underhill.",
+                "about seven thousand more than the year 1863-4. This is accounted for",
+                "Alonzo foreman h 1853 1st av — Augustine E v pres 116 Nassau",
+                "Arbitration League, 31 Nassau. R 1801 — A. E. Humphrey, Sec.",
+                # these three only surfaced once the veto removed the year masking them
+                "Establ FIRST NEW YORK DIRECTORY Printed 1786 Envelopes Addressed",
+                "Sadykier Morris L decorator 1785 Bway h 402 W 58th",
+                "Beth David Hospital Assn. 1828 Lex av — Jacob Carlinger, Pres"):
+        assert not [y for y, h, _q in years_from(src) if h == "digits"], \
+            f"vetoed shape still yields a year: {src!r} -> {years_from(src)!r}"
+
+    # ... and the conflicts that MUST survive it. Suppressing a real disagreement is the expensive
+    # error: checking the catalog is what this survey is for.
+    assert 1854 in [y for y, _h, _q in years_from(
+        "cording to Act of Congress, in the year 1854, by CHARLES R. RODE, In the Clerk's Office")], \
+        "a genuine copyright line is not statute boilerplate"
+    assert 1851 in [y for y, _h, _q in years_from("DOGGETT Jr., 89 LIBERTY STREET, NEW YORK, 1851.")]
+    assert 1906 in [y for y, _h, _q in years_from("UPINGTON'S GENERAL DIRECTORY FOR THE YEAR 1906")]
+
     assert [y for y, h, _q in years_from(lw) if h == "independence-formula"] == [1798], \
         "1775 + 23 = 1798"
 

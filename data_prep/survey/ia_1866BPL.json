@@ -2,39 +2,6 @@
  "source": "ia",
  "id": "1866BPL",
  "book_says": {
-  "year": {
-   "value": 1863,
-   "leaf": 21,
-   "canvas": "https://iiif.archive.org/iiif/1866BPL$21/canvas",
-   "image": "https://iiif.archive.org/iiif/1866BPL$21/full/1400,/0/default.jpg",
-   "evidence_type": "title_page",
-   "quote": "about\nseven thousand more than the year 1863-4'.\nThis is accounted for from the fact",
-   "method": "hocr-text",
-   "confidence": "low",
-   "attestation": "digits",
-   "conflicts_with_catalog": [
-    "1866",
-    "1866"
-   ]
-  },
-  "year_attestations": [
-   {
-    "year": 1863,
-    "how": "digits",
-    "leaf": 21,
-    "quote": "about\nseven thousand more than the year 1863-4'.\nThis is accounted for from the fact"
-   }
-  ],
-  "title": {
-   "value": "PREFACE. The canvass for this year's Brooklyn Directory, lias shown a very different result frofis\" that obtained last year. The canvass last year took place wh",
-   "leaf": 21,
-   "canvas": "https://iiif.archive.org/iiif/1866BPL$21/canvas",
-   "image": "https://iiif.archive.org/iiif/1866BPL$21/full/1400,/0/default.jpg",
-   "evidence_type": "title_page",
-   "quote": "PREFACE. / The canvass for this year's Brooklyn Directory, lias shown a very different result frofis\" / that obtained last year. / The canvass last year took place while the Craft was goiflg on', whil",
-   "method": "hocr-text",
-   "confidence": "medium"
-  },
   "publisher": {
    "value": "J. LAIN AND COMPANY",
    "leaf": 19,
@@ -45,6 +12,16 @@
    "method": "hocr-text",
    "confidence": "high",
    "evidence_detail": "imprint"
+  },
+  "title": {
+   "value": "PREFACE. The canvass for this year's Brooklyn Directory, lias shown a very different result frofis\" that obtained last year. The canvass last year took place wh",
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/1866BPL$21/canvas",
+   "image": "https://iiif.archive.org/iiif/1866BPL$21/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PREFACE. / The canvass for this year's Brooklyn Directory, lias shown a very different result frofis\" / that obtained last year. / The canvass last year took place while the Craft was goiflg on', whil",
+   "method": "hocr-text",
+   "confidence": "medium"
   },
   "legend": {
    "value": "present",
@@ -59,7 +36,7 @@
    "legend_location": "dedicated-page"
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 90263343,
   "hocr_sha1": "b26e459d833837b1d4e1821d6d2821b07bc50d02",
@@ -270,18 +247,12 @@
     "chars": 5075
    }
   },
-  "title_page_leaf": 21,
+  "title_page_leaf": 19,
   "copyright_page_leaf": 20,
   "target_card_leaf": null,
   "contents_leaf": null,
   "legend_leaves": [
    23
-  ],
-  "image_read_candidates": [
-   21
-  ],
-  "image_read_urls": [
-   "https://iiif.archive.org/iiif/1866BPL$21/full/1400,/0/default.jpg"
   ]
  },
  "frontmatter_read": "2026-09-22"

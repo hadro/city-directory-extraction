@@ -369,6 +369,32 @@ Two frames (`0018`, `0022`) were so underexposed as to be unreadable as served; 
 stretch plus a gamma lift recovered both. `0018`'s film frame also crops the left edge, losing the
 first word of every line — the publisher statement survives intact, and the sidecar says so.
 
+### Trow numbers itself from the first New York directory, and an ad I vetoed says so
+
+The same check on Trow's **general** (residential) directories, read 2026-09-22:
+
+| vol | for the year ending | copyright | implies vol 1 in |
+|---:|---|---:|---:|
+| CXX (120) | July 1, **1907** | 1906 | 1788 |
+| CXXI (121) | Aug 1, **1908** | 1907 | 1788 |
+| CXXII (122) | Aug 1, **1909** | 1908 | 1788 |
+| CXXIII (123) | Aug 1, **1910** | 1909 | 1788 |
+
+Four for four. And the corpus holds five 1786 rows — `newyorkdirectory00fran`, *The New York
+directory for 1786* — **the first New York city directory**, which is where a series numbering
+back to ~1787/88 would start, allowing for the early gaps.
+
+**Trow says so itself, in the advertisement the year gate throws away.**
+`trowsgeneraldir1904p1trow` carries *"FIRST NEW YORK DIRECTORY Printed 1786"* — which
+`YEAR_VETO` correctly suppresses as a year claim, because it is not this volume's date. It is
+Trow asserting descent from the 1786 directory. **A bad year and a real fact in the same line**,
+which is a good argument for the veto *skipping* a claim rather than deleting the text.
+
+Two independent series, then, each numbering itself from its city's first directory: Brooklyn
+from Spooner's 1822, Manhattan from Franks' 1786. Worth carrying into the coverage report, since
+a printed volume number plus a constant offset **predicts which years should exist** — and so
+names the holes without needing to find the books.
+
 ### And why the catalog said "Spooner" at all: it is ONE series, 1822 → 1912
 
 `volume_number` is an independent handle on a volume's place in its series, and four series now

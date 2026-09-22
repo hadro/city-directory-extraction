@@ -8,8 +8,8 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "OL. CXXIL\nFOR THE YEAR ENDING\nAUGUST 1, 1909\nPUBLISHED ANNUALLY\nBY\nTROW DIRECTORY, P",
-   "method": "hocr-text",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX, CITY OF NEW YORK. VOL. 122. FOR THE YEAR ENDING AUGUST 1, 1909. PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE, MANHATTAN, CITY OF NEW YORK. Copyright 1908.",
+   "method": "agent-read",
    "confidence": "high",
    "attestation": "digits"
   },
@@ -27,22 +27,66 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "OL. CXXIL\nFOR THE YEAR ENDING\nAUGUST 1, 1909\nPUBLISHED ANNUALLY\nBY\nTROW DIRECTORY, P",
-   "method": "hocr-text",
+   "quote": "FOR THE YEAR ENDING AUGUST 1, 1909",
+   "method": "agent-read",
    "confidence": "high"
   },
   "volume_number": {
-   "value": 129,
+   "value": 122,
    "leaf": 5,
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "VOL. CXXIL",
-   "method": "hocr-text",
+   "quote": "VOL. 122",
+   "method": "agent-read",
    "confidence": "high"
+  },
+  "year_published": {
+   "value": 1908,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Copyright 1908, by Trow Directory, Printing and Bookbinding Company",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Trow Directory, Printing and Bookbinding Company",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Trow"
+  },
+  "title": {
+   "value": "Trow's General Directory of the Boroughs of Manhattan and Bronx",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page, librarian's red 'pt. 3'. GENERAL (residential) directory -- the contrast with the 1913 rows, which are the Trow BUSINESS directory under the same catalog title. Textbook year_covered/year_published split: the volume is FOR the year ending in 1909 and was copyrighted in 1908, which is the 'published the autumn before their nominal year' pattern SURVEY_PLAN.md describes."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 198728735,
   "hocr_sha1": "81b24f06b75b62db84e4845f7deea2c1899c8b6f",

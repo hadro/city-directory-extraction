@@ -196,6 +196,17 @@ class Item:
         """Pull the entire `_hocr.html` so every page read is a local seek."""
         return self._get("_hocr.html")
 
+    def page_lines(self, leaf: int):
+        """(hocr_lines, page_dims) for one leaf, or (None, None) past the end of the book.
+
+        `sweep` reads pages through this and nothing else, so any object with the same method --
+        survey_harvest.WordDump, reading a harvested word dump -- can stand in for the hOCR.
+        """
+        markup = self.hocr_page(leaf)
+        if not markup:
+            return None, None
+        return hocr_lines(markup), page_dims(markup)
+
     def hocr_page(self, leaf: int):
         if leaf >= len(self.index):
             return None
@@ -247,23 +258,35 @@ def _range_get(url: str, a: int, b: int, retries: int):
     raise RuntimeError(f"range fetch failed after {retries}: {url} ({last})")
 
 
-def hocr_lines(markup: str):
-    """[((x0, y0, x1, y1), text)] from the hOCR's own ocr_line grouping."""
+def hocr_words(markup: str):
+    """[[[x0, y0, x1, y1, x_wconf, text], ...], ...] -- every word, grouped by hOCR ocr_line.
+
+    The lossless form: `hocr_lines` is derived from this and nothing else, so a word dump taken
+    once (survey_harvest.py) reproduces every line this module would ever read from the hOCR.
+    """
     out = []
     for seg in re.split(r'(?=<span class="ocr_line")', markup)[1:]:
         seg = seg.split("</p>")[0]
-        words, box = [], None
+        words = []
         for m in WORD_RE.finditer(seg):
-            x0, y0, x1, y1 = (int(m.group(i)) for i in range(1, 5))
             t = _html.unescape(TAG_RE.sub("", m.group(6))).strip()
-            if not t:
-                continue
-            words.append(t)
-            box = (min(box[0], x0), min(box[1], y0), max(box[2], x1), max(box[3], y1)) \
-                if box else (x0, y0, x1, y1)
-        if words and box:
-            out.append((box, " ".join(words)))
+            if t:
+                words.append([int(m.group(i)) for i in range(1, 6)] + [t])
+        if words:
+            out.append(words)
     return out
+
+
+def words_to_lines(lines):
+    """[((x0, y0, x1, y1), text)] from `hocr_words` output: the union box and the joined text."""
+    return [((min(w[0] for w in ws), min(w[1] for w in ws),
+              max(w[2] for w in ws), max(w[3] for w in ws)),
+             " ".join(w[5] for w in ws)) for ws in lines]
+
+
+def hocr_lines(markup: str):
+    """[((x0, y0, x1, y1), text)] from the hOCR's own ocr_line grouping."""
+    return words_to_lines(hocr_words(markup))
 
 
 def page_dims(markup: str):
@@ -868,26 +891,26 @@ def leaf_bands(buffered, marks, pad=BAND_PAD, min_lines=BAND_MIN_DITTO_LINES):
 
 
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
-          normalize_dittos=True, confirmed_marks=(), band=True, deep_indent=False):
+          normalize_dittos=True, confirmed_marks=(), band=True, deep_indent=False,
+          holdout=None):
     """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
 
     Kept lines are buffered rather than streamed so the ditto-lead frequency gate can see the
     whole volume before deciding which leading tokens are dittos (~50 MB for a 200k-line book).
     Normalization is applied at EMISSION, after every filter has run on the original text, so the
     text/geometry keep-rates documented above stay exactly as measured.
+
+    `holdout` maps leaf -> tag ("gold" / "adjacent") for leaves an eval set was built from; their
+    lines are emitted with `context.eval_holdout` so no consumer has to remember to filter them.
     """
     stats = {"leaves": 0, "raw": 0, "joins": 0, "kept": 0}
     reasons, ad_scores, buffered = {}, [], []
     for n, leaf in enumerate(leaves, 1):
-        markup = item.hocr_page(leaf)
-        if not markup:
-            continue
-        raw = hocr_lines(markup)
+        raw, dims = item.page_lines(leaf)
         if not raw:
             continue
         stats["leaves"] += 1
         stats["raw"] += len(raw)
-        dims = page_dims(markup)
 
         # Join BEFORE filtering: a continuation like "259 Himrod" is short enough that the text
         # filter would discard it, and the entry it belongs to would silently lose its address.
@@ -955,6 +978,8 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
             "bbox": box,
             "page_size": dims,
         }
+        if holdout and leaf in holdout:
+            ctx["eval_holdout"] = holdout[leaf]
         if out != text:
             # The audit trail against the page image. Stored only when something changed, so an
             # unnormalized volume costs nothing, and `raw_line` still means "what we fed the model".
@@ -1128,6 +1153,8 @@ def _self_test() -> int:
               '</span></p>')
     got = hocr_lines(markup)
     assert got == [((100, 100, 400, 118), "Smith John")], got
+    assert hocr_words(markup) == [[[100, 100, 200, 118, 90, "Smith"],
+                                   [210, 100, 400, 118, 90, "John"]]]
     assert page_dims(markup) == (2000, 3000)
 
     # Both hOCR dialects this corpus actually contains. The tesseract form is verbatim from
@@ -1264,7 +1291,7 @@ def main(argv=None) -> int:
                          "dense directory is a STRIP across the head and foot of ordinary listing "
                          "pages, and the listing body is bounded by the volume's own ditto-lead "
                          "extent padded by %.3f. Measured on 239 hand-labelled leaves: zero ad "
-                         "lines admitted, 0.2%% of listing lines lost "
+                         "lines admitted, 0.2%%%% of listing lines lost "
                          "(docs/PAGE_TYPE_CLASSIFIER.md). It MARKS, never drops -- cutting here "
                          "would strand dittos exactly as alpha_run_filter --apply does. A leaf "
                          "with too few ditto lines gets band=null rather than a guess."

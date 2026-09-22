@@ -714,6 +714,40 @@ Serial, one volume at a time, backoff, resume. Fetch pageindex + `_hocr.html` on
 `data/<ident>_lines.jsonl.gz` + `_dropped.txt` → **delete the hOCR**. Peak disk stays at one
 volume.
 
+**Built 2026-09-22 as `survey_harvest.py`, with one change to that design: the kept asset is a
+word dump, not the filtered lines.** Output goes to `data/survey_ocr/` (never `data/<id>_lines.jsonl`,
+which holds pinned artifacts — `docs/BANNER_CORRECTION.md`):
+
+| file | what | why |
+|---|---|---|
+| `<id>_words.jsonl.gz` | one record per pageindex leaf: every word, box, `x_wconf`, grouped by `ocr_line`; empty leaves included | **the asset**. Lossless for everything the repo reads from hOCR, at ~7.6% of its bytes (1857BPL: 60.5 MB → 4.6 MB) |
+| `<id>_lines.jsonl.gz` | `ia_volume_to_jsonl.sweep()` over the dump, default settings | what `qwen_predict.py` reads |
+| `<id>_dropped.txt.gz` | every rejected line with its reason | read it before trusting the kept file |
+
+The filters are not finished (the banner fix moved 1906BPL by 6,091 lines) and the `[publisher=]`
+tag comes from a column the survey is still correcting, so filtered lines alone would force a
+21.7 GB re-download the next time either moved. `--rederive` re-filters every volume offline.
+
+**Equivalence is measured, not argued.** `sweep()` now reads pages through `page_lines(leaf)`,
+which `Item` (hOCR) and `WordDump` (the dump) both implement. On 1856BPL the dump path and the
+direct hOCR path produce **byte-identical** `_lines` and `_dropped` (61,439 kept), and
+`micro_IABROOKLYN_0013` reproduces the documented 2,899.
+
+**Eval holdout is marked, not cut.** Phase 2 needs whole volumes, so gold leaves stay in and carry
+`eval_holdout` (`gold` / `adjacent` / `volume`) in both the dump record and every emitted line's
+`context`. The gold leaf is **located by text**, not taken from the jp2 filename: gold lines are
+matched against leaves ±3 around it and the best match wins, with the jp2 number, the chosen leaf
+and the match score recorded in the sidecar. A weak match tags the jp2 leaf too. Both neighbours
+are `adjacent`. `1897BPL` (`BANNED_IA_ITEMS`) is tagged `volume` on every leaf. 16 of the 184
+volumes carry gold. The leaf-keyed sets (`micro13_*`, `1906BPL_sample500`) are included, although
+`verify_harvest_leakage.gold_pages()` does not see them because they carry no `image`.
+
+Each sidecar gets a `harvest` block: status (`ok` · `no-hocr` · `fetch-failed` · `derive-failed`),
+hOCR sha1 as downloaded **against the 2026-09-12 census sha1**, so an IA re-OCR is detectable,
+word/line/char counts, mean `x_wconf`, chars per content leaf, filter outcome, and the git
+revision the filters ran at. `--report` adds `dead-ocr`: chars per content leaf below 10% of the
+volume's OCR-engine-class median.
+
 **Budget: 21.7 GB total, median volume 79 MB.** Four volumes exceed 500 MB and get their own
 night: `trowsgeneraldire1917trow` **1588 MB** (2480 leaves), `trowsgeneraldire1915trow` 1470 MB,
 `trowsgenerald192223p2trow` 643 MB, `trowsgenerald192223p1trow` 566 MB. For scale, 1906BPL's

@@ -654,8 +654,37 @@ dead volume: `ok` · `no-hocr` · `dead-ocr` (chars/page an order of magnitude b
 - `restricted` — `longworthsameric4818long`. IIIF returns **403 on every leaf** and its hOCR is
   empty, so it has no route at all, by text or by image. Not a collection-level block: other
   `durstoldyorklibrary` volumes serve fine, so this is item-level.
-- `not-residential` — `micro_IABROOKLYN_0041` (Boyd's Brooklyn **Business** Directory, 1860) and
-  `micro_IABROOKLYN_0038` (Brooklyn **Business** Directory, 1858-59). Firms, not residents.
+- `not-residential` — 6 volumes. `micro_IABROOKLYN_0041` (Boyd's Brooklyn **Business** Directory,
+  1860), `micro_IABROOKLYN_0038` (Brooklyn **Business** Directory, 1858-59), and **all four 1913
+  Trow rows** — see below.
+
+**⚠️ The whole 1913 Trow set is the BUSINESS directory, and nothing in the catalog says so.**
+`trowsgeneraldir1913p1trow` / `p2` / `p3` and `trowsgeneraldire19131trow` are all catalogued as
+*"Trow's general directory of the boroughs of Manhattan and Bronx"*, and their identifiers say
+`generaldir`. Their printed title pages say:
+
+> TROW **BUSINESS** DIRECTORY OF THE BOROUGHS OF MANHATTAN AND THE BRONX … ARRANGED UNDER
+> BUSINESS CLASSIFICATIONS AND FULLY INDEXED … 1913, VOLUME LXVI
+
+p2 and p3 carry a librarian's red *"pt. 2"* / *"pt. 3"* beside the year, so the three are parts of
+one business directory. p1's title page is a blank verso — it was read from the **show-through**,
+mirrored and contrast-lifted.
+
+**Do not generalise this to the 1904 set.** `trowsgeneraldir1904p3trow` leaf 9 is a three-column
+**residential** listings page (printed p.1106: *"Ryan Thos police h 513 E 87th"*). Same publisher,
+same identifier pattern, same "part N" shape, opposite answer — the parts have to be read, not
+inferred from a sibling.
+
+`trowsgeneraldire19131trow` is also a **probable duplicate** of `p2`: identical `imagecount` (834)
+against a different scandate (2010 vs 2013), the same manuscript accession number **63209** on its
+copyright page as p1, and the same title-page show-through. Not stamped `duplicate-of` — that
+evidence is suggestive, not conclusive, and a leaf-level comparison would settle it.
+
+**A free key-page signal, found in passing.** That 1904 listings page prints
+*"(For list of abbreviations see page 17.)"* — **the listings name their own key page.** Harvesting
+that pattern corpus-wide needs no image read at all, only a regex over the Phase-1 JSONL, and it
+yields a *printed page number* directly, which is exactly the unit `key_page` wants and the unit
+`_page_numbers.json` so often cannot supply.
 
 ⚠️ **"Business" in a title does not mean out of scope, and a keyword sweep would get this wrong.**
 12 rows match `business|mercantile|copartnership|trade`, and **10 of them are combined volumes** —

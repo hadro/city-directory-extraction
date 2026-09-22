@@ -13,6 +13,25 @@
    "confidence": "medium",
    "gloss_lines": 2,
    "legend_location": "inline-at-listing-head"
+  },
+  "year": {
+   "value": 1904,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p3trow$9/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p3trow$9/full/1400,/0/default.jpg",
+   "evidence_type": "listing",
+   "quote": "three-column residential listings, printed page 1106; running ads for Thomas Dimond Architectural Iron Works and Crouch & Fitzgerald",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "structural"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "year"
+   ],
+   "note": "CONTRAST with the 1913 set: this one IS residential. Leaf 9 is a three-column listings page (printed p.1106) of persons with occupations and addresses -- 'Ryan Thos police h 513 E 87th', 'Ryerson Rich carpenter h 2658 8th av'. The 1904 parts must NOT be stamped not-residential by analogy with 1913. It also points at its own key page: '(For list of abbreviations see page 17.)', a printed-page lead for phase 2."
   }
  },
  "survey_status": "needs-image-read",
@@ -242,5 +261,12 @@
    "https://iiif.archive.org/iiif/trowsgeneraldir1904p3trow$29/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "key_page_lead": {
+  "printed_page": 17,
+  "leaf": null,
+  "quote": "(For list of abbreviations see page 17.)",
+  "seen_on_leaf": 9,
+  "note": "The listings themselves name the key page. A cheap, general signal worth harvesting corpus-wide in phase 2 -- it needs no image read, only a regex over the JSONL."
+ }
 }

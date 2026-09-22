@@ -4,13 +4,13 @@
  "book_says": {
   "year": {
    "value": 1826,
-   "leaf": 1,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$1/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$1/full/1400,/0/default.jpg",
-   "evidence_type": "target_card",
-   "quote": "BROOKLYN, NEW YORK\n1826\nSpooner's Brooklyn Directory,for the ye",
-   "method": "hocr-text",
-   "confidence": "medium",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY. 1826.",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "digits"
   },
   "year_attestations": [
@@ -60,11 +60,31 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/full/1400,/0/default.jpg",
    "evidence_type": "legend",
-   "quote": "BROOKLYN DIRECTORY.\n1826.\nLF\u2014\nN. B. h. stands for house, n. for near, and c. for corner.\nAssor DANIEL, tavern & livery stable 16\nAbbot John, shoemaker, 114 Jay [Main\nAbrahams James, carpenter, High n",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "gloss_lines": 0,
+   "quote": "N. B. h. stands for house, n. for near, and c. for corner.",
+   "method": "agent-read",
+   "confidence": "high",
    "legend_location": "inline-at-listing-head"
+  },
+  "key_page": {
+   "value": 5,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/full/1400,/0/default.jpg",
+   "evidence_type": "legend",
+   "quote": "caption-title leaf carrying 'BROOKLYN DIRECTORY. 1826.' and the N.B. legend; leaf==printed page in this volume per IA's reads at leaves 6/8/9",
+   "method": "agent-read",
+   "confidence": "medium",
+   "attestation": "read"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "key_page",
+    "legend",
+    "year"
+   ],
+   "note": "UNIT SUSPECT RESOLVED as a coincidence. Leaf 5 is the caption-title page -- 'BROOKLYN DIRECTORY. 1826.' + the N.B. legend + the A listings -- and IA reads leaf 6 as printed page 6, leaf 8 as 8 and leaf 9 as 9 at real confidence (68-79), so leaf number equals printed page in this volume and leaf 5 IS printed page 5. The '2' centred at its foot is a signature mark, not a folio -- the same trap as hearnesbrooklync1852unse leaf 27. So the CSV's key_page=5 is correct as a printed page and merely happens to equal the leaf."
   }
  },
  "survey_status": "frontmatter-done",

@@ -8,14 +8,80 @@
    "canvas": "https://iiif.archive.org/iiif/1885BPL$1/canvas",
    "image": "https://iiif.archive.org/iiif/1885BPL$1/full/1400,/0/default.jpg",
    "evidence_type": "legend",
-   "quote": "in their vocations in the cities of Broolilyn and New York.\nABBREVIATIONS, ETC.\niuoci. accountant ; ugl. agricultural ; a,gt. agent; a,l alley; art. artificial ; &y avenue; asst.\nasmtant ; bk. 600A;; ",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "gloss_lines": 12,
-   "legend_location": "dedicated-page"
+   "quote": "ABBREVIATIONS, ETC. acct. accountant; agl. agricultural; agt. agent; al alley; art. artificial; av avenue; asst. assistant; bk. book; bldg. building; bldr. builder; B'way Broadway; c corner; c. h. custom house; clk. clerk",
+   "method": "agent-read",
+   "confidence": "high",
+   "legend_location": "inline-at-listing-head"
+  },
+  "year": {
+   "value": 1884,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1885BPL$1/canvas",
+   "image": "https://iiif.archive.org/iiif/1885BPL$1/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "LAIN'S BROOKLYN CITY DIRECTORY 1884-85.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1884,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1885BPL$1/canvas",
+   "image": "https://iiif.archive.org/iiif/1885BPL$1/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "LAIN'S BROOKLYN CITY DIRECTORY 1884-85.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Lain",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1885BPL$1/canvas",
+   "image": "https://iiif.archive.org/iiif/1885BPL$1/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "LAIN'S BROOKLYN CITY DIRECTORY 1884-85.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Lain",
+   "role": "title possessive"
+  },
+  "title": {
+   "value": "Lain's Brooklyn City Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1885BPL$1/canvas",
+   "image": "https://iiif.archive.org/iiif/1885BPL$1/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "LAIN'S BROOKLYN CITY DIRECTORY 1884-85.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "key_page": {
+   "value": 1,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1885BPL$1/canvas",
+   "image": "https://iiif.archive.org/iiif/1885BPL$1/full/1400,/0/default.jpg",
+   "evidence_type": "legend",
+   "quote": "folio '1' printed at the foot of the leaf carrying the ABBREVIATIONS and the A listings",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "key_page",
+    "legend",
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "UNIT SUSPECT RESOLVED. apply_survey flagged key_page=1 == legend_leaf 1 as possibly a leaf written into a printed-page column. It is a genuine coincidence: leaf 1 IS printed page 1 (the folio is set at the foot) and it IS the legend page. This is a caption-title leaf carrying the title, the ABBREVIATIONS inline, and the start of the A listings all at once -- the same shape as hearnesbrooklync1852unse leaf 27, except that this one prints its folio."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 200750721,
   "hocr_sha1": "82ef66f750c467eadeea87c98db387355833dce4",

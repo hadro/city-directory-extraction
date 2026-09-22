@@ -8,8 +8,8 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "VOL. CXVII.\nKOR THE YEAR ENDING\nJULY 1,-1904\n\u25a0'\u25a0 \u25a0' :\n\u25a0\n.\nPUBLISHED ANNUALLY\n..'t\n\u25a0",
-   "method": "hocr-text",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX, CITY OF NEW YORK. VOL. CXVII. FOR THE YEAR ENDING JULY 1, 1904. PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE. Price, Seven Dollars and Fifty Cents. Entered according to Act of Congress, in the",
+   "method": "agent-read",
    "confidence": "high",
    "attestation": "digits"
   },
@@ -27,12 +27,66 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "VOL. CXVII",
-   "method": "hocr-text",
+   "quote": "VOL. CXVII.",
+   "method": "agent-read",
    "confidence": "high"
+  },
+  "year_covered": {
+   "value": 1904,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE YEAR ENDING JULY 1, 1904",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1903,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Entered according to Act of Congress, in the year 1903, by TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Trow Directory, Printing and Bookbinding Company",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Trow"
+  },
+  "title": {
+   "value": "Trow's General Directory of the Boroughs of Manhattan and Bronx",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7, librarian's red 'pt. 2'. GENERAL (residential) directory, VOL. CXVII for the year ending July 1 1904, copyright 1903."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 189601803,
   "hocr_sha1": "1425485069222a861574d0b1f4ba6530557be020",

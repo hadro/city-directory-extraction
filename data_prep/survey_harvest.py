@@ -133,11 +133,33 @@ class WordDump:
             self._fh.close()
 
 
-def download(url: str, dest: Path, retries: int = 4) -> tuple[str, int]:
+def replica_urls(ident: str, filename: str) -> list:
+    """Direct URLs on each server holding the item, from IA's metadata endpoint.
+
+    Needed because the archive.org/download redirector can pick a storage node that answers 500
+    for one item for many minutes on end, while the item's own replicas serve it fine. Measured
+    2026-09-22: micro_IABROOKLYN_0003 failed 4/4 through the redirector over ~8 minutes, while a
+    curl to ia601602.us.archive.org returned all 2,010,792 bytes at the same time.
+    """
+    try:
+        req = urllib.request.Request(f"https://archive.org/metadata/{ident}",
+                                     headers={"User-Agent": UA})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            m = json.load(r)
+        servers = m.get("workable_servers") or [s for s in (m.get("d1"), m.get("d2")) if s]
+        return [f"https://{s}{m['dir']}/{filename}" for s in servers]
+    except Exception:                                      # noqa: BLE001 - fallback only
+        return []
+
+
+def download(url: str, dest: Path, retries: int = 4, fallbacks=()) -> tuple[str, int]:
     """Stream `url` to `dest` via a .part file; return (sha1, bytes). Never holds it in memory:
-    the largest volume is 1.6 GB."""
+    the largest volume is 1.6 GB. Each attempt tries `url` and then every fallback (replica)
+    before backing off."""
+    urls = [url, *fallbacks]
     last = None
-    for attempt in range(retries):
+    for attempt in range(retries * len(urls)):
+        url = urls[attempt % len(urls)]
         part = dest.with_suffix(dest.suffix + ".part")
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -158,10 +180,16 @@ def download(url: str, dest: Path, retries: int = 4) -> tuple[str, int]:
         except Exception as e:                             # noqa: BLE001 - retried, then surfaced
             last = e
             part.unlink(missing_ok=True)
-            wait = 30 * (2 ** attempt)
-            print(f"    ! {e} -- retry {attempt + 1}/{retries} in {wait}s", file=sys.stderr)
+            host = url.split("/")[2]
+            if (attempt + 1) % len(urls):
+                print(f"    ! {e} from {host} -- trying the next replica", file=sys.stderr)
+                continue
+            wait = 30 * (2 ** (attempt // len(urls)))
+            print(f"    ! {e} from {host} -- round {attempt // len(urls) + 1}/{retries} "
+                  f"failed on all {len(urls)} sources, retry in {wait}s", file=sys.stderr)
             time.sleep(wait)
-    raise RuntimeError(f"fetch failed after {retries}: {url} ({last})")
+    raise RuntimeError(f"fetch failed after {retries} rounds of {len(urls)} sources: "
+                       f"{urls[0]} ({last})")
 
 
 def sha1_file(p: Path) -> tuple[str, int]:
@@ -358,7 +386,8 @@ def harvest_one(v: dict, gold: dict, keep_hocr: bool) -> dict:
             sha, n = sha1_file(hocr)
             h["hocr_source"] = "cache"
         else:
-            sha, n = download(f"{DL}/{ident}/{ident}_hocr.html", hocr)
+            sha, n = download(f"{DL}/{ident}/{ident}_hocr.html", hocr,
+                              fallbacks=replica_urls(ident, f"{ident}_hocr.html"))
             h["hocr_source"] = "download"
     except Exception as e:                                 # noqa: BLE001
         return {"status": "fetch-failed", "error": str(e)[:300], **h}

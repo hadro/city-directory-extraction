@@ -743,7 +743,38 @@ Per volume, from the JSONL + pageindex + `_page_numbers.json`:
 - abbreviation frequency table, median line length, line-length distribution
 - surname/given-name pool as a byproduct
 
-### Phase 3 — the one agent fan-out (cheap tier, gated)
+### Phase 3 — DONE for the IA tier (2026-09-22): 75 volumes read, queue empty
+
+`survey_readpackets.py` hands out the leaves Phase 0b chose and writes the answers back as cited
+claims — leaf, canvas, IIIF image, verbatim quote, `method: agent-read`. **358 agent-read claims
+across 75 volumes**, and `needs-image-read` went 81 → 0 unread.
+
+| | before | after |
+|---|---:|---:|
+| `publisher` filled (ia rows) | 179 | **185** |
+| `volume_number` | 61 | **76** |
+| `year_covered` | 42 | **93** |
+| `year_published` | 21 | **49** |
+| year conflicts | 13 | **1** |
+| `not-residential` identified | 0 | **7** |
+
+It also produced claim types the schema did not have: `printer` (23), `stated_name_count` (4),
+`series_gap` (4), `race_marker` (2), `reprint_year`, `series_established`, `twin_of`,
+`ditto_convention`, `refusal_marker`.
+
+**What a read bought that text could not.** Every one of these came off an image and none of them
+could have come from the hOCR: the Spooner series' true publishers; the `TROW BUSINESS DIRECTORY`
+title pages that reclassified four rows; Doggett's printed entry counts, one of which the OCR
+renders `SIXTY-EIGHT THOUSAND ONE HXTNDRED AND FIFTT-NUfE`; the roman-numeral `M, DCC, LXXX, VI`
+that no digit regex can see; and three column counts that were simply wrong.
+
+⚠️ **A 403 is not self-explaining.** `longworthsameric4818long` was stamped `restricted` and the
+stamp was retracted the same day: the failures were my own request asking IIIF to scale a page
+*to* 1400px when the scan was narrower, answered `Requests for scales in excess of 100% are not
+allowed`. `page_image()` now emits `full/!1400,1400` — best fit within, never upscale — and 791
+citations were migrated to it. Reading the response body would have said so immediately.
+
+### Phase 3 — the original design (cheap tier, gated)
 
 Per volume, a script assembles a read packet of the **2–3 images the text could not settle** and
 hands it to one cheap agent with structured output and an arithmetic/consistency gate — the shape

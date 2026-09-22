@@ -51,7 +51,8 @@ SIDECAR = HERE / "survey"
 IMG_WIDTH = 1400
 UA = {"User-Agent": "Mozilla/5.0 (research; city-directory corpus survey; +josh)"}
 
-OLD = re.compile(r"^https://archive\.org/download/(?P<ident>[^/]+)/page/n(?P<leaf>\d+)_w\d+\.jpg$")
+OLD = re.compile(r"^https://archive\.org/download/(?P<ident>[^/]+)/page/n(?P<leaf>\d+)_w\d+\.jpg$"
+                 r"|^https://iiif\.archive\.org/iiif/(?P<i2>[^/$]+)\$(?P<l2>\d+)/full/\d+,/0/default\.jpg$")
 
 sys.path.insert(0, str(HERE))
 # The canonical builder lives with the citation code that emits it, so the migration and the
@@ -71,7 +72,10 @@ def fix_claim(ident: str, claim: dict) -> bool:
     if leaf is None or not isinstance(img, str):
         return False
     m = OLD.match(img)
-    if not m or int(m.group("leaf")) != int(leaf):
+    if not m:
+        return False
+    got = m.group("leaf") or m.group("l2")
+    if int(got) != int(leaf):
         return False
     claim["image"] = iiif_image(ident, int(leaf))
     return True
@@ -146,12 +150,19 @@ def verify(ident: str, leaf: int):
 
 def self_test():
     assert iiif_image("1906BPL", 9) == \
-        "https://iiif.archive.org/iiif/1906BPL$9/full/1400,/0/default.jpg"
+        "https://iiif.archive.org/iiif/1906BPL$9/full/!1400,1400/0/default.jpg"
 
     # The normal case: old scheme, leaf agrees, rewritten from the LEAF not the old string.
     c = {"leaf": 27, "image": "https://archive.org/download/hearne/page/n27_w1400.jpg"}
     assert fix_claim("hearne", c)
-    assert c["image"] == "https://iiif.archive.org/iiif/hearne$27/full/1400,/0/default.jpg"
+    assert c["image"] == "https://iiif.archive.org/iiif/hearne$27/full/!1400,1400/0/default.jpg"
+
+    # ... and the earlier IIIF form migrates too: `full/1400,` 403s on a scan narrower than 1400.
+    old_iiif = {"leaf": 9,
+                "image": "https://iiif.archive.org/iiif/1906BPL$9/full/1400,/0/default.jpg"}
+    assert fix_claim("1906BPL", old_iiif)
+    assert old_iiif["image"].endswith("/full/!1400,1400/0/default.jpg")
+    assert not fix_claim("1906BPL", old_iiif), "still idempotent"
 
     # Idempotent: a second pass leaves an already-migrated claim alone.
     assert not fix_claim("hearne", c), "migration must be idempotent"

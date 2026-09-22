@@ -3,23 +3,15 @@
  "id": "newyorkdirectory00durs_0",
  "book_says": {
   "year": {
-   "value": 1851,
+   "value": 1786,
    "leaf": 11,
    "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/canvas",
-   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "OGGETT Jr., S9 LIBEETT\nBTEEET, NW YOKK, 1851.",
-   "method": "hocr-text",
-   "confidence": "low",
-   "attestation": "digits",
-   "other_years_on_page": [
-    1789,
-    1851
-   ],
-   "conflicts_with_catalog": [
-    "1786",
-    "1874"
-   ]
+   "quote": "THE NEW-YORK DIRECTORY ... BY DAVID FRANKS. NEW-YORK: Printed by SHEPARD KOLLOCK, corner of Wall and Water Streets, M, DCC, LXXX, VI.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "roman-numerals"
   },
   "year_attestations": [
    {
@@ -36,38 +28,83 @@
    }
   ],
   "publisher": {
-   "value": "SHEPARD KOLLOCK",
+   "value": "David Franks",
    "leaf": 11,
    "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/canvas",
-   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "Printed by SHEPARD KOLLOCK",
-   "method": "hocr-text",
+   "quote": "BY DAVID FRANKS.",
+   "method": "agent-read",
    "confidence": "high",
-   "evidence_detail": "printer-imprint"
+   "csv_label": "Franks",
+   "role": "compiler/author of the original"
   },
   "printer": {
-   "value": "SHEPARD KOLLOCK",
+   "value": "Shepard Kollock",
    "leaf": 11,
    "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/canvas",
-   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "Printed by SHEPARD KOLLOCK",
-   "method": "hocr-text",
+   "quote": "Printed by SHEPARD KOLLOCK, corner of Wall and Water Streets",
+   "method": "agent-read",
    "confidence": "high"
   },
   "title": {
-   "value": "THE NEW-YORK DIRECTORY, CONTAINING, A Valuable and well Calculated ALMANACK ;\u2014 Tables of the different COINS, suitable for anj State, and digested in such order",
+   "value": "The New-York Directory",
    "leaf": 11,
    "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/canvas",
-   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "THE / NEW-YORK DIRECTORY, / CONTAINING, / A Valuable and well Calculated ALMANACK ;\u2014 / Tables of the different COINS, suitable for anj / State, and digested in such order, as to render an / Exchange b",
-   "method": "hocr-text",
-   "confidence": "medium"
+   "quote": "THE NEW-YORK DIRECTORY, CONTAINING, A Valuable and well Calculated ALMANACK",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_covered": {
+   "value": 1786,
+   "leaf": 11,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "M, DCC, LXXX, VI.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "reprint_year": {
+   "value": 1851,
+   "leaf": 11,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "REPUBLISHED BY JOHN DOGGETT Jr., 59 LIBERTY STREET, NEW YORK, 1851.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "reprint_publisher": {
+   "value": "John Doggett, Jr.",
+   "leaf": 11,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "REPUBLISHED BY JOHN DOGGETT Jr., 59 LIBERTY STREET, NEW YORK, 1851.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "reprint_publisher",
+    "reprint_year",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "THE 1786/1851 TANGLE IS BOTH-RIGHT, not a conflict. Title page leaf 11: 'THE NEW-YORK DIRECTORY, CONTAINING, A Valuable and well Calculated ALMANACK ... BY DAVID FRANKS. NEW-YORK: Printed by SHEPARD KOLLOCK, corner of Wall and Water Streets, M, DCC, LXXX, VI.' -- and then, below a rule, 'REPUBLISHED BY JOHN DOGGETT Jr., 59 LIBERTY STREET, NEW YORK, 1851.' The WORK is Franks' 1786 directory; 1851 is Doggett's facsimile reprint. The catalog's 1786 is right about the work and phase 0b's 1851 is right about the artefact. Confirms the plan's note on the fran/_0 pair, with a different reprint house and date. NOTE THE DATE FORM: the original year is set in ROMAN NUMERALS (M, DCC, LXXX, VI), which YEAR_DIGITS cannot see at all -- a fourth attestation channel alongside digits, spelled-out words and the regnal formula."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 3440020,
   "hocr_sha1": "3fd2567bda2746f8f9cb6ccb5892ba6663f4554e",

@@ -94,7 +94,12 @@ def page_image(ident: str, leaf: int, width: int = IMG_WIDTH) -> str:
 
     539 existing citations were migrated by `survey_fix_image_urls.py`.
     """
-    return f"https://iiif.archive.org/iiif/{ident}${leaf}/full/{width},/0/default.jpg"
+    # `!w,h` is "best fit WITHIN these bounds, never upscale". A bare `{width},` asks IIIF to
+    # scale the source TO that width, and iiif.archive.org answers 403 "Requests for scales in
+    # excess of 100% are not allowed" when the scan is narrower than the ask. Rare -- 0 of 28
+    # sampled citations -- but it cost a volume a wrong `restricted` stamp before being noticed,
+    # and the bang form costs nothing on a large scan.
+    return f"https://iiif.archive.org/iiif/{ident}${leaf}/full/!{width},{width}/0/default.jpg"
 
 
 def canvas(ident: str, leaf: int) -> str:
@@ -906,8 +911,10 @@ def _self_test():
     assert c["canvas"] == "https://iiif.archive.org/iiif/1906BPL$1/canvas"
     # The image must be IIIF and leaf-indexed. `page/nNN` is a DIFFERENT numbering that happens
     # to agree on 1906BPL and disagrees on hearnesbrooklync1852unse -- see page_image().
-    assert c["image"] == "https://iiif.archive.org/iiif/1906BPL$1/full/1400,/0/default.jpg", \
+    assert c["image"] == "https://iiif.archive.org/iiif/1906BPL$1/full/!1400,1400/0/default.jpg", \
         c["image"]
+    # `!w,h` never upscales. A bare `1400,` 403s on a scan narrower than 1400 -- see page_image().
+    assert "/full/!" in c["image"], "the size must be the no-upscale form"
     assert "/page/n" not in c["image"], "the page/nNN scheme must never be cited again"
     assert c["image"].startswith(c["canvas"].rsplit("/canvas", 1)[0]), \
         "image and canvas must name the same leaf"

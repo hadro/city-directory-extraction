@@ -173,7 +173,9 @@ def self_test():
     assert leaf_of("nonsense") is None
     c = cite_read("1856BPL", 9, 1856, "SMITH'S BROOKLYN DIRECTORY", "title_page")
     assert c["method"] == "agent-read" and c["leaf"] == 9
-    assert c["image"] == "https://iiif.archive.org/iiif/1856BPL$9/full/1400,/0/default.jpg"
+    # The image URL comes from survey_frontmatter.page_image, so this also pins the no-upscale
+    # `!w,h` form: a bare `1400,` 403s on any scan narrower than 1400.
+    assert c["image"] == "https://iiif.archive.org/iiif/1856BPL$9/full/!1400,1400/0/default.jpg"
     assert c["canvas"].endswith("$9/canvas")
     # An agent-read claim must be un-overwritable by a later hOCR re-read: eyes beat a regex.
     from survey_frontmatter import merge_book

@@ -6,16 +6,12 @@
    "value": 1910,
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "XXIII.\nKOR THE YEAR\" EN DING-\nAUGUST 1, 1910\nI\n-\n-\n. -\n\u2014 \\%y\nPUBLISHED ANNUALLY\nBY\nT",
-   "method": "hocr-text",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX, CITY OF NEW YORK. VOL. 123. FOR THE YEAR ENDING AUGUST 1, 1910. PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 202 EAST TWELFTH STREET. Copyright 1909.",
+   "method": "agent-read",
    "confidence": "high",
-   "attestation": "digits",
-   "other_years_on_page": [
-    1909,
-    1910
-   ]
+   "attestation": "digits"
   },
   "year_attestations": [
    {
@@ -35,14 +31,68 @@
    "value": 123,
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "VOL. CXXIII",
-   "method": "hocr-text",
+   "quote": "VOL. 123",
+   "method": "agent-read",
    "confidence": "high"
+  },
+  "year_covered": {
+   "value": 1910,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE YEAR ENDING AUGUST 1, 1910",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1909,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Copyright 1909, by Trow Directory, Printing and Bookbinding Company",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Trow Directory, Printing and Bookbinding Company",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 202 EAST TWELFTH STREET",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Trow"
+  },
+  "title": {
+   "value": "Trow's General Directory of the Boroughs of Manhattan and Bronx",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7, librarian's red 'pt. 3'. GENERAL (residential) directory. Same VOL. CXXIII as trowsgeneraldir1910p2trow -- genuine parts."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 211299158,
   "hocr_sha1": "14e4bf070e54343a64cb49fd2a990f96a4eaafa8",

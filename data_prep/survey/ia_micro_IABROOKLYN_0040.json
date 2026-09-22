@@ -6,7 +6,7 @@
    "value": 1860,
    "leaf": 6,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
    "quote": "DIRECTORY,\nFOR\nTHE YEAR ENDING MAY Ist,\n1860.\nCOMPILED BY F. LAIN.\nPUBLISHED BY J. L",
    "method": "hocr-text",
@@ -25,7 +25,7 @@
    "value": "J. LAIN AND COMPANY",
    "leaf": 6,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
    "quote": "PUBLISHED BY J. LAIN AND COMPANY",
    "method": "hocr-text",
@@ -36,7 +36,7 @@
    "value": "y THE * BROOKLYVN CITY DIRECTORY, FOR THE YEAR ENDING MAY Ist,",
    "leaf": 6,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$6/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
    "quote": "y THE / * / BROOKLYVN CITY / DIRECTORY, / FOR / THE YEAR ENDING MAY Ist,",
    "method": "hocr-text",
@@ -46,16 +46,35 @@
    "value": "present",
    "leaf": 10,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$10/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$10/full/1400,/0/default.jpg",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$10/full/!1400,1400/0/default.jpg",
    "evidence_type": "legend",
    "quote": "n their vocations in the cities ef Brooklyn and New York. e\nABBREVIATIONS, ETC,\nmarket; n. near; N. north; off. office; Op. opposite ; pl. place; # rear (Rev.) clergyman\nroad; S. south; sq. square; wi",
    "method": "hocr-text",
    "confidence": "medium",
    "gloss_lines": 2,
    "legend_location": "inline-at-listing-head"
+  },
+  "printer": {
+   "value": "Wynkoop, Hallenbeck & Thomas",
+   "leaf": 3,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$3/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$3/full/!1400,1400/0/default.jpg",
+   "evidence_type": "advertisement",
+   "quote": "NEW YORK STEAM PRINTING HOUSE. WYNKOOP, HALLENBECK & THOMAS, Book, Job and Newspaper Printers, No. 113 FULTON STREET, Between Nassau and William Streets, NEW YORK.",
+   "method": "agent-read",
+   "confidence": "high",
+   "note": "from the publisher's own advertisement, not a title page"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer"
+   ],
+   "note": "Leaf 3 is an advertiser page under the running head 'BROOKLYN DIRECTORY ADVERTISER' -- and it is the PUBLISHER'S OWN self-advertisement, which confirms both houses at once: 'PUBLISHING OFFICE OF THE BROOKLYN DIRECTORY, POST-OFFICE BUILDING, MONTAGUE STREET ... J. LAIN & CO., Publishers', and facing it 'NEW YORK STEAM PRINTING HOUSE. WYNKOOP, HALLENBECK & THOMAS, Book, Job and Newspaper Printers, No. 113 FULTON STREET' -- the same printing house as 1864BPL. It also carries a canvassing-fraud warning: 'No money to be paid on account of this Directory, without evidence of authority, signed by J. Lain.'"
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 19943763,
   "hocr_sha1": "0d498651f5ace72e5673070981fa26a39c8cf3d4",

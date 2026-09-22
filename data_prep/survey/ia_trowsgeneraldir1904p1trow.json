@@ -3,17 +3,82 @@
  "id": "trowsgeneraldir1904p1trow",
  "book_says": {
   "title": {
-   "value": "PURCHASERS' GUIDE AND COMMERCIAL REGISTER. ADVERTISING SIGNS. C. SCOTT FORENGTON THE SIGN MAN Gliding on Class and Class Signs 154 Duaie Street, Cor. West Broad",
-   "leaf": 25,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$25/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$25/full/1400,/0/default.jpg",
+   "value": "Trow's General Directory of the Boroughs of Manhattan and Bronx",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/full/!1400,1400/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "PURCHASERS' GUIDE AND COMMERCIAL REGISTER. / ADVERTISING SIGNS. / C. SCOTT FORENGTON / THE SIGN MAN / Gliding on Class and Class Signs / 154 Duaie Street, Cor. West Broadway, New York / Trow Business ",
-   "method": "hocr-text",
-   "confidence": "medium"
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year": {
+   "value": 1904,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX, CITY OF NEW YORK. VOL. 117. FOR THE YEAR ENDING JULY 1, 1904. PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE. Copyright 1903.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1904,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE YEAR ENDING JULY 1, 1904",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1903,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Copyright 1903, by Trow Directory, Printing and Bookbinding Company",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Trow Directory, Printing and Bookbinding Company",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Trow"
+  },
+  "volume_number": {
+   "value": 117,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOL. 117",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7, librarian's red 'pt. 1'. GENERAL (residential) directory. Same VOL. CXVII as trowsgeneraldir1904p2trow -- genuine parts. This also corrects phase 0b's title for this row, which read 'PURCHASERS' GUIDE AND COMMERCIAL REGISTER. ADVERTISING SIGNS. C. SCOTT FORENGTON THE SIGN MAN' -- an advertisement, not the volume's title."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 179624508,
   "hocr_sha1": "967bcc8177831476a6a98300df0359a586a581f4",

@@ -1,8 +1,39 @@
 {
  "source": "ia",
  "id": "longworthsameric4818long",
- "book_says": {},
- "survey_status": "restricted",
+ "book_says": {
+  "year": {
+   "value": 1823,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4818long$5/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric4818long$5/full/!1400,1400/0/default.jpg",
+   "evidence_type": "almanac",
+   "quote": "XI. NOVEMBER, begins on Saturday, 30 days. 1823.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "almanac-month-heading"
+  },
+  "year_covered": {
+   "value": 1823,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4818long$5/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric4818long$5/full/!1400,1400/0/default.jpg",
+   "evidence_type": "almanac",
+   "quote": "XI. NOVEMBER, begins on Saturday, 30 days. 1823.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "year",
+    "year_covered"
+   ],
+   "note": "RESTRICTED STAMP RETRACTED -- the 403s were my own fetch bug, not an access restriction (see restricted_retracted in this sidecar). Leaf 5 is an ALMANAC CALENDAR page: 'XI. NOVEMBER, begins on Saturday, 30 days. 1823', confirming the catalog's 1823. The almanac month pages carry the year in their own heading, which is a further attestation channel the extractor does not use. The page's prose is a period editorial against tight lacing."
+  }
+ },
+ "survey_status": "needs-image-read",
  "derivatives": {
   "hocr_bytes": 21407875,
   "hocr_sha1": "a33acafa42acc042c89bc67128d11fcfce3a44de",
@@ -235,5 +266,5 @@
   ]
  },
  "frontmatter_read": "2026-09-22",
- "error": "IIIF returns HTTP 403 for every leaf (checked leaves 1/5/6, 2026-09-22). NOT systematic -- other durstoldyorklibrary volumes serve fine, so this is an item-level restriction, not a collection one. The hOCR is also empty for this volume, so it has no text route either."
+ "restricted_retracted": "Stamped `restricted` on 2026-09-22 and RETRACTED the same day. The 403s were my own fetch bug, not an access restriction: the request asked IIIF to scale the page TO 1400px wide and this volume's scan is narrower, so the server answered 'Requests for scales in excess of 100% are not allowed'. `full/!1400,1400` (best fit within, never upscale) serves every leaf fine. The lesson is that a 403 is not self-explaining -- reading the body would have said so immediately."
 }

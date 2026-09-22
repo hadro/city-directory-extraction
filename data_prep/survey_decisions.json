@@ -333,6 +333,17 @@
       "by": "claude",
       "date": "2026-09-22",
       "awaiting_confirmation": true
+    },
+    {
+      "source": "ia",
+      "id": "newyorkdirectory00durs_0",
+      "column": "year",
+      "verdict": "both-right",
+      "reason": "Title page leaf 11 carries BOTH dates for different things: the work is 'THE NEW-YORK DIRECTORY ... BY DAVID FRANKS ... M, DCC, LXXX, VI' (1786 in roman numerals), and below a rule, 'REPUBLISHED BY JOHN DOGGETT Jr., 59 LIBERTY STREET, NEW YORK, 1851.' The catalog's 1786 is right about the work; phase 0b's 1851 is right about the artefact. Recorded as year=1786 plus reprint_year=1851 rather than forcing one to win.",
+      "wants_field_split": true,
+      "by": "claude",
+      "date": "2026-09-22",
+      "awaiting_confirmation": true
     }
   ]
 }

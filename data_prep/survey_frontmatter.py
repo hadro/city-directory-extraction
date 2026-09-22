@@ -256,11 +256,72 @@ _W = r"[^\S\n]"
 # An abbreviated forename, not just a single initial: this corpus is full of Wm., Chas., Jos.,
 # Geo. A single-letter rule reads "Published by Wm. J. Spooner" as "Wm".
 _INIT = r"[A-Z][a-z]{0,3}\."
-NAME = (rf"(?:{_INIT}{_W}*)*[A-Z][\w'&\-]*"
-        rf"(?:{_W}+(?:&{_W}+)?(?:{_INIT}{_W}*)*[A-Z][\w'&\-]*){{0,4}}")
-PUBLISHED_BY = re.compile(
-    rf"(?i:(?:published|printed)\s+(?:and\s+\w+\s+)?by){_W}+({NAME})")
+# A parenthesised expansion is part of the name. micro_IABROOKLYN_0025's card prints
+# "H(enry) R. & W(illiam) J. Hearne", and a charset without brackets captured a publisher of "H".
+_PAREN = r"(?:\([A-Za-z]+\))?"
+# Leading OCR crumbs. These cards are microfiche and the reader routinely prepends a stray quote
+# to a wrapped line -- 0025's continuation reads "'Hearne", which stopped the name one token short.
+_JUNK = r"[‘’'\"`]*"
+_WORD = rf"{_JUNK}[A-Z]{_PAREN}[\w'&\-]*"
+# A partnership is one name: "Henry R., & William J. Hearne, & Edwin Van Nostrand" is three people
+# and a single imprint, so the separator has to cross the comma AND the period that ends the
+# initial before it -- which is what stopped four of these at the first partner.
+#
+# But a comma is only crossed when an `&` follows it. Crossing any comma also swallowed what comes
+# after an imprint, which is almost always an ADDRESS: "LAIN & COMPANY, OFFICES 15 Court" and
+# "William A. Mercein, No. 93 Gold-street" both over-captured, and "OFFICES"/"No." are capitalised
+# so no charset rule separates them from a surname. The `&` is the thing that actually marks
+# another partner. The cost is one case -- "Thomas Leslie, Henry R., & William J. Hearne" stops at
+# "Thomas Leslie" -- and a truncated partner list is a far cheaper error than an address welded to
+# a publisher's name. Measured 9/10 against 8/10 for crossing every comma.
+_SEP = rf"(?:{_W}*[.,])*{_W}*&{_W}+|(?:{_W}*\.)?{_W}+"
+NAME = (rf"(?:{_INIT}{_W}*)*{_WORD}"
+        rf"(?:(?:{_SEP})(?:{_INIT}{_W}*)*{_WORD}){{0,9}}")
+PUBLISHED_BY = re.compile(rf"(?i:(?:compiled{_W}+and{_W}+)?published{_W}+by)[.,]?{_W}*({NAME})")
+# Split from PUBLISHED_BY, and consulted only as a fallback. They were one alternation, so on a
+# card naming both -- "Published by Nichols & Delaree. Brooklyn: Printed by Lewis Nichols" -- the
+# publisher wrapping to the next line let the PRINTER win and micro_IABROOKLYN_0010 was
+# attributed to Lewis Nichols.
+PRINTED_BY = re.compile(rf"(?i:printed{_W}+by)[.,]?{_W}*({NAME})")
 PUBLISHER_SUFFIX = re.compile(r"^([A-Z][\w'&.\- ]{2,50}?),\s*(?i:publisher|proprietor)\b", re.M)
+
+# A full word followed by a period and a capital ends a sentence; an initial does not. Without
+# this, `_INIT`'s `[a-z]{0,3}` reads "Webb." as an abbreviation and the name eats the imprint that
+# follows it -- "Wm. J. Hearne & James E. Webb. Brooklyn".
+_SENTENCE_END = re.compile(r"^(.*?[A-Za-z]{4,}\.)\s+[A-Z]")
+
+
+# Claims this module is NOT the author of. A re-read may replace its own hOCR readings; it may
+# not replace a page number converted by survey_pagenumbers.py, an image a human or an agent
+# actually looked at, or anything a person has confirmed.
+OWNED_METHODS = {"hocr-text", "hocr-geometry"}
+
+
+def merge_book(old: dict, new: dict) -> dict:
+    """-> the claims to store. Re-reading the hOCR must not destroy better evidence.
+
+    `doc["book_says"] = book` was a wholesale replacement, so a single re-run would have wiped
+    every `ia-page-numbers` key_page and all nine hand-confirmed Spooner-cluster publishers --
+    silently, and only visible later as the CSV drifting back to its old values. The sidecar is
+    the survey's record; a phase-0b re-read is one contributor to it, not its owner.
+    """
+    old = old or {}
+    out = dict(new)
+    for key, claim in old.items():
+        if not isinstance(claim, dict):
+            continue
+        method = claim.get("method")
+        if claim.get("confirmed_by") or (method and method not in OWNED_METHODS):
+            out[key] = claim                      # keep the better-sourced claim
+    return out
+
+
+def trim_name(s: str) -> str:
+    s = (s or "").strip(" .,&‘’'\"")
+    m = _SENTENCE_END.match(s)
+    if m:
+        s = m.group(1)
+    return s.strip(" .,&‘’'\"")
 ENTERED_BY = re.compile(
     r"(?i:act of congress[^,]*,?\s*in the year[^,]*,\s*by)\s+([A-Z][\w'&.\- ]{2,60})")
 VOLUME_RX = re.compile(r"\bvol(?:ume)?\.?\s+([IVXLC]{1,8})\b", re.I)
@@ -485,17 +546,39 @@ def survey_volume(ident: str, n_leaves: int = FRONT_LEAVES, verbose: bool = Fals
         if kind not in ("title_page", "target_card", "copyright_page"):
             continue
         flat = re.sub(r"\s+", " ", text)
+        # A microfilm target card is a TYPED PROSE PARAGRAPH that wraps; a title page is display
+        # type where a line break is a real boundary. Reading a card line-by-line is what cut
+        # "Nichols & Delaree" off its "Published by." line and handed the volume to its printer.
+        # So cards are matched reflowed, and the line-bounded rule stays where it belongs.
+        imprint_src = flat if kind == "target_card" else text
+        # Each pattern gets the shape of text it was written for:
+        #   ENTERED_BY       -> flat. The copyright formula wraps across lines by nature.
+        #   PUBLISHED_BY /
+        #   PRINTED_BY       -> reflowed on a card, line-bounded on display type (imprint_src).
+        #   PUBLISHER_SUFFIX -> text, ALWAYS. It is `^...`-anchored with re.M, so a reflowed
+        #                       string has exactly one line start and it silently stops matching
+        #                       -- which is how feeding it `flat` dropped both Doggett volumes
+        #                       ("JOHN DOGGETT JR., PUBLISHER", a perfectly good claim).
+        src_for = {ENTERED_BY: flat, PUBLISHER_SUFFIX: text,
+                   PUBLISHED_BY: imprint_src, PRINTED_BY: imprint_src}
         if "publisher" not in book:
             for rx, ev in ((ENTERED_BY, "copyright-line"), (PUBLISHED_BY, "imprint"),
-                           (PUBLISHER_SUFFIX, "imprint")):
-                # ENTERED_BY reads `flat` because the copyright formula wraps across lines;
-                # the other two read `text` because a line break bounds an imprint name.
-                m = rx.search(flat if rx is ENTERED_BY else text)
-                if m:
-                    book["publisher"] = cite(ident, leaf, m.group(1).strip(" .,"), m.group(0),
+                           (PUBLISHER_SUFFIX, "imprint"), (PRINTED_BY, "printer-imprint")):
+                # PRINTED_BY is last: a printer is who to credit only when nobody claims to have
+                # published the thing.
+                m = rx.search(src_for[rx])
+                if m and trim_name(m.group(1)):
+                    book["publisher"] = cite(ident, leaf, trim_name(m.group(1)), m.group(0),
                                              kind, conf_for.get(kind, "medium"))
                     book["publisher"]["evidence_detail"] = ev
                     break
+        # The printer is recorded alongside rather than competing with the publisher -- the two
+        # are different houses on most of these cards, and docs/SURVEY_PLAN.md wants them split.
+        if "printer" not in book:
+            m = PRINTED_BY.search(imprint_src)
+            if m and trim_name(m.group(1)):
+                book["printer"] = cite(ident, leaf, trim_name(m.group(1)), m.group(0),
+                                       kind, conf_for.get(kind, "medium"))
         if "volume_number" not in book:
             m = VOLUME_RX.search(flat)
             if m and roman_to_int(m.group(1)):
@@ -657,13 +740,69 @@ def _self_test():
     for src, want in (("PUBLISHED BY E. B. SPOONER,", "E. B. SPOONER"),
                       ("PUBLISHED BY R. L. POLK & CO.", "R. L. POLK & CO"),
                       ("Published by Wm. J. Spooner", "Wm. J. Spooner"),
-                      ("Printed by William A. Mercein", "William A. Mercein"),
                       ("Published by Henry R. Worthington", "Henry R. Worthington")):
         got = PUBLISHED_BY.search(src)
-        assert got and got.group(1) == want, f"{src!r} -> {got and got.group(1)!r}, want {want!r}"
-    # A name must not run off the end of its line and swallow the next.
+        assert got and trim_name(got.group(1)) == want, \
+            f"{src!r} -> {got and got.group(1)!r}, want {want!r}"
+    # The printer is its own pattern now. It used to share the alternation with `published`, and
+    # on a card naming both the printer could win -- see PRINTED_BY.
+    assert trim_name(PRINTED_BY.search("Printed by William A. Mercein").group(1)) \
+        == "William A. Mercein"
+    assert not PUBLISHED_BY.search("Printed by William A. Mercein"), \
+        "a printer must not be captured as the publisher"
+
+    # A partnership is ONE imprint and must survive its commas and the period that ends an initial.
+    for src, want in (
+            # A comma NOT followed by "&" is not crossed, so this one stops at the first
+            # partner. Deliberate: see _SEP. A short name is recoverable; a name with an address
+            # welded to it is not.
+            ("Compiled and Published by Thomas Leslie, Henry R., & William J. Hearne. Brooklyn:",
+             "Thomas Leslie"),
+            ("Compiled and Published by Wm. J. Hearne & James E. Webb. Brooklyn. Lees & Foulkes",
+             "Wm. J. Hearne & James E. Webb"),
+            # brackets are part of the name; this card yielded a publisher of "H"
+            ("Compiled and Published by H(enry) R. & W(illiam) J. Hearne. Brooklyn:",
+             "H(enry) R. & W(illiam) J. Hearne"),
+            # ... and the same name with the OCR's stray leading quote on the wrapped line
+            ("Compiled and Published by H(enry) R. & W(illiam) J. ‘Hearne. Brooklyn:",
+             "H(enry) R. & W(illiam) J. ‘Hearne")):
+        got = PUBLISHED_BY.search(src)
+        assert got and trim_name(got.group(1)) == want, \
+            f"{src!r} -> {got and trim_name(got.group(1))!r}, want {want!r}"
+
+    # The sentence boundary is what stops a name eating the imprint after it: `_INIT` happily
+    # reads "Webb." as an abbreviated forename, so the trim, not the regex, has to end it.
+    assert trim_name("Wm. J. Hearne & James E. Webb. Brooklyn") == "Wm. J. Hearne & James E. Webb"
+    assert trim_name("A. G. Stevens & Wm. H. Marschalk") == "A. G. Stevens & Wm. H. Marschalk", \
+        "an initial-only name has no sentence boundary to trim"
+
+    # An imprint is followed by its ADDRESS far more often than by another partner, and address
+    # words are capitalised too -- so the comma rule, not a charset, has to stop these.
+    for src, want in (("PUBLISHED BY LAIN & COMPANY, OFFICES 15 Court", "LAIN & COMPANY"),
+                      ("Published by William A. Mercein, No. 93 Gold-street",
+                       "William A. Mercein"),
+                      ("Published by William Bigelow, 55 Fulton-street Brooklyn:",
+                       "William Bigelow")):
+        got = PUBLISHED_BY.search(src)
+        assert got and trim_name(got.group(1)) == want, \
+            f"{src!r} -> {got and trim_name(got.group(1))!r}, want {want!r}"
+
+    # -- a re-read must not destroy claims this module did not author.
+    kept = merge_book(
+        {"publisher": {"value": "Thomas Leslie, Henry R., & William J. Hearne",
+                       "method": "agent-read", "confirmed_by": "hadro"},
+         "key_page": {"value": 21, "method": "ia-page-numbers"},
+         "year": {"value": 1843, "method": "hocr-text"}},
+        {"publisher": {"value": "Betts Burrell", "method": "hocr-text"},
+         "year": {"value": 1844, "method": "hocr-text"}})
+    assert kept["publisher"]["confirmed_by"] == "hadro", "a confirmed claim survives a re-read"
+    assert kept["key_page"]["value"] == 21, "another tool's claim survives a re-read"
+    assert kept["year"]["value"] == 1844, "but this module may replace its OWN reading"
+
+    # A name must not run off the end of its line and swallow the next -- still true where it
+    # matters, on display type. Target cards are reflowed before matching; title pages are not.
     assert PUBLISHED_BY.search("PUBLISHED BY GEORGE UPINGTON\nOFFICE\n317 Washington St") \
-        .group(1) == "GEORGE UPINGTON", "a newline bounds an imprint"
+        .group(1) == "GEORGE UPINGTON", "a newline bounds an imprint on a title page"
 
     # -- the trade-association roster, which handed at least three Upington volumes the year 1898
     assert classify("Association of American Directory Publishers\nOrganized November, 1898\n"
@@ -770,7 +909,7 @@ def main(argv=None):
                 structure.setdefault("image_read_candidates", [book["year"]["leaf"]])
                 structure.setdefault("image_read_urls", [book["year"]["image"]])
 
-        doc["book_says"] = book
+        doc["book_says"] = merge_book(doc.get("book_says"), book)
         doc["structure"] = structure
         doc["survey_status"] = status
         doc["frontmatter_read"] = time.strftime("%Y-%m-%d")

@@ -20,11 +20,16 @@
     "A decision is keyed (source, id, column) and is matched only against a conflict. It cannot",
     "invent a cell, and a `book-wins` on a cell that no longer conflicts is a no-op.",
     "",
-    "THE SPOONER CLUSTER IS SETTLED (2026-09-21). All 9 rows read at the corrected IIIF citation;",
-    "not one names Spooner. They attest a clean succession -- Nichols & Delaree 1833, Lewis",
-    "Nichols 1835, Stevens & Marschalk 1838, then Leslie and the Hearne brothers from 1843 to",
-    "1850. Alden Spooner published Brooklyn directories in the 1820s; the label looks propagated",
-    "across the whole microfilm series from the earliest volume and never revisited.",
+    "THE SPOONER CLUSTER IS SETTLED (2026-09-21), AND IT WAS TEN ROWS, NOT NINE. Not one names",
+    "Spooner as its publisher. They attest a clean succession -- Bigelow 1832, Nichols & Delaree",
+    "1833, Lewis Nichols 1835, Stevens & Marschalk 1838, then Leslie and the Hearne brothers from",
+    "1843 to 1850.",
+    "",
+    "AND THE TENTH ROW EXPLAINS THE OTHER NINE. micro_IABROOKLYN_0009's card reads 'Published by",
+    "William Bigelow ... Brooklyn: Printed by A. Spooner'. SPOONER WAS THE PRINTER. That row was",
+    "invisible while the extractor preferred `Printed by` over `Published by`: it read 'A. Spooner',",
+    "matched the CSV, and registered as a CONFIRMATION rather than a conflict. A whole series was",
+    "catalogued from its printer, and the bug that caused it also hid the evidence of it.",
     "",
     "Every one of those 9 survey reads was ALSO wrong, which is why each carries a corrected",
     "claim rather than just a verdict: 7 were truncated (at a comma, a forename, or the opening",
@@ -181,6 +186,16 @@
       "reason": "Re-cited from leaf 28 (a listings page; 'Betts Burrell, proprietor of steamboat Dream' is a RESIDENT) to the printed title page at leaf 7: 'COMPILED AND PUBLISHED BY THOMAS LESLIE, HENRY R., & WILLIAM J. HEARNE.' Confirmed by hadro. No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
       "by": "hadro",
       "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0009",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Brooklyn Directory, for 1832-33. Published by William Bigelow, 55 Fulton-street. Brooklyn: Printed by A. Spooner, 57 Fulton-street. 1832.' A TENTH spooner row, invisible until the extractor stopped preferring the printer -- and the one that explains the cluster: A. Spooner is the PRINTER here, and the sidecar now records him as such.",
+      "by": "claude",
+      "date": "2026-09-22",
+      "awaiting_confirmation": true
     }
   ]
 }

@@ -338,9 +338,21 @@ read at the corrected IIIF citation and confirmed. They attest a clean successio
 | 1848–49 | Henry R. & William J. Hearne | Lees & Foulkes |
 | 1849–50 | Henry R. & William J. Hearne | Lees & Foulkes |
 
-Alden Spooner published Brooklyn directories in the **1820s** (`micro_IABROOKLYN_0005` is
-*Spooner's Brooklyn Directory* for 1826). The label looks propagated across the whole microfilm
-series from the earliest volume and never revisited.
+### The cluster was ten rows, and the tenth explains the other nine
+
+`micro_IABROOKLYN_0009` (1832–33) never appeared in the queue at all. Its card reads:
+
+> Brooklyn Directory, for 1832-33. **Published by William Bigelow**, 55 Fulton-street.
+> Brooklyn: **Printed by A. Spooner**, 57 Fulton-street. 1832.
+
+**Spooner was the printer.** The extractor had `published|printed` in one alternation, so on this
+card it read `A. Spooner`, matched the CSV, and registered a **confirmation** — the row was
+silently counted as evidence *for* the wrong value. A whole series was catalogued from its printer,
+and the same bug that caused it hid the proof.
+
+Alden Spooner did publish Brooklyn directories in the 1820s (`micro_IABROOKLYN_0005` is *Spooner's
+Brooklyn Directory* for 1826), which is presumably where the label came from before it was carried
+down the series unrevisited.
 
 **Every one of the nine survey reads was also wrong**, which is why each row got a corrected claim
 and not just a verdict. Seven were **truncated** — at a comma (`Thomas Leslie`, dropping both
@@ -352,6 +364,37 @@ page** (leaf 6 and leaf 7), which outranks a target card in the evidence hierarc
 
 So the conflicts were real and the extracted names were never usable as answers — a distinction
 worth keeping, because the other 10 publisher conflicts came from the same extractor.
+
+### The extractor, fixed (2026-09-22)
+
+Four causes, all measured against the cached front-matter text and re-run offline over all 184
+volumes (`--redo`, 0 failures):
+
+1. **`published` and `printed` were one alternation**, so a printer could win. Split, with
+   `PRINTED_BY` consulted only as a last resort, and the printer now recorded in its own
+   `book_says.printer` claim (7 volumes) instead of competing for the publisher's slot.
+2. **A target card is a typed prose paragraph that wraps; the matcher read it line by line.**
+   Cards are now reflowed before matching. Display type still is not — the newline guard that
+   stops `GEORGE UPINGTON\nOFFICE\n317 Washington` is exactly right for a title page.
+3. **Brackets and OCR crumbs ended names early.** `H(enry) R. & W(illiam) J. Hearne` yielded `H`.
+4. **`_INIT`'s `[a-z]{0,3}` reads `Webb.` as an abbreviation**, so a name ran into the imprint
+   after it. `trim_name()` cuts at a real sentence boundary — a full word plus a period plus a
+   capital — which an initial never forms.
+
+A comma is crossed **only when an `&` follows it**. Crossing every comma also swallowed addresses
+(`LAIN & COMPANY, OFFICES 15 Court`, `William A. Mercein, No. 93 Gold-street`), and address words
+are capitalised, so no charset rule separates them from a surname. Measured 9/10 against 8/10; the
+one cost is that `Thomas Leslie, Henry R., & William J. Hearne` stops at `Thomas Leslie`. **A
+truncated partner list is a far cheaper error than an address welded to a publisher's name.**
+
+Net over the corpus: 93 publisher claims before, 93 after, **zero lost**, one changed — the
+`0009` correction — plus 7 new printer claims.
+
+⚠️ **And a re-read no longer destroys better evidence.** `doc["book_says"] = book` was a wholesale
+replacement, so one `--redo` would have wiped every `ia-page-numbers` key_page and all nine
+hand-confirmed publishers, silently — visible only later as the CSV drifting back. `merge_book()`
+keeps any claim carrying `confirmed_by` or a method this module does not own. The sidecar is the
+survey's record; phase 0b is one contributor to it, not its owner.
 
 **A `csv_label` on the claim** keeps the two sides honest: `value` is what the page says
 ("Thomas Leslie, Henry R., & William J. Hearne"), and the CSV takes the short family label the

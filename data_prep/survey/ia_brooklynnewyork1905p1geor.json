@@ -3,28 +3,95 @@
  "id": "brooklynnewyork1905p1geor",
  "book_says": {
   "publisher": {
-   "value": "GEORGE UPINGTON",
+   "value": "George Upington",
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/full/1400,/0/default.jpg",
-   "evidence_type": "copyright_page",
+   "evidence_type": "title_page",
    "quote": "GEORGE UPINGTON, Publisher",
-   "method": "hocr-text",
+   "method": "agent-read",
    "confidence": "high",
-   "evidence_detail": "imprint"
+   "csv_label": "Upington",
+   "role": "publisher"
   },
   "volume_number": {
    "value": 82,
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/full/1400,/0/default.jpg",
-   "evidence_type": "copyright_page",
+   "evidence_type": "title_page",
    "quote": "VOLUME LXXXII",
-   "method": "hocr-text",
+   "method": "agent-read",
    "confidence": "high"
+  },
+  "year": {
+   "value": 1905,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "UPINGTON'S GENERAL DIRECTORY OF BROOKLYN, NEW YORK CITY. VOLUME LXXXII. FOR THE YEAR 1905. GEORGE UPINGTON, Publisher. OFFICE 317 Washington Street, Brooklyn, N. Y. City. PRICE, $7.50. ENTERED ACCORDING TO ACT OF CONGRESS IN THE YEAR NINETEEN HUNDRED AND FIVE, BY GEORGE UPINGTON. WYNKOOP HALLENBECK ",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits+words"
+  },
+  "year_covered": {
+   "value": 1905,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOLUME LXXXII FOR THE YEAR 1905",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1905,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/full/1400,/0/default.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "ENTERED ACCORDING TO ACT OF CONGRESS IN THE YEAR NINETEEN HUNDRED AND FIVE, BY GEORGE UPINGTON",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "printer": {
+   "value": "Wynkoop Hallenbeck Crawford Co.",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "WYNKOOP HALLENBECK CRAWFORD CO., NEW YORK.",
+   "method": "agent-read",
+   "confidence": "high",
+   "note": "SURVEY_PLAN.md records that the hOCR drops this line on 1906BPL; the image carries it."
+  },
+  "title": {
+   "value": "Upington's General Directory of Brooklyn",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "UPINGTON'S GENERAL DIRECTORY OF BROOKLYN, NEW YORK CITY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7, librarian's red 'pt. 1' beside the year; both parts share the call number 79 9975 6. Genuine PARTS of one volume, not duplicates. Volume LXXXII for 1905 is consistent with 1906BPL's LXXXIII, so the Upington series numbers cleanly year over year. The copyright line also spells the year out -- 'NINETEEN HUNDRED AND FIVE' -- the OCR-proof channel the plan relies on."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 121700150,
   "hocr_sha1": "8cf877783e880a9258d26c705c9b44726f423a5e",

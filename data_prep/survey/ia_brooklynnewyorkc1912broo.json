@@ -3,21 +3,15 @@
  "id": "brooklynnewyorkc1912broo",
  "book_says": {
   "year": {
-   "value": 1911,
+   "value": 1912,
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "ion of this book\npublished for the year 1911\n1912\nft ,0.\nBROOKLYN DIRECTORY CO\nPUBLI",
-   "method": "hocr-text",
+   "quote": "THE BROOKLYN CITY DIRECTORY. VOLUME LXXXVIII. There was no edition of this book published for the year 1911. 1912. BROOKLYN DIRECTORY CO. PUBLISHERS. 317 Washington Street, Brooklyn, City of New York. PHONE MAIN 594. PRICE TWELVE DOLLARS. COPYRIGHT, 1912, BROOKLYN DIRECTORY CO.",
+   "method": "agent-read",
    "confidence": "high",
-   "attestation": "digits",
-   "other_years_on_page": [
-    1910,
-    1911,
-    1912,
-    1935
-   ]
+   "attestation": "digits"
   },
   "year_attestations": [
    {
@@ -52,13 +46,13 @@
    }
   ],
   "year_covered": {
-   "value": 1911,
+   "value": 1912,
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "ion of this book\npublished for the year 1911\n1912\nft ,0.\nBROOKLYN DIRECTORY CO\nPUBLI",
-   "method": "hocr-text",
+   "quote": "THE BROOKLYN CITY DIRECTORY ... 1912",
+   "method": "agent-read",
    "confidence": "high"
   },
   "volume_number": {
@@ -68,11 +62,67 @@
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
    "quote": "VOLUME LXXXVIII",
-   "method": "hocr-text",
+   "method": "agent-read",
    "confidence": "high"
+  },
+  "year_published": {
+   "value": 1912,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "COPYRIGHT, 1912, BROOKLYN DIRECTORY CO.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Brooklyn Directory Co.",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY CO. PUBLISHERS. 317 Washington Street, Brooklyn, City of New York.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Brooklyn Directory Co",
+   "role": "publishers"
+  },
+  "title": {
+   "value": "The Brooklyn City Directory",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE BROOKLYN CITY DIRECTORY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "series_gap": {
+   "value": 1911,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "There was no edition of this book published for the year 1911",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "series_gap",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7, librarian's red 'pt. 2' beside the year. The catalog leaves `publisher` EMPTY for all three; the title page names Brooklyn Directory Co. outright. THE TITLE PAGE DOCUMENTS A GAP IN ITS OWN SERIES: 'There was no edition of this book published for the year 1911.' That is a printed, citable answer to a coverage question, of the same kind as the Trow 1898/99 hole the plan already tracks."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 108670817,
   "hocr_sha1": "b2fa5f9ac01a586a9b906dc55c2c9bd0fa78df41",

@@ -1,8 +1,74 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0044",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1850,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "1850-1 Reynolds; Williamsburgh Directory, Village Register and Business Advertiser, for 1850-1. Sam'l & T. F. Reynolds, Publishers and Proprietors. C. F. Bunce, Printer, 89 Fourth Street.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1850,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "1850-1 Reynolds; Williamsburgh Directory, Village Register and Business Advertiser, for 1850-1. Sam'l & T. F. Reynolds, Publishers and Proprietors. C. F. Bunce, Printer, 89 Fourth Street.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Samuel & T. F. Reynolds",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "1850-1 Reynolds; Williamsburgh Directory, Village Register and Business Advertiser, for 1850-1. Sam'l & T. F. Reynolds, Publishers and Proprietors. C. F. Bunce, Printer, 89 Fourth Street.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Reynolds",
+   "role": "publishers and proprietors"
+  },
+  "printer": {
+   "value": "C. F. Bunce",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "1850-1 Reynolds; Williamsburgh Directory, Village Register and Business Advertiser, for 1850-1. Sam'l & T. F. Reynolds, Publishers and Proprietors. C. F. Bunce, Printer, 89 Fourth Street.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Reynolds' Williamsburgh Directory, Village Register and Business Advertiser",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "1850-1 Reynolds; Williamsburgh Directory, Village Register and Business Advertiser, for 1850-1. Sam'l & T. F. Reynolds, Publishers and Proprietors. C. F. Bunce, Printer, 89 Fourth Street.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "Williamsburgh was still a VILLAGE -- the title says 'Village Register'. It became a city in 1851 and was annexed to Brooklyn in 1855, which is why 0046 onward read 'City Directory'. Confirms the catalog (Reynolds)."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 11312686,
   "hocr_sha1": "a4e940453f2648fb1e988b8f859e454d63ea6b86",

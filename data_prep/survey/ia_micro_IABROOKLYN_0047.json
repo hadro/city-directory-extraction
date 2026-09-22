@@ -1,8 +1,85 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0047",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1853,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynold's Williamsburgh City Directory and Business Advertiser, For 1853. Fourth Annual Publication. Samuel & T. F. Reynolds, Publishers and Proprietors, Office, 91 South Seventh Street. Price One Dollar. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth Street, corner of South-Fi",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1853,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynold's Williamsburgh City Directory and Business Advertiser, For 1853. Fourth Annual Publication. Samuel & T. F. Reynolds, Publishers and Proprietors, Office, 91 South Seventh Street. Price One Dollar. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth Street, corner of South-Fi",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Samuel & T. F. Reynolds",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynold's Williamsburgh City Directory and Business Advertiser, For 1853. Fourth Annual Publication. Samuel & T. F. Reynolds, Publishers and Proprietors, Office, 91 South Seventh Street. Price One Dollar. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth Street, corner of South-Fi",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Reynolds",
+   "role": "publishers and proprietors"
+  },
+  "printer": {
+   "value": "L. Darbee & Son",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynold's Williamsburgh City Directory and Business Advertiser, For 1853. Fourth Annual Publication. Samuel & T. F. Reynolds, Publishers and Proprietors, Office, 91 South Seventh Street. Price One Dollar. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth Street, corner of South-Fi",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Reynolds' Williamsburgh City Directory and Business Advertiser",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynold's Williamsburgh City Directory and Business Advertiser, For 1853. Fourth Annual Publication. Samuel & T. F. Reynolds, Publishers and Proprietors, Office, 91 South Seventh Street. Price One Dollar. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth Street, corner of South-Fi",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "volume_number": {
+   "value": 4,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynold's Williamsburgh City Directory and Business Advertiser, For 1853. Fourth Annual Publication. Samuel & T. F. Reynolds, Publishers and Proprietors, Office, 91 South Seventh Street. Price One Dollar. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth Street, corner of South-Fi",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered"
+   ],
+   "note": "Confirms the catalog (Reynolds)."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 8128388,
   "hocr_sha1": "e6996204565c64f8c29c0425d9ee3bdf06b2088d",

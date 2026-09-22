@@ -1,8 +1,85 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0045",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1851,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynolds' Williamsburgh Directory, Village Register, and Business Advertiser, For 1851-52. Second Publication. Samuel & T(homas) F. Reynolds, Publishers and Proprietors. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1851,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynolds' Williamsburgh Directory, Village Register, and Business Advertiser, For 1851-52. Second Publication. Samuel & T(homas) F. Reynolds, Publishers and Proprietors. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Samuel & Thomas F. Reynolds",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynolds' Williamsburgh Directory, Village Register, and Business Advertiser, For 1851-52. Second Publication. Samuel & T(homas) F. Reynolds, Publishers and Proprietors. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Reynolds",
+   "role": "publishers and proprietors"
+  },
+  "title": {
+   "value": "Reynolds' Williamsburgh Directory, Village Register, and Business Advertiser",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynolds' Williamsburgh Directory, Village Register, and Business Advertiser, For 1851-52. Second Publication. Samuel & T(homas) F. Reynolds, Publishers and Proprietors. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "printer": {
+   "value": "L. Darbee & Son",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynolds' Williamsburgh Directory, Village Register, and Business Advertiser, For 1851-52. Second Publication. Samuel & T(homas) F. Reynolds, Publishers and Proprietors. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "volume_number": {
+   "value": 2,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Reynolds' Williamsburgh Directory, Village Register, and Business Advertiser, For 1851-52. Second Publication. Samuel & T(homas) F. Reynolds, Publishers and Proprietors. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, 146 Fourth street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered"
+   ],
+   "note": "Confirms the catalog."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 6583203,
   "hocr_sha1": "7d3a02d17b99ea92e10bb7df72d9f7818f46e558",

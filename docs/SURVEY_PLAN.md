@@ -369,6 +369,41 @@ Two frames (`0018`, `0022`) were so underexposed as to be unreadable as served; 
 stretch plus a gamma lift recovered both. `0018`'s film frame also crops the left edge, losing the
 first word of every line — the publisher statement survives intact, and the sidecar says so.
 
+### And why the catalog said "Spooner" at all: it is ONE series, 1822 → 1912
+
+`volume_number` is an independent handle on a volume's place in its series, and four series now
+carry enough attested numbers to check. **Every one is internally consistent** — `year − volume`
+is constant within each, so the numbering is a clean annual sequence:
+
+| series | attested | `year − vol` |
+|---|---|---|
+| Hearnes | 10th 1851 · 11th 1852 · 12th 1853 · 13th 1854 | 1841, all four |
+| Reynolds (Williamsburgh) | 2nd 1851 · 3rd 1852 · 4th 1853 · 5th 1854 | 1849, all four |
+| Upington | LXXXII 1905 (both parts) | 1823 |
+| Brooklyn Directory Co | LXXXVIII 1912 (all three parts) | 1824 |
+
+And the last two connect to the first volume in the corpus:
+
+```
+vol  82 in 1905  -> vol 1 falls in 1824   (Upington)
+vol  83 in 1906  -> vol 1 falls in 1824   (1906BPL)
+vol  88 in 1912  -> vol 1 falls in 1825   (Brooklyn Directory Co)   <- off by one
+```
+
+**The 1912 title page explains its own discrepancy**: *"There was no edition of this book
+published for the year 1911."* Skip a year and volume 88 slips from 1911 into 1912. The gap the
+book documents about itself reconciles its numbering with volumes seven years earlier.
+
+So the Brooklyn city directory is **one continuous series from the early 1820s to 1912**, passing
+from Alden Spooner through Nichols, Ogden, the Leslies, the Hearnes, Lain and Upington to the
+Brooklyn Directory Co. `micro_IABROOKLYN_0001` is *Spooner's Brooklyn Directory* for **1822**.
+
+That is almost certainly why the catalog says `spooner` on volumes Spooner had nothing to do with:
+**it is the series founder's name, applied to the series.** Not a typo, not a stray default — a
+defensible cataloguing choice that stops being true about the *publisher* after 1829 while
+remaining true about the *series*. Which is an argument for the `compiler`/`publisher`/`printer`
+split the plan already wants, plus something to hold the series identity.
+
 ### How it first surfaced: ten rows, and the tenth explains the other nine
 
 `micro_IABROOKLYN_0009` (1832–33) never appeared in the queue at all. Its card reads:

@@ -13,9 +13,63 @@
    "confidence": "medium",
    "gloss_lines": 2,
    "legend_location": "inline-at-listing-head"
+  },
+  "year": {
+   "value": 1858,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "The Brooklyn City Directory, for the year ending May 1st, 1859. Compiled by J(onathan) Lain. Published by J. Lain and Company. Offices: Mechanics' Bank Buildings, Montague Street, Cor. Court Street, Brooklyn and 93 William Street, New York. Price Two Dollars.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1858,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "The Brooklyn City Directory, for the year ending May 1st, 1859. Compiled by J(onathan) Lain. Published by J. Lain and Company. Offices: Mechanics' Bank Buildings, Montague Street, Cor. Court Street, Brooklyn and 93 William Street, New York. Price Two Dollars.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "J. Lain and Company",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "The Brooklyn City Directory, for the year ending May 1st, 1859. Compiled by J(onathan) Lain. Published by J. Lain and Company. Offices: Mechanics' Bank Buildings, Montague Street, Cor. Court Street, Brooklyn and 93 William Street, New York. Price Two Dollars.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Lain",
+   "role": "compiled by J. Lain; published by J. Lain and Company"
+  },
+  "title": {
+   "value": "The Brooklyn City Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "The Brooklyn City Directory, for the year ending May 1st, 1859. Compiled by J(onathan) Lain. Published by J. Lain and Company. Offices: Mechanics' Bank Buildings, Montague Street, Cor. Court Street, Brooklyn and 93 William Street, New York. Price Two Dollars.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "Catalog publisher was EMPTY. Note the year shape the plan warns about: the card says 'for the year ending May 1st, 1859' while the CSV year is 1858."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 19954659,
   "hocr_sha1": "a6a2caefd129d52d7adb48175a2c69a42a25596b",

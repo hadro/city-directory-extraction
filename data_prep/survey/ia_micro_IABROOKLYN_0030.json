@@ -4,12 +4,12 @@
  "book_says": {
   "year": {
    "value": 1852,
-   "leaf": 6,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$6/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$6/full/1400,/0/default.jpg",
-   "evidence_type": "copyright_page",
-   "quote": "cording to Act of Congress, in the year 1852, by 1\nHENRY R. & WILLIAM J, HEARNE, ?\nI",
-   "method": "hocr-text",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory. For 1852-1853. Eleventh Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office 1 Front Street, Cor. Fulton. Price, One Dollar.",
+   "method": "agent-read",
    "confidence": "high",
    "attestation": "digits"
   },
@@ -30,9 +30,63 @@
    "quote": "cording to Act of Congress, in the year 1852, by 1\nHENRY R. & WILLIAM J, HEARNE, ?\nI",
    "method": "hocr-text",
    "confidence": "high"
+  },
+  "year_covered": {
+   "value": 1852,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory. For 1852-1853. Eleventh Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office 1 Front Street, Cor. Fulton. Price, One Dollar.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Henry R. & William J. Hearne",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory. For 1852-1853. Eleventh Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office 1 Front Street, Cor. Fulton. Price, One Dollar.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Hearnes",
+   "role": "publishers"
+  },
+  "title": {
+   "value": "Hearnes' Brooklyn City Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory. For 1852-1853. Eleventh Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office 1 Front Street, Cor. Fulton. Price, One Dollar.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "volume_number": {
+   "value": 11,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory. For 1852-1853. Eleventh Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office 1 Front Street, Cor. Fulton. Price, One Dollar.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered"
+   ],
+   "note": "Confirms the catalog."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 21065097,
   "hocr_sha1": "c56659ca3042b1e5fb59633cd4b0032ad5481a1d",

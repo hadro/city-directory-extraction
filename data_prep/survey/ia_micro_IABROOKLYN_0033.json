@@ -8,14 +8,10 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "BROOKLYN, NEW YORK\n1854-5\nSmith's Brooklyn City Directory, for",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "attestation": "digits",
-   "other_years_on_page": [
-    1854,
-    1855
-   ]
+   "quote": "Smith's Brooklyn City Directory, for 1854 & 1855. Brooklyn: William H. Smith, Compiler and Publisher, Office, Room No. 7, Montague Hall, Court Street, 1854. Price, One Dollar and Fifty cents.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
   },
   "year_attestations": [
    {
@@ -42,9 +38,52 @@
     "leaf": 1,
     "quote": "oom No. 7, Montague Hall, Court Street,\n1854. Price, One Dollar and Fifty cents."
    }
-  ]
+  ],
+  "year_covered": {
+   "value": 1854,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Smith's Brooklyn City Directory, for 1854 & 1855. Brooklyn: William H. Smith, Compiler and Publisher, Office, Room No. 7, Montague Hall, Court Street, 1854. Price, One Dollar and Fifty cents.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "William H. Smith",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Smith's Brooklyn City Directory, for 1854 & 1855. Brooklyn: William H. Smith, Compiler and Publisher, Office, Room No. 7, Montague Hall, Court Street, 1854. Price, One Dollar and Fifty cents.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Smith",
+   "role": "compiler and publisher"
+  },
+  "title": {
+   "value": "Smith's Brooklyn City Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Smith's Brooklyn City Directory, for 1854 & 1855. Brooklyn: William H. Smith, Compiler and Publisher, Office, Room No. 7, Montague Hall, Court Street, 1854. Price, One Dollar and Fifty cents.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "Confirms the catalog. Smith is COMPILER AND PUBLISHER here in 1854; by 1857BPL the copyright line names CHARLES JENKINS as publisher with Smith still the compiler. That trajectory is direct support for the `both-right` verdict already recorded on 1857BPL and micro_IABROOKLYN_0036, and for the compiler/publisher/printer field split the plan wants."
+  }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 31902975,
   "hocr_sha1": "7e4442f88203fd18811f1297604bc279beac6472",

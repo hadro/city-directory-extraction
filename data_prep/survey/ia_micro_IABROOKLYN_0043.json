@@ -3,17 +3,72 @@
  "id": "micro_IABROOKLYN_0043",
  "book_says": {
   "title": {
-   "value": "WILLIAMSBURGH DIRECTORY, iaiivapiterert gear Dearly Advertiser, ose ny a td cyan | oct mode oar wae\", FS",
-   "leaf": 2,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$2/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$2/full/1400,/0/default.jpg",
-   "evidence_type": "title_page",
-   "quote": "WILLIAMSBURGH / DIRECTORY, / iaiivapiterert gear / Dearly Advertiser, / ose / ny a td / cyan | / oct mode / oar wae\", / FS",
-   "method": "hocr-text",
-   "confidence": "medium"
+   "value": "Williamsburgh Directory, Register, and Yearly Advertiser",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Williamsburgh Directory, Register, and Yearly Advertiser, For 1849-50. Compiled and Published by Henry Payson. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, No. 146 Fourth Street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year": {
+   "value": 1849,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Williamsburgh Directory, Register, and Yearly Advertiser, For 1849-50. Compiled and Published by Henry Payson. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, No. 146 Fourth Street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1849,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Williamsburgh Directory, Register, and Yearly Advertiser, For 1849-50. Compiled and Published by Henry Payson. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, No. 146 Fourth Street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Henry Payson",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Williamsburgh Directory, Register, and Yearly Advertiser, For 1849-50. Compiled and Published by Henry Payson. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, No. 146 Fourth Street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Payson",
+   "role": "compiled and published"
+  },
+  "printer": {
+   "value": "L. Darbee & Son",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Williamsburgh Directory, Register, and Yearly Advertiser, For 1849-50. Compiled and Published by Henry Payson. Williamsburgh: L. Darbee & Son, Printers, Gazette Office, No. 146 Fourth Street, corner of South-First.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "Catalog publisher was EMPTY. The Williamsburgh series before Reynolds: Payson 1849-50, then Samuel & T. F. Reynolds from 1850-51 -- and Darbee & Son print for both."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 8381222,
   "hocr_sha1": "17f9c169bcb555575f044895ef8f2988b78d7878",

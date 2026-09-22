@@ -3,17 +3,72 @@
  "id": "micro_IABROOKLYN_0031",
  "book_says": {
   "title": {
-   "value": "BROOKLYN CITY DIRECTORY. 23 11 1 ; f F 3 f",
-   "leaf": 27,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$27/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$27/full/1400,/0/default.jpg",
-   "evidence_type": "title_page",
-   "quote": "BROOKLYN CITY DIRECTORY. 23 / 11 / 1 / ; / f / F / 3 / f",
-   "method": "hocr-text",
-   "confidence": "medium"
+   "value": "Hearnes' Brooklyn Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn Directory. For 1853-1854. Twelfth Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office, I Front Street, Cor. Fulton. Price, Ten Shillings.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year": {
+   "value": 1853,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn Directory. For 1853-1854. Twelfth Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office, I Front Street, Cor. Fulton. Price, Ten Shillings.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1853,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn Directory. For 1853-1854. Twelfth Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office, I Front Street, Cor. Fulton. Price, Ten Shillings.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Henry R. & William J. Hearne",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn Directory. For 1853-1854. Twelfth Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office, I Front Street, Cor. Fulton. Price, Ten Shillings.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Hearnes",
+   "role": "publishers"
+  },
+  "volume_number": {
+   "value": 12,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn Directory. For 1853-1854. Twelfth Annual Publication. Brooklyn: Henry R. & William J. Hearne. Office, I Front Street, Cor. Fulton. Price, Ten Shillings.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered"
+   ],
+   "note": "Confirms the catalog."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 11632948,
   "hocr_sha1": "af24664ff788cc117d8813bb2545823c701a2256",

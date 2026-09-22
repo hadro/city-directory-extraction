@@ -8,10 +8,10 @@
    "canvas": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "Fifty-first Year of American Independence",
-   "method": "hocr-text",
-   "confidence": "low",
-   "attestation": "independence-formula"
+   "quote": "LONGWORTH'S AMERICAN ALMANAC, NEW-YORK REGISTER, AND CITY DIRECTORY, FOR THE FIFTY-FIRST YEAR OF AMERICAN INDEPENDENCE ... NEW-YORK: PUBLISHED BY THOMAS LONGWORTH, No. 15 PINE, CORNER OF NASSAU-STREET. 1826.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits+independence-formula"
   },
   "year_attestations": [
    {
@@ -22,28 +22,72 @@
    }
   ],
   "publisher": {
-   "value": "THOMAS LOKCWORTH",
+   "value": "Thomas Longworth",
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "PUBLISHED BY THOMAS LOKCWORTH",
-   "method": "hocr-text",
-   "confidence": "low",
-   "evidence_detail": "imprint"
+   "quote": "PUBLISHED BY THOMAS LONGWORTH, No. 15 PINE, CORNER OF NASSAU-STREET.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Longworth"
   },
   "title": {
-   "value": ". ... i. LONGWORTH'S M \u25a0 4- , AMERICAN ALMANAC, NEW-YORK REGISTER. AND CITY Bi RECTO: : FOP. THE",
+   "value": "Longworth's American Almanac, New-York Register, and City Directory",
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": ". ... / i. / LONGWORTH'S / M \u25a0 / 4- / , AMERICAN ALMANAC, / NEW-YORK REGISTER. / AND / CITY Bi RECTO: : / FOP. THE",
-   "method": "hocr-text",
-   "confidence": "low"
+   "quote": "LONGWORTH'S AMERICAN ALMANAC, NEW-YORK REGISTER, AND CITY DIRECTORY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_covered": {
+   "value": 1826,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE FIFTY-FIRST YEAR OF AMERICAN INDEPENDENCE",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1826,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED BY THOMAS LONGWORTH, No. 15 PINE, CORNER OF NASSAU-STREET. 1826.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "stated_name_count": {
+   "value": 27000,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "the names, occupation, and place of residence of all heads of families, firms, and those doing business in this City, exceeding twenty-seven thousand, in correct alphabetic arrangement",
+   "method": "agent-read",
+   "confidence": "high",
+   "note": "APPROXIMATE -- 'exceeding twenty-seven thousand'"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "stated_name_count",
+    "title",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7. RESOLVES the OCR-damage publisher conflict: the page reads 'PUBLISHED BY THOMAS LONGWORTH', so phase 0b's 'THOMAS LOKCWORTH' was damage, not a different house. The regnal formula gives the year independently ('FIFTY-FIRST YEAR OF AMERICAN INDEPENDENCE' = 1775+51 = 1826) and the imprint prints 1826. It states an approximate entry count, 'exceeding twenty-seven thousand', against the 1839 volume's 'near thirty-nine thousand' -- the same series, thirteen years apart, so the two are a growth measurement. It also carries the SAME Othello epigraph as the 1839 volume ('Who steals my purse, steals trash -- But he who borrows my DIRECTORY, filches me Most villanously'), a house signature spanning both."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 32551788,
   "hocr_sha1": "a461c66db4943ea62ce529a025e25dfe43582cd2",

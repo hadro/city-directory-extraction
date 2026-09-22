@@ -29,7 +29,7 @@
    "volume_numbered_leaves": 184
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "not-residential",
  "derivatives": {
   "hocr_bytes": 10621580,
   "hocr_sha1": "209d0885ec2c7e2af604051da2493a3f639ab3ce",
@@ -256,5 +256,6 @@
    "https://iiif.archive.org/iiif/newyorkdirectory00durs$29/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "scope_note": "NOT A DIRECTORY AT ALL -- a descriptive guidebook to New York City. Leaf 7 is printed page 31 under the running head 'BATTERY PARK.', continuous prose about the Battery, Castle Williams, Governor's Island and Cornelius Vanderbilt's ferry, with a photographic plate. Leaf 29 is printed page 53 under 'WALL STREET.' with a plate of the Chamber of Commerce. Running heads are TOPICS, not alphabetical ranges, and there are no listings anywhere. Corroborating: imagecount is 236, where real directories in this corpus run 600-2500. IA's title 'New York directory.' is a SPINE TITLE only, which the CSV note already suspected ('spine title only; publisher unidentified ... needs sample'). This also explains the phase-0 year conflict: its 1906 came from 'Photo copyright, 1906, by Irving Underhill' on a plate, now suppressed by YEAR_VETO's photo rule."
 }

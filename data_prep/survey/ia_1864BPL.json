@@ -3,15 +3,15 @@
  "id": "1864BPL",
  "book_says": {
   "publisher": {
-   "value": "J. LAIN AND COMPANY",
-   "leaf": 4,
-   "canvas": "https://iiif.archive.org/iiif/1864BPL$4/canvas",
-   "image": "https://iiif.archive.org/iiif/1864BPL$4/full/1400,/0/default.jpg",
-   "evidence_type": "title_page",
-   "quote": "PUBLISHED BY J. LAIN AND COMPANY",
-   "method": "hocr-text",
+   "value": "J. Lain and Company",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1864BPL$5/canvas",
+   "image": "https://iiif.archive.org/iiif/1864BPL$5/full/1400,/0/default.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "By J. LAIN AND COMPANY",
+   "method": "agent-read",
    "confidence": "high",
-   "evidence_detail": "imprint"
+   "csv_label": "Lain"
   },
   "legend": {
    "value": "present",
@@ -38,9 +38,40 @@
    "ia_leaf_confidence": 0,
    "volume_monotone_breaks": 25,
    "volume_numbered_leaves": 644
+  },
+  "year_published": {
+   "value": 1863,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1864BPL$5/canvas",
+   "image": "https://iiif.archive.org/iiif/1864BPL$5/full/1400,/0/default.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "Entered according to Act of Congress, in the year one thousand eight hundred and sixty-three. By J. LAIN AND COMPANY, In the Clerk's Office of the District Court of the United States, for the Southern District of New York.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "words"
+  },
+  "printer": {
+   "value": "Wynkoop, Hallenbeck & Thomas",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1864BPL$5/canvas",
+   "image": "https://iiif.archive.org/iiif/1864BPL$5/full/1400,/0/default.jpg",
+   "evidence_type": "copyright_page",
+   "quote": "WYNKOOP, HALLENBECK & THOMAS, PRINTERS, 113 FULTON STREET, N. Y.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "year_published"
+   ],
+   "note": "Copyright page leaf 5. The year is SPELLED OUT -- the OCR-proof channel -- and it is 1863 for a volume the catalog dates 1864: another clean year_published/year_covered split. Printer Wynkoop, Hallenbeck & Thomas, which is the same house that later prints Upington's Brooklyn volumes as Wynkoop Hallenbeck Crawford Co."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 78607766,
   "hocr_sha1": "554cdd4bf63c4a7b82d2a2543b7610753bd151fc",

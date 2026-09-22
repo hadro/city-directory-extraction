@@ -393,6 +393,38 @@ which is a good argument for the veto *skipping* a claim rather than deleting th
 Two independent series, then, each numbering itself from its city's first directory: Brooklyn
 from Spooner's 1822, Manhattan from Franks' 1786.
 
+### 🎯 Some volumes PRINT THEIR OWN ENTRY COUNT, which `entry_rate` has never had
+
+Doggett's title pages state, in words, how many names the book contains:
+
+| volume | printed on the title page | parses to |
+|---|---|---:|
+| `doggettsnewyorkc1845dogg` | "CONTAINS SIXTY-ONE THOUSAND THREE HUNDRED & THIRTY-THREE NAMES." | **61,333** |
+| `doggettsnewyorkc1847dogg` | "CONTAINS SIXTY-EIGHT THOUSAND ONE HUNDRED AND FIFTY-NINE NAMES." | **68,159** |
+
+**This is a ground-truth denominator, printed by the publisher, for a quantity the pipeline
+currently can only estimate.** `entry_rate` measures the share of extracted lines that look like
+entries; it has never had an independent answer to *how many entries the volume actually has*. A
+stated count gives extraction **recall** on a real number.
+
+Three things make it cheap and durable:
+
+- **It is spelled out**, so it is immune to digit OCR error — the same reason the plan already
+  prefers the spelled-out copyright year. `survey_frontmatter.words_to_number()` parses both
+  exactly, today, with no new code.
+- **The image is what makes it usable.** 1847's hOCR reads `SIXTY-EIGHT THOUSAND ONE HXTNDRED AND
+  FIFTT-NUfE`; the printed page is perfectly legible. A clean case for what an agent read buys.
+- **A regex over the Phase-1 JSONL finds the rest for free.** A scan of the cached front matter
+  already turns up **10 volumes** whose front matter makes a claim about its name count — two
+  absolute (above) and the rest comparative, which are useful differently:
+  `1863BPL` "contains several thousand more names than any heretofore",
+  `brooklyncitydire1848teal` "nearly Three thousand more names than that of last [year]",
+  and `trowsgeneraldire1915trow` "The following 1832 pages contain names of individuals,
+  copartnerships and corporations" — a printed **page** count for the listing section, which is a
+  direct check on `detect_listing_bounds`.
+
+Recorded as `stated_name_count` in the sidecar. Worth a dedicated harvest in Phase 2.
+
 ### ⚠️ `column_count` audit: 3 of 3 Trow NYC volumes checked were wrong
 
 Reading the listings rather than the front matter turned up a different class of error. Each of

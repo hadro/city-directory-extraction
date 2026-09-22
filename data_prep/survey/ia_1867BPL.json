@@ -3,15 +3,16 @@
  "id": "1867BPL",
  "book_says": {
   "publisher": {
-   "value": "J. LAIN AND COMPANY",
+   "value": "J. Lain and Company",
    "leaf": 5,
    "canvas": "https://iiif.archive.org/iiif/1867BPL$5/canvas",
    "image": "https://iiif.archive.org/iiif/1867BPL$5/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "PUBLISHED BY J. LAIN AND COMPANY",
-   "method": "hocr-text",
+   "quote": "COMPILED BY J. LAIN. PUBLISHED BY J. LAIN AND COMPANY.",
+   "method": "agent-read",
    "confidence": "high",
-   "evidence_detail": "imprint"
+   "csv_label": "Lain",
+   "role": "compiled by J. Lain; published by J. Lain and Company"
   },
   "legend": {
    "value": "present",
@@ -38,9 +39,51 @@
    "ia_leaf_confidence": 0,
    "volume_monotone_breaks": 34,
    "volume_numbered_leaves": 747
+  },
+  "year": {
+   "value": 1867,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1867BPL$5/canvas",
+   "image": "https://iiif.archive.org/iiif/1867BPL$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE BROOKLYN CITY DIRECTORY FOR THE YEAR ENDING MAY 1ST, 1867. COMPILED BY J. LAIN. PUBLISHED BY J. LAIN AND COMPANY. OFFICES: POST OFFICE BUILDING, MONTAGUE STREET, NEAR COURT STREET, BROOKLYN, AND 113 FULTON STREET, NEW YORK. PRICE, $3.50.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1867,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1867BPL$5/canvas",
+   "image": "https://iiif.archive.org/iiif/1867BPL$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE YEAR ENDING MAY 1ST, 1867.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "The Brooklyn City Directory",
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1867BPL$5/canvas",
+   "image": "https://iiif.archive.org/iiif/1867BPL$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "THE BROOKLYN CITY DIRECTORY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "Title page leaf 5, overprinted with a donor bookplate ('This Book Is A Gift Of HAROLD and CELIA BAKERMAN') -- a modern addition sitting directly on the title page, which is the kind of thing that confuses a text-only classifier."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 96471393,
   "hocr_sha1": "9d557e8dd34c63d18157d9422e5f1a683d67122c",

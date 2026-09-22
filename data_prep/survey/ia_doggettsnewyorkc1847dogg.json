@@ -7,15 +7,11 @@
    "leaf": 5,
    "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/canvas",
    "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/full/1400,/0/default.jpg",
-   "evidence_type": "target_card",
-   "quote": "G E T XrS\nNEW-YOEI\nCITY DIRECTORY,\nFOR\n1847 & 1848.\nNEW- YORK:\nJOHN DOGGETT JR., PU",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "attestation": "digits",
-   "other_years_on_page": [
-    1847,
-    1848
-   ]
+   "evidence_type": "title_page",
+   "quote": "DOGGETT'S NEW-YORK CITY DIRECTORY, FOR 1847 & 1848. Sixth Publication. NEW-YORK: JOHN DOGGETT JR., PUBLISHER AND PROPRIETOR, 156 BROADWAY. PRICE EIGHTEEN SHILLINGS. CONTAINS SIXTY-EIGHT THOUSAND ONE HUNDRED AND FIFTY-NINE NAMES.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
   },
   "year_attestations": [
    {
@@ -32,15 +28,16 @@
    }
   ],
   "publisher": {
-   "value": "JOHN DOGGETT JR",
+   "value": "John Doggett, Jr.",
    "leaf": 5,
    "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/canvas",
    "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/full/1400,/0/default.jpg",
-   "evidence_type": "target_card",
-   "quote": "JOHN DOGGETT JR., PUBLISHER",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "evidence_detail": "imprint"
+   "evidence_type": "title_page",
+   "quote": "JOHN DOGGETT JR., PUBLISHER AND PROPRIETOR, 156 BROADWAY.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Doggett",
+   "role": "publisher and proprietor"
   },
   "legend": {
    "value": "present",
@@ -53,6 +50,49 @@
    "confidence": "medium",
    "gloss_lines": 0,
    "legend_location": "inline-at-listing-head"
+  },
+  "year_covered": {
+   "value": 1847,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/canvas",
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR 1847 & 1848.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "volume_number": {
+   "value": 6,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/canvas",
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Sixth Publication.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "stated_name_count": {
+   "value": 68159,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/canvas",
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$5/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "CONTAINS SIXTY-EIGHT THOUSAND ONE HUNDRED AND FIFTY-NINE NAMES.",
+   "method": "agent-read",
+   "confidence": "high",
+   "note": "the hOCR reads 'ONE HXTNDRED AND FIFTT-NUfE'; the image is legible"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "stated_name_count",
+    "volume_number",
+    "year",
+    "year_covered"
+   ],
+   "note": "Also states its entry count: 'CONTAINS SIXTY-EIGHT THOUSAND ONE HUNDRED AND FIFTY-NINE NAMES.' The hOCR mangles this line to 'SIXTY-EIGHT THOUSAND ONE HXTNDRED AND FIFTT-NUfE', so the IMAGE is what makes the number usable -- a clean case for what an agent read buys. 'Sixth Publication' for 1847-48 against 1845's Fourth makes the Doggett series a consistent annual."
   }
  },
  "survey_status": "frontmatter-done",

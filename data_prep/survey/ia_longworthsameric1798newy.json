@@ -1,8 +1,85 @@
 {
  "source": "ia",
  "id": "longworthsameric1798newy",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1798,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "CITY DIRECTORY, 1798, FOR THE Twenty-third Year of American Independence.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits+independence-formula"
+  },
+  "year_covered": {
+   "value": 1798,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE Twenty-third Year of American Independence.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1798,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Printed for the Publisher, by T. & J. SWORDS, No. 99 Pearl-street. 1798.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Longworth",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "LONGWORTH's AMERICAN ALMANACK, NEW-YORK REGISTER, AND CITY DIRECTORY",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Longworth",
+   "role": "title possessive; the imprint reads 'Printed for the Publisher', naming no one"
+  },
+  "printer": {
+   "value": "T. & J. Swords",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Printed for the Publisher, by T. & J. SWORDS, No. 99 Pearl-street. 1798.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Longworth's American Almanack, New-York Register, and City Directory",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1798newy$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "LONGWORTH's AMERICAN ALMANACK, NEW-YORK REGISTER, AND CITY DIRECTORY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "The plan's showcase volume. Title page is legible in the image though its hOCR is mangled; the regnal formula and the printed 1798 agree."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 14316848,
   "hocr_sha1": "142fd5ba39528b7b6a9b9d4a7b849ffc21774a7c",

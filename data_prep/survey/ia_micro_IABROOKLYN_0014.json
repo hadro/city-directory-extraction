@@ -1,8 +1,85 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0014",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1837,
+   "leaf": 2,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY, FOR THE YEARS 1837-38. BY LEWIS NICHOLS. BROOKLYN: A. SPOONER & SONS, PRINTERS, MECHANICS' EXCHANGE. JUNE, 1837.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1837,
+   "leaf": 2,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY, FOR THE YEARS 1837-38.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1837,
+   "leaf": 2,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "JUNE, 1837.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Lewis Nichols",
+   "leaf": 2,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "BY LEWIS NICHOLS.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Nichols",
+   "role": "by (compiler/author)"
+  },
+  "printer": {
+   "value": "A. Spooner & Sons",
+   "leaf": 2,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN: A. SPOONER & SONS, PRINTERS, MECHANICS' EXCHANGE.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Brooklyn Directory",
+   "leaf": 2,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$2/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY, FOR THE YEARS 1837-38.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Candidate leaves 3/4/5 were all ADVERTISEMENT spreads (2-up scans); the title page is leaf 2. Leaf 3 carries an ad for 'A. SPOONER & SONS, Book & Letter Press Printers' -- a likely source of the catalog's spooner attribution."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 3673131,
   "hocr_sha1": "bc30e4267628278f4a36c88f5f473435ccf6b3d2",

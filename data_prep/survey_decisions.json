@@ -196,6 +196,26 @@
       "by": "claude",
       "date": "2026-09-22",
       "awaiting_confirmation": true
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0008",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1, read from the image: 'Brooklyn Directory for the year 1831. By Lewis Nichols, Brooklyn. A. Spooner, Printer, June 1831.' Spooner is named as the PRINTER on the page itself; the sidecar records him as such. Eleventh and twelfth rows of the spooner cluster, both invisible to phase 0 because the hOCR yielded no publisher at all.",
+      "by": "claude",
+      "date": "2026-09-22",
+      "awaiting_confirmation": true
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0014",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Title page leaf 2, read from the image: 'BROOKLYN DIRECTORY, FOR THE YEARS 1837-38. BY LEWIS NICHOLS. BROOKLYN: A. SPOONER & SONS, PRINTERS.' Spooner is the PRINTER. The phase-0 candidate leaves (3/4/5) were all advertisement spreads, one of which carries an ad for 'A. SPOONER & SONS, Book & Letter Press Printers' -- a plausible source of the catalog's attribution. Eleventh and twelfth rows of the spooner cluster, both invisible to phase 0 because the hOCR yielded no publisher at all.",
+      "by": "claude",
+      "date": "2026-09-22",
+      "awaiting_confirmation": true
     }
   ]
 }

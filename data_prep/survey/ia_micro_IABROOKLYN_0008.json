@@ -1,8 +1,85 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0008",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1831,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1831. By Lewis Nichols, Brooklyn. A. Spooner, Printer, June 1831.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1831,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1831.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1831,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "A. Spooner, Printer, June 1831.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Lewis Nichols",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1831. By Lewis Nichols, Brooklyn.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Nichols",
+   "role": "by (compiler/author)"
+  },
+  "printer": {
+   "value": "A. Spooner",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "A. Spooner, Printer, June 1831.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Brooklyn Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1831.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "target card, leaf 1. Spooner is the PRINTER; Lewis Nichols compiled it."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 3121353,
   "hocr_sha1": "970bb16d53a9f69dc9e535a13339735926017367",

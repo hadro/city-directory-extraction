@@ -2,7 +2,7 @@
  "source": "ia",
  "id": "longworthsameric4818long",
  "book_says": {},
- "survey_status": "needs-image-read",
+ "survey_status": "restricted",
  "derivatives": {
   "hocr_bytes": 21407875,
   "hocr_sha1": "a33acafa42acc042c89bc67128d11fcfce3a44de",
@@ -234,5 +234,6 @@
    "https://iiif.archive.org/iiif/longworthsameric4818long$6/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "error": "IIIF returns HTTP 403 for every leaf (checked leaves 1/5/6, 2026-09-22). NOT systematic -- other durstoldyorklibrary volumes serve fine, so this is an item-level restriction, not a collection one. The hOCR is also empty for this volume, so it has no text route either."
 }

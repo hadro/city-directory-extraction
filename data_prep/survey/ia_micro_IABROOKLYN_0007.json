@@ -13,9 +13,74 @@
    "confidence": "medium",
    "gloss_lines": 0,
    "legend_location": "inline-at-listing-head"
+  },
+  "year": {
+   "value": 1830,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1830. By Lewis Nichols, Brooklyn: A. Spooner, Printer, June 1830.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1830,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1830. By Lewis Nichols, Brooklyn: A. Spooner, Printer, June 1830.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Lewis Nichols",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1830. By Lewis Nichols, Brooklyn: A. Spooner, Printer, June 1830.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Nichols",
+   "role": "by (compiler/author)"
+  },
+  "title": {
+   "value": "Brooklyn Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1830. By Lewis Nichols, Brooklyn: A. Spooner, Printer, June 1830.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "printer": {
+   "value": "A. Spooner",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory for the year 1830. By Lewis Nichols, Brooklyn: A. Spooner, Printer, June 1830.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "Spooner is the PRINTER. This is where the catalog label stops being true."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 3032704,
   "hocr_sha1": "9d9dae9d14d3de12f9854488c1cbf413ceaf0fba",

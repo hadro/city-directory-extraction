@@ -338,7 +338,38 @@ read at the corrected IIIF citation and confirmed. They attest a clean successio
 | 1848–49 | Henry R. & William J. Hearne | Lees & Foulkes |
 | 1849–50 | Henry R. & William J. Hearne | Lees & Foulkes |
 
-### The cluster was ten rows, and the tenth explains the other nine
+### The whole Brooklyn microfilm series, read end to end (2026-09-22)
+
+Phase 3 read every target card in `micro_IABROOKLYN_0001`–`0028`. **The catalog's `spooner` was
+not simply wrong — it was right, and then it was carried past its expiry.**
+
+| vols | years | publisher / compiler the card names | `spooner`? |
+|---|---|---|---|
+| 0001–0006 | 1822–1829 | **Alden Spooner**, "at the office of the Long-Island Star" | ✅ correct |
+| 0007–0009 | 1830–1832 | Lewis Nichols, then William Bigelow | ❌ Spooner is the **printer** |
+| 0010 | 1833/34 | Nichols & Delaree | ❌ |
+| **0011** | **1834/35** | **Alden Spooner & William Bigelow** | ✅ **correct again** |
+| 0012–0014 | 1835–1838 | Lewis Nichols | ❌ Spooner prints it |
+| 0015–0018 | 1838–1842 | Stevens & Marschalk · Ogden · the Leslies | ❌ |
+| 0019–0025, 0027–0028 | 1843–1851 | the Hearne brothers, with Leslie, Van Nostrand, Webb | ❌ |
+| 0022 | 1845/46 | Silas H. Crowell | ❌ |
+| **0026** | **1848/49** | **E. B. Spooner**, compiled by Thomas P. Teale | ✅ **correct — a different Spooner** |
+
+Three things follow, and the second is why this took a full read rather than a bulk edit:
+
+1. **Alden Spooner published the 1820s volumes and printed the 1830s ones.** The catalog recorded
+   the name that stayed on the page while its role changed underneath.
+2. **The series cannot be corrected wholesale.** `spooner` is right on 8 of the 26 read, wrong on
+   18, and `0011` is *both* — Spooner is a co-compiler there and the printer. A rule that rewrote
+   every `spooner` row would have introduced six new errors to fix eighteen.
+3. **`0026`'s Spooner is E. B., not Alden**, and its compiler is Teale — which the sibling
+   identifier `brooklyncitydire1848teal` had been quietly recording all along.
+
+Two frames (`0018`, `0022`) were so underexposed as to be unreadable as served; a percentile
+stretch plus a gamma lift recovered both. `0018`'s film frame also crops the left edge, losing the
+first word of every line — the publisher statement survives intact, and the sidecar says so.
+
+### How it first surfaced: ten rows, and the tenth explains the other nine
 
 `micro_IABROOKLYN_0009` (1832–33) never appeared in the queue at all. Its card reads:
 

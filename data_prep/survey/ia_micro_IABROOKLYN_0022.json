@@ -13,9 +13,74 @@
    "confidence": "medium",
    "gloss_lines": 1,
    "legend_location": "inline-at-listing-head"
+  },
+  "year": {
+   "value": 1845,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory for 1845 and 1846, also an Almanac for 1845, Brooklyn: Silas H. Crowell, 1845. Douglas, Printer, 106 Fulton Street, N.Y.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1845,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory for 1845 and 1846, also an Almanac for 1845, Brooklyn: Silas H. Crowell, 1845. Douglas, Printer, 106 Fulton Street, N.Y.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Silas H. Crowell",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory for 1845 and 1846, also an Almanac for 1845, Brooklyn: Silas H. Crowell, 1845. Douglas, Printer, 106 Fulton Street, N.Y.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Crowell",
+   "role": "published by"
+  },
+  "title": {
+   "value": "Brooklyn City Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory for 1845 and 1846, also an Almanac for 1845, Brooklyn: Silas H. Crowell, 1845. Douglas, Printer, 106 Fulton Street, N.Y.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "printer": {
+   "value": "Douglas",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory for 1845 and 1846, also an Almanac for 1845, Brooklyn: Silas H. Crowell, 1845. Douglas, Printer, 106 Fulton Street, N.Y.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "Confirms SURVEY_PLAN.md's year_covered example: CSV says 1845, the card says 'for 1845 and 1846'. Frame underexposed; brightened."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 5468235,
   "hocr_sha1": "86010268f4d538b40d40d74af32fe44f6733ea59",

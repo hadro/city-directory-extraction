@@ -1,8 +1,63 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0041",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1860,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Boyd's Brooklyn Business Directory. 1860.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1860,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Boyd's Brooklyn Business Directory. 1860.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "William H. Boyd",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "New York: William H. Boyd, Directory Publisher, Etc. 346 and 348 Broadway.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Boyd",
+   "role": "directory publisher"
+  },
+  "title": {
+   "value": "Boyd's Brooklyn Business Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Boyd's Brooklyn Business Directory. 1860.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "target card leaf 1. Confirms the catalog (Boyd). NOTE: this is a BUSINESS directory, not residential -- relevant to the survey's scope. Candidate leaf 2 was a full-page Appleton advertisement."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 1164135,
   "hocr_sha1": "825b91e727ba04145ebc2b7ee4d34c347e46f0b2",

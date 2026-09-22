@@ -27,9 +27,63 @@
    "ia_leaf_confidence": 84,
    "volume_monotone_breaks": 1,
    "volume_numbered_leaves": 56
+  },
+  "year": {
+   "value": 1825,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Spooner's Brooklyn Directory, N.Y., for 1825. Brooklyn, N.Y. Published by Alden Spooner, at the office of the Star, no. 55 Fulton-street. June, 1825.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1825,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Spooner's Brooklyn Directory, N.Y., for 1825. Brooklyn, N.Y. Published by Alden Spooner, at the office of the Star, no. 55 Fulton-street. June, 1825.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Alden Spooner",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Spooner's Brooklyn Directory, N.Y., for 1825. Brooklyn, N.Y. Published by Alden Spooner, at the office of the Star, no. 55 Fulton-street. June, 1825.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Spooner",
+   "role": "published by"
+  },
+  "title": {
+   "value": "Spooner's Brooklyn Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Spooner's Brooklyn Directory, N.Y., for 1825. Brooklyn, N.Y. Published by Alden Spooner, at the office of the Star, no. 55 Fulton-street. June, 1825.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "CSV 'spooner' is CORRECT here."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 2173698,
   "hocr_sha1": "e5e1ee81fc50883570860e195a5007d0ccec6184",

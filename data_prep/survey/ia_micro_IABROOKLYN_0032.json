@@ -1,8 +1,73 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0032",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1854,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory, for 1854-1855.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1854,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "for 1854-1855.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Henry R. & William J. Hearne",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn: Henry R. & William J. Hearne. Price Ten Shillings.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Hearnes"
+  },
+  "volume_number": {
+   "value": 13,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Thirteenth Annual Publication.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Hearnes' Brooklyn City Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory, for 1854-1855.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered"
+   ],
+   "note": "target card leaf 1. Confirms the catalog. 'Thirteenth Annual' for 1854-55 is consistent with 0029's 'Tenth' for 1851-52 -- the series began 1842."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 15138602,
   "hocr_sha1": "3c6c39573b92c72ea2791767d4fb8e114548a193",

@@ -1,8 +1,74 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0017",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1840,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory and Yearly Advertiser, for 1840-1.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1840,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "for 1840-1.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Thomas & John W. Leslie, & William F. Chichester",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Compiled by T(homas) & J(ohn) W. Leslie, & W(illiam) F. Chichester.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Leslie/Chichester",
+   "role": "compiled by; no publisher named"
+  },
+  "printer": {
+   "value": "Stationers' Hall Works",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn: Stationers' Hall Works, 101 Front St.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Brooklyn Directory and Yearly Advertiser",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory and Yearly Advertiser, for 1840-1.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "target card leaf 1. Compilers named, no publisher stated; Stationers' Hall Works is the works. CSV says spooner -- 13th row of that cluster."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 7278923,
   "hocr_sha1": "3cea7248e254945433544084c40d4d8c06bde484",

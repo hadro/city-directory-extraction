@@ -1,8 +1,73 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0029",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1851,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory, for 1851-1852.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1851,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "for 1851-1852.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Henry R. & William J. Hearnes",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn: Henry R. & William J. Hearnes. Office, I Front Street, Cor. Fulton.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Hearnes"
+  },
+  "volume_number": {
+   "value": 10,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Tenth Annual Publication.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Hearnes' Brooklyn City Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hearnes' Brooklyn City Directory, for 1851-1852.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered"
+   ],
+   "note": "target card leaf 1. CONFIRMS the catalog (Hearnes) rather than conflicting. 'Tenth Annual Publication' gives a volume number."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 15914282,
   "hocr_sha1": "20ff5508087f75463a2b7ae56ba3e12dec9ecdb5",

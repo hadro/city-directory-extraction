@@ -1,8 +1,74 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0021",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1845,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Alphabetical & Street Directory, and Yearly Advertiser, for 1845 & 6.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1845,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "for 1845 & 6.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Henry R., & William J. Hearne",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Compiled and Published by Henry R., & William J. Hearne.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Hearnes",
+   "role": "compiled and published"
+  },
+  "printer": {
+   "value": "Stationers' Hall Works",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn: Stationers' Hall Works, 101 Front Street.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Brooklyn Alphabetical & Street Directory, and Yearly Advertiser",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Alphabetical & Street Directory, and Yearly Advertiser, for 1845 & 6.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "target card leaf 1. CSV says spooner -- 14th row of that cluster."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 6081323,
   "hocr_sha1": "abeb8c6a2da3df594d0d925580657e0e41d67c37",

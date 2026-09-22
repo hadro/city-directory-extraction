@@ -3,28 +3,72 @@
  "id": "micro_IABROOKLYN_0026",
  "book_says": {
   "publisher": {
-   "value": "E. B. SPOONER",
-   "leaf": 2,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$2/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$2/full/1400,/0/default.jpg",
-   "evidence_type": "title_page",
-   "quote": "PUBLISHED BY E. B. SPOONER",
-   "method": "hocr-text",
-   "confidence": "low",
-   "evidence_detail": "imprint"
+   "value": "E. B. Spooner",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory, and Annual Advertiser, for 1848-9. Compiled by Thomas P. Teale. Published by E. B. Spooner. Brooklyn: E. B. Spooner, Printer, Franklin Buildings, corner of Fulton and Orange-streets. 1848.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Spooner",
+   "role": "published by"
   },
   "title": {
-   "value": "\\ \u2014 \u2014 BROOKLYN CITY DIRECTORY. he : ANNUAL ADVERTISER, . a8 nen meee COMPILED BY THOMAS P. =e re | Ree ae P",
-   "leaf": 2,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$2/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$2/full/1400,/0/default.jpg",
-   "evidence_type": "title_page",
-   "quote": "\\ / \u2014 \u2014 / BROOKLYN / CITY DIRECTORY. / he : / ANNUAL ADVERTISER, . / a8 nen meee / COMPILED BY THOMAS P. =e / re | Ree ae P",
-   "method": "hocr-text",
-   "confidence": "low"
+   "value": "Brooklyn City Directory, and Annual Advertiser",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory, and Annual Advertiser, for 1848-9. Compiled by Thomas P. Teale. Published by E. B. Spooner. Brooklyn: E. B. Spooner, Printer, Franklin Buildings, corner of Fulton and Orange-streets. 1848.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year": {
+   "value": 1848,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory, and Annual Advertiser, for 1848-9. Compiled by Thomas P. Teale. Published by E. B. Spooner. Brooklyn: E. B. Spooner, Printer, Franklin Buildings, corner of Fulton and Orange-streets. 1848.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1848,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory, and Annual Advertiser, for 1848-9. Compiled by Thomas P. Teale. Published by E. B. Spooner. Brooklyn: E. B. Spooner, Printer, Franklin Buildings, corner of Fulton and Orange-streets. 1848.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "printer": {
+   "value": "E. B. Spooner",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn City Directory, and Annual Advertiser, for 1848-9. Compiled by Thomas P. Teale. Published by E. B. Spooner. Brooklyn: E. B. Spooner, Printer, Franklin Buildings, corner of Fulton and Orange-streets. 1848.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered"
+   ],
+   "note": "CSV 'spooner' is CORRECT -- but this is E. B. Spooner, not Alden, and Thomas P. Teale compiled it (cf. the sibling identifier brooklyncitydire1848teal)."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 11117486,
   "hocr_sha1": "7dbfa4f974c8538adc2ed93fc2a078579e7ec0d7",

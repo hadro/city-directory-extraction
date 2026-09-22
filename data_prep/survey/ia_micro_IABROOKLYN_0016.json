@@ -1,8 +1,85 @@
 {
  "source": "ia",
  "id": "micro_IABROOKLYN_0016",
- "book_says": {},
- "survey_status": "needs-image-read",
+ "book_says": {
+  "year": {
+   "value": 1839,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory, for 1839-40. Compiled by Henry L. Ogden. Brooklyn: Arnold & Van Anden, Printers, 40 Fulton Street. 1839.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1839,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory, for 1839-40.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1839,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "40 Fulton Street. 1839.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Henry L. Ogden",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Compiled by Henry L. Ogden.",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Ogden",
+   "role": "compiled by; no publisher named"
+  },
+  "printer": {
+   "value": "Arnold & Van Anden",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn: Arnold & Van Anden, Printers, 40 Fulton Street. 1839.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Brooklyn Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Brooklyn Directory, for 1839-40.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "printer",
+    "publisher",
+    "title",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "target card leaf 1. CSV says spooner -- 15th row of that cluster. This is the Ogden 1839 volume the style profiles already reference for its '*' race marker."
+  }
+ },
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 4285039,
   "hocr_sha1": "9f4ec066d7c44db7225ad73bdda21f7bc874b0f0",

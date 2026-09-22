@@ -34,15 +34,24 @@
    }
   ],
   "publisher": {
-   "value": "Lewis",
+   "value": "Nichols & Delaree",
+   "csv_label": "Nichols/Delaree",
    "leaf": 1,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0010$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0010$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "Printed by Lewis",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "evidence_detail": "imprint"
+   "quote": "Brooklyn Directory, for 1833-34. Published by Nichols & Delaree. Brooklyn: Printed by Lewis Nichols, 112 Bridge Street. 1833.",
+   "method": "agent-read",
+   "confidence": "high",
+   "role": "published",
+   "printer": "Lewis Nichols",
+   "supersedes": {
+    "value": "Lewis",
+    "leaf": 1,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   },
   "legend": {
    "value": "present",

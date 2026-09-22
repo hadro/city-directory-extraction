@@ -44,15 +44,24 @@
    "confidence": "medium"
   },
   "publisher": {
-   "value": "Ballard Rev J",
-   "leaf": 29,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$29/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$29/full/1400,/0/default.jpg",
-   "evidence_type": "target_card",
-   "quote": "Ballard Rev J, publisher",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "evidence_detail": "imprint"
+   "value": "Henry R. & William J. Hearne",
+   "csv_label": "Hearnes",
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$6/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$6/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "BROOKLYN DIRECTORY AND YEARLY ADVERTISER FOR 1849 & '50 ... COMPILED AND PUBLISHED BY HENRY R. & WILLIAM J. HEARNE. BROOKLYN: LEES & FOULKES, Printers, 35 and 41 Fulton Street.",
+   "method": "agent-read",
+   "confidence": "high",
+   "role": "compiled and published",
+   "printer": "Lees & Foulkes",
+   "supersedes": {
+    "value": "Ballard Rev J",
+    "leaf": 29,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   }
  },
  "survey_status": "frontmatter-done",

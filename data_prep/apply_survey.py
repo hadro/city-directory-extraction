@@ -179,10 +179,19 @@ def propose(row: dict, doc: dict):
         out.append(("key_page", str(kp["value"]), kp))
 
     # Existing columns. Same offer; the empty-cell rule is what keeps them safe.
+    #
+    # `csv_label` exists because the two sides want different strings. A claim's `value` is what
+    # the page actually says -- "Thomas Leslie, Henry R., & William J. Hearne" -- and truncating
+    # that is the exact failure this queue was built to catch. But the CSV column is what groups
+    # volumes into the ~20-30 publisher x era families the style profiles key on, and a unique
+    # 43-character string groups with nothing. The column's own convention is already short and
+    # already handles partnerships: `Trow/Wilson` on 27 rows, `Low/Buell/Bull`, `Hearnes` on 7.
+    # So the page keeps its words and the column keeps its labels.
     for col in ("publisher", "year"):
         claim = book.get(col)
         if claim and claim.get("value") is not None:
-            out.append((col, str(claim["value"]), claim))
+            cell = claim.get("csv_label") if col == "publisher" else None
+            out.append((col, str(cell if cell else claim["value"]), claim))
 
     assert not any(c in FORBIDDEN for c, _v, _cl in out), "rule 2 violated"
     return out

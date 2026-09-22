@@ -28,15 +28,24 @@
    }
   ],
   "publisher": {
-   "value": "Thomas Leslie",
+   "value": "Thomas Leslie, Henry R., & William J. Hearne",
+   "csv_label": "Leslie/Hearnes",
    "leaf": 1,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0019$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0019$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "Published by Thomas Leslie",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "evidence_detail": "imprint"
+   "quote": "Brooklyn Alphabetical and Street Directory, and Yearly Advertiser, for 1843 & 4. Compiled and Published by Thomas Leslie, Henry R., & William J. Hearne. Brooklyn: Stationers' Hall Works, 101 Front Street.",
+   "method": "agent-read",
+   "confidence": "high",
+   "role": "compiled and published",
+   "printer": "Stationers' Hall Works",
+   "supersedes": {
+    "value": "Thomas Leslie",
+    "leaf": 1,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   }
  },
  "survey_status": "frontmatter-done",

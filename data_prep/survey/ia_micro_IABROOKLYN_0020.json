@@ -28,15 +28,24 @@
    }
   ],
   "publisher": {
-   "value": "Henry R",
+   "value": "Henry R. & William J. Hearne, & Edwin Van Nostrand",
+   "csv_label": "Hearnes/Van Nostrand",
    "leaf": 1,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0020$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0020$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "Published by Henry R",
-   "method": "hocr-text",
-   "confidence": "low",
-   "evidence_detail": "imprint"
+   "quote": "Brooklyn Alphabetical & Street Directory, and Yearly Advertiser, for 1844 & 5. Compiled and Published by Henry R., & William J. Hearne, & Edwin Van Nostrand. Brooklyn: Stationers' Hall Works, 101 Front Street.",
+   "method": "agent-read",
+   "confidence": "high",
+   "role": "compiled and published",
+   "printer": "Stationers' Hall Works",
+   "supersedes": {
+    "value": "Henry R",
+    "leaf": 1,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   }
  },
  "survey_status": "needs-image-read",

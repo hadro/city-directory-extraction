@@ -34,15 +34,24 @@
    }
   ],
   "publisher": {
-   "value": "Wm. J. Hearne",
+   "value": "Wm. J. Hearne & James E. Webb",
+   "csv_label": "Hearnes/Webb",
    "leaf": 1,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0024$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0024$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "Published by Wm. J. Hearne",
-   "method": "hocr-text",
-   "confidence": "low",
-   "evidence_detail": "imprint"
+   "quote": "Brooklyn Directory and Yearly Advertiser, for 1847-8. Compiled and Published by Wm. J. Hearne & James E. Webb. Brooklyn. Lees & Foulkes' Print, 35 Fulton Street.",
+   "method": "agent-read",
+   "confidence": "high",
+   "role": "compiled and published",
+   "printer": "Lees & Foulkes",
+   "supersedes": {
+    "value": "Wm. J. Hearne",
+    "leaf": 1,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   },
   "legend": {
    "value": "present",

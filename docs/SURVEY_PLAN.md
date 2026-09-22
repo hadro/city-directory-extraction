@@ -326,11 +326,38 @@ human entered them.
 | the page contradicts the catalog for real | 3 | |
 | OCR garbage | 1 | `flushingnewyorkc00boyd` reads 1800 against CSV 1890 |
 
-**The `spooner` cluster is worth looking at first.** `micro_IABROOKLYN_0010/0012/0015/0019/0020/
-0024/0025/0027` and `brooklynalphabet1843unse` all carry lowercase `spooner` in the CSV, against
-target cards naming Lewis, Wm. J. Hearne, Henry R. Hearne, A. G. Stevens & Wm. H. Marschalk,
-Thomas Leslie and Betts Burrell. Uniform, lowercase, and contradicted by nine different cards:
-that reads as a collection-level default that was never revisited, not as nine assertions.
+**The `spooner` cluster — SETTLED 2026-09-21. Not one of the nine names Spooner.** All nine were
+read at the corrected IIIF citation and confirmed. They attest a clean succession:
+
+| 1833–34 | Nichols & Delaree | *printed by* Lewis Nichols |
+| 1835–36 | Lewis Nichols | |
+| 1838–39 | A. G. Stevens & Wm. H. Marschalk | Arnold & Van Anden |
+| 1843–44 | Thomas Leslie, Henry R. & William J. Hearne | Stationers' Hall Works |
+| 1844–45 | Henry R. & William J. Hearne, & Edwin Van Nostrand | Stationers' Hall Works |
+| 1847–48 | Wm. J. Hearne & James E. Webb | Lees & Foulkes |
+| 1848–49 | Henry R. & William J. Hearne | Lees & Foulkes |
+| 1849–50 | Henry R. & William J. Hearne | Lees & Foulkes |
+
+Alden Spooner published Brooklyn directories in the **1820s** (`micro_IABROOKLYN_0005` is
+*Spooner's Brooklyn Directory* for 1826). The label looks propagated across the whole microfilm
+series from the earliest volume and never revisited.
+
+**Every one of the nine survey reads was also wrong**, which is why each row got a corrected claim
+and not just a verdict. Seven were **truncated** — at a comma (`Thomas Leslie`, dropping both
+Hearnes), at a forename (`Henry R`), at 28 characters, and in the worst case at the opening
+parenthesis of `H(enry) R. & W(illiam) J. Hearne`, yielding a publisher of **`H`**. Two cited a
+listings page and read a *resident* whose trade was publishing: `Ballard Rev J, publisher N Y
+Recorder` and `Betts Burrell, proprietor of steamboat Dream`. Both re-cite to a **printed title
+page** (leaf 6 and leaf 7), which outranks a target card in the evidence hierarchy.
+
+So the conflicts were real and the extracted names were never usable as answers — a distinction
+worth keeping, because the other 10 publisher conflicts came from the same extractor.
+
+**A `csv_label` on the claim** keeps the two sides honest: `value` is what the page says
+("Thomas Leslie, Henry R., & William J. Hearne"), and the CSV takes the short family label the
+column's own convention already uses (`Trow/Wilson` on 27 rows, `Hearnes` on 7). Truncating the
+attestation is what caused this; fragmenting the grouping key would break the publisher × era
+families the style profiles rest on.
 
 **Nine of the thirteen year conflicts are the extractor grabbing a year that isn't the volume's**,
 and the *sources* of the bad year are more varied than the plan anticipated — it is not only ads:

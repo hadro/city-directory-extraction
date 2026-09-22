@@ -34,15 +34,24 @@
    }
   ],
   "publisher": {
-   "value": "Lewis",
+   "value": "Lewis Nichols",
+   "csv_label": "Nichols",
    "leaf": 1,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0012$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0012$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "Printed by Lewis",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "evidence_detail": "imprint"
+   "quote": "Brooklyn Directory, for 1835-36. Published by Lewis Nichols. For sale at the book store of A. Hageman & Son, Post Office, Fulton, near Hicks-street, Brooklyn. Brooklyn: Printed by Lewis Nichols, 112 Bridge-street. 1835.",
+   "method": "agent-read",
+   "confidence": "high",
+   "role": "published",
+   "printer": "Lewis Nichols",
+   "supersedes": {
+    "value": "Lewis",
+    "leaf": 1,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   },
   "title": {
    "value": "BROOKLYN DIRECTORY, Li } FOR o 1835236. . \u00bb",

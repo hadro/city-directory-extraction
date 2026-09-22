@@ -46,15 +46,24 @@
    }
   ],
   "publisher": {
-   "value": "H",
+   "value": "Henry R. & William J. Hearne",
+   "csv_label": "Hearnes",
    "leaf": 1,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "Published by H",
-   "method": "hocr-text",
-   "confidence": "low",
-   "evidence_detail": "imprint"
+   "quote": "Brooklyn Directory and Yearly Advertiser, for 1848-9. Compiled and Published by H(enry) R. & W(illiam) J. Hearne. Brooklyn: Lees & Foulkes, Printers, 35 & 41 Fulton St.",
+   "method": "agent-read",
+   "confidence": "high",
+   "role": "compiled and published",
+   "printer": "Lees & Foulkes",
+   "supersedes": {
+    "value": "H",
+    "leaf": 1,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   },
   "title": {
    "value": "BROOKLYN DIRECTORY YEARLY ADVERTISER,",

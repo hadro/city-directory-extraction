@@ -20,56 +20,167 @@
     "A decision is keyed (source, id, column) and is matched only against a conflict. It cannot",
     "invent a cell, and a `book-wins` on a cell that no longer conflicts is a no-op.",
     "",
-    "Seeded only with verdicts docs/SURVEY_PLAN.md ALREADY establishes. The open calls -- the",
-    "9-row `spooner` cluster, and the 9 year reads that grabbed boilerplate or listing text --",
-    "are deliberately left undecided: the spooner cluster needs a human, and recording",
-    "`catalog-wins` on the year reads would paper over an extractor bug that should be fixed at",
-    "the source instead."
+    "THE SPOONER CLUSTER IS SETTLED (2026-09-21). All 9 rows read at the corrected IIIF citation;",
+    "not one names Spooner. They attest a clean succession -- Nichols & Delaree 1833, Lewis",
+    "Nichols 1835, Stevens & Marschalk 1838, then Leslie and the Hearne brothers from 1843 to",
+    "1850. Alden Spooner published Brooklyn directories in the 1820s; the label looks propagated",
+    "across the whole microfilm series from the earliest volume and never revisited.",
+    "",
+    "Every one of those 9 survey reads was ALSO wrong, which is why each carries a corrected",
+    "claim rather than just a verdict: 7 were truncated (at a comma, a forename, or the opening",
+    "parenthesis of `H(enry)`), and 2 cited a listings page and read a RESIDENT whose trade was",
+    "publishing. The conflicts were real; the extracted names were never usable as answers.",
+    "",
+    "Still open: the 9 year reads that grabbed boilerplate or listing text. Recording",
+    "`catalog-wins` on those would paper over an extractor bug that should be fixed at the",
+    "source instead."
   ],
   "decisions": [
     {
-      "source": "ia", "id": "1857BPL", "column": "publisher",
+      "source": "ia",
+      "id": "1857BPL",
+      "column": "publisher",
       "verdict": "both-right",
       "reason": "Smith is the compiler the title is named for (SMITH'S BROOKLYN DIRECTORY); Charles Jenkins is the house that published it, per the copyright line on leaf 28. SURVEY_PLAN.md: these want separate `compiler` / `publisher` / `printer` fields.",
       "wants_field_split": true,
-      "by": "survey-plan", "date": "2026-09-12"
+      "by": "survey-plan",
+      "date": "2026-09-12"
     },
     {
-      "source": "ia", "id": "micro_IABROOKLYN_0036", "column": "publisher",
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0036",
+      "column": "publisher",
       "verdict": "both-right",
       "reason": "Same Smith/Jenkins split as 1857BPL, attested by the target card on leaf 1 ('Published by Charles Jenkins').",
       "wants_field_split": true,
-      "by": "survey-plan", "date": "2026-09-12"
+      "by": "survey-plan",
+      "date": "2026-09-12"
     },
     {
-      "source": "ia", "id": "1908BPL", "column": "publisher",
+      "source": "ia",
+      "id": "1908BPL",
+      "column": "publisher",
       "verdict": "needs-image",
       "reason": "Read is OCR-damaged ('GEORGE TTBiNfiTriM' for Upington). SURVEY_PLAN.md is explicit that character-level damage must stay a conflict rather than be matched loosely -- anything loose enough to match this would match unrelated houses.",
-      "by": "survey-plan", "date": "2026-09-12"
+      "by": "survey-plan",
+      "date": "2026-09-12"
     },
     {
-      "source": "ia", "id": "brooklynnewyorkc00geor", "column": "publisher",
+      "source": "ia",
+      "id": "brooklynnewyorkc00geor",
+      "column": "publisher",
       "verdict": "needs-image",
       "reason": "OCR-damaged read ('GEORGE UHNUTON' for Upington); same rule as 1908BPL.",
-      "by": "survey-plan", "date": "2026-09-12"
+      "by": "survey-plan",
+      "date": "2026-09-12"
     },
     {
-      "source": "ia", "id": "longworthsameric3818long", "column": "publisher",
+      "source": "ia",
+      "id": "longworthsameric3818long",
+      "column": "publisher",
       "verdict": "needs-image",
       "reason": "OCR-damaged read ('D. L0NGW0RTH' -- zeros for O's, which defeats the letters-only containment pass on purpose).",
-      "by": "survey-plan", "date": "2026-09-12"
+      "by": "survey-plan",
+      "date": "2026-09-12"
     },
     {
-      "source": "ia", "id": "longworthsameric6118long", "column": "publisher",
+      "source": "ia",
+      "id": "longworthsameric6118long",
+      "column": "publisher",
       "verdict": "needs-image",
       "reason": "OCR-damaged read ('THOMAS LONGWOIITH').",
-      "by": "survey-plan", "date": "2026-09-12"
+      "by": "survey-plan",
+      "date": "2026-09-12"
     },
     {
-      "source": "ia", "id": "longworthsameric1826newy", "column": "publisher",
+      "source": "ia",
+      "id": "longworthsameric1826newy",
+      "column": "publisher",
       "verdict": "needs-image",
       "reason": "OCR-damaged read ('THOMAS LOKCWORTH').",
-      "by": "survey-plan", "date": "2026-09-12"
+      "by": "survey-plan",
+      "date": "2026-09-12"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0010",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Published by Nichols & Delaree. Brooklyn: Printed by Lewis Nichols.' The survey read grabbed the PRINTER and truncated it to 'Lewis'. No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0012",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Published by Lewis Nichols ... Printed by Lewis Nichols, 112 Bridge-street. 1835.' No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0015",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Published by A. G. Stevens & Wm. H. Marschalk. Brooklyn: Arnold & Van Anden, Printers.' No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0019",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Compiled and Published by Thomas Leslie, Henry R., & William J. Hearne.' The survey read stopped at the first comma. No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0020",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Compiled and Published by Henry R., & William J. Hearne, & Edwin Van Nostrand.' No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0024",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Compiled and Published by Wm. J. Hearne & James E. Webb.' No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0025",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Compiled and Published by H(enry) R. & W(illiam) J. Hearne.' The survey read stopped at the opening parenthesis, yielding 'H'. No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0027",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Re-cited from leaf 29 (a listings page; 'Ballard Rev J, publisher' is a RESIDENT) to the printed title page at leaf 6: 'COMPILED AND PUBLISHED BY HENRY R. & WILLIAM J. HEARNE.' Confirmed by hadro. No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
+    },
+    {
+      "source": "ia",
+      "id": "brooklynalphabet1843unse",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Re-cited from leaf 28 (a listings page; 'Betts Burrell, proprietor of steamboat Dream' is a RESIDENT) to the printed title page at leaf 7: 'COMPILED AND PUBLISHED BY THOMAS LESLIE, HENRY R., & WILLIAM J. HEARNE.' Confirmed by hadro. No volume in this cluster names Spooner; Alden Spooner published Brooklyn directories in the 1820s and the label appears propagated across the microfilm series from the earliest volume.",
+      "by": "hadro",
+      "date": "2026-09-21"
     }
   ]
 }

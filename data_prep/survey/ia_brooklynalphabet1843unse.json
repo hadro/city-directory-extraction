@@ -32,15 +32,24 @@
    "confidence": "medium"
   },
   "publisher": {
-   "value": "Betts Burrell",
-   "leaf": 28,
-   "canvas": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$28/canvas",
-   "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$28/full/1400,/0/default.jpg",
+   "value": "Thomas Leslie, Henry R., & William J. Hearne",
+   "csv_label": "Leslie/Hearnes",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$7/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "Betts Burrell, proprietor",
-   "method": "hocr-text",
+   "quote": "BROOKLYN ALPHABETICAL AND STREET DIRECTORY, AND YEARLY ADVERTISER, FOR 1843 & 4. ... COMPILED AND PUBLISHED BY THOMAS LESLIE, HENRY R., & WILLIAM J. HEARNE. BROOKLYN: STATIONERS' HALL WORKS, 101 FRONT STREET.",
+   "method": "agent-read",
    "confidence": "high",
-   "evidence_detail": "imprint"
+   "role": "compiled and published",
+   "printer": "Stationers' Hall Works",
+   "supersedes": {
+    "value": "Betts Burrell",
+    "leaf": 28,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   },
   "legend": {
    "value": "present",

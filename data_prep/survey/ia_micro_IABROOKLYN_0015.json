@@ -45,14 +45,23 @@
   },
   "publisher": {
    "value": "A. G. Stevens & Wm. H. Marschalk",
+   "csv_label": "Stevens/Marschalk",
    "leaf": 1,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "Published\nby A. G. Stevens & Wm. H. Marschalk",
-   "method": "hocr-text",
-   "confidence": "medium",
-   "evidence_detail": "imprint"
+   "quote": "Brooklyn Directory, for the years 1838-39. Published by A. G. Stevens & Wm. H. Marschalk. Brooklyn: Arnold & Van Anden, Printers, 14 Fulton-st. 1838.",
+   "method": "agent-read",
+   "confidence": "high",
+   "role": "published",
+   "printer": "Arnold & Van Anden",
+   "supersedes": {
+    "value": "A. G. Stevens & Wm. H. Marschalk",
+    "leaf": 1,
+    "why": "truncated or mis-located by survey_frontmatter.py"
+   },
+   "confirmed_by": "hadro",
+   "confirmed": "2026-09-21"
   },
   "legend": {
    "value": "present",

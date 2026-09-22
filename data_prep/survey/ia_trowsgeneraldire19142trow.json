@@ -8,22 +8,77 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "VOL. CXXVII",
-   "method": "hocr-text",
+   "quote": "VOL. 127",
+   "method": "agent-read",
    "confidence": "high"
   },
   "title": {
-   "value": "TROWS GENERAL DIRECTORY OF THE BOrvOUGIIS OF MANHATTAN AND BRONX CITY OF NEW YOUK",
+   "value": "Trow's General Directory of the Boroughs of Manhattan and Bronx",
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "TROWS / GENERAL DIRECTORY / OF THE BOrvOUGIIS OF / MANHATTAN AND BRONX / CITY OF NEW YOUK",
-   "method": "hocr-text",
-   "confidence": "medium"
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year": {
+   "value": 1914,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX, CITY OF NEW YORK. VOL. 127. FOR THE YEAR ENDING AUGUST 1, 1914. PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 202 EAST TWELFTH STREET. Copyright 1913.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1914,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE YEAR ENDING AUGUST 1, 1914",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1913,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Copyright 1913, by Trow Directory, Printing and Bookbinding Company",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Trow Directory, Printing and Bookbinding Company",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 202 EAST TWELFTH STREET",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Trow"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7, librarian's red 'pt. 2'. GENERAL (residential) directory."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 71117730,
   "hocr_sha1": "9ab7280887a285b0fbdfe8388a288bec00c50a29",

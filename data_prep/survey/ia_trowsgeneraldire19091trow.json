@@ -8,22 +8,77 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "vol. cxxii",
-   "method": "hocr-text",
+   "quote": "VOL. 122",
+   "method": "agent-read",
    "confidence": "high"
   },
   "title": {
-   "value": "3 A TROWS GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX city of :n::ew yoek",
+   "value": "Trow's General Directory of the Boroughs of Manhattan and Bronx",
    "leaf": 7,
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "3 A / TROWS / GENERAL DIRECTORY / OF THE BOROUGHS OF / MANHATTAN AND BRONX / city of :n::ew yoek",
-   "method": "hocr-text",
-   "confidence": "medium"
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year": {
+   "value": 1909,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX, CITY OF NEW YORK. VOL. 122. FOR THE YEAR ENDING AUGUST 1, 1909. PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE. Copyright 1908.",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "digits"
+  },
+  "year_covered": {
+   "value": 1909,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE YEAR ENDING AUGUST 1, 1909",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1908,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Copyright 1908, by Trow Directory, Printing and Bookbinding Company",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Trow Directory, Printing and Bookbinding Company",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Trow"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7, librarian's red 'pt. 1'. GENERAL (residential) directory. Part 1 of the same VOL. CXXII as trowsgeneraldir1909p3trow (pt. 3); both carry call number 80 0273 6."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 68679004,
   "hocr_sha1": "321e75f0b704fdef4c3e651a564ed4ff796a4b08",

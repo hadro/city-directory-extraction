@@ -391,9 +391,23 @@ Trow asserting descent from the 1786 directory. **A bad year and a real fact in 
 which is a good argument for the veto *skipping* a claim rather than deleting the text.
 
 Two independent series, then, each numbering itself from its city's first directory: Brooklyn
-from Spooner's 1822, Manhattan from Franks' 1786. Worth carrying into the coverage report, since
-a printed volume number plus a constant offset **predicts which years should exist** — and so
-names the holes without needing to find the books.
+from Spooner's 1822, Manhattan from Franks' 1786.
+
+**And the arithmetic already found a hole.** Attested Trow *general* volumes now run:
+
+| vol | 120 | 121 | 122 | 123 | 124 | 125 | **126** | 127 |
+|---|---|---|---|---|---|---|---|---|
+| for year ending | 1907 | 1908 | 1909 | 1910 | 1911 | 1912 | **— missing —** | 1914 |
+
+**Volume 126, for the year ending August 1 1913, is absent from the corpus.** The catalog *does*
+hold four 1913 Trow rows — and every one of them is the **business** directory (VOL. LXVI), so
+none of them is this. That is a specific, checkable acquisition target, produced by arithmetic on
+printed volume numbers rather than by noticing an absence, which is the hard direction.
+
+This is the coverage report's method in miniature: a printed volume number plus a constant offset
+**predicts which years should exist**, so the holes announce themselves. It also needs the
+business/general split to be right first — mistake the 1913 business volumes for general ones and
+the gap closes on paper while staying open in fact.
 
 ### And why the catalog said "Spooner" at all: it is ONE series, 1822 → 1912
 

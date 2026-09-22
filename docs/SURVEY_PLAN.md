@@ -30,7 +30,7 @@ Every diegetic claim in a sidecar carries its source. No exceptions, including t
     "value": "George Upington",
     "leaf": 1,
     "canvas": "https://iiif.archive.org/iiif/1906BPL$1/canvas",
-    "image": "https://iiif.archive.org/iiif/1906BPL$1/full/1800,/0/default.jpg",
+    "image": "https://iiif.archive.org/iiif/1906BPL$1/full/1400,/0/default.jpg",
     "evidence_type": "title_page",
     "quote": "GEORGE UPINGTON, Publisher",
     "method": "hocr-text",
@@ -41,6 +41,11 @@ Every diegetic claim in a sidecar carries its source. No exceptions, including t
 
 `method` is one of `hocr-text` · `ia-page-numbers` · `hocr-geometry` · `agent-read` · `human`.
 A claim with no `leaf` is not a claim; it stays in `catalog_says`.
+
+**`image` is always a IIIF URL**, never `archive.org/download/<id>/page/nNN` — that is a separate
+numbering whose alignment with the leaf is per-volume, and citing it sent readers to the wrong page
+on 2 of 3 volumes checked. See the resolution below; build it with
+`survey_frontmatter.page_image()`.
 
 ---
 
@@ -265,16 +270,36 @@ backward steps in 1,245 leaves (0.9%) at leaf confidence 100 — and its ABBREVI
 checked by eye and does print **21** at the foot. Gating `high` on zero breaks downgraded every
 dense volume in the corpus.
 
-### ⚠️ The `page/nNN` image URL is not globally aligned with `leafNum`
+### The `page/nNN` image URL was not leaf-aligned — RESOLVED 2026-09-21
 
-**This plan asserts one global join verified on one volume, and it does not hold corpus-wide.**
-1906BPL's `n9` is leafNum 9 (its legend page, printing 21). `hearnesbrooklync1852unse`'s `n27` is
-leafNum **28** — its legend sits at `n26`. The `_page_numbers.json` files differ in whether they
-start at leafNum 0 or 1, and Hearne's has gaps (584 entries spanning 1..588).
+**Cite images by IIIF. `archive.org/download/<id>/page/nNN` is a fourth numbering and its
+alignment with the leaf index is per-volume.** Measured by opening pages in both schemes:
 
-Every `image` URL in every sidecar is therefore suspect by one leaf, including the ones cited in
-the Phase 0 conflict queue above. **Unresolved** — it needs a per-volume alignment check, not a
-constant.
+| volume | collection | `page/n<leaf>` | IIIF `$<leaf>` |
+|---|---|---|---|
+| 1906BPL leaf 9 | BPL | ✅ ABBREVIATIONS page, prints 21 | ✅ same page |
+| `hearnesbrooklync1852unse` leaf 27 | Columbia | ❌ wrong page (prints 18); legend is at `n26` | ✅ the legend |
+| `micro_IABROOKLYN_0012` leaf 1 | microfiche | — | ✅ the target card |
+
+IIIF was correct on all three, across three collections; `page/nNN` on one of three. IIIF also
+uses the same integer as the hOCR pageindex, so it is the scheme the rest of the survey is already
+indexed by — not merely the safer choice.
+
+`survey_frontmatter.page_image()` is now the single definition and returns IIIF;
+`survey_pagenumbers.py` and the migration import it. **539 existing citations across 167 sidecars
+were migrated** by `survey_fix_image_urls.py` (idempotent; 539 insertions, 539 deletions, no other
+line touched).
+
+**This mattered most for the queue that was about to be worked.** The `spooner` cluster is
+adjudicated by opening the cited target card; nine of them cited one leaf off would have been
+judged against the wrong page — the same class of error that put a leaf in `key_page`. The first
+card opened under the corrected URL already moved a row: `micro_IABROOKLYN_0012` reads *"Brooklyn:
+Printed by Lewis Nichols, 112 Bridge-street. 1835."* — so the publisher is **Lewis Nichols**, and
+the sidecar's `Lewis` is a truncation, not the name.
+
+The original error is worth naming because it repeats: `page_image()` carried a docstring saying
+it was *"verified against the hOCR leaf index, visually, on 1906BPL leaf 1."* That was true, and
+1906BPL is the one volume where the two schemes agree.
 
 **And the conversion found a live contamination in the column it was built to protect.**
 `hearnesbrooklync1852unse` carries `key_page=27` — a **leaf**, written by commit `94fe7fe`, whose

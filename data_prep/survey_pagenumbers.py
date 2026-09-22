@@ -92,6 +92,12 @@ UA = {"User-Agent": "Mozilla/5.0 (research; city-directory corpus survey; +josh)
 META = "https://archive.org/metadata/{ident}"
 PN_SUFFIX = "_page_numbers.json"
 
+sys.path.insert(0, str(HERE))
+# One definition of the citable image URL, for the reason recorded in its docstring: the
+# `page/nNN` scheme this module used to build is a separate numbering whose alignment with the
+# leaf index is per-volume.
+from survey_frontmatter import page_image  # noqa: E402  (same-dir sibling)
+
 
 def _get(url: str, timeout: int = 90, retries: int = 3) -> bytes:
     """Same retry shape as survey_census: IA returns transient 500s, and 4 of 184 volumes failed
@@ -234,7 +240,7 @@ def claim_for(ident: str, leaf: int, doc: dict) -> tuple:
         "value": page,
         "leaf": int(leaf),
         "canvas": f"https://iiif.archive.org/iiif/{ident}${leaf}/canvas",
-        "image": f"https://archive.org/download/{ident}/page/n{leaf}_w1400.jpg",
+        "image": page_image(ident, int(leaf)),
         "evidence_type": "legend",
         "quote": (f"printed page number {page} on leaf {leaf}" if attestation == "read"
                   else f"page {page} INTERPOLATED by IA for leaf {leaf}; not read from the page"),

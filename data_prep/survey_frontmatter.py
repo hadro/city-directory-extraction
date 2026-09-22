@@ -76,10 +76,25 @@ IMG_WIDTH = 1400           # the width a phase-3 agent gets; keeps the citation 
 # ---------------------------------------------------------------------------- citations
 
 def page_image(ident: str, leaf: int, width: int = IMG_WIDTH) -> str:
-    """The citable image for a leaf. Verified against the hOCR leaf index, visually, on
-    1906BPL leaf 1 -- `page/n1` IS hOCR leaf 1 (the Upington title page). Leaf-indexed, 0-based,
-    same integer as the hOCR pageindex and the IIIF canvas."""
-    return f"{DL}/{ident}/page/n{leaf}_w{width}.jpg"
+    """The citable image for a leaf, via IIIF -- which is the ONLY scheme that tracks the leaf.
+
+    This used to return `archive.org/download/<id>/page/n<leaf>_w1400.jpg`, justified by a visual
+    check on 1906BPL leaf 1. That check was real and the conclusion was still wrong: it holds on
+    1906BPL and fails on others, because **the `page/nNN` index is not globally aligned with the
+    leaf index.** Measured 2026-09-21 by opening pages in both schemes:
+
+        1906BPL      leaf 9  -> page/n9  == IIIF $9   both the ABBREVIATIONS page (prints 21)
+        hearne 1852  leaf 27 -> page/n27 is the WRONG PAGE; the legend is at page/n26
+                             -> IIIF $27 == the legend page
+
+    IIIF was correct on all three volumes checked, across three collections (1906BPL/BPL,
+    hearnesbrooklync1852unse/Columbia, micro_IABROOKLYN_0012/microfiche), and it is the same
+    integer the hOCR pageindex uses -- which is the join docs/SURVEY_PLAN.md documents. The
+    `page/nNN` scheme is a separate, fourth numbering and must not be cited.
+
+    539 existing citations were migrated by `survey_fix_image_urls.py`.
+    """
+    return f"https://iiif.archive.org/iiif/{ident}${leaf}/full/{width},/0/default.jpg"
 
 
 def canvas(ident: str, leaf: int) -> str:
@@ -682,8 +697,15 @@ def _self_test():
 
     # -- a citation is only a citation if it carries the leaf and a resolvable image
     c = cite("1906BPL", 1, 1906, "FOR THE YEAR 1906", "title_page")
-    assert c["leaf"] == 1 and c["image"].endswith("/page/n1_w1400.jpg")
+    assert c["leaf"] == 1
     assert c["canvas"] == "https://iiif.archive.org/iiif/1906BPL$1/canvas"
+    # The image must be IIIF and leaf-indexed. `page/nNN` is a DIFFERENT numbering that happens
+    # to agree on 1906BPL and disagrees on hearnesbrooklync1852unse -- see page_image().
+    assert c["image"] == "https://iiif.archive.org/iiif/1906BPL$1/full/1400,/0/default.jpg", \
+        c["image"]
+    assert "/page/n" not in c["image"], "the page/nNN scheme must never be cited again"
+    assert c["image"].startswith(c["canvas"].rsplit("/canvas", 1)[0]), \
+        "image and canvas must name the same leaf"
     print("self-test OK", file=sys.stderr)
     return 0
 

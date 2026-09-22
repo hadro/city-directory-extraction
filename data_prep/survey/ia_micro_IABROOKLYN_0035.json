@@ -8,9 +8,9 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "BROOKLYN, NEW YORK\n1856-7\nHope & Henderson's (Consolidated) Bro",
-   "method": "hocr-text",
-   "confidence": "low",
+   "quote": "Hope & Henderson's (Consolidated) Brooklyn City Directory for 1856-7. G. Clarke Henderson, Compiler. Brooklyn: Published by Hope & Henderson; Office, 181 Fulton Street. 1856.",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "digits"
   },
   "year_attestations": [
@@ -39,13 +39,56 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/full/1400,/0/default.jpg",
    "evidence_type": "target_card",
-   "quote": "Published by Hope & Henderson",
-   "method": "hocr-text",
-   "confidence": "low",
-   "evidence_detail": "imprint"
+   "quote": "Published by Hope & Henderson; Office, 181 Fulton Street",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Hope & Henderson",
+   "role": "published by; G. Clarke Henderson compiler"
+  },
+  "year_covered": {
+   "value": 1856,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "for 1856-7",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1856,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Office, 181 Fulton Street. 1856.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "title": {
+   "value": "Hope & Henderson's (Consolidated) Brooklyn City Directory",
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/full/1400,/0/default.jpg",
+   "evidence_type": "target_card",
+   "quote": "Hope & Henderson's (Consolidated) Brooklyn City Directory for 1856-7",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "publisher",
+    "title",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Target card leaf 1. Confirms the catalog (Hope & Henderson). '(Consolidated)' in the title is a bibliographic fact worth keeping: the competing Brooklyn directories merged for 1856-7, which is the same moment Smith's separate Brooklyn directory runs out."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 44667814,
   "hocr_sha1": "5f68e90104729eca5f48943410e9356287e98066",

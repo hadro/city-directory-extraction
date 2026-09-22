@@ -441,10 +441,22 @@ so the note names the exact leaf to open. Opening it:
 measured on the same pass. It also refutes the 1859 note's claim that *"the 2→3 transition is
 1857→1859"* — 1859 is still 2-column, and so is 1876.
 
-**160 rows carry a `column_count` citing an `s4` read** (54 twos, 51 threes, 51 ones). Three of
-three checked were wrong, so that population wants a sampled audit — and it is cheap, because each
-row's own note names the leaf to open. `column_count` feeds the style profiles and the page-type
-work, so a wrong value is not inert.
+**160 rows carry a `column_count` citing an `s4` read** (54 twos, 51 threes, 51 ones). `column_count`
+feeds the style profiles and the page-type work, so a wrong value is not inert — and each row's own
+note names the leaf, so the audit is cheap.
+
+**But the bracket is only wrong at one end.** Checked since: `trowsgeneraldir1906p2trow` leaf 401
+is genuinely **3 columns**, and `brooklyndirector00ogde` leaf 29 is genuinely **1**. So:
+
+| checked | 1839 | 1859 | 1863 | 1876 | **1906** | 1922/23 |
+|---|---|---|---|---|---|---|
+| recorded | 1 | 3 | 3 | 3 | 3 | 3 |
+| **counted** | **1 ✓** | **2 ✗** | **2 ✗** | **2 ✗** | **3 ✓** | **5 ✗** |
+
+The `1859-1915 all 3-col` bracket is right at its high end and wrong at its low end, so **the 2→3
+transition falls somewhere between 1876 and 1906** — not at 1857→1859 as the 1859 note claims.
+Locating it properly needs the 1880s–90s Trow volumes, and it is worth locating: it is the single
+fact that would let the bracket be re-dated rather than abandoned.
 
 *(`trowsgenerald192223p2trow` also moved 3 → **5**, but that is a measurement rather than a
 correction: its 3 came from a bracket covering 1859–1915, and 1922/23 sits outside it.)*

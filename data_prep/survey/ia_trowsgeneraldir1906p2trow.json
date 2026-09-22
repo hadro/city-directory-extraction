@@ -8,9 +8,9 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/full/1400,/0/default.jpg",
    "evidence_type": "title_page",
-   "quote": "it'-:\nF OR THE Y E A. R ENDING\nJULY 1, 1906\nPUBLISHED ANNUALLY\n.TROW DIRECTORY, PRI",
-   "method": "hocr-text",
-   "confidence": "low",
+   "quote": "TROW'S GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX, CITY OF NEW YORK. VOL. CXIX. FOR THE YEAR ENDING JULY 1, 1906. PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE. Price, Seven Dollars and Fifty Cents. Entered according to Act of Congress, in the ",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "digits"
   },
   "year_attestations": [
@@ -30,9 +30,85 @@
    "quote": "TROWS / ii'v .. . .' \u25a0 . .' _\u25a0\u25a0 ./-,^l < j L / mmi / :l r| . : \u25a0 / V'.-' Nil { / GENERAL DIRECTORY f\u00a7I / OF THE BOKOTJGIIS Or / ANHATTAN AND BRON / &\u00bb!;^\u00a3\u00a3$s / ia",
    "method": "hocr-text",
    "confidence": "low"
+  },
+  "year_covered": {
+   "value": 1906,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "FOR THE YEAR ENDING JULY 1, 1906",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "year_published": {
+   "value": 1905,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "Entered according to Act of Congress, in the year 1905, by TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "publisher": {
+   "value": "Trow Directory, Printing and Bookbinding Company",
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "PUBLISHED ANNUALLY BY TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE",
+   "method": "agent-read",
+   "confidence": "high",
+   "csv_label": "Trow"
+  },
+  "volume_number": {
+   "value": 119,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$7/full/1400,/0/default.jpg",
+   "evidence_type": "title_page",
+   "quote": "VOL. CXIX.",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "column_count": {
+   "value": 3,
+   "leaf": 401,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$401/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$401/full/1400,/0/default.jpg",
+   "evidence_type": "listing",
+   "quote": "three columns, each headed KAUFMAN; head advertisement FRANK E. CAMPBELL UNDERTAKERS, foot TROW DIRECTORY, PRINTING AND BOOKBINDING COMPANY, 89 THIRD AVENUE",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read"
+  },
+  "ditto_convention": {
+   "value": "em dash",
+   "leaf": 401,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$401/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$401/full/1400,/0/default.jpg",
+   "evidence_type": "listing",
+   "quote": "KAUFMAN / -Edwd trucks 54 10th av h 258 W 15th / -Edwd J h 415 E 117th -- an em dash stands for the repeated surname under its heading",
+   "method": "agent-read",
+   "confidence": "high"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "column_count",
+    "ditto_convention",
+    "publisher",
+    "volume_number",
+    "year",
+    "year_covered",
+    "year_published"
+   ],
+   "note": "Title page leaf 7 (red 'pt. 2') plus a listings check at leaf 401. COLUMN COUNT CONFIRMED at 3 -- so the 's4' bracket '1859-1915 all 3-col' is right at its HIGH end and wrong at its low end (1859/1863/1876 are all 2-col). The 2->3 transition therefore falls somewhere between 1876 and 1906, NOT at 1857->1859 as the 1859 note claims. Leaf 400 is a blank verso, a live example of the ~2x blank-leaf overstatement in imagecount."
   }
  },
- "survey_status": "needs-image-read",
+ "survey_status": "frontmatter-done",
  "derivatives": {
   "hocr_bytes": 199620424,
   "hocr_sha1": "3ccb2a748198dd336020ce412698805b769cf286",

@@ -263,6 +263,46 @@
       "by": "claude",
       "date": "2026-09-22",
       "awaiting_confirmation": true
+    },
+    {
+      "source": "ia",
+      "id": "trowsnewyorkcity1859trow",
+      "column": "column_count",
+      "verdict": "book-wins",
+      "reason": "Read at leaf 323 = printed p.317 (GAS-GAY), the exact anchor the CSV note cites. Its offset (+6) checks out; its column count does not. The page is TWO columns. This also refutes the note's claim that 'the 2->3 transition is 1857->1859'. Each anchor leaf was opened and counted; the offsets recorded alongside these column counts are all correct, so it is specifically the column measurement that is wrong.",
+      "by": "claude",
+      "date": "2026-09-22",
+      "awaiting_confirmation": true
+    },
+    {
+      "source": "ia",
+      "id": "trowsnewyorkcity1863trow",
+      "column": "column_count",
+      "verdict": "book-wins",
+      "reason": "Read at leaf 338 = printed p.326 (GID-GIL), the anchor the note cites. Offset +12 checks out; the page is TWO columns, not 3. Each anchor leaf was opened and counted; the offsets recorded alongside these column counts are all correct, so it is specifically the column measurement that is wrong.",
+      "by": "claude",
+      "date": "2026-09-22",
+      "awaiting_confirmation": true
+    },
+    {
+      "source": "ia",
+      "id": "trowsnewyorkcity1876trow",
+      "column": "column_count",
+      "verdict": "book-wins",
+      "reason": "Read at leaf 511 = printed p.497 (GIE-GIL), the anchor the note cites. Offset +14 checks out; the page is TWO columns, not 3. Leaf 23 (printed p.31) is 2-column too, so it is not a mid-volume change. Each anchor leaf was opened and counted; the offsets recorded alongside these column counts are all correct, so it is specifically the column measurement that is wrong.",
+      "by": "claude",
+      "date": "2026-09-22",
+      "awaiting_confirmation": true
+    },
+    {
+      "source": "ia",
+      "id": "trowsgenerald192223p2trow",
+      "column": "column_count",
+      "verdict": "book-wins",
+      "reason": "Read at leaf 7 = printed p.1025. FIVE columns. The CSV's 3 came from a bracket covering 1859-1915; 1922/23 is outside it, so this is a measured value rather than a correction. Each anchor leaf was opened and counted; the offsets recorded alongside these column counts are all correct, so it is specifically the column measurement that is wrong.",
+      "by": "claude",
+      "date": "2026-09-22",
+      "awaiting_confirmation": true
     }
   ]
 }

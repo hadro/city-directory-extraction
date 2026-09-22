@@ -178,6 +178,14 @@ def propose(row: dict, doc: dict):
             and kp.get("attestation") != INTERPOLATED):
         out.append(("key_page", str(kp["value"]), kp))
 
+    # `column_count` joined this list on 2026-09-22, when reading the listings turned up three
+    # Trow volumes whose recorded value was wrong. It is only ever offered from an `agent-read`
+    # claim -- a column count is a fact about the page's layout, and nothing in the hOCR text
+    # channel can see it.
+    cc = book.get("column_count")
+    if cc and cc.get("value") is not None and cc.get("method") == "agent-read":
+        out.append(("column_count", str(cc["value"]), cc))
+
     # Existing columns. Same offer; the empty-cell rule is what keeps them safe.
     #
     # `csv_label` exists because the two sides want different strings. A claim's `value` is what

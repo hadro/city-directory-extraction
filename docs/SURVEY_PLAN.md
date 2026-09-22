@@ -393,6 +393,41 @@ which is a good argument for the veto *skipping* a claim rather than deleting th
 Two independent series, then, each numbering itself from its city's first directory: Brooklyn
 from Spooner's 1822, Manhattan from Franks' 1786.
 
+### ⚠️ `column_count` audit: 3 of 3 Trow NYC volumes checked were wrong
+
+Reading the listings rather than the front matter turned up a different class of error. Each of
+these volumes' `notes` records an offset anchor — *"col=3 (pilot s4); offset +14 @ leaf511/p497"* —
+so the note names the exact leaf to open. Opening it:
+
+| volume | anchor | offset | recorded | **counted** |
+|---|---|---|---|---|
+| `trowsnewyorkcity1859trow` | leaf 323 = p.317 | +6 ✓ | 3 | **2** |
+| `trowsnewyorkcity1863trow` | leaf 338 = p.326 | +12 ✓ | 3 | **2** |
+| `trowsnewyorkcity1876trow` | leaf 511 = p.497 | +14 ✓ | 3 | **2** |
+
+**Every offset is right and every column count is wrong**, which suggests the two were not
+measured on the same pass. It also refutes the 1859 note's claim that *"the 2→3 transition is
+1857→1859"* — 1859 is still 2-column, and so is 1876.
+
+**160 rows carry a `column_count` citing an `s4` read** (54 twos, 51 threes, 51 ones). Three of
+three checked were wrong, so that population wants a sampled audit — and it is cheap, because each
+row's own note names the leaf to open. `column_count` feeds the style profiles and the page-type
+work, so a wrong value is not inert.
+
+*(`trowsgenerald192223p2trow` also moved 3 → **5**, but that is a measurement rather than a
+correction: its 3 came from a bracket covering 1859–1915, and 1922/23 sits outside it.)*
+
+### Two listing conventions in Manhattan Trow, both new to the project's records
+
+`trowsnewyorkcity1859trow` leaf 323 prints:
+
+- **`Gaskin Joseph (col'd), barber, h 41 Watts`** — a race marker in **Manhattan**. The project has
+  documented Brooklyn's (`*` in Hearne and Ogden, and Hope & Henderson's sense); this is a third
+  form, *parenthesised after the name* rather than prefixed. Recorded as `race_marker`.
+- **`Gatty (refused), 169 Monroe`** — a resident who declined to give particulars. The entry keeps
+  the surname and address and drops everything else. Worth knowing before a filter decides a
+  name-plus-address line with no occupation is a fragment.
+
 **And the arithmetic already found a hole.** Attested Trow *general* volumes now run:
 
 | vol | 120 | 121 | 122 | 123 | 124 | 125 | **126** | 127 |

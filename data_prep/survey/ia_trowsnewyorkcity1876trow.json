@@ -13,6 +13,25 @@
    "confidence": "medium",
    "gloss_lines": 0,
    "legend_location": "inline-at-listing-head"
+  },
+  "column_count": {
+   "value": 2,
+   "leaf": 511,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$511/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$511/full/1400,/0/default.jpg",
+   "evidence_type": "listing",
+   "quote": "two columns under running heads GIE / 497 / GIL; head advertisement CHICKERING PIANOS, foot E. RIDLEY & SONS",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read"
+  },
+  "_read": {
+   "date": "2026-09-22",
+   "by": "agent-read",
+   "found": [
+    "column_count"
+   ],
+   "note": "COLUMN COUNT AUDIT. Read at leaf 511 = printed p.497 (GIE-GIL), the anchor the CSV note cites. Offset +14 checks out; the recorded col=3 does not -- the page is TWO columns. Leaf 23 (printed p.31) is also 2-column, so this is not a mid-volume change."
   }
  },
  "survey_status": "needs-image-read",

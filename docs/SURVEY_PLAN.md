@@ -649,6 +649,21 @@ Every volume carries a `survey_status` with a reason code, so a nightly job neve
 dead volume: `ok` · `no-hocr` · `dead-ocr` (chars/page an order of magnitude below its class) ·
 `not-residential` · `duplicate-of:<id>` · `restricted` · `fetch-failed`.
 
+**Stamped so far (2026-09-22):**
+
+- `restricted` — `longworthsameric4818long`. IIIF returns **403 on every leaf** and its hOCR is
+  empty, so it has no route at all, by text or by image. Not a collection-level block: other
+  `durstoldyorklibrary` volumes serve fine, so this is item-level.
+- `not-residential` — `micro_IABROOKLYN_0041` (Boyd's Brooklyn **Business** Directory, 1860) and
+  `micro_IABROOKLYN_0038` (Brooklyn **Business** Directory, 1858-59). Firms, not residents.
+
+⚠️ **"Business" in a title does not mean out of scope, and a keyword sweep would get this wrong.**
+12 rows match `business|mercantile|copartnership|trade`, and **10 of them are combined volumes** —
+`Brooklyn City AND Business Directory` (1869, 1871, 1875, 1876, 1880) and Reynolds'
+`City Directory AND Business Advertiser` (0044-0048). Those carry a residential alphabet and stay
+in. Only the two named above are business-only. The discriminator is *and*, which is exactly the
+kind of thing that survives a human read and not a regex.
+
 Related: **duplicate and multi-part detection.** `master_directories.README.md` already flags
 p1/p2/p3 parts and duplicate scans across IA collections. Cluster on
 (publisher, year, city, imagecount, title) and stamp `duplicate_of` / `part N of M`, or everything
@@ -658,6 +673,23 @@ downstream double-counts.
 
 - **rights status** per volume — a public HF release is the goal and there are 1933 rows in the
   non-phonebook set
+- ⚠️ **racist content in the advertising, which a public release needs a stated position on.**
+  Found while reading `micro_IABROOKLYN_0041` leaf 2 (1860): a full-page D. Appleton & Co.
+  advertisement for stereoscopic views whose product list includes a category of "illustrations of
+  negro life" by a blackface minstrel troupe, one title of which contains a racial slur. This is
+  not incidental to one page — minstrel and blackface material was mainstream commercial
+  advertising in this era, so the ad sections across the 1850s-1880s volumes will carry more of it.
+
+  The project already has the *apparatus* for this: `docs/` and the style profiles record the
+  Hearne/Ogden `*` race marker as a deliberately **preserved** datum, on the grounds that
+  stripping it "destroys irrecoverably" the only racial identification those volumes carry. That
+  reasoning was about the **listings**, where the marker is evidence about Brooklyn's free Black
+  community. The **advertising** is a different case with the same material: not a record of
+  people, and not something the extraction pipeline needs at all.
+
+  Nothing to decide here — but the release should say which it is doing and why, and the ad-run
+  inventory Phase 2 already plans to build (`ad-run inventory — the reported gaps`) is the natural
+  place to carry the flag, since it identifies the ad leaves anyway.
 - **provenance of the OCR itself** — IA `sha1` and `mtime` of the hOCR derivative plus fetch date,
   so a re-derivation is reproducible and a later IA re-OCR is detectable
 - **a coverage report** — publisher × decade × borough. Thin in the 1860s–90s (21/16/18/14

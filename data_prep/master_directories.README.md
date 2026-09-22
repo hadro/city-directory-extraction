@@ -123,6 +123,15 @@ Deliberately out of the current **NYC-residential** scope, but catalogued here a
 - **Business / trade / copartnership / mercantile directories** (the "BIZ" shape — firms, not
   residents; a candidate *separate* model track). Seen but skipped: Wilson's business, Goulding's,
   Jones's mercantile, Trow business/copartnership, NY State business directory, Phillips' business.
+
+  ⚠️ **Two business-only volumes are already IN the catalog** and are now stamped
+  `not-residential` in their survey sidecars: `micro_IABROOKLYN_0041` (Boyd's Brooklyn Business
+  Directory 1860) and `micro_IABROOKLYN_0038` (Brooklyn Business Directory 1858-59).
+
+  **Do not filter on the word "business".** 12 rows match it and 10 are *combined* volumes —
+  `Brooklyn City **and** Business Directory` (1869/71/75/76/80) and Reynolds'
+  `City Directory **and** Business Advertiser` (`micro_IABROOKLYN_0044`–`0048`). Those carry a
+  residential alphabet and belong in the corpus. The discriminator is the word *and*.
 - **Biographical / social / élite registers** (persons data, not residential dirs): "Prominent
   families of NY", "Makers of New York", "Men of affairs", "Notable New Yorkers", Phillips' élite,
   Lain & Healy's élite, "The list" (visiting/shopping).

@@ -41,6 +41,12 @@ THREE RULES, and the second is the one that matters
      listings start; `detect_listing_bounds --from-jsonl` does, and it needs the Phase-1 OCR
      harvest first. There is nothing to write yet.
 
+     CONDITIONAL since 2026-09-23 (see PAGE_METHOD below): Phase 2 now produces them, and they
+     are written only from a claim that is `method: hocr-geometry`, `attestation: read` and
+     `confidence: high`. Stricter than key_page's high-or-medium on purpose -- a medium page
+     claim is a right number on a leaf that may not be the listing's edge (flagged bounds, a
+     not-residential volume) or a short, weakly corroborated sequence.
+
 3. **Idempotent.** Re-running writes nothing new: every fill from the last run now reads as
    `agree`. The CSV round-trips byte-identically through `csv` (CRLF, QUOTE_MINIMAL), so any diff
    this produces is a real change and not a reformat.
@@ -101,11 +107,35 @@ NEW_COLUMNS = ["volume_number", "year_covered", "year_published", "legend_leaf",
 
 # Columns this script must never write, and why. Enforced in `propose()` rather than left to
 # reviewer memory -- rule 2 above.
-FORBIDDEN = {
-    "start_page": "needs phase 2 (detect_listing_bounds), not measured by phase 0",
-    "end_page": "needs phase 2 (detect_listing_bounds), not measured by phase 0",
-    "page_offset": "needs phase 2 (the per-leaf curve), not measured by phase 0",
-}
+#
+# Empty since 2026-09-23. `start_page` / `end_page` / `page_offset` sat here from 2026-09-20
+# ("needs phase 2") until Phase 2 produced them; they are now conditional on PAGE_METHOD. The
+# mechanism stays -- the next column that must not be written from what the sidecars hold goes
+# here, with its reason.
+FORBIDDEN: dict = {}
+
+# The conditional page columns. Only `survey_derive.py pages` writes these claims, and every one
+# carries `method: hocr-geometry`. Three guards, all required:
+#
+#   method       a page claim from anywhere else is not this measurement
+#   attestation  `read`: the cited leaf's own margin prints the number. `inferred` is the
+#                sequence's guess for a leaf that prints none -- the same thing as IA's
+#                interpolated folios, which were retracted from key_page on 2026-09-21.
+#   confidence   `high` only. See the rule 2 note above for what `medium` means here.
+#
+# Before this was lifted, 10 randomly sampled high claims (seed 20260923) were opened at their
+# IIIF images: 10/10 print the cited folio, and 10/10 cited leaves are the listing's true first
+# or last page, the neighbouring leaf being a title page, a street directory, NAMES TOO LATE, or
+# an ADDITIONAL NAMES supplement.
+#
+# `page_offset` is offered only alongside a qualifying start_page and from the SAME claim
+# (start leaf - start page), so a row the survey fills always satisfies
+# start_page + page_offset == the cited leaf. The 29 existing values are left alone by rule 1;
+# where comparable they mostly differ (merceinscitydire00merc -5 vs -2), consistent with an anchor
+# taken elsewhere in a volume whose offset drifts.
+PAGE_METHOD = "hocr-geometry"
+PAGE_GRADE = {"high"}
+PAGE_COLUMNS = ("start_page", "end_page")
 
 # `key_page` was forbidden until 2026-09-21 and is now conditional, which is the honest form of
 # the rule: the column was never the problem, the UNIT was. A leaf may not be written there; a
@@ -149,6 +179,13 @@ def load_decisions():
     return out
 
 
+def page_claim_ok(claim) -> bool:
+    return bool(claim and claim.get("value") is not None
+                and claim.get("method") == PAGE_METHOD
+                and claim.get("attestation") == "read"
+                and claim.get("confidence") in PAGE_GRADE)
+
+
 def propose(row: dict, doc: dict):
     """-> list of (column, new_value, citation_dict). What this sidecar offers for this row.
 
@@ -177,6 +214,13 @@ def propose(row: dict, doc: dict):
             and kp.get("confidence") in CSV_GRADE
             and kp.get("attestation") != INTERPOLATED):
         out.append(("key_page", str(kp["value"]), kp))
+
+    for col in PAGE_COLUMNS:
+        pc = book.get(col)
+        if page_claim_ok(pc):
+            out.append((col, str(pc["value"]), pc))
+            if col == "start_page" and pc.get("page_offset") is not None:
+                out.append(("page_offset", str(pc["page_offset"]), pc))
 
     # `column_count` joined this list on 2026-09-22, when reading the listings turned up three
     # Trow volumes whose recorded value was wrong. It is only ever offered from an `agent-read`
@@ -228,6 +272,17 @@ def retractable(row: dict, doc: dict):
                        or kp.get("attestation") == INTERPOLATED)
         if below_grade and (row.get("key_page") or "").strip() == str(kp["value"]):
             out.append(("key_page", str(kp["value"]), kp))
+    # The page columns, on the same proof: the claim still exists, is no longer CSV-grade, and
+    # the cell holds exactly its value. page_offset follows its start_page claim.
+    for col in PAGE_COLUMNS:
+        pc = book.get(col)
+        if not pc or pc.get("method") != PAGE_METHOD or page_claim_ok(pc):
+            continue
+        if (row.get(col) or "").strip() == str(pc.get("value")):
+            out.append((col, str(pc["value"]), pc))
+        if (col == "start_page" and pc.get("page_offset") is not None
+                and (row.get("page_offset") or "").strip() == str(pc["page_offset"])):
+            out.append(("page_offset", str(pc["page_offset"]), pc))
     return out
 
 
@@ -449,6 +504,25 @@ def self_test():
     assert kp("ia-page-numbers", "low") == [], "a low-confidence conversion is not CSV-grade"
     assert kp("hocr-text", "high") == [], "only the converter may produce a key_page"
     assert kp("agent-read", "high") == [], "an agent leaf-read is still not a printed page"
+
+    # The page columns: conditional on method, attestation AND high confidence.
+    def pg(method="hocr-geometry", att="read", conf="high", col="start_page"):
+        claim = {"value": 561, "leaf": 9, "method": method, "attestation": att,
+                 "confidence": conf, "page_offset": -552}
+        return [(c, v) for c, v, _cl in propose({}, {"book_says": {col: claim}})]
+    assert pg() == [("start_page", "561"), ("page_offset", "-552")], pg()
+    assert pg(col="end_page") == [("end_page", "561")], "page_offset rides only on start_page"
+    assert pg(conf="medium") == [], "medium is not CSV-grade for a page column"
+    assert pg(att="inferred") == [], "a folio the leaf does not print is never written"
+    assert pg(method="ia-page-numbers") == [], "only survey_derive.py pages produces these"
+    # ...and a downgraded page claim retracts exactly the cells it wrote, never a human's
+    low = {"book_says": {"start_page": {"value": 561, "leaf": 9, "method": "hocr-geometry",
+                                        "attestation": "read", "confidence": "low",
+                                        "page_offset": -552}}}
+    got = [(c, v) for c, v, _cl in retractable({"start_page": "561", "page_offset": "-552"}, low)]
+    assert got == [("start_page", "561"), ("page_offset", "-552")], got
+    assert retractable({"start_page": "560", "page_offset": "-5"}, low) == [], \
+        "a value this tool did not write is never cleared"
 
     # An interpolated folio is refused even at high confidence: IA never read it off the page.
     interp = {"book_says": {"key_page": {"value": 17, "leaf": 27, "method": "ia-page-numbers",

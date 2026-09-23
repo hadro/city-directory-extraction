@@ -280,5 +280,101 @@
    "https://iiif.archive.org/iiif/brooklyndirector00ogde$29/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "ee876abd870c484ab6b365e3b0566e523eb654ef",
+  "hocr_bytes": 13404446,
+  "sha1_matches_census": true,
+  "fetch_s": 7,
+  "dump": {
+   "leaves": 340,
+   "leaves_with_text": 327,
+   "content_leaves": 305,
+   "lines": 13494,
+   "words": 80176,
+   "chars": 300757,
+   "no_page_size": 0,
+   "mean_wconf": 54.5,
+   "chars_per_content_leaf": 986
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "ogden1839_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 101,
+     "leaf": 101,
+     "match": 1.0,
+     "gold_lines": 33,
+     "offset": 0
+    },
+    {
+     "jp2": 237,
+     "leaf": 237,
+     "match": 1.0,
+     "gold_lines": 33,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    101,
+    237
+   ],
+   "adjacent_leaves": [
+    100,
+    102,
+    236,
+    238
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "ogden",
+   "publisher_tag_note": null,
+   "year_tag": "1839",
+   "hocr_lines": 13304,
+   "wrap_joins": 1459,
+   "candidates": 11845,
+   "kept": 8727,
+   "keep_rate": 0.7368,
+   "dropped": {
+    "short": 1475,
+    "bigtype": 848,
+    "banner": 550,
+    "allcaps": 182,
+    "nonascii": 62,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    78,
+    316,
+    324,
+    204,
+    306,
+    220,
+    96,
+    38,
+    1,
+    234
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 1042391,
+  "hocr_deleted": true,
+  "elapsed_s": 8
+ }
 }

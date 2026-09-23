@@ -311,5 +311,69 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$3/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "86010268f4d538b40d40d74af32fe44f6733ea59",
+  "hocr_bytes": 5468235,
+  "sha1_matches_census": true,
+  "fetch_s": 5,
+  "dump": {
+   "leaves": 84,
+   "leaves_with_text": 82,
+   "content_leaves": 78,
+   "lines": 5395,
+   "words": 31407,
+   "chars": 146097,
+   "no_page_size": 0,
+   "mean_wconf": 81.9,
+   "chars_per_content_leaf": 1873
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'crowell' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1845",
+   "hocr_lines": 5378,
+   "wrap_joins": 306,
+   "candidates": 5072,
+   "kept": 4114,
+   "keep_rate": 0.8111,
+   "dropped": {
+    "short": 515,
+    "banner": 158,
+    "allcaps": 148,
+    "bigtype": 133,
+    "nonascii": 3,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    55,
+    30,
+    56,
+    49,
+    4,
+    62,
+    65,
+    60,
+    68,
+    42
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 402989,
+  "hocr_deleted": true,
+  "elapsed_s": 6
+ }
 }

@@ -292,5 +292,101 @@
   "contents_leaf": 7,
   "legend_leaves": []
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "0fd1e040510ff5c0ac298d1e59eea82d1a9b6901",
+  "hocr_bytes": 25242082,
+  "sha1_matches_census": true,
+  "fetch_s": 30,
+  "dump": {
+   "leaves": 458,
+   "leaves_with_text": 447,
+   "content_leaves": 443,
+   "lines": 28668,
+   "words": 155539,
+   "chars": 794054,
+   "no_page_size": 0,
+   "mean_wconf": 27.1,
+   "chars_per_content_leaf": 1792
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "mercein1820_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 138,
+     "leaf": 138,
+     "match": 1.0,
+     "gold_lines": 46,
+     "offset": 0
+    },
+    {
+     "jp2": 320,
+     "leaf": 320,
+     "match": 1.0,
+     "gold_lines": 14,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    138,
+    320
+   ],
+   "adjacent_leaves": [
+    137,
+    139,
+    319,
+    321
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "mercein",
+   "publisher_tag_note": null,
+   "year_tag": "1820",
+   "hocr_lines": 28658,
+   "wrap_joins": 437,
+   "candidates": 28221,
+   "kept": 23773,
+   "keep_rate": 0.8424,
+   "dropped": {
+    "short": 2775,
+    "banner": 1070,
+    "allcaps": 547,
+    "bigtype": 41,
+    "nonascii": 14,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    53,
+    13,
+    29,
+    95,
+    38,
+    42,
+    35,
+    49,
+    326,
+    32
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 1818586,
+  "hocr_deleted": true,
+  "elapsed_s": 32
+ }
 }

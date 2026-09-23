@@ -257,5 +257,70 @@
   ]
  },
  "frontmatter_read": "2026-09-22",
- "scope_note": "NOT A DIRECTORY AT ALL -- a descriptive guidebook to New York City. Leaf 7 is printed page 31 under the running head 'BATTERY PARK.', continuous prose about the Battery, Castle Williams, Governor's Island and Cornelius Vanderbilt's ferry, with a photographic plate. Leaf 29 is printed page 53 under 'WALL STREET.' with a plate of the Chamber of Commerce. Running heads are TOPICS, not alphabetical ranges, and there are no listings anywhere. Corroborating: imagecount is 236, where real directories in this corpus run 600-2500. IA's title 'New York directory.' is a SPINE TITLE only, which the CSV note already suspected ('spine title only; publisher unidentified ... needs sample'). This also explains the phase-0 year conflict: its 1906 came from 'Photo copyright, 1906, by Irving Underhill' on a plate, now suppressed by YEAR_VETO's photo rule."
+ "scope_note": "NOT A DIRECTORY AT ALL -- a descriptive guidebook to New York City. Leaf 7 is printed page 31 under the running head 'BATTERY PARK.', continuous prose about the Battery, Castle Williams, Governor's Island and Cornelius Vanderbilt's ferry, with a photographic plate. Leaf 29 is printed page 53 under 'WALL STREET.' with a plate of the Chamber of Commerce. Running heads are TOPICS, not alphabetical ranges, and there are no listings anywhere. Corroborating: imagecount is 236, where real directories in this corpus run 600-2500. IA's title 'New York directory.' is a SPINE TITLE only, which the CSV note already suspected ('spine title only; publisher unidentified ... needs sample'). This also explains the phase-0 year conflict: its 1906 came from 'Photo copyright, 1906, by Irving Underhill' on a plate, now suppressed by YEAR_VETO's photo rule.",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "209d0885ec2c7e2af604051da2493a3f639ab3ce",
+  "hocr_bytes": 10621580,
+  "sha1_matches_census": true,
+  "fetch_s": 4,
+  "dump": {
+   "leaves": 236,
+   "leaves_with_text": 215,
+   "content_leaves": 202,
+   "lines": 10288,
+   "words": 68829,
+   "chars": 328554,
+   "no_page_size": 0,
+   "mean_wconf": 57.1,
+   "chars_per_content_leaf": 1627
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "no publisher in the catalog",
+   "year_tag": "1910",
+   "hocr_lines": 10267,
+   "wrap_joins": 622,
+   "candidates": 9645,
+   "kept": 7249,
+   "keep_rate": 0.7516,
+   "dropped": {
+    "banner": 1183,
+    "short": 670,
+    "allcaps": 432,
+    "bigtype": 103,
+    "nonascii": 8
+   },
+   "ditto_marks": [
+    "\u2014"
+   ],
+   "ditto_applied": 128,
+   "band": {
+    "leaves_banded": 2,
+    "head": 12,
+    "body": 412,
+    "foot": 23,
+    "unbanded": 6802
+   },
+   "top_ad_leaves": [
+    215,
+    168,
+    159,
+    178,
+    179,
+    139,
+    226,
+    229,
+    185,
+    216
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 858230,
+  "hocr_deleted": true,
+  "elapsed_s": 5
+ }
 }

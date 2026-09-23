@@ -270,5 +270,68 @@
   "contents_leaf": 10,
   "legend_leaves": []
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "909efcdb21b0f6d61a0fbb30683d967d062f85d2",
+  "hocr_bytes": 4095351,
+  "sha1_matches_census": true,
+  "fetch_s": 8,
+  "dump": {
+   "leaves": 114,
+   "leaves_with_text": 103,
+   "content_leaves": 99,
+   "lines": 7508,
+   "words": 18236,
+   "chars": 79269,
+   "no_page_size": 0,
+   "mean_wconf": 44.2,
+   "chars_per_content_leaf": 801
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'shepard kollock' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1786/96",
+   "hocr_lines": 7496,
+   "wrap_joins": 125,
+   "candidates": 7371,
+   "kept": 2200,
+   "keep_rate": 0.2985,
+   "dropped": {
+    "short": 4744,
+    "banner": 394,
+    "allcaps": 27,
+    "bigtype": 5,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    24,
+    75,
+    16,
+    11,
+    12,
+    25,
+    93,
+    73,
+    98,
+    15
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 219953,
+  "hocr_deleted": true,
+  "elapsed_s": 9
+ }
 }

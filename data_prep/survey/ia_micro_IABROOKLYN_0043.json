@@ -294,5 +294,69 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$28/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "17f9c169bcb555575f044895ef8f2988b78d7878",
+  "hocr_bytes": 8381222,
+  "sha1_matches_census": true,
+  "fetch_s": 6,
+  "dump": {
+   "leaves": 252,
+   "leaves_with_text": 243,
+   "content_leaves": 235,
+   "lines": 7675,
+   "words": 49732,
+   "chars": 241279,
+   "no_page_size": 0,
+   "mean_wconf": 80.0,
+   "chars_per_content_leaf": 1027
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'payson' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1849/50",
+   "hocr_lines": 7573,
+   "wrap_joins": 405,
+   "candidates": 7168,
+   "kept": 5909,
+   "keep_rate": 0.8244,
+   "dropped": {
+    "allcaps": 436,
+    "short": 416,
+    "bigtype": 227,
+    "banner": 167,
+    "nonascii": 12,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    202,
+    145,
+    191,
+    2,
+    166,
+    160,
+    168,
+    99,
+    55,
+    241
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 641742,
+  "hocr_deleted": true,
+  "elapsed_s": 6
+ }
 }

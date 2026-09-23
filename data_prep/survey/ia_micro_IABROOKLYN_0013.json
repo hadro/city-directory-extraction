@@ -311,5 +311,229 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0013$6/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "cache",
+  "hocr_sha1": "40864a62756b683a762986b4d2430043f292590c",
+  "hocr_bytes": 3531292,
+  "sha1_matches_census": true,
+  "fetch_s": 0,
+  "dump": {
+   "leaves": 113,
+   "leaves_with_text": 108,
+   "content_leaves": 100,
+   "lines": 3718,
+   "words": 19758,
+   "chars": 91853,
+   "no_page_size": 0,
+   "mean_wconf": 72.0,
+   "chars_per_content_leaf": 919
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "micro13_body_eval.jsonl",
+    "micro13_frontmatter_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 3,
+     "leaf": 3,
+     "match": 1.0,
+     "gold_lines": 10,
+     "offset": 0
+    },
+    {
+     "jp2": 4,
+     "leaf": 4,
+     "match": 1.0,
+     "gold_lines": 7,
+     "offset": 0
+    },
+    {
+     "jp2": 6,
+     "leaf": 6,
+     "match": 1.0,
+     "gold_lines": 13,
+     "offset": 0
+    },
+    {
+     "jp2": 7,
+     "leaf": 7,
+     "match": 1.0,
+     "gold_lines": 12,
+     "offset": 0
+    },
+    {
+     "jp2": 8,
+     "leaf": 8,
+     "match": 1.0,
+     "gold_lines": 3,
+     "offset": 0
+    },
+    {
+     "jp2": 9,
+     "leaf": 9,
+     "match": 1.0,
+     "gold_lines": 12,
+     "offset": 0
+    },
+    {
+     "jp2": 10,
+     "leaf": 10,
+     "match": 1.0,
+     "gold_lines": 13,
+     "offset": 0
+    },
+    {
+     "jp2": 11,
+     "leaf": 11,
+     "match": 1.0,
+     "gold_lines": 18,
+     "offset": 0
+    },
+    {
+     "jp2": 13,
+     "leaf": 13,
+     "match": 1.0,
+     "gold_lines": 7,
+     "offset": 0
+    },
+    {
+     "jp2": 14,
+     "leaf": 14,
+     "match": 1.0,
+     "gold_lines": 12,
+     "offset": 0
+    },
+    {
+     "jp2": 15,
+     "leaf": 15,
+     "match": 1.0,
+     "gold_lines": 5,
+     "offset": 0
+    },
+    {
+     "jp2": 16,
+     "leaf": 16,
+     "match": 1.0,
+     "gold_lines": 7,
+     "offset": 0
+    },
+    {
+     "jp2": 30,
+     "leaf": 30,
+     "match": 1.0,
+     "gold_lines": 22,
+     "offset": 0
+    },
+    {
+     "jp2": 31,
+     "leaf": 31,
+     "match": 1.0,
+     "gold_lines": 20,
+     "offset": 0
+    },
+    {
+     "jp2": 32,
+     "leaf": 32,
+     "match": 1.0,
+     "gold_lines": 24,
+     "offset": 0
+    },
+    {
+     "jp2": 33,
+     "leaf": 33,
+     "match": 1.0,
+     "gold_lines": 4,
+     "offset": 0
+    },
+    {
+     "jp2": 34,
+     "leaf": 34,
+     "match": 1.0,
+     "gold_lines": 30,
+     "offset": 0
+    },
+    {
+     "jp2": 35,
+     "leaf": 35,
+     "match": 1.0,
+     "gold_lines": 20,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    3,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+   ],
+   "adjacent_leaves": [
+    2,
+    5,
+    12,
+    17,
+    29,
+    36
+   ],
+   "whole_volume": false
+  },
+  "elapsed_s": 0,
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1836/37",
+   "hocr_lines": 3676,
+   "wrap_joins": 216,
+   "candidates": 3460,
+   "kept": 2899,
+   "keep_rate": 0.8379,
+   "dropped": {
+    "short": 257,
+    "bigtype": 114,
+    "banner": 99,
+    "allcaps": 79,
+    "nonascii": 12
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    99,
+    52,
+    15,
+    14,
+    25,
+    106,
+    18,
+    47,
+    82,
+    75
+   ],
+   "filters_at": "02404bc-dirty",
+   "derived": "2026-09-22"
+  }
+ }
 }

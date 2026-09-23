@@ -286,5 +286,68 @@
    10
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "c630e4bdcda6e6e85c1b74b7cd2dc8adca974f96",
+  "hocr_bytes": 102607006,
+  "sha1_matches_census": true,
+  "fetch_s": 20,
+  "dump": {
+   "leaves": 808,
+   "leaves_with_text": 805,
+   "content_leaves": 797,
+   "lines": 116437,
+   "words": 655747,
+   "chars": 2923999,
+   "no_page_size": 0,
+   "mean_wconf": 30.6,
+   "chars_per_content_leaf": 3669
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "lain",
+   "publisher_tag_note": null,
+   "year_tag": "1868",
+   "hocr_lines": 116389,
+   "wrap_joins": 2831,
+   "candidates": 113558,
+   "kept": 92874,
+   "keep_rate": 0.8179,
+   "dropped": {
+    "short": 11280,
+    "nonascii": 3468,
+    "banner": 3447,
+    "allcaps": 1693,
+    "bigtype": 796
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    2,
+    628,
+    279,
+    6,
+    793,
+    363,
+    513,
+    3,
+    54,
+    780
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 7468989,
+  "hocr_deleted": true,
+  "elapsed_s": 26
+ }
 }

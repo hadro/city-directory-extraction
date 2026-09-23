@@ -280,5 +280,78 @@
   "legend_leaves": []
  },
  "frontmatter_read": "2026-09-22",
- "error": "HTTPError: HTTP Error 500: Internal Server Error"
+ "error": "HTTPError: HTTP Error 500: Internal Server Error",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "a677bc1d2f8f4490b2bcb977090ddf596be40fe5",
+  "hocr_bytes": 108399041,
+  "sha1_matches_census": true,
+  "fetch_s": 57,
+  "dump": {
+   "leaves": 1352,
+   "leaves_with_text": 1264,
+   "content_leaves": 696,
+   "lines": 144742,
+   "words": 580881,
+   "chars": 2157015,
+   "no_page_size": 0,
+   "mean_wconf": 15.0,
+   "chars_per_content_leaf": 3099
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "upington",
+   "publisher_tag_note": null,
+   "year_tag": "1906",
+   "hocr_lines": 141606,
+   "wrap_joins": 8917,
+   "candidates": 132689,
+   "kept": 84065,
+   "keep_rate": 0.6335,
+   "dropped": {
+    "short": 34523,
+    "banner": 9039,
+    "allcaps": 2802,
+    "bigtype": 1759,
+    "nonascii": 477,
+    "pagenum": 24
+   },
+   "ditto_marks": [
+    "\"",
+    "'\u2022",
+    "\u2022'",
+    "\u2022\u2022",
+    "\u2022\u25a0",
+    "\u25a0'",
+    "\u25a0\u2022",
+    "\u25a0\u25a0"
+   ],
+   "ditto_applied": 5778,
+   "band": {
+    "leaves_banded": 327,
+    "head": 2496,
+    "body": 40921,
+    "foot": 2946,
+    "unbanded": 37702
+   },
+   "top_ad_leaves": [
+    7,
+    1135,
+    1111,
+    1167,
+    1043,
+    397,
+    1159,
+    685,
+    331,
+    1128
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 6938887,
+  "hocr_deleted": true,
+  "elapsed_s": 64
+ }
 }

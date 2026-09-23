@@ -282,5 +282,69 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0020$1/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "b4b10b357cdcc63f900fabc2297dd2dbb09da52c",
+  "hocr_bytes": 11220281,
+  "sha1_matches_census": true,
+  "fetch_s": 3,
+  "dump": {
+   "leaves": 274,
+   "leaves_with_text": 270,
+   "content_leaves": 265,
+   "lines": 10710,
+   "words": 62615,
+   "chars": 283151,
+   "no_page_size": 0,
+   "mean_wconf": 80.3,
+   "chars_per_content_leaf": 1068
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "hearne",
+   "publisher_tag_note": "'hearnes/van nostrand' tagged as its trained partner 'hearne'",
+   "year_tag": "1844",
+   "hocr_lines": 10656,
+   "wrap_joins": 449,
+   "candidates": 10207,
+   "kept": 8683,
+   "keep_rate": 0.8507,
+   "dropped": {
+    "short": 678,
+    "allcaps": 299,
+    "bigtype": 287,
+    "banner": 214,
+    "nonascii": 44,
+    "pagenum": 2
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    4,
+    2,
+    252,
+    229,
+    263,
+    8,
+    247,
+    255,
+    74,
+    256
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 811226,
+  "hocr_deleted": true,
+  "elapsed_s": 4
+ }
 }

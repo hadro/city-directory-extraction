@@ -346,5 +346,71 @@
    "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$17/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "b2fa5f9ac01a586a9b906dc55c2c9bd0fa78df41",
+  "hocr_bytes": 108670817,
+  "sha1_matches_census": true,
+  "fetch_s": 59,
+  "dump": {
+   "leaves": 1072,
+   "leaves_with_text": 548,
+   "content_leaves": 529,
+   "lines": 122635,
+   "words": 652918,
+   "chars": 2399711,
+   "no_page_size": 0,
+   "mean_wconf": 8.6,
+   "chars_per_content_leaf": 4536
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1912",
+   "hocr_lines": 122606,
+   "wrap_joins": 1708,
+   "candidates": 120898,
+   "kept": 88538,
+   "keep_rate": 0.7323,
+   "dropped": {
+    "short": 20965,
+    "banner": 7987,
+    "allcaps": 2102,
+    "bigtype": 1256,
+    "nonascii": 47,
+    "pagenum": 3
+   },
+   "ditto_marks": [
+    "\u2014"
+   ],
+   "ditto_applied": 27392,
+   "band": {
+    "leaves_banded": 511,
+    "head": 1848,
+    "body": 82692,
+    "foot": 1386,
+    "unbanded": 2612
+   },
+   "top_ad_leaves": [
+    19,
+    249,
+    115,
+    967,
+    211,
+    1049,
+    301,
+    723,
+    547,
+    483
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 7578391,
+  "hocr_deleted": true,
+  "elapsed_s": 66
+ }
 }

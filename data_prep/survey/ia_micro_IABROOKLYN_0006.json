@@ -271,5 +271,69 @@
    5
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "ea20c9243c83031ff15bde0bea6b9f793dc261f9",
+  "hocr_bytes": 2625956,
+  "sha1_matches_census": true,
+  "fetch_s": 9,
+  "dump": {
+   "leaves": 90,
+   "leaves_with_text": 87,
+   "content_leaves": 77,
+   "lines": 2620,
+   "words": 14290,
+   "chars": 69148,
+   "no_page_size": 0,
+   "mean_wconf": 87.6,
+   "chars_per_content_leaf": 898
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1829",
+   "hocr_lines": 2551,
+   "wrap_joins": 92,
+   "candidates": 2459,
+   "kept": 2170,
+   "keep_rate": 0.8825,
+   "dropped": {
+    "short": 87,
+    "allcaps": 82,
+    "banner": 75,
+    "bigtype": 36,
+    "nonascii": 8,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    68,
+    80,
+    86,
+    83,
+    76,
+    71,
+    82,
+    30,
+    69,
+    87
+   ],
+   "filters_at": "f4f9c2f-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 182690,
+  "hocr_deleted": true,
+  "elapsed_s": 10
+ }
 }

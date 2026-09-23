@@ -305,5 +305,68 @@
    "https://iiif.archive.org/iiif/longworthsameric1798newy$13/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "cache",
+  "hocr_sha1": "142fd5ba39528b7b6a9b9d4a7b849ffc21774a7c",
+  "hocr_bytes": 14316848,
+  "sha1_matches_census": true,
+  "fetch_s": 0,
+  "dump": {
+   "leaves": 642,
+   "leaves_with_text": 318,
+   "content_leaves": 312,
+   "lines": 17949,
+   "words": 79075,
+   "chars": 418784,
+   "no_page_size": 0,
+   "mean_wconf": 4.9,
+   "chars_per_content_leaf": 1342
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "longworth",
+   "publisher_tag_note": null,
+   "year_tag": "1798",
+   "hocr_lines": 17931,
+   "wrap_joins": 426,
+   "candidates": 17505,
+   "kept": 12002,
+   "keep_rate": 0.6856,
+   "dropped": {
+    "short": 3797,
+    "banner": 1270,
+    "allcaps": 385,
+    "nonascii": 31,
+    "pagenum": 12,
+    "bigtype": 8
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    43,
+    109,
+    57,
+    543,
+    407,
+    33,
+    233,
+    31,
+    441,
+    37
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 988911,
+  "elapsed_s": 1
+ }
 }

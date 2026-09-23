@@ -231,5 +231,73 @@
    "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$22/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "d75cad29d3ab480a5c5cbf50d7a1a6c3186e9c95",
+  "hocr_bytes": 1588284945,
+  "sha1_matches_census": true,
+  "fetch_s": 218,
+  "dump": {
+   "leaves": 2482,
+   "leaves_with_text": 2478,
+   "content_leaves": 2474,
+   "lines": 1841011,
+   "words": 9723140,
+   "chars": 39557614,
+   "no_page_size": 0,
+   "mean_wconf": 17.1,
+   "chars_per_content_leaf": 15989
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": null,
+   "year_tag": "1917",
+   "hocr_lines": 1840989,
+   "wrap_joins": 41297,
+   "candidates": 1799692,
+   "kept": 1622058,
+   "keep_rate": 0.9013,
+   "dropped": {
+    "short": 123485,
+    "allcaps": 24581,
+    "banner": 22247,
+    "bigtype": 6869,
+    "nonascii": 428,
+    "pagenum": 24
+   },
+   "ditto_marks": [
+    ",,",
+    "..",
+    "11"
+   ],
+   "ditto_applied": 156992,
+   "band": {
+    "leaves_banded": 1158,
+    "head": 14249,
+    "body": 801031,
+    "foot": 9482,
+    "unbanded": 797296
+   },
+   "top_ad_leaves": [
+    204,
+    128,
+    149,
+    1,
+    176,
+    2,
+    129,
+    185,
+    118,
+    3
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 113242323,
+  "hocr_deleted": true,
+  "elapsed_s": 315
+ }
 }

@@ -314,5 +314,334 @@
    9
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "cache",
+  "hocr_sha1": "b27f18d6fe48d69ecf9d2809c1326b027b06dcaa",
+  "hocr_bytes": 305071912,
+  "sha1_matches_census": true,
+  "fetch_s": 0,
+  "dump": {
+   "leaves": 1254,
+   "leaves_with_text": 1240,
+   "content_leaves": 1240,
+   "lines": 329989,
+   "words": 1627602,
+   "chars": 5859970,
+   "no_page_size": 0,
+   "mean_wconf": 22.4,
+   "chars_per_content_leaf": 4726
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "1906BPL_sample500_eval.jsonl",
+    "1906BPL_sample500_norm_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 65,
+     "leaf": 65,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 161,
+     "leaf": 161,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 225,
+     "leaf": 225,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 231,
+     "leaf": 231,
+     "match": 1.0,
+     "gold_lines": 38,
+     "offset": 0
+    },
+    {
+     "jp2": 251,
+     "leaf": 251,
+     "match": 1.0,
+     "gold_lines": 38,
+     "offset": 0
+    },
+    {
+     "jp2": 286,
+     "leaf": 286,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 307,
+     "leaf": 307,
+     "match": 1.0,
+     "gold_lines": 36,
+     "offset": 0
+    },
+    {
+     "jp2": 363,
+     "leaf": 363,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 364,
+     "leaf": 364,
+     "match": 1.0,
+     "gold_lines": 38,
+     "offset": 0
+    },
+    {
+     "jp2": 374,
+     "leaf": 374,
+     "match": 1.0,
+     "gold_lines": 38,
+     "offset": 0
+    },
+    {
+     "jp2": 377,
+     "leaf": 377,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 411,
+     "leaf": 411,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 461,
+     "leaf": 461,
+     "match": 1.0,
+     "gold_lines": 26,
+     "offset": 0
+    },
+    {
+     "jp2": 512,
+     "leaf": 512,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 612,
+     "leaf": 612,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 648,
+     "leaf": 648,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 752,
+     "leaf": 752,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 826,
+     "leaf": 826,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 925,
+     "leaf": 925,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 996,
+     "leaf": 996,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 1070,
+     "leaf": 1070,
+     "match": 1.0,
+     "gold_lines": 38,
+     "offset": 0
+    },
+    {
+     "jp2": 1084,
+     "leaf": 1084,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 1093,
+     "leaf": 1093,
+     "match": 1.0,
+     "gold_lines": 32,
+     "offset": 0
+    },
+    {
+     "jp2": 1115,
+     "leaf": 1115,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 1192,
+     "leaf": 1192,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    65,
+    161,
+    225,
+    231,
+    251,
+    286,
+    307,
+    363,
+    364,
+    374,
+    377,
+    411,
+    461,
+    512,
+    612,
+    648,
+    752,
+    826,
+    925,
+    996,
+    1070,
+    1084,
+    1093,
+    1115,
+    1192
+   ],
+   "adjacent_leaves": [
+    64,
+    66,
+    160,
+    162,
+    224,
+    226,
+    230,
+    232,
+    250,
+    252,
+    285,
+    287,
+    306,
+    308,
+    362,
+    365,
+    373,
+    375,
+    376,
+    378,
+    410,
+    412,
+    460,
+    462,
+    511,
+    513,
+    611,
+    613,
+    647,
+    649,
+    751,
+    753,
+    825,
+    827,
+    924,
+    926,
+    995,
+    997,
+    1069,
+    1071,
+    1083,
+    1085,
+    1092,
+    1094,
+    1114,
+    1116,
+    1191,
+    1193
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "upington",
+   "publisher_tag_note": null,
+   "year_tag": "1906",
+   "hocr_lines": 329989,
+   "wrap_joins": 37196,
+   "candidates": 292793,
+   "kept": 205103,
+   "keep_rate": 0.7005,
+   "dropped": {
+    "short": 73555,
+    "allcaps": 6526,
+    "bigtype": 3676,
+    "banner": 3401,
+    "nonascii": 517,
+    "pagenum": 15
+   },
+   "ditto_marks": [
+    "\"",
+    "**",
+    "44",
+    "\u201c"
+   ],
+   "ditto_applied": 131636,
+   "band": {
+    "leaves_banded": 1164,
+    "head": 1520,
+    "body": 190173,
+    "foot": 1537,
+    "unbanded": 11873
+   },
+   "top_ad_leaves": [
+    39,
+    590,
+    1243,
+    152,
+    1,
+    797,
+    1232,
+    131,
+    3,
+    1113
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 18920492,
+  "elapsed_s": 23
+ }
 }

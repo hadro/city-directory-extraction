@@ -308,5 +308,93 @@
    "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$7/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "c59b7daf2471e783f3a38521d890b100e04c2e69",
+  "hocr_bytes": 229527834,
+  "sha1_matches_census": true,
+  "fetch_s": 65,
+  "dump": {
+   "leaves": 1350,
+   "leaves_with_text": 730,
+   "content_leaves": 666,
+   "lines": 231081,
+   "words": 1466901,
+   "chars": 5031232,
+   "no_page_size": 0,
+   "mean_wconf": 10.4,
+   "chars_per_content_leaf": 7554
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "trow1907_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 403,
+     "leaf": 403,
+     "match": 0.97,
+     "gold_lines": 68,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    403
+   ],
+   "adjacent_leaves": [
+    402,
+    404
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": null,
+   "year_tag": "1907",
+   "hocr_lines": 231001,
+   "wrap_joins": 38984,
+   "candidates": 192017,
+   "kept": 181491,
+   "keep_rate": 0.9452,
+   "dropped": {
+    "short": 4117,
+    "allcaps": 3444,
+    "bigtype": 1717,
+    "banner": 1202,
+    "nonascii": 45,
+    "pagenum": 1
+   },
+   "ditto_marks": [
+    "\u2014"
+   ],
+   "ditto_applied": 62265,
+   "band": {
+    "leaves_banded": 659,
+    "head": 2134,
+    "body": 177396,
+    "foot": 931,
+    "unbanded": 1030
+   },
+   "top_ad_leaves": [
+    123,
+    121,
+    1055,
+    45,
+    1315,
+    1219,
+    503,
+    1131,
+    155,
+    929
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 16658914,
+  "hocr_deleted": true,
+  "elapsed_s": 85
+ }
 }

@@ -303,5 +303,71 @@
    5
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "e0a5448cf64e554e6dd6ef3c821b1da9b3512d57",
+  "hocr_bytes": 3867068,
+  "sha1_matches_census": true,
+  "fetch_s": 4,
+  "dump": {
+   "leaves": 107,
+   "leaves_with_text": 104,
+   "content_leaves": 100,
+   "lines": 3953,
+   "words": 22895,
+   "chars": 114670,
+   "no_page_size": 0,
+   "mean_wconf": 86.0,
+   "chars_per_content_leaf": 1147
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'bigelow' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1832/33",
+   "hocr_lines": 3925,
+   "wrap_joins": 190,
+   "candidates": 3735,
+   "kept": 3331,
+   "keep_rate": 0.8918,
+   "dropped": {
+    "allcaps": 135,
+    "short": 122,
+    "banner": 93,
+    "bigtype": 45,
+    "nonascii": 8,
+    "pagenum": 1
+   },
+   "ditto_marks": [
+    "*"
+   ],
+   "ditto_applied": 31,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    2,
+    87,
+    8,
+    89,
+    37,
+    20,
+    104,
+    22,
+    90,
+    100
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 294675,
+  "hocr_deleted": true,
+  "elapsed_s": 4
+ }
 }

@@ -287,5 +287,68 @@
    25
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "bb40a07647cb81626320d11ffaab9eae9b2cbd77",
+  "hocr_bytes": 21080670,
+  "sha1_matches_census": true,
+  "fetch_s": 83,
+  "dump": {
+   "leaves": 500,
+   "leaves_with_text": 476,
+   "content_leaves": 471,
+   "lines": 21438,
+   "words": 132328,
+   "chars": 647423,
+   "no_page_size": 0,
+   "mean_wconf": 39.3,
+   "chars_per_content_leaf": 1375
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "hearne",
+   "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
+   "year_tag": "1850",
+   "hocr_lines": 21417,
+   "wrap_joins": 699,
+   "candidates": 20718,
+   "kept": 17149,
+   "keep_rate": 0.8277,
+   "dropped": {
+    "short": 1413,
+    "banner": 1317,
+    "allcaps": 826,
+    "bigtype": 9,
+    "nonascii": 4
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    456,
+    13,
+    2,
+    490,
+    439,
+    438,
+    426,
+    454,
+    18,
+    423
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 1576808,
+  "hocr_deleted": true,
+  "elapsed_s": 85
+ }
 }

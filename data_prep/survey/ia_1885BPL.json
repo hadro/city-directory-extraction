@@ -311,5 +311,69 @@
    "https://iiif.archive.org/iiif/1885BPL$3/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "82ef66f750c467eadeea87c98db387355833dce4",
+  "hocr_bytes": 200750721,
+  "sha1_matches_census": true,
+  "fetch_s": 37,
+  "dump": {
+   "leaves": 1564,
+   "leaves_with_text": 1558,
+   "content_leaves": 1554,
+   "lines": 234648,
+   "words": 1274289,
+   "chars": 5886348,
+   "no_page_size": 0,
+   "mean_wconf": 33.0,
+   "chars_per_content_leaf": 3788
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "lain",
+   "publisher_tag_note": null,
+   "year_tag": "1884/85",
+   "hocr_lines": 234635,
+   "wrap_joins": 5566,
+   "candidates": 229069,
+   "kept": 191489,
+   "keep_rate": 0.8359,
+   "dropped": {
+    "short": 28940,
+    "allcaps": 3933,
+    "banner": 3257,
+    "bigtype": 1355,
+    "nonascii": 94,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    139,
+    645,
+    278,
+    147,
+    500,
+    12,
+    140,
+    151,
+    751,
+    1533
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 14897358,
+  "hocr_deleted": true,
+  "elapsed_s": 49
+ }
 }

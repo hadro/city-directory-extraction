@@ -307,5 +307,69 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$1/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "7e4442f88203fd18811f1297604bc279beac6472",
+  "hocr_bytes": 31902975,
+  "sha1_matches_census": true,
+  "fetch_s": 10,
+  "dump": {
+   "leaves": 624,
+   "leaves_with_text": 610,
+   "content_leaves": 583,
+   "lines": 26707,
+   "words": 184335,
+   "chars": 827384,
+   "no_page_size": 0,
+   "mean_wconf": 86.1,
+   "chars_per_content_leaf": 1419
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "smith",
+   "publisher_tag_note": null,
+   "year_tag": "1854",
+   "hocr_lines": 26430,
+   "wrap_joins": 1365,
+   "candidates": 25065,
+   "kept": 19052,
+   "keep_rate": 0.7601,
+   "dropped": {
+    "short": 3254,
+    "banner": 1195,
+    "allcaps": 888,
+    "bigtype": 593,
+    "nonascii": 76,
+    "pagenum": 7
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    175,
+    236,
+    224,
+    605,
+    181,
+    595,
+    594,
+    371,
+    592,
+    248
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 2309381,
+  "hocr_deleted": true,
+  "elapsed_s": 12
+ }
 }

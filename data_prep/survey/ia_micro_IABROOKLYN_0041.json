@@ -287,5 +287,69 @@
   ]
  },
  "frontmatter_read": "2026-09-22",
- "scope_note": "Target card leaf 1 read 2026-09-22: 'Boyd's Brooklyn Business Directory. 1860. New York: William H. Boyd, Directory Publisher.' A business-ONLY volume -- firms, not residents. Out of the NYC-residential scope this survey covers; kept in the catalog as a known lead (see master_directories.README.md, 'Deliberately out of the current NYC-residential scope')."
+ "scope_note": "Target card leaf 1 read 2026-09-22: 'Boyd's Brooklyn Business Directory. 1860. New York: William H. Boyd, Directory Publisher.' A business-ONLY volume -- firms, not residents. Out of the NYC-residential scope this survey covers; kept in the catalog as a known lead (see master_directories.README.md, 'Deliberately out of the current NYC-residential scope').",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "825b91e727ba04145ebc2b7ee4d34c347e46f0b2",
+  "hocr_bytes": 1164135,
+  "sha1_matches_census": true,
+  "fetch_s": 11,
+  "dump": {
+   "leaves": 121,
+   "leaves_with_text": 102,
+   "content_leaves": 44,
+   "lines": 1335,
+   "words": 4338,
+   "chars": 14352,
+   "no_page_size": 0,
+   "mean_wconf": 66.9,
+   "chars_per_content_leaf": 326
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "boyd",
+   "publisher_tag_note": null,
+   "year_tag": "1860",
+   "hocr_lines": 828,
+   "wrap_joins": 50,
+   "candidates": 778,
+   "kept": 312,
+   "keep_rate": 0.401,
+   "dropped": {
+    "short": 313,
+    "banner": 56,
+    "allcaps": 50,
+    "bigtype": 40,
+    "nonascii": 6,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    87,
+    53,
+    63,
+    82,
+    43,
+    55,
+    61,
+    57,
+    79,
+    113
+   ],
+   "filters_at": "02404bc-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 58640,
+  "hocr_deleted": true,
+  "elapsed_s": 11
+ }
 }

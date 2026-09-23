@@ -231,5 +231,69 @@
   ]
  },
  "frontmatter_read": "2026-09-22",
- "scope_note": "Catalog title 'Brooklyn Business Directory 1858-1859'; business-ONLY. Its front leaves 2/3 are advertiser pages ('BROOKLYN DIRECTORY ADVERTISER' running head) and no target card was reached. Out of the NYC-residential scope this survey covers; kept in the catalog as a known lead (see master_directories.README.md, 'Deliberately out of the current NYC-residential scope')."
+ "scope_note": "Catalog title 'Brooklyn Business Directory 1858-1859'; business-ONLY. Its front leaves 2/3 are advertiser pages ('BROOKLYN DIRECTORY ADVERTISER' running head) and no target card was reached. Out of the NYC-residential scope this survey covers; kept in the catalog as a known lead (see master_directories.README.md, 'Deliberately out of the current NYC-residential scope').",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "a1c44ad9f124fe84a8eb6f9939cdc6d8f8b7adb5",
+  "hocr_bytes": 3412990,
+  "sha1_matches_census": true,
+  "fetch_s": 3,
+  "dump": {
+   "leaves": 34,
+   "leaves_with_text": 33,
+   "content_leaves": 32,
+   "lines": 3174,
+   "words": 18334,
+   "chars": 73076,
+   "no_page_size": 0,
+   "mean_wconf": 75.9,
+   "chars_per_content_leaf": 2284
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "no publisher in the catalog",
+   "year_tag": "1858/59",
+   "hocr_lines": 3170,
+   "wrap_joins": 232,
+   "candidates": 2938,
+   "kept": 1793,
+   "keep_rate": 0.6103,
+   "dropped": {
+    "short": 750,
+    "banner": 177,
+    "allcaps": 114,
+    "bigtype": 79,
+    "nonascii": 23,
+    "pagenum": 2
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    12,
+    4,
+    10,
+    5,
+    8,
+    29,
+    32,
+    15,
+    2,
+    24
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 244493,
+  "hocr_deleted": true,
+  "elapsed_s": 4
+ }
 }

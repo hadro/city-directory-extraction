@@ -284,5 +284,251 @@
    29
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "e4ffbfb0d8fd59b40837d41e039f2f54f51c604e",
+  "hocr_bytes": 299935522,
+  "sha1_matches_census": true,
+  "fetch_s": 53,
+  "dump": {
+   "leaves": 1764,
+   "leaves_with_text": 1758,
+   "content_leaves": 1757,
+   "lines": 341983,
+   "words": 1907329,
+   "chars": 7516370,
+   "no_page_size": 0,
+   "mean_wconf": 33.1,
+   "chars_per_content_leaf": 4278
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "lain_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 28,
+     "leaf": 28,
+     "match": 0.97,
+     "gold_lines": 74,
+     "offset": 0
+    },
+    {
+     "jp2": 29,
+     "leaf": 29,
+     "match": 1.0,
+     "gold_lines": 17,
+     "offset": 0
+    },
+    {
+     "jp2": 30,
+     "leaf": 30,
+     "match": 1.0,
+     "gold_lines": 38,
+     "offset": 0
+    },
+    {
+     "jp2": 31,
+     "leaf": 31,
+     "match": 1.0,
+     "gold_lines": 17,
+     "offset": 0
+    },
+    {
+     "jp2": 32,
+     "leaf": 32,
+     "match": 1.0,
+     "gold_lines": 44,
+     "offset": 0
+    },
+    {
+     "jp2": 33,
+     "leaf": 33,
+     "match": 1.0,
+     "gold_lines": 22,
+     "offset": 0
+    },
+    {
+     "jp2": 34,
+     "leaf": 34,
+     "match": 1.0,
+     "gold_lines": 10,
+     "offset": 0
+    },
+    {
+     "jp2": 35,
+     "leaf": 35,
+     "match": 1.0,
+     "gold_lines": 14,
+     "offset": 0
+    },
+    {
+     "jp2": 36,
+     "leaf": 36,
+     "match": 1.0,
+     "gold_lines": 44,
+     "offset": 0
+    },
+    {
+     "jp2": 37,
+     "leaf": 37,
+     "match": 1.0,
+     "gold_lines": 60,
+     "offset": 0
+    },
+    {
+     "jp2": 38,
+     "leaf": 38,
+     "match": 1.0,
+     "gold_lines": 46,
+     "offset": 0
+    },
+    {
+     "jp2": 39,
+     "leaf": 39,
+     "match": 0.97,
+     "gold_lines": 67,
+     "offset": 0
+    },
+    {
+     "jp2": 40,
+     "leaf": 40,
+     "match": 1.0,
+     "gold_lines": 22,
+     "offset": 0
+    },
+    {
+     "jp2": 41,
+     "leaf": 41,
+     "match": 1.0,
+     "gold_lines": 23,
+     "offset": 0
+    },
+    {
+     "jp2": 42,
+     "leaf": 42,
+     "match": 1.0,
+     "gold_lines": 53,
+     "offset": 0
+    },
+    {
+     "jp2": 43,
+     "leaf": 43,
+     "match": 1.0,
+     "gold_lines": 6,
+     "offset": 0
+    },
+    {
+     "jp2": 44,
+     "leaf": 44,
+     "match": 1.0,
+     "gold_lines": 2,
+     "offset": 0
+    },
+    {
+     "jp2": 45,
+     "leaf": 45,
+     "match": 0.95,
+     "gold_lines": 59,
+     "offset": 0
+    },
+    {
+     "jp2": 46,
+     "leaf": 46,
+     "match": 1.0,
+     "gold_lines": 79,
+     "offset": 0
+    },
+    {
+     "jp2": 47,
+     "leaf": 47,
+     "match": 1.0,
+     "gold_lines": 64,
+     "offset": 0
+    },
+    {
+     "jp2": 48,
+     "leaf": 48,
+     "match": 1.0,
+     "gold_lines": 39,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+   ],
+   "adjacent_leaves": [
+    27,
+    49
+   ],
+   "whole_volume": true
+  },
+  "filtered": {
+   "publisher_tag": "lain",
+   "publisher_tag_note": null,
+   "year_tag": "1897",
+   "hocr_lines": 341968,
+   "wrap_joins": 17307,
+   "candidates": 324661,
+   "kept": 276406,
+   "keep_rate": 0.8514,
+   "dropped": {
+    "short": 35539,
+    "allcaps": 7063,
+    "banner": 2679,
+    "bigtype": 2675,
+    "nonascii": 288,
+    "pagenum": 11
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    1159,
+    1160,
+    190,
+    194,
+    766,
+    8,
+    27,
+    765,
+    12,
+    3
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 21836778,
+  "hocr_deleted": true,
+  "elapsed_s": 79
+ }
 }

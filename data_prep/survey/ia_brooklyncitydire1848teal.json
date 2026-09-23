@@ -336,5 +336,68 @@
    "https://iiif.archive.org/iiif/brooklyncitydire1848teal$9/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "e050beae63a65c234fc9b0c687d5540e605e0e38",
+  "hocr_bytes": 22386180,
+  "sha1_matches_census": true,
+  "fetch_s": 24,
+  "dump": {
+   "leaves": 496,
+   "leaves_with_text": 484,
+   "content_leaves": 476,
+   "lines": 22644,
+   "words": 140588,
+   "chars": 690695,
+   "no_page_size": 0,
+   "mean_wconf": 24.4,
+   "chars_per_content_leaf": 1451
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1848",
+   "hocr_lines": 22626,
+   "wrap_joins": 652,
+   "candidates": 21974,
+   "kept": 18849,
+   "keep_rate": 0.8578,
+   "dropped": {
+    "short": 1564,
+    "banner": 1200,
+    "allcaps": 350,
+    "bigtype": 10,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    1,
+    443,
+    451,
+    447,
+    453,
+    308,
+    454,
+    417,
+    321,
+    468
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 1702825,
+  "hocr_deleted": true,
+  "elapsed_s": 25
+ }
 }

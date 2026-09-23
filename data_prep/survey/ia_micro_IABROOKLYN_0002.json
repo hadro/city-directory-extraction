@@ -300,5 +300,70 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0002$6/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "68f20b5612595b0b90a377be521c3a1487c640c3",
+  "hocr_bytes": 1905816,
+  "sha1_matches_census": true,
+  "fetch_s": 134,
+  "dump": {
+   "leaves": 61,
+   "leaves_with_text": 56,
+   "content_leaves": 53,
+   "lines": 1847,
+   "words": 10333,
+   "chars": 50532,
+   "no_page_size": 0,
+   "mean_wconf": 86.3,
+   "chars_per_content_leaf": 953
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1823",
+   "hocr_lines": 1831,
+   "wrap_joins": 57,
+   "candidates": 1774,
+   "kept": 1573,
+   "keep_rate": 0.8867,
+   "dropped": {
+    "short": 70,
+    "allcaps": 60,
+    "banner": 53,
+    "bigtype": 16,
+    "nonascii": 2
+   },
+   "ditto_marks": [
+    "|"
+   ],
+   "ditto_applied": 10,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    9,
+    53,
+    51,
+    44,
+    57,
+    43,
+    25,
+    45,
+    29,
+    10
+   ],
+   "filters_at": "f4f9c2f-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 134643,
+  "hocr_deleted": true,
+  "elapsed_s": 134
+ }
 }

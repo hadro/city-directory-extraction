@@ -353,5 +353,91 @@
    "https://iiif.archive.org/iiif/newyorkcitydirec00rode$18/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "e71a912638832357d14213374aa8e38e02e126c8",
+  "hocr_bytes": 142015863,
+  "sha1_matches_census": true,
+  "fetch_s": 20,
+  "dump": {
+   "leaves": 1000,
+   "leaves_with_text": 983,
+   "content_leaves": 971,
+   "lines": 154379,
+   "words": 909756,
+   "chars": 4517298,
+   "no_page_size": 0,
+   "mean_wconf": 48.2,
+   "chars_per_content_leaf": 4652
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "rode1851_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 299,
+     "leaf": 299,
+     "match": 1.0,
+     "gold_lines": 53,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    299
+   ],
+   "adjacent_leaves": [
+    298,
+    300
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "rode",
+   "publisher_tag_note": null,
+   "year_tag": "1854",
+   "hocr_lines": 154351,
+   "wrap_joins": 2604,
+   "candidates": 151747,
+   "kept": 137120,
+   "keep_rate": 0.9036,
+   "dropped": {
+    "short": 11228,
+    "banner": 1704,
+    "allcaps": 1517,
+    "bigtype": 162,
+    "nonascii": 15,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    842,
+    984,
+    976,
+    941,
+    947,
+    995,
+    991,
+    6,
+    955,
+    17
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 11134772,
+  "hocr_deleted": true,
+  "elapsed_s": 34
+ }
 }

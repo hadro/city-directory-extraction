@@ -266,5 +266,68 @@
   ]
  },
  "frontmatter_read": "2026-09-22",
- "restricted_retracted": "Stamped `restricted` on 2026-09-22 and RETRACTED the same day. The 403s were my own fetch bug, not an access restriction: the request asked IIIF to scale the page TO 1400px wide and this volume's scan is narrower, so the server answered 'Requests for scales in excess of 100% are not allowed'. `full/!1400,1400` (best fit within, never upscale) serves every leaf fine. The lesson is that a 403 is not self-explaining -- reading the body would have said so immediately."
+ "restricted_retracted": "Stamped `restricted` on 2026-09-22 and RETRACTED the same day. The 403s were my own fetch bug, not an access restriction: the request asked IIIF to scale the page TO 1400px wide and this volume's scan is narrower, so the server answered 'Requests for scales in excess of 100% are not allowed'. `full/!1400,1400` (best fit within, never upscale) serves every leaf fine. The lesson is that a 403 is not self-explaining -- reading the body would have said so immediately.",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "a33acafa42acc042c89bc67128d11fcfce3a44de",
+  "hocr_bytes": 21407875,
+  "sha1_matches_census": true,
+  "fetch_s": 8,
+  "dump": {
+   "leaves": 396,
+   "leaves_with_text": 381,
+   "content_leaves": 378,
+   "lines": 22943,
+   "words": 133519,
+   "chars": 699272,
+   "no_page_size": 0,
+   "mean_wconf": 27.4,
+   "chars_per_content_leaf": 1850
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "longworth",
+   "publisher_tag_note": null,
+   "year_tag": "1823",
+   "hocr_lines": 22934,
+   "wrap_joins": 111,
+   "candidates": 22823,
+   "kept": 20698,
+   "keep_rate": 0.9069,
+   "dropped": {
+    "short": 1254,
+    "banner": 649,
+    "allcaps": 219,
+    "nonascii": 2,
+    "bigtype": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    5,
+    8,
+    9,
+    6,
+    24,
+    264,
+    7,
+    10,
+    66,
+    11
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 1606048,
+  "hocr_deleted": true,
+  "elapsed_s": 10
+ }
 }

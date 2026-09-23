@@ -259,5 +259,118 @@
   "contents_leaf": null,
   "legend_leaves": []
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "7033546a2a35dc41f71e4c9496f2c9b3b9c2d34e",
+  "hocr_bytes": 10712940,
+  "sha1_matches_census": true,
+  "fetch_s": 7,
+  "dump": {
+   "leaves": 266,
+   "leaves_with_text": 255,
+   "content_leaves": 250,
+   "lines": 11538,
+   "words": 67539,
+   "chars": 318153,
+   "no_page_size": 0,
+   "mean_wconf": 42.4,
+   "chars_per_content_leaf": 1273
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "franks1786_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 59,
+     "leaf": 59,
+     "match": 1.0,
+     "gold_lines": 11,
+     "offset": 0
+    },
+    {
+     "jp2": 68,
+     "leaf": 68,
+     "match": 0.83,
+     "gold_lines": 12,
+     "offset": 0
+    },
+    {
+     "jp2": 78,
+     "leaf": 78,
+     "match": 0.86,
+     "gold_lines": 7,
+     "offset": 0
+    },
+    {
+     "jp2": 79,
+     "leaf": 79,
+     "match": 0.81,
+     "gold_lines": 26,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    59,
+    68,
+    78,
+    79
+   ],
+   "adjacent_leaves": [
+    58,
+    60,
+    67,
+    69,
+    77,
+    80
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "franks",
+   "publisher_tag_note": null,
+   "year_tag": "1786",
+   "hocr_lines": 11527,
+   "wrap_joins": 542,
+   "candidates": 10985,
+   "kept": 7199,
+   "keep_rate": 0.6553,
+   "dropped": {
+    "short": 3007,
+    "banner": 470,
+    "allcaps": 281,
+    "bigtype": 25,
+    "nonascii": 3
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    14,
+    253,
+    9,
+    12,
+    55,
+    254,
+    122,
+    40,
+    258,
+    8
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 836001,
+  "hocr_deleted": true,
+  "elapsed_s": 8
+ }
 }

@@ -308,5 +308,71 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$5/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "bc30e4267628278f4a36c88f5f473435ccf6b3d2",
+  "hocr_bytes": 3673131,
+  "sha1_matches_census": true,
+  "fetch_s": 5,
+  "dump": {
+   "leaves": 101,
+   "leaves_with_text": 96,
+   "content_leaves": 90,
+   "lines": 3777,
+   "words": 21175,
+   "chars": 100134,
+   "no_page_size": 0,
+   "mean_wconf": 80.3,
+   "chars_per_content_leaf": 1113
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1837/38",
+   "hocr_lines": 3747,
+   "wrap_joins": 189,
+   "candidates": 3558,
+   "kept": 3124,
+   "keep_rate": 0.878,
+   "dropped": {
+    "short": 205,
+    "bigtype": 104,
+    "allcaps": 66,
+    "banner": 55,
+    "nonascii": 4
+   },
+   "ditto_marks": [
+    "*",
+    "."
+   ],
+   "ditto_applied": 42,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    3,
+    22,
+    79,
+    68,
+    69,
+    47,
+    8,
+    43,
+    31,
+    29
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 278912,
+  "hocr_deleted": true,
+  "elapsed_s": 5
+ }
 }

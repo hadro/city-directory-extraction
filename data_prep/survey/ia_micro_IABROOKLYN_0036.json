@@ -293,5 +293,101 @@
   "contents_leaf": null,
   "legend_leaves": []
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "770101f3d9cc2022b4602c65f3600e31c0b859e1",
+  "hocr_bytes": 29329657,
+  "sha1_matches_census": true,
+  "fetch_s": 7,
+  "dump": {
+   "leaves": 558,
+   "leaves_with_text": 532,
+   "content_leaves": 492,
+   "lines": 29707,
+   "words": 151108,
+   "chars": 652121,
+   "no_page_size": 0,
+   "mean_wconf": 82.3,
+   "chars_per_content_leaf": 1325
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "smith1856_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 168,
+     "leaf": 168,
+     "match": 0.61,
+     "gold_lines": 108,
+     "offset": 0
+    },
+    {
+     "jp2": 391,
+     "leaf": 391,
+     "match": 0.97,
+     "gold_lines": 121,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    168,
+    391
+   ],
+   "adjacent_leaves": [
+    167,
+    169,
+    390,
+    392
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "smith",
+   "publisher_tag_note": null,
+   "year_tag": "1856",
+   "hocr_lines": 29417,
+   "wrap_joins": 1641,
+   "candidates": 27776,
+   "kept": 18302,
+   "keep_rate": 0.6589,
+   "dropped": {
+    "short": 6987,
+    "banner": 1248,
+    "bigtype": 761,
+    "allcaps": 388,
+    "nonascii": 85,
+    "pagenum": 5
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    322,
+    503,
+    499,
+    497,
+    378,
+    82,
+    8,
+    501,
+    459,
+    556
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 1909921,
+  "hocr_deleted": true,
+  "elapsed_s": 9
+ }
 }

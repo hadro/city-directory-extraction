@@ -708,7 +708,7 @@ cells the survey can now fill.
 Output: `data_prep/survey/<source>_<id>.json` (committed — this is the survey record; 336 files,
 ~1.3 MB).
 
-### Phase 1 — OCR harvest (the only heavy step)
+### Phase 1 — OCR harvest (the only heavy step) — DONE 2026-09-22
 
 Serial, one volume at a time, backoff, resume. Fetch pageindex + `_hocr.html` once →
 `data/<ident>_lines.jsonl.gz` + `_dropped.txt` → **delete the hOCR**. Peak disk stays at one
@@ -747,6 +747,45 @@ hOCR sha1 as downloaded **against the 2026-09-12 census sha1**, so an IA re-OCR 
 word/line/char counts, mean `x_wconf`, chars per content leaf, filter outcome, and the git
 revision the filters ran at. `--report` adds `dead-ocr`: chars per content leaf below 10% of the
 volume's OCR-engine-class median.
+
+### Phase 1 results (run 2026-09-22) — DONE, 184/184 `ok`
+
+| | |
+|---|---:|
+| volumes | **184 ok** · 0 no-hocr · 0 fetch-failed · 0 dead-ocr |
+| words dumped | **132,634,451** |
+| candidate lines kept | **18,942,321** (median keep rate 82.8%) |
+| dump size | **1.53 GB** from 21.66 GB of hOCR (7.1%); `data/survey_ocr/` 2.0 GB in all |
+| hOCR re-derived by IA since the census | **0** — all 180 downloads match the 2026-09-12 sha1 |
+| wall clock | ~5 h of per-volume time |
+
+**The download redirector, not IA as a whole, was what failed.** `archive.org/download` sends each
+request to a storage node, and for some items it kept choosing one that returned 500 for many
+minutes, while that item's own `workable_servers` served it. `micro_IABROOKLYN_0003` failed 4/4 over
+~8 minutes that way while a direct request to its replica succeeded. `download()` now tries every
+replica before backing off; 9 fetches in the run needed it. A plain retry, which was enough for
+the 4-of-184 Range failures in Phase 0, is not enough for a whole-file fetch.
+
+**Eval holdout: 16 volumes, 15 verified at jp2 → leaf offset 0.** The jp2 number *is* the hOCR
+leaf on every volume where the text could check it. The exception proves why the check exists
+rather than refuting the arithmetic: `micro_IABROOKLYN_0035` (hopehenderson1856) jp2 205 matched
+no leaf, because **leaf 205 is a dead film frame** — 167 chars of noise (`“HAT AD TERETE Ade an`)
+sitting alphabetically exactly where the gold belongs, between Guthrie (leaf 204) and Haley (leaf 206).
+The gold was transcribed from the image, so no OCR could match it. The weak-match rule tagged
+jp2 205 *and* the best guess (207). 205 is correct. 207 is a harmless false positive.
+
+**`x_wconf` is not comparable across engines.** Median of per-volume mean word confidence:
+tesseract **82.3**, ABBYY-9 31.6, `none` 27.5, ABBYY-11 21.5, ABBYY-8 **12.6** — the ABBYY-8 tier
+is the *clean* one. Use it within an engine class only; see the engine-confound note in the
+memory index. `dead-ocr` uses chars per content leaf per class for the same reason.
+
+**Keep-rate outliers are Phase-2 leads, not failures.** Lowest: `newyorkdirectory00durs_0` 29.7%,
+`newyorkbrooklynd00durs` 29.9% (the Durst 1786 reprint/original pair), `brooklynnewyorkc19123broo`
+37.8%, `micro_IABROOKLYN_0041` 40.1% (the 1860 *business* directory, `not-residential`).
+
+**Correction to the failure register:** `longworthsameric4818long` is `restricted` for **images**
+(IIIF 403) but its hOCR is **not empty** — 378 content leaves, 133,519 words, mean conf 27.4.
+The text route exists.
 
 **Budget: 21.7 GB total, median volume 79 MB.** Four volumes exceed 500 MB and get their own
 night: `trowsgeneraldire1917trow` **1588 MB** (2480 leaves), `trowsgeneraldire1915trow` 1470 MB,
@@ -892,8 +931,9 @@ dead volume: `ok` · `no-hocr` · `dead-ocr` (chars/page an order of magnitude b
 
 **Stamped so far (2026-09-22):**
 
-- `restricted` — `longworthsameric4818long`. IIIF returns **403 on every leaf** and its hOCR is
-  empty, so it has no route at all, by text or by image. Not a collection-level block: other
+- `restricted` — `longworthsameric4818long`. IIIF returns **403 on every leaf**, so it has no
+  image route. *(It was also recorded here as having an empty hOCR; Phase 1 found 133,519 words
+  on 378 content leaves, so the text route exists.)* Not a collection-level block: other
   `durstoldyorklibrary` volumes serve fine, so this is item-level.
 - `not-residential` — 6 volumes. `micro_IABROOKLYN_0041` (Boyd's Brooklyn **Business** Directory,
   1860), `micro_IABROOKLYN_0038` (Brooklyn **Business** Directory, 1858-59), and **all four 1913

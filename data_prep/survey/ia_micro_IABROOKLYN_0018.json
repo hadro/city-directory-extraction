@@ -300,5 +300,69 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$5/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "08534aa9dbdced6437f03781ea326db6abe4b2a6",
+  "hocr_bytes": 11113052,
+  "sha1_matches_census": true,
+  "fetch_s": 24,
+  "dump": {
+   "leaves": 368,
+   "leaves_with_text": 358,
+   "content_leaves": 324,
+   "lines": 11331,
+   "words": 59044,
+   "chars": 266645,
+   "no_page_size": 0,
+   "mean_wconf": 84.1,
+   "chars_per_content_leaf": 823
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'leslie' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1841/42",
+   "hocr_lines": 11056,
+   "wrap_joins": 782,
+   "candidates": 10274,
+   "kept": 7989,
+   "keep_rate": 0.7776,
+   "dropped": {
+    "short": 988,
+    "allcaps": 548,
+    "banner": 501,
+    "bigtype": 214,
+    "nonascii": 32,
+    "pagenum": 2
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    33,
+    234,
+    78,
+    32,
+    248,
+    322,
+    240,
+    2,
+    281,
+    204
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 765921,
+  "hocr_deleted": true,
+  "elapsed_s": 24
+ }
 }

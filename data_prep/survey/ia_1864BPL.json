@@ -298,5 +298,68 @@
    "https://iiif.archive.org/iiif/1864BPL$4/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "554cdd4bf63c4a7b82d2a2543b7610753bd151fc",
+  "hocr_bytes": 78607766,
+  "sha1_matches_census": true,
+  "fetch_s": 27,
+  "dump": {
+   "leaves": 652,
+   "leaves_with_text": 651,
+   "content_leaves": 649,
+   "lines": 89014,
+   "words": 503493,
+   "chars": 2366144,
+   "no_page_size": 0,
+   "mean_wconf": 30.5,
+   "chars_per_content_leaf": 3646
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "lain",
+   "publisher_tag_note": null,
+   "year_tag": "1864",
+   "hocr_lines": 89010,
+   "wrap_joins": 2313,
+   "candidates": 86697,
+   "kept": 73697,
+   "keep_rate": 0.8501,
+   "dropped": {
+    "short": 5749,
+    "nonascii": 3123,
+    "banner": 2727,
+    "allcaps": 1341,
+    "bigtype": 60
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    601,
+    7,
+    417,
+    648,
+    253,
+    650,
+    40,
+    75,
+    643,
+    281
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 5695297,
+  "hocr_deleted": true,
+  "elapsed_s": 32
+ }
 }

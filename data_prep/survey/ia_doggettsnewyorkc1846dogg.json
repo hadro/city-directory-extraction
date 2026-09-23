@@ -274,5 +274,90 @@
    23
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "d47b4b517bfca70ef09edaca350a28c31ae4aaed",
+  "hocr_bytes": 81153101,
+  "sha1_matches_census": true,
+  "fetch_s": 36,
+  "dump": {
+   "leaves": 518,
+   "leaves_with_text": 515,
+   "content_leaves": 513,
+   "lines": 84122,
+   "words": 523098,
+   "chars": 2635652,
+   "no_page_size": 0,
+   "mean_wconf": 40.0,
+   "chars_per_content_leaf": 5138
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "doggett1846_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 155,
+     "leaf": 155,
+     "match": 1.0,
+     "gold_lines": 37,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    155
+   ],
+   "adjacent_leaves": [
+    154,
+    156
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "doggett",
+   "publisher_tag_note": null,
+   "year_tag": "1846",
+   "hocr_lines": 84111,
+   "wrap_joins": 926,
+   "candidates": 83185,
+   "kept": 76053,
+   "keep_rate": 0.9143,
+   "dropped": {
+    "short": 4701,
+    "banner": 1384,
+    "allcaps": 1007,
+    "bigtype": 32,
+    "nonascii": 8
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    15,
+    516,
+    14,
+    459,
+    515,
+    480,
+    466,
+    514,
+    6,
+    473
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 6315202,
+  "hocr_deleted": true,
+  "elapsed_s": 42
+ }
 }

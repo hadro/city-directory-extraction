@@ -313,5 +313,73 @@
    "https://iiif.archive.org/iiif/brooklynnewyork1905p1geor$7/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "8cf877783e880a9258d26c705c9b44726f423a5e",
+  "hocr_bytes": 121700150,
+  "sha1_matches_census": true,
+  "fetch_s": 28,
+  "dump": {
+   "leaves": 1138,
+   "leaves_with_text": 568,
+   "content_leaves": 559,
+   "lines": 148353,
+   "words": 716039,
+   "chars": 2516719,
+   "no_page_size": 0,
+   "mean_wconf": 19.1,
+   "chars_per_content_leaf": 4502
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "upington",
+   "publisher_tag_note": null,
+   "year_tag": "1905",
+   "hocr_lines": 148312,
+   "wrap_joins": 15768,
+   "candidates": 132544,
+   "kept": 87371,
+   "keep_rate": 0.6592,
+   "dropped": {
+    "short": 39077,
+    "allcaps": 3917,
+    "banner": 1054,
+    "bigtype": 994,
+    "nonascii": 117,
+    "pagenum": 14
+   },
+   "ditto_marks": [
+    "\"",
+    "'\u2022",
+    "\u2022'"
+   ],
+   "ditto_applied": 1592,
+   "band": {
+    "leaves_banded": 526,
+    "head": 1389,
+    "body": 83929,
+    "foot": 883,
+    "unbanded": 1170
+   },
+   "top_ad_leaves": [
+    263,
+    17,
+    275,
+    15,
+    99,
+    13,
+    271,
+    29,
+    283,
+    7
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 8208582,
+  "hocr_deleted": true,
+  "elapsed_s": 35
+ }
 }

@@ -296,5 +296,70 @@
    4
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "ce106daaea56587f96b173ee23a86c4e30c37573",
+  "hocr_bytes": 4048536,
+  "sha1_matches_census": true,
+  "fetch_s": 18,
+  "dump": {
+   "leaves": 121,
+   "leaves_with_text": 117,
+   "content_leaves": 112,
+   "lines": 4204,
+   "words": 23784,
+   "chars": 119995,
+   "no_page_size": 0,
+   "mean_wconf": 90.0,
+   "chars_per_content_leaf": 1071
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'nichols/delaree' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1833/34",
+   "hocr_lines": 4183,
+   "wrap_joins": 146,
+   "candidates": 4037,
+   "kept": 3686,
+   "keep_rate": 0.9131,
+   "dropped": {
+    "allcaps": 141,
+    "banner": 97,
+    "short": 71,
+    "bigtype": 34,
+    "nonascii": 8
+   },
+   "ditto_marks": [
+    "*"
+   ],
+   "ditto_applied": 20,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    100,
+    81,
+    24,
+    14,
+    31,
+    111,
+    104,
+    17,
+    40,
+    114
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 297309,
+  "hocr_deleted": true,
+  "elapsed_s": 19
+ }
 }

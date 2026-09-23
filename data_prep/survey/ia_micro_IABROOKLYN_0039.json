@@ -296,5 +296,71 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$26/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "a6a2caefd129d52d7adb48175a2c69a42a25596b",
+  "hocr_bytes": 19954659,
+  "sha1_matches_census": true,
+  "fetch_s": 84,
+  "dump": {
+   "leaves": 577,
+   "leaves_with_text": 566,
+   "content_leaves": 499,
+   "lines": 20779,
+   "words": 106782,
+   "chars": 430834,
+   "no_page_size": 0,
+   "mean_wconf": 69.4,
+   "chars_per_content_leaf": 863
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "lain",
+   "publisher_tag_note": null,
+   "year_tag": "1858",
+   "hocr_lines": 19987,
+   "wrap_joins": 1119,
+   "candidates": 18868,
+   "kept": 10585,
+   "keep_rate": 0.561,
+   "dropped": {
+    "short": 5219,
+    "banner": 1507,
+    "bigtype": 878,
+    "allcaps": 613,
+    "nonascii": 64,
+    "pagenum": 2
+   },
+   "ditto_marks": [
+    "\u00a9"
+   ],
+   "ditto_applied": 80,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    88,
+    367,
+    319,
+    116,
+    210,
+    369,
+    209,
+    75,
+    388,
+    153
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 1388774,
+  "hocr_deleted": true,
+  "elapsed_s": 85
+ }
 }

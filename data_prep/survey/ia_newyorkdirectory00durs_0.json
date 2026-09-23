@@ -327,5 +327,69 @@
    "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$11/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "3fd2567bda2746f8f9cb6ccb5892ba6663f4554e",
+  "hocr_bytes": 3440020,
+  "sha1_matches_census": true,
+  "fetch_s": 5,
+  "dump": {
+   "leaves": 102,
+   "leaves_with_text": 87,
+   "content_leaves": 85,
+   "lines": 6323,
+   "words": 16088,
+   "chars": 71063,
+   "no_page_size": 0,
+   "mean_wconf": 44.7,
+   "chars_per_content_leaf": 836
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "franks",
+   "publisher_tag_note": null,
+   "year_tag": "1786",
+   "hocr_lines": 6319,
+   "wrap_joins": 126,
+   "candidates": 6193,
+   "kept": 1840,
+   "keep_rate": 0.2971,
+   "dropped": {
+    "short": 3850,
+    "banner": 413,
+    "allcaps": 79,
+    "bigtype": 7,
+    "pagenum": 3,
+    "nonascii": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    26,
+    86,
+    15,
+    28,
+    16,
+    13,
+    29,
+    8,
+    88,
+    24
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 187318,
+  "hocr_deleted": true,
+  "elapsed_s": 5
+ }
 }

@@ -260,5 +260,68 @@
    "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$9/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "e715ce934a24b3d98f7b334b92ec0ed200e77251",
+  "hocr_bytes": 196424307,
+  "sha1_matches_census": true,
+  "fetch_s": 80,
+  "dump": {
+   "leaves": 1130,
+   "leaves_with_text": 1114,
+   "content_leaves": 1107,
+   "lines": 196983,
+   "words": 1289414,
+   "chars": 5863757,
+   "no_page_size": 0,
+   "mean_wconf": 32.0,
+   "chars_per_content_leaf": 5297
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": null,
+   "year_tag": "1863",
+   "hocr_lines": 196957,
+   "wrap_joins": 2835,
+   "candidates": 194122,
+   "kept": 176105,
+   "keep_rate": 0.9072,
+   "dropped": {
+    "short": 12172,
+    "allcaps": 2962,
+    "banner": 2799,
+    "bigtype": 45,
+    "nonascii": 39
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    1108,
+    1049,
+    1121,
+    1116,
+    1117,
+    1115,
+    1107,
+    1114,
+    1053,
+    10
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 15237553,
+  "hocr_deleted": true,
+  "elapsed_s": 92
+ }
 }

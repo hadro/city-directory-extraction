@@ -293,5 +293,69 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$15/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "a4e940453f2648fb1e988b8f859e454d63ea6b86",
+  "hocr_bytes": 11312686,
+  "sha1_matches_census": true,
+  "fetch_s": 18,
+  "dump": {
+   "leaves": 282,
+   "leaves_with_text": 275,
+   "content_leaves": 265,
+   "lines": 9785,
+   "words": 63753,
+   "chars": 277900,
+   "no_page_size": 0,
+   "mean_wconf": 80.1,
+   "chars_per_content_leaf": 1049
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1850/51",
+   "hocr_lines": 9706,
+   "wrap_joins": 497,
+   "candidates": 9209,
+   "kept": 7372,
+   "keep_rate": 0.8005,
+   "dropped": {
+    "short": 819,
+    "allcaps": 535,
+    "bigtype": 302,
+    "banner": 123,
+    "nonascii": 51,
+    "pagenum": 7
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    8,
+    249,
+    28,
+    24,
+    4,
+    68,
+    83,
+    26,
+    271,
+    250
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 832147,
+  "hocr_deleted": true,
+  "elapsed_s": 18
+ }
 }

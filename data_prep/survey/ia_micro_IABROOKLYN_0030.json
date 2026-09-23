@@ -310,5 +310,100 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$6/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "c56659ca3042b1e5fb59633cd4b0032ad5481a1d",
+  "hocr_bytes": 21065097,
+  "sha1_matches_census": true,
+  "fetch_s": 9,
+  "dump": {
+   "leaves": 579,
+   "leaves_with_text": 569,
+   "content_leaves": 542,
+   "lines": 19159,
+   "words": 119255,
+   "chars": 542040,
+   "no_page_size": 0,
+   "mean_wconf": 85.3,
+   "chars_per_content_leaf": 1000
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "hearne1852_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 174,
+     "leaf": 174,
+     "match": 1.0,
+     "gold_lines": 30,
+     "offset": 0
+    },
+    {
+     "jp2": 405,
+     "leaf": 405,
+     "match": 1.0,
+     "gold_lines": 22,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    174,
+    405
+   ],
+   "adjacent_leaves": [
+    173,
+    175,
+    404,
+    406
+   ],
+   "whole_volume": false
+  },
+  "hocr_deleted": true,
+  "elapsed_s": 10,
+  "filtered": {
+   "publisher_tag": "hearne",
+   "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
+   "year_tag": "1852/53",
+   "hocr_lines": 18883,
+   "wrap_joins": 723,
+   "candidates": 18160,
+   "kept": 15370,
+   "keep_rate": 0.8464,
+   "dropped": {
+    "short": 1302,
+    "allcaps": 557,
+    "banner": 450,
+    "bigtype": 411,
+    "nonascii": 66,
+    "pagenum": 4
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    532,
+    57,
+    399,
+    300,
+    533,
+    577,
+    574,
+    546,
+    514,
+    311
+   ],
+   "filters_at": "02404bc-dirty",
+   "derived": "2026-09-22"
+  }
+ }
 }

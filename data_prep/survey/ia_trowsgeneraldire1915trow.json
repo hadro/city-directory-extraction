@@ -350,5 +350,74 @@
   "legend_leaves": []
  },
  "frontmatter_read": "2026-09-22",
- "error": "HTTPError: HTTP Error 500: Internal Server Error"
+ "error": "HTTPError: HTTP Error 500: Internal Server Error",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "f1fbc2105c816b1227c32eccb2345b76ecc70e77",
+  "hocr_bytes": 1470184092,
+  "sha1_matches_census": true,
+  "fetch_s": 201,
+  "dump": {
+   "leaves": 2480,
+   "leaves_with_text": 2471,
+   "content_leaves": 2466,
+   "lines": 1690102,
+   "words": 9015656,
+   "chars": 36982723,
+   "no_page_size": 0,
+   "mean_wconf": 19.6,
+   "chars_per_content_leaf": 14997
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": null,
+   "year_tag": "1915",
+   "hocr_lines": 1690064,
+   "wrap_joins": 36230,
+   "candidates": 1653834,
+   "kept": 1484446,
+   "keep_rate": 0.8976,
+   "dropped": {
+    "short": 105833,
+    "allcaps": 32186,
+    "banner": 19413,
+    "bigtype": 11621,
+    "nonascii": 325,
+    "pagenum": 10
+   },
+   "ditto_marks": [
+    ",,",
+    "..",
+    "11",
+    "\u201e"
+   ],
+   "ditto_applied": 128911,
+   "band": {
+    "leaves_banded": 1051,
+    "head": 22767,
+    "body": 674922,
+    "foot": 12588,
+    "unbanded": 774169
+   },
+   "top_ad_leaves": [
+    1884,
+    2216,
+    1865,
+    2000,
+    2019,
+    1932,
+    1862,
+    2005,
+    1967,
+    1958
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 105268647,
+  "hocr_deleted": true,
+  "elapsed_s": 291
+ }
 }

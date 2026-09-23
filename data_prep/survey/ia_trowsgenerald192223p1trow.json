@@ -288,5 +288,73 @@
    29
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "93fb34e9ef8cc63aa1eb669a27e3bff9bd3e1de7",
+  "hocr_bytes": 565910910,
+  "sha1_matches_census": true,
+  "fetch_s": 96,
+  "dump": {
+   "leaves": 966,
+   "leaves_with_text": 958,
+   "content_leaves": 954,
+   "lines": 650521,
+   "words": 3485105,
+   "chars": 13468735,
+   "no_page_size": 0,
+   "mean_wconf": 12.4,
+   "chars_per_content_leaf": 14118
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": null,
+   "year_tag": "1922/23",
+   "hocr_lines": 650494,
+   "wrap_joins": 17643,
+   "candidates": 632851,
+   "kept": 555789,
+   "keep_rate": 0.8782,
+   "dropped": {
+    "short": 56856,
+    "allcaps": 9309,
+    "banner": 8508,
+    "bigtype": 2191,
+    "nonascii": 189,
+    "pagenum": 9
+   },
+   "ditto_marks": [
+    "\"",
+    "'",
+    "\u00bb"
+   ],
+   "ditto_applied": 13328,
+   "band": {
+    "leaves_banded": 776,
+    "head": 670,
+    "body": 539698,
+    "foot": 68,
+    "unbanded": 15353
+   },
+   "top_ad_leaves": [
+    5,
+    135,
+    53,
+    87,
+    100,
+    88,
+    141,
+    146,
+    142,
+    155
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 40455529,
+  "hocr_deleted": true,
+  "elapsed_s": 131
+ }
 }

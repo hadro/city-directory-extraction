@@ -296,5 +296,69 @@
    21
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "035be7ee9e15b227bdcd4a7c4767a392f1481041",
+  "hocr_bytes": 5784710,
+  "sha1_matches_census": true,
+  "fetch_s": 261,
+  "dump": {
+   "leaves": 83,
+   "leaves_with_text": 78,
+   "content_leaves": 73,
+   "lines": 5487,
+   "words": 32252,
+   "chars": 162334,
+   "no_page_size": 0,
+   "mean_wconf": 89.2,
+   "chars_per_content_leaf": 2224
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'stevens/marschalk' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1838/39",
+   "hocr_lines": 5442,
+   "wrap_joins": 240,
+   "candidates": 5202,
+   "kept": 4503,
+   "keep_rate": 0.8656,
+   "dropped": {
+    "banner": 286,
+    "short": 198,
+    "allcaps": 157,
+    "bigtype": 49,
+    "nonascii": 8,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    50,
+    19,
+    28,
+    73,
+    7,
+    24,
+    53,
+    29,
+    56,
+    18
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 415867,
+  "hocr_deleted": true,
+  "elapsed_s": 261
+ }
 }

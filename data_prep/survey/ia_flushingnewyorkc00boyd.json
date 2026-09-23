@@ -298,5 +298,111 @@
    "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$7/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "9ba7d421879680cc854f2eabe574fd5522c113ec",
+  "hocr_bytes": 5549401,
+  "sha1_matches_census": true,
+  "fetch_s": 11,
+  "dump": {
+   "leaves": 230,
+   "leaves_with_text": 119,
+   "content_leaves": 107,
+   "lines": 4959,
+   "words": 33944,
+   "chars": 150863,
+   "no_page_size": 0,
+   "mean_wconf": 23.7,
+   "chars_per_content_leaf": 1410
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "boyd1890_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 45,
+     "leaf": 45,
+     "match": 1.0,
+     "gold_lines": 14,
+     "offset": 0
+    },
+    {
+     "jp2": 75,
+     "leaf": 75,
+     "match": 1.0,
+     "gold_lines": 40,
+     "offset": 0
+    },
+    {
+     "jp2": 105,
+     "leaf": 105,
+     "match": 1.0,
+     "gold_lines": 21,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    45,
+    75,
+    105
+   ],
+   "adjacent_leaves": [
+    44,
+    46,
+    74,
+    76,
+    104,
+    106
+   ],
+   "whole_volume": false
+  },
+  "hocr_deleted": true,
+  "elapsed_s": 11,
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "'flushing journal' is not in the trained vocabulary -- falling back to 'trow'",
+   "year_tag": "1890",
+   "hocr_lines": 4940,
+   "wrap_joins": 198,
+   "candidates": 4742,
+   "kept": 3926,
+   "keep_rate": 0.8279,
+   "dropped": {
+    "short": 331,
+    "allcaps": 322,
+    "banner": 120,
+    "bigtype": 31,
+    "nonascii": 12
+   },
+   "ditto_marks": [
+    "^^"
+   ],
+   "ditto_applied": 36,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    7,
+    131,
+    11,
+    219,
+    221,
+    9,
+    141,
+    177,
+    215,
+    133
+   ],
+   "filters_at": "02404bc-dirty",
+   "derived": "2026-09-22"
+  }
+ }
 }

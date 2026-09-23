@@ -301,5 +301,101 @@
   "contents_leaf": 19,
   "legend_leaves": []
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "ae104c123c25d88772bda455ba4825f45fb2ac10",
+  "hocr_bytes": 169506380,
+  "sha1_matches_census": true,
+  "fetch_s": 40,
+  "dump": {
+   "leaves": 1248,
+   "leaves_with_text": 1240,
+   "content_leaves": 1230,
+   "lines": 194585,
+   "words": 1081099,
+   "chars": 4898214,
+   "no_page_size": 0,
+   "mean_wconf": 23.2,
+   "chars_per_content_leaf": 3982
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "lain1876_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 373,
+     "leaf": 373,
+     "match": 1.0,
+     "gold_lines": 73,
+     "offset": 0
+    },
+    {
+     "jp2": 873,
+     "leaf": 873,
+     "match": 1.0,
+     "gold_lines": 30,
+     "offset": 0
+    }
+   ],
+   "gold_leaves": [
+    373,
+    873
+   ],
+   "adjacent_leaves": [
+    372,
+    374,
+    872,
+    874
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "lain",
+   "publisher_tag_note": null,
+   "year_tag": "1876",
+   "hocr_lines": 194516,
+   "wrap_joins": 3766,
+   "candidates": 190750,
+   "kept": 165019,
+   "keep_rate": 0.8651,
+   "dropped": {
+    "short": 15816,
+    "allcaps": 6321,
+    "banner": 2265,
+    "bigtype": 1234,
+    "nonascii": 94,
+    "pagenum": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    1240,
+    8,
+    414,
+    64,
+    731,
+    3,
+    1129,
+    1180,
+    1130,
+    1
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 12553385,
+  "hocr_deleted": true,
+  "elapsed_s": 55
+ }
 }

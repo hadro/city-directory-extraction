@@ -347,5 +347,69 @@
    "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$7/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "d48bbf19a5ed1a4b9eac751c4ad4e48ff71e52fd",
+  "hocr_bytes": 73603447,
+  "sha1_matches_census": true,
+  "fetch_s": 9,
+  "dump": {
+   "leaves": 484,
+   "leaves_with_text": 479,
+   "content_leaves": 477,
+   "lines": 77252,
+   "words": 471174,
+   "chars": 2382557,
+   "no_page_size": 0,
+   "mean_wconf": 35.3,
+   "chars_per_content_leaf": 4995
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "doggett",
+   "publisher_tag_note": null,
+   "year_tag": "1845",
+   "hocr_lines": 77224,
+   "wrap_joins": 679,
+   "candidates": 76545,
+   "kept": 69075,
+   "keep_rate": 0.9024,
+   "dropped": {
+    "short": 5058,
+    "banner": 1480,
+    "allcaps": 838,
+    "nonascii": 54,
+    "bigtype": 33,
+    "pagenum": 7
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    5,
+    1,
+    454,
+    482,
+    460,
+    436,
+    441,
+    453,
+    136,
+    459
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 5712220,
+  "hocr_deleted": true,
+  "elapsed_s": 13
+ }
 }

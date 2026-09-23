@@ -313,5 +313,93 @@
    "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$1/full/1400,/0/default.jpg"
   ]
  },
- "frontmatter_read": "2026-09-22"
+ "frontmatter_read": "2026-09-22",
+ "harvest": {
+  "fetched": "2026-09-22",
+  "hocr_source": "download",
+  "hocr_sha1": "5f68e90104729eca5f48943410e9356287e98066",
+  "hocr_bytes": 44667814,
+  "sha1_matches_census": true,
+  "fetch_s": 12,
+  "dump": {
+   "leaves": 686,
+   "leaves_with_text": 667,
+   "content_leaves": 639,
+   "lines": 44750,
+   "words": 235442,
+   "chars": 1000885,
+   "no_page_size": 0,
+   "mean_wconf": 81.6,
+   "chars_per_content_leaf": 1566
+  },
+  "status": "ok",
+  "eval_holdout": {
+   "sets": [
+    "hopehenderson1856_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 205,
+     "leaf": 207,
+     "match": 0.4,
+     "gold_lines": 60,
+     "offset": 2
+    }
+   ],
+   "gold_leaves": [
+    205,
+    207
+   ],
+   "adjacent_leaves": [
+    204,
+    206,
+    208
+   ],
+   "whole_volume": false
+  },
+  "filtered": {
+   "publisher_tag": "hopehenderson",
+   "publisher_tag_note": "'hope & henderson' normalised to the trained token 'hopehenderson'",
+   "year_tag": "1856/57",
+   "hocr_lines": 44504,
+   "wrap_joins": 2193,
+   "candidates": 42311,
+   "kept": 30456,
+   "keep_rate": 0.7198,
+   "dropped": {
+    "short": 8369,
+    "banner": 1520,
+    "bigtype": 1270,
+    "allcaps": 436,
+    "nonascii": 249,
+    "pagenum": 11
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    538,
+    625,
+    177,
+    436,
+    611,
+    486,
+    622,
+    623,
+    640,
+    682
+   ],
+   "filters_at": "622eb3d-dirty",
+   "derived": "2026-09-22"
+  },
+  "words_gz_bytes": 2978376,
+  "hocr_deleted": true,
+  "elapsed_s": 16
+ }
 }

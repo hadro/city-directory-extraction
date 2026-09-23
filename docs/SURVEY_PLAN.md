@@ -877,8 +877,28 @@ claims exist, `end − start + 1` matches the listing's text leaves to 0.97–1.
 84 volumes carry at least one CSV-grade (high/medium) claim, which would fill **37 `start_page`
 and 65 `end_page` cells, all empty today**. One conflict: `merceinscitydire00merc` CSV 105 vs
 **106**. Leaf 104 prints "106 / MERCEIN'S / Acbeson Hugh, cartman", and the page before is an ad,
-so the CSV is one page early. **Not written.** `apply_survey.py` still lists all three columns as
-`FORBIDDEN`, and lifting that is a decision, not a side effect.
+so the CSV is one page early. The row's own note had already recorded "first clean directory page
+printed p106 = canvas c101", and c101 is leaf 104 in a numbering 3 off from IA's leaves, which also
+explains its `page_offset` of −5.
+
+**Written 2026-09-23, on hadro's decision.** `apply_survey.py` makes the three columns
+*conditional*: `method: hocr-geometry`, `attestation: read`, `confidence: high` (stricter than
+`key_page`'s high-or-medium), and `page_offset` only from the same claim as its `start_page`.
+Before that change, **10 randomly sampled high claims (seed 20260923) were opened at their IIIF
+images: 10/10 print the cited folio, and 10/10 are the listing's true first or last page**. Two of
+the neighbouring title pages carry a librarian's "Pt. 2", confirming the part assignment.
+
+| written | cells |
+|---|---:|
+| `end_page` | 56 |
+| `start_page` | 26 + merc 105 → 106 (`book-wins`) |
+| `page_offset` | 23 + merc −5 → −2 (`book-wins`) |
+
+107 cells in 70 rows, no other column touched, and a second run writes nothing. Every
+survey-written row satisfies `start_page + page_offset == cited leaf`, except `micro_IABROOKLYN_0028`
+and `_0033`, whose pre-existing offsets were measured deeper in the volume (+8 at leaf 146, +55 at
+leaf 186) and were left alone by rule 1. Those two plus merc were the three new `page_offset`
+conflicts; merc is decided, and the other two are drift, not error.
 
 Why so many `none` on `start_page`: a listing's opening page often prints no folio (caption title,
 legend). For 39 volumes the first read is 1–3 leaves after the start, and the rule above forbids

@@ -67,8 +67,16 @@ Two traps this encodes, both measured:
   what `legend_location` records.
 
 `year` stays the single human-facing summary and is never rewritten from `year_covered` /
-`year_published`. `start_page`, `end_page`, `page_offset` and `key_page` are **not** survey-written
-yet — they need the Phase-1 OCR harvest and Phase-2 bounds detection.
+`year_published`.
+
+**`start_page`, `end_page` and `page_offset` are survey-written since 2026-09-23**, conditionally:
+only from a Phase-2 claim (`survey_derive.py pages`, `method: hocr-geometry`) that is **read** off the
+cited leaf's own margin and graded **high**, and only into an empty cell. The claim, its leaf, the
+folio as printed and the IIIF image are in the row's sidecar under `book_says`. `page_offset` is
+filled only from the same claim as its `start_page`, so a survey-filled row satisfies
+`start_page + page_offset == leaf of the first listing page`. Rows whose `page_offset` predates the
+survey may be anchored deeper in the volume (`micro_IABROOKLYN_0028`: +8 at leaf 146 vs +4 at the
+listing start) — the offset drifts, so read it as local to wherever it was measured.
 
 ### What goes in `id`, per `source`
 - **`nypl`** — the item **UUID** (e.g. `4b4b2b90-317a-0134-6800-00505686a51c`). Resolves to

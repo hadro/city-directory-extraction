@@ -353,6 +353,15 @@
       "reason": "Leaf 104 prints '106' in its head margin above the caption 'MERCEIN'S' and the listing's first entry 'Acbeson Hugh, cartman 39 Lombard'; leaf 105 prints 107. The preceding leaf 103 is an advertisement ('NEW-YORK ANNUAL ADVERTISER ... A. ARNOUX, MERCHANT TAILOR'), so the CSV's 105 is the ad page, one before the listing. https://iiif.archive.org/iiif/merceinscitydire00merc$104/full/!1400,1400/0/default.jpg",
       "by": "hadro (approving claude's recommendation)",
       "date": "2026-09-23"
+    },
+    {
+      "source": "ia",
+      "id": "merceinscitydire00merc",
+      "column": "page_offset",
+      "verdict": "book-wins",
+      "reason": "The CSV's -5 was measured in a different canvas numbering: the row's own note records 'first clean directory page printed p106 = canvas c101', and that page is IA leaf 104 (IIIF canvas 104), 3 off. page_offset is canvas_index - printed_page (master_directories.README.md), so at the listing start it is 104 - 106 = -2, consistent with the corrected start_page=106. Leaving -5 beside 106 would make the row contradict itself. https://iiif.archive.org/iiif/merceinscitydire00merc$104/full/!1400,1400/0/default.jpg",
+      "by": "hadro",
+      "date": "2026-09-23"
     }
   ]
 }

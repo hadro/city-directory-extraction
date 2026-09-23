@@ -357,5 +357,243 @@
   "words_gz_bytes": 810009,
   "hocr_deleted": true,
   "elapsed_s": 14
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 4,
+  "end_leaf": 219,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDFHIJKLMNOPQRSTVWY",
+  "missing_letters": "EGUXZ",
+  "voting_density": 0.648,
+  "flags": [],
+  "start": {
+   "leaf": 4,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$4/full/!1400,1400/0/default.jpg",
+   "quote": "Albertans hae : ent mall"
+  },
+  "end": {
+   "leaf": 219,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$219/full/!1400,1400/0/default.jpg",
+   "quote": "Young Mary, seems store 112 Jay"
+  },
+  "sections": [
+   {
+    "start_leaf": 4,
+    "end_leaf": 219,
+    "voting_leaves": 140,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDFHIJKLMNOPQRSTVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 7,
+    "end_leaf": 13,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "D",
+     "F"
+    ],
+    "start_leaf": 38,
+    "end_leaf": 43,
+    "leaves": 6
+   },
+   {
+    "between": [
+     "F",
+     "H"
+    ],
+    "start_leaf": 51,
+    "end_leaf": 62,
+    "leaves": 12
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 75,
+    "end_leaf": 80,
+    "leaves": 6
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 86,
+    "end_leaf": 86,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 95,
+    "end_leaf": 95,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 101,
+    "end_leaf": 117,
+    "leaves": 17
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 121,
+    "end_leaf": 136,
+    "leaves": 16
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 165,
+    "end_leaf": 165,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    4,
+    6,
+    3
+   ],
+   "B": [
+    14,
+    19,
+    6
+   ],
+   "C": [
+    20,
+    30,
+    11
+   ],
+   "D": [
+    31,
+    37,
+    7
+   ],
+   "F": [
+    44,
+    50,
+    6
+   ],
+   "H": [
+    63,
+    74,
+    12
+   ],
+   "I": [
+    81,
+    81,
+    1
+   ],
+   "J": [
+    82,
+    85,
+    4
+   ],
+   "K": [
+    87,
+    94,
+    5
+   ],
+   "L": [
+    96,
+    100,
+    2
+   ],
+   "M": [
+    118,
+    120,
+    3
+   ],
+   "N": [
+    137,
+    139,
+    3
+   ],
+   "O": [
+    140,
+    142,
+    3
+   ],
+   "P": [
+    143,
+    152,
+    10
+   ],
+   "Q": [
+    153,
+    153,
+    1
+   ],
+   "R": [
+    154,
+    164,
+    10
+   ],
+   "S": [
+    166,
+    188,
+    20
+   ],
+   "T": [
+    189,
+    197,
+    9
+   ],
+   "V": [
+    198,
+    202,
+    5
+   ],
+   "W": [
+    203,
+    217,
+    15
+   ],
+   "Y": [
+    218,
+    219,
+    2
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 4,
+   "end_leaf": 219
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

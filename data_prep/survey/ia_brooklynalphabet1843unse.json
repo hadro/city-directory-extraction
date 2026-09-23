@@ -360,5 +360,171 @@
   "words_gz_bytes": 807138,
   "hocr_deleted": true,
   "elapsed_s": 7
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 17,
+  "end_leaf": 197,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPRSTUVWY",
+  "missing_letters": "QXZ",
+  "voting_density": 0.989,
+  "flags": [],
+  "start": {
+   "leaf": 17,
+   "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$17/full/!1400,1400/0/default.jpg",
+   "quote": "Abbot D D, auctioneer N Y h 45 Main"
+  },
+  "end": {
+   "leaf": 197,
+   "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$197/full/!1400,1400/0/default.jpg",
+   "quote": "Younie James, plasterer 173 Adams"
+  },
+  "sections": [
+   {
+    "start_leaf": 17,
+    "end_leaf": 197,
+    "voting_leaves": 179,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPRSTUVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    17,
+    20,
+    4
+   ],
+   "B": [
+    21,
+    40,
+    20
+   ],
+   "C": [
+    41,
+    57,
+    15
+   ],
+   "D": [
+    58,
+    68,
+    11
+   ],
+   "E": [
+    69,
+    70,
+    2
+   ],
+   "F": [
+    71,
+    77,
+    7
+   ],
+   "G": [
+    78,
+    85,
+    8
+   ],
+   "H": [
+    86,
+    99,
+    14
+   ],
+   "I": [
+    100,
+    100,
+    1
+   ],
+   "J": [
+    101,
+    104,
+    4
+   ],
+   "K": [
+    105,
+    109,
+    5
+   ],
+   "L": [
+    110,
+    116,
+    7
+   ],
+   "M": [
+    117,
+    137,
+    21
+   ],
+   "N": [
+    138,
+    139,
+    2
+   ],
+   "O": [
+    140,
+    142,
+    3
+   ],
+   "P": [
+    143,
+    150,
+    8
+   ],
+   "R": [
+    151,
+    159,
+    9
+   ],
+   "S": [
+    160,
+    175,
+    16
+   ],
+   "T": [
+    176,
+    180,
+    5
+   ],
+   "U": [
+    181,
+    181,
+    1
+   ],
+   "V": [
+    182,
+    184,
+    3
+   ],
+   "W": [
+    185,
+    196,
+    12
+   ],
+   "Y": [
+    197,
+    197,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 17,
+   "end_leaf": 197
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

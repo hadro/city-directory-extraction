@@ -343,5 +343,246 @@
   "words_gz_bytes": 8517103,
   "hocr_deleted": true,
   "elapsed_s": 31
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1027,
+  "first_letter": "L",
+  "last_letter": "Z",
+  "letters_present": "LMNOPQRSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKX",
+  "voting_density": 0.316,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1903geor$9/full/!1400,1400/0/default.jpg",
+   "quote": "Leeds Thus. meat, h 32 Oheever i>l"
+  },
+  "end": {
+   "leaf": 1027,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1903geor$1027/full/!1400,1400/0/default.jpg",
+   "quote": "Zvllnski Adam J. elk, li u:;7 Laf av"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1027,
+    "voting_leaves": 322,
+    "first_letter": "L",
+    "last_letter": "Z",
+    "letters": "LMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 70,
+    "end_leaf": 76,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 136,
+    "end_leaf": 296,
+    "leaves": 161
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 334,
+    "end_leaf": 344,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 370,
+    "end_leaf": 370,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 448,
+    "end_leaf": 448,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 452,
+    "end_leaf": 454,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 508,
+    "end_leaf": 698,
+    "leaves": 191
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 778,
+    "end_leaf": 800,
+    "leaves": 23
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 836,
+    "end_leaf": 836,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 842,
+    "end_leaf": 846,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 872,
+    "end_leaf": 970,
+    "leaves": 99
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 1010,
+    "end_leaf": 1010,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 1014,
+    "end_leaf": 1018,
+    "leaves": 5
+   }
+  ],
+  "letter_blocks": {
+   "L": [
+    29,
+    69,
+    20
+   ],
+   "M": [
+    77,
+    135,
+    22
+   ],
+   "N": [
+    297,
+    333,
+    12
+   ],
+   "O": [
+    345,
+    369,
+    10
+   ],
+   "P": [
+    371,
+    447,
+    33
+   ],
+   "Q": [
+    449,
+    451,
+    2
+   ],
+   "R": [
+    455,
+    507,
+    19
+   ],
+   "S": [
+    699,
+    777,
+    31
+   ],
+   "T": [
+    801,
+    835,
+    16
+   ],
+   "U": [
+    837,
+    841,
+    2
+   ],
+   "V": [
+    847,
+    871,
+    9
+   ],
+   "W": [
+    971,
+    1009,
+    12
+   ],
+   "Y": [
+    1011,
+    1013,
+    2
+   ],
+   "Z": [
+    1019,
+    1027,
+    5
+   ]
+  },
+  "skipped_votes": 13,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1025
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

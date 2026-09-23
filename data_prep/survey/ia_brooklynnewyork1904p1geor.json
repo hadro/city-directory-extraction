@@ -343,5 +343,218 @@
   "words_gz_bytes": 8199835,
   "hocr_deleted": true,
   "elapsed_s": 61
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 27,
+  "end_leaf": 1137,
+  "first_letter": "A",
+  "last_letter": "L",
+  "letters_present": "ABCDEFGHIJKL",
+  "missing_letters": "MNOPQRSTUVWXYZ",
+  "voting_density": 0.397,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 27,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1904p1geor$27/full/!1400,1400/0/default.jpg",
+   "quote": "Acct. accountant; agl. agricultural; agt agent; Ala. Alabama; al alley; art."
+  },
+  "end": {
+   "leaf": 1137,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1904p1geor$1137/full/!1400,1400/0/default.jpg",
+   "quote": "Levin Abraham grocer 68 Smith"
+  },
+  "sections": [
+   {
+    "start_leaf": 27,
+    "end_leaf": 1137,
+    "voting_leaves": 441,
+    "first_letter": "A",
+    "last_letter": "L",
+    "letters": "ABCDEFGHIJKL",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 60,
+    "end_leaf": 114,
+    "leaves": 55
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 238,
+    "end_leaf": 410,
+    "leaves": 173
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 458,
+    "end_leaf": 478,
+    "leaves": 21
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 560,
+    "end_leaf": 562,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 600,
+    "end_leaf": 600,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 684,
+    "end_leaf": 686,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 784,
+    "end_leaf": 824,
+    "leaves": 41
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 938,
+    "end_leaf": 940,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 948,
+    "end_leaf": 948,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 968,
+    "end_leaf": 1054,
+    "leaves": 87
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 1094,
+    "end_leaf": 1094,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    27,
+    59,
+    12
+   ],
+   "B": [
+    115,
+    237,
+    56
+   ],
+   "C": [
+    411,
+    457,
+    22
+   ],
+   "D": [
+    479,
+    559,
+    38
+   ],
+   "E": [
+    563,
+    599,
+    17
+   ],
+   "F": [
+    601,
+    683,
+    35
+   ],
+   "G": [
+    687,
+    783,
+    45
+   ],
+   "H": [
+    825,
+    937,
+    53
+   ],
+   "I": [
+    941,
+    947,
+    4
+   ],
+   "J": [
+    949,
+    967,
+    8
+   ],
+   "K": [
+    1055,
+    1093,
+    19
+   ],
+   "L": [
+    1095,
+    1137,
+    19
+   ]
+  },
+  "skipped_votes": 9,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 27,
+   "end_leaf": 1137
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

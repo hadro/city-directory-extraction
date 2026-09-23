@@ -324,5 +324,218 @@
   "words_gz_bytes": 22310946,
   "hocr_deleted": true,
   "elapsed_s": 85
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 7,
+  "end_leaf": 1552,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.928,
+  "flags": [],
+  "start": {
+   "leaf": 7,
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$7/full/!1400,1400/0/default.jpg",
+   "quote": "Aab Louis, jeweler, h r 6f> Market"
+  },
+  "end": {
+   "leaf": 1552,
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1552/full/!1400,1400/0/default.jpg",
+   "quote": "Zychlinski Si Hippler, coal, 24 East"
+  },
+  "sections": [
+   {
+    "start_leaf": 7,
+    "end_leaf": 1552,
+    "voting_leaves": 1434,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 862,
+    "end_leaf": 911,
+    "leaves": 50
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 1035,
+    "end_leaf": 1051,
+    "leaves": 17
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1095,
+    "end_leaf": 1098,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1153,
+    "end_leaf": 1154,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    7,
+    43,
+    35
+   ],
+   "B": [
+    44,
+    188,
+    141
+   ],
+   "C": [
+    189,
+    310,
+    108
+   ],
+   "D": [
+    311,
+    391,
+    79
+   ],
+   "E": [
+    392,
+    420,
+    27
+   ],
+   "F": [
+    421,
+    488,
+    68
+   ],
+   "G": [
+    489,
+    559,
+    71
+   ],
+   "H": [
+    560,
+    683,
+    120
+   ],
+   "I": [
+    684,
+    688,
+    5
+   ],
+   "J": [
+    689,
+    717,
+    27
+   ],
+   "K": [
+    718,
+    788,
+    71
+   ],
+   "L": [
+    789,
+    861,
+    71
+   ],
+   "M": [
+    912,
+    1034,
+    117
+   ],
+   "N": [
+    1052,
+    1063,
+    12
+   ],
+   "O": [
+    1064,
+    1094,
+    31
+   ],
+   "P": [
+    1099,
+    1147,
+    49
+   ],
+   "Q": [
+    1148,
+    1152,
+    5
+   ],
+   "R": [
+    1155,
+    1227,
+    71
+   ],
+   "S": [
+    1228,
+    1392,
+    155
+   ],
+   "T": [
+    1393,
+    1430,
+    38
+   ],
+   "U": [
+    1431,
+    1435,
+    5
+   ],
+   "V": [
+    1436,
+    1454,
+    19
+   ],
+   "W": [
+    1455,
+    1542,
+    88
+   ],
+   "Y": [
+    1543,
+    1546,
+    4
+   ],
+   "Z": [
+    1547,
+    1552,
+    6
+   ]
+  },
+  "skipped_votes": 20,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 7,
+   "end_leaf": 1552
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

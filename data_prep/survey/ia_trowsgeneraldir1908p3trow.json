@@ -334,5 +334,164 @@
   "words_gz_bytes": 5265070,
   "hocr_deleted": true,
   "elapsed_s": 26
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 47,
+  "end_leaf": 991,
+  "first_letter": "L",
+  "last_letter": "S",
+  "letters_present": "LMNOPQRS",
+  "missing_letters": "ABCDEFGHIJKTUVWXYZ",
+  "voting_density": 0.072,
+  "flags": [
+   "sparse",
+   "edge-disagreement",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 47,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p3trow$47/full/!1400,1400/0/default.jpg",
+   "quote": "Lmnris Ni"
+  },
+  "end": {
+   "leaf": 991,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p3trow$991/full/!1400,1400/0/default.jpg",
+   "quote": "Schui no. i, ana Wm h 15 Dominick"
+  },
+  "sections": [
+   {
+    "start_leaf": 47,
+    "end_leaf": 991,
+    "voting_leaves": 68,
+    "first_letter": "L",
+    "last_letter": "S",
+    "letters": "LMNOPQRS",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 54,
+    "end_leaf": 242,
+    "leaves": 189
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 248,
+    "end_leaf": 464,
+    "leaves": 217
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 474,
+    "end_leaf": 488,
+    "leaves": 15
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 490,
+    "end_leaf": 550,
+    "leaves": 61
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 560,
+    "end_leaf": 692,
+    "leaves": 133
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 694,
+    "end_leaf": 850,
+    "leaves": 157
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 862,
+    "end_leaf": 916,
+    "leaves": 55
+   }
+  ],
+  "letter_blocks": {
+   "L": [
+    47,
+    53,
+    3
+   ],
+   "M": [
+    243,
+    247,
+    3
+   ],
+   "N": [
+    465,
+    473,
+    5
+   ],
+   "O": [
+    489,
+    489,
+    1
+   ],
+   "P": [
+    551,
+    559,
+    3
+   ],
+   "Q": [
+    693,
+    693,
+    1
+   ],
+   "R": [
+    851,
+    861,
+    3
+   ],
+   "S": [
+    917,
+    921,
+    3
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 39,
+   "end_leaf": 991
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

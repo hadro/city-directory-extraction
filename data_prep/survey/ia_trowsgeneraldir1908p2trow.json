@@ -380,5 +380,150 @@
   "words_gz_bytes": 3974920,
   "hocr_deleted": true,
   "elapsed_s": 20
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 17,
+  "end_leaf": 1021,
+  "first_letter": "F",
+  "last_letter": "L",
+  "letters_present": "FGHIJKL",
+  "missing_letters": "ABCDEMNOPQRSTUVWXYZ",
+  "voting_density": 0.077,
+  "flags": [
+   "sparse",
+   "edge-disagreement",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 17,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p2trow$17/full/!1400,1400/0/default.jpg",
+   "quote": "Faultmaii Il.li"
+  },
+  "end": {
+   "leaf": 1021,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p2trow$1021/full/!1400,1400/0/default.jpg",
+   "quote": "Lindberg Adam electrician h 22 W 137th"
+  },
+  "sections": [
+   {
+    "start_leaf": 17,
+    "end_leaf": 1021,
+    "voting_leaves": 77,
+    "first_letter": "F",
+    "last_letter": "L",
+    "letters": "FGHIJKL",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 22,
+    "end_leaf": 290,
+    "leaves": 269
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 300,
+    "end_leaf": 480,
+    "leaves": 181
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 492,
+    "end_leaf": 634,
+    "leaves": 143
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 638,
+    "end_leaf": 706,
+    "leaves": 69
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 716,
+    "end_leaf": 722,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 728,
+    "end_leaf": 918,
+    "leaves": 191
+   }
+  ],
+  "letter_blocks": {
+   "F": [
+    17,
+    21,
+    3
+   ],
+   "G": [
+    291,
+    299,
+    3
+   ],
+   "H": [
+    481,
+    491,
+    3
+   ],
+   "I": [
+    635,
+    637,
+    2
+   ],
+   "J": [
+    707,
+    715,
+    3
+   ],
+   "K": [
+    723,
+    727,
+    3
+   ],
+   "L": [
+    919,
+    935,
+    5
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 85,
+   "end_leaf": 1033
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

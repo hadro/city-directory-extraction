@@ -345,5 +345,162 @@
   "words_gz_bytes": 13182149,
   "hocr_deleted": true,
   "elapsed_s": 65
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 33,
+  "end_leaf": 1155,
+  "first_letter": "A",
+  "last_letter": "H",
+  "letters_present": "ABCDEFGH",
+  "missing_letters": "IJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.43,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 33,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$33/full/!1400,1400/0/default.jpg",
+   "quote": "Aarons Alfd E h 200 W 70th"
+  },
+  "end": {
+   "leaf": 1155,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$1155/full/!1400,1400/0/default.jpg",
+   "quote": "Hansen Abraham machinist h 331 E C5th"
+  },
+  "sections": [
+   {
+    "start_leaf": 33,
+    "end_leaf": 1155,
+    "voting_leaves": 483,
+    "first_letter": "A",
+    "last_letter": "H",
+    "letters": "ABCDEFGH",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 124,
+    "end_leaf": 124,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 354,
+    "end_leaf": 518,
+    "leaves": 165
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 610,
+    "end_leaf": 636,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 754,
+    "end_leaf": 754,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 816,
+    "end_leaf": 816,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 956,
+    "end_leaf": 956,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 1036,
+    "end_leaf": 1118,
+    "leaves": 83
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    83,
+    123,
+    19
+   ],
+   "B": [
+    125,
+    353,
+    109
+   ],
+   "C": [
+    519,
+    609,
+    39
+   ],
+   "D": [
+    637,
+    753,
+    57
+   ],
+   "E": [
+    755,
+    815,
+    28
+   ],
+   "F": [
+    817,
+    955,
+    58
+   ],
+   "G": [
+    957,
+    1035,
+    36
+   ],
+   "H": [
+    1119,
+    1155,
+    15
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 33,
+   "end_leaf": 1155
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

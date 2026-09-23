@@ -411,5 +411,181 @@
   "words_gz_bytes": 5712220,
   "hocr_deleted": true,
   "elapsed_s": 13
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 19,
+  "end_leaf": 423,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.975,
+  "flags": [],
+  "start": {
+   "leaf": 19,
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$19/full/!1400,1400/0/default.jpg",
+   "quote": "Aagier Francis, printer, 281 Houston"
+  },
+  "end": {
+   "leaf": 423,
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$423/full/!1400,1400/0/default.jpg",
+   "quote": "Zwueck. Christian, cabinetmaker, 43 Pitt, h. 43 Pitt"
+  },
+  "sections": [
+   {
+    "start_leaf": 19,
+    "end_leaf": 423,
+    "voting_leaves": 395,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    19,
+    29,
+    11
+   ],
+   "B": [
+    30,
+    69,
+    40
+   ],
+   "C": [
+    70,
+    101,
+    32
+   ],
+   "D": [
+    102,
+    123,
+    22
+   ],
+   "E": [
+    124,
+    129,
+    6
+   ],
+   "F": [
+    130,
+    150,
+    15
+   ],
+   "G": [
+    151,
+    167,
+    17
+   ],
+   "H": [
+    168,
+    199,
+    32
+   ],
+   "I": [
+    200,
+    200,
+    1
+   ],
+   "J": [
+    201,
+    209,
+    9
+   ],
+   "K": [
+    210,
+    221,
+    12
+   ],
+   "L": [
+    222,
+    239,
+    18
+   ],
+   "M": [
+    240,
+    280,
+    39
+   ],
+   "N": [
+    281,
+    286,
+    6
+   ],
+   "O": [
+    287,
+    292,
+    6
+   ],
+   "P": [
+    293,
+    309,
+    17
+   ],
+   "Q": [
+    310,
+    310,
+    1
+   ],
+   "R": [
+    311,
+    329,
+    19
+   ],
+   "S": [
+    330,
+    368,
+    37
+   ],
+   "T": [
+    369,
+    383,
+    15
+   ],
+   "U": [
+    384,
+    384,
+    1
+   ],
+   "V": [
+    385,
+    392,
+    8
+   ],
+   "W": [
+    393,
+    420,
+    28
+   ],
+   "Y": [
+    421,
+    422,
+    2
+   ],
+   "Z": [
+    423,
+    423,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 19,
+   "end_leaf": 423
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

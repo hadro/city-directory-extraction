@@ -324,5 +324,227 @@
   "words_gz_bytes": 15265067,
   "hocr_deleted": true,
   "elapsed_s": 33
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 35,
+  "end_leaf": 1256,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.905,
+  "flags": [],
+  "start": {
+   "leaf": 35,
+   "image": "https://iiif.archive.org/iiif/1886BPL$35/full/!1400,1400/0/default.jpg",
+   "quote": "Aalbue Ole, machinist, h 130 Wolcott"
+  },
+  "end": {
+   "leaf": 1256,
+   "image": "https://iiif.archive.org/iiif/1886BPL$1256/full/!1400,1400/0/default.jpg",
+   "quote": "Zyfers Henry G. cabinetmkr b 369 S. 5th"
+  },
+  "sections": [
+   {
+    "start_leaf": 35,
+    "end_leaf": 1256,
+    "voting_leaves": 1106,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 151,
+    "end_leaf": 191,
+    "leaves": 41
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 283,
+    "end_leaf": 283,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 713,
+    "end_leaf": 787,
+    "leaves": 75
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 847,
+    "end_leaf": 847,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 940,
+    "end_leaf": 940,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    35,
+    63,
+    27
+   ],
+   "B": [
+    64,
+    150,
+    79
+   ],
+   "C": [
+    192,
+    282,
+    85
+   ],
+   "D": [
+    284,
+    347,
+    62
+   ],
+   "E": [
+    348,
+    368,
+    21
+   ],
+   "F": [
+    369,
+    418,
+    50
+   ],
+   "G": [
+    419,
+    472,
+    52
+   ],
+   "H": [
+    473,
+    567,
+    93
+   ],
+   "I": [
+    568,
+    571,
+    4
+   ],
+   "J": [
+    572,
+    597,
+    22
+   ],
+   "K": [
+    598,
+    658,
+    55
+   ],
+   "L": [
+    659,
+    712,
+    50
+   ],
+   "M": [
+    788,
+    846,
+    59
+   ],
+   "N": [
+    848,
+    869,
+    19
+   ],
+   "O": [
+    870,
+    890,
+    21
+   ],
+   "P": [
+    891,
+    935,
+    43
+   ],
+   "Q": [
+    936,
+    939,
+    4
+   ],
+   "R": [
+    941,
+    1000,
+    44
+   ],
+   "S": [
+    1001,
+    1121,
+    119
+   ],
+   "T": [
+    1122,
+    1155,
+    34
+   ],
+   "U": [
+    1156,
+    1157,
+    2
+   ],
+   "V": [
+    1158,
+    1174,
+    17
+   ],
+   "W": [
+    1175,
+    1248,
+    74
+   ],
+   "Y": [
+    1249,
+    1252,
+    4
+   ],
+   "Z": [
+    1253,
+    1256,
+    4
+   ]
+  },
+  "skipped_votes": 22,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 35,
+   "end_leaf": 1256
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -344,5 +344,204 @@
   "words_gz_bytes": 13568664,
   "hocr_deleted": true,
   "elapsed_s": 29
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1107,
+  "first_letter": "H",
+  "last_letter": "R",
+  "letters_present": "HIJKLMNOPQR",
+  "missing_letters": "ABCDEFGSTUVWXYZ",
+  "voting_density": 0.379,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p2trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "HalUr Jaioli sluxs r -lilt W \u2022I'.lth"
+  },
+  "end": {
+   "leaf": 1107,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p2trow$1107/full/!1400,1400/0/default.jpg",
+   "quote": "Rattngllata Louis prnccr 473 Pearl"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1107,
+    "voting_leaves": 417,
+    "first_letter": "H",
+    "last_letter": "R",
+    "letters": "HIJKLMNOPQR",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 208,
+    "end_leaf": 208,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 224,
+    "end_leaf": 236,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 254,
+    "end_leaf": 322,
+    "leaves": 69
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 420,
+    "end_leaf": 502,
+    "leaves": 83
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 574,
+    "end_leaf": 576,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 630,
+    "end_leaf": 894,
+    "leaves": 265
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 922,
+    "end_leaf": 922,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 972,
+    "end_leaf": 972,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1086,
+    "end_leaf": 1086,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1090,
+    "end_leaf": 1094,
+    "leaves": 5
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    47,
+    207,
+    69
+   ],
+   "I": [
+    209,
+    223,
+    8
+   ],
+   "J": [
+    237,
+    253,
+    8
+   ],
+   "K": [
+    323,
+    419,
+    45
+   ],
+   "L": [
+    503,
+    573,
+    33
+   ],
+   "M": [
+    577,
+    629,
+    25
+   ],
+   "N": [
+    895,
+    921,
+    12
+   ],
+   "O": [
+    923,
+    971,
+    20
+   ],
+   "P": [
+    973,
+    1085,
+    53
+   ],
+   "Q": [
+    1087,
+    1089,
+    2
+   ],
+   "R": [
+    1095,
+    1107,
+    7
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1107
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

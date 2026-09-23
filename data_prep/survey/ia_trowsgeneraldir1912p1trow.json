@@ -337,5 +337,162 @@
   "words_gz_bytes": 16394023,
   "hocr_deleted": true,
   "elapsed_s": 116
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 49,
+  "end_leaf": 1307,
+  "first_letter": "A",
+  "last_letter": "H",
+  "letters_present": "ABCDEFGH",
+  "missing_letters": "IJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.434,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 49,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$49/full/!1400,1400/0/default.jpg",
+   "quote": "Aaronberg Harry h66 W117th"
+  },
+  "end": {
+   "leaf": 1307,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$1307/full/!1400,1400/0/default.jpg",
+   "quote": "Harding Adolphus F treas 47 W 135th 4"
+  },
+  "sections": [
+   {
+    "start_leaf": 49,
+    "end_leaf": 1307,
+    "voting_leaves": 546,
+    "first_letter": "A",
+    "last_letter": "H",
+    "letters": "ABCDEFGH",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 152,
+    "end_leaf": 152,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 398,
+    "end_leaf": 456,
+    "leaves": 59
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 544,
+    "end_leaf": 708,
+    "leaves": 165
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 836,
+    "end_leaf": 836,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 906,
+    "end_leaf": 906,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 1068,
+    "end_leaf": 1068,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 1152,
+    "end_leaf": 1266,
+    "leaves": 115
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    103,
+    151,
+    23
+   ],
+   "B": [
+    153,
+    397,
+    116
+   ],
+   "C": [
+    457,
+    543,
+    43
+   ],
+   "D": [
+    709,
+    835,
+    61
+   ],
+   "E": [
+    837,
+    905,
+    33
+   ],
+   "F": [
+    907,
+    1067,
+    67
+   ],
+   "G": [
+    1069,
+    1151,
+    40
+   ],
+   "H": [
+    1267,
+    1307,
+    18
+   ]
+  },
+  "skipped_votes": 6,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 49,
+   "end_leaf": 1307
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

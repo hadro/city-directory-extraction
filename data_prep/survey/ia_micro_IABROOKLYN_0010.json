@@ -361,5 +361,166 @@
   "words_gz_bytes": 297309,
   "hocr_deleted": true,
   "elapsed_s": 19
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 4,
+  "end_leaf": 93,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDFGHJKLMNOPRSTVWY",
+  "missing_letters": "EIQUXZ",
+  "voting_density": 0.956,
+  "flags": [],
+  "start": {
+   "leaf": 4,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0010$4/full/!1400,1400/0/default.jpg",
+   "quote": "Abel Elisha, merchant 229 Fulton"
+  },
+  "end": {
+   "leaf": 93,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0010$93/full/!1400,1400/0/default.jpg",
+   "quote": "Youngs Carl, marketman 133-Concord"
+  },
+  "sections": [
+   {
+    "start_leaf": 4,
+    "end_leaf": 93,
+    "voting_leaves": 86,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDFGHJKLMNOPRSTVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "D",
+     "F"
+    ],
+    "start_leaf": 28,
+    "end_leaf": 28,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    4,
+    6,
+    3
+   ],
+   "B": [
+    7,
+    15,
+    9
+   ],
+   "C": [
+    16,
+    22,
+    7
+   ],
+   "D": [
+    23,
+    27,
+    5
+   ],
+   "F": [
+    29,
+    32,
+    4
+   ],
+   "G": [
+    33,
+    35,
+    3
+   ],
+   "H": [
+    36,
+    42,
+    7
+   ],
+   "J": [
+    43,
+    45,
+    3
+   ],
+   "K": [
+    46,
+    47,
+    2
+   ],
+   "L": [
+    48,
+    53,
+    4
+   ],
+   "M": [
+    54,
+    59,
+    6
+   ],
+   "N": [
+    60,
+    60,
+    1
+   ],
+   "O": [
+    61,
+    61,
+    1
+   ],
+   "P": [
+    62,
+    65,
+    4
+   ],
+   "R": [
+    66,
+    70,
+    5
+   ],
+   "S": [
+    71,
+    80,
+    9
+   ],
+   "T": [
+    81,
+    83,
+    3
+   ],
+   "V": [
+    84,
+    86,
+    3
+   ],
+   "W": [
+    87,
+    92,
+    6
+   ],
+   "Y": [
+    93,
+    93,
+    1
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 4,
+   "end_leaf": 93
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -360,5 +360,259 @@
   "words_gz_bytes": 435336,
   "hocr_deleted": true,
   "elapsed_s": 7
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 17,
+  "end_leaf": 225,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDHJKLMOPRSTUVW",
+  "missing_letters": "EFGINQXYZ",
+  "voting_density": 0.44,
+  "flags": [],
+  "start": {
+   "leaf": 17,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$17/full/!1400,1400/0/default.jpg",
+   "quote": "Andrews Andrews Thoms bard"
+  },
+  "end": {
+   "leaf": 225,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$225/full/!1400,1400/0/default.jpg",
+   "quote": "Witte'G A, : m9Ve ts had beet!"
+  },
+  "sections": [
+   {
+    "start_leaf": 17,
+    "end_leaf": 225,
+    "voting_leaves": 92,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDHJKLMOPRSTUVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 18,
+    "end_leaf": 18,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 40,
+    "end_leaf": 47,
+    "leaves": 8
+   },
+   {
+    "between": [
+     "D",
+     "H"
+    ],
+    "start_leaf": 73,
+    "end_leaf": 105,
+    "leaves": 33
+   },
+   {
+    "between": [
+     "H",
+     "J"
+    ],
+    "start_leaf": 114,
+    "end_leaf": 115,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 118,
+    "end_leaf": 120,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 125,
+    "end_leaf": 128,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 132,
+    "end_leaf": 133,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "M",
+     "O"
+    ],
+    "start_leaf": 146,
+    "end_leaf": 163,
+    "leaves": 18
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 166,
+    "end_leaf": 173,
+    "leaves": 8
+   },
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 176,
+    "end_leaf": 176,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 187,
+    "end_leaf": 189,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 206,
+    "end_leaf": 206,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 219,
+    "end_leaf": 219,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    17,
+    17,
+    1
+   ],
+   "B": [
+    19,
+    39,
+    9
+   ],
+   "C": [
+    48,
+    62,
+    14
+   ],
+   "D": [
+    63,
+    72,
+    9
+   ],
+   "H": [
+    106,
+    113,
+    4
+   ],
+   "J": [
+    116,
+    117,
+    2
+   ],
+   "K": [
+    121,
+    124,
+    4
+   ],
+   "L": [
+    129,
+    131,
+    2
+   ],
+   "M": [
+    134,
+    145,
+    9
+   ],
+   "O": [
+    164,
+    165,
+    2
+   ],
+   "P": [
+    174,
+    175,
+    2
+   ],
+   "R": [
+    177,
+    186,
+    7
+   ],
+   "S": [
+    190,
+    205,
+    11
+   ],
+   "T": [
+    207,
+    213,
+    7
+   ],
+   "U": [
+    214,
+    214,
+    1
+   ],
+   "V": [
+    215,
+    218,
+    4
+   ],
+   "W": [
+    220,
+    225,
+    3
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 17,
+   "end_leaf": 225
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

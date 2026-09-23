@@ -379,5 +379,221 @@
   "words_gz_bytes": 935077,
   "hocr_deleted": true,
   "elapsed_s": 8
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 22,
+  "end_leaf": 344,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHJKLMNOPQRSTVWY",
+  "missing_letters": "IUXZ",
+  "voting_density": 0.842,
+  "flags": [],
+  "start": {
+   "leaf": 22,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$22/full/!1400,1400/0/default.jpg",
+   "quote": "Abrahams coroner ene 55 outed"
+  },
+  "end": {
+   "leaf": 344,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$344/full/!1400,1400/0/default.jpg",
+   "quote": "Younnie James, plasterer 269 Adams"
+  },
+  "sections": [
+   {
+    "start_leaf": 22,
+    "end_leaf": 344,
+    "voting_leaves": 272,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHJKLMNOPQRSTVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 90,
+    "end_leaf": 90,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 110,
+    "end_leaf": 110,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 127,
+    "end_leaf": 127,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "J"
+    ],
+    "start_leaf": 165,
+    "end_leaf": 166,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 221,
+    "end_leaf": 236,
+    "leaves": 16
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 305,
+    "end_leaf": 305,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    22,
+    28,
+    5
+   ],
+   "B": [
+    29,
+    61,
+    33
+   ],
+   "C": [
+    62,
+    89,
+    24
+   ],
+   "D": [
+    91,
+    109,
+    19
+   ],
+   "E": [
+    111,
+    114,
+    4
+   ],
+   "F": [
+    115,
+    126,
+    12
+   ],
+   "G": [
+    128,
+    139,
+    12
+   ],
+   "H": [
+    140,
+    164,
+    21
+   ],
+   "J": [
+    167,
+    172,
+    5
+   ],
+   "K": [
+    173,
+    182,
+    8
+   ],
+   "L": [
+    183,
+    196,
+    13
+   ],
+   "M": [
+    197,
+    220,
+    23
+   ],
+   "N": [
+    237,
+    240,
+    4
+   ],
+   "O": [
+    241,
+    246,
+    4
+   ],
+   "P": [
+    247,
+    259,
+    13
+   ],
+   "Q": [
+    260,
+    261,
+    2
+   ],
+   "R": [
+    262,
+    276,
+    15
+   ],
+   "S": [
+    277,
+    304,
+    24
+   ],
+   "T": [
+    306,
+    316,
+    7
+   ],
+   "V": [
+    317,
+    322,
+    5
+   ],
+   "W": [
+    323,
+    342,
+    17
+   ],
+   "Y": [
+    343,
+    344,
+    2
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 23,
+   "end_leaf": 344
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

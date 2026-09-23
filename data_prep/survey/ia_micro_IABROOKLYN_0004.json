@@ -377,5 +377,155 @@
   "words_gz_bytes": 155689,
   "hocr_deleted": true,
   "elapsed_s": 2
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 5,
+  "end_leaf": 41,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDFHJLMNPRSTVW",
+  "missing_letters": "EGIKOQUXYZ",
+  "voting_density": 0.892,
+  "flags": [],
+  "start": {
+   "leaf": 5,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$5/full/!1400,1400/0/default.jpg",
+   "quote": "Ansor DANIEL, tavern & livery stable, 14 Main c."
+  },
+  "end": {
+   "leaf": 41,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$41/full/!1400,1400/0/default.jpg",
+   "quote": "Wright Frost, carpenter, 103 Sands"
+  },
+  "sections": [
+   {
+    "start_leaf": 5,
+    "end_leaf": 41,
+    "voting_leaves": 33,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDFHJLMNPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 22,
+    "end_leaf": 22,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 31,
+    "end_leaf": 33,
+    "leaves": 3
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    5,
+    5,
+    1
+   ],
+   "B": [
+    6,
+    10,
+    5
+   ],
+   "C": [
+    11,
+    12,
+    2
+   ],
+   "D": [
+    13,
+    14,
+    2
+   ],
+   "F": [
+    15,
+    15,
+    1
+   ],
+   "H": [
+    16,
+    17,
+    2
+   ],
+   "J": [
+    18,
+    19,
+    2
+   ],
+   "L": [
+    20,
+    21,
+    2
+   ],
+   "M": [
+    23,
+    25,
+    3
+   ],
+   "N": [
+    26,
+    26,
+    1
+   ],
+   "P": [
+    27,
+    28,
+    2
+   ],
+   "R": [
+    29,
+    30,
+    2
+   ],
+   "S": [
+    34,
+    35,
+    2
+   ],
+   "T": [
+    36,
+    37,
+    2
+   ],
+   "V": [
+    38,
+    38,
+    1
+   ],
+   "W": [
+    39,
+    41,
+    3
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 5,
+   "end_leaf": 41
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

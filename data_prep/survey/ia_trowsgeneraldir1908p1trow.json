@@ -355,5 +355,134 @@
   "words_gz_bytes": 11757416,
   "hocr_deleted": true,
   "elapsed_s": 61
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 113,
+  "end_leaf": 1059,
+  "first_letter": "A",
+  "last_letter": "F",
+  "letters_present": "ABCDEF",
+  "missing_letters": "GHIJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.407,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 113,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$113/full/!1400,1400/0/default.jpg",
+   "quote": "Aarons Abram stencils 16% University pi"
+  },
+  "end": {
+   "leaf": 1059,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$1059/full/!1400,1400/0/default.jpg",
+   "quote": "Farley A E li 214 W S3d"
+  },
+  "sections": [
+   {
+    "start_leaf": 113,
+    "end_leaf": 1059,
+    "voting_leaves": 385,
+    "first_letter": "A",
+    "last_letter": "F",
+    "letters": "ABCDEF",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 224,
+    "end_leaf": 224,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 492,
+    "end_leaf": 690,
+    "leaves": 199
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 800,
+    "end_leaf": 830,
+    "leaves": 31
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 910,
+    "end_leaf": 970,
+    "leaves": 61
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 1048,
+    "end_leaf": 1048,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    175,
+    223,
+    23
+   ],
+   "B": [
+    225,
+    491,
+    124
+   ],
+   "C": [
+    691,
+    799,
+    45
+   ],
+   "D": [
+    831,
+    909,
+    35
+   ],
+   "E": [
+    971,
+    1047,
+    31
+   ],
+   "F": [
+    1049,
+    1059,
+    6
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 113,
+   "end_leaf": 1059
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -337,5 +337,218 @@
   "words_gz_bytes": 5055942,
   "hocr_deleted": true,
   "elapsed_s": 42
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 5,
+  "end_leaf": 508,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.903,
+  "flags": [],
+  "start": {
+   "leaf": 5,
+   "image": "https://iiif.archive.org/iiif/1862BPL$5/full/!1400,1400/0/default.jpg",
+   "quote": "Aarons Aaron, hats and caps, N. Y. h. 30 Myr-"
+  },
+  "end": {
+   "leaf": 508,
+   "image": "https://iiif.archive.org/iiif/1862BPL$508/full/!1400,1400/0/default.jpg",
+   "quote": "Zyla Bobert, gardener, h. Marcy av. c. Madi-"
+  },
+  "sections": [
+   {
+    "start_leaf": 5,
+    "end_leaf": 508,
+    "voting_leaves": 455,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 235,
+    "end_leaf": 236,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 276,
+    "end_leaf": 309,
+    "leaves": 34
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 398,
+    "end_leaf": 398,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 507,
+    "end_leaf": 507,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    5,
+    15,
+    11
+   ],
+   "B": [
+    16,
+    63,
+    46
+   ],
+   "C": [
+    64,
+    101,
+    38
+   ],
+   "D": [
+    102,
+    130,
+    27
+   ],
+   "E": [
+    131,
+    138,
+    8
+   ],
+   "F": [
+    139,
+    159,
+    21
+   ],
+   "G": [
+    160,
+    181,
+    22
+   ],
+   "H": [
+    182,
+    223,
+    40
+   ],
+   "I": [
+    224,
+    224,
+    1
+   ],
+   "J": [
+    225,
+    234,
+    10
+   ],
+   "K": [
+    237,
+    254,
+    18
+   ],
+   "L": [
+    255,
+    275,
+    21
+   ],
+   "M": [
+    310,
+    339,
+    26
+   ],
+   "N": [
+    340,
+    346,
+    7
+   ],
+   "O": [
+    347,
+    354,
+    8
+   ],
+   "P": [
+    355,
+    373,
+    19
+   ],
+   "Q": [
+    374,
+    375,
+    2
+   ],
+   "R": [
+    376,
+    397,
+    11
+   ],
+   "S": [
+    399,
+    448,
+    46
+   ],
+   "T": [
+    449,
+    463,
+    15
+   ],
+   "U": [
+    464,
+    465,
+    2
+   ],
+   "V": [
+    466,
+    472,
+    7
+   ],
+   "W": [
+    473,
+    505,
+    33
+   ],
+   "Y": [
+    506,
+    506,
+    1
+   ],
+   "Z": [
+    508,
+    508,
+    1
+   ]
+  },
+  "skipped_votes": 9,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 5,
+   "end_leaf": 508
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

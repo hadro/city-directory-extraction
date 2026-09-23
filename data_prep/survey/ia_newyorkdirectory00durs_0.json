@@ -391,5 +391,151 @@
   "words_gz_bytes": 187318,
   "hocr_deleted": true,
   "elapsed_s": 5
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 30,
+  "end_leaf": 62,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMNPRSTVW",
+  "missing_letters": "IOQUXYZ",
+  "voting_density": 1.0,
+  "flags": [],
+  "start": {
+   "leaf": 30,
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$30/full/!1400,1400/0/default.jpg",
+   "quote": "Asli Tho. Winds, cliair maker, 31, John-st"
+  },
+  "end": {
+   "leaf": 62,
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$62/full/!1400,1400/0/default.jpg",
+   "quote": "Wilks J. merchant, 235, Queen-street"
+  },
+  "sections": [
+   {
+    "start_leaf": 30,
+    "end_leaf": 62,
+    "voting_leaves": 33,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMNPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    30,
+    30,
+    1
+   ],
+   "B": [
+    31,
+    33,
+    3
+   ],
+   "C": [
+    34,
+    36,
+    3
+   ],
+   "D": [
+    37,
+    37,
+    1
+   ],
+   "E": [
+    38,
+    38,
+    1
+   ],
+   "F": [
+    39,
+    39,
+    1
+   ],
+   "G": [
+    40,
+    41,
+    2
+   ],
+   "H": [
+    42,
+    43,
+    2
+   ],
+   "J": [
+    44,
+    44,
+    1
+   ],
+   "K": [
+    45,
+    45,
+    1
+   ],
+   "L": [
+    46,
+    47,
+    2
+   ],
+   "M": [
+    48,
+    50,
+    3
+   ],
+   "N": [
+    51,
+    51,
+    1
+   ],
+   "P": [
+    52,
+    52,
+    1
+   ],
+   "R": [
+    53,
+    54,
+    2
+   ],
+   "S": [
+    55,
+    57,
+    3
+   ],
+   "T": [
+    58,
+    59,
+    2
+   ],
+   "V": [
+    60,
+    60,
+    1
+   ],
+   "W": [
+    61,
+    62,
+    2
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 30,
+   "end_leaf": 62
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

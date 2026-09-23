@@ -342,5 +342,172 @@
   "words_gz_bytes": 12149981,
   "hocr_deleted": true,
   "elapsed_s": 30
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 809,
+  "first_letter": "R",
+  "last_letter": "Z",
+  "letters_present": "RSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKLMNOPQX",
+  "voting_density": 0.406,
+  "flags": [
+   "multi-section",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p3trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Raltey V. (firm of) wire 228 W 26th"
+  },
+  "end": {
+   "leaf": 809,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p3trow$809/full/!1400,1400/0/default.jpg",
+   "quote": "Zytson Jus cloaks 24 Ooerck"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 809,
+    "voting_leaves": 325,
+    "first_letter": "R",
+    "last_letter": "Z",
+    "letters": "RSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1001,
+    "end_leaf": 1033,
+    "voting_leaves": 7,
+    "first_letter": "L",
+    "last_letter": "L",
+    "letters": "L",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 142,
+    "end_leaf": 148,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 334,
+    "end_leaf": 476,
+    "leaves": 143
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 558,
+    "end_leaf": 558,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 572,
+    "end_leaf": 572,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 610,
+    "end_leaf": 610,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 704,
+    "end_leaf": 784,
+    "leaves": 81
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 794,
+    "end_leaf": 794,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "R": [
+    77,
+    141,
+    27
+   ],
+   "S": [
+    149,
+    333,
+    83
+   ],
+   "T": [
+    477,
+    557,
+    36
+   ],
+   "U": [
+    559,
+    571,
+    5
+   ],
+   "V": [
+    573,
+    609,
+    19
+   ],
+   "W": [
+    611,
+    703,
+    37
+   ],
+   "Y": [
+    785,
+    793,
+    4
+   ],
+   "Z": [
+    795,
+    809,
+    8
+   ]
+  },
+  "skipped_votes": 1,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 809
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -360,5 +360,260 @@
   "words_gz_bytes": 8965380,
   "hocr_deleted": true,
   "elapsed_s": 40
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1119,
+  "first_letter": "K",
+  "last_letter": "Z",
+  "letters_present": "KLMNOPQRSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJX",
+  "voting_density": 0.367,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1908geor$9/full/!1400,1400/0/default.jpg",
+   "quote": "Kuntz David dry gds 531 Marcy av h 521"
+  },
+  "end": {
+   "leaf": 1119,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1908geor$1119/full/!1400,1400/0/default.jpg",
+   "quote": "Zynn Abraham clothing 794 Grand"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1119,
+    "voting_leaves": 408,
+    "first_letter": "K",
+    "last_letter": "Z",
+    "letters": "KLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 10,
+    "end_leaf": 10,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 108,
+    "end_leaf": 266,
+    "leaves": 159
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 312,
+    "end_leaf": 332,
+    "leaves": 21
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 374,
+    "end_leaf": 374,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 416,
+    "end_leaf": 416,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 500,
+    "end_leaf": 500,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 504,
+    "end_leaf": 506,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 616,
+    "end_leaf": 620,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 750,
+    "end_leaf": 886,
+    "leaves": 137
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 922,
+    "end_leaf": 924,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 928,
+    "end_leaf": 928,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 960,
+    "end_leaf": 998,
+    "leaves": 39
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 1052,
+    "end_leaf": 1100,
+    "leaves": 49
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 1108,
+    "end_leaf": 1108,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "K": [
+    9,
+    9,
+    1
+   ],
+   "L": [
+    11,
+    107,
+    43
+   ],
+   "M": [
+    267,
+    311,
+    19
+   ],
+   "N": [
+    333,
+    373,
+    17
+   ],
+   "O": [
+    375,
+    415,
+    16
+   ],
+   "P": [
+    417,
+    499,
+    38
+   ],
+   "Q": [
+    501,
+    503,
+    2
+   ],
+   "R": [
+    507,
+    615,
+    42
+   ],
+   "S": [
+    621,
+    749,
+    57
+   ],
+   "T": [
+    887,
+    921,
+    18
+   ],
+   "U": [
+    925,
+    927,
+    2
+   ],
+   "V": [
+    929,
+    959,
+    16
+   ],
+   "W": [
+    999,
+    1051,
+    24
+   ],
+   "Y": [
+    1101,
+    1107,
+    3
+   ],
+   "Z": [
+    1109,
+    1119,
+    5
+   ]
+  },
+  "skipped_votes": 11,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1119
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

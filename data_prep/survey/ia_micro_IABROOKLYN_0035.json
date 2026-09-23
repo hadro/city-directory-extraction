@@ -401,5 +401,258 @@
   "words_gz_bytes": 2978376,
   "hocr_deleted": true,
   "elapsed_s": 16
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 39,
+  "end_leaf": 528,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHJKLMNOPQRSTUVWYZ",
+  "missing_letters": "IX",
+  "voting_density": 0.841,
+  "flags": [],
+  "start": {
+   "leaf": 39,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$39/full/!1400,1400/0/default.jpg",
+   "quote": "Abercrombie George, shoemaker, h. 3 Bridge"
+  },
+  "end": {
+   "leaf": 528,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$528/full/!1400,1400/0/default.jpg",
+   "quote": "Zundortf Louise, 145} Lawrence"
+  },
+  "sections": [
+   {
+    "start_leaf": 39,
+    "end_leaf": 528,
+    "voting_leaves": 412,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 93,
+    "end_leaf": 93,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 130,
+    "end_leaf": 130,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 164,
+    "end_leaf": 164,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 205,
+    "end_leaf": 205,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "J"
+    ],
+    "start_leaf": 243,
+    "end_leaf": 243,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 291,
+    "end_leaf": 311,
+    "leaves": 21
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 383,
+    "end_leaf": 383,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 407,
+    "end_leaf": 407,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 486,
+    "end_leaf": 487,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    39,
+    48,
+    10
+   ],
+   "B": [
+    49,
+    92,
+    41
+   ],
+   "C": [
+    94,
+    129,
+    32
+   ],
+   "D": [
+    131,
+    157,
+    22
+   ],
+   "E": [
+    158,
+    163,
+    6
+   ],
+   "F": [
+    165,
+    184,
+    16
+   ],
+   "G": [
+    185,
+    204,
+    18
+   ],
+   "H": [
+    206,
+    242,
+    33
+   ],
+   "J": [
+    244,
+    252,
+    9
+   ],
+   "K": [
+    253,
+    270,
+    16
+   ],
+   "L": [
+    271,
+    290,
+    20
+   ],
+   "M": [
+    312,
+    344,
+    31
+   ],
+   "N": [
+    345,
+    352,
+    6
+   ],
+   "O": [
+    353,
+    360,
+    8
+   ],
+   "P": [
+    361,
+    381,
+    17
+   ],
+   "Q": [
+    382,
+    382,
+    1
+   ],
+   "R": [
+    384,
+    406,
+    23
+   ],
+   "S": [
+    408,
+    458,
+    44
+   ],
+   "T": [
+    459,
+    476,
+    14
+   ],
+   "U": [
+    477,
+    477,
+    1
+   ],
+   "V": [
+    478,
+    485,
+    8
+   ],
+   "W": [
+    488,
+    525,
+    32
+   ],
+   "Y": [
+    526,
+    527,
+    2
+   ],
+   "Z": [
+    528,
+    528,
+    1
+   ]
+  },
+  "skipped_votes": 7,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 39,
+   "end_leaf": 528
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

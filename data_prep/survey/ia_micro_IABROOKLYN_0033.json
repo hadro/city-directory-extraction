@@ -371,5 +371,240 @@
   "words_gz_bytes": 2309381,
   "hocr_deleted": true,
   "elapsed_s": 12
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 66,
+  "end_leaf": 590,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
+  "missing_letters": "XZ",
+  "voting_density": 0.794,
+  "flags": [],
+  "start": {
+   "leaf": 66,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$66/full/!1400,1400/0/default.jpg",
+   "quote": "Adams Alexander, feed mer. 33 \u2014 N. V. h. Smith, cor. Butler"
+  },
+  "end": {
+   "leaf": 590,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$590/full/!1400,1400/0/default.jpg",
+   "quote": "Youngling Henry, \u2014\u2014 \u2014\u2014\u215ba"
+  },
+  "sections": [
+   {
+    "start_leaf": 66,
+    "end_leaf": 590,
+    "voting_leaves": 417,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 181,
+    "end_leaf": 181,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 221,
+    "end_leaf": 224,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 244,
+    "end_leaf": 244,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 318,
+    "end_leaf": 319,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 359,
+    "end_leaf": 399,
+    "leaves": 41
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 490,
+    "end_leaf": 491,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 552,
+    "end_leaf": 552,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    66,
+    76,
+    10
+   ],
+   "B": [
+    77,
+    129,
+    41
+   ],
+   "C": [
+    130,
+    180,
+    40
+   ],
+   "D": [
+    182,
+    212,
+    28
+   ],
+   "E": [
+    213,
+    220,
+    5
+   ],
+   "F": [
+    225,
+    243,
+    13
+   ],
+   "G": [
+    245,
+    265,
+    16
+   ],
+   "H": [
+    266,
+    305,
+    37
+   ],
+   "I": [
+    306,
+    307,
+    2
+   ],
+   "J": [
+    308,
+    317,
+    8
+   ],
+   "K": [
+    320,
+    334,
+    11
+   ],
+   "L": [
+    335,
+    358,
+    19
+   ],
+   "M": [
+    400,
+    424,
+    23
+   ],
+   "N": [
+    425,
+    432,
+    8
+   ],
+   "O": [
+    433,
+    442,
+    8
+   ],
+   "P": [
+    443,
+    462,
+    20
+   ],
+   "Q": [
+    463,
+    464,
+    2
+   ],
+   "R": [
+    465,
+    489,
+    25
+   ],
+   "S": [
+    492,
+    537,
+    43
+   ],
+   "T": [
+    538,
+    551,
+    12
+   ],
+   "U": [
+    553,
+    553,
+    1
+   ],
+   "V": [
+    554,
+    560,
+    7
+   ],
+   "W": [
+    561,
+    589,
+    27
+   ],
+   "Y": [
+    590,
+    590,
+    1
+   ]
+  },
+  "skipped_votes": 9,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 66,
+   "end_leaf": 590
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

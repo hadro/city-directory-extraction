@@ -405,5 +405,218 @@
    "filters_at": "02404bc-dirty",
    "derived": "2026-09-22"
   }
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 22,
+  "end_leaf": 508,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.887,
+  "flags": [],
+  "start": {
+   "leaf": 22,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$22/full/!1400,1400/0/default.jpg",
+   "quote": "Abrams ames"
+  },
+  "end": {
+   "leaf": 508,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$508/full/!1400,1400/0/default.jpg",
+   "quote": "Zwergius Julius, porter 287 Adams"
+  },
+  "sections": [
+   {
+    "start_leaf": 22,
+    "end_leaf": 508,
+    "voting_leaves": 432,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 251,
+    "end_leaf": 251,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 294,
+    "end_leaf": 305,
+    "leaves": 12
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 348,
+    "end_leaf": 353,
+    "leaves": 6
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 412,
+    "end_leaf": 412,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    22,
+    32,
+    11
+   ],
+   "B": [
+    33,
+    86,
+    51
+   ],
+   "C": [
+    87,
+    132,
+    46
+   ],
+   "D": [
+    133,
+    164,
+    31
+   ],
+   "E": [
+    165,
+    172,
+    8
+   ],
+   "F": [
+    173,
+    192,
+    20
+   ],
+   "G": [
+    193,
+    211,
+    19
+   ],
+   "H": [
+    212,
+    249,
+    34
+   ],
+   "I": [
+    250,
+    250,
+    1
+   ],
+   "J": [
+    252,
+    260,
+    9
+   ],
+   "K": [
+    261,
+    275,
+    14
+   ],
+   "L": [
+    276,
+    293,
+    17
+   ],
+   "M": [
+    306,
+    347,
+    33
+   ],
+   "N": [
+    354,
+    360,
+    7
+   ],
+   "O": [
+    361,
+    370,
+    8
+   ],
+   "P": [
+    371,
+    388,
+    14
+   ],
+   "Q": [
+    389,
+    390,
+    2
+   ],
+   "R": [
+    391,
+    411,
+    15
+   ],
+   "S": [
+    413,
+    452,
+    35
+   ],
+   "T": [
+    453,
+    467,
+    13
+   ],
+   "U": [
+    468,
+    468,
+    1
+   ],
+   "V": [
+    469,
+    476,
+    8
+   ],
+   "W": [
+    477,
+    505,
+    29
+   ],
+   "Y": [
+    506,
+    507,
+    2
+   ],
+   "Z": [
+    508,
+    508,
+    1
+   ]
+  },
+  "skipped_votes": 4,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 22,
+   "end_leaf": 508
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -349,5 +349,209 @@
   "words_gz_bytes": 5384915,
   "hocr_deleted": true,
   "elapsed_s": 14
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 13,
+  "end_leaf": 511,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.89,
+  "flags": [],
+  "start": {
+   "leaf": 13,
+   "image": "https://iiif.archive.org/iiif/1865BPL$13/full/!1400,1400/0/default.jpg",
+   "quote": "Aaden Margaret, wid. h 114 Concord"
+  },
+  "end": {
+   "leaf": 511,
+   "image": "https://iiif.archive.org/iiif/1865BPL$511/full/!1400,1400/0/default.jpg",
+   "quote": "Zung Ignatz, bootmaker, h. Flushing av. n."
+  },
+  "sections": [
+   {
+    "start_leaf": 13,
+    "end_leaf": 511,
+    "voting_leaves": 444,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 282,
+    "end_leaf": 310,
+    "leaves": 29
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 357,
+    "end_leaf": 358,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 476,
+    "end_leaf": 476,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    13,
+    23,
+    11
+   ],
+   "B": [
+    24,
+    73,
+    48
+   ],
+   "C": [
+    74,
+    115,
+    38
+   ],
+   "D": [
+    116,
+    142,
+    25
+   ],
+   "E": [
+    143,
+    150,
+    8
+   ],
+   "F": [
+    151,
+    169,
+    19
+   ],
+   "G": [
+    170,
+    192,
+    21
+   ],
+   "H": [
+    193,
+    231,
+    37
+   ],
+   "I": [
+    232,
+    235,
+    2
+   ],
+   "J": [
+    236,
+    243,
+    8
+   ],
+   "K": [
+    244,
+    261,
+    16
+   ],
+   "L": [
+    262,
+    281,
+    20
+   ],
+   "M": [
+    311,
+    341,
+    25
+   ],
+   "N": [
+    342,
+    348,
+    7
+   ],
+   "O": [
+    349,
+    356,
+    8
+   ],
+   "P": [
+    359,
+    375,
+    17
+   ],
+   "Q": [
+    376,
+    377,
+    2
+   ],
+   "R": [
+    378,
+    401,
+    17
+   ],
+   "S": [
+    402,
+    450,
+    45
+   ],
+   "T": [
+    451,
+    467,
+    15
+   ],
+   "U": [
+    468,
+    468,
+    1
+   ],
+   "V": [
+    469,
+    475,
+    7
+   ],
+   "W": [
+    477,
+    508,
+    32
+   ],
+   "Y": [
+    509,
+    509,
+    1
+   ],
+   "Z": [
+    510,
+    511,
+    2
+   ]
+  },
+  "skipped_votes": 7,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 13,
+   "end_leaf": 511
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

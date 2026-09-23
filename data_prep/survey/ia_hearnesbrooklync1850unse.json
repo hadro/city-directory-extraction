@@ -350,5 +350,176 @@
   "words_gz_bytes": 1576808,
   "hocr_deleted": true,
   "elapsed_s": 85
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 25,
+  "end_leaf": 418,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
+  "missing_letters": "XZ",
+  "voting_density": 0.964,
+  "flags": [],
+  "start": {
+   "leaf": 25,
+   "image": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$25/full/!1400,1400/0/default.jpg",
+   "quote": "Abbreviations : h. stands for house, n, for near, c. for corner, op. for"
+  },
+  "end": {
+   "leaf": 418,
+   "image": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$418/full/!1400,1400/0/default.jpg",
+   "quote": "Younie James, plasterer 269 Adams"
+  },
+  "sections": [
+   {
+    "start_leaf": 25,
+    "end_leaf": 418,
+    "voting_leaves": 380,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    25,
+    33,
+    9
+   ],
+   "B": [
+    34,
+    77,
+    42
+   ],
+   "C": [
+    78,
+    114,
+    33
+   ],
+   "D": [
+    115,
+    139,
+    23
+   ],
+   "E": [
+    140,
+    145,
+    6
+   ],
+   "F": [
+    146,
+    159,
+    14
+   ],
+   "G": [
+    160,
+    175,
+    16
+   ],
+   "H": [
+    176,
+    203,
+    28
+   ],
+   "I": [
+    204,
+    204,
+    1
+   ],
+   "J": [
+    205,
+    212,
+    8
+   ],
+   "K": [
+    213,
+    224,
+    12
+   ],
+   "L": [
+    225,
+    243,
+    17
+   ],
+   "M": [
+    244,
+    291,
+    46
+   ],
+   "N": [
+    292,
+    297,
+    6
+   ],
+   "O": [
+    298,
+    303,
+    6
+   ],
+   "P": [
+    304,
+    318,
+    15
+   ],
+   "Q": [
+    319,
+    319,
+    1
+   ],
+   "R": [
+    320,
+    339,
+    18
+   ],
+   "S": [
+    340,
+    373,
+    34
+   ],
+   "T": [
+    374,
+    384,
+    11
+   ],
+   "U": [
+    385,
+    385,
+    1
+   ],
+   "V": [
+    386,
+    392,
+    7
+   ],
+   "W": [
+    393,
+    416,
+    24
+   ],
+   "Y": [
+    417,
+    418,
+    2
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 25,
+   "end_leaf": 418
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

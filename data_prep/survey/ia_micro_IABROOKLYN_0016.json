@@ -371,5 +371,211 @@
   "words_gz_bytes": 280593,
   "hocr_deleted": true,
   "elapsed_s": 6
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 6,
+  "end_leaf": 145,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMNPQRSTVW",
+  "missing_letters": "IOUXYZ",
+  "voting_density": 0.729,
+  "flags": [],
+  "start": {
+   "leaf": 6,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$6/full/!1400,1400/0/default.jpg",
+   "quote": "Antony \u2018Alora Matthew, Th rospect."
+  },
+  "end": {
+   "leaf": 145,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$145/full/!1400,1400/0/default.jpg",
+   "quote": "Woodruff Hiram Jamaica toad 9th Ward"
+  },
+  "sections": [
+   {
+    "start_leaf": 6,
+    "end_leaf": 145,
+    "voting_leaves": 102,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMNPQRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 7,
+    "end_leaf": 7,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 19,
+    "end_leaf": 22,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 73,
+    "end_leaf": 75,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 87,
+    "end_leaf": 97,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "N",
+     "P"
+    ],
+    "start_leaf": 99,
+    "end_leaf": 100,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 128,
+    "end_leaf": 128,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    6,
+    6,
+    1
+   ],
+   "B": [
+    8,
+    18,
+    5
+   ],
+   "C": [
+    23,
+    35,
+    8
+   ],
+   "D": [
+    36,
+    44,
+    8
+   ],
+   "E": [
+    45,
+    47,
+    3
+   ],
+   "F": [
+    48,
+    52,
+    5
+   ],
+   "G": [
+    53,
+    57,
+    5
+   ],
+   "H": [
+    58,
+    67,
+    10
+   ],
+   "J": [
+    68,
+    71,
+    4
+   ],
+   "K": [
+    72,
+    72,
+    1
+   ],
+   "L": [
+    76,
+    81,
+    4
+   ],
+   "M": [
+    82,
+    86,
+    5
+   ],
+   "N": [
+    98,
+    98,
+    1
+   ],
+   "P": [
+    101,
+    107,
+    6
+   ],
+   "Q": [
+    108,
+    108,
+    1
+   ],
+   "R": [
+    109,
+    115,
+    6
+   ],
+   "S": [
+    116,
+    127,
+    12
+   ],
+   "T": [
+    129,
+    133,
+    5
+   ],
+   "V": [
+    134,
+    136,
+    3
+   ],
+   "W": [
+    137,
+    145,
+    9
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 4,
+   "end_leaf": 145
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

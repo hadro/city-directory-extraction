@@ -323,5 +323,148 @@
   "words_gz_bytes": 13637412,
   "hocr_deleted": true,
   "elapsed_s": 52
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 67,
+  "end_leaf": 1165,
+  "first_letter": "A",
+  "last_letter": "G",
+  "letters_present": "ABCDEFG",
+  "missing_letters": "HIJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.424,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 67,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$67/full/!1400,1400/0/default.jpg",
+   "quote": "Aaronberg Harry robes 113 Lenox av 1)124"
+  },
+  "end": {
+   "leaf": 1165,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$1165/full/!1400,1400/0/default.jpg",
+   "quote": "Grand av"
+  },
+  "sections": [
+   {
+    "start_leaf": 67,
+    "end_leaf": 1165,
+    "voting_leaves": 466,
+    "first_letter": "A",
+    "last_letter": "G",
+    "letters": "ABCDEFG",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 160,
+    "end_leaf": 160,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 390,
+    "end_leaf": 566,
+    "leaves": 177
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 660,
+    "end_leaf": 686,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 810,
+    "end_leaf": 816,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 876,
+    "end_leaf": 876,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 1008,
+    "end_leaf": 1028,
+    "leaves": 21
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    117,
+    159,
+    21
+   ],
+   "B": [
+    161,
+    389,
+    109
+   ],
+   "C": [
+    567,
+    659,
+    39
+   ],
+   "D": [
+    687,
+    809,
+    53
+   ],
+   "E": [
+    817,
+    875,
+    29
+   ],
+   "F": [
+    877,
+    1007,
+    57
+   ],
+   "G": [
+    1029,
+    1121,
+    43
+   ]
+  },
+  "skipped_votes": 7,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 67,
+   "end_leaf": 1167
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

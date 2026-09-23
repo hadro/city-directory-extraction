@@ -314,5 +314,204 @@
   "words_gz_bytes": 15696532,
   "hocr_deleted": true,
   "elapsed_s": 906
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 11,
+  "end_leaf": 1191,
+  "first_letter": "H",
+  "last_letter": "R",
+  "letters_present": "HIJKLMNOPQR",
+  "missing_letters": "ABCDEFGSTUVWXYZ",
+  "voting_density": 0.363,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 11,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p2trow$11/full/!1400,1400/0/default.jpg",
+   "quote": "Hall's Hair Dressing & Manicuring School"
+  },
+  "end": {
+   "leaf": 1191,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p2trow$1191/full/!1400,1400/0/default.jpg",
+   "quote": "Rogers nl"
+  },
+  "sections": [
+   {
+    "start_leaf": 11,
+    "end_leaf": 1191,
+    "voting_leaves": 429,
+    "first_letter": "H",
+    "last_letter": "R",
+    "letters": "HIJKLMNOPQR",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 186,
+    "end_leaf": 218,
+    "leaves": 33
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 236,
+    "end_leaf": 248,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 268,
+    "end_leaf": 342,
+    "leaves": 75
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 450,
+    "end_leaf": 450,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 522,
+    "end_leaf": 618,
+    "leaves": 97
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 706,
+    "end_leaf": 918,
+    "leaves": 213
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 944,
+    "end_leaf": 986,
+    "leaves": 43
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1038,
+    "end_leaf": 1038,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1162,
+    "end_leaf": 1162,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1170,
+    "end_leaf": 1170,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    73,
+    185,
+    48
+   ],
+   "I": [
+    219,
+    235,
+    8
+   ],
+   "J": [
+    249,
+    267,
+    10
+   ],
+   "K": [
+    343,
+    449,
+    49
+   ],
+   "L": [
+    451,
+    521,
+    30
+   ],
+   "M": [
+    619,
+    705,
+    35
+   ],
+   "N": [
+    919,
+    943,
+    11
+   ],
+   "O": [
+    987,
+    1037,
+    22
+   ],
+   "P": [
+    1039,
+    1161,
+    54
+   ],
+   "Q": [
+    1163,
+    1169,
+    3
+   ],
+   "R": [
+    1171,
+    1191,
+    11
+   ]
+  },
+  "skipped_votes": 5,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 11,
+   "end_leaf": 1191
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

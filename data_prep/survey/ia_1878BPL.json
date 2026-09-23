@@ -347,5 +347,200 @@
   "words_gz_bytes": 10949812,
   "hocr_deleted": true,
   "elapsed_s": 139
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 25,
+  "end_leaf": 1066,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.931,
+  "flags": [],
+  "start": {
+   "leaf": 25,
+   "image": "https://iiif.archive.org/iiif/1878BPL$25/full/!1400,1400/0/default.jpg",
+   "quote": "Aab George, engineer, h 152 Hopkins"
+  },
+  "end": {
+   "leaf": 1066,
+   "image": "https://iiif.archive.org/iiif/1878BPL$1066/full/!1400,1400/0/default.jpg",
+   "quote": "Zyfers Henry, eabinetmkr. h 339 S. 5th"
+  },
+  "sections": [
+   {
+    "start_leaf": 25,
+    "end_leaf": 1066,
+    "voting_leaves": 970,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 121,
+    "end_leaf": 157,
+    "leaves": 37
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 600,
+    "end_leaf": 666,
+    "leaves": 67
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    25,
+    47,
+    23
+   ],
+   "B": [
+    48,
+    120,
+    71
+   ],
+   "C": [
+    158,
+    238,
+    79
+   ],
+   "D": [
+    239,
+    295,
+    57
+   ],
+   "E": [
+    296,
+    312,
+    17
+   ],
+   "F": [
+    313,
+    355,
+    43
+   ],
+   "G": [
+    356,
+    402,
+    47
+   ],
+   "H": [
+    403,
+    482,
+    80
+   ],
+   "I": [
+    483,
+    486,
+    4
+   ],
+   "J": [
+    487,
+    505,
+    19
+   ],
+   "K": [
+    506,
+    551,
+    44
+   ],
+   "L": [
+    552,
+    599,
+    45
+   ],
+   "M": [
+    667,
+    717,
+    51
+   ],
+   "N": [
+    718,
+    734,
+    17
+   ],
+   "O": [
+    735,
+    752,
+    18
+   ],
+   "P": [
+    753,
+    791,
+    38
+   ],
+   "Q": [
+    792,
+    795,
+    4
+   ],
+   "R": [
+    796,
+    845,
+    40
+   ],
+   "S": [
+    846,
+    950,
+    100
+   ],
+   "T": [
+    951,
+    979,
+    29
+   ],
+   "U": [
+    980,
+    981,
+    2
+   ],
+   "V": [
+    982,
+    995,
+    14
+   ],
+   "W": [
+    996,
+    1060,
+    65
+   ],
+   "Y": [
+    1061,
+    1063,
+    3
+   ],
+   "Z": [
+    1064,
+    1066,
+    3
+   ]
+  },
+  "skipped_votes": 13,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 25,
+   "end_leaf": 1066
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

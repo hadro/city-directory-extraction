@@ -320,5 +320,204 @@
   "words_gz_bytes": 8738809,
   "hocr_deleted": true,
   "elapsed_s": 36
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 37,
+  "end_leaf": 1215,
+  "first_letter": "A",
+  "last_letter": "K",
+  "letters_present": "ABCDEFGHIJK",
+  "missing_letters": "LMNOPQRSTUVWXYZ",
+  "voting_density": 0.359,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 37,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1906geor$37/full/!1400,1400/0/default.jpg",
+   "quote": "Acct. accountant; agl. agricultural; agt. agent; Ala. Alabama; al alley; art."
+  },
+  "end": {
+   "leaf": 1215,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1906geor$1215/full/!1400,1400/0/default.jpg",
+   "quote": "Kober Geo W h 813 CJroone av"
+  },
+  "sections": [
+   {
+    "start_leaf": 37,
+    "end_leaf": 1215,
+    "voting_leaves": 423,
+    "first_letter": "A",
+    "last_letter": "K",
+    "letters": "ABCDEFGHIJK",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 104,
+    "end_leaf": 104,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 274,
+    "end_leaf": 352,
+    "leaves": 79
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 410,
+    "end_leaf": 532,
+    "leaves": 123
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 622,
+    "end_leaf": 624,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 670,
+    "end_leaf": 672,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 766,
+    "end_leaf": 768,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 882,
+    "end_leaf": 950,
+    "leaves": 69
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 1048,
+    "end_leaf": 1066,
+    "leaves": 19
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 1076,
+    "end_leaf": 1084,
+    "leaves": 9
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 1100,
+    "end_leaf": 1168,
+    "leaves": 69
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    37,
+    103,
+    27
+   ],
+   "B": [
+    105,
+    273,
+    71
+   ],
+   "C": [
+    353,
+    409,
+    25
+   ],
+   "D": [
+    533,
+    621,
+    35
+   ],
+   "E": [
+    625,
+    669,
+    19
+   ],
+   "F": [
+    673,
+    765,
+    35
+   ],
+   "G": [
+    769,
+    881,
+    48
+   ],
+   "H": [
+    951,
+    1047,
+    41
+   ],
+   "I": [
+    1067,
+    1075,
+    3
+   ],
+   "J": [
+    1085,
+    1099,
+    7
+   ],
+   "K": [
+    1169,
+    1191,
+    10
+   ]
+  },
+  "skipped_votes": 8,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 37,
+   "end_leaf": 1215
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

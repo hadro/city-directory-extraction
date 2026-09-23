@@ -305,5 +305,272 @@
   "words_gz_bytes": 25338088,
   "hocr_deleted": true,
   "elapsed_s": 3550
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 47,
+  "end_leaf": 1960,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.734,
+  "flags": [],
+  "start": {
+   "leaf": 47,
+   "image": "https://iiif.archive.org/iiif/1899xBPL$47/full/!1400,1400/0/default.jpg",
+   "quote": "Acct. accountant ; agl. agricultural ; agt. agent ; Ala Alabama ; al alley ; art. artificial ;"
+  },
+  "end": {
+   "leaf": 1960,
+   "image": "https://iiif.archive.org/iiif/1899xBPL$1960/full/!1400,1400/0/default.jpg",
+   "quote": "Zyndle Louisa, h 189 Rutledge"
+  },
+  "sections": [
+   {
+    "start_leaf": 47,
+    "end_leaf": 1960,
+    "voting_leaves": 1404,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 214,
+    "end_leaf": 254,
+    "leaves": 41
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 422,
+    "end_leaf": 422,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 502,
+    "end_leaf": 502,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 685,
+    "end_leaf": 687,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 708,
+    "end_leaf": 748,
+    "leaves": 41
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 919,
+    "end_leaf": 920,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 987,
+    "end_leaf": 1190,
+    "leaves": 204
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1280,
+    "end_leaf": 1319,
+    "leaves": 40
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 1485,
+    "end_leaf": 1491,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 1628,
+    "end_leaf": 1759,
+    "leaves": 132
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    47,
+    82,
+    29
+   ],
+   "B": [
+    83,
+    213,
+    115
+   ],
+   "C": [
+    255,
+    352,
+    76
+   ],
+   "D": [
+    353,
+    421,
+    55
+   ],
+   "E": [
+    423,
+    446,
+    23
+   ],
+   "F": [
+    447,
+    501,
+    49
+   ],
+   "G": [
+    503,
+    568,
+    61
+   ],
+   "H": [
+    569,
+    684,
+    91
+   ],
+   "I": [
+    688,
+    692,
+    4
+   ],
+   "J": [
+    693,
+    707,
+    12
+   ],
+   "K": [
+    749,
+    808,
+    50
+   ],
+   "L": [
+    809,
+    918,
+    87
+   ],
+   "M": [
+    921,
+    986,
+    48
+   ],
+   "N": [
+    1191,
+    1234,
+    31
+   ],
+   "O": [
+    1235,
+    1279,
+    28
+   ],
+   "P": [
+    1320,
+    1368,
+    42
+   ],
+   "Q": [
+    1369,
+    1376,
+    5
+   ],
+   "R": [
+    1377,
+    1484,
+    84
+   ],
+   "S": [
+    1492,
+    1627,
+    117
+   ],
+   "T": [
+    1760,
+    1795,
+    35
+   ],
+   "U": [
+    1796,
+    1801,
+    6
+   ],
+   "V": [
+    1802,
+    1833,
+    30
+   ],
+   "W": [
+    1834,
+    1944,
+    78
+   ],
+   "Y": [
+    1945,
+    1951,
+    4
+   ],
+   "Z": [
+    1952,
+    1960,
+    9
+   ]
+  },
+  "skipped_votes": 57,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 47,
+   "end_leaf": 1960
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

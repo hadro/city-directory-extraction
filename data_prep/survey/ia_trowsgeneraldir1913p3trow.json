@@ -293,5 +293,319 @@
   "words_gz_bytes": 6599658,
   "hocr_deleted": true,
   "elapsed_s": 42
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 279,
+  "end_leaf": 321,
+  "first_letter": "B",
+  "last_letter": "W",
+  "letters_present": "BCEFGHKLMNOPRSTW",
+  "missing_letters": "ADIJQUVXYZ",
+  "voting_density": 0.512,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 279,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p3trow$279/full/!1400,1400/0/default.jpg",
+   "quote": "Bway R1142 4 17 W34th R1017"
+  },
+  "end": {
+   "leaf": 321,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p3trow$321/full/!1400,1400/0/default.jpg",
+   "quote": "Wyoming Improvement Co, 47 W34th"
+  },
+  "sections": [
+   {
+    "start_leaf": 89,
+    "end_leaf": 129,
+    "voting_leaves": 21,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDFGHJKLMPRSW",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 279,
+    "end_leaf": 321,
+    "voting_leaves": 22,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCEFGHKLMNOPRSTW",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 329,
+    "end_leaf": 349,
+    "voting_leaves": 11,
+    "first_letter": "B",
+    "last_letter": "S",
+    "letters": "BCDFGKLMPRS",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 545,
+    "end_leaf": 567,
+    "voting_leaves": 12,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDGHKLMRSW",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 673,
+    "end_leaf": 699,
+    "voting_leaves": 11,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCFGKMRSW",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 753,
+    "end_leaf": 789,
+    "voting_leaves": 18,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDFGHKLMPRSW",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 282,
+    "end_leaf": 282,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "C",
+     "E"
+    ],
+    "start_leaf": 286,
+    "end_leaf": 286,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 288,
+    "end_leaf": 288,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 290,
+    "end_leaf": 290,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 292,
+    "end_leaf": 292,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "K"
+    ],
+    "start_leaf": 296,
+    "end_leaf": 296,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 298,
+    "end_leaf": 298,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 300,
+    "end_leaf": 300,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 304,
+    "end_leaf": 304,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 306,
+    "end_leaf": 306,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 308,
+    "end_leaf": 308,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 310,
+    "end_leaf": 310,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 312,
+    "end_leaf": 312,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 316,
+    "end_leaf": 316,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "T",
+     "W"
+    ],
+    "start_leaf": 318,
+    "end_leaf": 318,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "B": [
+    279,
+    281,
+    2
+   ],
+   "C": [
+    283,
+    285,
+    2
+   ],
+   "E": [
+    287,
+    287,
+    1
+   ],
+   "F": [
+    289,
+    289,
+    1
+   ],
+   "G": [
+    291,
+    291,
+    1
+   ],
+   "H": [
+    293,
+    295,
+    2
+   ],
+   "K": [
+    297,
+    297,
+    1
+   ],
+   "L": [
+    299,
+    299,
+    1
+   ],
+   "M": [
+    301,
+    303,
+    2
+   ],
+   "N": [
+    305,
+    305,
+    1
+   ],
+   "O": [
+    307,
+    307,
+    1
+   ],
+   "P": [
+    309,
+    309,
+    1
+   ],
+   "R": [
+    311,
+    311,
+    1
+   ],
+   "S": [
+    313,
+    315,
+    2
+   ],
+   "T": [
+    317,
+    317,
+    1
+   ],
+   "W": [
+    319,
+    321,
+    2
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 279,
+   "end_leaf": 321
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

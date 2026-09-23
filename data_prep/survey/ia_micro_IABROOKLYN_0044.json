@@ -357,5 +357,280 @@
   "words_gz_bytes": 832147,
   "hocr_deleted": true,
   "elapsed_s": 18
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 16,
+  "end_leaf": 210,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHJKLMNOPQRSTVWYZ",
+  "missing_letters": "IUX",
+  "voting_density": 0.749,
+  "flags": [],
+  "start": {
+   "leaf": 16,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$16/full/!1400,1400/0/default.jpg",
+   "quote": "Abbay Pursons, mariner, 23 South 2d tb es"
+  },
+  "end": {
+   "leaf": 210,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$210/full/!1400,1400/0/default.jpg",
+   "quote": "Zweck Charles, cabinet maker, 274 8 4th \u2014"
+  },
+  "sections": [
+   {
+    "start_leaf": 16,
+    "end_leaf": 210,
+    "voting_leaves": 146,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHJKLMNOPQRSTVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 20,
+    "end_leaf": 29,
+    "leaves": 10
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 44,
+    "end_leaf": 47,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 68,
+    "end_leaf": 68,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 76,
+    "end_leaf": 76,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 83,
+    "end_leaf": 83,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 107,
+    "end_leaf": 107,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 115,
+    "end_leaf": 116,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 139,
+    "end_leaf": 142,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 148,
+    "end_leaf": 148,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 155,
+    "end_leaf": 159,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 168,
+    "end_leaf": 171,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 187,
+    "end_leaf": 189,
+    "leaves": 3
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    16,
+    19,
+    4
+   ],
+   "B": [
+    30,
+    43,
+    14
+   ],
+   "C": [
+    48,
+    59,
+    12
+   ],
+   "D": [
+    60,
+    67,
+    8
+   ],
+   "E": [
+    69,
+    75,
+    2
+   ],
+   "F": [
+    77,
+    82,
+    6
+   ],
+   "G": [
+    84,
+    90,
+    7
+   ],
+   "H": [
+    91,
+    103,
+    13
+   ],
+   "J": [
+    104,
+    106,
+    3
+   ],
+   "K": [
+    108,
+    114,
+    5
+   ],
+   "L": [
+    117,
+    122,
+    6
+   ],
+   "M": [
+    123,
+    138,
+    11
+   ],
+   "N": [
+    143,
+    144,
+    2
+   ],
+   "O": [
+    145,
+    147,
+    2
+   ],
+   "P": [
+    149,
+    154,
+    6
+   ],
+   "Q": [
+    160,
+    160,
+    1
+   ],
+   "R": [
+    161,
+    167,
+    7
+   ],
+   "S": [
+    172,
+    186,
+    15
+   ],
+   "T": [
+    190,
+    194,
+    5
+   ],
+   "V": [
+    195,
+    197,
+    3
+   ],
+   "W": [
+    198,
+    208,
+    11
+   ],
+   "Y": [
+    209,
+    209,
+    1
+   ],
+   "Z": [
+    210,
+    210,
+    1
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 16,
+   "end_leaf": 210
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

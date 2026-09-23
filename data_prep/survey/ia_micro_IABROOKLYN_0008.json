@@ -371,5 +371,166 @@
   "words_gz_bytes": 217919,
   "hocr_deleted": true,
   "elapsed_s": 10
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 6,
+  "end_leaf": 64,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHJKLMOPRSTVWY",
+  "missing_letters": "INQUXZ",
+  "voting_density": 0.966,
+  "flags": [],
+  "start": {
+   "leaf": 6,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$6/full/!1400,1400/0/default.jpg",
+   "quote": "Assor DANIEL tavern and livery stable 42"
+  },
+  "end": {
+   "leaf": 64,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$64/full/!1400,1400/0/default.jpg",
+   "quote": "Youngs Carl 37 3H Henry"
+  },
+  "sections": [
+   {
+    "start_leaf": 6,
+    "end_leaf": 64,
+    "voting_leaves": 57,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHJKLMOPRSTVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 48,
+    "end_leaf": 48,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    6,
+    7,
+    2
+   ],
+   "B": [
+    8,
+    12,
+    4
+   ],
+   "C": [
+    13,
+    15,
+    3
+   ],
+   "D": [
+    16,
+    16,
+    1
+   ],
+   "E": [
+    17,
+    17,
+    1
+   ],
+   "F": [
+    18,
+    20,
+    3
+   ],
+   "G": [
+    21,
+    22,
+    2
+   ],
+   "H": [
+    23,
+    28,
+    6
+   ],
+   "J": [
+    29,
+    30,
+    2
+   ],
+   "K": [
+    31,
+    31,
+    1
+   ],
+   "L": [
+    32,
+    33,
+    2
+   ],
+   "M": [
+    34,
+    40,
+    7
+   ],
+   "O": [
+    41,
+    41,
+    1
+   ],
+   "P": [
+    42,
+    44,
+    3
+   ],
+   "R": [
+    45,
+    47,
+    3
+   ],
+   "S": [
+    49,
+    54,
+    6
+   ],
+   "T": [
+    55,
+    57,
+    3
+   ],
+   "V": [
+    58,
+    59,
+    2
+   ],
+   "W": [
+    60,
+    63,
+    4
+   ],
+   "Y": [
+    64,
+    64,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 6,
+   "end_leaf": 64
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

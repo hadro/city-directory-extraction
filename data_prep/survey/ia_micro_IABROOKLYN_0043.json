@@ -358,5 +358,185 @@
   "words_gz_bytes": 641742,
   "hocr_deleted": true,
   "elapsed_s": 6
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 4,
+  "end_leaf": 164,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPRSTVWY",
+  "missing_letters": "QUXZ",
+  "voting_density": 0.845,
+  "flags": [],
+  "start": {
+   "leaf": 4,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$4/full/!1400,1400/0/default.jpg",
+   "quote": "Abram John, ship fastener, 14 North 7th"
+  },
+  "end": {
+   "leaf": 164,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$164/full/!1400,1400/0/default.jpg",
+   "quote": "Younger, William, shoemaker, 26 North 2d - a"
+  },
+  "sections": [
+   {
+    "start_leaf": 4,
+    "end_leaf": 164,
+    "voting_leaves": 136,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPRSTVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 85,
+    "end_leaf": 104,
+    "leaves": 20
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 109,
+    "end_leaf": 116,
+    "leaves": 8
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    4,
+    7,
+    4
+   ],
+   "B": [
+    8,
+    22,
+    15
+   ],
+   "C": [
+    23,
+    32,
+    10
+   ],
+   "D": [
+    33,
+    40,
+    8
+   ],
+   "E": [
+    41,
+    42,
+    2
+   ],
+   "F": [
+    43,
+    47,
+    5
+   ],
+   "G": [
+    48,
+    53,
+    6
+   ],
+   "H": [
+    54,
+    65,
+    12
+   ],
+   "I": [
+    66,
+    66,
+    1
+   ],
+   "J": [
+    67,
+    69,
+    3
+   ],
+   "K": [
+    70,
+    74,
+    4
+   ],
+   "L": [
+    75,
+    79,
+    5
+   ],
+   "M": [
+    80,
+    84,
+    5
+   ],
+   "N": [
+    105,
+    106,
+    2
+   ],
+   "O": [
+    107,
+    108,
+    2
+   ],
+   "P": [
+    117,
+    120,
+    4
+   ],
+   "R": [
+    121,
+    128,
+    8
+   ],
+   "S": [
+    129,
+    143,
+    15
+   ],
+   "T": [
+    144,
+    149,
+    5
+   ],
+   "V": [
+    150,
+    151,
+    2
+   ],
+   "W": [
+    152,
+    163,
+    10
+   ],
+   "Y": [
+    164,
+    164,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 4,
+   "end_leaf": 165
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -364,5 +364,194 @@
   "words_gz_bytes": 765921,
   "hocr_deleted": true,
   "elapsed_s": 24
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 10,
+  "end_leaf": 178,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPRSTVWY",
+  "missing_letters": "QUXZ",
+  "voting_density": 0.834,
+  "flags": [],
+  "start": {
+   "leaf": 10,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$10/full/!1400,1400/0/default.jpg",
+   "quote": "Abbreviations\u2014h. stands for house, n. for near, o. for corner,"
+  },
+  "end": {
+   "leaf": 178,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$178/full/!1400,1400/0/default.jpg",
+   "quote": "Younie James, plasterer 178 Adams j"
+  },
+  "sections": [
+   {
+    "start_leaf": 10,
+    "end_leaf": 178,
+    "voting_leaves": 141,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPRSTVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 32,
+    "end_leaf": 33,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 93,
+    "end_leaf": 94,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 113,
+    "end_leaf": 120,
+    "leaves": 8
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    10,
+    13,
+    3
+   ],
+   "B": [
+    14,
+    31,
+    16
+   ],
+   "C": [
+    34,
+    46,
+    10
+   ],
+   "D": [
+    47,
+    56,
+    10
+   ],
+   "E": [
+    57,
+    58,
+    2
+   ],
+   "F": [
+    59,
+    64,
+    6
+   ],
+   "G": [
+    65,
+    70,
+    6
+   ],
+   "H": [
+    71,
+    84,
+    9
+   ],
+   "I": [
+    85,
+    85,
+    1
+   ],
+   "J": [
+    86,
+    89,
+    4
+   ],
+   "K": [
+    90,
+    92,
+    3
+   ],
+   "L": [
+    95,
+    100,
+    6
+   ],
+   "M": [
+    101,
+    112,
+    11
+   ],
+   "N": [
+    121,
+    122,
+    2
+   ],
+   "O": [
+    123,
+    124,
+    2
+   ],
+   "P": [
+    125,
+    132,
+    8
+   ],
+   "R": [
+    133,
+    141,
+    9
+   ],
+   "S": [
+    142,
+    157,
+    12
+   ],
+   "T": [
+    158,
+    162,
+    5
+   ],
+   "V": [
+    163,
+    166,
+    4
+   ],
+   "W": [
+    167,
+    177,
+    11
+   ],
+   "Y": [
+    178,
+    178,
+    1
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 10,
+   "end_leaf": 178
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

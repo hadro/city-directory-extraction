@@ -530,5 +530,290 @@
   "words_gz_bytes": 21836778,
   "hocr_deleted": true,
   "elapsed_s": 79
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 29,
+  "end_leaf": 1698,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.696,
+  "flags": [],
+  "start": {
+   "leaf": 29,
+   "image": "https://iiif.archive.org/iiif/1897BPL$29/full/!1400,1400/0/default.jpg",
+   "quote": "Acct. accountant ; agl. agricultural ; agt. agent ; Ala Alabama ; al aZZey ; art. artificial;"
+  },
+  "end": {
+   "leaf": 1698,
+   "image": "https://iiif.archive.org/iiif/1897BPL$1698/full/!1400,1400/0/default.jpg",
+   "quote": "Zzirillo Chas. shoemkr. 221 Mlddleton"
+  },
+  "sections": [
+   {
+    "start_leaf": 29,
+    "end_leaf": 1698,
+    "voting_leaves": 1162,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 187,
+    "end_leaf": 239,
+    "leaves": 53
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 545,
+    "end_leaf": 545,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 760,
+    "end_leaf": 769,
+    "leaves": 10
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 956,
+    "end_leaf": 958,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 1003,
+    "end_leaf": 1133,
+    "leaves": 131
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 1168,
+    "end_leaf": 1174,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1197,
+    "end_leaf": 1197,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1259,
+    "end_leaf": 1260,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 1342,
+    "end_leaf": 1342,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 1440,
+    "end_leaf": 1515,
+    "leaves": 76
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 1564,
+    "end_leaf": 1564,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 1653,
+    "end_leaf": 1686,
+    "leaves": 34
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    29,
+    68,
+    29
+   ],
+   "B": [
+    69,
+    186,
+    95
+   ],
+   "C": [
+    240,
+    353,
+    80
+   ],
+   "D": [
+    354,
+    438,
+    65
+   ],
+   "E": [
+    439,
+    470,
+    29
+   ],
+   "F": [
+    471,
+    544,
+    54
+   ],
+   "G": [
+    546,
+    624,
+    64
+   ],
+   "H": [
+    625,
+    753,
+    95
+   ],
+   "I": [
+    754,
+    759,
+    6
+   ],
+   "J": [
+    770,
+    796,
+    17
+   ],
+   "K": [
+    797,
+    882,
+    61
+   ],
+   "L": [
+    883,
+    955,
+    59
+   ],
+   "M": [
+    959,
+    1002,
+    32
+   ],
+   "N": [
+    1134,
+    1167,
+    24
+   ],
+   "O": [
+    1175,
+    1196,
+    15
+   ],
+   "P": [
+    1198,
+    1255,
+    47
+   ],
+   "Q": [
+    1256,
+    1258,
+    3
+   ],
+   "R": [
+    1261,
+    1341,
+    59
+   ],
+   "S": [
+    1343,
+    1439,
+    77
+   ],
+   "T": [
+    1516,
+    1558,
+    34
+   ],
+   "U": [
+    1559,
+    1563,
+    4
+   ],
+   "V": [
+    1565,
+    1586,
+    21
+   ],
+   "W": [
+    1587,
+    1652,
+    43
+   ],
+   "Y": [
+    1687,
+    1691,
+    2
+   ],
+   "Z": [
+    1692,
+    1698,
+    6
+   ]
+  },
+  "skipped_votes": 80,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 29,
+   "end_leaf": 1698
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

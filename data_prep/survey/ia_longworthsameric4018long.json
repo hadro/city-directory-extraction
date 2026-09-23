@@ -329,5 +329,187 @@
   "words_gz_bytes": 1805944,
   "hocr_deleted": true,
   "elapsed_s": 22
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 115,
+  "end_leaf": 463,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
+  "missing_letters": "XZ",
+  "voting_density": 0.986,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 115,
+   "image": "https://iiif.archive.org/iiif/longworthsameric4018long$115/full/!1400,1400/0/default.jpg",
+   "quote": "Abhatt Robert, marchant ;i36 Pearl"
+  },
+  "end": {
+   "leaf": 463,
+   "image": "https://iiif.archive.org/iiif/longworthsameric4018long$463/full/!1400,1400/0/default.jpg",
+   "quote": "Yvonnet John, 69 Chapel"
+  },
+  "sections": [
+   {
+    "start_leaf": 115,
+    "end_leaf": 463,
+    "voting_leaves": 344,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 465,
+    "end_leaf": 478,
+    "voting_leaves": 14,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDFHJLMPSVW",
+    "is_listing": false
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    115,
+    126,
+    12
+   ],
+   "B": [
+    127,
+    161,
+    34
+   ],
+   "C": [
+    162,
+    190,
+    29
+   ],
+   "D": [
+    191,
+    209,
+    19
+   ],
+   "E": [
+    210,
+    215,
+    6
+   ],
+   "F": [
+    216,
+    226,
+    11
+   ],
+   "G": [
+    227,
+    241,
+    15
+   ],
+   "H": [
+    242,
+    267,
+    25
+   ],
+   "I": [
+    268,
+    269,
+    2
+   ],
+   "J": [
+    270,
+    277,
+    8
+   ],
+   "K": [
+    278,
+    285,
+    8
+   ],
+   "L": [
+    286,
+    301,
+    16
+   ],
+   "M": [
+    302,
+    333,
+    32
+   ],
+   "N": [
+    334,
+    337,
+    4
+   ],
+   "O": [
+    338,
+    342,
+    5
+   ],
+   "P": [
+    343,
+    358,
+    16
+   ],
+   "Q": [
+    359,
+    359,
+    1
+   ],
+   "R": [
+    360,
+    376,
+    17
+   ],
+   "S": [
+    377,
+    411,
+    32
+   ],
+   "T": [
+    412,
+    426,
+    15
+   ],
+   "U": [
+    427,
+    427,
+    1
+   ],
+   "V": [
+    428,
+    437,
+    10
+   ],
+   "W": [
+    438,
+    461,
+    24
+   ],
+   "Y": [
+    462,
+    463,
+    2
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 115,
+   "end_leaf": 463
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

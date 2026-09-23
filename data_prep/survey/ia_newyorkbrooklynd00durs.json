@@ -333,5 +333,146 @@
   "words_gz_bytes": 219953,
   "hocr_deleted": true,
   "elapsed_s": 9
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 28,
+  "end_leaf": 60,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHKLMNPRSTVW",
+  "missing_letters": "IJOQUXYZ",
+  "voting_density": 1.0,
+  "flags": [],
+  "start": {
+   "leaf": 28,
+   "image": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$28/full/!1400,1400/0/default.jpg",
+   "quote": "Ash Tho. Winds, chair maker, 31, John-it"
+  },
+  "end": {
+   "leaf": 60,
+   "image": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$60/full/!1400,1400/0/default.jpg",
+   "quote": "Wilks J. merchant, 235, Oueen-ftreet"
+  },
+  "sections": [
+   {
+    "start_leaf": 28,
+    "end_leaf": 60,
+    "voting_leaves": 33,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHKLMNPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    28,
+    28,
+    1
+   ],
+   "B": [
+    29,
+    31,
+    3
+   ],
+   "C": [
+    32,
+    34,
+    3
+   ],
+   "D": [
+    35,
+    35,
+    1
+   ],
+   "E": [
+    36,
+    36,
+    1
+   ],
+   "F": [
+    37,
+    37,
+    1
+   ],
+   "G": [
+    38,
+    39,
+    2
+   ],
+   "H": [
+    40,
+    42,
+    3
+   ],
+   "K": [
+    43,
+    43,
+    1
+   ],
+   "L": [
+    44,
+    45,
+    2
+   ],
+   "M": [
+    46,
+    48,
+    3
+   ],
+   "N": [
+    49,
+    49,
+    1
+   ],
+   "P": [
+    50,
+    50,
+    1
+   ],
+   "R": [
+    51,
+    52,
+    2
+   ],
+   "S": [
+    53,
+    56,
+    4
+   ],
+   "T": [
+    57,
+    57,
+    1
+   ],
+   "V": [
+    58,
+    58,
+    1
+   ],
+   "W": [
+    59,
+    60,
+    2
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 28,
+   "end_leaf": 60
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

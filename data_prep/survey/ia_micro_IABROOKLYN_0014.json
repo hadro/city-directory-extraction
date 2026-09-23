@@ -374,5 +374,202 @@
   "words_gz_bytes": 278912,
   "hocr_deleted": true,
   "elapsed_s": 5
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 8,
+  "end_leaf": 86,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMNOPRSTVW",
+  "missing_letters": "IQUXYZ",
+  "voting_density": 0.835,
+  "flags": [],
+  "start": {
+   "leaf": 8,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$8/full/!1400,1400/0/default.jpg",
+   "quote": "All of which will be warranted genuine,"
+  },
+  "end": {
+   "leaf": 86,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0014$86/full/!1400,1400/0/default.jpg",
+   "quote": "Wright J. D. merchant 45 Willow"
+  },
+  "sections": [
+   {
+    "start_leaf": 8,
+    "end_leaf": 86,
+    "voting_leaves": 66,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMNOPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 25,
+    "end_leaf": 25,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 43,
+    "end_leaf": 47,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 55,
+    "end_leaf": 55,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 62,
+    "end_leaf": 62,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 79,
+    "end_leaf": 79,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    8,
+    9,
+    2
+   ],
+   "B": [
+    10,
+    14,
+    5
+   ],
+   "C": [
+    15,
+    19,
+    5
+   ],
+   "D": [
+    20,
+    22,
+    3
+   ],
+   "E": [
+    23,
+    23,
+    1
+   ],
+   "F": [
+    24,
+    24,
+    1
+   ],
+   "G": [
+    26,
+    27,
+    2
+   ],
+   "H": [
+    28,
+    31,
+    4
+   ],
+   "J": [
+    32,
+    32,
+    1
+   ],
+   "K": [
+    33,
+    34,
+    2
+   ],
+   "L": [
+    35,
+    36,
+    2
+   ],
+   "M": [
+    37,
+    42,
+    5
+   ],
+   "N": [
+    48,
+    49,
+    2
+   ],
+   "O": [
+    50,
+    50,
+    1
+   ],
+   "P": [
+    51,
+    54,
+    2
+   ],
+   "R": [
+    56,
+    61,
+    5
+   ],
+   "S": [
+    63,
+    72,
+    10
+   ],
+   "T": [
+    73,
+    76,
+    4
+   ],
+   "V": [
+    77,
+    78,
+    2
+   ],
+   "W": [
+    80,
+    86,
+    7
+   ]
+  },
+  "skipped_votes": 4,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 8,
+   "end_leaf": 86
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

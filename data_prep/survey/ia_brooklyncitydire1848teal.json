@@ -399,5 +399,202 @@
   "words_gz_bytes": 1702825,
   "hocr_deleted": true,
   "elapsed_s": 25
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 11,
+  "end_leaf": 260,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.94,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 11,
+   "image": "https://iiif.archive.org/iiif/brooklyncitydire1848teal$11/full/!1400,1400/0/default.jpg",
+   "quote": "Abbreviations, \u2014 k\" rtands for house, n for near, cor for corner, op for og-"
+  },
+  "end": {
+   "leaf": 260,
+   "image": "https://iiif.archive.org/iiif/brooklyncitydire1848teal$260/full/!1400,1400/0/default.jpg",
+   "quote": "Zuntz Phoebe, 91 State."
+  },
+  "sections": [
+   {
+    "start_leaf": 11,
+    "end_leaf": 260,
+    "voting_leaves": 235,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 318,
+    "end_leaf": 330,
+    "voting_leaves": 13,
+    "first_letter": "T",
+    "last_letter": "T",
+    "letters": "T",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 165,
+    "end_leaf": 176,
+    "leaves": 12
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    11,
+    16,
+    6
+   ],
+   "B": [
+    17,
+    43,
+    27
+   ],
+   "C": [
+    44,
+    65,
+    21
+   ],
+   "D": [
+    66,
+    82,
+    15
+   ],
+   "E": [
+    83,
+    85,
+    3
+   ],
+   "F": [
+    86,
+    95,
+    10
+   ],
+   "G": [
+    96,
+    105,
+    10
+   ],
+   "H": [
+    106,
+    123,
+    18
+   ],
+   "I": [
+    124,
+    124,
+    1
+   ],
+   "J": [
+    125,
+    130,
+    6
+   ],
+   "K": [
+    131,
+    137,
+    7
+   ],
+   "L": [
+    138,
+    147,
+    10
+   ],
+   "M": [
+    148,
+    164,
+    17
+   ],
+   "N": [
+    177,
+    180,
+    4
+   ],
+   "O": [
+    181,
+    184,
+    4
+   ],
+   "P": [
+    185,
+    194,
+    10
+   ],
+   "Q": [
+    195,
+    195,
+    1
+   ],
+   "R": [
+    196,
+    207,
+    12
+   ],
+   "S": [
+    208,
+    229,
+    22
+   ],
+   "T": [
+    230,
+    237,
+    8
+   ],
+   "U": [
+    238,
+    238,
+    1
+   ],
+   "V": [
+    239,
+    243,
+    5
+   ],
+   "W": [
+    244,
+    258,
+    15
+   ],
+   "Y": [
+    259,
+    259,
+    1
+   ],
+   "Z": [
+    260,
+    260,
+    1
+   ]
+  },
+  "skipped_votes": 12,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 11,
+   "end_leaf": 260
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

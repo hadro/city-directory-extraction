@@ -349,5 +349,209 @@
   "words_gz_bytes": 7468989,
   "hocr_deleted": true,
   "elapsed_s": 26
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 10,
+  "end_leaf": 717,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.917,
+  "flags": [],
+  "start": {
+   "leaf": 10,
+   "image": "https://iiif.archive.org/iiif/1868BPL$10/full/!1400,1400/0/default.jpg",
+   "quote": "Aalholm Mathias, h 82 Fort Greene pi"
+  },
+  "end": {
+   "leaf": 717,
+   "image": "https://iiif.archive.org/iiif/1868BPL$717/full/!1400,1400/0/default.jpg",
+   "quote": "Zimmermann K. vinegar-manf. 6th av. n. 15th,"
+  },
+  "sections": [
+   {
+    "start_leaf": 10,
+    "end_leaf": 717,
+    "voting_leaves": 649,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 405,
+    "end_leaf": 452,
+    "leaves": 48
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 571,
+    "end_leaf": 571,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 714,
+    "end_leaf": 714,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    10,
+    26,
+    15
+   ],
+   "B": [
+    27,
+    100,
+    68
+   ],
+   "C": [
+    101,
+    159,
+    55
+   ],
+   "D": [
+    160,
+    199,
+    40
+   ],
+   "E": [
+    200,
+    210,
+    11
+   ],
+   "F": [
+    211,
+    239,
+    29
+   ],
+   "G": [
+    240,
+    270,
+    31
+   ],
+   "H": [
+    271,
+    329,
+    55
+   ],
+   "I": [
+    330,
+    331,
+    2
+   ],
+   "J": [
+    332,
+    343,
+    12
+   ],
+   "K": [
+    344,
+    373,
+    28
+   ],
+   "L": [
+    374,
+    404,
+    29
+   ],
+   "M": [
+    453,
+    486,
+    34
+   ],
+   "N": [
+    487,
+    497,
+    11
+   ],
+   "O": [
+    498,
+    509,
+    12
+   ],
+   "P": [
+    510,
+    535,
+    24
+   ],
+   "Q": [
+    536,
+    538,
+    3
+   ],
+   "R": [
+    539,
+    570,
+    29
+   ],
+   "S": [
+    572,
+    636,
+    63
+   ],
+   "T": [
+    637,
+    659,
+    21
+   ],
+   "U": [
+    660,
+    660,
+    1
+   ],
+   "V": [
+    661,
+    670,
+    10
+   ],
+   "W": [
+    671,
+    713,
+    43
+   ],
+   "Y": [
+    715,
+    716,
+    2
+   ],
+   "Z": [
+    717,
+    717,
+    1
+   ]
+  },
+  "skipped_votes": 5,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 10,
+   "end_leaf": 718
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -334,5 +334,204 @@
   "words_gz_bytes": 15527905,
   "hocr_deleted": true,
   "elapsed_s": 84
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1215,
+  "first_letter": "H",
+  "last_letter": "R",
+  "letters_present": "HIJKLMNOPQR",
+  "missing_letters": "ABCDEFGSTUVWXYZ",
+  "voting_density": 0.389,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Hampl Ferdinand plumber 200 W132d"
+  },
+  "end": {
+   "leaf": 1215,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1215/full/!1400,1400/0/default.jpg",
+   "quote": "Reed A F tutor W116th n Amsterdam av"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1215,
+    "voting_leaves": 469,
+    "first_letter": "H",
+    "last_letter": "R",
+    "letters": "HIJKLMNOPQR",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 202,
+    "end_leaf": 202,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 220,
+    "end_leaf": 232,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 252,
+    "end_leaf": 332,
+    "leaves": 81
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 446,
+    "end_leaf": 540,
+    "leaves": 95
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 620,
+    "end_leaf": 622,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 720,
+    "end_leaf": 970,
+    "leaves": 251
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 1002,
+    "end_leaf": 1016,
+    "leaves": 15
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1056,
+    "end_leaf": 1056,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1180,
+    "end_leaf": 1180,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1188,
+    "end_leaf": 1188,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    33,
+    201,
+    76
+   ],
+   "I": [
+    203,
+    219,
+    7
+   ],
+   "J": [
+    233,
+    251,
+    10
+   ],
+   "K": [
+    333,
+    445,
+    52
+   ],
+   "L": [
+    541,
+    619,
+    37
+   ],
+   "M": [
+    623,
+    719,
+    43
+   ],
+   "N": [
+    971,
+    1001,
+    13
+   ],
+   "O": [
+    1017,
+    1055,
+    18
+   ],
+   "P": [
+    1057,
+    1179,
+    57
+   ],
+   "Q": [
+    1181,
+    1187,
+    3
+   ],
+   "R": [
+    1189,
+    1215,
+    14
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1215
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

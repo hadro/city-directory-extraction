@@ -370,5 +370,210 @@
    "filters_at": "02404bc-dirty",
    "derived": "2026-09-22"
   }
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 31,
+  "end_leaf": 345,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHJKLMNOPQRSTUVWY",
+  "missing_letters": "IXZ",
+  "voting_density": 0.86,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 31,
+   "image": "https://iiif.archive.org/iiif/1857BPL$31/full/!1400,1400/0/default.jpg",
+   "quote": "Abart Christian, tailor, 44 W. Baltic"
+  },
+  "end": {
+   "leaf": 345,
+   "image": "https://iiif.archive.org/iiif/1857BPL$345/full/!1400,1400/0/default.jpg",
+   "quote": "Youuil James, plasterer, Bond, n. State"
+  },
+  "sections": [
+   {
+    "start_leaf": 31,
+    "end_leaf": 345,
+    "voting_leaves": 271,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHJKLMNOPQRSTUVWY",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 347,
+    "end_leaf": 475,
+    "voting_leaves": 115,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHJKLMNOPRSTVWZ",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 203,
+    "end_leaf": 222,
+    "leaves": 20
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 281,
+    "end_leaf": 281,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 307,
+    "end_leaf": 308,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    31,
+    37,
+    7
+   ],
+   "B": [
+    38,
+    68,
+    27
+   ],
+   "C": [
+    69,
+    94,
+    26
+   ],
+   "D": [
+    95,
+    114,
+    18
+   ],
+   "E": [
+    115,
+    120,
+    4
+   ],
+   "F": [
+    121,
+    133,
+    13
+   ],
+   "G": [
+    134,
+    145,
+    12
+   ],
+   "H": [
+    146,
+    172,
+    23
+   ],
+   "J": [
+    173,
+    178,
+    6
+   ],
+   "K": [
+    179,
+    189,
+    11
+   ],
+   "L": [
+    190,
+    202,
+    13
+   ],
+   "M": [
+    223,
+    241,
+    15
+   ],
+   "N": [
+    242,
+    245,
+    4
+   ],
+   "O": [
+    246,
+    250,
+    5
+   ],
+   "P": [
+    251,
+    263,
+    11
+   ],
+   "Q": [
+    264,
+    265,
+    2
+   ],
+   "R": [
+    266,
+    280,
+    9
+   ],
+   "S": [
+    282,
+    306,
+    24
+   ],
+   "T": [
+    309,
+    317,
+    9
+   ],
+   "U": [
+    318,
+    318,
+    1
+   ],
+   "V": [
+    319,
+    322,
+    4
+   ],
+   "W": [
+    323,
+    344,
+    20
+   ],
+   "Y": [
+    345,
+    345,
+    1
+   ]
+  },
+  "skipped_votes": 4,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 31,
+   "end_leaf": 345
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

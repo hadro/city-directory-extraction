@@ -344,5 +344,163 @@
   "words_gz_bytes": 13214319,
   "hocr_deleted": true,
   "elapsed_s": 65
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 119,
+  "end_leaf": 1189,
+  "first_letter": "A",
+  "last_letter": "H",
+  "letters_present": "ABCDEFGH",
+  "missing_letters": "IJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.43,
+  "flags": [
+   "edge-disagreement",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 119,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p1trow$119/full/!1400,1400/0/default.jpg",
+   "quote": "Aaronofsky Frank grocer 218 Madison"
+  },
+  "end": {
+   "leaf": 1189,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p1trow$1189/full/!1400,1400/0/default.jpg",
+   "quote": "Hall A E pumps 170 Bwav R S03 h Plain-"
+  },
+  "sections": [
+   {
+    "start_leaf": 119,
+    "end_leaf": 1189,
+    "voting_leaves": 460,
+    "first_letter": "A",
+    "last_letter": "H",
+    "letters": "ABCDEFGH",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 204,
+    "end_leaf": 206,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 422,
+    "end_leaf": 588,
+    "leaves": 167
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 676,
+    "end_leaf": 700,
+    "leaves": 25
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 814,
+    "end_leaf": 814,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 880,
+    "end_leaf": 880,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 1014,
+    "end_leaf": 1014,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 1136,
+    "end_leaf": 1176,
+    "leaves": 41
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    165,
+    203,
+    19
+   ],
+   "B": [
+    207,
+    421,
+    104
+   ],
+   "C": [
+    589,
+    675,
+    39
+   ],
+   "D": [
+    701,
+    813,
+    51
+   ],
+   "E": [
+    815,
+    879,
+    29
+   ],
+   "F": [
+    881,
+    1013,
+    54
+   ],
+   "G": [
+    1015,
+    1135,
+    51
+   ],
+   "H": [
+    1177,
+    1189,
+    7
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 119,
+   "end_leaf": 1193
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -391,5 +391,132 @@
   "words_gz_bytes": 1999470,
   "hocr_deleted": true,
   "elapsed_s": 7
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 113,
+  "end_leaf": 749,
+  "first_letter": "S",
+  "last_letter": "Z",
+  "letters_present": "STVWZ",
+  "missing_letters": "ABCDEFGHIJKLMNOPQRUXY",
+  "voting_density": 0.058,
+  "flags": [
+   "sparse",
+   "edge-disagreement",
+   "multi-section",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 113,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc19123broo$113/full/!1400,1400/0/default.jpg",
+   "quote": "Saill :' , ~ . . mm h .SOO Uiok<"
+  },
+  "end": {
+   "leaf": 749,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc19123broo$749/full/!1400,1400/0/default.jpg",
+   "quote": "Zui'k.T F.iuaiiin-1 i-ariliT .'.(iH K 3Tlli"
+  },
+  "sections": [
+   {
+    "start_leaf": 113,
+    "end_leaf": 749,
+    "voting_leaves": 37,
+    "first_letter": "S",
+    "last_letter": "Z",
+    "letters": "STVWZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1063,
+    "end_leaf": 1065,
+    "voting_leaves": 2,
+    "first_letter": "W",
+    "last_letter": "W",
+    "letters": "W",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 138,
+    "end_leaf": 392,
+    "leaves": 255
+   },
+   {
+    "between": [
+     "T",
+     "V"
+    ],
+    "start_leaf": 394,
+    "end_leaf": 516,
+    "leaves": 123
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 518,
+    "end_leaf": 656,
+    "leaves": 139
+   },
+   {
+    "between": [
+     "W",
+     "Z"
+    ],
+    "start_leaf": 668,
+    "end_leaf": 736,
+    "leaves": 69
+   }
+  ],
+  "letter_blocks": {
+   "S": [
+    127,
+    137,
+    5
+   ],
+   "T": [
+    393,
+    393,
+    1
+   ],
+   "V": [
+    517,
+    517,
+    1
+   ],
+   "W": [
+    657,
+    667,
+    4
+   ],
+   "Z": [
+    737,
+    739,
+    2
+   ]
+  },
+  "skipped_votes": 11,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 127,
+   "end_leaf": 177
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

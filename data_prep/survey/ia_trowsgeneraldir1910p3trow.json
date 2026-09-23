@@ -382,5 +382,200 @@
   "words_gz_bytes": 14853524,
   "hocr_deleted": true,
   "elapsed_s": 39
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 983,
+  "first_letter": "P",
+  "last_letter": "Z",
+  "letters_present": "PQRSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKLMNOX",
+  "voting_density": 0.403,
+  "flags": [
+   "multi-section",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Pesant Alfonso Dres 21 State RS21 h Cuba"
+  },
+  "end": {
+   "leaf": 983,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p3trow$983/full/!1400,1400/0/default.jpg",
+   "quote": "Zyttenfeld Saml clerk hl21 E115th"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 983,
+    "voting_leaves": 393,
+    "first_letter": "P",
+    "last_letter": "Z",
+    "letters": "PQRSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1247,
+    "end_leaf": 1253,
+    "voting_leaves": 4,
+    "first_letter": "L",
+    "last_letter": "L",
+    "letters": "L",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 84,
+    "end_leaf": 84,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 92,
+    "end_leaf": 92,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 150,
+    "end_leaf": 262,
+    "leaves": 113
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 472,
+    "end_leaf": 622,
+    "leaves": 151
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 710,
+    "end_leaf": 710,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 716,
+    "end_leaf": 726,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 766,
+    "end_leaf": 786,
+    "leaves": 21
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 870,
+    "end_leaf": 954,
+    "leaves": 85
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 964,
+    "end_leaf": 964,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "P": [
+    9,
+    83,
+    36
+   ],
+   "Q": [
+    85,
+    91,
+    2
+   ],
+   "R": [
+    93,
+    149,
+    27
+   ],
+   "S": [
+    263,
+    471,
+    94
+   ],
+   "T": [
+    623,
+    709,
+    39
+   ],
+   "U": [
+    711,
+    715,
+    3
+   ],
+   "V": [
+    727,
+    765,
+    20
+   ],
+   "W": [
+    787,
+    869,
+    31
+   ],
+   "Y": [
+    955,
+    963,
+    4
+   ],
+   "Z": [
+    965,
+    983,
+    9
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 983
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

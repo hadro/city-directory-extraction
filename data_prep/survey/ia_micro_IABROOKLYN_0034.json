@@ -372,5 +372,254 @@
   "words_gz_bytes": 1902845,
   "hocr_deleted": true,
   "elapsed_s": 9
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 67,
+  "end_leaf": 348,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMNOPQRSTVW",
+  "missing_letters": "IUXYZ",
+  "voting_density": 0.745,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 67,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0034$67/full/!1400,1400/0/default.jpg",
+   "quote": "Abbott B, wid. John Db. 122 Second"
+  },
+  "end": {
+   "leaf": 348,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0034$348/full/!1400,1400/0/default.jpg",
+   "quote": "Wyckoff Benjamin, messenger, h. 222 Navy"
+  },
+  "sections": [
+   {
+    "start_leaf": 67,
+    "end_leaf": 348,
+    "voting_leaves": 210,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMNOPQRSTVW",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 358,
+    "end_leaf": 535,
+    "voting_leaves": 141,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHJKLMNOPRSTVWY",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 72,
+    "end_leaf": 78,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 109,
+    "end_leaf": 109,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 158,
+    "end_leaf": 159,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 161,
+    "end_leaf": 163,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 191,
+    "end_leaf": 191,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 235,
+    "end_leaf": 244,
+    "leaves": 10
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 267,
+    "end_leaf": 267,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 271,
+    "end_leaf": 272,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 302,
+    "end_leaf": 303,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    67,
+    71,
+    5
+   ],
+   "B": [
+    79,
+    108,
+    22
+   ],
+   "C": [
+    110,
+    136,
+    24
+   ],
+   "D": [
+    137,
+    157,
+    12
+   ],
+   "E": [
+    160,
+    160,
+    1
+   ],
+   "F": [
+    164,
+    179,
+    12
+   ],
+   "G": [
+    180,
+    190,
+    11
+   ],
+   "H": [
+    192,
+    214,
+    20
+   ],
+   "J": [
+    215,
+    220,
+    4
+   ],
+   "K": [
+    221,
+    226,
+    6
+   ],
+   "L": [
+    227,
+    234,
+    5
+   ],
+   "M": [
+    245,
+    259,
+    14
+   ],
+   "N": [
+    260,
+    266,
+    4
+   ],
+   "O": [
+    268,
+    270,
+    3
+   ],
+   "P": [
+    273,
+    285,
+    11
+   ],
+   "Q": [
+    286,
+    287,
+    2
+   ],
+   "R": [
+    288,
+    301,
+    14
+   ],
+   "S": [
+    304,
+    325,
+    18
+   ],
+   "T": [
+    326,
+    332,
+    5
+   ],
+   "V": [
+    333,
+    335,
+    3
+   ],
+   "W": [
+    336,
+    348,
+    10
+   ]
+  },
+  "skipped_votes": 8,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 67,
+   "end_leaf": 349
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

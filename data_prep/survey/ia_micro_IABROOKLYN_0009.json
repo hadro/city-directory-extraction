@@ -369,5 +369,146 @@
   "words_gz_bytes": 294675,
   "hocr_deleted": true,
   "elapsed_s": 4
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 5,
+  "end_leaf": 77,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDFGHJKLMNPRSTVW",
+  "missing_letters": "EIOQUXYZ",
+  "voting_density": 0.973,
+  "flags": [],
+  "start": {
+   "leaf": 5,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0009$5/full/!1400,1400/0/default.jpg",
+   "quote": "Abbot Mary, rear of 107 Concord"
+  },
+  "end": {
+   "leaf": 77,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0009$77/full/!1400,1400/0/default.jpg",
+   "quote": "Wyman Wn, mercht 152 Washington"
+  },
+  "sections": [
+   {
+    "start_leaf": 5,
+    "end_leaf": 77,
+    "voting_leaves": 71,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDFGHJKLMNPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    5,
+    6,
+    2
+   ],
+   "B": [
+    7,
+    13,
+    7
+   ],
+   "C": [
+    14,
+    20,
+    7
+   ],
+   "D": [
+    21,
+    24,
+    4
+   ],
+   "F": [
+    25,
+    27,
+    3
+   ],
+   "G": [
+    28,
+    30,
+    3
+   ],
+   "H": [
+    31,
+    36,
+    6
+   ],
+   "J": [
+    37,
+    39,
+    3
+   ],
+   "K": [
+    40,
+    40,
+    1
+   ],
+   "L": [
+    41,
+    45,
+    4
+   ],
+   "M": [
+    46,
+    50,
+    5
+   ],
+   "N": [
+    51,
+    51,
+    1
+   ],
+   "P": [
+    52,
+    54,
+    3
+   ],
+   "R": [
+    55,
+    58,
+    4
+   ],
+   "S": [
+    59,
+    66,
+    8
+   ],
+   "T": [
+    67,
+    68,
+    2
+   ],
+   "V": [
+    69,
+    70,
+    2
+   ],
+   "W": [
+    71,
+    77,
+    6
+   ]
+  },
+  "skipped_votes": 1,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 5,
+   "end_leaf": 77
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

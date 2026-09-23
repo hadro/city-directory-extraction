@@ -334,5 +334,190 @@
   "words_gz_bytes": 15383196,
   "hocr_deleted": true,
   "elapsed_s": 39
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1045,
+  "first_letter": "H",
+  "last_letter": "Q",
+  "letters_present": "HIJKLMNOPQ",
+  "missing_letters": "ABCDEFGRSTUVWXYZ",
+  "voting_density": 0.331,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Hagedorn-M. n Co milbj 200 Mb av R1..I"
+  },
+  "end": {
+   "leaf": 1045,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$1045/full/!1400,1400/0/default.jpg",
+   "quote": "Quieley A Rich watchman b220 E32d"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1045,
+    "voting_leaves": 343,
+    "first_letter": "H",
+    "last_letter": "Q",
+    "letters": "HIJKLMNOPQ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 40,
+    "end_leaf": 188,
+    "leaves": 149
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 204,
+    "end_leaf": 208,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 232,
+    "end_leaf": 300,
+    "leaves": 69
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 394,
+    "end_leaf": 478,
+    "leaves": 85
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 540,
+    "end_leaf": 542,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 622,
+    "end_leaf": 862,
+    "leaves": 241
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 890,
+    "end_leaf": 890,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 936,
+    "end_leaf": 936,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1044,
+    "end_leaf": 1044,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    9,
+    39,
+    12
+   ],
+   "I": [
+    189,
+    203,
+    8
+   ],
+   "J": [
+    209,
+    231,
+    10
+   ],
+   "K": [
+    301,
+    393,
+    38
+   ],
+   "L": [
+    479,
+    539,
+    30
+   ],
+   "M": [
+    543,
+    621,
+    34
+   ],
+   "N": [
+    863,
+    889,
+    11
+   ],
+   "O": [
+    891,
+    935,
+    18
+   ],
+   "P": [
+    937,
+    1043,
+    47
+   ],
+   "Q": [
+    1045,
+    1045,
+    1
+   ]
+  },
+  "skipped_votes": 8,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1045
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

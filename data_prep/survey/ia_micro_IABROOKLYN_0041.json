@@ -351,5 +351,63 @@
   "words_gz_bytes": 58640,
   "hocr_deleted": true,
   "elapsed_s": 11
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 57,
+  "end_leaf": 57,
+  "first_letter": "M",
+  "last_letter": "M",
+  "letters_present": "M",
+  "missing_letters": "ABCDEFGHIJKLNOPQRSTUVWXYZ",
+  "voting_density": 1.0,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 57,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$57/full/!1400,1400/0/default.jpg",
+   "quote": "Mahony Bridget, 337 Columbia"
+  },
+  "end": {
+   "leaf": 57,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0041$57/full/!1400,1400/0/default.jpg",
+   "quote": "Mellar Christopher, 287 8 5th E D"
+  },
+  "sections": [
+   {
+    "start_leaf": 57,
+    "end_leaf": 57,
+    "voting_leaves": 1,
+    "first_letter": "M",
+    "last_letter": "M",
+    "letters": "M",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "M": [
+    57,
+    57,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 58,
+   "end_leaf": 58
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

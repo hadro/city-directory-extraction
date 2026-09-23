@@ -368,5 +368,297 @@
   "words_gz_bytes": 478569,
   "hocr_deleted": true,
   "elapsed_s": 7
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 36,
+  "end_leaf": 211,
+  "first_letter": "B",
+  "last_letter": "Z",
+  "letters_present": "BCDFGHJKLMNOPRSTUVWYZ",
+  "missing_letters": "AEIQX",
+  "voting_density": 0.369,
+  "flags": [],
+  "start": {
+   "leaf": 36,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$36/full/!1400,1400/0/default.jpg",
+   "quote": "Bell Robert, ngent, : 5 gt vty To-#7;\u00b0S 8 TPR"
+  },
+  "end": {
+   "leaf": 211,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$211/full/!1400,1400/0/default.jpg",
+   "quote": "Zoller J. F. tobacconist, 22 Remgen -"
+  },
+  "sections": [
+   {
+    "start_leaf": 36,
+    "end_leaf": 211,
+    "voting_leaves": 65,
+    "first_letter": "B",
+    "last_letter": "Z",
+    "letters": "BCDFGHJKLMNOPRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 44,
+    "end_leaf": 56,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 59,
+    "end_leaf": 62,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "D",
+     "F"
+    ],
+    "start_leaf": 68,
+    "end_leaf": 75,
+    "leaves": 8
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 77,
+    "end_leaf": 89,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 91,
+    "end_leaf": 93,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "H",
+     "J"
+    ],
+    "start_leaf": 97,
+    "end_leaf": 107,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 110,
+    "end_leaf": 111,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 113,
+    "end_leaf": 122,
+    "leaves": 10
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 127,
+    "end_leaf": 137,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 145,
+    "end_leaf": 145,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 148,
+    "end_leaf": 148,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 150,
+    "end_leaf": 156,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 171,
+    "end_leaf": 171,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 179,
+    "end_leaf": 188,
+    "leaves": 10
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 196,
+    "end_leaf": 196,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "B": [
+    36,
+    43,
+    7
+   ],
+   "C": [
+    57,
+    58,
+    2
+   ],
+   "D": [
+    63,
+    67,
+    3
+   ],
+   "F": [
+    76,
+    76,
+    1
+   ],
+   "G": [
+    90,
+    90,
+    1
+   ],
+   "H": [
+    94,
+    96,
+    2
+   ],
+   "J": [
+    108,
+    109,
+    2
+   ],
+   "K": [
+    112,
+    112,
+    1
+   ],
+   "L": [
+    123,
+    126,
+    2
+   ],
+   "M": [
+    138,
+    144,
+    6
+   ],
+   "N": [
+    146,
+    147,
+    2
+   ],
+   "O": [
+    149,
+    149,
+    1
+   ],
+   "P": [
+    157,
+    161,
+    5
+   ],
+   "R": [
+    162,
+    170,
+    7
+   ],
+   "S": [
+    172,
+    178,
+    5
+   ],
+   "T": [
+    189,
+    193,
+    4
+   ],
+   "U": [
+    194,
+    194,
+    1
+   ],
+   "V": [
+    195,
+    195,
+    1
+   ],
+   "W": [
+    197,
+    209,
+    8
+   ],
+   "Y": [
+    210,
+    210,
+    1
+   ],
+   "Z": [
+    211,
+    211,
+    1
+   ]
+  },
+  "skipped_votes": 1,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 36,
+   "end_leaf": 211
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

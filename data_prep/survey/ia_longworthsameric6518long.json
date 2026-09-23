@@ -346,5 +346,181 @@
   "words_gz_bytes": 3252174,
   "hocr_deleted": true,
   "elapsed_s": 14
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 48,
+  "end_leaf": 702,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 1.0,
+  "flags": [],
+  "start": {
+   "leaf": 48,
+   "image": "https://iiif.archive.org/iiif/longworthsameric6518long$48/full/!1400,1400/0/default.jpg",
+   "quote": "Any person who actually finds, or thinks that he has found"
+  },
+  "end": {
+   "leaf": 702,
+   "image": "https://iiif.archive.org/iiif/longworthsameric6518long$702/full/!1400,1400/0/default.jpg",
+   "quote": "Zwahlcn Louis, turner 70 Mott"
+  },
+  "sections": [
+   {
+    "start_leaf": 48,
+    "end_leaf": 702,
+    "voting_leaves": 655,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    48,
+    66,
+    19
+   ],
+   "B": [
+    67,
+    133,
+    67
+   ],
+   "C": [
+    134,
+    187,
+    54
+   ],
+   "D": [
+    188,
+    223,
+    36
+   ],
+   "E": [
+    224,
+    234,
+    11
+   ],
+   "F": [
+    235,
+    258,
+    24
+   ],
+   "G": [
+    259,
+    286,
+    28
+   ],
+   "H": [
+    287,
+    339,
+    53
+   ],
+   "I": [
+    340,
+    342,
+    3
+   ],
+   "J": [
+    343,
+    355,
+    13
+   ],
+   "K": [
+    356,
+    373,
+    18
+   ],
+   "L": [
+    374,
+    402,
+    29
+   ],
+   "M": [
+    403,
+    464,
+    62
+   ],
+   "N": [
+    465,
+    473,
+    9
+   ],
+   "O": [
+    474,
+    481,
+    8
+   ],
+   "P": [
+    482,
+    513,
+    32
+   ],
+   "Q": [
+    514,
+    514,
+    1
+   ],
+   "R": [
+    515,
+    545,
+    31
+   ],
+   "S": [
+    546,
+    606,
+    61
+   ],
+   "T": [
+    607,
+    633,
+    27
+   ],
+   "U": [
+    634,
+    635,
+    2
+   ],
+   "V": [
+    636,
+    650,
+    15
+   ],
+   "W": [
+    651,
+    699,
+    49
+   ],
+   "Y": [
+    700,
+    701,
+    2
+   ],
+   "Z": [
+    702,
+    702,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 48,
+   "end_leaf": 702
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

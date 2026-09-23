@@ -364,5 +364,136 @@
   "words_gz_bytes": 4508087,
   "hocr_deleted": true,
   "elapsed_s": 13
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 161,
+  "end_leaf": 1053,
+  "first_letter": "A",
+  "last_letter": "F",
+  "letters_present": "ABCDEF",
+  "missing_letters": "GHIJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.046,
+  "flags": [
+   "sparse",
+   "edge-disagreement",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 161,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$161/full/!1400,1400/0/default.jpg",
+   "quote": "Ann R 10"
+  },
+  "end": {
+   "leaf": 1053,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$1053/full/!1400,1400/0/default.jpg",
+   "quote": "Fuhrtng Gustav H"
+  },
+  "sections": [
+   {
+    "start_leaf": 161,
+    "end_leaf": 1053,
+    "voting_leaves": 41,
+    "first_letter": "A",
+    "last_letter": "F",
+    "letters": "ABCDEF",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 162,
+    "end_leaf": 360,
+    "leaves": 199
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 376,
+    "end_leaf": 572,
+    "leaves": 197
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 582,
+    "end_leaf": 758,
+    "leaves": 177
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 760,
+    "end_leaf": 878,
+    "leaves": 119
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 890,
+    "end_leaf": 1046,
+    "leaves": 157
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    161,
+    161,
+    1
+   ],
+   "B": [
+    361,
+    375,
+    5
+   ],
+   "C": [
+    573,
+    581,
+    4
+   ],
+   "D": [
+    759,
+    759,
+    1
+   ],
+   "E": [
+    879,
+    889,
+    3
+   ],
+   "F": [
+    1047,
+    1053,
+    2
+   ]
+  },
+  "skipped_votes": 1,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 105,
+   "end_leaf": 1169
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

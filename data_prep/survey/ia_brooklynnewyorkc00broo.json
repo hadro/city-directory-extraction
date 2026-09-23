@@ -407,5 +407,162 @@
   "words_gz_bytes": 7498319,
   "hocr_deleted": true,
   "elapsed_s": 44
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 15,
+  "end_leaf": 1079,
+  "first_letter": "A",
+  "last_letter": "H",
+  "letters_present": "ABCDEFGH",
+  "missing_letters": "IJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.426,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 15,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$15/full/!1400,1400/0/default.jpg",
+   "quote": "Aalbue John h 1S6 Seeley"
+  },
+  "end": {
+   "leaf": 1079,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$1079/full/!1400,1400/0/default.jpg",
+   "quote": "Hausler Gustav mgr h 1370 Jef av"
+  },
+  "sections": [
+   {
+    "start_leaf": 15,
+    "end_leaf": 1079,
+    "voting_leaves": 454,
+    "first_letter": "A",
+    "last_letter": "H",
+    "letters": "ABCDEFGH",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 56,
+    "end_leaf": 152,
+    "leaves": 97
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 288,
+    "end_leaf": 466,
+    "leaves": 179
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 550,
+    "end_leaf": 550,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 682,
+    "end_leaf": 686,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 742,
+    "end_leaf": 742,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 868,
+    "end_leaf": 868,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 978,
+    "end_leaf": 1014,
+    "leaves": 37
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    15,
+    55,
+    20
+   ],
+   "B": [
+    153,
+    287,
+    64
+   ],
+   "C": [
+    467,
+    549,
+    36
+   ],
+   "D": [
+    551,
+    681,
+    60
+   ],
+   "E": [
+    687,
+    741,
+    27
+   ],
+   "F": [
+    743,
+    867,
+    55
+   ],
+   "G": [
+    869,
+    977,
+    49
+   ],
+   "H": [
+    1015,
+    1079,
+    29
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 15,
+   "end_leaf": 1079
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

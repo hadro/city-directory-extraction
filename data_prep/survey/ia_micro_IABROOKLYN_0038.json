@@ -295,5 +295,78 @@
   "words_gz_bytes": 244493,
   "hocr_deleted": true,
   "elapsed_s": 4
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 7,
+  "end_leaf": 16,
+  "first_letter": "B",
+  "last_letter": "L",
+  "letters_present": "BL",
+  "missing_letters": "ACDEFGHIJKMNOPQRSTUVWXYZ",
+  "voting_density": 0.2,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 7,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0038$7/full/!1400,1400/0/default.jpg",
+   "quote": "Block and Pum p-Mak- | Altenberg Cari, 841 Fulton Connelly Matthew, 138 N"
+  },
+  "end": {
+   "leaf": 16,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0038$16/full/!1400,1400/0/default.jpg",
+   "quote": "Lemont James, Van Brunt e MeKennett Thomas, 262 Navy ED Twenty-fifth"
+  },
+  "sections": [
+   {
+    "start_leaf": 7,
+    "end_leaf": 16,
+    "voting_leaves": 2,
+    "first_letter": "B",
+    "last_letter": "L",
+    "letters": "BL",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "L"
+    ],
+    "start_leaf": 8,
+    "end_leaf": 15,
+    "leaves": 8
+   }
+  ],
+  "letter_blocks": {
+   "B": [
+    7,
+    7,
+    1
+   ],
+   "L": [
+    16,
+    16,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 7,
+   "end_leaf": 16
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

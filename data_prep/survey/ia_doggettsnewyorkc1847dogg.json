@@ -377,5 +377,191 @@
   "words_gz_bytes": 6557473,
   "hocr_deleted": true,
   "elapsed_s": 51
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 25,
+  "end_leaf": 467,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.982,
+  "flags": [],
+  "start": {
+   "leaf": 25,
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$25/full/!1400,1400/0/default.jpg",
+   "quote": "Aaron Eiias E. late com. mer. h. 161 Allen"
+  },
+  "end": {
+   "leaf": 467,
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$467/full/!1400,1400/0/default.jpg",
+   "quote": "Zwergius Julius, teas, 60 Division, h. 60 Division"
+  },
+  "sections": [
+   {
+    "start_leaf": 25,
+    "end_leaf": 467,
+    "voting_leaves": 435,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 405,
+    "end_leaf": 406,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    25,
+    36,
+    12
+   ],
+   "B": [
+    37,
+    79,
+    43
+   ],
+   "C": [
+    80,
+    116,
+    35
+   ],
+   "D": [
+    117,
+    140,
+    24
+   ],
+   "E": [
+    141,
+    147,
+    7
+   ],
+   "F": [
+    148,
+    164,
+    17
+   ],
+   "G": [
+    165,
+    183,
+    19
+   ],
+   "H": [
+    184,
+    218,
+    35
+   ],
+   "I": [
+    219,
+    220,
+    2
+   ],
+   "J": [
+    221,
+    229,
+    9
+   ],
+   "K": [
+    230,
+    242,
+    13
+   ],
+   "L": [
+    243,
+    262,
+    20
+   ],
+   "M": [
+    263,
+    309,
+    45
+   ],
+   "N": [
+    310,
+    315,
+    6
+   ],
+   "O": [
+    316,
+    321,
+    6
+   ],
+   "P": [
+    322,
+    341,
+    20
+   ],
+   "Q": [
+    342,
+    342,
+    1
+   ],
+   "R": [
+    343,
+    363,
+    21
+   ],
+   "S": [
+    364,
+    404,
+    41
+   ],
+   "T": [
+    407,
+    422,
+    16
+   ],
+   "U": [
+    423,
+    423,
+    1
+   ],
+   "V": [
+    424,
+    432,
+    9
+   ],
+   "W": [
+    433,
+    464,
+    30
+   ],
+   "Y": [
+    465,
+    466,
+    2
+   ],
+   "Z": [
+    467,
+    467,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 25,
+   "end_leaf": 467
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

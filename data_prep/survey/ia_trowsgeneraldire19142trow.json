@@ -364,5 +364,191 @@
   "words_gz_bytes": 5127498,
   "hocr_deleted": true,
   "elapsed_s": 32
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 77,
+  "end_leaf": 1047,
+  "first_letter": "H",
+  "last_letter": "Q",
+  "letters_present": "HIJKLMNOPQ",
+  "missing_letters": "ABCDEFGRSTUVWXYZ",
+  "voting_density": 0.262,
+  "flags": [
+   "edge-disagreement",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 77,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$77/full/!1400,1400/0/default.jpg",
+   "quote": "Htd.-iniii Wm A pluslifS -ill 4lli av Kl"
+  },
+  "end": {
+   "leaf": 1047,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19142trow$1047/full/!1400,1400/0/default.jpg",
+   "quote": "Quick Adrian L fornilnre f Rcade hm6 Prospect pi"
+  },
+  "sections": [
+   {
+    "start_leaf": 77,
+    "end_leaf": 1047,
+    "voting_leaves": 254,
+    "first_letter": "H",
+    "last_letter": "Q",
+    "letters": "HIJKLMNOPQ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 134,
+    "end_leaf": 192,
+    "leaves": 59
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 206,
+    "end_leaf": 218,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 234,
+    "end_leaf": 302,
+    "leaves": 69
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 392,
+    "end_leaf": 480,
+    "leaves": 89
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 536,
+    "end_leaf": 540,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 616,
+    "end_leaf": 844,
+    "leaves": 229
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 856,
+    "end_leaf": 904,
+    "leaves": 49
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 938,
+    "end_leaf": 938,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1046,
+    "end_leaf": 1046,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    125,
+    133,
+    3
+   ],
+   "I": [
+    193,
+    205,
+    6
+   ],
+   "J": [
+    219,
+    233,
+    8
+   ],
+   "K": [
+    303,
+    391,
+    30
+   ],
+   "L": [
+    481,
+    535,
+    22
+   ],
+   "M": [
+    541,
+    615,
+    32
+   ],
+   "N": [
+    845,
+    855,
+    4
+   ],
+   "O": [
+    905,
+    937,
+    13
+   ],
+   "P": [
+    939,
+    1045,
+    43
+   ],
+   "Q": [
+    1047,
+    1047,
+    1
+   ]
+  },
+  "skipped_votes": 7,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 95,
+   "end_leaf": 1047
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

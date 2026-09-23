@@ -324,5 +324,190 @@
   "words_gz_bytes": 13548811,
   "hocr_deleted": true,
   "elapsed_s": 62
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 917,
+  "first_letter": "P",
+  "last_letter": "Z",
+  "letters_present": "PQRSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKLMNOX",
+  "voting_density": 0.408,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p3trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "PliAYTER"
+  },
+  "end": {
+   "leaf": 917,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p3trow$917/full/!1400,1400/0/default.jpg",
+   "quote": "Zyss Louis Jeweler 350 Bowery"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 917,
+    "voting_leaves": 371,
+    "first_letter": "P",
+    "last_letter": "Z",
+    "letters": "PQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 48,
+    "end_leaf": 48,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 56,
+    "end_leaf": 56,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 136,
+    "end_leaf": 218,
+    "leaves": 83
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 416,
+    "end_leaf": 566,
+    "leaves": 151
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 652,
+    "end_leaf": 652,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 658,
+    "end_leaf": 668,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 708,
+    "end_leaf": 758,
+    "leaves": 51
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 806,
+    "end_leaf": 890,
+    "leaves": 85
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 900,
+    "end_leaf": 900,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "P": [
+    9,
+    47,
+    19
+   ],
+   "Q": [
+    49,
+    55,
+    3
+   ],
+   "R": [
+    57,
+    135,
+    35
+   ],
+   "S": [
+    219,
+    415,
+    87
+   ],
+   "T": [
+    567,
+    651,
+    38
+   ],
+   "U": [
+    653,
+    657,
+    3
+   ],
+   "V": [
+    669,
+    707,
+    20
+   ],
+   "W": [
+    759,
+    805,
+    20
+   ],
+   "Y": [
+    891,
+    899,
+    4
+   ],
+   "Z": [
+    901,
+    917,
+    9
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 917
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

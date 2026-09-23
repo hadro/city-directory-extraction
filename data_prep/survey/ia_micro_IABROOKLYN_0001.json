@@ -363,5 +363,136 @@
   "words_gz_bytes": 187500,
   "hocr_deleted": true,
   "elapsed_s": 4
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 5,
+  "end_leaf": 31,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDFGHJLMPRSTVW",
+  "missing_letters": "EIKNOQUXYZ",
+  "voting_density": 1.0,
+  "flags": [],
+  "start": {
+   "leaf": 5,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0001$5/full/!1400,1400/0/default.jpg",
+   "quote": "Abbot John, shoemaker 76 Ja [c. Water"
+  },
+  "end": {
+   "leaf": 31,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0001$31/full/!1400,1400/0/default.jpg",
+   "quote": "Wright Grove, merchant Joralemon n. Datch Church"
+  },
+  "sections": [
+   {
+    "start_leaf": 5,
+    "end_leaf": 31,
+    "voting_leaves": 27,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDFGHJLMPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    5,
+    5,
+    1
+   ],
+   "B": [
+    6,
+    8,
+    3
+   ],
+   "C": [
+    9,
+    10,
+    2
+   ],
+   "D": [
+    11,
+    12,
+    2
+   ],
+   "F": [
+    13,
+    13,
+    1
+   ],
+   "G": [
+    14,
+    14,
+    1
+   ],
+   "H": [
+    15,
+    16,
+    2
+   ],
+   "J": [
+    17,
+    17,
+    1
+   ],
+   "L": [
+    18,
+    18,
+    1
+   ],
+   "M": [
+    19,
+    21,
+    3
+   ],
+   "P": [
+    22,
+    22,
+    1
+   ],
+   "R": [
+    23,
+    24,
+    2
+   ],
+   "S": [
+    25,
+    27,
+    3
+   ],
+   "T": [
+    28,
+    28,
+    1
+   ],
+   "V": [
+    29,
+    29,
+    1
+   ],
+   "W": [
+    30,
+    31,
+    2
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 5,
+   "end_leaf": 31
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

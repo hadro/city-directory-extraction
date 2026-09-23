@@ -338,5 +338,246 @@
   "words_gz_bytes": 8871418,
   "hocr_deleted": true,
   "elapsed_s": 43
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1079,
+  "first_letter": "L",
+  "last_letter": "Z",
+  "letters_present": "LMNOPQRSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKX",
+  "voting_density": 0.381,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1907geor$9/full/!1400,1400/0/default.jpg",
+   "quote": "Leglin Harris realestate h 611 Wil'by av"
+  },
+  "end": {
+   "leaf": 1079,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1907geor$1079/full/!1400,1400/0/default.jpg",
+   "quote": "Zynn Abraham clothing 794 Grand"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1079,
+    "voting_leaves": 408,
+    "first_letter": "L",
+    "last_letter": "Z",
+    "letters": "LMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 72,
+    "end_leaf": 76,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 136,
+    "end_leaf": 298,
+    "leaves": 163
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 340,
+    "end_leaf": 340,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 364,
+    "end_leaf": 382,
+    "leaves": 19
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 466,
+    "end_leaf": 466,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 472,
+    "end_leaf": 472,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 578,
+    "end_leaf": 586,
+    "leaves": 9
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 718,
+    "end_leaf": 850,
+    "leaves": 133
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 884,
+    "end_leaf": 884,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 892,
+    "end_leaf": 892,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 922,
+    "end_leaf": 922,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 1010,
+    "end_leaf": 1060,
+    "leaves": 51
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 1064,
+    "end_leaf": 1068,
+    "leaves": 5
+   }
+  ],
+  "letter_blocks": {
+   "L": [
+    29,
+    71,
+    22
+   ],
+   "M": [
+    77,
+    135,
+    22
+   ],
+   "N": [
+    299,
+    339,
+    17
+   ],
+   "O": [
+    341,
+    363,
+    8
+   ],
+   "P": [
+    383,
+    465,
+    39
+   ],
+   "Q": [
+    467,
+    471,
+    2
+   ],
+   "R": [
+    473,
+    577,
+    47
+   ],
+   "S": [
+    587,
+    717,
+    59
+   ],
+   "T": [
+    851,
+    883,
+    17
+   ],
+   "U": [
+    885,
+    891,
+    4
+   ],
+   "V": [
+    893,
+    921,
+    14
+   ],
+   "W": [
+    923,
+    1009,
+    33
+   ],
+   "Y": [
+    1061,
+    1063,
+    2
+   ],
+   "Z": [
+    1069,
+    1079,
+    6
+   ]
+  },
+  "skipped_votes": 4,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1079
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

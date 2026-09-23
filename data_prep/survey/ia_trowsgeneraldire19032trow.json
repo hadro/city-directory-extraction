@@ -334,5 +334,204 @@
   "words_gz_bytes": 13378609,
   "hocr_deleted": true,
   "elapsed_s": 59
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1163,
+  "first_letter": "H",
+  "last_letter": "R",
+  "letters_present": "HIJKLMNOPQR",
+  "missing_letters": "ABCDEFGSTUVWXYZ",
+  "voting_density": 0.364,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19032trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Hanser Frank carpenter h .148 K 76th"
+  },
+  "end": {
+   "leaf": 1163,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire19032trow$1163/full/!1400,1400/0/default.jpg",
+   "quote": "Resr-neyer Hy bottler \u00bbS7 Park \u2022 -"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1163,
+    "voting_leaves": 420,
+    "first_letter": "H",
+    "last_letter": "R",
+    "letters": "HIJKLMNOPQR",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 166,
+    "end_leaf": 198,
+    "leaves": 33
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 214,
+    "end_leaf": 224,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 244,
+    "end_leaf": 314,
+    "leaves": 71
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 416,
+    "end_leaf": 502,
+    "leaves": 87
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 574,
+    "end_leaf": 576,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 654,
+    "end_leaf": 910,
+    "leaves": 257
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 940,
+    "end_leaf": 940,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 990,
+    "end_leaf": 992,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1108,
+    "end_leaf": 1108,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1112,
+    "end_leaf": 1116,
+    "leaves": 5
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    51,
+    165,
+    47
+   ],
+   "I": [
+    199,
+    213,
+    7
+   ],
+   "J": [
+    225,
+    243,
+    9
+   ],
+   "K": [
+    315,
+    415,
+    47
+   ],
+   "L": [
+    503,
+    573,
+    32
+   ],
+   "M": [
+    577,
+    653,
+    34
+   ],
+   "N": [
+    911,
+    939,
+    13
+   ],
+   "O": [
+    941,
+    989,
+    21
+   ],
+   "P": [
+    993,
+    1107,
+    50
+   ],
+   "Q": [
+    1109,
+    1111,
+    2
+   ],
+   "R": [
+    1117,
+    1163,
+    22
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1163
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

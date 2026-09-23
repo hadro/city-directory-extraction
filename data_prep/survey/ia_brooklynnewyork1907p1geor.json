@@ -347,5 +347,218 @@
   "words_gz_bytes": 8151863,
   "hocr_deleted": true,
   "elapsed_s": 55
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 39,
+  "end_leaf": 1139,
+  "first_letter": "A",
+  "last_letter": "L",
+  "letters_present": "ABCDEFGHIJKL",
+  "missing_letters": "MNOPQRSTUVWXYZ",
+  "voting_density": 0.396,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 39,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1907p1geor$39/full/!1400,1400/0/default.jpg",
+   "quote": "Acct. accountant; agl. agricultural; agt. agent; Ala. Alabama; al. alley; art."
+  },
+  "end": {
+   "leaf": 1139,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1907p1geor$1139/full/!1400,1400/0/default.jpg",
+   "quote": "Lctrgo John printer 1237 Putnam av"
+  },
+  "sections": [
+   {
+    "start_leaf": 39,
+    "end_leaf": 1139,
+    "voting_leaves": 436,
+    "first_letter": "A",
+    "last_letter": "L",
+    "letters": "ABCDEFGHIJKL",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 96,
+    "end_leaf": 160,
+    "leaves": 65
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 248,
+    "end_leaf": 402,
+    "leaves": 155
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 458,
+    "end_leaf": 476,
+    "leaves": 19
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 556,
+    "end_leaf": 558,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 598,
+    "end_leaf": 598,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 658,
+    "end_leaf": 686,
+    "leaves": 29
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 790,
+    "end_leaf": 790,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 940,
+    "end_leaf": 948,
+    "leaves": 9
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 958,
+    "end_leaf": 964,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 978,
+    "end_leaf": 1062,
+    "leaves": 85
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 1108,
+    "end_leaf": 1108,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    39,
+    95,
+    24
+   ],
+   "B": [
+    161,
+    247,
+    43
+   ],
+   "C": [
+    403,
+    457,
+    24
+   ],
+   "D": [
+    477,
+    555,
+    36
+   ],
+   "E": [
+    559,
+    597,
+    18
+   ],
+   "F": [
+    599,
+    657,
+    26
+   ],
+   "G": [
+    687,
+    789,
+    45
+   ],
+   "H": [
+    791,
+    939,
+    60
+   ],
+   "I": [
+    949,
+    957,
+    4
+   ],
+   "J": [
+    965,
+    977,
+    5
+   ],
+   "K": [
+    1063,
+    1107,
+    22
+   ],
+   "L": [
+    1109,
+    1139,
+    12
+   ]
+  },
+  "skipped_votes": 7,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 39,
+   "end_leaf": 1139
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

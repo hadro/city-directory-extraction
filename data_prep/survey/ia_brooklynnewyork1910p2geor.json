@@ -353,5 +353,246 @@
   "words_gz_bytes": 10115361,
   "hocr_deleted": true,
   "elapsed_s": 78
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 7,
+  "end_leaf": 1261,
+  "first_letter": "L",
+  "last_letter": "Z",
+  "letters_present": "LMNOPQRSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKX",
+  "voting_density": 0.355,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 7,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1910p2geor$7/full/!1400,1400/0/default.jpg",
+   "quote": "Lareeo Jos hats 485 Bwick av"
+  },
+  "end": {
+   "leaf": 1261,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1910p2geor$1261/full/!1400,1400/0/default.jpg",
+   "quote": "Zysman Leon salesman h 1320 71st"
+  },
+  "sections": [
+   {
+    "start_leaf": 7,
+    "end_leaf": 1261,
+    "voting_leaves": 446,
+    "first_letter": "L",
+    "last_letter": "Z",
+    "letters": "LMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 102,
+    "end_leaf": 108,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 178,
+    "end_leaf": 354,
+    "leaves": 177
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 406,
+    "end_leaf": 416,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 448,
+    "end_leaf": 450,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 546,
+    "end_leaf": 546,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 550,
+    "end_leaf": 554,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 622,
+    "end_leaf": 686,
+    "leaves": 65
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 836,
+    "end_leaf": 986,
+    "leaves": 151
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 1030,
+    "end_leaf": 1032,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 1038,
+    "end_leaf": 1038,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 1074,
+    "end_leaf": 1114,
+    "leaves": 41
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 1180,
+    "end_leaf": 1238,
+    "leaves": 59
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 1248,
+    "end_leaf": 1248,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "L": [
+    55,
+    101,
+    21
+   ],
+   "M": [
+    109,
+    177,
+    28
+   ],
+   "N": [
+    355,
+    405,
+    19
+   ],
+   "O": [
+    417,
+    447,
+    12
+   ],
+   "P": [
+    451,
+    545,
+    41
+   ],
+   "Q": [
+    547,
+    549,
+    2
+   ],
+   "R": [
+    555,
+    621,
+    27
+   ],
+   "S": [
+    687,
+    835,
+    65
+   ],
+   "T": [
+    987,
+    1029,
+    20
+   ],
+   "U": [
+    1033,
+    1037,
+    2
+   ],
+   "V": [
+    1039,
+    1073,
+    16
+   ],
+   "W": [
+    1115,
+    1179,
+    25
+   ],
+   "Y": [
+    1239,
+    1247,
+    3
+   ],
+   "Z": [
+    1249,
+    1261,
+    6
+   ]
+  },
+  "skipped_votes": 14,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 7,
+   "end_leaf": 1261
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

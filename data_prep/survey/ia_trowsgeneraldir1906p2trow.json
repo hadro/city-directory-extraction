@@ -399,5 +399,190 @@
   "words_gz_bytes": 14377137,
   "hocr_deleted": true,
   "elapsed_s": 33
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1191,
+  "first_letter": "G",
+  "last_letter": "P",
+  "letters_present": "GHIJKLMNOP",
+  "missing_letters": "ABCDEFQRSTUVWXYZ",
+  "voting_density": 0.38,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Good work guaranteed"
+  },
+  "end": {
+   "leaf": 1191,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$1191/full/!1400,1400/0/default.jpg",
+   "quote": "Playtcr Franklin sec 52 Nassau"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1191,
+    "voting_leaves": 450,
+    "first_letter": "G",
+    "last_letter": "P",
+    "letters": "GHIJKLMNOP",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 72,
+    "end_leaf": 126,
+    "leaves": 55
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 302,
+    "end_leaf": 302,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 320,
+    "end_leaf": 332,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 350,
+    "end_leaf": 424,
+    "leaves": 75
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 528,
+    "end_leaf": 614,
+    "leaves": 87
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 690,
+    "end_leaf": 694,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 780,
+    "end_leaf": 994,
+    "leaves": 215
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 1020,
+    "end_leaf": 1060,
+    "leaves": 41
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1112,
+    "end_leaf": 1112,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "G": [
+    37,
+    71,
+    17
+   ],
+   "H": [
+    127,
+    301,
+    77
+   ],
+   "I": [
+    303,
+    319,
+    8
+   ],
+   "J": [
+    333,
+    349,
+    9
+   ],
+   "K": [
+    425,
+    527,
+    47
+   ],
+   "L": [
+    615,
+    689,
+    35
+   ],
+   "M": [
+    695,
+    779,
+    37
+   ],
+   "N": [
+    995,
+    1019,
+    12
+   ],
+   "O": [
+    1061,
+    1111,
+    21
+   ],
+   "P": [
+    1113,
+    1191,
+    35
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1191
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

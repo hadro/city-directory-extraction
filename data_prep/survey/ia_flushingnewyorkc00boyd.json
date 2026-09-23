@@ -404,5 +404,328 @@
    "filters_at": "02404bc-dirty",
    "derived": "2026-09-22"
   }
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 15,
+  "end_leaf": 171,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHJKLMNPRSTVWY",
+  "missing_letters": "IOQUXZ",
+  "voting_density": 0.465,
+  "flags": [],
+  "start": {
+   "leaf": 15,
+   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$15/full/!1400,1400/0/default.jpg",
+   "quote": "Abbott Noah, gardener, h 24 S. Prince C/2"
+  },
+  "end": {
+   "leaf": 171,
+   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$171/full/!1400,1400/0/default.jpg",
+   "quote": "Young Wm L, painter, h 42 Madison ave 5\u00a7"
+  },
+  "sections": [
+   {
+    "start_leaf": 15,
+    "end_leaf": 171,
+    "voting_leaves": 73,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHJKLMNPRSTVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 16,
+    "end_leaf": 18,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 32,
+    "end_leaf": 32,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 48,
+    "end_leaf": 48,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 54,
+    "end_leaf": 54,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 56,
+    "end_leaf": 56,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 64,
+    "end_leaf": 64,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 72,
+    "end_leaf": 72,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "J"
+    ],
+    "start_leaf": 84,
+    "end_leaf": 84,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 88,
+    "end_leaf": 88,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 92,
+    "end_leaf": 92,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 100,
+    "end_leaf": 100,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 114,
+    "end_leaf": 114,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "N",
+     "P"
+    ],
+    "start_leaf": 118,
+    "end_leaf": 118,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 124,
+    "end_leaf": 124,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 126,
+    "end_leaf": 134,
+    "leaves": 9
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 148,
+    "end_leaf": 148,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "T",
+     "V"
+    ],
+    "start_leaf": 156,
+    "end_leaf": 156,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 160,
+    "end_leaf": 160,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 170,
+    "end_leaf": 170,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    15,
+    15,
+    1
+   ],
+   "B": [
+    19,
+    31,
+    7
+   ],
+   "C": [
+    33,
+    47,
+    8
+   ],
+   "D": [
+    49,
+    53,
+    3
+   ],
+   "E": [
+    55,
+    55,
+    1
+   ],
+   "F": [
+    57,
+    63,
+    4
+   ],
+   "G": [
+    65,
+    71,
+    4
+   ],
+   "H": [
+    73,
+    83,
+    6
+   ],
+   "J": [
+    85,
+    87,
+    2
+   ],
+   "K": [
+    89,
+    91,
+    2
+   ],
+   "L": [
+    93,
+    99,
+    4
+   ],
+   "M": [
+    101,
+    113,
+    5
+   ],
+   "N": [
+    115,
+    117,
+    2
+   ],
+   "P": [
+    119,
+    123,
+    3
+   ],
+   "R": [
+    125,
+    125,
+    1
+   ],
+   "S": [
+    135,
+    147,
+    7
+   ],
+   "T": [
+    149,
+    155,
+    4
+   ],
+   "V": [
+    157,
+    159,
+    2
+   ],
+   "W": [
+    161,
+    169,
+    5
+   ],
+   "Y": [
+    171,
+    171,
+    1
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 15,
+   "end_leaf": 171
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

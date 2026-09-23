@@ -299,5 +299,377 @@
   "words_gz_bytes": 113242323,
   "hocr_deleted": true,
   "elapsed_s": 315
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 213,
+  "end_leaf": 2070,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPRSTUVWYZ",
+  "missing_letters": "QX",
+  "voting_density": 0.477,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 213,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$213/full/!1400,1400/0/default.jpg",
+   "quote": "Abatiga Angelo pdlr h.1446 Minford pi"
+  },
+  "end": {
+   "leaf": 2070,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$2070/full/!1400,1400/0/default.jpg",
+   "quote": "Zzisko Ignatz lab h286 E155th"
+  },
+  "sections": [
+   {
+    "start_leaf": 213,
+    "end_leaf": 2070,
+    "voting_leaves": 886,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPRSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 2272,
+    "end_leaf": 2408,
+    "voting_leaves": 16,
+    "first_letter": "C",
+    "last_letter": "S",
+    "letters": "CDFGHMPRS",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 275,
+    "end_leaf": 275,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 333,
+    "end_leaf": 442,
+    "leaves": 110
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 509,
+    "end_leaf": 620,
+    "leaves": 112
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 663,
+    "end_leaf": 667,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 701,
+    "end_leaf": 704,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 741,
+    "end_leaf": 798,
+    "leaves": 58
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 846,
+    "end_leaf": 960,
+    "leaves": 115
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 986,
+    "end_leaf": 1046,
+    "leaves": 61
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 1049,
+    "end_leaf": 1055,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 1071,
+    "end_leaf": 1113,
+    "leaves": 43
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 1173,
+    "end_leaf": 1230,
+    "leaves": 58
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 1266,
+    "end_leaf": 1301,
+    "leaves": 36
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 1367,
+    "end_leaf": 1434,
+    "leaves": 68
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 1450,
+    "end_leaf": 1482,
+    "leaves": 33
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1504,
+    "end_leaf": 1504,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 1579,
+    "end_leaf": 1584,
+    "leaves": 6
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 1628,
+    "end_leaf": 1681,
+    "leaves": 54
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 1800,
+    "end_leaf": 1901,
+    "leaves": 102
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 1926,
+    "end_leaf": 1935,
+    "leaves": 10
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 1937,
+    "end_leaf": 1938,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 1959,
+    "end_leaf": 2026,
+    "leaves": 68
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    213,
+    274,
+    32
+   ],
+   "B": [
+    276,
+    332,
+    38
+   ],
+   "C": [
+    443,
+    508,
+    41
+   ],
+   "D": [
+    621,
+    662,
+    22
+   ],
+   "E": [
+    668,
+    700,
+    18
+   ],
+   "F": [
+    705,
+    740,
+    19
+   ],
+   "G": [
+    799,
+    845,
+    31
+   ],
+   "H": [
+    961,
+    985,
+    10
+   ],
+   "I": [
+    1047,
+    1048,
+    2
+   ],
+   "J": [
+    1056,
+    1070,
+    8
+   ],
+   "K": [
+    1114,
+    1172,
+    39
+   ],
+   "L": [
+    1231,
+    1265,
+    23
+   ],
+   "M": [
+    1302,
+    1366,
+    40
+   ],
+   "N": [
+    1435,
+    1449,
+    8
+   ],
+   "O": [
+    1483,
+    1503,
+    12
+   ],
+   "P": [
+    1505,
+    1578,
+    53
+   ],
+   "R": [
+    1585,
+    1627,
+    23
+   ],
+   "S": [
+    1682,
+    1799,
+    77
+   ],
+   "T": [
+    1902,
+    1925,
+    20
+   ],
+   "U": [
+    1936,
+    1936,
+    1
+   ],
+   "V": [
+    1939,
+    1958,
+    19
+   ],
+   "W": [
+    2027,
+    2051,
+    10
+   ],
+   "Y": [
+    2052,
+    2057,
+    4
+   ],
+   "Z": [
+    2058,
+    2070,
+    11
+   ]
+  },
+  "skipped_votes": 60,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 213,
+   "end_leaf": 2070
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -359,5 +359,208 @@
   "words_gz_bytes": 1083391,
   "hocr_deleted": true,
   "elapsed_s": 7
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 48,
+  "end_leaf": 438,
+  "first_letter": "B",
+  "last_letter": "Y",
+  "letters_present": "BCDEFGHIJKLMNOPQRSTUVWY",
+  "missing_letters": "AXZ",
+  "voting_density": 0.836,
+  "flags": [],
+  "start": {
+   "leaf": 48,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$48/full/!1400,1400/0/default.jpg",
+   "quote": "Bennett Samuel M, cooper 166 Prospect"
+  },
+  "end": {
+   "leaf": 438,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$438/full/!1400,1400/0/default.jpg",
+   "quote": "Youris John, morocco dresser Navy n Bolivar"
+  },
+  "sections": [
+   {
+    "start_leaf": 48,
+    "end_leaf": 438,
+    "voting_leaves": 327,
+    "first_letter": "B",
+    "last_letter": "Y",
+    "letters": "BCDEFGHIJKLMNOPQRSTUVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 178,
+    "end_leaf": 178,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 286,
+    "end_leaf": 293,
+    "leaves": 8
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 327,
+    "end_leaf": 333,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 400,
+    "end_leaf": 400,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "B": [
+    48,
+    83,
+    16
+   ],
+   "C": [
+    84,
+    124,
+    38
+   ],
+   "D": [
+    125,
+    153,
+    25
+   ],
+   "E": [
+    154,
+    159,
+    5
+   ],
+   "F": [
+    160,
+    177,
+    15
+   ],
+   "G": [
+    179,
+    195,
+    13
+   ],
+   "H": [
+    196,
+    224,
+    25
+   ],
+   "I": [
+    225,
+    225,
+    1
+   ],
+   "J": [
+    226,
+    229,
+    4
+   ],
+   "K": [
+    230,
+    236,
+    7
+   ],
+   "L": [
+    237,
+    246,
+    10
+   ],
+   "M": [
+    247,
+    285,
+    36
+   ],
+   "N": [
+    294,
+    300,
+    7
+   ],
+   "O": [
+    301,
+    307,
+    7
+   ],
+   "P": [
+    308,
+    324,
+    17
+   ],
+   "Q": [
+    325,
+    326,
+    2
+   ],
+   "R": [
+    334,
+    347,
+    11
+   ],
+   "S": [
+    348,
+    385,
+    36
+   ],
+   "T": [
+    386,
+    398,
+    13
+   ],
+   "U": [
+    399,
+    399,
+    1
+   ],
+   "V": [
+    401,
+    408,
+    8
+   ],
+   "W": [
+    409,
+    436,
+    28
+   ],
+   "Y": [
+    437,
+    438,
+    2
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 48,
+   "end_leaf": 438
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

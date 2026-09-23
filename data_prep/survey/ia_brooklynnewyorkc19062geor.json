@@ -353,5 +353,233 @@
   "words_gz_bytes": 6938887,
   "hocr_deleted": true,
   "elapsed_s": 64
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 15,
+  "end_leaf": 1243,
+  "first_letter": "K",
+  "last_letter": "Z",
+  "letters_present": "KLMNOPRSTUVWZ",
+  "missing_letters": "ABCDEFGHIJQXY",
+  "voting_density": 0.116,
+  "flags": [
+   "sparse",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 15,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc19062geor$15/full/!1400,1400/0/default.jpg",
+   "quote": "Kobner Jacob prea't h 605 Otb"
+  },
+  "end": {
+   "leaf": 1243,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc19062geor$1243/full/!1400,1400/0/default.jpg",
+   "quote": "Zwilling J Cha"
+  },
+  "sections": [
+   {
+    "start_leaf": 15,
+    "end_leaf": 1243,
+    "voting_leaves": 143,
+    "first_letter": "K",
+    "last_letter": "Z",
+    "letters": "KLMNOPRSTUVWZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 42,
+    "end_leaf": 74,
+    "leaves": 33
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 92,
+    "end_leaf": 284,
+    "leaves": 193
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 300,
+    "end_leaf": 430,
+    "leaves": 131
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 444,
+    "end_leaf": 460,
+    "leaves": 17
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 462,
+    "end_leaf": 546,
+    "leaves": 85
+   },
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 560,
+    "end_leaf": 638,
+    "leaves": 79
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 644,
+    "end_leaf": 720,
+    "leaves": 77
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 748,
+    "end_leaf": 1004,
+    "leaves": 257
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 1032,
+    "end_leaf": 1038,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 1040,
+    "end_leaf": 1066,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 1068,
+    "end_leaf": 1202,
+    "leaves": 135
+   },
+   {
+    "between": [
+     "W",
+     "Z"
+    ],
+    "start_leaf": 1208,
+    "end_leaf": 1234,
+    "leaves": 27
+   }
+  ],
+  "letter_blocks": {
+   "K": [
+    29,
+    41,
+    3
+   ],
+   "L": [
+    75,
+    91,
+    6
+   ],
+   "M": [
+    285,
+    299,
+    7
+   ],
+   "N": [
+    431,
+    443,
+    4
+   ],
+   "O": [
+    461,
+    461,
+    1
+   ],
+   "P": [
+    547,
+    559,
+    6
+   ],
+   "R": [
+    639,
+    643,
+    2
+   ],
+   "S": [
+    721,
+    747,
+    10
+   ],
+   "T": [
+    1005,
+    1031,
+    8
+   ],
+   "U": [
+    1039,
+    1039,
+    1
+   ],
+   "V": [
+    1067,
+    1067,
+    1
+   ],
+   "W": [
+    1203,
+    1207,
+    2
+   ],
+   "Z": [
+    1235,
+    1243,
+    3
+   ]
+  },
+  "skipped_votes": 22,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 15,
+   "end_leaf": 1243
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

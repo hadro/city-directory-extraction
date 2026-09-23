@@ -349,5 +349,336 @@
   "words_gz_bytes": 1912336,
   "hocr_deleted": true,
   "elapsed_s": 20
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 15,
+  "end_leaf": 532,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHJKLMNOPQRSTUVWY",
+  "missing_letters": "IXZ",
+  "voting_density": 0.481,
+  "flags": [
+   "edge-disagreement"
+  ],
+  "start": {
+   "leaf": 15,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0042$15/full/!1400,1400/0/default.jpg",
+   "quote": "Acoaepes File B. painter, oF Y. h."
+  },
+  "end": {
+   "leaf": 532,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0042$532/full/!1400,1400/0/default.jpg",
+   "quote": "Young John R. salesman, h. 186 Myrtle av \u2014"
+  },
+  "sections": [
+   {
+    "start_leaf": 15,
+    "end_leaf": 532,
+    "voting_leaves": 249,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHJKLMNOPQRSTUVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 20,
+    "end_leaf": 54,
+    "leaves": 35
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 67,
+    "end_leaf": 81,
+    "leaves": 15
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 103,
+    "end_leaf": 121,
+    "leaves": 19
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 142,
+    "end_leaf": 158,
+    "leaves": 17
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 161,
+    "end_leaf": 162,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 173,
+    "end_leaf": 192,
+    "leaves": 20
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 211,
+    "end_leaf": 219,
+    "leaves": 9
+   },
+   {
+    "between": [
+     "H",
+     "J"
+    ],
+    "start_leaf": 245,
+    "end_leaf": 257,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 265,
+    "end_leaf": 268,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 286,
+    "end_leaf": 288,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 302,
+    "end_leaf": 337,
+    "leaves": 36
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 375,
+    "end_leaf": 375,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 383,
+    "end_leaf": 383,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 395,
+    "end_leaf": 401,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 403,
+    "end_leaf": 413,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 473,
+    "end_leaf": 475,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 485,
+    "end_leaf": 489,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 530,
+    "end_leaf": 531,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    15,
+    19,
+    2
+   ],
+   "B": [
+    55,
+    66,
+    12
+   ],
+   "C": [
+    82,
+    102,
+    13
+   ],
+   "D": [
+    122,
+    141,
+    17
+   ],
+   "E": [
+    159,
+    160,
+    2
+   ],
+   "F": [
+    163,
+    172,
+    6
+   ],
+   "G": [
+    193,
+    210,
+    15
+   ],
+   "H": [
+    220,
+    244,
+    18
+   ],
+   "J": [
+    258,
+    264,
+    4
+   ],
+   "K": [
+    269,
+    285,
+    17
+   ],
+   "L": [
+    289,
+    301,
+    5
+   ],
+   "M": [
+    338,
+    367,
+    18
+   ],
+   "N": [
+    368,
+    374,
+    5
+   ],
+   "O": [
+    376,
+    382,
+    6
+   ],
+   "P": [
+    384,
+    394,
+    8
+   ],
+   "Q": [
+    402,
+    402,
+    1
+   ],
+   "R": [
+    414,
+    426,
+    7
+   ],
+   "S": [
+    427,
+    472,
+    25
+   ],
+   "T": [
+    476,
+    484,
+    7
+   ],
+   "U": [
+    490,
+    490,
+    1
+   ],
+   "V": [
+    491,
+    497,
+    7
+   ],
+   "W": [
+    498,
+    529,
+    21
+   ],
+   "Y": [
+    532,
+    532,
+    1
+   ]
+  },
+  "skipped_votes": 8,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 55,
+   "end_leaf": 532
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

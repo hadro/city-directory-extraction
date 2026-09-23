@@ -323,5 +323,200 @@
   "words_gz_bytes": 15237553,
   "hocr_deleted": true,
   "elapsed_s": 92
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 21,
+  "end_leaf": 982,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.943,
+  "flags": [],
+  "start": {
+   "leaf": 21,
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$21/full/!1400,1400/0/default.jpg",
+   "quote": "Aaron Aaron J. exchance, h 222 W. ICth"
+  },
+  "end": {
+   "leaf": 982,
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$982/full/!1400,1400/0/default.jpg",
+   "quote": "Zwisler Martin, foundry, h r 431 Fifth"
+  },
+  "sections": [
+   {
+    "start_leaf": 21,
+    "end_leaf": 982,
+    "voting_leaves": 907,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 553,
+    "end_leaf": 583,
+    "leaves": 31
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 978,
+    "end_leaf": 978,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    21,
+    45,
+    23
+   ],
+   "B": [
+    46,
+    137,
+    90
+   ],
+   "C": [
+    138,
+    212,
+    71
+   ],
+   "D": [
+    213,
+    263,
+    51
+   ],
+   "E": [
+    264,
+    283,
+    16
+   ],
+   "F": [
+    284,
+    324,
+    41
+   ],
+   "G": [
+    325,
+    366,
+    42
+   ],
+   "H": [
+    367,
+    446,
+    76
+   ],
+   "I": [
+    447,
+    449,
+    3
+   ],
+   "J": [
+    450,
+    467,
+    18
+   ],
+   "K": [
+    468,
+    507,
+    40
+   ],
+   "L": [
+    508,
+    552,
+    45
+   ],
+   "M": [
+    584,
+    657,
+    74
+   ],
+   "N": [
+    658,
+    671,
+    14
+   ],
+   "O": [
+    672,
+    689,
+    18
+   ],
+   "P": [
+    690,
+    722,
+    33
+   ],
+   "Q": [
+    723,
+    726,
+    4
+   ],
+   "R": [
+    727,
+    774,
+    42
+   ],
+   "S": [
+    775,
+    869,
+    95
+   ],
+   "T": [
+    870,
+    898,
+    29
+   ],
+   "U": [
+    899,
+    900,
+    2
+   ],
+   "V": [
+    901,
+    913,
+    13
+   ],
+   "W": [
+    914,
+    975,
+    60
+   ],
+   "Y": [
+    976,
+    977,
+    2
+   ],
+   "Z": [
+    979,
+    982,
+    4
+   ]
+  },
+  "skipped_votes": 11,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 21,
+   "end_leaf": 982
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -318,5 +318,218 @@
   "words_gz_bytes": 6710474,
   "hocr_deleted": true,
   "elapsed_s": 27
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 23,
+  "end_leaf": 633,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.884,
+  "flags": [],
+  "start": {
+   "leaf": 23,
+   "image": "https://iiif.archive.org/iiif/1866BPL$23/full/!1400,1400/0/default.jpg",
+   "quote": "Aalholm Mathias, perfumer, William, N.Y. 82"
+  },
+  "end": {
+   "leaf": 633,
+   "image": "https://iiif.archive.org/iiif/1866BPL$633/full/!1400,1400/0/default.jpg",
+   "quote": "Zwergius Julius, 316 Navy"
+  },
+  "sections": [
+   {
+    "start_leaf": 23,
+    "end_leaf": 633,
+    "voting_leaves": 540,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 195,
+    "end_leaf": 196,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 358,
+    "end_leaf": 397,
+    "leaves": 40
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 478,
+    "end_leaf": 479,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 579,
+    "end_leaf": 579,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    23,
+    36,
+    14
+   ],
+   "B": [
+    37,
+    93,
+    55
+   ],
+   "C": [
+    94,
+    150,
+    49
+   ],
+   "D": [
+    151,
+    185,
+    33
+   ],
+   "E": [
+    186,
+    194,
+    9
+   ],
+   "F": [
+    197,
+    220,
+    24
+   ],
+   "G": [
+    221,
+    250,
+    26
+   ],
+   "H": [
+    251,
+    296,
+    46
+   ],
+   "I": [
+    297,
+    297,
+    1
+   ],
+   "J": [
+    298,
+    308,
+    11
+   ],
+   "K": [
+    309,
+    331,
+    21
+   ],
+   "L": [
+    332,
+    357,
+    26
+   ],
+   "M": [
+    398,
+    428,
+    29
+   ],
+   "N": [
+    429,
+    441,
+    9
+   ],
+   "O": [
+    442,
+    453,
+    10
+   ],
+   "P": [
+    454,
+    474,
+    21
+   ],
+   "Q": [
+    475,
+    477,
+    3
+   ],
+   "R": [
+    480,
+    504,
+    15
+   ],
+   "S": [
+    505,
+    559,
+    53
+   ],
+   "T": [
+    560,
+    577,
+    18
+   ],
+   "U": [
+    578,
+    578,
+    1
+   ],
+   "V": [
+    580,
+    589,
+    8
+   ],
+   "W": [
+    590,
+    629,
+    38
+   ],
+   "Y": [
+    630,
+    631,
+    2
+   ],
+   "Z": [
+    632,
+    633,
+    2
+   ]
+  },
+  "skipped_votes": 11,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 23,
+   "end_leaf": 633
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

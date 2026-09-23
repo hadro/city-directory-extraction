@@ -293,5 +293,202 @@
   "words_gz_bytes": 5449987,
   "hocr_deleted": true,
   "elapsed_s": 22
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 417,
+  "end_leaf": 573,
+  "first_letter": "B",
+  "last_letter": "S",
+  "letters_present": "BCFGHKLMRS",
+  "missing_letters": "ADEIJNOPQTUVWXYZ",
+  "voting_density": 0.096,
+  "flags": [
+   "sparse",
+   "edge-disagreement",
+   "multi-section",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 417,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$417/full/!1400,1400/0/default.jpg",
+   "quote": "Baas 4 Vogt. 491 Columbus ay"
+  },
+  "end": {
+   "leaf": 573,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$573/full/!1400,1400/0/default.jpg",
+   "quote": "Sunckur Taubic. 79 W12th"
+  },
+  "sections": [
+   {
+    "start_leaf": 225,
+    "end_leaf": 251,
+    "voting_leaves": 12,
+    "first_letter": "B",
+    "last_letter": "T",
+    "letters": "BCDFGLMPRST",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 417,
+    "end_leaf": 573,
+    "voting_leaves": 15,
+    "first_letter": "B",
+    "last_letter": "S",
+    "letters": "BCFGHKLMRS",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 418,
+    "end_leaf": 418,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "C",
+     "F"
+    ],
+    "start_leaf": 420,
+    "end_leaf": 420,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 422,
+    "end_leaf": 422,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 424,
+    "end_leaf": 424,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "K"
+    ],
+    "start_leaf": 426,
+    "end_leaf": 426,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 428,
+    "end_leaf": 428,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 430,
+    "end_leaf": 430,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "R"
+    ],
+    "start_leaf": 432,
+    "end_leaf": 434,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 436,
+    "end_leaf": 436,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "B": [
+    417,
+    417,
+    1
+   ],
+   "C": [
+    419,
+    419,
+    1
+   ],
+   "F": [
+    421,
+    421,
+    1
+   ],
+   "G": [
+    423,
+    423,
+    1
+   ],
+   "H": [
+    425,
+    425,
+    1
+   ],
+   "K": [
+    427,
+    427,
+    1
+   ],
+   "L": [
+    429,
+    429,
+    1
+   ],
+   "M": [
+    431,
+    431,
+    1
+   ],
+   "R": [
+    435,
+    435,
+    1
+   ],
+   "S": [
+    437,
+    439,
+    2
+   ]
+  },
+  "skipped_votes": 5,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 417,
+   "end_leaf": 579
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

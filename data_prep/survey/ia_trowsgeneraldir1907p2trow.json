@@ -396,5 +396,218 @@
   "words_gz_bytes": 16658914,
   "hocr_deleted": true,
   "elapsed_s": 85
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 11,
+  "end_leaf": 1341,
+  "first_letter": "G",
+  "last_letter": "R",
+  "letters_present": "GHIJKLMNOPQR",
+  "missing_letters": "ABCDEFSTUVWXYZ",
+  "voting_density": 0.347,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 11,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$11/full/!1400,1400/0/default.jpg",
+   "quote": "Greene av Bklyn"
+  },
+  "end": {
+   "leaf": 1341,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$1341/full/!1400,1400/0/default.jpg",
+   "quote": "Rnnhauscr John A machinist h 422 E 7\".th"
+  },
+  "sections": [
+   {
+    "start_leaf": 11,
+    "end_leaf": 1341,
+    "voting_leaves": 462,
+    "first_letter": "G",
+    "last_letter": "R",
+    "letters": "GHIJKLMNOPQR",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 86,
+    "end_leaf": 152,
+    "leaves": 67
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 256,
+    "end_leaf": 330,
+    "leaves": 75
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 346,
+    "end_leaf": 358,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 380,
+    "end_leaf": 458,
+    "leaves": 79
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 568,
+    "end_leaf": 664,
+    "leaves": 97
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 738,
+    "end_leaf": 746,
+    "leaves": 9
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 810,
+    "end_leaf": 1106,
+    "leaves": 297
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 1138,
+    "end_leaf": 1140,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1194,
+    "end_leaf": 1194,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1322,
+    "end_leaf": 1324,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1326,
+    "end_leaf": 1332,
+    "leaves": 7
+   }
+  ],
+  "letter_blocks": {
+   "G": [
+    49,
+    85,
+    18
+   ],
+   "H": [
+    153,
+    255,
+    41
+   ],
+   "I": [
+    331,
+    345,
+    7
+   ],
+   "J": [
+    359,
+    379,
+    10
+   ],
+   "K": [
+    459,
+    567,
+    46
+   ],
+   "L": [
+    665,
+    737,
+    35
+   ],
+   "M": [
+    747,
+    809,
+    30
+   ],
+   "N": [
+    1107,
+    1137,
+    12
+   ],
+   "O": [
+    1141,
+    1193,
+    22
+   ],
+   "P": [
+    1195,
+    1321,
+    54
+   ],
+   "Q": [
+    1325,
+    1325,
+    1
+   ],
+   "R": [
+    1333,
+    1341,
+    5
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1341
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -370,5 +370,268 @@
   "words_gz_bytes": 363666,
   "hocr_deleted": true,
   "elapsed_s": 6
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 17,
+  "end_leaf": 246,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHKLMPRSTVW",
+  "missing_letters": "IJNOQUXYZ",
+  "voting_density": 0.291,
+  "flags": [],
+  "start": {
+   "leaf": 17,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$17/full/!1400,1400/0/default.jpg",
+   "quote": "Aap roneteipatne, trencine, 08 Bost tat"
+  },
+  "end": {
+   "leaf": 246,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$246/full/!1400,1400/0/default.jpg",
+   "quote": "Wittstadt Michoc, eabinetaker, 79 Meserole"
+  },
+  "sections": [
+   {
+    "start_leaf": 17,
+    "end_leaf": 246,
+    "voting_leaves": 67,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHKLMPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 18,
+    "end_leaf": 30,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 50,
+    "end_leaf": 62,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 73,
+    "end_leaf": 79,
+    "leaves": 7
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 89,
+    "end_leaf": 90,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 102,
+    "end_leaf": 103,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "H",
+     "K"
+    ],
+    "start_leaf": 109,
+    "end_leaf": 133,
+    "leaves": 25
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 135,
+    "end_leaf": 136,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 146,
+    "end_leaf": 146,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "P"
+    ],
+    "start_leaf": 150,
+    "end_leaf": 176,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 182,
+    "end_leaf": 186,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 193,
+    "end_leaf": 207,
+    "leaves": 15
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 218,
+    "end_leaf": 225,
+    "leaves": 8
+   },
+   {
+    "between": [
+     "T",
+     "V"
+    ],
+    "start_leaf": 231,
+    "end_leaf": 233,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 235,
+    "end_leaf": 239,
+    "leaves": 5
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    17,
+    17,
+    1
+   ],
+   "B": [
+    31,
+    42,
+    5
+   ],
+   "C": [
+    43,
+    49,
+    5
+   ],
+   "D": [
+    63,
+    70,
+    5
+   ],
+   "E": [
+    71,
+    72,
+    2
+   ],
+   "F": [
+    80,
+    88,
+    5
+   ],
+   "G": [
+    91,
+    101,
+    7
+   ],
+   "H": [
+    104,
+    108,
+    3
+   ],
+   "K": [
+    134,
+    134,
+    1
+   ],
+   "L": [
+    137,
+    145,
+    9
+   ],
+   "M": [
+    147,
+    149,
+    2
+   ],
+   "P": [
+    177,
+    181,
+    2
+   ],
+   "R": [
+    187,
+    192,
+    2
+   ],
+   "S": [
+    208,
+    217,
+    5
+   ],
+   "T": [
+    226,
+    230,
+    2
+   ],
+   "V": [
+    234,
+    234,
+    1
+   ],
+   "W": [
+    240,
+    246,
+    3
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 17,
+   "end_leaf": 247
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

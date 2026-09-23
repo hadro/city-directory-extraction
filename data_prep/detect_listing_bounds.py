@@ -16,6 +16,15 @@ size or column width, and prose pages fall outside the run by construction rathe
 Measured on the cached 1906BPL (1,254 leaves): all 25 letter blocks land in correct A->Z order,
 zero violations, listing at leaves 9..1215 (X absent, as expected for surnames).
 
+A volume is NOT one A->Z run, and since 2026-09-22 it is not modelled as one. `alphabets()`
+segments the voting leaves into ascending alphabets (a Viterbi with a restart cost), and the
+largest is the listing. That handles the three shapes the single-run model got wrong across the
+184-volume corpus -- a PART covering a stretch of the alphabet (Trow p1 = A..H), stray leaves,
+and two alphabets in one binding (1856BPL's two districts) -- and it reports every alphabet as a
+section. See `alphabets`, `trim_edges` and `merge_interludes` for the measured cases each one
+exists for. The segmented bounds are reproduced from the word dumps of survey_harvest.py with
+`--from-dump`, identical to reading the hOCR.
+
 Ad runs surface two ways, and BOTH are reported rather than absorbed:
 
   * as gaps between letter blocks -- leaves inside the listing's span belonging to no letter.
@@ -68,15 +77,17 @@ read.
 
 import argparse
 import collections
+import gzip
 import json
 import re
+import statistics
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from ia_volume_to_jsonl import Item, hocr_lines          # noqa: E402
+from ia_volume_to_jsonl import Item, hocr_lines, words_to_lines   # noqa: E402
 
 REPO = HERE.parent
 LETTERS = [chr(c) for c in range(ord("A"), ord("Z") + 1)]
@@ -110,9 +121,16 @@ def leaf_letters_from_jsonl(path, min_lines):
     as leaf 14 against the hOCR's 18, and swaps which sparse letters clear the threshold. With so
     few lines per leaf, dropping a handful moves the modal share across the line either way.
     Prefer this path, but on a thin volume check the other before trusting a boundary.
+
+    Superseded for the corpus survey (2026-09-22). Run over all 184 IA volumes, the two sources
+    agreed within 2 leaves on 167; on every disagreement opened by eye (1897BPL, where this path
+    stopped the listing at leaf 1002 in the middle of M; micro_IABROOKLYN_0037 and _0042;
+    trowsgeneraldire19142trow) the hOCR path was the closer. survey_derive.py therefore reads
+    the word dump (`leaf_letters_from_dump`) and keeps this path as a cross-check only.
     """
     votes = collections.defaultdict(list)
-    with open(path, encoding="utf-8") as fh:
+    opener = gzip.open if str(path).endswith(".gz") else open
+    with opener(path, "rt", encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
             if not line:
@@ -122,13 +140,44 @@ def leaf_letters_from_jsonl(path, min_lines):
             if m:
                 votes[row.get("context", {}).get("leaf")].append(m.group(1).upper())
 
+    return {leaf: m for leaf, seen in votes.items()
+            if leaf is not None and (m := modal(seen, min_lines))}
+
+
+def modal(firsts, min_lines):
+    """(modal_letter, share, n_lines) over a leaf's sort keys, or None below `min_lines`."""
+    if len(firsts) < min_lines:
+        return None
+    letter, n = collections.Counter(firsts).most_common(1)[0]
+    return letter, n / len(firsts), len(firsts)
+
+
+def sort_keys(texts):
+    out = []
+    for text in texts:
+        m = FIRST_WORD_RE.match(text.strip())
+        if m:
+            out.append(m.group(1).upper())
+    return out
+
+
+def leaf_letters_from_dump(path, min_chars, min_lines):
+    """Same signal, from a survey_harvest.py word dump (data/survey_ocr/<id>_words.jsonl.gz).
+
+    This IS the hOCR path, not an approximation of it: the dump records every hOCR word, and
+    `words_to_lines` is exactly what `hocr_lines` returns, so the result is identical to reading
+    the hOCR -- with no network and no 21.7 GB cache. The min_chars gate reads the same pageindex
+    census, stored in each dump record as `chars`.
+    """
     out = {}
-    for leaf, seen in votes.items():
-        if leaf is None or len(seen) < min_lines:
-            continue
-        counts = collections.Counter(seen)
-        letter, n = counts.most_common(1)[0]
-        out[leaf] = (letter, n / len(seen), len(seen))
+    with gzip.open(path, "rt", encoding="utf-8") as fh:
+        for line in fh:
+            rec = json.loads(line)
+            if rec["chars"] < min_chars or not rec["lines"]:
+                continue
+            m = modal(sort_keys(t for _b, t in words_to_lines(rec["lines"])), min_lines)
+            if m:
+                out[rec["leaf"]] = m
     return out
 
 
@@ -141,16 +190,9 @@ def leaf_letters(item, idx, min_chars, min_lines):
         markup = item.hocr_page(leaf)
         if not markup:
             continue
-        firsts = []
-        for _box, text in hocr_lines(markup):
-            m = FIRST_WORD_RE.match(text.strip())
-            if m:
-                firsts.append(m.group(1).upper())
-        if len(firsts) < min_lines:
-            continue
-        counts = collections.Counter(firsts)
-        letter, n = counts.most_common(1)[0]
-        out[leaf] = (letter, n / len(firsts), len(firsts))
+        m = modal(sort_keys(t for _b, t in hocr_lines(markup)), min_lines)
+        if m:
+            out[leaf] = m
     return out
 
 
@@ -212,6 +254,202 @@ def analyse(block_map):
     return block_map[present[0]]["span"][0], block_map[present[-1]]["span"][1], present, violations, gaps
 
 
+RESTART_COST = 8         # leaves a new alphabet must be worth before it counts as a section
+EDGE_GAP = 10            # an alphabet's end cluster this far from the rest, and...
+EDGE_MIN = 3             # ...smaller than this, is not part of it
+MIN_REL_LINES = 0.25     # a leaf votes only with this share of the volume's median voting lines
+
+
+def alphabets(letters, min_share=0.40, restart_cost=RESTART_COST):
+    """Split a volume's letter-voting leaves into ascending alphabets.
+
+    -> [sorted leaf list, ...], one per alphabet, in volume order.
+
+    `blocks`/`analyse` model a volume as ONE A->Z run, and the corpus is not like that. Measured
+    over all 184 IA volumes on 2026-09-22, the single-run model produced a listing whose end came
+    BEFORE its start on 17 of them, because three shapes are common:
+
+      * a PART covers a stretch of the alphabet -- trowsgeneraldir1904p1trow runs A->H, and two
+        stray T leaves in its front matter made T the "last letter";
+      * single stray leaves -- a lone B inside 1904p1's A run, an S inside 1907p2's N run;
+      * TWO alphabets in one binding -- 1856BPL runs A->Y over leaves 65-389, then A->Z again
+        over 405-581, and the single-run model returned 65..581.
+
+    So this is a Viterbi over the voting leaves in leaf order. Each leaf is either included in
+    the current alphabet (only if its letter is >= the last one included), skipped, or opens a
+    new alphabet at a cost of `restart_cost` leaves. A stray leaf costs 1 to skip and so is
+    skipped; a real second alphabet is worth far more than 8 leaves and so opens a section. Maximises
+    the number of included leaves, so it keeps the longest coherent structure the votes support.
+    """
+    strong = {k: v for k, v in letters.items() if v[1] >= min_share and "A" <= v[0] <= "Z"}
+    if not strong:
+        return []
+    # Front-matter ad pages vote with a handful of lines; listing pages vote with a column's worth.
+    # 1867BPL leaves 2-4 ("BROOKLYN DIRECTORY ADVERTISER. ... GUTTENTAG & MYERS") voted A on
+    # 14-28 lines and sat close enough to the A block that trim_edges could not separate them; the
+    # listing pages vote on 90-160. Relative, so the thin microfilm tier scales with itself.
+    floor = MIN_REL_LINES * statistics.median(v[2] for v in strong.values())
+    seq = [(leaf, ord(v[0]) - 65) for leaf, v in sorted(strong.items()) if v[2] >= floor]
+    if not seq:
+        return []
+    NEG = float("-inf")
+    # state 0..25 = the last included letter; 26 = nothing included yet
+    score = [NEG] * 26 + [0.0]
+    back = []                                   # per element: {state: (prev_state, action)}
+    for _leaf, x in seq:
+        new = score[:]                          # skip: every state carries over unchanged
+        bp = {st: (st, "skip") for st in range(27)}
+        best_prev = max(range(26), key=lambda st: score[st])
+        cands = []
+        if score[26] > NEG:
+            cands.append((score[26] + 1, 26, "start"))
+        cont = max((st for st in range(x + 1)), key=lambda st: score[st])
+        if score[cont] > NEG:
+            cands.append((score[cont] + 1, cont, "include"))
+        if score[best_prev] > NEG:
+            # the epsilon breaks ties AGAINST a restart: brooklynnewyorkc1904geor has eight
+            # one-leaf ad votes (A C E F G J M R, leaves 665-681) between S and S, worth exactly
+            # the cost of a restart, and the tie split one alphabet in two
+            cands.append((score[best_prev] + 1 - restart_cost - 1e-6, best_prev, "restart"))
+        if cands:
+            val, prev, act = max(cands, key=lambda c: c[0])
+            if val > new[x]:
+                new[x] = val
+                bp[x] = (prev, act)
+        back.append(bp)
+        score = new
+    # trace back from the best final state
+    st = max(range(27), key=lambda s_: score[s_])
+    runs, cur = [], []
+    for i in range(len(seq) - 1, -1, -1):
+        prev, act = back[i][st]
+        if act != "skip":
+            cur.append(seq[i][0])
+            if act in ("start", "restart"):
+                runs.append(sorted(cur))
+                cur = []
+        st = prev
+    runs = [r for r in (trim_edges(r) for r in reversed(runs)) if r]
+    # ...but a listing ENDS partway down a page, so its last leaf is short by nature and the
+    # floor cuts it: 1862BPL leaf 508 ("Zyla Bobert, gardener", 20 votes) and 1867BPL leaf 657
+    # ("Zwergius Julius", 14) are the true final pages, and gating them moved both ends back a
+    # page. So after segmenting, an alphabet's end may reach any directly following leaf (within
+    # 2, i.e. across one blank verso) that continues its letter order, gated or not.
+    order = sorted(strong)
+    for r in runs:
+        while True:
+            last = r[-1]
+            nxt = next((k for k in order if k > last), None)
+            if nxt is None or nxt - last > 2 or strong[nxt][0] < letters[last][0]:
+                break
+            r.append(nxt)
+    return merge_interludes(runs, letters)
+
+
+def merge_interludes(runs, letters, edge_gap=EDGE_GAP):
+    """Rejoin an alphabet that a short interlude split in two.
+
+    brooklyncitydire1848teal runs A..M to leaf 164, then its Mc section -- "MAC | M'Cage James
+    ... Caig James" -- where the OCR splits off the M' and the names vote the letter AFTER the
+    Mc: C, D, G, K, L over leaves 165-176. Then N resumes at 177. Keeping that interlude was worth
+    more than a restart costs, so the listing became A..M plus a second "A..Z".
+
+    A real second alphabet follows a COMPLETE one (1856BPL's Eastern District starts after the
+    Western ends at Y). So: when an alphabet stops before W, and the next begins within
+    `edge_gap` leaves and later passes the letter the first stopped at, the second's continuation
+    is the first's, and its lead-in is an interlude (left as skipped votes inside the span).
+    """
+    if not runs:
+        return runs
+    out = [runs[0]]
+    for r in runs[1:]:
+        prev = out[-1]
+        stop = letters[prev[-1]][0]
+        if stop < "W" and r[0] - prev[-1] <= edge_gap and letters[r[-1]][0] > stop:
+            j = next(k for k, leaf in enumerate(r) if letters[leaf][0] >= stop)
+            out[-1] = prev + r[j:]
+        else:
+            out.append(r)
+    return out
+
+
+def trim_edges(run, edge_gap=EDGE_GAP, edge_min=EDGE_MIN):
+    """Drop small clusters sitting apart at either end of an alphabet.
+
+    Ascending order alone cannot reject a stray leaf that happens to carry the alphabet's FIRST
+    letter. 1856BPL leaves 12 and 29 are front-matter ad pages ("BROOKLYN DIRECTORY
+    ADVERTISER. ... FRANCIS D. NORRIS,") that vote A, and A is where the listing begins, so the
+    segmentation took them in and the listing "started" at leaf 12 instead of 65. They are singletons 13-23
+    leaves apart; the listing is dense. So: split at gaps over `edge_gap` and shed end clusters
+    smaller than `edge_min`, repeatedly. Interior clusters are untouched -- an ad run inside the
+    listing is a gap, not an edge.
+    """
+    parts = clusters(run, edge_gap)
+    while len(parts) > 1 and len(parts[0]) < edge_min:
+        parts.pop(0)
+    while len(parts) > 1 and len(parts[-1]) < edge_min:
+        parts.pop()
+    return [x for p in parts for x in p]
+
+
+def detect(letters, n_leaves, source, min_share=0.40, gap=6, interior="keep", params=None):
+    """-> (result, block_map, kept) for a {leaf: (letter, share, n)} map, or (None, ...) when no
+    alphabetical structure was found. The whole analysis, with no printing -- `main` and
+    survey_derive.py both call this, so the CLI and the corpus survey cannot drift apart.
+
+    The volume is first split into ascending `alphabets`; the largest is the listing, and the
+    letter blocks, gaps and violations are computed inside it alone. Every alphabet is reported
+    under `sections`, so a second alphabet (a business or street directory, a second town) is
+    inventoried rather than either swallowed or discarded."""
+    runs = alphabets(letters, min_share)
+    if not runs:
+        return None, {}, []
+    main = max(runs, key=len)
+    lo, hi = main[0], main[-1]
+    member = set(main)
+    # Blocks see only the listing's own voting leaves: a stray leaf inside the span that the
+    # segmentation skipped is exactly an out-of-order vote, and letting it form a block would
+    # re-create the violations the segmentation exists to remove.
+    block_map = blocks({k: v for k, v in letters.items() if k in member}, min_share, gap)
+    _s, _e, present, violations, gaps = analyse(block_map)
+    if _s is None:
+        return None, block_map, []
+    # The listing's bounds are the section's, not the first and last letter blocks'. A block
+    # is a letter's LARGEST cluster at `gap` leaves of slack, and on a volume with blank versos
+    # that slack is three pages: trowsgeneraldir1904p1trow's last H listings (leaves 1183-1195,
+    # "Harrison --Teresa G h 161 E 61st" under an ad band) fell outside H's block, and the
+    # listing ended at 1181.
+    start, end = lo, hi
+    if interior == "drop":
+        kept = sorted({leaf for L in present for leaf in block_map[L]["leaves"]})
+    else:
+        kept = sorted({leaf for L in present
+                       for leaf in range(block_map[L]["span"][0], block_map[L]["span"][1] + 1)})
+    missing = [L for L in LETTERS if L not in block_map]
+    result = {"source": source, "leaves": n_leaves,
+              "start_leaf": start, "end_leaf": end,
+              "kept_leaves": len(kept),
+              "letters_present": present, "missing_letters": missing,
+              "blocks": {L: {"start_leaf": b["span"][0], "end_leaf": b["span"][1],
+                             "leaves": b["n"], "alternates": b["alts"]}
+                         for L, b in block_map.items()},
+              "order_violations": violations,
+              "gaps": [{"between": [a, b], "start_leaf": lo, "end_leaf": hi, "leaves": n}
+                       for a, b, lo, hi, n in gaps],
+              "ambiguous_letters": [L for L in present if block_map[L]["alts"]],
+              "sections": [{"start_leaf": r[0], "end_leaf": r[-1], "voting_leaves": len(r),
+                            "first_letter": letters[r[0]][0], "last_letter": letters[r[-1]][0],
+                            "letters": "".join(sorted({letters[x][0] for x in r})),
+                            "is_listing": r is main}
+                           for r in runs],
+              "skipped_votes": sorted(k for k, v in letters.items()
+                                      if lo <= k <= hi and k not in member
+                                      and v[1] >= min_share),
+              "params": dict(params or {}, min_share=min_share, gap=gap,
+                             restart_cost=RESTART_COST)}
+    return result, block_map, kept
+
+
 def _self_test():
     """Offline; no network, no cache. Pins the two things measurement actually corrected here:
     the ditto forms must abstain, and a letter's block must be its member leaves rather than its
@@ -261,6 +499,46 @@ def _self_test():
     back = analyse(blocks({1: ("B", .9, 9), 9: ("A", .9, 9)}, 0.40, 6))
     assert back[3] == [("A", "B")], "B starting before A must be flagged as a violation"
 
+    # ---- alphabets(): the segmentation that replaced the single-run model -------------------
+    def run(lo, n, first="A", step=2, lines=90):
+        """n voting leaves from `lo`, `step` apart, two per letter from `first` on."""
+        return {lo + k * step: (chr(ord(first) + k // 2), 0.9, lines) for k in range(n)}
+
+    one = run(100, 40)
+    assert alphabets(one) == [sorted(one)], "one clean alphabet is one section"
+    # a PART: H..Q only, plus two stray T leaves in the front matter (trowsgeneraldir1904p1trow)
+    part = {**run(100, 20, "H"), 25: ("T", 0.9, 90), 65: ("T", 0.9, 90)}
+    got = alphabets(part)
+    assert len(got) == 1 and got[0][0] == 100, got
+    # a stray leaf inside a run is skipped, not a restart
+    stray = {**one, 121: ("B", 0.9, 90)}
+    assert alphabets(stray) == [sorted(one)], "a lone out-of-order leaf is skipped"
+    # TWO alphabets (1856BPL): both are sections, in volume order
+    two = {**run(100, 40), **run(300, 30)}
+    got = alphabets(two)
+    assert [(g[0], len(g)) for g in got] == [(100, 40), (300, 30)], got
+    # front-matter ads voting the FIRST letter pass ascending order; trim_edges sheds them
+    ads = {**one, 12: ("A", 0.9, 90), 29: ("A", 0.9, 90)}
+    assert alphabets(ads)[0][0] == 100, "isolated leading singletons are trimmed"
+    # ...and ads voting on a handful of lines are gated out even when adjacent (1867BPL)
+    thin = {**one, 94: ("A", 0.9, 14), 96: ("A", 0.9, 20)}
+    assert alphabets(thin)[0][0] == 100, "a few-line vote does not open the listing"
+    # but a short FINAL page is the listing's real end and must survive (1862BPL leaf 508)
+    tail = {**one, 180: ("Z", 0.9, 20)}
+    assert alphabets(tail)[0][-1] == 180, "a short last page still ends the listing"
+
+    # the Mc interlude (brooklyncitydire1848teal): A..M, then Mc names voting C..L, then N..Z
+    mc = {**run(100, 26), **{152 + k: (L, 0.9, 90) for k, L in enumerate("CDGKL" * 2)},
+          **run(170, 26, "N")}
+    got = alphabets(mc)
+    assert len(got) == 1 and got[0][0] == 100 and got[0][-1] == 220, [(g[0], g[-1]) for g in got]
+    # ...but a COMPLETE alphabet followed by another stays two (1856BPL's two districts)
+    assert len(alphabets(two)) == 2
+
+    res, _bm, _k = detect(two, 500, "test")
+    assert (res["start_leaf"], res["end_leaf"]) == (100, 178), res["start_leaf"]
+    assert [s["is_listing"] for s in res["sections"]] == [True, False]
+
     print("self-test OK", file=sys.stderr)
     return 0
 
@@ -277,6 +555,10 @@ def main(argv=None):
                          "flag looks for the default path. Faster, needs no network, and gets "
                          "the benefit of the ingest's own filters -- prefer it when the file "
                          "exists.")
+    ap.add_argument("--from-dump", nargs="?", const="auto", default=None,
+                    help="read a survey_harvest.py word dump (default "
+                         "data/survey_ocr/<ident>_words.jsonl.gz). Identical to reading the "
+                         "hOCR, with no network.")
     ap.add_argument("--cache", default=str(REPO / "data" / "ia_cache"))
     ap.add_argument("--min-chars", type=int, default=400,
                     help="skip leaves whose pageindex census is below this")
@@ -300,7 +582,17 @@ def main(argv=None):
     ap.add_argument("--verbose", action="store_true", help="print the per-leaf modal letters")
     args = ap.parse_args(argv)
 
-    if args.from_jsonl:
+    if args.from_dump:
+        path = Path(args.from_dump) if args.from_dump != "auto" \
+            else REPO / "data" / "survey_ocr" / f"{args.ident}_words.jsonl.gz"
+        if not path.exists():
+            ap.error(f"no word dump at {path} -- run survey_harvest.py --ids {args.ident}")
+        print(f"{args.ident}: reading {path}", file=sys.stderr)
+        letters = leaf_letters_from_dump(path, args.min_chars, args.min_lines)
+        with gzip.open(path, "rt", encoding="utf-8") as fh:
+            n_leaves = sum(1 for _ in fh)
+        source = str(path)
+    elif args.from_jsonl:
         path = Path(args.from_jsonl) if args.from_jsonl != "auto" \
             else REPO / "data" / f"{args.ident}_lines.jsonl"
         if not path.exists():
@@ -322,18 +614,19 @@ def main(argv=None):
         for leaf, (L, share, n) in sorted(letters.items()):
             print(f"    {leaf:5d}  {L}  {share:.2f}  ({n} lines)", file=sys.stderr)
 
-    block_map = blocks(letters, args.min_share, args.gap)
-    start, end, present, violations, gaps = analyse(block_map)
-    if start is None:
+    params = {"min_chars": args.min_chars, "min_lines": args.min_lines}
+    result, block_map, kept = detect(letters, n_leaves, source, args.min_share, args.gap,
+                                     args.interior, params)
+    if result is None:
         print("no alphabetical structure found -- not a sorted listing, or the OCR is too poor",
               file=sys.stderr)
         return 1
-
-    if args.interior == "drop":
-        kept = sorted({leaf for L in present for leaf in block_map[L]["leaves"]})
-    else:
-        kept = sorted({leaf for L in present
-                       for leaf in range(block_map[L]["span"][0], block_map[L]["span"][1] + 1)})
+    result = {"ident": args.ident, **result}
+    start, end = result["start_leaf"], result["end_leaf"]
+    present, missing = result["letters_present"], result["missing_letters"]
+    violations = [tuple(v) for v in result["order_violations"]]
+    gaps = [(g["between"][0], g["between"][1], g["start_leaf"], g["end_leaf"], g["leaves"])
+            for g in result["gaps"]]
     if args.emit_leaves:
         print(",".join(str(x) for x in kept))
         return 0
@@ -345,7 +638,6 @@ def main(argv=None):
             if b["alts"] else ""
         print(f"  {L}   {b['span'][0]:5d}..{b['span'][1]:<5d} {b['n']:4d}{alts}")
 
-    missing = [L for L in LETTERS if L not in block_map]
     print(f"\nlisting: leaves {start}..{end}  ({len(present)}/26 letters"
           + (f", missing {''.join(missing)}" if missing else "") + ")")
 
@@ -378,19 +670,6 @@ def main(argv=None):
     print(f"\n{len(kept)} leaves in the letter blocks, vs {swept} in a plain {start}-{end} range: "
           f"{dropped} {what} ({100 * dropped // swept}%).")
 
-    result = {"ident": args.ident, "source": source, "leaves": n_leaves,
-              "start_leaf": start, "end_leaf": end,
-              "kept_leaves": len(kept),
-              "letters_present": present, "missing_letters": missing,
-              "blocks": {L: {"start_leaf": b["span"][0], "end_leaf": b["span"][1],
-                             "leaves": b["n"], "alternates": b["alts"]}
-                         for L, b in block_map.items()},
-              "order_violations": violations,
-              "gaps": [{"between": [a, b], "start_leaf": lo, "end_leaf": hi, "leaves": n}
-                       for a, b, lo, hi, n in gaps],
-              "ambiguous_letters": ambiguous,
-              "params": {"min_chars": args.min_chars, "min_lines": args.min_lines,
-                         "min_share": args.min_share, "gap": args.gap}}
     if args.json:
         Path(args.json).write_text(json.dumps(result, indent=1), encoding="utf-8")
         print(f"\nwrote {args.json}")

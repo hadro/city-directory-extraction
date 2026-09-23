@@ -371,5 +371,151 @@
   "words_gz_bytes": 193878,
   "hocr_deleted": true,
   "elapsed_s": 13
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 5,
+  "end_leaf": 60,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMOPRSTVW",
+  "missing_letters": "INQUXYZ",
+  "voting_density": 1.0,
+  "flags": [],
+  "start": {
+   "leaf": 5,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/full/!1400,1400/0/default.jpg",
+   "quote": "Assor DANIEL, tavern & livery stable 16"
+  },
+  "end": {
+   "leaf": 60,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$60/full/!1400,1400/0/default.jpg",
+   "quote": "Wyckoff Mrs. Everit n. Doughty"
+  },
+  "sections": [
+   {
+    "start_leaf": 5,
+    "end_leaf": 60,
+    "voting_leaves": 56,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMOPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    5,
+    5,
+    1
+   ],
+   "B": [
+    6,
+    11,
+    6
+   ],
+   "C": [
+    12,
+    16,
+    5
+   ],
+   "D": [
+    17,
+    20,
+    4
+   ],
+   "E": [
+    21,
+    21,
+    1
+   ],
+   "F": [
+    22,
+    23,
+    2
+   ],
+   "G": [
+    24,
+    24,
+    1
+   ],
+   "H": [
+    25,
+    29,
+    5
+   ],
+   "J": [
+    30,
+    30,
+    1
+   ],
+   "K": [
+    31,
+    31,
+    1
+   ],
+   "L": [
+    32,
+    33,
+    2
+   ],
+   "M": [
+    34,
+    39,
+    6
+   ],
+   "O": [
+    40,
+    40,
+    1
+   ],
+   "P": [
+    41,
+    42,
+    2
+   ],
+   "R": [
+    43,
+    46,
+    4
+   ],
+   "S": [
+    47,
+    52,
+    6
+   ],
+   "T": [
+    53,
+    54,
+    2
+   ],
+   "V": [
+    55,
+    56,
+    2
+   ],
+   "W": [
+    57,
+    60,
+    4
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 5,
+   "end_leaf": 60
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

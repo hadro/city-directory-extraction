@@ -360,5 +360,166 @@
   "words_gz_bytes": 415867,
   "hocr_deleted": true,
   "elapsed_s": 261
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 22,
+  "end_leaf": 80,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMNOPRSTVW",
+  "missing_letters": "IQUXYZ",
+  "voting_density": 0.932,
+  "flags": [],
+  "start": {
+   "leaf": 22,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$22/full/!1400,1400/0/default.jpg",
+   "quote": "Alcorn William, tailor Main n James"
+  },
+  "end": {
+   "leaf": 80,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$80/full/!1400,1400/0/default.jpg",
+   "quote": "Wright Stephen, shoe maker, 110 Tillary"
+  },
+  "sections": [
+   {
+    "start_leaf": 22,
+    "end_leaf": 80,
+    "voting_leaves": 55,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMNOPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 58,
+    "end_leaf": 59,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    22,
+    22,
+    1
+   ],
+   "B": [
+    23,
+    28,
+    6
+   ],
+   "C": [
+    29,
+    33,
+    5
+   ],
+   "D": [
+    34,
+    38,
+    4
+   ],
+   "E": [
+    39,
+    39,
+    1
+   ],
+   "F": [
+    40,
+    41,
+    2
+   ],
+   "G": [
+    42,
+    43,
+    2
+   ],
+   "H": [
+    44,
+    47,
+    4
+   ],
+   "J": [
+    48,
+    49,
+    2
+   ],
+   "K": [
+    50,
+    50,
+    1
+   ],
+   "L": [
+    51,
+    53,
+    3
+   ],
+   "M": [
+    54,
+    57,
+    4
+   ],
+   "N": [
+    60,
+    60,
+    1
+   ],
+   "O": [
+    61,
+    61,
+    1
+   ],
+   "P": [
+    62,
+    64,
+    3
+   ],
+   "R": [
+    65,
+    67,
+    3
+   ],
+   "S": [
+    68,
+    72,
+    5
+   ],
+   "T": [
+    73,
+    75,
+    2
+   ],
+   "V": [
+    76,
+    76,
+    1
+   ],
+   "W": [
+    77,
+    80,
+    4
+   ]
+  },
+  "skipped_votes": 1,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 22,
+   "end_leaf": 80
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

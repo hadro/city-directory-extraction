@@ -346,5 +346,208 @@
   "words_gz_bytes": 1055189,
   "hocr_deleted": true,
   "elapsed_s": 5
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 19,
+  "end_leaf": 328,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHJKLMNOPQRSTUVWY",
+  "missing_letters": "IXZ",
+  "voting_density": 0.868,
+  "flags": [],
+  "start": {
+   "leaf": 19,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$19/full/!1400,1400/0/default.jpg",
+   "quote": "Abram David, cap store 53 York"
+  },
+  "end": {
+   "leaf": 328,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0027$328/full/!1400,1400/0/default.jpg",
+   "quote": "Younnie James, plastercr 269 Adams"
+  },
+  "sections": [
+   {
+    "start_leaf": 19,
+    "end_leaf": 328,
+    "voting_leaves": 269,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHJKLMNOPQRSTUVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 95,
+    "end_leaf": 95,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 201,
+    "end_leaf": 213,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 224,
+    "end_leaf": 224,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 304,
+    "end_leaf": 304,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    19,
+    25,
+    5
+   ],
+   "B": [
+    26,
+    61,
+    31
+   ],
+   "C": [
+    62,
+    94,
+    30
+   ],
+   "D": [
+    96,
+    116,
+    21
+   ],
+   "E": [
+    117,
+    120,
+    4
+   ],
+   "F": [
+    121,
+    133,
+    13
+   ],
+   "G": [
+    134,
+    147,
+    13
+   ],
+   "H": [
+    148,
+    160,
+    13
+   ],
+   "J": [
+    161,
+    164,
+    4
+   ],
+   "K": [
+    165,
+    170,
+    6
+   ],
+   "L": [
+    171,
+    177,
+    7
+   ],
+   "M": [
+    178,
+    200,
+    17
+   ],
+   "N": [
+    214,
+    218,
+    5
+   ],
+   "O": [
+    219,
+    223,
+    5
+   ],
+   "P": [
+    225,
+    237,
+    13
+   ],
+   "Q": [
+    238,
+    239,
+    2
+   ],
+   "R": [
+    240,
+    257,
+    17
+   ],
+   "S": [
+    258,
+    287,
+    23
+   ],
+   "T": [
+    288,
+    297,
+    10
+   ],
+   "U": [
+    298,
+    298,
+    1
+   ],
+   "V": [
+    299,
+    303,
+    5
+   ],
+   "W": [
+    305,
+    326,
+    22
+   ],
+   "Y": [
+    327,
+    328,
+    2
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 19,
+   "end_leaf": 328
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

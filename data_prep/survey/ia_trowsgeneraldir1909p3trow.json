@@ -374,5 +374,172 @@
   "words_gz_bytes": 13996528,
   "hocr_deleted": true,
   "elapsed_s": 1431
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 7,
+  "end_leaf": 863,
+  "first_letter": "R",
+  "last_letter": "Z",
+  "letters_present": "RSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKLMNOPQX",
+  "voting_density": 0.366,
+  "flags": [
+   "multi-section",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 7,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$7/full/!1400,1400/0/default.jpg",
+   "quote": "Reade Chas A painter :-i 171 E 112th"
+  },
+  "end": {
+   "leaf": 863,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$863/full/!1400,1400/0/default.jpg",
+   "quote": "Zyss Louis jeweler 350 Bowery"
+  },
+  "sections": [
+   {
+    "start_leaf": 7,
+    "end_leaf": 863,
+    "voting_leaves": 314,
+    "first_letter": "R",
+    "last_letter": "Z",
+    "letters": "RSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1077,
+    "end_leaf": 1083,
+    "voting_leaves": 4,
+    "first_letter": "L",
+    "last_letter": "L",
+    "letters": "L",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 148,
+    "end_leaf": 152,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 254,
+    "end_leaf": 546,
+    "leaves": 293
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 596,
+    "end_leaf": 608,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 612,
+    "end_leaf": 612,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 652,
+    "end_leaf": 678,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 754,
+    "end_leaf": 834,
+    "leaves": 81
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 840,
+    "end_leaf": 846,
+    "leaves": 7
+   }
+  ],
+  "letter_blocks": {
+   "R": [
+    107,
+    147,
+    14
+   ],
+   "S": [
+    153,
+    253,
+    47
+   ],
+   "T": [
+    547,
+    595,
+    24
+   ],
+   "U": [
+    609,
+    611,
+    2
+   ],
+   "V": [
+    613,
+    651,
+    20
+   ],
+   "W": [
+    679,
+    753,
+    26
+   ],
+   "Y": [
+    835,
+    839,
+    3
+   ],
+   "Z": [
+    847,
+    863,
+    8
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 7,
+   "end_leaf": 863
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

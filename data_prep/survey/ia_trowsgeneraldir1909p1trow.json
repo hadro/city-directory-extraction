@@ -334,5 +334,162 @@
   "words_gz_bytes": 15457990,
   "hocr_deleted": true,
   "elapsed_s": 665
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 99,
+  "end_leaf": 1255,
+  "first_letter": "A",
+  "last_letter": "H",
+  "letters_present": "ABCDEFGH",
+  "missing_letters": "IJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.411,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 99,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p1trow$99/full/!1400,1400/0/default.jpg",
+   "quote": "Aaronberg Hairy salesman h 1491 Madison"
+  },
+  "end": {
+   "leaf": 1255,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1909p1trow$1255/full/!1400,1400/0/default.jpg",
+   "quote": "Haekensnek N J \u25a0"
+  },
+  "sections": [
+   {
+    "start_leaf": 99,
+    "end_leaf": 1255,
+    "voting_leaves": 475,
+    "first_letter": "A",
+    "last_letter": "H",
+    "letters": "ABCDEFGH",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 198,
+    "end_leaf": 198,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 432,
+    "end_leaf": 606,
+    "leaves": 175
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 700,
+    "end_leaf": 726,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 846,
+    "end_leaf": 848,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 916,
+    "end_leaf": 976,
+    "leaves": 61
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 1064,
+    "end_leaf": 1064,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 1140,
+    "end_leaf": 1242,
+    "leaves": 103
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    153,
+    197,
+    22
+   ],
+   "B": [
+    199,
+    431,
+    104
+   ],
+   "C": [
+    607,
+    699,
+    38
+   ],
+   "D": [
+    727,
+    845,
+    54
+   ],
+   "E": [
+    849,
+    915,
+    29
+   ],
+   "F": [
+    977,
+    1063,
+    33
+   ],
+   "G": [
+    1065,
+    1139,
+    38
+   ],
+   "H": [
+    1243,
+    1255,
+    7
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 99,
+   "end_leaf": 1255
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

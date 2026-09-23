@@ -535,5 +535,172 @@
    "filters_at": "02404bc-dirty",
    "derived": "2026-09-22"
   }
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 18,
+  "end_leaf": 97,
+  "first_letter": "B",
+  "last_letter": "W",
+  "letters_present": "BCDEFGHJKLMNOPRSTVW",
+  "missing_letters": "AIQUXYZ",
+  "voting_density": 0.863,
+  "flags": [
+   "edge-disagreement"
+  ],
+  "start": {
+   "leaf": 18,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0013$18/full/!1400,1400/0/default.jpg",
+   "quote": "Barr J hn, livery stable"
+  },
+  "end": {
+   "leaf": 97,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0013$97/full/!1400,1400/0/default.jpg",
+   "quote": "Wyvill William, 72 Concord"
+  },
+  "sections": [
+   {
+    "start_leaf": 18,
+    "end_leaf": 97,
+    "voting_leaves": 69,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDEFGHJKLMNOPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 27,
+    "end_leaf": 27,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 76,
+    "end_leaf": 77,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "B": [
+    18,
+    26,
+    7
+   ],
+   "C": [
+    28,
+    35,
+    7
+   ],
+   "D": [
+    36,
+    42,
+    4
+   ],
+   "E": [
+    43,
+    43,
+    1
+   ],
+   "F": [
+    44,
+    47,
+    3
+   ],
+   "G": [
+    48,
+    52,
+    5
+   ],
+   "H": [
+    53,
+    60,
+    8
+   ],
+   "J": [
+    61,
+    63,
+    3
+   ],
+   "K": [
+    64,
+    66,
+    3
+   ],
+   "L": [
+    67,
+    70,
+    4
+   ],
+   "M": [
+    71,
+    75,
+    4
+   ],
+   "N": [
+    78,
+    78,
+    1
+   ],
+   "O": [
+    79,
+    79,
+    1
+   ],
+   "P": [
+    80,
+    81,
+    2
+   ],
+   "R": [
+    82,
+    84,
+    3
+   ],
+   "S": [
+    85,
+    90,
+    6
+   ],
+   "T": [
+    91,
+    92,
+    2
+   ],
+   "V": [
+    93,
+    93,
+    1
+   ],
+   "W": [
+    94,
+    97,
+    4
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 14,
+   "end_leaf": 97
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

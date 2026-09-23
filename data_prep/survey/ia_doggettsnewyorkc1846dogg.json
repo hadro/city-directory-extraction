@@ -359,5 +359,181 @@
   "words_gz_bytes": 6315202,
   "hocr_deleted": true,
   "elapsed_s": 42
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 23,
+  "end_leaf": 454,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.986,
+  "flags": [],
+  "start": {
+   "leaf": 23,
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$23/full/!1400,1400/0/default.jpg",
+   "quote": "Aaron Elias E. com. mer. 91 Maiden 1. h. 161 Allen"
+  },
+  "end": {
+   "leaf": 454,
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$454/full/!1400,1400/0/default.jpg",
+   "quote": "Zwhaleu Rodolphe, cabinetmaker, 6 E. Clinton pi"
+  },
+  "sections": [
+   {
+    "start_leaf": 23,
+    "end_leaf": 454,
+    "voting_leaves": 426,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    23,
+    34,
+    12
+   ],
+   "B": [
+    35,
+    77,
+    43
+   ],
+   "C": [
+    78,
+    112,
+    35
+   ],
+   "D": [
+    113,
+    136,
+    24
+   ],
+   "E": [
+    137,
+    143,
+    7
+   ],
+   "F": [
+    144,
+    159,
+    16
+   ],
+   "G": [
+    160,
+    180,
+    19
+   ],
+   "H": [
+    181,
+    216,
+    34
+   ],
+   "I": [
+    217,
+    218,
+    2
+   ],
+   "J": [
+    219,
+    227,
+    9
+   ],
+   "K": [
+    228,
+    240,
+    13
+   ],
+   "L": [
+    241,
+    259,
+    19
+   ],
+   "M": [
+    260,
+    305,
+    44
+   ],
+   "N": [
+    306,
+    311,
+    6
+   ],
+   "O": [
+    312,
+    317,
+    6
+   ],
+   "P": [
+    318,
+    335,
+    18
+   ],
+   "Q": [
+    336,
+    336,
+    1
+   ],
+   "R": [
+    337,
+    357,
+    21
+   ],
+   "S": [
+    358,
+    396,
+    39
+   ],
+   "T": [
+    397,
+    412,
+    16
+   ],
+   "U": [
+    413,
+    413,
+    1
+   ],
+   "V": [
+    414,
+    421,
+    8
+   ],
+   "W": [
+    422,
+    451,
+    30
+   ],
+   "Y": [
+    452,
+    453,
+    2
+   ],
+   "Z": [
+    454,
+    454,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 23,
+   "end_leaf": 454
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

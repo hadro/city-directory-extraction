@@ -350,5 +350,211 @@
   "words_gz_bytes": 15380049,
   "hocr_deleted": true,
   "elapsed_s": 82
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 31,
+  "end_leaf": 1345,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.927,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 31,
+   "image": "https://iiif.archive.org/iiif/1883BPL$31/full/!1400,1400/0/default.jpg",
+   "quote": "Aab George, engineer, li 204 Stockton"
+  },
+  "end": {
+   "leaf": 1345,
+   "image": "https://iiif.archive.org/iiif/1883BPL$1345/full/!1400,1400/0/default.jpg",
+   "quote": "Zyle Louis, truckman, 640 3d av"
+  },
+  "sections": [
+   {
+    "start_leaf": 31,
+    "end_leaf": 1345,
+    "voting_leaves": 1219,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1374,
+    "end_leaf": 1451,
+    "voting_leaves": 20,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDFGHKLMPSTW",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 1477,
+    "end_leaf": 1494,
+    "voting_leaves": 16,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDFHKLMORSW",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 752,
+    "end_leaf": 834,
+    "leaves": 83
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    31,
+    59,
+    29
+   ],
+   "B": [
+    60,
+    191,
+    122
+   ],
+   "C": [
+    192,
+    287,
+    94
+   ],
+   "D": [
+    288,
+    357,
+    70
+   ],
+   "E": [
+    358,
+    379,
+    22
+   ],
+   "F": [
+    380,
+    433,
+    54
+   ],
+   "G": [
+    434,
+    493,
+    58
+   ],
+   "H": [
+    494,
+    599,
+    104
+   ],
+   "I": [
+    600,
+    603,
+    4
+   ],
+   "J": [
+    604,
+    631,
+    24
+   ],
+   "K": [
+    632,
+    693,
+    56
+   ],
+   "L": [
+    694,
+    751,
+    56
+   ],
+   "M": [
+    835,
+    899,
+    65
+   ],
+   "N": [
+    900,
+    923,
+    21
+   ],
+   "O": [
+    924,
+    945,
+    22
+   ],
+   "P": [
+    946,
+    994,
+    47
+   ],
+   "Q": [
+    995,
+    1001,
+    5
+   ],
+   "R": [
+    1002,
+    1065,
+    54
+   ],
+   "S": [
+    1066,
+    1193,
+    128
+   ],
+   "T": [
+    1194,
+    1231,
+    38
+   ],
+   "U": [
+    1232,
+    1234,
+    3
+   ],
+   "V": [
+    1235,
+    1251,
+    17
+   ],
+   "W": [
+    1252,
+    1336,
+    83
+   ],
+   "Y": [
+    1337,
+    1341,
+    5
+   ],
+   "Z": [
+    1342,
+    1345,
+    4
+   ]
+  },
+  "skipped_votes": 12,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 31,
+   "end_leaf": 1345
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

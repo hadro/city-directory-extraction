@@ -389,5 +389,278 @@
   "words_gz_bytes": 1909921,
   "hocr_deleted": true,
   "elapsed_s": 9
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 34,
+  "end_leaf": 353,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
+  "missing_letters": "XZ",
+  "voting_density": 0.794,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 34,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0036$34/full/!1400,1400/0/default.jpg",
+   "quote": "Ackar Jobn, printer, 272 Hudson av."
+  },
+  "end": {
+   "leaf": 353,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0036$353/full/!1400,1400/0/default.jpg",
+   "quote": "Young John 8. coal, Hamilton av. c. Commercial, Zink John, ehosmhaker,'S elson **"
+  },
+  "sections": [
+   {
+    "start_leaf": 34,
+    "end_leaf": 353,
+    "voting_leaves": 254,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 355,
+    "end_leaf": 485,
+    "voting_leaves": 103,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMNOPQRSTVW",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 71,
+    "end_leaf": 72,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 96,
+    "end_leaf": 98,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 117,
+    "end_leaf": 117,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 176,
+    "end_leaf": 176,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 207,
+    "end_leaf": 229,
+    "leaves": 23
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 258,
+    "end_leaf": 258,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 271,
+    "end_leaf": 271,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 315,
+    "end_leaf": 316,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 325,
+    "end_leaf": 325,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 352,
+    "end_leaf": 352,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    34,
+    39,
+    6
+   ],
+   "B": [
+    40,
+    70,
+    25
+   ],
+   "C": [
+    73,
+    95,
+    19
+   ],
+   "D": [
+    99,
+    116,
+    13
+   ],
+   "E": [
+    118,
+    124,
+    5
+   ],
+   "F": [
+    125,
+    136,
+    12
+   ],
+   "G": [
+    137,
+    149,
+    12
+   ],
+   "H": [
+    150,
+    175,
+    22
+   ],
+   "I": [
+    177,
+    177,
+    1
+   ],
+   "J": [
+    178,
+    183,
+    6
+   ],
+   "K": [
+    184,
+    193,
+    10
+   ],
+   "L": [
+    194,
+    206,
+    13
+   ],
+   "M": [
+    230,
+    246,
+    14
+   ],
+   "N": [
+    247,
+    250,
+    4
+   ],
+   "O": [
+    251,
+    257,
+    7
+   ],
+   "P": [
+    259,
+    270,
+    9
+   ],
+   "Q": [
+    272,
+    272,
+    1
+   ],
+   "R": [
+    273,
+    288,
+    14
+   ],
+   "S": [
+    289,
+    314,
+    23
+   ],
+   "T": [
+    317,
+    324,
+    6
+   ],
+   "U": [
+    326,
+    326,
+    1
+   ],
+   "V": [
+    327,
+    331,
+    5
+   ],
+   "W": [
+    332,
+    351,
+    18
+   ],
+   "Y": [
+    353,
+    353,
+    1
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 34,
+   "end_leaf": 353
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

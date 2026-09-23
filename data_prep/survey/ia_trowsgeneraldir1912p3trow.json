@@ -341,5 +341,172 @@
   "words_gz_bytes": 14686870,
   "hocr_deleted": true,
   "elapsed_s": 34
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 935,
+  "first_letter": "R",
+  "last_letter": "Z",
+  "letters_present": "RSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKLMNOPQX",
+  "voting_density": 0.391,
+  "flags": [
+   "multi-section",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p3trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Regino Mu-hl coal 2470 Arthur av"
+  },
+  "end": {
+   "leaf": 935,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p3trow$935/full/!1400,1400/0/default.jpg",
+   "quote": "Zysman Isidor silks 387 4th av & seo 29"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 935,
+    "voting_leaves": 362,
+    "first_letter": "R",
+    "last_letter": "Z",
+    "letters": "RSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1159,
+    "end_leaf": 1193,
+    "voting_leaves": 7,
+    "first_letter": "C",
+    "last_letter": "L",
+    "letters": "CHL",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 160,
+    "end_leaf": 160,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 270,
+    "end_leaf": 594,
+    "leaves": 325
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 648,
+    "end_leaf": 648,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 656,
+    "end_leaf": 666,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 708,
+    "end_leaf": 846,
+    "leaves": 139
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 902,
+    "end_leaf": 902,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 914,
+    "end_leaf": 914,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "R": [
+    105,
+    159,
+    22
+   ],
+   "S": [
+    161,
+    269,
+    49
+   ],
+   "T": [
+    595,
+    647,
+    25
+   ],
+   "U": [
+    649,
+    655,
+    4
+   ],
+   "V": [
+    667,
+    707,
+    21
+   ],
+   "W": [
+    847,
+    901,
+    22
+   ],
+   "Y": [
+    903,
+    913,
+    4
+   ],
+   "Z": [
+    915,
+    935,
+    10
+   ]
+  },
+  "skipped_votes": 1,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 935
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

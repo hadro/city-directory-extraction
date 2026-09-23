@@ -354,5 +354,176 @@
   "words_gz_bytes": 764387,
   "hocr_deleted": true,
   "elapsed_s": 9
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 23,
+  "end_leaf": 237,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTVW",
+  "missing_letters": "UXYZ",
+  "voting_density": 0.949,
+  "flags": [],
+  "start": {
+   "leaf": 23,
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$23/full/!1400,1400/0/default.jpg",
+   "quote": "Aaronfred, Cocr.rad, taylor, 28 Bowery-lane."
+  },
+  "end": {
+   "leaf": 237,
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$237/full/!1400,1400/0/default.jpg",
+   "quote": "Wrighi, William."
+  },
+  "sections": [
+   {
+    "start_leaf": 23,
+    "end_leaf": 237,
+    "voting_leaves": 204,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHIJKLMNOPQRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 115,
+    "end_leaf": 115,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    23,
+    30,
+    8
+   ],
+   "B": [
+    31,
+    50,
+    20
+   ],
+   "C": [
+    51,
+    67,
+    17
+   ],
+   "D": [
+    68,
+    80,
+    11
+   ],
+   "E": [
+    81,
+    81,
+    1
+   ],
+   "F": [
+    82,
+    88,
+    7
+   ],
+   "G": [
+    89,
+    97,
+    9
+   ],
+   "H": [
+    98,
+    113,
+    16
+   ],
+   "I": [
+    114,
+    114,
+    1
+   ],
+   "J": [
+    116,
+    119,
+    4
+   ],
+   "K": [
+    120,
+    124,
+    5
+   ],
+   "L": [
+    125,
+    135,
+    11
+   ],
+   "M": [
+    136,
+    155,
+    20
+   ],
+   "N": [
+    156,
+    158,
+    3
+   ],
+   "O": [
+    159,
+    160,
+    2
+   ],
+   "P": [
+    161,
+    170,
+    10
+   ],
+   "Q": [
+    171,
+    171,
+    1
+   ],
+   "R": [
+    172,
+    182,
+    11
+   ],
+   "S": [
+    183,
+    201,
+    19
+   ],
+   "T": [
+    202,
+    208,
+    7
+   ],
+   "V": [
+    209,
+    215,
+    7
+   ],
+   "W": [
+    216,
+    230,
+    13
+   ]
+  },
+  "skipped_votes": 4,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 23,
+   "end_leaf": 237
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

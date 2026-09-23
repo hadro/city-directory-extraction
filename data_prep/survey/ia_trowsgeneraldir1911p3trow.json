@@ -382,5 +382,172 @@
   "words_gz_bytes": 14137303,
   "hocr_deleted": true,
   "elapsed_s": 64
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 889,
+  "first_letter": "R",
+  "last_letter": "Z",
+  "letters_present": "RSTUVWYZ",
+  "missing_letters": "ABCDEFGHIJKLMNOPQX",
+  "voting_density": 0.403,
+  "flags": [
+   "multi-section",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Reeves Abram h454 St Nicholas av"
+  },
+  "end": {
+   "leaf": 889,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$889/full/!1400,1400/0/default.jpg",
+   "quote": "Zyttenfeld Saml hair 200 E20th h!21 EllSth"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 889,
+    "voting_leaves": 355,
+    "first_letter": "R",
+    "last_letter": "Z",
+    "letters": "RSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1119,
+    "end_leaf": 1153,
+    "voting_leaves": 7,
+    "first_letter": "A",
+    "last_letter": "L",
+    "letters": "ACHL",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 92,
+    "end_leaf": 150,
+    "leaves": 59
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 252,
+    "end_leaf": 524,
+    "leaves": 273
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 614,
+    "end_leaf": 614,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 620,
+    "end_leaf": 630,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 672,
+    "end_leaf": 672,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 774,
+    "end_leaf": 858,
+    "leaves": 85
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 870,
+    "end_leaf": 870,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "R": [
+    9,
+    91,
+    34
+   ],
+   "S": [
+    151,
+    251,
+    47
+   ],
+   "T": [
+    525,
+    613,
+    40
+   ],
+   "U": [
+    615,
+    619,
+    3
+   ],
+   "V": [
+    631,
+    671,
+    21
+   ],
+   "W": [
+    673,
+    773,
+    39
+   ],
+   "Y": [
+    859,
+    869,
+    5
+   ],
+   "Z": [
+    871,
+    889,
+    9
+   ]
+  },
+  "skipped_votes": 1,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 889
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

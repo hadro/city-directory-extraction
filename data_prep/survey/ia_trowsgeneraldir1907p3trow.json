@@ -334,5 +334,160 @@
   "words_gz_bytes": 4753281,
   "hocr_deleted": true,
   "elapsed_s": 58
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 153,
+  "end_leaf": 915,
+  "first_letter": "R",
+  "last_letter": "Z",
+  "letters_present": "RSTVWYZ",
+  "missing_letters": "ABCDEFGHIJKLMNOPQUX",
+  "voting_density": 0.089,
+  "flags": [
+   "sparse",
+   "edge-disagreement",
+   "multi-section",
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 153,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1907p3trow$153/full/!1400,1400/0/default.jpg",
+   "quote": "Rudgi"
+  },
+  "end": {
+   "leaf": 915,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1907p3trow$915/full/!1400,1400/0/default.jpg",
+   "quote": "Zwelgh;"
+  },
+  "sections": [
+   {
+    "start_leaf": 153,
+    "end_leaf": 915,
+    "voting_leaves": 68,
+    "first_letter": "R",
+    "last_letter": "Z",
+    "letters": "RSTVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1115,
+    "end_leaf": 1127,
+    "voting_leaves": 6,
+    "first_letter": "B",
+    "last_letter": "L",
+    "letters": "BCL",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 158,
+    "end_leaf": 420,
+    "leaves": 263
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 434,
+    "end_leaf": 588,
+    "leaves": 155
+   },
+   {
+    "between": [
+     "T",
+     "V"
+    ],
+    "start_leaf": 604,
+    "end_leaf": 652,
+    "leaves": 49
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 668,
+    "end_leaf": 840,
+    "leaves": 173
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 844,
+    "end_leaf": 886,
+    "leaves": 43
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 892,
+    "end_leaf": 900,
+    "leaves": 9
+   }
+  ],
+  "letter_blocks": {
+   "R": [
+    153,
+    157,
+    3
+   ],
+   "S": [
+    421,
+    433,
+    4
+   ],
+   "T": [
+    589,
+    603,
+    6
+   ],
+   "V": [
+    653,
+    667,
+    6
+   ],
+   "W": [
+    841,
+    843,
+    2
+   ],
+   "Y": [
+    887,
+    891,
+    2
+   ],
+   "Z": [
+    901,
+    915,
+    5
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 39,
+   "end_leaf": 913
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

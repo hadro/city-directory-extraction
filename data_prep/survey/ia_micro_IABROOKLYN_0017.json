@@ -360,5 +360,215 @@
   "words_gz_bytes": 478656,
   "hocr_deleted": true,
   "elapsed_s": 5
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 8,
+  "end_leaf": 143,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMOPRSTVW",
+  "missing_letters": "INQUXYZ",
+  "voting_density": 0.699,
+  "flags": [],
+  "start": {
+   "leaf": 8,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$8/full/!1400,1400/0/default.jpg",
+   "quote": "Abbot James, blacksmith 2 Vine | | \u00e9,"
+  },
+  "end": {
+   "leaf": 143,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$143/full/!1400,1400/0/default.jpg",
+   "quote": "Wyckoff Rickard L. \u2018Level storage 5 *"
+  },
+  "sections": [
+   {
+    "start_leaf": 8,
+    "end_leaf": 143,
+    "voting_leaves": 95,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMOPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 11,
+    "end_leaf": 15,
+    "leaves": 5
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 25,
+    "end_leaf": 25,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 76,
+    "end_leaf": 78,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 80,
+    "end_leaf": 82,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "M",
+     "O"
+    ],
+    "start_leaf": 90,
+    "end_leaf": 98,
+    "leaves": 9
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 100,
+    "end_leaf": 102,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 114,
+    "end_leaf": 114,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    8,
+    10,
+    2
+   ],
+   "B": [
+    16,
+    24,
+    5
+   ],
+   "C": [
+    26,
+    37,
+    8
+   ],
+   "D": [
+    38,
+    46,
+    9
+   ],
+   "E": [
+    47,
+    47,
+    1
+   ],
+   "F": [
+    48,
+    53,
+    6
+   ],
+   "G": [
+    54,
+    57,
+    4
+   ],
+   "H": [
+    58,
+    68,
+    11
+   ],
+   "J": [
+    69,
+    72,
+    3
+   ],
+   "K": [
+    73,
+    75,
+    2
+   ],
+   "L": [
+    79,
+    79,
+    1
+   ],
+   "M": [
+    83,
+    89,
+    5
+   ],
+   "O": [
+    99,
+    99,
+    1
+   ],
+   "P": [
+    103,
+    107,
+    3
+   ],
+   "R": [
+    108,
+    113,
+    5
+   ],
+   "S": [
+    115,
+    126,
+    11
+   ],
+   "T": [
+    127,
+    131,
+    5
+   ],
+   "V": [
+    132,
+    134,
+    3
+   ],
+   "W": [
+    135,
+    143,
+    9
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 8,
+   "end_leaf": 143
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

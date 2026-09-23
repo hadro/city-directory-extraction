@@ -305,5 +305,192 @@
   },
   "words_gz_bytes": 4796309,
   "elapsed_s": 4
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 65,
+  "end_leaf": 389,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTVWY",
+  "missing_letters": "UXZ",
+  "voting_density": 0.895,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 65,
+   "image": "https://iiif.archive.org/iiif/1856BPL$65/full/!1400,1400/0/default.jpg",
+   "quote": "Abberley Richard, shoemaker, 170 Hudson"
+  },
+  "end": {
+   "leaf": 389,
+   "image": "https://iiif.archive.org/iiif/1856BPL$389/full/!1400,1400/0/default.jpg",
+   "quote": "Young John (Craft # Young), h. 145 Adams"
+  },
+  "sections": [
+   {
+    "start_leaf": 65,
+    "end_leaf": 389,
+    "voting_leaves": 291,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPQRSTVWY",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 405,
+    "end_leaf": 581,
+    "voting_leaves": 161,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTVWZ",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 246,
+    "end_leaf": 266,
+    "leaves": 21
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    65,
+    71,
+    7
+   ],
+   "B": [
+    72,
+    105,
+    30
+   ],
+   "C": [
+    106,
+    133,
+    28
+   ],
+   "D": [
+    134,
+    154,
+    19
+   ],
+   "E": [
+    155,
+    158,
+    4
+   ],
+   "F": [
+    159,
+    175,
+    15
+   ],
+   "G": [
+    176,
+    187,
+    12
+   ],
+   "H": [
+    188,
+    212,
+    25
+   ],
+   "I": [
+    213,
+    213,
+    1
+   ],
+   "J": [
+    214,
+    221,
+    6
+   ],
+   "K": [
+    222,
+    232,
+    11
+   ],
+   "L": [
+    233,
+    245,
+    11
+   ],
+   "M": [
+    267,
+    281,
+    15
+   ],
+   "N": [
+    282,
+    288,
+    5
+   ],
+   "O": [
+    289,
+    294,
+    6
+   ],
+   "P": [
+    295,
+    308,
+    12
+   ],
+   "Q": [
+    309,
+    309,
+    1
+   ],
+   "R": [
+    310,
+    324,
+    15
+   ],
+   "S": [
+    325,
+    350,
+    26
+   ],
+   "T": [
+    351,
+    361,
+    9
+   ],
+   "V": [
+    362,
+    366,
+    5
+   ],
+   "W": [
+    367,
+    388,
+    20
+   ],
+   "Y": [
+    389,
+    389,
+    1
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 65,
+   "end_leaf": 390
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

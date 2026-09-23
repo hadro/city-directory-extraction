@@ -361,5 +361,247 @@
   "words_gz_bytes": 8568715,
   "hocr_deleted": true,
   "elapsed_s": 30
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 12,
+  "end_leaf": 738,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.909,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 12,
+   "image": "https://iiif.archive.org/iiif/1869BPL$12/full/!1400,1400/0/default.jpg",
+   "quote": "Aalholm Matthias, h Fort Green pi"
+  },
+  "end": {
+   "leaf": 738,
+   "image": "https://iiif.archive.org/iiif/1869BPL$738/full/!1400,1400/0/default.jpg",
+   "quote": "Zwergins Julius, h 316 Navy"
+  },
+  "sections": [
+   {
+    "start_leaf": 12,
+    "end_leaf": 738,
+    "voting_leaves": 661,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 804,
+    "end_leaf": 889,
+    "voting_leaves": 11,
+    "first_letter": "B",
+    "last_letter": "L",
+    "letters": "BGKL",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 100,
+    "end_leaf": 101,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 330,
+    "end_leaf": 330,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 346,
+    "end_leaf": 347,
+    "leaves": 2
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 411,
+    "end_leaf": 457,
+    "leaves": 47
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 546,
+    "end_leaf": 546,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 734,
+    "end_leaf": 734,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    12,
+    27,
+    16
+   ],
+   "B": [
+    28,
+    99,
+    68
+   ],
+   "C": [
+    102,
+    160,
+    55
+   ],
+   "D": [
+    161,
+    199,
+    39
+   ],
+   "E": [
+    200,
+    210,
+    11
+   ],
+   "F": [
+    211,
+    240,
+    30
+   ],
+   "G": [
+    241,
+    270,
+    30
+   ],
+   "H": [
+    271,
+    329,
+    55
+   ],
+   "I": [
+    331,
+    332,
+    2
+   ],
+   "J": [
+    333,
+    345,
+    13
+   ],
+   "K": [
+    348,
+    381,
+    28
+   ],
+   "L": [
+    382,
+    410,
+    29
+   ],
+   "M": [
+    458,
+    494,
+    37
+   ],
+   "N": [
+    495,
+    505,
+    11
+   ],
+   "O": [
+    506,
+    517,
+    12
+   ],
+   "P": [
+    518,
+    542,
+    25
+   ],
+   "Q": [
+    543,
+    545,
+    3
+   ],
+   "R": [
+    547,
+    581,
+    27
+   ],
+   "S": [
+    582,
+    653,
+    68
+   ],
+   "T": [
+    654,
+    677,
+    22
+   ],
+   "U": [
+    678,
+    678,
+    1
+   ],
+   "V": [
+    679,
+    688,
+    10
+   ],
+   "W": [
+    689,
+    733,
+    45
+   ],
+   "Y": [
+    735,
+    736,
+    2
+   ],
+   "Z": [
+    737,
+    738,
+    2
+   ]
+  },
+  "skipped_votes": 6,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 12,
+   "end_leaf": 738
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -368,5 +368,162 @@
   "words_gz_bytes": 12993686,
   "hocr_deleted": true,
   "elapsed_s": 92
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 141,
+  "end_leaf": 1195,
+  "first_letter": "A",
+  "last_letter": "H",
+  "letters_present": "ABCDEFGH",
+  "missing_letters": "IJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.435,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 141,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$141/full/!1400,1400/0/default.jpg",
+   "quote": "Aaronsan Abraham agent h 16 E 109th"
+  },
+  "end": {
+   "leaf": 1195,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$1195/full/!1400,1400/0/default.jpg",
+   "quote": "Hasbrouck Abner carpenter 605 E 141st"
+  },
+  "sections": [
+   {
+    "start_leaf": 141,
+    "end_leaf": 1195,
+    "voting_leaves": 459,
+    "first_letter": "A",
+    "last_letter": "H",
+    "letters": "ABCDEFGH",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 178,
+    "end_leaf": 226,
+    "leaves": 49
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 432,
+    "end_leaf": 586,
+    "leaves": 155
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 668,
+    "end_leaf": 692,
+    "leaves": 25
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 798,
+    "end_leaf": 798,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 860,
+    "end_leaf": 860,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 984,
+    "end_leaf": 984,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 1100,
+    "end_leaf": 1138,
+    "leaves": 39
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    141,
+    177,
+    17
+   ],
+   "B": [
+    227,
+    431,
+    101
+   ],
+   "C": [
+    587,
+    667,
+    40
+   ],
+   "D": [
+    693,
+    797,
+    50
+   ],
+   "E": [
+    799,
+    859,
+    27
+   ],
+   "F": [
+    861,
+    983,
+    53
+   ],
+   "G": [
+    985,
+    1099,
+    47
+   ],
+   "H": [
+    1139,
+    1181,
+    20
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 141,
+   "end_leaf": 1195
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -418,5 +418,209 @@
   "words_gz_bytes": 17360895,
   "hocr_deleted": true,
   "elapsed_s": 70
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1390,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.916,
+  "flags": [],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/1889BPL$9/full/!1400,1400/0/default.jpg",
+   "quote": "Aalblumen Christina, h 223 Johnson av"
+  },
+  "end": {
+   "leaf": 1390,
+   "image": "https://iiif.archive.org/iiif/1889BPL$1390/full/!1400,1400/0/default.jpg",
+   "quote": "Zytnitzky Jacob, tinsmith, 73 Graham av"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1390,
+    "voting_leaves": 1266,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 133,
+    "end_leaf": 175,
+    "leaves": 43
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 600,
+    "end_leaf": 618,
+    "leaves": 19
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 776,
+    "end_leaf": 857,
+    "leaves": 82
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    9,
+    39,
+    31
+   ],
+   "B": [
+    40,
+    132,
+    91
+   ],
+   "C": [
+    176,
+    273,
+    95
+   ],
+   "D": [
+    274,
+    346,
+    71
+   ],
+   "E": [
+    347,
+    369,
+    23
+   ],
+   "F": [
+    370,
+    427,
+    58
+   ],
+   "G": [
+    428,
+    486,
+    59
+   ],
+   "H": [
+    487,
+    595,
+    107
+   ],
+   "I": [
+    596,
+    599,
+    4
+   ],
+   "J": [
+    619,
+    643,
+    25
+   ],
+   "K": [
+    644,
+    710,
+    61
+   ],
+   "L": [
+    711,
+    775,
+    59
+   ],
+   "M": [
+    858,
+    925,
+    68
+   ],
+   "N": [
+    926,
+    949,
+    22
+   ],
+   "O": [
+    950,
+    975,
+    26
+   ],
+   "P": [
+    976,
+    1028,
+    48
+   ],
+   "Q": [
+    1029,
+    1032,
+    4
+   ],
+   "R": [
+    1033,
+    1102,
+    56
+   ],
+   "S": [
+    1103,
+    1239,
+    136
+   ],
+   "T": [
+    1240,
+    1276,
+    37
+   ],
+   "U": [
+    1277,
+    1280,
+    4
+   ],
+   "V": [
+    1281,
+    1297,
+    17
+   ],
+   "W": [
+    1298,
+    1380,
+    81
+   ],
+   "Y": [
+    1381,
+    1385,
+    5
+   ],
+   "Z": [
+    1386,
+    1390,
+    5
+   ]
+  },
+  "skipped_votes": 17,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1390
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

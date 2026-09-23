@@ -356,5 +356,190 @@
   "words_gz_bytes": 40455529,
   "hocr_deleted": true,
   "elapsed_s": 131
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 187,
+  "end_leaf": 958,
+  "first_letter": "A",
+  "last_letter": "K",
+  "letters_present": "ABCDEFGHJK",
+  "missing_letters": "ILMNOPQRSTUVWXYZ",
+  "voting_density": 0.426,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 187,
+   "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$187/full/!1400,1400/0/default.jpg",
+   "quote": "Abadie Alt C (The Cinematograph Co)"
+  },
+  "end": {
+   "leaf": 958,
+   "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$958/full/!1400,1400/0/default.jpg",
+   "quote": "Kessel Adam jr treas Willat Studios &"
+  },
+  "sections": [
+   {
+    "start_leaf": 187,
+    "end_leaf": 958,
+    "voting_leaves": 329,
+    "first_letter": "A",
+    "last_letter": "K",
+    "letters": "ABCDEFGHJK",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 246,
+    "end_leaf": 246,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 317,
+    "end_leaf": 388,
+    "leaves": 72
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 443,
+    "end_leaf": 518,
+    "leaves": 76
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 570,
+    "end_leaf": 573,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 603,
+    "end_leaf": 645,
+    "leaves": 43
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 686,
+    "end_leaf": 686,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 727,
+    "end_leaf": 812,
+    "leaves": 86
+   },
+   {
+    "between": [
+     "H",
+     "J"
+    ],
+    "start_leaf": 858,
+    "end_leaf": 903,
+    "leaves": 46
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 912,
+    "end_leaf": 923,
+    "leaves": 12
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    222,
+    245,
+    12
+   ],
+   "B": [
+    247,
+    316,
+    43
+   ],
+   "C": [
+    389,
+    442,
+    32
+   ],
+   "D": [
+    519,
+    569,
+    30
+   ],
+   "E": [
+    574,
+    602,
+    13
+   ],
+   "F": [
+    646,
+    685,
+    18
+   ],
+   "G": [
+    687,
+    726,
+    27
+   ],
+   "H": [
+    813,
+    857,
+    20
+   ],
+   "J": [
+    904,
+    911,
+    5
+   ],
+   "K": [
+    924,
+    958,
+    19
+   ]
+  },
+  "skipped_votes": 6,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 187,
+   "end_leaf": 958
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

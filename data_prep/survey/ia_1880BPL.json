@@ -327,5 +327,229 @@
   "words_gz_bytes": 13132878,
   "hocr_deleted": true,
   "elapsed_s": 53
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 21,
+  "end_leaf": 1178,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.914,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 21,
+   "image": "https://iiif.archive.org/iiif/1880BPL$21/full/!1400,1400/0/default.jpg",
+   "quote": "Aab George, engineer, h r 152 Hopkins"
+  },
+  "end": {
+   "leaf": 1178,
+   "image": "https://iiif.archive.org/iiif/1880BPL$1178/full/!1400,1400/0/default.jpg",
+   "quote": "ZylinsM John, carver, h 225 N. 8th"
+  },
+  "sections": [
+   {
+    "start_leaf": 21,
+    "end_leaf": 1178,
+    "voting_leaves": 1058,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1279,
+    "end_leaf": 1295,
+    "voting_leaves": 15,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDFGHKLMSTW",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 1316,
+    "end_leaf": 1332,
+    "voting_leaves": 16,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDFHKLMPSW",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 125,
+    "end_leaf": 164,
+    "leaves": 40
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 663,
+    "end_leaf": 737,
+    "leaves": 75
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 935,
+    "end_leaf": 937,
+    "leaves": 3
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    21,
+    47,
+    25
+   ],
+   "B": [
+    48,
+    124,
+    77
+   ],
+   "C": [
+    165,
+    254,
+    85
+   ],
+   "D": [
+    255,
+    317,
+    63
+   ],
+   "E": [
+    318,
+    336,
+    19
+   ],
+   "F": [
+    337,
+    385,
+    49
+   ],
+   "G": [
+    386,
+    435,
+    50
+   ],
+   "H": [
+    436,
+    530,
+    91
+   ],
+   "I": [
+    531,
+    533,
+    3
+   ],
+   "J": [
+    534,
+    558,
+    21
+   ],
+   "K": [
+    559,
+    607,
+    49
+   ],
+   "L": [
+    608,
+    662,
+    49
+   ],
+   "M": [
+    738,
+    794,
+    57
+   ],
+   "N": [
+    795,
+    815,
+    18
+   ],
+   "O": [
+    816,
+    836,
+    21
+   ],
+   "P": [
+    837,
+    877,
+    41
+   ],
+   "Q": [
+    878,
+    882,
+    5
+   ],
+   "R": [
+    883,
+    934,
+    35
+   ],
+   "S": [
+    938,
+    1052,
+    111
+   ],
+   "T": [
+    1053,
+    1085,
+    33
+   ],
+   "U": [
+    1086,
+    1087,
+    2
+   ],
+   "V": [
+    1088,
+    1102,
+    15
+   ],
+   "W": [
+    1103,
+    1172,
+    70
+   ],
+   "Y": [
+    1173,
+    1175,
+    3
+   ],
+   "Z": [
+    1176,
+    1178,
+    3
+   ]
+  },
+  "skipped_votes": 26,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 21,
+   "end_leaf": 1178
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

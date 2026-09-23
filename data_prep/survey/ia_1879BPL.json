@@ -402,5 +402,209 @@
   "words_gz_bytes": 11784370,
   "hocr_deleted": true,
   "elapsed_s": 117
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 27,
+  "end_leaf": 1142,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.922,
+  "flags": [],
+  "start": {
+   "leaf": 27,
+   "image": "https://iiif.archive.org/iiif/1879BPL$27/full/!1400,1400/0/default.jpg",
+   "quote": "Aab George, engineer, h ljj2 Hopkins"
+  },
+  "end": {
+   "leaf": 1142,
+   "image": "https://iiif.archive.org/iiif/1879BPL$1142/full/!1400,1400/0/default.jpg",
+   "quote": "Zwing August, cabinetmkr. h 68 N. 8th"
+  },
+  "sections": [
+   {
+    "start_leaf": 27,
+    "end_leaf": 1142,
+    "voting_leaves": 1029,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 131,
+    "end_leaf": 169,
+    "leaves": 39
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 643,
+    "end_leaf": 714,
+    "leaves": 72
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 855,
+    "end_leaf": 855,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    27,
+    53,
+    25
+   ],
+   "B": [
+    54,
+    130,
+    76
+   ],
+   "C": [
+    170,
+    257,
+    84
+   ],
+   "D": [
+    258,
+    317,
+    60
+   ],
+   "E": [
+    318,
+    335,
+    18
+   ],
+   "F": [
+    336,
+    381,
+    46
+   ],
+   "G": [
+    382,
+    430,
+    49
+   ],
+   "H": [
+    431,
+    519,
+    85
+   ],
+   "I": [
+    520,
+    522,
+    3
+   ],
+   "J": [
+    523,
+    546,
+    20
+   ],
+   "K": [
+    547,
+    593,
+    47
+   ],
+   "L": [
+    594,
+    642,
+    47
+   ],
+   "M": [
+    715,
+    769,
+    55
+   ],
+   "N": [
+    770,
+    788,
+    18
+   ],
+   "O": [
+    789,
+    810,
+    20
+   ],
+   "P": [
+    811,
+    850,
+    40
+   ],
+   "Q": [
+    851,
+    854,
+    4
+   ],
+   "R": [
+    856,
+    907,
+    42
+   ],
+   "S": [
+    908,
+    1018,
+    106
+   ],
+   "T": [
+    1019,
+    1049,
+    31
+   ],
+   "U": [
+    1050,
+    1051,
+    2
+   ],
+   "V": [
+    1052,
+    1066,
+    15
+   ],
+   "W": [
+    1067,
+    1136,
+    70
+   ],
+   "Y": [
+    1137,
+    1139,
+    3
+   ],
+   "Z": [
+    1140,
+    1142,
+    3
+   ]
+  },
+  "skipped_votes": 15,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 27,
+   "end_leaf": 1142
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -327,5 +327,176 @@
   "words_gz_bytes": 1259245,
   "hocr_deleted": true,
   "elapsed_s": 10
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 61,
+  "end_leaf": 357,
+  "first_letter": "A",
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
+  "missing_letters": "XZ",
+  "voting_density": 1.0,
+  "flags": [],
+  "start": {
+   "leaf": 61,
+   "image": "https://iiif.archive.org/iiif/longworthsameric3818long$61/full/!1400,1400/0/default.jpg",
+   "quote": "Abbot Robert, merchant 82 Chamber"
+  },
+  "end": {
+   "leaf": 357,
+   "image": "https://iiif.archive.org/iiif/longworthsameric3818long$357/full/!1400,1400/0/default.jpg",
+   "quote": "Young Robert, shoemaker 139 Chamber"
+  },
+  "sections": [
+   {
+    "start_leaf": 61,
+    "end_leaf": 357,
+    "voting_leaves": 297,
+    "first_letter": "A",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    61,
+    70,
+    10
+   ],
+   "B": [
+    71,
+    101,
+    31
+   ],
+   "C": [
+    102,
+    125,
+    24
+   ],
+   "D": [
+    126,
+    141,
+    16
+   ],
+   "E": [
+    142,
+    146,
+    5
+   ],
+   "F": [
+    147,
+    156,
+    10
+   ],
+   "G": [
+    157,
+    169,
+    13
+   ],
+   "H": [
+    170,
+    192,
+    23
+   ],
+   "I": [
+    193,
+    194,
+    2
+   ],
+   "J": [
+    195,
+    201,
+    7
+   ],
+   "K": [
+    202,
+    208,
+    7
+   ],
+   "L": [
+    209,
+    222,
+    14
+   ],
+   "M": [
+    223,
+    249,
+    27
+   ],
+   "N": [
+    250,
+    253,
+    4
+   ],
+   "O": [
+    254,
+    257,
+    4
+   ],
+   "P": [
+    258,
+    270,
+    13
+   ],
+   "Q": [
+    271,
+    271,
+    1
+   ],
+   "R": [
+    272,
+    285,
+    14
+   ],
+   "S": [
+    286,
+    314,
+    29
+   ],
+   "T": [
+    315,
+    327,
+    13
+   ],
+   "U": [
+    328,
+    328,
+    1
+   ],
+   "V": [
+    329,
+    336,
+    8
+   ],
+   "W": [
+    337,
+    356,
+    20
+   ],
+   "Y": [
+    357,
+    357,
+    1
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 61,
+   "end_leaf": 357
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

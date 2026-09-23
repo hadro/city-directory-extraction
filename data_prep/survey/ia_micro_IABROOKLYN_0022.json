@@ -375,5 +375,175 @@
   "words_gz_bytes": 402989,
   "hocr_deleted": true,
   "elapsed_s": 6
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 4,
+  "end_leaf": 51,
+  "first_letter": "A",
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMNOPRSTVW",
+  "missing_letters": "IQUXYZ",
+  "voting_density": 0.938,
+  "flags": [],
+  "start": {
+   "leaf": 4,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$4/full/!1400,1400/0/default.jpg",
+   "quote": "Abberly Christian, ambsolle a maker, 9 97 \u2018Bridg\u00e9"
+  },
+  "end": {
+   "leaf": 51,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$51/full/!1400,1400/0/default.jpg",
+   "quote": "Woodworth Mrs. select school, 5} Dany"
+  },
+  "sections": [
+   {
+    "start_leaf": 4,
+    "end_leaf": 51,
+    "voting_leaves": 45,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMNOPRSTVW",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 18,
+    "end_leaf": 18,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 32,
+    "end_leaf": 33,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    4,
+    4,
+    1
+   ],
+   "B": [
+    5,
+    10,
+    6
+   ],
+   "C": [
+    11,
+    15,
+    5
+   ],
+   "D": [
+    16,
+    17,
+    2
+   ],
+   "E": [
+    19,
+    19,
+    1
+   ],
+   "F": [
+    20,
+    21,
+    2
+   ],
+   "G": [
+    22,
+    23,
+    2
+   ],
+   "H": [
+    24,
+    26,
+    3
+   ],
+   "J": [
+    27,
+    28,
+    2
+   ],
+   "K": [
+    29,
+    30,
+    2
+   ],
+   "L": [
+    31,
+    31,
+    1
+   ],
+   "M": [
+    34,
+    36,
+    3
+   ],
+   "N": [
+    37,
+    37,
+    1
+   ],
+   "O": [
+    38,
+    38,
+    1
+   ],
+   "P": [
+    39,
+    40,
+    2
+   ],
+   "R": [
+    41,
+    42,
+    2
+   ],
+   "S": [
+    43,
+    46,
+    4
+   ],
+   "T": [
+    47,
+    47,
+    1
+   ],
+   "V": [
+    48,
+    48,
+    1
+   ],
+   "W": [
+    49,
+    51,
+    3
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 4,
+   "end_leaf": 51
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

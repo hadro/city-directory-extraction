@@ -380,5 +380,162 @@
   "words_gz_bytes": 14992066,
   "hocr_deleted": true,
   "elapsed_s": 46
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 57,
+  "end_leaf": 1233,
+  "first_letter": "A",
+  "last_letter": "H",
+  "letters_present": "ABCDEFGH",
+  "missing_letters": "IJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.433,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 57,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p1trow$57/full/!1400,1400/0/default.jpg",
+   "quote": "Aaronoff Saml laundry 227 E99th"
+  },
+  "end": {
+   "leaf": 1233,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p1trow$1233/full/!1400,1400/0/default.jpg",
+   "quote": "Hampel Harry 1)453 E144th"
+  },
+  "sections": [
+   {
+    "start_leaf": 57,
+    "end_leaf": 1233,
+    "voting_leaves": 510,
+    "first_letter": "A",
+    "last_letter": "H",
+    "letters": "ABCDEFGH",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 102,
+    "end_leaf": 154,
+    "leaves": 53
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 388,
+    "end_leaf": 564,
+    "leaves": 177
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 656,
+    "end_leaf": 682,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 804,
+    "end_leaf": 804,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 876,
+    "end_leaf": 876,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 1024,
+    "end_leaf": 1024,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 1116,
+    "end_leaf": 1206,
+    "leaves": 91
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    57,
+    101,
+    21
+   ],
+   "B": [
+    155,
+    387,
+    111
+   ],
+   "C": [
+    565,
+    655,
+    41
+   ],
+   "D": [
+    683,
+    803,
+    56
+   ],
+   "E": [
+    805,
+    875,
+    31
+   ],
+   "F": [
+    877,
+    1023,
+    63
+   ],
+   "G": [
+    1025,
+    1115,
+    42
+   ],
+   "H": [
+    1207,
+    1233,
+    12
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 57,
+   "end_leaf": 1233
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

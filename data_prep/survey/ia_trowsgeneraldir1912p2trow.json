@@ -380,5 +380,204 @@
   "words_gz_bytes": 16262972,
   "hocr_deleted": true,
   "elapsed_s": 41
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 7,
+  "end_leaf": 1277,
+  "first_letter": "H",
+  "last_letter": "R",
+  "letters_present": "HIJKLMNOPQR",
+  "missing_letters": "ABCDEFGSTUVWXYZ",
+  "voting_density": 0.382,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 7,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p2trow$7/full/!1400,1400/0/default.jpg",
+   "quote": "Hardlnge Conical Mill Co 50 Cluirch R1174"
+  },
+  "end": {
+   "leaf": 1277,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p2trow$1277/full/!1400,1400/0/default.jpg",
+   "quote": "Reglni Seeondo varnisher 189 Varlck h3J"
+  },
+  "sections": [
+   {
+    "start_leaf": 7,
+    "end_leaf": 1277,
+    "voting_leaves": 485,
+    "first_letter": "H",
+    "last_letter": "R",
+    "letters": "HIJKLMNOPQR",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 204,
+    "end_leaf": 204,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 224,
+    "end_leaf": 236,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 258,
+    "end_leaf": 376,
+    "leaves": 119
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 456,
+    "end_leaf": 554,
+    "leaves": 99
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 640,
+    "end_leaf": 640,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 730,
+    "end_leaf": 1004,
+    "leaves": 275
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 1038,
+    "end_leaf": 1038,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 1094,
+    "end_leaf": 1094,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1236,
+    "end_leaf": 1236,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1244,
+    "end_leaf": 1244,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    21,
+    203,
+    83
+   ],
+   "I": [
+    205,
+    223,
+    9
+   ],
+   "J": [
+    237,
+    257,
+    10
+   ],
+   "K": [
+    377,
+    455,
+    37
+   ],
+   "L": [
+    555,
+    639,
+    40
+   ],
+   "M": [
+    641,
+    729,
+    39
+   ],
+   "N": [
+    1005,
+    1037,
+    13
+   ],
+   "O": [
+    1039,
+    1093,
+    23
+   ],
+   "P": [
+    1095,
+    1235,
+    63
+   ],
+   "Q": [
+    1237,
+    1243,
+    3
+   ],
+   "R": [
+    1245,
+    1277,
+    17
+   ]
+  },
+  "skipped_votes": 4,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 7,
+   "end_leaf": 1277
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

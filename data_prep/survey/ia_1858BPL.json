@@ -361,5 +361,200 @@
   "words_gz_bytes": 4783255,
   "hocr_deleted": true,
   "elapsed_s": 16
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 7,
+  "end_leaf": 436,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.898,
+  "flags": [],
+  "start": {
+   "leaf": 7,
+   "image": "https://iiif.archive.org/iiif/1858BPL$7/full/!1400,1400/0/default.jpg",
+   "quote": "Abberly Richard, shoemkr. 172 Hudson av. h."
+  },
+  "end": {
+   "leaf": 436,
+   "image": "https://iiif.archive.org/iiif/1858BPL$436/full/!1400,1400/0/default.jpg",
+   "quote": "Zwergius J. teas, 125 Pearl, N. Y..h. 314 Navy"
+  },
+  "sections": [
+   {
+    "start_leaf": 7,
+    "end_leaf": 436,
+    "voting_leaves": 386,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 239,
+    "end_leaf": 268,
+    "leaves": 30
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 338,
+    "end_leaf": 340,
+    "leaves": 3
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    7,
+    15,
+    9
+   ],
+   "B": [
+    16,
+    57,
+    40
+   ],
+   "C": [
+    58,
+    93,
+    34
+   ],
+   "D": [
+    94,
+    116,
+    23
+   ],
+   "E": [
+    117,
+    125,
+    7
+   ],
+   "F": [
+    126,
+    142,
+    17
+   ],
+   "G": [
+    143,
+    160,
+    18
+   ],
+   "H": [
+    161,
+    194,
+    32
+   ],
+   "I": [
+    195,
+    196,
+    2
+   ],
+   "J": [
+    197,
+    204,
+    8
+   ],
+   "K": [
+    205,
+    221,
+    15
+   ],
+   "L": [
+    222,
+    238,
+    17
+   ],
+   "M": [
+    269,
+    288,
+    20
+   ],
+   "N": [
+    289,
+    294,
+    6
+   ],
+   "O": [
+    295,
+    301,
+    7
+   ],
+   "P": [
+    302,
+    318,
+    15
+   ],
+   "Q": [
+    319,
+    320,
+    2
+   ],
+   "R": [
+    321,
+    337,
+    14
+   ],
+   "S": [
+    341,
+    381,
+    38
+   ],
+   "T": [
+    382,
+    394,
+    13
+   ],
+   "U": [
+    395,
+    395,
+    1
+   ],
+   "V": [
+    396,
+    401,
+    6
+   ],
+   "W": [
+    402,
+    433,
+    28
+   ],
+   "Y": [
+    434,
+    435,
+    2
+   ],
+   "Z": [
+    436,
+    436,
+    1
+   ]
+  },
+  "skipped_votes": 7,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 7,
+   "end_leaf": 436
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

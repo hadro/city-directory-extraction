@@ -324,5 +324,148 @@
   "words_gz_bytes": 12963585,
   "hocr_deleted": true,
   "elapsed_s": 48
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 109,
+  "end_leaf": 1165,
+  "first_letter": "A",
+  "last_letter": "G",
+  "letters_present": "ABCDEFG",
+  "missing_letters": "HIJKLMNOPQRSTUVWXYZ",
+  "voting_density": 0.41,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 109,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$109/full/!1400,1400/0/default.jpg",
+   "quote": "Aaronson Abraham drygds 53 Rutgers"
+  },
+  "end": {
+   "leaf": 1165,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$1165/full/!1400,1400/0/default.jpg",
+   "quote": "Goss Adolph H clerk h 258 W 144th"
+  },
+  "sections": [
+   {
+    "start_leaf": 109,
+    "end_leaf": 1165,
+    "voting_leaves": 433,
+    "first_letter": "A",
+    "last_letter": "G",
+    "letters": "ABCDEFG",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "A",
+     "B"
+    ],
+    "start_leaf": 200,
+    "end_leaf": 200,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 430,
+    "end_leaf": 608,
+    "leaves": 179
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 702,
+    "end_leaf": 728,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 848,
+    "end_leaf": 848,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 916,
+    "end_leaf": 916,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 1016,
+    "end_leaf": 1058,
+    "leaves": 43
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    157,
+    199,
+    20
+   ],
+   "B": [
+    201,
+    429,
+    101
+   ],
+   "C": [
+    609,
+    701,
+    41
+   ],
+   "D": [
+    729,
+    847,
+    54
+   ],
+   "E": [
+    849,
+    915,
+    30
+   ],
+   "F": [
+    917,
+    1015,
+    44
+   ],
+   "G": [
+    1059,
+    1133,
+    34
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 109,
+   "end_leaf": 1165
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

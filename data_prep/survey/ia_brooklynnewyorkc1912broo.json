@@ -412,5 +412,204 @@
   "words_gz_bytes": 7578391,
   "hocr_deleted": true,
   "elapsed_s": 66
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1063,
+  "first_letter": "H",
+  "last_letter": "R",
+  "letters_present": "HIJKLMNOPQR",
+  "missing_letters": "ABCDEFGSTUVWXYZ",
+  "voting_density": 0.351,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$9/full/!1400,1400/0/default.jpg",
+   "quote": "Hausmann 0 B h OISI 13th College Pt"
+  },
+  "end": {
+   "leaf": 1063,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$1063/full/!1400,1400/0/default.jpg",
+   "quote": "Reven Albert gilder h 137 Ralph"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1063,
+    "voting_leaves": 370,
+    "first_letter": "H",
+    "last_letter": "R",
+    "letters": "HIJKLMNOPQR",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 140,
+    "end_leaf": 152,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 164,
+    "end_leaf": 174,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 192,
+    "end_leaf": 266,
+    "leaves": 75
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 370,
+    "end_leaf": 370,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 502,
+    "end_leaf": 574,
+    "leaves": 73
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 678,
+    "end_leaf": 800,
+    "leaves": 123
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 820,
+    "end_leaf": 846,
+    "leaves": 27
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 896,
+    "end_leaf": 946,
+    "leaves": 51
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 1006,
+    "end_leaf": 1006,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 1010,
+    "end_leaf": 1012,
+    "leaves": 3
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    9,
+    139,
+    54
+   ],
+   "I": [
+    153,
+    163,
+    5
+   ],
+   "J": [
+    175,
+    191,
+    7
+   ],
+   "K": [
+    267,
+    369,
+    47
+   ],
+   "L": [
+    371,
+    501,
+    52
+   ],
+   "M": [
+    575,
+    677,
+    45
+   ],
+   "N": [
+    801,
+    819,
+    6
+   ],
+   "O": [
+    847,
+    895,
+    21
+   ],
+   "P": [
+    947,
+    1005,
+    26
+   ],
+   "Q": [
+    1007,
+    1009,
+    2
+   ],
+   "R": [
+    1013,
+    1063,
+    20
+   ]
+  },
+  "skipped_votes": 7,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1063
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

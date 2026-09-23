@@ -412,5 +412,220 @@
   "words_gz_bytes": 11871890,
   "hocr_deleted": true,
   "elapsed_s": 30
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 29,
+  "end_leaf": 1023,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.892,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 29,
+   "image": "https://iiif.archive.org/iiif/1875BPL$29/full/!1400,1400/0/default.jpg",
+   "quote": "Aalholm Joseph, elk. h 66 Fort Greene pi"
+  },
+  "end": {
+   "leaf": 1023,
+   "image": "https://iiif.archive.org/iiif/1875BPL$1023/full/!1400,1400/0/default.jpg",
+   "quote": "Zwingli Arnold, tinsmith, h 75 Debevoise"
+  },
+  "sections": [
+   {
+    "start_leaf": 29,
+    "end_leaf": 1023,
+    "voting_leaves": 888,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 1103,
+    "end_leaf": 1111,
+    "voting_leaves": 7,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BDFHMSW",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 119,
+    "end_leaf": 153,
+    "leaves": 35
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 573,
+    "end_leaf": 638,
+    "leaves": 66
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 730,
+    "end_leaf": 731,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    29,
+    48,
+    20
+   ],
+   "B": [
+    49,
+    118,
+    66
+   ],
+   "C": [
+    154,
+    228,
+    71
+   ],
+   "D": [
+    229,
+    281,
+    52
+   ],
+   "E": [
+    282,
+    297,
+    16
+   ],
+   "F": [
+    298,
+    337,
+    40
+   ],
+   "G": [
+    338,
+    382,
+    42
+   ],
+   "H": [
+    383,
+    463,
+    75
+   ],
+   "I": [
+    464,
+    466,
+    3
+   ],
+   "J": [
+    467,
+    488,
+    18
+   ],
+   "K": [
+    489,
+    528,
+    40
+   ],
+   "L": [
+    529,
+    572,
+    40
+   ],
+   "M": [
+    639,
+    688,
+    48
+   ],
+   "N": [
+    689,
+    708,
+    16
+   ],
+   "O": [
+    709,
+    729,
+    19
+   ],
+   "P": [
+    732,
+    767,
+    34
+   ],
+   "Q": [
+    768,
+    770,
+    3
+   ],
+   "R": [
+    771,
+    818,
+    35
+   ],
+   "S": [
+    819,
+    915,
+    93
+   ],
+   "T": [
+    916,
+    943,
+    28
+   ],
+   "U": [
+    944,
+    946,
+    3
+   ],
+   "V": [
+    947,
+    959,
+    13
+   ],
+   "W": [
+    960,
+    1017,
+    58
+   ],
+   "Y": [
+    1018,
+    1021,
+    4
+   ],
+   "Z": [
+    1022,
+    1023,
+    2
+   ]
+  },
+  "skipped_votes": 16,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 29,
+   "end_leaf": 1023
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

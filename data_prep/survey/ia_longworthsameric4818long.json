@@ -329,5 +329,186 @@
   "words_gz_bytes": 1606048,
   "hocr_deleted": true,
   "elapsed_s": 10
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 13,
+  "end_leaf": 390,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMOPQRSTUVWYZ",
+  "missing_letters": "NX",
+  "voting_density": 0.971,
+  "flags": [],
+  "start": {
+   "leaf": 13,
+   "image": "https://iiif.archive.org/iiif/longworthsameric4818long$13/full/!1400,1400/0/default.jpg",
+   "quote": "Allaire James P. brass & iron found. 444 Cherry 4' 167"
+  },
+  "end": {
+   "leaf": 390,
+   "image": "https://iiif.archive.org/iiif/longworthsameric4818long$390/full/!1400,1400/0/default.jpg",
+   "quote": "Zuntz widow of Alexander, i2B William"
+  },
+  "sections": [
+   {
+    "start_leaf": 13,
+    "end_leaf": 390,
+    "voting_leaves": 367,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "M",
+     "O"
+    ],
+    "start_leaf": 249,
+    "end_leaf": 250,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    13,
+    20,
+    8
+   ],
+   "B": [
+    21,
+    66,
+    44
+   ],
+   "C": [
+    67,
+    89,
+    23
+   ],
+   "D": [
+    90,
+    114,
+    23
+   ],
+   "E": [
+    115,
+    119,
+    5
+   ],
+   "F": [
+    120,
+    135,
+    16
+   ],
+   "G": [
+    136,
+    152,
+    17
+   ],
+   "H": [
+    153,
+    186,
+    34
+   ],
+   "I": [
+    187,
+    188,
+    2
+   ],
+   "J": [
+    189,
+    196,
+    8
+   ],
+   "K": [
+    197,
+    206,
+    10
+   ],
+   "L": [
+    207,
+    226,
+    20
+   ],
+   "M": [
+    227,
+    248,
+    20
+   ],
+   "O": [
+    251,
+    254,
+    4
+   ],
+   "P": [
+    255,
+    274,
+    20
+   ],
+   "Q": [
+    275,
+    275,
+    1
+   ],
+   "R": [
+    276,
+    295,
+    20
+   ],
+   "S": [
+    296,
+    330,
+    34
+   ],
+   "T": [
+    331,
+    347,
+    16
+   ],
+   "U": [
+    348,
+    349,
+    2
+   ],
+   "V": [
+    350,
+    360,
+    11
+   ],
+   "W": [
+    361,
+    388,
+    27
+   ],
+   "Y": [
+    389,
+    389,
+    1
+   ],
+   "Z": [
+    390,
+    390,
+    1
+   ]
+  },
+  "skipped_votes": 3,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 13,
+   "end_leaf": 390
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

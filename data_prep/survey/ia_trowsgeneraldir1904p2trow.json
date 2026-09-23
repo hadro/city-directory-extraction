@@ -376,5 +376,204 @@
   "words_gz_bytes": 13725058,
   "hocr_deleted": true,
   "elapsed_s": 91
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 9,
+  "end_leaf": 1137,
+  "first_letter": "H",
+  "last_letter": "R",
+  "letters_present": "HIJKLMNOPQR",
+  "missing_letters": "ABCDEFGSTUVWXYZ",
+  "voting_density": 0.381,
+  "flags": [
+   "partial-alphabet"
+  ],
+  "start": {
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Haschek Adolph bkbinder 40 Frankfort h"
+  },
+  "end": {
+   "leaf": 1137,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$1137/full/!1400,1400/0/default.jpg",
+   "quote": "Ryan Albert H lawyer 14G Bway h 80"
+  },
+  "sections": [
+   {
+    "start_leaf": 9,
+    "end_leaf": 1137,
+    "voting_leaves": 430,
+    "first_letter": "H",
+    "last_letter": "R",
+    "letters": "HIJKLMNOPQR",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "H",
+     "I"
+    ],
+    "start_leaf": 156,
+    "end_leaf": 156,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "I",
+     "J"
+    ],
+    "start_leaf": 170,
+    "end_leaf": 182,
+    "leaves": 13
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 200,
+    "end_leaf": 264,
+    "leaves": 65
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 356,
+    "end_leaf": 434,
+    "leaves": 79
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 502,
+    "end_leaf": 504,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 584,
+    "end_leaf": 806,
+    "leaves": 223
+   },
+   {
+    "between": [
+     "N",
+     "O"
+    ],
+    "start_leaf": 834,
+    "end_leaf": 834,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 880,
+    "end_leaf": 880,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 990,
+    "end_leaf": 990,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 992,
+    "end_leaf": 996,
+    "leaves": 5
+   }
+  ],
+  "letter_blocks": {
+   "H": [
+    9,
+    155,
+    65
+   ],
+   "I": [
+    157,
+    169,
+    5
+   ],
+   "J": [
+    183,
+    199,
+    8
+   ],
+   "K": [
+    265,
+    355,
+    42
+   ],
+   "L": [
+    435,
+    501,
+    32
+   ],
+   "M": [
+    505,
+    583,
+    33
+   ],
+   "N": [
+    807,
+    833,
+    11
+   ],
+   "O": [
+    835,
+    879,
+    19
+   ],
+   "P": [
+    881,
+    989,
+    50
+   ],
+   "Q": [
+    991,
+    991,
+    1
+   ],
+   "R": [
+    997,
+    1067,
+    31
+   ]
+  },
+  "skipped_votes": 4,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 9,
+   "end_leaf": 1137
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

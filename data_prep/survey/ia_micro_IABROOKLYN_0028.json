@@ -325,5 +325,256 @@
   "words_gz_bytes": 541826,
   "hocr_deleted": true,
   "elapsed_s": 11
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 41,
+  "end_leaf": 407,
+  "first_letter": "B",
+  "last_letter": "Y",
+  "letters_present": "BCDEFGHIJKLMNPSTUVWY",
+  "missing_letters": "AOQRXZ",
+  "voting_density": 0.433,
+  "flags": [],
+  "start": {
+   "leaf": 41,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$41/full/!1400,1400/0/default.jpg",
+   "quote": "Benjamin 5 \u2014\u016f\u2014"
+  },
+  "end": {
+   "leaf": 407,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$407/full/!1400,1400/0/default.jpg",
+   "quote": "Young Henry D, grocer 1 Atlantic h 75 Middagh"
+  },
+  "sections": [
+   {
+    "start_leaf": 41,
+    "end_leaf": 407,
+    "voting_leaves": 159,
+    "first_letter": "B",
+    "last_letter": "Y",
+    "letters": "BCDEFGHIJKLMNPSTUVWY",
+    "is_listing": true
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 72,
+    "end_leaf": 99,
+    "leaves": 28
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 151,
+    "end_leaf": 151,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 165,
+    "end_leaf": 187,
+    "leaves": 23
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 217,
+    "end_leaf": 226,
+    "leaves": 10
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 235,
+    "end_leaf": 257,
+    "leaves": 23
+   },
+   {
+    "between": [
+     "M",
+     "N"
+    ],
+    "start_leaf": 280,
+    "end_leaf": 280,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "N",
+     "P"
+    ],
+    "start_leaf": 284,
+    "end_leaf": 301,
+    "leaves": 18
+   },
+   {
+    "between": [
+     "P",
+     "S"
+    ],
+    "start_leaf": 307,
+    "end_leaf": 340,
+    "leaves": 34
+   },
+   {
+    "between": [
+     "T",
+     "U"
+    ],
+    "start_leaf": 364,
+    "end_leaf": 374,
+    "leaves": 11
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 380,
+    "end_leaf": 382,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 396,
+    "end_leaf": 405,
+    "leaves": 10
+   }
+  ],
+  "letter_blocks": {
+   "B": [
+    48,
+    71,
+    16
+   ],
+   "C": [
+    100,
+    107,
+    7
+   ],
+   "D": [
+    108,
+    130,
+    14
+   ],
+   "E": [
+    131,
+    136,
+    5
+   ],
+   "F": [
+    137,
+    150,
+    11
+   ],
+   "G": [
+    152,
+    164,
+    7
+   ],
+   "H": [
+    188,
+    195,
+    5
+   ],
+   "I": [
+    196,
+    196,
+    1
+   ],
+   "J": [
+    197,
+    204,
+    7
+   ],
+   "K": [
+    205,
+    216,
+    12
+   ],
+   "L": [
+    227,
+    234,
+    3
+   ],
+   "M": [
+    258,
+    279,
+    13
+   ],
+   "N": [
+    281,
+    283,
+    3
+   ],
+   "P": [
+    302,
+    306,
+    2
+   ],
+   "S": [
+    341,
+    361,
+    19
+   ],
+   "T": [
+    362,
+    363,
+    2
+   ],
+   "U": [
+    375,
+    375,
+    1
+   ],
+   "V": [
+    376,
+    379,
+    3
+   ],
+   "W": [
+    383,
+    395,
+    7
+   ],
+   "Y": [
+    406,
+    407,
+    2
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 41,
+   "end_leaf": 407
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

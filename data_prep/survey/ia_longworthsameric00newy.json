@@ -396,5 +396,181 @@
   "words_gz_bytes": 3394233,
   "hocr_deleted": true,
   "elapsed_s": 9
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 56,
+  "end_leaf": 737,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.997,
+  "flags": [],
+  "start": {
+   "leaf": 56,
+   "image": "https://iiif.archive.org/iiif/longworthsameric00newy$56/full/!1400,1400/0/default.jpg",
+   "quote": "Any person who actually finds, or thinks that he has found"
+  },
+  "end": {
+   "leaf": 737,
+   "image": "https://iiif.archive.org/iiif/longworthsameric00newy$737/full/!1400,1400/0/default.jpg",
+   "quote": "Zwahlen Rudolph cabinetmaker 35 Rose"
+  },
+  "sections": [
+   {
+    "start_leaf": 56,
+    "end_leaf": 737,
+    "voting_leaves": 680,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    56,
+    76,
+    21
+   ],
+   "B": [
+    77,
+    146,
+    69
+   ],
+   "C": [
+    147,
+    203,
+    57
+   ],
+   "D": [
+    204,
+    239,
+    36
+   ],
+   "E": [
+    240,
+    250,
+    11
+   ],
+   "F": [
+    251,
+    275,
+    25
+   ],
+   "G": [
+    276,
+    305,
+    30
+   ],
+   "H": [
+    306,
+    360,
+    55
+   ],
+   "I": [
+    361,
+    363,
+    3
+   ],
+   "J": [
+    364,
+    378,
+    15
+   ],
+   "K": [
+    379,
+    395,
+    17
+   ],
+   "L": [
+    396,
+    427,
+    31
+   ],
+   "M": [
+    428,
+    491,
+    64
+   ],
+   "N": [
+    492,
+    500,
+    9
+   ],
+   "O": [
+    501,
+    509,
+    9
+   ],
+   "P": [
+    510,
+    544,
+    35
+   ],
+   "Q": [
+    545,
+    545,
+    1
+   ],
+   "R": [
+    546,
+    576,
+    31
+   ],
+   "S": [
+    577,
+    639,
+    63
+   ],
+   "T": [
+    640,
+    666,
+    27
+   ],
+   "U": [
+    667,
+    668,
+    2
+   ],
+   "V": [
+    669,
+    683,
+    15
+   ],
+   "W": [
+    684,
+    733,
+    50
+   ],
+   "Y": [
+    734,
+    736,
+    3
+   ],
+   "Z": [
+    737,
+    737,
+    1
+   ]
+  },
+  "skipped_votes": 2,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 56,
+   "end_leaf": 737
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

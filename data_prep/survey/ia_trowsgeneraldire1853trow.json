@@ -311,5 +311,296 @@
   "words_gz_bytes": 2682059,
   "hocr_deleted": true,
   "elapsed_s": 22
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 417,
+  "end_leaf": 469,
+  "first_letter": "B",
+  "last_letter": "W",
+  "letters_present": "BCDEFGHKLMPRSTW",
+  "missing_letters": "AIJNOQUVXYZ",
+  "voting_density": 0.491,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 417,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1853trow$417/full/!1400,1400/0/default.jpg",
+   "quote": "Baehmann Adam, 179 Allen"
+  },
+  "end": {
+   "leaf": 469,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1853trow$469/full/!1400,1400/0/default.jpg",
+   "quote": "Wynne {Timothy, 030 Hudson"
+  },
+  "sections": [
+   {
+    "start_leaf": 129,
+    "end_leaf": 151,
+    "voting_leaves": 12,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDFHKLMPSW",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 161,
+    "end_leaf": 187,
+    "voting_leaves": 14,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BDFGHKLMRSW",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 417,
+    "end_leaf": 469,
+    "voting_leaves": 26,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDEFGHKLMPRSTW",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 543,
+    "end_leaf": 565,
+    "voting_leaves": 10,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCHLMRSTW",
+    "is_listing": false
+   },
+   {
+    "start_leaf": 707,
+    "end_leaf": 751,
+    "voting_leaves": 22,
+    "first_letter": "A",
+    "last_letter": "W",
+    "letters": "ABCDFGHKLMOPRSW",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "B",
+     "C"
+    ],
+    "start_leaf": 422,
+    "end_leaf": 422,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 426,
+    "end_leaf": 426,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "D",
+     "E"
+    ],
+    "start_leaf": 428,
+    "end_leaf": 428,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "E",
+     "F"
+    ],
+    "start_leaf": 430,
+    "end_leaf": 430,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "F",
+     "G"
+    ],
+    "start_leaf": 432,
+    "end_leaf": 432,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "G",
+     "H"
+    ],
+    "start_leaf": 434,
+    "end_leaf": 434,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "H",
+     "K"
+    ],
+    "start_leaf": 438,
+    "end_leaf": 440,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "K",
+     "L"
+    ],
+    "start_leaf": 442,
+    "end_leaf": 442,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "L",
+     "M"
+    ],
+    "start_leaf": 446,
+    "end_leaf": 446,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "M",
+     "P"
+    ],
+    "start_leaf": 452,
+    "end_leaf": 452,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 454,
+    "end_leaf": 454,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "R",
+     "S"
+    ],
+    "start_leaf": 458,
+    "end_leaf": 458,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "S",
+     "T"
+    ],
+    "start_leaf": 464,
+    "end_leaf": 464,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "T",
+     "W"
+    ],
+    "start_leaf": 466,
+    "end_leaf": 466,
+    "leaves": 1
+   }
+  ],
+  "letter_blocks": {
+   "B": [
+    417,
+    421,
+    3
+   ],
+   "C": [
+    423,
+    425,
+    2
+   ],
+   "D": [
+    427,
+    427,
+    1
+   ],
+   "E": [
+    429,
+    429,
+    1
+   ],
+   "F": [
+    431,
+    431,
+    1
+   ],
+   "G": [
+    433,
+    433,
+    1
+   ],
+   "H": [
+    435,
+    437,
+    2
+   ],
+   "K": [
+    441,
+    441,
+    1
+   ],
+   "L": [
+    443,
+    445,
+    2
+   ],
+   "M": [
+    447,
+    451,
+    3
+   ],
+   "P": [
+    453,
+    453,
+    1
+   ],
+   "R": [
+    455,
+    457,
+    2
+   ],
+   "S": [
+    459,
+    463,
+    3
+   ],
+   "T": [
+    465,
+    465,
+    1
+   ],
+   "W": [
+    467,
+    469,
+    2
+   ]
+  },
+  "skipped_votes": 0,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 417,
+   "end_leaf": 469
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

@@ -348,5 +348,192 @@
   "words_gz_bytes": 6537751,
   "hocr_deleted": true,
   "elapsed_s": 20
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-23",
+  "code_at": "f5b4e23-dirty",
+  "start_leaf": 25,
+  "end_leaf": 472,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.967,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 25,
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1848dogg$25/full/!1400,1400/0/default.jpg",
+   "quote": "Aaron Elias E. late com. mer. h. 161 Allen"
+  },
+  "end": {
+   "leaf": 472,
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1848dogg$472/full/!1400,1400/0/default.jpg",
+   "quote": "Zwick Mattis, porter, W . 29th n. Av, 7"
+  },
+  "sections": [
+   {
+    "start_leaf": 25,
+    "end_leaf": 472,
+    "voting_leaves": 433,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 506,
+    "end_leaf": 514,
+    "voting_leaves": 7,
+    "first_letter": "F",
+    "last_letter": "F",
+    "letters": "F",
+    "is_listing": false
+   }
+  ],
+  "gaps": [],
+  "letter_blocks": {
+   "A": [
+    25,
+    40,
+    12
+   ],
+   "B": [
+    41,
+    85,
+    43
+   ],
+   "C": [
+    86,
+    121,
+    36
+   ],
+   "D": [
+    122,
+    148,
+    25
+   ],
+   "E": [
+    149,
+    154,
+    6
+   ],
+   "F": [
+    155,
+    171,
+    17
+   ],
+   "G": [
+    172,
+    190,
+    19
+   ],
+   "H": [
+    191,
+    225,
+    35
+   ],
+   "I": [
+    226,
+    227,
+    2
+   ],
+   "J": [
+    228,
+    238,
+    9
+   ],
+   "K": [
+    239,
+    251,
+    13
+   ],
+   "L": [
+    252,
+    273,
+    20
+   ],
+   "M": [
+    274,
+    317,
+    44
+   ],
+   "N": [
+    318,
+    323,
+    6
+   ],
+   "O": [
+    324,
+    330,
+    7
+   ],
+   "P": [
+    331,
+    348,
+    18
+   ],
+   "Q": [
+    349,
+    350,
+    2
+   ],
+   "R": [
+    351,
+    370,
+    20
+   ],
+   "S": [
+    371,
+    411,
+    40
+   ],
+   "T": [
+    412,
+    427,
+    16
+   ],
+   "U": [
+    428,
+    428,
+    1
+   ],
+   "V": [
+    429,
+    437,
+    9
+   ],
+   "W": [
+    438,
+    470,
+    31
+   ],
+   "Y": [
+    471,
+    471,
+    1
+   ],
+   "Z": [
+    472,
+    472,
+    1
+   ]
+  },
+  "skipped_votes": 1,
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 25,
+   "end_leaf": 472
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
  }
 }

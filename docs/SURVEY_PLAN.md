@@ -833,7 +833,7 @@ What the bounds found:
   Rt."). 1879BPL, 1911p1 and 1914p1 open with "NAMES TOO LATE FOR INSERTION".
 - ⚠️ **`trowsgeneraldire1853trow` is not a Trow general directory.** Its title page, read in
   Phase 0, is **WILSON'S BUSINESS DIRECTORY … NEW-YORK**, the same catalog error as the 1913 set.
-  Its "listing" was 27 leaves of 948: five short B→W runs, the shape of names sorted under trade headings. **Stamped `not-residential` 2026-09-23, confirmed by hadro**; the failure register now holds 8.
+  Its "listing" was 27 leaves of 948: five short B→W runs, the shape of names sorted under trade headings. **Stamped `not-residential` 2026-09-23, confirmed by hadro**, making 8 `not-residential` volumes.
 
 **The empty-leaf question is answered: scanner artefacts, not lost text.** 68 volumes put an empty
 leaf between every page (the whole ABBYY-8 Trow/Brooklyn family, Longworth, Flushing) — the "~2×

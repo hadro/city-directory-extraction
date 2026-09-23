@@ -44,6 +44,7 @@
    "ia_page": null,
    "page_offset": 253,
    "listing_flags": [
+    "not-residential",
     "small-listing"
    ],
    "doubts": []
@@ -61,12 +62,13 @@
    "ia_page": null,
    "page_offset": 279,
    "listing_flags": [
+    "not-residential",
     "small-listing"
    ],
    "doubts": []
   }
  },
- "survey_status": "frontmatter-done",
+ "survey_status": "not-residential",
  "derivatives": {
   "hocr_bytes": 36389852,
   "hocr_sha1": "e3f4f07ba41b4bfc6d064fa6c01da811ad6e82b7",
@@ -641,7 +643,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "5341ab7-dirty",
   "content_leaves": 472,
   "fitted_leaves": 405,
   "read_leaves": 313,
@@ -703,5 +705,6 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
- }
+ },
+ "scope_note": "Title page (leaf 5, https://iiif.archive.org/iiif/trowsgeneraldire1853trow$5/full/!1400,1400/0/default.jpg): 'WILSON'S BUSINESS DIRECTORY ... NEW-YORK'. A business directory, not Trow's general (residential) directory, despite IA's title 'Trow's general directory of the boroughs of Manhattan and Bronx' and the `trowsgeneraldire` identifier -- the same catalog error as the 1913 Trow set. Structure agrees: Phase 2 found no volume-length alphabet, only five short B->W runs (leaves 129-751), the shape of names sorted within trade headings. Surfaced by the Phase 2 small-listing flag; confirmed by hadro, 2026-09-23."
 }

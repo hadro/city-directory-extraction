@@ -60,16 +60,39 @@
    "canvas": "https://iiif.archive.org/iiif/1863BPL$490/canvas",
    "image": "https://iiif.archive.org/iiif/1863BPL$490/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'486' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "medium",
+   "quote": "running head 'ZEI-ZIM 486 ZIM-ZWI'; last entries Zimmermann",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": 486,
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
    "page_offset": 4,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 7 leaves"
-   ]
+   "margin_fit_said": {
+    "value": 486,
+    "leaf": 490,
+    "page_offset": 4,
+    "confidence": "medium",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
+  },
+  "start_page": {
+   "value": 1,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1863BPL$5/canvas",
+   "image": "https://iiif.archive.org/iiif/1863BPL$5/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "caption 'THE [BROOKLYN CITY DIRECTORY]'; '(1)' printed at the head of the foot ad line '(1) MARVIN & CO., ALUM & WILDER PATENT FIRE AND BURGLAR-PROOF SAFES'; first entries 'Abbots Walter, saddler'",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "drop folio in parentheses",
+   "page_offset": 4
   }
  },
  "survey_status": "frontmatter-done",

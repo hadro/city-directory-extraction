@@ -24,19 +24,42 @@
    "confidence": "medium"
   },
   "start_page": {
-   "value": 105,
+   "value": null,
    "leaf": 109,
    "canvas": "https://iiif.archive.org/iiif/longworthsameric2618long$109/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric2618long$109/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 109; page 105 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "caption 'Longworth's New-York Directory.'; entries to 'Adams, widow Mary, 21 Bancker'; 'K 2' at foot is a signature",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 4,
-   "listing_flags": [],
-   "doubts": []
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted",
+   "margin_fit_said": {
+    "value": 105,
+    "leaf": 109,
+    "page_offset": 4,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
+  },
+  "end_page": {
+   "value": null,
+   "leaf": 324,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric2618long$324/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric2618long$324/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "running head '3?0 LONGWORTH'S' -- the middle digit is damaged; entries 'Youle, George, plumber' ... 'Youmans, Jeremiah', then an additions/removals list on the same page",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "illegible",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "illegible middle digit; the sequence suggests 320 but that is not a read"
   }
  },
  "survey_status": "frontmatter-done",

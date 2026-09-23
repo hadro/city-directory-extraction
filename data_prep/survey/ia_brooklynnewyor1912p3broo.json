@@ -122,21 +122,28 @@
    "note": "Title page leaf 7, librarian's red 'pt. 3' beside the year. PROBABLE DUPLICATE of brooklynnewyorkc19123broo; this is the 2013 scan (imagecount 1066, hOCR 88 MB) and is the better of the two. THE TITLE PAGE DOCUMENTS A GAP IN ITS OWN SERIES: 'There was no edition of this book published for the year 1911.' That is a printed, citable answer to a coverage question, of the same kind as the Trow 1898/99 hole the plan already tracks."
   },
   "start_page": {
-   "value": 2,
+   "value": 1155,
    "leaf": 11,
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$11/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$11/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 11; page 2 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 9,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 3 leaves"
-   ]
+   "quote": "running head 'BROOKLYN 1912 DIRECTORY', guide heads 'REYNOLDS' / 'RHEINGOLD'; folio '1155' centred at foot below the FRANK E. WHITE ad",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "part 2 (brooklynnewyorkc1912broo) ends at 1153 -- page 1154 may fall between the parts",
+   "page_offset": -1144,
+   "margin_fit_said": {
+    "value": 2,
+    "leaf": 11,
+    "page_offset": 9,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 1521,

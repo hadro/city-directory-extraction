@@ -1,0 +1,972 @@
+{
+ "_doc": [
+  "Every CSV cell apply_survey.py has WRITTEN, with the value it wrote.",
+  "Retraction of a cell whose claim a later read has overruled requires the cell to be here AND to still hold the value written: a human-entered value that merely equals the old claim is never touched.",
+  "Backfilled 2026-09-23 from the diff of commit 4de2cf8 (the first page-column write); apply_survey.py --write appends from then on."
+ ],
+ "written": [
+  {
+   "source": "ia",
+   "id": "trowsgeneraldire1917trow",
+   "column": "start_page",
+   "value": "231",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgeneraldire1917trow",
+   "column": "end_page",
+   "value": "2088",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgeneraldire1917trow",
+   "column": "page_offset",
+   "value": "-18",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgenerald192223p1trow",
+   "column": "start_page",
+   "value": "253",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgenerald192223p1trow",
+   "column": "end_page",
+   "value": "1024",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgenerald192223p1trow",
+   "column": "page_offset",
+   "value": "-66",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1906BPL",
+   "column": "start_page",
+   "value": "21",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1906BPL",
+   "column": "page_offset",
+   "value": "-12",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0028",
+   "column": "start_page",
+   "value": "37",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0005",
+   "column": "end_page",
+   "value": "60",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1864BPL",
+   "column": "end_page",
+   "value": "516",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0011",
+   "column": "end_page",
+   "value": "90",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0026",
+   "column": "end_page",
+   "value": "250",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0007",
+   "column": "end_page",
+   "value": "74",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0025",
+   "column": "start_page",
+   "value": "14",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0025",
+   "column": "page_offset",
+   "value": "8",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0004",
+   "column": "end_page",
+   "value": "47",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1903BPL",
+   "column": "end_page",
+   "value": "1054",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1883BPL",
+   "column": "end_page",
+   "value": "1275",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1907BPL",
+   "column": "start_page",
+   "value": "21",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1907BPL",
+   "column": "end_page",
+   "value": "1089",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1907BPL",
+   "column": "page_offset",
+   "value": "-6",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0024",
+   "column": "end_page",
+   "value": "261",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1865BPL",
+   "column": "end_page",
+   "value": "465",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0030",
+   "column": "end_page",
+   "value": "496",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0020",
+   "column": "end_page",
+   "value": "208",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1904BPL",
+   "column": "end_page",
+   "value": "1044",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1866BPL",
+   "column": "start_page",
+   "value": "1",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1866BPL",
+   "column": "page_offset",
+   "value": "22",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1858BPL",
+   "column": "end_page",
+   "value": "410",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0018",
+   "column": "end_page",
+   "value": "171",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0003",
+   "column": "end_page",
+   "value": "39",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0010",
+   "column": "end_page",
+   "value": "93",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1897BPL",
+   "column": "end_page",
+   "value": "1634",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1862BPL",
+   "column": "start_page",
+   "value": "1",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1862BPL",
+   "column": "page_offset",
+   "value": "4",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1908BPL",
+   "column": "start_page",
+   "value": "22",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1908BPL",
+   "column": "end_page",
+   "value": "1107",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1908BPL",
+   "column": "page_offset",
+   "value": "-12",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "1857BPL",
+   "column": "end_page",
+   "value": "323",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0006",
+   "column": "end_page",
+   "value": "65",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0033",
+   "column": "start_page",
+   "value": "21",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0040",
+   "column": "start_page",
+   "value": "1",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "micro_IABROOKLYN_0040",
+   "column": "page_offset",
+   "value": "9",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynalphabet1843unse",
+   "column": "end_page",
+   "value": "193",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklyncitydire1848teal",
+   "column": "end_page",
+   "value": "250",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "doggettsnewyorkc1845dogg",
+   "column": "end_page",
+   "value": "407",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "doggettsnewyorkc1846dogg",
+   "column": "end_page",
+   "value": "438",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "doggettsnewyorkc1847dogg",
+   "column": "end_page",
+   "value": "455",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "doggettsnewyorkc1848dogg",
+   "column": "end_page",
+   "value": "454",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "hearnesbrooklync1850unse",
+   "column": "end_page",
+   "value": "396",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "hearnesbrooklync1852unse",
+   "column": "end_page",
+   "value": "496",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric4018long",
+   "column": "end_page",
+   "value": "451",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric6018long",
+   "column": "start_page",
+   "value": "50",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric6018long",
+   "column": "page_offset",
+   "value": "8",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric6118long",
+   "column": "end_page",
+   "value": "741",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric6518long",
+   "column": "start_page",
+   "value": "50",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric6518long",
+   "column": "end_page",
+   "value": "706",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric6518long",
+   "column": "page_offset",
+   "value": "-2",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "merceinscitydire00merc",
+   "column": "start_page",
+   "value": "106",
+   "replaced": "105",
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "merceinscitydire00merc",
+   "column": "end_page",
+   "value": "448",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "merceinscitydire00merc",
+   "column": "page_offset",
+   "value": "-2",
+   "replaced": "-5",
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "newyorkcitydirec00rode",
+   "column": "end_page",
+   "value": "781",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "newyorkdirectory00dunc",
+   "column": "end_page",
+   "value": "215",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "newyorkdirectory00durs_0",
+   "column": "end_page",
+   "value": "52",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsnewyorkcity1857trow",
+   "column": "end_page",
+   "value": "911",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsnewyorkcity1859trow",
+   "column": "end_page",
+   "value": "937",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgeneraldir1903p3trow",
+   "column": "start_page",
+   "value": "1156",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgeneraldir1903p3trow",
+   "column": "page_offset",
+   "value": "-1149",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyor1912p3broo",
+   "column": "end_page",
+   "value": "1521",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1903geor",
+   "column": "start_page",
+   "value": "555",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1903geor",
+   "column": "end_page",
+   "value": "1054",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1903geor",
+   "column": "page_offset",
+   "value": "-546",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric1839newy",
+   "column": "start_page",
+   "value": "50",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric1839newy",
+   "column": "end_page",
+   "value": "731",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1909geor",
+   "column": "start_page",
+   "value": "583",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1909geor",
+   "column": "end_page",
+   "value": "1162",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1909geor",
+   "column": "page_offset",
+   "value": "-574",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyork1907p1geor",
+   "column": "start_page",
+   "value": "21",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyork1907p1geor",
+   "column": "page_offset",
+   "value": "18",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1907geor",
+   "column": "start_page",
+   "value": "561",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1907geor",
+   "column": "end_page",
+   "value": "1089",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1907geor",
+   "column": "page_offset",
+   "value": "-552",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgeneraldir1911p1trow",
+   "column": "start_page",
+   "value": "18",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "trowsgeneraldir1911p1trow",
+   "column": "page_offset",
+   "value": "39",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1905geor",
+   "column": "start_page",
+   "value": "549",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1905geor",
+   "column": "end_page",
+   "value": "1112",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1905geor",
+   "column": "page_offset",
+   "value": "-540",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1910geor",
+   "column": "start_page",
+   "value": "21",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1910geor",
+   "column": "page_offset",
+   "value": "14",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc19031geor",
+   "column": "end_page",
+   "value": "553",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "longworthsameric00newy",
+   "column": "end_page",
+   "value": "731",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyork1905p1geor",
+   "column": "end_page",
+   "value": "546",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyork1910p2geor",
+   "column": "end_page",
+   "value": "1275",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1904geor",
+   "column": "start_page",
+   "value": "559",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1904geor",
+   "column": "page_offset",
+   "value": "-550",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyork1904p1geor",
+   "column": "end_page",
+   "value": "558",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyork1909p1geor",
+   "column": "start_page",
+   "value": "21",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyork1909p1geor",
+   "column": "end_page",
+   "value": "582",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyork1909p1geor",
+   "column": "page_offset",
+   "value": "16",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1908geor",
+   "column": "start_page",
+   "value": "557",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1908geor",
+   "column": "end_page",
+   "value": "1107",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1908geor",
+   "column": "page_offset",
+   "value": "-548",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1912broo",
+   "column": "start_page",
+   "value": "626",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc1912broo",
+   "column": "page_offset",
+   "value": "-617",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "brooklynnewyorkc00broo",
+   "column": "end_page",
+   "value": "625",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  },
+  {
+   "source": "ia",
+   "id": "flushingnewyork189192boyd",
+   "column": "end_page",
+   "value": "123",
+   "replaced": null,
+   "commit": "4de2cf8",
+   "date": "2026-09-23"
+  }
+ ]
+}

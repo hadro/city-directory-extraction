@@ -900,6 +900,63 @@ and `_0033`, whose pre-existing offsets were measured deeper in the volume (+8 a
 leaf 186) and were left alone by rule 1. Those two plus merc were the three new `page_offset`
 conflicts; merc is decided, and the other two are drift, not error.
 
+#### Phase 3 page reads (2026-09-23): every listing edge without a high claim, read off the image
+
+235 listing edges (every non-`not-residential` volume whose start or end lacked a high claim) were
+read from IIIF head and foot strips, plus the neighbouring leaf of each of the 80 edges already
+written to the CSV. Recorded by `survey_readpackets.py --record-pages` as `method: agent-read`
+claims with the verbatim folio, and the margin fit's earlier answer kept in `margin_fit_said`.
+`survey_derive.py pages` no longer overwrites a read.
+
+⚠️ **8 of the 80 page cells written on 2026-09-23 were wrong, and the 10-sample spot-check had
+passed 10/10.** At a 10% error rate, ten clean draws happen 35% of the time. That is a sample
+too small for the claim it was used to support. The errors share one cause:
+
+| volume | written | page says | why |
+|---|---|---|---|
+| 1908BPL | start 22 | **21** | the caption page (leaf 9) was missed |
+| trowsgeneraldir1911p1trow | start 18 | **17** | the caption page (leaf 55) was missed |
+| trowsgenerald192223p1trow | start 253 | **252** | leaf 186 opens the listing, 185 is the title page |
+| micro_IABROOKLYN_0025 / 0033 | start 14 / 21 | *unprinted* | the caption page (leaf 21 / 64) prints no folio |
+| micro_IABROOKLYN_0028 | start 37 | *unprinted* | the bounds opened in **B**; the whole A section was missed on bad film |
+| brooklynnewyorkc19031geor | end 553 | **554** | the listing runs one leaf past the fit's last read |
+| flushingnewyork189192boyd | end 123 | **124** | ditto; p.125 opens the Business Directory |
+
+**A caption page votes on too few entry lines to open its listing**, so the detected start is
+one page late wherever the listing begins under a display title. That is a detector bug, not a
+reader bug, and worth fixing at the source: extend a listing's start back to the caption page.
+
+**The number at the foot of a caption page is usually a printer's SIGNATURE, not a folio**, and
+the image cannot tell them apart. The page sequence can. 31 of 39 small foot numbers on opening
+pages fail to continue into the following leaves: 1859trow's caption page shows "1" with the next
+leaves printing 22, 23, 24 (p.21), and 1856/1857BPL's "3" sits on p.33, the start of the third
+16-page gathering. Rule: a foot number under 60 counts as a folio only if the next text leaves
+continue it (twice for values under 10, since stray 2s and 3s are everywhere). Otherwise it is
+recorded `unprinted`, with the sequence's page in the note.
+
+Retraction is now **ledgered**. A cell whose claim a read has overruled is cleared only if
+`data_prep/survey_written.json` records this survey writing that exact value. Equality with the old
+claim is not proof of authorship: without the ledger the first dry run would have cleared four
+human values (micro_IABROOKLYN_0005 start 5, rode 25, doggett1845 13, hearnes1852 offset 10) that
+merely equalled what the fit had said, and all four are consistent with the page sequence.
+
+Found in passing:
+- **Pages that fall between parts:** Brooklyn 1912 p.1154, Trow 1904 p.1105, 1910 pp.565–568,
+  1922/23 pp.1025–1026 are in neither part's scan.
+- **Two-page spreads on one frame** in the microfilm set (0012, 0015, 0019, 0021, 0033, 0034,
+  0040). The leaf holds two folios, and `end_page` is the right-hand one.
+- **Roman-numbered appendices** close two listings (micro_IABROOKLYN_0025 `LVI`, 0027 `IX`), so
+  no arabic end page is printed.
+- **1898 and 1902 Lain/Upington running heads print the year beside the folio**
+  (`1016 ZWE-ZWI 1902 ZWI-ZYS`). The centre number is the year, the corner one the page.
+- `trowsgenerald192223p1trow`'s title page says **"Complete in One Volume — Vol. 133"**, although
+  IA splits it into two items.
+- `trowsgeneraldire1915trow` and `1917trow` leaves are **photographs of the open book**, not page
+  scans, and are unreadable at any IIIF size.
+- `longworthsameric4818long` is **truncated**: the 1823–24 almanac, then p.55. Pages 1–54 of the
+  directory are not in the item.
+- `micro_IABROOKLYN_0028` is Hearnes' 1850–51, the same edition as `hearnesbrooklync1850unse`.
+
 Why so many `none` on `start_page`: a listing's opening page often prints no folio (caption title,
 legend). For 39 volumes the first read is 1–3 leaves after the start, and the rule above forbids
 extrapolating it — **one image each settles them**, which is exactly the Phase-3 shape. 20

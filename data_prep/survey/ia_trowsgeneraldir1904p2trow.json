@@ -91,16 +91,39 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$1137/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$1137/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 1137; page 1104 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
+   "quote": "guide heads 'RUTHERFORD' / 'RUVANE' / 'RYAN'; folio '1104' at foot below the TROW DIRECTORY OFFICE ad",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "part 3 opens at 1106: page 1105 is in neither scan's detected span",
    "page_offset": 33,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 7 leaves"
-   ]
+   "margin_fit_said": {
+    "value": 1104,
+    "leaf": 1137,
+    "page_offset": 33,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
+  },
+  "start_page": {
+   "value": 541,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$9/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$9/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "guide heads 'HASCALL' / 'HASKINS' / 'HASSELL' under the PLANKINTON HOUSE ad (stamped 2071341); folio '541' at foot",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
+   "page_offset": -532
   }
  },
  "survey_status": "frontmatter-done",

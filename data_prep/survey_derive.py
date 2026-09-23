@@ -327,7 +327,12 @@ def main(argv=None) -> int:
             doc["folios"] = block
             book = doc.setdefault("book_says", {})
             for key in ("start_page", "end_page"):
-                # this step owns these two claims and nothing else in book_says
+                # this step owns these two claims and nothing else in book_says -- and not even
+                # these once someone has LOOKED: an agent-read page claim (survey_readpackets.py
+                # --record-pages) outranks the fit, exactly as a read outranks an hOCR regex in
+                # survey_frontmatter.merge_book()
+                if (book.get(key) or {}).get("method") == "agent-read":
+                    continue
                 if key in claims:
                     book[key] = claims[key]
                 elif (book.get(key) or {}).get("method") == "hocr-geometry":

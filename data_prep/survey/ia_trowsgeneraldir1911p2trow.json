@@ -52,19 +52,43 @@
    "confidence": "medium"
   },
   "start_page": {
-   "value": 4,
+   "value": 604,
    "leaf": 9,
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$9/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$9/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 9; page 4 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "guide heads 'HAMPEL' / 'HANAN' / 'HANCOCK' under the T. M. STEWART ad (stamped 2081085); folio '604' at foot",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
+   "page_offset": -595,
+   "margin_fit_said": {
+    "value": 4,
+    "leaf": 9,
+    "page_offset": 5,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
+  },
+  "end_page": {
+   "value": null,
+   "leaf": 1215,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1215/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1215/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "guide heads 'REDDENO' / 'REDFIELD' / 'REDMOND'; the foot is the THIEL DETECTIVE SERVICE ad, torn, no folio visible",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 5,
-   "listing_flags": [],
-   "doubts": []
+   "attestation": "illegible",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "not visible"
   }
  },
  "survey_status": "frontmatter-done",

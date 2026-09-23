@@ -19,19 +19,27 @@
    "note": "NEGATIVE RESULT, recorded so the candidate is not re-offered. Leaf 9 -- which phase 0b classified as this volume's title page, and from which it read the year 1837 -- is an ADVERTISEMENT: Samuel J. Sigler, looking-glass and picture-frame manufacturer, on the 'BROOKLYN DIRECTORY ADVERTISER' page (printed p.11), boasting 'ESTABLISHED 1837'. This is the exact case SURVEY_PLAN.md documents, now confirmed by eye; YEAR_VETO suppresses it. The real title page was not located: leaves 22/25/28 are also advertiser pages (p.27 at leaf 25), and this volume's printed numbering restarts deep in the book -- IA puts printed p.2 at leaf 396 -- so the front advertising section is very long. Finding it needs a targeted search, not the 30-leaf front window."
   },
   "start_page": {
-   "value": 33,
+   "value": null,
    "leaf": 65,
    "canvas": "https://iiif.archive.org/iiif/1856BPL$65/canvas",
    "image": "https://iiif.archive.org/iiif/1856BPL$65/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 65; page 33 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "caption 'SMITH'S BROOKLYN DIRECTORY,'; '3' centred at foot; first entries 'Abbot George H. bookkeeper' [the foot '3' is not a folio]",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 32,
-   "listing_flags": [],
-   "doubts": []
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted: the '3' at the foot does not continue into the next text leaves ([66, 67, 68, 69]: [[], [], [36], [37, 237]]) -- a printer's signature mark or a partial read; page 33 by sequence",
+   "margin_fit_said": {
+    "value": 33,
+    "leaf": 65,
+    "page_offset": 32,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 337,
@@ -39,14 +47,23 @@
    "canvas": "https://iiif.archive.org/iiif/1856BPL$389/canvas",
    "image": "https://iiif.archive.org/iiif/1856BPL$389/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 389; page 337 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": 337,
+   "quote": "running head 'WESTERN DISTRICT. 337'; last entry 'Young John (Craft & Young), h. 145 Adams'",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "the '22' at the foot is a signature mark (337 = 16x21+1)",
    "page_offset": 52,
-   "listing_flags": [],
-   "doubts": []
+   "margin_fit_said": {
+    "value": 337,
+    "leaf": 389,
+    "page_offset": 52,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "needs-image-read",

@@ -32,6 +32,37 @@
     "column_count"
    ],
    "note": "COLUMN COUNT AUDIT. Read at leaf 511 = printed p.497 (GIE-GIL), the anchor the CSV note cites. Offset +14 checks out; the recorded col=3 does not -- the page is TWO columns. Leaf 23 (printed p.31) is also 2-column, so this is not a mid-volume change."
+  },
+  "start_page": {
+   "value": null,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "caption 'THE NEW YORK CITY DIRECTORY.' under the CHICKERING PIANOS ad; entries 'Aarons Abram S.' ... 'Abbey Julia N.'; '2' at foot below the E. RIDLEY & SONS ad [the foot '2' is not a folio]",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted: the '2' at the foot does not continue into the next text leaves ([8, 9, 10, 11]: [[18, 121], [], [7, 20], []]) -- a printer's signature mark or a partial read; page 17 by sequence"
+  },
+  "end_page": {
+   "value": 1506,
+   "leaf": 1552,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1552/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1552/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "guide heads 'ZOT 1506 ZYC' under the CHICKERING PIANOS ad; entries 'Zottarelli Lorenzo' ... 'Zumstag George'",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
+   "page_offset": 46
   }
  },
  "survey_status": "needs-image-read",

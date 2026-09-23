@@ -79,6 +79,38 @@
     "year_covered"
    ],
    "note": "UNIT SUSPECT RESOLVED. apply_survey flagged key_page=1 == legend_leaf 1 as possibly a leaf written into a printed-page column. It is a genuine coincidence: leaf 1 IS printed page 1 (the folio is set at the foot) and it IS the legend page. This is a caption-title leaf carrying the title, the ABBREVIATIONS inline, and the start of the A listings all at once -- the same shape as hearnesbrooklync1852unse leaf 27, except that this one prints its folio."
+  },
+  "start_page": {
+   "value": 1,
+   "leaf": 1,
+   "canvas": "https://iiif.archive.org/iiif/1885BPL$1/canvas",
+   "image": "https://iiif.archive.org/iiif/1885BPL$1/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "caption 'LAIN'S'; folio '1' at foot below the BUTLER'S SAFES ad; first entries 'Aarons James, carpenter'",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "drop folio",
+   "page_offset": 0
+  },
+  "end_page": {
+   "value": 1456,
+   "leaf": 1512,
+   "canvas": "https://iiif.archive.org/iiif/1885BPL$1512/canvas",
+   "image": "https://iiif.archive.org/iiif/1885BPL$1512/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "running head 'ZIT-ZSC 1456 ZSC-ZYL'; entries 'Zschorna Julius H.', 'Zuber Jacob'",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
+   "page_offset": 56
   }
  },
  "survey_status": "frontmatter-done",

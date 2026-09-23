@@ -79,21 +79,42 @@
    "note": "target card, leaf 1. Spooner is the PRINTER; Lewis Nichols compiled it."
   },
   "start_page": {
-   "value": 11,
+   "value": null,
    "leaf": 6,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$6/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$6/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 6; page 11 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "caption 'BROOKLYN DIRECTORY. 1831-2.'; entries 'Allen William' ... 'Allen Isaac mason'; no folio",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": -5,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 8 leaves"
-   ]
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted",
+   "margin_fit_said": {
+    "value": 11,
+    "leaf": 6,
+    "page_offset": -5,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
+  },
+  "end_page": {
+   "value": null,
+   "leaf": 64,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$64/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$64/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "running head 'BROOKLYN DIRECTORY.' with an ink blot over the folio position; entries 'Wright Amasa' ... 'Wyckoff widow, Everit street'",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "illegible",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "illegible: the folio is under a blot on the film"
   }
  },
  "survey_status": "frontmatter-done",

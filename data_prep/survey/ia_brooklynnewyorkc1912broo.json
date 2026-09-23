@@ -137,22 +137,28 @@
    "doubts": []
   },
   "end_page": {
-   "value": 153,
+   "value": 1153,
    "leaf": 1063,
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$1063/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$1063/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'153' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "low",
+   "quote": "running head 'BROOKLYN 1912 DIRECTORY', guide heads 'RESNICK' / 'REUSCHENBERG'; folio '1153' centred at foot below the H. A. KNAUBER ad",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
-   "page_offset": 910,
-   "listing_flags": [],
-   "doubts": [
-    "sequence-break: an earlier sequence in this listing ran higher",
-    "page 153 is below the listing's 528 text leaves"
-   ]
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "the scan ends here; part 3 opens at 1155, so page 1154 is in neither scan",
+   "page_offset": -90,
+   "margin_fit_said": {
+    "value": 153,
+    "leaf": 1063,
+    "page_offset": 910,
+    "confidence": "low",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "frontmatter-done",

@@ -32,6 +32,37 @@
     "column_count"
    ],
    "note": "COLUMN COUNT AUDIT. Read at leaf 338 = printed p.326 (GID-GIL), the anchor the CSV note cites. Offset +12 checks out; the recorded col=3 does not -- the page is TWO columns."
+  },
+  "start_page": {
+   "value": null,
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$21/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$21/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "caption 'THE NEW YORK CITY [DIRECTORY]'; entries 'Abbey Horatio G.' ... 'Abbott Samuel S. lawyer'; '1' at foot below the MARVIN & CO. ad [the foot '1' is not a folio]",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted: the '1' at the foot does not continue into the next text leaves ([22, 23, 24, 25]: [[22], [23], [24], [25]]) -- a printer's signature mark or a partial read; page 21 by sequence"
+  },
+  "end_page": {
+   "value": 962,
+   "leaf": 982,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$982/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$982/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "guide heads 'ZOL 962 ZWI'; entries 'Zollfrei Abraham' ... 'Zundel William'",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
+   "page_offset": 20
   }
  },
  "survey_status": "needs-image-read",

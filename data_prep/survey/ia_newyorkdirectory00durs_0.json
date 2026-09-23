@@ -104,19 +104,27 @@
    "note": "THE 1786/1851 TANGLE IS BOTH-RIGHT, not a conflict. Title page leaf 11: 'THE NEW-YORK DIRECTORY, CONTAINING, A Valuable and well Calculated ALMANACK ... BY DAVID FRANKS. NEW-YORK: Printed by SHEPARD KOLLOCK, corner of Wall and Water Streets, M, DCC, LXXX, VI.' -- and then, below a rule, 'REPUBLISHED BY JOHN DOGGETT Jr., 59 LIBERTY STREET, NEW YORK, 1851.' The WORK is Franks' 1786 directory; 1851 is Doggett's facsimile reprint. The catalog's 1786 is right about the work and phase 0b's 1851 is right about the artefact. Confirms the plan's note on the fran/_0 pair, with a different reprint house and date. NOTE THE DATE FORM: the original year is set in ROMAN NUMERALS (M, DCC, LXXX, VI), which YEAR_DIGITS cannot see at all -- a fourth attestation channel alongside digits, spelled-out words and the regnal formula."
   },
   "start_page": {
-   "value": 20,
+   "value": null,
    "leaf": 30,
    "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$30/canvas",
    "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$30/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 30; page 20 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "an ornamental headpiece opens the listing; entries 'Anderson J. shopkeeper' ... 'Attwood T. Bridgen, doctor'; no folio",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 10,
-   "listing_flags": [],
-   "doubts": []
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted",
+   "margin_fit_said": {
+    "value": 20,
+    "leaf": 30,
+    "page_offset": 10,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 52,

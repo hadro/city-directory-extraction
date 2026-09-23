@@ -73,16 +73,38 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$210/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$210/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'161' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "low",
+   "quote": "running head 'DIRECTORY. 161'; the foot shows an additions list ('Grayston John' ... 'Kingslow James')",
+   "method": "agent-read",
+   "confidence": "medium",
    "attestation": "read",
-   "ia_page": null,
+   "position": "head",
+   "edge_confirmed": false,
+   "read_date": "2026-09-23",
+   "note": "unconfirmed end: the main alphabet's close is not visible",
    "page_offset": 49,
-   "listing_flags": [],
-   "doubts": [
-    "page 161 is below the listing's 189 text leaves"
-   ]
+   "margin_fit_said": {
+    "value": 161,
+    "leaf": 210,
+    "page_offset": 49,
+    "confidence": "low",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
+  },
+  "start_page": {
+   "value": null,
+   "leaf": 16,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$16/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$16/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "caption 'WILLIAMSBURGH DIRECTORY'; entries 'Acker Andrew' ... 'Ackerly William, wheelwright'; no folio",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted"
   }
  },
  "survey_status": "frontmatter-done",

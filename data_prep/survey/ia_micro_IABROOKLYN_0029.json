@@ -72,14 +72,23 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$438/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$438/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 438; page 463 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
+   "quote": "running head 'BROOKLYN DIRECTORY. 463'; entries 'Young John, Jersey pilot' ... 'Young John J. shoemaker'; the page ends partway",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
    "page_offset": -25,
-   "listing_flags": [],
-   "doubts": []
+   "margin_fit_said": {
+    "value": 463,
+    "leaf": 438,
+    "page_offset": -25,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "start_page": {
    "value": 43,
@@ -87,16 +96,23 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$48/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$48/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'43' in the head margin",
-   "method": "hocr-geometry",
+   "quote": "running head 'BROOKLYN DIRECTORY. 43'; entries 'Bennett Samuel M' ... 'Bergen George W' -- already in B",
+   "method": "agent-read",
    "confidence": "medium",
    "attestation": "read",
-   "ia_page": null,
+   "position": "head",
+   "edge_confirmed": false,
+   "read_date": "2026-09-23",
+   "note": "not the listing start: the listing detected here opens in B; the A section is not in the detected span",
    "page_offset": 5,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 4 leaves"
-   ]
+   "margin_fit_said": {
+    "value": 43,
+    "leaf": 48,
+    "page_offset": 5,
+    "confidence": "medium",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "frontmatter-done",

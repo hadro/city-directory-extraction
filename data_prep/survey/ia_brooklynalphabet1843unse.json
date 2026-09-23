@@ -78,19 +78,27 @@
    "volume_numbered_leaves": 250
   },
   "start_page": {
-   "value": 13,
+   "value": null,
    "leaf": 17,
    "canvas": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$17/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$17/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 17; page 13 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "caption 'BROOKLYN D[IRECTORY] For 1843 & 4', the note 'Names having a * are the names of colored people', abbreviations, then the A listings; the '2' centred at the foot is a printer's SIGNATURE mark, not a folio",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 4,
-   "listing_flags": [],
-   "doubts": []
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted: '2' is the signature of the second gathering (page 13 = 12+1, duodecimo), cf. hearnesbrooklync1852unse leaf 27",
+   "margin_fit_said": {
+    "value": 13,
+    "leaf": 17,
+    "page_offset": 4,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 193,

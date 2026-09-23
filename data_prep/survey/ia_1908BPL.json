@@ -75,19 +75,28 @@
    "legend_location": "dedicated-page"
   },
   "start_page": {
-   "value": 22,
-   "leaf": 10,
-   "canvas": "https://iiif.archive.org/iiif/1908BPL$10/canvas",
-   "image": "https://iiif.archive.org/iiif/1908BPL$10/full/!1400,1400/0/default.jpg",
+   "value": 21,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/1908BPL$9/canvas",
+   "image": "https://iiif.archive.org/iiif/1908BPL$9/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'22' in the head margin",
-   "method": "hocr-geometry",
+   "quote": "caption 'UPINGTON'S General Directory OF BROOKLYN 1908' under the Newcome's Detective Agency ad; entries 'Max watchmkr' ... 'Abbazia Mich'l bldr'; folio '21' at foot below the PARQUET FLOORING ad",
+   "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
-   "ia_page": 22,
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "CORRECTS the written start_page 22 (leaf 10): the caption page leaf 9 is the listing's first page; brooklynnewyork1908p1geor, the same edition, also opens at 21",
    "page_offset": -12,
-   "listing_flags": [],
-   "doubts": []
+   "margin_fit_said": {
+    "value": 22,
+    "leaf": 10,
+    "page_offset": -12,
+    "confidence": "high",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 1107,

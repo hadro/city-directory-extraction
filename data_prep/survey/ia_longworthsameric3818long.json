@@ -43,19 +43,27 @@
    "confidence": "medium"
   },
   "start_page": {
-   "value": 49,
+   "value": null,
    "leaf": 61,
    "canvas": "https://iiif.archive.org/iiif/longworthsameric3818long$61/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric3818long$61/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 61; page 49 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "caption 'LONGWORTH'S New-York Directory.'; entries 'Abramse Jacob' ... 'ACADEMY OF ARTS'; 'F' at foot is a signature",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 12,
-   "listing_flags": [],
-   "doubts": []
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted",
+   "margin_fit_said": {
+    "value": 49,
+    "leaf": 61,
+    "page_offset": 12,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 345,
@@ -63,14 +71,23 @@
    "canvas": "https://iiif.archive.org/iiif/longworthsameric3818long$357/canvas",
    "image": "https://iiif.archive.org/iiif/longworthsameric3818long$357/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 357; page 345 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
+   "quote": "running head 'NEW-YORK DIRECTORY. 345'; last entries 'Young Philip' ... 'Young Robert, shoemaker'; 'H h' at foot is a signature",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
    "page_offset": 12,
-   "listing_flags": [],
-   "doubts": []
+   "margin_fit_said": {
+    "value": 345,
+    "leaf": 357,
+    "page_offset": 12,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "frontmatter-done",

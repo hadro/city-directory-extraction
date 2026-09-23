@@ -97,16 +97,38 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$9/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$9/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'1209' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "medium",
+   "quote": "guide heads 'REEVE' / 'REGAL' / 'REGAN' (stamped 2081086); folio '1209' at foot below NEWCOME'S DETECTIVE AGENCY ad",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
    "page_offset": -1200,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 5 leaves"
-   ]
+   "margin_fit_said": {
+    "value": 1209,
+    "leaf": 9,
+    "page_offset": -1200,
+    "confidence": "medium",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
+  },
+  "end_page": {
+   "value": null,
+   "leaf": 889,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$889/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$889/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "guide heads 'ZUKERNICK' / 'ZUSCHLAG' / 'ZWETSCH'; the folio under the BRADLEY & SMITH'S BRUSHES ad is cut in half at the scan edge ('18?8')",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "illegible",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "illegible: cut off"
   }
  },
  "survey_status": "frontmatter-done",

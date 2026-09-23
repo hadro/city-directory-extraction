@@ -168,6 +168,69 @@ def record(payload: dict) -> int:
     return wrote
 
 
+PAGE_KEYS = ("start_page", "end_page")
+
+
+def record_pages(payload: dict) -> int:
+    """Write a batch of listing-edge PAGE reads (Phase 2's image queue) into the sidecars.
+
+    Separate from `record()` on purpose: that path is for bibliography, and it recomputes
+    `survey_status` from the bibliographic fields -- which would silently un-stamp a
+    `not-residential` volume. A page read touches `book_says.start_page` / `end_page` only.
+
+    Each entry: {id, key, leaf, value|null, position, quote, legible, edge_ok, note}.
+
+      value     the folio PRINTED on the leaf, or null when the leaf prints none (`unprinted`)
+                or it cannot be made out (`illegible`). A null is recorded, not skipped: it is
+                the answer, and it keeps the leaf out of the next queue.
+      edge_ok   the strip shows the listing's first entries (start) or last (end). False means
+                the bounds are wrong, and the claim is held below CSV grade.
+
+    The margin reader's earlier answer rides along as `margin_fit_said`, so a read that
+    overrules it stays auditable.
+    """
+    wrote = 0
+    for e in payload.get("reads") or []:
+        ident, key, leaf = e["id"], e["key"], int(e["leaf"])
+        if key not in PAGE_KEYS or not (e.get("quote") or "").strip():
+            print(f"  {ident}/{key}: refused -- a page read needs a key and a quote",
+                  file=sys.stderr)
+            continue
+        matches = list(SIDECAR.glob(f"*_{ident}.json"))
+        if not matches:
+            print(f"  no sidecar for {ident}", file=sys.stderr)
+            continue
+        doc = load(matches[0])
+        book = doc.setdefault("book_says", {})
+        prior = book.get(key) or {}
+        value = e.get("value")
+        if value is None:
+            att = "illegible" if e.get("legible") is False else "unprinted"
+            level = "low"
+        else:
+            att = "read"
+            level = "high" if e.get("edge_ok", True) and e.get("legible", True) else "medium"
+        extra = {"attestation": att, "confidence": level,
+                 "position": e.get("position"), "edge_confirmed": bool(e.get("edge_ok", True)),
+                 "read_date": time.strftime("%Y-%m-%d"), "note": e.get("note", "")}
+        if value is not None:
+            extra["page_offset"] = leaf - int(value)
+        # Keep what the MARGIN FIT said, including the leaf and offset it would have written:
+        # apply_survey.retractable() uses exactly these to clear a cell this survey wrote from
+        # a claim a read has since overruled. A second read of the same edge must not bury it,
+        # so an earlier read's own record of the fit is carried forward.
+        fit = prior.get("margin_fit_said") if prior.get("method") == "agent-read" else prior
+        if fit:
+            extra["margin_fit_said"] = {k: fit.get(k) for k in
+                                        ("value", "leaf", "page_offset", "confidence",
+                                         "attestation", "method")}
+        claim = cite_read(ident, leaf, value, e["quote"], "folio", extra)
+        book[key] = claim
+        matches[0].write_text(json.dumps(doc, indent=1), encoding="utf-8")
+        wrote += 1
+    return wrote
+
+
 def self_test():
     assert leaf_of("https://iiif.archive.org/iiif/1856BPL$9/full/1400,/0/default.jpg") == 9
     assert leaf_of("nonsense") is None
@@ -181,6 +244,28 @@ def self_test():
     from survey_frontmatter import merge_book
     kept = merge_book({"year": c}, {"year": {"value": 1837, "method": "hocr-text"}})
     assert kept["year"]["value"] == 1856, "a read must survive --redo"
+
+    # record_pages, against a throwaway sidecar dir: a printed folio, and a leaf that prints none
+    import tempfile
+    global SIDECAR
+    real, SIDECAR = SIDECAR, Path(tempfile.mkdtemp())
+    try:
+        (SIDECAR / "ia_x.json").write_text(json.dumps({"id": "x", "survey_status":
+            "not-residential", "book_says": {"start_page": {"value": 17, "method":
+            "hocr-geometry", "attestation": "inferred", "confidence": "low"}}}))
+        n = record_pages({"reads": [
+            {"id": "x", "key": "start_page", "leaf": 27, "value": None, "position": None,
+             "quote": "caption title 'HEARNE'S BROOKLYN DIRECTORY'; no folio at head or foot"},
+            {"id": "x", "key": "end_page", "leaf": 512, "value": 496, "position": "head",
+             "quote": "496", "edge_ok": True}]})
+        d = json.loads((SIDECAR / "ia_x.json").read_text())
+        sp, ep = d["book_says"]["start_page"], d["book_says"]["end_page"]
+        assert n == 2 and sp["attestation"] == "unprinted" and sp["confidence"] == "low"
+        assert sp["margin_fit_said"]["value"] == 17, "the overruled answer stays auditable"
+        assert ep["confidence"] == "high" and ep["page_offset"] == 16 and ep["method"] == "agent-read"
+        assert d["survey_status"] == "not-residential", "a page read never touches status"
+    finally:
+        SIDECAR = real
     print("self-test OK", file=sys.stderr)
     return 0
 
@@ -192,6 +277,8 @@ def main(argv=None):
     ap.add_argument("--fetch", type=int, metavar="N", help="download the next N packets' images")
     ap.add_argument("--out", default="/tmp/readpackets")
     ap.add_argument("--record", metavar="FILE", help="write a batch of reads back")
+    ap.add_argument("--record-pages", metavar="FILE",
+                    help="write a batch of listing-edge PAGE reads (start_page / end_page)")
     ap.add_argument("--status", action="store_true")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
@@ -201,6 +288,10 @@ def main(argv=None):
     if args.record:
         n = record(json.loads(Path(args.record).read_text(encoding="utf-8")))
         print(f"wrote {n} claims")
+        return 0
+    if args.record_pages:
+        n = record_pages(json.loads(Path(args.record_pages).read_text(encoding="utf-8")))
+        print(f"wrote {n} page claims")
         return 0
     if args.status:
         q = queue()

@@ -89,23 +89,28 @@
    "doubts": []
   },
   "end_page": {
-   "value": 1,
+   "value": 489,
    "leaf": 420,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$420/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$420/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'1' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "low",
+   "quote": "a two-page SPREAD: 'WOO 488 WOO-WOR' / 'WOR-WRI 489'; the right page ends 'WRIGHT WILLIAM H.'",
+   "method": "agent-read",
+   "confidence": "medium",
    "attestation": "read",
-   "ia_page": null,
-   "page_offset": 419,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 4 leaves",
-    "sequence-break: an earlier sequence in this listing ran higher",
-    "page 1 is below the listing's 386 text leaves"
-   ]
+   "position": "head",
+   "edge_confirmed": false,
+   "read_date": "2026-09-23",
+   "note": "unconfirmed end: stops in WRI, Y names likely follow",
+   "page_offset": -69,
+   "margin_fit_said": {
+    "value": 1,
+    "leaf": 420,
+    "page_offset": 419,
+    "confidence": "low",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "frontmatter-done",

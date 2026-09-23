@@ -68,16 +68,39 @@
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$33/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$33/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 33; page 18 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
+   "quote": "guide heads 'AARONS 18 ABEL' under the COMMERCIAL DETECTIVE BUREAU ad; entries 'Abbenseth Elizabeth' ... 'Abbott Jos H'",
+   "method": "agent-read",
+   "confidence": "medium",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": false,
+   "read_date": "2026-09-23",
+   "note": "not the listing start: the caption page 'TROW GENERAL DIRECTORY ... MANHATTAN AND BRONX' is leaf 31 (p.17), as on every Trow p1 1903-1914",
    "page_offset": 15,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 9 leaves"
-   ]
+   "margin_fit_said": {
+    "value": 18,
+    "leaf": 33,
+    "page_offset": 15,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
+  },
+  "end_page": {
+   "value": 577,
+   "leaf": 1155,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$1155/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$1155/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "guide heads 'HANNAN 577 HANSEN'; entries 'Hannan Geo J clerk' ... 'Christina M physician'",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "part 2 opens at 578",
+   "page_offset": 578
   }
  },
  "survey_status": "frontmatter-done",

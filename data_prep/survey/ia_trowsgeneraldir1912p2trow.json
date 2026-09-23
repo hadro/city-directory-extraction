@@ -92,23 +92,42 @@
    "note": "Title page leaf 5, librarian's red 'pt. 2'. GENERAL (residential) directory."
   },
   "end_page": {
-   "value": 6,
+   "value": null,
    "leaf": 1277,
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1912p2trow$1277/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p2trow$1277/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'6' in the foot margin",
-   "method": "hocr-geometry",
+   "quote": "guide heads 'REEVES' / 'REGAN' / 'REGAR'; the foot is the KEELEY INSTITUTE ad, folio cut off",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "read",
-   "ia_page": null,
-   "page_offset": 1271,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 3 leaves",
-    "sequence-break: an earlier sequence in this listing ran higher",
-    "page 6 is below the listing's 634 text leaves"
-   ]
+   "attestation": "illegible",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "not visible",
+   "margin_fit_said": {
+    "value": 6,
+    "leaf": 1277,
+    "page_offset": 1271,
+    "confidence": "low",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
+  },
+  "start_page": {
+   "value": null,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1912p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p2trow$7/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "guide heads 'HARDING' / 'HARDY' / 'HARGRAVE' under the LEATHEROID TRUNKS ad (stamped 2071347); the foot is the Jordan's Carpet Cleaning ad with no folio visible",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "illegible",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "not visible"
   }
  },
  "survey_status": "frontmatter-done",

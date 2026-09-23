@@ -49,19 +49,43 @@
    "confidence": "medium"
   },
   "end_page": {
-   "value": 123,
-   "leaf": 195,
-   "canvas": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$195/canvas",
-   "image": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$195/full/!1400,1400/0/default.jpg",
+   "value": 124,
+   "leaf": 197,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$197/canvas",
+   "image": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$197/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'123' in the head margin",
-   "method": "hocr-geometry",
+   "quote": "running head '124 FLUSHING DIRECTORY.' under the North Side Coal Co. ad; entries 'Wright Charles J, bartender' ... 'Zindel George, grocer', 'Zucker and Levett Chemical Works'",
+   "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
-   "page_offset": 72,
-   "listing_flags": [],
-   "doubts": []
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "CORRECTS the written end_page 123 (leaf 195): the listing runs on to leaf 197; page 125 (leaf 199) opens the Business Directory",
+   "page_offset": 73,
+   "margin_fit_said": {
+    "value": 123,
+    "leaf": 195,
+    "page_offset": 72,
+    "confidence": "high",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
+  },
+  "start_page": {
+   "value": null,
+   "leaf": 15,
+   "canvas": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$15/canvas",
+   "image": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$15/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "caption 'FLUSHING.' then letter head 'A' and 'Abbott Hadden R, agent, h 74 Bradford av' (under the 'ATLANTIC' White Lead ad); foot is the T. B. THORPE ad; no folio",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted"
   }
  },
  "survey_status": "frontmatter-done",

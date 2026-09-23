@@ -83,21 +83,43 @@
    "note": "Title page leaf 5, overprinted with a donor bookplate ('This Book Is A Gift Of HAROLD and CELIA BAKERMAN') -- a modern addition sitting directly on the title page, which is the kind of thing that confuses a text-only classifier."
   },
   "start_page": {
-   "value": 1,
+   "value": null,
    "leaf": 9,
    "canvas": "https://iiif.archive.org/iiif/1867BPL$9/canvas",
    "image": "https://iiif.archive.org/iiif/1867BPL$9/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'$1' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "medium",
+   "quote": "'1' at foot below the METROPOLITAN INSURANCE ad band; first entries 'Abbot W. S. saddler' [the foot '1' is not a folio]",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted: the '1' at the foot does not continue into the next text leaves ([10, 11, 12, 13]: [[], [13], [8], []]) -- a printer's signature mark or a partial read",
+   "margin_fit_said": {
+    "value": 1,
+    "leaf": 9,
+    "page_offset": 8,
+    "confidence": "medium",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
+  },
+  "end_page": {
+   "value": 627,
+   "leaf": 657,
+   "canvas": "https://iiif.archive.org/iiif/1867BPL$657/canvas",
+   "image": "https://iiif.archive.org/iiif/1867BPL$657/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "running head 'ZOB-ZOT 627 ZSC-ZWE'; last entries 'Zugalla C. H.', 'Zufle Christian'",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
-   "page_offset": 8,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 8 leaves"
-   ]
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
+   "page_offset": 30
   }
  },
  "survey_status": "frontmatter-done",

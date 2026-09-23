@@ -31,6 +31,38 @@
     "year_covered"
    ],
    "note": "RESTRICTED STAMP RETRACTED -- the 403s were my own fetch bug, not an access restriction (see restricted_retracted in this sidecar). Leaf 5 is an ALMANAC CALENDAR page: 'XI. NOVEMBER, begins on Saturday, 30 days. 1823', confirming the catalog's 1823. The almanac month pages carry the year in their own heading, which is a further attestation channel the extractor does not use. The page's prose is a period editorial against tight lacing."
+  },
+  "start_page": {
+   "value": 55,
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4818long$13/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric4818long$13/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "running head 'NEW-YORK DIRECTORY. 55'; entries 'Allaire James P.' ... 'Allen Thomas, painter'; '1*' at foot is a signature",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "TRUNCATED: leaves 1-12 are the 1823-24 almanac and the scan jumps to p.55 (Allaire) -- pages 1-54 of the directory are not in this item; 55 is its first listing page as scanned. The OCR reads 56 here; leaf 14 prints 56",
+   "page_offset": -42
+  },
+  "end_page": {
+   "value": 488,
+   "leaf": 390,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4818long$390/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric4818long$390/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "running head '488 LONGWORTH'S 1823-24'; main alphabet ends in Young William, then an additions list ('Amrod Thos.' ... 'Barmore widow')",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
+   "page_offset": -98
   }
  },
  "survey_status": "needs-image-read",

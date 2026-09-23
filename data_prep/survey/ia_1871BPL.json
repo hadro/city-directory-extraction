@@ -59,6 +59,37 @@
    "by": "agent-read",
    "found": [],
    "note": "NEGATIVE, recorded so the candidate is not re-offered. Leaf 5 is an ADVERTISER page -- printed p.5 under the running head 'BROOKLYN DIRECTORY ADVERTISER', a Barstow Elevated Oven Range engraving for G. G. Hallett, printed on YELLOW stock. Phase 0b's title for this row is from the same section ('BROOKLYN DIRECTORY ADVERTISER. CLARK'S BRYANT & STRATTON Brooklyn Business College'), i.e. an ad misread as the title page -- the 1856BPL failure again. The row's year, publisher and legend are all correct, so only `title` is wrong. GENERALISABLE: 'BROOKLYN DIRECTORY ADVERTISER' is a RUNNING HEAD, and running heads are the cheapest possible ad-run detector for the phase-2 ad inventory -- no layout analysis needed, just a regex over the top line. Several BPL volumes carry it (1856, 1871, micro_IABROOKLYN_0038), and the tinted paper is a second, independent signal."
+  },
+  "start_page": {
+   "value": null,
+   "leaf": 13,
+   "canvas": "https://iiif.archive.org/iiif/1871BPL$13/canvas",
+   "image": "https://iiif.archive.org/iiif/1871BPL$13/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "caption 'THE [BROOKLYN CITY DIRECTORY]'; '1' at foot below the Kingman & Murphy ad; first entries 'Abbey John, segarmkr.' [the foot '1' is not a folio]",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted: the '1' at the foot does not continue into the next text leaves ([14, 15, 16, 17]: [[193, 195], [32], [], [45, 153]]) -- a printer's signature mark or a partial read"
+  },
+  "end_page": {
+   "value": 797,
+   "leaf": 842,
+   "canvas": "https://iiif.archive.org/iiif/1871BPL$842/canvas",
+   "image": "https://iiif.archive.org/iiif/1871BPL$842/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "running head 'ZIM-ZIP 797 ZIP-ZWI'; last entries 'Zitzman August, principal'",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "",
+   "page_offset": 45
   }
  },
  "survey_status": "frontmatter-done",

@@ -90,19 +90,27 @@
    "note": "Target card leaf 1 read during the spooner-cluster sweep and recorded directly into the sidecar, before survey_readpackets.py existed. Stamped so the queue stops re-offering it."
   },
   "start_page": {
-   "value": 13,
+   "value": null,
    "leaf": 23,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0024$23/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0024$23/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 23; page 13 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "caption 'BROOKLYN DIRECTORY FOR 1847 & 8.'; entries 'Abrahams Jane' ... 'Achelis Thomas, merchant'; '2' at foot [the foot '2' is not a folio]",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 10,
-   "listing_flags": [],
-   "doubts": []
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted: the '2' at the foot does not continue into the next text leaves ([24, 25, 26, 27]: [[], [], [16, 26], [17]]) -- a printer's signature mark or a partial read; page 13 by sequence",
+   "margin_fit_said": {
+    "value": 13,
+    "leaf": 23,
+    "page_offset": 10,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 261,

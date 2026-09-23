@@ -87,19 +87,27 @@
    "note": "UNIT SUSPECT RESOLVED as a coincidence. Leaf 5 is the caption-title page -- 'BROOKLYN DIRECTORY. 1826.' + the N.B. legend + the A listings -- and IA reads leaf 6 as printed page 6, leaf 8 as 8 and leaf 9 as 9 at real confidence (68-79), so leaf number equals printed page in this volume and leaf 5 IS printed page 5. The '2' centred at its foot is a signature mark, not a folio -- the same trap as hearnesbrooklync1852unse leaf 27. So the CSV's key_page=5 is correct as a printed page and merely happens to equal the leaf."
   },
   "start_page": {
-   "value": 5,
+   "value": null,
    "leaf": 5,
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 5; page 5 INFERRED from the sequence of folios around it",
-   "method": "hocr-geometry",
+   "quote": "caption 'BROOKLYN DIRECTORY.'; entry 'Anderson widow Eliza, grocery, 60 Main c. James'; '2' centred at foot [the foot '2' is not a folio]",
+   "method": "agent-read",
    "confidence": "low",
-   "attestation": "inferred",
-   "ia_page": null,
-   "page_offset": 0,
-   "listing_flags": [],
-   "doubts": []
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "unprinted: the '2' at the foot does not continue into the next text leaves ([6, 7, 8, 9]: [[6, 84], [169], [20, 28], [2]]) -- a printer's signature mark or a partial read",
+   "margin_fit_said": {
+    "value": 5,
+    "leaf": 5,
+    "page_offset": 0,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 60,

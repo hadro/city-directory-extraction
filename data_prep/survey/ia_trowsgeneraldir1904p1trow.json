@@ -78,21 +78,44 @@
    "note": "Title page leaf 7, librarian's red 'pt. 1'. GENERAL (residential) directory. Same VOL. CXVII as trowsgeneraldir1904p2trow -- genuine parts. This also corrects phase 0b's title for this row, which read 'PURCHASERS' GUIDE AND COMMERCIAL REGISTER. ADVERTISING SIGNS. C. SCOTT FORENGTON THE SIGN MAN' -- an advertisement, not the volume's title."
   },
   "start_page": {
-   "value": 18,
-   "leaf": 141,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$141/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$141/full/!1400,1400/0/default.jpg",
+   "value": 17,
+   "leaf": 139,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$139/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$139/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'18' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "medium",
+   "quote": "caption 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX' under the C. H. BROWN CO. ad; entries 'Aalholm Jos J toiletgds' ... 'AARONS ABRAM stamps'; folio '17' centred at foot",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
-   "page_offset": 123,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 6 leaves"
-   ]
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "the bounds said leaf 141 (p.18, ABBERLEY/ABBOTT); the caption page is leaf 139 -- a caption page votes on too few lines, the same miss as 1908BPL",
+   "page_offset": 122,
+   "margin_fit_said": {
+    "value": 18,
+    "leaf": 141,
+    "page_offset": 123,
+    "confidence": "medium",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
+  },
+  "end_page": {
+   "value": 540,
+   "leaf": 1195,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$1195/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$1195/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "guide heads 'HARTSTALL' / 'HARVARD' / 'HARVEY'; folio '540' at foot below the Waterman's Ideal Fountain Pen ad",
+   "method": "agent-read",
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "part 2 opens at 541",
+   "page_offset": 655
   }
  },
  "survey_status": "frontmatter-done",

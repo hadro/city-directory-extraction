@@ -80,6 +80,19 @@ ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "data_prep" / "master_directories.csv"
 SIDECAR = ROOT / "data_prep" / "survey"
 DECISIONS = ROOT / "data_prep" / "survey_decisions.json"
+# Every cell this script has written. A page-column retraction requires the cell to be listed
+# here with the same value: equality with an old claim is not proof of authorship, and on
+# 2026-09-23 it would have cleared four HUMAN values (micro_IABROOKLYN_0005 start_page 5, rode 25,
+# doggett1845 13, hearnes1852 page_offset 10) that merely equalled what the margin fit had said.
+WRITTEN = ROOT / "data_prep" / "survey_written.json"
+
+
+def load_written():
+    """-> (doc, {(source, id, column): value})."""
+    if not WRITTEN.exists():
+        return {"written": []}, {}
+    doc = json.loads(WRITTEN.read_text(encoding="utf-8"))
+    return doc, {(w["source"], w["id"], w["column"]): str(w["value"]) for w in doc["written"]}
 
 # Only `book-wins` writes. The rest retire a conflict from the queue without touching the cell,
 # which is the point: "reviewed, the catalog was right" must be distinguishable from "not yet
@@ -134,6 +147,10 @@ FORBIDDEN: dict = {}
 # where comparable they mostly differ (merceinscitydire00merc -5 vs -2), consistent with an anchor
 # taken elsewhere in a volume whose offset drifts.
 PAGE_METHOD = "hocr-geometry"
+# ...and since 2026-09-23 also a page read by eye off the IIIF image (survey_readpackets.py
+# --record-pages), under the same `read` + `high` guards. A read that found NO folio is recorded
+# as `attestation: unprinted` with a null value, and so can never be written.
+PAGE_METHODS = {PAGE_METHOD, "agent-read"}
 PAGE_GRADE = {"high"}
 PAGE_COLUMNS = ("start_page", "end_page")
 
@@ -181,7 +198,7 @@ def load_decisions():
 
 def page_claim_ok(claim) -> bool:
     return bool(claim and claim.get("value") is not None
-                and claim.get("method") == PAGE_METHOD
+                and claim.get("method") in PAGE_METHODS
                 and claim.get("attestation") == "read"
                 and claim.get("confidence") in PAGE_GRADE)
 
@@ -249,7 +266,7 @@ def propose(row: dict, doc: dict):
     return out
 
 
-def retractable(row: dict, doc: dict):
+def retractable(row: dict, doc: dict, written=None):
     """-> [(column, value_to_clear, claim)]. Cells this tool wrote that it would no longer write.
 
     A survey claim can be DOWNGRADED after the fact -- `survey_pagenumbers.py` reclassified every
@@ -272,18 +289,49 @@ def retractable(row: dict, doc: dict):
                        or kp.get("attestation") == INTERPOLATED)
         if below_grade and (row.get("key_page") or "").strip() == str(kp["value"]):
             out.append(("key_page", str(kp["value"]), kp))
-    # The page columns, on the same proof: the claim still exists, is no longer CSV-grade, and
-    # the cell holds exactly its value. page_offset follows its start_page claim.
+    # The page columns, on a STRONGER proof than key_page's: besides matching a claim, the cell
+    # must be in the written ledger with the same value (`written`, from survey_written.json).
+    # `written=None` means "no ledger given" and retracts nothing from these columns.
+    src, ident = doc.get("source"), doc.get("id")
+
+    def ours(col, value):
+        return written is not None and written.get((src, ident, col)) == str(value)
+
     for col in PAGE_COLUMNS:
         pc = book.get(col)
-        if not pc or pc.get("method") != PAGE_METHOD or page_claim_ok(pc):
+        if not pc or pc.get("method") not in PAGE_METHODS:
             continue
-        if (row.get(col) or "").strip() == str(pc.get("value")):
-            out.append((col, str(pc["value"]), pc))
-        if (col == "start_page" and pc.get("page_offset") is not None
-                and (row.get("page_offset") or "").strip() == str(pc["page_offset"])):
-            out.append(("page_offset", str(pc["page_offset"]), pc))
-    return out
+        if not page_claim_ok(pc):
+            if (row.get(col) or "").strip() == str(pc.get("value")) and ours(col, pc["value"]):
+                out.append((col, str(pc["value"]), pc))
+            if (col == "start_page" and pc.get("page_offset") is not None
+                    and (row.get("page_offset") or "").strip() == str(pc["page_offset"])
+                    and ours("page_offset", pc["page_offset"])):
+                out.append(("page_offset", str(pc["page_offset"]), pc))
+        # ...and a cell written from the MARGIN FIT that an image read has since overruled
+        # (2026-09-23: 8 of the 80 written edges were one page off -- a caption page the bounds
+        # missed, or a listing that ran one page past the fit's last read). The read records
+        # what the fit said in `margin_fit_said`; the cell is cleared only if it still holds
+        # exactly that, so a human's value is never touched. If the read is itself CSV-grade,
+        # propose() then fills the cleared cell with it on the same run.
+        fit = pc.get("margin_fit_said") or {}
+        if pc.get("method") == "agent-read" and fit.get("method") == PAGE_METHOD:
+            if (str(fit.get("value")) != str(pc.get("value")) or not page_claim_ok(pc)) \
+                    and (row.get(col) or "").strip() == str(fit.get("value")) \
+                    and ours(col, fit.get("value")):
+                out.append((col, str(fit["value"]), pc))
+            if (col == "start_page" and fit.get("page_offset") is not None
+                    and str(fit.get("page_offset")) != str(pc.get("page_offset"))
+                    and (row.get("page_offset") or "").strip() == str(fit["page_offset"])
+                    and ours("page_offset", fit["page_offset"])):
+                out.append(("page_offset", str(fit["page_offset"]), pc))
+    # the not-CSV-grade and overruled paths can name the same cell; clear it once
+    seen, uniq = set(), []
+    for c, v, cl in out:
+        if (c, v) not in seen:
+            seen.add((c, v))
+            uniq.append((c, v, cl))
+    return uniq
 
 
 def unit_suspects(row: dict, doc: dict):
@@ -350,6 +398,8 @@ def run(write: bool, show_conflicts: bool, retract: bool = False):
 
     docs = load_sidecars()
     decisions = load_decisions()
+    written_doc, written = load_written()
+    newly_written, unwritten = [], set()
     out_header = header + [c for c in NEW_COLUMNS if c not in header]
     idx = {c: i for i, c in enumerate(out_header)}
 
@@ -374,10 +424,11 @@ def run(write: bool, show_conflicts: bool, retract: bool = False):
             suspects.append((rec["source"], rec["id"], col, cur, leaf,
                              (doc.get("book_says") or {}).get("key_page") or {}))
         if retract:
-            for col, value, claim in retractable(rec, doc):
+            for col, value, claim in retractable(rec, doc, written):
                 row[idx[col]] = ""
                 counts[f"retracted: {col}"] += 1
                 retracted.append((rec["source"], rec["id"], col, value, claim))
+                unwritten.add((rec["source"], rec["id"], col))
             rec = dict(zip(out_header, row))
         for col, value, claim in propose(rec, doc):
             verdict = classify(col, row[idx[col]], value)
@@ -389,12 +440,16 @@ def run(write: bool, show_conflicts: bool, retract: bool = False):
                     # The one path that overwrites a non-empty cell, and only ever by an
                     # explicit human verdict carrying a reason.
                     if d["verdict"] == "book-wins":
+                        if row[idx[col]] != value:
+                            newly_written.append((rec["source"], rec["id"], col, value,
+                                                  row[idx[col]] or None))
                         row[idx[col]] = value
                     continue
                 conflicts.append((rec["source"], rec["id"], col, row[idx[col]], value, claim))
             counts[f"{verdict}: {col}"] += 1
             if verdict == "fill":
                 row[idx[col]] = value
+                newly_written.append((rec["source"], rec["id"], col, value, None))
         rows_out.append(row)
 
     buf = io.StringIO()
@@ -413,9 +468,14 @@ def run(write: bool, show_conflicts: bool, retract: bool = False):
     if retracted:
         print(f"\nretracted ({len(retracted)}) -- written by this tool, now below CSV grade:")
         for src, ident, col, value, claim in retracted:
-            why = ("IA interpolated it; the page prints no such folio"
-                   if claim.get("attestation") == INTERPOLATED
-                   else f"confidence {claim.get('confidence')}")
+            if claim.get("attestation") == INTERPOLATED:
+                why = "IA interpolated it; the page prints no such folio"
+            elif claim.get("method") == "agent-read" and claim.get("margin_fit_said"):
+                why = (f"overruled by an image read: leaf {claim.get('leaf')} "
+                       + (f"prints {claim['value']}" if claim.get("value") is not None
+                          else f"prints no folio ({claim.get('attestation')})"))
+            else:
+                why = f"confidence {claim.get('confidence')}"
             print(f"  {src}/{ident[:34]:34} {col:10} cleared {value:>5}   ({why})")
             print(f"      still cited by leaf {claim.get('leaf')} in the sidecar")
 
@@ -461,6 +521,17 @@ def run(write: bool, show_conflicts: bool, retract: bool = False):
         return 0
     write_csv_raw(new_raw)
     print(f"\nwrote {CSV_PATH.relative_to(ROOT)}")
+    keep = [w for w in written_doc["written"]
+            if (w["source"], w["id"], w["column"]) not in unwritten]
+    today = __import__("datetime").date.today().isoformat()
+    for src, ident, col, value, replaced in newly_written:
+        keep = [w for w in keep if (w["source"], w["id"], w["column"]) != (src, ident, col)]
+        keep.append({"source": src, "id": ident, "column": col, "value": value,
+                     "replaced": replaced, "date": today})
+    written_doc["written"] = keep
+    WRITTEN.write_text(json.dumps(written_doc, indent=1), encoding="utf-8")
+    print(f"ledger {WRITTEN.relative_to(ROOT)}: +{len(newly_written)} written, "
+          f"-{len(unwritten)} retracted, {len(keep)} cells on record")
     return 0
 
 
@@ -515,14 +586,48 @@ def self_test():
     assert pg(conf="medium") == [], "medium is not CSV-grade for a page column"
     assert pg(att="inferred") == [], "a folio the leaf does not print is never written"
     assert pg(method="ia-page-numbers") == [], "only survey_derive.py pages produces these"
+    assert pg(method="agent-read") == [("start_page", "561"), ("page_offset", "-552")], \
+        "...or a read by eye, under the same guards"
+    assert pg(method="agent-read", att="unprinted") == [], "a leaf that prints no folio"
     # ...and a downgraded page claim retracts exactly the cells it wrote, never a human's
     low = {"book_says": {"start_page": {"value": 561, "leaf": 9, "method": "hocr-geometry",
                                         "attestation": "read", "confidence": "low",
                                         "page_offset": -552}}}
-    got = [(c, v) for c, v, _cl in retractable({"start_page": "561", "page_offset": "-552"}, low)]
+    low["source"], low["id"] = "ia", "x"
+    led = {("ia", "x", "start_page"): "561", ("ia", "x", "page_offset"): "-552"}
+    got = [(c, v) for c, v, _cl in retractable({"start_page": "561", "page_offset": "-552"},
+                                                low, led)]
     assert got == [("start_page", "561"), ("page_offset", "-552")], got
-    assert retractable({"start_page": "560", "page_offset": "-5"}, low) == [], \
-        "a value this tool did not write is never cleared"
+    assert retractable({"start_page": "561", "page_offset": "-552"}, low, {}) == [], \
+        "equal to the claim but NOT in the ledger: a human's value, never cleared"
+    assert retractable({"start_page": "561"}, low) == [], "no ledger, no page retraction"
+    # a read that overrules the fit: 1908BPL, fit said 22 at leaf 10, the caption leaf 9 prints 21
+    fixed = {"book_says": {"start_page": {
+        "value": 21, "leaf": 9, "method": "agent-read", "attestation": "read",
+        "confidence": "high", "page_offset": -12,
+        "margin_fit_said": {"value": 22, "leaf": 10, "page_offset": -12,
+                            "method": "hocr-geometry", "confidence": "high"}}}}
+    fixed["source"], fixed["id"] = "ia", "1908BPL"
+    led = {("ia", "1908BPL", "start_page"): "22", ("ia", "1908BPL", "page_offset"): "-12"}
+    assert [(c, v) for c, v, _cl in retractable({"start_page": "22", "page_offset": "-12"},
+                                                 fixed, led)] == [("start_page", "22")], \
+        "the superseded page is cleared; an unchanged offset is not"
+    assert [(c, v) for c, v, _cl in propose({}, fixed)] == [("start_page", "21"),
+                                                             ("page_offset", "-12")]
+    assert retractable({"start_page": "20"}, fixed, led) == [], "a different value is untouched"
+    # ...and a read that finds NO folio clears the fit's value without replacing it
+    gone = {"book_says": {"start_page": {
+        "value": None, "leaf": 21, "method": "agent-read", "attestation": "unprinted",
+        "confidence": "low",
+        "margin_fit_said": {"value": 14, "leaf": 22, "page_offset": 8,
+                            "method": "hocr-geometry", "confidence": "high"}}}}
+    gone["source"], gone["id"] = "ia", "m25"
+    led = {("ia", "m25", "start_page"): "14", ("ia", "m25", "page_offset"): "8"}
+    got = [(c, v) for c, v, _cl in retractable({"start_page": "14", "page_offset": "8"}, gone, led)]
+    assert got == [("start_page", "14"), ("page_offset", "8")], got
+    # micro_IABROOKLYN_0005: a human's start_page 5 equals what the fit said, and is not ours
+    assert retractable({"start_page": "14"}, gone, {}) == []
+    assert propose({}, gone) == []
 
     # An interpolated folio is refused even at high confidence: IA never read it off the page.
     interp = {"book_says": {"key_page": {"value": 17, "leaf": 27, "method": "ia-page-numbers",

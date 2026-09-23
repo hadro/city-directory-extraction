@@ -83,19 +83,43 @@
    "note": "Confirms the catalog. Smith is COMPILER AND PUBLISHER here in 1854; by 1857BPL the copyright line names CHARLES JENKINS as publisher with Smith still the compiler. That trajectory is direct support for the `both-right` verdict already recorded on 1857BPL and micro_IABROOKLYN_0036, and for the compiler/publisher/printer field split the plan wants."
   },
   "start_page": {
-   "value": 21,
-   "leaf": 66,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$66/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$66/full/!1400,1400/0/default.jpg",
+   "value": null,
+   "leaf": 64,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$64/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$64/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'21' in the head margin",
-   "method": "hocr-geometry",
+   "quote": "caption 'SMITH'S BROOKLYN CITY DIRECTORY, 1854-5.', a NOTICE and the ABBREVIATIONS, then 'A' and 'Aba George, laborer' ... 'Abbott Thomas, grocer'; the '2' at foot is a signature",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "CORRECTS the written start_page 21 (leaf 66): the listing opens on leaf 64; leaf 65 prints 20, so the caption page is p.19 by sequence",
+   "margin_fit_said": {
+    "value": 21,
+    "leaf": 66,
+    "page_offset": 45,
+    "confidence": "high",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
+  },
+  "end_page": {
+   "value": 527,
+   "leaf": 590,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$590/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$590/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "a two-page SPREAD: '526 BROOKLYN CITY DIRECTORY.' / 'BROOKLYN CITY DIRECTORY. 527'; the right page ends 'Youngling Henry, engraver'",
+   "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
-   "ia_page": 21,
-   "page_offset": 45,
-   "listing_flags": [],
-   "doubts": []
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "spread frame: end_page is the right page",
+   "page_offset": 63
   }
  },
  "survey_status": "frontmatter-done",

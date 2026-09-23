@@ -43,19 +43,27 @@
    "evidence_detail": "copyright-line"
   },
   "start_page": {
-   "value": 37,
-   "leaf": 41,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$41/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$41/full/!1400,1400/0/default.jpg",
+   "value": null,
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$21/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$21/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'37' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
-   "ia_page": 37,
-   "page_offset": 4,
-   "listing_flags": [],
-   "doubts": []
+   "quote": "caption 'HEARNES' BROOKLYN CITY DIRECTORY. 1850-1851.', the NOTE on the * for colored people and the abbreviations, then 'A' and 'Abberly Richard, shoemaker' ... 'Abrahams Joseph'; the '2' at foot is a signature",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "unprinted",
+   "position": null,
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "CORRECTS the written start_page 37 (leaf 41), which was mid-B: the detected listing missed the whole A section on this poorly filmed volume. Leaf 22 prints 18, so the caption page is p.17 by sequence",
+   "margin_fit_said": {
+    "value": 37,
+    "leaf": 41,
+    "page_offset": 4,
+    "confidence": "high",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
    "value": 396,
@@ -63,16 +71,23 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$407/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$407/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'396' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "medium",
+   "quote": "running head '396 BROOKLYN DIRECTORY.'; last entries 'Zeuill John, cabinet maker' ... 'Zwergius Julius, porter 287 Adams'",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "same edition and page as hearnesbrooklync1850unse",
    "page_offset": 11,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 9 leaves"
-   ]
+   "margin_fit_said": {
+    "value": 396,
+    "leaf": 407,
+    "page_offset": 11,
+    "confidence": "medium",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "frontmatter-done",

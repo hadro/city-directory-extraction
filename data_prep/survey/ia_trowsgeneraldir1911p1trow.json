@@ -92,38 +92,52 @@
    "note": "Title page leaf 7, librarian's red 'pt. 1'. GENERAL (residential) directory."
   },
   "start_page": {
-   "value": 18,
-   "leaf": 57,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p1trow$57/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p1trow$57/full/!1400,1400/0/default.jpg",
+   "value": 17,
+   "leaf": 55,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p1trow$55/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p1trow$55/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'18' in the head margin",
-   "method": "hocr-geometry",
+   "quote": "caption 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF' under the FRAME & PICTURE Co ad; entries 'A A Automatic Mfg Co' ... 'Aarons'; folio '17' at foot below the CAREFUL CARPET CLEANING ad",
+   "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
-   "page_offset": 39,
-   "listing_flags": [],
-   "doubts": []
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "CORRECTS the written start_page 18 (leaf 57): the caption page is the listing's first page; leaf 57 prints 18",
+   "page_offset": 38,
+   "margin_fit_said": {
+    "value": 18,
+    "leaf": 57,
+    "page_offset": 39,
+    "confidence": "high",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   },
   "end_page": {
-   "value": 3,
+   "value": 603,
    "leaf": 1233,
    "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p1trow$1233/canvas",
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p1trow$1233/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'003' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "low",
+   "quote": "guide heads 'HAMMEL' / 'HAMMERSCHLAG' / 'HAMMOND' under the FRANK E. CAMPBELL ad; folio '603' at foot",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
-   "page_offset": 1230,
-   "listing_flags": [],
-   "doubts": [
-    "sequence read on only 3 leaves",
-    "sequence-break: an earlier sequence in this listing ran higher",
-    "page 3 is below the listing's 589 text leaves"
-   ]
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "part 2 opens at 604; the OCR's '003' was this 603",
+   "page_offset": 630,
+   "margin_fit_said": {
+    "value": 3,
+    "leaf": 1233,
+    "page_offset": 1230,
+    "confidence": "low",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "frontmatter-done",

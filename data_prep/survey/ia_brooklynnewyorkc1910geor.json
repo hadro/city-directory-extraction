@@ -89,16 +89,23 @@
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$1311/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$1311/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'647' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "low",
+   "quote": "guide heads 'LANGUTH' / 'LANYON'; folio '647' centred at foot below the Bedford Riding Academy ad",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "part 2 (brooklynnewyork1910p2geor) opens at 648",
    "page_offset": 664,
-   "listing_flags": [],
-   "doubts": [
-    "sequence-break: an earlier sequence in this listing ran higher"
-   ]
+   "margin_fit_said": {
+    "value": 647,
+    "leaf": 1311,
+    "page_offset": 664,
+    "confidence": "low",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "frontmatter-done",

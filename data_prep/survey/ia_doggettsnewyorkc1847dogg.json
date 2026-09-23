@@ -93,6 +93,36 @@
     "year_covered"
    ],
    "note": "Also states its entry count: 'CONTAINS SIXTY-EIGHT THOUSAND ONE HUNDRED AND FIFTY-NINE NAMES.' The hOCR mangles this line to 'SIXTY-EIGHT THOUSAND ONE HXTNDRED AND FIFTT-NUfE', so the IMAGE is what makes the number usable -- a clean case for what an agent read buys. 'Sixth Publication' for 1847-48 against 1845's Fourth makes the Doggett series a consistent annual."
+  },
+  "end_page": {
+   "value": 455,
+   "leaf": 467,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$467/canvas",
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$467/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'455' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 12,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "start_page": {
+   "value": 21,
+   "leaf": 25,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$25/canvas",
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$25/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 25; page 21 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 4,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -382,7 +412,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 25,
   "end_leaf": 467,
   "first_letter": "A",
@@ -563,5 +593,47 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 525,
+  "fitted_leaves": 504,
+  "read_leaves": 467,
+  "segments": [
+   {
+    "first_leaf": 12,
+    "last_leaf": 468,
+    "first_page": 8,
+    "last_page": 456,
+    "leaves": 449,
+    "read": 419
+   },
+   {
+    "first_leaf": 469,
+    "last_leaf": 508,
+    "first_page": 1,
+    "last_page": 40,
+    "leaves": 40,
+    "read": 36
+   },
+   {
+    "first_leaf": 509,
+    "last_leaf": 523,
+    "first_page": 1,
+    "last_page": 15,
+    "leaves": 15,
+    "read": 12
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 45,
+   "both": 45,
+   "agree": 45,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

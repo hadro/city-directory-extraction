@@ -63,6 +63,21 @@
    "quote": "LONGWORTH'S / AMERICAN ALMANAC, / NEW-YORK REGISTER, / AND / CITY DIRECTORY. / OF / THE SIXTY-FIRST YEAR / OP / AMERICAN INDEPENDENCE : / CONTAINING",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 741,
+   "leaf": 711,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric6118long$711/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric6118long$711/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'741' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": 741,
+   "page_offset": -30,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -355,7 +370,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 42,
   "end_leaf": 711,
   "first_letter": "A",
@@ -521,5 +536,71 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 767,
+  "fitted_leaves": 750,
+  "read_leaves": 602,
+  "segments": [
+   {
+    "first_leaf": 13,
+    "last_leaf": 40,
+    "first_page": 9,
+    "last_page": 36,
+    "leaves": 28,
+    "read": 23
+   },
+   {
+    "first_leaf": 43,
+    "last_leaf": 471,
+    "first_page": 51,
+    "last_page": 479,
+    "leaves": 429,
+    "read": 348
+   },
+   {
+    "first_leaf": 474,
+    "last_leaf": 519,
+    "first_page": 490,
+    "last_page": 535,
+    "leaves": 46,
+    "read": 41
+   },
+   {
+    "first_leaf": 521,
+    "last_leaf": 529,
+    "first_page": 541,
+    "last_page": 549,
+    "leaves": 9,
+    "read": 8
+   },
+   {
+    "first_leaf": 530,
+    "last_leaf": 734,
+    "first_page": 560,
+    "last_page": 764,
+    "leaves": 205,
+    "read": 156
+   },
+   {
+    "first_leaf": 738,
+    "last_leaf": 770,
+    "first_page": 4,
+    "last_page": 36,
+    "leaves": 33,
+    "read": 26
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 424,
+   "both": 424,
+   "agree": 424,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

@@ -1,7 +1,46 @@
 {
  "source": "ia",
  "id": "trowsgeneraldir1913p1trow",
- "book_says": {},
+ "book_says": {
+  "start_page": {
+   "value": 167,
+   "leaf": 417,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$417/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$417/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'167' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 250,
+   "listing_flags": [
+    "edge-disagreement",
+    "not-residential",
+    "sparse"
+   ],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 239,
+   "leaf": 573,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$573/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$573/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'239' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 334,
+   "listing_flags": [
+    "edge-disagreement",
+    "not-residential",
+    "sparse"
+   ],
+   "doubts": []
+  }
+ },
  "survey_status": "not-residential",
  "derivatives": {
   "hocr_bytes": 76157656,
@@ -298,7 +337,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 417,
   "end_leaf": 573,
   "first_letter": "B",
@@ -490,5 +529,47 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 408,
+  "fitted_leaves": 345,
+  "read_leaves": 276,
+  "segments": [
+   {
+    "first_leaf": 79,
+    "last_leaf": 457,
+    "first_page": 10,
+    "last_page": 187,
+    "leaves": 178,
+    "read": 137
+   },
+   {
+    "first_leaf": 465,
+    "last_leaf": 723,
+    "first_page": 189,
+    "last_page": 311,
+    "leaves": 123,
+    "read": 101
+   },
+   {
+    "first_leaf": 733,
+    "last_leaf": 819,
+    "first_page": 313,
+    "last_page": 356,
+    "leaves": 44,
+    "read": 38
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

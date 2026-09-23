@@ -41,6 +41,38 @@
    "quote": "LONG WORTH'S NKW-YORK / ALMANAC, / roii the / YEAR OF OUR LORD",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 451,
+   "leaf": 463,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4018long$463/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric4018long$463/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'451' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": 451,
+   "page_offset": 12,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "start_page": {
+   "value": 3,
+   "leaf": 115,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric4018long$115/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric4018long$115/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 115; page 3 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 112,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 3 leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -334,7 +366,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 115,
   "end_leaf": 463,
   "first_letter": "A",
@@ -511,5 +543,79 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 473,
+  "fitted_leaves": 445,
+  "read_leaves": 223,
+  "segments": [
+   {
+    "first_leaf": 20,
+    "last_leaf": 25,
+    "first_page": 1,
+    "last_page": 6,
+    "leaves": 6,
+    "read": 4
+   },
+   {
+    "first_leaf": 26,
+    "last_leaf": 31,
+    "first_page": 25,
+    "last_page": 30,
+    "leaves": 6,
+    "read": 6
+   },
+   {
+    "first_leaf": 32,
+    "last_leaf": 34,
+    "first_page": 1,
+    "last_page": 3,
+    "leaves": 3,
+    "read": 3
+   },
+   {
+    "first_leaf": 41,
+    "last_leaf": 110,
+    "first_page": 33,
+    "last_page": 102,
+    "leaves": 70,
+    "read": 16
+   },
+   {
+    "first_leaf": 113,
+    "last_leaf": 116,
+    "first_page": 1,
+    "last_page": 4,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 118,
+    "last_leaf": 463,
+    "first_page": 108,
+    "last_page": 451,
+    "leaves": 344,
+    "read": 181
+   },
+   {
+    "first_leaf": 467,
+    "last_leaf": 478,
+    "first_page": 21,
+    "last_page": 32,
+    "leaves": 12,
+    "read": 10
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 114,
+   "both": 114,
+   "agree": 110,
+   "agree_rate": 0.965,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

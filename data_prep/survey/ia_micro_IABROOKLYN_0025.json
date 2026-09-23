@@ -84,6 +84,21 @@
     "year"
    ],
    "note": "Target card leaf 1 read during the spooner-cluster sweep and recorded directly into the sidecar, before survey_readpackets.py existed. Stamped so the queue stops re-offering it."
+  },
+  "start_page": {
+   "value": 14,
+   "leaf": 22,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$22/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$22/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'14\u00b0' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 8,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "needs-image-read",
@@ -384,7 +399,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 22,
   "end_leaf": 344,
   "first_letter": "A",
@@ -595,5 +610,39 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 409,
+  "fitted_leaves": 272,
+  "read_leaves": 138,
+  "segments": [
+   {
+    "first_leaf": 12,
+    "last_leaf": 81,
+    "first_page": 4,
+    "last_page": 72,
+    "leaves": 69,
+    "read": 36
+   },
+   {
+    "first_leaf": 83,
+    "last_leaf": 287,
+    "first_page": 74,
+    "last_page": 276,
+    "leaves": 203,
+    "read": 102
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 101,
+   "both": 101,
+   "agree": 101,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

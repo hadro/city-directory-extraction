@@ -51,6 +51,21 @@
    "quote": "^^<ilo / UPINGTQN^S / GENERAL DIRECTORY / OF BROOKLYN, H.i. / NEW YORK CITY.",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 558,
+   "leaf": 1137,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1904p1geor$1137/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1904p1geor$1137/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'558' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 579,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -348,7 +363,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 27,
   "end_leaf": 1137,
   "first_letter": "A",
@@ -556,5 +571,31 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 568,
+  "fitted_leaves": 537,
+  "read_leaves": 512,
+  "segments": [
+   {
+    "first_leaf": 29,
+    "last_leaf": 1137,
+    "first_page": 22,
+    "last_page": 558,
+    "leaves": 537,
+    "read": 512
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

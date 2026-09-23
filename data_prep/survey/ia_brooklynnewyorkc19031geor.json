@@ -61,6 +61,36 @@
    "quote": "-/ ^ fib / t / UPINGTON'S / GENERAL DIRECTORY / OF BROOKLYN, / NEW YORK CITY.",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 553,
+   "leaf": 1169,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc19031geor$1169/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc19031geor$1169/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'553' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 616,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "start_page": {
+   "value": 21,
+   "leaf": 39,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc19031geor$39/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc19031geor$39/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 39; page 21 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 18,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -348,7 +378,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 39,
   "end_leaf": 1169,
   "first_letter": "A",
@@ -556,5 +586,111 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 588,
+  "fitted_leaves": 546,
+  "read_leaves": 413,
+  "segments": [
+   {
+    "first_leaf": 7,
+    "last_leaf": 149,
+    "first_page": 5,
+    "last_page": 74,
+    "leaves": 70,
+    "read": 46
+   },
+   {
+    "first_leaf": 155,
+    "last_leaf": 217,
+    "first_page": 76,
+    "last_page": 107,
+    "leaves": 32,
+    "read": 23
+   },
+   {
+    "first_leaf": 219,
+    "last_leaf": 225,
+    "first_page": 107,
+    "last_page": 110,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 227,
+    "last_leaf": 247,
+    "first_page": 110,
+    "last_page": 120,
+    "leaves": 11,
+    "read": 9
+   },
+   {
+    "first_leaf": 249,
+    "last_leaf": 257,
+    "first_page": 120,
+    "last_page": 124,
+    "leaves": 5,
+    "read": 5
+   },
+   {
+    "first_leaf": 285,
+    "last_leaf": 413,
+    "first_page": 127,
+    "last_page": 189,
+    "leaves": 63,
+    "read": 57
+   },
+   {
+    "first_leaf": 419,
+    "last_leaf": 849,
+    "first_page": 191,
+    "last_page": 406,
+    "leaves": 216,
+    "read": 156
+   },
+   {
+    "first_leaf": 851,
+    "last_leaf": 917,
+    "first_page": 406,
+    "last_page": 439,
+    "leaves": 34,
+    "read": 29
+   },
+   {
+    "first_leaf": 925,
+    "last_leaf": 1011,
+    "first_page": 442,
+    "last_page": 485,
+    "leaves": 44,
+    "read": 34
+   },
+   {
+    "first_leaf": 1017,
+    "last_leaf": 1131,
+    "first_page": 487,
+    "last_page": 538,
+    "leaves": 52,
+    "read": 37
+   },
+   {
+    "first_leaf": 1143,
+    "last_leaf": 1171,
+    "first_page": 540,
+    "last_page": 554,
+    "leaves": 15,
+    "read": 13
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

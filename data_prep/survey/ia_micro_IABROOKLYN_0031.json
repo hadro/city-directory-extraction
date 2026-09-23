@@ -66,6 +66,46 @@
     "year_covered"
    ],
    "note": "Confirms the catalog."
+  },
+  "start_page": {
+   "value": 21,
+   "leaf": 25,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$25/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$25/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'21' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": 21,
+   "page_offset": 4,
+   "listing_flags": [
+    "edge-disagreement"
+   ],
+   "doubts": [
+    "sequence read on only 5 leaves"
+   ]
+  },
+  "end_page": {
+   "value": 8,
+   "leaf": 591,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$591/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$591/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'8,' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 583,
+   "listing_flags": [
+    "edge-disagreement"
+   ],
+   "doubts": [
+    "sequence read on only 3 leaves",
+    "sequence-break: an earlier sequence in this listing ran higher",
+    "page 8 is below the listing's 527 text leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -361,7 +401,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 25,
   "end_leaf": 591,
   "first_letter": "A",
@@ -645,5 +685,231 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 606,
+  "fitted_leaves": 453,
+  "read_leaves": 200,
+  "segments": [
+   {
+    "first_leaf": 10,
+    "last_leaf": 18,
+    "first_page": 6,
+    "last_page": 14,
+    "leaves": 9,
+    "read": 4
+   },
+   {
+    "first_leaf": 24,
+    "last_leaf": 35,
+    "first_page": 20,
+    "last_page": 31,
+    "leaves": 12,
+    "read": 5
+   },
+   {
+    "first_leaf": 40,
+    "last_leaf": 100,
+    "first_page": 36,
+    "last_page": 95,
+    "leaves": 60,
+    "read": 36
+   },
+   {
+    "first_leaf": 102,
+    "last_leaf": 123,
+    "first_page": 97,
+    "last_page": 118,
+    "leaves": 22,
+    "read": 11
+   },
+   {
+    "first_leaf": 126,
+    "last_leaf": 150,
+    "first_page": 121,
+    "last_page": 144,
+    "leaves": 24,
+    "read": 17
+   },
+   {
+    "first_leaf": 159,
+    "last_leaf": 164,
+    "first_page": 153,
+    "last_page": 158,
+    "leaves": 6,
+    "read": 3
+   },
+   {
+    "first_leaf": 171,
+    "last_leaf": 191,
+    "first_page": 166,
+    "last_page": 185,
+    "leaves": 20,
+    "read": 7
+   },
+   {
+    "first_leaf": 204,
+    "last_leaf": 229,
+    "first_page": 198,
+    "last_page": 222,
+    "leaves": 25,
+    "read": 11
+   },
+   {
+    "first_leaf": 233,
+    "last_leaf": 289,
+    "first_page": 226,
+    "last_page": 282,
+    "leaves": 57,
+    "read": 12
+   },
+   {
+    "first_leaf": 294,
+    "last_leaf": 302,
+    "first_page": 286,
+    "last_page": 294,
+    "leaves": 9,
+    "read": 4
+   },
+   {
+    "first_leaf": 311,
+    "last_leaf": 327,
+    "first_page": 303,
+    "last_page": 319,
+    "leaves": 17,
+    "read": 4
+   },
+   {
+    "first_leaf": 333,
+    "last_leaf": 344,
+    "first_page": 326,
+    "last_page": 336,
+    "leaves": 11,
+    "read": 6
+   },
+   {
+    "first_leaf": 346,
+    "last_leaf": 370,
+    "first_page": 338,
+    "last_page": 361,
+    "leaves": 24,
+    "read": 14
+   },
+   {
+    "first_leaf": 372,
+    "last_leaf": 375,
+    "first_page": 363,
+    "last_page": 366,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 389,
+    "last_leaf": 400,
+    "first_page": 380,
+    "last_page": 391,
+    "leaves": 12,
+    "read": 5
+   },
+   {
+    "first_leaf": 407,
+    "last_leaf": 414,
+    "first_page": 398,
+    "last_page": 405,
+    "leaves": 8,
+    "read": 3
+   },
+   {
+    "first_leaf": 416,
+    "last_leaf": 444,
+    "first_page": 407,
+    "last_page": 434,
+    "leaves": 28,
+    "read": 15
+   },
+   {
+    "first_leaf": 445,
+    "last_leaf": 453,
+    "first_page": 436,
+    "last_page": 443,
+    "leaves": 8,
+    "read": 4
+   },
+   {
+    "first_leaf": 456,
+    "last_leaf": 460,
+    "first_page": 446,
+    "last_page": 450,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 464,
+    "last_leaf": 469,
+    "first_page": 454,
+    "last_page": 459,
+    "leaves": 6,
+    "read": 4
+   },
+   {
+    "first_leaf": 481,
+    "last_leaf": 501,
+    "first_page": 471,
+    "last_page": 491,
+    "leaves": 21,
+    "read": 4
+   },
+   {
+    "first_leaf": 513,
+    "last_leaf": 533,
+    "first_page": 502,
+    "last_page": 522,
+    "leaves": 21,
+    "read": 7
+   },
+   {
+    "first_leaf": 543,
+    "last_leaf": 550,
+    "first_page": 1,
+    "last_page": 8,
+    "leaves": 8,
+    "read": 3
+   },
+   {
+    "first_leaf": 563,
+    "last_leaf": 579,
+    "first_page": 552,
+    "last_page": 568,
+    "leaves": 17,
+    "read": 7
+   },
+   {
+    "first_leaf": 585,
+    "last_leaf": 592,
+    "first_page": 2,
+    "last_page": 9,
+    "leaves": 8,
+    "read": 3
+   },
+   {
+    "first_leaf": 601,
+    "last_leaf": 619,
+    "first_page": 0,
+    "last_page": 10,
+    "leaves": 11,
+    "read": 5
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 66,
+   "both": 58,
+   "agree": 58,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

@@ -109,6 +109,21 @@
     "year_published"
    ],
    "note": "YEAR CONFLICT SETTLED, and decisively -- the title page carries TWO independent attestations of the same year. 'FOR THE SIXTY-FOURTH YEAR OF AMERICAN INDEPENDENCE' is 1775+64 = 1839, and the imprint prints '1839' outright. The catalog's 1816 is wrong. The page also states an approximate entry count ('amounting to near thirty-nine thousand') and an inclusion policy ('all heads of families, firms, and those doing business in the city'). It closes with an Othello parody: 'Who steals my purse steals trash; But he who BORROWS my DIRECTORY filches me Most villanously.'"
+  },
+  "end_page": {
+   "value": 731,
+   "leaf": 737,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric00newy$737/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric00newy$737/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'731' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": 731,
+   "page_offset": 6,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -401,7 +416,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 56,
   "end_leaf": 737,
   "first_letter": "A",
@@ -572,5 +587,55 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 785,
+  "fitted_leaves": 769,
+  "read_leaves": 585,
+  "segments": [
+   {
+    "first_leaf": 19,
+    "last_leaf": 24,
+    "first_page": 26,
+    "last_page": 31,
+    "leaves": 6,
+    "read": 6
+   },
+   {
+    "first_leaf": 25,
+    "last_leaf": 53,
+    "first_page": 7,
+    "last_page": 35,
+    "leaves": 29,
+    "read": 24
+   },
+   {
+    "first_leaf": 57,
+    "last_leaf": 755,
+    "first_page": 51,
+    "last_page": 749,
+    "leaves": 699,
+    "read": 528
+   },
+   {
+    "first_leaf": 760,
+    "last_leaf": 794,
+    "first_page": 2,
+    "last_page": 36,
+    "leaves": 35,
+    "read": 27
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 277,
+   "both": 276,
+   "agree": 276,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

@@ -67,6 +67,25 @@
     "year_covered"
    ],
    "note": "Catalog publisher was EMPTY. Note the year shape the plan warns about: the card says 'for the year ending May 1st, 1859' while the CSV year is 1858."
+  },
+  "end_page": {
+   "value": 5,
+   "leaf": 476,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$476/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$476/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 476; page 5 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 471,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 3 leaves",
+    "sequence-break: an earlier sequence in this listing ran higher",
+    "page 5 is below the listing's 454 text leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -367,7 +386,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 11,
   "end_leaf": 476,
   "first_letter": "A",
@@ -695,5 +714,143 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 563,
+  "fitted_leaves": 328,
+  "read_leaves": 131,
+  "segments": [
+   {
+    "first_leaf": 14,
+    "last_leaf": 68,
+    "first_page": 4,
+    "last_page": 58,
+    "leaves": 55,
+    "read": 24
+   },
+   {
+    "first_leaf": 74,
+    "last_leaf": 107,
+    "first_page": 61,
+    "last_page": 94,
+    "leaves": 34,
+    "read": 7
+   },
+   {
+    "first_leaf": 112,
+    "last_leaf": 137,
+    "first_page": 97,
+    "last_page": 121,
+    "leaves": 25,
+    "read": 15
+   },
+   {
+    "first_leaf": 183,
+    "last_leaf": 214,
+    "first_page": 161,
+    "last_page": 191,
+    "leaves": 31,
+    "read": 16
+   },
+   {
+    "first_leaf": 232,
+    "last_leaf": 240,
+    "first_page": 207,
+    "last_page": 215,
+    "leaves": 9,
+    "read": 5
+   },
+   {
+    "first_leaf": 334,
+    "last_leaf": 354,
+    "first_page": 299,
+    "last_page": 319,
+    "leaves": 21,
+    "read": 8
+   },
+   {
+    "first_leaf": 370,
+    "last_leaf": 388,
+    "first_page": 333,
+    "last_page": 351,
+    "leaves": 19,
+    "read": 5
+   },
+   {
+    "first_leaf": 394,
+    "last_leaf": 406,
+    "first_page": 354,
+    "last_page": 366,
+    "leaves": 13,
+    "read": 4
+   },
+   {
+    "first_leaf": 416,
+    "last_leaf": 438,
+    "first_page": 374,
+    "last_page": 396,
+    "leaves": 23,
+    "read": 7
+   },
+   {
+    "first_leaf": 450,
+    "last_leaf": 457,
+    "first_page": 406,
+    "last_page": 412,
+    "leaves": 7,
+    "read": 5
+   },
+   {
+    "first_leaf": 464,
+    "last_leaf": 471,
+    "first_page": 417,
+    "last_page": 424,
+    "leaves": 8,
+    "read": 5
+   },
+   {
+    "first_leaf": 473,
+    "last_leaf": 479,
+    "first_page": 2,
+    "last_page": 8,
+    "leaves": 7,
+    "read": 3
+   },
+   {
+    "first_leaf": 482,
+    "last_leaf": 513,
+    "first_page": 5,
+    "last_page": 36,
+    "leaves": 32,
+    "read": 7
+   },
+   {
+    "first_leaf": 519,
+    "last_leaf": 542,
+    "first_page": 4,
+    "last_page": 26,
+    "leaves": 23,
+    "read": 7
+   },
+   {
+    "first_leaf": 552,
+    "last_leaf": 572,
+    "first_page": 4,
+    "last_page": 24,
+    "leaves": 21,
+    "read": 13
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

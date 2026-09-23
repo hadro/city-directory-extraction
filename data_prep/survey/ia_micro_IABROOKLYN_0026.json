@@ -66,6 +66,21 @@
     "year_covered"
    ],
    "note": "CSV 'spooner' is CORRECT -- but this is E. B. Spooner, not Alden, and Thomas P. Teale compiled it (cf. the sibling identifier brooklyncitydire1848teal)."
+  },
+  "end_page": {
+   "value": 250,
+   "leaf": 219,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$219/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$219/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'250' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": -31,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -362,7 +377,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 4,
   "end_leaf": 219,
   "first_letter": "A",
@@ -595,5 +610,95 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 392,
+  "fitted_leaves": 225,
+  "read_leaves": 129,
+  "segments": [
+   {
+    "first_leaf": 81,
+    "last_leaf": 96,
+    "first_page": 114,
+    "last_page": 129,
+    "leaves": 16,
+    "read": 6
+   },
+   {
+    "first_leaf": 113,
+    "last_leaf": 120,
+    "first_page": 145,
+    "last_page": 152,
+    "leaves": 8,
+    "read": 3
+   },
+   {
+    "first_leaf": 137,
+    "last_leaf": 250,
+    "first_page": 169,
+    "last_page": 281,
+    "leaves": 113,
+    "read": 82
+   },
+   {
+    "first_leaf": 313,
+    "last_leaf": 333,
+    "first_page": 57,
+    "last_page": 76,
+    "leaves": 20,
+    "read": 14
+   },
+   {
+    "first_leaf": 351,
+    "last_leaf": 361,
+    "first_page": 94,
+    "last_page": 104,
+    "leaves": 11,
+    "read": 4
+   },
+   {
+    "first_leaf": 374,
+    "last_leaf": 385,
+    "first_page": 117,
+    "last_page": 128,
+    "leaves": 12,
+    "read": 7
+   },
+   {
+    "first_leaf": 387,
+    "last_leaf": 391,
+    "first_page": 130,
+    "last_page": 134,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 396,
+    "last_leaf": 412,
+    "first_page": 139,
+    "last_page": 154,
+    "leaves": 16,
+    "read": 6
+   },
+   {
+    "first_leaf": 418,
+    "last_leaf": 446,
+    "first_page": 160,
+    "last_page": 183,
+    "leaves": 24,
+    "read": 4
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 2,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

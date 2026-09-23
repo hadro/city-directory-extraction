@@ -36,6 +36,40 @@
    "quote": "VOLUME LXVI",
    "method": "hocr-text",
    "confidence": "high"
+  },
+  "start_page": {
+   "value": 570,
+   "leaf": 455,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1913p2trow$455/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p2trow$455/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 455; page 570 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": -115,
+   "listing_flags": [
+    "not-residential"
+   ],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 615,
+   "leaf": 545,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1913p2trow$545/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p2trow$545/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'615' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": -70,
+   "listing_flags": [
+    "not-residential"
+   ],
+   "doubts": []
   }
  },
  "survey_status": "not-residential",
@@ -330,7 +364,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 455,
   "end_leaf": 545,
   "first_letter": "A",
@@ -663,5 +697,39 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 411,
+  "fitted_leaves": 394,
+  "read_leaves": 330,
+  "segments": [
+   {
+    "first_leaf": 9,
+    "last_leaf": 219,
+    "first_page": 357,
+    "last_page": 456,
+    "leaves": 100,
+    "read": 90
+   },
+   {
+    "first_leaf": 231,
+    "last_leaf": 825,
+    "first_page": 458,
+    "last_page": 751,
+    "leaves": 294,
+    "read": 240
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

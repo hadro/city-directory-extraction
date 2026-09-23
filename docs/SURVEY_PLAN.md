@@ -794,6 +794,106 @@ night: `trowsgeneraldire1917trow` **1588 MB** (2480 leaves), `trowsgeneraldire19
 
 ### Phase 2 — free derivation (no agents, no network)
 
+#### Progress 2026-09-22: listing bounds and printed pages, all 184 IA volumes
+
+`survey_derive.py` is the driver. It reads only the Phase 1 dumps (plus the small
+`_page_numbers.json` cache), writes sidecar blocks, and never touches the CSV.
+
+**`bounds` → `listing`.** `detect_listing_bounds` modelled a volume as one A→Z run, and on this
+corpus that produced a listing ending *before* it started on 17 of 184 volumes. It now segments
+the letter votes into ascending **alphabets**. The largest alphabet is the listing and every one is
+recorded as a section. Each rule answers a case found in the corpus:
+
+| rule | case |
+|---|---|
+| a restart costs 8 leaves | a PART covers a stretch of the alphabet (Trow p1 = A→H); stray single leaves are skipped |
+| small isolated edge clusters are trimmed | 1856BPL leaves 12, 29: front-matter ads voting A |
+| a leaf votes only with ≥25% of the median voting lines | 1867BPL leaves 2–4: ads voting A on 14–28 lines |
+| …but an alphabet's end reaches a short page right after it | 1862BPL leaf 508 "Zyla Bobert" is the real last page |
+| ties go against a restart | `brooklynnewyorkc1904geor`: 8 one-leaf ad votes split one alphabet |
+| a split alphabet is rejoined across an interlude | `brooklyncitydire1848teal`'s **Mc section**: `M'Cage` → `Cage`, voting C…L between M and N |
+
+Read from the dump, the result is **identical to reading the hOCR** (1906BPL, 1856BPL, micro_0013).
+The filtered-lines path is kept as a cross-check: it agrees within 2 leaves on 167/184, and on
+every disagreement opened by eye the dump was closer (1897BPL: lines stopped at leaf 1002 in M).
+Flags: 90 clean · `partial-alphabet` 69 · `multi-section` 35 · `edge-disagreement` 17 · `sparse` 9
+(the dash-ditto ABBYY-8 Trow/Brooklyn volumes) · `small-listing` 5.
+
+What the bounds found:
+
+- **The letter ranges identify parts, and the parts tile.** Trow 1903–1914 run A–H / H–R / R–Z
+  (1906, 1910: A–G / G–P / P–Z; 1908 in four). **The Brooklyn `…c19NNgeor` volumes are
+  catalogued as whole directories and are halves**: 1905 = `1905p1geor` A–K + `c1905geor` K–Z,
+  and likewise 1903–1910. `brooklynnewyorkc00broo`, with no year in its id, is part 1 of 1912.
+- **Duplicates show as identical ranges** — Trow 1903 p2 / `19032trow`, 1907 p3 / `19073trow`,
+  1914 p2 / `19142trow`; Brooklyn 1903 `1903p1geor` / `c19031geor`, 1906 `c00geor` / `c19062geor`.
+- **Second alphabets are real structure.** Brooklyn 1855–57 carry two full alphabets. 1856BPL heads
+  its first "WESTERN DISTRICT", so the second is presumably the Eastern. Every Trow p3
+  1903–1912 ends in a **street directory** ("BOROUGH OF MANHATTAN … from 209 Bleecker … Left.
+  Rt."). 1879BPL, 1911p1 and 1914p1 open with "NAMES TOO LATE FOR INSERTION".
+- ⚠️ **`trowsgeneraldire1853trow` is not a Trow general directory.** Its title page, read in
+  Phase 0, is **WILSON'S BUSINESS DIRECTORY … NEW-YORK**, the same catalog error as the 1913 set.
+  Its "listing" was 27 leaves of 948. Not stamped `not-residential`; it wants one look.
+
+**The empty-leaf question is answered: scanner artefacts, not lost text.** 68 volumes put an empty
+leaf between every page (the whole ABBYY-8 Trow/Brooklyn family, Longworth, Flushing) — the "~2×
+`imagecount`" item. Consecutive *text* leaves print consecutive folios (`trowsgeneraldir1904p1trow`
+411, 413, 417 → 151, `151!`, `1B4`), so nothing is missing, and pages must be counted over text
+leaves.
+
+**`pages` → `folios` + `book_says.start_page` / `end_page`.** `survey_folios.py` is the tier-C/D
+reader this plan promised. It takes margin numbers, a piecewise-constant fit over text leaves, and
+`read` / `inferred` per leaf. It never extrapolates past its first or last read.
+
+| calibration against IA's READ numbers (conf ≥ 90), 85 volumes | |
+|---|---:|
+| leaves where the leaf's own margin shows the fitted number | **99.5%** agree |
+| leaves filled between reads (`inferred`) | 98.0% agree |
+
+⚠️ **The calibration found IA wrong, at confidence 100, on a tier-A volume.** 1904BPL sets
+`pageNumber = leafNum` on 381 leaves whose own margins print otherwise (leaf 10 prints 22, leaf
+612 prints 604), while IA's own `ocr_value` shows the tokens it actually saw — `['1904', '317',
+'3004']`, a year, a street number, a phone number. Tier A was never a guarantee. Also, IA derives
+its numbers from **this same OCR**, so "two independent detectors" overstated it: two readers of
+one text.
+
+**The OCR drops or mangles a folio's leading digit**, and a few truncated folios in a row fit a
+sequence of their own: `brooklynnewyorkc1912broo` reads 120…153 where its main run continues to 1153,
+and `trowsgeneraldir1911p1trow` "ends" on `003` (603). The first run graded those `high`. A claim now
+drops to `low` on a **sequence break** or an **end page below the listing's own text-leaf count**,
+and `high` needs a sequence read on ≥ 10 leaves.
+
+**Cross-volume check, not tuned for:** the Brooklyn parts join exactly — 1904 p1 ends p.558 and
+part 2 starts p.559; 1909 582→583; 1912 625→626 and 1153→1154 (1154 + 367 text pages = the p3
+claim of 1521, exactly). The single-volume BPL scans end on the **same page** as the two-part
+`geor` sets (1903 p.1054, 1907 p.1089, 1908 p.1107), so they are the same edition. Where both
+claims exist, `end − start + 1` matches the listing's text leaves to 0.97–1.00.
+
+| claims | high | medium | low | none |
+|---|---:|---:|---:|---:|
+| `start_page` | 27 | 11 | 37 | 109 |
+| `end_page` | 56 | 9 | 23 | 96 |
+
+84 volumes carry at least one CSV-grade (high/medium) claim, which would fill **37 `start_page`
+and 65 `end_page` cells, all empty today**. One conflict: `merceinscitydire00merc` CSV 105 vs
+**106**. Leaf 104 prints "106 / MERCEIN'S / Acbeson Hugh, cartman", and the page before is an ad,
+so the CSV is one page early. **Not written.** `apply_survey.py` still lists all three columns as
+`FORBIDDEN`, and lifting that is a decision, not a side effect.
+
+Why so many `none` on `start_page`: a listing's opening page often prints no folio (caption title,
+legend). For 39 volumes the first read is 1–3 leaves after the start, and the rule above forbids
+extrapolating it — **one image each settles them**, which is exactly the Phase-3 shape. 20
+volumes fit no folios at all (ABBYY-8 drops most of them).
+
+Leads, unbuilt: **guide words** — listing running heads print their alphabetic range ("ALE—ALL",
+"BEE—BEG"), a second listing detector independent of the sort-key vote; a **leading-digit
+repair** for folios, which would lift the ABBYY-8 tier; and a heading-based section inventory to
+name the sections the alphabets found. Three volumes ship no `_page_numbers.json` at all
+(`longworthsameric1798newy`, `micro_IABROOKLYN_0015`, `trowsgeneraldir1909p3trow`), against the
+census's "every IA item".
+
+#### The original design
+
 Per volume, from the JSONL + pageindex + `_page_numbers.json`:
 
 - `detect_listing_bounds --from-jsonl` → start/end leaf, letter blocks, gaps, order violations,

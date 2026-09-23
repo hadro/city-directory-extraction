@@ -22,6 +22,21 @@
    "quote": "NEW-YORK REGISTER / American / of the U. States, except teas, China ware, and / ail other articles liable to higher duties / Goods, warts, and merchandize, intended to U / exported to a foreign port o",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 105,
+   "leaf": 109,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric2618long$109/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric2618long$109/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 109; page 105 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 4,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -315,7 +330,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 109,
   "end_leaf": 324,
   "first_letter": "A",
@@ -499,5 +514,55 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 326,
+  "fitted_leaves": 282,
+  "read_leaves": 94,
+  "segments": [
+   {
+    "first_leaf": 11,
+    "last_leaf": 15,
+    "first_page": 1,
+    "last_page": 5,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 19,
+    "last_leaf": 24,
+    "first_page": 1,
+    "last_page": 6,
+    "leaves": 6,
+    "read": 4
+   },
+   {
+    "first_leaf": 26,
+    "last_leaf": 254,
+    "first_page": 22,
+    "last_page": 250,
+    "leaves": 229,
+    "read": 78
+   },
+   {
+    "first_leaf": 256,
+    "last_leaf": 297,
+    "first_page": 52,
+    "last_page": 93,
+    "leaves": 42,
+    "read": 8
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 39,
+   "both": 38,
+   "agree": 37,
+   "agree_rate": 0.974,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

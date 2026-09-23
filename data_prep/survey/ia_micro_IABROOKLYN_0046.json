@@ -375,7 +375,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 17,
   "end_leaf": 246,
   "first_letter": "A",
@@ -633,5 +633,127 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 254,
+  "fitted_leaves": 110,
+  "read_leaves": 62,
+  "segments": [
+   {
+    "first_leaf": 62,
+    "last_leaf": 65,
+    "first_page": 61,
+    "last_page": 64,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 68,
+    "last_leaf": 74,
+    "first_page": 67,
+    "last_page": 72,
+    "leaves": 6,
+    "read": 6
+   },
+   {
+    "first_leaf": 76,
+    "last_leaf": 82,
+    "first_page": 72,
+    "last_page": 78,
+    "leaves": 7,
+    "read": 6
+   },
+   {
+    "first_leaf": 96,
+    "last_leaf": 108,
+    "first_page": 92,
+    "last_page": 104,
+    "leaves": 13,
+    "read": 4
+   },
+   {
+    "first_leaf": 116,
+    "last_leaf": 121,
+    "first_page": 112,
+    "last_page": 117,
+    "leaves": 6,
+    "read": 5
+   },
+   {
+    "first_leaf": 135,
+    "last_leaf": 143,
+    "first_page": 131,
+    "last_page": 139,
+    "leaves": 9,
+    "read": 6
+   },
+   {
+    "first_leaf": 168,
+    "last_leaf": 170,
+    "first_page": 163,
+    "last_page": 165,
+    "leaves": 3,
+    "read": 3
+   },
+   {
+    "first_leaf": 186,
+    "last_leaf": 193,
+    "first_page": 181,
+    "last_page": 188,
+    "leaves": 8,
+    "read": 5
+   },
+   {
+    "first_leaf": 200,
+    "last_leaf": 208,
+    "first_page": 196,
+    "last_page": 203,
+    "leaves": 8,
+    "read": 3
+   },
+   {
+    "first_leaf": 221,
+    "last_leaf": 234,
+    "first_page": 216,
+    "last_page": 228,
+    "leaves": 13,
+    "read": 8
+   },
+   {
+    "first_leaf": 264,
+    "last_leaf": 273,
+    "first_page": 4,
+    "last_page": 13,
+    "leaves": 10,
+    "read": 6
+   },
+   {
+    "first_leaf": 275,
+    "last_leaf": 281,
+    "first_page": 15,
+    "last_page": 21,
+    "leaves": 7,
+    "read": 3
+   },
+   {
+    "first_leaf": 290,
+    "last_leaf": 307,
+    "first_page": 31,
+    "last_page": 46,
+    "leaves": 16,
+    "read": 4
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 21,
+   "both": 17,
+   "agree": 17,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

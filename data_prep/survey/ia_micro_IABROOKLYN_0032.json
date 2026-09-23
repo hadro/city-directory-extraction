@@ -65,6 +65,40 @@
     "year_covered"
    ],
    "note": "target card leaf 1. Confirms the catalog. 'Thirteenth Annual' for 1854-55 is consistent with 0029's 'Tenth' for 1851-52 -- the series began 1842."
+  },
+  "end_page": {
+   "value": 567,
+   "leaf": 578,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$578/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$578/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 578; page 567 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": 567,
+   "page_offset": 11,
+   "listing_flags": [
+    "edge-disagreement"
+   ],
+   "doubts": []
+  },
+  "start_page": {
+   "value": 15,
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$19/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$19/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 19; page 15 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": 15,
+   "page_offset": 4,
+   "listing_flags": [
+    "edge-disagreement"
+   ],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -364,7 +398,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 19,
   "end_leaf": 578,
   "first_letter": "A",
@@ -672,5 +706,175 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 606,
+  "fitted_leaves": 492,
+  "read_leaves": 243,
+  "segments": [
+   {
+    "first_leaf": 3,
+    "last_leaf": 71,
+    "first_page": 0,
+    "last_page": 67,
+    "leaves": 68,
+    "read": 33
+   },
+   {
+    "first_leaf": 79,
+    "last_leaf": 91,
+    "first_page": 74,
+    "last_page": 86,
+    "leaves": 13,
+    "read": 6
+   },
+   {
+    "first_leaf": 111,
+    "last_leaf": 160,
+    "first_page": 106,
+    "last_page": 154,
+    "leaves": 49,
+    "read": 29
+   },
+   {
+    "first_leaf": 176,
+    "last_leaf": 340,
+    "first_page": 170,
+    "last_page": 332,
+    "leaves": 163,
+    "read": 69
+   },
+   {
+    "first_leaf": 346,
+    "last_leaf": 362,
+    "first_page": 338,
+    "last_page": 354,
+    "leaves": 17,
+    "read": 13
+   },
+   {
+    "first_leaf": 371,
+    "last_leaf": 374,
+    "first_page": 362,
+    "last_page": 365,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 380,
+    "last_leaf": 384,
+    "first_page": 0,
+    "last_page": 4,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 386,
+    "last_leaf": 390,
+    "first_page": 377,
+    "last_page": 381,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 404,
+    "last_leaf": 410,
+    "first_page": 395,
+    "last_page": 401,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 416,
+    "last_leaf": 435,
+    "first_page": 407,
+    "last_page": 426,
+    "leaves": 20,
+    "read": 11
+   },
+   {
+    "first_leaf": 447,
+    "last_leaf": 461,
+    "first_page": 437,
+    "last_page": 451,
+    "leaves": 15,
+    "read": 4
+   },
+   {
+    "first_leaf": 474,
+    "last_leaf": 490,
+    "first_page": 464,
+    "last_page": 480,
+    "leaves": 17,
+    "read": 8
+   },
+   {
+    "first_leaf": 492,
+    "last_leaf": 509,
+    "first_page": 482,
+    "last_page": 499,
+    "leaves": 18,
+    "read": 9
+   },
+   {
+    "first_leaf": 513,
+    "last_leaf": 518,
+    "first_page": 3,
+    "last_page": 7,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 553,
+    "last_leaf": 555,
+    "first_page": 542,
+    "last_page": 544,
+    "leaves": 3,
+    "read": 3
+   },
+   {
+    "first_leaf": 557,
+    "last_leaf": 563,
+    "first_page": 546,
+    "last_page": 552,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 567,
+    "last_leaf": 587,
+    "first_page": 556,
+    "last_page": 575,
+    "leaves": 20,
+    "read": 13
+   },
+   {
+    "first_leaf": 590,
+    "last_leaf": 612,
+    "first_page": 578,
+    "last_page": 600,
+    "leaves": 23,
+    "read": 4
+   },
+   {
+    "first_leaf": 618,
+    "last_leaf": 650,
+    "first_page": 606,
+    "last_page": 638,
+    "leaves": 33,
+    "read": 21
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 172,
+   "both": 151,
+   "agree": 151,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

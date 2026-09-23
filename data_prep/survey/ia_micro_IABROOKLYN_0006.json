@@ -49,6 +49,38 @@
    "confidence": "medium",
    "gloss_lines": 0,
    "legend_location": "inline-at-listing-head"
+  },
+  "start_page": {
+   "value": 3,
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0006$6/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0006$6/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 6; page 3 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 3,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 4 leaves"
+   ]
+  },
+  "end_page": {
+   "value": 65,
+   "leaf": 66,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0006$66/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0006$66/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'65' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": 65,
+   "page_offset": 1,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -340,7 +372,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 6,
   "end_leaf": 66,
   "first_letter": "A",
@@ -486,5 +518,39 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 86,
+  "fitted_leaves": 70,
+  "read_leaves": 41,
+  "segments": [
+   {
+    "first_leaf": 5,
+    "last_leaf": 12,
+    "first_page": 2,
+    "last_page": 9,
+    "leaves": 8,
+    "read": 4
+   },
+   {
+    "first_leaf": 17,
+    "last_leaf": 79,
+    "first_page": 16,
+    "last_page": 77,
+    "leaves": 62,
+    "read": 37
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 21,
+   "both": 20,
+   "agree": 18,
+   "agree_rate": 0.9,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

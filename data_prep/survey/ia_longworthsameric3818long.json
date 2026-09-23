@@ -41,6 +41,36 @@
    "quote": "LONGWORTH'S / NEW- YORK ALMANAC, / FOR THE / YEAR OF OUR LORD,",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 49,
+   "leaf": 61,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric3818long$61/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric3818long$61/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 61; page 49 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 12,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 345,
+   "leaf": 357,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric3818long$357/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric3818long$357/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 357; page 345 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 12,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -332,7 +362,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 61,
   "end_leaf": 357,
   "first_letter": "A",
@@ -498,5 +528,47 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 349,
+  "fitted_leaves": 337,
+  "read_leaves": 197,
+  "segments": [
+   {
+    "first_leaf": 19,
+    "last_leaf": 23,
+    "first_page": 27,
+    "last_page": 31,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 24,
+    "last_leaf": 30,
+    "first_page": 22,
+    "last_page": 28,
+    "leaves": 7,
+    "read": 7
+   },
+   {
+    "first_leaf": 34,
+    "last_leaf": 358,
+    "first_page": 22,
+    "last_page": 346,
+    "leaves": 325,
+    "read": 186
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 128,
+   "both": 128,
+   "agree": 128,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

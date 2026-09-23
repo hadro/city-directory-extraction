@@ -113,6 +113,21 @@
     "year_published"
    ],
    "note": "Title page leaf 7, librarian's red 'pt. 1'. The FOURTH IA item for the 1912 Brooklyn City Directory, VOLUME LXXXVIII -- same 'There was no edition of this book published for the year 1911' line, same manuscript accession 4648, same call number 10650-14 as the other three. So the set is four IA items covering THREE parts, one of which (pt. 3) is the duplicate pair."
+  },
+  "end_page": {
+   "value": 625,
+   "leaf": 1079,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$1079/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$1079/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'625' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 454,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -412,7 +427,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 15,
   "end_leaf": 1079,
   "first_letter": "A",
@@ -564,5 +579,31 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 540,
+  "fitted_leaves": 524,
+  "read_leaves": 379,
+  "segments": [
+   {
+    "first_leaf": 17,
+    "last_leaf": 1079,
+    "first_page": 102,
+    "last_page": 625,
+    "leaves": 524,
+    "read": 379
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

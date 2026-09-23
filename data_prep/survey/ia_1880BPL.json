@@ -332,7 +332,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 21,
   "end_leaf": 1178,
   "first_letter": "A",
@@ -551,5 +551,135 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 1420,
+  "fitted_leaves": 1022,
+  "read_leaves": 394,
+  "segments": [
+   {
+    "first_leaf": 22,
+    "last_leaf": 123,
+    "first_page": 0,
+    "last_page": 101,
+    "leaves": 102,
+    "read": 14
+   },
+   {
+    "first_leaf": 133,
+    "last_leaf": 207,
+    "first_page": 103,
+    "last_page": 177,
+    "leaves": 75,
+    "read": 19
+   },
+   {
+    "first_leaf": 211,
+    "last_leaf": 223,
+    "first_page": 179,
+    "last_page": 191,
+    "leaves": 13,
+    "read": 3
+   },
+   {
+    "first_leaf": 235,
+    "last_leaf": 455,
+    "first_page": 201,
+    "last_page": 421,
+    "leaves": 221,
+    "read": 50
+   },
+   {
+    "first_leaf": 459,
+    "last_leaf": 499,
+    "first_page": 423,
+    "last_page": 463,
+    "leaves": 41,
+    "read": 12
+   },
+   {
+    "first_leaf": 517,
+    "last_leaf": 529,
+    "first_page": 479,
+    "last_page": 491,
+    "leaves": 13,
+    "read": 5
+   },
+   {
+    "first_leaf": 542,
+    "last_leaf": 606,
+    "first_page": 499,
+    "last_page": 563,
+    "leaves": 65,
+    "read": 16
+   },
+   {
+    "first_leaf": 840,
+    "last_leaf": 920,
+    "first_page": 787,
+    "last_page": 867,
+    "leaves": 81,
+    "read": 16
+   },
+   {
+    "first_leaf": 971,
+    "last_leaf": 983,
+    "first_page": 917,
+    "last_page": 929,
+    "leaves": 13,
+    "read": 4
+   },
+   {
+    "first_leaf": 989,
+    "last_leaf": 1007,
+    "first_page": 933,
+    "last_page": 951,
+    "leaves": 19,
+    "read": 6
+   },
+   {
+    "first_leaf": 1029,
+    "last_leaf": 1175,
+    "first_page": 971,
+    "last_page": 1117,
+    "leaves": 147,
+    "read": 35
+   },
+   {
+    "first_leaf": 1182,
+    "last_leaf": 1197,
+    "first_page": 2,
+    "last_page": 17,
+    "leaves": 16,
+    "read": 14
+   },
+   {
+    "first_leaf": 1206,
+    "last_leaf": 1386,
+    "first_page": 2,
+    "last_page": 182,
+    "leaves": 181,
+    "read": 167
+   },
+   {
+    "first_leaf": 1388,
+    "last_leaf": 1422,
+    "first_page": 2,
+    "last_page": 36,
+    "leaves": 35,
+    "read": 33
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 12,
+   "both": 11,
+   "agree": 9,
+   "agree_rate": 0.818,
+   "ia_page_equals_leaf": 0.08
+  },
+  "flags": []
  }
 }

@@ -30,6 +30,40 @@
    "quote": "WILSON'S / BUSINESS DIRECTORY / NJKW-Y.OKK / C3 / :ty. / < / -. / \"\"^S, / ') 1 / NEW-YORK :",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 164,
+   "leaf": 417,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire1853trow$417/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1853trow$417/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'164' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 253,
+   "listing_flags": [
+    "small-listing"
+   ],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 190,
+   "leaf": 469,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire1853trow$469/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1853trow$469/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'190' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 279,
+   "listing_flags": [
+    "small-listing"
+   ],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -316,7 +350,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 417,
   "end_leaf": 469,
   "first_letter": "B",
@@ -325,7 +359,8 @@
   "missing_letters": "AIJNOQUVXYZ",
   "voting_density": 0.491,
   "flags": [
-   "multi-section"
+   "multi-section",
+   "small-listing"
   ],
   "start": {
    "leaf": 417,
@@ -602,5 +637,71 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 472,
+  "fitted_leaves": 405,
+  "read_leaves": 313,
+  "segments": [
+   {
+    "first_leaf": 87,
+    "last_leaf": 273,
+    "first_page": 1,
+    "last_page": 94,
+    "leaves": 94,
+    "read": 75
+   },
+   {
+    "first_leaf": 281,
+    "last_leaf": 503,
+    "first_page": 96,
+    "last_page": 207,
+    "leaves": 112,
+    "read": 94
+   },
+   {
+    "first_leaf": 511,
+    "last_leaf": 807,
+    "first_page": 209,
+    "last_page": 353,
+    "leaves": 145,
+    "read": 111
+   },
+   {
+    "first_leaf": 817,
+    "last_leaf": 825,
+    "first_page": 356,
+    "last_page": 360,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 837,
+    "last_leaf": 873,
+    "first_page": 364,
+    "last_page": 382,
+    "leaves": 19,
+    "read": 14
+   },
+   {
+    "first_leaf": 881,
+    "last_leaf": 939,
+    "first_page": 384,
+    "last_page": 413,
+    "leaves": 30,
+    "read": 15
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 2,
+   "both": 2,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

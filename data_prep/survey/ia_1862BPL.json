@@ -53,6 +53,38 @@
    "confidence": "medium",
    "gloss_lines": 4,
    "legend_location": "dedicated-page"
+  },
+  "start_page": {
+   "value": 1,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/1862BPL$5/canvas",
+   "image": "https://iiif.archive.org/iiif/1862BPL$5/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'1' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 4,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 486,
+   "leaf": 508,
+   "canvas": "https://iiif.archive.org/iiif/1862BPL$508/canvas",
+   "image": "https://iiif.archive.org/iiif/1862BPL$508/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'486' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 22,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 6 leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -342,7 +374,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 5,
   "end_leaf": 508,
   "first_letter": "A",
@@ -550,5 +582,95 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 607,
+  "fitted_leaves": 571,
+  "read_leaves": 484,
+  "segments": [
+   {
+    "first_leaf": 5,
+    "last_leaf": 20,
+    "first_page": 1,
+    "last_page": 16,
+    "leaves": 16,
+    "read": 16
+   },
+   {
+    "first_leaf": 24,
+    "last_leaf": 234,
+    "first_page": 18,
+    "last_page": 224,
+    "leaves": 207,
+    "read": 174
+   },
+   {
+    "first_leaf": 238,
+    "last_leaf": 491,
+    "first_page": 226,
+    "last_page": 469,
+    "leaves": 244,
+    "read": 208
+   },
+   {
+    "first_leaf": 493,
+    "last_leaf": 501,
+    "first_page": 411,
+    "last_page": 419,
+    "leaves": 9,
+    "read": 6
+   },
+   {
+    "first_leaf": 503,
+    "last_leaf": 508,
+    "first_page": 481,
+    "last_page": 486,
+    "leaves": 6,
+    "read": 6
+   },
+   {
+    "first_leaf": 511,
+    "last_leaf": 546,
+    "first_page": 1,
+    "last_page": 36,
+    "leaves": 36,
+    "read": 31
+   },
+   {
+    "first_leaf": 551,
+    "last_leaf": 580,
+    "first_page": 1,
+    "last_page": 30,
+    "leaves": 30,
+    "read": 26
+   },
+   {
+    "first_leaf": 583,
+    "last_leaf": 596,
+    "first_page": 20,
+    "last_page": 33,
+    "leaves": 14,
+    "read": 12
+   },
+   {
+    "first_leaf": 599,
+    "last_leaf": 607,
+    "first_page": 3,
+    "last_page": 11,
+    "leaves": 9,
+    "read": 5
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 12,
+   "both": 12,
+   "agree": 12,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

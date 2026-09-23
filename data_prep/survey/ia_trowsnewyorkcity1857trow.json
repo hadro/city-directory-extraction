@@ -63,6 +63,21 @@
    "confidence": "medium",
    "gloss_lines": 0,
    "legend_location": "inline-at-listing-head"
+  },
+  "end_page": {
+   "value": 911,
+   "leaf": 919,
+   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1857trow$919/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1857trow$919/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'911' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 8,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -353,7 +368,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 23,
   "end_leaf": 919,
   "first_letter": "A",
@@ -534,5 +549,63 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 1046,
+  "fitted_leaves": 1019,
+  "read_leaves": 941,
+  "segments": [
+   {
+    "first_leaf": 10,
+    "last_leaf": 17,
+    "first_page": 4,
+    "last_page": 10,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 24,
+    "last_leaf": 919,
+    "first_page": 22,
+    "last_page": 911,
+    "leaves": 890,
+    "read": 849
+   },
+   {
+    "first_leaf": 925,
+    "last_leaf": 962,
+    "first_page": 1,
+    "last_page": 38,
+    "leaves": 38,
+    "read": 22
+   },
+   {
+    "first_leaf": 966,
+    "last_leaf": 1038,
+    "first_page": 2,
+    "last_page": 74,
+    "leaves": 73,
+    "read": 63
+   },
+   {
+    "first_leaf": 1040,
+    "last_leaf": 1050,
+    "first_page": 1,
+    "last_page": 11,
+    "leaves": 11,
+    "read": 3
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 447,
+   "both": 447,
+   "agree": 447,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

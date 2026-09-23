@@ -102,6 +102,36 @@
     "year_covered"
    ],
    "note": "THE 1786/1851 TANGLE IS BOTH-RIGHT, not a conflict. Title page leaf 11: 'THE NEW-YORK DIRECTORY, CONTAINING, A Valuable and well Calculated ALMANACK ... BY DAVID FRANKS. NEW-YORK: Printed by SHEPARD KOLLOCK, corner of Wall and Water Streets, M, DCC, LXXX, VI.' -- and then, below a rule, 'REPUBLISHED BY JOHN DOGGETT Jr., 59 LIBERTY STREET, NEW YORK, 1851.' The WORK is Franks' 1786 directory; 1851 is Doggett's facsimile reprint. The catalog's 1786 is right about the work and phase 0b's 1851 is right about the artefact. Confirms the plan's note on the fran/_0 pair, with a different reprint house and date. NOTE THE DATE FORM: the original year is set in ROMAN NUMERALS (M, DCC, LXXX, VI), which YEAR_DIGITS cannot see at all -- a fourth attestation channel alongside digits, spelled-out words and the regnal formula."
+  },
+  "start_page": {
+   "value": 20,
+   "leaf": 30,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$30/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$30/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 30; page 20 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 10,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 52,
+   "leaf": 62,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$62/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$62/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'52' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 10,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -396,7 +426,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 30,
   "end_leaf": 62,
   "first_letter": "A",
@@ -537,5 +567,31 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 86,
+  "fitted_leaves": 80,
+  "read_leaves": 66,
+  "segments": [
+   {
+    "first_leaf": 13,
+    "last_leaf": 92,
+    "first_page": 3,
+    "last_page": 82,
+    "leaves": 80,
+    "read": 66
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

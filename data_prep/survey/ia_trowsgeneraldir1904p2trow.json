@@ -84,6 +84,23 @@
     "year_published"
    ],
    "note": "Title page leaf 7, librarian's red 'pt. 2'. GENERAL (residential) directory, VOL. CXVII for the year ending July 1 1904, copyright 1903."
+  },
+  "end_page": {
+   "value": 1104,
+   "leaf": 1137,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$1137/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p2trow$1137/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 1137; page 1104 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 33,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 7 leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -381,7 +398,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 9,
   "end_leaf": 1137,
   "first_letter": "H",
@@ -575,5 +592,87 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 568,
+  "fitted_leaves": 524,
+  "read_leaves": 131,
+  "segments": [
+   {
+    "first_leaf": 25,
+    "last_leaf": 103,
+    "first_page": 549,
+    "last_page": 588,
+    "leaves": 40,
+    "read": 10
+   },
+   {
+    "first_leaf": 127,
+    "last_leaf": 297,
+    "first_page": 0,
+    "last_page": 85,
+    "leaves": 86,
+    "read": 16
+   },
+   {
+    "first_leaf": 301,
+    "last_leaf": 685,
+    "first_page": 687,
+    "last_page": 878,
+    "leaves": 192,
+    "read": 42
+   },
+   {
+    "first_leaf": 693,
+    "last_leaf": 713,
+    "first_page": 1,
+    "last_page": 11,
+    "leaves": 11,
+    "read": 3
+   },
+   {
+    "first_leaf": 729,
+    "last_leaf": 897,
+    "first_page": 0,
+    "last_page": 84,
+    "leaves": 85,
+    "read": 28
+   },
+   {
+    "first_leaf": 913,
+    "last_leaf": 1043,
+    "first_page": 992,
+    "last_page": 1057,
+    "leaves": 66,
+    "read": 20
+   },
+   {
+    "first_leaf": 1051,
+    "last_leaf": 1059,
+    "first_page": 1001,
+    "last_page": 1005,
+    "leaves": 5,
+    "read": 5
+   },
+   {
+    "first_leaf": 1063,
+    "last_leaf": 1139,
+    "first_page": 1067,
+    "last_page": 1105,
+    "leaves": 39,
+    "read": 7
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 1,
+   "both": 1,
+   "agree": 1,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

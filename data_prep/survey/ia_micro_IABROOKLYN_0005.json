@@ -85,6 +85,36 @@
     "year"
    ],
    "note": "UNIT SUSPECT RESOLVED as a coincidence. Leaf 5 is the caption-title page -- 'BROOKLYN DIRECTORY. 1826.' + the N.B. legend + the A listings -- and IA reads leaf 6 as printed page 6, leaf 8 as 8 and leaf 9 as 9 at real confidence (68-79), so leaf number equals printed page in this volume and leaf 5 IS printed page 5. The '2' centred at its foot is a signature mark, not a folio -- the same trap as hearnesbrooklync1852unse leaf 27. So the CSV's key_page=5 is correct as a printed page and merely happens to equal the leaf."
+  },
+  "start_page": {
+   "value": 5,
+   "leaf": 5,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 5; page 5 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 0,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 60,
+   "leaf": 60,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$60/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$60/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'60' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 0,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -376,7 +406,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 5,
   "end_leaf": 60,
   "first_letter": "A",
@@ -517,5 +547,31 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 78,
+  "fitted_leaves": 67,
+  "read_leaves": 30,
+  "segments": [
+   {
+    "first_leaf": 4,
+    "last_leaf": 70,
+    "first_page": 4,
+    "last_page": 70,
+    "leaves": 67,
+    "read": 30
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 9,
+   "both": 9,
+   "agree": 9,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 1.0
+  },
+  "flags": []
  }
 }

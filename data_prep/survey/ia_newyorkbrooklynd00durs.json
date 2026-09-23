@@ -51,6 +51,38 @@
    "quote": "THE / NEW-YORK DIRECTORY",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 11,
+   "leaf": 28,
+   "canvas": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$28/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$28/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'11,' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 17,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 9 leaves"
+   ]
+  },
+  "end_page": {
+   "value": 52,
+   "leaf": 60,
+   "canvas": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$60/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkbrooklynd00durs$60/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 60; page 52 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 8,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -338,7 +370,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 28,
   "end_leaf": 60,
   "first_letter": "A",
@@ -474,5 +506,47 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 100,
+  "fitted_leaves": 96,
+  "read_leaves": 67,
+  "segments": [
+   {
+    "first_leaf": 11,
+    "last_leaf": 18,
+    "first_page": 0,
+    "last_page": 7,
+    "leaves": 8,
+    "read": 8
+   },
+   {
+    "first_leaf": 19,
+    "last_leaf": 28,
+    "first_page": 2,
+    "last_page": 11,
+    "leaves": 10,
+    "read": 9
+   },
+   {
+    "first_leaf": 29,
+    "last_leaf": 106,
+    "first_page": 21,
+    "last_page": 98,
+    "leaves": 78,
+    "read": 50
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

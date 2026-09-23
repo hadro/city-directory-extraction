@@ -79,6 +79,23 @@
    "confidence": "medium",
    "gloss_lines": 19,
    "legend_location": "dedicated-page"
+  },
+  "end_page": {
+   "value": 1016,
+   "leaf": 1054,
+   "canvas": "https://iiif.archive.org/iiif/1902BPL$1054/canvas",
+   "image": "https://iiif.archive.org/iiif/1902BPL$1054/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'1016' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 38,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 8 leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -369,7 +386,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 15,
   "end_leaf": 1054,
   "first_letter": "A",
@@ -640,5 +657,111 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 1090,
+  "fitted_leaves": 1044,
+  "read_leaves": 958,
+  "segments": [
+   {
+    "first_leaf": 1,
+    "last_leaf": 6,
+    "first_page": 1,
+    "last_page": 6,
+    "leaves": 6,
+    "read": 3
+   },
+   {
+    "first_leaf": 17,
+    "last_leaf": 613,
+    "first_page": 3,
+    "last_page": 577,
+    "leaves": 575,
+    "read": 526
+   },
+   {
+    "first_leaf": 615,
+    "last_leaf": 711,
+    "first_page": 579,
+    "last_page": 673,
+    "leaves": 95,
+    "read": 91
+   },
+   {
+    "first_leaf": 713,
+    "last_leaf": 743,
+    "first_page": 675,
+    "last_page": 705,
+    "leaves": 31,
+    "read": 28
+   },
+   {
+    "first_leaf": 746,
+    "last_leaf": 759,
+    "first_page": 708,
+    "last_page": 721,
+    "leaves": 14,
+    "read": 14
+   },
+   {
+    "first_leaf": 761,
+    "last_leaf": 771,
+    "first_page": 723,
+    "last_page": 733,
+    "leaves": 11,
+    "read": 10
+   },
+   {
+    "first_leaf": 773,
+    "last_leaf": 853,
+    "first_page": 735,
+    "last_page": 815,
+    "leaves": 81,
+    "read": 75
+   },
+   {
+    "first_leaf": 855,
+    "last_leaf": 1031,
+    "first_page": 817,
+    "last_page": 993,
+    "leaves": 177,
+    "read": 161
+   },
+   {
+    "first_leaf": 1033,
+    "last_leaf": 1045,
+    "first_page": 995,
+    "last_page": 1007,
+    "leaves": 13,
+    "read": 13
+   },
+   {
+    "first_leaf": 1047,
+    "last_leaf": 1054,
+    "first_page": 1009,
+    "last_page": 1016,
+    "leaves": 8,
+    "read": 8
+   },
+   {
+    "first_leaf": 1063,
+    "last_leaf": 1095,
+    "first_page": 1,
+    "last_page": 33,
+    "leaves": 33,
+    "read": 29
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 7,
+   "both": 7,
+   "agree": 6,
+   "agree_rate": 0.857,
+   "ia_page_equals_leaf": 0.43
+  },
+  "flags": []
  }
 }

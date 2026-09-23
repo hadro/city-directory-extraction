@@ -56,6 +56,21 @@
    "ia_leaf_confidence": null,
    "volume_monotone_breaks": 0,
    "volume_numbered_leaves": 323
+  },
+  "start_page": {
+   "value": 13,
+   "leaf": 21,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0023$21/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0023$21/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 21; page 13 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 8,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -349,7 +364,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 21,
   "end_leaf": 279,
   "first_letter": "A",
@@ -529,5 +544,31 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 337,
+  "fitted_leaves": 191,
+  "read_leaves": 43,
+  "segments": [
+   {
+    "first_leaf": 18,
+    "last_leaf": 210,
+    "first_page": 10,
+    "last_page": 200,
+    "leaves": 191,
+    "read": 43
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 9,
+   "both": 7,
+   "agree": 7,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

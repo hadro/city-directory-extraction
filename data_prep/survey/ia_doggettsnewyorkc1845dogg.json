@@ -116,6 +116,36 @@
     "year_covered"
    ],
    "note": "THE TITLE PAGE STATES ITS OWN ENTRY COUNT: 'CONTAINS SIXTY-ONE THOUSAND THREE HUNDRED & THIRTY-THREE NAMES.' A printed ground-truth denominator, which is exactly what entry_rate has never had. Also 'Fourth Publication'."
+  },
+  "end_page": {
+   "value": 407,
+   "leaf": 423,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$423/canvas",
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$423/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'407' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 16,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "start_page": {
+   "value": 13,
+   "leaf": 19,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$19/canvas",
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$19/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 19; page 13 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 6,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -416,7 +446,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 19,
   "end_leaf": 423,
   "first_letter": "A",
@@ -587,5 +617,47 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 478,
+  "fitted_leaves": 442,
+  "read_leaves": 397,
+  "segments": [
+   {
+    "first_leaf": 11,
+    "last_leaf": 145,
+    "first_page": 5,
+    "last_page": 135,
+    "leaves": 131,
+    "read": 109
+   },
+   {
+    "first_leaf": 149,
+    "last_leaf": 452,
+    "first_page": 137,
+    "last_page": 434,
+    "leaves": 298,
+    "read": 275
+   },
+   {
+    "first_leaf": 467,
+    "last_leaf": 479,
+    "first_page": 3,
+    "last_page": 15,
+    "leaves": 13,
+    "read": 13
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 12,
+   "both": 11,
+   "agree": 11,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

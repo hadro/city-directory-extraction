@@ -7,6 +7,36 @@
    "by": "agent-read",
    "found": [],
    "note": "NEGATIVE, recorded so the candidate is not re-offered. Leaf 7 is a TORN index page photographed at an angle with the book open, stamped 'REMOVED FROM THE LIBRARY'; a large piece of the leaf is missing. Leaf 22, the phase-0 candidate, is a listings page that produced the false year 1801 ('R 1801 - A. E. Humphrey, Sec.'), now suppressed by YEAR_VETO. This is the corpus's largest volume (1588 MB hOCR, 2480 leaves) and its front matter is physically damaged, so its bibliography needs a targeted search rather than the standard candidates."
+  },
+  "start_page": {
+   "value": 231,
+   "leaf": 213,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$213/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$213/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'231' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": 231,
+   "page_offset": -18,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 2088,
+   "leaf": 2070,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$2070/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$2070/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'2088' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": 2088,
+   "page_offset": -18,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "needs-image-read",
@@ -304,7 +334,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 213,
   "end_leaf": 2070,
   "first_letter": "A",
@@ -671,5 +701,111 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 2476,
+  "fitted_leaves": 2455,
+  "read_leaves": 2126,
+  "segments": [
+   {
+    "first_leaf": 12,
+    "last_leaf": 97,
+    "first_page": 14,
+    "last_page": 97,
+    "leaves": 84,
+    "read": 69
+   },
+   {
+    "first_leaf": 98,
+    "last_leaf": 154,
+    "first_page": 100,
+    "last_page": 156,
+    "leaves": 57,
+    "read": 53
+   },
+   {
+    "first_leaf": 155,
+    "last_leaf": 202,
+    "first_page": 159,
+    "last_page": 206,
+    "leaves": 48,
+    "read": 47
+   },
+   {
+    "first_leaf": 204,
+    "last_leaf": 209,
+    "first_page": 208,
+    "last_page": 213,
+    "leaves": 6,
+    "read": 6
+   },
+   {
+    "first_leaf": 211,
+    "last_leaf": 337,
+    "first_page": 229,
+    "last_page": 355,
+    "leaves": 127,
+    "read": 100
+   },
+   {
+    "first_leaf": 338,
+    "last_leaf": 2070,
+    "first_page": 358,
+    "last_page": 2088,
+    "leaves": 1731,
+    "read": 1558
+   },
+   {
+    "first_leaf": 2071,
+    "last_leaf": 2129,
+    "first_page": 2091,
+    "last_page": 2149,
+    "leaves": 59,
+    "read": 52
+   },
+   {
+    "first_leaf": 2131,
+    "last_leaf": 2308,
+    "first_page": 2153,
+    "last_page": 2330,
+    "leaves": 178,
+    "read": 136
+   },
+   {
+    "first_leaf": 2309,
+    "last_leaf": 2312,
+    "first_page": 2333,
+    "last_page": 2336,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 2313,
+    "last_leaf": 2326,
+    "first_page": 2339,
+    "last_page": 2352,
+    "leaves": 14,
+    "read": 9
+   },
+   {
+    "first_leaf": 2327,
+    "last_leaf": 2473,
+    "first_page": 2355,
+    "last_page": 2501,
+    "leaves": 147,
+    "read": 93
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 1971,
+   "both": 1970,
+   "agree": 1970,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

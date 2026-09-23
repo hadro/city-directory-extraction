@@ -76,6 +76,23 @@
     "year_published"
    ],
    "note": "Title page leaf 7, librarian's red 'pt. 1'. GENERAL (residential) directory. Same VOL. CXVII as trowsgeneraldir1904p2trow -- genuine parts. This also corrects phase 0b's title for this row, which read 'PURCHASERS' GUIDE AND COMMERCIAL REGISTER. ADVERTISING SIGNS. C. SCOTT FORENGTON THE SIGN MAN' -- an advertisement, not the volume's title."
+  },
+  "start_page": {
+   "value": 18,
+   "leaf": 141,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$141/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$141/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'18' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 123,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 6 leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -373,7 +390,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 141,
   "end_leaf": 1195,
   "first_letter": "A",
@@ -525,5 +542,63 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 593,
+  "fitted_leaves": 360,
+  "read_leaves": 133,
+  "segments": [
+   {
+    "first_leaf": 39,
+    "last_leaf": 123,
+    "first_page": 10,
+    "last_page": 52,
+    "leaves": 43,
+    "read": 37
+   },
+   {
+    "first_leaf": 139,
+    "last_leaf": 155,
+    "first_page": 17,
+    "last_page": 25,
+    "leaves": 9,
+    "read": 6
+   },
+   {
+    "first_leaf": 185,
+    "last_leaf": 563,
+    "first_page": 38,
+    "last_page": 227,
+    "leaves": 190,
+    "read": 49
+   },
+   {
+    "first_leaf": 649,
+    "last_leaf": 797,
+    "first_page": 271,
+    "last_page": 345,
+    "leaves": 75,
+    "read": 29
+   },
+   {
+    "first_leaf": 913,
+    "last_leaf": 997,
+    "first_page": 401,
+    "last_page": 443,
+    "leaves": 43,
+    "read": 12
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

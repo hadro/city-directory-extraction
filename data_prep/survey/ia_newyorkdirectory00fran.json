@@ -36,6 +36,36 @@
    "quote": "ffaoSimilc \"Keprint of ffiist Directory / THE / New York Directory / FOB",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 51,
+   "leaf": 83,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00fran$83/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran$83/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 83; page 51 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 32,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "start_page": {
+   "value": 20,
+   "leaf": 52,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00fran$52/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran$52/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 52; page 20 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 32,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -328,7 +358,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 52,
   "end_leaf": 83,
   "first_letter": "A",
@@ -474,5 +504,39 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 249,
+  "fitted_leaves": 209,
+  "read_leaves": 169,
+  "segments": [
+   {
+    "first_leaf": 35,
+    "last_leaf": 111,
+    "first_page": 3,
+    "last_page": 79,
+    "leaves": 77,
+    "read": 41
+   },
+   {
+    "first_leaf": 120,
+    "last_leaf": 251,
+    "first_page": 84,
+    "last_page": 215,
+    "leaves": 132,
+    "read": 128
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 53,
+   "both": 53,
+   "agree": 53,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

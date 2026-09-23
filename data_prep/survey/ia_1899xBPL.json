@@ -22,6 +22,21 @@
    "method": "hocr-text",
    "confidence": "high",
    "evidence_detail": "imprint"
+  },
+  "end_page": {
+   "value": 1904,
+   "leaf": 1960,
+   "canvas": "https://iiif.archive.org/iiif/1899xBPL$1960/canvas",
+   "image": "https://iiif.archive.org/iiif/1899xBPL$1960/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 1960; page 1904 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": 1904,
+   "page_offset": 56,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -310,7 +325,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 47,
   "end_leaf": 1960,
   "first_letter": "A",
@@ -572,5 +587,127 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 1978,
+  "fitted_leaves": 1895,
+  "read_leaves": 554,
+  "segments": [
+   {
+    "first_leaf": 1,
+    "last_leaf": 14,
+    "first_page": 1,
+    "last_page": 14,
+    "leaves": 14,
+    "read": 12
+   },
+   {
+    "first_leaf": 24,
+    "last_leaf": 30,
+    "first_page": 2,
+    "last_page": 8,
+    "leaves": 7,
+    "read": 7
+   },
+   {
+    "first_leaf": 54,
+    "last_leaf": 214,
+    "first_page": 8,
+    "last_page": 168,
+    "leaves": 161,
+    "read": 32
+   },
+   {
+    "first_leaf": 225,
+    "last_leaf": 418,
+    "first_page": 173,
+    "last_page": 366,
+    "leaves": 194,
+    "read": 52
+   },
+   {
+    "first_leaf": 426,
+    "last_leaf": 449,
+    "first_page": 374,
+    "last_page": 397,
+    "leaves": 24,
+    "read": 10
+   },
+   {
+    "first_leaf": 452,
+    "last_leaf": 456,
+    "first_page": 1,
+    "last_page": 5,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 460,
+    "last_leaf": 464,
+    "first_page": 1,
+    "last_page": 5,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 469,
+    "last_leaf": 683,
+    "first_page": 417,
+    "last_page": 631,
+    "leaves": 215,
+    "read": 70
+   },
+   {
+    "first_leaf": 698,
+    "last_leaf": 775,
+    "first_page": 644,
+    "last_page": 721,
+    "leaves": 78,
+    "read": 21
+   },
+   {
+    "first_leaf": 784,
+    "last_leaf": 1169,
+    "first_page": 728,
+    "last_page": 1113,
+    "leaves": 386,
+    "read": 106
+   },
+   {
+    "first_leaf": 1173,
+    "last_leaf": 1963,
+    "first_page": 1117,
+    "last_page": 1907,
+    "leaves": 791,
+    "read": 223
+   },
+   {
+    "first_leaf": 1968,
+    "last_leaf": 1972,
+    "first_page": 1914,
+    "last_page": 1918,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 1973,
+    "last_leaf": 1982,
+    "first_page": 1921,
+    "last_page": 1930,
+    "leaves": 10,
+    "read": 10
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 1870,
+   "both": 1846,
+   "agree": 1836,
+   "agree_rate": 0.995,
+   "ia_page_equals_leaf": 0.01
+  },
+  "flags": []
  }
 }

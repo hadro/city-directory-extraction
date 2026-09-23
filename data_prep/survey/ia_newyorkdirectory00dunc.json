@@ -40,6 +40,21 @@
    "quote": "THE / NEW-YORK DIRECTORY / REGISTER,",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 215,
+   "leaf": 237,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$237/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$237/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'215' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 22,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -359,7 +374,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 23,
   "end_leaf": 237,
   "first_letter": "A",
@@ -525,5 +540,63 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 294,
+  "fitted_leaves": 271,
+  "read_leaves": 145,
+  "segments": [
+   {
+    "first_leaf": 24,
+    "last_leaf": 80,
+    "first_page": 2,
+    "last_page": 56,
+    "leaves": 55,
+    "read": 40
+   },
+   {
+    "first_leaf": 83,
+    "last_leaf": 174,
+    "first_page": 63,
+    "last_page": 154,
+    "leaves": 92,
+    "read": 47
+   },
+   {
+    "first_leaf": 175,
+    "last_leaf": 205,
+    "first_page": 55,
+    "last_page": 85,
+    "leaves": 31,
+    "read": 11
+   },
+   {
+    "first_leaf": 207,
+    "last_leaf": 237,
+    "first_page": 187,
+    "last_page": 215,
+    "leaves": 29,
+    "read": 13
+   },
+   {
+    "first_leaf": 241,
+    "last_leaf": 304,
+    "first_page": 219,
+    "last_page": 282,
+    "leaves": 64,
+    "read": 34
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 60,
+   "both": 59,
+   "agree": 57,
+   "agree_rate": 0.966,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

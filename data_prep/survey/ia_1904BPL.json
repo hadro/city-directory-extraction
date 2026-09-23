@@ -51,6 +51,21 @@
    "quote": "UPINGTON'S / GENERAL DIRECTORY / OF BROOKLYN, / NEW YORK CITY.",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 1044,
+   "leaf": 1046,
+   "canvas": "https://iiif.archive.org/iiif/1904BPL$1046/canvas",
+   "image": "https://iiif.archive.org/iiif/1904BPL$1046/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'1044' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 2,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -345,7 +360,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 9,
   "end_leaf": 1046,
   "first_letter": "A",
@@ -616,5 +631,161 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 1034,
+  "fitted_leaves": 997,
+  "read_leaves": 970,
+  "segments": [
+   {
+    "first_leaf": 10,
+    "last_leaf": 52,
+    "first_page": 22,
+    "last_page": 64,
+    "leaves": 43,
+    "read": 42
+   },
+   {
+    "first_leaf": 54,
+    "last_leaf": 67,
+    "first_page": 66,
+    "last_page": 79,
+    "leaves": 14,
+    "read": 14
+   },
+   {
+    "first_leaf": 71,
+    "last_leaf": 143,
+    "first_page": 83,
+    "last_page": 145,
+    "leaves": 63,
+    "read": 61
+   },
+   {
+    "first_leaf": 145,
+    "last_leaf": 224,
+    "first_page": 147,
+    "last_page": 224,
+    "leaves": 78,
+    "read": 77
+   },
+   {
+    "first_leaf": 226,
+    "last_leaf": 241,
+    "first_page": 226,
+    "last_page": 241,
+    "leaves": 16,
+    "read": 16
+   },
+   {
+    "first_leaf": 243,
+    "last_leaf": 416,
+    "first_page": 243,
+    "last_page": 416,
+    "leaves": 174,
+    "read": 171
+   },
+   {
+    "first_leaf": 418,
+    "last_leaf": 449,
+    "first_page": 418,
+    "last_page": 449,
+    "leaves": 32,
+    "read": 32
+   },
+   {
+    "first_leaf": 451,
+    "last_leaf": 480,
+    "first_page": 451,
+    "last_page": 480,
+    "leaves": 30,
+    "read": 30
+   },
+   {
+    "first_leaf": 483,
+    "last_leaf": 499,
+    "first_page": 483,
+    "last_page": 499,
+    "leaves": 17,
+    "read": 17
+   },
+   {
+    "first_leaf": 501,
+    "last_leaf": 548,
+    "first_page": 501,
+    "last_page": 546,
+    "leaves": 46,
+    "read": 44
+   },
+   {
+    "first_leaf": 549,
+    "last_leaf": 665,
+    "first_page": 545,
+    "last_page": 657,
+    "leaves": 113,
+    "read": 107
+   },
+   {
+    "first_leaf": 667,
+    "last_leaf": 678,
+    "first_page": 659,
+    "last_page": 670,
+    "leaves": 12,
+    "read": 11
+   },
+   {
+    "first_leaf": 682,
+    "last_leaf": 731,
+    "first_page": 672,
+    "last_page": 721,
+    "leaves": 50,
+    "read": 48
+   },
+   {
+    "first_leaf": 733,
+    "last_leaf": 818,
+    "first_page": 723,
+    "last_page": 806,
+    "leaves": 84,
+    "read": 83
+   },
+   {
+    "first_leaf": 819,
+    "last_leaf": 866,
+    "first_page": 817,
+    "last_page": 864,
+    "leaves": 48,
+    "read": 44
+   },
+   {
+    "first_leaf": 868,
+    "last_leaf": 922,
+    "first_page": 866,
+    "last_page": 918,
+    "leaves": 53,
+    "read": 51
+   },
+   {
+    "first_leaf": 923,
+    "last_leaf": 1046,
+    "first_page": 921,
+    "last_page": 1044,
+    "leaves": 124,
+    "read": 122
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 975,
+   "both": 928,
+   "agree": 547,
+   "agree_rate": 0.589,
+   "ia_page_equals_leaf": 0.8
+  },
+  "flags": [
+   "ia-disagrees"
+  ]
  }
 }

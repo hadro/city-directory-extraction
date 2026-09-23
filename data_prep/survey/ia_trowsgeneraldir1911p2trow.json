@@ -50,6 +50,21 @@
    "quote": "\\ / ty **?;.\u20ac: / X / TRow;s / GENERAL DIRECTORY / OF THE BOROUGHS OF / MANHATTAN AND BRONX / .-:.,, ; :..\u25a0:\u25a0.;,..\u2022\u25a0 ,.: \" \u2014 \u2122 \" 4 \"^\" ~\" / CITY OF ^JEW YORK",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 4,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$9/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$9/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 9; page 4 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 5,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -339,7 +354,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 9,
   "end_leaf": 1215,
   "first_letter": "H",
@@ -533,5 +548,55 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 608,
+  "fitted_leaves": 558,
+  "read_leaves": 127,
+  "segments": [
+   {
+    "first_leaf": 2,
+    "last_leaf": 175,
+    "first_page": 1,
+    "last_page": 87,
+    "leaves": 87,
+    "read": 10
+   },
+   {
+    "first_leaf": 201,
+    "last_leaf": 575,
+    "first_page": 700,
+    "last_page": 887,
+    "leaves": 188,
+    "read": 56
+   },
+   {
+    "first_leaf": 601,
+    "last_leaf": 771,
+    "first_page": 0,
+    "last_page": 85,
+    "leaves": 86,
+    "read": 13
+   },
+   {
+    "first_leaf": 817,
+    "last_leaf": 1209,
+    "first_page": 1008,
+    "last_page": 1204,
+    "leaves": 197,
+    "read": 48
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 1,
+   "both": 1,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

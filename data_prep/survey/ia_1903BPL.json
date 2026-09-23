@@ -61,6 +61,21 @@
    "quote": "UPINGTON'S / GENERAL DIRECTORY / OF BROOKLYN, / NEW YORK CITY.",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 1054,
+   "leaf": 1073,
+   "canvas": "https://iiif.archive.org/iiif/1903BPL$1073/canvas",
+   "image": "https://iiif.archive.org/iiif/1903BPL$1073/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'1054' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 19,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -349,7 +364,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 9,
   "end_leaf": 1073,
   "first_letter": "A",
@@ -602,5 +617,71 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 1114,
+  "fitted_leaves": 1060,
+  "read_leaves": 948,
+  "segments": [
+   {
+    "first_leaf": 11,
+    "last_leaf": 444,
+    "first_page": 23,
+    "last_page": 440,
+    "leaves": 418,
+    "read": 375
+   },
+   {
+    "first_leaf": 448,
+    "last_leaf": 473,
+    "first_page": 442,
+    "last_page": 467,
+    "leaves": 26,
+    "read": 24
+   },
+   {
+    "first_leaf": 475,
+    "last_leaf": 860,
+    "first_page": 469,
+    "last_page": 843,
+    "leaves": 375,
+    "read": 339
+   },
+   {
+    "first_leaf": 862,
+    "last_leaf": 1049,
+    "first_page": 845,
+    "last_page": 1032,
+    "leaves": 188,
+    "read": 170
+   },
+   {
+    "first_leaf": 1053,
+    "last_leaf": 1073,
+    "first_page": 1034,
+    "last_page": 1054,
+    "leaves": 21,
+    "read": 10
+   },
+   {
+    "first_leaf": 1083,
+    "last_leaf": 1114,
+    "first_page": 2,
+    "last_page": 33,
+    "leaves": 32,
+    "read": 30
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 32,
+   "both": 32,
+   "agree": 32,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

@@ -61,6 +61,21 @@
    "quote": "V\u00a5f* / UPJN..G TON'S / GENERAL DIRECTORY / OF THE BOROUGH OF / BROOKLYN / CITY OF NEW YORK",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 21,
+   "leaf": 39,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1907p1geor$39/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1907p1geor$39/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'21' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 18,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -352,7 +367,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 39,
   "end_leaf": 1139,
   "first_letter": "A",
@@ -560,5 +575,47 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 570,
+  "fitted_leaves": 555,
+  "read_leaves": 478,
+  "segments": [
+   {
+    "first_leaf": 3,
+    "last_leaf": 395,
+    "first_page": 3,
+    "last_page": 193,
+    "leaves": 191,
+    "read": 159
+   },
+   {
+    "first_leaf": 403,
+    "last_leaf": 1109,
+    "first_page": 195,
+    "last_page": 544,
+    "leaves": 350,
+    "read": 306
+   },
+   {
+    "first_leaf": 1111,
+    "last_leaf": 1137,
+    "first_page": 546,
+    "last_page": 559,
+    "leaves": 14,
+    "read": 13
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 2,
+   "both": 2,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

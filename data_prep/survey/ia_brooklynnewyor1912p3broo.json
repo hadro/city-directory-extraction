@@ -120,6 +120,38 @@
     "year_published"
    ],
    "note": "Title page leaf 7, librarian's red 'pt. 3' beside the year. PROBABLE DUPLICATE of brooklynnewyorkc19123broo; this is the 2013 scan (imagecount 1066, hOCR 88 MB) and is the better of the two. THE TITLE PAGE DOCUMENTS A GAP IN ITS OWN SERIES: 'There was no edition of this book published for the year 1911.' That is a printed, citable answer to a coverage question, of the same kind as the Trow 1898/99 hole the plan already tracks."
+  },
+  "start_page": {
+   "value": 2,
+   "leaf": 11,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$11/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$11/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 11; page 2 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 9,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 3 leaves"
+   ]
+  },
+  "end_page": {
+   "value": 1521,
+   "leaf": 743,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$743/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$743/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'1521' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": -778,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -418,7 +450,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 11,
   "end_leaf": 743,
   "first_letter": "R",
@@ -580,5 +612,87 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 529,
+  "fitted_leaves": 504,
+  "read_leaves": 274,
+  "segments": [
+   {
+    "first_leaf": 9,
+    "last_leaf": 15,
+    "first_page": 1,
+    "last_page": 4,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 17,
+    "last_leaf": 97,
+    "first_page": 158,
+    "last_page": 198,
+    "leaves": 41,
+    "read": 19
+   },
+   {
+    "first_leaf": 105,
+    "last_leaf": 743,
+    "first_page": 1202,
+    "last_page": 1521,
+    "leaves": 320,
+    "read": 169
+   },
+   {
+    "first_leaf": 747,
+    "last_leaf": 773,
+    "first_page": 523,
+    "last_page": 536,
+    "leaves": 14,
+    "read": 6
+   },
+   {
+    "first_leaf": 775,
+    "last_leaf": 919,
+    "first_page": 1537,
+    "last_page": 1607,
+    "leaves": 71,
+    "read": 39
+   },
+   {
+    "first_leaf": 927,
+    "last_leaf": 937,
+    "first_page": 1609,
+    "last_page": 1614,
+    "leaves": 6,
+    "read": 4
+   },
+   {
+    "first_leaf": 945,
+    "last_leaf": 1007,
+    "first_page": 1616,
+    "last_page": 1647,
+    "leaves": 32,
+    "read": 21
+   },
+   {
+    "first_leaf": 1027,
+    "last_leaf": 1057,
+    "first_page": 1653,
+    "last_page": 1668,
+    "leaves": 16,
+    "read": 13
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 6,
+   "both": 6,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

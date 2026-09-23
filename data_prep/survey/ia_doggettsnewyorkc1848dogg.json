@@ -63,6 +63,21 @@
    "confidence": "medium",
    "gloss_lines": 0,
    "legend_location": "inline-at-listing-head"
+  },
+  "end_page": {
+   "value": 454,
+   "leaf": 472,
+   "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1848dogg$472/canvas",
+   "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1848dogg$472/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'454' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 18,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -353,7 +368,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 25,
   "end_leaf": 472,
   "first_letter": "A",
@@ -535,5 +550,47 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 516,
+  "fitted_leaves": 475,
+  "read_leaves": 445,
+  "segments": [
+   {
+    "first_leaf": 26,
+    "last_leaf": 473,
+    "first_page": 22,
+    "last_page": 455,
+    "leaves": 434,
+    "read": 414
+   },
+   {
+    "first_leaf": 476,
+    "last_leaf": 501,
+    "first_page": 2,
+    "last_page": 27,
+    "leaves": 26,
+    "read": 21
+   },
+   {
+    "first_leaf": 504,
+    "last_leaf": 518,
+    "first_page": 2,
+    "last_page": 16,
+    "leaves": 15,
+    "read": 10
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 20,
+   "both": 20,
+   "agree": 20,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

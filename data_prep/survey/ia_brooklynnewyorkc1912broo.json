@@ -120,6 +120,39 @@
     "year_published"
    ],
    "note": "Title page leaf 7, librarian's red 'pt. 2' beside the year. The catalog leaves `publisher` EMPTY for all three; the title page names Brooklyn Directory Co. outright. THE TITLE PAGE DOCUMENTS A GAP IN ITS OWN SERIES: 'There was no edition of this book published for the year 1911.' That is a printed, citable answer to a coverage question, of the same kind as the Trow 1898/99 hole the plan already tracks."
+  },
+  "start_page": {
+   "value": 626,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$9/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$9/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'626' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": -617,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 153,
+   "leaf": 1063,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$1063/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1912broo$1063/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'153' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 910,
+   "listing_flags": [],
+   "doubts": [
+    "sequence-break: an earlier sequence in this listing ran higher",
+    "page 153 is below the listing's 528 text leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -417,7 +450,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 9,
   "end_leaf": 1063,
   "first_letter": "H",
@@ -611,5 +644,39 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 531,
+  "fitted_leaves": 528,
+  "read_leaves": 334,
+  "segments": [
+   {
+    "first_leaf": 9,
+    "last_leaf": 995,
+    "first_page": 626,
+    "last_page": 1119,
+    "leaves": 494,
+    "read": 311
+   },
+   {
+    "first_leaf": 997,
+    "last_leaf": 1063,
+    "first_page": 120,
+    "last_page": 153,
+    "leaves": 34,
+    "read": 23
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 4,
+   "both": 4,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

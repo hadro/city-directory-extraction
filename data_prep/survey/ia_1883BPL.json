@@ -67,6 +67,21 @@
    "quote": "twenty-sixth annual",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "end_page": {
+   "value": 1275,
+   "leaf": 1345,
+   "canvas": "https://iiif.archive.org/iiif/1883BPL$1345/canvas",
+   "image": "https://iiif.archive.org/iiif/1883BPL$1345/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'1275' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 70,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -355,7 +370,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 31,
   "end_leaf": 1345,
   "first_letter": "A",
@@ -556,5 +571,167 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 1634,
+  "fitted_leaves": 1492,
+  "read_leaves": 602,
+  "segments": [
+   {
+    "first_leaf": 39,
+    "last_leaf": 87,
+    "first_page": 9,
+    "last_page": 57,
+    "leaves": 49,
+    "read": 17
+   },
+   {
+    "first_leaf": 93,
+    "last_leaf": 145,
+    "first_page": 61,
+    "last_page": 113,
+    "leaves": 53,
+    "read": 18
+   },
+   {
+    "first_leaf": 151,
+    "last_leaf": 159,
+    "first_page": 117,
+    "last_page": 125,
+    "leaves": 9,
+    "read": 4
+   },
+   {
+    "first_leaf": 172,
+    "last_leaf": 257,
+    "first_page": 132,
+    "last_page": 217,
+    "leaves": 86,
+    "read": 26
+   },
+   {
+    "first_leaf": 263,
+    "last_leaf": 451,
+    "first_page": 221,
+    "last_page": 409,
+    "leaves": 189,
+    "read": 49
+   },
+   {
+    "first_leaf": 457,
+    "last_leaf": 581,
+    "first_page": 413,
+    "last_page": 537,
+    "leaves": 125,
+    "read": 28
+   },
+   {
+    "first_leaf": 591,
+    "last_leaf": 601,
+    "first_page": 545,
+    "last_page": 555,
+    "leaves": 11,
+    "read": 4
+   },
+   {
+    "first_leaf": 609,
+    "last_leaf": 667,
+    "first_page": 559,
+    "last_page": 617,
+    "leaves": 59,
+    "read": 16
+   },
+   {
+    "first_leaf": 681,
+    "last_leaf": 695,
+    "first_page": 625,
+    "last_page": 639,
+    "leaves": 15,
+    "read": 5
+   },
+   {
+    "first_leaf": 699,
+    "last_leaf": 955,
+    "first_page": 641,
+    "last_page": 893,
+    "leaves": 253,
+    "read": 70
+   },
+   {
+    "first_leaf": 961,
+    "last_leaf": 993,
+    "first_page": 897,
+    "last_page": 929,
+    "leaves": 33,
+    "read": 12
+   },
+   {
+    "first_leaf": 999,
+    "last_leaf": 1053,
+    "first_page": 933,
+    "last_page": 987,
+    "leaves": 55,
+    "read": 15
+   },
+   {
+    "first_leaf": 1061,
+    "last_leaf": 1313,
+    "first_page": 993,
+    "last_page": 1245,
+    "leaves": 253,
+    "read": 75
+   },
+   {
+    "first_leaf": 1319,
+    "last_leaf": 1540,
+    "first_page": 1249,
+    "last_page": 1470,
+    "leaves": 222,
+    "read": 188
+   },
+   {
+    "first_leaf": 1547,
+    "last_leaf": 1578,
+    "first_page": 1473,
+    "last_page": 1504,
+    "leaves": 32,
+    "read": 30
+   },
+   {
+    "first_leaf": 1580,
+    "last_leaf": 1599,
+    "first_page": 2,
+    "last_page": 21,
+    "leaves": 20,
+    "read": 18
+   },
+   {
+    "first_leaf": 1605,
+    "last_leaf": 1625,
+    "first_page": 3,
+    "last_page": 23,
+    "leaves": 21,
+    "read": 20
+   },
+   {
+    "first_leaf": 1631,
+    "last_leaf": 1637,
+    "first_page": 27,
+    "last_page": 33,
+    "leaves": 7,
+    "read": 7
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 46,
+   "both": 43,
+   "agree": 43,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

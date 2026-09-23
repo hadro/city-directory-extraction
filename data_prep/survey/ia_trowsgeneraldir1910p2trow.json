@@ -379,7 +379,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 11,
   "end_leaf": 1157,
   "first_letter": "G",
@@ -559,5 +559,71 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 578,
+  "fitted_leaves": 388,
+  "read_leaves": 109,
+  "segments": [
+   {
+    "first_leaf": 17,
+    "last_leaf": 73,
+    "first_page": 572,
+    "last_page": 600,
+    "leaves": 29,
+    "read": 6
+   },
+   {
+    "first_leaf": 87,
+    "last_leaf": 249,
+    "first_page": 7,
+    "last_page": 88,
+    "leaves": 82,
+    "read": 14
+   },
+   {
+    "first_leaf": 275,
+    "last_leaf": 509,
+    "first_page": 701,
+    "last_page": 818,
+    "leaves": 118,
+    "read": 21
+   },
+   {
+    "first_leaf": 813,
+    "last_leaf": 841,
+    "first_page": 70,
+    "last_page": 84,
+    "leaves": 15,
+    "read": 6
+   },
+   {
+    "first_leaf": 853,
+    "last_leaf": 859,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 875,
+    "last_leaf": 1153,
+    "first_page": 1001,
+    "last_page": 1140,
+    "leaves": 140,
+    "read": 59
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

@@ -73,6 +73,36 @@
    "quote": "-f^U / UPINGTON'S / GENERAL DIRECTORY / \u2022 \u2014 ' \u25a0\u25a0 \u25a0 / ft / i2E THE BOROUGH OF / BROOKLYN / CITY OF J\u00a3EW YORK",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 557,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1908geor$9/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1908geor$9/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'557' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": -548,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 1107,
+   "leaf": 1119,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1908geor$1119/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1908geor$1119/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'1107' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 12,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -365,7 +395,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 9,
   "end_leaf": 1119,
   "first_letter": "K",
@@ -615,5 +645,63 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 613,
+  "fitted_leaves": 587,
+  "read_leaves": 485,
+  "segments": [
+   {
+    "first_leaf": 9,
+    "last_leaf": 743,
+    "first_page": 557,
+    "last_page": 920,
+    "leaves": 364,
+    "read": 297
+   },
+   {
+    "first_leaf": 747,
+    "last_leaf": 851,
+    "first_page": 923,
+    "last_page": 975,
+    "leaves": 53,
+    "read": 36
+   },
+   {
+    "first_leaf": 863,
+    "last_leaf": 1119,
+    "first_page": 979,
+    "last_page": 1107,
+    "leaves": 129,
+    "read": 118
+   },
+   {
+    "first_leaf": 1141,
+    "last_leaf": 1207,
+    "first_page": 2,
+    "last_page": 35,
+    "leaves": 34,
+    "read": 29
+   },
+   {
+    "first_leaf": 1211,
+    "last_leaf": 1223,
+    "first_page": 38,
+    "last_page": 44,
+    "leaves": 7,
+    "read": 5
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 4,
+   "both": 4,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

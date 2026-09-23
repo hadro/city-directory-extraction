@@ -65,6 +65,38 @@
     "year_covered"
    ],
    "note": "target card leaf 1. CONFIRMS the catalog (Hearnes) rather than conflicting. 'Tenth Annual Publication' gives a volume number."
+  },
+  "end_page": {
+   "value": 463,
+   "leaf": 438,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$438/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$438/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 438; page 463 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": -25,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "start_page": {
+   "value": 43,
+   "leaf": 48,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$48/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$48/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'43' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 5,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 4 leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -364,7 +396,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 48,
   "end_leaf": 438,
   "first_letter": "B",
@@ -562,5 +594,87 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 481,
+  "fitted_leaves": 361,
+  "read_leaves": 183,
+  "segments": [
+   {
+    "first_leaf": 4,
+    "last_leaf": 21,
+    "first_page": 0,
+    "last_page": 8,
+    "leaves": 9,
+    "read": 4
+   },
+   {
+    "first_leaf": 34,
+    "last_leaf": 51,
+    "first_page": 29,
+    "last_page": 46,
+    "leaves": 18,
+    "read": 4
+   },
+   {
+    "first_leaf": 65,
+    "last_leaf": 75,
+    "first_page": 60,
+    "last_page": 69,
+    "leaves": 10,
+    "read": 4
+   },
+   {
+    "first_leaf": 78,
+    "last_leaf": 84,
+    "first_page": 72,
+    "last_page": 78,
+    "leaves": 7,
+    "read": 3
+   },
+   {
+    "first_leaf": 86,
+    "last_leaf": 216,
+    "first_page": 80,
+    "last_page": 209,
+    "leaves": 130,
+    "read": 75
+   },
+   {
+    "first_leaf": 255,
+    "last_leaf": 326,
+    "first_page": 282,
+    "last_page": 353,
+    "leaves": 72,
+    "read": 38
+   },
+   {
+    "first_leaf": 338,
+    "last_leaf": 439,
+    "first_page": 364,
+    "last_page": 464,
+    "leaves": 101,
+    "read": 51
+   },
+   {
+    "first_leaf": 493,
+    "last_leaf": 506,
+    "first_page": 2,
+    "last_page": 15,
+    "leaves": 14,
+    "read": 4
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 43,
+   "both": 33,
+   "agree": 33,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

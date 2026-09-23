@@ -343,7 +343,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 11,
   "end_leaf": 771,
   "first_letter": "Q",
@@ -519,5 +519,31 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 561,
+  "fitted_leaves": 169,
+  "read_leaves": 119,
+  "segments": [
+   {
+    "first_leaf": 775,
+    "last_leaf": 1123,
+    "first_page": 7,
+    "last_page": 175,
+    "leaves": 169,
+    "read": 119
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

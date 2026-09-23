@@ -85,6 +85,21 @@
     "year_published"
    ],
    "note": "Title page leaf 7. RESOLVES the OCR-damage publisher conflict: the page reads 'PUBLISHED BY THOMAS LONGWORTH', so phase 0b's 'THOMAS LOKCWORTH' was damage, not a different house. The regnal formula gives the year independently ('FIFTY-FIRST YEAR OF AMERICAN INDEPENDENCE' = 1775+51 = 1826) and the imprint prints 1826. It states an approximate entry count, 'exceeding twenty-seven thousand', against the 1839 volume's 'near thirty-nine thousand' -- the same series, thirteen years apart, so the two are a growth measurement. It also carries the SAME Othello epigraph as the 1839 volume ('Who steals my purse, steals trash -- But he who borrows my DIRECTORY, filches me Most villanously'), a house signature spanning both."
+  },
+  "end_page": {
+   "value": 535,
+   "leaf": 1123,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric1826newy$1123/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric1826newy$1123/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 1123; page 535 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 588,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -379,7 +394,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 153,
   "end_leaf": 1123,
   "first_letter": "A",
@@ -767,5 +782,39 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 568,
+  "fitted_leaves": 533,
+  "read_leaves": 99,
+  "segments": [
+   {
+    "first_leaf": 29,
+    "last_leaf": 119,
+    "first_page": 2,
+    "last_page": 47,
+    "leaves": 46,
+    "read": 8
+   },
+   {
+    "first_leaf": 157,
+    "last_leaf": 1133,
+    "first_page": 54,
+    "last_page": 540,
+    "leaves": 487,
+    "read": 91
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

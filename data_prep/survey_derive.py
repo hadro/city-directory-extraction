@@ -10,6 +10,7 @@ See docs/SURVEY_PLAN.md "Phase 2".
 
     python3 data_prep/survey_derive.py bounds              # listing bounds + section inventory
     python3 data_prep/survey_derive.py bounds --ids 1856BPL
+    python3 data_prep/survey_derive.py pages               # leaf -> printed page; start/end_page
     python3 data_prep/survey_derive.py report              # what the sidecars now say
     python3 data_prep/survey_derive.py --self-test
 
@@ -35,9 +36,39 @@ Flags, each a reason to distrust the bounds rather than a verdict:
     multi-section       more than one alphabet -- a second directory, or a supplement
     partial-alphabet    the listing starts after B or ends before W: usually a PART of a
                         multi-volume set, which is right, but check against the title page
+    small-listing       the listing spans < 10% of the volume's leaves. Every volume under that
+                        line is stamped not-residential except trowsgeneraldire1853trow, whose
+                        own title page reads WILSON'S BUSINESS DIRECTORY -- the same catalog
+                        error as the 1913 Trow set. The largest of its scattered alphabets was
+                        27 leaves of 948, and its page claims had been graded high.
 
 The bounds are LEAVES. Printed start_page/end_page are a separate step, because the leaf->page
 join is its own evidence problem (survey_pagenumbers.py, and the bottom-margin reader).
+
+`pages` -> sidecar `folios`, and `book_says.start_page` / `end_page`
+--------------------------------------------------------------------
+survey_folios.fit() over the dump: the page's own margins, fitted to a piecewise-constant
+sequence. Calibrated 2026-09-22 against IA's READ numbers (confidence >= 90) on the 86 tier-A/B
+volumes: 99.5% agreement (18,209/18,301 leaves) outside 1904BPL, where IA -- not this -- is wrong
+on 381 leaves (it sets page = leaf; the margins print otherwise).
+
+The claims take the printed page at the listing's first and last leaf, cited like every other
+claim (leaf, canvas, IIIF image, the folio token verbatim). Confidence is the conjunction of the
+two things a start_page depends on:
+
+    high     the leaf's own margin prints the number, IA's read number (if any) agrees, the
+             listing bounds carry no sparse / edge-disagreement flag, and the sequence it
+             belongs to is read on >= SEG_MIN_READ leaves
+    medium   printed on the leaf, but the bounds are flagged, IA disagrees, or the sequence is
+             short
+    low      `inferred` -- the leaf prints no folio and the number comes from the sequence --
+             or a `doubts` check says the number cannot be the listing's page (a sequence
+             break, or an end page below the listing's own leaf count). Never CSV-grade, the
+             rule survey_pagenumbers.py enforces on IA's interpolations.
+
+A listing edge outside every fitted segment gets no claim at all: its opening page often prints
+no folio (hearnesbrooklync1852unse leaf 27), and extrapolating one is the error that was
+retracted from the CSV on 2026-09-21.
 """
 from __future__ import annotations
 
@@ -57,11 +88,15 @@ from detect_listing_bounds import (FIRST_WORD_RE, detect, leaf_letters_from_dump
                                    leaf_letters_from_jsonl)
 from ia_volume_to_jsonl import words_to_lines  # noqa: E402
 from survey_frontmatter import page_image  # noqa: E402
+from survey_folios import compare, fit, folio_token, ia_read, load as load_folios  # noqa: E402
+from survey_folios import segments as folio_segments  # noqa: E402
 from survey_harvest import OUT, git_rev, load_volumes  # noqa: E402
 
 MIN_CHARS, MIN_LINES = 400, 5          # detect_listing_bounds' CLI defaults
 SPARSE = 0.20
 EDGE_TOL = 2
+SMALL_LISTING = 0.10    # a listing spanning less of the volume than this is not its directory
+SEG_MIN_READ = 10       # a page claim is `high` only from a sequence read on this many leaves
 
 
 def edge_quote(dump_path: Path, leaf: int, letter: str, last: bool) -> str | None:
@@ -105,6 +140,8 @@ def bounds(v: dict) -> dict:
         flags.append("multi-section")
     if main["first_letter"] > "B" or main["last_letter"] < "W":
         flags.append("partial-alphabet")
+    if (e - s + 1) / n_leaves < SMALL_LISTING:
+        flags.append("small-listing")
 
     def cite(leaf, letter, last):
         return {"leaf": leaf, "image": page_image(ident, leaf),
@@ -131,6 +168,93 @@ def bounds(v: dict) -> dict:
     }
 
 
+def leaf_record(dump_path: Path, leaf: int):
+    with gzip.open(dump_path, "rt", encoding="utf-8") as fh:
+        for line in fh:
+            rec = json.loads(line)
+            if rec["leaf"] == leaf:
+                return rec
+    return None
+
+
+def pages(v: dict) -> tuple[dict, dict]:
+    """-> (folios block, {"start_page": claim, "end_page": claim}) for one volume."""
+    ident = v["id"]
+    words = OUT / f"{ident}_words.jsonl.gz"
+    leaves, cands = load_folios(ident)
+    f = fit(leaves, cands)
+    ia = ia_read(ident)
+    cmp_ = compare(f, ia)
+    listing = v["doc"].get("listing") or {}
+    block = {"method": "margin-fit", "derived": _dt.date.today().isoformat(),
+             "code_at": git_rev(),
+             "content_leaves": len(leaves), "fitted_leaves": len(f),
+             "read_leaves": sum(a == "read" for _p, a in f.values()),
+             "segments": folio_segments(f), "ia_comparison": cmp_, "flags": []}
+    if cmp_["both"] >= 20 and cmp_["agree_rate"] is not None and cmp_["agree_rate"] < 0.9:
+        block["flags"].append("ia-disagrees")
+    if not f:
+        block["flags"].append("no-folios")
+
+    claims = {}
+    if "start_leaf" not in listing:
+        return block, claims
+    weak_bounds = {"sparse", "edge-disagreement", "small-listing"} & set(listing.get("flags", []))
+    if v["doc"].get("survey_status") == "not-residential":
+        weak_bounds.add("not-residential")
+    lo, hi = listing["start_leaf"], listing["end_leaf"]
+    span_pages = sum(lo <= leaf <= hi for leaf in leaves)
+    segs = [sg for sg in block["segments"] if sg["last_leaf"] >= lo and sg["first_leaf"] <= hi]
+
+    def doubts(key, leaf, page):
+        """Reasons a margin read at a listing edge is not the listing's page. Each was a claim
+        graded `high` on the first run: the OCR drops or mangles a folio's LEADING digit, and
+        a few truncated folios in a row fit a sequence of their own -- brooklynnewyorkc1912broo
+        reads 120..153 where its main sequence runs on to 1153, trowsgeneraldir1911p1trow ends
+        on `003` (603), trowsgeneraldir1912p2trow on `6`."""
+        seg = next(sg for sg in segs if sg["first_leaf"] <= leaf <= sg["last_leaf"])
+        why = []
+        if seg["read"] < SEG_MIN_READ:
+            why.append(f"sequence read on only {seg['read']} leaves")
+        if any(sg["last_leaf"] < seg["first_leaf"] and sg["last_page"] > seg["first_page"]
+               and sg["read"] >= SEG_MIN_READ for sg in segs):
+            why.append("sequence-break: an earlier sequence in this listing ran higher")
+        if key == "end_page" and page < 0.9 * span_pages:
+            why.append(f"page {page} is below the listing's {span_pages} text leaves")
+        return why
+
+    for key, leaf in (("start_page", lo), ("end_page", hi)):
+        if leaf not in f:
+            continue
+        page, att = f[leaf]
+        ia_page = ia.get(leaf)
+        why = doubts(key, leaf, page)
+        if att == "inferred" or any(w.startswith(("sequence-break", "page ")) for w in why):
+            level = "low"
+        elif weak_bounds or why or (ia_page is not None and ia_page != page):
+            level = "medium"
+        else:
+            level = "high"
+        token, zone = folio_token(leaf_record(words, leaf), page) if att == "read" else (None, None)
+        claims[key] = {
+            "value": page, "leaf": leaf,
+            "canvas": f"https://iiif.archive.org/iiif/{ident}${leaf}/canvas",
+            "image": page_image(ident, leaf),
+            "evidence_type": "folio",
+            "quote": (f"{token!r} in the {zone} margin" if token
+                      else f"no folio printed on leaf {leaf}; page {page} INFERRED from the "
+                           f"sequence of folios around it"),
+            "method": "hocr-geometry",
+            "confidence": level,
+            "attestation": att,
+            "ia_page": ia_page,
+            "page_offset": leaf - page,
+            "listing_flags": sorted(weak_bounds),
+            "doubts": why,
+        }
+    return block, claims
+
+
 def save(v: dict, key: str, block: dict):
     doc = json.loads(v["path"].read_text(encoding="utf-8"))   # re-read: never clobber others
     doc[key] = block
@@ -147,6 +271,15 @@ def report(vols: list) -> int:
     print(f"  clean (no flags): {len(clean)}")
     for f, n in flags.most_common():
         print(f"  {f:18} {n}")
+    fol = [v["doc"].get("folios") for v in vols if v["doc"].get("folios")]
+    if fol:
+        print(f"\n{len(fol)} volumes have a `folios` block")
+        for f, n in collections.Counter(x for b in fol for x in b["flags"]).most_common():
+            print(f"  {f:18} {n}")
+        for key in ("start_page", "end_page"):
+            c = collections.Counter((v["doc"].get("book_says", {}).get(key) or {}).get("confidence")
+                                    for v in vols)
+            print(f"  {key:12} " + ", ".join(f"{k or 'none'} {n}" for k, n in c.most_common()))
     return 0
 
 
@@ -170,7 +303,7 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("step", nargs="?", choices=["bounds", "report"])
+    ap.add_argument("step", nargs="?", choices=["bounds", "pages", "report"])
     ap.add_argument("--ids", default=None, help="comma list of IA identifiers (default: all)")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
@@ -185,6 +318,27 @@ def main(argv=None) -> int:
         want = set(args.ids.split(","))
         vols = [v for v in vols if v["id"] in want]
     if args.step == "report":
+        return report(vols)
+
+    if args.step == "pages":
+        for i, v in enumerate(vols, 1):
+            block, claims = pages(v)
+            doc = json.loads(v["path"].read_text(encoding="utf-8"))
+            doc["folios"] = block
+            book = doc.setdefault("book_says", {})
+            for key in ("start_page", "end_page"):
+                # this step owns these two claims and nothing else in book_says
+                if key in claims:
+                    book[key] = claims[key]
+                elif (book.get(key) or {}).get("method") == "hocr-geometry":
+                    del book[key]
+            v["path"].write_text(json.dumps(doc, indent=1), encoding="utf-8")
+            v["doc"] = doc
+            sp, ep = claims.get("start_page"), claims.get("end_page")
+            print(f"[{i}/{len(vols)}] {v['id']:40} fitted {block['fitted_leaves']:5} "
+                  f"start {sp and (sp['value'], sp['confidence'])} "
+                  f"end {ep and (ep['value'], ep['confidence'])} {','.join(block['flags'])}",
+                  file=sys.stderr)
         return report(vols)
 
     for i, v in enumerate(vols, 1):

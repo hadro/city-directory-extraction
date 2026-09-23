@@ -65,6 +65,25 @@
    "quote": "_ / - THE FIREMAN\u2019S ALMANAC \u00b0",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 3,
+   "leaf": 15,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0042$15/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0042$15/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 15; page 3 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 12,
+   "listing_flags": [
+    "edge-disagreement"
+   ],
+   "doubts": [
+    "sequence read on only 6 leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -354,7 +373,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 15,
   "end_leaf": 532,
   "first_letter": "A",
@@ -680,5 +699,127 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 602,
+  "fitted_leaves": 373,
+  "read_leaves": 123,
+  "segments": [
+   {
+    "first_leaf": 14,
+    "last_leaf": 39,
+    "first_page": 2,
+    "last_page": 24,
+    "leaves": 23,
+    "read": 6
+   },
+   {
+    "first_leaf": 61,
+    "last_leaf": 84,
+    "first_page": 40,
+    "last_page": 62,
+    "leaves": 23,
+    "read": 5
+   },
+   {
+    "first_leaf": 86,
+    "last_leaf": 101,
+    "first_page": 4,
+    "last_page": 19,
+    "leaves": 16,
+    "read": 5
+   },
+   {
+    "first_leaf": 103,
+    "last_leaf": 148,
+    "first_page": 81,
+    "last_page": 125,
+    "leaves": 45,
+    "read": 13
+   },
+   {
+    "first_leaf": 165,
+    "last_leaf": 170,
+    "first_page": 136,
+    "last_page": 141,
+    "leaves": 6,
+    "read": 4
+   },
+   {
+    "first_leaf": 180,
+    "last_leaf": 219,
+    "first_page": 145,
+    "last_page": 183,
+    "leaves": 39,
+    "read": 17
+   },
+   {
+    "first_leaf": 223,
+    "last_leaf": 244,
+    "first_page": 187,
+    "last_page": 208,
+    "leaves": 22,
+    "read": 9
+   },
+   {
+    "first_leaf": 304,
+    "last_leaf": 318,
+    "first_page": 257,
+    "last_page": 271,
+    "leaves": 15,
+    "read": 6
+   },
+   {
+    "first_leaf": 322,
+    "last_leaf": 417,
+    "first_page": 273,
+    "last_page": 367,
+    "leaves": 95,
+    "read": 19
+   },
+   {
+    "first_leaf": 422,
+    "last_leaf": 439,
+    "first_page": 370,
+    "last_page": 386,
+    "leaves": 17,
+    "read": 5
+   },
+   {
+    "first_leaf": 457,
+    "last_leaf": 486,
+    "first_page": 402,
+    "last_page": 431,
+    "leaves": 30,
+    "read": 14
+   },
+   {
+    "first_leaf": 510,
+    "last_leaf": 530,
+    "first_page": 450,
+    "last_page": 470,
+    "leaves": 21,
+    "read": 11
+   },
+   {
+    "first_leaf": 609,
+    "last_leaf": 629,
+    "first_page": 4,
+    "last_page": 24,
+    "leaves": 21,
+    "read": 9
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

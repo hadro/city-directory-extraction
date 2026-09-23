@@ -81,6 +81,21 @@
     "year_covered"
    ],
    "note": "Confirms the catalog. Smith is COMPILER AND PUBLISHER here in 1854; by 1857BPL the copyright line names CHARLES JENKINS as publisher with Smith still the compiler. That trajectory is direct support for the `both-right` verdict already recorded on 1857BPL and micro_IABROOKLYN_0036, and for the compiler/publisher/printer field split the plan wants."
+  },
+  "start_page": {
+   "value": 21,
+   "leaf": 66,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$66/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$66/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'21' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": 21,
+   "page_offset": 45,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -376,7 +391,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 66,
   "end_leaf": 590,
   "first_letter": "A",
@@ -606,5 +621,135 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 607,
+  "fitted_leaves": 464,
+  "read_leaves": 242,
+  "segments": [
+   {
+    "first_leaf": 42,
+    "last_leaf": 59,
+    "first_page": 2,
+    "last_page": 18,
+    "leaves": 17,
+    "read": 5
+   },
+   {
+    "first_leaf": 65,
+    "last_leaf": 86,
+    "first_page": 20,
+    "last_page": 40,
+    "leaves": 21,
+    "read": 16
+   },
+   {
+    "first_leaf": 93,
+    "last_leaf": 100,
+    "first_page": 45,
+    "last_page": 52,
+    "leaves": 8,
+    "read": 3
+   },
+   {
+    "first_leaf": 106,
+    "last_leaf": 140,
+    "first_page": 56,
+    "last_page": 90,
+    "leaves": 35,
+    "read": 27
+   },
+   {
+    "first_leaf": 145,
+    "last_leaf": 163,
+    "first_page": 93,
+    "last_page": 110,
+    "leaves": 18,
+    "read": 13
+   },
+   {
+    "first_leaf": 166,
+    "last_leaf": 171,
+    "first_page": 0,
+    "last_page": 5,
+    "leaves": 6,
+    "read": 3
+   },
+   {
+    "first_leaf": 172,
+    "last_leaf": 305,
+    "first_page": 117,
+    "last_page": 248,
+    "leaves": 132,
+    "read": 49
+   },
+   {
+    "first_leaf": 329,
+    "last_leaf": 339,
+    "first_page": 272,
+    "last_page": 282,
+    "leaves": 11,
+    "read": 4
+   },
+   {
+    "first_leaf": 341,
+    "last_leaf": 349,
+    "first_page": 1,
+    "last_page": 9,
+    "leaves": 9,
+    "read": 3
+   },
+   {
+    "first_leaf": 352,
+    "last_leaf": 363,
+    "first_page": 293,
+    "last_page": 304,
+    "leaves": 12,
+    "read": 7
+   },
+   {
+    "first_leaf": 372,
+    "last_leaf": 410,
+    "first_page": 310,
+    "last_page": 348,
+    "leaves": 39,
+    "read": 14
+   },
+   {
+    "first_leaf": 416,
+    "last_leaf": 489,
+    "first_page": 354,
+    "last_page": 426,
+    "leaves": 73,
+    "read": 48
+   },
+   {
+    "first_leaf": 493,
+    "last_leaf": 515,
+    "first_page": 428,
+    "last_page": 449,
+    "leaves": 22,
+    "read": 14
+   },
+   {
+    "first_leaf": 523,
+    "last_leaf": 583,
+    "first_page": 455,
+    "last_page": 515,
+    "leaves": 61,
+    "read": 36
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 74,
+   "both": 61,
+   "agree": 61,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

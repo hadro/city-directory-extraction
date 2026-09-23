@@ -36,6 +36,38 @@
    "quote": "3Fac=5imUe iRepcint of JFirst Directory / THE / New York Directory / FOR",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 9,
+   "leaf": 56,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$56/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$56/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 56; page 9 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 47,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 4 leaves"
+   ]
+  },
+  "end_page": {
+   "value": 52,
+   "leaf": 88,
+   "canvas": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$88/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$88/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 88; page 52 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 36,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -377,7 +409,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 56,
   "end_leaf": 88,
   "first_letter": "A",
@@ -523,5 +555,63 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 253,
+  "fitted_leaves": 204,
+  "read_leaves": 165,
+  "segments": [
+   {
+    "first_leaf": 40,
+    "last_leaf": 52,
+    "first_page": 4,
+    "last_page": 16,
+    "leaves": 13,
+    "read": 10
+   },
+   {
+    "first_leaf": 53,
+    "last_leaf": 58,
+    "first_page": 6,
+    "last_page": 11,
+    "leaves": 6,
+    "read": 4
+   },
+   {
+    "first_leaf": 59,
+    "last_leaf": 65,
+    "first_page": 3,
+    "last_page": 9,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 68,
+    "last_leaf": 116,
+    "first_page": 32,
+    "last_page": 80,
+    "leaves": 49,
+    "read": 31
+   },
+   {
+    "first_leaf": 124,
+    "last_leaf": 252,
+    "first_page": 84,
+    "last_page": 212,
+    "leaves": 129,
+    "read": 116
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 42,
+   "both": 40,
+   "agree": 40,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

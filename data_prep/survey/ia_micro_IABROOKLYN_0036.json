@@ -394,7 +394,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 34,
   "end_leaf": 353,
   "first_letter": "A",
@@ -662,5 +662,143 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 520,
+  "fitted_leaves": 357,
+  "read_leaves": 103,
+  "segments": [
+   {
+    "first_leaf": 4,
+    "last_leaf": 8,
+    "first_page": 1,
+    "last_page": 5,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 16,
+    "last_leaf": 25,
+    "first_page": 16,
+    "last_page": 25,
+    "leaves": 10,
+    "read": 6
+   },
+   {
+    "first_leaf": 35,
+    "last_leaf": 47,
+    "first_page": 35,
+    "last_page": 47,
+    "leaves": 13,
+    "read": 3
+   },
+   {
+    "first_leaf": 49,
+    "last_leaf": 56,
+    "first_page": 1,
+    "last_page": 7,
+    "leaves": 7,
+    "read": 3
+   },
+   {
+    "first_leaf": 66,
+    "last_leaf": 73,
+    "first_page": 0,
+    "last_page": 6,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 77,
+    "last_leaf": 101,
+    "first_page": 72,
+    "last_page": 96,
+    "leaves": 25,
+    "read": 9
+   },
+   {
+    "first_leaf": 106,
+    "last_leaf": 148,
+    "first_page": 99,
+    "last_page": 138,
+    "leaves": 40,
+    "read": 9
+   },
+   {
+    "first_leaf": 150,
+    "last_leaf": 159,
+    "first_page": 1,
+    "last_page": 8,
+    "leaves": 8,
+    "read": 3
+   },
+   {
+    "first_leaf": 164,
+    "last_leaf": 171,
+    "first_page": 1,
+    "last_page": 8,
+    "leaves": 8,
+    "read": 4
+   },
+   {
+    "first_leaf": 182,
+    "last_leaf": 254,
+    "first_page": 168,
+    "last_page": 235,
+    "leaves": 68,
+    "read": 17
+   },
+   {
+    "first_leaf": 268,
+    "last_leaf": 272,
+    "first_page": 1,
+    "last_page": 5,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 279,
+    "last_leaf": 283,
+    "first_page": 2,
+    "last_page": 5,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 289,
+    "last_leaf": 348,
+    "first_page": 264,
+    "last_page": 318,
+    "leaves": 55,
+    "read": 14
+   },
+   {
+    "first_leaf": 355,
+    "last_leaf": 418,
+    "first_page": 1,
+    "last_page": 59,
+    "leaves": 59,
+    "read": 14
+   },
+   {
+    "first_leaf": 419,
+    "last_leaf": 466,
+    "first_page": 58,
+    "last_page": 100,
+    "leaves": 43,
+    "read": 8
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
  }
 }

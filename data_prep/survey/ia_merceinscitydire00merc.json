@@ -73,6 +73,36 @@
    "quote": "ALMANAC,",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 106,
+   "leaf": 104,
+   "canvas": "https://iiif.archive.org/iiif/merceinscitydire00merc$104/canvas",
+   "image": "https://iiif.archive.org/iiif/merceinscitydire00merc$104/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'106' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": -2,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 448,
+   "leaf": 448,
+   "canvas": "https://iiif.archive.org/iiif/merceinscitydire00merc$448/canvas",
+   "image": "https://iiif.archive.org/iiif/merceinscitydire00merc$448/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'448' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": 448,
+   "page_offset": 0,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -393,7 +423,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 104,
   "end_leaf": 448,
   "first_letter": "A",
@@ -559,5 +589,55 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 445,
+  "fitted_leaves": 427,
+  "read_leaves": 193,
+  "segments": [
+   {
+    "first_leaf": 9,
+    "last_leaf": 34,
+    "first_page": 1,
+    "last_page": 24,
+    "leaves": 24,
+    "read": 5
+   },
+   {
+    "first_leaf": 36,
+    "last_leaf": 39,
+    "first_page": 1,
+    "last_page": 4,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 41,
+    "last_leaf": 95,
+    "first_page": 39,
+    "last_page": 93,
+    "leaves": 55,
+    "read": 23
+   },
+   {
+    "first_leaf": 104,
+    "last_leaf": 449,
+    "first_page": 106,
+    "last_page": 449,
+    "leaves": 344,
+    "read": 162
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 97,
+   "both": 97,
+   "agree": 97,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.46
+  },
+  "flags": []
  }
 }

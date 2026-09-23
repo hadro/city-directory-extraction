@@ -77,6 +77,23 @@
     "year_published"
    ],
    "note": "target card, leaf 1. Spooner is the PRINTER; Lewis Nichols compiled it."
+  },
+  "start_page": {
+   "value": 11,
+   "leaf": 6,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$6/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$6/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 6; page 11 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": -5,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 8 leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -376,7 +393,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 6,
   "end_leaf": 64,
   "first_letter": "A",
@@ -532,5 +549,31 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 72,
+  "fitted_leaves": 57,
+  "read_leaves": 8,
+  "segments": [
+   {
+    "first_leaf": 5,
+    "last_leaf": 61,
+    "first_page": 10,
+    "last_page": 66,
+    "leaves": 57,
+    "read": 8
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 3,
+   "both": 2,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

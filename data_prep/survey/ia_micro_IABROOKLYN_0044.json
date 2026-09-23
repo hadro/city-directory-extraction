@@ -66,6 +66,23 @@
     "year_covered"
    ],
    "note": "Williamsburgh was still a VILLAGE -- the title says 'Village Register'. It became a city in 1851 and was annexed to Brooklyn in 1855, which is why 0046 onward read 'City Directory'. Confirms the catalog (Reynolds)."
+  },
+  "end_page": {
+   "value": 161,
+   "leaf": 210,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$210/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0044$210/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'161' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 49,
+   "listing_flags": [],
+   "doubts": [
+    "page 161 is below the listing's 189 text leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -362,7 +379,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 16,
   "end_leaf": 210,
   "first_letter": "A",
@@ -632,5 +649,95 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 272,
+  "fitted_leaves": 211,
+  "read_leaves": 124,
+  "segments": [
+   {
+    "first_leaf": 31,
+    "last_leaf": 69,
+    "first_page": 10,
+    "last_page": 44,
+    "leaves": 35,
+    "read": 25
+   },
+   {
+    "first_leaf": 76,
+    "last_leaf": 106,
+    "first_page": 46,
+    "last_page": 76,
+    "leaves": 31,
+    "read": 16
+   },
+   {
+    "first_leaf": 111,
+    "last_leaf": 136,
+    "first_page": 79,
+    "last_page": 102,
+    "leaves": 24,
+    "read": 13
+   },
+   {
+    "first_leaf": 144,
+    "last_leaf": 155,
+    "first_page": 106,
+    "last_page": 116,
+    "leaves": 11,
+    "read": 6
+   },
+   {
+    "first_leaf": 161,
+    "last_leaf": 167,
+    "first_page": 118,
+    "last_page": 124,
+    "leaves": 7,
+    "read": 5
+   },
+   {
+    "first_leaf": 169,
+    "last_leaf": 171,
+    "first_page": 7,
+    "last_page": 9,
+    "leaves": 3,
+    "read": 3
+   },
+   {
+    "first_leaf": 173,
+    "last_leaf": 222,
+    "first_page": 126,
+    "last_page": 172,
+    "leaves": 47,
+    "read": 28
+   },
+   {
+    "first_leaf": 225,
+    "last_leaf": 232,
+    "first_page": 1,
+    "last_page": 8,
+    "leaves": 8,
+    "read": 8
+   },
+   {
+    "first_leaf": 234,
+    "last_leaf": 278,
+    "first_page": 2,
+    "last_page": 46,
+    "leaves": 45,
+    "read": 20
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 22,
+   "both": 21,
+   "agree": 21,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

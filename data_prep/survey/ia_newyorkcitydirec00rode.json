@@ -122,6 +122,36 @@
     "year_covered"
    ],
    "note": "YEAR CONFLICT SETTLED, and it closes a third series. Title page leaf 17 reads 'THE NEW-YORK CITY DIRECTORY, FOR 1854-1855. Thirteenth Publication. ESTABLISHED IN 1842. NEW-YORK: CHARLES R. RODE, 161 BROADWAY, LATE DOGGETT & RODE.' The catalog's 1851 is wrong. This volume PRINTS ITS OWN SERIES ORIGIN -- 'ESTABLISHED IN 1842' -- and the arithmetic matches Doggett exactly: Doggett's 4th is 1845, his 6th is 1847, Rode's 13th is 1854, and all three imply vol 1 in 1842. 'LATE DOGGETT & RODE' names the succession outright, so Doggett and Rode are ONE series. Leaf 16 is a Durst/Avery bookplate, which is why phase 0b's candidates missed this."
+  },
+  "start_page": {
+   "value": 25,
+   "leaf": 25,
+   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$25/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$25/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 25; page 25 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 0,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 781,
+   "leaf": 805,
+   "canvas": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$805/canvas",
+   "image": "https://iiif.archive.org/iiif/newyorkcitydirec00rode$805/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'781' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 24,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -444,7 +474,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 25,
   "end_leaf": 805,
   "first_letter": "A",
@@ -625,5 +655,95 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 980,
+  "fitted_leaves": 957,
+  "read_leaves": 871,
+  "segments": [
+   {
+    "first_leaf": 3,
+    "last_leaf": 15,
+    "first_page": 1,
+    "last_page": 13,
+    "leaves": 13,
+    "read": 12
+   },
+   {
+    "first_leaf": 20,
+    "last_leaf": 211,
+    "first_page": 20,
+    "last_page": 205,
+    "leaves": 186,
+    "read": 163
+   },
+   {
+    "first_leaf": 212,
+    "last_leaf": 757,
+    "first_page": 204,
+    "last_page": 737,
+    "leaves": 534,
+    "read": 499
+   },
+   {
+    "first_leaf": 762,
+    "last_leaf": 805,
+    "first_page": 740,
+    "last_page": 781,
+    "leaves": 42,
+    "read": 41
+   },
+   {
+    "first_leaf": 811,
+    "last_leaf": 854,
+    "first_page": 3,
+    "last_page": 46,
+    "leaves": 44,
+    "read": 34
+   },
+   {
+    "first_leaf": 857,
+    "last_leaf": 935,
+    "first_page": 49,
+    "last_page": 127,
+    "leaves": 79,
+    "read": 68
+   },
+   {
+    "first_leaf": 937,
+    "last_leaf": 939,
+    "first_page": 1,
+    "last_page": 3,
+    "leaves": 3,
+    "read": 3
+   },
+   {
+    "first_leaf": 941,
+    "last_leaf": 966,
+    "first_page": 5,
+    "last_page": 30,
+    "leaves": 26,
+    "read": 24
+   },
+   {
+    "first_leaf": 968,
+    "last_leaf": 997,
+    "first_page": 32,
+    "last_page": 61,
+    "leaves": 30,
+    "read": 27
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 72,
+   "both": 72,
+   "agree": 72,
+   "agree_rate": 1.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

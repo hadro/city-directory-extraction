@@ -67,6 +67,36 @@
    "quote": "4^^H / UPINGTON'S / GENERAL DIRECTORY / OF THE BOROUGH OF / CITY OFJiEW Y:0RK",
    "method": "hocr-text",
    "confidence": "medium"
+  },
+  "start_page": {
+   "value": 21,
+   "leaf": 37,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1909p1geor$37/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1909p1geor$37/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'21' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 16,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 582,
+   "leaf": 1175,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1909p1geor$1175/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyork1909p1geor$1175/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'582' in the foot margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 593,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -360,7 +390,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 37,
   "end_leaf": 1175,
   "first_letter": "A",
@@ -568,5 +598,55 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 588,
+  "fitted_leaves": 570,
+  "read_leaves": 381,
+  "segments": [
+   {
+    "first_leaf": 7,
+    "last_leaf": 415,
+    "first_page": 5,
+    "last_page": 204,
+    "leaves": 200,
+    "read": 128
+   },
+   {
+    "first_leaf": 429,
+    "last_leaf": 1005,
+    "first_page": 209,
+    "last_page": 497,
+    "leaves": 289,
+    "read": 202
+   },
+   {
+    "first_leaf": 1013,
+    "last_leaf": 1027,
+    "first_page": 601,
+    "last_page": 608,
+    "leaves": 8,
+    "read": 5
+   },
+   {
+    "first_leaf": 1031,
+    "last_leaf": 1175,
+    "first_page": 510,
+    "last_page": 582,
+    "leaves": 73,
+    "read": 46
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 2,
+   "both": 1,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

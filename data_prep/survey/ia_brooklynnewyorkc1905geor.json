@@ -103,6 +103,36 @@
     "year_published"
    ],
    "note": "Title page leaf 7, librarian's red 'pt. 2' beside the year; both parts share the call number 79 9975 6. Genuine PARTS of one volume, not duplicates. Volume LXXXII for 1905 is consistent with 1906BPL's LXXXIII, so the Upington series numbers cleanly year over year. The copyright line also spells the year out -- 'NINETEEN HUNDRED AND FIVE' -- the OCR-proof channel the plan relies on."
+  },
+  "start_page": {
+   "value": 549,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$9/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$9/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'549' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": -540,
+   "listing_flags": [],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 1112,
+   "leaf": 1153,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$1153/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$1153/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'1112' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "high",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 41,
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -400,7 +430,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "f5b4e23-dirty",
+  "code_at": "7eb7124-dirty",
   "start_leaf": 9,
   "end_leaf": 1153,
   "first_letter": "K",
@@ -650,5 +680,63 @@
    "gap": 6,
    "restart_cost": 8
   }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-23",
+  "code_at": "7eb7124-dirty",
+  "content_leaves": 616,
+  "fitted_leaves": 590,
+  "read_leaves": 529,
+  "segments": [
+   {
+    "first_leaf": 9,
+    "last_leaf": 179,
+    "first_page": 549,
+    "last_page": 634,
+    "leaves": 86,
+    "read": 79
+   },
+   {
+    "first_leaf": 187,
+    "last_leaf": 781,
+    "first_page": 636,
+    "last_page": 927,
+    "leaves": 292,
+    "read": 256
+   },
+   {
+    "first_leaf": 789,
+    "last_leaf": 1015,
+    "first_page": 929,
+    "last_page": 1042,
+    "leaves": 114,
+    "read": 108
+   },
+   {
+    "first_leaf": 1017,
+    "last_leaf": 1153,
+    "first_page": 1044,
+    "last_page": 1112,
+    "leaves": 69,
+    "read": 61
+   },
+   {
+    "first_leaf": 1173,
+    "last_leaf": 1229,
+    "first_page": 2,
+    "last_page": 30,
+    "leaves": 29,
+    "read": 25
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 1,
+   "both": 1,
+   "agree": 0,
+   "agree_rate": 0.0,
+   "ia_page_equals_leaf": 0.0
+  },
+  "flags": []
  }
 }

@@ -97,7 +97,11 @@ def load_written():
 # Only `book-wins` writes. The rest retire a conflict from the queue without touching the cell,
 # which is the point: "reviewed, the catalog was right" must be distinguishable from "not yet
 # reviewed", and a regenerated queue cannot tell you which.
-VERDICTS = {"book-wins", "catalog-wins", "both-right", "needs-image", "wontfix"}
+VERDICTS = {"book-wins", "catalog-wins", "both-right", "needs-image", "wontfix", "clear"}
+# `clear` (2026-09-24) empties a cell a human decided is wrong when the survey has nothing CSV-grade
+# to put there instead -- so no conflict ever surfaces for `book-wins` to act on. It needs the
+# value it expects to find (`expect`) and a reason, and does nothing if the cell has changed since.
+# First use: hearnesbrooklync1852unse key_page=27, a LEAF typed into a printed-page column.
 
 
 def read_csv_raw() -> str:
@@ -187,6 +191,10 @@ def load_decisions():
         if verdict not in VERDICTS:
             print(f"unknown verdict {verdict!r} on {d.get('id')}/{d.get('column')} -- ignored",
                   file=sys.stderr)
+            continue
+        if verdict == "clear" and (not (d.get("reason") or "").strip() or "expect" not in d):
+            print(f"clear without a reason or an expected value on {d.get('id')}/{d.get('column')} "
+                  f"-- ignored", file=sys.stderr)
             continue
         if verdict == "book-wins" and not (d.get("reason") or "").strip():
             print(f"book-wins with no reason on {d.get('id')}/{d.get('column')} -- ignored",
@@ -408,6 +416,15 @@ def run(write: bool, show_conflicts: bool, retract: bool = False):
         for col, cur, leaf in unit_suspects(rec, doc):
             suspects.append((rec["source"], rec["id"], col, cur, leaf,
                              (doc.get("book_says") or {}).get("key_page") or {}))
+        for (dsrc, did, dcol), dec in decisions.items():
+            if (dec["verdict"] == "clear" and (dsrc, did) == (rec["source"], rec["id"])
+                    and dcol in idx and row[idx[dcol]] == str(dec["expect"])):
+                row[idx[dcol]] = ""
+                counts[f"cleared by decision: {dcol}"] += 1
+                retracted.append((rec["source"], rec["id"], dcol, str(dec["expect"]),
+                                  {"attestation": "decision", "confidence": "clear",
+                                   "leaf": None}))
+        rec = dict(zip(out_header, row))
         if retract:
             for col, value, claim in retractable(rec, doc, written):
                 row[idx[col]] = ""
@@ -454,7 +471,9 @@ def run(write: bool, show_conflicts: bool, retract: bool = False):
         print(f"\nretracted ({len(retracted)}) -- written by this tool, now below CSV grade:")
         for src, ident, col, value, claim in retracted:
             said = claim.get("page_offset") if col == "page_offset" else claim.get("value")
-            if claim.get("attestation") == INTERPOLATED:
+            if claim.get("attestation") == "decision":
+                why = f"cleared by a `clear` decision in {DECISIONS.name}"
+            elif claim.get("attestation") == INTERPOLATED:
                 why = "IA interpolated it; the page prints no such folio"
             elif not claim:
                 why = "no claim supports it any more"

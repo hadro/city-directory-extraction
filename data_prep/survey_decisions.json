@@ -202,7 +202,8 @@
       "reason": "Target card leaf 1: 'Brooklyn Directory, for 1832-33. Published by William Bigelow, 55 Fulton-street. Brooklyn: Printed by A. Spooner, 57 Fulton-street. 1832.' A TENTH spooner row, invisible until the extractor stopped preferring the printer -- and the one that explains the cluster: A. Spooner is the PRINTER here, and the sidecar now records him as such.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -212,7 +213,8 @@
       "reason": "Target card leaf 1, read from the image: 'Brooklyn Directory for the year 1831. By Lewis Nichols, Brooklyn. A. Spooner, Printer, June 1831.' Spooner is named as the PRINTER on the page itself; the sidecar records him as such. Eleventh and twelfth rows of the spooner cluster, both invisible to phase 0 because the hOCR yielded no publisher at all.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -222,7 +224,8 @@
       "reason": "Title page leaf 2, read from the image: 'BROOKLYN DIRECTORY, FOR THE YEARS 1837-38. BY LEWIS NICHOLS. BROOKLYN: A. SPOONER & SONS, PRINTERS.' Spooner is the PRINTER. The phase-0 candidate leaves (3/4/5) were all advertisement spreads, one of which carries an ad for 'A. SPOONER & SONS, Book & Letter Press Printers' -- a plausible source of the catalog's attribution. Eleventh and twelfth rows of the spooner cluster, both invisible to phase 0 because the hOCR yielded no publisher at all.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -232,7 +235,8 @@
       "reason": "Target card leaf 1: 'Brooklyn Directory for the year 1830. By Lewis Nichols, Brooklyn: A. Spooner, Printer, June 1830.' Spooner is the PRINTER; Lewis Nichols compiled it. 1830 is where the catalog label stops being true.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -242,7 +246,8 @@
       "reason": "Target card leaf 1: 'Brooklyn Directory, for 1836-37. Published by Lewis Nichols. Brooklyn: Printed by A. Spooner & Sons.' Spooner is the PRINTER.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -252,7 +257,8 @@
       "reason": "Target card leaf 1 (underexposed frame, brightened): 'for 1841-2. Compiled by Thomas [Leslie] & John W. Leslie, and Published by them at the Reading and General Agency Office, 223 Fulton Street.' No Spooner involvement at all.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -262,7 +268,8 @@
       "reason": "Target card leaf 1 (underexposed frame, brightened): 'Brooklyn City Directory for 1845 and 1846 ... Brooklyn: Silas H. Crowell, 1845. Douglas, Printer.' No Spooner involvement at all.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -272,7 +279,8 @@
       "reason": "Read at leaf 323 = printed p.317 (GAS-GAY), the exact anchor the CSV note cites. Its offset (+6) checks out; its column count does not. The page is TWO columns. This also refutes the note's claim that 'the 2->3 transition is 1857->1859'. Each anchor leaf was opened and counted; the offsets recorded alongside these column counts are all correct, so it is specifically the column measurement that is wrong.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -282,7 +290,8 @@
       "reason": "Read at leaf 338 = printed p.326 (GID-GIL), the anchor the note cites. Offset +12 checks out; the page is TWO columns, not 3. Each anchor leaf was opened and counted; the offsets recorded alongside these column counts are all correct, so it is specifically the column measurement that is wrong.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -292,7 +301,8 @@
       "reason": "Read at leaf 511 = printed p.497 (GIE-GIL), the anchor the note cites. Offset +14 checks out; the page is TWO columns, not 3. Leaf 23 (printed p.31) is 2-column too, so it is not a mid-volume change. Each anchor leaf was opened and counted; the offsets recorded alongside these column counts are all correct, so it is specifically the column measurement that is wrong.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -302,7 +312,8 @@
       "reason": "Read at leaf 7 = printed p.1025. FIVE columns. The CSV's 3 came from a bracket covering 1859-1915; 1922/23 is outside it, so this is a measured value rather than a correction. Each anchor leaf was opened and counted; the offsets recorded alongside these column counts are all correct, so it is specifically the column measurement that is wrong.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -312,7 +323,8 @@
       "reason": "Title page leaf 17 carries TWO independent attestations of 1839: 'FOR THE SIXTY-FOURTH YEAR OF AMERICAN INDEPENDENCE' (1775+64) and the imprint's printed '1839'. The catalog's 1816 is wrong. This is one of the 16 IA-metadata errors the plan predicted, now confirmed from the page rather than inferred from a majority vote.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -322,7 +334,8 @@
       "reason": "Title page leaf 7: 'PRINTED AND PUBLISHED AT THE OFFICE OF THE FLUSHING JOURNAL, FLUSHING, N. Y. 1890', copyright entered by C. W. Smith. The volume is not Boyd's. The 'JOHN J. BRENNAN, PROPRIETOR' phase 0b read from leaf 27 is a third name again, and sits elsewhere in the front matter.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -332,7 +345,8 @@
       "reason": "Title page leaf 17: 'THE NEW-YORK CITY DIRECTORY, FOR 1854-1855. Thirteenth Publication. ESTABLISHED IN 1842.' The catalog's 1851 is wrong. Corroborated two ways: the copyright line on leaf 18 reads 'in the year 1854, by CHARLES R. RODE', and the printed volume number 13 against a printed origin of 1842 lands exactly on 1854.",
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -343,7 +357,8 @@
       "wants_field_split": true,
       "by": "claude",
       "date": "2026-09-22",
-      "awaiting_confirmation": true
+      "confirmed_by": "hadro",
+      "confirmed": "2026-09-24"
     },
     {
       "source": "ia",
@@ -362,6 +377,80 @@
       "reason": "The CSV's -5 was measured in a different canvas numbering: the row's own note records 'first clean directory page printed p106 = canvas c101', and that page is IA leaf 104 (IIIF canvas 104), 3 off. page_offset is canvas_index - printed_page (master_directories.README.md), so at the listing start it is 104 - 106 = -2, consistent with the corrected start_page=106. Leaving -5 beside 106 would make the row contradict itself. https://iiif.archive.org/iiif/merceinscitydire00merc$104/full/!1400,1400/0/default.jpg",
       "by": "hadro",
       "date": "2026-09-23"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0016",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Compiled by Henry L. Ogden.' The catalog's 'spooner' is the series founder's name carried past its expiry (see the Spooner-series note above); this volume's compiler/publisher is Ogden. https://iiif.archive.org/iiif/micro_IABROOKLYN_0016$1/full/!1400,1400/0/default.jpg",
+      "by": "hadro (accepting claude's recommendation)",
+      "date": "2026-09-24"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0017",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Compiled by T(homas) & J(ohn) W. Leslie, & W(illiam) F. Chichester.' The catalog's 'spooner' is the series founder's name carried past its expiry (see the Spooner-series note above); this volume's compiler/publisher is Leslie/Chichester. https://iiif.archive.org/iiif/micro_IABROOKLYN_0017$1/full/!1400,1400/0/default.jpg",
+      "by": "hadro (accepting claude's recommendation)",
+      "date": "2026-09-24"
+    },
+    {
+      "source": "ia",
+      "id": "micro_IABROOKLYN_0021",
+      "column": "publisher",
+      "verdict": "book-wins",
+      "reason": "Target card leaf 1: 'Compiled and Published by Henry R., & William J. Hearne.' The catalog's 'spooner' is the series founder's name carried past its expiry (see the Spooner-series note above); this volume's compiler/publisher is Hearnes. https://iiif.archive.org/iiif/micro_IABROOKLYN_0021$1/full/!1400,1400/0/default.jpg",
+      "by": "hadro (accepting claude's recommendation)",
+      "date": "2026-09-24"
+    },
+    {
+      "source": "ia",
+      "id": "1899xBPL",
+      "column": "publisher",
+      "verdict": "both-right",
+      "reason": "Title page leaf 10: 'GEO. H. CLARKE, Proprietor'. Lain is the series and firm name the directory kept; George H. Clarke owned it. Wants the compiler/publisher/proprietor split. https://iiif.archive.org/iiif/1899xBPL$10/full/!1400,1400/0/default.jpg",
+      "wants_field_split": true,
+      "by": "hadro (accepting claude's recommendation)",
+      "date": "2026-09-24"
+    },
+    {
+      "source": "ia",
+      "id": "1885BPL",
+      "column": "legend_location",
+      "verdict": "book-wins",
+      "reason": "Leaf 1 prints 'ABBREVIATIONS, ETC.' and then the first listing entries on the same page ('Aass Peter, baker, 253 Gold', 'Abal Peter, carver'), so the legend is inline at the listing head, not a dedicated page. https://iiif.archive.org/iiif/1885BPL$1/full/!1400,1400/0/default.jpg",
+      "by": "hadro (accepting claude's recommendation)",
+      "date": "2026-09-24"
+    },
+    {
+      "source": "ia",
+      "id": "trowsgeneraldir1909p3trow",
+      "column": "volume_number",
+      "verdict": "book-wins",
+      "reason": "Title page leaf 5: 'VOL. 122'. Trow general volumes number year-1787 continuously (CXX=1907 ... CXXIII=1910), so the year ending 1909 is vol. 122; the CSV's 129 cannot be. https://iiif.archive.org/iiif/trowsgeneraldir1909p3trow$5/full/!1400,1400/0/default.jpg",
+      "by": "hadro (accepting claude's recommendation)",
+      "date": "2026-09-24"
+    },
+    {
+      "source": "ia",
+      "id": "trowsgeneraldir1914p1trow",
+      "column": "year_published",
+      "verdict": "book-wins",
+      "reason": "Title page leaf 7: 'Copyright 1913, by Trow Directory, Printing and Bookbinding Company' -- the directory for the year ending August 1, 1914, published in 1913. The CSV's 1909 is a copy error. https://iiif.archive.org/iiif/trowsgeneraldir1914p1trow$7/full/!1400,1400/0/default.jpg",
+      "by": "hadro (accepting claude's recommendation)",
+      "date": "2026-09-24"
+    },
+    {
+      "source": "ia",
+      "id": "hearnesbrooklync1852unse",
+      "column": "key_page",
+      "verdict": "clear",
+      "expect": "27",
+      "reason": "27 is a LEAF (the legend page's scan position), typed into a printed-page column by commit 94fe7fe. The legend page prints no folio -- it is p.17 only by sequence (IA interpolated it) -- so no printed key_page exists to write. Its location stays recorded as legend_leaf=27. https://iiif.archive.org/iiif/hearnesbrooklync1852unse$27/full/!1400,1400/0/default.jpg",
+      "by": "hadro (accepting claude's recommendation)",
+      "date": "2026-09-24"
     }
   ]
 }

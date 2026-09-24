@@ -635,5 +635,102 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 3,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 4,
+    "end_leaf": 164,
+    "title": null,
+    "leaves": 153,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 5,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 158,
+      "page": 139,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "district",
+    "start_leaf": 165,
+    "end_leaf": 166,
+    "title": {
+     "leaf": 165,
+     "quote": "144 WILLIAMSBURGH DIRECTORY,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$165/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 168,
+    "end_leaf": 251,
+    "title": {
+     "leaf": 168,
+     "quote": "REGISTER,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$168/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 83,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 169,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 248,
+      "page": 46,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "district",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0043_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 4,
+    "end_leaf": 164
+   }
+  ],
+  "kept": 4271,
+  "dropped": 1638,
+  "kept_share": 0.7228,
+  "kept_by_section": {
+   "listing": 4271
+  }
  }
 }

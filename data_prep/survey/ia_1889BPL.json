@@ -815,5 +815,191 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 3,
+    "title": null,
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 4,
+    "end_leaf": 7,
+    "title": {
+     "leaf": 4,
+     "quote": "INDEX TO ADVERTISEMENTS",
+     "image": "https://iiif.archive.org/iiif/1889BPL$4/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 8,
+    "end_leaf": 8,
+    "title": {
+     "leaf": 8,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1889BPL$8/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1390,
+    "title": null,
+    "leaves": 1381,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 91,
+      "page": 81,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1387,
+      "page": 1323,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1391,
+    "end_leaf": 1392,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1393,
+    "end_leaf": 1400,
+    "title": {
+     "leaf": 1393,
+     "quote": "BUSINESS REGISTER",
+     "image": "https://iiif.archive.org/iiif/1889BPL$1393/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1394,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1399,
+      "page": 7,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1401,
+    "end_leaf": 1402,
+    "title": {
+     "leaf": 1401,
+     "quote": "INDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1889BPL$1401/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1403,
+    "end_leaf": 1432,
+    "title": {
+     "leaf": 1403,
+     "quote": "MUNICIPAL REGISTER",
+     "image": "https://iiif.archive.org/iiif/1889BPL$1403/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 30,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1406,
+      "page": 6,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1432,
+      "page": 32,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1433,
+    "end_leaf": 1473,
+    "title": {
+     "leaf": 1433,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1889BPL$1433/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 41,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1434,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1471,
+      "page": 39,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1889BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 8,
+    "end_leaf": 8
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1390
+   }
+  ],
+  "kept": 208167,
+  "dropped": 14078,
+  "kept_share": 0.9367,
+  "kept_by_section": {
+   "late_names": 73,
+   "listing": 208094
+  }
  }
 }

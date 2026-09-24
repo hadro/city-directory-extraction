@@ -771,5 +771,61 @@
   "flags": [
    "no-folios"
   ]
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 8,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 293,
+    "title": null,
+    "leaves": 278,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 294,
+    "end_leaf": 338,
+    "title": null,
+    "leaves": 39,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/brooklyndirector00ogde_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 293
+   }
+  ],
+  "kept": 7666,
+  "dropped": 1061,
+  "kept_share": 0.8784,
+  "kept_by_section": {
+   "listing": 7666
+  }
  }
 }

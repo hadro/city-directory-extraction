@@ -670,5 +670,132 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 25,
+    "title": null,
+    "leaves": 12,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 9,
+      "page": 8,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 25,
+      "page": 16,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 27,
+    "end_leaf": 31,
+    "title": {
+     "leaf": 27,
+     "quote": "INDEX TO ADVERTISEMENTS",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$27/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 27,
+      "page": 17,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 31,
+      "page": 19,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 33,
+    "end_leaf": 33,
+    "title": {
+     "leaf": 33,
+     "quote": "NAMES TOO LATE FOR CLASSIFICATION.",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1910geor$33/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 33,
+      "page": 20,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 33,
+      "page": 20,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 35,
+    "end_leaf": 1311,
+    "title": null,
+    "leaves": 639,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 35,
+      "page": 21,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1311,
+      "page": 647,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "index",
+   "late_names",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/brooklynnewyorkc1910geor_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 33,
+    "end_leaf": 33
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 35,
+    "end_leaf": 1311
+   }
+  ],
+  "kept": 108515,
+  "dropped": 329,
+  "kept_share": 0.997,
+  "kept_by_section": {
+   "late_names": 47,
+   "listing": 108468
+  }
  }
 }

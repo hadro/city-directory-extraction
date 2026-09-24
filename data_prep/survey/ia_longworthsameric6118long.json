@@ -626,5 +626,144 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 10,
+    "title": null,
+    "leaves": 6,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 11,
+    "end_leaf": 41,
+    "title": {
+     "leaf": 11,
+     "quote": "NEW-YORK REGISTER,",
+     "image": "https://iiif.archive.org/iiif/longworthsameric6118long$11/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 31,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 13,
+      "page": 9,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 40,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 42,
+    "end_leaf": 711,
+    "title": null,
+    "leaves": 670,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 43,
+      "page": 51,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 711,
+      "page": 741,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 712,
+    "end_leaf": 714,
+    "title": {
+     "leaf": 712,
+     "quote": "ADDITIONAL NAMES, REMOVALS, AND",
+     "image": "https://iiif.archive.org/iiif/longworthsameric6118long$712/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 712,
+      "page": 742,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 714,
+      "page": 744,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 715,
+    "end_leaf": 774,
+    "title": {
+     "leaf": 715,
+     "quote": "CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/longworthsameric6118long$715/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 57,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 715,
+      "page": 745,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 770,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "late_names",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/longworthsameric6118long_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 42,
+    "end_leaf": 711
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 712,
+    "end_leaf": 714
+   }
+  ],
+  "kept": 36213,
+  "dropped": 3313,
+  "kept_share": 0.9162,
+  "kept_by_section": {
+   "listing": 36090,
+   "late_names": 123
+  }
  }
 }

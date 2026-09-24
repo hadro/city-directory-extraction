@@ -568,5 +568,105 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 111,
+    "title": null,
+    "leaves": 54,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 15,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 99,
+      "page": 197,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 113,
+    "end_leaf": 749,
+    "title": null,
+    "leaves": 348,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 115,
+      "page": 1205,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 127,
+      "page": 1211,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 751,
+    "end_leaf": 953,
+    "title": null,
+    "leaves": 118,
+    "residential": false
+   },
+   {
+    "kind": "nurses",
+    "start_leaf": 955,
+    "end_leaf": 1065,
+    "title": {
+     "leaf": 955,
+     "quote": "BROOKLYN NURSES' DIREC-",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyorkc19123broo$955/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 1063,
+      "end_leaf": 1065,
+      "letters": "W"
+     }
+    ],
+    "leaves": 66,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "nurses"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/brooklynnewyorkc19123broo_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 113,
+    "end_leaf": 749
+   }
+  ],
+  "kept": 8723,
+  "dropped": 5440,
+  "kept_share": 0.6159,
+  "kept_by_section": {
+   "listing": 8723
+  }
  }
 }

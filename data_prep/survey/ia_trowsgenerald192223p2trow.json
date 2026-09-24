@@ -660,5 +660,81 @@
   "flags": [
    "no-folios"
   ]
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 8,
+    "end_leaf": 882,
+    "title": null,
+    "leaves": 869,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 883,
+    "end_leaf": 884,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 885,
+    "end_leaf": 972,
+    "title": {
+     "leaf": 885,
+     "quote": "DENTAL REGISTER AND DIRECTORY OF THE UNITED STATES AND CANADA",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$885/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 891,
+      "end_leaf": 966,
+      "letters": "ABCDFGHLMPRST"
+     }
+    ],
+    "leaves": 87,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgenerald192223p2trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 8,
+    "end_leaf": 882
+   }
+  ],
+  "kept": 596008,
+  "dropped": 42487,
+  "kept_share": 0.9335,
+  "kept_by_section": {
+   "listing": 596008
+  }
  }
 }

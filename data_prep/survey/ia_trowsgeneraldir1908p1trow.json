@@ -559,5 +559,146 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 23,
+    "title": null,
+    "leaves": 9,
+    "residential": false
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 25,
+    "end_leaf": 25,
+    "title": {
+     "leaf": 25,
+     "quote": "ALPHABETICALLY CLASSIFIED ACCORDING TO THE BUSINESS",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$25/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 27,
+    "end_leaf": 31,
+    "title": {
+     "leaf": 27,
+     "quote": "INDEX TO PURCHASERS' GUIDE.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$27/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 35,
+    "end_leaf": 101,
+    "title": {
+     "leaf": 35,
+     "quote": "PURCHASERS' GUIDE AND COMMERCIAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$35/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 32,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 57,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 99,
+      "page": 31,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 103,
+    "end_leaf": 105,
+    "title": {
+     "leaf": 103,
+     "quote": "INDEX TO ADVERTISERS.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$103/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 107,
+    "end_leaf": 109,
+    "title": {
+     "leaf": 107,
+     "quote": "NAMES TOO LATE FOR INSERTION (IN THE PROPER PLACE),",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$107/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": true
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 111,
+    "end_leaf": 1059,
+    "title": null,
+    "leaves": 474,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 115,
+      "page": 19,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 965,
+      "page": 441,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "business_notice",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldir1908p1trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 107,
+    "end_leaf": 109
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 111,
+    "end_leaf": 1059
+   }
+  ],
+  "kept": 127546,
+  "dropped": 1069,
+  "kept_share": 0.9917,
+  "kept_by_section": {
+   "late_names": 225,
+   "listing": 127321
+  }
  }
 }

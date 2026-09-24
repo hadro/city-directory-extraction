@@ -617,5 +617,85 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 4,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 42,
+    "title": null,
+    "leaves": 36,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 7,
+      "page": 7,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 42,
+      "page": 48,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 43,
+    "end_leaf": 62,
+    "title": null,
+    "leaves": 20,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 43,
+      "page": 49,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 61,
+      "page": 67,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0004_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 42
+   }
+  ],
+  "kept": 1387,
+  "dropped": 512,
+  "kept_share": 0.7304,
+  "kept_by_section": {
+   "listing": 1387
+  }
  }
 }

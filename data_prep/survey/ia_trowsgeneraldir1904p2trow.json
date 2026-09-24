@@ -705,5 +705,85 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1137,
+    "title": null,
+    "leaves": 564,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 25,
+      "page": 549,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1137,
+      "page": 1104,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1139,
+    "end_leaf": 1139,
+    "title": null,
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1139,
+      "page": 1105,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1139,
+      "page": 1105,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldir1904p2trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1137
+   }
+  ],
+  "kept": 157846,
+  "dropped": 312,
+  "kept_share": 0.998,
+  "kept_by_section": {
+   "listing": 157846
+  }
  }
 }

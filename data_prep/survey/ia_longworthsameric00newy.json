@@ -661,5 +661,159 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 15,
+    "title": null,
+    "leaves": 7,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 17,
+    "end_leaf": 55,
+    "title": {
+     "leaf": 17,
+     "quote": "NEW-YORK REGISTER,",
+     "image": "https://iiif.archive.org/iiif/longworthsameric00newy$17/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 39,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 19,
+      "page": 26,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 53,
+      "page": 35,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 56,
+    "end_leaf": 737,
+    "title": null,
+    "leaves": 682,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 57,
+      "page": 51,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 737,
+      "page": 731,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 738,
+    "end_leaf": 738,
+    "title": null,
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 738,
+      "page": 732,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 738,
+      "page": 732,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "nurses",
+    "start_leaf": 739,
+    "end_leaf": 793,
+    "title": {
+     "leaf": 739,
+     "quote": "NURSES.",
+     "image": "https://iiif.archive.org/iiif/longworthsameric00newy$739/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 55,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 739,
+      "page": 733,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 793,
+      "page": 35,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 794,
+    "end_leaf": 794,
+    "title": {
+     "leaf": 794,
+     "quote": "36 NEW-YORK REGISTER.",
+     "image": "https://iiif.archive.org/iiif/longworthsameric00newy$794/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 794,
+      "page": 36,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 794,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "nurses",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/longworthsameric00newy_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 56,
+    "end_leaf": 737
+   }
+  ],
+  "kept": 35735,
+  "dropped": 3941,
+  "kept_share": 0.9007,
+  "kept_by_section": {
+   "listing": 35735
+  }
  }
 }

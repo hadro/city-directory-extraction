@@ -664,5 +664,228 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 8,
+    "end_leaf": 29,
+    "title": {
+     "leaf": 8,
+     "quote": "DENTAL REGISTER AND DIRECTORY OF THE UNITED STATES AND CANADA",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$8/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 20,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 14,
+      "page": 40,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 29,
+      "page": 53,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 30,
+    "end_leaf": 31,
+    "title": {
+     "leaf": 30,
+     "quote": "INDEX TO ADVERTISERS",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$30/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 30,
+      "page": 54,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 31,
+      "page": 55,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 32,
+    "end_leaf": 32,
+    "title": {
+     "leaf": 32,
+     "quote": "-CLASSIFIED BUSINESS LISTS ^^^^^H",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$32/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 32,
+      "page": 56,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 32,
+      "page": 56,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 33,
+    "end_leaf": 36,
+    "title": {
+     "leaf": 33,
+     "quote": "TOO LATE FOR REGULAR INSERTION",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$33/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 33,
+      "page": 57,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 36,
+      "page": 60,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 37,
+    "end_leaf": 177,
+    "title": {
+     "leaf": 37,
+     "quote": "TROWS NEW YORK CITY STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$37/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 141,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 37,
+      "page": 61,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 177,
+      "page": 225,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 178,
+    "end_leaf": 185,
+    "title": {
+     "leaf": 178,
+     "quote": "CLASSIFIED BUSINESS LISTS",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$178/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 178,
+      "page": 226,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 184,
+      "page": 232,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 186,
+    "end_leaf": 958,
+    "title": null,
+    "leaves": 773,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 187,
+      "page": 253,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 958,
+      "page": 1024,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 962,
+    "end_leaf": 963,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "business_notice",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgenerald192223p1trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 33,
+    "end_leaf": 36
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 186,
+    "end_leaf": 958
+   }
+  ],
+  "kept": 540447,
+  "dropped": 15342,
+  "kept_share": 0.9724,
+  "kept_by_section": {
+   "late_names": 2159,
+   "listing": 538288
+  }
  }
 }

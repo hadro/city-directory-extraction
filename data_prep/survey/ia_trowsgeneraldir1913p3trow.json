@@ -735,5 +735,161 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 3,
+    "end_leaf": 4,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "business",
+    "start_leaf": 7,
+    "end_leaf": 277,
+    "title": {
+     "leaf": 7,
+     "quote": "BUSINESS DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p3trow$7/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 89,
+      "end_leaf": 129,
+      "letters": "ABCDFGHJKLMPRSW"
+     }
+    ],
+    "leaves": 135,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 11,
+      "page": 753,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 277,
+      "page": 879,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 279,
+    "end_leaf": 321,
+    "title": null,
+    "leaves": 22,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 279,
+      "page": 880,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 321,
+      "page": 901,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 323,
+    "end_leaf": 435,
+    "title": null,
+    "alphabets": [
+     {
+      "start_leaf": 329,
+      "end_leaf": 349,
+      "letters": "BCDFGKLMPRS"
+     }
+    ],
+    "leaves": 57,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 323,
+      "page": 902,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 435,
+      "page": 956,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business",
+    "start_leaf": 437,
+    "end_leaf": 1015,
+    "title": {
+     "leaf": 437,
+     "quote": "BUSINESS DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p3trow$437/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 545,
+      "end_leaf": 567,
+      "letters": "BCDGHKLMRSW"
+     },
+     {
+      "start_leaf": 673,
+      "end_leaf": 699,
+      "letters": "ABCFGKMRSW"
+     },
+     {
+      "start_leaf": 753,
+      "end_leaf": 789,
+      "letters": "BCDFGHKLMPRSW"
+     }
+    ],
+    "leaves": 290,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 445,
+      "page": 959,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1009,
+      "page": 100,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "back_matter",
+   "business",
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": null,
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 279,
+    "end_leaf": 321
+   }
+  ],
+  "kept": 0,
+  "skipped": "not-residential"
  }
 }

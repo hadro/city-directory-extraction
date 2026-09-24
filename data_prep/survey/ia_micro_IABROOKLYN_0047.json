@@ -613,5 +613,74 @@
   "flags": [
    "no-folios"
   ]
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 21,
+    "title": null,
+    "leaves": 18,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 22,
+    "end_leaf": 231,
+    "title": null,
+    "leaves": 201,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 232,
+    "end_leaf": 266,
+    "title": null,
+    "leaves": 34,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 267,
+    "end_leaf": 415,
+    "title": {
+     "leaf": 267,
+     "quote": "APPENDIX:",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$267/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 121,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "back_matter",
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0047_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 22,
+    "end_leaf": 231
+   }
+  ],
+  "kept": 2572,
+  "dropped": 1634,
+  "kept_share": 0.6115,
+  "kept_by_section": {
+   "listing": 2572
+  }
  }
 }

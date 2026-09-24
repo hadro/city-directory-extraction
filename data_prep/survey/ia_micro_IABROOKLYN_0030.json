@@ -723,5 +723,136 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 21,
+    "title": null,
+    "leaves": 20,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 6,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 21,
+      "page": 17,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 22,
+    "end_leaf": 508,
+    "title": null,
+    "leaves": 478,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 22,
+      "page": 18,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 508,
+      "page": 496,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 509,
+    "end_leaf": 523,
+    "title": null,
+    "leaves": 14,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 524,
+    "end_leaf": 527,
+    "title": {
+     "leaf": 524,
+     "quote": "STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$524/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 528,
+    "end_leaf": 558,
+    "title": {
+     "leaf": 528,
+     "quote": "APPENDIX\u2014CORPOR ATION.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$528/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 31,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 559,
+    "end_leaf": 561,
+    "title": {
+     "leaf": 559,
+     "quote": "APPENDIX\u2014\u2014CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$559/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 562,
+    "end_leaf": 578,
+    "title": {
+     "leaf": 562,
+     "quote": "APPENDIX\u2014INSURANCE COMPANIES,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0030$562/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 17,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0030_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 22,
+    "end_leaf": 508
+   }
+  ],
+  "kept": 14250,
+  "dropped": 1120,
+  "kept_share": 0.9271,
+  "kept_by_section": {
+   "listing": 14250
+  }
  }
 }

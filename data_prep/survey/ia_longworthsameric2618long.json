@@ -595,5 +595,93 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "register",
+    "start_leaf": 5,
+    "end_leaf": 108,
+    "title": {
+     "leaf": 5,
+     "quote": "NEW-TORK REGISTER",
+     "image": "https://iiif.archive.org/iiif/longworthsameric2618long$5/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 104,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 11,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 108,
+      "page": 104,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 109,
+    "end_leaf": 324,
+    "title": null,
+    "leaves": 216,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 109,
+      "page": 105,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 297,
+      "page": 93,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "nurses",
+    "start_leaf": 325,
+    "end_leaf": 330,
+    "title": {
+     "leaf": 325,
+     "quote": "SICK NURSES.",
+     "image": "https://iiif.archive.org/iiif/longworthsameric2618long$325/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 6,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "listing",
+   "nurses",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/longworthsameric2618long_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 109,
+    "end_leaf": 324
+   }
+  ],
+  "kept": 9961,
+  "dropped": 4441,
+  "kept_share": 0.6916,
+  "kept_by_section": {
+   "listing": 9961
+  }
  }
 }

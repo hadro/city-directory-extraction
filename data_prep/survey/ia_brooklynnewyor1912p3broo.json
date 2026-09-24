@@ -711,5 +711,117 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 743,
+    "title": null,
+    "leaves": 368,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 9,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 743,
+      "page": 1521,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 745,
+    "end_leaf": 945,
+    "title": null,
+    "alphabets": [
+     {
+      "start_leaf": 769,
+      "end_leaf": 1033,
+      "letters": "T"
+     }
+    ],
+    "leaves": 101,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 747,
+      "page": 523,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 945,
+      "page": 1616,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "nurses",
+    "start_leaf": 947,
+    "end_leaf": 1057,
+    "title": {
+     "leaf": 947,
+     "quote": "BROOKLYN NURSES' DIREC-",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$947/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 56,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 947,
+      "page": 1617,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1057,
+      "page": 1668,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "nurses"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/brooklynnewyor1912p3broo_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 743
+   }
+  ],
+  "kept": 62247,
+  "dropped": 12224,
+  "kept_share": 0.8359,
+  "kept_by_section": {
+   "listing": 62247
+  }
  }
 }

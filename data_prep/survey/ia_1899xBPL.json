@@ -741,5 +741,206 @@
    "ia_page_equals_leaf": 0.01
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 9,
+    "title": null,
+    "leaves": 10,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 9,
+      "page": 9,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 10,
+    "end_leaf": 15,
+    "title": {
+     "leaf": 10,
+     "quote": "CLASSIFIED BUSINESS LISTS",
+     "image": "https://iiif.archive.org/iiif/1899xBPL$10/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 6,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 10,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 14,
+      "page": 14,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 16,
+    "end_leaf": 22,
+    "title": {
+     "leaf": 16,
+     "quote": "INDEX TO ADVERTISEMENTS",
+     "image": "https://iiif.archive.org/iiif/1899xBPL$16/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 7,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 23,
+    "end_leaf": 36,
+    "title": {
+     "leaf": 23,
+     "quote": "BUSINESS REGISTER",
+     "image": "https://iiif.archive.org/iiif/1899xBPL$23/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 14,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 24,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 30,
+      "page": 8,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 37,
+    "end_leaf": 38,
+    "title": {
+     "leaf": 37,
+     "quote": "INDEX TO ADVERTISEMENTS,",
+     "image": "https://iiif.archive.org/iiif/1899xBPL$37/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 39,
+    "end_leaf": 39,
+    "title": {
+     "leaf": 39,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1899xBPL$39/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "index",
+    "start_leaf": 40,
+    "end_leaf": 46,
+    "title": {
+     "leaf": 40,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1899xBPL$40/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 47,
+    "end_leaf": 1960,
+    "title": null,
+    "leaves": 1910,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 54,
+      "page": 8,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1960,
+      "page": 1904,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1961,
+    "end_leaf": 1983,
+    "title": {
+     "leaf": 1961,
+     "quote": "COMMERCIAL REGISTER",
+     "image": "https://iiif.archive.org/iiif/1899xBPL$1961/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 23,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1961,
+      "page": 1905,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1982,
+      "page": 1930,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "business_notice",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1899xBPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 39,
+    "end_leaf": 39
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 47,
+    "end_leaf": 1960
+   }
+  ],
+  "kept": 289446,
+  "dropped": 3684,
+  "kept_share": 0.9874,
+  "kept_by_section": {
+   "late_names": 110,
+   "listing": 289336
+  }
  }
 }

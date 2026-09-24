@@ -620,5 +620,77 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 19,
+    "title": null,
+    "leaves": 10,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 21,
+    "end_leaf": 25,
+    "title": {
+     "leaf": 21,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyork1904p1geor$21/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 27,
+    "end_leaf": 1137,
+    "title": null,
+    "leaves": 555,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 29,
+      "page": 22,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1137,
+      "page": 558,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "index",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/brooklynnewyork1904p1geor_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 27,
+    "end_leaf": 1137
+   }
+  ],
+  "kept": 90393,
+  "dropped": 375,
+  "kept_share": 0.9959,
+  "kept_by_section": {
+   "listing": 90393
+  }
  }
 }

@@ -754,5 +754,231 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 8,
+    "title": null,
+    "leaves": 9,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 3,
+      "page": 4,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 657,
+    "title": null,
+    "leaves": 648,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 9,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 655,
+      "page": 625,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 658,
+    "end_leaf": 658,
+    "title": {
+     "leaf": 658,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1867BPL$658/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "index",
+    "start_leaf": 659,
+    "end_leaf": 662,
+    "title": {
+     "leaf": 659,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1867BPL$659/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 661,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 662,
+      "page": 2,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 663,
+    "end_leaf": 700,
+    "title": {
+     "leaf": 663,
+     "quote": "STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1867BPL$663/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 37,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 663,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 695,
+      "page": 35,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 701,
+    "end_leaf": 702,
+    "title": {
+     "leaf": 701,
+     "quote": "INDEX TO APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/1867BPL$701/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 703,
+    "end_leaf": 708,
+    "title": {
+     "leaf": 703,
+     "quote": "APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/1867BPL$703/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 6,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 704,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 708,
+      "page": 6,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 709,
+    "end_leaf": 711,
+    "title": {
+     "leaf": 709,
+     "quote": "APPENDIX \u2014 CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/1867BPL$709/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 709,
+      "page": 7,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 711,
+      "page": 9,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 712,
+    "end_leaf": 747,
+    "title": {
+     "leaf": 712,
+     "quote": "APPENDIX COUNTY OFFICERS AND ASSISTANTS.",
+     "image": "https://iiif.archive.org/iiif/1867BPL$712/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 36,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 712,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 746,
+      "page": 12,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1867BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 657
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 658,
+    "end_leaf": 658
+   }
+  ],
+  "kept": 80052,
+  "dropped": 7687,
+  "kept_share": 0.9124,
+  "kept_by_section": {
+   "listing": 80008,
+   "late_names": 44
+  }
  }
 }

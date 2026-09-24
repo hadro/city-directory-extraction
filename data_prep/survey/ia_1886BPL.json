@@ -627,5 +627,219 @@
    "ia_page_equals_leaf": 0.33
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 16,
+    "title": null,
+    "leaves": 17,
+    "residential": false
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 17,
+    "end_leaf": 21,
+    "title": {
+     "leaf": 17,
+     "quote": "BUSINESS DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1886BPL$17/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 22,
+    "end_leaf": 25,
+    "title": {
+     "leaf": 22,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1886BPL$22/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 26,
+    "end_leaf": 26,
+    "title": {
+     "leaf": 26,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1886BPL$26/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "register",
+    "start_leaf": 27,
+    "end_leaf": 34,
+    "title": {
+     "leaf": 27,
+     "quote": "BUSINESS REGISTER",
+     "image": "https://iiif.archive.org/iiif/1886BPL$27/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 28,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 34,
+      "page": 8,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 35,
+    "end_leaf": 1256,
+    "title": null,
+    "leaves": 1218,
+    "residential": true
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1257,
+    "end_leaf": 1258,
+    "title": {
+     "leaf": 1257,
+     "quote": "INDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1886BPL$1257/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1258,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1258,
+      "page": 2,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1259,
+    "end_leaf": 1279,
+    "title": {
+     "leaf": 1259,
+     "quote": "MUNICIPAL EEGISTEK",
+     "image": "https://iiif.archive.org/iiif/1886BPL$1259/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 21,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1259,
+      "page": 3,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1278,
+      "page": 22,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 1280,
+    "end_leaf": 1280,
+    "title": {
+     "leaf": 1280,
+     "quote": "CLASSIFIED BUSINESS LISTS",
+     "image": "https://iiif.archive.org/iiif/1886BPL$1280/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1281,
+    "end_leaf": 1316,
+    "title": {
+     "leaf": 1281,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1886BPL$1281/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 36,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1282,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1316,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 1317,
+    "end_leaf": 1319,
+    "title": {
+     "leaf": 1317,
+     "quote": "CLASSIFIED \u00bb BUSINESS \u2666 LISTS * FURNISHE",
+     "image": "https://iiif.archive.org/iiif/1886BPL$1317/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "business_notice",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1886BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 26,
+    "end_leaf": 26
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 35,
+    "end_leaf": 1256
+   }
+  ],
+  "kept": 181842,
+  "dropped": 13633,
+  "kept_share": 0.9303,
+  "kept_by_section": {
+   "late_names": 28,
+   "listing": 181814
+  }
  }
 }

@@ -714,5 +714,160 @@
   },
   "flags": []
  },
- "scope_note": "Title page (leaf 5, https://iiif.archive.org/iiif/trowsgeneraldire1853trow$5/full/!1400,1400/0/default.jpg): 'WILSON'S BUSINESS DIRECTORY ... NEW-YORK'. A business directory, not Trow's general (residential) directory, despite IA's title 'Trow's general directory of the boroughs of Manhattan and Bronx' and the `trowsgeneraldire` identifier -- the same catalog error as the 1913 Trow set. Structure agrees: Phase 2 found no volume-length alphabet, only five short B->W runs (leaves 129-751), the shape of names sorted within trade headings. Surfaced by the Phase 2 small-listing flag; confirmed by hadro, 2026-09-23."
+ "scope_note": "Title page (leaf 5, https://iiif.archive.org/iiif/trowsgeneraldire1853trow$5/full/!1400,1400/0/default.jpg): 'WILSON'S BUSINESS DIRECTORY ... NEW-YORK'. A business directory, not Trow's general (residential) directory, despite IA's title 'Trow's general directory of the boroughs of Manhattan and Bronx' and the `trowsgeneraldire` identifier -- the same catalog error as the 1913 Trow set. Structure agrees: Phase 2 found no volume-length alphabet, only five short B->W runs (leaves 129-751), the shape of names sorted within trade headings. Surfaced by the Phase 2 small-listing flag; confirmed by hadro, 2026-09-23.",
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 3,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "business",
+    "start_leaf": 5,
+    "end_leaf": 415,
+    "title": {
+     "leaf": 5,
+     "quote": "BUSINESS DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1853trow$5/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 129,
+      "end_leaf": 151,
+      "letters": "BCDFHKLMPSW"
+     },
+     {
+      "start_leaf": 161,
+      "end_leaf": 187,
+      "letters": "BDFGHKLMRSW"
+     }
+    ],
+    "leaves": 206,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 87,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 415,
+      "page": 163,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 417,
+    "end_leaf": 469,
+    "title": null,
+    "leaves": 27,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 417,
+      "page": 164,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 469,
+      "page": 190,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 471,
+    "end_leaf": 915,
+    "title": null,
+    "alphabets": [
+     {
+      "start_leaf": 543,
+      "end_leaf": 565,
+      "letters": "BCHLMRSTW"
+     },
+     {
+      "start_leaf": 707,
+      "end_leaf": 751,
+      "letters": "ABCDFGHKLMOPRSW"
+     }
+    ],
+    "leaves": 223,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 471,
+      "page": 191,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 915,
+      "page": 401,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 917,
+    "end_leaf": 946,
+    "title": {
+     "leaf": 917,
+     "quote": "NAMES TOO LATE FOR INSERTION.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1853trow$917/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 14,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 917,
+      "page": 402,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 939,
+      "page": 413,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "back_matter",
+   "business",
+   "front_matter",
+   "late_names",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": null,
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 417,
+    "end_leaf": 469
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 917,
+    "end_leaf": 946
+   }
+  ],
+  "kept": 0,
+  "skipped": "not-residential"
+ }
 }

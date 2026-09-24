@@ -840,5 +840,149 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 28,
+    "title": null,
+    "leaves": 27,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 4,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 25,
+      "page": 25,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 29,
+    "end_leaf": 33,
+    "title": {
+     "leaf": 29,
+     "quote": "AVENUE AND STREET \u2018GUIDE,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0036$29/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 34,
+    "end_leaf": 353,
+    "title": null,
+    "leaves": 300,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 35,
+      "page": 35,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 348,
+      "page": 318,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 354,
+    "end_leaf": 354,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "district",
+    "start_leaf": 355,
+    "end_leaf": 504,
+    "title": {
+     "leaf": 355,
+     "quote": "EASTERN DISTRIOT,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0036$355/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 355,
+      "end_leaf": 485,
+      "letters": "ABCDEFGHJKLMNOPQRSTVW"
+     }
+    ],
+    "leaves": 139,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 355,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 466,
+      "page": 100,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 505,
+    "end_leaf": 557,
+    "title": {
+     "leaf": 505,
+     "quote": "APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0036$505/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 49,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "back_matter",
+   "district",
+   "front_matter",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0036_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 34,
+    "end_leaf": 353
+   },
+   {
+    "kind": "district",
+    "start_leaf": 355,
+    "end_leaf": 504
+   }
+  ],
+  "kept": 17535,
+  "dropped": 767,
+  "kept_share": 0.9581,
+  "kept_by_section": {
+   "listing": 13232,
+   "district: EASTERN DISTRIOT,": 4303
+  }
  }
 }

@@ -817,5 +817,185 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 32,
+    "title": null,
+    "leaves": 32,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 12,
+      "page": 14,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 30,
+      "page": 32,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 33,
+    "end_leaf": 40,
+    "title": {
+     "leaf": 33,
+     "quote": "TOO LATE FOR REGULAR INSERTION",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$33/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 33,
+      "page": 33,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 40,
+      "page": 40,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 41,
+    "end_leaf": 211,
+    "title": {
+     "leaf": 41,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$41/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 170,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 41,
+      "page": 41,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 211,
+      "page": 229,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 212,
+    "end_leaf": 2070,
+    "title": null,
+    "leaves": 1857,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 212,
+      "page": 230,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 2070,
+      "page": 2088,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 2071,
+    "end_leaf": 2079,
+    "title": null,
+    "leaves": 9,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 2071,
+      "page": 2091,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 2079,
+      "page": 2099,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business",
+    "start_leaf": 2080,
+    "end_leaf": 2479,
+    "title": {
+     "leaf": 2080,
+     "quote": "CLASSIFIED PART",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$2080/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 2272,
+      "end_leaf": 2408,
+      "letters": "CDFGHMPRS"
+     }
+    ],
+    "leaves": 400,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 2080,
+      "page": 2100,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 2473,
+      "page": 2501,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "back_matter",
+   "business",
+   "front_matter",
+   "late_names",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldire1917trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 33,
+    "end_leaf": 40
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 212,
+    "end_leaf": 2070
+   }
+  ],
+  "kept": 1322523,
+  "dropped": 299535,
+  "kept_share": 0.8153,
+  "kept_by_section": {
+   "late_names": 4778,
+   "listing": 1317745
+  }
  }
 }

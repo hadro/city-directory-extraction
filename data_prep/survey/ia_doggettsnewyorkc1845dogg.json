@@ -675,5 +675,157 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 15,
+    "title": null,
+    "leaves": 15,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 11,
+      "page": 5,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 15,
+      "page": 9,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 16,
+    "end_leaf": 18,
+    "title": {
+     "leaf": 16,
+     "quote": "NAMES TOO LATE FOR INSERTION, AND REMOVALS.",
+     "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$16/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 16,
+      "page": 10,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 18,
+      "page": 12,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 19,
+    "end_leaf": 423,
+    "title": null,
+    "leaves": 404,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 19,
+      "page": 13,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 423,
+      "page": 407,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "nurses",
+    "start_leaf": 424,
+    "end_leaf": 464,
+    "title": {
+     "leaf": 424,
+     "quote": "LIST OF NURSES.",
+     "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$424/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 38,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 424,
+      "page": 408,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 452,
+      "page": 434,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 465,
+    "end_leaf": 482,
+    "title": {
+     "leaf": 465,
+     "quote": "STREET DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$465/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 18,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 467,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 479,
+      "page": 15,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "late_names",
+   "listing",
+   "nurses",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/doggettsnewyorkc1845dogg_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 16,
+    "end_leaf": 18
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 19,
+    "end_leaf": 423
+   }
+  ],
+  "kept": 64580,
+  "dropped": 4495,
+  "kept_share": 0.9349,
+  "kept_by_section": {
+   "late_names": 99,
+   "listing": 64481
+  }
  }
 }

@@ -692,5 +692,64 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1063,
+    "title": null,
+    "leaves": 528,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 9,
+      "page": 626,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1063,
+      "page": 153,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/brooklynnewyorkc1912broo_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1063
+   }
+  ],
+  "kept": 88536,
+  "dropped": 2,
+  "kept_share": 1.0,
+  "kept_by_section": {
+   "listing": 88536
+  }
  }
 }

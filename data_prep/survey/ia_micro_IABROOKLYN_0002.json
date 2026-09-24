@@ -583,5 +583,110 @@
    "ia_page_equals_leaf": 1.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 1,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 36,
+    "title": null,
+    "leaves": 32,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 16,
+      "page": 16,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 33,
+      "page": 33,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 38,
+    "end_leaf": 43,
+    "title": null,
+    "leaves": 6,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 38,
+      "page": 38,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 43,
+      "page": 43,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 44,
+    "end_leaf": 60,
+    "title": {
+     "leaf": 44,
+     "quote": "CHURCHES IN BROOKLYN.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0002$44/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 16,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 44,
+      "page": 44,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 57,
+      "page": 57,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0002_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 36
+   }
+  ],
+  "kept": 1095,
+  "dropped": 478,
+  "kept_share": 0.6961,
+  "kept_by_section": {
+   "listing": 1095
+  }
  }
 }

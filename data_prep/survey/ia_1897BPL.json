@@ -951,5 +951,192 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 5,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 6,
+    "end_leaf": 23,
+    "title": {
+     "leaf": 6,
+     "quote": "BROOKLYN STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1897BPL$6/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 17,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 24,
+    "end_leaf": 27,
+    "title": {
+     "leaf": 24,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1897BPL$24/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 28,
+    "end_leaf": 28,
+    "title": {
+     "leaf": 28,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1897BPL$28/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 29,
+    "end_leaf": 1698,
+    "title": null,
+    "leaves": 1666,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 31,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1698,
+      "page": 1634,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1699,
+    "end_leaf": 1699,
+    "title": null,
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1699,
+      "page": 1635,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1699,
+      "page": 1635,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 1700,
+    "end_leaf": 1700,
+    "title": {
+     "leaf": 1700,
+     "quote": "CLASSIFIED BY STREETS,",
+     "image": "https://iiif.archive.org/iiif/1897BPL$1700/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1700,
+      "page": 1636,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1700,
+      "page": 1636,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1701,
+    "end_leaf": 1724,
+    "title": {
+     "leaf": 1701,
+     "quote": "COMMERCIAL REGISTER",
+     "image": "https://iiif.archive.org/iiif/1897BPL$1701/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 24,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1701,
+      "page": 1637,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1723,
+      "page": 1659,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1725,
+    "end_leaf": 1763,
+    "title": {
+     "leaf": 1725,
+     "quote": "STREET and AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1897BPL$1725/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 39,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "business_notice",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1897BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 28,
+    "end_leaf": 28
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 29,
+    "end_leaf": 1698
+   }
+  ],
+  "kept": 262602,
+  "dropped": 13804,
+  "kept_share": 0.9501,
+  "kept_by_section": {
+   "late_names": 90,
+   "listing": 262512
+  }
  }
 }

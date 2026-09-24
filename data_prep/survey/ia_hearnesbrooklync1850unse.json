@@ -609,5 +609,126 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 24,
+    "title": null,
+    "leaves": 19,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 13,
+      "page": 5,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 24,
+      "page": 16,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 25,
+    "end_leaf": 418,
+    "title": null,
+    "leaves": 380,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 25,
+      "page": 17,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 418,
+      "page": 396,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 419,
+    "end_leaf": 440,
+    "title": {
+     "leaf": 419,
+     "quote": "BROOKLYN STREET DIRECTORY,",
+     "image": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$419/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 22,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 423,
+      "page": 5,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 440,
+      "page": 22,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 441,
+    "end_leaf": 494,
+    "title": {
+     "leaf": 441,
+     "quote": "APPENDIX \u2014 GENERAL INFORMATION.",
+     "image": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$441/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 54,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 441,
+      "page": 23,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 494,
+      "page": 472,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "front_matter",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/hearnesbrooklync1850unse_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 25,
+    "end_leaf": 418
+   }
+  ],
+  "kept": 14844,
+  "dropped": 2305,
+  "kept_share": 0.8656,
+  "kept_by_section": {
+   "listing": 14844
+  }
  }
 }

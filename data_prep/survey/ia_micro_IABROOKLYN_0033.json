@@ -783,5 +783,149 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 37,
+    "title": null,
+    "leaves": 36,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 38,
+    "end_leaf": 65,
+    "title": {
+     "leaf": 38,
+     "quote": "INDEX TO BROOKLYN ADVERTISERS.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$38/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 26,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 42,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 65,
+      "page": 20,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 66,
+    "end_leaf": 590,
+    "title": null,
+    "leaves": 513,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 66,
+      "page": 21,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 583,
+      "page": 515,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 591,
+    "end_leaf": 592,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 593,
+    "end_leaf": 600,
+    "title": {
+     "leaf": 593,
+     "quote": "AVENUE AND STREET GUIDE.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$593/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 601,
+    "end_leaf": 611,
+    "title": {
+     "leaf": 601,
+     "quote": "APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$601/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 11,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 612,
+    "end_leaf": 612,
+    "title": {
+     "leaf": 612,
+     "quote": "22 APPENDIX .\u2014CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$612/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 613,
+    "end_leaf": 623,
+    "title": {
+     "leaf": 613,
+     "quote": "24 APPENDIX.\u2014GAS AND RAILROAD COMPANIES.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0033$613/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 10,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "back_matter",
+   "front_matter",
+   "index",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0033_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 66,
+    "end_leaf": 590
+   }
+  ],
+  "kept": 17630,
+  "dropped": 1422,
+  "kept_share": 0.9254,
+  "kept_by_section": {
+   "listing": 17630
+  }
  }
 }

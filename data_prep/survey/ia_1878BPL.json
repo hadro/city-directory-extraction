@@ -687,5 +687,182 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 12,
+    "title": null,
+    "leaves": 13,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 13,
+    "end_leaf": 16,
+    "title": {
+     "leaf": 13,
+     "quote": "A STREET AND AVENUE DIRECTORY, A MUNICIPAL",
+     "image": "https://iiif.archive.org/iiif/1878BPL$13/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 17,
+    "end_leaf": 21,
+    "title": {
+     "leaf": 17,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1878BPL$17/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 22,
+    "end_leaf": 24,
+    "title": {
+     "leaf": 22,
+     "quote": "BROOKLYN BUSINESS REGISTER OK REPRESENTATIVE HOUSES.",
+     "image": "https://iiif.archive.org/iiif/1878BPL$22/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 25,
+    "end_leaf": 1066,
+    "title": null,
+    "leaves": 1040,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 33,
+      "page": 9,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1065,
+      "page": 1019,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 1067,
+    "end_leaf": 1068,
+    "title": {
+     "leaf": 1067,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER,",
+     "image": "https://iiif.archive.org/iiif/1878BPL$1067/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": true
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1069,
+    "end_leaf": 1070,
+    "title": {
+     "leaf": 1069,
+     "quote": "INDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1878BPL$1069/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1071,
+    "end_leaf": 1088,
+    "title": {
+     "leaf": 1071,
+     "quote": "MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1878BPL$1071/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 18,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1072,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1086,
+      "page": 16,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1089,
+    "end_leaf": 1125,
+    "title": {
+     "leaf": 1089,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1878BPL$1089/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 37,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1089,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1124,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1878BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 25,
+    "end_leaf": 1066
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 1067,
+    "end_leaf": 1068
+   }
+  ],
+  "kept": 132531,
+  "dropped": 12004,
+  "kept_share": 0.9169,
+  "kept_by_section": {
+   "listing": 132385,
+   "late_names": 146
+  }
  }
 }

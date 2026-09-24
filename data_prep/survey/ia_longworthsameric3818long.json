@@ -597,5 +597,89 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "register",
+    "start_leaf": 11,
+    "end_leaf": 60,
+    "title": {
+     "leaf": 11,
+     "quote": "NEW-YORK REGISTER,",
+     "image": "https://iiif.archive.org/iiif/longworthsameric3818long$11/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 49,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 19,
+      "page": 27,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 60,
+      "page": 48,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 61,
+    "end_leaf": 358,
+    "title": null,
+    "leaves": 298,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 61,
+      "page": 49,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 358,
+      "page": 346,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 359,
+    "end_leaf": 360,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/longworthsameric3818long_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 61,
+    "end_leaf": 358
+   }
+  ],
+  "kept": 14184,
+  "dropped": 1498,
+  "kept_share": 0.9045,
+  "kept_by_section": {
+   "listing": 14184
+  }
  }
 }

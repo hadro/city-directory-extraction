@@ -603,5 +603,74 @@
   "flags": [
    "no-folios"
   ]
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 1,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 2,
+    "end_leaf": 3,
+    "title": {
+     "leaf": 2,
+     "quote": "COMPANIES, BANKS, CHURCHES, ODD",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$2/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 4,
+    "end_leaf": 51,
+    "title": null,
+    "leaves": 48,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 53,
+    "end_leaf": 83,
+    "title": null,
+    "leaves": 30,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0022_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 4,
+    "end_leaf": 51
+   }
+  ],
+  "kept": 3535,
+  "dropped": 579,
+  "kept_share": 0.8593,
+  "kept_by_section": {
+   "listing": 3535
+  }
  }
 }

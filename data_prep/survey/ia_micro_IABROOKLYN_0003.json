@@ -558,5 +558,110 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 4,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 33,
+    "title": null,
+    "leaves": 29,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 6,
+      "page": 6,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 33,
+      "page": 39,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 34,
+    "end_leaf": 43,
+    "title": null,
+    "leaves": 10,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 34,
+      "page": 40,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 43,
+      "page": 49,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 44,
+    "end_leaf": 54,
+    "title": {
+     "leaf": 44,
+     "quote": "50 CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0003$44/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 11,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 44,
+      "page": 50,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 51,
+      "page": 57,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0003_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 33
+   }
+  ],
+  "kept": 1166,
+  "dropped": 579,
+  "kept_share": 0.6682,
+  "kept_by_section": {
+   "listing": 1166
+  }
  }
 }

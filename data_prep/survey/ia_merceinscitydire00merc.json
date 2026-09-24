@@ -647,5 +647,132 @@
    "ia_page_equals_leaf": 0.46
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "late_names",
+    "start_leaf": 2,
+    "end_leaf": 12,
+    "title": {
+     "leaf": 2,
+     "quote": "ADDITIONAL NAMES.",
+     "image": "https://iiif.archive.org/iiif/merceinscitydire00merc$2/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 11,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 9,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 12,
+      "page": 4,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 13,
+    "end_leaf": 103,
+    "title": {
+     "leaf": 13,
+     "quote": "NEW-YORK REGISTER.",
+     "image": "https://iiif.archive.org/iiif/merceinscitydire00merc$13/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 89,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 13,
+      "page": 5,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 95,
+      "page": 93,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 104,
+    "end_leaf": 448,
+    "title": null,
+    "leaves": 343,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 104,
+      "page": 106,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 448,
+      "page": 448,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 449,
+    "end_leaf": 456,
+    "title": null,
+    "leaves": 2,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 449,
+      "page": 449,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 449,
+      "page": 449,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "late_names",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/merceinscitydire00merc_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 2,
+    "end_leaf": 12
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 104,
+    "end_leaf": 448
+   }
+  ],
+  "kept": 20523,
+  "dropped": 3250,
+  "kept_share": 0.8633,
+  "kept_by_section": {
+   "late_names": 326,
+   "listing": 20197
+  }
  }
 }

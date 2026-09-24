@@ -586,5 +586,150 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 47,
+    "title": null,
+    "leaves": 24,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 49,
+    "end_leaf": 57,
+    "title": {
+     "leaf": 49,
+     "quote": "INDEX TO ADVERTISERS.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire19131trow$49/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "business",
+    "start_leaf": 59,
+    "end_leaf": 227,
+    "title": {
+     "leaf": 59,
+     "quote": "BUSINESS DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire19131trow$59/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 85,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 81,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 227,
+      "page": 79,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 229,
+    "end_leaf": 253,
+    "title": null,
+    "leaves": 13,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 229,
+      "page": 80,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 253,
+      "page": 92,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 255,
+    "end_leaf": 551,
+    "title": null,
+    "alphabets": [
+     {
+      "start_leaf": 419,
+      "end_leaf": 443,
+      "letters": "BCFGHKLMRSW"
+     }
+    ],
+    "leaves": 149,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 255,
+      "page": 93,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 551,
+      "page": 227,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business",
+    "start_leaf": 553,
+    "end_leaf": 836,
+    "title": {
+     "leaf": 553,
+     "quote": "CIRCULARS ADDRESSED. CLASSIFIED LISTS OF BUSINESS NAMES.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire19131trow$553/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 138,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 553,
+      "page": 228,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 821,
+      "page": 356,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "back_matter",
+   "business",
+   "front_matter",
+   "index",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": null,
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 229,
+    "end_leaf": 253
+   }
+  ],
+  "kept": 0,
+  "skipped": "not-residential"
  }
 }

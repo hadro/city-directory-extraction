@@ -793,5 +793,135 @@
    "ia_page_equals_leaf": 0.43
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 10,
+    "title": null,
+    "leaves": 11,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 6,
+      "page": 6,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 11,
+    "end_leaf": 14,
+    "title": {
+     "leaf": 11,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1902BPL$11/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 15,
+    "end_leaf": 1054,
+    "title": null,
+    "leaves": 1030,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 17,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1054,
+      "page": 1016,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1055,
+    "end_leaf": 1063,
+    "title": null,
+    "leaves": 9,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1063,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1063,
+      "page": 1,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1064,
+    "end_leaf": 1099,
+    "title": {
+     "leaf": 1064,
+     "quote": "UPINGTON'S BROOKLYN STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1902BPL$1064/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 36,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1064,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1095,
+      "page": 33,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "index",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1902BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 15,
+    "end_leaf": 1054
+   }
+  ],
+  "kept": 172353,
+  "dropped": 13500,
+  "kept_share": 0.9274,
+  "kept_by_section": {
+   "listing": 172353
+  }
  }
 }

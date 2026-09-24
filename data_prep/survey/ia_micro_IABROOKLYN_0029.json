@@ -700,5 +700,172 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 47,
+    "title": null,
+    "leaves": 36,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 4,
+      "page": 0,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 47,
+      "page": 42,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 48,
+    "end_leaf": 438,
+    "title": null,
+    "leaves": 378,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 48,
+      "page": 43,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 438,
+      "page": 463,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 439,
+    "end_leaf": 439,
+    "title": null,
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 439,
+      "page": 464,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 439,
+      "page": 464,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 440,
+    "end_leaf": 446,
+    "title": {
+     "leaf": 440,
+     "quote": "APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$440/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 7,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 447,
+    "end_leaf": 460,
+    "title": {
+     "leaf": 447,
+     "quote": "APPENDIX\u2014BROOKLYN STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$447/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 13,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 461,
+    "end_leaf": 487,
+    "title": {
+     "leaf": 461,
+     "quote": "APPENDIX\u2014\u2014POLICE DEPARTMENT.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$461/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 25,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 488,
+    "end_leaf": 490,
+    "title": {
+     "leaf": 488,
+     "quote": "~ * LIST OF CHURCHES IN THE CITY.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$488/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 492,
+    "end_leaf": 509,
+    "title": {
+     "leaf": 492,
+     "quote": "APPENDIX\u2014INSURANCE COMPANIES. 4",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0029$492/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 18,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 493,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 506,
+      "page": 15,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0029_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 48,
+    "end_leaf": 438
+   }
+  ],
+  "kept": 9727,
+  "dropped": 1223,
+  "kept_share": 0.8883,
+  "kept_by_section": {
+   "listing": 9727
+  }
  }
 }

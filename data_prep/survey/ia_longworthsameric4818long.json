@@ -616,5 +616,76 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 12,
+    "title": null,
+    "leaves": 9,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 5,
+      "page": 23,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 12,
+      "page": 30,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 13,
+    "end_leaf": 390,
+    "title": null,
+    "leaves": 370,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 14,
+      "page": 56,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 384,
+      "page": 478,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/longworthsameric4818long_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 13,
+    "end_leaf": 390
+   }
+  ],
+  "kept": 20549,
+  "dropped": 149,
+  "kept_share": 0.9928,
+  "kept_by_section": {
+   "listing": 20549
+  }
  }
 }

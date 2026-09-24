@@ -639,5 +639,244 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 4,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 490,
+    "title": null,
+    "leaves": 486,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 6,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 490,
+      "page": 486,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 491,
+    "end_leaf": 491,
+    "title": {
+     "leaf": 491,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1863BPL$491/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 491,
+      "page": 487,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 491,
+      "page": 487,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "nurses",
+    "start_leaf": 492,
+    "end_leaf": 492,
+    "title": {
+     "leaf": 492,
+     "quote": "NURSES.",
+     "image": "https://iiif.archive.org/iiif/1863BPL$492/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 492,
+      "page": 488,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 492,
+      "page": 488,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 493,
+    "end_leaf": 494,
+    "title": {
+     "leaf": 493,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1863BPL$493/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 493,
+      "page": 489,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 494,
+      "page": 490,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 495,
+    "end_leaf": 530,
+    "title": {
+     "leaf": 495,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1863BPL$495/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 36,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 495,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 530,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 531,
+    "end_leaf": 535,
+    "title": {
+     "leaf": 531,
+     "quote": "APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/1863BPL$531/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 531,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 535,
+      "page": 5,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 536,
+    "end_leaf": 538,
+    "title": {
+     "leaf": 536,
+     "quote": "APPENDIX \u2014 CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/1863BPL$536/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 536,
+      "page": 6,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 538,
+      "page": 8,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 539,
+    "end_leaf": 559,
+    "title": {
+     "leaf": 539,
+     "quote": "APPENDIX COUNTY OFFICERS AND ASSISTANTS.",
+     "image": "https://iiif.archive.org/iiif/1863BPL$539/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 21,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 539,
+      "page": 9,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 558,
+      "page": 28,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "nurses",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1863BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 490
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 491,
+    "end_leaf": 491
+   }
+  ],
+  "kept": 61664,
+  "dropped": 8004,
+  "kept_share": 0.8851,
+  "kept_by_section": {
+   "listing": 61628,
+   "late_names": 36
+  }
  }
 }

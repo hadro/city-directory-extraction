@@ -700,5 +700,183 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 4,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 5,
+    "end_leaf": 6,
+    "title": {
+     "leaf": 5,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1858BPL$5/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": true
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 7,
+    "end_leaf": 436,
+    "title": null,
+    "leaves": 428,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 8,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 436,
+      "page": 410,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 437,
+    "end_leaf": 438,
+    "title": {
+     "leaf": 437,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1858BPL$437/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 437,
+      "page": 411,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 438,
+      "page": 412,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 439,
+    "end_leaf": 474,
+    "title": {
+     "leaf": 439,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1858BPL$439/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 36,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 439,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 472,
+      "page": 34,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 475,
+    "end_leaf": 505,
+    "title": {
+     "leaf": 475,
+     "quote": "APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/1858BPL$475/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 31,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 476,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 505,
+      "page": 31,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 506,
+    "end_leaf": 543,
+    "title": {
+     "leaf": 506,
+     "quote": "APPENDIX POST OFFICES AND CHURCHES IN BROOKLYN.",
+     "image": "https://iiif.archive.org/iiif/1858BPL$506/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 37,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 506,
+      "page": 32,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 542,
+      "page": 34,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1858BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 5,
+    "end_leaf": 6
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 7,
+    "end_leaf": 436
+   }
+  ],
+  "kept": 52597,
+  "dropped": 9672,
+  "kept_share": 0.8447,
+  "kept_by_section": {
+   "late_names": 94,
+   "listing": 52503
+  }
  }
 }

@@ -700,5 +700,236 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 14,
+    "title": null,
+    "leaves": 15,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 13,
+      "page": 13,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 15,
+    "end_leaf": 18,
+    "title": {
+     "leaf": 15,
+     "quote": "1TREET AND AVENUE DIRECTORY, A MUNICIPAL REGIS-",
+     "image": "https://iiif.archive.org/iiif/1876BPL$15/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 19,
+    "end_leaf": 23,
+    "title": {
+     "leaf": 19,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1876BPL$19/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 24,
+    "end_leaf": 30,
+    "title": {
+     "leaf": 24,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1876BPL$24/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 7,
+    "residential": true
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 31,
+    "end_leaf": 1056,
+    "title": null,
+    "leaves": 1022,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1057,
+    "end_leaf": 1057,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "business",
+    "start_leaf": 1058,
+    "end_leaf": 1152,
+    "title": {
+     "leaf": 1058,
+     "quote": "INDEX TO BUSINESS DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1876BPL$1058/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 1136,
+      "end_leaf": 1215,
+      "letters": "BDGKL"
+     }
+    ],
+    "leaves": 94,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1073,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1152,
+      "page": 83,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "nurses",
+    "start_leaf": 1153,
+    "end_leaf": 1179,
+    "title": {
+     "leaf": 1153,
+     "quote": "84 NOTARIES PUBLIC\u2014 NURSES\u2014 OIL CLOTH MAKERS AND DEALERS.",
+     "image": "https://iiif.archive.org/iiif/1876BPL$1153/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 27,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1153,
+      "page": 84,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1174,
+      "page": 105,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1180,
+    "end_leaf": 1219,
+    "title": {
+     "leaf": 1180,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1876BPL$1180/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 40,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1181,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1215,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1220,
+    "end_leaf": 1220,
+    "title": {
+     "leaf": 1220,
+     "quote": "INDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1876BPL$1220/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1221,
+    "end_leaf": 1244,
+    "title": {
+     "leaf": 1221,
+     "quote": "EflDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1876BPL$1221/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 24,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1223,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1238,
+      "page": 17,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "back_matter",
+   "business",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "nurses",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1876BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 24,
+    "end_leaf": 30
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 31,
+    "end_leaf": 1056
+   }
+  ],
+  "kept": 129152,
+  "dropped": 35867,
+  "kept_share": 0.7826,
+  "kept_by_section": {
+   "late_names": 194,
+   "listing": 128958
+  }
  }
 }

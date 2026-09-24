@@ -87,6 +87,7 @@ sys.path.insert(0, str(HERE))
 from detect_listing_bounds import (FIRST_WORD_RE, detect, extend_edges,  # noqa: E402
                                    leaf_letters_from_dump, leaf_letters_from_jsonl)
 from ia_volume_to_jsonl import words_to_lines  # noqa: E402
+from section_titles import RESIDENTIAL, TRANSPARENT, page_title  # noqa: E402
 from survey_frontmatter import page_image  # noqa: E402
 from survey_folios import compare, fit, folio_token, ia_read, load as load_folios  # noqa: E402
 from survey_folios import segments as folio_segments  # noqa: E402
@@ -96,7 +97,8 @@ MIN_CHARS, MIN_LINES = 400, 5          # detect_listing_bounds' CLI defaults
 SPARSE = 0.20
 EDGE_TOL = 2
 SMALL_LISTING = 0.10    # a listing spanning less of the volume than this is not its directory
-SEG_MIN_READ = 10       # a page claim is `high` only from a sequence read on this many leaves
+SEG_MIN_READ = 10
+BUSINESS_MIN_LEAVES = 10   # a titled business run shorter than this is a notice, not a directory       # a page claim is `high` only from a sequence read on this many leaves
 
 
 EDGE_WINDOW = 40         # leaves either side of each voted edge that extension may reach
@@ -280,6 +282,175 @@ def pages(v: dict) -> tuple[dict, dict]:
     return block, claims
 
 
+def sections(v: dict) -> dict:
+    """-> the `sections` block: the volume as an ordered list of runs, each with a kind.
+
+    Anchors, in order of authority: the residential LISTING (the `listing` bounds, edge-extended);
+    the other ALPHABETS the letter vote found; and TITLE PAGES (section_titles.page_title). Outside
+    the listing a title page opens a run that lasts until the next title of another kind -- pages
+    with no title, and advertising pages, belong to the run they sit in. An alphabet takes the kind
+    of the run it starts in, so "EASTERN DISTRICT" on the page before an A->Z makes it residential.
+    """
+    ident = v["id"]
+    words = OUT / f"{ident}_words.jsonl.gz"
+    listing = v["doc"].get("listing") or {}
+    out = {"method": "title-pages", "derived": _dt.date.today().isoformat(), "code_at": git_rev()}
+    if "start_leaf" not in listing:
+        return {**out, "runs": [], "flags": ["no-listing"]}
+    S, E = listing["start_leaf"], listing["end_leaf"]
+    alphabets = [(sec["start_leaf"], sec["end_leaf"], sec["letters"]) for sec in listing["sections"]
+                 if not sec["is_listing"] and not (S <= sec["start_leaf"] <= E)]
+
+    titles, text_leaves = {}, []
+    with gzip.open(words, "rt", encoding="utf-8") as fh:
+        for line in fh:
+            rec = json.loads(line)
+            if rec["chars"] < 50:
+                continue
+            text_leaves.append(rec["leaf"])
+            ordered = [t for _b, t in sorted(words_to_lines(rec["lines"]), key=lambda bt: bt[0][1])]
+            kind, text = page_title(ordered)
+            if kind:
+                titles[rec["leaf"]] = (kind, text)
+
+    runs, cur = [], None
+
+    def close():
+        if cur:
+            runs.append(cur)
+
+    for leaf in text_leaves:
+        if S <= leaf <= E:
+            if not (cur and cur["kind"] == "listing"):
+                close()
+                cur = {"kind": "listing", "start_leaf": S, "end_leaf": E, "title": None}
+            continue
+        kind, text = titles.get(leaf, (None, None))
+        if kind and kind not in TRANSPARENT and (cur is None or kind != cur["kind"]):
+            close()
+            cur = {"kind": kind, "start_leaf": leaf, "end_leaf": leaf,
+                   "title": {"leaf": leaf, "quote": text, "image": page_image(ident, leaf)}}
+        elif cur is None or cur["kind"] == "listing":
+            close()
+            cur = {"kind": "front_matter" if leaf < S else "back_matter", "start_leaf": leaf,
+                   "end_leaf": leaf, "title": None}
+        else:
+            cur["end_leaf"] = leaf
+    close()
+
+    # An alphabet is named by a title on its OWN first pages before the run it starts in:
+    # 1856BPL's Eastern District alphabet opens at leaf 405, straight after the Western District's
+    # street guide, and would otherwise inherit "street_guide". A district title found there
+    # splits the host run so the alphabet becomes its own residential section.
+    for a0, a1, letters in alphabets:
+        own = next((titles[x] for x in range(a0 - 1, a0 + 4)
+                    if x in titles and titles[x][0] not in TRANSPARENT), None)
+        host = next((r for r in runs if r["start_leaf"] <= a0 <= r["end_leaf"]), None)
+        if host is None:
+            continue
+        if own and own[0] in RESIDENTIAL and host["kind"] != own[0]:
+            idx = runs.index(host)
+            tail = {"kind": own[0], "start_leaf": a0, "end_leaf": host["end_leaf"],
+                    "title": {"leaf": a0, "quote": own[1], "image": page_image(ident, a0)}}
+            host["end_leaf"] = max(x for x in text_leaves if x < a0) if a0 > host["start_leaf"] \
+                else host["start_leaf"]
+            if host["end_leaf"] < host["start_leaf"] or a0 == host["start_leaf"]:
+                runs[idx] = tail
+            else:
+                runs.insert(idx + 1, tail)
+            host = tail
+        host.setdefault("alphabets", []).append({"start_leaf": a0, "end_leaf": a1,
+                                                 "letters": letters})
+    merged = []
+    for r in runs:                   # adjacent runs of one kind are one section
+        if merged and merged[-1]["kind"] == r["kind"] and r["kind"] != "listing":
+            merged[-1]["end_leaf"] = r["end_leaf"]
+            merged[-1].setdefault("alphabets", []).extend(r.get("alphabets", []))
+        else:
+            merged.append(r)
+    runs = merged
+    for r in runs:
+        r["leaves"] = sum(r["start_leaf"] <= x <= r["end_leaf"] for x in text_leaves)
+        alph = r.get("alphabets", [])
+        # A district or late-names TITLE is residential; a district WORD elsewhere is not
+        # (trowsgeneraldir1910p3trow leaf 1089 is a court, "Southern District", in the register)
+        r["residential"] = (r["kind"] == "listing" or r["kind"] == "late_names"
+                            or (r["kind"] == "district" and bool(alph)))
+        # an alphabet spanning most of A-Z under no readable title is a second residential list
+        if r["kind"] in ("front_matter", "back_matter") and any(len(a["letters"]) >= 18
+                                                               for a in alph):
+            r["residential"], r["kind"] = True, "untitled_alphabet"
+        # a one-page "BUSINESS DIRECTORY" is an advertisement or notice FOR one, not the thing
+        if r["kind"] == "business" and r["leaves"] < BUSINESS_MIN_LEAVES:
+            r["kind"] = "business_notice"
+
+    # printed pages at each run's edges, from the margin fit (never inferred past a read)
+    leaves, cands = load_folios(ident)
+    f = fit(leaves, cands)
+    for r in runs:
+        inside = sorted(x for x in f if r["start_leaf"] <= x <= r["end_leaf"])
+        if inside:
+            r["pages"] = {"first": {"leaf": inside[0], "page": f[inside[0]][0],
+                                    "attestation": f[inside[0]][1]},
+                          "last": {"leaf": inside[-1], "page": f[inside[-1]][0],
+                                   "attestation": f[inside[-1]][1]}}
+    kinds = [r["kind"] for r in runs]
+    return {**out, "runs": runs,
+            "has_business": "business" in kinds,
+            "kinds": sorted(set(kinds))}
+
+
+def scope(v: dict) -> dict:
+    """Write data/survey_ocr/<id>_listing.jsonl.gz: the candidate lines of the RESIDENTIAL
+    sections only, each tagged `context.section`. -> the sidecar's `scope` block.
+
+    The Phase 1 lines file holds every candidate line in the volume. Measured 2026-09-23, 10.5% of
+    them (1.94M of 18.6M in the residential volumes) sit outside the listing -- front matter,
+    advertising, street guides, registers, business directories -- and the model never refuses, so
+    each would come back as a person. But "outside the listing" is not "not residential": 1856BPL's
+    Eastern District is 42% of that volume's lines. So the cut follows the `sections` inventory,
+    not the listing bounds: a line is kept when its leaf sits in a residential run. Nothing else
+    is filtered here; the ad-band marks (`context.band`) ride through for the next stage.
+    """
+    ident = v["id"]
+    runs = [r for r in (v["doc"].get("sections") or {}).get("runs", []) if r.get("residential")]
+    src = OUT / f"{ident}_lines.jsonl.gz"
+    dst = OUT / f"{ident}_listing.jsonl.gz"
+    out = {"method": "residential-sections", "derived": _dt.date.today().isoformat(),
+           "code_at": git_rev(), "file": str(dst.relative_to(REPO)),
+           "sections": [{"kind": r["kind"], "start_leaf": r["start_leaf"],
+                         "end_leaf": r["end_leaf"]} for r in runs]}
+    if v["doc"].get("survey_status") == "not-residential" or not runs:
+        dst.unlink(missing_ok=True)
+        return {**out, "file": None, "kept": 0,
+                "skipped": "not-residential" if runs else "no residential section"}
+
+    def label(leaf):
+        r = next((r for r in runs if r["start_leaf"] <= leaf <= r["end_leaf"]), None)
+        if r is None:
+            return None
+        title = (r.get("title") or {}).get("quote") or ""
+        return r["kind"] if r["kind"] in ("listing", "late_names") else f"{r['kind']}: {title}"[:60]
+
+    kept, dropped = collections.Counter(), 0
+    tmp = dst.with_suffix(".tmp")
+    with gzip.open(src, "rt", encoding="utf-8") as fin, gzip.open(tmp, "wt", encoding="utf-8") as fo:
+        for line in fin:
+            row = json.loads(line)
+            sec = label(row["context"]["leaf"])
+            if sec is None:
+                dropped += 1
+                continue
+            row["context"]["section"] = sec
+            fo.write(json.dumps(row, ensure_ascii=False) + "\n")
+            kept[sec] += 1
+    tmp.rename(dst)
+    total = sum(kept.values()) + dropped
+    return {**out, "kept": sum(kept.values()), "dropped": dropped,
+            "kept_share": round(sum(kept.values()) / total, 4) if total else None,
+            "kept_by_section": dict(kept)}
+
+
 def save(v: dict, key: str, block: dict):
     doc = json.loads(v["path"].read_text(encoding="utf-8"))   # re-read: never clobber others
     doc[key] = block
@@ -328,7 +499,7 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("step", nargs="?", choices=["bounds", "pages", "report"])
+    ap.add_argument("step", nargs="?", choices=["bounds", "pages", "sections", "scope", "report"])
     ap.add_argument("--ids", default=None, help="comma list of IA identifiers (default: all)")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
@@ -344,6 +515,28 @@ def main(argv=None) -> int:
         vols = [v for v in vols if v["id"] in want]
     if args.step == "report":
         return report(vols)
+
+    if args.step == "scope":
+        tot = collections.Counter()
+        for i, v in enumerate(vols, 1):
+            b = scope(v)
+            save(v, "scope", b)
+            tot["kept"] += b.get("kept", 0)
+            tot["dropped"] += b.get("dropped", 0)
+            print(f"[{i}/{len(vols)}] {v['id']:40} kept {b.get('kept', 0):>9,} "
+                  f"dropped {b.get('dropped', 0):>8,} {b.get('skipped', '')}", file=sys.stderr)
+        print(f"kept {tot['kept']:,}, dropped {tot['dropped']:,} "
+              f"({tot['dropped'] / max(tot['kept'] + tot['dropped'], 1):.1%})", file=sys.stderr)
+        return 0
+
+    if args.step == "sections":
+        for i, v in enumerate(vols, 1):
+            b = sections(v)
+            save(v, "sections", b)
+            print(f"[{i}/{len(vols)}] {v['id']:40} "
+                  + " ".join(f"{r['kind']}[{r['start_leaf']}-{r['end_leaf']}]" for r in b["runs"]),
+                  file=sys.stderr)
+        return 0
 
     if args.step == "pages":
         for i, v in enumerate(vols, 1):

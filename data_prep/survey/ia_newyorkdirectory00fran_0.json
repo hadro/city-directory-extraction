@@ -636,5 +636,110 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 10,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 11,
+    "end_leaf": 55,
+    "title": {
+     "leaf": 11,
+     "quote": "MUNICIPAL AND RAILROAD BONDS.",
+     "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$11/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 44,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 40,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 55,
+      "page": 8,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 56,
+    "end_leaf": 88,
+    "title": null,
+    "leaves": 33,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 56,
+      "page": 9,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 88,
+      "page": 52,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 89,
+    "end_leaf": 259,
+    "title": null,
+    "leaves": 171,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 89,
+      "page": 53,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 252,
+      "page": 212,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/newyorkdirectory00fran_0_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 56,
+    "end_leaf": 88
+   }
+  ],
+  "kept": 906,
+  "dropped": 6293,
+  "kept_share": 0.1259,
+  "kept_by_section": {
+   "listing": 906
+  }
  }
 }

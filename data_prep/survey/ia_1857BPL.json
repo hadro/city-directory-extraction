@@ -695,5 +695,278 @@
    "ia_page_equals_leaf": 0.04
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 26,
+    "title": null,
+    "leaves": 26,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 4,
+      "page": 6,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 26,
+      "page": 28,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 27,
+    "end_leaf": 30,
+    "title": {
+     "leaf": 27,
+     "quote": "AVENUE AND STREET GUIDE,",
+     "image": "https://iiif.archive.org/iiif/1857BPL$27/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 27,
+      "page": 29,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 30,
+      "page": 32,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 31,
+    "end_leaf": 345,
+    "title": null,
+    "leaves": 314,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 31,
+      "page": 33,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 345,
+      "page": 323,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 346,
+    "end_leaf": 346,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "district",
+    "start_leaf": 347,
+    "end_leaf": 475,
+    "title": {
+     "leaf": 347,
+     "quote": "EASTERN DISTRICT,",
+     "image": "https://iiif.archive.org/iiif/1857BPL$347/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 347,
+      "end_leaf": 475,
+      "letters": "ABCDEFGHJKLMNOPRSTVWZ"
+     }
+    ],
+    "leaves": 129,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 348,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 475,
+      "page": 121,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 476,
+    "end_leaf": 478,
+    "title": {
+     "leaf": 476,
+     "quote": "NAMES, &c,TOO LATE FOR INSERTION IN -REGULAR ORDER,",
+     "image": "https://iiif.archive.org/iiif/1857BPL$476/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 478,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 478,
+      "page": 2,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "district",
+    "start_leaf": 479,
+    "end_leaf": 492,
+    "title": {
+     "leaf": 479,
+     "quote": "STKEET AND AVENUE GUIDE: WESTERN DISTRICT.",
+     "image": "https://iiif.archive.org/iiif/1857BPL$479/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 14,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 479,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 492,
+      "page": 6,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 493,
+    "end_leaf": 523,
+    "title": {
+     "leaf": 493,
+     "quote": "APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/1857BPL$493/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 31,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 494,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 523,
+      "page": 31,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 524,
+    "end_leaf": 528,
+    "title": {
+     "leaf": 524,
+     "quote": "APPENDIX POST-OFFICES, CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/1857BPL$524/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 524,
+      "page": 32,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 528,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 529,
+    "end_leaf": 545,
+    "title": {
+     "leaf": 529,
+     "quote": "INDEX TO ADVEETISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1857BPL$529/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 17,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 529,
+      "page": 37,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 530,
+      "page": 38,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "back_matter",
+   "district",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1857BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 31,
+    "end_leaf": 345
+   },
+   {
+    "kind": "district",
+    "start_leaf": 347,
+    "end_leaf": 475
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 476,
+    "end_leaf": 478
+   }
+  ],
+  "kept": 53309,
+  "dropped": 6320,
+  "kept_share": 0.894,
+  "kept_by_section": {
+   "listing": 37435,
+   "district: EASTERN DISTRICT,": 15657,
+   "late_names": 217
+  }
  }
 }

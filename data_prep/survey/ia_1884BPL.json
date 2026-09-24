@@ -630,5 +630,152 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 8,
+    "end_leaf": 15,
+    "title": {
+     "leaf": 8,
+     "quote": "31,000 NAMES, CLASSIFIED lit STREETS.",
+     "image": "https://iiif.archive.org/iiif/1884BPL$8/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 16,
+    "end_leaf": 22,
+    "title": {
+     "leaf": 16,
+     "quote": "iNDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1884BPL$16/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 7,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 23,
+    "end_leaf": 30,
+    "title": {
+     "leaf": 23,
+     "quote": "BUSINESS REGISTER",
+     "image": "https://iiif.archive.org/iiif/1884BPL$23/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 31,
+    "end_leaf": 1456,
+    "title": null,
+    "leaves": 1420,
+    "residential": true
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1457,
+    "end_leaf": 1457,
+    "title": {
+     "leaf": 1457,
+     "quote": "INDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1884BPL$1457/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1458,
+    "end_leaf": 1481,
+    "title": {
+     "leaf": 1458,
+     "quote": "INDKX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1884BPL$1458/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 24,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1458,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1479,
+      "page": 23,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1482,
+    "end_leaf": 1523,
+    "title": {
+     "leaf": 1482,
+     "quote": "LAIN'S BROOKLYN STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1884BPL$1482/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 39,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1482,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1522,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "business_notice",
+   "front_matter",
+   "index",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1884BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 31,
+    "end_leaf": 1456
+   }
+  ],
+  "kept": 171849,
+  "dropped": 13541,
+  "kept_share": 0.927,
+  "kept_by_section": {
+   "listing": 171849
+  }
  }
 }

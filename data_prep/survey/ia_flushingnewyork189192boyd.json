@@ -727,5 +727,98 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 3,
+    "end_leaf": 11,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 13,
+    "end_leaf": 13,
+    "title": {
+     "leaf": 13,
+     "quote": "INDEX TO ADYERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$13/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 15,
+    "end_leaf": 197,
+    "title": null,
+    "leaves": 92,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 17,
+      "page": 34,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 197,
+      "page": 124,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 199,
+    "end_leaf": 251,
+    "title": null,
+    "leaves": 27,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 199,
+      "page": 125,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 243,
+      "page": 147,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "index",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/flushingnewyork189192boyd_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 15,
+    "end_leaf": 197
+   }
+  ],
+  "kept": 3137,
+  "dropped": 722,
+  "kept_share": 0.8129,
+  "kept_by_section": {
+   "listing": 3137
+  }
  }
 }

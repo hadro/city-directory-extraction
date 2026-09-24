@@ -724,5 +724,170 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 22,
+    "title": null,
+    "leaves": 22,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 23,
+    "end_leaf": 633,
+    "title": null,
+    "leaves": 610,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 23,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 631,
+      "page": 573,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 634,
+    "end_leaf": 634,
+    "title": {
+     "leaf": 634,
+     "quote": "MMES TOO LATE FOR INSERTION IN RKGULiR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1866BPL$634/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "index",
+    "start_leaf": 635,
+    "end_leaf": 638,
+    "title": {
+     "leaf": 635,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1866BPL$635/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 637,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 638,
+      "page": 2,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 639,
+    "end_leaf": 675,
+    "title": {
+     "leaf": 639,
+     "quote": "STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1866BPL$639/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 37,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 639,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 671,
+      "page": 35,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 679,
+    "end_leaf": 680,
+    "title": {
+     "leaf": 679,
+     "quote": "INDEX TO APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/1866BPL$679/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 681,
+    "end_leaf": 718,
+    "title": {
+     "leaf": 681,
+     "quote": "APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/1866BPL$681/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 38,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 682,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 711,
+      "page": 31,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1866BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 23,
+    "end_leaf": 633
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 634,
+    "end_leaf": 634
+   }
+  ],
+  "kept": 73318,
+  "dropped": 7990,
+  "kept_share": 0.9017,
+  "kept_by_section": {
+   "listing": 73262,
+   "late_names": 56
+  }
  }
 }

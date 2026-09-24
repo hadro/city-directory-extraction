@@ -656,5 +656,101 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 27,
+    "title": null,
+    "leaves": 14,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 7,
+      "page": 5,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 27,
+      "page": 16,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 29,
+    "end_leaf": 35,
+    "title": {
+     "leaf": 29,
+     "quote": "INDEX TO ADVERTISEMENTS",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyork1909p1geor$29/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 29,
+      "page": 17,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 35,
+      "page": 20,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 37,
+    "end_leaf": 1175,
+    "title": null,
+    "leaves": 570,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 37,
+      "page": 21,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1175,
+      "page": 582,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "index",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/brooklynnewyork1909p1geor_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 37,
+    "end_leaf": 1175
+   }
+  ],
+  "kept": 91375,
+  "dropped": 410,
+  "kept_share": 0.9955,
+  "kept_by_section": {
+   "listing": 91375
+  }
  }
 }

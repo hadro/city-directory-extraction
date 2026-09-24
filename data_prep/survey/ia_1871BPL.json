@@ -630,5 +630,215 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 10,
+    "title": null,
+    "leaves": 11,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 11,
+    "end_leaf": 12,
+    "title": {
+     "leaf": 11,
+     "quote": "STREET AND AVENUE DIRECTORY AND AN APPENDIX",
+     "image": "https://iiif.archive.org/iiif/1871BPL$11/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 13,
+    "end_leaf": 842,
+    "title": null,
+    "leaves": 830,
+    "residential": true
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 843,
+    "end_leaf": 843,
+    "title": {
+     "leaf": 843,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1871BPL$843/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "business",
+    "start_leaf": 844,
+    "end_leaf": 931,
+    "title": {
+     "leaf": 844,
+     "quote": "INDEX TO BUSINESS DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1871BPL$844/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 88,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 932,
+    "end_leaf": 934,
+    "title": {
+     "leaf": 932,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1871BPL$932/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 935,
+    "end_leaf": 977,
+    "title": {
+     "leaf": 935,
+     "quote": "STREET DIRECTORY CHANGES.",
+     "image": "https://iiif.archive.org/iiif/1871BPL$935/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 966,
+      "end_leaf": 971,
+      "letters": "L"
+     }
+    ],
+    "leaves": 42,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 937,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 971,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 978,
+    "end_leaf": 979,
+    "title": {
+     "leaf": 978,
+     "quote": "INDEX TO APPENDIX.",
+     "image": "https://iiif.archive.org/iiif/1871BPL$978/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 980,
+    "end_leaf": 981,
+    "title": {
+     "leaf": 980,
+     "quote": "APPENDIX",
+     "image": "https://iiif.archive.org/iiif/1871BPL$980/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 982,
+    "end_leaf": 982,
+    "title": {
+     "leaf": 982,
+     "quote": "APPENDIX CEMETERIES AND CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/1871BPL$982/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 982,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 982,
+      "page": 3,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 983,
+    "end_leaf": 1012,
+    "title": {
+     "leaf": 983,
+     "quote": "APPENDIX CIIUECHES.",
+     "image": "https://iiif.archive.org/iiif/1871BPL$983/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 30,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 983,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1010,
+      "page": 15,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "appendix",
+   "business",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1871BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 13,
+    "end_leaf": 842
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 843,
+    "end_leaf": 843
+   }
+  ],
+  "kept": 99379,
+  "dropped": 25606,
+  "kept_share": 0.7951,
+  "kept_by_section": {
+   "listing": 99329,
+   "late_names": 50
+  }
  }
 }

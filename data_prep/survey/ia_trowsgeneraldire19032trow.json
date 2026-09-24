@@ -607,5 +607,64 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1163,
+    "title": null,
+    "leaves": 578,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 281,
+      "page": 714,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1149,
+      "page": 1148,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldire19032trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1163
+   }
+  ],
+  "kept": 152636,
+  "dropped": 9,
+  "kept_share": 0.9999,
+  "kept_by_section": {
+   "listing": 152636
+  }
  }
 }

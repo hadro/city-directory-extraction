@@ -579,5 +579,126 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 45,
+    "title": null,
+    "leaves": 20,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 47,
+    "end_leaf": 55,
+    "title": {
+     "leaf": 47,
+     "quote": "INDEX TO ADVERTISERS.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$47/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "business",
+    "start_leaf": 57,
+    "end_leaf": 415,
+    "title": {
+     "leaf": 57,
+     "quote": "BUSINESS DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1913p1trow$57/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 225,
+      "end_leaf": 251,
+      "letters": "BCDFGLMPRST"
+     }
+    ],
+    "leaves": 180,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 79,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 415,
+      "page": 166,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 417,
+    "end_leaf": 573,
+    "title": null,
+    "leaves": 79,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 417,
+      "page": 167,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 573,
+      "page": 239,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 575,
+    "end_leaf": 823,
+    "title": null,
+    "leaves": 124,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 575,
+      "page": 240,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 819,
+      "page": 356,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "back_matter",
+   "business",
+   "front_matter",
+   "index",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": null,
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 417,
+    "end_leaf": 573
+   }
+  ],
+  "kept": 0,
+  "skipped": "not-residential"
  }
 }

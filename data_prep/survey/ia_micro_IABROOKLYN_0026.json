@@ -724,5 +724,126 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 2,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 3,
+    "end_leaf": 3,
+    "title": {
+     "leaf": 3,
+     "quote": "PREFACE 10 THE REGISTER.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$3/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 4,
+    "end_leaf": 219,
+    "title": null,
+    "leaves": 202,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 81,
+      "page": 114,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 219,
+      "page": 250,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 220,
+    "end_leaf": 253,
+    "title": {
+     "leaf": 220,
+     "quote": "APENDIX.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$220/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 34,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 220,
+      "page": 251,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 250,
+      "page": 281,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 256,
+    "end_leaf": 450,
+    "title": {
+     "leaf": 256,
+     "quote": "MUNICIPAL REGISTER",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0026$256/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 154,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 313,
+      "page": 57,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 446,
+      "page": 183,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0026_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 4,
+    "end_leaf": 219
+   }
+  ],
+  "kept": 5131,
+  "dropped": 2600,
+  "kept_share": 0.6637,
+  "kept_by_section": {
+   "listing": 5131
+  }
  }
 }

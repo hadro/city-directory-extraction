@@ -854,5 +854,110 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 5,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 7,
+    "end_leaf": 149,
+    "title": {
+     "leaf": 7,
+     "quote": "NEW-YORK REGISTER.",
+     "image": "https://iiif.archive.org/iiif/longworthsameric1826newy$7/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 72,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 29,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 119,
+      "page": 47,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 151,
+    "end_leaf": 1123,
+    "title": null,
+    "leaves": 485,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 157,
+      "page": 54,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1123,
+      "page": 535,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1125,
+    "end_leaf": 1144,
+    "title": null,
+    "leaves": 8,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1125,
+      "page": 536,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1133,
+      "page": 540,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/longworthsameric1826newy_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 151,
+    "end_leaf": 1123
+   }
+  ],
+  "kept": 25486,
+  "dropped": 2579,
+  "kept_share": 0.9081,
+  "kept_by_section": {
+   "listing": 25486
+  }
  }
 }

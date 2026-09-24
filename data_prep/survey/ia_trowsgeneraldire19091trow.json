@@ -522,5 +522,131 @@
   "flags": [
    "no-folios"
   ]
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 23,
+    "title": null,
+    "leaves": 11,
+    "residential": false
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 25,
+    "end_leaf": 25,
+    "title": {
+     "leaf": 25,
+     "quote": "ALPHABETICALLY CLASSIFIED ACCORDING TO THE BUSINESS",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$25/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 27,
+    "end_leaf": 27,
+    "title": {
+     "leaf": 27,
+     "quote": "INDEX TO PURCHASERS' GUIDE.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$27/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 29,
+    "end_leaf": 89,
+    "title": {
+     "leaf": 29,
+     "quote": "PURCHASERS' GUIDE AND COMMERCIAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$29/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 30,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 91,
+    "end_leaf": 91,
+    "title": {
+     "leaf": 91,
+     "quote": "INDEX TO ADVERTISERS.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$91/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 93,
+    "end_leaf": 159,
+    "title": {
+     "leaf": 93,
+     "quote": "NAMES TOO LATE FOR INSERTION (IN THE PROPER PLACE),",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire19091trow$93/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 34,
+    "residential": true
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 161,
+    "end_leaf": 1053,
+    "title": null,
+    "leaves": 447,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1055,
+    "end_leaf": 1258,
+    "title": null,
+    "leaves": 100,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "business_notice",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldire19091trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 93,
+    "end_leaf": 159
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 161,
+    "end_leaf": 1053
+   }
+  ],
+  "kept": 40962,
+  "dropped": 7656,
+  "kept_share": 0.8425,
+  "kept_by_section": {
+   "late_names": 2852,
+   "listing": 38110
+  }
  }
 }

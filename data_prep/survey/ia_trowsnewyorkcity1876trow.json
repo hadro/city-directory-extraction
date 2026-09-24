@@ -762,5 +762,199 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 5,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 7,
+    "end_leaf": 1552,
+    "title": null,
+    "leaves": 1543,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 8,
+      "page": 18,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1544,
+      "page": 1498,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1553,
+    "end_leaf": 1628,
+    "title": {
+     "leaf": 1553,
+     "quote": "COMMERCIAL REGISTER,",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1553/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 76,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1555,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1625,
+      "page": 71,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1629,
+    "end_leaf": 1629,
+    "title": {
+     "leaf": 1629,
+     "quote": "INDEX TO CITY REGISTER.",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1629/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1630,
+    "end_leaf": 1680,
+    "title": {
+     "leaf": 1630,
+     "quote": "INDKX TO CITY REGISTER.",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1630/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 51,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1630,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1680,
+      "page": 54,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1681,
+    "end_leaf": 1682,
+    "title": {
+     "leaf": 1681,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1681/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1681,
+      "page": 55,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1682,
+      "page": 56,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1683,
+    "end_leaf": 1683,
+    "title": {
+     "leaf": 1683,
+     "quote": "REGISTER\u2014 STEEET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1683/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1683,
+      "page": 57,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1683,
+      "page": 57,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1684,
+    "end_leaf": 1696,
+    "title": {
+     "leaf": 1684,
+     "quote": "REGISTER \u2014 STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1684/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 13,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1684,
+      "page": 58,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1696,
+      "page": 70,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "index",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsnewyorkcity1876trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 7,
+    "end_leaf": 1552
+   }
+  ],
+  "kept": 254696,
+  "dropped": 12678,
+  "kept_share": 0.9526,
+  "kept_by_section": {
+   "listing": 254696
+  }
  }
 }

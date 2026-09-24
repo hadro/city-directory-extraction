@@ -525,5 +525,61 @@
   "flags": [
    "no-folios"
   ]
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 7,
+    "end_leaf": 41,
+    "title": null,
+    "leaves": 19,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 43,
+    "end_leaf": 993,
+    "title": null,
+    "leaves": 476,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 995,
+    "end_leaf": 1005,
+    "title": null,
+    "leaves": 6,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldir1908p3trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 43,
+    "end_leaf": 993
+   }
+  ],
+  "kept": 57655,
+  "dropped": 2171,
+  "kept_share": 0.9637,
+  "kept_by_section": {
+   "listing": 57655
+  }
  }
 }

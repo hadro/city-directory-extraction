@@ -746,5 +746,98 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1153,
+    "title": null,
+    "leaves": 573,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 9,
+      "page": 549,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1153,
+      "page": 1112,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1155,
+    "end_leaf": 1163,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1165,
+    "end_leaf": 1233,
+    "title": {
+     "leaf": 1165,
+     "quote": "STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$1165/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 35,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1173,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1229,
+      "page": 30,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/brooklynnewyorkc1905geor_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1153
+   }
+  ],
+  "kept": 91345,
+  "dropped": 13388,
+  "kept_share": 0.8722,
+  "kept_by_section": {
+   "listing": 91345
+  }
  }
 }

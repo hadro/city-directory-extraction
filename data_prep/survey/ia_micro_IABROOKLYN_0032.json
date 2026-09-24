@@ -884,5 +884,126 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 18,
+    "title": null,
+    "leaves": 17,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 3,
+      "page": 0,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 18,
+      "page": 14,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 19,
+    "end_leaf": 578,
+    "title": null,
+    "leaves": 516,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 19,
+      "page": 15,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 578,
+      "page": 567,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 579,
+    "end_leaf": 630,
+    "title": {
+     "leaf": 579,
+     "quote": "BROOKLYN STREET DIRECTORY,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$579/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 49,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 579,
+      "page": 568,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 630,
+      "page": 618,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 631,
+    "end_leaf": 654,
+    "title": {
+     "leaf": 631,
+     "quote": "CHURCHES. 619",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$631/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 24,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 631,
+      "page": 619,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 650,
+      "page": 638,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0032_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 19,
+    "end_leaf": 578
+   }
+  ],
+  "kept": 7879,
+  "dropped": 1155,
+  "kept_share": 0.8721,
+  "kept_by_section": {
+   "listing": 7879
+  }
  }
 }

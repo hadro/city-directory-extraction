@@ -602,5 +602,89 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 20,
+    "title": null,
+    "leaves": 19,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 18,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 20,
+      "page": 12,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 21,
+    "end_leaf": 279,
+    "title": null,
+    "leaves": 256,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 21,
+      "page": 13,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 210,
+      "page": 200,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 280,
+    "end_leaf": 343,
+    "title": {
+     "leaf": 280,
+     "quote": "BROOKLYN STREET DIRECTORY ;",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0023$280/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 62,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0023_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 21,
+    "end_leaf": 279
+   }
+  ],
+  "kept": 9469,
+  "dropped": 1388,
+  "kept_share": 0.8722,
+  "kept_by_section": {
+   "listing": 9469
+  }
  }
 }

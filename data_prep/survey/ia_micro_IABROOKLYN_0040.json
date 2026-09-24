@@ -880,5 +880,184 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 9,
+    "title": null,
+    "leaves": 9,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 10,
+    "end_leaf": 421,
+    "title": null,
+    "leaves": 387,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 10,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 421,
+      "page": 2,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 422,
+    "end_leaf": 427,
+    "title": null,
+    "leaves": 6,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 422,
+      "page": 3,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 427,
+      "page": 8,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 428,
+    "end_leaf": 451,
+    "title": {
+     "leaf": 428,
+     "quote": "\u00bb STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$428/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 24,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 428,
+      "page": 9,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 448,
+      "page": 10,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 452,
+    "end_leaf": 460,
+    "title": {
+     "leaf": 452,
+     "quote": "8 APPENDIX\u2014\u2014FIRE DEPARTMENT (w. bis.)",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$452/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 452,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 460,
+      "page": 8,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 461,
+    "end_leaf": 461,
+    "title": {
+     "leaf": 461,
+     "quote": "APPENDIX-\u2014\u2014CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$461/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 461,
+      "page": 9,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 461,
+      "page": 9,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 462,
+    "end_leaf": 481,
+    "title": {
+     "leaf": 462,
+     "quote": "26 APPENDIX\u2014BROOKLYN FIRE INSURANCE COMPANIES,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$462/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 20,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 462,
+      "page": 10,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 478,
+      "page": 26,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0040_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 10,
+    "end_leaf": 421
+   }
+  ],
+  "kept": 8130,
+  "dropped": 1340,
+  "kept_share": 0.8585,
+  "kept_by_section": {
+   "listing": 8130
+  }
  }
 }

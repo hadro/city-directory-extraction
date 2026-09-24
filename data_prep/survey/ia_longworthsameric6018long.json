@@ -639,5 +639,172 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 13,
+    "title": null,
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 15,
+    "end_leaf": 57,
+    "title": {
+     "leaf": 15,
+     "quote": "NEW-YORK REGISTER,",
+     "image": "https://iiif.archive.org/iiif/longworthsameric6018long$15/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 43,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 17,
+      "page": 9,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 57,
+      "page": 49,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 58,
+    "end_leaf": 742,
+    "title": null,
+    "leaves": 685,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 58,
+      "page": 50,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 742,
+      "page": 734,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 743,
+    "end_leaf": 744,
+    "title": null,
+    "leaves": 2,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 743,
+      "page": 735,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 744,
+      "page": 736,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 745,
+    "end_leaf": 800,
+    "title": {
+     "leaf": 745,
+     "quote": "CHURCHES.",
+     "image": "https://iiif.archive.org/iiif/longworthsameric6018long$745/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 55,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 745,
+      "page": 737,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 800,
+      "page": 1,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 805,
+    "end_leaf": 830,
+    "title": {
+     "leaf": 805,
+     "quote": "NEW NAMES, ALTERATIONS, REMOVALS,",
+     "image": "https://iiif.archive.org/iiif/longworthsameric6018long$805/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 807,
+      "end_leaf": 825,
+      "letters": "ABCDGHLMPSTW"
+     }
+    ],
+    "leaves": 24,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 805,
+      "page": 2,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 828,
+      "page": 24,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "late_names",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/longworthsameric6018long_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 58,
+    "end_leaf": 742
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 805,
+    "end_leaf": 830
+   }
+  ],
+  "kept": 37589,
+  "dropped": 3688,
+  "kept_share": 0.9107,
+  "kept_by_section": {
+   "listing": 36522,
+   "late_names": 1067
+  }
  }
 }

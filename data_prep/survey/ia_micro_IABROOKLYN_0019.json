@@ -602,5 +602,147 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 1,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 2,
+    "end_leaf": 13,
+    "title": {
+     "leaf": 2,
+     "quote": "CHURCHES, ODD FELLOWS AND L. r",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0019$2/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 11,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 9,
+      "page": 7,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 11,
+      "page": 9,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 14,
+    "end_leaf": 171,
+    "title": null,
+    "leaves": 154,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 16,
+      "page": 15,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 144,
+      "page": 142,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 172,
+    "end_leaf": 172,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 173,
+    "end_leaf": 194,
+    "title": {
+     "leaf": 173,
+     "quote": "196 BROOEATE CERERT DIREOTORE- BROOKLYN STREET DIRECTORY. 197",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0019$173/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 21,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 184,
+      "page": 216,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 194,
+      "page": 226,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 195,
+    "end_leaf": 225,
+    "title": {
+     "leaf": 195,
+     "quote": "CHURCHES. \\ ;",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0019$195/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 31,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 195,
+      "page": 227,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 218,
+      "page": 250,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0019_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 14,
+    "end_leaf": 171
+   }
+  ],
+  "kept": 6302,
+  "dropped": 1405,
+  "kept_share": 0.8177,
+  "kept_by_section": {
+   "listing": 6302
+  }
  }
 }

@@ -789,5 +789,139 @@
    "ia_page_equals_leaf": 0.17
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 0,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 1,
+    "end_leaf": 1512,
+    "title": null,
+    "leaves": 1505,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 3,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1503,
+      "page": 1447,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1513,
+    "end_leaf": 1514,
+    "title": {
+     "leaf": 1513,
+     "quote": "INDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1885BPL$1513/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1514,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1514,
+      "page": 2,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1515,
+    "end_leaf": 1534,
+    "title": {
+     "leaf": 1515,
+     "quote": "ilUNICIPAL REGISTER",
+     "image": "https://iiif.archive.org/iiif/1885BPL$1515/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 20,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1515,
+      "page": 3,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1534,
+      "page": 2,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1535,
+    "end_leaf": 1563,
+    "title": {
+     "leaf": 1535,
+     "quote": "LAIN'S BROOKLYN STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1885BPL$1535/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 29,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1535,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1562,
+      "page": 30,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "index",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1885BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 1,
+    "end_leaf": 1512
+   }
+  ],
+  "kept": 180764,
+  "dropped": 10725,
+  "kept_share": 0.944,
+  "kept_by_section": {
+   "listing": 180764
+  }
  }
 }

@@ -692,5 +692,192 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 9,
+    "title": null,
+    "leaves": 10,
+    "residential": false
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 10,
+    "end_leaf": 16,
+    "title": {
+     "leaf": 10,
+     "quote": "BUSINESS DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1887BPL$10/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 7,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 17,
+    "end_leaf": 20,
+    "title": {
+     "leaf": 17,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1887BPL$17/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 21,
+    "end_leaf": 21,
+    "title": {
+     "leaf": 21,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER",
+     "image": "https://iiif.archive.org/iiif/1887BPL$21/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "register",
+    "start_leaf": 22,
+    "end_leaf": 29,
+    "title": {
+     "leaf": 22,
+     "quote": "BUSINESS REGISTER",
+     "image": "https://iiif.archive.org/iiif/1887BPL$22/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 30,
+    "end_leaf": 1337,
+    "title": null,
+    "leaves": 1306,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 177,
+      "page": 128,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1330,
+      "page": 1264,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1338,
+    "end_leaf": 1338,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1339,
+    "end_leaf": 1340,
+    "title": {
+     "leaf": 1339,
+     "quote": "INDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1887BPL$1339/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1341,
+    "end_leaf": 1362,
+    "title": {
+     "leaf": 1341,
+     "quote": "MUNICIPAL EEGISTER",
+     "image": "https://iiif.archive.org/iiif/1887BPL$1341/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 22,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1343,
+      "page": 5,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1362,
+      "page": 24,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1363,
+    "end_leaf": 1400,
+    "title": {
+     "leaf": 1363,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1887BPL$1363/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 38,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1364,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1397,
+      "page": 35,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "business_notice",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1887BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 21,
+    "end_leaf": 21
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 30,
+    "end_leaf": 1337
+   }
+  ],
+  "kept": 199925,
+  "dropped": 13142,
+  "kept_share": 0.9383,
+  "kept_by_section": {
+   "late_names": 27,
+   "listing": 199898
+  }
  }
 }

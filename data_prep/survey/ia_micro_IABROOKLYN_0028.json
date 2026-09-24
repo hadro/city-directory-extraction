@@ -761,5 +761,148 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 40,
+    "title": null,
+    "leaves": 32,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 6,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 40,
+      "page": 36,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 41,
+    "end_leaf": 407,
+    "title": null,
+    "leaves": 329,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 41,
+      "page": 37,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 407,
+      "page": 396,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 408,
+    "end_leaf": 421,
+    "title": null,
+    "leaves": 9,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 422,
+    "end_leaf": 439,
+    "title": {
+     "leaf": 422,
+     "quote": "APPENDIX\u2014\u2014BROOKLYN STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$422/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 12,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 441,
+    "end_leaf": 453,
+    "title": {
+     "leaf": 441,
+     "quote": "APPENDIX\u2014-GENERAL INFORMATION,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$441/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 11,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 454,
+    "end_leaf": 470,
+    "title": {
+     "leaf": 454,
+     "quote": "LIST OF CHURCHES IN CITY.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$454/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 15,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 471,
+    "end_leaf": 484,
+    "title": {
+     "leaf": 471,
+     "quote": "APPENDIX~\u2014ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0028$471/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 14,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 481,
+      "page": 469,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 484,
+      "page": 472,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0028_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 41,
+    "end_leaf": 407
+   }
+  ],
+  "kept": 4291,
+  "dropped": 539,
+  "kept_share": 0.8884,
+  "kept_by_section": {
+   "listing": 4291
+  }
  }
 }

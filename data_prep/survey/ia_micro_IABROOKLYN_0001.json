@@ -567,5 +567,110 @@
    "ia_page_equals_leaf": 1.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 4,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 31,
+    "title": null,
+    "leaves": 27,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 6,
+      "page": 6,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 31,
+      "page": 31,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 32,
+    "end_leaf": 41,
+    "title": null,
+    "leaves": 10,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 32,
+      "page": 32,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 41,
+      "page": 41,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 42,
+    "end_leaf": 71,
+    "title": {
+     "leaf": 42,
+     "quote": "CHURCHES IN BROOKLYN.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0001$42/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 30,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 42,
+      "page": 42,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 68,
+      "page": 68,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0001_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 5,
+    "end_leaf": 31
+   }
+  ],
+  "kept": 959,
+  "dropped": 1149,
+  "kept_share": 0.4549,
+  "kept_by_section": {
+   "listing": 959
+  }
  }
 }

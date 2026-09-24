@@ -641,5 +641,133 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 8,
+    "title": null,
+    "leaves": 6,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 9,
+    "end_leaf": 9,
+    "title": {
+     "leaf": 9,
+     "quote": "_.. * ADDITIONAL NAMES.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$9/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 10,
+    "end_leaf": 178,
+    "title": null,
+    "leaves": 166,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 15,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 178,
+      "page": 171,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 180,
+    "end_leaf": 305,
+    "title": {
+     "leaf": 180,
+     "quote": "STREET DIRECTORY,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$180/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 120,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 182,
+      "page": 175,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 218,
+      "page": 211,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 306,
+    "end_leaf": 364,
+    "title": {
+     "leaf": 306,
+     "quote": "MUNICIPAL INFORMATION.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$306/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 59,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 308,
+      "page": 299,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 341,
+      "page": 332,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0018_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 9,
+    "end_leaf": 9
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 10,
+    "end_leaf": 178
+   }
+  ],
+  "kept": 4934,
+  "dropped": 3055,
+  "kept_share": 0.6176,
+  "kept_by_section": {
+   "late_names": 15,
+   "listing": 4919
+  }
  }
 }

@@ -638,5 +638,195 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 2,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 889,
+    "title": null,
+    "leaves": 440,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 9,
+      "page": 1209,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 37,
+      "page": 1223,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 891,
+    "end_leaf": 891,
+    "title": {
+     "leaf": 891,
+     "quote": "ALPHABETICALLY CLASSIFIED ACCORDING TO THE BUSINESS",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$891/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 893,
+    "end_leaf": 893,
+    "title": {
+     "leaf": 893,
+     "quote": "INDEX TO PURCHASERS' GUIDE.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$893/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 895,
+    "end_leaf": 933,
+    "title": {
+     "leaf": 895,
+     "quote": "PURCHASERS' GUIDE AND COMMERCIAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$895/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 20,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 913,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 933,
+      "page": 20,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 935,
+    "end_leaf": 941,
+    "title": {
+     "leaf": 935,
+     "quote": "INDEX TO REGISTER OF PUBLIC INSTITUTIONS.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$935/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 935,
+      "page": 21,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 941,
+      "page": 24,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 943,
+    "end_leaf": 1137,
+    "title": {
+     "leaf": 943,
+     "quote": "CITY AND BOROUGH REGISTER",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$943/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 1119,
+      "end_leaf": 1153,
+      "letters": "ACHL"
+     }
+    ],
+    "leaves": 98,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 943,
+      "page": 25,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1137,
+      "page": 104,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1139,
+    "end_leaf": 1286,
+    "title": {
+     "leaf": 1139,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p3trow$1139/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 73,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1139,
+      "page": 105,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1273,
+      "page": 172,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "business_notice",
+   "front_matter",
+   "index",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldir1911p3trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 889
+   }
+  ],
+  "kept": 138989,
+  "dropped": 42264,
+  "kept_share": 0.7668,
+  "kept_by_section": {
+   "listing": 138989
+  }
  }
 }

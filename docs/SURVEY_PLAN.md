@@ -995,6 +995,43 @@ edge" once the edge has moved.
 and 12 fills (the Trow p1 caption pages' 17 for 1905, 1906, 1907, 1912 and 1914, and the 1907 p2
 start 565). The ledger holds 241 survey-written page cells.
 
+#### Section inventory and listing-scoped lines (2026-09-23)
+
+`survey_derive.py sections` → sidecar `sections`: each volume as an ordered list of **runs**, each with
+a kind (`listing`, `district`, `late_names`, `untitled_alphabet`, `business`, `business_notice`,
+`street_guide`, `register`, `index`, `nurses`, `appendix`, `front_matter`, `back_matter`), a cited
+title (leaf, verbatim quote, IIIF image), leaf range, printed pages at both ends where the margin
+fit reads them, any alphabets inside, and `residential`. Titles are read from a page's top display
+lines by `section_titles.py`. A title opens a run that lasts until the next title of another kind,
+and advertising pages don't break it.
+
+**Why titles and not alphabets:** a classified business directory sorts names *within each trade*,
+so it forms no alphabet. 1883BPL's (leaves 1347–1578, heads like "CLOTHING— COAL AND WOOD") made
+no section at all under the letter vote. Every one of these parts prints a title page.
+
+Guards, each a measured false positive: "CITY & BUSINESS DIRECTORY" is the *volume's* title and the
+running head of its advertising pages, with the "&" OCR'd as `i.`, `A`, `1`, `4` (1875BPL, 1884BPL).
+"INDEX TO THE BUSINESS DIRECTORY" belongs to the business section (Hope & Henderson 1856 prints it
+four leaves after the title). A district is residential only when it heads an alphabet (Trow 1910
+p3 leaf 1089 is a court, "Southern District", in the register). A titled business run under 10
+leaves is a notice: the Trow Business Directory's "Alphabetically classified according to the
+business" ad, and Lain's 1879 ad pages for its separate business volume.
+
+**Business sections in residential volumes, 10:** Lain 1869, 1871, 1875, 1876, 1880, 1883 (BPL);
+Boyd's Flushing (`flushingnewyorkc00boyd`); Hope & Henderson 1856 (`micro_IABROOKLYN_0035`); and
+the back of Trow 1915 and 1917 (*"Trow's New York City Classified Business Directory"*, ~400 leaves
+each). Six openings verified by image. Business-only volumes (the 1913 set, Wilson's 1853,
+`micro_IABROOKLYN_0038`) read as business throughout.
+
+**Second residential alphabets:** the Eastern District of 1856BPL, 1857BPL, Smith 1855 and 1856
+(`micro_IABROOKLYN_0034`, `_0036`). Plus 55 "names too late" supplements.
+
+`survey_derive.py scope` → `data/survey_ocr/<id>_listing.jsonl.gz` (176 volumes, 516 MB): the Phase 1
+candidate lines of residential runs only, each tagged `context.section`. **16.70M lines kept, 1.88M
+(10.1%) dropped.** The cut follows sections, not listing bounds: 1856BPL keeps 90% of its lines with
+its Eastern District, against 58% for the listing alone. Kept: listing 16.63M, district 46k, late
+names 18k.
+
 Why so many `none` on `start_page`: a listing's opening page often prints no folio (caption title,
 legend). For 39 volumes the first read is 1–3 leaves after the start, and the rule above forbids
 extrapolating it — **one image each settles them**, which is exactly the Phase-3 shape. 20

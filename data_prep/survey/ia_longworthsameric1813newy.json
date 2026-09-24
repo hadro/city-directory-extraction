@@ -771,5 +771,98 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 3,
+    "end_leaf": 4,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 5,
+    "end_leaf": 127,
+    "title": {
+     "leaf": 5,
+     "quote": "NEW-YORK REGISTER,",
+     "image": "https://iiif.archive.org/iiif/longworthsameric1813newy$5/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 62,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 15,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 123,
+      "page": 58,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 129,
+    "end_leaf": 839,
+    "title": null,
+    "leaves": 355,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 131,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 831,
+      "page": 351,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 841,
+    "end_leaf": 845,
+    "title": null,
+    "leaves": 3,
+    "residential": false
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/longworthsameric1813newy_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 129,
+    "end_leaf": 839
+   }
+  ],
+  "kept": 17283,
+  "dropped": 2188,
+  "kept_share": 0.8876,
+  "kept_by_section": {
+   "listing": 17283
+  }
  }
 }

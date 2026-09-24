@@ -768,5 +768,199 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 37,
+    "title": null,
+    "leaves": 36,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 5,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 37,
+      "page": 8,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 38,
+    "end_leaf": 38,
+    "title": {
+     "leaf": 38,
+     "quote": "NAMES RECEIVED TOO LATE FOR REGULAR INSERTION",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$38/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 38,
+      "page": 9,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 38,
+      "page": 9,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 39,
+    "end_leaf": 528,
+    "title": null,
+    "leaves": 478,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 39,
+      "page": 10,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 336,
+      "page": 303,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 529,
+    "end_leaf": 536,
+    "title": {
+     "leaf": 529,
+     "quote": "NAMES TOO LATE FOR REGULAR INSERTION,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$529/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": true
+   },
+   {
+    "kind": "business",
+    "start_leaf": 537,
+    "end_leaf": 605,
+    "title": {
+     "leaf": 537,
+     "quote": "BUSINESS DIRECTORY,",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$537/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 67,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 544,
+      "page": 8,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 601,
+      "page": 64,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 606,
+    "end_leaf": 642,
+    "title": {
+     "leaf": 606,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$606/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 37,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 609,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 621,
+      "page": 16,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 643,
+    "end_leaf": 685,
+    "title": {
+     "leaf": 643,
+     "quote": "APPENDIX.\u2014-CITY GOVERNMENT.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$643/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 41,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 680,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 683,
+      "page": 5,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "appendix",
+   "business",
+   "front_matter",
+   "late_names",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/micro_IABROOKLYN_0035_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 38,
+    "end_leaf": 38
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 39,
+    "end_leaf": 528
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 529,
+    "end_leaf": 536
+   }
+  ],
+  "kept": 26525,
+  "dropped": 3931,
+  "kept_share": 0.8709,
+  "kept_by_section": {
+   "late_names": 183,
+   "listing": 26342
+  }
  }
 }

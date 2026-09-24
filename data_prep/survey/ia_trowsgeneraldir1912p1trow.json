@@ -561,5 +561,96 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 7,
+    "end_leaf": 37,
+    "title": null,
+    "leaves": 16,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 39,
+    "end_leaf": 39,
+    "title": {
+     "leaf": 39,
+     "quote": "INDEX TO ADVERTISERS.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$39/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 41,
+    "end_leaf": 45,
+    "title": {
+     "leaf": 41,
+     "quote": "NAMES TOO LATE FOR INSERTION (IN THE PROPER PLACER",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$41/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": true
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 47,
+    "end_leaf": 1307,
+    "title": null,
+    "leaves": 631,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 361,
+      "page": 174,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 469,
+      "page": 228,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "index",
+   "late_names",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldir1912p1trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 41,
+    "end_leaf": 45
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 47,
+    "end_leaf": 1307
+   }
+  ],
+  "kept": 196387,
+  "dropped": 438,
+  "kept_share": 0.9978,
+  "kept_by_section": {
+   "late_names": 303,
+   "listing": 196084
+  }
  }
 }

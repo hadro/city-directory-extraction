@@ -814,5 +814,123 @@
    "ia_page_equals_leaf": 0.2
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 4,
+    "title": null,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 5,
+    "end_leaf": 8,
+    "title": {
+     "leaf": 5,
+     "quote": "INDEX TO ADVERTISEMENTS",
+     "image": "https://iiif.archive.org/iiif/1908BPL$5/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1109,
+    "title": null,
+    "leaves": 1084,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 10,
+      "page": 22,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1109,
+      "page": 1107,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1110,
+    "end_leaf": 1115,
+    "title": null,
+    "leaves": 6,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1112,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1114,
+      "page": 4,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1116,
+    "end_leaf": 1163,
+    "title": {
+     "leaf": 1116,
+     "quote": "STREET DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1908BPL$1116/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 48,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1120,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1162,
+      "page": 44,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "front_matter",
+   "index",
+   "listing",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1908BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 1109
+   }
+  ],
+  "kept": 174880,
+  "dropped": 17639,
+  "kept_share": 0.9084,
+  "kept_by_section": {
+   "listing": 174880
+  }
  }
 }

@@ -791,5 +791,204 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 14,
+    "title": null,
+    "leaves": 14,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 15,
+    "end_leaf": 18,
+    "title": {
+     "leaf": 15,
+     "quote": "A STREET AND AVENUE DIRECTORY, A MUNICIPAL",
+     "image": "https://iiif.archive.org/iiif/1879BPL$15/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 19,
+    "end_leaf": 21,
+    "title": {
+     "leaf": 19,
+     "quote": "INDEX TO ADVERTISEMENTS.",
+     "image": "https://iiif.archive.org/iiif/1879BPL$19/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 22,
+    "end_leaf": 25,
+    "title": {
+     "leaf": 22,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1879BPL$22/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": true
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 26,
+    "end_leaf": 26,
+    "title": {
+     "leaf": 26,
+     "quote": "BUSINESS DIRECTORY OF BROOKLYN, towns of kings county",
+     "image": "https://iiif.archive.org/iiif/1879BPL$26/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 27,
+    "end_leaf": 1142,
+    "title": null,
+    "leaves": 1112,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 29,
+      "page": 3,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1141,
+      "page": 1083,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 1144,
+    "end_leaf": 1145,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 1147,
+    "end_leaf": 1148,
+    "title": {
+     "leaf": 1147,
+     "quote": "INDEX TO MUNICIPAL REGISTER.",
+     "image": "https://iiif.archive.org/iiif/1879BPL$1147/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1149,
+    "end_leaf": 1168,
+    "title": {
+     "leaf": 1149,
+     "quote": "MUNICIPAL REGISTER",
+     "image": "https://iiif.archive.org/iiif/1879BPL$1149/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 20,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1150,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1168,
+      "page": 20,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 1169,
+    "end_leaf": 1170,
+    "title": {
+     "leaf": 1169,
+     "quote": "IBIS'S BROOKLYN BUSINESS DIRECTORY.",
+     "image": "https://iiif.archive.org/iiif/1879BPL$1169/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1171,
+    "end_leaf": 1213,
+    "title": {
+     "leaf": 1171,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/1879BPL$1171/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 38,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1171,
+      "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1212,
+      "page": 36,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "back_matter",
+   "business_notice",
+   "front_matter",
+   "index",
+   "late_names",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/1879BPL_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 22,
+    "end_leaf": 25
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 27,
+    "end_leaf": 1142
+   }
+  ],
+  "kept": 140832,
+  "dropped": 12511,
+  "kept_share": 0.9184,
+  "kept_by_section": {
+   "late_names": 233,
+   "listing": 140599
+  }
  }
 }

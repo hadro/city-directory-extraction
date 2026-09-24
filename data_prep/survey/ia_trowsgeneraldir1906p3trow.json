@@ -575,5 +575,127 @@
    "ia_page_equals_leaf": null
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 5,
+    "end_leaf": 7,
+    "title": null,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 917,
+    "title": null,
+    "leaves": 455,
+    "residential": true
+   },
+   {
+    "kind": "register",
+    "start_leaf": 919,
+    "end_leaf": 921,
+    "title": {
+     "leaf": 919,
+     "quote": "REGISTER OF PUBLIC INSTITUTIONS",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p3trow$919/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "index",
+    "start_leaf": 923,
+    "end_leaf": 929,
+    "title": {
+     "leaf": 923,
+     "quote": "INDEX TO REGISTER OF PUBLIC INSTITUTIONS.",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p3trow$923/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 931,
+    "end_leaf": 1107,
+    "title": {
+     "leaf": 931,
+     "quote": "CITY AND BOROUGH REGISTER",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p3trow$931/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 89,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 937,
+      "page": 10,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1107,
+      "page": 95,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "street_guide",
+    "start_leaf": 1109,
+    "end_leaf": 1237,
+    "title": {
+     "leaf": 1109,
+     "quote": "STREET AND AVENUE DIRECTORY",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p3trow$1109/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 65,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1109,
+      "page": 96,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 1231,
+      "page": 157,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "index",
+   "listing",
+   "register",
+   "street_guide"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/trowsgeneraldir1906p3trow_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 9,
+    "end_leaf": 917
+   }
+  ],
+  "kept": 123656,
+  "dropped": 34376,
+  "kept_share": 0.7825,
+  "kept_by_section": {
+   "listing": 123656
+  }
  }
 }

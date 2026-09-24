@@ -621,5 +621,101 @@
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 1,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 11,
+    "end_leaf": 22,
+    "title": {
+     "leaf": 11,
+     "quote": "REGISTER,",
+     "image": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$11/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 10,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 23,
+    "end_leaf": 237,
+    "title": null,
+    "leaves": 211,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 24,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 237,
+      "page": 215,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 239,
+    "end_leaf": 315,
+    "title": {
+     "leaf": 239,
+     "quote": "REGISTER",
+     "image": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$239/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 72,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 241,
+      "page": 219,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 304,
+      "page": 282,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "front_matter",
+   "listing",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": "data/survey_ocr/newyorkdirectory00dunc_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 23,
+    "end_leaf": 237
+   }
+  ],
+  "kept": 8210,
+  "dropped": 2679,
+  "kept_share": 0.754,
+  "kept_by_section": {
+   "listing": 8210
+  }
  }
 }

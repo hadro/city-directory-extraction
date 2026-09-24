@@ -395,5 +395,70 @@
   "flags": [
    "no-folios"
   ]
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 1,
+    "end_leaf": 6,
+    "title": null,
+    "leaves": 6,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 7,
+    "end_leaf": 16,
+    "title": null,
+    "leaves": 10,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 17,
+    "end_leaf": 17,
+    "title": null,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "business",
+    "start_leaf": 18,
+    "end_leaf": 33,
+    "title": {
+     "leaf": 18,
+     "quote": "34 BROOKLYN BUSINESS DIRECTORY. BROOKLYN BUSINESS DIRECTORY. 35",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0038$18/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 16,
+    "residential": false
+   }
+  ],
+  "has_business": true,
+  "kinds": [
+   "back_matter",
+   "business",
+   "front_matter",
+   "listing"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-23",
+  "code_at": "d0f4457-dirty",
+  "file": null,
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 7,
+    "end_leaf": 16
+   }
+  ],
+  "kept": 0,
+  "skipped": "not-residential"
  }
 }

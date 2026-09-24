@@ -1031,7 +1031,14 @@ for Lain's separate business volume). Every real section found sits after the li
 `micro_IABROOKLYN_0038`) read as business throughout.
 
 **Second residential alphabets:** the Eastern District of 1856BPL, 1857BPL, Smith 1855 and 1856
-(`micro_IABROOKLYN_0034`, `_0036`). Plus 55 "names too late" supplements.
+(`micro_IABROOKLYN_0034`, `_0036`). Plus 55 "names too late" supplements. **Village directories
+bound after the main one:** `bronxboroughdire1871` (added to the catalog 2026-09-24) holds Morrisania,
+then Highbridgeville and Tremont under their own running heads, which are too short to form an
+alphabet. A `place_directory` kind catches a "<PLACE> DIRECTORY" heading on a page of entries,
+naming a place other than the listing's own (fuzzy match, since Morrisania prints as MOREISANIA). It
+may open a run only after the listing and never inside a titled section: the same running head also
+occurs inside 1880BPL's business section and two Longworth supplements. Checked corpus-wide, the rule
+changes the residential runs of exactly one volume, this one.
 
 `survey_derive.py scope` → `data/survey_ocr/<id>_listing.jsonl.gz` (176 volumes, 516 MB): the Phase 1
 candidate lines of residential runs only, each tagged `context.section`. **16.70M lines kept, 1.88M

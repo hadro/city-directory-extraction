@@ -54,7 +54,18 @@ KINDS = [
     ("district", re.compile(r"\b(WEST\w*|EA\w{3,6}|NORTH\w*|SOUTH\w*)\s+DIS\w*|"
                             r"WILLIAMSBURGH?\s+DIRECTORY", re.I)),
     ("advertiser", re.compile(r"\bADVERTISER\b", re.I)),
+    # "<PLACE> DIRECTORY" as a whole line: a village or district with a listing of its own. The
+    # Morrisania and Tremont volume (bronxboroughdire1871) binds three -- Morrisania, then
+    # HIGHBRIDGEVILLE DIRECTORY, then Tremont -- and the second and third are too short to form
+    # an alphabet the letter vote can see. Only a candidate: survey_derive.sections() keeps it
+    # when the page is a page of entries AND the place is not the main listing's own
+    # ("BROOKLYN DIRECTORY" is the running head of half the corpus's ad pages).
+    # OCR-tolerant at both ends: a mangled folio in front ("IT'i", "2") and DIRECTORY itself
+    # misread ("DIEECTORY", "DlllECTuJIY") -- any D.......Y word of that length
+    ("place_directory", re.compile(r"^(?:\S{1,5}\s+)?([A-Z][A-Z'.]{3,}(?:\s+[A-Z][A-Z'.]+)?)\s+"
+                                   r"D[A-Za-z]{6,8}Y\W*$")),
 ]
+PLACE_RX = KINDS[-1][1]
 # kinds that are someone's residence or a supplement to the residential list
 RESIDENTIAL = {"district", "late_names"}
 # kinds that do not END the section they appear inside: ad pages are bound through everything
@@ -64,7 +75,7 @@ TRANSPARENT = {"advertiser", "volume_title"}
 def page_title(lines_by_y: list) -> tuple:
     """-> (kind, text) for the first title-like line among a page's top lines, or (None, None).
     `lines_by_y` is the page's line texts in top-to-bottom order."""
-    seen = 0
+    seen, fallback = 0, None
     for t in lines_by_y:
         letters = [c for c in t if c.isalpha()]
         # only lines with some text count toward the window: OCR crumbs from a side banner
@@ -84,8 +95,13 @@ def page_title(lines_by_y: list) -> tuple:
             continue
         for kind, rx in KINDS:
             if rx.search(t):
-                return kind, t.strip()[:90]
-    return None, None
+                if kind != "place_directory":
+                    return kind, t.strip()[:90]
+                fallback = fallback or (kind, t.strip()[:90])
+                break
+    # a bare "<PLACE> DIRECTORY" yields to anything more specific in the window: Smith 1856
+    # prints "BROOKLYN DIRECTORY," ABOVE "EASTERN DISTRICT,"
+    return fallback or (None, None)
 
 
 def _self_test():
@@ -105,6 +121,9 @@ def _self_test():
                        "FLUSHING DIRECTORY.", "O", ">", "2", "Business Directory,"])[0] == "business"
     assert page_title(["Lain & Co. business directory publishers, 213 Montague"]) == (None, None)
     assert page_title(["Classified Business Lists", "OF ANY"])[0] == "advertiser"
+    assert page_title(["IT'i HIOUBKIDGEVILLE DIEECTORY"])[0] == "place_directory"
+    assert PLACE_RX.match("2 MOREISANIA DIRECTORY.").group(1) == "MOREISANIA"
+    assert page_title(["LAIN'S BROOKLYN DIRECTORY ADVERTISER."])[0] == "advertiser"
     assert page_title(["REYNOLDS' CITY DIRECTORY AND BUSINESS ADVERTISER"])[0] == "volume_title"
     print("self-test OK")
 

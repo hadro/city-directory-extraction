@@ -75,6 +75,8 @@ from __future__ import annotations
 import argparse
 import collections
 import datetime as _dt
+import difflib
+import re
 import gzip
 import json
 import sys
@@ -87,7 +89,7 @@ sys.path.insert(0, str(HERE))
 from detect_listing_bounds import (FIRST_WORD_RE, detect, extend_edges,  # noqa: E402
                                    leaf_letters_from_dump, leaf_letters_from_jsonl)
 from ia_volume_to_jsonl import words_to_lines  # noqa: E402
-from section_titles import RESIDENTIAL, TRANSPARENT, page_title  # noqa: E402
+from section_titles import PLACE_RX, RESIDENTIAL, TRANSPARENT, page_title  # noqa: E402
 from survey_frontmatter import page_image  # noqa: E402
 from survey_folios import compare, fit, folio_token, ia_read, load as load_folios  # noqa: E402
 from survey_folios import segments as folio_segments  # noqa: E402
@@ -98,7 +100,11 @@ SPARSE = 0.20
 EDGE_TOL = 2
 SMALL_LISTING = 0.10    # a listing spanning less of the volume than this is not its directory
 SEG_MIN_READ = 10
-BUSINESS_MIN_LEAVES = 10   # a titled business run shorter than this is a notice, not a directory       # a page claim is `high` only from a sequence read on this many leaves
+BUSINESS_MIN_LEAVES = 10
+PLACE_MIN_ENTRIES = 8      # a "<PLACE> DIRECTORY" page must carry this many entry-shaped lines
+# "Surname Given," -- not an address number: Highbridgeville's entries are rural
+# ("Baxter John, lbr., Orchard nr Anderson av") and carry none
+ENTRY_RX = re.compile(r"^[A-Z][a-z']{2,}\s+[A-Z][A-Za-z.]*[,.]")   # a titled business run shorter than this is a notice, not a directory       # a page claim is `high` only from a sequence read on this many leaves
 
 
 EDGE_WINDOW = 40         # leaves either side of each voted edge that extension may reach
@@ -301,7 +307,7 @@ def sections(v: dict) -> dict:
     alphabets = [(sec["start_leaf"], sec["end_leaf"], sec["letters"]) for sec in listing["sections"]
                  if not sec["is_listing"] and not (S <= sec["start_leaf"] <= E)]
 
-    titles, text_leaves = {}, []
+    titles, text_leaves, place_of, main_place = {}, [], {}, None
     with gzip.open(words, "rt", encoding="utf-8") as fh:
         for line in fh:
             rec = json.loads(line)
@@ -310,8 +316,26 @@ def sections(v: dict) -> dict:
             text_leaves.append(rec["leaf"])
             ordered = [t for _b, t in sorted(words_to_lines(rec["lines"]), key=lambda bt: bt[0][1])]
             kind, text = page_title(ordered)
+            if kind == "place_directory":
+                place = PLACE_RX.match(text).group(1)
+                if S <= rec["leaf"] <= E and main_place is None:
+                    main_place = place           # the listing's own running head
+                entries = sum(bool(ENTRY_RX.match(t)) for t in ordered)
+                kind = kind if entries >= PLACE_MIN_ENTRIES else None
+                if kind:
+                    place_of[rec["leaf"]] = place
             if kind:
                 titles[rec["leaf"]] = (kind, text)
+
+    # a place directory naming the MAIN listing's own place is its running head, not a section
+    # (OCR-tolerant: Morrisania prints as both MOREISANIA and MORRISANIA)
+    if main_place:
+        for leaf, place in place_of.items():
+            if difflib.SequenceMatcher(None, place, main_place).ratio() >= 0.7:
+                titles.pop(leaf, None)
+    else:
+        for leaf in place_of:            # no main place known: never guess
+            titles.pop(leaf, None)
 
     runs, cur = [], None
 
@@ -326,6 +350,13 @@ def sections(v: dict) -> dict:
                 cur = {"kind": "listing", "start_leaf": S, "end_leaf": E, "title": None}
             continue
         kind, text = titles.get(leaf, (None, None))
+        # A place directory is ANOTHER village's listing bound after the main one, so it may open
+        # a run only after the listing and never inside a titled section: a "... DIRECTORY"
+        # running head also turned up inside 1880BPL's business section, Longworth 1840's late
+        # names, and Longworth 1815's front matter
+        if kind == "place_directory" and (leaf < S or (cur and cur["kind"] not in
+                                                      ("listing", "back_matter", "place_directory"))):
+            kind = None
         if kind and kind not in TRANSPARENT and (cur is None or kind != cur["kind"]):
             close()
             cur = {"kind": kind, "start_leaf": leaf, "end_leaf": leaf,
@@ -374,7 +405,7 @@ def sections(v: dict) -> dict:
         alph = r.get("alphabets", [])
         # A district or late-names TITLE is residential; a district WORD elsewhere is not
         # (trowsgeneraldir1910p3trow leaf 1089 is a court, "Southern District", in the register)
-        r["residential"] = (r["kind"] == "listing" or r["kind"] == "late_names"
+        r["residential"] = (r["kind"] in ("listing", "late_names", "place_directory")
                             or (r["kind"] == "district" and bool(alph)))
         # an alphabet spanning most of A-Z under no readable title is a second residential list
         if r["kind"] in ("front_matter", "back_matter") and any(len(a["letters"]) >= 18

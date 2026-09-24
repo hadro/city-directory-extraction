@@ -1,0 +1,727 @@
+{
+ "source": "ia",
+ "id": "bronxboroughdire1871",
+ "book_says": {
+  "end_page": {
+   "value": 111,
+   "leaf": 161,
+   "canvas": "https://iiif.archive.org/iiif/bronxboroughdire1871$161/canvas",
+   "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$161/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 161; page 111 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": 50,
+   "listing_flags": [],
+   "doubts": []
+  }
+ },
+ "survey_status": "needs-image-read",
+ "derivatives": {
+  "hocr_bytes": 11222511,
+  "hocr_sha1": "26fb6832073b6202aee5478ac7148c66ffb2b7e1",
+  "hocr_mtime": "1699143973",
+  "has_hocr": true,
+  "has_pageindex": true,
+  "fetched": "2026-09-24"
+ },
+ "page_numbers": {
+  "present": true,
+  "tier": "B",
+  "vol_confidence": 71,
+  "leaves": 202,
+  "filled": 119,
+  "high_confidence": 44,
+  "ocr_value_leaves": 0,
+  "join": "hocr_leaf L == iiif canvas L == page_numbers entry leafNum L",
+  "route": "ia-page-numbers"
+ },
+ "catalog_says": {
+  "csv": {
+   "publisher": null,
+   "city": "New York",
+   "borough": "Bronx",
+   "year": "1871",
+   "title": "Bronx (Borough) Direct. Morrisania and Tremont directory ...",
+   "column_count": null,
+   "start_page": null,
+   "end_page": null,
+   "key_page": null,
+   "page_offset": null,
+   "holding_institution": "Internet Archive",
+   "contributing_institution": "New York Public Library",
+   "notes": "Added 2026-09-24 (hadro), found by the business-directory-extraction session. Morrisania and Tremont, then in Westchester County -- pre-annexation Bronx residential directory; no other Bronx volume from this period in the catalog."
+  },
+  "ia": {
+   "title": "Bronx (Borough) Direct. Morrisania and Tremont directory ...",
+   "date": "1871",
+   "year": null,
+   "publisher": null,
+   "creator": null,
+   "contributor": "New York Public Library",
+   "imagecount": "206",
+   "ocr": null,
+   "scandate": "20080118010201",
+   "language": "und",
+   "collection": [
+    "newyorkpubliclibrary",
+    "americana"
+   ],
+   "possible_copyright_status": "NOT_IN_COPYRIGHT",
+   "licenseurl": null,
+   "rights": null
+  }
+ },
+ "structure": {
+  "front_leaves_read": 30,
+  "classes": {
+   "0": {
+    "class": "other",
+    "lines": 10,
+    "chars": 173
+   },
+   "1": {
+    "class": "front_matter",
+    "lines": 15,
+    "chars": 200
+   },
+   "2": {
+    "class": "other",
+    "lines": 14,
+    "chars": 423
+   },
+   "3": {
+    "class": "front_matter",
+    "lines": 17,
+    "chars": 418
+   },
+   "4": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "5": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "6": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "7": {
+    "class": "front_matter",
+    "lines": 21,
+    "chars": 1502
+   },
+   "8": {
+    "class": "ia-digitization-notice",
+    "lines": 4,
+    "chars": 135
+   },
+   "9": {
+    "class": "other",
+    "lines": 9,
+    "chars": 189
+   },
+   "10": {
+    "class": "blank",
+    "lines": 0,
+    "chars": 0
+   },
+   "11": {
+    "class": "other",
+    "lines": 38,
+    "chars": 2484
+   },
+   "12": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3114
+   },
+   "13": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3020
+   },
+   "14": {
+    "class": "other",
+    "lines": 45,
+    "chars": 2778
+   },
+   "15": {
+    "class": "other",
+    "lines": 45,
+    "chars": 2317
+   },
+   "16": {
+    "class": "other",
+    "lines": 44,
+    "chars": 2519
+   },
+   "17": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3026
+   },
+   "18": {
+    "class": "other",
+    "lines": 131,
+    "chars": 2072
+   },
+   "19": {
+    "class": "other",
+    "lines": 63,
+    "chars": 2703
+   },
+   "20": {
+    "class": "other",
+    "lines": 45,
+    "chars": 3144
+   },
+   "21": {
+    "class": "other",
+    "lines": 151,
+    "chars": 2416
+   },
+   "22": {
+    "class": "other",
+    "lines": 60,
+    "chars": 2589
+   },
+   "23": {
+    "class": "other",
+    "lines": 44,
+    "chars": 2965
+   },
+   "24": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3062
+   },
+   "25": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3123
+   },
+   "26": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3102
+   },
+   "27": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3005
+   },
+   "28": {
+    "class": "other",
+    "lines": 44,
+    "chars": 3103
+   },
+   "29": {
+    "class": "other",
+    "lines": 41,
+    "chars": 2805
+   }
+  },
+  "title_page_leaf": null,
+  "copyright_page_leaf": null,
+  "target_card_leaf": null,
+  "contents_leaf": null,
+  "legend_leaves": [],
+  "image_read_candidates": [
+   0,
+   1,
+   2
+  ],
+  "image_read_urls": [
+   "https://iiif.archive.org/iiif/bronxboroughdire1871$0/full/!1400,1400/0/default.jpg",
+   "https://iiif.archive.org/iiif/bronxboroughdire1871$1/full/!1400,1400/0/default.jpg",
+   "https://iiif.archive.org/iiif/bronxboroughdire1871$2/full/!1400,1400/0/default.jpg"
+  ]
+ },
+ "frontmatter_read": "2026-09-24",
+ "harvest": {
+  "fetched": "2026-09-24",
+  "hocr_source": "download",
+  "hocr_sha1": "26fb6832073b6202aee5478ac7148c66ffb2b7e1",
+  "hocr_bytes": 11222511,
+  "sha1_matches_census": true,
+  "fetch_s": 5,
+  "dump": {
+   "leaves": 208,
+   "leaves_with_text": 194,
+   "content_leaves": 189,
+   "lines": 8063,
+   "words": 77575,
+   "chars": 311878,
+   "no_page_size": 0,
+   "mean_wconf": 26.2,
+   "chars_per_content_leaf": 1650
+  },
+  "status": "ok",
+  "filtered": {
+   "publisher_tag": "trow",
+   "publisher_tag_note": "no publisher in the catalog",
+   "year_tag": "1871",
+   "hocr_lines": 8032,
+   "wrap_joins": 249,
+   "candidates": 7783,
+   "kept": 7101,
+   "keep_rate": 0.9124,
+   "dropped": {
+    "short": 363,
+    "allcaps": 244,
+    "banner": 56,
+    "bigtype": 18,
+    "nonascii": 1
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
+   "band": {
+    "leaves_banded": 0,
+    "head": 0,
+    "body": 0,
+    "foot": 0,
+    "unbanded": 0
+   },
+   "top_ad_leaves": [
+    0,
+    176,
+    109,
+    1,
+    86,
+    21,
+    110,
+    76,
+    9,
+    3
+   ],
+   "filters_at": "b4ac266-dirty",
+   "derived": "2026-09-24"
+  },
+  "words_gz_bytes": 888115,
+  "hocr_deleted": true,
+  "elapsed_s": 6
+ },
+ "listing": {
+  "method": "letter-votes",
+  "source": "dump",
+  "derived": "2026-09-24",
+  "code_at": "b4ac266-dirty",
+  "start_leaf": 39,
+  "end_leaf": 161,
+  "first_letter": "A",
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPRSTVWYZ",
+  "missing_letters": "QUX",
+  "voting_density": 0.886,
+  "flags": [
+   "multi-section"
+  ],
+  "start": {
+   "leaf": 39,
+   "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$39/full/!1400,1400/0/default.jpg",
+   "quote": "Abrams Albert T, hardware, n s Wall '2d h e Boston road"
+  },
+  "end": {
+   "leaf": 161,
+   "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$161/full/!1400,1400/0/default.jpg",
+   "quote": "Zwmk John, iiuih., w s R R av 4th h s Wash'n av"
+  },
+  "sections": [
+   {
+    "start_leaf": 39,
+    "end_leaf": 161,
+    "voting_leaves": 109,
+    "first_letter": "A",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPRSTVWYZ",
+    "is_listing": true
+   },
+   {
+    "start_leaf": 168,
+    "end_leaf": 182,
+    "voting_leaves": 10,
+    "first_letter": "B",
+    "last_letter": "W",
+    "letters": "BCDGHKMSW",
+    "is_listing": false
+   }
+  ],
+  "gaps": [
+   {
+    "between": [
+     "P",
+     "R"
+    ],
+    "start_leaf": 127,
+    "end_leaf": 128,
+    "leaves": 2
+   }
+  ],
+  "letter_blocks": {
+   "A": [
+    39,
+    41,
+    3
+   ],
+   "B": [
+    42,
+    51,
+    10
+   ],
+   "C": [
+    52,
+    57,
+    6
+   ],
+   "D": [
+    58,
+    63,
+    6
+   ],
+   "E": [
+    64,
+    66,
+    3
+   ],
+   "F": [
+    67,
+    72,
+    6
+   ],
+   "G": [
+    73,
+    79,
+    5
+   ],
+   "H": [
+    80,
+    93,
+    10
+   ],
+   "I": [
+    94,
+    94,
+    1
+   ],
+   "J": [
+    95,
+    95,
+    1
+   ],
+   "K": [
+    96,
+    101,
+    6
+   ],
+   "L": [
+    102,
+    106,
+    5
+   ],
+   "M": [
+    107,
+    118,
+    9
+   ],
+   "N": [
+    119,
+    120,
+    2
+   ],
+   "O": [
+    121,
+    122,
+    2
+   ],
+   "P": [
+    123,
+    126,
+    4
+   ],
+   "R": [
+    129,
+    133,
+    4
+   ],
+   "S": [
+    134,
+    147,
+    12
+   ],
+   "T": [
+    148,
+    151,
+    4
+   ],
+   "V": [
+    152,
+    153,
+    2
+   ],
+   "W": [
+    154,
+    159,
+    6
+   ],
+   "Y": [
+    160,
+    160,
+    1
+   ],
+   "Z": [
+    161,
+    161,
+    1
+   ]
+  },
+  "skipped_votes": 2,
+  "voted_bounds": [
+   39,
+   161
+  ],
+  "extended": {
+   "start": [],
+   "end": []
+  },
+  "cross_check": {
+   "source": "lines",
+   "start_leaf": 39,
+   "end_leaf": 161
+  },
+  "params": {
+   "min_chars": 400,
+   "min_lines": 5,
+   "min_share": 0.4,
+   "gap": 6,
+   "restart_cost": 8
+  }
+ },
+ "folios": {
+  "method": "margin-fit",
+  "derived": "2026-09-24",
+  "code_at": "b4ac266-dirty",
+  "content_leaves": 192,
+  "fitted_leaves": 121,
+  "read_leaves": 86,
+  "segments": [
+   {
+    "first_leaf": 40,
+    "last_leaf": 72,
+    "first_page": 2,
+    "last_page": 34,
+    "leaves": 33,
+    "read": 25
+   },
+   {
+    "first_leaf": 81,
+    "last_leaf": 84,
+    "first_page": 41,
+    "last_page": 44,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 88,
+    "last_leaf": 107,
+    "first_page": 46,
+    "last_page": 63,
+    "leaves": 18,
+    "read": 13
+   },
+   {
+    "first_leaf": 112,
+    "last_leaf": 125,
+    "first_page": 66,
+    "last_page": 79,
+    "leaves": 14,
+    "read": 12
+   },
+   {
+    "first_leaf": 129,
+    "last_leaf": 143,
+    "first_page": 81,
+    "last_page": 95,
+    "leaves": 15,
+    "read": 9
+   },
+   {
+    "first_leaf": 147,
+    "last_leaf": 167,
+    "first_page": 97,
+    "last_page": 117,
+    "leaves": 21,
+    "read": 12
+   },
+   {
+    "first_leaf": 177,
+    "last_leaf": 192,
+    "first_page": 123,
+    "last_page": 138,
+    "leaves": 16,
+    "read": 12
+   }
+  ],
+  "ia_comparison": {
+   "ia_read_leaves": 0,
+   "both": 0,
+   "agree": 0,
+   "agree_rate": null,
+   "ia_page_equals_leaf": null
+  },
+  "flags": []
+ },
+ "sections": {
+  "method": "title-pages",
+  "derived": "2026-09-24",
+  "code_at": "b4ac266-dirty",
+  "runs": [
+   {
+    "kind": "front_matter",
+    "start_leaf": 0,
+    "end_leaf": 38,
+    "title": null,
+    "leaves": 35,
+    "residential": false
+   },
+   {
+    "kind": "listing",
+    "start_leaf": 39,
+    "end_leaf": 161,
+    "title": null,
+    "leaves": 123,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 40,
+      "page": 2,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 161,
+      "page": 111,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "place_directory",
+    "start_leaf": 162,
+    "end_leaf": 182,
+    "title": {
+     "leaf": 162,
+     "quote": "IT'i HIOUBKIDGEVILLE DIEECTORY",
+     "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$162/full/!1400,1400/0/default.jpg"
+    },
+    "alphabets": [
+     {
+      "start_leaf": 168,
+      "end_leaf": 182,
+      "letters": "BCDGHKMSW"
+     }
+    ],
+    "leaves": 21,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 162,
+      "page": 112,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 182,
+      "page": 128,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 183,
+    "end_leaf": 188,
+    "title": {
+     "leaf": 183,
+     "quote": "APPENDIX",
+     "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$183/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 6,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 183,
+      "page": 129,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 188,
+      "page": 134,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 189,
+    "end_leaf": 205,
+    "title": {
+     "leaf": 189,
+     "quote": "CHURCHES\u2014 TREMONT.",
+     "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$189/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 7,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 189,
+      "page": 135,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 192,
+      "page": 138,
+      "attestation": "read"
+     }
+    }
+   }
+  ],
+  "has_business": false,
+  "kinds": [
+   "appendix",
+   "front_matter",
+   "listing",
+   "place_directory",
+   "register"
+  ]
+ },
+ "scope": {
+  "method": "residential-sections",
+  "derived": "2026-09-24",
+  "code_at": "b4ac266-dirty",
+  "file": "data/survey_ocr/bronxboroughdire1871_listing.jsonl.gz",
+  "sections": [
+   {
+    "kind": "listing",
+    "start_leaf": 39,
+    "end_leaf": 161
+   },
+   {
+    "kind": "place_directory",
+    "start_leaf": 162,
+    "end_leaf": 182
+   }
+  ],
+  "kept": 5468,
+  "dropped": 1633,
+  "kept_share": 0.77,
+  "kept_by_section": {
+   "listing": 4848,
+   "place_directory: IT'i HIOUBKIDGEVILLE DIEECTORY": 620
+  }
+ }
+}

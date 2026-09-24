@@ -710,7 +710,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -753,10 +753,14 @@
     }
    },
    {
-    "kind": "back_matter",
+    "kind": "register",
     "start_leaf": 1074,
     "end_leaf": 1078,
-    "title": null,
+    "title": {
+     "leaf": 1074,
+     "quote": "Commercial Register",
+     "image": "https://iiif.archive.org/iiif/1903BPL$1074/full/!1400,1400/0/default.jpg"
+    },
     "leaves": 5,
     "residential": false
    },
@@ -787,17 +791,17 @@
   ],
   "has_business": false,
   "kinds": [
-   "back_matter",
    "front_matter",
    "index",
    "listing",
+   "register",
    "street_guide"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/1903BPL_listing.jsonl.gz",
   "sections": [
    {

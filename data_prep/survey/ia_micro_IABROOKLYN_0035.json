@@ -772,18 +772,42 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 1,
-    "end_leaf": 37,
+    "end_leaf": 29,
     "title": null,
-    "leaves": 36,
+    "leaves": 29,
     "residential": false,
     "pages": {
      "first": {
       "leaf": 5,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 25,
+      "page": 24,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 30,
+    "end_leaf": 37,
+    "title": {
+     "leaf": 30,
+     "quote": "General Business Directory Combined;",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$30/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 7,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 32,
       "page": 4,
       "attestation": "read"
      },
@@ -927,6 +951,7 @@
   "kinds": [
    "appendix",
    "business",
+   "business_notice",
    "front_matter",
    "late_names",
    "listing",
@@ -935,8 +960,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0035_listing.jsonl.gz",
   "sections": [
    {

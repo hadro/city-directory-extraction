@@ -760,7 +760,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -785,14 +785,26 @@
    {
     "kind": "index",
     "start_leaf": 14,
-    "end_leaf": 20,
+    "end_leaf": 19,
     "title": {
      "leaf": 14,
      "quote": "INDEX TO ADVERTISEMENTS.",
      "image": "https://iiif.archive.org/iiif/1883BPL$14/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 7,
+    "leaves": 6,
     "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 20,
+    "end_leaf": 20,
+    "title": {
+     "leaf": 20,
+     "quote": "NAMES TOO LATE FOR mSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1883BPL$20/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
    },
    {
     "kind": "register",
@@ -962,6 +974,7 @@
    "business_notice",
    "front_matter",
    "index",
+   "late_names",
    "listing",
    "register",
    "street_guide"
@@ -969,20 +982,26 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/1883BPL_listing.jsonl.gz",
   "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 20,
+    "end_leaf": 20
+   },
    {
     "kind": "listing",
     "start_leaf": 31,
     "end_leaf": 1345
    }
   ],
-  "kept": 162900,
-  "dropped": 38690,
-  "kept_share": 0.8081,
+  "kept": 162988,
+  "dropped": 38602,
+  "kept_share": 0.8085,
   "kept_by_section": {
+   "late_names": 88,
    "listing": 162900
   }
  }

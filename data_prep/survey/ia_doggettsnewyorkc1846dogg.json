@@ -619,14 +619,26 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 1,
-    "end_leaf": 15,
+    "end_leaf": 7,
     "title": null,
-    "leaves": 15,
+    "leaves": 7,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 8,
+    "end_leaf": 15,
+    "title": {
+     "leaf": 8,
+     "quote": "Appendix, 1",
+     "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$8/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
     "residential": false,
     "pages": {
      "first": {
@@ -867,8 +879,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/doggettsnewyorkc1846dogg_listing.jsonl.gz",
   "sections": [
    {

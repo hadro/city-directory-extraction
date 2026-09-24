@@ -716,7 +716,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -749,8 +749,20 @@
    {
     "kind": "back_matter",
     "start_leaf": 157,
-    "end_leaf": 239,
+    "end_leaf": 177,
     "title": null,
+    "leaves": 11,
+    "residential": false
+   },
+   {
+    "kind": "business",
+    "start_leaf": 179,
+    "end_leaf": 239,
+    "title": {
+     "leaf": 179,
+     "quote": "Business Directory.",
+     "image": "https://iiif.archive.org/iiif/flushingnewyork188586boyd$179/full/!1400,1400/0/default.jpg"
+    },
     "alphabets": [
      {
       "start_leaf": 205,
@@ -758,13 +770,14 @@
       "letters": "BCDGHKLRSW"
      }
     ],
-    "leaves": 41,
+    "leaves": 30,
     "residential": false
    }
   ],
-  "has_business": false,
+  "has_business": true,
   "kinds": [
    "back_matter",
+   "business",
    "front_matter",
    "index",
    "listing"
@@ -772,8 +785,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/flushingnewyork188586boyd_listing.jsonl.gz",
   "sections": [
    {

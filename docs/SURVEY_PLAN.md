@@ -1017,10 +1017,17 @@ p3 leaf 1089 is a court, "Southern District", in the register). A titled busines
 leaves is a notice: the Trow Business Directory's "Alphabetically classified according to the
 business" ad, and Lain's 1879 ad pages for its separate business volume.
 
-**Business sections in residential volumes, 10:** Lain 1869, 1871, 1875, 1876, 1880, 1883 (BPL);
-Boyd's Flushing (`flushingnewyorkc00boyd`); Hope & Henderson 1856 (`micro_IABROOKLYN_0035`); and
-the back of Trow 1915 and 1917 (*"Trow's New York City Classified Business Directory"*, ~400 leaves
-each). Six openings verified by image. Business-only volumes (the 1913 set, Wilson's 1853,
+**Business sections in residential volumes, 13:** Lain 1869, 1871, 1875, 1876, 1880, 1883 (BPL);
+all three Boyd's Flushing volumes (1885/86, 1890, 1891/92); Hope & Henderson 1856
+(`micro_IABROOKLYN_0035`); and the classified parts of Trow 1915, 1917 and 1922/23 p2 (*"R. L. Polk
+& Co.'s Trow's New York City Classified Business Directory"*). Six openings verified by image.
+Two of the Flushing volumes and the 1922/23 part were first missed, and were found by a peer session
+cross-checking these records against the CSV notes. Their titles are printed in title case
+("Business Directory,"), and one sat under OCR crumbs from a side banner. So a short line of
+capitalised words now counts as display type, and crumbs don't count toward the 10-line window.
+Relaxing that let in two new false positives, now guarded: the "Classified Business Lists" ad for
+an addressing service, and business runs *before* a residential listing (1876BPL's front ad pages
+for Lain's separate business volume). Every real section found sits after the listing. Business-only volumes (the 1913 set, Wilson's 1853,
 `micro_IABROOKLYN_0038`) read as business throughout.
 
 **Second residential alphabets:** the Eastern District of 1856BPL, 1857BPL, Smith 1855 and 1856

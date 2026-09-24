@@ -925,14 +925,26 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 1,
-    "end_leaf": 23,
+    "end_leaf": 2,
     "title": null,
-    "leaves": 20,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 3,
+    "end_leaf": 23,
+    "title": {
+     "leaf": 3,
+     "quote": "% Register",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$3/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 18,
     "residential": false,
     "pages": {
      "first": {
@@ -1048,8 +1060,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0031_listing.jsonl.gz",
   "sections": [
    {

@@ -884,7 +884,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -961,18 +961,66 @@
    {
     "kind": "appendix",
     "start_leaf": 516,
-    "end_leaf": 544,
+    "end_leaf": 522,
     "title": {
      "leaf": 516,
      "quote": "APPENDIX,",
      "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$516/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 28,
+    "leaves": 7,
     "residential": false,
     "pages": {
      "first": {
       "leaf": 519,
       "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 522,
+      "page": 7,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "district",
+    "start_leaf": 523,
+    "end_leaf": 523,
+    "title": {
+     "leaf": 523,
+     "quote": "Western District.",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$523/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 523,
+      "page": 8,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 523,
+      "page": 8,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 524,
+    "end_leaf": 544,
+    "title": {
+     "leaf": 524,
+     "quote": "APPENDIX\u2014FIRE DEPARTMENT (Ww. DIST.) 9",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$524/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 20,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 524,
+      "page": 9,
       "attestation": "read"
      },
      "last": {
@@ -1011,6 +1059,7 @@
   "kinds": [
    "appendix",
    "back_matter",
+   "district",
    "front_matter",
    "listing",
    "register",
@@ -1019,8 +1068,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0039_listing.jsonl.gz",
   "sections": [
    {

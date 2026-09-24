@@ -731,14 +731,26 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 3,
-    "end_leaf": 11,
+    "end_leaf": 6,
     "title": null,
-    "leaves": 5,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 7,
+    "end_leaf": 11,
+    "title": {
+     "leaf": 7,
+     "quote": "Complete Business Directory",
+     "image": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$7/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
     "residential": false
    },
    {
@@ -774,16 +786,44 @@
     }
    },
    {
-    "kind": "back_matter",
+    "kind": "business",
     "start_leaf": 199,
-    "end_leaf": 251,
-    "title": null,
-    "leaves": 27,
+    "end_leaf": 233,
+    "title": {
+     "leaf": 199,
+     "quote": "Business Directory,",
+     "image": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$199/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 18,
     "residential": false,
     "pages": {
      "first": {
       "leaf": 199,
       "page": 125,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 233,
+      "page": 142,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 235,
+    "end_leaf": 251,
+    "title": {
+     "leaf": 235,
+     "quote": "Appendix",
+     "image": "https://iiif.archive.org/iiif/flushingnewyork189192boyd$235/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 9,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 235,
+      "page": 143,
       "attestation": "read"
      },
      "last": {
@@ -794,9 +834,11 @@
     }
    }
   ],
-  "has_business": false,
+  "has_business": true,
   "kinds": [
-   "back_matter",
+   "appendix",
+   "business",
+   "business_notice",
    "front_matter",
    "index",
    "listing"
@@ -804,8 +846,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/flushingnewyork189192boyd_listing.jsonl.gz",
   "sections": [
    {

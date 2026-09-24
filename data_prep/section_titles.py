@@ -35,6 +35,9 @@ KINDS = [
     # "CITY 1 BUSINESS", "CITY 4 BUSINESS" -- all the running head of the ADVERTISING pages
     ("volume_title", re.compile(r"CITY\s*(AND|\S{0,2})\s*BUSINESS\s+DIRECTORY|BUSINESS\s+ADVERTISER",
                                 re.I)),
+    # "Classified Business Lists ... Furnished at Short Notice" is an addressing-service ad that
+    # recurs across Lain (1886BPL leaf 10) and Trow (1922/23) -- advertising, not a section
+    ("advertiser", re.compile(r"CLASSIFIED\s+BUSINESS\s+LISTS", re.I)),
     # ...but an index TO THE BUSINESS DIRECTORY is part of that section: Hope & Henderson 1856
     # (micro_IABROOKLYN_0035) titles its business directory at leaf 537 and prints its index at
     # 541, and an index kind there cut a real section off after four leaves
@@ -61,9 +64,23 @@ TRANSPARENT = {"advertiser", "volume_title"}
 def page_title(lines_by_y: list) -> tuple:
     """-> (kind, text) for the first title-like line among a page's top lines, or (None, None).
     `lines_by_y` is the page's line texts in top-to-bottom order."""
-    for t in lines_by_y[:TOP_LINES]:
+    seen = 0
+    for t in lines_by_y:
         letters = [c for c in t if c.isalpha()]
-        if len(letters) < 6 or sum(c.isupper() for c in letters) < CAPS_SHARE * len(letters):
+        # only lines with some text count toward the window: OCR crumbs from a side banner
+        # (`O`, `>`, `2`) pushed Flushing 1891/92's "Business Directory," to the 11th line
+        if len(letters) < 3:
+            continue
+        seen += 1
+        if seen > TOP_LINES:
+            break
+        words = [w for w in t.split() if any(c.isalpha() for c in w)]
+        # Display type is either mostly capitals, or a SHORT line of capitalised words: Boyd's
+        # Flushing 1891/92 opens its business section (leaf 199) with "Business Directory,"
+        # in title case, which the capitals rule alone missed.
+        titled = 0 < len(words) <= 4 and all(w.lstrip("\"'(")[:1].isupper() for w in words)
+        if len(letters) < 6 or (sum(c.isupper() for c in letters) < CAPS_SHARE * len(letters)
+                                and not titled):
             continue
         for kind, rx in KINDS:
             if rx.search(t):
@@ -83,6 +100,11 @@ def _self_test():
     assert page_title(["NAMES TOO LATE FOR INSERTION IN REGULAR ORDER"])[0] == "late_names"
     assert page_title(["STREET AND AVENUE DIRECTORY"])[0] == "street_guide"
     assert page_title(["Abbott John, grocer, 12 Pine"]) == (None, None), "entries are not titles"
+    assert page_title(["FLUSHING DIRECTORY.", "125", "Business Directory,"])[0] == "business"
+    assert page_title(["LUMDER, LIME", "Geo. B. Roe & Co.,", "WOOD. Ottlce", "Yard, Ft. of", "125",
+                       "FLUSHING DIRECTORY.", "O", ">", "2", "Business Directory,"])[0] == "business"
+    assert page_title(["Lain & Co. business directory publishers, 213 Montague"]) == (None, None)
+    assert page_title(["Classified Business Lists", "OF ANY"])[0] == "advertiser"
     assert page_title(["REYNOLDS' CITY DIRECTORY AND BUSINESS ADVERTISER"])[0] == "volume_title"
     print("self-test OK")
 

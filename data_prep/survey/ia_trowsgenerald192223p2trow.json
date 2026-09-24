@@ -664,7 +664,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -693,11 +693,23 @@
    {
     "kind": "register",
     "start_leaf": 885,
-    "end_leaf": 972,
+    "end_leaf": 888,
     "title": {
      "leaf": 885,
      "quote": "DENTAL REGISTER AND DIRECTORY OF THE UNITED STATES AND CANADA",
      "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$885/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "business",
+    "start_leaf": 889,
+    "end_leaf": 920,
+    "title": {
+     "leaf": 889,
+     "quote": "Classified Business Directory",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$889/full/!1400,1400/0/default.jpg"
     },
     "alphabets": [
      {
@@ -706,22 +718,48 @@
       "letters": "ABCDFGHLMPRST"
      }
     ],
-    "leaves": 87,
+    "leaves": 32,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 921,
+    "end_leaf": 947,
+    "title": {
+     "leaf": 921,
+     "quote": "Investment Securities \u2014 Municipal Bonds",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$921/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 27,
+    "residential": false
+   },
+   {
+    "kind": "nurses",
+    "start_leaf": 948,
+    "end_leaf": 972,
+    "title": {
+     "leaf": 948,
+     "quote": "Nurses & Maids Outfits",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$948/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 24,
     "residential": false
    }
   ],
-  "has_business": false,
+  "has_business": true,
   "kinds": [
    "back_matter",
+   "business",
    "front_matter",
    "listing",
+   "nurses",
    "register"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/trowsgenerald192223p2trow_listing.jsonl.gz",
   "sections": [
    {

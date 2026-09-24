@@ -592,7 +592,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -623,10 +623,14 @@
     }
    },
    {
-    "kind": "back_matter",
+    "kind": "business_notice",
     "start_leaf": 937,
     "end_leaf": 937,
-    "title": null,
+    "title": {
+     "leaf": 937,
+     "quote": "Alphabetically Classified According",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p3trow$937/full/!1400,1400/0/default.jpg"
+    },
     "leaves": 1,
     "residential": false
    },
@@ -796,7 +800,7 @@
   ],
   "has_business": false,
   "kinds": [
-   "back_matter",
+   "business_notice",
    "district",
    "front_matter",
    "index",
@@ -807,8 +811,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1912p3trow_listing.jsonl.gz",
   "sections": [
    {

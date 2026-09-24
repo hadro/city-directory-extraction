@@ -704,19 +704,43 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 0,
-    "end_leaf": 14,
+    "end_leaf": 4,
     "title": null,
-    "leaves": 15,
+    "leaves": 5,
     "residential": false,
     "pages": {
      "first": {
       "leaf": 1,
       "page": 1,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 4,
+      "page": 4,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 5,
+    "end_leaf": 14,
+    "title": {
+     "leaf": 5,
+     "quote": "Brooklyn Business Directory.",
+     "image": "https://iiif.archive.org/iiif/1876BPL$5/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 10,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 5,
+      "page": 5,
       "attestation": "read"
      },
      "last": {
@@ -898,6 +922,7 @@
   "kinds": [
    "back_matter",
    "business",
+   "business_notice",
    "front_matter",
    "index",
    "late_names",
@@ -909,8 +934,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/1876BPL_listing.jsonl.gz",
   "sections": [
    {

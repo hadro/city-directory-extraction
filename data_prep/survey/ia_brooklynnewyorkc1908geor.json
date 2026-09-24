@@ -715,7 +715,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -748,9 +748,21 @@
    {
     "kind": "back_matter",
     "start_leaf": 1121,
-    "end_leaf": 1131,
+    "end_leaf": 1121,
     "title": null,
-    "leaves": 6,
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1123,
+    "end_leaf": 1131,
+    "title": {
+     "leaf": 1123,
+     "quote": "Commercial Register",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1908geor$1123/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 5,
     "residential": false
    },
    {
@@ -783,13 +795,14 @@
    "back_matter",
    "front_matter",
    "listing",
+   "register",
    "street_guide"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1908geor_listing.jsonl.gz",
   "sections": [
    {

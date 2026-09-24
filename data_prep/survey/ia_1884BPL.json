@@ -634,39 +634,51 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 0,
-    "end_leaf": 7,
+    "end_leaf": 6,
     "title": null,
-    "leaves": 8,
+    "leaves": 7,
     "residential": false
    },
    {
     "kind": "business_notice",
-    "start_leaf": 8,
+    "start_leaf": 7,
     "end_leaf": 15,
     "title": {
-     "leaf": 8,
-     "quote": "31,000 NAMES, CLASSIFIED lit STREETS.",
-     "image": "https://iiif.archive.org/iiif/1884BPL$8/full/!1400,1400/0/default.jpg"
+     "leaf": 7,
+     "quote": "Brooklyn Business Directory.",
+     "image": "https://iiif.archive.org/iiif/1884BPL$7/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 8,
+    "leaves": 9,
     "residential": false
    },
    {
     "kind": "index",
     "start_leaf": 16,
-    "end_leaf": 22,
+    "end_leaf": 21,
     "title": {
      "leaf": 16,
      "quote": "iNDEX TO ADVERTISEMENTS.",
      "image": "https://iiif.archive.org/iiif/1884BPL$16/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 7,
+    "leaves": 6,
     "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 22,
+    "end_leaf": 22,
+    "title": {
+     "leaf": 22,
+     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "image": "https://iiif.archive.org/iiif/1884BPL$22/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
    },
    {
     "kind": "register",
@@ -754,6 +766,7 @@
    "business_notice",
    "front_matter",
    "index",
+   "late_names",
    "listing",
    "register",
    "street_guide"
@@ -761,20 +774,26 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/1884BPL_listing.jsonl.gz",
   "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 22,
+    "end_leaf": 22
+   },
    {
     "kind": "listing",
     "start_leaf": 31,
     "end_leaf": 1456
    }
   ],
-  "kept": 171849,
-  "dropped": 13541,
-  "kept_share": 0.927,
+  "kept": 171909,
+  "dropped": 13481,
+  "kept_share": 0.9273,
   "kept_by_section": {
+   "late_names": 60,
    "listing": 171849
   }
  }

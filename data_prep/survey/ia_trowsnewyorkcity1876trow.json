@@ -766,7 +766,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -799,13 +799,13 @@
    {
     "kind": "register",
     "start_leaf": 1553,
-    "end_leaf": 1628,
+    "end_leaf": 1625,
     "title": {
      "leaf": 1553,
      "quote": "COMMERCIAL REGISTER,",
      "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1553/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 76,
+    "leaves": 73,
     "residential": false,
     "pages": {
      "first": {
@@ -819,6 +819,30 @@
       "attestation": "read"
      }
     }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 1626,
+    "end_leaf": 1626,
+    "title": {
+     "leaf": 1626,
+     "quote": "Business Directory,",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1626/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 1627,
+    "end_leaf": 1628,
+    "title": {
+     "leaf": 1627,
+     "quote": "CITY REGISTER:",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1627/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
+    "residential": false
    },
    {
     "kind": "index",
@@ -835,19 +859,43 @@
    {
     "kind": "register",
     "start_leaf": 1630,
-    "end_leaf": 1680,
+    "end_leaf": 1679,
     "title": {
      "leaf": 1630,
      "quote": "INDKX TO CITY REGISTER.",
      "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1630/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 51,
+    "leaves": 50,
     "residential": false,
     "pages": {
      "first": {
       "leaf": 1630,
       "page": 4,
       "attestation": "read"
+     },
+     "last": {
+      "leaf": 1679,
+      "page": 53,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 1680,
+    "end_leaf": 1680,
+    "title": {
+     "leaf": 1680,
+     "quote": "Business Directory,",
+     "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1876trow$1680/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1680,
+      "page": 54,
+      "attestation": "inferred"
      },
      "last": {
       "leaf": 1680,
@@ -931,6 +979,7 @@
   ],
   "has_business": false,
   "kinds": [
+   "business_notice",
    "front_matter",
    "index",
    "listing",
@@ -940,8 +989,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/trowsnewyorkcity1876trow_listing.jsonl.gz",
   "sections": [
    {

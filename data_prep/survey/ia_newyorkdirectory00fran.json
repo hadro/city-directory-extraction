@@ -569,14 +569,38 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 1,
-    "end_leaf": 51,
+    "end_leaf": 6,
     "title": null,
-    "leaves": 47,
+    "leaves": 5,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 7,
+    "end_leaf": 14,
+    "title": {
+     "leaf": 7,
+     "quote": "ALSO WITH AN APPENDIX CONSISTING OF",
+     "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran$7/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 15,
+    "end_leaf": 51,
+    "title": {
+     "leaf": 15,
+     "quote": "Churches :",
+     "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran$15/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 34,
     "residential": false,
     "pages": {
      "first": {
@@ -634,15 +658,17 @@
   ],
   "has_business": false,
   "kinds": [
+   "appendix",
    "back_matter",
    "front_matter",
-   "listing"
+   "listing",
+   "register"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/newyorkdirectory00fran_listing.jsonl.gz",
   "sections": [
    {

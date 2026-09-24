@@ -640,7 +640,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -653,13 +653,37 @@
    {
     "kind": "register",
     "start_leaf": 11,
-    "end_leaf": 55,
+    "end_leaf": 12,
     "title": {
      "leaf": 11,
      "quote": "MUNICIPAL AND RAILROAD BONDS.",
      "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$11/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 44,
+    "leaves": 2,
+    "residential": false
+   },
+   {
+    "kind": "appendix",
+    "start_leaf": 13,
+    "end_leaf": 20,
+    "title": {
+     "leaf": 13,
+     "quote": "ALSO WITH AN APPENDIX CONSISTING OF",
+     "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$13/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 21,
+    "end_leaf": 55,
+    "title": {
+     "leaf": 21,
+     "quote": "Churches :",
+     "image": "https://iiif.archive.org/iiif/newyorkdirectory00fran_0$21/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 34,
     "residential": false,
     "pages": {
      "first": {
@@ -717,6 +741,7 @@
   ],
   "has_business": false,
   "kinds": [
+   "appendix",
    "back_matter",
    "front_matter",
    "listing",
@@ -725,8 +750,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/newyorkdirectory00fran_0_listing.jsonl.gz",
   "sections": [
    {

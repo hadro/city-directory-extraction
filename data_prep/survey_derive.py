@@ -383,6 +383,12 @@ def sections(v: dict) -> dict:
         # a one-page "BUSINESS DIRECTORY" is an advertisement or notice FOR one, not the thing
         if r["kind"] == "business" and r["leaves"] < BUSINESS_MIN_LEAVES:
             r["kind"] = "business_notice"
+        # ...and so, in a residential volume, is one BEFORE the listing: every real business
+        # section found sits after it, while 1876BPL leaves 5-14 are front-matter ad pages
+        # headed "Brooklyn Business Directory." -- an advertisement for Lain's separate volume
+        if (r["kind"] == "business" and r["end_leaf"] < S
+                and v["doc"].get("survey_status") != "not-residential"):
+            r["kind"] = "business_notice"
 
     # printed pages at each run's edges, from the margin fit (never inferred past a read)
     leaves, cands = load_folios(ident)

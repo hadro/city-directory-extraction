@@ -895,14 +895,38 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 1,
-    "end_leaf": 13,
+    "end_leaf": 8,
     "title": null,
-    "leaves": 13,
+    "leaves": 8,
+    "residential": false
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 9,
+    "end_leaf": 11,
+    "title": {
+     "leaf": 9,
+     "quote": "I ALSO A COMPLETE CLASSIFIED BUSINESS DIRECTORY, CONTAINING THE NAMES OF ALL",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$9/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 12,
+    "end_leaf": 13,
+    "title": {
+     "leaf": 12,
+     "quote": "African Moth. Episcopal Churches. . . 144",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$12/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 2,
     "residential": false,
     "pages": {
      "first": {
@@ -947,7 +971,7 @@
     "end_leaf": 39,
     "title": {
      "leaf": 20,
-     "quote": "BUREAU OF MUNICIPAL INVESTIGATION",
+     "quote": "Municipal Courts",
      "image": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$20/full/!1400,1400/0/default.jpg"
     },
     "leaves": 18,
@@ -1008,11 +1032,59 @@
    {
     "kind": "business",
     "start_leaf": 2089,
-    "end_leaf": 2478,
+    "end_leaf": 2140,
     "title": {
      "leaf": 2089,
      "quote": "CLASSIFIED BUSINESS DIRECTORY",
      "image": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$2089/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 52,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 2089,
+      "page": 2271,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 2140,
+      "page": 2322,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "register",
+    "start_leaf": 2141,
+    "end_leaf": 2148,
+    "title": {
+     "leaf": 2141,
+     "quote": "Merchants Register Exchange 4 Repair",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$2141/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 8,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 2141,
+      "page": 2323,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 2148,
+      "page": 2330,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business",
+    "start_leaf": 2149,
+    "end_leaf": 2478,
+    "title": {
+     "leaf": 2149,
+     "quote": "CLASSIFIED PART",
+     "image": "https://iiif.archive.org/iiif/trowsgeneraldire1915trow$2149/full/!1400,1400/0/default.jpg"
     },
     "alphabets": [
      {
@@ -1026,12 +1098,12 @@
       "letters": "BCDGHKLMRS"
      }
     ],
-    "leaves": 390,
+    "leaves": 330,
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 2089,
-      "page": 2271,
+      "leaf": 2149,
+      "page": 2331,
       "attestation": "read"
      },
      "last": {
@@ -1046,6 +1118,7 @@
   "kinds": [
    "back_matter",
    "business",
+   "business_notice",
    "front_matter",
    "index",
    "listing",
@@ -1054,8 +1127,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/trowsgeneraldire1915trow_listing.jsonl.gz",
   "sections": [
    {

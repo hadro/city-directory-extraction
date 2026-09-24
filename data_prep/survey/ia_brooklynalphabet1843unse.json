@@ -602,14 +602,26 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 1,
-    "end_leaf": 16,
+    "end_leaf": 7,
     "title": null,
-    "leaves": 13,
+    "leaves": 4,
+    "residential": false
+   },
+   {
+    "kind": "register",
+    "start_leaf": 8,
+    "end_leaf": 16,
+    "title": {
+     "leaf": 8,
+     "quote": "Churches ..... 227",
+     "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$8/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 9,
     "residential": false,
     "pages": {
      "first": {
@@ -647,13 +659,13 @@
    {
     "kind": "street_guide",
     "start_leaf": 198,
-    "end_leaf": 230,
+    "end_leaf": 225,
     "title": {
      "leaf": 198,
      "quote": "BROOKLYN STREET DIRECTORY;",
      "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$198/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 33,
+    "leaves": 28,
     "residential": false,
     "pages": {
      "first": {
@@ -662,27 +674,27 @@
       "attestation": "inferred"
      },
      "last": {
-      "leaf": 230,
-      "page": 226,
+      "leaf": 225,
+      "page": 221,
       "attestation": "read"
      }
     }
    },
    {
     "kind": "register",
-    "start_leaf": 231,
+    "start_leaf": 226,
     "end_leaf": 268,
     "title": {
-     "leaf": 231,
-     "quote": "CHURCHES,",
-     "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$231/full/!1400,1400/0/default.jpg"
+     "leaf": 226,
+     "quote": "Civil List.",
+     "image": "https://iiif.archive.org/iiif/brooklynalphabet1843unse$226/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 31,
+    "leaves": 36,
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 231,
-      "page": 227,
+      "leaf": 226,
+      "page": 222,
       "attestation": "read"
      },
      "last": {
@@ -703,8 +715,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/brooklynalphabet1843unse_listing.jsonl.gz",
   "sections": [
    {

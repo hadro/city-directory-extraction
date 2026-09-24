@@ -745,14 +745,14 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
     "start_leaf": 0,
-    "end_leaf": 9,
+    "end_leaf": 7,
     "title": null,
-    "leaves": 10,
+    "leaves": 8,
     "residential": false,
     "pages": {
      "first": {
@@ -761,27 +761,27 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 9,
-      "page": 9,
+      "leaf": 7,
+      "page": 7,
       "attestation": "read"
      }
     }
    },
    {
-    "kind": "business_notice",
-    "start_leaf": 10,
+    "kind": "street_guide",
+    "start_leaf": 8,
     "end_leaf": 15,
     "title": {
-     "leaf": 10,
-     "quote": "CLASSIFIED BUSINESS LISTS",
-     "image": "https://iiif.archive.org/iiif/1899xBPL$10/full/!1400,1400/0/default.jpg"
+     "leaf": 8,
+     "quote": "Brooklyn Street Guide",
+     "image": "https://iiif.archive.org/iiif/1899xBPL$8/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 6,
+    "leaves": 8,
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 10,
-      "page": 10,
+      "leaf": 8,
+      "page": 8,
       "attestation": "read"
      },
      "last": {
@@ -910,18 +910,18 @@
   ],
   "has_business": false,
   "kinds": [
-   "business_notice",
    "front_matter",
    "index",
    "late_names",
    "listing",
-   "register"
+   "register",
+   "street_guide"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/1899xBPL_listing.jsonl.gz",
   "sections": [
    {

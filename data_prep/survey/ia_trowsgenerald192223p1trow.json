@@ -668,7 +668,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "code_at": "e4382e9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -681,19 +681,43 @@
    {
     "kind": "register",
     "start_leaf": 8,
-    "end_leaf": 29,
+    "end_leaf": 28,
     "title": {
      "leaf": 8,
      "quote": "DENTAL REGISTER AND DIRECTORY OF THE UNITED STATES AND CANADA",
      "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$8/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 20,
+    "leaves": 19,
     "residential": false,
     "pages": {
      "first": {
       "leaf": 14,
       "page": 40,
       "attestation": "read"
+     },
+     "last": {
+      "leaf": 28,
+      "page": 52,
+      "attestation": "read"
+     }
+    }
+   },
+   {
+    "kind": "business_notice",
+    "start_leaf": 29,
+    "end_leaf": 29,
+    "title": {
+     "leaf": 29,
+     "quote": "Classified Business Directory... 1899",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$29/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 29,
+      "page": 53,
+      "attestation": "inferred"
      },
      "last": {
       "leaf": 29,
@@ -705,42 +729,18 @@
    {
     "kind": "index",
     "start_leaf": 30,
-    "end_leaf": 31,
+    "end_leaf": 32,
     "title": {
      "leaf": 30,
      "quote": "INDEX TO ADVERTISERS",
      "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$30/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 2,
+    "leaves": 3,
     "residential": false,
     "pages": {
      "first": {
       "leaf": 30,
       "page": 54,
-      "attestation": "inferred"
-     },
-     "last": {
-      "leaf": 31,
-      "page": 55,
-      "attestation": "read"
-     }
-    }
-   },
-   {
-    "kind": "business_notice",
-    "start_leaf": 32,
-    "end_leaf": 32,
-    "title": {
-     "leaf": 32,
-     "quote": "-CLASSIFIED BUSINESS LISTS ^^^^^H",
-     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$32/full/!1400,1400/0/default.jpg"
-    },
-    "leaves": 1,
-    "residential": false,
-    "pages": {
-     "first": {
-      "leaf": 32,
-      "page": 56,
       "attestation": "inferred"
      },
      "last": {
@@ -777,13 +777,13 @@
    {
     "kind": "street_guide",
     "start_leaf": 37,
-    "end_leaf": 177,
+    "end_leaf": 140,
     "title": {
      "leaf": 37,
      "quote": "TROWS NEW YORK CITY STREET AND AVENUE DIRECTORY",
      "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$37/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 141,
+    "leaves": 104,
     "residential": false,
     "pages": {
      "first": {
@@ -792,27 +792,27 @@
       "attestation": "inferred"
      },
      "last": {
-      "leaf": 177,
-      "page": 225,
-      "attestation": "read"
+      "leaf": 140,
+      "page": 188,
+      "attestation": "inferred"
      }
     }
    },
    {
-    "kind": "business_notice",
-    "start_leaf": 178,
+    "kind": "register",
+    "start_leaf": 141,
     "end_leaf": 185,
     "title": {
-     "leaf": 178,
-     "quote": "CLASSIFIED BUSINESS LISTS",
-     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$178/full/!1400,1400/0/default.jpg"
+     "leaf": 141,
+     "quote": "Churches, Residence*, Theatres,",
+     "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$141/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 8,
+    "leaves": 45,
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 178,
-      "page": 226,
+      "leaf": 141,
+      "page": 189,
       "attestation": "read"
      },
      "last": {
@@ -865,8 +865,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-23",
-  "code_at": "d0f4457-dirty",
+  "derived": "2026-09-24",
+  "code_at": "e4382e9-dirty",
   "file": "data/survey_ocr/trowsgenerald192223p1trow_listing.jsonl.gz",
   "sections": [
    {

@@ -120,7 +120,8 @@ from survey_report import publisher_agrees, year_agrees  # noqa: E402  (same-dir
 
 # New columns, appended to the header in this order. Each is a unit the CSV did not previously
 # carry -- none of them redefines an existing column.
-NEW_COLUMNS = ["volume_number", "year_covered", "year_published", "legend_leaf", "legend_location"]
+NEW_COLUMNS = ["volume_number", "year_covered", "year_published", "legend_leaf", "legend_location",
+               "printer"]
 
 # Columns this script must never write, and why. Enforced in `propose()` rather than left to
 # reviewer memory -- rule 2 above.
@@ -246,6 +247,18 @@ def propose(row: dict, doc: dict):
             out.append((col, str(pc["value"]), pc))
             if col == "start_page" and pc.get("page_offset") is not None:
                 out.append(("page_offset", str(pc["page_offset"]), pc))
+
+    # `printer` (2026-09-24). The catalog recorded the name on the imprint whatever its role, and a
+    # whole Brooklyn series was catalogued under Spooner, who PRINTED it (see survey_decisions.json);
+    # the printer needs its own column so the publisher column can mean publisher. Written from an
+    # image read, or from an hOCR "Printed by ..." line whose name is at least two words -- the
+    # one-word hOCR read on 1857BPL ("PRINTED BY EDWARD") is a truncation and stays out.
+    pr = book.get("printer")
+    if pr and pr.get("value") and (
+            pr.get("method") == "agent-read"
+            or (pr.get("method") == "hocr-text" and pr.get("confidence") in CSV_GRADE
+                and len(str(pr["value"]).split()) >= 2)):
+        out.append(("printer", str(pr["value"]), pr))
 
     # `column_count` joined this list on 2026-09-22, when reading the listings turned up three
     # Trow volumes whose recorded value was wrong. It is only ever offered from an `agent-read`
@@ -584,6 +597,15 @@ def self_test():
     assert kp("ia-page-numbers", "low") == [], "a low-confidence conversion is not CSV-grade"
     assert kp("hocr-text", "high") == [], "only the converter may produce a key_page"
     assert kp("agent-read", "high") == [], "an agent leaf-read is still not a printed page"
+
+    # printer: an image read, or a multi-word hOCR imprint -- never a one-word truncation
+    def prn(method, conf, value):
+        return [c for c, _v, _cl in propose({}, {"book_says": {"printer": {
+            "value": value, "leaf": 1, "method": method, "confidence": conf}}})]
+    assert prn("agent-read", "high", "Douglas") == ["printer"]
+    assert prn("hocr-text", "medium", "Lewis Nichols") == ["printer"]
+    assert prn("hocr-text", "high", "EDWARD") == [], "1857BPL's truncated imprint"
+    assert prn("hocr-text", "low", "A. Spooner") == []
 
     # The page columns: conditional on method, attestation AND high confidence.
     def pg(method="hocr-geometry", att="read", conf="high", col="start_page"):

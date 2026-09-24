@@ -42,6 +42,7 @@ IIIF image URL and verbatim quote. Do not hand-edit these; edit the sidecar and 
 | `year_published` | 21 | the year of the imprint/copyright line. Routinely **differs** from `year_covered`: Trow volumes were published the autumn before their nominal year, and `micro_IABROOKLYN_0022` is a title page reading "for 1845 and 1846" |
 | `legend_leaf` | 60 | **leaf index** (0-based canvas) of the abbreviations key. Deliberately *not* `key_page` — see below |
 | `legend_location` | 60 | `dedicated-page` (20) \| `inline-at-listing-head` (40) |
+| `printer` | 28 | who PRINTED the volume, as the imprint names it ("A. Spooner & Sons", "Wynkoop Hallenbeck Crawford Co."). Separate from `publisher` since 2026-09-24: the catalog had recorded Brooklyn's 1830s-40s directories under Spooner, who printed them. Written only from an image read or a multi-word "Printed by" line; the claim, its leaf and IIIF image are in the sidecar's `book_says.printer` |
 | `key_page` | +3 | the **printed page** of the legend, converted from `legend_leaf` by `survey_pagenumbers.py`. Written only from a `method: ia-page-numbers` claim that IA actually **read** (`attestation: read`) at confidence high/medium — never from one it interpolated |
 
 ⚠️ **`key_page` and `start_page` hold printed pages, and at least one row has a LEAF in them.**

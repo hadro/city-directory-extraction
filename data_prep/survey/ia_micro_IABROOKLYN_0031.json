@@ -68,16 +68,16 @@
    "note": "Confirms the catalog."
   },
   "start_page": {
-   "value": 21,
-   "leaf": 25,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$25/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$25/full/!1400,1400/0/default.jpg",
+   "value": 20,
+   "leaf": 24,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$24/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$24/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'21' in the head margin",
+   "quote": "'20' in the head margin",
    "method": "hocr-geometry",
    "confidence": "medium",
    "attestation": "read",
-   "ia_page": 21,
+   "ia_page": null,
    "page_offset": 4,
    "listing_flags": [
     "edge-disagreement"
@@ -104,7 +104,7 @@
    "doubts": [
     "sequence read on only 3 leaves",
     "sequence-break: an earlier sequence in this listing ran higher",
-    "page 8 is below the listing's 527 text leaves"
+    "page 8 is below the listing's 528 text leaves"
    ]
   }
  },
@@ -401,8 +401,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 25,
+  "code_at": "3528867-dirty",
+  "start_leaf": 24,
   "end_leaf": 591,
   "first_letter": "A",
   "last_letter": "W",
@@ -413,9 +413,9 @@
    "edge-disagreement"
   ],
   "start": {
-   "leaf": 25,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$25/full/!1400,1400/0/default.jpg",
-   "quote": "Alexander b Park & Flushing av . ."
+   "leaf": 24,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$24/full/!1400,1400/0/default.jpg",
+   "quote": "Aldridge E C, 18th st n"
   },
   "end": {
    "leaf": 591,
@@ -673,6 +673,16 @@
    ]
   },
   "skipped_votes": 1,
+  "voted_bounds": [
+   25,
+   591
+  ],
+  "extended": {
+   "start": [
+    24
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 24,
@@ -689,7 +699,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 606,
   "fitted_leaves": 453,
   "read_leaves": 200,

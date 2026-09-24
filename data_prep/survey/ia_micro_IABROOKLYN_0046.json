@@ -78,38 +78,44 @@
    ],
    "note": "Confirms the catalog (Reynolds)."
   },
-  "start_page": {
-   "value": 18,
-   "leaf": 17,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$17/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$17/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "running head '18 WILLIAMSBURGH'; entries 'Atkinson James, butcher' ... 'AYMAR JAS. M., justice of the peace'",
-   "method": "agent-read",
-   "confidence": "medium",
-   "attestation": "read",
-   "position": "head",
-   "edge_confirmed": false,
-   "read_date": "2026-09-23",
-   "note": "not the listing start: mid-A",
-   "page_offset": -1
-  },
-  "end_page": {
-   "value": 240,
-   "leaf": 246,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$246/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$246/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "running head '240 WILLIAMSBURGH'; entries 'Wine James' ... 'Wittstadt Michael, cabinetmaker'",
-   "method": "agent-read",
-   "confidence": "medium",
-   "attestation": "read",
-   "position": "head",
-   "edge_confirmed": false,
-   "read_date": "2026-09-23",
-   "note": "unconfirmed end: stops in Witt-, no close visible",
-   "page_offset": 6
-  }
+  "_superseded_page_reads": [
+   {
+    "start_page": {
+     "value": 18,
+     "leaf": 17,
+     "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$17/canvas",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$17/full/!1400,1400/0/default.jpg",
+     "evidence_type": "folio",
+     "quote": "running head '18 WILLIAMSBURGH'; entries 'Atkinson James, butcher' ... 'AYMAR JAS. M., justice of the peace'",
+     "method": "agent-read",
+     "confidence": "medium",
+     "attestation": "read",
+     "position": "head",
+     "edge_confirmed": false,
+     "read_date": "2026-09-23",
+     "note": "not the listing start: mid-A",
+     "page_offset": -1
+    }
+   },
+   {
+    "end_page": {
+     "value": 240,
+     "leaf": 246,
+     "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$246/canvas",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$246/full/!1400,1400/0/default.jpg",
+     "evidence_type": "folio",
+     "quote": "running head '240 WILLIAMSBURGH'; entries 'Wine James' ... 'Wittstadt Michael, cabinetmaker'",
+     "method": "agent-read",
+     "confidence": "medium",
+     "attestation": "read",
+     "position": "head",
+     "edge_confirmed": false,
+     "read_date": "2026-09-23",
+     "note": "unconfirmed end: stops in Witt-, no close visible",
+     "page_offset": 6
+    }
+   }
+  ]
  },
  "survey_status": "frontmatter-done",
  "derivatives": {
@@ -407,9 +413,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 17,
-  "end_leaf": 246,
+  "code_at": "3528867-dirty",
+  "start_leaf": 16,
+  "end_leaf": 247,
   "first_letter": "A",
   "last_letter": "W",
   "letters_present": "ABCDEFGHKLMPRSTVW",
@@ -417,14 +423,14 @@
   "voting_density": 0.291,
   "flags": [],
   "start": {
-   "leaf": 17,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$17/full/!1400,1400/0/default.jpg",
-   "quote": "Aap roneteipatne, trencine, 08 Bost tat"
+   "leaf": 16,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$16/full/!1400,1400/0/default.jpg",
+   "quote": "Anderson Wa. C., f"
   },
   "end": {
-   "leaf": 246,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$246/full/!1400,1400/0/default.jpg",
-   "quote": "Wittstadt Michoc, eabinetaker, 79 Meserole"
+   "leaf": 247,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0046$247/full/!1400,1400/0/default.jpg",
+   "quote": "Wolf"
   },
   "sections": [
    {
@@ -653,6 +659,18 @@
    ]
   },
   "skipped_votes": 2,
+  "voted_bounds": [
+   17,
+   246
+  ],
+  "extended": {
+   "start": [
+    16
+   ],
+   "end": [
+    247
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 17,
@@ -669,7 +687,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 254,
   "fitted_leaves": 110,
   "read_leaves": 62,

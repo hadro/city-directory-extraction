@@ -42,20 +42,20 @@
    "confidence": "medium"
   },
   "start_page": {
-   "value": 18,
-   "leaf": 109,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$109/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$109/full/!1400,1400/0/default.jpg",
+   "value": 17,
+   "leaf": 107,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$107/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$107/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'AARON' / 'ABBE' / 'ABBOTT' under the COLOGNE SPIRIT ad; '18' at foot",
+   "quote": "caption page 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX ... NOTICE ... ABBREVIATIONS', then the first A entries; folio '17' centred at foot below the CAREFUL CARPET CLEANING Co. ad",
    "method": "agent-read",
-   "confidence": "medium",
+   "confidence": "high",
    "attestation": "read",
    "position": "foot",
-   "edge_confirmed": false,
+   "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "not the listing start: the caption page (leaf 107, p.17) is one page earlier",
-   "page_offset": 91
+   "note": "the listing's caption page, found by edge extension and confirmed on the full-page image 2026-09-23; the next leaf prints 18",
+   "page_offset": 90
   },
   "end_page": {
    "value": 538,
@@ -361,8 +361,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 109,
+  "code_at": "3528867-dirty",
+  "start_leaf": 107,
   "end_leaf": 1165,
   "first_letter": "A",
   "last_letter": "G",
@@ -373,9 +373,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 109,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$109/full/!1400,1400/0/default.jpg",
-   "quote": "Aaronson Abraham drygds 53 Rutgers"
+   "leaf": 107,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$107/full/!1400,1400/0/default.jpg",
+   "quote": "Aler"
   },
   "end": {
    "leaf": 1165,
@@ -487,6 +487,16 @@
    ]
   },
   "skipped_votes": 3,
+  "voted_bounds": [
+   109,
+   1165
+  ],
+  "extended": {
+   "start": [
+    107
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 109,
@@ -503,7 +513,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 578,
   "fitted_leaves": 247,
   "read_leaves": 73,

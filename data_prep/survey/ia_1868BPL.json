@@ -81,22 +81,26 @@
    "read_date": "2026-09-23",
    "note": "unprinted: the '1' at the foot does not continue into the next text leaves ([11, 12, 13, 14]: [[8], [13], [], [8, 16]]) -- a printer's signature mark or a partial read"
   },
-  "end_page": {
-   "value": 679,
-   "leaf": 717,
-   "canvas": "https://iiif.archive.org/iiif/1868BPL$717/canvas",
-   "image": "https://iiif.archive.org/iiif/1868BPL$717/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "running head 'YOU-ZEL 679 ZEM-ZIM'; last entry 'Zimmermann Max, engineer'",
-   "method": "agent-read",
-   "confidence": "medium",
-   "attestation": "read",
-   "position": "head",
-   "edge_confirmed": false,
-   "read_date": "2026-09-23",
-   "note": "right-hand guide word stops at ZIM and no Zo-/Zu- names follow: leaf 718 is late names, 719 the advertisement index -- the last listing page may be missing from the scan",
-   "page_offset": 38
-  }
+  "_superseded_page_reads": [
+   {
+    "end_page": {
+     "value": 679,
+     "leaf": 717,
+     "canvas": "https://iiif.archive.org/iiif/1868BPL$717/canvas",
+     "image": "https://iiif.archive.org/iiif/1868BPL$717/full/!1400,1400/0/default.jpg",
+     "evidence_type": "folio",
+     "quote": "running head 'YOU-ZEL 679 ZEM-ZIM'; last entry 'Zimmermann Max, engineer'",
+     "method": "agent-read",
+     "confidence": "medium",
+     "attestation": "read",
+     "position": "head",
+     "edge_confirmed": false,
+     "read_date": "2026-09-23",
+     "note": "right-hand guide word stops at ZIM and no Zo-/Zu- names follow: leaf 718 is late names, 719 the advertisement index -- the last listing page may be missing from the scan",
+     "page_offset": 38
+    }
+   }
+  ]
  },
  "survey_status": "frontmatter-done",
  "derivatives": {
@@ -385,9 +389,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "start_leaf": 10,
-  "end_leaf": 717,
+  "end_leaf": 718,
   "first_letter": "A",
   "last_letter": "Z",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
@@ -400,9 +404,9 @@
    "quote": "Aalholm Mathias, h 82 Fort Greene pi"
   },
   "end": {
-   "leaf": 717,
-   "image": "https://iiif.archive.org/iiif/1868BPL$717/full/!1400,1400/0/default.jpg",
-   "quote": "Zimmermann K. vinegar-manf. 6th av. n. 15th,"
+   "leaf": 718,
+   "image": "https://iiif.archive.org/iiif/1868BPL$718/full/!1400,1400/0/default.jpg",
+   "quote": "Zwergius Julius, h 316 Navy"
   },
   "sections": [
    {
@@ -572,6 +576,16 @@
    ]
   },
   "skipped_votes": 5,
+  "voted_bounds": [
+   10,
+   717
+  ],
+  "extended": {
+   "start": [],
+   "end": [
+    718
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 10,
@@ -588,7 +602,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 804,
   "fitted_leaves": 682,
   "read_leaves": 251,

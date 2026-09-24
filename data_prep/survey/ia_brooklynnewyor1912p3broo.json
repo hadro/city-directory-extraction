@@ -122,20 +122,20 @@
    "note": "Title page leaf 7, librarian's red 'pt. 3' beside the year. PROBABLE DUPLICATE of brooklynnewyorkc19123broo; this is the 2013 scan (imagecount 1066, hOCR 88 MB) and is the better of the two. THE TITLE PAGE DOCUMENTS A GAP IN ITS OWN SERIES: 'There was no edition of this book published for the year 1911.' That is a printed, citable answer to a coverage question, of the same kind as the Trow 1898/99 hole the plan already tracks."
   },
   "start_page": {
-   "value": 1155,
-   "leaf": 11,
-   "canvas": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$11/canvas",
-   "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$11/full/!1400,1400/0/default.jpg",
+   "value": 1154,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$9/canvas",
+   "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$9/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "running head 'BROOKLYN 1912 DIRECTORY', guide heads 'REYNOLDS' / 'RHEINGOLD'; folio '1155' centred at foot below the FRANK E. WHITE ad",
+   "quote": "running head 'BROOKLYN 1912 DIRECTORY', guide heads 'REYEN' / 'REYNOLDS' under the 'Directory Advertisements Bring Business' banner; folio '1154' at foot below the HORTON'S ICE CREAM ad",
    "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
    "position": "foot",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "part 2 (brooklynnewyorkc1912broo) ends at 1153 -- page 1154 may fall between the parts",
-   "page_offset": -1144,
+   "note": "CORRECTS an earlier strip read: leaf 11 (p.1155) is the second listing page, not the first; p.1154 is in this scan after all; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23",
+   "page_offset": -1145,
    "margin_fit_said": {
     "value": 2,
     "leaf": 11,
@@ -457,8 +457,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 11,
+  "code_at": "3528867-dirty",
+  "start_leaf": 9,
   "end_leaf": 743,
   "first_letter": "R",
   "last_letter": "Z",
@@ -470,9 +470,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 11,
-   "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$11/full/!1400,1400/0/default.jpg",
-   "quote": "Reysen M hotel 42 Jamaica av"
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$9/full/!1400,1400/0/default.jpg",
+   "quote": "Rcyorsun Chus II machinist li 1941 r>-J,l"
   },
   "end": {
    "leaf": 743,
@@ -607,6 +607,16 @@
    ]
   },
   "skipped_votes": 4,
+  "voted_bounds": [
+   11,
+   743
+  ],
+  "extended": {
+   "start": [
+    9
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 11,
@@ -623,7 +633,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 529,
   "fitted_leaves": 504,
   "read_leaves": 274,

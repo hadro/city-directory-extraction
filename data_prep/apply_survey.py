@@ -289,42 +289,27 @@ def retractable(row: dict, doc: dict, written=None):
                        or kp.get("attestation") == INTERPOLATED)
         if below_grade and (row.get("key_page") or "").strip() == str(kp["value"]):
             out.append(("key_page", str(kp["value"]), kp))
-    # The page columns, on a STRONGER proof than key_page's: besides matching a claim, the cell
-    # must be in the written ledger with the same value (`written`, from survey_written.json).
-    # `written=None` means "no ledger given" and retracts nothing from these columns.
+    # The page columns, on a STRONGER proof than key_page's: the cell must be in the written
+    # ledger (survey_written.json) with the value it holds, and the volume's CURRENT claim must no
+    # longer support that value -- a claim below CSV grade, or one that now says something else.
+    # That one rule covers a downgraded claim, a margin-fit value an image read has overruled, and
+    # an edge that moved (micro_IABROOKLYN_0004: written 47 from leaf 41, but the listing runs on
+    # to leaf 42). propose() refills the cleared cell on the same run if the current claim is
+    # CSV-grade. `written=None` means no ledger was given, and nothing here is retracted.
     src, ident = doc.get("source"), doc.get("id")
 
     def ours(col, value):
-        return written is not None and written.get((src, ident, col)) == str(value)
+        return written is not None and value != "" and written.get((src, ident, col)) == str(value)
 
     for col in PAGE_COLUMNS:
-        pc = book.get(col)
-        if not pc or pc.get("method") not in PAGE_METHODS:
-            continue
-        if not page_claim_ok(pc):
-            if (row.get(col) or "").strip() == str(pc.get("value")) and ours(col, pc["value"]):
-                out.append((col, str(pc["value"]), pc))
-            if (col == "start_page" and pc.get("page_offset") is not None
-                    and (row.get("page_offset") or "").strip() == str(pc["page_offset"])
-                    and ours("page_offset", pc["page_offset"])):
-                out.append(("page_offset", str(pc["page_offset"]), pc))
-        # ...and a cell written from the MARGIN FIT that an image read has since overruled
-        # (2026-09-23: 8 of the 80 written edges were one page off -- a caption page the bounds
-        # missed, or a listing that ran one page past the fit's last read). The read records
-        # what the fit said in `margin_fit_said`; the cell is cleared only if it still holds
-        # exactly that, so a human's value is never touched. If the read is itself CSV-grade,
-        # propose() then fills the cleared cell with it on the same run.
-        fit = pc.get("margin_fit_said") or {}
-        if pc.get("method") == "agent-read" and fit.get("method") == PAGE_METHOD:
-            if (str(fit.get("value")) != str(pc.get("value")) or not page_claim_ok(pc)) \
-                    and (row.get(col) or "").strip() == str(fit.get("value")) \
-                    and ours(col, fit.get("value")):
-                out.append((col, str(fit["value"]), pc))
-            if (col == "start_page" and fit.get("page_offset") is not None
-                    and str(fit.get("page_offset")) != str(pc.get("page_offset"))
-                    and (row.get("page_offset") or "").strip() == str(fit["page_offset"])
-                    and ours("page_offset", fit["page_offset"])):
-                out.append(("page_offset", str(fit["page_offset"]), pc))
+        pc = book.get(col) or {}
+        cell = (row.get(col) or "").strip()
+        if ours(col, cell) and not (page_claim_ok(pc) and str(pc["value"]) == cell):
+            out.append((col, cell, pc))
+    cell = (row.get("page_offset") or "").strip()
+    sp = book.get("start_page") or {}
+    if ours("page_offset", cell) and not (page_claim_ok(sp) and str(sp.get("page_offset")) == cell):
+        out.append(("page_offset", cell, sp))
     # the not-CSV-grade and overruled paths can name the same cell; clear it once
     seen, uniq = set(), []
     for c, v, cl in out:
@@ -468,14 +453,19 @@ def run(write: bool, show_conflicts: bool, retract: bool = False):
     if retracted:
         print(f"\nretracted ({len(retracted)}) -- written by this tool, now below CSV grade:")
         for src, ident, col, value, claim in retracted:
+            said = claim.get("page_offset") if col == "page_offset" else claim.get("value")
             if claim.get("attestation") == INTERPOLATED:
                 why = "IA interpolated it; the page prints no such folio"
-            elif claim.get("method") == "agent-read" and claim.get("margin_fit_said"):
-                why = (f"overruled by an image read: leaf {claim.get('leaf')} "
-                       + (f"prints {claim['value']}" if claim.get("value") is not None
-                          else f"prints no folio ({claim.get('attestation')})"))
+            elif not claim:
+                why = "no claim supports it any more"
+            elif said is None:
+                why = (f"the current claim is leaf {claim.get('leaf')}, which prints no folio "
+                       f"({claim.get('attestation')}; {claim.get('method')})")
+            elif str(said) != value:
+                why = (f"the current claim says {said} at leaf {claim.get('leaf')} "
+                       f"({claim.get('method')}, {claim.get('confidence')})")
             else:
-                why = f"confidence {claim.get('confidence')}"
+                why = f"its claim fell to {claim.get('confidence')}"
             print(f"  {src}/{ident[:34]:34} {col:10} cleared {value:>5}   ({why})")
             print(f"      still cited by leaf {claim.get('leaf')} in the sidecar")
 
@@ -627,6 +617,19 @@ def self_test():
     assert got == [("start_page", "14"), ("page_offset", "8")], got
     # micro_IABROOKLYN_0005: a human's start_page 5 equals what the fit said, and is not ours
     assert retractable({"start_page": "14"}, gone, {}) == []
+    # an edge that MOVED: the ledger holds 47 (written from leaf 41), the current claim is an
+    # illegible read at leaf 42 -- the cell is cleared and nothing replaces it
+    moved = {"source": "ia", "id": "m4", "book_says": {"end_page": {
+        "value": None, "leaf": 42, "method": "agent-read", "attestation": "illegible",
+        "confidence": "low"}}}
+    assert [(c, v) for c, v, _cl in retractable({"end_page": "47"}, moved,
+                                                 {("ia", "m4", "end_page"): "47"})] == \
+        [("end_page", "47")]
+    # ...and a cell the current claim still supports is left alone
+    kept = {"source": "ia", "id": "k", "book_says": {"end_page": {
+        "value": 338, "leaf": 390, "method": "agent-read", "attestation": "read",
+        "confidence": "high"}}}
+    assert retractable({"end_page": "338"}, kept, {("ia", "k", "end_page"): "338"}) == []
     assert propose({}, gone) == []
 
     # An interpolated folio is refused even at high confidence: IA never read it off the page.

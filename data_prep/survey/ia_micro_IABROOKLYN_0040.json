@@ -89,28 +89,23 @@
    "doubts": []
   },
   "end_page": {
-   "value": 489,
-   "leaf": 420,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$420/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$420/full/!1400,1400/0/default.jpg",
+   "value": 2,
+   "leaf": 421,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$421/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$421/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "a two-page SPREAD: 'WOO 488 WOO-WOR' / 'WOR-WRI 489'; the right page ends 'WRIGHT WILLIAM H.'",
-   "method": "agent-read",
-   "confidence": "medium",
+   "quote": "'2' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "low",
    "attestation": "read",
-   "position": "head",
-   "edge_confirmed": false,
-   "read_date": "2026-09-23",
-   "note": "unconfirmed end: stops in WRI, Y names likely follow",
-   "page_offset": -69,
-   "margin_fit_said": {
-    "value": 1,
-    "leaf": 420,
-    "page_offset": 419,
-    "confidence": "low",
-    "attestation": "read",
-    "method": "hocr-geometry"
-   }
+   "ia_page": null,
+   "page_offset": 419,
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 4 leaves",
+    "sequence-break: an earlier sequence in this listing ran higher",
+    "page 2 is below the listing's 387 text leaves"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -415,9 +410,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "start_leaf": 10,
-  "end_leaf": 420,
+  "end_leaf": 421,
   "first_letter": "A",
   "last_letter": "W",
   "letters_present": "ABCDEFGHIJKLMNOPRSTUVW",
@@ -430,9 +425,9 @@
    "quote": "Aaron Gabriel, pedlar, h. Myrtle av. u. Nostrand"
   },
   "end": {
-   "leaf": 420,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$420/full/!1400,1400/0/default.jpg",
-   "quote": "Wortman James H. builder, h. Raymond n. Poplar ho W"
+   "leaf": 421,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0040$421/full/!1400,1400/0/default.jpg",
+   "quote": "Wyvill Ann, wid. h. 38 Tillary"
   },
   "sections": [
    {
@@ -677,6 +672,16 @@
    ]
   },
   "skipped_votes": 5,
+  "voted_bounds": [
+   10,
+   420
+  ],
+  "extended": {
+   "start": [],
+   "end": [
+    421
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 10,
@@ -693,7 +698,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 455,
   "fitted_leaves": 308,
   "read_leaves": 109,

@@ -43,34 +43,34 @@
   },
   "start_page": {
    "value": null,
-   "leaf": 67,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$67/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$67/full/!1400,1400/0/default.jpg",
+   "leaf": 65,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$65/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$65/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'AARON' / 'ABBATE' / 'ABBOTT' under the NATIONAL METER CO. ad; no folio visible below the WATERMAN'S ad",
+   "quote": "caption page 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX ... NOTICE ... ABBREVIATIONS', then the first A entries; the foot shows the CAREFUL CARPET CLEANING Co. ad and the folio falls below the scanned area",
    "method": "agent-read",
    "confidence": "low",
-   "attestation": "unprinted",
-   "position": null,
-   "edge_confirmed": false,
+   "attestation": "illegible",
+   "position": "foot",
+   "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "not the listing start: the caption page is leaf 65"
+   "note": "the listing's caption page, found by edge extension and confirmed on the full-page image 2026-09-23; the next leaf prints 18; page 17 by sequence, not read"
   },
   "end_page": {
-   "value": 564,
-   "leaf": 1165,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$1165/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$1165/full/!1400,1400/0/default.jpg",
+   "value": 565,
+   "leaf": 1167,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$1167/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$1167/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'GRECHEN' / 'GREEN' / 'GREEN' under the T. M. STEWART ad; folio '564' at foot below the BRADLEY & SMITH'S BRUSHES ad",
+   "quote": "guide heads 'GREEN' / 'GREEN' / 'GREEN' under the FRANK E. CAMPBELL ad; folio '565' at foot below THE LIBERTY NATIONAL BANK ad",
    "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
    "position": "foot",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "",
-   "page_offset": 601
+   "note": "CORRECTS an earlier strip read: leaf 1165 (p.564) is the second-to-last listing page; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23",
+   "page_offset": 602
   }
  },
  "survey_status": "frontmatter-done",
@@ -359,9 +359,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 67,
-  "end_leaf": 1165,
+  "code_at": "3528867-dirty",
+  "start_leaf": 65,
+  "end_leaf": 1167,
   "first_letter": "A",
   "last_letter": "G",
   "letters_present": "ABCDEFG",
@@ -371,14 +371,14 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 67,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$67/full/!1400,1400/0/default.jpg",
-   "quote": "Aaronberg Harry robes 113 Lenox av 1)124"
+   "leaf": 65,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$65/full/!1400,1400/0/default.jpg",
+   "quote": "Alex"
   },
   "end": {
-   "leaf": 1165,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$1165/full/!1400,1400/0/default.jpg",
-   "quote": "Grand av"
+   "leaf": 1167,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p1trow$1167/full/!1400,1400/0/default.jpg",
+   "quote": "Greenbaum Abraham operator h22l E114tll"
   },
   "sections": [
    {
@@ -485,6 +485,18 @@
    ]
   },
   "skipped_votes": 7,
+  "voted_bounds": [
+   67,
+   1165
+  ],
+  "extended": {
+   "start": [
+    65
+   ],
+   "end": [
+    1167
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 67,
@@ -501,7 +513,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 582,
   "fitted_leaves": 423,
   "read_leaves": 124,

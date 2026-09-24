@@ -86,20 +86,20 @@
    "note": "Title page, librarian's red 'pt. 2'. GENERAL (residential) directory -- the contrast with the 1913 rows, which are the Trow BUSINESS directory under the same catalog title. Textbook year_covered/year_published split: the volume is FOR the year ending in 1910 and was copyrighted in 1909, which is the 'published the autumn before their nominal year' pattern SURVEY_PLAN.md describes."
   },
   "start_page": {
-   "value": 569,
-   "leaf": 11,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p2trow$11/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p2trow$11/full/!1400,1400/0/default.jpg",
+   "value": 568,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1910p2trow$9/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p2trow$9/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'GREENE' / 'GREENFIELD' / 'GREENFIELD' under the Pinkerton's ad; folio '569' at foot",
+   "quote": "guide heads 'GREENBERGER' / 'GREENBURG' / 'GREENE' under THE LIBERTY NATIONAL BANK ad (stamped 2063237); folio '568' at foot below the LEATHEROID TRUNKS AND CASES ad",
    "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
    "position": "foot",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "part 1 ends at 564: pages 565-568 fall in neither scan's listing",
-   "page_offset": -558
+   "note": "CORRECTS an earlier strip read: leaf 11 (p.569) is the second listing page; only pp.566-567 fall between the two scans; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23",
+   "page_offset": -559
   },
   "end_page": {
    "value": 1142,
@@ -411,8 +411,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 11,
+  "code_at": "3528867-dirty",
+  "start_leaf": 9,
   "end_leaf": 1157,
   "first_letter": "G",
   "last_letter": "P",
@@ -423,9 +423,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 11,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p2trow$11/full/!1400,1400/0/default.jpg",
-   "quote": "Greene-Newburger Co trimmings lfl E34th"
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1910p2trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Greenberry Harrv hats 170 Greene h230 6th"
   },
   "end": {
    "leaf": 1157,
@@ -579,6 +579,16 @@
    ]
   },
   "skipped_votes": 4,
+  "voted_bounds": [
+   11,
+   1157
+  ],
+  "extended": {
+   "start": [
+    9
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 11,
@@ -595,7 +605,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 578,
   "fitted_leaves": 388,
   "read_leaves": 109,

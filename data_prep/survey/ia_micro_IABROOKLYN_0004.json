@@ -83,19 +83,27 @@
    "note": "CSV 'spooner' is CORRECT here."
   },
   "end_page": {
-   "value": 47,
-   "leaf": 41,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$41/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$41/full/!1400,1400/0/default.jpg",
+   "value": null,
+   "leaf": 42,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$42/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$42/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'47' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
-   "ia_page": null,
-   "page_offset": -6,
-   "listing_flags": [],
-   "doubts": []
+   "quote": "running head '4? BROOKLYN DIRECTORY.' -- only the first digit survives the film; 'Wright Grove, merchant' ... 'Young Henry, carpenter, 113 Gold', then VILLAGE OF BROOKLYN. ABSTRACT",
+   "method": "agent-read",
+   "confidence": "low",
+   "attestation": "illegible",
+   "position": "head",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "CORRECTS an earlier strip read: the listing runs on to leaf 42, whose folio is illegible; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23",
+   "margin_fit_said": {
+    "value": 48,
+    "leaf": 42,
+    "page_offset": -6,
+    "confidence": "low",
+    "attestation": "inferred",
+    "method": "hocr-geometry"
+   }
   },
   "start_page": {
    "value": null,
@@ -412,9 +420,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "start_leaf": 5,
-  "end_leaf": 41,
+  "end_leaf": 42,
   "first_letter": "A",
   "last_letter": "W",
   "letters_present": "ABCDFHJLMNPRSTVW",
@@ -427,9 +435,9 @@
    "quote": "Ansor DANIEL, tavern & livery stable, 14 Main c."
   },
   "end": {
-   "leaf": 41,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$41/full/!1400,1400/0/default.jpg",
-   "quote": "Wright Frost, carpenter, 103 Sands"
+   "leaf": 42,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0004$42/full/!1400,1400/0/default.jpg",
+   "quote": "Wyckoff Samuel, porter, 15 Main"
   },
   "sections": [
    {
@@ -545,6 +553,16 @@
    ]
   },
   "skipped_votes": 0,
+  "voted_bounds": [
+   5,
+   41
+  ],
+  "extended": {
+   "start": [],
+   "end": [
+    42
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 5,
@@ -561,7 +579,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 59,
   "fitted_leaves": 47,
   "read_leaves": 31,

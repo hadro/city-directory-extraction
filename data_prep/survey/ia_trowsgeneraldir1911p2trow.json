@@ -77,18 +77,18 @@
   },
   "end_page": {
    "value": null,
-   "leaf": 1215,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1215/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1215/full/!1400,1400/0/default.jpg",
+   "leaf": 1217,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1217/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1217/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'REDDENO' / 'REDFIELD' / 'REDMOND'; the foot is the THIEL DETECTIVE SERVICE ad, torn, no folio visible",
+   "quote": "guide heads 'REED' / 'REEHILL' under the MERCHANTS EXCHANGE NAT. BANK ad; the leaf is torn and the foot shows no folio",
    "method": "agent-read",
    "confidence": "low",
    "attestation": "illegible",
    "position": "foot",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "not visible"
+   "note": "CORRECTS an earlier strip read: the listing runs on to leaf 1217; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23"
   }
  },
  "survey_status": "frontmatter-done",
@@ -378,9 +378,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "start_leaf": 9,
-  "end_leaf": 1215,
+  "end_leaf": 1217,
   "first_letter": "H",
   "last_letter": "R",
   "letters_present": "HIJKLMNOPQR",
@@ -395,9 +395,9 @@
    "quote": "Hampl Ferdinand plumber 200 W132d"
   },
   "end": {
-   "leaf": 1215,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1215/full/!1400,1400/0/default.jpg",
-   "quote": "Reed A F tutor W116th n Amsterdam av"
+   "leaf": 1217,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1911p2trow$1217/full/!1400,1400/0/default.jpg",
+   "quote": "Reeve Arthur B pres 225 5th av R816"
   },
   "sections": [
    {
@@ -560,6 +560,16 @@
    ]
   },
   "skipped_votes": 2,
+  "voted_bounds": [
+   9,
+   1215
+  ],
+  "extended": {
+   "start": [],
+   "end": [
+    1217
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 9,
@@ -576,7 +586,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 608,
   "fitted_leaves": 558,
   "read_leaves": 127,

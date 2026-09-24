@@ -57,19 +57,19 @@
    "note": "Leaf 7 is a listings page (printed p.1025) -- residential and business entries interleaved, Kessel/Kessler/Ketcham. MEASURED FIVE COLUMNS, where the CSV notes bracket Trow 1859-1915 as 3-column. 1922/23 sits outside that bracket, so this is not a contradiction, but it is a measured value for a volume that had none. Title page not reached."
   },
   "start_page": {
-   "value": 1027,
-   "leaf": 9,
-   "canvas": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$9/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$9/full/!1400,1400/0/default.jpg",
+   "value": 1025,
+   "leaf": 7,
+   "canvas": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$7/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$7/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "folio '1027' centred above the STUYVESANT PRESS ad; guide heads 'KHOURY' ... 'KIENINGER'",
+   "quote": "folio '1025' centred at head above the BUSINESS ADDRESS COMPANY ad; guide heads 'KESSEL' / 'KESSLER' / 'KESSNER' / 'KESTER'",
    "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
    "position": "head",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "part 1 (trowsgenerald192223p1trow) ends at 1024 on its leaf 958; 1025-1026 are in neither scan",
+   "note": "CORRECTS an earlier strip read: the part opens on p.1025, straight after part 1's 1024 (leaf 5 is the 'Copyright March, 1923, by R. L. Polk & Co.' page); pp.1025-1026 were not missing; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23",
    "page_offset": -1018
   },
   "end_page": {
@@ -385,8 +385,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 9,
+  "code_at": "3528867-dirty",
+  "start_leaf": 8,
   "end_leaf": 882,
   "first_letter": "K",
   "last_letter": "Z",
@@ -398,9 +398,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 9,
-   "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$9/full/!1400,1400/0/default.jpg",
-   "quote": "Khulman Geo (Kuuiman & Zimmerman)"
+   "leaf": 8,
+   "image": "https://iiif.archive.org/iiif/trowsgenerald192223p2trow$8/full/!1400,1400/0/default.jpg",
+   "quote": "Ketiiioilier waiter artist 9 WHfli r do"
   },
   "end": {
    "leaf": 882,
@@ -619,6 +619,16 @@
    ]
   },
   "skipped_votes": 14,
+  "voted_bounds": [
+   9,
+   882
+  ],
+  "extended": {
+   "start": [
+    8
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 9,
@@ -635,7 +645,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 962,
   "fitted_leaves": 0,
   "read_leaves": 0,

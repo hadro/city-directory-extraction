@@ -53,18 +53,18 @@
   },
   "end_page": {
    "value": null,
-   "leaf": 1045,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$1045/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$1045/full/!1400,1400/0/default.jpg",
+   "leaf": 1047,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$1047/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$1047/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'QUADRIBOROUGH' / 'QUASHA' / 'QUEENSBORO' / 'QUICK'; the foot is the Coca-Cola ad with no folio visible",
+   "quote": "guide heads 'QUIGLEY' / 'QUINLAN' / 'QUINN' under THE CLARK & WILKINS COMPANY ad; the foot is the HORTON'S ICE CREAM ad with no folio visible",
    "method": "agent-read",
    "confidence": "low",
    "attestation": "illegible",
    "position": "foot",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "not visible"
+   "note": "CORRECTS an earlier strip read: the listing runs on to leaf 1047 (part 3 opens at 1022, so this is p.1021 by sequence); found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23"
   },
   "start_page": {
    "value": 517,
@@ -370,9 +370,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "start_leaf": 9,
-  "end_leaf": 1045,
+  "end_leaf": 1047,
   "first_letter": "H",
   "last_letter": "Q",
   "letters_present": "HIJKLMNOPQ",
@@ -387,9 +387,9 @@
    "quote": "Hagedorn-M. n Co milbj 200 Mb av R1..I"
   },
   "end": {
-   "leaf": 1045,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$1045/full/!1400,1400/0/default.jpg",
-   "quote": "Quieley A Rich watchman b220 E32d"
+   "leaf": 1047,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p2trow$1047/full/!1400,1400/0/default.jpg",
+   "quote": "Quinn Alice wid Thos h227 ESOth"
   },
   "sections": [
    {
@@ -538,6 +538,16 @@
    ]
   },
   "skipped_votes": 8,
+  "voted_bounds": [
+   9,
+   1045
+  ],
+  "extended": {
+   "start": [],
+   "end": [
+    1047
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 9,
@@ -554,7 +564,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 523,
   "fitted_leaves": 0,
   "read_leaves": 0,

@@ -392,6 +392,70 @@ def trim_edges(run, edge_gap=EDGE_GAP, edge_min=EDGE_MIN):
     return [x for p in parts for x in p]
 
 
+# ---- edge extension ----------------------------------------------------------------------
+# The letter vote misses a listing's OUTERMOST pages, and it misses them systematically: a caption
+# page ("TROW GENERAL DIRECTORY ... ABBREVIATIONS", then the first A entries) or a last page that
+# is half advertising carries too few entry lines to vote. Measured against 292 listing edges read
+# off the page images on 2026-09-23: 16 of 142 starts were late (the Trow p1 caption page every
+# year 1903-1914, 1908BPL, 1911p1...) and 4 of 150 ends early. Extending each edge outward across
+# pages that still read as listing corrects them. 57 extension steps were opened at their IIIF
+# images: 54 right, and the 3 wrong were all a TITLE-and-abbreviations page (1922/23 p1 leaf 185,
+# 1917 leaves 210-211) taken for a caption page -- which is what CAPTION_SHARE exists to refuse.
+EDGE_KEY_RE = re.compile(r"^[*\u2022\"'`]*([A-Z])(?:[a-z']+|\s[A-Z&]\b|&|\.)")
+EXTEND_GAP = 3           # the next page may be this many leaves away (blank versos between)
+EXTEND_MIN = 5           # a page needs this many lines keyed on the edge letter...
+EXTEND_SHARE = 0.25      # ...making up this share of its keyed lines
+# ...or, at a START only, be a caption page ("DIRECTORY" in its first 12 lines) above this share.
+# The margin is narrow and measured: title pages 0.049-0.083, the weakest real caption page
+# (trowsgeneraldir1905p1trow leaf 117, 5 of 50) 0.100.
+CAPTION_SHARE = 0.09
+
+
+def edge_page(lines):
+    """-> (keys, is_caption) for one page's line texts. The key admits what FIRST_WORD_RE
+    refuses and a listing's first page is full of: corporate names (`A A Automatic Mfg Co`,
+    `A&B`) and initials. ALL-CAPS lines never key -- they are headings and banners."""
+    keys = [m.group(1) for t in lines if (m := EDGE_KEY_RE.match(t.strip())) and not t.isupper()]
+    return keys, any("DIRECTORY" in t.upper() for t in lines[:12])
+
+
+def extend_edges(start, end, first_letter, last_letter, pages):
+    """-> (start, end, added_at_start, added_at_end). `pages` = {leaf: [line texts]} for the
+    TEXT leaves around both edges (blank leaves omitted)."""
+    def listingish(leaf, letter, at_start):
+        keys, caption = edge_page(pages[leaf])
+        k = keys.count(letter)
+        share = k / max(len(keys), 1)
+        # caption first: a caption page is where the listing BEGINS, however well it scores
+        if at_start and caption and k >= EXTEND_MIN and share >= CAPTION_SHARE:
+            return "caption"
+        if k >= EXTEND_MIN and share >= EXTEND_SHARE:
+            return "listing"
+        return None
+
+    added = {"start": [], "end": []}
+    leaves = sorted(pages)
+    for side, edge, letter in (("start", start, first_letter), ("end", end, last_letter)):
+        cur = edge
+        while True:
+            nxt = ([x for x in leaves if x < cur][-1:] if side == "start"
+                   else [x for x in leaves if x > cur][:1])
+            if not nxt or abs(nxt[0] - cur) > EXTEND_GAP:
+                break
+            kind = listingish(nxt[0], letter, side == "start")
+            if not kind:
+                break
+            cur = nxt[0]
+            added[side].append(cur)
+            if kind == "caption":          # nothing before a caption page is the listing
+                break
+        if side == "start":
+            start = cur
+        else:
+            end = cur
+    return start, end, added["start"], added["end"]
+
+
 def detect(letters, n_leaves, source, min_share=0.40, gap=6, interior="keep", params=None):
     """-> (result, block_map, kept) for a {leaf: (letter, share, n)} map, or (None, ...) when no
     alphabetical structure was found. The whole analysis, with no printing -- `main` and
@@ -534,6 +598,22 @@ def _self_test():
     assert len(got) == 1 and got[0][0] == 100 and got[0][-1] == 220, [(g[0], g[-1]) for g in got]
     # ...but a COMPLETE alphabet followed by another stays two (1856BPL's two districts)
     assert len(alphabets(two)) == 2
+
+    # extend_edges: a caption page before the first voting leaf, a short tail page after
+    body = ["Abbott John h 12 Pine"] * 20
+    pages = {7: ["TROW GENERAL DIRECTORY", "ABBREVIATIONS"] + ["x y"] * 40 + ["Aaron A h 1 B"] * 6,
+             5: ["POLK'S TROW'S NEW YORK CITY DIRECTORY", "LIST OF ABBREVIATIONS"]
+                + ["Alley al", "Avenue av"] * 3 + ["Bway Broadway"] * 100,    # a TITLE page
+             9: body, 11: body,
+             13: ["Zabel J h 4 Oak"] * 8 + ["PIANOS", "Kindling wood"] * 3,
+             15: ["INDEX TO ADVERTISEMENTS"] + ["Smith & Co page 4"] * 30}
+    got = extend_edges(9, 11, "A", "Z", pages)
+    assert got == (7, 13, [7], [13]), got
+    title_only = {k: v for k, v in pages.items() if k != 7}
+    assert extend_edges(9, 11, "A", "Z", title_only)[0] == 9, \
+        "a title-and-abbreviations page is refused (share under CAPTION_SHARE)"
+    assert extend_edges(9, 11, "A", "Z", {9: body, 11: body, 30: body})[1] == 11, \
+        "too far away to be the next page"
 
     res, _bm, _k = detect(two, 500, "test")
     assert (res["start_leaf"], res["end_leaf"]) == (100, 178), res["start_leaf"]

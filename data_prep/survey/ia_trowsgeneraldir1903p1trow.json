@@ -63,24 +63,23 @@
    "confidence": "high"
   },
   "start_page": {
-   "value": 18,
-   "leaf": 33,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$33/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$33/full/!1400,1400/0/default.jpg",
+   "value": null,
+   "leaf": 31,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$31/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$31/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'AARONS 18 ABEL' under the COMMERCIAL DETECTIVE BUREAU ad; entries 'Abbenseth Elizabeth' ... 'Abbott Jos H'",
+   "quote": "caption page 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX ... NOTICE ... ABBREVIATIONS', then the first A entries; the foot shows the EAST RIVER STEAM KINDLING WOOD ad, with a '2' signature above it and the folio falls below the scanned area",
    "method": "agent-read",
-   "confidence": "medium",
-   "attestation": "read",
-   "position": "head",
-   "edge_confirmed": false,
+   "confidence": "low",
+   "attestation": "illegible",
+   "position": "foot",
+   "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "not the listing start: the caption page 'TROW GENERAL DIRECTORY ... MANHATTAN AND BRONX' is leaf 31 (p.17), as on every Trow p1 1903-1914",
-   "page_offset": 15,
+   "note": "the listing's caption page, found by edge extension and confirmed on the full-page image 2026-09-23; the next leaf prints 18; page 17 by sequence, not read",
    "margin_fit_said": {
-    "value": 18,
-    "leaf": 33,
-    "page_offset": 15,
+    "value": 17,
+    "leaf": 31,
+    "page_offset": 14,
     "confidence": "low",
     "attestation": "inferred",
     "method": "hocr-geometry"
@@ -390,8 +389,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 33,
+  "code_at": "3528867-dirty",
+  "start_leaf": 31,
   "end_leaf": 1155,
   "first_letter": "A",
   "last_letter": "H",
@@ -402,9 +401,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 33,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$33/full/!1400,1400/0/default.jpg",
-   "quote": "Aarons Alfd E h 200 W 70th"
+   "leaf": 31,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$31/full/!1400,1400/0/default.jpg",
+   "quote": "Alex"
   },
   "end": {
    "leaf": 1155,
@@ -530,6 +529,16 @@
    ]
   },
   "skipped_votes": 0,
+  "voted_bounds": [
+   33,
+   1155
+  ],
+  "extended": {
+   "start": [
+    31
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 33,
@@ -546,7 +555,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 577,
   "fitted_leaves": 567,
   "read_leaves": 211,

@@ -55,19 +55,20 @@
    "confidence": "medium"
   },
   "start_page": {
-   "value": null,
-   "leaf": 49,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$49/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$49/full/!1400,1400/0/default.jpg",
+   "value": 17,
+   "leaf": 47,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$47/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$47/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'AARON' / 'ABATE' / 'ABBOTT' under the NATIONAL METER CO. ad; no folio visible below the Waterman's ad",
+   "quote": "caption page 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX ... NOTICE ... ABBREVIATIONS', then the first A entries; folio '17' centred at foot below the CAREFUL CARPET CLEANING Co. ad",
    "method": "agent-read",
-   "confidence": "low",
-   "attestation": "unprinted",
-   "position": null,
-   "edge_confirmed": false,
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "not the listing start: the caption page is leaf 47"
+   "note": "the listing's caption page, found by edge extension and confirmed on the full-page image 2026-09-23; the next leaf prints 18",
+   "page_offset": 30
   },
   "end_page": {
    "value": null,
@@ -372,8 +373,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 49,
+  "code_at": "3528867-dirty",
+  "start_leaf": 47,
   "end_leaf": 1307,
   "first_letter": "A",
   "last_letter": "H",
@@ -384,9 +385,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 49,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$49/full/!1400,1400/0/default.jpg",
-   "quote": "Aaronberg Harry h66 W117th"
+   "leaf": 47,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1912p1trow$47/full/!1400,1400/0/default.jpg",
+   "quote": "Alex"
   },
   "end": {
    "leaf": 1307,
@@ -512,6 +513,16 @@
    ]
   },
   "skipped_votes": 6,
+  "voted_bounds": [
+   49,
+   1307
+  ],
+  "extended": {
+   "start": [
+    47
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 49,
@@ -528,7 +539,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 651,
   "fitted_leaves": 55,
   "read_leaves": 13,

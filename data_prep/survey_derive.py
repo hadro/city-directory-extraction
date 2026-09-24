@@ -84,8 +84,8 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 sys.path.insert(0, str(HERE))
 
-from detect_listing_bounds import (FIRST_WORD_RE, detect, leaf_letters_from_dump,  # noqa: E402
-                                   leaf_letters_from_jsonl)
+from detect_listing_bounds import (FIRST_WORD_RE, detect, extend_edges,  # noqa: E402
+                                   leaf_letters_from_dump, leaf_letters_from_jsonl)
 from ia_volume_to_jsonl import words_to_lines  # noqa: E402
 from survey_frontmatter import page_image  # noqa: E402
 from survey_folios import compare, fit, folio_token, ia_read, load as load_folios  # noqa: E402
@@ -97,6 +97,22 @@ SPARSE = 0.20
 EDGE_TOL = 2
 SMALL_LISTING = 0.10    # a listing spanning less of the volume than this is not its directory
 SEG_MIN_READ = 10       # a page claim is `high` only from a sequence read on this many leaves
+
+
+EDGE_WINDOW = 40         # leaves either side of each voted edge that extension may reach
+
+
+def edge_pages(dump_path: Path, start: int, end: int) -> dict:
+    """{leaf: [line texts]} for text leaves within EDGE_WINDOW of either edge."""
+    out = {}
+    with gzip.open(dump_path, "rt", encoding="utf-8") as fh:
+        for line in fh:
+            rec = json.loads(line)
+            leaf = rec["leaf"]
+            if rec["chars"] >= 50 and (abs(leaf - start) <= EDGE_WINDOW
+                                       or abs(leaf - end) <= EDGE_WINDOW):
+                out[leaf] = [t for _b, t in words_to_lines(rec["lines"])]
+    return out
 
 
 def edge_quote(dump_path: Path, leaf: int, letter: str, last: bool) -> str | None:
@@ -128,13 +144,20 @@ def bounds(v: dict) -> dict:
         return {**out, "flags": ["no-structure"]}
     x, _bm, _kept = detect(leaf_letters_from_jsonl(lines, MIN_LINES), n_leaves, "lines")
 
-    s, e = res["start_leaf"], res["end_leaf"]
     main = next(sec for sec in res["sections"] if sec["is_listing"])
-    density = main["voting_leaves"] / (e - s + 1)
+    # Pull each edge out across caption / tail pages the vote cannot see (detect_listing_bounds
+    # .extend_edges, measured on 292 image-read edges). The voted bounds are kept alongside.
+    voted = (res["start_leaf"], res["end_leaf"])
+    s, e, add_s, add_e = extend_edges(voted[0], voted[1], main["first_letter"],
+                                      main["last_letter"],
+                                      edge_pages(words, voted[0], voted[1]))
+    res["start_leaf"], res["end_leaf"] = s, e
+    density = main["voting_leaves"] / (voted[1] - voted[0] + 1)
     flags = []
     if density < SPARSE:
         flags.append("sparse")
-    if x is None or abs(x["start_leaf"] - s) > EDGE_TOL or abs(x["end_leaf"] - e) > EDGE_TOL:
+    if (x is None or abs(x["start_leaf"] - voted[0]) > EDGE_TOL
+            or abs(x["end_leaf"] - voted[1]) > EDGE_TOL):
         flags.append("edge-disagreement")
     if len(res["sections"]) > 1:
         flags.append("multi-section")
@@ -162,6 +185,8 @@ def bounds(v: dict) -> dict:
         "letter_blocks": {L: [b["start_leaf"], b["end_leaf"], b["leaves"]]
                           for L, b in sorted(res["blocks"].items())},
         "skipped_votes": len(res["skipped_votes"]),
+        "voted_bounds": list(voted),
+        "extended": {"start": add_s, "end": add_e},
         "cross_check": ({"source": "lines", "start_leaf": x["start_leaf"],
                          "end_leaf": x["end_leaf"]} if x else {"source": "lines", "none": True}),
         "params": res["params"],
@@ -331,8 +356,23 @@ def main(argv=None) -> int:
                 # these once someone has LOOKED: an agent-read page claim (survey_readpackets.py
                 # --record-pages) outranks the fit, exactly as a read outranks an hOCR regex in
                 # survey_frontmatter.merge_book()
-                if (book.get(key) or {}).get("method") == "agent-read":
-                    continue
+                # ...but a read speaks only for the leaf it read. One that CONFIRMED an edge
+                # still wins; one that said "not the edge", or that sits on a leaf the bounds
+                # have since moved away from, gives way, and is kept under superseded_read.
+                prior = book.get(key) or {}
+                edge_leaf = (doc.get("listing") or {}).get(
+                    "start_leaf" if key == "start_page" else "end_leaf")
+                if prior.get("method") == "agent-read":
+                    if prior.get("edge_confirmed") or prior.get("leaf") == edge_leaf:
+                        continue
+                    if key in claims:
+                        claims[key]["superseded_read"] = prior
+                    else:
+                        # a stale "not the edge" read with nothing to replace it: set it aside
+                        # rather than leave it standing as the volume's answer
+                        book.setdefault("_superseded_page_reads", []).append({key: prior})
+                        del book[key]
+                        continue
                 if key in claims:
                     book[key] = claims[key]
                 elif (book.get(key) or {}).get("method") == "hocr-geometry":

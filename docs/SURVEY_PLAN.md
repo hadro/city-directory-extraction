@@ -941,8 +941,10 @@ human values (micro_IABROOKLYN_0005 start 5, rode 25, doggett1845 13, hearnes185
 merely equalled what the fit had said, and all four are consistent with the page sequence.
 
 Found in passing:
-- **Pages that fall between parts:** Brooklyn 1912 p.1154, Trow 1904 p.1105, 1910 pp.565–568,
-  1922/23 pp.1025–1026 are in neither part's scan.
+- **Pages that fall between parts:** Trow 1904 p.1105 and 1910 pp.566–567 are in neither part's
+  scan. *(This line first also listed Brooklyn 1912 p.1154 and Trow 1922/23 pp.1025–1026. They are
+  there after all: p3's leaf 9 prints 1154 and 1922/23 p2's leaf 7 prints 1025. The strip read had
+  taken the second listing page for the first. See "Edge extension" below.)*
 - **Two-page spreads on one frame** in the microfilm set (0012, 0015, 0019, 0021, 0033, 0034,
   0040). The leaf holds two folios, and `end_page` is the right-hand one.
 - **Roman-numbered appendices** close two listings (micro_IABROOKLYN_0025 `LVI`, 0027 `IX`), so
@@ -960,6 +962,34 @@ Found in passing:
 **Written 2026-09-23 (hadro's decision):** 137 cells, comprising 127 fills (77 `end_page`, 25 `start_page`,
 25 `page_offset`), the 6 corrections above, and 4 retractions where the true first page prints no
 folio. The ledger holds 230 survey-written page cells.
+
+#### Edge extension (2026-09-23): the caption-page miss fixed at the source
+
+`detect_listing_bounds.extend_edges()` pulls each listing edge outward across pages that still read
+as listing: ≥5 lines keyed on the edge letter at ≥25% share, within 3 leaves. At a start it also
+takes a **caption page** ("DIRECTORY" in its first 12 lines) at ≥9% share, and stops there. The key
+admits what the sort-key vote refuses and an opening page is full of: `A A Automatic Mfg Co`, `A&B`,
+initials. `listing.voted_bounds` keeps the vote's answer alongside.
+
+57 extension steps across the corpus were opened at their full-page IIIF images: **54 right, 3
+wrong, and the 3 were all a title-and-abbreviations page** (1922/23 p1 leaf 185, 1917 leaves 210–211,
+at 0.049–0.083 share) taken for a caption page. The weakest genuine caption page (1905p1 leaf 117) is
+at 0.100, so the floor is 0.09, a narrow margin. Against the 292 image-checked edges, exact starts
+went **126 → 136 / 142**.
+
+⚠️ **The ground truth was wrong more often than the extension.** Of the 14 edges where they
+disagreed, 9 were my own strip reads calling an edge "confirmed" without seeing the next page:
+1856BPL ends on p.338, not 337 (the Z section is on p.338); 3818long on 346, not 345; Trow 1910 p1
+on 565, not 564; the 1912 p3, 1922/23 p2, 1907 p2 and 1910 p2 starts are each a page earlier. **A
+strip of one leaf cannot confirm an edge; only the neighbour can.** The corrected reads cite the
+full-page image. The remaining misses are real detector limits: `1903p1geor` and `c19031geor` end one
+page short on thin OCR, `micro_0028` misses its A section, and `micro_0033` starts two pages late.
+
+Retraction is now one rule: **a ledgered cell whose current claim no longer supports it is
+cleared**, and refilled on the same run if the current claim is CSV-grade. That also covers an edge
+that moved (micro_IABROOKLYN_0004 had 47 from leaf 41, but the listing runs on to leaf 42, whose folio
+is illegible, so the cell is cleared). `survey_derive.py pages` sets aside a read that said "not the
+edge" once the edge has moved.
 
 Why so many `none` on `start_page`: a listing's opening page often prints no folio (caption title,
 legend). For 39 volumes the first read is 1–3 leaves after the start, and the rule above forbids

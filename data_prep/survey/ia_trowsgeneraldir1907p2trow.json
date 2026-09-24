@@ -86,19 +86,20 @@
    "note": "Title page, librarian's red 'pt. 2'. GENERAL (residential) directory -- the contrast with the 1913 rows, which are the Trow BUSINESS directory under the same catalog title. Textbook year_covered/year_published split: the volume is FOR the year ending in 1907 and was copyrighted in 1906, which is the 'published the autumn before their nominal year' pattern SURVEY_PLAN.md describes."
   },
   "start_page": {
-   "value": null,
-   "leaf": 11,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$11/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$11/full/!1400,1400/0/default.jpg",
+   "value": 565,
+   "leaf": 9,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$9/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$9/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'GOODRICH' / 'GOODWIN' / 'GOODWIN' under the Thomas Dimond ad; the folio below the SAMWICK DETECTIVE BUREAU ad reads '5?6', blurred",
+   "quote": "guide heads 'GOODMAN' / 'GOODMAN' / 'GOODMAN' under the FRANK E. CAMPBELL ad (stamped 2071344); folio '565' at foot below the NEWCOME'S DETECTIVE AGENCY ad",
    "method": "agent-read",
-   "confidence": "low",
-   "attestation": "illegible",
+   "confidence": "high",
+   "attestation": "read",
    "position": "foot",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "illegible middle digit (perhaps 566)"
+   "note": "CORRECTS an earlier strip read: leaf 11 is the second listing page; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23",
+   "page_offset": -556
   },
   "end_page": {
    "value": null,
@@ -431,8 +432,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 11,
+  "code_at": "3528867-dirty",
+  "start_leaf": 9,
   "end_leaf": 1341,
   "first_letter": "G",
   "last_letter": "R",
@@ -443,9 +444,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 11,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$11/full/!1400,1400/0/default.jpg",
-   "quote": "Greene av Bklyn"
+   "leaf": 9,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1907p2trow$9/full/!1400,1400/0/default.jpg",
+   "quote": "Goodman-ltelchman Co auction 10 Walker"
   },
   "end": {
    "leaf": 1341,
@@ -627,6 +628,16 @@
    ]
   },
   "skipped_votes": 2,
+  "voted_bounds": [
+   11,
+   1341
+  ],
+  "extended": {
+   "start": [
+    9
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 9,
@@ -643,7 +654,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 668,
   "fitted_leaves": 0,
   "read_leaves": 0,

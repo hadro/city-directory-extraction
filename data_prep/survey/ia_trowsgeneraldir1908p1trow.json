@@ -73,20 +73,19 @@
    "confidence": "medium"
   },
   "start_page": {
-   "value": 18,
-   "leaf": 113,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$113/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$113/full/!1400,1400/0/default.jpg",
+   "value": null,
+   "leaf": 111,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$111/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$111/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'AARON' / 'ABBATE' / 'ABBOTT' under the ALCOHOL ad; folio '18' at foot",
+   "quote": "caption page 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX ... NOTICE ... ABBREVIATIONS', then the first A entries; the foot shows the CAREFUL CARPET CLEANING Co. ad and the folio falls below the scanned area",
    "method": "agent-read",
-   "confidence": "medium",
-   "attestation": "read",
+   "confidence": "low",
+   "attestation": "illegible",
    "position": "foot",
-   "edge_confirmed": false,
+   "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "not the listing start: the caption page is leaf 111 (p.17)",
-   "page_offset": 95
+   "note": "the listing's caption page, found by edge extension and confirmed on the full-page image 2026-09-23; the next leaf prints 18; page 17 by sequence, not read"
   },
   "end_page": {
    "value": 486,
@@ -392,8 +391,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 113,
+  "code_at": "3528867-dirty",
+  "start_leaf": 111,
   "end_leaf": 1059,
   "first_letter": "A",
   "last_letter": "F",
@@ -404,9 +403,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 113,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$113/full/!1400,1400/0/default.jpg",
-   "quote": "Aarons Abram stencils 16% University pi"
+   "leaf": 111,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1908p1trow$111/full/!1400,1400/0/default.jpg",
+   "quote": "Alex ."
   },
   "end": {
    "leaf": 1059,
@@ -504,6 +503,16 @@
    ]
   },
   "skipped_votes": 0,
+  "voted_bounds": [
+   113,
+   1059
+  ],
+  "extended": {
+   "start": [
+    111
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 113,
@@ -520,7 +529,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 522,
   "fitted_leaves": 445,
   "read_leaves": 113,

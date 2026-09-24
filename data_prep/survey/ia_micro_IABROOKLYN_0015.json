@@ -75,21 +75,6 @@
    "gloss_lines": 0,
    "legend_location": "inline-at-listing-head"
   },
-  "start_page": {
-   "value": null,
-   "leaf": 22,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$22/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$22/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "a two-page spread '32 BROOKLYN DIRECTORY.' / 'BROOKLYN DIRECTORY. 33' with entries 'Alcorn William' ... 'Applegate Lewis' -- mid-A, under running heads",
-   "method": "agent-read",
-   "confidence": "low",
-   "attestation": "unprinted",
-   "position": null,
-   "edge_confirmed": false,
-   "read_date": "2026-09-23",
-   "note": "not the listing start: the listing opens earlier (leaf 21 votes A)"
-  },
   "end_page": {
    "value": 145,
    "leaf": 80,
@@ -105,7 +90,26 @@
    "read_date": "2026-09-23",
    "note": "spread frame: end_page is the right page",
    "page_offset": -65
-  }
+  },
+  "_superseded_page_reads": [
+   {
+    "start_page": {
+     "value": null,
+     "leaf": 22,
+     "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$22/canvas",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$22/full/!1400,1400/0/default.jpg",
+     "evidence_type": "folio",
+     "quote": "a two-page spread '32 BROOKLYN DIRECTORY.' / 'BROOKLYN DIRECTORY. 33' with entries 'Alcorn William' ... 'Applegate Lewis' -- mid-A, under running heads",
+     "method": "agent-read",
+     "confidence": "low",
+     "attestation": "unprinted",
+     "position": null,
+     "edge_confirmed": false,
+     "read_date": "2026-09-23",
+     "note": "not the listing start: the listing opens earlier (leaf 21 votes A)"
+    }
+   }
+  ]
  },
  "survey_status": "frontmatter-done",
  "derivatives": {
@@ -396,8 +400,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 22,
+  "code_at": "3528867-dirty",
+  "start_leaf": 21,
   "end_leaf": 80,
   "first_letter": "A",
   "last_letter": "W",
@@ -406,9 +410,9 @@
   "voting_density": 0.932,
   "flags": [],
   "start": {
-   "leaf": 22,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$22/full/!1400,1400/0/default.jpg",
-   "quote": "Alcorn William, tailor Main n James"
+   "leaf": 21,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$21/full/!1400,1400/0/default.jpg",
+   "quote": "Abbott Daniel, sales stable Water n Main, h25"
   },
   "end": {
    "leaf": 80,
@@ -540,6 +544,16 @@
    ]
   },
   "skipped_votes": 1,
+  "voted_bounds": [
+   22,
+   80
+  ],
+  "extended": {
+   "start": [
+    21
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 22,
@@ -556,7 +570,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 78,
   "fitted_leaves": 0,
   "read_leaves": 0,

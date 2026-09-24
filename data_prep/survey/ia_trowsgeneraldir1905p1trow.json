@@ -63,21 +63,28 @@
    "confidence": "high"
   },
   "start_page": {
-   "value": 18,
-   "leaf": 119,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1905p1trow$119/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p1trow$119/full/!1400,1400/0/default.jpg",
+   "value": 17,
+   "leaf": 117,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1905p1trow$117/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p1trow$117/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'18' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "medium",
+   "quote": "caption page 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX ... NOTICE ... ABBREVIATIONS', then the first A entries; folio '17' centred at foot below the CAREFUL CARPET CLEANING Co. ad",
+   "method": "agent-read",
+   "confidence": "high",
    "attestation": "read",
-   "ia_page": null,
-   "page_offset": 101,
-   "listing_flags": [
-    "edge-disagreement"
-   ],
-   "doubts": []
+   "position": "foot",
+   "edge_confirmed": true,
+   "read_date": "2026-09-23",
+   "note": "the listing's caption page, found by edge extension and confirmed on the full-page image 2026-09-23; the next leaf prints 18",
+   "page_offset": 100,
+   "margin_fit_said": {
+    "value": 17,
+    "leaf": 117,
+    "page_offset": 100,
+    "confidence": "medium",
+    "attestation": "read",
+    "method": "hocr-geometry"
+   }
   }
  },
  "survey_status": "frontmatter-done",
@@ -366,8 +373,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 119,
+  "code_at": "3528867-dirty",
+  "start_leaf": 117,
   "end_leaf": 1189,
   "first_letter": "A",
   "last_letter": "H",
@@ -379,9 +386,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 119,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p1trow$119/full/!1400,1400/0/default.jpg",
-   "quote": "Aaronofsky Frank grocer 218 Madison"
+   "leaf": 117,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p1trow$117/full/!1400,1400/0/default.jpg",
+   "quote": "Alai"
   },
   "end": {
    "leaf": 1189,
@@ -507,6 +514,16 @@
    ]
   },
   "skipped_votes": 0,
+  "voted_bounds": [
+   119,
+   1189
+  ],
+  "extended": {
+   "start": [
+    117
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 119,
@@ -523,7 +540,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 590,
   "fitted_leaves": 528,
   "read_leaves": 139,

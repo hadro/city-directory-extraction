@@ -42,19 +42,19 @@
    }
   },
   "end_page": {
-   "value": 337,
-   "leaf": 389,
-   "canvas": "https://iiif.archive.org/iiif/1856BPL$389/canvas",
-   "image": "https://iiif.archive.org/iiif/1856BPL$389/full/!1400,1400/0/default.jpg",
+   "value": 338,
+   "leaf": 390,
+   "canvas": "https://iiif.archive.org/iiif/1856BPL$390/canvas",
+   "image": "https://iiif.archive.org/iiif/1856BPL$390/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "running head 'WESTERN DISTRICT. 337'; last entry 'Young John (Craft & Young), h. 145 Adams'",
+   "quote": "running head '338 BROOKLYN DIRECTORY: WESTERN DISTRICT.'; the Z section: 'Z.' 'Zang Joseph, hotel' ... 'Zwergius Julius, tea, 125 Pearl'",
    "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
    "position": "head",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "the '22' at the foot is a signature mark (337 = 16x21+1)",
+   "note": "CORRECTS an earlier strip read: leaf 389 (p.337) ends in Young, and the Z entries follow on p.338; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23",
    "page_offset": 52,
    "margin_fit_said": {
     "value": 337,
@@ -357,9 +357,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "start_leaf": 65,
-  "end_leaf": 389,
+  "end_leaf": 390,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTVWY",
@@ -374,9 +374,9 @@
    "quote": "Abberley Richard, shoemaker, 170 Hudson"
   },
   "end": {
-   "leaf": 389,
-   "image": "https://iiif.archive.org/iiif/1856BPL$389/full/!1400,1400/0/default.jpg",
-   "quote": "Young John (Craft # Young), h. 145 Adams"
+   "leaf": 390,
+   "image": "https://iiif.archive.org/iiif/1856BPL$390/full/!1400,1400/0/default.jpg",
+   "quote": "Younie James, plasterer, h. 157J Schermer-"
   },
   "sections": [
    {
@@ -527,6 +527,16 @@
    ]
   },
   "skipped_votes": 3,
+  "voted_bounds": [
+   65,
+   389
+  ],
+  "extended": {
+   "start": [],
+   "end": [
+    390
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 65,
@@ -543,7 +553,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 635,
   "fitted_leaves": 574,
   "read_leaves": 458,

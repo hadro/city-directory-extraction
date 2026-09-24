@@ -119,19 +119,20 @@
    "note": "illegible: faint (consistent with 516, since part 2 opens at 517)"
   },
   "start_page": {
-   "value": null,
-   "leaf": 27,
-   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1914p1trow$27/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p1trow$27/full/!1400,1400/0/default.jpg",
+   "value": 17,
+   "leaf": 25,
+   "canvas": "https://iiif.archive.org/iiif/trowsgeneraldir1914p1trow$25/canvas",
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p1trow$25/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'AARON' / 'AARONSON' / 'ABBEY' / 'ABBOTT' under the Coca-Cola ad; '18' at foot [the foot '18' is not a folio]",
+   "quote": "caption page 'TROW GENERAL DIRECTORY OF THE BOROUGHS OF MANHATTAN AND BRONX ... NOTICE ... ABBREVIATIONS', then the first A entries; folio '17' centred at foot below the CAREFUL CARPET CLEANING Co. ad",
    "method": "agent-read",
-   "confidence": "low",
-   "attestation": "unprinted",
-   "position": null,
-   "edge_confirmed": false,
+   "confidence": "high",
+   "attestation": "read",
+   "position": "foot",
+   "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "unprinted: the '18' at the foot does not continue into the next text leaves ([29, 31, 33, 35]: [[], [], [], [413]]) -- a printer's signature mark or a partial read"
+   "note": "the listing's caption page, found by edge extension and confirmed on the full-page image 2026-09-23; the next leaf prints 18",
+   "page_offset": 8
   }
  },
  "survey_status": "frontmatter-done",
@@ -432,8 +433,8 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
-  "start_leaf": 27,
+  "code_at": "3528867-dirty",
+  "start_leaf": 25,
   "end_leaf": 1029,
   "first_letter": "A",
   "last_letter": "H",
@@ -444,9 +445,9 @@
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 27,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p1trow$27/full/!1400,1400/0/default.jpg",
-   "quote": "Aaron's A A, Window Cleaning Co 52 E8th"
+   "leaf": 25,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1914p1trow$25/full/!1400,1400/0/default.jpg",
+   "quote": "Alex"
   },
   "end": {
    "leaf": 1029,
@@ -572,6 +573,16 @@
    ]
   },
   "skipped_votes": 7,
+  "voted_bounds": [
+   27,
+   1029
+  ],
+  "extended": {
+   "start": [
+    25
+   ],
+   "end": []
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 27,
@@ -588,7 +599,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 513,
   "fitted_leaves": 0,
   "read_leaves": 0,

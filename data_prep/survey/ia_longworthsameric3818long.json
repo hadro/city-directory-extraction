@@ -66,19 +66,19 @@
    }
   },
   "end_page": {
-   "value": 345,
-   "leaf": 357,
-   "canvas": "https://iiif.archive.org/iiif/longworthsameric3818long$357/canvas",
-   "image": "https://iiif.archive.org/iiif/longworthsameric3818long$357/full/!1400,1400/0/default.jpg",
+   "value": 346,
+   "leaf": 358,
+   "canvas": "https://iiif.archive.org/iiif/longworthsameric3818long$358/canvas",
+   "image": "https://iiif.archive.org/iiif/longworthsameric3818long$358/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "running head 'NEW-YORK DIRECTORY. 345'; last entries 'Young Philip' ... 'Young Robert, shoemaker'; 'H h' at foot is a signature",
+   "quote": "running head '346 LONGWORTH'S NEW-YORK DIRECTORY.'; 'Young Stephen' ... 'Z' ... 'Zuntz Judah', then ADDITIONAL NAMES and NURSES",
    "method": "agent-read",
    "confidence": "high",
    "attestation": "read",
    "position": "head",
    "edge_confirmed": true,
    "read_date": "2026-09-23",
-   "note": "",
+   "note": "CORRECTS an earlier strip read: leaf 357 (p.345) stops in Young; the Y-Z close is on p.346; found by edge extension (detect_listing_bounds.extend_edges) and confirmed on the full-page image, 2026-09-23",
    "page_offset": 12,
    "margin_fit_said": {
     "value": 345,
@@ -379,9 +379,9 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "start_leaf": 61,
-  "end_leaf": 357,
+  "end_leaf": 358,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
@@ -394,9 +394,9 @@
    "quote": "Abbot Robert, merchant 82 Chamber"
   },
   "end": {
-   "leaf": 357,
-   "image": "https://iiif.archive.org/iiif/longworthsameric3818long$357/full/!1400,1400/0/default.jpg",
-   "quote": "Young Robert, shoemaker 139 Chamber"
+   "leaf": 358,
+   "image": "https://iiif.archive.org/iiif/longworthsameric3818long$358/full/!1400,1400/0/default.jpg",
+   "quote": "Yronnet John, tobacconist Rhynders"
   },
   "sections": [
    {
@@ -533,6 +533,16 @@
    ]
   },
   "skipped_votes": 0,
+  "voted_bounds": [
+   61,
+   357
+  ],
+  "extended": {
+   "start": [],
+   "end": [
+    358
+   ]
+  },
   "cross_check": {
    "source": "lines",
    "start_leaf": 61,
@@ -549,7 +559,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-09-23",
-  "code_at": "7eb7124-dirty",
+  "code_at": "3528867-dirty",
   "content_leaves": 349,
   "fitted_leaves": 337,
   "read_leaves": 197,

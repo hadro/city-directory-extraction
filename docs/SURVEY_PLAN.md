@@ -991,6 +991,10 @@ that moved (micro_IABROOKLYN_0004 had 47 from leaf 41, but the listing runs on t
 is illegible, so the cell is cleared). `survey_derive.py pages` sets aside a read that said "not the
 edge" once the edge has moved.
 
+**Written 2026-09-23 (hadro's decision):** 22 cells, comprising 9 corrections, 1 clear (micro_IABROOKLYN_0004's end),
+and 12 fills (the Trow p1 caption pages' 17 for 1905, 1906, 1907, 1912 and 1914, and the 1907 p2
+start 565). The ledger holds 241 survey-written page cells.
+
 Why so many `none` on `start_page`: a listing's opening page often prints no folio (caption title,
 legend). For 39 volumes the first read is 1–3 leaves after the start, and the rule above forbids
 extrapolating it — **one image each settles them**, which is exactly the Phase-3 shape. 20

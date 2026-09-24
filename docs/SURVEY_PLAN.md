@@ -957,6 +957,10 @@ Found in passing:
   directory are not in the item.
 - `micro_IABROOKLYN_0028` is Hearnes' 1850–51, the same edition as `hearnesbrooklync1850unse`.
 
+**Written 2026-09-23 (hadro's decision):** 137 cells, comprising 127 fills (77 `end_page`, 25 `start_page`,
+25 `page_offset`), the 6 corrections above, and 4 retractions where the true first page prints no
+folio. The ledger holds 230 survey-written page cells.
+
 Why so many `none` on `start_page`: a listing's opening page often prints no folio (caption title,
 legend). For 39 volumes the first read is 1–3 leaves after the start, and the rule above forbids
 extrapolating it — **one image each settles them**, which is exactly the Phase-3 shape. 20

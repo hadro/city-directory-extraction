@@ -71,7 +71,10 @@ Two traps this encodes, both measured:
 
 **`start_page`, `end_page` and `page_offset` are survey-written since 2026-09-23**, conditionally:
 only from a Phase-2 claim (`survey_derive.py pages`, `method: hocr-geometry`) that is **read** off the
-cited leaf's own margin and graded **high**, and only into an empty cell. The claim, its leaf, the
+cited leaf's own margin and graded **high**, and only into an empty cell. Since the same day a
+claim read by eye off the IIIF image (`method: agent-read`) qualifies under the same guards, and it
+outranks the margin fit. A cell the survey wrote is recorded in `survey_written.json`, and only a
+cell recorded there can be cleared when a later read overrules its claim. The claim, its leaf, the
 folio as printed and the IIIF image are in the row's sidecar under `book_says`. `page_offset` is
 filled only from the same claim as its `start_page`, so a survey-filled row satisfies
 `start_page + page_offset == leaf of the first listing page`. Rows whose `page_offset` predates the

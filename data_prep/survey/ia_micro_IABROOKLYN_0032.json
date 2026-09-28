@@ -353,15 +353,30 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
    "year_tag": "1854/55",
-   "hocr_lines": 13878,
-   "wrap_joins": 762,
-   "candidates": 13116,
+   "hocr_lines": 13887,
+   "wrap_joins": 761,
+   "candidates": 13126,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 10089,
+    "mark_share": 0.0798,
+    "mode": 1.75,
+    "mode_pairs": 226,
+    "trough": 1.25,
+    "trough_pairs": 99,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 9,
+    "leaves": 1
+   },
    "kept": 9034,
-   "keep_rate": 0.6888,
+   "keep_rate": 0.6883,
    "dropped": {
-    "short": 2468,
-    "banner": 620,
-    "allcaps": 604,
+    "short": 2470,
+    "banner": 627,
+    "allcaps": 605,
     "bigtype": 336,
     "nonascii": 51,
     "pagenum": 3
@@ -387,8 +402,8 @@
     471,
     184
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 965293,
   "hocr_deleted": true,
@@ -887,8 +902,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -989,8 +1004,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0032_listing.jsonl.gz",
   "sections": [
    {

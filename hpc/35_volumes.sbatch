@@ -20,6 +20,11 @@
 # Resumable by construction: a chunk whose prediction file already holds as many records as the
 # chunk has lines is skipped, so re-submitting the same --array after a preemption or a
 # wall-clock kill redoes only what is missing. Records are YAML separated by a blank line.
+#
+# ...but only when the predictions were made from THIS chunk: each run writes the chunk's SHA-1
+# to <pred>.sha1, and a skip requires it to match. Restaged chunks keep their names (chunk_000
+# is chunk_000 in every staging), so without the check a second staging unpacked over the first
+# would keep run 1's predictions for run 2's lines -- same counts, silently misaligned.
 set -euo pipefail
 
 cd "${SLURM_SUBMIT_DIR:-$PWD}"
@@ -44,17 +49,20 @@ PRED="${IN%.jsonl}.preds_${RUN_NAME}.txt"
 echo "=== task $i | $IDENT | $CHUNK ($NLINES lines) | node $(hostname) | $(date) ==="
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
 
+SHA=$(sha1sum "$IN" | cut -d' ' -f1)
 have=0
 [ -f "$PRED" ] && have=$(python3 -c "import sys; t=open(sys.argv[1]).read().strip(); print(len(t.split('\n\n')) if t else 0)" "$PRED")
-if [ "$have" -ge "$NLINES" ]; then
-    echo "already complete ($have records) -- skipping"
+if [ "$have" -ge "$NLINES" ] && [ "$(cat "$PRED.sha1" 2>/dev/null)" = "$SHA" ]; then
+    echo "already complete ($have records, chunk sha1 matches) -- skipping"
     exit 0
 fi
+[ -f "$PRED" ] && echo "stale or partial predictions ($have records, chunk sha1 $SHA) -- redoing"
 
 start=$(date +%s)
 run_in_env "python eval/qwen_predict.py \
     --base-model '$MODEL_ID' --model '$ADAPTER' \
     --gold '$IN' --out '$PRED.partial' --target yaml --batch-size $BATCH"
 mv "$PRED.partial" "$PRED"
+echo "$SHA" > "$PRED.sha1"
 secs=$(( $(date +%s) - start ))
 echo "=== done: $NLINES lines in ${secs}s = $(python3 -c "print(round($NLINES/max($secs,1),2))") rows/s ==="

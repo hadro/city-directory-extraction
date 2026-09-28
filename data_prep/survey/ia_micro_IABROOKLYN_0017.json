@@ -349,11 +349,26 @@
   "status": "ok",
   "filtered": {
    "publisher_tag": "trow",
-   "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
+   "publisher_tag_note": "'leslie/chichester' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1840/41",
    "hocr_lines": 6673,
    "wrap_joins": 554,
    "candidates": 6119,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 5163,
+    "mark_share": 0.1152,
+    "mode": 1.25,
+    "mode_pairs": 78,
+    "trough": 1.0,
+    "trough_pairs": 85,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 4269,
    "keep_rate": 0.6977,
    "dropped": {
@@ -385,8 +400,8 @@
     258,
     192
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 478656,
   "hocr_deleted": true,
@@ -678,8 +693,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -753,8 +768,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0017_listing.jsonl.gz",
   "sections": [
    {

@@ -353,6 +353,21 @@
    "hocr_lines": 26997,
    "wrap_joins": 852,
    "candidates": 26145,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 24149,
+    "mark_share": 0.005,
+    "mode": 1.75,
+    "mode_pairs": 45,
+    "trough": 0.75,
+    "trough_pairs": 15,
+    "reason": "too few runovers to read a mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 22669,
    "keep_rate": 0.867,
    "dropped": {
@@ -384,8 +399,8 @@
     514,
     516
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 2028088,
   "hocr_deleted": true,
@@ -627,8 +642,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -970,8 +985,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/hearnesbrooklync1852unse_listing.jsonl.gz",
   "sections": [
    {

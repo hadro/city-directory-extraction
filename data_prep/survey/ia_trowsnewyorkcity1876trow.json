@@ -316,17 +316,31 @@
    "publisher_tag_note": null,
    "year_tag": "1876",
    "hocr_lines": 295962,
-   "wrap_joins": 4244,
-   "candidates": 291718,
-   "kept": 267374,
-   "keep_rate": 0.9165,
+   "wrap_joins": 28680,
+   "candidates": 267282,
+   "wrap_calibration": {
+    "indent_ratio": 1.75,
+    "calibrated": true,
+    "pairs": 264873,
+    "mark_share": 0.0066,
+    "mode": 2.0,
+    "mode_pairs": 13939,
+    "trough": 1.75,
+    "trough_pairs": 224,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 255844,
+   "keep_rate": 0.9572,
    "dropped": {
-    "short": 16107,
-    "allcaps": 4026,
-    "banner": 2663,
-    "bigtype": 1500,
-    "nonascii": 47,
-    "pagenum": 1
+    "allcaps": 3729,
+    "short": 3591,
+    "banner": 2589,
+    "bigtype": 1484,
+    "nonascii": 45
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -340,17 +354,17 @@
    "top_ad_leaves": [
     1305,
     1622,
-    1572,
     1269,
+    1572,
+    1614,
     1347,
-    1606,
     1621,
     1573,
-    1605,
-    1553
+    1606,
+    1599
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 22310946,
   "hocr_deleted": true,
@@ -765,8 +779,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -989,8 +1003,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/trowsnewyorkcity1876trow_listing.jsonl.gz",
   "sections": [
    {
@@ -999,11 +1013,11 @@
     "end_leaf": 1552
    }
   ],
-  "kept": 254696,
-  "dropped": 12678,
-  "kept_share": 0.9526,
+  "kept": 243542,
+  "dropped": 12302,
+  "kept_share": 0.9519,
   "kept_by_section": {
-   "listing": 254696
+   "listing": 243542
   }
  }
 }

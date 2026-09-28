@@ -328,6 +328,21 @@
    "hocr_lines": 143881,
    "wrap_joins": 17606,
    "candidates": 126275,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 105951,
+    "mark_share": 0.4545,
+    "mode": 1.5,
+    "mode_pairs": 5305,
+    "trough": 1.0,
+    "trough_pairs": 66,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 88477,
    "keep_rate": 0.7007,
    "dropped": {
@@ -363,8 +378,8 @@
     1083,
     31
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 8037549,
   "hocr_deleted": true,
@@ -621,8 +636,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -635,14 +650,26 @@
    {
     "kind": "index",
     "start_leaf": 23,
-    "end_leaf": 29,
+    "end_leaf": 27,
     "title": {
      "leaf": 23,
      "quote": "INDEX TO ADVERTISEMENTS",
      "image": "https://iiif.archive.org/iiif/brooklynnewyork1908p1geor$23/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 4,
+    "leaves": 3,
     "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 29,
+    "end_leaf": 29,
+    "title": {
+     "leaf": 29,
+     "quote": "Names too Late for Classification",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyork1908p1geor$29/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
    },
    {
     "kind": "listing",
@@ -669,25 +696,32 @@
   "kinds": [
    "front_matter",
    "index",
+   "late_names",
    "listing"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/brooklynnewyork1908p1geor_listing.jsonl.gz",
   "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 29,
+    "end_leaf": 29
+   },
    {
     "kind": "listing",
     "start_leaf": 31,
     "end_leaf": 1127
    }
   ],
-  "kept": 88085,
-  "dropped": 392,
-  "kept_share": 0.9956,
+  "kept": 88107,
+  "dropped": 370,
+  "kept_share": 0.9958,
   "kept_by_section": {
+   "late_names": 22,
    "listing": 88085
   }
  }

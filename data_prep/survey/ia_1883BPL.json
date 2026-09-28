@@ -341,17 +341,32 @@
    "publisher_tag_note": null,
    "year_tag": "1883",
    "hocr_lines": 242909,
-   "wrap_joins": 7030,
-   "candidates": 235879,
-   "kept": 201590,
-   "keep_rate": 0.8546,
+   "wrap_joins": 32806,
+   "candidates": 210103,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 207074,
+    "mark_share": 0.0179,
+    "mode": 2.0,
+    "mode_pairs": 22541,
+    "trough": 1.5,
+    "trough_pairs": 434,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 184924,
+   "keep_rate": 0.8802,
    "dropped": {
-    "short": 24563,
-    "allcaps": 4596,
-    "banner": 3566,
-    "bigtype": 1389,
-    "nonascii": 165,
-    "pagenum": 10
+    "short": 15980,
+    "allcaps": 4180,
+    "banner": 3306,
+    "bigtype": 1537,
+    "nonascii": 168,
+    "pagenum": 8
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -367,15 +382,15 @@
     1464,
     584,
     1055,
+    1578,
     1601,
     21,
-    1578,
     5,
     150,
-    583
+    6
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 15380049,
   "hocr_deleted": true,
@@ -759,8 +774,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -982,8 +997,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/1883BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -997,12 +1012,12 @@
     "end_leaf": 1345
    }
   ],
-  "kept": 162988,
-  "dropped": 38602,
-  "kept_share": 0.8085,
+  "kept": 147377,
+  "dropped": 37547,
+  "kept_share": 0.797,
   "kept_by_section": {
-   "late_names": 88,
-   "listing": 162900
+   "late_names": 79,
+   "listing": 147298
   }
  }
 }

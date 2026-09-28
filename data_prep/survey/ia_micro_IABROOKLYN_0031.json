@@ -359,6 +359,21 @@
    "hocr_lines": 11145,
    "wrap_joins": 1086,
    "candidates": 10059,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 7595,
+    "mark_share": 0.1489,
+    "mode": 1.25,
+    "mode_pairs": 126,
+    "trough": 1.0,
+    "trough_pairs": 147,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 5516,
    "keep_rate": 0.5484,
    "dropped": {
@@ -390,8 +405,8 @@
     78,
     310
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 697905,
   "hocr_deleted": true,
@@ -924,8 +939,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1060,8 +1075,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0031_listing.jsonl.gz",
   "sections": [
    {

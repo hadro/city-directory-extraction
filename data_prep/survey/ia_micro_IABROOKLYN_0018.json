@@ -354,16 +354,31 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'leslie' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1841/42",
-   "hocr_lines": 11056,
-   "wrap_joins": 782,
-   "candidates": 10274,
-   "kept": 7989,
-   "keep_rate": 0.7776,
+   "hocr_lines": 11070,
+   "wrap_joins": 783,
+   "candidates": 10287,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 9062,
+    "mark_share": 0.0759,
+    "mode": 1.75,
+    "mode_pairs": 121,
+    "trough": 1.25,
+    "trough_pairs": 101,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 14,
+    "leaves": 1
+   },
+   "kept": 7990,
+   "keep_rate": 0.7767,
    "dropped": {
-    "short": 988,
+    "short": 999,
     "allcaps": 548,
     "banner": 501,
-    "bigtype": 214,
+    "bigtype": 215,
     "nonascii": 32,
     "pagenum": 2
    },
@@ -388,8 +403,8 @@
     281,
     204
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 765921,
   "hocr_deleted": true,
@@ -644,8 +659,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -747,8 +762,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0018_listing.jsonl.gz",
   "sections": [
    {
@@ -762,12 +777,12 @@
     "end_leaf": 178
    }
   ],
-  "kept": 4934,
+  "kept": 4935,
   "dropped": 3055,
   "kept_share": 0.6176,
   "kept_by_section": {
    "late_names": 15,
-   "listing": 4919
+   "listing": 4920
   }
  }
 }

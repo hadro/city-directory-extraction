@@ -359,23 +359,38 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1858",
-   "hocr_lines": 19987,
-   "wrap_joins": 1119,
-   "candidates": 18868,
-   "kept": 10585,
-   "keep_rate": 0.561,
+   "hocr_lines": 20901,
+   "wrap_joins": 1088,
+   "candidates": 19813,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 12695,
+    "mark_share": 0.094,
+    "mode": 1.5,
+    "mode_pairs": 421,
+    "trough": 1.0,
+    "trough_pairs": 202,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 914,
+    "leaves": 41
+   },
+   "kept": 11088,
+   "keep_rate": 0.5596,
    "dropped": {
-    "short": 5219,
-    "banner": 1507,
-    "bigtype": 878,
-    "allcaps": 613,
+    "short": 5294,
+    "banner": 1840,
+    "bigtype": 914,
+    "allcaps": 611,
     "nonascii": 64,
     "pagenum": 2
    },
    "ditto_marks": [
     "\u00a9"
    ],
-   "ditto_applied": 80,
+   "ditto_applied": 78,
    "band": {
     "leaves_banded": 0,
     "head": 0,
@@ -395,8 +410,8 @@
     388,
     153
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 1388774,
   "hocr_deleted": true,
@@ -883,8 +898,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1068,8 +1083,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0039_listing.jsonl.gz",
   "sections": [
    {
@@ -1078,11 +1093,11 @@
     "end_leaf": 476
    }
   ],
-  "kept": 8717,
+  "kept": 9220,
   "dropped": 1868,
-  "kept_share": 0.8235,
+  "kept_share": 0.8315,
   "kept_by_section": {
-   "listing": 8717
+   "listing": 9220
   }
  }
 }

@@ -377,15 +377,30 @@
    "publisher_tag_note": null,
    "year_tag": "1847",
    "hocr_lines": 86284,
-   "wrap_joins": 881,
-   "candidates": 85403,
-   "kept": 77752,
-   "keep_rate": 0.9104,
+   "wrap_joins": 6023,
+   "candidates": 80261,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 78956,
+    "mark_share": 0.0071,
+    "mode": 2.0,
+    "mode_pairs": 3840,
+    "trough": 1.5,
+    "trough_pairs": 46,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 73919,
+   "keep_rate": 0.921,
    "dropped": {
-    "short": 5076,
-    "banner": 1565,
-    "allcaps": 973,
-    "bigtype": 31,
+    "short": 3829,
+    "banner": 1534,
+    "allcaps": 943,
+    "bigtype": 30,
     "nonascii": 6
    },
    "ditto_marks": [],
@@ -400,17 +415,17 @@
    "top_ad_leaves": [
     105,
     5,
-    20,
     480,
+    20,
     472,
-    507,
-    10,
-    106,
     4,
-    525
+    106,
+    476,
+    507,
+    10
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 6557473,
   "hocr_deleted": true,
@@ -654,8 +669,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -963,8 +978,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/doggettsnewyorkc1847dogg_listing.jsonl.gz",
   "sections": [
    {
@@ -978,12 +993,12 @@
     "end_leaf": 467
    }
   ],
-  "kept": 70758,
-  "dropped": 6994,
-  "kept_share": 0.91,
+  "kept": 67284,
+  "dropped": 6635,
+  "kept_share": 0.9102,
   "kept_by_section": {
-   "late_names": 149,
-   "listing": 70609
+   "late_names": 143,
+   "listing": 67141
   }
  }
 }

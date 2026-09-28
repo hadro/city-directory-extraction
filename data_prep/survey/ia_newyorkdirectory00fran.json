@@ -333,6 +333,21 @@
    "hocr_lines": 11472,
    "wrap_joins": 509,
    "candidates": 10963,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 7326,
+    "mark_share": 0.0174,
+    "mode": 1.25,
+    "mode_pairs": 67,
+    "trough": 0.75,
+    "trough_pairs": 34,
+    "reason": "too few runovers to read a mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 7105,
    "keep_rate": 0.6481,
    "dropped": {
@@ -364,8 +379,8 @@
     97,
     43
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 819852,
   "hocr_deleted": true,
@@ -568,8 +583,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -667,8 +682,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/newyorkdirectory00fran_listing.jsonl.gz",
   "sections": [
    {

@@ -293,6 +293,21 @@
    "hocr_lines": 123511,
    "wrap_joins": 5187,
    "candidates": 118324,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 103844,
+    "mark_share": 0.0397,
+    "mode": 1.25,
+    "mode_pairs": 3644,
+    "trough": 0.5,
+    "trough_pairs": 455,
+    "reason": "runover mode not isolated from the next-entry band"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 96140,
    "keep_rate": 0.8125,
    "dropped": {
@@ -324,8 +339,8 @@
     249,
     739
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 6599658,
   "hocr_deleted": true,
@@ -738,8 +753,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -879,8 +894,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": null,
   "sections": [
    {

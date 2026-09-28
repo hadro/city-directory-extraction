@@ -400,6 +400,21 @@
    "hocr_lines": 4940,
    "wrap_joins": 198,
    "candidates": 4742,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 4149,
+    "mark_share": 0.068,
+    "mode": 2.0,
+    "mode_pairs": 114,
+    "trough": 1.0,
+    "trough_pairs": 9,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 3926,
    "keep_rate": 0.8279,
    "dropped": {
@@ -432,9 +447,10 @@
     215,
     133
    ],
-   "filters_at": "02404bc-dirty",
-   "derived": "2026-09-22"
-  }
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
+  },
+  "words_gz_bytes": 410776
  },
  "listing": {
   "method": "letter-votes",
@@ -788,8 +804,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -829,8 +845,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/flushingnewyorkc00boyd_listing.jsonl.gz",
   "sections": [
    {

@@ -363,23 +363,37 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1837/38",
-   "hocr_lines": 3747,
+   "hocr_lines": 3807,
    "wrap_joins": 189,
-   "candidates": 3558,
-   "kept": 3124,
-   "keep_rate": 0.878,
+   "candidates": 3618,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 3341,
+    "mark_share": 0.083,
+    "mode": 2.25,
+    "mode_pairs": 26,
+    "trough": 1.75,
+    "trough_pairs": 16,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 60,
+    "leaves": 2
+   },
+   "kept": 3168,
+   "keep_rate": 0.8756,
    "dropped": {
-    "short": 205,
-    "bigtype": 104,
+    "short": 207,
+    "bigtype": 105,
+    "banner": 68,
     "allcaps": 66,
-    "banner": 55,
     "nonascii": 4
    },
    "ditto_marks": [
-    "*",
     "."
    ],
-   "ditto_applied": 42,
+   "ditto_applied": 26,
    "band": {
     "leaves_banded": 0,
     "head": 0,
@@ -399,8 +413,8 @@
     31,
     29
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 278912,
   "hocr_deleted": true,
@@ -632,8 +646,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -669,8 +683,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0014_listing.jsonl.gz",
   "sections": [
    {
@@ -679,11 +693,11 @@
     "end_leaf": 86
    }
   ],
-  "kept": 2620,
+  "kept": 2664,
   "dropped": 504,
-  "kept_share": 0.8387,
+  "kept_share": 0.8409,
   "kept_by_section": {
-   "listing": 2620
+   "listing": 2664
   }
  }
 }

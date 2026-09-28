@@ -28,6 +28,10 @@ import re
 
 TOP_LINES = 10           # display lines searched for a title
 CAPS_SHARE = 0.6         # a title line is mostly capitals
+TITLE_WORDS = 6          # ...or a short line of capitalised words
+# words a title-case heading leaves in lower case: "Names too Late for Classification"
+SMALL_WORDS = {"a", "an", "and", "at", "by", "for", "in", "of", "on", "the", "to", "too"}
+CONTENTS_RX = re.compile(r"(?:[-.·]{2,}|\s-)\s*\d+\s*$")   # a contents line ends in its page
 
 # (kind, pattern) -- first match wins, so the order is part of the rule
 KINDS = [
@@ -88,13 +92,26 @@ def page_title(lines_by_y: list) -> tuple:
         words = [w for w in t.split() if any(c.isalpha() for c in w)]
         # Display type is either mostly capitals, or a SHORT line of capitalised words: Boyd's
         # Flushing 1891/92 opens its business section (leaf 199) with "Business Directory,"
-        # in title case, which the capitals rule alone missed.
-        titled = 0 < len(words) <= 4 and all(w.lstrip("\"'(")[:1].isupper() for w in words)
+        # in title case, which the capitals rule alone missed. Title case keeps its small words
+        # in lower case: 1906BPL's leaf 8 is "Names too Late for Classification", ~80 real
+        # entries the survey filed as front matter while the rule wanted every word capitalised.
+        caps = [w for w in words if w.lstrip("\"'(")[:1].isupper()]
+        titled = 0 < len(words) <= 4 and len(caps) == len(words)
+        # ...and ONLY for "names too late": letting small words through for every kind read a
+        # copyright notice ("the Southern District of New York") as a residential `district`
+        # title on 8 volumes. A contents line ("Additional Names and Removals ---- 731") is not a
+        # title either.
+        loose = (0 < len(words) <= TITLE_WORDS and len(caps) >= min(2, len(words))
+                 and all(w in caps or w.lower().strip(".,") in SMALL_WORDS for w in words)
+                 and not CONTENTS_RX.search(t))
         if len(letters) < 6 or (sum(c.isupper() for c in letters) < CAPS_SHARE * len(letters)
-                                and not titled):
+                                and not titled and not loose):
             continue
+        shouting = sum(c.isupper() for c in letters) >= CAPS_SHARE * len(letters)
         for kind, rx in KINDS:
             if rx.search(t):
+                if not (shouting or titled) and kind != "late_names":
+                    break
                 if kind != "place_directory":
                     return kind, t.strip()[:90]
                 fallback = fallback or (kind, t.strip()[:90])
@@ -114,6 +131,12 @@ def _self_test():
     assert page_title(["SMITH'S", "BROOKLYN DIRECTORY,", "EASTERN DISTRIOT,"])[0] == "district"
     assert page_title(["BROOKLYN DIRECTORY,", "EA8TEEN DISTRICT,"])[0] == "district"
     assert page_title(["NAMES TOO LATE FOR INSERTION IN REGULAR ORDER"])[0] == "late_names"
+    assert page_title(["Names too Late for Classification",
+                       "Adams Arthur D syrup 759 Park pi h 1031"])[0] == "late_names"
+    assert page_title(["Bay Ridge Outfitter 5101 3d av"]) == (None, None), "an entry, not a title"
+    assert page_title(["the Southern District of New York"]) == (None, None), "copyright notice"
+    assert page_title(["Additional Names and Removals ------ 731"]) == (None, None), "contents"
+    assert page_title(["Ahman Gustav steward h 421 50th"]) == (None, None)
     assert page_title(["STREET AND AVENUE DIRECTORY"])[0] == "street_guide"
     assert page_title(["Abbott John, grocer, 12 Pine"]) == (None, None), "entries are not titles"
     assert page_title(["FLUSHING DIRECTORY.", "125", "Business Directory,"])[0] == "business"

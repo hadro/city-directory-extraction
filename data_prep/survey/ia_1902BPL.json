@@ -366,6 +366,21 @@
    "hocr_lines": 272321,
    "wrap_joins": 17468,
    "candidates": 254853,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 211547,
+    "mark_share": 0.4184,
+    "mode": 1.25,
+    "mode_pairs": 9329,
+    "trough": 0.75,
+    "trough_pairs": 351,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 185853,
    "keep_rate": 0.7293,
    "dropped": {
@@ -397,8 +412,8 @@
     1063,
     7
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 15392777,
   "hocr_deleted": true,
@@ -796,8 +811,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -822,14 +837,26 @@
    {
     "kind": "index",
     "start_leaf": 11,
-    "end_leaf": 14,
+    "end_leaf": 13,
     "title": {
      "leaf": 11,
      "quote": "INDEX TO ADVERTISEMENTS.",
      "image": "https://iiif.archive.org/iiif/1902BPL$11/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 4,
+    "leaves": 3,
     "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 14,
+    "end_leaf": 14,
+    "title": {
+     "leaf": 14,
+     "quote": "Names Too Late for Classification.",
+     "image": "https://iiif.archive.org/iiif/1902BPL$14/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
    },
    {
     "kind": "listing",
@@ -904,6 +931,7 @@
   "kinds": [
    "front_matter",
    "index",
+   "late_names",
    "listing",
    "register",
    "street_guide"
@@ -911,20 +939,26 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/1902BPL_listing.jsonl.gz",
   "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 14,
+    "end_leaf": 14
+   },
    {
     "kind": "listing",
     "start_leaf": 15,
     "end_leaf": 1054
    }
   ],
-  "kept": 172353,
-  "dropped": 13500,
-  "kept_share": 0.9274,
+  "kept": 172398,
+  "dropped": 13455,
+  "kept_share": 0.9276,
   "kept_by_section": {
+   "late_names": 45,
    "listing": 172353
   }
  }

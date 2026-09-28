@@ -328,6 +328,21 @@
    "hocr_lines": 183977,
    "wrap_joins": 19424,
    "candidates": 164553,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 136062,
+    "mark_share": 0.4025,
+    "mode": 1.5,
+    "mode_pairs": 5705,
+    "trough": 0.75,
+    "trough_pairs": 382,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 114014,
    "keep_rate": 0.6929,
    "dropped": {
@@ -364,8 +379,8 @@
     1319,
     507
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 9849214,
   "hocr_deleted": true,
@@ -806,8 +821,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -893,8 +908,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc00geor_listing.jsonl.gz",
   "sections": [
    {

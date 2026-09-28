@@ -354,15 +354,30 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1823",
-   "hocr_lines": 1831,
-   "wrap_joins": 57,
-   "candidates": 1774,
-   "kept": 1573,
-   "keep_rate": 0.8867,
+   "hocr_lines": 1843,
+   "wrap_joins": 56,
+   "candidates": 1787,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 1675,
+    "mark_share": 0.0488,
+    "mode": 2.25,
+    "mode_pairs": 11,
+    "trough": 1.75,
+    "trough_pairs": 5,
+    "reason": "too few runovers to read a mode"
+   },
+   "column_splits": {
+    "lines": 12,
+    "leaves": 1
+   },
+   "kept": 1562,
+   "keep_rate": 0.8741,
    "dropped": {
-    "short": 70,
+    "short": 79,
+    "banner": 68,
     "allcaps": 60,
-    "banner": 53,
     "bigtype": 16,
     "nonascii": 2
    },
@@ -383,14 +398,14 @@
     51,
     44,
     57,
+    21,
     43,
     25,
     45,
-    29,
-    10
+    29
    ],
-   "filters_at": "f4f9c2f-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 134643,
   "hocr_deleted": true,
@@ -586,8 +601,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -672,8 +687,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0002_listing.jsonl.gz",
   "sections": [
    {
@@ -682,11 +697,11 @@
     "end_leaf": 36
    }
   ],
-  "kept": 1095,
+  "kept": 1084,
   "dropped": 478,
-  "kept_share": 0.6961,
+  "kept_share": 0.694,
   "kept_by_section": {
-   "listing": 1095
+   "listing": 1084
   }
  }
 }

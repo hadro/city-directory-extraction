@@ -349,44 +349,59 @@
    "publisher_tag_note": null,
    "year_tag": "1910",
    "hocr_lines": 153474,
-   "wrap_joins": 7151,
-   "candidates": 146323,
-   "kept": 108844,
-   "keep_rate": 0.7439,
+   "wrap_joins": 19463,
+   "candidates": 134011,
+   "wrap_calibration": {
+    "indent_ratio": 2.0,
+    "calibrated": true,
+    "pairs": 117941,
+    "mark_share": 0.0497,
+    "mode": 2.75,
+    "mode_pairs": 7869,
+    "trough": 2.0,
+    "trough_pairs": 78,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 102237,
+   "keep_rate": 0.7629,
    "dropped": {
-    "short": 31861,
-    "allcaps": 3051,
-    "bigtype": 1320,
-    "banner": 1153,
-    "nonascii": 88,
+    "short": 26369,
+    "allcaps": 2910,
+    "bigtype": 1296,
+    "banner": 1103,
+    "nonascii": 90,
     "pagenum": 6
    },
    "ditto_marks": [
     "..",
     "\u201e"
    ],
-   "ditto_applied": 1784,
+   "ditto_applied": 1789,
    "band": {
     "leaves_banded": 1,
     "head": 23,
-    "body": 120,
-    "foot": 17,
-    "unbanded": 108684
+    "body": 111,
+    "foot": 16,
+    "unbanded": 102087
    },
    "top_ad_leaves": [
+    295,
     13,
     455,
     181,
     25,
-    295,
     839,
     1159,
     7,
     35,
     297
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 9206599,
   "hocr_deleted": true,
@@ -673,8 +688,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -775,8 +790,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1910geor_listing.jsonl.gz",
   "sections": [
    {
@@ -790,12 +805,12 @@
     "end_leaf": 1311
    }
   ],
-  "kept": 108515,
-  "dropped": 329,
-  "kept_share": 0.997,
+  "kept": 101939,
+  "dropped": 298,
+  "kept_share": 0.9971,
   "kept_by_section": {
-   "late_names": 47,
-   "listing": 108468
+   "late_names": 46,
+   "listing": 101893
   }
  }
 }

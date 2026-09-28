@@ -354,6 +354,21 @@
    "hocr_lines": 650494,
    "wrap_joins": 17643,
    "candidates": 632851,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 561528,
+    "mark_share": 0.3674,
+    "mode": 2.5,
+    "mode_pairs": 102605,
+    "trough": 1.75,
+    "trough_pairs": 904,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 555789,
    "keep_rate": 0.8782,
    "dropped": {
@@ -389,8 +404,8 @@
     142,
     155
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 40455529,
   "hocr_deleted": true,
@@ -667,8 +682,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -756,7 +771,7 @@
     "end_leaf": 36,
     "title": {
      "leaf": 33,
-     "quote": "TOO LATE FOR REGULAR INSERTION",
+     "quote": "Removals, Alterations and Omissions",
      "image": "https://iiif.archive.org/iiif/trowsgenerald192223p1trow$33/full/!1400,1400/0/default.jpg"
     },
     "leaves": 4,
@@ -865,8 +880,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/trowsgenerald192223p1trow_listing.jsonl.gz",
   "sections": [
    {

@@ -311,15 +311,30 @@
    "publisher_tag": "boyd",
    "publisher_tag_note": null,
    "year_tag": "1860",
-   "hocr_lines": 828,
-   "wrap_joins": 50,
-   "candidates": 778,
-   "kept": 312,
-   "keep_rate": 0.401,
+   "hocr_lines": 842,
+   "wrap_joins": 45,
+   "candidates": 797,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 430,
+    "mark_share": 0.1425,
+    "mode": 1.25,
+    "mode_pairs": 9,
+    "trough": 0.5,
+    "trough_pairs": 9,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 14,
+    "leaves": 2
+   },
+   "kept": 317,
+   "keep_rate": 0.3977,
    "dropped": {
-    "short": 313,
-    "banner": 56,
-    "allcaps": 50,
+    "short": 321,
+    "banner": 61,
+    "allcaps": 51,
     "bigtype": 40,
     "nonascii": 6,
     "pagenum": 1
@@ -345,8 +360,8 @@
     79,
     113
    ],
-   "filters_at": "02404bc-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 58640,
   "hocr_deleted": true,
@@ -442,8 +457,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -479,8 +494,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": null,
   "sections": [
    {

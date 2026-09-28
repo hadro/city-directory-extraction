@@ -315,16 +315,30 @@
    "publisher_tag_note": null,
    "year_tag": "1856",
    "hocr_lines": 77278,
-   "wrap_joins": 3007,
-   "candidates": 74271,
-   "kept": 61439,
-   "keep_rate": 0.8272,
+   "wrap_joins": 21281,
+   "candidates": 55997,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 60891,
+    "mark_share": 0.0056,
+    "mode": 2.0,
+    "mode_pairs": 15020,
+    "trough": 1.5,
+    "trough_pairs": 83,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 48955,
+   "keep_rate": 0.8742,
    "dropped": {
-    "short": 9196,
-    "banner": 1871,
-    "allcaps": 1723,
-    "bigtype": 41,
-    "nonascii": 1
+    "short": 3486,
+    "banner": 1873,
+    "allcaps": 1642,
+    "bigtype": 41
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -336,19 +350,19 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
+    149,
     41,
-    575,
     371,
-    372,
-    7,
+    575,
     31,
-    439,
     50,
+    7,
+    439,
     626,
     585
    ],
-   "filters_at": "02404bc-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 4796309,
   "elapsed_s": 4
@@ -690,8 +704,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -982,8 +996,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/1856BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -1007,13 +1021,13 @@
     "end_leaf": 584
    }
   ],
-  "kept": 55415,
-  "dropped": 6024,
-  "kept_share": 0.902,
+  "kept": 43227,
+  "dropped": 5728,
+  "kept_share": 0.883,
   "kept_by_section": {
-   "listing": 35692,
-   "late_names": 611,
-   "district: EA8TEEN DISTRICT,": 19112
+   "listing": 27441,
+   "late_names": 414,
+   "district: EA8TEEN DISTRICT,": 15372
   }
  }
 }

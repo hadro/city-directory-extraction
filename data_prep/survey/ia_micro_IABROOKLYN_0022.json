@@ -366,16 +366,31 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'crowell' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1845",
-   "hocr_lines": 5378,
-   "wrap_joins": 306,
-   "candidates": 5072,
-   "kept": 4114,
-   "keep_rate": 0.8111,
+   "hocr_lines": 5703,
+   "wrap_joins": 298,
+   "candidates": 5405,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 4702,
+    "mark_share": 0.0575,
+    "mode": 1.75,
+    "mode_pairs": 74,
+    "trough": 1.0,
+    "trough_pairs": 20,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 325,
+    "leaves": 8
+   },
+   "kept": 4387,
+   "keep_rate": 0.8117,
    "dropped": {
-    "short": 515,
-    "banner": 158,
-    "allcaps": 148,
-    "bigtype": 133,
+    "short": 546,
+    "banner": 177,
+    "allcaps": 147,
+    "bigtype": 144,
     "nonascii": 3,
     "pagenum": 1
    },
@@ -392,16 +407,16 @@
     55,
     30,
     56,
-    49,
     4,
     62,
     65,
     60,
     68,
-    42
+    42,
+    75
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 402989,
   "hocr_deleted": true,
@@ -606,8 +621,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -656,8 +671,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0022_listing.jsonl.gz",
   "sections": [
    {
@@ -666,11 +681,11 @@
     "end_leaf": 51
    }
   ],
-  "kept": 3535,
+  "kept": 3808,
   "dropped": 579,
-  "kept_share": 0.8593,
+  "kept_share": 0.868,
   "kept_by_section": {
-   "listing": 3535
+   "listing": 3808
   }
  }
 }

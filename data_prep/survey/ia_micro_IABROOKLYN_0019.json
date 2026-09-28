@@ -321,16 +321,31 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'leslie/hearnes' tagged as its trained partner 'hearne'",
    "year_tag": "1843",
-   "hocr_lines": 9691,
-   "wrap_joins": 499,
-   "candidates": 9192,
-   "kept": 7707,
+   "hocr_lines": 9760,
+   "wrap_joins": 503,
+   "candidates": 9257,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 8567,
+    "mark_share": 0.0656,
+    "mode": 2.75,
+    "mode_pairs": 75,
+    "trough": 2.25,
+    "trough_pairs": 47,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 69,
+    "leaves": 2
+   },
+   "kept": 7761,
    "keep_rate": 0.8384,
    "dropped": {
     "short": 655,
     "allcaps": 393,
-    "bigtype": 221,
-    "banner": 190,
+    "bigtype": 224,
+    "banner": 198,
     "nonascii": 25,
     "pagenum": 1
    },
@@ -355,8 +370,8 @@
     163,
     8
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 731528,
   "hocr_deleted": true,
@@ -605,8 +620,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -728,8 +743,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0019_listing.jsonl.gz",
   "sections": [
    {
@@ -738,11 +753,11 @@
     "end_leaf": 171
    }
   ],
-  "kept": 6302,
+  "kept": 6356,
   "dropped": 1405,
-  "kept_share": 0.8177,
+  "kept_share": 0.819,
   "kept_by_section": {
-   "listing": 6302
+   "listing": 6356
   }
  }
 }

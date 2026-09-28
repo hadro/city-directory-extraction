@@ -363,17 +363,32 @@
    "publisher_tag": "smith",
    "publisher_tag_note": null,
    "year_tag": "1855",
-   "hocr_lines": 29341,
-   "wrap_joins": 1801,
-   "candidates": 27540,
-   "kept": 18276,
-   "keep_rate": 0.6636,
+   "hocr_lines": 29974,
+   "wrap_joins": 1758,
+   "candidates": 28216,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 19827,
+    "mark_share": 0.0791,
+    "mode": 1.75,
+    "mode_pairs": 1622,
+    "trough": 0.75,
+    "trough_pairs": 250,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 633,
+    "leaves": 34
+   },
+   "kept": 18647,
+   "keep_rate": 0.6609,
    "dropped": {
-    "short": 6490,
-    "banner": 1168,
-    "bigtype": 803,
-    "allcaps": 731,
-    "nonascii": 68,
+    "short": 6587,
+    "banner": 1333,
+    "bigtype": 832,
+    "allcaps": 742,
+    "nonascii": 71,
     "pagenum": 4
    },
    "ditto_marks": [],
@@ -397,8 +412,8 @@
     164,
     352
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 1902845,
   "hocr_deleted": true,
@@ -785,8 +800,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1025,8 +1040,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0034_listing.jsonl.gz",
   "sections": [
    {
@@ -1045,13 +1060,13 @@
     "end_leaf": 538
    }
   ],
-  "kept": 17140,
+  "kept": 17511,
   "dropped": 1136,
-  "kept_share": 0.9378,
+  "kept_share": 0.9391,
   "kept_by_section": {
-   "listing": 9890,
-   "district: EASTERN DISTRICT. \u00a2": 7218,
-   "late_names": 32
+   "listing": 10107,
+   "district: EASTERN DISTRICT. \u00a2": 7357,
+   "late_names": 47
   }
  }
 }

@@ -369,16 +369,31 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1831",
-   "hocr_lines": 2986,
-   "wrap_joins": 120,
-   "candidates": 2866,
-   "kept": 2354,
-   "keep_rate": 0.8214,
+   "hocr_lines": 3006,
+   "wrap_joins": 119,
+   "candidates": 2887,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 2706,
+    "mark_share": 0.0579,
+    "mode": 1.5,
+    "mode_pairs": 15,
+    "trough": 1.25,
+    "trough_pairs": 12,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 20,
+    "leaves": 1
+   },
+   "kept": 2350,
+   "keep_rate": 0.814,
    "dropped": {
-    "banner": 248,
-    "short": 130,
+    "banner": 267,
+    "short": 131,
     "allcaps": 72,
-    "bigtype": 52,
+    "bigtype": 57,
     "nonascii": 9,
     "pagenum": 1
    },
@@ -393,6 +408,7 @@
    },
    "top_ad_leaves": [
     6,
+    12,
     42,
     14,
     10,
@@ -400,11 +416,10 @@
     68,
     73,
     70,
-    20,
-    56
+    20
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 217919,
   "hocr_deleted": true,
@@ -607,8 +622,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -681,8 +696,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0008_listing.jsonl.gz",
   "sections": [
    {
@@ -691,11 +706,11 @@
     "end_leaf": 64
    }
   ],
-  "kept": 2019,
+  "kept": 2015,
   "dropped": 335,
-  "kept_share": 0.8577,
+  "kept_share": 0.8574,
   "kept_by_section": {
-   "listing": 2019
+   "listing": 2015
   }
  }
 }

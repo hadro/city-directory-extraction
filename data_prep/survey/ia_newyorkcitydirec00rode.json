@@ -438,16 +438,31 @@
    "publisher_tag_note": null,
    "year_tag": "1854",
    "hocr_lines": 154351,
-   "wrap_joins": 2604,
-   "candidates": 151747,
-   "kept": 137120,
-   "keep_rate": 0.9036,
+   "wrap_joins": 22879,
+   "candidates": 131472,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 133577,
+    "mark_share": 0.0148,
+    "mode": 2.0,
+    "mode_pairs": 17121,
+    "trough": 1.5,
+    "trough_pairs": 285,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 124046,
+   "keep_rate": 0.9435,
    "dropped": {
-    "short": 11228,
-    "banner": 1704,
-    "allcaps": 1517,
-    "bigtype": 162,
-    "nonascii": 15,
+    "short": 4444,
+    "banner": 1411,
+    "allcaps": 1395,
+    "bigtype": 161,
+    "nonascii": 14,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -461,18 +476,18 @@
    },
    "top_ad_leaves": [
     842,
+    9,
     984,
     976,
     941,
-    947,
     995,
+    947,
+    12,
     991,
-    6,
-    955,
-    17
+    6
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 11134772,
   "hocr_deleted": true,
@@ -764,8 +779,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1014,8 +1029,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/newyorkcitydirec00rode_listing.jsonl.gz",
   "sections": [
    {
@@ -1029,12 +1044,12 @@
     "end_leaf": 807
    }
   ],
-  "kept": 120740,
-  "dropped": 16380,
-  "kept_share": 0.8805,
+  "kept": 108401,
+  "dropped": 15645,
+  "kept_share": 0.8739,
   "kept_by_section": {
-   "listing": 120591,
-   "late_names": 149
+   "listing": 108269,
+   "late_names": 132
   }
  }
 }

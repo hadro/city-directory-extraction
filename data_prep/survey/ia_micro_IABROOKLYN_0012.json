@@ -384,16 +384,31 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1835/36",
-   "hocr_lines": 5043,
-   "wrap_joins": 246,
-   "candidates": 4797,
-   "kept": 4356,
-   "keep_rate": 0.9081,
+   "hocr_lines": 5099,
+   "wrap_joins": 247,
+   "candidates": 4852,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 4614,
+    "mark_share": 0.0308,
+    "mode": 1.75,
+    "mode_pairs": 22,
+    "trough": 1.25,
+    "trough_pairs": 13,
+    "reason": "too few runovers to read a mode"
+   },
+   "column_splits": {
+    "lines": 56,
+    "leaves": 2
+   },
+   "kept": 4393,
+   "keep_rate": 0.9054,
    "dropped": {
     "allcaps": 203,
-    "short": 139,
-    "banner": 58,
-    "bigtype": 39,
+    "short": 140,
+    "banner": 72,
+    "bigtype": 42,
     "nonascii": 2
    },
    "ditto_marks": [],
@@ -407,18 +422,18 @@
    },
    "top_ad_leaves": [
     100,
+    82,
     4,
+    80,
     92,
     103,
     30,
     97,
     101,
-    14,
-    25,
-    6
+    14
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 375890,
   "hocr_deleted": true,
@@ -616,8 +631,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -677,8 +692,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0012_listing.jsonl.gz",
   "sections": [
    {
@@ -687,11 +702,11 @@
     "end_leaf": 93
    }
   ],
-  "kept": 3330,
+  "kept": 3367,
   "dropped": 1026,
-  "kept_share": 0.7645,
+  "kept_share": 0.7664,
   "kept_by_section": {
-   "listing": 3330
+   "listing": 3367
   }
  }
 }

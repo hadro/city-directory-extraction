@@ -404,16 +404,31 @@
    "publisher_tag_note": null,
    "year_tag": "1875",
    "hocr_lines": 184130,
-   "wrap_joins": 3709,
-   "candidates": 180421,
-   "kept": 156424,
-   "keep_rate": 0.867,
+   "wrap_joins": 19507,
+   "candidates": 164623,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 159727,
+    "mark_share": 0.0143,
+    "mode": 2.0,
+    "mode_pairs": 9675,
+    "trough": 1.5,
+    "trough_pairs": 328,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 145397,
+   "keep_rate": 0.8832,
    "dropped": {
-    "short": 14550,
-    "allcaps": 5418,
-    "banner": 2862,
-    "bigtype": 1123,
-    "nonascii": 39,
+    "short": 10306,
+    "allcaps": 5090,
+    "banner": 2701,
+    "bigtype": 1087,
+    "nonascii": 37,
     "pagenum": 5
    },
    "ditto_marks": [],
@@ -426,19 +441,19 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
+    1083,
     15,
     1038,
     148,
+    1161,
     27,
     120,
-    1097,
     887,
-    3,
-    1161,
-    402
+    1097,
+    3
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 11871890,
   "hocr_deleted": true,
@@ -743,8 +758,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1002,8 +1017,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/1875BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -1017,12 +1032,12 @@
     "end_leaf": 1023
    }
   ],
-  "kept": 123201,
-  "dropped": 33223,
-  "kept_share": 0.7876,
+  "kept": 113273,
+  "dropped": 32124,
+  "kept_share": 0.7791,
   "kept_by_section": {
-   "late_names": 64,
-   "listing": 123137
+   "late_names": 57,
+   "listing": 113216
   }
  }
 }

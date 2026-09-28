@@ -1058,6 +1058,23 @@ name the sections the alphabets found. Three volumes ship no `_page_numbers.json
 (`longworthsameric1798newy`, `micro_IABROOKLYN_0015`, `trowsgeneraldir1909p3trow`), against the
 census's "every IA item".
 
+#### Lines re-derived after the first whole-volume run (2026-09-28)
+
+The five-volume 4B run showed that the scoped lines were costing entries before the model ran
+(docs/PIPELINE.md, stage 6). Three fixes landed in the survey's own path. All 184 volumes were
+re-derived from the dumps (`--rederive`, ~3 s a volume), then `sections` and `scope` re-ran:
+- **Per-volume wrap threshold** (`calibrate_indent`, recorded per volume in
+  `harvest.filtered.wrap_calibration`). Unjoined runovers corpus-wide 517,137 → 268,888; scoped
+  lines 16.87M → 16.25M.
+- **Column-merged microfilm lines cut** (`split_merged_columns`, recorded as
+  `harvest.filtered.column_splits`). Smith 1856's merged-leaf lines 2,548 → 31.
+- **"Names too Late for Classification" pages** are now read as `late_names` (`section_titles`),
+  13 volumes. The title-case relaxation applies to that kind only: applied to every kind, it read
+  a copyright notice as a residential `district` title on 8 volumes.
+
+`apply_survey.py` dry run afterwards: no CSV change. Page and section claims do not read the
+extraction lines.
+
 #### The original design
 
 Per volume, from the JSONL + pageindex + `_page_numbers.json`:

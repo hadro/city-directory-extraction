@@ -10,6 +10,9 @@ outputs/
 
 # the HPC shipping tarball (rebuild with `bash hpc/make_bundle.sh`)
 cde-hpc-bundle-*.tar.gz
+# staged volume chunks and returned predictions for hpc/35_volumes.sbatch (rebuild: hpc/prep_volumes.py)
+cde-volumes*.tar.gz
+cde-volume-preds*.tar.gz
 
 # generated locally from pipeline output (census surnames.tsv IS committed as the seed)
 data_prep/names/surnames_harvested.tsv

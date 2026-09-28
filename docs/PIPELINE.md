@@ -27,8 +27,8 @@ records which published figures were re-derived and which were mis-scoped;
 | 2 | bounds | `data_prep/detect_listing_bounds.py` | yes | ~1 s from JSONL |
 | 3 | ad/front-matter cut | `data_prep/alpha_run_filter.py` | yes, but **do not `--apply`** | seconds |
 | 4 | **model** | `eval/qwen_predict.py` | — | **the expensive one** |
-| 5 | **ditto resolution** | `postprocess/resolve_dittos.py` | within-line yes, cross-line partly | seconds |
-| 6 | QA | `eval/entry_rate.py`, `eval/evaluate.py` | proxy / gold | seconds |
+| 5 | **copy guard, ditto resolution** | `postprocess/copy_guard.py`, `postprocess/resolve_dittos.py` | guard: panel 243 fixed / 0 broken; dittos: within-line yes, cross-line partly | seconds |
+| 6 | QA | `eval/entry_rate.py`, `eval/evaluate.py`, `eval/volume_run_report.py`, `eval/ia_panel.py` | proxy / gold | seconds |
 
 Stages 1, 4 and 5 are the pipeline. 2, 3 and 6 are instruments you read, not transforms you have to
 apply.
@@ -83,6 +83,28 @@ elements. Same words, 4.5× the error, purely from line segmentation.
    `--deep-indent-gate`; 12.7% of *candidates*, and 12.8% without the gate). Joining *before*
    filtering matters — a continuation like `259 Himrod` is short enough that the text filter would
    drop it, taking the address off the entry above.
+
+   **The corpus survey (`survey_harvest.py`) adds two per-volume corrections that this CLI leaves
+   off (2026-09-28).** The CLI's defaults are pinned to published 1906BPL figures.
+   - **The wrap threshold is read off each volume's own indent histogram (`calibrate_indent`).**
+     `INDENT_RATIO` = 3.0 fits 1906BPL, whose runovers sit at 3.9–5.2 line heights. Most of the
+     corpus indents runovers by ~2.0, so **517,137 scoped lines were unjoined runovers**. A volume
+     gets a lower threshold only when two things hold. First, almost no line opens with a ditto
+     mark: a dropped mark indents like a runover. Second, the runover mode is sharp, with the
+     trough below it under 5% of the mode. Doggett 1845, the 1860s–80s BPL and Rode qualify at
+     1.5. 1906BPL, 1897BPL, Smith and Hearnes keep 3.0, and each sidecar records why
+     (`harvest.filtered.wrap_calibration`).
+   - **Lines tesseract read across a two-column gutter are cut (`split_merged_columns`).** A
+     merged line is cut at the right column's margin, where the entry-opening words line up. A
+     leaf is cut only when enough lines cut cleanly *and* the right halves read as one alphabet
+     column (Fagans, Falconer, Fales…). The alphabet test is what keeps one-column books from
+     being cut at their mid-page street names.
+
+   Corpus effect: scoped lines 16,865,145 → 16,247,330, unjoined runovers 517,137 → 268,888, and
+   lines on column-merged leaves 27,074 → 16,100 (Smith 1856: 2,548 → 31). A uniform sample of 50
+   new joins (Doggett, 1884BPL) held 50 single entries and no two people glued together. The
+   runovers that remain are in ditto volumes and noisy microfilm, where joining would glue people
+   together. On Hearnes, 17 lines on 2 leaves are cut that should not be.
 2. **Text filter** — page numbers, ALL-CAPS running heads, sub-8-char fragments, non-ASCII garbage.
    **Keeps 72.5% whole-volume on 1906BPL** (the 76% in the script's docstring is a 14-leaf sample;
    see [FIGURE_AUDIT.md](FIGURE_AUDIT.md)). **It is not an entry detector** and happily passes ad
@@ -330,7 +352,44 @@ at ~4.5 H200-hours and the whole corpus's 16.7M residential lines at ~390.
 
 ---
 
-## Stage 5 — Post-processing: resolve the dittos
+## Stage 5 — Post-processing: the copy guard, then resolve the dittos
+
+### The copy guard: put back the printed word
+
+```bash
+python3 postprocess/copy_guard.py --volumes data/volumes --run 4b-100k   # -> *.preds_4b-100k+guard.txt
+python3 postprocess/copy_guard.py --lines <lines.jsonl> --preds <preds.txt> --out <guarded.txt>
+```
+
+The model is trained to repair OCR: the generator corrupts 35% of training inputs and keeps the
+targets clean. So it also rewrites printed words that were read correctly but are unfamiliar:
+`Degraw → Delaware`, `Mhtn → Mthn`, `Bancker → Banker`, `Carll → Carroll`, `rd → dr`, **house
+numbers transposed** (`h 623 Grand → h 263 Grand`, on the *clean-text* panel). It also adds
+given names that were never printed (Mary, Sarah). The guard aligns every field to its own line
+and keeps a change only if it is one of:
+- spacing or punctuation only;
+- made only of classical OCR misreadings (`elk → clk`, `pi → pl`);
+- a piece of a glued word (`boardingh → h`);
+- a rare printed word moved to one the volume prints often, within 2 characters (`cartmaa → cartman`).
+
+Anything else gets the printed word back. A name word with no near match in the line is dropped.
+The model's predictions are never overwritten; the guarded file sits beside them.
+
+| test | fields fixed | broken |
+|---|---|---|
+| 21-volume panel, clean text, 4B | 243 | **0** |
+| same, 2B | 246 | **0** |
+| gold pages read through IA OCR (Mercein/Hearnes/Smith) | 5 | **0** |
+| NYU externals (500 rows), before its last rule was added | 39 | 3 (then fixed) |
+
+Whole-row EM on the clean panel rises everywhere or stays level: Lain 65.9 → 77.4, Polk 1933 SI
+69.6 → 80.4, trow1884 80.1 → 86.5, NYU 56.0 → 61.6. **The rules were tuned against these
+same checks.** The NYU figure before its last fix is the honest held-out number, and the next
+Torch run's real-OCR panel is the first test the guard has never seen. It does not catch
+`Harman → Harmon` (477 in 1906BPL): a/o is a genuine OCR misreading, and nothing in the book
+tells the two cases apart.
+
+### Resolve the dittos
 
 The model emits ditto marks **verbatim by contract** (conventions 11/12), and that contract governs
 the generator, all 21 gold volumes and `evaluate.py` at once — resolving inside the model would
@@ -563,6 +622,29 @@ District names 97.0% of lines against the Western's 95.0%. Smith's low 95.5% ove
 column-merged leaves and runovers, not the district. `late_names` sections are the weakest
 everywhere (Mercein 77.5%, Doggett 87.9%): short sections full of headings and notes.
 
+### A panel on the model's real input (`eval/ia_panel.py`, 2026-09-28)
+
+```bash
+python3 eval/ia_panel.py build                 # data/iapanel_<set>_eval.jsonl + results/ia_panel_manifest.json
+python3 eval/ia_panel.py score --run 4b-100k   # after the Torch run predicts on those files
+```
+
+The 21-volume panel feeds the model hand-corrected text. This pairs the same gold records with the
+line the pipeline actually produces from IA's OCR, with no new labelling. The survey already
+verified each gold page's leaf, and the builder checks ±3 leaves where that placement was weak. **14
+sets; 1,608 of 1,902 gold rows (84.5%) reach the model as a line at all.** The unmatched rows are
+loss before the model. Most sets deliver 98–100%. The losses are in the microfilm:
+
+| set | gold rows delivered | why not more |
+|---|---|---|
+| smith1856 | 140/229 | leaf 168: tesseract kept 62 of ~108 printed lines. Leaf 391 was 13/121 before the column split, 95/121 after |
+| smith1855 | 57/185 | the same microfilm tier |
+| hopehenderson1856 | 7/60 | IA's OCR of the gold page (leaf 205) is 13 lines, 167 characters of noise |
+
+So on the thin tier, a large part of the gold never reaches the model at any quality. Scoring the
+delivered rows needs 4B predictions on them. They are staged with the second Torch run
+(`data/volumes/iapanel_*`). Every row carries `eval_holdout: gold`.
+
 ---
 
 ## What is NOT in the pipeline yet
@@ -646,30 +728,24 @@ volume of 21 collapsing, and `entry_rate` cannot (it is a fabrication/page-type 
 record quality). Cheap: the per-field accumulators already exist; add a per-volume breakdown, print
 median alongside mean, and flag any volume more than some margin below it.
 
-**21. Guard field copying with the volume's own vocabulary.** The 4B turns `Degraw` into
-`Delaware`, `Bancker` into `Banker` and `Mhtn` into `Mthn` (stage 6, whole-volume run), and the 2B
-shares all but the last. A post-check needs no model change and no gold. For each field word
-absent from its line, find the line word it replaced (`volume_run_report.substitutions`). If that
-word is common in the volume and the replacement is not, restore the printed word. **This must
-not fire on `elk → clk` or `pi → pl`,** which are correct repairs of errors systematic enough to
-look like vocabulary. So it needs an allow-list of known OCR confusions, per volume, read by a
-human; the report's top-30 pairs are the reading list. Test: 1906BPL `Mhtn` survival 3% → ~100%,
-and `elk → clk` unchanged.
+**21. ~~Guard field copying with the volume's own vocabulary.~~ DONE 2026-09-28:
+`postprocess/copy_guard.py`** (stage 5). It needed no per-volume allow-list. A change is kept
+when it is spacing, a classical OCR misreading, a glued-word split, or a move toward a word the
+volume prints often. Test met: 1906BPL `Mhtn → Mthn` 13,431 → 163, with `elk → clk` untouched
+(14,900). Clean panel 243 fields fixed, 0 broken. The residual is `Harman → Harmon`.
 
-**22. A per-volume wrap-join threshold.** `INDENT_RATIO` = 3.0 was calibrated on 1906BPL. It
-joined none of Doggett 1845's 2,814 runovers, which sit in a tight band at 2.00–2.17 line
-heights, and almost none of Smith 1856's (1.0–1.9). Each unjoined runover costs an entry its tail
-and adds a fabricated record: 2,104 named runovers in Doggett alone. Read the threshold off the
-volume's own indent histogram, at the trough between starts and runovers (`layout_roles` already
-finds both modes). It must be gated the way `--deep-indent-gate` is: a threshold that low would
-also merge consecutive entries whose ditto was dropped. Test: Doggett named records per printed
-name 1.038 → ~1.00, with the named-start count unchanged.
+**22. ~~A per-volume wrap-join threshold.~~ DONE 2026-09-28: `calibrate_indent`** in
+`ia_volume_to_jsonl.py`, applied by the survey harvest (stage 1). Test met at the line level:
+Doggett 1845 scoped lines per printed name 1.053 → **1.006**, runover lines 2,911 → 64, start
+lines 61,601 → 61,606. Corpus unjoined runovers 517,137 → 268,888; the rest are in volumes
+deliberately left at 3.0. The named-record version of the test needs the next Torch run.
 
-**25. Let `page_title` read a title-case heading with lowercase small words.** 1906BPL's leaf 8
-reads "Names too Late for Classification", ~80 real entries ahead of the listing. It was filed as
-front matter, because the title-case rule wants ≤4 words, all capitalised. Allow `too/for/of/the/
-in/and/to` in lowercase and up to 6 words. Then re-derive `sections` and `scope` for the corpus
-and review every run that changes kind; the rule also admits more non-titles.
+**25. ~~Let `page_title` read a title-case heading with lowercase small words.~~ DONE
+2026-09-28**, for "names too late" only. Letting small words through for every kind read a
+copyright notice ("the Southern District of New York") as a residential `district` title on 8
+volumes. Narrowed, the change touches exactly 13 volumes, each gaining its "Names too Late for
+Classification" page (1902–1908 BPL, the 1903–1909 Georgetown volumes), plus a title-quote change
+on 2 Trows.
 
 ## Medium effort, high information
 
@@ -824,14 +900,11 @@ Pass/fail is already instrumented and needs no new gold: `score_ocr.py --engine 
 `abbr%` and `CER-m` directly, so the test is **"does abbr% move 84.8 → ~95 with CER-m unchanged"**.
 A CER-m that rises means the repair is firing on tokens that were not abbreviations.
 
-**23. Split column-merged microfilm lines at the gutter.** Tesseract read straight across the
-gutter on 58 of Smith 1856's 414 leaves (2,548 lines), so ~2,200 right-column entries never reach
-the model as lines of their own. The word dump keeps every word's box. Split a line at an
-inter-word gap that lands on the page's gutter (the column edges `layout_roles` finds on the
-volume's unmerged leaves), then re-order the right halves after the left column so dittos and
-`join_wraps` see the true predecessor. Test: on Smith's gold leaf 391, gold rows found in the OCR
-13/121 → ~100/121. Survey all microfilm volumes for merged leaves first, because the size of the
-fix depends on how many there are.
+**23. ~~Split column-merged microfilm lines at the gutter.~~ DONE 2026-09-28:
+`split_merged_columns`** (stage 1). Test met: on Smith 1856's gold leaf 391, gold rows found in
+the pipeline's lines 13/121 → **95/121**; the volume's merged-leaf lines 2,548 → 31. The survey of
+microfilm volumes came first, as planned: 83 volumes had leaves that looked merged. The alphabet
+test cut that to the 29 that are.
 
 **24. Teach the model to leave an absent given name absent.** Mercein prints widows as `Ackerman
 widow, 47 Elizabeth`, and the 4B adds `Sarah` or `Mary` on 15% of the 1,391 such lines. Gold keeps

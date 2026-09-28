@@ -355,6 +355,21 @@
    "hocr_lines": 89010,
    "wrap_joins": 2313,
    "candidates": 86697,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 75982,
+    "mark_share": 0.0714,
+    "mode": 2.0,
+    "mode_pairs": 9149,
+    "trough": 1.5,
+    "trough_pairs": 86,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 73697,
    "keep_rate": 0.8501,
    "dropped": {
@@ -385,8 +400,8 @@
     643,
     281
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 5695297,
   "hocr_deleted": true,
@@ -688,8 +703,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -926,8 +941,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/1864BPL_listing.jsonl.gz",
   "sections": [
    {

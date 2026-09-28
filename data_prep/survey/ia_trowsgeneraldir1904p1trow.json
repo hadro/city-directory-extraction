@@ -369,6 +369,21 @@
    "hocr_lines": 184358,
    "wrap_joins": 27068,
    "candidates": 157290,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 158283,
+    "mark_share": 0.3162,
+    "mode": 2.25,
+    "mode_pairs": 528,
+    "trough": 1.75,
+    "trough_pairs": 70,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 148416,
    "keep_rate": 0.9436,
    "dropped": {
@@ -402,8 +417,8 @@
     69,
     53
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 12993686,
   "hocr_deleted": true,
@@ -636,8 +651,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -752,8 +767,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1904p1trow_listing.jsonl.gz",
   "sections": [
    {

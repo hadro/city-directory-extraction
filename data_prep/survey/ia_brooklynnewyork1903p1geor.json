@@ -345,6 +345,21 @@
    "hocr_lines": 144698,
    "wrap_joins": 14193,
    "candidates": 130505,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 102544,
+    "mark_share": 0.3892,
+    "mode": 1.25,
+    "mode_pairs": 4930,
+    "trough": 0.75,
+    "trough_pairs": 185,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 89023,
    "keep_rate": 0.6821,
    "dropped": {
@@ -376,8 +391,8 @@
     1127,
     15
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 8292999,
   "hocr_deleted": true,
@@ -648,8 +663,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -662,14 +677,26 @@
    {
     "kind": "index",
     "start_leaf": 31,
-    "end_leaf": 37,
+    "end_leaf": 35,
     "title": {
      "leaf": 31,
      "quote": "INDEX TO ADVERTISEMENTS.",
      "image": "https://iiif.archive.org/iiif/brooklynnewyork1903p1geor$31/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 4,
+    "leaves": 3,
     "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 37,
+    "end_leaf": 37,
+    "title": {
+     "leaf": 37,
+     "quote": "Names Too Late for Classification.",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyork1903p1geor$37/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
    },
    {
     "kind": "listing",
@@ -717,25 +744,32 @@
    "back_matter",
    "front_matter",
    "index",
+   "late_names",
    "listing"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/brooklynnewyork1903p1geor_listing.jsonl.gz",
   "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 37,
+    "end_leaf": 37
+   },
    {
     "kind": "listing",
     "start_leaf": 39,
     "end_leaf": 1157
    }
   ],
-  "kept": 88352,
-  "dropped": 671,
-  "kept_share": 0.9925,
+  "kept": 88392,
+  "dropped": 631,
+  "kept_share": 0.9929,
   "kept_by_section": {
+   "late_names": 40,
    "listing": 88352
   }
  }

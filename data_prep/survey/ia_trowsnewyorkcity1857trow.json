@@ -338,17 +338,32 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1857",
-   "hocr_lines": 186965,
-   "wrap_joins": 2711,
-   "candidates": 184254,
-   "kept": 169506,
-   "keep_rate": 0.92,
+   "hocr_lines": 186977,
+   "wrap_joins": 19251,
+   "candidates": 167726,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 167455,
+    "mark_share": 0.008,
+    "mode": 2.0,
+    "mode_pairs": 12567,
+    "trough": 1.5,
+    "trough_pairs": 481,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 12,
+    "leaves": 1
+   },
+   "kept": 158624,
+   "keep_rate": 0.9457,
    "dropped": {
-    "short": 10725,
-    "allcaps": 2218,
-    "banner": 1725,
-    "nonascii": 42,
-    "bigtype": 36,
+    "short": 5337,
+    "allcaps": 1987,
+    "banner": 1703,
+    "nonascii": 39,
+    "bigtype": 34,
     "pagenum": 2
    },
    "ditto_marks": [],
@@ -362,18 +377,18 @@
    },
    "top_ad_leaves": [
     1048,
+    839,
     4,
     1043,
-    1049,
     237,
+    1049,
     18,
-    965,
-    1046,
     182,
-    20
+    965,
+    1046
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 14169186,
   "hocr_deleted": true,
@@ -633,8 +648,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -979,8 +994,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/trowsnewyorkcity1857trow_listing.jsonl.gz",
   "sections": [
    {
@@ -994,12 +1009,12 @@
     "end_leaf": 919
    }
   ],
-  "kept": 153076,
-  "dropped": 16430,
-  "kept_share": 0.9031,
+  "kept": 142940,
+  "dropped": 15684,
+  "kept_share": 0.9011,
   "kept_by_section": {
-   "late_names": 258,
-   "listing": 152818
+   "late_names": 241,
+   "listing": 142699
   }
  }
 }

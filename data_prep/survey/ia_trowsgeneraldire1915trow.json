@@ -413,31 +413,47 @@
    "publisher_tag_note": null,
    "year_tag": "1915",
    "hocr_lines": 1690064,
-   "wrap_joins": 36230,
-   "candidates": 1653834,
-   "kept": 1484446,
-   "keep_rate": 0.8976,
+   "wrap_joins": 315704,
+   "candidates": 1374360,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 1507966,
+    "mark_share": 0.0418,
+    "mode": 2.25,
+    "mode_pairs": 187768,
+    "trough": 1.5,
+    "trough_pairs": 1665,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 1295606,
+   "keep_rate": 0.9427,
    "dropped": {
-    "short": 105833,
-    "allcaps": 32186,
-    "banner": 19413,
-    "bigtype": 11621,
-    "nonascii": 325,
-    "pagenum": 10
+    "short": 28466,
+    "allcaps": 20076,
+    "banner": 18750,
+    "bigtype": 11328,
+    "nonascii": 128,
+    "pagenum": 6
    },
    "ditto_marks": [
+    "\"",
     ",,",
     "..",
     "11",
     "\u201e"
    ],
-   "ditto_applied": 128911,
+   "ditto_applied": 129373,
    "band": {
-    "leaves_banded": 1051,
-    "head": 22767,
-    "body": 674922,
-    "foot": 12588,
-    "unbanded": 774169
+    "leaves_banded": 1185,
+    "head": 21501,
+    "body": 657394,
+    "foot": 11001,
+    "unbanded": 605710
    },
    "top_ad_leaves": [
     1884,
@@ -445,14 +461,14 @@
     1865,
     2000,
     2019,
-    1932,
     1862,
+    1932,
     2005,
-    1967,
-    1958
+    1869,
+    9
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 105268647,
   "hocr_deleted": true,
@@ -894,8 +910,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1127,8 +1143,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/trowsgeneraldire1915trow_listing.jsonl.gz",
   "sections": [
    {
@@ -1137,11 +1153,11 @@
     "end_leaf": 1850
    }
   ],
-  "kept": 1218663,
-  "dropped": 265783,
-  "kept_share": 0.821,
+  "kept": 1044823,
+  "dropped": 250783,
+  "kept_share": 0.8064,
   "kept_by_section": {
-   "listing": 1218663
+   "listing": 1044823
   }
  }
 }

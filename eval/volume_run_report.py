@@ -670,9 +670,12 @@ def _self_test() -> int:
 
 
 def main(argv=None) -> int:
+    global VOL
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--run", default="4b-100k")
+    ap.add_argument("--volumes-dir", default=str(VOL),
+                    help="where the chunks and predictions are (run 1: data/volumes_run1)")
     ap.add_argument("--out", help="write the full report as JSON")
     ap.add_argument("--diffs", default=str(REPO / "results" / "volume_run_1906BPL_2b_vs_4b.tsv"),
                     help="2B-vs-4B field diffs for human review ('' to skip)")
@@ -680,6 +683,7 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
+    VOL = Path(args.volumes_dir)
     rep = run_all(args.run, args.diffs or None)
     print_report(rep)
     if args.out:

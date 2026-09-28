@@ -373,14 +373,29 @@
    "publisher_tag_note": null,
    "year_tag": "1857",
    "hocr_lines": 69980,
-   "wrap_joins": 1865,
-   "candidates": 68115,
-   "kept": 59629,
-   "keep_rate": 0.8754,
+   "wrap_joins": 12551,
+   "candidates": 57429,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 58749,
+    "mark_share": 0.0069,
+    "mode": 2.0,
+    "mode_pairs": 9298,
+    "trough": 1.5,
+    "trough_pairs": 76,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 52787,
+   "keep_rate": 0.9192,
    "dropped": {
-    "short": 6042,
-    "banner": 1288,
-    "allcaps": 1079,
+    "short": 2227,
+    "banner": 1305,
+    "allcaps": 1033,
     "bigtype": 72,
     "nonascii": 5
    },
@@ -395,9 +410,9 @@
    },
    "top_ad_leaves": [
     256,
+    100,
     326,
     378,
-    100,
     221,
     170,
     539,
@@ -405,9 +420,10 @@
     118,
     273
    ],
-   "filters_at": "02404bc-dirty",
-   "derived": "2026-09-22"
-  }
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
+  },
+  "words_gz_bytes": 4471845
  },
  "listing": {
   "method": "letter-votes",
@@ -698,8 +714,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -940,8 +956,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/1857BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -960,13 +976,13 @@
     "end_leaf": 478
    }
   ],
-  "kept": 53309,
-  "dropped": 6320,
-  "kept_share": 0.894,
+  "kept": 46677,
+  "dropped": 6110,
+  "kept_share": 0.8843,
   "kept_by_section": {
-   "listing": 37435,
-   "district: EASTERN DISTRICT,": 15657,
-   "late_names": 217
+   "listing": 32214,
+   "district: EASTERN DISTRICT,": 14293,
+   "late_names": 170
   }
  }
 }

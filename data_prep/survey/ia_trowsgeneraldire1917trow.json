@@ -286,30 +286,46 @@
    "publisher_tag_note": null,
    "year_tag": "1917",
    "hocr_lines": 1840989,
-   "wrap_joins": 41297,
-   "candidates": 1799692,
-   "kept": 1622058,
-   "keep_rate": 0.9013,
+   "wrap_joins": 361073,
+   "candidates": 1479916,
+   "wrap_calibration": {
+    "indent_ratio": 1.75,
+    "calibrated": true,
+    "pairs": 1646267,
+    "mark_share": 0.0412,
+    "mode": 2.25,
+    "mode_pairs": 203654,
+    "trough": 1.75,
+    "trough_pairs": 3129,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 1402489,
+   "keep_rate": 0.9477,
    "dropped": {
-    "short": 123485,
-    "allcaps": 24581,
-    "banner": 22247,
-    "bigtype": 6869,
-    "nonascii": 428,
-    "pagenum": 24
+    "short": 36540,
+    "banner": 20678,
+    "allcaps": 13271,
+    "bigtype": 6684,
+    "nonascii": 242,
+    "pagenum": 12
    },
    "ditto_marks": [
     ",,",
     "..",
-    "11"
+    "11",
+    "\u201e"
    ],
-   "ditto_applied": 156992,
+   "ditto_applied": 165056,
    "band": {
-    "leaves_banded": 1158,
-    "head": 14249,
-    "body": 801031,
-    "foot": 9482,
-    "unbanded": 797296
+    "leaves_banded": 1248,
+    "head": 12631,
+    "body": 736514,
+    "foot": 9121,
+    "unbanded": 644223
    },
    "top_ad_leaves": [
     204,
@@ -317,14 +333,14 @@
     149,
     1,
     176,
+    116,
     2,
-    129,
     185,
     118,
     3
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 113242323,
   "hocr_deleted": true,
@@ -820,8 +836,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -861,7 +877,7 @@
     "end_leaf": 40,
     "title": {
      "leaf": 33,
-     "quote": "TOO LATE FOR REGULAR INSERTION",
+     "quote": "Removals, Alterations and Omissions",
      "image": "https://iiif.archive.org/iiif/trowsgeneraldire1917trow$33/full/!1400,1400/0/default.jpg"
     },
     "leaves": 8,
@@ -1064,8 +1080,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/trowsgeneraldire1917trow_listing.jsonl.gz",
   "sections": [
    {
@@ -1079,12 +1095,12 @@
     "end_leaf": 2070
    }
   ],
-  "kept": 1322523,
-  "dropped": 299535,
-  "kept_share": 0.8153,
+  "kept": 1121874,
+  "dropped": 280615,
+  "kept_share": 0.7999,
   "kept_by_section": {
-   "late_names": 4778,
-   "listing": 1317745
+   "late_names": 2830,
+   "listing": 1119044
   }
  }
 }

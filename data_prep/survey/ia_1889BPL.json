@@ -410,17 +410,32 @@
    "publisher_tag_note": null,
    "year_tag": "1889",
    "hocr_lines": 264731,
-   "wrap_joins": 4901,
-   "candidates": 259830,
-   "kept": 222245,
-   "keep_rate": 0.8553,
+   "wrap_joins": 29855,
+   "candidates": 234876,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 225679,
+    "mark_share": 0.0204,
+    "mode": 2.0,
+    "mode_pairs": 22085,
+    "trough": 1.5,
+    "trough_pairs": 274,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 207365,
+   "keep_rate": 0.8829,
    "dropped": {
-    "short": 26246,
-    "allcaps": 5169,
-    "banner": 3390,
-    "bigtype": 2587,
-    "nonascii": 177,
-    "pagenum": 16
+    "short": 16654,
+    "allcaps": 4830,
+    "banner": 3285,
+    "bigtype": 2541,
+    "nonascii": 184,
+    "pagenum": 17
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -434,17 +449,17 @@
    "top_ad_leaves": [
     1400,
     579,
-    1061,
-    140,
     580,
-    1394,
+    1061,
     1062,
+    140,
+    1394,
     760,
     1390,
     614
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 17360895,
   "hocr_deleted": true,
@@ -818,8 +833,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -979,8 +994,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/1889BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -994,12 +1009,12 @@
     "end_leaf": 1390
    }
   ],
-  "kept": 208167,
-  "dropped": 14078,
-  "kept_share": 0.9367,
+  "kept": 193480,
+  "dropped": 13885,
+  "kept_share": 0.933,
   "kept_by_section": {
-   "late_names": 73,
-   "listing": 208094
+   "late_names": 65,
+   "listing": 193415
   }
  }
 }

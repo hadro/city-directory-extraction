@@ -308,17 +308,32 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1853",
-   "hocr_lines": 47025,
-   "wrap_joins": 855,
-   "candidates": 46170,
-   "kept": 42125,
-   "keep_rate": 0.9124,
+   "hocr_lines": 47444,
+   "wrap_joins": 846,
+   "candidates": 46598,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 41841,
+    "mark_share": 0.0177,
+    "mode": 1.25,
+    "mode_pairs": 246,
+    "trough": 0.75,
+    "trough_pairs": 109,
+    "reason": "runover mode not isolated from the next-entry band"
+   },
+   "column_splits": {
+    "lines": 419,
+    "leaves": 11
+   },
+   "kept": 42131,
+   "keep_rate": 0.9041,
    "dropped": {
-    "short": 2837,
+    "short": 3272,
     "allcaps": 685,
-    "banner": 492,
-    "bigtype": 23,
-    "nonascii": 8
+    "banner": 476,
+    "bigtype": 25,
+    "nonascii": 9
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -341,8 +356,8 @@
     5,
     65
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 2682059,
   "hocr_deleted": true,
@@ -717,8 +732,8 @@
  "scope_note": "Title page (leaf 5, https://iiif.archive.org/iiif/trowsgeneraldire1853trow$5/full/!1400,1400/0/default.jpg): 'WILSON'S BUSINESS DIRECTORY ... NEW-YORK'. A business directory, not Trow's general (residential) directory, despite IA's title 'Trow's general directory of the boroughs of Manhattan and Bronx' and the `trowsgeneraldire` identifier -- the same catalog error as the 1913 Trow set. Structure agrees: Phase 2 found no volume-length alphabet, only five short B->W runs (leaves 129-751), the shape of names sorted within trade headings. Surfaced by the Phase 2 small-listing flag; confirmed by hadro, 2026-09-23.",
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -852,8 +867,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": null,
   "sections": [
    {

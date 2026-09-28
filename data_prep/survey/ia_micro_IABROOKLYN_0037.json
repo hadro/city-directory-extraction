@@ -283,17 +283,32 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'j. lain and company' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1857",
-   "hocr_lines": 16291,
-   "wrap_joins": 982,
-   "candidates": 15309,
-   "kept": 8868,
-   "keep_rate": 0.5793,
+   "hocr_lines": 17161,
+   "wrap_joins": 930,
+   "candidates": 16231,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 10624,
+    "mark_share": 0.1073,
+    "mode": 1.75,
+    "mode_pairs": 464,
+    "trough": 0.75,
+    "trough_pairs": 137,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 870,
+    "leaves": 40
+   },
+   "kept": 9300,
+   "keep_rate": 0.573,
    "dropped": {
-    "short": 4278,
-    "banner": 945,
-    "bigtype": 687,
-    "allcaps": 462,
-    "nonascii": 59,
+    "short": 4382,
+    "banner": 1289,
+    "bigtype": 713,
+    "allcaps": 467,
+    "nonascii": 70,
     "pagenum": 10
    },
    "ditto_marks": [
@@ -319,8 +334,8 @@
     84,
     206
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 1157978,
   "hocr_deleted": true,
@@ -715,8 +730,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -827,8 +842,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0037_listing.jsonl.gz",
   "sections": [
    {
@@ -842,12 +857,12 @@
     "end_leaf": 414
    }
   ],
-  "kept": 8208,
+  "kept": 8640,
   "dropped": 660,
-  "kept_share": 0.9256,
+  "kept_share": 0.929,
   "kept_by_section": {
    "late_names": 32,
-   "listing": 8176
+   "listing": 8608
   }
  }
 }

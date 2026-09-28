@@ -339,17 +339,32 @@
    "publisher_tag_note": null,
    "year_tag": "1848",
    "hocr_lines": 86668,
-   "wrap_joins": 1286,
-   "candidates": 85382,
-   "kept": 78746,
-   "keep_rate": 0.9223,
+   "wrap_joins": 7690,
+   "candidates": 78978,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 78687,
+    "mark_share": 0.0075,
+    "mode": 2.0,
+    "mode_pairs": 4974,
+    "trough": 1.5,
+    "trough_pairs": 60,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 73784,
+   "keep_rate": 0.9342,
    "dropped": {
-    "short": 4359,
-    "allcaps": 1197,
-    "banner": 1009,
-    "bigtype": 47,
+    "short": 3060,
+    "allcaps": 1147,
+    "banner": 913,
+    "bigtype": 49,
     "pagenum": 14,
-    "nonascii": 10
+    "nonascii": 11
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -363,17 +378,17 @@
    "top_ad_leaves": [
     523,
     468,
+    5,
     1,
     519,
     36,
     475,
     502,
-    5,
     4,
-    522
+    501
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 6537751,
   "hocr_deleted": true,
@@ -618,8 +633,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -935,8 +950,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/doggettsnewyorkc1848dogg_listing.jsonl.gz",
   "sections": [
    {
@@ -950,12 +965,12 @@
     "end_leaf": 472
    }
   ],
-  "kept": 72240,
-  "dropped": 6506,
-  "kept_share": 0.9174,
+  "kept": 67588,
+  "dropped": 6196,
+  "kept_share": 0.916,
   "kept_by_section": {
-   "late_names": 291,
-   "listing": 71949
+   "late_names": 252,
+   "listing": 67336
   }
  }
 }

@@ -104,6 +104,7 @@ import statistics
 import sys
 import time
 import urllib.request
+from collections import Counter
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -206,6 +207,14 @@ class Item:
         if not markup:
             return None, None
         return hocr_lines(markup), page_dims(markup)
+
+    def page_words(self, leaf: int):
+        """(hocr_words, page_dims): the same page before words are joined into line text. What
+        `split_merged_columns` needs, since the gutter is only visible in the word boxes."""
+        markup = self.hocr_page(leaf)
+        if not markup:
+            return None, None
+        return hocr_words(markup), page_dims(markup)
 
     def hocr_page(self, leaf: int):
         if leaf >= len(self.index):
@@ -353,8 +362,12 @@ def word_parent(text):
             and not DITTO_SHAPE.match(t[0]) and not text.rstrip().endswith("-"))
 
 
-def join_wraps(lines, med_h, deep_indent=False):
+def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO):
     """Join wrapped entries into one line. Returns ([(box, text, height)], n_joins).
+
+    `indent_ratio` replaces INDENT_RATIO for one volume; `calibrate_indent` reads it off the
+    volume's own indent histogram. See there for why 3.0 is right for 1906BPL and wrong for most
+    of the corpus.
 
     GROUND_TRUTH_HANDOFF conventions 9a and 15: a printed entry that overflows its column
     continues on an INDENTED next line, and gold joins the two into a single `raw_line` -- with
@@ -438,7 +451,7 @@ def join_wraps(lines, med_h, deep_indent=False):
     for box, text in lines:
         if out:
             pb, pt, ph = out[-1]
-            floor = DEEP_INDENT if (deep_indent and word_parent(pt)) else INDENT_RATIO
+            floor = DEEP_INDENT if (deep_indent and word_parent(pt)) else indent_ratio
             if (box[0] - pb[0] > floor * med_h
                     and 0 < box[1] - pb[1] < VGAP_RATIO * med_h
                     and min(box[2], pb[2]) - max(box[0], pb[0]) > OVERLAP_FRAC * (box[2] - box[0])):
@@ -449,6 +462,194 @@ def join_wraps(lines, med_h, deep_indent=False):
                 continue
         out.append((box, text, box[3] - box[1]))
     return out, joins
+
+
+# Per-volume wrap threshold. The consecutive-line indent histogram, in median line heights.
+CAL_BIN = 0.25                 # histogram bin
+CAL_MODE_RANGE = (1.25, 3.0)   # where a runover mode shallower than INDENT_RATIO is looked for
+CAL_MIN_MODE = 100             # line pairs in the mode bin before the volume's own mode is believed
+CAL_TROUGH_SHARE = 0.05        # the trough below it must fall to this share of the mode
+CAL_MAX_MARK_SHARE = 0.05      # lines opening with a ditto mark: at or above this, keep the default
+
+
+def _indent_pairs(raw, med_h):
+    """Indent, in median line heights, of each line under the one before it -- only for pairs
+    join_wraps could join at all (just below it, overlapping it)."""
+    for (pb, _), (b, _) in zip(raw, raw[1:]):
+        if (0 < b[1] - pb[1] < VGAP_RATIO * med_h
+                and min(b[2], pb[2]) - max(b[0], pb[0]) > OVERLAP_FRAC * (b[2] - b[0])):
+            yield (b[0] - pb[0]) / med_h
+
+
+def calibrate_indent(item, leaves, split_columns=False) -> dict:
+    """The wrap threshold for THIS volume, from its own indent histogram. No labels.
+
+    INDENT_RATIO = 3.0 was calibrated on 1906BPL, whose runovers sit at 3.9-5.2 line heights.
+    Most of the corpus indents its runovers by ~2.0: measured over the survey's 16.9M scoped
+    lines, 517,137 runover lines sat below 3.0 and were never joined (Doggett 1845 2,814 of 2,814;
+    1884BPL 17,318). Each one costs an entry its tail and comes back from the model as a person
+    named 'Bleecker' or '191 Duane'.
+
+    A volume gets a lower threshold only when both hold:
+      * almost no line opens with a ditto mark. In a ditto volume, a line whose mark the OCR
+        dropped is indented by the mark's width, 1-2.5 line heights, and joining it glues two
+        people together. That is join_wraps' deep-indent problem, and 1906BPL and 1897BPL
+        (54% mark-led) keep 3.0.
+      * the runover mode is SHARP: the trough below it falls to 5% of the mode. Doggett 1845,
+        1884BPL and Rode 1851 trough at 1.7% of a 2.0 mode. Smith 1856 does not (19%), and
+        rightly so: its microfilm OCR turns the dash that stands for a repeated surname into `,`,
+        `—` or nothing, so its shallow band mixes real runovers with the next entry. The mark
+        share cannot see that (2.0% -- the marks are gone); the histogram's shape can.
+    The threshold is the trough: the emptiest bin within one line height below the mode.
+    """
+    hist, pairs, marks, n_lines = Counter(), 0, 0, 0
+    for leaf in leaves:
+        if split_columns:
+            words, dims = item.page_words(leaf)
+            raw = words_to_lines(split_merged_columns(words, dims)[0]) if words else None
+        else:
+            raw, dims = item.page_lines(leaf)
+        if not raw or len(raw) < 8:
+            continue
+        med_h = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
+        for _, t in raw:
+            tok = t.split()[0] if t.split() else ""
+            n_lines += 1
+            marks += bool(DITTO_SHAPE.match(tok)) and not any(c.isdigit() for c in tok)
+        for r in _indent_pairs(raw, med_h):
+            pairs += 1
+            hist[round(r / CAL_BIN) * CAL_BIN] += 1
+    out = {"indent_ratio": INDENT_RATIO, "calibrated": False, "pairs": pairs,
+           "mark_share": round(marks / n_lines, 4) if n_lines else None}
+    lo, hi = CAL_MODE_RANGE
+    in_range = {b: c for b, c in hist.items() if lo <= b < hi}
+    if not in_range:
+        return {**out, "reason": "no line pairs in the runover range"}
+    mode = max(in_range, key=in_range.get)
+    below = {b: hist.get(b, 0) for b in
+             [round(mode - k * CAL_BIN, 4) for k in range(1, int(1 / CAL_BIN) + 1)] if b > 0}
+    trough = min(below, key=lambda b: (below[b], -b)) if below else None
+    out.update({"mode": mode, "mode_pairs": hist[mode], "trough": trough,
+                "trough_pairs": below.get(trough)})
+    if out["mark_share"] is not None and out["mark_share"] >= CAL_MAX_MARK_SHARE:
+        return {**out, "reason": "ditto marks: a dropped mark indents like a runover"}
+    if hist[mode] < CAL_MIN_MODE:
+        return {**out, "reason": "too few runovers to read a mode"}
+    if trough is None or below[trough] > CAL_TROUGH_SHARE * hist[mode]:
+        return {**out, "reason": "runover mode not isolated from the next-entry band"}
+    return {**out, "indent_ratio": trough, "calibrated": True, "reason": "sharp runover mode"}
+
+
+# Column-merged microfilm lines
+SPLIT_GAP = 0.8          # whitespace that marks a candidate right-column margin, in word heights
+CUT_GAP = 0.2            # ...and the least whitespace at which a line is cut there: on microfilm
+                         # the left column runs up to the gutter (`Mar-` ends ~50 px before
+                         # `Fagans`), so the margin's alignment is the signal, not the gap
+SPLIT_MIN_LINES = 4      # a leaf splits only when this many lines split...
+SPLIT_MIN_SHARE = 0.2    # ...and at least this share of its lines
+SPLIT_ALPHA_SHARE = 0.7  # ...and the right halves read as ONE alphabet column: this share of them
+                         # open with the same letter or the next one (Fagans, Falconer, Fales)
+
+
+def _alpha_column(heads) -> bool:
+    """True when these entry-opening words look like a run of an alphabetical listing."""
+    initials = [next((c for c in h if c.isalpha()), "") for h in heads]
+    initials = [c for c in initials if c.isupper()]
+    if len(initials) < SPLIT_MIN_LINES:
+        return False
+    counts = Counter(initials)
+    best = max(counts[c] + counts.get(chr(ord(c) + 1), 0) for c in counts)
+    return best >= SPLIT_ALPHA_SHARE * len(initials)
+
+
+def _alnum(w):
+    return any(c.isalnum() for c in w[5])
+
+
+def _split_at(ws, margin, tol, gap):
+    """(left, right) for one hOCR line straddling the gutter, or None. The right half must open
+    at the right column's margin, after gutter-sized whitespace, with something that can open an
+    entry (a capital or a ditto mark). Lone punctuation at the gutter -- tesseract reads the
+    column rule as `|` -- belongs to neither half."""
+    last_x1 = None
+    for i, w in enumerate(ws):
+        if not _alnum(w):
+            continue
+        if (last_x1 is not None and abs(w[0] - margin) <= tol and w[0] - last_x1 > gap):
+            left = [v for v in ws[:i] if _alnum(v) or v[2] <= last_x1]
+            right = ws[i:]
+            first = right[0][5]
+            alpha = next((c for c in first if c.isalpha()), "")
+            if alpha.isupper() or DITTO_SHAPE.match(first):
+                return left, right
+            return None
+        last_x1 = w[2]
+    return None
+
+
+def split_merged_columns(lines, dims):
+    """Undo tesseract reading straight across a two-column page's gutter. Returns (lines, n).
+
+    On 58 of Smith 1856's 414 leaves most hOCR lines hold a left-column entry AND a right-column
+    entry (`Evans John, brassmoulder, 252 First F. George A. Lawton, n. Broadway`), and the model
+    returns one record per line, so the right column never reaches it. 83 volumes have such
+    leaves, ~27,000 lines, most of them the Brooklyn microfilm.
+
+    The widest gap in a line is NOT the gutter: the same OCR drops words mid-column, leaving gaps
+    as wide (`Ernst John, tailor, 62 Schols rum` has 678 px inside the left column). What is
+    reliable is the right column's own margin. Right-column entries open at one x, so words that
+    open a line or follow gutter-sized whitespace in the middle of the page pile up at that x
+    even on a fully merged leaf. Lines are cut at that margin, only when enough of the leaf's
+    lines cut cleanly. Then the leaf is re-read column by column, so dittos and join_wraps see
+    each line's true predecessor.
+
+    Two books line up words mid-page without being merged, and both are refused. A one-column
+    book aligns its street names (`Burl John, stone cutter 89` | `Hudson av`), and Trow's heading
+    indexes are tables. So the cut halves must also read as one alphabet column: most right
+    halves open with the same letter or the next (`_alpha_column`).
+
+    Words-in, words-out, and a leaf that does not split is returned untouched, so any volume
+    without merged leaves produces byte-identical lines."""
+    if not dims or not lines or len(lines) < 10:
+        return lines, 0
+    W = dims[0]
+    hs = sorted(w[3] - w[1] for ws in lines for w in ws)
+    h = hs[len(hs) // 2] or 1
+    xs = []
+    for ws in lines:
+        last_x1 = None
+        for w in ws:
+            if not _alnum(w):
+                continue
+            if 0.3 * W <= w[0] <= 0.7 * W and (last_x1 is None or w[0] - last_x1 > SPLIT_GAP * h):
+                xs.append(w[0])
+            last_x1 = w[2]
+    if len(xs) < SPLIT_MIN_LINES:
+        return lines, 0
+    bins = Counter(int(x * 100 / W) for x in xs)
+    peak = max(bins, key=lambda b: (bins[b] + bins.get(b - 1, 0) + bins.get(b + 1, 0), -b))
+    near = sorted(x for x in xs if abs(int(x * 100 / W) - peak) <= 1)
+    margin, tol = near[len(near) // 2], 0.015 * W
+    left, right, n = [], [], 0
+    for ws in lines:
+        cut = _split_at(ws, margin, tol, CUT_GAP * h)
+        if cut:
+            left.append(cut[0])
+            right.append(cut[1])
+            n += 1
+        elif min(w[0] for w in ws) >= margin - tol:
+            right.append(ws)
+        else:
+            left.append(ws)
+    if n < max(SPLIT_MIN_LINES, SPLIT_MIN_SHARE * len(lines)):
+        return lines, 0
+    # A one-column book aligns its STREETS mid-page (`Burl John, stone cutter 89 | Hudson av`):
+    # a right half that opens with Henry, Main, Wall, Adams is an address, not an entry. Merged
+    # columns open their right halves with one letter of the alphabet.
+    if not _alpha_column([r[0][5] for r in right if r and not DITTO_SHAPE.match(r[0][5])]):
+        return lines, 0
+    top = lambda ws: min(w[1] for w in ws)
+    return sorted(left, key=top) + sorted(right, key=top), n
 
 
 BODY_WIDTH_FLOOR = 0.5   # a line under this share of the median width is a fragment, not a body line
@@ -892,8 +1093,12 @@ def leaf_bands(buffered, marks, pad=BAND_PAD, min_lines=BAND_MIN_DITTO_LINES):
 
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
           normalize_dittos=True, confirmed_marks=(), band=True, deep_indent=False,
-          holdout=None):
+          holdout=None, indent_ratio=INDENT_RATIO, split_columns=False):
     """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
+
+    `indent_ratio` is the wrap-join threshold (see calibrate_indent). `split_columns` cuts hOCR
+    lines that run across a two-column page's gutter (see split_merged_columns); it reads words
+    through `item.page_words`, and counts cut lines in stats["splits"].
 
     Kept lines are buffered rather than streamed so the ditto-lead frequency gate can see the
     whole volume before deciding which leading tokens are dittos (~50 MB for a 200k-line book).
@@ -903,10 +1108,17 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
     `holdout` maps leaf -> tag ("gold" / "adjacent") for leaves an eval set was built from; their
     lines are emitted with `context.eval_holdout` so no consumer has to remember to filter them.
     """
-    stats = {"leaves": 0, "raw": 0, "joins": 0, "kept": 0}
+    stats = {"leaves": 0, "raw": 0, "joins": 0, "kept": 0, "splits": 0, "split_leaves": 0}
     reasons, ad_scores, buffered = {}, [], []
     for n, leaf in enumerate(leaves, 1):
-        raw, dims = item.page_lines(leaf)
+        if split_columns:
+            words, dims = item.page_words(leaf)
+            words, cut = split_merged_columns(words, dims) if words else (words, 0)
+            raw = words_to_lines(words) if words else None
+            stats["splits"] += cut
+            stats["split_leaves"] += bool(cut)
+        else:
+            raw, dims = item.page_lines(leaf)
         if not raw:
             continue
         stats["leaves"] += 1
@@ -916,7 +1128,7 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
         # filter would discard it, and the entry it belongs to would silently lose its address.
         med_h_raw = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
         if join:
-            lines, joins = join_wraps(raw, med_h_raw, deep_indent)
+            lines, joins = join_wraps(raw, med_h_raw, deep_indent, indent_ratio)
             stats["joins"] += joins
         else:
             lines = [(b, t, b[3] - b[1]) for b, t in raw]
@@ -1235,6 +1447,62 @@ def _self_test() -> int:
     heads = ["— ■ Telephone Call:"] * 30 + [f"Ackerman{i} lab h 1 Main" for i in range(70)]
     assert "—" not in ditto_lead_candidates(heads, confirmed=("—",))[0], \
         "a heading mark must not be promotable by hand"
+
+    # --- split_merged_columns: a merged two-column page is cut at the right column's margin
+    def word(x, y, t, w=None):
+        return [x, y, x + (w or 18 * len(t)), y + 40, 90, t]
+
+    def merged_line(k, left, right, junk=False):
+        y = 100 + 60 * k
+        ws, x = [], 100
+        for t in left.split():
+            ws.append(word(x, y, t)); x = ws[-1][2] + 15
+        if junk:
+            ws.append(word(1010, y, "|", 6))
+        x = 1050
+        for t in right.split():
+            ws.append(word(x, y, t)); x = ws[-1][2] + 15
+        return ws
+    surnames = ["Fagans", "Falconer", "Fales", "Fall", "Fallon", "Falvey", "Fancher", "Fanjoy",
+                "Farley", "Farmer", "Farnam", "Farrel"]
+    page = [merged_line(k, f"Erb{k} Henry, tailor, 11 Grand", f"{s} John, 4 Main", junk=k == 3)
+            for k, s in enumerate(surnames)]
+    out, n = split_merged_columns(page, (2000, 3000))
+    assert n == 12 and len(out) == 24, (n, len(out))
+    assert [w[5] for w in out[12]] == ["Fagans", "John,", "4", "Main"], "right column after left"
+    assert all(w[5] != "|" for ws in out for w in ws), "the column rule belongs to neither half"
+    assert out[:12] == [ws[:5] for ws in page], "left halves keep their words and order"
+    # a one-column book aligns its street names mid-page: same geometry, not one alphabet column
+    streets = ["Henry", "Main", "Wall", "Adams", "Nassau", "Jay", "York", "Pearl", "Sands",
+               "Court", "Hicks", "Navy"]
+    page = [merged_line(k, f"Burl{k} John, stone cutter 89", f"{s} st") for k, s in
+            enumerate(streets)]
+    assert split_merged_columns(page, (2000, 3000)) == (page, 0), "streets are not a column"
+    assert split_merged_columns(page[:5], (2000, 3000)) == (page[:5], 0), "too few lines to judge"
+
+    # --- calibrate_indent: a sharp runover mode below 3.0 lowers the threshold; dittos veto it
+    class FakeItem:
+        def __init__(self, pages):
+            self.pages = pages
+
+        def page_lines(self, leaf):
+            return self.pages[leaf], (2000, 3000)
+
+    def leaf_lines(first="Abbott"):
+        out, y = [], 100
+        for k in range(12):                         # entry, then a runover indented 2.0 heights
+            out.append(((100, y, 900, y + 20), f"{first}{k} John, grocer, 12"))
+            out.append(((140, y + 22, 400, y + 42), "Pearl"))
+            y += 44
+        return out
+    item = FakeItem({L: leaf_lines() for L in range(10)})
+    cal = calibrate_indent(item, range(10))
+    assert cal["calibrated"] and cal["mode"] == 2.0 and cal["indent_ratio"] < 2.0, cal
+    joined, n = join_wraps(item.pages[0], 20, indent_ratio=cal["indent_ratio"])
+    assert n == 12 and joined[0][1] == "Abbott0 John, grocer, 12 Pearl", (n, joined[0])
+    assert join_wraps(item.pages[0], 20)[1] == 0, "the default 3.0 joins none of them"
+    ditto = FakeItem({L: leaf_lines(first='" ') for L in range(10)})
+    assert not calibrate_indent(ditto, range(10))["calibrated"], "a ditto volume keeps 3.0"
 
     print("self-test OK", file=sys.stderr)
     return 0

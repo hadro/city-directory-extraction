@@ -331,6 +331,21 @@
    "hocr_lines": 50064,
    "wrap_joins": 689,
    "candidates": 49375,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 46023,
+    "mark_share": 0.0048,
+    "mode": 1.25,
+    "mode_pairs": 97,
+    "trough": 0.75,
+    "trough_pairs": 89,
+    "reason": "too few runovers to read a mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 41277,
    "keep_rate": 0.836,
    "dropped": {
@@ -362,8 +377,8 @@
     749,
     788
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 3432412,
   "hocr_deleted": true,
@@ -642,8 +657,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -787,8 +802,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/longworthsameric6018long_listing.jsonl.gz",
   "sections": [
    {

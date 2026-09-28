@@ -316,16 +316,31 @@
    "publisher_tag_note": null,
    "year_tag": "1863",
    "hocr_lines": 196957,
-   "wrap_joins": 2835,
-   "candidates": 194122,
-   "kept": 176105,
-   "keep_rate": 0.9072,
+   "wrap_joins": 18959,
+   "candidates": 177998,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 177162,
+    "mark_share": 0.0053,
+    "mode": 2.0,
+    "mode_pairs": 14360,
+    "trough": 1.5,
+    "trough_pairs": 222,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 167549,
+   "keep_rate": 0.9413,
    "dropped": {
-    "short": 12172,
-    "allcaps": 2962,
-    "banner": 2799,
+    "short": 4963,
+    "banner": 2756,
+    "allcaps": 2650,
     "bigtype": 45,
-    "nonascii": 39
+    "nonascii": 35
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -338,18 +353,18 @@
    },
    "top_ad_leaves": [
     1108,
-    1049,
+    1117,
     1121,
     1116,
-    1117,
     1115,
     1107,
     1114,
     1053,
-    10
+    10,
+    1049
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 15237553,
   "hocr_deleted": true,
@@ -634,8 +649,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -907,8 +922,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/trowsnewyorkcity1863trow_listing.jsonl.gz",
   "sections": [
    {
@@ -922,12 +937,12 @@
     "end_leaf": 982
    }
   ],
-  "kept": 160983,
-  "dropped": 15122,
-  "kept_share": 0.9141,
+  "kept": 152975,
+  "dropped": 14574,
+  "kept_share": 0.913,
   "kept_by_section": {
-   "late_names": 157,
-   "listing": 160826
+   "late_names": 146,
+   "listing": 152829
   }
  }
 }

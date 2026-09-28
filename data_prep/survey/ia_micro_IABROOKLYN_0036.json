@@ -381,17 +381,32 @@
    "publisher_tag": "smith",
    "publisher_tag_note": null,
    "year_tag": "1856",
-   "hocr_lines": 29417,
-   "wrap_joins": 1641,
-   "candidates": 27776,
-   "kept": 18302,
-   "keep_rate": 0.6589,
+   "hocr_lines": 31210,
+   "wrap_joins": 1563,
+   "candidates": 29647,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 21140,
+    "mark_share": 0.0807,
+    "mode": 1.75,
+    "mode_pairs": 1161,
+    "trough": 0.75,
+    "trough_pairs": 206,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 1793,
+    "leaves": 70
+   },
+   "kept": 19355,
+   "keep_rate": 0.6528,
    "dropped": {
-    "short": 6987,
-    "banner": 1248,
-    "bigtype": 761,
-    "allcaps": 388,
-    "nonascii": 85,
+    "short": 7228,
+    "banner": 1756,
+    "bigtype": 800,
+    "allcaps": 409,
+    "nonascii": 94,
     "pagenum": 5
    },
    "ditto_marks": [],
@@ -415,8 +430,8 @@
     459,
     556
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 1909921,
   "hocr_deleted": true,
@@ -843,8 +858,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -962,8 +977,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0036_listing.jsonl.gz",
   "sections": [
    {
@@ -977,12 +992,12 @@
     "end_leaf": 504
    }
   ],
-  "kept": 17535,
+  "kept": 18588,
   "dropped": 767,
-  "kept_share": 0.9581,
+  "kept_share": 0.9604,
   "kept_by_section": {
-   "listing": 13232,
-   "district: EASTERN DISTRIOT,": 4303
+   "listing": 13810,
+   "district: EASTERN DISTRIOT,": 4778
   }
  }
 }

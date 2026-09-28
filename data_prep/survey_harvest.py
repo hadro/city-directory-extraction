@@ -24,8 +24,11 @@ Per volume, under data/survey_ocr/ (gitignored):
                             out of hOCR (`hocr_lines` is derived from `hocr_words` and nothing
                             else), at ~7.6% of the hOCR's bytes -- measured on 1857BPL, 60.5 MB
                             of hOCR -> 4.6 MB gzipped, so ~1.6 GB for the 21.7 GB corpus.
-    <id>_lines.jsonl.gz     ia_volume_to_jsonl.sweep() over the dump, default settings: the
-                            `{raw_line, context, record}` file eval/qwen_predict.py reads.
+    <id>_lines.jsonl.gz     ia_volume_to_jsonl.sweep() over the dump: the `{raw_line, context,
+                            record}` file eval/qwen_predict.py reads. Default filters, plus two
+                            per-volume corrections the CLI leaves off: the wrap threshold is read
+                            off the volume's own indent histogram (calibrate_indent), and lines
+                            tesseract ran across the gutter are cut (split_merged_columns).
     <id>_dropped.txt.gz     every line the filters rejected, with its reason. Together with
                             _lines it accounts for every candidate line.
 
@@ -75,8 +78,9 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 sys.path.insert(0, str(HERE))
 
-from ia_volume_to_jsonl import (MIN_CHARS_LEAF, Item, hocr_words, lookup_master,  # noqa: E402
-                                page_dims, sweep, tag_publisher, words_to_lines)
+from ia_volume_to_jsonl import (MIN_CHARS_LEAF, Item, calibrate_indent,  # noqa: E402
+                                hocr_words, lookup_master, page_dims, sweep, tag_publisher,
+                                words_to_lines)
 from verify_harvest_leakage import BANNED_IA_ITEMS, gold_pages, page_id  # noqa: E402
 
 SIDECARS = HERE / "survey"
@@ -116,6 +120,10 @@ class WordDump:
                 yield json.loads(line)
 
     def page_lines(self, leaf: int):
+        words, dims = self.page_words(leaf)
+        return (words_to_lines(words), dims) if words is not None else (None, None)
+
+    def page_words(self, leaf: int):
         if self._fh is None or (self._rec is not None and self._rec["leaf"] > leaf):
             self._open()
         while self._rec is None or self._rec["leaf"] < leaf:
@@ -126,7 +134,7 @@ class WordDump:
         if self._rec["leaf"] != leaf:
             return None, None
         dims = tuple(self._rec["page_size"]) if self._rec["page_size"] else None
-        return words_to_lines(self._rec["lines"]), dims
+        return self._rec["lines"], dims
 
     def close(self):
         if self._fh:
@@ -345,13 +353,14 @@ def derive(ident: str, holdout: dict) -> dict:
     content = [r["leaf"] for r in dump.records() if r["chars"] > MIN_CHARS_LEAF]
     catalog_pub, year = lookup_master(ident)
     publisher, why = tag_publisher(catalog_pub)
+    wraps = calibrate_indent(dump, content, split_columns=True)
     tmp_l = p["lines.jsonl.gz"].with_suffix(".tmp")
     tmp_d = p["dropped.txt.gz"].with_suffix(".tmp")
     with gzip.open(tmp_l, "wt", encoding="utf-8") as out_fh, \
             gzip.open(tmp_d, "wt", encoding="utf-8") as dropped_fh:
         stats, reasons, ad_scores, ditto, band = sweep(
             dump, publisher, year, content, True, None, True, dropped_fh, out_fh,
-            holdout=holdout)
+            holdout=holdout, indent_ratio=wraps["indent_ratio"], split_columns=True)
     dump.close()
     tmp_l.rename(p["lines.jsonl.gz"])
     tmp_d.rename(p["dropped.txt.gz"])
@@ -359,6 +368,8 @@ def derive(ident: str, holdout: dict) -> dict:
     return {
         "publisher_tag": publisher, "publisher_tag_note": why or None, "year_tag": year or None,
         "hocr_lines": stats["raw"], "wrap_joins": stats["joins"], "candidates": cand,
+        "wrap_calibration": wraps,
+        "column_splits": {"lines": stats["splits"], "leaves": stats["split_leaves"]},
         "kept": stats["kept"], "keep_rate": round(stats["kept"] / cand, 4) if cand else None,
         "dropped": dict(sorted(reasons.items(), key=lambda kv: -kv[1])),
         "ditto_marks": ditto["marks"] if ditto else [],

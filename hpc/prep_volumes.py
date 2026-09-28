@@ -8,13 +8,15 @@ Stage whole volumes for a Torch prediction run (hpc/35_volumes.sbatch). Runs on 
 
     python3 hpc/prep_volumes.py --ids micro_IABROOKLYN_0030,merceinscitydire00merc
     python3 hpc/prep_volumes.py --ids ... --chunk 10000 --out data/volumes
+    python3 hpc/prep_volumes.py --ids ... --files data/iapanel_*_eval.jsonl   # + eval files
     tar czf cde-volumes.tar.gz data/volumes          # ship next to the bundle
     python3 hpc/prep_volumes.py --self-test
 
 Reads the listing-scoped lines the corpus survey writes (data/survey_ocr/<id>_listing.jsonl.gz:
 residential sections only, each line tagged `context.section`) and splits each volume into plain
 JSONL chunks of --chunk lines, because eval/qwen_predict.py reads plain JSONL and has no resume.
-A chunk is one SLURM array task: ~1 h on an L40S at the measured 2.7 rows/s, so no chunk comes
+A chunk is one SLURM array task: ~25 min on an L40S at the measured 7.3 rows/s (14 min on an
+H200 at 11.88; the 2.7 once assumed here was a load-dominated figure), so no chunk comes
 near a wall-clock limit, and a preempted chunk is simply re-run.
 
 Writes, under --out:
@@ -35,8 +37,8 @@ REPO = Path(__file__).resolve().parent.parent
 SRC = REPO / "data" / "survey_ocr"
 
 
-def split(ident: str, out: Path, chunk: int) -> list:
-    src = SRC / f"{ident}_listing.jsonl.gz"
+def split(ident: str, out: Path, chunk: int, src: Path = None) -> list:
+    src = src or SRC / f"{ident}_listing.jsonl.gz"
     if not src.exists():
         raise SystemExit(f"no listing-scoped lines for {ident} at {src} -- run "
                          f"data_prep/survey_derive.py scope first")
@@ -58,7 +60,8 @@ def split(ident: str, out: Path, chunk: int) -> list:
                        "sha1": hashlib.sha1(text.encode("utf-8")).hexdigest()})
         buf.clear()
 
-    with gzip.open(src, "rt", encoding="utf-8") as fh:
+    with (gzip.open(src, "rt", encoding="utf-8") if src.suffix == ".gz"
+          else open(src, encoding="utf-8")) as fh:
         for line in fh:
             if line.strip():
                 buf.append(line if line.endswith("\n") else line + "\n")
@@ -72,21 +75,27 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--ids", help="comma list of IA identifiers")
+    ap.add_argument("--files", nargs="*", default=[],
+                    help="extra JSONL files (e.g. eval/ia_panel.py's data/iapanel_<set>_eval.jsonl), "
+                         "each staged as its own pseudo-volume named after the file")
     ap.add_argument("--chunk", type=int, default=10000, help="lines per array task")
     ap.add_argument("--out", default=str(REPO / "data" / "volumes"))
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
-    if not args.ids:
-        ap.error("--ids is required")
+    if not args.ids and not args.files:
+        ap.error("--ids or --files is required")
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     manifest, tasks = {}, []
-    for ident in args.ids.split(","):
-        chunks = split(ident, out, args.chunk)
-        manifest[ident] = {"source": str((SRC / f"{ident}_listing.jsonl.gz").relative_to(REPO)),
+    sources = [(i, SRC / f"{i}_listing.jsonl.gz") for i in (args.ids or "").split(",") if i]
+    sources += [(Path(f).name.replace("_eval.jsonl", "").replace(".jsonl", ""), Path(f).resolve())
+                for f in args.files]
+    for ident, src in sources:
+        chunks = split(ident, out, args.chunk, src)
+        manifest[ident] = {"source": str(src.relative_to(REPO)),
                            "lines": sum(c["lines"] for c in chunks), "chunks": chunks}
         tasks += [f"{ident} {c['path']} {c['lines']}" for c in chunks]
         print(f"{ident}: {manifest[ident]['lines']:,} lines -> {len(chunks)} chunks",
@@ -94,8 +103,9 @@ def main(argv=None) -> int:
     (out / "tasks.txt").write_text("\n".join(tasks) + "\n", encoding="utf-8")
     (out / "manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
     total = sum(v["lines"] for v in manifest.values())
-    print(f"\n{len(tasks)} array tasks, {total:,} lines; at the measured 2.7 rows/s (4B, L40S) "
-          f"that is ~{total / 2.7 / 3600:.1f} GPU-hours", file=sys.stderr)
+    print(f"\n{len(tasks)} array tasks, {total:,} lines: ~{total / 7.3 / 3600:.1f} L40S GPU-hours "
+          f"at 7.3 rows/s, ~{total / 11.88 / 3600:.1f} H200 at 11.88 (4B, measured 2026-09-28)",
+          file=sys.stderr)
     print(f"submit with: sbatch $(slurm_gpu_args) --array=0-{len(tasks) - 1} "
           f"hpc/35_volumes.sbatch", file=sys.stderr)
     return 0

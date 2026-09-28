@@ -327,6 +327,21 @@
    "hocr_lines": 249133,
    "wrap_joins": 18075,
    "candidates": 231058,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 194437,
+    "mark_share": 0.4629,
+    "mode": 1.25,
+    "mode_pairs": 10173,
+    "trough": 0.75,
+    "trough_pairs": 206,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 170897,
    "keep_rate": 0.7396,
    "dropped": {
@@ -364,8 +379,8 @@
     529,
     716
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 14707144,
   "hocr_deleted": true,
@@ -813,8 +828,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -827,14 +842,26 @@
    {
     "kind": "index",
     "start_leaf": 5,
-    "end_leaf": 8,
+    "end_leaf": 7,
     "title": {
      "leaf": 5,
      "quote": "INDEX TO ADVERTISEMENTS.",
      "image": "https://iiif.archive.org/iiif/1904BPL$5/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 4,
+    "leaves": 3,
     "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 8,
+    "end_leaf": 8,
+    "title": {
+     "leaf": 8,
+     "quote": "Names Too Late for Classification.",
+     "image": "https://iiif.archive.org/iiif/1904BPL$8/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
    },
    {
     "kind": "listing",
@@ -870,25 +897,32 @@
    "back_matter",
    "front_matter",
    "index",
+   "late_names",
    "listing"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/1904BPL_listing.jsonl.gz",
   "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 8,
+    "end_leaf": 8
+   },
    {
     "kind": "listing",
     "start_leaf": 9,
     "end_leaf": 1046
    }
   ],
-  "kept": 170508,
-  "dropped": 389,
-  "kept_share": 0.9977,
+  "kept": 170553,
+  "dropped": 344,
+  "kept_share": 0.998,
   "kept_by_section": {
+   "late_names": 45,
    "listing": 170508
   }
  }

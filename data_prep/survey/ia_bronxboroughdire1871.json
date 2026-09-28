@@ -269,14 +269,29 @@
    "publisher_tag_note": "no publisher in the catalog",
    "year_tag": "1871",
    "hocr_lines": 8032,
-   "wrap_joins": 249,
-   "candidates": 7783,
-   "kept": 7101,
-   "keep_rate": 0.9124,
+   "wrap_joins": 707,
+   "candidates": 7325,
+   "wrap_calibration": {
+    "indent_ratio": 1.5,
+    "calibrated": true,
+    "pairs": 7001,
+    "mark_share": 0.0098,
+    "mode": 2.25,
+    "mode_pairs": 212,
+    "trough": 1.5,
+    "trough_pairs": 7,
+    "reason": "sharp runover mode"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
+   "kept": 6839,
+   "keep_rate": 0.9337,
    "dropped": {
-    "short": 363,
-    "allcaps": 244,
-    "banner": 56,
+    "allcaps": 232,
+    "short": 180,
+    "banner": 55,
     "bigtype": 18,
     "nonascii": 1
    },
@@ -299,10 +314,10 @@
     110,
     76,
     9,
-    3
+    128
    ],
-   "filters_at": "b4ac266-dirty",
-   "derived": "2026-09-24"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 888115,
   "hocr_deleted": true,
@@ -579,8 +594,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -701,8 +716,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/bronxboroughdire1871_listing.jsonl.gz",
   "sections": [
    {
@@ -716,12 +731,12 @@
     "end_leaf": 182
    }
   ],
-  "kept": 5468,
-  "dropped": 1633,
-  "kept_share": 0.77,
+  "kept": 5267,
+  "dropped": 1572,
+  "kept_share": 0.7701,
   "kept_by_section": {
-   "listing": 4848,
-   "place_directory: IT'i HIOUBKIDGEVILLE DIEECTORY": 620
+   "listing": 4675,
+   "place_directory: IT'i HIOUBKIDGEVILLE DIEECTORY": 592
   }
  }
 }

@@ -308,6 +308,21 @@
    "hocr_lines": 152520,
    "wrap_joins": 17595,
    "candidates": 134925,
+   "wrap_calibration": {
+    "indent_ratio": 3.0,
+    "calibrated": false,
+    "pairs": 114877,
+    "mark_share": 0.447,
+    "mode": 1.5,
+    "mode_pairs": 4050,
+    "trough": 0.75,
+    "trough_pairs": 148,
+    "reason": "ditto marks: a dropped mark indents like a runover"
+   },
+   "column_splits": {
+    "lines": 0,
+    "leaves": 0
+   },
    "kept": 95757,
    "keep_rate": 0.7097,
    "dropped": {
@@ -345,8 +360,8 @@
     7,
     859
    ],
-   "filters_at": "622eb3d-dirty",
-   "derived": "2026-09-22"
+   "filters_at": "18ec87e-dirty",
+   "derived": "2026-09-28"
   },
   "words_gz_bytes": 8738809,
   "hocr_deleted": true,
@@ -643,8 +658,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -669,14 +684,26 @@
    {
     "kind": "index",
     "start_leaf": 29,
-    "end_leaf": 35,
+    "end_leaf": 33,
     "title": {
      "leaf": 29,
      "quote": "INDEX TO ADVERTISEMENTS",
      "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1906geor$29/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 4,
+    "leaves": 3,
     "residential": false
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 35,
+    "end_leaf": 35,
+    "title": {
+     "leaf": 35,
+     "quote": "Names too Late for Classification",
+     "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1906geor$35/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true
    },
    {
     "kind": "listing",
@@ -703,26 +730,33 @@
   "kinds": [
    "front_matter",
    "index",
+   "late_names",
    "listing",
    "street_guide"
   ]
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-24",
-  "code_at": "e4382e9-dirty",
+  "derived": "2026-09-28",
+  "code_at": "18ec87e-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1906geor_listing.jsonl.gz",
   "sections": [
+   {
+    "kind": "late_names",
+    "start_leaf": 35,
+    "end_leaf": 35
+   },
    {
     "kind": "listing",
     "start_leaf": 37,
     "end_leaf": 1215
    }
   ],
-  "kept": 95257,
-  "dropped": 500,
-  "kept_share": 0.9948,
+  "kept": 95312,
+  "dropped": 445,
+  "kept_share": 0.9954,
   "kept_by_section": {
+   "late_names": 55,
    "listing": 95257
   }
  }

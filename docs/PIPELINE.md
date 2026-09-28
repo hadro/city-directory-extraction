@@ -324,6 +324,10 @@ PYTORCH_ENABLE_MPS_FALLBACK=1 PYTHONPATH=<dir> $VP eval/qwen_predict.py …
 **0.38–0.6 lines/s** for the 2B on an M2 Air 16 GB. So 2,889 lines ≈ 2 h and **199,012 lines ≈ 6
 days**. A rented GPU is hours. Do not attempt a whole volume locally.
 
+On NYU Torch the **4B** does **11.88 rows/s on an H200 at batch 64** and **7.3 on an L40S at batch
+32**, measured on sustained 10k-line chunks (`hpc/35_volumes.sbatch`, 2026-09-28). That puts 1906BPL
+at ~4.5 H200-hours and the whole corpus's 16.7M residential lines at ~390.
+
 ---
 
 ## Stage 5 — Post-processing: resolve the dittos
@@ -451,12 +455,122 @@ changed classification**. Cite it for fabrication; never as record quality.
 publish verbatim. This project spent three cycles learning that a verbatim gain which vanishes
 under normalization is typography, not extraction.
 
+### The first whole-volume 4B run: five volumes, 310,932 lines (2026-09-28)
+
+```bash
+python3 eval/volume_run_report.py --out results/volume_run_4b-100k.json   # ~25 s, no labels
+```
+
+`4b-100k` over the survey's listing-scoped lines for Hearnes 1852, Mercein 1820, Smith 1856,
+Doggett 1845 and 1906BPL (`hpc/35_volumes.sbatch`, NYU Torch). All 310,932 records came back and
+aligned 1:1. **H200 at batch 64 does 11.88 rows/s, and an L40S at batch 32 does 7.3**, so
+the full 16.7M residential lines are **~390 H200 GPU-hours**, not the ~1,700 the plan assumed from a
+load-dominated 2.7. The checks were stated before the run. Per-volume detail, examples and the
+2B-vs-4B diffs are in [`results/volume_run_4b-100k.json`](../results/volume_run_4b-100k.json) and
+[`results/volume_run_1906BPL_2b_vs_4b.tsv`](../results/volume_run_1906BPL_2b_vs_4b.tsv).
+
+**The model is not the binding constraint on old and microfilm volumes; the OCR is.** The panel
+pages sit inside three of these volumes, so the same gold rows can be scored twice. Once as the
+panel does it, with the model reading the gold's hand-corrected text. Once end to end, with the
+model reading IA's OCR line:
+
+| volume | gold rows found in IA OCR | end-to-end row EM | panel row EM, same rows | on identical text |
+|---|---|---|---|---|
+| mercein1820 | 60/60 | **63.3** | 88.3 | 91.7 = 91.7 (n=36) |
+| hearne1852 (microfilm) | 49/52 | **38.8** | 79.6 | 85.7 = 85.7 (n=21) |
+| smith1856 (microfilm) | **58/229** | **12.1** | — (held out of the panel) | 58.3 (n=12) |
+
+Where IA's line matches the gold text exactly, the two runs are identical, which also proves NYU
+ran the right adapter. Every point of the gap is input. The misses are OCR digit errors (`58
+Rutgers` read as `68`), neighbouring-column bleed (`147 Prospect f [ington`), and on Smith, lines
+missing entirely: leaf 168 kept 62 of ~108 printed lines. **Panel scores measure the model on
+clean text. They are not what a whole-volume run delivers on this tier.**
+
+**Doggett 1845's printed count is met almost exactly, once runovers are removed.** The title page
+claims 61,333 names. Named records: 63,632, or 1.038 (inside the 0.9–1.05 band, near its top).
+Named records on lines at the column margin: **61,480, or 1.002**. The excess is 2,104
+**runover lines turned into people** ('Bleecker', '191 Duane', 'Twenty-fifth'). The 121 unnamed
+margin lines are ad prose that the model rightly left empty, so there is no sign of lost entries.
+The roles come from box geometry alone (`layout_roles`): starts at 0–15‰ of page width, runovers at
+30–45‰, with a clean trough between.
+
+**`join_wraps` joined almost none of these volumes' runovers.** It needs an indent of
+≥ `INDENT_RATIO` = 3.0 median line heights, calibrated on 1906BPL. Measured runover indents:
+
+| volume | runover indent, p10–p50–p90 (line heights) | runovers below 3.0 |
+|---|---|---|
+| Doggett 1845 | 2.00 – 2.08 – 2.17 | 2,814 of 2,814 |
+| Smith 1856 | 1.02 – 1.59 – 1.92 | 1,834 of 1,844 |
+| 1906BPL | 0.65 – 1.92 – 4.96 | 1,742 of 2,150 |
+
+So 2,815 Doggett entries lost their tail (often the `h.` home address) and each tail became a
+fabricated record. That is the train/serve mismatch `join_wraps`' own docstring warns about.
+Doggett's band is so tight that a per-volume threshold would separate it cleanly (next step 22).
+
+**Microfilm tesseract merges columns.** On 58 of Smith's 414 leaves (2,548 lines), most lines hold
+a left-column entry *and* a right-column entry (`Evans John, brassmoulder, 252 First F. George A.
+Lawton, n. Broadway`). The model returns one record per line, so **roughly 2,200 right-column
+entries are lost** and some left-column records absorb right-column text. The lines come straight
+from the hOCR's own `ocr_line`, so this is IA's segmentation, not ours. The word dump has the boxes
+to split them (next step 23).
+
+**The model overwrites real words with familiar ones.** No gold is needed to see it: the check is
+field words absent from their own line, traced back to the line word they replaced, and referred
+to the volume's own vocabulary (`substitutions`). The top pairs, read by hand:
+
+| volume | printed (and printed how often) | model wrote | records |
+|---|---|---|---|
+| 1906BPL | `Mhtn` (Manhattan; 14,281) | `Mthn` / `Mtn` | **13,707** |
+| 1906BPL | `rd` (road) | `dr` | 2,205 |
+| 1906BPL | `Kosc'ko` · `Himrod` · `Degraw` · `Cornelia` · `Harman` · `Maujer` · `Meserole` | `Kosciello` · `Hiramod` · `Delaware` · `Cornelius` · `Harmon` · `Mauer` · `Mersole` | 858 · 669 · 613 · 512 · 477 · 354 · 244 |
+| Mercein 1820 | `Bancker` · `Harman` | `Banker` · `Hanman` | 343 · 108 |
+| Doggett 1845 | `Goerck` · `Cornelia` · `Laight` | `George` · `Cornelius` · `Liight`/`Light` | 148 · 79 · 56 |
+| Smith 1856 | `Meserole` · `Degraw` | `Moseley` · `Delaware` | 61 · 12 |
+
+Each of these is a real street, correctly OCR'd and printed hundreds of times in the book. The
+**2B does the same** (Classon, Degraw, Harman, Himrod, `rd` on the shared 500 lines). `Mhtn` is
+4B-only: of the 41 shared lines that print it, the 4B dropped it on 40 and the 2B kept it on 37 of
+those. None of `Mhtn`, `Mthn`, `Delaware` or `Cornelia` occurs in the 4B's 100k training rows (the
+first 100k of `data/synth_train_250k.jsonl`); `Cornelius` occurs 1,713 times. So this is a pull
+toward familiar words, not copied training text. **The panel cannot see this.** Two pages per volume rarely hold a given street, and 1906BPL
+is not on the panel. The same check also finds genuine repairs (`elk → clk` 14,900, `pi → pl`,
+`cartmaa → cartman`), so its `replaces_common_word` class is an upper bound, to be read and not
+cited raw. In 1906BPL the hand-read corruptions in the top 30 pairs come to ~20,500 field words.
+Most of them are `Mthn`.
+
+**It also invents given names.** Mercein prints 1,391 widows as `Ackerman widow, 47 Elizabeth`,
+with no given name. Gold keeps the surname alone (`Duggan widow of Thomas` → `Duggan`). The 4B
+adds one on **212 (15%): Mary 104, Sarah 87**. Smaller cases: `Hol lith , 26 N. Y.` → `Holith
+Thaddeus`, `Court, n. ueer` → `Court Anne`. Name words with no near match in their line: 0.16%
+(1906BPL) to 1.86% (Mercein).
+
+**1906BPL, 2B against 4B on the 500 shared lines:** all 500 found by leaf+bbox, 497 with identical
+input. Row agreement is 68.6%. Of 123 address disagreements, 36 are `Mhtn → Mthn` alone, and most
+of the rest fall on junk lines. Both models call 448 of the 500 lines entry-shaped.
+
+**1906BPL, against the 140 hand entry labels:** the survey's section scoping removed 31 of the
+labelled OCR-garbage lines before the model saw them. It also removed **one real entry** (leaf 8,
+`Mancke Flora wid 450- Van Buren`). Leaf 8 is a whole **"Names too Late for Classification"**
+page ahead of the listing (~80 entries), which the section inventory filed as front matter:
+`page_title`'s title-case rule wants ≤4 words, all capitalised, and this title has five words, two
+of them lowercase (next step 25). Of the labelled
+non-entries that remained, the model named **55 of 65**, and 17 of those are entry-shaped.
+Advertising in head and foot bands is still where fabricated people come from, as the band study
+found.
+
+**Entry rate by section:** a second alphabet runs as cleanly as the first. Smith's Eastern
+District names 97.0% of lines against the Western's 95.0%. Smith's low 95.5% overall is its
+column-merged leaves and runovers, not the district. `late_names` sections are the weakest
+everywhere (Mercein 77.5%, Doggett 87.9%): short sections full of headings and notes.
+
 ---
 
 ## What is NOT in the pipeline yet
 
 - **No whole-volume gold**, so volume-scale field accuracy is unmeasured. The 21-volume panel is
-  sampled pages; `entry_rate` is a proxy with a known blind spot.
+  sampled pages; `entry_rate` is a proxy with a known blind spot. The panel also feeds the model
+  hand-corrected text: on the gold pages inside Mercein, Hearnes and Smith, end-to-end row EM on
+  IA's OCR is 63 / 39 / 12 against the panel's 88 / 80 / — (stage 6, whole-volume run).
 - **No records assembly / export.** Predictions land in a `.txt` and stop. There is no CSV/IIIF
   writer downstream of stage 5.
 - **No page-type classifier.** Stages 1 and 3 cut by shape and order; neither reads the page.
@@ -531,6 +645,31 @@ confidently structured fake people rather than an obvious error. Nothing current
 volume of 21 collapsing, and `entry_rate` cannot (it is a fabrication/page-type proxy, blind to
 record quality). Cheap: the per-field accumulators already exist; add a per-volume breakdown, print
 median alongside mean, and flag any volume more than some margin below it.
+
+**21. Guard field copying with the volume's own vocabulary.** The 4B turns `Degraw` into
+`Delaware`, `Bancker` into `Banker` and `Mhtn` into `Mthn` (stage 6, whole-volume run), and the 2B
+shares all but the last. A post-check needs no model change and no gold. For each field word
+absent from its line, find the line word it replaced (`volume_run_report.substitutions`). If that
+word is common in the volume and the replacement is not, restore the printed word. **This must
+not fire on `elk → clk` or `pi → pl`,** which are correct repairs of errors systematic enough to
+look like vocabulary. So it needs an allow-list of known OCR confusions, per volume, read by a
+human; the report's top-30 pairs are the reading list. Test: 1906BPL `Mhtn` survival 3% → ~100%,
+and `elk → clk` unchanged.
+
+**22. A per-volume wrap-join threshold.** `INDENT_RATIO` = 3.0 was calibrated on 1906BPL. It
+joined none of Doggett 1845's 2,814 runovers, which sit in a tight band at 2.00–2.17 line
+heights, and almost none of Smith 1856's (1.0–1.9). Each unjoined runover costs an entry its tail
+and adds a fabricated record: 2,104 named runovers in Doggett alone. Read the threshold off the
+volume's own indent histogram, at the trough between starts and runovers (`layout_roles` already
+finds both modes). It must be gated the way `--deep-indent-gate` is: a threshold that low would
+also merge consecutive entries whose ditto was dropped. Test: Doggett named records per printed
+name 1.038 → ~1.00, with the named-start count unchanged.
+
+**25. Let `page_title` read a title-case heading with lowercase small words.** 1906BPL's leaf 8
+reads "Names too Late for Classification", ~80 real entries ahead of the listing. It was filed as
+front matter, because the title-case rule wants ≤4 words, all capitalised. Allow `too/for/of/the/
+in/and/to` in lowercase and up to 6 words. Then re-derive `sections` and `scope` for the corpus
+and review every run that changes kind; the rule also admits more non-titles.
 
 ## Medium effort, high information
 
@@ -685,6 +824,22 @@ Pass/fail is already instrumented and needs no new gold: `score_ocr.py --engine 
 `abbr%` and `CER-m` directly, so the test is **"does abbr% move 84.8 → ~95 with CER-m unchanged"**.
 A CER-m that rises means the repair is firing on tokens that were not abbreviations.
 
+**23. Split column-merged microfilm lines at the gutter.** Tesseract read straight across the
+gutter on 58 of Smith 1856's 414 leaves (2,548 lines), so ~2,200 right-column entries never reach
+the model as lines of their own. The word dump keeps every word's box. Split a line at an
+inter-word gap that lands on the page's gutter (the column edges `layout_roles` finds on the
+volume's unmerged leaves), then re-order the right halves after the left column so dittos and
+`join_wraps` see the true predecessor. Test: on Smith's gold leaf 391, gold rows found in the OCR
+13/121 → ~100/121. Survey all microfilm volumes for merged leaves first, because the size of the
+fix depends on how many there are.
+
+**24. Teach the model to leave an absent given name absent.** Mercein prints widows as `Ackerman
+widow, 47 Elizabeth`, and the 4B adds `Sarah` or `Mary` on 15% of the 1,391 such lines. Gold keeps
+the surname alone. The synthetic generator should emit surname-only widow entries and other
+records with a missing given name, and uncommon printed street names and abbreviations to copy
+verbatim (`Mhtn`, `Goerck`, `Meserole`). Measure with `volume_run_report.py`'s `widow_names` and
+`substitutions` before and after. Both need no gold, so this is testable without the panel.
+
 ## Larger, and the ones that unblock claims
 
 **10. A whole-volume gold slice.** Hand-label ~200 lines sampled across one volume's *listing*
@@ -703,8 +858,8 @@ a clean listing body, and an ad strip.** Ditto-lead density is 0.7% in the top d
 is a band within a leaf, not the leaf — and `--interior drop`'s recorded cost of ~172 leaves is
 ~172 *clean listing bodies* discarded to remove their strips.
 
-**12. Run a whole volume on the 4B, on the HPC.** The release candidate has never processed a
-volume; every whole-volume number in this repo is from the 2B. Rented GPU, hours not days.
+**12. ~~Run a whole volume on the 4B, on the HPC.~~ DONE 2026-09-28**, five volumes, 310,932 lines.
+See "The first whole-volume 4B run" under stage 6. It produced items 21–24.
 
 **13. Records assembly.** Predictions → a CSV/IIIF-annotated export with `ditto_source` provenance
 carried through. This is what makes the output usable by anyone outside the repo, and stage 5's

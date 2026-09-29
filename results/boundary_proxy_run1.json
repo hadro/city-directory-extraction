@@ -1,0 +1,1388 @@
+{
+ "derived": "2026-09-28",
+ "code_at": "db0609c",
+ "lexicon": {
+  "tokens": 619,
+  "sha1": "10e37655a0c7",
+  "occ_ratio": 3,
+  "occ_min": 2
+ },
+ "runs": {
+  "4b-100k": {
+   "1906BPL": {
+    "lines": 194201,
+    "with_occupation": 121237,
+    "swallowed": 613,
+    "swallow_rate": 0.0051,
+    "occ_in_name": 1658,
+    "digit_in_name": 3830,
+    "by_section": {
+     "listing": {
+      "lines": 194201,
+      "with_occupation": 121237,
+      "swallowed": 613,
+      "swallow_rate": 0.0051,
+      "occ_in_name": 1658,
+      "digit_in_name": 3830
+     }
+    },
+    "top_triggers": [
+     [
+      "elk",
+      290
+     ],
+     [
+      "pres",
+      71
+     ],
+     [
+      "real",
+      37
+     ],
+     [
+      "agent",
+      34
+     ],
+     [
+      "ins",
+      34
+     ],
+     [
+      "vice",
+      30
+     ],
+     [
+      "police",
+      11
+     ],
+     [
+      "mer",
+      8
+     ],
+     [
+      "public",
+      7
+     ],
+     [
+      "tel",
+      6
+     ],
+     [
+      "book",
+      6
+     ],
+     [
+      "institution",
+      6
+     ],
+     [
+      "none",
+      5
+     ],
+     [
+      "manager",
+      3
+     ],
+     [
+      "express",
+      3
+     ],
+     [
+      "student",
+      3
+     ],
+     [
+      "meat",
+      3
+     ],
+     [
+      "iron",
+      3
+     ],
+     [
+      "furniture",
+      3
+     ],
+     [
+      "asst",
+      2
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "WM. H. WALLACE. . Vice-President",
+      "name": "WM. H. WALLACE",
+      "address": "Vice-President"
+     },
+     {
+      "raw_line": "GATES D. FAHNESTOCK, 2d-Vice-Pres.",
+      "name": "GATES D. FAHNESTOCK",
+      "address": "2d-Vice-Pres."
+     },
+     {
+      "raw_line": "GEO. H. SOUTHARD, Jr., 3d-Vice-Pres.",
+      "name": "GEO. H. SOUTHARD, Jr.",
+      "address": "3d-Vice-Pres."
+     },
+     {
+      "raw_line": "HENRY C. LOW, Jr.. - - Asst. Sec’y",
+      "name": "HENRY C. LOW, Jr.",
+      "address": "- - Asst. Sec'y"
+     },
+     {
+      "raw_line": "\" Jos elk h 243 Hawthorne",
+      "name": "\" Josk",
+      "address": "h 243 Hawthorne"
+     },
+     {
+      "raw_line": "\" Jos elk h 236 Franklin av",
+      "name": "\" Josk",
+      "address": "h 236 Franklin av"
+     },
+     {
+      "raw_line": "Ahrberg Svern elk h 71 Bleecker",
+      "name": "Ahrberg Sverlenk",
+      "address": "h 71 Bleecker"
+     },
+     {
+      "raw_line": "\" Jos elk h 195 Himrod",
+      "name": "\" Josk",
+      "address": "h 195 Hiramod"
+     }
+    ]
+   },
+   "doggettsnewyorkc1845dogg": {
+    "lines": 64580,
+    "with_occupation": 40244,
+    "swallowed": 41,
+    "swallow_rate": 0.001,
+    "occ_in_name": 164,
+    "digit_in_name": 566,
+    "by_section": {
+     "late_names": {
+      "lines": 99,
+      "with_occupation": 46,
+      "swallowed": 5,
+      "swallow_rate": 0.1087,
+      "occ_in_name": 4,
+      "digit_in_name": 0
+     },
+     "listing": {
+      "lines": 64481,
+      "with_occupation": 40198,
+      "swallowed": 36,
+      "swallow_rate": 0.0009,
+      "occ_in_name": 160,
+      "digit_in_name": 566
+     }
+    },
+    "top_triggers": [
+     [
+      "ice",
+      3
+     ],
+     [
+      "ins",
+      3
+     ],
+     [
+      "exchange",
+      3
+     ],
+     [
+      "public",
+      3
+     ],
+     [
+      "glass",
+      2
+     ],
+     [
+      "lamps",
+      2
+     ],
+     [
+      "manufacturers",
+      2
+     ],
+     [
+      "goods",
+      2
+     ],
+     [
+      "marble",
+      2
+     ],
+     [
+      "gilder",
+      1
+     ],
+     [
+      "mers",
+      1
+     ],
+     [
+      "com",
+      1
+     ],
+     [
+      "fish",
+      1
+     ],
+     [
+      "tel",
+      1
+     ],
+     [
+      "twine",
+      1
+     ],
+     [
+      "stillman",
+      1
+     ],
+     [
+      "pres",
+      1
+     ],
+     [
+      "merchants",
+      1
+     ],
+     [
+      "put",
+      1
+     ],
+     [
+      "grocery",
+      1
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "amps, Girandoles, Britannia and Plated Wares Cut Glass, Mantel Clocks, Cutlery, Tea Trays, Flower Va",
+      "name": "amps Girandoles",
+      "address": "Britannia and Plated Wares Cut Glass, Mantel Clocks, Cutlery, Tea Trays, Flower Vases"
+     },
+     {
+      "raw_line": "These superior Lamps have superseded the Solar Lamps altogether, and have",
+      "name": "",
+      "address": "These superior Lamps have superseded the Solar Lamps altogether, and have"
+     },
+     {
+      "raw_line": "now become in general use in this city. They are made by one of the first manufacturers in England, ",
+      "name": "",
+      "address": "now become in general use in this city"
+     },
+     {
+      "raw_line": "ALSO — Just received from the same Manufacturers — THE",
+      "name": "ALSO",
+      "address": "Just received from the same Manufacturers — THE"
+     },
+     {
+      "raw_line": "An entirely new article ; and, unlike other Spirit Lamps, there is NO DANGEK",
+      "name": "",
+      "address": "An entirely new article; and, unlike other Spirit Lamps, there is NO DANGER"
+     },
+     {
+      "raw_line": "Waverley pl ice",
+      "name": "Waverley pl ice",
+      "address": ""
+     },
+     {
+      "raw_line": "BOWERY FIRE INS. ISO. 124 Bowery",
+      "name": "BOWERY FIRE INS. SOI.",
+      "address": "124 Bowery"
+     },
+     {
+      "raw_line": "Briggs carver & gilder, 222 A v. 6",
+      "name": "Briggs carver & gilder",
+      "address": "222 Av. 6"
+     }
+    ]
+   },
+   "merceinscitydire00merc": {
+    "lines": 20366,
+    "with_occupation": 10235,
+    "swallowed": 18,
+    "swallow_rate": 0.0018,
+    "occ_in_name": 57,
+    "digit_in_name": 59,
+    "by_section": {
+     "late_names": {
+      "lines": 169,
+      "with_occupation": 12,
+      "swallowed": 3,
+      "swallow_rate": 0.25,
+      "occ_in_name": 2,
+      "digit_in_name": 1
+     },
+     "listing": {
+      "lines": 20197,
+      "with_occupation": 10223,
+      "swallowed": 15,
+      "swallow_rate": 0.0015,
+      "occ_in_name": 55,
+      "digit_in_name": 58
+     }
+    },
+    "top_triggers": [
+     [
+      "attorney",
+      8
+     ],
+     [
+      "book",
+      2
+     ],
+     [
+      "cashier",
+      1
+     ],
+     [
+      "institution",
+      1
+     ],
+     [
+      "pastor",
+      1
+     ],
+     [
+      "exchange",
+      1
+     ],
+     [
+      "tavern",
+      1
+     ],
+     [
+      "washing",
+      1
+     ],
+     [
+      "inspector",
+      1
+     ],
+     [
+      "stable",
+      1
+     ],
+     [
+      "livery",
+      1
+     ],
+     [
+      "cabinet",
+      1
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "Except a loaned book.''",
+      "name": "",
+      "address": "Except a loaned book"
+     },
+     {
+      "raw_line": "a sealed cover, directed to the Cashier, with the name of",
+      "name": "a sealed cover",
+      "address": "directed to the Cashier, with the name of"
+     },
+     {
+      "raw_line": "tered in the dealer's book at the time such deposite is",
+      "name": "",
+      "address": "tered in the dealer's book at the time such deposit is"
+     },
+     {
+      "raw_line": "JVew-York |fe='|£fl Institution",
+      "name": "Jew-York Fred",
+      "address": "fe='|£fl Institution"
+     },
+     {
+      "raw_line": "c Chrystieb Delan. l**lslU Pastor J. Chase",
+      "name": "c Christy",
+      "address": "Delan. 111st U"
+     },
+     {
+      "raw_line": "Bell Robert, Exchange Tavern 18 Nassau",
+      "name": "Bell Robert",
+      "address": "Exchange Tavern 18 Nassau"
+     },
+     {
+      "raw_line": "Bevens widow Rebecca, Attorney n Delancy",
+      "name": "Bevens Rebecca",
+      "address": "Attorney n Delancy"
+     },
+     {
+      "raw_line": "Case Gabriel, Stanton c. Attorney",
+      "name": "Case Gabriel",
+      "address": "Stanton c Attorney"
+     }
+    ]
+   },
+   "micro_IABROOKLYN_0030": {
+    "lines": 14250,
+    "with_occupation": 8303,
+    "swallowed": 19,
+    "swallow_rate": 0.0023,
+    "occ_in_name": 92,
+    "digit_in_name": 225,
+    "by_section": {
+     "listing": {
+      "lines": 14250,
+      "with_occupation": 8303,
+      "swallowed": 19,
+      "swallow_rate": 0.0023,
+      "occ_in_name": 92,
+      "digit_in_name": 225
+     }
+    },
+    "top_triggers": [
+     [
+      "ins",
+      3
+     ],
+     [
+      "express",
+      2
+     ],
+     [
+      "merchant",
+      1
+     ],
+     [
+      "agent",
+      1
+     ],
+     [
+      "com",
+      1
+     ],
+     [
+      "goods",
+      1
+     ],
+     [
+      "tavern",
+      1
+     ],
+     [
+      "cabinet",
+      1
+     ],
+     [
+      "mer",
+      1
+     ],
+     [
+      "grain",
+      1
+     ],
+     [
+      "tel",
+      1
+     ],
+     [
+      "laborer",
+      1
+     ],
+     [
+      "institution",
+      1
+     ],
+     [
+      "saloon",
+      1
+     ],
+     [
+      "captain",
+      1
+     ],
+     [
+      "lieut",
+      1
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "Louis, com merchant 60 Sackett",
+      "name": "Louis com merchant",
+      "address": "60 Sackett"
+     },
+     {
+      "raw_line": "Joralemon, Robert Yellowlee, Agent",
+      "name": "Joralemon Robert",
+      "address": "Yellowlee, Agent"
+     },
+     {
+      "raw_line": "De Le Ree George A, Brooklyn & NY Express 29 Boerum",
+      "name": "De Le Ree George A",
+      "address": "29 Boerum"
+     },
+     {
+      "raw_line": "Doveras Ronzur, Brooklyn & NY Express 43 Carlton av",
+      "name": "Doveras Ronzur",
+      "address": "43 Carlton av"
+     },
+     {
+      "raw_line": "Dugan Shape) Com",
+      "name": "Dugan Shape",
+      "address": "Com"
+     },
+     {
+      "raw_line": "oster dry goods 96 Main h 28:Prospect:",
+      "name": "oster dry goods",
+      "address": "96 Main"
+     },
+     {
+      "raw_line": "(odet Henry 41 liſe ins —— — Wall — h 42",
+      "name": "odet Henry",
+      "address": "415 life ins —— — Wall"
+     },
+     {
+      "raw_line": "Goldsmith W, Bull’s head tavern Fulton n Hudson av",
+      "name": "Goldsmith W",
+      "address": "Bull's head tavern"
+     }
+    ]
+   },
+   "micro_IABROOKLYN_0036": {
+    "lines": 17535,
+    "with_occupation": 8324,
+    "swallowed": 145,
+    "swallow_rate": 0.0174,
+    "occ_in_name": 364,
+    "digit_in_name": 895,
+    "by_section": {
+     "district: EASTERN DISTRIOT,": {
+      "lines": 4303,
+      "with_occupation": 2183,
+      "swallowed": 45,
+      "swallow_rate": 0.0206,
+      "occ_in_name": 98,
+      "digit_in_name": 213
+     },
+     "listing": {
+      "lines": 13232,
+      "with_occupation": 6141,
+      "swallowed": 100,
+      "swallow_rate": 0.0163,
+      "occ_in_name": 266,
+      "digit_in_name": 682
+     }
+    },
+    "top_triggers": [
+     [
+      "mer",
+      13
+     ],
+     [
+      "laborer",
+      13
+     ],
+     [
+      "mason",
+      8
+     ],
+     [
+      "maker",
+      8
+     ],
+     [
+      "goods",
+      5
+     ],
+     [
+      "coal",
+      5
+     ],
+     [
+      "shoes",
+      5
+     ],
+     [
+      "builder",
+      4
+     ],
+     [
+      "ins",
+      4
+     ],
+     [
+      "tailor",
+      4
+     ],
+     [
+      "liquors",
+      4
+     ],
+     [
+      "cutter",
+      3
+     ],
+     [
+      "agent",
+      3
+     ],
+     [
+      "broker",
+      3
+     ],
+     [
+      "com",
+      3
+     ],
+     [
+      "eagle",
+      3
+     ],
+     [
+      "sec",
+      2
+     ],
+     [
+      "glass",
+      2
+     ],
+     [
+      "manuf",
+      2
+     ],
+     [
+      "carpenter",
+      2
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "112 Ba sec. RR. Co. Bedford av. n. av |",
+      "name": "112 Basc",
+      "address": "Bedford av n. av"
+     },
+     {
+      "raw_line": "ra Ue cutter, 18 Cortland, N. Y. h. 72",
+      "name": "ra Ue cutter",
+      "address": "18 Cortland, N. Y."
+     },
+     {
+      "raw_line": "Butler fancy goods, 245 Pearl, N. T. h. , Myrtle av. n. Stenbeh",
+      "name": "Butler fancy goods",
+      "address": "245 Pearl, N. T."
+     },
+     {
+      "raw_line": "farrier, 222 E. Warren Calvy Peter, mason, 195 Schermerhorn 1",
+      "name": "farrier",
+      "address": "222 E. Warren"
+     },
+     {
+      "raw_line": "Theodore, looking glasses, 440 Pearl, Camblin John, glass cutter, 304 Hudson av.",
+      "name": "Theodore looking glasses",
+      "address": "440 Pearl Camblin John"
+     },
+     {
+      "raw_line": "Chambers Elizabeth, widow, 286 Smith Chapman Thomas H. framer, 2lst,n. 4th ar",
+      "name": "Chambers Elizabeth",
+      "address": "286 Smith Chapman Thomas H."
+     },
+     {
+      "raw_line": "une shipping mer. 69 South, N. T. 847 | Coit W. A. & Coke",
+      "name": "une shipping mer.",
+      "address": "69 South, N. T."
+     },
+     {
+      "raw_line": "Cook Ann widow, 7 Hamilton av. Coombe J printer, 90 Pearl 10 |",
+      "name": "Cook Ann",
+      "address": "7 Hamilton av Coombe J"
+     }
+    ]
+   }
+  },
+  "4b-100k+guard": {
+   "1906BPL": {
+    "lines": 194201,
+    "with_occupation": 121237,
+    "swallowed": 613,
+    "swallow_rate": 0.0051,
+    "occ_in_name": 1690,
+    "digit_in_name": 3891,
+    "by_section": {
+     "listing": {
+      "lines": 194201,
+      "with_occupation": 121237,
+      "swallowed": 613,
+      "swallow_rate": 0.0051,
+      "occ_in_name": 1690,
+      "digit_in_name": 3891
+     }
+    },
+    "top_triggers": [
+     [
+      "elk",
+      290
+     ],
+     [
+      "pres",
+      71
+     ],
+     [
+      "real",
+      37
+     ],
+     [
+      "agent",
+      34
+     ],
+     [
+      "ins",
+      34
+     ],
+     [
+      "vice",
+      30
+     ],
+     [
+      "police",
+      11
+     ],
+     [
+      "mer",
+      8
+     ],
+     [
+      "public",
+      7
+     ],
+     [
+      "tel",
+      6
+     ],
+     [
+      "book",
+      6
+     ],
+     [
+      "institution",
+      6
+     ],
+     [
+      "none",
+      5
+     ],
+     [
+      "manager",
+      3
+     ],
+     [
+      "express",
+      3
+     ],
+     [
+      "student",
+      3
+     ],
+     [
+      "meat",
+      3
+     ],
+     [
+      "iron",
+      3
+     ],
+     [
+      "furniture",
+      3
+     ],
+     [
+      "asst",
+      2
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "WM. H. WALLACE. . Vice-President",
+      "name": "WM. H. WALLACE",
+      "address": "Vice-President"
+     },
+     {
+      "raw_line": "GATES D. FAHNESTOCK, 2d-Vice-Pres.",
+      "name": "GATES D. FAHNESTOCK",
+      "address": "2d-Vice-Pres."
+     },
+     {
+      "raw_line": "GEO. H. SOUTHARD, Jr., 3d-Vice-Pres.",
+      "name": "GEO. H. SOUTHARD, Jr.",
+      "address": "3d-Vice-Pres."
+     },
+     {
+      "raw_line": "HENRY C. LOW, Jr.. - - Asst. Sec’y",
+      "name": "HENRY C. LOW, Jr.",
+      "address": "- - Asst. Sec'y"
+     },
+     {
+      "raw_line": "\" Jos elk h 243 Hawthorne",
+      "name": "\" Josk",
+      "address": "h 243 Hawthorne"
+     },
+     {
+      "raw_line": "\" Jos elk h 236 Franklin av",
+      "name": "\" Josk",
+      "address": "h 236 Franklin av"
+     },
+     {
+      "raw_line": "Ahrberg Svern elk h 71 Bleecker",
+      "name": "Ahrberg Svern",
+      "address": "h 71 Bleecker"
+     },
+     {
+      "raw_line": "\" Jos elk h 195 Himrod",
+      "name": "\" Josk",
+      "address": "h 195 Himrod"
+     }
+    ]
+   },
+   "doggettsnewyorkc1845dogg": {
+    "lines": 64580,
+    "with_occupation": 40244,
+    "swallowed": 41,
+    "swallow_rate": 0.001,
+    "occ_in_name": 184,
+    "digit_in_name": 631,
+    "by_section": {
+     "late_names": {
+      "lines": 99,
+      "with_occupation": 46,
+      "swallowed": 5,
+      "swallow_rate": 0.1087,
+      "occ_in_name": 4,
+      "digit_in_name": 0
+     },
+     "listing": {
+      "lines": 64481,
+      "with_occupation": 40198,
+      "swallowed": 36,
+      "swallow_rate": 0.0009,
+      "occ_in_name": 180,
+      "digit_in_name": 631
+     }
+    },
+    "top_triggers": [
+     [
+      "ice",
+      3
+     ],
+     [
+      "ins",
+      3
+     ],
+     [
+      "exchange",
+      3
+     ],
+     [
+      "public",
+      3
+     ],
+     [
+      "glass",
+      2
+     ],
+     [
+      "lamps",
+      2
+     ],
+     [
+      "manufacturers",
+      2
+     ],
+     [
+      "goods",
+      2
+     ],
+     [
+      "marble",
+      2
+     ],
+     [
+      "gilder",
+      1
+     ],
+     [
+      "mers",
+      1
+     ],
+     [
+      "com",
+      1
+     ],
+     [
+      "fish",
+      1
+     ],
+     [
+      "tel",
+      1
+     ],
+     [
+      "twine",
+      1
+     ],
+     [
+      "stillman",
+      1
+     ],
+     [
+      "pres",
+      1
+     ],
+     [
+      "merchants",
+      1
+     ],
+     [
+      "put",
+      1
+     ],
+     [
+      "grocery",
+      1
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "amps, Girandoles, Britannia and Plated Wares Cut Glass, Mantel Clocks, Cutlery, Tea Trays, Flower Va",
+      "name": "amps Girandoles",
+      "address": "Britannia and Plated Wares Cut Glass, Mantel Clocks, Cutlery, Tea Trays, Flower Vases"
+     },
+     {
+      "raw_line": "These superior Lamps have superseded the Solar Lamps altogether, and have",
+      "name": "",
+      "address": "These superior Lamps have superseded the Solar Lamps altogether, and have"
+     },
+     {
+      "raw_line": "now become in general use in this city. They are made by one of the first manufacturers in England, ",
+      "name": "",
+      "address": "now become in general use in this city"
+     },
+     {
+      "raw_line": "ALSO — Just received from the same Manufacturers — THE",
+      "name": "ALSO",
+      "address": "Just received from the same Manufacturers — THE"
+     },
+     {
+      "raw_line": "An entirely new article ; and, unlike other Spirit Lamps, there is NO DANGEK",
+      "name": "",
+      "address": "An entirely new article; and, unlike other Spirit Lamps, there is NO DANGEK"
+     },
+     {
+      "raw_line": "Waverley pl ice",
+      "name": "Waverley pl ice",
+      "address": ""
+     },
+     {
+      "raw_line": "BOWERY FIRE INS. ISO. 124 Bowery",
+      "name": "BOWERY FIRE INS. ISO.",
+      "address": "124 Bowery"
+     },
+     {
+      "raw_line": "Briggs carver & gilder, 222 A v. 6",
+      "name": "Briggs carver & gilder",
+      "address": "222 Av. 6"
+     }
+    ]
+   },
+   "merceinscitydire00merc": {
+    "lines": 20366,
+    "with_occupation": 10235,
+    "swallowed": 18,
+    "swallow_rate": 0.0018,
+    "occ_in_name": 70,
+    "digit_in_name": 113,
+    "by_section": {
+     "late_names": {
+      "lines": 169,
+      "with_occupation": 12,
+      "swallowed": 3,
+      "swallow_rate": 0.25,
+      "occ_in_name": 2,
+      "digit_in_name": 2
+     },
+     "listing": {
+      "lines": 20197,
+      "with_occupation": 10223,
+      "swallowed": 15,
+      "swallow_rate": 0.0015,
+      "occ_in_name": 68,
+      "digit_in_name": 111
+     }
+    },
+    "top_triggers": [
+     [
+      "attorney",
+      8
+     ],
+     [
+      "book",
+      2
+     ],
+     [
+      "cashier",
+      1
+     ],
+     [
+      "institution",
+      1
+     ],
+     [
+      "pastor",
+      1
+     ],
+     [
+      "exchange",
+      1
+     ],
+     [
+      "tavern",
+      1
+     ],
+     [
+      "washing",
+      1
+     ],
+     [
+      "inspector",
+      1
+     ],
+     [
+      "stable",
+      1
+     ],
+     [
+      "livery",
+      1
+     ],
+     [
+      "cabinet",
+      1
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "Except a loaned book.''",
+      "name": "",
+      "address": "Except a loaned book"
+     },
+     {
+      "raw_line": "a sealed cover, directed to the Cashier, with the name of",
+      "name": "a sealed cover",
+      "address": "directed to the Cashier, with the name of"
+     },
+     {
+      "raw_line": "tered in the dealer's book at the time such deposite is",
+      "name": "",
+      "address": "tered in the dealer's book at the time such deposite is"
+     },
+     {
+      "raw_line": "JVew-York |fe='|£fl Institution",
+      "name": "Jew-York",
+      "address": "fe='|£fl Institution"
+     },
+     {
+      "raw_line": "c Chrystieb Delan. l**lslU Pastor J. Chase",
+      "name": "c Chrystieb",
+      "address": "Delan. l**lslU"
+     },
+     {
+      "raw_line": "Bell Robert, Exchange Tavern 18 Nassau",
+      "name": "Bell Robert",
+      "address": "Exchange Tavern 18 Nassau"
+     },
+     {
+      "raw_line": "Bevens widow Rebecca, Attorney n Delancy",
+      "name": "Bevens Rebecca",
+      "address": "Attorney n Delancy"
+     },
+     {
+      "raw_line": "Case Gabriel, Stanton c. Attorney",
+      "name": "Case Gabriel",
+      "address": "Stanton c Attorney"
+     }
+    ]
+   },
+   "micro_IABROOKLYN_0030": {
+    "lines": 14250,
+    "with_occupation": 8303,
+    "swallowed": 19,
+    "swallow_rate": 0.0023,
+    "occ_in_name": 118,
+    "digit_in_name": 262,
+    "by_section": {
+     "listing": {
+      "lines": 14250,
+      "with_occupation": 8303,
+      "swallowed": 19,
+      "swallow_rate": 0.0023,
+      "occ_in_name": 118,
+      "digit_in_name": 262
+     }
+    },
+    "top_triggers": [
+     [
+      "ins",
+      3
+     ],
+     [
+      "express",
+      2
+     ],
+     [
+      "merchant",
+      1
+     ],
+     [
+      "agent",
+      1
+     ],
+     [
+      "com",
+      1
+     ],
+     [
+      "goods",
+      1
+     ],
+     [
+      "tavern",
+      1
+     ],
+     [
+      "cabinet",
+      1
+     ],
+     [
+      "mer",
+      1
+     ],
+     [
+      "grain",
+      1
+     ],
+     [
+      "tel",
+      1
+     ],
+     [
+      "laborer",
+      1
+     ],
+     [
+      "institution",
+      1
+     ],
+     [
+      "saloon",
+      1
+     ],
+     [
+      "captain",
+      1
+     ],
+     [
+      "lieut",
+      1
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "Louis, com merchant 60 Sackett",
+      "name": "Louis com merchant",
+      "address": "60 Sackett"
+     },
+     {
+      "raw_line": "Joralemon, Robert Yellowlee, Agent",
+      "name": "Joralemon Robert",
+      "address": "Yellowlee, Agent"
+     },
+     {
+      "raw_line": "De Le Ree George A, Brooklyn & NY Express 29 Boerum",
+      "name": "De Le Ree George A",
+      "address": "29 Boerum"
+     },
+     {
+      "raw_line": "Doveras Ronzur, Brooklyn & NY Express 43 Carlton av",
+      "name": "Doveras Ronzur",
+      "address": "43 Carlton av"
+     },
+     {
+      "raw_line": "Dugan Shape) Com",
+      "name": "Dugan Shape",
+      "address": "Com"
+     },
+     {
+      "raw_line": "oster dry goods 96 Main h 28:Prospect:",
+      "name": "oster dry goods",
+      "address": "96 Main"
+     },
+     {
+      "raw_line": "(odet Henry 41 liſe ins —— — Wall — h 42",
+      "name": "odet Henry",
+      "address": "41 liſe ins —— — Wall"
+     },
+     {
+      "raw_line": "Goldsmith W, Bull’s head tavern Fulton n Hudson av",
+      "name": "Goldsmith W",
+      "address": "Bull's head tavern"
+     }
+    ]
+   },
+   "micro_IABROOKLYN_0036": {
+    "lines": 17535,
+    "with_occupation": 8324,
+    "swallowed": 145,
+    "swallow_rate": 0.0174,
+    "occ_in_name": 387,
+    "digit_in_name": 957,
+    "by_section": {
+     "district: EASTERN DISTRIOT,": {
+      "lines": 4303,
+      "with_occupation": 2183,
+      "swallowed": 45,
+      "swallow_rate": 0.0206,
+      "occ_in_name": 103,
+      "digit_in_name": 231
+     },
+     "listing": {
+      "lines": 13232,
+      "with_occupation": 6141,
+      "swallowed": 100,
+      "swallow_rate": 0.0163,
+      "occ_in_name": 284,
+      "digit_in_name": 726
+     }
+    },
+    "top_triggers": [
+     [
+      "mer",
+      13
+     ],
+     [
+      "laborer",
+      13
+     ],
+     [
+      "mason",
+      8
+     ],
+     [
+      "maker",
+      8
+     ],
+     [
+      "goods",
+      5
+     ],
+     [
+      "coal",
+      5
+     ],
+     [
+      "shoes",
+      5
+     ],
+     [
+      "builder",
+      4
+     ],
+     [
+      "ins",
+      4
+     ],
+     [
+      "tailor",
+      4
+     ],
+     [
+      "liquors",
+      4
+     ],
+     [
+      "cutter",
+      3
+     ],
+     [
+      "agent",
+      3
+     ],
+     [
+      "broker",
+      3
+     ],
+     [
+      "com",
+      3
+     ],
+     [
+      "eagle",
+      3
+     ],
+     [
+      "sec",
+      2
+     ],
+     [
+      "glass",
+      2
+     ],
+     [
+      "manuf",
+      2
+     ],
+     [
+      "carpenter",
+      2
+     ]
+    ],
+    "examples": [
+     {
+      "raw_line": "112 Ba sec. RR. Co. Bedford av. n. av |",
+      "name": "112 Ba sec.",
+      "address": "Bedford av n. av"
+     },
+     {
+      "raw_line": "ra Ue cutter, 18 Cortland, N. Y. h. 72",
+      "name": "ra Ue cutter",
+      "address": "18 Cortland, N. Y."
+     },
+     {
+      "raw_line": "Butler fancy goods, 245 Pearl, N. T. h. , Myrtle av. n. Stenbeh",
+      "name": "Butler fancy goods",
+      "address": "245 Pearl, N. T."
+     },
+     {
+      "raw_line": "farrier, 222 E. Warren Calvy Peter, mason, 195 Schermerhorn 1",
+      "name": "farrier",
+      "address": "222 E. Warren"
+     },
+     {
+      "raw_line": "Theodore, looking glasses, 440 Pearl, Camblin John, glass cutter, 304 Hudson av.",
+      "name": "Theodore looking glasses",
+      "address": "440 Pearl Camblin John"
+     },
+     {
+      "raw_line": "Chambers Elizabeth, widow, 286 Smith Chapman Thomas H. framer, 2lst,n. 4th ar",
+      "name": "Chambers Elizabeth",
+      "address": "286 Smith Chapman Thomas H."
+     },
+     {
+      "raw_line": "une shipping mer. 69 South, N. T. 847 | Coit W. A. & Coke",
+      "name": "une shipping mer.",
+      "address": "69 South, N. T."
+     },
+     {
+      "raw_line": "Cook Ann widow, 7 Hamilton av. Coombe J printer, 90 Pearl 10 |",
+      "name": "Cook Ann",
+      "address": "7 Hamilton av Coombe J"
+     }
+    ]
+   }
+  }
+ }
+}

@@ -712,11 +712,33 @@ volume it was decided for.
 > Queues also exist now for `1856BPL` (nothing worth promoting; that volume has no ditto
 > convention) and `longworth1798`.
 
-**2. A boundary-sensitive quality proxy.** `entry_rate` is blind to the failure that normalization
-fixes, which means **the pipeline currently has no instrument for field-boundary quality at all**.
-A proxy scoring "line contains an occupation token AND `occupation_role` is populated" already
-exists in `results/ab_ditto44_1906BPL_2b100k_preds/analyze.py` and was validated on the pilot —
-promoting it to a real instrument is a small job with high leverage on every future claim.
+**2. ~~A boundary-sensitive quality proxy.~~ DONE 2026-09-28: `eval/boundary_proxy.py`.**
+`entry_rate` is blind to the failure that normalization fixes, so the pipeline had no instrument
+for field-boundary quality at all. The pilot's proxy (`results/ab_ditto44_1906BPL_2b100k_preds/
+analyze.py`) is now reusable. It flags a line that prints an occupation word after the name, whose
+record is not a business, and whose `occupation_role` came back empty. It reads chunk
+directories (`--root`, one or more `--run`) or any lines/preds pair, and needs no labels.
+
+```bash
+python3 eval/boundary_proxy.py --root data/volumes_run1 --run 4b-100k --run 4b-100k+guard \
+    --out results/boundary_proxy_run1.json                 # ~15 s
+```
+
+| run 1 (4b-100k) | swallowed / lines printing an occupation |
+|---|---|
+| 1906BPL | 613 / 121,237 (0.5%), 290 of them `elk` fused into the name (`" Jos elk` → `" Josk`) |
+| Doggett 1845 · Mercein 1820 · Hearnes 1852 | 41 · 18 · 19 (0.1–0.2%), mostly ad copy |
+| Smith 1856 (microfilm) | 145 / 8,324 (**1.7%**), column-merged lines (`Butler fancy goods` as a name) |
+
+Copy-guard (`+guard`) changes none of it, as it should: it restores street words, not
+occupations. Getting to a usable instrument took four fixes, each now in the docstring:
+- Widow and race markers are out of the lexicon. `wid` was 84% of the first draft's flags, and
+  the gold itself files `wid` in `occupation_role` on 298 rows and only in `spouse_name` on 196.
+- Only whole one-word gold occupations are admitted, so `city`, `law` and `eagle` stay out.
+- The name and street positions are spared, since Miller and Attorney Street are not trades there.
+- The parser returns `is_business` as the string `'False'`, which is truthy.
+
+**Use it to compare runs over the same lines.** It does not measure recall of occupations.
 
 **3. Make `alpha_run_filter` mark rather than drop.** Removes the structural conflict with ditto
 expansion and makes `--apply` safe to reconsider on its own merits.

@@ -1,0 +1,2478 @@
+{
+ "derived": "2026-09-28",
+ "code_at": "bbdc871-dirty",
+ "method": "exact normalised-line match, gold raw_line vs IA candidate lines",
+ "params": {
+  "min_chars": 15,
+  "min_tokens": 3,
+  "twin_abs": 0.5,
+  "own_decent": 0.2,
+  "twin_rel": 0.9,
+  "twin_min": 0.1,
+  "check_rows": 3,
+  "fuzzy_rows": 150,
+  "fuzzy_ratio": 0.8
+ },
+ "volumes_scanned": 186,
+ "skipped": {
+  "1906BPL_sample500_norm_eval.jsonl": "the same 500 rows as 1906BPL_sample500, normalized",
+  "bands_1906BPL_eval.jsonl": "band labels; no raw_line"
+ },
+ "sets": {
+  "1906BPL_sample500": {
+   "file": "1906BPL_sample500_eval.jsonl",
+   "rows": 500,
+   "eligible_lines": 464,
+   "own": "1906BPL",
+   "own_from": "ia_id",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "1906BPL",
+     "verdict": "own",
+     "verified": null,
+     "exact": 363,
+     "exact_share": 0.7823,
+     "fuzzy_share": 0.1133,
+     "leaves": [
+      925,
+      1084,
+      225,
+      411,
+      648,
+      996
+     ],
+     "title": "Upington's General Directory for the Borough of Brooklyn, City of New York, for the year 1",
+     "ia_date": "1906",
+     "year_covered": 1906,
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1907BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 142,
+     "exact_share": 0.306,
+     "fuzzy_share": 0.0867,
+     "leaves": [
+      371,
+      1080,
+      343,
+      407,
+      181,
+      215
+     ],
+     "title": "Upington's General Directory of the Borough of Brooklyn, City of New York, for the year 19",
+     "ia_date": "1907",
+     "year_covered": 1907,
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1908BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 126,
+     "exact_share": 0.2716,
+     "fuzzy_share": 0.0933,
+     "leaves": [
+      333,
+      1085,
+      60,
+      675,
+      211,
+      280
+     ],
+     "title": "Upington's General Directory of the Borough of Brooklyn, City of New York, for the year 19",
+     "ia_date": "1908",
+     "year_covered": 1908,
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1906geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 88,
+     "exact_share": 0.1897,
+     "fuzzy_share": 0.1067,
+     "leaves": [
+      745,
+      841,
+      37,
+      509,
+      471,
+      233
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1906",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyork1905p1geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 75,
+     "exact_share": 0.1616,
+     "fuzzy_share": 0.1267,
+     "leaves": [
+      147,
+      453,
+      567,
+      709,
+      797,
+      331
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1905",
+     "year_covered": 1905,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyork1907p1geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 57,
+     "exact_share": 0.1228,
+     "fuzzy_share": 0.06,
+     "leaves": [
+      751,
+      503,
+      439,
+      695,
+      567,
+      103
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1903",
+     "year_covered": 1907,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyork1908p1geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 55,
+     "exact_share": 0.1185,
+     "fuzzy_share": 0.0933,
+     "leaves": [
+      133,
+      679,
+      701,
+      471,
+      425,
+      769
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1908",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1904BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 54,
+     "exact_share": 0.1164,
+     "fuzzy_share": 0.1067,
+     "leaves": [
+      260,
+      368,
+      535,
+      897,
+      645,
+      157
+     ],
+     "title": "Upington's General Directory of Brooklyn, New York City, for the year 1904",
+     "ia_date": "1904",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1903BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 52,
+     "exact_share": 0.1121,
+     "fuzzy_share": 0.0933,
+     "leaves": [
+      373,
+      281,
+      207,
+      141,
+      273,
+      894
+     ],
+     "title": "Upington's General Directory of Brooklyn, New York City, for the year 1903",
+     "ia_date": "1903",
+     "year_covered": 1903,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1905geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 49,
+     "exact_share": 0.1056,
+     "fuzzy_share": 0.0733,
+     "leaves": [
+      41,
+      107,
+      917,
+      437,
+      1111,
+      121
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1905",
+     "year_covered": 1905,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1907geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 46,
+     "exact_share": 0.0991,
+     "fuzzy_share": 0.0133,
+     "leaves": [
+      473,
+      669,
+      989,
+      537,
+      81,
+      149
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1907",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc00geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 44,
+     "exact_share": 0.0948,
+     "fuzzy_share": 0.0533,
+     "leaves": [
+      1195,
+      13,
+      1049,
+      661,
+      209,
+      857
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1906",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1908geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 38,
+     "exact_share": 0.0819,
+     "fuzzy_share": 0.0667,
+     "leaves": [
+      889,
+      1071,
+      253,
+      871,
+      69,
+      841
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1908",
+     "year_covered": 1908,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1902BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 35,
+     "exact_share": 0.0754,
+     "fuzzy_share": 0.0467,
+     "leaves": [
+      370,
+      273,
+      1023,
+      927,
+      39,
+      307
+     ],
+     "title": "Upington's General Directory of Brooklyn, New York City, for the year 1902",
+     "ia_date": "1902",
+     "year_covered": 1902,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyork1904p1geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 33,
+     "exact_share": 0.0711,
+     "fuzzy_share": 0.0933,
+     "leaves": [
+      1087,
+      129,
+      531,
+      665,
+      747,
+      903
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1904",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyork1909p1geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 26,
+     "exact_share": 0.056,
+     "fuzzy_share": 0.06,
+     "leaves": [
+      447,
+      809,
+      141,
+      493,
+      561,
+      713
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1909",
+     "year_covered": 1909,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyork1903p1geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 23,
+     "exact_share": 0.0496,
+     "fuzzy_share": 0.04,
+     "leaves": [
+      581,
+      219,
+      303,
+      887,
+      371,
+      437
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1903",
+     "year_covered": 1903,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1904geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 21,
+     "exact_share": 0.0453,
+     "fuzzy_share": 0.0067,
+     "leaves": [
+      37,
+      299,
+      821,
+      199,
+      961,
+      19
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1904",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1909geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 20,
+     "exact_share": 0.0431,
+     "fuzzy_share": 0.06,
+     "leaves": [
+      247,
+      867,
+      913,
+      61,
+      389,
+      1111
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1909",
+     "year_covered": 1909,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1903geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 15,
+     "exact_share": 0.0323,
+     "fuzzy_share": 0.0,
+     "leaves": [
+      791,
+      77,
+      13,
+      855,
+      145,
+      209
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1903",
+     "year_covered": 1903,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc19062geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 13,
+     "exact_share": 0.028,
+     "fuzzy_share": 0.02,
+     "leaves": [
+      923,
+      859,
+      987,
+      1051,
+      141,
+      337
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1903",
+     "year_covered": 1906,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1899xBPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 11,
+     "exact_share": 0.0237,
+     "fuzzy_share": 0.06,
+     "leaves": [
+      544,
+      335,
+      359,
+      671,
+      1585,
+      1748
+     ],
+     "title": "Lain & Healy's Brooklyn Directory for the year ending May 1, 1899",
+     "ia_date": "1899",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1910geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 11,
+     "exact_share": 0.0237,
+     "fuzzy_share": 0.0533,
+     "leaves": [
+      483,
+      885,
+      151,
+      351,
+      493,
+      533
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1910",
+     "year_covered": 1910,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc19031geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 9,
+     "exact_share": 0.0194,
+     "fuzzy_share": 0.0,
+     "leaves": [
+      447,
+      511,
+      703,
+      767,
+      157,
+      313
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1903",
+     "year_covered": 1903,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1897BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 8,
+     "exact_share": 0.0172,
+     "fuzzy_share": 0.0333,
+     "leaves": [
+      322,
+      235,
+      331,
+      445,
+      738,
+      1409
+     ],
+     "title": "Lain & Healy's Brooklyn Directory for the year ending May 1, 1897",
+     "ia_date": "1897",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyork1910p2geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 4,
+     "exact_share": 0.0086,
+     "fuzzy_share": 0.04,
+     "leaves": [
+      267,
+      971,
+      1203
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1910",
+     "year_covered": 1910,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc00broo",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0065,
+     "fuzzy_share": 0.0267,
+     "leaves": [
+      143,
+      563,
+      841
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1912",
+     "year_covered": 1912,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyorkc1912broo",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0065,
+     "fuzzy_share": 0.02,
+     "leaves": [
+      691
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1912",
+     "year_covered": 1912,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "boyd1890": {
+   "file": "boyd1890_eval.jsonl",
+   "rows": 75,
+   "eligible_lines": 74,
+   "own": "flushingnewyorkc00boyd",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "flushingnewyorkc00boyd",
+     "verdict": "own",
+     "verified": null,
+     "exact": 24,
+     "exact_share": 0.3243,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      105,
+      75,
+      45
+     ],
+     "title": "Flushing, New York, city directory",
+     "ia_date": "1890",
+     "year_covered": 1890,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "doggett1846": {
+   "file": "doggett1846_eval.jsonl",
+   "rows": 37,
+   "eligible_lines": 37,
+   "own": "doggettsnewyorkc1846dogg",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "doggettsnewyorkc1846dogg",
+     "verdict": "own",
+     "verified": null,
+     "exact": 29,
+     "exact_share": 0.7838,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      155
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "doggettsnewyorkc1847dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 10,
+     "exact_share": 0.2703,
+     "fuzzy_share": 0.6486,
+     "leaves": [
+      160,
+      159
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": 1847,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "doggettsnewyorkc1845dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 8,
+     "exact_share": 0.2162,
+     "fuzzy_share": 0.5676,
+     "leaves": [
+      144
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": 1845,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "doggetts1850": {
+   "file": "doggetts1850_eval.jsonl",
+   "rows": 303,
+   "eligible_lines": 303,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": [
+    {
+     "id": "doggettsnewyorkc1848dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 27,
+     "exact_share": 0.0891,
+     "fuzzy_share": 0.38,
+     "leaves": [
+      144,
+      357,
+      358
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "doggettsnewyorkc1846dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 9,
+     "exact_share": 0.0297,
+     "fuzzy_share": 0.2267,
+     "leaves": [
+      344,
+      133,
+      343
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "newyorkcitydirec00rode",
+     "verdict": "check",
+     "verified": null,
+     "exact": 9,
+     "exact_share": 0.0297,
+     "fuzzy_share": 0.2,
+     "leaves": [
+      608,
+      221,
+      607,
+      222
+     ],
+     "title": "The New York City directory, for ..",
+     "ia_date": "1851",
+     "year_covered": 1854,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "doggettsnewyorkc1847dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 8,
+     "exact_share": 0.0264,
+     "fuzzy_share": 0.2133,
+     "leaves": [
+      137,
+      350,
+      349
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": 1847,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric00newy",
+     "verdict": "check",
+     "verified": null,
+     "exact": 4,
+     "exact_share": 0.0132,
+     "fuzzy_share": 0.04,
+     "leaves": [
+      557,
+      234
+     ],
+     "title": "Longworth's American almanac, New-York register and city directory",
+     "ia_date": "1816",
+     "year_covered": 1839,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric1839newy",
+     "verdict": "check",
+     "verified": null,
+     "exact": 4,
+     "exact_share": 0.0132,
+     "fuzzy_share": 0.04,
+     "leaves": [
+      557,
+      234
+     ],
+     "title": "Longworth's American almanac, New-York register and city directory",
+     "ia_date": "1816",
+     "year_covered": null,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric6518long",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0099,
+     "fuzzy_share": 0.0533,
+     "leaves": [
+      526,
+      218
+     ],
+     "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of ",
+     "ia_date": "1797",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsnewyorkcity1857trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0099,
+     "fuzzy_share": 0.1467,
+     "leaves": [
+      696,
+      244
+     ],
+     "title": "Trow's New York city directory.",
+     "ia_date": "1857",
+     "year_covered": 1857,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "duncan1794": {
+   "file": "duncan1794_eval.jsonl",
+   "rows": 58,
+   "eligible_lines": 58,
+   "own": "newyorkdirectory00dunc",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "newyorkdirectory00dunc",
+     "verdict": "own",
+     "verified": null,
+     "exact": 19,
+     "exact_share": 0.3276,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      222,
+      96
+     ],
+     "title": "New-York directory, and register, for the year 1794. Illustrated with a new and accurate p",
+     "ia_date": "1794",
+     "year_covered": 1794,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "franks1786": {
+   "file": "franks1786_eval.jsonl",
+   "rows": 56,
+   "eligible_lines": 56,
+   "own": "newyorkdirectory00fran_0",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "newyorkdirectory00durs_0",
+     "verdict": "twin",
+     "verified": "twin",
+     "exact": 32,
+     "exact_share": 0.5714,
+     "fuzzy_share": 0.9821,
+     "leaves": [
+      53,
+      42,
+      33,
+      52
+     ],
+     "title": "New York directory : containing a valuable and well calculated almanack ... /",
+     "ia_date": "1874",
+     "year_covered": 1786,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "newyorkbrooklynd00durs",
+     "verdict": "check",
+     "verified": "twin",
+     "exact": 3,
+     "exact_share": 0.0536,
+     "fuzzy_share": 0.7857,
+     "leaves": [
+      51,
+      40
+     ],
+     "title": "New York and Brooklyn directory, 1786-1796",
+     "ia_date": "1876",
+     "year_covered": null,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "newyorkdirectory00fran_0",
+     "verdict": "own",
+     "verified": null,
+     "exact": 1,
+     "exact_share": 0.0179,
+     "fuzzy_share": null,
+     "leaves": [
+      79
+     ],
+     "title": "New York directory for 1786,",
+     "ia_date": "1889",
+     "year_covered": null,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "ftd": {
+   "file": "ftd_eval.jsonl",
+   "rows": 2000,
+   "eligible_lines": 2000,
+   "own": null,
+   "own_from": null,
+   "own_in_corpus": null,
+   "volumes": []
+  },
+  "hearne1852": {
+   "file": "hearne1852_eval.jsonl",
+   "rows": 52,
+   "eligible_lines": 52,
+   "own": "micro_IABROOKLYN_0030",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "hearnesbrooklync1852unse",
+     "verdict": "twin",
+     "verified": "twin",
+     "exact": 35,
+     "exact_share": 0.6731,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      178,
+      410
+     ],
+     "title": "Hearnes' Brooklyn city directory for ...",
+     "ia_date": "1851",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0030",
+     "verdict": "own",
+     "verified": null,
+     "exact": 21,
+     "exact_share": 0.4038,
+     "fuzzy_share": 0.8462,
+     "leaves": [
+      174,
+      405
+     ],
+     "title": "Hearnes' Brooklyn City Directory for 1852-1853",
+     "ia_date": "1852-1853",
+     "year_covered": 1852,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "hearnesbrooklync1850unse",
+     "verdict": "check",
+     "verified": null,
+     "exact": 6,
+     "exact_share": 0.1154,
+     "fuzzy_share": 0.3077,
+     "leaves": [
+      146,
+      334
+     ],
+     "title": "Hearnes' Brooklyn city directory for ...",
+     "ia_date": "1851",
+     "year_covered": null,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0028",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0577,
+     "fuzzy_share": 0.0962,
+     "leaves": [
+      137
+     ],
+     "title": "Hearnes' Brooklyn City Directory for 1850-1851",
+     "ia_date": "1850-1851",
+     "year_covered": null,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "hopehenderson1856": {
+   "file": "hopehenderson1856_eval.jsonl",
+   "rows": 60,
+   "eligible_lines": 60,
+   "own": "micro_IABROOKLYN_0035",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "1856BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 5,
+     "exact_share": 0.0833,
+     "fuzzy_share": 0.3,
+     "leaves": [
+      189,
+      188
+     ],
+     "title": "Smith's Brooklyn Directory for the year ending May 1, 1856",
+     "ia_date": "1856",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "needs-image-read"
+    }
+   ]
+  },
+  "lain": {
+   "file": "lain_eval.jsonl",
+   "rows": 800,
+   "eligible_lines": 800,
+   "own": "1897BPL",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "1897BPL",
+     "verdict": "own",
+     "verified": null,
+     "exact": 573,
+     "exact_share": 0.7163,
+     "fuzzy_share": 0.48,
+     "leaves": [
+      46,
+      47,
+      39,
+      37,
+      42,
+      32
+     ],
+     "title": "Lain & Healy's Brooklyn Directory for the year ending May 1, 1897",
+     "ia_date": "1897",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1899xBPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 28,
+     "exact_share": 0.035,
+     "fuzzy_share": 0.1333,
+     "leaves": [
+      55,
+      51,
+      57,
+      61,
+      64,
+      54
+     ],
+     "title": "Lain & Healy's Brooklyn Directory for the year ending May 1, 1899",
+     "ia_date": "1899",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1902BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 9,
+     "exact_share": 0.0112,
+     "fuzzy_share": 0.0533,
+     "leaves": [
+      27,
+      21,
+      16,
+      26,
+      28
+     ],
+     "title": "Upington's General Directory of Brooklyn, New York City, for the year 1902",
+     "ia_date": "1902",
+     "year_covered": 1902,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1904BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 7,
+     "exact_share": 0.0088,
+     "fuzzy_share": 0.0267,
+     "leaves": [
+      22,
+      10,
+      12,
+      16,
+      20,
+      24
+     ],
+     "title": "Upington's General Directory of Brooklyn, New York City, for the year 1904",
+     "ia_date": "1904",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1903BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 6,
+     "exact_share": 0.0075,
+     "fuzzy_share": 0.04,
+     "leaves": [
+      16,
+      10,
+      11,
+      20,
+      24
+     ],
+     "title": "Upington's General Directory of Brooklyn, New York City, for the year 1903",
+     "ia_date": "1903",
+     "year_covered": 1903,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1906BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 4,
+     "exact_share": 0.005,
+     "fuzzy_share": 0.0333,
+     "leaves": [
+      13,
+      16,
+      21,
+      23
+     ],
+     "title": "Upington's General Directory for the Borough of Brooklyn, City of New York, for the year 1",
+     "ia_date": "1906",
+     "year_covered": 1906,
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynnewyork1904p1geor",
+     "verdict": "check",
+     "verified": null,
+     "exact": 4,
+     "exact_share": 0.005,
+     "fuzzy_share": 0.02,
+     "leaves": [
+      55,
+      29,
+      59
+     ],
+     "title": "Brooklyn, New York, city directory",
+     "ia_date": "1904",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1886BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0037,
+     "fuzzy_share": 0.0133,
+     "leaves": [
+      40,
+      41,
+      1270
+     ],
+     "title": "Lain's Brooklyn Directory for the year ending May 1, 1886",
+     "ia_date": "1886",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1889BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0037,
+     "fuzzy_share": 0.0267,
+     "leaves": [
+      1418,
+      11,
+      15,
+      21
+     ],
+     "title": "Lain's Brooklyn Directory for the year ending May 1, 1889",
+     "ia_date": "1889",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1907BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0037,
+     "fuzzy_share": 0.0133,
+     "leaves": [
+      18,
+      22,
+      26
+     ],
+     "title": "Upington's General Directory of the Borough of Brooklyn, City of New York, for the year 19",
+     "ia_date": "1907",
+     "year_covered": 1907,
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1908BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0037,
+     "fuzzy_share": 0.0067,
+     "leaves": [
+      12,
+      16,
+      21
+     ],
+     "title": "Upington's General Directory of the Borough of Brooklyn, City of New York, for the year 19",
+     "ia_date": "1908",
+     "year_covered": 1908,
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "lain1876": {
+   "file": "lain1876_eval.jsonl",
+   "rows": 103,
+   "eligible_lines": 103,
+   "own": "1876BPL",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "1876BPL",
+     "verdict": "own",
+     "verified": null,
+     "exact": 71,
+     "exact_share": 0.6893,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      373,
+      873
+     ],
+     "title": "The Brooklyn City and Business Directory for the year ending May 1, 1876",
+     "ia_date": "1876",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1875BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 10,
+     "exact_share": 0.0971,
+     "fuzzy_share": 0.3981,
+     "leaves": [
+      352,
+      842,
+      351,
+      841
+     ],
+     "title": "Brooklyn City and Business Directory for the year ending May 1, 1875",
+     "ia_date": "1875",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1879BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 5,
+     "exact_share": 0.0485,
+     "fuzzy_share": 0.3204,
+     "leaves": [
+      397,
+      396,
+      936
+     ],
+     "title": "Brooklyn City Directory for the year ending May 1, 1879",
+     "ia_date": "1879",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1880BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 5,
+     "exact_share": 0.0485,
+     "fuzzy_share": 0.2136,
+     "leaves": [
+      401
+     ],
+     "title": "Brooklyn City and Business Directory for the year ending May 1, 1880",
+     "ia_date": "1880",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "longworth1818": {
+   "file": "longworth1818_eval.jsonl",
+   "rows": 106,
+   "eligible_lines": 106,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": [
+    {
+     "id": "merceinscitydire00merc",
+     "verdict": "check",
+     "verified": null,
+     "exact": 8,
+     "exact_share": 0.0755,
+     "fuzzy_share": 0.3868,
+     "leaves": [
+      193,
+      357,
+      356
+     ],
+     "title": "Mercein's city directory, New-York register, and almanac, for the forty-fifth year of Amer",
+     "ia_date": "1820",
+     "year_covered": 1820,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric3818long",
+     "verdict": "check",
+     "verified": null,
+     "exact": 6,
+     "exact_share": 0.0566,
+     "fuzzy_share": 0.2264,
+     "leaves": [
+      276,
+      139,
+      140
+     ],
+     "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of ",
+     "ia_date": "1797",
+     "year_covered": null,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric4018long",
+     "verdict": "check",
+     "verified": null,
+     "exact": 4,
+     "exact_share": 0.0377,
+     "fuzzy_share": 0.1415,
+     "leaves": [
+      207
+     ],
+     "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of ",
+     "ia_date": "1797",
+     "year_covered": null,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "mb1931": {
+   "file": "mb1931_eval.jsonl",
+   "rows": 109,
+   "eligible_lines": 109,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": []
+  },
+  "mercein1820": {
+   "file": "mercein1820_eval.jsonl",
+   "rows": 60,
+   "eligible_lines": 60,
+   "own": "merceinscitydire00merc",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "merceinscitydire00merc",
+     "verdict": "own",
+     "verified": null,
+     "exact": 36,
+     "exact_share": 0.6,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      138,
+      320
+     ],
+     "title": "Mercein's city directory, New-York register, and almanac, for the forty-fifth year of Amer",
+     "ia_date": "1820",
+     "year_covered": 1820,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "micro13_body": {
+   "file": "micro13_body_eval.jsonl",
+   "rows": 120,
+   "eligible_lines": 114,
+   "own": "micro_IABROOKLYN_0013",
+   "own_from": "ia_id",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "micro_IABROOKLYN_0013",
+     "verdict": "own",
+     "verified": null,
+     "exact": 114,
+     "exact_share": 1.0,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      34,
+      30,
+      32,
+      35,
+      31,
+      33
+     ],
+     "title": "Brooklyn Directory for 1836-1837",
+     "ia_date": "1836-1837",
+     "year_covered": 1836,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0012",
+     "verdict": "check",
+     "verified": null,
+     "exact": 9,
+     "exact_share": 0.0789,
+     "fuzzy_share": 0.307,
+     "leaves": [
+      34,
+      30,
+      29,
+      31,
+      33
+     ],
+     "title": "Brooklyn Directory for 1835-1836",
+     "ia_date": "1835-1836",
+     "year_covered": null,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0014",
+     "verdict": "check",
+     "verified": null,
+     "exact": 5,
+     "exact_share": 0.0439,
+     "fuzzy_share": 0.307,
+     "leaves": [
+      17,
+      19,
+      18
+     ],
+     "title": "Brooklyn Directory for the years 1837-1838",
+     "ia_date": "1837-1838",
+     "year_covered": 1837,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0010",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0263,
+     "fuzzy_share": 0.0789,
+     "leaves": [
+      17,
+      19,
+      22
+     ],
+     "title": "Brooklyn Directory for 1833-1834",
+     "ia_date": "1833-1834",
+     "year_covered": null,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "micro13_frontmatter": {
+   "file": "micro13_frontmatter_eval.jsonl",
+   "rows": 120,
+   "eligible_lines": 100,
+   "own": "micro_IABROOKLYN_0013",
+   "own_from": "ia_id",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "micro_IABROOKLYN_0013",
+     "verdict": "own",
+     "verified": null,
+     "exact": 100,
+     "exact_share": 1.0,
+     "fuzzy_share": 0.53,
+     "leaves": [
+      11,
+      6,
+      7,
+      10,
+      9,
+      3
+     ],
+     "title": "Brooklyn Directory for 1836-1837",
+     "ia_date": "1836-1837",
+     "year_covered": 1836,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "minneapolis": {
+   "file": "minneapolis_eval.jsonl",
+   "rows": 230,
+   "eligible_lines": 230,
+   "own": null,
+   "own_from": null,
+   "own_in_corpus": null,
+   "volumes": []
+  },
+  "nyu": {
+   "file": "nyu_eval.jsonl",
+   "rows": 3000,
+   "eligible_lines": 2996,
+   "own": null,
+   "own_from": null,
+   "own_in_corpus": null,
+   "volumes": [
+    {
+     "id": "doggettsnewyorkc1848dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 311,
+     "exact_share": 0.1038,
+     "fuzzy_share": 0.12,
+     "leaves": [
+      99,
+      111,
+      102,
+      125,
+      132,
+      113
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "doggettsnewyorkc1847dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 168,
+     "exact_share": 0.0561,
+     "fuzzy_share": 0.0533,
+     "leaves": [
+      120,
+      92,
+      95,
+      104,
+      103,
+      127
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": 1847,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "doggettsnewyorkc1846dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 152,
+     "exact_share": 0.0507,
+     "fuzzy_share": 0.0667,
+     "leaves": [
+      102,
+      90,
+      92,
+      93,
+      96,
+      116
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "newyorkcitydirec00rode",
+     "verdict": "check",
+     "verified": null,
+     "exact": 113,
+     "exact_share": 0.0377,
+     "fuzzy_share": 0.0667,
+     "leaves": [
+      167,
+      155,
+      161,
+      149,
+      170,
+      174
+     ],
+     "title": "The New York City directory, for ..",
+     "ia_date": "1851",
+     "year_covered": 1854,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "doggettsnewyorkc1845dogg",
+     "verdict": "check",
+     "verified": null,
+     "exact": 83,
+     "exact_share": 0.0277,
+     "fuzzy_share": 0.0733,
+     "leaves": [
+      92,
+      83,
+      81,
+      104,
+      80,
+      86
+     ],
+     "title": "Doggett's New-York City directory, for ...",
+     "ia_date": "1845",
+     "year_covered": 1845,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsnewyorkcity1857trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 17,
+     "exact_share": 0.0057,
+     "fuzzy_share": 0.0467,
+     "leaves": [
+      184,
+      150,
+      154,
+      160,
+      163,
+      165
+     ],
+     "title": "Trow's New York city directory.",
+     "ia_date": "1857",
+     "year_covered": 1857,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsnewyorkcity1859trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 9,
+     "exact_share": 0.003,
+     "fuzzy_share": 0.0267,
+     "leaves": [
+      164,
+      167,
+      168,
+      185,
+      189,
+      193
+     ],
+     "title": "Trow's New York city directory.",
+     "ia_date": "1859",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric00newy",
+     "verdict": "check",
+     "verified": null,
+     "exact": 8,
+     "exact_share": 0.0027,
+     "fuzzy_share": 0.0,
+     "leaves": [
+      172,
+      178,
+      186,
+      187,
+      191,
+      194
+     ],
+     "title": "Longworth's American almanac, New-York register and city directory",
+     "ia_date": "1816",
+     "year_covered": 1839,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric1839newy",
+     "verdict": "check",
+     "verified": null,
+     "exact": 8,
+     "exact_share": 0.0027,
+     "fuzzy_share": 0.0,
+     "leaves": [
+      172,
+      178,
+      186,
+      187,
+      191,
+      194
+     ],
+     "title": "Longworth's American almanac, New-York register and city directory",
+     "ia_date": "1816",
+     "year_covered": null,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric6518long",
+     "verdict": "check",
+     "verified": null,
+     "exact": 8,
+     "exact_share": 0.0027,
+     "fuzzy_share": 0.0,
+     "leaves": [
+      159,
+      162,
+      166,
+      171,
+      175,
+      178
+     ],
+     "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of ",
+     "ia_date": "1797",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric6118long",
+     "verdict": "check",
+     "verified": null,
+     "exact": 7,
+     "exact_share": 0.0023,
+     "fuzzy_share": 0.0,
+     "leaves": [
+      157,
+      164,
+      168,
+      169,
+      173,
+      201
+     ],
+     "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of ",
+     "ia_date": "1797",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "longworthsameric6018long",
+     "verdict": "check",
+     "verified": null,
+     "exact": 6,
+     "exact_share": 0.002,
+     "fuzzy_share": 0.0,
+     "leaves": [
+      174,
+      177,
+      183,
+      187,
+      188,
+      192
+     ],
+     "title": "Longworth's American almanack, New-York register, and city directory: for the ... year of ",
+     "ia_date": "1797",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsnewyorkcity1863trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.001,
+     "fuzzy_share": 0.0,
+     "leaves": [
+      177,
+      187,
+      190
+     ],
+     "title": "Trow's New York city directory.",
+     "ia_date": "1863",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "needs-image-read"
+    }
+   ]
+  },
+  "ogden1839": {
+   "file": "ogden1839_eval.jsonl",
+   "rows": 66,
+   "eligible_lines": 66,
+   "own": "brooklyndirector00ogde",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "micro_IABROOKLYN_0016",
+     "verdict": "twin",
+     "verified": "twin",
+     "exact": 27,
+     "exact_share": 0.4091,
+     "fuzzy_share": 0.7121,
+     "leaves": [
+      50,
+      119
+     ],
+     "title": "Brooklyn Directory for the years 1839-1840",
+     "ia_date": "1839-1840",
+     "year_covered": 1839,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklyndirector00ogde",
+     "verdict": "own",
+     "verified": null,
+     "exact": 23,
+     "exact_share": 0.3485,
+     "fuzzy_share": 0.8939,
+     "leaves": [
+      237,
+      101
+     ],
+     "title": "Brooklyn directory, for the years 1839-40",
+     "ia_date": "1839",
+     "year_covered": null,
+     "ocr": "tesseract 5.3.0-3-g9920",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "brooklynalphabet1843unse",
+     "verdict": "check",
+     "verified": null,
+     "exact": 7,
+     "exact_share": 0.1061,
+     "fuzzy_share": 0.2576,
+     "leaves": [
+      74,
+      164,
+      75
+     ],
+     "title": "Brooklyn alphabetical and street directory, and yearly advertiser.",
+     "ia_date": "1846",
+     "year_covered": null,
+     "ocr": null,
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0017",
+     "verdict": "check",
+     "verified": null,
+     "exact": 7,
+     "exact_share": 0.1061,
+     "fuzzy_share": 0.2424,
+     "leaves": [
+      51
+     ],
+     "title": "Brooklyn Directory and Yearly Advertiser for 1840-1841",
+     "ia_date": "1840-1841",
+     "year_covered": 1840,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0019",
+     "verdict": "check",
+     "verified": null,
+     "exact": 7,
+     "exact_share": 0.1061,
+     "fuzzy_share": 0.197,
+     "leaves": [
+      71,
+      72,
+      155
+     ],
+     "title": "Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1843 & 1844",
+     "ia_date": "1843-1844",
+     "year_covered": null,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0015",
+     "verdict": "check",
+     "verified": null,
+     "exact": 6,
+     "exact_share": 0.0909,
+     "fuzzy_share": 0.2576,
+     "leaves": [
+      40,
+      69
+     ],
+     "title": "Brooklyn Directory for the years 1838-1839",
+     "ia_date": "1838-1839",
+     "year_covered": 1838,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0018",
+     "verdict": "check",
+     "verified": null,
+     "exact": 4,
+     "exact_share": 0.0606,
+     "fuzzy_share": 0.2879,
+     "leaves": [
+      62,
+      147
+     ],
+     "title": "Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1841-1842",
+     "ia_date": "1841-1842",
+     "year_covered": 1841,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0012",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0455,
+     "fuzzy_share": 0.1515,
+     "leaves": [
+      44,
+      84
+     ],
+     "title": "Brooklyn Directory for 1835-1836",
+     "ia_date": "1835-1836",
+     "year_covered": null,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0020",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0455,
+     "fuzzy_share": 0.197,
+     "leaves": [
+      78,
+      174,
+      175
+     ],
+     "title": "Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1844 & 1845",
+     "ia_date": "1844-1845",
+     "year_covered": null,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "needs-image-read"
+    }
+   ]
+  },
+  "polk1917": {
+   "file": "polk1917_eval.jsonl",
+   "rows": 72,
+   "eligible_lines": 69,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": [
+    {
+     "id": "trowsgeneraldire1917trow",
+     "verdict": "check",
+     "verified": "twin",
+     "exact": 4,
+     "exact_share": 0.058,
+     "fuzzy_share": 0.971,
+     "leaves": [
+      688,
+      687
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1917",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "needs-image-read"
+    }
+   ]
+  },
+  "polk1925": {
+   "file": "polk1925_eval.jsonl",
+   "rows": 40,
+   "eligible_lines": 39,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": []
+  },
+  "polk1933bk": {
+   "file": "polk1933bk_eval.jsonl",
+   "rows": 49,
+   "eligible_lines": 49,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": []
+  },
+  "polk1933si": {
+   "file": "polk1933si_eval.jsonl",
+   "rows": 56,
+   "eligible_lines": 56,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": []
+  },
+  "queens1933": {
+   "file": "queens1933_eval.jsonl",
+   "rows": 62,
+   "eligible_lines": 62,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": []
+  },
+  "rode1851": {
+   "file": "rode1851_eval.jsonl",
+   "rows": 53,
+   "eligible_lines": 53,
+   "own": "newyorkcitydirec00rode",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "newyorkcitydirec00rode",
+     "verdict": "own",
+     "verified": null,
+     "exact": 36,
+     "exact_share": 0.6792,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      299
+     ],
+     "title": "The New York City directory, for ..",
+     "ia_date": "1851",
+     "year_covered": 1854,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "smith1855": {
+   "file": "smith1855_eval.jsonl",
+   "rows": 185,
+   "eligible_lines": 185,
+   "own": "micro_IABROOKLYN_0034",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "1856BPL",
+     "verdict": "twin",
+     "verified": "twin",
+     "exact": 153,
+     "exact_share": 0.827,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      161,
+      434
+     ],
+     "title": "Smith's Brooklyn Directory for the year ending May 1, 1856",
+     "ia_date": "1856",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "needs-image-read"
+    },
+    {
+     "id": "micro_IABROOKLYN_0034",
+     "verdict": "own",
+     "verified": null,
+     "exact": 5,
+     "exact_share": 0.027,
+     "fuzzy_share": 0.2333,
+     "leaves": [
+      386,
+      165
+     ],
+     "title": "Smith's Brooklyn City Directory for the year ending May 1st, 1856",
+     "ia_date": "1855-1856",
+     "year_covered": 1856,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "smith1856": {
+   "file": "smith1856_eval.jsonl",
+   "rows": 229,
+   "eligible_lines": 229,
+   "own": "micro_IABROOKLYN_0036",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "1857BPL",
+     "verdict": "twin",
+     "verified": "twin",
+     "exact": 184,
+     "exact_share": 0.8035,
+     "fuzzy_share": 1.0,
+     "leaves": [
+      164,
+      382
+     ],
+     "title": "Smith's Brooklyn Directory for the year ending May 1, 1857",
+     "ia_date": "1857",
+     "year_covered": 1857,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "micro_IABROOKLYN_0036",
+     "verdict": "own",
+     "verified": null,
+     "exact": 35,
+     "exact_share": 0.1528,
+     "fuzzy_share": 0.64,
+     "leaves": [
+      391,
+      168
+     ],
+     "title": "Smith's Brooklyn City Directory for the year ending May 1st, 1857",
+     "ia_date": "1856-1857",
+     "year_covered": 1857,
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "1858BPL",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0131,
+     "fuzzy_share": 0.08,
+     "leaves": [
+      186,
+      187
+     ],
+     "title": "Brooklyn City Directory, for the year ending May 1, 1858",
+     "ia_date": "1858",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "trow1884": {
+   "file": "trow1884_eval.jsonl",
+   "rows": 141,
+   "eligible_lines": 141,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": []
+  },
+  "trow1907": {
+   "file": "trow1907_eval.jsonl",
+   "rows": 68,
+   "eligible_lines": 68,
+   "own": "trowsgeneraldir1907p2trow",
+   "own_from": "ia-image",
+   "own_in_corpus": true,
+   "volumes": [
+    {
+     "id": "trowsgeneraldir1905p2trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 8,
+     "exact_share": 0.1176,
+     "fuzzy_share": 0.4118,
+     "leaves": [
+      273
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1905",
+     "year_covered": 1906,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsgeneraldir1906p2trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 7,
+     "exact_share": 0.1029,
+     "fuzzy_share": 0.6176,
+     "leaves": [
+      371,
+      373
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1906",
+     "year_covered": 1906,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsgeneraldir1907p2trow",
+     "verdict": "own",
+     "verified": null,
+     "exact": 7,
+     "exact_share": 0.1029,
+     "fuzzy_share": 0.8824,
+     "leaves": [
+      403
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1907",
+     "year_covered": 1907,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsgeneraldir1904p2trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 6,
+     "exact_share": 0.0882,
+     "fuzzy_share": 0.3971,
+     "leaves": [
+      219
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1904",
+     "year_covered": 1904,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsgeneraldir1908p2trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0441,
+     "fuzzy_share": 0.1912,
+     "leaves": [
+      711
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1908",
+     "year_covered": 1908,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsgeneraldir1909p2trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 3,
+     "exact_share": 0.0441,
+     "fuzzy_share": 0.3235,
+     "leaves": [
+      289
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1909",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "trow1913": {
+   "file": "trow1913_eval.jsonl",
+   "rows": 93,
+   "eligible_lines": 92,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": [
+    {
+     "id": "trowsgeneraldir1912p1trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 7,
+     "exact_share": 0.0761,
+     "fuzzy_share": 0.3696,
+     "leaves": [
+      883,
+      881
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1912",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsgeneraldir1911p1trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 6,
+     "exact_share": 0.0652,
+     "fuzzy_share": 0.3043,
+     "leaves": [
+      853,
+      855
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1911",
+     "year_covered": 1911,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsgeneraldir1910p1trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 5,
+     "exact_share": 0.0543,
+     "fuzzy_share": 0.2065,
+     "leaves": [
+      853
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1910",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsgeneraldire1915trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 5,
+     "exact_share": 0.0543,
+     "fuzzy_share": 0.2935,
+     "leaves": [
+      493
+     ],
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New York",
+     "ia_date": "1915",
+     "year_covered": 1914,
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done"
+    }
+   ]
+  },
+  "trowwilson1865": {
+   "file": "trowwilson1865_eval.jsonl",
+   "rows": 167,
+   "eligible_lines": 167,
+   "own": null,
+   "own_from": "nypl",
+   "own_in_corpus": null,
+   "volumes": [
+    {
+     "id": "trowsnewyorkcity1863trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 18,
+     "exact_share": 0.1078,
+     "fuzzy_share": 0.42,
+     "leaves": [
+      742,
+      743
+     ],
+     "title": "Trow's New York city directory.",
+     "ia_date": "1863",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "needs-image-read"
+    },
+    {
+     "id": "trowsnewyorkcity1859trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 10,
+     "exact_share": 0.0599,
+     "fuzzy_share": 0.3333,
+     "leaves": [
+      724,
+      723
+     ],
+     "title": "Trow's New York city directory.",
+     "ia_date": "1859",
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done"
+    },
+    {
+     "id": "trowsnewyorkcity1876trow",
+     "verdict": "check",
+     "verified": null,
+     "exact": 4,
+     "exact_share": 0.024,
+     "fuzzy_share": 0.2667,
+     "leaves": [
+      1178
+     ],
+     "title": "Trow's New York city directory.",
+     "ia_date": null,
+     "year_covered": null,
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "needs-image-read"
+    }
+   ]
+  },
+  "tulsa": {
+   "file": "tulsa_eval.jsonl",
+   "rows": 1500,
+   "eligible_lines": 1500,
+   "own": null,
+   "own_from": "raw",
+   "own_in_corpus": null,
+   "volumes": []
+  }
+ }
+}

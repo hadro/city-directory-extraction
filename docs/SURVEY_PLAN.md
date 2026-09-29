@@ -1075,10 +1075,79 @@ re-derived from the dumps (`--rederive`, ~3 s a volume), then `sections` and `sc
 `apply_survey.py` dry run afterwards: no CSV change. Page and section claims do not read the
 extraction lines.
 
-**Twin holdout (2026-09-28).** Seven gold sets have the same edition in a second scan (sibling
-session's `survey_twins.py`). The twins' gold pages were untagged, because `locate_holdout` only
-searched the volume named in the gold's image path. `GOLD_TWINS` in `survey_harvest.py`, keyed by
-gold set, now locates them volume-wide and tags them. Re-apply with `--relocate-holdout`.
+**Twin holdout (2026-09-28).** Six gold sets have the same edition in a second scan, seven twin
+volumes in all (sibling session's `survey_twins.py`; see below). The twins' gold pages were
+untagged, because `locate_holdout` only searched the volume named in the gold's image path.
+`GOLD_TWINS` in `survey_harvest.py`, keyed by gold set, now locates them volume-wide and tags them.
+Re-apply with `--relocate-holdout`.
+
+#### Twins: one edition, scanned twice (2026-09-28)
+
+```bash
+python3 data_prep/survey_twins.py gold     # ~2 min, 8 cores -> results/survey_twins_gold.json
+```
+
+**The Brooklyn microfilm series was also scanned as books, and the book scans read the same
+pages far better.** Each gold set's hand-corrected lines were matched against every volume's IA
+lines. A line counts as exact when the two texts are identical after lower-casing and dropping
+punctuation.
+
+| edition (gold rows) | microfilm copy: exact / ≥0.8 | book-scan twin: exact / ≥0.8 |
+|---|---|---|
+| Smith, year ending May 1857 (229) | `micro_IABROOKLYN_0036`: 16% / 52% | **`1857BPL`: 81% / 100%** |
+| Smith, year ending May 1856 (185) | `micro_IABROOKLYN_0034`: 3% / 20% | **`1856BPL`: 83% / 100%** |
+| Hearnes 1852–53 (52) | `micro_IABROOKLYN_0030`: 40% / 83% | **`hearnesbrooklync1852unse`: 67% / 100%** |
+
+The five-volume Torch run read `_0030` and `_0036`. For these editions, what stage 6 of
+PIPELINE.md calls the OCR ceiling is **a choice of scan**, and run 2 adds the two book scans.
+⚠️ **The identifier's year is not the edition:** `1856BPL` prints "for the year ending May 1, 1856",
+so it is `_0034`'s twin, not `_0036`'s.
+
+**Every gold set was scanned, NYPL-sourced ones included**, because their editions can be in the
+IA corpus under a name nothing else would connect. Twins, each checked line by line and now in
+`GOLD_TWINS`:
+
+| gold set | twin | gold pages in the twin |
+|---|---|---|
+| smith1856, smith1855, hearne1852 | above | 164, 382 · 161, 434 · 178, 410 |
+| ogden1839 | `micro_IABROOKLYN_0016` (the 1839–40 edition, filmed) | 50, 119 |
+| franks1786 | `newyorkdirectory00durs_0` (Durst's 1874 reprint) | 33, 42, 52, 53 |
+| franks1786 | `newyorkbrooklynd00durs` (1876, the long s printed as f) | 31, 40, 50, 51 |
+| polk1917 (NYPL) | `trowsgeneraldire1917trow` | 688 |
+
+Exact matching undercounts a noisy copy. `trowsgeneraldire1917trow` reproduces the Polk 1917 page
+at only 4 of 69 exact lines, because ABBYY-8 reads the ditto mark as `ii` (`ii Jas watchmn h427
+W36th`). And franks1786's own volume, `newyorkdirectory00fran_0`, matches only 1 of 56.
+
+**Neighbouring editions reprint gold lines verbatim, and at rates that vary by city and decade.**
+That is why no single exact share marks a twin:
+
+| gold | own volume | neighbouring editions |
+|---|---|---|
+| smith1856 (Brooklyn 1856–57) | 15% (microfilm) | 1855–56 (`1856BPL`) **0.4%** |
+| doggett1846 (Manhattan) | 78% | 1847 **27%**, 1845 **22%** |
+| trow1907 (Manhattan, ABBYY-8) | 10% | 1905 p2 **12%**, 1906 p2 **10%** |
+
+`survey_twins` judges a candidate against the gold's own volume where that volume reads its own
+gold at ≥ 20%, and against an absolute 50% where it does not. That rule marks no neighbour a twin,
+and it leaves the two noisy twins at `check`, which only a page read settles. One `check` was read
+and is **not** a twin. `bub_gb_hY4tAAAAYAAJ` (Trow 1865–66) shares entries with the trowwilson1865
+NYPL gold, but its page 735 prints Mason & Hamlin at "No. 7 Mercer Street" where the gold prints
+"596 Broadway", and its page breaks differ.
+
+⚠️ **Page-level holdout cannot cover the verbatim reprints.** Doggett 1845 and 1847 carry a
+quarter of the doggett1846 gold lines word for word, on untagged pages. If a training set is ever
+drawn from harvested lines, drop every line whose normalised text equals a gold line
+(`survey_twins.norm` plus a set lookup). PIPELINE.md stage 6 records this as a requirement.
+
+**No twin found** for boyd1890, doggett1846, duncan1794, lain, lain1876, mercein1820, rode1851,
+trow1907, micro13, or the NYPL-sourced trow1884, doggetts1850 and nyu (Doggett 1850–51; the IA
+corpus has 1845–48), trow1913 (IA's 1913 set is the business directory), polk1925, polk1933bk/si,
+queens1933 and mb1931. The Polk 1917 case shows that a very noisy twin can hide from exact
+matching, so "none" is firmest where the other volume's OCR is decent.
+
+Next: the same test volume against volume, to find every twin and duplicate part in the corpus,
+not just those of gold pages, and pick the better copy of each edition before the corpus run.
 
 #### The original design
 

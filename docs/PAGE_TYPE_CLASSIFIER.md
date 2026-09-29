@@ -509,6 +509,20 @@ These are also the easy case — a leaf with zero ditto-lead lines and no alphab
 flagged by `detect_listing_bounds` as a gap. The open question is only how many are missed, not
 whether the signal exists.
 
+> **Measured corpus-wide, 2026-09-28 (`data_prep/survey_adleaves.py`; SURVEY_PLAN.md, "Non-entry
+> pages inside the listing").** No model was needed. The deciding feature is the share of a page's
+> lines that have an entry's shape. Line count, letter vote and typography all failed: a dense
+> text ad such as 1906BPL leaf 130's 230-line almanac list looks busy, and a page of dittos does
+> not vote a letter.
+>
+> The rule flags all four of this plan's `has_body: false` leaves, all 7 ads in an image-read
+> sample, and both failed-OCR listing pages in it. It keeps the banded listing pages. Across 153
+> volumes, 108,523 scoped lines (0.67%) sit on flagged pages. The pages are marked, not cut.
+>
+> The gap-leaf figure of 166 above is not a count of ad pages. Of 1906BPL's 199 gap leaves, only
+> 11 are flagged. The other 188 read as listing: letter-block gaps are mostly listing pages whose
+> ad bands and dittos threw off the letter vote.
+
 ## Phase 4 — How it lands in the pipeline
 
 **As a queue and a marked field, not a gate.** Two reasons, both already established in the repo:

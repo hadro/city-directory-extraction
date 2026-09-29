@@ -1273,6 +1273,70 @@ Also found:
   which gives recall on whole volumes (run 1's Doggett 1845: 1.002). 1875BPL's per-letter table
   allows it per letter.
 
+#### Non-entry pages inside the listing: the ad-run inventory (2026-09-28)
+
+```bash
+python3 data_prep/survey_adleaves.py features            # ~1 min, 8 cores (gitignored output)
+python3 data_prep/survey_adleaves.py inventory --write  # -> results/adleaf_inventory.json + sidecars
+```
+
+`scope` keeps every line on every leaf inside a residential run, and by design an ad page does
+not break a run. So a full-page ad bound into the alphabet goes to the model, which returns its
+copy as people. This inventory marks, in each sidecar's `non_entry_pages`, **every page inside a
+residential run whose OCR lines do not have an entry's shape**. That covers two kinds of page:
+
+- a full-page ad;
+- a listing page whose OCR failed.
+
+Either way, the model would turn its lines into people.
+
+**108,523 of the 16.25M scoped lines (0.67%) sit on such pages, spread over 153 volumes.** The
+ingest filters have already done most of the work. Full-page ads keep few lines past `bigtype`
+and `banner`, about a dozen a page. What remains concentrates in a few places:
+
+| where | non-entry pages | scoped lines on them |
+|---|---|---|
+| Trow 1917 · 1922/23 p2 · p1 · 1915 | 31 · 17 · 15 · 24 | 12,188 · 11,646 · 9,688 · 8,824 (0.8–1.9%) |
+| ⚠️ `micro_IABROOKLYN_0047` (Williamsburgh 1853) | 163 | 2,042 of 2,572 (**79%**) |
+| ⚠️ `brooklyndirector00ogde` (Ogden 1839, the book scan) | 135 | 2,396 of 7,666 (**31%**) |
+| ⚠️ `brooklynnewyorkc19123broo` (Brooklyn 1912 p3) | 186 | 2,307 of 8,723 (**26%**) |
+| ⚠️ `micro_IABROOKLYN_0031` | 225 | 1,209 of 5,214 (23%) |
+
+**The rule.** Every other page feature was tried and failed. The measure that decides is the
+**entry share**: the share of a page's lines with an entry's shape, such as `h 241 Hull`, `h180
+E64th`, `Smith John, grocer, 12 Pine`, `merchant, 95, Water-street`, `Bridge n Fulton` or `w s
+Clinton`. A page is non-entry below 0.15, or below 0.3 × its volume's median page if that is lower,
+since Trow 1922/23's five narrow columns split entries across lines. Nothing counts as listing
+below 0.05. Checked against page images:
+- all 4 of 1906BPL's band-labelled no-body leaves are flagged;
+- all 7 full-page ads read off the image are flagged, among them Upington's own circular-mailing
+  service, a Knabe piano ad and a stenography school;
+- both listing pages whose OCR had failed are flagged (Trow 1910 p2 leaf 59, 94 garbled lines);
+- both listing pages under ad bands are kept.
+
+Two approaches were tried first and dropped:
+- A line-count and letter-vote rule missed the *Brooklyn Eagle Almanac*'s 230-line price list
+  (1906BPL leaf 130), because dense ads look busy. It also flagged listing pages whose dittos do
+  not vote a letter.
+- A clean-word share could not tell garbled microfilm from prose. OCR noise makes plausible
+  three-letter words.
+
+The pattern needed several era-specific forms before whole volumes stopped reading as non-entry:
+1910s glued markers (`r205 W141st`), 1786's comma after the number, and the Bronx villages'
+side-of-street addresses.
+
+What it adds to the survey:
+- ⚠️ **Three volumes are mostly unreadable, and Phase 1's `dead-ocr` check passed them**, because
+  it compares characters per page within an engine class. `micro_0047` produces text like "rapa
+  Sete fe reer). ig seni mt". The Ogden book scan's flagged pages look like OCR'd show-through
+  (`sited Tn odellaW ...`). That undercuts part of the Ogden choice in "Editions held twice": it
+  won on lines per page, and a third of those lines are this. Its microfilm twin `micro_0016`
+  loses 6% to non-entry pages. The pair is now a real close call, and wants a page read.
+- **Nothing is cut yet.** The marks sit in the sidecars, and `assemble_records.py` carries them
+  as a flag. Whether `scope` should drop these lines, or the stager skip them, is a decision.
+  The two kinds want different handling: an ad page should be skipped, while a failed listing page
+  should be re-read from the image, which is what the vision OCR question in PIPELINE.md comes to.
+
 #### The original design
 
 Per volume, from the JSONL + pageindex + `_page_numbers.json`:

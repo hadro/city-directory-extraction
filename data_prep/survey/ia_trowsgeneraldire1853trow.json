@@ -884,5 +884,27 @@
   ],
   "kept": 0,
   "skipped": "not-residential"
+ },
+ "non_entry_pages": {
+  "method": "entry-shape",
+  "derived": "2026-09-29",
+  "entry_min": 0.15,
+  "scoped_lines": 0,
+  "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, or listing pages the OCR failed on. Not yet cut by scope.",
+  "leaves": [
+   919,
+   921,
+   923,
+   925,
+   927,
+   929,
+   931,
+   933,
+   935,
+   937,
+   939,
+   941,
+   946
+  ]
  }
 }

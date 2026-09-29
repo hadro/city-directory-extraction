@@ -1,0 +1,9485 @@
+{
+ "derived": "2026-09-28",
+ "code_at": "c26fbb5-dirty",
+ "params": {
+  "sample_k": 3000,
+  "df_max": 6,
+  "pair_min": 0.03,
+  "page_vote": 5,
+  "folio_min": 30,
+  "same_conc": 0.95,
+  "same_pages": 30,
+  "min_chars": 15,
+  "min_tokens": 3
+ },
+ "relations": {
+  "same-edition": 26,
+  "neighbour": 216,
+  "undecided": 10
+ },
+ "editions": [
+  {
+   "members": [
+    {
+     "id": "1906BPL",
+     "ia_date": "1906",
+     "title": "Upington's General Directory for the Borough of Brooklyn, City of New York, for ",
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 194256,
+     "text_leaves": 1191,
+     "lines_per_leaf": 163.1,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyorkc00geor",
+     "ia_date": "1906",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "K-Z",
+     "whole": false,
+     "kind": "listing",
+     "lines": 101019,
+     "text_leaves": 614,
+     "lines_per_leaf": 164.5,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyorkc19062geor",
+     "ia_date": "1903",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "K-Z",
+     "whole": false,
+     "kind": "listing",
+     "lines": 74583,
+     "text_leaves": 610,
+     "lines_per_leaf": 122.3,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyorkc1906geor",
+     "ia_date": "1906",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-K",
+     "whole": false,
+     "kind": "listing",
+     "lines": 95312,
+     "text_leaves": 588,
+     "lines_per_leaf": 162.1,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "1906BPL"
+   ],
+   "spare_lines": 270914,
+   "close_call": false,
+   "attested_years": [
+    1906
+   ],
+   "pairs": [
+    {
+     "a": "1906BPL",
+     "b": "brooklynnewyorkc00geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 601,
+     "pages_b": 601,
+     "folio_agree": 0.579,
+     "folio_pairs": 21741,
+     "contain_a": 0.2534,
+     "contain_b": 0.4896,
+     "via": null
+    },
+    {
+     "a": "1906BPL",
+     "b": "brooklynnewyorkc19062geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 472,
+     "pages_b": 473,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.0684,
+     "contain_b": 0.2253,
+     "via": null
+    },
+    {
+     "a": "1906BPL",
+     "b": "brooklynnewyorkc1906geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 573,
+     "pages_b": 573,
+     "folio_agree": 0.981,
+     "folio_pairs": 26558,
+     "contain_a": 0.2148,
+     "contain_b": 0.441,
+     "via": null
+    },
+    {
+     "a": "brooklynnewyorkc00geor",
+     "b": "brooklynnewyorkc19062geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 478,
+     "pages_b": 479,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.1377,
+     "contain_b": 0.2349,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "1903BPL",
+     "ia_date": "1903",
+     "title": "Upington's General Directory of Brooklyn, New York City, for the year 1903",
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 176717,
+     "text_leaves": 1059,
+     "lines_per_leaf": 166.9,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyork1903p1geor",
+     "ia_date": "1903",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-L",
+     "whole": false,
+     "kind": "listing",
+     "lines": 88392,
+     "text_leaves": 556,
+     "lines_per_leaf": 159.0,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyorkc19031geor",
+     "ia_date": "1903",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-L",
+     "whole": false,
+     "kind": "listing",
+     "lines": 89693,
+     "text_leaves": 563,
+     "lines_per_leaf": 159.3,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyorkc1903geor",
+     "ia_date": "1903",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "L-Z",
+     "whole": false,
+     "kind": "listing",
+     "lines": 81269,
+     "text_leaves": 505,
+     "lines_per_leaf": 160.9,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "1903BPL"
+   ],
+   "spare_lines": 259354,
+   "close_call": false,
+   "attested_years": [
+    1903
+   ],
+   "pairs": [
+    {
+     "a": "1903BPL",
+     "b": "brooklynnewyork1903p1geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 542,
+     "pages_b": 542,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.1765,
+     "contain_b": 0.3448,
+     "via": null
+    },
+    {
+     "a": "1903BPL",
+     "b": "brooklynnewyorkc19031geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 364,
+     "pages_b": 367,
+     "folio_agree": 0.962,
+     "folio_pairs": 131,
+     "contain_a": 0.0291,
+     "contain_b": 0.0559,
+     "via": null
+    },
+    {
+     "a": "1903BPL",
+     "b": "brooklynnewyorkc1903geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 492,
+     "pages_b": 492,
+     "folio_agree": 0.0,
+     "folio_pairs": 287,
+     "contain_a": 0.1317,
+     "contain_b": 0.2807,
+     "via": null
+    },
+    {
+     "a": "brooklynnewyork1903p1geor",
+     "b": "brooklynnewyorkc19031geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 378,
+     "pages_b": 381,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.0643,
+     "contain_b": 0.0632,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "1907BPL",
+     "ia_date": "1907",
+     "title": "Upington's General Directory of the Borough of Brooklyn, City of New York, for t",
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 178020,
+     "text_leaves": 1085,
+     "lines_per_leaf": 164.1,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyork1907p1geor",
+     "ia_date": "1903",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-L",
+     "whole": false,
+     "kind": "listing",
+     "lines": 89662,
+     "text_leaves": 549,
+     "lines_per_leaf": 163.3,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyorkc1907geor",
+     "ia_date": "1907",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "L-Z",
+     "whole": false,
+     "kind": "listing",
+     "lines": 88459,
+     "text_leaves": 533,
+     "lines_per_leaf": 166.0,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "1907BPL"
+   ],
+   "spare_lines": 178121,
+   "close_call": false,
+   "attested_years": [
+    1907
+   ],
+   "pairs": [
+    {
+     "a": "1907BPL",
+     "b": "brooklynnewyork1907p1geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 542,
+     "pages_b": 542,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.1988,
+     "contain_b": 0.3978,
+     "via": null
+    },
+    {
+     "a": "1907BPL",
+     "b": "brooklynnewyorkc1907geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 528,
+     "pages_b": 528,
+     "folio_agree": 0.0,
+     "folio_pairs": 453,
+     "contain_a": 0.1967,
+     "contain_b": 0.3976,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "1908BPL",
+     "ia_date": "1908",
+     "title": "Upington's General Directory of the Borough of Brooklyn, City of New York, for t",
+     "ocr": "ABBYY FineReader 11.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 174902,
+     "text_leaves": 1082,
+     "lines_per_leaf": 161.6,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyork1908p1geor",
+     "ia_date": "1908",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-K",
+     "whole": false,
+     "kind": "listing",
+     "lines": 88107,
+     "text_leaves": 545,
+     "lines_per_leaf": 161.7,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyorkc1908geor",
+     "ia_date": "1908",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "K-Z",
+     "whole": false,
+     "kind": "listing",
+     "lines": 89185,
+     "text_leaves": 553,
+     "lines_per_leaf": 161.3,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "1908BPL"
+   ],
+   "spare_lines": 177292,
+   "close_call": false,
+   "attested_years": [
+    1908
+   ],
+   "pairs": [
+    {
+     "a": "1908BPL",
+     "b": "brooklynnewyork1908p1geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 527,
+     "pages_b": 527,
+     "folio_agree": 1.0,
+     "folio_pairs": 11432,
+     "contain_a": 0.2528,
+     "contain_b": 0.5047,
+     "via": null
+    },
+    {
+     "a": "1908BPL",
+     "b": "brooklynnewyorkc1908geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 540,
+     "pages_b": 541,
+     "folio_agree": null,
+     "folio_pairs": 3,
+     "contain_a": 0.2599,
+     "contain_b": 0.5153,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "1904BPL",
+     "ia_date": "1904",
+     "title": "Upington's General Directory of Brooklyn, New York City, for the year 1904",
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 170553,
+     "text_leaves": 1019,
+     "lines_per_leaf": 167.4,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyork1904p1geor",
+     "ia_date": "1904",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-L",
+     "whole": false,
+     "kind": "listing",
+     "lines": 90393,
+     "text_leaves": 550,
+     "lines_per_leaf": 164.4,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "brooklynnewyorkc1904geor",
+     "ia_date": "1904",
+     "title": "Brooklyn, New York, city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "L-Z",
+     "whole": false,
+     "kind": "listing",
+     "lines": 80646,
+     "text_leaves": 490,
+     "lines_per_leaf": 164.6,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "1904BPL"
+   ],
+   "spare_lines": 171039,
+   "close_call": false,
+   "attested_years": [],
+   "pairs": [
+    {
+     "a": "1904BPL",
+     "b": "brooklynnewyork1904p1geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 535,
+     "pages_b": 533,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.288,
+     "contain_b": 0.5364,
+     "via": null
+    },
+    {
+     "a": "1904BPL",
+     "b": "brooklynnewyorkc1904geor",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 468,
+     "pages_b": 468,
+     "folio_agree": 0.999,
+     "folio_pairs": 15487,
+     "contain_a": 0.2691,
+     "contain_b": 0.5555,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "trowsgeneraldir1903p2trow",
+     "ia_date": "1903",
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New Yor",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "H-R",
+     "whole": false,
+     "kind": "listing",
+     "lines": 153625,
+     "text_leaves": 578,
+     "lines_per_leaf": 265.8,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "trowsgeneraldire19032trow",
+     "ia_date": "1853",
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New Yor",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "H-R",
+     "whole": false,
+     "kind": "listing",
+     "lines": 152636,
+     "text_leaves": 578,
+     "lines_per_leaf": 264.1,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "trowsgeneraldir1903p2trow"
+   ],
+   "spare_lines": 152636,
+   "close_call": true,
+   "attested_years": [
+    1903
+   ],
+   "pairs": [
+    {
+     "a": "trowsgeneraldir1903p2trow",
+     "b": "trowsgeneraldire19032trow",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 567,
+     "pages_b": 568,
+     "folio_agree": 0.999,
+     "folio_pairs": 6092,
+     "contain_a": 0.108,
+     "contain_b": 0.1106,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "longworthsameric00newy",
+     "ia_date": "1816",
+     "title": "Longworth's American almanac, New-York register and city directory",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 35735,
+     "text_leaves": 682,
+     "lines_per_leaf": 52.4,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "longworthsameric1839newy",
+     "ia_date": "1816",
+     "title": "Longworth's American almanac, New-York register and city directory",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 35714,
+     "text_leaves": 682,
+     "lines_per_leaf": 52.4,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "longworthsameric00newy"
+   ],
+   "spare_lines": 35714,
+   "close_call": true,
+   "attested_years": [
+    1839
+   ],
+   "pairs": [
+    {
+     "a": "longworthsameric00newy",
+     "b": "longworthsameric1839newy",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 677,
+     "pages_b": 677,
+     "folio_agree": 1.0,
+     "folio_pairs": 28026,
+     "contain_a": 0.7862,
+     "contain_b": 0.7866,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "1857BPL",
+     "ia_date": "1857",
+     "title": "Smith's Brooklyn Directory for the year ending May 1, 1857",
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Y",
+     "whole": true,
+     "kind": "listing",
+     "lines": 46677,
+     "text_leaves": 442,
+     "lines_per_leaf": 105.6,
+     "run": true,
+     "gold_twin": true
+    },
+    {
+     "id": "micro_IABROOKLYN_0036",
+     "ia_date": "1856-1857",
+     "title": "Smith's Brooklyn City Directory for the year ending May 1st, 1857",
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Y",
+     "whole": true,
+     "kind": "listing",
+     "lines": 18588,
+     "text_leaves": 390,
+     "lines_per_leaf": 47.7,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "1857BPL"
+   ],
+   "spare_lines": 18588,
+   "close_call": false,
+   "attested_years": [
+    1857
+   ],
+   "pairs": [
+    {
+     "a": "1857BPL",
+     "b": "micro_IABROOKLYN_0036",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 253,
+     "pages_b": 254,
+     "folio_agree": 1.0,
+     "folio_pairs": 152,
+     "contain_a": 0.0714,
+     "contain_b": 0.2059,
+     "via": null
+    },
+    {
+     "a": "micro_IABROOKLYN_0036",
+     "b": "1857BPL",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "smith1856_eval.jsonl"
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "1856BPL",
+     "ia_date": "1856",
+     "title": "Smith's Brooklyn Directory for the year ending May 1, 1856",
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "needs-image-read",
+     "letters": "A-Y",
+     "whole": true,
+     "kind": "listing",
+     "lines": 43227,
+     "text_leaves": 504,
+     "lines_per_leaf": 85.8,
+     "run": true,
+     "gold_twin": true
+    },
+    {
+     "id": "micro_IABROOKLYN_0034",
+     "ia_date": "1855-1856",
+     "title": "Smith's Brooklyn City Directory for the year ending May 1st, 1856",
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done",
+     "letters": "A-W",
+     "whole": true,
+     "kind": "listing",
+     "lines": 17511,
+     "text_leaves": 399,
+     "lines_per_leaf": 43.9,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "1856BPL"
+   ],
+   "spare_lines": 17511,
+   "close_call": false,
+   "attested_years": [
+    1856
+   ],
+   "pairs": [
+    {
+     "a": "1856BPL",
+     "b": "micro_IABROOKLYN_0034",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 146,
+     "pages_b": 150,
+     "folio_agree": 0.875,
+     "folio_pairs": 40,
+     "contain_a": 0.0477,
+     "contain_b": 0.1431,
+     "via": null
+    },
+    {
+     "a": "micro_IABROOKLYN_0034",
+     "b": "1856BPL",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "smith1855_eval.jsonl"
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "hearnesbrooklync1852unse",
+     "ia_date": "1851",
+     "title": "Hearnes' Brooklyn city directory for ...",
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 20120,
+     "text_leaves": 481,
+     "lines_per_leaf": 41.8,
+     "run": true,
+     "gold_twin": true
+    },
+    {
+     "id": "micro_IABROOKLYN_0030",
+     "ia_date": "1852-1853",
+     "title": "Hearnes' Brooklyn City Directory for 1852-1853",
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 14255,
+     "text_leaves": 461,
+     "lines_per_leaf": 30.9,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "hearnesbrooklync1852unse"
+   ],
+   "spare_lines": 14255,
+   "close_call": false,
+   "attested_years": [
+    1852
+   ],
+   "pairs": [
+    {
+     "a": "hearnesbrooklync1852unse",
+     "b": "micro_IABROOKLYN_0030",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 366,
+     "pages_b": 366,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.2818,
+     "contain_b": 0.4138,
+     "via": null
+    },
+    {
+     "a": "micro_IABROOKLYN_0030",
+     "b": "hearnesbrooklync1852unse",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "hearne1852_eval.jsonl"
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "1858BPL",
+     "ia_date": "1858",
+     "title": "Brooklyn City Directory, for the year ending May 1, 1858",
+     "ocr": "ABBYY FineReader 9.0",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 52597,
+     "text_leaves": 429,
+     "lines_per_leaf": 122.6,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "micro_IABROOKLYN_0037",
+     "ia_date": "1857-1858",
+     "title": "The Brooklyn City Directory (Consolidated) for the year ending May 1st, 1858",
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done",
+     "letters": "A-W",
+     "whole": true,
+     "kind": "listing",
+     "lines": 8640,
+     "text_leaves": 264,
+     "lines_per_leaf": 32.7,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "1858BPL"
+   ],
+   "spare_lines": 8640,
+   "close_call": false,
+   "attested_years": [],
+   "pairs": [
+    {
+     "a": "1858BPL",
+     "b": "micro_IABROOKLYN_0037",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 77,
+     "pages_b": 78,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.0239,
+     "contain_b": 0.16,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "brooklynalphabet1843unse",
+     "ia_date": "1846",
+     "title": "Brooklyn alphabetical and street directory, and yearly advertiser.",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "A-Y",
+     "whole": true,
+     "kind": "listing",
+     "lines": 7394,
+     "text_leaves": 181,
+     "lines_per_leaf": 40.9,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "micro_IABROOKLYN_0019",
+     "ia_date": "1843-1844",
+     "title": "Brooklyn Alphabetical and Street Directory and Yearly Advertiser for 1843 & 1844",
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done",
+     "letters": "A-W",
+     "whole": true,
+     "kind": "listing",
+     "lines": 6356,
+     "text_leaves": 151,
+     "lines_per_leaf": 42.1,
+     "run": true,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "micro_IABROOKLYN_0019"
+   ],
+   "spare_lines": 7394,
+   "close_call": true,
+   "attested_years": [],
+   "pairs": [
+    {
+     "a": "brooklynalphabet1843unse",
+     "b": "micro_IABROOKLYN_0019",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 143,
+     "pages_b": 129,
+     "folio_agree": 1.0,
+     "folio_pairs": 1784,
+     "contain_a": 0.3457,
+     "contain_b": 0.416,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "brooklyncitydire1848teal",
+     "ia_date": "1848",
+     "title": "Brooklyn city directory, and annual advertiser, for the years ...",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "A-Z",
+     "whole": true,
+     "kind": "listing",
+     "lines": 11682,
+     "text_leaves": 248,
+     "lines_per_leaf": 47.1,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "micro_IABROOKLYN_0026",
+     "ia_date": "1848-1849",
+     "title": "Brooklyn City Directory and Annual Advertiser for 1848-1849",
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Y",
+     "whole": true,
+     "kind": "listing",
+     "lines": 5131,
+     "text_leaves": 166,
+     "lines_per_leaf": 30.9,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "brooklyncitydire1848teal"
+   ],
+   "spare_lines": 5131,
+   "close_call": false,
+   "attested_years": [
+    1848
+   ],
+   "pairs": [
+    {
+     "a": "brooklyncitydire1848teal",
+     "b": "micro_IABROOKLYN_0026",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 89,
+     "pages_b": 79,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.1136,
+     "contain_b": 0.2846,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "hearnesbrooklync1850unse",
+     "ia_date": "1851",
+     "title": "Hearnes' Brooklyn city directory for ...",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "A-Y",
+     "whole": true,
+     "kind": "listing",
+     "lines": 14844,
+     "text_leaves": 380,
+     "lines_per_leaf": 39.1,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "micro_IABROOKLYN_0028",
+     "ia_date": "1850-1851",
+     "title": "Hearnes' Brooklyn City Directory for 1850-1851",
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done",
+     "letters": "B-Y",
+     "whole": true,
+     "kind": "listing",
+     "lines": 4291,
+     "text_leaves": 220,
+     "lines_per_leaf": 19.5,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "hearnesbrooklync1850unse"
+   ],
+   "spare_lines": 4291,
+   "close_call": false,
+   "attested_years": [],
+   "pairs": [
+    {
+     "a": "hearnesbrooklync1850unse",
+     "b": "micro_IABROOKLYN_0028",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 108,
+     "pages_b": 108,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.0918,
+     "contain_b": 0.3544,
+     "via": null
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "brooklyndirector00ogde",
+     "ia_date": "1839",
+     "title": "Brooklyn directory, for the years 1839-40",
+     "ocr": "tesseract 5.3.0-3-g9920",
+     "survey_status": "frontmatter-done",
+     "letters": "A-Y",
+     "whole": true,
+     "kind": "listing",
+     "lines": 7666,
+     "text_leaves": 259,
+     "lines_per_leaf": 29.6,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "micro_IABROOKLYN_0016",
+     "ia_date": "1839-1840",
+     "title": "Brooklyn Directory for the years 1839-1840",
+     "ocr": "tesseract 5.3.0-6-g76ae",
+     "survey_status": "frontmatter-done",
+     "letters": "A-W",
+     "whole": true,
+     "kind": "listing",
+     "lines": 2831,
+     "text_leaves": 122,
+     "lines_per_leaf": 23.2,
+     "run": false,
+     "gold_twin": true
+    }
+   ],
+   "run": [
+    "brooklyndirector00ogde"
+   ],
+   "spare_lines": 2831,
+   "close_call": false,
+   "attested_years": [
+    1839
+   ],
+   "pairs": [
+    {
+     "a": "brooklyndirector00ogde",
+     "b": "micro_IABROOKLYN_0016",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 57,
+     "pages_b": 57,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.103,
+     "contain_b": 0.2722,
+     "via": null
+    },
+    {
+     "a": "brooklyndirector00ogde",
+     "b": "micro_IABROOKLYN_0016",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "ogden1839_eval.jsonl"
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "newyorkbrooklynd00durs",
+     "ia_date": "1876",
+     "title": "New York and Brooklyn directory, 1786-1796",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "A-W",
+     "whole": true,
+     "kind": "listing",
+     "lines": 904,
+     "text_leaves": 33,
+     "lines_per_leaf": 27.4,
+     "run": false,
+     "gold_twin": true
+    },
+    {
+     "id": "newyorkdirectory00durs_0",
+     "ia_date": "1874",
+     "title": "New York directory : containing a valuable and well calculated almanack ... /",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "A-W",
+     "whole": true,
+     "kind": "listing",
+     "lines": 905,
+     "text_leaves": 33,
+     "lines_per_leaf": 27.4,
+     "run": false,
+     "gold_twin": true
+    },
+    {
+     "id": "newyorkdirectory00fran",
+     "ia_date": "1889",
+     "title": "The New York directory for 1786",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "A-W",
+     "whole": true,
+     "kind": "listing",
+     "lines": 908,
+     "text_leaves": 33,
+     "lines_per_leaf": 27.5,
+     "run": true,
+     "gold_twin": false
+    },
+    {
+     "id": "newyorkdirectory00fran_0",
+     "ia_date": "1889",
+     "title": "New York directory for 1786,",
+     "ocr": null,
+     "survey_status": "frontmatter-done",
+     "letters": "A-W",
+     "whole": true,
+     "kind": "listing",
+     "lines": 906,
+     "text_leaves": 33,
+     "lines_per_leaf": 27.5,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [
+    "newyorkdirectory00fran"
+   ],
+   "spare_lines": 2715,
+   "close_call": true,
+   "attested_years": [
+    1786
+   ],
+   "pairs": [
+    {
+     "a": "newyorkdirectory00fran",
+     "b": "newyorkdirectory00fran_0",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 30,
+     "pages_b": 30,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.3169,
+     "contain_b": 0.3173,
+     "via": null
+    },
+    {
+     "a": "newyorkdirectory00fran_0",
+     "b": "newyorkdirectory00durs_0",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "franks1786_eval.jsonl"
+    },
+    {
+     "a": "newyorkdirectory00fran_0",
+     "b": "newyorkbrooklynd00durs",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "franks1786_eval.jsonl"
+    }
+   ]
+  },
+  {
+   "members": [
+    {
+     "id": "trowsgeneraldir1913p1trow",
+     "ia_date": "1913",
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New Yor",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "not-residential",
+     "letters": "B-S",
+     "whole": false,
+     "kind": "lines",
+     "lines": 76350,
+     "text_leaves": 397,
+     "lines_per_leaf": 192.3,
+     "run": false,
+     "gold_twin": false
+    },
+    {
+     "id": "trowsgeneraldire19131trow",
+     "ia_date": "1853",
+     "title": "Trow's general directory of the boroughs of Manhattan and Bronx, city of New Yor",
+     "ocr": "ABBYY FineReader 8.0",
+     "survey_status": "not-residential",
+     "letters": "B-T",
+     "whole": false,
+     "kind": "lines",
+     "lines": 66425,
+     "text_leaves": 403,
+     "lines_per_leaf": 164.8,
+     "run": false,
+     "gold_twin": false
+    }
+   ],
+   "run": [],
+   "spare_lines": 0,
+   "close_call": false,
+   "attested_years": [],
+   "pairs": [
+    {
+     "a": "trowsgeneraldir1913p1trow",
+     "b": "trowsgeneraldire19131trow",
+     "page_conc_a": 1.0,
+     "page_conc_b": 1.0,
+     "pages_a": 373,
+     "pages_b": 374,
+     "folio_agree": null,
+     "folio_pairs": 0,
+     "contain_a": 0.3394,
+     "contain_b": 0.4141,
+     "via": null
+    }
+   ]
+  }
+ ],
+ "volumes": {
+  "1856BPL": {
+   "kind": "listing",
+   "lines": 43227,
+   "unique_lines": 43014,
+   "folio_leaves": 212
+  },
+  "1857BPL": {
+   "kind": "listing",
+   "lines": 46677,
+   "unique_lines": 46263,
+   "folio_leaves": 95
+  },
+  "1858BPL": {
+   "kind": "listing",
+   "lines": 52597,
+   "unique_lines": 47116,
+   "folio_leaves": 147
+  },
+  "1862BPL": {
+   "kind": "listing",
+   "lines": 58696,
+   "unique_lines": 52800,
+   "folio_leaves": 106
+  },
+  "1863BPL": {
+   "kind": "listing",
+   "lines": 61664,
+   "unique_lines": 56016,
+   "folio_leaves": 553
+  },
+  "1864BPL": {
+   "kind": "listing",
+   "lines": 65519,
+   "unique_lines": 59554,
+   "folio_leaves": 153
+  },
+  "1865BPL": {
+   "kind": "listing",
+   "lines": 57809,
+   "unique_lines": 51967,
+   "folio_leaves": 158
+  },
+  "1866BPL": {
+   "kind": "listing",
+   "lines": 73318,
+   "unique_lines": 65980,
+   "folio_leaves": 488
+  },
+  "1867BPL": {
+   "kind": "listing",
+   "lines": 80052,
+   "unique_lines": 73308,
+   "folio_leaves": 525
+  },
+  "1868BPL": {
+   "kind": "listing",
+   "lines": 85854,
+   "unique_lines": 77747,
+   "folio_leaves": 668
+  },
+  "1869BPL": {
+   "kind": "listing",
+   "lines": 86502,
+   "unique_lines": 77570,
+   "folio_leaves": 579
+  },
+  "1871BPL": {
+   "kind": "listing",
+   "lines": 99379,
+   "unique_lines": 90348,
+   "folio_leaves": 49
+  },
+  "1875BPL": {
+   "kind": "listing",
+   "lines": 113273,
+   "unique_lines": 110231,
+   "folio_leaves": 134
+  },
+  "1876BPL": {
+   "kind": "listing",
+   "lines": 118186,
+   "unique_lines": 115121,
+   "folio_leaves": 142
+  },
+  "1878BPL": {
+   "kind": "listing",
+   "lines": 118406,
+   "unique_lines": 115657,
+   "folio_leaves": 1034
+  },
+  "1879BPL": {
+   "kind": "listing",
+   "lines": 126899,
+   "unique_lines": 124875,
+   "folio_leaves": 1057
+  },
+  "1880BPL": {
+   "kind": "listing",
+   "lines": 129330,
+   "unique_lines": 127024,
+   "folio_leaves": 907
+  },
+  "1883BPL": {
+   "kind": "listing",
+   "lines": 147377,
+   "unique_lines": 145776,
+   "folio_leaves": 1239
+  },
+  "1884BPL": {
+   "kind": "listing",
+   "lines": 154563,
+   "unique_lines": 151940,
+   "folio_leaves": 32
+  },
+  "1885BPL": {
+   "kind": "listing",
+   "lines": 163186,
+   "unique_lines": 160640,
+   "folio_leaves": 745
+  },
+  "1886BPL": {
+   "kind": "listing",
+   "lines": 168930,
+   "unique_lines": 166099,
+   "folio_leaves": 63
+  },
+  "1887BPL": {
+   "kind": "listing",
+   "lines": 182252,
+   "unique_lines": 178669,
+   "folio_leaves": 916
+  },
+  "1889BPL": {
+   "kind": "listing",
+   "lines": 193480,
+   "unique_lines": 190383,
+   "folio_leaves": 671
+  },
+  "1897BPL": {
+   "kind": "listing",
+   "lines": 262602,
+   "unique_lines": 246837,
+   "folio_leaves": 1018
+  },
+  "1899xBPL": {
+   "kind": "listing",
+   "lines": 289446,
+   "unique_lines": 274050,
+   "folio_leaves": 1104
+  },
+  "1902BPL": {
+   "kind": "listing",
+   "lines": 172398,
+   "unique_lines": 160218,
+   "folio_leaves": 368
+  },
+  "1903BPL": {
+   "kind": "listing",
+   "lines": 176717,
+   "unique_lines": 161752,
+   "folio_leaves": 267
+  },
+  "1904BPL": {
+   "kind": "listing",
+   "lines": 170553,
+   "unique_lines": 158168,
+   "folio_leaves": 560
+  },
+  "1906BPL": {
+   "kind": "listing",
+   "lines": 194256,
+   "unique_lines": 189314,
+   "folio_leaves": 785
+  },
+  "1907BPL": {
+   "kind": "listing",
+   "lines": 178020,
+   "unique_lines": 173162,
+   "folio_leaves": 468
+  },
+  "1908BPL": {
+   "kind": "listing",
+   "lines": 174902,
+   "unique_lines": 170006,
+   "folio_leaves": 174
+  },
+  "bronxboroughdire1871": {
+   "kind": "listing",
+   "lines": 5267,
+   "unique_lines": 5239,
+   "folio_leaves": 103
+  },
+  "brooklynalphabet1843unse": {
+   "kind": "listing",
+   "lines": 7394,
+   "unique_lines": 7387,
+   "folio_leaves": 251
+  },
+  "brooklyncitydire1848teal": {
+   "kind": "listing",
+   "lines": 11682,
+   "unique_lines": 11679,
+   "folio_leaves": 280
+  },
+  "brooklyndirector00ogde": {
+   "kind": "listing",
+   "lines": 7666,
+   "unique_lines": 6807,
+   "folio_leaves": 0
+  },
+  "brooklynnewyor1912p3broo": {
+   "kind": "listing",
+   "lines": 62247,
+   "unique_lines": 57778,
+   "folio_leaves": 433
+  },
+  "brooklynnewyork1903p1geor": {
+   "kind": "listing",
+   "lines": 88392,
+   "unique_lines": 82772,
+   "folio_leaves": 0
+  },
+  "brooklynnewyork1904p1geor": {
+   "kind": "listing",
+   "lines": 90393,
+   "unique_lines": 84912,
+   "folio_leaves": 0
+  },
+  "brooklynnewyork1905p1geor": {
+   "kind": "listing",
+   "lines": 86511,
+   "unique_lines": 83595,
+   "folio_leaves": 354
+  },
+  "brooklynnewyork1907p1geor": {
+   "kind": "listing",
+   "lines": 89662,
+   "unique_lines": 86552,
+   "folio_leaves": 14
+  },
+  "brooklynnewyork1908p1geor": {
+   "kind": "listing",
+   "lines": 88107,
+   "unique_lines": 85143,
+   "folio_leaves": 355
+  },
+  "brooklynnewyork1909p1geor": {
+   "kind": "listing",
+   "lines": 91410,
+   "unique_lines": 89121,
+   "folio_leaves": 81
+  },
+  "brooklynnewyork1910p2geor": {
+   "kind": "listing",
+   "lines": 108981,
+   "unique_lines": 101207,
+   "folio_leaves": 663
+  },
+  "brooklynnewyorkc00broo": {
+   "kind": "listing",
+   "lines": 87159,
+   "unique_lines": 81553,
+   "folio_leaves": 0
+  },
+  "brooklynnewyorkc00geor": {
+   "kind": "listing",
+   "lines": 101019,
+   "unique_lines": 97978,
+   "folio_leaves": 411
+  },
+  "brooklynnewyorkc19031geor": {
+   "kind": "listing",
+   "lines": 89693,
+   "unique_lines": 84159,
+   "folio_leaves": 361
+  },
+  "brooklynnewyorkc1903geor": {
+   "kind": "listing",
+   "lines": 81269,
+   "unique_lines": 75896,
+   "folio_leaves": 87
+  },
+  "brooklynnewyorkc1904geor": {
+   "kind": "listing",
+   "lines": 80646,
+   "unique_lines": 76621,
+   "folio_leaves": 443
+  },
+  "brooklynnewyorkc1905geor": {
+   "kind": "listing",
+   "lines": 91345,
+   "unique_lines": 88144,
+   "folio_leaves": 212
+  },
+  "brooklynnewyorkc19062geor": {
+   "kind": "listing",
+   "lines": 74583,
+   "unique_lines": 57429,
+   "folio_leaves": 31
+  },
+  "brooklynnewyorkc1906geor": {
+   "kind": "listing",
+   "lines": 95312,
+   "unique_lines": 92234,
+   "folio_leaves": 457
+  },
+  "brooklynnewyorkc1907geor": {
+   "kind": "listing",
+   "lines": 88459,
+   "unique_lines": 85658,
+   "folio_leaves": 50
+  },
+  "brooklynnewyorkc1908geor": {
+   "kind": "listing",
+   "lines": 89185,
+   "unique_lines": 85766,
+   "folio_leaves": 223
+  },
+  "brooklynnewyorkc1909geor": {
+   "kind": "listing",
+   "lines": 92833,
+   "unique_lines": 90340,
+   "folio_leaves": 68
+  },
+  "brooklynnewyorkc1910geor": {
+   "kind": "listing",
+   "lines": 101939,
+   "unique_lines": 99315,
+   "folio_leaves": 244
+  },
+  "brooklynnewyorkc19123broo": {
+   "kind": "listing",
+   "lines": 8723,
+   "unique_lines": 5176,
+   "folio_leaves": 45
+  },
+  "brooklynnewyorkc1912broo": {
+   "kind": "listing",
+   "lines": 88536,
+   "unique_lines": 82562,
+   "folio_leaves": 528
+  },
+  "bub_gb_hY4tAAAAYAAJ": {
+   "kind": "listing",
+   "lines": 162336,
+   "unique_lines": 153975,
+   "folio_leaves": 730
+  },
+  "doggettsnewyorkc1845dogg": {
+   "kind": "listing",
+   "lines": 61724,
+   "unique_lines": 61571,
+   "folio_leaves": 13
+  },
+  "doggettsnewyorkc1846dogg": {
+   "kind": "listing",
+   "lines": 66263,
+   "unique_lines": 65955,
+   "folio_leaves": 61
+  },
+  "doggettsnewyorkc1847dogg": {
+   "kind": "listing",
+   "lines": 67284,
+   "unique_lines": 67229,
+   "folio_leaves": 55
+  },
+  "doggettsnewyorkc1848dogg": {
+   "kind": "listing",
+   "lines": 67588,
+   "unique_lines": 67518,
+   "folio_leaves": 41
+  },
+  "flushingnewyork188586boyd": {
+   "kind": "listing",
+   "lines": 2410,
+   "unique_lines": 2266,
+   "folio_leaves": 0
+  },
+  "flushingnewyork189192boyd": {
+   "kind": "listing",
+   "lines": 3137,
+   "unique_lines": 2776,
+   "folio_leaves": 0
+  },
+  "flushingnewyorkc00boyd": {
+   "kind": "listing",
+   "lines": 3143,
+   "unique_lines": 2831,
+   "folio_leaves": 0
+  },
+  "hearnesbrooklync1850unse": {
+   "kind": "listing",
+   "lines": 14844,
+   "unique_lines": 14823,
+   "folio_leaves": 72
+  },
+  "hearnesbrooklync1852unse": {
+   "kind": "listing",
+   "lines": 20120,
+   "unique_lines": 20100,
+   "folio_leaves": 444
+  },
+  "longworthsameric00newy": {
+   "kind": "listing",
+   "lines": 35735,
+   "unique_lines": 35691,
+   "folio_leaves": 699
+  },
+  "longworthsameric1798newy": {
+   "kind": "listing",
+   "lines": 8874,
+   "unique_lines": 8123,
+   "folio_leaves": 0
+  },
+  "longworthsameric1813newy": {
+   "kind": "listing",
+   "lines": 17283,
+   "unique_lines": 17208,
+   "folio_leaves": 355
+  },
+  "longworthsameric1826newy": {
+   "kind": "listing",
+   "lines": 25486,
+   "unique_lines": 24172,
+   "folio_leaves": 487
+  },
+  "longworthsameric1839newy": {
+   "kind": "listing",
+   "lines": 35714,
+   "unique_lines": 35674,
+   "folio_leaves": 738
+  },
+  "longworthsameric2618long": {
+   "kind": "listing",
+   "lines": 9961,
+   "unique_lines": 9893,
+   "folio_leaves": 48
+  },
+  "longworthsameric3818long": {
+   "kind": "listing",
+   "lines": 14184,
+   "unique_lines": 14091,
+   "folio_leaves": 325
+  },
+  "longworthsameric4018long": {
+   "kind": "listing",
+   "lines": 16861,
+   "unique_lines": 16742,
+   "folio_leaves": 360
+  },
+  "longworthsameric4818long": {
+   "kind": "listing",
+   "lines": 20549,
+   "unique_lines": 20437,
+   "folio_leaves": 358
+  },
+  "longworthsameric6018long": {
+   "kind": "listing",
+   "lines": 37651,
+   "unique_lines": 37573,
+   "folio_leaves": 785
+  },
+  "longworthsameric6118long": {
+   "kind": "listing",
+   "lines": 36213,
+   "unique_lines": 36170,
+   "folio_leaves": 689
+  },
+  "longworthsameric6518long": {
+   "kind": "listing",
+   "lines": 34175,
+   "unique_lines": 34137,
+   "folio_leaves": 35
+  },
+  "merceinscitydire00merc": {
+   "kind": "listing",
+   "lines": 20366,
+   "unique_lines": 20087,
+   "folio_leaves": 344
+  },
+  "micro_IABROOKLYN_0001": {
+   "kind": "listing",
+   "lines": 959,
+   "unique_lines": 940,
+   "folio_leaves": 63
+  },
+  "micro_IABROOKLYN_0002": {
+   "kind": "listing",
+   "lines": 1084,
+   "unique_lines": 1050,
+   "folio_leaves": 38
+  },
+  "micro_IABROOKLYN_0003": {
+   "kind": "listing",
+   "lines": 1166,
+   "unique_lines": 1153,
+   "folio_leaves": 6
+  },
+  "micro_IABROOKLYN_0004": {
+   "kind": "listing",
+   "lines": 1387,
+   "unique_lines": 1363,
+   "folio_leaves": 47
+  },
+  "micro_IABROOKLYN_0005": {
+   "kind": "listing",
+   "lines": 1845,
+   "unique_lines": 1827,
+   "folio_leaves": 67
+  },
+  "micro_IABROOKLYN_0006": {
+   "kind": "listing",
+   "lines": 1847,
+   "unique_lines": 1770,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0007": {
+   "kind": "listing",
+   "lines": 2342,
+   "unique_lines": 2327,
+   "folio_leaves": 78
+  },
+  "micro_IABROOKLYN_0008": {
+   "kind": "listing",
+   "lines": 2015,
+   "unique_lines": 1964,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0009": {
+   "kind": "listing",
+   "lines": 2459,
+   "unique_lines": 2442,
+   "folio_leaves": 96
+  },
+  "micro_IABROOKLYN_0010": {
+   "kind": "listing",
+   "lines": 3055,
+   "unique_lines": 3041,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0011": {
+   "kind": "listing",
+   "lines": 2661,
+   "unique_lines": 2627,
+   "folio_leaves": 8
+  },
+  "micro_IABROOKLYN_0012": {
+   "kind": "listing",
+   "lines": 3367,
+   "unique_lines": 3349,
+   "folio_leaves": 66
+  },
+  "micro_IABROOKLYN_0013": {
+   "kind": "listing",
+   "lines": 2474,
+   "unique_lines": 2338,
+   "folio_leaves": 26
+  },
+  "micro_IABROOKLYN_0014": {
+   "kind": "listing",
+   "lines": 2664,
+   "unique_lines": 2576,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0015": {
+   "kind": "listing",
+   "lines": 3787,
+   "unique_lines": 3751,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0016": {
+   "kind": "listing",
+   "lines": 2831,
+   "unique_lines": 2575,
+   "folio_leaves": 16
+  },
+  "micro_IABROOKLYN_0017": {
+   "kind": "listing",
+   "lines": 3127,
+   "unique_lines": 2788,
+   "folio_leaves": 5
+  },
+  "micro_IABROOKLYN_0018": {
+   "kind": "listing",
+   "lines": 4935,
+   "unique_lines": 4759,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0019": {
+   "kind": "listing",
+   "lines": 6356,
+   "unique_lines": 6139,
+   "folio_leaves": 148
+  },
+  "micro_IABROOKLYN_0020": {
+   "kind": "listing",
+   "lines": 7480,
+   "unique_lines": 7297,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0021": {
+   "kind": "listing",
+   "lines": 3423,
+   "unique_lines": 2579,
+   "folio_leaves": 29
+  },
+  "micro_IABROOKLYN_0022": {
+   "kind": "listing",
+   "lines": 3808,
+   "unique_lines": 3593,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0023": {
+   "kind": "listing",
+   "lines": 9469,
+   "unique_lines": 9306,
+   "folio_leaves": 191
+  },
+  "micro_IABROOKLYN_0024": {
+   "kind": "listing",
+   "lines": 8107,
+   "unique_lines": 7964,
+   "folio_leaves": 65
+  },
+  "micro_IABROOKLYN_0025": {
+   "kind": "listing",
+   "lines": 8766,
+   "unique_lines": 8387,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0026": {
+   "kind": "listing",
+   "lines": 5131,
+   "unique_lines": 4663,
+   "folio_leaves": 20
+  },
+  "micro_IABROOKLYN_0027": {
+   "kind": "listing",
+   "lines": 9946,
+   "unique_lines": 9501,
+   "folio_leaves": 143
+  },
+  "micro_IABROOKLYN_0028": {
+   "kind": "listing",
+   "lines": 4291,
+   "unique_lines": 3840,
+   "folio_leaves": 7
+  },
+  "micro_IABROOKLYN_0029": {
+   "kind": "listing",
+   "lines": 9798,
+   "unique_lines": 9403,
+   "folio_leaves": 21
+  },
+  "micro_IABROOKLYN_0030": {
+   "kind": "listing",
+   "lines": 14255,
+   "unique_lines": 13691,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0031": {
+   "kind": "listing",
+   "lines": 5214,
+   "unique_lines": 3658,
+   "folio_leaves": 4
+  },
+  "micro_IABROOKLYN_0032": {
+   "kind": "listing",
+   "lines": 7879,
+   "unique_lines": 7077,
+   "folio_leaves": 53
+  },
+  "micro_IABROOKLYN_0033": {
+   "kind": "listing",
+   "lines": 17641,
+   "unique_lines": 16894,
+   "folio_leaves": 113
+  },
+  "micro_IABROOKLYN_0034": {
+   "kind": "listing",
+   "lines": 17511,
+   "unique_lines": 14322,
+   "folio_leaves": 65
+  },
+  "micro_IABROOKLYN_0035": {
+   "kind": "listing",
+   "lines": 27152,
+   "unique_lines": 22464,
+   "folio_leaves": 4
+  },
+  "micro_IABROOKLYN_0036": {
+   "kind": "listing",
+   "lines": 18588,
+   "unique_lines": 16051,
+   "folio_leaves": 140
+  },
+  "micro_IABROOKLYN_0037": {
+   "kind": "listing",
+   "lines": 8640,
+   "unique_lines": 7030,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0038": {
+   "kind": "lines",
+   "lines": 1793,
+   "unique_lines": 1475,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0039": {
+   "kind": "listing",
+   "lines": 9220,
+   "unique_lines": 7302,
+   "folio_leaves": 98
+  },
+  "micro_IABROOKLYN_0040": {
+   "kind": "listing",
+   "lines": 8466,
+   "unique_lines": 6679,
+   "folio_leaves": 99
+  },
+  "micro_IABROOKLYN_0041": {
+   "kind": "lines",
+   "lines": 317,
+   "unique_lines": 226,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0042": {
+   "kind": "listing",
+   "lines": 16419,
+   "unique_lines": 13970,
+   "folio_leaves": 94
+  },
+  "micro_IABROOKLYN_0043": {
+   "kind": "listing",
+   "lines": 4271,
+   "unique_lines": 4192,
+   "folio_leaves": 168
+  },
+  "micro_IABROOKLYN_0044": {
+   "kind": "listing",
+   "lines": 5457,
+   "unique_lines": 5263,
+   "folio_leaves": 144
+  },
+  "micro_IABROOKLYN_0045": {
+   "kind": "listing",
+   "lines": 2137,
+   "unique_lines": 1923,
+   "folio_leaves": 41
+  },
+  "micro_IABROOKLYN_0046": {
+   "kind": "listing",
+   "lines": 1688,
+   "unique_lines": 1567,
+   "folio_leaves": 39
+  },
+  "micro_IABROOKLYN_0047": {
+   "kind": "listing",
+   "lines": 2572,
+   "unique_lines": 1488,
+   "folio_leaves": 0
+  },
+  "micro_IABROOKLYN_0048": {
+   "kind": "listing",
+   "lines": 1859,
+   "unique_lines": 1731,
+   "folio_leaves": 0
+  },
+  "newyorkbrooklynd00durs": {
+   "kind": "listing",
+   "lines": 904,
+   "unique_lines": 892,
+   "folio_leaves": 0
+  },
+  "newyorkcitydirec00rode": {
+   "kind": "listing",
+   "lines": 108401,
+   "unique_lines": 107397,
+   "folio_leaves": 58
+  },
+  "newyorkdirectory00dunc": {
+   "kind": "listing",
+   "lines": 8210,
+   "unique_lines": 7459,
+   "folio_leaves": 271
+  },
+  "newyorkdirectory00durs": {
+   "kind": "lines",
+   "lines": 7249,
+   "unique_lines": 5181,
+   "folio_leaves": 66
+  },
+  "newyorkdirectory00durs_0": {
+   "kind": "listing",
+   "lines": 905,
+   "unique_lines": 891,
+   "folio_leaves": 0
+  },
+  "newyorkdirectory00fran": {
+   "kind": "listing",
+   "lines": 908,
+   "unique_lines": 893,
+   "folio_leaves": 132
+  },
+  "newyorkdirectory00fran_0": {
+   "kind": "listing",
+   "lines": 906,
+   "unique_lines": 892,
+   "folio_leaves": 185
+  },
+  "trowsgenerald192223p1trow": {
+   "kind": "listing",
+   "lines": 540447,
+   "unique_lines": 475901,
+   "folio_leaves": 800
+  },
+  "trowsgenerald192223p2trow": {
+   "kind": "listing",
+   "lines": 596008,
+   "unique_lines": 522768,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1903p1trow": {
+   "kind": "listing",
+   "lines": 150094,
+   "unique_lines": 148359,
+   "folio_leaves": 537
+  },
+  "trowsgeneraldir1903p2trow": {
+   "kind": "listing",
+   "lines": 153625,
+   "unique_lines": 151584,
+   "folio_leaves": 574
+  },
+  "trowsgeneraldir1903p3trow": {
+   "kind": "listing",
+   "lines": 106213,
+   "unique_lines": 104949,
+   "folio_leaves": 568
+  },
+  "trowsgeneraldir1904p1trow": {
+   "kind": "listing",
+   "lines": 146951,
+   "unique_lines": 144562,
+   "folio_leaves": 360
+  },
+  "trowsgeneraldir1904p2trow": {
+   "kind": "listing",
+   "lines": 157846,
+   "unique_lines": 155190,
+   "folio_leaves": 524
+  },
+  "trowsgeneraldir1904p3trow": {
+   "kind": "listing",
+   "lines": 87515,
+   "unique_lines": 85967,
+   "folio_leaves": 417
+  },
+  "trowsgeneraldir1905p1trow": {
+   "kind": "listing",
+   "lines": 147041,
+   "unique_lines": 144450,
+   "folio_leaves": 528
+  },
+  "trowsgeneraldir1905p2trow": {
+   "kind": "listing",
+   "lines": 150952,
+   "unique_lines": 148620,
+   "folio_leaves": 350
+  },
+  "trowsgeneraldir1905p3trow": {
+   "kind": "listing",
+   "lines": 109207,
+   "unique_lines": 107659,
+   "folio_leaves": 237
+  },
+  "trowsgeneraldir1906p1trow": {
+   "kind": "listing",
+   "lines": 142152,
+   "unique_lines": 139790,
+   "folio_leaves": 218
+  },
+  "trowsgeneraldir1906p2trow": {
+   "kind": "listing",
+   "lines": 162482,
+   "unique_lines": 159374,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1906p3trow": {
+   "kind": "listing",
+   "lines": 123656,
+   "unique_lines": 121673,
+   "folio_leaves": 148
+  },
+  "trowsgeneraldir1907p1trow": {
+   "kind": "listing",
+   "lines": 151873,
+   "unique_lines": 148322,
+   "folio_leaves": 92
+  },
+  "trowsgeneraldir1907p2trow": {
+   "kind": "listing",
+   "lines": 181488,
+   "unique_lines": 177867,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1907p3trow": {
+   "kind": "listing",
+   "lines": 33522,
+   "unique_lines": 20821,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1908p1trow": {
+   "kind": "listing",
+   "lines": 127546,
+   "unique_lines": 125458,
+   "folio_leaves": 22
+  },
+  "trowsgeneraldir1908p2trow": {
+   "kind": "listing",
+   "lines": 43595,
+   "unique_lines": 26298,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1908p3trow": {
+   "kind": "listing",
+   "lines": 57655,
+   "unique_lines": 36483,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1908p4trow": {
+   "kind": "listing",
+   "lines": 92283,
+   "unique_lines": 90922,
+   "folio_leaves": 478
+  },
+  "trowsgeneraldir1909p1trow": {
+   "kind": "listing",
+   "lines": 170568,
+   "unique_lines": 167806,
+   "folio_leaves": 222
+  },
+  "trowsgeneraldir1909p2trow": {
+   "kind": "listing",
+   "lines": 175830,
+   "unique_lines": 173002,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1909p3trow": {
+   "kind": "listing",
+   "lines": 122286,
+   "unique_lines": 119916,
+   "folio_leaves": 160
+  },
+  "trowsgeneraldir1910p1trow": {
+   "kind": "listing",
+   "lines": 170875,
+   "unique_lines": 168246,
+   "folio_leaves": 423
+  },
+  "trowsgeneraldir1910p2trow": {
+   "kind": "listing",
+   "lines": 177110,
+   "unique_lines": 173783,
+   "folio_leaves": 388
+  },
+  "trowsgeneraldir1910p3trow": {
+   "kind": "listing",
+   "lines": 151774,
+   "unique_lines": 148954,
+   "folio_leaves": 652
+  },
+  "trowsgeneraldir1911p1trow": {
+   "kind": "listing",
+   "lines": 185732,
+   "unique_lines": 182423,
+   "folio_leaves": 566
+  },
+  "trowsgeneraldir1911p2trow": {
+   "kind": "listing",
+   "lines": 192696,
+   "unique_lines": 189160,
+   "folio_leaves": 471
+  },
+  "trowsgeneraldir1911p3trow": {
+   "kind": "listing",
+   "lines": 138989,
+   "unique_lines": 136817,
+   "folio_leaves": 196
+  },
+  "trowsgeneraldir1912p1trow": {
+   "kind": "listing",
+   "lines": 196387,
+   "unique_lines": 192833,
+   "folio_leaves": 55
+  },
+  "trowsgeneraldir1912p2trow": {
+   "kind": "listing",
+   "lines": 192936,
+   "unique_lines": 189358,
+   "folio_leaves": 111
+  },
+  "trowsgeneraldir1912p3trow": {
+   "kind": "listing",
+   "lines": 139318,
+   "unique_lines": 137151,
+   "folio_leaves": 215
+  },
+  "trowsgeneraldir1913p1trow": {
+   "kind": "lines",
+   "lines": 76350,
+   "unique_lines": 70405,
+   "folio_leaves": 44
+  },
+  "trowsgeneraldir1913p2trow": {
+   "kind": "lines",
+   "lines": 73962,
+   "unique_lines": 67421,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1913p3trow": {
+   "kind": "lines",
+   "lines": 96140,
+   "unique_lines": 77322,
+   "folio_leaves": 355
+  },
+  "trowsgeneraldir1914p1trow": {
+   "kind": "listing",
+   "lines": 183354,
+   "unique_lines": 179768,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1914p2trow": {
+   "kind": "listing",
+   "lines": 158886,
+   "unique_lines": 146699,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldir1914p3trow": {
+   "kind": "listing",
+   "lines": 138852,
+   "unique_lines": 136371,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldire1853trow": {
+   "kind": "lines",
+   "lines": 42131,
+   "unique_lines": 39121,
+   "folio_leaves": 260
+  },
+  "trowsgeneraldire19032trow": {
+   "kind": "listing",
+   "lines": 152636,
+   "unique_lines": 148060,
+   "folio_leaves": 223
+  },
+  "trowsgeneraldire19073trow": {
+   "kind": "listing",
+   "lines": 40654,
+   "unique_lines": 25617,
+   "folio_leaves": 9
+  },
+  "trowsgeneraldire19091trow": {
+   "kind": "listing",
+   "lines": 40962,
+   "unique_lines": 22473,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldire19131trow": {
+   "kind": "lines",
+   "lines": 66425,
+   "unique_lines": 57692,
+   "folio_leaves": 75
+  },
+  "trowsgeneraldire19142trow": {
+   "kind": "listing",
+   "lines": 56076,
+   "unique_lines": 44973,
+   "folio_leaves": 0
+  },
+  "trowsgeneraldire1915trow": {
+   "kind": "listing",
+   "lines": 1044823,
+   "unique_lines": 1019852,
+   "folio_leaves": 1829
+  },
+  "trowsgeneraldire1917trow": {
+   "kind": "listing",
+   "lines": 1121874,
+   "unique_lines": 1092990,
+   "folio_leaves": 2266
+  },
+  "trowsnewyorkcity1857trow": {
+   "kind": "listing",
+   "lines": 142940,
+   "unique_lines": 142449,
+   "folio_leaves": 129
+  },
+  "trowsnewyorkcity1859trow": {
+   "kind": "listing",
+   "lines": 146937,
+   "unique_lines": 146702,
+   "folio_leaves": 44
+  },
+  "trowsnewyorkcity1863trow": {
+   "kind": "listing",
+   "lines": 152975,
+   "unique_lines": 152797,
+   "folio_leaves": 216
+  },
+  "trowsnewyorkcity1876trow": {
+   "kind": "listing",
+   "lines": 243542,
+   "unique_lines": 242310,
+   "folio_leaves": 1298
+  }
+ },
+ "pairs": [
+  {
+   "a": "1856BPL",
+   "b": "micro_IABROOKLYN_0034",
+   "sketch_a": 0.0487,
+   "sketch_b": 0.1401,
+   "matched": 2050,
+   "contain_a": 0.0477,
+   "contain_b": 0.1431,
+   "page_conc_a": 1.0,
+   "pages_a": 146,
+   "page_conc_b": 1.0,
+   "pages_b": 150,
+   "folio_pairs": 40,
+   "folio_agree": 0.875,
+   "cover_a": 0.637,
+   "cover_b": 0.764,
+   "span_a": [
+    66,
+    583
+   ],
+   "span_b": [
+    68,
+    537
+   ],
+   "year_a": null,
+   "year_b": 1856,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1857BPL",
+   "b": "micro_IABROOKLYN_0036",
+   "sketch_a": 0.0657,
+   "sketch_b": 0.2011,
+   "matched": 3305,
+   "contain_a": 0.0714,
+   "contain_b": 0.2059,
+   "page_conc_a": 1.0,
+   "pages_a": 253,
+   "page_conc_b": 1.0,
+   "pages_b": 254,
+   "folio_pairs": 152,
+   "folio_agree": 1.0,
+   "cover_a": 0.76,
+   "cover_b": 0.869,
+   "span_a": [
+    32,
+    473
+   ],
+   "span_b": [
+    34,
+    485
+   ],
+   "year_a": 1857,
+   "year_b": 1857,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1858BPL",
+   "b": "micro_IABROOKLYN_0037",
+   "sketch_a": 0.0227,
+   "sketch_b": 0.1651,
+   "matched": 1125,
+   "contain_a": 0.0239,
+   "contain_b": 0.16,
+   "page_conc_a": 1.0,
+   "pages_a": 77,
+   "page_conc_b": 1.0,
+   "pages_b": 78,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.382,
+   "cover_b": 0.61,
+   "span_a": [
+    6,
+    431
+   ],
+   "span_b": [
+    10,
+    412
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1903BPL",
+   "b": "brooklynnewyork1903p1geor",
+   "sketch_a": 0.1682,
+   "sketch_b": 0.3063,
+   "matched": 28542,
+   "contain_a": 0.1765,
+   "contain_b": 0.3448,
+   "page_conc_a": 1.0,
+   "pages_a": 542,
+   "page_conc_b": 1.0,
+   "pages_b": 542,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.533,
+   "cover_b": 0.984,
+   "span_a": [
+    8,
+    983
+   ],
+   "span_b": [
+    37,
+    1157
+   ],
+   "year_a": 1903,
+   "year_b": 1903,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1903BPL",
+   "b": "brooklynnewyorkc19031geor",
+   "sketch_a": 0.0267,
+   "sketch_b": 0.0474,
+   "matched": 4704,
+   "contain_a": 0.0291,
+   "contain_b": 0.0559,
+   "page_conc_a": 1.0,
+   "pages_a": 364,
+   "page_conc_b": 1.0,
+   "pages_b": 367,
+   "folio_pairs": 131,
+   "folio_agree": 0.962,
+   "cover_a": 0.484,
+   "cover_b": 0.899,
+   "span_a": [
+    9,
+    1024
+   ],
+   "span_b": [
+    39,
+    1169
+   ],
+   "year_a": 1903,
+   "year_b": 1903,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1903BPL",
+   "b": "brooklynnewyorkc1903geor",
+   "sketch_a": 0.1231,
+   "sketch_b": 0.2554,
+   "matched": 21303,
+   "contain_a": 0.1317,
+   "contain_b": 0.2807,
+   "page_conc_a": 1.0,
+   "pages_a": 492,
+   "page_conc_b": 1.0,
+   "pages_b": 492,
+   "folio_pairs": 287,
+   "folio_agree": 0.0,
+   "cover_a": 0.486,
+   "cover_b": 0.996,
+   "span_a": [
+    16,
+    1073
+   ],
+   "span_b": [
+    9,
+    1027
+   ],
+   "year_a": 1903,
+   "year_b": 1903,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1904BPL",
+   "b": "brooklynnewyork1904p1geor",
+   "sketch_a": 0.2691,
+   "sketch_b": 0.4961,
+   "matched": 45550,
+   "contain_a": 0.288,
+   "contain_b": 0.5364,
+   "page_conc_a": 1.0,
+   "pages_a": 535,
+   "page_conc_b": 1.0,
+   "pages_b": 533,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.542,
+   "cover_b": 0.975,
+   "span_a": [
+    9,
+    963
+   ],
+   "span_b": [
+    27,
+    1137
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1904BPL",
+   "b": "brooklynnewyorkc1904geor",
+   "sketch_a": 0.2581,
+   "sketch_b": 0.5057,
+   "matched": 42566,
+   "contain_a": 0.2691,
+   "contain_b": 0.5555,
+   "page_conc_a": 1.0,
+   "pages_a": 468,
+   "page_conc_b": 1.0,
+   "pages_b": 468,
+   "folio_pairs": 15487,
+   "folio_agree": 0.999,
+   "cover_a": 0.477,
+   "cover_b": 0.967,
+   "span_a": [
+    18,
+    1046
+   ],
+   "span_b": [
+    9,
+    995
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyorkc00geor",
+   "sketch_a": 0.2236,
+   "sketch_b": 0.4101,
+   "matched": 47967,
+   "contain_a": 0.2534,
+   "contain_b": 0.4896,
+   "page_conc_a": 1.0,
+   "pages_a": 601,
+   "page_conc_b": 1.0,
+   "pages_b": 601,
+   "folio_pairs": 21741,
+   "folio_agree": 0.579,
+   "cover_a": 0.519,
+   "cover_b": 0.985,
+   "span_a": [
+    89,
+    1215
+   ],
+   "span_b": [
+    9,
+    1241
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyorkc19062geor",
+   "sketch_a": 0.0482,
+   "sketch_b": 0.1558,
+   "matched": 12941,
+   "contain_a": 0.0684,
+   "contain_b": 0.2253,
+   "page_conc_a": 1.0,
+   "pages_a": 472,
+   "page_conc_b": 1.0,
+   "pages_b": 473,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.468,
+   "cover_b": 0.908,
+   "span_a": [
+    102,
+    1215
+   ],
+   "span_b": [
+    13,
+    1243
+   ],
+   "year_a": 1906,
+   "year_b": 1906,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.1948,
+   "sketch_b": 0.3655,
+   "matched": 40673,
+   "contain_a": 0.2148,
+   "contain_b": 0.441,
+   "page_conc_a": 1.0,
+   "pages_a": 573,
+   "page_conc_b": 1.0,
+   "pages_b": 573,
+   "folio_pairs": 26558,
+   "folio_agree": 0.981,
+   "cover_a": 0.491,
+   "cover_b": 0.978,
+   "span_a": [
+    8,
+    1055
+   ],
+   "span_b": [
+    35,
+    1215
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyork1907p1geor",
+   "sketch_a": 0.1738,
+   "sketch_b": 0.328,
+   "matched": 34432,
+   "contain_a": 0.1988,
+   "contain_b": 0.3978,
+   "page_conc_a": 1.0,
+   "pages_a": 542,
+   "page_conc_b": 1.0,
+   "pages_b": 542,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.515,
+   "cover_b": 0.993,
+   "span_a": [
+    14,
+    1098
+   ],
+   "span_b": [
+    37,
+    1139
+   ],
+   "year_a": 1907,
+   "year_b": 1907,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyorkc1907geor",
+   "sketch_a": 0.1667,
+   "sketch_b": 0.3134,
+   "matched": 34055,
+   "contain_a": 0.1967,
+   "contain_b": 0.3976,
+   "page_conc_a": 1.0,
+   "pages_a": 528,
+   "page_conc_b": 1.0,
+   "pages_b": 528,
+   "folio_pairs": 453,
+   "folio_agree": 0.0,
+   "cover_a": 0.496,
+   "cover_b": 0.994,
+   "span_a": [
+    91,
+    1103
+   ],
+   "span_b": [
+    9,
+    1079
+   ],
+   "year_a": 1907,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyork1908p1geor",
+   "sketch_a": 0.2432,
+   "sketch_b": 0.4368,
+   "matched": 42970,
+   "contain_a": 0.2528,
+   "contain_b": 0.5047,
+   "page_conc_a": 1.0,
+   "pages_a": 527,
+   "page_conc_b": 1.0,
+   "pages_b": 527,
+   "folio_pairs": 11432,
+   "folio_agree": 1.0,
+   "cover_a": 0.507,
+   "cover_b": 0.976,
+   "span_a": [
+    8,
+    1092
+   ],
+   "span_b": [
+    29,
+    1127
+   ],
+   "year_a": 1908,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyorkc1908geor",
+   "sketch_a": 0.236,
+   "sketch_b": 0.4381,
+   "matched": 44192,
+   "contain_a": 0.2599,
+   "contain_b": 0.5153,
+   "page_conc_a": 1.0,
+   "pages_a": 540,
+   "page_conc_b": 1.0,
+   "pages_b": 541,
+   "folio_pairs": 3,
+   "folio_agree": null,
+   "cover_a": 0.516,
+   "cover_b": 0.984,
+   "span_a": [
+    53,
+    1109
+   ],
+   "span_b": [
+    9,
+    1119
+   ],
+   "year_a": 1908,
+   "year_b": 1908,
+   "relation": "same-edition"
+  },
+  {
+   "a": "brooklynalphabet1843unse",
+   "b": "micro_IABROOKLYN_0019",
+   "sketch_a": 0.3491,
+   "sketch_b": 0.4203,
+   "matched": 2554,
+   "contain_a": 0.3457,
+   "contain_b": 0.416,
+   "page_conc_a": 1.0,
+   "pages_a": 143,
+   "page_conc_b": 1.0,
+   "pages_b": 129,
+   "folio_pairs": 1784,
+   "folio_agree": 1.0,
+   "cover_a": 0.928,
+   "cover_b": 0.96,
+   "span_a": [
+    18,
+    197
+   ],
+   "span_b": [
+    15,
+    171
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "brooklyncitydire1848teal",
+   "b": "micro_IABROOKLYN_0026",
+   "sketch_a": 0.1066,
+   "sketch_b": 0.2761,
+   "matched": 1327,
+   "contain_a": 0.1136,
+   "contain_b": 0.2846,
+   "page_conc_a": 1.0,
+   "pages_a": 89,
+   "page_conc_b": 1.0,
+   "pages_b": 79,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.569,
+   "cover_b": 0.753,
+   "span_a": [
+    32,
+    260
+   ],
+   "span_b": [
+    14,
+    219
+   ],
+   "year_a": 1848,
+   "year_b": 1848,
+   "relation": "same-edition"
+  },
+  {
+   "a": "brooklyndirector00ogde",
+   "b": "micro_IABROOKLYN_0016",
+   "sketch_a": 0.0982,
+   "sketch_b": 0.2677,
+   "matched": 701,
+   "contain_a": 0.103,
+   "contain_b": 0.2722,
+   "page_conc_a": 1.0,
+   "pages_a": 57,
+   "page_conc_b": 1.0,
+   "pages_b": 57,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.367,
+   "cover_b": 0.779,
+   "span_a": [
+    17,
+    289
+   ],
+   "span_b": [
+    8,
+    145
+   ],
+   "year_a": null,
+   "year_b": 1839,
+   "relation": "same-edition"
+  },
+  {
+   "a": "brooklynnewyork1903p1geor",
+   "b": "brooklynnewyorkc19031geor",
+   "sketch_a": 0.0641,
+   "sketch_b": 0.0629,
+   "matched": 5321,
+   "contain_a": 0.0643,
+   "contain_b": 0.0632,
+   "page_conc_a": 1.0,
+   "pages_a": 378,
+   "page_conc_b": 1.0,
+   "pages_b": 381,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.917,
+   "cover_b": 0.917,
+   "span_a": [
+    39,
+    1157
+   ],
+   "span_b": [
+    39,
+    1169
+   ],
+   "year_a": 1903,
+   "year_b": 1903,
+   "relation": "same-edition"
+  },
+  {
+   "a": "brooklynnewyorkc00geor",
+   "b": "brooklynnewyorkc19062geor",
+   "sketch_a": 0.1078,
+   "sketch_b": 0.1737,
+   "matched": 13492,
+   "contain_a": 0.1377,
+   "contain_b": 0.2349,
+   "page_conc_a": 1.0,
+   "pages_a": 478,
+   "page_conc_b": 1.0,
+   "pages_b": 479,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.909,
+   "cover_b": 0.915,
+   "span_a": [
+    13,
+    1241
+   ],
+   "span_b": [
+    13,
+    1243
+   ],
+   "year_a": null,
+   "year_b": 1906,
+   "relation": "same-edition"
+  },
+  {
+   "a": "hearnesbrooklync1850unse",
+   "b": "micro_IABROOKLYN_0028",
+   "sketch_a": 0.0919,
+   "sketch_b": 0.3471,
+   "matched": 1361,
+   "contain_a": 0.0918,
+   "contain_b": 0.3544,
+   "page_conc_a": 1.0,
+   "pages_a": 108,
+   "page_conc_b": 1.0,
+   "pages_b": 108,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.437,
+   "cover_b": 0.755,
+   "span_a": [
+    52,
+    418
+   ],
+   "span_b": [
+    48,
+    407
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "hearnesbrooklync1852unse",
+   "b": "micro_IABROOKLYN_0030",
+   "sketch_a": 0.2808,
+   "sketch_b": 0.4154,
+   "matched": 5665,
+   "contain_a": 0.2818,
+   "contain_b": 0.4138,
+   "page_conc_a": 1.0,
+   "pages_a": 366,
+   "page_conc_b": 1.0,
+   "pages_b": 366,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.915,
+   "cover_b": 0.954,
+   "span_a": [
+    28,
+    512
+   ],
+   "span_b": [
+    22,
+    508
+   ],
+   "year_a": null,
+   "year_b": 1852,
+   "relation": "same-edition"
+  },
+  {
+   "a": "longworthsameric00newy",
+   "b": "longworthsameric1839newy",
+   "sketch_a": 0.7968,
+   "sketch_b": 0.7915,
+   "matched": 28061,
+   "contain_a": 0.7862,
+   "contain_b": 0.7866,
+   "page_conc_a": 1.0,
+   "pages_a": 677,
+   "page_conc_b": 1.0,
+   "pages_b": 677,
+   "folio_pairs": 28026,
+   "folio_agree": 1.0,
+   "cover_a": 0.996,
+   "cover_b": 0.996,
+   "span_a": [
+    56,
+    737
+   ],
+   "span_b": [
+    56,
+    737
+   ],
+   "year_a": 1839,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "newyorkdirectory00fran",
+   "b": "newyorkdirectory00fran_0",
+   "sketch_a": 0.3169,
+   "sketch_b": 0.3173,
+   "matched": 283,
+   "contain_a": 0.3169,
+   "contain_b": 0.3173,
+   "page_conc_a": 1.0,
+   "pages_a": 30,
+   "page_conc_b": 1.0,
+   "pages_b": 30,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 1.0,
+   "cover_b": 1.0,
+   "span_a": [
+    52,
+    84
+   ],
+   "span_b": [
+    56,
+    88
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "trowsgeneraldir1903p2trow",
+   "b": "trowsgeneraldire19032trow",
+   "sketch_a": 0.107,
+   "sketch_b": 0.1148,
+   "matched": 16374,
+   "contain_a": 0.108,
+   "contain_b": 0.1106,
+   "page_conc_a": 1.0,
+   "pages_a": 567,
+   "page_conc_b": 1.0,
+   "pages_b": 568,
+   "folio_pairs": 6092,
+   "folio_agree": 0.999,
+   "cover_a": 0.99,
+   "cover_b": 0.99,
+   "span_a": [
+    9,
+    1163
+   ],
+   "span_b": [
+    9,
+    1163
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "trowsgeneraldir1913p1trow",
+   "b": "trowsgeneraldire19131trow",
+   "sketch_a": 0.3326,
+   "sketch_b": 0.4148,
+   "matched": 23892,
+   "contain_a": 0.3394,
+   "contain_b": 0.4141,
+   "page_conc_a": 1.0,
+   "pages_a": 373,
+   "page_conc_b": 1.0,
+   "pages_b": 374,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.962,
+   "cover_b": 0.953,
+   "span_a": [
+    9,
+    821
+   ],
+   "span_b": [
+    9,
+    823
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "same-edition"
+  },
+  {
+   "a": "1862BPL",
+   "b": "1863BPL",
+   "sketch_a": 0.0642,
+   "sketch_b": 0.0602,
+   "matched": 3323,
+   "contain_a": 0.0629,
+   "contain_b": 0.0593,
+   "page_conc_a": 0.818,
+   "pages_a": 373,
+   "page_conc_b": 0.809,
+   "pages_b": 374,
+   "folio_pairs": 216,
+   "folio_agree": 0.787,
+   "cover_a": 0.96,
+   "cover_b": 0.988,
+   "span_a": [
+    5,
+    510
+   ],
+   "span_b": [
+    5,
+    491
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1862BPL",
+   "b": "1864BPL",
+   "sketch_a": 0.0404,
+   "sketch_b": 0.0364,
+   "matched": 2289,
+   "contain_a": 0.0434,
+   "contain_b": 0.0384,
+   "page_conc_a": 0.75,
+   "pages_a": 232,
+   "page_conc_b": 0.8,
+   "pages_b": 232,
+   "folio_pairs": 3,
+   "folio_agree": null,
+   "cover_a": 0.96,
+   "cover_b": 0.91,
+   "span_a": [
+    5,
+    510
+   ],
+   "span_b": [
+    8,
+    558
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1863BPL",
+   "b": "1864BPL",
+   "sketch_a": 0.0565,
+   "sketch_b": 0.0568,
+   "matched": 3709,
+   "contain_a": 0.0662,
+   "contain_b": 0.0623,
+   "page_conc_a": 0.757,
+   "pages_a": 398,
+   "page_conc_b": 0.8,
+   "pages_b": 418,
+   "folio_pairs": 485,
+   "folio_agree": 0.0,
+   "cover_a": 0.988,
+   "cover_b": 0.92,
+   "span_a": [
+    5,
+    491
+   ],
+   "span_b": [
+    8,
+    560
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1863BPL",
+   "b": "1865BPL",
+   "sketch_a": 0.0384,
+   "sketch_b": 0.0408,
+   "matched": 2132,
+   "contain_a": 0.0381,
+   "contain_b": 0.041,
+   "page_conc_a": 0.778,
+   "pages_a": 215,
+   "page_conc_b": 0.75,
+   "pages_b": 227,
+   "folio_pairs": 331,
+   "folio_agree": 0.0,
+   "cover_a": 0.982,
+   "cover_b": 0.915,
+   "span_a": [
+    5,
+    490
+   ],
+   "span_b": [
+    13,
+    511
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1864BPL",
+   "b": "1865BPL",
+   "sketch_a": 0.0491,
+   "sketch_b": 0.0535,
+   "matched": 3212,
+   "contain_a": 0.0539,
+   "contain_b": 0.0618,
+   "page_conc_a": 0.8,
+   "pages_a": 357,
+   "page_conc_b": 0.75,
+   "pages_b": 351,
+   "folio_pairs": 26,
+   "folio_agree": null,
+   "cover_a": 0.939,
+   "cover_b": 0.944,
+   "span_a": [
+    8,
+    561
+   ],
+   "span_b": [
+    13,
+    510
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1867BPL",
+   "b": "1868BPL",
+   "sketch_a": 0.0361,
+   "sketch_b": 0.0321,
+   "matched": 2846,
+   "contain_a": 0.0388,
+   "contain_b": 0.0366,
+   "page_conc_a": 0.8,
+   "pages_a": 287,
+   "page_conc_b": 0.8,
+   "pages_b": 283,
+   "folio_pairs": 1803,
+   "folio_agree": 0.001,
+   "cover_a": 0.943,
+   "cover_b": 0.932,
+   "span_a": [
+    9,
+    657
+   ],
+   "span_b": [
+    11,
+    718
+   ],
+   "year_a": 1867,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1868BPL",
+   "b": "1869BPL",
+   "sketch_a": 0.0481,
+   "sketch_b": 0.0514,
+   "matched": 4004,
+   "contain_a": 0.0515,
+   "contain_b": 0.0516,
+   "page_conc_a": 0.8,
+   "pages_a": 450,
+   "page_conc_b": 0.8,
+   "pages_b": 452,
+   "folio_pairs": 2443,
+   "folio_agree": 0.145,
+   "cover_a": 0.97,
+   "cover_b": 0.969,
+   "span_a": [
+    10,
+    718
+   ],
+   "span_b": [
+    12,
+    852
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1869BPL",
+   "b": "1871BPL",
+   "sketch_a": 0.037,
+   "sketch_b": 0.03,
+   "matched": 2663,
+   "contain_a": 0.0343,
+   "contain_b": 0.0295,
+   "page_conc_a": 0.714,
+   "pages_a": 232,
+   "page_conc_b": 0.8,
+   "pages_b": 213,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.943,
+   "cover_b": 0.913,
+   "span_a": [
+    12,
+    851
+   ],
+   "span_b": [
+    13,
+    842
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1875BPL",
+   "b": "1876BPL",
+   "sketch_a": 0.0592,
+   "sketch_b": 0.0551,
+   "matched": 6456,
+   "contain_a": 0.0586,
+   "contain_b": 0.0561,
+   "page_conc_a": 0.8,
+   "pages_a": 670,
+   "page_conc_b": 0.833,
+   "pages_b": 698,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.95,
+   "cover_b": 0.959,
+   "span_a": [
+    26,
+    1023
+   ],
+   "span_b": [
+    24,
+    1056
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1876BPL",
+   "b": "1878BPL",
+   "sketch_a": 0.0374,
+   "sketch_b": 0.0382,
+   "matched": 4980,
+   "contain_a": 0.0433,
+   "contain_b": 0.0431,
+   "page_conc_a": 0.8,
+   "pages_a": 541,
+   "page_conc_b": 0.8,
+   "pages_b": 515,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.953,
+   "cover_b": 0.958,
+   "span_a": [
+    24,
+    1056
+   ],
+   "span_b": [
+    25,
+    1068
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1878BPL",
+   "b": "1879BPL",
+   "sketch_a": 0.0764,
+   "sketch_b": 0.0696,
+   "matched": 8913,
+   "contain_a": 0.0771,
+   "contain_b": 0.0714,
+   "page_conc_a": 0.769,
+   "pages_a": 891,
+   "page_conc_b": 0.8,
+   "pages_b": 919,
+   "folio_pairs": 8286,
+   "folio_agree": 0.0,
+   "cover_a": 0.981,
+   "cover_b": 0.975,
+   "span_a": [
+    25,
+    1068
+   ],
+   "span_b": [
+    22,
+    1142
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1878BPL",
+   "b": "1880BPL",
+   "sketch_a": 0.0368,
+   "sketch_b": 0.0318,
+   "matched": 5226,
+   "contain_a": 0.0452,
+   "contain_b": 0.0411,
+   "page_conc_a": 0.786,
+   "pages_a": 565,
+   "page_conc_b": 0.833,
+   "pages_b": 532,
+   "folio_pairs": 3163,
+   "folio_agree": 0.0,
+   "cover_a": 0.958,
+   "cover_b": 0.95,
+   "span_a": [
+    25,
+    1067
+   ],
+   "span_b": [
+    21,
+    1178
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1879BPL",
+   "b": "1880BPL",
+   "sketch_a": 0.0535,
+   "sketch_b": 0.0519,
+   "matched": 7629,
+   "contain_a": 0.0611,
+   "contain_b": 0.0601,
+   "page_conc_a": 0.8,
+   "pages_a": 815,
+   "page_conc_b": 0.818,
+   "pages_b": 831,
+   "folio_pairs": 4406,
+   "folio_agree": 0.034,
+   "cover_a": 0.971,
+   "cover_b": 0.971,
+   "span_a": [
+    22,
+    1142
+   ],
+   "span_b": [
+    12,
+    1178
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1883BPL",
+   "b": "1884BPL",
+   "sketch_a": 0.0478,
+   "sketch_b": 0.0455,
+   "matched": 6799,
+   "contain_a": 0.0466,
+   "contain_b": 0.0447,
+   "page_conc_a": 0.8,
+   "pages_a": 717,
+   "page_conc_b": 0.833,
+   "pages_b": 697,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.953,
+   "cover_b": 0.938,
+   "span_a": [
+    20,
+    1345
+   ],
+   "span_b": [
+    31,
+    1456
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1884BPL",
+   "b": "1885BPL",
+   "sketch_a": 0.0529,
+   "sketch_b": 0.0514,
+   "matched": 7994,
+   "contain_a": 0.0526,
+   "contain_b": 0.0498,
+   "page_conc_a": 0.8,
+   "pages_a": 818,
+   "page_conc_b": 0.833,
+   "pages_b": 838,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.953,
+   "cover_b": 0.951,
+   "span_a": [
+    22,
+    1456
+   ],
+   "span_b": [
+    1,
+    1512
+   ],
+   "year_a": null,
+   "year_b": 1884,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1884BPL",
+   "b": "1886BPL",
+   "sketch_a": 0.0381,
+   "sketch_b": 0.0358,
+   "matched": 6888,
+   "contain_a": 0.0453,
+   "contain_b": 0.0415,
+   "page_conc_a": 0.833,
+   "pages_a": 701,
+   "page_conc_b": 0.75,
+   "pages_b": 693,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.919,
+   "cover_b": 0.92,
+   "span_a": [
+    32,
+    1455
+   ],
+   "span_b": [
+    36,
+    1255
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1885BPL",
+   "b": "1886BPL",
+   "sketch_a": 0.0474,
+   "sketch_b": 0.0465,
+   "matched": 8498,
+   "contain_a": 0.0529,
+   "contain_b": 0.0512,
+   "page_conc_a": 0.875,
+   "pages_a": 855,
+   "page_conc_b": 0.727,
+   "pages_b": 839,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.957,
+   "cover_b": 0.96,
+   "span_a": [
+    1,
+    1512
+   ],
+   "span_b": [
+    26,
+    1256
+   ],
+   "year_a": 1884,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1885BPL",
+   "b": "1887BPL",
+   "sketch_a": 0.0314,
+   "sketch_b": 0.0257,
+   "matched": 5795,
+   "contain_a": 0.0361,
+   "contain_b": 0.0324,
+   "page_conc_a": 0.833,
+   "pages_a": 543,
+   "page_conc_b": 0.778,
+   "pages_b": 592,
+   "folio_pairs": 1366,
+   "folio_agree": 0.0,
+   "cover_a": 0.92,
+   "cover_b": 0.941,
+   "span_a": [
+    2,
+    1512
+   ],
+   "span_b": [
+    30,
+    1337
+   ],
+   "year_a": 1884,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1886BPL",
+   "b": "1887BPL",
+   "sketch_a": 0.0592,
+   "sketch_b": 0.0532,
+   "matched": 10922,
+   "contain_a": 0.0658,
+   "contain_b": 0.0611,
+   "page_conc_a": 0.769,
+   "pages_a": 969,
+   "page_conc_b": 0.824,
+   "pages_b": 1024,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.958,
+   "cover_b": 0.962,
+   "span_a": [
+    26,
+    1256
+   ],
+   "span_b": [
+    21,
+    1337
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1886BPL",
+   "b": "1889BPL",
+   "sketch_a": 0.0315,
+   "sketch_b": 0.0277,
+   "matched": 5673,
+   "contain_a": 0.0342,
+   "contain_b": 0.0298,
+   "page_conc_a": 0.8,
+   "pages_a": 582,
+   "page_conc_b": 0.833,
+   "pages_b": 552,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.925,
+   "cover_b": 0.924,
+   "span_a": [
+    35,
+    1256
+   ],
+   "span_b": [
+    8,
+    1389
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1887BPL",
+   "b": "1889BPL",
+   "sketch_a": 0.0418,
+   "sketch_b": 0.0388,
+   "matched": 8249,
+   "contain_a": 0.0462,
+   "contain_b": 0.0433,
+   "page_conc_a": 0.8,
+   "pages_a": 884,
+   "page_conc_b": 0.833,
+   "pages_b": 891,
+   "folio_pairs": 3381,
+   "folio_agree": 0.0,
+   "cover_a": 0.966,
+   "cover_b": 0.952,
+   "span_a": [
+    30,
+    1337
+   ],
+   "span_b": [
+    8,
+    1389
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1897BPL",
+   "b": "1899xBPL",
+   "sketch_a": 0.0509,
+   "sketch_b": 0.0466,
+   "matched": 13834,
+   "contain_a": 0.056,
+   "contain_b": 0.0505,
+   "page_conc_a": 0.7,
+   "pages_a": 1273,
+   "page_conc_b": 0.778,
+   "pages_b": 1305,
+   "folio_pairs": 2927,
+   "folio_agree": 0.013,
+   "cover_a": 0.969,
+   "cover_b": 0.972,
+   "span_a": [
+    29,
+    1698
+   ],
+   "span_b": [
+    39,
+    1960
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1902BPL",
+   "b": "1903BPL",
+   "sketch_a": 0.099,
+   "sketch_b": 0.1048,
+   "matched": 19952,
+   "contain_a": 0.1245,
+   "contain_b": 0.1233,
+   "page_conc_a": 0.75,
+   "pages_a": 1005,
+   "page_conc_b": 0.765,
+   "pages_b": 1017,
+   "folio_pairs": 3906,
+   "folio_agree": 0.0,
+   "cover_a": 0.986,
+   "cover_b": 0.978,
+   "span_a": [
+    15,
+    1053
+   ],
+   "span_b": [
+    8,
+    1072
+   ],
+   "year_a": 1902,
+   "year_b": 1903,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1902BPL",
+   "b": "1904BPL",
+   "sketch_a": 0.0467,
+   "sketch_b": 0.0509,
+   "matched": 12364,
+   "contain_a": 0.0772,
+   "contain_b": 0.0782,
+   "page_conc_a": 0.8,
+   "pages_a": 960,
+   "page_conc_b": 0.8,
+   "pages_b": 963,
+   "folio_pairs": 2243,
+   "folio_agree": 0.0,
+   "cover_a": 0.973,
+   "cover_b": 0.982,
+   "span_a": [
+    15,
+    1051
+   ],
+   "span_b": [
+    8,
+    1046
+   ],
+   "year_a": 1902,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1902BPL",
+   "b": "brooklynnewyork1903p1geor",
+   "sketch_a": 0.0298,
+   "sketch_b": 0.057,
+   "matched": 6240,
+   "contain_a": 0.0389,
+   "contain_b": 0.0754,
+   "page_conc_a": 0.786,
+   "pages_a": 506,
+   "page_conc_b": 0.786,
+   "pages_b": 502,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.544,
+   "cover_b": 0.971,
+   "span_a": [
+    15,
+    1017
+   ],
+   "span_b": [
+    37,
+    1157
+   ],
+   "year_a": 1902,
+   "year_b": 1903,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1902BPL",
+   "b": "brooklynnewyork1904p1geor",
+   "sketch_a": 0.019,
+   "sketch_b": 0.0404,
+   "matched": 5465,
+   "contain_a": 0.0341,
+   "contain_b": 0.0644,
+   "page_conc_a": 0.778,
+   "pages_a": 503,
+   "page_conc_b": 0.8,
+   "pages_b": 504,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.554,
+   "cover_b": 0.982,
+   "span_a": [
+    15,
+    1015
+   ],
+   "span_b": [
+    27,
+    1137
+   ],
+   "year_a": 1902,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1902BPL",
+   "b": "brooklynnewyork1905p1geor",
+   "sketch_a": 0.0145,
+   "sketch_b": 0.0347,
+   "matched": 5459,
+   "contain_a": 0.0341,
+   "contain_b": 0.0653,
+   "page_conc_a": 0.75,
+   "pages_a": 480,
+   "page_conc_b": 0.789,
+   "pages_b": 501,
+   "folio_pairs": 6,
+   "folio_agree": null,
+   "cover_a": 0.506,
+   "cover_b": 0.985,
+   "span_a": [
+    15,
+    1021
+   ],
+   "span_b": [
+    39,
+    1117
+   ],
+   "year_a": 1902,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1902BPL",
+   "b": "brooklynnewyorkc1903geor",
+   "sketch_a": 0.0194,
+   "sketch_b": 0.0417,
+   "matched": 4572,
+   "contain_a": 0.0285,
+   "contain_b": 0.0602,
+   "page_conc_a": 0.778,
+   "pages_a": 425,
+   "page_conc_b": 0.8,
+   "pages_b": 414,
+   "folio_pairs": 78,
+   "folio_agree": 0.0,
+   "cover_a": 0.493,
+   "cover_b": 0.968,
+   "span_a": [
+    24,
+    1053
+   ],
+   "span_b": [
+    9,
+    1025
+   ],
+   "year_a": 1902,
+   "year_b": 1903,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1902BPL",
+   "b": "brooklynnewyorkc1904geor",
+   "sketch_a": 0.0177,
+   "sketch_b": 0.0381,
+   "matched": 4650,
+   "contain_a": 0.029,
+   "contain_b": 0.0607,
+   "page_conc_a": 0.818,
+   "pages_a": 432,
+   "page_conc_b": 0.833,
+   "pages_b": 431,
+   "folio_pairs": 2720,
+   "folio_agree": 0.0,
+   "cover_a": 0.484,
+   "cover_b": 0.98,
+   "span_a": [
+    42,
+    1052
+   ],
+   "span_b": [
+    9,
+    997
+   ],
+   "year_a": 1902,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1902BPL",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.0163,
+   "sketch_b": 0.0346,
+   "matched": 5008,
+   "contain_a": 0.0313,
+   "contain_b": 0.0568,
+   "page_conc_a": 0.75,
+   "pages_a": 475,
+   "page_conc_b": 0.8,
+   "pages_b": 489,
+   "folio_pairs": 1646,
+   "folio_agree": 0.0,
+   "cover_a": 0.524,
+   "cover_b": 0.968,
+   "span_a": [
+    50,
+    1053
+   ],
+   "span_b": [
+    9,
+    1153
+   ],
+   "year_a": 1902,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1903BPL",
+   "b": "1904BPL",
+   "sketch_a": 0.173,
+   "sketch_b": 0.1787,
+   "matched": 36306,
+   "contain_a": 0.2245,
+   "contain_b": 0.2295,
+   "page_conc_a": 0.794,
+   "pages_a": 1016,
+   "page_conc_b": 0.788,
+   "pages_b": 996,
+   "folio_pairs": 5893,
+   "folio_agree": 0.0,
+   "cover_a": 0.967,
+   "cover_b": 0.99,
+   "span_a": [
+    9,
+    1070
+   ],
+   "span_b": [
+    8,
+    1046
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1903BPL",
+   "b": "1906BPL",
+   "sketch_a": 0.0601,
+   "sketch_b": 0.0561,
+   "matched": 20832,
+   "contain_a": 0.1288,
+   "contain_b": 0.11,
+   "page_conc_a": 0.727,
+   "pages_a": 1024,
+   "page_conc_b": 0.8,
+   "pages_b": 1160,
+   "folio_pairs": 2238,
+   "folio_agree": 0.0,
+   "cover_a": 0.977,
+   "cover_b": 0.982,
+   "span_a": [
+    9,
+    1072
+   ],
+   "span_b": [
+    9,
+    1215
+   ],
+   "year_a": 1903,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1903BPL",
+   "b": "brooklynnewyork1904p1geor",
+   "sketch_a": 0.0652,
+   "sketch_b": 0.1282,
+   "matched": 15444,
+   "contain_a": 0.0955,
+   "contain_b": 0.1819,
+   "page_conc_a": 0.794,
+   "pages_a": 541,
+   "page_conc_b": 0.8,
+   "pages_b": 537,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.533,
+   "cover_b": 0.984,
+   "span_a": [
+    9,
+    1062
+   ],
+   "span_b": [
+    27,
+    1137
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1903BPL",
+   "b": "brooklynnewyork1905p1geor",
+   "sketch_a": 0.0517,
+   "sketch_b": 0.0952,
+   "matched": 12229,
+   "contain_a": 0.0756,
+   "contain_b": 0.1463,
+   "page_conc_a": 0.75,
+   "pages_a": 501,
+   "page_conc_b": 0.771,
+   "pages_b": 528,
+   "folio_pairs": 707,
+   "folio_agree": 0.0,
+   "cover_a": 0.5,
+   "cover_b": 0.987,
+   "span_a": [
+    9,
+    1061
+   ],
+   "span_b": [
+    39,
+    1117
+   ],
+   "year_a": 1903,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1903BPL",
+   "b": "brooklynnewyorkc1904geor",
+   "sketch_a": 0.0627,
+   "sketch_b": 0.1299,
+   "matched": 13667,
+   "contain_a": 0.0845,
+   "contain_b": 0.1784,
+   "page_conc_a": 0.781,
+   "pages_a": 488,
+   "page_conc_b": 0.781,
+   "pages_b": 484,
+   "folio_pairs": 4877,
+   "folio_agree": 0.0,
+   "cover_a": 0.486,
+   "cover_b": 0.996,
+   "span_a": [
+    23,
+    1072
+   ],
+   "span_b": [
+    9,
+    999
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1903BPL",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.0462,
+   "sketch_b": 0.0915,
+   "matched": 11945,
+   "contain_a": 0.0738,
+   "contain_b": 0.1355,
+   "page_conc_a": 0.765,
+   "pages_a": 526,
+   "page_conc_b": 0.792,
+   "pages_b": 550,
+   "folio_pairs": 3755,
+   "folio_agree": 0.0,
+   "cover_a": 0.526,
+   "cover_b": 0.986,
+   "span_a": [
+    23,
+    1072
+   ],
+   "span_b": [
+    9,
+    1153
+   ],
+   "year_a": 1903,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1904BPL",
+   "b": "1906BPL",
+   "sketch_a": 0.0911,
+   "sketch_b": 0.0802,
+   "matched": 29327,
+   "contain_a": 0.1854,
+   "contain_b": 0.1549,
+   "page_conc_a": 0.725,
+   "pages_a": 997,
+   "page_conc_b": 0.812,
+   "pages_b": 1143,
+   "folio_pairs": 11115,
+   "folio_agree": 0.028,
+   "cover_a": 0.988,
+   "cover_b": 0.972,
+   "span_a": [
+    8,
+    1046
+   ],
+   "span_b": [
+    9,
+    1212
+   ],
+   "year_a": null,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1904BPL",
+   "b": "1907BPL",
+   "sketch_a": 0.0372,
+   "sketch_b": 0.0364,
+   "matched": 19847,
+   "contain_a": 0.1255,
+   "contain_b": 0.1146,
+   "page_conc_a": 0.75,
+   "pages_a": 991,
+   "page_conc_b": 0.783,
+   "pages_b": 1041,
+   "folio_pairs": 6496,
+   "folio_agree": 0.051,
+   "cover_a": 0.985,
+   "cover_b": 0.972,
+   "span_a": [
+    9,
+    1046
+   ],
+   "span_b": [
+    15,
+    1100
+   ],
+   "year_a": null,
+   "year_b": 1907,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1904BPL",
+   "b": "brooklynnewyork1903p1geor",
+   "sketch_a": 0.0622,
+   "sketch_b": 0.1061,
+   "matched": 12013,
+   "contain_a": 0.076,
+   "contain_b": 0.1451,
+   "page_conc_a": 0.818,
+   "pages_a": 522,
+   "page_conc_b": 0.824,
+   "pages_b": 527,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.531,
+   "cover_b": 0.962,
+   "span_a": [
+    8,
+    862
+   ],
+   "span_b": [
+    39,
+    1157
+   ],
+   "year_a": null,
+   "year_b": 1903,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1904BPL",
+   "b": "brooklynnewyork1905p1geor",
+   "sketch_a": 0.0877,
+   "sketch_b": 0.1622,
+   "matched": 19471,
+   "contain_a": 0.1231,
+   "contain_b": 0.2329,
+   "page_conc_a": 0.75,
+   "pages_a": 487,
+   "page_conc_b": 0.788,
+   "pages_b": 522,
+   "folio_pairs": 10326,
+   "folio_agree": 0.0,
+   "cover_a": 0.497,
+   "cover_b": 0.983,
+   "span_a": [
+    8,
+    1035
+   ],
+   "span_b": [
+    37,
+    1117
+   ],
+   "year_a": null,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1904BPL",
+   "b": "brooklynnewyorkc00geor",
+   "sketch_a": 0.0262,
+   "sketch_b": 0.0426,
+   "matched": 9810,
+   "contain_a": 0.062,
+   "contain_b": 0.1001,
+   "page_conc_a": 0.741,
+   "pages_a": 499,
+   "page_conc_b": 0.833,
+   "pages_b": 577,
+   "folio_pairs": 1976,
+   "folio_agree": 0.0,
+   "cover_a": 0.513,
+   "cover_b": 0.967,
+   "span_a": [
+    35,
+    1046
+   ],
+   "span_b": [
+    9,
+    1235
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1904BPL",
+   "b": "brooklynnewyorkc1903geor",
+   "sketch_a": 0.0334,
+   "sketch_b": 0.0721,
+   "matched": 8030,
+   "contain_a": 0.0508,
+   "contain_b": 0.1058,
+   "page_conc_a": 0.833,
+   "pages_a": 465,
+   "page_conc_b": 0.818,
+   "pages_b": 469,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.492,
+   "cover_b": 0.962,
+   "span_a": [
+    10,
+    1046
+   ],
+   "span_b": [
+    9,
+    1021
+   ],
+   "year_a": null,
+   "year_b": 1903,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1904BPL",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.0702,
+   "sketch_b": 0.1335,
+   "matched": 17165,
+   "contain_a": 0.1085,
+   "contain_b": 0.1947,
+   "page_conc_a": 0.759,
+   "pages_a": 507,
+   "page_conc_b": 0.794,
+   "pages_b": 537,
+   "folio_pairs": 4197,
+   "folio_agree": 0.0,
+   "cover_a": 0.526,
+   "cover_b": 0.963,
+   "span_a": [
+    18,
+    1046
+   ],
+   "span_b": [
+    9,
+    1149
+   ],
+   "year_a": null,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1904BPL",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.0239,
+   "sketch_b": 0.0415,
+   "matched": 9311,
+   "contain_a": 0.0589,
+   "contain_b": 0.1009,
+   "page_conc_a": 0.75,
+   "pages_a": 485,
+   "page_conc_b": 0.833,
+   "pages_b": 550,
+   "folio_pairs": 5081,
+   "folio_agree": 0.0,
+   "cover_a": 0.509,
+   "cover_b": 0.976,
+   "span_a": [
+    8,
+    1026
+   ],
+   "span_b": [
+    35,
+    1215
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "1907BPL",
+   "sketch_a": 0.3291,
+   "sketch_b": 0.3539,
+   "matched": 78035,
+   "contain_a": 0.4122,
+   "contain_b": 0.4506,
+   "page_conc_a": 0.771,
+   "pages_a": 1170,
+   "page_conc_b": 0.728,
+   "pages_b": 1069,
+   "folio_pairs": 25196,
+   "folio_agree": 0.0,
+   "cover_a": 0.987,
+   "cover_b": 0.991,
+   "span_a": [
+    9,
+    1215
+   ],
+   "span_b": [
+    14,
+    1103
+   ],
+   "year_a": 1906,
+   "year_b": 1907,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "1908BPL",
+   "sketch_a": 0.2655,
+   "sketch_b": 0.3004,
+   "matched": 67171,
+   "contain_a": 0.3548,
+   "contain_b": 0.3951,
+   "page_conc_a": 0.79,
+   "pages_a": 1161,
+   "page_conc_b": 0.741,
+   "pages_b": 1069,
+   "folio_pairs": 9152,
+   "folio_agree": 0.055,
+   "cover_a": 0.978,
+   "cover_b": 0.991,
+   "span_a": [
+    9,
+    1215
+   ],
+   "span_b": [
+    9,
+    1109
+   ],
+   "year_a": 1906,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyork1903p1geor",
+   "sketch_a": 0.0174,
+   "sketch_b": 0.0317,
+   "matched": 6884,
+   "contain_a": 0.0364,
+   "contain_b": 0.0832,
+   "page_conc_a": 0.833,
+   "pages_a": 570,
+   "page_conc_b": 0.741,
+   "pages_b": 509,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.519,
+   "cover_b": 0.968,
+   "span_a": [
+    10,
+    1153
+   ],
+   "span_b": [
+    41,
+    1157
+   ],
+   "year_a": 1906,
+   "year_b": 1903,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyork1904p1geor",
+   "sketch_a": 0.0284,
+   "sketch_b": 0.0672,
+   "matched": 12704,
+   "contain_a": 0.0671,
+   "contain_b": 0.1496,
+   "page_conc_a": 0.809,
+   "pages_a": 612,
+   "page_conc_b": 0.731,
+   "pages_b": 540,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.53,
+   "cover_b": 0.987,
+   "span_a": [
+    9,
+    1153
+   ],
+   "span_b": [
+    27,
+    1137
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyork1905p1geor",
+   "sketch_a": 0.1221,
+   "sketch_b": 0.2663,
+   "matched": 30608,
+   "contain_a": 0.1617,
+   "contain_b": 0.3661,
+   "page_conc_a": 0.793,
+   "pages_a": 562,
+   "page_conc_b": 0.765,
+   "pages_b": 529,
+   "folio_pairs": 19537,
+   "folio_agree": 0.0,
+   "cover_a": 0.502,
+   "cover_b": 0.991,
+   "span_a": [
+    9,
+    1187
+   ],
+   "span_b": [
+    39,
+    1117
+   ],
+   "year_a": 1906,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyork1907p1geor",
+   "sketch_a": 0.0711,
+   "sketch_b": 0.1491,
+   "matched": 20846,
+   "contain_a": 0.1101,
+   "contain_b": 0.2408,
+   "page_conc_a": 0.808,
+   "pages_a": 600,
+   "page_conc_b": 0.75,
+   "pages_b": 539,
+   "folio_pairs": 529,
+   "folio_agree": 0.0,
+   "cover_a": 0.524,
+   "cover_b": 0.985,
+   "span_a": [
+    9,
+    1138
+   ],
+   "span_b": [
+    37,
+    1139
+   ],
+   "year_a": 1906,
+   "year_b": 1907,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyork1908p1geor",
+   "sketch_a": 0.0814,
+   "sketch_b": 0.161,
+   "matched": 22354,
+   "contain_a": 0.1181,
+   "contain_b": 0.2625,
+   "page_conc_a": 0.802,
+   "pages_a": 584,
+   "page_conc_b": 0.756,
+   "pages_b": 538,
+   "folio_pairs": 14210,
+   "folio_agree": 0.0,
+   "cover_a": 0.51,
+   "cover_b": 0.987,
+   "span_a": [
+    9,
+    1207
+   ],
+   "span_b": [
+    31,
+    1127
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyork1909p1geor",
+   "sketch_a": 0.0288,
+   "sketch_b": 0.0571,
+   "matched": 10866,
+   "contain_a": 0.0574,
+   "contain_b": 0.1219,
+   "page_conc_a": 0.824,
+   "pages_a": 579,
+   "page_conc_b": 0.78,
+   "pages_b": 546,
+   "folio_pairs": 1250,
+   "folio_agree": 0.0,
+   "cover_a": 0.512,
+   "cover_b": 0.982,
+   "span_a": [
+    9,
+    1214
+   ],
+   "span_b": [
+    37,
+    1175
+   ],
+   "year_a": 1906,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyorkc1904geor",
+   "sketch_a": 0.0316,
+   "sketch_b": 0.0755,
+   "matched": 12186,
+   "contain_a": 0.0644,
+   "contain_b": 0.159,
+   "page_conc_a": 0.831,
+   "pages_a": 550,
+   "page_conc_b": 0.739,
+   "pages_b": 485,
+   "folio_pairs": 6165,
+   "folio_agree": 0.0,
+   "cover_a": 0.493,
+   "cover_b": 0.992,
+   "span_a": [
+    37,
+    1215
+   ],
+   "span_b": [
+    9,
+    999
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.1126,
+   "sketch_b": 0.2514,
+   "matched": 30630,
+   "contain_a": 0.1618,
+   "contain_b": 0.3475,
+   "page_conc_a": 0.793,
+   "pages_a": 605,
+   "page_conc_b": 0.75,
+   "pages_b": 554,
+   "folio_pairs": 4960,
+   "folio_agree": 0.0,
+   "cover_a": 0.534,
+   "cover_b": 0.986,
+   "span_a": [
+    50,
+    1215
+   ],
+   "span_b": [
+    9,
+    1153
+   ],
+   "year_a": 1906,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyorkc1907geor",
+   "sketch_a": 0.0763,
+   "sketch_b": 0.15,
+   "matched": 20982,
+   "contain_a": 0.1108,
+   "contain_b": 0.245,
+   "page_conc_a": 0.788,
+   "pages_a": 564,
+   "page_conc_b": 0.737,
+   "pages_b": 525,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.492,
+   "cover_b": 0.991,
+   "span_a": [
+    37,
+    1215
+   ],
+   "span_b": [
+    9,
+    1079
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyorkc1908geor",
+   "sketch_a": 0.0731,
+   "sketch_b": 0.1595,
+   "matched": 23295,
+   "contain_a": 0.123,
+   "contain_b": 0.2716,
+   "page_conc_a": 0.815,
+   "pages_a": 582,
+   "page_conc_b": 0.761,
+   "pages_b": 538,
+   "folio_pairs": 4237,
+   "folio_agree": 0.0,
+   "cover_a": 0.509,
+   "cover_b": 0.982,
+   "span_a": [
+    37,
+    1215
+   ],
+   "span_b": [
+    9,
+    1119
+   ],
+   "year_a": 1906,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1906BPL",
+   "b": "brooklynnewyorkc1909geor",
+   "sketch_a": 0.0205,
+   "sketch_b": 0.0486,
+   "matched": 9656,
+   "contain_a": 0.051,
+   "contain_b": 0.1069,
+   "page_conc_a": 0.8,
+   "pages_a": 555,
+   "page_conc_b": 0.762,
+   "pages_b": 536,
+   "folio_pairs": 365,
+   "folio_agree": 0.0,
+   "cover_a": 0.495,
+   "cover_b": 0.974,
+   "span_a": [
+    37,
+    1215
+   ],
+   "span_b": [
+    9,
+    1165
+   ],
+   "year_a": 1906,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "1908BPL",
+   "sketch_a": 0.5277,
+   "sketch_b": 0.558,
+   "matched": 103802,
+   "contain_a": 0.5995,
+   "contain_b": 0.6106,
+   "page_conc_a": 0.769,
+   "pages_a": 1063,
+   "page_conc_b": 0.772,
+   "pages_b": 1073,
+   "folio_pairs": 13098,
+   "folio_agree": 0.0,
+   "cover_a": 0.984,
+   "cover_b": 0.996,
+   "span_a": [
+    15,
+    1103
+   ],
+   "span_b": [
+    9,
+    1109
+   ],
+   "year_a": 1907,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyork1905p1geor",
+   "sketch_a": 0.061,
+   "sketch_b": 0.1229,
+   "matched": 19015,
+   "contain_a": 0.1098,
+   "contain_b": 0.2275,
+   "page_conc_a": 0.75,
+   "pages_a": 500,
+   "page_conc_b": 0.778,
+   "pages_b": 525,
+   "folio_pairs": 10317,
+   "folio_agree": 0.0,
+   "cover_a": 0.488,
+   "cover_b": 0.983,
+   "span_a": [
+    14,
+    1027
+   ],
+   "span_b": [
+    39,
+    1117
+   ],
+   "year_a": 1907,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyork1908p1geor",
+   "sketch_a": 0.169,
+   "sketch_b": 0.3179,
+   "matched": 34738,
+   "contain_a": 0.2006,
+   "contain_b": 0.408,
+   "page_conc_a": 0.784,
+   "pages_a": 524,
+   "page_conc_b": 0.803,
+   "pages_b": 539,
+   "folio_pairs": 17732,
+   "folio_agree": 0.0,
+   "cover_a": 0.498,
+   "cover_b": 0.996,
+   "span_a": [
+    15,
+    1087
+   ],
+   "span_b": [
+    31,
+    1127
+   ],
+   "year_a": 1907,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyork1909p1geor",
+   "sketch_a": 0.0586,
+   "sketch_b": 0.116,
+   "matched": 15694,
+   "contain_a": 0.0906,
+   "contain_b": 0.1761,
+   "page_conc_a": 0.762,
+   "pages_a": 522,
+   "page_conc_b": 0.789,
+   "pages_b": 552,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.5,
+   "cover_b": 0.988,
+   "span_a": [
+    14,
+    1069
+   ],
+   "span_b": [
+    37,
+    1175
+   ],
+   "year_a": 1907,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyorkc00geor",
+   "sketch_a": 0.1097,
+   "sketch_b": 0.1802,
+   "matched": 26747,
+   "contain_a": 0.1545,
+   "contain_b": 0.273,
+   "page_conc_a": 0.736,
+   "pages_a": 559,
+   "page_conc_b": 0.788,
+   "pages_b": 607,
+   "folio_pairs": 585,
+   "folio_agree": 0.0,
+   "cover_a": 0.539,
+   "cover_b": 0.993,
+   "span_a": [
+    30,
+    1103
+   ],
+   "span_b": [
+    9,
+    1241
+   ],
+   "year_a": 1907,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.0625,
+   "sketch_b": 0.1155,
+   "matched": 19795,
+   "contain_a": 0.1143,
+   "contain_b": 0.2246,
+   "page_conc_a": 0.75,
+   "pages_a": 557,
+   "page_conc_b": 0.743,
+   "pages_b": 554,
+   "folio_pairs": 6112,
+   "folio_agree": 0.0,
+   "cover_a": 0.536,
+   "cover_b": 0.988,
+   "span_a": [
+    94,
+    1103
+   ],
+   "span_b": [
+    9,
+    1153
+   ],
+   "year_a": 1907,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyorkc19062geor",
+   "sketch_a": 0.0186,
+   "sketch_b": 0.0563,
+   "matched": 7228,
+   "contain_a": 0.0417,
+   "contain_b": 0.1259,
+   "page_conc_a": 0.815,
+   "pages_a": 426,
+   "page_conc_b": 0.836,
+   "pages_b": 432,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.486,
+   "cover_b": 0.885,
+   "span_a": [
+    51,
+    1103
+   ],
+   "span_b": [
+    13,
+    1243
+   ],
+   "year_a": 1907,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.0831,
+   "sketch_b": 0.1569,
+   "matched": 21755,
+   "contain_a": 0.1256,
+   "contain_b": 0.2359,
+   "page_conc_a": 0.739,
+   "pages_a": 507,
+   "page_conc_b": 0.816,
+   "pages_b": 570,
+   "folio_pairs": 11628,
+   "folio_agree": 0.0,
+   "cover_a": 0.488,
+   "cover_b": 0.978,
+   "span_a": [
+    15,
+    1059
+   ],
+   "span_b": [
+    37,
+    1215
+   ],
+   "year_a": 1907,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyorkc1908geor",
+   "sketch_a": 0.1718,
+   "sketch_b": 0.3293,
+   "matched": 36219,
+   "contain_a": 0.2092,
+   "contain_b": 0.4223,
+   "page_conc_a": 0.8,
+   "pages_a": 545,
+   "page_conc_b": 0.788,
+   "pages_b": 544,
+   "folio_pairs": 12698,
+   "folio_agree": 0.0,
+   "cover_a": 0.512,
+   "cover_b": 0.987,
+   "span_a": [
+    90,
+    1103
+   ],
+   "span_b": [
+    9,
+    1119
+   ],
+   "year_a": 1907,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1907BPL",
+   "b": "brooklynnewyorkc1909geor",
+   "sketch_a": 0.0463,
+   "sketch_b": 0.0877,
+   "matched": 13750,
+   "contain_a": 0.0794,
+   "contain_b": 0.1522,
+   "page_conc_a": 0.772,
+   "pages_a": 526,
+   "page_conc_b": 0.8,
+   "pages_b": 549,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.505,
+   "cover_b": 0.979,
+   "span_a": [
+    61,
+    1103
+   ],
+   "span_b": [
+    9,
+    1165
+   ],
+   "year_a": 1907,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyork1905p1geor",
+   "sketch_a": 0.0476,
+   "sketch_b": 0.0921,
+   "matched": 16302,
+   "contain_a": 0.0959,
+   "contain_b": 0.195,
+   "page_conc_a": 0.75,
+   "pages_a": 502,
+   "page_conc_b": 0.77,
+   "pages_b": 520,
+   "folio_pairs": 4310,
+   "folio_agree": 0.0,
+   "cover_a": 0.492,
+   "cover_b": 0.98,
+   "span_a": [
+    9,
+    1060
+   ],
+   "span_b": [
+    37,
+    1117
+   ],
+   "year_a": 1908,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyork1907p1geor",
+   "sketch_a": 0.1312,
+   "sketch_b": 0.2346,
+   "matched": 27298,
+   "contain_a": 0.1606,
+   "contain_b": 0.3154,
+   "page_conc_a": 0.792,
+   "pages_a": 539,
+   "page_conc_b": 0.782,
+   "pages_b": 534,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.518,
+   "cover_b": 0.985,
+   "span_a": [
+    9,
+    1107
+   ],
+   "span_b": [
+    37,
+    1139
+   ],
+   "year_a": 1908,
+   "year_b": 1907,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyork1909p1geor",
+   "sketch_a": 0.0804,
+   "sketch_b": 0.1466,
+   "matched": 18344,
+   "contain_a": 0.1079,
+   "contain_b": 0.2058,
+   "page_conc_a": 0.757,
+   "pages_a": 524,
+   "page_conc_b": 0.784,
+   "pages_b": 549,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.507,
+   "cover_b": 0.981,
+   "span_a": [
+    9,
+    1100
+   ],
+   "span_b": [
+    37,
+    1175
+   ],
+   "year_a": 1908,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyorkc00geor",
+   "sketch_a": 0.0832,
+   "sketch_b": 0.1337,
+   "matched": 23388,
+   "contain_a": 0.1376,
+   "contain_b": 0.2387,
+   "page_conc_a": 0.754,
+   "pages_a": 563,
+   "page_conc_b": 0.812,
+   "pages_b": 606,
+   "folio_pairs": 9,
+   "folio_agree": null,
+   "cover_a": 0.542,
+   "cover_b": 0.99,
+   "span_a": [
+    21,
+    1109
+   ],
+   "span_b": [
+    9,
+    1241
+   ],
+   "year_a": 1908,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.0484,
+   "sketch_b": 0.0919,
+   "matched": 17703,
+   "contain_a": 0.1041,
+   "contain_b": 0.2008,
+   "page_conc_a": 0.826,
+   "pages_a": 566,
+   "page_conc_b": 0.794,
+   "pages_b": 554,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.538,
+   "cover_b": 0.982,
+   "span_a": [
+    91,
+    1109
+   ],
+   "span_b": [
+    9,
+    1153
+   ],
+   "year_a": 1908,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyorkc19062geor",
+   "sketch_a": 0.0144,
+   "sketch_b": 0.0413,
+   "matched": 6226,
+   "contain_a": 0.0366,
+   "contain_b": 0.1084,
+   "page_conc_a": 0.821,
+   "pages_a": 418,
+   "page_conc_b": 0.812,
+   "pages_b": 421,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.491,
+   "cover_b": 0.885,
+   "span_a": [
+    47,
+    1109
+   ],
+   "span_b": [
+    13,
+    1243
+   ],
+   "year_a": 1908,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.0736,
+   "sketch_b": 0.1298,
+   "matched": 18372,
+   "contain_a": 0.1081,
+   "contain_b": 0.1992,
+   "page_conc_a": 0.759,
+   "pages_a": 506,
+   "page_conc_b": 0.819,
+   "pages_b": 560,
+   "folio_pairs": 5796,
+   "folio_agree": 0.0,
+   "cover_a": 0.489,
+   "cover_b": 0.966,
+   "span_a": [
+    9,
+    1039
+   ],
+   "span_b": [
+    37,
+    1215
+   ],
+   "year_a": 1908,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyorkc1907geor",
+   "sketch_a": 0.1276,
+   "sketch_b": 0.2367,
+   "matched": 28192,
+   "contain_a": 0.1658,
+   "contain_b": 0.3291,
+   "page_conc_a": 0.791,
+   "pages_a": 530,
+   "page_conc_b": 0.783,
+   "pages_b": 524,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.503,
+   "cover_b": 0.987,
+   "span_a": [
+    50,
+    1109
+   ],
+   "span_b": [
+    9,
+    1079
+   ],
+   "year_a": 1908,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyorkc1909geor",
+   "sketch_a": 0.0664,
+   "sketch_b": 0.1163,
+   "matched": 15938,
+   "contain_a": 0.0937,
+   "contain_b": 0.1764,
+   "page_conc_a": 0.786,
+   "pages_a": 531,
+   "page_conc_b": 0.793,
+   "pages_b": 549,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.509,
+   "cover_b": 0.981,
+   "span_a": [
+    16,
+    1109
+   ],
+   "span_b": [
+    9,
+    1165
+   ],
+   "year_a": 1908,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "1908BPL",
+   "b": "brooklynnewyorkc1910geor",
+   "sketch_a": 0.0208,
+   "sketch_b": 0.0326,
+   "matched": 4796,
+   "contain_a": 0.0282,
+   "contain_b": 0.0483,
+   "page_conc_a": 0.8,
+   "pages_a": 412,
+   "page_conc_b": 0.9,
+   "pages_b": 419,
+   "folio_pairs": 938,
+   "folio_agree": 0.0,
+   "cover_a": 0.487,
+   "cover_b": 0.934,
+   "span_a": [
+    9,
+    1048
+   ],
+   "span_b": [
+    35,
+    1311
+   ],
+   "year_a": 1908,
+   "year_b": 1910,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynalphabet1843unse",
+   "b": "micro_IABROOKLYN_0018",
+   "sketch_a": 0.0296,
+   "sketch_b": 0.0457,
+   "matched": 264,
+   "contain_a": 0.0357,
+   "contain_b": 0.0555,
+   "page_conc_a": 1.0,
+   "pages_a": 8,
+   "page_conc_b": 1.0,
+   "pages_b": 9,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.63,
+   "cover_b": 0.704,
+   "span_a": [
+    17,
+    197
+   ],
+   "span_b": [
+    10,
+    178
+   ],
+   "year_a": null,
+   "year_b": 1841,
+   "relation": "undecided"
+  },
+  {
+   "a": "brooklynalphabet1843unse",
+   "b": "micro_IABROOKLYN_0020",
+   "sketch_a": 0.1152,
+   "sketch_b": 0.1155,
+   "matched": 901,
+   "contain_a": 0.122,
+   "contain_b": 0.1235,
+   "page_conc_a": 0.8,
+   "pages_a": 104,
+   "page_conc_b": 0.833,
+   "pages_b": 97,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.95,
+   "cover_b": 0.898,
+   "span_a": [
+    17,
+    197
+   ],
+   "span_b": [
+    14,
+    211
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynalphabet1843unse",
+   "b": "micro_IABROOKLYN_0023",
+   "sketch_a": 0.0489,
+   "sketch_b": 0.0379,
+   "matched": 396,
+   "contain_a": 0.0536,
+   "contain_b": 0.0426,
+   "page_conc_a": 0.708,
+   "pages_a": 20,
+   "page_conc_b": 0.833,
+   "pages_b": 13,
+   "folio_pairs": 285,
+   "folio_agree": 0.011,
+   "cover_a": 0.823,
+   "cover_b": 0.727,
+   "span_a": [
+    17,
+    197
+   ],
+   "span_b": [
+    21,
+    279
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklyncitydire1848teal",
+   "b": "micro_IABROOKLYN_0024",
+   "sketch_a": 0.0278,
+   "sketch_b": 0.0447,
+   "matched": 409,
+   "contain_a": 0.035,
+   "contain_b": 0.0514,
+   "page_conc_a": 1.0,
+   "pages_a": 17,
+   "page_conc_b": 1.0,
+   "pages_b": 17,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.702,
+   "cover_b": 0.731,
+   "span_a": [
+    11,
+    260
+   ],
+   "span_b": [
+    23,
+    342
+   ],
+   "year_a": 1848,
+   "year_b": null,
+   "relation": "undecided"
+  },
+  {
+   "a": "brooklyncitydire1848teal",
+   "b": "micro_IABROOKLYN_0025",
+   "sketch_a": 0.0225,
+   "sketch_b": 0.0335,
+   "matched": 350,
+   "contain_a": 0.03,
+   "contain_b": 0.0417,
+   "page_conc_a": 0.69,
+   "pages_a": 14,
+   "page_conc_b": 0.917,
+   "pages_b": 6,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.601,
+   "cover_b": 0.564,
+   "span_a": [
+    12,
+    260
+   ],
+   "span_b": [
+    22,
+    344
+   ],
+   "year_a": 1848,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklyndirector00ogde",
+   "b": "micro_IABROOKLYN_0015",
+   "sketch_a": 0.0385,
+   "sketch_b": 0.0688,
+   "matched": 287,
+   "contain_a": 0.0422,
+   "contain_b": 0.0765,
+   "page_conc_a": 1.0,
+   "pages_a": 10,
+   "page_conc_b": 0.571,
+   "pages_b": 31,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.456,
+   "cover_b": 1.0,
+   "span_a": [
+    11,
+    291
+   ],
+   "span_b": [
+    21,
+    80
+   ],
+   "year_a": null,
+   "year_b": 1838,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklyndirector00ogde",
+   "b": "micro_IABROOKLYN_0017",
+   "sketch_a": 0.0131,
+   "sketch_b": 0.0321,
+   "matched": 99,
+   "contain_a": 0.0145,
+   "contain_b": 0.0355,
+   "page_conc_a": 0.8,
+   "pages_a": 3,
+   "page_conc_b": 0.8,
+   "pages_b": 3,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.189,
+   "cover_b": 0.417,
+   "span_a": [
+    35,
+    291
+   ],
+   "span_b": [
+    20,
+    143
+   ],
+   "year_a": null,
+   "year_b": 1840,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1903p1geor",
+   "b": "brooklynnewyork1904p1geor",
+   "sketch_a": 0.0873,
+   "sketch_b": 0.0892,
+   "matched": 10045,
+   "contain_a": 0.1214,
+   "contain_b": 0.1183,
+   "page_conc_a": 0.824,
+   "pages_a": 533,
+   "page_conc_b": 0.83,
+   "pages_b": 532,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.971,
+   "cover_b": 0.978,
+   "span_a": [
+    39,
+    1157
+   ],
+   "span_b": [
+    27,
+    1123
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1903p1geor",
+   "b": "brooklynnewyork1905p1geor",
+   "sketch_a": 0.067,
+   "sketch_b": 0.0709,
+   "matched": 8607,
+   "contain_a": 0.104,
+   "contain_b": 0.103,
+   "page_conc_a": 0.765,
+   "pages_a": 489,
+   "page_conc_b": 0.789,
+   "pages_b": 519,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.906,
+   "cover_b": 0.987,
+   "span_a": [
+    39,
+    1129
+   ],
+   "span_b": [
+    39,
+    1117
+   ],
+   "year_a": 1903,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1904p1geor",
+   "b": "brooklynnewyork1905p1geor",
+   "sketch_a": 0.126,
+   "sketch_b": 0.1329,
+   "matched": 16204,
+   "contain_a": 0.1908,
+   "contain_b": 0.1938,
+   "page_conc_a": 0.76,
+   "pages_a": 497,
+   "page_conc_b": 0.794,
+   "pages_b": 528,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.911,
+   "cover_b": 0.987,
+   "span_a": [
+    27,
+    1113
+   ],
+   "span_b": [
+    37,
+    1117
+   ],
+   "year_a": null,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1904p1geor",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.036,
+   "sketch_b": 0.0343,
+   "matched": 7924,
+   "contain_a": 0.0933,
+   "contain_b": 0.0859,
+   "page_conc_a": 0.762,
+   "pages_a": 488,
+   "page_conc_b": 0.833,
+   "pages_b": 547,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.924,
+   "cover_b": 0.974,
+   "span_a": [
+    27,
+    1091
+   ],
+   "span_b": [
+    35,
+    1215
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1905p1geor",
+   "b": "brooklynnewyork1907p1geor",
+   "sketch_a": 0.0593,
+   "sketch_b": 0.0571,
+   "matched": 11233,
+   "contain_a": 0.1344,
+   "contain_b": 0.1298,
+   "page_conc_a": 0.794,
+   "pages_a": 518,
+   "page_conc_b": 0.773,
+   "pages_b": 494,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.983,
+   "cover_b": 0.918,
+   "span_a": [
+    39,
+    1117
+   ],
+   "span_b": [
+    37,
+    1133
+   ],
+   "year_a": 1905,
+   "year_b": 1907,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1905p1geor",
+   "b": "brooklynnewyork1908p1geor",
+   "sketch_a": 0.0617,
+   "sketch_b": 0.0566,
+   "matched": 12217,
+   "contain_a": 0.1461,
+   "contain_b": 0.1435,
+   "page_conc_a": 0.773,
+   "pages_a": 525,
+   "page_conc_b": 0.77,
+   "pages_b": 514,
+   "folio_pairs": 8074,
+   "folio_agree": 0.0,
+   "cover_a": 0.985,
+   "cover_b": 0.95,
+   "span_a": [
+    37,
+    1117
+   ],
+   "span_b": [
+    31,
+    1125
+   ],
+   "year_a": 1905,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1905p1geor",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.148,
+   "sketch_b": 0.135,
+   "matched": 19678,
+   "contain_a": 0.2354,
+   "contain_b": 0.2133,
+   "page_conc_a": 0.776,
+   "pages_a": 526,
+   "page_conc_b": 0.806,
+   "pages_b": 562,
+   "folio_pairs": 13933,
+   "folio_agree": 0.0,
+   "cover_a": 0.989,
+   "cover_b": 0.969,
+   "span_a": [
+    39,
+    1117
+   ],
+   "span_b": [
+    35,
+    1191
+   ],
+   "year_a": 1905,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1907p1geor",
+   "b": "brooklynnewyork1908p1geor",
+   "sketch_a": 0.188,
+   "sketch_b": 0.1838,
+   "matched": 21835,
+   "contain_a": 0.2523,
+   "contain_b": 0.2565,
+   "page_conc_a": 0.792,
+   "pages_a": 523,
+   "page_conc_b": 0.808,
+   "pages_b": 538,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.96,
+   "cover_b": 0.996,
+   "span_a": [
+    39,
+    1123
+   ],
+   "span_b": [
+    31,
+    1127
+   ],
+   "year_a": 1907,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1907p1geor",
+   "b": "brooklynnewyork1909p1geor",
+   "sketch_a": 0.0798,
+   "sketch_b": 0.0736,
+   "matched": 10240,
+   "contain_a": 0.1183,
+   "contain_b": 0.1149,
+   "page_conc_a": 0.8,
+   "pages_a": 512,
+   "page_conc_b": 0.833,
+   "pages_b": 548,
+   "folio_pairs": 11,
+   "folio_agree": null,
+   "cover_a": 0.958,
+   "cover_b": 0.984,
+   "span_a": [
+    39,
+    1113
+   ],
+   "span_b": [
+    37,
+    1175
+   ],
+   "year_a": 1907,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1907p1geor",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.0851,
+   "sketch_b": 0.0815,
+   "matched": 13781,
+   "contain_a": 0.1592,
+   "contain_b": 0.1494,
+   "page_conc_a": 0.753,
+   "pages_a": 504,
+   "page_conc_b": 0.833,
+   "pages_b": 563,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.933,
+   "cover_b": 0.974,
+   "span_a": [
+    37,
+    1123
+   ],
+   "span_b": [
+    37,
+    1215
+   ],
+   "year_a": 1907,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1908p1geor",
+   "b": "brooklynnewyork1909p1geor",
+   "sketch_a": 0.1269,
+   "sketch_b": 0.12,
+   "matched": 14805,
+   "contain_a": 0.1739,
+   "contain_b": 0.1661,
+   "page_conc_a": 0.765,
+   "pages_a": 531,
+   "page_conc_b": 0.793,
+   "pages_b": 551,
+   "folio_pairs": 1750,
+   "folio_agree": 0.0,
+   "cover_a": 0.985,
+   "cover_b": 0.977,
+   "span_a": [
+    31,
+    1127
+   ],
+   "span_b": [
+    37,
+    1165
+   ],
+   "year_a": null,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1908p1geor",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.0965,
+   "sketch_b": 0.0951,
+   "matched": 14487,
+   "contain_a": 0.1701,
+   "contain_b": 0.1571,
+   "page_conc_a": 0.772,
+   "pages_a": 518,
+   "page_conc_b": 0.833,
+   "pages_b": 566,
+   "folio_pairs": 9807,
+   "folio_agree": 0.0,
+   "cover_a": 0.965,
+   "cover_b": 0.978,
+   "span_a": [
+    31,
+    1117
+   ],
+   "span_b": [
+    37,
+    1215
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1909p1geor",
+   "b": "brooklynnewyorkc1906geor",
+   "sketch_a": 0.0366,
+   "sketch_b": 0.0385,
+   "matched": 7058,
+   "contain_a": 0.0792,
+   "contain_b": 0.0765,
+   "page_conc_a": 0.8,
+   "pages_a": 494,
+   "page_conc_b": 0.836,
+   "pages_b": 514,
+   "folio_pairs": 703,
+   "folio_agree": 0.001,
+   "cover_a": 0.942,
+   "cover_b": 0.963,
+   "span_a": [
+    37,
+    1135
+   ],
+   "span_b": [
+    37,
+    1215
+   ],
+   "year_a": 1909,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyork1909p1geor",
+   "b": "brooklynnewyorkc1910geor",
+   "sketch_a": 0.0374,
+   "sketch_b": 0.0309,
+   "matched": 4272,
+   "contain_a": 0.0479,
+   "contain_b": 0.043,
+   "page_conc_a": 0.833,
+   "pages_a": 361,
+   "page_conc_b": 0.9,
+   "pages_b": 371,
+   "folio_pairs": 233,
+   "folio_agree": 0.0,
+   "cover_a": 0.938,
+   "cover_b": 0.922,
+   "span_a": [
+    37,
+    1175
+   ],
+   "span_b": [
+    35,
+    1303
+   ],
+   "year_a": 1909,
+   "year_b": 1910,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc00geor",
+   "b": "brooklynnewyorkc1904geor",
+   "sketch_a": 0.0329,
+   "sketch_b": 0.0434,
+   "matched": 8831,
+   "contain_a": 0.0901,
+   "contain_b": 0.1153,
+   "page_conc_a": 0.842,
+   "pages_a": 545,
+   "page_conc_b": 0.75,
+   "pages_b": 475,
+   "folio_pairs": 4610,
+   "folio_agree": 0.0,
+   "cover_a": 0.927,
+   "cover_b": 0.996,
+   "span_a": [
+    13,
+    1241
+   ],
+   "span_b": [
+    9,
+    999
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc00geor",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.1345,
+   "sketch_b": 0.1595,
+   "matched": 21911,
+   "contain_a": 0.2236,
+   "contain_b": 0.2486,
+   "page_conc_a": 0.824,
+   "pages_a": 603,
+   "page_conc_b": 0.743,
+   "pages_b": 548,
+   "folio_pairs": 274,
+   "folio_agree": 0.496,
+   "cover_a": 0.995,
+   "cover_b": 0.981,
+   "span_a": [
+    9,
+    1241
+   ],
+   "span_b": [
+    17,
+    1153
+   ],
+   "year_a": null,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc00geor",
+   "b": "brooklynnewyorkc1907geor",
+   "sketch_a": 0.0992,
+   "sketch_b": 0.1122,
+   "matched": 16348,
+   "contain_a": 0.1669,
+   "contain_b": 0.1909,
+   "page_conc_a": 0.8,
+   "pages_a": 567,
+   "page_conc_b": 0.757,
+   "pages_b": 520,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.933,
+   "cover_b": 0.987,
+   "span_a": [
+    61,
+    1241
+   ],
+   "span_b": [
+    9,
+    1079
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc00geor",
+   "b": "brooklynnewyorkc1908geor",
+   "sketch_a": 0.0961,
+   "sketch_b": 0.1108,
+   "matched": 17149,
+   "contain_a": 0.175,
+   "contain_b": 0.2,
+   "page_conc_a": 0.833,
+   "pages_a": 585,
+   "page_conc_b": 0.772,
+   "pages_b": 540,
+   "folio_pairs": 252,
+   "folio_agree": 0.0,
+   "cover_a": 0.967,
+   "cover_b": 0.984,
+   "span_a": [
+    15,
+    1241
+   ],
+   "span_b": [
+    9,
+    1119
+   ],
+   "year_a": null,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1903geor",
+   "b": "brooklynnewyorkc1904geor",
+   "sketch_a": 0.0703,
+   "sketch_b": 0.0752,
+   "matched": 7823,
+   "contain_a": 0.1031,
+   "contain_b": 0.1021,
+   "page_conc_a": 0.812,
+   "pages_a": 459,
+   "page_conc_b": 0.818,
+   "pages_b": 465,
+   "folio_pairs": 839,
+   "folio_agree": 0.0,
+   "cover_a": 0.97,
+   "cover_b": 0.998,
+   "span_a": [
+    19,
+    1025
+   ],
+   "span_b": [
+    9,
+    999
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1903geor",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.0466,
+   "sketch_b": 0.046,
+   "matched": 6641,
+   "contain_a": 0.0875,
+   "contain_b": 0.0753,
+   "page_conc_a": 0.8,
+   "pages_a": 463,
+   "page_conc_b": 0.818,
+   "pages_b": 487,
+   "folio_pairs": 90,
+   "folio_agree": 0.0,
+   "cover_a": 0.98,
+   "cover_b": 0.921,
+   "span_a": [
+    9,
+    1025
+   ],
+   "span_b": [
+    23,
+    1153
+   ],
+   "year_a": 1903,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1904geor",
+   "b": "brooklynnewyorkc1905geor",
+   "sketch_a": 0.1341,
+   "sketch_b": 0.1186,
+   "matched": 15086,
+   "contain_a": 0.1969,
+   "contain_b": 0.1712,
+   "page_conc_a": 0.776,
+   "pages_a": 482,
+   "page_conc_b": 0.8,
+   "pages_b": 509,
+   "folio_pairs": 4837,
+   "folio_agree": 0.0,
+   "cover_a": 0.996,
+   "cover_b": 0.922,
+   "span_a": [
+    9,
+    999
+   ],
+   "span_b": [
+    9,
+    1153
+   ],
+   "year_a": null,
+   "year_b": 1905,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1905geor",
+   "b": "brooklynnewyorkc19062geor",
+   "sketch_a": 0.0322,
+   "sketch_b": 0.0486,
+   "matched": 5899,
+   "contain_a": 0.0669,
+   "contain_b": 0.1027,
+   "page_conc_a": 0.833,
+   "pages_a": 408,
+   "page_conc_b": 0.838,
+   "pages_b": 411,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.894,
+   "cover_b": 0.867,
+   "span_a": [
+    21,
+    1153
+   ],
+   "span_b": [
+    13,
+    1243
+   ],
+   "year_a": 1905,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1905geor",
+   "b": "brooklynnewyorkc1907geor",
+   "sketch_a": 0.0534,
+   "sketch_b": 0.0528,
+   "matched": 11328,
+   "contain_a": 0.1285,
+   "contain_b": 0.1322,
+   "page_conc_a": 0.783,
+   "pages_a": 512,
+   "page_conc_b": 0.773,
+   "pages_b": 511,
+   "folio_pairs": 138,
+   "folio_agree": 0.0,
+   "cover_a": 0.924,
+   "cover_b": 0.983,
+   "span_a": [
+    33,
+    1153
+   ],
+   "span_b": [
+    9,
+    1079
+   ],
+   "year_a": 1905,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1905geor",
+   "b": "brooklynnewyorkc1908geor",
+   "sketch_a": 0.0542,
+   "sketch_b": 0.0542,
+   "matched": 12356,
+   "contain_a": 0.1402,
+   "contain_b": 0.1441,
+   "page_conc_a": 0.822,
+   "pages_a": 526,
+   "page_conc_b": 0.833,
+   "pages_b": 533,
+   "folio_pairs": 4307,
+   "folio_agree": 0.0,
+   "cover_a": 0.951,
+   "cover_b": 0.98,
+   "span_a": [
+    23,
+    1153
+   ],
+   "span_b": [
+    9,
+    1119
+   ],
+   "year_a": 1905,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc19062geor",
+   "b": "brooklynnewyorkc1908geor",
+   "sketch_a": 0.0311,
+   "sketch_b": 0.0216,
+   "matched": 4762,
+   "contain_a": 0.0829,
+   "contain_b": 0.0555,
+   "page_conc_a": 0.857,
+   "pages_a": 374,
+   "page_conc_b": 0.833,
+   "pages_b": 357,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.841,
+   "cover_b": 0.901,
+   "span_a": [
+    15,
+    1243
+   ],
+   "span_b": [
+    9,
+    1119
+   ],
+   "year_a": 1906,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1907geor",
+   "b": "brooklynnewyorkc1908geor",
+   "sketch_a": 0.1781,
+   "sketch_b": 0.1796,
+   "matched": 21870,
+   "contain_a": 0.2553,
+   "contain_b": 0.255,
+   "page_conc_a": 0.807,
+   "pages_a": 524,
+   "page_conc_b": 0.8,
+   "pages_b": 522,
+   "folio_pairs": 389,
+   "folio_agree": 0.0,
+   "cover_a": 0.989,
+   "cover_b": 0.953,
+   "span_a": [
+    9,
+    1079
+   ],
+   "span_b": [
+    29,
+    1119
+   ],
+   "year_a": null,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1907geor",
+   "b": "brooklynnewyorkc1909geor",
+   "sketch_a": 0.0551,
+   "sketch_b": 0.0486,
+   "matched": 8668,
+   "contain_a": 0.1012,
+   "contain_b": 0.0959,
+   "page_conc_a": 0.789,
+   "pages_a": 492,
+   "page_conc_b": 0.824,
+   "pages_b": 518,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.972,
+   "cover_b": 0.948,
+   "span_a": [
+    9,
+    1079
+   ],
+   "span_b": [
+    35,
+    1165
+   ],
+   "year_a": null,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "brooklynnewyorkc1908geor",
+   "b": "brooklynnewyorkc1909geor",
+   "sketch_a": 0.1033,
+   "sketch_b": 0.0909,
+   "matched": 12492,
+   "contain_a": 0.1457,
+   "contain_b": 0.1383,
+   "page_conc_a": 0.8,
+   "pages_a": 513,
+   "page_conc_b": 0.821,
+   "pages_b": 539,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.966,
+   "cover_b": 0.965,
+   "span_a": [
+    17,
+    1119
+   ],
+   "span_b": [
+    9,
+    1165
+   ],
+   "year_a": 1908,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "doggettsnewyorkc1845dogg",
+   "b": "doggettsnewyorkc1846dogg",
+   "sketch_a": 0.1693,
+   "sketch_b": 0.1542,
+   "matched": 10832,
+   "contain_a": 0.1759,
+   "contain_b": 0.1642,
+   "page_conc_a": 0.737,
+   "pages_a": 396,
+   "page_conc_b": 0.781,
+   "pages_b": 427,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.983,
+   "cover_b": 0.986,
+   "span_a": [
+    16,
+    423
+   ],
+   "span_b": [
+    23,
+    454
+   ],
+   "year_a": 1845,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "doggettsnewyorkc1845dogg",
+   "b": "doggettsnewyorkc1847dogg",
+   "sketch_a": 0.0689,
+   "sketch_b": 0.0605,
+   "matched": 4433,
+   "contain_a": 0.072,
+   "contain_b": 0.0659,
+   "page_conc_a": 0.769,
+   "pages_a": 370,
+   "page_conc_b": 0.842,
+   "pages_b": 391,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.975,
+   "cover_b": 0.982,
+   "span_a": [
+    16,
+    423
+   ],
+   "span_b": [
+    23,
+    467
+   ],
+   "year_a": 1845,
+   "year_b": 1847,
+   "relation": "neighbour"
+  },
+  {
+   "a": "doggettsnewyorkc1845dogg",
+   "b": "doggettsnewyorkc1848dogg",
+   "sketch_a": 0.0482,
+   "sketch_b": 0.0444,
+   "matched": 3230,
+   "contain_a": 0.0525,
+   "contain_b": 0.0478,
+   "page_conc_a": 0.8,
+   "pages_a": 341,
+   "page_conc_b": 0.833,
+   "pages_b": 356,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.973,
+   "cover_b": 0.953,
+   "span_a": [
+    19,
+    423
+   ],
+   "span_b": [
+    25,
+    472
+   ],
+   "year_a": 1845,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "doggettsnewyorkc1846dogg",
+   "b": "doggettsnewyorkc1847dogg",
+   "sketch_a": 0.1586,
+   "sketch_b": 0.152,
+   "matched": 10475,
+   "contain_a": 0.1588,
+   "contain_b": 0.1558,
+   "page_conc_a": 0.8,
+   "pages_a": 423,
+   "page_conc_b": 0.814,
+   "pages_b": 432,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.982,
+   "cover_b": 0.984,
+   "span_a": [
+    23,
+    454
+   ],
+   "span_b": [
+    23,
+    467
+   ],
+   "year_a": null,
+   "year_b": 1847,
+   "relation": "neighbour"
+  },
+  {
+   "a": "doggettsnewyorkc1846dogg",
+   "b": "doggettsnewyorkc1848dogg",
+   "sketch_a": 0.0877,
+   "sketch_b": 0.0881,
+   "matched": 6310,
+   "contain_a": 0.0957,
+   "contain_b": 0.0935,
+   "page_conc_a": 0.733,
+   "pages_a": 422,
+   "page_conc_b": 0.733,
+   "pages_b": 427,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.982,
+   "cover_b": 0.96,
+   "span_a": [
+    23,
+    454
+   ],
+   "span_b": [
+    25,
+    472
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "doggettsnewyorkc1847dogg",
+   "b": "doggettsnewyorkc1848dogg",
+   "sketch_a": 0.1253,
+   "sketch_b": 0.1332,
+   "matched": 9563,
+   "contain_a": 0.1422,
+   "contain_b": 0.1416,
+   "page_conc_a": 0.821,
+   "pages_a": 430,
+   "page_conc_b": 0.818,
+   "pages_b": 430,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.986,
+   "cover_b": 0.962,
+   "span_a": [
+    23,
+    467
+   ],
+   "span_b": [
+    25,
+    472
+   ],
+   "year_a": 1847,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "hearnesbrooklync1850unse",
+   "b": "hearnesbrooklync1852unse",
+   "sketch_a": 0.0821,
+   "sketch_b": 0.0556,
+   "matched": 1354,
+   "contain_a": 0.0913,
+   "contain_b": 0.0674,
+   "page_conc_a": 0.714,
+   "pages_a": 110,
+   "page_conc_b": 0.817,
+   "pages_b": 82,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.958,
+   "cover_b": 0.929,
+   "span_a": [
+    25,
+    418
+   ],
+   "span_b": [
+    27,
+    512
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "hearnesbrooklync1850unse",
+   "b": "micro_IABROOKLYN_0025",
+   "sketch_a": 0.0178,
+   "sketch_b": 0.0325,
+   "matched": 331,
+   "contain_a": 0.0223,
+   "contain_b": 0.0395,
+   "page_conc_a": 0.633,
+   "pages_a": 4,
+   "page_conc_b": 0.6,
+   "pages_b": 4,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.489,
+   "cover_b": 0.57,
+   "span_a": [
+    31,
+    417
+   ],
+   "span_b": [
+    27,
+    343
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "hearnesbrooklync1850unse",
+   "b": "micro_IABROOKLYN_0027",
+   "sketch_a": 0.0506,
+   "sketch_b": 0.0754,
+   "matched": 741,
+   "contain_a": 0.05,
+   "contain_b": 0.078,
+   "page_conc_a": 1.0,
+   "pages_a": 43,
+   "page_conc_b": 0.646,
+   "pages_b": 50,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.713,
+   "cover_b": 0.773,
+   "span_a": [
+    26,
+    418
+   ],
+   "span_b": [
+    19,
+    328
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "hearnesbrooklync1850unse",
+   "b": "micro_IABROOKLYN_0029",
+   "sketch_a": 0.055,
+   "sketch_b": 0.0878,
+   "matched": 866,
+   "contain_a": 0.0584,
+   "contain_b": 0.0921,
+   "page_conc_a": 0.9,
+   "pages_a": 51,
+   "page_conc_b": 0.8,
+   "pages_b": 53,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.737,
+   "cover_b": 0.793,
+   "span_a": [
+    45,
+    418
+   ],
+   "span_b": [
+    48,
+    438
+   ],
+   "year_a": null,
+   "year_b": 1851,
+   "relation": "neighbour"
+  },
+  {
+   "a": "hearnesbrooklync1850unse",
+   "b": "micro_IABROOKLYN_0030",
+   "sketch_a": 0.0389,
+   "sketch_b": 0.0428,
+   "matched": 591,
+   "contain_a": 0.0399,
+   "contain_b": 0.0432,
+   "page_conc_a": 0.8,
+   "pages_a": 20,
+   "page_conc_b": 0.817,
+   "pages_b": 12,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.661,
+   "cover_b": 0.607,
+   "span_a": [
+    28,
+    418
+   ],
+   "span_b": [
+    25,
+    508
+   ],
+   "year_a": null,
+   "year_b": 1852,
+   "relation": "neighbour"
+  },
+  {
+   "a": "hearnesbrooklync1852unse",
+   "b": "micro_IABROOKLYN_0028",
+   "sketch_a": 0.0074,
+   "sketch_b": 0.0429,
+   "matched": 171,
+   "contain_a": 0.0085,
+   "contain_b": 0.0445,
+   "page_conc_a": 0.9,
+   "pages_a": 2,
+   "page_conc_b": 0.9,
+   "pages_b": 2,
+   "folio_pairs": 2,
+   "folio_agree": null,
+   "cover_a": 0.204,
+   "cover_b": 0.423,
+   "span_a": [
+    72,
+    497
+   ],
+   "span_b": [
+    56,
+    395
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "undecided"
+  },
+  {
+   "a": "hearnesbrooklync1852unse",
+   "b": "micro_IABROOKLYN_0029",
+   "sketch_a": 0.0412,
+   "sketch_b": 0.0935,
+   "matched": 894,
+   "contain_a": 0.0445,
+   "contain_b": 0.0951,
+   "page_conc_a": 0.833,
+   "pages_a": 49,
+   "page_conc_b": 0.8,
+   "pages_b": 61,
+   "folio_pairs": 9,
+   "folio_agree": null,
+   "cover_a": 0.688,
+   "cover_b": 0.804,
+   "span_a": [
+    54,
+    512
+   ],
+   "span_b": [
+    48,
+    438
+   ],
+   "year_a": null,
+   "year_b": 1851,
+   "relation": "neighbour"
+  },
+  {
+   "a": "hearnesbrooklync1852unse",
+   "b": "micro_IABROOKLYN_0031",
+   "sketch_a": 0.007,
+   "sketch_b": 0.053,
+   "matched": 193,
+   "contain_a": 0.0096,
+   "contain_b": 0.0528,
+   "page_conc_a": 1.0,
+   "pages_a": 7,
+   "page_conc_b": 0.8,
+   "pages_b": 8,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.17,
+   "cover_b": 0.24,
+   "span_a": [
+    31,
+    498
+   ],
+   "span_b": [
+    25,
+    579
+   ],
+   "year_a": null,
+   "year_b": 1853,
+   "relation": "neighbour"
+  },
+  {
+   "a": "hearnesbrooklync1852unse",
+   "b": "micro_IABROOKLYN_0032",
+   "sketch_a": 0.011,
+   "sketch_b": 0.033,
+   "matched": 257,
+   "contain_a": 0.0128,
+   "contain_b": 0.0363,
+   "page_conc_a": 0.8,
+   "pages_a": 3,
+   "page_conc_b": 0.633,
+   "pages_b": 6,
+   "folio_pairs": 14,
+   "folio_agree": null,
+   "cover_a": 0.297,
+   "cover_b": 0.384,
+   "span_a": [
+    32,
+    508
+   ],
+   "span_b": [
+    21,
+    574
+   ],
+   "year_a": null,
+   "year_b": 1854,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric00newy",
+   "b": "longworthsameric6018long",
+   "sketch_a": 0.0607,
+   "sketch_b": 0.0546,
+   "matched": 2608,
+   "contain_a": 0.0731,
+   "contain_b": 0.0694,
+   "page_conc_a": 0.8,
+   "pages_a": 243,
+   "page_conc_b": 0.8,
+   "pages_b": 242,
+   "folio_pairs": 2604,
+   "folio_agree": 0.202,
+   "cover_a": 0.949,
+   "cover_b": 0.935,
+   "span_a": [
+    56,
+    737
+   ],
+   "span_b": [
+    58,
+    824
+   ],
+   "year_a": 1839,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric00newy",
+   "b": "longworthsameric6118long",
+   "sketch_a": 0.0895,
+   "sketch_b": 0.0867,
+   "matched": 3603,
+   "contain_a": 0.1009,
+   "contain_b": 0.0996,
+   "page_conc_a": 0.8,
+   "pages_a": 415,
+   "page_conc_b": 0.8,
+   "pages_b": 408,
+   "folio_pairs": 3581,
+   "folio_agree": 0.049,
+   "cover_a": 0.994,
+   "cover_b": 0.993,
+   "span_a": [
+    56,
+    737
+   ],
+   "span_b": [
+    42,
+    713
+   ],
+   "year_a": 1839,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric00newy",
+   "b": "longworthsameric6518long",
+   "sketch_a": 0.2853,
+   "sketch_b": 0.298,
+   "matched": 10080,
+   "contain_a": 0.2824,
+   "contain_b": 0.2953,
+   "page_conc_a": 0.75,
+   "pages_a": 677,
+   "page_conc_b": 0.741,
+   "pages_b": 653,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.997,
+   "cover_b": 0.997,
+   "span_a": [
+    56,
+    737
+   ],
+   "span_b": [
+    48,
+    704
+   ],
+   "year_a": 1839,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric1813newy",
+   "b": "longworthsameric3818long",
+   "sketch_a": 0.126,
+   "sketch_b": 0.1618,
+   "matched": 2258,
+   "contain_a": 0.1312,
+   "contain_b": 0.1602,
+   "page_conc_a": 0.857,
+   "pages_a": 258,
+   "page_conc_b": 0.778,
+   "pages_b": 243,
+   "folio_pairs": 2238,
+   "folio_agree": 0.013,
+   "cover_a": 0.992,
+   "cover_b": 0.997,
+   "span_a": [
+    129,
+    839
+   ],
+   "span_b": [
+    61,
+    358
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric1813newy",
+   "b": "longworthsameric4018long",
+   "sketch_a": 0.0317,
+   "sketch_b": 0.0323,
+   "matched": 569,
+   "contain_a": 0.0331,
+   "contain_b": 0.034,
+   "page_conc_a": 0.8,
+   "pages_a": 17,
+   "page_conc_b": 0.929,
+   "pages_b": 16,
+   "folio_pairs": 557,
+   "folio_agree": 0.0,
+   "cover_a": 0.769,
+   "cover_b": 0.775,
+   "span_a": [
+    129,
+    839
+   ],
+   "span_b": [
+    115,
+    463
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric1839newy",
+   "b": "longworthsameric6018long",
+   "sketch_a": 0.06,
+   "sketch_b": 0.0539,
+   "matched": 2575,
+   "contain_a": 0.0722,
+   "contain_b": 0.0685,
+   "page_conc_a": 0.8,
+   "pages_a": 236,
+   "page_conc_b": 0.8,
+   "pages_b": 228,
+   "folio_pairs": 2575,
+   "folio_agree": 0.203,
+   "cover_a": 0.949,
+   "cover_b": 0.938,
+   "span_a": [
+    56,
+    737
+   ],
+   "span_b": [
+    58,
+    824
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric1839newy",
+   "b": "longworthsameric6118long",
+   "sketch_a": 0.0912,
+   "sketch_b": 0.089,
+   "matched": 3552,
+   "contain_a": 0.0996,
+   "contain_b": 0.0982,
+   "page_conc_a": 0.8,
+   "pages_a": 402,
+   "page_conc_b": 0.8,
+   "pages_b": 402,
+   "folio_pairs": 3530,
+   "folio_agree": 0.05,
+   "cover_a": 0.987,
+   "cover_b": 0.987,
+   "span_a": [
+    56,
+    737
+   ],
+   "span_b": [
+    42,
+    713
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric1839newy",
+   "b": "longworthsameric6518long",
+   "sketch_a": 0.2809,
+   "sketch_b": 0.296,
+   "matched": 9970,
+   "contain_a": 0.2795,
+   "contain_b": 0.2921,
+   "page_conc_a": 0.75,
+   "pages_a": 677,
+   "page_conc_b": 0.733,
+   "pages_b": 651,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.994,
+   "cover_b": 0.995,
+   "span_a": [
+    56,
+    737
+   ],
+   "span_b": [
+    48,
+    704
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric3818long",
+   "b": "longworthsameric4018long",
+   "sketch_a": 0.0687,
+   "sketch_b": 0.0574,
+   "matched": 1029,
+   "contain_a": 0.073,
+   "contain_b": 0.0615,
+   "page_conc_a": 0.8,
+   "pages_a": 88,
+   "page_conc_b": 0.833,
+   "pages_b": 75,
+   "folio_pairs": 1024,
+   "folio_agree": 0.0,
+   "cover_a": 0.943,
+   "cover_b": 0.905,
+   "span_a": [
+    61,
+    358
+   ],
+   "span_b": [
+    115,
+    463
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric6018long",
+   "b": "longworthsameric6118long",
+   "sketch_a": 0.2425,
+   "sketch_b": 0.2537,
+   "matched": 9252,
+   "contain_a": 0.2462,
+   "contain_b": 0.2558,
+   "page_conc_a": 0.767,
+   "pages_a": 670,
+   "page_conc_b": 0.75,
+   "pages_b": 652,
+   "folio_pairs": 9197,
+   "folio_agree": 0.064,
+   "cover_a": 0.968,
+   "cover_b": 0.976,
+   "span_a": [
+    58,
+    825
+   ],
+   "span_b": [
+    42,
+    711
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric6018long",
+   "b": "longworthsameric6518long",
+   "sketch_a": 0.0405,
+   "sketch_b": 0.0473,
+   "matched": 1912,
+   "contain_a": 0.0509,
+   "contain_b": 0.056,
+   "page_conc_a": 0.8,
+   "pages_a": 122,
+   "page_conc_b": 0.8,
+   "pages_b": 131,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.877,
+   "cover_b": 0.904,
+   "span_a": [
+    58,
+    824
+   ],
+   "span_b": [
+    48,
+    704
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "longworthsameric6118long",
+   "b": "longworthsameric6518long",
+   "sketch_a": 0.0609,
+   "sketch_b": 0.0664,
+   "matched": 2568,
+   "contain_a": 0.071,
+   "contain_b": 0.0752,
+   "page_conc_a": 0.8,
+   "pages_a": 222,
+   "page_conc_b": 0.8,
+   "pages_b": 247,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.975,
+   "cover_b": 0.964,
+   "span_a": [
+    42,
+    714
+   ],
+   "span_b": [
+    48,
+    706
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0001",
+   "b": "micro_IABROOKLYN_0002",
+   "sketch_a": 0.1351,
+   "sketch_b": 0.1211,
+   "matched": 127,
+   "contain_a": 0.1351,
+   "contain_b": 0.121,
+   "page_conc_a": 0.692,
+   "pages_a": 13,
+   "page_conc_b": 0.875,
+   "pages_b": 13,
+   "folio_pairs": 73,
+   "folio_agree": 0.0,
+   "cover_a": 0.926,
+   "cover_b": 0.875,
+   "span_a": [
+    5,
+    31
+   ],
+   "span_b": [
+    5,
+    35
+   ],
+   "year_a": 1822,
+   "year_b": 1823,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0001",
+   "b": "micro_IABROOKLYN_0003",
+   "sketch_a": 0.0745,
+   "sketch_b": 0.0608,
+   "matched": 70,
+   "contain_a": 0.0745,
+   "contain_b": 0.0607,
+   "page_conc_a": 0.757,
+   "pages_a": 4,
+   "page_conc_b": 0.6,
+   "pages_b": 5,
+   "folio_pairs": 14,
+   "folio_agree": null,
+   "cover_a": 0.852,
+   "cover_b": 0.786,
+   "span_a": [
+    6,
+    31
+   ],
+   "span_b": [
+    6,
+    32
+   ],
+   "year_a": 1822,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0002",
+   "b": "micro_IABROOKLYN_0003",
+   "sketch_a": 0.1173,
+   "sketch_b": 0.1068,
+   "matched": 124,
+   "contain_a": 0.1181,
+   "contain_b": 0.1075,
+   "page_conc_a": 0.8,
+   "pages_a": 13,
+   "page_conc_b": 0.571,
+   "pages_b": 11,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.875,
+   "cover_b": 0.893,
+   "span_a": [
+    5,
+    36
+   ],
+   "span_b": [
+    5,
+    32
+   ],
+   "year_a": 1823,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0002",
+   "b": "micro_IABROOKLYN_0004",
+   "sketch_a": 0.0343,
+   "sketch_b": 0.0264,
+   "matched": 36,
+   "contain_a": 0.0343,
+   "contain_b": 0.0264,
+   "page_conc_a": null,
+   "pages_a": 0,
+   "page_conc_b": null,
+   "pages_b": 0,
+   "folio_pairs": 17,
+   "folio_agree": null,
+   "cover_a": 0.656,
+   "cover_b": 0.667,
+   "span_a": [
+    5,
+    34
+   ],
+   "span_b": [
+    5,
+    40
+   ],
+   "year_a": 1823,
+   "year_b": 1825,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0003",
+   "b": "micro_IABROOKLYN_0004",
+   "sketch_a": 0.0703,
+   "sketch_b": 0.0595,
+   "matched": 81,
+   "contain_a": 0.0703,
+   "contain_b": 0.0594,
+   "page_conc_a": 0.6,
+   "pages_a": 5,
+   "page_conc_b": 0.8,
+   "pages_b": 3,
+   "folio_pairs": 13,
+   "folio_agree": null,
+   "cover_a": 0.893,
+   "cover_b": 0.833,
+   "span_a": [
+    5,
+    33
+   ],
+   "span_b": [
+    5,
+    42
+   ],
+   "year_a": null,
+   "year_b": 1825,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0004",
+   "b": "micro_IABROOKLYN_0005",
+   "sketch_a": 0.1601,
+   "sketch_b": 0.1194,
+   "matched": 218,
+   "contain_a": 0.1599,
+   "contain_b": 0.1193,
+   "page_conc_a": 0.714,
+   "pages_a": 25,
+   "page_conc_b": 0.882,
+   "pages_b": 22,
+   "folio_pairs": 163,
+   "folio_agree": 0.012,
+   "cover_a": 0.972,
+   "cover_b": 0.893,
+   "span_a": [
+    5,
+    42
+   ],
+   "span_b": [
+    5,
+    60
+   ],
+   "year_a": 1825,
+   "year_b": 1826,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0006",
+   "b": "micro_IABROOKLYN_0007",
+   "sketch_a": 0.255,
+   "sketch_b": 0.1941,
+   "matched": 458,
+   "contain_a": 0.2588,
+   "contain_b": 0.1968,
+   "page_conc_a": 0.714,
+   "pages_a": 54,
+   "page_conc_b": 0.833,
+   "pages_b": 55,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 1.0,
+   "cover_b": 0.943,
+   "span_a": [
+    6,
+    66
+   ],
+   "span_b": [
+    6,
+    75
+   ],
+   "year_a": null,
+   "year_b": 1830,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0006",
+   "b": "micro_IABROOKLYN_0008",
+   "sketch_a": 0.0603,
+   "sketch_b": 0.0542,
+   "matched": 109,
+   "contain_a": 0.0616,
+   "contain_b": 0.0555,
+   "page_conc_a": 0.917,
+   "pages_a": 4,
+   "page_conc_b": 0.714,
+   "pages_b": 5,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.746,
+   "cover_b": 0.644,
+   "span_a": [
+    7,
+    66
+   ],
+   "span_b": [
+    8,
+    63
+   ],
+   "year_a": null,
+   "year_b": 1831,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0006",
+   "b": "micro_IABROOKLYN_0009",
+   "sketch_a": 0.0603,
+   "sketch_b": 0.0438,
+   "matched": 113,
+   "contain_a": 0.0638,
+   "contain_b": 0.0463,
+   "page_conc_a": 0.9,
+   "pages_a": 4,
+   "page_conc_b": 1.0,
+   "pages_b": 3,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.831,
+   "cover_b": 0.764,
+   "span_a": [
+    6,
+    66
+   ],
+   "span_b": [
+    6,
+    77
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "undecided"
+  },
+  {
+   "a": "micro_IABROOKLYN_0006",
+   "b": "micro_IABROOKLYN_0010",
+   "sketch_a": 0.0529,
+   "sketch_b": 0.0299,
+   "matched": 104,
+   "contain_a": 0.0588,
+   "contain_b": 0.0342,
+   "page_conc_a": 0.6,
+   "pages_a": 3,
+   "page_conc_b": null,
+   "pages_b": 0,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.78,
+   "cover_b": 0.618,
+   "span_a": [
+    6,
+    66
+   ],
+   "span_b": [
+    6,
+    92
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0007",
+   "b": "micro_IABROOKLYN_0008",
+   "sketch_a": 0.1088,
+   "sketch_b": 0.1283,
+   "matched": 257,
+   "contain_a": 0.1104,
+   "contain_b": 0.1309,
+   "page_conc_a": 1.0,
+   "pages_a": 23,
+   "page_conc_b": 1.0,
+   "pages_b": 24,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.871,
+   "cover_b": 0.932,
+   "span_a": [
+    5,
+    75
+   ],
+   "span_b": [
+    6,
+    64
+   ],
+   "year_a": 1830,
+   "year_b": 1831,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0007",
+   "b": "micro_IABROOKLYN_0009",
+   "sketch_a": 0.0949,
+   "sketch_b": 0.0904,
+   "matched": 234,
+   "contain_a": 0.1006,
+   "contain_b": 0.0958,
+   "page_conc_a": 0.722,
+   "pages_a": 20,
+   "page_conc_b": 0.667,
+   "pages_b": 20,
+   "folio_pairs": 232,
+   "folio_agree": 0.319,
+   "cover_a": 0.929,
+   "cover_b": 0.917,
+   "span_a": [
+    5,
+    75
+   ],
+   "span_b": [
+    5,
+    77
+   ],
+   "year_a": 1830,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0007",
+   "b": "micro_IABROOKLYN_0010",
+   "sketch_a": 0.0702,
+   "sketch_b": 0.0538,
+   "matched": 177,
+   "contain_a": 0.0761,
+   "contain_b": 0.0582,
+   "page_conc_a": 0.817,
+   "pages_a": 10,
+   "page_conc_b": 1.0,
+   "pages_b": 7,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.857,
+   "cover_b": 0.787,
+   "span_a": [
+    6,
+    75
+   ],
+   "span_b": [
+    5,
+    92
+   ],
+   "year_a": 1830,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0008",
+   "b": "micro_IABROOKLYN_0009",
+   "sketch_a": 0.1042,
+   "sketch_b": 0.0842,
+   "matched": 209,
+   "contain_a": 0.1064,
+   "contain_b": 0.0856,
+   "page_conc_a": 0.944,
+   "pages_a": 20,
+   "page_conc_b": 1.0,
+   "pages_b": 16,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.898,
+   "cover_b": 0.847,
+   "span_a": [
+    6,
+    64
+   ],
+   "span_b": [
+    5,
+    77
+   ],
+   "year_a": 1831,
+   "year_b": null,
+   "relation": "undecided"
+  },
+  {
+   "a": "micro_IABROOKLYN_0008",
+   "b": "micro_IABROOKLYN_0010",
+   "sketch_a": 0.0557,
+   "sketch_b": 0.0363,
+   "matched": 115,
+   "contain_a": 0.0586,
+   "contain_b": 0.0378,
+   "page_conc_a": 0.833,
+   "pages_a": 5,
+   "page_conc_b": 1.0,
+   "pages_b": 3,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.763,
+   "cover_b": 0.584,
+   "span_a": [
+    7,
+    63
+   ],
+   "span_b": [
+    5,
+    91
+   ],
+   "year_a": 1831,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0009",
+   "b": "micro_IABROOKLYN_0010",
+   "sketch_a": 0.1813,
+   "sketch_b": 0.145,
+   "matched": 457,
+   "contain_a": 0.1871,
+   "contain_b": 0.1503,
+   "page_conc_a": 0.727,
+   "pages_a": 49,
+   "page_conc_b": 0.8,
+   "pages_b": 51,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.986,
+   "cover_b": 0.966,
+   "span_a": [
+    5,
+    77
+   ],
+   "span_b": [
+    4,
+    93
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0010",
+   "b": "micro_IABROOKLYN_0011",
+   "sketch_a": 0.0333,
+   "sketch_b": 0.038,
+   "matched": 114,
+   "contain_a": 0.0375,
+   "contain_b": 0.0434,
+   "page_conc_a": 0.9,
+   "pages_a": 4,
+   "page_conc_b": 0.9,
+   "pages_b": 4,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.64,
+   "cover_b": 0.776,
+   "span_a": [
+    6,
+    92
+   ],
+   "span_b": [
+    7,
+    91
+   ],
+   "year_a": null,
+   "year_b": 1834,
+   "relation": "undecided"
+  },
+  {
+   "a": "micro_IABROOKLYN_0011",
+   "b": "micro_IABROOKLYN_0012",
+   "sketch_a": 0.1582,
+   "sketch_b": 0.1238,
+   "matched": 428,
+   "contain_a": 0.1629,
+   "contain_b": 0.1278,
+   "page_conc_a": 0.8,
+   "pages_a": 44,
+   "page_conc_b": 0.721,
+   "pages_b": 42,
+   "folio_pairs": 16,
+   "folio_agree": null,
+   "cover_a": 0.974,
+   "cover_b": 0.835,
+   "span_a": [
+    7,
+    91
+   ],
+   "span_b": [
+    16,
+    93
+   ],
+   "year_a": 1834,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0011",
+   "b": "micro_IABROOKLYN_0013",
+   "sketch_a": 0.0403,
+   "sketch_b": 0.0452,
+   "matched": 113,
+   "contain_a": 0.043,
+   "contain_b": 0.0483,
+   "page_conc_a": 0.6,
+   "pages_a": 3,
+   "page_conc_b": 0.6,
+   "pages_b": 5,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.658,
+   "cover_b": 0.6,
+   "span_a": [
+    16,
+    91
+   ],
+   "span_b": [
+    28,
+    97
+   ],
+   "year_a": 1834,
+   "year_b": 1836,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0012",
+   "b": "micro_IABROOKLYN_0013",
+   "sketch_a": 0.0666,
+   "sketch_b": 0.0995,
+   "matched": 243,
+   "contain_a": 0.0726,
+   "contain_b": 0.1039,
+   "page_conc_a": 0.826,
+   "pages_a": 20,
+   "page_conc_b": 1.0,
+   "pages_b": 20,
+   "folio_pairs": 108,
+   "folio_agree": 0.0,
+   "cover_a": 0.747,
+   "cover_b": 0.8,
+   "span_a": [
+    21,
+    93
+   ],
+   "span_b": [
+    23,
+    97
+   ],
+   "year_a": null,
+   "year_b": 1836,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0012",
+   "b": "micro_IABROOKLYN_0014",
+   "sketch_a": 0.0448,
+   "sketch_b": 0.0591,
+   "matched": 164,
+   "contain_a": 0.049,
+   "contain_b": 0.0637,
+   "page_conc_a": 0.667,
+   "pages_a": 5,
+   "page_conc_b": 0.6,
+   "pages_b": 13,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.772,
+   "cover_b": 0.726,
+   "span_a": [
+    15,
+    93
+   ],
+   "span_b": [
+    9,
+    86
+   ],
+   "year_a": null,
+   "year_b": 1837,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0012",
+   "b": "micro_IABROOKLYN_0015",
+   "sketch_a": 0.0323,
+   "sketch_b": 0.0273,
+   "matched": 131,
+   "contain_a": 0.0391,
+   "contain_b": 0.0349,
+   "page_conc_a": 0.817,
+   "pages_a": 6,
+   "page_conc_b": 0.757,
+   "pages_b": 8,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.696,
+   "cover_b": 0.776,
+   "span_a": [
+    15,
+    93
+   ],
+   "span_b": [
+    22,
+    80
+   ],
+   "year_a": null,
+   "year_b": 1838,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0013",
+   "b": "micro_IABROOKLYN_0014",
+   "sketch_a": 0.0582,
+   "sketch_b": 0.0528,
+   "matched": 144,
+   "contain_a": 0.0616,
+   "contain_b": 0.0559,
+   "page_conc_a": 0.885,
+   "pages_a": 10,
+   "page_conc_b": 0.8,
+   "pages_b": 10,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.64,
+   "cover_b": 0.63,
+   "span_a": [
+    23,
+    97
+   ],
+   "span_b": [
+    13,
+    86
+   ],
+   "year_a": 1836,
+   "year_b": 1837,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0014",
+   "b": "micro_IABROOKLYN_0015",
+   "sketch_a": 0.0637,
+   "sketch_b": 0.0455,
+   "matched": 177,
+   "contain_a": 0.0687,
+   "contain_b": 0.0472,
+   "page_conc_a": 1.0,
+   "pages_a": 14,
+   "page_conc_b": 0.833,
+   "pages_b": 16,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.795,
+   "cover_b": 0.845,
+   "span_a": [
+    9,
+    86
+   ],
+   "span_b": [
+    22,
+    80
+   ],
+   "year_a": 1837,
+   "year_b": 1838,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0015",
+   "b": "micro_IABROOKLYN_0016",
+   "sketch_a": 0.034,
+   "sketch_b": 0.0513,
+   "matched": 145,
+   "contain_a": 0.0387,
+   "contain_b": 0.0563,
+   "page_conc_a": 0.6,
+   "pages_a": 11,
+   "page_conc_b": 1.0,
+   "pages_b": 5,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.724,
+   "cover_b": 0.574,
+   "span_a": [
+    29,
+    80
+   ],
+   "span_b": [
+    23,
+    145
+   ],
+   "year_a": 1838,
+   "year_b": 1839,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0016",
+   "b": "micro_IABROOKLYN_0017",
+   "sketch_a": 0.0317,
+   "sketch_b": 0.0292,
+   "matched": 88,
+   "contain_a": 0.0342,
+   "contain_b": 0.0316,
+   "page_conc_a": 0.9,
+   "pages_a": 4,
+   "page_conc_b": 0.857,
+   "pages_b": 3,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.311,
+   "cover_b": 0.339,
+   "span_a": [
+    40,
+    144
+   ],
+   "span_b": [
+    41,
+    142
+   ],
+   "year_a": 1839,
+   "year_b": 1840,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0017",
+   "b": "micro_IABROOKLYN_0018",
+   "sketch_a": 0.0371,
+   "sketch_b": 0.0242,
+   "matched": 113,
+   "contain_a": 0.0405,
+   "contain_b": 0.0237,
+   "page_conc_a": 0.829,
+   "pages_a": 6,
+   "page_conc_b": 1.0,
+   "pages_b": 3,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.435,
+   "cover_b": 0.346,
+   "span_a": [
+    20,
+    143
+   ],
+   "span_b": [
+    25,
+    177
+   ],
+   "year_a": 1840,
+   "year_b": 1841,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0019",
+   "b": "micro_IABROOKLYN_0020",
+   "sketch_a": 0.0657,
+   "sketch_b": 0.0561,
+   "matched": 450,
+   "contain_a": 0.0733,
+   "contain_b": 0.0617,
+   "page_conc_a": 0.75,
+   "pages_a": 37,
+   "page_conc_b": 1.0,
+   "pages_b": 37,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.755,
+   "cover_b": 0.673,
+   "span_a": [
+    17,
+    171
+   ],
+   "span_b": [
+    17,
+    210
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0020",
+   "b": "micro_IABROOKLYN_0023",
+   "sketch_a": 0.0386,
+   "sketch_b": 0.0305,
+   "matched": 337,
+   "contain_a": 0.0462,
+   "contain_b": 0.0362,
+   "page_conc_a": 0.757,
+   "pages_a": 14,
+   "page_conc_b": 1.0,
+   "pages_b": 7,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.694,
+   "cover_b": 0.637,
+   "span_a": [
+    14,
+    211
+   ],
+   "span_b": [
+    21,
+    279
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0023",
+   "b": "micro_IABROOKLYN_0024",
+   "sketch_a": 0.092,
+   "sketch_b": 0.1061,
+   "matched": 869,
+   "contain_a": 0.0934,
+   "contain_b": 0.1091,
+   "page_conc_a": 0.833,
+   "pages_a": 81,
+   "page_conc_b": 0.8,
+   "pages_b": 81,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.836,
+   "cover_b": 0.837,
+   "span_a": [
+    22,
+    279
+   ],
+   "span_b": [
+    24,
+    274
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0024",
+   "b": "micro_IABROOKLYN_0025",
+   "sketch_a": 0.0373,
+   "sketch_b": 0.0352,
+   "matched": 318,
+   "contain_a": 0.0399,
+   "contain_b": 0.0379,
+   "page_conc_a": 0.8,
+   "pages_a": 15,
+   "page_conc_b": 1.0,
+   "pages_b": 9,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.563,
+   "cover_b": 0.508,
+   "span_a": [
+    24,
+    274
+   ],
+   "span_b": [
+    22,
+    344
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0025",
+   "b": "micro_IABROOKLYN_0027",
+   "sketch_a": 0.0439,
+   "sketch_b": 0.0365,
+   "matched": 379,
+   "contain_a": 0.0452,
+   "contain_b": 0.0399,
+   "page_conc_a": 0.8,
+   "pages_a": 17,
+   "page_conc_b": 0.8,
+   "pages_b": 19,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.518,
+   "cover_b": 0.543,
+   "span_a": [
+    28,
+    344
+   ],
+   "span_b": [
+    25,
+    328
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0027",
+   "b": "micro_IABROOKLYN_0028",
+   "sketch_a": 0.0104,
+   "sketch_b": 0.0302,
+   "matched": 128,
+   "contain_a": 0.0135,
+   "contain_b": 0.0333,
+   "page_conc_a": 0.6,
+   "pages_a": 3,
+   "page_conc_b": 1.0,
+   "pages_b": 1,
+   "folio_pairs": 1,
+   "folio_agree": null,
+   "cover_a": 0.234,
+   "cover_b": 0.336,
+   "span_a": [
+    37,
+    327
+   ],
+   "span_b": [
+    41,
+    407
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0028",
+   "b": "micro_IABROOKLYN_0029",
+   "sketch_a": 0.0328,
+   "sketch_b": 0.0164,
+   "matched": 128,
+   "contain_a": 0.0333,
+   "contain_b": 0.0136,
+   "page_conc_a": 1.0,
+   "pages_a": 1,
+   "page_conc_b": 1.0,
+   "pages_b": 1,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.359,
+   "cover_b": 0.227,
+   "span_a": [
+    48,
+    407
+   ],
+   "span_b": [
+    55,
+    437
+   ],
+   "year_a": null,
+   "year_b": 1851,
+   "relation": "undecided"
+  },
+  {
+   "a": "micro_IABROOKLYN_0029",
+   "b": "micro_IABROOKLYN_0030",
+   "sketch_a": 0.0524,
+   "sketch_b": 0.0374,
+   "matched": 507,
+   "contain_a": 0.0539,
+   "contain_b": 0.037,
+   "page_conc_a": 0.875,
+   "pages_a": 27,
+   "page_conc_b": 1.0,
+   "pages_b": 20,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.599,
+   "cover_b": 0.503,
+   "span_a": [
+    48,
+    438
+   ],
+   "span_b": [
+    48,
+    508
+   ],
+   "year_a": 1851,
+   "year_b": 1852,
+   "relation": "neighbour"
+  },
+  {
+   "a": "micro_IABROOKLYN_0030",
+   "b": "micro_IABROOKLYN_0031",
+   "sketch_a": 0.009,
+   "sketch_b": 0.038,
+   "matched": 146,
+   "contain_a": 0.0107,
+   "contain_b": 0.0399,
+   "page_conc_a": 1.0,
+   "pages_a": 8,
+   "page_conc_b": 0.882,
+   "pages_b": 8,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.121,
+   "cover_b": 0.161,
+   "span_a": [
+    29,
+    482
+   ],
+   "span_b": [
+    30,
+    565
+   ],
+   "year_a": 1852,
+   "year_b": 1853,
+   "relation": "neighbour"
+  },
+  {
+   "a": "newyorkbrooklynd00durs",
+   "b": "newyorkdirectory00durs_0",
+   "sketch_a": 0.0819,
+   "sketch_b": 0.082,
+   "matched": 74,
+   "contain_a": 0.083,
+   "contain_b": 0.0831,
+   "page_conc_a": 1.0,
+   "pages_a": 1,
+   "page_conc_b": 1.0,
+   "pages_b": 1,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.879,
+   "cover_b": 0.879,
+   "span_a": [
+    28,
+    60
+   ],
+   "span_b": [
+    30,
+    62
+   ],
+   "year_a": null,
+   "year_b": 1786,
+   "relation": "undecided"
+  },
+  {
+   "a": "newyorkbrooklynd00durs",
+   "b": "newyorkdirectory00fran",
+   "sketch_a": 0.2379,
+   "sketch_b": 0.2374,
+   "matched": 212,
+   "contain_a": 0.2377,
+   "contain_b": 0.2374,
+   "page_conc_a": 1.0,
+   "pages_a": 22,
+   "page_conc_b": 1.0,
+   "pages_b": 22,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 1.0,
+   "cover_b": 1.0,
+   "span_a": [
+    28,
+    60
+   ],
+   "span_b": [
+    52,
+    84
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "undecided"
+  },
+  {
+   "a": "newyorkbrooklynd00durs",
+   "b": "newyorkdirectory00fran_0",
+   "sketch_a": 0.2424,
+   "sketch_b": 0.2422,
+   "matched": 216,
+   "contain_a": 0.2422,
+   "contain_b": 0.2422,
+   "page_conc_a": 1.0,
+   "pages_a": 23,
+   "page_conc_b": 1.0,
+   "pages_b": 23,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.97,
+   "cover_b": 0.97,
+   "span_a": [
+    29,
+    60
+   ],
+   "span_b": [
+    57,
+    88
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "undecided"
+  },
+  {
+   "a": "newyorkdirectory00durs_0",
+   "b": "newyorkdirectory00fran",
+   "sketch_a": 0.0506,
+   "sketch_b": 0.0504,
+   "matched": 45,
+   "contain_a": 0.0505,
+   "contain_b": 0.0504,
+   "page_conc_a": null,
+   "pages_a": 0,
+   "page_conc_b": null,
+   "pages_b": 0,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.667,
+   "cover_b": 0.667,
+   "span_a": [
+    31,
+    62
+   ],
+   "span_b": [
+    53,
+    84
+   ],
+   "year_a": 1786,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "newyorkdirectory00durs_0",
+   "b": "newyorkdirectory00fran_0",
+   "sketch_a": 0.0461,
+   "sketch_b": 0.046,
+   "matched": 41,
+   "contain_a": 0.046,
+   "contain_b": 0.046,
+   "page_conc_a": null,
+   "pages_a": 0,
+   "page_conc_b": null,
+   "pages_b": 0,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.667,
+   "cover_b": 0.667,
+   "span_a": [
+    31,
+    62
+   ],
+   "span_b": [
+    57,
+    88
+   ],
+   "year_a": 1786,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p1trow",
+   "b": "trowsgeneraldir1904p1trow",
+   "sketch_a": 0.1011,
+   "sketch_b": 0.109,
+   "matched": 17406,
+   "contain_a": 0.1173,
+   "contain_b": 0.1204,
+   "page_conc_a": 0.793,
+   "pages_a": 561,
+   "page_conc_b": 0.731,
+   "pages_b": 511,
+   "folio_pairs": 10306,
+   "folio_agree": 0.0,
+   "cover_a": 0.998,
+   "cover_b": 0.972,
+   "span_a": [
+    23,
+    1155
+   ],
+   "span_b": [
+    139,
+    1191
+   ],
+   "year_a": 1903,
+   "year_b": 1904,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p1trow",
+   "b": "trowsgeneraldir1905p1trow",
+   "sketch_a": 0.0727,
+   "sketch_b": 0.0762,
+   "matched": 11888,
+   "contain_a": 0.0801,
+   "contain_b": 0.0823,
+   "page_conc_a": 0.737,
+   "pages_a": 549,
+   "page_conc_b": 0.734,
+   "pages_b": 532,
+   "folio_pairs": 10706,
+   "folio_agree": 0.033,
+   "cover_a": 0.98,
+   "cover_b": 0.994,
+   "span_a": [
+    23,
+    1139
+   ],
+   "span_b": [
+    117,
+    1189
+   ],
+   "year_a": 1903,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p1trow",
+   "b": "trowsgeneraldir1906p1trow",
+   "sketch_a": 0.0388,
+   "sketch_b": 0.0426,
+   "matched": 6879,
+   "contain_a": 0.0464,
+   "contain_b": 0.0492,
+   "page_conc_a": 0.778,
+   "pages_a": 506,
+   "page_conc_b": 0.795,
+   "pages_b": 510,
+   "folio_pairs": 2509,
+   "folio_agree": 0.003,
+   "cover_a": 0.92,
+   "cover_b": 0.981,
+   "span_a": [
+    23,
+    1135
+   ],
+   "span_b": [
+    107,
+    1165
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p2trow",
+   "b": "trowsgeneraldir1904p2trow",
+   "sketch_a": 0.1087,
+   "sketch_b": 0.1082,
+   "matched": 16111,
+   "contain_a": 0.1063,
+   "contain_b": 0.1038,
+   "page_conc_a": 0.825,
+   "pages_a": 558,
+   "page_conc_b": 0.769,
+   "pages_b": 506,
+   "folio_pairs": 14914,
+   "folio_agree": 0.0,
+   "cover_a": 0.972,
+   "cover_b": 0.92,
+   "span_a": [
+    17,
+    1163
+   ],
+   "span_b": [
+    9,
+    1123
+   ],
+   "year_a": 1903,
+   "year_b": 1904,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p2trow",
+   "b": "trowsgeneraldir1905p2trow",
+   "sketch_a": 0.0518,
+   "sketch_b": 0.0556,
+   "matched": 8070,
+   "contain_a": 0.0532,
+   "contain_b": 0.0543,
+   "page_conc_a": 0.769,
+   "pages_a": 540,
+   "page_conc_b": 0.75,
+   "pages_b": 519,
+   "folio_pairs": 5427,
+   "folio_agree": 0.0,
+   "cover_a": 0.964,
+   "cover_b": 0.969,
+   "span_a": [
+    9,
+    1131
+   ],
+   "span_b": [
+    17,
+    1107
+   ],
+   "year_a": 1903,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p2trow",
+   "b": "trowsgeneraldir1906p2trow",
+   "sketch_a": 0.0365,
+   "sketch_b": 0.0348,
+   "matched": 6472,
+   "contain_a": 0.0427,
+   "contain_b": 0.0406,
+   "page_conc_a": 0.791,
+   "pages_a": 516,
+   "page_conc_b": 0.8,
+   "pages_b": 523,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.912,
+   "cover_b": 0.919,
+   "span_a": [
+    9,
+    1147
+   ],
+   "span_b": [
+    15,
+    1191
+   ],
+   "year_a": 1903,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p3trow",
+   "b": "trowsgeneraldir1904p3trow",
+   "sketch_a": 0.075,
+   "sketch_b": 0.0866,
+   "matched": 7894,
+   "contain_a": 0.0752,
+   "contain_b": 0.0918,
+   "page_conc_a": 0.808,
+   "pages_a": 345,
+   "page_conc_b": 0.75,
+   "pages_b": 314,
+   "folio_pairs": 7302,
+   "folio_agree": 0.0,
+   "cover_a": 0.868,
+   "cover_b": 1.0,
+   "span_a": [
+    29,
+    803
+   ],
+   "span_b": [
+    9,
+    635
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p3trow",
+   "b": "trowsgeneraldir1905p3trow",
+   "sketch_a": 0.0804,
+   "sketch_b": 0.074,
+   "matched": 8357,
+   "contain_a": 0.0796,
+   "contain_b": 0.0776,
+   "page_conc_a": 0.793,
+   "pages_a": 399,
+   "page_conc_b": 0.778,
+   "pages_b": 383,
+   "folio_pairs": 1602,
+   "folio_agree": 0.0,
+   "cover_a": 0.998,
+   "cover_b": 0.968,
+   "span_a": [
+    7,
+    803
+   ],
+   "span_b": [
+    15,
+    809
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1903p3trow",
+   "b": "trowsgeneraldir1906p3trow",
+   "sketch_a": 0.0536,
+   "sketch_b": 0.0425,
+   "matched": 5879,
+   "contain_a": 0.056,
+   "contain_b": 0.0483,
+   "page_conc_a": 0.769,
+   "pages_a": 398,
+   "page_conc_b": 0.769,
+   "pages_b": 402,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.998,
+   "cover_b": 0.899,
+   "span_a": [
+    7,
+    803
+   ],
+   "span_b": [
+    59,
+    915
+   ],
+   "year_a": 1903,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p1trow",
+   "b": "trowsgeneraldir1905p1trow",
+   "sketch_a": 0.2035,
+   "sketch_b": 0.202,
+   "matched": 29599,
+   "contain_a": 0.2047,
+   "contain_b": 0.2049,
+   "page_conc_a": 0.75,
+   "pages_a": 503,
+   "page_conc_b": 0.784,
+   "pages_b": 534,
+   "folio_pairs": 18426,
+   "folio_agree": 0.019,
+   "cover_a": 0.958,
+   "cover_b": 1.0,
+   "span_a": [
+    137,
+    1177
+   ],
+   "span_b": [
+    115,
+    1189
+   ],
+   "year_a": 1904,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p1trow",
+   "b": "trowsgeneraldir1906p1trow",
+   "sketch_a": 0.0959,
+   "sketch_b": 0.0987,
+   "matched": 14783,
+   "contain_a": 0.1023,
+   "contain_b": 0.1058,
+   "page_conc_a": 0.778,
+   "pages_a": 468,
+   "page_conc_b": 0.833,
+   "pages_b": 521,
+   "folio_pairs": 4922,
+   "folio_agree": 0.009,
+   "cover_a": 0.902,
+   "cover_b": 0.985,
+   "span_a": [
+    139,
+    1157
+   ],
+   "span_b": [
+    107,
+    1165
+   ],
+   "year_a": 1904,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p1trow",
+   "b": "trowsgeneraldir1907p1trow",
+   "sketch_a": 0.0456,
+   "sketch_b": 0.0442,
+   "matched": 6694,
+   "contain_a": 0.0463,
+   "contain_b": 0.0451,
+   "page_conc_a": 0.75,
+   "pages_a": 452,
+   "page_conc_b": 0.85,
+   "pages_b": 520,
+   "folio_pairs": 770,
+   "folio_agree": 0.062,
+   "cover_a": 0.885,
+   "cover_b": 0.987,
+   "span_a": [
+    137,
+    1177
+   ],
+   "span_b": [
+    105,
+    1223
+   ],
+   "year_a": 1904,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p2trow",
+   "b": "trowsgeneraldir1905p2trow",
+   "sketch_a": 0.142,
+   "sketch_b": 0.1596,
+   "matched": 23424,
+   "contain_a": 0.1509,
+   "contain_b": 0.1576,
+   "page_conc_a": 0.805,
+   "pages_a": 492,
+   "page_conc_b": 0.846,
+   "pages_b": 519,
+   "folio_pairs": 15000,
+   "folio_agree": 0.0,
+   "cover_a": 0.885,
+   "cover_b": 0.955,
+   "span_a": [
+    9,
+    1127
+   ],
+   "span_b": [
+    23,
+    1107
+   ],
+   "year_a": 1904,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p2trow",
+   "b": "trowsgeneraldir1905p3trow",
+   "sketch_a": 0.0231,
+   "sketch_b": 0.0305,
+   "matched": 3475,
+   "contain_a": 0.0224,
+   "contain_b": 0.0323,
+   "page_conc_a": 0.814,
+   "pages_a": 64,
+   "page_conc_b": 0.847,
+   "pages_b": 68,
+   "folio_pairs": 2909,
+   "folio_agree": 0.0,
+   "cover_a": 0.222,
+   "cover_b": 0.319,
+   "span_a": [
+    9,
+    1137
+   ],
+   "span_b": [
+    9,
+    789
+   ],
+   "year_a": 1904,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p2trow",
+   "b": "trowsgeneraldir1906p2trow",
+   "sketch_a": 0.1025,
+   "sketch_b": 0.1004,
+   "matched": 16150,
+   "contain_a": 0.1041,
+   "contain_b": 0.1013,
+   "page_conc_a": 0.747,
+   "pages_a": 464,
+   "page_conc_b": 0.828,
+   "pages_b": 522,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.848,
+   "cover_b": 0.908,
+   "span_a": [
+    9,
+    1111
+   ],
+   "span_b": [
+    19,
+    1191
+   ],
+   "year_a": 1904,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p2trow",
+   "b": "trowsgeneraldir1907p2trow",
+   "sketch_a": 0.0369,
+   "sketch_b": 0.0331,
+   "matched": 6228,
+   "contain_a": 0.0401,
+   "contain_b": 0.035,
+   "page_conc_a": 0.736,
+   "pages_a": 470,
+   "page_conc_b": 0.833,
+   "pages_b": 528,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.885,
+   "cover_b": 0.894,
+   "span_a": [
+    9,
+    1109
+   ],
+   "span_b": [
+    9,
+    1341
+   ],
+   "year_a": 1904,
+   "year_b": 1907,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p2trow",
+   "b": "trowsgeneraldire19032trow",
+   "sketch_a": 0.0302,
+   "sketch_b": 0.0317,
+   "matched": 4137,
+   "contain_a": 0.0267,
+   "contain_b": 0.0279,
+   "page_conc_a": 0.788,
+   "pages_a": 396,
+   "page_conc_b": 0.833,
+   "pages_b": 401,
+   "folio_pairs": 1590,
+   "folio_agree": 0.0,
+   "cover_a": 0.904,
+   "cover_b": 0.96,
+   "span_a": [
+    9,
+    1119
+   ],
+   "span_b": [
+    35,
+    1163
+   ],
+   "year_a": 1904,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p3trow",
+   "b": "trowsgeneraldir1905p3trow",
+   "sketch_a": 0.1411,
+   "sketch_b": 0.1139,
+   "matched": 12928,
+   "contain_a": 0.1504,
+   "contain_b": 0.1201,
+   "page_conc_a": 0.733,
+   "pages_a": 314,
+   "page_conc_b": 0.768,
+   "pages_b": 330,
+   "folio_pairs": 933,
+   "folio_agree": 0.0,
+   "cover_a": 1.0,
+   "cover_b": 0.84,
+   "span_a": [
+    9,
+    635
+   ],
+   "span_b": [
+    19,
+    809
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1904p3trow",
+   "b": "trowsgeneraldir1906p3trow",
+   "sketch_a": 0.0886,
+   "sketch_b": 0.063,
+   "matched": 7643,
+   "contain_a": 0.0889,
+   "contain_b": 0.0628,
+   "page_conc_a": 0.75,
+   "pages_a": 314,
+   "page_conc_b": 0.81,
+   "pages_b": 349,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 1.0,
+   "cover_b": 0.774,
+   "span_a": [
+    9,
+    635
+   ],
+   "span_b": [
+    109,
+    917
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1905p1trow",
+   "b": "trowsgeneraldir1906p1trow",
+   "sketch_a": 0.1775,
+   "sketch_b": 0.1833,
+   "matched": 25138,
+   "contain_a": 0.174,
+   "contain_b": 0.1798,
+   "page_conc_a": 0.778,
+   "pages_a": 495,
+   "page_conc_b": 0.794,
+   "pages_b": 518,
+   "folio_pairs": 9811,
+   "folio_agree": 0.027,
+   "cover_a": 0.935,
+   "cover_b": 0.985,
+   "span_a": [
+    115,
+    1145
+   ],
+   "span_b": [
+    107,
+    1165
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1905p1trow",
+   "b": "trowsgeneraldir1907p1trow",
+   "sketch_a": 0.0688,
+   "sketch_b": 0.0677,
+   "matched": 10746,
+   "contain_a": 0.0744,
+   "contain_b": 0.0725,
+   "page_conc_a": 0.75,
+   "pages_a": 491,
+   "page_conc_b": 0.8,
+   "pages_b": 545,
+   "folio_pairs": 1497,
+   "folio_agree": 0.065,
+   "cover_a": 0.925,
+   "cover_b": 0.986,
+   "span_a": [
+    117,
+    1173
+   ],
+   "span_b": [
+    105,
+    1223
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1905p1trow",
+   "b": "trowsgeneraldir1908p1trow",
+   "sketch_a": 0.0312,
+   "sketch_b": 0.0388,
+   "matched": 5572,
+   "contain_a": 0.0386,
+   "contain_b": 0.0444,
+   "page_conc_a": 0.722,
+   "pages_a": 381,
+   "page_conc_b": 0.846,
+   "pages_b": 450,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.737,
+   "cover_b": 0.992,
+   "span_a": [
+    115,
+    1159
+   ],
+   "span_b": [
+    111,
+    1059
+   ],
+   "year_a": 1906,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1905p2trow",
+   "b": "trowsgeneraldir1906p2trow",
+   "sketch_a": 0.1396,
+   "sketch_b": 0.1235,
+   "matched": 20224,
+   "contain_a": 0.1361,
+   "contain_b": 0.1269,
+   "page_conc_a": 0.78,
+   "pages_a": 512,
+   "page_conc_b": 0.8,
+   "pages_b": 542,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.935,
+   "cover_b": 0.929,
+   "span_a": [
+    9,
+    1067
+   ],
+   "span_b": [
+    21,
+    1191
+   ],
+   "year_a": 1906,
+   "year_b": 1906,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1905p2trow",
+   "b": "trowsgeneraldir1907p2trow",
+   "sketch_a": 0.0522,
+   "sketch_b": 0.0388,
+   "matched": 7239,
+   "contain_a": 0.0487,
+   "contain_b": 0.0407,
+   "page_conc_a": 0.778,
+   "pages_a": 511,
+   "page_conc_b": 0.857,
+   "pages_b": 562,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.982,
+   "cover_b": 0.923,
+   "span_a": [
+    9,
+    1103
+   ],
+   "span_b": [
+    9,
+    1341
+   ],
+   "year_a": 1906,
+   "year_b": 1907,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1905p3trow",
+   "b": "trowsgeneraldir1906p3trow",
+   "sketch_a": 0.1896,
+   "sketch_b": 0.1678,
+   "matched": 20653,
+   "contain_a": 0.1918,
+   "contain_b": 0.1697,
+   "page_conc_a": 0.755,
+   "pages_a": 399,
+   "page_conc_b": 0.786,
+   "pages_b": 421,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.998,
+   "cover_b": 0.941,
+   "span_a": [
+    9,
+    809
+   ],
+   "span_b": [
+    27,
+    917
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1905p3trow",
+   "b": "trowsgeneraldir1908p4trow",
+   "sketch_a": 0.0442,
+   "sketch_b": 0.0522,
+   "matched": 5122,
+   "contain_a": 0.0476,
+   "contain_b": 0.0563,
+   "page_conc_a": 0.732,
+   "pages_a": 280,
+   "page_conc_b": 0.864,
+   "pages_b": 341,
+   "folio_pairs": 5,
+   "folio_agree": null,
+   "cover_a": 0.718,
+   "cover_b": 0.994,
+   "span_a": [
+    9,
+    809
+   ],
+   "span_b": [
+    11,
+    707
+   ],
+   "year_a": null,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1906p1trow",
+   "b": "trowsgeneraldir1907p1trow",
+   "sketch_a": 0.1172,
+   "sketch_b": 0.1126,
+   "matched": 17024,
+   "contain_a": 0.1218,
+   "contain_b": 0.1148,
+   "page_conc_a": 0.786,
+   "pages_a": 514,
+   "page_conc_b": 0.817,
+   "pages_b": 548,
+   "folio_pairs": 1973,
+   "folio_agree": 0.09,
+   "cover_a": 0.979,
+   "cover_b": 0.987,
+   "span_a": [
+    105,
+    1159
+   ],
+   "span_b": [
+    105,
+    1223
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1906p1trow",
+   "b": "trowsgeneraldir1908p1trow",
+   "sketch_a": 0.0584,
+   "sketch_b": 0.0646,
+   "matched": 7996,
+   "contain_a": 0.0572,
+   "contain_b": 0.0637,
+   "page_conc_a": 0.75,
+   "pages_a": 402,
+   "page_conc_b": 0.867,
+   "pages_b": 466,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.786,
+   "cover_b": 0.992,
+   "span_a": [
+    105,
+    1165
+   ],
+   "span_b": [
+    111,
+    1059
+   ],
+   "year_a": null,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1906p1trow",
+   "b": "trowsgeneraldir1909p1trow",
+   "sketch_a": 0.0339,
+   "sketch_b": 0.0295,
+   "matched": 4879,
+   "contain_a": 0.0349,
+   "contain_b": 0.0291,
+   "page_conc_a": 0.8,
+   "pages_a": 463,
+   "page_conc_b": 0.8,
+   "pages_b": 470,
+   "folio_pairs": 849,
+   "folio_agree": 0.001,
+   "cover_a": 0.983,
+   "cover_b": 0.926,
+   "span_a": [
+    105,
+    1165
+   ],
+   "span_b": [
+    97,
+    1251
+   ],
+   "year_a": null,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1906p2trow",
+   "b": "trowsgeneraldir1907p2trow",
+   "sketch_a": 0.0984,
+   "sketch_b": 0.0856,
+   "matched": 16475,
+   "contain_a": 0.1034,
+   "contain_b": 0.0926,
+   "page_conc_a": 0.78,
+   "pages_a": 588,
+   "page_conc_b": 0.815,
+   "pages_b": 623,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 1.0,
+   "cover_b": 0.95,
+   "span_a": [
+    9,
+    1191
+   ],
+   "span_b": [
+    9,
+    1299
+   ],
+   "year_a": 1906,
+   "year_b": 1907,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1906p2trow",
+   "b": "trowsgeneraldir1909p2trow",
+   "sketch_a": 0.0318,
+   "sketch_b": 0.0274,
+   "matched": 5861,
+   "contain_a": 0.0368,
+   "contain_b": 0.0339,
+   "page_conc_a": 0.788,
+   "pages_a": 516,
+   "page_conc_b": 0.778,
+   "pages_b": 522,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.937,
+   "cover_b": 0.944,
+   "span_a": [
+    15,
+    1191
+   ],
+   "span_b": [
+    11,
+    1163
+   ],
+   "year_a": 1906,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1906p3trow",
+   "b": "trowsgeneraldir1908p4trow",
+   "sketch_a": 0.0606,
+   "sketch_b": 0.0829,
+   "matched": 8036,
+   "contain_a": 0.066,
+   "contain_b": 0.0884,
+   "page_conc_a": 0.706,
+   "pages_a": 296,
+   "page_conc_b": 0.806,
+   "pages_b": 344,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.664,
+   "cover_b": 0.994,
+   "span_a": [
+    119,
+    917
+   ],
+   "span_b": [
+    11,
+    707
+   ],
+   "year_a": null,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1907p1trow",
+   "b": "trowsgeneraldir1908p1trow",
+   "sketch_a": 0.07,
+   "sketch_b": 0.0817,
+   "matched": 10329,
+   "contain_a": 0.0696,
+   "contain_b": 0.0823,
+   "page_conc_a": 0.744,
+   "pages_a": 425,
+   "page_conc_b": 0.808,
+   "pages_b": 467,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.781,
+   "cover_b": 0.989,
+   "span_a": [
+    103,
+    1215
+   ],
+   "span_b": [
+    111,
+    1059
+   ],
+   "year_a": null,
+   "year_b": 1908,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1907p1trow",
+   "b": "trowsgeneraldir1909p1trow",
+   "sketch_a": 0.0392,
+   "sketch_b": 0.0352,
+   "matched": 5214,
+   "contain_a": 0.0352,
+   "contain_b": 0.0311,
+   "page_conc_a": 0.846,
+   "pages_a": 473,
+   "page_conc_b": 0.833,
+   "pages_b": 460,
+   "folio_pairs": 2,
+   "folio_agree": null,
+   "cover_a": 0.984,
+   "cover_b": 0.921,
+   "span_a": [
+    103,
+    1223
+   ],
+   "span_b": [
+    95,
+    1251
+   ],
+   "year_a": null,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1908p1trow",
+   "b": "trowsgeneraldir1909p1trow",
+   "sketch_a": 0.0639,
+   "sketch_b": 0.0459,
+   "matched": 7025,
+   "contain_a": 0.056,
+   "contain_b": 0.0419,
+   "page_conc_a": 0.833,
+   "pages_a": 465,
+   "page_conc_b": 0.75,
+   "pages_b": 407,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.996,
+   "cover_b": 0.731,
+   "span_a": [
+    107,
+    1059
+   ],
+   "span_b": [
+    97,
+    1241
+   ],
+   "year_a": 1908,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1908p4trow",
+   "b": "trowsgeneraldir1909p3trow",
+   "sketch_a": 0.0619,
+   "sketch_b": 0.0455,
+   "matched": 5566,
+   "contain_a": 0.0612,
+   "contain_b": 0.0464,
+   "page_conc_a": 0.842,
+   "pages_a": 342,
+   "page_conc_b": 0.75,
+   "pages_b": 300,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.994,
+   "cover_b": 0.723,
+   "span_a": [
+    11,
+    707
+   ],
+   "span_b": [
+    79,
+    863
+   ],
+   "year_a": 1908,
+   "year_b": 1909,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1910p1trow",
+   "b": "trowsgeneraldir1911p1trow",
+   "sketch_a": 0.1332,
+   "sketch_b": 0.1232,
+   "matched": 23227,
+   "contain_a": 0.1381,
+   "contain_b": 0.1273,
+   "page_conc_a": 0.792,
+   "pages_a": 546,
+   "page_conc_b": 0.794,
+   "pages_b": 548,
+   "folio_pairs": 17834,
+   "folio_agree": 0.02,
+   "cover_a": 0.991,
+   "cover_b": 0.939,
+   "span_a": [
+    63,
+    1167
+   ],
+   "span_b": [
+    57,
+    1217
+   ],
+   "year_a": null,
+   "year_b": 1911,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1910p1trow",
+   "b": "trowsgeneraldir1912p1trow",
+   "sketch_a": 0.0509,
+   "sketch_b": 0.0445,
+   "matched": 8972,
+   "contain_a": 0.0533,
+   "contain_b": 0.0465,
+   "page_conc_a": 0.772,
+   "pages_a": 542,
+   "page_conc_b": 0.805,
+   "pages_b": 580,
+   "folio_pairs": 840,
+   "folio_agree": 0.0,
+   "cover_a": 0.991,
+   "cover_b": 0.926,
+   "span_a": [
+    63,
+    1167
+   ],
+   "span_b": [
+    49,
+    1261
+   ],
+   "year_a": null,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1910p2trow",
+   "b": "trowsgeneraldir1911p2trow",
+   "sketch_a": 0.1198,
+   "sketch_b": 0.1061,
+   "matched": 20190,
+   "contain_a": 0.1162,
+   "contain_b": 0.1067,
+   "page_conc_a": 0.739,
+   "pages_a": 535,
+   "page_conc_b": 0.75,
+   "pages_b": 546,
+   "folio_pairs": 10156,
+   "folio_agree": 0.044,
+   "cover_a": 0.939,
+   "cover_b": 0.912,
+   "span_a": [
+    55,
+    1157
+   ],
+   "span_b": [
+    9,
+    1207
+   ],
+   "year_a": 1910,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1910p2trow",
+   "b": "trowsgeneraldir1912p2trow",
+   "sketch_a": 0.0385,
+   "sketch_b": 0.0331,
+   "matched": 6633,
+   "contain_a": 0.0382,
+   "contain_b": 0.035,
+   "page_conc_a": 0.782,
+   "pages_a": 500,
+   "page_conc_b": 0.818,
+   "pages_b": 517,
+   "folio_pairs": 1259,
+   "folio_agree": 0.0,
+   "cover_a": 0.916,
+   "cover_b": 0.888,
+   "span_a": [
+    51,
+    1157
+   ],
+   "span_b": [
+    7,
+    1247
+   ],
+   "year_a": 1910,
+   "year_b": 1912,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1910p3trow",
+   "b": "trowsgeneraldir1911p3trow",
+   "sketch_a": 0.0996,
+   "sketch_b": 0.1047,
+   "matched": 14631,
+   "contain_a": 0.0982,
+   "contain_b": 0.1069,
+   "page_conc_a": 0.778,
+   "pages_a": 430,
+   "page_conc_b": 0.781,
+   "pages_b": 439,
+   "folio_pairs": 510,
+   "folio_agree": 0.0,
+   "cover_a": 0.895,
+   "cover_b": 1.0,
+   "span_a": [
+    31,
+    983
+   ],
+   "span_b": [
+    9,
+    889
+   ],
+   "year_a": 1910,
+   "year_b": 1911,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1910p3trow",
+   "b": "trowsgeneraldir1912p3trow",
+   "sketch_a": 0.0401,
+   "sketch_b": 0.0408,
+   "matched": 5419,
+   "contain_a": 0.0364,
+   "contain_b": 0.0395,
+   "page_conc_a": 0.769,
+   "pages_a": 401,
+   "page_conc_b": 0.833,
+   "pages_b": 429,
+   "folio_pairs": 457,
+   "folio_agree": 0.0,
+   "cover_a": 0.889,
+   "cover_b": 0.98,
+   "span_a": [
+    31,
+    983
+   ],
+   "span_b": [
+    9,
+    935
+   ],
+   "year_a": 1910,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1911p1trow",
+   "b": "trowsgeneraldir1912p1trow",
+   "sketch_a": 0.082,
+   "sketch_b": 0.0759,
+   "matched": 15651,
+   "contain_a": 0.0858,
+   "contain_b": 0.0812,
+   "page_conc_a": 0.773,
+   "pages_a": 586,
+   "page_conc_b": 0.8,
+   "pages_b": 624,
+   "folio_pairs": 1260,
+   "folio_agree": 0.0,
+   "cover_a": 0.997,
+   "cover_b": 0.987,
+   "span_a": [
+    53,
+    1233
+   ],
+   "span_b": [
+    47,
+    1295
+   ],
+   "year_a": 1911,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1911p2trow",
+   "b": "trowsgeneraldir1912p2trow",
+   "sketch_a": 0.0683,
+   "sketch_b": 0.0682,
+   "matched": 12983,
+   "contain_a": 0.0686,
+   "contain_b": 0.0686,
+   "page_conc_a": 0.769,
+   "pages_a": 585,
+   "page_conc_b": 0.793,
+   "pages_b": 616,
+   "folio_pairs": 2131,
+   "folio_agree": 0.0,
+   "cover_a": 0.99,
+   "cover_b": 0.983,
+   "span_a": [
+    9,
+    1217
+   ],
+   "span_b": [
+    7,
+    1275
+   ],
+   "year_a": null,
+   "year_b": 1912,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1911p3trow",
+   "b": "trowsgeneraldir1912p3trow",
+   "sketch_a": 0.0829,
+   "sketch_b": 0.0819,
+   "matched": 10035,
+   "contain_a": 0.0733,
+   "contain_b": 0.0732,
+   "page_conc_a": 0.809,
+   "pages_a": 435,
+   "page_conc_b": 0.818,
+   "pages_b": 449,
+   "folio_pairs": 116,
+   "folio_agree": 0.0,
+   "cover_a": 0.995,
+   "cover_b": 0.98,
+   "span_a": [
+    11,
+    889
+   ],
+   "span_b": [
+    9,
+    935
+   ],
+   "year_a": 1911,
+   "year_b": null,
+   "relation": "neighbour"
+  },
+  {
+   "a": "trowsgeneraldir1912p1trow",
+   "b": "trowsgeneraldir1914p1trow",
+   "sketch_a": 0.0335,
+   "sketch_b": 0.0354,
+   "matched": 6253,
+   "contain_a": 0.0324,
+   "contain_b": 0.0348,
+   "page_conc_a": 0.857,
+   "pages_a": 550,
+   "page_conc_b": 0.733,
+   "pages_b": 478,
+   "folio_pairs": 0,
+   "folio_agree": null,
+   "cover_a": 0.968,
+   "cover_b": 0.994,
+   "span_a": [
+    41,
+    1273
+   ],
+   "span_b": [
+    27,
+    1029
+   ],
+   "year_a": null,
+   "year_b": 1914,
+   "relation": "neighbour"
+  }
+ ]
+}

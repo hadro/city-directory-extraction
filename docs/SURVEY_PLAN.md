@@ -1146,8 +1146,60 @@ corpus has 1845–48), trow1913 (IA's 1913 set is the business directory), polk1
 queens1933 and mb1931. The Polk 1917 case shows that a very noisy twin can hide from exact
 matching, so "none" is firmest where the other volume's OCR is decent.
 
-Next: the same test volume against volume, to find every twin and duplicate part in the corpus,
-not just those of gold pages, and pick the better copy of each edition before the corpus run.
+#### Editions held twice: every volume against every other (2026-09-28)
+
+```bash
+python3 data_prep/survey_twins.py pairs    # ~1 min, 8 cores -> results/survey_twins_pairs.json
+```
+
+**17 editions are in the corpus more than once, and the copies not chosen hold 1.33M residential
+lines**: 8.2% of the 16.25M, or **~31 of the ~390 H200-hours** the corpus run needs at 11.88 rows/s,
+and people counted twice in any export. Found by page structure, not by how much text two volumes
+share. Consecutive editions share a lot (1907BPL and 1908BPL: 60% of their lines), and a noisy
+twin can share very little (1856BPL and `micro_IABROOKLYN_0034`: 5%). But a page of one edition
+is a page of its twin. So wherever two volumes share lines, each page's shared lines are checked
+for landing on a single page of the other. **Every twin measures 1.0 both ways. Every neighbouring
+edition measures 0.72–0.85.** The method is in the script's docstring.
+
+| edition | recommended run | not run (lines) |
+|---|---|---|
+| Brooklyn 1906 | `1906BPL` | `c1906geor` (A–K), `c00geor` and `c19062geor` (both K–Z) (270,914) |
+| Brooklyn 1903 | `1903BPL` | `1903p1geor`, `c19031geor` (both A–L), `c1903geor` (L–Z) (259,354) |
+| Brooklyn 1907 · 1908 · 1904 | `1907BPL` · `1908BPL` · `1904BPL` | each year's two `geor` halves (178k · 177k · 171k) |
+| Trow 1903 p2 | `trowsgeneraldir1903p2trow` ⚖ | `trowsgeneraldire19032trow` (152,636) |
+| Longworth (IA date 1816, title page 1839) | `longworthsameric00newy` ⚖ | `longworthsameric1839newy` (35,714) |
+| Smith 1856–57 · 1855–56 | `1857BPL` · `1856BPL` | `micro_0036` · `micro_0034` |
+| Hearnes 1852–53 · 1850–51 | `hearnesbrooklync1852unse` · `…1850unse` | `micro_0030` · `micro_0028` |
+| Brooklyn 1857–58 · 1848–49 | `1858BPL` · `brooklyncitydire1848teal` | `micro_0037` · `micro_0026` |
+| Brooklyn 1843–44 | `micro_IABROOKLYN_0019` ⚖ | `brooklynalphabet1843unse` |
+| Ogden 1839–40 | `brooklyndirector00ogde` | `micro_IABROOKLYN_0016` |
+| Franks 1786 (four copies) | `newyorkdirectory00fran` ⚖ | `…fran_0`, `durs_0` (1874), `newyorkbrooklynd00durs` (1876) |
+| Trow Business 1913 p1 | not residential | `trowsgeneraldire19131trow` is its duplicate |
+
+⚖ = close call: the copies deliver within 5% of each other's lines per page.
+
+**Rule used:** whole alphabet first, then most lines per page. Where the printed page is the same,
+the difference in lines is what OCR and the filters lost. The table is a recommendation for
+hadro, not a stamp. `survey_status: duplicate-of:<id>` is written only on his word, and
+`hpc/prep_volumes.py` needs the run set before the corpus is staged.
+
+What else it found:
+- ⚠️ **1906BPL, the project's calibration volume, is the same edition as the three 1906 `geor`
+  scans.** So `1906BPL_sample500`'s gold lines are also printed, untagged, in `c1906geor`,
+  `c00geor` and `c19062geor`. The gold scan saw them at 19%, 9.5% and 2.8% exact, behind ABBYY-8's
+  OCR, and ranked them `check`, below its bar for a twin. This twin was found by page structure.
+- ⚠️ **`trowsgeneraldire19131trow` duplicates p1, not p2.** Its pages align with p1's on 373 pages
+  (cover 96%/95%). The failure register below had guessed p2 from an identical `imagecount`.
+- **Twins check each other's folios.** Aligned pages must print the same number. Where the fits
+  disagree, one misread: 1906BPL p.670 = `c00geor` "p.70", p.897 = "p.4". 1903BPL and 1907BPL
+  disagree with their L–Z `geor` halves on all 287 and 453 aligned lines whose pages both fits
+  read. That gives the folio leading-digit repair ready-made training pairs.
+- **Standing type:** the 1830s Brooklyn directories align page for page across consecutive years,
+  on 16–24 pages. `micro_0007` and `_0008` print "for the year 1830" and "1831", so they are
+  different editions set from kept type. Such pairs stay `undecided` (under 30 aligned pages)
+  unless two title-page years settle them. Ten remain in the results, most on under ten pages.
+- **Catalog dates mislead, again:** `trowsgeneraldire19032trow` and `19131trow` are dated 1853 by
+  IA, `brooklynnewyork1907p1geor` 1903, and `brooklynalphabet1843unse` 1846 (it is 1843–44).
 
 #### The original design
 
@@ -1317,6 +1369,9 @@ inferred from a sibling.
 against a different scandate (2010 vs 2013), the same manuscript accession number **63209** on its
 copyright page as p1, and the same title-page show-through. Not stamped `duplicate-of` — that
 evidence is suggestive, not conclusive, and a leaf-level comparison would settle it.
+*(Settled 2026-09-28, and it is **p1**, not p2: its pages align with p1's on 373 pages, each
+covering 95–96% of the other. The shared accession number was the right clue; the `imagecount`
+was not. See "Editions held twice" in Phase 2.)*
 
 **A free key-page signal, found in passing.** That 1904 listings page prints
 *"(For list of abbreviations see page 17.)"* — **the listings name their own key page.** Harvesting
@@ -1334,7 +1389,10 @@ kind of thing that survives a human read and not a regex.
 Related: **duplicate and multi-part detection.** `master_directories.README.md` already flags
 p1/p2/p3 parts and duplicate scans across IA collections. Cluster on
 (publisher, year, city, imagecount, title) and stamp `duplicate_of` / `part N of M`, or everything
-downstream double-counts.
+downstream double-counts. *(Done from the text instead, 2026-09-28: `survey_twins.py pairs` finds
+17 editions held more than once, and that metadata would have missed most of them. The catalog
+dates `brooklynnewyork1907p1geor` 1903, and it misses `1856BPL`'s edition entirely. The stamps
+await hadro's decision on the run set. See "Editions held twice" in Phase 2.)*
 
 ## Also worth recording while the sweep is running
 

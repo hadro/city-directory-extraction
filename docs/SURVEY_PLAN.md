@@ -440,6 +440,8 @@ Three things make it cheap and durable:
   direct check on `detect_listing_bounds`.
 
 Recorded as `stated_name_count` in the sidecar. Worth a dedicated harvest in Phase 2.
+*(Harvested 2026-09-28: **27 volumes** now carry a printed count, and the prefaces turned out to be
+where most of them sit. See "Printed name counts" in Phase 2.)*
 
 ### ⚠️ `column_count` audit: 3 of 3 Trow NYC volumes checked were wrong
 
@@ -1200,6 +1202,76 @@ What else it found:
   unless two title-page years settle them. Ten remain in the results, most on under ten pages.
 - **Catalog dates mislead, again:** `trowsgeneraldire19032trow` and `19131trow` are dated 1853 by
   IA, `brooklynnewyork1907p1geor` 1903, and `brooklynalphabet1843unse` 1846 (it is 1843–44).
+
+#### Printed name counts: 27 volumes (2026-09-28)
+
+```bash
+python3 data_prep/survey_counts.py scan            # ~4 s -> results/stated_counts_candidates.json
+python3 data_prep/survey_counts.py record --write  # verified claims -> sidecars, results/stated_counts.json
+```
+
+Doggett's title-page count gave the project its only gold-free recall check: named records came
+to 1.002 per printed name. The harvest finds the same kind of figure in **27 volumes**. There are
+23 new `book_says.stated_name_count` claims beside the 4 from Phase 3, and almost all the new ones
+come from **prefaces**. Lain's Brooklyn directories announce "This volume contains 114,724 names"
+nearly every year. Doggett prints a table under "NUMBER OF NAMES IN THIS WORK". Trow's prefaces
+give 147,325 (1859–60), 153,186 (1863–64), 405,264 (1903, across all three parts) and 1,104,676
+(1915).
+
+| series | volumes | counts |
+|---|---|---|
+| Lain, Brooklyn (BPL) | 1868, 1875, 1876, 1878, 1880, 1883, 1884, 1886, 1887, 1889, 1897, 1899x | 74,120 → 271,797 |
+| Doggett, Manhattan | 1845, 1846, 1847, 1848 | 61,333 · 65,838 · 68,159 · 67,246 |
+| Trow, Manhattan | 1857~, 1859, 1863, 1903 (p1–3), 1912~ (p1–3), 1915 | ~150,000 → 1,104,676 |
+| Longworth | 1813, 1816~, 1826~ | 17,750 · ~39,000 · ~27,000 |
+| Brooklyn microfilm | `micro_0039` (1858–59)~, `micro_0046` (Williamsburgh 1852) | ~50,000 · 7,345 |
+
+~ = approximate as printed ("about", "over", "we claim").
+
+Each claim says how it was checked. `text` is clean OCR digits in a sentence that says what they
+count. `image` is a read off the IIIF crop, for 1876BPL, 1899xBPL, `micro_0039`, and `micro_0046`
+("Number of names contained in the Directory for 1852 … 7,345", which the OCR had garbled). `sum`
+is used for **1875BPL, which prints the count under every letter; the 26 add up exactly to its
+109,785**. Several confirm each other. Doggett 1846 gives 1845 as 61,333 (the 1845 title page's
+figure), and 1847 gives 1846 as 65,838. 1884BPL's preface says the 1880 volume "then contained
+125,440", which is 1880BPL's own figure.
+
+**The immediate use needs no model: residential lines per printed name.** Lines ought to
+slightly outnumber names, because runovers, headings and ad lines are lines too. **On 24 of 27
+volumes the ratio falls between 0.95 and 1.08.** Lain is 1.00–1.04, Doggett 0.99–1.01, and Trow
+1859 and 1863 are 0.997 and 0.999. So the survey's scoped lines deliver almost exactly the names
+the publisher counted, and that holds on whole volumes, not sampled pages. The three high ones,
+1868BPL (1.16), 1897BPL (1.08) and 1899xBPL (1.07), are worth a look for unjoined runovers or
+extra sections.
+
+⚠️ **The two microfilm volumes deliver a fifth of their printed names.** `micro_IABROOKLYN_0039`
+(Brooklyn 1858–59) claims ~50,000 names on a correctly bounded 466-leaf listing, about 107 a page.
+IA's tesseract read ~40 lines a page, and 9,220 residential lines survive: **0.18 per name**.
+Williamsburgh 1852 (`micro_0046`) is at **0.23**. The twins show the same loss across the tier.
+Each microfilm copy delivers **16–86% of its book scan's lines, about 40% typically**
+(`micro_0037` gives 8,640 against 1858BPL's 52,597; `micro_0036` 18,588 against 1857BPL's 46,677).
+No model can recover a name the OCR never produced. For microfilm volumes with a twin, the answer
+is the twin ("Editions held twice", above). For those without one, it is a new read of the page
+image.
+
+Also found:
+- ⚠️ **1899xBPL has another edition's preface bound in.** Leaf 15, in an older face, reads
+  "161,238 names … the population of Brooklyn is 704,610": that is 1884's 152,290 plus 8,958, so
+  ~1885. Leaf 43 reads "This year's Directory contains 271,797 names, or 14,503 more than 1897".
+  The listing itself is post-1897 (the pair pass sets it after 1897BPL).
+- **Most "N names" in front matter are not the volume's count.** The scan also finds Upington's
+  ads for its separate *Elite Directory* ("Contains 30,000 names", in nine Brooklyn volumes),
+  business-directory ads ("Over 20,000 Names of every Trade"), stockholder lists ("Over 4,000,000
+  names"), and yearly increases. That is why every candidate was read before becoming a claim.
+- **Leads, not yet transcribed:**
+  - Prefaces that tabulate *earlier* editions, which could fill counts for volumes that print
+    none: 1889BPL's table of 1857–1888, Trow 1903's 1856 and 1872, and Trow 1912's "line of
+    succession" of the New York Directory's publishers from 1786.
+  - 1889's table must be matched by edition, not by label: its "1875 … 114,700" is 1876BPL's
+    114,724, not 1875BPL's 109,785.
+- **Next, with predictions:** named records per printed name for every run over these volumes,
+  which gives recall on whole volumes (run 1's Doggett 1845: 1.002). 1875BPL's per-letter table
+  allows it per letter.
 
 #### The original design
 

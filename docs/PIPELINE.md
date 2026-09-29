@@ -913,9 +913,21 @@ mechanism, applied to the 67% of lines that are dittos. Testable with the same p
 gold. **Careful:** a wrong antecedent would inject a wrong surname into the record, so this needs
 the dispute rate down first (item 6).
 
-**8. Implement the Duncan address slot grammar.** `71 do. do.` is two independent slots; the
-grammar is documented in `resolve_dittos.py` but not implemented. ~45 rows in duncan1794, more
-across the early volumes. Small but it is currently a known-wrong output on those books.
+**8. ~~Implement the Duncan address slot grammar.~~ DONE 2026-09-28:
+`resolve_dittos.resolve_address_run`.** `71 do. do.` is two independent slots. Each address
+resolves against the previous line's *resolved* address, because a street type carries down a
+chain: `71 Dey-street.`, `27 Ann do.` → `27 Ann-street`, `11 Rector do.` → `11 Rector-street`.
+On duncan1794's 58 gold addresses:
+- 13 carry no ditto;
+- 39 inherit a type;
+- 4 inherit number + street (`30 do.`);
+- 1 inherits the whole address (`do.` → `Bowery-lane`);
+- 1 fills two slots (`71 do. do.` → `71 Roosevelt-street`);
+- none is left unresolved.
+
+A slot with nothing to fill it (no street type to inherit, as after `Broadway`) is
+`no_antecedent`, never guessed. It writes `address_resolved` only (`assemble_records.py`), and the
+model's `address` stays verbatim.
 
 **9. Trow's glued ditto (`-Michl`). DONE 2026-09-12.** `resolve_dittos.py` now has
 `split_glued_mark`, `classify_glued_marks` and a `--glued-marks` flag; `is_ditto_lead` takes an

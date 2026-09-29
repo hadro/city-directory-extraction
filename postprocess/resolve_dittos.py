@@ -409,6 +409,69 @@ def resolve_cross_line(rows, glued=()):
 
 
 # --------------------------------------------------------------------------------------------
+# CROSS-LINE: the address channel, the early volumes' SLOT GRAMMAR (PIPELINE.md #8)
+#
+# Duncan 1794 prints a street type once and dittos it after (the table in the module docstring).
+# Each address resolves against the previous line's RESOLVED address, because the type carries
+# down a chain: `71 Dey-street.`, then `27 Ann do.` -> `27 Ann-street`, then `11 Rector do.` ->
+# `11 Rector-street`. 45 of duncan1794's 58 gold rows sit in such chains. The slots:
+#
+#     do.              the whole previous address                  (row 51, after `Bowery-lane`)
+#     71 do. do.       number; the NAME slot and the TYPE slot      (row 53 -> `71 Roosevelt-street`)
+#     30 do.           number; the previous street, name and type   (row 39 -> `30 Warren-street`)
+#     27 Ann do.       number and name; the previous street's TYPE  (row 1  -> `27 Ann-street`)
+#
+# An address with no ditto is its own antecedent. A slot with nothing to fill it is
+# `no_antecedent`, never a guess: a type cannot be inherited from `Broadway`.
+
+STREET_TYPES = ("street|lane|slip|alley|road|square|place|row|court|wharf|market|walk|avenue|"
+                "dock|yard")
+STREET_RX = re.compile(r"^(?:\d+[.,]?\s+)?(?P<name>.+?)(?P<join>[- ])(?P<type>" + STREET_TYPES +
+                       r")\.?$", re.IGNORECASE)
+SLOT_TWO = re.compile(r"^(?P<num>\d+)[.,]?\s+do\.?\s+do\.?$", re.IGNORECASE)
+SLOT_TYPE = re.compile(r"^(?:(?P<num>\d+)[.,]?\s+)?(?P<name>[A-Z][\w'’]*(?:\s[A-Z][\w'’]*)*)"
+                       r"\s+do\.?$")
+
+
+def resolve_address_slot(address: str, prev: str) -> tuple:
+    """(resolved, status) for one `address` against the previous line's resolved address.
+    Status: not_ditto | resolved_full | resolved_two_slots | resolved_street | resolved_type |
+    no_antecedent."""
+    a, prev = (address or "").strip(), (prev or "").strip()
+    if not a:
+        return "", "not_ditto"
+    street = STREET_RX.match(prev) if prev else None
+    if DITTO_TOKEN.match(a):
+        return (prev, "resolved_full") if prev else ("", "no_antecedent")
+    m = SLOT_TWO.match(a)
+    if m:
+        return ((f"{m['num']} {street['name']}{street['join']}{street['type']}",
+                 "resolved_two_slots") if street else ("", "no_antecedent"))
+    m = NUM_DITTO.match(a)
+    if m:
+        rest = street_part(prev).rstrip(".")
+        return (f"{m['num']} {rest}", "resolved_street") if rest else ("", "no_antecedent")
+    m = SLOT_TYPE.match(a)
+    if m:
+        if not street:
+            return "", "no_antecedent"
+        num = f"{m['num']} " if m["num"] else ""
+        return f"{num}{m['name']}{street['join']}{street['type']}", "resolved_type"
+    return a, "not_ditto"
+
+
+def resolve_address_run(addresses):
+    """Yield (resolved, status) for a volume's addresses in reading order, each resolved against
+    the last one that resolved. Leaves the model's `address` alone: this is `address_resolved`."""
+    prev = ""
+    for a in addresses:
+        val, status = resolve_address_slot(a, prev)
+        if val:
+            prev = val
+        yield val, status
+
+
+# --------------------------------------------------------------------------------------------
 # loaders -- mirror eval/evaluate.py so the same files work here without conversion
 
 
@@ -573,6 +636,25 @@ def self_test() -> int:
     # a ditto with nothing before it is an orphan, never a guess
     orph = list(resolve_cross_line([(1, '" Ann C wid David h 518 Madison')]))
     check("orphan", (orph[0]["status"], orph[0]["resolved"]), ("orphan", ""))
+
+    # the address slot grammar, on duncan1794's gold addresses in their printed order
+    duncan = ["71 Dey-street.", "27 Ann do.", "11 Rector do.", "30 Ferry-street", "Mott do.",
+              "13 Warren-street.", "13 do", "13 Warren do.", "30 do.", "19 Water do.", "169 do.",
+              "Bowery-lane", "do.", "73 Roosevelt-street.", "71 do. do.", "31 James's do."]
+    got = list(resolve_address_run(duncan))
+    check("type slot", got[1], ("27 Ann-street", "resolved_type"))
+    check("type carries down the chain", got[2], ("11 Rector-street", "resolved_type"))
+    check("type slot, no number", got[4], ("Mott-street", "resolved_type"))
+    check("number + street", got[6], ("13 Warren-street", "resolved_street"))
+    check("number + street, after a resolved one", got[8], ("30 Warren-street", "resolved_street"))
+    check("169 do.", got[10], ("169 Water-street", "resolved_street"))
+    check("do. = the whole address", got[12], ("Bowery-lane", "resolved_full"))
+    check("two slots", got[14], ("71 Roosevelt-street", "resolved_two_slots"))
+    check("a possessive name", got[15], ("31 James's-street", "resolved_type"))
+    check("no type to inherit", resolve_address_slot("27 Ann do.", "Broadway"),
+          ("", "no_antecedent"))
+    check("Do-minick is a street", resolve_address_slot("12 Do-minick", "71 Dey-street"),
+          ("12 Do-minick", "not_ditto"))
 
     if fails:
         print("SELF-TEST FAILED\n" + "\n".join(fails), file=sys.stderr)

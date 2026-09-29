@@ -350,7 +350,13 @@ def locate_holdout(dump: WordDump, gold: dict) -> tuple[dict, list]:
 
     For a twin (`gold["twin_of"]`) the jp2 number means nothing, so every leaf is a candidate,
     and a page is tagged only at TWIN_MIN_MATCH or better: an unconvincing best guess would
-    miss the gold page and tag one unrelated page instead."""
+    miss the gold page and tag one unrelated page instead.
+
+    ⚠️ The twin search assumes a WHOLE-BOOK twin and whole gold pages. Tried on 1906BPL_sample500
+    (~20 sampled lines per page) against the geor scans, which each hold only part of the book,
+    it placed pages the scan does not hold, at coverage up to 0.87. The right placements scored
+    as low as 0.67, so no floor separates them. Twins like that need a page-structure map, not
+    this ranker."""
     want = {}
     for jp2, glines in gold["leaves"].items():
         toks = [set(_TOK.findall(g.lower())) for g in glines]

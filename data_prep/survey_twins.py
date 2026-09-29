@@ -376,11 +376,12 @@ def _h(t: str) -> int:
     return int.from_bytes(hashlib.blake2b(t.encode("utf-8"), digest_size=8).digest(), "big")
 
 
-def hash_volume(ident: str):
-    """A volume's residential lines (its whole candidate lines if it has none), reduced to the
-    eligible lines printed once in it: (ident, kind, lines read, text leaves, hashes, leaves)."""
+def hash_volume(ident: str, every_line: bool = False):
+    """A volume's residential lines (its whole candidate lines if it has none, or if
+    `every_line`), reduced to the eligible lines printed once in it: (ident, kind, lines read,
+    text leaves, hashes, leaves)."""
     listing = OCR / f"{ident}_listing.jsonl.gz"
-    path, kind = ((listing, "listing") if listing.exists()
+    path, kind = ((listing, "listing") if listing.exists() and not every_line
                   else (OCR / f"{ident}_lines.jsonl.gz", "lines"))
     counts, leaf_of, n = collections.Counter(), {}, 0
     with gzip.open(path, "rt", encoding="utf-8") as fh:
@@ -610,6 +611,65 @@ def print_groups(groups: list, rows: list):
                   f"shared {p['contain_a']:.0%}/{p['contain_b']:.0%}")
 
 
+MAP_MIN = 3         # matched lines a leaf needs before it gets a partner in the leaf map
+MAP_DRIFT = 4       # a partner this many leaves off its neighbours' line is marked inconsistent
+
+
+def leaf_map(source: dict, twin: dict) -> dict:
+    """{source leaf: {"leaf", "share", "lines", "consistent"}} for every source leaf with
+    MAP_MIN matched lines: its modal partner in the twin, and the share of its matched lines
+    that land there. `consistent` checks the partner against the median offset of the ten
+    mapped leaves either side, so a stray match (an ad reprinted on another page) is visible.
+    A leaf with no entry is one the twin does not hold, or holds too garbled to place."""
+    db = dict(zip(twin["hs"], twin["ls"]))
+    groups = collections.defaultdict(collections.Counter)
+    for h, leaf in zip(source["hs"], source["ls"]):
+        if h in db:
+            groups[leaf][db[h]] += 1
+    out = {}
+    for leaf, c in sorted(groups.items()):
+        n = sum(c.values())
+        if n >= MAP_MIN:
+            partner, k = c.most_common(1)[0]
+            out[leaf] = {"leaf": partner, "share": round(k / n, 3), "lines": n}
+    keys = sorted(out)
+    for i, leaf in enumerate(keys):
+        near = keys[max(0, i - 10):i] + keys[i + 1:i + 11]
+        if not near:
+            out[leaf]["consistent"] = None
+            continue
+        offsets = sorted(out[x]["leaf"] - x for x in near)
+        expect = leaf + offsets[len(offsets) // 2]
+        out[leaf]["consistent"] = abs(out[leaf]["leaf"] - expect) <= MAP_DRIFT
+    return out
+
+
+def leafmap(args) -> int:
+    if not (args.source and args.twins):
+        raise SystemExit("leafmap needs --source and --twins")
+    twins = args.twins.split(",")
+    with multiprocessing.Pool(min(len(twins) + 1, max(1, (os.cpu_count() or 2) - 1))) as pool:
+        hashed = pool.starmap(hash_volume, [(i, True) for i in [args.source] + twins])
+    V = {ident: {"hs": hs, "ls": ls} for ident, _k, _n, _t, hs, ls in hashed}
+    report = {"source": args.source, "derived": _dt.date.today().isoformat(),
+              "code_at": git_rev(),
+              "method": "exact normalised-line match over every candidate line (_lines.jsonl.gz); "
+                        "each source leaf's modal partner leaf in the twin",
+              "params": {"map_min": MAP_MIN, "map_drift": MAP_DRIFT, "min_chars": MIN_CHARS,
+                         "min_tokens": MIN_TOKENS},
+              "twins": {}}
+    for t in twins:
+        m = leaf_map(V[args.source], V[t])
+        report["twins"][t] = {str(k): v for k, v in m.items()}
+        ok = sum(1 for v in m.values() if v["consistent"] and v["share"] >= 0.8)
+        print(f"{t}: {len(m)} source leaves mapped, {ok} consistent at share >= 0.8; "
+              f"source leaves {min(m) if m else '-'}..{max(m) if m else '-'}")
+    out = Path(args.out_map or RESULTS / f"survey_twins_leafmap_{args.source}.json")
+    out.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+    print(f"-> {out.relative_to(REPO)}", file=sys.stderr)
+    return 0
+
+
 def pairs(args) -> int:
     idents = sorted(p.name[:-len("_lines.jsonl.gz")] for p in OCR.glob("*_lines.jsonl.gz"))
     print(f"hashing {len(idents)} volumes", file=sys.stderr)
@@ -708,10 +768,14 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["gold", "pairs"])
+    ap.add_argument("cmd", nargs="?", choices=["gold", "pairs", "leafmap"])
     ap.add_argument("--ids", help="comma list of IA identifiers to scan (default: all)")
     ap.add_argument("--out", default=str(RESULTS / "survey_twins_gold.json"))
     ap.add_argument("--out-pairs", default=str(RESULTS / "survey_twins_pairs.json"))
+    ap.add_argument("--source", help="leafmap: the volume whose leaves are mapped")
+    ap.add_argument("--twins", help="leafmap: comma list of its twins")
+    ap.add_argument("--out-map", help="leafmap: output (default results/"
+                                      "survey_twins_leafmap_<source>.json)")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:
@@ -720,6 +784,8 @@ def main(argv=None) -> int:
         return gold(args)
     if args.cmd == "pairs":
         return pairs(args)
+    if args.cmd == "leafmap":
+        return leafmap(args)
     ap.error("a command is required")
     return 2
 

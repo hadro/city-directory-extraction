@@ -677,7 +677,11 @@ Every sample page is tagged in each scan that holds its half.
 doggett1846 gold lines verbatim, Trow 1905/06 about 10–12% of trow1907's, Lain 1875 9.7% of
 lain1876's. If a training set is ever drawn from harvested lines, the guard has to work at the
 line level: drop any line whose normalised text (lower case, non-alphanumerics to spaces)
-equals a gold line. Training today is synthetic, so nothing leaks yet.
+equals a gold line. Training today is synthetic, so nothing leaks yet. **The guard exists:
+`data_prep/gold_line_filter.py`** (2026-09-28). It matches all 10,421 distinct gold lines,
+NYPL-sourced sets included, and `--report` counts them in any set of line files. Doggett 1847's
+harvested lines, for instance, hold 185 gold lines: 168 of the NYU set's, 10 of doggett1846's
+and 8 of doggetts1850's. No page tag reaches any of them.
 
 ---
 

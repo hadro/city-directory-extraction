@@ -91,7 +91,7 @@ def build_set(ident: str, set_file: str, evidence: list, lines: list, scoped: se
     if not _labelled(gold):
         return None, None
     jp2_to_leaf = {e["jp2"]: e["leaf"] for e in evidence if "page" not in e}
-    key_to_leaf = {e["page"]: e["leaf"] for e in evidence if "page" in e}
+    key_to_leaf = {e["page"]: e["leaf"] for e in evidence if "page" in e and e.get("leaf") is not None}
     rows = [({"raw_line": ln["raw_line"], "context": ln["context"]}, None) for ln in lines]
     by_leaf = defaultdict(list)
     for i, ln in enumerate(lines):
@@ -153,7 +153,7 @@ def build() -> dict:
         lines_path, scoped_path = OCR / f"{ident}_lines.jsonl.gz", OCR / f"{ident}_listing.jsonl.gz"
         if not lines_path.exists():
             continue
-        leaves = {e["leaf"] + k for e in held.get("evidence", [])
+        leaves = {e["leaf"] + k for e in held.get("evidence", []) if e.get("leaf") is not None
                   for k in range(-LEAF_WINDOW, LEAF_WINDOW + 1)} | \
                  {e["jp2"] + k for e in held.get("evidence", [])
                   for k in range(-LEAF_WINDOW, LEAF_WINDOW + 1)}

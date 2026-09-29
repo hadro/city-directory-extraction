@@ -294,8 +294,20 @@ GOLD_TWINS = {                                       # gold set -> other scans o
     "franks1786_eval.jsonl": ["newyorkdirectory00durs_0",  # Durst's 1874 reprint
                               "newyorkbrooklynd00durs"],   # 1876 reprint, long s printed as f
     "polk1917_eval.jsonl": ["trowsgeneraldire1917trow"],   # NYPL gold; ABBYY reads the ditto `ii`
+    # the 500-line 1906BPL evaluation sample (leaf-keyed, unlabelled, but held out all the same);
+    # the 1906 edition is also held as three geor scans, each holding part of the book
+    "1906BPL_sample500_eval.jsonl": ["brooklynnewyorkc1906geor", "brooklynnewyorkc00geor",
+                                     "brooklynnewyorkc19062geor"],
 }
 TWIN_MIN_MATCH = 0.5     # a twin page is tagged only when found this convincingly
+# Twins the text ranker cannot place -- a part-of-the-book scan, gold sampled ~20 lines a page --
+# take their leaves from a page-structure map (survey_twins.py leafmap: each source leaf's modal
+# partner by exact line match, with its share and a consistency check against its neighbours).
+TWIN_LEAF_MAPS = {"1906BPL_sample500_eval.jsonl": "results/survey_twins_leafmap_1906BPL.json"}
+MAP_MIN_SHARE = 0.8      # a mapped partner is used at this share and only if `consistent`
+MAP_INTERP = 15          # an unplaceable page inside a mapped range: its nearest mapped neighbours,
+MAP_WINDOW = 2           # within this many source leaves each side, interpolate it; this many
+                         # leaves either side of that are tagged
 
 
 def gold_page_key(ctx: dict) -> str:
@@ -328,11 +340,53 @@ def twin_gold() -> dict:
                 n = int(pid[2]) if pid[0] == "ia" and pid[2].isdigit() else 100000 + len(pages)
                 pages[n] = key
             leaves[n].append(d["raw_line"])
+        lmap = (json.loads((REPO / TWIN_LEAF_MAPS[set_file]).read_text(encoding="utf-8"))
+                if set_file in TWIN_LEAF_MAPS else None)
         for t in twins:
             assert t.lower() not in out, f"{t} is a twin of two gold sets -- extend twin_gold"
             out[t.lower()] = {"sets": [set_file], "leaves": dict(leaves), "pages": pages,
                               "twin_of": set_file}
+            if lmap is not None:
+                entries = lmap["twins"].get(t, {})
+                out[t.lower()]["leaf_map"] = {
+                    int(k): v["leaf"] for k, v in entries.items()
+                    if v["share"] >= MAP_MIN_SHARE and v["consistent"] is True}
+                out[t.lower()]["leaf_map_file"] = TWIN_LEAF_MAPS[set_file]
     return out
+
+
+def locate_by_map(gold: dict) -> tuple[dict, list]:
+    """locate_holdout for a twin with a page-structure map. A gold page's source leaf maps to its
+    partner. A page the map cannot place, but whose neighbours it does place (the twin holds the
+    range, too garbled on that page to match), is tagged by LINEAR interpolation between its
+    nearest mapped neighbours, MAP_WINDOW leaves either side. Not a median offset, because the
+    geor scans run ~2 leaves per source leaf (blank versos) and the offset drifts across a gap:
+    19062geor's 1115 sits between 1112->1037 and 1126->1065, so at 1043. A page outside the
+    twin's range is not in the twin."""
+    lm = gold["leaf_map"]
+    tags, evidence = {}, []
+    for n in sorted(gold["leaves"]):
+        key = gold["pages"][n]
+        src = int(key.split(":")[-1]) if key.split(":")[-1].isdigit() else None
+        ev = {"jp2": n, "page": key, "twin_of": gold["twin_of"], "via": "leaf-map"}
+        if src in lm:
+            tags[lm[src]] = "gold"
+            evidence.append({**ev, "leaf": lm[src], "tagged": True})
+            continue
+        a = max((k for k in lm if src is not None and src - MAP_INTERP <= k < src), default=None)
+        b = min((k for k in lm if src is not None and src < k <= src + MAP_INTERP), default=None)
+        if a is not None and b is not None:
+            at = round(lm[a] + (src - a) * (lm[b] - lm[a]) / (b - a))
+            for L in range(at - MAP_WINDOW, at + MAP_WINDOW + 1):
+                tags[L] = "gold"
+            evidence.append({**ev, "via": "leaf-map-interpolated", "leaf": at,
+                             "between": [[a, lm[a]], [b, lm[b]]], "tagged": True})
+        else:
+            evidence.append({**ev, "leaf": None, "tagged": False})
+    for L in list(tags):
+        for m in (L - 1, L + 1):
+            tags.setdefault(m, "adjacent")
+    return tags, evidence
 
 
 def with_twins(gold: dict) -> dict:
@@ -357,6 +411,8 @@ def locate_holdout(dump: WordDump, gold: dict) -> tuple[dict, list]:
     it placed pages the scan does not hold, at coverage up to 0.87. The right placements scored
     as low as 0.67, so no floor separates them. Twins like that need a page-structure map, not
     this ranker."""
+    if gold.get("leaf_map") is not None:
+        return locate_by_map(gold)
     want = {}
     for jp2, glines in gold["leaves"].items():
         toks = [set(_TOK.findall(g.lower())) for g in glines]
@@ -654,6 +710,16 @@ def _self_test() -> int:
     assert [r.get("eval_holdout") for r in WordDump(p).records()] == [None, None, "gold"]
     assert engine_class("ABBYY FineReader 8.0") == "abbyy-8"
     assert engine_class("tesseract 5.3.0-6-g76ae") == "tesseract"
+    # a twin placed by page-structure map: mapped, interpolated across a garbled gap, or absent
+    g = {"twin_of": "s.jsonl", "leaves": {0: ["a"], 1: ["b"], 2: ["c"]},
+         "pages": {0: "leaf:10", 1: "leaf:15", 2: "leaf:90"},
+         "leaf_map": {10: 20, 12: 24, 18: 36}}
+    tags, ev = locate_by_map(g)
+    assert tags[20] == "gold" and tags[19] == tags[21] == "adjacent", tags
+    assert ev[1]["leaf"] == 30 and all(tags[L] == "gold" for L in range(28, 33)), \
+        "15 lies between 12->24 and 18->36: linear, at 30"
+    assert ev[2]["tagged"] is False and not any(80 <= L <= 200 for L in tags), \
+        "a page outside the twin's mapped range is not in the twin"
     print("self-test OK", file=sys.stderr)
     return 0
 
@@ -709,7 +775,8 @@ def main(argv=None) -> int:
             h["filtered"] = derive(v["id"], holdout)
             save(v, h)
             print(f"{v['id']}: gold leaves {h['eval_holdout']['gold_leaves']} "
-                  f"{[(e['jp2'], e['leaf'], e['match']) for e in evidence]}", file=sys.stderr)
+                  f"{[(e['jp2'], e['leaf'], e.get('match', e.get('via'))) for e in evidence]}",
+                  file=sys.stderr)
         return 0
 
     if args.rederive:

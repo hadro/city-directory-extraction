@@ -666,7 +666,12 @@ nothing in the gold's image path names it, so they were emitted as ordinary unta
 `survey_harvest.GOLD_TWINS` (keyed by gold set) now locates each twin's gold pages volume-wide,
 ranked by token coverage, since the thresholded score ties on common words. It tags the pages
 gold and their neighbours adjacent, and re-derives. All seven twins sit at match 0.83–1.0.
-`survey_harvest.py --relocate-holdout` re-applies the map.
+`survey_harvest.py --relocate-holdout` re-applies the map. The text ranker cannot place a
+partial-book twin or sampled gold: 1906BPL_sample500 against the three geor scans, each holding
+half the book. Those take their leaves from a page-structure map
+(`results/survey_twins_leafmap_1906BPL.json`, `survey_twins.py leafmap`), with share ≥ 0.8 and
+consistent neighbours. Two garbled pages are interpolated linearly between mapped neighbours.
+Every sample page is tagged in each scan that holds its half.
 
 ⚠️ **Page tags do not cover neighbouring editions.** Doggett 1845 and 1847 reprint 22–27% of the
 doggett1846 gold lines verbatim, Trow 1905/06 about 10–12% of trow1907's, Lain 1875 9.7% of

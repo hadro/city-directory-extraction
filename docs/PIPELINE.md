@@ -1006,9 +1006,40 @@ is a band within a leaf, not the leaf — and `--interior drop`'s recorded cost 
 **12. ~~Run a whole volume on the 4B, on the HPC.~~ DONE 2026-09-28**, five volumes, 310,932 lines.
 See "The first whole-volume 4B run" under stage 6. It produced items 21–24.
 
-**13. Records assembly.** Predictions → a CSV/IIIF-annotated export with `ditto_source` provenance
-carried through. This is what makes the output usable by anyone outside the repo, and stage 5's
-`*_resolved` fields were designed for it.
+**13. ~~Records assembly.~~ DONE 2026-09-28: `postprocess/assemble_records.py`.** Predictions
+used to land in a `.txt` and stop. The assembler turns a run into one row per line, in
+`data/records/<run>/<volume>.jsonl.gz` and `.csv.gz` (gitignored), with a summary in
+`results/records_<run>.json`.
+
+```bash
+python3 postprocess/assemble_records.py --root data/volumes_run1 --run 4b-100k+guard   # ~30 s
+```
+
+Each row carries:
+- **Provenance:** a stable `record_id` (`volume:leaf:n`); the IIIF canvas, the line's `#xywh=`
+  box and a crop URL; the printed page (`read` or `inferred`) from the survey's margin fit; and
+  the section.
+- **The text:** `raw_line`, and the model's eight fields verbatim.
+- **Resolutions, beside the fields:** `name_resolved` (surname carried across ditto lines, with
+  the source line's `ditto_source` and the carry's review flags), `address_resolved` (#8) and
+  `home_address_resolved`.
+- **Flags, never filters:** layout `role` (a runover is an entry's tail), `entry_shaped`,
+  `non_entry_page` (SURVEY_PLAN.md, "Non-entry pages") and `eval_holdout`.
+
+`usable` is the conservative subset: entry-shaped, a start line, on a listing page, and not held
+out.
+
+| run 1, `4b-100k+guard` | rows | usable | printed page known | against the printed count |
+|---|---|---|---|---|
+| 1906BPL | 194,201 | 166,537 (86%) | 97% | 135,864 surnames carried, 31,501 disputed (23%) |
+| Doggett 1845 | 64,580 | 60,372 (93%) | 99% | **0.984 usable per printed name** (61,333) |
+| Mercein 1820 | 20,366 | 18,510 (91%) | 99% | |
+| Hearnes 1852 (microfilm) | 14,250 | 11,339 (80%) | 99.6% | |
+| Smith 1856 (microfilm) | 17,535 | 10,136 (58%) | 82% | |
+
+The microfilm rows are the ones the twin finding replaces: run 2 adds `hearnesbrooklync1852unse`
+and 1857BPL, the book scans of the same editions. The summary compares usable records with every
+volume's `stated_name_count` wherever the survey found one (27 volumes).
 
 ## Explicitly deprioritized
 

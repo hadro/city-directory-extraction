@@ -1,6 +1,6 @@
 {
- "derived": "2026-09-28",
- "code_at": "c26fbb5-dirty",
+ "derived": "2026-09-29",
+ "code_at": "2c99985-dirty",
  "params": {
   "sample_k": 3000,
   "df_max": 6,
@@ -48,7 +48,7 @@
      "text_leaves": 614,
      "lines_per_leaf": 164.5,
      "run": false,
-     "gold_twin": false
+     "gold_twin": true
     },
     {
      "id": "brooklynnewyorkc19062geor",
@@ -63,7 +63,7 @@
      "text_leaves": 610,
      "lines_per_leaf": 122.3,
      "run": false,
-     "gold_twin": false
+     "gold_twin": true
     },
     {
      "id": "brooklynnewyorkc1906geor",
@@ -78,7 +78,7 @@
      "text_leaves": 588,
      "lines_per_leaf": 162.1,
      "run": false,
-     "gold_twin": false
+     "gold_twin": true
     }
    ],
    "run": [
@@ -97,8 +97,8 @@
      "page_conc_b": 1.0,
      "pages_a": 601,
      "pages_b": 601,
-     "folio_agree": 0.579,
-     "folio_pairs": 21741,
+     "folio_agree": 0.654,
+     "folio_pairs": 26437,
      "contain_a": 0.2534,
      "contain_b": 0.4896,
      "via": null
@@ -124,7 +124,7 @@
      "pages_a": 573,
      "pages_b": 573,
      "folio_agree": 0.981,
-     "folio_pairs": 26558,
+     "folio_pairs": 26559,
      "contain_a": 0.2148,
      "contain_b": 0.441,
      "via": null
@@ -141,6 +141,45 @@
      "contain_a": 0.1377,
      "contain_b": 0.2349,
      "via": null
+    },
+    {
+     "a": "1906BPL",
+     "b": "brooklynnewyorkc1906geor",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "1906BPL_sample500_eval.jsonl"
+    },
+    {
+     "a": "1906BPL",
+     "b": "brooklynnewyorkc00geor",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "1906BPL_sample500_eval.jsonl"
+    },
+    {
+     "a": "1906BPL",
+     "b": "brooklynnewyorkc19062geor",
+     "page_conc_a": null,
+     "page_conc_b": null,
+     "pages_a": null,
+     "pages_b": null,
+     "folio_agree": null,
+     "folio_pairs": null,
+     "contain_a": null,
+     "contain_b": null,
+     "via": "1906BPL_sample500_eval.jsonl"
     }
    ]
   },
@@ -347,8 +386,8 @@
      "page_conc_b": 1.0,
      "pages_a": 528,
      "pages_b": 528,
-     "folio_agree": 0.0,
-     "folio_pairs": 453,
+     "folio_agree": 0.915,
+     "folio_pairs": 5390,
      "contain_a": 0.1967,
      "contain_b": 0.3976,
      "via": null
@@ -516,7 +555,7 @@
      "pages_a": 468,
      "pages_b": 468,
      "folio_agree": 0.999,
-     "folio_pairs": 15487,
+     "folio_pairs": 15450,
      "contain_a": 0.2691,
      "contain_b": 0.5555,
      "via": null
@@ -756,8 +795,8 @@
      "page_conc_b": 1.0,
      "pages_a": 146,
      "pages_b": 150,
-     "folio_agree": 0.875,
-     "folio_pairs": 40,
+     "folio_agree": 0.96,
+     "folio_pairs": 149,
      "contain_a": 0.0477,
      "contain_b": 0.1431,
      "via": null
@@ -826,8 +865,8 @@
      "page_conc_b": 1.0,
      "pages_a": 366,
      "pages_b": 366,
-     "folio_agree": null,
-     "folio_pairs": 0,
+     "folio_agree": 0.995,
+     "folio_pairs": 1676,
      "contain_a": 0.2818,
      "contain_b": 0.4138,
      "via": null
@@ -894,8 +933,8 @@
      "page_conc_b": 1.0,
      "pages_a": 77,
      "pages_b": 78,
-     "folio_agree": null,
-     "folio_pairs": 0,
+     "folio_agree": 0.942,
+     "folio_pairs": 120,
      "contain_a": 0.0239,
      "contain_b": 0.16,
      "via": null
@@ -1006,8 +1045,8 @@
      "page_conc_b": 1.0,
      "pages_a": 89,
      "pages_b": 79,
-     "folio_agree": null,
-     "folio_pairs": 0,
+     "folio_agree": 1.0,
+     "folio_pairs": 792,
      "contain_a": 0.1136,
      "contain_b": 0.2846,
      "via": null
@@ -1061,8 +1100,8 @@
      "page_conc_b": 1.0,
      "pages_a": 108,
      "pages_b": 108,
-     "folio_agree": null,
-     "folio_pairs": 0,
+     "folio_agree": 0.993,
+     "folio_pairs": 1214,
      "contain_a": 0.0918,
      "contain_b": 0.3544,
      "via": null
@@ -1218,8 +1257,8 @@
      "page_conc_b": 1.0,
      "pages_a": 30,
      "pages_b": 30,
-     "folio_agree": null,
-     "folio_pairs": 0,
+     "folio_agree": 0.727,
+     "folio_pairs": 256,
      "contain_a": 0.3169,
      "contain_b": 0.3173,
      "via": null
@@ -1311,7 +1350,7 @@
    "kind": "listing",
    "lines": 43227,
    "unique_lines": 43014,
-   "folio_leaves": 212
+   "folio_leaves": 256
   },
   "1857BPL": {
    "kind": "listing",
@@ -1323,13 +1362,13 @@
    "kind": "listing",
    "lines": 52597,
    "unique_lines": 47116,
-   "folio_leaves": 147
+   "folio_leaves": 162
   },
   "1862BPL": {
    "kind": "listing",
    "lines": 58696,
    "unique_lines": 52800,
-   "folio_leaves": 106
+   "folio_leaves": 120
   },
   "1863BPL": {
    "kind": "listing",
@@ -1365,7 +1404,7 @@
    "kind": "listing",
    "lines": 85854,
    "unique_lines": 77747,
-   "folio_leaves": 668
+   "folio_leaves": 682
   },
   "1869BPL": {
    "kind": "listing",
@@ -1377,7 +1416,7 @@
    "kind": "listing",
    "lines": 99379,
    "unique_lines": 90348,
-   "folio_leaves": 49
+   "folio_leaves": 64
   },
   "1875BPL": {
    "kind": "listing",
@@ -1389,7 +1428,7 @@
    "kind": "listing",
    "lines": 118186,
    "unique_lines": 115121,
-   "folio_leaves": 142
+   "folio_leaves": 155
   },
   "1878BPL": {
    "kind": "listing",
@@ -1407,7 +1446,7 @@
    "kind": "listing",
    "lines": 129330,
    "unique_lines": 127024,
-   "folio_leaves": 907
+   "folio_leaves": 1022
   },
   "1883BPL": {
    "kind": "listing",
@@ -1425,7 +1464,7 @@
    "kind": "listing",
    "lines": 163186,
    "unique_lines": 160640,
-   "folio_leaves": 745
+   "folio_leaves": 1082
   },
   "1886BPL": {
    "kind": "listing",
@@ -1437,31 +1476,31 @@
    "kind": "listing",
    "lines": 182252,
    "unique_lines": 178669,
-   "folio_leaves": 916
+   "folio_leaves": 1127
   },
   "1889BPL": {
    "kind": "listing",
    "lines": 193480,
    "unique_lines": 190383,
-   "folio_leaves": 671
+   "folio_leaves": 1219
   },
   "1897BPL": {
    "kind": "listing",
    "lines": 262602,
    "unique_lines": 246837,
-   "folio_leaves": 1018
+   "folio_leaves": 1021
   },
   "1899xBPL": {
    "kind": "listing",
    "lines": 289446,
    "unique_lines": 274050,
-   "folio_leaves": 1104
+   "folio_leaves": 1895
   },
   "1902BPL": {
    "kind": "listing",
    "lines": 172398,
    "unique_lines": 160218,
-   "folio_leaves": 368
+   "folio_leaves": 374
   },
   "1903BPL": {
    "kind": "listing",
@@ -1479,19 +1518,19 @@
    "kind": "listing",
    "lines": 194256,
    "unique_lines": 189314,
-   "folio_leaves": 785
+   "folio_leaves": 907
   },
   "1907BPL": {
    "kind": "listing",
    "lines": 178020,
    "unique_lines": 173162,
-   "folio_leaves": 468
+   "folio_leaves": 508
   },
   "1908BPL": {
    "kind": "listing",
    "lines": 174902,
    "unique_lines": 170006,
-   "folio_leaves": 174
+   "folio_leaves": 217
   },
   "bronxboroughdire1871": {
    "kind": "listing",
@@ -1509,7 +1548,7 @@
    "kind": "listing",
    "lines": 11682,
    "unique_lines": 11679,
-   "folio_leaves": 280
+   "folio_leaves": 468
   },
   "brooklyndirector00ogde": {
    "kind": "listing",
@@ -1557,7 +1596,7 @@
    "kind": "listing",
    "lines": 91410,
    "unique_lines": 89121,
-   "folio_leaves": 81
+   "folio_leaves": 370
   },
   "brooklynnewyork1910p2geor": {
    "kind": "listing",
@@ -1575,7 +1614,7 @@
    "kind": "listing",
    "lines": 101019,
    "unique_lines": 97978,
-   "folio_leaves": 411
+   "folio_leaves": 443
   },
   "brooklynnewyorkc19031geor": {
    "kind": "listing",
@@ -1593,13 +1632,13 @@
    "kind": "listing",
    "lines": 80646,
    "unique_lines": 76621,
-   "folio_leaves": 443
+   "folio_leaves": 377
   },
   "brooklynnewyorkc1905geor": {
    "kind": "listing",
    "lines": 91345,
    "unique_lines": 88144,
-   "folio_leaves": 212
+   "folio_leaves": 298
   },
   "brooklynnewyorkc19062geor": {
    "kind": "listing",
@@ -1617,7 +1656,7 @@
    "kind": "listing",
    "lines": 88459,
    "unique_lines": 85658,
-   "folio_leaves": 50
+   "folio_leaves": 165
   },
   "brooklynnewyorkc1908geor": {
    "kind": "listing",
@@ -1629,7 +1668,7 @@
    "kind": "listing",
    "lines": 92833,
    "unique_lines": 90340,
-   "folio_leaves": 68
+   "folio_leaves": 620
   },
   "brooklynnewyorkc1910geor": {
    "kind": "listing",
@@ -1653,7 +1692,7 @@
    "kind": "listing",
    "lines": 162336,
    "unique_lines": 153975,
-   "folio_leaves": 730
+   "folio_leaves": 887
   },
   "doggettsnewyorkc1845dogg": {
    "kind": "listing",
@@ -1689,7 +1728,7 @@
    "kind": "listing",
    "lines": 3137,
    "unique_lines": 2776,
-   "folio_leaves": 0
+   "folio_leaves": 114
   },
   "flushingnewyorkc00boyd": {
    "kind": "listing",
@@ -1701,91 +1740,91 @@
    "kind": "listing",
    "lines": 14844,
    "unique_lines": 14823,
-   "folio_leaves": 72
+   "folio_leaves": 464
   },
   "hearnesbrooklync1852unse": {
    "kind": "listing",
    "lines": 20120,
    "unique_lines": 20100,
-   "folio_leaves": 444
+   "folio_leaves": 559
   },
   "longworthsameric00newy": {
    "kind": "listing",
    "lines": 35735,
    "unique_lines": 35691,
-   "folio_leaves": 699
+   "folio_leaves": 769
   },
   "longworthsameric1798newy": {
    "kind": "listing",
    "lines": 8874,
    "unique_lines": 8123,
-   "folio_leaves": 0
+   "folio_leaves": 67
   },
   "longworthsameric1813newy": {
    "kind": "listing",
    "lines": 17283,
    "unique_lines": 17208,
-   "folio_leaves": 355
+   "folio_leaves": 400
   },
   "longworthsameric1826newy": {
    "kind": "listing",
    "lines": 25486,
    "unique_lines": 24172,
-   "folio_leaves": 487
+   "folio_leaves": 533
   },
   "longworthsameric1839newy": {
    "kind": "listing",
    "lines": 35714,
    "unique_lines": 35674,
-   "folio_leaves": 738
+   "folio_leaves": 771
   },
   "longworthsameric2618long": {
    "kind": "listing",
    "lines": 9961,
    "unique_lines": 9893,
-   "folio_leaves": 48
+   "folio_leaves": 282
   },
   "longworthsameric3818long": {
    "kind": "listing",
    "lines": 14184,
    "unique_lines": 14091,
-   "folio_leaves": 325
+   "folio_leaves": 337
   },
   "longworthsameric4018long": {
    "kind": "listing",
    "lines": 16861,
    "unique_lines": 16742,
-   "folio_leaves": 360
+   "folio_leaves": 445
   },
   "longworthsameric4818long": {
    "kind": "listing",
    "lines": 20549,
    "unique_lines": 20437,
-   "folio_leaves": 358
+   "folio_leaves": 366
   },
   "longworthsameric6018long": {
    "kind": "listing",
    "lines": 37651,
    "unique_lines": 37573,
-   "folio_leaves": 785
+   "folio_leaves": 800
   },
   "longworthsameric6118long": {
    "kind": "listing",
    "lines": 36213,
    "unique_lines": 36170,
-   "folio_leaves": 689
+   "folio_leaves": 750
   },
   "longworthsameric6518long": {
    "kind": "listing",
    "lines": 34175,
    "unique_lines": 34137,
-   "folio_leaves": 35
+   "folio_leaves": 751
   },
   "merceinscitydire00merc": {
    "kind": "listing",
    "lines": 20366,
    "unique_lines": 20087,
-   "folio_leaves": 344
+   "folio_leaves": 427
   },
   "micro_IABROOKLYN_0001": {
    "kind": "listing",
@@ -1803,7 +1842,7 @@
    "kind": "listing",
    "lines": 1166,
    "unique_lines": 1153,
-   "folio_leaves": 6
+   "folio_leaves": 41
   },
   "micro_IABROOKLYN_0004": {
    "kind": "listing",
@@ -1821,7 +1860,7 @@
    "kind": "listing",
    "lines": 1847,
    "unique_lines": 1770,
-   "folio_leaves": 0
+   "folio_leaves": 70
   },
   "micro_IABROOKLYN_0007": {
    "kind": "listing",
@@ -1833,7 +1872,7 @@
    "kind": "listing",
    "lines": 2015,
    "unique_lines": 1964,
-   "folio_leaves": 0
+   "folio_leaves": 57
   },
   "micro_IABROOKLYN_0009": {
    "kind": "listing",
@@ -1845,13 +1884,13 @@
    "kind": "listing",
    "lines": 3055,
    "unique_lines": 3041,
-   "folio_leaves": 0
+   "folio_leaves": 112
   },
   "micro_IABROOKLYN_0011": {
    "kind": "listing",
    "lines": 2661,
    "unique_lines": 2627,
-   "folio_leaves": 8
+   "folio_leaves": 93
   },
   "micro_IABROOKLYN_0012": {
    "kind": "listing",
@@ -1881,19 +1920,19 @@
    "kind": "listing",
    "lines": 2831,
    "unique_lines": 2575,
-   "folio_leaves": 16
+   "folio_leaves": 110
   },
   "micro_IABROOKLYN_0017": {
    "kind": "listing",
    "lines": 3127,
    "unique_lines": 2788,
-   "folio_leaves": 5
+   "folio_leaves": 106
   },
   "micro_IABROOKLYN_0018": {
    "kind": "listing",
    "lines": 4935,
    "unique_lines": 4759,
-   "folio_leaves": 0
+   "folio_leaves": 231
   },
   "micro_IABROOKLYN_0019": {
    "kind": "listing",
@@ -1905,13 +1944,13 @@
    "kind": "listing",
    "lines": 7480,
    "unique_lines": 7297,
-   "folio_leaves": 0
+   "folio_leaves": 267
   },
   "micro_IABROOKLYN_0021": {
    "kind": "listing",
    "lines": 3423,
    "unique_lines": 2579,
-   "folio_leaves": 29
+   "folio_leaves": 148
   },
   "micro_IABROOKLYN_0022": {
    "kind": "listing",
@@ -1929,85 +1968,85 @@
    "kind": "listing",
    "lines": 8107,
    "unique_lines": 7964,
-   "folio_leaves": 65
+   "folio_leaves": 321
   },
   "micro_IABROOKLYN_0025": {
    "kind": "listing",
    "lines": 8766,
    "unique_lines": 8387,
-   "folio_leaves": 0
+   "folio_leaves": 272
   },
   "micro_IABROOKLYN_0026": {
    "kind": "listing",
    "lines": 5131,
    "unique_lines": 4663,
-   "folio_leaves": 20
+   "folio_leaves": 225
   },
   "micro_IABROOKLYN_0027": {
    "kind": "listing",
    "lines": 9946,
    "unique_lines": 9501,
-   "folio_leaves": 143
+   "folio_leaves": 213
   },
   "micro_IABROOKLYN_0028": {
    "kind": "listing",
    "lines": 4291,
    "unique_lines": 3840,
-   "folio_leaves": 7
+   "folio_leaves": 264
   },
   "micro_IABROOKLYN_0029": {
    "kind": "listing",
    "lines": 9798,
    "unique_lines": 9403,
-   "folio_leaves": 21
+   "folio_leaves": 361
   },
   "micro_IABROOKLYN_0030": {
    "kind": "listing",
    "lines": 14255,
    "unique_lines": 13691,
-   "folio_leaves": 0
+   "folio_leaves": 202
   },
   "micro_IABROOKLYN_0031": {
    "kind": "listing",
    "lines": 5214,
    "unique_lines": 3658,
-   "folio_leaves": 4
+   "folio_leaves": 453
   },
   "micro_IABROOKLYN_0032": {
    "kind": "listing",
    "lines": 7879,
    "unique_lines": 7077,
-   "folio_leaves": 53
+   "folio_leaves": 492
   },
   "micro_IABROOKLYN_0033": {
    "kind": "listing",
    "lines": 17641,
    "unique_lines": 16894,
-   "folio_leaves": 113
+   "folio_leaves": 464
   },
   "micro_IABROOKLYN_0034": {
    "kind": "listing",
    "lines": 17511,
    "unique_lines": 14322,
-   "folio_leaves": 65
+   "folio_leaves": 226
   },
   "micro_IABROOKLYN_0035": {
    "kind": "listing",
    "lines": 27152,
    "unique_lines": 22464,
-   "folio_leaves": 4
+   "folio_leaves": 392
   },
   "micro_IABROOKLYN_0036": {
    "kind": "listing",
    "lines": 18588,
    "unique_lines": 16051,
-   "folio_leaves": 140
+   "folio_leaves": 317
   },
   "micro_IABROOKLYN_0037": {
    "kind": "listing",
    "lines": 8640,
    "unique_lines": 7030,
-   "folio_leaves": 0
+   "folio_leaves": 240
   },
   "micro_IABROOKLYN_0038": {
    "kind": "lines",
@@ -2019,13 +2058,13 @@
    "kind": "listing",
    "lines": 9220,
    "unique_lines": 7302,
-   "folio_leaves": 98
+   "folio_leaves": 328
   },
   "micro_IABROOKLYN_0040": {
    "kind": "listing",
    "lines": 8466,
    "unique_lines": 6679,
-   "folio_leaves": 99
+   "folio_leaves": 308
   },
   "micro_IABROOKLYN_0041": {
    "kind": "lines",
@@ -2037,19 +2076,19 @@
    "kind": "listing",
    "lines": 16419,
    "unique_lines": 13970,
-   "folio_leaves": 94
+   "folio_leaves": 373
   },
   "micro_IABROOKLYN_0043": {
    "kind": "listing",
    "lines": 4271,
    "unique_lines": 4192,
-   "folio_leaves": 168
+   "folio_leaves": 195
   },
   "micro_IABROOKLYN_0044": {
    "kind": "listing",
    "lines": 5457,
    "unique_lines": 5263,
-   "folio_leaves": 144
+   "folio_leaves": 105
   },
   "micro_IABROOKLYN_0045": {
    "kind": "listing",
@@ -2061,7 +2100,7 @@
    "kind": "listing",
    "lines": 1688,
    "unique_lines": 1567,
-   "folio_leaves": 39
+   "folio_leaves": 110
   },
   "micro_IABROOKLYN_0047": {
    "kind": "listing",
@@ -2079,13 +2118,13 @@
    "kind": "listing",
    "lines": 904,
    "unique_lines": 892,
-   "folio_leaves": 0
+   "folio_leaves": 96
   },
   "newyorkcitydirec00rode": {
    "kind": "listing",
    "lines": 108401,
    "unique_lines": 107397,
-   "folio_leaves": 58
+   "folio_leaves": 237
   },
   "newyorkdirectory00dunc": {
    "kind": "listing",
@@ -2097,31 +2136,31 @@
    "kind": "lines",
    "lines": 7249,
    "unique_lines": 5181,
-   "folio_leaves": 66
+   "folio_leaves": 142
   },
   "newyorkdirectory00durs_0": {
    "kind": "listing",
    "lines": 905,
    "unique_lines": 891,
-   "folio_leaves": 0
+   "folio_leaves": 80
   },
   "newyorkdirectory00fran": {
    "kind": "listing",
    "lines": 908,
    "unique_lines": 893,
-   "folio_leaves": 132
+   "folio_leaves": 209
   },
   "newyorkdirectory00fran_0": {
    "kind": "listing",
    "lines": 906,
    "unique_lines": 892,
-   "folio_leaves": 185
+   "folio_leaves": 204
   },
   "trowsgenerald192223p1trow": {
    "kind": "listing",
    "lines": 540447,
    "unique_lines": 475901,
-   "folio_leaves": 800
+   "folio_leaves": 941
   },
   "trowsgenerald192223p2trow": {
    "kind": "listing",
@@ -2133,7 +2172,7 @@
    "kind": "listing",
    "lines": 150094,
    "unique_lines": 148359,
-   "folio_leaves": 537
+   "folio_leaves": 567
   },
   "trowsgeneraldir1903p2trow": {
    "kind": "listing",
@@ -2163,7 +2202,7 @@
    "kind": "listing",
    "lines": 87515,
    "unique_lines": 85967,
-   "folio_leaves": 417
+   "folio_leaves": 436
   },
   "trowsgeneraldir1905p1trow": {
    "kind": "listing",
@@ -2187,7 +2226,7 @@
    "kind": "listing",
    "lines": 142152,
    "unique_lines": 139790,
-   "folio_leaves": 218
+   "folio_leaves": 247
   },
   "trowsgeneraldir1906p2trow": {
    "kind": "listing",
@@ -2217,7 +2256,7 @@
    "kind": "listing",
    "lines": 33522,
    "unique_lines": 20821,
-   "folio_leaves": 0
+   "folio_leaves": 40
   },
   "trowsgeneraldir1908p1trow": {
    "kind": "listing",
@@ -2289,7 +2328,7 @@
    "kind": "listing",
    "lines": 192696,
    "unique_lines": 189160,
-   "folio_leaves": 471
+   "folio_leaves": 558
   },
   "trowsgeneraldir1911p3trow": {
    "kind": "listing",
@@ -2331,7 +2370,7 @@
    "kind": "lines",
    "lines": 96140,
    "unique_lines": 77322,
-   "folio_leaves": 355
+   "folio_leaves": 391
   },
   "trowsgeneraldir1914p1trow": {
    "kind": "listing",
@@ -2367,7 +2406,7 @@
    "kind": "listing",
    "lines": 40654,
    "unique_lines": 25617,
-   "folio_leaves": 9
+   "folio_leaves": 150
   },
   "trowsgeneraldire19091trow": {
    "kind": "listing",
@@ -2391,13 +2430,13 @@
    "kind": "listing",
    "lines": 1044823,
    "unique_lines": 1019852,
-   "folio_leaves": 1829
+   "folio_leaves": 60
   },
   "trowsgeneraldire1917trow": {
    "kind": "listing",
    "lines": 1121874,
    "unique_lines": 1092990,
-   "folio_leaves": 2266
+   "folio_leaves": 2371
   },
   "trowsnewyorkcity1857trow": {
    "kind": "listing",
@@ -2437,8 +2476,8 @@
    "pages_a": 146,
    "page_conc_b": 1.0,
    "pages_b": 150,
-   "folio_pairs": 40,
-   "folio_agree": 0.875,
+   "folio_pairs": 149,
+   "folio_agree": 0.96,
    "cover_a": 0.637,
    "cover_b": 0.764,
    "span_a": [
@@ -2493,8 +2532,8 @@
    "pages_a": 77,
    "page_conc_b": 1.0,
    "pages_b": 78,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 120,
+   "folio_agree": 0.942,
    "cover_a": 0.382,
    "cover_b": 0.61,
    "span_a": [
@@ -2633,7 +2672,7 @@
    "pages_a": 468,
    "page_conc_b": 1.0,
    "pages_b": 468,
-   "folio_pairs": 15487,
+   "folio_pairs": 15450,
    "folio_agree": 0.999,
    "cover_a": 0.477,
    "cover_b": 0.967,
@@ -2661,8 +2700,8 @@
    "pages_a": 601,
    "page_conc_b": 1.0,
    "pages_b": 601,
-   "folio_pairs": 21741,
-   "folio_agree": 0.579,
+   "folio_pairs": 26437,
+   "folio_agree": 0.654,
    "cover_a": 0.519,
    "cover_b": 0.985,
    "span_a": [
@@ -2717,7 +2756,7 @@
    "pages_a": 573,
    "page_conc_b": 1.0,
    "pages_b": 573,
-   "folio_pairs": 26558,
+   "folio_pairs": 26559,
    "folio_agree": 0.981,
    "cover_a": 0.491,
    "cover_b": 0.978,
@@ -2773,8 +2812,8 @@
    "pages_a": 528,
    "page_conc_b": 1.0,
    "pages_b": 528,
-   "folio_pairs": 453,
-   "folio_agree": 0.0,
+   "folio_pairs": 5390,
+   "folio_agree": 0.915,
    "cover_a": 0.496,
    "cover_b": 0.994,
    "span_a": [
@@ -2885,8 +2924,8 @@
    "pages_a": 89,
    "page_conc_b": 1.0,
    "pages_b": 79,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 792,
+   "folio_agree": 1.0,
    "cover_a": 0.569,
    "cover_b": 0.753,
    "span_a": [
@@ -2997,8 +3036,8 @@
    "pages_a": 108,
    "page_conc_b": 1.0,
    "pages_b": 108,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 1214,
+   "folio_agree": 0.993,
    "cover_a": 0.437,
    "cover_b": 0.755,
    "span_a": [
@@ -3025,8 +3064,8 @@
    "pages_a": 366,
    "page_conc_b": 1.0,
    "pages_b": 366,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 1676,
+   "folio_agree": 0.995,
    "cover_a": 0.915,
    "cover_b": 0.954,
    "span_a": [
@@ -3081,8 +3120,8 @@
    "pages_a": 30,
    "page_conc_b": 1.0,
    "pages_b": 30,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 256,
+   "folio_agree": 0.727,
    "cover_a": 1.0,
    "cover_b": 1.0,
    "span_a": [
@@ -3473,8 +3512,8 @@
    "pages_a": 565,
    "page_conc_b": 0.833,
    "pages_b": 532,
-   "folio_pairs": 3163,
-   "folio_agree": 0.0,
+   "folio_pairs": 3672,
+   "folio_agree": 0.003,
    "cover_a": 0.958,
    "cover_b": 0.95,
    "span_a": [
@@ -3501,8 +3540,8 @@
    "pages_a": 815,
    "page_conc_b": 0.818,
    "pages_b": 831,
-   "folio_pairs": 4406,
-   "folio_agree": 0.034,
+   "folio_pairs": 5265,
+   "folio_agree": 0.1,
    "cover_a": 0.971,
    "cover_b": 0.971,
    "span_a": [
@@ -3641,7 +3680,7 @@
    "pages_a": 543,
    "page_conc_b": 0.778,
    "pages_b": 592,
-   "folio_pairs": 1366,
+   "folio_pairs": 3487,
    "folio_agree": 0.0,
    "cover_a": 0.92,
    "cover_b": 0.941,
@@ -3725,7 +3764,7 @@
    "pages_a": 884,
    "page_conc_b": 0.833,
    "pages_b": 891,
-   "folio_pairs": 3381,
+   "folio_pairs": 6386,
    "folio_agree": 0.0,
    "cover_a": 0.966,
    "cover_b": 0.952,
@@ -3753,8 +3792,8 @@
    "pages_a": 1273,
    "page_conc_b": 0.778,
    "pages_b": 1305,
-   "folio_pairs": 2927,
-   "folio_agree": 0.013,
+   "folio_pairs": 8716,
+   "folio_agree": 0.004,
    "cover_a": 0.969,
    "cover_b": 0.972,
    "span_a": [
@@ -3949,7 +3988,7 @@
    "pages_a": 432,
    "page_conc_b": 0.833,
    "pages_b": 431,
-   "folio_pairs": 2720,
+   "folio_pairs": 1864,
    "folio_agree": 0.0,
    "cover_a": 0.484,
    "cover_b": 0.98,
@@ -3977,7 +4016,7 @@
    "pages_a": 475,
    "page_conc_b": 0.8,
    "pages_b": 489,
-   "folio_pairs": 1646,
+   "folio_pairs": 1649,
    "folio_agree": 0.0,
    "cover_a": 0.524,
    "cover_b": 0.968,
@@ -4033,7 +4072,7 @@
    "pages_a": 1024,
    "page_conc_b": 0.8,
    "pages_b": 1160,
-   "folio_pairs": 2238,
+   "folio_pairs": 3752,
    "folio_agree": 0.0,
    "cover_a": 0.977,
    "cover_b": 0.982,
@@ -4117,7 +4156,7 @@
    "pages_a": 488,
    "page_conc_b": 0.781,
    "pages_b": 484,
-   "folio_pairs": 4877,
+   "folio_pairs": 4020,
    "folio_agree": 0.0,
    "cover_a": 0.486,
    "cover_b": 0.996,
@@ -4145,7 +4184,7 @@
    "pages_a": 526,
    "page_conc_b": 0.792,
    "pages_b": 550,
-   "folio_pairs": 3755,
+   "folio_pairs": 3756,
    "folio_agree": 0.0,
    "cover_a": 0.526,
    "cover_b": 0.986,
@@ -4173,8 +4212,8 @@
    "pages_a": 997,
    "page_conc_b": 0.812,
    "pages_b": 1143,
-   "folio_pairs": 11115,
-   "folio_agree": 0.028,
+   "folio_pairs": 13492,
+   "folio_agree": 0.023,
    "cover_a": 0.988,
    "cover_b": 0.972,
    "span_a": [
@@ -4285,7 +4324,7 @@
    "pages_a": 499,
    "page_conc_b": 0.833,
    "pages_b": 577,
-   "folio_pairs": 1976,
+   "folio_pairs": 2418,
    "folio_agree": 0.0,
    "cover_a": 0.513,
    "cover_b": 0.967,
@@ -4341,7 +4380,7 @@
    "pages_a": 507,
    "page_conc_b": 0.794,
    "pages_b": 537,
-   "folio_pairs": 4197,
+   "folio_pairs": 4200,
    "folio_agree": 0.0,
    "cover_a": 0.526,
    "cover_b": 0.963,
@@ -4397,7 +4436,7 @@
    "pages_a": 1170,
    "page_conc_b": 0.728,
    "pages_b": 1069,
-   "folio_pairs": 25196,
+   "folio_pairs": 30362,
    "folio_agree": 0.0,
    "cover_a": 0.987,
    "cover_b": 0.991,
@@ -4425,7 +4464,7 @@
    "pages_a": 1161,
    "page_conc_b": 0.741,
    "pages_b": 1069,
-   "folio_pairs": 9152,
+   "folio_pairs": 9153,
    "folio_agree": 0.055,
    "cover_a": 0.978,
    "cover_b": 0.991,
@@ -4509,7 +4548,7 @@
    "pages_a": 562,
    "page_conc_b": 0.765,
    "pages_b": 529,
-   "folio_pairs": 19537,
+   "folio_pairs": 19544,
    "folio_agree": 0.0,
    "cover_a": 0.502,
    "cover_b": 0.991,
@@ -4565,7 +4604,7 @@
    "pages_a": 584,
    "page_conc_b": 0.756,
    "pages_b": 538,
-   "folio_pairs": 14210,
+   "folio_pairs": 14212,
    "folio_agree": 0.0,
    "cover_a": 0.51,
    "cover_b": 0.987,
@@ -4593,7 +4632,7 @@
    "pages_a": 579,
    "page_conc_b": 0.78,
    "pages_b": 546,
-   "folio_pairs": 1250,
+   "folio_pairs": 6532,
    "folio_agree": 0.0,
    "cover_a": 0.512,
    "cover_b": 0.982,
@@ -4621,7 +4660,7 @@
    "pages_a": 550,
    "page_conc_b": 0.739,
    "pages_b": 485,
-   "folio_pairs": 6165,
+   "folio_pairs": 8192,
    "folio_agree": 0.0,
    "cover_a": 0.493,
    "cover_b": 0.992,
@@ -4649,7 +4688,7 @@
    "pages_a": 605,
    "page_conc_b": 0.75,
    "pages_b": 554,
-   "folio_pairs": 4960,
+   "folio_pairs": 13893,
    "folio_agree": 0.0,
    "cover_a": 0.534,
    "cover_b": 0.986,
@@ -4677,8 +4716,8 @@
    "pages_a": 564,
    "page_conc_b": 0.737,
    "pages_b": 525,
-   "folio_pairs": 1,
-   "folio_agree": null,
+   "folio_pairs": 3159,
+   "folio_agree": 0.0,
    "cover_a": 0.492,
    "cover_b": 0.991,
    "span_a": [
@@ -4705,7 +4744,7 @@
    "pages_a": 582,
    "page_conc_b": 0.761,
    "pages_b": 538,
-   "folio_pairs": 4237,
+   "folio_pairs": 7737,
    "folio_agree": 0.0,
    "cover_a": 0.509,
    "cover_b": 0.982,
@@ -4733,7 +4772,7 @@
    "pages_a": 555,
    "page_conc_b": 0.762,
    "pages_b": 536,
-   "folio_pairs": 365,
+   "folio_pairs": 7972,
    "folio_agree": 0.0,
    "cover_a": 0.495,
    "cover_b": 0.974,
@@ -4845,8 +4884,8 @@
    "pages_a": 522,
    "page_conc_b": 0.789,
    "pages_b": 552,
-   "folio_pairs": 1,
-   "folio_agree": null,
+   "folio_pairs": 7522,
+   "folio_agree": 0.0,
    "cover_a": 0.5,
    "cover_b": 0.988,
    "span_a": [
@@ -4873,7 +4912,7 @@
    "pages_a": 559,
    "page_conc_b": 0.788,
    "pages_b": 607,
-   "folio_pairs": 585,
+   "folio_pairs": 1669,
    "folio_agree": 0.0,
    "cover_a": 0.539,
    "cover_b": 0.993,
@@ -4901,7 +4940,7 @@
    "pages_a": 557,
    "page_conc_b": 0.743,
    "pages_b": 554,
-   "folio_pairs": 6112,
+   "folio_pairs": 6114,
    "folio_agree": 0.0,
    "cover_a": 0.536,
    "cover_b": 0.988,
@@ -5013,8 +5052,8 @@
    "pages_a": 526,
    "page_conc_b": 0.8,
    "pages_b": 549,
-   "folio_pairs": 1,
-   "folio_agree": null,
+   "folio_pairs": 5234,
+   "folio_agree": 0.0,
    "cover_a": 0.505,
    "cover_b": 0.979,
    "span_a": [
@@ -5097,8 +5136,8 @@
    "pages_a": 524,
    "page_conc_b": 0.784,
    "pages_b": 549,
-   "folio_pairs": 1,
-   "folio_agree": null,
+   "folio_pairs": 4104,
+   "folio_agree": 0.0,
    "cover_a": 0.507,
    "cover_b": 0.981,
    "span_a": [
@@ -5153,7 +5192,7 @@
    "pages_a": 566,
    "page_conc_b": 0.794,
    "pages_b": 554,
-   "folio_pairs": 0,
+   "folio_pairs": 1,
    "folio_agree": null,
    "cover_a": 0.538,
    "cover_b": 0.982,
@@ -5265,7 +5304,7 @@
    "pages_a": 531,
    "page_conc_b": 0.793,
    "pages_b": 549,
-   "folio_pairs": 0,
+   "folio_pairs": 3,
    "folio_agree": null,
    "cover_a": 0.509,
    "cover_b": 0.981,
@@ -5321,8 +5360,8 @@
    "pages_a": 8,
    "page_conc_b": 1.0,
    "pages_b": 9,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 252,
+   "folio_agree": 0.0,
    "cover_a": 0.63,
    "cover_b": 0.704,
    "span_a": [
@@ -5349,8 +5388,8 @@
    "pages_a": 104,
    "page_conc_b": 0.833,
    "pages_b": 97,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 901,
+   "folio_agree": 0.026,
    "cover_a": 0.95,
    "cover_b": 0.898,
    "span_a": [
@@ -5405,8 +5444,8 @@
    "pages_a": 17,
    "page_conc_b": 1.0,
    "pages_b": 17,
-   "folio_pairs": 1,
-   "folio_agree": null,
+   "folio_pairs": 407,
+   "folio_agree": 0.0,
    "cover_a": 0.702,
    "cover_b": 0.731,
    "span_a": [
@@ -5433,8 +5472,8 @@
    "pages_a": 14,
    "page_conc_b": 0.917,
    "pages_b": 6,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 317,
+   "folio_agree": 0.0,
    "cover_a": 0.601,
    "cover_b": 0.564,
    "span_a": [
@@ -5797,7 +5836,7 @@
    "pages_a": 531,
    "page_conc_b": 0.793,
    "pages_b": 551,
-   "folio_pairs": 1750,
+   "folio_pairs": 9029,
    "folio_agree": 0.0,
    "cover_a": 0.985,
    "cover_b": 0.977,
@@ -5853,8 +5892,8 @@
    "pages_a": 494,
    "page_conc_b": 0.836,
    "pages_b": 514,
-   "folio_pairs": 703,
-   "folio_agree": 0.001,
+   "folio_pairs": 4350,
+   "folio_agree": 0.0,
    "cover_a": 0.942,
    "cover_b": 0.963,
    "span_a": [
@@ -5881,8 +5920,8 @@
    "pages_a": 361,
    "page_conc_b": 0.9,
    "pages_b": 371,
-   "folio_pairs": 233,
-   "folio_agree": 0.0,
+   "folio_pairs": 1480,
+   "folio_agree": 0.001,
    "cover_a": 0.938,
    "cover_b": 0.922,
    "span_a": [
@@ -5909,7 +5948,7 @@
    "pages_a": 545,
    "page_conc_b": 0.75,
    "pages_b": 475,
-   "folio_pairs": 4610,
+   "folio_pairs": 3655,
    "folio_agree": 0.0,
    "cover_a": 0.927,
    "cover_b": 0.996,
@@ -5937,8 +5976,8 @@
    "pages_a": 603,
    "page_conc_b": 0.743,
    "pages_b": 548,
-   "folio_pairs": 274,
-   "folio_agree": 0.496,
+   "folio_pairs": 3853,
+   "folio_agree": 0.035,
    "cover_a": 0.995,
    "cover_b": 0.981,
    "span_a": [
@@ -5965,8 +6004,8 @@
    "pages_a": 567,
    "page_conc_b": 0.757,
    "pages_b": 520,
-   "folio_pairs": 1,
-   "folio_agree": null,
+   "folio_pairs": 883,
+   "folio_agree": 0.0,
    "cover_a": 0.933,
    "cover_b": 0.987,
    "span_a": [
@@ -5993,7 +6032,7 @@
    "pages_a": 585,
    "page_conc_b": 0.772,
    "pages_b": 540,
-   "folio_pairs": 252,
+   "folio_pairs": 1172,
    "folio_agree": 0.0,
    "cover_a": 0.967,
    "cover_b": 0.984,
@@ -6049,7 +6088,7 @@
    "pages_a": 463,
    "page_conc_b": 0.818,
    "pages_b": 487,
-   "folio_pairs": 90,
+   "folio_pairs": 647,
    "folio_agree": 0.0,
    "cover_a": 0.98,
    "cover_b": 0.921,
@@ -6077,7 +6116,7 @@
    "pages_a": 482,
    "page_conc_b": 0.8,
    "pages_b": 509,
-   "folio_pairs": 4837,
+   "folio_pairs": 6044,
    "folio_agree": 0.0,
    "cover_a": 0.996,
    "cover_b": 0.922,
@@ -6133,7 +6172,7 @@
    "pages_a": 512,
    "page_conc_b": 0.773,
    "pages_b": 511,
-   "folio_pairs": 138,
+   "folio_pairs": 1836,
    "folio_agree": 0.0,
    "cover_a": 0.924,
    "cover_b": 0.983,
@@ -6161,7 +6200,7 @@
    "pages_a": 526,
    "page_conc_b": 0.833,
    "pages_b": 533,
-   "folio_pairs": 4307,
+   "folio_pairs": 4308,
    "folio_agree": 0.0,
    "cover_a": 0.951,
    "cover_b": 0.98,
@@ -6217,7 +6256,7 @@
    "pages_a": 524,
    "page_conc_b": 0.8,
    "pages_b": 522,
-   "folio_pairs": 389,
+   "folio_pairs": 4416,
    "folio_agree": 0.0,
    "cover_a": 0.989,
    "cover_b": 0.953,
@@ -6245,8 +6284,8 @@
    "pages_a": 492,
    "page_conc_b": 0.824,
    "pages_b": 518,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 1708,
+   "folio_agree": 0.0,
    "cover_a": 0.972,
    "cover_b": 0.948,
    "span_a": [
@@ -6273,8 +6312,8 @@
    "pages_a": 513,
    "page_conc_b": 0.821,
    "pages_b": 539,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 4680,
+   "folio_agree": 0.0,
    "cover_a": 0.966,
    "cover_b": 0.965,
    "span_a": [
@@ -6469,8 +6508,8 @@
    "pages_a": 110,
    "page_conc_b": 0.817,
    "pages_b": 82,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 1354,
+   "folio_agree": 0.009,
    "cover_a": 0.958,
    "cover_b": 0.929,
    "span_a": [
@@ -6497,8 +6536,8 @@
    "pages_a": 4,
    "page_conc_b": 0.6,
    "pages_b": 4,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 314,
+   "folio_agree": 0.0,
    "cover_a": 0.489,
    "cover_b": 0.57,
    "span_a": [
@@ -6525,8 +6564,8 @@
    "pages_a": 43,
    "page_conc_b": 0.646,
    "pages_b": 50,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 404,
+   "folio_agree": 0.0,
    "cover_a": 0.713,
    "cover_b": 0.773,
    "span_a": [
@@ -6553,8 +6592,8 @@
    "pages_a": 51,
    "page_conc_b": 0.8,
    "pages_b": 53,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 694,
+   "folio_agree": 0.0,
    "cover_a": 0.737,
    "cover_b": 0.793,
    "span_a": [
@@ -6581,8 +6620,8 @@
    "pages_a": 20,
    "page_conc_b": 0.817,
    "pages_b": 12,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 159,
+   "folio_agree": 0.0,
    "cover_a": 0.661,
    "cover_b": 0.607,
    "span_a": [
@@ -6609,8 +6648,8 @@
    "pages_a": 2,
    "page_conc_b": 0.9,
    "pages_b": 2,
-   "folio_pairs": 2,
-   "folio_agree": null,
+   "folio_pairs": 156,
+   "folio_agree": 0.0,
    "cover_a": 0.204,
    "cover_b": 0.423,
    "span_a": [
@@ -6637,8 +6676,8 @@
    "pages_a": 49,
    "page_conc_b": 0.8,
    "pages_b": 61,
-   "folio_pairs": 9,
-   "folio_agree": null,
+   "folio_pairs": 735,
+   "folio_agree": 0.0,
    "cover_a": 0.688,
    "cover_b": 0.804,
    "span_a": [
@@ -6665,8 +6704,8 @@
    "pages_a": 7,
    "page_conc_b": 0.8,
    "pages_b": 8,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 186,
+   "folio_agree": 0.005,
    "cover_a": 0.17,
    "cover_b": 0.24,
    "span_a": [
@@ -6693,8 +6732,8 @@
    "pages_a": 3,
    "page_conc_b": 0.633,
    "pages_b": 6,
-   "folio_pairs": 14,
-   "folio_agree": null,
+   "folio_pairs": 240,
+   "folio_agree": 0.071,
    "cover_a": 0.297,
    "cover_b": 0.384,
    "span_a": [
@@ -6777,8 +6816,8 @@
    "pages_a": 677,
    "page_conc_b": 0.741,
    "pages_b": 653,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 10034,
+   "folio_agree": 0.008,
    "cover_a": 0.997,
    "cover_b": 0.997,
    "span_a": [
@@ -6917,8 +6956,8 @@
    "pages_a": 677,
    "page_conc_b": 0.733,
    "pages_b": 651,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 9941,
+   "folio_agree": 0.01,
    "cover_a": 0.994,
    "cover_b": 0.995,
    "span_a": [
@@ -7001,8 +7040,8 @@
    "pages_a": 122,
    "page_conc_b": 0.8,
    "pages_b": 131,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 1901,
+   "folio_agree": 0.047,
    "cover_a": 0.877,
    "cover_b": 0.904,
    "span_a": [
@@ -7029,8 +7068,8 @@
    "pages_a": 222,
    "page_conc_b": 0.8,
    "pages_b": 247,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 2543,
+   "folio_agree": 0.115,
    "cover_a": 0.975,
    "cover_b": 0.964,
    "span_a": [
@@ -7085,8 +7124,8 @@
    "pages_a": 4,
    "page_conc_b": 0.6,
    "pages_b": 5,
-   "folio_pairs": 14,
-   "folio_agree": null,
+   "folio_pairs": 49,
+   "folio_agree": 0.082,
    "cover_a": 0.852,
    "cover_b": 0.786,
    "span_a": [
@@ -7113,8 +7152,8 @@
    "pages_a": 13,
    "page_conc_b": 0.571,
    "pages_b": 11,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 47,
+   "folio_agree": 0.0,
    "cover_a": 0.875,
    "cover_b": 0.893,
    "span_a": [
@@ -7169,8 +7208,8 @@
    "pages_a": 5,
    "page_conc_b": 0.8,
    "pages_b": 3,
-   "folio_pairs": 13,
-   "folio_agree": null,
+   "folio_pairs": 58,
+   "folio_agree": 0.017,
    "cover_a": 0.893,
    "cover_b": 0.833,
    "span_a": [
@@ -7225,8 +7264,8 @@
    "pages_a": 54,
    "page_conc_b": 0.833,
    "pages_b": 55,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 439,
+   "folio_agree": 0.0,
    "cover_a": 1.0,
    "cover_b": 0.943,
    "span_a": [
@@ -7253,8 +7292,8 @@
    "pages_a": 4,
    "page_conc_b": 0.714,
    "pages_b": 5,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 103,
+   "folio_agree": 0.019,
    "cover_a": 0.746,
    "cover_b": 0.644,
    "span_a": [
@@ -7281,8 +7320,8 @@
    "pages_a": 4,
    "page_conc_b": 1.0,
    "pages_b": 3,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 108,
+   "folio_agree": 0.0,
    "cover_a": 0.831,
    "cover_b": 0.764,
    "span_a": [
@@ -7309,8 +7348,8 @@
    "pages_a": 3,
    "page_conc_b": null,
    "pages_b": 0,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 100,
+   "folio_agree": 0.0,
    "cover_a": 0.78,
    "cover_b": 0.618,
    "span_a": [
@@ -7337,8 +7376,8 @@
    "pages_a": 23,
    "page_conc_b": 1.0,
    "pages_b": 24,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 242,
+   "folio_agree": 0.012,
    "cover_a": 0.871,
    "cover_b": 0.932,
    "span_a": [
@@ -7393,8 +7432,8 @@
    "pages_a": 10,
    "page_conc_b": 1.0,
    "pages_b": 7,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 177,
+   "folio_agree": 0.006,
    "cover_a": 0.857,
    "cover_b": 0.787,
    "span_a": [
@@ -7421,8 +7460,8 @@
    "pages_a": 20,
    "page_conc_b": 1.0,
    "pages_b": 16,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 201,
+   "folio_agree": 0.005,
    "cover_a": 0.898,
    "cover_b": 0.847,
    "span_a": [
@@ -7449,8 +7488,8 @@
    "pages_a": 5,
    "page_conc_b": 1.0,
    "pages_b": 3,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 113,
+   "folio_agree": 0.027,
    "cover_a": 0.763,
    "cover_b": 0.584,
    "span_a": [
@@ -7477,8 +7516,8 @@
    "pages_a": 49,
    "page_conc_b": 0.8,
    "pages_b": 51,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 455,
+   "folio_agree": 0.015,
    "cover_a": 0.986,
    "cover_b": 0.966,
    "span_a": [
@@ -7505,8 +7544,8 @@
    "pages_a": 4,
    "page_conc_b": 0.9,
    "pages_b": 4,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 111,
+   "folio_agree": 0.045,
    "cover_a": 0.64,
    "cover_b": 0.776,
    "span_a": [
@@ -7533,8 +7572,8 @@
    "pages_a": 44,
    "page_conc_b": 0.721,
    "pages_b": 42,
-   "folio_pairs": 16,
-   "folio_agree": null,
+   "folio_pairs": 219,
+   "folio_agree": 0.0,
    "cover_a": 0.974,
    "cover_b": 0.835,
    "span_a": [
@@ -7561,8 +7600,8 @@
    "pages_a": 3,
    "page_conc_b": 0.6,
    "pages_b": 5,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 44,
+   "folio_agree": 0.0,
    "cover_a": 0.658,
    "cover_b": 0.6,
    "span_a": [
@@ -7757,8 +7796,8 @@
    "pages_a": 4,
    "page_conc_b": 0.857,
    "pages_b": 3,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 88,
+   "folio_agree": 0.0,
    "cover_a": 0.311,
    "cover_b": 0.339,
    "span_a": [
@@ -7785,8 +7824,8 @@
    "pages_a": 6,
    "page_conc_b": 1.0,
    "pages_b": 3,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 105,
+   "folio_agree": 0.0,
    "cover_a": 0.435,
    "cover_b": 0.346,
    "span_a": [
@@ -7813,8 +7852,8 @@
    "pages_a": 37,
    "page_conc_b": 1.0,
    "pages_b": 37,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 279,
+   "folio_agree": 0.011,
    "cover_a": 0.755,
    "cover_b": 0.673,
    "span_a": [
@@ -7841,8 +7880,8 @@
    "pages_a": 14,
    "page_conc_b": 1.0,
    "pages_b": 7,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 233,
+   "folio_agree": 0.009,
    "cover_a": 0.694,
    "cover_b": 0.637,
    "span_a": [
@@ -7869,8 +7908,8 @@
    "pages_a": 81,
    "page_conc_b": 0.8,
    "pages_b": 81,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 593,
+   "folio_agree": 0.073,
    "cover_a": 0.836,
    "cover_b": 0.837,
    "span_a": [
@@ -7897,8 +7936,8 @@
    "pages_a": 15,
    "page_conc_b": 1.0,
    "pages_b": 9,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 286,
+   "folio_agree": 0.007,
    "cover_a": 0.563,
    "cover_b": 0.508,
    "span_a": [
@@ -7925,8 +7964,8 @@
    "pages_a": 17,
    "page_conc_b": 0.8,
    "pages_b": 19,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 241,
+   "folio_agree": 0.017,
    "cover_a": 0.518,
    "cover_b": 0.543,
    "span_a": [
@@ -7953,8 +7992,8 @@
    "pages_a": 3,
    "page_conc_b": 1.0,
    "pages_b": 1,
-   "folio_pairs": 1,
-   "folio_agree": null,
+   "folio_pairs": 56,
+   "folio_agree": 0.0,
    "cover_a": 0.234,
    "cover_b": 0.336,
    "span_a": [
@@ -7981,8 +8020,8 @@
    "pages_a": 1,
    "page_conc_b": 1.0,
    "pages_b": 1,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 96,
+   "folio_agree": 0.0,
    "cover_a": 0.359,
    "cover_b": 0.227,
    "span_a": [
@@ -8009,8 +8048,8 @@
    "pages_a": 27,
    "page_conc_b": 1.0,
    "pages_b": 20,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 185,
+   "folio_agree": 0.0,
    "cover_a": 0.599,
    "cover_b": 0.503,
    "span_a": [
@@ -8037,7 +8076,7 @@
    "pages_a": 8,
    "page_conc_b": 0.882,
    "pages_b": 8,
-   "folio_pairs": 0,
+   "folio_pairs": 5,
    "folio_agree": null,
    "cover_a": 0.121,
    "cover_b": 0.161,
@@ -8065,8 +8104,8 @@
    "pages_a": 1,
    "page_conc_b": 1.0,
    "pages_b": 1,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 74,
+   "folio_agree": 0.986,
    "cover_a": 0.879,
    "cover_b": 0.879,
    "span_a": [
@@ -8093,8 +8132,8 @@
    "pages_a": 22,
    "page_conc_b": 1.0,
    "pages_b": 22,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 212,
+   "folio_agree": 0.995,
    "cover_a": 1.0,
    "cover_b": 1.0,
    "span_a": [
@@ -8121,8 +8160,8 @@
    "pages_a": 23,
    "page_conc_b": 1.0,
    "pages_b": 23,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 199,
+   "folio_agree": 0.764,
    "cover_a": 0.97,
    "cover_b": 0.97,
    "span_a": [
@@ -8149,8 +8188,8 @@
    "pages_a": 0,
    "page_conc_b": null,
    "pages_b": 0,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 45,
+   "folio_agree": 1.0,
    "cover_a": 0.667,
    "cover_b": 0.667,
    "span_a": [
@@ -8177,8 +8216,8 @@
    "pages_a": 0,
    "page_conc_b": null,
    "pages_b": 0,
-   "folio_pairs": 0,
-   "folio_agree": null,
+   "folio_pairs": 41,
+   "folio_agree": 0.61,
    "cover_a": 0.667,
    "cover_b": 0.667,
    "span_a": [
@@ -8205,8 +8244,8 @@
    "pages_a": 561,
    "page_conc_b": 0.731,
    "pages_b": 511,
-   "folio_pairs": 10306,
-   "folio_agree": 0.0,
+   "folio_pairs": 10547,
+   "folio_agree": 0.015,
    "cover_a": 0.998,
    "cover_b": 0.972,
    "span_a": [
@@ -8233,8 +8272,8 @@
    "pages_a": 549,
    "page_conc_b": 0.734,
    "pages_b": 532,
-   "folio_pairs": 10706,
-   "folio_agree": 0.033,
+   "folio_pairs": 11038,
+   "folio_agree": 0.058,
    "cover_a": 0.98,
    "cover_b": 0.994,
    "span_a": [
@@ -8261,8 +8300,8 @@
    "pages_a": 506,
    "page_conc_b": 0.795,
    "pages_b": 510,
-   "folio_pairs": 2509,
-   "folio_agree": 0.003,
+   "folio_pairs": 2675,
+   "folio_agree": 0.039,
    "cover_a": 0.92,
    "cover_b": 0.981,
    "span_a": [
@@ -8373,7 +8412,7 @@
    "pages_a": 345,
    "page_conc_b": 0.75,
    "pages_b": 314,
-   "folio_pairs": 7302,
+   "folio_pairs": 7613,
    "folio_agree": 0.0,
    "cover_a": 0.868,
    "cover_b": 1.0,
@@ -9269,8 +9308,8 @@
    "pages_a": 535,
    "page_conc_b": 0.75,
    "pages_b": 546,
-   "folio_pairs": 10156,
-   "folio_agree": 0.044,
+   "folio_pairs": 13122,
+   "folio_agree": 0.155,
    "cover_a": 0.939,
    "cover_b": 0.912,
    "span_a": [
@@ -9409,7 +9448,7 @@
    "pages_a": 585,
    "page_conc_b": 0.793,
    "pages_b": 616,
-   "folio_pairs": 2131,
+   "folio_pairs": 2293,
    "folio_agree": 0.0,
    "cover_a": 0.99,
    "cover_b": 0.983,

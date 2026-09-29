@@ -1193,9 +1193,11 @@ What else it found:
 - ⚠️ **`trowsgeneraldire19131trow` duplicates p1, not p2.** Its pages align with p1's on 373 pages
   (cover 96%/95%). The failure register below had guessed p2 from an identical `imagecount`.
 - **Twins check each other's folios.** Aligned pages must print the same number. Where the fits
-  disagree, one misread: 1906BPL p.670 = `c00geor` "p.70", p.897 = "p.4". 1903BPL and 1907BPL
-  disagree with their L–Z `geor` halves on all 287 and 453 aligned lines whose pages both fits
-  read. That gives the folio leading-digit repair ready-made training pairs.
+  disagree, one misread: 1906BPL p.670 = `c00geor` "p.70", p.897 = "p.4". 1903BPL disagrees with
+  its L–Z `geor` half on all 287 aligned lines whose pages both fits read. That gives the folio
+  leading-digit repair ready-made training pairs. *(1907BPL was first listed here too, at 0% of
+  453. That was my artifact: pages were rebuilt from the sidecar's segments, which skip
+  unnumbered leaves. With the fit's own leaf list, 1907BPL agrees with its half on 91.5%.)*
 - **Standing type:** the 1830s Brooklyn directories align page for page across consecutive years,
   on 16–24 pages. `micro_0007` and `_0008` print "for the year 1830" and "1831", so they are
   different editions set from kept type. Such pairs stay `undecided` (under 30 aligned pages)

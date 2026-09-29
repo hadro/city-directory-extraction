@@ -393,21 +393,37 @@ def hash_volume(ident: str, every_line: bool = False):
                 h = _h(t)
                 counts[h] += 1
                 leaf_of[h] = row["context"]["leaf"]
-    # every leaf carrying a candidate line: the text leaves a folio segment counts pages over
-    text_leaves = set()
-    with gzip.open(OCR / f"{ident}_lines.jsonl.gz", "rt", encoding="utf-8") as fh:
-        for line in fh:
-            m = LEAF_RX.search(line)
-            if m:
-                text_leaves.add(int(m.group(1)))
     uniq = sorted(h for h, c in counts.items() if c == 1)
-    return (ident, kind, n, sorted(text_leaves), array("Q", uniq),
+    return (ident, kind, n, content_leaves(ident), array("Q", uniq),
             array("L", (leaf_of[h] for h in uniq)))
+
+
+DUMP_HEAD = re.compile(r'"leaf":\s*(\d+).*?"chars":\s*(\d+)')
+CONTENT_CHARS = 50      # survey_folios.CONTENT_CHARS: the leaves a segment counts pages over
+
+
+def content_leaves(ident: str) -> list:
+    """Dump leaves with >= CONTENT_CHARS characters, read from each record's head so the words
+    are never parsed. Closer to what a folio segment counts than the leaves carrying a candidate
+    line, but still not exact: a segment also skips the unnumbered leaves inside it (Doggett
+    1845's first segment has 134 content leaves and 131 pages), and the sidecar does not say which.
+    Good enough for the twin pass's secondary folio check. For the page of every leaf, run
+    survey_folios.fit(), as postprocess/assemble_records.py does."""
+    out = []
+    path = OCR / f"{ident}_words.jsonl.gz"
+    if not path.exists():
+        return out
+    with gzip.open(path, "rt", encoding="utf-8") as fh:
+        for line in fh:
+            m = DUMP_HEAD.search(line[:300])
+            if m and int(m.group(2)) >= CONTENT_CHARS:
+                out.append(int(m.group(1)))
+    return out
 
 
 def folio_map(ident: str, text_leaves: list) -> dict:
     """leaf -> printed page, from the sidecar's margin-fit segments. A segment numbers pages over
-    its text leaves, so it is used only where this volume's text leaves count out exactly."""
+    its text leaves (pass content_leaves()), so it is used only where they count out exactly."""
     p = SIDECARS / f"ia_{ident}.json"
     if not p.exists():
         return {}

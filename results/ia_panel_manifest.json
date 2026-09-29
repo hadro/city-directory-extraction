@@ -1,4 +1,34 @@
 {
+ "smith1855__1856BPL": {
+  "volume": "1856BPL",
+  "gold_rows": 185,
+  "matched": 185,
+  "matched_pct": 100.0,
+  "pairs": 0,
+  "identical_text": 153,
+  "in_scope": 185,
+  "median_match": 1.0,
+  "leaves_unlocated": 0,
+  "unmatched_examples": [],
+  "set": "smith1855",
+  "twin_of": "smith1855_eval.jsonl",
+  "file": "data/iapanel/iapanel_smith1855__1856BPL.jsonl"
+ },
+ "smith1856__1857BPL": {
+  "volume": "1857BPL",
+  "gold_rows": 229,
+  "matched": 229,
+  "matched_pct": 100.0,
+  "pairs": 1,
+  "identical_text": 185,
+  "in_scope": 229,
+  "median_match": 1.0,
+  "leaves_unlocated": 0,
+  "unmatched_examples": [],
+  "set": "smith1856",
+  "twin_of": "smith1856_eval.jsonl",
+  "file": "data/iapanel/iapanel_smith1856__1857BPL.jsonl"
+ },
  "lain1876": {
   "volume": "1876BPL",
   "gold_rows": 103,
@@ -10,7 +40,9 @@
   "median_match": 1.0,
   "leaves_unlocated": 0,
   "unmatched_examples": [],
-  "file": "data/iapanel_lain1876_eval.jsonl"
+  "set": "lain1876",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_lain1876.jsonl"
  },
  "lain": {
   "volume": "1897BPL",
@@ -32,7 +64,9 @@
    "ALBURTUS JOHN P. physician, 1712 Fulton",
    "Albus Fred'k H. grocer, 59 Carlton, h 148 Park av === ADVERTISEMENT === H. F. BURROUGHS & CO. DEALERS IN LIME, BRICKS, LATH, AND ALL KINDS OF MASONS' MATERIALS. KENT AVENUE, FOOT OF HEWES ST.—TELEPHONE CALL, 428 WILLIAMSBURGH. JOHNSON AVENUE AND NEWTOWN CREEK.—TELEPHONE CALL, 471 WILLIAMSBURGH. YARDS: REEDY ELEVATOR COMPANY Manufacturers of High Grade Passenger and Freight Elevators, Electric, Hydraulic, Steam, Gas and Hand Power, for all Classes of Business. 31-33 Tenth Avenue, New York. Telephone Call, 357 18th St. === END ADVERTISEMENT ==="
   ],
-  "file": "data/iapanel_lain_eval.jsonl"
+  "set": "lain",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_lain.jsonl"
  },
  "ogden1839": {
   "volume": "brooklyndirector00ogde",
@@ -52,7 +86,9 @@
    "Force Peter, Nassau n Jackson",
    "Ford John & Andrew, grocers Tillary c Stanton"
   ],
-  "file": "data/iapanel_ogden1839_eval.jsonl"
+  "set": "ogden1839",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_ogden1839.jsonl"
  },
  "doggett1846": {
   "volume": "doggettsnewyorkc1846dogg",
@@ -65,7 +101,9 @@
   "median_match": 1.0,
   "leaves_unlocated": 0,
   "unmatched_examples": [],
-  "file": "data/iapanel_doggett1846_eval.jsonl"
+  "set": "doggett1846",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_doggett1846.jsonl"
  },
  "boyd1890": {
   "volume": "flushingnewyorkc00boyd",
@@ -80,7 +118,24 @@
   "unmatched_examples": [
    "costan William, laborer, h 60 Grove"
   ],
-  "file": "data/iapanel_boyd1890_eval.jsonl"
+  "set": "boyd1890",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_boyd1890.jsonl"
+ },
+ "hearne1852__hearnesbrooklync1852unse": {
+  "volume": "hearnesbrooklync1852unse",
+  "gold_rows": 52,
+  "matched": 52,
+  "matched_pct": 100.0,
+  "pairs": 0,
+  "identical_text": 35,
+  "in_scope": 52,
+  "median_match": 1.0,
+  "leaves_unlocated": 0,
+  "unmatched_examples": [],
+  "set": "hearne1852",
+  "twin_of": "hearne1852_eval.jsonl",
+  "file": "data/iapanel/iapanel_hearne1852__hearnesbrooklync1852unse.jsonl"
  },
  "mercein1820": {
   "volume": "merceinscitydire00merc",
@@ -93,7 +148,33 @@
   "median_match": 1.0,
   "leaves_unlocated": 0,
   "unmatched_examples": [],
-  "file": "data/iapanel_mercein1820_eval.jsonl"
+  "set": "mercein1820",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_mercein1820.jsonl"
+ },
+ "ogden1839__micro_IABROOKLYN_0016": {
+  "volume": "micro_IABROOKLYN_0016",
+  "gold_rows": 66,
+  "matched": 52,
+  "matched_pct": 78.8,
+  "pairs": 1,
+  "identical_text": 27,
+  "in_scope": 52,
+  "median_match": 1.0,
+  "leaves_unlocated": 0,
+  "unmatched_examples": [
+   "*Flash M. P. C. Jay n Concord",
+   "Fleet Jesse, Fulton n Fleet",
+   "Fletcher G. merchant 104 Maiden Lane N. Y. h 135 Hicks",
+   "Fletcher James, grocer Nassau c Pearl",
+   "Fobes Alpheus, merch 128 Front N. Y. h 140 Sands",
+   "Foote Andrew, merchant 105 Front N. Y. h 135 Bridge",
+   "Ford John & Andrew, grocers Tillary c Stanton",
+   "*Simmons Henry, cook 244 Marshall"
+  ],
+  "set": "ogden1839",
+  "twin_of": "ogden1839_eval.jsonl",
+  "file": "data/iapanel/iapanel_ogden1839__micro_IABROOKLYN_0016.jsonl"
  },
  "hearne1852": {
   "volume": "micro_IABROOKLYN_0030",
@@ -110,7 +191,9 @@
    "Rogers Jonathan, builder 90 Classon n Myrtle av",
    "Rogers Joshua, grocer 36 Willoughby"
   ],
-  "file": "data/iapanel_hearne1852_eval.jsonl"
+  "set": "hearne1852",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_hearne1852.jsonl"
  },
  "smith1855": {
   "volume": "micro_IABROOKLYN_0034",
@@ -132,7 +215,9 @@
    "Farrell Ann, wid. Patrick, h. 290 Plymouth",
    "Farrell Berkley, laborer, h. Underhill av. n. Baltic st."
   ],
-  "file": "data/iapanel_smith1855_eval.jsonl"
+  "set": "smith1855",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_smith1855.jsonl"
  },
  "hopehenderson1856": {
   "volume": "micro_IABROOKLYN_0035",
@@ -154,7 +239,9 @@
    "Hagan Ellen, wid. Peter, h. Flushing av. cor. Oxford st.",
    "Hagan Felix, laborer, h. 22 Amity"
   ],
-  "file": "data/iapanel_hopehenderson1856_eval.jsonl"
+  "set": "hopehenderson1856",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_hopehenderson1856.jsonl"
  },
  "smith1856": {
   "volume": "micro_IABROOKLYN_0036",
@@ -176,7 +263,24 @@
    "HOLMES WILLIAM M. grocer, 158 Court",
    "Holmguyst Hannah, widow, 109 Gold"
   ],
-  "file": "data/iapanel_smith1856_eval.jsonl"
+  "set": "smith1856",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_smith1856.jsonl"
+ },
+ "franks1786__newyorkbrooklynd00durs": {
+  "volume": "newyorkbrooklynd00durs",
+  "gold_rows": 56,
+  "matched": 56,
+  "matched_pct": 100.0,
+  "pairs": 1,
+  "identical_text": 3,
+  "in_scope": 56,
+  "median_match": 0.947,
+  "leaves_unlocated": 0,
+  "unmatched_examples": [],
+  "set": "franks1786",
+  "twin_of": "franks1786_eval.jsonl",
+  "file": "data/iapanel/iapanel_franks1786__newyorkbrooklynd00durs.jsonl"
  },
  "rode1851": {
   "volume": "newyorkcitydirec00rode",
@@ -189,7 +293,9 @@
   "median_match": 1.0,
   "leaves_unlocated": 0,
   "unmatched_examples": [],
-  "file": "data/iapanel_rode1851_eval.jsonl"
+  "set": "rode1851",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_rode1851.jsonl"
  },
  "duncan1794": {
   "volume": "newyorkdirectory00dunc",
@@ -202,7 +308,24 @@
   "median_match": 0.97,
   "leaves_unlocated": 0,
   "unmatched_examples": [],
-  "file": "data/iapanel_duncan1794_eval.jsonl"
+  "set": "duncan1794",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_duncan1794.jsonl"
+ },
+ "franks1786__newyorkdirectory00durs_0": {
+  "volume": "newyorkdirectory00durs_0",
+  "gold_rows": 56,
+  "matched": 56,
+  "matched_pct": 100.0,
+  "pairs": 1,
+  "identical_text": 32,
+  "in_scope": 56,
+  "median_match": 1.0,
+  "leaves_unlocated": 0,
+  "unmatched_examples": [],
+  "set": "franks1786",
+  "twin_of": "franks1786_eval.jsonl",
+  "file": "data/iapanel/iapanel_franks1786__newyorkdirectory00durs_0.jsonl"
  },
  "franks1786": {
   "volume": "newyorkdirectory00fran_0",
@@ -215,7 +338,9 @@
   "median_match": 0.93,
   "leaves_unlocated": 0,
   "unmatched_examples": [],
-  "file": "data/iapanel_franks1786_eval.jsonl"
+  "set": "franks1786",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_franks1786.jsonl"
  },
  "trow1907": {
   "volume": "trowsgeneraldir1907p2trow",
@@ -228,6 +353,23 @@
   "median_match": 0.925,
   "leaves_unlocated": 0,
   "unmatched_examples": [],
-  "file": "data/iapanel_trow1907_eval.jsonl"
+  "set": "trow1907",
+  "twin_of": null,
+  "file": "data/iapanel/iapanel_trow1907.jsonl"
+ },
+ "polk1917__trowsgeneraldire1917trow": {
+  "volume": "trowsgeneraldire1917trow",
+  "gold_rows": 72,
+  "matched": 72,
+  "matched_pct": 100.0,
+  "pairs": 2,
+  "identical_text": 3,
+  "in_scope": 72,
+  "median_match": 0.939,
+  "leaves_unlocated": 0,
+  "unmatched_examples": [],
+  "set": "polk1917",
+  "twin_of": "polk1917_eval.jsonl",
+  "file": "data/iapanel/iapanel_polk1917__trowsgeneraldire1917trow.jsonl"
  }
 }

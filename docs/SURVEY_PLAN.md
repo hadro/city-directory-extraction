@@ -1075,6 +1075,11 @@ re-derived from the dumps (`--rederive`, ~3 s a volume), then `sections` and `sc
 `apply_survey.py` dry run afterwards: no CSV change. Page and section claims do not read the
 extraction lines.
 
+**Twin holdout (2026-09-28).** Seven gold sets have the same edition in a second scan (sibling
+session's `survey_twins.py`). The twins' gold pages were untagged, because `locate_holdout` only
+searched the volume named in the gold's image path. `GOLD_TWINS` in `survey_harvest.py`, keyed by
+gold set, now locates them volume-wide and tags them. Re-apply with `--relocate-holdout`.
+
 #### The original design
 
 Per volume, from the JSONL + pageindex + `_page_numbers.json`:

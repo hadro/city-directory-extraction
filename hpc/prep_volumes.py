@@ -8,7 +8,7 @@ Stage whole volumes for a Torch prediction run (hpc/35_volumes.sbatch). Runs on 
 
     python3 hpc/prep_volumes.py --ids micro_IABROOKLYN_0030,merceinscitydire00merc
     python3 hpc/prep_volumes.py --ids ... --chunk 10000 --out data/volumes
-    python3 hpc/prep_volumes.py --ids ... --files data/iapanel_*_eval.jsonl   # + eval files
+    python3 hpc/prep_volumes.py --ids ... --files data/iapanel/*.jsonl   # + eval files
     tar czf cde-volumes.tar.gz data/volumes          # ship next to the bundle
     python3 hpc/prep_volumes.py --self-test
 
@@ -76,7 +76,7 @@ def main(argv=None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--ids", help="comma list of IA identifiers")
     ap.add_argument("--files", nargs="*", default=[],
-                    help="extra JSONL files (e.g. eval/ia_panel.py's data/iapanel_<set>_eval.jsonl), "
+                    help="extra JSONL files (e.g. eval/ia_panel.py's data/iapanel/iapanel_<set>.jsonl), "
                          "each staged as its own pseudo-volume named after the file")
     ap.add_argument("--chunk", type=int, default=10000, help="lines per array task")
     ap.add_argument("--out", default=str(REPO / "data" / "volumes"))

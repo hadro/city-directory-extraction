@@ -389,12 +389,79 @@
     98,
     15
    ],
-   "filters_at": "18ec87e-dirty",
+   "filters_at": "07e3614-dirty",
    "derived": "2026-09-28"
   },
   "words_gz_bytes": 219953,
   "hocr_deleted": true,
-  "elapsed_s": 9
+  "elapsed_s": 9,
+  "eval_holdout": {
+   "sets": [
+    "franks1786_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 59,
+     "leaf": 31,
+     "match": 1.0,
+     "coverage": 0.8,
+     "gold_lines": 11,
+     "offset": -28,
+     "twin_of": "franks1786_eval.jsonl",
+     "page": "ia:newyorkdirectory00fran_0:0059",
+     "tagged": true
+    },
+    {
+     "jp2": 68,
+     "leaf": 40,
+     "match": 0.83,
+     "coverage": 0.738,
+     "gold_lines": 12,
+     "offset": -28,
+     "twin_of": "franks1786_eval.jsonl",
+     "page": "ia:newyorkdirectory00fran_0:0068",
+     "tagged": true
+    },
+    {
+     "jp2": 78,
+     "leaf": 50,
+     "match": 1.0,
+     "coverage": 0.721,
+     "gold_lines": 7,
+     "offset": -28,
+     "twin_of": "franks1786_eval.jsonl",
+     "page": "ia:newyorkdirectory00fran_0:0078",
+     "tagged": true
+    },
+    {
+     "jp2": 79,
+     "leaf": 51,
+     "match": 0.88,
+     "coverage": 0.683,
+     "gold_lines": 26,
+     "offset": -28,
+     "twin_of": "franks1786_eval.jsonl",
+     "page": "ia:newyorkdirectory00fran_0:0079",
+     "tagged": true
+    }
+   ],
+   "gold_leaves": [
+    31,
+    40,
+    50,
+    51
+   ],
+   "adjacent_leaves": [
+    30,
+    32,
+    39,
+    41,
+    49,
+    52
+   ],
+   "whole_volume": false,
+   "twin_of": "franks1786_eval.jsonl"
+  }
  },
  "listing": {
   "method": "letter-votes",
@@ -663,7 +730,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "code_at": "07e3614-dirty",
   "file": "data/survey_ocr/newyorkbrooklynd00durs_listing.jsonl.gz",
   "sections": [
    {

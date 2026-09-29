@@ -399,12 +399,53 @@
     514,
     516
    ],
-   "filters_at": "18ec87e-dirty",
+   "filters_at": "07e3614-dirty",
    "derived": "2026-09-28"
   },
   "words_gz_bytes": 2028088,
   "hocr_deleted": true,
-  "elapsed_s": 9
+  "elapsed_s": 9,
+  "eval_holdout": {
+   "sets": [
+    "hearne1852_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 174,
+     "leaf": 178,
+     "match": 1.0,
+     "coverage": 1.0,
+     "gold_lines": 30,
+     "offset": 4,
+     "twin_of": "hearne1852_eval.jsonl",
+     "page": "ia:micro_iabrooklyn_0030:0174",
+     "tagged": true
+    },
+    {
+     "jp2": 405,
+     "leaf": 410,
+     "match": 1.0,
+     "coverage": 0.974,
+     "gold_lines": 22,
+     "offset": 5,
+     "twin_of": "hearne1852_eval.jsonl",
+     "page": "ia:micro_iabrooklyn_0030:0405",
+     "tagged": true
+    }
+   ],
+   "gold_leaves": [
+    178,
+    410
+   ],
+   "adjacent_leaves": [
+    177,
+    179,
+    409,
+    411
+   ],
+   "whole_volume": false,
+   "twin_of": "hearne1852_eval.jsonl"
+  }
  },
  "listing": {
   "method": "letter-votes",
@@ -986,7 +1027,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "code_at": "07e3614-dirty",
   "file": "data/survey_ocr/hearnesbrooklync1852unse_listing.jsonl.gz",
   "sections": [
    {

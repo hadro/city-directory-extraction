@@ -625,14 +625,15 @@ everywhere (Mercein 77.5%, Doggett 87.9%): short sections full of headings and n
 ### A panel on the model's real input (`eval/ia_panel.py`, 2026-09-28)
 
 ```bash
-python3 eval/ia_panel.py build                 # data/iapanel_<set>_eval.jsonl + results/ia_panel_manifest.json
+python3 eval/ia_panel.py build                 # data/iapanel/iapanel_<set>.jsonl + results/ia_panel_manifest.json
 python3 eval/ia_panel.py score --run 4b-100k   # after the Torch run predicts on those files
 ```
 
 The 21-volume panel feeds the model hand-corrected text. This pairs the same gold records with the
 line the pipeline actually produces from IA's OCR, with no new labelling. The survey already
 verified each gold page's leaf, and the builder checks ±3 leaves where that placement was weak. **14
-sets; 1,608 of 1,902 gold rows (84.5%) reach the model as a line at all.** The unmatched rows are
+sets in their own volumes; 1,608 of 1,902 gold rows (84.5%) reach the model as a line at all.**
+With the 7 twin sets below, 21 sets and 2,310 of 2,618 rows. The unmatched rows are
 loss before the model. Most sets deliver 98–100%. The losses are in the microfilm:
 
 | set | gold rows delivered | why not more |
@@ -644,6 +645,34 @@ loss before the model. Most sets deliver 98–100%. The losses are in the microf
 So on the thin tier, a large part of the gold never reaches the model at any quality. Scoring the
 delivered rows needs 4B predictions on them. They are staged with the second Torch run
 (`data/volumes/iapanel_*`). Every row carries `eval_holdout: gold`.
+
+**Much of that microfilm ceiling is a choice of scan, not the OCR engine.** A sibling session
+matched every gold set against every harvested volume (`data_prep/survey_twins.py`,
+`results/survey_twins_gold.json`). Seven gold sets have a **twin**: the same edition in another
+scan. Built as their own panel sets (`<set>__<twin>`), on the same gold rows:
+
+| gold | microfilm copy delivers | book-scan twin delivers (identical text) |
+|---|---|---|
+| smith1856 | 140/229 | **229/229** (185), 1857BPL |
+| smith1855 | 57/185 | **185/185** (153), 1856BPL (the 1855–56 edition: pair editions by the printed "year ending") |
+| hearne1852 | 49/52 | **52/52** (35), hearnesbrooklync1852unse |
+
+The other twins are ogden1839 (micro_IABROOKLYN_0016), franks1786 (both Durst reprints) and
+polk1917, whose gold is NYPL-sourced, in Trow 1917. **The full-corpus run should read the
+book scan wherever an edition has one.** The twin pass is the list of which editions do.
+
+**Twins were a holdout leak, now closed.** A twin's gold pages sit under other leaf numbers and
+nothing in the gold's image path names it, so they were emitted as ordinary untagged lines.
+`survey_harvest.GOLD_TWINS` (keyed by gold set) now locates each twin's gold pages volume-wide,
+ranked by token coverage, since the thresholded score ties on common words. It tags the pages
+gold and their neighbours adjacent, and re-derives. All seven twins sit at match 0.83–1.0.
+`survey_harvest.py --relocate-holdout` re-applies the map.
+
+⚠️ **Page tags do not cover neighbouring editions.** Doggett 1845 and 1847 reprint 22–27% of the
+doggett1846 gold lines verbatim, Trow 1905/06 about 10–12% of trow1907's, Lain 1875 9.7% of
+lain1876's. If a training set is ever drawn from harvested lines, the guard has to work at the
+line level: drop any line whose normalised text (lower case, non-alphanumerics to spaces)
+equals a gold line. Training today is synthetic, so nothing leaks yet.
 
 ---
 

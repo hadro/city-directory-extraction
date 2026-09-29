@@ -7,7 +7,7 @@
 A panel on the model's REAL input: the gold records, paired with the line the pipeline actually
 produces for each from IA's OCR, instead of the hand-corrected text the panel feeds it.
 
-    python3 eval/ia_panel.py build                   # -> data/iapanel_<set>_eval.jsonl + manifest
+    python3 eval/ia_panel.py build                   # -> data/iapanel/iapanel_<set>.jsonl + manifest
     python3 eval/ia_panel.py score --run 4b-100k     # after a prediction run over those files
     python3 eval/ia_panel.py --self-test
 
@@ -30,6 +30,12 @@ page the pipeline never delivers, and the manifest counts them.
 where the panel has predictions for the same gold rows, the clean-text score beside it. The gap
 between the two is what the OCR costs.
 
+TWINS. Where the corpus holds the gold's edition in a second scan (survey_harvest.GOLD_TWINS:
+smith1856 in 1857BPL, smith1855 in 1856BPL, hearne1852 in hearnesbrooklync1852unse, ogden1839 in
+micro_IABROOKLYN_0016, franks1786 in two Durst reprints, polk1917 -- NYPL gold -- in Trow 1917),
+the twin is built as its own set, `<set>__<ident>`, on the same gold rows. The microfilm-vs-book-scan gap on
+identical gold is then a measurement, not a guess.
+
 HOLDOUT. Every row carries context.eval_holdout = "gold". These files are for measurement only
 and must never feed training.
 """
@@ -46,6 +52,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path[:0] = [str(REPO / "eval"), str(REPO / "data_prep"), str(REPO / "postprocess")]
 from evaluate import FIELDS, load_pred, metrics, score  # noqa: E402
+from survey_harvest import gold_page_key  # noqa: E402
 from verify_harvest_leakage import page_id  # noqa: E402
 from volume_run_report import EXCLUDE, _key, align  # noqa: E402
 
@@ -54,6 +61,7 @@ DATA = REPO / "data"
 OCR = DATA / "survey_ocr"
 PANEL_PREDS = REPO / "results" / "runs" / "scale-runs" / "preds"
 MANIFEST = REPO / "results" / "ia_panel_manifest.json"
+PANEL_DIR = DATA / "iapanel"
 LEAF_WINDOW = 3          # leaves either side of the survey's placement tried for each gold page
 
 
@@ -62,8 +70,10 @@ def _labelled(rows: list) -> bool:
     return any(r["record"].get("name") for r in rows)
 
 
-def gold_leaf(row: dict, jp2_to_leaf: dict):
+def gold_leaf(row: dict, jp2_to_leaf: dict, key_to_leaf: dict = None):
     ctx = row.get("context") or {}
+    if key_to_leaf and gold_page_key(ctx) in key_to_leaf:
+        return key_to_leaf[gold_page_key(ctx)]     # a twin: located by page, IA or NYPL
     img = ctx.get("image")
     if img and img != "?":
         pid = page_id(img)
@@ -80,12 +90,13 @@ def build_set(ident: str, set_file: str, evidence: list, lines: list, scoped: se
             if x.strip()]
     if not _labelled(gold):
         return None, None
-    jp2_to_leaf = {e["jp2"]: e["leaf"] for e in evidence}
+    jp2_to_leaf = {e["jp2"]: e["leaf"] for e in evidence if "page" not in e}
+    key_to_leaf = {e["page"]: e["leaf"] for e in evidence if "page" in e}
     rows = [({"raw_line": ln["raw_line"], "context": ln["context"]}, None) for ln in lines]
     by_leaf = defaultdict(list)
     for i, ln in enumerate(lines):
         by_leaf[ln["context"]["leaf"]].append(i)
-    leaf_of = [gold_leaf(g, jp2_to_leaf) for g in gold]
+    leaf_of = [gold_leaf(g, jp2_to_leaf, key_to_leaf) for g in gold]
     out, matched = [], {}
     for L in sorted({x for x in leaf_of if x is not None}):
         gi = [i for i, x in enumerate(leaf_of) if x == L]
@@ -154,11 +165,18 @@ def build() -> dict:
             rows, stats = build_set(ident, set_file, held.get("evidence", []), lines, scoped)
             if rows is None:
                 continue
-            name = set_file[:-len("_eval.jsonl")]
-            out = DATA / f"iapanel_{name}_eval.jsonl"
+            base = set_file[:-len("_eval.jsonl")]
+            # a twin (the same edition in another scan) scores the same gold beside its sibling
+            name = f"{base}__{ident}" if held.get("twin_of") else base
+            # NOT data/*_eval.jsonl: that glob means "hand-built gold" to survey_harvest,
+            # verify_harvest_leakage, survey_twins and make_bundle, and these rows would be
+            # mistaken for new gold sets
+            PANEL_DIR.mkdir(parents=True, exist_ok=True)
+            out = PANEL_DIR / f"iapanel_{name}.jsonl"
             out.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows),
                            encoding="utf-8")
-            manifest[name] = {**stats, "file": str(out.relative_to(REPO))}
+            manifest[name] = {**stats, "set": base, "twin_of": held.get("twin_of"),
+                              "file": str(out.relative_to(REPO))}
             print(f"{name:22s} {ident:28s} {stats['matched']:>4}/{stats['gold_rows']:<4} "
                   f"({stats['matched_pct']:5.1f}%)  identical text {stats['identical_text']:>4}  "
                   f"pairs {stats['pairs']:>3}  in scope {stats['in_scope']:>4}", file=sys.stderr)
@@ -191,7 +209,7 @@ def score_run(run: str, preds_dir: Path) -> dict:
             raise SystemExit(f"{pf}: {len(preds)} predictions for {len(rows)} rows")
         gold = [r["record"] for r in rows]
         res = {"rows": len(rows), "gold_rows": m["gold_rows"], "ia_input": _m(gold, preds)}
-        clean = PANEL_PREDS / f"preds_{run}_{name}.txt"
+        clean = PANEL_PREDS / f"preds_{run}_{m.get('set', name)}.txt"
         if clean.exists():
             cp = load_pred(str(clean), "yaml")
             res["clean_text"] = _m(gold, [cp[r["context"]["gold_row"]] for r in rows])
@@ -209,6 +227,7 @@ def _self_test() -> int:
                  "micro_IABROOKLYN_0030_jp2%2Fmicro_IABROOKLYN_0030_0174.jp2.jpg"}}
     assert gold_leaf(g, {e["jp2"]: e["leaf"] for e in ev}) == 175, "the verified leaf, not the jp2"
     assert gold_leaf({"context": {"ia_id": "x", "leaf": 9}}, {}) == 9
+    assert gold_leaf({"context": {"image": "0021_56855258.jpg"}}, {}, {"nypl:56855258": 688}) == 688
     assert not _labelled([{"record": {"name": ""}}])
     print("self-test OK", file=sys.stderr)
     return 0

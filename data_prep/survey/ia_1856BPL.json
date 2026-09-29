@@ -361,11 +361,52 @@
     626,
     585
    ],
-   "filters_at": "18ec87e-dirty",
+   "filters_at": "07e3614-dirty",
    "derived": "2026-09-28"
   },
   "words_gz_bytes": 4796309,
-  "elapsed_s": 4
+  "elapsed_s": 4,
+  "eval_holdout": {
+   "sets": [
+    "smith1855_eval.jsonl"
+   ],
+   "evidence": [
+    {
+     "jp2": 165,
+     "leaf": 161,
+     "match": 1.0,
+     "coverage": 0.986,
+     "gold_lines": 90,
+     "offset": -4,
+     "twin_of": "smith1855_eval.jsonl",
+     "page": "ia:micro_iabrooklyn_0034:0165",
+     "tagged": true
+    },
+    {
+     "jp2": 386,
+     "leaf": 434,
+     "match": 1.0,
+     "coverage": 0.986,
+     "gold_lines": 95,
+     "offset": 48,
+     "twin_of": "smith1855_eval.jsonl",
+     "page": "ia:micro_iabrooklyn_0034:0386",
+     "tagged": true
+    }
+   ],
+   "gold_leaves": [
+    161,
+    434
+   ],
+   "adjacent_leaves": [
+    160,
+    162,
+    433,
+    435
+   ],
+   "whole_volume": false,
+   "twin_of": "smith1855_eval.jsonl"
+  }
  },
  "listing": {
   "method": "letter-votes",
@@ -997,7 +1038,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "code_at": "07e3614-dirty",
   "file": "data/survey_ocr/1856BPL_listing.jsonl.gz",
   "sections": [
    {

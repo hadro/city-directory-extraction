@@ -277,14 +277,87 @@ def gold_by_volume() -> dict:
     return {k: {"leaves": dict(v), "sets": sorted(sets[k])} for k, v in lines.items()}
 
 
+# Gold editions the corpus ALSO holds as a different scan. The gold pages are in the twin too,
+# under other leaf numbers, and nothing in the gold's image path names it, so without this map
+# the twin's gold pages were emitted as ordinary, untagged lines (found 2026-09-28 by a sibling
+# session: each gold file fuzzy-matched volume-wide; the twin reads the gold 67-83% EXACT, while
+# consecutive editions share ~0.4%). Pair editions by the printed "year ending", never by the
+# year in the identifier: 1856BPL is the 1855-56 edition, micro_IABROOKLYN_0034's twin. Keyed by
+# gold SET, not by the gold's own volume, because some gold is NYPL-sourced (polk1917) and names
+# no IA volume at all. Twins confirmed line by line by the sibling session
+# (results/survey_twins_gold.json).
+GOLD_TWINS = {                                       # gold set -> other scans of the SAME edition
+    "smith1856_eval.jsonl": ["1857BPL"],             # Smith, year ending May 1857
+    "smith1855_eval.jsonl": ["1856BPL"],             # Smith, year ending May 1856
+    "hearne1852_eval.jsonl": ["hearnesbrooklync1852unse"],
+    "ogden1839_eval.jsonl": ["micro_IABROOKLYN_0016"],   # Brooklyn Directory 1839-40
+    "franks1786_eval.jsonl": ["newyorkdirectory00durs_0",  # Durst's 1874 reprint
+                              "newyorkbrooklynd00durs"],   # 1876 reprint, long s printed as f
+    "polk1917_eval.jsonl": ["trowsgeneraldire1917trow"],   # NYPL gold; ABBYY reads the ditto `ii`
+}
+TWIN_MIN_MATCH = 0.5     # a twin page is tagged only when found this convincingly
+
+
+def gold_page_key(ctx: dict) -> str:
+    """One gold page's identity, IA or NYPL: `ia:<ident>:<jp2>`, `nypl:<id>`, or `leaf:<n>`."""
+    img = (ctx or {}).get("image")
+    if img and img != "?":
+        return ":".join(page_id(img))
+    return f"leaf:{(ctx or {}).get('leaf')}"
+
+
+def twin_gold() -> dict:
+    """{twin ident (lower): gold entry} for every GOLD_TWINS twin, built from the gold set's own
+    pages, so NYPL-sourced gold (polk1917) is covered too. `leaves` is keyed by a page number:
+    the jp2 number for an IA page, else the page's order in the file. It is only a label, since a
+    twin's gold is searched for volume-wide. `pages` maps it back to gold_page_key."""
+    out = {}
+    for set_file, twins in GOLD_TWINS.items():
+        path = REPO / "data" / set_file
+        if not path.exists():
+            continue
+        leaves, pages = collections.defaultdict(list), {}
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            d = json.loads(line)
+            key = gold_page_key(d.get("context"))
+            n = next((k for k, v in pages.items() if v == key), None)
+            if n is None:
+                pid = key.split(":")
+                n = int(pid[2]) if pid[0] == "ia" and pid[2].isdigit() else 100000 + len(pages)
+                pages[n] = key
+            leaves[n].append(d["raw_line"])
+        for t in twins:
+            assert t.lower() not in out, f"{t} is a twin of two gold sets -- extend twin_gold"
+            out[t.lower()] = {"sets": [set_file], "leaves": dict(leaves), "pages": pages,
+                              "twin_of": set_file}
+    return out
+
+
+def with_twins(gold: dict) -> dict:
+    """gold_by_volume() plus every GOLD_TWINS twin. A twin's entry carries `twin_of`, which makes
+    locate_holdout search the whole volume rather than near the jp2 number."""
+    out = dict(gold)
+    for ident, g in twin_gold().items():
+        assert ident not in gold, f"{ident} holds gold of its own AND is a twin -- merge them"
+        out[ident] = g
+    return out
+
+
 def locate_holdout(dump: WordDump, gold: dict) -> tuple[dict, list]:
-    """Verify each gold jp2 number against the dump text. Returns ({leaf: tag}, evidence)."""
+    """Verify each gold jp2 number against the dump text. Returns ({leaf: tag}, evidence).
+
+    For a twin (`gold["twin_of"]`) the jp2 number means nothing, so every leaf is a candidate,
+    and a page is tagged only at TWIN_MIN_MATCH or better: an unconvincing best guess would
+    miss the gold page and tag one unrelated page instead."""
     want = {}
     for jp2, glines in gold["leaves"].items():
         toks = [set(_TOK.findall(g.lower())) for g in glines]
         want[jp2] = [t for t in toks if t]
-    lo = min(want) - HOLDOUT_WINDOW
-    hi = max(want) + HOLDOUT_WINDOW
+    twin = bool(gold.get("twin_of"))
+    lo = -1 if twin else min(want) - HOLDOUT_WINDOW
+    hi = 10 ** 9 if twin else max(want) + HOLDOUT_WINDOW
     text = {}
     for rec in dump.records():
         if lo <= rec["leaf"] <= hi:
@@ -295,16 +368,30 @@ def locate_holdout(dump: WordDump, gold: dict) -> tuple[dict, list]:
         def score(leaf):
             vocab = text.get(leaf, set())
             return sum(len(t & vocab) / len(t) >= 0.5 for t in toks) / max(len(toks), 1)
-        cands = range(jp2 - HOLDOUT_WINDOW, jp2 + HOLDOUT_WINDOW + 1)
-        best = max(cands, key=lambda L: (score(L), -abs(L - jp2)))
+
+        def coverage(leaf):
+            vocab = text.get(leaf, set())
+            return sum(len(t & vocab) / len(t) for t in toks) / max(len(toks), 1)
+        cands = sorted(text) if twin else range(jp2 - HOLDOUT_WINDOW, jp2 + HOLDOUT_WINDOW + 1)
+        # Volume-wide, the thresholded score saturates: in Durst's 1786 reprint, a page of the S
+        # entries scored 1.0 against gold page B (`merchant`, `Wall-street` are everywhere), tied
+        # with the true page and won the tie. Mean token coverage separates them (0.56 vs 0.93).
+        best = max(cands, key=(lambda L: (coverage(L), score(L))) if twin
+                   else (lambda L: (score(L), -abs(L - jp2))))
         s = score(best)
         # An unconvincing match marks the jp2 number itself as well: a false "gold" costs one
         # leaf of training data, a missed one is a leak.
-        chosen = {best} if s >= 0.5 else {best, jp2}
+        if twin:
+            chosen = {best} if s >= TWIN_MIN_MATCH else set()
+        else:
+            chosen = {best} if s >= 0.5 else {best, jp2}
         for L in chosen:
             tags[L] = "gold"
         evidence.append({"jp2": jp2, "leaf": best, "match": round(s, 2),
-                         "gold_lines": len(toks), "offset": best - jp2})
+                         **({"coverage": round(coverage(best), 3)} if twin else {}),
+                         "gold_lines": len(toks), "offset": best - jp2,
+                         **({"twin_of": gold["twin_of"], "page": gold["pages"][jp2],
+                             "tagged": bool(chosen)} if twin else {})})
     for L in list(tags):
         for n in (L - 1, L + 1):
             tags.setdefault(n, "adjacent")
@@ -429,7 +516,8 @@ def harvest_one(v: dict, gold: dict, keep_hocr: bool) -> dict:
                 "sets": g["sets"], "evidence": evidence,
                 "gold_leaves": sorted(L for L, t in holdout.items() if t == "gold"),
                 "adjacent_leaves": sorted(L for L, t in holdout.items() if t == "adjacent"),
-                "whole_volume": ident.lower() in BANNED_IA_ITEMS}
+                "whole_volume": ident.lower() in BANNED_IA_ITEMS,
+                **({"twin_of": g["twin_of"]} if g.get("twin_of") else {})}
         if h["status"] == "ok":
             h["filtered"] = derive(ident, holdout)
         h["words_gz_bytes"] = p["words.jsonl.gz"].stat().st_size
@@ -453,6 +541,11 @@ def _tag_dump(path: Path, holdout: dict):
             rec = json.loads(line)
             if rec["leaf"] in holdout:
                 rec["eval_holdout"] = holdout[rec["leaf"]]
+                line = json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n"
+            elif "eval_holdout" in rec:
+                # `holdout` is always the volume's complete map, so a stamp outside it is stale
+                # (a re-located twin page); the dump must say exactly what the sidecar says
+                del rec["eval_holdout"]
                 line = json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n"
             out.write(line)
     tmp.rename(path)
@@ -571,6 +664,9 @@ def main(argv=None) -> int:
     ap.add_argument("--pause", type=float, default=3.0, help="seconds between volumes")
     ap.add_argument("--rederive", action="store_true",
                     help="re-run the filters over existing dumps; no network")
+    ap.add_argument("--relocate-holdout", action="store_true",
+                    help="re-find the gold pages in already-harvested volumes (default: the "
+                         "GOLD_TWINS twins), stamp the dump, and re-derive their lines")
     ap.add_argument("--plan", action="store_true", help="list what would run and stop")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--self-test", action="store_true")
@@ -587,6 +683,28 @@ def main(argv=None) -> int:
             print(f"no IA sidecar for: {sorted(missing)}", file=sys.stderr)
     if args.report:
         return report(vols)
+
+    if args.relocate_holdout:
+        gold = with_twins(gold_by_volume())
+        twins = {t.lower() for ts in GOLD_TWINS.values() for t in ts}
+        todo = [v for v in vols if (v["doc"].get("harvest") or {}).get("status") == "ok"
+                and v["id"].lower() in gold and (args.ids or v["id"].lower() in twins)]
+        for v in todo:
+            h, g = v["doc"]["harvest"], gold[v["id"].lower()]
+            holdout, evidence = locate_holdout(WordDump(paths(v["id"])["words.jsonl.gz"]), g)
+            if holdout:
+                _tag_dump(paths(v["id"])["words.jsonl.gz"], holdout)
+            h["eval_holdout"] = {
+                "sets": g["sets"], "evidence": evidence,
+                "gold_leaves": sorted(L for L, t in holdout.items() if t == "gold"),
+                "adjacent_leaves": sorted(L for L, t in holdout.items() if t == "adjacent"),
+                "whole_volume": v["id"].lower() in BANNED_IA_ITEMS,
+                **({"twin_of": g["twin_of"]} if g.get("twin_of") else {})}
+            h["filtered"] = derive(v["id"], holdout)
+            save(v, h)
+            print(f"{v['id']}: gold leaves {h['eval_holdout']['gold_leaves']} "
+                  f"{[(e['jp2'], e['leaf'], e['match']) for e in evidence]}", file=sys.stderr)
+        return 0
 
     if args.rederive:
         # derive-failed is included: its dump was written before the filters broke, so fixing
@@ -625,7 +743,7 @@ def main(argv=None) -> int:
             print(f"  {v['bytes'] / 1e6:>8.1f} MB  {v['id']}")
         return 0
 
-    gold = gold_by_volume()
+    gold = with_twins(gold_by_volume())
     got = 0
     for i, v in enumerate(todo, 1):
         print(f"[{i}/{len(todo)}] {v['id']}  {v['bytes'] / 1e6:.0f} MB  "

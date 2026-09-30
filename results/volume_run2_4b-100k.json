@@ -1,0 +1,6003 @@
+{
+ "run": "4b-100k",
+ "volumes": {
+  "1857BPL": {
+   "lines": 46677,
+   "entry_rates": {
+    "all": {
+     "lines": 46677,
+     "named": 46370,
+     "entry_shaped": 44945,
+     "business": 884
+    },
+    "by_section": {
+     "listing": {
+      "lines": 32214,
+      "named": 32028,
+      "entry_shaped": 30962,
+      "business": 662
+     },
+     "district: EASTERN DISTRICT,": {
+      "lines": 14293,
+      "named": 14232,
+      "entry_shaped": 13940,
+      "business": 220
+     },
+     "late_names": {
+      "lines": 170,
+      "named": 110,
+      "entry_shaped": 43,
+      "business": 2
+     }
+    },
+    "by_role": {
+     "start": {
+      "lines": 46299,
+      "named": 46086,
+      "entry_shaped": 44866,
+      "business": 843
+     },
+     "runover": {
+      "lines": 228,
+      "named": 159,
+      "entry_shaped": 55,
+      "business": 22
+     },
+     "other": {
+      "lines": 124,
+      "named": 105,
+      "entry_shaped": 21,
+      "business": 15
+     },
+     "thin": {
+      "lines": 26,
+      "named": 20,
+      "entry_shaped": 3,
+      "business": 4
+     }
+    }
+   },
+   "layout": {
+    "runover_after_start": 131,
+    "runover_indent_in_line_heights": {
+     "p10": 0.91,
+     "p50": 1.12,
+     "p90": 2.0
+    },
+    "join_threshold": 3.0,
+    "runovers_below_threshold": 128,
+    "two_column": true,
+    "lines_crossing_gutter": 272,
+    "column_merged_leaves": 14,
+    "lines_on_merged_leaves": 240,
+    "column_merged_leaf_list": [
+     48,
+     66,
+     117,
+     169,
+     203,
+     204,
+     222,
+     255,
+     308,
+     325,
+     359,
+     360,
+     412,
+     430
+    ]
+   },
+   "invented_name_tokens": {
+    "named": 46370,
+    "with_invented_token": 88,
+    "rate": 0.0019,
+    "examples": [
+     [
+      "Babcock Wil'mll. police'n, Myrtle av. n. Grand av",
+      "Babcock William",
+      [
+       "william"
+      ]
+     ],
+     [
+      "Bartlett Raetus, L salesman. 294 Carbon av",
+      "Bartlett Reuben",
+      [
+       "reuben"
+      ]
+     ],
+     [
+      "Bennett Harmenus, 3d av. op. 17th",
+      "Bennett Henry",
+      [
+       "henry"
+      ]
+     ],
+     [
+      "Ji nery Grease. For the last three years ^",
+      "Jinery George",
+      [
+       "george"
+      ]
+     ],
+     [
+      "Brush Pboebe, wid. John, Oxford, n. Flushing av",
+      "Brush Parnabeb",
+      [
+       "parnabeb"
+      ]
+     ],
+     [
+      "3. Hoyrs for Ladies, daily from 9 a. m. to !> p. M.",
+      "3 Henry",
+      [
+       "henry"
+      ]
+     ],
+     [
+      "Coldbrook, 72 Hoyt",
+      "Coldbrook John",
+      [
+       "john"
+      ]
+     ],
+     [
+      "Consedine, 242 Columbia",
+      "Consedine Thomas",
+      [
+       "thomas"
+      ]
+     ],
+     [
+      "Corcoran , widow, laundress, r. 125 Navy",
+      "Corcoran Mary",
+      [
+       "mary"
+      ]
+     ],
+     [
+      "Fillcroff Willhehnena, widow r. Charles, Franklin av. n. Flushing av",
+      "Fillcroff William",
+      [
+       "william"
+      ]
+     ],
+     [
+      "Fitzsimmons widow, Pacific n. Willow",
+      "Fitzsimmons Mary",
+      [
+       "mary"
+      ]
+     ],
+     [
+      "Goodeve, 2 Cheever pi",
+      "Goodeve Charles",
+      [
+       "charles"
+      ]
+     ],
+     [
+      "9 nei; of Union and Court sts Brooklyn. |»",
+      "Ninei John",
+      [
+       "john"
+      ]
+     ],
+     [
+      "Hartmann Casmer, baker, 219 Bridge",
+      "Hartmann Charles",
+      [
+       "charles"
+      ]
+     ],
+     [
+      "Herbeck Ignirtz G tailor, Flushing av. n. Classon av",
+      "Herbeck Ignatius G",
+      [
+       "ignatius"
+      ]
+     ]
+    ]
+   },
+   "widow_names": {
+    "lines": 10,
+    "given_name_invented": 3,
+    "given_names": {
+     "Mary": 3
+    },
+    "examples": [
+     [
+      "Fitzsimmons widow, Pacific n. Willow",
+      "Fitzsimmons Mary"
+     ],
+     [
+      "Higgins, widow, 94 Front",
+      "Higgins Mary"
+     ],
+     [
+      "Murphy, widow, Underhill av n. Bergen",
+      "Murphy Mary"
+     ]
+    ]
+   },
+   "substitutions": {
+    "field_tokens": 217858,
+    "not_in_line": 4662,
+    "by_kind_tokens": {
+     "toward_common_word": 1713,
+     "unclear": 1324,
+     "replaces_common_word": 1625
+    },
+    "by_kind_records": {
+     "toward_common_word": 1509,
+     "unclear": 1272,
+     "replaces_common_word": 1588
+    },
+    "replaces_common_word_record_rate": 0.034,
+    "top_pairs": [
+     {
+      "line": "meserole",
+      "wrote": "moseley",
+      "n": 290,
+      "book_freq_line": 491,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "pi",
+      "wrote": "pl",
+      "n": 279,
+      "book_freq_line": 1113,
+      "book_freq_wrote": 5,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "carll",
+      "wrote": "carroll",
+      "n": 199,
+      "book_freq_line": 218,
+      "book_freq_wrote": 364,
+      "kind": "unclear"
+     },
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 172,
+      "book_freq_line": 180,
+      "book_freq_wrote": 4,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 115,
+      "book_freq_line": 378,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "luqueer",
+      "wrote": "luquer",
+      "n": 104,
+      "book_freq_line": 160,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "av",
+      "n": 86,
+      "book_freq_line": 0,
+      "book_freq_wrote": 13897,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "calyer",
+      "wrote": "claye",
+      "n": 65,
+      "book_freq_line": 130,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "classon",
+      "wrote": "clinton",
+      "n": 64,
+      "book_freq_line": 368,
+      "book_freq_wrote": 473,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "ny",
+      "n": 62,
+      "book_freq_line": 0,
+      "book_freq_wrote": 7,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "madison",
+      "n": 53,
+      "book_freq_line": 0,
+      "book_freq_wrote": 51,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "meserole",
+      "wrote": "mesarole",
+      "n": 50,
+      "book_freq_line": 491,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "middagh",
+      "wrote": "maddagh",
+      "n": 46,
+      "book_freq_line": 118,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "varet",
+      "wrote": "veset",
+      "n": 40,
+      "book_freq_line": 113,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "conselyea",
+      "wrote": "conleysea",
+      "n": 40,
+      "book_freq_line": 111,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "luqueer",
+      "wrote": "duqueer",
+      "n": 39,
+      "book_freq_line": 160,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "wyekoff",
+      "wrote": "wyckoff",
+      "n": 36,
+      "book_freq_line": 37,
+      "book_freq_wrote": 445,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pierpont",
+      "n": 34,
+      "book_freq_line": 79,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "tompkins",
+      "wrote": "tompkin",
+      "n": 32,
+      "book_freq_line": 84,
+      "book_freq_wrote": 8,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "st",
+      "n": 27,
+      "book_freq_line": 0,
+      "book_freq_wrote": 222,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "douglass",
+      "wrote": "douglas",
+      "n": 24,
+      "book_freq_line": 212,
+      "book_freq_wrote": 23,
+      "kind": "unclear"
+     },
+     {
+      "line": "parkav",
+      "wrote": "park",
+      "n": 19,
+      "book_freq_line": 20,
+      "book_freq_wrote": 640,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "remsen",
+      "wrote": "reuben",
+      "n": 19,
+      "book_freq_line": 281,
+      "book_freq_wrote": 19,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "wick",
+      "wrote": "bushwick",
+      "n": 19,
+      "book_freq_line": 29,
+      "book_freq_wrote": 433,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "bemsen",
+      "wrote": "bensen",
+      "n": 18,
+      "book_freq_line": 42,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "rapelyea",
+      "wrote": "rapleyea",
+      "n": 17,
+      "book_freq_line": 43,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "kentav",
+      "wrote": "kent",
+      "n": 17,
+      "book_freq_line": 18,
+      "book_freq_wrote": 494,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "si",
+      "wrote": "st",
+      "n": 17,
+      "book_freq_line": 61,
+      "book_freq_wrote": 222,
+      "kind": "unclear"
+     },
+     {
+      "line": "eartman",
+      "wrote": "cartman",
+      "n": 17,
+      "book_freq_line": 17,
+      "book_freq_wrote": 459,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "dekalbav",
+      "wrote": "dekalb",
+      "n": 15,
+      "book_freq_line": 15,
+      "book_freq_wrote": 87,
+      "kind": "unclear"
+     }
+    ],
+    "top_replacements": [
+     {
+      "line": "meserole",
+      "wrote": "moseley",
+      "n": 290,
+      "book_freq_line": 491,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "pi",
+      "wrote": "pl",
+      "n": 279,
+      "book_freq_line": 1113,
+      "book_freq_wrote": 5
+     },
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 172,
+      "book_freq_line": 180,
+      "book_freq_wrote": 4
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 115,
+      "book_freq_line": 378,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "luqueer",
+      "wrote": "luquer",
+      "n": 104,
+      "book_freq_line": 160,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "calyer",
+      "wrote": "claye",
+      "n": 65,
+      "book_freq_line": 130,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "meserole",
+      "wrote": "mesarole",
+      "n": 50,
+      "book_freq_line": 491,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "middagh",
+      "wrote": "maddagh",
+      "n": 46,
+      "book_freq_line": 118,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "varet",
+      "wrote": "veset",
+      "n": 40,
+      "book_freq_line": 113,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "conselyea",
+      "wrote": "conleysea",
+      "n": 40,
+      "book_freq_line": 111,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "luqueer",
+      "wrote": "duqueer",
+      "n": 39,
+      "book_freq_line": 160,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pierpont",
+      "n": 34,
+      "book_freq_line": 79,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "tompkins",
+      "wrote": "tompkin",
+      "n": 32,
+      "book_freq_line": 84,
+      "book_freq_wrote": 8
+     },
+     {
+      "line": "remsen",
+      "wrote": "reuben",
+      "n": 19,
+      "book_freq_line": 281,
+      "book_freq_wrote": 19
+     },
+     {
+      "line": "bemsen",
+      "wrote": "bensen",
+      "n": 18,
+      "book_freq_line": 42,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "rapelyea",
+      "wrote": "rapleyea",
+      "n": 17,
+      "book_freq_line": 43,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "calyer",
+      "wrote": "cayler",
+      "n": 15,
+      "book_freq_line": 130,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "conselyea",
+      "wrote": "conselkeya",
+      "n": 14,
+      "book_freq_line": 111,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "clove",
+      "wrote": "clover",
+      "n": 12,
+      "book_freq_line": 97,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "av",
+      "wrote": "avn",
+      "n": 10,
+      "book_freq_line": 13897,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "eemsen",
+      "wrote": "emmens",
+      "n": 10,
+      "book_freq_line": 47,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "pi",
+      "wrote": "pin",
+      "n": 10,
+      "book_freq_line": 1113,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "hunterfly",
+      "wrote": "hunterly",
+      "n": 7,
+      "book_freq_line": 20,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "al",
+      "wrote": "pl",
+      "n": 7,
+      "book_freq_line": 191,
+      "book_freq_wrote": 5
+     },
+     {
+      "line": "calyer",
+      "wrote": "clayer",
+      "n": 7,
+      "book_freq_line": 130,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "henry",
+      "wrote": "ny",
+      "n": 6,
+      "book_freq_line": 1925,
+      "book_freq_wrote": 7
+     },
+     {
+      "line": "varet",
+      "wrote": "varlet",
+      "n": 6,
+      "book_freq_line": 113,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "luqueer",
+      "wrote": "luequer",
+      "n": 5,
+      "book_freq_line": 160,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "classon",
+      "wrote": "clason",
+      "n": 4,
+      "book_freq_line": 368,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "dekalb",
+      "wrote": "decklab",
+      "n": 4,
+      "book_freq_line": 87,
+      "book_freq_wrote": 0
+     }
+    ]
+   }
+  },
+  "1906BPL": {
+   "lines": 194256,
+   "entry_rates": {
+    "all": {
+     "lines": 194256,
+     "named": 192955,
+     "entry_shaped": 189230,
+     "business": 5926
+    },
+    "by_section": {
+     "listing": {
+      "lines": 194201,
+      "named": 192900,
+      "entry_shaped": 189175,
+      "business": 5918
+     },
+     "late_names": {
+      "lines": 55,
+      "named": 55,
+      "entry_shaped": 55,
+      "business": 8
+     }
+    },
+    "by_role": {
+     "start": {
+      "lines": 179591,
+      "named": 179179,
+      "entry_shaped": 177912,
+      "business": 5316
+     },
+     "runover": {
+      "lines": 9006,
+      "named": 8558,
+      "entry_shaped": 7705,
+      "business": 300
+     },
+     "other": {
+      "lines": 5651,
+      "named": 5214,
+      "entry_shaped": 3613,
+      "business": 310
+     },
+     "thin": {
+      "lines": 8,
+      "named": 4,
+      "entry_shaped": 0,
+      "business": 0
+     }
+    },
+    "by_band": {
+     "body": {
+      "lines": 190173,
+      "named": 189710,
+      "entry_shaped": 187749,
+      "business": 5646
+     },
+     "foot": {
+      "lines": 1537,
+      "named": 1130,
+      "entry_shaped": 576,
+      "business": 159
+     },
+     "head": {
+      "lines": 1520,
+      "named": 1294,
+      "entry_shaped": 378,
+      "business": 62
+     },
+     "unbanded": {
+      "lines": 1026,
+      "named": 821,
+      "entry_shaped": 527,
+      "business": 59
+     }
+    }
+   },
+   "layout": {
+    "runover_after_start": 2150,
+    "runover_indent_in_line_heights": {
+     "p10": 0.65,
+     "p50": 1.92,
+     "p90": 4.96
+    },
+    "join_threshold": 3.0,
+    "runovers_below_threshold": 1742,
+    "two_column": true,
+    "lines_crossing_gutter": 589,
+    "column_merged_leaves": 16,
+    "lines_on_merged_leaves": 388,
+    "column_merged_leaf_list": [
+     40,
+     132,
+     133,
+     165,
+     166,
+     203,
+     204,
+     588,
+     589,
+     675,
+     676,
+     823,
+     895,
+     1014,
+     1167,
+     1168
+    ]
+   },
+   "invented_name_tokens": {
+    "named": 192955,
+    "with_invented_token": 302,
+    "rate": 0.0016,
+    "examples": [
+     [
+      "Achuff Ohas E bookkpr h 1443 Bedford av",
+      "Achuff Oscar E",
+      [
+       "oscar"
+      ]
+     ],
+     [
+      "\" Bam’l cigarmkr 262 Chester",
+      "\" Barn'l",
+      [
+       "barn"
+      ]
+     ],
+     [
+      "\" Bam’l manager 216 Wallabout mkt h 233 Vernon av",
+      "\" Barn'l",
+      [
+       "barn"
+      ]
+     ],
+     [
+      "4i Sam’l caps h 207 Stockton",
+      "Chi Sam'l",
+      [
+       "chi"
+      ]
+     ],
+     [
+      "Cath wid John h 301 Division av",
+      "Cath Mary",
+      [
+       "mary"
+      ]
+     ],
+     [
+      "\" Cbns h 57 Douglass",
+      "\" Cornls",
+      [
+       "cornls"
+      ]
+     ],
+     [
+      "Angman Gumar bkbinder h 725 43d",
+      "Angman Samuel",
+      [
+       "samuel"
+      ]
+     ],
+     [
+      "M © x 53",
+      "M Cox",
+      [
+       "cox"
+      ]
+     ],
+     [
+      "w Ho “ rM",
+      "Hawo",
+      [
+       "hawo"
+      ]
+     ],
+     [
+      "03 tj oc in *71 p ° s",
+      "Ojt John",
+      [
+       "ojt",
+       "john"
+      ]
+     ],
+     [
+      "5 o a 0!",
+      "Soo A",
+      [
+       "soo"
+      ]
+     ],
+     [
+      "Beaubelle Rosenno grocer 4824 6th av",
+      "Beaubelle Ronald",
+      [
+       "ronald"
+      ]
+     ],
+     [
+      "Jacob tinsmith h 638 Hart",
+      "Jacob John",
+      [
+       "john"
+      ]
+     ],
+     [
+      "^ pi 13 u -",
+      "pipl3u",
+      [
+       "pipl"
+      ]
+     ],
+     [
+      "M Qo u o>",
+      "M Quin",
+      [
+       "quin"
+      ]
+     ]
+    ]
+   },
+   "widow_names": {
+    "lines": 277,
+    "given_name_invented": 9,
+    "given_names": {
+     "Mary": 7,
+     "J": 1,
+     "Anna": 1
+    },
+    "examples": [
+     [
+      "Cath wid John h 301 Division av",
+      "Cath Mary"
+     ],
+     [
+      "Cath wid Matthew J h 398 Wil’by av",
+      "Cath Mary J"
+     ],
+     [
+      "Cath wid Isaac k 1208 Dean",
+      "Cath Mary"
+     ],
+     [
+      "Cath wid Peter h 413 Henry",
+      "Cath Mary"
+     ],
+     [
+      "Cath wid Hugh h 740 Bedford av",
+      "Cath Mary"
+     ],
+     [
+      "Naudain wid Arnold h 88 Fort Greene pi",
+      "Naudain Anna"
+     ],
+     [
+      "Cath wid Conrad h 643 6th av",
+      "Cath Mary"
+     ],
+     [
+      "Cath wid John h 250 Schermerhorn",
+      "Cath Mary"
+     ],
+     [
+      "Cath wid John h 384 2d",
+      "Cath Mary"
+     ]
+    ]
+   },
+   "substitutions": {
+    "field_tokens": 915981,
+    "not_in_line": 55179,
+    "by_kind_tokens": {
+     "unclear": 7363,
+     "toward_common_word": 4425,
+     "replaces_common_word": 43391
+    },
+    "by_kind_records": {
+     "unclear": 7149,
+     "toward_common_word": 4281,
+     "replaces_common_word": 38568
+    },
+    "replaces_common_word_record_rate": 0.1985,
+    "top_pairs": [
+     {
+      "line": "elk",
+      "wrote": "clk",
+      "n": 14903,
+      "book_freq_line": 15674,
+      "book_freq_wrote": 8,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "mhtn",
+      "wrote": "mthn",
+      "n": 13422,
+      "book_freq_line": 14282,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "realestate",
+      "wrote": "estate",
+      "n": 2419,
+      "book_freq_line": 2898,
+      "book_freq_wrote": 164,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "realestate",
+      "wrote": "real",
+      "n": 2359,
+      "book_freq_line": 2898,
+      "book_freq_wrote": 161,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 2206,
+      "book_freq_line": 2302,
+      "book_freq_wrote": 10,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "pi",
+      "wrote": "pl",
+      "n": 724,
+      "book_freq_line": 11343,
+      "book_freq_wrote": 855,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "kosc",
+      "wrote": "kosciello",
+      "n": 679,
+      "book_freq_line": 944,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 615,
+      "book_freq_line": 813,
+      "book_freq_wrote": 3,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "himrod",
+      "wrote": "hiramod",
+      "n": 594,
+      "book_freq_line": 730,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "cornelia",
+      "wrote": "cornelius",
+      "n": 512,
+      "book_freq_line": 569,
+      "book_freq_wrote": 316,
+      "kind": "unclear"
+     },
+     {
+      "line": "harman",
+      "wrote": "harmon",
+      "n": 480,
+      "book_freq_line": 588,
+      "book_freq_wrote": 15,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "classon",
+      "wrote": "clarkson",
+      "n": 376,
+      "book_freq_line": 620,
+      "book_freq_wrote": 235,
+      "kind": "unclear"
+     },
+     {
+      "line": "maujer",
+      "wrote": "mauer",
+      "n": 347,
+      "book_freq_line": 485,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "mhtn",
+      "wrote": "mtn",
+      "n": 275,
+      "book_freq_line": 14282,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "meserole",
+      "wrote": "mersole",
+      "n": 244,
+      "book_freq_line": 277,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "beverley",
+      "wrote": "beverly",
+      "n": 207,
+      "book_freq_line": 214,
+      "book_freq_wrote": 16,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "knick",
+      "wrote": "knicker",
+      "n": 205,
+      "book_freq_line": 293,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "remsen",
+      "wrote": "reuben",
+      "n": 169,
+      "book_freq_line": 338,
+      "book_freq_wrote": 83,
+      "kind": "unclear"
+     },
+     {
+      "line": "douglass",
+      "wrote": "douglas",
+      "n": 153,
+      "book_freq_line": 402,
+      "book_freq_wrote": 17,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "classon",
+      "wrote": "clinton",
+      "n": 147,
+      "book_freq_line": 620,
+      "book_freq_wrote": 1443,
+      "kind": "unclear"
+     },
+     {
+      "line": "impr",
+      "wrote": "imp",
+      "n": 130,
+      "book_freq_line": 148,
+      "book_freq_wrote": 2,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pierpont",
+      "n": 116,
+      "book_freq_line": 181,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "weirfleld",
+      "wrote": "weirfield",
+      "n": 116,
+      "book_freq_line": 128,
+      "book_freq_wrote": 177,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "av",
+      "n": 115,
+      "book_freq_line": 0,
+      "book_freq_wrote": 72985,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "steamfltter",
+      "wrote": "steamflitter",
+      "n": 110,
+      "book_freq_line": 111,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "dr",
+      "n": 104,
+      "book_freq_line": 0,
+      "book_freq_wrote": 10,
+      "kind": "unclear"
+     },
+     {
+      "line": "kosc",
+      "wrote": "kosk",
+      "n": 104,
+      "book_freq_line": 944,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "hgts",
+      "wrote": "htgs",
+      "n": 97,
+      "book_freq_line": 204,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "depy",
+      "wrote": "dep",
+      "n": 95,
+      "book_freq_line": 99,
+      "book_freq_wrote": 12,
+      "kind": "unclear"
+     },
+     {
+      "line": "thatford",
+      "wrote": "thatchford",
+      "n": 94,
+      "book_freq_line": 106,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     }
+    ],
+    "top_replacements": [
+     {
+      "line": "elk",
+      "wrote": "clk",
+      "n": 14903,
+      "book_freq_line": 15674,
+      "book_freq_wrote": 8
+     },
+     {
+      "line": "mhtn",
+      "wrote": "mthn",
+      "n": 13422,
+      "book_freq_line": 14282,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "realestate",
+      "wrote": "estate",
+      "n": 2419,
+      "book_freq_line": 2898,
+      "book_freq_wrote": 164
+     },
+     {
+      "line": "realestate",
+      "wrote": "real",
+      "n": 2359,
+      "book_freq_line": 2898,
+      "book_freq_wrote": 161
+     },
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 2206,
+      "book_freq_line": 2302,
+      "book_freq_wrote": 10
+     },
+     {
+      "line": "pi",
+      "wrote": "pl",
+      "n": 724,
+      "book_freq_line": 11343,
+      "book_freq_wrote": 855
+     },
+     {
+      "line": "kosc",
+      "wrote": "kosciello",
+      "n": 679,
+      "book_freq_line": 944,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 615,
+      "book_freq_line": 813,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "himrod",
+      "wrote": "hiramod",
+      "n": 594,
+      "book_freq_line": 730,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "harman",
+      "wrote": "harmon",
+      "n": 480,
+      "book_freq_line": 588,
+      "book_freq_wrote": 15
+     },
+     {
+      "line": "maujer",
+      "wrote": "mauer",
+      "n": 347,
+      "book_freq_line": 485,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "mhtn",
+      "wrote": "mtn",
+      "n": 275,
+      "book_freq_line": 14282,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "meserole",
+      "wrote": "mersole",
+      "n": 244,
+      "book_freq_line": 277,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "beverley",
+      "wrote": "beverly",
+      "n": 207,
+      "book_freq_line": 214,
+      "book_freq_wrote": 16
+     },
+     {
+      "line": "knick",
+      "wrote": "knicker",
+      "n": 205,
+      "book_freq_line": 293,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "douglass",
+      "wrote": "douglas",
+      "n": 153,
+      "book_freq_line": 402,
+      "book_freq_wrote": 17
+     },
+     {
+      "line": "impr",
+      "wrote": "imp",
+      "n": 130,
+      "book_freq_line": 148,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pierpont",
+      "n": 116,
+      "book_freq_line": 181,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "steamfltter",
+      "wrote": "steamflitter",
+      "n": 110,
+      "book_freq_line": 111,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "kosc",
+      "wrote": "kosk",
+      "n": 104,
+      "book_freq_line": 944,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "hgts",
+      "wrote": "htgs",
+      "n": 97,
+      "book_freq_line": 204,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "thatford",
+      "wrote": "thatchford",
+      "n": 94,
+      "book_freq_line": 106,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "varet",
+      "wrote": "vanderbilt",
+      "n": 92,
+      "book_freq_line": 114,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "bush",
+      "wrote": "fbush",
+      "n": 87,
+      "book_freq_line": 1117,
+      "book_freq_wrote": 8
+     },
+     {
+      "line": "taaffe",
+      "wrote": "taffe",
+      "n": 87,
+      "book_freq_line": 99,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "calyer",
+      "wrote": "claye",
+      "n": 86,
+      "book_freq_line": 186,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "conselyea",
+      "wrote": "conselwea",
+      "n": 82,
+      "book_freq_line": 142,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "kosc",
+      "wrote": "kosci",
+      "n": 75,
+      "book_freq_line": 944,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "himrod",
+      "wrote": "homer",
+      "n": 75,
+      "book_freq_line": 730,
+      "book_freq_wrote": 29
+     },
+     {
+      "line": "hgts",
+      "wrote": "hgt",
+      "n": 71,
+      "book_freq_line": 204,
+      "book_freq_wrote": 3
+     }
+    ]
+   },
+   "2b_vs_4b_sample500": {
+    "sample": 500,
+    "found_by_leaf_bbox": 500,
+    "identical_input": 497,
+    "row_agreement": 0.686,
+    "row_agreement_identical_input": 0.6881,
+    "field_agreement": {
+     "name": 0.92,
+     "is_business": 0.986,
+     "spouse_name": 0.998,
+     "race_designation": 0.998,
+     "occupation_role": 0.93,
+     "employer": 0.998,
+     "address": 0.754,
+     "home_address": 0.972
+    },
+    "named_2b": 493,
+    "named_4b": 495,
+    "entry_2b": 448,
+    "entry_4b": 448,
+    "field_diffs": 222,
+    "diff_by_field": {
+     "address": 123,
+     "name": 40,
+     "occupation_role": 35,
+     "home_address": 14,
+     "is_business": 7,
+     "spouse_name": 1,
+     "race_designation": 1,
+     "employer": 1
+    },
+    "diffs_file": "results/volume_run2_1906BPL_2b_vs_4b.tsv"
+   },
+   "entry_labels": {
+    "labels": 140,
+    "in_scope": {
+     "entry/-": 40,
+     "not-entry/advertising": 7,
+     "not-entry/business-directory": 10,
+     "not-entry/ocr-garbage": 48
+    },
+    "out_of_scope": {
+     "not-entry/advertising": 1,
+     "not-entry/ocr-garbage": 31
+    },
+    "in_scope_named": {
+     "entry/-": 40,
+     "not-entry/advertising": 5,
+     "not-entry/business-directory": 10,
+     "not-entry/ocr-garbage": 40
+    },
+    "in_scope_entry_shaped": {
+     "entry/-": 40,
+     "not-entry/advertising": 1,
+     "not-entry/business-directory": 7,
+     "not-entry/ocr-garbage": 9
+    },
+    "out_of_scope_entries": [],
+    "in_scope_not_entry_named": [
+     [
+      14,
+      "body",
+      "\" H’y elk h 120 3d pi",
+      "\" H'y"
+     ],
+     [
+      38,
+      "foot",
+      "Aurora Grata Club 1160 Bedford av",
+      "Aurora Grata Club"
+     ],
+     [
+      72,
+      "foot",
+      "Watches, Diamonds and Jewelry",
+      "Watches, Diamonds and Jewelry"
+     ],
+     [
+      75,
+      "head",
+      "GATES D. FAHNESTOCK, 2d-Vice-Pres.",
+      "GATES D. FAHNESTOCK"
+     ],
+     [
+      148,
+      "head",
+      "New York City, N. Y.",
+      "New York City"
+     ],
+     [
+      156,
+      "head",
+      "upon Request",
+      "upon Request"
+     ],
+     [
+      172,
+      "foot",
+      "French and Amer*",
+      "French and Amer"
+     ],
+     [
+      179,
+      "head",
+      "140 Broadway, Borough of Manhattan CAPITAL, SURPLUS AND UNDIVIDED \"",
+      "140 Broadway"
+     ],
+     [
+      188,
+      "foot",
+      "French and American, all flavors.",
+      "French and American"
+     ],
+     [
+      191,
+      "head",
+      "Buildings may be Desired.",
+      "Buildings may be Desired"
+     ],
+     [
+      206,
+      "foot",
+      "French and American, all flavors.",
+      "French and American"
+     ],
+     [
+      216,
+      "head",
+      "New York City, N.Y.",
+      "New York City"
+     ],
+     [
+      226,
+      "head",
+      "to Owners, Builders, etc.,",
+      "to Owners"
+     ],
+     [
+      253,
+      "head",
+      "Allows Interest on Depos-",
+      "Allows Interest"
+     ],
+     [
+      261,
+      "head",
+      "tee, Committee, or Agent.",
+      "tee Committee"
+     ],
+     [
+      264,
+      "foot",
+      "Telephone 3004 Main 264",
+      "Telephone"
+     ],
+     [
+      284,
+      "foot",
+      "HERMAN WICCHMAHN, VlCC-PRER.",
+      "HERMAN WICCHMAHN"
+     ],
+     [
+      289,
+      "head",
+      "Buildings may be Desired.",
+      "Buildings may be Desired"
+     ],
+     [
+      293,
+      "head",
+      "tee, Committee, or Agent,",
+      "tee Committee"
+     ],
+     [
+      384,
+      "head",
+      "In Litigation",
+      "In Litigation"
+     ],
+     [
+      384,
+      "head",
+      "what Titlo",
+      "what Titlo"
+     ],
+     [
+      438,
+      "foot",
+      "millions— Try them.",
+      "-millions"
+     ],
+     [
+      445,
+      "head",
+      "until Withdrawn,",
+      "until Withdrawn"
+     ],
+     [
+      448,
+      "head",
+      "Pamphlet",
+      "Pamphlet"
+     ],
+     [
+      480,
+      "foot",
+      "Telephone 3004 Main 480",
+      "Telephone"
+     ],
+     [
+      526,
+      "head",
+      "Telephone 3418 Vain",
+      "Telephone"
+     ],
+     [
+      539,
+      "foot",
+      "270 Court",
+      "270 Court"
+     ],
+     [
+      583,
+      "foot",
+      "Telephome Call, 269 Bedford Brooklyn, N.Y, 58S",
+      "Telephome Call"
+     ],
+     [
+      601,
+      "head",
+      "■ Asst. Sec'y",
+      "■ Asst. Sec'y"
+     ],
+     [
+      602,
+      "foot",
+      "millions— Try them.",
+      "-millions"
+     ],
+     [
+      612,
+      "head",
+      "In Litigation",
+      "In Litigation"
+     ],
+     [
+      612,
+      "head",
+      "what Title",
+      "what Title"
+     ],
+     [
+      665,
+      "head",
+      "GEO. H. SOUTHARD, • - President",
+      "GEO. H. SOUTHARD"
+     ],
+     [
+      692,
+      "foot",
+      "rich and delicious,",
+      "rich and delicious"
+     ],
+     [
+      708,
+      "foot",
+      "French and American, all flavors.",
+      "French and American"
+     ],
+     [
+      774,
+      "head",
+      "In Litigation",
+      "In Litigation"
+     ],
+     [
+      795,
+      "foot",
+      "1 330 Lenox Ave.",
+      "1330 Lenox Ave"
+     ],
+     [
+      823,
+      "None",
+      "C. OPFERMAN. P.rftiident",
+      "C. OPFERMAN"
+     ],
+     [
+      829,
+      "head",
+      "HENRY C. LOW, Jr., -- - Asst. Sec’y",
+      "HENRY C. LOW, Jr."
+     ],
+     [
+      840,
+      "foot",
+      "Telephone 3004 Main",
+      "Telephone"
+     ],
+     [
+      841,
+      "head",
+      "Telephone, 2813 WILUAMSBURQfl",
+      "Telephone"
+     ],
+     [
+      861,
+      "head",
+      "GEO. H. SOUTHARD. Jr., 3d-Vice-Pres.",
+      "GEO. H. SOUTHARD Jr."
+     ],
+     [
+      870,
+      "foot",
+      "French and American, all flavors.",
+      "French and American"
+     ],
+     [
+      925,
+      "head",
+      "GATES D. FAHNESTOCK, 2d-Vice-Pret.",
+      "GATES D. FAHNESTOCK"
+     ],
+     [
+      925,
+      "head",
+      "CLINTON W. LUDLUM, ■ Secretary",
+      "CLINTON W. LUDLUM"
+     ],
+     [
+      934,
+      "foot",
+      "rich and delicious,",
+      "rich and delicious"
+     ],
+     [
+      984,
+      "foot",
+      "Telephone 3004 Main 976",
+      "Telephone"
+     ],
+     [
+      1000,
+      "foot",
+      "Telephone 3004 Main 992",
+      "Telephone"
+     ],
+     [
+      1035,
+      "head",
+      "when Expert Knowledge of",
+      "when Expert"
+     ],
+     [
+      1069,
+      "foot",
+      "New York, 21-27 New Chambers St. TELEPHONE 4346 FRANKLIN",
+      "New York"
+     ],
+     [
+      1086,
+      "foot",
+      "Telephone, 3004 Main.",
+      "Telephone"
+     ],
+     [
+      1087,
+      "head",
+      "140 Broadway, Borough of Manhattan CAPITAL, SURPLUS AND UNDIVIDED",
+      "140 Broadway"
+     ],
+     [
+      1091,
+      "foot",
+      "-Telephone Call: Store, 924 Bedford-",
+      "-Telephone"
+     ],
+     [
+      1185,
+      "head",
+      "WM. H. WALLACE. ■ Vice-President",
+      "WM. H. WALLACE"
+     ],
+     [
+      1212,
+      "foot",
+      "Telephone 3004 Main 1200",
+      "Telephone"
+     ]
+    ]
+   }
+  },
+  "doggettsnewyorkc1845dogg": {
+   "lines": 61724,
+   "entry_rates": {
+    "all": {
+     "lines": 61724,
+     "named": 61566,
+     "entry_shaped": 60830,
+     "business": 3657
+    },
+    "by_section": {
+     "listing": {
+      "lines": 61631,
+      "named": 61484,
+      "entry_shaped": 60765,
+      "business": 3646
+     },
+     "late_names": {
+      "lines": 93,
+      "named": 82,
+      "entry_shaped": 65,
+      "business": 11
+     }
+    },
+    "by_role": {
+     "start": {
+      "lines": 61606,
+      "named": 61489,
+      "entry_shaped": 60815,
+      "business": 3652
+     },
+     "runover": {
+      "lines": 64,
+      "named": 37,
+      "entry_shaped": 8,
+      "business": 3
+     },
+     "other": {
+      "lines": 44,
+      "named": 35,
+      "entry_shaped": 7,
+      "business": 2
+     },
+     "thin": {
+      "lines": 10,
+      "named": 5,
+      "entry_shaped": 0,
+      "business": 0
+     }
+    }
+   },
+   "layout": {
+    "runover_after_start": 26,
+    "runover_indent_in_line_heights": {
+     "p10": 0.98,
+     "p50": 1.93,
+     "p90": 2.17
+    },
+    "join_threshold": 3.0,
+    "runovers_below_threshold": 26,
+    "two_column": true,
+    "lines_crossing_gutter": 77,
+    "column_merged_leaves": 3,
+    "lines_on_merged_leaves": 82,
+    "column_merged_leaf_list": [
+     17,
+     135,
+     270
+    ]
+   },
+   "invented_name_tokens": {
+    "named": 61566,
+    "with_invented_token": 315,
+    "rate": 0.0051,
+    "examples": [
+     [
+      "Britton I. hotH,3 Warren",
+      "Britton I. Hugh",
+      [
+       "hugh"
+      ]
+     ],
+     [
+      "Ackerman J.iines, 54 Sullivan",
+      "Ackerman James",
+      [
+       "james"
+      ]
+     ],
+     [
+      "Adams, widow, boarding, 56 Bond",
+      "Adams Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "Adams Crowel, butter, 244 Fulton, h. 326 Greenwich",
+      "Adams Cornelius",
+      [
+       "cornelius"
+      ]
+     ],
+     [
+      "Alexander, widow, sewing, 278 Mott",
+      "Alexander Mary",
+      [
+       "mary"
+      ]
+     ],
+     [
+      "Alvord Coridon A. printer, 51 John, h. Brooklyn",
+      "Alvord Cornelius A.",
+      [
+       "cornelius"
+      ]
+     ],
+     [
+      "Andrews Hayin M 35 South Wm. h. 41 W. 11th",
+      "Andrews Henry M",
+      [
+       "henry"
+      ]
+     ],
+     [
+      "Ashby Jolin, engineer, 164 W. Twentv-second",
+      "Ashby John",
+      [
+       "john"
+      ]
+     ],
+     [
+      "Ashley Jairn s, physician, 40 Hudson",
+      "Ashley James",
+      [
+       "james"
+      ]
+     ],
+     [
+      "Baily Tatnall. grocer, 108 Vesey, h. Jersey city",
+      "Baily Tannatt",
+      [
+       "tannatt"
+      ]
+     ],
+     [
+      "Bancker Jcsiah H. tailor, Broadway c. Reade, h. 134 Wooster",
+      "Bancker Joshua H.",
+      [
+       "joshua"
+      ]
+     ],
+     [
+      "Banta Weart, carman, rear 128 Hammond",
+      "Banta Walter",
+      [
+       "walter"
+      ]
+     ],
+     [
+      "Biiiin Martin R. carman, 261 Av G",
+      "Buin Martin R.",
+      [
+       "buin"
+      ]
+     ],
+     [
+      "bemis Thorn is H. stables, Gouverneur c. E. B'dway, h. 316 Henry",
+      "bemis Thomas H.",
+      [
+       "thomas"
+      ]
+     ],
+     [
+      "i Benjamin John B. hotel, 28 Park row, h. 3\") Greene",
+      "Bini Benjamin",
+      [
+       "bini"
+      ]
+     ]
+    ]
+   },
+   "widow_names": {
+    "lines": 4,
+    "given_name_invented": 2,
+    "given_names": {
+     "Sarah": 1,
+     "Mary": 1
+    },
+    "examples": [
+     [
+      "Adams, widow, boarding, 56 Bond",
+      "Adams Sarah"
+     ],
+     [
+      "Alexander, widow, sewing, 278 Mott",
+      "Alexander Mary"
+     ]
+    ]
+   },
+   "substitutions": {
+    "field_tokens": 251401,
+    "not_in_line": 14081,
+    "by_kind_tokens": {
+     "unclear": 5519,
+     "replaces_common_word": 1338,
+     "toward_common_word": 7224
+    },
+    "by_kind_records": {
+     "unclear": 5048,
+     "replaces_common_word": 1305,
+     "toward_common_word": 6455
+    },
+    "replaces_common_word_record_rate": 0.0211,
+    "top_pairs": [
+     {
+      "line": "delancy",
+      "wrote": "delancey",
+      "n": 514,
+      "book_freq_line": 622,
+      "book_freq_wrote": 2,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "av",
+      "n": 332,
+      "book_freq_line": 0,
+      "book_freq_wrote": 3966,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "11",
+      "n": 162,
+      "book_freq_line": 0,
+      "book_freq_wrote": 445,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "goerck",
+      "wrote": "george",
+      "n": 150,
+      "book_freq_line": 196,
+      "book_freq_wrote": 2131,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "pi",
+      "wrote": "pl",
+      "n": 133,
+      "book_freq_line": 1178,
+      "book_freq_wrote": 30,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "wich",
+      "wrote": "greenwich",
+      "n": 121,
+      "book_freq_line": 192,
+      "book_freq_wrote": 1579,
+      "kind": "unclear"
+     },
+     {
+      "line": "si",
+      "wrote": "st",
+      "n": 91,
+      "book_freq_line": 283,
+      "book_freq_wrote": 260,
+      "kind": "unclear"
+     },
+     {
+      "line": "cornelia",
+      "wrote": "cornelius",
+      "n": 80,
+      "book_freq_line": 110,
+      "book_freq_wrote": 261,
+      "kind": "unclear"
+     },
+     {
+      "line": "drvgoods",
+      "wrote": "drwgoods",
+      "n": 69,
+      "book_freq_line": 80,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "st",
+      "n": 63,
+      "book_freq_line": 0,
+      "book_freq_wrote": 260,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "mangin",
+      "wrote": "manning",
+      "n": 56,
+      "book_freq_line": 93,
+      "book_freq_wrote": 32,
+      "kind": "unclear"
+     },
+     {
+      "line": "16",
+      "wrote": "116",
+      "n": 52,
+      "book_freq_line": 485,
+      "book_freq_wrote": 227,
+      "kind": "unclear"
+     },
+     {
+      "line": "18",
+      "wrote": "118",
+      "n": 46,
+      "book_freq_line": 522,
+      "book_freq_wrote": 235,
+      "kind": "unclear"
+     },
+     {
+      "line": "laight",
+      "wrote": "liight",
+      "n": 43,
+      "book_freq_line": 95,
+      "book_freq_wrote": 2,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "nwich",
+      "wrote": "greenwich",
+      "n": 43,
+      "book_freq_line": 54,
+      "book_freq_wrote": 1579,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "10",
+      "wrote": "110",
+      "n": 41,
+      "book_freq_line": 710,
+      "book_freq_wrote": 196,
+      "kind": "unclear"
+     },
+     {
+      "line": "12",
+      "wrote": "112",
+      "n": 40,
+      "book_freq_line": 565,
+      "book_freq_wrote": 198,
+      "kind": "unclear"
+     },
+     {
+      "line": "19",
+      "wrote": "119",
+      "n": 40,
+      "book_freq_line": 443,
+      "book_freq_wrote": 187,
+      "kind": "unclear"
+     },
+     {
+      "line": "15",
+      "wrote": "115",
+      "n": 39,
+      "book_freq_line": 559,
+      "book_freq_wrote": 209,
+      "kind": "unclear"
+     },
+     {
+      "line": "13",
+      "wrote": "113",
+      "n": 38,
+      "book_freq_line": 625,
+      "book_freq_wrote": 186,
+      "kind": "unclear"
+     },
+     {
+      "line": "wash",
+      "wrote": "washington",
+      "n": 31,
+      "book_freq_line": 198,
+      "book_freq_wrote": 1212,
+      "kind": "unclear"
+     },
+     {
+      "line": "iker",
+      "wrote": "maker",
+      "n": 31,
+      "book_freq_line": 65,
+      "book_freq_wrote": 236,
+      "kind": "unclear"
+     },
+     {
+      "line": "17",
+      "wrote": "117",
+      "n": 29,
+      "book_freq_line": 466,
+      "book_freq_wrote": 171,
+      "kind": "unclear"
+     },
+     {
+      "line": "07",
+      "wrote": "70",
+      "n": 29,
+      "book_freq_line": 29,
+      "book_freq_wrote": 326,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "barclay",
+      "n": 29,
+      "book_freq_line": 0,
+      "book_freq_wrote": 215,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "broadwav",
+      "wrote": "broadway",
+      "n": 28,
+      "book_freq_line": 34,
+      "book_freq_wrote": 2372,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "08",
+      "wrote": "80",
+      "n": 27,
+      "book_freq_line": 31,
+      "book_freq_wrote": 292,
+      "kind": "unclear"
+     },
+     {
+      "line": "14",
+      "wrote": "114",
+      "n": 27,
+      "book_freq_line": 504,
+      "book_freq_wrote": 197,
+      "kind": "unclear"
+     },
+     {
+      "line": "721",
+      "wrote": "271",
+      "n": 27,
+      "book_freq_line": 29,
+      "book_freq_wrote": 68,
+      "kind": "unclear"
+     },
+     {
+      "line": "bowerv",
+      "wrote": "bowery",
+      "n": 26,
+      "book_freq_line": 33,
+      "book_freq_wrote": 1313,
+      "kind": "toward_common_word"
+     }
+    ],
+    "top_replacements": [
+     {
+      "line": "delancy",
+      "wrote": "delancey",
+      "n": 514,
+      "book_freq_line": 622,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "pi",
+      "wrote": "pl",
+      "n": 133,
+      "book_freq_line": 1178,
+      "book_freq_wrote": 30
+     },
+     {
+      "line": "drvgoods",
+      "wrote": "drwgoods",
+      "n": 69,
+      "book_freq_line": 80,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "laight",
+      "wrote": "liight",
+      "n": 43,
+      "book_freq_line": 95,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "way",
+      "wrote": "bway",
+      "n": 22,
+      "book_freq_line": 466,
+      "book_freq_wrote": 11
+     },
+     {
+      "line": "hamersley",
+      "wrote": "hammersley",
+      "n": 17,
+      "book_freq_line": 275,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "laight",
+      "wrote": "light",
+      "n": 16,
+      "book_freq_line": 95,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "vaiick",
+      "wrote": "duick",
+      "n": 16,
+      "book_freq_line": 20,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "wash",
+      "wrote": "washn",
+      "n": 15,
+      "book_freq_line": 198,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "iker",
+      "wrote": "biker",
+      "n": 12,
+      "book_freq_line": 65,
+      "book_freq_wrote": 4
+     },
+     {
+      "line": "laight",
+      "wrote": "delight",
+      "n": 6,
+      "book_freq_line": 95,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "depeyster",
+      "wrote": "delpeyster",
+      "n": 6,
+      "book_freq_line": 26,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "41",
+      "wrote": "411",
+      "n": 6,
+      "book_freq_line": 333,
+      "book_freq_wrote": 27
+     },
+     {
+      "line": "61",
+      "wrote": "611",
+      "n": 5,
+      "book_freq_line": 320,
+      "book_freq_wrote": 6
+     },
+     {
+      "line": "mers",
+      "wrote": "commers",
+      "n": 5,
+      "book_freq_line": 295,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "minetta",
+      "wrote": "mignonet",
+      "n": 5,
+      "book_freq_line": 69,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "44",
+      "wrote": "441",
+      "n": 4,
+      "book_freq_line": 421,
+      "book_freq_wrote": 17
+     },
+     {
+      "line": "pearl",
+      "wrote": "pl",
+      "n": 4,
+      "book_freq_line": 1979,
+      "book_freq_wrote": 30
+     },
+     {
+      "line": "bro",
+      "wrote": "brod",
+      "n": 4,
+      "book_freq_line": 23,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "51",
+      "wrote": "511",
+      "n": 4,
+      "book_freq_line": 413,
+      "book_freq_wrote": 11
+     },
+     {
+      "line": "29",
+      "wrote": "297",
+      "n": 4,
+      "book_freq_line": 409,
+      "book_freq_wrote": 35
+     },
+     {
+      "line": "gton",
+      "wrote": "nington",
+      "n": 4,
+      "book_freq_line": 33,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "48",
+      "wrote": "481",
+      "n": 4,
+      "book_freq_line": 337,
+      "book_freq_wrote": 14
+     },
+     {
+      "line": "42",
+      "wrote": "421",
+      "n": 4,
+      "book_freq_line": 401,
+      "book_freq_wrote": 30
+     },
+     {
+      "line": "av",
+      "wrote": "av6",
+      "n": 3,
+      "book_freq_line": 3966,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "pl",
+      "wrote": "expl",
+      "n": 3,
+      "book_freq_line": 30,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "386",
+      "wrote": "h386",
+      "n": 3,
+      "book_freq_line": 31,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "49",
+      "wrote": "497",
+      "n": 3,
+      "book_freq_line": 375,
+      "book_freq_wrote": 14
+     },
+     {
+      "line": "36",
+      "wrote": "361",
+      "n": 3,
+      "book_freq_line": 379,
+      "book_freq_wrote": 29
+     },
+     {
+      "line": "21st",
+      "wrote": "e21st",
+      "n": 3,
+      "book_freq_line": 93,
+      "book_freq_wrote": 0
+     }
+    ]
+   },
+   "printed_count": {
+    "printed": 61333,
+    "band": [
+     0.9,
+     1.05
+    ],
+    "named": 61566,
+    "ratio": 1.0038,
+    "named_by_role": {
+     "start": 61489,
+     "other": 35,
+     "runover": 37,
+     "thin": 5
+    },
+    "named_starts_and_thin": 61494,
+    "ratio_adjusted": 1.0026,
+    "verdict": "pass",
+    "verdict_adjusted": "pass",
+    "entries_split_over_runover": 27,
+    "start_lines_unnamed": 117,
+    "start_lines_unnamed_examples": [
+     "now become in general use in this city. They are made by one of the first manufacturers in England, are not liable to get out of order, seldom require cleaning, and",
+     "give a more brilliant and steady light than any other Lamp now in use. There is",
+     "alw ays a sufficient supply of oil to the wick, and all that may overflow is carried",
+     "directly back into the Lamp, — consequently there is no oil cup to empty, and no",
+     "An entirely new article ; and, unlike other Spirit Lamps, there is NO DANGEK",
+     "of explosion, as no heat whatever can be communicated to the liquid. They are",
+     "very economical, burn with brilliancy surpassing gas, and without smell or smoke ;",
+     "are extremely simple, and easily kept in order. Both the above Lamps are imported and for sale by",
+     "Cylinders covered at short notice in the best manner.",
+     "h. 170 Twenty second",
+     "Acute and Chronie Rheumatism.",
+     "Affections of the Bladder and Kid-"
+    ],
+    "runover_named_examples": [
+     [
+      "Muslin and figured",
+      "Muslin and figured"
+     ],
+     [
+      "and Cotton Alt",
+      "and Cotton Alt"
+     ],
+     [
+      "Linen and Muslin.",
+      "Linen and Muslin"
+     ],
+     [
+      "Suspenders,",
+      "Suspenders"
+     ],
+     [
+      "Pocket and Neck",
+      "Pocket and Neck"
+     ],
+     [
+      "UMBRELLAS, Collars,",
+      "UMBRELLAS Collars"
+     ],
+     [
+      "gallery, 247 Broadway",
+      "gallery"
+     ],
+     [
+      "&.c. 285 Broadway",
+      "c. 285 Broadway"
+     ],
+     [
+      "Fulton, h. Jersey City",
+      "Fulton"
+     ],
+     [
+      "tinning John B .in order to prevent mistakes.",
+      "tinning John B"
+     ],
+     [
+      ". Park place",
+      "Park place"
+     ],
+     [
+      "&c. 138 William, h. 436 Broome",
+      "c &c."
+     ]
+    ]
+   }
+  },
+  "hearnesbrooklync1852unse": {
+   "lines": 20120,
+   "entry_rates": {
+    "all": {
+     "lines": 20120,
+     "named": 20109,
+     "entry_shaped": 19359,
+     "business": 343
+    },
+    "by_section": {
+     "listing": {
+      "lines": 20120,
+      "named": 20109,
+      "entry_shaped": 19359,
+      "business": 343
+     }
+    },
+    "by_role": {
+     "start": {
+      "lines": 20070,
+      "named": 20070,
+      "entry_shaped": 19335,
+      "business": 340
+     },
+     "other": {
+      "lines": 40,
+      "named": 32,
+      "entry_shaped": 19,
+      "business": 2
+     },
+     "thin": {
+      "lines": 6,
+      "named": 3,
+      "entry_shaped": 2,
+      "business": 1
+     },
+     "runover": {
+      "lines": 4,
+      "named": 4,
+      "entry_shaped": 3,
+      "business": 0
+     }
+    }
+   },
+   "layout": {
+    "runover_after_start": 2,
+    "runover_indent_in_line_heights": {
+     "p10": 0.94,
+     "p50": 0.94,
+     "p90": 0.94
+    },
+    "join_threshold": 3.0,
+    "runovers_below_threshold": 2,
+    "two_column": false,
+    "lines_crossing_gutter": null,
+    "column_merged_leaves": 0,
+    "lines_on_merged_leaves": 0,
+    "column_merged_leaf_list": []
+   },
+   "invented_name_tokens": {
+    "named": 20109,
+    "with_invented_token": 39,
+    "rate": 0.0019,
+    "examples": [
+     [
+      "Baxter Cecge W, mer 32 Liberty NY h Joralemon c Gar-",
+      "Baxter George W",
+      [
+       "george"
+      ]
+     ],
+     [
+      "Beckwith Colon, clerk 112 Fulton h 99 Washington",
+      "Beckwith Cornelius",
+      [
+       "cornelius"
+      ]
+     ],
+     [
+      "Bedennell Charles, paint manfr 3 18th st Gowanu9",
+      "Beddell Charles",
+      [
+       "beddell"
+      ]
+     ],
+     [
+      "Bliss Pr:oebe, widow of Moses, 183 Water [Hampden",
+      "Bliss Parnabe",
+      [
+       "parnabe"
+      ]
+     ],
+     [
+      "Buckley Af importer 43 Pine NY h 220 Clinton",
+      "Buckley Frank",
+      [
+       "frank"
+      ]
+     ],
+     [
+      "Campbell Colon, seaman East Warren n Bond",
+      "Campbell Cornelius",
+      [
+       "cornelius"
+      ]
+     ],
+     [
+      "( 'aun Henry, seaman Ryerson pi c DeKalb av",
+      "(Cain) Henry",
+      [
+       "cain"
+      ]
+     ],
+     [
+      "Cou way Peter, laborer Caill n Fair",
+      "Coiro Peter",
+      [
+       "coiro"
+      ]
+     ],
+     [
+      "Craudell , stage driver Spencer n Myrtle av",
+      "Craudell Saml",
+      [
+       "saml"
+      ]
+     ],
+     [
+      "Cutter ?flichael, laborer Amity n Columbia",
+      "Cutter Francis",
+      [
+       "francis"
+      ]
+     ],
+     [
+      "DolanJOwen, carpenter Centre n Court",
+      "Dolan John",
+      [
+       "john"
+      ]
+     ],
+     [
+      "Farrell Anfi, dressmaker Raymond n Bolivar",
+      "Farrell Fannie",
+      [
+       "fannie"
+      ]
+     ],
+     [
+      "Fiug Joseph, cabinet maker Fulton av c Navy",
+      "Figueroa Joseph",
+      [
+       "figueroa"
+      ]
+     ],
+     [
+      "Flattery Caanan, policeman 286 Atlantic",
+      "Flattery Caleb",
+      [
+       "caleb"
+      ]
+     ],
+     [
+      "Golding , laborer East Baltic n Hoyt [h 58 Sackett",
+      "Golding John",
+      [
+       "john"
+      ]
+     ]
+    ]
+   },
+   "widow_names": {
+    "lines": 1,
+    "given_name_invented": 0,
+    "given_names": {},
+    "examples": []
+   },
+   "substitutions": {
+    "field_tokens": 93040,
+    "not_in_line": 3300,
+    "by_kind_tokens": {
+     "unclear": 1569,
+     "replaces_common_word": 499,
+     "toward_common_word": 1232
+    },
+    "by_kind_records": {
+     "unclear": 1487,
+     "replaces_common_word": 455,
+     "toward_common_word": 1079
+    },
+    "replaces_common_word_record_rate": 0.0226,
+    "top_pairs": [
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 173,
+      "book_freq_line": 179,
+      "book_freq_wrote": 9,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "carll",
+      "wrote": "carroll",
+      "n": 111,
+      "book_freq_line": 185,
+      "book_freq_wrote": 89,
+      "kind": "unclear"
+     },
+     {
+      "line": "pi",
+      "wrote": "pl",
+      "n": 80,
+      "book_freq_line": 546,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "madison",
+      "n": 58,
+      "book_freq_line": 0,
+      "book_freq_wrote": 9,
+      "kind": "unclear"
+     },
+     {
+      "line": "nyh",
+      "wrote": "ny",
+      "n": 56,
+      "book_freq_line": 57,
+      "book_freq_wrote": 1840,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "wyckoft",
+      "wrote": "wyckoff",
+      "n": 53,
+      "book_freq_line": 53,
+      "book_freq_wrote": 91,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "av",
+      "n": 53,
+      "book_freq_line": 0,
+      "book_freq_wrote": 5032,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "classon",
+      "wrote": "clinton",
+      "n": 42,
+      "book_freq_line": 173,
+      "book_freq_wrote": 371,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "st",
+      "n": 41,
+      "book_freq_line": 0,
+      "book_freq_wrote": 930,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "pi",
+      "wrote": "pin",
+      "n": 31,
+      "book_freq_line": 546,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "11",
+      "n": 28,
+      "book_freq_line": 0,
+      "book_freq_wrote": 87,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pierpont",
+      "n": 28,
+      "book_freq_line": 55,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "middagh",
+      "wrote": "maddagh",
+      "n": 27,
+      "book_freq_line": 86,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "pi",
+      "wrote": "in",
+      "n": 25,
+      "book_freq_line": 546,
+      "book_freq_wrote": 17,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "1s2",
+      "wrote": "152",
+      "n": 20,
+      "book_freq_line": 20,
+      "book_freq_wrote": 42,
+      "kind": "unclear"
+     },
+     {
+      "line": "3s",
+      "wrote": "33",
+      "n": 19,
+      "book_freq_line": 20,
+      "book_freq_wrote": 74,
+      "kind": "unclear"
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 17,
+      "book_freq_line": 271,
+      "book_freq_wrote": 2,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "5s",
+      "wrote": "55",
+      "n": 17,
+      "book_freq_line": 17,
+      "book_freq_wrote": 63,
+      "kind": "unclear"
+     },
+     {
+      "line": "2s",
+      "wrote": "25",
+      "n": 17,
+      "book_freq_line": 20,
+      "book_freq_wrote": 93,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "50",
+      "n": 16,
+      "book_freq_line": 0,
+      "book_freq_wrote": 90,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "pl",
+      "n": 16,
+      "book_freq_line": 0,
+      "book_freq_wrote": 1,
+      "kind": "unclear"
+     },
+     {
+      "line": "4s",
+      "wrote": "45",
+      "n": 15,
+      "book_freq_line": 17,
+      "book_freq_wrote": 81,
+      "kind": "unclear"
+     },
+     {
+      "line": "9s",
+      "wrote": "95",
+      "n": 14,
+      "book_freq_line": 14,
+      "book_freq_wrote": 66,
+      "kind": "unclear"
+     },
+     {
+      "line": "6s",
+      "wrote": "65",
+      "n": 14,
+      "book_freq_line": 16,
+      "book_freq_wrote": 51,
+      "kind": "unclear"
+     },
+     {
+      "line": "yanderbilt",
+      "wrote": "vanderbilt",
+      "n": 13,
+      "book_freq_line": 22,
+      "book_freq_wrote": 136,
+      "kind": "unclear"
+     },
+     {
+      "line": "19s",
+      "wrote": "195",
+      "n": 13,
+      "book_freq_line": 13,
+      "book_freq_wrote": 28,
+      "kind": "unclear"
+     },
+     {
+      "line": "clove",
+      "wrote": "clover",
+      "n": 12,
+      "book_freq_line": 76,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "7s",
+      "wrote": "75",
+      "n": 12,
+      "book_freq_line": 12,
+      "book_freq_wrote": 82,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "15",
+      "n": 11,
+      "book_freq_line": 0,
+      "book_freq_wrote": 107,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "s3",
+      "wrote": "35",
+      "n": 11,
+      "book_freq_line": 30,
+      "book_freq_wrote": 75,
+      "kind": "unclear"
+     }
+    ],
+    "top_replacements": [
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 173,
+      "book_freq_line": 179,
+      "book_freq_wrote": 9
+     },
+     {
+      "line": "pi",
+      "wrote": "pl",
+      "n": 80,
+      "book_freq_line": 546,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "pi",
+      "wrote": "pin",
+      "n": 31,
+      "book_freq_line": 546,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pierpont",
+      "n": 28,
+      "book_freq_line": 55,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "middagh",
+      "wrote": "maddagh",
+      "n": 27,
+      "book_freq_line": 86,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "pi",
+      "wrote": "in",
+      "n": 25,
+      "book_freq_line": 546,
+      "book_freq_wrote": 17
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 17,
+      "book_freq_line": 271,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "clove",
+      "wrote": "clover",
+      "n": 12,
+      "book_freq_line": 76,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "classon",
+      "wrote": "clason",
+      "n": 5,
+      "book_freq_line": 173,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "hunterfly",
+      "wrote": "hunterfield",
+      "n": 5,
+      "book_freq_line": 20,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "carll",
+      "wrote": "carl",
+      "n": 4,
+      "book_freq_line": 185,
+      "book_freq_wrote": 8
+     },
+     {
+      "line": "buildings",
+      "wrote": "building",
+      "n": 4,
+      "book_freq_line": 138,
+      "book_freq_wrote": 5
+     },
+     {
+      "line": "5th",
+      "wrote": "51st",
+      "n": 4,
+      "book_freq_line": 138,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "sandford",
+      "wrote": "sanford",
+      "n": 4,
+      "book_freq_line": 26,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "degraw",
+      "wrote": "delgraw",
+      "n": 4,
+      "book_freq_line": 271,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "strong",
+      "wrote": "spring",
+      "n": 3,
+      "book_freq_line": 31,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "boerum",
+      "wrote": "bowery",
+      "n": 3,
+      "book_freq_line": 227,
+      "book_freq_wrote": 4
+     },
+     {
+      "line": "kalb",
+      "wrote": "kalbar",
+      "n": 2,
+      "book_freq_line": 67,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "remsen",
+      "wrote": "renssen",
+      "n": 2,
+      "book_freq_line": 55,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "mer",
+      "wrote": "mercer",
+      "n": 2,
+      "book_freq_line": 783,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "tillary",
+      "wrote": "stillary",
+      "n": 2,
+      "book_freq_line": 492,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "degraw",
+      "wrote": "delawar",
+      "n": 2,
+      "book_freq_line": 271,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "edward",
+      "wrote": "delaware",
+      "n": 2,
+      "book_freq_line": 439,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "degraw",
+      "wrote": "degrav",
+      "n": 2,
+      "book_freq_line": 271,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "john",
+      "wrote": "on",
+      "n": 1,
+      "book_freq_line": 2811,
+      "book_freq_wrote": 4
+     },
+     {
+      "line": "hunterfly",
+      "wrote": "hunterly",
+      "n": 1,
+      "book_freq_line": 20,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "broad",
+      "wrote": "barclay",
+      "n": 1,
+      "book_freq_line": 60,
+      "book_freq_wrote": 5
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pearlton",
+      "n": 1,
+      "book_freq_line": 55,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "47",
+      "wrote": "476",
+      "n": 1,
+      "book_freq_line": 82,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "st",
+      "wrote": "stop",
+      "n": 1,
+      "book_freq_line": 930,
+      "book_freq_wrote": 0
+     }
+    ]
+   }
+  },
+  "merceinscitydire00merc": {
+   "lines": 20366,
+   "entry_rates": {
+    "all": {
+     "lines": 20366,
+     "named": 20316,
+     "entry_shaped": 19047,
+     "business": 546
+    },
+    "by_section": {
+     "listing": {
+      "lines": 20197,
+      "named": 20185,
+      "entry_shaped": 18959,
+      "business": 523
+     },
+     "late_names": {
+      "lines": 169,
+      "named": 131,
+      "entry_shaped": 88,
+      "business": 23
+     }
+    },
+    "by_role": {
+     "start": {
+      "lines": 20035,
+      "named": 20009,
+      "entry_shaped": 18902,
+      "business": 512
+     },
+     "runover": {
+      "lines": 164,
+      "named": 151,
+      "entry_shaped": 84,
+      "business": 22
+     },
+     "other": {
+      "lines": 161,
+      "named": 152,
+      "entry_shaped": 59,
+      "business": 12
+     },
+     "thin": {
+      "lines": 6,
+      "named": 4,
+      "entry_shaped": 2,
+      "business": 0
+     }
+    }
+   },
+   "layout": {
+    "runover_after_start": 63,
+    "runover_indent_in_line_heights": {
+     "p10": 0.84,
+     "p50": 1.06,
+     "p90": 1.91
+    },
+    "join_threshold": 3.0,
+    "runovers_below_threshold": 62,
+    "two_column": false,
+    "lines_crossing_gutter": null,
+    "column_merged_leaves": 0,
+    "lines_on_merged_leaves": 0,
+    "column_merged_leaf_list": []
+   },
+   "invented_name_tokens": {
+    "named": 20316,
+    "with_invented_token": 377,
+    "rate": 0.0186,
+    "examples": [
+     [
+      "Catlnk£|pnde, 65 Broadway",
+      "Catlin Kemp",
+      [
+       "kemp"
+      ]
+     ],
+     [
+      "Ackerman widow, 47 Elizabeth",
+      "Ackerman Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "Ackley widow, 76 Pump",
+      "Ackley Mary",
+      [
+       "mary"
+      ]
+     ],
+     [
+      "Adams widow, 92 Henry",
+      "Adams Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "Adams widow, 62 Mott,",
+      "Adams Mary",
+      [
+       "mary"
+      ]
+     ],
+     [
+      "Aiken widow 5 Suffolk",
+      "Aiken Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "Akerly widow, 68 Rutgers",
+      "Akerly Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "Albertson widow 231 Bowery [chard",
+      "Albertson Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "AMERICAN jf|ojj» MUSEUM",
+      "AMERICAN Joseph",
+      [
+       "joseph"
+      ]
+     ],
+     [
+      "JVew-York |fe='|£fl Institution",
+      "Jew-York Fred",
+      [
+       "fred"
+      ]
+     ],
+     [
+      "Anderson widow, 15 Christie",
+      "Anderson Mary",
+      [
+       "mary"
+      ]
+     ],
+     [
+      "Anderson widow, 402 Bowery",
+      "Anderson Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "Angus widow, 218 Bowery",
+      "Angus Mary",
+      [
+       "mary"
+      ]
+     ],
+     [
+      "Appleby widow, 195 Orange [Division",
+      "Appleby Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "Armentu widow, 205 Bancker MK* -. .<",
+      "Armentu Mary",
+      [
+       "mary"
+      ]
+     ]
+    ]
+   },
+   "widow_names": {
+    "lines": 1391,
+    "given_name_invented": 212,
+    "given_names": {
+     "Mary": 104,
+     "Sarah": 87,
+     "Fannie": 3,
+     "Anna": 3,
+     "Hannah": 2,
+     "Parnabeh": 2,
+     "Felt": 1,
+     "Cornelia": 1
+    },
+    "examples": [
+     [
+      "Ackerman widow, 47 Elizabeth",
+      "Ackerman Sarah"
+     ],
+     [
+      "Ackley widow, 76 Pump",
+      "Ackley Mary"
+     ],
+     [
+      "Adams widow, 92 Henry",
+      "Adams Sarah"
+     ],
+     [
+      "Adams widow, 62 Mott,",
+      "Adams Mary"
+     ],
+     [
+      "Aiken widow 5 Suffolk",
+      "Aiken Sarah"
+     ],
+     [
+      "Akerly widow, 68 Rutgers",
+      "Akerly Sarah"
+     ],
+     [
+      "Albertson widow 231 Bowery [chard",
+      "Albertson Sarah"
+     ],
+     [
+      "Anderson widow, 15 Christie",
+      "Anderson Mary"
+     ],
+     [
+      "Anderson widow, 402 Bowery",
+      "Anderson Sarah"
+     ],
+     [
+      "Angus widow, 218 Bowery",
+      "Angus Mary"
+     ]
+    ]
+   },
+   "substitutions": {
+    "field_tokens": 69437,
+    "not_in_line": 4618,
+    "by_kind_tokens": {
+     "toward_common_word": 1971,
+     "unclear": 1986,
+     "replaces_common_word": 661
+    },
+    "by_kind_records": {
+     "toward_common_word": 1743,
+     "unclear": 1774,
+     "replaces_common_word": 659
+    },
+    "replaces_common_word_record_rate": 0.0324,
+    "top_pairs": [
+     {
+      "line": "bancker",
+      "wrote": "banker",
+      "n": 343,
+      "book_freq_line": 392,
+      "book_freq_wrote": 3,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "harman",
+      "wrote": "hanman",
+      "n": 108,
+      "book_freq_line": 192,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "st",
+      "n": 60,
+      "book_freq_line": 0,
+      "book_freq_wrote": 264,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "delancy",
+      "wrote": "delancey",
+      "n": 52,
+      "book_freq_line": 223,
+      "book_freq_wrote": 21,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "11",
+      "n": 33,
+      "book_freq_line": 0,
+      "book_freq_wrote": 157,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "goerck",
+      "wrote": "george",
+      "n": 22,
+      "book_freq_line": 55,
+      "book_freq_wrote": 331,
+      "kind": "unclear"
+     },
+     {
+      "line": "chesnut",
+      "wrote": "chestnut",
+      "n": 21,
+      "book_freq_line": 24,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "boardingh",
+      "wrote": "boarding",
+      "n": 21,
+      "book_freq_line": 75,
+      "book_freq_wrote": 48,
+      "kind": "unclear"
+     },
+     {
+      "line": "pear",
+      "wrote": "pearl",
+      "n": 20,
+      "book_freq_line": 20,
+      "book_freq_wrote": 949,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "governeur",
+      "wrote": "gouverneur",
+      "n": 14,
+      "book_freq_line": 15,
+      "book_freq_wrote": 23,
+      "kind": "unclear"
+     },
+     {
+      "line": "wash",
+      "wrote": "washn",
+      "n": 14,
+      "book_freq_line": 60,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "14",
+      "wrote": "114",
+      "n": 14,
+      "book_freq_line": 158,
+      "book_freq_wrote": 35,
+      "kind": "unclear"
+     },
+     {
+      "line": "cartraan",
+      "wrote": "cartman",
+      "n": 14,
+      "book_freq_line": 14,
+      "book_freq_wrote": 912,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "mercb",
+      "wrote": "merch",
+      "n": 13,
+      "book_freq_line": 13,
+      "book_freq_wrote": 77,
+      "kind": "unclear"
+     },
+     {
+      "line": "cartmau",
+      "wrote": "cartman",
+      "n": 12,
+      "book_freq_line": 12,
+      "book_freq_wrote": 912,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "esses",
+      "wrote": "essex",
+      "n": 12,
+      "book_freq_line": 14,
+      "book_freq_wrote": 138,
+      "kind": "unclear"
+     },
+     {
+      "line": "cbrystie",
+      "wrote": "christie",
+      "n": 12,
+      "book_freq_line": 16,
+      "book_freq_wrote": 70,
+      "kind": "unclear"
+     },
+     {
+      "line": "harman",
+      "wrote": "hanmer",
+      "n": 11,
+      "book_freq_line": 192,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "sbipcarpenter",
+      "wrote": "shipcarpenter",
+      "n": 11,
+      "book_freq_line": 11,
+      "book_freq_wrote": 57,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "12",
+      "n": 11,
+      "book_freq_line": 0,
+      "book_freq_wrote": 163,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "eartman",
+      "wrote": "cartman",
+      "n": 11,
+      "book_freq_line": 11,
+      "book_freq_wrote": 912,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "boardingb",
+      "wrote": "boarding",
+      "n": 11,
+      "book_freq_line": 18,
+      "book_freq_wrote": 48,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "av",
+      "n": 10,
+      "book_freq_line": 0,
+      "book_freq_wrote": 2,
+      "kind": "unclear"
+     },
+     {
+      "line": "cbapel",
+      "wrote": "chapel",
+      "n": 10,
+      "book_freq_line": 10,
+      "book_freq_wrote": 262,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "porterh",
+      "wrote": "porter",
+      "n": 10,
+      "book_freq_line": 10,
+      "book_freq_wrote": 76,
+      "kind": "unclear"
+     },
+     {
+      "line": "16",
+      "wrote": "116",
+      "n": 10,
+      "book_freq_line": 167,
+      "book_freq_wrote": 34,
+      "kind": "unclear"
+     },
+     {
+      "line": "cbeapside",
+      "wrote": "cheapside",
+      "n": 9,
+      "book_freq_line": 9,
+      "book_freq_wrote": 55,
+      "kind": "unclear"
+     },
+     {
+      "line": "15",
+      "wrote": "115",
+      "n": 9,
+      "book_freq_line": 143,
+      "book_freq_wrote": 35,
+      "kind": "unclear"
+     },
+     {
+      "line": "while",
+      "wrote": "white",
+      "n": 9,
+      "book_freq_line": 25,
+      "book_freq_wrote": 124,
+      "kind": "unclear"
+     },
+     {
+      "line": "haerlem",
+      "wrote": "harlem",
+      "n": 8,
+      "book_freq_line": 8,
+      "book_freq_wrote": 1,
+      "kind": "unclear"
+     }
+    ],
+    "top_replacements": [
+     {
+      "line": "bancker",
+      "wrote": "banker",
+      "n": 343,
+      "book_freq_line": 392,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "harman",
+      "wrote": "hanman",
+      "n": 108,
+      "book_freq_line": 192,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "delancy",
+      "wrote": "delancey",
+      "n": 52,
+      "book_freq_line": 223,
+      "book_freq_wrote": 21
+     },
+     {
+      "line": "chesnut",
+      "wrote": "chestnut",
+      "n": 21,
+      "book_freq_line": 24,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "wash",
+      "wrote": "washn",
+      "n": 14,
+      "book_freq_line": 60,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "harman",
+      "wrote": "hanmer",
+      "n": 11,
+      "book_freq_line": 192,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "way",
+      "wrote": "bway",
+      "n": 4,
+      "book_freq_line": 28,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "48",
+      "wrote": "481",
+      "n": 4,
+      "book_freq_line": 109,
+      "book_freq_wrote": 7
+     },
+     {
+      "line": "21",
+      "wrote": "211",
+      "n": 3,
+      "book_freq_line": 149,
+      "book_freq_wrote": 14
+     },
+     {
+      "line": "james",
+      "wrote": "hanmer",
+      "n": 3,
+      "book_freq_line": 1157,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "alley",
+      "wrote": "lley",
+      "n": 3,
+      "book_freq_line": 43,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "31",
+      "wrote": "311",
+      "n": 3,
+      "book_freq_line": 116,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "34",
+      "wrote": "341",
+      "n": 3,
+      "book_freq_line": 126,
+      "book_freq_wrote": 4
+     },
+     {
+      "line": "42",
+      "wrote": "421",
+      "n": 3,
+      "book_freq_line": 131,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "baker",
+      "wrote": "hanmer",
+      "n": 2,
+      "book_freq_line": 260,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "carpenter",
+      "wrote": "hanmer",
+      "n": 2,
+      "book_freq_line": 869,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "of",
+      "wrote": "ft",
+      "n": 2,
+      "book_freq_line": 416,
+      "book_freq_wrote": 13
+     },
+     {
+      "line": "laight",
+      "wrote": "light",
+      "n": 2,
+      "book_freq_line": 20,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "41",
+      "wrote": "411",
+      "n": 2,
+      "book_freq_line": 114,
+      "book_freq_wrote": 6
+     },
+     {
+      "line": "burrows",
+      "wrote": "bowrows",
+      "n": 2,
+      "book_freq_line": 23,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "att",
+      "wrote": "attand",
+      "n": 2,
+      "book_freq_line": 28,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "harman",
+      "wrote": "hanam",
+      "n": 2,
+      "book_freq_line": 192,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "58",
+      "wrote": "581",
+      "n": 1,
+      "book_freq_line": 90,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "51",
+      "wrote": "851",
+      "n": 1,
+      "book_freq_line": 91,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "54",
+      "wrote": "543",
+      "n": 1,
+      "book_freq_line": 70,
+      "book_freq_wrote": 4
+     },
+     {
+      "line": "baker",
+      "wrote": "banker",
+      "n": 1,
+      "book_freq_line": 260,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "shoe",
+      "wrote": "shoes",
+      "n": 1,
+      "book_freq_line": 39,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "55",
+      "wrote": "551",
+      "n": 1,
+      "book_freq_line": 76,
+      "book_freq_wrote": 5
+     },
+     {
+      "line": "45",
+      "wrote": "345",
+      "n": 1,
+      "book_freq_line": 105,
+      "book_freq_wrote": 8
+     },
+     {
+      "line": "shoemaker",
+      "wrote": "shaker",
+      "n": 1,
+      "book_freq_line": 519,
+      "book_freq_wrote": 0
+     }
+    ]
+   },
+   "panel_pages": {
+    "set": "mercein1820",
+    "gold_rows": 60,
+    "per_leaf": {
+     "138": {
+      "gold_rows": 46,
+      "ocr_lines": 60,
+      "matched": 46,
+      "pairs": 0,
+      "unmatched_ocr_lines": 14
+     },
+     "320": {
+      "gold_rows": 14,
+      "ocr_lines": 59,
+      "matched": 14,
+      "pairs": 0,
+      "unmatched_ocr_lines": 45
+     }
+    },
+    "matched": 60,
+    "matched_pct": 100.0,
+    "match_ratio_median": 1.0,
+    "volume_on_matched": {
+     "n": 60,
+     "row_exact_pct": 63.3,
+     "macro_f1": 0.735,
+     "field_em": {
+      "name": 83.3,
+      "occupation_role": 86.7,
+      "employer": 100.0,
+      "address": 83.3,
+      "home_address": 95.0
+     }
+    },
+    "volume_on_single_line_matches": {
+     "n": 60,
+     "row_exact_pct": 63.3,
+     "macro_f1": 0.735,
+     "field_em": {
+      "name": 83.3,
+      "occupation_role": 86.7,
+      "employer": 100.0,
+      "address": 83.3,
+      "home_address": 95.0
+     }
+    },
+    "volume_on_identical_text": {
+     "n": 36,
+     "row_exact_pct": 91.7,
+     "macro_f1": 0.97,
+     "field_em": {
+      "name": 94.4,
+      "occupation_role": 97.2,
+      "employer": 100.0,
+      "address": 97.2,
+      "home_address": 100.0
+     }
+    },
+    "extras": 59,
+    "extras_named": 59,
+    "extras_by_role": {
+     "start": 59
+    },
+    "extras_examples": [
+     [
+      "Brower Adolphus, 1 Delancey, Anotbor, Reasen",
+      "Brower Adolphus",
+      "start"
+     ],
+     [
+      "Brower Eliza, widow 320 Greenwich [68 Chapel",
+      "Brower Eliza",
+      "start"
+     ],
+     [
+      "Brower Maria, fruit st. 2 Mulberry",
+      "Brower Maria",
+      "start"
+     ],
+     [
+      "Brower Mary, 68 Chapel",
+      "Brower Mary",
+      "start"
+     ],
+     [
+      "Brower Mary, 222 William",
+      "Brower Mary",
+      "start"
+     ],
+     [
+      "Brower Martha, 63 Chapel [Ferry",
+      "Brower Martha",
+      "start"
+     ],
+     [
+      "Brower Nicholas B. bandbox manu. 62 Fulton h 8",
+      "Brower Nicholas B.",
+      "start"
+     ],
+     [
+      "Brower Oliver, cartman Grand c Suffolk",
+      "Brower Oliver",
+      "start"
+     ],
+     [
+      "Brower Peter, cartman 56 Anthony",
+      "Brower Peter",
+      "start"
+     ],
+     [
+      "Brower Peter, shoemaker 210 Division",
+      "Brower Peter",
+      "start"
+     ],
+     [
+      "Brower Richard D. mer. 155 Fulton",
+      "Brower Richard D.",
+      "start"
+     ],
+     [
+      "Brower Samuel, bandbox and trunk m. 127 Wm",
+      "Brower Samuel",
+      "start"
+     ],
+     [
+      "Brower Samuel, chairmaker 312 Water",
+      "Brower Samuel",
+      "start"
+     ],
+     [
+      "Brower T L. cabinet m. Fulton h 36 Church",
+      "Brower T L.",
+      "start"
+     ],
+     [
+      "Morton Robt. boatman Goerck n Broome",
+      "Morton Robt.",
+      "start"
+     ]
+    ],
+    "unmatched_gold_examples": [],
+    "panel_on_matched": {
+     "n": 60,
+     "row_exact_pct": 88.3,
+     "macro_f1": 0.959,
+     "field_em": {
+      "name": 95.0,
+      "occupation_role": 93.3,
+      "employer": 100.0,
+      "address": 96.7,
+      "home_address": 100.0
+     }
+    },
+    "panel_on_all_gold": {
+     "n": 60,
+     "row_exact_pct": 88.3,
+     "macro_f1": 0.959,
+     "field_em": {
+      "name": 95.0,
+      "occupation_role": 93.3,
+      "employer": 100.0,
+      "address": 96.7,
+      "home_address": 100.0
+     }
+    },
+    "panel_on_identical_text": {
+     "n": 36,
+     "row_exact_pct": 91.7,
+     "macro_f1": 0.97,
+     "field_em": {
+      "name": 94.4,
+      "occupation_role": 97.2,
+      "employer": 100.0,
+      "address": 97.2,
+      "home_address": 100.0
+     }
+    },
+    "panel_right_volume_wrong": 22,
+    "panel_right_volume_wrong_examples": [
+     {
+      "gold_text": "Brooks James, shipwright 58 Rutgers",
+      "ocr_text": "Brooks James, shipwright 68 Rutgers",
+      "field": "address",
+      "gold": "58 Rutgers",
+      "volume": "68 Rutgers"
+     },
+     {
+      "gold_text": "Brooks James, painter &c. 55 Liberty",
+      "ocr_text": "Brook- James, painter he. 55 Liberty",
+      "field": "name",
+      "gold": "Brooks James",
+      "volume": "Brook-James"
+     },
+     {
+      "gold_text": "Brooks James, painter &c. 55 Liberty",
+      "ocr_text": "Brook- James, painter he. 55 Liberty",
+      "field": "occupation_role",
+      "gold": "painter &c.",
+      "volume": "painter"
+     },
+     {
+      "gold_text": "Brooks James, painter &c. 55 Liberty",
+      "ocr_text": "Brook- James, painter he. 55 Liberty",
+      "field": "address",
+      "gold": "55 Liberty",
+      "volume": "h. 55 Liberty"
+     },
+     {
+      "gold_text": "Brooks John, gardener 1st Avenue",
+      "ocr_text": "Bronki John, gardener 1st Avenue",
+      "field": "name",
+      "gold": "Brooks John",
+      "volume": "Bronki John"
+     },
+     {
+      "gold_text": "Brooks Wm C. shoemaker 57 Allen",
+      "ocr_text": "Brooks Vi'm C. shoemaker 67 Allen",
+      "field": "name",
+      "gold": "Brooks Wm C.",
+      "volume": "Brooks Vim C."
+     },
+     {
+      "gold_text": "Brooks Wm C. shoemaker 57 Allen",
+      "ocr_text": "Brooks Vi'm C. shoemaker 67 Allen",
+      "field": "address",
+      "gold": "57 Allen",
+      "volume": "67 Allen"
+     },
+     {
+      "gold_text": "Brooks Wm. W. shoestore 209 Greenwich",
+      "ocr_text": "Brooks Wrn. W. shoeslore 209 Greenwich",
+      "field": "occupation_role",
+      "gold": "shoestore",
+      "volume": "shoelore"
+     },
+     {
+      "gold_text": "Brooks widow Catherine, Crosby n Spring",
+      "ocr_text": "Brooks widow Catherine, Cropby n Spring",
+      "field": "address",
+      "gold": "Crosby n Spring",
+      "volume": "Cropby n Spring"
+     },
+     {
+      "gold_text": "Brooks widow Hannah, Collect n Pearl",
+      "ocr_text": "Brooks widow Hannah, Collect n Pearl [clay",
+      "field": "home_address",
+      "gold": "",
+      "volume": "clay"
+     },
+     {
+      "gold_text": "Brooks and Co. Thos. leather st. 60 Vesey h 58 Barclay",
+      "ocr_text": "Brooks and t^o. Thos. leather st . 60 Vesey h 58 Bar-",
+      "field": "name",
+      "gold": "Brooks and Co. Thos.",
+      "volume": "Brooks and To Thos."
+     },
+     {
+      "gold_text": "Brooks and Co. Thos. leather st. 60 Vesey h 58 Barclay",
+      "ocr_text": "Brooks and t^o. Thos. leather st . 60 Vesey h 58 Bar-",
+      "field": "home_address",
+      "gold": "58 Barclay",
+      "volume": "58 Bar-"
+     },
+     {
+      "gold_text": "Brooks and Co. Thomas, tanyard, Collect n Pearl",
+      "ocr_text": "Brooks and Co. Thomas, lanyard, Collect n Pearl",
+      "field": "occupation_role",
+      "gold": "tanyard",
+      "volume": "lanyard"
+     },
+     {
+      "gold_text": "Broome John L. Tammany Hall",
+      "ocr_text": "Broome John !.. Tammany Hall",
+      "field": "name",
+      "gold": "Broome John L.",
+      "volume": "Broome John"
+     },
+     {
+      "gold_text": "Broseus John, 27 Orange",
+      "ocr_text": "Bro9eus John, 27 Orange",
+      "field": "name",
+      "gold": "Broseus John",
+      "volume": "Broeus John"
+     }
+    ]
+   }
+  },
+  "micro_IABROOKLYN_0030": {
+   "lines": 14255,
+   "entry_rates": {
+    "all": {
+     "lines": 14255,
+     "named": 14125,
+     "entry_shaped": 12132,
+     "business": 241
+    },
+    "by_section": {
+     "listing": {
+      "lines": 14255,
+      "named": 14125,
+      "entry_shaped": 12132,
+      "business": 241
+     }
+    },
+    "by_role": {
+     "start": {
+      "lines": 13038,
+      "named": 13021,
+      "entry_shaped": 11464,
+      "business": 212
+     },
+     "other": {
+      "lines": 911,
+      "named": 812,
+      "entry_shaped": 477,
+      "business": 27
+     },
+     "runover": {
+      "lines": 215,
+      "named": 210,
+      "entry_shaped": 146,
+      "business": 1
+     },
+     "thin": {
+      "lines": 91,
+      "named": 82,
+      "entry_shaped": 45,
+      "business": 1
+     }
+    }
+   },
+   "layout": {
+    "runover_after_start": 157,
+    "runover_indent_in_line_heights": {
+     "p10": 0.48,
+     "p50": 0.72,
+     "p90": 1.43
+    },
+    "join_threshold": 3.0,
+    "runovers_below_threshold": 157,
+    "two_column": false,
+    "lines_crossing_gutter": null,
+    "column_merged_leaves": 0,
+    "lines_on_merged_leaves": 0,
+    "column_merged_leaf_list": []
+   },
+   "invented_name_tokens": {
+    "named": 14125,
+    "with_invented_token": 145,
+    "rate": 0.0103,
+    "examples": [
+     [
+      "Ackerman pe) avy e Bolivar",
+      "Ackerman Peter",
+      [
+       "peter"
+      ]
+     ],
+     [
+      "oF oe ate ood eus 1004",
+      "Foe Faye",
+      [
+       "faye"
+      ]
+     ],
+     [
+      "Alcock anor",
+      "Alcock Anna",
+      [
+       "anna"
+      ]
+     ],
+     [
+      "y Theodore, furrier Bergen n Powers",
+      "Jey Theodore",
+      [
+       "jey"
+      ]
+     ],
+     [
+      "ug? Washington h 5 Monroe plc W",
+      "Quig Washington",
+      [
+       "quig"
+      ]
+     ],
+     [
+      "Arthur Ge e Washi ton n Atlantic av |",
+      "Arthur George",
+      [
+       "george"
+      ]
+     ],
+     [
+      "Babcock 7 ver Flushin avn",
+      "Babcock George",
+      [
+       "george"
+      ]
+     ],
+     [
+      "Bailey Ano, widow r 173 Concord",
+      "Bailey Anna",
+      [
+       "anna"
+      ]
+     ],
+     [
+      "N ulton he Clove rd & Pacific",
+      "Nulton Henry",
+      [
+       "henry"
+      ]
+     ],
+     [
+      "¢ Fulton ot 2 oye",
+      "Fulton Otis",
+      [
+       "otis"
+      ]
+     ],
+     [
+      "Baldwin ae carpenter 157 Gold",
+      "Baldwin Jane",
+      [
+       "jane"
+      ]
+     ],
+     [
+      "Barnes Aan L, widow of Charles L, 100 Willoughby",
+      "Barnes Anna L",
+      [
+       "anna"
+      ]
+     ],
+     [
+      "Beckwith Colon, clerk 112 Fulton h 99 Washington",
+      "Beckwith Cornelius",
+      [
+       "cornelius"
+      ]
+     ],
+     [
+      "— Gare E, ＋ NY h 75",
+      "- George E",
+      [
+       "george"
+      ]
+     ],
+     [
+      "Bliss Pcoebe, widow of Moses, 183 Water Hampden",
+      "Bliss Parnab",
+      [
+       "parnab"
+      ]
+     ]
+    ]
+   },
+   "widow_names": {
+    "lines": 13,
+    "given_name_invented": 2,
+    "given_names": {
+     "Fannie": 1,
+     "Mary": 1
+    },
+    "examples": [
+     [
+      "Feene widow of",
+      "Feene Fannie"
+     ],
+     [
+      "Webster widow of William, 234 Henry",
+      "Webster Mary"
+     ]
+    ]
+   },
+   "substitutions": {
+    "field_tokens": 61092,
+    "not_in_line": 2475,
+    "by_kind_tokens": {
+     "unclear": 1208,
+     "replaces_common_word": 290,
+     "toward_common_word": 977
+    },
+    "by_kind_records": {
+     "unclear": 1073,
+     "replaces_common_word": 279,
+     "toward_common_word": 897
+    },
+    "replaces_common_word_record_rate": 0.0196,
+    "top_pairs": [
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 111,
+      "book_freq_line": 124,
+      "book_freq_wrote": 8,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "carll",
+      "wrote": "carroll",
+      "n": 59,
+      "book_freq_line": 92,
+      "book_freq_wrote": 52,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "av",
+      "n": 34,
+      "book_freq_line": 0,
+      "book_freq_wrote": 3015,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "st",
+      "n": 33,
+      "book_freq_line": 0,
+      "book_freq_wrote": 631,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "madison",
+      "n": 23,
+      "book_freq_line": 0,
+      "book_freq_wrote": 3,
+      "kind": "unclear"
+     },
+     {
+      "line": "ay",
+      "wrote": "av",
+      "n": 17,
+      "book_freq_line": 159,
+      "book_freq_wrote": 3015,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "middagh",
+      "wrote": "maddagh",
+      "n": 14,
+      "book_freq_line": 42,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "jobnson",
+      "wrote": "johnson",
+      "n": 13,
+      "book_freq_line": 15,
+      "book_freq_wrote": 260,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pierpont",
+      "n": 12,
+      "book_freq_line": 28,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "classon",
+      "wrote": "clinton",
+      "n": 12,
+      "book_freq_line": 103,
+      "book_freq_wrote": 221,
+      "kind": "unclear"
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 11,
+      "book_freq_line": 154,
+      "book_freq_wrote": 2,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "pl",
+      "n": 10,
+      "book_freq_line": 0,
+      "book_freq_wrote": 318,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "pear",
+      "wrote": "pearl",
+      "n": 10,
+      "book_freq_line": 11,
+      "book_freq_wrote": 293,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "pacifie",
+      "wrote": "pacific",
+      "n": 9,
+      "book_freq_line": 10,
+      "book_freq_wrote": 284,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "ist",
+      "wrote": "1st",
+      "n": 9,
+      "book_freq_line": 16,
+      "book_freq_wrote": 2,
+      "kind": "unclear"
+     },
+     {
+      "line": "atlantie",
+      "wrote": "atlantic",
+      "n": 8,
+      "book_freq_line": 9,
+      "book_freq_wrote": 592,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "elerk",
+      "wrote": "clerk",
+      "n": 8,
+      "book_freq_line": 8,
+      "book_freq_wrote": 318,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "2ist",
+      "wrote": "21st",
+      "n": 8,
+      "book_freq_line": 9,
+      "book_freq_wrote": 55,
+      "kind": "unclear"
+     },
+     {
+      "line": "remsen",
+      "wrote": "reuben",
+      "n": 7,
+      "book_freq_line": 32,
+      "book_freq_wrote": 6,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "front",
+      "n": 7,
+      "book_freq_line": 0,
+      "book_freq_wrote": 292,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "washi",
+      "wrote": "washn",
+      "n": 7,
+      "book_freq_line": 9,
+      "book_freq_wrote": 0,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "11",
+      "n": 7,
+      "book_freq_line": 0,
+      "book_freq_wrote": 73,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "2lst",
+      "wrote": "21st",
+      "n": 7,
+      "book_freq_line": 7,
+      "book_freq_wrote": 55,
+      "kind": "unclear"
+     },
+     {
+      "line": "clove",
+      "wrote": "clover",
+      "n": 7,
+      "book_freq_line": 52,
+      "book_freq_wrote": 1,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "of",
+      "n": 7,
+      "book_freq_line": 0,
+      "book_freq_wrote": 457,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "1st",
+      "n": 7,
+      "book_freq_line": 0,
+      "book_freq_wrote": 2,
+      "kind": "unclear"
+     },
+     {
+      "line": "jobn",
+      "wrote": "john",
+      "n": 7,
+      "book_freq_line": 53,
+      "book_freq_wrote": 1733,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "peart",
+      "wrote": "pearl",
+      "n": 7,
+      "book_freq_line": 7,
+      "book_freq_wrote": 293,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "aud",
+      "wrote": "and",
+      "n": 6,
+      "book_freq_line": 8,
+      "book_freq_wrote": 504,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "and",
+      "n": 6,
+      "book_freq_line": 0,
+      "book_freq_wrote": 504,
+      "kind": "toward_common_word"
+     }
+    ],
+    "top_replacements": [
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 111,
+      "book_freq_line": 124,
+      "book_freq_wrote": 8
+     },
+     {
+      "line": "middagh",
+      "wrote": "maddagh",
+      "n": 14,
+      "book_freq_line": 42,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "pierrepont",
+      "wrote": "pierpont",
+      "n": 12,
+      "book_freq_line": 28,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 11,
+      "book_freq_line": 154,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "clove",
+      "wrote": "clover",
+      "n": 7,
+      "book_freq_line": 52,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "degraw",
+      "wrote": "degrav",
+      "n": 6,
+      "book_freq_line": 154,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "sands",
+      "wrote": "sand",
+      "n": 6,
+      "book_freq_line": 163,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "remsen",
+      "wrote": "renssen",
+      "n": 2,
+      "book_freq_line": 32,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "rd",
+      "wrote": "drd",
+      "n": 2,
+      "book_freq_line": 124,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "classon",
+      "wrote": "clarkson",
+      "n": 2,
+      "book_freq_line": 103,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "duffield",
+      "wrote": "duddfield",
+      "n": 2,
+      "book_freq_line": 85,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "mer",
+      "wrote": "mercer",
+      "n": 2,
+      "book_freq_line": 504,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "degraw",
+      "wrote": "delgraw",
+      "n": 2,
+      "book_freq_line": 154,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "classon",
+      "wrote": "clason",
+      "n": 2,
+      "book_freq_line": 103,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "80",
+      "wrote": "801",
+      "n": 1,
+      "book_freq_line": 55,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "at",
+      "wrote": "aat",
+      "n": 1,
+      "book_freq_line": 41,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "10",
+      "wrote": "410",
+      "n": 1,
+      "book_freq_line": 85,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "oe",
+      "wrote": "ooe",
+      "n": 1,
+      "book_freq_line": 22,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "henry",
+      "wrote": "end",
+      "n": 1,
+      "book_freq_line": 580,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "20",
+      "wrote": "20d",
+      "n": 1,
+      "book_freq_line": 64,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "sands",
+      "wrote": "sandee",
+      "n": 1,
+      "book_freq_line": 163,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "162",
+      "wrote": "1162",
+      "n": 1,
+      "book_freq_line": 29,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "108",
+      "wrote": "1108",
+      "n": 1,
+      "book_freq_line": 39,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "mill",
+      "wrote": "millory",
+      "n": 1,
+      "book_freq_line": 35,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "st",
+      "wrote": "stop",
+      "n": 1,
+      "book_freq_line": 631,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "brady",
+      "wrote": "barclay",
+      "n": 1,
+      "book_freq_line": 41,
+      "book_freq_wrote": 4
+     },
+     {
+      "line": "us",
+      "wrote": "usd",
+      "n": 1,
+      "book_freq_line": 27,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "carll",
+      "wrote": "carlle",
+      "n": 1,
+      "book_freq_line": 92,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "de",
+      "wrote": "del",
+      "n": 1,
+      "book_freq_line": 99,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "gold",
+      "wrote": "golden",
+      "n": 1,
+      "book_freq_line": 395,
+      "book_freq_wrote": 7
+     }
+    ]
+   },
+   "panel_pages": {
+    "set": "hearne1852",
+    "gold_rows": 52,
+    "per_leaf": {
+     "174": {
+      "gold_rows": 30,
+      "ocr_lines": 44,
+      "matched": 30,
+      "pairs": 1,
+      "unmatched_ocr_lines": 13
+     },
+     "405": {
+      "gold_rows": 22,
+      "ocr_lines": 26,
+      "matched": 19,
+      "pairs": 1,
+      "unmatched_ocr_lines": 6
+     }
+    },
+    "matched": 49,
+    "matched_pct": 94.2,
+    "match_ratio_median": 0.974,
+    "volume_on_matched": {
+     "n": 49,
+     "row_exact_pct": 38.8,
+     "macro_f1": 0.569,
+     "field_em": {
+      "name": 79.6,
+      "occupation_role": 85.7,
+      "employer": 87.8,
+      "address": 57.1,
+      "home_address": 81.6
+     }
+    },
+    "volume_on_single_line_matches": {
+     "n": 47,
+     "row_exact_pct": 40.4,
+     "macro_f1": 0.58,
+     "field_em": {
+      "name": 78.7,
+      "occupation_role": 85.1,
+      "employer": 89.4,
+      "address": 59.6,
+      "home_address": 83.0
+     }
+    },
+    "volume_on_identical_text": {
+     "n": 21,
+     "row_exact_pct": 85.7,
+     "macro_f1": 0.757,
+     "field_em": {
+      "name": 100.0,
+      "occupation_role": 95.2,
+      "employer": 95.2,
+      "address": 90.5,
+      "home_address": 95.2
+     }
+    },
+    "extras": 19,
+    "extras_named": 18,
+    "extras_by_role": {
+     "start": 16,
+     "runover": 2,
+     "other": 1
+    },
+    "extras_examples": [
+     [
+      "Farr William, ri 31 Hudson av",
+      "Farr William",
+      "start"
+     ],
+     [
+      "Farrell Ann, dressmaker Raymond n Bolivar",
+      "Farrell Ann",
+      "start"
+     ],
+     [
+      "Farrell Aun, widow of Patrick, 286 Plymouth",
+      "Farrell Anna",
+      "start"
+     ],
+     [
+      "Farrell Ann, widow tavern 63 Hudson av",
+      "Farrell Ann",
+      "start"
+     ],
+     [
+      "Farrell Arthur, laborer Plymouth n Bridge",
+      "Farrell Arthur",
+      "start"
+     ],
+     [
+      "Farrell Bryan, laborer Bond n Douglass",
+      "Farrell Bryan",
+      "start"
+     ],
+     [
+      "Farrell Bryan, laborer East Baltic n Hoyt",
+      "Farrell Bryan",
+      "start"
+     ],
+     [
+      "Farrell Catherine, widow Vanderbilt e Atlantic av",
+      "Farrell Catherine",
+      "start"
+     ],
+     [
+      "Farrell Charles, carpenter Pacific n Vanderbilt av",
+      "Farrell Charles",
+      "start"
+     ],
+     [
+      "Farrell Christopher, Kent n Myrtle av",
+      "Farrell Christopher",
+      "start"
+     ],
+     [
+      "Farrell Daniel, tea ‘Skillmenn Parka",
+      "Farrell Daniel",
+      "start"
+     ],
+     [
+      "F Dennis, mason 215 1",
+      "F Dennis",
+      "start"
+     ],
+     [
+      "Farrell Dominick, laborer 5 Tiffany pln Harriaan",
+      "Farrell Dominick",
+      "start"
+     ],
+     [
+      "ogers conor builder 7 “ae n Myrtle av — ua, grocer 36 Willoughby h 98 Jay",
+      "ogers conor",
+      "runover"
+     ],
+     [
+      "Rogers Lewis, sailmaker 128 Nassau",
+      "Rogers Lewis",
+      "start"
+     ]
+    ],
+    "unmatched_gold_examples": [
+     "Rogers Fanny, widow of John, 55 Hicks",
+     "Rogers Jonathan, builder 90 Classon n Myrtle av",
+     "Rogers Joshua, grocer 36 Willoughby"
+    ],
+    "panel_on_matched": {
+     "n": 49,
+     "row_exact_pct": 79.6,
+     "macro_f1": 0.843,
+     "field_em": {
+      "name": 98.0,
+      "occupation_role": 91.8,
+      "employer": 91.8,
+      "address": 85.7,
+      "home_address": 95.9
+     }
+    },
+    "panel_on_all_gold": {
+     "n": 52,
+     "row_exact_pct": 78.8,
+     "macro_f1": 0.841,
+     "field_em": {
+      "name": 98.1,
+      "occupation_role": 92.3,
+      "employer": 92.3,
+      "address": 84.6,
+      "home_address": 96.2
+     }
+    },
+    "panel_on_identical_text": {
+     "n": 21,
+     "row_exact_pct": 85.7,
+     "macro_f1": 0.757,
+     "field_em": {
+      "name": 100.0,
+      "occupation_role": 95.2,
+      "employer": 95.2,
+      "address": 90.5,
+      "home_address": 95.2
+     }
+    },
+    "panel_right_volume_wrong": 34,
+    "panel_right_volume_wrong_examples": [
+     {
+      "gold_text": "Farley Catherine, 147 Prospect",
+      "ocr_text": "Farley Catherine, 147 Prospect f [ington",
+      "field": "address",
+      "gold": "147 Prospect",
+      "volume": "147 Prospect ft Irvington"
+     },
+     {
+      "gold_text": "Farley David, foreman white lead factory 73 Front c Washington",
+      "ocr_text": "Farley David, foreman white lead 73 Front e Wash-",
+      "field": "address",
+      "gold": "73 Front c Washington",
+      "volume": "73 Front"
+     },
+     {
+      "gold_text": "Farley David, foreman white lead factory 73 Front c Washington",
+      "ocr_text": "Farley David, foreman white lead 73 Front e Wash-",
+      "field": "home_address",
+      "gold": "",
+      "volume": "Wash-"
+     },
+     {
+      "gold_text": "Farley James, 11 Harper court Jay st",
+      "ocr_text": "Farley James, 11 court Jay st",
+      "field": "address",
+      "gold": "11 Harper court Jay st",
+      "volume": "11 court Jay st"
+     },
+     {
+      "gold_text": "Farley Patrick, laborer Graham n Myrtle av",
+      "ocr_text": "Farley Patrick, laborer Graham n Myrtle av Sands",
+      "field": "address",
+      "gold": "Graham n Myrtle av",
+      "volume": "Graham n Myrtle av Sands"
+     },
+     {
+      "gold_text": "Farmer A D, type founder c Beekman & Cliff NY h 149 Sands",
+      "ocr_text": "Farmer A D, type founder c Beekman & Cliff h 149",
+      "field": "address",
+      "gold": "c Beekman & Cliff NY",
+      "volume": "c Beekman & Cliff"
+     },
+     {
+      "gold_text": "Farmer A D, type founder c Beekman & Cliff NY h 149 Sands",
+      "ocr_text": "Farmer A D, type founder c Beekman & Cliff h 149",
+      "field": "home_address",
+      "gold": "149 Sands",
+      "volume": "149"
+     },
+     {
+      "gold_text": "Farmer Edward, coppersmith 163 York",
+      "ocr_text": "Farmer Edward, coppersmith 163 York BAA Ha",
+      "field": "address",
+      "gold": "163 York",
+      "volume": "163 York BAA Ha"
+     },
+     {
+      "gold_text": "Farmer Joseph S, produce dealer NY h 162 Concord",
+      "ocr_text": "Farmer Joseph 8, produce dealer NY h 162 Concord",
+      "field": "name",
+      "gold": "Farmer Joseph S",
+      "volume": "Farmer Joseph B"
+     },
+     {
+      "gold_text": "Farmer John, laborer Graham n Myrtle av",
+      "ocr_text": "Farmer John, laborer Graham n Myrtle ay",
+      "field": "address",
+      "gold": "Graham n Myrtle av",
+      "volume": "Graham n Myrtle ay"
+     },
+     {
+      "gold_text": "Farmer Peter, produce broker Washington market NY h 325 Gold",
+      "ocr_text": "Farmer Peter, produce broker Washington market NY h",
+      "field": "home_address",
+      "gold": "325 Gold",
+      "volume": ""
+     },
+     {
+      "gold_text": "Farmer Thomas, builder 89 Hudson av",
+      "ocr_text": "Farmer Thomas, builder 89 Hudson av [325 Gold",
+      "field": "home_address",
+      "gold": "",
+      "volume": "325 Gold"
+     },
+     {
+      "gold_text": "Rogers F, carpenter 154 Johnson",
+      "ocr_text": "Rogers Lewis, carpenter 290 Hudson av",
+      "field": "name",
+      "gold": "Rogers F",
+      "volume": "Rogers Lewis"
+     },
+     {
+      "gold_text": "Rogers F, carpenter 154 Johnson",
+      "ocr_text": "Rogers Lewis, carpenter 290 Hudson av",
+      "field": "address",
+      "gold": "154 Johnson",
+      "volume": "290 Hudson av"
+     },
+     {
+      "gold_text": "Rogers George F, fishmonger Fulton market NY h 80 Pineapple",
+      "ocr_text": "Rogers George F, fishmonger Fulton market NY h S0 Pine-",
+      "field": "home_address",
+      "gold": "80 Pineapple",
+      "volume": "50 Pine-"
+     }
+    ]
+   }
+  },
+  "micro_IABROOKLYN_0036": {
+   "lines": 18588,
+   "entry_rates": {
+    "all": {
+     "lines": 18588,
+     "named": 17759,
+     "entry_shaped": 14118,
+     "business": 272
+    },
+    "by_section": {
+     "listing": {
+      "lines": 13810,
+      "named": 13125,
+      "entry_shaped": 10367,
+      "business": 216
+     },
+     "district: EASTERN DISTRIOT,": {
+      "lines": 4778,
+      "named": 4634,
+      "entry_shaped": 3751,
+      "business": 56
+     }
+    },
+    "by_role": {
+     "start": {
+      "lines": 13061,
+      "named": 13021,
+      "entry_shaped": 11133,
+      "business": 199
+     },
+     "other": {
+      "lines": 3203,
+      "named": 2987,
+      "entry_shaped": 2193,
+      "business": 45
+     },
+     "runover": {
+      "lines": 2162,
+      "named": 1619,
+      "entry_shaped": 750,
+      "business": 27
+     },
+     "thin": {
+      "lines": 162,
+      "named": 132,
+      "entry_shaped": 42,
+      "business": 1
+     }
+    }
+   },
+   "layout": {
+    "runover_after_start": 1728,
+    "runover_indent_in_line_heights": {
+     "p10": 1.17,
+     "p50": 1.62,
+     "p90": 1.93
+    },
+    "join_threshold": 3.0,
+    "runovers_below_threshold": 1719,
+    "two_column": true,
+    "lines_crossing_gutter": 106,
+    "column_merged_leaves": 1,
+    "lines_on_merged_leaves": 31,
+    "column_merged_leaf_list": [
+     380
+    ]
+   },
+   "invented_name_tokens": {
+    "named": 17759,
+    "with_invented_token": 256,
+    "rate": 0.0144,
+    "examples": [
+     [
+      "Akerly 3 A t",
+      "Akerly Samt",
+      [
+       "samt"
+      ]
+     ],
+     [
+      "— 65 Jovdlemon jeweller, 266 Pearl, N. V. h. 122",
+      "-65 Judson",
+      [
+       "judson"
+      ]
+     ],
+     [
+      "Da P. straw 8 N. I.",
+      "Da P. Paul",
+      [
+       "paul"
+      ]
+     ],
+     [
+      "Bassett jemin F. physician, v Brunt n. Ewe ° an n.",
+      "Bassett James F.",
+      [
+       "james"
+      ]
+     ],
+     [
+      "F. widow, 99",
+      "F. Sarah",
+      [
+       "sarah"
+      ]
+     ],
+     [
+      "Bennett Harmenus, 3d av. op. 17th",
+      "Bennett Henry",
+      [
+       "henry"
+      ]
+     ],
+     [
+      "nery Grease. For the last three",
+      "nery George",
+      [
+       "george"
+      ]
+     ],
+     [
+      "Gilbert, dock builder,",
+      "Gilbert John",
+      [
+       "john"
+      ]
+     ],
+     [
+      "Bo ue „watch case maker, 100 Degraw",
+      "Boue George",
+      [
+       "george"
+      ]
+     ],
+     [
+      "PEE „„ ge ae 7 gt he",
+      "PEE George",
+      [
+       "george"
+      ]
+     ],
+     [
+      "0 bee ee 11115 i",
+      "Obee Edward",
+      [
+       "edward"
+      ]
+     ],
+     [
+      "N com. mer. 94 Front, N. Y. bh.",
+      "N Corns",
+      [
+       "corns"
+      ]
+     ],
+     [
+      "B. 2ist, n. 4th av",
+      "B. Stis",
+      [
+       "stis"
+      ]
+     ],
+     [
+      "Christian, jeweller, 181 Broadway, N. I.",
+      "Christian John",
+      [
+       "john"
+      ]
+     ],
+     [
+      "rk Peter, laborer, 1%0 Water",
+      "Kirk Peter",
+      [
+       "kirk"
+      ]
+     ]
+    ]
+   },
+   "widow_names": {
+    "lines": 55,
+    "given_name_invented": 17,
+    "given_names": {
+     "Mary": 9,
+     "Sarah": 8
+    },
+    "examples": [
+     [
+      "Casey widow",
+      "Casey Mary"
+     ],
+     [
+      "Casey widow",
+      "Casey Mary"
+     ],
+     [
+      "Feitz widow rt, Raymond n.",
+      "Feitz Mary"
+     ],
+     [
+      "Goodwin widow, 163",
+      "Goodwin Sarah"
+     ],
+     [
+      "Locadia, widow,",
+      "Locadia Mary"
+     ],
+     [
+      "Liming widow, 16 Hart's al.",
+      "Liming Mary"
+     ],
+     [
+      "Mahon widow, 6",
+      "Mahon Mary"
+     ],
+     [
+      "Malony widow, r. 21",
+      "Malony Mary"
+     ],
+     [
+      "Mitchell widow, 233 Carlton av a",
+      "Mitchell Sarah"
+     ],
+     [
+      "Sale widow, 199 High",
+      "Sale Sarah"
+     ]
+    ]
+   },
+   "substitutions": {
+    "field_tokens": 66946,
+    "not_in_line": 2948,
+    "by_kind_tokens": {
+     "toward_common_word": 825,
+     "unclear": 1521,
+     "replaces_common_word": 602
+    },
+    "by_kind_records": {
+     "toward_common_word": 762,
+     "unclear": 1390,
+     "replaces_common_word": 596
+    },
+    "replaces_common_word_record_rate": 0.0321,
+    "top_pairs": [
+     {
+      "line": "ist",
+      "wrote": "1st",
+      "n": 193,
+      "book_freq_line": 221,
+      "book_freq_wrote": 29,
+      "kind": "unclear"
+     },
+     {
+      "line": "meserole",
+      "wrote": "moseley",
+      "n": 64,
+      "book_freq_line": 112,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "carll",
+      "wrote": "carroll",
+      "n": 47,
+      "book_freq_line": 67,
+      "book_freq_wrote": 90,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "st",
+      "n": 45,
+      "book_freq_line": 0,
+      "book_freq_wrote": 70,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 32,
+      "book_freq_line": 46,
+      "book_freq_wrote": 3,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "av",
+      "n": 32,
+      "book_freq_line": 0,
+      "book_freq_wrote": 4028,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "lst",
+      "wrote": "1st",
+      "n": 27,
+      "book_freq_line": 26,
+      "book_freq_wrote": 29,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "1st",
+      "n": 22,
+      "book_freq_line": 0,
+      "book_freq_wrote": 29,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "ny",
+      "n": 20,
+      "book_freq_line": 0,
+      "book_freq_wrote": 9,
+      "kind": "unclear"
+     },
+     {
+      "line": "luqueer",
+      "wrote": "luquer",
+      "n": 20,
+      "book_freq_line": 31,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "classon",
+      "wrote": "clinton",
+      "n": 16,
+      "book_freq_line": 98,
+      "book_freq_wrote": 140,
+      "kind": "unclear"
+     },
+     {
+      "line": "ay",
+      "wrote": "av",
+      "n": 16,
+      "book_freq_line": 231,
+      "book_freq_wrote": 4028,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "2ist",
+      "wrote": "21st",
+      "n": 13,
+      "book_freq_line": 15,
+      "book_freq_wrote": 30,
+      "kind": "unclear"
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 13,
+      "book_freq_line": 74,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "varet",
+      "wrote": "veset",
+      "n": 13,
+      "book_freq_line": 28,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "nter",
+      "wrote": "enter",
+      "n": 11,
+      "book_freq_line": 14,
+      "book_freq_wrote": 0,
+      "kind": "unclear"
+     },
+     {
+      "line": "sth",
+      "wrote": "5th",
+      "n": 10,
+      "book_freq_line": 35,
+      "book_freq_wrote": 249,
+      "kind": "unclear"
+     },
+     {
+      "line": "jobnson",
+      "wrote": "johnson",
+      "n": 9,
+      "book_freq_line": 12,
+      "book_freq_wrote": 256,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "18",
+      "wrote": "188",
+      "n": 9,
+      "book_freq_line": 96,
+      "book_freq_wrote": 43,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "pl",
+      "n": 9,
+      "book_freq_line": 0,
+      "book_freq_wrote": 285,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "do",
+      "n": 9,
+      "book_freq_line": 0,
+      "book_freq_wrote": 7,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "madison",
+      "n": 8,
+      "book_freq_line": 0,
+      "book_freq_wrote": 15,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "28",
+      "n": 8,
+      "book_freq_line": 0,
+      "book_freq_wrote": 72,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "76",
+      "wrote": "768",
+      "n": 8,
+      "book_freq_line": 60,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "ft",
+      "n": 8,
+      "book_freq_line": 0,
+      "book_freq_wrote": 19,
+      "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "2d",
+      "n": 7,
+      "book_freq_line": 0,
+      "book_freq_wrote": 253,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "luqueer",
+      "wrote": "duqueer",
+      "n": 7,
+      "book_freq_line": 31,
+      "book_freq_wrote": 0,
+      "kind": "replaces_common_word"
+     },
+     {
+      "line": "24",
+      "wrote": "248",
+      "n": 7,
+      "book_freq_line": 94,
+      "book_freq_wrote": 20,
+      "kind": "unclear"
+     },
+     {
+      "line": "flushav",
+      "wrote": "flush",
+      "n": 7,
+      "book_freq_line": 7,
+      "book_freq_wrote": 21,
+      "kind": "unclear"
+     },
+     {
+      "line": "remsen",
+      "wrote": "reuben",
+      "n": 7,
+      "book_freq_line": 111,
+      "book_freq_wrote": 6,
+      "kind": "replaces_common_word"
+     }
+    ],
+    "top_replacements": [
+     {
+      "line": "meserole",
+      "wrote": "moseley",
+      "n": 64,
+      "book_freq_line": 112,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "rd",
+      "wrote": "dr",
+      "n": 32,
+      "book_freq_line": 46,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "luqueer",
+      "wrote": "luquer",
+      "n": 20,
+      "book_freq_line": 31,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "degraw",
+      "wrote": "delaware",
+      "n": 13,
+      "book_freq_line": 74,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "varet",
+      "wrote": "veset",
+      "n": 13,
+      "book_freq_line": 28,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "76",
+      "wrote": "768",
+      "n": 8,
+      "book_freq_line": 60,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "luqueer",
+      "wrote": "duqueer",
+      "n": 7,
+      "book_freq_line": 31,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "remsen",
+      "wrote": "reuben",
+      "n": 7,
+      "book_freq_line": 111,
+      "book_freq_wrote": 6
+     },
+     {
+      "line": "meserole",
+      "wrote": "mesarole",
+      "n": 7,
+      "book_freq_line": 112,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "ist",
+      "wrote": "81st",
+      "n": 7,
+      "book_freq_line": 221,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "middagh",
+      "wrote": "maddagh",
+      "n": 6,
+      "book_freq_line": 25,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "120",
+      "wrote": "1208",
+      "n": 6,
+      "book_freq_line": 47,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "42",
+      "wrote": "428",
+      "n": 6,
+      "book_freq_line": 57,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "45",
+      "wrote": "458",
+      "n": 6,
+      "book_freq_line": 51,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "124",
+      "wrote": "1248",
+      "n": 6,
+      "book_freq_line": 42,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "94",
+      "wrote": "948",
+      "n": 5,
+      "book_freq_line": 54,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "wash",
+      "wrote": "washn",
+      "n": 5,
+      "book_freq_line": 40,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "84",
+      "wrote": "848",
+      "n": 5,
+      "book_freq_line": 55,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "70",
+      "wrote": "708",
+      "n": 5,
+      "book_freq_line": 71,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "87",
+      "wrote": "878",
+      "n": 4,
+      "book_freq_line": 79,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "54",
+      "wrote": "548",
+      "n": 4,
+      "book_freq_line": 59,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "52",
+      "wrote": "528",
+      "n": 4,
+      "book_freq_line": 55,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "88",
+      "wrote": "888",
+      "n": 4,
+      "book_freq_line": 102,
+      "book_freq_wrote": 1
+     },
+     {
+      "line": "90",
+      "wrote": "908",
+      "n": 4,
+      "book_freq_line": 45,
+      "book_freq_wrote": 2
+     },
+     {
+      "line": "142",
+      "wrote": "1428",
+      "n": 4,
+      "book_freq_line": 46,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "113",
+      "wrote": "1138",
+      "n": 4,
+      "book_freq_line": 27,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "78",
+      "wrote": "788",
+      "n": 4,
+      "book_freq_line": 64,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "40",
+      "wrote": "408",
+      "n": 4,
+      "book_freq_line": 58,
+      "book_freq_wrote": 3
+     },
+     {
+      "line": "182",
+      "wrote": "1828",
+      "n": 4,
+      "book_freq_line": 49,
+      "book_freq_wrote": 0
+     },
+     {
+      "line": "154",
+      "wrote": "1548",
+      "n": 4,
+      "book_freq_line": 27,
+      "book_freq_wrote": 0
+     }
+    ]
+   },
+   "panel_pages": {
+    "set": "smith1856",
+    "gold_rows": 229,
+    "per_leaf": {
+     "168": {
+      "gold_rows": 108,
+      "ocr_lines": 62,
+      "matched": 45,
+      "pairs": 9,
+      "unmatched_ocr_lines": 8
+     },
+     "391": {
+      "gold_rows": 121,
+      "ocr_lines": 99,
+      "matched": 95,
+      "pairs": 1,
+      "unmatched_ocr_lines": 3
+     }
+    },
+    "matched": 140,
+    "matched_pct": 61.1,
+    "match_ratio_median": 0.938,
+    "volume_on_matched": {
+     "n": 140,
+     "row_exact_pct": 15.0,
+     "macro_f1": 0.376,
+     "field_em": {
+      "name": 75.7,
+      "occupation_role": 80.0,
+      "employer": 99.3,
+      "address": 23.6,
+      "home_address": 88.6
+     }
+    },
+    "volume_on_single_line_matches": {
+     "n": 130,
+     "row_exact_pct": 16.2,
+     "macro_f1": 0.394,
+     "field_em": {
+      "name": 75.4,
+      "occupation_role": 82.3,
+      "employer": 99.2,
+      "address": 23.8,
+      "home_address": 93.1
+     }
+    },
+    "volume_on_identical_text": {
+     "n": 35,
+     "row_exact_pct": 54.3,
+     "macro_f1": 0.827,
+     "field_em": {
+      "name": 91.4,
+      "occupation_role": 97.1,
+      "employer": 100.0,
+      "address": 60.0,
+      "home_address": 100.0
+     }
+    },
+    "extras": 11,
+    "extras_named": 10,
+    "extras_by_role": {
+     "start": 6,
+     "runover": 2,
+     "other": 3
+    },
+    "extras_examples": [
+     [
+      "Hol lith , 26 N. Y.",
+      "Holith Thaddeus",
+      "start"
+     ],
+     [
+      "Tce: Merwin mPa",
+      "Tce Merwin",
+      "runover"
+     ],
+     [
+      "Holt 8 York",
+      "Holt B York",
+      "start"
+     ],
+     [
+      "7 Front, N. T. h.",
+      "7 Front",
+      "other"
+     ],
+     [
+      ". Cumberland, n. av. 5",
+      "Cumberland n. av. S",
+      "runover"
+     ],
+     [
+      "ter, 283 Hudson av vol 4",
+      "ter",
+      "other"
+     ],
+     [
+      ", 78 Cedar, N. V. h. @",
+      "",
+      "other"
+     ],
+     [
+      "ope Geor, , 70 *",
+      "ope Geo",
+      "start"
+     ],
+     [
+      "G mkr. Noble, u.",
+      "Gmkr. Noble",
+      "start"
+     ],
+     [
+      "Fagans Julius, segars, 1454 Ewen",
+      "Fagans Julius",
+      "start"
+     ],
+     [
+      "Fancher . manuf. India, u. Frank-",
+      "Fancher manuf.",
+      "start"
+     ]
+    ],
+    "unmatched_gold_examples": [
+     "Holmes Matthew, blacksmith, Pacific, near Flatbush rd",
+     "Holmes Nathaniel, lithographer, 26 Platt, N. Y. h. 22 Carll",
+     "Holmes Nathaniel, jr. lithographer, 26 Platt, N. h. 24 Carll",
+     "Holmes Samuel E. city surveyor, 1015 Broadway, N. Y. h. 76 Montague",
+     "Holmes Wm. colored, coffee roaster, 186 Navy",
+     "Holmes William, matress mkr. r. 175 Gold",
+     "HOLMES WILLIAM M. grocer, 158 Court",
+     "Holmguyst Hannah, widow, 109 Gold",
+     "Holohan Michael, bootmaker, 1 Navy",
+     "Holsted William H. spices, 94 Front, N. Y. h. 116 Myrtle av",
+     "Holstein Frederick, shipmaster, 75 Union",
+     "Holt Catharine, tailoress, 3 York",
+     "Holt Henry, 22d, n. 4th av",
+     "Holt Horatio N. com. 64 Pearl, N. Y. h. Mansion House",
+     "Holt Lucy, Mrs. wid. Henry, Washington av. c."
+    ]
+   }
+  }
+ }
+}

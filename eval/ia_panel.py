@@ -51,7 +51,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path[:0] = [str(REPO / "eval"), str(REPO / "data_prep"), str(REPO / "postprocess")]
-from evaluate import FIELDS, load_pred, metrics, score  # noqa: E402
+from evaluate import FIELDS, load_pred, metrics, norm, score  # noqa: E402
 from survey_harvest import gold_page_key  # noqa: E402
 from verify_harvest_leakage import page_id  # noqa: E402
 from volume_run_report import EXCLUDE, _key, align  # noqa: E402
@@ -193,31 +193,101 @@ def _m(gold, pred) -> dict:
     return {"n": m["n"], "row_exact_pct": m["row_exact_pct"], "macro_f1": m["macro_f1"]}
 
 
+def _fixed_broken(gold, a, b):
+    """Scored fields the guard turned right (fixed) and wrong (broken), a -> b."""
+    fixed = broken = 0
+    for g, x, y in zip(gold, a, b):
+        for f in FIELDS:
+            if f in EXCLUDE:
+                continue
+            gv, xv, yv = (norm(str(r.get(f, "")), False) for r in (g, x, y))
+            if xv != yv:
+                fixed += yv == gv
+                broken += xv == gv
+    return fixed, broken
+
+
+def _load_set(name, m, run, preds_dir):
+    rows = [json.loads(x) for x in (REPO / m["file"]).read_text(encoding="utf-8").splitlines()
+            if x.strip()]
+    out = {}
+    for r in (run, run + "+guard"):
+        pf = preds_dir / f"iapanel_{name}" / f"chunk_000.preds_{r}.txt"
+        if pf.exists():
+            p = load_pred(str(pf), "yaml")
+            if len(p) != len(rows):
+                raise SystemExit(f"{pf}: {len(p)} predictions for {len(rows)} rows")
+            out[r] = p
+    return rows, out
+
+
 def score_run(run: str, preds_dir: Path) -> dict:
     """IA-input predictions live where hpc/35_volumes.sbatch writes them:
-    <preds_dir>/iapanel_<set>/chunk_000.preds_<run>.txt."""
+    <preds_dir>/iapanel_<set>/chunk_000.preds_<run>.txt, and the copy guard's beside them as
+    <run>+guard. Per set: whole-row EM on IA input, raw and guarded; the guard's fields fixed and
+    broken against gold (its first test on gold it was never tuned on); and the panel's
+    clean-text prediction on the same gold rows, raw and guarded. Then each twin against its
+    sibling scan, on the gold rows both deliver."""
+    from copy_guard import build_vocab, guard_file
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    out = {}
+    out, loaded = {"sets": {}, "twins": {}}, {}
     for name, m in manifest.items():
-        rows = [json.loads(x) for x in (REPO / m["file"]).read_text(encoding="utf-8").splitlines()
-                if x.strip()]
-        pf = preds_dir / f"iapanel_{name}" / f"chunk_000.preds_{run}.txt"
-        if not pf.exists():
+        rows, preds = _load_set(name, m, run, preds_dir)
+        if run not in preds:
             continue
-        preds = load_pred(str(pf), "yaml")
-        if len(preds) != len(rows):
-            raise SystemExit(f"{pf}: {len(preds)} predictions for {len(rows)} rows")
+        loaded[name] = (rows, preds)
         gold = [r["record"] for r in rows]
-        res = {"rows": len(rows), "gold_rows": m["gold_rows"], "ia_input": _m(gold, preds)}
+        res = {"rows": len(rows), "gold_rows": m["gold_rows"], "twin_of": m.get("twin_of"),
+               "ia_input": _m(gold, preds[run])}
+        if run + "+guard" in preds:
+            res["ia_input_guard"] = _m(gold, preds[run + "+guard"])
+            res["guard_fixed"], res["guard_broken"] = _fixed_broken(gold, preds[run],
+                                                                    preds[run + "+guard"])
         clean = PANEL_PREDS / f"preds_{run}_{m.get('set', name)}.txt"
         if clean.exists():
+            src = [json.loads(x) for x in (DATA / f"{m.get('set', name)}_eval.jsonl").read_text(
+                encoding="utf-8").splitlines() if x.strip()]
             cp = load_pred(str(clean), "yaml")
-            res["clean_text"] = _m(gold, [cp[r["context"]["gold_row"]] for r in rows])
-        out[name] = res
-        c = res.get("clean_text")
-        print(f"{name:22s} n={len(rows):>4}  IA input row EM {res['ia_input']['row_exact_pct']:5.1f}"
-              + (f"   clean text {c['row_exact_pct']:5.1f}" if c else ""), file=sys.stderr)
+            cg, _ = guard_file(src, cp, build_vocab(x["raw_line"] for x in src))
+            idx = [r["context"]["gold_row"] for r in rows]
+            res["clean_text"] = _m(gold, [cp[i] for i in idx])
+            res["clean_text_guard"] = _m(gold, [cg[i] for i in idx])
+        out["sets"][name] = res
+    for name, (rows, preds) in loaded.items():
+        base = manifest[name].get("set")
+        if not manifest[name].get("twin_of") or base not in loaded:
+            continue
+        brows, bpreds = loaded[base]
+        bi = {r["context"]["gold_row"]: k for k, r in enumerate(brows)}
+        both = [(k, bi[r["context"]["gold_row"]]) for k, r in enumerate(rows)
+                if r["context"]["gold_row"] in bi]
+        gold = [rows[k]["record"] for k, _ in both]
+        t = {"microfilm_or_own": base, "twin": name, "both_deliver": len(both),
+             "own_delivers": len(brows), "twin_delivers": len(rows),
+             "gold_rows": manifest[name]["gold_rows"]}
+        for r in (run, run + "+guard"):
+            if r in preds and r in bpreds:
+                t[f"own_{r}"] = _m(gold, [bpreds[r][b] for _, b in both])
+                t[f"twin_{r}"] = _m(gold, [preds[r][k] for k, _ in both])
+        out["twins"][name] = t
     return out
+
+
+def print_score(res: dict, run: str) -> None:
+    P = lambda *a: print(*a, file=sys.stderr)
+    P(f"{'set':42s} {'n':>4} {'IA':>6} {'IA+g':>6} {'fix':>4} {'brk':>4} {'clean':>6} {'cl+g':>6}")
+    for name, r in res["sets"].items():
+        c, cg = r.get("clean_text", {}), r.get("clean_text_guard", {})
+        P(f"{name:42s} {r['rows']:>4} {r['ia_input']['row_exact_pct']:6.1f} "
+          f"{r.get('ia_input_guard', {}).get('row_exact_pct', float('nan')):6.1f} "
+          f"{r.get('guard_fixed', 0):>4} {r.get('guard_broken', 0):>4} "
+          f"{c.get('row_exact_pct', float('nan')):6.1f} {cg.get('row_exact_pct', float('nan')):6.1f}")
+    P("")
+    for name, t in res["twins"].items():
+        a, b = t.get(f"own_{run}+guard", t.get(f"own_{run}")), t.get(f"twin_{run}+guard", t.get(f"twin_{run}"))
+        P(f"{t['microfilm_or_own']:18s} own delivers {t['own_delivers']:>3}  twin {t['twin_delivers']:>3} "
+          f"of {t['gold_rows']:>3} | on {t['both_deliver']:>3} rows both deliver, guarded row EM: own "
+          f"{a['row_exact_pct']:5.1f}  twin {b['row_exact_pct']:5.1f}   ({name.split('__')[1]})")
 
 
 def _self_test() -> int:
@@ -248,6 +318,7 @@ def main(argv=None) -> int:
         build()
     elif args.cmd == "score":
         res = score_run(args.run, Path(args.preds_dir))
+        print_score(res, args.run)
         if args.out:
             Path(args.out).write_text(json.dumps(res, indent=1), encoding="utf-8")
     else:

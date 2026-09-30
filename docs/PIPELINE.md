@@ -381,13 +381,27 @@ The model's predictions are never overwritten; the guarded file sits beside them
 | same, 2B | 246 | **0** |
 | gold pages read through IA OCR (Mercein/Hearnes/Smith) | 5 | **0** |
 | NYU externals (500 rows), before its last rule was added | 39 | 3 (then fixed) |
+| **real-OCR panel, run 2, first contact (pre-registered)** | **142** | **76: FAILED** |
+| real-OCR panel after the long-s rules (tuned on it) | 143 | 6 |
+| clean panel + NYU after those rules (`--check-panel 4b-100k`) | 279 | **0** |
 
 Whole-row EM on the clean panel rises everywhere or stays level: Lain 65.9 → 77.4, Polk 1933 SI
-69.6 → 80.4, trow1884 80.1 → 86.5, NYU 56.0 → 61.6. **The rules were tuned against these
-same checks.** The NYU figure before its last fix is the honest held-out number, and the next
-Torch run's real-OCR panel is the first test the guard has never seen. It does not catch
-`Harman → Harmon` (477 in 1906BPL): a/o is a genuine OCR misreading, and nothing in the book
-tells the two cases apart.
+69.6 → 80.4, trow1884 80.1 → 86.5, NYU 56.0 → 61.8. It does not catch `Harman → Harmon` (477
+in 1906BPL): a/o is a genuine OCR misreading, and nothing in the book tells the two cases apart.
+
+**Its first test on gold it had never seen failed the bar set before the run.** The bar was to
+lower no set's row EM and break at most one field for every ten it fixes. On run 2's real-OCR
+panel it fixed 142 and broke 76, and lowered 4 sets: Franks 1786 28.6 → 1.8, its 1876 reprint
+37.5 → 8.9, Duncan 1794 50.0 → 44.8, Ogden 1839 36.7 → 31.7. The clean panel could not have
+shown this. The breaks are all real-OCR patterns the guard did not know:
+- **the long s:** `Water-ftreet`, `William-ltreet`, `Wall-itreet`, `Jofeph`, `Auguflus`, `Han.
+  Jquare`, which the model rightly writes as s;
+- **punctuation that is a misread letter:** `Genera)`, `10!`;
+- **residence markers glued on:** `N. Y.h`, `hl701`;
+- **alignment slips.**
+With those rules added, the panel reads 143 fixed / 6 broken, and the clean panel plus NYU 279 /
+0. **The real-OCR panel is no longer held out, so those figures are tuned.** A clean held-out
+test of the guard now needs new gold (next step #10).
 
 ### Resolve the dittos
 
@@ -683,6 +697,50 @@ NYPL-sourced sets included, and `--report` counts them in any set of line files.
 harvested lines, for instance, hold 185 gold lines: 168 of the NYU set's, 10 of doggett1846's
 and 8 of doggetts1850's. No page tag reaches any of them.
 
+### Run 2 (2026-09-29): repaired lines, book-scan twins, and the real-OCR panel scored
+
+```bash
+python3 eval/volume_run_report.py --out results/volume_run2_4b-100k.json
+python3 postprocess/copy_guard.py --volumes data/volumes --run 4b-100k
+python3 eval/ia_panel.py score --run 4b-100k --out results/ia_panel_run2.json
+```
+
+63 Torch tasks on L40S; 378,296 records. Every prediction carries the SHA-1 of the chunk it was
+made from, and all 63 match. Run 1 stays in `data/volumes_run1`. The checks were stated before
+the run:
+
+| check | result |
+|---|---|
+| Doggett 1845 named records per printed name, bar 0.98–1.02 | **1.004** (61,566), from 1.038. **Pass** |
+| its named records at the column margin, within 0.5% of run 1 | 61,489 vs 61,480. **Pass**: no entry lost to a join |
+| copy guard on unseen gold | **Fail**: 142 fixed / 76 broken, 4 sets lowered (stage 5) |
+| Smith 1856 gold pages end to end | 140 of 229 rows delivered (58 in run 1); row EM 15.7, guarded 19.3 (12.1 in run 1) |
+| microfilm vs book scan, same gold | **the book scan, decisively** (below) |
+
+**Microfilm against book scan**, whole-row EM (guarded) on the gold rows both copies deliver:
+
+| edition | microfilm copy | book-scan twin | rows delivered, microfilm / book |
+|---|---|---|---|
+| Smith 1855–56 | 10.5 | **52.6** (1856BPL) | 57 / 185 of 185 |
+| Smith 1856–57 | 19.3 | **47.9** (1857BPL) | 140 / 229 of 229 |
+| Hearnes 1852–53 | 38.8 | **67.3** (hearnesbrooklync1852unse) | 49 / 52 of 52 |
+
+**The full-corpus run should read the book scan wherever an edition has one**: the sibling
+session's `editions` array in `results/survey_twins_pairs.json`. On the same gold pages, the
+book scan gives about 4× as many exactly-right records for Smith 1856–57 (115 vs 27), about 15×
+for Smith 1855–56 (90 vs 6), and about 1.8× for Hearnes (34 vs 19).
+
+**What the OCR costs.** Over the 17 real-OCR panel sets that also have clean-text predictions
+(1,699 gold rows): row EM **47.4** on IA's line (52.1 guarded) against **73.7** on the gold's
+hand-corrected text (80.6). That is 26–28 points of whole-record accuracy, and it counts only the
+rows the OCR delivers. The worst gaps have causes the pipeline could still address:
+- trow1907 is 7.4 against 77.9. Its ABBYY-8 OCR mangles digits (`h 95 7th` → `h OS 7th`,
+  `144 W 98th` → `III w 08th`).
+- boyd1890 is 24.3 against 90.5. The OCR reads the residence marker `h` as `li`, and side-banner
+  noise (`£jjgr`, `■^S2_`) opens lines and lands in the name (next step 26).
+- The Trow 1917 twin of polk1917 is 8.3 against 63.9. Its ditto `"` is read `ii` and never
+  normalized (next step 18).
+
 ---
 
 ## What is NOT in the pipeline yet
@@ -807,6 +865,12 @@ volumes. Narrowed, the change touches exactly 13 volumes, each gaining its "Name
 Classification" page (1902–1908 BPL, the 1903–1909 Georgetown volumes), plus a title-quote change
 on 2 Trows.
 
+**26. Strip side-banner noise from line starts, and read `li` as the `h` marker.** Boyd 1890's
+real-OCR panel rows open with OCR of a side banner (`£jjgr Corse Titus…`, `■^S2_ Corroll Mrs
+John…`), and the model folds it into the name. Its OCR also reads the residence marker `h` as
+`li` throughout. Both are line-level and measurable on the real-OCR panel, where boyd1890 scores
+24.3 against 90.5 on clean text. Test: boyd1890 IA-input row EM up, with no set down.
+
 ## Medium effort, high information
 
 **5. Does the `44` finding generalize?** It is measured on one volume, one OCR engine, one adapter.
@@ -820,7 +884,9 @@ normalization is now on by default for every volume.
 > A/B needs no new ingest, only GPU time on a paired sample. Note the scale: run it on a sample,
 > not the volume.
 
-**18. Group ditto OCR variants before gating them.** The gate is per *variant*, but a printed mark
+**18. Group ditto OCR variants before gating them.** (Run 2: Trow 1917 reads its ditto `"` as
+`ii` on every ditto line. On polk1917's twin it costs most of a 64-point real-OCR gap.)
+The gate is per *variant*, but a printed mark
 shatters into several OCR readings and each is gated alone. On 1906BPL the dominant reading `44` is
 41.5% and sails through, which is why this never surfaced; on Trow 1915 one mark scatters six ways
 (`11` `,,` `..` `„` `.1` `,1`) and only four clear their floors. Summing variants that are the same

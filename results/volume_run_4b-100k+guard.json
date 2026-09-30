@@ -6,15 +6,15 @@
    "entry_rates": {
     "all": {
      "lines": 194201,
-     "named": 192882,
-     "entry_shaped": 189198,
+     "named": 192883,
+     "entry_shaped": 189197,
      "business": 5917
     },
     "by_section": {
      "listing": {
       "lines": 194201,
-      "named": 192882,
-      "entry_shaped": 189198,
+      "named": 192883,
+      "entry_shaped": 189197,
       "business": 5917
      }
     },
@@ -22,19 +22,19 @@
      "start": {
       "lines": 179536,
       "named": 179122,
-      "entry_shaped": 177882,
+      "entry_shaped": 177881,
       "business": 5307
      },
      "runover": {
       "lines": 9006,
-      "named": 8556,
-      "entry_shaped": 7705,
+      "named": 8557,
+      "entry_shaped": 7706,
       "business": 300
      },
      "other": {
       "lines": 5651,
       "named": 5200,
-      "entry_shaped": 3611,
+      "entry_shaped": 3610,
       "business": 310
      },
      "thin": {
@@ -47,8 +47,8 @@
     "by_band": {
      "body": {
       "lines": 190173,
-      "named": 189700,
-      "entry_shaped": 187770,
+      "named": 189701,
+      "entry_shaped": 187769,
       "business": 5646
      },
      "foot": {
@@ -104,9 +104,9 @@
     ]
    },
    "invented_name_tokens": {
-    "named": 192882,
-    "with_invented_token": 8,
-    "rate": 0.0,
+    "named": 192883,
+    "with_invented_token": 14,
+    "rate": 0.0001,
     "examples": [
      [
       "\" Bam’l cigarmkr 262 Chester",
@@ -137,10 +137,31 @@
       ]
      ],
      [
+      "Berdan Elra A manager 166 World bldg Mhtn h 160 Clarkson av",
+      "Berdan Earl A",
+      [
+       "earl"
+      ]
+     ],
+     [
+      "\" Clias H Paint Co 280 Baltic",
+      "\" Chas H",
+      [
+       "chas"
+      ]
+     ],
+     [
       "Langi Bam'l machinist h 415 S 4th",
       "Langi Barn'l",
       [
        "barn"
+      ]
+     ],
+     [
+      "Peter com mer h 857 St John’s pi",
+      "Peter corn mer",
+      [
+       "corn"
       ]
      ],
      [
@@ -155,6 +176,27 @@
       "Jas corn'l",
       [
        "corn"
+      ]
+     ],
+     [
+      "Riis Jens H bldr h 319 78th",
+      "Rus Jens H",
+      [
+       "rus"
+      ]
+     ],
+     [
+      "Jos umbrellamkr 639 B’way",
+      "Josiah",
+      [
+       "josiah"
+      ]
+     ],
+     [
+      "\" EcTw’d P buyer h 5621 12th av",
+      "\" Edw'd P",
+      [
+       "edw"
       ]
      ],
      [
@@ -173,19 +215,19 @@
     "examples": []
    },
    "substitutions": {
-    "field_tokens": 917048,
-    "not_in_line": 28035,
+    "field_tokens": 916997,
+    "not_in_line": 28121,
     "by_kind_tokens": {
-     "toward_common_word": 3646,
-     "replaces_common_word": 22071,
-     "unclear": 2318
+     "toward_common_word": 3661,
+     "replaces_common_word": 22100,
+     "unclear": 2360
     },
     "by_kind_records": {
-     "toward_common_word": 3565,
-     "replaces_common_word": 19533,
-     "unclear": 2226
+     "toward_common_word": 3577,
+     "replaces_common_word": 19557,
+     "unclear": 2269
     },
-    "replaces_common_word_record_rate": 0.1006,
+    "replaces_common_word_record_rate": 0.1007,
     "top_pairs": [
      {
       "line": "elk",
@@ -655,18 +697,18 @@
      "occupation_role": 0.926,
      "employer": 1.0,
      "address": 0.812,
-     "home_address": 0.972
+     "home_address": 0.97
     },
     "named_2b": 493,
     "named_4b": 495,
     "entry_2b": 448,
     "entry_4b": 448,
-    "field_diffs": 192,
+    "field_diffs": 193,
     "diff_by_field": {
      "address": 94,
      "name": 39,
      "occupation_role": 37,
-     "home_address": 14,
+     "home_address": 15,
      "is_business": 7,
      "race_designation": 1
     },
@@ -1043,14 +1085,14 @@
     "all": {
      "lines": 64580,
      "named": 63630,
-     "entry_shaped": 60994,
+     "entry_shaped": 60992,
      "business": 3710
     },
     "by_section": {
      "listing": {
       "lines": 64481,
       "named": 63543,
-      "entry_shaped": 60929,
+      "entry_shaped": 60927,
       "business": 3699
      },
      "late_names": {
@@ -1064,13 +1106,13 @@
      "start": {
       "lines": 61601,
       "named": 61479,
-      "entry_shaped": 60381,
+      "entry_shaped": 60378,
       "business": 3643
      },
      "runover": {
       "lines": 2911,
       "named": 2103,
-      "entry_shaped": 605,
+      "entry_shaped": 606,
       "business": 62
      },
      "other": {
@@ -1108,9 +1150,93 @@
    },
    "invented_name_tokens": {
     "named": 63630,
-    "with_invented_token": 3,
-    "rate": 0.0,
+    "with_invented_token": 35,
+    "rate": 0.0006,
     "examples": [
+     [
+      "Blasdell .lav. drygoods, 17 Carmine cor. Bleecker",
+      "Blasdell Rev. drygoods",
+      [
+       "rev"
+      ]
+     ],
+     [
+      "Bum George B plumber. 187 Delancy",
+      "Burn George B",
+      [
+       "burn"
+      ]
+     ],
+     [
+      "D.-iiny William H. grocer, 3-28 Third",
+      "-Duny William H.",
+      [
+       "duny"
+      ]
+     ],
+     [
+      "Diino William J. seaman, 381 Monroe",
+      "Duno William J.",
+      [
+       "duno"
+      ]
+     ],
+     [
+      "' Diiau William, buicher, 46 Columbia, h. r. 33 Essex",
+      "' Duau William",
+      [
+       "duau"
+      ]
+     ],
+     [
+      "D\"iig ■ Jeremiah, late customhouse, h. 264 Rivington",
+      "Dug Jeremiah",
+      [
+       "dug"
+      ]
+     ],
+     [
+      "Esteve Jolin L. (col'd) confectioner, 11 Thomas",
+      "Esteve John L.",
+      [
+       "john"
+      ]
+     ],
+     [
+      "siied. Medicated vapor baths and spirit baths",
+      "sued. Medicated",
+      [
+       "sued"
+      ]
+     ],
+     [
+      "Fiith John, pencilcase maker, r. 116 Wooster",
+      "Futh John",
+      [
+       "futh"
+      ]
+     ],
+     [
+      "Fiiz Henry, locksmith, 153 Delancy",
+      "Fuz Henry",
+      [
+       "fuz"
+      ]
+     ],
+     [
+      "Giigg James W. stove manufacturer, 172 Division",
+      "Gugg James W.",
+      [
+       "gugg"
+      ]
+     ],
+     [
+      "Henry JoJin L. carpenter, 23 Sullivan",
+      "Henry John L.",
+      [
+       "john"
+      ]
+     ],
      [
       "Hyatt Beiij-min, collector. 117 Wooster",
       "Hyatt Beuj-min",
@@ -1119,17 +1245,17 @@
       ]
      ],
      [
-      "O'Riian Thomas, weaver. 224 Mott",
-      "O'Ruan Thomas",
+      "Inbusch Jolin D. grocer, 142 Greenwich & 347 Grand,",
+      "Inbusch John D.",
       [
-       "ruan"
+       "john"
       ]
      ],
      [
-      "O'Riian Thomas, laborer, 267 Washington",
-      "O'Ruan Thomas",
+      "Keiih, Brothers & Co. painters, 2 Pine",
+      "Keuh Brothers & Co",
       [
-       "ruan"
+       "keuh"
       ]
      ]
     ]
@@ -1141,24 +1267,24 @@
     "examples": []
    },
    "substitutions": {
-    "field_tokens": 249126,
-    "not_in_line": 9606,
+    "field_tokens": 249027,
+    "not_in_line": 9754,
     "by_kind_tokens": {
-     "replaces_common_word": 565,
-     "unclear": 2978,
-     "toward_common_word": 6063
+     "replaces_common_word": 568,
+     "unclear": 3044,
+     "toward_common_word": 6142
     },
     "by_kind_records": {
-     "replaces_common_word": 552,
-     "unclear": 2749,
-     "toward_common_word": 5479
+     "replaces_common_word": 555,
+     "unclear": 2811,
+     "toward_common_word": 5549
     },
-    "replaces_common_word_record_rate": 0.0085,
+    "replaces_common_word_record_rate": 0.0086,
     "top_pairs": [
      {
       "line": "",
       "wrote": "av",
-      "n": 280,
+      "n": 312,
       "book_freq_line": 0,
       "book_freq_wrote": 3914,
       "kind": "toward_common_word"
@@ -1166,7 +1292,7 @@
      {
       "line": "",
       "wrote": "11",
-      "n": 139,
+      "n": 144,
       "book_freq_line": 0,
       "book_freq_wrote": 443,
       "kind": "toward_common_word"
@@ -1206,7 +1332,7 @@
      {
       "line": "18",
       "wrote": "118",
-      "n": 43,
+      "n": 44,
       "book_freq_line": 523,
       "book_freq_wrote": 235,
       "kind": "unclear"
@@ -1222,7 +1348,7 @@
      {
       "line": "10",
       "wrote": "110",
-      "n": 38,
+      "n": 39,
       "book_freq_line": 706,
       "book_freq_wrote": 196,
       "kind": "unclear"
@@ -1230,7 +1356,7 @@
      {
       "line": "12",
       "wrote": "112",
-      "n": 37,
+      "n": 38,
       "book_freq_line": 564,
       "book_freq_wrote": 198,
       "kind": "unclear"
@@ -1238,7 +1364,7 @@
      {
       "line": "15",
       "wrote": "115",
-      "n": 37,
+      "n": 38,
       "book_freq_line": 559,
       "book_freq_wrote": 209,
       "kind": "unclear"
@@ -1246,9 +1372,17 @@
      {
       "line": "13",
       "wrote": "113",
-      "n": 34,
+      "n": 35,
       "book_freq_line": 626,
       "book_freq_wrote": 186,
+      "kind": "unclear"
+     },
+     {
+      "line": "17",
+      "wrote": "117",
+      "n": 29,
+      "book_freq_line": 466,
+      "book_freq_wrote": 171,
       "kind": "unclear"
      },
      {
@@ -1268,11 +1402,11 @@
       "kind": "toward_common_word"
      },
      {
-      "line": "17",
-      "wrote": "117",
+      "line": "14",
+      "wrote": "114",
       "n": 27,
-      "book_freq_line": 466,
-      "book_freq_wrote": 171,
+      "book_freq_line": 505,
+      "book_freq_wrote": 197,
       "kind": "unclear"
      },
      {
@@ -1290,14 +1424,6 @@
       "book_freq_line": 31,
       "book_freq_wrote": 1282,
       "kind": "toward_common_word"
-     },
-     {
-      "line": "14",
-      "wrote": "114",
-      "n": 25,
-      "book_freq_line": 505,
-      "book_freq_wrote": 197,
-      "kind": "unclear"
      },
      {
       "line": "04",
@@ -1340,6 +1466,14 @@
       "kind": "toward_common_word"
      },
      {
+      "line": "",
+      "wrote": "111",
+      "n": 21,
+      "book_freq_line": 0,
+      "book_freq_wrote": 149,
+      "kind": "toward_common_word"
+     },
+     {
       "line": "02",
       "wrote": "20",
       "n": 21,
@@ -1353,22 +1487,6 @@
       "n": 20,
       "book_freq_line": 166,
       "book_freq_wrote": 2047,
-      "kind": "toward_common_word"
-     },
-     {
-      "line": "",
-      "wrote": "111",
-      "n": 20,
-      "book_freq_line": 0,
-      "book_freq_wrote": 149,
-      "kind": "toward_common_word"
-     },
-     {
-      "line": "05",
-      "wrote": "50",
-      "n": 20,
-      "book_freq_line": 26,
-      "book_freq_wrote": 368,
       "kind": "toward_common_word"
      },
      {
@@ -1393,6 +1511,14 @@
       "n": 19,
       "book_freq_line": 24,
       "book_freq_wrote": 335,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "dway",
+      "wrote": "broadway",
+      "n": 19,
+      "book_freq_line": 226,
+      "book_freq_wrote": 2368,
       "kind": "toward_common_word"
      }
     ],
@@ -1701,20 +1827,20 @@
     "all": {
      "lines": 20366,
      "named": 20316,
-     "entry_shaped": 19013,
+     "entry_shaped": 19008,
      "business": 546
     },
     "by_section": {
      "listing": {
       "lines": 20197,
       "named": 20185,
-      "entry_shaped": 18924,
+      "entry_shaped": 18920,
       "business": 523
      },
      "late_names": {
       "lines": 169,
       "named": 131,
-      "entry_shaped": 89,
+      "entry_shaped": 88,
       "business": 23
      }
     },
@@ -1722,7 +1848,7 @@
      "start": {
       "lines": 20035,
       "named": 20009,
-      "entry_shaped": 18871,
+      "entry_shaped": 18867,
       "business": 512
      },
      "runover": {
@@ -1740,7 +1866,7 @@
      "thin": {
       "lines": 6,
       "named": 4,
-      "entry_shaped": 3,
+      "entry_shaped": 2,
       "business": 0
      }
     }
@@ -1762,9 +1888,38 @@
    },
    "invented_name_tokens": {
     "named": 20316,
-    "with_invented_token": 0,
-    "rate": 0.0,
-    "examples": []
+    "with_invented_token": 4,
+    "rate": 0.0002,
+    "examples": [
+     [
+      "Com miision Company 187 Pearl '*US»^",
+      "Corn mission Company",
+      [
+       "corn"
+      ]
+     ],
+     [
+      "Edgar jiin. William, 57 Greenwich",
+      "Edgar jun. William",
+      [
+       "jun"
+      ]
+     ],
+     [
+      "Shipping Liit and Prices Surrent, office 1 Old-slip",
+      "Shipping Lut and Prices Surrent",
+      [
+       "lut"
+      ]
+     ],
+     [
+      "W iite John, butcher 99 Orange",
+      "Wute John",
+      [
+       "wute"
+      ]
+     ]
+    ]
    },
    "widow_names": {
     "lines": 1391,
@@ -1773,19 +1928,19 @@
     "examples": []
    },
    "substitutions": {
-    "field_tokens": 69502,
-    "not_in_line": 2853,
+    "field_tokens": 69470,
+    "not_in_line": 2878,
     "by_kind_tokens": {
-     "unclear": 1090,
-     "toward_common_word": 1690,
-     "replaces_common_word": 73
+     "unclear": 1108,
+     "toward_common_word": 1695,
+     "replaces_common_word": 75
     },
     "by_kind_records": {
-     "unclear": 982,
-     "toward_common_word": 1506,
-     "replaces_common_word": 72
+     "unclear": 1002,
+     "toward_common_word": 1510,
+     "replaces_common_word": 74
     },
-    "replaces_common_word_record_rate": 0.0035,
+    "replaces_common_word_record_rate": 0.0036,
     "top_pairs": [
      {
       "line": "",
@@ -1796,20 +1951,20 @@
       "kind": "toward_common_word"
      },
      {
+      "line": "boardingh",
+      "wrote": "boarding",
+      "n": 21,
+      "book_freq_line": 75,
+      "book_freq_wrote": 48,
+      "kind": "unclear"
+     },
+     {
       "line": "pear",
       "wrote": "pearl",
       "n": 20,
       "book_freq_line": 20,
       "book_freq_wrote": 949,
       "kind": "toward_common_word"
-     },
-     {
-      "line": "boardingh",
-      "wrote": "boarding",
-      "n": 18,
-      "book_freq_line": 75,
-      "book_freq_wrote": 48,
-      "kind": "unclear"
      },
      {
       "line": "cartraan",
@@ -1868,6 +2023,14 @@
       "kind": "toward_common_word"
      },
      {
+      "line": "boardingb",
+      "wrote": "boarding",
+      "n": 11,
+      "book_freq_line": 18,
+      "book_freq_wrote": 48,
+      "kind": "unclear"
+     },
+     {
       "line": "cbapel",
       "wrote": "chapel",
       "n": 10,
@@ -1889,14 +2052,6 @@
       "n": 10,
       "book_freq_line": 167,
       "book_freq_wrote": 34,
-      "kind": "unclear"
-     },
-     {
-      "line": "boardingb",
-      "wrote": "boarding",
-      "n": 10,
-      "book_freq_line": 18,
-      "book_freq_wrote": 48,
       "kind": "unclear"
      },
      {
@@ -1948,6 +2103,22 @@
       "kind": "unclear"
      },
      {
+      "line": "groeer",
+      "wrote": "grocer",
+      "n": 8,
+      "book_freq_line": 8,
+      "book_freq_wrote": 1187,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "11",
+      "wrote": "111",
+      "n": 7,
+      "book_freq_line": 157,
+      "book_freq_wrote": 32,
+      "kind": "unclear"
+     },
+     {
       "line": "bouse",
       "wrote": "house",
       "n": 7,
@@ -1986,22 +2157,6 @@
       "book_freq_line": 8,
       "book_freq_wrote": 949,
       "kind": "toward_common_word"
-     },
-     {
-      "line": "groeer",
-      "wrote": "grocer",
-      "n": 7,
-      "book_freq_line": 8,
-      "book_freq_wrote": 1187,
-      "kind": "toward_common_word"
-     },
-     {
-      "line": "11",
-      "wrote": "111",
-      "n": 6,
-      "book_freq_line": 157,
-      "book_freq_wrote": 32,
-      "kind": "unclear"
      },
      {
       "line": "markt",
@@ -2091,6 +2246,13 @@
       "n": 2,
       "book_freq_line": 192,
       "book_freq_wrote": 0
+     },
+     {
+      "line": "41",
+      "wrote": "411",
+      "n": 2,
+      "book_freq_line": 114,
+      "book_freq_wrote": 6
      },
      {
       "line": "att",
@@ -2212,13 +2374,6 @@
       "book_freq_wrote": 0
      },
      {
-      "line": "41",
-      "wrote": "411",
-      "n": 1,
-      "book_freq_line": 114,
-      "book_freq_wrote": 6
-     },
-     {
       "line": "12",
       "wrote": "712",
       "n": 1,
@@ -2233,10 +2388,10 @@
       "book_freq_wrote": 10
      },
      {
-      "line": "162",
-      "wrote": "1162",
+      "line": "11",
+      "wrote": "1011",
       "n": 1,
-      "book_freq_line": 24,
+      "book_freq_line": 157,
       "book_freq_wrote": 0
      }
     ]
@@ -2390,14 +2545,14 @@
     "all": {
      "lines": 14250,
      "named": 14122,
-     "entry_shaped": 12188,
+     "entry_shaped": 12186,
      "business": 242
     },
     "by_section": {
      "listing": {
       "lines": 14250,
       "named": 14122,
-      "entry_shaped": 12188,
+      "entry_shaped": 12186,
       "business": 242
      }
     },
@@ -2405,13 +2560,13 @@
      "start": {
       "lines": 13045,
       "named": 13028,
-      "entry_shaped": 11522,
+      "entry_shaped": 11519,
       "business": 213
      },
      "other": {
       "lines": 903,
       "named": 806,
-      "entry_shaped": 477,
+      "entry_shaped": 478,
       "business": 27
      },
      "runover": {
@@ -2445,9 +2600,16 @@
    },
    "invented_name_tokens": {
     "named": 14122,
-    "with_invented_token": 1,
+    "with_invented_token": 2,
     "rate": 0.0001,
     "examples": [
+     [
+      "Cam John, fishmonger 1}",
+      "Carn John",
+      [
+       "carn"
+      ]
+     ],
      [
       "O‘Harna Hua G, empire marble works 198 200 202 At-",
       "O'Hama Hua G",
@@ -2464,24 +2626,24 @@
     "examples": []
    },
    "substitutions": {
-    "field_tokens": 61252,
-    "not_in_line": 1379,
+    "field_tokens": 61234,
+    "not_in_line": 1386,
     "by_kind_tokens": {
-     "unclear": 505,
+     "unclear": 513,
      "replaces_common_word": 78,
-     "toward_common_word": 796
+     "toward_common_word": 795
     },
     "by_kind_records": {
-     "unclear": 447,
+     "unclear": 455,
      "replaces_common_word": 75,
-     "toward_common_word": 741
+     "toward_common_word": 740
     },
     "replaces_common_word_record_rate": 0.0053,
     "top_pairs": [
      {
       "line": "",
       "wrote": "av",
-      "n": 15,
+      "n": 16,
       "book_freq_line": 0,
       "book_freq_wrote": 3015,
       "kind": "toward_common_word"
@@ -2527,6 +2689,14 @@
       "kind": "unclear"
      },
      {
+      "line": "",
+      "wrote": "pl",
+      "n": 9,
+      "book_freq_line": 0,
+      "book_freq_wrote": 318,
+      "kind": "toward_common_word"
+     },
+     {
       "line": "atlantie",
       "wrote": "atlantic",
       "n": 8,
@@ -2535,27 +2705,11 @@
       "kind": "toward_common_word"
      },
      {
-      "line": "",
-      "wrote": "pl",
-      "n": 8,
-      "book_freq_line": 0,
-      "book_freq_wrote": 318,
-      "kind": "toward_common_word"
-     },
-     {
       "line": "elerk",
       "wrote": "clerk",
       "n": 8,
       "book_freq_line": 8,
       "book_freq_wrote": 318,
-      "kind": "toward_common_word"
-     },
-     {
-      "line": "",
-      "wrote": "st",
-      "n": 8,
-      "book_freq_line": 0,
-      "book_freq_wrote": 631,
       "kind": "toward_common_word"
      },
      {
@@ -2573,6 +2727,14 @@
       "book_freq_line": 7,
       "book_freq_wrote": 55,
       "kind": "unclear"
+     },
+     {
+      "line": "",
+      "wrote": "st",
+      "n": 7,
+      "book_freq_line": 0,
+      "book_freq_wrote": 631,
+      "kind": "toward_common_word"
      },
      {
       "line": "jobn",
@@ -3094,13 +3256,13 @@
      "listing": {
       "lines": 13232,
       "named": 12569,
-      "entry_shaped": 10047,
+      "entry_shaped": 10046,
       "business": 205
      },
      "district: EASTERN DISTRIOT,": {
       "lines": 4303,
       "named": 4172,
-      "entry_shaped": 3446,
+      "entry_shaped": 3447,
       "business": 56
      }
     },
@@ -3108,19 +3270,19 @@
      "start": {
       "lines": 11806,
       "named": 11767,
-      "entry_shaped": 10262,
+      "entry_shaped": 10264,
       "business": 181
      },
      "other": {
       "lines": 3263,
       "named": 3049,
-      "entry_shaped": 2234,
+      "entry_shaped": 2233,
       "business": 52
      },
      "runover": {
       "lines": 2302,
       "named": 1790,
-      "entry_shaped": 955,
+      "entry_shaped": 954,
       "business": 27
      },
      "thin": {
@@ -3207,9 +3369,59 @@
    },
    "invented_name_tokens": {
     "named": 16741,
-    "with_invented_token": 0,
-    "rate": 0.0,
-    "examples": []
+    "with_invented_token": 7,
+    "rate": 0.0004,
+    "examples": [
+     [
+      "Conkling Jolin T. po. 176 W Connelly Michael, laborer, Kelsey's al ehipmaster, 139 [Connell laborer, Pacific, o. Columbia",
+      "Conkling John T.",
+      [
+       "john"
+      ]
+     ],
+     [
+      "Keller 2 com. mer. 44 Broadway, h. $27",
+      "Keller 2 Corn. mer.",
+      [
+       "corn"
+      ]
+     ],
+     [
+      "A. com. mer. 5",
+      "A. Corn. mer.",
+      [
+       "corn"
+      ]
+     ],
+     [
+      "Smith Joka C. tin roofer, 270 —",
+      "Smith John C.",
+      [
+       "john"
+      ]
+     ],
+     [
+      "W com. mer. 36 Vesey, N. T. h.",
+      "W corn. mer.",
+      [
+       "corn"
+      ]
+     ],
+     [
+      "Wiis R. Murray, grain, Franklin av. n. Myrtle",
+      "Wus R. Murray",
+      [
+       "wus"
+      ]
+     ],
+     [
+      "11 ow Cornelius, laundress,",
+      "Ilow Cornelius",
+      [
+       "ilow"
+      ]
+     ]
+    ]
    },
    "widow_names": {
     "lines": 51,
@@ -3218,24 +3430,24 @@
     "examples": []
    },
    "substitutions": {
-    "field_tokens": 70876,
-    "not_in_line": 1572,
+    "field_tokens": 70848,
+    "not_in_line": 1585,
     "by_kind_tokens": {
-     "replaces_common_word": 163,
-     "toward_common_word": 612,
-     "unclear": 797
+     "replaces_common_word": 164,
+     "toward_common_word": 609,
+     "unclear": 812
     },
     "by_kind_records": {
-     "replaces_common_word": 162,
-     "toward_common_word": 575,
-     "unclear": 731
+     "replaces_common_word": 163,
+     "toward_common_word": 573,
+     "unclear": 746
     },
-    "replaces_common_word_record_rate": 0.0092,
+    "replaces_common_word_record_rate": 0.0093,
     "top_pairs": [
      {
       "line": "ist",
       "wrote": "1st",
-      "n": 185,
+      "n": 186,
       "book_freq_line": 233,
       "book_freq_wrote": 30,
       "kind": "unclear"
@@ -3259,7 +3471,7 @@
      {
       "line": "",
       "wrote": "st",
-      "n": 14,
+      "n": 13,
       "book_freq_line": 0,
       "book_freq_wrote": 73,
       "kind": "toward_common_word"
@@ -3275,7 +3487,7 @@
      {
       "line": "ay",
       "wrote": "av",
-      "n": 12,
+      "n": 11,
       "book_freq_line": 246,
       "book_freq_wrote": 4264,
       "kind": "toward_common_word"
@@ -3299,7 +3511,7 @@
      {
       "line": "jobnson",
       "wrote": "johnson",
-      "n": 8,
+      "n": 9,
       "book_freq_line": 12,
       "book_freq_wrote": 260,
       "kind": "toward_common_word"
@@ -3327,14 +3539,6 @@
       "book_freq_line": 7,
       "book_freq_wrote": 22,
       "kind": "unclear"
-     },
-     {
-      "line": "",
-      "wrote": "av",
-      "n": 6,
-      "book_freq_line": 0,
-      "book_freq_wrote": 4264,
-      "kind": "toward_common_word"
      },
      {
       "line": "ev",
@@ -3374,6 +3578,14 @@
       "n": 5,
       "book_freq_line": 6,
       "book_freq_wrote": 343,
+      "kind": "toward_common_word"
+     },
+     {
+      "line": "",
+      "wrote": "av",
+      "n": 5,
+      "book_freq_line": 0,
+      "book_freq_wrote": 4264,
       "kind": "toward_common_word"
      },
      {
@@ -3433,19 +3645,19 @@
       "kind": "toward_common_word"
      },
      {
+      "line": "farnishing",
+      "wrote": "furnishing",
+      "n": 4,
+      "book_freq_line": 4,
+      "book_freq_wrote": 18,
+      "kind": "unclear"
+     },
+     {
       "line": "grabam",
       "wrote": "graham",
       "n": 4,
       "book_freq_line": 7,
       "book_freq_wrote": 199,
-      "kind": "toward_common_word"
-     },
-     {
-      "line": "",
-      "wrote": "44",
-      "n": 4,
-      "book_freq_line": 0,
-      "book_freq_wrote": 69,
       "kind": "toward_common_word"
      },
      {
@@ -3622,6 +3834,13 @@
       "book_freq_wrote": 4
      },
      {
+      "line": "navy",
+      "wrote": "avy",
+      "n": 1,
+      "book_freq_line": 143,
+      "book_freq_wrote": 7
+     },
+     {
       "line": "court",
       "wrote": "cort",
       "n": 1,
@@ -3676,13 +3895,6 @@
       "n": 1,
       "book_freq_line": 44,
       "book_freq_wrote": 0
-     },
-     {
-      "line": "207",
-      "wrote": "207oe",
-      "n": 1,
-      "book_freq_line": 20,
-      "book_freq_wrote": 0
      }
     ]
    },
@@ -3711,24 +3923,24 @@
     "volume_on_matched": {
      "n": 58,
      "row_exact_pct": 15.5,
-     "macro_f1": 0.454,
+     "macro_f1": 0.45,
      "field_em": {
       "name": 72.4,
       "occupation_role": 72.4,
       "employer": 100.0,
-      "address": 29.3,
+      "address": 27.6,
       "home_address": 74.1
      }
     },
     "volume_on_single_line_matches": {
      "n": 49,
      "row_exact_pct": 18.4,
-     "macro_f1": 0.475,
+     "macro_f1": 0.47,
      "field_em": {
       "name": 69.4,
       "occupation_role": 77.6,
       "employer": 100.0,
-      "address": 30.6,
+      "address": 28.6,
       "home_address": 81.6
      }
     },

@@ -91,8 +91,10 @@ def load_volume(ident: str, run: str) -> list:
 
 
 def volumes(run: str) -> list:
+    """Whole volumes only: eval/ia_panel.py's staged panel sets (iapanel_*) are scored there."""
     return sorted(d.name for d in VOL.iterdir()
-                  if d.is_dir() and any(d.glob(f"chunk_*.preds_{run}.txt")))
+                  if d.is_dir() and not d.name.startswith("iapanel_")
+                  and any(d.glob(f"chunk_*.preds_{run}.txt")))
 
 
 # ---------------------------------------------------------------- layout
@@ -389,7 +391,7 @@ def bpl_2b_vs_4b(rows: list, diffs_path) -> dict:
             "field_agreement": {f: round(agree[f] / max(n, 1), 4) for f in FIELDS},
             **dict(counts), "field_diffs": len(diffs),
             "diff_by_field": dict(Counter(d["field"] for d in diffs).most_common()),
-            "diffs_file": str(Path(diffs_path).relative_to(REPO)) if diffs_path else None}
+            "diffs_file": str(Path(diffs_path).resolve().relative_to(REPO)) if diffs_path else None}
 
 
 def bpl_labels(rows: list) -> dict:

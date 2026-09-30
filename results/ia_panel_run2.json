@@ -1,0 +1,701 @@
+{
+ "sets": {
+  "smith1855__1856BPL": {
+   "rows": 185,
+   "gold_rows": 185,
+   "twin_of": "smith1855_eval.jsonl",
+   "ia_input": {
+    "n": 185,
+    "row_exact_pct": 46.5,
+    "macro_f1": 0.856
+   },
+   "ia_input_guard": {
+    "n": 185,
+    "row_exact_pct": 48.6,
+    "macro_f1": 0.862
+   },
+   "guard_fixed": 4,
+   "guard_broken": 0
+  },
+  "smith1856__1857BPL": {
+   "rows": 229,
+   "gold_rows": 229,
+   "twin_of": "smith1856_eval.jsonl",
+   "ia_input": {
+    "n": 229,
+    "row_exact_pct": 47.6,
+    "macro_f1": 0.808
+   },
+   "ia_input_guard": {
+    "n": 229,
+    "row_exact_pct": 50.2,
+    "macro_f1": 0.827
+   },
+   "guard_fixed": 10,
+   "guard_broken": 0
+  },
+  "lain1876": {
+   "rows": 103,
+   "gold_rows": 103,
+   "twin_of": null,
+   "ia_input": {
+    "n": 103,
+    "row_exact_pct": 58.3,
+    "macro_f1": 0.634
+   },
+   "ia_input_guard": {
+    "n": 103,
+    "row_exact_pct": 67.0,
+    "macro_f1": 0.676
+   },
+   "guard_fixed": 10,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 103,
+    "row_exact_pct": 75.7,
+    "macro_f1": 0.708
+   },
+   "clean_text_guard": {
+    "n": 103,
+    "row_exact_pct": 85.4,
+    "macro_f1": 0.754
+   }
+  },
+  "lain": {
+   "rows": 786,
+   "gold_rows": 800,
+   "twin_of": null,
+   "ia_input": {
+    "n": 786,
+    "row_exact_pct": 54.8,
+    "macro_f1": 0.825
+   },
+   "ia_input_guard": {
+    "n": 786,
+    "row_exact_pct": 63.9,
+    "macro_f1": 0.864
+   },
+   "guard_fixed": 92,
+   "guard_broken": 1,
+   "clean_text": {
+    "n": 786,
+    "row_exact_pct": 66.4,
+    "macro_f1": 0.887
+   },
+   "clean_text_guard": {
+    "n": 786,
+    "row_exact_pct": 77.9,
+    "macro_f1": 0.933
+   }
+  },
+  "ogden1839": {
+   "rows": 60,
+   "gold_rows": 66,
+   "twin_of": null,
+   "ia_input": {
+    "n": 60,
+    "row_exact_pct": 36.7,
+    "macro_f1": 0.718
+   },
+   "ia_input_guard": {
+    "n": 60,
+    "row_exact_pct": 35.0,
+    "macro_f1": 0.711
+   },
+   "guard_fixed": 0,
+   "guard_broken": 1,
+   "clean_text": {
+    "n": 60,
+    "row_exact_pct": 91.7,
+    "macro_f1": 0.948
+   },
+   "clean_text_guard": {
+    "n": 60,
+    "row_exact_pct": 91.7,
+    "macro_f1": 0.948
+   }
+  },
+  "doggett1846": {
+   "rows": 37,
+   "gold_rows": 37,
+   "twin_of": null,
+   "ia_input": {
+    "n": 37,
+    "row_exact_pct": 56.8,
+    "macro_f1": 0.669
+   },
+   "ia_input_guard": {
+    "n": 37,
+    "row_exact_pct": 56.8,
+    "macro_f1": 0.669
+   },
+   "guard_fixed": 0,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 37,
+    "row_exact_pct": 67.6,
+    "macro_f1": 0.691
+   },
+   "clean_text_guard": {
+    "n": 37,
+    "row_exact_pct": 67.6,
+    "macro_f1": 0.691
+   }
+  },
+  "boyd1890": {
+   "rows": 74,
+   "gold_rows": 75,
+   "twin_of": null,
+   "ia_input": {
+    "n": 74,
+    "row_exact_pct": 24.3,
+    "macro_f1": 0.597
+   },
+   "ia_input_guard": {
+    "n": 74,
+    "row_exact_pct": 24.3,
+    "macro_f1": 0.603
+   },
+   "guard_fixed": 2,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 74,
+    "row_exact_pct": 90.5,
+    "macro_f1": 0.823
+   },
+   "clean_text_guard": {
+    "n": 74,
+    "row_exact_pct": 90.5,
+    "macro_f1": 0.826
+   }
+  },
+  "hearne1852__hearnesbrooklync1852unse": {
+   "rows": 52,
+   "gold_rows": 52,
+   "twin_of": "hearne1852_eval.jsonl",
+   "ia_input": {
+    "n": 52,
+    "row_exact_pct": 65.4,
+    "macro_f1": 0.751
+   },
+   "ia_input_guard": {
+    "n": 52,
+    "row_exact_pct": 65.4,
+    "macro_f1": 0.759
+   },
+   "guard_fixed": 2,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 52,
+    "row_exact_pct": 78.8,
+    "macro_f1": 0.841
+   },
+   "clean_text_guard": {
+    "n": 52,
+    "row_exact_pct": 80.8,
+    "macro_f1": 0.849
+   }
+  },
+  "mercein1820": {
+   "rows": 60,
+   "gold_rows": 60,
+   "twin_of": null,
+   "ia_input": {
+    "n": 60,
+    "row_exact_pct": 63.3,
+    "macro_f1": 0.735
+   },
+   "ia_input_guard": {
+    "n": 60,
+    "row_exact_pct": 63.3,
+    "macro_f1": 0.735
+   },
+   "guard_fixed": 0,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 60,
+    "row_exact_pct": 88.3,
+    "macro_f1": 0.959
+   },
+   "clean_text_guard": {
+    "n": 60,
+    "row_exact_pct": 90.0,
+    "macro_f1": 0.965
+   }
+  },
+  "ogden1839__micro_IABROOKLYN_0016": {
+   "rows": 52,
+   "gold_rows": 66,
+   "twin_of": "ogden1839_eval.jsonl",
+   "ia_input": {
+    "n": 52,
+    "row_exact_pct": 48.1,
+    "macro_f1": 0.659
+   },
+   "ia_input_guard": {
+    "n": 52,
+    "row_exact_pct": 48.1,
+    "macro_f1": 0.659
+   },
+   "guard_fixed": 0,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 52,
+    "row_exact_pct": 92.3,
+    "macro_f1": 0.942
+   },
+   "clean_text_guard": {
+    "n": 52,
+    "row_exact_pct": 92.3,
+    "macro_f1": 0.942
+   }
+  },
+  "hearne1852": {
+   "rows": 49,
+   "gold_rows": 52,
+   "twin_of": null,
+   "ia_input": {
+    "n": 49,
+    "row_exact_pct": 38.8,
+    "macro_f1": 0.578
+   },
+   "ia_input_guard": {
+    "n": 49,
+    "row_exact_pct": 38.8,
+    "macro_f1": 0.582
+   },
+   "guard_fixed": 1,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 49,
+    "row_exact_pct": 79.6,
+    "macro_f1": 0.843
+   },
+   "clean_text_guard": {
+    "n": 49,
+    "row_exact_pct": 81.6,
+    "macro_f1": 0.851
+   }
+  },
+  "smith1855": {
+   "rows": 57,
+   "gold_rows": 185,
+   "twin_of": null,
+   "ia_input": {
+    "n": 57,
+    "row_exact_pct": 8.8,
+    "macro_f1": 0.399
+   },
+   "ia_input_guard": {
+    "n": 57,
+    "row_exact_pct": 10.5,
+    "macro_f1": 0.399
+   },
+   "guard_fixed": 1,
+   "guard_broken": 1
+  },
+  "hopehenderson1856": {
+   "rows": 7,
+   "gold_rows": 60,
+   "twin_of": null,
+   "ia_input": {
+    "n": 7,
+    "row_exact_pct": 0.0,
+    "macro_f1": 0.357
+   },
+   "ia_input_guard": {
+    "n": 7,
+    "row_exact_pct": 0.0,
+    "macro_f1": 0.357
+   },
+   "guard_fixed": 0,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 7,
+    "row_exact_pct": 85.7,
+    "macro_f1": 0.964
+   },
+   "clean_text_guard": {
+    "n": 7,
+    "row_exact_pct": 85.7,
+    "macro_f1": 0.964
+   }
+  },
+  "smith1856": {
+   "rows": 140,
+   "gold_rows": 229,
+   "twin_of": null,
+   "ia_input": {
+    "n": 140,
+    "row_exact_pct": 15.7,
+    "macro_f1": 0.408
+   },
+   "ia_input_guard": {
+    "n": 140,
+    "row_exact_pct": 19.3,
+    "macro_f1": 0.42
+   },
+   "guard_fixed": 8,
+   "guard_broken": 0
+  },
+  "franks1786__newyorkbrooklynd00durs": {
+   "rows": 56,
+   "gold_rows": 56,
+   "twin_of": "franks1786_eval.jsonl",
+   "ia_input": {
+    "n": 56,
+    "row_exact_pct": 37.5,
+    "macro_f1": 0.702
+   },
+   "ia_input_guard": {
+    "n": 56,
+    "row_exact_pct": 37.5,
+    "macro_f1": 0.708
+   },
+   "guard_fixed": 1,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 56,
+    "row_exact_pct": 80.4,
+    "macro_f1": 0.903
+   },
+   "clean_text_guard": {
+    "n": 56,
+    "row_exact_pct": 83.9,
+    "macro_f1": 0.932
+   }
+  },
+  "rode1851": {
+   "rows": 53,
+   "gold_rows": 53,
+   "twin_of": null,
+   "ia_input": {
+    "n": 53,
+    "row_exact_pct": 52.8,
+    "macro_f1": 0.662
+   },
+   "ia_input_guard": {
+    "n": 53,
+    "row_exact_pct": 54.7,
+    "macro_f1": 0.666
+   },
+   "guard_fixed": 1,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 53,
+    "row_exact_pct": 73.6,
+    "macro_f1": 0.735
+   },
+   "clean_text_guard": {
+    "n": 53,
+    "row_exact_pct": 75.5,
+    "macro_f1": 0.739
+   }
+  },
+  "duncan1794": {
+   "rows": 58,
+   "gold_rows": 58,
+   "twin_of": null,
+   "ia_input": {
+    "n": 58,
+    "row_exact_pct": 50.0,
+    "macro_f1": 0.743
+   },
+   "ia_input_guard": {
+    "n": 58,
+    "row_exact_pct": 50.0,
+    "macro_f1": 0.748
+   },
+   "guard_fixed": 2,
+   "guard_broken": 1,
+   "clean_text": {
+    "n": 58,
+    "row_exact_pct": 79.3,
+    "macro_f1": 0.895
+   },
+   "clean_text_guard": {
+    "n": 58,
+    "row_exact_pct": 81.0,
+    "macro_f1": 0.912
+   }
+  },
+  "franks1786__newyorkdirectory00durs_0": {
+   "rows": 56,
+   "gold_rows": 56,
+   "twin_of": "franks1786_eval.jsonl",
+   "ia_input": {
+    "n": 56,
+    "row_exact_pct": 57.1,
+    "macro_f1": 0.825
+   },
+   "ia_input_guard": {
+    "n": 56,
+    "row_exact_pct": 58.9,
+    "macro_f1": 0.843
+   },
+   "guard_fixed": 4,
+   "guard_broken": 1,
+   "clean_text": {
+    "n": 56,
+    "row_exact_pct": 80.4,
+    "macro_f1": 0.903
+   },
+   "clean_text_guard": {
+    "n": 56,
+    "row_exact_pct": 83.9,
+    "macro_f1": 0.932
+   }
+  },
+  "franks1786": {
+   "rows": 56,
+   "gold_rows": 56,
+   "twin_of": null,
+   "ia_input": {
+    "n": 56,
+    "row_exact_pct": 28.6,
+    "macro_f1": 0.64
+   },
+   "ia_input_guard": {
+    "n": 56,
+    "row_exact_pct": 26.8,
+    "macro_f1": 0.646
+   },
+   "guard_fixed": 2,
+   "guard_broken": 1,
+   "clean_text": {
+    "n": 56,
+    "row_exact_pct": 80.4,
+    "macro_f1": 0.903
+   },
+   "clean_text_guard": {
+    "n": 56,
+    "row_exact_pct": 83.9,
+    "macro_f1": 0.932
+   }
+  },
+  "trow1907": {
+   "rows": 68,
+   "gold_rows": 68,
+   "twin_of": null,
+   "ia_input": {
+    "n": 68,
+    "row_exact_pct": 7.4,
+    "macro_f1": 0.439
+   },
+   "ia_input_guard": {
+    "n": 68,
+    "row_exact_pct": 7.4,
+    "macro_f1": 0.443
+   },
+   "guard_fixed": 1,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 68,
+    "row_exact_pct": 77.9,
+    "macro_f1": 0.876
+   },
+   "clean_text_guard": {
+    "n": 68,
+    "row_exact_pct": 83.8,
+    "macro_f1": 0.904
+   }
+  },
+  "polk1917__trowsgeneraldire1917trow": {
+   "rows": 72,
+   "gold_rows": 72,
+   "twin_of": "polk1917_eval.jsonl",
+   "ia_input": {
+    "n": 72,
+    "row_exact_pct": 8.3,
+    "macro_f1": 0.555
+   },
+   "ia_input_guard": {
+    "n": 72,
+    "row_exact_pct": 8.3,
+    "macro_f1": 0.56
+   },
+   "guard_fixed": 2,
+   "guard_broken": 0,
+   "clean_text": {
+    "n": 72,
+    "row_exact_pct": 63.9,
+    "macro_f1": 0.788
+   },
+   "clean_text_guard": {
+    "n": 72,
+    "row_exact_pct": 65.3,
+    "macro_f1": 0.79
+   }
+  }
+ },
+ "twins": {
+  "smith1855__1856BPL": {
+   "microfilm_or_own": "smith1855",
+   "twin": "smith1855__1856BPL",
+   "both_deliver": 57,
+   "own_delivers": 57,
+   "twin_delivers": 185,
+   "gold_rows": 185,
+   "own_4b-100k": {
+    "n": 57,
+    "row_exact_pct": 8.8,
+    "macro_f1": 0.399
+   },
+   "twin_4b-100k": {
+    "n": 57,
+    "row_exact_pct": 50.9,
+    "macro_f1": 0.873
+   },
+   "own_4b-100k+guard": {
+    "n": 57,
+    "row_exact_pct": 10.5,
+    "macro_f1": 0.399
+   },
+   "twin_4b-100k+guard": {
+    "n": 57,
+    "row_exact_pct": 52.6,
+    "macro_f1": 0.877
+   }
+  },
+  "smith1856__1857BPL": {
+   "microfilm_or_own": "smith1856",
+   "twin": "smith1856__1857BPL",
+   "both_deliver": 140,
+   "own_delivers": 140,
+   "twin_delivers": 229,
+   "gold_rows": 229,
+   "own_4b-100k": {
+    "n": 140,
+    "row_exact_pct": 15.7,
+    "macro_f1": 0.408
+   },
+   "twin_4b-100k": {
+    "n": 140,
+    "row_exact_pct": 44.3,
+    "macro_f1": 0.782
+   },
+   "own_4b-100k+guard": {
+    "n": 140,
+    "row_exact_pct": 19.3,
+    "macro_f1": 0.42
+   },
+   "twin_4b-100k+guard": {
+    "n": 140,
+    "row_exact_pct": 47.9,
+    "macro_f1": 0.792
+   }
+  },
+  "hearne1852__hearnesbrooklync1852unse": {
+   "microfilm_or_own": "hearne1852",
+   "twin": "hearne1852__hearnesbrooklync1852unse",
+   "both_deliver": 49,
+   "own_delivers": 49,
+   "twin_delivers": 52,
+   "gold_rows": 52,
+   "own_4b-100k": {
+    "n": 49,
+    "row_exact_pct": 38.8,
+    "macro_f1": 0.578
+   },
+   "twin_4b-100k": {
+    "n": 49,
+    "row_exact_pct": 67.3,
+    "macro_f1": 0.755
+   },
+   "own_4b-100k+guard": {
+    "n": 49,
+    "row_exact_pct": 38.8,
+    "macro_f1": 0.582
+   },
+   "twin_4b-100k+guard": {
+    "n": 49,
+    "row_exact_pct": 67.3,
+    "macro_f1": 0.763
+   }
+  },
+  "ogden1839__micro_IABROOKLYN_0016": {
+   "microfilm_or_own": "ogden1839",
+   "twin": "ogden1839__micro_IABROOKLYN_0016",
+   "both_deliver": 49,
+   "own_delivers": 60,
+   "twin_delivers": 52,
+   "gold_rows": 66,
+   "own_4b-100k": {
+    "n": 49,
+    "row_exact_pct": 38.8,
+    "macro_f1": 0.726
+   },
+   "twin_4b-100k": {
+    "n": 49,
+    "row_exact_pct": 49.0,
+    "macro_f1": 0.668
+   },
+   "own_4b-100k+guard": {
+    "n": 49,
+    "row_exact_pct": 36.7,
+    "macro_f1": 0.717
+   },
+   "twin_4b-100k+guard": {
+    "n": 49,
+    "row_exact_pct": 49.0,
+    "macro_f1": 0.668
+   }
+  },
+  "franks1786__newyorkbrooklynd00durs": {
+   "microfilm_or_own": "franks1786",
+   "twin": "franks1786__newyorkbrooklynd00durs",
+   "both_deliver": 56,
+   "own_delivers": 56,
+   "twin_delivers": 56,
+   "gold_rows": 56,
+   "own_4b-100k": {
+    "n": 56,
+    "row_exact_pct": 28.6,
+    "macro_f1": 0.64
+   },
+   "twin_4b-100k": {
+    "n": 56,
+    "row_exact_pct": 37.5,
+    "macro_f1": 0.702
+   },
+   "own_4b-100k+guard": {
+    "n": 56,
+    "row_exact_pct": 26.8,
+    "macro_f1": 0.646
+   },
+   "twin_4b-100k+guard": {
+    "n": 56,
+    "row_exact_pct": 37.5,
+    "macro_f1": 0.708
+   }
+  },
+  "franks1786__newyorkdirectory00durs_0": {
+   "microfilm_or_own": "franks1786",
+   "twin": "franks1786__newyorkdirectory00durs_0",
+   "both_deliver": 56,
+   "own_delivers": 56,
+   "twin_delivers": 56,
+   "gold_rows": 56,
+   "own_4b-100k": {
+    "n": 56,
+    "row_exact_pct": 28.6,
+    "macro_f1": 0.64
+   },
+   "twin_4b-100k": {
+    "n": 56,
+    "row_exact_pct": 57.1,
+    "macro_f1": 0.825
+   },
+   "own_4b-100k+guard": {
+    "n": 56,
+    "row_exact_pct": 26.8,
+    "macro_f1": 0.646
+   },
+   "twin_4b-100k+guard": {
+    "n": 56,
+    "row_exact_pct": 58.9,
+    "macro_f1": 0.843
+   }
+  }
+ }
+}

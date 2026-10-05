@@ -1,0 +1,27 @@
+{
+ "_doc": [
+  "Human verdicts on ditto marks the gate gave up: the missing half of results/ditto_review_*.",
+  "PIPELINE.md #1 asks for the verdict to be recorded per volume, and nothing ever did. The queue",
+  "is derived (ia_volume_to_jsonl.ditto_lead_candidates); the verdict is not.",
+  "",
+  "`confirmed` marks go to the sweep as `confirmed_marks`: they skip the share floor (and the 5%",
+  "digit floor) but not the name-follower ratio, which is a property of the data. survey_harvest.py",
+  "--rederive applies them; the harvest records them as `harvest.filtered.ditto_confirmed`.",
+  "`rejected` keeps the reason, so a regenerated queue can be read against it.",
+  "",
+  "Each verdict was made on the page images: data_prep/ditto_review_page.py --id <volume>."
+ ],
+ "volumes": {
+  "trowsgeneraldire1915trow": {
+   "decided_by": "hadro",
+   "date": "2026-10-04",
+   "review": "results/ditto_review_trowsgeneraldire1915trow.html",
+   "confirmed": [".1", "1", ",1", "1.", ",.", ",", ".", ".,", "1,", "»", "-", "«", "■1", "•1"],
+   "rejected": {
+    "&": "not a ditto (hadro): mostly a business name or address wrapped onto a second line, or a ditto mark followed by an ampersand whose ditto the OCR dropped",
+    "4": "the same case: 9 of 10 crops are a printed '\" &' with the & read as 4 and the ditto dropped, the 10th a wrapped '& Liquor Co'. Admitting it would turn 'Gluck & Mandel' into 'Gluck Mandel'"
+   },
+   "note": "The 14 confirmed marks are OCR readings of the printed '\"', the 1915 ditto, which shatters across OCR variants (PIPELINE.md #18). They start 33,477 scoped lines."
+  }
+ }
+}

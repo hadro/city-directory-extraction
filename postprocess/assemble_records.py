@@ -18,8 +18,10 @@ results/records_<run>.json.
 EVERY ROW CARRIES
     record_id           <volume>:<leaf>:<n>, n the line's order on its leaf. Stable across
                         re-runs of the same lines
-    canvas, xywh        the IIIF canvas and the line's box on it (`#xywh=`), in the hOCR's pixel
-                        space, which is the scan's; `crop` is the IIIF image of just that line
+    canvas, xywh        the IIIF canvas and the line's box on it (`#xywh=`); `crop` is the IIIF
+                        image of just that line, upright. The hOCR's pixel space is the scan's on
+                        182 of 184 volumes; Trow 1915 and 1917 OCR'd a cropped, turned page, and
+                        data_prep/iiif_frame.py maps their boxes onto the camera image
     printed_page        the folio the survey's margin fit gives the leaf, and printed_page_how:
                         `read` off its margin, or `inferred` from the sequence around it
     section             the residential run the line came from (`listing`, `late_names`, ...)
@@ -67,6 +69,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path[:0] = [str(REPO / "postprocess"), str(REPO / "eval"), str(REPO / "data_prep")]
 from entry_rate import is_entry  # noqa: E402
+from iiif_frame import crop_url, xywh as canvas_xywh  # noqa: E402
 from evaluate import FIELDS, load_pred  # noqa: E402
 from resolve_dittos import (annotate, classify_glued_marks, resolve_address_run,  # noqa: E402
                            resolve_cross_line)
@@ -159,8 +162,7 @@ def assemble(ident: str, pairs: list) -> tuple:
             source = None
         ann = annotate(rec)
         bbox = ctx.get("bbox")
-        xywh = (f"{bbox[0]},{bbox[1]},{bbox[2] - bbox[0]},{bbox[3] - bbox[1]}"
-                if bbox and len(bbox) == 4 else None)
+        xywh = canvas_xywh(ident, leaf, bbox) if bbox and len(bbox) == 4 else None
         entry = is_entry(rec)
         held = ctx.get("eval_holdout")
         usable = bool(entry and role in ("start", "thin") and leaf not in non_entry and not held)
@@ -170,7 +172,7 @@ def assemble(ident: str, pairs: list) -> tuple:
             "printed_page_how": (folios.get(leaf) or (None, None))[1],
             "section": ctx.get("section"),
             "canvas": f"{IIIF}/{ident}${leaf}/canvas", "xywh": xywh,
-            "crop": f"{IIIF}/{ident}${leaf}/{xywh}/full/0/default.jpg" if xywh else None,
+            "crop": crop_url(ident, leaf, bbox) if xywh else None,
             "raw_line": ln.get("raw_line"),
             **{f: rec.get(f, "") for f in FIELDS},
             "name_resolved": name_resolved,

@@ -495,9 +495,22 @@ def paths(ident: str) -> dict:
             ("words.jsonl.gz", "lines.jsonl.gz", "dropped.txt.gz")}
 
 
+DITTO_DECISIONS = HERE / "ditto_decisions.json"
+
+
+def confirmed_dittos(ident: str) -> tuple:
+    """The ditto marks hadro confirmed for this volume off the page images (ditto_decisions.json).
+    They skip the gate's share floors, never its name-follower ratio."""
+    if not DITTO_DECISIONS.exists():
+        return ()
+    vol = json.loads(DITTO_DECISIONS.read_text(encoding="utf-8"))["volumes"].get(ident) or {}
+    return tuple(vol.get("confirmed") or ())
+
+
 def derive(ident: str, holdout: dict) -> dict:
     """Filter the dump into candidate lines. Offline; the same code path as a live harvest."""
     p = paths(ident)
+    confirmed = confirmed_dittos(ident)
     dump = WordDump(p["words.jsonl.gz"], ident)
     content = [r["leaf"] for r in dump.records() if r["chars"] > MIN_CHARS_LEAF]
     catalog_pub, year = lookup_master(ident)
@@ -509,7 +522,8 @@ def derive(ident: str, holdout: dict) -> dict:
             gzip.open(tmp_d, "wt", encoding="utf-8") as dropped_fh:
         stats, reasons, ad_scores, ditto, band = sweep(
             dump, publisher, year, content, True, None, True, dropped_fh, out_fh,
-            holdout=holdout, indent_ratio=wraps["indent_ratio"], split_columns=True)
+            holdout=holdout, indent_ratio=wraps["indent_ratio"], split_columns=True,
+            confirmed_marks=confirmed)
     dump.close()
     tmp_l.rename(p["lines.jsonl.gz"])
     tmp_d.rename(p["dropped.txt.gz"])
@@ -523,6 +537,7 @@ def derive(ident: str, holdout: dict) -> dict:
         "dropped": dict(sorted(reasons.items(), key=lambda kv: -kv[1])),
         "ditto_marks": ditto["marks"] if ditto else [],
         "ditto_applied": ditto["applied"] if ditto else 0,
+        **({"ditto_confirmed": list(confirmed)} if confirmed else {}),
         "band": band,
         "top_ad_leaves": [leaf for leaf, _ in sorted(ad_scores, key=lambda kv: -kv[1])[:10]],
         "filters_at": git_rev(),

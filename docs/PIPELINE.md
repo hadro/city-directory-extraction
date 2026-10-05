@@ -779,6 +779,28 @@ volume it was decided for.
 > Queues also exist now for `1856BPL` (nothing worth promoting; that volume has no ditto
 > convention) and `longworth1798`.
 
+> **DONE for Trow 1915 (2026-10-04), by hadro, on the page images.** The TSV's one OCR'd line per
+> mark could not show the printed glyph, so `data_prep/ditto_review_page.py` puts ten crops per
+> mark, each with the line above it, on a page (`results/ditto_review_<id>.html`). On the scoped
+> lines there were 16 candidates. 14 are OCR readings of the printed `"`: `.1` `1` `,1` `1.` `,.`
+> `,` `.` `.,` `1,` `»` `-` `«` `■1` `•1`. Two are not dittos:
+> - `&` (343 lines) is a wrapped business name or address, or the `&` of a `" &` firm entry
+>   whose ditto the OCR dropped.
+> - `4` (849 lines) is that same `&`, read as `4`: 9 of 10 crops print `" & Mandel (Louis L
+>   Gluck, Max Mandel)`. Admitting it as a ditto would make the firm "Gluck Mandel".
+>
+> The verdict lives in `data_prep/ditto_decisions.json`, the per-volume record this item always
+> lacked. `survey_harvest.py --rederive` passes it to the sweep as `confirmed_marks`. Scoped
+> lines led by the ditto went **136,510 → 170,512 (+34,002)**, with the line count unchanged. Left
+> open: the ~1,190 `&`/`4` lines that are dropped-ditto firm entries still reach the model with
+> no surname to carry. Telling them from wrapped lines needs the indent, not the glyph.
+>
+> ⚠️ Building the page found that **Trow 1915 and 1917's IIIF images are camera frames**, two book
+> pages each, while IA OCR'd each page cropped and turned upright (`scandata.xml`). So every crop
+> and `#xywh=` built from their hOCR boxes pointed at the wrong place, sideways. That is 2 of 184
+> volumes (`results/iiif_frames.json`), but 2.17M of the run set's 14.9M lines.
+> `data_prep/iiif_frame.py` maps the boxes, and `assemble_records.py` uses it.
+
 **2. ~~A boundary-sensitive quality proxy.~~ DONE 2026-09-28: `eval/boundary_proxy.py`.**
 `entry_rate` is blind to the failure that normalization fixes, so the pipeline had no instrument
 for field-boundary quality at all. The pilot's proxy (`results/ab_ditto44_1906BPL_2b100k_preds/

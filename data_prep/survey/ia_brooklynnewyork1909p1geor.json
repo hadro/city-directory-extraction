@@ -340,8 +340,8 @@
    "publisher_tag_note": null,
    "year_tag": "1909",
    "hocr_lines": 144522,
-   "wrap_joins": 17875,
-   "candidates": 126647,
+   "wrap_joins": 17879,
+   "candidates": 126643,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -357,12 +357,17 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 91785,
+   "side_bands": {
+    "words": 86,
+    "leaves": 5
+   },
+   "marker_fixes": 1019,
+   "kept": 91778,
    "keep_rate": 0.7247,
    "dropped": {
-    "short": 30180,
+    "short": 30181,
     "allcaps": 2428,
-    "bigtype": 1330,
+    "bigtype": 1332,
     "banner": 865,
     "nonascii": 55,
     "pagenum": 4
@@ -374,18 +379,18 @@
     "\u2022\u2022",
     "\u25a0'"
    ],
-   "ditto_applied": 5044,
+   "ditto_applied": 5036,
    "band": {
     "leaves_banded": 560,
     "head": 1108,
-    "body": 88961,
+    "body": 88957,
     "foot": 1213,
-    "unbanded": 503
+    "unbanded": 500
    },
    "top_ad_leaves": [
+    853,
     901,
     421,
-    853,
     273,
     9,
     7,
@@ -394,8 +399,8 @@
     27,
     275
    ],
-   "filters_at": "18ec87e-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 8364758,
   "hocr_deleted": true,
@@ -674,8 +679,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -776,8 +781,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/brooklynnewyork1909p1geor_listing.jsonl.gz",
   "sections": [
    {
@@ -791,12 +796,12 @@
     "end_leaf": 1175
    }
   ],
-  "kept": 91410,
+  "kept": 91403,
   "dropped": 375,
   "kept_share": 0.9959,
   "kept_by_section": {
    "late_names": 35,
-   "listing": 91375
+   "listing": 91368
   }
  },
  "non_entry_pages": {

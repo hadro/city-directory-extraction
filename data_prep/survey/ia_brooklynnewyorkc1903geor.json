@@ -334,8 +334,8 @@
    "publisher_tag_note": null,
    "year_tag": "1903",
    "hocr_lines": 161288,
-   "wrap_joins": 14990,
-   "candidates": 146298,
+   "wrap_joins": 14989,
+   "candidates": 146299,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -351,12 +351,17 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 94444,
+   "side_bands": {
+    "words": 70,
+    "leaves": 6
+   },
+   "marker_fixes": 1091,
+   "kept": 94453,
    "keep_rate": 0.6456,
    "dropped": {
-    "short": 44322,
+    "short": 44323,
     "allcaps": 3014,
-    "banner": 2549,
+    "banner": 2540,
     "bigtype": 1695,
     "nonascii": 265,
     "pagenum": 9
@@ -382,8 +387,8 @@
     1027,
     287
    ],
-   "filters_at": "18ec87e-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 8517103,
   "hocr_deleted": true,
@@ -698,8 +703,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -776,8 +781,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1903geor_listing.jsonl.gz",
   "sections": [
    {
@@ -786,11 +791,11 @@
     "end_leaf": 1027
    }
   ],
-  "kept": 81269,
+  "kept": 81278,
   "dropped": 13175,
   "kept_share": 0.8605,
   "kept_by_section": {
-   "listing": 81269
+   "listing": 81278
   }
  },
  "non_entry_pages": {

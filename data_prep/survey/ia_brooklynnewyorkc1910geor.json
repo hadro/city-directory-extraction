@@ -366,14 +366,19 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 102237,
+   "side_bands": {
+    "words": 57,
+    "leaves": 5
+   },
+   "marker_fixes": 982,
+   "kept": 102236,
    "keep_rate": 0.7629,
    "dropped": {
-    "short": 26369,
+    "short": 26371,
     "allcaps": 2910,
     "bigtype": 1296,
     "banner": 1103,
-    "nonascii": 90,
+    "nonascii": 89,
     "pagenum": 6
    },
    "ditto_marks": [
@@ -398,7 +403,7 @@
    "band": {
     "leaves_banded": 621,
     "head": 1140,
-    "body": 98610,
+    "body": 98609,
     "foot": 1618,
     "unbanded": 869
    },
@@ -414,8 +419,8 @@
     35,
     297
    ],
-   "filters_at": "5317ca8-dirty",
-   "derived": "2026-10-04"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 9206599,
   "hocr_deleted": true,
@@ -702,8 +707,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-04",
-  "code_at": "5317ca8-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -804,8 +809,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-04",
-  "code_at": "5317ca8-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1910geor_listing.jsonl.gz",
   "sections": [
    {
@@ -819,12 +824,12 @@
     "end_leaf": 1311
    }
   ],
-  "kept": 101939,
+  "kept": 101938,
   "dropped": 298,
   "kept_share": 0.9971,
   "kept_by_section": {
    "late_names": 46,
-   "listing": 101893
+   "listing": 101892
   }
  },
  "non_entry_pages": {

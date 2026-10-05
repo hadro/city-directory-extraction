@@ -921,11 +921,32 @@ volumes. Narrowed, the change touches exactly 13 volumes, each gaining its "Name
 Classification" page (1902–1908 BPL, the 1903–1909 Georgetown volumes), plus a title-quote change
 on 2 Trows.
 
-**26. Strip side-banner noise from line starts, and read `li` as the `h` marker.** Boyd 1890's
-real-OCR panel rows open with OCR of a side banner (`£jjgr Corse Titus…`, `■^S2_ Corroll Mrs
-John…`), and the model folds it into the name. Its OCR also reads the residence marker `h` as
-`li` throughout. Both are line-level and measurable on the real-OCR panel, where boyd1890 scores
-24.3 against 90.5 on clean text. Test: boyd1890 IA-input row EM up, with no set down.
+**26. ~~Strip side-banner noise from line starts, and read `li` as the `h` marker.~~ DONE
+2026-10-05**, in `ia_volume_to_jsonl.py` (`strip_side_bands`, `fix_residence_markers`), applied by
+the survey harvest; all 184 volumes re-derived. Boyd 1890's real-OCR panel rows opened with OCR
+of a side banner (`£jjgr Corse Titus…`), or ended with it (`…h 161 Broadway gj|3`), and its OCR
+read the residence marker `h` as `li`. It scored 24.3 row EM against 90.5 on clean text.
+- **`li` → `h`**: a mid-line `li`, `Ii`, `ll`, `1i` or `lI` before a house number or `do` is the
+  marker on all 31 real-OCR panel cases. Applied corpus-wide: **132,341** fixes in 72+ volumes
+  (2.2% of markers; up to 17.5% in Brooklyn 1912 p3). A leading token is never touched (a
+  leading `li` is a ditto in Trow 1917).
+- **Side bands**: ABBYY's word boxes run edge to edge, so the scraps show by position. On one
+  page they are low-confidence words with a character no entry prints, lined up at the band's
+  inner edge. Three guards came from a corpus dry run that first stripped real text:
+  - the band must be at least 3% of the page wide;
+  - most words inside it must be scraps (1867BPL lost `Adams`, `Auld` and `Buck` without this);
+  - a dash-led token is never a scrap, and the band's inner edge is held to the first column's
+    text margin (Trow 1912 p2 and 1914 p2 lost ditto dashes without these).
+
+  Final: **5,577 words on ~311 pages**, almost all Boyd's Flushing volumes and Brooklyn 1912 p3.
+  Kept lines changed by +5.
+- **Measured on the real-OCR panel, no GPU** (IA line identical to gold after lower-casing and
+  punctuation): **boyd1890 24 → 61 of 74**, mean similarity 0.964 → 0.981. No set went down,
+  and lines delivered are unchanged. Across all 21 sets 1,329 → 1,399, which includes the
+  letter-ditto change: Polk 1917's copy in Trow 1917 went 3 → 34. Boyd's 13 left: 6 scraps on
+  pages whose band failed the guards, 4 letter misreads (`Golden`/Colden), 3 alignment pairs.
+  Row EM needs a Torch run. Run 2's panel inputs are kept in `data/iapanel_run2/`, the files its
+  predictions were made on.
 
 ## Medium effort, high information
 

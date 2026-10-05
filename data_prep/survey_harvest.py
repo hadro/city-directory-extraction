@@ -533,6 +533,8 @@ def derive(ident: str, holdout: dict) -> dict:
         "hocr_lines": stats["raw"], "wrap_joins": stats["joins"], "candidates": cand,
         "wrap_calibration": wraps,
         "column_splits": {"lines": stats["splits"], "leaves": stats["split_leaves"]},
+        "side_bands": {"words": stats["band_words"], "leaves": stats["band_leaves"]},
+        "marker_fixes": stats["marker_fixes"],
         "kept": stats["kept"], "keep_rate": round(stats["kept"] / cand, 4) if cand else None,
         "dropped": dict(sorted(reasons.items(), key=lambda kv: -kv[1])),
         "ditto_marks": ditto["marks"] if ditto else [],

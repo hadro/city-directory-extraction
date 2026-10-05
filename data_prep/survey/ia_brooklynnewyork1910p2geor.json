@@ -341,8 +341,8 @@
    "publisher_tag_note": null,
    "year_tag": "1910",
    "hocr_lines": 178874,
-   "wrap_joins": 8112,
-   "candidates": 170762,
+   "wrap_joins": 8113,
+   "candidates": 170761,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -358,14 +358,19 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 126709,
-   "keep_rate": 0.742,
+   "side_bands": {
+    "words": 45,
+    "leaves": 4
+   },
+   "marker_fixes": 1462,
+   "kept": 126718,
+   "keep_rate": 0.7421,
    "dropped": {
-    "short": 36433,
+    "short": 36434,
     "allcaps": 3028,
-    "banner": 2785,
+    "banner": 2776,
     "bigtype": 1348,
-    "nonascii": 452,
+    "nonascii": 450,
     "pagenum": 7
    },
    "ditto_marks": [
@@ -379,7 +384,7 @@
     "n",
     "\u201e"
    ],
-   "ditto_applied": 62642,
+   "ditto_applied": 62651,
    "ditto_confirmed": [
     "ii",
     "n",
@@ -391,7 +396,7 @@
    "band": {
     "leaves_banded": 624,
     "head": 1285,
-    "body": 105764,
+    "body": 105773,
     "foot": 1406,
     "unbanded": 18254
    },
@@ -407,8 +412,8 @@
     413,
     1359
    ],
-   "filters_at": "5317ca8-dirty",
-   "derived": "2026-10-04"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 10115361,
   "hocr_deleted": true,
@@ -723,8 +728,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-04",
-  "code_at": "5317ca8-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -810,8 +815,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-04",
-  "code_at": "5317ca8-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/brooklynnewyork1910p2geor_listing.jsonl.gz",
   "sections": [
    {
@@ -820,11 +825,11 @@
     "end_leaf": 1261
    }
   ],
-  "kept": 108981,
+  "kept": 108990,
   "dropped": 17728,
   "kept_share": 0.8601,
   "kept_by_section": {
-   "listing": 108981
+   "listing": 108990
   }
  },
  "non_entry_pages": {

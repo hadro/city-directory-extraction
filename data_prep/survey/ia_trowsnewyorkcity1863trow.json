@@ -329,8 +329,8 @@
    "publisher_tag_note": null,
    "year_tag": "1863",
    "hocr_lines": 196957,
-   "wrap_joins": 18959,
-   "candidates": 177998,
+   "wrap_joins": 18964,
+   "candidates": 177993,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
@@ -346,7 +346,12 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 167549,
+   "side_bands": {
+    "words": 6,
+    "leaves": 1
+   },
+   "marker_fixes": 1005,
+   "kept": 167544,
    "keep_rate": 0.9413,
    "dropped": {
     "short": 4963,
@@ -376,8 +381,8 @@
     10,
     1049
    ],
-   "filters_at": "18ec87e-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 15237553,
   "hocr_deleted": true,
@@ -662,8 +667,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -935,8 +940,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/trowsnewyorkcity1863trow_listing.jsonl.gz",
   "sections": [
    {
@@ -950,12 +955,12 @@
     "end_leaf": 982
    }
   ],
-  "kept": 152975,
+  "kept": 152970,
   "dropped": 14574,
   "kept_share": 0.913,
   "kept_by_section": {
    "late_names": 146,
-   "listing": 152829
+   "listing": 152824
   }
  },
  "non_entry_pages": {

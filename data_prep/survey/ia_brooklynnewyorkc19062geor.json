@@ -305,8 +305,8 @@
    "publisher_tag_note": null,
    "year_tag": "1906",
    "hocr_lines": 141606,
-   "wrap_joins": 8917,
-   "candidates": 132689,
+   "wrap_joins": 8916,
+   "candidates": 132690,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -322,15 +322,20 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 84065,
+   "side_bands": {
+    "words": 75,
+    "leaves": 8
+   },
+   "marker_fixes": 430,
+   "kept": 84059,
    "keep_rate": 0.6335,
    "dropped": {
-    "short": 34523,
-    "banner": 9039,
-    "allcaps": 2802,
-    "bigtype": 1759,
-    "nonascii": 477,
-    "pagenum": 24
+    "short": 34536,
+    "banner": 9038,
+    "allcaps": 2801,
+    "bigtype": 1757,
+    "nonascii": 476,
+    "pagenum": 23
    },
    "ditto_marks": [
     "\"",
@@ -346,9 +351,9 @@
    "band": {
     "leaves_banded": 327,
     "head": 2496,
-    "body": 40921,
+    "body": 40920,
     "foot": 2946,
-    "unbanded": 37702
+    "unbanded": 37697
    },
    "top_ad_leaves": [
     7,
@@ -362,10 +367,10 @@
     331,
     1128
    ],
-   "filters_at": "3f5f231-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
-  "words_gz_bytes": 6938887,
+  "words_gz_bytes": 6939360,
   "hocr_deleted": true,
   "elapsed_s": 64,
   "eval_holdout": {
@@ -925,8 +930,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1000,8 +1005,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "3f5f231-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc19062geor_listing.jsonl.gz",
   "sections": [
    {
@@ -1010,11 +1015,11 @@
     "end_leaf": 1243
    }
   ],
-  "kept": 74583,
+  "kept": 74577,
   "dropped": 9482,
   "kept_share": 0.8872,
   "kept_by_section": {
-   "listing": 74583
+   "listing": 74577
   }
  },
  "non_entry_pages": {

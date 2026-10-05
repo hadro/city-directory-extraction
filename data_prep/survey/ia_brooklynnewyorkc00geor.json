@@ -326,8 +326,8 @@
    "publisher_tag_note": null,
    "year_tag": "1906",
    "hocr_lines": 183977,
-   "wrap_joins": 19424,
-   "candidates": 164553,
+   "wrap_joins": 19420,
+   "candidates": 164557,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -343,12 +343,17 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 114014,
-   "keep_rate": 0.6929,
+   "side_bands": {
+    "words": 42,
+    "leaves": 1
+   },
+   "marker_fixes": 1031,
+   "kept": 114038,
+   "keep_rate": 0.693,
    "dropped": {
     "short": 42590,
     "allcaps": 3279,
-    "banner": 2979,
+    "banner": 2959,
     "bigtype": 1383,
     "nonascii": 302,
     "pagenum": 6
@@ -359,13 +364,13 @@
     "'\u2022",
     "\u2022'"
    ],
-   "ditto_applied": 2552,
+   "ditto_applied": 2548,
    "band": {
-    "leaves_banded": 600,
-    "head": 1218,
-    "body": 97587,
-    "foot": 1022,
-    "unbanded": 14187
+    "leaves_banded": 601,
+    "head": 1226,
+    "body": 97753,
+    "foot": 1026,
+    "unbanded": 14033
    },
    "top_ad_leaves": [
     1249,
@@ -379,10 +384,10 @@
     1319,
     507
    ],
-   "filters_at": "3f5f231-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
-  "words_gz_bytes": 9849214,
+  "words_gz_bytes": 9849831,
   "hocr_deleted": true,
   "elapsed_s": 63,
   "eval_holdout": {
@@ -1067,8 +1072,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1154,8 +1159,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "3f5f231-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc00geor_listing.jsonl.gz",
   "sections": [
    {
@@ -1164,11 +1169,11 @@
     "end_leaf": 1241
    }
   ],
-  "kept": 101019,
+  "kept": 101043,
   "dropped": 12995,
   "kept_share": 0.886,
   "kept_by_section": {
-   "listing": 101019
+   "listing": 101043
   }
  },
  "non_entry_pages": {

@@ -345,13 +345,18 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 182345,
+   "side_bands": {
+    "words": 15,
+    "leaves": 3
+   },
+   "marker_fixes": 2659,
+   "kept": 182344,
    "keep_rate": 0.8982,
    "dropped": {
     "short": 12100,
     "allcaps": 4281,
     "banner": 2330,
-    "bigtype": 1834,
+    "bigtype": 1835,
     "nonascii": 124,
     "pagenum": 1
    },
@@ -376,8 +381,8 @@
     3,
     575
    ],
-   "filters_at": "18ec87e-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 15265067,
   "hocr_deleted": true,
@@ -657,8 +662,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -834,8 +839,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/1886BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -849,12 +854,12 @@
     "end_leaf": 1256
    }
   ],
-  "kept": 168930,
+  "kept": 168929,
   "dropped": 13415,
   "kept_share": 0.9264,
   "kept_by_section": {
    "late_names": 22,
-   "listing": 168908
+   "listing": 168907
   }
  },
  "non_entry_pages": {

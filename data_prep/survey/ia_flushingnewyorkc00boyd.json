@@ -398,8 +398,8 @@
    "publisher_tag_note": "'flushing journal' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1890",
    "hocr_lines": 4940,
-   "wrap_joins": 198,
-   "candidates": 4742,
+   "wrap_joins": 192,
+   "candidates": 4748,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -415,19 +415,22 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 3926,
-   "keep_rate": 0.8279,
-   "dropped": {
-    "short": 331,
-    "allcaps": 322,
-    "banner": 120,
-    "bigtype": 31,
-    "nonascii": 12
+   "side_bands": {
+    "words": 2030,
+    "leaves": 70
    },
-   "ditto_marks": [
-    "^^"
-   ],
-   "ditto_applied": 36,
+   "marker_fixes": 528,
+   "kept": 3849,
+   "keep_rate": 0.8107,
+   "dropped": {
+    "short": 363,
+    "allcaps": 329,
+    "banner": 166,
+    "bigtype": 32,
+    "nonascii": 9
+   },
+   "ditto_marks": [],
+   "ditto_applied": 0,
    "band": {
     "leaves_banded": 0,
     "head": 0,
@@ -441,14 +444,14 @@
     11,
     219,
     221,
+    17,
     9,
+    193,
     141,
-    177,
-    215,
     133
    ],
-   "filters_at": "18ec87e-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 410776
  },
@@ -804,8 +807,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -845,8 +848,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/flushingnewyorkc00boyd_listing.jsonl.gz",
   "sections": [
    {
@@ -855,11 +858,11 @@
     "end_leaf": 171
    }
   ],
-  "kept": 3143,
-  "dropped": 783,
-  "kept_share": 0.8006,
+  "kept": 3078,
+  "dropped": 771,
+  "kept_share": 0.7997,
   "kept_by_section": {
-   "listing": 3143
+   "listing": 3078
   }
  }
 }

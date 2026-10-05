@@ -397,8 +397,8 @@
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
    "hocr_lines": 122987,
-   "wrap_joins": 1871,
-   "candidates": 121116,
+   "wrap_joins": 1864,
+   "candidates": 121123,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -414,24 +414,29 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 87282,
-   "keep_rate": 0.7206,
+   "side_bands": {
+    "words": 60,
+    "leaves": 3
+   },
+   "marker_fixes": 3311,
+   "kept": 87296,
+   "keep_rate": 0.7207,
    "dropped": {
-    "short": 22246,
-    "banner": 7922,
+    "short": 22247,
+    "banner": 7916,
     "allcaps": 2341,
-    "bigtype": 1274,
-    "nonascii": 46,
+    "bigtype": 1273,
+    "nonascii": 45,
     "pagenum": 5
    },
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 28903,
+   "ditto_applied": 28920,
    "band": {
     "leaves_banded": 519,
-    "head": 1237,
-    "body": 83516,
+    "head": 1234,
+    "body": 83533,
     "foot": 1562,
     "unbanded": 967
    },
@@ -447,8 +452,8 @@
     963,
     575
    ],
-   "filters_at": "18ec87e-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 7498319,
   "hocr_deleted": true,
@@ -647,8 +652,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -700,8 +705,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc00broo_listing.jsonl.gz",
   "sections": [
    {
@@ -710,11 +715,11 @@
     "end_leaf": 1079
    }
   ],
-  "kept": 87159,
+  "kept": 87173,
   "dropped": 123,
   "kept_share": 0.9986,
   "kept_by_section": {
-   "listing": 87159
+   "listing": 87173
   }
  },
  "non_entry_pages": {

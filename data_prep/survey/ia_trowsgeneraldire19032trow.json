@@ -342,12 +342,17 @@
     "lines": 0,
     "leaves": 0
    },
-   "kept": 152645,
-   "keep_rate": 0.9267,
+   "side_bands": {
+    "words": 5,
+    "leaves": 1
+   },
+   "marker_fixes": 618,
+   "kept": 152647,
+   "keep_rate": 0.9268,
    "dropped": {
     "short": 6799,
     "allcaps": 2083,
-    "banner": 1745,
+    "banner": 1743,
     "bigtype": 1271,
     "nonascii": 166,
     "pagenum": 2
@@ -355,11 +360,11 @@
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 46890,
+   "ditto_applied": 46892,
    "band": {
     "leaves_banded": 573,
     "head": 1697,
-    "body": 149067,
+    "body": 149069,
     "foot": 775,
     "unbanded": 1106
    },
@@ -371,12 +376,12 @@
     499,
     1099,
     1079,
-    657,
     1015,
+    657,
     785
    ],
-   "filters_at": "18ec87e-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 13378609,
   "hocr_deleted": true,
@@ -625,8 +630,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -665,8 +670,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/trowsgeneraldire19032trow_listing.jsonl.gz",
   "sections": [
    {
@@ -675,11 +680,11 @@
     "end_leaf": 1163
    }
   ],
-  "kept": 152636,
+  "kept": 152638,
   "dropped": 9,
   "kept_share": 0.9999,
   "kept_by_section": {
-   "listing": 152636
+   "listing": 152638
   }
  },
  "non_entry_pages": {

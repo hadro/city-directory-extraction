@@ -410,8 +410,8 @@
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
    "hocr_lines": 108976,
-   "wrap_joins": 1834,
-   "candidates": 107142,
+   "wrap_joins": 1831,
+   "candidates": 107145,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -427,21 +427,26 @@
     "lines": 0,
     "leaves": 0
    },
+   "side_bands": {
+    "words": 62,
+    "leaves": 3
+   },
+   "marker_fixes": 5558,
    "kept": 74471,
-   "keep_rate": 0.6951,
+   "keep_rate": 0.695,
    "dropped": {
-    "short": 17031,
-    "banner": 7779,
-    "allcaps": 6682,
-    "bigtype": 1133,
-    "nonascii": 41,
+    "short": 17035,
+    "banner": 7784,
+    "allcaps": 6683,
+    "bigtype": 1128,
+    "nonascii": 39,
     "pagenum": 5
    },
    "ditto_marks": [
     "-",
     "\u2014"
    ],
-   "ditto_applied": 17394,
+   "ditto_applied": 17402,
    "band": {
     "leaves_banded": 360,
     "head": 1509,
@@ -459,10 +464,10 @@
     977,
     791,
     801,
-    67
+    1015
    ],
-   "filters_at": "18ec87e-dirty",
-   "derived": "2026-09-28"
+   "filters_at": "572efd7-dirty",
+   "derived": "2026-10-05"
   },
   "words_gz_bytes": 6473770,
   "hocr_deleted": true,
@@ -729,8 +734,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -822,8 +827,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-09-28",
-  "code_at": "18ec87e-dirty",
+  "derived": "2026-10-05",
+  "code_at": "572efd7-dirty",
   "file": "data/survey_ocr/brooklynnewyor1912p3broo_listing.jsonl.gz",
   "sections": [
    {

@@ -587,6 +587,135 @@ def _split_at(ws, margin, tol, gap):
     return None
 
 
+CRUMB_CONF = 5            # x_wconf at or below which a word can be a side-banner crumb
+CRUMB_RX = re.compile(r"[^\w\s,.'’()&:;\"-]")   # a character an entry does not print
+BAND_MIN = 4              # crumbs that must line up before a side band is believed
+BAND_TOL = 0.006          # how closely their inner edges line up, as a share of page width
+BAND_WIDTH = 0.03         # ...and how wide the band must be: a ditto mark at the margin is not one
+BAND_OUTER = 0.35         # a side band sits in this outer share of the page
+BAND_PURE = 0.6           # ...and at least this share of the words inside it are scraps
+
+
+def strip_side_bands(lines, dims):
+    """Drop the OCR of a side banner from the ends of lines. Returns (lines, n words dropped).
+
+    Boyd's Flushing directories print an advertisement running down the outer edge of each page,
+    and ABBYY reads a scrap of it onto the end of every line it sits beside:
+    `■^S2_ Corroll Mrs John, widow, h 66 Amity` on a left-hand page, `Harding James, driver,
+    h 161 Broadway gj|3` on a right-hand one. The model files the scrap into the name. Boyd 1890
+    scored 24.3 row EM on IA's lines against 90.5 on the gold text (PIPELINE.md #26).
+
+    The scraps cannot be told by word gaps, because ABBYY's word boxes there run edge to edge.
+    They are told by where they sit. Each is a low-confidence word with a character no entry
+    prints, and on one page they line up: the leading ones end where the column begins
+    (leaf 45: x1 534-535, from x0 337-340), the trailing ones begin at the banner's edge
+    (leaf 75: x0 2071-2076). So a side band is BAND_MIN such words whose inner edges agree
+    within BAND_TOL, in the page's outer BAND_OUTER, and at least BAND_WIDTH wide. The width
+    test is what spares ditto marks: Trow's `—` and 1922/23's `■■` are also odd, low-confidence
+    and aligned at a column margin, but about 30 px wide, not ~195. Every word inside a found
+    band is then dropped whatever its shape (`JEHS`, `52-`), and a leading word only when it
+    starts left of the band's inner edge, so a mark AT the margin is never touched. A line is
+    never emptied."""
+    if not lines or not dims:
+        return lines, 0
+    W = dims[0]
+    tol = max(4.0, BAND_TOL * W)
+
+    def crumb(w):
+        # a token opening with a dash is Trow's ditto, alone (`—`) or glued (`—Geo`): never a
+        # scrap, though `—` is a character no entry prints (Trow 1914 p2 leaf 91 lost five)
+        return (w[4] <= CRUMB_CONF and CRUMB_RX.search(w[5]) is not None
+                and not w[5].startswith(("—", "–", "-")))
+
+    def band(pairs):
+        """(inner edge, outer edge) of the largest group of inner edges within 2*tol."""
+        pairs = sorted(pairs)
+        best, j = [], 0
+        for i in range(len(pairs)):
+            while pairs[i][0] - pairs[j][0] > 2 * tol:
+                j += 1
+            if i - j + 1 > len(best):
+                best = pairs[j:i + 1]
+        if len(best) < BAND_MIN:
+            return None
+        inner = statistics.median(p[0] for p in best)
+        outer = statistics.median(p[1] for p in best)
+        return (inner, outer) if abs(inner - outer) >= BAND_WIDTH * W else None
+
+    def run(ws, end):
+        """The words of the crumb run at one end of a line (a scrap can be two: `»— "£`)."""
+        seq = ws if end == "start" else ws[::-1]
+        k = 0
+        while k < len(seq) - 1 and crumb(seq[k]):
+            k += 1
+        return seq[:k]
+
+    lead_runs = [r for r in (run(ws, "start") for ws in lines) if r]
+    tail_runs = [r for r in (run(ws, "end") for ws in lines) if r]
+    left = band([(r[-1][2], r[0][0]) for r in lead_runs if r[-1][2] < BAND_OUTER * W])
+    right = band([(r[-1][0], r[0][2]) for r in tail_runs if r[-1][0] > (1 - BAND_OUTER) * W])
+    if left is not None:
+        # The band ends where the text begins. Measured from the lines that open with a word,
+        # not a scrap, so a crumb glued into the text cannot push the edge inward: Trow 1912
+        # p2 leaf 1249 lost the ditto dash of `— Karctn barber` to an edge 20 px too far right.
+        starts = [ws[0][0] for ws in lines if len(ws) > 1 and not crumb(ws[0])
+                  and left[1] + tol <= ws[0][0] <= left[0] + BAND_WIDTH * W]   # first column only
+        if starts:
+            left = (min(left[0], statistics.median(starts)), left[1])
+
+    def in_left(w):
+        return w[2] <= left[0] + tol and w[0] < left[0] - tol
+
+    def in_right(w):
+        return w[0] >= right[0] - tol
+
+    def zone(ws, inside, end):
+        """The words of a line that lie in a band, from that end inward."""
+        seq, k = (ws if end == "start" else ws[::-1]), 0
+        while k < len(seq) - 1 and inside(seq[k]):
+            k += 1
+        return seq[:k]
+
+    def pure(inside, end):
+        """A banner's band holds scraps. Where most of what sits in it is ordinary words, the
+        aligned crumbs were a coincidence, and the "band" is text: 1867BPL leaf 11 lost
+        `Adams`, `Auld` and `Buck` to one, and Trow 1865 (`bub_gb_hY4tAAAAYAAJ`) `(store)` and
+        `K 45tb`, before this test (2026-10-05)."""
+        words = [w for ws in lines for w in zone(ws, inside, end)]
+        return bool(words) and sum(crumb(w) for w in words) >= BAND_PURE * len(words)
+
+    if left is not None and not pure(in_left, "start"):
+        left = None
+    if right is not None and not pure(in_right, "end"):
+        right = None
+    if left is None and right is None:
+        return lines, 0
+    out, n = [], 0
+    for ws in lines:
+        ws = list(ws)
+        if left is not None:
+            k = len(zone(ws, in_left, "start"))
+            ws, n = ws[k:], n + k
+        if right is not None:
+            k = len(zone(ws, in_right, "end"))
+            ws, n = ws[:len(ws) - k], n + k
+        out.append(ws)
+    return out, n
+
+
+# `h`, the residence marker, read as `li`. Mid-line before a house number or `do` it is always
+# the marker: 31 of 31 such readings on the real-OCR panel print `h` in the gold (two with an
+# OCR'd number besides), on 131,740 run-set lines in 72 volumes, 2.2% of all markers (2026-10-05).
+# Never the first token: a LEADING `li` is a ditto reading in Trow 1917.
+MARKER_RX = re.compile(r"(?<=\S)\s(?:li|Ii|ll|1i|lI)(?=\s+(?:\d|do\b))")
+
+
+def fix_residence_markers(text):
+    """(text, n): the `li` readings of a mid-line `h` marker put back to `h`."""
+    out, n = MARKER_RX.subn(" h", text)
+    return out, n
+
+
 def split_merged_columns(lines, dims):
     """Undo tesseract reading straight across a two-column page's gutter. Returns (lines, n).
 
@@ -1112,11 +1241,15 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
     `holdout` maps leaf -> tag ("gold" / "adjacent") for leaves an eval set was built from; their
     lines are emitted with `context.eval_holdout` so no consumer has to remember to filter them.
     """
-    stats = {"leaves": 0, "raw": 0, "joins": 0, "kept": 0, "splits": 0, "split_leaves": 0}
+    stats = {"leaves": 0, "raw": 0, "joins": 0, "kept": 0, "splits": 0, "split_leaves": 0,
+             "band_words": 0, "band_leaves": 0, "marker_fixes": 0}
     reasons, ad_scores, buffered = {}, [], []
     for n, leaf in enumerate(leaves, 1):
         if split_columns:
             words, dims = item.page_words(leaf)
+            words, banded = strip_side_bands(words, dims) if words else (words, 0)
+            stats["band_words"] += banded
+            stats["band_leaves"] += bool(banded)
             words, cut = split_merged_columns(words, dims) if words else (words, 0)
             raw = words_to_lines(words) if words else None
             stats["splits"] += cut
@@ -1185,6 +1318,9 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
             out = normalize_ditto_lead(out, marks)
             if despecked:
                 ditto_report["despecked"] += 1
+        dittoed = out != text
+        out, fixed = fix_residence_markers(out)
+        stats["marker_fixes"] += fixed
         ctx = {
             "publisher": publisher,                  # already a trained token (tag_publisher)
             "directory_year": year or "",
@@ -1200,7 +1336,8 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
             # The audit trail against the page image. Stored only when something changed, so an
             # unnormalized volume costs nothing, and `raw_line` still means "what we fed the model".
             ctx["raw_line_original"] = text
-            ditto_report["applied"] += 1
+            if dittoed:
+                ditto_report["applied"] += 1
         if bands:
             # MARK, never drop. A ditto whose parent surname was cut has nothing to point at, so a
             # cut here would break stage 5 exactly as `alpha_run_filter --apply` does. Downstream
@@ -1460,6 +1597,68 @@ def _self_test() -> int:
     near = ["n fulton h 12 Main"] * 40 + [f"Ackerman{i} lab h 1 Main" for i in range(60)]
     assert "n" not in ditto_lead_candidates(near, confirmed=("n",))[0], \
         "a confirmed letter still needs the name-follower ratio"
+
+    # --- strip_side_bands: Boyd 1890's side banner, word boxes from leaf 45 and leaf 75
+    dims_b = [2648, 4216]
+    lead = [[[340, 100, 534, 140, 0, "■^S2_"], [534, 100, 786, 140, 44, "Corroll"],
+             [786, 100, 935, 140, 31, "Mrs"], [935, 100, 1137, 140, 34, "John,"]],
+            [[339, 200, 535, 240, 0, "g_«H"], [535, 200, 740, 240, 29, "Corse"],
+             [740, 200, 891, 240, 34, "Mrs"]],
+            [[337, 300, 535, 340, 0, "£jjgr"], [535, 300, 740, 340, 24, "Corse"],
+             [740, 300, 954, 340, 14, "Titus,"]],
+            [[340, 400, 534, 440, 0, "^^j"], [534, 400, 818, 440, 34, "Costello"],
+             [818, 400, 1116, 440, 43, "Michael,"]],
+            [[536, 500, 794, 540, 45, "Cornell"], [794, 500, 1079, 540, 46, "William"]],
+            [[536, 600, 560, 640, 0, "—"], [560, 600, 800, 640, 20, "Mary"]]]
+    cleaned, n = strip_side_bands(lead, dims_b)
+    assert n == 4 and [ws[0][5] for ws in cleaned] == \
+        ["Corroll", "Corse", "Corse", "Costello", "Cornell", "—"], "crumbs out, a margin mark kept"
+    trail = [[[89, 100, 379, 140, 7, "Harding"], [921, 100, 2071, 140, 28, "Broadway"],
+              [2071, 100, 2201, 140, 0, "gj|3"]],
+             [[93, 200, 382, 240, 39, "Harding"], [1217, 200, 2075, 240, 48, "Broadway"],
+              [2075, 200, 2128, 240, 0, "»—"], [2128, 200, 2174, 240, 0, '"£']],
+             [[96, 300, 366, 340, 33, "Harpell"], [1060, 300, 2076, 340, 61, "Congress"],
+              [2076, 300, 2175, 340, 0, "P^"]],
+             [[95, 400, 380, 440, 20, "Harned"], [1000, 400, 2073, 440, 30, "ave"],
+              [2073, 400, 2190, 440, 0, "JEHS"]],
+             [[97, 500, 380, 540, 20, "Harris"], [1000, 500, 2072, 540, 30, "Amity"],
+              [2072, 500, 2170, 540, 0, "£•§"]]]
+    cleaned, n = strip_side_bands(trail, dims_b)
+    assert n == 6 and [ws[-1][5] for ws in cleaned] == \
+        ["Broadway", "Broadway", "Congress", "ave", "Amity"], "every word in the band goes"
+    dittos = [[[535, 100 * i, 565, 100 * i + 40, 0, "■■"], [565, 100 * i, 800, 100 * i + 40, 20,
+                                                            "Jos"]] for i in range(8)]
+    assert strip_side_bands(dittos, dims_b) == (dittos, 0), "a column of ditto marks is no band"
+    assert strip_side_bands(lead[:3], dims_b)[1] == 0, "three crumbs do not make a band"
+    # 1867BPL leaf 11: crumbs line up, but real surnames sit in the same zone -- text, not band
+    names = [[[300, 1000 + 50 * i, 500, 1040 + 50 * i, 20, s], [530, 1000 + 50 * i, 800,
+                                                               1040 + 50 * i, 20, "Calvin,"]]
+             for i, s in enumerate(["Adams", "Adama", "Auld", "Austin", "Buck", "Burr", "Bush",
+                                    "Byrd"])]
+    assert strip_side_bands(lead[:4] + names, dims_b)[1] == 0, "a band holding names is text"
+    # Trow 1912 p2 leaf 1249: crumbs glued 20 px into the text must not carry a ditto dash off
+    glued = [[[340, 100 * i, 556, 100 * i + 40, 0, "■^S"], [556, 100 * i, 800, 100 * i + 40, 30,
+                                                            "Smith"]] for i in range(4)]
+    dash = [[[535, 900, 548, 940, 0, "—"], [548, 900, 800, 940, 30, "Karctn"]]]
+    plain = [[[535, 1000 + 50 * i, 800, 1040 + 50 * i, 30, "Jones"],
+              [800, 1000 + 50 * i, 900, 1040 + 50 * i, 30, "Wm"]] for i in range(6)]
+    kept = strip_side_bands(glued + dash + plain, dims_b)[0]
+    assert kept[4][0][5] == "—", "a ditto mark at the text margin is never a scrap"
+    # Trow 1914 p2 leaf 91: dash dittos glued to names at the page edge are not a band
+    trow = [[[8, 60 * i, 75, 60 * i + 30, 1, s], [75, 60 * i, 200, 60 * i + 30, 3, "carpntr"]]
+            for i, s in enumerate(["—Geo", "—Cm", "—Ida", "—Wm", "—Jno", "—", "—Fred"])]
+    assert strip_side_bands(trow, [2108, 3185])[1] == 0, "Trow's glued ditto dashes are kept"
+
+    # --- fix_residence_markers: Boyd 1890's `li` for `h`, never a leading token
+    assert fix_residence_markers("Cornell Mrs Sarah, widow, li 13 Elliott") == \
+        ("Cornell Mrs Sarah, widow, h 13 Elliott", 1)
+    assert fix_residence_markers("Harpell Thomas S, laundry, 3 1-2 Jaggar ave, li do")[0] \
+        .endswith(", h do")
+    assert fix_residence_markers("—Thos fitter ll 235 E 74th")[0] == "—Thos fitter h 235 E 74th"
+    assert fix_residence_markers("li Jas H h232 W134th") == ("li Jas H h232 W134th", 0), \
+        "a leading li is a ditto reading (Trow 1917)"
+    assert fix_residence_markers("Wong Li laundry 12 Pell")[1] == 0
+    assert fix_residence_markers("Bellini Tullio, li 12 Mott")[0] == "Bellini Tullio, h 12 Mott"
 
     # --- split_merged_columns: a merged two-column page is cut at the right column's margin
     def word(x, y, t, w=None):

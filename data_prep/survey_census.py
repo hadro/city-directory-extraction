@@ -58,6 +58,9 @@ REPO = HERE.parent
 MASTER = HERE / "master_directories.csv"
 SIDECAR = HERE / "survey"
 RAWCACHE = REPO / "data" / "survey_census"
+sys.path.insert(0, str(HERE))
+
+from survey_report import stamped  # noqa: E402
 
 UA = {"User-Agent": "Mozilla/5.0 (research; city-directory corpus survey; +josh)"}
 META = "https://archive.org/metadata/{ident}"
@@ -223,7 +226,8 @@ def build_sidecar(row: dict, raw: dict | None) -> dict:
             doc["page_numbers"] = {"present": False, "tier": "D",
                                    "route": "hocr-margin-regression"}
     elif raw and raw.get("error"):
-        doc["survey_status"] = "fetch-failed"
+        if not stamped(doc.get("survey_status")):
+            doc["survey_status"] = "fetch-failed"
         doc["error"] = raw["error"]
 
     doc["catalog_says"] = cat

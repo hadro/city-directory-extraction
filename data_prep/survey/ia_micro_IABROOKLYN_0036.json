@@ -107,7 +107,7 @@
    "page_offset": 30
   }
  },
- "survey_status": "frontmatter-done",
+ "survey_status": "duplicate-of:1857BPL",
  "derivatives": {
   "hocr_bytes": 29329657,
   "hocr_sha1": "770101f3d9cc2022b4602c65f3600e31c0b859e1",
@@ -1057,5 +1057,14 @@
    503,
    504
   ]
+ },
+ "run_set": {
+  "edition_run": "1857BPL",
+  "decided_by": "hadro",
+  "date": "2026-10-04",
+  "basis": "the book scan; the microfilm copy delivers 45% of its lines per page",
+  "decision": "data_prep/survey_runset.json",
+  "role": "duplicate",
+  "previous_status": "frontmatter-done"
  }
 }

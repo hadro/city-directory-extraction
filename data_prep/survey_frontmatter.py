@@ -64,7 +64,7 @@ TEXT_CACHE = REPO / "data" / "survey_fm_text"     # extracted front-matter lines
 
 sys.path.insert(0, str(HERE))
 from ia_volume_to_jsonl import Item, hocr_lines         # noqa: E402
-from survey_report import year_agrees                   # noqa: E402  (the conflict gate)
+from survey_report import stamped, year_agrees          # noqa: E402  (the conflict gate)
 
 UA = {"User-Agent": "Mozilla/5.0 (research; city-directory corpus survey; +josh)"}
 DL = "https://archive.org/download"
@@ -948,7 +948,8 @@ def main(argv=None):
             continue
         if not (doc.get("derivatives") or {}).get("has_pageindex"):
             continue
-        if doc.get("survey_status") in ("frontmatter-done", "needs-image-read") and not args.redo:
+        if (doc.get("survey_status") in ("frontmatter-done", "needs-image-read")
+                or stamped(doc.get("survey_status"))) and not args.redo:
             continue
         todo.append((p, doc))
     if args.limit:
@@ -961,7 +962,8 @@ def main(argv=None):
         try:
             book, structure, status = survey_volume(ident, args.leaves, args.verbose)
         except Exception as e:                           # noqa: BLE001 - recorded, keeps going
-            doc["survey_status"] = "frontmatter-failed"
+            if not stamped(doc.get("survey_status")):
+                doc["survey_status"] = "frontmatter-failed"
             doc["error"] = f"{type(e).__name__}: {e}"[:200]
             p.write_text(json.dumps(doc, indent=1), encoding="utf-8")
             print(f"[{i}/{len(todo)}] {ident}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
@@ -984,7 +986,8 @@ def main(argv=None):
 
         doc["book_says"] = merge_book(doc.get("book_says"), book)
         doc["structure"] = structure
-        doc["survey_status"] = status
+        if not stamped(doc.get("survey_status")):    # --redo re-reads; it never un-stamps
+            doc["survey_status"] = status
         doc["frontmatter_read"] = time.strftime("%Y-%m-%d")
         p.write_text(json.dumps(doc, indent=1), encoding="utf-8")
         got = ",".join(k for k in ("year", "publisher", "title", "legend") if k in book)

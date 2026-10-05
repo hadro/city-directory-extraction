@@ -1,0 +1,146 @@
+{
+ "_doc": [
+  "The run set: which copy of each edition held more than once the corpus run reads. hadro's",
+  "decisions of 2026-10-04, made on results/runset_review.html (the five close calls) and on",
+  "results/survey_twins_pairs.json (the rest). The pairs pass RECOMMENDS; this file DECIDES, the",
+  "way survey_decisions.json decides the CSV conflicts that apply_survey.py only finds.",
+  "",
+  "`survey_twins.py stamp --write` projects it into the sidecars: each duplicate gets",
+  "`survey_status: duplicate-of:<run>` and every member a `run_set` block. `survey_twins.py pairs`",
+  "then keeps the decided copy as the run, and hpc/prep_volumes.py refuses to stage a duplicate.",
+  "Removing an edition here and re-stamping restores each duplicate's previous status.",
+  "",
+  "`recommended` is what the pairs pass chose where the decision differs from it.",
+  "`skip_non_entry_pages`: the stager drops the lines on the volume's `non_entry_pages` leaves."
+ ],
+ "decided_by": "hadro",
+ "date": "2026-10-04",
+ "review": "results/runset_review.html",
+ "editions": [
+  {
+   "run": "1906BPL",
+   "duplicates": [
+    "brooklynnewyorkc00geor",
+    "brooklynnewyorkc19062geor",
+    "brooklynnewyorkc1906geor"
+   ],
+   "basis": "the only whole alphabet; each geor scan is half of the same edition"
+  },
+  {
+   "run": "1903BPL",
+   "duplicates": [
+    "brooklynnewyork1903p1geor",
+    "brooklynnewyorkc19031geor",
+    "brooklynnewyorkc1903geor"
+   ],
+   "basis": "the only whole alphabet; each geor scan is half of the same edition"
+  },
+  {
+   "run": "1907BPL",
+   "duplicates": [
+    "brooklynnewyork1907p1geor",
+    "brooklynnewyorkc1907geor"
+   ],
+   "basis": "the only whole alphabet; each geor scan is half of the same edition"
+  },
+  {
+   "run": "1908BPL",
+   "duplicates": [
+    "brooklynnewyork1908p1geor",
+    "brooklynnewyorkc1908geor"
+   ],
+   "basis": "the only whole alphabet; each geor scan is half of the same edition"
+  },
+  {
+   "run": "1904BPL",
+   "duplicates": [
+    "brooklynnewyork1904p1geor",
+    "brooklynnewyorkc1904geor"
+   ],
+   "basis": "the only whole alphabet; each geor scan is half of the same edition"
+  },
+  {
+   "run": "trowsgeneraldir1903p2trow",
+   "duplicates": [
+    "trowsgeneraldire19032trow"
+   ],
+   "basis": "14% more entry-shaped lines (114,534 against 100,609); the ABBYY-8 copy reads the h marker as b and garbles dense pages"
+  },
+  {
+   "run": "longworthsameric00newy",
+   "duplicates": [
+    "longworthsameric1839newy"
+   ],
+   "basis": "the same photographs uploaded twice, OCR within 0.4%; the pick's images are 1.7x the resolution, for any later re-OCR"
+  },
+  {
+   "run": "1857BPL",
+   "duplicates": [
+    "micro_IABROOKLYN_0036"
+   ],
+   "basis": "the book scan; the microfilm copy delivers 45% of its lines per page"
+  },
+  {
+   "run": "1856BPL",
+   "duplicates": [
+    "micro_IABROOKLYN_0034"
+   ],
+   "basis": "the book scan; the microfilm copy delivers 51% of its lines per page"
+  },
+  {
+   "run": "hearnesbrooklync1852unse",
+   "duplicates": [
+    "micro_IABROOKLYN_0030"
+   ],
+   "basis": "the book scan; the microfilm copy delivers 74% of its lines per page"
+  },
+  {
+   "run": "1858BPL",
+   "duplicates": [
+    "micro_IABROOKLYN_0037"
+   ],
+   "basis": "the book scan; the microfilm copy delivers 27% of its lines per page"
+  },
+  {
+   "run": "brooklynalphabet1843unse",
+   "duplicates": [
+    "micro_IABROOKLYN_0019"
+   ],
+   "basis": "the book scan: 47% more entry-shaped lines (6,846 against 4,666); the microfilm OCR drops and merges lines, and the pairs pass chose it only because its later frames hold two pages each",
+   "recommended": "micro_IABROOKLYN_0019"
+  },
+  {
+   "run": "brooklyncitydire1848teal",
+   "duplicates": [
+    "micro_IABROOKLYN_0026"
+   ],
+   "basis": "the book scan; the microfilm copy delivers 66% of its lines per page"
+  },
+  {
+   "run": "hearnesbrooklync1850unse",
+   "duplicates": [
+    "micro_IABROOKLYN_0028"
+   ],
+   "basis": "the book scan; the microfilm copy delivers 50% of its lines per page"
+  },
+  {
+   "run": "brooklyndirector00ogde",
+   "duplicates": [
+    "micro_IABROOKLYN_0016"
+   ],
+   "basis": "the book scan: 2.2x the microfilm's entry-shaped lines once its 135 show-through versos are skipped (4,014 against 1,805), and 89% of the gold lines at >=0.8 against 71%",
+   "skip_non_entry_pages": true,
+   "skip_reason": "every even leaf 10-292 is a blank verso; on 135 the OCR read the facing page through the paper (2,396 scoped lines)"
+  },
+  {
+   "run": "newyorkdirectory00durs_0",
+   "duplicates": [
+    "newyorkbrooklynd00durs",
+    "newyorkdirectory00fran",
+    "newyorkdirectory00fran_0"
+   ],
+   "basis": "the 1851 reprint, reset with a modern s: reads 57% of the franks1786 gold lines exactly against 5% or less for the three long-s copies. Records cite the 1851 reprint's pages",
+   "recommended": "newyorkdirectory00fran"
+  }
+ ]
+}

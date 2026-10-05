@@ -19,6 +19,14 @@ A chunk is one SLURM array task: ~25 min on an L40S at the measured 7.3 rows/s (
 H200 at 11.88; the 2.7 once assumed here was a load-dominated figure), so no chunk comes
 near a wall-clock limit, and a preempted chunk is simply re-run.
 
+The run set is hadro's (data_prep/survey_runset.json, stamped into the sidecars by
+`data_prep/survey_twins.py stamp`). A volume stamped `duplicate-of:<id>` is another scan of an
+edition the corpus run reads elsewhere, so staging it would count its people twice: it is
+refused unless --allow-duplicates (run 2 staged two microfilm copies on purpose, to compare
+them with their book scans). A volume whose `run_set` says `skip_non_entry_pages` loses the lines
+on its `non_entry_pages` leaves: Ogden 1839's book scan, whose 135 blank versos the OCR read
+through the paper.
+
 Writes, under --out:
     <id>/chunk_000.jsonl ...   the lines, in volume order, unchanged
     tasks.txt                  one line per chunk: "<id> <chunk path> <n lines>" -- the array index
@@ -35,9 +43,21 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 SRC = REPO / "data" / "survey_ocr"
+SIDECARS = REPO / "data_prep" / "survey"
 
 
-def split(ident: str, out: Path, chunk: int, src: Path = None) -> list:
+def run_set(ident: str):
+    """(survey_status, the leaves the run set says to skip) from the volume's sidecar."""
+    p = SIDECARS / f"ia_{ident}.json"
+    if not p.exists():
+        return None, set()
+    d = json.loads(p.read_text(encoding="utf-8"))
+    skip = set((d.get("non_entry_pages") or {}).get("leaves") or []) \
+        if (d.get("run_set") or {}).get("skip_non_entry_pages") else set()
+    return d.get("survey_status"), skip
+
+
+def split(ident: str, out: Path, chunk: int, src: Path = None, skip_leaves=()) -> list:
     src = src or SRC / f"{ident}_listing.jsonl.gz"
     if not src.exists():
         raise SystemExit(f"no listing-scoped lines for {ident} at {src} -- run "
@@ -64,6 +84,8 @@ def split(ident: str, out: Path, chunk: int, src: Path = None) -> list:
           else open(src, encoding="utf-8")) as fh:
         for line in fh:
             if line.strip():
+                if skip_leaves and json.loads(line)["context"]["leaf"] in skip_leaves:
+                    continue
                 buf.append(line if line.endswith("\n") else line + "\n")
                 if len(buf) == chunk:
                     flush()
@@ -78,6 +100,8 @@ def main(argv=None) -> int:
     ap.add_argument("--files", nargs="*", default=[],
                     help="extra JSONL files (e.g. eval/ia_panel.py's data/iapanel/iapanel_<set>.jsonl), "
                          "each staged as its own pseudo-volume named after the file")
+    ap.add_argument("--allow-duplicates", action="store_true",
+                    help="stage volumes stamped duplicate-of: (a scan comparison, not the corpus)")
     ap.add_argument("--chunk", type=int, default=10000, help="lines per array task")
     ap.add_argument("--out", default=str(REPO / "data" / "volumes"))
     ap.add_argument("--self-test", action="store_true")
@@ -93,10 +117,19 @@ def main(argv=None) -> int:
     sources = [(i, SRC / f"{i}_listing.jsonl.gz") for i in (args.ids or "").split(",") if i]
     sources += [(Path(f).name.replace("_eval.jsonl", "").replace(".jsonl", ""), Path(f).resolve())
                 for f in args.files]
+    plan = {ident: run_set(ident) for ident, _src in sources}
+    dups = {i: s for i, (s, _skip) in plan.items() if str(s).startswith("duplicate-of:")}
+    if dups and not args.allow_duplicates:
+        ap.error("another copy of these editions is in the run set (data_prep/survey_runset.json"
+                 "): " + ", ".join(f"{i} is {s}" for i, s in dups.items())
+                 + ". --allow-duplicates stages them anyway")
     for ident, src in sources:
-        chunks = split(ident, out, args.chunk, src)
+        skip = plan[ident][1]
+        chunks = split(ident, out, args.chunk, src, skip)
         manifest[ident] = {"source": str(src.relative_to(REPO)),
                            "lines": sum(c["lines"] for c in chunks), "chunks": chunks}
+        if skip:
+            manifest[ident]["skipped_leaves"] = sorted(skip)
         tasks += [f"{ident} {c['path']} {c['lines']}" for c in chunks]
         print(f"{ident}: {manifest[ident]['lines']:,} lines -> {len(chunks)} chunks",
               file=sys.stderr)
@@ -126,6 +159,9 @@ def _self_test() -> int:
         assert (chunks[0]["first_leaf"], chunks[2]["last_leaf"]) == (10, 14)
         text = "".join((tmp / "out" / c["path"]).read_text() for c in chunks)
         assert text.count("\n") == 25, "every line lands in exactly one chunk, in order"
+        kept = split("v", tmp / "out", 10, skip_leaves={11, 13})
+        assert [c["lines"] for c in kept] == [10, 5], "a skipped leaf's five lines are gone"
+        assert (kept[0]["first_leaf"], kept[1]["last_leaf"]) == (10, 14)
     finally:
         SRC = real
     print("self-test OK", file=sys.stderr)

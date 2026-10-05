@@ -79,7 +79,7 @@
    "page_offset": -22
   }
  },
- "survey_status": "frontmatter-done",
+ "survey_status": "duplicate-of:brooklynalphabet1843unse",
  "derivatives": {
   "hocr_bytes": 10214627,
   "hocr_sha1": "62ee3a2403a32eeb6b3f1ee952c4b0fc80bb37d8",
@@ -771,5 +771,14 @@
    28,
    34
   ]
+ },
+ "run_set": {
+  "edition_run": "brooklynalphabet1843unse",
+  "decided_by": "hadro",
+  "date": "2026-10-04",
+  "basis": "the book scan: 47% more entry-shaped lines (6,846 against 4,666); the microfilm OCR drops and merges lines, and the pairs pass chose it only because its later frames hold two pages each",
+  "decision": "data_prep/survey_runset.json",
+  "role": "duplicate",
+  "previous_status": "frontmatter-done"
  }
 }

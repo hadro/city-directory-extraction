@@ -1185,6 +1185,28 @@ the difference in lines is what OCR and the filters lost. The table is a recomme
 hadro, not a stamp. `survey_status: duplicate-of:<id>` is written only on his word, and
 `hpc/prep_volumes.py` needs the run set before the corpus is staged.
 
+**Decided 2026-10-04 by hadro**, on `results/runset_review.html` for the five close calls (built by
+`data_prep/survey_runset_review.py`: the same printed lines in each copy's scan crop beside its
+OCR). The verdict is `data_prep/survey_runset.json`. `survey_twins.py stamp --write` stamped
+**25 copies** `duplicate-of:<run>` and gave all 41 decided sidecars a `run_set` block. The
+recommendation stands on 14 editions. Two were switched:
+- **Brooklyn 1843–44 runs the book scan `brooklynalphabet1843unse`**, not `micro_IABROOKLYN_0019`.
+  The book scan reads 47% more entry-shaped lines (6,846 against 4,666). The microfilm led on
+  lines per page (42.1 against 40.9) only because from about leaf 148 each film frame holds two
+  pages (leaf 166 is pp. 182–183).
+- **Franks 1786 runs `newyorkdirectory00durs_0`**, the 1851 reprint reset with a modern s. It
+  reads 57% of the franks1786 gold lines exactly, against 5% or less for the three long-s copies.
+  The cost is provenance: records cite the 1851 reprint's pages, not a facsimile of 1786.
+
+Two others were kept with a qualification. Longworth's two copies are the same photographs
+uploaded twice, so the pick is kept for its 1.7× image resolution. Ogden keeps the book scan but
+**skips its 135 flagged pages**: every even leaf from 10 to 292 is a blank verso, and on 135 of
+them the OCR read the facing page through the paper. The stager drops those 2,396 lines.
+
+`pairs` now reports the decided copy as `run` and the measured one as `recommended`.
+`prep_volumes.py` refuses a stamped duplicate unless `--allow-duplicates`. The run set is
+**153 volumes, 14.92M lines, ~349 H200-hours at 11.88 rows/s**; the duplicates hold 1.33M.
+
 What else it found:
 - ⚠️ **1906BPL, the project's calibration volume, is the same edition as the three 1906 `geor`
   scans.** So `1906BPL_sample500`'s gold lines are also printed, untagged, in `c1906geor`,
@@ -1334,7 +1356,21 @@ What it adds to the survey:
   (`sited Tn odellaW ...`). That undercuts part of the Ogden choice in "Editions held twice": it
   won on lines per page, and a third of those lines are this. Its microfilm twin `micro_0016`
   loses 6% to non-entry pages. The pair is now a real close call, and wants a page read.
-- **Nothing is cut yet.** The marks sit in the sidecars, and `assemble_records.py` carries them
+- ⚠️ **The rule misreads blocks of corporations in the late Trows (found 2026-10-04).** One
+  flagged page drawn at random from each of four heavily flagged run-set volumes, read off the
+  image:
+  - Trow 1917 leaf 245 is a listing page of "AMERICAN …" companies under an ad band.
+  - Trow 1922/23 p2 leaf 295 (p.1313) is a listing page of "NATIONAL …" companies under one.
+  - Brooklyn 1912 p3 leaf 367 (p.1330) is a listing page whose OCR read only the ad bands around
+    it, 62 lines for a full page.
+  - `micro_IABROOKLYN_0042` leaf 267 is a full-page type-foundry ad.
+
+  A corporation's entry names officers and a business address (`ii Scientific Instrument Co Inc
+  (N Y) Oscar A Boehm pres … 50 John`), and no residence marker, so ENTRY_RX misses it. The four
+  late Trows carry 42,346 of the 97,682 flagged lines left in the run set. So no flagged page is
+  cut corpus-wide until ENTRY_RX reads a corporate entry and the inventory is re-checked.
+- **Nothing is cut yet, except Ogden's versos** (run-set decision, above). The marks sit in the
+  sidecars, and `assemble_records.py` carries them
   as a flag. Whether `scope` should drop these lines, or the stager skip them, is a decision.
   The two kinds want different handling: an ad page should be skipped, while a failed listing page
   should be re-read from the image, which is what the vision OCR question in PIPELINE.md comes to.
@@ -1482,6 +1518,12 @@ dead volume: `ok` · `no-hocr` · `dead-ocr` (chars/page an order of magnitude b
   image route. *(It was also recorded here as having an empty hOCR; Phase 1 found 133,519 words
   on 378 content leaves, so the text route exists.)* Not a collection-level block: other
   `durstoldyorklibrary` volumes serve fine, so this is item-level.
+- `duplicate-of:<id>` — 25 volumes, stamped 2026-10-04 on hadro's run-set decision ("Editions
+  held twice" in Phase 2). The status it replaced is kept in `run_set.previous_status`.
+  `survey_frontmatter.py` and `survey_census.py` now never overwrite a stamped status
+  (`survey_report.stamped`). Before that, a default front-matter re-run would have silently
+  un-stamped every `not-residential` volume, since it re-read any status but `frontmatter-done`
+  and `needs-image-read`.
 - `not-residential` — 6 volumes. `micro_IABROOKLYN_0041` (Boyd's Brooklyn **Business** Directory,
   1860), `micro_IABROOKLYN_0038` (Brooklyn **Business** Directory, 1858-59), and **all four 1913
   Trow rows** — see below.

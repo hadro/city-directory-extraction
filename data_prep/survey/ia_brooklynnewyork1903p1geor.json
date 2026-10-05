@@ -102,7 +102,7 @@
    "note": "unprinted: the '1' at the foot does not continue into the next text leaves ([41, 43, 45, 47]: [[1, 22, 1903], [21, 23, 1903], [0, 2, 3], [1, 25, 1903]]) -- a printer's signature mark or a partial read"
   }
  },
- "survey_status": "frontmatter-done",
+ "survey_status": "duplicate-of:1903BPL",
  "derivatives": {
   "hocr_bytes": 119563214,
   "hocr_sha1": "aca2039dc04b70c5b25ee4e60fc392f531e49139",
@@ -808,5 +808,14 @@
    1125,
    1127
   ]
+ },
+ "run_set": {
+  "edition_run": "1903BPL",
+  "decided_by": "hadro",
+  "date": "2026-10-04",
+  "basis": "the only whole alphabet; each geor scan is half of the same edition",
+  "decision": "data_prep/survey_runset.json",
+  "role": "duplicate",
+  "previous_status": "frontmatter-done"
  }
 }

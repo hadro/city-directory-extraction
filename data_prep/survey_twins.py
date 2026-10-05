@@ -9,6 +9,7 @@ cannot see them and the identifiers mislead.
 
     python3 data_prep/survey_twins.py gold            # which IA volumes print each gold set's lines
     python3 data_prep/survey_twins.py pairs           # every volume against every other: editions
+    python3 data_prep/survey_twins.py stamp [--write] # hadro's run-set decisions -> the sidecars
     python3 data_prep/survey_twins.py --self-test
 
 WHY (2026-09-28). The Brooklyn microfilm series was also scanned as books, and the book scans'
@@ -101,6 +102,15 @@ Editions are the same-edition pairs unioned, plus the gold scan's same-text pair
 1786 reprints re-set the type, so their pages do not align). For each edition the run set is the
 whole alphabet delivering the most lines per page, or failing a whole copy, the best of each
 part. A recommendation for review, never a stamp.
+
+`stamp` -> the sidecars
+-----------------------
+hadro decides the run set in data_prep/survey_runset.json (2026-10-04, on
+results/runset_review.html). `stamp --write` gives each copy not run `survey_status:
+duplicate-of:<run>` and every decided copy a `run_set` block; `pairs` then reports the decided
+copy as the run and keeps the measured choice as `recommended` where they differ. Lines per page
+was the rule's blind spot twice: `micro_IABROOKLYN_0019` led its book scan 42.1 to 40.9 because
+its later film frames hold two pages each, while the book scan read 47% more entry-shaped lines.
 """
 from __future__ import annotations
 
@@ -534,16 +544,47 @@ def _uf():
 DUP_COVER = 0.80    # two parts matching over this share of each other's pages are one part
 
 
-def edition_groups(rows: list, V: dict, text_edges: list) -> list:
-    """Union the same-edition pairs (and the gold-proven same-text pairs) into editions, and
-    choose what to run of each.
+def choose_run(live: list, same: list):
+    """(run ids, close call) for one edition's candidate copies, as measured.
 
     A whole alphabet beats parts, and among copies of the same span the one delivering more
     lines per page wins: the printed page is the same, so the difference is what OCR and the
     filters lost. Parts are kept only where no whole copy exists, one per part, where two parts
     are the same part when each matches over DUP_COVER of the other's pages (their letter ranges
-    are read by OCR and can differ by a letter). Not-residential volumes are never run. This is
-    a recommendation for review, never a stamp."""
+    are read by OCR and can differ by a letter)."""
+    wholes = [c for c in live if c["whole"]]
+    if wholes:
+        best = max(wholes, key=lambda c: c["lines_per_leaf"])
+        rivals = [c for c in wholes if c is not best]
+        return [best["id"]], any(c["lines_per_leaf"] >= 0.95 * best["lines_per_leaf"]
+                                 for c in rivals)
+    pp, pfind = _uf()
+    for c in live:
+        pfind(c["id"])
+    for p in same:
+        if (p["a"] in pp and p["b"] in pp and p["cover_a"] >= DUP_COVER
+                and p["cover_b"] >= DUP_COVER):
+            pp[pfind(p["a"])] = pfind(p["b"])
+    parts = collections.defaultdict(list)
+    for c in live:
+        parts[pfind(c["id"])].append(c)
+    run, close = [], False
+    for cs in parts.values():
+        best = max(cs, key=lambda c: c["lines_per_leaf"])
+        run.append(best["id"])
+        close |= any(c is not best and c["lines_per_leaf"] >= 0.95 * best["lines_per_leaf"]
+                     for c in cs)
+    return run, close
+
+
+def edition_groups(rows: list, V: dict, text_edges: list) -> list:
+    """Union the same-edition pairs (and the gold-proven same-text pairs) into editions, and
+    choose what to run of each (choose_run). Not-residential volumes are never run.
+
+    The choice is a recommendation for review, never a stamp. Where hadro has decided
+    (data_prep/survey_runset.json, projected into the sidecars by `stamp`), a copy stamped
+    `duplicate-of:` is never run, `run` is the decided copy, and `recommended` keeps what the
+    measurement alone would have chosen."""
     parent, find = _uf()
     same = [p for p in rows if p["relation"] == "same-edition"]
     for p in same + text_edges:
@@ -556,37 +597,19 @@ def edition_groups(rows: list, V: dict, text_edges: list) -> list:
     for members in groups.values():
         cards = sorted((member_card(m, V) for m in members), key=lambda c: c["id"])
         live = [c for c in cards if c["survey_status"] != "not-residential"]
-        wholes = [c for c in live if c["whole"]]
-        close = False
-        if wholes:
-            best = max(wholes, key=lambda c: c["lines_per_leaf"])
-            run = [best["id"]]
-            rivals = [c for c in wholes if c is not best]
-            close = any(c["lines_per_leaf"] >= 0.95 * best["lines_per_leaf"] for c in rivals)
-        else:
-            pp, pfind = _uf()
-            for c in live:
-                pfind(c["id"])
-            for p in same:
-                if (p["a"] in pp and p["b"] in pp and p["cover_a"] >= DUP_COVER
-                        and p["cover_b"] >= DUP_COVER):
-                    pp[pfind(p["a"])] = pfind(p["b"])
-            parts = collections.defaultdict(list)
-            for c in live:
-                parts[pfind(c["id"])].append(c)
-            run = []
-            for cs in parts.values():
-                best = max(cs, key=lambda c: c["lines_per_leaf"])
-                run.append(best["id"])
-                close |= any(c is not best and c["lines_per_leaf"] >= 0.95 * best["lines_per_leaf"]
-                             for c in cs)
+        recommended, close = choose_run(live, same)
+        dups = {c["id"] for c in live if str(c["survey_status"]).startswith("duplicate-of:")}
+        run = choose_run([c for c in live if c["id"] not in dups], same)[0] if dups \
+            else recommended
         for c in cards:
             c["run"] = c["id"] in run
             c["gold_twin"] = c["id"] in gold_twins
         spare = sum(c["lines"] for c in live if not c["run"] and c["kind"] == "listing")
         years = sorted({y for m in members if (y := attested_year(m))})
-        out.append({"members": cards, "run": sorted(run), "spare_lines": spare,
-                    "close_call": close, "attested_years": years,
+        out.append({"members": cards, "run": sorted(run), "decided": bool(dups),
+                    **({"recommended": sorted(recommended)}
+                       if sorted(recommended) != sorted(run) else {}),
+                    "spare_lines": spare, "close_call": close, "attested_years": years,
                     "pairs": [{k: p.get(k) for k in ("a", "b", "page_conc_a", "page_conc_b",
                                                       "pages_a", "pages_b", "folio_agree",
                                                       "folio_pairs", "contain_a", "contain_b",
@@ -604,10 +627,14 @@ def print_groups(groups: list, rows: list):
     for g in groups:
         years = f", title pages read: {g['attested_years']}" if g["attested_years"] else ""
         close = "; CLOSE CALL" if g["close_call"] else ""
-        print(f"edition ({len(g['members'])} scans, {g['spare_lines']:,} spare lines{years}{close})")
+        decided = (f"; DECIDED (measurement chose {', '.join(g['recommended'])})"
+                   if g.get("recommended") else "; DECIDED" if g.get("decided") else "")
+        print(f"edition ({len(g['members'])} scans, {g['spare_lines']:,} spare lines{years}{close}"
+              f"{decided})")
         for c in g["members"]:
-            flag = ("RUN " if c["run"] else "    ") if c["survey_status"] != "not-residential" \
-                else "n/r "
+            status = str(c["survey_status"])
+            flag = ("n/r " if status == "not-residential" else "RUN " if c["run"]
+                    else "dup " if status.startswith("duplicate-of:") else "    ")
             gold = " [gold twin]" if c["gold_twin"] else ""
             print(f"  {flag}{c['id']:30s} {c['letters']:5s} {str(c['ia_date'])[:9]:9s} "
                   f"{str(c['ocr'])[:22]:22s} {c['lines']:8,d} lines {c['lines_per_leaf']:6.1f}/leaf"
@@ -745,7 +772,108 @@ def pairs(args) -> int:
     return 0
 
 
+RUNSET = HERE / "survey_runset.json"
+
+
+def runset_blocks(decision: dict) -> dict:
+    """ident -> the `run_set` sidecar block survey_runset.json gives it."""
+    out = {}
+    for e in decision["editions"]:
+        base = {"edition_run": e["run"], "decided_by": decision["decided_by"],
+                "date": decision["date"], "basis": e["basis"],
+                "decision": str(RUNSET.relative_to(REPO))}
+        out[e["run"]] = {**base, "role": "run"}
+        if e.get("skip_non_entry_pages"):
+            out[e["run"]].update(skip_non_entry_pages=True, skip_reason=e.get("skip_reason"))
+        for d in e["duplicates"]:
+            out[d] = {**base, "role": "duplicate"}
+    return out
+
+
+def apply_stamp(doc: dict, block: dict | None) -> dict:
+    """The sidecar with its run-set decision applied: a duplicate's `survey_status` becomes
+    `duplicate-of:<run>`, keeping what it replaced in `run_set.previous_status`; a volume no
+    longer decided gets that status back. Idempotent."""
+    new = dict(doc)
+    status = doc.get("survey_status")
+    old = doc.get("run_set") or {}
+    was_dup = str(status).startswith("duplicate-of:")
+    if block is None:
+        new.pop("run_set", None)
+        if was_dup:
+            if not old.get("previous_status"):
+                raise SystemExit(f"{doc['id']}: {status} with no previous_status to restore")
+            new["survey_status"] = old["previous_status"]
+        return new
+    block = dict(block)
+    if block["role"] == "duplicate":
+        if status in ("not-residential", "restricted"):
+            raise SystemExit(f"{doc['id']} is {status}; a duplicate stamp would hide that")
+        block["previous_status"] = old.get("previous_status") if was_dup else status
+        new["survey_status"] = f"duplicate-of:{block['edition_run']}"
+    elif was_dup:
+        new["survey_status"] = old.get("previous_status") or status
+    new["run_set"] = block
+    return new
+
+
+def stamp(args) -> int:
+    """Project data_prep/survey_runset.json into the sidecars. Every decided edition must be
+    one measured edition of results/survey_twins_pairs.json, so a decision can never stamp two
+    different editions as each other's copies."""
+    decision = json.loads(RUNSET.read_text(encoding="utf-8"))
+    report = json.loads(Path(args.out_pairs).read_text(encoding="utf-8"))
+    group = {m["id"]: i for i, e in enumerate(report["editions"]) for m in e["members"]}
+    for e in decision["editions"]:
+        ids = [e["run"], *e["duplicates"]]
+        if len({group.get(i, -1 - n) for n, i in enumerate(ids)}) != 1:
+            raise SystemExit(f"{e['run']}: {ids} are not one edition in {args.out_pairs}")
+    blocks = runset_blocks(decision)
+    changed = collections.Counter()
+    for p in sorted(SIDECARS.glob("ia_*.json")):
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        block = blocks.pop(doc["id"], None)
+        if block is None and not doc.get("run_set"):
+            continue
+        new = apply_stamp(doc, block)
+        if new == doc:
+            continue
+        what = (f"{doc.get('survey_status')} -> {new.get('survey_status')}"
+                if new.get("survey_status") != doc.get("survey_status") else "run_set block")
+        changed[what.split(" -> ")[-1].split(":")[0]] += 1
+        print(f"  {doc['id']:30s} {what}")
+        if args.write:
+            p.write_text(json.dumps(new, indent=1), encoding="utf-8")
+    if blocks:
+        raise SystemExit(f"decided but no sidecar: {sorted(blocks)}")
+    n = sum(changed.values())
+    print(f"{n} sidecars {'written' if args.write else 'would change (dry run; --write)'}"
+          f"{': ' + dict(changed).__repr__() if n else ''}")
+    return 0
+
+
 def _self_test() -> int:
+    doc = {"id": "m", "survey_status": "frontmatter-done"}
+    dup = {"edition_run": "b", "role": "duplicate"}
+    once = apply_stamp(doc, dup)
+    assert once["survey_status"] == "duplicate-of:b"
+    assert once["run_set"]["previous_status"] == "frontmatter-done"
+    assert apply_stamp(once, dup) == once, "stamping twice changes nothing"
+    assert apply_stamp(once, None) == doc, "an undecided volume gets its status back"
+    moved = apply_stamp(once, {"edition_run": "c", "role": "duplicate"})
+    assert moved["run_set"]["previous_status"] == "frontmatter-done", "a re-target keeps it"
+    run = apply_stamp(once, {"edition_run": "m", "role": "run"})
+    assert run["survey_status"] == "frontmatter-done", "a duplicate promoted to run"
+    try:
+        apply_stamp({"id": "x", "survey_status": "not-residential"}, dup)
+        raise AssertionError("a not-residential volume must not be stamped a duplicate")
+    except SystemExit:
+        pass
+    live = [{"id": "a", "whole": True, "lines_per_leaf": 42.1},
+            {"id": "b", "whole": True, "lines_per_leaf": 40.9}]
+    assert choose_run(live, []) == (["a"], True), "Brooklyn 1843-44, as measured"
+    assert choose_run(live[1:], [])[0] == ["b"], "and as decided, with a stamped"
+
     assert norm("Clark Alexander, 188:Adams ©. -") == "clark alexander 188 adams"
     assert norm("  Holmes  Isaac,policeman, 53 Butler") == "holmes isaac policeman 53 butler"
     assert eligible("holmes isaac policeman 53 butler")
@@ -784,7 +912,8 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["gold", "pairs", "leafmap"])
+    ap.add_argument("cmd", nargs="?", choices=["gold", "pairs", "leafmap", "stamp"])
+    ap.add_argument("--write", action="store_true", help="stamp: write the sidecars")
     ap.add_argument("--ids", help="comma list of IA identifiers to scan (default: all)")
     ap.add_argument("--out", default=str(RESULTS / "survey_twins_gold.json"))
     ap.add_argument("--out-pairs", default=str(RESULTS / "survey_twins_pairs.json"))
@@ -802,6 +931,8 @@ def main(argv=None) -> int:
         return pairs(args)
     if args.cmd == "leafmap":
         return leafmap(args)
+    if args.cmd == "stamp":
+        return stamp(args)
     ap.error("a command is required")
     return 2
 

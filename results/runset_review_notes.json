@@ -1,0 +1,23 @@
+{
+ "_doc": "Reviewer notes for results/runset_review.html, keyed by the copy survey_twins.py pairs picked. Written 2026-10-02 after reading the excerpts' crops; read by data_prep/survey_runset_review.py. A suggestion for hadro, not a stamp.",
+ "trowsgeneraldir1903p2trow": {
+  "pick": "Keep <code>trowsgeneraldir1903p2trow</code>",
+  "read": "The two copies hold the same printed pages (572 aligned) and nearly the same line counts, but the pick reads 114,534 entry-shaped lines to 100,609 (+14%). The other copy's ABBYY-8 OCR often reads the residence marker <i>h</i> as <i>b</i> (<code>b 279 W 12th</code>), and it garbles dense pages: on leaf 897 it has 6 OCR lines where the pick has 10. Even on the page where it leads most (leaf 823), it misses two entries the pick reads."
+ },
+ "longworthsameric00newy": {
+  "pick": "Keep <code>longworthsameric00newy</code> (on the OCR alone it is a coin flip)",
+  "read": "These are the same photographs uploaded twice: the crops match smudge for smudge, and the pick's images have 1.7&times; the resolution (2,394 px wide against 1,412). Each OCR wins some pages. The pick drops line-initial capitals on leaf 82 (<code>allou</code> for Ballou), and the other garbles leaf 715. Overall they come out within 0.4% (32,869 against 32,996 entry-shaped lines). Keep the pick for its higher-resolution images, which any later re-OCR would read."
+ },
+ "micro_IABROOKLYN_0019": {
+  "pick": "<b>Switch</b> to <code>brooklynalphabet1843unse</code>, the book scan",
+  "read": "The book scan reads 6,846 entry-shaped lines to the microfilm's 4,666 (+47%), over 181 listing pages to 151. The microfilm images are legible, but its OCR drops and merges lines: on leaf 78 it has 10 OCR lines for the 20 entries the book scan reads. The rule chose the microfilm on lines per page (42.1 against 40.9) because from about leaf 148 on, each microfilm frame photographs two pages (leaf 166 is pages 182 and 183)."
+ },
+ "newyorkdirectory00fran": {
+  "pick": "<b>Switch</b> to <code>newyorkdirectory00durs_0</code>, the 1851 reprint, if a reprint is acceptable as the source",
+  "read": "None of the four is the 1786 printing. The pick and <code>fran_0</code> are two scans of the 1889 facsimile reprint. <code>newyorkbrooklynd00durs</code> (1876) resets the pages one for one. All three keep the long s, which the OCR reads as f (<code>ftreet</code>, <code>Jofeph</code>). <code>durs_0</code>, whose title page gives a reprint year of 1851 (IA dates it 1874), reset the type with a modern s. Its OCR reads 57% of the gold lines exactly, against 5% or less for the other three, and 98% of them at &ge;0.8. The cost is provenance: records would cite an 1851 reprint's pages instead of a facsimile of the original. Either way it is about 905 lines. On the random pages, the three long-s copies agree with each other line for line, misreadings included (<code>Water-ftreet</code>), so their green marks there show agreement, not accuracy. The gold page is the fair test."
+ },
+ "brooklyndirector00ogde": {
+  "pick": "Keep <code>brooklyndirector00ogde</code>, and skip its 135 flagged pages",
+  "read": "Every even-numbered leaf from 10 to 292 is a blank verso. On 135 of them the OCR read the facing page backwards through the paper (<code>sited Tn odellaW</code>); the other 7 came out empty. They are not listing pages, and their 2,396 scoped lines would become invented people. Without them, the book scan reads 4,014 entry-shaped lines to the microfilm's 1,805, and it finds 89% of the gold lines at &ge;0.8 against 71%. So it wins on coverage, not on legibility. Its type is faint, and line for line the microfilm OCR sometimes reads better: on leaf 123 the microfilm has <code>Haviland Barnard, lighterman</code> where the book scan has <code>Haviland Fainand: oe</code>, and the microfilm reads more gold lines exactly (41% against 35%). But the microfilm drops lines elsewhere: on leaf 89 it has 6 OCR lines for 11 printed. If Ogden is ever re-OCR'd, the microfilm's bolder images may be the better source. The microfilm's own flagged pages are a different kind: leaf 88 is a listing page whose OCR failed."
+ }
+}

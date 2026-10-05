@@ -37,6 +37,15 @@ SIDECAR = HERE / "survey"
 CSV_PATH = HERE / "master_directories.csv"
 
 
+def stamped(status) -> bool:
+    """A `survey_status` that records a decision about the volume, not a phase's progress:
+    `not-residential`, `restricted`, `duplicate-of:<id>`. A phase script that re-reads a volume
+    must never overwrite one, or a re-run silently un-stamps it (docs/SURVEY_PLAN.md, "Failure
+    register")."""
+    return status in ("not-residential", "restricted") or str(status or "").startswith(
+        "duplicate-of:")
+
+
 def live_csv():
     """-> {(source, id): row}. The CSV as it is NOW, not as phase 0 found it.
 

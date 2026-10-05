@@ -977,7 +977,11 @@ def ditto_lead_candidates(texts, gate=DITTO_FREQ_GATE, min_share=DITTO_MIN_SHARE
             follow[w] = follow.get(w, 0) + 1
     admitted, review, stats = set(), {}, {}
     for w, c in counts.items():
-        if not DITTO_SHAPE.match(w):
+        # A confirmed mark may be letters: ABBYY-8 reads the 1910s Trow/Brooklyn `"` as `ii`,
+        # `n`, `it`, `i`, `ti` on 1.05M run-set lines (measured 2026-10-04). Letters are never
+        # admitted on the numbers alone -- `n` is also "near" in a wrapped address -- only by a
+        # human verdict per volume (data_prep/ditto_decisions.json).
+        if not DITTO_SHAPE.match(w) and w not in confirmed:
             continue
         share, ratio = c / max(n, 1), follow.get(w, 0) / c
         stats[w] = (c, share, ratio)
@@ -1447,6 +1451,15 @@ def _self_test() -> int:
     heads = ["— ■ Telephone Call:"] * 30 + [f"Ackerman{i} lab h 1 Main" for i in range(70)]
     assert "—" not in ditto_lead_candidates(heads, confirmed=("—",))[0], \
         "a heading mark must not be promotable by hand"
+    # ...and a letter-shaped mark is never admitted unconfirmed, however common: Trow 1915's
+    # `ii` leads 33% of its lines, and `n` is also "near" in a wrapped address
+    trow = ["ii Geo J gro 424 E80th"] * 40 + [f"Ackerman{i} lab h 1 Main" for i in range(60)]
+    assert "ii" not in ditto_lead_candidates(trow)[0], "letters are never admitted on counts"
+    assert "ii" in ditto_lead_candidates(trow, confirmed=("ii",))[0], "a human can confirm them"
+    assert normalize_ditto_lead("ii Geo J gro 424 E80th", {"ii"}) == '" Geo J gro 424 E80th'
+    near = ["n fulton h 12 Main"] * 40 + [f"Ackerman{i} lab h 1 Main" for i in range(60)]
+    assert "n" not in ditto_lead_candidates(near, confirmed=("n",))[0], \
+        "a confirmed letter still needs the name-follower ratio"
 
     # --- split_merged_columns: a merged two-column page is cut at the right column's margin
     def word(x, y, t, w=None):

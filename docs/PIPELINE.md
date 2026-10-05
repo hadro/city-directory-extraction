@@ -779,7 +779,40 @@ volume it was decided for.
 > Queues also exist now for `1856BPL` (nothing worth promoting; that volume has no ditto
 > convention) and `longworth1798`.
 
-> **DONE for Trow 1915 (2026-10-04), by hadro, on the page images.** The TSV's one OCR'd line per
+> **Trow 1915's punctuation and digit forms decided (2026-10-04), by hadro, on the page images.**
+> ⚠️ That was the small part. The same day, **letter-shaped readings of the ditto (`ii` `n` `it`
+> `i` `ti`) turned up on 1.05M run-set lines** in six ABBYY-8 volumes (Trow 1915 465k, 1917
+> 443k, the two Brooklyn 1910 halves 112k, Trow 1922/23 34k). DITTO_SHAPE admits only
+> punctuation and digits, so neither the gate nor the review queue ever saw them. A confirmed
+> mark may now be letters (`ditto_lead_candidates`; never on counts alone, since `n` is also
+> "near"). `results/ditto_review_letters.html` put the six volumes' undecided marks, grouped by
+> mark, before hadro: 36 marks on 1.21M lines.
+>
+> **Decided the same day: 33 yes, 3 no.** Rejected: `h` (the residence marker opening a wrapped
+> line, `h Newark N J`), `&`, and `4` (the OCR's `&`). Re-derived, the six volumes' scoped lines
+> led by the ditto rose by **1,208,634**:
+>
+> | volume | ditto-led lines before | after | share of the volume after |
+> |---|---:|---:|---:|
+> | Trow 1915 | 170,512 | 641,596 | 61% |
+> | Trow 1917 | 170,185 | 673,585 | 60% |
+> | Brooklyn 1910, two halves | 6,704 | 126,330 | 58–62% |
+> | Trow 1922/23, two parts | 449,449 | 563,973 | 47–53% |
+>
+> Line counts are unchanged, and `h`/`&`/`4` lines are untouched. **Checked on gold, no GPU:** on
+> the Polk 1917 page inside Trow 1917 (leaf 688), the gold's 60 ditto-led rows read the ditto
+> in IA's line **1 time before, 57 after**. The 3 misses are variants under the page's 500-line
+> floor (`li`, `i.`, `i,`); those marks hold ~15.7k lines across the six volumes, still undecided.
+> One conversion looked false and is not: the gold row `n Dora Mrs h115 Washn pl` prints `"` on
+> the page, so the gold has a transcription slip (left as is pending hadro). The real-OCR panel
+> score for that twin (8.3 row EM, against 63.9 on clean text) needs a Torch run to re-measure.
+>
+> Found while reviewing (hadro): **some late Trow pages have their left edge cut off**, so the
+> leftmost column's first letters are lost (1922/23 p2 leaf 653 prints Stahlberg as `tanlberg`).
+> Pages with 15+ lines touching the image's left edge: 334 in 1922/23 p1, 136 in p2, 300 in
+> 1917 (~66k lines); Brooklyn 1910 has none. Only p2's loss is confirmed by image.
+>
+> The TSV's one OCR'd line per
 > mark could not show the printed glyph, so `data_prep/ditto_review_page.py` puts ten crops per
 > mark, each with the line above it, on a page (`results/ditto_review_<id>.html`). On the scoped
 > lines there were 16 candidates. 14 are OCR readings of the printed `"`: `.1` `1` `,1` `1.` `,.`

@@ -1,0 +1,548 @@
+{
+ "checked": "2026-10-05",
+ "by": "image read (Claude), IIIF page images",
+ "rule": "data_prep/survey_adleaves.py after the corporate-entry shapes (CORP_RX)",
+ "sample": "seeded 20261005, run-set volumes only, at most 3 pages per volume: 16 of the 126 pages the fix cleared, 32 of 3,349 still flagged, 12 of 1,064 listing pages within 0.10 above the bar",
+ "pages": [
+  {
+   "set": "cleared",
+   "volume": "micro_IABROOKLYN_0047",
+   "leaf": 34,
+   "entry_share": 0.073,
+   "bar": 0.05,
+   "label": "listing, OCR mostly failed",
+   "note": "Brooks..Brown; heavy bleed-through"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgenerald192223p1trow",
+   "leaf": 33,
+   "entry_share": 0.463,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgenerald192223p1trow",
+   "leaf": 213,
+   "entry_share": 0.622,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgenerald192223p1trow",
+   "leaf": 891,
+   "entry_share": 0.661,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgenerald192223p2trow",
+   "leaf": 295,
+   "entry_share": 0.602,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldir1903p2trow",
+   "leaf": 903,
+   "entry_share": 0.176,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "N Y ... firms under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldir1905p2trow",
+   "leaf": 889,
+   "entry_share": 0.157,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "N Y ... firms under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldir1906p1trow",
+   "leaf": 1015,
+   "entry_share": 0.164,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "FRAME..FRANCIS, ordinary listing under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldir1909p2trow",
+   "leaf": 949,
+   "entry_share": 0.186,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "N Y ... firms under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldir1910p2trow",
+   "leaf": 487,
+   "entry_share": 0.163,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "KRASENSKY..KRAUS, ordinary listing under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldire1915trow",
+   "leaf": 817,
+   "entry_share": 0.646,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldire1915trow",
+   "leaf": 1094,
+   "entry_share": 0.62,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldire1915trow",
+   "leaf": 1226,
+   "entry_share": 0.515,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldire1917trow",
+   "leaf": 1453,
+   "entry_share": 0.582,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldire1917trow",
+   "leaf": 1454,
+   "entry_share": 0.512,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "cleared",
+   "volume": "trowsgeneraldire1917trow",
+   "leaf": 1667,
+   "entry_share": 0.642,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "corporate block under ad bands"
+  },
+  {
+   "set": "flagged",
+   "volume": "1856BPL",
+   "leaf": 304,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1858BPL",
+   "leaf": 124,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1865BPL",
+   "leaf": 251,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1868BPL",
+   "leaf": 363,
+   "entry_share": 0.123,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1878BPL",
+   "leaf": 121,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1883BPL",
+   "leaf": 671,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1884BPL",
+   "leaf": 1044,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1884BPL",
+   "leaf": 1149,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1886BPL",
+   "leaf": 715,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1886BPL",
+   "leaf": 907,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1897BPL",
+   "leaf": 528,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1903BPL",
+   "leaf": 123,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "1903BPL",
+   "leaf": 1051,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "brooklyndirector00ogde",
+   "leaf": 230,
+   "entry_share": 0.0,
+   "bar": 0.098,
+   "label": "blank, show-through",
+   "note": "blank verso, facing page read through the paper"
+  },
+  {
+   "set": "flagged",
+   "volume": "brooklynnewyorkc1910geor",
+   "leaf": 455,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "brooklynnewyorkc19123broo",
+   "leaf": 543,
+   "entry_share": 0.024,
+   "bar": 0.05,
+   "label": "listing, OCR failed",
+   "note": "VINCENT..VISSHER p.1417 under ad bands; OCR read only crumbs"
+  },
+  {
+   "set": "flagged",
+   "volume": "bub_gb_hY4tAAAAYAAJ",
+   "leaf": 159,
+   "entry_share": 0.033,
+   "bar": 0.144,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "longworthsameric1826newy",
+   "leaf": 245,
+   "entry_share": 0.077,
+   "bar": 0.15,
+   "label": "listing, OCR failed",
+   "note": "Brinckerhoff..Bronson, legible"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0029",
+   "leaf": 50,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0029",
+   "leaf": 57,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0032",
+   "leaf": 124,
+   "entry_share": 0.089,
+   "bar": 0.104,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0032",
+   "leaf": 163,
+   "entry_share": 0.0,
+   "bar": 0.104,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0039",
+   "leaf": 401,
+   "entry_share": 0.043,
+   "bar": 0.05,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0040",
+   "leaf": 85,
+   "entry_share": 0.0,
+   "bar": 0.065,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0042",
+   "leaf": 144,
+   "entry_share": 0.031,
+   "bar": 0.088,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0042",
+   "leaf": 397,
+   "entry_share": 0.0,
+   "bar": 0.088,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0047",
+   "leaf": 81,
+   "entry_share": 0.0,
+   "bar": 0.05,
+   "label": "ad and listing, bleed-through",
+   "note": "ads over a few Foster entries"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0047",
+   "leaf": 110,
+   "entry_share": 0.0,
+   "bar": 0.05,
+   "label": "listing with ad band, bleed-through",
+   "note": "Hodge..Hoffman under an ad"
+  },
+  {
+   "set": "flagged",
+   "volume": "micro_IABROOKLYN_0047",
+   "leaf": 202,
+   "entry_share": 0.0,
+   "bar": 0.05,
+   "label": "listing, OCR failed",
+   "note": "legible microfilm listing; OCR produced fragments"
+  },
+  {
+   "set": "flagged",
+   "volume": "trowsgeneraldir1908p4trow",
+   "leaf": 241,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "flagged",
+   "volume": "trowsgeneraldire19073trow",
+   "leaf": 652,
+   "entry_share": 0.0,
+   "bar": 0.09,
+   "label": "blank, show-through",
+   "note": "near-blank page, faint show-through"
+  },
+  {
+   "set": "flagged",
+   "volume": "trowsnewyorkcity1876trow",
+   "leaf": 227,
+   "entry_share": 0.0,
+   "bar": 0.15,
+   "label": "ad",
+   "note": "full-page advertisement"
+  },
+  {
+   "set": "near",
+   "volume": "brooklynnewyorkc00broo",
+   "leaf": 303,
+   "entry_share": 0.187,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "BROOKLYN ... firm block under heavy ad bands"
+  },
+  {
+   "set": "near",
+   "volume": "longworthsameric1798newy",
+   "leaf": 583,
+   "entry_share": 0.146,
+   "bar": 0.1,
+   "label": "listing",
+   "note": "Tyler..Valentine"
+  },
+  {
+   "set": "near",
+   "volume": "micro_IABROOKLYN_0013",
+   "leaf": 44,
+   "entry_share": 0.242,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "Everit..Farren"
+  },
+  {
+   "set": "near",
+   "volume": "micro_IABROOKLYN_0021",
+   "leaf": 84,
+   "entry_share": 0.057,
+   "bar": 0.05,
+   "label": "listing, OCR mostly failed",
+   "note": "Fish..Flanders, bleed-through"
+  },
+  {
+   "set": "near",
+   "volume": "micro_IABROOKLYN_0033",
+   "leaf": 548,
+   "entry_share": 0.154,
+   "bar": 0.15,
+   "label": "listing",
+   "note": "Tompkins..Towle"
+  },
+  {
+   "set": "near",
+   "volume": "micro_IABROOKLYN_0039",
+   "leaf": 223,
+   "entry_share": 0.111,
+   "bar": 0.05,
+   "label": "listing",
+   "note": "JOH-JON"
+  },
+  {
+   "set": "near",
+   "volume": "micro_IABROOKLYN_0039",
+   "leaf": 256,
+   "entry_share": 0.065,
+   "bar": 0.05,
+   "label": "listing, OCR mostly failed",
+   "note": "LOG-LON"
+  },
+  {
+   "set": "near",
+   "volume": "micro_IABROOKLYN_0040",
+   "leaf": 78,
+   "entry_share": 0.122,
+   "bar": 0.065,
+   "label": "listing",
+   "note": "CAS"
+  },
+  {
+   "set": "near",
+   "volume": "micro_IABROOKLYN_0042",
+   "leaf": 526,
+   "entry_share": 0.138,
+   "bar": 0.088,
+   "label": "listing",
+   "note": "WIL-WIN"
+  },
+  {
+   "set": "near",
+   "volume": "trowsgeneraldir1908p2trow",
+   "leaf": 201,
+   "entry_share": 0.139,
+   "bar": 0.105,
+   "label": "listing",
+   "note": "GELLUSSER..GENEVA under ad bands"
+  },
+  {
+   "set": "near",
+   "volume": "trowsgeneraldire19073trow",
+   "leaf": 757,
+   "entry_share": 0.097,
+   "bar": 0.09,
+   "label": "listing",
+   "note": "WEINGART..WEINSTEIN, faint print"
+  },
+  {
+   "set": "near",
+   "volume": "trowsgeneraldire19142trow",
+   "leaf": 711,
+   "entry_share": 0.196,
+   "bar": 0.101,
+   "label": "listing",
+   "note": "MEINHOLD..MELBY"
+  }
+ ]
+}

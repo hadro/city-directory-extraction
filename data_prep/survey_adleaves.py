@@ -79,10 +79,26 @@ ENTRY_FLOOR = 0.05      # below this a page is never listing, whatever its volum
 #    and after a trade: "Davis Samuel, engineer n Gold");
 #  - the side of a street, the rural Bronx villages' way ("w s Clinton 2d h w Seventh", "n w c
 #    Governeur & Morris av"); without it Morrisania's whole listing read as non-entry.
+#  - a CORPORATION's entry, which has no residence marker and wraps over three or four narrow
+#    lines (added 2026-10-04): an incorporation or trade-name tag ("Ukrainian Exch Inc (N Y)",
+#    "Electric Novelty Co (RTN)"), a firm word opening its parties ("Co (", "Assn ("), an
+#    officer ("Sol Kashman pres", "nett mgr 147 W23d", "sec131 Bowery"), or an address in the
+#    directory's own form ("124 E14th", "Bway R309"). Without it, 82 of the 87 flagged pages in
+#    Trow 1915, 1917 and 1922/23 were "AMERICAN ...", "NATIONAL ..." listing pages: Trow 1917
+#    leaf 245 scored 0.03, and 0.65 with it. None of the four forms appears in ad copy, which
+#    capitalises its firm ("ROOFING CO.") and spells out its street ("52 Stone Street").
+TAGS = (r"N ?Y|RTN|TN|N ?J|Pa|Del|Conn|Mass|Me|Va|W ?Va|Ill|Ohio|Mich|R ?I|Md|Ind|Wis|Mo|Cal"
+        r"|Ky|Tenn|Ga|N ?H|Vt|Minn|La|Tex|Can|Eng")
+CORP_RX = re.compile(rf"[(<](?:{TAGS})\)"
+                     r"|\b(?:Co|Inc|Corp|Corpn|Assn|Soc|Exch|Mfg|Bros|Cos|Ltd|Agcy)\b\.?\s*[(<]"
+                     r"|\b(?:pres|v-pres|v-ps?|sec|treas|sec-treas|mgr|agt|supt)(?:\b|(?=\d))"
+                     r"|\b\d{1,5}\s+[NSEW]\s?\d{1,3}(?:st|d|th)\b"
+                     r"|\bR\d{3,4}\b")
 ENTRY_RX = re.compile(r"\b(?:h|r|b|bds|res|rms|ho|house)\.?(?:\s+(?:\d|[A-Z][a-z])|\d)"
                       r"|^\W{0,3}[A-Z][A-Za-z'’]+,?\s+[A-Z][A-Za-z.]*[,.]?.*?\b\d{1,5},?\s+[A-Z][a-z]"
                       r"|[A-Za-z]{3,}\s+(?:nr|n|c|cor|near|bet)\.?\s+[A-Z][a-z]"
-                      r"|\b(?:[nsew]\s){1,2}[sc]\s+[A-Z0-9]")
+                      r"|\b(?:[nsew]\s){1,2}[sc]\s+[A-Z0-9]"
+                      r"|" + CORP_RX.pattern)
 
 
 def residential_leaves(doc: dict) -> set:
@@ -184,6 +200,13 @@ def inventory(args) -> int:
                          "non_entry_share": round(lost / scoped, 4) if scoped else None,
                          "leaves": [{k: r[k] for k in ("leaf", "lines", "entry_share",
                                                         "ad_score", "scoped")} for r in bad]}
+        if args.write and not bad:
+            # a volume whose last flagged page was cleared must lose the block, or its stale
+            # leaves keep reaching the stager (it used to be left as it was)
+            path = SIDECARS / f"ia_{ident}.json"
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            if doc.pop("non_entry_pages", None) is not None:
+                path.write_text(json.dumps(doc, indent=1), encoding="utf-8")
         if args.write and bad:
             path = SIDECARS / f"ia_{ident}.json"
             doc = json.loads(path.read_text(encoding="utf-8"))   # re-read: never clobber others
@@ -191,7 +214,9 @@ def inventory(args) -> int:
                 "method": "entry-shape", "derived": _dt.date.today().isoformat(),
                 "entry_min": ENTRY_MIN, "scoped_lines": lost,
                 "note": "pages inside residential runs whose OCR lines are not entry-shaped: "
-                        "full-page ads, or listing pages the OCR failed on. Not yet cut by scope.",
+                        "full-page ads, blank pages read through the paper, or listing pages "
+                        "the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them "
+                        "by default, and they are the re-OCR queue.",
                 "leaves": [r["leaf"] for r in bad]}
             path.write_text(json.dumps(doc, indent=1), encoding="utf-8")
     out = RESULTS / "adleaf_inventory.json"
@@ -240,11 +265,24 @@ def _self_test() -> int:
                   "Baxter John, lbr., Orchard nr Anderson av",
                   "Sasche John, shoemkr, n s Milton 1st h e Courtland av",
                   "Eyan James, peddler, n w c Governeur & Morris av",
-                  "Davis Samuel, engineer n Gold"):
+                  "Davis Samuel, engineer n Gold",
+                  # corporations, Trow 1917 leaf 245 and 1922/23 p2 leaf 295 (2026-10-04)
+                  "ii Ukrainian Exch Inc (N Y) Simon Vad-", "ii Star Line Inc <N Y) Moses Ginsberg",
+                  '" Electric Novelty Co (RTN) (Sol Beid-', "11 Display Co (TN) (David BonSeld)",
+                  "Sol Kashman pres Simon Kashman", "nett mgr 147 W23d", "124 E14th", "Bway R309"):
         assert ENTRY_RX.search(entry), entry
     for ad in ("No. 113— American Pulpit. Price. 10 cents.", "5 PARK PLACE - - - - MANHATTAN",
                "The Brooklyn Eagle Almanac", "Telephone 828 Bushwick"):
         assert not ENTRY_RX.search(ad), ad
+    # ad copy that names a firm and an address, from flagged pages read off the image: the
+    # corporate shapes must add none of it (the all-caps first line already matched the
+    # name-then-address form before them; its page still scores 0.00)
+    for ad in ("NEW YORK ROOF REPAIRING CO., 100 William Street, New York City",
+               "50 & 52 Stone Street", "L. L.WALDORF CO.",
+               "Conner's United States Type Foundry, Nos. 29, 31 & 33 Beekman Street",
+               "Hugh McAtamney Co. Woolworth Building Phone 7760 Barclay",
+               "PHONE — JOHN 31S1 See Advertisement in Roofers' Dept."):
+        assert not CORP_RX.search(ad), ad
     print("self-test ok")
     return 0
 

@@ -684,10 +684,10 @@
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-09-29",
+  "derived": "2026-10-05",
   "entry_min": 0.15,
   "scoped_lines": 1191,
-  "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, or listing pages the OCR failed on. Not yet cut by scope.",
+  "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    499,
    701,

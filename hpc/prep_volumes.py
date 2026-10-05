@@ -23,9 +23,14 @@ The run set is hadro's (data_prep/survey_runset.json, stamped into the sidecars 
 `data_prep/survey_twins.py stamp`). A volume stamped `duplicate-of:<id>` is another scan of an
 edition the corpus run reads elsewhere, so staging it would count its people twice: it is
 refused unless --allow-duplicates (run 2 staged two microfilm copies on purpose, to compare
-them with their book scans). A volume whose `run_set` says `skip_non_entry_pages` loses the lines
-on its `non_entry_pages` leaves: Ogden 1839's book scan, whose 135 blank versos the OCR read
-through the paper.
+them with their book scans).
+
+Flagged pages are skipped by default (2026-10-05): the lines on a volume's `non_entry_pages`
+leaves (data_prep/survey_adleaves.py) never reach the model, which would make people of them.
+An image check of 32 flagged run-set pages found no listing page with usable OCR among them:
+17 full-page ads, 2 blank pages read through the paper (Ogden's 135 versos are this kind), and
+13 listing pages whose OCR failed, mostly legible microfilm. Those 13 hold real entries, so the
+skipped pages are also the re-OCR queue. --keep-non-entry stages them anyway.
 
 Writes, under --out:
     <id>/chunk_000.jsonl ...   the lines, in volume order, unchanged
@@ -46,14 +51,14 @@ SRC = REPO / "data" / "survey_ocr"
 SIDECARS = REPO / "data_prep" / "survey"
 
 
-def run_set(ident: str):
-    """(survey_status, the leaves the run set says to skip) from the volume's sidecar."""
+def run_set(ident: str, keep_non_entry: bool = False):
+    """(survey_status, the leaves to skip) from the volume's sidecar: its flagged non-entry
+    pages, unless keep_non_entry."""
     p = SIDECARS / f"ia_{ident}.json"
     if not p.exists():
         return None, set()
     d = json.loads(p.read_text(encoding="utf-8"))
-    skip = set((d.get("non_entry_pages") or {}).get("leaves") or []) \
-        if (d.get("run_set") or {}).get("skip_non_entry_pages") else set()
+    skip = set() if keep_non_entry else set((d.get("non_entry_pages") or {}).get("leaves") or [])
     return d.get("survey_status"), skip
 
 
@@ -102,6 +107,8 @@ def main(argv=None) -> int:
                          "each staged as its own pseudo-volume named after the file")
     ap.add_argument("--allow-duplicates", action="store_true",
                     help="stage volumes stamped duplicate-of: (a scan comparison, not the corpus)")
+    ap.add_argument("--keep-non-entry", action="store_true",
+                    help="stage the lines on flagged non-entry pages too (skipped by default)")
     ap.add_argument("--chunk", type=int, default=10000, help="lines per array task")
     ap.add_argument("--out", default=str(REPO / "data" / "volumes"))
     ap.add_argument("--self-test", action="store_true")
@@ -117,7 +124,7 @@ def main(argv=None) -> int:
     sources = [(i, SRC / f"{i}_listing.jsonl.gz") for i in (args.ids or "").split(",") if i]
     sources += [(Path(f).name.replace("_eval.jsonl", "").replace(".jsonl", ""), Path(f).resolve())
                 for f in args.files]
-    plan = {ident: run_set(ident) for ident, _src in sources}
+    plan = {ident: run_set(ident, args.keep_non_entry) for ident, _src in sources}
     dups = {i: s for i, (s, _skip) in plan.items() if str(s).startswith("duplicate-of:")}
     if dups and not args.allow_duplicates:
         ap.error("another copy of these editions is in the run set (data_prep/survey_runset.json"

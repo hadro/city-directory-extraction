@@ -1367,13 +1367,37 @@ What it adds to the survey:
 
   A corporation's entry names officers and a business address (`ii Scientific Instrument Co Inc
   (N Y) Oscar A Boehm pres … 50 John`), and no residence marker, so ENTRY_RX misses it. The four
-  late Trows carry 42,346 of the 97,682 flagged lines left in the run set. So no flagged page is
-  cut corpus-wide until ENTRY_RX reads a corporate entry and the inventory is re-checked.
-- **Nothing is cut yet, except Ogden's versos** (run-set decision, above). The marks sit in the
-  sidecars, and `assemble_records.py` carries them
-  as a flag. Whether `scope` should drop these lines, or the stager skip them, is a decision.
-  The two kinds want different handling: an ad page should be skipped, while a failed listing page
-  should be re-read from the image, which is what the vision OCR question in PIPELINE.md comes to.
+  late Trows carry 42,346 of the 97,682 flagged lines left in the run set.
+
+  **Fixed 2026-10-05: ENTRY_RX now reads a corporate entry** (`CORP_RX`): an incorporation or
+  trade-name tag (`(N Y)`, `(RTN)`), a firm word opening its parties (`Co (`), a lowercase officer
+  (`pres`, `sec-treas`, `mgr`), or the directory's address form (`124 E14th`, `R2174`). Ad copy
+  capitalises its firm and spells out its street, and the self-test pins six such lines that must
+  not match. Trow 1917 leaf 245 went 0.03 → 0.65; the ads, the failed page and an Ogden verso
+  stayed at 0.00–0.02. Corpus-wide, **flagged lines went 108,523 → 58,674 (0.67% → 0.36%)**:
+  128 pages cleared, 87 of them in the four late Trows, which now hold 5 flagged pages. Ogden's
+  135 versos are unchanged. Three Trow volumes gained 1–2 flags each, because a higher median
+  raised their bar. The inventory also now drops a stale `non_entry_pages` block from a volume
+  whose last flag cleared (it used to leave it).
+
+  **Checked off the images** (`results/adleaf_check_2026-10-05.json`; seeded, run-set volumes,
+  at most 3 pages per volume):
+
+  | sample | pages | what they are |
+  |---|---:|---|
+  | cleared by the fix | 16 | 16 listing pages (one with mostly failed OCR) |
+  | still flagged | 32 | 17 full-page ads · 2 blank pages read through the paper · 13 listing pages whose OCR failed (11 legible microfilm or book pages, 2 under heavy bleed-through) · **0 listing pages with usable OCR** |
+  | listing, within 0.10 above the bar | 12 | 12 listing pages (2 with mostly failed OCR) |
+
+  No page feature separates an ad from a failed-OCR listing: ad score, line count and letter
+  votes all overlap. What separates them is mostly the scan: the failed pages are microfilm.
+- **Flagged pages are skipped at staging by default (2026-10-05).** `hpc/prep_volumes.py` drops
+  the lines on every `non_entry_pages` leaf, 50,299 run-set lines (0.34%), and records them per
+  volume as `skipped_leaves`; `--keep-non-entry` stages them. No flagged page in the check held
+  usable entries, so nothing the model could read correctly is lost. But 13 of the 32 were
+  listing pages, so the skipped pages are also the **re-OCR queue**: re-reading one that turns
+  out to be an ad costs only that page, and it is flagged again. `scope` itself still cuts
+  nothing, and `assemble_records.py` still carries the flag.
 
 #### The original design
 

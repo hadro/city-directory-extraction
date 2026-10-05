@@ -238,6 +238,21 @@ are covered. Done: the full **Polk 1933/34** outer-borough set — Staten Island
 terse style, Bronx-rich). Next: the std tail (Smith col-transition, Spooner, Reynolds, the NYPL
 early-Manhattan run), or shift to **depth** (more lines/volume) now that breadth is broad.
 
+### Corrections to gold after export
+
+`data/` is gitignored, so a fix to a gold file leaves no history except here. Each fix keeps the
+original under `data/_gold_backup/` and names the image that settled it.
+
+| date | set · row | was | now | evidence |
+|---|---|---|---|---|
+| 2026-10-04 | polk1917 · line 10 (`raw_line` only) | `n Dora Mrs h115 Washn pl` | `" Dora Mrs h115 Washn pl` | the page (Trow 1917 twin, leaf 688) prints the ditto `"`; the row's own `name` already read `" Dora Mrs`. Found when the letter-ditto admission converted this line and the gold disagreed (PIPELINE.md #1). `validate_gold` does not check a leading ditto token, so it never flagged the drift |
+
+What a fix leaves stale, until re-run: clean-panel predictions for the row (the model read the
+old `raw_line`), `results/implied_surname_validation.json` (it lists this row as an illustrative
+false negative; no headline count includes it), and the `historical-ocr-eval` bench, which reads
+gold from this directory. The copy in `data/iapanel/iapanel_polk1917__trowsgeneraldire1917trow.jsonl`
+(`context.gold_raw_line`) was updated with it.
+
 ## Reading F1 vs EM (for scoring runs)
 For **sparse fields** (spouse/employer/race/home), read **F1 (non-empty), not EM** — high EM there
 is just empty-matches-empty. `evaluate.py` separates them.

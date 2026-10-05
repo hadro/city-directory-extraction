@@ -804,7 +804,8 @@ volume it was decided for.
 > in IA's line **1 time before, 57 after**. The 3 misses are variants under the page's 500-line
 > floor (`li`, `i.`, `i,`); those marks hold ~15.7k lines across the six volumes, still undecided.
 > One conversion looked false and is not: the gold row `n Dora Mrs h115 Washn pl` prints `"` on
-> the page, so the gold has a transcription slip (left as is pending hadro). The real-OCR panel
+> the page, so the gold had a transcription slip (corrected 2026-10-04 on hadro's word; see
+> GROUND_TRUTH_HANDOFF.md, "Corrections to gold after export"). The real-OCR panel
 > score for that twin (8.3 row EM, against 63.9 on clean text) needs a Torch run to re-measure.
 >
 > Found while reviewing (hadro): **some late Trow pages have their left edge cut off**, so the

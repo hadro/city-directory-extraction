@@ -785,6 +785,68 @@ rows the OCR delivers. The worst gaps have causes the pipeline could still addre
 - The Trow 1917 twin of polk1917 is 8.3 against 63.9. Its ditto `"` is read `ii` and never
   normalized (next step 18).
 
+### Run 3 (2026-10-06): the real-OCR panel after the ingest fixes
+
+```bash
+# predictions unpacked into data/volumes_panel3; all 21 SHA-1 sidecars match the staged chunks
+python3 postprocess/copy_guard.py --volumes data/volumes_panel3 --run 4b-100k
+python3 eval/ia_panel.py score --run 4b-100k --preds-dir data/volumes_panel3 \
+    --out results/ia_panel_run3.json
+```
+
+Torch job 19264497, 21 tasks on L40S. This run measures next step 26 (`li` → `h`, side-band
+scraps) and the letter-ditto verdicts on the model's real input. 16 sets had unchanged inputs
+and kept run 2's predictions; their SHA-1 sidecars matched. 5 were predicted again: boyd1890,
+lain, trow1907, and the Hearnes and Polk twins (1,052 lines).
+
+| whole-row EM on IA's line (guarded) | run 2 | run 3 | clean text |
+|---|---|---|---|
+| all 21 sets, 2,310 rows | 44.5 (48.6) | **47.2 (51.4)** | |
+| the 17 sets with clean-text predictions, 1,699 rows | 47.4 (52.1) | **51.1 (55.9)** | 73.7 (80.6) |
+| boyd1890 | 24.3 | **73.0** | 90.5 |
+| polk1917's twin in Trow 1917 | 8.3 (8.3) | **47.2 (48.6)** | 63.9 |
+
+- **No row went from right to wrong.** In boyd1890, 37 rows were fixed: 16 by the marker and 21
+  by scraps stripped from either end of the line. In the Polk twin, 28 were fixed, 23 of them by
+  `ii` read as the ditto. The other three re-predicted sets changed 1–4 input lines each and no
+  row's score.
+- **Compare runs by `context.gold_row`, never by position.** The rebuilt boyd1890 panel lost
+  gold row 9 and gained row 74, so row k of run 2 is not row k of run 3. A positional diff shows
+  four false regressions.
+- **Boyd's 20 wrong rows:**
+  - 10 still carry scraps, on pages whose band failed the guards.
+  - 4 are commuters' entries with a parenthetical, such as `(label cutter N Y)`. The model
+    misses these on clean text too: they are 6 of its 7 wrong boyd1890 rows there. This is a
+    convention the model never learned, not OCR.
+  - 3 are letter misreads (`Golden`/Colden).
+  - 3 are panel pairing errors, where `align` matched the gold row to a neighbour at the same
+    house. For example, `Costan William` is paired with `Covert William A` (gold rows 12, 73
+    and 74).
+- **What the OCR costs is now 22.6 points** of whole-row EM (24.7 guarded), down from 26.3.
+  trow1907 is unchanged at 7.4.
+- The copy guard fixed 144 fields and broke 6. Its rules were tuned on this panel, so this is
+  not a test.
+
+**The held re-derive, applied after scoring (2026-10-06).** Steps, in order:
+- `survey_harvest.py --rederive` with `fix_digit_s` and the ditto tail verdicts, on the 70
+  ABBYY-8 volumes outside the `defer` tier;
+- then `survey_derive.py sections` and `scope` on the same volumes;
+- then `run_tiers.py --rescan`.
+
+Brooklyn 1912 p3 (`brooklynnewyorkc19123broo`) is left out: it is being re-OCR'd (step 27), and
+that job reads its sections.
+
+Results:
+- **S → 8:** 168,902 fixes. The dry run's 128,666 counted run-set volumes only.
+- **Ditto tails:** applied to all six letter-ditto volumes, adding 11,754 ditto-led lines.
+- **Unchanged:** kept lines in every volume, every section run, and every volume's tier.
+- **Leading-zero rates** rose slightly in 34 volumes, because `0S` now reads `08`.
+- **On the rebuilt panel**, the repair changes two trow1907 lines, both to the gold's number
+  (`S7 Chambers` → `87`, `41S` → `418`). Lines identical to gold stay at 1,399.
+
+Panel run 3's inputs are kept in `data/iapanel_run3/`, with the manifest they were built under,
+and staged in `data/volumes_panel3/`.
+
 ---
 
 ## What is NOT in the pipeline yet
@@ -867,8 +929,9 @@ volume it was decided for.
 > 1906BPL is re-derived (ditto-led lines 134,124 → 136,103). Its `*` and `1` stay out, though
 > confirmed: a capitalised word follows them only 42% and 20% of the time volume-wide, under the
 > 0.70 floor no verdict overrides (the review page had measured listing pages only; it now uses
-> the gate's own ratio). **The six ABBYY-8 volumes take their tail verdicts at the post-panel
-> re-derive**, with `fix_digit_s`, so panel run 3's inputs stay what it measures.
+> the gate's own ratio). The six ABBYY-8 volumes took their tail verdicts at the post-panel
+> re-derive, with `fix_digit_s`, so that panel run 3's inputs stayed what it measured. **Applied
+> 2026-10-06:** 11,754 more ditto-led lines across the six (stage 6, "Run 3").
 >
 > Found while reviewing (hadro): **some late Trow pages have their left edge cut off**, so the
 > leftmost column's first letters are lost (1922/23 p2 leaf 653 prints Stahlberg as `tanlberg`).
@@ -1007,8 +1070,9 @@ read the residence marker `h` as `li`. It scored 24.3 row EM against 90.5 on cle
   and lines delivered are unchanged. Across all 21 sets 1,329 → 1,399, which includes the
   letter-ditto change: Polk 1917's copy in Trow 1917 went 3 → 34. Boyd's 13 left: 6 scraps on
   pages whose band failed the guards, 4 letter misreads (`Golden`/Colden), 3 alignment pairs.
-  Row EM needs a Torch run. Run 2's panel inputs are kept in `data/iapanel_run2/`, the files its
-  predictions were made on.
+  Run 2's panel inputs are kept in `data/iapanel_run2/`, the files its predictions were made on.
+- **Row EM, panel run 3 (2026-10-06):** boyd1890 went from 24.3 to **73.0**, and Polk 1917's
+  copy in Trow 1917 from 8.3 to **47.2**. No row went from right to wrong. See stage 6, "Run 3".
 
 ## Medium effort, high information
 
@@ -1273,8 +1337,9 @@ and against the panel gold:
 - **`S` → `8`** where only a digit can stand (`S3`, `1S4`, `Sth`) is right 89% of the time on the
   twins (583 of 656) and 4 of 4 on the gold. It is applied to ABBYY-8 volumes
   (`fix_digit_s`, `survey_harvest.derive`), and a dry run counts 128,666 fixes across the 53
-  ABBYY-8 run-set volumes. **It takes effect at the next re-derive, held until the real-OCR
-  panel's run 3 is scored**, so that run's staged inputs stay what it measures.
+  ABBYY-8 run-set volumes. It was held until the real-OCR panel's run 3 was scored, so that
+  run's staged inputs would stay what it measured. **It was applied on 2026-10-06: 168,902
+  fixes in 70 volumes** (stage 6, "Run 3").
 - **A leading `0` → `6` is rejected.** It is right 67% of the time on Brooklyn, but 0 of 9 on the
   trow1907 gold, where Trow's font turned 9 into 0 (`08th` for 98th). A wrong repair would also
   hide a visible error behind a plausible street.

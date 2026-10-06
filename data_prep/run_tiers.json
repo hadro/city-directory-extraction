@@ -1,6 +1,6 @@
 {
  "_doc": "Tiers for the corpus run: data_prep/run_tiers.py builds this; hpc/prep_volumes.py --corpus --tier <tier> stages one. See the script.",
- "built": "2026-10-05",
+ "built": "2026-10-06",
  "totals": {
   "first": {
    "volumes": 60,
@@ -271,58 +271,58 @@
   },
   "brooklynnewyor1912p3broo": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.68%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.74%: digits damaged",
    "lines": 62094,
-   "leading_zero": 0.03681,
+   "leading_zero": 0.03737,
    "overridden": false
   },
   "brooklynnewyork1905p1geor": {
    "tier": "abbyy8-damaged",
    "why": "ABBYY-8, leading-zero numbers 0.96%: digits damaged",
    "lines": 85954,
-   "leading_zero": 0.00957,
+   "leading_zero": 0.00961,
    "overridden": false
   },
   "brooklynnewyork1909p1geor": {
    "tier": "abbyy8-damaged",
    "why": "ABBYY-8, leading-zero numbers 1.05%: digits damaged",
    "lines": 91310,
-   "leading_zero": 0.01052,
+   "leading_zero": 0.01055,
    "overridden": false
   },
   "brooklynnewyork1910p2geor": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 0.71%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 0.72%: digits damaged",
    "lines": 108719,
-   "leading_zero": 0.00709,
+   "leading_zero": 0.00723,
    "overridden": false
   },
   "brooklynnewyorkc00broo": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 2.82%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 2.84%: digits damaged",
    "lines": 87096,
-   "leading_zero": 0.02818,
+   "leading_zero": 0.02842,
    "overridden": false
   },
   "brooklynnewyorkc1905geor": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 1.43%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 1.44%: digits damaged",
    "lines": 91014,
-   "leading_zero": 0.01428,
+   "leading_zero": 0.01436,
    "overridden": false
   },
   "brooklynnewyorkc1909geor": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 1.22%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 1.23%: digits damaged",
    "lines": 92517,
-   "leading_zero": 0.01219,
+   "leading_zero": 0.01229,
    "overridden": false
   },
   "brooklynnewyorkc1910geor": {
    "tier": "abbyy8-damaged",
    "why": "ABBYY-8, leading-zero numbers 0.51%: digits damaged",
    "lines": 101312,
-   "leading_zero": 0.00511,
+   "leading_zero": 0.00514,
    "overridden": false
   },
   "brooklynnewyorkc19123broo": {
@@ -334,9 +334,9 @@
   },
   "brooklynnewyorkc1912broo": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.79%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.82%: digits damaged",
    "lines": 88515,
-   "leading_zero": 0.03789,
+   "leading_zero": 0.03817,
    "overridden": false
   },
   "bub_gb_hY4tAAAAYAAJ": {
@@ -784,21 +784,21 @@
    "tier": "abbyy8-clean",
    "why": "ABBYY-8, leading-zero numbers 0.16%: as clean as a book scan",
    "lines": 540436,
-   "leading_zero": 0.00162,
+   "leading_zero": 0.00163,
    "overridden": false
   },
   "trowsgenerald192223p2trow": {
    "tier": "abbyy8-clean",
    "why": "ABBYY-8, leading-zero numbers 0.31%: as clean as a book scan",
    "lines": 596008,
-   "leading_zero": 0.00312,
+   "leading_zero": 0.00313,
    "overridden": false
   },
   "trowsgeneraldir1903p1trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.10%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.11%: digits damaged",
    "lines": 149926,
-   "leading_zero": 0.03103,
+   "leading_zero": 0.03113,
    "overridden": false
   },
   "trowsgeneraldir1903p2trow": {
@@ -817,135 +817,135 @@
   },
   "trowsgeneraldir1904p1trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 1.85%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 1.86%: digits damaged",
    "lines": 146706,
-   "leading_zero": 0.01851,
+   "leading_zero": 0.01861,
    "overridden": false
   },
   "trowsgeneraldir1904p2trow": {
    "tier": "abbyy8-damaged",
    "why": "ABBYY-8, leading-zero numbers 1.75%: digits damaged",
    "lines": 157560,
-   "leading_zero": 0.01748,
+   "leading_zero": 0.01753,
    "overridden": false
   },
   "trowsgeneraldir1904p3trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.96%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.97%: digits damaged",
    "lines": 87515,
-   "leading_zero": 0.03959,
+   "leading_zero": 0.03971,
    "overridden": false
   },
   "trowsgeneraldir1905p1trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.32%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.33%: digits damaged",
    "lines": 146844,
-   "leading_zero": 0.03318,
+   "leading_zero": 0.03325,
    "overridden": false
   },
   "trowsgeneraldir1905p2trow": {
    "tier": "abbyy8-damaged",
    "why": "ABBYY-8, leading-zero numbers 1.71%: digits damaged",
    "lines": 150141,
-   "leading_zero": 0.01707,
+   "leading_zero": 0.01712,
    "overridden": false
   },
   "trowsgeneraldir1905p3trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.33%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.34%: digits damaged",
    "lines": 109190,
-   "leading_zero": 0.03331,
+   "leading_zero": 0.03342,
    "overridden": false
   },
   "trowsgeneraldir1906p1trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 2.73%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 2.74%: digits damaged",
    "lines": 141861,
-   "leading_zero": 0.02732,
+   "leading_zero": 0.02742,
    "overridden": false
   },
   "trowsgeneraldir1906p2trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.59%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.60%: digits damaged",
    "lines": 162217,
-   "leading_zero": 0.0359,
+   "leading_zero": 0.03601,
    "overridden": false
   },
   "trowsgeneraldir1906p3trow": {
    "tier": "abbyy8-damaged",
    "why": "ABBYY-8, leading-zero numbers 3.42%: digits damaged",
    "lines": 123627,
-   "leading_zero": 0.03415,
+   "leading_zero": 0.0342,
    "overridden": false
   },
   "trowsgeneraldir1907p1trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 4.54%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 4.57%: digits damaged",
    "lines": 151611,
-   "leading_zero": 0.04544,
+   "leading_zero": 0.04568,
    "overridden": false
   },
   "trowsgeneraldir1907p2trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 4.87%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 4.90%: digits damaged",
    "lines": 180720,
-   "leading_zero": 0.04869,
+   "leading_zero": 0.04903,
    "overridden": false
   },
   "trowsgeneraldir1907p3trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 4.20%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 4.25%: digits damaged",
    "lines": 33475,
-   "leading_zero": 0.04204,
+   "leading_zero": 0.0425,
    "overridden": false
   },
   "trowsgeneraldir1908p1trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 4.05%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 4.06%: digits damaged",
    "lines": 127300,
-   "leading_zero": 0.04049,
+   "leading_zero": 0.04056,
    "overridden": false
   },
   "trowsgeneraldir1908p2trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.58%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.59%: digits damaged",
    "lines": 43542,
-   "leading_zero": 0.03579,
+   "leading_zero": 0.03593,
    "overridden": false
   },
   "trowsgeneraldir1908p3trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.06%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.07%: digits damaged",
    "lines": 57282,
-   "leading_zero": 0.03056,
+   "leading_zero": 0.03067,
    "overridden": false
   },
   "trowsgeneraldir1908p4trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.39%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.40%: digits damaged",
    "lines": 92278,
-   "leading_zero": 0.0339,
+   "leading_zero": 0.034,
    "overridden": false
   },
   "trowsgeneraldir1909p1trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 4.86%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 4.87%: digits damaged",
    "lines": 170353,
-   "leading_zero": 0.04862,
+   "leading_zero": 0.04873,
    "overridden": false
   },
   "trowsgeneraldir1909p2trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.78%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.79%: digits damaged",
    "lines": 175281,
-   "leading_zero": 0.03784,
+   "leading_zero": 0.03785,
    "overridden": false
   },
   "trowsgeneraldir1909p3trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.08%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.09%: digits damaged",
    "lines": 122265,
-   "leading_zero": 0.03083,
+   "leading_zero": 0.03092,
    "overridden": false
   },
   "trowsgeneraldir1910p1trow": {
@@ -1029,21 +1029,21 @@
    "tier": "abbyy8-damaged",
    "why": "ABBYY-8, leading-zero numbers 0.68%: digits damaged",
    "lines": 138830,
-   "leading_zero": 0.00678,
+   "leading_zero": 0.00679,
    "overridden": false
   },
   "trowsgeneraldire19073trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 3.69%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 3.72%: digits damaged",
    "lines": 40469,
-   "leading_zero": 0.03693,
+   "leading_zero": 0.0372,
    "overridden": false
   },
   "trowsgeneraldire19091trow": {
    "tier": "abbyy8-damaged",
-   "why": "ABBYY-8, leading-zero numbers 4.07%: digits damaged",
+   "why": "ABBYY-8, leading-zero numbers 4.10%: digits damaged",
    "lines": 40493,
-   "leading_zero": 0.04072,
+   "leading_zero": 0.04097,
    "overridden": false
   },
   "trowsgeneraldire19142trow": {

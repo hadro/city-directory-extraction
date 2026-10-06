@@ -308,6 +308,7 @@
     "leaves": 0
    },
    "marker_fixes": 174,
+   "digit_fixes": 2090,
    "kept": 1402489,
    "keep_rate": 0.9477,
    "dropped": {
@@ -323,6 +324,7 @@
     ",,",
     ",.",
     ",1",
+    "-",
     ".",
     ".,",
     "..",
@@ -331,9 +333,13 @@
     "1,",
     "1.",
     "11",
+    "41",
+    "a",
+    "hi",
     "i",
     "ii",
     "in",
+    "ir",
     "it",
     "m",
     "n",
@@ -341,9 +347,13 @@
     "ti",
     "tt",
     "u",
-    "\u201e"
+    "\u00ab",
+    "\u00bb",
+    "\u201e",
+    "\u20221",
+    "\u25a01"
    ],
-   "ditto_applied": 669188,
+   "ditto_applied": 671189,
    "ditto_confirmed": [
     "ii",
     "n",
@@ -363,14 +373,24 @@
     ",.",
     "u",
     "t",
-    "in"
+    "in",
+    "\u25a0",
+    "\u00ab",
+    "a",
+    "\u25a01",
+    "\u20221",
+    "-",
+    "hi",
+    "\u00bb",
+    "ir",
+    "41"
    ],
    "band": {
-    "leaves_banded": 1865,
-    "head": 2614,
-    "body": 1119205,
-    "foot": 260,
-    "unbanded": 280410
+    "leaves_banded": 1866,
+    "head": 2530,
+    "body": 1119844,
+    "foot": 259,
+    "unbanded": 279856
    },
    "top_ad_leaves": [
     204,
@@ -384,8 +404,8 @@
     118,
     3
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "f5deb88-dirty",
+   "derived": "2026-10-06"
   },
   "words_gz_bytes": 113242429,
   "hocr_deleted": true,
@@ -908,8 +928,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-06",
+  "code_at": "f5deb88-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1152,8 +1172,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-06",
+  "code_at": "f5deb88-dirty",
   "file": "data/survey_ocr/trowsgeneraldire1917trow_listing.jsonl.gz",
   "sections": [
    {

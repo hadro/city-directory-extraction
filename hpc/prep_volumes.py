@@ -9,8 +9,16 @@ Stage whole volumes for a Torch prediction run (hpc/35_volumes.sbatch). Runs on 
     python3 hpc/prep_volumes.py --ids micro_IABROOKLYN_0030,merceinscitydire00merc
     python3 hpc/prep_volumes.py --ids ... --chunk 10000 --out data/volumes
     python3 hpc/prep_volumes.py --ids ... --files data/iapanel/*.jsonl   # + eval files
+    python3 hpc/prep_volumes.py --corpus --plan                         # sizes only, no writes
+    python3 hpc/prep_volumes.py --corpus --chunk 20000 --out data/volumes_corpus
     tar czf cde-volumes.tar.gz data/volumes          # ship next to the bundle
     python3 hpc/prep_volumes.py --self-test
+
+`--corpus` stages the decided run set: every surveyed volume with listing-scoped lines that is
+neither `not-residential` nor `duplicate-of:` (153 volumes, 2026-10-05). `--plan` sizes a staging
+from the sidecars' counts (scope.kept less the flagged pages' lines) without reading or writing a
+line. A job array has a size limit, so the submit commands come in batches of --max-array tasks,
+each with a TASK_OFFSET that hpc/35_volumes.sbatch adds to SLURM_ARRAY_TASK_ID.
 
 Reads the listing-scoped lines the corpus survey writes (data/survey_ocr/<id>_listing.jsonl.gz:
 residential sections only, each line tagged `context.section`) and splits each volume into plain
@@ -36,13 +44,17 @@ Writes, under --out:
     <id>/chunk_000.jsonl ...   the lines, in volume order, unchanged
     tasks.txt                  one line per chunk: "<id> <chunk path> <n lines>" -- the array index
     manifest.json              per chunk: lines, first/last leaf, sha1; per volume: source, totals
+    staging.json               what was staged, from which code, and what was skipped
 """
 from __future__ import annotations
 
 import argparse
+import datetime as _dt
 import gzip
 import hashlib
 import json
+import math
+import subprocess
 import sys
 from pathlib import Path
 
@@ -60,6 +72,44 @@ def run_set(ident: str, keep_non_entry: bool = False):
     d = json.loads(p.read_text(encoding="utf-8"))
     skip = set() if keep_non_entry else set((d.get("non_entry_pages") or {}).get("leaves") or [])
     return d.get("survey_status"), skip
+
+
+def corpus_ids() -> list:
+    """The decided run set, from the sidecars: listing-scoped lines, residential, not a copy."""
+    out = []
+    for p in sorted(SIDECARS.glob("ia_*.json")):
+        d = json.loads(p.read_text(encoding="utf-8"))
+        status = str(d.get("survey_status"))
+        if ((d.get("scope") or {}).get("kept") and status != "not-residential"
+                and not status.startswith("duplicate-of:")):
+            out.append(d["id"])
+    return out
+
+
+def planned_lines(ident: str, keep_non_entry: bool) -> int:
+    """Lines a staging would write for the volume, from its sidecar's counts alone."""
+    d = json.loads((SIDECARS / f"ia_{ident}.json").read_text(encoding="utf-8"))
+    kept = (d.get("scope") or {}).get("kept") or 0
+    skipped = 0 if keep_non_entry else (d.get("non_entry_pages") or {}).get("scoped_lines") or 0
+    return kept - skipped
+
+
+def submit_lines(n_tasks: int, max_array: int) -> list:
+    """sbatch commands covering n_tasks in batches no larger than the cluster's array limit."""
+    return [f"TASK_OFFSET={o} sbatch $(slurm_gpu_args) --export=ALL,TASK_OFFSET={o} "
+            f"--array=0-{min(max_array, n_tasks - o) - 1} hpc/35_volumes.sbatch"
+            for o in range(0, n_tasks, max_array)]
+
+
+def git_rev() -> str:
+    try:
+        rev = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO, text=True,
+                             capture_output=True).stdout.strip()
+        dirty = subprocess.run(["git", "status", "--porcelain"], cwd=REPO, text=True,
+                               capture_output=True).stdout.strip()
+        return rev + ("-dirty" if dirty else "")
+    except OSError:
+        return "unknown"
 
 
 def split(ident: str, out: Path, chunk: int, src: Path = None, skip_leaves=()) -> list:
@@ -110,13 +160,33 @@ def main(argv=None) -> int:
     ap.add_argument("--keep-non-entry", action="store_true",
                     help="stage the lines on flagged non-entry pages too (skipped by default)")
     ap.add_argument("--chunk", type=int, default=10000, help="lines per array task")
+    ap.add_argument("--corpus", action="store_true", help="stage the decided run set")
+    ap.add_argument("--plan", action="store_true",
+                    help="size the staging from sidecar counts; write nothing")
+    ap.add_argument("--max-array", type=int, default=1000,
+                    help="the cluster's job-array size limit: submit commands are batched by it")
     ap.add_argument("--out", default=str(REPO / "data" / "volumes"))
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
+    if args.corpus:
+        if args.ids:
+            ap.error("--corpus stages the run set; drop --ids")
+        args.ids = ",".join(corpus_ids())
     if not args.ids and not args.files:
-        ap.error("--ids or --files is required")
+        ap.error("--ids, --corpus or --files is required")
+    if args.plan:
+        ids = [i for i in args.ids.split(",") if i]
+        lines = {i: planned_lines(i, args.keep_non_entry) for i in ids}
+        total = sum(lines.values())
+        for size in sorted({args.chunk, 10000, 20000}):
+            n = sum(math.ceil(v / size) for v in lines.values() if v)
+            print(f"chunk {size:6,d}: {n:5,d} array tasks, ~{size / 7.3 / 60:4.0f} min each on an "
+                  f"L40S, ~{size / 11.88 / 60:4.0f} on an H200", file=sys.stderr)
+        print(f"{len(ids)} volumes, {total:,} lines: ~{total / 7.3 / 3600:.0f} L40S GPU-hours, "
+              f"~{total / 11.88 / 3600:.0f} H200 (4B, measured 2026-09-28)", file=sys.stderr)
+        return 0
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -143,11 +213,17 @@ def main(argv=None) -> int:
     (out / "tasks.txt").write_text("\n".join(tasks) + "\n", encoding="utf-8")
     (out / "manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
     total = sum(v["lines"] for v in manifest.values())
+    (out / "staging.json").write_text(json.dumps({
+        "staged": _dt.date.today().isoformat(), "code_at": git_rev(), "corpus": args.corpus,
+        "run_set": "data_prep/survey_runset.json" if args.corpus else None,
+        "chunk": args.chunk, "volumes": len(manifest), "lines": total, "tasks": len(tasks),
+        "keep_non_entry": args.keep_non_entry,
+        "skipped_leaves": sum(len(v.get("skipped_leaves", [])) for v in manifest.values()),
+    }, indent=1) + "\n", encoding="utf-8")
     print(f"\n{len(tasks)} array tasks, {total:,} lines: ~{total / 7.3 / 3600:.1f} L40S GPU-hours "
           f"at 7.3 rows/s, ~{total / 11.88 / 3600:.1f} H200 at 11.88 (4B, measured 2026-09-28)",
           file=sys.stderr)
-    print(f"submit with: sbatch $(slurm_gpu_args) --array=0-{len(tasks) - 1} "
-          f"hpc/35_volumes.sbatch", file=sys.stderr)
+    print("submit with:", *submit_lines(len(tasks), args.max_array), sep="\n  ", file=sys.stderr)
     return 0
 
 
@@ -169,6 +245,9 @@ def _self_test() -> int:
         kept = split("v", tmp / "out", 10, skip_leaves={11, 13})
         assert [c["lines"] for c in kept] == [10, 5], "a skipped leaf's five lines are gone"
         assert (kept[0]["first_leaf"], kept[1]["last_leaf"]) == (10, 14)
+        assert submit_lines(2500, 1000)[-1].endswith("--array=0-499 hpc/35_volumes.sbatch")
+        assert len(submit_lines(2500, 1000)) == 3 and "TASK_OFFSET=2000" in submit_lines(2500, 1000)[2]
+        assert submit_lines(21, 1000) == [submit_lines(21, 1000)[0]] and "0-20" in submit_lines(21, 1000)[0]
     finally:
         SRC = real
     print("self-test OK", file=sys.stderr)

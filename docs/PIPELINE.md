@@ -310,6 +310,29 @@ PYTORCH_ENABLE_MPS_FALLBACK=1 PYTHONPATH=<tf5-dir> <python> eval/qwen_predict.py
 
 **`--target` must match what the adapter was trained with** (`yaml` for all current adapters).
 
+### The corpus run, staged (2026-10-05)
+
+```bash
+python3 hpc/prep_volumes.py --corpus --plan                  # sizes from sidecar counts, no writes
+python3 hpc/prep_volumes.py --corpus --chunk 20000 --out data/volumes_corpus
+tar -czf cde-volumes-corpus.tar.gz -s ',^data/volumes_corpus,data/volumes,' data/volumes_corpus
+#   on Torch, in $PROJECT: tar xzf it, source hpc/env.sh, then run each printed submit line
+python3 postprocess/copy_guard.py --volumes data/volumes_corpus --run 4b-100k
+python3 postprocess/assemble_records.py --root data/volumes_corpus --run 4b-100k+guard
+```
+
+`--corpus` stages the decided run set from the sidecars: 153 volumes, **14,871,643 lines** with
+duplicates and flagged pages excluded, ~348 H200-hours at 11.88 rows/s. That is 1,569 array
+tasks at 10k lines or 835 at 20k, about 28 minutes each on an H200. The array limit is unknown,
+so the submit lines come in batches of `--max-array` (default 1000), and `35_volumes.sbatch` adds
+each batch's `TASK_OFFSET` to the array index. `staging.json` records what was staged and from
+which code.
+
+`assemble_records.py` reports a volume whose predictions are missing, short or **stale** as
+incomplete, skips it and exits 1, instead of stopping the whole run. Stale means made from
+another staging of the chunk, caught by the chunk SHA-1 the cluster writes beside each
+prediction. Checked on Boyd 1890's restaged panel chunk against run 2's predictions.
+
 ### Which adapter
 
 | adapter | EM normalized | note |

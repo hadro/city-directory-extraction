@@ -13,6 +13,7 @@
 #
 #     source hpc/env.sh                     # with MODEL_SIZE=4B
 #     sbatch $(slurm_gpu_args) --array=0-<N-1> hpc/35_volumes.sbatch
+#     (a corpus of more tasks than the array limit: the batched lines prep_volumes.py prints)
 #
 # Chunks and tasks.txt come from hpc/prep_volumes.py (run on the laptop, shipped as
 # cde-volumes.tar.gz and unpacked into $DATA/volumes). Task i reads line i+1 of tasks.txt.
@@ -40,7 +41,9 @@ export TOKENIZERS_PARALLELISM=false
 [ -f "$ADAPTER/adapter_config.json" ] || { echo "no adapter at $ADAPTER" >&2; exit 1; }
 [ -f "$VOL/tasks.txt" ] || { echo "no $VOL/tasks.txt -- unpack cde-volumes.tar.gz" >&2; exit 1; }
 
-i="${SLURM_ARRAY_TASK_ID:?run as an array job}"
+# A job array has a size limit, so the corpus is submitted in batches: TASK_OFFSET (exported by
+# the submit lines hpc/prep_volumes.py prints) is added to the array index.
+i=$(( ${SLURM_ARRAY_TASK_ID:?run as an array job} + ${TASK_OFFSET:-0} ))
 read -r IDENT CHUNK NLINES < <(sed -n "$((i + 1))p" "$VOL/tasks.txt")
 [ -n "${IDENT:-}" ] || { echo "no task $i in tasks.txt" >&2; exit 1; }
 IN="$VOL/$CHUNK"

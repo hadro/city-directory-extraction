@@ -61,6 +61,7 @@ import collections
 import csv
 import datetime as _dt
 import gzip
+import hashlib
 import json
 import re
 import sys
@@ -86,18 +87,30 @@ CSV_COLUMNS = (["record_id", "volume", "leaf", "printed_page", "printed_page_how
                 "eval_holdout", "usable"])
 
 
+class Incomplete(Exception):
+    """A volume whose predictions do not cover its chunks: it is skipped and reported, never
+    assembled from part of its lines."""
+
+
 def load_run(vdir: Path, run: str) -> list:
-    """[(line, record)] in volume order; a count mismatch is fatal, never truncated."""
+    """[(line, record)] in volume order. A missing, short or stale prediction file makes the
+    volume Incomplete, never truncated. Stale means made from another staging of the chunk: the
+    cluster writes the chunk's SHA-1 beside each prediction (hpc/35_volumes.sbatch), and a
+    restaged chunk keeps its name."""
     out = []
     for c in sorted(vdir.glob("chunk_*.jsonl")):
-        lines = [json.loads(x) for x in c.read_text(encoding="utf-8").splitlines() if x.strip()]
+        raw = c.read_bytes()
+        lines = [json.loads(x) for x in raw.decode("utf-8").splitlines() if x.strip()]
         p = c.with_name(f"{c.stem}.preds_{run}.txt")
         if not p.exists():
-            raise SystemExit(f"missing predictions {p}")
+            raise Incomplete(f"missing predictions {p.name}")
+        sha = p.with_name(p.name + ".sha1")
+        if sha.exists() and sha.read_text().strip() != hashlib.sha1(raw).hexdigest():
+            raise Incomplete(f"{p.name} was made from another staging of {c.name}")
         preds = load_pred(str(p), "yaml")
         if len(preds) != len(lines):
-            raise SystemExit(f"{p}: {len(preds)} records for {len(lines)} lines -- they must "
-                             f"align 1:1")
+            raise Incomplete(f"{p.name}: {len(preds)} records for {len(lines)} lines -- they "
+                             f"must align 1:1")
         out += list(zip(lines, preds))
     return out
 
@@ -264,9 +277,15 @@ def main(argv=None) -> int:
         vols = [v for v in vols if v in set(args.ids.split(","))]
     out_dir = Path(args.out) / args.run
     report = {"derived": _dt.date.today().isoformat(), "run": args.run, "root": args.root,
-              "volumes": {}}
+              "volumes": {}, "incomplete": {}}
     for ident in vols:
-        rows, summary = assemble(ident, load_run(root / ident, args.run))
+        try:
+            pairs = load_run(root / ident, args.run)
+        except Incomplete as e:
+            report["incomplete"][ident] = str(e)
+            print(f"{ident:30s} INCOMPLETE: {e}")
+            continue
+        rows, summary = assemble(ident, pairs)
         write(rows, out_dir, ident)
         report["volumes"][ident] = summary
         per = summary["usable_per_stated_name"]
@@ -275,6 +294,9 @@ def main(argv=None) -> int:
     path = Path(args.summary or REPO / "results" / f"records_{args.run}.json")
     path.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
     print(f"-> {out_dir}/<volume>.jsonl.gz, .csv.gz; summary {path}")
+    if report["incomplete"]:
+        print(f"{len(report['incomplete'])} volumes incomplete, not assembled: re-run their chunks")
+        return 1
     return 0
 
 

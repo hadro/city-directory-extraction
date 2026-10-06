@@ -164,7 +164,7 @@ def main(argv=None) -> int:
     ap.add_argument("--chunk", type=int, default=10000, help="lines per array task")
     ap.add_argument("--corpus", action="store_true", help="stage the decided run set")
     ap.add_argument("--tier", help="with --corpus: only these tiers of data_prep/run_tiers.json "
-                                   "(first, check, defer; comma list)")
+                                   "(first, abbyy8-clean, abbyy8-damaged, defer; comma list)")
     ap.add_argument("--plan", action="store_true",
                     help="size the staging from sidecar counts; write nothing")
     ap.add_argument("--max-array", type=int, default=1000,

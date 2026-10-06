@@ -511,6 +511,10 @@ def derive(ident: str, holdout: dict) -> dict:
     """Filter the dump into candidate lines. Offline; the same code path as a live harvest."""
     p = paths(ident)
     confirmed = confirmed_dittos(ident)
+    side = SIDECARS / f"ia_{ident}.json"
+    ocr = (((json.loads(side.read_text(encoding="utf-8")).get("catalog_says") or {}).get("ia")
+            or {}).get("ocr") or "") if side.exists() else ""
+    abbyy8 = ocr.startswith("ABBYY FineReader 8")   # fix_digit_s was measured on this engine
     dump = WordDump(p["words.jsonl.gz"], ident)
     content = [r["leaf"] for r in dump.records() if r["chars"] > MIN_CHARS_LEAF]
     catalog_pub, year = lookup_master(ident)
@@ -523,7 +527,7 @@ def derive(ident: str, holdout: dict) -> dict:
         stats, reasons, ad_scores, ditto, band = sweep(
             dump, publisher, year, content, True, None, True, dropped_fh, out_fh,
             holdout=holdout, indent_ratio=wraps["indent_ratio"], split_columns=True,
-            confirmed_marks=confirmed)
+            confirmed_marks=confirmed, digit_s=abbyy8)
     dump.close()
     tmp_l.rename(p["lines.jsonl.gz"])
     tmp_d.rename(p["dropped.txt.gz"])
@@ -535,6 +539,7 @@ def derive(ident: str, holdout: dict) -> dict:
         "column_splits": {"lines": stats["splits"], "leaves": stats["split_leaves"]},
         "side_bands": {"words": stats["band_words"], "leaves": stats["band_leaves"]},
         "marker_fixes": stats["marker_fixes"],
+        **({"digit_fixes": stats["digit_fixes"]} if abbyy8 else {}),
         "kept": stats["kept"], "keep_rate": round(stats["kept"] / cand, 4) if cand else None,
         "dropped": dict(sorted(reasons.items(), key=lambda kv: -kv[1])),
         "ditto_marks": ditto["marks"] if ditto else [],

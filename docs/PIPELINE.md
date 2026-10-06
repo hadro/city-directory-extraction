@@ -336,8 +336,18 @@ exception overrides it:
 | tier | volumes | lines | H200-hours | what |
 |---|---:|---:|---:|---|
 | `first` | 60 | 5,518,133 | ~129 | ABBYY-9/11 and older Columbia/NYPL book scans, plus Boyd (61/74 IA lines identical to gold after #26) |
-| `check` | 54 | 9,145,400 | ~214 | ABBYY-8 and pre-`ocr`-field Allen County Trows: lines 87–99% close to their better twins but 30–58% exact. The real-OCR panel's trow1907 and Polk 1917 sets decide |
+| `abbyy8-clean` | 18 | 5,136,257 | ~120 | ABBYY-8 whose numbers are as clean as a book scan's: Trow 1910–1917, 1922/23, three Longworths |
+| `abbyy8-damaged` | 36 | 4,009,143 | ~94 | ABBYY-8 with damaged digits: Trow 1903–1909, Brooklyn 1905–1912 parts |
 | `defer` | 39 | 208,110 | ~5 | BPL microfilm (54% of a book scan's lines, #27), plus Brooklyn 1912 p3 (typical page 0.04 entry-shaped, 186 pages failed OCR): re-OCR first |
+
+The ABBYY-8 split is a gold-free measure (`results/number_damage.json`). ABBYY-8 reads 6
+(Brooklyn's font) or 9 (Trow's) as 0, and a leading 0 is impossible in a house number or street
+ordinal, so its rate measures a volume's digit damage. The book scans' median is 0.08%, with their
+worst tenth above 0.43%. A volume at or below 0.5% counts as clean. Trow 1910–1917 sit at about
+0.01%, and the Trow 1903–1909 parts at 1.6–4.9%, with Trow 1907 p2 the worst; that is the trow1907
+panel volume, which scored 7.4 row EM on IA's lines in run 2. The real-OCR panel tests the split:
+Polk 1917 is in the clean group, trow1907 in the damaged one. A first corpus run of
+`--tier first,abbyy8-clean` is 78 volumes, 10.65M lines, ~249 H200-hours.
 
 `assemble_records.py` reports a volume whose predictions are missing, short or **stale** as
 incomplete, skips it and exits 1, instead of stopping the whole run. Stale means made from
@@ -1177,9 +1187,20 @@ session that owns the OCR bench.
 The same pairing measures the ABBYY-8 tier, which is 53 run-set volumes, 8.89M lines and ~208 of
 the run's ~348 H200-hours. The ABBYY-8 Brooklyn halves reproduce **87–99%** of their ABBYY-9/11
 twins' lines at ratio ≥ 0.8, but only 30–58% exactly. The two weak duplicate halves the run set
-skips scored 57–67%. So ABBYY-8 errors are characters, mostly digits, not lost lines. Whether
-they cost enough records to defer the tier is what the real-OCR panel's trow1907 and Polk 1917
-sets will show.
+skips scored 57–67%. So ABBYY-8 errors are characters, not lost lines. About 3% of number tokens and 10% of word
+tokens differ from the better copy. The dominant number confusion is 6 → 0 in Brooklyn's font
+(`26` → `20`, `16th` → `10th`), with 8 → `S` second. Two repairs were tested against the twins
+and against the panel gold:
+- **`S` → `8`** where only a digit can stand (`S3`, `1S4`, `Sth`) is right 89% of the time on the
+  twins (583 of 656) and 4 of 4 on the gold. It is applied to ABBYY-8 volumes
+  (`fix_digit_s`, `survey_harvest.derive`), and a dry run counts 128,666 fixes across the 53
+  ABBYY-8 run-set volumes. **It takes effect at the next re-derive, held until the real-OCR
+  panel's run 3 is scored**, so that run's staged inputs stay what it measures.
+- **A leading `0` → `6` is rejected.** It is right 67% of the time on Brooklyn, but 0 of 9 on the
+  trow1907 gold, where Trow's font turned 9 into 0 (`08th` for 98th). A wrong repair would also
+  hide a visible error behind a plausible street.
+
+The leading-zero rate became the tier signal above.
 
 ## Larger, and the ones that unblock claims
 

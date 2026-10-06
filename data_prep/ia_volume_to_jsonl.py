@@ -716,6 +716,29 @@ def fix_residence_markers(text):
     return out, n
 
 
+# ABBYY-8's `8` read as `S`, where only a digit can stand: among digits, or before `th`
+# (`S3` -> `83`, `1S` -> `18`, `Sth` -> `8th`). Measured 2026-10-05 against the ABBYY-9/11 copies
+# of the same pages: 583 of 656 such tokens become right (89%), 9 right tokens broken; and 4 of 4
+# on the real-OCR panel's gold (trow1907, hearne1852). `S` -> `5` would be right 1% of the time.
+# Not `Sd` (a `d` ordinal follows only 2 and 3), and never a lone `S` or `S.` (South, an initial).
+# The other impossible form, a leading `0`, is NOT repaired: Brooklyn's ABBYY-8 font turns 6 into
+# 0 (67% right as 6) but Trow's turns 9 into 0 (0 of 9 right on the trow1907 gold), and a wrong
+# repair hides a visible error behind a plausible street (`08th` -> `68th` for 98th).
+DIGIT_S_RX = re.compile(r"\d+S\d*|S\d+|Sth")
+
+
+def fix_digit_s(text):
+    """(text, n): ABBYY-8's `S` for `8` put back where only a digit can stand."""
+    tokens, n = [], 0
+    for tok in text.split(" "):
+        core = tok.strip(",.;:")
+        if DIGIT_S_RX.fullmatch(core):
+            new = core.replace("S", "8", 1)
+            tok, n = tok.replace(core, new, 1), n + 1
+        tokens.append(tok)
+    return " ".join(tokens), n
+
+
 def split_merged_columns(lines, dims):
     """Undo tesseract reading straight across a two-column page's gutter. Returns (lines, n).
 
@@ -1226,7 +1249,7 @@ def leaf_bands(buffered, marks, pad=BAND_PAD, min_lines=BAND_MIN_DITTO_LINES):
 
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
           normalize_dittos=True, confirmed_marks=(), band=True, deep_indent=False,
-          holdout=None, indent_ratio=INDENT_RATIO, split_columns=False):
+          holdout=None, indent_ratio=INDENT_RATIO, split_columns=False, digit_s=False):
     """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
 
     `indent_ratio` is the wrap-join threshold (see calibrate_indent). `split_columns` cuts hOCR
@@ -1242,7 +1265,7 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
     lines are emitted with `context.eval_holdout` so no consumer has to remember to filter them.
     """
     stats = {"leaves": 0, "raw": 0, "joins": 0, "kept": 0, "splits": 0, "split_leaves": 0,
-             "band_words": 0, "band_leaves": 0, "marker_fixes": 0}
+             "band_words": 0, "band_leaves": 0, "marker_fixes": 0, "digit_fixes": 0}
     reasons, ad_scores, buffered = {}, [], []
     for n, leaf in enumerate(leaves, 1):
         if split_columns:
@@ -1321,6 +1344,9 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
         dittoed = out != text
         out, fixed = fix_residence_markers(out)
         stats["marker_fixes"] += fixed
+        if digit_s:                                  # ABBYY-8 volumes only: where it was measured
+            out, fixed = fix_digit_s(out)
+            stats["digit_fixes"] += fixed
         ctx = {
             "publisher": publisher,                  # already a trained token (tag_publisher)
             "directory_year": year or "",
@@ -1659,6 +1685,11 @@ def _self_test() -> int:
         "a leading li is a ditto reading (Trow 1917)"
     assert fix_residence_markers("Wong Li laundry 12 Pell")[1] == 0
     assert fix_residence_markers("Bellini Tullio, li 12 Mott")[0] == "Bellini Tullio, h 12 Mott"
+    # --- fix_digit_s: ABBYY-8's S for 8, only where a digit must stand
+    assert fix_digit_s("Smith Wm lab h S3 Sth av") == ("Smith Wm lab h 83 8th av", 2)
+    assert fix_digit_s("Jones Jno clk h 1S4, W 4th") == ("Jones Jno clk h 184, W 4th", 1)
+    assert fix_digit_s("Sands S. lab h 12 S 3d") == ("Sands S. lab h 12 S 3d", 0), "S alone: South"
+    assert fix_digit_s("Sloan h 5 Sd av")[1] == 0, "Sd is not 8d: d follows only 2 and 3"
 
     # --- split_merged_columns: a merged two-column page is cut at the right column's margin
     def word(x, y, t, w=None):

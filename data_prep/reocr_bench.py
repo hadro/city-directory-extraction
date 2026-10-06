@@ -455,17 +455,79 @@ def merge(args) -> int:
     return 0
 
 
+# A vision model describes the page as well as reading it: churro-3B wrote 83 such lines on 42
+# pages ("Single page from a printed directory.", "Page 57 of the Brooklyn Directory, listing
+# individuals with the surname Hall and..."), two per page (2026-10-06).
+DESCRIPTION_RX = re.compile(r"^(single page|page \d+ of|this (page|is)|a page|the page|"
+                            r"listing (names|individuals))", re.I)
+
+
+def hybrid_page(boxed: dict, text: dict | None) -> dict:
+    """The boxed run's lines and boxes, each line's text replaced by the text run's reading of
+    the same printed line (ratio >= PAIR_TEXT, each text line used once), after dropping the text
+    run's page descriptions. A page the text run never finished keeps the boxed run's text."""
+    if not text:
+        return dict(boxed)
+    cand = [(t, norm(t)) for t in text["lines"] if not DESCRIPTION_RX.search(t.strip())]
+    used, lines = set(), []
+    for t in boxed["lines"]:
+        n, best, best_r = norm(t), None, PAIR_TEXT
+        for j, (u, nu) in enumerate(cand):
+            if j not in used:
+                r = difflib.SequenceMatcher(None, n, nu, autojunk=False).ratio()
+                if r >= best_r:
+                    best, best_r = j, r
+        if best is None:
+            lines.append(t)
+        else:
+            used.add(best)
+            lines.append(cand[best][0])
+    return {"volume": boxed["volume"], "leaf": boxed["leaf"], "lines": lines,
+            "boxes": boxed.get("boxes")}
+
+
+def hybrid(args) -> int:
+    boxed, text = load_candidate(Path(args.base)), load_candidate(Path(args.other))
+    rows = [hybrid_page(boxed[k], text.get(k)) for k in sorted(boxed)]
+    path = RUNS / f"{args.name}.jsonl"
+    path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+    print(f"{len(rows)} pages ({sum(k in text for k in boxed)} with text-run readings) -> "
+          f"{path.relative_to(REPO)}", file=sys.stderr)
+    return 0
+
+
+BODY_RX = re.compile(r"<Body>(.*?)(?:</Body>|$)", re.S)
+LINE_RX = re.compile(r"<Line[^>]*>(.*?)</Line>", re.S)
+
+
+def body_lines(raw: str) -> list:
+    """The `<Line>`s of a Churro document's `<Body>`. Churro answers with an XML document whose
+    `<Metadata>` describes the page ("<PhysicalDescription>Single page from a printed
+    directory."), names its `<Script>` and `<Language>`, and whose `<Header>` holds the running
+    title and folio. The runner's flattening kept all of it as lines: those were the "descriptive
+    lines" (2026-10-06). An output cut off mid-document keeps the lines it finished."""
+    import html as _html
+    m = BODY_RX.search(raw)
+    return [_html.unescape(t).strip() for t in LINE_RX.findall(m.group(1) if m else "")
+            if t.strip()]
+
+
 def import_run(args) -> int:
     """historical-ocr-eval's runners write `<stem>_<slug>.txt` beside each staged image, one line
-    per printed line (engines/run_churro.py prints the slug): -> data/reocr_runs/<slug>.jsonl."""
+    per printed line (engines/run_churro.py prints the slug): -> data/reocr_runs/<slug>.jsonl.
+    --from-raw reads the saved `<stem>_<slug>.raw.txt` instead, keeping only the body lines of a
+    structured answer (body_lines)."""
     rows = []
-    for txt in sorted(STAGE.rglob(f"*_{args.slug}.txt")):
-        base = txt.name[:-len(f"_{args.slug}.txt")]
+    suffix = ".raw.txt" if args.from_raw else ".txt"
+    for txt in sorted(STAGE.rglob(f"*_{args.slug}{suffix}")):
+        base = txt.name[:-len(f"_{args.slug}{suffix}")]
         volume, leaf = base.rsplit("_", 1)
-        lines = [t for t in txt.read_text(encoding="utf-8").splitlines() if t.strip()]
+        text = txt.read_text(encoding="utf-8")
+        lines = (body_lines(text) if args.from_raw
+                 else [t for t in text.splitlines() if t.strip()])
         rows.append({"volume": volume, "leaf": int(leaf), "lines": lines})
     RUNS.mkdir(parents=True, exist_ok=True)
-    path = RUNS / f"{args.slug}.jsonl"
+    path = RUNS / f"{args.slug}{'-body' if args.from_raw else ''}.jsonl"
     path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
     print(f"{len(rows)} pages -> {path.relative_to(REPO)}", file=sys.stderr)
     return 0
@@ -483,6 +545,13 @@ def _self_test() -> int:
     assert s["expanded"] == 1 and s["abbr_kept"] < 1.0, "an expanded abbreviation is caught"
     s = page_score(ref + ["Wilson Peter, grocer, h 77 Main st"], ref)
     assert s["invented"] == 0.25, "an entry the page does not hold"
+    raw = ("<HistoricalDocument><Metadata><PhysicalDescription>Single page from a printed "
+           "directory.</PhysicalDescription><Script>Latin</Script></Metadata><Page><Header>"
+           "<Line>BROOKLYN DIRECTORY.</Line></Header><Body><Paragraph><Line>Haley Henry, "
+           "accountant Baltic n Smith</Line></Paragraph><Paragraph><Line>Ford John &amp; "
+           "Andrew, grocers</Line></Paragraph><Paragraph><Line>Hall Jo")
+    assert body_lines(raw) == ["Haley Henry, accountant Baltic n Smith",
+                               "Ford John & Andrew, grocers"], "body only, entities, cut-off safe"
     print("self-test ok")
     return 0
 
@@ -491,26 +560,28 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("cmd", nargs="?", choices=["build", "stage", "tesseract", "import", "merge",
-                                               "score"])
-    ap.add_argument("--base", help="merge: the run whose lines are kept")
-    ap.add_argument("--other", help="merge: the run whose readings may replace them")
+                                               "hybrid", "score"])
+    ap.add_argument("--base", help="merge/hybrid: the run whose lines (and boxes) are kept")
+    ap.add_argument("--other", help="merge/hybrid: the run whose readings may replace them")
     ap.add_argument("--rule", default="conf", choices=["conf", "other"], help="merge: who wins")
     ap.add_argument("--add-unpaired", action="store_true",
                     help="merge: also keep lines only the other run found")
-    ap.add_argument("--name", help="merge: the output run's name")
+    ap.add_argument("--name", help="merge/hybrid: the output run's name")
     ap.add_argument("--candidate", nargs="*", help="score: candidate runs, JSONL {volume, leaf, "
                                                    "lines[, boxes]}")
     ap.add_argument("--variants", default="raw,contrast,sauvola", help="tesseract: preparations")
     ap.add_argument("--psm", type=int, default=3, help="tesseract: page segmentation mode")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--slug", help="import: the engine slug its runner printed")
+    ap.add_argument("--from-raw", action="store_true",
+                    help="import: read <stem>_<slug>.raw.txt and keep a structured answer's body lines")
     ap.add_argument("--out", help="score: write the report as JSON")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
     cmds = {"build": build, "stage": stage, "tesseract": tesseract, "import": import_run,
-            "merge": merge, "score": score}
+            "merge": merge, "hybrid": hybrid, "score": score}
     if args.cmd in cmds:
         return cmds[args.cmd](args)
     ap.error("a command is required")

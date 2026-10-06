@@ -1229,6 +1229,31 @@ drops, a point above IA's abbreviation retention, at a cost of 1.5 points of lin
 Adding lines only the contrast run found changed nothing. **That merge is engine 1's result:
 92% of the book scan's lines against IA's 54%, and 44% of the gold lines exactly against 24%.**
 
+**Engine 2 measured 2026-10-06: Churro-3B, a 3B vision model trained on historical documents,
+on the M2's GPU** (`historical-ocr-eval/engines/run_churro.py --device mps`, unmodified;
+`reocr_bench.py import --slug churro-3b --from-raw`).
+
+| run | pages | close | exact | gold close | gold exact | junk | invented | abbr kept | boxed |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| IA's microfilm OCR | 48 | 53.6% | 19.8% | 55.3% | 23.9% | 3.6% | 2.3% | 79% | yes |
+| tesseract merge | 48 | 92.2% | 34.5% | 93.0% | 43.9% | 5.2% | 2.7% | 80% | yes |
+| Churro-3B, body lines | 42 | 95.3% | 63.6% | 94.9% | 77.3% | 3.4% | 3.0% | 94% | no |
+| **hybrid: merge's lines and boxes, Churro's text** | 48 | **96.1%** | 59.0% | 95.7% | 76.6% | 4.7% | 2.6% | 92% | yes |
+
+- **Churro reads characters far better**: nearly double the merge's exact lines, and 94% of
+  abbreviations kept. Its "descriptive lines" ("Single page from a printed directory.") were not
+  hallucinations. Churro answers with an XML document whose `<Metadata>` describes the page,
+  and the runner's flattening kept that as text. `body_lines` keeps only the `<Body>`'s `<Line>`s,
+  which takes junk from 7.4% to 3.4%, below IA's. Sampling was never the lever: the checkpoint's
+  defaults are near-greedy (temperature 1e-6, repetition penalty 1.05).
+- **It gives no boxes, and on dense pages it does not finish.** 6 of 48 pages hit the runner's
+  15-minute cap: every Brooklyn 1857–58 page and one Smith 1855 page. Pages took ~5 minutes at
+  ~50 lines and 10–29 minutes at ~140 lines on the M2, so the 39 deferred volumes (~7,750 pages)
+  are not a laptop job.
+- **The hybrid** (`reocr_bench.py hybrid`) keeps the merge's lines and boxes and takes Churro's
+  reading of each line it also read, falling back to the merge where Churro timed out. That gives
+  the best line recovery, Churro-level accuracy, and a box on every line.
+
 Every run keeps boxes and expands next to nothing. **Local binarization is what recovers the
 lines.** Tesseract on the raw film frame reports "Empty page!!" without a DPI hint, and Sauvola
 takes the book-scan agreement from 54% to 94%. Its cost is small tokens: it glues `n Johnson` into

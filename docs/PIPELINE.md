@@ -1151,6 +1151,25 @@ records with a missing given name, and uncommon printed street names and abbrevi
 verbatim (`Mhtn`, `Goerck`, `Meserole`). Measure with `volume_run_report.py`'s `widow_names` and
 `substitutions` before and after. Both need no gold, so this is testable without the panel.
 
+**27. Re-OCR the microfilm, measured before anything is spent.** 38 run-set volumes are BPL
+microfilm with no book scan. IA's tesseract delivers about 40% of their lines, and the flagged-page
+check found legible microfilm listing pages it read as fragments. `data_prep/reocr_bench.py`
+(2026-10-05) scores any OCR of a microfilm page against the book scan of the same printed page,
+from the 8 microfilm volumes that are copies of a book scan, and against the gold on 8 gold pages.
+That is 48 pages and 3,174 reference lines, with no labelling. **Baseline (IA's microfilm OCR):
+19.8% of the book scan's lines reproduced exactly, 53.6% at ratio ≥ 0.8; against the gold 23.9%
+and 55.3%.** A candidate engine is scored with
+`reocr_bench.py score --candidate <pages.jsonl>`, one `{volume, leaf, lines}` per page. Running
+an engine costs money or GPU, so it waits on hadro, and possibly on the `historical-ocr-eval`
+session that owns the OCR bench.
+
+The same pairing measures the ABBYY-8 tier, which is 53 run-set volumes, 8.89M lines and ~208 of
+the run's ~348 H200-hours. The ABBYY-8 Brooklyn halves reproduce **87–99%** of their ABBYY-9/11
+twins' lines at ratio ≥ 0.8, but only 30–58% exactly. The two weak duplicate halves the run set
+skips scored 57–67%. So ABBYY-8 errors are characters, mostly digits, not lost lines. Whether
+they cost enough records to defer the tier is what the real-OCR panel's trow1907 and Polk 1917
+sets will show.
+
 ## Larger, and the ones that unblock claims
 
 **10. A whole-volume gold slice.** Hand-label ~200 lines sampled across one volume's *listing*

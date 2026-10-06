@@ -11,6 +11,7 @@ Stage whole volumes for a Torch prediction run (hpc/35_volumes.sbatch). Runs on 
     python3 hpc/prep_volumes.py --ids ... --files data/iapanel/*.jsonl   # + eval files
     python3 hpc/prep_volumes.py --corpus --plan                         # sizes only, no writes
     python3 hpc/prep_volumes.py --corpus --chunk 20000 --out data/volumes_corpus
+    python3 hpc/prep_volumes.py --corpus --tier first --plan             # one tier (run_tiers.py)
     tar czf cde-volumes.tar.gz data/volumes          # ship next to the bundle
     python3 hpc/prep_volumes.py --self-test
 
@@ -61,6 +62,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 SRC = REPO / "data" / "survey_ocr"
 SIDECARS = REPO / "data_prep" / "survey"
+TIERS = REPO / "data_prep" / "run_tiers.json"
 
 
 def run_set(ident: str, keep_non_entry: bool = False):
@@ -161,6 +163,8 @@ def main(argv=None) -> int:
                     help="stage the lines on flagged non-entry pages too (skipped by default)")
     ap.add_argument("--chunk", type=int, default=10000, help="lines per array task")
     ap.add_argument("--corpus", action="store_true", help="stage the decided run set")
+    ap.add_argument("--tier", help="with --corpus: only these tiers of data_prep/run_tiers.json "
+                                   "(first, check, defer; comma list)")
     ap.add_argument("--plan", action="store_true",
                     help="size the staging from sidecar counts; write nothing")
     ap.add_argument("--max-array", type=int, default=1000,
@@ -173,7 +177,20 @@ def main(argv=None) -> int:
     if args.corpus:
         if args.ids:
             ap.error("--corpus stages the run set; drop --ids")
-        args.ids = ",".join(corpus_ids())
+        ids = corpus_ids()
+        if args.tier:
+            if not TIERS.exists():
+                ap.error("no data_prep/run_tiers.json: run data_prep/run_tiers.py")
+            tiers = json.loads(TIERS.read_text(encoding="utf-8"))["volumes"]
+            stale = sorted(set(ids) ^ set(tiers))
+            if stale:
+                ap.error(f"run_tiers.json does not match the run set ({', '.join(stale[:5])}...): "
+                         f"re-run data_prep/run_tiers.py")
+            want = set(args.tier.split(","))
+            ids = [i for i in ids if tiers[i]["tier"] in want]
+        args.ids = ",".join(ids)
+    elif args.tier:
+        ap.error("--tier needs --corpus")
     if not args.ids and not args.files:
         ap.error("--ids, --corpus or --files is required")
     if args.plan:
@@ -215,6 +232,7 @@ def main(argv=None) -> int:
     total = sum(v["lines"] for v in manifest.values())
     (out / "staging.json").write_text(json.dumps({
         "staged": _dt.date.today().isoformat(), "code_at": git_rev(), "corpus": args.corpus,
+        "tier": args.tier,
         "run_set": "data_prep/survey_runset.json" if args.corpus else None,
         "chunk": args.chunk, "volumes": len(manifest), "lines": total, "tasks": len(tasks),
         "keep_non_entry": args.keep_non_entry,

@@ -1,0 +1,941 @@
+{
+ "_doc": "Tiers for the corpus run: data_prep/run_tiers.py builds this; hpc/prep_volumes.py --corpus --tier <tier> stages one. See the script.",
+ "built": "2026-10-05",
+ "totals": {
+  "first": {
+   "volumes": 60,
+   "lines": 5518133,
+   "h200_hours": 129
+  },
+  "check": {
+   "volumes": 54,
+   "lines": 9145400,
+   "h200_hours": 214
+  },
+  "defer": {
+   "volumes": 39,
+   "lines": 208110,
+   "h200_hours": 5
+  }
+ },
+ "volumes": {
+  "1856BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 42885,
+   "overridden": false
+  },
+  "1857BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 46143,
+   "overridden": false
+  },
+  "1858BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 52305,
+   "overridden": false
+  },
+  "1862BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 58440,
+   "overridden": false
+  },
+  "1863BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 61664,
+   "overridden": false
+  },
+  "1864BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 64959,
+   "overridden": false
+  },
+  "1865BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 57239,
+   "overridden": false
+  },
+  "1866BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 72586,
+   "overridden": false
+  },
+  "1867BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 79778,
+   "overridden": false
+  },
+  "1868BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 85518,
+   "overridden": false
+  },
+  "1869BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 86132,
+   "overridden": false
+  },
+  "1871BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 98937,
+   "overridden": false
+  },
+  "1875BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 112718,
+   "overridden": false
+  },
+  "1876BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 117739,
+   "overridden": false
+  },
+  "1878BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 118196,
+   "overridden": false
+  },
+  "1879BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 126488,
+   "overridden": false
+  },
+  "1880BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 129068,
+   "overridden": false
+  },
+  "1883BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 146862,
+   "overridden": false
+  },
+  "1884BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 153827,
+   "overridden": false
+  },
+  "1885BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 162287,
+   "overridden": false
+  },
+  "1886BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 168333,
+   "overridden": false
+  },
+  "1887BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 181737,
+   "overridden": false
+  },
+  "1889BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 192873,
+   "overridden": false
+  },
+  "1897BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 262173,
+   "overridden": false
+  },
+  "1899xBPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 11.0 (BPL)",
+   "lines": 289118,
+   "overridden": false
+  },
+  "1902BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 171974,
+   "overridden": false
+  },
+  "1903BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 175935,
+   "overridden": false
+  },
+  "1904BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (BPL)",
+   "lines": 169888,
+   "overridden": false
+  },
+  "1906BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 11.0 (BPL)",
+   "lines": 193375,
+   "overridden": false
+  },
+  "1907BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 11.0 (BPL)",
+   "lines": 177436,
+   "overridden": false
+  },
+  "1908BPL": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 11.0 (BPL)",
+   "lines": 174545,
+   "overridden": false
+  },
+  "bronxboroughdire1871": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (New York Public Library)",
+   "lines": 5121,
+   "overridden": false
+  },
+  "brooklynalphabet1843unse": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 7394,
+   "overridden": false
+  },
+  "brooklyncitydire1848teal": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 11682,
+   "overridden": false
+  },
+  "brooklyndirector00ogde": {
+   "tier": "first",
+   "why": "book scan, tesseract 5.3.0-3-g9920 (Allen County Public Library Genealogy Center)",
+   "lines": 5270,
+   "overridden": false
+  },
+  "brooklynnewyor1912p3broo": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 62094,
+   "overridden": false
+  },
+  "brooklynnewyork1905p1geor": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 85954,
+   "overridden": false
+  },
+  "brooklynnewyork1909p1geor": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 91310,
+   "overridden": false
+  },
+  "brooklynnewyork1910p2geor": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 108719,
+   "overridden": false
+  },
+  "brooklynnewyorkc00broo": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 87096,
+   "overridden": false
+  },
+  "brooklynnewyorkc1905geor": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 91014,
+   "overridden": false
+  },
+  "brooklynnewyorkc1909geor": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 92517,
+   "overridden": false
+  },
+  "brooklynnewyorkc1910geor": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 101312,
+   "overridden": false
+  },
+  "brooklynnewyorkc19123broo": {
+   "tier": "defer",
+   "why": "typical listing page 0.04 entry-shaped (ABBYY-8 median 0.60); 186 pages failed OCR: re-OCR whole",
+   "lines": 6429,
+   "overridden": true
+  },
+  "brooklynnewyorkc1912broo": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 88515,
+   "overridden": false
+  },
+  "bub_gb_hY4tAAAAYAAJ": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Harvard University)",
+   "lines": 161743,
+   "overridden": false
+  },
+  "doggettsnewyorkc1845dogg": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 61365,
+   "overridden": false
+  },
+  "doggettsnewyorkc1846dogg": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 65800,
+   "overridden": false
+  },
+  "doggettsnewyorkc1847dogg": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 67100,
+   "overridden": false
+  },
+  "doggettsnewyorkc1848dogg": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 67255,
+   "overridden": false
+  },
+  "flushingnewyork188586boyd": {
+   "tier": "first",
+   "why": "Boyd's Flushing series, as Boyd 1890",
+   "lines": 2398,
+   "overridden": true
+  },
+  "flushingnewyork189192boyd": {
+   "tier": "first",
+   "why": "Boyd's Flushing series, as Boyd 1890",
+   "lines": 3132,
+   "overridden": true
+  },
+  "flushingnewyorkc00boyd": {
+   "tier": "first",
+   "why": "Boyd 1890: IA lines 61 of 74 identical to gold after #26",
+   "lines": 3078,
+   "overridden": true
+  },
+  "hearnesbrooklync1850unse": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 14844,
+   "overridden": false
+  },
+  "hearnesbrooklync1852unse": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 20114,
+   "overridden": false
+  },
+  "longworthsameric00newy": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 35726,
+   "overridden": false
+  },
+  "longworthsameric1798newy": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 8462,
+   "overridden": false
+  },
+  "longworthsameric1813newy": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 17283,
+   "overridden": false
+  },
+  "longworthsameric1826newy": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 25105,
+   "overridden": false
+  },
+  "longworthsameric2618long": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 9284,
+   "overridden": false
+  },
+  "longworthsameric3818long": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 14184,
+   "overridden": false
+  },
+  "longworthsameric4018long": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 16861,
+   "overridden": false
+  },
+  "longworthsameric4818long": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 20549,
+   "overridden": false
+  },
+  "longworthsameric6018long": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 37597,
+   "overridden": false
+  },
+  "longworthsameric6118long": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 36213,
+   "overridden": false
+  },
+  "longworthsameric6518long": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 34175,
+   "overridden": false
+  },
+  "merceinscitydire00merc": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 20241,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0001": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 959,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0002": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 1062,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0003": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 1166,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0004": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 1348,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0005": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 1832,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0006": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 1847,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0007": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 2342,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0008": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 2015,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0009": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 2459,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0010": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 3055,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0011": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 2661,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0012": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 3367,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0013": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 2368,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0014": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 2647,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0015": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 3787,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0017": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 2893,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0018": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 4841,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0020": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 7420,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0021": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 2463,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0022": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 3757,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0023": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 9469,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0024": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 8072,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0025": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 8647,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0027": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 9725,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0029": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 9674,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0031": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 4005,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0032": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 7714,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0033": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 17396,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0035": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 27065,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0039": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 8187,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0040": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 7970,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0042": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 14972,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0043": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 4083,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0044": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 4917,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0045": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 1615,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0046": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 1567,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0047": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 550,
+   "overridden": false
+  },
+  "micro_IABROOKLYN_0048": {
+   "tier": "defer",
+   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "lines": 1764,
+   "overridden": false
+  },
+  "newyorkcitydirec00rode": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 108268,
+   "overridden": false
+  },
+  "newyorkdirectory00dunc": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 7814,
+   "overridden": false
+  },
+  "newyorkdirectory00durs_0": {
+   "tier": "first",
+   "why": "book scan, pre-`ocr`-field OCR (Columbia University Libraries)",
+   "lines": 905,
+   "overridden": false
+  },
+  "trowsgenerald192223p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 540436,
+   "overridden": false
+  },
+  "trowsgenerald192223p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 596008,
+   "overridden": false
+  },
+  "trowsgeneraldir1903p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 149926,
+   "overridden": false
+  },
+  "trowsgeneraldir1903p2trow": {
+   "tier": "check",
+   "why": "Allen County scan predating the `ocr` field: with the ABBYY-8 Trows",
+   "lines": 153260,
+   "overridden": false
+  },
+  "trowsgeneraldir1903p3trow": {
+   "tier": "check",
+   "why": "Allen County scan predating the `ocr` field: with the ABBYY-8 Trows",
+   "lines": 106213,
+   "overridden": false
+  },
+  "trowsgeneraldir1904p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 146706,
+   "overridden": false
+  },
+  "trowsgeneraldir1904p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 157560,
+   "overridden": false
+  },
+  "trowsgeneraldir1904p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 87515,
+   "overridden": false
+  },
+  "trowsgeneraldir1905p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 146844,
+   "overridden": false
+  },
+  "trowsgeneraldir1905p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 150141,
+   "overridden": false
+  },
+  "trowsgeneraldir1905p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 109190,
+   "overridden": false
+  },
+  "trowsgeneraldir1906p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 141861,
+   "overridden": false
+  },
+  "trowsgeneraldir1906p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 162217,
+   "overridden": false
+  },
+  "trowsgeneraldir1906p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 123627,
+   "overridden": false
+  },
+  "trowsgeneraldir1907p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 151611,
+   "overridden": false
+  },
+  "trowsgeneraldir1907p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 180720,
+   "overridden": false
+  },
+  "trowsgeneraldir1907p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 33475,
+   "overridden": false
+  },
+  "trowsgeneraldir1908p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 127300,
+   "overridden": false
+  },
+  "trowsgeneraldir1908p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 43542,
+   "overridden": false
+  },
+  "trowsgeneraldir1908p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 57282,
+   "overridden": false
+  },
+  "trowsgeneraldir1908p4trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 92278,
+   "overridden": false
+  },
+  "trowsgeneraldir1909p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 170353,
+   "overridden": false
+  },
+  "trowsgeneraldir1909p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 175281,
+   "overridden": false
+  },
+  "trowsgeneraldir1909p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 122265,
+   "overridden": false
+  },
+  "trowsgeneraldir1910p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 170653,
+   "overridden": false
+  },
+  "trowsgeneraldir1910p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 176681,
+   "overridden": false
+  },
+  "trowsgeneraldir1910p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 151774,
+   "overridden": false
+  },
+  "trowsgeneraldir1911p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 185559,
+   "overridden": false
+  },
+  "trowsgeneraldir1911p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 192696,
+   "overridden": false
+  },
+  "trowsgeneraldir1911p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 138989,
+   "overridden": false
+  },
+  "trowsgeneraldir1912p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 196241,
+   "overridden": false
+  },
+  "trowsgeneraldir1912p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 192356,
+   "overridden": false
+  },
+  "trowsgeneraldir1912p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 139080,
+   "overridden": false
+  },
+  "trowsgeneraldir1914p1trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 183191,
+   "overridden": false
+  },
+  "trowsgeneraldir1914p2trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 155967,
+   "overridden": false
+  },
+  "trowsgeneraldir1914p3trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 138830,
+   "overridden": false
+  },
+  "trowsgeneraldire19073trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 40469,
+   "overridden": false
+  },
+  "trowsgeneraldire19091trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 40493,
+   "overridden": false
+  },
+  "trowsgeneraldire19142trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 55687,
+   "overridden": false
+  },
+  "trowsgeneraldire1915trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 1044471,
+   "overridden": false
+  },
+  "trowsgeneraldire1917trow": {
+   "tier": "check",
+   "why": "ABBYY-8: near-right lines, digit errors; decided by the panel's ABBYY-8 sets",
+   "lines": 1121545,
+   "overridden": false
+  },
+  "trowsnewyorkcity1857trow": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 142895,
+   "overridden": false
+  },
+  "trowsnewyorkcity1859trow": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 146555,
+   "overridden": false
+  },
+  "trowsnewyorkcity1863trow": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 152653,
+   "overridden": false
+  },
+  "trowsnewyorkcity1876trow": {
+   "tier": "first",
+   "why": "book scan, ABBYY FineReader 9.0 (Columbia University Libraries)",
+   "lines": 242485,
+   "overridden": false
+  }
+ }
+}

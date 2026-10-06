@@ -328,6 +328,17 @@ so the submit lines come in batches of `--max-array` (default 1000), and `35_vol
 each batch's `TASK_OFFSET` to the array index. `staging.json` records what was staged and from
 which code.
 
+**Tiers** (`data_prep/run_tiers.py` → `data_prep/run_tiers.json`; stage one with
+`--corpus --tier first`). The H200 goes where the output will be best, and nothing is spent on
+lines a re-OCR will replace. A tier is set per volume from its OCR family, and a measured
+exception overrides it:
+
+| tier | volumes | lines | H200-hours | what |
+|---|---:|---:|---:|---|
+| `first` | 60 | 5,518,133 | ~129 | ABBYY-9/11 and older Columbia/NYPL book scans, plus Boyd (61/74 IA lines identical to gold after #26) |
+| `check` | 54 | 9,145,400 | ~214 | ABBYY-8 and pre-`ocr`-field Allen County Trows: lines 87–99% close to their better twins but 30–58% exact. The real-OCR panel's trow1907 and Polk 1917 sets decide |
+| `defer` | 39 | 208,110 | ~5 | BPL microfilm (54% of a book scan's lines, #27), plus Brooklyn 1912 p3 (typical page 0.04 entry-shaped, 186 pages failed OCR): re-OCR first |
+
 `assemble_records.py` reports a volume whose predictions are missing, short or **stale** as
 incomplete, skips it and exits 1, instead of stopping the whole run. Stale means made from
 another staging of the chunk, caught by the chunk SHA-1 the cluster writes beside each

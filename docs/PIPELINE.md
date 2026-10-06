@@ -1202,6 +1202,33 @@ and 55.3%.** A candidate engine is scored with
 an engine costs money or GPU, so it waits on hadro, and possibly on the `historical-ocr-eval`
 session that owns the OCR bench.
 
+**Engine 1 measured 2026-10-05: tesseract 5.5, run locally, at no cost.**
+`reocr_bench.py stage` puts the 48 images in the layout `historical-ocr-eval`'s engine runners
+read (`engines/run_churro.py` covers Churro-3B, olmOCR-2, PaddleOCR-VL and API providers), and
+`import --slug` brings their output back. `score` now also checks the contract:
+- `abbr_kept`: abbreviation tokens kept;
+- `expanded`: abbreviations spelled out;
+- `invented`: entry-shaped lines matching nothing on the page;
+- `boxed`: lines with boxes.
+
+| run | close | exact | gold close | gold exact | junk | invented | abbr kept |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| IA's microfilm OCR | 53.6% | 19.8% | 55.3% | 23.9% | 3.6% | 2.3% | 79% |
+| tesseract 5.5, raw (`--dpi 300`) | 57.4% | 22.3% | 60.5% | 28.9% | 6.5% | 3.3% | 82% |
+| tesseract 5.5, contrast + unsharp | 74.4% | **29.7%** | 78.6% | **39.6%** | 6.2% | 2.7% | **84%** |
+| **tesseract 5.5, Sauvola (w 41, k 0.2)** | **93.7%** | 29.4% | **93.8%** | 37.9% | 5.2% | 2.5% | 74% |
+| Sauvola, k 0.1 | 76.1% | 9.4% | 83.9% | 12.4% | 8.2% | 3.6% | 67% |
+| Sauvola after 2× upscale | 89.1% | 26.5% | 92.6% | 35.6% | 5.0% | 2.8% | 74% |
+
+Every run keeps boxes and expands next to nothing. **Local binarization is what recovers the
+lines.** Tesseract on the raw film frame reports "Empty page!!" without a DPI hint, and Sauvola
+takes the book-scan agreement from 54% to 94%. Its cost is small tokens: it glues `n Johnson` into
+`njohnson`, drops the corner `c`, and reads `h` as `b`. Those are the tokens the fields rest on,
+so its abbreviation retention falls below IA's. Character accuracy stays modest in every run (an
+exact line 29–30% of the time), which is what engines 2 and 3 would have to improve. Tesseract
+ran as 4 single-threaded processes (`OMP_THREAD_LIMIT=1`), about 5 s a page. The 39 deferred
+volumes (~7,750 pages) are ~11 CPU-hours: about 3 hours here, or minutes as a Torch CPU array.
+
 The same pairing measures the ABBYY-8 tier, which is 53 run-set volumes, 8.89M lines and ~208 of
 the run's ~348 H200-hours. The ABBYY-8 Brooklyn halves reproduce **87–99%** of their ABBYY-9/11
 twins' lines at ratio ≥ 0.8, but only 30–58% exactly. The two weak duplicate halves the run set

@@ -60,6 +60,7 @@ SIDECARS = HERE / "survey"
 OUT = REPO / "results" / "reocr_bench.json"
 sys.path.insert(0, str(HERE))
 
+from survey_adleaves import ENTRY_RX  # noqa: E402
 from survey_twins import eligible, hash_volume, norm  # noqa: E402
 
 IIIF = "https://iiif.archive.org/iiif"
@@ -184,18 +185,59 @@ def _ratio(a: str, b: str) -> float:
     return m.ratio() if m.real_quick_ratio() >= JUNK and m.quick_ratio() >= JUNK else 0.0
 
 
+# The contract checks (docs/PIPELINE.md, "Explicitly deprioritized"): an OCR must print what the
+# page prints. A vision model can expand the abbreviations NER depends on (`bds` -> `boards`) or
+# drop a ditto (`do`), and it can invent a clean entry the page never held.
+ABBR = {"h", "r", "b", "bds", "bd", "wid", "n", "c", "cor", "nr", "lab", "carp", "clk", "mer",
+        "do", "av", "st"}
+EXPANSIONS = {"boards", "widow", "house", "laborer", "carpenter", "clerk", "merchant", "near",
+              "corner", "avenue", "street", "ditto"}
+
+
 def page_score(candidate: list, reference: list) -> dict:
-    """book_exact / book_close / junk for one page (see the module docstring)."""
-    cand = [norm(t) for t in candidate if eligible(norm(t))]
+    """One page (see the module docstring). Besides agreement:
+        abbr_kept   share of the reference's abbreviation tokens (ABBR) found in the candidate
+                    line that matches its line (ratio >= CLOSE)
+        expanded    matched lines where the candidate spells out what the reference abbreviates
+        invented    share of the candidate's entry-shaped lines that match no reference line
+                    (ratio < JUNK): an entry the page may not hold"""
+    cand_raw = [t for t in candidate if eligible(norm(t))]
+    cand = [norm(t) for t in cand_raw]
     ref = [norm(t) for t in reference if eligible(norm(t))]
     if not ref:
         return {"ref": 0, "cand": len(cand), "exact": None, "close": None, "junk": None}
     cset = set(cand)
-    exact = sum(r in cset for r in ref)
-    close = sum(r in cset or any(_ratio(r, c) >= CLOSE for c in cand) for r in ref)
-    junk = sum(not any(_ratio(c, r) >= JUNK for r in ref) for c in cand) if cand else 0
+    exact = close = abbr_ref = abbr_kept = expanded = 0
+    for r in ref:
+        if r in cset:
+            best, score_ = r, 1.0
+        else:
+            score_, best = max(((_ratio(r, c), c) for c in cand), default=(0.0, None))
+        exact += r in cset
+        if score_ < CLOSE:
+            continue
+        close += 1
+        rt, bt = r.split(), collections.Counter(best.split())
+        wanted = collections.Counter(t for t in rt if t in ABBR)
+        abbr_ref += sum(wanted.values())
+        abbr_kept += sum(min(n, bt[t]) for t, n in wanted.items())
+        if wanted and any(t in EXPANSIONS and t not in rt for t in bt):
+            expanded += 1
+    best_ref = [max((_ratio(c, r) for r in ref), default=0.0) for c in cand]
+    junk = sum(b < JUNK for b in best_ref)
+    entry = [b for t, b in zip(cand_raw, best_ref) if ENTRY_RX.search(t)]
     return {"ref": len(ref), "cand": len(cand), "exact": exact / len(ref),
-            "close": close / len(ref), "junk": junk / len(cand) if cand else None}
+            "close": close / len(ref), "junk": junk / len(cand) if cand else None,
+            "abbr_kept": abbr_kept / abbr_ref if abbr_ref else None, "expanded": expanded,
+            "invented": sum(b < JUNK for b in entry) / len(entry) if entry else None}
+
+
+def load_candidate(path: Path) -> dict:
+    out = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        r = json.loads(line)
+        out[(r["volume"], r["leaf"])] = r
+    return out
 
 
 def score(args) -> int:
@@ -203,14 +245,14 @@ def score(args) -> int:
     base = {}
     for vol in {p["volume"] for p in bench["pages"]}:
         base[vol] = lines_by_leaf(vol)
-    runs = {"ia-microfilm": {(p["volume"], p["leaf"]): base[p["volume"]].get(p["leaf"], [])
+    runs = {"ia-microfilm": {(p["volume"], p["leaf"]): {"lines": base[p["volume"]].get(p["leaf"], []),
+                                                          "boxed": True}
                              for p in bench["pages"]}}
-    if args.candidate:
-        cand = {}
-        for line in Path(args.candidate).read_text(encoding="utf-8").splitlines():
-            r = json.loads(line)
-            cand[(r["volume"], r["leaf"])] = r["lines"]
-        runs[args.name or Path(args.candidate).stem] = cand
+    for path in args.candidate or []:
+        got = load_candidate(Path(path))
+        runs[Path(path).stem] = {k: {"lines": v["lines"],
+                                     "boxed": bool(v.get("boxes")) and len(v["boxes"]) == len(v["lines"])}
+                                 for k, v in got.items()}
     report = {"scored": _dt.date.today().isoformat(), "runs": {}}
     for name, got in runs.items():
         per, agg = [], collections.defaultdict(list)
@@ -218,31 +260,172 @@ def score(args) -> int:
             key = (p["volume"], p["leaf"])
             if key not in got:
                 continue
-            s = page_score(got[key], p["reference"])
-            g = page_score(got[key], p["gold"]) if p["gold"] else None
+            s = page_score(got[key]["lines"], p["reference"])
+            g = page_score(got[key]["lines"], p["gold"]) if p["gold"] else None
             per.append({"volume": p["volume"], "leaf": p["leaf"], "book": s, "gold": g})
-            for k in ("exact", "close", "junk"):
-                if s[k] is not None:
+            agg["boxed"].append(1.0 if got[key]["boxed"] else 0.0)
+            agg["expanded"].append(s.get("expanded") or 0)
+            for k in ("exact", "close", "junk", "abbr_kept", "invented"):
+                if s.get(k) is not None:
                     agg[f"book_{k}"].append(s[k])
-                if g and g[k] is not None and k != "junk":
+                if g and g.get(k) is not None and k in ("exact", "close"):
                     agg[f"gold_{k}"].append(g[k])
-        means = {k: round(sum(v) / len(v), 3) for k, v in agg.items()}
+        means = {k: round(sum(v) / len(v), 3) for k, v in agg.items() if k != "expanded"}
+        means["expanded_lines"] = sum(agg["expanded"])
         report["runs"][name] = {"pages": len(per), "mean": means, "per_page": per}
-        print(f"{name:20s} {len(per):3d} pages  " + "  ".join(f"{k} {v:.3f}" for k, v in
-                                                            sorted(means.items())))
+    cols = ["book_close", "book_exact", "gold_close", "gold_exact", "book_junk", "book_invented",
+            "book_abbr_kept", "expanded_lines", "boxed"]
+    print(f"{'run':24s} {'pages':>5s} " + " ".join(f"{c.replace('book_', ''):>12s}" for c in cols))
+    for name, r in report["runs"].items():
+        print(f"{name:24s} {r['pages']:5d} " + " ".join(
+            f"{r['mean'].get(c, float('nan')):12.3f}" if c != "expanded_lines"
+            else f"{r['mean'].get(c, 0):12d}" for c in cols))
     if args.out:
         Path(args.out).write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
     return 0
 
 
+STAGE = DATA / "reocr_stage"
+RUNS = DATA / "reocr_runs"
+
+
+def stem(volume: str, leaf: int) -> str:
+    return f"{volume}_{leaf:04d}"
+
+
+def stage(args) -> int:
+    """Download each bench page's image to data/reocr_stage/<volume>/<volume>_<leaf>.jpg: the
+    layout historical-ocr-eval's engine runners read (engines/run_churro.py and friends)."""
+    import urllib.request
+    bench = json.loads(OUT.read_text(encoding="utf-8"))
+    n = 0
+    for p in bench["pages"]:
+        dst = STAGE / p["volume"] / f"{stem(p['volume'], p['leaf'])}.jpg"
+        if dst.exists():
+            continue
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        dst.write_bytes(urllib.request.urlopen(p["image"], timeout=180).read())
+        n += 1
+    print(f"{n} images fetched -> {STAGE.relative_to(REPO)}", file=sys.stderr)
+    return 0
+
+
+TESSERACT = "/opt/homebrew/bin/tesseract"
+
+
+def prepare(im, variant: str):
+    """(image tesseract reads, scale from the original). `raw`: grayscale. `contrast`:
+    autocontrast and an unsharp mask for faded film. `sauvola`: local thresholding, which suits
+    uneven film exposure and bleed-through that defeat one global threshold; `-k10` softens it
+    (k 0.1 for 0.2), `-2x` doubles the image first so thin glyphs and word gaps survive it.
+    Plain `sauvola` reads 94% of the book scan's lines closely but glues `n Johnson` and drops
+    `c` and `h`, the tokens the record fields rest on (2026-10-05)."""
+    from PIL import Image, ImageFilter, ImageOps
+    g = im.convert("L")
+    if variant == "raw":
+        return g, 1.0
+    if variant == "contrast":
+        return ImageOps.autocontrast(g, cutoff=1).filter(ImageFilter.UnsharpMask(2, 150, 3)), 1.0
+    if variant.startswith("sauvola"):
+        import numpy as np
+        scale = 2.0 if "-2x" in variant else 1.0
+        k = 0.1 if "-k10" in variant else 0.2
+        if scale != 1.0:
+            g = g.resize((int(g.width * scale), int(g.height * scale)), Image.LANCZOS)
+        a = np.asarray(g, dtype=np.float64)
+        w, R = int(41 * scale) | 1, 128.0
+        pad = w // 2
+        p_ = np.pad(a, pad + 1, mode="reflect")
+        ii = p_.cumsum(0).cumsum(1)
+        ii2 = (p_ ** 2).cumsum(0).cumsum(1)
+        H, W_ = a.shape
+
+        def box(t):
+            return (t[w:w + H, w:w + W_] - t[0:H, w:w + W_] - t[w:w + H, 0:W_] + t[0:H, 0:W_])
+        mean = box(ii) / (w * w)
+        var = np.maximum(box(ii2) / (w * w) - mean ** 2, 0)
+        thr = mean * (1 + k * (np.sqrt(var) / R - 1))
+        return Image.fromarray(np.where(a > thr, 255, 0).astype("uint8")), scale
+    raise ValueError(variant)
+
+
+def tesseract_page(job):
+    """(volume, leaf, variant, lines, boxes): tesseract's lines in reading order, from its TSV."""
+    import os
+    import subprocess
+    import tempfile
+    from PIL import Image
+    volume, leaf, variant, psm = job
+    img = Image.open(STAGE / volume / f"{stem(volume, leaf)}.jpg")
+    with tempfile.NamedTemporaryFile(suffix=".png") as tmp:
+        prepared, scale = prepare(img, variant)
+        prepared.save(tmp.name)
+        # --dpi: on raw film frames tesseract guesses ~633 dpi and reports "Empty page!!"
+        out = subprocess.run([TESSERACT, tmp.name, "stdout", "--psm", str(psm), "--dpi", "300",
+                              "-l", "eng", "tsv"],
+                             capture_output=True, text=True,
+                             env={**os.environ, "OMP_THREAD_LIMIT": "1"}).stdout
+    lines = collections.OrderedDict()
+    for row in out.splitlines()[1:]:
+        f = row.split("\t")
+        if len(f) < 12 or f[0] != "5" or not f[11].strip():
+            continue
+        key = (int(f[2]), int(f[3]), int(f[4]))
+        x, y, w, h = (int(v) for v in f[6:10])
+        words, box = lines.setdefault(key, ([], [x, y, x + w, y + h]))
+        words.append(f[11])
+        box[:] = [min(box[0], x), min(box[1], y), max(box[2], x + w), max(box[3], y + h)]
+    return (volume, leaf, variant, [" ".join(ws) for ws, _ in lines.values()],
+            [[round(v / scale) for v in b] for _, b in lines.values()])
+
+
+def tesseract(args) -> int:
+    import multiprocessing
+    bench = json.loads(OUT.read_text(encoding="utf-8"))
+    variants = args.variants.split(",")
+    jobs = [(p["volume"], p["leaf"], v, args.psm) for p in bench["pages"] for v in variants]
+    RUNS.mkdir(parents=True, exist_ok=True)
+    out = collections.defaultdict(list)
+    with multiprocessing.Pool(args.workers) as pool:
+        for n, (vol, leaf, v, lines, boxes) in enumerate(pool.imap_unordered(tesseract_page, jobs), 1):
+            out[v].append({"volume": vol, "leaf": leaf, "lines": lines, "boxes": boxes})
+            if n % 24 == 0:
+                print(f"  {n}/{len(jobs)}", file=sys.stderr)
+    for v, rows in out.items():
+        path = RUNS / f"tesseract-5.5-{v}-psm{args.psm}.jsonl"
+        path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+        print(f"-> {path.relative_to(REPO)}", file=sys.stderr)
+    return 0
+
+
+def import_run(args) -> int:
+    """historical-ocr-eval's runners write `<stem>_<slug>.txt` beside each staged image, one line
+    per printed line (engines/run_churro.py prints the slug): -> data/reocr_runs/<slug>.jsonl."""
+    rows = []
+    for txt in sorted(STAGE.rglob(f"*_{args.slug}.txt")):
+        base = txt.name[:-len(f"_{args.slug}.txt")]
+        volume, leaf = base.rsplit("_", 1)
+        lines = [t for t in txt.read_text(encoding="utf-8").splitlines() if t.strip()]
+        rows.append({"volume": volume, "leaf": int(leaf), "lines": lines})
+    RUNS.mkdir(parents=True, exist_ok=True)
+    path = RUNS / f"{args.slug}.jsonl"
+    path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+    print(f"{len(rows)} pages -> {path.relative_to(REPO)}", file=sys.stderr)
+    return 0
+
+
 def _self_test() -> int:
-    ref = ["Smith John, laborer, 12 Pine st", "Brown Mary, widow, 4 Oak st",
+    ref = ["Smith John, laborer, 12 Pine st", "Brown Mary, wid, h 4 Oak st",
            "Jones Wm, cartman, h 9 Elm st"]
     s = page_score(ref, ref)
-    assert (s["exact"], s["close"], s["junk"]) == (1.0, 1.0, 0.0)
+    assert (s["exact"], s["close"], s["junk"], s["abbr_kept"]) == (1.0, 1.0, 0.0, 1.0)
     s = page_score(["Smith Jobn, laborer, 12 Pine st", "xq zz vv ww tt rr ss"], ref)
     assert s["exact"] == 0.0 and abs(s["close"] - 1 / 3) < 1e-9 and s["junk"] == 0.5
     assert page_score([], ref)["exact"] == 0.0
+    s = page_score(["Brown Mary, widow, house 4 Oak st"], ref)
+    assert s["expanded"] == 1 and s["abbr_kept"] < 1.0, "an expanded abbreviation is caught"
+    s = page_score(ref + ["Wilson Peter, grocer, h 77 Main st"], ref)
+    assert s["invented"] == 0.25, "an entry the page does not hold"
     print("self-test ok")
     return 0
 
@@ -250,18 +433,22 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["build", "score"])
-    ap.add_argument("--candidate", help="score: candidate OCR, JSONL {volume, leaf, lines}")
-    ap.add_argument("--name", help="score: the candidate's name in the report")
+    ap.add_argument("cmd", nargs="?", choices=["build", "stage", "tesseract", "import", "score"])
+    ap.add_argument("--candidate", nargs="*", help="score: candidate runs, JSONL {volume, leaf, "
+                                                   "lines[, boxes]}")
+    ap.add_argument("--variants", default="raw,contrast,sauvola", help="tesseract: preparations")
+    ap.add_argument("--psm", type=int, default=3, help="tesseract: page segmentation mode")
+    ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--slug", help="import: the engine slug its runner printed")
     ap.add_argument("--out", help="score: write the report as JSON")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
-    if args.cmd == "build":
-        return build(args)
-    if args.cmd == "score":
-        return score(args)
+    cmds = {"build": build, "stage": stage, "tesseract": tesseract, "import": import_run,
+            "score": score}
+    if args.cmd in cmds:
+        return cmds[args.cmd](args)
     ap.error("a command is required")
     return 2
 

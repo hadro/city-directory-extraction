@@ -1220,6 +1220,15 @@ read (`engines/run_churro.py` covers Churro-3B, olmOCR-2, PaddleOCR-VL and API p
 | Sauvola, k 0.1 | 76.1% | 9.4% | 83.9% | 12.4% | 8.2% | 3.6% | 67% |
 | Sauvola after 2× upscale | 89.1% | 26.5% | 92.6% | 35.6% | 5.0% | 2.8% | 74% |
 
+| **merge: Sauvola's lines, the higher-confidence reading of each** | 92.2% | **34.5%** | 93.0% | **43.9%** | 5.2% | 2.7% | **80%** |
+
+The merge (`reocr_bench.py merge --rule conf`) keeps every line the Sauvola run found. Where the
+contrast run read the same printed line (boxes overlapping, texts ≥ 0.6 alike), the merge takes
+whichever reading tesseract was more confident of. That brings back the small tokens Sauvola
+drops, a point above IA's abbreviation retention, at a cost of 1.5 points of line recovery.
+Adding lines only the contrast run found changed nothing. **That merge is engine 1's result:
+92% of the book scan's lines against IA's 54%, and 44% of the gold lines exactly against 24%.**
+
 Every run keeps boxes and expands next to nothing. **Local binarization is what recovers the
 lines.** Tesseract on the raw film frame reports "Empty page!!" without a DPI hint, and Sauvola
 takes the book-scan agreement from 54% to 94%. Its cost is small tokens: it glues `n Johnson` into

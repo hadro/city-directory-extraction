@@ -372,11 +372,13 @@ def tesseract_page(job):
             continue
         key = (int(f[2]), int(f[3]), int(f[4]))
         x, y, w, h = (int(v) for v in f[6:10])
-        words, box = lines.setdefault(key, ([], [x, y, x + w, y + h]))
+        words, box, confs = lines.setdefault(key, ([], [x, y, x + w, y + h], []))
         words.append(f[11])
+        confs.append(max(0.0, float(f[10])))
         box[:] = [min(box[0], x), min(box[1], y), max(box[2], x + w), max(box[3], y + h)]
-    return (volume, leaf, variant, [" ".join(ws) for ws, _ in lines.values()],
-            [[round(v / scale) for v in b] for _, b in lines.values()])
+    return (volume, leaf, variant, [" ".join(ws) for ws, _, _ in lines.values()],
+            [[round(v / scale) for v in b] for _, b, _ in lines.values()],
+            [round(sum(c) / len(c), 1) for _, _, c in lines.values()])
 
 
 def tesseract(args) -> int:
@@ -387,14 +389,69 @@ def tesseract(args) -> int:
     RUNS.mkdir(parents=True, exist_ok=True)
     out = collections.defaultdict(list)
     with multiprocessing.Pool(args.workers) as pool:
-        for n, (vol, leaf, v, lines, boxes) in enumerate(pool.imap_unordered(tesseract_page, jobs), 1):
-            out[v].append({"volume": vol, "leaf": leaf, "lines": lines, "boxes": boxes})
+        for n, (vol, leaf, v, lines, boxes, confs) in enumerate(
+                pool.imap_unordered(tesseract_page, jobs), 1):
+            out[v].append({"volume": vol, "leaf": leaf, "lines": lines, "boxes": boxes,
+                           "confs": confs})
             if n % 24 == 0:
                 print(f"  {n}/{len(jobs)}", file=sys.stderr)
     for v, rows in out.items():
         path = RUNS / f"tesseract-5.5-{v}-psm{args.psm}.jsonl"
         path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
         print(f"-> {path.relative_to(REPO)}", file=sys.stderr)
+    return 0
+
+
+PAIR_OVERLAP = 0.5      # two readings are one printed line when their boxes overlap this much
+PAIR_TEXT = 0.6         # ...and their texts are at least this alike
+
+
+def _overlap(a, b) -> float:
+    """The smaller of the vertical and horizontal overlaps, each as a share of the shorter."""
+    v = min(a[3], b[3]) - max(a[1], b[1])
+    h = min(a[2], b[2]) - max(a[0], b[0])
+    if v <= 0 or h <= 0:
+        return 0.0
+    return min(v / min(a[3] - a[1], b[3] - b[1]), h / min(a[2] - a[0], b[2] - b[0]))
+
+
+def merge_page(base: dict, other: dict, rule: str, add_unpaired: bool) -> dict:
+    """One page, two tesseract readings of it. Every line of `base` is kept, in its order; where
+    `other` read the same printed line (boxes overlapping PAIR_OVERLAP, texts PAIR_TEXT alike),
+    `rule` picks the text: `conf`, the higher mean word confidence, or `other`, always the other
+    reading. Base is the Sauvola run, which finds the lines, and other the contrast run, which
+    keeps the small tokens (`n`, `c`, `h`) Sauvola glues or drops."""
+    used, lines, boxes = set(), [], []
+    for i, (t, bx) in enumerate(zip(base["lines"], base["boxes"])):
+        best, best_r = None, PAIR_TEXT
+        for j, (u, by) in enumerate(zip(other["lines"], other["boxes"])):
+            if j in used or _overlap(bx, by) < PAIR_OVERLAP:
+                continue
+            r = difflib.SequenceMatcher(None, norm(t), norm(u), autojunk=False).ratio()
+            if r >= best_r:
+                best, best_r = j, r
+        if best is None:
+            lines.append(t)
+        else:
+            used.add(best)
+            take_other = (rule == "other" or
+                          other.get("confs", [0])[best] > base.get("confs", [0] * (i + 1))[i])
+            lines.append(other["lines"][best] if take_other else t)
+        boxes.append(bx)
+    if add_unpaired:
+        for j, (u, by) in enumerate(zip(other["lines"], other["boxes"])):
+            if j not in used and not any(_overlap(by, bx) >= PAIR_OVERLAP for bx in base["boxes"]):
+                lines.append(u)
+                boxes.append(by)
+    return {"volume": base["volume"], "leaf": base["leaf"], "lines": lines, "boxes": boxes}
+
+
+def merge(args) -> int:
+    a, b = load_candidate(Path(args.base)), load_candidate(Path(args.other))
+    rows = [merge_page(a[k], b[k], args.rule, args.add_unpaired) for k in sorted(a) if k in b]
+    path = RUNS / f"{args.name}.jsonl"
+    path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+    print(f"{len(rows)} pages -> {path.relative_to(REPO)}", file=sys.stderr)
     return 0
 
 
@@ -433,7 +490,14 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["build", "stage", "tesseract", "import", "score"])
+    ap.add_argument("cmd", nargs="?", choices=["build", "stage", "tesseract", "import", "merge",
+                                               "score"])
+    ap.add_argument("--base", help="merge: the run whose lines are kept")
+    ap.add_argument("--other", help="merge: the run whose readings may replace them")
+    ap.add_argument("--rule", default="conf", choices=["conf", "other"], help="merge: who wins")
+    ap.add_argument("--add-unpaired", action="store_true",
+                    help="merge: also keep lines only the other run found")
+    ap.add_argument("--name", help="merge: the output run's name")
     ap.add_argument("--candidate", nargs="*", help="score: candidate runs, JSONL {volume, leaf, "
                                                    "lines[, boxes]}")
     ap.add_argument("--variants", default="raw,contrast,sauvola", help="tesseract: preparations")
@@ -446,7 +510,7 @@ def main(argv=None) -> int:
     if args.self_test:
         return _self_test()
     cmds = {"build": build, "stage": stage, "tesseract": tesseract, "import": import_run,
-            "score": score}
+            "merge": merge, "score": score}
     if args.cmd in cmds:
         return cmds[args.cmd](args)
     ap.error("a command is required")

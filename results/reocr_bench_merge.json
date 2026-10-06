@@ -1,0 +1,5661 @@
+{
+ "scored": "2026-10-05",
+ "runs": {
+  "ia-microfilm": {
+   "pages": 48,
+   "mean": {
+    "boxed": 1.0,
+    "book_exact": 0.198,
+    "gold_exact": 0.239,
+    "book_close": 0.536,
+    "gold_close": 0.553,
+    "book_junk": 0.036,
+    "book_abbr_kept": 0.789,
+    "book_invented": 0.023,
+    "expanded_lines": 1
+   },
+   "per_page": [
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 50,
+     "book": {
+      "ref": 32,
+      "cand": 30,
+      "exact": 0.125,
+      "close": 0.53125,
+      "junk": 0.1,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 30,
+      "exact": 0.5151515151515151,
+      "close": 0.6363636363636364,
+      "junk": 0.03333333333333333,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 58,
+     "book": {
+      "ref": 35,
+      "cand": 31,
+      "exact": 0.11428571428571428,
+      "close": 0.6571428571428571,
+      "junk": 0.03225806451612903,
+      "abbr_kept": 0.7142857142857143,
+      "expanded": 0,
+      "invented": 0.05555555555555555
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 83,
+     "book": {
+      "ref": 31,
+      "cand": 26,
+      "exact": 0.22580645161290322,
+      "close": 0.6129032258064516,
+      "junk": 0.19230769230769232,
+      "abbr_kept": 0.6666666666666666,
+      "expanded": 0,
+      "invented": 0.14285714285714285
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 85,
+     "book": {
+      "ref": 40,
+      "cand": 20,
+      "exact": 0.1,
+      "close": 0.375,
+      "junk": 0.0,
+      "abbr_kept": 0.6153846153846154,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 119,
+     "book": {
+      "ref": 40,
+      "cand": 27,
+      "exact": 0.175,
+      "close": 0.6,
+      "junk": 0.0,
+      "abbr_kept": 0.7222222222222222,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 27,
+      "exact": 0.30303030303030304,
+      "close": 0.7878787878787878,
+      "junk": 0.0,
+      "abbr_kept": 0.7777777777777778,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 120,
+     "book": {
+      "ref": 35,
+      "cand": 30,
+      "exact": 0.37142857142857144,
+      "close": 0.6857142857142857,
+      "junk": 0.1,
+      "abbr_kept": 0.9230769230769231,
+      "expanded": 0,
+      "invented": 0.08
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 139,
+     "book": {
+      "ref": 35,
+      "cand": 32,
+      "exact": 0.4857142857142857,
+      "close": 0.8285714285714286,
+      "junk": 0.0,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 27,
+     "book": {
+      "ref": 43,
+      "cand": 43,
+      "exact": 0.4883720930232558,
+      "close": 0.9767441860465116,
+      "junk": 0.0,
+      "abbr_kept": 0.8367346938775511,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 53,
+     "book": {
+      "ref": 42,
+      "cand": 41,
+      "exact": 0.5,
+      "close": 0.9285714285714286,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.8076923076923077,
+      "expanded": 0,
+      "invented": 0.02857142857142857
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 54,
+     "book": {
+      "ref": 43,
+      "cand": 42,
+      "exact": 0.4186046511627907,
+      "close": 0.9767441860465116,
+      "junk": 0.0,
+      "abbr_kept": 0.7586206896551724,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 58,
+     "book": {
+      "ref": 41,
+      "cand": 44,
+      "exact": 0.4146341463414634,
+      "close": 0.975609756097561,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9142857142857143,
+      "expanded": 0,
+      "invented": 0.02702702702702703
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 109,
+     "book": {
+      "ref": 36,
+      "cand": 40,
+      "exact": 0.5277777777777778,
+      "close": 0.9444444444444444,
+      "junk": 0.075,
+      "abbr_kept": 0.9,
+      "expanded": 0,
+      "invented": 0.09090909090909091
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 120,
+     "book": {
+      "ref": 46,
+      "cand": 16,
+      "exact": 0.06521739130434782,
+      "close": 0.2826086956521739,
+      "junk": 0.0,
+      "abbr_kept": 0.9090909090909091,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 169,
+     "book": {
+      "ref": 49,
+      "cand": 44,
+      "exact": 0.12244897959183673,
+      "close": 0.6122448979591837,
+      "junk": 0.09090909090909091,
+      "abbr_kept": 0.5,
+      "expanded": 0,
+      "invented": 0.058823529411764705
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 183,
+     "book": {
+      "ref": 46,
+      "cand": 43,
+      "exact": 0.3695652173913043,
+      "close": 0.782608695652174,
+      "junk": 0.0,
+      "abbr_kept": 0.782608695652174,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 203,
+     "book": {
+      "ref": 49,
+      "cand": 48,
+      "exact": 0.32653061224489793,
+      "close": 0.8979591836734694,
+      "junk": 0.020833333333333332,
+      "abbr_kept": 0.8780487804878049,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 218,
+     "book": {
+      "ref": 46,
+      "cand": 44,
+      "exact": 0.5652173913043478,
+      "close": 0.8695652173913043,
+      "junk": 0.06818181818181818,
+      "abbr_kept": 0.8181818181818182,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 55,
+     "book": {
+      "ref": 40,
+      "cand": 15,
+      "exact": 0.225,
+      "close": 0.375,
+      "junk": 0.0,
+      "abbr_kept": 0.75,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 133,
+     "book": {
+      "ref": 40,
+      "cand": 19,
+      "exact": 0.15,
+      "close": 0.425,
+      "junk": 0.0,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 193,
+     "book": {
+      "ref": 34,
+      "cand": 15,
+      "exact": 0.14705882352941177,
+      "close": 0.3235294117647059,
+      "junk": 0.2,
+      "abbr_kept": 0.7692307692307693,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 274,
+     "book": {
+      "ref": 40,
+      "cand": 20,
+      "exact": 0.3,
+      "close": 0.475,
+      "junk": 0.1,
+      "abbr_kept": 0.8095238095238095,
+      "expanded": 0,
+      "invented": 0.25
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 283,
+     "book": {
+      "ref": 41,
+      "cand": 23,
+      "exact": 0.1951219512195122,
+      "close": 0.4878048780487805,
+      "junk": 0.0,
+      "abbr_kept": 0.782608695652174,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 174,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.6046511627906976,
+      "close": 0.9534883720930233,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.85,
+      "expanded": 0,
+      "invented": 0.02702702702702703
+     },
+     "gold": {
+      "ref": 30,
+      "cand": 44,
+      "exact": 0.6,
+      "close": 0.9666666666666667,
+      "junk": 0.18181818181818182,
+      "abbr_kept": 0.9230769230769231,
+      "expanded": 0,
+      "invented": 0.13513513513513514
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 187,
+     "book": {
+      "ref": 45,
+      "cand": 37,
+      "exact": 0.4,
+      "close": 0.8222222222222222,
+      "junk": 0.0,
+      "abbr_kept": 0.7837837837837838,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 226,
+     "book": {
+      "ref": 43,
+      "cand": 21,
+      "exact": 0.06976744186046512,
+      "close": 0.4418604651162791,
+      "junk": 0.0,
+      "abbr_kept": 0.6666666666666666,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 227,
+     "book": {
+      "ref": 42,
+      "cand": 26,
+      "exact": 0.16666666666666666,
+      "close": 0.5476190476190477,
+      "junk": 0.0,
+      "abbr_kept": 0.84,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 231,
+     "book": {
+      "ref": 43,
+      "cand": 28,
+      "exact": 0.13953488372093023,
+      "close": 0.6511627906976745,
+      "junk": 0.0,
+      "abbr_kept": 0.6216216216216216,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 248,
+     "book": {
+      "ref": 42,
+      "cand": 31,
+      "exact": 0.21428571428571427,
+      "close": 0.6904761904761905,
+      "junk": 0.03225806451612903,
+      "abbr_kept": 0.6666666666666666,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 405,
+     "book": {
+      "ref": 43,
+      "cand": 26,
+      "exact": 0.09302325581395349,
+      "close": 0.5116279069767442,
+      "junk": 0.0,
+      "abbr_kept": 0.8461538461538461,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 22,
+      "cand": 26,
+      "exact": 0.13636363636363635,
+      "close": 0.6818181818181818,
+      "junk": 0.11538461538461539,
+      "abbr_kept": 0.9,
+      "expanded": 0,
+      "invented": 0.1111111111111111
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 105,
+     "book": {
+      "ref": 90,
+      "cand": 42,
+      "exact": 0.044444444444444446,
+      "close": 0.24444444444444444,
+      "junk": 0.11904761904761904,
+      "abbr_kept": 0.6944444444444444,
+      "expanded": 0,
+      "invented": 0.03571428571428571
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 165,
+     "book": {
+      "ref": 92,
+      "cand": 29,
+      "exact": 0.03260869565217391,
+      "close": 0.1956521739130435,
+      "junk": 0.0,
+      "abbr_kept": 0.6363636363636364,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 90,
+      "cand": 29,
+      "exact": 0.011111111111111112,
+      "close": 0.18888888888888888,
+      "junk": 0.0,
+      "abbr_kept": 0.6363636363636364,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 167,
+     "book": {
+      "ref": 88,
+      "cand": 28,
+      "exact": 0.03409090909090909,
+      "close": 0.22727272727272727,
+      "junk": 0.0,
+      "abbr_kept": 0.6888888888888889,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 230,
+     "book": {
+      "ref": 85,
+      "cand": 29,
+      "exact": 0.047058823529411764,
+      "close": 0.16470588235294117,
+      "junk": 0.10344827586206896,
+      "abbr_kept": 0.7647058823529411,
+      "expanded": 0,
+      "invented": 0.09523809523809523
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 241,
+     "book": {
+      "ref": 89,
+      "cand": 53,
+      "exact": 0.0898876404494382,
+      "close": 0.4943820224719101,
+      "junk": 0.0,
+      "abbr_kept": 0.6521739130434783,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 386,
+     "book": {
+      "ref": 95,
+      "cand": 35,
+      "exact": 0.031578947368421054,
+      "close": 0.17894736842105263,
+      "junk": 0.08571428571428572,
+      "abbr_kept": 0.84,
+      "expanded": 0,
+      "invented": 0.037037037037037035
+     },
+     "gold": {
+      "ref": 95,
+      "cand": 35,
+      "exact": 0.042105263157894736,
+      "close": 0.17894736842105263,
+      "junk": 0.08571428571428572,
+      "abbr_kept": 0.875,
+      "expanded": 0,
+      "invented": 0.037037037037037035
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 509,
+     "book": {
+      "ref": 87,
+      "cand": 68,
+      "exact": 0.04597701149425287,
+      "close": 0.45977011494252873,
+      "junk": 0.04411764705882353,
+      "abbr_kept": 0.7764705882352941,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 159,
+     "book": {
+      "ref": 103,
+      "cand": 40,
+      "exact": 0.0970873786407767,
+      "close": 0.2621359223300971,
+      "junk": 0.025,
+      "abbr_kept": 0.75,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 168,
+     "book": {
+      "ref": 109,
+      "cand": 50,
+      "exact": 0.11009174311926606,
+      "close": 0.29357798165137616,
+      "junk": 0.04,
+      "abbr_kept": 0.78125,
+      "expanded": 0,
+      "invented": 0.04
+     },
+     "gold": {
+      "ref": 108,
+      "cand": 50,
+      "exact": 0.1111111111111111,
+      "close": 0.2962962962962963,
+      "junk": 0.04,
+      "abbr_kept": 0.7575757575757576,
+      "expanded": 0,
+      "invented": 0.04
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 200,
+     "book": {
+      "ref": 108,
+      "cand": 74,
+      "exact": 0.05555555555555555,
+      "close": 0.3888888888888889,
+      "junk": 0.02702702702702703,
+      "abbr_kept": 0.8823529411764706,
+      "expanded": 0,
+      "invented": 0.022727272727272728
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 233,
+     "book": {
+      "ref": 113,
+      "cand": 74,
+      "exact": 0.10619469026548672,
+      "close": 0.46017699115044247,
+      "junk": 0.04054054054054054,
+      "abbr_kept": 0.74,
+      "expanded": 0,
+      "invented": 0.027777777777777776
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 273,
+     "book": {
+      "ref": 103,
+      "cand": 30,
+      "exact": 0.02912621359223301,
+      "close": 0.17475728155339806,
+      "junk": 0.06666666666666667,
+      "abbr_kept": 0.6666666666666666,
+      "expanded": 0,
+      "invented": 0.06666666666666667
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 391,
+     "book": {
+      "ref": 122,
+      "cand": 98,
+      "exact": 0.13114754098360656,
+      "close": 0.6885245901639344,
+      "junk": 0.0,
+      "abbr_kept": 0.7682926829268293,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 121,
+      "cand": 98,
+      "exact": 0.19008264462809918,
+      "close": 0.6859504132231405,
+      "junk": 0.0,
+      "abbr_kept": 0.7831325301204819,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 438,
+     "book": {
+      "ref": 123,
+      "cand": 41,
+      "exact": 0.08943089430894309,
+      "close": 0.2682926829268293,
+      "junk": 0.0,
+      "abbr_kept": 0.8571428571428571,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 42,
+     "book": {
+      "ref": 123,
+      "cand": 111,
+      "exact": 0.2601626016260163,
+      "close": 0.8373983739837398,
+      "junk": 0.0,
+      "abbr_kept": 0.8903225806451613,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 157,
+     "book": {
+      "ref": 115,
+      "cand": 64,
+      "exact": 0.0782608695652174,
+      "close": 0.48695652173913045,
+      "junk": 0.015625,
+      "abbr_kept": 0.8068181818181818,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 326,
+     "book": {
+      "ref": 115,
+      "cand": 29,
+      "exact": 0.043478260869565216,
+      "close": 0.20869565217391303,
+      "junk": 0.034482758620689655,
+      "abbr_kept": 0.875,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 397,
+     "book": {
+      "ref": 113,
+      "cand": 48,
+      "exact": 0.035398230088495575,
+      "close": 0.26548672566371684,
+      "junk": 0.041666666666666664,
+      "abbr_kept": 0.7959183673469388,
+      "expanded": 0,
+      "invented": 0.037037037037037035
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 410,
+     "book": {
+      "ref": 116,
+      "cand": 31,
+      "exact": 0.0603448275862069,
+      "close": 0.20689655172413793,
+      "junk": 0.0,
+      "abbr_kept": 0.8648648648648649,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    }
+   ]
+  },
+  "tesseract-5.5-contrast-psm3": {
+   "pages": 48,
+   "mean": {
+    "boxed": 1.0,
+    "book_exact": 0.297,
+    "gold_exact": 0.396,
+    "book_close": 0.744,
+    "gold_close": 0.786,
+    "book_junk": 0.062,
+    "book_abbr_kept": 0.837,
+    "book_invented": 0.027,
+    "expanded_lines": 2
+   },
+   "per_page": [
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 50,
+     "book": {
+      "ref": 32,
+      "cand": 41,
+      "exact": 0.21875,
+      "close": 0.84375,
+      "junk": 0.0975609756097561,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.041666666666666664
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 41,
+      "exact": 0.696969696969697,
+      "close": 0.9393939393939394,
+      "junk": 0.07317073170731707,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 58,
+     "book": {
+      "ref": 35,
+      "cand": 38,
+      "exact": 0.02857142857142857,
+      "close": 0.7714285714285715,
+      "junk": 0.05263157894736842,
+      "abbr_kept": 0.8666666666666667,
+      "expanded": 0,
+      "invented": 0.041666666666666664
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 83,
+     "book": {
+      "ref": 31,
+      "cand": 37,
+      "exact": 0.2903225806451613,
+      "close": 0.8064516129032258,
+      "junk": 0.1891891891891892,
+      "abbr_kept": 0.75,
+      "expanded": 0,
+      "invented": 0.08333333333333333
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 85,
+     "book": {
+      "ref": 40,
+      "cand": 30,
+      "exact": 0.15,
+      "close": 0.575,
+      "junk": 0.03333333333333333,
+      "abbr_kept": 0.8333333333333334,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 119,
+     "book": {
+      "ref": 40,
+      "cand": 33,
+      "exact": 0.25,
+      "close": 0.675,
+      "junk": 0.06060606060606061,
+      "abbr_kept": 0.9047619047619048,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 33,
+      "exact": 0.45454545454545453,
+      "close": 0.8787878787878788,
+      "junk": 0.06060606060606061,
+      "abbr_kept": 0.8571428571428571,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 120,
+     "book": {
+      "ref": 35,
+      "cand": 35,
+      "exact": 0.5142857142857142,
+      "close": 0.8571428571428571,
+      "junk": 0.08571428571428572,
+      "abbr_kept": 0.8666666666666667,
+      "expanded": 0,
+      "invented": 0.07142857142857142
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 139,
+     "book": {
+      "ref": 35,
+      "cand": 39,
+      "exact": 0.4857142857142857,
+      "close": 0.9428571428571428,
+      "junk": 0.05128205128205128,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.03125
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 27,
+     "book": {
+      "ref": 43,
+      "cand": 43,
+      "exact": 0.5116279069767442,
+      "close": 0.9534883720930233,
+      "junk": 0.023255813953488372,
+      "abbr_kept": 0.8958333333333334,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 53,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.6428571428571429,
+      "close": 1.0,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9333333333333333,
+      "expanded": 0,
+      "invented": 0.027777777777777776
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 54,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.3953488372093023,
+      "close": 1.0,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.9,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 58,
+     "book": {
+      "ref": 41,
+      "cand": 46,
+      "exact": 0.4878048780487805,
+      "close": 0.975609756097561,
+      "junk": 0.10869565217391304,
+      "abbr_kept": 0.9142857142857143,
+      "expanded": 0,
+      "invented": 0.05128205128205128
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 109,
+     "book": {
+      "ref": 36,
+      "cand": 44,
+      "exact": 0.5833333333333334,
+      "close": 0.9722222222222222,
+      "junk": 0.09090909090909091,
+      "abbr_kept": 0.9090909090909091,
+      "expanded": 0,
+      "invented": 0.07894736842105263
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 120,
+     "book": {
+      "ref": 46,
+      "cand": 46,
+      "exact": 0.2826086956521739,
+      "close": 0.8695652173913043,
+      "junk": 0.043478260869565216,
+      "abbr_kept": 0.896551724137931,
+      "expanded": 0,
+      "invented": 0.0625
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 169,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.22448979591836735,
+      "close": 0.9795918367346939,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.6136363636363636,
+      "expanded": 0,
+      "invented": 0.03125
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 183,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.5652173913043478,
+      "close": 0.9782608695652174,
+      "junk": 0.058823529411764705,
+      "abbr_kept": 0.8333333333333334,
+      "expanded": 0,
+      "invented": 0.046511627906976744
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 203,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.5102040816326531,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.8809523809523809,
+      "expanded": 0,
+      "invented": 0.025
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 218,
+     "book": {
+      "ref": 46,
+      "cand": 49,
+      "exact": 0.6521739130434783,
+      "close": 0.9565217391304348,
+      "junk": 0.061224489795918366,
+      "abbr_kept": 0.8611111111111112,
+      "expanded": 0,
+      "invented": 0.047619047619047616
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 55,
+     "book": {
+      "ref": 40,
+      "cand": 34,
+      "exact": 0.5,
+      "close": 0.775,
+      "junk": 0.058823529411764705,
+      "abbr_kept": 0.84,
+      "expanded": 0,
+      "invented": 0.03571428571428571
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 133,
+     "book": {
+      "ref": 40,
+      "cand": 35,
+      "exact": 0.25,
+      "close": 0.7,
+      "junk": 0.05714285714285714,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 193,
+     "book": {
+      "ref": 34,
+      "cand": 28,
+      "exact": 0.20588235294117646,
+      "close": 0.4117647058823529,
+      "junk": 0.35714285714285715,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0625
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 274,
+     "book": {
+      "ref": 40,
+      "cand": 38,
+      "exact": 0.45,
+      "close": 0.775,
+      "junk": 0.07894736842105263,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.07692307692307693
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 283,
+     "book": {
+      "ref": 41,
+      "cand": 35,
+      "exact": 0.36585365853658536,
+      "close": 0.7804878048780488,
+      "junk": 0.02857142857142857,
+      "abbr_kept": 0.7446808510638298,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 174,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.7209302325581395,
+      "close": 0.9767441860465116,
+      "junk": 0.044444444444444446,
+      "abbr_kept": 0.926829268292683,
+      "expanded": 0,
+      "invented": 0.02564102564102564
+     },
+     "gold": {
+      "ref": 30,
+      "cand": 45,
+      "exact": 0.7,
+      "close": 1.0,
+      "junk": 0.15555555555555556,
+      "abbr_kept": 0.9259259259259259,
+      "expanded": 0,
+      "invented": 0.1282051282051282
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 187,
+     "book": {
+      "ref": 45,
+      "cand": 44,
+      "exact": 0.4666666666666667,
+      "close": 0.9333333333333333,
+      "junk": 0.0,
+      "abbr_kept": 0.7674418604651163,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 226,
+     "book": {
+      "ref": 43,
+      "cand": 33,
+      "exact": 0.11627906976744186,
+      "close": 0.7441860465116279,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.574468085106383,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 227,
+     "book": {
+      "ref": 42,
+      "cand": 39,
+      "exact": 0.30952380952380953,
+      "close": 0.8809523809523809,
+      "junk": 0.05128205128205128,
+      "abbr_kept": 0.9210526315789473,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 231,
+     "book": {
+      "ref": 43,
+      "cand": 41,
+      "exact": 0.2558139534883721,
+      "close": 0.8837209302325582,
+      "junk": 0.04878048780487805,
+      "abbr_kept": 0.813953488372093,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 248,
+     "book": {
+      "ref": 42,
+      "cand": 37,
+      "exact": 0.2619047619047619,
+      "close": 0.7857142857142857,
+      "junk": 0.05405405405405406,
+      "abbr_kept": 0.7837837837837838,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 405,
+     "book": {
+      "ref": 43,
+      "cand": 42,
+      "exact": 0.2558139534883721,
+      "close": 0.7674418604651163,
+      "junk": 0.047619047619047616,
+      "abbr_kept": 0.8235294117647058,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 22,
+      "cand": 42,
+      "exact": 0.4090909090909091,
+      "close": 0.9545454545454546,
+      "junk": 0.19047619047619047,
+      "abbr_kept": 0.9565217391304348,
+      "expanded": 0,
+      "invented": 0.07142857142857142
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 105,
+     "book": {
+      "ref": 90,
+      "cand": 92,
+      "exact": 0.13333333333333333,
+      "close": 0.6666666666666666,
+      "junk": 0.09782608695652174,
+      "abbr_kept": 0.7685185185185185,
+      "expanded": 0,
+      "invented": 0.028985507246376812
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 165,
+     "book": {
+      "ref": 92,
+      "cand": 53,
+      "exact": 0.09782608695652174,
+      "close": 0.41304347826086957,
+      "junk": 0.03773584905660377,
+      "abbr_kept": 0.7738095238095238,
+      "expanded": 0,
+      "invented": 0.03125
+     },
+     "gold": {
+      "ref": 90,
+      "cand": 53,
+      "exact": 0.1111111111111111,
+      "close": 0.43333333333333335,
+      "junk": 0.03773584905660377,
+      "abbr_kept": 0.7419354838709677,
+      "expanded": 0,
+      "invented": 0.03125
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 167,
+     "book": {
+      "ref": 88,
+      "cand": 53,
+      "exact": 0.03409090909090909,
+      "close": 0.3522727272727273,
+      "junk": 0.03773584905660377,
+      "abbr_kept": 0.6455696202531646,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 230,
+     "book": {
+      "ref": 85,
+      "cand": 67,
+      "exact": 0.08235294117647059,
+      "close": 0.4,
+      "junk": 0.13432835820895522,
+      "abbr_kept": 0.6865671641791045,
+      "expanded": 0,
+      "invented": 0.0851063829787234
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 241,
+     "book": {
+      "ref": 89,
+      "cand": 135,
+      "exact": 0.1797752808988764,
+      "close": 0.8089887640449438,
+      "junk": 0.08888888888888889,
+      "abbr_kept": 0.6879432624113475,
+      "expanded": 0,
+      "invented": 0.06
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 386,
+     "book": {
+      "ref": 95,
+      "cand": 88,
+      "exact": 0.30526315789473685,
+      "close": 0.7578947368421053,
+      "junk": 0.056818181818181816,
+      "abbr_kept": 0.8404907975460123,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 95,
+      "cand": 88,
+      "exact": 0.3263157894736842,
+      "close": 0.7684210526315789,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.8475609756097561,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 509,
+     "book": {
+      "ref": 87,
+      "cand": 77,
+      "exact": 0.08045977011494253,
+      "close": 0.6781609195402298,
+      "junk": 0.025974025974025976,
+      "abbr_kept": 0.7608695652173914,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 159,
+     "book": {
+      "ref": 103,
+      "cand": 86,
+      "exact": 0.1941747572815534,
+      "close": 0.5145631067961165,
+      "junk": 0.08139534883720931,
+      "abbr_kept": 0.7457627118644068,
+      "expanded": 0,
+      "invented": 0.05263157894736842
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 168,
+     "book": {
+      "ref": 109,
+      "cand": 107,
+      "exact": 0.1743119266055046,
+      "close": 0.6788990825688074,
+      "junk": 0.07476635514018691,
+      "abbr_kept": 0.7,
+      "expanded": 0,
+      "invented": 0.07272727272727272
+     },
+     "gold": {
+      "ref": 108,
+      "cand": 107,
+      "exact": 0.19444444444444445,
+      "close": 0.6759259259259259,
+      "junk": 0.08411214953271028,
+      "abbr_kept": 0.7368421052631579,
+      "expanded": 0,
+      "invented": 0.07272727272727272
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 200,
+     "book": {
+      "ref": 108,
+      "cand": 113,
+      "exact": 0.25925925925925924,
+      "close": 0.7592592592592593,
+      "junk": 0.061946902654867256,
+      "abbr_kept": 0.8172043010752689,
+      "expanded": 0,
+      "invented": 0.05
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 233,
+     "book": {
+      "ref": 113,
+      "cand": 90,
+      "exact": 0.09734513274336283,
+      "close": 0.415929203539823,
+      "junk": 0.05555555555555555,
+      "abbr_kept": 0.8571428571428571,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 273,
+     "book": {
+      "ref": 103,
+      "cand": 98,
+      "exact": 0.038834951456310676,
+      "close": 0.4368932038834951,
+      "junk": 0.12244897959183673,
+      "abbr_kept": 0.7857142857142857,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 391,
+     "book": {
+      "ref": 122,
+      "cand": 90,
+      "exact": 0.22131147540983606,
+      "close": 0.6311475409836066,
+      "junk": 0.011111111111111112,
+      "abbr_kept": 0.9012345679012346,
+      "expanded": 0,
+      "invented": 0.02564102564102564
+     },
+     "gold": {
+      "ref": 121,
+      "cand": 90,
+      "exact": 0.2727272727272727,
+      "close": 0.6363636363636364,
+      "junk": 0.011111111111111112,
+      "abbr_kept": 0.9125,
+      "expanded": 0,
+      "invented": 0.02564102564102564
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 438,
+     "book": {
+      "ref": 123,
+      "cand": 108,
+      "exact": 0.3008130081300813,
+      "close": 0.7398373983739838,
+      "junk": 0.009259259259259259,
+      "abbr_kept": 0.881578947368421,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 42,
+     "book": {
+      "ref": 123,
+      "cand": 119,
+      "exact": 0.43089430894308944,
+      "close": 0.9512195121951219,
+      "junk": 0.0,
+      "abbr_kept": 0.9322033898305084,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 157,
+     "book": {
+      "ref": 115,
+      "cand": 106,
+      "exact": 0.3391304347826087,
+      "close": 0.8173913043478261,
+      "junk": 0.009433962264150943,
+      "abbr_kept": 0.8993288590604027,
+      "expanded": 0,
+      "invented": 0.012195121951219513
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 326,
+     "book": {
+      "ref": 115,
+      "cand": 82,
+      "exact": 0.19130434782608696,
+      "close": 0.6521739130434783,
+      "junk": 0.012195121951219513,
+      "abbr_kept": 0.8558558558558559,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 397,
+     "book": {
+      "ref": 113,
+      "cand": 53,
+      "exact": 0.017699115044247787,
+      "close": 0.1592920353982301,
+      "junk": 0.05660377358490566,
+      "abbr_kept": 0.8571428571428571,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 410,
+     "book": {
+      "ref": 116,
+      "cand": 52,
+      "exact": 0.11206896551724138,
+      "close": 0.3017241379310345,
+      "junk": 0.038461538461538464,
+      "abbr_kept": 0.9375,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    }
+   ]
+  },
+  "tesseract-5.5-sauvola-psm3": {
+   "pages": 48,
+   "mean": {
+    "boxed": 1.0,
+    "book_exact": 0.294,
+    "gold_exact": 0.379,
+    "book_close": 0.937,
+    "gold_close": 0.938,
+    "book_junk": 0.052,
+    "book_abbr_kept": 0.737,
+    "book_invented": 0.025,
+    "expanded_lines": 2
+   },
+   "per_page": [
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 50,
+     "book": {
+      "ref": 32,
+      "cand": 41,
+      "exact": 0.21875,
+      "close": 0.9375,
+      "junk": 0.0975609756097561,
+      "abbr_kept": 0.9444444444444444,
+      "expanded": 0,
+      "invented": 0.06060606060606061
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 41,
+      "exact": 0.7575757575757576,
+      "close": 1.0,
+      "junk": 0.04878048780487805,
+      "abbr_kept": 0.9523809523809523,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 58,
+     "book": {
+      "ref": 35,
+      "cand": 41,
+      "exact": 0.11428571428571428,
+      "close": 0.8285714285714286,
+      "junk": 0.04878048780487805,
+      "abbr_kept": 0.8823529411764706,
+      "expanded": 0,
+      "invented": 0.03571428571428571
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 83,
+     "book": {
+      "ref": 31,
+      "cand": 41,
+      "exact": 0.25806451612903225,
+      "close": 1.0,
+      "junk": 0.17073170731707318,
+      "abbr_kept": 0.6,
+      "expanded": 0,
+      "invented": 0.08
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 85,
+     "book": {
+      "ref": 40,
+      "cand": 41,
+      "exact": 0.2,
+      "close": 0.975,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.6923076923076923,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 119,
+     "book": {
+      "ref": 40,
+      "cand": 42,
+      "exact": 0.275,
+      "close": 0.9,
+      "junk": 0.047619047619047616,
+      "abbr_kept": 0.8888888888888888,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 42,
+      "exact": 0.5454545454545454,
+      "close": 1.0,
+      "junk": 0.16666666666666666,
+      "abbr_kept": 0.9166666666666666,
+      "expanded": 0,
+      "invented": 0.0967741935483871
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 120,
+     "book": {
+      "ref": 35,
+      "cand": 42,
+      "exact": 0.45714285714285713,
+      "close": 0.9714285714285714,
+      "junk": 0.07142857142857142,
+      "abbr_kept": 0.875,
+      "expanded": 0,
+      "invented": 0.06666666666666667
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 139,
+     "book": {
+      "ref": 35,
+      "cand": 40,
+      "exact": 0.5428571428571428,
+      "close": 1.0,
+      "junk": 0.05,
+      "abbr_kept": 0.9285714285714286,
+      "expanded": 0,
+      "invented": 0.03225806451612903
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 27,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.4186046511627907,
+      "close": 0.9767441860465116,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.74,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 53,
+     "book": {
+      "ref": 42,
+      "cand": 43,
+      "exact": 0.7142857142857143,
+      "close": 1.0,
+      "junk": 0.023255813953488372,
+      "abbr_kept": 0.9,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 54,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.4186046511627907,
+      "close": 1.0,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 58,
+     "book": {
+      "ref": 41,
+      "cand": 46,
+      "exact": 0.5121951219512195,
+      "close": 1.0,
+      "junk": 0.10869565217391304,
+      "abbr_kept": 0.8857142857142857,
+      "expanded": 0,
+      "invented": 0.02564102564102564
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 109,
+     "book": {
+      "ref": 36,
+      "cand": 44,
+      "exact": 0.3611111111111111,
+      "close": 1.0,
+      "junk": 0.09090909090909091,
+      "abbr_kept": 0.7575757575757576,
+      "expanded": 0,
+      "invented": 0.09090909090909091
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 120,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.043478260869565216,
+      "close": 0.9782608695652174,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.7,
+      "expanded": 0,
+      "invented": 0.0625
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 169,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.24489795918367346,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.6521739130434783,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 183,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.5,
+      "close": 1.0,
+      "junk": 0.0196078431372549,
+      "abbr_kept": 0.9166666666666666,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 203,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.4897959183673469,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.7380952380952381,
+      "expanded": 0,
+      "invented": 0.02564102564102564
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 218,
+     "book": {
+      "ref": 46,
+      "cand": 49,
+      "exact": 0.6956521739130435,
+      "close": 1.0,
+      "junk": 0.061224489795918366,
+      "abbr_kept": 0.9230769230769231,
+      "expanded": 0,
+      "invented": 0.044444444444444446
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 55,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.6,
+      "close": 1.0,
+      "junk": 0.046511627906976744,
+      "abbr_kept": 0.71875,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 133,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.475,
+      "close": 1.0,
+      "junk": 0.06976744186046512,
+      "abbr_kept": 0.8148148148148148,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 193,
+     "book": {
+      "ref": 34,
+      "cand": 43,
+      "exact": 0.2647058823529412,
+      "close": 1.0,
+      "junk": 0.13953488372093023,
+      "abbr_kept": 0.6764705882352942,
+      "expanded": 0,
+      "invented": 0.09375
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 274,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.525,
+      "close": 1.0,
+      "junk": 0.06976744186046512,
+      "abbr_kept": 0.5952380952380952,
+      "expanded": 0,
+      "invented": 0.05555555555555555
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 283,
+     "book": {
+      "ref": 41,
+      "cand": 41,
+      "exact": 0.2926829268292683,
+      "close": 0.9512195121951219,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.7,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 174,
+     "book": {
+      "ref": 43,
+      "cand": 46,
+      "exact": 0.6511627906976745,
+      "close": 1.0,
+      "junk": 0.06521739130434782,
+      "abbr_kept": 0.8780487804878049,
+      "expanded": 0,
+      "invented": 0.02564102564102564
+     },
+     "gold": {
+      "ref": 30,
+      "cand": 46,
+      "exact": 0.5666666666666667,
+      "close": 1.0,
+      "junk": 0.1956521739130435,
+      "abbr_kept": 0.9259259259259259,
+      "expanded": 0,
+      "invented": 0.15384615384615385
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 187,
+     "book": {
+      "ref": 45,
+      "cand": 45,
+      "exact": 0.4222222222222222,
+      "close": 0.9777777777777777,
+      "junk": 0.0,
+      "abbr_kept": 0.6521739130434783,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 226,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.09302325581395349,
+      "close": 1.0,
+      "junk": 0.044444444444444446,
+      "abbr_kept": 0.5098039215686274,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 227,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.3333333333333333,
+      "close": 0.9285714285714286,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.868421052631579,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 231,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.13953488372093023,
+      "close": 0.9302325581395349,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.75,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 248,
+     "book": {
+      "ref": 42,
+      "cand": 43,
+      "exact": 0.16666666666666666,
+      "close": 0.9047619047619048,
+      "junk": 0.023255813953488372,
+      "abbr_kept": 0.5714285714285714,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 405,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.3488372093023256,
+      "close": 0.9534883720930233,
+      "junk": 0.022222222222222223,
+      "abbr_kept": 0.7142857142857143,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 22,
+      "cand": 45,
+      "exact": 0.3181818181818182,
+      "close": 0.9545454545454546,
+      "junk": 0.08888888888888889,
+      "abbr_kept": 0.6956521739130435,
+      "expanded": 0,
+      "invented": 0.08108108108108109
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 105,
+     "book": {
+      "ref": 90,
+      "cand": 103,
+      "exact": 0.022222222222222223,
+      "close": 0.8888888888888888,
+      "junk": 0.0970873786407767,
+      "abbr_kept": 0.5333333333333333,
+      "expanded": 0,
+      "invented": 0.04054054054054054
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 165,
+     "book": {
+      "ref": 92,
+      "cand": 95,
+      "exact": 0.021739130434782608,
+      "close": 0.7282608695652174,
+      "junk": 0.07368421052631578,
+      "abbr_kept": 0.49390243902439024,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 90,
+      "cand": 95,
+      "exact": 0.022222222222222223,
+      "close": 0.7555555555555555,
+      "junk": 0.07368421052631578,
+      "abbr_kept": 0.4880952380952381,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 167,
+     "book": {
+      "ref": 88,
+      "cand": 79,
+      "exact": 0.0,
+      "close": 0.6022727272727273,
+      "junk": 0.0379746835443038,
+      "abbr_kept": 0.4745762711864407,
+      "expanded": 0,
+      "invented": 0.016129032258064516
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 230,
+     "book": {
+      "ref": 85,
+      "cand": 106,
+      "exact": 0.047058823529411764,
+      "close": 0.7058823529411765,
+      "junk": 0.14150943396226415,
+      "abbr_kept": 0.5630252100840336,
+      "expanded": 0,
+      "invented": 0.08974358974358974
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 241,
+     "book": {
+      "ref": 89,
+      "cand": 201,
+      "exact": 0.0898876404494382,
+      "close": 0.9101123595505618,
+      "junk": 0.13930348258706468,
+      "abbr_kept": 0.47560975609756095,
+      "expanded": 0,
+      "invented": 0.07586206896551724
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 386,
+     "book": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.22105263157894736,
+      "close": 0.9473684210526315,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.6844660194174758,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     },
+     "gold": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.24210526315789474,
+      "close": 0.9578947368421052,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.6875,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 509,
+     "book": {
+      "ref": 87,
+      "cand": 99,
+      "exact": 0.09195402298850575,
+      "close": 0.896551724137931,
+      "junk": 0.06060606060606061,
+      "abbr_kept": 0.6529411764705882,
+      "expanded": 0,
+      "invented": 0.015384615384615385
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 159,
+     "book": {
+      "ref": 103,
+      "cand": 112,
+      "exact": 0.18446601941747573,
+      "close": 0.8058252427184466,
+      "junk": 0.044642857142857144,
+      "abbr_kept": 0.6956521739130435,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 168,
+     "book": {
+      "ref": 109,
+      "cand": 122,
+      "exact": 0.24770642201834864,
+      "close": 0.8899082568807339,
+      "junk": 0.06557377049180328,
+      "abbr_kept": 0.7314814814814815,
+      "expanded": 0,
+      "invented": 0.08695652173913043
+     },
+     "gold": {
+      "ref": 108,
+      "cand": 122,
+      "exact": 0.26851851851851855,
+      "close": 0.8796296296296297,
+      "junk": 0.07377049180327869,
+      "abbr_kept": 0.7403846153846154,
+      "expanded": 0,
+      "invented": 0.08695652173913043
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 200,
+     "book": {
+      "ref": 108,
+      "cand": 115,
+      "exact": 0.3333333333333333,
+      "close": 0.9166666666666666,
+      "junk": 0.034782608695652174,
+      "abbr_kept": 0.7719298245614035,
+      "expanded": 1,
+      "invented": 0.041666666666666664
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 233,
+     "book": {
+      "ref": 113,
+      "cand": 123,
+      "exact": 0.22123893805309736,
+      "close": 0.911504424778761,
+      "junk": 0.04065040650406504,
+      "abbr_kept": 0.6875,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 273,
+     "book": {
+      "ref": 103,
+      "cand": 120,
+      "exact": 0.1553398058252427,
+      "close": 0.8155339805825242,
+      "junk": 0.09166666666666666,
+      "abbr_kept": 0.7654320987654321,
+      "expanded": 0,
+      "invented": 0.03333333333333333
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 391,
+     "book": {
+      "ref": 122,
+      "cand": 127,
+      "exact": 0.27049180327868855,
+      "close": 0.9426229508196722,
+      "junk": 0.015748031496062992,
+      "abbr_kept": 0.8518518518518519,
+      "expanded": 0,
+      "invented": 0.01639344262295082
+     },
+     "gold": {
+      "ref": 121,
+      "cand": 127,
+      "exact": 0.3140495867768595,
+      "close": 0.9586776859504132,
+      "junk": 0.015748031496062992,
+      "abbr_kept": 0.8260869565217391,
+      "expanded": 0,
+      "invented": 0.01639344262295082
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 438,
+     "book": {
+      "ref": 123,
+      "cand": 126,
+      "exact": 0.35772357723577236,
+      "close": 0.967479674796748,
+      "junk": 0.0,
+      "abbr_kept": 0.8157894736842105,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 42,
+     "book": {
+      "ref": 123,
+      "cand": 124,
+      "exact": 0.3252032520325203,
+      "close": 0.991869918699187,
+      "junk": 0.008064516129032258,
+      "abbr_kept": 0.825136612021858,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 157,
+     "book": {
+      "ref": 115,
+      "cand": 119,
+      "exact": 0.25217391304347825,
+      "close": 0.9826086956521739,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.7873563218390804,
+      "expanded": 0,
+      "invented": 0.011111111111111112
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 326,
+     "book": {
+      "ref": 115,
+      "cand": 117,
+      "exact": 0.14782608695652175,
+      "close": 0.9739130434782609,
+      "junk": 0.008547008547008548,
+      "abbr_kept": 0.7560975609756098,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 397,
+     "book": {
+      "ref": 113,
+      "cand": 119,
+      "exact": 0.19469026548672566,
+      "close": 0.9292035398230089,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.6966292134831461,
+      "expanded": 0,
+      "invented": 0.011764705882352941
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 410,
+     "book": {
+      "ref": 116,
+      "cand": 115,
+      "exact": 0.16379310344827586,
+      "close": 0.9396551724137931,
+      "junk": 0.008695652173913044,
+      "abbr_kept": 0.8157894736842105,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    }
+   ]
+  },
+  "merge-conf": {
+   "pages": 48,
+   "mean": {
+    "boxed": 1.0,
+    "book_exact": 0.345,
+    "gold_exact": 0.439,
+    "book_close": 0.922,
+    "gold_close": 0.93,
+    "book_junk": 0.052,
+    "book_abbr_kept": 0.802,
+    "book_invented": 0.027,
+    "expanded_lines": 3
+   },
+   "per_page": [
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 50,
+     "book": {
+      "ref": 32,
+      "cand": 41,
+      "exact": 0.25,
+      "close": 0.90625,
+      "junk": 0.0975609756097561,
+      "abbr_kept": 0.9375,
+      "expanded": 0,
+      "invented": 0.06666666666666667
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 41,
+      "exact": 0.7878787878787878,
+      "close": 1.0,
+      "junk": 0.07317073170731707,
+      "abbr_kept": 0.9523809523809523,
+      "expanded": 0,
+      "invented": 0.03333333333333333
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 58,
+     "book": {
+      "ref": 35,
+      "cand": 41,
+      "exact": 0.08571428571428572,
+      "close": 0.8571428571428571,
+      "junk": 0.04878048780487805,
+      "abbr_kept": 0.9444444444444444,
+      "expanded": 0,
+      "invented": 0.037037037037037035
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 83,
+     "book": {
+      "ref": 31,
+      "cand": 41,
+      "exact": 0.25806451612903225,
+      "close": 0.9354838709677419,
+      "junk": 0.17073170731707318,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.1111111111111111
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 85,
+     "book": {
+      "ref": 40,
+      "cand": 41,
+      "exact": 0.25,
+      "close": 0.9,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 119,
+     "book": {
+      "ref": 40,
+      "cand": 42,
+      "exact": 0.25,
+      "close": 0.9,
+      "junk": 0.047619047619047616,
+      "abbr_kept": 0.9259259259259259,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 42,
+      "exact": 0.5151515151515151,
+      "close": 1.0,
+      "junk": 0.16666666666666666,
+      "abbr_kept": 0.9166666666666666,
+      "expanded": 0,
+      "invented": 0.0967741935483871
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 120,
+     "book": {
+      "ref": 35,
+      "cand": 42,
+      "exact": 0.5714285714285714,
+      "close": 0.9714285714285714,
+      "junk": 0.07142857142857142,
+      "abbr_kept": 0.8125,
+      "expanded": 0,
+      "invented": 0.06451612903225806
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 139,
+     "book": {
+      "ref": 35,
+      "cand": 40,
+      "exact": 0.5142857142857142,
+      "close": 1.0,
+      "junk": 0.05,
+      "abbr_kept": 0.9285714285714286,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 27,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.5813953488372093,
+      "close": 0.9767441860465116,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.8979591836734694,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 53,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.7380952380952381,
+      "close": 1.0,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9333333333333333,
+      "expanded": 0,
+      "invented": 0.027777777777777776
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 54,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.4418604651162791,
+      "close": 1.0,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.8666666666666667,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 58,
+     "book": {
+      "ref": 41,
+      "cand": 46,
+      "exact": 0.4878048780487805,
+      "close": 1.0,
+      "junk": 0.10869565217391304,
+      "abbr_kept": 0.9142857142857143,
+      "expanded": 0,
+      "invented": 0.02631578947368421
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 109,
+     "book": {
+      "ref": 36,
+      "cand": 44,
+      "exact": 0.5833333333333334,
+      "close": 0.9722222222222222,
+      "junk": 0.09090909090909091,
+      "abbr_kept": 0.8484848484848485,
+      "expanded": 0,
+      "invented": 0.08333333333333333
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 120,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.2608695652173913,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.9032258064516129,
+      "expanded": 0,
+      "invented": 0.05714285714285714
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 169,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.2653061224489796,
+      "close": 0.9795918367346939,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.6363636363636364,
+      "expanded": 0,
+      "invented": 0.03125
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 183,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.5652173913043478,
+      "close": 1.0,
+      "junk": 0.058823529411764705,
+      "abbr_kept": 0.8611111111111112,
+      "expanded": 0,
+      "invented": 0.044444444444444446
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 203,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.5714285714285714,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.8095238095238095,
+      "expanded": 0,
+      "invented": 0.025
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 218,
+     "book": {
+      "ref": 46,
+      "cand": 49,
+      "exact": 0.7391304347826086,
+      "close": 1.0,
+      "junk": 0.061224489795918366,
+      "abbr_kept": 0.9230769230769231,
+      "expanded": 0,
+      "invented": 0.045454545454545456
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 55,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.575,
+      "close": 1.0,
+      "junk": 0.046511627906976744,
+      "abbr_kept": 0.75,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 133,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.475,
+      "close": 0.975,
+      "junk": 0.06976744186046512,
+      "abbr_kept": 0.8846153846153846,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 193,
+     "book": {
+      "ref": 34,
+      "cand": 43,
+      "exact": 0.3235294117647059,
+      "close": 1.0,
+      "junk": 0.13953488372093023,
+      "abbr_kept": 0.7941176470588235,
+      "expanded": 0,
+      "invented": 0.09090909090909091
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 274,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.625,
+      "close": 0.95,
+      "junk": 0.06976744186046512,
+      "abbr_kept": 0.7297297297297297,
+      "expanded": 0,
+      "invented": 0.05555555555555555
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 283,
+     "book": {
+      "ref": 41,
+      "cand": 41,
+      "exact": 0.36585365853658536,
+      "close": 0.9512195121951219,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.76,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 174,
+     "book": {
+      "ref": 43,
+      "cand": 46,
+      "exact": 0.7209302325581395,
+      "close": 1.0,
+      "junk": 0.06521739130434782,
+      "abbr_kept": 0.926829268292683,
+      "expanded": 0,
+      "invented": 0.025
+     },
+     "gold": {
+      "ref": 30,
+      "cand": 46,
+      "exact": 0.6666666666666666,
+      "close": 1.0,
+      "junk": 0.17391304347826086,
+      "abbr_kept": 0.9259259259259259,
+      "expanded": 0,
+      "invented": 0.125
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 187,
+     "book": {
+      "ref": 45,
+      "cand": 45,
+      "exact": 0.4666666666666667,
+      "close": 0.9777777777777777,
+      "junk": 0.0,
+      "abbr_kept": 0.7391304347826086,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 226,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.11627906976744186,
+      "close": 1.0,
+      "junk": 0.044444444444444446,
+      "abbr_kept": 0.6274509803921569,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 227,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.42857142857142855,
+      "close": 0.9285714285714286,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9210526315789473,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 231,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.18604651162790697,
+      "close": 0.9302325581395349,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.7916666666666666,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 248,
+     "book": {
+      "ref": 42,
+      "cand": 43,
+      "exact": 0.23809523809523808,
+      "close": 0.9047619047619048,
+      "junk": 0.023255813953488372,
+      "abbr_kept": 0.7380952380952381,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 405,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.3023255813953488,
+      "close": 0.9302325581395349,
+      "junk": 0.022222222222222223,
+      "abbr_kept": 0.8048780487804879,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 22,
+      "cand": 45,
+      "exact": 0.45454545454545453,
+      "close": 0.9545454545454546,
+      "junk": 0.08888888888888889,
+      "abbr_kept": 0.9130434782608695,
+      "expanded": 0,
+      "invented": 0.05714285714285714
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 105,
+     "book": {
+      "ref": 90,
+      "cand": 102,
+      "exact": 0.13333333333333333,
+      "close": 0.8333333333333334,
+      "junk": 0.08823529411764706,
+      "abbr_kept": 0.6834532374100719,
+      "expanded": 0,
+      "invented": 0.038461538461538464
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 165,
+     "book": {
+      "ref": 92,
+      "cand": 94,
+      "exact": 0.09782608695652174,
+      "close": 0.7065217391304348,
+      "junk": 0.06382978723404255,
+      "abbr_kept": 0.6381578947368421,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 90,
+      "cand": 94,
+      "exact": 0.1,
+      "close": 0.7333333333333333,
+      "junk": 0.06382978723404255,
+      "abbr_kept": 0.6352201257861635,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 167,
+     "book": {
+      "ref": 88,
+      "cand": 79,
+      "exact": 0.03409090909090909,
+      "close": 0.625,
+      "junk": 0.0379746835443038,
+      "abbr_kept": 0.5833333333333334,
+      "expanded": 0,
+      "invented": 0.016129032258064516
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 230,
+     "book": {
+      "ref": 85,
+      "cand": 106,
+      "exact": 0.09411764705882353,
+      "close": 0.6941176470588235,
+      "junk": 0.14150943396226415,
+      "abbr_kept": 0.5948275862068966,
+      "expanded": 0,
+      "invented": 0.09210526315789473
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 241,
+     "book": {
+      "ref": 89,
+      "cand": 201,
+      "exact": 0.16853932584269662,
+      "close": 0.8876404494382022,
+      "junk": 0.14427860696517414,
+      "abbr_kept": 0.6234567901234568,
+      "expanded": 0,
+      "invented": 0.0684931506849315
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 386,
+     "book": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.3368421052631579,
+      "close": 0.9368421052631579,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.7881773399014779,
+      "expanded": 0,
+      "invented": 0.015625
+     },
+     "gold": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.3684210526315789,
+      "close": 0.9473684210526315,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.7902439024390244,
+      "expanded": 0,
+      "invented": 0.015625
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 509,
+     "book": {
+      "ref": 87,
+      "cand": 98,
+      "exact": 0.14942528735632185,
+      "close": 0.896551724137931,
+      "junk": 0.04081632653061224,
+      "abbr_kept": 0.7588235294117647,
+      "expanded": 0,
+      "invented": 0.014285714285714285
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 159,
+     "book": {
+      "ref": 103,
+      "cand": 112,
+      "exact": 0.23300970873786409,
+      "close": 0.7864077669902912,
+      "junk": 0.044642857142857144,
+      "abbr_kept": 0.7142857142857143,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 168,
+     "book": {
+      "ref": 109,
+      "cand": 121,
+      "exact": 0.24770642201834864,
+      "close": 0.8623853211009175,
+      "junk": 0.05785123966942149,
+      "abbr_kept": 0.7289719626168224,
+      "expanded": 0,
+      "invented": 0.07352941176470588
+     },
+     "gold": {
+      "ref": 108,
+      "cand": 121,
+      "exact": 0.26851851851851855,
+      "close": 0.8518518518518519,
+      "junk": 0.05785123966942149,
+      "abbr_kept": 0.7549019607843137,
+      "expanded": 0,
+      "invented": 0.07352941176470588
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 200,
+     "book": {
+      "ref": 108,
+      "cand": 115,
+      "exact": 0.3333333333333333,
+      "close": 0.8888888888888888,
+      "junk": 0.043478260869565216,
+      "abbr_kept": 0.8333333333333334,
+      "expanded": 1,
+      "invented": 0.04225352112676056
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 233,
+     "book": {
+      "ref": 113,
+      "cand": 123,
+      "exact": 0.24778761061946902,
+      "close": 0.8584070796460177,
+      "junk": 0.04065040650406504,
+      "abbr_kept": 0.74,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 273,
+     "book": {
+      "ref": 103,
+      "cand": 118,
+      "exact": 0.1650485436893204,
+      "close": 0.7669902912621359,
+      "junk": 0.07627118644067797,
+      "abbr_kept": 0.7808219178082192,
+      "expanded": 0,
+      "invented": 0.037037037037037035
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 391,
+     "book": {
+      "ref": 122,
+      "cand": 127,
+      "exact": 0.30327868852459017,
+      "close": 0.9426229508196722,
+      "junk": 0.015748031496062992,
+      "abbr_kept": 0.8918918918918919,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     },
+     "gold": {
+      "ref": 121,
+      "cand": 127,
+      "exact": 0.34710743801652894,
+      "close": 0.9504132231404959,
+      "junk": 0.015748031496062992,
+      "abbr_kept": 0.8849557522123894,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 438,
+     "book": {
+      "ref": 123,
+      "cand": 126,
+      "exact": 0.35772357723577236,
+      "close": 0.959349593495935,
+      "junk": 0.0,
+      "abbr_kept": 0.8738738738738738,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 42,
+     "book": {
+      "ref": 123,
+      "cand": 124,
+      "exact": 0.4634146341463415,
+      "close": 0.991869918699187,
+      "junk": 0.008064516129032258,
+      "abbr_kept": 0.9016393442622951,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 157,
+     "book": {
+      "ref": 115,
+      "cand": 119,
+      "exact": 0.3826086956521739,
+      "close": 0.9826086956521739,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.861271676300578,
+      "expanded": 0,
+      "invented": 0.010869565217391304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 326,
+     "book": {
+      "ref": 115,
+      "cand": 117,
+      "exact": 0.1826086956521739,
+      "close": 0.9652173913043478,
+      "junk": 0.008547008547008548,
+      "abbr_kept": 0.7791411042944786,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 397,
+     "book": {
+      "ref": 113,
+      "cand": 119,
+      "exact": 0.18584070796460178,
+      "close": 0.8407079646017699,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.691358024691358,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 410,
+     "book": {
+      "ref": 116,
+      "cand": 115,
+      "exact": 0.1896551724137931,
+      "close": 0.9051724137931034,
+      "junk": 0.008695652173913044,
+      "abbr_kept": 0.8120805369127517,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    }
+   ]
+  },
+  "merge-other": {
+   "pages": 48,
+   "mean": {
+    "boxed": 1.0,
+    "book_exact": 0.319,
+    "gold_exact": 0.408,
+    "book_close": 0.879,
+    "gold_close": 0.893,
+    "book_junk": 0.051,
+    "book_abbr_kept": 0.813,
+    "book_invented": 0.026,
+    "expanded_lines": 3
+   },
+   "per_page": [
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 50,
+     "book": {
+      "ref": 32,
+      "cand": 41,
+      "exact": 0.21875,
+      "close": 0.84375,
+      "junk": 0.0975609756097561,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.041666666666666664
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 41,
+      "exact": 0.696969696969697,
+      "close": 0.9393939393939394,
+      "junk": 0.07317073170731707,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 58,
+     "book": {
+      "ref": 35,
+      "cand": 41,
+      "exact": 0.02857142857142857,
+      "close": 0.8,
+      "junk": 0.04878048780487805,
+      "abbr_kept": 0.875,
+      "expanded": 0,
+      "invented": 0.04
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 83,
+     "book": {
+      "ref": 31,
+      "cand": 41,
+      "exact": 0.2903225806451613,
+      "close": 0.9354838709677419,
+      "junk": 0.14634146341463414,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.11538461538461539
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 85,
+     "book": {
+      "ref": 40,
+      "cand": 41,
+      "exact": 0.225,
+      "close": 0.825,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.8695652173913043,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 119,
+     "book": {
+      "ref": 40,
+      "cand": 42,
+      "exact": 0.25,
+      "close": 0.8,
+      "junk": 0.047619047619047616,
+      "abbr_kept": 0.9166666666666666,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 42,
+      "exact": 0.45454545454545453,
+      "close": 0.9393939393939394,
+      "junk": 0.16666666666666666,
+      "abbr_kept": 0.8636363636363636,
+      "expanded": 0,
+      "invented": 0.12
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 120,
+     "book": {
+      "ref": 35,
+      "cand": 42,
+      "exact": 0.5714285714285714,
+      "close": 0.9714285714285714,
+      "junk": 0.07142857142857142,
+      "abbr_kept": 0.8125,
+      "expanded": 0,
+      "invented": 0.0625
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 139,
+     "book": {
+      "ref": 35,
+      "cand": 40,
+      "exact": 0.4857142857142857,
+      "close": 0.9714285714285714,
+      "junk": 0.05,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 27,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.5348837209302325,
+      "close": 0.9767441860465116,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.8979591836734694,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 53,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.6428571428571429,
+      "close": 1.0,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9333333333333333,
+      "expanded": 0,
+      "invented": 0.027777777777777776
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 54,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.3953488372093023,
+      "close": 1.0,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.9,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 58,
+     "book": {
+      "ref": 41,
+      "cand": 46,
+      "exact": 0.4878048780487805,
+      "close": 0.975609756097561,
+      "junk": 0.10869565217391304,
+      "abbr_kept": 0.9142857142857143,
+      "expanded": 0,
+      "invented": 0.05128205128205128
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 109,
+     "book": {
+      "ref": 36,
+      "cand": 44,
+      "exact": 0.5833333333333334,
+      "close": 0.9722222222222222,
+      "junk": 0.09090909090909091,
+      "abbr_kept": 0.9090909090909091,
+      "expanded": 0,
+      "invented": 0.07894736842105263
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 120,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.2826086956521739,
+      "close": 0.9782608695652174,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.9,
+      "expanded": 0,
+      "invented": 0.05714285714285714
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 169,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.22448979591836735,
+      "close": 0.9795918367346939,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.6136363636363636,
+      "expanded": 0,
+      "invented": 0.03125
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 183,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.5652173913043478,
+      "close": 0.9782608695652174,
+      "junk": 0.058823529411764705,
+      "abbr_kept": 0.8333333333333334,
+      "expanded": 0,
+      "invented": 0.046511627906976744
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 203,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.5102040816326531,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.8809523809523809,
+      "expanded": 0,
+      "invented": 0.025
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 218,
+     "book": {
+      "ref": 46,
+      "cand": 49,
+      "exact": 0.6739130434782609,
+      "close": 0.9782608695652174,
+      "junk": 0.04081632653061224,
+      "abbr_kept": 0.8648648648648649,
+      "expanded": 0,
+      "invented": 0.046511627906976744
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 55,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.625,
+      "close": 1.0,
+      "junk": 0.046511627906976744,
+      "abbr_kept": 0.78125,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 133,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.3,
+      "close": 0.875,
+      "junk": 0.06976744186046512,
+      "abbr_kept": 0.8846153846153846,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 193,
+     "book": {
+      "ref": 34,
+      "cand": 43,
+      "exact": 0.3235294117647059,
+      "close": 0.9705882352941176,
+      "junk": 0.11627906976744186,
+      "abbr_kept": 0.7941176470588235,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 274,
+     "book": {
+      "ref": 40,
+      "cand": 42,
+      "exact": 0.55,
+      "close": 0.925,
+      "junk": 0.047619047619047616,
+      "abbr_kept": 0.7428571428571429,
+      "expanded": 0,
+      "invented": 0.06666666666666667
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 283,
+     "book": {
+      "ref": 41,
+      "cand": 41,
+      "exact": 0.36585365853658536,
+      "close": 0.926829268292683,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.7291666666666666,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 174,
+     "book": {
+      "ref": 43,
+      "cand": 46,
+      "exact": 0.7209302325581395,
+      "close": 0.9767441860465116,
+      "junk": 0.06521739130434782,
+      "abbr_kept": 0.926829268292683,
+      "expanded": 0,
+      "invented": 0.02564102564102564
+     },
+     "gold": {
+      "ref": 30,
+      "cand": 46,
+      "exact": 0.7,
+      "close": 1.0,
+      "junk": 0.17391304347826086,
+      "abbr_kept": 0.9259259259259259,
+      "expanded": 0,
+      "invented": 0.1282051282051282
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 187,
+     "book": {
+      "ref": 45,
+      "cand": 45,
+      "exact": 0.4666666666666667,
+      "close": 0.9555555555555556,
+      "junk": 0.0,
+      "abbr_kept": 0.75,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 226,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.13953488372093023,
+      "close": 1.0,
+      "junk": 0.044444444444444446,
+      "abbr_kept": 0.5882352941176471,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 227,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.30952380952380953,
+      "close": 0.9285714285714286,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9210526315789473,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 231,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.2558139534883721,
+      "close": 0.9069767441860465,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.8181818181818182,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 248,
+     "book": {
+      "ref": 42,
+      "cand": 43,
+      "exact": 0.2619047619047619,
+      "close": 0.8571428571428571,
+      "junk": 0.023255813953488372,
+      "abbr_kept": 0.7619047619047619,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 405,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.2558139534883721,
+      "close": 0.8604651162790697,
+      "junk": 0.022222222222222223,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 22,
+      "cand": 45,
+      "exact": 0.4090909090909091,
+      "close": 0.9545454545454546,
+      "junk": 0.15555555555555556,
+      "abbr_kept": 0.9565217391304348,
+      "expanded": 0,
+      "invented": 0.06451612903225806
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 105,
+     "book": {
+      "ref": 90,
+      "cand": 101,
+      "exact": 0.13333333333333333,
+      "close": 0.7777777777777778,
+      "junk": 0.07920792079207921,
+      "abbr_kept": 0.7175572519083969,
+      "expanded": 0,
+      "invented": 0.02631578947368421
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 165,
+     "book": {
+      "ref": 92,
+      "cand": 94,
+      "exact": 0.08695652173913043,
+      "close": 0.6847826086956522,
+      "junk": 0.06382978723404255,
+      "abbr_kept": 0.6462585034013606,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 90,
+      "cand": 94,
+      "exact": 0.1,
+      "close": 0.7222222222222222,
+      "junk": 0.06382978723404255,
+      "abbr_kept": 0.6369426751592356,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 167,
+     "book": {
+      "ref": 88,
+      "cand": 79,
+      "exact": 0.03409090909090909,
+      "close": 0.5795454545454546,
+      "junk": 0.0379746835443038,
+      "abbr_kept": 0.5826086956521739,
+      "expanded": 0,
+      "invented": 0.01694915254237288
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 230,
+     "book": {
+      "ref": 85,
+      "cand": 106,
+      "exact": 0.09411764705882353,
+      "close": 0.611764705882353,
+      "junk": 0.14150943396226415,
+      "abbr_kept": 0.65,
+      "expanded": 0,
+      "invented": 0.08450704225352113
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 241,
+     "book": {
+      "ref": 89,
+      "cand": 201,
+      "exact": 0.1797752808988764,
+      "close": 0.8314606741573034,
+      "junk": 0.15920398009950248,
+      "abbr_kept": 0.6805555555555556,
+      "expanded": 0,
+      "invented": 0.09027777777777778
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 386,
+     "book": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.3263157894736842,
+      "close": 0.8842105263157894,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.8306878306878307,
+      "expanded": 0,
+      "invented": 0.014925373134328358
+     },
+     "gold": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.35789473684210527,
+      "close": 0.8947368421052632,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.8324607329842932,
+      "expanded": 0,
+      "invented": 0.014925373134328358
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 509,
+     "book": {
+      "ref": 87,
+      "cand": 98,
+      "exact": 0.12643678160919541,
+      "close": 0.8505747126436781,
+      "junk": 0.04081632653061224,
+      "abbr_kept": 0.7560975609756098,
+      "expanded": 0,
+      "invented": 0.014705882352941176
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 159,
+     "book": {
+      "ref": 103,
+      "cand": 113,
+      "exact": 0.1941747572815534,
+      "close": 0.7281553398058253,
+      "junk": 0.05309734513274336,
+      "abbr_kept": 0.7215189873417721,
+      "expanded": 0,
+      "invented": 0.02666666666666667
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 168,
+     "book": {
+      "ref": 109,
+      "cand": 121,
+      "exact": 0.1926605504587156,
+      "close": 0.7798165137614679,
+      "junk": 0.05785123966942149,
+      "abbr_kept": 0.7096774193548387,
+      "expanded": 0,
+      "invented": 0.07936507936507936
+     },
+     "gold": {
+      "ref": 108,
+      "cand": 121,
+      "exact": 0.21296296296296297,
+      "close": 0.7777777777777778,
+      "junk": 0.06611570247933884,
+      "abbr_kept": 0.7415730337078652,
+      "expanded": 0,
+      "invented": 0.07936507936507936
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 200,
+     "book": {
+      "ref": 108,
+      "cand": 114,
+      "exact": 0.25925925925925924,
+      "close": 0.8240740740740741,
+      "junk": 0.03508771929824561,
+      "abbr_kept": 0.8247422680412371,
+      "expanded": 1,
+      "invented": 0.046153846153846156
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 233,
+     "book": {
+      "ref": 113,
+      "cand": 123,
+      "exact": 0.168141592920354,
+      "close": 0.6991150442477876,
+      "junk": 0.04065040650406504,
+      "abbr_kept": 0.7564102564102564,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 273,
+     "book": {
+      "ref": 103,
+      "cand": 116,
+      "exact": 0.10679611650485436,
+      "close": 0.6310679611650486,
+      "junk": 0.07758620689655173,
+      "abbr_kept": 0.8181818181818182,
+      "expanded": 0,
+      "invented": 0.043478260869565216
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 391,
+     "book": {
+      "ref": 122,
+      "cand": 125,
+      "exact": 0.27049180327868855,
+      "close": 0.9016393442622951,
+      "junk": 0.016,
+      "abbr_kept": 0.897196261682243,
+      "expanded": 0,
+      "invented": 0.017857142857142856
+     },
+     "gold": {
+      "ref": 121,
+      "cand": 125,
+      "exact": 0.3305785123966942,
+      "close": 0.9173553719008265,
+      "junk": 0.016,
+      "abbr_kept": 0.8899082568807339,
+      "expanded": 0,
+      "invented": 0.017857142857142856
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 438,
+     "book": {
+      "ref": 123,
+      "cand": 126,
+      "exact": 0.3252032520325203,
+      "close": 0.8943089430894309,
+      "junk": 0.0,
+      "abbr_kept": 0.8725490196078431,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 42,
+     "book": {
+      "ref": 123,
+      "cand": 124,
+      "exact": 0.43902439024390244,
+      "close": 0.983739837398374,
+      "junk": 0.008064516129032258,
+      "abbr_kept": 0.9230769230769231,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 157,
+     "book": {
+      "ref": 115,
+      "cand": 119,
+      "exact": 0.34782608695652173,
+      "close": 0.9217391304347826,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.8647058823529412,
+      "expanded": 0,
+      "invented": 0.01098901098901099
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 326,
+     "book": {
+      "ref": 115,
+      "cand": 117,
+      "exact": 0.2,
+      "close": 0.9130434782608695,
+      "junk": 0.008547008547008548,
+      "abbr_kept": 0.8223684210526315,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 397,
+     "book": {
+      "ref": 113,
+      "cand": 119,
+      "exact": 0.11504424778761062,
+      "close": 0.6902654867256637,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.7099236641221374,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 410,
+     "book": {
+      "ref": 116,
+      "cand": 117,
+      "exact": 0.1810344827586207,
+      "close": 0.853448275862069,
+      "junk": 0.017094017094017096,
+      "abbr_kept": 0.8098591549295775,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    }
+   ]
+  },
+  "merge-conf-add": {
+   "pages": 48,
+   "mean": {
+    "boxed": 1.0,
+    "book_exact": 0.345,
+    "gold_exact": 0.439,
+    "book_close": 0.922,
+    "gold_close": 0.93,
+    "book_junk": 0.054,
+    "book_abbr_kept": 0.802,
+    "book_invented": 0.028,
+    "expanded_lines": 3
+   },
+   "per_page": [
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 50,
+     "book": {
+      "ref": 32,
+      "cand": 41,
+      "exact": 0.25,
+      "close": 0.90625,
+      "junk": 0.0975609756097561,
+      "abbr_kept": 0.9375,
+      "expanded": 0,
+      "invented": 0.06666666666666667
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 41,
+      "exact": 0.7878787878787878,
+      "close": 1.0,
+      "junk": 0.07317073170731707,
+      "abbr_kept": 0.9523809523809523,
+      "expanded": 0,
+      "invented": 0.03333333333333333
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 58,
+     "book": {
+      "ref": 35,
+      "cand": 41,
+      "exact": 0.08571428571428572,
+      "close": 0.8571428571428571,
+      "junk": 0.04878048780487805,
+      "abbr_kept": 0.9444444444444444,
+      "expanded": 0,
+      "invented": 0.037037037037037035
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 83,
+     "book": {
+      "ref": 31,
+      "cand": 41,
+      "exact": 0.25806451612903225,
+      "close": 0.9354838709677419,
+      "junk": 0.17073170731707318,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.1111111111111111
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 85,
+     "book": {
+      "ref": 40,
+      "cand": 41,
+      "exact": 0.25,
+      "close": 0.9,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 119,
+     "book": {
+      "ref": 40,
+      "cand": 42,
+      "exact": 0.25,
+      "close": 0.9,
+      "junk": 0.047619047619047616,
+      "abbr_kept": 0.9259259259259259,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 42,
+      "exact": 0.5151515151515151,
+      "close": 1.0,
+      "junk": 0.16666666666666666,
+      "abbr_kept": 0.9166666666666666,
+      "expanded": 0,
+      "invented": 0.0967741935483871
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 120,
+     "book": {
+      "ref": 35,
+      "cand": 42,
+      "exact": 0.5714285714285714,
+      "close": 0.9714285714285714,
+      "junk": 0.07142857142857142,
+      "abbr_kept": 0.8125,
+      "expanded": 0,
+      "invented": 0.06451612903225806
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 139,
+     "book": {
+      "ref": 35,
+      "cand": 41,
+      "exact": 0.5142857142857142,
+      "close": 1.0,
+      "junk": 0.07317073170731707,
+      "abbr_kept": 0.9285714285714286,
+      "expanded": 0,
+      "invented": 0.058823529411764705
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 27,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.5813953488372093,
+      "close": 0.9767441860465116,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.8979591836734694,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 53,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.7380952380952381,
+      "close": 1.0,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9333333333333333,
+      "expanded": 0,
+      "invented": 0.027777777777777776
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 54,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.4418604651162791,
+      "close": 1.0,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.8666666666666667,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 58,
+     "book": {
+      "ref": 41,
+      "cand": 47,
+      "exact": 0.4878048780487805,
+      "close": 1.0,
+      "junk": 0.1276595744680851,
+      "abbr_kept": 0.9142857142857143,
+      "expanded": 0,
+      "invented": 0.02631578947368421
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 109,
+     "book": {
+      "ref": 36,
+      "cand": 44,
+      "exact": 0.5833333333333334,
+      "close": 0.9722222222222222,
+      "junk": 0.09090909090909091,
+      "abbr_kept": 0.8484848484848485,
+      "expanded": 0,
+      "invented": 0.08333333333333333
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 120,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.2608695652173913,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.9032258064516129,
+      "expanded": 0,
+      "invented": 0.05714285714285714
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 169,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.2653061224489796,
+      "close": 0.9795918367346939,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.6363636363636364,
+      "expanded": 0,
+      "invented": 0.03125
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 183,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.5652173913043478,
+      "close": 1.0,
+      "junk": 0.058823529411764705,
+      "abbr_kept": 0.8611111111111112,
+      "expanded": 0,
+      "invented": 0.044444444444444446
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 203,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.5714285714285714,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.8095238095238095,
+      "expanded": 0,
+      "invented": 0.025
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 218,
+     "book": {
+      "ref": 46,
+      "cand": 49,
+      "exact": 0.7391304347826086,
+      "close": 1.0,
+      "junk": 0.061224489795918366,
+      "abbr_kept": 0.9230769230769231,
+      "expanded": 0,
+      "invented": 0.045454545454545456
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 55,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.575,
+      "close": 1.0,
+      "junk": 0.046511627906976744,
+      "abbr_kept": 0.75,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 133,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.475,
+      "close": 0.975,
+      "junk": 0.06976744186046512,
+      "abbr_kept": 0.8846153846153846,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 193,
+     "book": {
+      "ref": 34,
+      "cand": 43,
+      "exact": 0.3235294117647059,
+      "close": 1.0,
+      "junk": 0.13953488372093023,
+      "abbr_kept": 0.7941176470588235,
+      "expanded": 0,
+      "invented": 0.09090909090909091
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 274,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.625,
+      "close": 0.95,
+      "junk": 0.06976744186046512,
+      "abbr_kept": 0.7297297297297297,
+      "expanded": 0,
+      "invented": 0.05555555555555555
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 283,
+     "book": {
+      "ref": 41,
+      "cand": 41,
+      "exact": 0.36585365853658536,
+      "close": 0.9512195121951219,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.76,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 174,
+     "book": {
+      "ref": 43,
+      "cand": 46,
+      "exact": 0.7209302325581395,
+      "close": 1.0,
+      "junk": 0.06521739130434782,
+      "abbr_kept": 0.926829268292683,
+      "expanded": 0,
+      "invented": 0.025
+     },
+     "gold": {
+      "ref": 30,
+      "cand": 46,
+      "exact": 0.6666666666666666,
+      "close": 1.0,
+      "junk": 0.17391304347826086,
+      "abbr_kept": 0.9259259259259259,
+      "expanded": 0,
+      "invented": 0.125
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 187,
+     "book": {
+      "ref": 45,
+      "cand": 45,
+      "exact": 0.4666666666666667,
+      "close": 0.9777777777777777,
+      "junk": 0.0,
+      "abbr_kept": 0.7391304347826086,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 226,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.11627906976744186,
+      "close": 1.0,
+      "junk": 0.044444444444444446,
+      "abbr_kept": 0.6274509803921569,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 227,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.42857142857142855,
+      "close": 0.9285714285714286,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9210526315789473,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 231,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.18604651162790697,
+      "close": 0.9302325581395349,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.7916666666666666,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 248,
+     "book": {
+      "ref": 42,
+      "cand": 43,
+      "exact": 0.23809523809523808,
+      "close": 0.9047619047619048,
+      "junk": 0.023255813953488372,
+      "abbr_kept": 0.7380952380952381,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 405,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.3023255813953488,
+      "close": 0.9302325581395349,
+      "junk": 0.022222222222222223,
+      "abbr_kept": 0.8048780487804879,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 22,
+      "cand": 45,
+      "exact": 0.45454545454545453,
+      "close": 0.9545454545454546,
+      "junk": 0.08888888888888889,
+      "abbr_kept": 0.9130434782608695,
+      "expanded": 0,
+      "invented": 0.05714285714285714
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 105,
+     "book": {
+      "ref": 90,
+      "cand": 103,
+      "exact": 0.13333333333333333,
+      "close": 0.8333333333333334,
+      "junk": 0.0970873786407767,
+      "abbr_kept": 0.6834532374100719,
+      "expanded": 0,
+      "invented": 0.038461538461538464
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 165,
+     "book": {
+      "ref": 92,
+      "cand": 95,
+      "exact": 0.09782608695652174,
+      "close": 0.7065217391304348,
+      "junk": 0.07368421052631578,
+      "abbr_kept": 0.6381578947368421,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 90,
+      "cand": 95,
+      "exact": 0.1,
+      "close": 0.7333333333333333,
+      "junk": 0.07368421052631578,
+      "abbr_kept": 0.6352201257861635,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 167,
+     "book": {
+      "ref": 88,
+      "cand": 79,
+      "exact": 0.03409090909090909,
+      "close": 0.625,
+      "junk": 0.0379746835443038,
+      "abbr_kept": 0.5833333333333334,
+      "expanded": 0,
+      "invented": 0.016129032258064516
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 230,
+     "book": {
+      "ref": 85,
+      "cand": 107,
+      "exact": 0.09411764705882353,
+      "close": 0.6941176470588235,
+      "junk": 0.14018691588785046,
+      "abbr_kept": 0.5948275862068966,
+      "expanded": 0,
+      "invented": 0.09210526315789473
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 241,
+     "book": {
+      "ref": 89,
+      "cand": 202,
+      "exact": 0.16853932584269662,
+      "close": 0.8876404494382022,
+      "junk": 0.14356435643564355,
+      "abbr_kept": 0.6234567901234568,
+      "expanded": 0,
+      "invented": 0.06802721088435375
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 386,
+     "book": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.3368421052631579,
+      "close": 0.9368421052631579,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.7881773399014779,
+      "expanded": 0,
+      "invented": 0.015625
+     },
+     "gold": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.3684210526315789,
+      "close": 0.9473684210526315,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.7902439024390244,
+      "expanded": 0,
+      "invented": 0.015625
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 509,
+     "book": {
+      "ref": 87,
+      "cand": 98,
+      "exact": 0.14942528735632185,
+      "close": 0.896551724137931,
+      "junk": 0.04081632653061224,
+      "abbr_kept": 0.7588235294117647,
+      "expanded": 0,
+      "invented": 0.014285714285714285
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 159,
+     "book": {
+      "ref": 103,
+      "cand": 112,
+      "exact": 0.23300970873786409,
+      "close": 0.7864077669902912,
+      "junk": 0.044642857142857144,
+      "abbr_kept": 0.7142857142857143,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 168,
+     "book": {
+      "ref": 109,
+      "cand": 121,
+      "exact": 0.24770642201834864,
+      "close": 0.8623853211009175,
+      "junk": 0.05785123966942149,
+      "abbr_kept": 0.7289719626168224,
+      "expanded": 0,
+      "invented": 0.07352941176470588
+     },
+     "gold": {
+      "ref": 108,
+      "cand": 121,
+      "exact": 0.26851851851851855,
+      "close": 0.8518518518518519,
+      "junk": 0.05785123966942149,
+      "abbr_kept": 0.7549019607843137,
+      "expanded": 0,
+      "invented": 0.07352941176470588
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 200,
+     "book": {
+      "ref": 108,
+      "cand": 117,
+      "exact": 0.3333333333333333,
+      "close": 0.8888888888888888,
+      "junk": 0.05128205128205128,
+      "abbr_kept": 0.8333333333333334,
+      "expanded": 1,
+      "invented": 0.04225352112676056
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 233,
+     "book": {
+      "ref": 113,
+      "cand": 123,
+      "exact": 0.24778761061946902,
+      "close": 0.8584070796460177,
+      "junk": 0.04065040650406504,
+      "abbr_kept": 0.74,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 273,
+     "book": {
+      "ref": 103,
+      "cand": 118,
+      "exact": 0.1650485436893204,
+      "close": 0.7669902912621359,
+      "junk": 0.07627118644067797,
+      "abbr_kept": 0.7808219178082192,
+      "expanded": 0,
+      "invented": 0.037037037037037035
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 391,
+     "book": {
+      "ref": 122,
+      "cand": 127,
+      "exact": 0.30327868852459017,
+      "close": 0.9426229508196722,
+      "junk": 0.015748031496062992,
+      "abbr_kept": 0.8918918918918919,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     },
+     "gold": {
+      "ref": 121,
+      "cand": 127,
+      "exact": 0.34710743801652894,
+      "close": 0.9504132231404959,
+      "junk": 0.015748031496062992,
+      "abbr_kept": 0.8849557522123894,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 438,
+     "book": {
+      "ref": 123,
+      "cand": 126,
+      "exact": 0.35772357723577236,
+      "close": 0.959349593495935,
+      "junk": 0.0,
+      "abbr_kept": 0.8738738738738738,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 42,
+     "book": {
+      "ref": 123,
+      "cand": 124,
+      "exact": 0.4634146341463415,
+      "close": 0.991869918699187,
+      "junk": 0.008064516129032258,
+      "abbr_kept": 0.9016393442622951,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 157,
+     "book": {
+      "ref": 115,
+      "cand": 119,
+      "exact": 0.3826086956521739,
+      "close": 0.9826086956521739,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.861271676300578,
+      "expanded": 0,
+      "invented": 0.010869565217391304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 326,
+     "book": {
+      "ref": 115,
+      "cand": 117,
+      "exact": 0.1826086956521739,
+      "close": 0.9652173913043478,
+      "junk": 0.008547008547008548,
+      "abbr_kept": 0.7791411042944786,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 397,
+     "book": {
+      "ref": 113,
+      "cand": 119,
+      "exact": 0.18584070796460178,
+      "close": 0.8407079646017699,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.691358024691358,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 410,
+     "book": {
+      "ref": 116,
+      "cand": 115,
+      "exact": 0.1896551724137931,
+      "close": 0.9051724137931034,
+      "junk": 0.008695652173913044,
+      "abbr_kept": 0.8120805369127517,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    }
+   ]
+  },
+  "merge-other-add": {
+   "pages": 48,
+   "mean": {
+    "boxed": 1.0,
+    "book_exact": 0.319,
+    "gold_exact": 0.408,
+    "book_close": 0.879,
+    "gold_close": 0.893,
+    "book_junk": 0.052,
+    "book_abbr_kept": 0.813,
+    "book_invented": 0.027,
+    "expanded_lines": 3
+   },
+   "per_page": [
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 50,
+     "book": {
+      "ref": 32,
+      "cand": 41,
+      "exact": 0.21875,
+      "close": 0.84375,
+      "junk": 0.0975609756097561,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.041666666666666664
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 41,
+      "exact": 0.696969696969697,
+      "close": 0.9393939393939394,
+      "junk": 0.07317073170731707,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 58,
+     "book": {
+      "ref": 35,
+      "cand": 41,
+      "exact": 0.02857142857142857,
+      "close": 0.8,
+      "junk": 0.04878048780487805,
+      "abbr_kept": 0.875,
+      "expanded": 0,
+      "invented": 0.04
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 83,
+     "book": {
+      "ref": 31,
+      "cand": 41,
+      "exact": 0.2903225806451613,
+      "close": 0.9354838709677419,
+      "junk": 0.14634146341463414,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.11538461538461539
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 85,
+     "book": {
+      "ref": 40,
+      "cand": 41,
+      "exact": 0.225,
+      "close": 0.825,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.8695652173913043,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 119,
+     "book": {
+      "ref": 40,
+      "cand": 42,
+      "exact": 0.25,
+      "close": 0.8,
+      "junk": 0.047619047619047616,
+      "abbr_kept": 0.9166666666666666,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 33,
+      "cand": 42,
+      "exact": 0.45454545454545453,
+      "close": 0.9393939393939394,
+      "junk": 0.16666666666666666,
+      "abbr_kept": 0.8636363636363636,
+      "expanded": 0,
+      "invented": 0.12
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 120,
+     "book": {
+      "ref": 35,
+      "cand": 42,
+      "exact": 0.5714285714285714,
+      "close": 0.9714285714285714,
+      "junk": 0.07142857142857142,
+      "abbr_kept": 0.8125,
+      "expanded": 0,
+      "invented": 0.0625
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0016",
+     "leaf": 139,
+     "book": {
+      "ref": 35,
+      "cand": 41,
+      "exact": 0.4857142857142857,
+      "close": 0.9714285714285714,
+      "junk": 0.07317073170731707,
+      "abbr_kept": 1.0,
+      "expanded": 0,
+      "invented": 0.058823529411764705
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 27,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.5348837209302325,
+      "close": 0.9767441860465116,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.8979591836734694,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 53,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.6428571428571429,
+      "close": 1.0,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9333333333333333,
+      "expanded": 0,
+      "invented": 0.027777777777777776
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 54,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.3953488372093023,
+      "close": 1.0,
+      "junk": 0.022727272727272728,
+      "abbr_kept": 0.9,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 58,
+     "book": {
+      "ref": 41,
+      "cand": 47,
+      "exact": 0.4878048780487805,
+      "close": 0.975609756097561,
+      "junk": 0.1276595744680851,
+      "abbr_kept": 0.9142857142857143,
+      "expanded": 0,
+      "invented": 0.05128205128205128
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0019",
+     "leaf": 109,
+     "book": {
+      "ref": 36,
+      "cand": 44,
+      "exact": 0.5833333333333334,
+      "close": 0.9722222222222222,
+      "junk": 0.09090909090909091,
+      "abbr_kept": 0.9090909090909091,
+      "expanded": 0,
+      "invented": 0.07894736842105263
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 120,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.2826086956521739,
+      "close": 0.9782608695652174,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.9,
+      "expanded": 0,
+      "invented": 0.05714285714285714
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 169,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.22448979591836735,
+      "close": 0.9795918367346939,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.6136363636363636,
+      "expanded": 0,
+      "invented": 0.03125
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 183,
+     "book": {
+      "ref": 46,
+      "cand": 51,
+      "exact": 0.5652173913043478,
+      "close": 0.9782608695652174,
+      "junk": 0.058823529411764705,
+      "abbr_kept": 0.8333333333333334,
+      "expanded": 0,
+      "invented": 0.046511627906976744
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 203,
+     "book": {
+      "ref": 49,
+      "cand": 51,
+      "exact": 0.5102040816326531,
+      "close": 1.0,
+      "junk": 0.0392156862745098,
+      "abbr_kept": 0.8809523809523809,
+      "expanded": 0,
+      "invented": 0.025
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0026",
+     "leaf": 218,
+     "book": {
+      "ref": 46,
+      "cand": 49,
+      "exact": 0.6739130434782609,
+      "close": 0.9782608695652174,
+      "junk": 0.04081632653061224,
+      "abbr_kept": 0.8648648648648649,
+      "expanded": 0,
+      "invented": 0.046511627906976744
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 55,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.625,
+      "close": 1.0,
+      "junk": 0.046511627906976744,
+      "abbr_kept": 0.78125,
+      "expanded": 0,
+      "invented": 0.030303030303030304
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 133,
+     "book": {
+      "ref": 40,
+      "cand": 43,
+      "exact": 0.3,
+      "close": 0.875,
+      "junk": 0.06976744186046512,
+      "abbr_kept": 0.8846153846153846,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 193,
+     "book": {
+      "ref": 34,
+      "cand": 43,
+      "exact": 0.3235294117647059,
+      "close": 0.9705882352941176,
+      "junk": 0.11627906976744186,
+      "abbr_kept": 0.7941176470588235,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 274,
+     "book": {
+      "ref": 40,
+      "cand": 42,
+      "exact": 0.55,
+      "close": 0.925,
+      "junk": 0.047619047619047616,
+      "abbr_kept": 0.7428571428571429,
+      "expanded": 0,
+      "invented": 0.06666666666666667
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0028",
+     "leaf": 283,
+     "book": {
+      "ref": 41,
+      "cand": 41,
+      "exact": 0.36585365853658536,
+      "close": 0.926829268292683,
+      "junk": 0.024390243902439025,
+      "abbr_kept": 0.7291666666666666,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 174,
+     "book": {
+      "ref": 43,
+      "cand": 46,
+      "exact": 0.7209302325581395,
+      "close": 0.9767441860465116,
+      "junk": 0.06521739130434782,
+      "abbr_kept": 0.926829268292683,
+      "expanded": 0,
+      "invented": 0.02564102564102564
+     },
+     "gold": {
+      "ref": 30,
+      "cand": 46,
+      "exact": 0.7,
+      "close": 1.0,
+      "junk": 0.17391304347826086,
+      "abbr_kept": 0.9259259259259259,
+      "expanded": 0,
+      "invented": 0.1282051282051282
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 187,
+     "book": {
+      "ref": 45,
+      "cand": 45,
+      "exact": 0.4666666666666667,
+      "close": 0.9555555555555556,
+      "junk": 0.0,
+      "abbr_kept": 0.75,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 226,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.13953488372093023,
+      "close": 1.0,
+      "junk": 0.044444444444444446,
+      "abbr_kept": 0.5882352941176471,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 227,
+     "book": {
+      "ref": 42,
+      "cand": 44,
+      "exact": 0.30952380952380953,
+      "close": 0.9285714285714286,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.9210526315789473,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 231,
+     "book": {
+      "ref": 43,
+      "cand": 44,
+      "exact": 0.2558139534883721,
+      "close": 0.9069767441860465,
+      "junk": 0.045454545454545456,
+      "abbr_kept": 0.8181818181818182,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 248,
+     "book": {
+      "ref": 42,
+      "cand": 43,
+      "exact": 0.2619047619047619,
+      "close": 0.8571428571428571,
+      "junk": 0.023255813953488372,
+      "abbr_kept": 0.7619047619047619,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0030",
+     "leaf": 405,
+     "book": {
+      "ref": 43,
+      "cand": 45,
+      "exact": 0.2558139534883721,
+      "close": 0.8604651162790697,
+      "junk": 0.022222222222222223,
+      "abbr_kept": 0.8,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 22,
+      "cand": 45,
+      "exact": 0.4090909090909091,
+      "close": 0.9545454545454546,
+      "junk": 0.15555555555555556,
+      "abbr_kept": 0.9565217391304348,
+      "expanded": 0,
+      "invented": 0.06451612903225806
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 105,
+     "book": {
+      "ref": 90,
+      "cand": 102,
+      "exact": 0.13333333333333333,
+      "close": 0.7777777777777778,
+      "junk": 0.08823529411764706,
+      "abbr_kept": 0.7175572519083969,
+      "expanded": 0,
+      "invented": 0.02631578947368421
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 165,
+     "book": {
+      "ref": 92,
+      "cand": 95,
+      "exact": 0.08695652173913043,
+      "close": 0.6847826086956522,
+      "junk": 0.07368421052631578,
+      "abbr_kept": 0.6462585034013606,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": {
+      "ref": 90,
+      "cand": 95,
+      "exact": 0.1,
+      "close": 0.7222222222222222,
+      "junk": 0.07368421052631578,
+      "abbr_kept": 0.6369426751592356,
+      "expanded": 0,
+      "invented": 0.0
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 167,
+     "book": {
+      "ref": 88,
+      "cand": 79,
+      "exact": 0.03409090909090909,
+      "close": 0.5795454545454546,
+      "junk": 0.0379746835443038,
+      "abbr_kept": 0.5826086956521739,
+      "expanded": 0,
+      "invented": 0.01694915254237288
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 230,
+     "book": {
+      "ref": 85,
+      "cand": 107,
+      "exact": 0.09411764705882353,
+      "close": 0.611764705882353,
+      "junk": 0.14018691588785046,
+      "abbr_kept": 0.65,
+      "expanded": 0,
+      "invented": 0.08450704225352113
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 241,
+     "book": {
+      "ref": 89,
+      "cand": 202,
+      "exact": 0.1797752808988764,
+      "close": 0.8314606741573034,
+      "junk": 0.15841584158415842,
+      "abbr_kept": 0.6805555555555556,
+      "expanded": 0,
+      "invented": 0.0896551724137931
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 386,
+     "book": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.3263157894736842,
+      "close": 0.8842105263157894,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.8306878306878307,
+      "expanded": 0,
+      "invented": 0.014925373134328358
+     },
+     "gold": {
+      "ref": 95,
+      "cand": 99,
+      "exact": 0.35789473684210527,
+      "close": 0.8947368421052632,
+      "junk": 0.030303030303030304,
+      "abbr_kept": 0.8324607329842932,
+      "expanded": 0,
+      "invented": 0.014925373134328358
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0034",
+     "leaf": 509,
+     "book": {
+      "ref": 87,
+      "cand": 98,
+      "exact": 0.12643678160919541,
+      "close": 0.8505747126436781,
+      "junk": 0.04081632653061224,
+      "abbr_kept": 0.7560975609756098,
+      "expanded": 0,
+      "invented": 0.014705882352941176
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 159,
+     "book": {
+      "ref": 103,
+      "cand": 113,
+      "exact": 0.1941747572815534,
+      "close": 0.7281553398058253,
+      "junk": 0.05309734513274336,
+      "abbr_kept": 0.7215189873417721,
+      "expanded": 0,
+      "invented": 0.02666666666666667
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 168,
+     "book": {
+      "ref": 109,
+      "cand": 121,
+      "exact": 0.1926605504587156,
+      "close": 0.7798165137614679,
+      "junk": 0.05785123966942149,
+      "abbr_kept": 0.7096774193548387,
+      "expanded": 0,
+      "invented": 0.07936507936507936
+     },
+     "gold": {
+      "ref": 108,
+      "cand": 121,
+      "exact": 0.21296296296296297,
+      "close": 0.7777777777777778,
+      "junk": 0.06611570247933884,
+      "abbr_kept": 0.7415730337078652,
+      "expanded": 0,
+      "invented": 0.07936507936507936
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 200,
+     "book": {
+      "ref": 108,
+      "cand": 116,
+      "exact": 0.25925925925925924,
+      "close": 0.8240740740740741,
+      "junk": 0.04310344827586207,
+      "abbr_kept": 0.8247422680412371,
+      "expanded": 1,
+      "invented": 0.046153846153846156
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 233,
+     "book": {
+      "ref": 113,
+      "cand": 123,
+      "exact": 0.168141592920354,
+      "close": 0.6991150442477876,
+      "junk": 0.04065040650406504,
+      "abbr_kept": 0.7564102564102564,
+      "expanded": 0,
+      "invented": 0.016666666666666666
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 273,
+     "book": {
+      "ref": 103,
+      "cand": 116,
+      "exact": 0.10679611650485436,
+      "close": 0.6310679611650486,
+      "junk": 0.07758620689655173,
+      "abbr_kept": 0.8181818181818182,
+      "expanded": 0,
+      "invented": 0.043478260869565216
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 391,
+     "book": {
+      "ref": 122,
+      "cand": 125,
+      "exact": 0.27049180327868855,
+      "close": 0.9016393442622951,
+      "junk": 0.016,
+      "abbr_kept": 0.897196261682243,
+      "expanded": 0,
+      "invented": 0.017857142857142856
+     },
+     "gold": {
+      "ref": 121,
+      "cand": 125,
+      "exact": 0.3305785123966942,
+      "close": 0.9173553719008265,
+      "junk": 0.016,
+      "abbr_kept": 0.8899082568807339,
+      "expanded": 0,
+      "invented": 0.017857142857142856
+     }
+    },
+    {
+     "volume": "micro_IABROOKLYN_0036",
+     "leaf": 438,
+     "book": {
+      "ref": 123,
+      "cand": 126,
+      "exact": 0.3252032520325203,
+      "close": 0.8943089430894309,
+      "junk": 0.0,
+      "abbr_kept": 0.8725490196078431,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 42,
+     "book": {
+      "ref": 123,
+      "cand": 124,
+      "exact": 0.43902439024390244,
+      "close": 0.983739837398374,
+      "junk": 0.008064516129032258,
+      "abbr_kept": 0.9230769230769231,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 157,
+     "book": {
+      "ref": 115,
+      "cand": 119,
+      "exact": 0.34782608695652173,
+      "close": 0.9217391304347826,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.8647058823529412,
+      "expanded": 0,
+      "invented": 0.01098901098901099
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 326,
+     "book": {
+      "ref": 115,
+      "cand": 117,
+      "exact": 0.2,
+      "close": 0.9130434782608695,
+      "junk": 0.008547008547008548,
+      "abbr_kept": 0.8223684210526315,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 397,
+     "book": {
+      "ref": 113,
+      "cand": 119,
+      "exact": 0.11504424778761062,
+      "close": 0.6902654867256637,
+      "junk": 0.01680672268907563,
+      "abbr_kept": 0.7099236641221374,
+      "expanded": 1,
+      "invented": 0.0
+     },
+     "gold": null
+    },
+    {
+     "volume": "micro_IABROOKLYN_0037",
+     "leaf": 410,
+     "book": {
+      "ref": 116,
+      "cand": 117,
+      "exact": 0.1810344827586207,
+      "close": 0.853448275862069,
+      "junk": 0.017094017094017096,
+      "abbr_kept": 0.8098591549295775,
+      "expanded": 0,
+      "invented": 0.0
+     },
+     "gold": null
+    }
+   ]
+  }
+ }
+}

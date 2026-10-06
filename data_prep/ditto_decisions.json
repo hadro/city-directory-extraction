@@ -12,13 +12,17 @@
   "because `n` is also \"near\" in a wrapped address. A mark is confirmed for the volumes the",
   "review page showed it in (results/ditto_review_letters.html: 500+ lines there).",
   "",
-  "Each verdict was made on the page images: data_prep/ditto_review_page.py --ids <volumes>."
+  "Each verdict was made on the page images: data_prep/ditto_review_page.py --ids <volumes>.",
+  "",
+  "`ambiguous` marks were reviewed and are not admitted: the crops show them as the ditto on some",
+  "lines and as something else on others (`li` is also the `h` marker opening a wrapped line). They",
+  "are left out of later review pages like decided marks."
  ],
  "volumes": {
   "trowsgeneraldire1915trow": {
    "decided_by": "hadro",
-   "date": "2026-10-04",
-   "review": "results/ditto_review_trowsgeneraldire1915trow.html; results/ditto_review_letters.html",
+   "date": "2026-10-05",
+   "review": "results/ditto_review_trowsgeneraldire1915trow.html; results/ditto_review_letters.html; results/ditto_review_letters_tail.html",
    "confirmed": [
     ".1",
     "1",
@@ -41,14 +45,23 @@
     "ti",
     "tt",
     "m",
-    "u"
+    "u",
+    "■",
+    "a",
+    "pp",
+    "t",
+    "pi"
    ],
    "rejected": {
     "&": "not a ditto (hadro): mostly a business name or address wrapped onto a second line, or a ditto mark followed by an ampersand whose ditto the OCR dropped",
     "4": "the same case: 9 of 10 crops are a printed '\" &' with the & read as 4 and the ditto dropped, the 10th a wrapped '& Liquor Co'. Admitting it would turn 'Gluck & Mandel' into 'Gluck Mandel'",
-    "h": "the residence marker at the start of a wrapped line ('h Newark N J'), not a ditto (hadro)"
+    "h": "the residence marker at the start of a wrapped line ('h Newark N J'), not a ditto (hadro)",
+    "in": "usually genuine text (hadro)"
    },
-   "note": "Two reviews. The first (14 punctuation/digit marks, 33,477 scoped lines) missed the letter-shaped readings of the same printed '\"', which lead 44.5% of the volume's lines; the second (results/ditto_review_letters.html) added 8 of them. All are OCR readings of one glyph (PIPELINE.md #18)."
+   "note": "Two reviews. The first (14 punctuation/digit marks, 33,477 scoped lines) missed the letter-shaped readings of the same printed '\"', which lead 44.5% of the volume's lines; the second (results/ditto_review_letters.html) added 8 of them. All are OCR readings of one glyph (PIPELINE.md #18).",
+   "ambiguous": {
+    "'": "ambiguous (hadro): not admitted"
+   }
   },
   "trowsgeneraldire1917trow": {
    "decided_by": "hadro",
@@ -71,14 +84,30 @@
     ",.",
     "u",
     "t",
-    "in"
+    "in",
+    "■",
+    "«",
+    "a",
+    "■1",
+    "•1",
+    "-",
+    "hi",
+    "»",
+    "ir",
+    "41"
    ],
    "rejected": {
     "h": "the residence marker at the start of a wrapped line ('h Newark N J'), not a ditto (hadro)",
-    "4": "the OCR's reading of '&' (hadro): a '\" &' firm entry with the ditto dropped"
+    "4": "the OCR's reading of '&' (hadro): a '\" &' firm entry with the ditto dropped",
+    "&": "not a ditto: hadro's verdict on `&` (results/ditto_review_letters.html), applied to every volume, since it is a verdict on the glyph",
+    "r": "genuine text: the `r` (rooms) marker, usually right as read (hadro)",
+    "0": "not a ditto (hadro)"
    },
-   "date": "2026-10-04",
-   "review": "results/ditto_review_letters.html"
+   "date": "2026-10-05",
+   "review": "results/ditto_review_letters.html; results/ditto_review_letters_tail.html",
+   "ambiguous": {
+    "li": "sometimes the ditto, sometimes the `h` marker opening a wrapped line (hadro): not admitted"
+   }
   },
   "brooklynnewyorkc1910geor": {
    "decided_by": "hadro",
@@ -88,11 +117,22 @@
     "it",
     "11",
     ".1",
-    "a"
+    "a",
+    ",.",
+    "m",
+    "u",
+    ",,",
+    "ti",
+    ".,",
+    "i"
    ],
-   "rejected": {},
-   "date": "2026-10-04",
-   "review": "results/ditto_review_letters.html"
+   "rejected": {
+    "&": "not a ditto: hadro's verdict on `&` (results/ditto_review_letters.html), applied to every volume, since it is a verdict on the glyph",
+    "h": "the residence marker opening a wrapped line: hadro's verdict on `h` (results/ditto_review_letters.html), applied to every volume",
+    "317": "genuine text: `317 Washington St`, the directory office in banner ads (hadro)"
+   },
+   "date": "2026-10-05",
+   "review": "results/ditto_review_letters.html; results/ditto_review_letters_tail.html"
   },
   "brooklynnewyork1910p2geor": {
    "decided_by": "hadro",
@@ -102,11 +142,20 @@
     "11",
     ".1",
     ".,",
-    "a"
+    "a",
+    ",.",
+    "it",
+    "m",
+    "ti",
+    ",1"
    ],
-   "rejected": {},
-   "date": "2026-10-04",
-   "review": "results/ditto_review_letters.html"
+   "rejected": {
+    "&": "not a ditto: hadro's verdict on `&` (results/ditto_review_letters.html), applied to every volume, since it is a verdict on the glyph",
+    "h": "the residence marker opening a wrapped line: hadro's verdict on `h` (results/ditto_review_letters.html), applied to every volume",
+    "317": "genuine text: `317 Washington St`, the directory office in banner ads (hadro)"
+   },
+   "date": "2026-10-05",
+   "review": "results/ditto_review_letters.html; results/ditto_review_letters_tail.html"
   },
   "trowsgenerald192223p1trow": {
    "decided_by": "hadro",
@@ -124,14 +173,35 @@
     "••",
     "■■",
     "||",
-    "■1"
+    "■1",
+    "■",
+    "«",
+    "■•",
+    "•■",
+    "•1",
+    "''",
+    "|",
+    "u",
+    "'\"",
+    "il"
    ],
    "rejected": {
     "h": "the residence marker at the start of a wrapped line ('h Newark N J'), not a ditto (hadro)",
-    "&": "not a ditto (hadro): a wrapped business line, or the & of a '\" &' firm entry whose ditto the OCR dropped"
+    "&": "not a ditto (hadro): a wrapped business line, or the & of a '\" &' firm entry whose ditto the OCR dropped",
+    "r": "genuine text: the `r` (rooms) marker, usually right as read (hadro)",
+    "of": "genuine text (hadro)",
+    "5": "genuine text (hadro)",
+    "120": "genuine text (hadro)",
+    "50": "genuine text (hadro)",
+    "6": "the OCR's reading of `&`, as `4` (hadro)",
+    "25": "genuine text (hadro)"
    },
-   "date": "2026-10-04",
-   "review": "results/ditto_review_letters.html"
+   "date": "2026-10-05",
+   "review": "results/ditto_review_letters.html; results/ditto_review_letters_tail.html",
+   "ambiguous": {
+    "li": "sometimes the ditto, sometimes the `h` marker opening a wrapped line (hadro): not admitted",
+    "!": "ambiguous, often cut-off text (hadro): not admitted"
+   }
   },
   "trowsgenerald192223p2trow": {
    "decided_by": "hadro",
@@ -148,15 +218,51 @@
     "••",
     "•1",
     "''",
-    "|"
+    "|",
+    "■",
+    "«",
+    "■•",
+    "•■",
+    "■1",
+    "it",
+    "■■",
+    "u",
+    "'\"",
+    "o"
    ],
    "rejected": {
     "h": "the residence marker at the start of a wrapped line ('h Newark N J'), not a ditto (hadro)",
-    "&": "not a ditto (hadro): a wrapped business line, or the & of a '\" &' firm entry whose ditto the OCR dropped"
+    "&": "not a ditto (hadro): a wrapped business line, or the & of a '\" &' firm entry whose ditto the OCR dropped",
+    "r": "genuine text: the `r` (rooms) marker, usually right as read (hadro)",
+    "of": "genuine text (hadro)",
+    "5": "genuine text (hadro)",
+    "120": "genuine text (hadro)",
+    "50": "genuine text (hadro)",
+    "6": "the OCR's reading of `&`, as `4` (hadro)",
+    "30": "genuine text (hadro)"
    },
-   "date": "2026-10-04",
-   "review": "results/ditto_review_letters.html",
-   "note": "hadro confirmed `i` while noting the page's left edge is cut off: 163 of its 675 `i` lines start at the image edge, where a clipped column's first letters survive as `i` (leaf 653 prints Stahlberg as 'tanlberg'). Most `i` lines are the ditto (leaf 561, 808)."
+   "date": "2026-10-05",
+   "review": "results/ditto_review_letters.html; results/ditto_review_letters_tail.html",
+   "note": "hadro confirmed `i` while noting the page's left edge is cut off: 163 of its 675 `i` lines start at the image edge, where a clipped column's first letters survive as `i` (leaf 653 prints Stahlberg as 'tanlberg'). Most `i` lines are the ditto (leaf 561, 808).",
+   "ambiguous": {
+    "li": "sometimes the ditto, sometimes the `h` marker opening a wrapped line (hadro): not admitted"
+   }
+  },
+  "1906BPL": {
+   "decided_by": "hadro",
+   "confirmed": [
+    "41",
+    "14",
+    "'*",
+    "*'",
+    "‘",
+    "4‘",
+    "*",
+    "1"
+   ],
+   "rejected": {},
+   "date": "2026-10-05",
+   "review": "results/ditto_review_1906BPL.html"
   }
  }
 }

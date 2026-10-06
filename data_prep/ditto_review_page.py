@@ -76,7 +76,21 @@ def decided(ident: str) -> set:
     if not DECISIONS.exists():
         return set()
     vol = json.loads(DECISIONS.read_text(encoding="utf-8"))["volumes"].get(ident) or {}
-    return set(vol.get("confirmed") or ()) | set(vol.get("rejected") or {})
+    return (set(vol.get("confirmed") or ()) | set(vol.get("rejected") or {})
+            | set(vol.get("ambiguous") or {}))
+
+
+def gate_ratios(ident: str) -> dict:
+    """mark -> share of its lines with a capitalised word next, over every candidate line of
+    the volume (data/survey_ocr/<id>_lines.jsonl.gz): what the sweep's gate measures."""
+    lead, follow = collections.Counter(), collections.Counter()
+    with gzip.open(OCR / f"{ident}_lines.jsonl.gz", "rt", encoding="utf-8") as fh:
+        for line in fh:
+            tk = json.loads(line)["raw_line"].split()
+            if tk:
+                lead[tk[0]] += 1
+                follow[tk[0]] += len(tk) > 1 and bool(NAME_FOLLOWER.match(tk[1]))
+    return {w: follow[w] / c for w, c in lead.items()}
 
 
 def candidates(ident: str):
@@ -98,6 +112,7 @@ def candidates(ident: str):
             if tk[0] == '"':
                 given[tk[1]] += 1
     vocab = {w for w, c in given.items() if c >= GIVEN_MIN}
+    gate = gate_ratios(ident)
     skip = decided(ident)
     out = []
     for w, c in lead.items():
@@ -105,7 +120,10 @@ def candidates(ident: str):
             continue
         kind = "letters" if LETTERS.match(w) else "review" if w in review else None
         ratio = follow[w] / c
-        if kind and ratio >= DITTO_MIN_FOLLOWER:
+        # a verdict cannot admit a mark below the gate's own follower floor, which the sweep
+        # measures over the volume's every candidate line, front matter and ads included: 1906BPL's
+        # `*` and `1` read 75% and 67% on listing pages and 42% and 20% volume-wide (2026-10-05)
+        if kind and ratio >= DITTO_MIN_FOLLOWER and gate.get(w, 0.0) >= DITTO_MIN_FOLLOWER:
             g = sum(s in vocab for s in second[w]) / c
             out.append((c, w, c / n, ratio, g, kind))
     out.sort(key=lambda x: (x[5] != "letters", -x[0]))

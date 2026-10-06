@@ -852,6 +852,24 @@ volume it was decided for.
 > GROUND_TRUTH_HANDOFF.md, "Corrections to gold after export"). The real-OCR panel
 > score for that twin (8.3 row EM, against 63.9 on clean text) needs a Torch run to re-measure.
 >
+> **The tails, decided 2026-10-05.** These are the six volumes' marks under the 500-line floor
+> (`results/ditto_review_letters_tail.html`, 44 marks) and 1906BPL's queue
+> (`results/ditto_review_1906BPL.html`, 8 marks).
+> - Rejected as genuine text: `r` (the rooms marker), `of`, `in`, `317` (the directory office
+>   in banner ads), `5`, `25`, `30`, `50`, `120`. Also `6` (the OCR's `&`) and `0`.
+> - Recorded as **ambiguous**, so not admitted and not asked again:
+>   - `li`: sometimes the ditto, sometimes `h` opening a wrapped line;
+>   - `'`;
+>   - `!`: often cut-off text.
+> - Everything else confirmed.
+> - The earlier rulings on `&` and `h` now apply to all six volumes.
+>
+> 1906BPL is re-derived (ditto-led lines 134,124 → 136,103). Its `*` and `1` stay out, though
+> confirmed: a capitalised word follows them only 42% and 20% of the time volume-wide, under the
+> 0.70 floor no verdict overrides (the review page had measured listing pages only; it now uses
+> the gate's own ratio). **The six ABBYY-8 volumes take their tail verdicts at the post-panel
+> re-derive**, with `fix_digit_s`, so panel run 3's inputs stay what it measures.
+>
 > Found while reviewing (hadro): **some late Trow pages have their left edge cut off**, so the
 > leftmost column's first letters are lost (1922/23 p2 leaf 653 prints Stahlberg as `tanlberg`).
 > Pages with 15+ lines touching the image's left edge: 334 in 1922/23 p1, 136 in p2, 300 in

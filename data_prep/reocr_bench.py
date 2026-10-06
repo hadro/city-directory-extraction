@@ -498,6 +498,8 @@ def hybrid(args) -> int:
 
 BODY_RX = re.compile(r"<Body>(.*?)(?:</Body>|$)", re.S)
 LINE_RX = re.compile(r"<Line[^>]*>(.*?)</Line>", re.S)
+INITIAL_RX = re.compile(r"<Initial[^>]*>(.*?)</Initial>\s*", re.S)
+TAG_RX = re.compile(r"<[^>]+>")
 
 
 def body_lines(raw: str) -> list:
@@ -505,11 +507,18 @@ def body_lines(raw: str) -> list:
     `<Metadata>` describes the page ("<PhysicalDescription>Single page from a printed
     directory."), names its `<Script>` and `<Language>`, and whose `<Header>` holds the running
     title and folio. The runner's flattening kept all of it as lines: those were the "descriptive
-    lines" (2026-10-06). An output cut off mid-document keeps the lines it finished."""
+    lines" (2026-10-06). An output cut off mid-document keeps the lines it finished. Tags inside
+    a line keep their text: `<Emphasis>`, `<Addition>`, and `<Initial>`, which on a column crop
+    of the 1858 Brooklyn directory holds the "E" (Eastern District) before an entry, separated
+    by a space as the page prints it."""
     import html as _html
     m = BODY_RX.search(raw)
-    return [_html.unescape(t).strip() for t in LINE_RX.findall(m.group(1) if m else "")
-            if t.strip()]
+    out = []
+    for t in LINE_RX.findall(m.group(1) if m else ""):
+        t = " ".join(TAG_RX.sub("", INITIAL_RX.sub(r"\1 ", t)).split())
+        if t:
+            out.append(_html.unescape(t))
+    return out
 
 
 def import_run(args) -> int:
@@ -552,6 +561,11 @@ def _self_test() -> int:
            "Andrew, grocers</Line></Paragraph><Paragraph><Line>Hall Jo")
     assert body_lines(raw) == ["Haley Henry, accountant Baltic n Smith",
                                "Ford John & Andrew, grocers"], "body only, entities, cut-off safe"
+    raw = ("<Body><Line><Initial>E</Initial>Agar James, h. Pacific</Line><Line>Rogers G W, "
+           "policeman <Addition>apple</Addition></Line><Line>\n  <Emphasis type=\"italic\">See "
+           "index.</Emphasis>\n</Line></Body>")
+    assert body_lines(raw) == ["E Agar James, h. Pacific", "Rogers G W, policeman apple",
+                               "See index."], "inner tags keep their text"
     print("self-test ok")
     return 0
 

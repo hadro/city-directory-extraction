@@ -9,6 +9,7 @@ by line (reocr_bench.py's winning recipe), cached per page, then written as a wo
 survey harvest can derive from.
 
     python3 data_prep/reocr_volumes.py run [--tier defer] [--ids a,b] [--workers 6] [--limit N]
+    python3 data_prep/reocr_volumes.py download [--tier defer] [--ids a,b]  # whole jp2 zips first
     python3 data_prep/reocr_volumes.py status
     python3 data_prep/reocr_volumes.py --self-test
 
@@ -51,6 +52,7 @@ REPO = HERE.parent
 SIDECARS = HERE / "survey"
 OCR = REPO / "data" / "survey_ocr"
 WORK = REPO / "data" / "reocr"
+ZIPS = REPO / "data" / "reocr_zips"
 TIERS = HERE / "run_tiers.json"
 sys.path.insert(0, str(HERE))
 
@@ -83,10 +85,32 @@ def pages(ident: str) -> list:
     return out
 
 
+def zip_path(ident: str) -> Path:
+    return ZIPS / f"{ident}_jp2.zip"
+
+
+def jp2_to_jpeg(data: bytes) -> bytes:
+    import io
+    from PIL import Image
+    buf = io.BytesIO()
+    Image.open(io.BytesIO(data)).convert("RGB").save(buf, "JPEG", quality=92)
+    return buf.getvalue()
+
+
 def fetch(ident: str, leaf: int, dst: Path, tries: int = 3) -> None:
-    """The page at full size: IIIF, or the original JPEG 2000 from the item's `_jp2.zip`, the same
-    pixels. IIIF answers 500 at full size for some leaves however often it is asked (2026-10-06:
-    brooklynnewyorkc19123broo leaf 121, micro_IABROOKLYN_0039 leaf 11), while the jp2 is served."""
+    """The page at full size: from the volume's `_jp2.zip` when `download` has fetched it, else
+    IIIF, else that zip's one member over HTTP -- the same pixels each way. IIIF answers 500 or
+    504 for some leaves however often it is asked (2026-10-06: brooklynnewyorkc19123broo leaf 121,
+    micro_IABROOKLYN_0039 leaf 11, micro_IABROOKLYN_0029 leaf 127 after 62 s), and a worker
+    waiting out its retries holds a slot: the run fell from ~670 pages/h to ~50."""
+    if zip_path(ident).exists():
+        import zipfile
+        with zipfile.ZipFile(zip_path(ident)) as zf:
+            data = jp2_to_jpeg(zf.read(f"{ident}_jp2/{ident}_{leaf:04d}.jp2"))
+        tmp = dst.with_suffix(".part")
+        tmp.write_bytes(data)
+        tmp.rename(dst)
+        return
     urls = [f"{IIIF}/{ident}${leaf}/full/max/0/default.jpg",
             f"https://archive.org/download/{ident}/{ident}_jp2.zip/{ident}_jp2%2F{ident}_{leaf:04d}.jp2"]
     last = None
@@ -95,11 +119,7 @@ def fetch(ident: str, leaf: int, dst: Path, tries: int = 3) -> None:
             try:
                 data = urllib.request.urlopen(url, timeout=180).read()
                 if url.endswith(".jp2"):          # store as the JPEG the rest of the job reads
-                    import io
-                    from PIL import Image
-                    buf = io.BytesIO()
-                    Image.open(io.BytesIO(data)).convert("RGB").save(buf, "JPEG", quality=92)
-                    data = buf.getvalue()
+                    data = jp2_to_jpeg(data)
                 tmp = dst.with_suffix(".part")
                 tmp.write_bytes(data)
                 tmp.rename(dst)
@@ -305,6 +325,37 @@ def run(args) -> int:
     return 0
 
 
+def download(args) -> int:
+    """Each volume's `<id>_jp2.zip` (the original JPEG 2000s IIIF renders from) whole, in run
+    order, for volumes with pages left: curl resumes a broken transfer (-C -), the size is checked
+    against the item's file list, and only a complete zip is renamed into place, so `fetch` never
+    reads a partial one. A volume's zip can go once its pages are cached."""
+    ZIPS.mkdir(parents=True, exist_ok=True)
+    for ident in volumes(args):
+        dst = zip_path(ident)
+        left = [leaf for leaf in pages(ident)
+                if not (WORK / ident / f"{ident}_{leaf:04d}.json").exists()]
+        if dst.exists() or not left:
+            continue
+        name = f"{ident}_jp2.zip"
+        files = json.loads(urllib.request.urlopen(f"https://archive.org/metadata/{ident}/files",
+                                                  timeout=120).read())["result"]
+        size = next(int(f["size"]) for f in files if f["name"] == name)
+        part = dst.with_name(name + ".part")
+        t0 = time.time()
+        r = subprocess.run(["curl", "-sSL", "--retry", "5", "--retry-delay", "10", "-C", "-",
+                            "-o", str(part), f"https://archive.org/download/{ident}/{name}"])
+        got = part.stat().st_size if part.exists() else 0
+        if r.returncode or got != size:
+            print(f"{ident}: curl exit {r.returncode}, {got}/{size} bytes; rerun to resume",
+                  flush=True)
+            continue
+        part.rename(dst)
+        print(f"{ident}: {size / 1e9:.2f} GB in {time.time() - t0:.0f}s, {len(left)} pages left",
+              flush=True)
+    return 0
+
+
 def status(args) -> int:
     for i in volumes(args):
         n = len(pages(i))
@@ -354,7 +405,7 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["run", "status"])
+    ap.add_argument("cmd", nargs="?", choices=["run", "download", "status"])
     ap.add_argument("--tier", default="defer")
     ap.add_argument("--ids")
     ap.add_argument("--workers", type=int, default=6)
@@ -365,6 +416,8 @@ def main(argv=None) -> int:
         return _self_test()
     if args.cmd == "run":
         return run(args)
+    if args.cmd == "download":
+        return download(args)
     if args.cmd == "status":
         return status(args)
     ap.error("a command is required")

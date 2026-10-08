@@ -7,8 +7,8 @@
 Column crops of the re-OCR'd pages for Churro-3B on Torch, and Churro's answers back as page
 lines for the hybrid (docs/PIPELINE.md #27).
 
-    python3 data_prep/reocr_columns.py stage [--per-shard 150]   # -> data/reocr_columns/
-    tar czf cde-churro-columns.tar.gz data/reocr_columns         # ship; hpc/38_churro.sbatch
+    python3 data_prep/reocr_columns.py stage [--per-shard 150] [--workers 6]  # -> data/reocr_columns/
+    tar cf cde-churro-columns.tar data/reocr_columns             # ship (JPEGs: no gzip); hpc/38_churro.sbatch
     python3 data_prep/reocr_columns.py import                    # -> data/reocr/<id>.churro.jsonl
     python3 data_prep/reocr_columns.py --self-test
 
@@ -44,53 +44,102 @@ OUT = REPO / "data" / "reocr_columns"
 sys.path.insert(0, str(HERE))
 
 from reocr_bench import body_lines  # noqa: E402
-from reocr_volumes import columns  # noqa: E402
+from reocr_volumes import page_columns  # noqa: E402
 
 PAD = 0.01              # of the page width, around each crop
+MAX_DIM = 2500          # churro-ocr's MAX_INLINE_IMAGE_DIM: it shrinks a larger image to fit
 SLUG = "churro-3b"
 
 
-def crop_boxes(rec: dict) -> list:
-    """[(k, (x0, y0, x1, y1))] for a cached page: each column, over the text's vertical extent."""
+def crop_boxes(rec: dict) -> tuple:
+    """(angle, [(k, (x0, y0, x1, y1))]) for a cached page: the degrees its image is turned
+    upright by (Image.rotate; 0.0 for a page tilted under reocr_volumes.SKEW_MIN), and each
+    column over the text's vertical extent, in the turned image's pixels. The columns are the
+    current rule's, not the cache's."""
     W, H = rec["page_size"]
     if not rec["lines"]:
-        return []
-    y0 = min(w[1] for ws in rec["lines"] for w in ws)
-    y1 = max(w[3] for ws in rec["lines"] for w in ws)
+        return 0.0, []
+    angle, upright, cols = page_columns(rec["lines"], (W, H))
+    y0 = min(w[1] for ws in upright for w in ws)
+    y1 = max(w[3] for ws in upright for w in ws)
     pad = int(PAD * W)
-    return [(k, (max(0, x0 - pad), max(0, y0 - pad), min(W, x1 + pad), min(H, y1 + pad)))
-            for k, (x0, x1) in enumerate(columns(rec["lines"], W))]   # current rule, not the cache
+    return angle, [(k, (max(0, x0 - pad), max(0, y0 - pad), min(W, x1 + pad), min(H, y1 + pad)))
+                   for k, (x0, x1) in enumerate(cols)]
 
 
 def readings(crop: Path) -> list:
     return [crop.with_name(f"{crop.stem}_{SLUG}.{ext}") for ext in ("raw.txt", "meta.json")]
 
 
-def stage(args) -> int:
-    """Each crop's box (page pixels) is kept in boxes.json. A page whose columns changed (the rule
-    did, 2026-10-06) gets new crops and loses Churro's readings of the old ones, and a column that
-    no longer exists loses its crop; an unchanged box keeps both. (Comparing the JPEG bytes does
-    not work: Pillow encodes the same crop to a few bytes' difference from one call to the next.)"""
+def fit(img):
+    """The crop as Churro will see it: churro-ocr's prepare_ocr_image fits every image within
+    MAX_DIM x MAX_DIM (Lanczos) before the model does, so a full-size crop ships pixels it never
+    reads (15 GB of crops at full size, 2026-10-06). Same arithmetic, so its resize is a no-op."""
     from PIL import Image
+    w, h = img.size
+    if max(w, h) <= MAX_DIM:
+        return img
+    scale = min(MAX_DIM / w, MAX_DIM / h)
+    return img.resize((max(1, int(w * scale)), max(1, int(h * scale))),
+                      resample=Image.Resampling.LANCZOS)
+
+
+def stage_page(job) -> tuple:
+    """One page's crops, cut where the page's manifest entries changed: (entries, crops, cut)."""
+    from PIL import Image
+    page, old = job
+    rec = json.loads(page.read_text(encoding="utf-8"))
+    angle, page_boxes = crop_boxes(rec)
+    img, entries, crops, cut = None, {}, [], 0
+    for k, box in page_boxes:
+        dst = OUT / page.parent.name / f"{page.stem}_c{k}.jpg"
+        key = str(dst.relative_to(OUT))
+        entries[key] = list(box) + ([angle] if angle else [])
+        if not dst.exists() or old.get(key) != entries[key]:
+            if img is None:
+                img = Image.open(page.with_suffix(".jpg"))
+                if angle:
+                    img = img.rotate(angle, resample=Image.BICUBIC, fillcolor="white")
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            fit(img.crop(box).convert("RGB")).save(dst, quality=92)
+            for r in readings(dst):
+                r.unlink(missing_ok=True)
+            cut += 1
+        else:
+            with Image.open(dst) as c:
+                big = max(c.size) > MAX_DIM
+            if big:                          # cut before crops were fitted: same pixels to Churro
+                fit(Image.open(dst)).save(dst, quality=92)
+        crops.append(dst)
+    return entries, crops, cut
+
+
+def stage(args) -> int:
+    """Each crop's box (page pixels; then the angle, for a page turned upright) is kept in
+    boxes.json. A page whose columns changed (the rule did, 2026-10-06) gets new crops and loses
+    Churro's readings of the old ones, and a column that no longer exists loses its crop; an
+    unchanged entry keeps both. (Comparing the JPEG bytes does not work: Pillow encodes the same
+    crop to a few bytes' difference from one call to the next.) Pages run in --workers
+    processes, and the manifest is saved every 500 pages, so a killed run resumes: one pass
+    over all 7,947 pages took longer than half an hour in a single process."""
+    import multiprocessing
     manifest = OUT / "boxes.json"
     old = json.loads(manifest.read_text(encoding="utf-8")) if manifest.exists() else {}
+    by_page = collections.defaultdict(dict)
+    for key, entry in old.items():
+        by_page[key.rsplit("_c", 1)[0]][key] = entry
+    pages = sorted(WORK.glob("*/*.json"))
+    jobs = [(p, by_page.get(f"{p.parent.name}/{p.stem}", {})) for p in pages]
     boxes, crops, changed = {}, [], 0
-    for page in sorted(WORK.glob("*/*.json")):
-        rec = json.loads(page.read_text(encoding="utf-8"))
-        ident = page.parent.name
-        img = None
-        for k, box in crop_boxes(rec):
-            dst = OUT / ident / f"{page.stem}_c{k}.jpg"
-            key = str(dst.relative_to(OUT))
-            boxes[key] = list(box)
-            if not dst.exists() or old.get(key) != list(box):
-                img = img or Image.open(page.with_suffix(".jpg"))
-                dst.parent.mkdir(parents=True, exist_ok=True)
-                img.crop(box).convert("RGB").save(dst, quality=92)
-                for r in readings(dst):
-                    r.unlink(missing_ok=True)
-                changed += 1
-            crops.append(dst)
+    with multiprocessing.Pool(args.workers) as pool:
+        for n, (entries, page_crops, cut) in enumerate(pool.imap(stage_page, jobs, chunksize=8), 1):
+            boxes.update(entries)
+            crops += page_crops
+            changed += cut
+            if n % 500 == 0:
+                manifest.write_text(json.dumps({**old, **boxes}, indent=0, sort_keys=True),
+                                    encoding="utf-8")
+                print(f"  {n}/{len(jobs)} pages, {changed} crops cut", file=sys.stderr, flush=True)
     staged = set(crops)
     gone = [c for c in OUT.glob("*/*_c*.jpg") if c not in staged]
     for c in gone:
@@ -145,7 +194,8 @@ def _self_test() -> int:
                [500, 200 + 40 * i, 900, 230 + 40 * i, 90, "John"]] for i in range(20)]
              + [[[1000, 200 + 40 * i, 1480, 230 + 40 * i, 90, "Jones"],
                  [1500, 200 + 40 * i, 1900, 230 + 40 * i, 90, "Wm"]] for i in range(20)])
-    boxes = crop_boxes({"page_size": [2000, 3000], "lines": lines})
+    angle, boxes = crop_boxes({"page_size": [2000, 3000], "lines": lines})
+    assert angle == 0.0
     assert [k for k, _ in boxes] == [0, 1]
     assert boxes[0][1] == (80, 180, 1020, 1010) and boxes[1][1] == (980, 180, 1920, 1010)
     assert CROP_RX.match("micro_IABROOKLYN_0039_0012_c1_churro-3b.raw.txt")["k"] == "1"
@@ -158,6 +208,7 @@ def main(argv=None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("cmd", nargs="?", choices=["stage", "import"])
     ap.add_argument("--per-shard", type=int, default=150)
+    ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:

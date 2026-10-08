@@ -37,6 +37,7 @@ import argparse
 import collections
 import gzip
 import json
+import math
 import multiprocessing
 import os
 import re
@@ -65,10 +66,11 @@ COLUMN_GAP = 0.08       # column starts at least this far apart (share of page w
 COLUMN_SHARE = 0.04     # a column holds at least this share of the page's lines...
 COLUMN_MIN = 8          # ...and at least this many
 COLUMN_WIDTH = 0.12     # and is at least this wide
-COLUMN_CROSS = 0.3      # a boundary the previous column's lines run across this often is not one
+COLUMN_CROSS = 0.35     # a boundary with no gap freer of words than this is not one
 COLUMN_WORDS = 2        # a column's lines hold at least this many words (median)
-GUTTER_H = 2.5          # a gap in a tesseract line wider than this many word heights...
-GUTTER_W = 0.02         # ...and this share of the page width splits the line in two
+GUTTER_W = 0.02         # a gap in a tesseract line wider than this share of the page splits it
+SKEW_MIN = 0.5          # degrees: a page tilted less is read as it lies...
+SKEW_AGREE = 0.75       # ...as is one whose lines and left margin disagree on its tilt by this
 
 
 def pages(ident: str) -> list:
@@ -180,13 +182,15 @@ def merge_words(base: list, other: list) -> list:
 
 
 def segments(lines: list, width: int) -> list:
-    """Each tesseract line cut at its wide gaps (GUTTER_H word heights and GUTTER_W of the page).
-    Tesseract reads straight across a narrow gutter wherever two columns' baselines line up
-    (Brooklyn 1912 p3 leaf 113: half its "lines" are a left-column entry and a right-column one),
-    so the right column's entries start at the left column's margin and leave no peak of their
-    own. Word spaces there are ~1 word height; the gutter gaps 3 to 8+."""
-    hs = sorted(w[3] - w[1] for ws in lines for w in ws)
-    gap = max(GUTTER_H * (hs[len(hs) // 2] if hs else 0), GUTTER_W * width)
+    """Each tesseract line cut at its gaps wider than GUTTER_W of the page. Tesseract reads
+    straight across a narrow gutter wherever two columns' baselines line up (Brooklyn 1912 p3
+    leaf 113: half its "lines" are a left-column entry and a right-column one), so the right
+    column's entries start at the left column's margin and leave no peak of their own. A first
+    rule also required 2.5 word heights, which is ~2% on a clean page but not on film, where
+    tesseract's boxes can span two rows (micro_IABROOKLYN_0039 leaf 94: median word 115 px
+    against 60) and the gutter stayed shut: 90 of 0039's 454 pages read as one column, 34 now
+    (the rest mostly full-page advertisements)."""
+    gap = GUTTER_W * width
     out = []
     for ws in lines:
         if not ws:
@@ -210,14 +214,20 @@ def columns(lines: list, width: int) -> list:
     indent is 2-4% of the page, a six-column page's columns ~17% apart). A first draft looked for
     gaps between sorted line starts instead, and a few lines starting mid-page bridged a
     two-column 1858 page into one (micro_IABROOKLYN_0039 leaf 12). Segments narrower than 4% of
-    the page (banner crumbs) do not vote. Two peaks are not columns (Brooklyn 1912 p3, measured
-    on 171 pages; real columns cross 2-14% and hold 3-7 words):
-      - one the previous column's segments run across (> COLUMN_CROSS of them): a smudge down
-        the column that breaks half its lines at the same x (leaf 201: 61 of 114);
+    the page (banner crumbs) do not vote. Two peaks are not columns:
+      - one with no gutter before it: somewhere from 5% of the page left of the peak to 1% right
+        of it, a gutter has a position few words lie over. A smudge down a column breaks half
+        its lines at one x, and the other half's words cover every position near it (Brooklyn
+        1912 p3 leaf 201: at least 51% of the column's lines; real gutters 3-21%, skewed film
+        included). Counting the previous column's segments that run past the peak instead
+        rejected real gutters on film, where tesseract joins an entry ending near the rule to
+        the next column's line (0039 leaf 41: 61%);
       - one whose segments hold a median of under COLUMN_WORDS words: a rotated side banner,
         which tesseract reads as a stack of one-word lines (leaf 413).
     A column runs to where the next begins; the last to the right end of the segments starting
-    at its margin, which leaves out a banner beside it that made no peak (leaf 113)."""
+    at its margin, which leaves out a banner beside it that made no peak (leaf 113). A filmed
+    two-page spread comes out as each page's columns, left page first."""
+    words_all = [w for ws in lines for w in ws]
     segs = [(min(w[0] for w in s), max(w[2] for w in s), len(s)) for s in segments(lines, width)]
     segs = [s for s in segs if s[1] - s[0] > 0.04 * width]
     if not segs:
@@ -241,8 +251,11 @@ def columns(lines: list, width: int) -> list:
         if words[len(words) // 2] < COLUMN_WORDS:
             continue
         if x0s:
-            prev = [s for s in segs if x0s[-1] <= s[0] < x]
-            if sum(1 for s in prev if s[1] > x + bin_w) > COLUMN_CROSS * len(prev):
+            n = sum(1 for s in segs if x0s[-1] <= s[0] < x)
+            step = max(1, int(0.0025 * width))
+            fewest = min(sum(1 for w in words_all if w[0] < g < w[2])
+                         for g in range(int(x - 0.05 * width), int(x + bin_w) + 1, step))
+            if fewest > COLUMN_CROSS * n:
                 continue
         x0s.append(x)
     if not x0s:
@@ -255,23 +268,98 @@ def columns(lines: list, width: int) -> list:
     return [c for c in cols if c[1] - c[0] >= COLUMN_WIDTH * width] or cols
 
 
-def column_lines(lines: list, cols: list) -> list:
+def skew(lines: list, width: int) -> float:
+    """The page's tilt in degrees, positive where its lines run downhill to the right: the median
+    slope of word bottoms along tesseract lines of 4+ words spanning 15% of the page; 0.0 with
+    fewer than 10 such lines. Filmed pages lie a median 0.4 degrees off; at 1 degree a column's
+    margin drifts ~3% of the page from top to bottom, over three bins of `columns`, and half the
+    dense two-column pages read as one column were tilted 0.9-2.2 degrees (0039, 0040, 0042)."""
+    slopes = []
+    for ws in lines:
+        xs = [(w[0] + w[2]) / 2 for w in ws]
+        if len(ws) < 4 or max(xs) - min(xs) < 0.15 * width:
+            continue
+        ys = [w[3] for w in ws]
+        mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
+        slopes.append(sum((x - mx) * (y - my) for x, y in zip(xs, ys))
+                      / sum((x - mx) ** 2 for x in xs))
+    if len(slopes) < 10:
+        return 0.0
+    return math.degrees(math.atan(sorted(slopes)[len(slopes) // 2]))
+
+
+def margin_skew(lines: list, width: int):
+    """The tilt of the page's left margin in degrees, signed as `skew`: the median slope over
+    pairs (Theil-Sen) of the line segments starting within 4% of the page of the leftmost margin,
+    against their heights. None with under 10 such segments. A filmed page curved at the binding
+    bows its lines while its columns stand straight (micro_IABROOKLYN_0040 leaf 117: lines
+    +2.46, margin +0.44), and turning it by its lines tilts the columns instead."""
+    segs = [(min(w[0] for w in s), (min(w[1] for w in s) + max(w[3] for w in s)) / 2)
+            for s in segments(lines, width) if max(w[2] for w in s) - min(w[0] for w in s)
+            > 0.04 * width]
+    if len(segs) < 20:
+        return None
+    x0 = sorted(s[0] for s in segs)[len(segs) // 20]
+    band = [s for s in segs if s[0] < x0 + 0.04 * width]
+    slopes = sorted((b[0] - a[0]) / (b[1] - a[1]) for i, a in enumerate(band)
+                    for b in band[i + 1:] if abs(b[1] - a[1]) > 0.1 * width)
+    if len(band) < 10 or not slopes:
+        return None
+    return math.degrees(math.atan(-slopes[len(slopes) // 2]))
+
+
+def turn(lines: list, angle: float, size) -> list:
+    """The words with their boxes turned `angle` degrees about the page centre, as PIL's
+    Image.rotate(angle) turns the image (counter-clockwise on screen), each box the bounds of its
+    turned corners: a page tilted by its skew comes upright."""
+    if not angle:
+        return lines
+    c, s = math.cos(math.radians(angle)), math.sin(math.radians(angle))
+    cx, cy = size[0] / 2, size[1] / 2
+
+    def box(w):
+        pts = [(cx + (x - cx) * c + (y - cy) * s, cy - (x - cx) * s + (y - cy) * c)
+               for x in (w[0], w[2]) for y in (w[1], w[3])]
+        return [round(min(p[0] for p in pts)), round(min(p[1] for p in pts)),
+                round(max(p[0] for p in pts)), round(max(p[1] for p in pts))] + list(w[4:])
+    return [[box(w) for w in ws] for ws in lines]
+
+
+def page_columns(lines: list, size) -> tuple:
+    """(angle, upright lines, columns) of a cached page: one tilted SKEW_MIN or more, its lines
+    and its left margin agreeing within SKEW_AGREE, is turned upright by its lines' skew before
+    its columns are found, and its crops are cut from the image turned the same way
+    (reocr_columns.py). Tesseract read the tilted page well enough; only the geometry needs it
+    upright. On the 7,917 cached pages (2026-10-06) this turns 3,547 and finds the second column
+    on 7 dense pages read as one, losing none; by lines alone it lost 0040 leaf 117, by margins
+    alone two more (0039 leaf 181, 0042 leaf 303)."""
+    angle = round(skew(lines, size[0]), 2)
+    margin = margin_skew(lines, size[0])
+    if abs(angle) < SKEW_MIN or margin is None or abs(angle - margin) >= SKEW_AGREE:
+        angle = 0.0
+    upright = turn(lines, angle, size)
+    return angle, upright, columns(upright, size[0])
+
+
+def column_lines(lines: list, size) -> list:
     """The page's lines in reading order, a line tesseract read across a gutter cut in two: each
-    word to the column its middle falls in (one outside every column goes to the nearest), then
-    column by column, top to bottom. The word dump written from the cache, and the hybrid's
-    line boxes, need one entry per line."""
-    def col(w):
-        mid = (w[0] + w[2]) / 2
+    word to the column its middle falls in on the upright page (one outside every column goes to
+    the nearest), then column by column, top to bottom. Words keep the image's coordinates. The
+    word dump written from the cache, and the hybrid's line boxes, need one entry per line."""
+    _angle, upright, cols = page_columns(lines, size)
+
+    def col(u):
+        mid = (u[0] + u[2]) / 2
         return min(range(len(cols)), key=lambda k: 0 if cols[k][0] <= mid < cols[k][1]
                    else min(abs(mid - cols[k][0]), abs(mid - cols[k][1])))
     out = []
-    for ws in lines:
+    for ws, us in zip(lines, upright):
         parts = collections.defaultdict(list)
-        for w in ws:
-            parts[col(w)].append(w)
-        out += [(k, ws_k) for k, ws_k in parts.items()]
-    out.sort(key=lambda kw: (kw[0], min(w[1] for w in kw[1])))
-    return [ws for _k, ws in out]
+        for w, u in zip(ws, us):
+            parts[col(u)].append((w, u))
+        out += [(k, min(u[1] for _w, u in wu), [w for w, _u in wu]) for k, wu in parts.items()]
+    out.sort(key=lambda kyw: kyw[:2])
+    return [ws for _k, _y, ws in out]
 
 
 def page_job(job):
@@ -385,7 +473,11 @@ def _self_test() -> int:
     assert len(columns(six, w)) == 6, "six columns ~17% apart"
     merged = [a + b for a, b in zip(one, right)]
     assert columns(merged, w) == [[100, 1100], [1100, 1890]], "a line read across the gutter"
-    smudge = one + [ln(1100, 1300, y, 2) + ln(1400, 1900, y) if y % 80 == 0 else ln(1100, 1900, y)
+    def staggered(y):                        # an unbroken line, its word breaks not aligned
+        e = 1240 + (y * 7) % 230
+        return [[1100, y, e, y + 30, 90, "w"], [e + 10, y, 1700, y + 30, 90, "w"],
+                [1710, y, 1900, y + 30, 90, "w"]]
+    smudge = one + [ln(1100, 1300, y, 2) + ln(1400, 1900, y) if y % 80 == 0 else staggered(y)
                     for y in range(0, 900, 40)]
     assert len(columns(smudge, w)) == 2, "a column broken at one x is still one column"
     left = [ln(100, 900, y) for y in range(0, 900, 40)]
@@ -393,8 +485,22 @@ def _self_test() -> int:
     banner = [[[1700, y, 1800, y + 60, 40, "X"]] for y in range(0, 900, 70)]
     assert columns(left + mid + banner, w) == [[100, 1000], [1000, 1590]], "a banner is no column"
     assert columns(left + mid + banner[:3], w) == [[100, 1000], [1000, 1590]], "nor runs to one"
-    split = column_lines(merged[:2], [[100, 1100], [1100, 1890]])
-    assert [ws[0][0] for ws in split] == [100, 100, 1100, 1100], "cut, then column by column"
+    split = column_lines(merged, (2000, 3000))
+    assert len(split) == 46 and [split[k][0][0] for k in (0, 1, 23, 24)] == [100, 100, 1100, 1100], \
+        "cut, then column by column"
+    tall = [ln(100, 900, y) for y in range(0, 2800, 40)] + [ln(1100, 1900, y) for y in range(0, 2800, 40)]
+    tilted = turn(tall, -1.5, (2000, 3000))  # clockwise on screen: downhill to the right
+    assert abs(skew(tilted, 2000) - 1.5) < 0.1 and abs(skew(tall, 2000)) < 0.01
+    angle, upright, cols = page_columns(tilted, (2000, 3000))
+    assert angle == round(skew(tilted, 2000), 2) and len(cols) == 2, "turned upright, two columns"
+    assert page_columns(tall, (2000, 3000))[0] == 0.0, "an upright page is read as it lies"
+    assert abs(margin_skew(tilted, 2000) - 1.5) < 0.1
+    bowed = [[[w[0], w[1] + (w[0] - 100) // 30, w[2], w[3] + (w[2] - 100) // 30] + w[4:] for w in ws]
+             for ws in tall]                 # lines sloping ~2 degrees, margins upright
+    assert skew(bowed, 2000) > 1.5 and abs(margin_skew(bowed, 2000)) < 0.1
+    assert page_columns(bowed, (2000, 3000))[0] == 0.0, "a curved page is not turned"
+    assert [w[0] for w in column_lines(tilted, (2000, 3000))[0]] == [w[0] for w in tilted[0]], \
+        "the dump keeps the image's coordinates"
     base = [([[0, 0, 100, 20, 60, "njohnson"]], [0, 0, 100, 20], 60.0)]
     other = [([[0, 0, 40, 20, 90, "n"], [45, 0, 100, 20, 90, "johnson"]], [0, 0, 100, 20], 90.0)]
     assert merge_words(base, other)[0][0][5] == "n", "the confident reading's words win"

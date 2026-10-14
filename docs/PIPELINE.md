@@ -1318,6 +1318,60 @@ on the M2's GPU** (`historical-ocr-eval/engines/run_churro.py --device mps`, unm
   reading of each line it also read, falling back to the merge where Churro timed out. That gives
   the best line recovery, Churro-level accuracy, and a box on every line.
 
+**Engine 3 measured 2026-10-14, with the `historical-ocr-eval` session: LightOnOCR-3-1B
+(Apache-2.0), and it replaces Churro.** Four things changed how the engines are compared:
+- **The references are entries.** The gold and the book scan's lines are wrap-joined and
+  de-hyphenated ("Graham av. n. Mar-" + "shall" -> "Marshall"), so a printed-line engine paid for
+  every run-over. `data_prep/reocr_pair.py score` joins each engine's lines the way the reference
+  does (guided by it, never changing a character) and writes E marks one way.
+- **The pairing replaces the hybrid.** `reocr_pair.py` aligns each model line to a run of 1-3
+  tesseract lines in the same tile (an in-order alignment), splits its words back over those
+  printed lines, keeps tesseract's hyphen, and puts back the "E" (Eastern District) mark tesseract
+  saw (a small or glued token). The hybrid's continuation lines had kept tesseract's text.
+- **Tiles.** Each column is cut in two at the whitest pixel row near a gap between lines
+  (`reocr_columns.py stage --tiles halves`), kept at native resolution.
+- **Post-passes** (`reocr_pair.py post`): an 1840s "[x" turnover goes back to the entry above, and
+  a fraction glyph after a digit becomes "1/2" as the gold writes it.
+
+On the 42 pages both engines finished (8 gold pages, 532 lines; 2,503 book-scan lines):
+
+| run | gold exact | gold close | book exact |
+|---|---:|---:|---:|
+| **LightOn-1B, half tiles, paired + post** | **93.4%** | **100.0%** | **75.5%** |
+| Churro-3B, whole page, paired + post | 91.5% | 99.4% | 72.5% |
+| the hybrid (Churro, before this) | 82.9% | 97.0% | 69.8% |
+| tesseract merge | 38.9% | 95.5% | 34.4% |
+
+LightOn reads 104 book-scan lines Churro misses against 48 the other way (exact McNemar
+p = 6.5e-06); gold leans the same way (24 / 14). The pairing costs nothing and beats the hybrid
+for either model (Churro 36 / 1, LightOn 58 / 12 discordant gold lines). Greedy decoding matched
+three sampling seeds on gold (93.6% against 93.4% for each, 0-1 discordant lines), so production
+is greedy and reproducible. E marks: 83% found, 94.5%+ of those written are real; nearly every
+miss is a mark tesseract never saw. A pixel test at each line's left end raised that to 88% with
+a few false marks, so it is not in v1.
+
+Failure modes found, each handled:
+- **Table mode.** On ~6% of tiles LightOn writes a table with an invented caption. The runner's
+  `untable` drops the invention and rejoins field-split rows.
+- **Bleed-through loops.** The reverse page shows through and the model repeats to the token cap
+  under any seed. The tile is read once more on its darkest 10% of ink (`bleed_retry`, digits less
+  sure), else cut back to before the loop (`loop_truncated`).
+- **Churro invents E marks** (67 written for 40 printed) and reads worse on native-resolution half
+  tiles than on its 2,500-px column crops.
+- **The half cut.** Where tesseract's boxes span two rows, cutting at the gap between box rows put
+  1 line in one half and 83 in the other; the cut is now made by ink.
+
+**A no-gold screen of the 39 deferred volumes** (none is on the bench: 2 pages each, 188 tiles)
+found no collapse. LightOn wrote 0.83-1.06 lines and 0.91-1.16 characters per tesseract line, and
+the 1820s single-column volumes read as cleanly as the bench. One tile looped on bleed-through,
+and the long lines it flagged were advertisements printed as prose.
+
+**The Torch run** (`hpc/39_lightonocr_setup.sh`, `hpc/39_lightonocr.sbatch`) uses
+`hpc/lightonocr_tiles.py`: historical-ocr-eval's runner, vendored with its pinned library versions,
+reproducing a bench tile byte for byte. Its first task re-reads the 138 bench tiles and the screen
+pages' production tiles on CUDA in bf16. That scores gold under the deployed setup and checks
+greedy's loop rate on the unseen volumes before the 7,947 pages run.
+
 Every run keeps boxes and expands next to nothing. **Local binarization is what recovers the
 lines.** Tesseract on the raw film frame reports "Empty page!!" without a DPI hint, and Sauvola
 takes the book-scan agreement from 54% to 94%. Its cost is small tokens: it glues `n Johnson` into

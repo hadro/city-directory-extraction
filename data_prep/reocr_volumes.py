@@ -341,11 +341,13 @@ def page_columns(lines: list, size) -> tuple:
     return angle, upright, columns(upright, size[0])
 
 
-def column_lines(lines: list, size) -> list:
+def column_lines(lines: list, size, keyed: bool = False) -> list:
     """The page's lines in reading order, a line tesseract read across a gutter cut in two: each
     word to the column its middle falls in on the upright page (one outside every column goes to
     the nearest), then column by column, top to bottom. Words keep the image's coordinates. The
-    word dump written from the cache, and the hybrid's line boxes, need one entry per line."""
+    word dump written from the cache, and the hybrid's line boxes, need one entry per line.
+    keyed=True gives (column, upright top, words) per line instead, which places each line in its
+    column crop or half tile (reocr_pair.py)."""
     _angle, upright, cols = page_columns(lines, size)
 
     def col(u):
@@ -359,7 +361,7 @@ def column_lines(lines: list, size) -> list:
             parts[col(u)].append((w, u))
         out += [(k, min(u[1] for _w, u in wu), [w for w, _u in wu]) for k, wu in parts.items()]
     out.sort(key=lambda kyw: kyw[:2])
-    return [ws for _k, _y, ws in out]
+    return out if keyed else [ws for _k, _y, ws in out]
 
 
 def page_job(job):

@@ -16,6 +16,9 @@ cde-volume-preds*.tar.gz
 # column crops for hpc/38_churro.sbatch and Churro's answers back (rebuild: data_prep/reocr_columns.py)
 cde-churro-columns*.tar
 churro-answers*.tar
+# half tiles for hpc/39_lightonocr.sbatch and LightOn's answers back (rebuild: data_prep/reocr_columns.py)
+cde-lightonocr-halves*.tar
+lighton-answers*.tar
 
 # generated locally from pipeline output (census surnames.tsv IS committed as the seed)
 data_prep/names/surnames_harvested.tsv

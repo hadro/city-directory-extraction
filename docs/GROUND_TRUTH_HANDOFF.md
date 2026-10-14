@@ -246,12 +246,32 @@ original under `data/_gold_backup/` and names the image that settled it.
 | date | set · row | was | now | evidence |
 |---|---|---|---|---|
 | 2026-10-04 | polk1917 · line 10 (`raw_line` only) | `n Dora Mrs h115 Washn pl` | `" Dora Mrs h115 Washn pl` | the page (Trow 1917 twin, leaf 688) prints the ditto `"`; the row's own `name` already read `" Dora Mrs`. Found when the letter-ditto admission converted this line and the gold disagreed (PIPELINE.md #1). `validate_gold` does not check a leading ditto token, so it never flagged the drift |
+| 2026-10-14 | trow1913 · line 2 (`raw_line` only) | `Adolph A salesman h68 Lenox av` | `-Adolph A salesman h68 Lenox av` | the page (`nypl_trow_1913_14_4bfc3730/0021_56908927.jpg`, crop x 0-420, y 200-620) prints Trow's dash on every line of the run; `name` already read `-Adolph A`. Surya's box starts at x = 0 and lost the edge dash; the hand correction kept the loss. Found by historical-ocr-eval's new dittoFP column (repeat marks where gold has none) |
+| 2026-10-14 | trow1913 · line 8 (`raw_line` only) | `Anna wid Isidor h68 Lenox av` | `-Anna wid Isidor h68 Lenox av` | as line 2; `name` read `-Anna` |
+| 2026-10-14 | trow1913 · line 13 (`raw_line` only) | `Arnold neckties 110 5th av h19 Pinehurst av` | `-Arnold neckties …` | as line 2; `name` read `-Arnold` |
+| 2026-10-14 | trow1913 · line 15 (`raw_line` only) | `Arthur F, Mfg Co novelties 309 Bway R801` | `-Arthur F, Mfg Co …` | as line 2; `name` read `-Arthur F, Mfg Co` |
+| 2026-10-14 | trow1913 · line 16 (`raw_line` only) | `Arthur J clerk h463 W 166th` | `-Arthur J clerk …` | as line 2; `name` read `-Arthur J` |
+| 2026-10-14 | trow1913 · line 19 (`raw_line` only) | `Benj B oils 170 W65th` | `-Benj B oils 170 W65th` | as line 2; `name` read `-Benj B` |
+| 2026-10-14 | trow1913 · line 30 (`name` only) | `Chas H` | `-Chas H` | the reverse drift: `raw_line` and the page (y ≈ 794) print `-Chas H`. Found by the new `validate_gold` check below |
+| 2026-10-14 | trow1913 · line 67 (`name` only) | `Fred L` | `-Fred L` | `raw_line` prints `-Fred L`. On the image the dash is all but cut off by the left edge here (y ≈ 1520, a sliver at x = 0), as on every "Fred" line: the run is dittoed, so the printed page has it, but no OCR engine can read it from this crop |
+| 2026-10-14 | trow1907 · line 40 (`name` only) | `H L, Co` | `-H L, Co` | the page (`ia_trow_1907_trowsgen/…trowsgeneraldir1907p2trow_0403.jp2.jpg`) prints `—H L, Co`; `raw_line` already had it. The copy in `data/iapanel/iapanel_trow1907.jsonl` (`gold_row` 39) was updated with it |
+| 2026-10-14 | polk1925 · line 5 (`name` only) | `I Isidor` | `" Isidor` | the page (`nypl_polk_1925_bf529e00/0021_58115032.jpg`) prints `"`; `raw_line` already had it |
+| 2026-10-14 | polk1933si · line 42 (`raw_line`, `name`) | `Mildred r128 Brighton av, NB` / `Mildred` | `" Mildred r128 Brighton av, NB` / `" Mildred` | the page (`0021_58064839.jpg`) prints `"`; both fields had lost it, mid-column (Surya box x = 453), so not the edge. Found by a scan for markless person rows shaped like a ditto line (a given name or initial first) in the 7 ditto-convention sets |
+| 2026-10-14 | queens1933 · line 51 (`raw_line`, `name`, `address`) | `Harold A 197-15 97th av, Ozone Pk` / `Harold A` / `197-15 97th av Ozone Pk` | `" Harold A r97-15 97th av, Ozone Pk` / `" Harold A` / `r97-15 97th av Ozone Pk` | the page (`0022_58082931.jpg`) prints `" Harold A r97-15`: the ditto both fields had lost, and Surya's `1` for the resides marker `r`. Found by the same scan |
 
 What a fix leaves stale, until re-run: clean-panel predictions for the row (the model read the
 old `raw_line`), `results/implied_surname_validation.json` (it lists this row as an illustrative
 false negative; no headline count includes it), and the `historical-ocr-eval` bench, which reads
 gold from this directory. The copy in `data/iapanel/iapanel_polk1917__trowsgeneraldire1917trow.jsonl`
 (`context.gold_raw_line`) was updated with it.
+
+The 2026-10-14 fixes leave stale the NER predictions and scores on trow1907, trow1913, polk1925,
+polk1933si and queens1933 (`results/scores.jsonl`), and the historical-ocr-eval bench's saved
+scores, which it re-saves against the fixed gold. `validate_gold.py` now ERRORs when a leading
+ditto mark is in `name` but not `raw_line`, or the reverse: it fires on exactly the 10 drift rows
+above in the backups and nowhere else in the 21 sets. It cannot see a mark both fields lost; the
+scan that found polk1933si 42 and queens1933 51 is a heuristic, and a crop review of every
+markless person row in the 7 ditto-convention sets (about 100) would settle the rest.
 
 ## Reading F1 vs EM (for scoring runs)
 For **sparse fields** (spouse/employer/race/home), read **F1 (non-empty), not EM** — high EM there

@@ -23,6 +23,7 @@ ERRORS
   * context missing publisher|directory_year|image
   * home_address starts with a residence marker (h/h./bds/b, spaced or fused "h502")
     -> conv #8: home_address stores the BARE address; the marker is the separator
+  * a leading ditto mark (- — " do.) in name but not raw_line, or in raw_line but not name
 WARNINGS
   * field text whose tokens don't appear in raw_line (transcription drift / typo)
   * occupation_role that looks like an address (has "h /r /bds " or a street number)
@@ -81,6 +82,7 @@ OCC_AS_ADDR = re.compile(r"\b(h|r|bds)\s+\d|\b\d+\s+[A-Z]")
 HOME_MARKER_ERR = re.compile(r"^(?:(?:h|bds|b)\.?\s+\S|[hb]\d)")
 HOME_MARKER_WARN = re.compile(r"^(?:r\.?\s+\S|r\d)")
 WORD = re.compile(r"[A-Za-z0-9]+")
+LEAD_DITTO = re.compile(r"""^\s*(?:-+|—+|–+|"|“|”|„|,,|''|do\.?(?=\s|$))""")
 
 
 def _norm(s: str) -> str:
@@ -145,6 +147,14 @@ def check_record(rec: dict, raw: str, where: str, rep: Report):
         rep.warn(where, "home_address set but address empty — a single address belongs in `address`")
     if home and HOME_MARKER_ERR.match(home):
         rep.err(where, f"home_address starts with residence marker (conv #8: store the BARE address): {home!r}")
+    # A ditto entry carries the page's mark in BOTH places: raw_line is the verbatim page, and
+    # name is the mark plus the given name ("-Adolph A", '" Saml'). Drift either way charges a
+    # correct prediction: the model reads raw_line and is scored on name. 12 rows across 5 sets
+    # had it on 2026-10-14 (docs/GROUND_TRUTH_HANDOFF.md, corrections), after one on 2026-10-04.
+    in_name = bool(LEAD_DITTO.match(str(rec.get("name", ""))))
+    if in_name != bool(LEAD_DITTO.match(raw)):
+        rep.err(where, f"leading ditto mark in {'name' if in_name else 'raw_line'} but not in "
+                       f"{'raw_line' if in_name else 'name'} (name={rec.get('name')!r})")
     elif home and HOME_MARKER_WARN.match(home):
         rep.warn(where, f"home_address starts with 'r' — resides marker (strip, conv #8) or 'rear' (keep)? "
                         f"check raw_line: {home!r}")

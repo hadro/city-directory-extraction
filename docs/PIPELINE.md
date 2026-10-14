@@ -1372,6 +1372,27 @@ reproducing a bench tile byte for byte. Its first task re-reads the 138 bench ti
 pages' production tiles on CUDA in bf16. That scores gold under the deployed setup and checks
 greedy's loop rate on the unseen volumes before the 7,947 pages run.
 
+**When the answers come back** (slug `lightonocr-3-1b-greedy-torch`):
+1. Task 0: `reocr_pair.py bench <slug> --kind halves`, `post <slug>-halves-paired`, then `score`
+   it beside `lightonocr-3-1b-halves-paired-post` (the M2's reading) and Churro.
+2. After the full run: `reocr_pair.py dump <slug> --root data/reocr_halves` writes each volume's
+   word dump, keeping IA's as `<id>_words.ia.jsonl.gz`. Then `survey_harvest.py --rederive --ids
+   <the 39>` and `survey_derive.py` re-read the volumes.
+
+The dump keeps IA's records for the leaves not re-read. For each re-read leaf it pairs the tiles
+(a tile without an answer keeps tesseract's lines), runs the post-passes, and spreads every
+line's text over tesseract's word boxes (`respell`: similarity anchors, so "capmker" still
+anchors "capmaker"). A line tesseract never saw gets boxes under its neighbour. Lines read twice
+are paired too: between two paired lines, tesseract's unpaired readings and the model's are the
+same printed lines (`fill_gaps`). Without that, bleed-through garbage stayed beside the model's
+line for it (0047: tesseract-only lines 38 -> 7). Model words carry confidence 90, a bleed-retry
+tile's 30, and the record carries per-line `sources`.
+
+A dry run on the screen pages took the survey's own filters from IA's 0 candidate lines to 136
+and 147 on two 0039 pages, and from 1 to 144 on a 1912 page. LightOn writes 1912's ditto dash as
+a Markdown bullet ("- LeGrand T h 453 Washn av"). It is kept as the ditto token, and leads 81% of
+that volume's lines, so the ditto gate will admit it once the whole volume is re-read.
+
 Every run keeps boxes and expands next to nothing. **Local binarization is what recovers the
 lines.** Tesseract on the raw film frame reports "Empty page!!" without a DPI hint, and Sauvola
 takes the book-scan agreement from 54% to 94%. Its cost is small tokens: it glues `n Johnson` into

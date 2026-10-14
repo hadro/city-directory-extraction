@@ -10,6 +10,7 @@ Pair a vision model's text with tesseract's printed lines (docs/PIPELINE.md #27)
     python3 data_prep/reocr_pair.py score <run> [<run> ...] [--pages a_0001,b_0002]
     python3 data_prep/reocr_pair.py post <run>        # turnovers and fractions -> <run>-post
     python3 data_prep/reocr_pair.py screen <slug> [--root data/reocr_screen]   # no-gold checks
+    python3 data_prep/reocr_pair.py dump <slug> --root data/reocr_halves [--ids a,b] [--out-dir D]
     python3 data_prep/reocr_pair.py --self-test
 
 WHY (2026-10-13). The hybrid (reocr_bench.hybrid_page) gives each tesseract line the model line
@@ -73,12 +74,12 @@ def sim(a: str, b: str) -> float:
     return difflib.SequenceMatcher(None, a, b, autojunk=False).ratio() if a and b else 0.0
 
 
-def fast_sim(a: str, b: str) -> float:
-    """sim, or 0.0 when it cannot reach PAIR (quick_ratio is an upper bound)."""
+def fast_sim(a: str, b: str, floor: float = PAIR) -> float:
+    """sim, or 0.0 when it cannot reach `floor` (quick_ratio is an upper bound)."""
     if not a or not b:
         return 0.0
     m = difflib.SequenceMatcher(None, a, b, autojunk=False)
-    return m.ratio() if m.real_quick_ratio() >= PAIR and m.quick_ratio() >= PAIR else 0.0
+    return m.ratio() if m.real_quick_ratio() >= floor and m.quick_ratio() >= floor else 0.0
 
 
 def joint(parts: list) -> str:
@@ -105,7 +106,7 @@ def canon(text: str) -> str:
     return LEAD_MARK.sub("E ", text)
 
 
-def align(tess: list, model: list) -> list:
+def align(tess: list, model: list, floor: float = PAIR) -> list:
     """[(i0, i1, j)] in order: model line j covers tesseract lines i0..i1-1. j None: a tesseract
     line no model line covers; i0 == i1: a model line with no printed line found. The monotone
     alignment of greatest total similarity, every pair at least PAIR."""
@@ -130,10 +131,10 @@ def align(tess: list, model: list) -> list:
                 for k in range(1, RUN + 1):
                     if i + k > n:
                         break
-                    r = fast_sim(nm[j], runs[(i, k)])
+                    r = fast_sim(nm[j], runs[(i, k)], floor)
                     # each extra printed line costs a little, so a run takes a line only when
                     # it reads better with it (a junk line normalises to "" and ties otherwise)
-                    if r >= PAIR and s + r - RUN_COST * (k - 1) > best[i + k][j + 1]:
+                    if r >= floor and s + r - RUN_COST * (k - 1) > best[i + k][j + 1]:
                         best[i + k][j + 1], back[i + k][j + 1] = s + r - RUN_COST * (k - 1), (i, j, k)
     out, i, j = [], n, m
     while (i, j) != (0, 0):
@@ -141,6 +142,44 @@ def align(tess: list, model: list) -> list:
         out.append((pi, pi + 1, None) if k == 0 else (pi, pi, pj) if k == -1 else (pi, pi + k, pj))
         i, j = pi, pj
     return out[::-1]
+
+
+GAP_FLOOR = 0.25        # inside a gap between paired lines, a weaker likeness still pairs
+
+
+def fill_gaps(segs: list, tess: list, model: list) -> list:
+    """align()'s segments with the gaps between paired lines filled. Where tesseract's reading of
+    a line is garbage ("Glacken Mic clad Hirer 26°8 eT" for "Glacken Michael, laborer, 125 Stagg",
+    bleed-through on micro_IABROOKLYN_0047 leaf 90), the model's line falls under PAIR and both
+    would be kept: the junk as a line of its own, the model's text as a model-only line with a
+    made-up box. Between two paired lines, unpaired tesseract lines and unpaired model lines
+    are the same printed lines read twice: paired one to one, in order, when they are as many;
+    otherwise by align() at GAP_FLOOR, within the gap."""
+    out, run = [], []
+    for seg in segs + [None]:
+        if seg is not None and (seg[2] is None or seg[0] == seg[1]):
+            run.append(seg)
+            continue
+        if run:
+            tl = [r[0] for r in run if r[2] is None]
+            ml = [r[2] for r in run if r[0] == r[1]]
+            if tl and ml and len(tl) == len(ml):
+                out += [(t, t + 1, m) for t, m in zip(tl, ml)]
+            elif tl and ml:
+                sub = align([tess[t] for t in tl], [model[m] for m in ml], GAP_FLOOR)
+                for i0, i1, j in sub:
+                    if j is None:
+                        out.append((tl[i0], tl[i0] + 1, None))
+                    elif i0 == i1:
+                        out.append((tl[i0] if i0 < len(tl) else tl[-1] + 1,) * 2 + (ml[j],))
+                    else:
+                        out.append((tl[i0], tl[i1 - 1] + 1, ml[j]))
+            else:
+                out += run
+            run = []
+        if seg is not None:
+            out.append(seg)
+    return out
 
 
 def split(text: str, parts: list) -> list:
@@ -193,7 +232,7 @@ def pair_tile(tess: list, model: list, median_h: float) -> list:
     -> [{"text", "words", "source", "mark"}] in printed order, model-only lines in place."""
     texts = [" ".join(w[5] for w in ws) for ws in tess]
     out = []
-    for i0, i1, j in align(texts, model):
+    for i0, i1, j in fill_gaps(align(texts, model), texts, model):
         if j is None:
             out.append({"text": texts[i0], "words": tess[i0], "source": "tesseract", "mark": False})
             continue
@@ -277,14 +316,229 @@ def post_run(args) -> int:
     return 0
 
 
+# ---------------------------------------------------------------- the word dump (production)
+
+CONF_MODEL = 90         # a word the vision model read: well above CRUMB_CONF (5), where a word
+CONF_BLEED = 30         # ...with an odd character is taken for banner crumbs; a bleed_retry tile's
+                        # words are less sure (house numbers off by a digit on 0047 leaf 90)
+
+
+def respell(words: list, text: str, conf: int) -> list:
+    """Tesseract's words for one printed line, spelled as `text` (the model's piece of the line,
+    after the post-passes). Each tesseract word is paired, in order, with the model token most
+    like it (similarity >= 0.5; the in-order pairing of greatest total similarity, so "capmker"
+    still anchors "capmaker"), and a paired token takes that word's box, its confidence at least
+    `conf`. Unpaired tokens fill the gap between their paired neighbours, by length: an "E" mark
+    before the name goes just left of it, words tesseract never read ("60 Ewen") run on past its
+    last word at the line's character width. A word the model did not read is dropped. Boxes
+    stay tesseract's, so the line keeps its place and its indent."""
+    toks = text.split()
+    if not words or not toks:
+        return []
+    ws = sorted(words, key=lambda w: w[0])
+    nw, nt = [norm(w[5]) for w in ws], [norm(t) for t in toks]
+    n, m = len(ws), len(toks)
+    best = [[0.0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n - 1, -1, -1):
+        for j in range(m - 1, -1, -1):
+            r = 1.0 if nw[i] == nt[j] else sim(nw[i], nt[j])
+            best[i][j] = max(best[i + 1][j], best[i][j + 1], best[i + 1][j + 1] + r if r >= 0.5 else 0.0)
+    pair, i, j = {}, 0, 0
+    while i < n and j < m:
+        r = 1.0 if nw[i] == nt[j] else sim(nw[i], nt[j])
+        if r >= 0.5 and best[i][j] == best[i + 1][j + 1] + r:
+            pair[j] = i
+            i, j = i + 1, j + 1
+        elif best[i][j] == best[i + 1][j]:
+            i += 1
+        else:
+            j += 1
+    y0, y1 = min(w[1] for w in ws), max(w[3] for w in ws)
+    cw = sorted((w[2] - w[0]) / max(len(w[5]), 1) for w in ws)[len(ws) // 2]
+    out, j = [], 0
+    while j < m:
+        if j in pair:
+            w = ws[pair[j]]
+            out.append([*w[:4], max(w[4], conf), toks[j]])
+            j += 1
+            continue
+        k = j
+        while k < m and k not in pair:
+            k += 1
+        run = toks[j:k]
+        need = cw * (sum(len(t) for t in run) + len(run))
+        prev = ws[pair[j - 1]] if j > 0 else None
+        nxt = ws[pair[k]] if k < m else None
+        left = prev[2] + cw / 2 if prev else (nxt[0] - need if nxt else ws[0][0])
+        right = nxt[0] - cw / 2 if nxt else max(left + need, ws[-1][2] if not prev else left + need)
+        right = max(right, left + 4)
+        total, x = sum(len(t) + 1 for t in run), left
+        for t in run:
+            nx = x + (right - left) * (len(t) + 1) / total
+            out.append([round(x), y0, max(round(x) + 1, round(nx - cw / 2)), y1, conf, t])
+            x = nx
+        j = k
+    return out
+
+
+def synth_line(text: str, above, below, x0: int, char_w: float, line_h: int, conf: int) -> list:
+    """Word boxes for a line the model read and tesseract did not: under the line above (or
+    over the line below), at the column's margin, each word as wide as its characters."""
+    if above is not None:
+        top = above[3] + max(2, line_h // 4)
+    elif below is not None:
+        top = below[1] - line_h - max(2, line_h // 4)
+    else:
+        top = 0
+    out, x = [], x0
+    for t in text.split():
+        w = max(4, round(char_w * len(t)))
+        out.append([round(x), round(top), round(x) + w, round(top) + line_h, conf, t])
+        x += w + char_w
+    return out
+
+
+def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
+    """One re-OCR'd page as a word-dump record's lines: (lines, sources). `tiles` maps a tile name
+    (c0_h0, ...) to its box; `answers` maps it to (model lines, bleed) or to None where the model
+    has no answer (that tile keeps tesseract's lines). Each tile paired (pair_tile), the page's
+    lines put through the post-passes in reading order, then every line's text spread over its
+    tesseract words (respell), or given boxes where tesseract never saw it (synth_line)."""
+    from reocr_volumes import column_lines
+    keyed = column_lines(rec["lines"], rec["page_size"], keyed=True)
+    hs = sorted(w[3] - w[1] for _k, _y, ws in keyed for w in ws)
+    median_h = hs[len(hs) // 2] if hs else 30
+    widths = sorted((w[2] - w[0]) / max(len(w[5]), 1) for _k, _y, ws in keyed for w in ws if len(w[5]) >= 3)
+    char_w = widths[len(widths) // 2] if widths else 0.5 * median_h
+    rows = []
+    for name in sorted(tiles, key=lambda n: (int(n[1:].split("_")[0]), n)):
+        k = int(name[1:].split("_")[0])
+        j = int(name.split("_h")[1]) if "_h" in name else None
+        cut = tiles.get(f"c{k}_h0", [0, 0, 0, 0])[3]
+        tess = [ws for kk, y, ws in keyed if kk == k and (j is None or (j == 0) == (y < cut))]
+        got = answers.get(name)
+        if got is None:
+            rows += [{"text": " ".join(w[5] for w in ws), "words": ws, "source": "tesseract",
+                      "x0": tiles[name][0]} for ws in tess]
+            continue
+        model, bleed = got
+        for r in pair_tile(tess, model, median_h):
+            r["source"] = "bleed" if bleed and r["source"] != "tesseract" else r["source"]
+            r["x0"] = tiles[name][0]
+            rows.append(r)
+    texts = post([r["text"] for r in rows])
+    lines, sources = [], []
+    for i, (r, text) in enumerate(zip(rows, texts)):
+        conf = CONF_BLEED if r["source"] == "bleed" else CONF_MODEL
+        if r["source"] == "tesseract":
+            ws = respell(r["words"], text, 0) if text != r["text"] else r["words"]
+        elif r["words"]:
+            ws = respell(r["words"], text, conf)
+        else:
+            above = next((_box(rows[q]["words"]) for q in range(i - 1, -1, -1) if rows[q]["words"]), None)
+            below = next((_box(rows[q]["words"]) for q in range(i + 1, len(rows)) if rows[q]["words"]), None)
+            ws = synth_line(text, above, below, r["x0"] + int(0.01 * rec["page_size"][0]), char_w,
+                            int(median_h), conf)
+        if ws:
+            lines.append(ws)
+            sources.append(r["source"])
+    return lines, sources
+
+
+def _box(words: list):
+    return [min(w[0] for w in words), min(w[1] for w in words), max(w[2] for w in words),
+            max(w[3] for w in words)]
+
+
+def dump(args) -> int:
+    """Swap the re-OCR into a volume's word dump. IA's dump is kept as <id>_words.ia.jsonl.gz
+    (once; it is always the source of the leaves not re-read), and <id>_words.jsonl.gz becomes
+    IA's records with every re-OCR'd leaf's lines replaced: tesseract's word boxes carrying the
+    model's text, model-only lines given boxes, a tile without an answer kept as tesseract read
+    it. Each replaced record gains "ocr" and per-line "sources" (model / tesseract / model-only
+    / bleed, a bleed_retry tile's line); consumers that read only "lines" are unaffected. The
+    sidecar gains a `reocr` block. Then `survey_harvest.py --rederive --ids <id>` and
+    `survey_derive.py` re-read the volume from it."""
+    import gzip
+    root = Path(args.root).resolve()
+    boxes = json.loads((root / "boxes.json").read_text(encoding="utf-8"))
+    pages = collections.defaultdict(dict)
+    for key, entry in boxes.items():
+        vol, fname = key.split("/")
+        stem, name = fname[:-4].rsplit("_c", 1)
+        pages[(vol, stem)][f"c{name}"] = entry
+    vols = sorted({v for v, _s in pages} if not args.ids else set(args.ids.split(",")))
+    survey_ocr = Path(args.out_dir).resolve() if args.out_dir else DATA / "survey_ocr"
+    survey_ocr.mkdir(parents=True, exist_ok=True)
+    for vol in vols:
+        src = DATA / "survey_ocr" / f"{vol}_words.ia.jsonl.gz"
+        if not src.exists():
+            src = DATA / "survey_ocr" / f"{vol}_words.jsonl.gz"
+        dst = survey_ocr / f"{vol}_words.jsonl.gz"
+        stats = collections.Counter()
+        replaced = {}
+        for (v, stem), tiles in pages.items():
+            if v != vol:
+                continue
+            rec = json.loads((DATA / "reocr" / vol / f"{stem}.json").read_text(encoding="utf-8"))
+            if not rec["lines"]:
+                continue
+            answers = {}
+            for name in tiles:
+                base = root / vol / f"{stem}_{name}"
+                lines = model_lines(base, args.slug, False)
+                meta_f = base.with_name(f"{base.name}_{args.slug}.meta.json")
+                meta = json.loads(meta_f.read_text(encoding="utf-8")) if meta_f.exists() else {}
+                answers[name] = None if lines is None else (lines, bool(meta.get("bleed_retry")))
+                stats["tiles"] += 1
+                stats["tiles_answered"] += lines is not None
+                stats["bleed_retry"] += bool(meta.get("bleed_retry"))
+                stats["loop_truncated"] += bool(meta.get("loop_truncated"))
+                stats["table_mode"] += bool(meta.get("table_mode"))
+            lines, sources = page_dump(rec, tiles, answers)
+            replaced[rec["leaf"]] = (lines, sources, rec["page_size"])
+            stats["pages"] += 1
+            stats.update(f"lines_{s}" for s in sources)
+        if not replaced:
+            print(f"{vol}: no re-OCR'd pages under {root}", file=sys.stderr)
+            continue
+        tmp = dst.with_name(dst.name + ".tmp")
+        with gzip.open(src, "rt", encoding="utf-8") as fh, gzip.open(tmp, "wt", encoding="utf-8") as out:
+            for line in fh:
+                r = json.loads(line)
+                if r["leaf"] in replaced:
+                    lines, sources, size = replaced[r["leaf"]]
+                    r.update(lines=lines, sources=sources, page_size=size,
+                             chars=sum(len(w[5]) for ws in lines for w in ws),
+                             ocr=f"reocr: tesseract-5.5 merge + {args.slug}")
+                    stats["leaves_replaced"] += 1
+                out.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
+        if args.out_dir is None and src.name.endswith("_words.jsonl.gz"):
+            src.rename(src.with_name(f"{vol}_words.ia.jsonl.gz"))   # keep IA's, once
+        tmp.rename(dst)
+        if args.out_dir is None:
+            side = HERE / "survey" / f"ia_{vol}.json"
+            doc = json.loads(side.read_text(encoding="utf-8"))
+            doc["reocr"] = {"engine": f"tesseract-5.5 merge + {args.slug}", "root": str(root.relative_to(REPO)),
+                            "ia_dump": f"data/survey_ocr/{vol}_words.ia.jsonl.gz", **dict(stats),
+                            "dumped": __import__("datetime").date.today().isoformat()}
+            side.write_text(json.dumps(doc, indent=1), encoding="utf-8")
+        print(f"{vol}: {stats['leaves_replaced']} leaves replaced ({stats['tiles_answered']}/"
+              f"{stats['tiles']} tiles answered; lines: {stats['lines_model']} model, "
+              f"{stats['lines_tesseract']} tesseract, {stats['lines_model-only']} model-only, "
+              f"{stats['lines_bleed']} bleed) -> {dst.relative_to(REPO) if dst.is_relative_to(REPO) else dst}",
+              file=sys.stderr)
+    return 0
+
+
 # ---------------------------------------------------------------- the bench (reocr_benchcols)
 
 PLACEHOLDER = re.compile(r"!\[[^\]]*\]\([^)]*\)")
 
 
 def demarkdown(text: str) -> list:
-    """A Markdown answer as plain lines: placeholders, table rules, tags, heading and list
-    markers and emphasis dropped, table cells joined in order."""
+    """A Markdown answer as plain lines: placeholders, table rules, tags, heading markers and
+    emphasis dropped, table cells joined in order; list markers kept (see below)."""
     out = []
     for t in text.splitlines():
         t = PLACEHOLDER.sub("", t)
@@ -292,7 +546,10 @@ def demarkdown(text: str) -> list:
             continue
         t = re.sub(r"<[^>]+>", " ", t)
         t = re.sub(r"^\s*#{1,6}\s+", "", t)
-        t = re.sub(r"^\s*(?:[-*+]|\d+[.)])\s+", "", t)
+        # No list markers are stripped: LightOn writes 1912 Brooklyn's ditto dash ("same surname
+        # as above") as a Markdown bullet, "- LeGrand T h 453 Washn av", and that "-" is the
+        # ditto token the survey's ditto gate reads (as IA's OCR has it). The runner's
+        # markdown_to_lines keeps it too.
         t = t.replace("**", "").replace("__", "")
         if "|" in t:
             t = " ".join(c.strip() for c in t.strip().strip("|").split("|"))
@@ -587,7 +844,7 @@ def _self_test() -> int:
                   ["Ewing Isaac, mariner, 91 N. 5th", "Eplen Mathias, shoemaker"]) == \
         ["Ewing Isaac, mariner, 91 N. 5th", "Eplen Mathias, shoemaker"], "a standing line is kept"
     assert demarkdown("# HES—HEW\n- **Hess** John, h. 5 Ewen  \n| a | b |\n|---|---|") == \
-        ["HES—HEW", "Hess John, h. 5 Ewen", "a b"]
+        ["HES—HEW", "- Hess John, h. 5 Ewen", "a b"], "a bullet is 1912's ditto dash: kept"
     page = ["Fletcher G. merchant 104 Maiden Lane N. Y. h 135", "Fletcher James, grocer Nassau c Pearl [Hicks",
             "Smith Jacob, h. Myrtle av. n. Skill-", "Jones Wm. 86 Prince [man", "Brown A. [col'd] 5 Main",
             "Rogers G. F. fishmonger h 80 Pine-", "Rogers F. carpenter 154 Johnson",
@@ -600,6 +857,22 @@ def _self_test() -> int:
                           "Rogers Joshua, grocer 36 Willoughby [h 98 Jay"], post(page)
     assert fractions("Force Harvey, mason 165½ Jackson") == "Force Harvey, mason 165 1/2 Jackson"
     assert fractions("½ Main") == "½ Main" and fractions("12 ¾ Pearl") == "12 3/4 Pearl"
+    junk = ["Gittens Josiah, clerk, 130 Grand", "Glacken Mic clad Hirer 26 8 eT fopirne",
+            "Glass John, cartman, 18 Sobwrot"]
+    good = ["Gittens Josiah, clerk, 130 Grand", "Glacken Michael, laborer, 125 Stagg",
+            "Glass John, cartman, 18 Schols"]
+    assert fill_gaps(align(junk, good), junk, good) == [(0, 1, 0), (1, 2, 1), (2, 3, 2)], \
+        "a garbled line between two pairs takes the model's reading"
+    words = [[100, 10, 180, 40, 80, "€Hess"], [190, 10, 290, 40, 85, "George,"], [300, 10, 420, 40, 20, "capmker,"]]
+    rs = respell(words, "E Hess George, capmaker, 60 Ewen", 90)
+    assert [w[5] for w in rs] == ["E", "Hess", "George,", "capmaker,", "60", "Ewen"], rs
+    assert rs[2][:4] == [190, 10, 290, 40] and rs[2][4] == 90, "a matched word keeps its box"
+    assert rs[0][2] <= 100 and rs[1][:4] == [100, 10, 180, 40], "E left of the name, Hess keeps its box"
+    assert rs[3][:4] == [300, 10, 420, 40] and rs[3][4] == 90, "capmker anchors capmaker"
+    assert rs[4][0] > 420 and rs[5][0] > rs[4][0], "words tesseract never read run on after it"
+    assert respell(words, "", 90) == [] and respell([], "Hess", 90) == []
+    sl = synth_line("Hess Peter, h. 3", [100, 10, 400, 40], None, 100, 12.0, 30, 90)
+    assert [w[5] for w in sl] == ["Hess", "Peter,", "h.", "3"] and sl[0][1] > 40 and sl[0][0] == 100
     print("self-test ok")
     return 0
 
@@ -607,12 +880,14 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["bench", "score", "post", "screen"])
+    ap.add_argument("cmd", nargs="?", choices=["bench", "score", "post", "screen", "dump"])
     ap.add_argument("names", nargs="*", help="bench: the model slug; score: run names")
     ap.add_argument("--kind", default="halves", choices=["halves", "columns", "page"])
     ap.add_argument("--raw", action="store_true", help="read <tile>_<slug>.raw.txt as Churro XML")
     ap.add_argument("--pages", help="score: only these pages, as <volume>_<leaf>")
-    ap.add_argument("--root", default="data/reocr_screen", help="screen: the staged half tiles")
+    ap.add_argument("--root", default="data/reocr_screen", help="screen/dump: the staged half tiles")
+    ap.add_argument("--ids", help="dump: only these volumes")
+    ap.add_argument("--out-dir", help="dump: write here instead (a dry run: no swap, no sidecar)")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:
@@ -620,6 +895,9 @@ def main(argv=None) -> int:
     if args.cmd == "bench" and len(args.names) == 1:
         args.slug = args.names[0]
         return bench(args)
+    if args.cmd == "dump" and len(args.names) == 1:
+        args.slug = args.names[0]
+        return dump(args)
     if args.cmd == "screen" and len(args.names) == 1:
         args.slug = args.names[0]
         return screen(args)

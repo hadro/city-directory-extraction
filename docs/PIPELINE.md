@@ -1407,7 +1407,9 @@ greedy's loop rate on the unseen volumes before the 7,947 pages run.
      - 1912's firms under a surname ("— & Oest"), which had lost their dash and let the gate
        admit "&".
    - The run-health summary flags 0022 (16% table mode) and 0047 (bleed-through, 3% looped).
-   - Open: `run_tiers.py` still puts all 39 in `defer`, the tier for unusable OCR.
+   - Tiers (hadro, 2026-10-15): the 39 left `defer` for a tier of their own, `reocr` (505,965
+     lines, ~12 H200-hours), which stages with the first tier: `prep_volumes.py --corpus --tier
+     first,reocr`. `defer` is now empty.
 
 The dump keeps IA's records for the leaves not re-read. For each re-read leaf it pairs the tiles
 (a tile without an answer keeps tesseract's lines), runs the post-passes, and spreads every

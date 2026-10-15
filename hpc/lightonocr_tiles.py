@@ -25,7 +25,9 @@ loaded model), the resize to the card's longest side, the empty prompt, the samp
 cut-offs and the output contract. The library versions are the bench's. So a Torch run differs
 from the bench only in device and dtype (CUDA bf16 against MPS fp32), which is why its first
 task re-reads the bench tiles to be scored again. Changes: a shard list instead of a directory,
-and --tag in the slug, so answers made on Torch never overwrite the bench's when unpacked.
+and --tag in the slug, so answers made on Torch never overwrite the bench's when unpacked; and
+(2026-10-14) untable reads LightOn's HTML tables too, dropping a margin column (html_rows). The
+import flattens answers again from .raw.txt, so a .txt made before a fix there is never read.
 
 Per tile, beside the .jpg:
     <tile>_<slug>.txt        one line per line, reading order (Markdown flattened)
@@ -90,6 +92,19 @@ _ROW = re.compile(r"^\s*\|(.*)\|\s*$")
 _SEP = re.compile(r"^\s*\|?[\s:|]*-{3,}[\s:|-]*\|?\s*$")
 # "Falconer David", "McDougal Duncan", "Fanjoy & Enoch" -- but not "N. Y. h.", "Walworth st."
 _ENTRY_START = re.compile(r"^[A-Z][a-z'’]+[A-Za-z'’-]*\s+(?:&\s+)?[A-Z]")
+_HTML_ROW = re.compile(r"<tr\b[^>]*>(.*?)</tr\s*>", re.S | re.I)
+_HTML_CELL = re.compile(r"<t[dh]\b[^>]*>(.*?)</t[dh]\s*>", re.S | re.I)
+_MARGIN = re.compile(r"^\S{1,3}$")       # "H", "S", "1-", "2a", "79": no field of an entry
+
+
+def html_rows(raw: str) -> str:
+    """LightOn's other table form, HTML (<table><thead><tr><th>...), as one pipe row per <tr>,
+    so untable's vote reads its cells; markdown_to_lines would make every cell a line. Its <th>
+    row is the tile's first entry, not an invented header, so no rule line follows it."""
+    def row(m):
+        cells = [" ".join(_HTML_TAG.sub(" ", c).split()) for c in _HTML_CELL.findall(m.group(1))]
+        return "\n| " + " | ".join(cells) + " |\n"
+    return re.sub(r"</?(?:thead|tbody|tfoot)\b[^>]*>", "", _HTML_ROW.sub(row, raw), flags=re.I)
 
 
 def untable(raw: str) -> tuple[str, bool]:
@@ -115,19 +130,34 @@ def untable(raw: str) -> tuple[str, bool]:
     packing; one opening "h.", a street or a number votes field split. Joining packed
     entries would glue two people into one line -- 35 lines to 15 on one tile -- so the
     vote is not optional.
+
+    The table may also come as HTML (html_rows; 7 of 410 bench and screen answers, every one
+    with no caption), and a column of 1-3 character cells in it is the tile's margin, not a
+    field: the next column's sliver past the rule, read as a letter beside every entry ("H",
+    "S" on micro_IABROOKLYN_0040 leaf 310, 0034 leaves 105 and 241), or row numbers the model
+    invented ("1-", "2a", "3." on 0037 leaf 42). Such a column is dropped before the vote.
     """
     if "<table" not in raw and not re.search(r"^\s*\|", raw, re.M):
         return raw, False
-    lines, table, rows = raw.splitlines(), False, {}
+    lines, table, rows = html_rows(raw).splitlines(), False, {}
     for i, line in enumerate(lines):
         m = _ROW.match(line)
         if m and not (i + 1 < len(lines) and _SEP.match(lines[i + 1]) and "|" in lines[i + 1]):
-            rows[i] = [c.strip() for c in m.group(1).split("|") if c.strip()]
+            rows[i] = [c.strip() for c in m.group(1).split("|")]
+    cols = {}
+    for cells in rows.values():
+        for k, c in enumerate(cells):
+            if c:
+                cols.setdefault(k, []).append(c)
+    margin = {k for k, col in cols.items() if 5 * sum(bool(_MARGIN.match(c)) for c in col) >= 4 * len(col)}
+    if len(margin) == len(cols):
+        margin = set()
+    rows = {i: [c for k, c in enumerate(cells) if c and k not in margin] for i, cells in rows.items()}
     later = [c for cells in rows.values() for c in cells[1:]]
     packed = bool(later) and 2 * sum(bool(_ENTRY_START.match(c)) for c in later) >= len(later)
     out = []
     for i, line in enumerate(lines):
-        if re.fullmatch(r"\s*</?table>\s*", line) or _CAPTION.match(line) or _TYPE.match(line):
+        if re.fullmatch(r"\s*</?table\b[^>]*>\s*", line) or _CAPTION.match(line) or _TYPE.match(line):
             table = True
             continue
         if (_SEP.match(line) and "|" in line) or (_ROW.match(line) and i not in rows):

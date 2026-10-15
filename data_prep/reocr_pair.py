@@ -227,28 +227,168 @@ def mark_of(words: list, median_h: float, name: str) -> bool:
     return False
 
 
-def pair_tile(tess: list, model: list, median_h: float) -> list:
+def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = False) -> list:
     """One tile: tesseract's printed lines (word lists, top to bottom) and the model's lines.
-    -> [{"text", "words", "source", "mark"}] in printed order, model-only lines in place."""
+    -> [{"text", "words", "source", "mark", "start", "bullet"}] in printed order, model-only
+    lines in place. model_marks: the model writes E marks itself (Churro), so a leading "E " is
+    one."""
     texts = [" ".join(w[5] for w in ws) for ws in tess]
     out = []
     for i0, i1, j in fill_gaps(align(texts, model), texts, model):
         if j is None:
             out.append({"text": texts[i0], "words": tess[i0], "source": "tesseract", "mark": False})
             continue
+        bullet = BULLET.match(model[j]) is not None
+        line = BULLET.sub("", model[j], count=1)
         if i0 == i1:
-            out.append({"text": model[j], "words": [], "source": "model-only", "mark": False})
+            out.append({"text": line, "words": [], "source": "model-only", "mark": False,
+                        "start": True, "bullet": bullet})
             continue
-        body = strip_mark(model[j])
+        # Churro writes the mark itself (<Initial>E</Initial>); LightOn never does, and its
+        # leading "E " is an initial ("E A cigars"), so its marks come from tesseract alone
+        body = strip_mark(line) if model_marks else line
         first = re.sub(r"[^\w'-]", "", body.split()[0]) if body.split() else ""
-        mark = body != model[j] or mark_of(tess[i0], median_h, first)
+        mark = body != line or mark_of(tess[i0], median_h, first)
         for t, piece in enumerate(split(body, texts[i0:i1])):
             text = piece if piece is not None else texts[i0 + t]
             if t == 0 and mark:
                 text = f"E {text}"
             out.append({"text": text, "words": tess[i0 + t], "source": "model",
-                        "mark": mark and t == 0})
+                        "mark": mark and t == 0, "start": t == 0, "bullet": bullet and t == 0})
     return out
+
+
+BULLET = re.compile(r"^\s*-\s+")
+DASH = re.compile(r"^[~\-—–‒―_=]+")
+
+
+def name_key(text: str, marked: bool = False) -> str:
+    """The first word's letters, lowercase: what a directory's alphabetical order runs on (after
+    the "E " mark, where the pairing put one)."""
+    words = (text[2:] if marked and text.startswith("E ") else text).split()
+    if not words:
+        return ""
+    chunk = re.split(r"[—–\-]", words[0])[0] or words[0]      # "HES—HEW" -> "HES"
+    return re.sub(r"[^a-z]", "", chunk.lower())
+
+
+BULLET_AGREE = 0.2      # bullets are dash evidence on a page where this share of them meet a dash
+DASH_W = 0.15           # a dash token standing alone is evidence if at least this share of the
+DASH_FLAT = 1.5         # page's median word height wide and this many times wider than tall
+LONE_LETTER = re.compile(r"^[A-Z]\.?$")      # a section's letter ("D"), never an entry
+_GIVEN = None
+
+
+def given_names() -> set:
+    """Given names and their abbreviations seen at least twice in the corpus (names/
+    given_harvested.tsv: John, Jos, Wm, Chas, ...), lowercase letters only."""
+    global _GIVEN
+    if _GIVEN is None:
+        _GIVEN = set()
+        f = HERE / "names" / "given_harvested.tsv"
+        if f.exists():
+            for line in f.read_text(encoding="utf-8").splitlines():
+                name, _tab, n = line.partition("\t")
+                if n.strip().isdigit() and int(n) >= 2:
+                    _GIVEN.add(re.sub(r"[^a-z]", "", name.lower()))
+    return _GIVEN
+
+
+def dittos(rows: list, median_h: float = 0.0) -> list:
+    """A page's paired rows (reading order) with each entry's ditto decided and written as a
+    leading "— " (r["ditto"]; r["ambiguous"] marks the lines worth a look). LightOn's leading
+    "- " is Markdown list markup, not the printed dash: it bullets whole runs of entries, new
+    surname heads included ("- Smalldone Giacomo" and "- Smalley Arthur" print no dash on 1912
+    p3 leaf 291), and whole lists in volumes with no dash dittos at all (0001, 0003, 0004, 0009,
+    0042). Tesseract alone misses real dashes ("- E A cigars" read "I A cigars"). Both mistakes
+    cascade under the downstream surname carry: a false ditto hands the head's entry the surname
+    above, a false head hands its given name to the dittos below.
+
+    So a prefix chain, after historical-ocr-eval (2026-10-14): walking the page, an entry is a
+    head when its first word sorts at or after the current head and shares its first two letters
+    (Small, Smalldone, Smalley, Smart; given names span A-Z and fail), or its first letter and
+    is no known given name (the next two-letter run: Abel -> Ackerman), and it becomes the
+    current head. An entry with dash evidence that fails is a ditto: tesseract's first token a
+    dash, or LightOn's bullet on a page where bullets meet tesseract dashes (BULLET_AGREE; 68% on
+    1912, 0-5% where LightOn bulleted plain lists). An entry with no evidence is a head, as the
+    downstream carry will take it, and moves the chain unless it is a known given name that
+    fails the test: that one is ambiguous (counted for a look), and the chain stays put, so a
+    ditto both readings missed cannot turn the next real head into a ditto.
+
+    Two kinds of line are never dittos (2026-10-14, the plain-list volumes' false ones). A first
+    word in capitals (a running head, "BROOKLYN DIRECTORY.", a banner, an ad, a guide word) is a
+    head whatever stands before it, so a speck over a running head no longer makes it a ditto;
+    it moves the chain as before, which is how 1912's banner and then its guide word ("SMALL")
+    start the chain above a column's first, bulleted, entries. A lone letter (a section's "D", a
+    neighbour column's sliver, or an initial LightOn cut short, "- G" for "—G A h") is a ditto
+    on evidence and never moves the chain; a line that starts in lowercase (a run-over the model
+    wrote as a line of its own) is skipped. A bullet alone does not make a ditto of a word
+    tesseract read as it is, with nothing before it, that is no given name: checked by eye on
+    1912 leaves 291 and 671, that was the one false ditto ("Smeloft", set after "Smeltzer"), and
+    9 of the 10 bullet-only dittos tesseract read cleanly were given names or initials, the
+    tenth being it. And tesseract's dash, where it stands alone, is
+    evidence only if it is a dash: DASH_W of a word's height wide and DASH_FLAT times wider than
+    tall. Measured on standalone dash tokens before a capitalised word: 96.7% of 1912's pass,
+    13.1% of the specks ("-", "_", "~" off the film) in six plain-list volumes (0013, 0018, 0021,
+    0029, 0032, 0047), whose long "——" dittos ("—— Michael, butcher" under Donnally, 0035;
+    also read "= Samuel") pass too. Glued to the given name ("—John H", 1912's usual form) it
+    counts as it is, but not as "_" or "=": glued so, they lead 73 of 22,199 glued tokens in 1912
+    and 268 of 718 in nine plain-list volumes ("_Storan" under "Storm", 0006)."""
+    starts = [r for r in rows if r.get("start")]
+
+    def tlead(r):
+        """Tesseract's first token as dash evidence: "glued" to the word, "alone", or None."""
+        ws = sorted(r["words"], key=lambda w: w[0]) if r["words"] else []
+        lead = DASH.match(ws[0][5]) if ws else None
+        if lead is None:
+            return None
+        if ws[0][5][lead.end():lead.end() + 1].isalpha():
+            return None if set(lead.group(0)) & set("_=") else "glued"
+        w, h = ws[0][2] - ws[0][0], max(ws[0][3] - ws[0][1], 1)
+        return "alone" if w >= DASH_W * median_h and w >= DASH_FLAT * h else None
+
+    def tdash(r):
+        return tlead(r) is not None
+    bulleted = [r for r in starts if r.get("bullet")]
+    bullets_mean_dashes = (len(bulleted) < 5
+                           or sum(tdash(r) for r in bulleted) >= BULLET_AGREE * len(bulleted))
+    given = given_names()
+    head = None
+    for r in starts:
+        k = name_key(r["text"], r.get("mark"))
+        r["ditto"] = r["ambiguous"] = False
+        body = r["text"][2:] if r.get("mark") and r["text"].startswith("E ") else r["text"]
+        if not k or DASH.match(body) or body.lstrip()[:1].islower():
+            continue                 # (a dash the model wrote itself stays as it wrote it; a
+                                     # lowercase start is a run-over, "h. Rutledge n. Bedford av")
+        caps = len(k) > 1 and body.split()[0].isupper()
+        evidence = not caps and (tdash(r) or bool(bullets_mean_dashes and r.get("bullet")))
+        if LONE_LETTER.match(body.strip()):
+            # an initial under a dash (LightOn's "- G" for "—G A h", tesseract's "—G"), or a
+            # section's letter, which a speck beside it ("- D", 0003 leaf 23) does not make a
+            # ditto; the chain stays either way
+            r["ditto"] = not caps and (tlead(r) == "glued" or bool(bullets_mean_dashes and r.get("bullet")))
+        else:
+            follows = head is not None and k >= head and (
+                k[:2] == head[:2] or (k[0] == head[0] and len(k) > 1 and k not in given))
+            # a bullet alone against a word tesseract read as it is, with nothing before it, and
+            # no given name: a head the page sets out of order ("Smeloft" after "Smeltzer")
+            clean = (evidence and not tdash(r) and bool(r["words"]) and len(k) > 1 and k not in given
+                     and sorted(r["words"], key=lambda w: w[0])[0][5] == body.split()[0])
+            if evidence and not clean:
+                if follows or (head is None and not tdash(r)):
+                    head = k         # a head after all (bulleted Smalley; a page's first line)
+                else:
+                    r["ditto"] = True
+            elif follows or clean or k not in given:
+                head = k             # no dash evidence: downstream will take it as a head too
+            else:
+                r["ambiguous"] = True    # a given name with no dash: a ditto both readings
+                                         # missed, or a head; kept a head, the chain stays put
+        if r["ditto"]:
+            r["text"] = (f"E — {r['text'][2:]}" if r["text"].startswith("E ") and r.get("mark")
+                         else f"— {r['text']}")
+    return rows
 
 
 # ---------------------------------------------------------------- page post-passes
@@ -398,12 +538,10 @@ def synth_line(text: str, above, below, x0: int, char_w: float, line_h: int, con
     return out
 
 
-def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
-    """One re-OCR'd page as a word-dump record's lines: (lines, sources). `tiles` maps a tile name
-    (c0_h0, ...) to its box; `answers` maps it to (model lines, bleed) or to None where the model
-    has no answer (that tile keeps tesseract's lines). Each tile paired (pair_tile), the page's
-    lines put through the post-passes in reading order, then every line's text spread over its
-    tesseract words (respell), or given boxes where tesseract never saw it (synth_line)."""
+def page_rows(rec: dict, tiles: dict, answers: dict) -> tuple:
+    """A page's paired rows in reading order, dittos decided: (rows, median_h, char_w). `tiles`
+    maps a tile name (c0_h0, ...) to its box; `answers` maps it to (model lines, bleed) or to None
+    where the model has no answer (that tile keeps tesseract's lines)."""
     from reocr_volumes import column_lines
     keyed = column_lines(rec["lines"], rec["page_size"], keyed=True)
     hs = sorted(w[3] - w[1] for _k, _y, ws in keyed for w in ws)
@@ -426,6 +564,14 @@ def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
             r["source"] = "bleed" if bleed and r["source"] != "tesseract" else r["source"]
             r["x0"] = tiles[name][0]
             rows.append(r)
+    return dittos(rows, median_h), median_h, char_w
+
+
+def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
+    """One re-OCR'd page as a word-dump record's lines: (lines, sources). The page's rows
+    (page_rows) put through the post-passes in reading order, then every line's text spread over
+    its tesseract words (respell), or given boxes where tesseract never saw it (synth_line)."""
+    rows, median_h, char_w = page_rows(rec, tiles, answers)
     texts = post([r["text"] for r in rows])
     lines, sources = [], []
     for i, (r, text) in enumerate(zip(rows, texts)):
@@ -534,6 +680,12 @@ def dump(args) -> int:
 # ---------------------------------------------------------------- the bench (reocr_benchcols)
 
 PLACEHOLDER = re.compile(r"!\[[^\]]*\]\([^)]*\)")
+# An entry's printed mark, glued to the name as the page sets it and the gold writes it
+# ("*Simmons Aaron", conv #16). LightOn sometimes spaces it ("* Dixon William", "• White Anna" for
+# a star, micro_IABROOKLYN_0035 leaf 143 and 0048 leaf 296), and a separate leading "*" is a
+# ditto candidate to the survey's gate: on the screen pages it admitted "*" for 0035, which would
+# have handed every starred entry the surname above.
+MARK_GLUE = re.compile(r"^([*•†‡§✱])\s+(?=[A-Z])")
 
 
 def demarkdown(text: str) -> list:
@@ -547,13 +699,13 @@ def demarkdown(text: str) -> list:
         t = re.sub(r"<[^>]+>", " ", t)
         t = re.sub(r"^\s*#{1,6}\s+", "", t)
         # No list markers are stripped: LightOn writes 1912 Brooklyn's ditto dash ("same surname
-        # as above") as a Markdown bullet, "- LeGrand T h 453 Washn av", and that "-" is the
-        # ditto token the survey's ditto gate reads (as IA's OCR has it). The runner's
+        # as above") as a Markdown bullet, "- LeGrand T h 453 Washn av", but bullets plain lists
+        # too, so pair_tile takes the bullet off and dittos() weighs it as evidence. The runner's
         # markdown_to_lines keeps it too.
         t = t.replace("**", "").replace("__", "")
         if "|" in t:
             t = " ".join(c.strip() for c in t.strip().strip("|").split("|"))
-        t = " ".join(html.unescape(t).split())
+        t = MARK_GLUE.sub(r"\1", " ".join(html.unescape(t).split()))
         if t:
             out.append(t)
     return out
@@ -572,7 +724,26 @@ def tiles_of(stem: str, page: dict, kind: str) -> list:
     return out
 
 
+_RUNNER = None
+
+
+def runner():
+    """hpc/lightonocr_tiles.py as a module: its to_lines is how an answer becomes lines."""
+    global _RUNNER
+    if _RUNNER is None:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("lightonocr_tiles", REPO / "hpc" / "lightonocr_tiles.py")
+        _RUNNER = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_RUNNER)
+    return _RUNNER
+
+
 def model_lines(path_stem: Path, slug: str, raw: bool):
+    """A tile's answer as lines, or None where there is none. `raw`: Churro's raw XML. Otherwise
+    the .txt marks a finished tile (the runner writes none for one that ran out of clock), and a
+    LightOn answer is flattened again from its .raw.txt by the runner's own to_lines, so a fix
+    there (the HTML tables, 2026-10-14) reaches answers already made without a rerun. The .raw.txt
+    is what the runner flattened: a bleed retry's answer, or a looped one already cut back."""
     f = path_stem.with_name(f"{path_stem.name}_{slug}.raw.txt" if raw else f"{path_stem.name}_{slug}.txt")
     if not f.exists():
         return None
@@ -580,6 +751,9 @@ def model_lines(path_stem: Path, slug: str, raw: bool):
     if raw:
         from reocr_bench import body_lines
         return body_lines(text)
+    raw_f = path_stem.with_name(f"{path_stem.name}_{slug}.raw.txt")
+    if "lightonocr" in slug and raw_f.exists():
+        text = "\n".join(runner().to_lines(raw_f.read_text(encoding="utf-8"))[0])
     return demarkdown(text)
 
 
@@ -621,7 +795,8 @@ def bench(args) -> int:
                 tiles.append((tess, lines))
             if tiles is None:
                 continue
-        rows = [r for tess, lines in tiles for r in pair_tile(tess, lines, median_h)]
+        rows = dittos([r for tess, lines in tiles
+                       for r in pair_tile(tess, lines, median_h, model_marks=args.raw)], median_h)
         marks += sum(r["mark"] for r in rows)
         sources.update(r["source"] for r in rows)
         paired.append({"volume": vol, "leaf": int(leaf), "lines": [r["text"] for r in rows],
@@ -857,6 +1032,20 @@ def _self_test() -> int:
                           "Rogers Joshua, grocer 36 Willoughby [h 98 Jay"], post(page)
     assert fractions("Force Harvey, mason 165½ Jackson") == "Force Harvey, mason 165 1/2 Jackson"
     assert fractions("½ Main") == "½ Main" and fractions("12 ¾ Pearl") == "12 3/4 Pearl"
+    w = lambda t, x=100: [x, 0, x + 10 * len(t), 30, 90, t]        # noqa: E731 - a word box
+    rows = [{"text": t, "words": [w(f)] if f else [], "start": True, "bullet": b, "mark": False}
+            for t, f, b in [("Small Wm h 5 Ewen", "Small", False),
+                            ("Smalldone Giacomo carpr h 478 Prest", "Smalidone", True),
+                            ("E A cigars 445 DeKalb", "I", True),
+                            ("Chas lab h 34 4th", "—Chas", False),
+                            ("Smalley Arthur chocolates h 1430 35th", "Smalley", True),
+                            ("Thos h 104 Koscko", "“Thins", True),
+                            ("Smallman John driver h 1024 Prest", "Smallman", False)]]
+    got = [r["text"].split(" ")[0] for r in dittos(rows)]
+    assert got == ["Small", "Smalldone", "—", "—", "Smalley", "—", "Smallman"], got
+    rows = [{"text": t, "words": [], "start": True, "bullet": True, "mark": False}
+            for t in ("Abbott Jane, widow", "Abel John, cartman", "Ackerman Wm, grocer")]
+    assert not any(r["ditto"] for r in dittos(rows)), "a bulleted list of heads has no dittos"
     junk = ["Gittens Josiah, clerk, 130 Grand", "Glacken Mic clad Hirer 26 8 eT fopirne",
             "Glass John, cartman, 18 Sobwrot"]
     good = ["Gittens Josiah, clerk, 130 Grand", "Glacken Michael, laborer, 125 Stagg",

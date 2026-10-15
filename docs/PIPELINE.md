@@ -1352,7 +1352,11 @@ a few false marks, so it is not in v1.
 
 Failure modes found, each handled:
 - **Table mode.** On ~6% of tiles LightOn writes a table with an invented caption. The runner's
-  `untable` drops the invention and rejoins field-split rows.
+  `untable` drops the invention and rejoins field-split rows. The table may also come as HTML (7 of
+  410 saved answers), with a column of one-letter cells beside every entry: the next column's
+  sliver past the rule ("H", "S"), or row numbers it invented. `untable` reads HTML rows too and
+  drops such a margin column (2026-10-14). The import flattens every answer again from its
+  `.raw.txt` with the runner's own `to_lines`, so the fix reaches answers made before it.
 - **Bleed-through loops.** The reverse page shows through and the model repeats to the token cap
   under any seed. The tile is read once more on its darkest 10% of ink (`bleed_retry`, digits less
   sure), else cut back to before the loop (`loop_truncated`).
@@ -1389,9 +1393,28 @@ line for it (0047: tesseract-only lines 38 -> 7). Model words carry confidence 9
 tile's 30, and the record carries per-line `sources`.
 
 A dry run on the screen pages took the survey's own filters from IA's 0 candidate lines to 136
-and 147 on two 0039 pages, and from 1 to 144 on a 1912 page. LightOn writes 1912's ditto dash as
-a Markdown bullet ("- LeGrand T h 453 Washn av"). It is kept as the ditto token, and leads 81% of
-that volume's lines, so the ditto gate will admit it once the whole volume is re-read.
+and 147 on two 0039 pages, and from 1 to 144 on a 1912 page.
+
+**Dittos** (`reocr_pair.dittos`, 2026-10-14, with historical-ocr-eval). LightOn writes 1912's
+ditto dash as a Markdown bullet ("- LeGrand T h 453 Washn av"), but bullets are list markup:
+it bullets new surname heads on the same page, and whole lists in volumes with no dash at all.
+Tesseract misses most real dashes. Both errors cascade under the downstream surname carry, so
+each entry is decided from evidence plus alphabetical order:
+- Evidence: tesseract's dash glued to the name ("—John H"), or standing alone and dash-shaped.
+  Or LightOn's bullet, on a page where bullets meet tesseract's dashes.
+- An entry with evidence is a ditto ("— " written) unless it continues the chain of heads (same
+  first two letters, or same first letter and no given name).
+- Never a ditto: capitals, run-overs, and a head tesseract read cleanly that is no given name.
+- Checked by eye on 1912 leaves 291 and 671 (the 340 lines tesseract boxed): each of the 265
+  dittos among them is printed with a dash. The other 15 of the 280 are lines only LightOn read,
+  inside dash runs. One printed ditto is missed: LightOn wrote "Smalt M" for "—Wm M".
+- On the plain-list screen pages (~4,100 entries) one ditto is written, for the printer's fist
+  before an ad.
+- 0035 prints its own long "——" ditto, which the shape test lets through.
+- An entry's printed "*" is glued to the name, as the gold writes it ("*Dixon"); spaced, the
+  survey's gate had admitted "*" as 0035's ditto.
+On the screen pages' own lines that gate admits "—" for 1912 (60% of lines), and dry-run derives
+admit it for 1912 from two re-read leaves and nothing for 0035.
 
 Every run keeps boxes and expands next to nothing. **Local binarization is what recovers the
 lines.** Tesseract on the raw film frame reports "Empty page!!" without a DPI hint, and Sauvola

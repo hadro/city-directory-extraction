@@ -1,6 +1,6 @@
 {
  "_doc": "Tiers for the corpus run: data_prep/run_tiers.py builds this; hpc/prep_volumes.py --corpus --tier <tier> stages one. See the script.",
- "built": "2026-10-06",
+ "built": "2026-10-15",
  "totals": {
   "first": {
    "volumes": 60,
@@ -12,10 +12,10 @@
    "lines": 4009143,
    "h200_hours": 94
   },
-  "defer": {
+  "reocr": {
    "volumes": 39,
-   "lines": 208110,
-   "h200_hours": 5
+   "lines": 505965,
+   "h200_hours": 12
   },
   "abbyy8-clean": {
    "volumes": 18,
@@ -326,11 +326,11 @@
    "overridden": false
   },
   "brooklynnewyorkc19123broo": {
-   "tier": "defer",
-   "why": "typical listing page 0.04 entry-shaped (ABBYY-8 median 0.60); 186 pages failed OCR: re-OCR whole",
-   "lines": 6429,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 51576,
    "leading_zero": 0.01014,
-   "overridden": true
+   "overridden": false
   },
   "brooklynnewyorkc1912broo": {
    "tier": "abbyy8-damaged",
@@ -494,268 +494,268 @@
    "overridden": false
   },
   "micro_IABROOKLYN_0001": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 959,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 995,
    "leading_zero": 0.0,
    "overridden": false
   },
   "micro_IABROOKLYN_0002": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 1062,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 1186,
    "leading_zero": 0.0,
    "overridden": false
   },
   "micro_IABROOKLYN_0003": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 1166,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 1273,
    "leading_zero": 0.0,
    "overridden": false
   },
   "micro_IABROOKLYN_0004": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 1348,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 1484,
    "leading_zero": 0.00083,
    "overridden": false
   },
   "micro_IABROOKLYN_0005": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 1832,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 1889,
    "leading_zero": 0.0,
    "overridden": false
   },
   "micro_IABROOKLYN_0006": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 1847,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 1923,
    "leading_zero": 0.00061,
    "overridden": false
   },
   "micro_IABROOKLYN_0007": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
    "lines": 2342,
    "leading_zero": 0.0,
    "overridden": false
   },
   "micro_IABROOKLYN_0008": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 2015,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 2424,
    "leading_zero": 0.00116,
    "overridden": false
   },
   "micro_IABROOKLYN_0009": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 2459,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 2572,
    "leading_zero": 0.00048,
    "overridden": false
   },
   "micro_IABROOKLYN_0010": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 3055,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 3099,
    "leading_zero": 0.0004,
    "overridden": false
   },
   "micro_IABROOKLYN_0011": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 2661,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 3070,
    "leading_zero": 0.00098,
    "overridden": false
   },
   "micro_IABROOKLYN_0012": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 3367,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 3447,
    "leading_zero": 0.0,
    "overridden": false
   },
   "micro_IABROOKLYN_0013": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 2368,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 3597,
    "leading_zero": 0.00059,
    "overridden": false
   },
   "micro_IABROOKLYN_0014": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 2647,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 3792,
    "leading_zero": 0.00057,
    "overridden": false
   },
   "micro_IABROOKLYN_0015": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 3787,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 4306,
    "leading_zero": 0.0004,
    "overridden": false
   },
   "micro_IABROOKLYN_0017": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 2893,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 5541,
    "leading_zero": 0.00461,
    "overridden": false
   },
   "micro_IABROOKLYN_0018": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 4841,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 6704,
    "leading_zero": 0.00032,
    "overridden": false
   },
   "micro_IABROOKLYN_0020": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 7420,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 7947,
    "leading_zero": 0.00253,
    "overridden": false
   },
   "micro_IABROOKLYN_0021": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 2463,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 7762,
    "leading_zero": 0.00874,
    "overridden": false
   },
   "micro_IABROOKLYN_0022": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 3757,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 7076,
    "leading_zero": 0.0,
    "overridden": false
   },
   "micro_IABROOKLYN_0023": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 9469,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 10445,
    "leading_zero": 0.00035,
    "overridden": false
   },
   "micro_IABROOKLYN_0024": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 8072,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 10086,
    "leading_zero": 0.00107,
    "overridden": false
   },
   "micro_IABROOKLYN_0025": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 8647,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 12798,
    "leading_zero": 0.00081,
    "overridden": false
   },
   "micro_IABROOKLYN_0027": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 9725,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 13187,
    "leading_zero": 0.00153,
    "overridden": false
   },
   "micro_IABROOKLYN_0029": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 9674,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 16230,
    "leading_zero": 0.00052,
    "overridden": false
   },
   "micro_IABROOKLYN_0031": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 4005,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 21920,
    "leading_zero": 0.00239,
    "overridden": false
   },
   "micro_IABROOKLYN_0032": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 7714,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 21940,
    "leading_zero": 0.00095,
    "overridden": false
   },
   "micro_IABROOKLYN_0033": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 17396,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 25428,
    "leading_zero": 0.00047,
    "overridden": false
   },
   "micro_IABROOKLYN_0035": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 27065,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 56367,
    "leading_zero": 0.00035,
    "overridden": false
   },
   "micro_IABROOKLYN_0039": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 8187,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 51073,
    "leading_zero": 0.00158,
    "overridden": false
   },
   "micro_IABROOKLYN_0040": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 7970,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 52785,
    "leading_zero": 0.00219,
    "overridden": false
   },
   "micro_IABROOKLYN_0042": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 14972,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 58085,
    "leading_zero": 0.00092,
    "overridden": false
   },
   "micro_IABROOKLYN_0043": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 4083,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 4430,
    "leading_zero": 0.00073,
    "overridden": false
   },
   "micro_IABROOKLYN_0044": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 4917,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 5313,
    "leading_zero": 0.0007,
    "overridden": false
   },
   "micro_IABROOKLYN_0045": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 1615,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 3933,
    "leading_zero": 0.00617,
    "overridden": false
   },
   "micro_IABROOKLYN_0046": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 1567,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 5850,
    "leading_zero": 0.004,
    "overridden": false
   },
   "micro_IABROOKLYN_0047": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 550,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 4898,
    "leading_zero": 0.0153,
    "overridden": false
   },
   "micro_IABROOKLYN_0048": {
-   "tier": "defer",
-   "why": "BPL microfilm, tesseract: 54% of a book scan's lines (reocr_bench)",
-   "lines": 1764,
+   "tier": "reocr",
+   "why": "re-OCR'd: tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+   "lines": 7192,
    "leading_zero": 0.00297,
    "overridden": false
   },

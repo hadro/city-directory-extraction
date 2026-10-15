@@ -32,6 +32,11 @@ exception overrides it:
             (clean) and trow1907 (damaged) sets test the split.
     defer   BPL microfilm with no book scan: IA's tesseract reproduces 54% of the book scan's
             lines on the 8 microfilm volumes that have one. The re-OCR targets (#27).
+    reocr   A volume whose dump now carries the #27 re-OCR (its sidecar's `reocr` block):
+            LightOnOCR-3's text on tesseract's boxes, which reads 93.6% of the microfilm bench's
+            gold entries exactly against IA's 20%, and above the first tier's book scans (81-83%
+            of gold lines). All 39 deferred volumes since 2026-10-15; stage it with the first
+            tier (--tier first,reocr).
 
 Overrides (OVERRIDES), each a measurement:
     Boyd's Flushing volumes are Allen County scans with no `ocr` field, but #26 brought Boyd
@@ -124,10 +129,13 @@ def build(rescan: bool = False) -> dict:
     rates = damages(ids, rescan)
     for ident in ids:
         doc = json.loads((SIDECARS / f"ia_{ident}.json").read_text(encoding="utf-8"))
-        tier, why = OVERRIDES.get(ident) or tier_of(ident, doc, rates[ident])
+        if doc.get("reocr"):                 # re-read whole: no longer IA's OCR, and no override
+            tier, why = "reocr", f"re-OCR'd: {doc['reocr'].get('engine', 'tesseract + LightOnOCR-3')}"
+        else:
+            tier, why = OVERRIDES.get(ident) or tier_of(ident, doc, rates[ident])
         lines = planned_lines(ident, False)
         vols[ident] = {"tier": tier, "why": why, "lines": lines, "leading_zero": rates[ident],
-                       "overridden": ident in OVERRIDES}
+                       "overridden": ident in OVERRIDES and not doc.get("reocr")}
         totals[tier]["volumes"] += 1
         totals[tier]["lines"] += lines
     for t in totals.values():
@@ -163,7 +171,7 @@ def main(argv=None) -> int:
         return _self_test()
     doc = build(args.rescan)
     OUT.write_text(json.dumps(doc, indent=1) + "\n", encoding="utf-8")
-    for tier in ("first", "abbyy8-clean", "abbyy8-damaged", "defer"):
+    for tier in ("first", "reocr", "abbyy8-clean", "abbyy8-damaged", "defer"):
         t = doc["totals"].get(tier, {})
         print(f"{tier:15s} {t.get('volumes', 0):4d} volumes {t.get('lines', 0):11,d} lines "
               f"~{t.get('h200_hours', 0):4d} H200-hours")

@@ -365,18 +365,18 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1834/35",
-   "hocr_lines": 3588,
-   "wrap_joins": 137,
-   "candidates": 3451,
+   "hocr_lines": 4106,
+   "wrap_joins": 110,
+   "candidates": 3996,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 3313,
-    "mark_share": 0.029,
-    "mode": 1.75,
-    "mode_pairs": 11,
+    "pairs": 3687,
+    "mark_share": 0.0161,
+    "mode": 1.5,
+    "mode_pairs": 12,
     "trough": 1.25,
-    "trough_pairs": 6,
+    "trough_pairs": 7,
     "reason": "too few runovers to read a mode"
    },
    "column_splits": {
@@ -388,13 +388,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 3230,
-   "keep_rate": 0.936,
+   "kept": 3639,
+   "keep_rate": 0.9107,
    "dropped": {
-    "allcaps": 82,
-    "short": 71,
-    "banner": 42,
-    "bigtype": 25,
+    "short": 164,
+    "allcaps": 92,
+    "banner": 71,
+    "bigtype": 29,
     "nonascii": 1
    },
    "ditto_marks": [],
@@ -407,41 +407,41 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    5,
-    31,
     107,
+    5,
+    33,
     97,
-    7,
-    76,
     101,
-    13,
-    30,
-    102
+    56,
+    102,
+    19,
+    42,
+    96
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 263234,
+  "words_gz_bytes": 292770,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 5,
   "end_leaf": 91,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHJKLMNOPRSTVWY",
   "missing_letters": "IQUXZ",
-  "voting_density": 0.828,
+  "voting_density": 0.908,
   "flags": [],
   "start": {
    "leaf": 5,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0011$5/full/!1400,1400/0/default.jpg",
-   "quote": "Abel E I, Fulton n Johnson Bh, -- 4b vie"
+   "quote": "Abbot Mary, 132 Bridge"
   },
   "end": {
    "leaf": 91,
@@ -452,7 +452,7 @@
    {
     "start_leaf": 5,
     "end_leaf": 91,
-    "voting_leaves": 72,
+    "voting_leaves": 79,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHJKLMNOPRSTVWY",
@@ -460,33 +460,6 @@
    }
   ],
   "gaps": [
-   {
-    "between": [
-     "A",
-     "B"
-    ],
-    "start_leaf": 6,
-    "end_leaf": 6,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "C",
-     "D"
-    ],
-    "start_leaf": 18,
-    "end_leaf": 23,
-    "leaves": 6
-   },
-   {
-    "between": [
-     "E",
-     "F"
-    ],
-    "start_leaf": 30,
-    "end_leaf": 30,
-    "leaves": 1
-   },
    {
     "between": [
      "M",
@@ -500,23 +473,23 @@
   "letter_blocks": {
    "A": [
     5,
-    5,
-    1
+    6,
+    2
    ],
    "B": [
     7,
     15,
-    6
+    7
    ],
    "C": [
     16,
-    17,
-    2
+    22,
+    5
    ],
    "D": [
-    24,
+    23,
     28,
-    5
+    6
    ],
    "E": [
     29,
@@ -524,9 +497,9 @@
     1
    ],
    "F": [
-    31,
+    30,
     32,
-    2
+    3
    ],
    "G": [
     33,
@@ -604,7 +577,7 @@
     1
    ]
   },
-  "skipped_votes": 3,
+  "skipped_votes": 2,
   "voted_bounds": [
    5,
    91
@@ -615,7 +588,7 @@
   },
   "cross_check": {
    "source": "lines",
-   "start_leaf": 7,
+   "start_leaf": 5,
    "end_leaf": 91
   },
   "params": {
@@ -628,19 +601,19 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 107,
-  "fitted_leaves": 93,
-  "read_leaves": 49,
+  "fitted_leaves": 95,
+  "read_leaves": 68,
   "segments": [
    {
-    "first_leaf": 14,
+    "first_leaf": 12,
     "last_leaf": 17,
-    "first_page": 14,
+    "first_page": 12,
     "last_page": 17,
-    "leaves": 4,
-    "read": 3
+    "leaves": 6,
+    "read": 6
    },
    {
     "first_leaf": 22,
@@ -648,7 +621,7 @@
     "first_page": 22,
     "last_page": 106,
     "leaves": 85,
-    "read": 43
+    "read": 59
    },
    {
     "first_leaf": 110,
@@ -670,8 +643,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -690,8 +663,8 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 14,
-      "page": 14,
+      "leaf": 12,
+      "page": 12,
       "attestation": "read"
      },
      "last": {
@@ -756,8 +729,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0011_listing.jsonl.gz",
   "sections": [
    {
@@ -766,11 +739,11 @@
     "end_leaf": 91
    }
   ],
-  "kept": 2661,
+  "kept": 3070,
   "dropped": 569,
-  "kept_share": 0.8238,
+  "kept_share": 0.8436,
   "kept_by_section": {
-   "listing": 2661
+   "listing": 3070
   }
  },
  "non_entry_pages": {
@@ -782,5 +755,21 @@
   "leaves": [
    6
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0011_words.ia.jsonl.gz",
+  "tiles": 164,
+  "tiles_answered": 164,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 2,
+  "pages": 82,
+  "lines_model": 3112,
+  "lines_model-only": 131,
+  "lines_tesseract": 105,
+  "leaves_replaced": 82,
+  "dumped": "2026-10-15"
  }
 }

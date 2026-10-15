@@ -499,37 +499,38 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1836/37",
-   "hocr_lines": 3687,
-   "wrap_joins": 218,
-   "candidates": 3469,
+   "hocr_lines": 5400,
+   "wrap_joins": 177,
+   "candidates": 5223,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 3093,
-    "mark_share": 0.0758,
+    "pairs": 4168,
+    "mark_share": 0.0656,
     "mode": 1.25,
-    "mode_pairs": 38,
+    "mode_pairs": 30,
     "trough": 1.0,
     "trough_pairs": 37,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
    "column_splits": {
-    "lines": 11,
-    "leaves": 1
+    "lines": 0,
+    "leaves": 0
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2918,
-   "keep_rate": 0.8412,
+   "kept": 4147,
+   "keep_rate": 0.794,
    "dropped": {
-    "short": 257,
-    "bigtype": 115,
-    "banner": 88,
-    "allcaps": 79,
-    "nonascii": 12
+    "short": 587,
+    "bigtype": 177,
+    "banner": 154,
+    "allcaps": 146,
+    "nonascii": 11,
+    "pagenum": 1
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -542,40 +543,38 @@
    },
    "top_ad_leaves": [
     99,
-    52,
     15,
     14,
-    25,
     106,
-    18,
-    47,
-    82,
-    35
+    51,
+    68,
+    25,
+    87,
+    64,
+    84
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 264836
+  "words_gz_bytes": 353886
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 18,
   "end_leaf": 97,
   "first_letter": "B",
   "last_letter": "W",
   "letters_present": "BCDEFGHJKLMNOPRSTVW",
   "missing_letters": "AIQUXYZ",
-  "voting_density": 0.863,
-  "flags": [
-   "edge-disagreement"
-  ],
+  "voting_density": 0.95,
+  "flags": [],
   "start": {
    "leaf": 18,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0013$18/full/!1400,1400/0/default.jpg",
-   "quote": "Barr J hn, livery stable"
+   "quote": "Barkeloo Harmanus H. Jay n Willoughby"
   },
   "end": {
    "leaf": 97,
@@ -586,7 +585,7 @@
    {
     "start_leaf": 18,
     "end_leaf": 97,
-    "voting_leaves": 69,
+    "voting_leaves": 76,
     "first_letter": "B",
     "last_letter": "W",
     "letters": "BCDEFGHJKLMNOPRSTVW",
@@ -594,15 +593,6 @@
    }
   ],
   "gaps": [
-   {
-    "between": [
-     "B",
-     "C"
-    ],
-    "start_leaf": 27,
-    "end_leaf": 27,
-    "leaves": 1
-   },
    {
     "between": [
      "M",
@@ -617,17 +607,17 @@
    "B": [
     18,
     26,
-    7
+    9
    ],
    "C": [
-    28,
+    27,
     35,
-    7
+    9
    ],
    "D": [
     36,
     42,
-    4
+    6
    ],
    "E": [
     43,
@@ -637,7 +627,7 @@
    "F": [
     44,
     47,
-    3
+    4
    ],
    "G": [
     48,
@@ -656,13 +646,13 @@
    ],
    "K": [
     64,
-    66,
-    3
+    65,
+    2
    ],
    "L": [
-    67,
+    66,
     70,
-    4
+    5
    ],
    "M": [
     71,
@@ -710,7 +700,7 @@
     4
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 1,
   "voted_bounds": [
    18,
    97
@@ -721,7 +711,7 @@
   },
   "cross_check": {
    "source": "lines",
-   "start_leaf": 14,
+   "start_leaf": 18,
    "end_leaf": 97
   },
   "params": {
@@ -734,19 +724,27 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 105,
-  "fitted_leaves": 26,
-  "read_leaves": 9,
+  "fitted_leaves": 47,
+  "read_leaves": 19,
   "segments": [
    {
-    "first_leaf": 46,
-    "last_leaf": 71,
-    "first_page": 45,
-    "last_page": 70,
-    "leaves": 26,
-    "read": 9
+    "first_leaf": 19,
+    "last_leaf": 35,
+    "first_page": 18,
+    "last_page": 34,
+    "leaves": 17,
+    "read": 6
+   },
+   {
+    "first_leaf": 43,
+    "last_leaf": 72,
+    "first_page": 42,
+    "last_page": 71,
+    "leaves": 30,
+    "read": 13
    }
   ],
   "ia_comparison": {
@@ -760,8 +758,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -780,13 +778,13 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 46,
-      "page": 45,
+      "leaf": 19,
+      "page": 18,
       "attestation": "read"
      },
      "last": {
-      "leaf": 71,
-      "page": 70,
+      "leaf": 72,
+      "page": 71,
       "attestation": "read"
      }
     }
@@ -809,8 +807,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0013_listing.jsonl.gz",
   "sections": [
    {
@@ -819,11 +817,11 @@
     "end_leaf": 97
    }
   ],
-  "kept": 2474,
+  "kept": 3703,
   "dropped": 444,
-  "kept_share": 0.8478,
+  "kept_share": 0.8929,
   "kept_by_section": {
-   "listing": 2474
+   "listing": 3703
   }
  },
  "non_entry_pages": {
@@ -843,5 +841,21 @@
    45,
    52
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0013_words.ia.jsonl.gz",
+  "tiles": 204,
+  "tiles_answered": 204,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 78,
+  "lines_model": 3802,
+  "lines_model-only": 168,
+  "lines_tesseract": 719,
+  "leaves_replaced": 78,
+  "dumped": "2026-10-15"
  }
 }

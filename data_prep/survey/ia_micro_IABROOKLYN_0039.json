@@ -69,28 +69,21 @@
    "note": "Catalog publisher was EMPTY. Note the year shape the plan warns about: the card says 'for the year ending May 1st, 1859' while the CSV year is 1858."
   },
   "end_page": {
-   "value": 429,
-   "leaf": 476,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$476/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$476/full/!1400,1400/0/default.jpg",
+   "value": 425,
+   "leaf": 472,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$472/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$472/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "running head 'INDEX TO ADVERTISEMENTS. 429' -- the advertisement index, not the listing",
-   "method": "agent-read",
+   "quote": "'425' in the head margin",
+   "method": "hocr-geometry",
    "confidence": "medium",
    "attestation": "read",
-   "position": "head",
-   "edge_confirmed": false,
-   "read_date": "2026-09-23",
-   "note": "not the listing end: the detected end leaf is the ad index",
+   "ia_page": null,
    "page_offset": 47,
-   "margin_fit_said": {
-    "value": 5,
-    "leaf": 476,
-    "page_offset": 471,
-    "confidence": "low",
-    "attestation": "inferred",
-    "method": "hocr-geometry"
-   }
+   "listing_flags": [],
+   "doubts": [
+    "sequence read on only 9 leaves"
+   ]
   },
   "start_page": {
    "value": null,
@@ -372,43 +365,41 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1858",
-   "hocr_lines": 20901,
-   "wrap_joins": 1088,
-   "candidates": 19813,
+   "hocr_lines": 70330,
+   "wrap_joins": 3345,
+   "candidates": 66985,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 12695,
-    "mark_share": 0.094,
+    "pairs": 50806,
+    "mark_share": 0.04,
     "mode": 1.5,
-    "mode_pairs": 421,
+    "mode_pairs": 1535,
     "trough": 1.0,
-    "trough_pairs": 202,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 1386,
+    "reason": "runover mode not isolated from the next-entry band"
    },
    "column_splits": {
-    "lines": 914,
-    "leaves": 41
+    "lines": 29,
+    "leaves": 1
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 0,
-   "kept": 11088,
-   "keep_rate": 0.5596,
+   "marker_fixes": 1,
+   "kept": 54101,
+   "keep_rate": 0.8077,
    "dropped": {
-    "short": 5294,
-    "banner": 1840,
-    "bigtype": 914,
-    "allcaps": 611,
-    "nonascii": 64,
+    "short": 8182,
+    "bigtype": 2389,
+    "banner": 1410,
+    "allcaps": 834,
+    "nonascii": 67,
     "pagenum": 2
    },
-   "ditto_marks": [
-    "\u00a9"
-   ],
-   "ditto_applied": 78,
+   "ditto_marks": [],
+   "ditto_applied": 0,
    "band": {
     "leaves_banded": 0,
     "head": 0,
@@ -417,271 +408,118 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    88,
-    367,
+    110,
+    495,
+    498,
+    146,
+    507,
+    482,
+    502,
     319,
-    116,
-    210,
-    369,
-    209,
-    75,
-    388,
-    153
+    535,
+    494
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 1388774,
+  "words_gz_bytes": 5105701,
   "hocr_deleted": true,
   "elapsed_s": 85
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 11,
-  "end_leaf": 476,
+  "end_leaf": 472,
   "first_letter": "A",
-  "last_letter": "W",
-  "letters_present": "ABCDEFGHIJKLMNOPRSTUVW",
-  "missing_letters": "QXYZ",
-  "voting_density": 0.35,
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.874,
   "flags": [],
   "start": {
    "leaf": 11,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$11/full/!1400,1400/0/default.jpg",
-   "quote": "Abberley Richard, bootmkr., Hudson av. n. Nas- |"
+   "quote": "Abberley Richard, bootmkr., Hudson av. n. Nassau"
   },
   "end": {
-   "leaf": 476,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$476/full/!1400,1400/0/default.jpg",
-   "quote": "Wyuhecy, Eebubed OT Ge"
+   "leaf": 472,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$472/full/!1400,1400/0/default.jpg",
+   "quote": "Zweifel Peter, tailor, h. 129 Prospect"
   },
   "sections": [
    {
     "start_leaf": 11,
-    "end_leaf": 476,
-    "voting_leaves": 163,
+    "end_leaf": 472,
+    "voting_leaves": 404,
     "first_letter": "A",
-    "last_letter": "W",
-    "letters": "ABCDEFGHIJKLMNOPRSTUVW",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
     "is_listing": true
    }
   ],
   "gaps": [
    {
     "between": [
-     "A",
-     "B"
-    ],
-    "start_leaf": 22,
-    "end_leaf": 38,
-    "leaves": 17
-   },
-   {
-    "between": [
-     "B",
-     "C"
-    ],
-    "start_leaf": 62,
-    "end_leaf": 62,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "C",
-     "D"
-    ],
-    "start_leaf": 77,
-    "end_leaf": 102,
-    "leaves": 26
-   },
-   {
-    "between": [
-     "D",
-     "E"
-    ],
-    "start_leaf": 114,
-    "end_leaf": 126,
-    "leaves": 13
-   },
-   {
-    "between": [
-     "E",
-     "F"
-    ],
-    "start_leaf": 128,
-    "end_leaf": 137,
-    "leaves": 10
-   },
-   {
-    "between": [
-     "F",
-     "G"
-    ],
-    "start_leaf": 155,
-    "end_leaf": 166,
-    "leaves": 12
-   },
-   {
-    "between": [
-     "G",
-     "H"
-    ],
-    "start_leaf": 171,
-    "end_leaf": 201,
-    "leaves": 31
-   },
-   {
-    "between": [
-     "I",
-     "J"
-    ],
-    "start_leaf": 214,
-    "end_leaf": 214,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "J",
-     "K"
-    ],
-    "start_leaf": 226,
-    "end_leaf": 232,
-    "leaves": 7
-   },
-   {
-    "between": [
-     "K",
-     "L"
-    ],
-    "start_leaf": 234,
-    "end_leaf": 241,
-    "leaves": 8
-   },
-   {
-    "between": [
      "L",
      "M"
     ],
-    "start_leaf": 256,
-    "end_leaf": 301,
-    "leaves": 46
-   },
-   {
-    "between": [
-     "M",
-     "N"
-    ],
-    "start_leaf": 309,
-    "end_leaf": 315,
-    "leaves": 7
-   },
-   {
-    "between": [
-     "N",
-     "O"
-    ],
-    "start_leaf": 323,
-    "end_leaf": 323,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "O",
-     "P"
-    ],
-    "start_leaf": 331,
-    "end_leaf": 333,
-    "leaves": 3
-   },
-   {
-    "between": [
-     "P",
-     "R"
-    ],
-    "start_leaf": 347,
-    "end_leaf": 350,
-    "leaves": 4
-   },
-   {
-    "between": [
-     "R",
-     "S"
-    ],
-    "start_leaf": 356,
-    "end_leaf": 384,
-    "leaves": 29
+    "start_leaf": 261,
+    "end_leaf": 291,
+    "leaves": 31
    },
    {
     "between": [
      "S",
      "T"
     ],
-    "start_leaf": 399,
+    "start_leaf": 415,
     "end_leaf": 415,
-    "leaves": 17
-   },
-   {
-    "between": [
-     "T",
-     "U"
-    ],
-    "start_leaf": 427,
-    "end_leaf": 428,
-    "leaves": 2
-   },
-   {
-    "between": [
-     "V",
-     "W"
-    ],
-    "start_leaf": 436,
-    "end_leaf": 437,
-    "leaves": 2
+    "leaves": 1
    }
   ],
   "letter_blocks": {
    "A": [
     11,
-    21,
+    20,
     10
    ],
    "B": [
-    39,
+    21,
     61,
-    15
+    41
    ],
    "C": [
-    63,
-    76,
-    5
+    62,
+    99,
+    35
    ],
    "D": [
-    103,
-    113,
-    6
+    100,
+    125,
+    24
    ],
    "E": [
-    127,
-    127,
-    1
+    126,
+    132,
+    7
    ],
    "F": [
-    138,
-    154,
-    6
+    133,
+    156,
+    20
    ],
    "G": [
-    167,
-    170,
-    2
+    157,
+    175,
+    18
    ],
    "H": [
-    202,
+    176,
     212,
-    8
+    34
    ],
    "I": [
     213,
@@ -689,75 +527,90 @@
     1
    ],
    "J": [
-    215,
+    214,
     225,
-    6
+    10
    ],
    "K": [
-    233,
-    233,
-    1
+    226,
+    240,
+    14
    ],
    "L": [
-    242,
-    255,
-    6
+    241,
+    260,
+    18
    ],
    "M": [
-    302,
-    308,
-    4
+    292,
+    314,
+    20
    ],
    "N": [
-    316,
+    315,
     322,
-    4
+    6
    ],
    "O": [
-    324,
+    323,
     330,
-    2
+    7
    ],
    "P": [
-    334,
+    331,
     346,
-    5
+    16
+   ],
+   "Q": [
+    347,
+    348,
+    2
    ],
    "R": [
-    351,
-    355,
-    3
+    349,
+    371,
+    21
    ],
    "S": [
-    385,
-    398,
-    5
+    372,
+    414,
+    38
    ],
    "T": [
     416,
-    426,
-    9
+    428,
+    13
    ],
    "U": [
     429,
-    430,
-    2
+    429,
+    1
    ],
    "V": [
-    431,
-    435,
-    5
+    430,
+    436,
+    7
    ],
    "W": [
-    438,
-    476,
-    26
+    437,
+    470,
+    29
+   ],
+   "Y": [
+    471,
+    471,
+    1
+   ],
+   "Z": [
+    472,
+    472,
+    1
    ]
   },
-  "skipped_votes": 5,
+  "skipped_votes": 1,
   "voted_bounds": [
    11,
-   476
+   472
   ],
   "extended": {
    "start": [],
@@ -766,7 +619,7 @@
   "cross_check": {
    "source": "lines",
    "start_leaf": 11,
-   "end_leaf": 476
+   "end_leaf": 472
   },
   "params": {
    "min_chars": 400,
@@ -778,107 +631,107 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 563,
-  "fitted_leaves": 328,
-  "read_leaves": 131,
+  "fitted_leaves": 479,
+  "read_leaves": 301,
   "segments": [
    {
-    "first_leaf": 14,
-    "last_leaf": 68,
-    "first_page": 4,
-    "last_page": 58,
-    "leaves": 55,
-    "read": 24
+    "first_leaf": 12,
+    "last_leaf": 69,
+    "first_page": 2,
+    "last_page": 59,
+    "leaves": 58,
+    "read": 50
    },
    {
     "first_leaf": 74,
-    "last_leaf": 107,
+    "last_leaf": 155,
     "first_page": 61,
-    "last_page": 94,
-    "leaves": 34,
-    "read": 7
+    "last_page": 137,
+    "leaves": 77,
+    "read": 56
    },
    {
-    "first_leaf": 112,
-    "last_leaf": 137,
-    "first_page": 97,
-    "last_page": 121,
-    "leaves": 25,
-    "read": 15
-   },
-   {
-    "first_leaf": 183,
-    "last_leaf": 214,
-    "first_page": 161,
-    "last_page": 191,
-    "leaves": 31,
-    "read": 16
-   },
-   {
-    "first_leaf": 232,
-    "last_leaf": 240,
-    "first_page": 207,
-    "last_page": 215,
-    "leaves": 9,
+    "first_leaf": 156,
+    "last_leaf": 168,
+    "first_page": 136,
+    "last_page": 148,
+    "leaves": 13,
     "read": 5
    },
    {
-    "first_leaf": 334,
-    "last_leaf": 354,
-    "first_page": 299,
-    "last_page": 319,
-    "leaves": 21,
+    "first_leaf": 172,
+    "last_leaf": 227,
+    "first_page": 152,
+    "last_page": 202,
+    "leaves": 51,
+    "read": 33
+   },
+   {
+    "first_leaf": 231,
+    "last_leaf": 249,
+    "first_page": 206,
+    "last_page": 224,
+    "leaves": 19,
+    "read": 11
+   },
+   {
+    "first_leaf": 253,
+    "last_leaf": 266,
+    "first_page": 226,
+    "last_page": 238,
+    "leaves": 13,
     "read": 8
    },
    {
-    "first_leaf": 370,
-    "last_leaf": 388,
-    "first_page": 333,
-    "last_page": 351,
-    "leaves": 19,
-    "read": 5
+    "first_leaf": 270,
+    "last_leaf": 283,
+    "first_page": 242,
+    "last_page": 255,
+    "leaves": 14,
+    "read": 9
    },
    {
-    "first_leaf": 394,
-    "last_leaf": 406,
-    "first_page": 354,
-    "last_page": 366,
-    "leaves": 13,
-    "read": 4
-   },
-   {
-    "first_leaf": 416,
-    "last_leaf": 438,
-    "first_page": 374,
-    "last_page": 396,
-    "leaves": 23,
+    "first_leaf": 288,
+    "last_leaf": 304,
+    "first_page": 258,
+    "last_page": 274,
+    "leaves": 17,
     "read": 7
    },
    {
-    "first_leaf": 450,
-    "last_leaf": 457,
-    "first_page": 406,
-    "last_page": 412,
-    "leaves": 7,
-    "read": 5
+    "first_leaf": 311,
+    "last_leaf": 355,
+    "first_page": 279,
+    "last_page": 320,
+    "leaves": 42,
+    "read": 24
    },
    {
-    "first_leaf": 464,
-    "last_leaf": 471,
-    "first_page": 417,
-    "last_page": 424,
-    "leaves": 8,
-    "read": 5
+    "first_leaf": 360,
+    "last_leaf": 408,
+    "first_page": 323,
+    "last_page": 368,
+    "leaves": 46,
+    "read": 28
    },
    {
-    "first_leaf": 473,
-    "last_leaf": 479,
-    "first_page": 2,
-    "last_page": 8,
-    "leaves": 7,
-    "read": 3
+    "first_leaf": 416,
+    "last_leaf": 459,
+    "first_page": 374,
+    "last_page": 414,
+    "leaves": 41,
+    "read": 34
+   },
+   {
+    "first_leaf": 465,
+    "last_leaf": 476,
+    "first_page": 418,
+    "last_page": 429,
+    "leaves": 12,
+    "read": 9
    },
    {
     "first_leaf": 482,
@@ -916,8 +769,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -930,40 +783,88 @@
    {
     "kind": "listing",
     "start_leaf": 11,
-    "end_leaf": 476,
+    "end_leaf": 472,
     "title": null,
-    "leaves": 454,
+    "leaves": 450,
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 14,
-      "page": 4,
+      "leaf": 12,
+      "page": 2,
       "attestation": "read"
      },
      "last": {
-      "leaf": 476,
-      "page": 5,
-      "attestation": "inferred"
+      "leaf": 472,
+      "page": 425,
+      "attestation": "read"
      }
     }
    },
    {
     "kind": "back_matter",
-    "start_leaf": 477,
-    "end_leaf": 477,
+    "start_leaf": 473,
+    "end_leaf": 473,
     "title": null,
     "leaves": 1,
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 477,
-      "page": 6,
+      "leaf": 473,
+      "page": 426,
       "attestation": "inferred"
      },
      "last": {
-      "leaf": 477,
-      "page": 6,
+      "leaf": 473,
+      "page": 426,
       "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 474,
+    "end_leaf": 474,
+    "title": {
+     "leaf": 474,
+     "quote": "NAMES TOO LATE FOR INSE",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$474/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 1,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 474,
+      "page": 427,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 474,
+      "page": 427,
+      "attestation": "inferred"
+     }
+    }
+   },
+   {
+    "kind": "index",
+    "start_leaf": 475,
+    "end_leaf": 477,
+    "title": {
+     "leaf": 475,
+     "quote": "INDEX TO",
+     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0039$475/full/!1400,1400/0/default.jpg"
+    },
+    "leaves": 3,
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 475,
+      "page": 428,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 476,
+      "page": 429,
+      "attestation": "read"
      }
     }
    },
@@ -980,9 +881,9 @@
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 478,
-      "page": 7,
-      "attestation": "inferred"
+      "leaf": 482,
+      "page": 5,
+      "attestation": "read"
      },
      "last": {
       "leaf": 513,
@@ -1094,6 +995,8 @@
    "back_matter",
    "district",
    "front_matter",
+   "index",
+   "late_names",
    "listing",
    "register",
    "street_guide"
@@ -1101,21 +1004,27 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0039_listing.jsonl.gz",
   "sections": [
    {
     "kind": "listing",
     "start_leaf": 11,
-    "end_leaf": 476
+    "end_leaf": 472
+   },
+   {
+    "kind": "late_names",
+    "start_leaf": 474,
+    "end_leaf": 474
    }
   ],
-  "kept": 9220,
-  "dropped": 1868,
-  "kept_share": 0.8315,
+  "kept": 52106,
+  "dropped": 1995,
+  "kept_share": 0.9631,
   "kept_by_section": {
-   "listing": 9220
+   "listing": 51946,
+   "late_names": 160
   }
  },
  "non_entry_pages": {
@@ -1279,5 +1188,21 @@
    475,
    476
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0039_words.ia.jsonl.gz",
+  "tiles": 1752,
+  "tiles_answered": 1750,
+  "bleed_retry": 0,
+  "loop_truncated": 1,
+  "table_mode": 88,
+  "pages": 454,
+  "lines_tesseract": 8577,
+  "lines_model": 54054,
+  "lines_model-only": 4314,
+  "leaves_replaced": 454,
+  "dumped": "2026-10-15"
  }
 }

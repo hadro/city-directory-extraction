@@ -85,10 +85,10 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0020$211/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0020$211/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'208' in the head margin",
+   "quote": "no folio printed on leaf 211; page 208 INFERRED from the sequence of folios around it",
    "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
+   "confidence": "low",
+   "attestation": "inferred",
    "ia_page": null,
    "page_offset": 3,
    "listing_flags": [],
@@ -344,19 +344,19 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'hearnes/van nostrand' tagged as its trained partner 'hearne'",
    "year_tag": "1844",
-   "hocr_lines": 10656,
-   "wrap_joins": 449,
-   "candidates": 10207,
+   "hocr_lines": 11617,
+   "wrap_joins": 351,
+   "candidates": 11266,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 9484,
-    "mark_share": 0.0572,
+    "pairs": 9752,
+    "mark_share": 0.0445,
     "mode": 1.25,
-    "mode_pairs": 70,
+    "mode_pairs": 58,
     "trough": 1.0,
-    "trough_pairs": 72,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 99,
+    "reason": "too few runovers to read a mode"
    },
    "column_splits": {
     "lines": 0,
@@ -367,14 +367,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 8683,
-   "keep_rate": 0.8507,
+   "kept": 9210,
+   "keep_rate": 0.8175,
    "dropped": {
-    "short": 678,
-    "allcaps": 299,
-    "bigtype": 287,
-    "banner": 214,
-    "nonascii": 44,
+    "short": 965,
+    "banner": 412,
+    "allcaps": 380,
+    "bigtype": 278,
+    "nonascii": 19,
     "pagenum": 2
    },
    "ditto_marks": [],
@@ -395,21 +395,21 @@
     8,
     247,
     255,
-    74,
-    256
+    256,
+    257
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 811226,
+  "words_gz_bytes": 828304,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 14,
   "end_leaf": 211,
   "first_letter": "A",
@@ -421,7 +421,7 @@
   "start": {
    "leaf": 14,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0020$14/full/!1400,1400/0/default.jpg",
-   "quote": "Abbreviati.ns; h. stand. for for pear, g. for."
+   "quote": "Abbot Daniel, livery stable 42 main h 25 Front"
   },
   "end": {
    "leaf": 211,
@@ -518,13 +518,13 @@
    ],
    "N": [
     145,
-    147,
-    3
+    146,
+    2
    ],
    "O": [
-    148,
+    147,
     150,
-    3
+    4
    ],
    "P": [
     151,
@@ -596,11 +596,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 270,
   "fitted_leaves": 267,
-  "read_leaves": 72,
+  "read_leaves": 129,
   "segments": [
    {
     "first_leaf": 3,
@@ -608,7 +608,7 @@
     "first_page": 2,
     "last_page": 268,
     "leaves": 267,
-    "read": 72
+    "read": 129
    }
   ],
   "ia_comparison": {
@@ -622,8 +622,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -661,7 +661,7 @@
      "last": {
       "leaf": 211,
       "page": 208,
-      "attestation": "read"
+      "attestation": "inferred"
      }
     }
    },
@@ -699,8 +699,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0020_listing.jsonl.gz",
   "sections": [
    {
@@ -709,11 +709,11 @@
     "end_leaf": 211
    }
   ],
-  "kept": 7480,
+  "kept": 8007,
   "dropped": 1203,
-  "kept_share": 0.8615,
+  "kept_share": 0.8694,
   "kept_by_section": {
-   "listing": 7480
+   "listing": 8007
   }
  },
  "non_entry_pages": {
@@ -726,5 +726,22 @@
    91,
    93
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0020_words.ia.jsonl.gz",
+  "tiles": 392,
+  "tiles_answered": 392,
+  "bleed_retry": 1,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 196,
+  "lines_tesseract": 828,
+  "lines_model": 8457,
+  "lines_model-only": 183,
+  "lines_bleed": 21,
+  "leaves_replaced": 196,
+  "dumped": "2026-10-15"
  }
 }

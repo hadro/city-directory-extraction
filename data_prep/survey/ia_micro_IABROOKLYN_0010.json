@@ -350,18 +350,18 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'nichols/delaree' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1833/34",
-   "hocr_lines": 4183,
-   "wrap_joins": 146,
-   "candidates": 4037,
+   "hocr_lines": 4332,
+   "wrap_joins": 109,
+   "candidates": 4223,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 3848,
-    "mark_share": 0.0311,
+    "pairs": 3912,
+    "mark_share": 0.018,
     "mode": 1.5,
-    "mode_pairs": 20,
+    "mode_pairs": 13,
     "trough": 1.25,
-    "trough_pairs": 17,
+    "trough_pairs": 10,
     "reason": "too few runovers to read a mode"
    },
    "column_splits": {
@@ -373,19 +373,17 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 3686,
-   "keep_rate": 0.9131,
+   "kept": 3730,
+   "keep_rate": 0.8833,
    "dropped": {
-    "allcaps": 141,
-    "banner": 97,
-    "short": 71,
-    "bigtype": 34,
-    "nonascii": 8
+    "banner": 178,
+    "allcaps": 147,
+    "short": 147,
+    "bigtype": 20,
+    "nonascii": 1
    },
-   "ditto_marks": [
-    "*"
-   ],
-   "ditto_applied": 20,
+   "ditto_marks": [],
+   "ditto_applied": 0,
    "band": {
     "leaves_banded": 0,
     "head": 0,
@@ -395,35 +393,35 @@
    },
    "top_ad_leaves": [
     100,
-    81,
-    24,
-    14,
-    31,
     111,
+    33,
+    14,
     104,
-    17,
-    40,
-    114
+    114,
+    82,
+    12,
+    72,
+    56
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 297309,
+  "words_gz_bytes": 302450,
   "hocr_deleted": true,
   "elapsed_s": 19
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 4,
   "end_leaf": 93,
   "first_letter": "A",
   "last_letter": "Y",
-  "letters_present": "ABCDFGHJKLMNOPRSTVWY",
-  "missing_letters": "EIQUXZ",
-  "voting_density": 0.956,
+  "letters_present": "ABCDEFGHJKLMNOPRSTVWY",
+  "missing_letters": "IQUXZ",
+  "voting_density": 0.967,
   "flags": [],
   "start": {
    "leaf": 4,
@@ -433,50 +431,45 @@
   "end": {
    "leaf": 93,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0010$93/full/!1400,1400/0/default.jpg",
-   "quote": "Youngs Carl, marketman 133-Concord"
+   "quote": "Youngs Carl, marketman 133 Concord"
   },
   "sections": [
    {
     "start_leaf": 4,
     "end_leaf": 93,
-    "voting_leaves": 86,
+    "voting_leaves": 87,
     "first_letter": "A",
     "last_letter": "Y",
-    "letters": "ABCDFGHJKLMNOPRSTVWY",
+    "letters": "ABCDEFGHJKLMNOPRSTVWY",
     "is_listing": true
    }
   ],
-  "gaps": [
-   {
-    "between": [
-     "D",
-     "F"
-    ],
-    "start_leaf": 28,
-    "end_leaf": 28,
-    "leaves": 1
-   }
-  ],
+  "gaps": [],
   "letter_blocks": {
    "A": [
     4,
-    6,
-    3
+    5,
+    2
    ],
    "B": [
-    7,
-    15,
+    6,
+    14,
     9
    ],
    "C": [
-    16,
+    15,
     22,
-    7
+    8
    ],
    "D": [
     23,
     27,
     5
+   ],
+   "E": [
+    28,
+    28,
+    1
    ],
    "F": [
     29,
@@ -583,11 +576,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 117,
   "fitted_leaves": 112,
-  "read_leaves": 83,
+  "read_leaves": 75,
   "segments": [
    {
     "first_leaf": 5,
@@ -595,7 +588,7 @@
     "first_page": 6,
     "last_page": 117,
     "leaves": 112,
-    "read": 83
+    "read": 75
    }
   ],
   "ia_comparison": {
@@ -609,8 +602,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -670,8 +663,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0010_listing.jsonl.gz",
   "sections": [
    {
@@ -680,11 +673,27 @@
     "end_leaf": 93
    }
   ],
-  "kept": 3055,
+  "kept": 3099,
   "dropped": 631,
-  "kept_share": 0.8288,
+  "kept_share": 0.8308,
   "kept_by_section": {
-   "listing": 3055
+   "listing": 3099
   }
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0010_words.ia.jsonl.gz",
+  "tiles": 178,
+  "tiles_answered": 178,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 89,
+  "lines_model": 3363,
+  "lines_tesseract": 97,
+  "lines_model-only": 45,
+  "leaves_replaced": 89,
+  "dumped": "2026-10-15"
  }
 }

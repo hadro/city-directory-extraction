@@ -354,37 +354,37 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'leslie' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1841/42",
-   "hocr_lines": 11070,
-   "wrap_joins": 783,
-   "candidates": 10287,
+   "hocr_lines": 13141,
+   "wrap_joins": 681,
+   "candidates": 12460,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 9062,
-    "mark_share": 0.0759,
-    "mode": 1.75,
-    "mode_pairs": 121,
+    "pairs": 10596,
+    "mark_share": 0.0574,
+    "mode": 1.5,
+    "mode_pairs": 103,
     "trough": 1.25,
-    "trough_pairs": 101,
+    "trough_pairs": 87,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
    "column_splits": {
-    "lines": 14,
-    "leaves": 1
+    "lines": 0,
+    "leaves": 0
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 7990,
-   "keep_rate": 0.7767,
+   "kept": 9853,
+   "keep_rate": 0.7908,
    "dropped": {
-    "short": 999,
-    "allcaps": 548,
-    "banner": 501,
-    "bigtype": 215,
-    "nonascii": 32,
+    "short": 1170,
+    "allcaps": 599,
+    "banner": 575,
+    "bigtype": 239,
+    "nonascii": 22,
     "pagenum": 2
    },
    "ditto_marks": [],
@@ -397,52 +397,52 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    33,
     234,
-    78,
-    32,
     248,
     322,
     240,
     2,
     281,
-    204
+    204,
+    260,
+    274,
+    244
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 765921,
+  "words_gz_bytes": 913298,
   "hocr_deleted": true,
   "elapsed_s": 24
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 10,
   "end_leaf": 178,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHIJKLMNOPRSTVWY",
   "missing_letters": "QUXZ",
-  "voting_density": 0.834,
+  "voting_density": 0.976,
   "flags": [],
   "start": {
    "leaf": 10,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$10/full/!1400,1400/0/default.jpg",
-   "quote": "Abbreviations\u2014h. stands for house, n. for near, o. for corner,"
+   "quote": "Abbreviations\u2014h. stands for house, n. for near, c. for corner, op."
   },
   "end": {
    "leaf": 178,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$178/full/!1400,1400/0/default.jpg",
-   "quote": "Younie James, plasterer 178 Adams j"
+   "quote": "Younie James, plasterer 173 Adams"
   },
   "sections": [
    {
     "start_leaf": 10,
     "end_leaf": 178,
-    "voting_leaves": 141,
+    "voting_leaves": 165,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHIJKLMNOPRSTVWY",
@@ -452,47 +452,29 @@
   "gaps": [
    {
     "between": [
-     "B",
-     "C"
+     "T",
+     "V"
     ],
-    "start_leaf": 32,
-    "end_leaf": 33,
-    "leaves": 2
-   },
-   {
-    "between": [
-     "K",
-     "L"
-    ],
-    "start_leaf": 93,
-    "end_leaf": 94,
-    "leaves": 2
-   },
-   {
-    "between": [
-     "M",
-     "N"
-    ],
-    "start_leaf": 113,
-    "end_leaf": 120,
-    "leaves": 8
+    "start_leaf": 163,
+    "end_leaf": 163,
+    "leaves": 1
    }
   ],
   "letter_blocks": {
    "A": [
     10,
     13,
-    3
+    4
    ],
    "B": [
     14,
     31,
-    16
+    18
    ],
    "C": [
-    34,
+    32,
     46,
-    10
+    15
    ],
    "D": [
     47,
@@ -517,7 +499,7 @@
    "H": [
     71,
     84,
-    9
+    13
    ],
    "I": [
     85,
@@ -531,23 +513,23 @@
    ],
    "K": [
     90,
-    92,
-    3
+    93,
+    4
    ],
    "L": [
-    95,
+    94,
     100,
-    6
+    7
    ],
    "M": [
     101,
-    112,
-    11
+    119,
+    19
    ],
    "N": [
-    121,
+    120,
     122,
-    2
+    3
    ],
    "O": [
     123,
@@ -567,7 +549,7 @@
    "S": [
     142,
     157,
-    12
+    14
    ],
    "T": [
     158,
@@ -575,9 +557,9 @@
     5
    ],
    "V": [
-    163,
+    164,
     166,
-    4
+    3
    ],
    "W": [
     167,
@@ -590,7 +572,7 @@
     1
    ]
   },
-  "skipped_votes": 3,
+  "skipped_votes": 0,
   "voted_bounds": [
    10,
    178
@@ -614,27 +596,27 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 352,
-  "fitted_leaves": 231,
-  "read_leaves": 72,
+  "fitted_leaves": 235,
+  "read_leaves": 131,
   "segments": [
    {
-    "first_leaf": 15,
-    "last_leaf": 145,
-    "first_page": 10,
-    "last_page": 139,
-    "leaves": 130,
-    "read": 42
+    "first_leaf": 11,
+    "last_leaf": 147,
+    "first_page": 6,
+    "last_page": 140,
+    "leaves": 135,
+    "read": 91
    },
    {
-    "first_leaf": 149,
+    "first_leaf": 150,
     "last_leaf": 178,
-    "first_page": 142,
+    "first_page": 143,
     "last_page": 171,
-    "leaves": 30,
-    "read": 10
+    "leaves": 29,
+    "read": 20
    },
    {
     "first_leaf": 182,
@@ -664,8 +646,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -681,7 +663,7 @@
     "end_leaf": 9,
     "title": {
      "leaf": 9,
-     "quote": "_.. * ADDITIONAL NAMES.",
+     "quote": "ADDITIONAL NAMES.",
      "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0018$9/full/!1400,1400/0/default.jpg"
     },
     "leaves": 1,
@@ -696,8 +678,8 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 15,
-      "page": 10,
+      "leaf": 11,
+      "page": 6,
       "attestation": "read"
      },
      "last": {
@@ -767,8 +749,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0018_listing.jsonl.gz",
   "sections": [
    {
@@ -782,12 +764,12 @@
     "end_leaf": 178
    }
   ],
-  "kept": 4935,
+  "kept": 6798,
   "dropped": 3055,
-  "kept_share": 0.6176,
+  "kept_share": 0.6899,
   "kept_by_section": {
-   "late_names": 15,
-   "listing": 4920
+   "late_names": 32,
+   "listing": 6766
   }
  },
  "non_entry_pages": {
@@ -807,5 +789,21 @@
    115,
    117
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0018_words.ia.jsonl.gz",
+  "tiles": 334,
+  "tiles_answered": 334,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 167,
+  "lines_model": 7266,
+  "lines_tesseract": 764,
+  "lines_model-only": 115,
+  "leaves_replaced": 167,
+  "dumped": "2026-10-15"
  }
 }

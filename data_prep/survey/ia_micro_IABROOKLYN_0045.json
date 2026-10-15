@@ -360,16 +360,16 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1851/52",
-   "hocr_lines": 5617,
-   "wrap_joins": 433,
-   "candidates": 5184,
+   "hocr_lines": 8723,
+   "wrap_joins": 470,
+   "candidates": 8253,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 4192,
-    "mark_share": 0.128,
+    "pairs": 6650,
+    "mark_share": 0.0638,
     "mode": 1.25,
-    "mode_pairs": 48,
+    "mode_pairs": 56,
     "trough": 1.0,
     "trough_pairs": 57,
     "reason": "ditto marks: a dropped mark indents like a runover"
@@ -383,15 +383,15 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 3760,
-   "keep_rate": 0.7253,
+   "kept": 6078,
+   "keep_rate": 0.7365,
    "dropped": {
-    "short": 663,
-    "allcaps": 363,
-    "banner": 194,
-    "bigtype": 177,
-    "nonascii": 21,
-    "pagenum": 6
+    "short": 725,
+    "banner": 605,
+    "allcaps": 527,
+    "bigtype": 289,
+    "nonascii": 22,
+    "pagenum": 7
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -403,55 +403,55 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    155,
     261,
-    130,
-    169,
-    78,
     61,
     10,
-    131,
-    170,
-    26
+    166,
+    152,
+    103,
+    136,
+    26,
+    292,
+    38
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 478569,
+  "words_gz_bytes": 718883,
   "hocr_deleted": true,
   "elapsed_s": 7
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 36,
   "end_leaf": 211,
   "first_letter": "B",
   "last_letter": "Z",
-  "letters_present": "BCDFGHJKLMNOPRSTUVWYZ",
-  "missing_letters": "AEIQX",
-  "voting_density": 0.369,
+  "letters_present": "BCDEFGHJKLMNOPRSTVWYZ",
+  "missing_letters": "AIQUX",
+  "voting_density": 0.631,
   "flags": [],
   "start": {
    "leaf": 36,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$36/full/!1400,1400/0/default.jpg",
-   "quote": "Bell Robert, ngent, : 5 gt vty To-#7;\u00b0S 8 TPR"
+   "quote": "Bell George, ropemaker, 24 North 2d"
   },
   "end": {
    "leaf": 211,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0045$211/full/!1400,1400/0/default.jpg",
-   "quote": "Zoller J. F. tobacconist, 22 Remgen -"
+   "quote": "Zoller J. F. tobacconist, 22 Remsen"
   },
   "sections": [
    {
     "start_leaf": 36,
     "end_leaf": 211,
-    "voting_leaves": 65,
+    "voting_leaves": 111,
     "first_letter": "B",
     "last_letter": "Z",
-    "letters": "BCDFGHJKLMNOPRSTUVWYZ",
+    "letters": "BCDEFGHJKLMNOPRSTVWYZ",
     "is_listing": true
    }
   ],
@@ -461,72 +461,45 @@
      "B",
      "C"
     ],
-    "start_leaf": 44,
-    "end_leaf": 56,
-    "leaves": 13
+    "start_leaf": 45,
+    "end_leaf": 45,
+    "leaves": 1
    },
    {
     "between": [
      "C",
      "D"
     ],
-    "start_leaf": 59,
+    "start_leaf": 60,
     "end_leaf": 62,
-    "leaves": 4
+    "leaves": 3
    },
    {
     "between": [
-     "D",
+     "E",
      "F"
     ],
-    "start_leaf": 68,
-    "end_leaf": 75,
-    "leaves": 8
+    "start_leaf": 74,
+    "end_leaf": 74,
+    "leaves": 1
    },
    {
     "between": [
      "F",
      "G"
     ],
-    "start_leaf": 77,
-    "end_leaf": 89,
-    "leaves": 13
-   },
-   {
-    "between": [
-     "G",
-     "H"
-    ],
-    "start_leaf": 91,
-    "end_leaf": 93,
-    "leaves": 3
-   },
-   {
-    "between": [
-     "H",
-     "J"
-    ],
-    "start_leaf": 97,
-    "end_leaf": 107,
-    "leaves": 11
-   },
-   {
-    "between": [
-     "J",
-     "K"
-    ],
-    "start_leaf": 110,
-    "end_leaf": 111,
-    "leaves": 2
+    "start_leaf": 80,
+    "end_leaf": 80,
+    "leaves": 1
    },
    {
     "between": [
      "K",
      "L"
     ],
-    "start_leaf": 113,
+    "start_leaf": 115,
     "end_leaf": 122,
-    "leaves": 10
+    "leaves": 8
    },
    {
     "between": [
@@ -536,15 +509,6 @@
     "start_leaf": 127,
     "end_leaf": 137,
     "leaves": 11
-   },
-   {
-    "between": [
-     "M",
-     "N"
-    ],
-    "start_leaf": 145,
-    "end_leaf": 145,
-    "leaves": 1
    },
    {
     "between": [
@@ -561,26 +525,8 @@
      "P"
     ],
     "start_leaf": 150,
-    "end_leaf": 156,
-    "leaves": 7
-   },
-   {
-    "between": [
-     "R",
-     "S"
-    ],
-    "start_leaf": 171,
-    "end_leaf": 171,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "S",
-     "T"
-    ],
-    "start_leaf": 179,
-    "end_leaf": 188,
-    "leaves": 10
+    "end_leaf": 155,
+    "leaves": 6
    },
    {
     "between": [
@@ -595,53 +541,58 @@
   "letter_blocks": {
    "B": [
     36,
-    43,
-    7
+    44,
+    9
    ],
    "C": [
-    57,
-    58,
-    2
+    46,
+    59,
+    9
    ],
    "D": [
     63,
-    67,
-    3
+    72,
+    5
+   ],
+   "E": [
+    73,
+    73,
+    1
    ],
    "F": [
-    76,
-    76,
-    1
+    75,
+    79,
+    5
    ],
    "G": [
+    81,
     90,
-    90,
-    1
+    5
    ],
    "H": [
-    94,
-    96,
-    2
+    91,
+    106,
+    10
    ],
    "J": [
-    108,
+    107,
     109,
-    2
+    3
    ],
    "K": [
-    112,
-    112,
-    1
+    110,
+    114,
+    4
    ],
    "L": [
     123,
     126,
-    2
+    4
    ],
    "M": [
     138,
-    144,
-    6
+    145,
+    7
    ],
    "N": [
     146,
@@ -654,9 +605,9 @@
     1
    ],
    "P": [
-    157,
+    156,
     161,
-    5
+    6
    ],
    "R": [
     162,
@@ -664,29 +615,24 @@
     7
    ],
    "S": [
-    172,
-    178,
-    5
+    171,
+    189,
+    13
    ],
    "T": [
-    189,
+    190,
     193,
     4
    ],
-   "U": [
-    194,
-    194,
-    1
-   ],
    "V": [
+    194,
     195,
-    195,
-    1
+    2
    ],
    "W": [
     197,
     209,
-    8
+    9
    ],
    "Y": [
     210,
@@ -699,7 +645,7 @@
     1
    ]
   },
-  "skipped_votes": 1,
+  "skipped_votes": 2,
   "voted_bounds": [
    36,
    211
@@ -723,12 +669,20 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
-  "content_leaves": 256,
-  "fitted_leaves": 41,
-  "read_leaves": 8,
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
+  "content_leaves": 255,
+  "fitted_leaves": 64,
+  "read_leaves": 18,
   "segments": [
+   {
+    "first_leaf": 157,
+    "last_leaf": 181,
+    "first_page": 98,
+    "last_page": 120,
+    "leaves": 23,
+    "read": 10
+   },
    {
     "first_leaf": 246,
     "last_leaf": 286,
@@ -749,8 +703,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "district",
@@ -769,8 +723,20 @@
     "start_leaf": 36,
     "end_leaf": 211,
     "title": null,
-    "leaves": 151,
-    "residential": true
+    "leaves": 150,
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 157,
+      "page": 98,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 181,
+      "page": 120,
+      "attestation": "read"
+     }
+    }
    },
    {
     "kind": "back_matter",
@@ -802,8 +768,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0045_listing.jsonl.gz",
   "sections": [
    {
@@ -812,11 +778,11 @@
     "end_leaf": 211
    }
   ],
-  "kept": 2137,
+  "kept": 4455,
   "dropped": 1623,
-  "kept_share": 0.5684,
+  "kept_share": 0.733,
   "kept_by_section": {
-   "listing": 2137
+   "listing": 4455
   }
  },
  "non_entry_pages": {
@@ -882,5 +848,22 @@
    201,
    202
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0045_words.ia.jsonl.gz",
+  "tiles": 300,
+  "tiles_answered": 296,
+  "bleed_retry": 5,
+  "loop_truncated": 0,
+  "table_mode": 13,
+  "pages": 150,
+  "lines_model-only": 536,
+  "lines_tesseract": 742,
+  "lines_model": 4951,
+  "lines_bleed": 99,
+  "leaves_replaced": 150,
+  "dumped": "2026-10-15"
  }
 }

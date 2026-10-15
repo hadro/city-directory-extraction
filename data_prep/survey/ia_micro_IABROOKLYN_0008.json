@@ -369,38 +369,37 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1831",
-   "hocr_lines": 3006,
-   "wrap_joins": 119,
-   "candidates": 2887,
+   "hocr_lines": 3535,
+   "wrap_joins": 94,
+   "candidates": 3441,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 2706,
-    "mark_share": 0.0579,
-    "mode": 1.5,
-    "mode_pairs": 15,
-    "trough": 1.25,
-    "trough_pairs": 12,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "pairs": 2977,
+    "mark_share": 0.0498,
+    "mode": 1.25,
+    "mode_pairs": 18,
+    "trough": 1.0,
+    "trough_pairs": 27,
+    "reason": "too few runovers to read a mode"
    },
    "column_splits": {
-    "lines": 20,
-    "leaves": 1
+    "lines": 0,
+    "leaves": 0
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2350,
-   "keep_rate": 0.814,
+   "kept": 2759,
+   "keep_rate": 0.8018,
    "dropped": {
-    "banner": 267,
-    "short": 131,
-    "allcaps": 72,
-    "bigtype": 57,
-    "nonascii": 9,
-    "pagenum": 1
+    "short": 265,
+    "banner": 259,
+    "allcaps": 108,
+    "bigtype": 44,
+    "nonascii": 6
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -412,52 +411,52 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    6,
-    12,
-    42,
-    14,
-    10,
-    48,
+    16,
     68,
     73,
     70,
-    20
+    6,
+    20,
+    32,
+    64,
+    50,
+    27
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 217919,
+  "words_gz_bytes": 238562,
   "hocr_deleted": true,
   "elapsed_s": 10
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 6,
   "end_leaf": 64,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHJKLMOPRSTVWY",
   "missing_letters": "INQUXZ",
-  "voting_density": 0.966,
+  "voting_density": 0.983,
   "flags": [],
   "start": {
    "leaf": 6,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$6/full/!1400,1400/0/default.jpg",
-   "quote": "Assor DANIEL tavern and livery stable 42"
+   "quote": "Abbot Henry R 68 Willow"
   },
   "end": {
    "leaf": 64,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0008$64/full/!1400,1400/0/default.jpg",
-   "quote": "Youngs Carl 37 3H Henry"
+   "quote": "Youngs Carl 311 Henry"
   },
   "sections": [
    {
     "start_leaf": 6,
     "end_leaf": 64,
-    "voting_leaves": 57,
+    "voting_leaves": 58,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHJKLMOPRSTVWY",
@@ -467,11 +466,11 @@
   "gaps": [
    {
     "between": [
-     "R",
-     "S"
+     "G",
+     "H"
     ],
-    "start_leaf": 48,
-    "end_leaf": 48,
+    "start_leaf": 23,
+    "end_leaf": 23,
     "leaves": 1
    }
   ],
@@ -484,17 +483,17 @@
    "B": [
     8,
     12,
-    4
+    5
    ],
    "C": [
     13,
-    15,
-    3
+    14,
+    2
    ],
    "D": [
+    15,
     16,
-    16,
-    1
+    2
    ],
    "E": [
     17,
@@ -512,9 +511,9 @@
     2
    ],
    "H": [
-    23,
+    24,
     28,
-    6
+    5
    ],
    "J": [
     29,
@@ -552,9 +551,9 @@
     3
    ],
    "S": [
-    49,
+    48,
     54,
-    6
+    7
    ],
    "T": [
     55,
@@ -577,7 +576,7 @@
     1
    ]
   },
-  "skipped_votes": 0,
+  "skipped_votes": 1,
   "voted_bounds": [
    6,
    64
@@ -601,34 +600,42 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 72,
-  "fitted_leaves": 57,
-  "read_leaves": 8,
+  "fitted_leaves": 52,
+  "read_leaves": 21,
   "segments": [
    {
     "first_leaf": 5,
-    "last_leaf": 61,
-    "first_page": 10,
-    "last_page": 66,
-    "leaves": 57,
-    "read": 8
+    "last_leaf": 9,
+    "first_page": 4,
+    "last_page": 8,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 16,
+    "last_leaf": 62,
+    "first_page": 21,
+    "last_page": 67,
+    "leaves": 47,
+    "read": 17
    }
   ],
   "ia_comparison": {
    "ia_read_leaves": 3,
-   "both": 2,
+   "both": 0,
    "agree": 0,
-   "agree_rate": 0.0,
+   "agree_rate": null,
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -640,12 +647,12 @@
     "pages": {
      "first": {
       "leaf": 5,
-      "page": 10,
+      "page": 4,
       "attestation": "read"
      },
      "last": {
       "leaf": 5,
-      "page": 10,
+      "page": 4,
       "attestation": "read"
      }
     }
@@ -660,12 +667,12 @@
     "pages": {
      "first": {
       "leaf": 6,
-      "page": 11,
+      "page": 5,
       "attestation": "inferred"
      },
      "last": {
-      "leaf": 61,
-      "page": 66,
+      "leaf": 62,
+      "page": 67,
       "attestation": "read"
      }
     }
@@ -701,8 +708,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0008_listing.jsonl.gz",
   "sections": [
    {
@@ -711,11 +718,27 @@
     "end_leaf": 64
    }
   ],
-  "kept": 2015,
+  "kept": 2424,
   "dropped": 335,
-  "kept_share": 0.8574,
+  "kept_share": 0.8786,
   "kept_by_section": {
-   "listing": 2015
+   "listing": 2424
   }
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0008_words.ia.jsonl.gz",
+  "tiles": 130,
+  "tiles_answered": 130,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 59,
+  "lines_model": 2681,
+  "lines_tesseract": 243,
+  "lines_model-only": 82,
+  "leaves_replaced": 59,
+  "dumped": "2026-10-15"
  }
 }

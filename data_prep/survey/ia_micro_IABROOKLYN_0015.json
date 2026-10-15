@@ -355,37 +355,37 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'stevens/marschalk' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1838/39",
-   "hocr_lines": 5555,
-   "wrap_joins": 251,
-   "candidates": 5304,
+   "hocr_lines": 6234,
+   "wrap_joins": 191,
+   "candidates": 6043,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 4999,
-    "mark_share": 0.0553,
-    "mode": 2.25,
-    "mode_pairs": 24,
-    "trough": 2.0,
+    "pairs": 5203,
+    "mark_share": 0.048,
+    "mode": 2.75,
+    "mode_pairs": 17,
+    "trough": 2.25,
     "trough_pairs": 9,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "reason": "too few runovers to read a mode"
    },
    "column_splits": {
-    "lines": 113,
-    "leaves": 4
+    "lines": 0,
+    "leaves": 0
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 4567,
-   "keep_rate": 0.861,
+   "kept": 5086,
+   "keep_rate": 0.8416,
    "dropped": {
-    "banner": 317,
-    "short": 202,
-    "allcaps": 158,
-    "bigtype": 51,
-    "nonascii": 8,
+    "short": 466,
+    "banner": 256,
+    "allcaps": 176,
+    "bigtype": 44,
+    "nonascii": 14,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -398,41 +398,41 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    50,
     19,
-    28,
-    25,
-    73,
     7,
-    47,
-    24,
-    53,
-    29
+    21,
+    56,
+    18,
+    69,
+    30,
+    29,
+    43,
+    32
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 415867,
+  "words_gz_bytes": 444012,
   "hocr_deleted": true,
   "elapsed_s": 261
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 21,
   "end_leaf": 80,
   "first_letter": "A",
   "last_letter": "W",
   "letters_present": "ABCDEFGHJKLMNOPRSTVW",
   "missing_letters": "IQUXYZ",
-  "voting_density": 0.932,
+  "voting_density": 0.933,
   "flags": [],
   "start": {
    "leaf": 21,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0015$21/full/!1400,1400/0/default.jpg",
-   "quote": "Abbott Daniel, sales stable Water n Main, h25"
+   "quote": "Abbott Daniel, sales stable Water n Main, h 25 Front"
   },
   "end": {
    "leaf": 80,
@@ -441,9 +441,9 @@
   },
   "sections": [
    {
-    "start_leaf": 22,
+    "start_leaf": 21,
     "end_leaf": 80,
-    "voting_leaves": 55,
+    "voting_leaves": 56,
     "first_letter": "A",
     "last_letter": "W",
     "letters": "ABCDEFGHJKLMNOPRSTVW",
@@ -463,9 +463,9 @@
   ],
   "letter_blocks": {
    "A": [
+    21,
     22,
-    22,
-    1
+    2
    ],
    "B": [
     23,
@@ -499,13 +499,13 @@
    ],
    "H": [
     44,
-    47,
-    4
+    48,
+    5
    ],
    "J": [
-    48,
     49,
-    2
+    49,
+    1
    ],
    "K": [
     50,
@@ -565,18 +565,16 @@
   },
   "skipped_votes": 1,
   "voted_bounds": [
-   22,
+   21,
    80
   ],
   "extended": {
-   "start": [
-    21
-   ],
+   "start": [],
    "end": []
   },
   "cross_check": {
    "source": "lines",
-   "start_leaf": 22,
+   "start_leaf": 21,
    "end_leaf": 80
   },
   "params": {
@@ -589,8 +587,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 78,
   "fitted_leaves": 0,
   "read_leaves": 0,
@@ -608,8 +606,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -645,8 +643,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0015_listing.jsonl.gz",
   "sections": [
    {
@@ -655,11 +653,27 @@
     "end_leaf": 80
    }
   ],
-  "kept": 3787,
+  "kept": 4306,
   "dropped": 780,
-  "kept_share": 0.8292,
+  "kept_share": 0.8466,
   "kept_by_section": {
-   "listing": 3787
+   "listing": 4306
   }
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0015_words.ia.jsonl.gz",
+  "tiles": 230,
+  "tiles_answered": 230,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 58,
+  "lines_model": 4443,
+  "lines_tesseract": 564,
+  "lines_model-only": 216,
+  "leaves_replaced": 58,
+  "dumped": "2026-10-15"
  }
 }

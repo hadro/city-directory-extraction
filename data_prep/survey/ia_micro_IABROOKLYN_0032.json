@@ -78,9 +78,7 @@
    "attestation": "inferred",
    "ia_page": 567,
    "page_offset": 11,
-   "listing_flags": [
-    "edge-disagreement"
-   ],
+   "listing_flags": [],
    "doubts": []
   },
   "start_page": {
@@ -89,15 +87,13 @@
    "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$19/canvas",
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$19/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 19; page 15 INFERRED from the sequence of folios around it",
+   "quote": "'15' in the head margin",
    "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "inferred",
+   "confidence": "high",
+   "attestation": "read",
    "ia_page": 15,
    "page_offset": 4,
-   "listing_flags": [
-    "edge-disagreement"
-   ],
+   "listing_flags": [],
    "doubts": []
   }
  },
@@ -353,38 +349,38 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
    "year_tag": "1854/55",
-   "hocr_lines": 13887,
-   "wrap_joins": 761,
-   "candidates": 13126,
+   "hocr_lines": 27221,
+   "wrap_joins": 538,
+   "candidates": 26683,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 10089,
-    "mark_share": 0.0798,
+    "pairs": 23226,
+    "mark_share": 0.037,
     "mode": 1.75,
-    "mode_pairs": 226,
-    "trough": 1.25,
-    "trough_pairs": 99,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "mode_pairs": 435,
+    "trough": 1.0,
+    "trough_pairs": 156,
+    "reason": "runover mode not isolated from the next-entry band"
    },
    "column_splits": {
-    "lines": 9,
-    "leaves": 1
+    "lines": 0,
+    "leaves": 0
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 9034,
-   "keep_rate": 0.6883,
+   "kept": 23260,
+   "keep_rate": 0.8717,
    "dropped": {
-    "short": 2470,
-    "banner": 627,
-    "allcaps": 605,
-    "bigtype": 336,
-    "nonascii": 51,
-    "pagenum": 3
+    "short": 1826,
+    "allcaps": 799,
+    "banner": 466,
+    "bigtype": 299,
+    "nonascii": 29,
+    "pagenum": 4
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -397,140 +393,75 @@
    },
    "top_ad_leaves": [
     579,
-    312,
-    116,
-    502,
-    20,
-    453,
-    558,
-    489,
-    471,
-    184
+    609,
+    18,
+    650,
+    13,
+    611,
+    640,
+    601,
+    594,
+    5
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 965293,
+  "words_gz_bytes": 2183808,
   "hocr_deleted": true,
   "elapsed_s": 9
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 19,
   "end_leaf": 578,
   "first_letter": "A",
-  "last_letter": "Y",
-  "letters_present": "ABCDEFGHIJKLMNOPQRSTVWY",
-  "missing_letters": "UXZ",
-  "voting_density": 0.537,
-  "flags": [
-   "edge-disagreement"
-  ],
+  "last_letter": "Z",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.921,
+  "flags": [],
   "start": {
    "leaf": 19,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$19/full/!1400,1400/0/default.jpg",
-   "quote": "Alexander Henry, brick mer 74 Broadway NV h Hicks n"
+   "quote": "Alexander Henry, brick mer 74 Broadway N Y h Hicks n"
   },
   "end": {
    "leaf": 578,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0032$578/full/!1400,1400/0/default.jpg",
-   "quote": "Your\u2019 William F. mer 70 Front N h 3s Dean 5"
+   "quote": "Zwergius Julius, porter 287 Adams"
   },
   "sections": [
    {
     "start_leaf": 19,
     "end_leaf": 578,
-    "voting_leaves": 301,
+    "voting_leaves": 516,
     "first_letter": "A",
-    "last_letter": "Y",
-    "letters": "ABCDEFGHIJKLMNOPQRSTVWY",
+    "last_letter": "Z",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
     "is_listing": true
    }
   ],
   "gaps": [
    {
     "between": [
-     "B",
-     "C"
-    ],
-    "start_leaf": 85,
-    "end_leaf": 86,
-    "leaves": 2
-   },
-   {
-    "between": [
      "D",
      "E"
     ],
-    "start_leaf": 145,
-    "end_leaf": 171,
-    "leaves": 27
-   },
-   {
-    "between": [
-     "G",
-     "H"
-    ],
-    "start_leaf": 223,
-    "end_leaf": 224,
+    "start_leaf": 166,
+    "end_leaf": 167,
     "leaves": 2
-   },
-   {
-    "between": [
-     "H",
-     "I"
-    ],
-    "start_leaf": 268,
-    "end_leaf": 268,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "I",
-     "J"
-    ],
-    "start_leaf": 270,
-    "end_leaf": 270,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "J",
-     "K"
-    ],
-    "start_leaf": 283,
-    "end_leaf": 284,
-    "leaves": 2
-   },
-   {
-    "between": [
-     "K",
-     "L"
-    ],
-    "start_leaf": 303,
-    "end_leaf": 317,
-    "leaves": 15
-   },
-   {
-    "between": [
-     "L",
-     "M"
-    ],
-    "start_leaf": 327,
-    "end_leaf": 343,
-    "leaves": 17
    },
    {
     "between": [
      "M",
      "N"
     ],
-    "start_leaf": 364,
-    "end_leaf": 394,
-    "leaves": 31
+    "start_leaf": 392,
+    "end_leaf": 393,
+    "leaves": 2
    },
    {
     "between": [
@@ -538,26 +469,8 @@
      "O"
     ],
     "start_leaf": 401,
-    "end_leaf": 406,
-    "leaves": 6
-   },
-   {
-    "between": [
-     "O",
-     "P"
-    ],
-    "start_leaf": 409,
-    "end_leaf": 410,
+    "end_leaf": 402,
     "leaves": 2
-   },
-   {
-    "between": [
-     "R",
-     "S"
-    ],
-    "start_leaf": 437,
-    "end_leaf": 476,
-    "leaves": 40
    },
    {
     "between": [
@@ -565,34 +478,16 @@
      "T"
     ],
     "start_leaf": 510,
-    "end_leaf": 516,
-    "leaves": 7
+    "end_leaf": 511,
+    "leaves": 2
    },
    {
     "between": [
      "T",
-     "V"
+     "U"
     ],
-    "start_leaf": 518,
-    "end_leaf": 530,
-    "leaves": 13
-   },
-   {
-    "between": [
-     "V",
-     "W"
-    ],
-    "start_leaf": 540,
-    "end_leaf": 552,
-    "leaves": 13
-   },
-   {
-    "between": [
-     "W",
-     "Y"
-    ],
-    "start_leaf": 576,
-    "end_leaf": 576,
+    "start_leaf": 529,
+    "end_leaf": 529,
     "leaves": 1
    }
   ],
@@ -600,82 +495,82 @@
    "A": [
     19,
     27,
-    8
+    9
    ],
    "B": [
     28,
-    84,
-    46
+    85,
+    55
    ],
    "C": [
-    87,
+    86,
     132,
-    23
+    44
    ],
    "D": [
     133,
-    144,
-    12
+    165,
+    32
    ],
    "E": [
-    172,
+    168,
     175,
-    2
+    7
    ],
    "F": [
     176,
     199,
-    19
+    24
    ],
    "G": [
     200,
-    222,
-    22
+    223,
+    23
    ],
    "H": [
-    225,
+    224,
     267,
-    27
+    44
    ],
    "I": [
+    268,
     269,
-    269,
-    1
-   ],
-   "J": [
-    271,
-    282,
-    10
-   ],
-   "K": [
-    285,
-    302,
-    12
-   ],
-   "L": [
-    318,
-    326,
-    6
-   ],
-   "M": [
-    344,
-    363,
-    18
-   ],
-   "N": [
-    395,
-    400,
-    6
-   ],
-   "O": [
-    407,
-    408,
     2
    ],
-   "P": [
-    411,
-    432,
+   "J": [
+    270,
+    282,
+    13
+   ],
+   "K": [
+    283,
+    302,
     19
+   ],
+   "L": [
+    303,
+    329,
+    27
+   ],
+   "M": [
+    330,
+    391,
+    53
+   ],
+   "N": [
+    394,
+    400,
+    7
+   ],
+   "O": [
+    403,
+    409,
+    7
+   ],
+   "P": [
+    410,
+    432,
+    22
    ],
    "Q": [
     433,
@@ -684,36 +579,46 @@
    ],
    "R": [
     435,
-    436,
-    2
-   ],
-   "S": [
-    477,
-    509,
+    461,
     22
    ],
+   "S": [
+    462,
+    509,
+    46
+   ],
    "T": [
-    517,
-    517,
+    512,
+    528,
+    13
+   ],
+   "U": [
+    530,
+    530,
     1
    ],
    "V": [
     531,
     539,
-    6
+    9
    ],
    "W": [
-    553,
+    540,
     575,
-    13
+    32
    ],
    "Y": [
+    576,
     577,
-    578,
     2
+   ],
+   "Z": [
+    578,
+    578,
+    1
    ]
   },
-  "skipped_votes": 1,
+  "skipped_votes": 0,
   "voted_bounds": [
    19,
    578
@@ -724,7 +629,7 @@
   },
   "cross_check": {
    "source": "lines",
-   "start_leaf": 15,
+   "start_leaf": 19,
    "end_leaf": 578
   },
   "params": {
@@ -737,43 +642,67 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 606,
-  "fitted_leaves": 492,
-  "read_leaves": 243,
+  "fitted_leaves": 531,
+  "read_leaves": 297,
   "segments": [
    {
     "first_leaf": 3,
-    "last_leaf": 71,
+    "last_leaf": 74,
     "first_page": 0,
-    "last_page": 67,
-    "leaves": 68,
+    "last_page": 69,
+    "leaves": 70,
     "read": 33
    },
    {
-    "first_leaf": 79,
-    "last_leaf": 91,
-    "first_page": 74,
-    "last_page": 86,
-    "leaves": 13,
-    "read": 6
+    "first_leaf": 84,
+    "last_leaf": 90,
+    "first_page": 79,
+    "last_page": 85,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 93,
+    "last_leaf": 99,
+    "first_page": 88,
+    "last_page": 94,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 102,
+    "last_leaf": 109,
+    "first_page": 97,
+    "last_page": 104,
+    "leaves": 8,
+    "read": 3
    },
    {
     "first_leaf": 111,
-    "last_leaf": 160,
+    "last_leaf": 164,
     "first_page": 106,
-    "last_page": 154,
-    "leaves": 49,
-    "read": 29
+    "last_page": 158,
+    "leaves": 53,
+    "read": 32
    },
    {
-    "first_leaf": 176,
-    "last_leaf": 340,
-    "first_page": 170,
-    "last_page": 332,
-    "leaves": 163,
-    "read": 69
+    "first_leaf": 168,
+    "last_leaf": 172,
+    "first_page": 162,
+    "last_page": 166,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 177,
+    "last_leaf": 342,
+    "first_page": 171,
+    "last_page": 334,
+    "leaves": 164,
+    "read": 91
    },
    {
     "first_leaf": 346,
@@ -781,23 +710,7 @@
     "first_page": 338,
     "last_page": 354,
     "leaves": 17,
-    "read": 13
-   },
-   {
-    "first_leaf": 371,
-    "last_leaf": 374,
-    "first_page": 362,
-    "last_page": 365,
-    "leaves": 4,
-    "read": 3
-   },
-   {
-    "first_leaf": 380,
-    "last_leaf": 384,
-    "first_page": 0,
-    "last_page": 4,
-    "leaves": 5,
-    "read": 3
+    "read": 12
    },
    {
     "first_leaf": 386,
@@ -805,79 +718,95 @@
     "first_page": 377,
     "last_page": 381,
     "leaves": 5,
-    "read": 3
+    "read": 5
    },
    {
-    "first_leaf": 404,
-    "last_leaf": 410,
-    "first_page": 395,
-    "last_page": 401,
-    "leaves": 7,
-    "read": 4
-   },
-   {
-    "first_leaf": 416,
-    "last_leaf": 435,
-    "first_page": 407,
-    "last_page": 426,
-    "leaves": 20,
-    "read": 11
-   },
-   {
-    "first_leaf": 447,
-    "last_leaf": 461,
-    "first_page": 437,
-    "last_page": 451,
-    "leaves": 15,
-    "read": 4
-   },
-   {
-    "first_leaf": 474,
-    "last_leaf": 490,
-    "first_page": 464,
-    "last_page": 480,
-    "leaves": 17,
-    "read": 8
-   },
-   {
-    "first_leaf": 492,
-    "last_leaf": 509,
-    "first_page": 482,
-    "last_page": 499,
-    "leaves": 18,
-    "read": 9
-   },
-   {
-    "first_leaf": 513,
-    "last_leaf": 518,
-    "first_page": 3,
-    "last_page": 7,
-    "leaves": 5,
-    "read": 3
-   },
-   {
-    "first_leaf": 553,
-    "last_leaf": 555,
-    "first_page": 542,
-    "last_page": 544,
+    "first_leaf": 397,
+    "last_leaf": 399,
+    "first_page": 388,
+    "last_page": 390,
     "leaves": 3,
     "read": 3
    },
    {
-    "first_leaf": 557,
+    "first_leaf": 403,
+    "last_leaf": 411,
+    "first_page": 394,
+    "last_page": 402,
+    "leaves": 9,
+    "read": 7
+   },
+   {
+    "first_leaf": 413,
+    "last_leaf": 429,
+    "first_page": 404,
+    "last_page": 420,
+    "leaves": 17,
+    "read": 11
+   },
+   {
+    "first_leaf": 447,
+    "last_leaf": 465,
+    "first_page": 437,
+    "last_page": 455,
+    "leaves": 19,
+    "read": 11
+   },
+   {
+    "first_leaf": 467,
+    "last_leaf": 490,
+    "first_page": 457,
+    "last_page": 480,
+    "leaves": 24,
+    "read": 12
+   },
+   {
+    "first_leaf": 495,
+    "last_leaf": 509,
+    "first_page": 485,
+    "last_page": 499,
+    "leaves": 15,
+    "read": 8
+   },
+   {
+    "first_leaf": 512,
+    "last_leaf": 515,
+    "first_page": 501,
+    "last_page": 504,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 532,
+    "last_leaf": 546,
+    "first_page": 521,
+    "last_page": 535,
+    "leaves": 15,
+    "read": 8
+   },
+   {
+    "first_leaf": 551,
+    "last_leaf": 555,
+    "first_page": 540,
+    "last_page": 544,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 558,
     "last_leaf": 563,
-    "first_page": 546,
+    "first_page": 547,
     "last_page": 552,
-    "leaves": 7,
+    "leaves": 6,
     "read": 4
    },
    {
-    "first_leaf": 567,
+    "first_leaf": 565,
     "last_leaf": 587,
-    "first_page": 556,
+    "first_page": 554,
     "last_page": 575,
-    "leaves": 20,
-    "read": 13
+    "leaves": 22,
+    "read": 14
    },
    {
     "first_leaf": 590,
@@ -898,8 +827,8 @@
   ],
   "ia_comparison": {
    "ia_read_leaves": 172,
-   "both": 151,
-   "agree": 151,
+   "both": 152,
+   "agree": 152,
    "agree_rate": 1.0,
    "ia_page_equals_leaf": 0.0
   },
@@ -907,8 +836,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -941,7 +870,7 @@
      "first": {
       "leaf": 19,
       "page": 15,
-      "attestation": "inferred"
+      "attestation": "read"
      },
      "last": {
       "leaf": 578,
@@ -1009,8 +938,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0032_listing.jsonl.gz",
   "sections": [
    {
@@ -1019,11 +948,11 @@
     "end_leaf": 578
    }
   ],
-  "kept": 7879,
+  "kept": 22105,
   "dropped": 1155,
-  "kept_share": 0.8721,
+  "kept_share": 0.9503,
   "kept_by_section": {
-   "listing": 7879
+   "listing": 22105
   }
  },
  "non_entry_pages": {
@@ -1151,5 +1080,22 @@
    562,
    567
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0032_words.ia.jsonl.gz",
+  "tiles": 1032,
+  "tiles_answered": 1032,
+  "bleed_retry": 1,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 516,
+  "lines_model": 22788,
+  "lines_tesseract": 1889,
+  "lines_model-only": 403,
+  "lines_bleed": 20,
+  "leaves_replaced": 516,
+  "dumped": "2026-10-15"
  }
 }

@@ -77,6 +77,40 @@
     "year_covered"
    ],
    "note": "Confirms the catalog (Reynolds)."
+  },
+  "start_page": {
+   "value": 25,
+   "leaf": 22,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$22/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$22/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "no folio printed on leaf 22; page 25 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
+   "page_offset": -3,
+   "listing_flags": [
+    "edge-disagreement"
+   ],
+   "doubts": []
+  },
+  "end_page": {
+   "value": 231,
+   "leaf": 231,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$231/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$231/full/!1400,1400/0/default.jpg",
+   "evidence_type": "folio",
+   "quote": "'231' in the head margin",
+   "method": "hocr-geometry",
+   "confidence": "medium",
+   "attestation": "read",
+   "ia_page": null,
+   "page_offset": 0,
+   "listing_flags": [
+    "edge-disagreement"
+   ],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -331,18 +365,18 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1853",
-   "hocr_lines": 8422,
-   "wrap_joins": 1083,
-   "candidates": 7339,
+   "hocr_lines": 13332,
+   "wrap_joins": 1189,
+   "candidates": 12143,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 5625,
-    "mark_share": 0.165,
-    "mode": 1.75,
-    "mode_pairs": 99,
-    "trough": 1.5,
-    "trough_pairs": 93,
+    "pairs": 9218,
+    "mark_share": 0.0734,
+    "mode": 1.5,
+    "mode_pairs": 92,
+    "trough": 1.25,
+    "trough_pairs": 82,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
    "column_splits": {
@@ -354,14 +388,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 4206,
-   "keep_rate": 0.5731,
+   "kept": 8554,
+   "keep_rate": 0.7044,
    "dropped": {
-    "short": 1420,
-    "banner": 758,
-    "bigtype": 602,
-    "allcaps": 288,
-    "nonascii": 63,
+    "short": 1379,
+    "banner": 760,
+    "bigtype": 755,
+    "allcaps": 656,
+    "nonascii": 37,
     "pagenum": 2
    },
    "ditto_marks": [],
@@ -378,222 +412,170 @@
     376,
     342,
     337,
-    27,
     340,
     379,
     381,
-    28,
-    321
+    321,
+    3,
+    345
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 556753,
+  "words_gz_bytes": 988012,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 22,
   "end_leaf": 231,
   "first_letter": "B",
   "last_letter": "S",
-  "letters_present": "BDEGHLMNOPRS",
-  "missing_letters": "ACFIJKQTUVWXYZ",
-  "voting_density": 0.171,
+  "letters_present": "BCDEFGHIJKLMNOPQRS",
+  "missing_letters": "ATUVWXYZ",
+  "voting_density": 0.9,
   "flags": [
-   "sparse",
    "edge-disagreement",
    "partial-alphabet"
   ],
   "start": {
    "leaf": 22,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$22/full/!1400,1400/0/default.jpg",
-   "quote": "Bell"
+   "quote": "Bedell G. C. & E., grocers, Bushwick av., n. North 2d"
   },
   "end": {
    "leaf": 231,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0047$231/full/!1400,1400/0/default.jpg",
-   "quote": "Sypher John E. ropemmabst, E sahth 1. North"
+   "quote": "Sypher John E. ropemabst: E tole"
   },
   "sections": [
    {
     "start_leaf": 22,
     "end_leaf": 231,
-    "voting_leaves": 36,
+    "voting_leaves": 189,
     "first_letter": "B",
     "last_letter": "S",
-    "letters": "BDEGHLMNOPRS",
+    "letters": "BCDEFGHIJKLMNOPQRS",
     "is_listing": true
    }
   ],
   "gaps": [
    {
     "between": [
-     "B",
-     "D"
+     "J",
+     "K"
     ],
-    "start_leaf": 27,
-    "end_leaf": 60,
-    "leaves": 34
-   },
-   {
-    "between": [
-     "D",
-     "E"
-    ],
-    "start_leaf": 65,
-    "end_leaf": 69,
-    "leaves": 5
-   },
-   {
-    "between": [
-     "E",
-     "G"
-    ],
-    "start_leaf": 71,
-    "end_leaf": 84,
-    "leaves": 14
-   },
-   {
-    "between": [
-     "G",
-     "H"
-    ],
-    "start_leaf": 86,
-    "end_leaf": 103,
-    "leaves": 18
-   },
-   {
-    "between": [
-     "H",
-     "L"
-    ],
-    "start_leaf": 119,
-    "end_leaf": 134,
-    "leaves": 16
+    "start_leaf": 125,
+    "end_leaf": 125,
+    "leaves": 1
    },
    {
     "between": [
      "L",
      "M"
     ],
-    "start_leaf": 144,
+    "start_leaf": 146,
     "end_leaf": 160,
-    "leaves": 17
-   },
-   {
-    "between": [
-     "M",
-     "N"
-    ],
-    "start_leaf": 172,
-    "end_leaf": 177,
-    "leaves": 6
-   },
-   {
-    "between": [
-     "N",
-     "O"
-    ],
-    "start_leaf": 179,
-    "end_leaf": 180,
-    "leaves": 2
-   },
-   {
-    "between": [
-     "O",
-     "P"
-    ],
-    "start_leaf": 182,
-    "end_leaf": 188,
-    "leaves": 7
-   },
-   {
-    "between": [
-     "P",
-     "R"
-    ],
-    "start_leaf": 191,
-    "end_leaf": 193,
-    "leaves": 3
-   },
-   {
-    "between": [
-     "R",
-     "S"
-    ],
-    "start_leaf": 201,
-    "end_leaf": 214,
-    "leaves": 14
+    "leaves": 15
    }
   ],
   "letter_blocks": {
    "B": [
     22,
-    26,
-    4
+    39,
+    18
+   ],
+   "C": [
+    40,
+    56,
+    17
    ],
    "D": [
-    61,
-    64,
-    2
+    57,
+    67,
+    11
    ],
    "E": [
-    70,
-    70,
-    1
+    68,
+    71,
+    4
+   ],
+   "F": [
+    72,
+    84,
+    12
    ],
    "G": [
     85,
-    85,
-    1
+    95,
+    10
    ],
    "H": [
-    104,
+    96,
     118,
-    4
+    20
+   ],
+   "I": [
+    119,
+    119,
+    1
+   ],
+   "J": [
+    120,
+    124,
+    5
+   ],
+   "K": [
+    126,
+    134,
+    9
    ],
    "L": [
     135,
-    143,
-    3
+    145,
+    10
    ],
    "M": [
     161,
-    171,
-    4
+    173,
+    13
    ],
    "N": [
+    174,
     178,
-    178,
-    1
-   ],
-   "O": [
-    181,
-    181,
-    1
-   ],
-   "P": [
-    189,
-    190,
-    2
-   ],
-   "R": [
-    194,
-    200,
     3
    ],
+   "O": [
+    179,
+    181,
+    3
+   ],
+   "P": [
+    182,
+    191,
+    10
+   ],
+   "Q": [
+    192,
+    192,
+    1
+   ],
+   "R": [
+    193,
+    207,
+    14
+   ],
    "S": [
-    215,
-    218,
-    4
+    208,
+    231,
+    21
    ]
   },
-  "skipped_votes": 1,
+  "skipped_votes": 0,
   "voted_bounds": [
    22,
    231
@@ -605,7 +587,7 @@
   "cross_check": {
    "source": "lines",
    "start_leaf": 14,
-   "end_leaf": 243
+   "end_leaf": 231
   },
   "params": {
    "min_chars": 400,
@@ -617,12 +599,61 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 374,
-  "fitted_leaves": 0,
-  "read_leaves": 0,
-  "segments": [],
+  "fitted_leaves": 218,
+  "read_leaves": 75,
+  "segments": [
+   {
+    "first_leaf": 1,
+    "last_leaf": 91,
+    "first_page": 7,
+    "last_page": 93,
+    "leaves": 87,
+    "read": 25
+   },
+   {
+    "first_leaf": 97,
+    "last_leaf": 124,
+    "first_page": 100,
+    "last_page": 126,
+    "leaves": 27,
+    "read": 6
+   },
+   {
+    "first_leaf": 126,
+    "last_leaf": 135,
+    "first_page": 128,
+    "last_page": 137,
+    "leaves": 10,
+    "read": 7
+   },
+   {
+    "first_leaf": 139,
+    "last_leaf": 155,
+    "first_page": 141,
+    "last_page": 156,
+    "leaves": 16,
+    "read": 6
+   },
+   {
+    "first_leaf": 158,
+    "last_leaf": 195,
+    "first_page": 159,
+    "last_page": 196,
+    "leaves": 38,
+    "read": 15
+   },
+   {
+    "first_leaf": 199,
+    "last_leaf": 239,
+    "first_page": 200,
+    "last_page": 239,
+    "leaves": 40,
+    "read": 16
+   }
+  ],
   "ia_comparison": {
    "ia_read_leaves": 0,
    "both": 0,
@@ -630,14 +661,12 @@
    "agree_rate": null,
    "ia_page_equals_leaf": null
   },
-  "flags": [
-   "no-folios"
-  ]
+  "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -645,7 +674,19 @@
     "end_leaf": 21,
     "title": null,
     "leaves": 18,
-    "residential": false
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 1,
+      "page": 7,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 21,
+      "page": 24,
+      "attestation": "inferred"
+     }
+    }
    },
    {
     "kind": "listing",
@@ -653,7 +694,19 @@
     "end_leaf": 231,
     "title": null,
     "leaves": 201,
-    "residential": true
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 22,
+      "page": 25,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 231,
+      "page": 231,
+      "attestation": "read"
+     }
+    }
    },
    {
     "kind": "back_matter",
@@ -661,7 +714,19 @@
     "end_leaf": 266,
     "title": null,
     "leaves": 34,
-    "residential": false
+    "residential": false,
+    "pages": {
+     "first": {
+      "leaf": 232,
+      "page": 232,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 239,
+      "page": 239,
+      "attestation": "read"
+     }
+    }
    },
    {
     "kind": "appendix",
@@ -686,8 +751,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0047_listing.jsonl.gz",
   "sections": [
    {
@@ -696,11 +761,11 @@
     "end_leaf": 231
    }
   ],
-  "kept": 2572,
+  "kept": 6920,
   "dropped": 1634,
-  "kept_share": 0.6115,
+  "kept_share": 0.809,
   "kept_by_section": {
-   "listing": 2572
+   "listing": 6920
   }
  },
  "non_entry_pages": {
@@ -873,5 +938,22 @@
    230,
    231
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0047_words.ia.jsonl.gz",
+  "tiles": 402,
+  "tiles_answered": 401,
+  "bleed_retry": 11,
+  "loop_truncated": 1,
+  "table_mode": 10,
+  "pages": 201,
+  "lines_model": 7005,
+  "lines_tesseract": 1782,
+  "lines_model-only": 868,
+  "lines_bleed": 223,
+  "leaves_replaced": 201,
+  "dumped": "2026-10-15"
  }
 }

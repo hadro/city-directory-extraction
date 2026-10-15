@@ -75,37 +75,12 @@
    "evidence_type": "folio",
    "quote": "'20' in the head margin",
    "method": "hocr-geometry",
-   "confidence": "medium",
+   "confidence": "high",
    "attestation": "read",
    "ia_page": null,
    "page_offset": 4,
-   "listing_flags": [
-    "edge-disagreement"
-   ],
-   "doubts": [
-    "sequence read on only 5 leaves"
-   ]
-  },
-  "end_page": {
-   "value": 8,
-   "leaf": 591,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$591/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$591/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "'8,' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "read",
-   "ia_page": null,
-   "page_offset": 583,
-   "listing_flags": [
-    "edge-disagreement"
-   ],
-   "doubts": [
-    "sequence read on only 3 leaves",
-    "sequence-break: an earlier sequence in this listing ran higher",
-    "page 8 is below the listing's 528 text leaves"
-   ]
+   "listing_flags": [],
+   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -356,38 +331,38 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
    "year_tag": "1853/54",
-   "hocr_lines": 11145,
-   "wrap_joins": 1086,
-   "candidates": 10059,
+   "hocr_lines": 27028,
+   "wrap_joins": 395,
+   "candidates": 26633,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 7595,
-    "mark_share": 0.1489,
-    "mode": 1.25,
-    "mode_pairs": 126,
-    "trough": 1.0,
-    "trough_pairs": 147,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "pairs": 22775,
+    "mark_share": 0.0398,
+    "mode": 1.75,
+    "mode_pairs": 159,
+    "trough": 1.25,
+    "trough_pairs": 61,
+    "reason": "runover mode not isolated from the next-entry band"
    },
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
+    "lines": 31,
+    "leaves": 3
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 1,
-   "kept": 5516,
-   "keep_rate": 0.5484,
+   "marker_fixes": 0,
+   "kept": 23407,
+   "keep_rate": 0.8789,
    "dropped": {
-    "short": 2835,
-    "banner": 824,
-    "bigtype": 412,
-    "allcaps": 337,
-    "nonascii": 129,
-    "pagenum": 6
+    "short": 1751,
+    "allcaps": 594,
+    "banner": 511,
+    "bigtype": 350,
+    "nonascii": 18,
+    "pagenum": 2
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -399,168 +374,76 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    538,
-    288,
-    228,
     614,
-    240,
-    199,
-    249,
-    521,
-    78,
-    310
+    23,
+    642,
+    672,
+    21,
+    3,
+    20,
+    634,
+    617,
+    594
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 697905,
+  "words_gz_bytes": 2184468,
   "hocr_deleted": true,
   "elapsed_s": 7
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 24,
-  "end_leaf": 591,
+  "end_leaf": 594,
   "first_letter": "A",
-  "last_letter": "W",
-  "letters_present": "ABCDEFGHIJKLMNOPQRSW",
-  "missing_letters": "TUVXYZ",
-  "voting_density": 0.295,
-  "flags": [
-   "edge-disagreement"
-  ],
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
+  "missing_letters": "XZ",
+  "voting_density": 0.876,
+  "flags": [],
   "start": {
    "leaf": 24,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$24/full/!1400,1400/0/default.jpg",
-   "quote": "Aldridge E C, 18th st n"
+   "quote": "Agan John, porter Park av n Clermont"
   },
   "end": {
-   "leaf": 591,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$591/full/!1400,1400/0/default.jpg",
-   "quote": "Worthington Asa, mer 28 Broadway Nx h 142-Hicke"
+   "leaf": 594,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0031$594/full/!1400,1400/0/default.jpg",
+   "quote": "York 3 iow of Iemes, Eat Balt Court. 75"
   },
   "sections": [
    {
-    "start_leaf": 25,
-    "end_leaf": 591,
-    "voting_leaves": 167,
+    "start_leaf": 24,
+    "end_leaf": 594,
+    "voting_leaves": 500,
     "first_letter": "A",
-    "last_letter": "W",
-    "letters": "ABCDEFGHIJKLMNOPQRSW",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
     "is_listing": true
    }
   ],
   "gaps": [
    {
     "between": [
-     "B",
-     "C"
-    ],
-    "start_leaf": 78,
-    "end_leaf": 95,
-    "leaves": 18
-   },
-   {
-    "between": [
-     "D",
-     "E"
-    ],
-    "start_leaf": 145,
-    "end_leaf": 175,
-    "leaves": 31
-   },
-   {
-    "between": [
-     "E",
-     "F"
-    ],
-    "start_leaf": 180,
-    "end_leaf": 198,
-    "leaves": 19
-   },
-   {
-    "between": [
-     "F",
-     "G"
-    ],
-    "start_leaf": 209,
-    "end_leaf": 209,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "G",
-     "H"
-    ],
-    "start_leaf": 218,
-    "end_leaf": 260,
-    "leaves": 43
-   },
-   {
-    "between": [
      "J",
      "K"
     ],
     "start_leaf": 291,
-    "end_leaf": 298,
-    "leaves": 8
-   },
-   {
-    "between": [
-     "K",
-     "L"
-    ],
-    "start_leaf": 300,
-    "end_leaf": 310,
-    "leaves": 11
-   },
-   {
-    "between": [
-     "L",
-     "M"
-    ],
-    "start_leaf": 332,
-    "end_leaf": 341,
-    "leaves": 10
+    "end_leaf": 292,
+    "leaves": 2
    },
    {
     "between": [
      "M",
      "N"
     ],
-    "start_leaf": 369,
+    "start_leaf": 378,
     "end_leaf": 405,
-    "leaves": 37
-   },
-   {
-    "between": [
-     "N",
-     "O"
-    ],
-    "start_leaf": 412,
-    "end_leaf": 419,
-    "leaves": 8
-   },
-   {
-    "between": [
-     "O",
-     "P"
-    ],
-    "start_leaf": 426,
-    "end_leaf": 434,
-    "leaves": 9
-   },
-   {
-    "between": [
-     "P",
-     "Q"
-    ],
-    "start_leaf": 445,
-    "end_leaf": 452,
-    "leaves": 8
+    "leaves": 28
    },
    {
     "between": [
@@ -568,139 +451,166 @@
      "R"
     ],
     "start_leaf": 454,
-    "end_leaf": 455,
-    "leaves": 2
+    "end_leaf": 454,
+    "leaves": 1
    },
    {
     "between": [
      "R",
      "S"
     ],
-    "start_leaf": 458,
-    "end_leaf": 500,
-    "leaves": 43
+    "start_leaf": 480,
+    "end_leaf": 480,
+    "leaves": 1
    },
    {
     "between": [
-     "S",
+     "V",
      "W"
     ],
-    "start_leaf": 509,
-    "end_leaf": 558,
-    "leaves": 50
+    "start_leaf": 554,
+    "end_leaf": 557,
+    "leaves": 4
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 592,
+    "end_leaf": 593,
+    "leaves": 2
    }
   ],
   "letter_blocks": {
    "A": [
-    25,
+    24,
     34,
-    6
+    11
    ],
    "B": [
     35,
-    77,
-    30
+    92,
+    56
    ],
    "C": [
-    96,
+    93,
     140,
-    29
+    46
    ],
    "D": [
     141,
-    144,
-    4
+    175,
+    28
    ],
    "E": [
     176,
-    179,
-    2
+    184,
+    9
    ],
    "F": [
-    199,
+    185,
     208,
-    4
+    21
    ],
    "G": [
-    210,
-    217,
-    7
+    209,
+    232,
+    22
    ],
    "H": [
-    261,
-    277,
-    8
+    233,
+    276,
+    44
    ],
    "I": [
+    277,
     278,
-    278,
-    1
+    2
    ],
    "J": [
     279,
     290,
-    10
+    12
    ],
    "K": [
-    299,
-    299,
-    1
+    293,
+    310,
+    17
    ],
    "L": [
     311,
-    331,
-    5
+    333,
+    23
    ],
    "M": [
-    342,
-    368,
-    13
+    334,
+    377,
+    40
    ],
    "N": [
     406,
-    411,
-    4
+    417,
+    10
    ],
    "O": [
-    420,
-    425,
-    4
+    418,
+    427,
+    10
    ],
    "P": [
-    435,
-    444,
-    5
+    428,
+    451,
+    22
    ],
    "Q": [
+    452,
     453,
-    453,
-    1
-   ],
-   "R": [
-    456,
-    457,
     2
    ],
+   "R": [
+    455,
+    479,
+    23
+   ],
    "S": [
-    501,
-    508,
-    3
+    481,
+    529,
+    46
+   ],
+   "T": [
+    530,
+    548,
+    19
+   ],
+   "U": [
+    549,
+    549,
+    1
+   ],
+   "V": [
+    550,
+    553,
+    4
    ],
    "W": [
-    559,
-    571,
-    8
+    558,
+    591,
+    31
+   ],
+   "Y": [
+    594,
+    594,
+    1
    ]
   },
-  "skipped_votes": 1,
+  "skipped_votes": 26,
   "voted_bounds": [
-   25,
-   591
+   24,
+   594
   ],
   "extended": {
-   "start": [
-    24
-   ],
+   "start": [],
    "end": []
   },
   "cross_check": {
@@ -718,11 +628,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 606,
-  "fitted_leaves": 453,
-  "read_leaves": 200,
+  "fitted_leaves": 498,
+  "read_leaves": 339,
   "segments": [
    {
     "first_leaf": 10,
@@ -738,15 +648,15 @@
     "first_page": 20,
     "last_page": 31,
     "leaves": 12,
-    "read": 5
+    "read": 10
    },
    {
-    "first_leaf": 40,
+    "first_leaf": 39,
     "last_leaf": 100,
-    "first_page": 36,
+    "first_page": 35,
     "last_page": 95,
-    "leaves": 60,
-    "read": 36
+    "leaves": 61,
+    "read": 47
    },
    {
     "first_leaf": 102,
@@ -754,7 +664,7 @@
     "first_page": 97,
     "last_page": 118,
     "leaves": 22,
-    "read": 11
+    "read": 18
    },
    {
     "first_leaf": 126,
@@ -762,7 +672,7 @@
     "first_page": 121,
     "last_page": 144,
     "leaves": 24,
-    "read": 17
+    "read": 21
    },
    {
     "first_leaf": 159,
@@ -770,119 +680,135 @@
     "first_page": 153,
     "last_page": 158,
     "leaves": 6,
-    "read": 3
+    "read": 4
    },
    {
-    "first_leaf": 171,
-    "last_leaf": 191,
-    "first_page": 166,
-    "last_page": 185,
+    "first_leaf": 174,
+    "last_leaf": 193,
+    "first_page": 168,
+    "last_page": 187,
     "leaves": 20,
-    "read": 7
+    "read": 18
+   },
+   {
+    "first_leaf": 199,
+    "last_leaf": 202,
+    "first_page": 193,
+    "last_page": 196,
+    "leaves": 4,
+    "read": 4
    },
    {
     "first_leaf": 204,
-    "last_leaf": 229,
+    "last_leaf": 228,
     "first_page": 198,
-    "last_page": 222,
-    "leaves": 25,
-    "read": 11
+    "last_page": 221,
+    "leaves": 24,
+    "read": 9
    },
    {
     "first_leaf": 233,
-    "last_leaf": 289,
+    "last_leaf": 288,
     "first_page": 226,
-    "last_page": 282,
-    "leaves": 57,
-    "read": 12
+    "last_page": 281,
+    "leaves": 56,
+    "read": 37
    },
    {
     "first_leaf": 294,
-    "last_leaf": 302,
+    "last_leaf": 304,
     "first_page": 286,
-    "last_page": 294,
-    "leaves": 9,
-    "read": 4
-   },
-   {
-    "first_leaf": 311,
-    "last_leaf": 327,
-    "first_page": 303,
-    "last_page": 319,
-    "leaves": 17,
-    "read": 4
-   },
-   {
-    "first_leaf": 333,
-    "last_leaf": 344,
-    "first_page": 326,
-    "last_page": 336,
+    "last_page": 296,
     "leaves": 11,
-    "read": 6
+    "read": 4
    },
    {
-    "first_leaf": 346,
+    "first_leaf": 307,
+    "last_leaf": 335,
+    "first_page": 299,
+    "last_page": 327,
+    "leaves": 29,
+    "read": 13
+   },
+   {
+    "first_leaf": 337,
+    "last_leaf": 344,
+    "first_page": 329,
+    "last_page": 336,
+    "leaves": 8,
+    "read": 7
+   },
+   {
+    "first_leaf": 347,
     "last_leaf": 370,
-    "first_page": 338,
+    "first_page": 339,
     "last_page": 361,
-    "leaves": 24,
-    "read": 14
+    "leaves": 23,
+    "read": 18
    },
    {
-    "first_leaf": 372,
-    "last_leaf": 375,
-    "first_page": 363,
-    "last_page": 366,
-    "leaves": 4,
-    "read": 3
+    "first_leaf": 374,
+    "last_leaf": 380,
+    "first_page": 365,
+    "last_page": 371,
+    "leaves": 7,
+    "read": 4
    },
    {
-    "first_leaf": 389,
+    "first_leaf": 388,
     "last_leaf": 400,
-    "first_page": 380,
+    "first_page": 379,
     "last_page": 391,
-    "leaves": 12,
+    "leaves": 13,
     "read": 5
    },
    {
-    "first_leaf": 407,
+    "first_leaf": 406,
     "last_leaf": 414,
-    "first_page": 398,
+    "first_page": 397,
     "last_page": 405,
-    "leaves": 8,
-    "read": 3
+    "leaves": 9,
+    "read": 6
    },
    {
     "first_leaf": 416,
-    "last_leaf": 444,
+    "last_leaf": 442,
     "first_page": 407,
-    "last_page": 434,
-    "leaves": 28,
-    "read": 15
+    "last_page": 432,
+    "leaves": 26,
+    "read": 18
    },
    {
-    "first_leaf": 445,
+    "first_leaf": 447,
     "last_leaf": 453,
-    "first_page": 436,
+    "first_page": 437,
     "last_page": 443,
-    "leaves": 8,
-    "read": 4
+    "leaves": 7,
+    "read": 6
    },
    {
-    "first_leaf": 456,
-    "last_leaf": 460,
-    "first_page": 446,
-    "last_page": 450,
-    "leaves": 5,
-    "read": 3
+    "first_leaf": 455,
+    "last_leaf": 461,
+    "first_page": 445,
+    "last_page": 451,
+    "leaves": 7,
+    "read": 6
    },
    {
     "first_leaf": 464,
-    "last_leaf": 469,
+    "last_leaf": 468,
     "first_page": 454,
-    "last_page": 459,
-    "leaves": 6,
+    "last_page": 458,
+    "leaves": 5,
     "read": 4
+   },
+   {
+    "first_leaf": 472,
+    "last_leaf": 479,
+    "first_page": 462,
+    "last_page": 469,
+    "leaves": 8,
+    "read": 6
    },
    {
     "first_leaf": 481,
@@ -890,39 +816,31 @@
     "first_page": 471,
     "last_page": 491,
     "leaves": 21,
-    "read": 4
+    "read": 14
+   },
+   {
+    "first_leaf": 504,
+    "last_leaf": 509,
+    "first_page": 494,
+    "last_page": 499,
+    "leaves": 6,
+    "read": 6
    },
    {
     "first_leaf": 513,
-    "last_leaf": 533,
+    "last_leaf": 560,
     "first_page": 502,
-    "last_page": 522,
+    "last_page": 549,
+    "leaves": 48,
+    "read": 30
+   },
+   {
+    "first_leaf": 562,
+    "last_leaf": 582,
+    "first_page": 551,
+    "last_page": 571,
     "leaves": 21,
-    "read": 7
-   },
-   {
-    "first_leaf": 543,
-    "last_leaf": 550,
-    "first_page": 1,
-    "last_page": 8,
-    "leaves": 8,
-    "read": 3
-   },
-   {
-    "first_leaf": 563,
-    "last_leaf": 579,
-    "first_page": 552,
-    "last_page": 568,
-    "leaves": 17,
-    "read": 7
-   },
-   {
-    "first_leaf": 585,
-    "last_leaf": 592,
-    "first_page": 2,
-    "last_page": 9,
-    "leaves": 8,
-    "read": 3
+    "read": 15
    },
    {
     "first_leaf": 601,
@@ -935,8 +853,8 @@
   ],
   "ia_comparison": {
    "ia_read_leaves": 66,
-   "both": 58,
-   "agree": 58,
+   "both": 61,
+   "agree": 61,
    "agree_rate": 1.0,
    "ia_page_equals_leaf": 0.0
   },
@@ -944,8 +862,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -982,9 +900,9 @@
    {
     "kind": "listing",
     "start_leaf": 24,
-    "end_leaf": 591,
+    "end_leaf": 594,
     "title": null,
-    "leaves": 528,
+    "leaves": 531,
     "residential": true,
     "pages": {
      "first": {
@@ -993,23 +911,23 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 591,
-      "page": 8,
+      "leaf": 582,
+      "page": 571,
       "attestation": "read"
      }
     }
    },
    {
     "kind": "back_matter",
-    "start_leaf": 592,
+    "start_leaf": 595,
     "end_leaf": 609,
     "title": null,
-    "leaves": 12,
+    "leaves": 9,
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 592,
-      "page": 9,
+      "leaf": 601,
+      "page": 0,
       "attestation": "read"
      },
      "last": {
@@ -1080,21 +998,21 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0031_listing.jsonl.gz",
   "sections": [
    {
     "kind": "listing",
     "start_leaf": 24,
-    "end_leaf": 591
+    "end_leaf": 594
    }
   ],
-  "kept": 5214,
-  "dropped": 302,
-  "kept_share": 0.9453,
+  "kept": 23129,
+  "dropped": 278,
+  "kept_share": 0.9881,
   "kept_by_section": {
-   "listing": 5214
+   "listing": 23129
   }
  },
  "non_entry_pages": {
@@ -1330,5 +1248,22 @@
    573,
    585
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0031_words.ia.jsonl.gz",
+  "tiles": 1056,
+  "tiles_answered": 1056,
+  "bleed_retry": 4,
+  "loop_truncated": 0,
+  "table_mode": 8,
+  "pages": 528,
+  "lines_model": 22914,
+  "lines_tesseract": 2685,
+  "lines_model-only": 695,
+  "lines_bleed": 95,
+  "leaves_replaced": 528,
+  "dumped": "2026-10-15"
  }
 }

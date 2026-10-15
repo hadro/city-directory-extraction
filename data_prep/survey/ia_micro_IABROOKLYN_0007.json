@@ -365,16 +365,16 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1830",
-   "hocr_lines": 3095,
-   "wrap_joins": 63,
-   "candidates": 3032,
+   "hocr_lines": 3227,
+   "wrap_joins": 53,
+   "candidates": 3174,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 2925,
-    "mark_share": 0.0275,
-    "mode": 2.75,
-    "mode_pairs": 13,
+    "pairs": 2915,
+    "mark_share": 0.027,
+    "mode": 2.25,
+    "mode_pairs": 10,
     "trough": 1.75,
     "trough_pairs": 2,
     "reason": "too few runovers to read a mode"
@@ -389,13 +389,13 @@
    },
    "marker_fixes": 0,
    "kept": 2729,
-   "keep_rate": 0.9001,
+   "keep_rate": 0.8598,
    "dropped": {
-    "banner": 137,
-    "allcaps": 107,
-    "short": 41,
-    "bigtype": 11,
-    "nonascii": 6,
+    "banner": 166,
+    "short": 131,
+    "allcaps": 124,
+    "bigtype": 16,
+    "nonascii": 7,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -410,27 +410,27 @@
    "top_ad_leaves": [
     88,
     85,
-    36,
     83,
+    36,
+    5,
     23,
-    12,
-    47,
+    55,
     84,
-    22,
-    46
+    12,
+    26
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 219084,
+  "words_gz_bytes": 221614,
   "hocr_deleted": true,
   "elapsed_s": 12
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 5,
   "end_leaf": 75,
   "first_letter": "A",
@@ -442,12 +442,12 @@
   "start": {
    "leaf": 5,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$5/full/!1400,1400/0/default.jpg",
-   "quote": "Assor DANIEL tavern ami Jivery stable, 38"
+   "quote": "Abrahams Joseph 13 Garrison"
   },
   "end": {
    "leaf": 75,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0007$75/full/!1400,1400/0/default.jpg",
-   "quote": "Wyckoff widow Everit 7"
+   "quote": "Wyckoff widow Everit street"
   },
   "sections": [
    {
@@ -549,13 +549,13 @@
    ],
    "T": [
     65,
-    67,
-    3
+    66,
+    2
    ],
    "V": [
-    68,
+    67,
     69,
-    2
+    3
    ],
    "W": [
     70,
@@ -587,11 +587,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 87,
   "fitted_leaves": 78,
-  "read_leaves": 43,
+  "read_leaves": 55,
   "segments": [
    {
     "first_leaf": 6,
@@ -599,7 +599,7 @@
     "first_page": 6,
     "last_page": 83,
     "leaves": 78,
-    "read": 43
+    "read": 55
    }
   ],
   "ia_comparison": {
@@ -613,8 +613,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -687,8 +687,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0007_listing.jsonl.gz",
   "sections": [
    {
@@ -703,5 +703,21 @@
   "kept_by_section": {
    "listing": 2342
   }
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0007_words.ia.jsonl.gz",
+  "tiles": 140,
+  "tiles_answered": 140,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 70,
+  "lines_model": 2560,
+  "lines_tesseract": 99,
+  "lines_model-only": 41,
+  "leaves_replaced": 70,
+  "dumped": "2026-10-15"
  }
 }

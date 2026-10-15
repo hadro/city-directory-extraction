@@ -88,28 +88,19 @@
    "note": "Target card leaf 1. Confirms the catalog (Hope & Henderson). '(Consolidated)' in the title is a bibliographic fact worth keeping: the competing Brooklyn directories merged for 1856-7, which is the same moment Smith's separate Brooklyn directory runs out."
   },
   "start_page": {
-   "value": 10,
-   "leaf": 39,
-   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$39/canvas",
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$39/full/!1400,1400/0/default.jpg",
+   "value": 9,
+   "leaf": 38,
+   "canvas": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$38/canvas",
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$38/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "guide heads 'ACK 10 ADA'; entries '*Abenheck John, mason' ... 'Adams Gilbert, conductor'",
-   "method": "agent-read",
-   "confidence": "medium",
-   "attestation": "read",
-   "position": "head",
-   "edge_confirmed": false,
-   "read_date": "2026-09-23",
-   "note": "not the listing's caption page",
+   "quote": "no folio printed on leaf 38; page 9 INFERRED from the sequence of folios around it",
+   "method": "hocr-geometry",
+   "confidence": "low",
+   "attestation": "inferred",
+   "ia_page": null,
    "page_offset": 29,
-   "margin_fit_said": {
-    "value": 10,
-    "leaf": 39,
-    "page_offset": 29,
-    "confidence": "low",
-    "attestation": "inferred",
-    "method": "hocr-geometry"
-   }
+   "listing_flags": [],
+   "doubts": []
   },
   "end_page": {
    "value": 476,
@@ -401,38 +392,38 @@
    "publisher_tag": "hopehenderson",
    "publisher_tag_note": "'hope & henderson' normalised to the trained token 'hopehenderson'",
    "year_tag": "1856/57",
-   "hocr_lines": 45644,
-   "wrap_joins": 2164,
-   "candidates": 43480,
+   "hocr_lines": 76299,
+   "wrap_joins": 2224,
+   "candidates": 74075,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 32292,
-    "mark_share": 0.0782,
+    "pairs": 56587,
+    "mark_share": 0.0298,
     "mode": 1.75,
-    "mode_pairs": 3007,
+    "mode_pairs": 6417,
     "trough": 1.0,
-    "trough_pairs": 524,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 769,
+    "reason": "runover mode not isolated from the next-entry band"
    },
    "column_splits": {
-    "lines": 1140,
-    "leaves": 57
+    "lines": 61,
+    "leaves": 3
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 1,
-   "kept": 31102,
-   "keep_rate": 0.7153,
+   "marker_fixes": 0,
+   "kept": 60404,
+   "keep_rate": 0.8154,
    "dropped": {
-    "short": 8563,
-    "banner": 1805,
-    "bigtype": 1304,
-    "allcaps": 436,
-    "nonascii": 259,
-    "pagenum": 11
+    "short": 10017,
+    "bigtype": 2060,
+    "banner": 938,
+    "allcaps": 482,
+    "nonascii": 168,
+    "pagenum": 6
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -446,102 +437,57 @@
    "top_ad_leaves": [
     538,
     625,
-    177,
-    436,
+    536,
     611,
-    486,
     622,
     623,
     640,
-    682
+    682,
+    605,
+    637
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 2978376,
+  "words_gz_bytes": 5197794,
   "hocr_deleted": true,
   "elapsed_s": 16
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
-  "start_leaf": 39,
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
+  "start_leaf": 38,
   "end_leaf": 528,
   "first_letter": "A",
   "last_letter": "Z",
-  "letters_present": "ABCDEFGHJKLMNOPQRSTUVWYZ",
-  "missing_letters": "IX",
-  "voting_density": 0.841,
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+  "missing_letters": "X",
+  "voting_density": 0.91,
   "flags": [],
   "start": {
-   "leaf": 39,
-   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$39/full/!1400,1400/0/default.jpg",
-   "quote": "Abercrombie George, shoemaker, h. 3 Bridge"
+   "leaf": 38,
+   "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$38/full/!1400,1400/0/default.jpg",
+   "quote": "Abbott Harison B., milkman, h. Lafayette av."
   },
   "end": {
    "leaf": 528,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$528/full/!1400,1400/0/default.jpg",
-   "quote": "Zundortf Louise, 145} Lawrence"
+   "quote": "Zwergius Julius, teas, 125 Pearl, N. Y. h. Navy"
   },
   "sections": [
    {
-    "start_leaf": 39,
+    "start_leaf": 38,
     "end_leaf": 528,
-    "voting_leaves": 412,
+    "voting_leaves": 447,
     "first_letter": "A",
     "last_letter": "Z",
-    "letters": "ABCDEFGHJKLMNOPQRSTUVWYZ",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
     "is_listing": true
    }
   ],
   "gaps": [
-   {
-    "between": [
-     "B",
-     "C"
-    ],
-    "start_leaf": 93,
-    "end_leaf": 93,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "C",
-     "D"
-    ],
-    "start_leaf": 130,
-    "end_leaf": 130,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "E",
-     "F"
-    ],
-    "start_leaf": 164,
-    "end_leaf": 164,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "G",
-     "H"
-    ],
-    "start_leaf": 205,
-    "end_leaf": 205,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "H",
-     "J"
-    ],
-    "start_leaf": 243,
-    "end_leaf": 243,
-    "leaves": 1
-   },
    {
     "between": [
      "L",
@@ -550,24 +496,6 @@
     "start_leaf": 291,
     "end_leaf": 311,
     "leaves": 21
-   },
-   {
-    "between": [
-     "Q",
-     "R"
-    ],
-    "start_leaf": 383,
-    "end_leaf": 383,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "R",
-     "S"
-    ],
-    "start_leaf": 407,
-    "end_leaf": 407,
-    "leaves": 1
    },
    {
     "between": [
@@ -581,44 +509,49 @@
   ],
   "letter_blocks": {
    "A": [
-    39,
+    38,
     48,
-    10
+    11
    ],
    "B": [
     49,
-    92,
-    41
+    93,
+    44
    ],
    "C": [
     94,
     129,
-    32
+    36
    ],
    "D": [
-    131,
+    130,
     157,
-    22
+    27
    ],
    "E": [
     158,
-    163,
-    6
+    164,
+    7
    ],
    "F": [
     165,
     184,
-    16
+    20
    ],
    "G": [
     185,
-    204,
+    203,
     18
    ],
    "H": [
-    206,
+    204,
     242,
-    33
+    38
+   ],
+   "I": [
+    243,
+    243,
+    1
    ],
    "J": [
     244,
@@ -628,7 +561,7 @@
    "K": [
     253,
     270,
-    16
+    18
    ],
    "L": [
     271,
@@ -638,7 +571,7 @@
    "M": [
     312,
     344,
-    31
+    33
    ],
    "N": [
     345,
@@ -653,27 +586,27 @@
    "P": [
     361,
     381,
-    17
+    18
    ],
    "Q": [
     382,
-    382,
-    1
+    383,
+    2
    ],
    "R": [
     384,
-    406,
-    23
+    407,
+    24
    ],
    "S": [
     408,
     458,
-    44
+    46
    ],
    "T": [
     459,
     476,
-    14
+    16
    ],
    "U": [
     477,
@@ -688,7 +621,7 @@
    "W": [
     488,
     525,
-    32
+    33
    ],
    "Y": [
     526,
@@ -701,9 +634,9 @@
     1
    ]
   },
-  "skipped_votes": 7,
+  "skipped_votes": 1,
   "voted_bounds": [
-   39,
+   38,
    528
   ],
   "extended": {
@@ -712,7 +645,7 @@
   },
   "cross_check": {
    "source": "lines",
-   "start_leaf": 39,
+   "start_leaf": 38,
    "end_leaf": 528
   },
   "params": {
@@ -725,11 +658,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 668,
-  "fitted_leaves": 392,
-  "read_leaves": 124,
+  "fitted_leaves": 563,
+  "read_leaves": 375,
   "segments": [
    {
     "first_leaf": 5,
@@ -741,19 +674,99 @@
    },
    {
     "first_leaf": 32,
-    "last_leaf": 185,
+    "last_leaf": 152,
     "first_page": 4,
-    "last_page": 154,
-    "leaves": 151,
-    "read": 32
+    "last_page": 121,
+    "leaves": 118,
+    "read": 93
+   },
+   {
+    "first_leaf": 153,
+    "last_leaf": 186,
+    "first_page": 22,
+    "last_page": 55,
+    "leaves": 34,
+    "read": 21
    },
    {
     "first_leaf": 189,
-    "last_leaf": 336,
+    "last_leaf": 341,
     "first_page": 158,
-    "last_page": 303,
-    "leaves": 146,
-    "read": 35
+    "last_page": 308,
+    "leaves": 151,
+    "read": 94
+   },
+   {
+    "first_leaf": 348,
+    "last_leaf": 362,
+    "first_page": 13,
+    "last_page": 27,
+    "leaves": 15,
+    "read": 9
+   },
+   {
+    "first_leaf": 368,
+    "last_leaf": 374,
+    "first_page": 30,
+    "last_page": 36,
+    "leaves": 7,
+    "read": 6
+   },
+   {
+    "first_leaf": 375,
+    "last_leaf": 401,
+    "first_page": 337,
+    "last_page": 363,
+    "leaves": 27,
+    "read": 18
+   },
+   {
+    "first_leaf": 402,
+    "last_leaf": 419,
+    "first_page": 64,
+    "last_page": 79,
+    "leaves": 16,
+    "read": 13
+   },
+   {
+    "first_leaf": 420,
+    "last_leaf": 466,
+    "first_page": 380,
+    "last_page": 423,
+    "leaves": 44,
+    "read": 25
+   },
+   {
+    "first_leaf": 470,
+    "last_leaf": 499,
+    "first_page": 25,
+    "last_page": 52,
+    "leaves": 28,
+    "read": 21
+   },
+   {
+    "first_leaf": 500,
+    "last_leaf": 504,
+    "first_page": 453,
+    "last_page": 456,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 508,
+    "last_leaf": 521,
+    "first_page": 58,
+    "last_page": 71,
+    "leaves": 14,
+    "read": 8
+   },
+   {
+    "first_leaf": 526,
+    "last_leaf": 535,
+    "first_page": 474,
+    "last_page": 483,
+    "leaves": 10,
+    "read": 6
    },
    {
     "first_leaf": 544,
@@ -791,8 +804,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -839,46 +852,22 @@
     }
    },
    {
-    "kind": "late_names",
-    "start_leaf": 38,
-    "end_leaf": 38,
-    "title": {
-     "leaf": 38,
-     "quote": "NAMES RECEIVED TOO LATE FOR REGULAR INSERTION",
-     "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$38/full/!1400,1400/0/default.jpg"
-    },
-    "leaves": 1,
-    "residential": true,
-    "pages": {
-     "first": {
-      "leaf": 38,
-      "page": 9,
-      "attestation": "inferred"
-     },
-     "last": {
-      "leaf": 38,
-      "page": 9,
-      "attestation": "inferred"
-     }
-    }
-   },
-   {
     "kind": "listing",
-    "start_leaf": 39,
+    "start_leaf": 38,
     "end_leaf": 528,
     "title": null,
-    "leaves": 478,
+    "leaves": 479,
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 39,
-      "page": 10,
+      "leaf": 38,
+      "page": 9,
       "attestation": "inferred"
      },
      "last": {
-      "leaf": 336,
-      "page": 303,
-      "attestation": "read"
+      "leaf": 528,
+      "page": 476,
+      "attestation": "inferred"
      }
     }
    },
@@ -888,11 +877,23 @@
     "end_leaf": 536,
     "title": {
      "leaf": 529,
-     "quote": "NAMES TOO LATE FOR REGULAR INSERTION,",
+     "quote": "NAMES TOO LATE FOR",
      "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0035$529/full/!1400,1400/0/default.jpg"
     },
     "leaves": 8,
-    "residential": true
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 529,
+      "page": 477,
+      "attestation": "inferred"
+     },
+     "last": {
+      "leaf": 535,
+      "page": 483,
+      "attestation": "read"
+     }
+    }
    },
    {
     "kind": "business",
@@ -980,18 +981,13 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0035_listing.jsonl.gz",
   "sections": [
    {
-    "kind": "late_names",
-    "start_leaf": 38,
-    "end_leaf": 38
-   },
-   {
     "kind": "listing",
-    "start_leaf": 39,
+    "start_leaf": 38,
     "end_leaf": 528
    },
    {
@@ -1000,12 +996,12 @@
     "end_leaf": 536
    }
   ],
-  "kept": 27152,
+  "kept": 56454,
   "dropped": 3950,
-  "kept_share": 0.873,
+  "kept_share": 0.9346,
   "kept_by_section": {
-   "late_names": 193,
-   "listing": 26959
+   "listing": 55761,
+   "late_names": 693
   }
  },
  "non_entry_pages": {
@@ -1044,5 +1040,22 @@
    529,
    536
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0035_words.ia.jsonl.gz",
+  "tiles": 1920,
+  "tiles_answered": 1919,
+  "bleed_retry": 2,
+  "loop_truncated": 0,
+  "table_mode": 131,
+  "pages": 487,
+  "lines_model": 62438,
+  "lines_tesseract": 4185,
+  "lines_model-only": 2020,
+  "lines_bleed": 24,
+  "leaves_replaced": 487,
+  "dumped": "2026-10-15"
  }
 }

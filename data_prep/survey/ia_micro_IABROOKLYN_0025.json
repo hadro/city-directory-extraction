@@ -377,38 +377,38 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
    "year_tag": "1848/49",
-   "hocr_lines": 12514,
-   "wrap_joins": 496,
-   "candidates": 12018,
+   "hocr_lines": 17481,
+   "wrap_joins": 383,
+   "candidates": 17098,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 10704,
-    "mark_share": 0.0652,
-    "mode": 2.75,
-    "mode_pairs": 78,
+    "pairs": 14486,
+    "mark_share": 0.0461,
+    "mode": 2.5,
+    "mode_pairs": 73,
     "trough": 1.75,
-    "trough_pairs": 41,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 55,
+    "reason": "too few runovers to read a mode"
    },
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
+    "lines": 13,
+    "leaves": 1
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 3,
-   "kept": 9667,
-   "keep_rate": 0.8044,
+   "marker_fixes": 0,
+   "kept": 13818,
+   "keep_rate": 0.8082,
    "dropped": {
-    "short": 924,
-    "banner": 589,
-    "allcaps": 482,
+    "short": 1373,
+    "banner": 986,
+    "allcaps": 585,
     "bigtype": 306,
-    "nonascii": 42,
-    "pagenum": 8
+    "nonascii": 23,
+    "pagenum": 7
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -423,38 +423,38 @@
     386,
     394,
     384,
-    81,
     362,
-    333,
-    292,
     387,
-    323,
-    92
+    370,
+    79,
+    358,
+    417,
+    15
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 935077,
+  "words_gz_bytes": 1306767,
   "hocr_deleted": true,
   "elapsed_s": 8
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 21,
   "end_leaf": 344,
   "first_letter": "A",
   "last_letter": "Y",
-  "letters_present": "ABCDEFGHJKLMNOPQRSTVWY",
-  "missing_letters": "IUXZ",
-  "voting_density": 0.842,
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTVWY",
+  "missing_letters": "UXZ",
+  "voting_density": 0.981,
   "flags": [],
   "start": {
    "leaf": 21,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0025$21/full/!1400,1400/0/default.jpg",
-   "quote": "Abbott Francis 1"
+   "quote": "Abbreviations.\u2014h. stands for house, n. for near, c. for corner, op. for op-"
   },
   "end": {
    "leaf": 344,
@@ -463,76 +463,21 @@
   },
   "sections": [
    {
-    "start_leaf": 22,
+    "start_leaf": 21,
     "end_leaf": 344,
-    "voting_leaves": 272,
+    "voting_leaves": 318,
     "first_letter": "A",
     "last_letter": "Y",
-    "letters": "ABCDEFGHJKLMNOPQRSTVWY",
+    "letters": "ABCDEFGHIJKLMNOPQRSTVWY",
     "is_listing": true
    }
   ],
-  "gaps": [
-   {
-    "between": [
-     "C",
-     "D"
-    ],
-    "start_leaf": 90,
-    "end_leaf": 90,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "D",
-     "E"
-    ],
-    "start_leaf": 110,
-    "end_leaf": 110,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "F",
-     "G"
-    ],
-    "start_leaf": 127,
-    "end_leaf": 127,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "H",
-     "J"
-    ],
-    "start_leaf": 165,
-    "end_leaf": 166,
-    "leaves": 2
-   },
-   {
-    "between": [
-     "M",
-     "N"
-    ],
-    "start_leaf": 221,
-    "end_leaf": 236,
-    "leaves": 16
-   },
-   {
-    "between": [
-     "S",
-     "T"
-    ],
-    "start_leaf": 305,
-    "end_leaf": 305,
-    "leaves": 1
-   }
-  ],
+  "gaps": [],
   "letter_blocks": {
    "A": [
-    22,
+    21,
     28,
-    5
+    8
    ],
    "B": [
     29,
@@ -541,8 +486,8 @@
    ],
    "C": [
     62,
-    89,
-    24
+    90,
+    27
    ],
    "D": [
     91,
@@ -550,9 +495,9 @@
     19
    ],
    "E": [
-    111,
+    110,
     114,
-    4
+    5
    ],
    "F": [
     115,
@@ -560,34 +505,39 @@
     12
    ],
    "G": [
-    128,
+    127,
     139,
-    12
+    13
    ],
    "H": [
     140,
     164,
-    21
+    24
+   ],
+   "I": [
+    165,
+    165,
+    1
    ],
    "J": [
-    167,
+    166,
     172,
-    5
+    7
    ],
    "K": [
     173,
     182,
-    8
+    10
    ],
    "L": [
     183,
     196,
-    13
+    14
    ],
    "M": [
     197,
-    220,
-    23
+    236,
+    38
    ],
    "N": [
     237,
@@ -597,7 +547,7 @@
    "O": [
     241,
     246,
-    4
+    6
    ],
    "P": [
     247,
@@ -606,33 +556,33 @@
    ],
    "Q": [
     260,
-    261,
-    2
+    260,
+    1
    ],
    "R": [
-    262,
+    261,
     276,
-    15
+    16
    ],
    "S": [
     277,
-    304,
-    24
+    305,
+    28
    ],
    "T": [
     306,
     316,
-    7
+    11
    ],
    "V": [
     317,
     322,
-    5
+    6
    ],
    "W": [
     323,
     342,
-    17
+    20
    ],
    "Y": [
     343,
@@ -640,20 +590,18 @@
     2
    ]
   },
-  "skipped_votes": 3,
+  "skipped_votes": 0,
   "voted_bounds": [
-   22,
+   21,
    344
   ],
   "extended": {
-   "start": [
-    21
-   ],
+   "start": [],
    "end": []
   },
   "cross_check": {
    "source": "lines",
-   "start_leaf": 23,
+   "start_leaf": 21,
    "end_leaf": 344
   },
   "params": {
@@ -666,11 +614,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 409,
-  "fitted_leaves": 272,
-  "read_leaves": 138,
+  "fitted_leaves": 268,
+  "read_leaves": 193,
   "segments": [
    {
     "first_leaf": 12,
@@ -678,21 +626,21 @@
     "first_page": 4,
     "last_page": 72,
     "leaves": 69,
-    "read": 36
+    "read": 49
    },
    {
-    "first_leaf": 83,
-    "last_leaf": 287,
-    "first_page": 74,
-    "last_page": 276,
-    "leaves": 203,
-    "read": 102
+    "first_leaf": 86,
+    "last_leaf": 286,
+    "first_page": 77,
+    "last_page": 275,
+    "leaves": 199,
+    "read": 144
    }
   ],
   "ia_comparison": {
    "ia_read_leaves": 101,
-   "both": 101,
-   "agree": 101,
+   "both": 100,
+   "agree": 100,
    "agree_rate": 1.0,
    "ia_page_equals_leaf": 0.0
   },
@@ -700,8 +648,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -737,8 +685,8 @@
       "attestation": "inferred"
      },
      "last": {
-      "leaf": 287,
-      "page": 276,
+      "leaf": 286,
+      "page": 275,
       "attestation": "read"
      }
     }
@@ -765,8 +713,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0025_listing.jsonl.gz",
   "sections": [
    {
@@ -775,11 +723,11 @@
     "end_leaf": 344
    }
   ],
-  "kept": 8766,
+  "kept": 12917,
   "dropped": 901,
-  "kept_share": 0.9068,
+  "kept_share": 0.9348,
   "kept_by_section": {
-   "listing": 8766
+   "listing": 12917
   }
  },
  "non_entry_pages": {
@@ -809,5 +757,21 @@
    317,
    323
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0025_words.ia.jsonl.gz",
+  "tiles": 638,
+  "tiles_answered": 638,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 319,
+  "lines_model": 13774,
+  "lines_tesseract": 1483,
+  "lines_model-only": 349,
+  "leaves_replaced": 319,
+  "dumped": "2026-10-15"
  }
 }

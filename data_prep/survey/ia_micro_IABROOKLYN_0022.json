@@ -366,37 +366,37 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'crowell' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1845",
-   "hocr_lines": 5703,
-   "wrap_joins": 298,
-   "candidates": 5405,
+   "hocr_lines": 9306,
+   "wrap_joins": 317,
+   "candidates": 8989,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 4702,
-    "mark_share": 0.0575,
+    "pairs": 7467,
+    "mark_share": 0.0404,
     "mode": 1.75,
-    "mode_pairs": 74,
-    "trough": 1.0,
-    "trough_pairs": 20,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "mode_pairs": 90,
+    "trough": 1.5,
+    "trough_pairs": 54,
+    "reason": "too few runovers to read a mode"
    },
    "column_splits": {
-    "lines": 325,
-    "leaves": 8
+    "lines": 0,
+    "leaves": 0
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 4387,
-   "keep_rate": 0.8117,
+   "kept": 7706,
+   "keep_rate": 0.8573,
    "dropped": {
-    "short": 546,
-    "banner": 177,
-    "allcaps": 147,
-    "bigtype": 144,
-    "nonascii": 3,
+    "short": 805,
+    "bigtype": 196,
+    "allcaps": 141,
+    "banner": 134,
+    "nonascii": 6,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -410,87 +410,68 @@
    },
    "top_ad_leaves": [
     55,
-    30,
     56,
-    4,
     62,
     65,
     60,
+    4,
     68,
-    42,
-    75
+    75,
+    81,
+    64
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 402989,
+  "words_gz_bytes": 630554,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 4,
   "end_leaf": 51,
   "first_letter": "A",
   "last_letter": "W",
   "letters_present": "ABCDEFGHJKLMNOPRSTVW",
   "missing_letters": "IQUXYZ",
-  "voting_density": 0.938,
+  "voting_density": 1.0,
   "flags": [],
   "start": {
    "leaf": 4,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$4/full/!1400,1400/0/default.jpg",
-   "quote": "Abberly Christian, ambsolle a maker, 9 97 \u2018Bridg\u00e9"
+   "quote": "Abberly Christian, umbrella maker, 97 Bridge"
   },
   "end": {
    "leaf": 51,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0022$51/full/!1400,1400/0/default.jpg",
-   "quote": "Woodworth Mrs. select school, 5} Dany"
+   "quote": "Woolsey Homer, plumber,"
   },
   "sections": [
    {
     "start_leaf": 4,
     "end_leaf": 51,
-    "voting_leaves": 45,
+    "voting_leaves": 48,
     "first_letter": "A",
     "last_letter": "W",
     "letters": "ABCDEFGHJKLMNOPRSTVW",
     "is_listing": true
    }
   ],
-  "gaps": [
-   {
-    "between": [
-     "D",
-     "E"
-    ],
-    "start_leaf": 18,
-    "end_leaf": 18,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "L",
-     "M"
-    ],
-    "start_leaf": 32,
-    "end_leaf": 33,
-    "leaves": 2
-   }
-  ],
+  "gaps": [],
   "letter_blocks": {
    "A": [
     4,
-    4,
-    1
+    5,
+    2
    ],
    "B": [
-    5,
+    6,
     10,
-    6
+    5
    ],
    "C": [
     11,
@@ -499,8 +480,8 @@
    ],
    "D": [
     16,
-    17,
-    2
+    18,
+    3
    ],
    "E": [
     19,
@@ -519,28 +500,28 @@
    ],
    "H": [
     24,
-    26,
-    3
+    27,
+    4
    ],
    "J": [
-    27,
     28,
-    2
+    28,
+    1
    ],
    "K": [
     29,
-    30,
-    2
-   ],
-   "L": [
-    31,
-    31,
+    29,
     1
    ],
+   "L": [
+    30,
+    31,
+    2
+   ],
    "M": [
-    34,
+    32,
     36,
-    3
+    5
    ],
    "N": [
     37,
@@ -583,7 +564,7 @@
     3
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 0,
   "voted_bounds": [
    4,
    51
@@ -607,12 +588,21 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 81,
-  "fitted_leaves": 0,
-  "read_leaves": 0,
-  "segments": [],
+  "fitted_leaves": 46,
+  "read_leaves": 32,
+  "segments": [
+   {
+    "first_leaf": 5,
+    "last_leaf": 50,
+    "first_page": 4,
+    "last_page": 49,
+    "leaves": 46,
+    "read": 32
+   }
+  ],
   "ia_comparison": {
    "ia_read_leaves": 0,
    "both": 0,
@@ -620,14 +610,12 @@
    "agree_rate": null,
    "ia_page_equals_leaf": null
   },
-  "flags": [
-   "no-folios"
-  ]
+  "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -655,7 +643,19 @@
     "end_leaf": 51,
     "title": null,
     "leaves": 48,
-    "residential": true
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 5,
+      "page": 4,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 50,
+      "page": 49,
+      "attestation": "read"
+     }
+    }
    },
    {
     "kind": "back_matter",
@@ -676,8 +676,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0022_listing.jsonl.gz",
   "sections": [
    {
@@ -686,11 +686,11 @@
     "end_leaf": 51
    }
   ],
-  "kept": 3808,
+  "kept": 7127,
   "dropped": 579,
-  "kept_share": 0.868,
+  "kept_share": 0.9249,
   "kept_by_section": {
-   "listing": 3808
+   "listing": 7127
   }
  },
  "non_entry_pages": {
@@ -702,5 +702,21 @@
   "leaves": [
    33
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0022_words.ia.jsonl.gz",
+  "tiles": 192,
+  "tiles_answered": 192,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 31,
+  "pages": 48,
+  "lines_tesseract": 914,
+  "lines_model": 6773,
+  "lines_model-only": 588,
+  "leaves_replaced": 48,
+  "dumped": "2026-10-15"
  }
 }

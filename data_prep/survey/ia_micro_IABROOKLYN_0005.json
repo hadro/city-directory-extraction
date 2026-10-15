@@ -369,18 +369,18 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1826",
-   "hocr_lines": 2712,
-   "wrap_joins": 90,
-   "candidates": 2622,
+   "hocr_lines": 2831,
+   "wrap_joins": 103,
+   "candidates": 2728,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 2427,
-    "mark_share": 0.0498,
+    "pairs": 2484,
+    "mark_share": 0.041,
     "mode": 1.75,
-    "mode_pairs": 14,
+    "mode_pairs": 16,
     "trough": 1.25,
-    "trough_pairs": 2,
+    "trough_pairs": 4,
     "reason": "too few runovers to read a mode"
    },
    "column_splits": {
@@ -392,14 +392,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2342,
-   "keep_rate": 0.8932,
+   "kept": 2399,
+   "keep_rate": 0.8794,
    "dropped": {
-    "short": 127,
-    "allcaps": 89,
-    "banner": 29,
-    "bigtype": 27,
-    "nonascii": 7,
+    "short": 154,
+    "allcaps": 90,
+    "banner": 49,
+    "bigtype": 31,
+    "nonascii": 4,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -417,24 +417,24 @@
     74,
     4,
     75,
-    9,
     76,
-    16,
-    37,
-    51
+    17,
+    6,
+    46,
+    11
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 193878,
+  "words_gz_bytes": 198193,
   "hocr_deleted": true,
   "elapsed_s": 13
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 5,
   "end_leaf": 60,
   "first_letter": "A",
@@ -446,7 +446,7 @@
   "start": {
    "leaf": 5,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0005$5/full/!1400,1400/0/default.jpg",
-   "quote": "Assor DANIEL, tavern & livery stable 16"
+   "quote": "Abbot John, shoemaker, 114 Jay"
   },
   "end": {
    "leaf": 60,
@@ -493,13 +493,13 @@
    ],
    "F": [
     22,
-    23,
-    2
+    22,
+    1
    ],
    "G": [
+    23,
     24,
-    24,
-    1
+    2
    ],
    "H": [
     25,
@@ -586,11 +586,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 78,
   "fitted_leaves": 67,
-  "read_leaves": 30,
+  "read_leaves": 46,
   "segments": [
    {
     "first_leaf": 4,
@@ -598,7 +598,7 @@
     "first_page": 4,
     "last_page": 70,
     "leaves": 67,
-    "read": 30
+    "read": 46
    }
   ],
   "ia_comparison": {
@@ -612,8 +612,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -685,8 +685,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0005_listing.jsonl.gz",
   "sections": [
    {
@@ -695,11 +695,11 @@
     "end_leaf": 60
    }
   ],
-  "kept": 1845,
+  "kept": 1902,
   "dropped": 497,
-  "kept_share": 0.7878,
+  "kept_share": 0.7928,
   "kept_by_section": {
-   "listing": 1845
+   "listing": 1902
   }
  },
  "non_entry_pages": {
@@ -711,5 +711,21 @@
   "leaves": [
    8
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0005_words.ia.jsonl.gz",
+  "tiles": 112,
+  "tiles_answered": 112,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 56,
+  "lines_model": 1988,
+  "lines_tesseract": 90,
+  "lines_model-only": 41,
+  "leaves_replaced": 56,
+  "dumped": "2026-10-15"
  }
 }

@@ -287,6 +287,7 @@ BULLET_AGREE = 0.2      # bullets are dash evidence on a page where this share o
 DASH_W = 0.15           # a dash token standing alone is evidence if at least this share of the
 DASH_FLAT = 1.5         # page's median word height wide and this many times wider than tall
 LONE_LETTER = re.compile(r"^[A-Z]\.?$")      # a section's letter ("D"), never an entry
+AMPERSAND = re.compile(r"^&\s+\S")            # "& Oest grocers": a firm under the surname above
 _GIVEN = None
 
 
@@ -369,12 +370,20 @@ def dittos(rows: list, median_h: float = 0.0) -> list:
         k = name_key(r["text"], r.get("mark"))
         r["ditto"] = r["ambiguous"] = False
         body = r["text"][2:] if r.get("mark") and r["text"].startswith("E ") else r["text"]
-        if not k or DASH.match(body) or body.lstrip()[:1].islower():
+        if AMPERSAND.match(body):
+            # A firm under the surname above, which 1912 prints "— & Oest grocers 1508 Bway" and
+            # LightOn reads without its dash. On evidence the dash goes back; left bare, the
+            # survey's gate admitted "&" itself as the ditto (424 lines), turning "[Surname] &
+            # Oest" into "[Surname] Oest", the firm-name loss hadro rejected "&" for in Trow 1915
+            r["ditto"] = tdash(r) or bool(bullets_mean_dashes and r.get("bullet"))
+        elif not k or DASH.match(body) or body.lstrip()[:1].islower():
             continue                 # (a dash the model wrote itself stays as it wrote it; a
                                      # lowercase start is a run-over, "h. Rutledge n. Bedford av")
         caps = len(k) > 1 and body.split()[0].isupper()
         evidence = not caps and (tdash(r) or bool(bullets_mean_dashes and r.get("bullet")))
-        if LONE_LETTER.match(body.strip()):
+        if AMPERSAND.match(body):
+            pass                     # decided above; a firm never moves the chain
+        elif LONE_LETTER.match(body.strip()):
             # an initial under a dash (LightOn's "- G" for "—G A h", tesseract's "—G"), or a
             # section's letter, which a speck beside it ("- D", 0003 leaf 23) does not make a
             # ditto; the chain stays either way
@@ -636,6 +645,7 @@ def dump(args) -> int:
     `survey_derive.py` re-read the volume from it."""
     import gzip
     root = Path(args.root).resolve()
+    page_dir = Path(getattr(args, "page_dir", None) or DATA / "reocr").resolve()
     boxes = json.loads((root / "boxes.json").read_text(encoding="utf-8"))
     pages = collections.defaultdict(dict)
     for key, entry in boxes.items():
@@ -655,7 +665,7 @@ def dump(args) -> int:
         for (v, stem), tiles in pages.items():
             if v != vol:
                 continue
-            rec = json.loads((DATA / "reocr" / vol / f"{stem}.json").read_text(encoding="utf-8"))
+            rec = json.loads((page_dir / vol / f"{stem}.json").read_text(encoding="utf-8"))
             if not rec["lines"]:
                 continue
             answers = {}
@@ -860,6 +870,7 @@ def screen(args) -> int:
     bench's, so this is the model's first look at their layouts (1820s single columns, 1912)."""
     from reocr_volumes import column_lines
     root = Path(args.root).resolve()
+    page_dir = Path(getattr(args, "page_dir", None) or DATA / "reocr").resolve()
     boxes = json.loads((root / "boxes.json").read_text(encoding="utf-8"))
     pages = collections.defaultdict(dict)
     for key, entry in boxes.items():
@@ -868,7 +879,7 @@ def screen(args) -> int:
         pages[(vol, stem)][f"c{name}"] = entry
     tiles, by_vol = [], collections.defaultdict(list)
     for (vol, stem), named in sorted(pages.items()):
-        rec = json.loads((DATA / "reocr" / vol / f"{stem}.json").read_text(encoding="utf-8"))
+        rec = json.loads((page_dir / vol / f"{stem}.json").read_text(encoding="utf-8"))
         keyed = column_lines(rec["lines"], rec["page_size"], keyed=True)
         hs = sorted(w[3] - w[1] for _k, _y, ws in keyed for w in ws)
         median_h = hs[len(hs) // 2] if hs else 1
@@ -1127,6 +1138,8 @@ def main(argv=None) -> int:
     ap.add_argument("--root", default="data/reocr_screen", help="screen/dump: the staged half tiles")
     ap.add_argument("--ids", help="dump: only these volumes")
     ap.add_argument("--out-dir", help="dump: write here instead (a dry run: no swap, no sidecar)")
+    ap.add_argument("--page-dir", default="data/reocr",
+                    help="screen/dump: the pages' tesseract records, <dir>/<id>/<id>_<leaf>.json")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:

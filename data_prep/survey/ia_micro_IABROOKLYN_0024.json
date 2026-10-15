@@ -381,38 +381,38 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'hearnes/webb' tagged as its trained partner 'hearne'",
    "year_tag": "1847",
-   "hocr_lines": 12566,
-   "wrap_joins": 505,
-   "candidates": 12061,
+   "hocr_lines": 15502,
+   "wrap_joins": 435,
+   "candidates": 15067,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 11063,
-    "mark_share": 0.0557,
-    "mode": 2.0,
-    "mode_pairs": 71,
-    "trough": 1.75,
-    "trough_pairs": 43,
+    "pairs": 12354,
+    "mark_share": 0.0518,
+    "mode": 1.25,
+    "mode_pairs": 62,
+    "trough": 1.0,
+    "trough_pairs": 105,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
+    "lines": 9,
+    "leaves": 1
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 0,
-   "kept": 9874,
-   "keep_rate": 0.8187,
+   "marker_fixes": 1,
+   "kept": 11888,
+   "keep_rate": 0.789,
    "dropped": {
-    "short": 717,
-    "banner": 665,
-    "allcaps": 492,
-    "bigtype": 284,
-    "nonascii": 27,
-    "pagenum": 2
+    "short": 1294,
+    "banner": 718,
+    "allcaps": 599,
+    "bigtype": 533,
+    "nonascii": 32,
+    "pagenum": 3
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -424,36 +424,36 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    73,
-    123,
     2,
     4,
-    100,
     293,
     338,
     3,
     319,
-    128
+    307,
+    284,
+    11,
+    329
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 937528,
+  "words_gz_bytes": 1103022,
   "hocr_deleted": true,
   "elapsed_s": 8
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 23,
   "end_leaf": 274,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTVWY",
   "missing_letters": "UXZ",
-  "voting_density": 0.937,
+  "voting_density": 0.988,
   "flags": [],
   "start": {
    "leaf": 23,
@@ -463,39 +463,20 @@
   "end": {
    "leaf": 274,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0024$274/full/!1400,1400/0/default.jpg",
-   "quote": "Youngs Isaac, attorney N Y - Atlantic c Powers"
+   "quote": "Youngs Isaac, attorney N Y h Atlantic c Powers"
   },
   "sections": [
    {
     "start_leaf": 23,
     "end_leaf": 274,
-    "voting_leaves": 236,
+    "voting_leaves": 249,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHIJKLMNOPQRSTVWY",
     "is_listing": true
    }
   ],
-  "gaps": [
-   {
-    "between": [
-     "C",
-     "D"
-    ],
-    "start_leaf": 80,
-    "end_leaf": 80,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "M",
-     "N"
-    ],
-    "start_leaf": 185,
-    "end_leaf": 188,
-    "leaves": 4
-   }
-  ],
+  "gaps": [],
   "letter_blocks": {
    "A": [
     23,
@@ -505,17 +486,17 @@
    "B": [
     30,
     56,
-    26
+    27
    ],
    "C": [
     57,
     79,
-    18
+    22
    ],
    "D": [
-    81,
+    80,
     95,
-    14
+    16
    ],
    "E": [
     96,
@@ -525,7 +506,7 @@
    "F": [
     99,
     107,
-    8
+    9
    ],
    "G": [
     108,
@@ -535,7 +516,7 @@
    "H": [
     118,
     135,
-    17
+    18
    ],
    "I": [
     136,
@@ -544,13 +525,13 @@
    ],
    "J": [
     137,
-    143,
-    6
+    142,
+    5
    ],
    "K": [
-    144,
+    143,
     150,
-    7
+    8
    ],
    "L": [
     151,
@@ -559,8 +540,8 @@
    ],
    "M": [
     160,
-    184,
-    25
+    188,
+    29
    ],
    "N": [
     189,
@@ -613,7 +594,7 @@
     1
    ]
   },
-  "skipped_votes": 3,
+  "skipped_votes": 0,
   "voted_bounds": [
    23,
    274
@@ -637,11 +618,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 338,
   "fitted_leaves": 321,
-  "read_leaves": 129,
+  "read_leaves": 188,
   "segments": [
    {
     "first_leaf": 16,
@@ -649,7 +630,7 @@
     "first_page": 6,
     "last_page": 261,
     "leaves": 256,
-    "read": 103
+    "read": 162
    },
    {
     "first_leaf": 277,
@@ -671,8 +652,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -823,8 +804,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0024_listing.jsonl.gz",
   "sections": [
    {
@@ -838,11 +819,11 @@
     "end_leaf": 343
    }
   ],
-  "kept": 8107,
+  "kept": 10121,
   "dropped": 1767,
-  "kept_share": 0.821,
+  "kept_share": 0.8514,
   "kept_by_section": {
-   "listing": 8070,
+   "listing": 10084,
    "late_names": 37
   }
  },
@@ -860,5 +841,21 @@
    100,
    343
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0024_words.ia.jsonl.gz",
+  "tiles": 502,
+  "tiles_answered": 502,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 251,
+  "lines_model": 10876,
+  "lines_tesseract": 1417,
+  "lines_model-only": 187,
+  "leaves_replaced": 251,
+  "dumped": "2026-10-15"
  }
 }

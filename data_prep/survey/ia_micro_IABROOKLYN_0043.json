@@ -349,19 +349,19 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'payson' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1849/50",
-   "hocr_lines": 7573,
-   "wrap_joins": 405,
-   "candidates": 7168,
+   "hocr_lines": 8448,
+   "wrap_joins": 366,
+   "candidates": 8082,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 6471,
-    "mark_share": 0.0735,
+    "pairs": 6739,
+    "mark_share": 0.0473,
     "mode": 2.5,
-    "mode_pairs": 56,
+    "mode_pairs": 41,
     "trough": 2.0,
-    "trough_pairs": 28,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 19,
+    "reason": "too few runovers to read a mode"
    },
    "column_splits": {
     "lines": 0,
@@ -372,15 +372,15 @@
     "leaves": 0
    },
    "marker_fixes": 1,
-   "kept": 5909,
-   "keep_rate": 0.8244,
+   "kept": 6256,
+   "keep_rate": 0.7741,
    "dropped": {
-    "allcaps": 436,
-    "short": 416,
-    "bigtype": 227,
-    "banner": 167,
-    "nonascii": 12,
-    "pagenum": 1
+    "short": 750,
+    "allcaps": 505,
+    "banner": 280,
+    "bigtype": 278,
+    "nonascii": 11,
+    "pagenum": 2
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -393,28 +393,28 @@
    },
    "top_ad_leaves": [
     202,
-    145,
+    95,
     191,
     2,
     166,
-    160,
     168,
-    99,
-    55,
-    241
+    161,
+    241,
+    187,
+    112
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 641742,
+  "words_gz_bytes": 673916,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 4,
   "end_leaf": 164,
   "first_letter": "A",
@@ -431,7 +431,7 @@
   "end": {
    "leaf": 164,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0043$164/full/!1400,1400/0/default.jpg",
-   "quote": "Younger, William, shoemaker, 26 North 2d - a"
+   "quote": "Younger, William, shoemaker, 25 North 2d"
   },
   "sections": [
    {
@@ -576,7 +576,7 @@
     1
    ]
   },
-  "skipped_votes": 0,
+  "skipped_votes": 1,
   "voted_bounds": [
    4,
    164
@@ -600,35 +600,35 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 241,
-  "fitted_leaves": 195,
-  "read_leaves": 87,
+  "fitted_leaves": 191,
+  "read_leaves": 126,
   "segments": [
    {
     "first_leaf": 5,
-    "last_leaf": 80,
+    "last_leaf": 84,
     "first_page": 4,
-    "last_page": 78,
-    "leaves": 75,
-    "read": 37
+    "last_page": 82,
+    "leaves": 79,
+    "read": 58
    },
    {
-    "first_leaf": 84,
+    "first_leaf": 97,
     "last_leaf": 110,
-    "first_page": 76,
+    "first_page": 85,
     "last_page": 98,
-    "leaves": 23,
-    "read": 4
+    "leaves": 14,
+    "read": 9
    },
    {
     "first_leaf": 118,
-    "last_leaf": 158,
+    "last_leaf": 159,
     "first_page": 100,
-    "last_page": 139,
-    "leaves": 40,
-    "read": 13
+    "last_page": 140,
+    "leaves": 41,
+    "read": 26
    },
    {
     "first_leaf": 169,
@@ -658,8 +658,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -683,8 +683,8 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 158,
-      "page": 139,
+      "leaf": 159,
+      "page": 140,
       "attestation": "read"
      }
     }
@@ -736,8 +736,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0043_listing.jsonl.gz",
   "sections": [
    {
@@ -746,11 +746,11 @@
     "end_leaf": 164
    }
   ],
-  "kept": 4271,
+  "kept": 4618,
   "dropped": 1638,
-  "kept_share": 0.7228,
+  "kept_share": 0.7382,
   "kept_by_section": {
-   "listing": 4271
+   "listing": 4618
   }
  },
  "non_entry_pages": {
@@ -773,5 +773,21 @@
    160,
    161
   ]
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0043_words.ia.jsonl.gz",
+  "tiles": 306,
+  "tiles_answered": 305,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 4,
+  "pages": 153,
+  "lines_model": 5154,
+  "lines_tesseract": 607,
+  "lines_model-only": 146,
+  "leaves_replaced": 153,
+  "dumped": "2026-10-15"
  }
 }

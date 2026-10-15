@@ -1392,6 +1392,22 @@ greedy's loop rate on the unseen volumes before the 7,947 pages run.
 2. After the full run: `reocr_pair.py dump <slug> --root data/reocr_halves` writes each volume's
    word dump, keeping IA's as `<id>_words.ia.jsonl.gz`. Then `survey_harvest.py --rederive --ids
    <the 39>` and `survey_derive.py` re-read the volumes.
+   **Done 2026-10-15** (job 19954791, 70 tasks on L40S, 28.9 GPU-hours):
+   - Answers: 20,691 of 20,712 tiles. The 21 empty ones keep tesseract's lines; greedy would
+     read them the same way again, so they were not retried. 44 tiles looped: 39 were rescued
+     by the darkest-ink retry, 4 cut back.
+   - Survey totals: kept lines 268,422 to 566,402, and scoped listing lines 220,682 to 518,537.
+     The largest gains are where IA's OCR had failed: 1912 8,736 to 53,883; 0039, 0040 and
+     0042 each 8–16k to 52–60k.
+   - Ditto: 1912's gate admits "—" (24,204 lines). Listing bounds are unchanged; 10 of the 78
+     page claims moved, none of them written to the CSV.
+   - Three forms the bench had not shown, fixed in the import:
+     - LightOn's glyphs for the small E (4,567 lines of 0039, 0040, 0042);
+     - turnovers on lines of their own (~300 lines);
+     - 1912's firms under a surname ("— & Oest"), which had lost their dash and let the gate
+       admit "&".
+   - The run-health summary flags 0022 (16% table mode) and 0047 (bleed-through, 3% looped).
+   - Open: `run_tiers.py` still puts all 39 in `defer`, the tier for unusable OCR.
 
 The dump keeps IA's records for the leaves not re-read. For each re-read leaf it pairs the tiles
 (a tile without an answer keeps tesseract's lines), runs the post-passes, and spreads every

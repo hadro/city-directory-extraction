@@ -366,19 +366,19 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'bigelow' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1832/33",
-   "hocr_lines": 3925,
-   "wrap_joins": 190,
-   "candidates": 3735,
+   "hocr_lines": 4142,
+   "wrap_joins": 126,
+   "candidates": 4016,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 3554,
-    "mark_share": 0.0554,
-    "mode": 1.75,
-    "mode_pairs": 19,
-    "trough": 1.25,
-    "trough_pairs": 9,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "pairs": 3668,
+    "mark_share": 0.035,
+    "mode": 1.25,
+    "mode_pairs": 10,
+    "trough": 1.0,
+    "trough_pairs": 18,
+    "reason": "too few runovers to read a mode"
    },
    "column_splits": {
     "lines": 0,
@@ -389,20 +389,18 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 3331,
-   "keep_rate": 0.8918,
+   "kept": 3444,
+   "keep_rate": 0.8576,
    "dropped": {
-    "allcaps": 135,
-    "short": 122,
-    "banner": 93,
-    "bigtype": 45,
+    "banner": 188,
+    "short": 187,
+    "allcaps": 152,
+    "bigtype": 36,
     "nonascii": 8,
     "pagenum": 1
    },
-   "ditto_marks": [
-    "*"
-   ],
-   "ditto_applied": 31,
+   "ditto_marks": [],
+   "ditto_applied": 0,
    "band": {
     "leaves_banded": 0,
     "head": 0,
@@ -413,44 +411,44 @@
    "top_ad_leaves": [
     2,
     87,
-    8,
     89,
-    37,
-    20,
     104,
-    22,
+    20,
     90,
-    100
+    76,
+    9,
+    100,
+    60
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "91c24e3-dirty",
+   "derived": "2026-10-15"
   },
-  "words_gz_bytes": 294675,
+  "words_gz_bytes": 303956,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "start_leaf": 5,
   "end_leaf": 77,
   "first_letter": "A",
   "last_letter": "W",
-  "letters_present": "ABCDFGHJKLMNPRSTVW",
-  "missing_letters": "EIOQUXYZ",
+  "letters_present": "ABCDEFGHJKLMNPRSTVW",
+  "missing_letters": "IOQUXYZ",
   "voting_density": 0.973,
   "flags": [],
   "start": {
    "leaf": 5,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0009$5/full/!1400,1400/0/default.jpg",
-   "quote": "Abbot Mary, rear of 107 Concord"
+   "quote": "Abbot Henry R, 68 Willow"
   },
   "end": {
    "leaf": 77,
    "image": "https://iiif.archive.org/iiif/micro_IABROOKLYN_0009$77/full/!1400,1400/0/default.jpg",
-   "quote": "Wyman Wn, mercht 152 Washington"
+   "quote": "Wyman Wm, merch 152 Washington"
   },
   "sections": [
    {
@@ -459,7 +457,7 @@
     "voting_leaves": 71,
     "first_letter": "A",
     "last_letter": "W",
-    "letters": "ABCDFGHJKLMNPRSTVW",
+    "letters": "ABCDEFGHJKLMNPRSTVW",
     "is_listing": true
    }
   ],
@@ -477,13 +475,18 @@
    ],
    "C": [
     14,
-    20,
-    7
+    19,
+    6
    ],
    "D": [
-    21,
-    24,
+    20,
+    23,
     4
+   ],
+   "E": [
+    24,
+    24,
+    1
    ],
    "F": [
     25,
@@ -537,13 +540,13 @@
    ],
    "S": [
     59,
-    66,
-    8
+    65,
+    7
    ],
    "T": [
-    67,
+    66,
     68,
-    2
+    3
    ],
    "V": [
     69,
@@ -580,11 +583,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "content_leaves": 104,
   "fitted_leaves": 96,
-  "read_leaves": 45,
+  "read_leaves": 60,
   "segments": [
    {
     "first_leaf": 6,
@@ -592,7 +595,7 @@
     "first_page": 6,
     "last_page": 101,
     "leaves": 96,
-    "read": 45
+    "read": 60
    }
   ],
   "ia_comparison": {
@@ -606,8 +609,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -667,8 +670,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-15",
+  "code_at": "91c24e3-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0009_listing.jsonl.gz",
   "sections": [
    {
@@ -677,11 +680,27 @@
     "end_leaf": 77
    }
   ],
-  "kept": 2459,
+  "kept": 2572,
   "dropped": 872,
-  "kept_share": 0.7382,
+  "kept_share": 0.7468,
   "kept_by_section": {
-   "listing": 2459
+   "listing": 2572
   }
+ },
+ "reocr": {
+  "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
+  "root": "data/reocr_halves",
+  "ia_dump": "data/survey_ocr/micro_IABROOKLYN_0009_words.ia.jsonl.gz",
+  "tiles": 144,
+  "tiles_answered": 144,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 72,
+  "lines_tesseract": 141,
+  "lines_model": 2754,
+  "lines_model-only": 59,
+  "leaves_replaced": 72,
+  "dumped": "2026-10-15"
  }
 }

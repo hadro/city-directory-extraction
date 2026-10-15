@@ -458,6 +458,8 @@ def post_run(args) -> int:
 
 # ---------------------------------------------------------------- the word dump (production)
 
+LOOP_LOOK = 0.02        # a volume is worth a look past this share of looped tiles (task 0: 1 in 326)
+TABLE_LOOK = 0.15       # ...or this share in table mode (twice the bench's 10 of 138)
 CONF_MODEL = 90         # a word the vision model read: well above CRUMB_CONF (5), where a word
 CONF_BLEED = 30         # ...with an odd character is taken for banner crumbs; a bleed_retry tile's
                         # words are less sure (house numbers off by a digit on 0047 leaf 90)
@@ -674,6 +676,15 @@ def dump(args) -> int:
               f"{stats['lines_tesseract']} tesseract, {stats['lines_model-only']} model-only, "
               f"{stats['lines_bleed']} bleed) -> {dst.relative_to(REPO) if dst.is_relative_to(REPO) else dst}",
               file=sys.stderr)
+        # Per volume, as historical-ocr-eval asked of the full run (2026-10-15): bleed-through
+        # clusters by volume, and a table-mode rate far above the bench's (10 of 138 tiles; 4 of
+        # 188 on the screen pages) would mean a layout no one has looked at.
+        n = max(stats["tiles_answered"], 1)
+        looped, table = stats["bleed_retry"] + stats["loop_truncated"], stats["table_mode"]
+        warn = looped > LOOP_LOOK * n or table > TABLE_LOOK * n
+        print(f"    looped {looped} ({stats['bleed_retry']} bleed-retried, {stats['loop_truncated']} "
+              f"truncated), table mode {table} of {n} tiles"
+              + ("  <- look at this volume's pages" if warn else ""), file=sys.stderr)
     return 0
 
 

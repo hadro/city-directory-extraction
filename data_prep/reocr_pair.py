@@ -227,6 +227,13 @@ def mark_of(words: list, median_h: float, name: str) -> bool:
     return False
 
 
+# What LightOn makes of the small "E" (Eastern District) set before a name: on the full run,
+# 4,567 lines of 0039, 0040 and 0042 open "^Butler", "£Ford", "=Cooney", "≡Flynn", "†Taylor" or
+# "■Blumberg", each the printed mark on the page images (2026-10-15). Glued to a capitalised
+# name it is the mark, and goes back as tesseract's are: "E Butler Edward".
+EGLYPH = re.compile(r"^\s*[\^£=≡■†€©®ᴱ](?=[A-Z][a-z])")
+
+
 def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = False) -> list:
     """One tile: tesseract's printed lines (word lists, top to bottom) and the model's lines.
     -> [{"text", "words", "source", "mark", "start", "bullet"}] in printed order, model-only
@@ -240,15 +247,19 @@ def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = Fals
             continue
         bullet = BULLET.match(model[j]) is not None
         line = BULLET.sub("", model[j], count=1)
+        glyph = None if model_marks else EGLYPH.match(line)
+        if glyph:
+            line = line[glyph.end():]
         if i0 == i1:
-            out.append({"text": line, "words": [], "source": "model-only", "mark": False,
-                        "start": True, "bullet": bullet})
+            out.append({"text": f"E {line}" if glyph else line, "words": [], "source": "model-only",
+                        "mark": bool(glyph), "start": True, "bullet": bullet})
             continue
-        # Churro writes the mark itself (<Initial>E</Initial>); LightOn never does, and its
-        # leading "E " is an initial ("E A cigars"), so its marks come from tesseract alone
+        # Churro writes the mark itself (<Initial>E</Initial>). LightOn's leading "E " is an
+        # initial ("E A cigars"), so its marks are the glyphs it reads them as (EGLYPH) and
+        # tesseract's
         body = strip_mark(line) if model_marks else line
         first = re.sub(r"[^\w'-]", "", body.split()[0]) if body.split() else ""
-        mark = body != line or mark_of(tess[i0], median_h, first)
+        mark = bool(glyph) or body != line or mark_of(tess[i0], median_h, first)
         for t, piece in enumerate(split(body, texts[i0:i1])):
             text = piece if piece is not None else texts[i0 + t]
             if t == 0 and mark:
@@ -395,6 +406,7 @@ def dittos(rows: list, median_h: float = 0.0) -> list:
 
 TURNOVER = re.compile(r"\s\[\s*([^\[\]]+?)\s*$")
 TURNOVER_MAX = 3        # tokens a turnover carries ("[Hicks", "[45 Front")
+STANDALONE = re.compile(r"^\s*\[\s*([^\[\]\s][^\[\]]*?)\s*$")    # a turnover on a line of its own
 FRACTIONS = {"½": "1/2", "¼": "1/4", "¾": "3/4", "⅓": "1/3", "⅔": "2/3", "⅛": "1/8", "⅜": "3/8",
              "⅝": "5/8", "⅞": "7/8"}
 FRACTION_RX = re.compile(r"(\d)\s*([" + "".join(FRACTIONS) + r"])")
@@ -410,6 +422,21 @@ def turnovers(lines: list) -> list:
     up as the gold does ("Skill-" + "[man" -> "Skillman")."""
     out = list(lines)
     for i in range(1, len(out)):
+        s = STANDALONE.match(out[i] or "")
+        if s:
+            # LightOn sometimes writes the turnover as a line of its own, after the entry it
+            # completes ("…merchant, 75 Washington, store 10" / "[Cedar-street New-York"; ~300
+            # lines in the full run, mostly 1840s volumes). It goes to the nearest line above,
+            # or a word's second half to the nearest hyphenated line up to 3 above ("[pect").
+            frag, above = s.group(1), [j for j in range(i - 1, -1, -1) if (out[j] or "").strip()]
+            target = above[0] if above else None
+            if frag[0].islower() and frag.isalpha():
+                target = next((j for j in above[:3] if out[j].rstrip()[-1] in HYPHENS), target)
+            if target is not None:
+                prev = out[target].rstrip()
+                out[target] = prev[:-1] + frag if prev[-1] in HYPHENS else f"{prev} {frag}"
+                out[i] = ""
+            continue
         m = TURNOVER.search(out[i] or "")
         if not m or len(m.group(1).split()) > TURNOVER_MAX or not out[i][:m.start()].strip():
             continue
@@ -1019,6 +1046,18 @@ def _self_test() -> int:
     assert not mark_of([w("E", 48), w("Hess")], 48, "Hess"), "a full-height E is a letter"
     rows = pair_tile([[w("€Hess"), w("George,"), w("capmaker,")]], ["Hess George, capmaker"], 48)
     assert rows[0]["text"] == "E Hess George, capmaker" and rows[0]["mark"]
+    # LightOn's glyph for the mark, with or without tesseract's: one "E", never "E £Ford"
+    for tess_first in ("EFord", "Ford"):
+        rows = pair_tile([[w(tess_first), w("George,"), w("engineer")]], ["£Ford George, engineer"], 48)
+        assert rows[0]["text"] == "E Ford George, engineer" and rows[0]["mark"], rows[0]
+    rows = pair_tile([[w("FORSTER"), w("JAMES,")]], ["=FORSTER JAMES, feathers"], 48)
+    assert rows[0]["text"].startswith("=FORSTER") and not rows[0]["mark"], "not before capitals"
+    assert turnovers(["Napier John, merchant, 75 Washington, store 10", "[Cedar-street New-York",
+                      "Nassau Whiting Factory"]) == [
+        "Napier John, merchant, 75 Washington, store 10 Cedar-street New-York", "",
+        "Nassau Whiting Factory"]
+    assert turnovers(["Smith J, 27 Pros-", "Antonio, cigars, 15 High", "[pect"]) == [
+        "Smith J, 27 Prospect", "Antonio, cigars, 15 High", ""]
     assert canon("EHess John") == "E Hess John" and canon("Ebert John") == "Ebert John"
     assert canon("© Hess John") == "E Hess John"
     assert canon("sBowron Josiah") == "E Bowron Josiah" and canon(".EWittsdeldt M") == "E Wittsdeldt M"

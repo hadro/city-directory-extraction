@@ -251,6 +251,7 @@ original under `data/_gold_backup/` and names the image that settled it.
 | 2026-10-14 | trow1913 · line 13 (`raw_line` only) | `Arnold neckties 110 5th av h19 Pinehurst av` | `-Arnold neckties …` | as line 2; `name` read `-Arnold` |
 | 2026-10-14 | trow1913 · line 15 (`raw_line` only) | `Arthur F, Mfg Co novelties 309 Bway R801` | `-Arthur F, Mfg Co …` | as line 2; `name` read `-Arthur F, Mfg Co` |
 | 2026-10-14 | trow1913 · line 16 (`raw_line` only) | `Arthur J clerk h463 W 166th` | `-Arthur J clerk …` | as line 2; `name` read `-Arthur J` |
+| 2026-10-14 | trow1913 · line 16 (`raw_line`, `address`) | `-Arthur J clerk h463 W 166th` / `h463 W 166th` | `-Arthur J clerk h463 W166th` / `h463 W166th` | the page prints `W166th`, fused, as this set writes `W149th` and `W65th` elsewhere. Seen while checking the dash above; the backup holds the row as it was before both fixes |
 | 2026-10-14 | trow1913 · line 19 (`raw_line` only) | `Benj B oils 170 W65th` | `-Benj B oils 170 W65th` | as line 2; `name` read `-Benj B` |
 | 2026-10-14 | trow1913 · line 30 (`name` only) | `Chas H` | `-Chas H` | the reverse drift: `raw_line` and the page (y ≈ 794) print `-Chas H`. Found by the new `validate_gold` check below |
 | 2026-10-14 | trow1913 · line 67 (`name` only) | `Fred L` | `-Fred L` | `raw_line` prints `-Fred L`. On the image the dash is all but cut off by the left edge here (y ≈ 1520, a sliver at x = 0), as on every "Fred" line: the run is dittoed, so the printed page has it, but no OCR engine can read it from this crop |

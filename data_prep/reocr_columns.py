@@ -11,7 +11,7 @@ lines for the hybrid (docs/PIPELINE.md #27).
     python3 data_prep/reocr_columns.py stage --tiles halves [--max-side N]  # -> data/reocr_halves/
     python3 data_prep/reocr_columns.py stage --tiles halves --sample 2 --out data/reocr_screen
     python3 data_prep/reocr_columns.py bench-tasks      # the first Torch task: bench + screen pages
-    tar cf cde-churro-columns.tar data/reocr_columns             # ship (JPEGs: no gzip); hpc/38_churro.sbatch
+    COPYFILE_DISABLE=1 tar cf cde-churro-columns.tar data/reocr_columns  # ship (JPEGs: no gzip; no ._ files)
     python3 data_prep/reocr_columns.py import                    # -> data/reocr/<id>.churro.jsonl
     python3 data_prep/reocr_columns.py --self-test
 

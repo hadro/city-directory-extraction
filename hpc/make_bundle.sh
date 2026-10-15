@@ -77,7 +77,8 @@ else
 fi
 
 echo "=== packing ==="
-( cd "$(dirname "$STAGE")" && tar czf "$ROOT/$NAME.tar.gz" "$NAME" )
+# COPYFILE_DISABLE: macOS tar otherwise ships a ._ AppleDouble file per file with xattrs
+( cd "$(dirname "$STAGE")" && COPYFILE_DISABLE=1 tar czf "$ROOT/$NAME.tar.gz" "$NAME" )
 rm -rf "$(dirname "$STAGE")"
 
 echo

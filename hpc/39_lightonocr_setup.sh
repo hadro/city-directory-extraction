@@ -37,6 +37,13 @@ if [ ! -x "$UV" ]; then
   curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="$PROJECT/bin" UV_NO_MODIFY_PATH=1 sh
   UV="$PROJECT/bin/uv"
 fi
+# The job looks for uv at $PROJECT/bin/uv when Slurm does not carry PATH into it, so a uv found
+# elsewhere on PATH is linked there (NYU, 2026-10-15: theirs lives in /scratch/$USER/bin).
+if [ ! -e "$PROJECT/bin/uv" ]; then
+  mkdir -p "$PROJECT/bin"
+  ln -s "$UV" "$PROJECT/bin/uv"
+  echo "=== linked $PROJECT/bin/uv -> $UV, where the job looks when its PATH has no uv"
+fi
 echo "=== uv: $UV ($("$UV" --version))"
 
 echo "=== building the job environment (transformers 5.19, torch 2.14; several GB, once)"

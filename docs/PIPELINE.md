@@ -315,7 +315,7 @@ PYTORCH_ENABLE_MPS_FALLBACK=1 PYTHONPATH=<tf5-dir> <python> eval/qwen_predict.py
 ```bash
 python3 hpc/prep_volumes.py --corpus --plan                  # sizes from sidecar counts, no writes
 python3 hpc/prep_volumes.py --corpus --chunk 20000 --out data/volumes_corpus
-tar -czf cde-volumes-corpus.tar.gz -s ',^data/volumes_corpus,data/volumes,' data/volumes_corpus
+COPYFILE_DISABLE=1 tar -czf cde-volumes-corpus.tar.gz -s ',^data/volumes_corpus,data/volumes,' data/volumes_corpus
 #   on Torch, in $PROJECT: tar xzf it, source hpc/env.sh, then run each printed submit line
 python3 postprocess/copy_guard.py --volumes data/volumes_corpus --run 4b-100k
 python3 postprocess/assemble_records.py --root data/volumes_corpus --run 4b-100k+guard
@@ -1379,6 +1379,16 @@ greedy's loop rate on the unseen volumes before the 7,947 pages run.
 **When the answers come back** (slug `lightonocr-3-1b-greedy-torch`):
 1. Task 0: `reocr_pair.py bench <slug> --kind halves`, `post <slug>-halves-paired`, then `score`
    it beside `lightonocr-3-1b-halves-paired-post` (the M2's reading) and Churro.
+   **Done 2026-10-15** (job 19897894_0, an L40S, 326 tiles in 25 minutes):
+   - Scores: 93.6% of gold entries exact and 100% close; 75.5% of book-scan entries exact. That
+     is one gold line better than the M2's 93.4%, none worse.
+   - Outcomes: 0 failed, 0 empty. The one loop (0047 leaf 90) was rescued by the bleed retry.
+     Table mode came up on 10 of 138 bench tiles and 4 of 188 screen tiles.
+   - Screen pages: 278 dittos on 1912 against the M2's 280, and the gate admits "—".
+   - Cost: median 4.05 s a tile, so the 20,712 tiles take about 28 L40S-hours, 24 minutes a task.
+   - Two packaging gaps NYU worked around, now fixed: the setup script links `$PROJECT/bin/uv`,
+     where the job looks for uv when its PATH has none; and tars made on the Mac take
+     `COPYFILE_DISABLE=1`, since the tiles tar carried a `._` AppleDouble file per tile.
 2. After the full run: `reocr_pair.py dump <slug> --root data/reocr_halves` writes each volume's
    word dump, keeping IA's as `<id>_words.ia.jsonl.gz`. Then `survey_harvest.py --rederive --ids
    <the 39>` and `survey_derive.py` re-read the volumes.

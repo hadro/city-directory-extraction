@@ -12,7 +12,7 @@ Stage whole volumes for a Torch prediction run (hpc/35_volumes.sbatch). Runs on 
     python3 hpc/prep_volumes.py --corpus --plan                         # sizes only, no writes
     python3 hpc/prep_volumes.py --corpus --chunk 20000 --out data/volumes_corpus
     python3 hpc/prep_volumes.py --corpus --tier first --plan             # one tier (run_tiers.py)
-    tar czf cde-volumes.tar.gz data/volumes          # ship next to the bundle
+    COPYFILE_DISABLE=1 tar czf cde-volumes.tar.gz data/volumes   # ship next to the bundle
     python3 hpc/prep_volumes.py --self-test
 
 `--corpus` stages the decided run set: every surveyed volume with listing-scoped lines that is

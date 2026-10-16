@@ -528,6 +528,7 @@ LOOP_LOOK = 0.02        # a volume is worth a look past this share of looped til
 TABLE_LOOK = 0.15       # ...or this share in table mode (twice the bench's 10 of 138)
 TALL = 1.8              # a word this many times the line's median height is clamped to the line
 MARGIN_REACH = 8        # an entry's first word this many characters in from the margin is moved to it
+MARGIN_SPAN = 12        # ...the margin there read off the entry starts within this many line heights
 CONF_MODEL = 90         # a word the vision model read: well above CRUMB_CONF (5), where a word
 CONF_BLEED = 30         # ...with an odd character is taken for banner crumbs; a bleed_retry tile's
                         # words are less sure (house numbers off by a digit on 0047 leaf 90)
@@ -694,9 +695,15 @@ def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
     (Trow 1917 leaf 688: "Emmons Addison mgr h3056, 3d av" + '" Alice L tchr P S h347 W23d', and
     a run of three `"` entries joined into one wide line the filters then dropped as a banner).
     So an entry start, by the model's reading, whose first word tesseract never read, within
-    MARGIN_REACH characters of its column's margin (the 20th percentile of where its entry
-    starts begin), begins at the margin. A line whose first word tesseract read keeps its place,
-    so a real run-over still joins, even one the model wrote as a line of its own."""
+    MARGIN_REACH characters of its column's margin, begins at the margin. A line whose first word
+    tesseract read keeps its place, so a real run-over still joins, even one the model wrote as a
+    line of its own.
+
+    The margin is local: the 20th percentile of where the column's entry starts begin, among those
+    within MARGIN_SPAN line heights of the line. A column's edge drifts down a skewed page (Trow
+    1917 leaf 688, a camera frame: x 196 at the top, 122 at the foot), and one margin for the
+    whole column (146) put the top's pulled starts 50 px into blank paper, left of the starts
+    tesseract read at 196, which then looked indented and were joined on as run-overs."""
     rows, median_h, char_w = page_rows(rec, tiles, answers)
     texts = post([r["text"] for r in rows])
     built = []
@@ -725,14 +732,17 @@ def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
     begins = collections.defaultdict(list)
     for r, ws in built:
         if ws and r.get("start") and r["source"] != "tesseract":
-            begins[r["x0"]].append(min(w[0] for w in ws))
-    margin = {x0: sorted(v)[len(v) // 5] for x0, v in begins.items() if len(v) >= 5}
+            begins[r["x0"]].append((min(w[1] for w in ws), min(w[0] for w in ws)))
+
+    def margin(x0, top):
+        near = sorted(x for y, x in begins.get(x0, ()) if abs(y - top) <= MARGIN_SPAN * median_h)
+        return near[len(near) // 5] if len(near) >= 5 else None
     lines, sources = [], []
     for r, ws in built:
         if not ws:
             continue
-        m = margin.get(r["x0"])
-        if m is not None and r.get("start") and r["source"] != "tesseract":
+        m = margin(r["x0"], min(w[1] for w in ws)) if r.get("start") and r["source"] != "tesseract" else None
+        if m is not None:
             first = min(range(len(ws)), key=lambda q: ws[q][0])
             # only where tesseract missed the line's opening: a first word it read sits where the
             # print starts, and a run-over LightOn wrote as a line of its own ("Brunt",

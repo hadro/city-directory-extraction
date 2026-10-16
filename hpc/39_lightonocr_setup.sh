@@ -11,6 +11,7 @@
 # Everything goes under $PROJECT on /scratch: /home on Torch allows only 30K files, and torch
 # alone exceeds it. hpc/39_lightonocr.sbatch sets the same UV_* paths and runs uv offline.
 # MODEL=lightonai/LightOnOCR-3-4B bash hpc/39_lightonocr_setup.sh also fetches the 4B.
+# ENGINE=vllm bash hpc/39_lightonocr_setup.sh also builds the batched runner's environment.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -58,6 +59,24 @@ echo "=== checking the job can start with no network, as on a compute node"
 UV_OFFLINE=1 HF_HUB_OFFLINE=1 "$UV" run hpc/lightonocr_tiles.py --help > /dev/null
 echo "    ok"
 
+if [ "${ENGINE:-hf}" = vllm ]; then
+  # the batched runner's own environment (vLLM pins its own torch); built here, where there is
+  # network, and checked offline as the compute node will run it
+  echo "=== building the vLLM environment (hpc/lightonocr_vllm.py; several GB, once)"
+  "$UV" run hpc/lightonocr_vllm.py --help > /dev/null
+  UV_OFFLINE=1 HF_HUB_OFFLINE=1 "$UV" run hpc/lightonocr_vllm.py --help > /dev/null
+  echo "    ok"
+fi
+
+if [ "${ENGINE:-hf}" = vllm ]; then
+cat <<EOF
+
+Ready (vLLM). GPU type for this run: $GPU_TYPE (export GPU_TYPE=l40s before 'source hpc/env.sh' to change).
+First the parity run: task 0's tiles read by vLLM, to be scored beside the per-tile run's answers:
+    sbatch \$(slurm_gpu_args) --export=ALL,ENGINE=vllm,TASKS=data/reocr_halves/bench_tasks.txt --array=0 hpc/39_lightonocr.sbatch
+Then, once Josh has the parity scores back, a batch with ENGINE=vllm in its --export.
+EOF
+else
 cat <<EOF
 
 Ready. GPU type for this run: $GPU_TYPE (export GPU_TYPE=l40s before 'source hpc/env.sh' to change).
@@ -66,3 +85,4 @@ First the bench tiles, to measure seconds per tile and re-score the bench under 
 Then, once Josh has the bench scores back, the whole run:
     sbatch \$(slurm_gpu_args) --array=0-$((N - 1)) hpc/39_lightonocr.sbatch
 EOF
+fi

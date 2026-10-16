@@ -50,6 +50,13 @@ SHARD=$(sed -n "$((i + 1))p" "$TASKS")
 
 echo "=== task $i | $SHARD | node $(hostname) | $(date) ==="
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
-"$UV" run hpc/lightonocr_tiles.py "$SHARD" --model "${MODEL:-lightonai/LightOnOCR-3-1B}" \
-    --temperature "${TEMPERATURE:-0}" --tag torch
+# ENGINE=vllm decodes whole batches (hpc/lightonocr_vllm.py); its first run re-reads task 0 with
+# --tag vllm, scored beside the per-tile run's answers before any batch is trusted
+if [ "${ENGINE:-hf}" = vllm ]; then
+    "$UV" run hpc/lightonocr_vllm.py "$SHARD" --model "${MODEL:-lightonai/LightOnOCR-3-1B}" \
+        --temperature "${TEMPERATURE:-0}" --tag "${TAG:-vllm}"
+else
+    "$UV" run hpc/lightonocr_tiles.py "$SHARD" --model "${MODEL:-lightonai/LightOnOCR-3-1B}" \
+        --temperature "${TEMPERATURE:-0}" --tag torch
+fi
 echo "=== done $(date) ==="

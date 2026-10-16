@@ -1765,6 +1765,20 @@ joins to 11,916, and its `short` drops fall 9,962 → 7,446: those were the orph
 40,710 lines carry the flag over 7,917 pages, 9 of which lost it to a column split and joined on
 the indent as before. **No volume's listing bounds or printed-page claims moved.**
 
+**Against the printed name count** — the one external truth available for these volumes without
+a GPU. Two of the 39 state their own count:
+
+| | printed names | scoped lines before | after |
+|---|---|---|---|
+| 0039 | 50,000 | 54,348 (**1.087** per name) | 51,892 (**1.038**) |
+| 0046 | 7,345 | 6,083 (0.828) | 6,058 (0.825) |
+
+0039's excess over its printed count falls by 2,456 lines — the whole of its reduction, so
+essentially every join there removed a line that was never an entry. It lands beside Doggett
+1845's 1.004–1.038. 0046 *under*-counts by 17%, an OCR recall problem this change cannot touch,
+and with 200 flagged run-overs it barely moves. The round 50,000 is a publisher's figure, so
+read the direction, not the third digit.
+
 **Done when:**
 - ~~No pilot set regresses.~~ None did, and six rows became exact.
 - ~~The 39 volumes are imported again.~~ Above.

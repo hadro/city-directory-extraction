@@ -288,6 +288,10 @@ DASH_W = 0.15           # a dash token standing alone is evidence if at least th
 DASH_FLAT = 1.5         # page's median word height wide and this many times wider than tall
 LONE_LETTER = re.compile(r"^[A-Z]\.?$")      # a section's letter ("D"), never an entry
 AMPERSAND = re.compile(r"^&\s+\S")            # "& Oest grocers": a firm under the surname above
+QUOTE_MARK = re.compile(r"^(?:[\"“”„«»]|''|,,)")  # a printed `"` ditto as tesseract reads it
+QUOTE_ONLY = re.compile(r"^(?:[\"“”„«»]+|''|,,)$")   # ...as a token of its own
+QUOTE_DITTO = re.compile(r"^\s*[\"“”„]\s+[A-Z]")      # LightOn's own `" Chas P r10 W43d`
+QUOTE_SHARE = 0.2
 _GIVEN = None
 
 
@@ -361,9 +365,34 @@ def dittos(rows: list, median_h: float = 0.0) -> list:
 
     def tdash(r):
         return tlead(r) is not None
+
+    def tquote_token(r):
+        """Tesseract's first token is a quote mark standing alone, as a `"` ditto reads (Trow
+        and Polk from the 1910s: `"`, `«`, `»`, `|"`), not glued to a word as a quotation is."""
+        ws = sorted(r["words"], key=lambda w: w[0]) if r["words"] else []
+        return bool(ws) and QUOTE_ONLY.match(ws[0][5].lstrip("|")) is not None
+
+    def mquote(r):
+        """LightOn wrote the `"` ditto itself: a quote mark, a space, a capitalised word."""
+        return QUOTE_DITTO.match(r["text"]) is not None
+    # quote marks are this page's ditto only where they lead a fifth of its entries: 0.49 of
+    # Trow 1917 leaf 688's lines, under 0.1 on 7,840 of the 7,926 re-read pages, where a quote
+    # opens an advertisement's testimonial (0039 leaf 286) or is the small E misread (0040)
+    quote_page = sum(tquote_token(r) or mquote(r) for r in starts) >= max(5, QUOTE_SHARE * len(starts))
+
+    def tquote(r):
+        return quote_page and tquote_token(r)
+
+    def tmark(r):
+        return tdash(r) or tquote(r)
     bulleted = [r for r in starts if r.get("bullet")]
-    bullets_mean_dashes = (len(bulleted) < 5
-                           or sum(tdash(r) for r in bulleted) >= BULLET_AGREE * len(bulleted))
+    bullets_mean_marks = (len(bulleted) < 5
+                          or sum(tmark(r) for r in bulleted) >= BULLET_AGREE * len(bulleted))
+    # the page's own ditto mark, written back as it prints: `"` on a quote page (Trow 1917 leaf
+    # 688: LightOn bulleted 281 dittos and wrote 66 as `"`; tesseract read `"`, «, », |"), the
+    # dash elsewhere (1912 Brooklyn)
+    dashes = sum(tdash(r) or DASH.match(r["text"].lstrip()) is not None for r in starts)
+    glyph = '"' if quote_page and sum(tquote(r) or mquote(r) for r in starts) > dashes else "—"
     given = given_names()
     head = None
     for r in starts:
@@ -375,28 +404,29 @@ def dittos(rows: list, median_h: float = 0.0) -> list:
             # LightOn reads without its dash. On evidence the dash goes back; left bare, the
             # survey's gate admitted "&" itself as the ditto (424 lines), turning "[Surname] &
             # Oest" into "[Surname] Oest", the firm-name loss hadro rejected "&" for in Trow 1915
-            r["ditto"] = tdash(r) or bool(bullets_mean_dashes and r.get("bullet"))
+            r["ditto"] = tmark(r) or bool(bullets_mean_marks and r.get("bullet"))
         elif not k or DASH.match(body) or body.lstrip()[:1].islower():
             continue                 # (a dash the model wrote itself stays as it wrote it; a
                                      # lowercase start is a run-over, "h. Rutledge n. Bedford av")
         caps = len(k) > 1 and body.split()[0].isupper()
-        evidence = not caps and (tdash(r) or bool(bullets_mean_dashes and r.get("bullet")))
+        evidence = not caps and (tmark(r) or bool(bullets_mean_marks and r.get("bullet")))
         if AMPERSAND.match(body):
             pass                     # decided above; a firm never moves the chain
         elif LONE_LETTER.match(body.strip()):
             # an initial under a dash (LightOn's "- G" for "—G A h", tesseract's "—G"), or a
             # section's letter, which a speck beside it ("- D", 0003 leaf 23) does not make a
             # ditto; the chain stays either way
-            r["ditto"] = not caps and (tlead(r) == "glued" or bool(bullets_mean_dashes and r.get("bullet")))
+            r["ditto"] = not caps and (tlead(r) == "glued" or tquote(r)
+                                       or bool(bullets_mean_marks and r.get("bullet")))
         else:
             follows = head is not None and k >= head and (
                 k[:2] == head[:2] or (k[0] == head[0] and len(k) > 1 and k not in given))
             # a bullet alone against a word tesseract read as it is, with nothing before it, and
             # no given name: a head the page sets out of order ("Smeloft" after "Smeltzer")
-            clean = (evidence and not tdash(r) and bool(r["words"]) and len(k) > 1 and k not in given
+            clean = (evidence and not tmark(r) and bool(r["words"]) and len(k) > 1 and k not in given
                      and sorted(r["words"], key=lambda w: w[0])[0][5] == body.split()[0])
             if evidence and not clean:
-                if follows or (head is None and not tdash(r)):
+                if follows or (head is None and not tmark(r)):
                     head = k         # a head after all (bulleted Smalley; a page's first line)
                 else:
                     r["ditto"] = True
@@ -406,8 +436,8 @@ def dittos(rows: list, median_h: float = 0.0) -> list:
                 r["ambiguous"] = True    # a given name with no dash: a ditto both readings
                                          # missed, or a head; kept a head, the chain stays put
         if r["ditto"]:
-            r["text"] = (f"E — {r['text'][2:]}" if r["text"].startswith("E ") and r.get("mark")
-                         else f"— {r['text']}")
+            r["text"] = (f"E {glyph} {r['text'][2:]}" if r["text"].startswith("E ") and r.get("mark")
+                         else f"{glyph} {r['text']}")
     return rows
 
 

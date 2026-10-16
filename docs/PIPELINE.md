@@ -1743,6 +1743,30 @@ line on leaf 205:
   split entries before `pair_tile` spreads them over printed lines.** The bench sizes it at 101
   of 3,174 entries, and `joined()` already performs exactly that merge when a reference is there
   to guide it. Doing it without a reference needs its own design and its own gold.
+
+  **A first attempt at that was built and REJECTED on 2026-10-16. Read this before trying
+  again.** The rule: merge when the line ends where an entry cannot end (a connector, a bare
+  house number, a residence marker, a direction, a hyphen) or the next begins where one cannot
+  begin (a residence marker, a street type, lower case). Against the bench's hand gold it looked
+  excellent — **29 of 30 splits found, 0 false merges in 456 whole entries.** On the pilot panel
+  it was a net loss, and the way it failed is the lesson:
+  - Rows delivered fell **2,062 → 2,053**: nine gold rows vanished, glued into a neighbour.
+  - boyd1890 96.0 → 94.7, rode1851 98.1 → 96.2, Smith 1855 92.4 → 91.8.
+  - Boyd's row 13 lost its surname to the entry above: "Harding James, driver, h 161 Broadway"
+    came out "James, driver, h 161 Broadway".
+  - Lain 1897 cascaded. Its lines trail an E-mark scrap (`…h 399 17th, " E`), the tail test read
+    that final `E` as a direction, and each merge pulled in the next entry: five gold rows gone,
+    one replaced by a different person entirely.
+  - hopehenderson1856, the volume it was built for, did not move — the pilot copies 0035's
+    production lines (`TORCH_READ`), so that set never tested it.
+
+  Three things to take from it. The bench's 532 hand-gold lines are too few and too clean to
+  clear a merge rule — 0 of 456 there became 9 lost rows on 2,062. **A false merge costs a whole
+  entry and cascades**, while a missed join costs a tail, so the rule must be far more
+  conservative than its recall suggests. And the obvious guard is the one that was missing:
+  **never merge when the next line opens with a plausible surname** (capitalised, alphabetic,
+  not a street type) — that alone would have blocked Boyd and Lain. The scratch rule is not in
+  the repo; the measurement is here so the next attempt starts from it.
 - **One** ("Hagarman Barnes R., clothing," + "102 Fulton,") is the wide-gap split already listed
   under "Still open": the two halves sit side by side on one printed row and fail `join_wraps`'
   horizontal-overlap test, so no rule reaches them.

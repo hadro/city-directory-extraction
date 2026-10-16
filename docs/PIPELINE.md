@@ -1511,9 +1511,34 @@ What a book-scan batch needed, done 2026-10-16 (hadro asked for all three):
    `ENGINE=vllm`; setup with `ENGINE=vllm bash hpc/39_lightonocr_setup.sh` (vllm 0.30.0).
    - Unchanged from the per-tile runner: tiles, resize, prompt, greedy decoding, cap, loop
      handling and output files, many tiles at a time.
-   - Not yet run on a GPU. Its first Torch job is a parity run: task 0 with `ENGINE=vllm`,
-     scored beside `lightonocr-3-1b-greedy-torch`, because batched arithmetic can flip a greedy
-     near-tie. Only then is a batch trusted, and its tiles per second known.
+   - **Parity run DONE 2026-10-16** (NYU job 20083721_0, L40S, the same card as the `-torch`
+     task 0; answers under slug `lightonocr-3-1b-greedy-vllm`). **Batched decoding is trusted.**
+
+     | the same 326 tiles | per-tile (`-torch`) | vLLM |
+     |---|---|---|
+     | gold entries exact (532 lines) | **93.6%** | **93.6%** |
+     | book entries exact (3,174) | 74.6% | 74.4% |
+     | E marks found / written | 173/210, 183 | 173/210, 183 |
+     | decode | 1,504 s (4.61 s a tile) | **189 s (0.58 s)** |
+     | failures, loops, bleed retries | 1 loop, 1 retry | 0, 0 |
+
+     Greedy is **not** bit-reproducible across the two: 105 of 326 tiles differ. But the
+     differences are a wash — on gold, 5 lines right where the other is wrong and 5 the reverse,
+     and 354 changed lines one way against 364 the other. Most are a straight vs curly
+     apostrophe or a comma; a few are real misreads in both directions ("26 Grafton" /
+     "26 G. Smith"). A LaTeX-style fraction (`165$frac{1}{2}$`, which `fractions()` does not
+     catch) appears once under `-torch` and twice under `-vllm`, so it is a model quirk, not an
+     engine one.
+   - **A caveat NYU raised, and it is real.** vllm 0.30.0 declares `transformers>=5.10.4` with no
+     upper bound; its `pixtral.py` imports `PixtralRotaryEmbedding`, renamed by transformers 5.19,
+     so the first attempt died before the engine started. They pinned `transformers==5.14.1` (5.19
+     would not have worked). So `-vllm` ran under 5.14.1 and `-torch` under 5.19.0, and the
+     comparison above is engine *and* library. Since the two agree to within noise, the
+     confound does not change the conclusion — it would only matter if they had disagreed.
+   - **Cost.** At 0.58 s a tile the 20,712-tile corpus is ~3.3 GPU-hours of decode against the
+     28.9 the `-torch` run cost. Engine init is ~199 s per task and fixed, so the 70-shard layout
+     adds ~3.9 h of it: **~7.2 GPU-hours as sharded, ~3.9 at ten shards of ~2,000 tiles.**
+     Re-shard before any further re-OCR.
 
 **End to end: the 4B on the LightOn panel (NYU job 20035169, 2026-10-16).** NYU ran `4b-100k` over
 the pilot panel as staged on 2026-10-15: 17 sets, 2,029 rows, built with b5495c9's import.

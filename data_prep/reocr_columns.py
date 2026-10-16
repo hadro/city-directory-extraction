@@ -216,7 +216,9 @@ def volume_columns(pages: list, workers: int = 4) -> dict:
         for vol, n in pool.imap_unordered(_page_count, mine, chunksize=8):
             if n:
                 votes[vol][n] += 1
-    return {vol: c.most_common(1)[0][0] for vol, c in votes.items()}
+    # a tie goes to the larger count: a page misses a gutter more often than it invents one,
+    # and a forced gutter through text is refused page by page anyway
+    return {vol: max(c.items(), key=lambda kv: (kv[1], kv[0]))[0] for vol, c in votes.items()}
 
 
 def stage(args) -> int:

@@ -526,12 +526,14 @@ def post_run(args) -> int:
 
 LOOP_LOOK = 0.02        # a volume is worth a look past this share of looped tiles (task 0: 1 in 326)
 TABLE_LOOK = 0.15       # ...or this share in table mode (twice the bench's 10 of 138)
+TALL = 1.8              # a word this many times the line's median height is clamped to the line
+MARGIN_REACH = 8        # an entry's first word this many characters in from the margin is moved to it
 CONF_MODEL = 90         # a word the vision model read: well above CRUMB_CONF (5), where a word
 CONF_BLEED = 30         # ...with an odd character is taken for banner crumbs; a bleed_retry tile's
                         # words are less sure (house numbers off by a digit on 0047 leaf 90)
 
 
-def respell(words: list, text: str, conf: int) -> list:
+def respell(words: list, text: str, conf: int, limit: float = 0.0) -> list:
     """Tesseract's words for one printed line, spelled as `text` (the model's piece of the line,
     after the post-passes). Each tesseract word is paired, in order, with the model token most
     like it (similarity >= 0.5; the in-order pairing of greatest total similarity, so "capmker"
@@ -561,13 +563,20 @@ def respell(words: list, text: str, conf: int) -> list:
             i += 1
         else:
             j += 1
-    y0, y1 = min(w[1] for w in ws), max(w[3] for w in ws)
+    # a token far taller than the line's words (a blot, or a rule tesseract read with the line:
+    # "mr Walter 721" Minette da -" stood three rows tall on Trow 1917 leaf 688) takes the line's
+    # height, or the survey drops the whole line as large type
+    hs = sorted(w[3] - w[1] for w in ws)
+    h_mid = hs[len(hs) // 2]
+    fit = [w for w in ws if w[3] - w[1] <= TALL * h_mid] or ws
+    y0, y1 = min(w[1] for w in fit), max(w[3] for w in fit)
     cw = sorted((w[2] - w[0]) / max(len(w[5]), 1) for w in ws)[len(ws) // 2]
     out, j = [], 0
     while j < m:
         if j in pair:
             w = ws[pair[j]]
-            out.append([*w[:4], max(w[4], conf), toks[j]])
+            box = w[:4] if w[3] - w[1] <= TALL * h_mid else [w[0], y0, w[2], y1]
+            out.append([*box, max(w[4], conf), toks[j]])
             j += 1
             continue
         k = j
@@ -579,6 +588,10 @@ def respell(words: list, text: str, conf: int) -> list:
         nxt = ws[pair[k]] if k < m else None
         left = prev[2] + cw / 2 if prev else (nxt[0] - need if nxt else ws[0][0])
         right = nxt[0] - cw / 2 if nxt else max(left + need, ws[-1][2] if not prev else left + need)
+        if limit and not nxt and right > limit:
+            # words tesseract never read, run on past its last: kept inside the column's tile,
+            # or the line reads wider than the column and the survey drops it as a banner
+            right = max(limit, left + 4 * len(run))
         right = max(right, left + 4)
         total, x = sum(len(t) + 1 for t in run), left
         for t in run:
@@ -660,12 +673,12 @@ def page_rows(rec: dict, tiles: dict, answers: dict) -> tuple:
         got = answers.get(name)
         if got is None:
             rows += [{"text": " ".join(w[5] for w in ws), "words": ws, "source": "tesseract",
-                      "x0": tiles[name][0]} for ws in tess]
+                      "x0": tiles[name][0], "x1": tiles[name][2]} for ws in tess]
             continue
         model, bleed = got
         for r in pair_tile(tess, model, median_h):
             r["source"] = "bleed" if bleed and r["source"] != "tesseract" else r["source"]
-            r["x0"] = tiles[name][0]
+            r["x0"], r["x1"] = tiles[name][0], tiles[name][2]
             rows.append(r)
     return dittos(rows, median_h), median_h, char_w
 
@@ -673,24 +686,58 @@ def page_rows(rec: dict, tiles: dict, answers: dict) -> tuple:
 def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
     """One re-OCR'd page as a word-dump record's lines: (lines, sources). The page's rows
     (page_rows) put through the post-passes in reading order, then every line's text spread over
-    its tesseract words (respell), or given boxes where tesseract never saw it (synth_line)."""
+    its tesseract words (respell), or given boxes where tesseract never saw it (synth_line).
+
+    An entry's first printed line sits at its column's margin. Where tesseract missed the line's
+    opening (a `"` ditto, a first name), its boxes begin at the first word it did read, and the
+    survey's wrap-joiner takes that indent for a run-over and glues the entry onto the one above
+    (Trow 1917 leaf 688: "Emmons Addison mgr h3056, 3d av" + '" Alice L tchr P S h347 W23d', and
+    a run of three `"` entries joined into one wide line the filters then dropped as a banner).
+    So an entry start, by the model's reading, within MARGIN_REACH characters of its column's
+    margin (the 20th percentile of where its entry starts begin) begins at the margin. A
+    continuation line keeps tesseract's indent, so a real run-over still joins."""
     rows, median_h, char_w = page_rows(rec, tiles, answers)
     texts = post([r["text"] for r in rows])
-    lines, sources = [], []
+    built = []
     for i, (r, text) in enumerate(zip(rows, texts)):
         conf = CONF_BLEED if r["source"] == "bleed" else CONF_MODEL
         if r["source"] == "tesseract":
             ws = respell(r["words"], text, 0) if text != r["text"] else r["words"]
         elif r["words"]:
-            ws = respell(r["words"], text, conf)
+            ws = respell(r["words"], text, conf, r.get("x1", 0))
+            # normal-width letters in boxes far taller than the page's lines: tesseract boxed
+            # several printed rows as one (Trow 1917 leaf 688: three lines ~70 px against 22),
+            # and the survey drops the line as large type. Large type is wide too, and is left
+            h = max(w[3] for w in ws) - min(w[1] for w in ws) if ws else 0
+            chars = sum(len(w[5]) for w in ws)
+            span = max(w[2] for w in ws) - min(w[0] for w in ws) if ws else 0
+            if h > TALL * median_h and chars and span / chars <= TALL * char_w:
+                mid_y = (max(w[3] for w in ws) + min(w[1] for w in ws)) / 2
+                y0, y1 = int(mid_y - median_h / 2), int(mid_y + median_h / 2)
+                ws = [[w[0], y0, w[2], y1, *w[4:]] for w in ws]
         else:
             above = next((_box(rows[q]["words"]) for q in range(i - 1, -1, -1) if rows[q]["words"]), None)
             below = next((_box(rows[q]["words"]) for q in range(i + 1, len(rows)) if rows[q]["words"]), None)
             ws = synth_line(text, above, below, r["x0"] + int(0.01 * rec["page_size"][0]), char_w,
                             int(median_h), conf)
-        if ws:
-            lines.append(ws)
-            sources.append(r["source"])
+        built.append((r, ws))
+    begins = collections.defaultdict(list)
+    for r, ws in built:
+        if ws and r.get("start") and r["source"] != "tesseract":
+            begins[r["x0"]].append(min(w[0] for w in ws))
+    margin = {x0: sorted(v)[len(v) // 5] for x0, v in begins.items() if len(v) >= 5}
+    lines, sources = [], []
+    for r, ws in built:
+        if not ws:
+            continue
+        m = margin.get(r["x0"])
+        if m is not None and r.get("start") and r["source"] != "tesseract":
+            first = min(range(len(ws)), key=lambda q: ws[q][0])
+            if m < ws[first][0] <= m + MARGIN_REACH * char_w:
+                ws = [list(w) for w in ws]
+                ws[first][0] = int(m)
+        lines.append(ws)
+        sources.append(r["source"])
     return lines, sources
 
 

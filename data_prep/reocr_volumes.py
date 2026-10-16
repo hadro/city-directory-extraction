@@ -508,6 +508,11 @@ def page_job(job):
     try:
         if not img_path.exists():
             fetch(ident, leaf, img_path)
+            # Trow 1915/1917's IIIF images are camera frames, a page turned +-90 degrees with the
+            # facing page's edge: stage the page IA's OCR read (iiif_frame.upright)
+            from iiif_frame import mismatched, upright
+            if ident in mismatched():
+                upright(ident, leaf, Image.open(img_path)).convert("RGB").save(img_path, quality=95)
         img = Image.open(img_path)
         lines = merge_words(tess_words(img, "sauvola"), tess_words(img, "contrast"))
         rec = {"leaf": leaf, "page_size": list(img.size),

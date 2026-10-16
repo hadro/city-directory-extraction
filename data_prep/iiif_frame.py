@@ -81,6 +81,34 @@ def pages(ident: str) -> dict:
     return out
 
 
+@functools.lru_cache(maxsize=8)
+def crop_sizes(ident: str) -> dict:
+    """leaf -> (crop width, crop height) from scandata's cropBox: the upright page's size."""
+    pages(ident)                                      # fetches and caches the scandata
+    text = gzip.decompress((CACHE / f"{ident}_scandata.xml.gz").read_bytes()).decode("utf-8", "replace")
+    out = {}
+    for num, body in re.findall(r'<page leafNum="(\d+)">(.*?)</page>', text, re.S):
+        crop = re.search(r"<cropBox>(.*?)</cropBox>", body, re.S)
+        if crop:
+            w, h = (re.search(rf"<{t}>\s*(\d+)", crop.group(1)) for t in ("w", "h"))
+            if w and h:
+                out[int(num)] = (int(w.group(1)), int(h.group(1)))
+    return out
+
+
+def upright(ident: str, leaf: int, img, size=None):
+    """The page as IA's own OCR saw it, from a camera frame: turned by scandata's rotateDegree
+    (PIL turns counter-clockwise, so by -rotateDegree: the -90 frames of Trow 1917 by +90,
+    checked by eye on leaf 688) and cut to its cropBox. `size` (the dump's page size) stands in
+    for a cropBox without one. On a volume IIIF serves upright, the image as it is."""
+    if ident not in mismatched():
+        return img
+    cx, cy, rot, _cw, _ch = pages(ident)[leaf]
+    turned = img.rotate(-rot, expand=True) if rot % 360 else img
+    w, h = crop_sizes(ident).get(leaf) or size or turned.size
+    return turned.crop((cx, cy, cx + w, cy + h))
+
+
 def to_camera(box, crop_x, crop_y, rot, cam_w, cam_h):
     """An upright-page box (x0, y0, x1, y1) -> ((x, y, w, h) on the camera image, the IIIF
     rotation that shows it upright)."""

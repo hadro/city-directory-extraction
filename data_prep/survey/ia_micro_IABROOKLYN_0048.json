@@ -332,8 +332,8 @@
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1854",
    "hocr_lines": 10985,
-   "wrap_joins": 411,
-   "candidates": 10574,
+   "wrap_joins": 431,
+   "candidates": 10554,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -345,6 +345,8 @@
     "trough_pairs": 30,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 106,
+   "cont_dropped_leaves": 1,
    "column_splits": {
     "lines": 12,
     "leaves": 1
@@ -354,13 +356,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 8433,
-   "keep_rate": 0.7975,
+   "kept": 8416,
+   "keep_rate": 0.7974,
    "dropped": {
-    "short": 975,
-    "allcaps": 606,
+    "short": 974,
+    "allcaps": 605,
     "banner": 374,
-    "bigtype": 171,
+    "bigtype": 170,
     "nonascii": 14,
     "pagenum": 1
    },
@@ -385,10 +387,10 @@
     24,
     40
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 828619,
+  "words_gz_bytes": 830008,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
@@ -396,7 +398,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 52,
   "end_leaf": 306,
   "first_letter": "C",
@@ -648,7 +650,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 315,
   "fitted_leaves": 109,
   "read_leaves": 64,
@@ -770,7 +772,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -839,7 +841,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0048_listing.jsonl.gz",
   "sections": [
    {
@@ -848,11 +850,11 @@
     "end_leaf": 306
    }
   ],
-  "kept": 7386,
+  "kept": 7369,
   "dropped": 1047,
-  "kept_share": 0.8758,
+  "kept_share": 0.8756,
   "kept_by_section": {
-   "listing": 7386
+   "listing": 7369
   }
  },
  "non_entry_pages": {
@@ -955,6 +957,7 @@
   "loop_truncated": 0,
   "table_mode": 2,
   "pages": 202,
+  "lines_runover": 106,
   "lines_model-only": 296,
   "lines_model": 8057,
   "lines_tesseract": 830,

@@ -361,8 +361,8 @@
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1851/52",
    "hocr_lines": 8723,
-   "wrap_joins": 464,
-   "candidates": 8259,
+   "wrap_joins": 475,
+   "candidates": 8248,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -374,6 +374,8 @@
     "trough_pairs": 62,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 155,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 8,
     "leaves": 1
@@ -383,12 +385,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 6193,
-   "keep_rate": 0.7498,
+   "kept": 6186,
+   "keep_rate": 0.75,
    "dropped": {
-    "short": 729,
-    "banner": 611,
-    "allcaps": 523,
+    "short": 728,
+    "banner": 609,
+    "allcaps": 522,
     "bigtype": 175,
     "nonascii": 22,
     "pagenum": 6
@@ -409,15 +411,15 @@
     50,
     152,
     26,
-    136,
     100,
     292,
+    136,
     135
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 712529,
+  "words_gz_bytes": 713613,
   "hocr_deleted": true,
   "elapsed_s": 7
  },
@@ -425,7 +427,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 36,
   "end_leaf": 211,
   "first_letter": "B",
@@ -670,7 +672,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 255,
   "fitted_leaves": 64,
   "read_leaves": 18,
@@ -704,7 +706,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "district",
@@ -769,7 +771,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0045_listing.jsonl.gz",
   "sections": [
    {
@@ -778,11 +780,11 @@
     "end_leaf": 211
    }
   ],
-  "kept": 4570,
+  "kept": 4563,
   "dropped": 1623,
-  "kept_share": 0.7379,
+  "kept_share": 0.7376,
   "kept_by_section": {
-   "listing": 4570
+   "listing": 4563
   }
  },
  "non_entry_pages": {
@@ -859,6 +861,7 @@
   "loop_truncated": 0,
   "table_mode": 13,
   "pages": 150,
+  "lines_runover": 155,
   "lines_model-only": 536,
   "lines_tesseract": 742,
   "lines_model": 4951,

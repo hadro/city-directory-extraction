@@ -325,8 +325,8 @@
    "publisher_tag_note": "no publisher in the catalog",
    "year_tag": "1860",
    "hocr_lines": 71185,
-   "wrap_joins": 1981,
-   "candidates": 69204,
+   "wrap_joins": 6612,
+   "candidates": 64573,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -338,6 +338,8 @@
     "trough_pairs": 316,
     "reason": "runover mode not isolated from the next-entry band"
    },
+   "model_runovers": 6265,
+   "cont_dropped_leaves": 1,
    "column_splits": {
     "lines": 35,
     "leaves": 2
@@ -347,13 +349,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 62213,
-   "keep_rate": 0.899,
+   "kept": 58368,
+   "keep_rate": 0.9039,
    "dropped": {
-    "short": 5236,
-    "allcaps": 786,
-    "banner": 486,
-    "bigtype": 456,
+    "short": 4474,
+    "allcaps": 778,
+    "banner": 475,
+    "bigtype": 451,
     "nonascii": 26,
     "pagenum": 1
    },
@@ -378,10 +380,10 @@
     541,
     632
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 5217707,
+  "words_gz_bytes": 5236785,
   "hocr_deleted": true,
   "elapsed_s": 20
  },
@@ -389,7 +391,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 15,
   "end_leaf": 532,
   "first_letter": "A",
@@ -649,7 +651,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 600,
   "fitted_leaves": 467,
   "read_leaves": 337,
@@ -755,7 +757,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -842,7 +844,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0042_listing.jsonl.gz",
   "sections": [
    {
@@ -851,11 +853,11 @@
     "end_leaf": 532
    }
   ],
-  "kept": 60901,
+  "kept": 57056,
   "dropped": 1312,
-  "kept_share": 0.9789,
+  "kept_share": 0.9775,
   "kept_by_section": {
-   "listing": 60901
+   "listing": 57056
   }
  },
  "non_entry_pages": {
@@ -1062,6 +1064,7 @@
   "loop_truncated": 1,
   "table_mode": 227,
   "pages": 492,
+  "lines_runover": 6272,
   "lines_model": 60313,
   "lines_model-only": 4237,
   "lines_tesseract": 4132,

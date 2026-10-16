@@ -345,8 +345,8 @@
    "publisher_tag_note": "'j. lain and company' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1859",
    "hocr_lines": 70708,
-   "wrap_joins": 3151,
-   "candidates": 67557,
+   "wrap_joins": 7304,
+   "candidates": 63404,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -358,6 +358,8 @@
     "trough_pairs": 582,
     "reason": "runover mode not isolated from the next-entry band"
    },
+   "model_runovers": 6717,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -367,13 +369,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 56288,
-   "keep_rate": 0.8332,
+   "kept": 53210,
+   "keep_rate": 0.8392,
    "dropped": {
-    "short": 8083,
-    "bigtype": 1419,
-    "allcaps": 942,
-    "banner": 749,
+    "short": 7073,
+    "bigtype": 1375,
+    "allcaps": 930,
+    "banner": 740,
     "nonascii": 68,
     "pagenum": 8
    },
@@ -398,10 +400,10 @@
     443,
     437
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 5062824,
+  "words_gz_bytes": 5083372,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
@@ -409,7 +411,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 10,
   "end_leaf": 421,
   "first_letter": "A",
@@ -606,7 +608,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 455,
   "fitted_leaves": 337,
   "read_leaves": 205,
@@ -768,7 +770,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -928,7 +930,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0040_listing.jsonl.gz",
   "sections": [
    {
@@ -937,11 +939,11 @@
     "end_leaf": 421
    }
   ],
-  "kept": 54948,
+  "kept": 51870,
   "dropped": 1340,
-  "kept_share": 0.9762,
+  "kept_share": 0.9748,
   "kept_by_section": {
-   "listing": 54948
+   "listing": 51870
   }
  },
  "non_entry_pages": {
@@ -1081,6 +1083,7 @@
   "loop_truncated": 0,
   "table_mode": 230,
   "pages": 387,
+  "lines_runover": 6717,
   "lines_tesseract": 9075,
   "lines_model": 54437,
   "lines_model-only": 3833,

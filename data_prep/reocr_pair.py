@@ -770,10 +770,11 @@ def dump(args) -> int:
     (once; it is always the source of the leaves not re-read), and <id>_words.jsonl.gz becomes
     IA's records with every re-OCR'd leaf's lines replaced: tesseract's word boxes carrying the
     model's text, model-only lines given boxes, a tile without an answer kept as tesseract read
-    it. Each replaced record gains "ocr" and per-line "sources" (model / tesseract / model-only
-    / bleed, a bleed_retry tile's line); consumers that read only "lines" are unaffected. The
-    sidecar gains a `reocr` block. Then `survey_harvest.py --rederive --ids <id>` and
-    `survey_derive.py` re-read the volume from it."""
+    it. Each replaced record gains "ocr", per-line "sources" (model / tesseract / model-only
+    / bleed, a bleed_retry tile's line) and per-line "cont" (1 where the model read the printed
+    line as part of the entry above -- what the survey's wrap-joiner joins on, PIPELINE #28);
+    consumers that read only "lines" are unaffected. The sidecar gains a `reocr` block. Then
+    `survey_harvest.py --rederive --ids <id>` and `survey_derive.py` re-read the volume from it."""
     import gzip
     root = Path(args.root).resolve()
     page_dir = Path(getattr(args, "page_dir", None) or DATA / "reocr").resolve()
@@ -811,9 +812,14 @@ def dump(args) -> int:
                 stats["bleed_retry"] += bool(meta.get("bleed_retry"))
                 stats["loop_truncated"] += bool(meta.get("loop_truncated"))
                 stats["table_mode"] += bool(meta.get("table_mode"))
-            lines, sources = page_dump(rec, tiles, answers)
-            replaced[rec["leaf"]] = (lines, sources, rec["page_size"])
+            lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True)
+            # 1 only where the MODEL read the line as part of the entry above. A tesseract line
+            # (a tile with no answer, or one the model skipped) carries no start flag and no
+            # reading either, so it is 0: the joiner keeps the indent rule for it.
+            cont = [0 if st or src == "tesseract" else 1 for st, src in zip(starts, sources)]
+            replaced[rec["leaf"]] = (lines, sources, cont, rec["page_size"])
             stats["pages"] += 1
+            stats["lines_runover"] += sum(cont)
             stats.update(f"lines_{s}" for s in sources)
         if not replaced:
             print(f"{vol}: no re-OCR'd pages under {root}", file=sys.stderr)
@@ -823,8 +829,8 @@ def dump(args) -> int:
             for line in fh:
                 r = json.loads(line)
                 if r["leaf"] in replaced:
-                    lines, sources, size = replaced[r["leaf"]]
-                    r.update(lines=lines, sources=sources, page_size=size,
+                    lines, sources, cont, size = replaced[r["leaf"]]
+                    r.update(lines=lines, sources=sources, cont=cont, page_size=size,
                              chars=sum(len(w[5]) for ws in lines for w in ws),
                              ocr=f"reocr: tesseract-5.5 merge + {args.slug}")
                     stats["leaves_replaced"] += 1
@@ -864,11 +870,14 @@ def joins(args) -> int:
     run-overs joined and left apart (and how many of those sit between 1.5 line heights and the
     threshold), and starts glued onto the line above.
 
-    The labels are the model's, not gold. Once the joiner takes the model's reading this measure
-    is circular, so judge that change on gold. It mirrors join_wraps with the deep-indent gate
-    off, as the survey runs it, on the dump's lines as `page_dump` writes them: before the
-    derive's side-band strip and column split, which seldom touch a re-OCR'd page (its lines are
-    cut per column)."""
+    The labels are the model's, not gold. It mirrors join_wraps with the deep-indent gate off and
+    WITHOUT `cont`, on the dump's lines as `page_dump` writes them: before the derive's side-band
+    strip and column split, which seldom touch a re-OCR'd page (its lines are cut per column).
+
+    Since 2026-10-16 the survey's joiner takes `cont`, so this is the BEFORE picture -- what the
+    indent alone did, which is the table in PIPELINE #28 -- and it is kept that way on purpose.
+    Run against the new joiner it would be circular, both sides being the model's reading. Judge
+    that change on gold."""
     import statistics
     from ia_volume_to_jsonl import OVERLAP_FRAC, VGAP_RATIO, words_to_lines
     root = Path(args.root).resolve()

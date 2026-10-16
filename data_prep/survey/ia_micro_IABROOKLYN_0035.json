@@ -393,8 +393,8 @@
    "publisher_tag_note": "'hope & henderson' normalised to the trained token 'hopehenderson'",
    "year_tag": "1856/57",
    "hocr_lines": 76299,
-   "wrap_joins": 2327,
-   "candidates": 73972,
+   "wrap_joins": 11916,
+   "candidates": 64383,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -406,6 +406,8 @@
     "trough_pairs": 412,
     "reason": "runover mode not isolated from the next-entry band"
    },
+   "model_runovers": 11569,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 61,
     "leaves": 3
@@ -415,13 +417,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 61899,
-   "keep_rate": 0.8368,
+   "kept": 54858,
+   "keep_rate": 0.8521,
    "dropped": {
-    "short": 9962,
-    "bigtype": 779,
-    "banner": 668,
-    "allcaps": 489,
+    "short": 7446,
+    "bigtype": 759,
+    "banner": 667,
+    "allcaps": 478,
     "nonascii": 169,
     "pagenum": 6
    },
@@ -446,10 +448,10 @@
     637,
     613
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 5146603,
+  "words_gz_bytes": 5166717,
   "hocr_deleted": true,
   "elapsed_s": 16
  },
@@ -457,7 +459,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 38,
   "end_leaf": 528,
   "first_letter": "A",
@@ -659,7 +661,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 668,
   "fitted_leaves": 563,
   "read_leaves": 375,
@@ -805,7 +807,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -982,7 +984,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0035_listing.jsonl.gz",
   "sections": [
    {
@@ -996,12 +998,12 @@
     "end_leaf": 536
    }
   ],
-  "kept": 57949,
+  "kept": 50908,
   "dropped": 3950,
-  "kept_share": 0.9362,
+  "kept_share": 0.928,
   "kept_by_section": {
-   "listing": 57229,
-   "late_names": 720
+   "listing": 50271,
+   "late_names": 637
   }
  },
  "non_entry_pages": {
@@ -1051,6 +1053,7 @@
   "loop_truncated": 0,
   "table_mode": 131,
   "pages": 487,
+  "lines_runover": 11569,
   "lines_model": 62438,
   "lines_tesseract": 4185,
   "lines_model-only": 2020,

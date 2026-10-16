@@ -385,8 +385,8 @@
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1835/36",
    "hocr_lines": 5363,
-   "wrap_joins": 209,
-   "candidates": 5154,
+   "wrap_joins": 210,
+   "candidates": 5153,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -398,6 +398,8 @@
     "trough_pairs": 10,
     "reason": "too few runovers to read a mode"
    },
+   "model_runovers": 6,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -407,8 +409,8 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 4523,
-   "keep_rate": 0.8776,
+   "kept": 4522,
+   "keep_rate": 0.8775,
    "dropped": {
     "short": 252,
     "allcaps": 231,
@@ -437,10 +439,10 @@
     52,
     6
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 378820,
+  "words_gz_bytes": 379292,
   "hocr_deleted": true,
   "elapsed_s": 7
  },
@@ -448,7 +450,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 14,
   "end_leaf": 93,
   "first_letter": "A",
@@ -611,7 +613,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 106,
   "fitted_leaves": 67,
   "read_leaves": 52,
@@ -637,7 +639,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -698,7 +700,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0012_listing.jsonl.gz",
   "sections": [
    {
@@ -707,11 +709,11 @@
     "end_leaf": 93
    }
   ],
-  "kept": 3497,
+  "kept": 3496,
   "dropped": 1026,
-  "kept_share": 0.7732,
+  "kept_share": 0.7731,
   "kept_by_section": {
-   "listing": 3497
+   "listing": 3496
   }
  },
  "reocr": {
@@ -724,6 +726,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 79,
+  "lines_runover": 6,
   "lines_model": 3622,
   "lines_tesseract": 190,
   "lines_model-only": 110,

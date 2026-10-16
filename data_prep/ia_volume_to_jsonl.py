@@ -327,6 +327,9 @@ OVERLAP_FRAC = 0.3       # ...and horizontally overlapping it, i.e. the same col
 # uniform sample of 30 blocked joins: 17 false merges, 13 ad/OCR junk, ZERO real wraps) and unsafe
 # on 1856BPL, which wraps addresses at word boundaries with no hyphen to protect them.
 DEEP_INDENT = 4.4
+# ...and a line a re-OCR'd page's own model read as a run-over needs only this much. It is a
+# margin guard, not a threshold: see join_wraps, "THE MODEL'S OWN READING".
+MODEL_INDENT = 0.5
 
 
 def word_parent(text):
@@ -362,12 +365,16 @@ def word_parent(text):
             and not DITTO_SHAPE.match(t[0]) and not text.rstrip().endswith("-"))
 
 
-def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO):
+def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=None):
     """Join wrapped entries into one line. Returns ([(box, text, height)], n_joins).
 
     `indent_ratio` replaces INDENT_RATIO for one volume; `calibrate_indent` reads it off the
     volume's own indent histogram. See there for why 3.0 is right for 1906BPL and wrong for most
     of the corpus.
+
+    `cont` is a re-OCR'd page's reading of its own line structure, 1 per line where the vision
+    model read the printed line as part of the entry above (`reocr_pair.py dump`). See THE
+    MODEL'S OWN READING at the end for what it is worth and why it is not the whole rule.
 
     GROUND_TRUTH_HANDOFF conventions 9a and 15: a printed entry that overflows its column
     continues on an INDENTED next line, and gold joins the two into a single `raw_line` -- with
@@ -446,12 +453,48 @@ def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO):
     box is kept for provenance. The union WIDTH is deliberately NOT corrected the same way:
     testing `banner` against the widest segment instead recovers 4 lines per 300 leaves, because
     58% of banner drops are single-segment and joining is not what makes lines wide.
+
+    THE MODEL'S OWN READING (`cont`, PIPELINE #28). A re-OCR'd page has better evidence than the
+    indent: LightOnOCR writes ENTRIES, so `reocr_pair.pair_tile` already knows which printed
+    lines it read as one. The indent cannot replace it. All 39 re-OCR'd volumes keep the 3.0
+    default (`calibrate_indent` declines each, for ditto marks or for no isolated mode) while
+    their run-overs sit about 2 line heights in, so 26,462 of 31,281 of them were left apart, and
+    each one costs an entry its tail.
+
+    `cont` LOWERS the floor to MODEL_INDENT; it does not replace the indent, in either direction:
+
+    * **The indent stays as a fallback**, because the model sometimes writes a run-over as a line
+      of its own (Smith 1855's "Brunt", "derbilt av."). Then `cont` says start and only the
+      indent can join it. On the re-OCR bench's 48 reference pages, 101 of 3,174 reference
+      entries are split over two model lines this way (3.2%).
+    * **A line at the column margin never joins on `cont` alone**, which is what MODEL_INDENT
+      buys. The model sometimes runs consecutive entries into one line -- 19 bench lines hold two
+      or more reference entries, one of them five consecutive Boyds -- and `pair_tile` then marks
+      every printed line after the first a run-over. Those lines sit AT the margin, where a real
+      run-over is indented, so the floor tells them apart with no column model, in keeping with
+      the rest of this function. This is the one failure the indent rule did not already have:
+      left to itself the indent leaves those entries alone.
+
+      The two are well separated. Hope & Henderson 1856, every line under the entry above
+      (10,694 model run-overs, 39,695 model starts), by indent in line heights:
+
+          below 0.25    run-overs  322  (3.0%)    starts  33,563  (84.6%)
+          1.5 - 2.0     run-overs 7,107 (66.5%)   starts   3,521   (8.9%)
+
+      0.5 admits 96.6% of the run-overs and holds back the margin cluster, with ~10 px of
+      tolerance for box noise at that volume's line height. The starts in the run-over band are
+      the first bullet's case, and they keep the indent rule they have always had.
+
+    `cont` also overrides the deep-indent gate, which is a guess at the same question from
+    geometry alone. The survey never turns that gate on, so this is theory, not a measured case.
     """
     out, joins = [], 0
-    for box, text in lines:
+    for i, (box, text) in enumerate(lines):
         if out:
             pb, pt, ph = out[-1]
             floor = DEEP_INDENT if (deep_indent and word_parent(pt)) else indent_ratio
+            if cont is not None and cont[i]:
+                floor = min(floor, MODEL_INDENT)
             if (box[0] - pb[0] > floor * med_h
                     and 0 < box[1] - pb[1] < VGAP_RATIO * med_h
                     and min(box[2], pb[2]) - max(box[0], pb[0]) > OVERLAP_FRAC * (box[2] - box[0])):
@@ -1265,11 +1308,18 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
     lines are emitted with `context.eval_holdout` so no consumer has to remember to filter them.
     """
     stats = {"leaves": 0, "raw": 0, "joins": 0, "kept": 0, "splits": 0, "split_leaves": 0,
-             "band_words": 0, "band_leaves": 0, "marker_fixes": 0, "digit_fixes": 0}
+             "band_words": 0, "band_leaves": 0, "marker_fixes": 0, "digit_fixes": 0,
+             "model_runovers": 0, "cont_dropped_leaves": 0}
     reasons, ad_scores, buffered = {}, [], []
     for n, leaf in enumerate(leaves, 1):
+        cont = None
         if split_columns:
             words, dims = item.page_words(leaf)
+            # the model's own line structure, where the dump carries one (join_wraps). It is
+            # read now, while the lines are still the dump's: strip_side_bands returns one line
+            # per line, but a column split re-cuts and re-orders them, so the flag is dropped
+            # for a leaf that splits and that leaf joins on the indent alone.
+            cont = item.page_cont(leaf) if hasattr(item, "page_cont") else None
             words, banded = strip_side_bands(words, dims) if words else (words, 0)
             stats["band_words"] += banded
             stats["band_leaves"] += bool(banded)
@@ -1277,6 +1327,9 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
             raw = words_to_lines(words) if words else None
             stats["splits"] += cut
             stats["split_leaves"] += bool(cut)
+            if cont is not None and raw and (cut or len(cont) != len(raw)):
+                stats["cont_dropped_leaves"] += 1
+                cont = None
         else:
             raw, dims = item.page_lines(leaf)
         if not raw:
@@ -1288,8 +1341,9 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
         # filter would discard it, and the entry it belongs to would silently lose its address.
         med_h_raw = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
         if join:
-            lines, joins = join_wraps(raw, med_h_raw, deep_indent, indent_ratio)
+            lines, joins = join_wraps(raw, med_h_raw, deep_indent, indent_ratio, cont)
             stats["joins"] += joins
+            stats["model_runovers"] += sum(cont) if cont else 0
         else:
             lines = [(b, t, b[3] - b[1]) for b, t in raw]
 
@@ -1513,6 +1567,25 @@ def _self_test() -> int:
     assert join_wraps(smith, 18)[1] == 1, "default keeps Smith's real wrap"
     assert join_wraps(smith, 18, deep_indent=True)[1] == 0, \
         "and the flag destroys it -- this is why it is not a default"
+
+    # --- a re-OCR'd page's own reading (`cont`, PIPELINE #28) ---------------------------------
+    # A run-over the indent leaves apart, because this volume's runovers sit ~2 line heights in
+    # and it keeps the 3.0 default. The model read it as part of the entry above, so it joins.
+    shallow = [((100, 100, 400, 118), "Hagerty James, glass, 92 John, N. Y. h. 27"),
+               ((136, 122, 240, 140), "Hicks")]                          # indent 36/18 = 2.0
+    assert join_wraps(shallow, 18)[1] == 0, "the indent alone leaves it apart"
+    assert join_wraps(shallow, 18, cont=[0, 1])[1] == 1, "the model's reading joins it"
+    assert join_wraps(shallow, 18, cont=[0, 1])[0][0][1] == \
+        "Hagerty James, glass, 92 John, N. Y. h. 27 Hicks"
+    # ...but a line AT the column margin never joins on the model's word alone. LightOn runs
+    # consecutive entries into one line on a dense page (five Boyds on one bench line), and
+    # `pair_tile` then marks every printed line after the first a run-over.
+    margin = [((100, 100, 400, 118), "Boyd Valentine, ship joiner, h. 114 Adams"),
+              ((100, 122, 390, 140), "Boyd William, baker, 41 Gold")]    # indent 0
+    assert join_wraps(margin, 18, cont=[0, 1])[1] == 0, "two entries, not an entry and its tail"
+    # a start the model wrote as a line of its own ("Brunt", "derbilt av.", Smith 1855) keeps
+    # the indent rule as its fallback: cont says start, the indent says run-over
+    assert join_wraps(wrapped, 18, cont=[0, 0, 0])[1] == 1, "the indent rule still runs"
 
     # margins: three dense clusters; junk in the gutter matches none of them
     ms = left_margins(boxes)

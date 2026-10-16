@@ -332,8 +332,8 @@
    "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
    "year_tag": "1853/54",
    "hocr_lines": 27028,
-   "wrap_joins": 426,
-   "candidates": 26602,
+   "wrap_joins": 526,
+   "candidates": 26502,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -345,6 +345,8 @@
     "trough_pairs": 45,
     "reason": "runover mode not isolated from the next-entry band"
    },
+   "model_runovers": 167,
+   "cont_dropped_leaves": 3,
    "column_splits": {
     "lines": 31,
     "leaves": 3
@@ -354,13 +356,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 23500,
-   "keep_rate": 0.8834,
+   "kept": 23406,
+   "keep_rate": 0.8832,
    "dropped": {
-    "short": 1769,
-    "allcaps": 597,
-    "banner": 374,
-    "bigtype": 341,
+    "short": 1764,
+    "allcaps": 596,
+    "banner": 375,
+    "bigtype": 340,
     "nonascii": 19,
     "pagenum": 2
    },
@@ -385,10 +387,10 @@
     617,
     594
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 2138539,
+  "words_gz_bytes": 2142743,
   "hocr_deleted": true,
   "elapsed_s": 7
  },
@@ -396,7 +398,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 24,
   "end_leaf": 594,
   "first_letter": "A",
@@ -629,7 +631,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 606,
   "fitted_leaves": 498,
   "read_leaves": 339,
@@ -863,7 +865,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -999,7 +1001,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0031_listing.jsonl.gz",
   "sections": [
    {
@@ -1008,11 +1010,11 @@
     "end_leaf": 594
    }
   ],
-  "kept": 23222,
+  "kept": 23128,
   "dropped": 278,
-  "kept_share": 0.9882,
+  "kept_share": 0.9881,
   "kept_by_section": {
-   "listing": 23222
+   "listing": 23128
   }
  },
  "non_entry_pages": {
@@ -1259,6 +1261,7 @@
   "loop_truncated": 0,
   "table_mode": 8,
   "pages": 528,
+  "lines_runover": 167,
   "lines_model": 22914,
   "lines_tesseract": 2685,
   "lines_model-only": 695,

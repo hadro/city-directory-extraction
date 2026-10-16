@@ -382,8 +382,8 @@
    "publisher_tag_note": "'hearnes/webb' tagged as its trained partner 'hearne'",
    "year_tag": "1847",
    "hocr_lines": 15502,
-   "wrap_joins": 440,
-   "candidates": 15062,
+   "wrap_joins": 451,
+   "candidates": 15051,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -395,6 +395,8 @@
     "trough_pairs": 97,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 32,
+   "cont_dropped_leaves": 1,
    "column_splits": {
     "lines": 9,
     "leaves": 1
@@ -404,10 +406,10 @@
     "leaves": 0
    },
    "marker_fixes": 1,
-   "kept": 11929,
+   "kept": 11921,
    "keep_rate": 0.792,
    "dropped": {
-    "short": 1294,
+    "short": 1291,
     "banner": 713,
     "allcaps": 599,
     "bigtype": 492,
@@ -435,10 +437,10 @@
     11,
     329
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 1094715,
+  "words_gz_bytes": 1096270,
   "hocr_deleted": true,
   "elapsed_s": 8
  },
@@ -446,7 +448,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 23,
   "end_leaf": 274,
   "first_letter": "A",
@@ -619,7 +621,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 338,
   "fitted_leaves": 321,
   "read_leaves": 188,
@@ -653,7 +655,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -805,7 +807,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0024_listing.jsonl.gz",
   "sections": [
    {
@@ -819,12 +821,12 @@
     "end_leaf": 343
    }
   ],
-  "kept": 10162,
+  "kept": 10154,
   "dropped": 1767,
-  "kept_share": 0.8519,
+  "kept_share": 0.8518,
   "kept_by_section": {
-   "listing": 10124,
-   "late_names": 38
+   "listing": 10120,
+   "late_names": 34
   }
  },
  "non_entry_pages": {
@@ -852,6 +854,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 251,
+  "lines_runover": 32,
   "lines_model": 10876,
   "lines_tesseract": 1417,
   "lines_model-only": 187,

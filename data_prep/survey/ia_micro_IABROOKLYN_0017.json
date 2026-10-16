@@ -352,8 +352,8 @@
    "publisher_tag_note": "'leslie/chichester' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1840/41",
    "hocr_lines": 9698,
-   "wrap_joins": 383,
-   "candidates": 9315,
+   "wrap_joins": 387,
+   "candidates": 9311,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -365,6 +365,8 @@
     "trough_pairs": 62,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 61,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -374,11 +376,11 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 6956,
-   "keep_rate": 0.7468,
+   "kept": 6954,
+   "keep_rate": 0.7469,
    "dropped": {
-    "short": 1259,
-    "banner": 587,
+    "short": 1258,
+    "banner": 586,
     "bigtype": 245,
     "allcaps": 239,
     "nonascii": 27,
@@ -405,10 +407,10 @@
     192,
     239
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 679740,
+  "words_gz_bytes": 680915,
   "hocr_deleted": true,
   "elapsed_s": 5
  },
@@ -416,7 +418,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 8,
   "end_leaf": 143,
   "first_letter": "A",
@@ -584,7 +586,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 295,
   "fitted_leaves": 126,
   "read_leaves": 90,
@@ -642,7 +644,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -717,7 +719,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0017_listing.jsonl.gz",
   "sections": [
    {
@@ -726,11 +728,11 @@
     "end_leaf": 143
    }
   ],
-  "kept": 5814,
+  "kept": 5812,
   "dropped": 1142,
   "kept_share": 0.8358,
   "kept_by_section": {
-   "listing": 5814
+   "listing": 5812
   }
  },
  "non_entry_pages": {
@@ -777,6 +779,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 130,
+  "lines_runover": 61,
   "lines_tesseract": 1087,
   "lines_model": 6107,
   "lines_model-only": 189,

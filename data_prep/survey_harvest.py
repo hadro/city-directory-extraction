@@ -28,7 +28,9 @@ Per volume, under data/survey_ocr/ (gitignored):
                             record}` file eval/qwen_predict.py reads. Default filters, plus two
                             per-volume corrections the CLI leaves off: the wrap threshold is read
                             off the volume's own indent histogram (calibrate_indent), and lines
-                            tesseract ran across the gutter are cut (split_merged_columns).
+                            tesseract ran across the gutter are cut (split_merged_columns). On a
+                            re-OCR'd leaf the wrap-joiner also reads the dump's `cont` (see
+                            page_cont and join_wraps).
     <id>_dropped.txt.gz     every line the filters rejected, with its reason. Together with
                             _lines it accounts for every candidate line.
 
@@ -135,6 +137,14 @@ class WordDump:
             return None, None
         dims = tuple(self._rec["page_size"]) if self._rec["page_size"] else None
         return self._rec["lines"], dims
+
+    def page_cont(self, leaf: int):
+        """Per line, 1 where a re-OCR'd page's model read the printed line as part of the entry
+        above, or None for a leaf the dump has no such reading for (`reocr_pair.py dump`, which
+        writes it beside `sources`). The wrap-joiner joins on it; see join_wraps."""
+        if self._rec is None or self._rec["leaf"] != leaf:
+            return None
+        return self._rec.get("cont")
 
     def close(self):
         if self._fh:
@@ -536,6 +546,8 @@ def derive(ident: str, holdout: dict) -> dict:
         "publisher_tag": publisher, "publisher_tag_note": why or None, "year_tag": year or None,
         "hocr_lines": stats["raw"], "wrap_joins": stats["joins"], "candidates": cand,
         "wrap_calibration": wraps,
+        **({"model_runovers": stats["model_runovers"],
+            "cont_dropped_leaves": stats["cont_dropped_leaves"]} if stats["model_runovers"] else {}),
         "column_splits": {"lines": stats["splits"], "leaves": stats["split_leaves"]},
         "side_bands": {"words": stats["band_words"], "leaves": stats["band_leaves"]},
         "marker_fixes": stats["marker_fixes"],

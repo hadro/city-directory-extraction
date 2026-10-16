@@ -366,8 +366,8 @@
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1853",
    "hocr_lines": 13332,
-   "wrap_joins": 1109,
-   "candidates": 12223,
+   "wrap_joins": 1137,
+   "candidates": 12195,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -379,6 +379,8 @@
     "trough_pairs": 99,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 300,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -388,13 +390,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 8916,
-   "keep_rate": 0.7294,
+   "kept": 8896,
+   "keep_rate": 0.7295,
    "dropped": {
-    "short": 1407,
-    "bigtype": 729,
-    "allcaps": 639,
-    "banner": 496,
+    "short": 1403,
+    "bigtype": 730,
+    "allcaps": 637,
+    "banner": 493,
     "nonascii": 34,
     "pagenum": 2
    },
@@ -419,10 +421,10 @@
     3,
     345
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 973897,
+  "words_gz_bytes": 975658,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
@@ -430,7 +432,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 22,
   "end_leaf": 231,
   "first_letter": "B",
@@ -600,7 +602,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 374,
   "fitted_leaves": 218,
   "read_leaves": 75,
@@ -666,7 +668,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -752,7 +754,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0047_listing.jsonl.gz",
   "sections": [
    {
@@ -761,11 +763,11 @@
     "end_leaf": 231
    }
   ],
-  "kept": 7282,
+  "kept": 7262,
   "dropped": 1634,
-  "kept_share": 0.8167,
+  "kept_share": 0.8163,
   "kept_by_section": {
-   "listing": 7282
+   "listing": 7262
   }
  },
  "non_entry_pages": {
@@ -949,6 +951,7 @@
   "loop_truncated": 1,
   "table_mode": 10,
   "pages": 201,
+  "lines_runover": 300,
   "lines_model": 7005,
   "lines_tesseract": 1782,
   "lines_model-only": 868,

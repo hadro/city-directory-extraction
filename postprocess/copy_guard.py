@@ -86,12 +86,27 @@ MAX_EDIT = 2         # ...and be this close to it, in characters
 NAME_MATCH = 0.6     # a name word below this similarity to every window of its line was invented
 
 
+LONG_S = str.maketrans("ſ", "s")
+
+
+def _lower(s: str) -> str:
+    """Lower case, reading the long s as s. LightOn transcribes the printed `ſ`; the model and
+    the gold both write `s`, and without this the guard restores `Queen-ſtreet` over the model's
+    `Queen-street` (franks1786: 16 fields, row EM 66.1 -> 48.2 on the LightOn panel).
+
+    A comparison only -- no stored text changes -- because `ſ` means different letters in
+    different readings. On IA's Fraktur-read microfilm it is a misread f, never an s
+    (docs/POST_OCR_CORRECTION.md). Reading it as s costs nothing there: f/s is already a
+    misreading below, so the model's letter stands either way."""
+    return s.lower().translate(LONG_S)
+
+
 def _norm(tok: str) -> str:
-    return re.sub(r"[^a-z0-9]", "", tok.lower())
+    return re.sub(r"[^a-z0-9]", "", _lower(tok))
 
 
 def _squash(s: str) -> str:
-    return "".join(c for c in s.lower() if c not in PUNCT and not c.isspace())
+    return "".join(c for c in _lower(s) if c not in PUNCT and not c.isspace())
 
 
 _FOLD = str.maketrans("1i!|05$8", "lllloss" + "b")
@@ -142,7 +157,7 @@ def judge(printed: str, wrote: str, vocab: Counter) -> str | None:
         return "spacing"
     if w and len(p) - len(w) >= 3 and (p.startswith(w) or p.endswith(w)):
         return "glued-part"          # `boardingh` printed; the model took `h` for the address
-    if _misreadings(p, w) or _misreadings(*(re.sub(r"[\s,;:]", "", x.lower()) for x in (printed, wrote))):
+    if _misreadings(p, w) or _misreadings(*(re.sub(r"[\s,;:]", "", _lower(x)) for x in (printed, wrote))):
         return "ocr-confusion"       # `II -> 11` is two misreadings, not one
     unmarked = MARKER.sub("", re.sub(r"\s", "", printed.lower()))
     if unmarked != re.sub(r"\s", "", printed.lower()) and judge(unmarked, wrote, vocab):
@@ -257,10 +272,10 @@ def _in_line(wrote: str, raw: str) -> bool:
 
 def _invented(text: str, raw: str) -> bool:
     """True when some word of `text` (3+ letters) has no near match anywhere in the line."""
-    flat = re.sub(r"[^a-z]", "", raw.lower())
-    heads = {re.sub(r"[^a-z]", "", x.lower()) for x in raw.split()}
+    flat = re.sub(r"[^a-z]", "", _lower(raw))
+    heads = {re.sub(r"[^a-z]", "", _lower(x)) for x in raw.split()}
     for t in text.split():
-        w = re.sub(r"[^a-z]", "", t.lower())
+        w = re.sub(r"[^a-z]", "", _lower(t))
         # a printed word that begins it was cut short or abbreviated, not conjured: `Brid`
         if any(len(h) >= 3 and w.startswith(h) for h in heads):
             continue
@@ -399,6 +414,13 @@ def _self_test() -> int:
     assert g("Inslee Chas F.", "Inslee Clias F. ins. h 47 HeTkimer", "name") == "Inslee Chas F."
     assert g("Farrell Bridget", "Farrell Brid wid. Christy, laundress", "name") == "Farrell Brid"
     assert g("18 Congress do.", "Wetmore. Hezekiah phyfician, 18 Congrefs do.") == "18 Congress do."
+    # the long s as LightOn writes it (U+017F), where the model and the gold both write `s`
+    assert g("80 Queen-street", "Parker William, painter, 80, Queen-ſtreet") == "80 Queen-street"
+    assert g("Parsons James", "Parſons James, merchant, 194, Queen-ſt.", "name") == "Parsons James"
+    assert g("Pearsse John", "Pearſſe John, 37, Crown-ſtreet", "name") == "Pearsse John"
+    # ...but on IA's Fraktur-read microfilm ſ is a misread f, and the model's f still stands
+    assert g("ferrymaster", "Bunſord Peter, ſerrymaster, 12 Dock", "occupation_role") == \
+        "ferrymaster", "ſ read as s, and f -> s is a misreading: the model's letter stands"
     for bad in ("Cherry-ftreec", "William-ltreet", "Wall-itreet", "Oueen-ftreet", "Water-ftrecc"):
         assert g(f"5 {bad.split('-')[0]}-street", f"Smith J. merchant, 5, {bad}") == \
             f"5 {bad.split('-')[0]}-street", bad

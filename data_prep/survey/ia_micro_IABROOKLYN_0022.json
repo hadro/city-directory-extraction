@@ -367,8 +367,8 @@
    "publisher_tag_note": "'crowell' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1845",
    "hocr_lines": 9306,
-   "wrap_joins": 312,
-   "candidates": 8994,
+   "wrap_joins": 416,
+   "candidates": 8890,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -380,6 +380,8 @@
     "trough_pairs": 50,
     "reason": "too few runovers to read a mode"
    },
+   "model_runovers": 201,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -389,13 +391,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 7866,
-   "keep_rate": 0.8746,
+   "kept": 7823,
+   "keep_rate": 0.88,
    "dropped": {
-    "short": 804,
+    "short": 742,
     "allcaps": 141,
     "bigtype": 95,
-    "banner": 79,
+    "banner": 80,
     "nonascii": 7,
     "pagenum": 2
    },
@@ -420,10 +422,10 @@
     64,
     66
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 625174,
+  "words_gz_bytes": 626890,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
@@ -431,7 +433,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 4,
   "end_leaf": 51,
   "first_letter": "A",
@@ -589,7 +591,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 81,
   "fitted_leaves": 46,
   "read_leaves": 32,
@@ -615,7 +617,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -677,7 +679,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0022_listing.jsonl.gz",
   "sections": [
    {
@@ -686,11 +688,11 @@
     "end_leaf": 51
    }
   ],
-  "kept": 7287,
+  "kept": 7244,
   "dropped": 579,
-  "kept_share": 0.9264,
+  "kept_share": 0.926,
   "kept_by_section": {
-   "listing": 7287
+   "listing": 7244
   }
  },
  "non_entry_pages": {
@@ -713,6 +715,7 @@
   "loop_truncated": 0,
   "table_mode": 31,
   "pages": 48,
+  "lines_runover": 201,
   "lines_tesseract": 914,
   "lines_model": 6773,
   "lines_model-only": 588,

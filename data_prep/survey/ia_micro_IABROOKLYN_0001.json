@@ -377,6 +377,8 @@
     "trough_pairs": 10,
     "reason": "too few runovers to read a mode"
    },
+   "model_runovers": 3,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -416,10 +418,10 @@
     7,
     25
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 189239,
+  "words_gz_bytes": 189417,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
@@ -427,7 +429,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 5,
   "end_leaf": 31,
   "first_letter": "A",
@@ -570,7 +572,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 70,
   "fitted_leaves": 62,
   "read_leaves": 28,
@@ -596,7 +598,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -682,7 +684,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0001_listing.jsonl.gz",
   "sections": [
    {
@@ -708,6 +710,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 27,
+  "lines_runover": 3,
   "lines_model": 1086,
   "lines_tesseract": 41,
   "lines_model-only": 27,

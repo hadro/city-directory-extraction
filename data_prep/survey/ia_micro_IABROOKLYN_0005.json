@@ -370,8 +370,8 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1826",
    "hocr_lines": 2831,
-   "wrap_joins": 103,
-   "candidates": 2728,
+   "wrap_joins": 104,
+   "candidates": 2727,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -383,6 +383,8 @@
     "trough_pairs": 5,
     "reason": "too few runovers to read a mode"
    },
+   "model_runovers": 1,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -392,7 +394,7 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2431,
+   "kept": 2430,
    "keep_rate": 0.8911,
    "dropped": {
     "short": 154,
@@ -423,10 +425,10 @@
     63,
     11
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 197791,
+  "words_gz_bytes": 198059,
   "hocr_deleted": true,
   "elapsed_s": 13
  },
@@ -434,7 +436,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 5,
   "end_leaf": 60,
   "first_letter": "A",
@@ -587,7 +589,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 78,
   "fitted_leaves": 67,
   "read_leaves": 46,
@@ -613,7 +615,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -686,7 +688,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0005_listing.jsonl.gz",
   "sections": [
    {
@@ -695,11 +697,11 @@
     "end_leaf": 60
    }
   ],
-  "kept": 1934,
+  "kept": 1933,
   "dropped": 497,
-  "kept_share": 0.7956,
+  "kept_share": 0.7955,
   "kept_by_section": {
-   "listing": 1934
+   "listing": 1933
   }
  },
  "non_entry_pages": {
@@ -722,6 +724,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 56,
+  "lines_runover": 1,
   "lines_model": 1988,
   "lines_tesseract": 90,
   "lines_model-only": 41,

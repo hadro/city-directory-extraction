@@ -357,8 +357,8 @@
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1850/51",
    "hocr_lines": 11494,
-   "wrap_joins": 449,
-   "candidates": 11045,
+   "wrap_joins": 492,
+   "candidates": 11002,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -370,6 +370,8 @@
     "trough_pairs": 38,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 226,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -379,14 +381,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 7938,
-   "keep_rate": 0.7187,
+   "kept": 7908,
+   "keep_rate": 0.7188,
    "dropped": {
-    "short": 1636,
+    "short": 1624,
     "allcaps": 687,
     "bigtype": 374,
     "banner": 295,
-    "nonascii": 84,
+    "nonascii": 83,
     "pagenum": 31
    },
    "ditto_marks": [],
@@ -405,15 +407,15 @@
     83,
     8,
     249,
-    70,
     44,
+    70,
     4,
     24
    ],
-   "filters_at": "fc46ac8-dirty",
+   "filters_at": "586fde9-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 904188,
+  "words_gz_bytes": 905661,
   "hocr_deleted": true,
   "elapsed_s": 18
  },
@@ -421,7 +423,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "start_leaf": 16,
   "end_leaf": 210,
   "first_letter": "A",
@@ -687,7 +689,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "content_leaves": 272,
   "fitted_leaves": 225,
   "read_leaves": 151,
@@ -777,7 +779,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "runs": [
    {
     "kind": "district",
@@ -879,7 +881,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "fc46ac8-dirty",
+  "code_at": "586fde9-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0044_listing.jsonl.gz",
   "sections": [
    {
@@ -888,11 +890,11 @@
     "end_leaf": 210
    }
   ],
-  "kept": 6023,
+  "kept": 5993,
   "dropped": 1915,
-  "kept_share": 0.7588,
+  "kept_share": 0.7578,
   "kept_by_section": {
-   "listing": 6023
+   "listing": 5993
   }
  },
  "non_entry_pages": {
@@ -948,6 +950,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 189,
+  "lines_runover": 226,
   "lines_tesseract": 1818,
   "lines_model": 6317,
   "lines_model-only": 304,

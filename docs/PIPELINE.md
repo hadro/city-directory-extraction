@@ -1411,6 +1411,60 @@ greedy's loop rate on the unseen volumes before the 7,947 pages run.
      lines, ~12 H200-hours), which stages with the first tier: `prep_volumes.py --corpus --tier
      first,reocr`. `defer` is now empty.
 
+**Beyond the microfilm: a pilot on the real-OCR panel (2026-10-15, hadro).** Should the other
+tiers be re-OCR'd too? LightOn read the gold pages of the panel's 16 IA book-scan volumes on
+the M2. The pages went through fresh tesseract and half tiles, then the production import,
+`survey_harvest.derive` and `eval/ia_panel.build`, into `data/iapanel_lighton/`. The driver
+and the dense-page re-cut are in the session's scratch, not the repo.
+
+Lines against gold, with typography set aside (curly vs straight quotes, one leading ditto
+form), over 2,029 rows:
+
+| | IA's OCR | LightOn |
+|---|---|---|
+| Pooled, exact | 59.1% | 82.0% |
+| Pooled, CER | 0.023 | 0.011 |
+| trow1907 (ABBYY-8 damaged) | 10% | 87% |
+| Polk 1917 in Trow 1917 (ABBYY-8 clean) | 46% | 73% |
+| Lain 1897 (ABBYY-9) | 70% | 83% |
+| lain1876 | 60% | 95% |
+| rode1851 | 64% | 98% |
+| ogden1839 | 28% | 93% |
+| mercein1820 | 53% | 92% |
+| duncan1794 | 26% | 81% |
+| Smith 1855 (book scan) | 77% | 92% |
+| Smith 1856 (book scan) | 68% | 83% |
+| franks1786 (long s) | 2% | 43% |
+
+historical-ocr-eval scored the same engine on its 18-volume ranking panel (2dc7296). Leaving out
+two badly cut pages: CER-all 0.024, match 99.3%. Gemini on the same volumes is 0.145 as run, and
+0.027 on the lines it does not refuse.
+
+Before a book-scan batch:
+1. **The cropper fails on dense 4-6-column pages.** It treats M&B's repeated-surname stripe as a
+   banner and drops it, and it splits Polk's columns at their `"` stripe. The pilot re-cut those
+   pages from known column counts, with gutters where the fewest tesseract words cross.
+   Polk 1933 Brooklyn and Queens still cut 30-50 words.
+2. **Trow 1915/1917 pages are camera frames,** turned ±90°. They must be staged upright from
+   scandata (iiif_frame.pages: rotate, then crop). Even then, 13 of Polk 1917's 72 rows were
+   lost: LightOn ran entries together, the filters dropped them as banners, and a ditto line
+   was joined to its neighbour.
+3. **`"` dittos:** the import now writes them back (b5495c9). It had dropped all 281 that
+   LightOn bulleted.
+4. **Long s** (franks1786) stays weak.
+5. **The end-to-end row EM** needs a 4B run over the panel: `data/volumes_panel_lighton`,
+   packaged as `cde-volumes-panel-lighton.tar.gz`, 17 tasks.
+
+Cost at the full run's 0.19 L40S-seconds a line, one tile at a time:
+
+| Tier | Lines | L40S-hours |
+|---|---|---|
+| abbyy8-damaged | 4.0M | ~210 |
+| first | 5.5M | ~290 |
+| abbyy8-clean | 5.1M | ~270 |
+
+Batched decoding (vLLM) should cut these several times over.
+
 The dump keeps IA's records for the leaves not re-read. For each re-read leaf it pairs the tiles
 (a tile without an answer keeps tesseract's lines), runs the post-passes, and spreads every
 line's text over tesseract's word boxes (`respell`: similarity anchors, so "capmker" still

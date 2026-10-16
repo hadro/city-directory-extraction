@@ -606,12 +606,47 @@ def synth_line(text: str, above, below, x0: int, char_w: float, line_h: int, con
     return out
 
 
+def boxed_lines(rec: dict, tiles: dict) -> list:
+    """reocr_volumes.column_lines(keyed=True) read off the staged tiles' own boxes: (column,
+    upright top, words) per line piece, each word to the column whose tiles hold it on the page
+    turned upright by the tiles' angle. Each column's edges are its tiles' box less the padding
+    the staging added, so this is column_lines' own assignment over the columns as they were cut,
+    by whichever rule (peaks for the microfilm, a book scan's gutters at its volume's count). The
+    import then follows the staging, and cannot disagree with it if a column rule changes."""
+    from reocr_columns import PAD
+    from reocr_volumes import turn
+    W = rec["page_size"][0]
+    angle = next((v[4] for v in tiles.values() if len(v) > 4), 0.0)
+    upright = turn(rec["lines"], angle, rec["page_size"])
+    by_col = collections.defaultdict(list)
+    for name, box in tiles.items():
+        by_col[int(name[1:].split("_")[0])].append(box)
+    ks = sorted(by_col)
+    pad = int(PAD * W)                        # reocr_columns.tile_boxes padded each column so
+    cols = []
+    for k in ks:
+        x0, x1 = min(b[0] for b in by_col[k]), max(b[2] for b in by_col[k])
+        cols.append([x0 + pad if x0 > 0 else x0, x1 - pad if x1 < W else x1])
+
+    def col(u):                               # ...and column_lines' own rule from here on
+        mid = (u[0] + u[2]) / 2
+        return min(range(len(cols)), key=lambda i: 0 if cols[i][0] <= mid < cols[i][1]
+                   else min(abs(mid - cols[i][0]), abs(mid - cols[i][1])))
+    out = []
+    for ws, us in zip(rec["lines"], upright):
+        parts = collections.defaultdict(list)
+        for w, u in zip(ws, us):
+            parts[ks[col(u)]].append((w, u))
+        out += [(k, min(u[1] for _w, u in wu), [w for w, _u in wu]) for k, wu in parts.items()]
+    out.sort(key=lambda kyw: kyw[:2])
+    return out
+
+
 def page_rows(rec: dict, tiles: dict, answers: dict) -> tuple:
     """A page's paired rows in reading order, dittos decided: (rows, median_h, char_w). `tiles`
     maps a tile name (c0_h0, ...) to its box; `answers` maps it to (model lines, bleed) or to None
     where the model has no answer (that tile keeps tesseract's lines)."""
-    from reocr_volumes import column_lines
-    keyed = column_lines(rec["lines"], rec["page_size"], keyed=True)
+    keyed = boxed_lines(rec, tiles)
     hs = sorted(w[3] - w[1] for _k, _y, ws in keyed for w in ws)
     median_h = hs[len(hs) // 2] if hs else 30
     widths = sorted((w[2] - w[0]) / max(len(w[5]), 1) for _k, _y, ws in keyed for w in ws if len(w[5]) >= 3)
@@ -898,7 +933,6 @@ def screen(args) -> int:
     characters, empty/looped/timed-out tiles, Markdown or table output, lines run together into
     paragraphs, and what the pairing leaves unmatched. The 39 deferred volumes are none of the
     bench's, so this is the model's first look at their layouts (1820s single columns, 1912)."""
-    from reocr_volumes import column_lines
     root = Path(args.root).resolve()
     page_dir = Path(getattr(args, "page_dir", None) or DATA / "reocr").resolve()
     boxes = json.loads((root / "boxes.json").read_text(encoding="utf-8"))
@@ -910,7 +944,7 @@ def screen(args) -> int:
     tiles, by_vol = [], collections.defaultdict(list)
     for (vol, stem), named in sorted(pages.items()):
         rec = json.loads((page_dir / vol / f"{stem}.json").read_text(encoding="utf-8"))
-        keyed = column_lines(rec["lines"], rec["page_size"], keyed=True)
+        keyed = boxed_lines(rec, named)
         hs = sorted(w[3] - w[1] for _k, _y, ws in keyed for w in ws)
         median_h = hs[len(hs) // 2] if hs else 1
         for name in sorted(named):

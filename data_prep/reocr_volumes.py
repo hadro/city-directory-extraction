@@ -268,6 +268,137 @@ def columns(lines: list, width: int) -> list:
     return [c for c in cols if c[1] - c[0] >= COLUMN_WIDTH * width] or cols
 
 
+GUTTER_TOL = 0.15       # gutters: a valley whose deepest point is crossed by under this share
+GUTTER_REGION = 0.35    # ...of a column's density, in a stretch under this share of it
+GUTTER_SNAP = 0.2       # with a known count: a gutter within this share of a column's width
+GUTTER_BODY = 0.84      # ...counted on the middle of the text's height, off the top and bottom ads
+GUTTER_MIN = 0.8        # ...at least this many median character widths wide
+GUTTER_LOOK = 12        # the words ending this many character widths left of it are its left side
+GUTTER_STRAIGHT = 2.0   # a left side whose words start AND end within this many characters is a
+                        # stripe (repeated surname, `"` dittos), and the band after it no gutter
+
+
+def gutter_columns(lines: list, width: int, n: int = 0) -> list:
+    """[[x0, x1]] of a book-scan page's text columns, from its gutters (2026-10-15). With n,
+    n columns: each gutter where the fewest words cross within GUTTER_SNAP of a column's width of
+    its equal-width place, so long as each is as clear as a gutter; a page laid out otherwise
+    keeps its own. A directory keeps one column count on its listing pages, so staging takes n
+    as the volume's most common detected count (reocr_columns.py).
+
+    `columns` finds a column where many line segments start, and drops a peak whose segments
+    are mostly one word. On dense book scans both misfire. Manhattan & Bronx 1931 prints the
+    surname on every line, so a column of "Fitzgerald" is one word per line, dropped as a
+    banner, and the given names after it read as the column's start: the tiles cut the surnames
+    off. Polk 1933 splits at its column of `"` dittos the same way.
+
+    Without n, a gutter is a valley in how many words cross each x, counted on the body of the
+    page (GUTTER_BODY of the text's height: an advertisement across the top or bottom crosses
+    every gutter). It is a stretch under GUTTER_REGION of the columns' density, at least
+    GUTTER_MIN characters wide, whose clearest point is under GUTTER_TOL of it: a narrow gutter
+    is never empty, since long entries reach into it and tesseract reads its printed rule as "|"
+    (Trow 1913: 4-11 crossings over 70 px, against 53 in a column). A gutter beside a sparse
+    column can run on into the page's edge (Polk 1925's last, an advertisement and short
+    entries) and be lost with the margin; the volume's count catches it. The white strip
+    after a stripe of identical words is such a valley too, but its left side is that stripe:
+    words that start and end at the same x on every line (GUTTER_STRAIGHT). A gutter's left side
+    is the ends of entries, which end at different x (or, justified, at least start at different
+    x). On the pilot's 63 book-scan pages this found the right count on 60."""
+    words = [w for ws in lines for w in ws if w[2] > w[0]]
+    if not words:
+        return [[0, width]]
+    hs = sorted(w[3] - w[1] for w in words)
+    wh = hs[len(hs) // 2]
+    body = [w for w in words if w[3] - w[1] < 3 * wh]
+    cws = sorted((w[2] - w[0]) / len(w[5]) for w in body if len(w[5]) >= 3)
+    if not cws:
+        return [[0, width]]
+    cw = cws[len(cws) // 2]
+    xs0, xs1 = sorted(w[0] for w in body), sorted(w[2] for w in body)
+    left, right = int(xs0[len(xs0) // 100]), int(xs1[-1 - len(xs1) // 100])
+    ys = sorted((w[1] + w[3]) / 2 for w in body)
+    top, bot = ys[len(ys) // 100], ys[-1 - len(ys) // 100]
+    margin = (1 - GUTTER_BODY) / 2 * (bot - top)
+    mid = [w for w in body if top + margin <= (w[1] + w[3]) / 2 <= bot - margin]
+    diff = [0] * (width + 2)
+    for w in mid:
+        a, b = max(0, int(w[0]) + 1), min(width + 1, int(w[2]))
+        if b > a:
+            diff[a] += 1
+            diff[b] -= 1
+    cross, running = [], 0
+    for x in range(width + 1):
+        running += diff[x]
+        cross.append(running)
+    if right <= left:
+        return [[0, width]]
+
+    def clearest(a, b):
+        least = min(cross[a:b])
+        plateau = [x for x in range(a, b) if cross[x] == least]
+        return plateau[len(plateau) // 2]
+    dense = sorted(cross[left:right + 1])[3 * (right - left + 1) // 4]
+    if n:
+        colw = (right - left) / n
+        gutters = []
+        for i in range(1, n):
+            c = left + i * colw
+            a, b = max(left, int(c - GUTTER_SNAP * colw)), min(right, int(c + GUTTER_SNAP * colw))
+            gutters.append(clearest(a, b) if b > a else int(c))
+        # the volume's count, unless the page is laid out otherwise (an advertisement, a one-column
+        # opening page): a forced gutter through text is crossed like a column, and the page keeps
+        # its own gutters
+        if all(cross[g] <= max(1, GUTTER_TOL * dense) for g in gutters):
+            edges = [left] + gutters + [right]
+            return [[a, b] for a, b in zip(edges, edges[1:])]
+
+    runs, start = [], None
+    for x in range(left, right + 2):
+        low = x <= right and cross[x] <= GUTTER_REGION * dense
+        if low and start is None:
+            start = x
+        elif not low and start is not None:
+            if x - start >= GUTTER_MIN * cw and min(cross[start:x]) <= max(1, GUTTER_TOL * dense):
+                runs.append((start, x))
+            start = None
+    gutters = []
+    for g0, g1 in runs:
+        side = []
+        for ws in lines:
+            near = [w for w in ws if g0 - GUTTER_LOOK * cw <= w[2] <= g0 + 1 and w[3] - w[1] < 3 * wh]
+            if near:
+                side.append(max(near, key=lambda w: w[2]))
+        if len(side) < max(5, 0.1 * len(lines)):
+            continue                                  # little text left of it: a margin, not a gutter
+        x0s, x1s = sorted(w[0] for w in side), sorted(w[2] for w in side)
+        lo, hi = len(side) // 10, -1 - len(side) // 10
+        if x1s[hi] - x1s[lo] < GUTTER_STRAIGHT * cw and x0s[hi] - x0s[lo] < GUTTER_STRAIGHT * cw:
+            continue                                  # a stripe's white strip
+        gutters.append(clearest(g0, g1))
+    edges = [left] + gutters + [right]
+    cols = [[a, b] for a, b in zip(edges, edges[1:])]
+    # a narrow piece at the page's edge is a side banner; one between two columns is a column
+    # split at a false gutter, and goes back into its narrower neighbour
+    while len(cols) > 1:
+        narrow = [i for i, c in enumerate(cols) if c[1] - c[0] < COLUMN_WIDTH * width]
+        if not narrow:
+            break
+        i = narrow[0]
+        if i in (0, len(cols) - 1):
+            cols.pop(i)
+        else:
+            j = i - 1 if cols[i - 1][1] - cols[i - 1][0] <= cols[i + 1][1] - cols[i + 1][0] else i + 1
+            a, b = min(i, j), max(i, j)
+            cols[a:b + 1] = [[cols[a][0], cols[b][1]]]
+    return cols
+
+
+def column_method(ident: str) -> str:
+    """Which column rule a volume's pages are cut and paired by. The 39 microfilm volumes of the
+    first re-OCR were staged, read and imported by `columns` (peaks), so they keep it; every
+    other volume, a book scan, is cut by `gutter_columns`."""
+    return "peaks" if ident.startswith("micro_IABROOKLYN_") or ident == "brooklynnewyorkc19123broo" else "gutters"
+
+
 def skew(lines: list, width: int) -> float:
     """The page's tilt in degrees, positive where its lines run downhill to the right: the median
     slope of word bottoms along tesseract lines of 4+ words spanning 15% of the page; 0.0 with
@@ -325,7 +456,7 @@ def turn(lines: list, angle: float, size) -> list:
     return [[box(w) for w in ws] for ws in lines]
 
 
-def page_columns(lines: list, size) -> tuple:
+def page_columns(lines: list, size, method: str = "peaks", n: int = 0) -> tuple:
     """(angle, upright lines, columns) of a cached page: one tilted SKEW_MIN or more, its lines
     and its left margin agreeing within SKEW_AGREE, is turned upright by its lines' skew before
     its columns are found, and its crops are cut from the image turned the same way
@@ -338,17 +469,18 @@ def page_columns(lines: list, size) -> tuple:
     if abs(angle) < SKEW_MIN or margin is None or abs(angle - margin) >= SKEW_AGREE:
         angle = 0.0
     upright = turn(lines, angle, size)
-    return angle, upright, columns(upright, size[0])
+    cols = gutter_columns(upright, size[0], n) if method == "gutters" else columns(upright, size[0])
+    return angle, upright, cols
 
 
-def column_lines(lines: list, size, keyed: bool = False) -> list:
+def column_lines(lines: list, size, keyed: bool = False, method: str = "peaks", n: int = 0) -> list:
     """The page's lines in reading order, a line tesseract read across a gutter cut in two: each
     word to the column its middle falls in on the upright page (one outside every column goes to
     the nearest), then column by column, top to bottom. Words keep the image's coordinates. The
     word dump written from the cache, and the hybrid's line boxes, need one entry per line.
     keyed=True gives (column, upright top, words) per line instead, which places each line in its
     column crop or half tile (reocr_pair.py)."""
-    _angle, upright, cols = page_columns(lines, size)
+    _angle, upright, cols = page_columns(lines, size, method, n)
 
     def col(u):
         mid = (u[0] + u[2]) / 2

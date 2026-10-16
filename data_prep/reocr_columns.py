@@ -48,7 +48,7 @@ HALVES = REPO / "data" / "reocr_halves"
 sys.path.insert(0, str(HERE))
 
 from reocr_bench import body_lines  # noqa: E402
-from reocr_volumes import page_columns  # noqa: E402
+from reocr_volumes import column_method, page_columns  # noqa: E402
 
 PAD = 0.01              # of the page width, around each crop
 MAX_DIM = 2500          # churro-ocr's MAX_INLINE_IMAGE_DIM: it shrinks a larger image to fit
@@ -56,6 +56,7 @@ SLUG = "churro-3b"
 
 
 BALANCE = 0.3           # a half holding less of its column's rows than this is re-cut by ink
+VOTE_LINES = 40         # a book-scan page votes on its volume's column count with this many lines
 
 
 def ink_cut(gray, x0: int, x1: int, a: int, b: int) -> int:
@@ -72,7 +73,7 @@ def ink_cut(gray, x0: int, x1: int, a: int, b: int) -> int:
     return a + int(np.argmin(smooth))
 
 
-def tile_boxes(rec: dict, tiles: str = "columns", gray=None) -> tuple:
+def tile_boxes(rec: dict, tiles: str = "columns", gray=None, method: str = "peaks", n: int = 0) -> tuple:
     """(angle, [(name, (x0, y0, x1, y1))]) for a cached page: the degrees its image is turned
     upright by (Image.rotate; 0.0 for a page tilted under reocr_volumes.SKEW_MIN), and each tile
     in the turned image's pixels, in reading order. "columns": each column over the text's
@@ -87,7 +88,7 @@ def tile_boxes(rec: dict, tiles: str = "columns", gray=None) -> tuple:
     W, H = rec["page_size"]
     if not rec["lines"]:
         return 0.0, []
-    angle, upright, cols = page_columns(rec["lines"], (W, H))
+    angle, upright, cols = page_columns(rec["lines"], (W, H), method, n)
     y0 = min(w[1] for ws in upright for w in ws)
     y1 = max(w[3] for ws in upright for w in ws)
     pad = int(PAD * W)
@@ -158,7 +159,7 @@ def fit(img, max_dim: int | None = MAX_DIM):
 def stage_page(job) -> tuple:
     """One page's crops, cut where the page's manifest entries changed: (entries, crops, cut)."""
     from PIL import Image
-    page, old, out, tiles, max_dim = job
+    page, old, out, tiles, max_dim, method, n = job
     rec = json.loads(page.read_text(encoding="utf-8"))
     img = None
     if tiles == "halves" and rec["lines"]:
@@ -167,9 +168,9 @@ def stage_page(job) -> tuple:
         angle = page_columns(rec["lines"], rec["page_size"])[0]
         if angle:
             img = img.rotate(angle, resample=Image.BICUBIC, fillcolor="white")
-        angle, page_boxes = tile_boxes(rec, tiles, gray=np.asarray(img.convert("L")))
+        angle, page_boxes = tile_boxes(rec, tiles, gray=np.asarray(img.convert("L")), method=method, n=n)
     else:
-        angle, page_boxes = tile_boxes(rec, tiles)
+        angle, page_boxes = tile_boxes(rec, tiles, method=method, n=n)
     entries, crops, cut = {}, [], 0
     for name, box in page_boxes:
         dst = out / page.parent.name / f"{page.stem}_{name}.jpg"
@@ -192,6 +193,30 @@ def stage_page(job) -> tuple:
                 fit(Image.open(dst), max_dim).save(dst, quality=92)
         crops.append(dst)
     return entries, crops, cut
+
+
+def _page_count(page) -> tuple:
+    rec = json.loads(page.read_text(encoding="utf-8"))
+    if len(rec["lines"]) < VOTE_LINES:
+        return page.parent.name, 0
+    return page.parent.name, len(page_columns(rec["lines"], rec["page_size"], "gutters")[2])
+
+
+def volume_columns(pages: list, workers: int = 4) -> dict:
+    """{volume: column count} for the book-scan volumes among `pages`: the count its pages'
+    gutters give most often, over pages of at least VOTE_LINES lines. A directory keeps one
+    column count on its listing pages, and a single page's gutters miss one beside a sparse
+    column (Polk 1925's last) or an advertisement; the volume's count is cut on every page."""
+    import multiprocessing
+    mine = [p for p in pages if column_method(p.parent.name) == "gutters"]
+    if not mine:
+        return {}
+    votes = collections.defaultdict(collections.Counter)
+    with multiprocessing.Pool(workers) as pool:
+        for vol, n in pool.imap_unordered(_page_count, mine, chunksize=8):
+            if n:
+                votes[vol][n] += 1
+    return {vol: c.most_common(1)[0][0] for vol, c in votes.items()}
 
 
 def stage(args) -> int:
@@ -219,7 +244,13 @@ def stage(args) -> int:
                 by_vol[p.parent.name].append(p)
         pages = sorted(q for v in sorted(by_vol) for q in rng.sample(by_vol[v], min(args.sample, len(by_vol[v]))))
     out.mkdir(parents=True, exist_ok=True)
-    jobs = [(p, by_page.get(f"{p.parent.name}/{p.stem}", {}), out, args.tiles, max_dim) for p in pages]
+    counts = volume_columns(pages, args.workers)
+    if counts:
+        (out / "columns.json").write_text(json.dumps(counts, indent=1, sort_keys=True), encoding="utf-8")
+        print("column counts (book scans, the volume's most common): "
+              + ", ".join(f"{v} {n}" for v, n in sorted(counts.items())), file=sys.stderr)
+    jobs = [(p, by_page.get(f"{p.parent.name}/{p.stem}", {}), out, args.tiles, max_dim,
+             column_method(p.parent.name), counts.get(p.parent.name, 0)) for p in pages]
     boxes, crops, changed = {}, [], 0
     with multiprocessing.Pool(args.workers) as pool:
         for n, (entries, page_crops, cut) in enumerate(pool.imap(stage_page, jobs, chunksize=8), 1):

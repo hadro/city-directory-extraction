@@ -774,24 +774,6 @@
    "listing": 6818
   }
  },
- "non_entry_pages": {
-  "method": "entry-shape",
-  "derived": "2026-10-05",
-  "entry_min": 0.15,
-  "scoped_lines": 94,
-  "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
-  "leaves": [
-   9,
-   32,
-   33,
-   39,
-   77,
-   83,
-   106,
-   115,
-   117
-  ]
- },
  "reocr": {
   "engine": "tesseract-5.5 merge + lightonocr-3-1b-greedy-torch",
   "root": "data/reocr_halves",

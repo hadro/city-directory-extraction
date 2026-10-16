@@ -1074,6 +1074,17 @@ read the residence marker `h` as `li`. It scored 24.3 row EM against 90.5 on cle
 - **Row EM, panel run 3 (2026-10-06):** boyd1890 went from 24.3 to **73.0**, and Polk 1917's
   copy in Trow 1917 from 8.3 to **47.2**. No row went from right to wrong. See stage 6, "Run 3".
 
+**29. Let the copy guard read LightOn's long s as s.** On the LightOn panel (#27, 2026-10-16),
+the guard restored the printed "ſ" over the model's "s":
+- franks1786 fell from 66.1 to 48.2 guarded, with 16 fields broken; its durs twin lost 7.
+- Gold writes "s", so the restore step in `postprocess/copy_guard.py` should compare with ſ folded
+  to s.
+- Re-guard the stored predictions offline, with no GPU: `copy_guard.py --volumes
+  data/volumes_panel_lighton_b5495c9 --run 4b-100k`, then `ia_panel.score_run` with that panel's
+  manifest (`data/iapanel_lighton_b5495c9/manifest.json`).
+- Check that the IA panel's guard counts (run 3) don't move. On IA's Fraktur-read microfilm, "ſ"
+  is a misread f (docs/POST_OCR_CORRECTION.md), so the fold must not turn those into s.
+
 ## Medium effort, high information
 
 **5. Does the `44` finding generalize?** It is measured on one volume, one OCR engine, one adapter.
@@ -1415,7 +1426,8 @@ greedy's loop rate on the unseen volumes before the 7,947 pages run.
 tiers be re-OCR'd too? LightOn read the gold pages of the panel's 16 IA book-scan volumes on
 the M2. The pages went through fresh tesseract and half tiles, then the production import,
 `survey_harvest.derive` and `eval/ia_panel.build`, into `data/iapanel_lighton/`. The driver
-and the dense-page re-cut are in the session's scratch, not the repo.
+is `eval/lighton_pilot.py` (since 2026-10-16). The staging tools and the dense-page re-cut stayed
+in that session's scratch; their output is in `data/reocr_pilot*`.
 
 Lines against gold, with typography set aside (curly vs straight quotes, one leading ditto
 form), over 2,029 rows:
@@ -1524,27 +1536,18 @@ What it shows:
   the model is.
 - The copy guard breaks long s on LightOn input. LightOn writes "ſ"; the 4B writes "s", as gold
   does; the guard then restores the printed "ſ". franks1786 loses 16 fields to it, 66.1 → 48.2,
-  and the durs twin 7. The fix is to treat ſ as s when restoring.
+  and the durs twin 7. The fix is to treat ſ as s when restoring (#29).
 - The restaged panel (fc46ac8, 2,062 rows) adds 11 of Polk 1917's rows. Scoring them needs
   another 0.1 GPU-hour job.
 
 Still open:
 - Long s (franks1786, 43% exact) stays weak.
-- The survey's wrap-joiner leaves most of the re-OCR'd volumes' run-overs unjoined. All 39 keep
-  the 3.0 threshold (`calibrate_indent` declines them), and their run-overs sit about 2 line
-  heights in (1912: 2.0–2.25). By LightOn's reading, over the 39 volumes:
-  - 4,819 run-overs are joined and 26,462 left apart; 21,933 of those sit 1.5–3.0 line heights
-    in.
-  - 7,097 entry starts are glued onto the line above.
-  - Hope & Henderson 1856 (0035) alone leaves 9,778 apart. Five of its 31 inexact panel rows are
-    entries cut short this way ("Hagerty James, glass, 92 John, N. Y. h. 27" without "Hicks").
-
-  The re-OCR knows which printed lines continue an entry. For re-OCR'd leaves, the joiner could
-  take that reading instead of the indent.
+- The survey's wrap-joiner leaves 26,462 of the 39 volumes' run-overs unjoined, by LightOn's
+  reading: #28.
 - A printed line tesseract splits at a wide gap stays two lines. Trow 1907's "Jucker Bernard
   designer 260 W" loses "Bway" this way. On the pilot pages, most such splits are running heads
   and ads, not entries.
-- The copy guard's long s, above.
+- The copy guard's long s: #29.
 
 Cost at the full run's 0.19 L40S-seconds a line, one tile at a time, before batching:
 
@@ -1614,6 +1617,72 @@ and against the panel gold:
   hide a visible error behind a plausible street.
 
 The leading-zero rate became the tier signal above.
+
+**28. Join a re-OCR'd page's run-overs by LightOn's reading, not by indent.** Measured
+2026-10-16; not started.
+
+How it works today:
+- The import splits each LightOn entry back over tesseract's printed lines, by design ("the
+  downstream wrap-joiner sees what it always sees", `reocr_pair.py`'s docstring).
+- The survey's `join_wraps` then re-joins them by indent alone: a line joins the entry above when
+  it sits more than `indent_ratio` line heights in.
+- All 39 re-OCR'd volumes keep the 3.0 default. `calibrate_indent` declines each one, for ditto
+  marks or for no isolated run-over mode.
+- Their run-overs sit about 2 line heights in (1912: 2.0–2.25).
+
+So most of them stay apart. By LightOn's reading (`reocr_pair.py joins
+lightonocr-3-1b-greedy-torch --root data/reocr_halves`):
+
+| The 39 volumes | Lines |
+|---|---|
+| Run-overs joined | 4,819 |
+| Run-overs left apart | 26,462 (21,933 of them 1.5–3.0 line heights in) |
+| Entry starts glued onto the line above | 7,097 |
+
+Hope & Henderson 1856 (0035) alone leaves 9,778 apart. An entry left apart loses its tail,
+usually the address, and the tail can come back from the model as a person. On the LightOn
+panel, 5 of hopehenderson1856's 31 inexact rows are cut short this way ("Hagerty James, glass, 92
+John, N. Y. h. 27" without "Hicks").
+
+**What the import knows.** `pair_tile` marks each printed line it fills: `start` is False where
+the model read the line as part of the entry above. `page_dump` drops the flag; `page_dump(...,
+with_starts=True)` returns it, and `joins` reads it that way.
+
+**A sketch, to be settled on gold:**
+1. The dump writes the flag: each re-OCR'd record gains a list beside `sources` (say `cont`, 1
+   for a run-over). Consumers that read only `lines` are unaffected.
+2. For those records, the derive's joiner joins where the model says run-over. Two kinds of
+   model error decide what else the rule needs:
+   - LightOn sometimes writes a run-over as a line of its own (Smith 1855's "Brunt", "derbilt
+     av."). Its `start` is True but its indent says run-over. Gold decides whether the indent
+     rule stays as a fallback for these.
+   - LightOn sometimes runs two entries together (Trow 1917, before the camera-frame fix). Its
+     `start` is False on a real entry. A line at the column margin should probably never join.
+3. `strip_side_bands` and `split_merged_columns` run before the join and can change or split a
+   line. The flag has to follow its line, or be dropped where the line splits.
+4. The margin pull in `page_dump` (6a5837e, fc46ac8) exists only to steer the indent rule, and it
+   moves word boxes the survey keeps. With the flag it may not be needed.
+5. `calibrate_indent` also reads these leaves' indents. Decide whether re-OCR'd leaves still feed
+   it.
+
+**Gold, before and after.** Gold for the 39 is thin:
+- **hopehenderson1856** (0035) is the only panel set among them: 60 rows. Use
+  `eval/lighton_pilot.py`, with `--diff-against` a saved copy of `data/iapanel_lighton`.
+- **The pilot's 16 book-scan sets** must not regress. The trap is Smith 1855, whose run-overs
+  LightOn writes apart.
+- **The re-OCR bench's reference entries** (42 pages, `reocr_pair.py bench`/`score`). Its scorer
+  joins lines under the reference's guidance, so it cannot judge the survey's joiner. But its
+  references can measure how often LightOn's own lines are whole entries: the accuracy of the
+  signal itself.
+- **`joins` is LightOn's reading, not gold.** Once the joiner takes that reading, the measure is
+  circular. Use it to size the problem; judge the change on gold.
+
+**Done when:**
+- hopehenderson's 5 cut-short rows are whole, and no gold row is newly glued to another.
+- No pilot set regresses.
+- The 39 volumes are imported again: `reocr_pair.py dump`, `survey_harvest.py --rederive --ids`,
+  then `survey_derive.py` bounds, pages, sections and scope.
+- A stage-B run on the panel then measures the row EM.
 
 ## Larger, and the ones that unblock claims
 

@@ -11,6 +11,7 @@ Pair a vision model's text with tesseract's printed lines (docs/PIPELINE.md #27)
     python3 data_prep/reocr_pair.py post <run>        # turnovers and fractions -> <run>-post
     python3 data_prep/reocr_pair.py screen <slug> [--root data/reocr_screen]   # no-gold checks
     python3 data_prep/reocr_pair.py dump <slug> --root data/reocr_halves [--ids a,b] [--out-dir D]
+    python3 data_prep/reocr_pair.py joins <slug> --root data/reocr_halves [--ids a,b]  # run-overs
     python3 data_prep/reocr_pair.py --self-test
 
 WHY (2026-10-13). The hybrid (reocr_bench.hybrid_page) gives each tesseract line the model line
@@ -684,10 +685,12 @@ def page_rows(rec: dict, tiles: dict, answers: dict) -> tuple:
     return dittos(rows, median_h), median_h, char_w
 
 
-def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
+def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False) -> tuple:
     """One re-OCR'd page as a word-dump record's lines: (lines, sources). The page's rows
     (page_rows) put through the post-passes in reading order, then every line's text spread over
     its tesseract words (respell), or given boxes where tesseract never saw it (synth_line).
+    `with_starts` adds a third list, each line's `start`: False where the model read the printed
+    line as part of the entry above (a run-over), True where a model line begins (`joins`).
 
     An entry's first printed line sits at its column's margin. Where tesseract missed the line's
     opening (a `"` ditto, a first name), its boxes begin at the first word it did read, and the
@@ -737,7 +740,7 @@ def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
     def margin(x0, top):
         near = sorted(x for y, x in begins.get(x0, ()) if abs(y - top) <= MARGIN_SPAN * median_h)
         return near[len(near) // 5] if len(near) >= 5 else None
-    lines, sources = [], []
+    lines, sources, starts = [], [], []
     for r, ws in built:
         if not ws:
             continue
@@ -753,7 +756,8 @@ def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
                 ws[first][0] = int(m)
         lines.append(ws)
         sources.append(r["source"])
-    return lines, sources
+        starts.append(bool(r.get("start")))
+    return (lines, sources, starts) if with_starts else (lines, sources)
 
 
 def _box(words: list):
@@ -849,6 +853,76 @@ def dump(args) -> int:
         print(f"    looped {looped} ({stats['bleed_retry']} bleed-retried, {stats['loop_truncated']} "
               f"truncated), table mode {table} of {n} tiles"
               + ("  <- look at this volume's pages" if warn else ""), file=sys.stderr)
+    return 0
+
+
+def joins(args) -> int:
+    """How the survey's wrap-joiner treats the re-OCR'd pages' run-overs, judged by the model's
+    reading (PIPELINE #28). Each printed line the model read as part of the entry above is a
+    run-over; one a model line begins with is a start. join_wraps' rule is applied at the
+    volume's own threshold (the sidecar's wrap_calibration.indent_ratio, else 3.0). Per volume:
+    run-overs joined and left apart (and how many of those sit between 1.5 line heights and the
+    threshold), and starts glued onto the line above.
+
+    The labels are the model's, not gold. Once the joiner takes the model's reading this measure
+    is circular, so judge that change on gold. It mirrors join_wraps with the deep-indent gate
+    off, as the survey runs it, on the dump's lines as `page_dump` writes them: before the
+    derive's side-band strip and column split, which seldom touch a re-OCR'd page (its lines are
+    cut per column)."""
+    import statistics
+    from ia_volume_to_jsonl import OVERLAP_FRAC, VGAP_RATIO, words_to_lines
+    root = Path(args.root).resolve()
+    page_dir = Path(args.page_dir).resolve()
+    boxes = json.loads((root / "boxes.json").read_text(encoding="utf-8"))
+    pages = collections.defaultdict(lambda: collections.defaultdict(dict))
+    for key, entry in boxes.items():
+        vol, fname = key.split("/")
+        stem, name = fname[:-4].rsplit("_c", 1)
+        pages[vol][stem][f"c{name}"] = entry
+    vols = args.ids.split(",") if args.ids else sorted(v for v in pages if not v.startswith("nypl_"))
+    tot = collections.Counter()
+    print(f"{'volume':28s} {'ratio':>5s} | {'run-overs joined':>16s} {'apart':>6s} "
+          f"{'of which 1.5-ratio':>18s} | {'starts joined':>13s}")
+    for vol in vols:
+        side = HERE / "survey" / f"ia_{vol}.json"
+        doc = json.loads(side.read_text(encoding="utf-8")) if side.exists() else {}
+        cal = ((doc.get("harvest") or {}).get("filtered") or {}).get("wrap_calibration") or {}
+        ratio = cal.get("indent_ratio", 3.0)
+        c = collections.Counter()
+        for stem, tiles in sorted(pages[vol].items()):
+            rec_f = page_dir / vol / f"{stem}.json"
+            rec = json.loads(rec_f.read_text(encoding="utf-8")) if rec_f.exists() else {}
+            if not rec.get("lines"):
+                continue
+            answers = {}
+            for name in tiles:
+                base = root / vol / f"{stem}_{name}"
+                got = model_lines(base, args.slug, False)
+                meta_f = base.with_name(f"{base.name}_{args.slug}.meta.json")
+                meta = json.loads(meta_f.read_text(encoding="utf-8")) if meta_f.exists() else {}
+                answers[name] = None if got is None else (got, bool(meta.get("bleed_retry")))
+            lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True)
+            raw = words_to_lines(lines)
+            if not raw:
+                continue
+            med_h = statistics.median([b[3] - b[1] for b, _t in raw]) or 1.0
+            entry = None                  # the accumulated entry's box, as join_wraps keeps it
+            for (box, _t), src, start in zip(raw, sources, starts):
+                if entry is not None and 0 < box[1] - entry[1] < VGAP_RATIO * med_h and \
+                        min(box[2], entry[2]) - max(box[0], entry[0]) > OVERLAP_FRAC * (box[2] - box[0]):
+                    indent = (box[0] - entry[0]) / med_h
+                    kind = "tesseract" if src == "tesseract" else "start" if start else "run-over"
+                    c[kind, indent > ratio] += 1
+                    c["shallow"] += kind == "run-over" and 1.5 <= indent <= ratio
+                    if indent > ratio:
+                        entry = [min(entry[0], box[0]), entry[1], max(entry[2], box[2]), box[3]]
+                        continue
+                entry = list(box)
+        tot.update(c)
+        print(f"{vol:28s} {ratio:5.2f} | {c['run-over', True]:16,d} {c['run-over', False]:6,d} "
+              f"{c['shallow']:18,d} | {c['start', True]:13,d}", flush=True)
+    print(f"{'TOTAL':28s} {'':5s} | {tot['run-over', True]:16,d} {tot['run-over', False]:6,d} "
+          f"{tot['shallow']:18,d} | {tot['start', True]:13,d}")
     return 0
 
 
@@ -1256,13 +1330,13 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["bench", "score", "post", "screen", "dump"])
+    ap.add_argument("cmd", nargs="?", choices=["bench", "score", "post", "screen", "dump", "joins"])
     ap.add_argument("names", nargs="*", help="bench: the model slug; score: run names")
     ap.add_argument("--kind", default="halves", choices=["halves", "columns", "page"])
     ap.add_argument("--raw", action="store_true", help="read <tile>_<slug>.raw.txt as Churro XML")
     ap.add_argument("--pages", help="score: only these pages, as <volume>_<leaf>")
-    ap.add_argument("--root", default="data/reocr_screen", help="screen/dump: the staged half tiles")
-    ap.add_argument("--ids", help="dump: only these volumes")
+    ap.add_argument("--root", default="data/reocr_screen", help="screen/dump/joins: the staged half tiles")
+    ap.add_argument("--ids", help="dump/joins: only these volumes")
     ap.add_argument("--out-dir", help="dump: write here instead (a dry run: no swap, no sidecar)")
     ap.add_argument("--page-dir", default="data/reocr",
                     help="screen/dump: the pages' tesseract records, <dir>/<id>/<id>_<leaf>.json")
@@ -1276,6 +1350,9 @@ def main(argv=None) -> int:
     if args.cmd == "dump" and len(args.names) == 1:
         args.slug = args.names[0]
         return dump(args)
+    if args.cmd == "joins" and len(args.names) == 1:
+        args.slug = args.names[0]
+        return joins(args)
     if args.cmd == "screen" and len(args.names) == 1:
         args.slug = args.names[0]
         return screen(args)

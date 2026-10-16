@@ -693,9 +693,10 @@ def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
     survey's wrap-joiner takes that indent for a run-over and glues the entry onto the one above
     (Trow 1917 leaf 688: "Emmons Addison mgr h3056, 3d av" + '" Alice L tchr P S h347 W23d', and
     a run of three `"` entries joined into one wide line the filters then dropped as a banner).
-    So an entry start, by the model's reading, within MARGIN_REACH characters of its column's
-    margin (the 20th percentile of where its entry starts begin) begins at the margin. A
-    continuation line keeps tesseract's indent, so a real run-over still joins."""
+    So an entry start, by the model's reading, whose first word tesseract never read, within
+    MARGIN_REACH characters of its column's margin (the 20th percentile of where its entry
+    starts begin), begins at the margin. A line whose first word tesseract read keeps its place,
+    so a real run-over still joins, even one the model wrote as a line of its own."""
     rows, median_h, char_w = page_rows(rec, tiles, answers)
     texts = post([r["text"] for r in rows])
     built = []
@@ -733,7 +734,11 @@ def page_dump(rec: dict, tiles: dict, answers: dict) -> tuple:
         m = margin.get(r["x0"])
         if m is not None and r.get("start") and r["source"] != "tesseract":
             first = min(range(len(ws)), key=lambda q: ws[q][0])
-            if m < ws[first][0] <= m + MARGIN_REACH * char_w:
+            # only where tesseract missed the line's opening: a first word it read sits where the
+            # print starts, and a run-over LightOn wrote as a line of its own ("Brunt",
+            # "derbilt av.", Smith 1855) keeps the indent that joins it to its entry
+            read = {(w[0], w[2]) for w in r["words"]}
+            if (ws[first][0], ws[first][2]) not in read and m < ws[first][0] <= m + MARGIN_REACH * char_w:
                 ws = [list(w) for w in ws]
                 ws[first][0] = int(m)
         lines.append(ws)

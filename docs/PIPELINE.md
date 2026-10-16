@@ -1440,30 +1440,78 @@ historical-ocr-eval scored the same engine on its 18-volume ranking panel (2dc72
 two badly cut pages: CER-all 0.024, match 99.3%. Gemini on the same volumes is 0.145 as run, and
 0.027 on the lines it does not refuse.
 
-Before a book-scan batch:
-1. **The cropper fails on dense 4-6-column pages.** It treats M&B's repeated-surname stripe as a
-   banner and drops it, and it splits Polk's columns at their `"` stripe. The pilot re-cut those
-   pages from known column counts, with gutters where the fewest tesseract words cross.
-   Polk 1933 Brooklyn and Queens still cut 30-50 words.
-2. **Trow 1915/1917 pages are camera frames,** turned ±90°. They must be staged upright from
-   scandata (iiif_frame.pages: rotate, then crop). Even then, 13 of Polk 1917's 72 rows were
-   lost: LightOn ran entries together, the filters dropped them as banners, and a ditto line
-   was joined to its neighbour.
-3. **`"` dittos:** the import now writes them back (b5495c9). It had dropped all 281 that
-   LightOn bulleted.
-4. **Long s** (franks1786) stays weak.
-5. **The end-to-end row EM** needs a 4B run over the panel: `data/volumes_panel_lighton`,
-   packaged as `cde-volumes-panel-lighton.tar.gz`, 17 tasks.
+What a book-scan batch needed, done 2026-10-16 (hadro asked for all three):
+1. **Columns on dense pages** (d544fd5). The old cropper treated M&B's repeated-surname stripe
+   as a banner and dropped it, and split Polk's columns at their `"` stripe. Book scans now use
+   `reocr_volumes.gutter_columns`:
+   - A gutter is a valley in how many words cross each x, measured off the top and bottom ads.
+   - A stripe's white strip is told apart by its straight left side.
+   - Staging takes each volume's most common count (ties to the larger, `columns.json`) and cuts
+     every page to it, unless a forced gutter runs through text.
+   - The pilot's 63 pages: the right count on 60. With the volume's count, the dense pages cut
+     no entry words.
+   - The import reads the staged boxes (`boxed_lines`): identical to `column_lines` on 1,000 of
+     1,000 microfilm pages.
+   - The microfilm volumes keep the old cropper (`column_method`).
+   - The pilot's polk1933bk and queens1933 cuts were wrong because they forced 3 and 4 columns;
+     those pages print 5.
+2. **Camera frames and line geometry** (d24fa33, 6a5837e, fc46ac8).
+   - `reocr_volumes.page_job` stages Trow 1915/1917 upright: turned by −rotateDegree and cropped
+     to scandata's cropBox (`iiif_frame.upright`), checked by eye both ways.
+   - The import now:
+     - moves an entry start (by LightOn's reading) to its column's margin, but only where
+       tesseract missed the line's opening (6a5837e). Moving every start broke Smith 1855
+       (92% → 84%): LightOn sometimes writes a run-over as a line of its own ("Brunt"), and
+       the move took away the indent that joins it to its entry.
+     - reads that margin off the entry starts within 12 line heights (fc46ac8). Trow 1917's
+       camera frame is skewed about a degree: its first column's edge runs from x 196 at the top
+       to 122 at the foot. One margin for the whole column put the moved starts in blank paper.
+       The starts tesseract read then looked indented and were joined on as run-overs.
+     - clamps normal-width words in boxes three rows tall;
+     - keeps unread words inside the column's tile.
+   - Polk 1917 in Trow 1917: 59 → 70 of 72 rows, 73% → 84% exact, CER 0.033 → 0.011. Smith 1855
+     stays at 92%.
+   - The pilot re-run under fc46ac8: pooled 82.3% exact, CER 0.010, over 2,062 rows. Against the
+     table above, only Polk 1917 moves by more than a row.
+   - It also recovers lines on the microfilm (0040's trial: 54,621 → 56,254 kept), so the 39
+     volumes were imported again under fc46ac8: kept lines 566,403 → 576,992, scoped
+     518,537 → 529,126. Against a single margin for the whole column, the totals move by 26.
+     The joins change, though: on 1912, by LightOn's reading, there are 72 fewer false joins
+     and 49 fewer real ones.
+3. **Batched decoding** (822de99): `hpc/lightonocr_vllm.py`, run by `hpc/39_lightonocr.sbatch` with
+   `ENGINE=vllm`; setup with `ENGINE=vllm bash hpc/39_lightonocr_setup.sh` (vllm 0.30.0).
+   - Unchanged from the per-tile runner: tiles, resize, prompt, greedy decoding, cap, loop
+     handling and output files, many tiles at a time.
+   - Not yet run on a GPU. Its first Torch job is a parity run: task 0 with `ENGINE=vllm`,
+     scored beside `lightonocr-3-1b-greedy-torch`, because batched arithmetic can flip a greedy
+     near-tie. Only then is a batch trusted, and its tiles per second known.
 
-Cost at the full run's 0.19 L40S-seconds a line, one tile at a time:
+Still open:
+- Long s (franks1786, 43% exact) stays weak.
+- The survey's wrap-joiner leaves most of the re-OCR'd volumes' run-overs unjoined. All 39 keep
+  the 3.0 threshold (`calibrate_indent` declines them), and their run-overs sit about 2 line
+  heights in (1912: 2.0–2.25). By LightOn's reading, over the 39 volumes:
+  - 4,819 run-overs are joined and 26,462 left apart; 21,933 of those sit 1.5–3.0 line heights
+    in.
+  - 7,097 entry starts are glued onto the line above.
+  - Hope & Henderson 1856 (0035) alone leaves 9,778 apart. Five of its 31 inexact panel rows are
+    entries cut short this way ("Hagerty James, glass, 92 John, N. Y. h. 27" without "Hicks").
+
+  The re-OCR knows which printed lines continue an entry. For re-OCR'd leaves, the joiner could
+  take that reading instead of the indent.
+- A printed line tesseract splits at a wide gap stays two lines. Trow 1907's "Jucker Bernard
+  designer 260 W" loses "Bway" this way. On the pilot pages, most such splits are running heads
+  and ads, not entries.
+- The end-to-end row EM needs the 4B run over the LightOn panel
+  (`cde-volumes-panel-lighton.tar.gz`, 17 tasks, restaged under fc46ac8).
+
+Cost at the full run's 0.19 L40S-seconds a line, one tile at a time, before batching:
 
 | Tier | Lines | L40S-hours |
 |---|---|---|
 | abbyy8-damaged | 4.0M | ~210 |
 | first | 5.5M | ~290 |
 | abbyy8-clean | 5.1M | ~270 |
-
-Batched decoding (vLLM) should cut these several times over.
 
 The dump keeps IA's records for the leaves not re-read. For each re-read leaf it pairs the tiles
 (a tile without an answer keeps tesseract's lines), runs the post-passes, and spreads every

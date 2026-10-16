@@ -366,17 +366,17 @@
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1853",
    "hocr_lines": 13332,
-   "wrap_joins": 1189,
-   "candidates": 12143,
+   "wrap_joins": 1109,
+   "candidates": 12223,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 9218,
+    "pairs": 8845,
     "mark_share": 0.0734,
-    "mode": 1.5,
-    "mode_pairs": 92,
-    "trough": 1.25,
-    "trough_pairs": 82,
+    "mode": 1.25,
+    "mode_pairs": 80,
+    "trough": 1.0,
+    "trough_pairs": 99,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
    "column_splits": {
@@ -388,14 +388,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 8554,
-   "keep_rate": 0.7044,
+   "kept": 8916,
+   "keep_rate": 0.7294,
    "dropped": {
-    "short": 1379,
-    "banner": 760,
-    "bigtype": 755,
-    "allcaps": 656,
-    "nonascii": 37,
+    "short": 1407,
+    "bigtype": 729,
+    "allcaps": 639,
+    "banner": 496,
+    "nonascii": 34,
     "pagenum": 2
    },
    "ditto_marks": [],
@@ -419,18 +419,18 @@
     3,
     345
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 988012,
+  "words_gz_bytes": 973897,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 22,
   "end_leaf": 231,
   "first_letter": "B",
@@ -599,8 +599,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 374,
   "fitted_leaves": 218,
   "read_leaves": 75,
@@ -665,8 +665,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -751,8 +751,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0047_listing.jsonl.gz",
   "sections": [
    {
@@ -761,11 +761,11 @@
     "end_leaf": 231
    }
   ],
-  "kept": 6920,
+  "kept": 7282,
   "dropped": 1634,
-  "kept_share": 0.809,
+  "kept_share": 0.8167,
   "kept_by_section": {
-   "listing": 6920
+   "listing": 7282
   }
  },
  "non_entry_pages": {
@@ -954,6 +954,6 @@
   "lines_model-only": 868,
   "lines_bleed": 223,
   "leaves_replaced": 201,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

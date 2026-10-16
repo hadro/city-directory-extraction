@@ -345,17 +345,17 @@
    "publisher_tag_note": "'j. lain and company' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1859",
    "hocr_lines": 70708,
-   "wrap_joins": 3266,
-   "candidates": 67442,
+   "wrap_joins": 3151,
+   "candidates": 67557,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 50770,
+    "pairs": 49908,
     "mark_share": 0.0439,
-    "mode": 1.25,
-    "mode_pairs": 1842,
-    "trough": 1.0,
-    "trough_pairs": 1638,
+    "mode": 1.75,
+    "mode_pairs": 1976,
+    "trough": 1.25,
+    "trough_pairs": 582,
     "reason": "runover mode not isolated from the next-entry band"
    },
    "column_splits": {
@@ -367,14 +367,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 54621,
-   "keep_rate": 0.8099,
+   "kept": 56288,
+   "keep_rate": 0.8332,
    "dropped": {
-    "short": 8004,
-    "bigtype": 2198,
-    "banner": 1618,
-    "allcaps": 928,
-    "nonascii": 65,
+    "short": 8083,
+    "bigtype": 1419,
+    "allcaps": 942,
+    "banner": 749,
+    "nonascii": 68,
     "pagenum": 8
    },
    "ditto_marks": [],
@@ -398,18 +398,18 @@
     443,
     437
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 5158613,
+  "words_gz_bytes": 5062824,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 10,
   "end_leaf": 421,
   "first_letter": "A",
@@ -605,11 +605,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 455,
-  "fitted_leaves": 338,
-  "read_leaves": 208,
+  "fitted_leaves": 337,
+  "read_leaves": 205,
   "segments": [
    {
     "first_leaf": 10,
@@ -617,7 +617,7 @@
     "first_page": 1,
     "last_page": 47,
     "leaves": 47,
-    "read": 38
+    "read": 39
    },
    {
     "first_leaf": 63,
@@ -657,7 +657,7 @@
     "first_page": 45,
     "last_page": 60,
     "leaves": 16,
-    "read": 10
+    "read": 9
    },
    {
     "first_leaf": 186,
@@ -724,20 +724,12 @@
     "read": 10
    },
    {
-    "first_leaf": 384,
-    "last_leaf": 395,
-    "first_page": 403,
-    "last_page": 414,
-    "leaves": 12,
-    "read": 8
-   },
-   {
-    "first_leaf": 396,
+    "first_leaf": 385,
     "last_leaf": 413,
-    "first_page": 15,
+    "first_page": 4,
     "last_page": 32,
-    "leaves": 18,
-    "read": 11
+    "leaves": 29,
+    "read": 16
    },
    {
     "first_leaf": 422,
@@ -775,8 +767,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -935,8 +927,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0040_listing.jsonl.gz",
   "sections": [
    {
@@ -945,11 +937,11 @@
     "end_leaf": 421
    }
   ],
-  "kept": 53281,
+  "kept": 54948,
   "dropped": 1340,
-  "kept_share": 0.9755,
+  "kept_share": 0.9762,
   "kept_by_section": {
-   "listing": 53281
+   "listing": 54948
   }
  },
  "non_entry_pages": {
@@ -1094,6 +1086,6 @@
   "lines_model-only": 3833,
   "lines_bleed": 46,
   "leaves_replaced": 387,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

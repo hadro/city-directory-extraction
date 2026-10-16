@@ -356,7 +356,7 @@
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 3912,
+    "pairs": 3913,
     "mark_share": 0.018,
     "mode": 1.5,
     "mode_pairs": 13,
@@ -373,12 +373,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 3730,
-   "keep_rate": 0.8833,
+   "kept": 3773,
+   "keep_rate": 0.8934,
    "dropped": {
-    "banner": 178,
     "allcaps": 147,
     "short": 147,
+    "banner": 135,
     "bigtype": 20,
     "nonascii": 1
    },
@@ -394,27 +394,27 @@
    "top_ad_leaves": [
     100,
     111,
-    33,
     14,
     104,
     114,
     82,
     12,
     72,
+    92,
     56
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 302450,
+  "words_gz_bytes": 301861,
   "hocr_deleted": true,
   "elapsed_s": 19
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 4,
   "end_leaf": 93,
   "first_letter": "A",
@@ -576,8 +576,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 117,
   "fitted_leaves": 112,
   "read_leaves": 75,
@@ -602,8 +602,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -663,8 +663,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0010_listing.jsonl.gz",
   "sections": [
    {
@@ -673,11 +673,11 @@
     "end_leaf": 93
    }
   ],
-  "kept": 3099,
+  "kept": 3142,
   "dropped": 631,
-  "kept_share": 0.8308,
+  "kept_share": 0.8328,
   "kept_by_section": {
-   "listing": 3099
+   "listing": 3142
   }
  },
  "reocr": {
@@ -694,6 +694,6 @@
   "lines_tesseract": 97,
   "lines_model-only": 45,
   "leaves_replaced": 89,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

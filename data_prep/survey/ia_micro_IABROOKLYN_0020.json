@@ -345,17 +345,17 @@
    "publisher_tag_note": "'hearnes/van nostrand' tagged as its trained partner 'hearne'",
    "year_tag": "1844",
    "hocr_lines": 11617,
-   "wrap_joins": 351,
-   "candidates": 11266,
+   "wrap_joins": 352,
+   "candidates": 11265,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 9752,
+    "pairs": 9741,
     "mark_share": 0.0445,
     "mode": 1.25,
-    "mode_pairs": 58,
+    "mode_pairs": 61,
     "trough": 1.0,
-    "trough_pairs": 99,
+    "trough_pairs": 94,
     "reason": "too few runovers to read a mode"
    },
    "column_splits": {
@@ -367,13 +367,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 9210,
-   "keep_rate": 0.8175,
+   "kept": 9338,
+   "keep_rate": 0.8289,
    "dropped": {
-    "short": 965,
-    "banner": 412,
+    "short": 968,
     "allcaps": 380,
-    "bigtype": 278,
+    "banner": 380,
+    "bigtype": 178,
     "nonascii": 19,
     "pagenum": 2
    },
@@ -398,18 +398,18 @@
     256,
     257
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 828304,
+  "words_gz_bytes": 817975,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 14,
   "end_leaf": 211,
   "first_letter": "A",
@@ -596,8 +596,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 270,
   "fitted_leaves": 267,
   "read_leaves": 129,
@@ -622,8 +622,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -699,8 +699,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0020_listing.jsonl.gz",
   "sections": [
    {
@@ -709,11 +709,11 @@
     "end_leaf": 211
    }
   ],
-  "kept": 8007,
+  "kept": 8135,
   "dropped": 1203,
-  "kept_share": 0.8694,
+  "kept_share": 0.8712,
   "kept_by_section": {
-   "listing": 8007
+   "listing": 8135
   }
  },
  "non_entry_pages": {
@@ -742,6 +742,6 @@
   "lines_model-only": 183,
   "lines_bleed": 21,
   "leaves_replaced": 196,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

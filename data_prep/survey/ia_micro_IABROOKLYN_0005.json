@@ -375,12 +375,12 @@
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 2484,
+    "pairs": 2488,
     "mark_share": 0.041,
     "mode": 1.75,
-    "mode_pairs": 16,
+    "mode_pairs": 14,
     "trough": 1.25,
-    "trough_pairs": 4,
+    "trough_pairs": 5,
     "reason": "too few runovers to read a mode"
    },
    "column_splits": {
@@ -392,13 +392,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2399,
-   "keep_rate": 0.8794,
+   "kept": 2431,
+   "keep_rate": 0.8911,
    "dropped": {
     "short": 154,
     "allcaps": 90,
-    "banner": 49,
-    "bigtype": 31,
+    "bigtype": 29,
+    "banner": 19,
     "nonascii": 4,
     "pagenum": 1
    },
@@ -417,24 +417,24 @@
     74,
     4,
     75,
-    76,
     17,
-    6,
+    76,
     46,
+    63,
     11
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 198193,
+  "words_gz_bytes": 197791,
   "hocr_deleted": true,
   "elapsed_s": 13
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 5,
   "end_leaf": 60,
   "first_letter": "A",
@@ -586,8 +586,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 78,
   "fitted_leaves": 67,
   "read_leaves": 46,
@@ -612,8 +612,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -685,8 +685,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0005_listing.jsonl.gz",
   "sections": [
    {
@@ -695,11 +695,11 @@
     "end_leaf": 60
    }
   ],
-  "kept": 1902,
+  "kept": 1934,
   "dropped": 497,
-  "kept_share": 0.7928,
+  "kept_share": 0.7956,
   "kept_by_section": {
-   "listing": 1902
+   "listing": 1934
   }
  },
  "non_entry_pages": {
@@ -726,6 +726,6 @@
   "lines_tesseract": 90,
   "lines_model-only": 41,
   "leaves_replaced": 56,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

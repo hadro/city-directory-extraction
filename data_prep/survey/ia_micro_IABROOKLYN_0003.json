@@ -332,17 +332,17 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1824",
    "hocr_lines": 2287,
-   "wrap_joins": 62,
-   "candidates": 2225,
+   "wrap_joins": 63,
+   "candidates": 2224,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 1996,
+    "pairs": 1999,
     "mark_share": 0.0267,
-    "mode": 1.25,
+    "mode": 2.0,
     "mode_pairs": 9,
-    "trough": 0.5,
-    "trough_pairs": 16,
+    "trough": 1.75,
+    "trough_pairs": 7,
     "reason": "too few runovers to read a mode"
    },
    "column_splits": {
@@ -354,13 +354,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 1875,
-   "keep_rate": 0.8427,
+   "kept": 1886,
+   "keep_rate": 0.848,
    "dropped": {
-    "banner": 128,
+    "banner": 126,
     "short": 112,
     "allcaps": 80,
-    "bigtype": 30
+    "bigtype": 20
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -375,26 +375,26 @@
     3,
     4,
     46,
-    24,
     45,
     41,
     50,
     47,
     49,
-    44
+    44,
+    42
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 164836,
+  "words_gz_bytes": 164126,
   "hocr_deleted": true,
   "elapsed_s": 28
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 5,
   "end_leaf": 32,
   "first_letter": "A",
@@ -531,8 +531,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 53,
   "fitted_leaves": 40,
   "read_leaves": 31,
@@ -565,8 +565,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -651,8 +651,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0003_listing.jsonl.gz",
   "sections": [
    {
@@ -661,11 +661,11 @@
     "end_leaf": 32
    }
   ],
-  "kept": 1273,
+  "kept": 1284,
   "dropped": 602,
-  "kept_share": 0.6789,
+  "kept_share": 0.6808,
   "kept_by_section": {
-   "listing": 1273
+   "listing": 1284
   }
  },
  "non_entry_pages": {
@@ -692,6 +692,6 @@
   "lines_model": 1423,
   "lines_model-only": 30,
   "leaves_replaced": 29,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

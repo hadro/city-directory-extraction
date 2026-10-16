@@ -360,12 +360,12 @@
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 10596,
+    "pairs": 10597,
     "mark_share": 0.0574,
     "mode": 1.5,
     "mode_pairs": 103,
     "trough": 1.25,
-    "trough_pairs": 87,
+    "trough_pairs": 84,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
    "column_splits": {
@@ -377,13 +377,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 9853,
-   "keep_rate": 0.7908,
+   "kept": 9910,
+   "keep_rate": 0.7953,
    "dropped": {
-    "short": 1170,
+    "short": 1172,
     "allcaps": 599,
-    "banner": 575,
-    "bigtype": 239,
+    "banner": 550,
+    "bigtype": 205,
     "nonascii": 22,
     "pagenum": 2
    },
@@ -408,18 +408,18 @@
     274,
     244
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 913298,
+  "words_gz_bytes": 907353,
   "hocr_deleted": true,
   "elapsed_s": 24
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 10,
   "end_leaf": 178,
   "first_letter": "A",
@@ -596,8 +596,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 352,
   "fitted_leaves": 235,
   "read_leaves": 131,
@@ -646,8 +646,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -749,8 +749,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0018_listing.jsonl.gz",
   "sections": [
    {
@@ -764,12 +764,12 @@
     "end_leaf": 178
    }
   ],
-  "kept": 6798,
+  "kept": 6855,
   "dropped": 3055,
-  "kept_share": 0.6899,
+  "kept_share": 0.6917,
   "kept_by_section": {
-   "late_names": 32,
-   "listing": 6766
+   "late_names": 31,
+   "listing": 6824
   }
  },
  "non_entry_pages": {
@@ -804,6 +804,6 @@
   "lines_tesseract": 764,
   "lines_model-only": 115,
   "leaves_replaced": 167,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

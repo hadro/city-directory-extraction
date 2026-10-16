@@ -331,37 +331,37 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1854",
-   "hocr_lines": 10973,
-   "wrap_joins": 403,
-   "candidates": 10570,
+   "hocr_lines": 10985,
+   "wrap_joins": 411,
+   "candidates": 10574,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 8987,
-    "mark_share": 0.0541,
+    "pairs": 8956,
+    "mark_share": 0.054,
     "mode": 1.75,
-    "mode_pairs": 61,
-    "trough": 1.25,
-    "trough_pairs": 39,
+    "mode_pairs": 47,
+    "trough": 1.5,
+    "trough_pairs": 30,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
+    "lines": 12,
+    "leaves": 1
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 8334,
-   "keep_rate": 0.7885,
+   "kept": 8433,
+   "keep_rate": 0.7975,
    "dropped": {
-    "short": 962,
-    "allcaps": 615,
-    "banner": 404,
-    "bigtype": 239,
-    "nonascii": 15,
+    "short": 975,
+    "allcaps": 606,
+    "banner": 374,
+    "bigtype": 171,
+    "nonascii": 14,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -380,23 +380,23 @@
     320,
     51,
     13,
-    24,
     153,
-    40,
-    325
+    305,
+    24,
+    40
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 837400,
+  "words_gz_bytes": 828619,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 52,
   "end_leaf": 306,
   "first_letter": "C",
@@ -647,8 +647,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 315,
   "fitted_leaves": 109,
   "read_leaves": 64,
@@ -769,8 +769,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -838,8 +838,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0048_listing.jsonl.gz",
   "sections": [
    {
@@ -848,11 +848,11 @@
     "end_leaf": 306
    }
   ],
-  "kept": 7287,
+  "kept": 7386,
   "dropped": 1047,
-  "kept_share": 0.8744,
+  "kept_share": 0.8758,
   "kept_by_section": {
-   "listing": 7287
+   "listing": 7386
   }
  },
  "non_entry_pages": {
@@ -960,6 +960,6 @@
   "lines_tesseract": 830,
   "lines_bleed": 18,
   "leaves_replaced": 202,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

@@ -377,17 +377,17 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1825",
    "hocr_lines": 2458,
-   "wrap_joins": 63,
-   "candidates": 2395,
+   "wrap_joins": 61,
+   "candidates": 2397,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 2140,
+    "pairs": 2143,
     "mark_share": 0.0269,
     "mode": 2.75,
-    "mode_pairs": 10,
+    "mode_pairs": 12,
     "trough": 1.75,
-    "trough_pairs": 5,
+    "trough_pairs": 4,
     "reason": "too few runovers to read a mode"
    },
    "column_splits": {
@@ -399,13 +399,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2035,
-   "keep_rate": 0.8497,
+   "kept": 2040,
+   "keep_rate": 0.8511,
    "dropped": {
     "short": 130,
-    "banner": 127,
+    "banner": 128,
     "allcaps": 80,
-    "bigtype": 21,
+    "bigtype": 17,
     "nonascii": 2
    },
    "ditto_marks": [],
@@ -427,20 +427,20 @@
     56,
     59,
     4,
-    5
+    26
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 167671,
+  "words_gz_bytes": 166807,
   "hocr_deleted": true,
   "elapsed_s": 2
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 5,
   "end_leaf": 42,
   "first_letter": "A",
@@ -589,8 +589,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 59,
   "fitted_leaves": 50,
   "read_leaves": 34,
@@ -631,8 +631,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -692,8 +692,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0004_listing.jsonl.gz",
   "sections": [
    {
@@ -702,11 +702,11 @@
     "end_leaf": 42
    }
   ],
-  "kept": 1523,
+  "kept": 1528,
   "dropped": 512,
-  "kept_share": 0.7484,
+  "kept_share": 0.749,
   "kept_by_section": {
-   "listing": 1523
+   "listing": 1528
   }
  },
  "non_entry_pages": {
@@ -733,6 +733,6 @@
   "lines_tesseract": 84,
   "lines_model-only": 48,
   "leaves_replaced": 36,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

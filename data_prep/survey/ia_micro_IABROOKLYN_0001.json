@@ -364,8 +364,8 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1822",
    "hocr_lines": 2574,
-   "wrap_joins": 74,
-   "candidates": 2500,
+   "wrap_joins": 75,
+   "candidates": 2499,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -386,13 +386,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2144,
-   "keep_rate": 0.8576,
+   "kept": 2156,
+   "keep_rate": 0.8627,
    "dropped": {
-    "short": 141,
+    "short": 140,
     "allcaps": 93,
-    "banner": 89,
-    "bigtype": 30,
+    "banner": 85,
+    "bigtype": 22,
     "nonascii": 3
    },
    "ditto_marks": [],
@@ -405,7 +405,6 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    23,
     43,
     44,
     53,
@@ -414,20 +413,21 @@
     24,
     71,
     41,
+    7,
     25
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 189917,
+  "words_gz_bytes": 189239,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 5,
   "end_leaf": 31,
   "first_letter": "A",
@@ -569,8 +569,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 70,
   "fitted_leaves": 62,
   "read_leaves": 28,
@@ -595,8 +595,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -681,8 +681,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0001_listing.jsonl.gz",
   "sections": [
    {
@@ -691,11 +691,11 @@
     "end_leaf": 31
    }
   ],
-  "kept": 995,
+  "kept": 1007,
   "dropped": 1149,
-  "kept_share": 0.4641,
+  "kept_share": 0.4671,
   "kept_by_section": {
-   "listing": 995
+   "listing": 1007
   }
  },
  "reocr": {
@@ -712,6 +712,6 @@
   "lines_tesseract": 41,
   "lines_model-only": 27,
   "leaves_replaced": 27,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

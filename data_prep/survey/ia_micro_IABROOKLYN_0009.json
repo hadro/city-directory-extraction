@@ -372,12 +372,12 @@
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 3668,
+    "pairs": 3667,
     "mark_share": 0.035,
-    "mode": 1.25,
-    "mode_pairs": 10,
-    "trough": 1.0,
-    "trough_pairs": 18,
+    "mode": 1.5,
+    "mode_pairs": 12,
+    "trough": 1.25,
+    "trough_pairs": 7,
     "reason": "too few runovers to read a mode"
    },
    "column_splits": {
@@ -389,13 +389,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 3444,
-   "keep_rate": 0.8576,
+   "kept": 3523,
+   "keep_rate": 0.8772,
    "dropped": {
-    "banner": 188,
     "short": 187,
     "allcaps": 152,
-    "bigtype": 36,
+    "banner": 118,
+    "bigtype": 27,
     "nonascii": 8,
     "pagenum": 1
    },
@@ -413,25 +413,25 @@
     87,
     89,
     104,
-    20,
-    90,
     76,
-    9,
+    90,
     100,
-    60
+    60,
+    84,
+    25
    ],
-   "filters_at": "91c24e3-dirty",
-   "derived": "2026-10-15"
+   "filters_at": "fc46ac8-dirty",
+   "derived": "2026-10-16"
   },
-  "words_gz_bytes": 303956,
+  "words_gz_bytes": 302613,
   "hocr_deleted": true,
   "elapsed_s": 4
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "start_leaf": 5,
   "end_leaf": 77,
   "first_letter": "A",
@@ -583,8 +583,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "content_leaves": 104,
   "fitted_leaves": 96,
   "read_leaves": 60,
@@ -609,8 +609,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -670,8 +670,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-15",
-  "code_at": "91c24e3-dirty",
+  "derived": "2026-10-16",
+  "code_at": "fc46ac8-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0009_listing.jsonl.gz",
   "sections": [
    {
@@ -680,11 +680,11 @@
     "end_leaf": 77
    }
   ],
-  "kept": 2572,
+  "kept": 2651,
   "dropped": 872,
-  "kept_share": 0.7468,
+  "kept_share": 0.7525,
   "kept_by_section": {
-   "listing": 2572
+   "listing": 2651
   }
  },
  "reocr": {
@@ -701,6 +701,6 @@
   "lines_model": 2754,
   "lines_model-only": 59,
   "leaves_replaced": 72,
-  "dumped": "2026-10-15"
+  "dumped": "2026-10-16"
  }
 }

@@ -1486,6 +1486,48 @@ What a book-scan batch needed, done 2026-10-16 (hadro asked for all three):
      scored beside `lightonocr-3-1b-greedy-torch`, because batched arithmetic can flip a greedy
      near-tie. Only then is a batch trusted, and its tiles per second known.
 
+**End to end: the 4B on the LightOn panel (NYU job 20035169, 2026-10-16).** NYU ran `4b-100k` over
+the pilot panel as staged on 2026-10-15: 17 sets, 2,029 rows, built with b5495c9's import.
+That staging had since been overwritten by the restage under fc46ac8, so it was rebuilt from
+b5495c9 in a worktree:
+- 15 of 17 chunks match the SHA-1s NYU recorded, byte for byte.
+- Polk 1917 and trow1907 do not; the `"` ditto rule changed between the pilot run and its commit.
+  Their rows still line up (59 and 68), and every prediction's words are in its row's line but
+  one, whose gold row is the same.
+
+Panel rows are in `data/iapanel_lighton_b5495c9/`, predictions in
+`data/volumes_panel_lighton_b5495c9/`, and the score in `results/ia_panel_lighton_run1.json`.
+Whole-row EM below is guarded (copy guard). "Clean" is the 4B on gold's own text, a ceiling for
+the OCR. IA's figures are panel run 3's.
+
+| Set | IA's OCR | LightOn | Clean |
+|---|---|---|---|
+| **Pooled, guarded** (2,012 / 2,029 rows) | **55.2** | **66.2** | |
+| Pooled, raw | 50.7 | 62.3 | |
+| Pooled, the 1,969 gold rows both deliver | 55.7 | 66.6 | |
+| trow1907 | 7.4 | 60.3 | 83.8 |
+| ogden1839 | 35.0 | 85.5 | 92.7 |
+| mercein1820 | 63.3 | 86.7 | 90.0 |
+| duncan1794 | 50.0 | 79.3 | 81.0 |
+| lain1876 | 67.0 | 85.4 | 85.4 |
+| rode1851 | 54.7 | 75.5 | 75.5 |
+| boyd1890 | 73.0 | 88.0 | 90.7 |
+| Lain 1897 | 63.9 | 67.1 | 78.2 |
+| Polk 1917 in Trow 1917 | 48.6 | 54.2 | 64.4 |
+| Smith 1855 / 1856 (book scans) | 48.6 / 50.2 | 53.0 / 55.5 | — |
+| hopehenderson1856 (0035, microfilm) | 0.0 on 7 rows | 58.2 on 55 | 65.5 |
+| franks1786 (long s) | 26.8 | 48.2 | 83.9 |
+
+What it shows:
+- No set does worse. On lain1876, rode1851, doggett1846 and duncan1794, LightOn input matches
+  clean text, or comes within two points of it. There the OCR has stopped being the limit, and
+  the model is.
+- The copy guard breaks long s on LightOn input. LightOn writes "ſ"; the 4B writes "s", as gold
+  does; the guard then restores the printed "ſ". franks1786 loses 16 fields to it, 66.1 → 48.2,
+  and the durs twin 7. The fix is to treat ſ as s when restoring.
+- The restaged panel (fc46ac8, 2,062 rows) adds 11 of Polk 1917's rows. Scoring them needs
+  another 0.1 GPU-hour job.
+
 Still open:
 - Long s (franks1786, 43% exact) stays weak.
 - The survey's wrap-joiner leaves most of the re-OCR'd volumes' run-overs unjoined. All 39 keep
@@ -1502,8 +1544,7 @@ Still open:
 - A printed line tesseract splits at a wide gap stays two lines. Trow 1907's "Jucker Bernard
   designer 260 W" loses "Bway" this way. On the pilot pages, most such splits are running heads
   and ads, not entries.
-- The end-to-end row EM needs the 4B run over the LightOn panel
-  (`cde-volumes-panel-lighton.tar.gz`, 17 tasks, restaged under fc46ac8).
+- The copy guard's long s, above.
 
 Cost at the full run's 0.19 L40S-seconds a line, one tile at a time, before batching:
 

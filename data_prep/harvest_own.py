@@ -35,6 +35,20 @@ lines under 0.5; the worst is 0333_…2771_left at 77.1%, median similarity 0.28
 borderline at 20-50%, and the median of per-page medians is 0.99 -- so the failures are clear
 outliers against their own volume.
 
+Lain 1897 (`output/lain_healy_s_brooklyn_directory_for_the_1897BPL/1897BPL`, filtering to the
+`*_gemini-3.1-flash-lite-preview_aligned.json` files -- the directory also holds apple-vision
+and chandra alignments) is five times cleaner: **1 failing page of 98 (1%)**, 7 borderline,
+median 0.97. `lain_eval` draws 17 of its 800 rows from that one page (0032) and they are
+untouched -- clean alphabetical entries scoring 76.5% row EM against 65.6% for the other 783.
+
+And what that page actually is, because it bears on the screen: Surya emitted 317 lines there
+with a MEAN LINE LENGTH OF 16 CHARACTERS. It shredded the page into micro-boxes, so real Gemini
+entry lines bound to boxes holding a single stray glyph ('" R. & M. hotel, 48 Ewen' against
+'4'). The binding is genuinely wrong, but the cause is upstream in segmentation, and some of
+the low scores are not binding errors at all (Gemini's synthetic '=== ADVERTISEMENT ===' marker
+against real ad text). So a page's Surya mean line length may be the cheaper pre-filter, and it
+needs no alignment run.
+
 What already shipped is clean, and by construction rather than by luck: this script drops the
 coordinates, so `data/tulsa_eval.jsonl` and `data/lain_eval.jsonl` carry no box for a
 mis-binding to be wrong about. Checked anyway on the text they do expose -- the record's

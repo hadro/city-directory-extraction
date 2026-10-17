@@ -1016,7 +1016,27 @@ was a top-of-page sample. Whole-volume against stratified, the gap is **30.1% vs
 2×. The normalization worry dissolved too: no ditto mark clears the gates on that volume, so
 `raw_line` is untouched and the existing predictions stand. See stage 6.
 
-**14. Report a median and a per-volume tail in `evaluate.py`.** It currently pools TP/FP/FN across
+**14. ~~Report a median and a per-volume tail in `evaluate.py`.~~ DONE 2026-10-16:
+`--by-volume`.** It scores each `--gold`/`--pred` pair separately and prints the per-set table,
+the pooled number, the median, and every set more than `--tail-margin` points of row EM below it
+(default 15). `distribution()` and `pool()` are reusable, and `pool()` sums the raw `score()`
+tallies, so the pooled figure is exactly what a single score over the concatenation gives.
+
+It earned itself on the first run. Over the 25 clean-gold panel sets, `4b-100k`:
+
+| | |
+|---|---|
+| Pooled row EM | 69.5% |
+| Median | 77.6% |
+| Worst | **minneapolis 35.2%** — 42 points below the median |
+| Also flagged | nyu 56.0% |
+
+minneapolis holds a macro-F1 of 0.804 while its row EM is 35.2%, which is the signature of one
+field consistently off rather than a collapse — the distribution says where to look, not what is
+wrong. The self-test is the case the measure exists for: a small collapsed set among healthy
+ones, where the pooled mean reads 97.8% and the worst set is 0.0%.
+
+The original item follows. It currently pools TP/FP/FN across
 the whole panel and prints macro/micro F1 and whole-row EM — one number per field, no distribution.
 CLOCR-C (arXiv 2408.17428) reports that pooled means hide catastrophic per-document failure:
 individual documents collapsed into complete hallucination or word repetition while the mean stayed

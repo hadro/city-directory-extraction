@@ -16,6 +16,16 @@ in the same order, then:
     python3 eval/evaluate.py --gold data/nyu_eval.jsonl --pred preds.pipe.txt
     python3 eval/evaluate.py --gold data/nyu_eval.jsonl --pred preds.yaml.txt --target yaml
     python3 eval/evaluate.py --gold data/synth_dev.jsonl --self-test   # sanity-check the harness
+    python3 eval/evaluate.py --by-volume --target yaml \
+        --gold a_eval.jsonl,b_eval.jsonl --pred preds_a.txt,preds_b.txt   # the DISTRIBUTION
+
+**Score a panel with `--by-volume`, not one set at a time.** One pooled mean over many volumes
+hides a single volume collapsing, and that is this pipeline's live exposure: the model never
+refuses, so a volume whose page-type filter admitted advertising reads as confident people
+rather than as an obvious error. `--by-volume` prints the per-set table, the pooled number, the
+median, and every set more than `--tail-margin` points of row EM below it. On the clean gold
+panel it reports a pooled 69.5% over 25 sets whose median is 77.6% and whose worst is
+minneapolis at 35.2% — 42 points down, and invisible in the pooled figure. See distribution().
 
 "Eval realism" rule (van Strien): score predictions produced the SAME way the model will
 actually run (same prompt, same serialization), not training-checkpoint metrics.
@@ -163,6 +173,85 @@ def metrics(res: dict, exclude: Optional[set] = None) -> dict:
     if exclude:
         out["excluded_fields"] = sorted(exclude)      # recorded in --save so a number is never
     return out                                        # silently comparable to an unrestricted one
+
+
+TAIL_MARGIN = 15.0      # points of row EM below the median at which a volume is called collapsed
+
+
+def eval_set_name(path: str) -> str:
+    """`data/boyd1890_eval.jsonl` -> `boyd1890`, the name the board and results_table use."""
+    base = os.path.basename(path or "")
+    for suf in ("_eval.jsonl", ".jsonl"):
+        if base.endswith(suf):
+            return base[: -len(suf)]
+    return base or path
+
+
+def pool(results: list) -> dict:
+    """Several sets' raw score() tallies summed into one -- the pooled number, computed exactly
+    as a single score() over the concatenation would compute it."""
+    out = {"n": 0, "row_exact": 0,
+           "per": {f: {k: 0 for k in ("em", "gold_ne", "pred_ne", "correct_ne")} for f in FIELDS}}
+    for r in results:
+        out["n"] += r["n"]
+        out["row_exact"] += r["row_exact"]
+        for f in FIELDS:
+            for k in out["per"][f]:
+                out["per"][f][k] += r["per"][f][k]
+    return out
+
+
+def distribution(per_set: dict, margin: float = TAIL_MARGIN, exclude: Optional[set] = None) -> dict:
+    """The shape of a panel's scores, not just its centre: pooled, median, and the tail.
+
+    A pooled mean hides a single collapsed volume, and this pipeline is unusually exposed to
+    that. CLOCR-C (arXiv 2408.17428) reports individual documents falling into complete
+    hallucination or word repetition while the pooled mean stayed respectable, because the
+    distribution is skewed. Here the same failure is quieter still: **the model never refuses**,
+    so a volume whose page-type filter let advertising through does not produce garbage, it
+    produces confidently structured people who never existed. Nothing else in the harness
+    catches one volume of twenty-one going wrong -- `entry_rate` cannot, being a page-type proxy
+    blind to record quality (PIPELINE #14).
+
+    `per_set` maps a set name to its score() result, and `exclude` must be the same set passed
+    to score(), or the per-set macro-F1 counts fields the row EM already dropped. A set is in
+    the tail when its whole-row EM is more than `margin` points below the median; the median is
+    used rather than the mean because the collapsed volume drags a mean toward itself and so
+    hides its own outlierness.
+    """
+    rows = {k: metrics(v, exclude) for k, v in per_set.items()}
+    ems = sorted(m["row_exact_pct"] for m in rows.values())
+    if not ems:
+        return {"sets": {}, "pooled": None, "median": None, "tail": []}
+    mid = (ems[len(ems) // 2] if len(ems) % 2
+           else round((ems[len(ems) // 2 - 1] + ems[len(ems) // 2]) / 2, 1))
+    return {"sets": rows,
+            "pooled": metrics(pool(list(per_set.values())), exclude)["row_exact_pct"],
+            "median": mid, "worst": ems[0], "margin": margin,
+            "tail": sorted((k for k, m in rows.items() if m["row_exact_pct"] < mid - margin),
+                           key=lambda k: rows[k]["row_exact_pct"])}
+
+
+def print_distribution(d: dict) -> None:
+    """The per-volume table, then pooled / median / tail. See distribution()."""
+    if not d["sets"]:
+        print("no sets scored")
+        return
+    print(f"\n{'set':<34} {'rows':>6} {'row EM':>8} {'macro-F1':>9}")
+    print("-" * 60)
+    for k, m in sorted(d["sets"].items(), key=lambda kv: kv[1]["row_exact_pct"]):
+        flag = "  <- TAIL" if k in d["tail"] else ""
+        print(f"{k:<34} {m['n']:>6} {m['row_exact_pct']:>7.1f}% {m['macro_f1']:>9.3f}{flag}")
+    print("-" * 60)
+    print(f"{'POOLED':<34} {sum(m['n'] for m in d['sets'].values()):>6} {d['pooled']:>7.1f}%")
+    print(f"{'MEDIAN':<34} {len(d['sets']):>6} {d['median']:>7.1f}%   worst {d['worst']:.1f}%")
+    if d["tail"]:
+        print(f"\n{len(d['tail'])} set(s) more than {d['margin']:.0f} points below the median -- "
+              f"a pooled mean would hide this:")
+        for k in d["tail"]:
+            print(f"    {k}  {d['sets'][k]['row_exact_pct']:.1f}%")
+    else:
+        print(f"\nno set is more than {d['margin']:.0f} points below the median.")
 
 
 def _bar(x: float) -> str:
@@ -323,8 +412,20 @@ def _roundtrip_check(gold: list, target: str) -> int:
 
 def main(argv: Optional[list] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--gold", required=True, help="gold JSONL ({record:...} per line)")
-    ap.add_argument("--pred", default=None, help="predictions file (one serialized row per gold line)")
+    ap.add_argument("--gold", required=True, help="gold JSONL ({record:...} per line); with "
+                    "--by-volume, a comma-separated list of them")
+    ap.add_argument("--pred", default=None, help="predictions file (one serialized row per gold "
+                    "line); with --by-volume, a comma-separated list matching --gold")
+    ap.add_argument("--by-volume", action="store_true",
+                    help="score each --gold/--pred pair separately and report the DISTRIBUTION: "
+                         "a per-set table, the pooled number, the median, and any set more than "
+                         "--tail-margin points of row EM below it. A pooled mean hides one "
+                         "volume collapsing, which is this pipeline's live exposure (PIPELINE "
+                         "#14) -- the model never refuses, so a collapsed volume reads as "
+                         "confident people rather than as an error.")
+    ap.add_argument("--tail-margin", type=float, default=TAIL_MARGIN,
+                    help=f"points of row EM below the median that mark a set as collapsed "
+                         f"(default {TAIL_MARGIN:g})")
     ap.add_argument("--target", choices=["pipe", "yaml"], default="pipe")
     ap.add_argument("--strict", action="store_true", help="exact string match (default: case/space/period-insensitive)")
     ap.add_argument("--save", default=None, help="append run metrics as one JSON line to this file "
@@ -346,6 +447,24 @@ def main(argv: Optional[list] = None) -> int:
     ap.add_argument("--self-test", action="store_true", help="score gold-vs-gold and a corrupted copy to verify the harness")
     args = ap.parse_args(argv)
 
+    if args.by_volume:
+        golds = [g for g in args.gold.split(",") if g]
+        preds = [p for p in (args.pred or "").split(",") if p]
+        if len(golds) != len(preds):
+            ap.error(f"--by-volume: {len(golds)} gold file(s) against {len(preds)} prediction "
+                     "file(s); they are paired in order")
+        excl = set(args.exclude_fields.split(",")) - {""}
+        per_set = {}
+        for g, p in zip(golds, preds):
+            gold_rows, pred_rows = load_gold(g), load_pred(p, args.target)
+            if len(pred_rows) != len(gold_rows):
+                print(f"WARNING: {eval_set_name(g)}: {len(pred_rows)} predictions vs "
+                      f"{len(gold_rows)} gold rows; scoring the first "
+                      f"{min(len(pred_rows), len(gold_rows))}", file=sys.stderr)
+            per_set[eval_set_name(g)] = score(gold_rows, pred_rows, args.strict, excl)
+        print_distribution(distribution(per_set, args.tail_margin, excl))
+        return 0
+
     gold = load_gold(args.gold)
 
     if args.self_test:
@@ -360,6 +479,20 @@ def main(argv: Optional[list] = None) -> int:
             corrupted.append(c)
         print("\n[self-test] occupation blanked in half (expect occupation R~0.50):")
         report(score(gold, corrupted, args.strict))
+        # the distribution's whole job is to catch the set a pooled mean hides, so the test is
+        # one collapsed set among healthy ones -- and it has to be a SMALL one, since a pooled
+        # mean only hides what is small
+        healthy = score(gold, [dict(g) for g in gold], args.strict)
+        collapsed = score(gold[:5], [{f: "" for f in FIELDS} for _ in gold[:5]], args.strict)
+        d = distribution({"good_a": healthy, "good_b": healthy, "good_c": healthy,
+                          "collapsed": collapsed})
+        assert d["tail"] == ["collapsed"], d["tail"]
+        assert d["median"] == 100.0 and d["worst"] == 0.0, (d["median"], d["worst"])
+        assert d["pooled"] > 90.0, f"a pooled mean hides it ({d['pooled']}) -- that is the point"
+        assert distribution({"only": healthy})["tail"] == [], "one healthy set has no tail"
+        assert distribution({})["tail"] == [], "no sets must not divide by zero"
+        print(f"\n[self-test] distribution: pooled {d['pooled']:.1f}% hides a collapsed set at "
+              f"{d['worst']:.1f}%, median {d['median']:.1f}%, flagged {d['tail']}")
         if rc:
             return rc
         return 0

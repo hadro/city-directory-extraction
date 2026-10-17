@@ -107,6 +107,14 @@ def main(argv: Optional[list] = None) -> int:
         md = "\n".join(build_table(recs, m) for m in METRICS)
     else:
         md = build_table(recs, args.metric)
+    # A caveat about a cell outlives the table, which is regenerated whenever a run is scored.
+    # Keeping it in a sidecar is what stops "flag the stale columns" from being erased by the
+    # next --out (minneapolis, 2026-10-17: its gold was corrected and only 4 of 18 models could
+    # be re-scored, so most of that row is measured against gold that no longer exists).
+    notes = os.path.join(os.path.dirname(args.inp), "eval_table_notes.md")
+    if os.path.exists(notes):
+        with open(notes, encoding="utf-8") as fh:
+            md += "\n\n" + fh.read().rstrip() + "\n"
     if args.out:
         if os.path.dirname(args.out):
             os.makedirs(os.path.dirname(args.out), exist_ok=True)

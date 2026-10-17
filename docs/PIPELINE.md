@@ -1055,12 +1055,35 @@ field after", so it is a known caveat that was never measured, and the published
 (`results/eval_table.md`) carries the depressed number for every model in it. Some carries are
 also simply wrong ("Mabel Mrs Mary E", "Howard John G" on a page of Abbotts).
 
-Before minneapolis is read as a model result it needs the review it was shipped awaiting: either
-re-harvest with `--surname` per page, or strip the inherited surname so the gold reads as the
-line prints it. **`nyu`, the other flagged set, is a known non-peer** (a third-party CRF parse
-over uncorrected OCR, GROUND_TRUTH_HANDOFF "The NYU case, in full"). The two sets the instrument
-flagged on its first run are the two in the panel that are not hand-built gold — which is a fair
-first result for it, and a reminder that a low set is a question, not a verdict.
+**FIXED 2026-10-17, hadro's call.** The gold now records what the page prints — the inherited
+surname stripped from `name`, and kept in `context.inherited_surname` rather than discarded, so
+a future surname-carry evaluation keeps its target. All 95 rows match their own `raw_line`
+afterwards, and `validate_gold`'s 95 standing `name tokens not in raw_line` warnings go to zero.
+`harvest_minneapolis.py`'s docstring now says to emit the printed name and NOT to use
+`--surname`, so a re-run cannot reintroduce it. Logged in GROUND_TRUTH_HANDOFF's corrections
+table; the original is `data/_gold_backup/minneapolis_eval.2026-10-17.jsonl`.
+
+Minneapolis prints no repeat mark at all, unlike polk1917's `"` or trow1913's `-`, so there is
+nothing for `resolve_dittos.py` to key on and the surname genuinely is not recoverable
+downstream. That is a property of the book, not something the gold should paper over.
+
+| minneapolis row EM | before | after |
+|---|---|---|
+| v7 | 31.3 | **63.0** |
+| 2b-100k | 34.8 | **65.7** |
+| 4b-100k | 35.2 | **64.8** |
+| v8-250k | 21.3 | **45.7** |
+
+Only those four of the board's 18 models had stored predictions. The rest of that row predates
+the correction and is flagged as not comparable in `results/eval_table_notes.md`, which
+`results_table.py` now appends to every regenerated table so the caveat cannot be erased by the
+next `--out`.
+
+**The panel after the fix: pooled 69.5 → 71.0, worst 35.2 → 56.0, and one set still flagged —
+`nyu`, which is a known non-peer** (a third-party CRF parse over uncorrected OCR,
+GROUND_TRUTH_HANDOFF "The NYU case, in full"). So both sets the instrument caught on its first
+run were the two in the panel that are not hand-built gold, one of them a real defect nobody had
+measured. A low set is a question, not a verdict.
 
 Checked at the same time, and clean: `lain` (800 rows) and `tulsa` (1,500) are harvested from
 directory-pipeline's aligned JSON by `harvest_own.py`, and a sibling session reported that

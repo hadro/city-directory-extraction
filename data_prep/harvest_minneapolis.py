@@ -23,10 +23,22 @@ Get the data (MIT):
     python3 harvest_minneapolis.py --dir data/minneapolis/ground_truth --out data/minneapolis_eval.jsonl
 
 Dialect notes (Minneapolis 1900), grounded on the real `ground_truth/*.txt` lines:
-  * surname-first with INHERITANCE [review item #1]: a surname is printed once ("Cook Ira M")
-    and following entries drop it ("Jacob H, ...", "Mary (wid George A), ..."), inheriting the
-    run's surname. Recovering that from plain text is lossy -- pass --surname for single-surname
-    pages (the bundled pages are mostly one surname each) or review the `name` field after.
+  * surname-first with INHERITANCE [review item #1 -- RESOLVED 2026-10-17, read this before
+    re-running]: a surname is printed once ("Cook Ira M") and following entries drop it
+    ("Jacob H, ...", "Mary (wid George A), ..."), inheriting the run's surname. This converter
+    wrote the INHERITED surname into `name`, which turned out to be the wrong call and was
+    corrected in data/minneapolis_eval.jsonl by hand (GROUND_TRUTH_HANDOFF, corrections table).
+    Gold records what the PAGE PRINTS: every other panel volume keeps the repeat form in `name`
+    (polk1917 `" Jno H`, trow1913 `-Adolph A`), because the model emits verbatim by contract and
+    resolve_dittos.py expands downstream where the antecedent is auditable. Asking for a surname
+    absent from the line made the 4B score a structural 0.0% row EM on the 95 affected rows of
+    230, against 60.0% on the rest, and dragged the published board for every model in it.
+    The carry was also often simply wrong ("Mabel Mrs Mary E", "Novelty Rev Charles H").
+    SO: if you re-run this converter, emit the printed name only and put any surname you infer
+    in `context.inherited_surname`, as the corrected file does -- do NOT use --surname to write
+    it into `name`. Minneapolis prints no repeat mark at all, so there is nothing for
+    resolve_dittos.py to key on and the surname is simply not recoverable downstream; that is a
+    property of the book, not something gold should paper over.
   * residency codes r / b / bds / rms / res / h / rear (like Tulsa's r/b/rms), kept verbatim in
     the address value to match how Tulsa is stored.
   * widow spouse marker "(wid George A)"; titles "Mrs"/"Miss"; employer embedded in the

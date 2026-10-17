@@ -18,6 +18,31 @@ line's `#xywh=...` exactly. Multi-line entries are rebuilt by taking every align
 an entry's headline down to the next entry's headline (reading order within a single
 left/right column image).
 
+⚠️ SCREEN THE PAGES BEFORE HARVESTING MORE (2026-10-17). directory-pipeline's alignment can
+bind the wrong Gemini line to a box, and the error is between TEXT and BOX: the line's text and
+its fields stay consistent with each other while the `#xywh=` points at a different printed
+line. Since this harvest walks boxes in reading order to assemble a multi-line entry, a wrong
+box can attach the right head to the wrong tail.
+
+The signature (from the directory-pipeline session, which found it on its own panel): compare
+each aligned line's gemini_text with the Surya text at the SAME bbox, in `*_surya.json` beside
+the aligned JSON, and take the share of bound lines under 0.5 head-similarity on the first 60
+characters, normalised. Read it per page against the volume's own distribution, since poor
+Surya text also scores low.
+
+Measured over 150 random pages of `tulsa_1921`: **8 pages (5%) fail** (>50% of their bound
+lines under 0.5; the worst is 0333_…2771_left at 77.1%, median similarity 0.28), 51% sit
+borderline at 20-50%, and the median of per-page medians is 0.99 -- so the failures are clear
+outliers against their own volume.
+
+What already shipped is clean, and by construction rather than by luck: this script drops the
+coordinates, so `data/tulsa_eval.jsonl` and `data/lain_eval.jsonl` carry no box for a
+mis-binding to be wrong about. Checked anyway on the text they do expose -- the record's
+surname AND its address both appear in the row's own `raw_line` on 100% of rows in both sets,
+which covers the head and (since an address usually ends an entry) the tail. The existing
+1,500 Tulsa rows were drawn with --limit and evidently missed the bad pages; a larger harvest
+should not count on that.
+
 Usage
 -----
     python3 harvest_own.py --dir ../directory-pipeline/output/tulsa_1921 --out data/tulsa_eval.jsonl

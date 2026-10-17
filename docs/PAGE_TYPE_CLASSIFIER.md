@@ -497,6 +497,53 @@ learning ABBYY's artifacts, not page structure**, and it must be retrained per O
 shipped as one corpus-wide model. That is a fine outcome; it just has to be known before it is
 claimed otherwise.
 
+## STATUS 4 — re-measured after the re-OCR: phase 2 holds for 38 volumes, and is overturned for one
+
+**2026-10-16.** Phase 2's verdict — the band rule cannot run on the thin tier — was measured on
+`micro_IABROOKLYN_0013` as **tesseract read it off microfilm**. All 39 of those volumes have since
+been re-OCR'd by LightOnOCR (PIPELINE #27), so the premise had to be re-measured before anything
+was built on the "learned model" conclusion. Both dumps are still on disk (IA's as
+`<id>_words.ia.jsonl.gz`), so this is a true before/after on the same leaves:
+[`results/band_structure_after_reocr.py`](../results/band_structure_after_reocr.py) →
+`results/band_structure_after_reocr.json`.
+
+Leaves clearing the 20-ditto gate the rule needs, over all 39 volumes:
+**27 of 8,296 → 305 of 8,307.** All but three of the gain is one volume.
+
+| | ditto mark | gate leaves, IA | gate leaves, re-OCR | ditto share |
+|---|---|---|---|---|
+| **Brooklyn 1912** (`brooklynnewyorkc19123broo`) | `—` | 25 / 566 | **302 / 566** | 15.7% → **43.3%** |
+| the 38 BPL microfilm volumes | none admitted | 2 / 7,730 | 3 / 7,741 | 4.3% → **0.7%** |
+
+**Brooklyn 1912 is now a dense-tier volume for this purpose.** Its profile after the re-OCR is the
+1906BPL shape, and the rule's precondition is met:
+
+    decile   0.0-0.1   0.1-0.9 (eight deciles)   0.9-1.0
+    share      2.5%        41-49%, flat           1.6%
+
+Against IA's reading of the same leaves, which has no band at all (0.049, 0.135, 0.211, 0.201,
+0.160, 0.189, 0.172, 0.178, 0.162, 0.050). Its commonest leading tokens are now `—John`, `—Wm`,
+`—Chas`, `—Geo`: the convention was always printed, and IA's OCR was losing it.
+
+**For the other 38 the phase 2 finding stands, and is now better evidenced.** Their per-volume
+gate admits no mark at all, and their apparent ditto share **fell** — 0047 from 12.8% to 1.6%,
+0031 from 9.5% to 0.7%. Those IA "dittos" were film specks passing the mark-shape test, which
+`dittos()` already describes; LightOn does not produce them. 0035's commonest leading tokens are
+`h.`, `N.`, `n.`, `av.` — an address vocabulary, not a mark. These books print every surname in
+full, exactly as phase 2 concluded, and no OCR will create a convention the printer did not use.
+
+**What this changes.** The band rule should be run on Brooklyn 1912, which is 566 leaves and
+54,036 staged lines and was the single worst volume in the corpus for failed OCR. The learned
+instrument phase 2 called for is still the candidate for the 38, and its target is now sharply
+defined: volumes with **no ditto convention whatsoever**, where the rule is inapplicable by
+construction rather than by threshold.
+
+**What this does not settle.** The 30.1% fabrication rate that sizes the prize was also measured
+on IA's reading of the thin tier. Re-measuring it needs predictions from the re-OCR'd lines,
+which is the `reocr` tier run (PIPELINE #28, staged 2026-10-16, awaiting a GPU). Until that
+lands, the gap between the tiers is an open number, and the case for spending on a learned
+classifier rests on a figure taken from OCR that has been replaced.
+
 ## Phase 3 — Full-page ad leaves, only if phases 1–2 pass
 
 Phase 0 absorbed the old phase 3 — line-level *was* the concession to mixed leaves, and mixed leaves

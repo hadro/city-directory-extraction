@@ -1032,9 +1032,41 @@ It earned itself on the first run. Over the 25 clean-gold panel sets, `4b-100k`:
 | Also flagged | nyu 56.0% |
 
 minneapolis holds a macro-F1 of 0.804 while its row EM is 35.2%, which is the signature of one
-field consistently off rather than a collapse — the distribution says where to look, not what is
-wrong. The self-test is the case the measure exists for: a small collapsed set among healthy
-ones, where the pooled mean reads 97.8% and the worst set is 0.0%.
+field consistently off rather than a collapse. The self-test is the case the measure exists for:
+a small collapsed set among healthy ones, where the pooled mean reads 97.8% and the worst set is
+0.0%.
+
+**Followed up 2026-10-17, and the tail is a GOLD defect, not a model one.** Minneapolis 1900
+prints a surname once and drops it from the entries beneath ("Cook Ira M", then "Jacob H, …"),
+and `harvest_minneapolis.py` RESOLVES that inherited surname into the `name` field. So the gold
+asks for a surname that is not in the input line, against the contract that a ditto is emitted
+verbatim and expanded downstream by `resolve_dittos.py`, where the antecedent is auditable.
+**95 of 230 rows (41.3%) carry a surname absent from their own `raw_line`:**
+
+| minneapolis, `4b-100k` | rows | row EM | macro-F1 |
+|---|---|---|---|
+| all | 230 | 35.2 | 0.754 |
+| surname IS in the line | 135 | **60.0** | 0.797 |
+| inherited surname | 95 | **0.0** | 0.696 |
+
+The model scores a structural zero on the 95 because it cannot do otherwise; 35.2 is just that
+arithmetic. The converter's own docstring flags this as "[review item #1] … review the `name`
+field after", so it is a known caveat that was never measured, and the published board
+(`results/eval_table.md`) carries the depressed number for every model in it. Some carries are
+also simply wrong ("Mabel Mrs Mary E", "Howard John G" on a page of Abbotts).
+
+Before minneapolis is read as a model result it needs the review it was shipped awaiting: either
+re-harvest with `--surname` per page, or strip the inherited surname so the gold reads as the
+line prints it. **`nyu`, the other flagged set, is a known non-peer** (a third-party CRF parse
+over uncorrected OCR, GROUND_TRUTH_HANDOFF "The NYU case, in full"). The two sets the instrument
+flagged on its first run are the two in the panel that are not hand-built gold — which is a fair
+first result for it, and a reminder that a low set is a question, not a verdict.
+
+Checked at the same time, and clean: `lain` (800 rows) and `tulsa` (1,500) are harvested from
+directory-pipeline's aligned JSON by `harvest_own.py`, and a sibling session reported that
+alignment can bind the wrong line on dense pages. It does not reach these: the surname and the
+address appear in their own `raw_line` on 100% of rows in both sets, so the `#xywh=` join held.
+They remain silver by provenance (labels are Gemini's), not by defect.
 
 The original item follows. It currently pools TP/FP/FN across
 the whole panel and prints macro/micro F1 and whole-row EM — one number per field, no distribution.

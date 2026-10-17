@@ -355,8 +355,8 @@
    "publisher_tag_note": "'leslie' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1841/42",
    "hocr_lines": 13141,
-   "wrap_joins": 687,
-   "candidates": 12454,
+   "wrap_joins": 699,
+   "candidates": 12442,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -368,7 +368,7 @@
     "trough_pairs": 84,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
-   "model_runovers": 22,
+   "model_runovers": 56,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -379,12 +379,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 9904,
-   "keep_rate": 0.7952,
+   "kept": 9896,
+   "keep_rate": 0.7954,
    "dropped": {
     "short": 1172,
     "allcaps": 599,
-    "banner": 550,
+    "banner": 546,
     "bigtype": 205,
     "nonascii": 22,
     "pagenum": 2
@@ -410,10 +410,10 @@
     274,
     244
    ],
-   "filters_at": "586fde9-dirty",
+   "filters_at": "1eada69-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 908372,
+  "words_gz_bytes": 908434,
   "hocr_deleted": true,
   "elapsed_s": 24
  },
@@ -421,7 +421,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "start_leaf": 10,
   "end_leaf": 178,
   "first_letter": "A",
@@ -599,7 +599,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "content_leaves": 352,
   "fitted_leaves": 235,
   "read_leaves": 131,
@@ -649,7 +649,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -752,7 +752,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0018_listing.jsonl.gz",
   "sections": [
    {
@@ -766,12 +766,12 @@
     "end_leaf": 178
    }
   ],
-  "kept": 6849,
+  "kept": 6841,
   "dropped": 3055,
-  "kept_share": 0.6915,
+  "kept_share": 0.6913,
   "kept_by_section": {
    "late_names": 31,
-   "listing": 6818
+   "listing": 6810
   }
  },
  "reocr": {
@@ -784,7 +784,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 167,
-  "lines_runover": 22,
+  "lines_runover": 56,
   "lines_model": 7266,
   "lines_tesseract": 764,
   "lines_model-only": 115,

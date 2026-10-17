@@ -377,8 +377,8 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1825",
    "hocr_lines": 2458,
-   "wrap_joins": 67,
-   "candidates": 2391,
+   "wrap_joins": 75,
+   "candidates": 2383,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -390,7 +390,7 @@
     "trough_pairs": 4,
     "reason": "too few runovers to read a mode"
    },
-   "model_runovers": 12,
+   "model_runovers": 29,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -401,11 +401,11 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2035,
-   "keep_rate": 0.8511,
+   "kept": 2026,
+   "keep_rate": 0.8502,
    "dropped": {
     "short": 129,
-    "banner": 128,
+    "banner": 129,
     "allcaps": 80,
     "bigtype": 17,
     "nonascii": 2
@@ -431,10 +431,10 @@
     4,
     26
    ],
-   "filters_at": "586fde9-dirty",
+   "filters_at": "1eada69-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 167126,
+  "words_gz_bytes": 167178,
   "hocr_deleted": true,
   "elapsed_s": 2
  },
@@ -442,7 +442,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "start_leaf": 5,
   "end_leaf": 42,
   "first_letter": "A",
@@ -592,7 +592,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "content_leaves": 59,
   "fitted_leaves": 50,
   "read_leaves": 34,
@@ -634,7 +634,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -695,7 +695,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0004_listing.jsonl.gz",
   "sections": [
    {
@@ -704,11 +704,11 @@
     "end_leaf": 42
    }
   ],
-  "kept": 1523,
+  "kept": 1514,
   "dropped": 512,
-  "kept_share": 0.7484,
+  "kept_share": 0.7473,
   "kept_by_section": {
-   "listing": 1523
+   "listing": 1514
   }
  },
  "reocr": {
@@ -721,7 +721,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 36,
-  "lines_runover": 12,
+  "lines_runover": 29,
   "lines_model": 1633,
   "lines_tesseract": 84,
   "lines_model-only": 48,

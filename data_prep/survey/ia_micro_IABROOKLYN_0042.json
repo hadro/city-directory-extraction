@@ -325,20 +325,20 @@
    "publisher_tag_note": "no publisher in the catalog",
    "year_tag": "1860",
    "hocr_lines": 71185,
-   "wrap_joins": 6612,
-   "candidates": 64573,
+   "wrap_joins": 9046,
+   "candidates": 62139,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 56113,
-    "mark_share": 0.0201,
+    "pairs": 56062,
+    "mark_share": 0.02,
     "mode": 2.0,
-    "mode_pairs": 2828,
+    "mode_pairs": 2840,
     "trough": 1.25,
-    "trough_pairs": 316,
+    "trough_pairs": 338,
     "reason": "runover mode not isolated from the next-entry band"
    },
-   "model_runovers": 6265,
+   "model_runovers": 9082,
    "cont_dropped_leaves": 1,
    "column_splits": {
     "lines": 35,
@@ -349,13 +349,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 58368,
-   "keep_rate": 0.9039,
+   "kept": 56251,
+   "keep_rate": 0.9052,
    "dropped": {
-    "short": 4474,
+    "short": 4165,
     "allcaps": 778,
     "banner": 475,
-    "bigtype": 451,
+    "bigtype": 443,
     "nonascii": 26,
     "pagenum": 1
    },
@@ -380,10 +380,10 @@
     541,
     632
    ],
-   "filters_at": "586fde9-dirty",
+   "filters_at": "1eada69-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 5236785,
+  "words_gz_bytes": 5240035,
   "hocr_deleted": true,
   "elapsed_s": 20
  },
@@ -391,7 +391,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "start_leaf": 15,
   "end_leaf": 532,
   "first_letter": "A",
@@ -651,7 +651,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "content_leaves": 600,
   "fitted_leaves": 467,
   "read_leaves": 337,
@@ -757,7 +757,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -844,7 +844,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0042_listing.jsonl.gz",
   "sections": [
    {
@@ -853,11 +853,11 @@
     "end_leaf": 532
    }
   ],
-  "kept": 57056,
+  "kept": 54939,
   "dropped": 1312,
-  "kept_share": 0.9775,
+  "kept_share": 0.9767,
   "kept_by_section": {
-   "listing": 57056
+   "listing": 54939
   }
  },
  "non_entry_pages": {
@@ -904,7 +904,7 @@
   "loop_truncated": 1,
   "table_mode": 227,
   "pages": 492,
-  "lines_runover": 6272,
+  "lines_runover": 9097,
   "lines_model": 60313,
   "lines_model-only": 4237,
   "lines_tesseract": 4132,

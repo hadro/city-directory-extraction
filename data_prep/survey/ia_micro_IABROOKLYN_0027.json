@@ -346,20 +346,20 @@
    "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
    "year_tag": "1849",
    "hocr_lines": 17869,
-   "wrap_joins": 403,
-   "candidates": 17466,
+   "wrap_joins": 490,
+   "candidates": 17379,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
     "pairs": 14946,
     "mark_share": 0.0398,
     "mode": 2.75,
-    "mode_pairs": 96,
+    "mode_pairs": 97,
     "trough": 2.0,
-    "trough_pairs": 47,
+    "trough_pairs": 48,
     "reason": "too few runovers to read a mode"
    },
-   "model_runovers": 63,
+   "model_runovers": 217,
    "cont_dropped_leaves": 2,
    "column_splits": {
     "lines": 26,
@@ -370,13 +370,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 14521,
+   "kept": 14449,
    "keep_rate": 0.8314,
    "dropped": {
-    "short": 1275,
-    "banner": 831,
+    "short": 1271,
+    "banner": 821,
     "allcaps": 594,
-    "bigtype": 220,
+    "bigtype": 219,
     "nonascii": 23,
     "pagenum": 2
    },
@@ -401,10 +401,10 @@
     357,
     338
    ],
-   "filters_at": "586fde9-dirty",
+   "filters_at": "1eada69-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 1355844,
+  "words_gz_bytes": 1356208,
   "hocr_deleted": true,
   "elapsed_s": 5
  },
@@ -412,7 +412,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "start_leaf": 19,
   "end_leaf": 328,
   "first_letter": "A",
@@ -604,7 +604,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "content_leaves": 385,
   "fitted_leaves": 295,
   "read_leaves": 192,
@@ -694,7 +694,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -780,7 +780,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0027_listing.jsonl.gz",
   "sections": [
    {
@@ -789,11 +789,11 @@
     "end_leaf": 328
    }
   ],
-  "kept": 13485,
+  "kept": 13413,
   "dropped": 1036,
-  "kept_share": 0.9287,
+  "kept_share": 0.9283,
   "kept_by_section": {
-   "listing": 13485
+   "listing": 13413
   }
  },
  "reocr": {
@@ -806,7 +806,7 @@
   "loop_truncated": 0,
   "table_mode": 3,
   "pages": 298,
-  "lines_runover": 64,
+  "lines_runover": 219,
   "lines_model": 14090,
   "lines_tesseract": 1413,
   "lines_model-only": 408,

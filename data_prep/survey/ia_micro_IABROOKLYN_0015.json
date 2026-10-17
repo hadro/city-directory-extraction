@@ -355,21 +355,21 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'stevens/marschalk' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1838/39",
-   "hocr_lines": 6234,
-   "wrap_joins": 191,
+   "hocr_lines": 6233,
+   "wrap_joins": 190,
    "candidates": 6043,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
     "pairs": 5197,
-    "mark_share": 0.048,
+    "mark_share": 0.0478,
     "mode": 2.75,
     "mode_pairs": 17,
     "trough": 2.5,
     "trough_pairs": 7,
     "reason": "too few runovers to read a mode"
    },
-   "model_runovers": 17,
+   "model_runovers": 29,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -411,10 +411,10 @@
     17,
     30
    ],
-   "filters_at": "586fde9-dirty",
+   "filters_at": "1eada69-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 443217,
+  "words_gz_bytes": 443235,
   "hocr_deleted": true,
   "elapsed_s": 261
  },
@@ -422,7 +422,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "start_leaf": 21,
   "end_leaf": 80,
   "first_letter": "A",
@@ -590,7 +590,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "content_leaves": 78,
   "fitted_leaves": 0,
   "read_leaves": 0,
@@ -609,7 +609,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -646,7 +646,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0015_listing.jsonl.gz",
   "sections": [
    {
@@ -672,8 +672,8 @@
   "loop_truncated": 0,
   "table_mode": 1,
   "pages": 58,
-  "lines_runover": 17,
-  "lines_model": 4443,
+  "lines_runover": 29,
+  "lines_model": 4442,
   "lines_tesseract": 564,
   "lines_model-only": 216,
   "leaves_replaced": 58,

@@ -393,20 +393,20 @@
    "publisher_tag_note": "'hope & henderson' normalised to the trained token 'hopehenderson'",
    "year_tag": "1856/57",
    "hocr_lines": 76299,
-   "wrap_joins": 11916,
-   "candidates": 64383,
+   "wrap_joins": 16440,
+   "candidates": 59859,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 56363,
-    "mark_share": 0.0298,
+    "pairs": 56237,
+    "mark_share": 0.0295,
     "mode": 1.75,
-    "mode_pairs": 6421,
-    "trough": 1.25,
-    "trough_pairs": 412,
+    "mode_pairs": 6531,
+    "trough": 1.0,
+    "trough_pairs": 468,
     "reason": "runover mode not isolated from the next-entry band"
    },
-   "model_runovers": 11569,
+   "model_runovers": 16628,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 61,
@@ -417,13 +417,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 54858,
-   "keep_rate": 0.8521,
+   "kept": 51453,
+   "keep_rate": 0.8596,
    "dropped": {
-    "short": 7446,
-    "bigtype": 759,
+    "short": 6340,
+    "bigtype": 747,
     "banner": 667,
-    "allcaps": 478,
+    "allcaps": 477,
     "nonascii": 169,
     "pagenum": 6
    },
@@ -448,10 +448,10 @@
     637,
     613
    ],
-   "filters_at": "586fde9-dirty",
+   "filters_at": "1eada69-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 5166717,
+  "words_gz_bytes": 5170719,
   "hocr_deleted": true,
   "elapsed_s": 16
  },
@@ -459,7 +459,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "start_leaf": 38,
   "end_leaf": 528,
   "first_letter": "A",
@@ -661,7 +661,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "content_leaves": 668,
   "fitted_leaves": 563,
   "read_leaves": 375,
@@ -807,7 +807,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -984,7 +984,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0035_listing.jsonl.gz",
   "sections": [
    {
@@ -998,12 +998,12 @@
     "end_leaf": 536
    }
   ],
-  "kept": 50908,
+  "kept": 47503,
   "dropped": 3950,
-  "kept_share": 0.928,
+  "kept_share": 0.9232,
   "kept_by_section": {
-   "listing": 50271,
-   "late_names": 637
+   "listing": 46920,
+   "late_names": 583
   }
  },
  "non_entry_pages": {
@@ -1038,7 +1038,7 @@
   "loop_truncated": 0,
   "table_mode": 131,
   "pages": 487,
-  "lines_runover": 11569,
+  "lines_runover": 16628,
   "lines_model": 62438,
   "lines_tesseract": 4185,
   "lines_model-only": 2020,

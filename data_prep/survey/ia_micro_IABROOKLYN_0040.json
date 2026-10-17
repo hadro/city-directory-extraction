@@ -345,20 +345,20 @@
    "publisher_tag_note": "'j. lain and company' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1859",
    "hocr_lines": 70708,
-   "wrap_joins": 7304,
-   "candidates": 63404,
+   "wrap_joins": 8918,
+   "candidates": 61790,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 49908,
-    "mark_share": 0.0439,
+    "pairs": 49849,
+    "mark_share": 0.0436,
     "mode": 1.75,
-    "mode_pairs": 1976,
+    "mode_pairs": 2032,
     "trough": 1.25,
-    "trough_pairs": 582,
+    "trough_pairs": 611,
     "reason": "runover mode not isolated from the next-entry band"
    },
-   "model_runovers": 6717,
+   "model_runovers": 8939,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -369,13 +369,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 53210,
-   "keep_rate": 0.8392,
+   "kept": 51964,
+   "keep_rate": 0.841,
    "dropped": {
-    "short": 7073,
-    "bigtype": 1375,
-    "allcaps": 930,
-    "banner": 740,
+    "short": 6721,
+    "bigtype": 1365,
+    "allcaps": 929,
+    "banner": 735,
     "nonascii": 68,
     "pagenum": 8
    },
@@ -400,10 +400,10 @@
     443,
     437
    ],
-   "filters_at": "586fde9-dirty",
+   "filters_at": "1eada69-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 5083372,
+  "words_gz_bytes": 5085738,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
@@ -411,7 +411,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "start_leaf": 10,
   "end_leaf": 421,
   "first_letter": "A",
@@ -608,7 +608,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "content_leaves": 455,
   "fitted_leaves": 337,
   "read_leaves": 205,
@@ -770,7 +770,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -930,7 +930,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0040_listing.jsonl.gz",
   "sections": [
    {
@@ -939,11 +939,11 @@
     "end_leaf": 421
    }
   ],
-  "kept": 51870,
+  "kept": 50624,
   "dropped": 1340,
-  "kept_share": 0.9748,
+  "kept_share": 0.9742,
   "kept_by_section": {
-   "listing": 51870
+   "listing": 50624
   }
  },
  "non_entry_pages": {
@@ -983,7 +983,7 @@
   "loop_truncated": 0,
   "table_mode": 230,
   "pages": 387,
-  "lines_runover": 6717,
+  "lines_runover": 8939,
   "lines_tesseract": 9075,
   "lines_model": 54437,
   "lines_model-only": 3833,

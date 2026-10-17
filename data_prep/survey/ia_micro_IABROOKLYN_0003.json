@@ -332,8 +332,8 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1824",
    "hocr_lines": 2287,
-   "wrap_joins": 74,
-   "candidates": 2213,
+   "wrap_joins": 76,
+   "candidates": 2211,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -345,7 +345,7 @@
     "trough_pairs": 7,
     "reason": "too few runovers to read a mode"
    },
-   "model_runovers": 17,
+   "model_runovers": 24,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -356,8 +356,8 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 1877,
-   "keep_rate": 0.8482,
+   "kept": 1875,
+   "keep_rate": 0.848,
    "dropped": {
     "banner": 126,
     "short": 110,
@@ -385,10 +385,10 @@
     44,
     42
    ],
-   "filters_at": "586fde9-dirty",
+   "filters_at": "1eada69-dirty",
    "derived": "2026-10-16"
   },
-  "words_gz_bytes": 164396,
+  "words_gz_bytes": 164429,
   "hocr_deleted": true,
   "elapsed_s": 28
  },
@@ -396,7 +396,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "start_leaf": 5,
   "end_leaf": 32,
   "first_letter": "A",
@@ -534,7 +534,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "content_leaves": 53,
   "fitted_leaves": 40,
   "read_leaves": 31,
@@ -568,7 +568,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -654,7 +654,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-10-16",
-  "code_at": "586fde9-dirty",
+  "code_at": "1eada69-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0003_listing.jsonl.gz",
   "sections": [
    {
@@ -663,11 +663,11 @@
     "end_leaf": 32
    }
   ],
-  "kept": 1276,
+  "kept": 1274,
   "dropped": 601,
-  "kept_share": 0.6798,
+  "kept_share": 0.6795,
   "kept_by_section": {
-   "listing": 1276
+   "listing": 1274
   }
  },
  "reocr": {
@@ -680,7 +680,7 @@
   "loop_truncated": 0,
   "table_mode": 0,
   "pages": 29,
-  "lines_runover": 17,
+  "lines_runover": 24,
   "lines_tesseract": 87,
   "lines_model": 1423,
   "lines_model-only": 30,

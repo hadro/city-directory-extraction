@@ -97,6 +97,113 @@ def joint(parts: list) -> str:
     return out
 
 
+# A printed entry never ENDS on one of these: a connector with nothing after it ("Van Brunt, n."),
+# a residence marker with no address ("boarding, h."), a bare house number ("h. 196"), an
+# ampersand, or a hyphenated word-break ("Til-").
+# A lone direction ("h. 65 S." / "Fifth") belongs here by grammar and is DELIBERATELY LEFT OUT.
+# Adding `[NSEW]` bought one split entry in the bench gold and cost Lain 1897 four of its rows:
+# that volume's OCR trails an E-mark scrap (`...h 399 17th, " E`), the `E` read as a direction,
+# and the merge ran on into the next entry. One case of recall is not worth a volume.
+ENTRY_TAIL = re.compile(r"(?:^|\s)(?:n|near|c|cor|corner|b|bet|between|opp|opposite|junc|junction"
+                        r"|h|r|bds|bd|res|&|and|\d+|No)\.?,?\s*$", re.I)
+# ...and never BEGINS on one: an entry opens with a surname or a ditto mark, not with a residence
+# marker ("h. 70 S. Ninth"), a street type ("av."), or a connector. Case-insensitive, so it is
+# kept apart from the lower-case test below -- under re.I, `[a-z]` matches capitals too, and one
+# regex for both would merge every pair of entries.
+ENTRY_HEAD = re.compile(r"^\s*(?:h|r|bds|bd|res|av|ave|st|pl|ct|rd|ter|sq|n|cor|c|b|opp|bet)\.?\s",
+                        re.I)
+LOWER_HEAD = re.compile(r"^\s*[a-z]")    # "ilton av.", "toga av. h. same": the tail of the line above
+HAS_LOWER = re.compile(r"[a-z]")         # ...and an entry has one somewhere: see entry_shaped
+MERGE_MAX = 3            # model lines one entry may be put back together from
+
+
+def entry_shaped(text: str) -> bool:
+    """Could this line be a directory entry at all? An entry has a lower-case letter in it and
+    opens on a word with a letter in it. Page furniture fails both ways round, and only a line
+    that could be an entry may take a run-over.
+
+    This is `ia_volume_to_jsonl.text_reject`'s `allcaps` test plus its page-number case, applied
+    here for a different purpose. It is what keeps a running head from swallowing the first entry
+    under it: Lain 1897 sets "10 AHE-AHR 1896" above each column, which ends on a bare number, so
+    the grammar below read it as an unfinished entry and glued "Ahearn Wm. printer, h 53
+    Duffield" onto it. The ad slogans above those heads ("COLOGNE SPIRIT", "MAJOR'S C") did the
+    same through their trailing "C", read as `cor`.
+    """
+    first = text.split()[0] if text.split() else ""
+    return bool(HAS_LOWER.search(text)) and bool(re.search(r"[A-Za-z]", first))
+
+
+def mark_continuations(rows: list) -> int:
+    """An entry the model broke over two of its own lines: mark the second a run-over, in place.
+    Returns how many were marked. Call AFTER `pair_tile` has filled its rows.
+
+    LightOnOCR writes an ENTRY per line -- that is the whole basis of `cont` (see
+    ia_volume_to_jsonl.join_wraps) -- but on some pages it writes the run-over as a line of its
+    own instead, and then neither signal joins them: `start` is True on both, so `cont` says
+    "entry", and the indent is below the volume's threshold (PIPELINE #28, Hope & Henderson's
+    "h. 27" / "Hicks").
+
+    ONLY THE FLAG MOVES. An earlier version merged the model's TEXT before `align` instead, so
+    that the whole entry matched a run of printed lines. That works on paper and loses characters
+    in practice: `split` then has to re-divide the merged text over those printed lines, and it
+    is lossy at exactly the join. On the pilot it produced "...67 Nassau N. Y. 73 S 10th" (the
+    `h` gone), "...h 244 N 2d d" and "...n. Columbia ia ad" -- three entries whose merged text
+    was character-perfect against gold. Worse, it had to close up the printed hyphen to merge
+    ("Colum-" + "bia"), destroying the very mark `join_wraps` uses to rejoin them. Marking the
+    flag leaves every character where the pairing put it and lets the wrap-joiner do the joining
+    it has always done, hyphens included.
+
+    GRAMMAR SAYS WHEN, ALPHABETICAL ORDER SAYS WHETHER. Two grammar signals propose, either one
+    enough, because a directory entry's shape is fixed: the line ends where an entry cannot end
+    (ENTRY_TAIL, a hyphen) or the next begins where one cannot begin (ENTRY_HEAD, LOWER_HEAD).
+    Grammar alone is not enough to act on -- the first version shipped on grammar alone and had
+    to be reverted; PIPELINE #28 records what it cost.
+
+    What it was missing is the page's own alphabet. A directory's entries ascend, so a line whose
+    first word FITS between its neighbours' is an entry, however unfinished the line above looks,
+    and `fits_alphabet` refuses. "Hicks" after "Hagerty James" and before "Hagerty John" does not
+    fit and is a street; "Harding James" between "Harding Geo" and "Hardy" does fit and is a
+    person. The same order `dittos` walks, read one line ahead.
+
+    With no line after it to bound the test, a tile's last line is judged against the entry above
+    alone, and continuing the alphabet is enough to refuse. That costs a real run-over now and
+    then at a tile's foot, and it is the right way to be wrong: a missed join loses a tail, a
+    false one destroys a whole entry and cascades into the next. Only a first word with no
+    letters (a line opening on a number) goes unjudged, and there the grammar decides.
+
+    Three kinds of line are never marked. A BULLET is LightOn's own list markup for "a new item"
+    (`dittos`) and an E-mark glyph opens an entry, so both contradict the model to override. And
+    a line only the model read (`model-only`) keeps its place: it has no printed line of its own,
+    so `synth_line` gave it a box at the tile's edge, and joining on a box that was never
+    measured is not a join the indent can check.
+    """
+    keys = [name_key(r["text"]) for r in rows]
+    marked, heads, run = 0, [], 0
+
+    def fits_alphabet(i: int) -> bool:
+        nxt = next((keys[j] for j in range(i + 1, len(rows)) if keys[j]), None)
+        prev = next((h for h in reversed(heads) if h), None)
+        if not keys[i] or prev is None:
+            return False            # no letters to order: let the grammar signal decide
+        return prev <= keys[i] <= nxt if nxt is not None else prev <= keys[i]
+
+    for i, r in enumerate(rows):
+        prev = rows[i - 1]["text"] if i else ""
+        proposes = (i and r.get("start") and r["source"] not in ("tesseract", "model-only")
+                    and entry_shaped(prev) and run < MERGE_MAX - 1
+                    and not r.get("bullet") and not EGLYPH.match(r["text"])
+                    and (ENTRY_TAIL.search(prev.rstrip()) or prev.rstrip()[-1:] in HYPHENS
+                         or ENTRY_HEAD.match(r["text"]) or LOWER_HEAD.match(r["text"])))
+        if proposes and not fits_alphabet(i):
+            r["start"] = False
+            marked += 1
+            run += 1
+            continue
+        heads.append(keys[i])
+        run = 0
+    return marked
+
+
 def strip_mark(text: str) -> str:
     """A model line without its own leading mark (Churro's <Initial>E</Initial> -> "E Hess")."""
     return re.sub(r"^\s*[E€©&ᴱ®]\s+(?=[A-Z])", "", text)
@@ -239,7 +346,11 @@ def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = Fals
     """One tile: tesseract's printed lines (word lists, top to bottom) and the model's lines.
     -> [{"text", "words", "source", "mark", "start", "bullet"}] in printed order, model-only
     lines in place. model_marks: the model writes E marks itself (Churro), so a leading "E " is
-    one."""
+    one.
+
+    An entry the model broke over two of its own lines leaves both rows `start` True, which no
+    downstream signal can undo; `mark_continuations` marks the second a run-over once the rows
+    are built, changing the flag and not a character."""
     texts = [" ".join(w[5] for w in ws) for ws in tess]
     out = []
     for i0, i1, j in fill_gaps(align(texts, model), texts, model):
@@ -267,6 +378,7 @@ def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = Fals
                 text = f"E {text}"
             out.append({"text": text, "words": tess[i0 + t], "source": "model",
                         "mark": mark and t == 0, "start": t == 0, "bullet": bullet and t == 0})
+    mark_continuations(out)
     return out
 
 
@@ -1246,6 +1358,51 @@ def score(args) -> int:
 
 
 def _self_test() -> int:
+    # --- mark_continuations: an entry the model broke over two of its own lines ---------------
+    # Every case is a real line from the re-OCR bench or the pilot panel. The ones that must NOT
+    # be marked are the regressions that sank the grammar-only first version (PIPELINE #28).
+    def marks(texts, source="model"):
+        rows = [{"text": t, "source": source, "start": True,
+                 "bullet": BULLET.match(t) is not None} for t in texts]
+        mark_continuations(rows)
+        return [i for i, r in enumerate(rows) if not r["start"]]
+
+    assert marks(["Hagerty Francis, carman, h. 3 Union ct.",
+                  "Hagerty James, glass, 92 John, N. Y. h. 27", "Hicks",
+                  "Hagerty John, blacksmith, 253 Atlantic"]) == [2], \
+        "'Hicks' breaks the Hagerty run, so it is a street, not an entry"
+    assert marks(["Burke Louise, wid. h. Van Brunt",
+                  "Burke Michael, laborer, h. r. Court st. n. Ham-", "ilton av.",
+                  "Burns Ann, widow, h 12 Gold"]) == [2], "a hyphen break is a run-over"
+    assert marks(["Cook John, lawyer, 111 Nassau",
+                  "Cooke Lyman, fancygoods, 60 Broadway, N. Y.", "h. 70 S. Ninth",
+                  "Cooley Sam, mason, h 4 Pine"]) == [2], "no entry OPENS with a marker"
+    # boyd1890 row 13: the grammar-only rule ate this surname into the entry above
+    assert marks(["Hardenbrook Geo, clerk, h 12 Pearl", "Harding James, driver, h 161 Broadway",
+                  "Hardy John, mason, h 9 Front"]) == [], "'Harding James' fits the alphabet"
+    # lain 1897: its lines trail an E-mark scrap that the tail rule read as a direction, and the
+    # merge cascaded through five entries. Every key here ascends, so none may be marked.
+    assert marks(['Adamai August, barber, h 399 17th, " E',
+                  'Adame Frank, tailor, h 213 Hopkins, " E',
+                  'Adami August, grocer, 1660 Atlantic av, " E',
+                  "Adams Jos. japanner, h 175 Ten Eyck"]) == [], "the alphabet refuses each one"
+    assert marks(["Smith John, carpenter, h. 12 Front",
+                  "Jones Mary, widow, h. 14 Front"]) == [], \
+        "`[a-z]` under re.I matches capitals: the lower-case test must be its own pattern"
+    # a running head ends on the year and an ad slogan on a "C": both read as unfinished entries
+    # by grammar alone, and each swallowed the first entry under it until `entry_shaped`
+    assert marks(["COLOGNE SPIRIT", "10 AHE\u2014AHR 1896", "Ahearn Wm. printer, h 53 Duffield",
+                  "\u201c Wm. (Rev.) h 852 Pacific"]) == [], "page furniture takes no run-over"
+    assert not entry_shaped("10 AHE\u2014AHR 1896") and not entry_shaped("MAJOR'S C")
+    assert entry_shaped("Ahearn Wm. printer, h 53 Duffield")
+    assert marks(["Burke Patrick, butcher, Gold, n. Tillary, h.",
+                  "- Smalley Arthur, clerk"]) == [], "the model's own bullet means a new item"
+    # an address running down the page: each key falls, so order never refuses and the cap does
+    assert marks(["Zane John, mason, h. r. Court st. n.", "Hamilton av. cor.", "Baltic st. n.",
+                  "Union pl"]) == [1, 2], "MERGE_MAX caps a run"
+    # a line tesseract never read has a synthesised box, so there is no measured indent to join on
+    assert marks(["Pell John, mason, h. Court st. n.", "Hamilton av."], "model-only") == []
+
     tess = ["Eplen Mathias, shoemaker, Graham av. n. Mar-", "shall",
             "Esdaile Joseph M. H. capmaker, 157 Water, N.Y.", "h. 188 S. 6th",
             "Ewing Isaac, mariner, 91 N. 5th", "| ~~ ."]

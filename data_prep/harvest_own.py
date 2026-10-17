@@ -41,13 +41,20 @@ and chandra alignments) is five times cleaner: **1 failing page of 98 (1%)**, 7 
 median 0.97. `lain_eval` draws 17 of its 800 rows from that one page (0032) and they are
 untouched -- clean alphabetical entries scoring 76.5% row EM against 65.6% for the other 783.
 
-And what that page actually is, because it bears on the screen: Surya emitted 317 lines there
-with a MEAN LINE LENGTH OF 16 CHARACTERS. It shredded the page into micro-boxes, so real Gemini
-entry lines bound to boxes holding a single stray glyph ('" R. & M. hotel, 48 Ewen' against
-'4'). The binding is genuinely wrong, but the cause is upstream in segmentation, and some of
-the low scores are not binding errors at all (Gemini's synthetic '=== ADVERTISEMENT ===' marker
-against real ad text). So a page's Surya mean line length may be the cheaper pre-filter, and it
-needs no alignment run.
+And what that page actually is, because it bears on how to screen: Surya emitted 317 lines
+there with a MEAN LINE LENGTH OF 16 CHARACTERS. It shredded the page into micro-boxes, so real
+Gemini entry lines bound to boxes holding a single stray glyph ('" R. & M. hotel, 48 Ewen'
+against '4'). The binding is genuinely wrong, but the cause is upstream in segmentation -- and
+some of the low scores are not binding errors at all (Gemini's synthetic '=== ADVERTISEMENT ==='
+marker scored against real ad text).
+
+⚠️ Mean line length alone is NOT the pre-filter. This file briefly suggested it; the
+directory-pipeline session then measured that it does not predict their failing pages (polk1917
+averages 30 chars, inside the 26-38 clean range). Their failures are the OPPOSITE tail --
+UNDER-segmentation, not over: 16-26 tall region boxes per failing page against 0-3 on clean
+ones, and 0.49-0.82 usable Surya boxes per Gemini line against roughly 0.9+ when clean. Lain
+0032 is the over-segmented tail of the same axis. So a cheap pre-check needs BOTH tails -- the
+box-to-line ratio and box geometry -- and still runs before alignment.
 
 What already shipped is clean, and by construction rather than by luck: this script drops the
 coordinates, so `data/tulsa_eval.jsonl` and `data/lain_eval.jsonl` carry no box for a

@@ -1,49 +1,38 @@
 {
- "derived": "2026-09-29",
+ "derived": "2026-10-19",
  "run": "4b-100k+guard",
- "root": "data/volumes_run1",
+ "root": "data/volumes_reocr",
  "volumes": {
-  "1906BPL": {
-   "rows": 194201,
-   "usable": 166537,
-   "named": 192882,
-   "entry_shaped": 189198,
+  "brooklynnewyorkc19123broo": {
+   "rows": 53850,
+   "usable": 44190,
+   "named": 52236,
+   "entry_shaped": 47230,
    "roles": {
-    "runover": 9006,
-    "other": 5651,
-    "start": 179536,
-    "thin": 8
+    "start": 47375,
+    "other": 3568,
+    "runover": 2907
    },
-   "non_entry_page_rows": 881,
-   "eval_holdout_rows": 12045,
-   "printed_page_known": 188054,
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 47464,
    "ditto": {
-    "carried": 135864,
-    "orphan": 0,
-    "disputed": 31501,
+    "carried": 34080,
+    "orphan": 14,
+    "disputed": 13278,
     "glued_marks": [
      "\"",
-     "'",
-     "**",
      "\u2014",
+     "--",
+     "\u2014'",
      "-",
-     "'*",
-     "*",
-     "\u2018",
-     "\u201d",
-     "\u2019",
-     "*\u201c",
-     "*'",
      "\u201c",
-     "\u2019*",
-     "\u00ab",
-     "\u2018\u2018",
-     "\u201c*",
-     "*\u2018",
-     "***",
-     "*\u2019",
-     "\u2019\u2019",
-     "*-"
+     "\u2014\u2019",
+     "\u2018",
+     "-\u2014",
+     "\u2014-",
+     "'",
+     "\u2019"
     ],
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -52,54 +41,176 @@
    "stated_approximate": false,
    "usable_per_stated_name": null
   },
-  "doggettsnewyorkc1845dogg": {
-   "rows": 64580,
-   "usable": 60372,
-   "named": 63630,
-   "entry_shaped": 60994,
+  "micro_IABROOKLYN_0001": {
+   "rows": 1007,
+   "usable": 933,
+   "named": 1007,
+   "entry_shaped": 960,
    "roles": {
-    "start": 61601,
-    "runover": 2911,
-    "other": 65,
-    "thin": 3
+    "other": 16,
+    "start": 973,
+    "runover": 18
    },
-   "non_entry_page_rows": 400,
+   "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 64052,
+   "printed_page_known": 941,
    "ditto": {
-    "carried": 32,
+    "carried": 2,
     "orphan": 0,
-    "disputed": 4,
+    "disputed": 0,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0002": {
+   "rows": 1203,
+   "usable": 997,
+   "named": 1199,
+   "entry_shaped": 1056,
+   "roles": {
+    "runover": 56,
+    "start": 1119,
+    "other": 28
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 1029,
+   "ditto": {
+    "carried": 4,
+    "orphan": 0,
+    "disputed": 1,
     "glued_marks": [
-     "\u2014"
+     "\u2018"
     ],
     "address_slots": 0,
     "address_no_antecedent": 0
    },
-   "stated_name_count": 61333,
+   "stated_name_count": null,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.984
+   "usable_per_stated_name": null
   },
-  "merceinscitydire00merc": {
-   "rows": 20366,
-   "usable": 18510,
-   "named": 20316,
-   "entry_shaped": 19013,
+  "micro_IABROOKLYN_0003": {
+   "rows": 1274,
+   "usable": 1007,
+   "named": 1274,
+   "entry_shaped": 1042,
    "roles": {
-    "start": 20035,
-    "other": 161,
-    "thin": 6,
-    "runover": 164
+    "runover": 35,
+    "start": 1226,
+    "other": 13
    },
-   "non_entry_page_rows": 125,
-   "eval_holdout_rows": 359,
-   "printed_page_known": 20197,
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 790,
    "ditto": {
-    "carried": 32,
+    "carried": 0,
     "orphan": 0,
-    "disputed": 5,
+    "disputed": 0,
+    "glued_marks": [],
+    "address_slots": 2,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0004": {
+   "rows": 1514,
+   "usable": 1319,
+   "named": 1504,
+   "entry_shaped": 1367,
+   "roles": {
+    "other": 29,
+    "start": 1452,
+    "runover": 33
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 1197,
+   "ditto": {
+    "carried": 2,
+    "orphan": 0,
+    "disputed": 0,
+    "glued_marks": [],
+    "address_slots": 1,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0005": {
+   "rows": 1917,
+   "usable": 1765,
+   "named": 1916,
+   "entry_shaped": 1819,
+   "roles": {
+    "start": 1854,
+    "other": 19,
+    "runover": 44
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 1917,
+   "ditto": {
+    "carried": 2,
+    "orphan": 0,
+    "disputed": 0,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0006": {
+   "rows": 1912,
+   "usable": 1782,
+   "named": 1907,
+   "entry_shaped": 1809,
+   "roles": {
+    "start": 1861,
+    "other": 31,
+    "runover": 20
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 1912,
+   "ditto": {
+    "carried": 1,
+    "orphan": 0,
+    "disputed": 0,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0007": {
+   "rows": 2331,
+   "usable": 2119,
+   "named": 2325,
+   "entry_shaped": 2230,
+   "roles": {
+    "other": 23,
+    "start": 2206,
+    "runover": 102
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 2306,
+   "ditto": {
+    "carried": 22,
+    "orphan": 0,
+    "disputed": 22,
     "glued_marks": [
-     "\"",
      "'"
     ],
     "address_slots": 0,
@@ -109,26 +220,678 @@
    "stated_approximate": false,
    "usable_per_stated_name": null
   },
-  "micro_IABROOKLYN_0030": {
-   "rows": 14250,
-   "usable": 11339,
-   "named": 14122,
-   "entry_shaped": 12188,
+  "micro_IABROOKLYN_0008": {
+   "rows": 2430,
+   "usable": 2196,
+   "named": 2427,
+   "entry_shaped": 2328,
    "roles": {
-    "start": 13045,
-    "other": 903,
-    "runover": 215,
-    "thin": 87
+    "start": 2279,
+    "other": 64,
+    "runover": 87
    },
-   "non_entry_page_rows": 200,
-   "eval_holdout_rows": 179,
-   "printed_page_known": 14186,
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 1970,
    "ditto": {
-    "carried": 213,
+    "carried": 0,
     "orphan": 0,
-    "disputed": 43,
+    "disputed": 0,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0009": {
+   "rows": 2651,
+   "usable": 2473,
+   "named": 2648,
+   "entry_shaped": 2554,
+   "roles": {
+    "runover": 71,
+    "start": 2559,
+    "other": 21
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 2619,
+   "ditto": {
+    "carried": 4,
+    "orphan": 0,
+    "disputed": 0,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0010": {
+   "rows": 3140,
+   "usable": 2851,
+   "named": 3139,
+   "entry_shaped": 2970,
+   "roles": {
+    "runover": 110,
+    "other": 17,
+    "start": 3013
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 3112,
+   "ditto": {
+    "carried": 5,
+    "orphan": 0,
+    "disputed": 0,
     "glued_marks": [
-     "\u2014\u2014",
+     "\""
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0011": {
+   "rows": 3129,
+   "usable": 2890,
+   "named": 3127,
+   "entry_shaped": 3018,
+   "roles": {
+    "runover": 111,
+    "start": 2989,
+    "other": 29
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 2867,
+   "ditto": {
+    "carried": 13,
+    "orphan": 0,
+    "disputed": 1,
+    "glued_marks": [
+     "\""
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 1
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0012": {
+   "rows": 3494,
+   "usable": 3142,
+   "named": 3491,
+   "entry_shaped": 3322,
+   "roles": {
+    "runover": 170,
+    "start": 3293,
+    "other": 31
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 2141,
+   "ditto": {
+    "carried": 8,
+    "orphan": 0,
+    "disputed": 1,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0013": {
+   "rows": 3812,
+   "usable": 2986,
+   "named": 3798,
+   "entry_shaped": 3613,
+   "roles": {
+    "runover": 287,
+    "start": 3374,
+    "other": 151
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 302,
+   "printed_page_known": 1737,
+   "ditto": {
+    "carried": 18,
+    "orphan": 0,
+    "disputed": 6,
+    "glued_marks": [
+     "-",
+     "\""
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0014": {
+   "rows": 3864,
+   "usable": 3289,
+   "named": 3831,
+   "entry_shaped": 3578,
+   "roles": {
+    "other": 236,
+    "start": 3433,
+    "runover": 195
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 864,
+   "ditto": {
+    "carried": 24,
+    "orphan": 0,
+    "disputed": 7,
+    "glued_marks": [
+     "-",
+     "\"",
+     "\u2014"
+    ],
+    "address_slots": 1,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0015": {
+   "rows": 4321,
+   "usable": 4045,
+   "named": 4313,
+   "entry_shaped": 4135,
+   "roles": {
+    "start": 4200,
+    "other": 46,
+    "runover": 75
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 0,
+   "ditto": {
+    "carried": 5,
+    "orphan": 0,
+    "disputed": 2,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0017": {
+   "rows": 5804,
+   "usable": 5008,
+   "named": 5778,
+   "entry_shaped": 5361,
+   "roles": {
+    "other": 248,
+    "runover": 268,
+    "start": 5288
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 5613,
+   "ditto": {
+    "carried": 23,
+    "orphan": 0,
+    "disputed": 4,
+    "glued_marks": [
+     "-",
+     "\u2018"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0018": {
+   "rows": 6841,
+   "usable": 6239,
+   "named": 6829,
+   "entry_shaped": 6500,
+   "roles": {
+    "other": 113,
+    "runover": 192,
+    "start": 6536
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 6739,
+   "ditto": {
+    "carried": 12,
+    "orphan": 0,
+    "disputed": 3,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0020": {
+   "rows": 8107,
+   "usable": 7548,
+   "named": 8104,
+   "entry_shaped": 7791,
+   "roles": {
+    "other": 147,
+    "start": 7792,
+    "runover": 168
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 8107,
+   "ditto": {
+    "carried": 22,
+    "orphan": 0,
+    "disputed": 1,
+    "glued_marks": [
+     "\u2018",
+     "-"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0021": {
+   "rows": 8800,
+   "usable": 7874,
+   "named": 8788,
+   "entry_shaped": 8280,
+   "roles": {
+    "start": 8167,
+    "other": 396,
+    "runover": 233,
+    "thin": 4
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 8315,
+   "ditto": {
+    "carried": 26,
+    "orphan": 0,
+    "disputed": 2,
+    "glued_marks": [
+     "-",
+     "\u2014"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0022": {
+   "rows": 7233,
+   "usable": 6505,
+   "named": 7215,
+   "entry_shaped": 6797,
+   "roles": {
+    "other": 151,
+    "runover": 261,
+    "start": 6821
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 6966,
+   "ditto": {
+    "carried": 13,
+    "orphan": 0,
+    "disputed": 2,
+    "glued_marks": [
+     "\u2018"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0023": {
+   "rows": 10429,
+   "usable": 9910,
+   "named": 10417,
+   "entry_shaped": 10123,
+   "roles": {
+    "other": 152,
+    "runover": 151,
+    "start": 10126
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 10429,
+   "ditto": {
+    "carried": 12,
+    "orphan": 0,
+    "disputed": 7,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0024": {
+   "rows": 10127,
+   "usable": 9601,
+   "named": 10121,
+   "entry_shaped": 9801,
+   "roles": {
+    "runover": 100,
+    "start": 9838,
+    "other": 189
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 10127,
+   "ditto": {
+    "carried": 15,
+    "orphan": 0,
+    "disputed": 3,
+    "glued_marks": [
+     "'"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0025": {
+   "rows": 12864,
+   "usable": 11894,
+   "named": 12830,
+   "entry_shaped": 12295,
+   "roles": {
+    "other": 283,
+    "runover": 266,
+    "start": 12315
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 10384,
+   "ditto": {
+    "carried": 39,
+    "orphan": 0,
+    "disputed": 10,
+    "glued_marks": [
+     "\u201c",
+     "-",
+     "\u2018"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0027": {
+   "rows": 13413,
+   "usable": 12460,
+   "named": 13393,
+   "entry_shaped": 12869,
+   "roles": {
+    "start": 12861,
+    "runover": 270,
+    "other": 282
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 9741,
+   "ditto": {
+    "carried": 20,
+    "orphan": 0,
+    "disputed": 2,
+    "glued_marks": [
+     "\u201c"
+    ],
+    "address_slots": 1,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0029": {
+   "rows": 16271,
+   "usable": 15542,
+   "named": 16227,
+   "entry_shaped": 15868,
+   "roles": {
+    "start": 15840,
+    "other": 171,
+    "runover": 260
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 13132,
+   "ditto": {
+    "carried": 15,
+    "orphan": 0,
+    "disputed": 3,
+    "glued_marks": [
+     "\u2018"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0031": {
+   "rows": 22921,
+   "usable": 21355,
+   "named": 22854,
+   "entry_shaped": 21965,
+   "roles": {
+    "start": 22026,
+    "runover": 376,
+    "other": 519
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 20707,
+   "ditto": {
+    "carried": 50,
+    "orphan": 0,
+    "disputed": 9,
+    "glued_marks": [
+     "\u201d",
+     "\""
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0032": {
+   "rows": 21456,
+   "usable": 19952,
+   "named": 21360,
+   "entry_shaped": 20554,
+   "roles": {
+    "start": 20628,
+    "runover": 464,
+    "other": 364
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 18805,
+   "ditto": {
+    "carried": 35,
+    "orphan": 0,
+    "disputed": 3,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0033": {
+   "rows": 25275,
+   "usable": 22370,
+   "named": 25219,
+   "entry_shaped": 23000,
+   "roles": {
+    "start": 24426,
+    "other": 351,
+    "runover": 498
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 24247,
+   "ditto": {
+    "carried": 23,
+    "orphan": 0,
+    "disputed": 4,
+    "glued_marks": [],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0035": {
+   "rows": 47379,
+   "usable": 42233,
+   "named": 46232,
+   "entry_shaped": 44097,
+   "roles": {
+    "other": 758,
+    "runover": 2093,
+    "start": 44528
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 511,
+   "printed_page_known": 46287,
+   "ditto": {
+    "carried": 78,
+    "orphan": 0,
+    "disputed": 9,
+    "glued_marks": [
+     "-",
+     "\u2018"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0039": {
+   "rows": 50454,
+   "usable": 35748,
+   "named": 49756,
+   "entry_shaped": 46206,
+   "roles": {
+    "other": 2770,
+    "runover": 9905,
+    "start": 37779
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 47827,
+   "ditto": {
+    "carried": 152,
+    "orphan": 0,
+    "disputed": 15,
+    "glued_marks": [
+     "\u2014",
+     "\u2018",
+     "'",
+     "-",
+     "\u2019",
+     "\u201d",
+     "\u00ab"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": 50000,
+   "stated_approximate": true,
+   "usable_per_stated_name": 0.715
+  },
+  "micro_IABROOKLYN_0040": {
+   "rows": 50244,
+   "usable": 36441,
+   "named": 49355,
+   "entry_shaped": 45490,
+   "roles": {
+    "start": 38914,
+    "runover": 8441,
+    "other": 2889
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 33548,
+   "ditto": {
+    "carried": 164,
+    "orphan": 0,
+    "disputed": 19,
+    "glued_marks": [
+     "\u2014",
+     "-",
+     "\u00ab",
+     "\u2018",
+     "'",
+     "\u2019"
+    ],
+    "address_slots": 1,
+    "address_no_antecedent": 1
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0042": {
+   "rows": 54585,
+   "usable": 35209,
+   "named": 53941,
+   "entry_shaped": 51881,
+   "roles": {
+    "start": 36509,
+    "runover": 16792,
+    "other": 1284
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 52432,
+   "ditto": {
+    "carried": 40,
+    "orphan": 0,
+    "disputed": 2,
+    "glued_marks": [
      "\u2014",
      "-"
     ],
@@ -139,41 +902,175 @@
    "stated_approximate": false,
    "usable_per_stated_name": null
   },
-  "micro_IABROOKLYN_0036": {
-   "rows": 17535,
-   "usable": 10136,
-   "named": 16741,
-   "entry_shaped": 13493,
+  "micro_IABROOKLYN_0043": {
+   "rows": 4558,
+   "usable": 4375,
+   "named": 4539,
+   "entry_shaped": 4473,
    "roles": {
-    "start": 11806,
-    "runover": 2302,
-    "other": 3263,
-    "thin": 164
+    "runover": 59,
+    "start": 4436,
+    "other": 63
    },
-   "non_entry_page_rows": 231,
-   "eval_holdout_rows": 210,
-   "printed_page_known": 14431,
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 4333,
    "ditto": {
-    "carried": 441,
+    "carried": 8,
     "orphan": 0,
-    "disputed": 94,
+    "disputed": 1,
+    "glued_marks": [
+     "\u2014"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0044": {
+   "rows": 5381,
+   "usable": 5088,
+   "named": 5348,
+   "entry_shaped": 5210,
+   "roles": {
+    "start": 5159,
+    "runover": 72,
+    "other": 136,
+    "thin": 14
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 5211,
+   "ditto": {
+    "carried": 6,
+    "orphan": 0,
+    "disputed": 0,
+    "glued_marks": [
+     "-"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0045": {
+   "rows": 4125,
+   "usable": 3868,
+   "named": 4108,
+   "entry_shaped": 4005,
+   "roles": {
+    "start": 3924,
+    "other": 137,
+    "runover": 64
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 801,
+   "ditto": {
+    "carried": 15,
+    "orphan": 0,
+    "disputed": 6,
+    "glued_marks": [
+     "\u201c"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0046": {
+   "rows": 5978,
+   "usable": 5284,
+   "named": 5716,
+   "entry_shaped": 5432,
+   "roles": {
+    "start": 5549,
+    "other": 219,
+    "runover": 210
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 4827,
+   "ditto": {
+    "carried": 12,
+    "orphan": 0,
+    "disputed": 6,
     "glued_marks": [
      "\u2014",
-     "*",
-     "\u2018",
-     "\u2014\u2014",
-     "\u201c",
-     "-",
-     "'",
-     "\"",
-     "\u2019"
+     "\u201c"
     ],
-    "address_slots": 2,
-    "address_no_antecedent": 1
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": 7345,
+   "stated_approximate": false,
+   "usable_per_stated_name": 0.719
+  },
+  "micro_IABROOKLYN_0047": {
+   "rows": 6979,
+   "usable": 5097,
+   "named": 6806,
+   "entry_shaped": 6050,
+   "roles": {
+    "start": 5539,
+    "other": 944,
+    "runover": 496
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 6676,
+   "ditto": {
+    "carried": 44,
+    "orphan": 0,
+    "disputed": 20,
+    "glued_marks": [
+     "\u2018",
+     "\"",
+     "-",
+     "\u2014",
+     "\u201c"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  },
+  "micro_IABROOKLYN_0048": {
+   "rows": 7317,
+   "usable": 6689,
+   "named": 7180,
+   "entry_shaped": 6935,
+   "roles": {
+    "start": 6882,
+    "other": 248,
+    "runover": 187
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 3880,
+   "ditto": {
+    "carried": 16,
+    "orphan": 0,
+    "disputed": 8,
+    "glued_marks": [
+     "-",
+     "\u2018"
+    ],
+    "address_slots": 0,
+    "address_no_antecedent": 0
    },
    "stated_name_count": null,
    "stated_approximate": false,
    "usable_per_stated_name": null
   }
- }
+ },
+ "incomplete": {}
 }

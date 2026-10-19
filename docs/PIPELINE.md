@@ -1908,7 +1908,58 @@ read the direction, not the third digit.
 - ~~The 39 volumes are imported again.~~ Above.
 - A stage-B run on the panel still has to measure the row EM.
 
-**⏸ WHEN NYU'S RESULTS LAND — the `reocr` tier run (job 20310742, sent 2026-10-18).** 52 tasks,
+**THE `reocr` TIER RAN AND IS SCORED (2026-10-19).** 52 tasks, 498,390 records for 498,390 lines,
+all 52 `.sha1` sidecars verified against the staged chunks on both sides, no `.partial` files,
+every log reporting `Qwen/Qwen3.5-4B`. Predictions in `data/volumes_reocr/`, guarded, assembled
+to `data/records/4b-100k+guard/`, summary `results/records_4b-100k+guard.json`.
+
+- **Cost: 19.8 GPU-hours at 7.00 rows/s**, against the ~11.7 this file predicted. **The 11.88
+  rows/s in `prep_volumes.py` does not reproduce and should not be used for planning.** It came
+  from one H200 task in September; the two H200 tasks here ran at 7.13 and 7.57. NYU moved tasks
+  2-51 to L40S after h200_public stalled (927 jobs pending on a 24-GPU partition cap) because the
+  extractor runs the same speed on either card. At ~7.2 rows/s the remaining tiers are **~215
+  H200-hours, not the ~129 / 120 / 94 recorded under "Tiers" above.**
+- **The GPU split is benign.** This was the first tier spread over two card types, so Brooklyn
+  1912 — whose three chunks ran H200, H200, L40S — was checked: 30.9 / 31.2 / **30.7** bytes a
+  record, 2.98% / 2.92% / **2.95%** empty names, 100% of records parsing all eight fields in all
+  three. Worth checking, since greedy decoding turned out not to be bit-reproducible across
+  vLLM versus the per-tile runner (#27).
+- **The copy guard changed 32,941 of 498,390 records (6.61%)**: 32,972 restorations and 1,431
+  invented given names dropped. Brooklyn 1912 took the most at 6,559.
+
+**⚠️ THE PRINTED-NAME MEASUREMENT IS CONFOUNDED BY OUR OWN `role` FLAG — do not quote 0.715.**
+`usable` requires `role == "start"`, and `layout_roles` assigns that from the box alone. On these
+microfilm frames it inverts: leaf 93 of 0039 has both of its column margins correctly detected as
+peaks (45 entry rows each), and **the 45 rows sitting AT each margin are labelled `runover` while
+the 10-12 slightly left of it are labelled `start`**. The texts settle it — `E Ackerman William,
+driver, h. 85 S. 7th` and `Ackerson Theador, ship carpenter, h. 206 High` are complete entries,
+not tails. It is scattered over 406 of 423 leaves rather than failing whole leaves, and across
+the 39 volumes **39,906 entry-shaped rows (8.0%) are discarded by `usable` on this flag.**
+
+| | usable | + entry-shaped runovers |
+|---|---|---|
+| 0039 (stated 50,000) | 35,748 → **0.715** | 44,541 → **0.891** |
+| 0046 (stated 7,345) | 5,284 → 0.719 | 5,357 → 0.729 |
+
+So **#28's end-to-end number is between 0.715 and 0.891 per printed name**, and the uncertainty
+is in our role labelling rather than in the extraction. Doggett 1845's 0.984 is the benchmark.
+Two things are NOT the cause, both tested: the small "E" mark (runover rows are 1.1% E-marked
+against starts at 20.6%, so if anything the reverse) and a whole-leaf margin failure (zero leaves
+have ≥80% of their entry rows called runover).
+
+**0046's shortfall is a different and real problem.** Only 73 of its rows are entry-shaped
+runovers, so the flag does not explain it: it has 5,978 rows for 7,345 printed names. That is OCR
+recall, consistent with the 0.825 scoped-lines-per-name measured this morning — this volume is
+missing lines, not mislabelling them.
+
+**Next, in order:** fix `layout_roles`' margin placement on multi-column microfilm (it feeds
+`usable`, so it deserves its own measurement and a before/after on these 39), then re-read the
+printed-name ratio. Until then the honest statement of #28's end-to-end effect is the range.
+
+⚠️ `data/records/4b-100k+guard/` also holds run 1's five volumes (310,932 rows). Never glob that
+directory for a per-run total; select the volumes you mean.
+
+**⏸ THE ORIGINAL PLAN, kept for the parts still open (job 20310742, sent 2026-10-18).** 52 tasks,
 498,390 lines, staged at `58ee8ec` as `cde-volumes-reocr.tar.gz`. The canary (20304867_0) came
 back correct but slow: **7.13 rows/s on an H200** against the 11.88 measured once on gh129, so
 the run costs ~18.7 GPU-hours rather than ~11.7. NYU went ahead; we issued no stop order,

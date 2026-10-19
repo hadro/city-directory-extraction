@@ -1908,6 +1908,55 @@ read the direction, not the third digit.
 - ~~The 39 volumes are imported again.~~ Above.
 - A stage-B run on the panel still has to measure the row EM.
 
+**⏸ WHEN NYU'S RESULTS LAND — the `reocr` tier run (job 20310742, sent 2026-10-18).** 52 tasks,
+498,390 lines, staged at `58ee8ec` as `cde-volumes-reocr.tar.gz`. The canary (20304867_0) came
+back correct but slow: **7.13 rows/s on an H200** against the 11.88 measured once on gh129, so
+the run costs ~18.7 GPU-hours rather than ~11.7. NYU went ahead; we issued no stop order,
+because the output is right and only GPU time is at stake. Their notes and the canary log are in
+`~/Downloads/to_josh_20261019a`.
+
+In order, on arrival:
+1. **Install and verify.** Predictions into `data/volumes_reocr/` (never over another staging —
+   PIPELINE #27's lesson). Check all 52 `.sha1` sidecars against `manifest.json` and that each
+   file's record count equals its chunk's line count.
+2. `postprocess/copy_guard.py --volumes data/volumes_reocr --run 4b-100k`
+3. `postprocess/assemble_records.py --root data/volumes_reocr --run 4b-100k+guard`
+4. **#28's real done-criterion, which the panel cannot give.** Compare usable records per
+   printed name against the two volumes that state their own count: **0039 claims 50,000** and
+   **0046 claims 7,345**. Before any of this work 0039's scoped lines ran 1.087 per printed name
+   and 1.038 after the first pass; this import should move it again. Doggett 1845's 1.004 is the
+   benchmark.
+5. **Re-measure the thin tier's fabrication rate.** The 30.1% that sizes the case for a learned
+   page-type classifier (PAGE_TYPE_CLASSIFIER "STATUS 4", and hadro's question about a
+   calibrated decision model) was measured on IA's dead OCR of these same volumes. This run is
+   the first chance to replace it. Until then that number is not evidence about the re-OCR'd
+   corpus.
+
+Also waiting on NYU, neither blocking: their **option 2** A/B (2,000 lines from each of two
+chunks plus `BATCH=64`, on one node) to separate node from data from batch size — the 11.88
+figure is n=1 against the canary's n=1; and **option 3**, installing flash-linear-attention and
+causal-conv1d, which is probably the real speed-up but changes the inference environment and so
+needs a parity check against the canary chunk. Do option 3 deliberately before the next large
+run, not during one.
+
+Two fixes of our own, both small and both deferred to the same moment:
+- **The runbook artifact's stash step is incomplete.** It tells NYU to stash `tasks.txt` and
+  `manifest.json` before unpacking, but the tar overwrites **`staging.json`** too; NYU caught it
+  and stashed it anyway. Fix https://claude.ai/artifact/VuDtqkwxhHS2ax5BYzrB8h before the next
+  package goes out.
+- **Re-shard before any further re-OCR.** `reocr_columns.py stage --per-shard` produced 70
+  shards of ~296 tiles; vLLM's engine init is a fixed ~199 s a task, so that is ~3.9 GPU-hours of
+  startup against ~3.3 of decode. Ten shards of ~2,000 tiles takes the corpus from ~7.2 to ~3.9
+  GPU-hours by NYU's projection (their arithmetic from one shard, not a measurement). This is our
+  setting, not theirs — nothing for NYU to change.
+
+**Do NOT spend time on length-sorted batching.** NYU suggested it from the corpus mean of 39.0
+chars against the canary chunk's 27.9, reasoning that a 700-char line pads its batch of 32. The
+tail is not there: p99 is 74 characters, 19 lines of 498,390 exceed 200 and 7 exceed 400. The
+canary volume (Brooklyn 1912) is simply the short one. And the longest lines are not wrap joins
+at all — they are LightOn repetition loops ("North 6th & 5th & 6th & 7th & 8th &" counting up to
+the cap), six lines, every one in `micro_IABROOKLYN_0045`, whose loop detection missed them.
+
 ## Larger, and the ones that unblock claims
 
 **10. A whole-volume gold slice.** Hand-label ~200 lines sampled across one volume's *listing*

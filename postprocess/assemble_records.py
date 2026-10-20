@@ -46,6 +46,9 @@ AND WHAT IT KNOWS ABOUT THE LINE, AS FLAGS, NOT FILTERS
                         full-page ad, or a page whose OCR failed
     eval_holdout        gold / adjacent / volume: measurement lines, never to be published as
                         records or trained on
+    root                the --root the volume was assembled from. One <run> directory can hold
+                        volumes from several roots (4b-100k+guard holds run 1's five and the
+                        reocr tier's 39), and this is the only thing on the row that says which
 
 `usable` is the conservative export: entry-shaped, a start (or thin) line, on a listing page, not
 held out. Nothing is dropped; a consumer filters on the flags.
@@ -84,7 +87,7 @@ CSV_COLUMNS = (["record_id", "volume", "leaf", "printed_page", "printed_page_how
                 "canvas", "xywh", "raw_line"] + FIELDS +
                ["name_resolved", "address_resolved", "address_ditto", "home_address_resolved",
                 "ditto_source", "ditto_flags", "role", "entry_shaped", "non_entry_page",
-                "eval_holdout", "usable"])
+                "eval_holdout", "usable", "root"])
 
 
 class Incomplete(Exception):
@@ -135,8 +138,8 @@ def strip_lead(name: str, lead: str) -> str:
     return re.sub(r"^\W+", "", name).strip()
 
 
-def assemble(ident: str, pairs: list) -> tuple:
-    """-> (rows, summary) for one volume."""
+def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
+    """-> (rows, summary) for one volume, `root` the chunk directory it was read from."""
     side = SIDECARS / f"ia_{ident}.json"
     doc = json.loads(side.read_text(encoding="utf-8")) if side.exists() else {}
     folios = printed_pages(ident)
@@ -193,7 +196,7 @@ def assemble(ident: str, pairs: list) -> tuple:
             "home_address_resolved": ann["home_address_resolved"],
             "ditto_source": source, "ditto_flags": cr["flags"],
             "role": role, "entry_shaped": entry, "non_entry_page": leaf in non_entry,
-            "eval_holdout": held, "usable": usable})
+            "eval_holdout": held, "usable": usable, "root": root})
 
     stated = (doc.get("book_says") or {}).get("stated_name_count") or {}
     usable_n = sum(r["usable"] for r in rows)
@@ -243,8 +246,9 @@ def _self_test() -> int:
                "context": {**ctx, "leaf": 5, "bbox": [100, 130, 600, 150]}},
               {"name": '" Wm', "occupation_role": "carman", "address": "3 Oak",
                "home_address": "do"})]
-    rows, s = assemble("no_such_volume", pairs)
+    rows, s = assemble("no_such_volume", pairs, root="data/volumes_x")
     assert rows[0]["record_id"] == "no_such_volume:5:0" and rows[1]["record_id"].endswith(":5:1")
+    assert rows[0]["root"] == rows[1]["root"] == "data/volumes_x"
     assert rows[1]["name_resolved"] == "Smith Wm", rows[1]["name_resolved"]
     assert rows[1]["ditto_source"] == "no_such_volume:5:0"
     assert rows[1]["home_address_resolved"] == "3 Oak"
@@ -285,7 +289,7 @@ def main(argv=None) -> int:
             report["incomplete"][ident] = str(e)
             print(f"{ident:30s} INCOMPLETE: {e}")
             continue
-        rows, summary = assemble(ident, pairs)
+        rows, summary = assemble(ident, pairs, root=args.root)
         write(rows, out_dir, ident)
         report["volumes"][ident] = summary
         per = summary["usable_per_stated_name"]

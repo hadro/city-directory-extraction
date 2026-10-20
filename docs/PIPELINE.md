@@ -1952,9 +1952,42 @@ runovers, so the flag does not explain it: it has 5,978 rows for 7,345 printed n
 recall, consistent with the 0.825 scoped-lines-per-name measured this morning — this volume is
 missing lines, not mislabelling them.
 
-**Next, in order:** fix `layout_roles`' margin placement on multi-column microfilm (it feeds
-`usable`, so it deserves its own measurement and a before/after on these 39), then re-read the
-printed-name ratio. Until then the honest statement of #28's end-to-end effect is the range.
+**FIXED 2026-10-20, and it was a hanging mark, not multi-column geometry.** `layout_roles`
+seeded each column's margin on the 10th percentile of x. A mark that hangs LEFT of the text
+margin puts a minority of lines there, the p10 seed lands among them, the fit pins the margin to
+the mark, and every ordinary entry then measures past `START_MAX` and comes out `runover`. The
+seed is now the column's MODAL left edge -- the text margin by construction, since a hanging
+mark is a minority and a runover indent is a minority -- and `OUTDENT` goes -25 → -40 so the
+hanging line itself stays a `start`. The hang measures a median 52-56 px over 2,057 leaf-columns
+of 0039/0040/0042, p90 60-70, i.e. 21-27.5 per-mille; a column gutter is ~500 away.
+
+A regression test in `volume_run_report._self_test` carries leaf 93's real geometry (45 entries
+at the margin, 14 `E `-marked hanging 55 px left, 2 genuine runovers) and **fails on the old
+code**, which called all 45 margin entries `runover` and the 14 marks `start`.
+
+**It is not a microfilm problem.** Three populations have a hanging mark and all three gain:
+the Eastern District `E` of 0039/0040/0042, **1906BPL's `"` ditto**, and Smith 1856's microfilm.
+Volumes without one do not move.
+
+| | usable before | after |
+|---|---|---|
+| 0042 | 35,209 | **49,025** (+13,816) |
+| 0039 | 35,748 | **43,033** (+7,285) |
+| 0040 | 36,441 | **42,549** (+6,108) |
+| the 39, total | 414,274 | **444,786** (+30,512) |
+| 1906BPL (run 1) | 166,537 | **173,899** (+7,362) |
+| Smith 1856, microfilm (run 1) | 10,136 | 11,084 (+948) |
+| **Doggett 1845 — no hanging mark** | 60,372 | 60,369 (**−3**, ratio holds at 0.984) |
+
+Nearly 39,000 real records recovered across both runs. A sample of 1906BPL's newly usable rows:
+`" Pierce contractor 498 Leonard h 21 St Francis pi`, `" Conrad barber h 998 DeKalb av`,
+`Neufield Jos bldr h 305 Hinsdale` — entries, not advertising. (A 60-leaf sample suggested ad
+copy and was unrepresentative; over the full volume 8,087 of 8,275 moved rows are entry-shaped.)
+
+**#28's end-to-end number, at last: 0039 goes 0.715 → 0.861 usable records per printed name**,
+against Doggett 1845's 0.984. **0046 barely moves, 0.719 → 0.722**, which is the control: it has
+no hanging mark, so it was never affected, and its shortfall is genuine OCR recall — 5,978 rows
+for 7,345 printed names.
 
 ⚠️ `data/records/4b-100k+guard/` also holds run 1's five volumes (310,932 rows). Never glob that
 directory for a per-run total; select the volumes you mean.

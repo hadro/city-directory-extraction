@@ -1,17 +1,17 @@
 {
- "derived": "2026-10-19",
+ "derived": "2026-10-20",
  "run": "4b-100k+guard",
  "root": "data/volumes_reocr",
  "volumes": {
   "brooklynnewyorkc19123broo": {
    "rows": 53850,
-   "usable": 44190,
+   "usable": 44780,
    "named": 52236,
    "entry_shaped": 47230,
    "roles": {
-    "start": 47375,
-    "other": 3568,
-    "runover": 2907
+    "start": 48043,
+    "runover": 2365,
+    "other": 3442
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -43,13 +43,13 @@
   },
   "micro_IABROOKLYN_0001": {
    "rows": 1007,
-   "usable": 933,
+   "usable": 944,
    "named": 1007,
    "entry_shaped": 960,
    "roles": {
-    "other": 16,
-    "start": 973,
-    "runover": 18
+    "other": 13,
+    "start": 985,
+    "runover": 9
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -68,13 +68,13 @@
   },
   "micro_IABROOKLYN_0002": {
    "rows": 1203,
-   "usable": 997,
+   "usable": 1015,
    "named": 1199,
    "entry_shaped": 1056,
    "roles": {
-    "runover": 56,
-    "start": 1119,
-    "other": 28
+    "start": 1147,
+    "runover": 31,
+    "other": 25
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -95,13 +95,13 @@
   },
   "micro_IABROOKLYN_0003": {
    "rows": 1274,
-   "usable": 1007,
+   "usable": 1031,
    "named": 1274,
    "entry_shaped": 1042,
    "roles": {
-    "runover": 35,
-    "start": 1226,
-    "other": 13
+    "runover": 9,
+    "start": 1254,
+    "other": 11
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -120,13 +120,13 @@
   },
   "micro_IABROOKLYN_0004": {
    "rows": 1514,
-   "usable": 1319,
+   "usable": 1345,
    "named": 1504,
    "entry_shaped": 1367,
    "roles": {
-    "other": 29,
-    "start": 1452,
-    "runover": 33
+    "other": 18,
+    "start": 1480,
+    "runover": 16
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -145,13 +145,13 @@
   },
   "micro_IABROOKLYN_0005": {
    "rows": 1917,
-   "usable": 1765,
+   "usable": 1794,
    "named": 1916,
    "entry_shaped": 1819,
    "roles": {
-    "start": 1854,
-    "other": 19,
-    "runover": 44
+    "start": 1885,
+    "other": 17,
+    "runover": 15
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -170,13 +170,13 @@
   },
   "micro_IABROOKLYN_0006": {
    "rows": 1912,
-   "usable": 1782,
+   "usable": 1789,
    "named": 1907,
    "entry_shaped": 1809,
    "roles": {
-    "start": 1861,
-    "other": 31,
-    "runover": 20
+    "start": 1868,
+    "other": 29,
+    "runover": 15
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -195,13 +195,13 @@
   },
   "micro_IABROOKLYN_0007": {
    "rows": 2331,
-   "usable": 2119,
+   "usable": 2129,
    "named": 2325,
    "entry_shaped": 2230,
    "roles": {
-    "other": 23,
-    "start": 2206,
-    "runover": 102
+    "other": 22,
+    "start": 2216,
+    "runover": 93
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -222,13 +222,13 @@
   },
   "micro_IABROOKLYN_0008": {
    "rows": 2430,
-   "usable": 2196,
+   "usable": 2254,
    "named": 2427,
    "entry_shaped": 2328,
    "roles": {
-    "start": 2279,
-    "other": 64,
-    "runover": 87
+    "start": 2339,
+    "other": 42,
+    "runover": 49
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -247,13 +247,13 @@
   },
   "micro_IABROOKLYN_0009": {
    "rows": 2651,
-   "usable": 2473,
+   "usable": 2492,
    "named": 2648,
    "entry_shaped": 2554,
    "roles": {
-    "runover": 71,
-    "start": 2559,
-    "other": 21
+    "runover": 54,
+    "start": 2580,
+    "other": 17
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -272,13 +272,13 @@
   },
   "micro_IABROOKLYN_0010": {
    "rows": 3140,
-   "usable": 2851,
+   "usable": 2878,
    "named": 3139,
    "entry_shaped": 2970,
    "roles": {
-    "runover": 110,
-    "other": 17,
-    "start": 3013
+    "runover": 88,
+    "start": 3039,
+    "other": 13
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -299,13 +299,13 @@
   },
   "micro_IABROOKLYN_0011": {
    "rows": 3129,
-   "usable": 2890,
+   "usable": 2936,
    "named": 3127,
    "entry_shaped": 3018,
    "roles": {
-    "runover": 111,
-    "start": 2989,
-    "other": 29
+    "runover": 49,
+    "start": 3037,
+    "other": 43
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -326,13 +326,13 @@
   },
   "micro_IABROOKLYN_0012": {
    "rows": 3494,
-   "usable": 3142,
+   "usable": 3222,
    "named": 3491,
    "entry_shaped": 3322,
    "roles": {
-    "runover": 170,
-    "start": 3293,
-    "other": 31
+    "runover": 89,
+    "start": 3381,
+    "other": 24
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -351,13 +351,13 @@
   },
   "micro_IABROOKLYN_0013": {
    "rows": 3812,
-   "usable": 2986,
+   "usable": 3187,
    "named": 3798,
    "entry_shaped": 3613,
    "roles": {
-    "runover": 287,
-    "start": 3374,
-    "other": 151
+    "start": 3583,
+    "runover": 89,
+    "other": 140
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 302,
@@ -379,13 +379,13 @@
   },
   "micro_IABROOKLYN_0014": {
    "rows": 3864,
-   "usable": 3289,
+   "usable": 3425,
    "named": 3831,
    "entry_shaped": 3578,
    "roles": {
-    "other": 236,
-    "start": 3433,
-    "runover": 195
+    "other": 198,
+    "start": 3581,
+    "runover": 85
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -408,13 +408,13 @@
   },
   "micro_IABROOKLYN_0015": {
    "rows": 4321,
-   "usable": 4045,
+   "usable": 4085,
    "named": 4313,
    "entry_shaped": 4135,
    "roles": {
-    "start": 4200,
-    "other": 46,
-    "runover": 75
+    "start": 4241,
+    "other": 37,
+    "runover": 43
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -433,13 +433,13 @@
   },
   "micro_IABROOKLYN_0017": {
    "rows": 5804,
-   "usable": 5008,
+   "usable": 5120,
    "named": 5778,
    "entry_shaped": 5361,
    "roles": {
-    "other": 248,
-    "runover": 268,
-    "start": 5288
+    "other": 213,
+    "runover": 182,
+    "start": 5409
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -461,13 +461,13 @@
   },
   "micro_IABROOKLYN_0018": {
    "rows": 6841,
-   "usable": 6239,
+   "usable": 6327,
    "named": 6829,
    "entry_shaped": 6500,
    "roles": {
-    "other": 113,
-    "runover": 192,
-    "start": 6536
+    "other": 94,
+    "runover": 120,
+    "start": 6627
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -486,13 +486,13 @@
   },
   "micro_IABROOKLYN_0020": {
    "rows": 8107,
-   "usable": 7548,
+   "usable": 7604,
    "named": 8104,
    "entry_shaped": 7791,
    "roles": {
-    "other": 147,
-    "start": 7792,
-    "runover": 168
+    "other": 131,
+    "start": 7850,
+    "runover": 126
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -514,13 +514,13 @@
   },
   "micro_IABROOKLYN_0021": {
    "rows": 8800,
-   "usable": 7874,
+   "usable": 8001,
    "named": 8788,
    "entry_shaped": 8280,
    "roles": {
-    "start": 8167,
-    "other": 396,
-    "runover": 233,
+    "start": 8296,
+    "runover": 152,
+    "other": 348,
     "thin": 4
    },
    "non_entry_page_rows": 0,
@@ -543,13 +543,13 @@
   },
   "micro_IABROOKLYN_0022": {
    "rows": 7233,
-   "usable": 6505,
+   "usable": 6581,
    "named": 7215,
    "entry_shaped": 6797,
    "roles": {
-    "other": 151,
-    "runover": 261,
-    "start": 6821
+    "other": 123,
+    "runover": 210,
+    "start": 6900
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -570,13 +570,13 @@
   },
   "micro_IABROOKLYN_0023": {
    "rows": 10429,
-   "usable": 9910,
+   "usable": 9968,
    "named": 10417,
    "entry_shaped": 10123,
    "roles": {
-    "other": 152,
-    "runover": 151,
-    "start": 10126
+    "other": 140,
+    "runover": 103,
+    "start": 10186
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -595,13 +595,13 @@
   },
   "micro_IABROOKLYN_0024": {
    "rows": 10127,
-   "usable": 9601,
+   "usable": 9657,
    "named": 10121,
    "entry_shaped": 9801,
    "roles": {
-    "runover": 100,
-    "start": 9838,
-    "other": 189
+    "runover": 91,
+    "start": 9892,
+    "other": 144
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -622,13 +622,13 @@
   },
   "micro_IABROOKLYN_0025": {
    "rows": 12864,
-   "usable": 11894,
+   "usable": 11994,
    "named": 12830,
    "entry_shaped": 12295,
    "roles": {
-    "other": 283,
-    "runover": 266,
-    "start": 12315
+    "other": 252,
+    "runover": 189,
+    "start": 12423
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -651,13 +651,13 @@
   },
   "micro_IABROOKLYN_0027": {
    "rows": 13413,
-   "usable": 12460,
+   "usable": 12555,
    "named": 13393,
    "entry_shaped": 12869,
    "roles": {
-    "start": 12861,
-    "runover": 270,
-    "other": 282
+    "start": 12964,
+    "runover": 205,
+    "other": 244
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -678,13 +678,13 @@
   },
   "micro_IABROOKLYN_0029": {
    "rows": 16271,
-   "usable": 15542,
+   "usable": 15617,
    "named": 16227,
    "entry_shaped": 15868,
    "roles": {
-    "start": 15840,
-    "other": 171,
-    "runover": 260
+    "start": 15917,
+    "other": 146,
+    "runover": 208
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -705,13 +705,13 @@
   },
   "micro_IABROOKLYN_0031": {
    "rows": 22921,
-   "usable": 21355,
+   "usable": 21506,
    "named": 22854,
    "entry_shaped": 21965,
    "roles": {
-    "start": 22026,
-    "runover": 376,
-    "other": 519
+    "start": 22187,
+    "runover": 268,
+    "other": 466
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -733,13 +733,13 @@
   },
   "micro_IABROOKLYN_0032": {
    "rows": 21456,
-   "usable": 19952,
+   "usable": 20082,
    "named": 21360,
    "entry_shaped": 20554,
    "roles": {
-    "start": 20628,
-    "runover": 464,
-    "other": 364
+    "start": 20766,
+    "runover": 395,
+    "other": 295
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -758,13 +758,13 @@
   },
   "micro_IABROOKLYN_0033": {
    "rows": 25275,
-   "usable": 22370,
+   "usable": 22539,
    "named": 25219,
    "entry_shaped": 23000,
    "roles": {
-    "start": 24426,
-    "other": 351,
-    "runover": 498
+    "start": 24612,
+    "other": 308,
+    "runover": 355
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -783,13 +783,13 @@
   },
   "micro_IABROOKLYN_0035": {
    "rows": 47379,
-   "usable": 42233,
+   "usable": 42416,
    "named": 46232,
    "entry_shaped": 44097,
    "roles": {
-    "other": 758,
-    "runover": 2093,
-    "start": 44528
+    "other": 705,
+    "runover": 1946,
+    "start": 44728
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 511,
@@ -811,13 +811,13 @@
   },
   "micro_IABROOKLYN_0039": {
    "rows": 50454,
-   "usable": 35748,
+   "usable": 43033,
    "named": 49756,
    "entry_shaped": 46206,
    "roles": {
-    "other": 2770,
-    "runover": 9905,
-    "start": 37779
+    "other": 2336,
+    "runover": 2686,
+    "start": 45432
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -840,17 +840,17 @@
    },
    "stated_name_count": 50000,
    "stated_approximate": true,
-   "usable_per_stated_name": 0.715
+   "usable_per_stated_name": 0.861
   },
   "micro_IABROOKLYN_0040": {
    "rows": 50244,
-   "usable": 36441,
+   "usable": 42549,
    "named": 49355,
    "entry_shaped": 45490,
    "roles": {
-    "start": 38914,
-    "runover": 8441,
-    "other": 2889
+    "start": 45304,
+    "runover": 2454,
+    "other": 2486
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -876,13 +876,13 @@
   },
   "micro_IABROOKLYN_0042": {
    "rows": 54585,
-   "usable": 35209,
+   "usable": 49025,
    "named": 53941,
    "entry_shaped": 51881,
    "roles": {
-    "start": 36509,
-    "runover": 16792,
-    "other": 1284
+    "start": 50650,
+    "runover": 2958,
+    "other": 977
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -904,13 +904,13 @@
   },
   "micro_IABROOKLYN_0043": {
    "rows": 4558,
-   "usable": 4375,
+   "usable": 4387,
    "named": 4539,
    "entry_shaped": 4473,
    "roles": {
-    "runover": 59,
-    "start": 4436,
-    "other": 63
+    "runover": 61,
+    "start": 4449,
+    "other": 48
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -931,13 +931,13 @@
   },
   "micro_IABROOKLYN_0044": {
    "rows": 5381,
-   "usable": 5088,
+   "usable": 5118,
    "named": 5348,
    "entry_shaped": 5210,
    "roles": {
-    "start": 5159,
-    "runover": 72,
-    "other": 136,
+    "start": 5193,
+    "runover": 54,
+    "other": 120,
     "thin": 14
    },
    "non_entry_page_rows": 0,
@@ -959,13 +959,13 @@
   },
   "micro_IABROOKLYN_0045": {
    "rows": 4125,
-   "usable": 3868,
+   "usable": 3927,
    "named": 4108,
    "entry_shaped": 4005,
    "roles": {
-    "start": 3924,
-    "other": 137,
-    "runover": 64
+    "start": 3983,
+    "other": 122,
+    "runover": 20
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -986,13 +986,13 @@
   },
   "micro_IABROOKLYN_0046": {
    "rows": 5978,
-   "usable": 5284,
+   "usable": 5302,
    "named": 5716,
    "entry_shaped": 5432,
    "roles": {
-    "start": 5549,
-    "other": 219,
-    "runover": 210
+    "start": 5567,
+    "other": 198,
+    "runover": 213
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -1010,17 +1010,17 @@
    },
    "stated_name_count": 7345,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.719
+   "usable_per_stated_name": 0.722
   },
   "micro_IABROOKLYN_0047": {
    "rows": 6979,
-   "usable": 5097,
+   "usable": 5429,
    "named": 6806,
    "entry_shaped": 6050,
    "roles": {
-    "start": 5539,
-    "other": 944,
-    "runover": 496
+    "start": 5911,
+    "other": 781,
+    "runover": 287
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
@@ -1045,13 +1045,13 @@
   },
   "micro_IABROOKLYN_0048": {
    "rows": 7317,
-   "usable": 6689,
+   "usable": 6743,
    "named": 7180,
    "entry_shaped": 6935,
    "roles": {
-    "start": 6882,
-    "other": 248,
-    "runover": 187
+    "start": 6936,
+    "other": 226,
+    "runover": 155
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,

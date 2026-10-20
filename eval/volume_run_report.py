@@ -65,7 +65,13 @@ BPL_LABELS = REPO / "data" / "entry_labels_1906BPL.jsonl"
 
 # Indent from the fitted column margin, in thousandths of page width. Doggett 1845 (64,580 lines):
 # starts sit at 0-15, runovers at 30-45 with a trough between; ad copy and centred headings beyond.
-START_MAX, RUNOVER_MAX, OUTDENT = 18, 60, -25
+# OUTDENT was -25 until 2026-10-20 and is now -40, to hold a HANGING MARK. The 1857-59 Brooklyn
+# volumes set a small "E" (Eastern District) before the name, and its box hangs left of the text
+# margin by a median 52-56 px over 2,057 leaf-columns of 0039/0040/0042 -- 21 per-mille of the
+# page, with a p90 of 60-70 px, i.e. 23.5-27.5. At -25 those entries fell out of `start` and into
+# `other`. A column gutter is ~500 per-mille away, so -40 is nowhere near admitting a neighbour.
+START_MAX, RUNOVER_MAX, OUTDENT = 18, 60, -40
+MODE_BIN = 0.01          # page-width bins for the modal left edge; see layout_roles
 MATCH_MIN = 0.6                     # fuzzy ratio for a gold row to claim an OCR line (or pair)
 
 
@@ -141,9 +147,20 @@ def layout_roles(lines: list) -> list:
         for grp in cols.values():
             if len(grp) < 5:
                 continue
-            xs = sorted(x[i] for i in grp)
-            p10 = xs[len(xs) // 10]
-            keep = [(y[i], x[i]) for i in grp if p10 - 0.02 <= x[i] <= p10 + 0.015]
+            # Seed the margin on the column's MODAL left edge, not its 10th percentile. A
+            # hanging mark pulls a minority of lines left of the text margin -- the "E" of the
+            # 1857-59 Brooklyn volumes hangs ~21 per-mille (see OUTDENT) -- and a p10 seed lands
+            # in THAT group. The fit then pins the margin to the mark and every ordinary entry
+            # measures past START_MAX, so the column comes out `runover`. On leaf 93 of
+            # micro_IABROOKLYN_0039 that mislabelled 45 of a column's 60 entries, and across the
+            # 39 re-OCR'd volumes it put 39,906 entry-shaped rows (8.0%) outside `usable`.
+            # The mode is the text margin by construction: a hanging mark is a minority, a
+            # runover indent is a minority, and the entries are what is left. Neighbouring bins
+            # are summed so a cluster split across a bin edge still wins.
+            xbins = Counter(int(x[i] / MODE_BIN) for i in grp)
+            seed = (max(xbins, key=lambda b: (xbins[b] + xbins.get(b - 1, 0) + xbins.get(b + 1, 0),
+                                              -b)) + 0.5) * MODE_BIN
+            keep = [(y[i], x[i]) for i in grp if abs(x[i] - seed) <= 0.012]
             a, b = _fit(keep or [(y[i], x[i]) for i in grp])
             for _ in range(2):
                 near = [(y[i], x[i]) for i in grp if abs(x[i] - (a + b * y[i])) <= 0.012]
@@ -641,6 +658,24 @@ def _self_test() -> int:
     assert roles[5] == roles[12] == "runover", roles
     assert roles[17] == "other", roles
     assert roles.count("start") == 17, roles
+
+    # A HANGING MARK must not capture the margin. Real geometry, micro_IABROOKLYN_0039 leaf 93
+    # left column: 14 "E "-marked entries at x 198-214 and 45 unmarked ones at 260-275, all of
+    # them entry starts, plus two genuine runovers. A p10 seed pinned the margin to the marked
+    # minority and called the other 45 `runover`; the mode seeds on the text margin instead.
+    hang = []
+    for k in range(45):                                   # the unmarked entries, at the margin
+        hang.append([263 + k % 13, 200 + 40 * k])
+    for k in range(14):                                   # "E "-marked, hanging ~55 px left
+        hang.append([198 + k, 200 + 40 * (45 + k)])
+    for k in range(2):                                    # genuine runovers, indented past them
+        hang.append([263 + 70, 200 + 40 * (59 + k)])
+    lines = [{"raw_line": "x", "context": {"leaf": 2, "page_size": [2550, 3300],
+                                           "bbox": [x0, y0, 1500, y0 + 30]}} for x0, y0 in hang]
+    roles = layout_roles(lines)
+    assert roles[:45].count("start") == 45, f"the margin entries: {Counter(roles[:45])}"
+    assert roles[45:59].count("start") == 14, f"the hanging mark: {Counter(roles[45:59])}"
+    assert roles[59:] == ["runover", "runover"], roles[59:]
     # align: a gold entry typed as one row matches a start + runover pair
     rows = [({"raw_line": t}, {}) for t in
             ["Holmes James M. fish, 42 Water, N. V. bh. Wash-", "ington av. n. Lafayette av",

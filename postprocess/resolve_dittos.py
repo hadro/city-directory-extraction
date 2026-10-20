@@ -352,12 +352,87 @@ def modal_letters(rows):
     return out
 
 
-def resolve_cross_line(rows, glued=()):
+LETTER_WINDOW = 3            # voting leaves either side that set a leaf's letter span
+
+
+def leaf_letter_ranges(rows, k=LETTER_WINDOW) -> dict:
+    """{leaf: (lo, hi)}: the letters a surname on the leaf may begin with, from the NEIGHBOURING
+    leaves' votes rather than the leaf's own.
+
+    The leaf's own vote is not safe. 1906BPL leaf 20 is an A page holding most of the Allen
+    block, and so many of its lines lost their ditto mark and lead with a given name that it
+    votes J (42 `Jas foreman`-style lines to 4 surnames) -- gating on that refused Alleman,
+    Allemania and Allen, and the whole page inherited `Allegretti`.
+
+    Nor is ONE sorted run per volume: micro_IABROOKLYN_0036 has two alphabets (the listing, then
+    the Eastern District's own A-W) and 0031 carries a sorted 20-leaf insert between its M and N
+    leaves, and a volume-wide longest non-decreasing run refused every surname in the second.
+
+    So: each leaf takes the votes (alpha_run_filter.leaf_letters) of the `k` nearest voting leaves
+    either side and its own, drops the single lowest and highest of them, and spans what is left.
+    A stray J leaf among A's gets (A, A); a leaf where C ends and D begins gets (C, D), so the D
+    block's first surname still sets the carry; at a restart the span widens, which fails open --
+    more lines may set the carry, as before this rule existed, never fewer than they should.
+    """
+    import bisect
+    try:
+        from alpha_run_filter import leaf_letters
+    except ImportError:                                # pragma: no cover
+        return {}
+    votes = leaf_letters([{"raw_line": raw or "", "context": {"leaf": leaf}} for leaf, raw in rows])
+    voting = sorted(votes)
+    out = {}
+    for leaf in {lf for lf, _ in rows}:
+        i = bisect.bisect_left(voting, leaf)
+        own = i < len(voting) and voting[i] == leaf
+        window = voting[max(0, i - k): i + k + (1 if own else 0)]
+        letters = sorted(votes[lf][0] for lf in window)
+        if len(letters) >= 5:
+            letters = letters[1:-1]
+        out[leaf] = (letters[0], letters[-1]) if letters else ("A", "Z")
+    return out
+
+
+def can_set_carry(sur: str, leaf, ranges) -> bool:
+    """May this surname-shaped lead become the carry? The `strict` rule (2026-10-20).
+
+    `surname_token` alone lets any line whose first word looks sortable reset the carry, and on a
+    page that interleaves advertising that is most of the error: 25,601 records across the 44
+    whole-volume runs carried a surname from a line that is not an entry -- 1906BPL's
+    `" Harry engineer` came out `millions— Harry` from the ad `millions— Try them.`, and
+    `French and American, all flavors.` handed `French` to 856 dittos. Two tests, both cheap:
+
+      a CAPITAL lead. `alpha_run_filter._SORT_KEY_RE` opens `[A-Za-z]` although first_letter's
+      docstring says "anchored capital"; it is left alone there because it also drives listing
+      bounds. For the carry, `until Withdrawn.` (9,166 records carried a lowercase surname)
+      must not count.
+      the LEAF'S LETTERS (leaf_letter_ranges): a directory is sorted, so a surname outside the
+      span its neighbours set is ad copy, a legend, a street continuation, or a given name whose
+      ditto mark the OCR dropped (`Geo A J realestate` on an A page, `Jas foreman` under Allen).
+
+    A line that fails is TRANSPARENT -- the carry runs on past it, which is right for an ad set
+    between two entries of one block. Not used: `entry_shaped` (it would block 1,057 real
+    surname lines of micro_IABROOKLYN_0039 such as `Abbott Moses, keeper city hall.`) and the
+    layout role (0039 has 1,252 real entries labelled runover).
+    """
+    if not sur or not sur[0].isupper():
+        return False
+    lo, hi = ranges.get(leaf, ("A", "Z"))
+    return lo <= sur[0].upper() <= hi
+
+
+def resolve_cross_line(rows, glued=(), heads=None, strict=False):
     """Sequential surname carry over `rows` = [(leaf, raw_line), ...] in reading order.
 
     `glued` is the per-volume set of marks printed without a space (Trow's `-`), empty by default
     so every number recorded before 2026-09-12 reproduces. Get it from `classify_glued_marks`,
     never by assumption -- ogden1839's `*` is a race designation, not a ditto.
+
+    `heads` {row index: surname} puts back the surname block headers ingest drops (`ANDERSON`
+    over a column, `ACME` over its dittos): the carry becomes that surname just before the row.
+    `strict` gates which lines may set the carry (`can_set_carry`). Both default off, so every
+    number recorded before 2026-10-20 reproduces; assemble_records.py turns both on. A row
+    resolved from a header says so in `header` (and has no source line to point at).
 
     Yields one dict per row: the verbatim leading token, the resolved surname, and FLAGS. It
     never drops a row and never silently picks between candidates.
@@ -374,8 +449,12 @@ def resolve_cross_line(rows, glued=()):
     the number to drive down with better column handling, not to hide.
     """
     modal = modal_letters(rows)
-    prev, prev_leaf = None, None
-    for leaf, raw in rows:
+    ranges = leaf_letter_ranges(rows) if strict else {}
+    heads = heads or {}
+    prev, prev_leaf, prev_header = None, None, None
+    for i, (leaf, raw) in enumerate(rows):
+        if i in heads and (not strict or can_set_carry(heads[i], leaf, ranges)):
+            prev, prev_leaf, prev_header = heads[i], leaf, heads[i]
         # The glued test runs FIRST so an opted-in mark is never re-read as something else.
         # Without it a Trow line is INERT rather than wrong: `first_letter` anchors at position 0,
         # the dash is not a letter, so surname_token abstains and is_ditto_lead sees no mark --
@@ -383,8 +462,12 @@ def resolve_cross_line(rows, glued=()):
         # Measured on trow1913's 93 gold rows: 0 surnames carried without `glued`, 86 with it.
         gl = split_glued_mark(raw, glued)
         sur = None if gl else surname_token(raw)
+        if sur is not None and strict and not can_set_carry(sur, leaf, ranges):
+            yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": "",
+                   "status": "not_ditto", "flags": []}
+            continue
         if sur is not None:
-            prev, prev_leaf = sur, leaf
+            prev, prev_leaf, prev_header = sur, leaf, None
             yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": sur,
                    "status": "not_ditto", "flags": []}
             continue
@@ -404,8 +487,11 @@ def resolve_cross_line(rows, glued=()):
         m = modal.get(leaf)
         if m and not m[1] and prev[0].upper() != m[0]:
             flags.append("letter_conflict")
-        yield {"leaf": leaf, "raw_line": raw, "lead": lead, "resolved": prev,
+        out = {"leaf": leaf, "raw_line": raw, "lead": lead, "resolved": prev,
                "status": "resolved", "flags": flags}
+        if prev_header:
+            out["header"] = prev_header
+        yield out
 
 
 # --------------------------------------------------------------------------------------------
@@ -636,6 +722,63 @@ def self_test() -> int:
     # a ditto with nothing before it is an orphan, never a guess
     orph = list(resolve_cross_line([(1, '" Ann C wid David h 518 Madison')]))
     check("orphan", (orph[0]["status"], orph[0]["resolved"]), ("orphan", ""))
+
+    # `strict`: ad copy between two entries of one block is transparent to the carry. The real
+    # 1906BPL shape -- leaf 51's bank notice, leaf 26's ad above leaf 27's dittos.
+    # (a leaf votes only with alpha_run_filter.MIN_ALPHA_LINES sortable lines, as a real page has)
+    a_page = [f"A{s} Wm clk h {n} Hicks" for n, s in enumerate(
+        ("aron", "bel", "cker", "dams", "ldridge", "llen", "lvord", "mes", "nders", "ndrews",
+         "nthony", "pplegate", "rcher", "rmstrong", "rnold", "shley"))]
+    ads = [(5, s) for s in a_page] + [
+           (5, "Abbott Geo grocer 9 Fulton"),
+           (5, "until Withdrawn."),                       # lowercase: was the carry
+           (5, "French and American, all flavors."),      # off-letter on an A leaf: was the carry
+           (5, '" Harry engineer h 26 3d')]
+    loose = list(resolve_cross_line(ads))
+    check("loose: the ad is the carry", loose[-1]["resolved"], "French")
+    tight = list(resolve_cross_line(ads, strict=True))
+    check("strict: the carry runs past both ad lines",
+          (tight[-1]["resolved"], tight[-3]["resolved"], tight[-2]["resolved"]), ("Abbott", "", ""))
+    check("strict leaves the ad rows not_ditto", [tight[-3]["status"], tight[-2]["status"]],
+          ["not_ditto", "not_ditto"])
+    # ...but a real surname still sets it, and a two-letter leaf lets both letters through
+    two = [(7, "Baker Ann h 1 Main"), (7, "Bell Jos h 2 Main"), (7, "Carr Wm h 3 Main"),
+           (7, "Cole Jas h 4 Main"), (7, '" Mary h 5 Main')]
+    check("strict on a two-letter leaf", list(resolve_cross_line(two, strict=True))[4]["resolved"],
+          "Cole")
+    # THE REGRESSION THE RANGES EXIST FOR (1906BPL leaf 20): an A page whose Allen block lost its
+    # ditto marks votes J on its given names. Its own vote would refuse `Allen`; the run of
+    # leaves around it says A, so Allen sets the carry and `Jas foreman` does not.
+    allen = ([(lf, s) for lf in (16, 17, 18, 19) for s in a_page]
+             + [(20, "Allegretti Jos h 1 Pine"), (20, "Allen Abram h 131")]
+             + [(20, f"Jas {w} h {n} High") for n, w in enumerate(
+                 ("foreman", "machinist", "printer", "salesman", "tailor", "clk", "carpr", "mason",
+                  "painter", "porter", "grocer", "baker", "barber", "cooper", "driver", "agt"))]
+             + [(20, '" Arthur W painter h 1176 Madison')]
+             + [(lf, s) for lf in (21, 22, 23) for s in a_page])
+    got = list(resolve_cross_line(allen, strict=True))
+    check("leaf 20: its neighbours' letters, not its own vote",
+          got[4 * len(a_page) + 18]["resolved"], "Allen")
+    check("leaf 20's own vote was J", modal_letters(allen)[20][0], "J")
+    # a second alphabet (0036's Eastern District): the restart widens the span, never blocks it
+    restart = ([(lf, s) for lf in range(1, 6) for s in [f"W{t} Jas h 1 Main" for t in (
+        "ade", "agner", "alker", "allace", "alsh", "ard", "arner", "arren", "atson", "eaver",
+        "ebb", "eber", "ells", "elsh", "est", "hite")]] + [(lf, s) for lf in range(6, 11)
+                                                          for s in a_page])
+    rng = leaf_letter_ranges(restart)
+    check("past a restart the new run's own letter is allowed", rng[8], ("A", "A"))
+    check("at the seam the span is wide, not wrong", rng[6][0] <= "A" and rng[6][1] >= "W", True)
+    # `heads`: the dropped ALL-CAPS header becomes the carry just before its follower
+    hd = [(27, "Abbott Geo grocer 9 Fulton"), (27, "Allen Jas mason h 3 Court"),
+          (27, '" Harry engineer h 26 3d'), (27, '" Hedwig physician h 1544 Bergen')]
+    got = list(resolve_cross_line(hd, heads={2: "Anderson"}, strict=True))
+    check("header carries", [(g["resolved"], g.get("header")) for g in got[2:]],
+          [("Anderson", "Anderson"), ("Anderson", "Anderson")])
+    check("a header changes nothing above it", got[1].get("header"), None)
+    got = list(resolve_cross_line(hd + [(27, "Archer Wm h 7 Pine"), (27, '" Ann h 8 Pine')],
+                                  heads={2: "Anderson"}))
+    check("the next real surname ends the header's run", (got[5]["resolved"], got[5].get("header")),
+          ("Archer", None))
 
     # the address slot grammar, on duncan1794's gold addresses in their printed order
     duncan = ["71 Dey-street.", "27 Ann do.", "11 Rector do.", "30 Ferry-street", "Mott do.",

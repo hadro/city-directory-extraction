@@ -32,10 +32,16 @@ EVERY ROW CARRIES
     home_address_resolved   resolve_dittos.annotate's within-line expansion (`h do`)
     address_resolved    the early volumes' slot grammar (`27 Ann do.` -> `27 Ann-street`,
                         resolve_dittos.resolve_address_run), with its status in address_ditto
-    ditto_source        the record_id of the line the surname was carried from
+    ditto_source        the record_id of the line the surname was carried from, or null where it
+                        came from a dropped header (ditto_header)
+    ditto_header        the surname block header it came from: ingest drops every one (`ANDERSON`
+                        over a column), dropped_headers puts them back for the carry
     ditto_flags         resolve_dittos.resolve_cross_line's review flags: cross_leaf,
-                        letter_conflict, orphan. Kept, never acted on: ~23% of 1906BPL's dittos
-                        are disputed and the two checks overlap only 28%
+                        letter_conflict, orphan. Kept, never acted on. The carry is `strict` from
+                        2026-10-20 (only a capitalised surname inside its leaf's letters sets it)
+                        and reads the headers; 1906BPL's disputed share went 23.2% -> 6.6%, much
+                        of that by construction -- results/carry_rules.py has the evidence that
+                        is not: agreement with the printed headers, 47.8% -> 84.8%
 
 AND WHAT IT KNOWS ABOUT THE LINE, AS FLAGS, NOT FILTERS
     role                start | runover | other | thin, from the box alone
@@ -76,7 +82,7 @@ from entry_rate import is_entry  # noqa: E402
 from iiif_frame import crop_url, xywh as canvas_xywh  # noqa: E402
 from evaluate import FIELDS, load_pred  # noqa: E402
 from resolve_dittos import (annotate, classify_glued_marks, resolve_address_run,  # noqa: E402
-                           resolve_cross_line)
+                           resolve_cross_line, surname_token)
 from survey_folios import fit as fit_folios, load as load_folios  # noqa: E402
 from volume_run_report import layout_roles  # noqa: E402
 
@@ -87,7 +93,7 @@ CSV_COLUMNS = (["record_id", "volume", "leaf", "printed_page", "printed_page_how
                 "canvas", "xywh", "raw_line"] + FIELDS +
                ["name_resolved", "address_resolved", "address_ditto", "home_address_resolved",
                 "ditto_source", "ditto_flags", "role", "entry_shaped", "non_entry_page",
-                "eval_holdout", "usable", "root"])
+                "eval_holdout", "usable", "root", "ditto_header"])
 
 
 class Incomplete(Exception):
@@ -130,6 +136,62 @@ def printed_pages(ident: str) -> dict:
     return fit_folios(leaves, cands)
 
 
+# A surname block header: one ALL-CAPS word, as results/surname_headers_dropped_1906BPL.py
+# defines it. Ingest drops every one (as `short` under 8 chars, else `allcaps`), and 1906BPL and
+# Brooklyn 1912 print one over every column (`ANDERSON` at the head of leaf 27's two columns).
+HEADER_RE = re.compile(r"^[A-Z][A-Z'’]{2,14}$")
+DROPPED_BOX = re.compile(r"\((\d+), (\d+), (\d+), (\d+)\)")
+
+
+def dropped_headers(ident: str, lines: list) -> dict:
+    """{index of the line a dropped header sits over: surname}, for resolve_cross_line's `heads`.
+
+    The header is read from data/survey_ocr/<id>_dropped.txt.gz and placed by its box: over the
+    nearest kept line of the same leaf that starts within 5% of a page width of its left edge and
+    within 2.5 header heights below it. Spelled as the volume's own entries spell it where they
+    do (`ANDERSON` -> `Anderson`), else title-cased; resolve_cross_line's `strict` still holds it
+    to the leaf's letters.
+
+    NO follower test, although the header finding defined headers by one (ALL-CAPS followed by a
+    ditto-lead line). Over a full entry a header is harmless -- the entry's own surname replaces it
+    on the very next line -- and over a DAMAGED one it is the only antecedent there is: 1906BPL
+    leaf 318 prints ENNIS over `Ennis Adam B`, OCR'd `iimnis Adam`, which `strict` refuses as
+    lowercase, so with the follower test its dittos fell back to the previous block's `Enners`."""
+    path = OCR / f"{ident}_dropped.txt.gz"
+    if not path.exists():
+        return {}
+    found = collections.defaultdict(list)
+    with gzip.open(path, "rt", encoding="utf-8", errors="replace") as fh:
+        for row in fh:
+            parts = row.rstrip("\n").split("\t")
+            if len(parts) < 4 or parts[1] not in ("short", "allcaps"):
+                continue
+            box = DROPPED_BOX.fullmatch(parts[2].strip())
+            if box and HEADER_RE.match(parts[3].strip()) and parts[0].isdigit():
+                found[int(parts[0])].append((tuple(map(int, box.groups())), parts[3].strip()))
+    by_leaf = collections.defaultdict(list)
+    spellings = collections.defaultdict(collections.Counter)
+    for i, ln in enumerate(lines):
+        ctx = ln.get("context") or {}
+        if ctx.get("leaf") in found and len(ctx.get("bbox") or []) == 4:
+            by_leaf[ctx["leaf"]].append((i, ctx["bbox"], (ctx.get("page_size") or [2500])[0]))
+        sur = surname_token(ln.get("raw_line") or "")
+        if sur and sur[0].isupper():
+            spellings[sur.lower()][sur] += 1
+    heads = {}
+    for leaf, hs in found.items():
+        for (x0, _y0, _x1, y1), text in hs:
+            h = max(y1 - _y0, 1)
+            near = [(b[1] - y1, i) for i, b, pw in by_leaf.get(leaf, [])
+                    if abs(b[0] - x0) <= 0.05 * pw and -0.5 * h <= b[1] - y1 <= 2.5 * h]
+            if not near:
+                continue
+            i = min(near)[1]
+            seen = spellings.get(text.lower())
+            heads[i] = seen.most_common(1)[0][0] if seen else text.title()
+    return heads
+
+
 def strip_lead(name: str, lead: str) -> str:
     """The given names of a ditto-led name: the model's `name` less the mark it copied."""
     name = (name or "").strip()
@@ -159,7 +221,10 @@ def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
     # the surname carry over the whole volume, in reading order
     seq = [(ln["context"]["leaf"], ln.get("raw_line") or "") for ln in lines]
     glued = tuple(m for m, d in classify_glued_marks(seq).items() if d["verdict"] == "DITTO")
-    carry = list(resolve_cross_line(seq, glued))
+    # the dropped surname headers put back, and only lines that can be a surname setting it
+    # (resolve_dittos.can_set_carry); measured in results/carry_rules.py
+    heads = dropped_headers(ident, lines)
+    carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True))
     addresses = list(resolve_address_run(rec.get("address") for _ln, rec in pairs))
 
     rows, last_surname = [], None
@@ -172,7 +237,7 @@ def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
         if cr["status"] == "resolved":
             given = strip_lead(rec.get("name"), cr["lead"])
             name_resolved = f"{cr['resolved']} {given}".strip()
-            source = last_surname
+            source = None if cr.get("header") else last_surname
         else:
             name_resolved = "" if cr["status"] == "orphan" else (rec.get("name") or "")
             source = None
@@ -195,6 +260,7 @@ def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
             "address_resolved": addr, "address_ditto": addr_status,
             "home_address_resolved": ann["home_address_resolved"],
             "ditto_source": source, "ditto_flags": cr["flags"],
+            "ditto_header": cr.get("header"),
             "role": role, "entry_shaped": entry, "non_entry_page": leaf in non_entry,
             "eval_holdout": held, "usable": usable, "root": root})
 
@@ -212,6 +278,8 @@ def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
                   "orphan": sum(1 for c in carry if c["status"] == "orphan"),
                   "disputed": sum(1 for c in carry if c["status"] == "resolved" and c["flags"]),
                   "glued_marks": list(glued),
+                  "headers_placed": len(heads),
+                  "from_header": sum(1 for c in carry if c.get("header")),
                   "address_slots": sum(1 for _a, st in addresses if st.startswith("resolved")),
                   "address_no_antecedent": sum(1 for _a, st in addresses
                                                if st == "no_antecedent")},

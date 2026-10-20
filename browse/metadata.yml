@@ -16,7 +16,7 @@ databases:
         column_order: [record_id, crop, raw_line, name_resolved, address_resolved,
                        home_address_resolved, name, is_business, spouse_name, race_designation,
                        occupation_role, employer, address, home_address, role, usable,
-                       volume, year, publisher]
+                       volume, year, publisher, ditto_source, ditto_header, ditto_flags]
         # keep in step with `facets` in browse/sources.toml, which gives each one its index
         facets: [root, volume, role, usable]
         fts_table: records_fts
@@ -64,7 +64,8 @@ databases:
           address_resolved: "the early volumes' slot grammar (`27 Ann do.` -> `27 Ann-street`)"
           address_ditto: the status of address_resolved
           home_address_resolved: "the within-line expansion of `h do`"
-          ditto_source: the record_id the surname was carried from (click to open it)
+          ditto_source: "the record_id the surname was carried from, with that line's text under it (click to open it). Empty where it came from a dropped header (ditto_header)"
+          ditto_header: "the surname block header the surname came from (ANDERSON over a column, as the page prints it, spelled as the volume's entries spell it). Ingest drops every header; assemble_records puts them back for the carry"
           ditto_flags: "review flags on the carry: cross_leaf, letter_conflict, orphan. Kept, never acted on: ~23% of 1906BPL's dittos are disputed and the two checks overlap only 28%"
           role: "start | runover | other | thin, from the box alone (volume_run_report.layout_roles), so only as good as the margin fit. A runover is the tail of the entry above; the model makes a person of it anyway"
           entry_shaped: "a name and an address-like field (entry_rate.is_entry)"

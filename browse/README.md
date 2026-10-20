@@ -102,9 +102,13 @@ header menu. They come from `assemble_records.py`'s docstring, via `metadata.yml
   **open** opens it full size in a new tab. The **Show all N line images** button above the
   table loads every row on the page; it toggles back to hiding them. Showing a page's images
   goes back to off when you move to another page.
-- **`canvas`**: links to the whole page image.
+- **page** (in the `crop` cell, and `canvas`'s **page image**): opens the line's whole page, with
+  the line outlined and scrolled into view. IA fails some image requests, so the viewer tries
+  several sizes, giving each 10 s. It also has direct links to the image at fixed sizes.
 - **`leaf`**: links to every line on that leaf, in reading order.
-- **`ditto_source`**: links to the line the surname was carried from.
+- **`ditto_source`**: links to the line the surname was carried from, and shows that line's text
+  underneath. When a name has the wrong surname, this is where to look: "millions— Try them."
+  means an ad supplied it.
 - It puts the columns in the order set in `metadata.yml` (see below) and folds the column
   descriptions.
 

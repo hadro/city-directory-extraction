@@ -214,6 +214,7 @@ eval/
 notebooks/colab_finetune.ipynb  # free-Colab T4 fine-tune -> push to Hub
 cards/                    # MODEL_CARD.md + DATASET_CARD.md templates
 results/                  # eval_table.md (tracked); scores.jsonl log (gitignored, regenerable)
+browse/                   # local Datasette browser over data/records/ -- see browse/README.md
 
 # ──────────────── shared ────────────────
 data/                     # gitignored: downloads + generated sets (the interface artifacts)

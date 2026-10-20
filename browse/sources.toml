@@ -1,0 +1,52 @@
+# What browse/build_db.py loads into the browsing database (browse/README.md).
+# Paths are relative to the repo root, or absolute; `~` is expanded.
+
+# One [tables.<name>] per table. Changing `fts` needs --rebuild; the indexes follow the config on
+# every build, and one taken out of it is dropped. The table's own columns are in the files'
+# order, which is what CSV/JSON exports and SQL `select *` give.
+#
+# `facets` should match the default facets in browse/metadata.yml. Each gets an index led by it
+# that also carries every `filters` column, so a facet count under any mix of those filters reads
+# that index alone: at 0.8M rows, 2-3 s a facet -> ~50 ms (~80 MB an index). SQLite otherwise
+# walks the facet column's own index to skip a sort and looks up every row to test the filter.
+# `index` is plain indexes, for filters on a rare value (eval_holdout=gold); a list is composite.
+# `fts` columns go into the search box. A "contains" filter cannot use any of this (~2 s a
+# query over the whole table); the search box can.
+[tables.records]
+# (the order columns are SHOWN in is `column_order` in browse/metadata.yml, not set here)
+facets = ["root", "volume", "role", "usable"]
+filters = ["root", "run", "volume", "section", "role", "usable", "entry_shaped", "non_entry_page",
+           "eval_holdout", "address_ditto", "printed_page_how", "is_business", "year",
+           "publisher", "scan"]
+index = ["record_id", ["volume", "leaf"], "run", "section", "entry_shaped", "non_entry_page",
+         "eval_holdout", "address_ditto", "printed_page_how", "is_business", "year", "publisher"]
+fts = ["raw_line", "name_resolved", "occupation_role", "employer", "address_resolved",
+       "home_address_resolved", "spouse_name"]
+
+# One [[sources]] per set of files: .jsonl or .jsonl.gz, one JSON object per line. Every row
+# gets `run` (the file's parent directory unless `run` is set here) and `source_file`. Rows with
+# a different shape go in their own table; a new key in a file becomes a new column.
+[[sources]]
+table = "records"
+glob = "data/records/*/*.jsonl.gz"
+# assemble_records.py writes `root` on every row from 2026-10-20. Files assembled before that
+# get it from whichever of these directories holds the volume's chunks. They do not overlap.
+infer_root = ["data/volumes_run1", "data/volumes_reocr"]
+
+# What the repo knows about each volume (browse/volumes.py: the catalog, IA's metadata, the
+# survey sidecar) goes in a `volumes` table, one row per volume, rewritten on every build. The
+# `copy` columns of it also go onto every record of the volume, so they can be filtered, sorted
+# and faceted; a record's own field of the same name wins. When what would be copied changes --
+# a catalog edit, or this list -- the volume's files are reloaded. The described table's `key`
+# column is declared a foreign key to volumes, which is how Datasette shows "1858 Lain
+# (Brooklyn)" for micro_IABROOKLYN_0039; that declaration needs --rebuild to add to an existing
+# table.
+[volumes]
+table = "records"
+key = "volume"
+copy = ["year", "publisher", "city", "borough", "scan"]
+
+# Another folder, e.g. the business-directory sibling once it writes records:
+# [[sources]]
+# table = "business_records"
+# glob = "~/github/business-directory-extraction/data/records/*/*.jsonl.gz"

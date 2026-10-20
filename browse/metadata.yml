@@ -1,0 +1,125 @@
+# Datasette metadata for the records browser (browse/README.md). The column descriptions are
+# postprocess/assemble_records.py's docstring; keep them in step with it.
+title: City directory records
+description_html: |-
+  Whole-volume extractions from the fine-tuned Qwen model, joined to what the repo knows about
+  each line. Built by <code>browse/build_db.py</code> from <code>browse/sources.toml</code>;
+  see <a href="/browse/loaded_files">loaded_files</a> for what is in here and when it was loaded.
+databases:
+  browse:
+    tables:
+      records:
+        size: 50
+        # The columns shown first, in this order; the rest follow in the table's own order. Save
+        # and reload the page (serve.sh restarts Datasette on any change to this file). Display
+        # only: exports keep the table's order unless the URL picks columns with ?_col=.
+        column_order: [record_id, crop, raw_line, name_resolved, address_resolved,
+                       home_address_resolved, name, is_business, spouse_name, race_designation,
+                       occupation_role, employer, address, home_address, role, usable,
+                       volume, year, publisher]
+        # keep in step with `facets` in browse/sources.toml, which gives each one its index
+        facets: [root, volume, role, usable]
+        fts_table: records_fts
+        fts_pk: rowid
+        description_html: |-
+          One row per OCR line. The model's eight fields are verbatim; the <code>*_resolved</code>
+          columns and the flags are the repo's. Nothing is dropped: filter on the flags.
+          <b>One run directory can mix roots</b> (4b-100k+guard holds run 1's five volumes and the
+          reocr tier's 39), so split a run's totals by <code>root</code>.
+          Starting points:
+          <a href="/browse/records?usable=1">usable records</a> ·
+          <a href="/browse/records?role=runover&entry_shaped=1">entry-shaped runovers</a> ·
+          <a href="/browse/records?volume=1906BPL&ditto_source__notblank=1&_facet_array=ditto_flags">1906BPL's carried surnames, by flag</a> ·
+          <a href="/browse/records?eval_holdout=gold">the gold lines</a> ·
+          <a href="/browse/records?volume=micro_IABROOKLYN_0039&leaf=93&_size=200">one leaf, in reading order</a> ·
+          <a href="/browse/records?_search=grocer&usable=1">search: grocer</a> ·
+          <a href="/browse/records?year__gte=1850&year__lt=1860&_facet=publisher">the 1850s, by publisher</a> ·
+          <a href="/browse/records?scan=book+scan&_facet=scan">book scans</a> ·
+          <a href="/browse/volumes">every volume</a>
+        columns:
+          record_id: "<volume>:<leaf>:<n>, n the line's order on its leaf. Stable across re-runs of the same lines; bookmark rows by this, not by the row URL"
+          volume: "the Internet Archive identifier, shown with its volume's label; click the label for everything known about the volume"
+          year: "the volume's year, from the catalog: its first year where the catalog gives two (1852/53 -> 1852). Copied from the volumes table"
+          publisher: the volume's publisher, from the catalog. Copied from the volumes table
+          city: the volume's city, from the catalog (Brooklyn, Williamsburgh, New York). Copied from the volumes table
+          borough: the volume's borough, from the catalog (Brooklyn, Manhattan). Copied from the volumes table
+          scan: "the volume's material: microfiche, BPL PDF upload, or book scan (browse/volumes.py has the rule). Copied from the volumes table"
+          leaf: "the hOCR page index, which is the IIIF canvas index. Click for every line of the leaf in reading order"
+          printed_page: the folio the survey's margin fit gives the leaf
+          printed_page_how: "`read` off its margin, or `inferred` from the sequence around it"
+          section: "the residential run the line came from (listing, late_names, ...)"
+          canvas: the IIIF canvas the line is on; the link opens the whole leaf's image
+          xywh: "the line's box on the canvas (#xywh=)"
+          crop: "the IIIF image of just this line, upright. `show` loads it (none load until asked; the button above the table shows a whole page), `open` opens it full size"
+          raw_line: what the model read, verbatim
+          name: model field, verbatim (never overwritten)
+          is_business: "model field, verbatim: the strings True / False"
+          spouse_name: model field, verbatim
+          race_designation: model field, verbatim
+          occupation_role: model field, verbatim
+          employer: model field, verbatim
+          address: model field, verbatim
+          home_address: model field, verbatim
+          name_resolved: "for a ditto-led line, the carried surname + the given names; else `name`. Empty for an orphan ditto"
+          address_resolved: "the early volumes' slot grammar (`27 Ann do.` -> `27 Ann-street`)"
+          address_ditto: the status of address_resolved
+          home_address_resolved: "the within-line expansion of `h do`"
+          ditto_source: the record_id the surname was carried from (click to open it)
+          ditto_flags: "review flags on the carry: cross_leaf, letter_conflict, orphan. Kept, never acted on: ~23% of 1906BPL's dittos are disputed and the two checks overlap only 28%"
+          role: "start | runover | other | thin, from the box alone (volume_run_report.layout_roles), so only as good as the margin fit. A runover is the tail of the entry above; the model makes a person of it anyway"
+          entry_shaped: "a name and an address-like field (entry_rate.is_entry)"
+          non_entry_page: "the leaf is in the survey's non_entry_pages: a full-page ad, or a page whose OCR failed"
+          eval_holdout: "gold / adjacent / volume: measurement lines, never to be published as records or trained on"
+          usable: "the conservative export: entry-shaped, a start (or thin) line, on a listing page, not held out"
+          root: "the chunk directory the volume was assembled from (assemble_records.py --root); inferred from browse/sources.toml for files assembled before 2026-10-20"
+          run: the prediction run, the records directory the file sits in
+          source_file: the file this row was loaded from
+      volumes:
+        size: 100
+        sort: year
+        label_column: label
+        facets: [scan, borough, publisher]
+        column_order: [volume, label, year, publisher, city, borough, scan, records, usable,
+                       stated_name_count, usable_per_stated_name, title]
+        description_html: |-
+          One row per volume in the records, rewritten on every build by
+          <code>browse/volumes.py</code> from the catalog
+          (<code>data_prep/master_directories.csv</code>), IA's own metadata
+          (<code>data/survey_census/</code>) and the survey sidecars
+          (<code>data_prep/survey/</code>). <code>year</code>, <code>publisher</code>,
+          <code>city</code>, <code>borough</code> and <code>scan</code> are also on every record,
+          to filter by. Click a volume's <code>records</code> count for its records.
+        columns:
+          volume: the Internet Archive identifier
+          label: "what the records table shows for the volume: catalog year, publisher, and city (or borough, for New York)"
+          year: "the catalog's year read as its first year (1852/53 -> 1852), for filtering and sorting"
+          catalog_year: "the catalog's year as written: the human-facing summary (master_directories.README.md)"
+          year_covered: "the year the listings describe, where the catalog has it"
+          year_published: "the imprint year, where the catalog has it; routinely differs from year_covered"
+          ia_date: IA's own date for the item
+          publisher: "from the catalog, which leaves it blank where it is unverified (micro_IABROOKLYN_0042)"
+          ia_publisher: "IA's own publisher field, as IA wrote it; not checked against the book"
+          printer: from the catalog
+          city: from the catalog
+          borough: from the catalog
+          title: from the catalog, else IA's
+          volume_number: from the catalog
+          column_count: text columns on a page, from the catalog
+          scan: "microfiche where IA files it in its microfiche collection; BPL PDF upload for BPL's ####BPL uploads; book scan otherwise (Columbia, Allen County). IA's OCR label is no guide: it tracks the scan source, not quality"
+          contributor: the contributing library, from the catalog, else IA's
+          ia_collections: IA's collections for the item
+          ia_ocr: "the engine IA's own OCR names (null where IA recorded none)"
+          reocr: "the volume's re-OCR, if it has had one: the OCR its listing reads now. Today every data/volumes_reocr volume has one and no data/volumes_run1 volume does, but this is a fact about the volume, not about any run's records"
+          leaves: IA's image count
+          listing_leaves: the leaves of the residential listing, from the survey
+          stated_name_count: the number of names the book says it lists, where it says so (survey sidecar)
+          stated_approximate: whether the book's count is approximate
+          ia_url: the item on archive.org
+          catalog_notes: the catalog's notes
+          records: "rows of the volume in the records table (all runs); click for them"
+          usable: usable rows of the volume (all runs)
+          usable_per_stated_name: "usable rows per name the book states, where it states one and the volume is in a single run"
+          runs: the runs the volume's records come from
+          roots: the chunk directories they were assembled from
+      loaded_files:
+        description: "Every file in the database: its size and mtime when loaded (a change to either reloads it on the next build), its row count, the volumes it holds, and a fingerprint of their copied metadata (a change reloads it too)."

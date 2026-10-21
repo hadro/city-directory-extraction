@@ -32,8 +32,9 @@ baseline to score and a source of silver data, not a technique to adopt.
 
 Allmaps, the same author's current IIIF georeferencing project, is the way past the 1857 coverage limit: with
 a georeferenced atlas, any house number found on the page image converts to a coordinate, and the same
-transform in reverse gives reviewers an atlas crop at each placed address. First step: find out which NYPL
-atlases Allmaps already holds.
+transform in reverse gives reviewers an atlas crop at each placed address. It already holds NYPL's Map Warper
+georeferencing, including thousands of 1850s–1910s insurance-atlas plates across all five boroughs; Manhattan
+in the 1860s–1870s is the thin spot.
 
 ## Where our project stands today
 
@@ -317,10 +318,38 @@ bounds how far a point taken from that atlas can be trusted; and its geocoder UI
 (`Orange, N. J.`).
 
 **Caveats.** It is a TypeScript monorepo on Node 24; call the CLI as an external tool from `data_prep/`, or port
-the transform math to Python, rather than add a Node dependency to the pipeline. And one thing not yet checked:
-the Allmaps API was unreachable from the sandbox this was written in, so which NYPL atlases are already
-georeferenced is unknown. That lookup is the first step, because it decides whether use 1 is mostly reuse or
-mostly new georeferencing.
+the transform math to Python, rather than add a Node dependency to the pipeline. Allmaps knows NYPL maps by
+image, not by manifest (all `canvases` are empty), so look them up with `iiif.nypl.org/iiif/2/<image id>`, and
+pass bounding boxes to its API latitude first.
+
+### What NYPL coverage Allmaps already has (checked 2026-10-21)
+
+Mostly reuse: the atlases we need are already georeferenced. A Manhattan query capped at 1,000 km² returned
+100 maps (the limit, so there are more), with a median size of 0.05 km²: single insurance-atlas plates. 99
+were bulk-created on 2022-07-10, and 59 of the 100 match by image ID the Map Warper maps in Space/Time's CC0
+`mapwarper` dataset, so Allmaps evidently imported NYPL's Map Warper georeferencing.
+
+That makes the `mapwarper` file (9,657 maps, with image IDs, ground control points, descriptions and years) a
+free offline inventory of what Allmaps holds, as of 2017. Its city-scale sheets (≤ 2 km²) by decade and
+borough, placed by the centre of each sheet:
+
+| Decade | Manhattan | Brooklyn | Bronx | Queens | Staten Island |
+| --- | --- | --- | --- | --- | --- |
+| 1850s | 343 | 9 | 0 | 0 | 0 |
+| 1860s | 75 | 8 | 1 | 0 | 0 |
+| 1870s | 39 | 7 | 5 | 2 | 1 |
+| 1880s | 872 | 719 | 73 | 237 | 195 |
+| 1890s | 367 | 87 | 127 | 1 | 0 |
+| 1900s | 425 | 198 | 261 | 63 | 22 |
+| 1910s | 521 | 56 | 167 | 31 | 120 |
+| 1920s | 54 | 17 | 81 | 71 | 1 |
+
+Read the decades loosely: Map Warper's year field is unreliable (sheets from "Atlas 108, Vol. 1, 1903" are
+dated 1884), so group by the atlas citation in each description instead. The large runs are Bromley and
+Robinson insurance atlases: Manhattan 1894–1915, Brooklyn 1893–1907, Queens 1901–1912, Staten Island
+1898–1917, Bronx from the 1900s. The thin spot is Manhattan in the 1860s and 1870s, which is exactly where
+Space/Time's 1857 address points stop working. The other 41 of the 100 are not in the 2017 file (image IDs
+from `57565…`), so they were added later; the live API is the only full list of those.
 
 ## Recommended roadmap
 

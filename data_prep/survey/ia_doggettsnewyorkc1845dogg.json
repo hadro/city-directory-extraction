@@ -409,37 +409,39 @@
    "publisher_tag": "doggett",
    "publisher_tag_note": null,
    "year_tag": "1845",
-   "hocr_lines": 77224,
-   "wrap_joins": 4970,
-   "candidates": 72254,
+   "hocr_lines": 77961,
+   "wrap_joins": 5349,
+   "candidates": 72612,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 69843,
-    "mark_share": 0.0102,
+    "pairs": 69478,
+    "mark_share": 0.0087,
     "mode": 2.0,
-    "mode_pairs": 2908,
+    "mode_pairs": 2852,
     "trough": 1.5,
-    "trough_pairs": 48,
+    "trough_pairs": 115,
     "reason": "sharp runover mode"
    },
+   "model_runovers": 4236,
+   "cont_dropped_leaves": 1,
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
+    "lines": 37,
+    "leaves": 1
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 4,
-   "kept": 65933,
-   "keep_rate": 0.9125,
+   "marker_fixes": 0,
+   "kept": 65612,
+   "keep_rate": 0.9036,
    "dropped": {
-    "short": 4015,
-    "banner": 1405,
-    "allcaps": 808,
-    "nonascii": 53,
-    "bigtype": 33,
+    "short": 4535,
+    "banner": 1554,
+    "allcaps": 813,
+    "nonascii": 52,
+    "bigtype": 39,
     "pagenum": 7
    },
    "ditto_marks": [],
@@ -458,23 +460,23 @@
     460,
     1,
     436,
+    136,
     453,
     441,
-    136,
     459
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "facd160-dirty",
+   "derived": "2026-10-21"
   },
-  "words_gz_bytes": 5712220,
+  "words_gz_bytes": 5323517,
   "hocr_deleted": true,
   "elapsed_s": 13
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-21",
+  "code_at": "facd160-dirty",
   "start_leaf": 19,
   "end_leaf": 423,
   "first_letter": "A",
@@ -491,7 +493,7 @@
   "end": {
    "leaf": 423,
    "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$423/full/!1400,1400/0/default.jpg",
-   "quote": "Zwueck. Christian, cabinetmaker, 43 Pitt, h. 43 Pitt"
+   "quote": "Zwueck Christian, cabinetmaker, 43 Pitt, h. 43 Pitt"
   },
   "sections": [
    {
@@ -563,13 +565,13 @@
    ],
    "L": [
     222,
-    239,
-    18
+    238,
+    17
    ],
    "M": [
-    240,
+    239,
     280,
-    39
+    40
    ],
    "N": [
     281,
@@ -656,11 +658,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-21",
+  "code_at": "facd160-dirty",
   "content_leaves": 478,
   "fitted_leaves": 442,
-  "read_leaves": 397,
+  "read_leaves": 355,
   "segments": [
    {
     "first_leaf": 11,
@@ -672,11 +674,19 @@
    },
    {
     "first_leaf": 149,
+    "last_leaf": 195,
+    "first_page": 37,
+    "last_page": 83,
+    "leaves": 47,
+    "read": 40
+   },
+   {
+    "first_leaf": 196,
     "last_leaf": 452,
-    "first_page": 137,
+    "first_page": 184,
     "last_page": 434,
-    "leaves": 298,
-    "read": 275
+    "leaves": 251,
+    "read": 193
    },
    {
     "first_leaf": 467,
@@ -698,8 +708,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-21",
+  "code_at": "facd160-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -727,7 +737,7 @@
     "end_leaf": 18,
     "title": {
      "leaf": 16,
-     "quote": "NAMES TOO LATE FOR INSERTION, AND REMOVALS.",
+     "quote": "NAMES TOO LATE FOR INS",
      "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1845dogg$16/full/!1400,1400/0/default.jpg"
     },
     "leaves": 3,
@@ -825,8 +835,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-21",
+  "code_at": "facd160-dirty",
   "file": "data/survey_ocr/doggettsnewyorkc1845dogg_listing.jsonl.gz",
   "sections": [
    {
@@ -840,19 +850,19 @@
     "end_leaf": 423
    }
   ],
-  "kept": 61724,
+  "kept": 61403,
   "dropped": 4209,
-  "kept_share": 0.9362,
+  "kept_share": 0.9359,
   "kept_by_section": {
-   "late_names": 93,
-   "listing": 61631
+   "late_names": 94,
+   "listing": 61309
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-21",
   "entry_min": 0.15,
-  "scoped_lines": 359,
+  "scoped_lines": 406,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    17,
@@ -867,5 +877,22 @@
    331,
    332
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_books_halves",
+  "ia_dump": "data/survey_ocr/doggettsnewyorkc1845dogg_words.ia.jsonl.gz",
+  "tiles": 1612,
+  "tiles_answered": 1612,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 133,
+  "pages": 407,
+  "lines_runover": 4252,
+  "lines_model": 66951,
+  "lines_model-only": 681,
+  "lines_tesseract": 733,
+  "leaves_replaced": 407,
+  "dumped": "2026-10-21"
  }
 }

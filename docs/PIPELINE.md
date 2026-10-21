@@ -1793,6 +1793,65 @@ answers land: `reocr_pair.py dump lightonocr-3-1b-greedy-vllm --root data/reocr_
 is records per printed name against the three stated counts, and Doggett 1845 against its own
 0.984 from IA's text.
 
+**THE CANARY CAME BACK 2026-10-21 (NYU job 20525205, 5 L40S tasks) and is imported.** 8,907 of
+8,908 tiles answered, 9 loops (0.10%; 8 in Trow 1907 p3), **0.53 s a tile** (1876BPL 0.40, the
+Doggett task 0.71), engine load 77-82 s, ~1.6 GPU-hours. At that rate the three tiers' ~470k
+tiles are **~70 GPU-hours** of decoding. The one EMPTY tile (1876BPL leaf 905 c1_h1) is LightOn
+writing 36 entries as ONE Markdown table row, which `untable` cannot split; the tile keeps IA's
+lines. 1876BPL went to table mode on 796 of 4,042 tiles (20%), because Lain prints an ad down the
+page edge and LightOn sets its scraps in a second cell ("G"); the flattening keeps the entries.
+LightOn's own notes ("Type: table", "Advertisement", "Figure – ...") reach the listing 23 times,
+all in 1876BPL.
+
+Imported (`reocr_pair.py dump`, `--rederive`, `survey_derive.py` bounds/pages/sections/scope,
+`survey_adleaves.py` features merged + inventory). Listing bounds and printed-page claims did
+not move. Scoped listing lines, IA's text -> LightOn's:
+
+| | IA | LightOn | per printed name |
+|---|---|---|---|
+| Doggett 1845 (61,333) | 61,631 | 61,309 | 1.005 -> **1.000** |
+| 1876BPL (114,724) | 118,019 | 120,878 | 1.029 -> 1.054 |
+| Longworth 1826 (27,000) | 25,500 | 26,464 | 0.944 -> **0.980** |
+| Trow 1907 p3 (no count) | 33,522 | **104,621** | |
+
+1876BPL's excess is mostly the margin advertising, now read cleanly as lines of its own ("WM.
+KNABE & CO.", "New York House and Warerooms,"); they are not entry-shaped, so `usable` should drop
+them after the 4B, which is the number that counts. Its wrap calibration also stopped calibrating
+(1.5 -> 3.0, "runover mode not isolated"), and joins went 21,102 -> 18,046; LightOn joins most
+run-overs itself (leaf 500 reads cleanly).
+
+**Trow 1907 p3: IA's OCR had failed page by page, and IA's words could not be the layer there.**
+Leaf 167 holds ~400 printed entries; IA read 243 words. Over IA's words, 69,270 of the volume's
+LightOn lines came out `model-only` (no OCR words under them: synthesized boxes, no indent, a crop
+that is not the line) against 53,894 paired. So the import now takes a **second word layer per
+page**: `reocr_books.py tesseract` runs the microfilm's recipe on the staged images
+(`data/reocr_books_tess/`), and `dump --alt-page-dir` keeps IA's words unless tesseract leaves
+`ALT_MIN`/`ALT_GAIN` fewer model-only lines (`better_layer`). On p3 it chose tesseract on 381 of
+383 pages: model-only 69,270 -> 2,621, paired 53,894 -> 131,784. ~45 min of tesseract for 383
+dense pages on the Mac (6 workers).
+
+**How much of the full run needs it: about 4% of pages, mostly ten volumes.** A gold-free proxy,
+IA's lines per page against what the page's text area holds (columns x text height / 1.3 word
+heights), separates the canary cleanly: medians Doggett 1.04, 1876BPL 1.10, Longworth 1.05, Trow
+1907 p3 **0.42** (283 of 383 pages under 0.5). Over the three tiers' 73,826 residential pages,
+3,028 are under 0.5: first 1,208 (2.8%), abbyy8-damaged 1,562 (8.7%), abbyy8-clean 258 (2.0%).
+Volumes with a median under 0.8 or over a tenth of their pages under 0.5: Trow 1907 p3, 1908 p2
+(376 of 511), 1908 p3, `trowsgeneraldire19073trow`, `trowsgeneraldire19091trow`, Trow 1914 p2
+(`trowsgeneraldire19142trow`, abbyy8-clean), Bronx 1871 (three village directories; possibly a
+layout effect), and Trow 1863 and 1876 (medians 0.70, few pages under 0.5, probably the proxy's
+line pitch). So the tesseract fallback is ~5,000 pages, not a corpus-wide CPU stage; it can run
+on the Mac from those volumes' zips (~7 GB) or on Torch. The scan also found `gutter_columns`
+raising IndexError when an upright-turned box stands past the page edge (Trow 1859 leaf 249,
+Longworth 1801 leaf 273), which would have stopped their staging; the text edges are now clamped
+to the page.
+
+**The canary's 4B pass, staged 2026-10-21:** `data/volumes_books_canary`, 19 tasks of 20,000,
+312,660 lines (Trow p3 now 104,593 of them; 47 non-entry leaves skipped), ~6.9 GPU-hours with the
+kernels. Packed as `cde-volumes-books-canary.tar.gz` (unpacks to `data/volumes`). When the
+predictions land: verify the 19 `.sha1`s, `copy_guard.py --volumes data/volumes_books_canary`,
+`assemble_records.py --root data/volumes_books_canary --run 4b-100k+guard`, then usable records per
+printed name against the three counts, Doggett 1845 against run 1's 0.984.
+
 **Assembly changed under it on 2026-10-20** (`fb1a020`, `4efc6ae`: the surname carry, the dropped
 headers, the leading markers — Stage 5). Nothing sent to NYU depends on it; only the assemble
 after the 4B does. `usable` is untouched, so the done-criterion stands — Doggett 1845 assembled by

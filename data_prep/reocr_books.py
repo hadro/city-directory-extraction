@@ -4,6 +4,7 @@ Stage book-scan volumes for the LightOn re-OCR over IA's own words: no tesseract
 
     python3 data_prep/reocr_books.py download --ids a,b        # each volume's _jp2.zip, whole
     python3 data_prep/reocr_books.py pages --ids a,b [--workers 6]   # -> data/reocr_books/<id>/
+    python3 data_prep/reocr_books.py tesseract --ids a,b         # -> data/reocr_books_tess/<id>/
     python3 data_prep/reocr_books.py status --ids a,b
     python3 data_prep/reocr_columns.py stage --pages data/reocr_books --tiles halves \
         --out data/reocr_books_halves --per-shard 2000      # then LightOn, then reocr_pair.py dump
@@ -41,6 +42,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 OCR = REPO / "data" / "survey_ocr"
 BOOKS = REPO / "data" / "reocr_books"
+TESS = REPO / "data" / "reocr_books_tess"       # fresh tesseract, the second word layer
 sys.path.insert(0, str(HERE))
 
 import reocr_volumes as rv  # noqa: E402
@@ -114,6 +116,43 @@ def write_pages(args) -> int:
     return 1 if bad else 0
 
 
+def tess_page(job) -> tuple:
+    """(ident, leaf, status): reocr_volumes' recipe (tesseract 5.5 on a Sauvola-binarized and a
+    contrast-enhanced image, the more confident reading of each line) over a staged page image,
+    as a second word layer in TESS for reocr_pair.py dump --alt-page-dir."""
+    from PIL import Image
+    ident, leaf = job
+    out = TESS / ident / f"{ident}_{leaf:04d}.json"
+    if out.exists():
+        return ident, leaf, "cached"
+    try:
+        img = Image.open(BOOKS / ident / f"{ident}_{leaf:04d}.jpg")
+        lines = rv.merge_words(rv.tess_words(img, "sauvola"), rv.tess_words(img, "contrast"))
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps({"leaf": leaf, "page_size": list(img.size),
+                                   "chars": sum(len(w[5]) for ws in lines for w in ws),
+                                   "lines": lines, "engine": "tesseract-5.5 sauvola+contrast merge"}),
+                       encoding="utf-8")
+        return ident, leaf, "ok"
+    except Exception as e:                       # noqa: BLE001 - recorded, the run goes on
+        return ident, leaf, f"error {type(e).__name__}: {e}"[:300]
+
+
+def tesseract(args) -> int:
+    """Fresh tesseract for the volumes' staged pages: the word layer where IA's OCR failed."""
+    jobs = [(ident, json.loads(p.read_text(encoding="utf-8"))["leaf"])
+            for ident in args.ids.split(",") for p in sorted((BOOKS / ident).glob("*.json"))]
+    bad = 0
+    with multiprocessing.Pool(args.workers) as pool:
+        for k, (ident, leaf, st) in enumerate(pool.imap_unordered(tess_page, jobs), 1):
+            if st.startswith("error"):
+                bad += 1
+                print(f"  {ident} {leaf}: {st}", file=sys.stderr)
+            if k % 50 == 0 or k == len(jobs):
+                print(f"  {k}/{len(jobs)} pages", file=sys.stderr, flush=True)
+    return 1 if bad else 0
+
+
 def status(args) -> int:
     for ident in args.ids.split(","):
         d = BOOKS / ident
@@ -141,7 +180,7 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["download", "pages", "status"])
+    ap.add_argument("cmd", nargs="?", choices=["download", "pages", "tesseract", "status"])
     ap.add_argument("--ids")
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--self-test", action="store_true")
@@ -155,6 +194,8 @@ def main(argv=None) -> int:
         return rv.download(args)
     if args.cmd == "pages":
         return write_pages(args)
+    if args.cmd == "tesseract":
+        return tesseract(args)
     return status(args)
 
 

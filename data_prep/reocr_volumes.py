@@ -320,7 +320,10 @@ def gutter_columns(lines: list, width: int, n: int = 0) -> list:
         return [[0, width]]
     cw = cws[len(cws) // 2]
     xs0, xs1 = sorted(w[0] for w in body), sorted(w[2] for w in body)
-    left, right = int(xs0[len(xs0) // 100]), int(xs1[-1 - len(xs1) // 100])
+    # on the page: a box turned upright can stand past its edge, and `cross` stops there
+    # (trowsnewyorkcity1859trow leaf 249 and longworthsameric2618long leaf 273 raised IndexError)
+    left = min(max(0, int(xs0[len(xs0) // 100])), width)
+    right = min(max(0, int(xs1[-1 - len(xs1) // 100])), width)
     ys = sorted((w[1] + w[3]) / 2 for w in body)
     top, bot = ys[len(ys) // 100], ys[-1 - len(ys) // 100]
     margin = (1 - GUTTER_BODY) / 2 * (bot - top)
@@ -675,6 +678,10 @@ def _self_test() -> int:
     long_tail.append([[1700, 3000, 1720, 3020, 1, "."]])     # a speck right of the text
     (x0, x1), = gutter_columns(long_tail, 2000, 1)
     assert 1010 < x1 < 1700 and 40 <= x0 < 100, "the longest entries are not cut, nor is a speck taken"
+    past = [[w[:2] + [w[2] + 1300, w[3]] + w[4:] for w in ws] if k % 3 == 0 else ws
+            for k, ws in enumerate(long_tail)]   # boxes standing past a 2,000 px page's right edge
+    cols = gutter_columns(past, 2000, 2)
+    assert cols and cols[-1][1] <= 2000, "text past the page edge is cut at the edge, not an IndexError"
     base = [([[0, 0, 100, 20, 60, "njohnson"]], [0, 0, 100, 20], 60.0)]
     other = [([[0, 0, 40, 20, 90, "n"], [45, 0, 100, 20, 90, "johnson"]], [0, 0, 100, 20], 90.0)]
     assert merge_words(base, other)[0][0][5] == "n", "the confident reading's words win"

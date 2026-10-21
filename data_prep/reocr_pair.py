@@ -903,6 +903,33 @@ def _box(words: list):
             max(w[3] for w in words)]
 
 
+ALT_GAIN = 0.05         # the second word layer is taken where it pairs this share more of a page's
+ALT_MIN = 5             # ...rows (and at least this many) than the first
+
+
+def better_layer(rec: dict, alt: dict, tiles: dict, answers: dict, marks: frozenset) -> dict:
+    """The page record whose words pair more of the model's lines: `rec` unless `alt` leaves
+    ALT_MIN lines and ALT_GAIN of the page fewer `model-only`. A model-only line has no OCR words
+    under it, so it is given boxes under its neighbour (synth_line): no indent for the joiner, and
+    a crop that is not the line. On a book scan whose IA OCR failed page by page (Trow 1907 p3,
+    2026-10-21: 243 IA words on leaf 167 against ~400 printed entries), IA's words left 69,270 of
+    the volume's lines model-only, and fresh tesseract is the layer there. Where IA covers the page
+    it stays, since on the pilot it paired as well as tesseract and read slightly better (83.6% of
+    gold entries exact against 82.8%)."""
+    if not alt.get("lines"):
+        return rec
+
+    def unpaired(r):
+        if not r.get("lines"):
+            return None
+        rows = page_rows(r, tiles, answers, marks)[0]
+        return sum(x["source"] == "model-only" for x in rows), len(rows)
+    a, b = unpaired(rec), unpaired(alt)
+    if a is None:
+        return alt
+    return alt if b[0] < a[0] - max(ALT_MIN, ALT_GAIN * a[1]) else rec
+
+
 def dump(args) -> int:
     """Swap the re-OCR into a volume's word dump. IA's dump is kept as <id>_words.ia.jsonl.gz
     (once; it is always the source of the leaves not re-read), and <id>_words.jsonl.gz becomes
@@ -916,6 +943,7 @@ def dump(args) -> int:
     import gzip
     root = Path(args.root).resolve()
     page_dir = Path(getattr(args, "page_dir", None) or DATA / "reocr").resolve()
+    alt_dir = Path(args.alt_page_dir).resolve() if getattr(args, "alt_page_dir", None) else None
     boxes = json.loads((root / "boxes.json").read_text(encoding="utf-8"))
     pages = collections.defaultdict(dict)
     for key, entry in boxes.items():
@@ -933,12 +961,13 @@ def dump(args) -> int:
         stats = collections.Counter()
         replaced = {}
         marks = confirmed_marks(vol)
-        layer = "tesseract-5.5 merge"
+        layers = collections.Counter()
         for (v, stem), tiles in pages.items():
             if v != vol:
                 continue
             rec = json.loads((page_dir / vol / f"{stem}.json").read_text(encoding="utf-8"))
-            if not rec["lines"]:
+            alt_f = alt_dir / vol / f"{stem}.json" if alt_dir else None
+            if not rec["lines"] and not (alt_f and alt_f.exists()):
                 continue
             answers = {}
             for name in tiles:
@@ -952,15 +981,19 @@ def dump(args) -> int:
                 stats["bleed_retry"] += bool(meta.get("bleed_retry"))
                 stats["loop_truncated"] += bool(meta.get("loop_truncated"))
                 stats["table_mode"] += bool(meta.get("table_mode"))
+            if alt_f and alt_f.exists():
+                rec = better_layer(rec, json.loads(alt_f.read_text(encoding="utf-8")), tiles,
+                                   answers, marks)
             lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True, marks=marks)
             # 1 only where the MODEL read the line as part of the entry above. A tesseract line
             # (a tile with no answer, or one the model skipped) carries no start flag and no
             # reading either, so it is 0: the joiner keeps the indent rule for it.
             cont = [0 if st or src == "tesseract" else 1 for st, src in zip(starts, sources)]
-            replaced[rec["leaf"]] = (lines, sources, cont, rec["page_size"])
             # the word layer: the microfilm's tesseract cache, or IA's own words (reocr_books.py)
             layer = "tesseract-5.5 merge" if rec.get("engine", "tesseract").startswith("tesseract") \
                 else rec["engine"]
+            layers[layer] += 1
+            replaced[rec["leaf"]] = (lines, sources, cont, rec["page_size"], layer)
             stats["pages"] += 1
             stats["lines_runover"] += sum(cont)
             stats.update(f"lines_{s}" for s in sources)
@@ -972,7 +1005,7 @@ def dump(args) -> int:
             for line in fh:
                 r = json.loads(line)
                 if r["leaf"] in replaced:
-                    lines, sources, cont, size = replaced[r["leaf"]]
+                    lines, sources, cont, size, layer = replaced[r["leaf"]]
                     r.update(lines=lines, sources=sources, cont=cont, page_size=size,
                              chars=sum(len(w[5]) for ws in lines for w in ws),
                              ocr=f"reocr: {layer} + {args.slug}")
@@ -984,8 +1017,10 @@ def dump(args) -> int:
         if args.out_dir is None:
             side = HERE / "survey" / f"ia_{vol}.json"
             doc = json.loads(side.read_text(encoding="utf-8"))
-            doc["reocr"] = {"engine": f"{layer} + {args.slug}", "root": str(root.relative_to(REPO)),
+            doc["reocr"] = {"engine": f"{' / '.join(sorted(layers))} + {args.slug}",
+                            "root": str(root.relative_to(REPO)),
                             "ia_dump": f"data/survey_ocr/{vol}_words.ia.jsonl.gz", **dict(stats),
+                            "layers": dict(layers),
                             "dumped": __import__("datetime").date.today().isoformat()}
             side.write_text(json.dumps(doc, indent=1), encoding="utf-8")
         print(f"{vol}: {stats['leaves_replaced']} leaves replaced ({stats['tiles_answered']}/"
@@ -993,6 +1028,8 @@ def dump(args) -> int:
               f"{stats['lines_tesseract']} tesseract, {stats['lines_model-only']} model-only, "
               f"{stats['lines_bleed']} bleed) -> {dst.relative_to(REPO) if dst.is_relative_to(REPO) else dst}",
               file=sys.stderr)
+        if len(layers) > 1 or alt_dir:
+            print(f"    word layer by page: {dict(layers)}", file=sys.stderr)
         # Per volume, as historical-ocr-eval asked of the full run (2026-10-15): bleed-through
         # clusters by volume, and a table-mode rate far above the bench's (10 of 138 tiles; 4 of
         # 188 on the screen pages) would mean a layout no one has looked at.
@@ -1552,6 +1589,9 @@ def main(argv=None) -> int:
     ap.add_argument("--out-dir", help="dump: write here instead (a dry run: no swap, no sidecar)")
     ap.add_argument("--page-dir", default="data/reocr",
                     help="screen/dump: the pages' tesseract records, <dir>/<id>/<id>_<leaf>.json")
+    ap.add_argument("--alt-page-dir", help="dump: a second word layer for the same pages (a book "
+                    "scan's fresh tesseract, reocr_books.py tesseract); each page takes it where it "
+                    "leaves clearly fewer of the model's lines unpaired (better_layer)")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:

@@ -16,7 +16,8 @@ databases:
         column_order: [record_id, crop, raw_line, name_resolved, address_resolved,
                        home_address_resolved, name, is_business, spouse_name, race_designation,
                        occupation_role, employer, address, home_address, role, usable,
-                       volume, year, publisher, ditto_source, ditto_header, ditto_flags]
+                       volume, year, publisher, district, name_mark, ditto_source, ditto_header,
+                       ditto_flags]
         # keep in step with `facets` in browse/sources.toml, which gives each one its index
         facets: [root, volume, role, usable]
         fts_table: records_fts
@@ -35,6 +36,7 @@ databases:
           <a href="/browse/records?_search=grocer&usable=1">search: grocer</a> ·
           <a href="/browse/records?year__gte=1850&year__lt=1860&_facet=publisher">the 1850s, by publisher</a> ·
           <a href="/browse/records?scan=book+scan&_facet=scan">book scans</a> ·
+          <a href="/browse/records?district=Eastern&_facet=name_mark">Eastern District residents, by mark</a> ·
           <a href="/browse/volumes">every volume</a>
         columns:
           record_id: "<volume>:<leaf>:<n>, n the line's order on its leaf. Stable across re-runs of the same lines; bookmark rows by this, not by the row URL"
@@ -66,7 +68,9 @@ databases:
           home_address_resolved: "the within-line expansion of `h do`"
           ditto_source: "the record_id the surname was carried from, with that line's text under it (click to open it). Empty where it came from a dropped header (ditto_header)"
           ditto_header: "the surname block header the surname came from (ANDERSON over a column, as the page prints it, spelled as the volume's entries spell it). Ingest drops every header; assemble_records puts them back for the carry"
-          ditto_flags: "review flags on the carry: cross_leaf, letter_conflict, orphan. Kept, never acted on: ~23% of 1906BPL's dittos are disputed and the two checks overlap only 28%"
+          name_mark: "a leading mark the line opens with, as the OCR printed it, found per volume by what follows it: the Eastern District E and its misreadings (Æ © € ® or a quote), a column rule (| I ! or 1), a * . Stripped from name_resolved, never from name"
+          district: "Eastern where the volume marks Eastern District residents (0039, 0040, 0042: 'Names marked thus (E) are persons residing in the Eastern District') and this line carries the mark, or the line is in a section printed for that district (0036's); else empty"
+          ditto_flags: "review flags on the carry: cross_leaf, letter_conflict, orphan. Kept, never acted on. Since the 2026-10-20 carry rules 6.6% of 1906BPL's dittos are flagged (it was ~23%), much of that drop by construction; results/carry_rules.py has the evidence that is not"
           role: "start | runover | other | thin, from the box alone (volume_run_report.layout_roles), so only as good as the margin fit. A runover is the tail of the entry above; the model makes a person of it anyway"
           entry_shaped: "a name and an address-like field (entry_rate.is_entry)"
           non_entry_page: "the leaf is in the survey's non_entry_pages: a full-page ad, or a page whose OCR failed"

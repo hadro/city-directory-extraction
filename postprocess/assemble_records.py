@@ -36,6 +36,13 @@ EVERY ROW CARRIES
                         came from a dropped header (ditto_header)
     ditto_header        the surname block header it came from: ingest drops every one (`ANDERSON`
                         over a column), dropped_headers puts them back for the carry
+    name_mark           a leading MARKER the line opens with, as the OCR printed it -- the
+                        Eastern District `E` (or its misreadings `Æ`, a quote), a column rule
+                        (`|`, `1`), a `*` -- found per volume by resolve_dittos.
+                        classify_lead_marks. It is stripped from name_resolved, never from `name`
+    district            `Eastern` where the volume marks Eastern District residents and this line
+                        carries the mark, or the line is in a section printed for that district
+                        (micro_IABROOKLYN_0036's); else null
     ditto_flags         resolve_dittos.resolve_cross_line's review flags: cross_leaf,
                         letter_conflict, orphan. Kept, never acted on. The carry is `strict` from
                         2026-10-20 (only a capitalised surname inside its leaf's letters sets it)
@@ -81,8 +88,8 @@ sys.path[:0] = [str(REPO / "postprocess"), str(REPO / "eval"), str(REPO / "data_
 from entry_rate import is_entry  # noqa: E402
 from iiif_frame import crop_url, xywh as canvas_xywh  # noqa: E402
 from evaluate import FIELDS, load_pred  # noqa: E402
-from resolve_dittos import (annotate, classify_glued_marks, resolve_address_run,  # noqa: E402
-                           resolve_cross_line, surname_token)
+from resolve_dittos import (annotate, classify_glued_marks, classify_lead_marks,  # noqa: E402
+                           resolve_address_run, resolve_cross_line, surname_token)
 from survey_folios import fit as fit_folios, load as load_folios  # noqa: E402
 from volume_run_report import layout_roles  # noqa: E402
 
@@ -93,7 +100,7 @@ CSV_COLUMNS = (["record_id", "volume", "leaf", "printed_page", "printed_page_how
                 "canvas", "xywh", "raw_line"] + FIELDS +
                ["name_resolved", "address_resolved", "address_ditto", "home_address_resolved",
                 "ditto_source", "ditto_flags", "role", "entry_shaped", "non_entry_page",
-                "eval_holdout", "usable", "root", "ditto_header"])
+                "eval_holdout", "usable", "root", "ditto_header", "name_mark", "district"])
 
 
 class Incomplete(Exception):
@@ -192,6 +199,36 @@ def dropped_headers(ident: str, lines: list) -> dict:
     return heads
 
 
+# The Eastern District mark of the consolidated Brooklyn volumes (micro_IABROOKLYN_0039/0040/0042:
+# "Names marked thus (E) are persons residing in the Eastern District"), as the OCR prints it:
+# `E`, and on the page-checked misreadings `Æ` (`ÆArron Louis`), `©` (`© Anderson George W.`),
+# `€` (`€Clare Patrick`), `®` (`®Donop Bern`) and a quote (`"Bridge Margaret`, `“Kleinschnitz
+# George`). `|` and `1` are a column rule (`| Cahill Robert J.`), not this mark.
+EAST_MARKS = frozenset({"E", "Æ", "©", "€", "®", '"', "“", "”", "'", "‘", "’"})
+
+
+def is_east(mark: str | None) -> bool:
+    return bool(mark) and any(p in EAST_MARKS for p in mark.split())
+
+
+def strip_mark(name: str, mark: str) -> str:
+    """The model's `name` less its leading marker(s). The model re-spells the E's misreadings (it
+    writes `" Kleinschnitz George` for `“Kleinschnitz`, `EE Adams` for `E EAdams`), so any of
+    EAST_MARKS stands for one of them, as often as it repeats; a mark comes off only before a
+    space or a capital, never out of `Edwards`."""
+    name = (name or "").strip()
+    forms = set(mark.split()) | (EAST_MARKS if is_east(mark) else set())
+    for _ in range(3):
+        for f in sorted(forms, key=len, reverse=True):
+            rest = name[len(f):]
+            if name.startswith(f) and rest[:1] and (rest[:1].isspace() or rest[:1].isupper()):
+                name = rest.strip()
+                break
+        else:
+            break
+    return name
+
+
 def strip_lead(name: str, lead: str) -> str:
     """The given names of a ditto-led name: the model's `name` less the mark it copied."""
     name = (name or "").strip()
@@ -200,8 +237,9 @@ def strip_lead(name: str, lead: str) -> str:
     return re.sub(r"^\W+", "", name).strip()
 
 
-def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
-    """-> (rows, summary) for one volume, `root` the chunk directory it was read from."""
+def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool = True) -> tuple:
+    """-> (rows, summary) for one volume, `root` the chunk directory it was read from.
+    `lead_marks=False` skips the leading-marker step, for results/lead_marks.py's before/after."""
     side = SIDECARS / f"ia_{ident}.json"
     doc = json.loads(side.read_text(encoding="utf-8")) if side.exists() else {}
     folios = printed_pages(ident)
@@ -224,7 +262,11 @@ def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
     # the dropped surname headers put back, and only lines that can be a surname setting it
     # (resolve_dittos.can_set_carry); measured in results/carry_rules.py
     heads = dropped_headers(ident, lines)
-    carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True))
+    # leading markers, per volume, by what follows them (resolve_dittos.classify_lead_marks)
+    mark_verdicts = classify_lead_marks(seq) if lead_marks else {}
+    markers = tuple(m for m, d in mark_verdicts.items() if d["verdict"] == "MARKER")
+    east = "E" in markers                        # this volume marks Eastern District residents
+    carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True, markers=markers))
     addresses = list(resolve_address_run(rec.get("address") for _ln, rec in pairs))
 
     rows, last_surname = [], None
@@ -240,7 +282,12 @@ def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
             source = None if cr.get("header") else last_surname
         else:
             name_resolved = "" if cr["status"] == "orphan" else (rec.get("name") or "")
+            if cr.get("mark"):
+                name_resolved = strip_mark(name_resolved, cr["mark"])
             source = None
+        mark = cr.get("mark")
+        district = ("Eastern" if (east and is_east(mark))
+                    or "EASTERN" in str(ctx.get("section") or "").upper() else None)
         ann = annotate(rec)
         bbox = ctx.get("bbox")
         xywh = canvas_xywh(ident, leaf, bbox) if bbox and len(bbox) == 4 else None
@@ -261,6 +308,7 @@ def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
             "home_address_resolved": ann["home_address_resolved"],
             "ditto_source": source, "ditto_flags": cr["flags"],
             "ditto_header": cr.get("header"),
+            "name_mark": mark, "district": district,
             "role": role, "entry_shaped": entry, "non_entry_page": leaf in non_entry,
             "eval_holdout": held, "usable": usable, "root": root})
 
@@ -280,6 +328,9 @@ def assemble(ident: str, pairs: list, root: str | None = None) -> tuple:
                   "glued_marks": list(glued),
                   "headers_placed": len(heads),
                   "from_header": sum(1 for c in carry if c.get("header")),
+                  "lead_marks": {m: mark_verdicts[m]["n"] for m in markers},
+                  "marked_lines": sum(1 for c in carry if c.get("mark")),
+                  "district_eastern": sum(1 for r in rows if r["district"] == "Eastern"),
                   "address_slots": sum(1 for _a, st in addresses if st.startswith("resolved")),
                   "address_no_antecedent": sum(1 for _a, st in addresses
                                                if st == "no_antecedent")},
@@ -324,6 +375,15 @@ def _self_test() -> int:
     assert rows[0]["xywh"] == "100,100,500,20"
     assert rows[1]["name"] == '" Wm', "the model's field stays verbatim"
     assert s["ditto"]["carried"] == 1 and s["rows"] == 2
+    assert strip_mark("E Cox L.", "E") == "Cox L."
+    assert strip_mark('" Kleinschnitz George', "“") == "Kleinschnitz George", "the model re-spells it"
+    assert strip_mark("Edwards John", "E") == "Edwards John", "never out of a surname"
+    assert strip_mark("*Abadie Paul", "*") == "Abadie Paul"
+    assert strip_mark("Abadie Paul", "*") == "Abadie Paul", "the model already dropped it"
+    assert strip_mark("EE Adams Henry R.", "E") == "Adams Henry R.", "a doubled mark"
+    assert strip_mark("E Bennett William J.", "E *") == "Bennett William J.", "stacked marks"
+    assert strip_mark("E Edwards John", "E") == "Edwards John"
+    assert is_east("E *") and is_east("©") and not is_east("*") and not is_east(None)
     print("self-test ok")
     return 0
 

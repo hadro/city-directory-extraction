@@ -68,6 +68,7 @@ import argparse
 import json
 import re
 import sys
+import collections
 from collections import Counter
 
 FIELDS = ["name", "is_business", "spouse_name", "race_designation",
@@ -393,6 +394,78 @@ def leaf_letter_ranges(rows, k=LETTER_WINDOW) -> dict:
     return out
 
 
+# A LEADING MARK before the name: 1-3 punctuation characters, one capital standing alone (no
+# full stop -- `J. Smith` is an initial), or a one- or two-digit number. Glued or spaced. What
+# follows starts with a capital, in either case after it: `E ACKERMAN T. & J. boiler works` is
+# 431 of micro_IABROOKLYN_0040's Eastern District lines.
+LEAD_MARK = re.compile(r"^(?P<mark>[^\sA-Za-z0-9]{1,3}|[A-Z](?![.\w])|\d{1,2})\s*"
+                       r"(?P<rest>(?:[^\sA-Za-z0-9]{1,3}\s*)?[A-Z][A-Za-z].*)$", re.S)
+
+# One printed column rule, read by the OCR as any of these -- `| Cahill Robert J.` (0042),
+# `I Darla Dommic` (1906BPL), `! Eichler Albert C`, all checked on the page. Judged as ONE mark,
+# since each reading alone can fall under min_n -- the scatter PIPELINE.md #18 describes for
+# dittos. NOT the digits, although `1 Christian John J.` (0040) and `1 Darling Byron S` (1906BPL)
+# are the rule too: in an ABBYY volume `1`/`11` are mostly readings of the DITTO (61 of 1906BPL's
+# 82 `1` lines go on with a given name), and pooled they sank its rule class to 40% coherent. A
+# digit is judged alone, per volume, as the DITTO_LEADERS note above says it must be.
+RULE_GLYPHS = frozenset("|I!][")
+
+
+def _mark_class(mark: str) -> str:
+    return "column rule" if mark and set(mark) <= RULE_GLYPHS else mark
+
+
+def classify_lead_marks(rows, ranges=None, min_n=20, min_share=0.85) -> dict:
+    """Per volume, which leading marks sit before the SURNAME (a marker) rather than a given name.
+
+    The same alphabetical-coherence test as classify_glued_marks, on the follower: a marker is
+    followed by the sort key, so it lies inside its leaf's letters; a ditto is followed by a given
+    name, so it scatters. Measured over the 44 whole-volume runs on 2026-10-20 the two ends are far
+    apart -- 1906BPL's ditto `"` 8% coherent, Brooklyn 1912's `—` 6%, and the markers ~100%:
+    the Eastern District `E` of micro_IABROOKLYN_0039/0040/0042 (14.8 / 15.1 / 20.4% of their
+    lines), its misreadings `Æ` and `"` (`ÆArron Louis`, `"Bridge Margaret` on the page), the
+    column rule read as `|` or `1`, and the `*` of nearly every microfiche volume. `min_n` keeps a
+    handful of stray lines from becoming a convention. -> {mark: {"n", "coherent", "verdict"}}.
+    """
+    ranges = ranges if ranges is not None else leaf_letter_ranges(rows)
+    by_class, members = {}, collections.defaultdict(collections.Counter)
+    for leaf, raw in rows:
+        m = LEAD_MARK.match(raw or "")
+        sur = surname_token(m.group("rest")) if m else None
+        if not sur:
+            continue
+        key = _mark_class(m.group("mark"))
+        members[key][m.group("mark")] += 1
+        d = by_class.setdefault(key, {"n": 0, "coherent": 0})
+        lo, hi = ranges.get(leaf, ("A", "Z"))
+        d["n"] += 1
+        d["coherent"] += lo <= sur[0].upper() <= hi
+    out = {}
+    for key, d in by_class.items():
+        share = d["coherent"] / d["n"]
+        verdict = "MARKER" if d["n"] >= min_n and share >= min_share else "UNDECIDED"
+        for mark, n in members[key].items():
+            out[mark] = {"n": n, "class": key, "class_n": d["n"], "share": round(share, 3),
+                         "verdict": verdict}
+    return out
+
+
+def split_lead_mark(raw_line: str, marks=()):
+    """('E', 'Cox L. carman ...') when the line opens with one of the volume's `marks`. Marks
+    can stack -- 359 of micro_IABROOKLYN_0040's lines open `E *Bennett William J.`, the
+    Eastern District mark and the race designation -- and then come back joined by a space."""
+    if not marks:
+        return None
+    found, rest = [], raw_line or ""
+    for _ in range(2):
+        m = LEAD_MARK.match(rest)
+        if not m or m.group("mark") not in marks:
+            break
+        found.append(m.group("mark"))
+        rest = m.group("rest")
+    return (" ".join(found), rest) if found else None
+
+
 def can_set_carry(sur: str, leaf, ranges) -> bool:
     """May this surname-shaped lead become the carry? The `strict` rule (2026-10-20).
 
@@ -421,7 +494,7 @@ def can_set_carry(sur: str, leaf, ranges) -> bool:
     return lo <= sur[0].upper() <= hi
 
 
-def resolve_cross_line(rows, glued=(), heads=None, strict=False):
+def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=()):
     """Sequential surname carry over `rows` = [(leaf, raw_line), ...] in reading order.
 
     `glued` is the per-volume set of marks printed without a space (Trow's `-`), empty by default
@@ -433,6 +506,13 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False):
     `strict` gates which lines may set the carry (`can_set_carry`). Both default off, so every
     number recorded before 2026-10-20 reproduces; assemble_records.py turns both on. A row
     resolved from a header says so in `header` (and has no source line to point at).
+
+    `markers` (classify_lead_marks' MARKER verdicts) lets a line that opens with a marker --
+    `E Cox L.`, `“Kleinschnitz George` -- set the carry from the surname after it, and says
+    which mark in `mark`. Without it those lines can never set the carry (first_letter anchors at
+    position 0), so a ditto under an Eastern District entry inherited the surname before it. A
+    marker that is also a ditto glyph (`"`) is read as a marker only where what follows lies
+    inside the leaf's letters; otherwise the line is still a ditto.
 
     Yields one dict per row: the verbatim leading token, the resolved surname, and FLAGS. It
     never drops a row and never silently picks between candidates.
@@ -449,7 +529,7 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False):
     the number to drive down with better column handling, not to hide.
     """
     modal = modal_letters(rows)
-    ranges = leaf_letter_ranges(rows) if strict else {}
+    ranges = leaf_letter_ranges(rows) if (strict or markers) else {}
     heads = heads or {}
     prev, prev_leaf, prev_header = None, None, None
     for i, (leaf, raw) in enumerate(rows):
@@ -461,6 +541,22 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False):
         # the row falls through as not_ditto with an empty resolution and the carry is untouched.
         # Measured on trow1913's 93 gold rows: 0 surnames carried without `glued`, 86 with it.
         gl = split_glued_mark(raw, glued)
+        mk = None if gl else split_lead_mark(raw, markers)
+        if mk:
+            sur = surname_token(mk[1])
+            if is_ditto_lead(raw) and not (sur and can_set_carry(sur, leaf, ranges)):
+                mk = None                              # a ditto after all: fall through
+            elif not sur or (strict and not can_set_carry(sur, leaf, ranges)):
+                # still the marker's line (`E ACKERMAN T. & J.`, `E De Barr John`), but nothing
+                # here may set the carry
+                yield {"leaf": leaf, "raw_line": raw, "lead": mk[0], "resolved": "",
+                       "status": "not_ditto", "flags": [], "mark": mk[0]}
+                continue
+            else:
+                prev, prev_leaf, prev_header = sur, leaf, None
+                yield {"leaf": leaf, "raw_line": raw, "lead": mk[0], "resolved": sur,
+                       "status": "not_ditto", "flags": [], "mark": mk[0]}
+                continue
         sur = None if gl else surname_token(raw)
         if sur is not None and strict and not can_set_carry(sur, leaf, ranges):
             yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": "",
@@ -768,6 +864,47 @@ def self_test() -> int:
     rng = leaf_letter_ranges(restart)
     check("past a restart the new run's own letter is allowed", rng[8], ("A", "A"))
     check("at the seam the span is wide, not wrong", rng[6][0] <= "A" and rng[6][1] >= "W", True)
+    # `markers`: the Eastern District E (0039/0040/0042) and its misreadings, measured not assumed
+    c_page = [f"C{s} Wm h {n} Main" for n, s in enumerate(
+        ("able", "ain", "ald", "alder", "all", "amp", "ane", "arr", "arter", "ase", "ass", "ole",
+         "ook", "ox", "rane", "ross"))]
+    east = ([(lf, s) for lf in (1, 2, 3) for s in c_page]
+            + [(2, f"E C{s} Jas, carman, h. {n} Grand") for n, s in enumerate(
+                ("able", "ain", "ald", "alder", "all", "amp", "ane", "arr", "arter", "ase",
+                 "ass", "ole", "ook", "ox", "rane", "ross", "uff", "urtis", "ady", "elk"))]
+            + [(2, "“Coxe George, lager beer, Graham av."), (2, '" Mary wid h 3 Main')])
+    verdicts = classify_lead_marks(east)
+    check("E is a MARKER", verdicts["E"]["verdict"], "MARKER")
+    check("too few `“` to call", verdicts["“"]["verdict"], "UNDECIDED")
+    got = list(resolve_cross_line(east, strict=True, markers=("E", "“", '"')))
+    e_row = len(c_page) * 3                     # the first E line
+    check("an E line sets the carry from its surname", (got[e_row]["resolved"],
+                                                        got[e_row]["mark"]), ("Cable", "E"))
+    check("a glued quote is the E misread", (got[-2]["resolved"], got[-2]["mark"]),
+          ("Coxe", "“"))
+    check("a spaced quote before an off-letter given name is still a ditto",
+          (got[-1]["status"], got[-1]["resolved"]), ("resolved", "Coxe"))
+    check("no markers, no change", [g.get("mark") for g in resolve_cross_line(east)][e_row],
+          None)
+    # the column rule's readings are judged together: 12 `|` + 12 `I` clear min_n only as one;
+    # a digit is never pooled (in an ABBYY volume it is usually the ditto)
+    rule = ([(lf, s) for lf in (1, 2, 3) for s in c_page]
+            + [(2, f"{g} C{s} Wm h {n} Main") for g in ("|", "I", "1") for n, s in enumerate(
+                ("able", "ain", "ald", "alder", "all", "amp", "ane", "arr", "arter", "ase", "ass",
+                 "ole"))])
+    rv = classify_lead_marks(rule)
+    check("column rule pooled", (rv["|"]["verdict"], rv["I"]["verdict"], rv["I"]["class"]),
+          ("MARKER", "MARKER", "column rule"))
+    check("a digit is judged alone", (rv["1"]["class"], rv["1"]["verdict"]), ("1", "UNDECIDED"))
+    caps = list(resolve_cross_line(east + [(2, "E ACKERMAN T. & J. boiler works, 9 Grand")],
+                                   strict=True, markers=("E",)))
+    stacked = list(resolve_cross_line(east + [(2, "E *Cotter William J. seaman, h. N. 8th")],
+                                      strict=True, markers=("E", "*")))
+    check("stacked marks: E and the race designation", (stacked[-1]["mark"],
+                                                        stacked[-1]["resolved"]), ("E *", "Cotter"))
+    check("an E before an ALL-CAPS business is still the mark",
+          (caps[-1]["mark"], caps[-1]["resolved"], caps[-1]["status"]), ("E", "", "not_ditto"))
+
     # `heads`: the dropped ALL-CAPS header becomes the carry just before its follower
     hd = [(27, "Abbott Geo grocer 9 Fulton"), (27, "Allen Jas mason h 3 Court"),
           (27, '" Harry engineer h 26 3d'), (27, '" Hedwig physician h 1544 Bergen')]

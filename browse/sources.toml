@@ -19,7 +19,8 @@ filters = ["root", "run", "volume", "section", "role", "usable", "entry_shaped",
            "eval_holdout", "address_ditto", "printed_page_how", "is_business", "year",
            "publisher", "scan"]
 index = ["record_id", ["volume", "leaf"], "run", "section", "entry_shaped", "non_entry_page",
-         "eval_holdout", "address_ditto", "printed_page_how", "is_business", "year", "publisher"]
+         "eval_holdout", "address_ditto", "printed_page_how", "is_business", "year", "publisher",
+         "district", "name_mark"]
 fts = ["raw_line", "name_resolved", "occupation_role", "employer", "address_resolved",
        "home_address_resolved", "spouse_name"]
 

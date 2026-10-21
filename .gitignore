@@ -19,6 +19,11 @@ churro-answers*.tar
 # half tiles for hpc/39_lightonocr.sbatch and LightOn's answers back (rebuild: data_prep/reocr_columns.py)
 cde-lightonocr-halves*.tar
 lighton-answers*.tar
+# book-scan half tiles for the LightOn canary and tiers (rebuild: data_prep/reocr_books.py pages,
+# then data_prep/reocr_columns.py stage)
+cde-lightonocr-books*.tar
+# the kernel speed/parity bundle for hpc/36_kernel_test.sbatch (data/kernel_test/)
+cde-kernel-test*.tar.gz
 
 # generated locally from pipeline output (census surnames.tsv IS committed as the seed)
 data_prep/names/surnames_harvested.tsv

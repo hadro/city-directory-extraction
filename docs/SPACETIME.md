@@ -351,6 +351,17 @@ Robinson insurance atlases: Manhattan 1894–1915, Brooklyn 1893–1907, Queens 
 Space/Time's 1857 address points stop working. The other 41 of the 100 are not in the 2017 file (image IDs
 from `57565…`), so they were added later; the live API is the only full list of those.
 
+**Beyond NYPL.** A second query over the same box without the NYPL filter returned 200 maps, the cap for
+anonymous users, so it was cut off: 191 NYPL and 9 Library of Congress Sanborn sheets. The LoC sheets are
+Manhattan 1905 vol. 1 (3 sheets around the Bowery and Greenwich Village, created 2026-10-13, so someone is
+working on it now), Brooklyn 1888 vol. 9 (5 sheets, Williamsburg and Bushwick, 2022) and Brooklyn 1951 vol. 4
+(1 sheet, 2024). No other institution appeared. LoC's other NYC Sanborn volumes would need georeferencing in
+Allmaps Editor, which opens their IIIF manifests directly; none of this fills the 1860s–1870s Manhattan gap.
+
+**Querying tips.** Give `intersects` as south, west, north, east, latitude first. Pass `maxArea=1000000000` to
+drop world maps. Anonymous queries return at most 200 maps, so use small boxes. To see only what was added
+after the July 2022 Map Warper import, pass `modifiedAfter=2022-07-11`.
+
 ## Recommended roadmap
 
 Start with the address stage: it is new capability, it needs no retraining, and it leaves the panel and the

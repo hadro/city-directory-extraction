@@ -362,6 +362,26 @@ Allmaps Editor, which opens their IIIF manifests directly; none of this fills th
 drop world maps. Anonymous queries return at most 200 maps, so use small boxes. To see only what was added
 after the July 2022 Map Warper import, pass `modifiedAfter=2022-07-11`.
 
+### Full sweep, all five boroughs (2026-10-21)
+
+Nine area queries (maps added after the July 2022 import) plus one LoC-only query returned 485 unique maps.
+North Brooklyn and Queens hit the 200 cap, so those two are incomplete. What matters for geocoding is
+address-scale sheets (under 0.5 km²), and nearly all of those come from one place:
+
+| Source | Maps | Address-scale sheets | What they are |
+| --- | --- | --- | --- |
+| NYPL, added since 2022 | 193 | 188 | One complete Manhattan atlas, 187 plates (image IDs 5222332–5222522, Battery to Inwood), georeferenced 17–24 Jan 2025; title and year not yet identified |
+| NYPL, from the Map Warper import | 25 | 9 | Insurance-atlas plates also in the 2017 `mapwarper` file |
+| David Rumsey | 149 | 3 | City and borough maps, mostly added Feb 2025 |
+| Library of Congress | 45 | 11 | Sanborn Brooklyn 1888 vols. 7 and 9, Sanborn Manhattan 1905 vol. 1, and 9 plates of an "Atlas of the city of New York, Manhattan Island" (~1 km² each) |
+| Digital Commonwealth | 41 | 1 | Historical city plans, 1660s–1900s |
+| Others (Princeton, Harvard, Michigan, UW–Milwaukee, NYU, Smithsonian, Northwestern, Internet Archive, a Map Warper bridge) | 32 | 5 | Single maps |
+
+The 1860s–1870s gap is smaller than it looked. The 2017 `mapwarper` file already holds 20 sheets of the 1867
+*Plan of New York City, from the Battery to Spuyten Duyvil Creek*, which shows every lot and prints street
+numbers at the corners of blocks, enough to interpolate house numbers along each block. It also holds 68
+Bromley sheets dated 1879–80. Next step: identify the January 2025 atlas from any one of its plates.
+
 ## Recommended roadmap
 
 Start with the address stage: it is new capability, it needs no retraining, and it leaves the panel and the

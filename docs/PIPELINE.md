@@ -477,6 +477,26 @@ dispute ~20k of 133,902, overlapping only 28% — **31,500 (23.5%) are disputed 
 Those go to a review queue; nothing silently picks a winner. Use hOCR **emission order**, not
 reconstructed columns: the surname sequence is 93.6% alphabetically non-decreasing within a leaf.
 
+**Since 2026-10-20 the carry is narrower and better grounded** (`fb1a020`, `4efc6ae`; #6 has the
+measurement). Three opt-ins to `resolve_cross_line`, all on in `assemble_records`, all off by
+default so every number above still reproduces:
+- **`strict`** — a line sets the carry only if its surname is capitalised and inside its leaf's
+  letters, taken from the NEIGHBOURING leaves' votes (`leaf_letter_ranges`; a leaf's own vote
+  fails on a big block whose marks dropped — 1906BPL leaf 20 votes J on the Allen block's
+  `Jas …` lines). Ad copy (`millions— Try them.`, `until Withdrawn.`) and off-letter given-name
+  leads no longer name the dittos after them; they are transparent.
+- **`heads`** — the surname block headers ingest drops are put back by position
+  (`assemble_records.dropped_headers`, from `<id>_dropped.txt.gz`) and set the carry. New field
+  `ditto_header`; `ditto_source` is null there.
+- **`markers`** — leading marks found per volume by what follows them (`classify_lead_marks`):
+  the Eastern District `E` of 0039/0040/0042 and its misreadings (`Æ © € ®`, a quote), the
+  column rule (`| I ! ]`, judged as one), `*`. A marked line sets the carry from the surname after
+  the mark, which comes off `name_resolved` into `name_mark`; `district` = Eastern.
+
+1906BPL's disputed share under these rules is **6.6%** (8,975 of 135,864), much of the fall by
+construction. The record that is not: at 1,802 printed headers the carry agrees with the header
+**41.3% → 79.8%** (`results/carry_rules.py`).
+
 It **does not detect non-entries** and shouldn't — on an advertisement leaf it will happily resolve
 nonsense, because page type is stage 1/3's problem.
 
@@ -1278,6 +1298,37 @@ a column break *within* a leaf and reset the carry there, then re-measure the di
 > 2026-09-12**: `classify_glued_marks` identifies the mark per volume and the gate now agrees with
 > gold on every panel volume (trow1907 0.0%→60.3%, trow1913 0.0%→93.5%). (a) and (b) stand.
 
+> **Headers put back, and the carry gated — 2026-10-20 (`fb1a020`; `results/carry_rules.py`).**
+> Found from the browser (`browse/`), not from this item: `" Harry engineer` came out
+> `millions— Harry`, its surname planted by an ad at the foot of 1906BPL leaf 26, because leaf 27's
+> `ANDERSON` header — the line that names the column — is one of the drops above. So
+> `resolve_cross_line` gained `heads` (the dropped headers, placed by position, no follower test)
+> and `strict` (only a capitalised surname inside its leaf's letters may set the carry); Stage 5
+> describes both.
+>
+> **The 2026-09-13 measurement above understated the headers**, because it counted only the
+> ditto right after one (1,392). A header names every ditto down to the next surname line:
+> **42,470 of 1906BPL's 135,864 carried surnames now come from one.** No gold holds the carried
+> surname for these volumes, but a printed header IS that fact, so at every header the carry was
+> asked what it would have said without it:
+>
+> | | 1906BPL | Brooklyn 1912 | all 44 volumes |
+> |---|---|---|---|
+> | carry agrees with the printed header (n = 1,802) | 47.8% → **84.8%** | 17.0% → **60.9%** | 41.3% → **79.8%** |
+> | disputed share (largely by construction) | 23.2% → 6.6% | 39.0% → 5.5% | 26.3% → 6.4% |
+> | ditto rows whose surname moved | 33,349 | 16,515 | 50,128 |
+>
+> Twelve moved rows drawn at random all came off junk (`Wallabout`, `Corner`, `Street.`, a given
+> name whose mark dropped); of six read on the page four were confirmed, one unreadable, one
+> wrong and fixed (ENNIS over the OCR'd `iimnis Adam`, which is why there is no follower test).
+> Two first drafts of the letter test failed on real pages and are recorded in
+> `leaf_letter_ranges`: the leaf's own vote, and one sorted run per volume (micro_IABROOKLYN_0036
+> prints a second alphabet). **Known cost:** an entry whose first letter the OCR lost (`rntzen` =
+> Arntzen) is refused as lowercase, so its dittos take the surname before it — 184 rows in
+> 1906BPL. **Still open:** the column-break reset this item proposed, and the implied-surname
+> detector above — `strict` catches a mark-less given name only on an off-letter leaf (`Geo` on
+> an A page), not `Jas` under a J surname.
+
 **7. Feed the model the resolved surname.** Currently dittos are resolved *after* the model, so the
 model sees `" Wm` and emits `" Wm`. What if the input said `Ackerman Wm`? That is a different and
 possibly larger version of the `44` result — the same "give the model in-distribution input"
@@ -1742,6 +1793,17 @@ answers land: `reocr_pair.py dump lightonocr-3-1b-greedy-vllm --root data/reocr_
 is records per printed name against the three stated counts, and Doggett 1845 against its own
 0.984 from IA's text.
 
+**Assembly changed under it on 2026-10-20** (`fb1a020`, `4efc6ae`: the surname carry, the dropped
+headers, the leading markers — Stage 5). Nothing sent to NYU depends on it; only the assemble
+after the 4B does. `usable` is untouched, so the done-criterion stands — Doggett 1845 assembled by
+the new code is still 0.984. But `name_resolved`, the summary's `ditto` block and the new fields
+are not comparable with anything assembled before `fb1a020`: for a before/after, re-assemble the
+"before" with the same code (its predictions are on disk; ~1 min). On arrival, check two things
+per volume: that the harvest has rewritten `data/survey_ocr/<id>_dropped.txt.gz` from the re-OCR'd
+lines (`dropped_headers` reads the headers from it; a missing file just means none), and the
+summary's `ditto.lead_marks` — marks are re-detected per volume, and LightOn may print a mark
+differently from ABBYY.
+
 The dump keeps IA's records for the leaves not re-read. For each re-read leaf it pairs the tiles
 (a tile without an answer keeps tesseract's lines), runs the post-passes, and spreads every
 line's text over tesseract's word boxes (`respell`: similarity anchors, so "capmker" still
@@ -2164,10 +2226,20 @@ Each row carries:
   the section.
 - **The text:** `raw_line`, and the model's eight fields verbatim.
 - **Resolutions, beside the fields:** `name_resolved` (surname carried across ditto lines, with
-  the source line's `ditto_source` and the carry's review flags), `address_resolved` (#8) and
-  `home_address_resolved`.
+  the source line's `ditto_source` — or `ditto_header`, the dropped header it came from — and the
+  carry's review flags), `address_resolved` (#8) and `home_address_resolved`. A leading marker
+  comes off `name_resolved` into `name_mark`, and `district` is `Eastern` for the Eastern
+  District's mark or section (Stage 5; from 2026-10-20).
 - **Flags, never filters:** layout `role` (a runover is an entry's tail), `entry_shaped`,
   `non_entry_page` (SURVEY_PLAN.md, "Non-entry pages") and `eval_holdout`.
+- **Which staging:** `root`, the `--root` the volume was assembled from (from 2026-10-20). One
+  run directory can mix roots — `4b-100k+guard` holds run 1's five volumes and the reocr tier's
+  39 — and this is the only thing on a row that says which.
+
+**To look at them:** `bash browse/serve.sh` serves every record file in a local Datasette
+(`browse/README.md`) — filters, facets, search, the line's IIIF image and its page with the line
+outlined, and the volume metadata from the catalog. `python3 browse/build_db.py` refreshes it after
+an assemble.
 
 `usable` is the conservative subset: entry-shaped, a start line, on a listing page, and not held
 out.
@@ -2183,6 +2255,11 @@ out.
 The microfilm rows are the ones the twin finding replaces: run 2 adds `hearnesbrooklync1852unse`
 and 1857BPL, the book scans of the same editions. The summary compares usable records with every
 volume's `stated_name_count` wherever the survey found one (27 volumes).
+
+The table is run 1 as assembled on 2026-09-28. Since then `layout_roles` (`66a9949`) moved
+1906BPL's usable to 173,899 and Smith 1856's to 11,084, and the 2026-10-20 carry (#6) took
+1906BPL's disputed share from 23% to 6.6%. That carry, the headers and the markers change
+`name_resolved` and the summary's `ditto` block, **never `usable`**: Doggett 1845 is still 0.984.
 
 ## Explicitly deprioritized
 

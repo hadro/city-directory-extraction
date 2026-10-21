@@ -238,7 +238,7 @@ def stage(args) -> int:
     by_page = collections.defaultdict(dict)
     for key, entry in old.items():
         by_page[key.rsplit("_c", 1)[0]][key] = entry
-    pages = sorted(WORK.glob("*/*.json"))
+    pages = sorted((Path(args.pages).resolve() if args.pages else WORK).glob("*/*.json"))
     if args.sample:                         # a seeded sample of pages with text, per volume
         rng, by_vol = random.Random(args.seed), collections.defaultdict(list)
         for p in pages:
@@ -360,6 +360,8 @@ def main(argv=None) -> int:
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--tiles", default="columns", choices=["columns", "halves"])
     ap.add_argument("--out", help="default data/reocr_columns (columns), data/reocr_halves (halves)")
+    ap.add_argument("--pages", help="the page records and images to cut (default data/reocr, the "
+                    "microfilm's tesseract cache; data/reocr_books for book scans, reocr_books.py)")
     ap.add_argument("--max-side", type=int, help="fit tiles to this many pixels (0: native); "
                     "default 2500 for columns (Churro), native for halves")
     ap.add_argument("--sample", type=int, default=0, help="only this many pages per volume")

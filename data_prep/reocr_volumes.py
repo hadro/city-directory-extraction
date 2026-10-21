@@ -276,6 +276,12 @@ GUTTER_MIN = 0.8        # ...at least this many median character widths wide
 GUTTER_LOOK = 12        # the words ending this many character widths left of it are its left side
 GUTTER_STRAIGHT = 2.0   # a left side whose words start AND end within this many characters is a
                         # stripe (repeated surname, `"` dittos), and the band after it no gutter
+OUTER_REACH = 0.25      # the outer columns reach the ends of their lines, at most this share of a
+                        # column's width past the text's 1st/99th-percentile edges...
+OUTER_SLACK = (1, 6)    # ...and this many characters past them, left and right: OCR misses faint
+                        # ends (ABBYY boxed Longworth 1826's "Whitehall" as "Whit*", 90 px short)
+OUTER_LEFT = 3          # on the left, at most this many characters past the 1st percentile: a
+                        # hanging mark is 1-2, and further out is the verso's show-through
 
 
 def gutter_columns(lines: list, width: int, n: int = 0) -> list:
@@ -336,6 +342,27 @@ def gutter_columns(lines: list, width: int, n: int = 0) -> list:
         least = min(cross[a:b])
         plateau = [x for x in range(a, b) if cross[x] == least]
         return plateau[len(plateau) // 2]
+
+    def outer(cols):
+        """The outer columns out to the ends of their lines. `left` and `right` are the text's
+        1st and 99th percentiles, which hold against specks and side-banner scraps but cut the
+        longest entries short: on Longworth 1826, one column to the page, "h. 26 Whitehall" lost
+        "tehall" to the tile's edge, as did 0.14-0.35% of the canary volumes' words. A line that
+        starts inside the text area counts to its last body word, plus OUTER_SLACK characters
+        (the OCR's own box can stop short of faint print), within OUTER_REACH of a column's width;
+        a word wholly outside the text (a scrap, a speck) does not count. The slack is margin on
+        most pages; beside a side-banner advertisement (Boyd) it can take in a sliver of it."""
+        reach = OUTER_REACH * (right - left) / len(cols)
+        ends, starts = [right], [left]
+        for ws in lines:
+            ws = [w for w in ws if w[2] > w[0] and w[3] - w[1] < 3 * wh]
+            if ws and left <= min(w[0] for w in ws) <= right:
+                ends.append(max(w[2] for w in ws))
+            if ws and left <= max(w[2] for w in ws) <= right:
+                starts.append(min(w[0] for w in ws))
+        cols[-1][1] = int(min(max(ends) + OUTER_SLACK[1] * cw, right + reach, width))
+        cols[0][0] = int(max(min(starts) - OUTER_SLACK[0] * cw, left - OUTER_LEFT * cw, 0))
+        return cols
     dense = sorted(cross[left:right + 1])[3 * (right - left + 1) // 4]
     if n:
         colw = (right - left) / n
@@ -349,7 +376,7 @@ def gutter_columns(lines: list, width: int, n: int = 0) -> list:
         # its own gutters
         if all(cross[g] <= max(1, GUTTER_TOL * dense) for g in gutters):
             edges = [left] + gutters + [right]
-            return [[a, b] for a, b in zip(edges, edges[1:])]
+            return outer([[a, b] for a, b in zip(edges, edges[1:])])
 
     runs, start = [], None
     for x in range(left, right + 2):
@@ -389,7 +416,7 @@ def gutter_columns(lines: list, width: int, n: int = 0) -> list:
             j = i - 1 if cols[i - 1][1] - cols[i - 1][0] <= cols[i + 1][1] - cols[i + 1][0] else i + 1
             a, b = min(i, j), max(i, j)
             cols[a:b + 1] = [[cols[a][0], cols[b][1]]]
-    return cols
+    return outer(cols)
 
 
 def column_method(ident: str) -> str:
@@ -640,6 +667,14 @@ def _self_test() -> int:
     assert page_columns(bowed, (2000, 3000))[0] == 0.0, "a curved page is not turned"
     assert [w[0] for w in column_lines(tilted, (2000, 3000))[0]] == [w[0] for w in tilted[0]], \
         "the dump keeps the image's coordinates"
+    def entry(x1, y, n=4):                   # gutter_columns measures letters on 3+ letter words
+        return [w[:5] + ["word"] for w in ln(100, x1, y, n)]
+    long_tail = [entry(900, y) for y in range(0, 4000, 40)]
+    long_tail[10] = entry(1020, 400, 5)      # two entries run a word past the 99th percentile
+    long_tail[60] = entry(1020, 2400, 5)
+    long_tail.append([[1700, 3000, 1720, 3020, 1, "."]])     # a speck right of the text
+    (x0, x1), = gutter_columns(long_tail, 2000, 1)
+    assert 1010 < x1 < 1700 and 40 <= x0 < 100, "the longest entries are not cut, nor is a speck taken"
     base = [([[0, 0, 100, 20, 60, "njohnson"]], [0, 0, 100, 20], 60.0)]
     other = [([[0, 0, 40, 20, 90, "n"], [45, 0, 100, 20, 90, "johnson"]], [0, 0, 100, 20], 90.0)]
     assert merge_words(base, other)[0][0][5] == "n", "the confident reading's words win"

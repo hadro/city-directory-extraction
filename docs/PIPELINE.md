@@ -1675,6 +1675,73 @@ Cost at the full run's 0.19 L40S-seconds a line, one tile at a time, before batc
 | first | 5.5M | ~290 |
 | abbyy8-clean | 5.1M | ~270 |
 
+(Batched decoding, item 3 above, cuts these about eightfold: at the parity run's ~0.02
+L40S-seconds a line the three tiers are ~80–120 GPU-hours, against ~566 for the 4B extraction
+that reads them. That is an extrapolation from microfilm tiles; the canary below measures it.)
+
+**DECIDED 2026-10-20 (hadro): re-OCR the book-scan tiers BEFORE the 4B reads them.** Extracting
+IA's text first would pay for the 4B twice. Order: a four-volume canary, then abbyy8-damaged,
+then first and abbyy8-clean.
+
+**Book scans need no tesseract: IA's own words are the layer (2026-10-20).** The microfilm ran
+tesseract because IA's OCR of the film was dead. A book scan's ABBYY OCR is damaged in its
+characters, not its geometry, so its words can carry LightOn's text. Measured on the pilot with
+the same LightOn answers and tiles, only the word layer swapped
+(`data/reocr_pilot_pages_ia`, IA's words with side bands stripped):
+
+| | fresh tesseract | IA's words |
+|---|---|---|
+| Pooled, exact (typography aside) | 82.8% (2,062 rows) | **83.6%** (2,067 rows) |
+| Polk 1917 in Trow 1917 | 84.3% | 88.9% |
+| Lain 1897 | 84.0% | 85.8% |
+| ogden1839 | 92.9% | 95.0% |
+| boyd1890 / Smith 1855 / trow1907 | 96.0 / 92.4 / 88.2 | 94.6 / 91.8 / 86.8 |
+
+33 rows gained, 11 lost. The losses are Boyd's known same-address false matches, two run-overs
+left unjoined, a neighbour column's scrap and a doubled "N J". It took two fixes in
+`reocr_pair.py`, neither of which moves a tesseract-layer row (the baseline panel is unchanged
+but for a few box edges):
+- **The volume's confirmed ditto forms are evidence** (`confirmed_marks`, from
+  `ditto_decisions.json`). ABBYY-8 reads Trow 1917's `"` as "ii" (188 of leaf 688's entries) or
+  "n", and without them Polk 1917 lost every ditto: 84% → 12% exact. A standalone first token in
+  the set counts as a quote mark under the same page gate. None of the 39 microfilm volumes has
+  decisions, so their import cannot change.
+- **`respell` lays a name over garbled words where they are**, not leftwards from its first
+  anchor. ABBYY read Lain 1897 leaf 45's "Allenburg Chas." as `i !^U«S-£has-`; the name was
+  placed 140 px left of the column's margin and the joiner glued three entries into a line the
+  banner filter dropped (5 gold rows).
+
+So the book-scan path has no CPU stage at all: `data_prep/reocr_books.py pages` writes each listing
+page's record from IA's dump (side-band scraps stripped first, as the ingest strips them, since
+after pairing they carry the model's text at confidence 90) beside its image from the volume's
+`_jp2.zip`, and `reocr_columns.py stage --pages data/reocr_books` cuts the tiles. And the
+three remaining tiers' images are ~75 GB of zips (114 volumes, ~100k listing pages, measured off
+IA's file lists), which the Mac cannot stage, so the full run cuts its tiles on Torch.
+
+`gutter_columns` also cut the longest entries short: the outer edges were the text's 1st/99th
+percentiles, and 0.14–0.35% of the canary's words fell outside every tile, mostly an entry's last
+address word ("h. 26 Whitehall" on Longworth 1826, where ABBYY had boxed only "Whit*"). The outer
+columns now reach the ends of the lines that start inside the text, plus `OUTER_SLACK` characters
+(1 left, 6 right), within `OUTER_REACH` of a column, and on the left within `OUTER_LEFT` = 3
+characters, since further out is the verso's show-through. Words outside every tile on the right:
+1876BPL 1,245 → 62, Doggett 645 → 0, Longworth 603 → 56, Trow 1907 p3 463 → 2; what is left is
+specks. A sliver of a side-banner advertisement can now come inside a tile (Boyd): look at Boyd's
+tiles before its tier runs.
+
+**The canary, staged 2026-10-20 and not yet sent:** Doggett 1845 (first; prints 61,333 names; run
+1 read it from IA's text at 0.984 usable records per printed name, so it is a before/after),
+1876BPL (first; 114,724), Longworth 1826 (abbyy8-clean; 27,000) and Trow 1907 p3 (abbyy8-damaged;
+the trow1907 gold's edition). 2,304 pages, 8,908 half tiles at the volumes' catalog column counts
+(2, 2, 1, 3), 5 shards of ≤2,000 in `data/reocr_books_halves/`, packed as
+`cde-lightonocr-books-canary.tar` (4.07 GB, sha256 af1d21d9…72aa). The densest tile holds ~3,800
+characters (~1,900 tokens of the 4,096 cap). Runbook artifact
+https://claude.ai/artifact/9jx1ZeAycJR572kHrWdYv5 (private; share before sending). When the
+answers land: `reocr_pair.py dump lightonocr-3-1b-greedy-vllm --root data/reocr_books_halves
+--page-dir data/reocr_books --ids <the four>`, `survey_harvest.py --rederive --ids`,
+`survey_derive.py`, then stage the four for the 4B (~240k lines, ~9 GPU-hours). Its done-criterion
+is records per printed name against the three stated counts, and Doggett 1845 against its own
+0.984 from IA's text.
+
 The dump keeps IA's records for the leaves not re-read. For each re-read leaf it pairs the tiles
 (a tile without an answer keeps tesseract's lines), runs the post-passes, and spreads every
 line's text over tesseract's word boxes (`respell`: similarity anchors, so "capmker" still
@@ -1917,8 +1984,10 @@ to `data/records/4b-100k+guard/`, summary `results/records_4b-100k+guard.json`.
   rows/s in `prep_volumes.py` does not reproduce and should not be used for planning.** It came
   from one H200 task in September; the two H200 tasks here ran at 7.13 and 7.57. NYU moved tasks
   2-51 to L40S after h200_public stalled (927 jobs pending on a 24-GPU partition cap) because the
-  extractor runs the same speed on either card. At ~7.2 rows/s the remaining tiers are **~215
-  H200-hours, not the ~129 / 120 / 94 recorded under "Tiers" above.**
+  extractor runs the same speed on either card. At ~7.2 rows/s the remaining tiers are **~213 /
+  198 / 155 GPU-hours (first / abbyy8-clean / abbyy8-damaged), ~566 in all, not the ~129 / 120 /
+  94 recorded under "Tiers" above.** (Corrected 2026-10-20: this line said "~215" for all three,
+  which is the first tier alone.)
 - **The GPU split is benign.** This was the first tier spread over two card types, so Brooklyn
   1912 — whose three chunks ran H200, H200, L40S — was checked: 30.9 / 31.2 / **30.7** bytes a
   record, 2.98% / 2.92% / **2.95%** empty names, 100% of records parsing all eight fields in all

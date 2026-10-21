@@ -405,7 +405,19 @@ QUOTE_MARK = re.compile(r"^(?:[\"“”„«»]|''|,,)")  # a printed `"` ditto 
 QUOTE_ONLY = re.compile(r"^(?:[\"“”„«»]+|''|,,)$")   # ...as a token of its own
 QUOTE_DITTO = re.compile(r"^\s*[\"“”„]\s+[A-Z]")      # LightOn's own `" Chas P r10 W43d`
 QUOTE_SHARE = 0.2
+DITTO_DECISIONS = HERE / "ditto_decisions.json"
 _GIVEN = None
+
+
+def confirmed_marks(ident: str) -> frozenset:
+    """The ditto marks hadro confirmed for this volume off the page images (ditto_decisions.json,
+    as survey_harvest.confirmed_dittos reads them): the forms ITS OCR gives the printed ditto.
+    ABBYY-8 reads Trow 1917's `"` as "ii", "n", "1" ..., and with IA's words as the word layer
+    (no fresh tesseract) those are a quote page's evidence (dittos, `marks`)."""
+    if not DITTO_DECISIONS.exists():
+        return frozenset()
+    vol = json.loads(DITTO_DECISIONS.read_text(encoding="utf-8"))["volumes"].get(ident) or {}
+    return frozenset(vol.get("confirmed") or ())
 
 
 def given_names() -> set:
@@ -423,7 +435,7 @@ def given_names() -> set:
     return _GIVEN
 
 
-def dittos(rows: list, median_h: float = 0.0) -> list:
+def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) -> list:
     """A page's paired rows (reading order) with each entry's ditto decided and written as a
     leading "— " (r["ditto"]; r["ambiguous"] marks the lines worth a look). LightOn's leading
     "- " is Markdown list markup, not the printed dash: it bullets whole runs of entries, new
@@ -462,7 +474,12 @@ def dittos(rows: list, median_h: float = 0.0) -> list:
     0029, 0032, 0047), whose long "——" dittos ("—— Michael, butcher" under Donnally, 0035;
     also read "= Samuel") pass too. Glued to the given name ("—John H", 1912's usual form) it
     counts as it is, but not as "_" or "=": glued so, they lead 73 of 22,199 glued tokens in 1912
-    and 268 of 718 in nine plain-list volumes ("_Storan" under "Storm", 0006)."""
+    and 268 of 718 in nine plain-list volumes ("_Storan" under "Storm", 0006).
+
+    `marks` are the volume's confirmed ditto forms (confirmed_marks): a first token standing alone
+    in that set counts as a quote mark, under the same page gate (QUOTE_SHARE). A book scan
+    re-read over IA's words needs it: ABBYY-8 reads Trow 1917's `"` as "ii" (188 of leaf 688's
+    entries) or "n", and without it the pilot's Polk 1917 set lost every ditto, 84% -> 12% exact."""
     starts = [r for r in rows if r.get("start")]
 
     def tlead(r):
@@ -483,7 +500,8 @@ def dittos(rows: list, median_h: float = 0.0) -> list:
         """Tesseract's first token is a quote mark standing alone, as a `"` ditto reads (Trow
         and Polk from the 1910s: `"`, `«`, `»`, `|"`), not glued to a word as a quotation is."""
         ws = sorted(r["words"], key=lambda w: w[0]) if r["words"] else []
-        return bool(ws) and QUOTE_ONLY.match(ws[0][5].lstrip("|")) is not None
+        return bool(ws) and (QUOTE_ONLY.match(ws[0][5].lstrip("|")) is not None
+                             or (len(ws) > 1 and ws[0][5] in marks))
 
     def mquote(r):
         """LightOn wrote the `"` ditto itself: a quote mark, a space, a capitalised word."""
@@ -701,6 +719,12 @@ def respell(words: list, text: str, conf: int, limit: float = 0.0) -> list:
         prev = ws[pair[j - 1]] if j > 0 else None
         nxt = ws[pair[k]] if k < m else None
         left = prev[2] + cw / 2 if prev else (nxt[0] - need if nxt else ws[0][0])
+        if not prev and nxt and pair[k] > 0:
+            # the OCR read words before the first one it shares with the model, too garbled to
+            # pair: the line starts where they do. Laid out leftwards from the anchor instead, a
+            # long name over ABBYY's "i !^U«S-£has-" (Lain 1897 leaf 45, "Allenburg Chas.") began
+            # 140 px left of its column's margin, and the joiner glued three entries together
+            left = ws[0][0]
         right = nxt[0] - cw / 2 if nxt else max(left + need, ws[-1][2] if not prev else left + need)
         if limit and not nxt and right > limit:
             # words tesseract never read, run on past its last: kept inside the column's tile,
@@ -769,10 +793,11 @@ def boxed_lines(rec: dict, tiles: dict) -> list:
     return out
 
 
-def page_rows(rec: dict, tiles: dict, answers: dict) -> tuple:
+def page_rows(rec: dict, tiles: dict, answers: dict, marks: frozenset = frozenset()) -> tuple:
     """A page's paired rows in reading order, dittos decided: (rows, median_h, char_w). `tiles`
     maps a tile name (c0_h0, ...) to its box; `answers` maps it to (model lines, bleed) or to None
-    where the model has no answer (that tile keeps tesseract's lines)."""
+    where the model has no answer (that tile keeps tesseract's lines). `marks`: the volume's
+    confirmed ditto forms (confirmed_marks)."""
     keyed = boxed_lines(rec, tiles)
     hs = sorted(w[3] - w[1] for _k, _y, ws in keyed for w in ws)
     median_h = hs[len(hs) // 2] if hs else 30
@@ -794,10 +819,11 @@ def page_rows(rec: dict, tiles: dict, answers: dict) -> tuple:
             r["source"] = "bleed" if bleed and r["source"] != "tesseract" else r["source"]
             r["x0"], r["x1"] = tiles[name][0], tiles[name][2]
             rows.append(r)
-    return dittos(rows, median_h), median_h, char_w
+    return dittos(rows, median_h, marks), median_h, char_w
 
 
-def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False) -> tuple:
+def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False,
+              marks: frozenset = frozenset()) -> tuple:
     """One re-OCR'd page as a word-dump record's lines: (lines, sources). The page's rows
     (page_rows) put through the post-passes in reading order, then every line's text spread over
     its tesseract words (respell), or given boxes where tesseract never saw it (synth_line).
@@ -819,7 +845,7 @@ def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False) 
     1917 leaf 688, a camera frame: x 196 at the top, 122 at the foot), and one margin for the
     whole column (146) put the top's pulled starts 50 px into blank paper, left of the starts
     tesseract read at 196, which then looked indented and were joined on as run-overs."""
-    rows, median_h, char_w = page_rows(rec, tiles, answers)
+    rows, median_h, char_w = page_rows(rec, tiles, answers, marks)
     texts = post([r["text"] for r in rows])
     built = []
     for i, (r, text) in enumerate(zip(rows, texts)):
@@ -906,6 +932,8 @@ def dump(args) -> int:
         dst = survey_ocr / f"{vol}_words.jsonl.gz"
         stats = collections.Counter()
         replaced = {}
+        marks = confirmed_marks(vol)
+        layer = "tesseract-5.5 merge"
         for (v, stem), tiles in pages.items():
             if v != vol:
                 continue
@@ -924,12 +952,15 @@ def dump(args) -> int:
                 stats["bleed_retry"] += bool(meta.get("bleed_retry"))
                 stats["loop_truncated"] += bool(meta.get("loop_truncated"))
                 stats["table_mode"] += bool(meta.get("table_mode"))
-            lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True)
+            lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True, marks=marks)
             # 1 only where the MODEL read the line as part of the entry above. A tesseract line
             # (a tile with no answer, or one the model skipped) carries no start flag and no
             # reading either, so it is 0: the joiner keeps the indent rule for it.
             cont = [0 if st or src == "tesseract" else 1 for st, src in zip(starts, sources)]
             replaced[rec["leaf"]] = (lines, sources, cont, rec["page_size"])
+            # the word layer: the microfilm's tesseract cache, or IA's own words (reocr_books.py)
+            layer = "tesseract-5.5 merge" if rec.get("engine", "tesseract").startswith("tesseract") \
+                else rec["engine"]
             stats["pages"] += 1
             stats["lines_runover"] += sum(cont)
             stats.update(f"lines_{s}" for s in sources)
@@ -944,7 +975,7 @@ def dump(args) -> int:
                     lines, sources, cont, size = replaced[r["leaf"]]
                     r.update(lines=lines, sources=sources, cont=cont, page_size=size,
                              chars=sum(len(w[5]) for ws in lines for w in ws),
-                             ocr=f"reocr: tesseract-5.5 merge + {args.slug}")
+                             ocr=f"reocr: {layer} + {args.slug}")
                     stats["leaves_replaced"] += 1
                 out.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
         if args.out_dir is None and src.name.endswith("_words.jsonl.gz"):
@@ -953,7 +984,7 @@ def dump(args) -> int:
         if args.out_dir is None:
             side = HERE / "survey" / f"ia_{vol}.json"
             doc = json.loads(side.read_text(encoding="utf-8"))
-            doc["reocr"] = {"engine": f"tesseract-5.5 merge + {args.slug}", "root": str(root.relative_to(REPO)),
+            doc["reocr"] = {"engine": f"{layer} + {args.slug}", "root": str(root.relative_to(REPO)),
                             "ia_dump": f"data/survey_ocr/{vol}_words.ia.jsonl.gz", **dict(stats),
                             "dumped": __import__("datetime").date.today().isoformat()}
             side.write_text(json.dumps(doc, indent=1), encoding="utf-8")
@@ -1022,7 +1053,8 @@ def joins(args) -> int:
                 meta_f = base.with_name(f"{base.name}_{args.slug}.meta.json")
                 meta = json.loads(meta_f.read_text(encoding="utf-8")) if meta_f.exists() else {}
                 answers[name] = None if got is None else (got, bool(meta.get("bleed_retry")))
-            lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True)
+            lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True,
+                                               marks=confirmed_marks(vol))
             raw = words_to_lines(lines)
             if not raw:
                 continue
@@ -1473,6 +1505,15 @@ def _self_test() -> int:
     rows = [{"text": t, "words": [], "start": True, "bullet": True, "mark": False}
             for t in ("Abbott Jane, widow", "Abel John, cartman", "Ackerman Wm, grocer")]
     assert not any(r["ditto"] for r in dittos(rows)), "a bulleted list of heads has no dittos"
+    rows = [{"text": t, "words": [w(f), w(t.split()[0], 140)] if f else [w(t.split()[0])],
+             "start": True, "bullet": False, "mark": False}
+            for t, f in [("Emmons Addison mgr h3056 3d av", None), ("Alice L tchr P S h347 W23d", "ii"),
+                         ("Arth B h60 Park av", "ii"), ("Chas bkpr h378 E140th", "n"),
+                         ("Dora Mrs h115 Washn pl", "ii"), ("Edw J v-p h New Milford Conn", "ii"),
+                         ("Emmott Jas clk", None)]]
+    assert not any(r["ditto"] for r in dittos([dict(r) for r in rows])), "no marks: ABBYY's ii is a word"
+    got = [r["text"].split(" ")[0] for r in dittos(rows, marks=frozenset({"ii", "n"}))]
+    assert got == ["Emmons", '"', '"', '"', '"', '"', "Emmott"], got
     junk = ["Gittens Josiah, clerk, 130 Grand", "Glacken Mic clad Hirer 26 8 eT fopirne",
             "Glass John, cartman, 18 Sobwrot"]
     good = ["Gittens Josiah, clerk, 130 Grand", "Glacken Michael, laborer, 125 Stagg",
@@ -1487,6 +1528,11 @@ def _self_test() -> int:
     assert rs[3][:4] == [300, 10, 420, 40] and rs[3][4] == 90, "capmker anchors capmaker"
     assert rs[4][0] > 420 and rs[5][0] > rs[4][0], "words tesseract never read run on after it"
     assert respell(words, "", 90) == [] and respell([], "Hess", 90) == []
+    garbled = [[320, 942, 364, 982, 0, "i"], [364, 944, 554, 982, 0, "!^U«S-£has-"],
+               [554, 951, 724, 976, 14, "sasfixtures,"], [724, 953, 751, 976, 11, "h"]]
+    rs = respell(garbled, "Allenburg Chas. gasfixtures, h", 90)
+    assert rs[0][0] == 320 and rs[1][2] <= 554 and rs[2][:4] == [554, 951, 724, 976], \
+        "a name over garbled words takes their place, not the margin's left"
     sl = synth_line("Hess Peter, h. 3", [100, 10, 400, 40], None, 100, 12.0, 30, 90)
     assert [w[5] for w in sl] == ["Hess", "Peter,", "h.", "3"] and sl[0][1] > 40 and sl[0][0] == 100
     print("self-test ok")

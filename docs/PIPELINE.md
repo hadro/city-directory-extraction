@@ -2092,6 +2092,24 @@ causal-conv1d, which is probably the real speed-up but changes the inference env
 needs a parity check against the canary chunk. Do option 3 deliberately before the next large
 run, not during one.
 
+**Options 2 and 3, packaged 2026-10-20 (hadro), not yet sent:** `hpc/36_kernel_test.sbatch` +
+`cde-kernel-test.tar.gz` (281 KB: `data/kernel_test/`), the second job on the book-scan canary's
+runbook (https://claude.ai/artifact/9jx1ZeAycJR572kHrWdYv5). NYU's own logs settle the premise:
+both the 11.88 and the 7.13 H200 runs print transformers' "fast path is not available", so the
+linear-attention layers run in plain PyTorch. One job on one GPU reads the same lines in the
+current overlay and in a copy with flash-linear-attention (>=0.2.2) and causal-conv1d: 5,000 lines
+of the canary chunk at batch 32 and 64 in each (speed; decode timed from the "loaded" line), and
+the LightOn panel at fc46ac8 (17 sets, 2,062 gold rows, concatenated in `tasks.txt` order;
+`panel_sets.tsv` splits them back) at batch 32 in each (parity). transformers 5.13 falls back one
+kernel at a time (`modeling_qwen3_5`: fla's delta rules and gated norm, causal-conv1d's
+convolution), so fla alone is a partial fast path, and it reports either as usable only with a
+GPU. **When the results land:** split `panel.{current,kernels}.b32.txt` by `panel_sets.tsv` into
+`iapanel_<set>/chunk_000.preds_<run>.txt` under a scratch preds dir, guard them, and score both
+with `eval/ia_panel.py score` against `data/iapanel_lighton_fc46ac8` (job 20077014 scored 67.0
+pooled guarded there; the current overlay re-run is the same-node control, since the panel is
+concatenated and so batched differently). Pass = the kernels' row EM within noise of the
+current overlay's, with flips symmetric; then the canary's 4B job is the first to use them.
+
 Two fixes of our own, both small and both deferred to the same moment:
 - **The runbook artifact's stash step is incomplete.** It tells NYU to stash `tasks.txt` and
   `manifest.json` before unpacking, but the tar overwrites **`staging.json`** too; NYU caught it

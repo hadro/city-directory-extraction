@@ -24,9 +24,11 @@ each with a TASK_OFFSET that hpc/35_volumes.sbatch adds to SLURM_ARRAY_TASK_ID.
 Reads the listing-scoped lines the corpus survey writes (data/survey_ocr/<id>_listing.jsonl.gz:
 residential sections only, each line tagged `context.section`) and splits each volume into plain
 JSONL chunks of --chunk lines, because eval/qwen_predict.py reads plain JSONL and has no resume.
-A chunk is one SLURM array task: ~25 min on an L40S at the measured 7.3 rows/s (14 min on an
-H200 at 11.88; the 2.7 once assumed here was a load-dominated figure), so no chunk comes
-near a wall-clock limit, and a preempted chunk is simply re-run.
+A chunk is one SLURM array task: ~26 min of 20,000 lines on any card at ROWS_PER_S, the 4B with
+flash-linear-attention at batch 64 (VENV=$PROJECT/venv-kernels BATCH=64, NYU job 20524162,
+2026-10-21; ~7.2 without the kernels, on an L40S and an H200 alike -- the 11.88 measured once on
+an H200 in September never reproduced), so no chunk comes near a wall-clock limit, and a
+preempted chunk is simply re-run.
 
 The run set is hadro's (data_prep/survey_runset.json, stamped into the sidecars by
 `data_prep/survey_twins.py stamp`). A volume stamped `duplicate-of:<id>` is another scan of an
@@ -60,6 +62,8 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
+ROWS_PER_S = 12.6       # the 4B, venv-kernels, batch 64 (job 20524162, L40S)
+ROWS_PLAIN = 7.2        # without the kernels, any card (the reocr tier, job 20310742)
 SRC = REPO / "data" / "survey_ocr"
 SIDECARS = REPO / "data_prep" / "survey"
 TIERS = REPO / "data_prep" / "run_tiers.json"
@@ -199,10 +203,11 @@ def main(argv=None) -> int:
         total = sum(lines.values())
         for size in sorted({args.chunk, 10000, 20000}):
             n = sum(math.ceil(v / size) for v in lines.values() if v)
-            print(f"chunk {size:6,d}: {n:5,d} array tasks, ~{size / 7.3 / 60:4.0f} min each on an "
-                  f"L40S, ~{size / 11.88 / 60:4.0f} on an H200", file=sys.stderr)
-        print(f"{len(ids)} volumes, {total:,} lines: ~{total / 7.3 / 3600:.0f} L40S GPU-hours, "
-              f"~{total / 11.88 / 3600:.0f} H200 (4B, measured 2026-09-28)", file=sys.stderr)
+            print(f"chunk {size:6,d}: {n:5,d} array tasks, ~{size / ROWS_PER_S / 60:4.0f} min each",
+                  file=sys.stderr)
+        print(f"{len(ids)} volumes, {total:,} lines: ~{total / ROWS_PER_S / 3600:.0f} GPU-hours at "
+              f"{ROWS_PER_S} rows/s (4B + kernels, batch 64), ~{total / ROWS_PLAIN / 3600:.0f} without "
+              f"the kernels", file=sys.stderr)
         return 0
 
     out = Path(args.out)
@@ -238,9 +243,9 @@ def main(argv=None) -> int:
         "keep_non_entry": args.keep_non_entry,
         "skipped_leaves": sum(len(v.get("skipped_leaves", [])) for v in manifest.values()),
     }, indent=1) + "\n", encoding="utf-8")
-    print(f"\n{len(tasks)} array tasks, {total:,} lines: ~{total / 7.3 / 3600:.1f} L40S GPU-hours "
-          f"at 7.3 rows/s, ~{total / 11.88 / 3600:.1f} H200 at 11.88 (4B, measured 2026-09-28)",
-          file=sys.stderr)
+    print(f"\n{len(tasks)} array tasks, {total:,} lines: ~{total / ROWS_PER_S / 3600:.1f} GPU-hours at "
+          f"{ROWS_PER_S} rows/s (4B + kernels, batch 64), ~{total / ROWS_PLAIN / 3600:.1f} without the "
+          f"kernels", file=sys.stderr)
     print("submit with:", *submit_lines(len(tasks), args.max_array), sep="\n  ", file=sys.stderr)
     return 0
 

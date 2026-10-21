@@ -2172,6 +2172,31 @@ pooled guarded there; the current overlay re-run is the same-node control, since
 concatenated and so batched differently). Pass = the kernels' row EM within noise of the
 current overlay's, with flips symmetric; then the canary's 4B job is the first to use them.
 
+**RESULT 2026-10-21, NYU job 20524162 (one L40S, gl044): GO, flash-linear-attention alone.**
+- **NYU does not run in an overlay**: their `hpc/env.sh` has `USE_CONTAINER=0`, so `run_in_env`
+  activates `$VENV` and ignores `OVERLAY`, and the script as written would have compared one
+  environment with itself. They built `$PROJECT/venv-kernels` from a `uv pip freeze` of the
+  production venv (80 packages identical: torch 2.13.0+cu130, transformers 5.14.1, triton 3.7.1)
+  plus fla 0.5.2, and ran a copy of the script that switches `VENV` (both freezes and the copy are
+  in `data/kernel_test/out/`). `hpc/env.sh` now reads `VENV="${VENV:-$PROJECT/venv}"` so a job can
+  choose it, as NYU asked.
+- **causal-conv1d would not install**: no prebuilt wheel for torch 2.13 / CUDA 13.0 / cp312, and
+  no `nvcc` on Torch's login nodes or as a module. So the warning still prints; the delta rules
+  and the gated norm are fla's.
+- **Speed** (decode only, 5,000 lines of the reocr canary chunk): current 7.58 rows/s at batch 32,
+  7.61 at 64; kernels 8.61 at 32, **12.59 at 64 (1.66x)**. Batch size alone does nothing without
+  the kernels, which answers option 2: the plain-PyTorch delta rule was the bottleneck. Panel,
+  batch 32: 7.26 -> 9.33.
+- **Parity on gold** (`data/kernel_test/scores.json`; the setup reproduces job 20077014's 66.99):
+  guarded pooled row EM **67.03 current, 67.21 kernels**, no set worse. 8 of 2,062 guarded records
+  differ; 4 flip whole-row exactness, all 4 toward the kernels ("Empel" -> "Empel Abr"), 0 the
+  other way. Byte-identical records, kernels against current at batch 32: 99.2% (speed b32),
+  99.3% (b64), 99.1% (panel), against 99.4% for batch 32 vs 64 with no kernels, so the kernel
+  differences are the size of batch noise.
+- At 12.6 rows/s the remaining tiers are **~315 GPU-hours, not ~566**. The next 4B jobs run with
+  `VENV=$PROJECT/venv-kernels BATCH=64`. Parity was measured at batch 32; batch 64 was checked
+  only byte-for-byte (99.3%), which is the batch noise above.
+
 Two fixes of our own, both small and both deferred to the same moment:
 - **The runbook artifact's stash step is incomplete.** It tells NYU to stash `tasks.txt` and
   `manifest.json` before unpacking, but the tar overwrites **`staging.json`** too; NYU caught it

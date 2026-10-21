@@ -55,7 +55,9 @@ APPTAINER_BIN="${APPTAINER_BIN:-$(command -v apptainer || command -v singularity
 export PROJECT MODEL_SIZE MODEL_ID GPU_TYPE USE_CONTAINER CONTAINER_SIF OVERLAY_SRC APPTAINER_BIN
 
 export OVERLAY="$PROJECT/overlay-15GB-500K.ext3"
-export VENV="$PROJECT/venv"                 # used when USE_CONTAINER=0
+# used when USE_CONTAINER=0 (how NYU runs). Overridable per job: VENV=$PROJECT/venv-kernels is the
+# production venv plus flash-linear-attention (PIPELINE "option 3", 2026-10-21: 1.66x at batch 64)
+export VENV="${VENV:-$PROJECT/venv}"
 export DATA="$PROJECT/data"
 export OUT="$PROJECT/out"
 export LOGS="$PROJECT/logs"

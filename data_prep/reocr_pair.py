@@ -903,6 +903,23 @@ def _box(words: list):
             max(w[3] for w in words)]
 
 
+_RECORDS = {}
+
+
+def page_record(page_dir: Path, vol: str, stem: str) -> dict:
+    """A page's word layer: <page_dir>/<vol>/<stem>.json, or the page's line of
+    <page_dir>/<vol>.records.jsonl.gz, the one-file-a-volume form a Torch-staged book scan ships
+    (data_prep/reocr_books.py records: ~100k pages need not be ~100k files on the Mac)."""
+    f = page_dir / f"{vol}.records.jsonl.gz"
+    if f.exists():
+        if f not in _RECORDS:
+            import gzip
+            with gzip.open(f, "rt", encoding="utf-8") as fh:
+                _RECORDS[f] = {f"{vol}_{r['leaf']:04d}": r for r in map(json.loads, fh)}
+        return _RECORDS[f][stem]
+    return json.loads((page_dir / vol / f"{stem}.json").read_text(encoding="utf-8"))
+
+
 ALT_GAIN = 0.05         # the second word layer is taken where it pairs this share more of a page's
 ALT_MIN = 5             # ...rows (and at least this many) than the first
 
@@ -965,7 +982,7 @@ def dump(args) -> int:
         for (v, stem), tiles in pages.items():
             if v != vol:
                 continue
-            rec = json.loads((page_dir / vol / f"{stem}.json").read_text(encoding="utf-8"))
+            rec = page_record(page_dir, vol, stem)
             alt_f = alt_dir / vol / f"{stem}.json" if alt_dir else None
             if not rec["lines"] and not (alt_f and alt_f.exists()):
                 continue

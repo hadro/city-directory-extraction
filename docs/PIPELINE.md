@@ -1852,6 +1852,37 @@ predictions land: verify the 19 `.sha1`s, `copy_guard.py --volumes data/volumes_
 `assemble_records.py --root data/volumes_books_canary --run 4b-100k+guard`, then usable records per
 printed name against the three counts, Doggett 1845 against run 1's 0.984.
 
+**THE FULL BOOK-SCAN RE-OCR, STAGED ON TORCH (built 2026-10-22).** The tiers' images are ~75 GB,
+which the Mac cannot hold, so Torch fetches and cuts them, and only words and answers cross:
+
+| step | where | what |
+|---|---|---|
+| `reocr_books.py records --tier <t>` | Mac | `data/reocr_books_records/<id>.records.jsonl.gz` (IA's words per listing page, side bands stripped) + `volumes_<t>.tsv` (each volume's `_jp2.zip`/`.tar` and size on IA); volumes with a sidecar `reocr` block are left out |
+| `hpc/41_books_download.sh <tsv>` | Torch DTN (dtn012) | the archives into `data/reocr_zips/`, 4 at a time, `curl -C -`, renamed only at full size |
+| `hpc/42_books_tiles.sbatch` (`hpc/books_tiles.py`) | Torch CPU array, one task a volume | pages from the archive -> `reocr_columns.stage` -> `data/reocr_tiers/<id>/` (tiles, boxes.json, columns.json, STAGED); page images deleted after |
+| `hpc/books_shards.py <tsv>` | Torch login | shards of 2,000 unanswered tiles across volumes, `tasks_<t>.txt` |
+| `hpc/39_lightonocr.sbatch`, `ENGINE=vllm` | Torch GPU | unchanged |
+| `hpc/books_pack.py <tsv>` | Torch login | one tar of answers + boxes per finished volume, `answers_<t>/<id>.tar` |
+| `reocr_pair.py dump --root data/reocr_tiers/<id> --page-dir data/reocr_books_records` | Mac | `page_record` reads the records file; then `--rederive`, `survey_derive.py`, adleaves, staging |
+
+Checked end to end on Longworth 1826 before anything shipped: the Torch-path tiles have the
+canary's boxes (970 of 970) and pixels (identical), and the import from the packed tar is
+byte-identical to the canary's (1,146 of 1,146 dump records); the download script fetches, skips
+and resumes; the tile job runs with `uv` offline from the login-node cache. `books_tiles.py` pins
+Pillow 10.4.0 and numpy 2.0.2, the Mac's.
+
+**Trow 1915/1917's `_jp2.tar` holds pages IA has already cropped and turned** (leaf 688: 3273 x
+4516, the frame of IA's words), not the camera frames IIIF serves (5616 x 3744). Turning them
+upright again, as the IIIF path must, would have cut every tile from the wrong place, so
+`convert` now checks every page image against its word record's `page_size`, turns it only on a
+mismatch in a camera-frame volume, and stops the volume if it still does not match.
+
+**abbyy8-damaged, packaged first:** 35 volumes (Trow 1907 p3 done in the canary), 17,647 listing
+pages, 21.8 GB of zips (~1-1.5 h on the DTN at four streams), ~95k tiles, **~14 GPU-hours** of
+LightOn in ~48 tasks. Five of its volumes are in the coverage scan's failed-OCR list (Trow 1908
+p2/p3, 1907 "19073", 1909 "19091", and 1907 p3 done); their pages get the tesseract layer on the
+Mac at import, from their zips (~3 GB).
+
 **Assembly changed under it on 2026-10-20** (`fb1a020`, `4efc6ae`: the surname carry, the dropped
 headers, the leading markers — Stage 5). Nothing sent to NYU depends on it; only the assemble
 after the 4B does. `usable` is untouched, so the done-criterion stands — Doggett 1845 assembled by

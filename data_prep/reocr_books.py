@@ -5,6 +5,7 @@ Stage book-scan volumes for the LightOn re-OCR over IA's own words: no tesseract
     python3 data_prep/reocr_books.py download --ids a,b        # each volume's _jp2.zip, whole
     python3 data_prep/reocr_books.py pages --ids a,b [--workers 6]   # -> data/reocr_books/<id>/
     python3 data_prep/reocr_books.py tesseract --ids a,b         # -> data/reocr_books_tess/<id>/
+    python3 data_prep/reocr_books.py records --tier abbyy8-damaged  # -> data/reocr_books_records/ (Torch)
     python3 data_prep/reocr_books.py status --ids a,b
     python3 data_prep/reocr_columns.py stage --pages data/reocr_books --tiles halves \
         --out data/reocr_books_halves --per-shard 2000      # then LightOn, then reocr_pair.py dump
@@ -43,6 +44,8 @@ REPO = HERE.parent
 OCR = REPO / "data" / "survey_ocr"
 BOOKS = REPO / "data" / "reocr_books"
 TESS = REPO / "data" / "reocr_books_tess"       # fresh tesseract, the second word layer
+RECORDS = REPO / "data" / "reocr_books_records"  # what a Torch-side staging needs from the Mac
+TIERS = HERE / "run_tiers.json"
 sys.path.insert(0, str(HERE))
 
 import reocr_volumes as rv  # noqa: E402
@@ -153,6 +156,63 @@ def tesseract(args) -> int:
     return 1 if bad else 0
 
 
+def archive_file(ident: str) -> tuple:
+    """(name, bytes) of the volume's page images on IA: <id>_jp2.zip, else <id>_jp2.tar (Trow
+    1915 and 1917 have only the tar)."""
+    import urllib.request
+    files = json.loads(urllib.request.urlopen(f"https://archive.org/metadata/{ident}/files",
+                                              timeout=120).read())["result"]
+    sizes = {f["name"]: int(f.get("size") or 0) for f in files}
+    for name in (f"{ident}_jp2.zip", f"{ident}_jp2.tar"):
+        if name in sizes:
+            return name, sizes[name]
+    raise SystemExit(f"{ident}: IA lists no _jp2.zip or _jp2.tar")
+
+
+def write_records(args) -> int:
+    """What a Torch-side staging needs from the Mac, per volume: RECORDS/<id>.records.jsonl.gz, one
+    `ia_page` record per listing page (the same records `pages` writes one file each), and
+    RECORDS/volumes_<label>.tsv, the volumes with their image archive's name and size on IA for
+    hpc/41_books_download.sh to fetch and hpc/42_books_tiles.sbatch to cut. A volume already
+    re-OCR'd (its sidecar has a `reocr` block) is left out unless --redo."""
+    tiers = json.loads(TIERS.read_text(encoding="utf-8"))["volumes"]
+    ids = (sorted(i for i, v in tiers.items() if v["tier"] in args.tier.split(","))
+           if args.tier else args.ids.split(","))
+    RECORDS.mkdir(parents=True, exist_ok=True)
+    rows = []
+    for ident in ids:
+        side = json.loads((HERE / "survey" / f"ia_{ident}.json").read_text(encoding="utf-8"))
+        if side.get("reocr") and not args.redo:
+            print(f"{ident}: re-OCR'd already ({side['reocr'].get('dumped')}) -- left out", file=sys.stderr)
+            continue
+        if column_method(ident) != "gutters":
+            print(f"{ident}: a microfilm volume -- left out", file=sys.stderr)
+            continue
+        engine = ((side.get("catalog_says") or {}).get("ia") or {}).get("ocr") or "IA OCR"
+        want = set(rv.pages(ident))
+        out = RECORDS / f"{ident}.records.jsonl.gz"
+        tmp = out.with_name(out.name + ".tmp")
+        n = 0
+        with gzip.open(ia_dump(ident), "rt", encoding="utf-8") as fh, \
+                gzip.open(tmp, "wt", encoding="utf-8") as o:
+            for line in fh:
+                rec = json.loads(line)
+                if rec["leaf"] in want:
+                    o.write(json.dumps(ia_page(rec, engine), separators=(",", ":")) + "\n")
+                    n += 1
+        tmp.rename(out)
+        name, size = archive_file(ident)
+        rows.append((ident, tiers.get(ident, {}).get("tier", "-"), name, size, n))
+        print(f"{ident}: {n} pages, {name} {size / 1e9:.2f} GB", file=sys.stderr)
+    label = args.label or (args.tier or "ids").replace(",", "+")
+    tsv = RECORDS / f"volumes_{label}.tsv"
+    tsv.write_text("ident\ttier\tarchive\tbytes\tpages\n"
+                   + "".join("\t".join(map(str, r)) + "\n" for r in rows), encoding="utf-8")
+    print(f"{len(rows)} volumes, {sum(r[4] for r in rows):,} pages, "
+          f"{sum(r[3] for r in rows) / 1e9:.1f} GB of images -> {tsv.relative_to(REPO)}", file=sys.stderr)
+    return 0
+
+
 def status(args) -> int:
     for ident in args.ids.split(","):
         d = BOOKS / ident
@@ -180,15 +240,18 @@ def _self_test() -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["download", "pages", "tesseract", "status"])
+    ap.add_argument("cmd", nargs="?", choices=["download", "pages", "tesseract", "records", "status"])
     ap.add_argument("--ids")
+    ap.add_argument("--tier", help="records: every volume of these tiers (data_prep/run_tiers.json)")
+    ap.add_argument("--label", help="records: the volumes TSV's name (default: the tier)")
+    ap.add_argument("--redo", action="store_true", help="records: include volumes re-OCR'd already")
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
-    if not args.cmd or not args.ids:
-        ap.error("a command and --ids are required")
+    if not args.cmd or not (args.ids or (args.cmd == "records" and args.tier)):
+        ap.error("a command and --ids (or, for records, --tier) are required")
     if args.cmd == "download":
         args.tier = None
         return rv.download(args)
@@ -196,6 +259,8 @@ def main(argv=None) -> int:
         return write_pages(args)
     if args.cmd == "tesseract":
         return tesseract(args)
+    if args.cmd == "records":
+        return write_records(args)
     return status(args)
 
 

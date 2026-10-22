@@ -6,6 +6,9 @@ Stage book-scan volumes for the LightOn re-OCR over IA's own words: no tesseract
     python3 data_prep/reocr_books.py pages --ids a,b [--workers 6]   # -> data/reocr_books/<id>/
     python3 data_prep/reocr_books.py tesseract --ids a,b         # -> data/reocr_books_tess/<id>/
     python3 data_prep/reocr_books.py records --tier abbyy8-damaged  # -> data/reocr_books_records/ (Torch)
+    python3 data_prep/reocr_books.py coverage --tier abbyy8-damaged   # whose IA OCR failed, page by page
+    python3 data_prep/reocr_books.py import --ids a,b [--root data/reocr_tiers/{id}]  # answers -> survey
+    python3 data_prep/reocr_books.py facts --ids a,b --against HEAD  # what an import moved
     python3 data_prep/reocr_books.py status --ids a,b
     python3 data_prep/reocr_columns.py stage --pages data/reocr_books --tiles halves \
         --out data/reocr_books_halves --per-shard 2000      # then LightOn, then reocr_pair.py dump
@@ -237,21 +240,191 @@ def _self_test() -> int:
     return 0
 
 
+def volumes_of(args) -> list:
+    if args.ids:
+        return args.ids.split(",")
+    tiers = json.loads(TIERS.read_text(encoding="utf-8"))["volumes"]
+    return sorted(i for i, v in tiers.items() if v["tier"] in args.tier.split(","))
+
+
+def column_count(ident: str) -> int:
+    side = json.loads((HERE / "survey" / f"ia_{ident}.json").read_text(encoding="utf-8"))
+    try:
+        return int(((side.get("catalog_says") or {}).get("csv") or {}).get("column_count") or 2)
+    except ValueError:
+        return 2
+
+
+def page_coverage(rec: dict, ncol: int) -> float:
+    """How much of a page IA's OCR read: its lines (cut at the columns) over what the text area
+    holds, columns x text height / (1.3 x the median word height). ~1.0 on a page IA read whole
+    (Doggett 1845 1.04, 1876BPL 1.10, Longworth 1826 1.05); Trow 1907 p3, whose OCR failed page by
+    page, 0.42. 0.0 for a page with under 20 words."""
+    lines = rv.column_lines(rec["lines"], rec["page_size"], method="gutters", n=ncol) if rec["lines"] else []
+    words = [w for ws in lines for w in ws]
+    if len(words) < 20:
+        return 0.0
+    hs = sorted(w[3] - w[1] for w in words)
+    ys = sorted((w[1] + w[3]) / 2 for w in words)
+    height = ys[-1 - len(ys) // 50] - ys[len(ys) // 50]
+    cap = ncol * height / (1.3 * hs[len(hs) // 2])
+    return min(2.0, len(lines) / cap) if cap > 0 else 0.0
+
+
+def _coverage_one(ident: str) -> tuple:
+    want, ncol, out = set(rv.pages(ident)), column_count(ident), {}
+    with gzip.open(ia_dump(ident), "rt", encoding="utf-8") as fh:
+        for line in fh:
+            rec = json.loads(line)
+            if rec["leaf"] in want:
+                out[rec["leaf"]] = round(page_coverage(rec, ncol), 3)
+    return ident, out
+
+
+def coverage(args) -> int:
+    """Which volumes' IA OCR failed page by page, before any GPU time is spent: per volume, the
+    median page coverage, its 10th percentile, and the pages under 0.5. A volume with a median
+    under 0.8 or a tenth of its pages under 0.5 will want the tesseract layer at import (Trow 1907
+    p3: model-only lines 69,270 -> 2,621 with it). Measured 2026-10-21 over the three tiers: 3,028
+    of 73,826 pages under 0.5, most in six Trow parts of 1907-1914 (PIPELINE #27)."""
+    ids, result = volumes_of(args), {}
+    with multiprocessing.Pool(args.workers) as pool:
+        for ident, cov in pool.imap_unordered(_coverage_one, ids):
+            result[ident] = cov
+    print(f"{'volume':32s} {'pages':>6} {'median':>6} {'p10':>5} {'<0.5':>5}")
+    for ident in sorted(result):
+        c = sorted(result[ident].values())
+        if not c:
+            print(f"{ident:32s} {0:6d}")
+            continue
+        low = sum(x < 0.5 for x in c)
+        flag = "  <- tesseract layer" if c[len(c) // 2] < 0.8 or low > 0.1 * len(c) else ""
+        print(f"{ident:32s} {len(c):6d} {c[len(c) // 2]:6.2f} {c[len(c) // 10]:5.2f} {low:5d}{flag}")
+    if args.json:
+        Path(args.json).write_text(json.dumps(result), encoding="utf-8")
+    return 0
+
+
+def facts_of(doc: dict) -> dict:
+    """The survey facts a re-OCR moves, from a volume's sidecar."""
+    h = ((doc.get("harvest") or {}).get("filtered")) or {}
+    listing, bs, ro = doc.get("listing") or {}, doc.get("book_says") or {}, doc.get("reocr") or {}
+    snc = bs.get("stated_name_count")
+    snc = snc.get("value") if isinstance(snc, dict) else snc
+    scoped = ((doc.get("scope") or {}).get("kept_by_section") or {}).get("listing")
+    model, only = ro.get("lines_model", 0), ro.get("lines_model-only", 0)
+    return {"kept": h.get("candidates"), "joins": h.get("wrap_joins"),
+            "indent": (h.get("wrap_calibration") or {}).get("indent_ratio"),
+            "listing": f"{listing.get('start_leaf')}-{listing.get('end_leaf')}",
+            "scoped": scoped, "non_entry": len((doc.get("non_entry_pages") or {}).get("leaves", [])),
+            "printed": snc, "per_name": round(scoped / snc, 3) if scoped and snc else None,
+            "layer": ro.get("engine", "IA OCR").split(" + ")[0],
+            "model_only": round(only / (model + only), 3) if model + only else None}
+
+
+def facts(args) -> int:
+    """Per volume, the survey facts now and, with --against REV, at that git revision (the
+    sidecars before an import: commit them first). The numbers to read after an import: scoped
+    lines and per printed name, the share of the model's lines with no OCR words under them
+    (model_only: over ~0.1 the page layer failed, see `coverage`), and listing bounds, which a
+    re-OCR should not move."""
+    import subprocess
+    for ident in volumes_of(args):
+        rel = f"data_prep/survey/ia_{ident}.json"
+        now = facts_of(json.loads((REPO / rel).read_text(encoding="utf-8")))
+        if args.against:
+            got = subprocess.run(["git", "show", f"{args.against}:{rel}"], cwd=REPO,
+                                 capture_output=True, text=True)
+            was = facts_of(json.loads(got.stdout)) if got.returncode == 0 else {}
+            moved = {k: f"{was.get(k)} -> {v}" for k, v in now.items() if was.get(k) != v}
+            print(f"{ident:32s} " + ("; ".join(f"{k} {m}" for k, m in moved.items()) or "unchanged"))
+        else:
+            print(f"{ident:32s} " + "; ".join(f"{k} {v}" for k, v in now.items()))
+    return 0
+
+
+def import_volumes(args) -> int:
+    """The whole import of re-OCR'd book scans, as done for the canary (PIPELINE #27): per volume
+    `reocr_pair.py dump` from its answers (--root, `{id}` filled in; the page layer from --page-dir,
+    the tesseract layer from --alt-page-dir where it has the page), then `survey_harvest.py
+    --rederive`, `survey_derive.py` bounds/pages/sections/scope, and the non-entry pages
+    (`survey_adleaves.py features --merge`, `inventory --write`). Then `facts --against HEAD`, and
+    the volumes whose model-only share says they want the tesseract layer. Commit the sidecars
+    before running it, so HEAD is the before."""
+    import subprocess
+    py, ids = sys.executable, []
+    for ident in volumes_of(args):
+        if (REPO / args.root.format(id=ident) / "boxes.json").exists():
+            ids.append(ident)
+        else:
+            print(f"{ident}: no answers under {args.root.format(id=ident)} -- left out", file=sys.stderr)
+    if not ids:
+        return 1
+
+    def run(*cmd):
+        print("$ " + " ".join(cmd[1:]), file=sys.stderr, flush=True)
+        subprocess.run(list(cmd), cwd=REPO, check=True)
+    for ident in ids:
+        root = args.root.format(id=ident)
+        cmd = [py, "data_prep/reocr_pair.py", "dump", args.slug, "--root", root,
+               "--page-dir", args.page_dir, "--ids", ident]
+        if (REPO / args.alt_page_dir / ident).exists():
+            cmd += ["--alt-page-dir", args.alt_page_dir]
+        run(*cmd)
+    joined = ",".join(ids)
+    run(py, "data_prep/survey_harvest.py", "--rederive", "--ids", joined)
+    for step in ("bounds", "pages", "sections", "scope"):
+        run(py, "data_prep/survey_derive.py", step, "--ids", joined)
+    run(py, "data_prep/survey_adleaves.py", "features", "--ids", joined, "--merge")
+    run(py, "data_prep/survey_adleaves.py", "inventory", "--write")
+    print("\n--- facts against HEAD (before the import, if the sidecars were committed)")
+    facts(argparse.Namespace(ids=joined, tier=None, against="HEAD"))
+    want = []
+    for ident in ids:
+        mo = facts_of(json.loads((HERE / "survey" / f"ia_{ident}.json").read_text(encoding="utf-8")))["model_only"]
+        if mo is not None and mo > MODEL_ONLY_FLAG:
+            want.append((ident, mo))
+    if want:
+        print(f"\nmodel-only over {MODEL_ONLY_FLAG:.0%} -- these want the tesseract layer "
+              "(download, pages, tesseract, then import them again):")
+        for ident, mo in want:
+            print(f"  {ident:32s} {mo:.1%}")
+    return 0
+
+
+MODEL_ONLY_FLAG = 0.10      # the canary's good volumes ran 1-3%; Trow 1907 p3 over IA's words 56%
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", nargs="?", choices=["download", "pages", "tesseract", "records", "status"])
+    ap.add_argument("cmd", nargs="?", choices=["download", "pages", "tesseract", "records", "coverage",
+                                               "import", "facts", "status"])
     ap.add_argument("--ids")
     ap.add_argument("--tier", help="records: every volume of these tiers (data_prep/run_tiers.json)")
     ap.add_argument("--label", help="records: the volumes TSV's name (default: the tier)")
     ap.add_argument("--redo", action="store_true", help="records: include volumes re-OCR'd already")
+    ap.add_argument("--json", help="coverage: also write {volume: {leaf: coverage}} here")
+    ap.add_argument("--against", help="facts: compare with the sidecars at this git revision")
+    ap.add_argument("--root", default="data/reocr_tiers/{id}",
+                    help="import: each volume's answers ({id} filled in; the canary's: data/reocr_books_halves)")
+    ap.add_argument("--page-dir", default="data/reocr_books_records", help="import: the page layer")
+    ap.add_argument("--alt-page-dir", default="data/reocr_books_tess",
+                    help="import: the tesseract layer, used for a volume that has it")
+    ap.add_argument("--slug", default="lightonocr-3-1b-greedy-vllm", help="import: the answers' slug")
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
-    if not args.cmd or not (args.ids or (args.cmd == "records" and args.tier)):
-        ap.error("a command and --ids (or, for records, --tier) are required")
+    if not args.cmd or not (args.ids or (args.cmd in ("records", "coverage", "facts") and args.tier)):
+        ap.error("a command and --ids (or, for records/coverage/facts, --tier) are required")
+    if args.cmd == "coverage":
+        return coverage(args)
+    if args.cmd == "facts":
+        return facts(args)
+    if args.cmd == "import":
+        return import_volumes(args)
     if args.cmd == "download":
         args.tier = None
         return rv.download(args)

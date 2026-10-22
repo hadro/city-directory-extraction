@@ -7,6 +7,7 @@
 Which leaves inside a residential listing are not listing: the full-page ad inventory.
 
     python3 data_prep/survey_adleaves.py features             # -> data/survey_ocr/adleaf_features.jsonl.gz
+    python3 data_prep/survey_adleaves.py features --ids a,b --merge   # re-derive a few, keep the rest
     python3 data_prep/survey_adleaves.py inventory --write   # -> results/adleaf_inventory.json + sidecars
     python3 data_prep/survey_adleaves.py --self-test
 
@@ -210,6 +211,9 @@ def inventory(args) -> int:
         if args.write and bad:
             path = SIDECARS / f"ia_{ident}.json"
             doc = json.loads(path.read_text(encoding="utf-8"))   # re-read: never clobber others
+            old = doc.get("non_entry_pages") or {}
+            if old.get("leaves") == [r["leaf"] for r in bad] and old.get("scoped_lines") == lost:
+                continue          # unchanged: no re-dated sidecar (a re-run re-dated ~130 of them)
             doc["non_entry_pages"] = {
                 "method": "entry-shape", "derived": _dt.date.today().isoformat(),
                 "entry_min": ENTRY_MIN, "scoped_lines": lost,
@@ -238,14 +242,25 @@ def features(args) -> int:
     if args.ids:
         idents = [i for i in idents if i in set(args.ids.split(","))]
     out = Path(args.out)
+    # --merge: the other volumes' rows are carried over as they are (a re-OCR re-derives only the
+    # volumes it re-read; without it, `--ids` would leave a features file of those volumes alone)
+    kept = []
+    if args.merge and out.exists():
+        mine = set(idents)
+        with gzip.open(out, "rt", encoding="utf-8") as fh:
+            kept = [line for line in fh if json.loads(line)["id"] not in mine]
+    tmp = out.with_name(out.name + ".tmp")
     n = 0
     with multiprocessing.Pool(max(1, (os.cpu_count() or 2) - 1)) as pool, \
-            gzip.open(out, "wt", encoding="utf-8") as fh:
+            gzip.open(tmp, "wt", encoding="utf-8") as fh:
+        fh.writelines(kept)
         for ident, rows in pool.imap_unordered(_features_one, idents):
             for r in rows:
                 fh.write(json.dumps({"id": ident, **r}) + "\n")
             n += len(rows)
-    print(f"{n:,} residential leaves in {len(idents)} volumes -> {out}")
+    tmp.replace(out)
+    print(f"{n:,} residential leaves in {len(idents)} volumes"
+          + (f", {len(kept):,} other volumes' rows kept" if args.merge else "") + f" -> {out}")
     return 0
 
 
@@ -297,6 +312,8 @@ def main(argv=None) -> int:
     ap.add_argument("--features", default=str(OCR / "adleaf_features.jsonl.gz"),
                     help="inventory: the features file to read")
     ap.add_argument("--write", action="store_true", help="inventory: write sidecar blocks")
+    ap.add_argument("--merge", action="store_true",
+                    help="features with --ids: replace those volumes' rows, keep every other volume's")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:

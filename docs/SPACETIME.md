@@ -370,7 +370,7 @@ address-scale sheets (under 0.5 km²), and nearly all of those come from one pla
 
 | Source | Maps | Address-scale sheets | What they are |
 | --- | --- | --- | --- |
-| NYPL, added since 2022 | 193 | 188 | One complete Manhattan atlas, 187 plates (image IDs 5222332–5222522, Battery to Inwood), georeferenced 17–24 Jan 2025; title and year not yet identified |
+| NYPL, added since 2022 | 193 | 188 | Bromley's 1930 Manhattan Land Book, complete: 187 plates (image IDs 5222332–5222522, Battery to Inwood), georeferenced 17–24 Jan 2025 |
 | NYPL, from the Map Warper import | 25 | 9 | Insurance-atlas plates also in the 2017 `mapwarper` file |
 | David Rumsey | 149 | 3 | City and borough maps, mostly added Feb 2025 |
 | Library of Congress | 45 | 11 | Sanborn Brooklyn 1888 vols. 7 and 9, Sanborn Manhattan 1905 vol. 1, and 9 plates of an "Atlas of the city of New York, Manhattan Island" (~1 km² each) |
@@ -381,8 +381,11 @@ The 1860s–1870s gap is smaller than it looked. The 2017 `mapwarper` file alrea
 *Plan of New York City, from the Battery to Spuyten Duyvil Creek*, which shows every lot and prints street
 numbers at the corners of blocks, enough to interpolate house numbers along each block. It also holds 68
 Bromley sheets dated 1879–80. The January 2025 atlas is NYPL item
-[0e644ca0-2175-0132-851f-58d385a7b928](https://digitalcollections.nypl.org/items/0e644ca0-2175-0132-851f-58d385a7b928);
-its title and year are still to be recorded here.
+[0e644ca0-2175-0132-851f-58d385a7b928](https://digitalcollections.nypl.org/items/0e644ca0-2175-0132-851f-58d385a7b928):
+G.W. Bromley & Co., *Land Book of the Borough of Manhattan, City of New York*, desk and library edition, 1930.
+It pairs with our latest Manhattan volumes (Polk 1925, M&B 1931), not with the 1860s–1870s gap, and by 1930
+Manhattan's numbering is close enough to today's that a modern address layer may already place most of those
+volumes; the Land Book is the check on that.
 
 ## Recommended roadmap
 

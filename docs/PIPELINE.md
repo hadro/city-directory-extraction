@@ -1882,6 +1882,15 @@ pages, 21.8 GB of zips (~1-1.5 h on the DTN at four streams), ~95k tiles, **~14 
 LightOn in ~48 tasks. Five of its volumes are in the coverage scan's failed-OCR list (Trow 1908
 p2/p3, 1907 "19073", 1909 "19091", and 1907 p3 done); their pages get the tesseract layer on the
 Mac at import, from their zips (~3 GB).
+Packed 2026-10-22 as `cde-books-damaged.tar` (358 MB, sha256 1f8d8fa7...7291: `data_prep/*.py` at
+6002d70, the five hpc files, `results/iiif_frames.json`, Trow 1915/1917 scandata, the 35 records
+files + TSV). Runbook artifact https://claude.ai/artifact/L5hhRFvo22384GUDwNkQZa (private; share
+before sending). **When the answers land**, per volume: untar at the repo root (it recreates
+`data/reocr_tiers/<id>/` with boxes and answers), `reocr_pair.py dump lightonocr-3-1b-greedy-vllm
+--root data/reocr_tiers/<id> --page-dir data/reocr_books_records --ids <id>` (for the five
+failed-OCR volumes, first `reocr_books.py pages` + `tesseract` from their zips, then
+`--alt-page-dir data/reocr_books_tess`), `survey_harvest.py --rederive`, `survey_derive.py`, then
+the adleaves merge as for the canary.
 
 **Assembly changed under it on 2026-10-20** (`fb1a020`, `4efc6ae`: the surname carry, the dropped
 headers, the leading markers — Stage 5). Nothing sent to NYU depends on it; only the assemble

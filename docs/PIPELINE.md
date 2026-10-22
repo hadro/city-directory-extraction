@@ -883,6 +883,10 @@ and staged in `data/volumes_panel3/`.
 
 # Next steps
 
+> **Live as of 2026-10-22: two NYU jobs are out** (the canary's 4B pass, and the abbyy8-damaged
+> tier's LightOn re-OCR). [BOOKSCAN_HANDOFF.md](BOOKSCAN_HANDOFF.md) is the guide for receiving,
+> importing and judging them and for what comes after; #27 below is the full record behind it.
+
 Roughly ordered by value per unit of effort. Each says what it would settle, not just what it is.
 
 > **The numbers are stable identifiers, not reading order.** `PAGE_TYPE_CLASSIFIER.md` cites #3, #6

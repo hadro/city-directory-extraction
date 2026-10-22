@@ -1,5 +1,11 @@
 # Taking this over — read this first
 
+> **⚡ 2026-10-22: if you are here because NYU sent results (the book-scan re-OCR, or the canary's
+> 4B pass), start with [BOOKSCAN_HANDOFF.md](BOOKSCAN_HANDOFF.md).** It says what is out, how to
+> receive and judge each result, and what to propose next. The rest of this page is the September
+> orientation and still holds for the project's history; the live worklist is PIPELINE.md
+> "# Next steps".
+
 **Written 2026-09-01.** Three-minute orientation for an agent or person picking this up cold.
 Deeper context: [HANDOFF.md](HANDOFF.md) (long, start at "RESUME HERE"),
 [GROUND_TRUTH_HANDOFF.md](GROUND_TRUTH_HANDOFF.md) (labelling conventions),

@@ -368,7 +368,8 @@ Nine area queries (maps added after the July 2022 import) plus one LoC-only quer
 Re-running north Brooklyn and Queens in halves added no new maps: the two west halves still hit the cap because
 they reach into Manhattan, and the uncapped north Brooklyn east half holds only 10 sheet-scale maps. Outside
 Manhattan, address-scale coverage is thin: 7 LoC Sanborn Brooklyn 1888 plates, 2 NYPL Brooklyn plates, and 12
-Bronx plates from the 1930 Land Book. What matters for geocoding is
+Bronx plates from the 1930 Land Book. Narrower sheet-only queries (`maxArea=2000000`) over the Brooklyn
+waterfront, Williamsburg–Greenpoint and western Queens returned 30 maps, none new, so the sweep is complete. What matters for geocoding is
 address-scale sheets (under 0.5 km²), and nearly all of those come from one place:
 
 | Source | Maps | Address-scale sheets | What they are |

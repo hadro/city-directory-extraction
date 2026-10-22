@@ -380,7 +380,9 @@ address-scale sheets (under 0.5 km²), and nearly all of those come from one pla
 The 1860s–1870s gap is smaller than it looked. The 2017 `mapwarper` file already holds 20 sheets of the 1867
 *Plan of New York City, from the Battery to Spuyten Duyvil Creek*, which shows every lot and prints street
 numbers at the corners of blocks, enough to interpolate house numbers along each block. It also holds 68
-Bromley sheets dated 1879–80. Next step: identify the January 2025 atlas from any one of its plates.
+Bromley sheets dated 1879–80. The January 2025 atlas is NYPL item
+[0e644ca0-2175-0132-851f-58d385a7b928](https://digitalcollections.nypl.org/items/0e644ca0-2175-0132-851f-58d385a7b928);
+its title and year are still to be recorded here.
 
 ## Recommended roadmap
 

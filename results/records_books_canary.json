@@ -1,0 +1,150 @@
+{
+ "derived": "2026-10-23",
+ "run": "4b-100k+guard",
+ "root": "data/volumes_books_canary",
+ "volumes": {
+  "1876BPL": {
+   "rows": 120627,
+   "usable": 112370,
+   "named": 119043,
+   "entry_shaped": 114262,
+   "roles": {
+    "start": 116503,
+    "runover": 2204,
+    "other": 1920
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 727,
+   "printed_page_known": 109822,
+   "ditto": {
+    "carried": 33,
+    "orphan": 0,
+    "disputed": 6,
+    "glued_marks": [
+     "*",
+     "\"",
+     "\u00ab"
+    ],
+    "headers_placed": 98,
+    "from_header": 0,
+    "lead_marks": {
+     "E": 32
+    },
+    "marked_lines": 34,
+    "district_eastern": 34,
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": 114724,
+   "stated_approximate": false,
+   "usable_per_stated_name": 0.979
+  },
+  "doggettsnewyorkc1845dogg": {
+   "rows": 60997,
+   "usable": 60187,
+   "named": 60962,
+   "entry_shaped": 60610,
+   "roles": {
+    "start": 60541,
+    "other": 35,
+    "runover": 421
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 60846,
+   "ditto": {
+    "carried": 1,
+    "orphan": 0,
+    "disputed": 1,
+    "glued_marks": [],
+    "headers_placed": 12,
+    "from_header": 0,
+    "lead_marks": {},
+    "marked_lines": 0,
+    "district_eastern": 0,
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": 61333,
+   "stated_approximate": false,
+   "usable_per_stated_name": 0.981
+  },
+  "longworthsameric1826newy": {
+   "rows": 26443,
+   "usable": 23195,
+   "named": 26329,
+   "entry_shaped": 24657,
+   "roles": {
+    "start": 24206,
+    "other": 1527,
+    "runover": 708,
+    "thin": 2
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 26340,
+   "ditto": {
+    "carried": 19,
+    "orphan": 0,
+    "disputed": 5,
+    "glued_marks": [
+     "-",
+     "'"
+    ],
+    "headers_placed": 7,
+    "from_header": 0,
+    "lead_marks": {},
+    "marked_lines": 0,
+    "district_eastern": 0,
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": 27000,
+   "stated_approximate": false,
+   "usable_per_stated_name": 0.859
+  },
+  "trowsgeneraldir1907p3trow": {
+   "rows": 104593,
+   "usable": 98767,
+   "named": 103182,
+   "entry_shaped": 100311,
+   "roles": {
+    "start": 100777,
+    "other": 1905,
+    "runover": 1911
+   },
+   "non_entry_page_rows": 0,
+   "eval_holdout_rows": 0,
+   "printed_page_known": 87230,
+   "ditto": {
+    "carried": 77195,
+    "orphan": 0,
+    "disputed": 5216,
+    "glued_marks": [
+     "\"",
+     "\u2014",
+     "\u201c\u2014",
+     "-",
+     "--",
+     "\u2018",
+     "'",
+     "-\u2014",
+     "\u201c"
+    ],
+    "headers_placed": 1222,
+    "from_header": 28580,
+    "lead_marks": {
+     "*": 37
+    },
+    "marked_lines": 48,
+    "district_eastern": 0,
+    "address_slots": 0,
+    "address_no_antecedent": 0
+   },
+   "stated_name_count": null,
+   "stated_approximate": false,
+   "usable_per_stated_name": null
+  }
+ },
+ "incomplete": {}
+}

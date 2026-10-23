@@ -1856,6 +1856,29 @@ predictions land: verify the 19 `.sha1`s, `copy_guard.py --volumes data/volumes_
 `assemble_records.py --root data/volumes_books_canary --run 4b-100k+guard`, then usable records per
 printed name against the three counts, Doggett 1845 against run 1's 0.984.
 
+**The canary's 4B pass, back 2026-10-23** (NYU job 20632142, all on L40S, `venv-kernels` at batch
+64: 11.58 rows/s overall, 11.9 median on full chunks, 7.50 GPU-hours). 19 of 19 `.sha1`s and line
+counts match. Guarded and assembled into `data/records_canary`, summary
+`results/records_books_canary.json`:
+
+| volume | rows | usable | usable per printed name |
+|---|---|---|---|
+| Doggett 1845 | 60,997 | 60,187 | **0.981** (0.984 on IA's text, run 1): holds |
+| 1876BPL | 120,627 | 112,370 | **0.979**: the margin ads do not inflate it |
+| Longworth 1826 | 26,443 | 23,195 | **0.859**, against ~0.95 expected |
+| Trow 1907 p3 | 104,593 | 98,767 | no count; 2.9x IA's 33,522 scoped lines, a 25-record sample reads right |
+
+Longworth's gap is not fabrication. **(1) Same-row splits:** IA's layer cuts one printed line in two
+at a wide justified space ("Dyckman William, shoemaker" | "rear 230 Spring", leaf 409, same
+baseline), LightOn reads it whole, and `pair_tile` spreads the whole line back over both pieces, so
+the record is cut short and its tail becomes a nameless `other` row: 601 such pairs in Longworth
+(~1,150 unusable rows), 626 in Trow 1907 p3, 47 in 1876BPL, 1 in Doggett. Fixed in the import
+before the abbyy8-damaged tier (below). **(2) `entry_rate.is_entry`** rejects 1826 addresses with
+no house number that `CONNECT` misses ("King n. M'Dougal": the apostrophe; "Greenwich",
+"h. Harlem", "French Tanyards"): ~400 start rows with a non-empty address. Ad copy does reach
+`usable`, but little: ~150 records of repeated running lines in 1876BPL ("EXTRA CHOICE TEAS, 50
+Cts. Per Lb." x57) and ~240 in Trow 1907 p3, about 0.2%. LightOn's Markdown notes reach none.
+
 **THE FULL BOOK-SCAN RE-OCR, STAGED ON TORCH (built 2026-10-22).** The tiers' images are ~75 GB,
 which the Mac cannot hold, so Torch fetches and cuts them, and only words and answers cross:
 

@@ -334,20 +334,22 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1905",
-   "hocr_lines": 188624,
-   "wrap_joins": 30070,
-   "candidates": 158554,
+   "hocr_lines": 194724,
+   "wrap_joins": 31866,
+   "candidates": 162858,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 162775,
-    "mark_share": 0.3309,
-    "mode": 2.25,
-    "mode_pairs": 469,
+    "pairs": 164354,
+    "mark_share": 0.432,
+    "mode": 2.0,
+    "mode_pairs": 9546,
     "trough": 1.5,
-    "trough_pairs": 63,
+    "trough_pairs": 1301,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 30918,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -356,78 +358,79 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 1047,
-   "digit_fixes": 5719,
-   "kept": 150956,
-   "keep_rate": 0.9521,
+   "marker_fixes": 19,
+   "digit_fixes": 235,
+   "kept": 152039,
+   "keep_rate": 0.9336,
    "dropped": {
-    "allcaps": 2696,
-    "short": 2586,
-    "bigtype": 1232,
-    "banner": 1033,
-    "nonascii": 48,
+    "allcaps": 4887,
+    "short": 4014,
+    "banner": 1017,
+    "bigtype": 881,
+    "nonascii": 17,
     "pagenum": 3
    },
    "ditto_marks": [
-    "\u2014"
+    "\u2014",
+    "\u2014&"
    ],
-   "ditto_applied": 61151,
+   "ditto_applied": 81985,
    "band": {
-    "leaves_banded": 543,
-    "head": 1331,
-    "body": 147780,
-    "foot": 918,
-    "unbanded": 927
+    "leaves_banded": 542,
+    "head": 2837,
+    "body": 144190,
+    "foot": 3113,
+    "unbanded": 1899
    },
    "top_ad_leaves": [
-    297,
-    51,
     7,
     975,
     1005,
     103,
+    51,
     317,
-    745,
-    1045,
-    573
+    957,
+    765,
+    175,
+    29
    ],
-   "filters_at": "f5deb88-dirty",
-   "derived": "2026-10-06"
+   "filters_at": "b092193-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 13568664,
+  "words_gz_bytes": 12887512,
   "hocr_deleted": true,
   "elapsed_s": 29
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "start_leaf": 9,
   "end_leaf": 1107,
   "first_letter": "H",
   "last_letter": "R",
   "letters_present": "HIJKLMNOPQR",
   "missing_letters": "ABCDEFGSTUVWXYZ",
-  "voting_density": 0.379,
+  "voting_density": 0.386,
   "flags": [
    "partial-alphabet"
   ],
   "start": {
    "leaf": 9,
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p2trow$9/full/!1400,1400/0/default.jpg",
-   "quote": "HalUr Jaioli sluxs r -lilt W \u2022I'.lth"
+   "quote": "Hallar Jacob shoes r 443 W 49th"
   },
   "end": {
    "leaf": 1107,
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1905p2trow$1107/full/!1400,1400/0/default.jpg",
-   "quote": "Rattngllata Louis prnccr 473 Pearl"
+   "quote": "Rattagliata Louis grocer 473 Pearl"
   },
   "sections": [
    {
     "start_leaf": 9,
     "end_leaf": 1107,
-    "voting_leaves": 417,
+    "voting_leaves": 424,
     "first_letter": "H",
     "last_letter": "R",
     "letters": "HIJKLMNOPQR",
@@ -450,17 +453,17 @@
      "J"
     ],
     "start_leaf": 224,
-    "end_leaf": 236,
-    "leaves": 13
+    "end_leaf": 224,
+    "leaves": 1
    },
    {
     "between": [
      "J",
      "K"
     ],
-    "start_leaf": 254,
+    "start_leaf": 276,
     "end_leaf": 322,
-    "leaves": 69
+    "leaves": 47
    },
    {
     "between": [
@@ -528,9 +531,9 @@
   ],
   "letter_blocks": {
    "H": [
-    47,
+    43,
     207,
-    69
+    71
    ],
    "I": [
     209,
@@ -538,14 +541,14 @@
     8
    ],
    "J": [
-    237,
-    253,
-    8
+    225,
+    275,
+    16
    ],
    "K": [
     323,
     419,
-    45
+    46
    ],
    "L": [
     503,
@@ -570,7 +573,7 @@
    "P": [
     973,
     1085,
-    53
+    54
    ],
    "Q": [
     1087,
@@ -607,35 +610,19 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "content_leaves": 554,
-  "fitted_leaves": 350,
-  "read_leaves": 80,
+  "fitted_leaves": 549,
+  "read_leaves": 304,
   "segments": [
    {
-    "first_leaf": 105,
-    "last_leaf": 281,
-    "first_page": 0,
-    "last_page": 88,
-    "leaves": 89,
-    "read": 22
-   },
-   {
-    "first_leaf": 323,
-    "last_leaf": 687,
-    "first_page": 709,
-    "last_page": 891,
-    "leaves": 183,
-    "read": 47
-   },
-   {
-    "first_leaf": 707,
-    "last_leaf": 861,
-    "first_page": 1,
-    "last_page": 78,
-    "leaves": 78,
-    "read": 11
+    "first_leaf": 11,
+    "last_leaf": 1107,
+    "first_page": 553,
+    "last_page": 1101,
+    "leaves": 549,
+    "read": 304
    }
   ],
   "ia_comparison": {
@@ -649,8 +636,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -669,13 +656,13 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 105,
-      "page": 0,
+      "leaf": 11,
+      "page": 553,
       "attestation": "read"
      },
      "last": {
-      "leaf": 861,
-      "page": 78,
+      "leaf": 1107,
+      "page": 1101,
       "attestation": "read"
      }
     }
@@ -698,8 +685,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1905p2trow_listing.jsonl.gz",
   "sections": [
    {
@@ -708,28 +695,43 @@
     "end_leaf": 1107
    }
   ],
-  "kept": 150952,
+  "kept": 152035,
   "dropped": 4,
   "kept_share": 1.0,
   "kept_by_section": {
-   "listing": 150952
+   "listing": 152035
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-23",
   "entry_min": 0.15,
-  "scoped_lines": 811,
+  "scoped_lines": 229,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    10,
-   51,
-   297,
-   677,
-   891,
-   893,
-   975,
-   1005
+   893
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/trowsgeneraldir1905p2trow",
+  "ia_dump": "data/survey_ocr/trowsgeneraldir1905p2trow_words.ia.jsonl.gz",
+  "tiles": 3292,
+  "tiles_answered": 3292,
+  "bleed_retry": 6,
+  "loop_truncated": 1,
+  "table_mode": 181,
+  "pages": 551,
+  "lines_runover": 30918,
+  "lines_model": 187751,
+  "lines_tesseract": 4100,
+  "lines_model-only": 2762,
+  "lines_bleed": 86,
+  "leaves_replaced": 551,
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 551
+  },
+  "dumped": "2026-10-23"
  }
 }

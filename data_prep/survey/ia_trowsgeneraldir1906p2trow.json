@@ -388,20 +388,22 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1906",
-   "hocr_lines": 204713,
-   "wrap_joins": 34514,
-   "candidates": 170199,
+   "hocr_lines": 208967,
+   "wrap_joins": 36296,
+   "candidates": 172671,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 176104,
-    "mark_share": 0.298,
-    "mode": 2.25,
-    "mode_pairs": 483,
-    "trough": 1.75,
-    "trough_pairs": 52,
+    "pairs": 177449,
+    "mark_share": 0.4309,
+    "mode": 2.0,
+    "mode_pairs": 9822,
+    "trough": 1.5,
+    "trough_pairs": 1435,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 35742,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -410,53 +412,53 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 2541,
-   "digit_fixes": 4725,
-   "kept": 162491,
-   "keep_rate": 0.9547,
+   "marker_fixes": 8,
+   "digit_fixes": 135,
+   "kept": 162412,
+   "keep_rate": 0.9406,
    "dropped": {
-    "short": 2811,
-    "allcaps": 2784,
-    "bigtype": 1150,
-    "banner": 933,
-    "nonascii": 26,
-    "pagenum": 4
+    "allcaps": 4934,
+    "short": 3545,
+    "banner": 968,
+    "bigtype": 803,
+    "nonascii": 9
    },
    "ditto_marks": [
-    "\u2014"
+    "\u2014",
+    "\u2014&"
    ],
-   "ditto_applied": 59955,
+   "ditto_applied": 87643,
    "band": {
-    "leaves_banded": 585,
-    "head": 1481,
-    "body": 159204,
-    "foot": 777,
-    "unbanded": 1029
+    "leaves_banded": 581,
+    "head": 2720,
+    "body": 154564,
+    "foot": 3068,
+    "unbanded": 2060
    },
    "top_ad_leaves": [
     7,
     265,
-    33,
-    467,
-    53,
     1085,
-    897,
-    117,
-    887,
-    913
+    603,
+    467,
+    1023,
+    33,
+    751,
+    591,
+    75
    ],
-   "filters_at": "f5deb88-dirty",
-   "derived": "2026-10-06"
+   "filters_at": "b092193-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 14377137,
+  "words_gz_bytes": 13833779,
   "hocr_deleted": true,
   "elapsed_s": 33
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "start_leaf": 9,
   "end_leaf": 1191,
   "first_letter": "G",
@@ -470,12 +472,12 @@
   "start": {
    "leaf": 9,
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$9/full/!1400,1400/0/default.jpg",
-   "quote": "Good work guaranteed"
+   "quote": "Gossel John D grocer 1674 Park av h 1666"
   },
   "end": {
    "leaf": 1191,
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p2trow$1191/full/!1400,1400/0/default.jpg",
-   "quote": "Playtcr Franklin sec 52 Nassau"
+   "quote": "Playter Franklin sec 52 Nassau"
   },
   "sections": [
    {
@@ -513,8 +515,8 @@
      "J"
     ],
     "start_leaf": 320,
-    "end_leaf": 332,
-    "leaves": 13
+    "end_leaf": 320,
+    "leaves": 1
    },
    {
     "between": [
@@ -522,8 +524,8 @@
      "K"
     ],
     "start_leaf": 350,
-    "end_leaf": 424,
-    "leaves": 75
+    "end_leaf": 434,
+    "leaves": 85
    },
    {
     "between": [
@@ -531,17 +533,17 @@
      "L"
     ],
     "start_leaf": 528,
-    "end_leaf": 614,
-    "leaves": 87
+    "end_leaf": 528,
+    "leaves": 1
    },
    {
     "between": [
      "L",
      "M"
     ],
-    "start_leaf": 690,
-    "end_leaf": 694,
-    "leaves": 5
+    "start_leaf": 608,
+    "end_leaf": 692,
+    "leaves": 85
    },
    {
     "between": [
@@ -580,7 +582,7 @@
    "H": [
     127,
     301,
-    77
+    76
    ],
    "I": [
     303,
@@ -588,24 +590,24 @@
     8
    ],
    "J": [
-    333,
+    321,
     349,
-    9
+    11
    ],
    "K": [
-    425,
+    435,
     527,
-    47
+    44
    ],
    "L": [
-    615,
-    689,
-    35
+    529,
+    607,
+    34
    ],
    "M": [
-    695,
+    693,
     779,
-    37
+    38
    ],
    "N": [
     995,
@@ -615,15 +617,15 @@
    "O": [
     1061,
     1111,
-    21
+    22
    ],
    "P": [
     1113,
     1191,
-    35
+    36
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 3,
   "voted_bounds": [
    9,
    1191
@@ -647,12 +649,21 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "content_leaves": 593,
-  "fitted_leaves": 0,
-  "read_leaves": 0,
-  "segments": [],
+  "fitted_leaves": 586,
+  "read_leaves": 122,
+  "segments": [
+   {
+    "first_leaf": 13,
+    "last_leaf": 1189,
+    "first_page": 541,
+    "last_page": 1126,
+    "leaves": 586,
+    "read": 122
+   }
+  ],
   "ia_comparison": {
    "ia_read_leaves": 0,
    "both": 0,
@@ -660,14 +671,12 @@
    "agree_rate": null,
    "ia_page_equals_leaf": null
   },
-  "flags": [
-   "no-folios"
-  ]
+  "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -683,7 +692,19 @@
     "end_leaf": 1191,
     "title": null,
     "leaves": 589,
-    "residential": true
+    "residential": true,
+    "pages": {
+     "first": {
+      "leaf": 13,
+      "page": 541,
+      "attestation": "read"
+     },
+     "last": {
+      "leaf": 1189,
+      "page": 1126,
+      "attestation": "read"
+     }
+    }
    }
   ],
   "has_business": false,
@@ -694,8 +715,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1906p2trow_listing.jsonl.gz",
   "sections": [
    {
@@ -704,21 +725,42 @@
     "end_leaf": 1191
    }
   ],
-  "kept": 162482,
+  "kept": 162403,
   "dropped": 9,
   "kept_share": 0.9999,
   "kept_by_section": {
-   "listing": 162482
+   "listing": 162403
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-23",
   "entry_min": 0.15,
-  "scoped_lines": 265,
+  "scoped_lines": 228,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    1029
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/trowsgeneraldir1906p2trow",
+  "ia_dump": "data/survey_ocr/trowsgeneraldir1906p2trow_words.ia.jsonl.gz",
+  "tiles": 3534,
+  "tiles_answered": 3534,
+  "bleed_retry": 1,
+  "loop_truncated": 0,
+  "table_mode": 183,
+  "pages": 589,
+  "lines_runover": 35742,
+  "lines_model": 204458,
+  "lines_model-only": 1921,
+  "lines_tesseract": 2504,
+  "lines_bleed": 59,
+  "leaves_replaced": 589,
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 589
+  },
+  "dumped": "2026-10-23"
  }
 }

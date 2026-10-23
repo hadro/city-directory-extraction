@@ -396,100 +396,102 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
-   "hocr_lines": 122987,
-   "wrap_joins": 1864,
-   "candidates": 121123,
+   "hocr_lines": 130722,
+   "wrap_joins": 8974,
+   "candidates": 121748,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 100522,
-    "mark_share": 0.2762,
-    "mode": 2.25,
-    "mode_pairs": 3709,
-    "trough": 1.5,
-    "trough_pairs": 137,
+    "pairs": 83630,
+    "mark_share": 0.3972,
+    "mode": 1.75,
+    "mode_pairs": 4651,
+    "trough": 0.75,
+    "trough_pairs": 277,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 9313,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 60,
-    "leaves": 3
+    "words": 0,
+    "leaves": 0
    },
-   "marker_fixes": 3311,
-   "digit_fixes": 2244,
-   "kept": 87296,
-   "keep_rate": 0.7207,
+   "marker_fixes": 5,
+   "digit_fixes": 47,
+   "kept": 86171,
+   "keep_rate": 0.7078,
    "dropped": {
-    "short": 22247,
-    "banner": 7916,
-    "allcaps": 2341,
-    "bigtype": 1273,
-    "nonascii": 45,
-    "pagenum": 5
+    "short": 19622,
+    "banner": 8528,
+    "allcaps": 6454,
+    "bigtype": 935,
+    "nonascii": 31,
+    "pagenum": 7
    },
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 28920,
+   "ditto_applied": 44337,
    "band": {
-    "leaves_banded": 519,
-    "head": 1234,
-    "body": 83533,
-    "foot": 1562,
-    "unbanded": 967
+    "leaves_banded": 498,
+    "head": 3098,
+    "body": 71757,
+    "foot": 6740,
+    "unbanded": 4576
    },
    "top_ad_leaves": [
     295,
-    653,
-    699,
     15,
     331,
-    463,
-    793,
     447,
     963,
-    575
+    463,
+    639,
+    699,
+    211,
+    473
    ],
-   "filters_at": "ef1d8e8-dirty",
-   "derived": "2026-10-06"
+   "filters_at": "b092193-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 7498319,
+  "words_gz_bytes": 7571267,
   "hocr_deleted": true,
   "elapsed_s": 44
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "start_leaf": 15,
   "end_leaf": 1079,
   "first_letter": "A",
   "last_letter": "H",
   "letters_present": "ABCDEFGH",
   "missing_letters": "IJKLMNOPQRSTUVWXYZ",
-  "voting_density": 0.426,
+  "voting_density": 0.428,
   "flags": [
    "partial-alphabet"
   ],
   "start": {
    "leaf": 15,
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$15/full/!1400,1400/0/default.jpg",
-   "quote": "Aalbue John h 1S6 Seeley"
+   "quote": "Acct accountant; agl agricultural; agt agent; Ala Alabama; al alley; art"
   },
   "end": {
    "leaf": 1079,
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc00broo$1079/full/!1400,1400/0/default.jpg",
-   "quote": "Hausler Gustav mgr h 1370 Jef av"
+   "quote": "Hausman Adolf teacher h 276 Sackett"
   },
   "sections": [
    {
     "start_leaf": 15,
     "end_leaf": 1079,
-    "voting_leaves": 454,
+    "voting_leaves": 456,
     "first_letter": "A",
     "last_letter": "H",
     "letters": "ABCDEFGH",
@@ -502,9 +504,9 @@
      "A",
      "B"
     ],
-    "start_leaf": 56,
-    "end_leaf": 152,
-    "leaves": 97
+    "start_leaf": 58,
+    "end_leaf": 94,
+    "leaves": 37
    },
    {
     "between": [
@@ -521,8 +523,8 @@
      "D"
     ],
     "start_leaf": 550,
-    "end_leaf": 550,
-    "leaves": 1
+    "end_leaf": 572,
+    "leaves": 23
    },
    {
     "between": [
@@ -564,38 +566,38 @@
   "letter_blocks": {
    "A": [
     15,
-    55,
+    57,
     20
    ],
    "B": [
-    153,
+    95,
     287,
-    64
+    88
    ],
    "C": [
     467,
     549,
-    36
+    38
    ],
    "D": [
-    551,
+    573,
     681,
-    60
+    48
    ],
    "E": [
     687,
     741,
-    27
+    28
    ],
    "F": [
     743,
     867,
-    55
+    56
    ],
    "G": [
     869,
     977,
-    49
+    50
    ],
    "H": [
     1015,
@@ -603,7 +605,7 @@
     29
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 1,
   "voted_bounds": [
    15,
    1079
@@ -627,19 +629,51 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "content_leaves": 540,
-  "fitted_leaves": 524,
-  "read_leaves": 379,
+  "fitted_leaves": 522,
+  "read_leaves": 397,
   "segments": [
    {
     "first_leaf": 17,
+    "last_leaf": 77,
+    "first_page": 2,
+    "last_page": 32,
+    "leaves": 31,
+    "read": 25
+   },
+   {
+    "first_leaf": 79,
+    "last_leaf": 287,
+    "first_page": 133,
+    "last_page": 237,
+    "leaves": 105,
+    "read": 81
+   },
+   {
+    "first_leaf": 305,
+    "last_leaf": 623,
+    "first_page": 240,
+    "last_page": 399,
+    "leaves": 160,
+    "read": 120
+   },
+   {
+    "first_leaf": 625,
+    "last_leaf": 681,
+    "first_page": 0,
+    "last_page": 28,
+    "leaves": 29,
+    "read": 20
+   },
+   {
+    "first_leaf": 687,
     "last_leaf": 1079,
-    "first_page": 102,
+    "first_page": 429,
     "last_page": 625,
-    "leaves": 524,
-    "read": 379
+    "leaves": 197,
+    "read": 151
    }
   ],
   "ia_comparison": {
@@ -653,8 +687,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -686,7 +720,7 @@
     "pages": {
      "first": {
       "leaf": 17,
-      "page": 102,
+      "page": 2,
       "attestation": "read"
      },
      "last": {
@@ -706,8 +740,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc00broo_listing.jsonl.gz",
   "sections": [
    {
@@ -716,18 +750,18 @@
     "end_leaf": 1079
    }
   ],
-  "kept": 87173,
+  "kept": 86048,
   "dropped": 123,
   "kept_share": 0.9986,
   "kept_by_section": {
-   "listing": 87173
+   "listing": 86048
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-23",
   "entry_min": 0.15,
-  "scoped_lines": 77,
+  "scoped_lines": 79,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    291,
@@ -739,5 +773,26 @@
    683,
    685
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/brooklynnewyorkc00broo",
+  "ia_dump": "data/survey_ocr/brooklynnewyorkc00broo_words.ia.jsonl.gz",
+  "tiles": 2114,
+  "tiles_answered": 2114,
+  "bleed_retry": 8,
+  "loop_truncated": 0,
+  "table_mode": 19,
+  "pages": 533,
+  "lines_runover": 9313,
+  "lines_model": 105680,
+  "lines_tesseract": 18264,
+  "lines_model-only": 6271,
+  "lines_bleed": 352,
+  "leaves_replaced": 533,
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 533
+  },
+  "dumped": "2026-10-23"
  }
 }

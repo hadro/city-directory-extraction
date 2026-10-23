@@ -103,36 +103,6 @@
     "year_published"
    ],
    "note": "Title page leaf 7, librarian's red 'pt. 2' beside the year; both parts share the call number 79 9975 6. Genuine PARTS of one volume, not duplicates. Volume LXXXII for 1905 is consistent with 1906BPL's LXXXIII, so the Upington series numbers cleanly year over year. The copyright line also spells the year out -- 'NINETEEN HUNDRED AND FIVE' -- the OCR-proof channel the plan relies on."
-  },
-  "start_page": {
-   "value": 549,
-   "leaf": 9,
-   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$9/canvas",
-   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$9/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "'549' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
-   "ia_page": null,
-   "page_offset": -540,
-   "listing_flags": [],
-   "doubts": []
-  },
-  "end_page": {
-   "value": 1112,
-   "leaf": 1153,
-   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$1153/canvas",
-   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$1153/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "'1112' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
-   "ia_page": null,
-   "page_offset": 41,
-   "listing_flags": [],
-   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -381,91 +351,92 @@
    "publisher_tag": "upington",
    "publisher_tag_note": null,
    "year_tag": "1905",
-   "hocr_lines": 173714,
-   "wrap_joins": 17631,
-   "candidates": 156083,
+   "hocr_lines": 183701,
+   "wrap_joins": 16344,
+   "candidates": 167357,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 125512,
-    "mark_share": 0.4043,
+    "pairs": 90805,
+    "mark_share": 0.3897,
     "mode": 1.25,
-    "mode_pairs": 4872,
-    "trough": 0.75,
-    "trough_pairs": 466,
+    "mode_pairs": 3268,
+    "trough": 0.5,
+    "trough_pairs": 275,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 16629,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 21,
-    "leaves": 3
+    "words": 0,
+    "leaves": 0
    },
-   "marker_fixes": 152,
-   "digit_fixes": 1451,
-   "kept": 104732,
-   "keep_rate": 0.671,
+   "marker_fixes": 2,
+   "digit_fixes": 178,
+   "kept": 109488,
+   "keep_rate": 0.6542,
    "dropped": {
-    "short": 44342,
-    "allcaps": 4218,
-    "banner": 1458,
-    "bigtype": 986,
-    "nonascii": 337,
-    "pagenum": 10
+    "short": 43709,
+    "allcaps": 10652,
+    "banner": 2540,
+    "bigtype": 631,
+    "nonascii": 328,
+    "pagenum": 9
    },
    "ditto_marks": [
     "\"",
-    "'",
-    "\u2022'"
+    "\u201c"
    ],
-   "ditto_applied": 1801,
+   "ditto_applied": 38720,
    "band": {
-    "leaves_banded": 553,
-    "head": 1650,
-    "body": 87845,
-    "foot": 973,
-    "unbanded": 14264
+    "leaves_banded": 557,
+    "head": 2011,
+    "body": 91266,
+    "foot": 1986,
+    "unbanded": 14225
    },
    "top_ad_leaves": [
     239,
-    133,
     383,
-    165,
     1231,
+    433,
     1155,
-    549,
     1171,
-    193,
-    1159
+    1159,
+    485,
+    7,
+    193
    ],
-   "filters_at": "f5deb88-dirty",
-   "derived": "2026-10-06"
+   "filters_at": "b092193-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 9209339,
+  "words_gz_bytes": 9331733,
   "hocr_deleted": true,
   "elapsed_s": 79
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "start_leaf": 9,
   "end_leaf": 1153,
   "first_letter": "K",
   "last_letter": "Z",
   "letters_present": "KLMNOPQRSTUVWYZ",
   "missing_letters": "ABCDEFGHIJX",
-  "voting_density": 0.372,
+  "voting_density": 0.369,
   "flags": [
    "partial-alphabet"
   ],
   "start": {
    "leaf": 9,
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1905geor$9/full/!1400,1400/0/default.jpg",
-   "quote": "Klett John J pocketbooks h 698 7th av"
+   "quote": "Klett John J pocketbooks h 696 7th av"
   },
   "end": {
    "leaf": 1153,
@@ -476,7 +447,7 @@
    {
     "start_leaf": 9,
     "end_leaf": 1153,
-    "voting_leaves": 426,
+    "voting_leaves": 422,
     "first_letter": "K",
     "last_letter": "Z",
     "letters": "KLMNOPQRSTUVWYZ",
@@ -498,18 +469,18 @@
      "L",
      "M"
     ],
-    "start_leaf": 150,
-    "end_leaf": 314,
-    "leaves": 165
+    "start_leaf": 146,
+    "end_leaf": 152,
+    "leaves": 7
    },
    {
     "between": [
      "M",
      "N"
     ],
-    "start_leaf": 368,
+    "start_leaf": 196,
     "end_leaf": 380,
-    "leaves": 13
+    "leaves": 185
    },
    {
     "between": [
@@ -552,18 +523,18 @@
      "R",
      "S"
     ],
-    "start_leaf": 662,
+    "start_leaf": 666,
     "end_leaf": 666,
-    "leaves": 5
+    "leaves": 1
    },
    {
     "between": [
      "S",
      "T"
     ],
-    "start_leaf": 782,
+    "start_leaf": 800,
     "end_leaf": 930,
-    "leaves": 149
+    "leaves": 131
    },
    {
     "between": [
@@ -589,8 +560,8 @@
      "W"
     ],
     "start_leaf": 1006,
-    "end_leaf": 1006,
-    "leaves": 1
+    "end_leaf": 1024,
+    "leaves": 19
    },
    {
     "between": [
@@ -619,13 +590,13 @@
    ],
    "L": [
     49,
-    149,
-    43
+    145,
+    42
    ],
    "M": [
-    315,
-    367,
-    20
+    153,
+    195,
+    17
    ],
    "N": [
     381,
@@ -635,7 +606,7 @@
    "O": [
     421,
     461,
-    18
+    14
    ],
    "P": [
     465,
@@ -649,13 +620,13 @@
    ],
    "R": [
     559,
-    661,
-    41
+    665,
+    43
    ],
    "S": [
     667,
-    781,
-    52
+    799,
+    58
    ],
    "T": [
     931,
@@ -673,9 +644,9 @@
     16
    ],
    "W": [
-    1007,
+    1025,
     1069,
-    21
+    17
    ],
    "Y": [
     1139,
@@ -688,7 +659,7 @@
     5
    ]
   },
-  "skipped_votes": 9,
+  "skipped_votes": 8,
   "voted_bounds": [
    9,
    1153
@@ -712,43 +683,403 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "content_leaves": 616,
-  "fitted_leaves": 590,
-  "read_leaves": 529,
+  "fitted_leaves": 375,
+  "read_leaves": 204,
   "segments": [
    {
-    "first_leaf": 9,
-    "last_leaf": 179,
-    "first_page": 549,
-    "last_page": 634,
-    "leaves": 86,
-    "read": 79
+    "first_leaf": 27,
+    "last_leaf": 33,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 41,
+    "last_leaf": 49,
+    "first_page": 1,
+    "last_page": 5,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 55,
+    "last_leaf": 97,
+    "first_page": 1,
+    "last_page": 22,
+    "leaves": 22,
+    "read": 5
+   },
+   {
+    "first_leaf": 109,
+    "last_leaf": 147,
+    "first_page": 0,
+    "last_page": 19,
+    "leaves": 20,
+    "read": 4
+   },
+   {
+    "first_leaf": 149,
+    "last_leaf": 161,
+    "first_page": 619,
+    "last_page": 625,
+    "leaves": 7,
+    "read": 3
+   },
+   {
+    "first_leaf": 165,
+    "last_leaf": 181,
+    "first_page": 0,
+    "last_page": 8,
+    "leaves": 9,
+    "read": 3
    },
    {
     "first_leaf": 187,
-    "last_leaf": 781,
-    "first_page": 636,
-    "last_page": 927,
-    "leaves": 292,
-    "read": 256
+    "last_leaf": 201,
+    "first_page": 0,
+    "last_page": 7,
+    "leaves": 8,
+    "read": 4
    },
    {
-    "first_leaf": 789,
-    "last_leaf": 1015,
-    "first_page": 929,
-    "last_page": 1042,
-    "leaves": 114,
-    "read": 108
+    "first_leaf": 203,
+    "last_leaf": 207,
+    "first_page": 0,
+    "last_page": 2,
+    "leaves": 3,
+    "read": 3
    },
    {
-    "first_leaf": 1017,
-    "last_leaf": 1153,
-    "first_page": 1044,
-    "last_page": 1112,
-    "leaves": 69,
-    "read": 61
+    "first_leaf": 211,
+    "last_leaf": 217,
+    "first_page": 2,
+    "last_page": 5,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 233,
+    "last_leaf": 247,
+    "first_page": 0,
+    "last_page": 7,
+    "leaves": 8,
+    "read": 4
+   },
+   {
+    "first_leaf": 253,
+    "last_leaf": 261,
+    "first_page": 0,
+    "last_page": 4,
+    "leaves": 5,
+    "read": 3
+   },
+   {
+    "first_leaf": 275,
+    "last_leaf": 281,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 317,
+    "last_leaf": 327,
+    "first_page": 0,
+    "last_page": 5,
+    "leaves": 6,
+    "read": 3
+   },
+   {
+    "first_leaf": 335,
+    "last_leaf": 339,
+    "first_page": 0,
+    "last_page": 2,
+    "leaves": 3,
+    "read": 3
+   },
+   {
+    "first_leaf": 341,
+    "last_leaf": 365,
+    "first_page": 0,
+    "last_page": 12,
+    "leaves": 13,
+    "read": 5
+   },
+   {
+    "first_leaf": 381,
+    "last_leaf": 393,
+    "first_page": 2,
+    "last_page": 8,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 399,
+    "last_leaf": 407,
+    "first_page": 3,
+    "last_page": 7,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 497,
+    "last_leaf": 515,
+    "first_page": 0,
+    "last_page": 9,
+    "leaves": 10,
+    "read": 4
+   },
+   {
+    "first_leaf": 519,
+    "last_leaf": 525,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 529,
+    "last_leaf": 543,
+    "first_page": 0,
+    "last_page": 7,
+    "leaves": 8,
+    "read": 4
+   },
+   {
+    "first_leaf": 563,
+    "last_leaf": 583,
+    "first_page": 0,
+    "last_page": 10,
+    "leaves": 11,
+    "read": 4
+   },
+   {
+    "first_leaf": 585,
+    "last_leaf": 593,
+    "first_page": 0,
+    "last_page": 4,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 611,
+    "last_leaf": 617,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 621,
+    "last_leaf": 627,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 637,
+    "last_leaf": 661,
+    "first_page": 0,
+    "last_page": 12,
+    "leaves": 13,
+    "read": 4
+   },
+   {
+    "first_leaf": 667,
+    "last_leaf": 671,
+    "first_page": 0,
+    "last_page": 2,
+    "leaves": 3,
+    "read": 3
+   },
+   {
+    "first_leaf": 679,
+    "last_leaf": 685,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 711,
+    "last_leaf": 731,
+    "first_page": 0,
+    "last_page": 10,
+    "leaves": 11,
+    "read": 4
+   },
+   {
+    "first_leaf": 743,
+    "last_leaf": 749,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 755,
+    "last_leaf": 761,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 763,
+    "last_leaf": 769,
+    "first_page": 2,
+    "last_page": 5,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 779,
+    "last_leaf": 789,
+    "first_page": 0,
+    "last_page": 5,
+    "leaves": 6,
+    "read": 5
+   },
+   {
+    "first_leaf": 805,
+    "last_leaf": 819,
+    "first_page": 2,
+    "last_page": 9,
+    "leaves": 8,
+    "read": 6
+   },
+   {
+    "first_leaf": 821,
+    "last_leaf": 845,
+    "first_page": 1,
+    "last_page": 13,
+    "leaves": 13,
+    "read": 4
+   },
+   {
+    "first_leaf": 847,
+    "last_leaf": 853,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 863,
+    "last_leaf": 869,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 871,
+    "last_leaf": 879,
+    "first_page": 970,
+    "last_page": 974,
+    "leaves": 5,
+    "read": 4
+   },
+   {
+    "first_leaf": 911,
+    "last_leaf": 917,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 927,
+    "last_leaf": 937,
+    "first_page": 0,
+    "last_page": 5,
+    "leaves": 6,
+    "read": 3
+   },
+   {
+    "first_leaf": 939,
+    "last_leaf": 949,
+    "first_page": 3,
+    "last_page": 8,
+    "leaves": 6,
+    "read": 3
+   },
+   {
+    "first_leaf": 969,
+    "last_leaf": 973,
+    "first_page": 1,
+    "last_page": 3,
+    "leaves": 3,
+    "read": 3
+   },
+   {
+    "first_leaf": 977,
+    "last_leaf": 983,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 987,
+    "last_leaf": 999,
+    "first_page": 1,
+    "last_page": 7,
+    "leaves": 7,
+    "read": 4
+   },
+   {
+    "first_leaf": 1005,
+    "last_leaf": 1011,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 1015,
+    "last_leaf": 1063,
+    "first_page": 1,
+    "last_page": 25,
+    "leaves": 25,
+    "read": 5
+   },
+   {
+    "first_leaf": 1065,
+    "last_leaf": 1071,
+    "first_page": 0,
+    "last_page": 3,
+    "leaves": 4,
+    "read": 3
+   },
+   {
+    "first_leaf": 1089,
+    "last_leaf": 1103,
+    "first_page": 1,
+    "last_page": 8,
+    "leaves": 8,
+    "read": 4
+   },
+   {
+    "first_leaf": 1105,
+    "last_leaf": 1121,
+    "first_page": 0,
+    "last_page": 8,
+    "leaves": 9,
+    "read": 3
+   },
+   {
+    "first_leaf": 1135,
+    "last_leaf": 1141,
+    "first_page": 2,
+    "last_page": 5,
+    "leaves": 4,
+    "read": 3
    },
    {
     "first_leaf": 1173,
@@ -761,17 +1092,17 @@
   ],
   "ia_comparison": {
    "ia_read_leaves": 1,
-   "both": 1,
+   "both": 0,
    "agree": 0,
-   "agree_rate": 0.0,
+   "agree_rate": null,
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -790,13 +1121,13 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 9,
-      "page": 549,
+      "leaf": 27,
+      "page": 0,
       "attestation": "read"
      },
      "last": {
-      "leaf": 1153,
-      "page": 1112,
+      "leaf": 1141,
+      "page": 5,
       "attestation": "read"
      }
     }
@@ -848,8 +1179,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1905geor_listing.jsonl.gz",
   "sections": [
    {
@@ -858,37 +1189,52 @@
     "end_leaf": 1153
    }
   ],
-  "kept": 91344,
+  "kept": 96100,
   "dropped": 13388,
-  "kept_share": 0.8722,
+  "kept_share": 0.8777,
   "kept_by_section": {
-   "listing": 91344
+   "listing": 96100
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-23",
   "entry_min": 0.15,
-  "scoped_lines": 330,
+  "scoped_lines": 180,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
-   133,
-   165,
    181,
    183,
-   193,
    197,
    199,
-   239,
    383,
    433,
    435,
    485,
    487,
-   549,
-   557,
    785,
    787
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/brooklynnewyorkc1905geor",
+  "ia_dump": "data/survey_ocr/brooklynnewyorkc1905geor_words.ia.jsonl.gz",
+  "tiles": 2264,
+  "tiles_answered": 2264,
+  "bleed_retry": 15,
+  "loop_truncated": 1,
+  "table_mode": 538,
+  "pages": 573,
+  "lines_runover": 16629,
+  "lines_model": 114929,
+  "lines_tesseract": 40430,
+  "lines_model-only": 9970,
+  "lines_bleed": 732,
+  "leaves_replaced": 573,
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 573
+  },
+  "dumped": "2026-10-23"
  }
 }

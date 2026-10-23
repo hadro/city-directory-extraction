@@ -61,36 +61,6 @@
    "quote": "MPLNGTON'S / GENERAL DIRECTORY / OF THE BOROUGH OF / BROOKLYN / CITY OF NEW YORK",
    "method": "hocr-text",
    "confidence": "medium"
-  },
-  "start_page": {
-   "value": 583,
-   "leaf": 9,
-   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1909geor$9/canvas",
-   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1909geor$9/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "'583' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
-   "ia_page": null,
-   "page_offset": -574,
-   "listing_flags": [],
-   "doubts": []
-  },
-  "end_page": {
-   "value": 1162,
-   "leaf": 1165,
-   "canvas": "https://iiif.archive.org/iiif/brooklynnewyorkc1909geor$1165/canvas",
-   "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1909geor$1165/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "'1162' in the foot margin",
-   "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
-   "ia_page": null,
-   "page_offset": 3,
-   "listing_flags": [],
-   "doubts": []
   }
  },
  "survey_status": "frontmatter-done",
@@ -333,106 +303,103 @@
    "publisher_tag": "upington",
    "publisher_tag_note": null,
    "year_tag": "1909",
-   "hocr_lines": 175592,
-   "wrap_joins": 19565,
-   "candidates": 156027,
+   "hocr_lines": 186093,
+   "wrap_joins": 18078,
+   "candidates": 168015,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 128458,
-    "mark_share": 0.4131,
+    "pairs": 104997,
+    "mark_share": 0.4054,
     "mode": 1.5,
-    "mode_pairs": 5096,
+    "mode_pairs": 4618,
     "trough": 0.5,
-    "trough_pairs": 306,
+    "trough_pairs": 283,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 17092,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 78,
-    "leaves": 2
+    "words": 10,
+    "leaves": 1
    },
-   "marker_fixes": 1229,
-   "digit_fixes": 2034,
-   "kept": 109478,
-   "keep_rate": 0.7017,
+   "marker_fixes": 4,
+   "digit_fixes": 340,
+   "kept": 113950,
+   "keep_rate": 0.6782,
    "dropped": {
-    "short": 38632,
-    "banner": 3307,
-    "allcaps": 2903,
-    "bigtype": 1352,
-    "nonascii": 341,
-    "pagenum": 14
+    "short": 40543,
+    "allcaps": 7895,
+    "banner": 4200,
+    "bigtype": 1094,
+    "nonascii": 320,
+    "pagenum": 13
    },
    "ditto_marks": [
     "\"",
-    "'\u2022",
-    "\u2022'",
-    "\u2022\u2022",
-    "\u2022\u25a0",
-    "\u25a0'",
-    "\u25a0\u2022"
+    "\u201c"
    ],
-   "ditto_applied": 7561,
+   "ditto_applied": 25894,
    "band": {
-    "leaves_banded": 568,
-    "head": 1105,
-    "body": 89731,
-    "foot": 1160,
-    "unbanded": 17482
+    "leaves_banded": 572,
+    "head": 1850,
+    "body": 92639,
+    "foot": 2088,
+    "unbanded": 17373
    },
    "top_ad_leaves": [
     7,
     1175,
     1173,
     1279,
-    593,
-    697,
     1277,
-    911,
     1171,
-    1187
+    1187,
+    561,
+    1265,
+    1179
    ],
-   "filters_at": "f5deb88-dirty",
-   "derived": "2026-10-06"
+   "filters_at": "b092193-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 9428678,
+  "words_gz_bytes": 9318374,
   "hocr_deleted": true,
   "elapsed_s": 41
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "start_leaf": 9,
   "end_leaf": 1165,
   "first_letter": "L",
   "last_letter": "Z",
   "letters_present": "LMNOPQRSTUVWYZ",
   "missing_letters": "ABCDEFGHIJKX",
-  "voting_density": 0.356,
+  "voting_density": 0.375,
   "flags": [
    "partial-alphabet"
   ],
   "start": {
    "leaf": 9,
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1909geor$9/full/!1400,1400/0/default.jpg",
-   "quote": "Loans \u2014 Estate Managers"
+   "quote": "Landa Samuel tailor B'wick av c Halsey h"
   },
   "end": {
    "leaf": 1165,
    "image": "https://iiif.archive.org/iiif/brooklynnewyorkc1909geor$1165/full/!1400,1400/0/default.jpg",
-   "quote": "Zysman Leon salesman h 1526 Tlst"
+   "quote": "Zysman Leon salesman h 1526 71st"
   },
   "sections": [
    {
     "start_leaf": 9,
     "end_leaf": 1165,
-    "voting_leaves": 412,
+    "voting_leaves": 434,
     "first_letter": "L",
     "last_letter": "Z",
     "letters": "LMNOPQRSTUVWYZ",
@@ -445,18 +412,18 @@
      "L",
      "M"
     ],
-    "start_leaf": 102,
+    "start_leaf": 100,
     "end_leaf": 104,
-    "leaves": 3
+    "leaves": 5
    },
    {
     "between": [
      "M",
      "N"
     ],
-    "start_leaf": 166,
+    "start_leaf": 144,
     "end_leaf": 328,
-    "leaves": 163
+    "leaves": 185
    },
    {
     "between": [
@@ -482,8 +449,8 @@
      "Q"
     ],
     "start_leaf": 504,
-    "end_leaf": 506,
-    "leaves": 3
+    "end_leaf": 504,
+    "leaves": 1
    },
    {
     "between": [
@@ -491,17 +458,17 @@
      "R"
     ],
     "start_leaf": 508,
-    "end_leaf": 530,
-    "leaves": 23
+    "end_leaf": 562,
+    "leaves": 55
    },
    {
     "between": [
      "R",
      "S"
     ],
-    "start_leaf": 550,
+    "start_leaf": 632,
     "end_leaf": 632,
-    "leaves": 83
+    "leaves": 1
    },
    {
     "between": [
@@ -509,8 +476,8 @@
      "T"
     ],
     "start_leaf": 772,
-    "end_leaf": 912,
-    "leaves": 141
+    "end_leaf": 884,
+    "leaves": 113
    },
    {
     "between": [
@@ -518,17 +485,17 @@
      "U"
     ],
     "start_leaf": 948,
-    "end_leaf": 954,
-    "leaves": 7
+    "end_leaf": 948,
+    "leaves": 1
    },
    {
     "between": [
      "U",
      "V"
     ],
-    "start_leaf": 956,
+    "start_leaf": 958,
     "end_leaf": 958,
-    "leaves": 3
+    "leaves": 1
    },
    {
     "between": [
@@ -544,9 +511,9 @@
      "W",
      "Y"
     ],
-    "start_leaf": 1088,
+    "start_leaf": 1070,
     "end_leaf": 1144,
-    "leaves": 57
+    "leaves": 75
    },
    {
     "between": [
@@ -561,18 +528,18 @@
   "letter_blocks": {
    "L": [
     57,
-    101,
+    99,
     21
    ],
    "M": [
     105,
-    165,
-    26
+    143,
+    20
    ],
    "N": [
     329,
     375,
-    19
+    17
    ],
    "O": [
     377,
@@ -582,42 +549,42 @@
    "P": [
     417,
     503,
-    39
+    40
    ],
    "Q": [
+    505,
     507,
-    507,
-    1
+    2
    ],
    "R": [
-    531,
-    549,
-    7
+    563,
+    631,
+    26
    ],
    "S": [
     633,
     771,
-    60
+    62
    ],
    "T": [
-    913,
+    885,
     947,
-    17
+    28
    ],
    "U": [
-    955,
-    955,
-    1
+    949,
+    957,
+    5
    ],
    "V": [
     959,
     991,
-    17
+    16
    ],
    "W": [
     1005,
-    1087,
-    34
+    1069,
+    24
    ],
    "Y": [
     1145,
@@ -630,7 +597,7 @@
     6
    ]
   },
-  "skipped_votes": 6,
+  "skipped_votes": 7,
   "voted_bounds": [
    9,
    1165
@@ -654,27 +621,171 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "content_leaves": 641,
-  "fitted_leaves": 620,
-  "read_leaves": 462,
+  "fitted_leaves": 605,
+  "read_leaves": 391,
   "segments": [
    {
-    "first_leaf": 9,
-    "last_leaf": 61,
-    "first_page": 583,
-    "last_page": 609,
-    "leaves": 27,
-    "read": 14
+    "first_leaf": 17,
+    "last_leaf": 41,
+    "first_page": 587,
+    "last_page": 599,
+    "leaves": 13,
+    "read": 7
+   },
+   {
+    "first_leaf": 43,
+    "last_leaf": 59,
+    "first_page": 0,
+    "last_page": 8,
+    "leaves": 9,
+    "read": 8
    },
    {
     "first_leaf": 63,
-    "last_leaf": 1165,
-    "first_page": 611,
-    "last_page": 1162,
-    "leaves": 552,
-    "read": 427
+    "last_leaf": 219,
+    "first_page": 11,
+    "last_page": 89,
+    "leaves": 79,
+    "read": 39
+   },
+   {
+    "first_leaf": 221,
+    "last_leaf": 237,
+    "first_page": 0,
+    "last_page": 8,
+    "leaves": 9,
+    "read": 5
+   },
+   {
+    "first_leaf": 241,
+    "last_leaf": 367,
+    "first_page": 0,
+    "last_page": 63,
+    "leaves": 64,
+    "read": 49
+   },
+   {
+    "first_leaf": 369,
+    "last_leaf": 387,
+    "first_page": 764,
+    "last_page": 773,
+    "leaves": 10,
+    "read": 8
+   },
+   {
+    "first_leaf": 389,
+    "last_leaf": 439,
+    "first_page": 74,
+    "last_page": 99,
+    "leaves": 26,
+    "read": 18
+   },
+   {
+    "first_leaf": 441,
+    "last_leaf": 493,
+    "first_page": 300,
+    "last_page": 326,
+    "leaves": 27,
+    "read": 13
+   },
+   {
+    "first_leaf": 497,
+    "last_leaf": 535,
+    "first_page": 828,
+    "last_page": 847,
+    "leaves": 20,
+    "read": 12
+   },
+   {
+    "first_leaf": 537,
+    "last_leaf": 585,
+    "first_page": 48,
+    "last_page": 72,
+    "leaves": 25,
+    "read": 13
+   },
+   {
+    "first_leaf": 587,
+    "last_leaf": 623,
+    "first_page": 873,
+    "last_page": 891,
+    "leaves": 19,
+    "read": 10
+   },
+   {
+    "first_leaf": 625,
+    "last_leaf": 639,
+    "first_page": 392,
+    "last_page": 399,
+    "leaves": 8,
+    "read": 4
+   },
+   {
+    "first_leaf": 641,
+    "last_leaf": 753,
+    "first_page": 0,
+    "last_page": 56,
+    "leaves": 57,
+    "read": 35
+   },
+   {
+    "first_leaf": 755,
+    "last_leaf": 781,
+    "first_page": 957,
+    "last_page": 970,
+    "leaves": 14,
+    "read": 9
+   },
+   {
+    "first_leaf": 783,
+    "last_leaf": 829,
+    "first_page": 71,
+    "last_page": 94,
+    "leaves": 24,
+    "read": 14
+   },
+   {
+    "first_leaf": 841,
+    "last_leaf": 1089,
+    "first_page": 0,
+    "last_page": 124,
+    "leaves": 125,
+    "read": 100
+   },
+   {
+    "first_leaf": 1091,
+    "last_leaf": 1105,
+    "first_page": 25,
+    "last_page": 32,
+    "leaves": 8,
+    "read": 5
+   },
+   {
+    "first_leaf": 1107,
+    "last_leaf": 1121,
+    "first_page": 133,
+    "last_page": 140,
+    "leaves": 8,
+    "read": 7
+   },
+   {
+    "first_leaf": 1123,
+    "last_leaf": 1147,
+    "first_page": 41,
+    "last_page": 53,
+    "leaves": 13,
+    "read": 9
+   },
+   {
+    "first_leaf": 1149,
+    "last_leaf": 1159,
+    "first_page": 154,
+    "last_page": 159,
+    "leaves": 6,
+    "read": 5
    },
    {
     "first_leaf": 1193,
@@ -720,8 +831,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -740,13 +851,13 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 9,
-      "page": 583,
+      "leaf": 17,
+      "page": 587,
       "attestation": "read"
      },
      "last": {
-      "leaf": 1165,
-      "page": 1162,
+      "leaf": 1159,
+      "page": 159,
       "attestation": "read"
      }
     }
@@ -807,8 +918,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1909geor_listing.jsonl.gz",
   "sections": [
    {
@@ -817,28 +928,43 @@
     "end_leaf": 1165
    }
   ],
-  "kept": 92835,
+  "kept": 97307,
   "dropped": 16643,
-  "kept_share": 0.848,
+  "kept_share": 0.8539,
   "kept_by_section": {
-   "listing": 92835
+   "listing": 97307
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-23",
   "entry_min": 0.15,
-  "scoped_lines": 318,
+  "scoped_lines": 172,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    351,
-   551,
-   593,
-   611,
-   697,
-   911,
-   999,
-   1047
+   999
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/brooklynnewyorkc1909geor",
+  "ia_dump": "data/survey_ocr/brooklynnewyorkc1909geor_words.ia.jsonl.gz",
+  "tiles": 2314,
+  "tiles_answered": 2314,
+  "bleed_retry": 9,
+  "loop_truncated": 2,
+  "table_mode": 42,
+  "pages": 579,
+  "lines_runover": 17092,
+  "lines_model": 118605,
+  "lines_tesseract": 28173,
+  "lines_model-only": 9280,
+  "lines_bleed": 338,
+  "leaves_replaced": 579,
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 579
+  },
+  "dumped": "2026-10-23"
  }
 }

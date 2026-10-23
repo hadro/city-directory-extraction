@@ -344,20 +344,22 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1903",
-   "hocr_lines": 178355,
-   "wrap_joins": 27737,
-   "candidates": 150618,
+   "hocr_lines": 182953,
+   "wrap_joins": 29298,
+   "candidates": 153655,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 149817,
-    "mark_share": 0.2434,
+    "pairs": 151768,
+    "mark_share": 0.189,
     "mode": 1.25,
-    "mode_pairs": 2039,
+    "mode_pairs": 9674,
     "trough": 0.75,
-    "trough_pairs": 340,
+    "trough_pairs": 435,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 24674,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -366,59 +368,60 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 204,
-   "kept": 136266,
-   "keep_rate": 0.9047,
+   "marker_fixes": 16,
+   "kept": 136542,
+   "keep_rate": 0.8886,
    "dropped": {
-    "short": 6366,
-    "banner": 4099,
-    "allcaps": 2709,
-    "bigtype": 728,
-    "nonascii": 446,
-    "pagenum": 4
+    "short": 7380,
+    "allcaps": 4847,
+    "banner": 4055,
+    "nonascii": 426,
+    "bigtype": 402,
+    "pagenum": 3
    },
    "ditto_marks": [
-    "\u2014"
+    "\u2014",
+    "\u2014&"
    ],
-   "ditto_applied": 41133,
+   "ditto_applied": 31672,
    "band": {
-    "leaves_banded": 420,
-    "head": 1389,
-    "body": 111046,
-    "foot": 858,
-    "unbanded": 22973
+    "leaves_banded": 374,
+    "head": 13945,
+    "body": 85971,
+    "foot": 1555,
+    "unbanded": 35071
    },
    "top_ad_leaves": [
     847,
     1194,
     897,
-    805,
     851,
     911,
     865,
     913,
     845,
-    823
+    823,
+    829
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "b092193-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 11616070,
+  "words_gz_bytes": 11128950,
   "hocr_deleted": true,
   "elapsed_s": 28
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "start_leaf": 7,
   "end_leaf": 805,
   "first_letter": "R",
   "last_letter": "Z",
   "letters_present": "RSTUVWYZ",
   "missing_letters": "ABCDEFGHIJKLMNOPQX",
-  "voting_density": 0.404,
+  "voting_density": 0.406,
   "flags": [
    "multi-section",
    "partial-alphabet"
@@ -426,18 +429,18 @@
   "start": {
    "leaf": 7,
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p3trow$7/full/!1400,1400/0/default.jpg",
-   "quote": "Ressmeyer Hy F v pres 1945 Park ay h"
+   "quote": "Ressmeyer Hy F v pres 1945 Park av h"
   },
   "end": {
    "leaf": 805,
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p3trow$805/full/!1400,1400/0/default.jpg",
-   "quote": "Zysman Hy ,lerk k 85 Lesox \u00bb,"
+   "quote": "Zysman Hy clerk h 85 Lerox av"
   },
   "sections": [
    {
     "start_leaf": 7,
     "end_leaf": 805,
-    "voting_leaves": 323,
+    "voting_leaves": 324,
     "first_letter": "R",
     "last_letter": "Z",
     "letters": "RSTUVWYZ",
@@ -496,17 +499,17 @@
      "W"
     ],
     "start_leaf": 596,
-    "end_leaf": 646,
-    "leaves": 51
+    "end_leaf": 612,
+    "leaves": 17
    },
    {
     "between": [
      "W",
      "Y"
     ],
-    "start_leaf": 694,
+    "start_leaf": 718,
     "end_leaf": 778,
-    "leaves": 85
+    "leaves": 61
    },
    {
     "between": [
@@ -522,12 +525,12 @@
    "R": [
     7,
     67,
-    26
+    25
    ],
    "S": [
     119,
     313,
-    90
+    89
    ],
    "T": [
     459,
@@ -545,9 +548,9 @@
     19
    ],
    "W": [
-    647,
-    693,
-    21
+    613,
+    717,
+    40
    ],
    "Y": [
     779,
@@ -560,7 +563,7 @@
     8
    ]
   },
-  "skipped_votes": 1,
+  "skipped_votes": 3,
   "voted_bounds": [
    7,
    805
@@ -572,7 +575,7 @@
   "cross_check": {
    "source": "lines",
    "start_leaf": 7,
-   "end_leaf": 803
+   "end_leaf": 805
   },
   "params": {
    "min_chars": 400,
@@ -584,19 +587,19 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "content_leaves": 594,
-  "fitted_leaves": 568,
-  "read_leaves": 297,
+  "fitted_leaves": 569,
+  "read_leaves": 520,
   "segments": [
    {
     "first_leaf": 7,
-    "last_leaf": 803,
+    "last_leaf": 805,
     "first_page": 1156,
-    "last_page": 1554,
-    "leaves": 399,
-    "read": 157
+    "last_page": 1555,
+    "leaves": 400,
+    "read": 380
    },
    {
     "first_leaf": 831,
@@ -626,8 +629,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -651,8 +654,8 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 803,
-      "page": 1554,
+      "leaf": 805,
+      "page": 1555,
       "attestation": "read"
      }
     }
@@ -854,8 +857,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1903p3trow_listing.jsonl.gz",
   "sections": [
    {
@@ -864,11 +867,32 @@
     "end_leaf": 805
    }
   ],
-  "kept": 106213,
+  "kept": 106489,
   "dropped": 30053,
-  "kept_share": 0.7795,
+  "kept_share": 0.7799,
   "kept_by_section": {
-   "listing": 106213
+   "listing": 106489
   }
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/trowsgeneraldir1903p3trow",
+  "ia_dump": "data/survey_ocr/trowsgeneraldir1903p3trow_words.ia.jsonl.gz",
+  "tiles": 2396,
+  "tiles_answered": 2396,
+  "bleed_retry": 1,
+  "loop_truncated": 0,
+  "table_mode": 489,
+  "pages": 400,
+  "lines_runover": 24674,
+  "lines_model": 134867,
+  "lines_model-only": 1658,
+  "lines_tesseract": 3161,
+  "lines_bleed": 62,
+  "leaves_replaced": 400,
+  "layers": {
+   "ia-words (IA OCR)": 400
+  },
+  "dumped": "2026-10-23"
  }
 }

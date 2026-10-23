@@ -1974,6 +1974,52 @@ no house number that `CONNECT` misses ("King n. M'Dougal": the apostrophe; "Gree
 `usable`, but little: ~150 records of repeated running lines in 1876BPL ("EXTRA CHOICE TEAS, 50
 Cts. Per Lb." x57) and ~240 in Trow 1907 p3, about 0.2%. LightOn's Markdown notes reach none.
 
+**The same-row fix (`de9521a`).** `boxed_lines` groups a column's side-by-side pieces into rows
+(middles within half the shorter's height, heights within 2x) and orders them left to right;
+`pair_tile` joins a row's pieces only where ONE model line covers them, so the ~30,000 specks and
+margin marks beside lines in a Brooklyn volume stay apart. Canary re-dump, same-row model-line
+pairs: Longworth 1826 1,159 -> 41 (1,973 fewer lines), Trow 1907 p3 1,347 -> 292. Pilot, exact
+against gold: IA's words 83.6 -> 83.7%, fresh tesseract 82.8 -> 83.0%, no row lost on either. The
+first version lost two Ogden rows, because a three-line margin bracket joined the middle line's
+row and pulled it above the line before; the height rule is what fixed that. The canary's own
+dumps and its 4B pass predate the fix; re-import those four before they are staged again.
+
+**abbyy8-damaged tier imported 2026-10-23** (NYU's answers: 96,378 tiles, 16 EMPTY, 0.24%
+looped; 151 bleed-retried keep a `.loop.raw.txt`, 79 truncated keep none). The four volumes whose
+IA OCR failed page by page got the tesseract layer on the Mac first (`reocr_books.py tesseract`,
+1,923 pages, ~45 min a volume), taken page by page by `better_layer`. historical-ocr-eval
+suggested Indra instead (~10x faster on CPU, clean detection on Trow but for word-space cutting,
+which the same-row fix absorbs); no head-to-head against tesseract exists and its weights are
+OpenRAIL-M, so tesseract stays until a tier needs far more pages. `facts --against HEAD`:
+
+| | scoped lines before -> after | model-only |
+|---|---|---|
+| trowsgeneraldir1908p2trow (tesseract layer) | 43,595 -> **139,654** | 1.9% |
+| trowsgeneraldir1908p3trow (tesseract layer) | 57,655 -> **130,727** | 1.2% |
+| trowsgeneraldire19073trow (tesseract layer) | 40,654 -> **123,804** | 3.9% |
+| trowsgeneraldire19091trow (tesseract layer) | 38,110 -> **140,670** | 3.1% |
+| the other 25 Trow parts | within +-1.5% each | 0.7-1.4% |
+| Brooklyn 1905 p1, c1905, c1909, c1910, 1909 p1 | +4 to +5% | 6.2-8.0% |
+| Brooklyn 1910 p2, c1912, c00, 1912 p3 | -1 to -3% (joins 4-5x: LightOn's `cont` joins run-overs IA left apart) | 5.2-6.0% |
+| Longworth 1798 | 8,874 -> 9,026 | 2.0% |
+
+No volume is over the 10% model-only flag. The 1903 edition prints 405,264 names for all three
+parts: scoped lines 409,787 -> 412,719 (1.018 per name). **Three listing starts moved, each a
+correction:** Trow 1903 p1 31 -> 33 and 1907 p1 105 -> 107 (the old start was the abbreviations /
+"Names Received too Late" page), and Trow 1909 vol 1 161 -> 95, where IA's failed OCR had lost the
+whole early A section (leaves 97-159, ~9,000 lines; flags `sparse`, `edge-disagreement` gone). Its
+new start, 95, is that same abbreviations page, so it is probably two leaves early.
+
+Table mode ran high on five volumes, a layout effect: Brooklyn 1905 p1 and c1905 ~25% of tiles,
+Trow 1903 p1-p3 ~20% (bench: 10 of 138). LightOn reads a plain listing column as an HTML table
+with an invented header; `untable` recovers one entry per line, with two side effects: the ", "
+it restores at a field cut lands after the NAME in these styles ("Dorfman Dora, dry gds 50 Livonia
+av"; the page prints no comma), and an HTML `<thead>` row survives as a line: 76 in the tier
+("Name, Address" 34, "Name, Occupation, Address" 20). Neither has an address shape, so they should
+not reach `usable`; both are fixable by re-import alone (it re-flattens from `.raw.txt`). The two
+Brooklyn 1905s also leave the most IA lines unpaired (38-40k against 17-28k): partly specks, perhaps
+entries table mode dropped; read a few pages against their images before the 4B.
+
 **THE FULL BOOK-SCAN RE-OCR, STAGED ON TORCH (built 2026-10-22).** The tiers' images are ~75 GB,
 which the Mac cannot hold, so Torch fetches and cuts them, and only words and answers cross:
 

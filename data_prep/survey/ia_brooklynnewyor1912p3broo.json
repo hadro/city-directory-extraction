@@ -146,17 +146,17 @@
    }
   },
   "end_page": {
-   "value": 1521,
+   "value": 521,
    "leaf": 743,
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$743/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$743/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'1521' in the foot margin",
+   "quote": "'521' in the foot margin",
    "method": "hocr-geometry",
    "confidence": "high",
    "attestation": "read",
    "ia_page": null,
-   "page_offset": -778,
+   "page_offset": 222,
    "listing_flags": [],
    "doubts": []
   }
@@ -409,51 +409,52 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
-   "hocr_lines": 108976,
-   "wrap_joins": 1831,
-   "candidates": 107145,
+   "hocr_lines": 113320,
+   "wrap_joins": 7208,
+   "candidates": 106112,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 88240,
-    "mark_share": 0.1984,
+    "pairs": 76863,
+    "mark_share": 0.3299,
     "mode": 1.25,
-    "mode_pairs": 3147,
+    "mode_pairs": 3765,
     "trough": 0.75,
-    "trough_pairs": 723,
+    "trough_pairs": 614,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 6672,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 62,
-    "leaves": 3
+    "words": 0,
+    "leaves": 0
    },
-   "marker_fixes": 5558,
-   "digit_fixes": 2554,
-   "kept": 74471,
-   "keep_rate": 0.695,
+   "marker_fixes": 85,
+   "digit_fixes": 725,
+   "kept": 72666,
+   "keep_rate": 0.6848,
    "dropped": {
-    "short": 17035,
-    "banner": 7784,
-    "allcaps": 6683,
-    "bigtype": 1128,
-    "nonascii": 39,
-    "pagenum": 5
+    "short": 14524,
+    "allcaps": 9648,
+    "banner": 8323,
+    "bigtype": 914,
+    "nonascii": 33,
+    "pagenum": 4
    },
    "ditto_marks": [
-    "-",
     "\u2014"
    ],
-   "ditto_applied": 17402,
+   "ditto_applied": 31932,
    "band": {
-    "leaves_banded": 360,
-    "head": 1509,
-    "body": 58275,
-    "foot": 1150,
-    "unbanded": 13537
+    "leaves_banded": 351,
+    "head": 2138,
+    "body": 50532,
+    "foot": 4937,
+    "unbanded": 15059
    },
    "top_ad_leaves": [
     999,
@@ -467,25 +468,25 @@
     801,
     1015
    ],
-   "filters_at": "ef1d8e8-dirty",
-   "derived": "2026-10-06"
+   "filters_at": "b092193-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 6473770,
+  "words_gz_bytes": 6484227,
   "hocr_deleted": true,
   "elapsed_s": 16
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "start_leaf": 9,
   "end_leaf": 743,
   "first_letter": "R",
   "last_letter": "Z",
   "letters_present": "RSTUVWYZ",
   "missing_letters": "ABCDEFGHIJKLMNOPQX",
-  "voting_density": 0.383,
+  "voting_density": 0.411,
   "flags": [
    "multi-section",
    "partial-alphabet"
@@ -493,18 +494,18 @@
   "start": {
    "leaf": 9,
    "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$9/full/!1400,1400/0/default.jpg",
-   "quote": "Rcyorsun Chus II machinist li 1941 r>-J,l"
+   "quote": "Reyerson Chas H machintst h 1941 52d"
   },
   "end": {
    "leaf": 743,
    "image": "https://iiif.archive.org/iiif/brooklynnewyor1912p3broo$743/full/!1400,1400/0/default.jpg",
-   "quote": "Zysman Leon salesman li 1520 71st"
+   "quote": "Zysman Leon salesman h 1526 71st"
   },
   "sections": [
    {
     "start_leaf": 11,
     "end_leaf": 743,
-    "voting_leaves": 281,
+    "voting_leaves": 301,
     "first_letter": "R",
     "last_letter": "Z",
     "letters": "RSTUVWYZ",
@@ -526,9 +527,9 @@
      "R",
      "S"
     ],
-    "start_leaf": 106,
+    "start_leaf": 100,
     "end_leaf": 106,
-    "leaves": 1
+    "leaves": 7
    },
    {
     "between": [
@@ -553,9 +554,9 @@
      "U",
      "V"
     ],
-    "start_leaf": 502,
+    "start_leaf": 510,
     "end_leaf": 510,
-    "leaves": 9
+    "leaves": 1
    },
    {
     "between": [
@@ -571,9 +572,9 @@
      "W",
      "Y"
     ],
-    "start_leaf": 636,
+    "start_leaf": 662,
     "end_leaf": 718,
-    "leaves": 83
+    "leaves": 57
    },
    {
     "between": [
@@ -587,24 +588,24 @@
   ],
   "letter_blocks": {
    "R": [
-    51,
-    105,
-    20
+    11,
+    99,
+    39
    ],
    "S": [
     107,
     287,
-    78
+    80
    ],
    "T": [
     423,
     499,
-    34
+    36
    ],
    "U": [
     501,
-    501,
-    1
+    509,
+    4
    ],
    "V": [
     511,
@@ -613,8 +614,8 @@
    ],
    "W": [
     573,
-    635,
-    27
+    661,
+    38
    ],
    "Y": [
     719,
@@ -627,7 +628,7 @@
     6
    ]
   },
-  "skipped_votes": 4,
+  "skipped_votes": 0,
   "voted_bounds": [
    11,
    743
@@ -640,7 +641,7 @@
   },
   "cross_check": {
    "source": "lines",
-   "start_leaf": 11,
+   "start_leaf": 9,
    "end_leaf": 743
   },
   "params": {
@@ -653,43 +654,35 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "content_leaves": 529,
-  "fitted_leaves": 504,
-  "read_leaves": 274,
+  "fitted_leaves": 508,
+  "read_leaves": 266,
   "segments": [
    {
     "first_leaf": 9,
-    "last_leaf": 15,
-    "first_page": 1,
-    "last_page": 4,
-    "leaves": 4,
-    "read": 3
-   },
-   {
-    "first_leaf": 17,
-    "last_leaf": 97,
-    "first_page": 158,
-    "last_page": 198,
-    "leaves": 41,
-    "read": 19
-   },
-   {
-    "first_leaf": 105,
-    "last_leaf": 743,
-    "first_page": 1202,
-    "last_page": 1521,
-    "leaves": 320,
-    "read": 169
-   },
-   {
-    "first_leaf": 747,
-    "last_leaf": 773,
-    "first_page": 523,
-    "last_page": 536,
-    "leaves": 14,
+    "last_leaf": 29,
+    "first_page": 54,
+    "last_page": 64,
+    "leaves": 11,
     "read": 6
+   },
+   {
+    "first_leaf": 31,
+    "last_leaf": 53,
+    "first_page": 1165,
+    "last_page": 1176,
+    "leaves": 12,
+    "read": 7
+   },
+   {
+    "first_leaf": 55,
+    "last_leaf": 773,
+    "first_page": 177,
+    "last_page": 536,
+    "leaves": 360,
+    "read": 176
    },
    {
     "first_leaf": 775,
@@ -735,8 +728,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -756,12 +749,12 @@
     "pages": {
      "first": {
       "leaf": 9,
-      "page": 1,
+      "page": 54,
       "attestation": "read"
      },
      "last": {
       "leaf": 743,
-      "page": 1521,
+      "page": 521,
       "attestation": "read"
      }
     }
@@ -782,9 +775,9 @@
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 747,
-      "page": 523,
-      "attestation": "read"
+      "leaf": 745,
+      "page": 522,
+      "attestation": "inferred"
      },
      "last": {
       "leaf": 945,
@@ -828,8 +821,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "file": "data/survey_ocr/brooklynnewyor1912p3broo_listing.jsonl.gz",
   "sections": [
    {
@@ -838,21 +831,32 @@
     "end_leaf": 743
    }
   ],
-  "kept": 62247,
+  "kept": 60442,
   "dropped": 12224,
-  "kept_share": 0.8359,
+  "kept_share": 0.8318,
   "kept_by_section": {
-   "listing": 62247
+   "listing": 60442
   }
  },
- "non_entry_pages": {
-  "method": "entry-shape",
-  "derived": "2026-10-16",
-  "entry_min": 0.15,
-  "scoped_lines": 153,
-  "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
-  "leaves": [
-   199
-  ]
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/brooklynnewyor1912p3broo",
+  "ia_dump": "data/survey_ocr/brooklynnewyor1912p3broo_words.ia.jsonl.gz",
+  "tiles": 1470,
+  "tiles_answered": 1470,
+  "bleed_retry": 11,
+  "loop_truncated": 9,
+  "table_mode": 8,
+  "pages": 368,
+  "lines_runover": 6672,
+  "lines_model": 72981,
+  "lines_model-only": 4098,
+  "lines_tesseract": 13056,
+  "lines_bleed": 578,
+  "leaves_replaced": 368,
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 368
+  },
+  "dumped": "2026-10-23"
  }
 }

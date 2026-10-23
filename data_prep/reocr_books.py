@@ -417,8 +417,8 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
-    if not args.cmd or not (args.ids or (args.cmd in ("records", "coverage", "facts") and args.tier)):
-        ap.error("a command and --ids (or, for records/coverage/facts, --tier) are required")
+    if not args.cmd or not (args.ids or (args.cmd in ("records", "coverage", "facts", "import") and args.tier)):
+        ap.error("a command and --ids (or, for records/coverage/facts/import, --tier) are required")
     if args.cmd == "coverage":
         return coverage(args)
     if args.cmd == "facts":

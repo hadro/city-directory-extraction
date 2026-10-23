@@ -69,19 +69,22 @@
    "confidence": "medium"
   },
   "end_page": {
-   "value": 1275,
+   "value": 275,
    "leaf": 1261,
    "canvas": "https://iiif.archive.org/iiif/brooklynnewyork1910p2geor$1261/canvas",
    "image": "https://iiif.archive.org/iiif/brooklynnewyork1910p2geor$1261/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'1275' in the foot margin",
+   "quote": "'275' in the foot margin",
    "method": "hocr-geometry",
-   "confidence": "high",
+   "confidence": "low",
    "attestation": "read",
    "ia_page": null,
-   "page_offset": -14,
+   "page_offset": 986,
    "listing_flags": [],
-   "doubts": []
+   "doubts": [
+    "sequence-break: an earlier sequence in this listing ran higher",
+    "page 275 is below the listing's 629 text leaves"
+   ]
   },
   "start_page": {
    "value": 648,
@@ -340,57 +343,52 @@
    "publisher_tag": "upington",
    "publisher_tag_note": null,
    "year_tag": "1910",
-   "hocr_lines": 178874,
-   "wrap_joins": 8113,
-   "candidates": 170761,
+   "hocr_lines": 188223,
+   "wrap_joins": 19348,
+   "candidates": 168875,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 137992,
-    "mark_share": 0.0733,
+    "pairs": 118174,
+    "mark_share": 0.4344,
     "mode": 2.75,
-    "mode_pairs": 8965,
+    "mode_pairs": 6061,
     "trough": 2.0,
-    "trough_pairs": 157,
+    "trough_pairs": 273,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
+   "model_runovers": 18605,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 45,
-    "leaves": 4
+    "words": 6,
+    "leaves": 1
    },
-   "marker_fixes": 1462,
-   "digit_fixes": 2575,
-   "kept": 126718,
-   "keep_rate": 0.7421,
+   "marker_fixes": 22,
+   "digit_fixes": 622,
+   "kept": 123235,
+   "keep_rate": 0.7297,
    "dropped": {
-    "short": 36434,
-    "allcaps": 3028,
-    "banner": 2776,
-    "bigtype": 1348,
-    "nonascii": 450,
+    "short": 32155,
+    "allcaps": 8439,
+    "banner": 3604,
+    "bigtype": 1028,
+    "nonascii": 407,
     "pagenum": 7
    },
    "ditto_marks": [
-    ",,",
+    "\"",
     ",.",
-    ",1",
     ".,",
-    "..",
     ".1",
-    "11",
-    "a",
     "ii",
-    "it",
-    "m",
     "n",
-    "ti",
-    "\u201e"
+    "ti"
    ],
-   "ditto_applied": 64188,
+   "ditto_applied": 418,
    "ditto_confirmed": [
     "ii",
     "n",
@@ -405,11 +403,11 @@
     ",1"
    ],
    "band": {
-    "leaves_banded": 624,
-    "head": 1239,
-    "body": 105837,
-    "foot": 1388,
-    "unbanded": 18254
+    "leaves_banded": 625,
+    "head": 1485,
+    "body": 101210,
+    "foot": 2428,
+    "unbanded": 18112
    },
    "top_ad_leaves": [
     1369,
@@ -417,49 +415,49 @@
     5,
     1265,
     1281,
-    679,
     1273,
+    1359,
+    1277,
     1261,
-    413,
-    1359
+    679
    ],
-   "filters_at": "f5deb88-dirty",
-   "derived": "2026-10-06"
+   "filters_at": "b092193-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 10115361,
+  "words_gz_bytes": 9993139,
   "hocr_deleted": true,
   "elapsed_s": 78
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "start_leaf": 7,
   "end_leaf": 1261,
   "first_letter": "L",
   "last_letter": "Z",
   "letters_present": "LMNOPQRSTUVWYZ",
   "missing_letters": "ABCDEFGHIJKX",
-  "voting_density": 0.355,
+  "voting_density": 0.369,
   "flags": [
    "partial-alphabet"
   ],
   "start": {
    "leaf": 7,
    "image": "https://iiif.archive.org/iiif/brooklynnewyork1910p2geor$7/full/!1400,1400/0/default.jpg",
-   "quote": "Lareeo Jos hats 485 Bwick av"
+   "quote": "Lareco Jos hats 485 Bwick av"
   },
   "end": {
    "leaf": 1261,
    "image": "https://iiif.archive.org/iiif/brooklynnewyork1910p2geor$1261/full/!1400,1400/0/default.jpg",
-   "quote": "Zysman Leon salesman h 1320 71st"
+   "quote": "Zysman Leon salesman h 1526 71st"
   },
   "sections": [
    {
     "start_leaf": 7,
     "end_leaf": 1261,
-    "voting_leaves": 446,
+    "voting_leaves": 463,
     "first_letter": "L",
     "last_letter": "Z",
     "letters": "LMNOPQRSTUVWYZ",
@@ -472,9 +470,9 @@
      "L",
      "M"
     ],
-    "start_leaf": 102,
+    "start_leaf": 104,
     "end_leaf": 108,
-    "leaves": 7
+    "leaves": 5
    },
    {
     "between": [
@@ -482,8 +480,8 @@
      "N"
     ],
     "start_leaf": 178,
-    "end_leaf": 354,
-    "leaves": 177
+    "end_leaf": 356,
+    "leaves": 179
    },
    {
     "between": [
@@ -491,17 +489,17 @@
      "O"
     ],
     "start_leaf": 406,
-    "end_leaf": 416,
-    "leaves": 11
+    "end_leaf": 406,
+    "leaves": 1
    },
    {
     "between": [
      "O",
      "P"
     ],
-    "start_leaf": 448,
+    "start_leaf": 450,
     "end_leaf": 450,
-    "leaves": 3
+    "leaves": 1
    },
    {
     "between": [
@@ -526,17 +524,17 @@
      "R",
      "S"
     ],
-    "start_leaf": 622,
+    "start_leaf": 646,
     "end_leaf": 686,
-    "leaves": 65
+    "leaves": 41
    },
    {
     "between": [
      "S",
      "T"
     ],
-    "start_leaf": 836,
-    "end_leaf": 986,
+    "start_leaf": 838,
+    "end_leaf": 988,
     "leaves": 151
    },
    {
@@ -545,8 +543,8 @@
      "U"
     ],
     "start_leaf": 1030,
-    "end_leaf": 1032,
-    "leaves": 3
+    "end_leaf": 1030,
+    "leaves": 1
    },
    {
     "between": [
@@ -563,8 +561,8 @@
      "W"
     ],
     "start_leaf": 1074,
-    "end_leaf": 1114,
-    "leaves": 41
+    "end_leaf": 1074,
+    "leaves": 1
    },
    {
     "between": [
@@ -587,29 +585,29 @@
   ],
   "letter_blocks": {
    "L": [
-    55,
-    101,
-    21
+    51,
+    103,
+    24
    ],
    "M": [
     109,
     177,
-    28
+    30
    ],
    "N": [
-    355,
+    357,
     405,
-    19
+    18
    ],
    "O": [
-    417,
-    447,
-    12
+    407,
+    449,
+    17
    ],
    "P": [
     451,
     545,
-    41
+    43
    ],
    "Q": [
     547,
@@ -618,33 +616,33 @@
    ],
    "R": [
     555,
-    621,
-    27
+    645,
+    38
    ],
    "S": [
     687,
-    835,
+    837,
     65
    ],
    "T": [
-    987,
+    989,
     1029,
-    20
+    19
    ],
    "U": [
-    1033,
+    1031,
     1037,
-    2
+    3
    ],
    "V": [
     1039,
     1073,
-    16
+    18
    ],
    "W": [
-    1115,
+    1075,
     1179,
-    25
+    41
    ],
    "Y": [
     1239,
@@ -657,7 +655,7 @@
     6
    ]
   },
-  "skipped_votes": 14,
+  "skipped_votes": 6,
   "voted_bounds": [
    7,
    1261
@@ -681,43 +679,59 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "content_leaves": 687,
-  "fitted_leaves": 663,
-  "read_leaves": 418,
+  "fitted_leaves": 667,
+  "read_leaves": 441,
   "segments": [
    {
     "first_leaf": 11,
-    "last_leaf": 947,
+    "last_leaf": 709,
     "first_page": 650,
-    "last_page": 1118,
-    "leaves": 469,
-    "read": 322
+    "last_page": 999,
+    "leaves": 350,
+    "read": 257
    },
    {
-    "first_leaf": 951,
-    "last_leaf": 1085,
-    "first_page": 120,
-    "last_page": 187,
-    "leaves": 68,
-    "read": 28
+    "first_leaf": 711,
+    "last_leaf": 909,
+    "first_page": 0,
+    "last_page": 99,
+    "leaves": 100,
+    "read": 63
    },
    {
-    "first_leaf": 1093,
-    "last_leaf": 1105,
-    "first_page": 101,
-    "last_page": 107,
-    "leaves": 7,
-    "read": 4
+    "first_leaf": 911,
+    "last_leaf": 1067,
+    "first_page": 0,
+    "last_page": 78,
+    "leaves": 79,
+    "read": 40
    },
    {
-    "first_leaf": 1111,
+    "first_leaf": 1069,
+    "last_leaf": 1121,
+    "first_page": 179,
+    "last_page": 205,
+    "leaves": 27,
+    "read": 15
+   },
+   {
+    "first_leaf": 1127,
+    "last_leaf": 1201,
+    "first_page": 8,
+    "last_page": 45,
+    "leaves": 38,
+    "read": 21
+   },
+   {
+    "first_leaf": 1203,
     "last_leaf": 1261,
-    "first_page": 1200,
-    "last_page": 1275,
-    "leaves": 76,
-    "read": 35
+    "first_page": 246,
+    "last_page": 275,
+    "leaves": 30,
+    "read": 16
    },
    {
     "first_leaf": 1283,
@@ -739,8 +753,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -765,7 +779,7 @@
      },
      "last": {
       "leaf": 1261,
-      "page": 1275,
+      "page": 275,
       "attestation": "read"
      }
     }
@@ -826,8 +840,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-23",
+  "code_at": "b092193-dirty",
   "file": "data/survey_ocr/brooklynnewyork1910p2geor_listing.jsonl.gz",
   "sections": [
    {
@@ -836,23 +850,42 @@
     "end_leaf": 1261
    }
   ],
-  "kept": 108990,
+  "kept": 105507,
   "dropped": 17728,
-  "kept_share": 0.8601,
+  "kept_share": 0.8561,
   "kept_by_section": {
-   "listing": 108990
+   "listing": 105507
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-23",
   "entry_min": 0.15,
-  "scoped_lines": 271,
+  "scoped_lines": 0,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
-   10,
-   361,
-   1035
+   10
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/brooklynnewyork1910p2geor",
+  "ia_dump": "data/survey_ocr/brooklynnewyork1910p2geor_words.ia.jsonl.gz",
+  "tiles": 2514,
+  "tiles_answered": 2514,
+  "bleed_retry": 5,
+  "loop_truncated": 12,
+  "table_mode": 46,
+  "pages": 629,
+  "lines_runover": 18605,
+  "lines_model-only": 8153,
+  "lines_model": 128575,
+  "lines_tesseract": 23946,
+  "lines_bleed": 281,
+  "leaves_replaced": 629,
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 629
+  },
+  "dumped": "2026-10-23"
  }
 }

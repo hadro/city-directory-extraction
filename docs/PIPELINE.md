@@ -1201,6 +1201,59 @@ Both standing checks hold:
   times in run 3's, so the fold cannot reach them.
 - `copy_guard.py --check-panel 4b-100k`: **broken 0** on clean text, 280 fixed over 4,613 rows.
 
+**30. Stop the panel scoring a gold row against a different person's line; and stop the joiner
+gluing a display banner onto an entry.** Found 2026-10-23 on boyd1890 gold row 73 (leaf 105), and
+present before and after the same-row fix of that day. Two defects stacked; the first is the cheap,
+general one.
+
+The row: gold `McElroy John A, news agent, h 84 Bradford ave`; the panel's line `McElroy Bernard
+E, bill poster, h 84 Bradford ave`, match 0.622. LightOn and the dump read the page right, as
+separate lines: line 50 the entry (x=561), line 51 `LLIOTT, Plumbing, Steam and Gas Fitt` (an ad
+banner below, x=891), line 52 the drop-cap `ELLIOTT` (the layer's alone). Then:
+
+1. **The joiner glued the banner onto the entry.** The model read line 51 as a start (`cont` 0), so
+   `join_wraps` fell back to its indent rule, and an indent of 330 px is a run-over by that rule.
+   `_lines.jsonl.gz` holds `McElroy John A, ... Bradford ave LLIOTT, Plumbing, Steam and Gas Fitt`.
+   In production the record's address carries the ad, and the copy guard will not strip it.
+2. **The panel builder could not see the right line, and took a neighbour.**
+   `volume_run_report.align` (which `eval/ia_panel.py` uses) only tries a line whose key length is
+   within max(12, 60%) of the gold's: the gold is ~43 characters, the glued line ~78, so it is
+   never a candidate. The greedy match then gives the row the best remaining line at
+   `MATCH_MIN` 0.6 or more: Bernard E, who shares the surname and the whole address and is not in
+   the gold sample, so he was free. The row is scored as a miss, and on a 4B panel run the model
+   is graded on one person's line against another person's gold. These are the "same-address false
+   matches" noted for Boyd rows 12, 73 and 74 since run 3.
+
+**Size** (rows whose matched line's first two words differ from the gold's, with match < 0.8;
+ditto-led gold left out): `data/iapanel` 55 of 2,206 (smith1855 21, hopehenderson1856 7, lain 6,
+smith1856 6); the LightOn pilot panel 15 of 1,963 (lain 9, boyd1890 3). An upper bound: on IA's
+text some are the right person under a garbled name (franks1786 row 37, `Qaincey J.` for `Quincey
+J.`, 0.789), and hopehenderson1856 rows 6-7 are one miss cascading into the next row.
+
+**Recommended fix, panel (do this first; it touches no production data).** In `align`, a
+single-line candidate claims a gold row only if it agrees on the name as well as the ratio: the
+gold's leading surname token, and its first given-name token where the gold prints one, each
+within a small edit distance of the line's (say ratio >= 0.75 on the token, so `Qaincey`/`Quincey`
+passes and `Bernard`/`John` fails). Leave ditto-led gold rows (`" John`, `— Wm`) to the ratio alone,
+since their surname is not printed. A row that fails is left unmatched, not given its nearest
+neighbour: that is what `matched_pct` exists to show. Also widen the length window for a candidate
+that *starts* with the gold (a prefix ratio), so a line with a glued tail can still claim its row
+and the defect shows as an inexact line rather than a wrong person. Verify: re-run
+`eval/lighton_pilot.py --skip-derive --diff-against <saved panel>` and `ia_panel.py build` against a
+saved `data/iapanel`; every changed row should be one of the ~70 above, each now unmatched or
+matched to the gold's own person; no exact row should change. Rows dropped from the panel change
+the denominators, so report pooled row EM before and after with the matched counts beside it.
+
+**Recommended fix, joiner (narrower and riskier; do it second, measured).** A re-OCR'd line the
+model itself read as a start (`cont` 0, source `model`) should not be joined on indent alone when it
+looks like display type: two or more of its first three words in capitals or a trade-banner shape
+(`Plumbing, Steam and Gas`), or a layer-only line of tall type beside it (the drop cap `ELLIOTT`,
+140 px tall here against a ~55 px line). #28 already learned that geometry cannot separate starts
+from run-overs (3,521 of 0035's model starts sit in the run-overs' indent band), so this must be a
+test on the banner's own shape, not a tighter indent. Measure it on the pilot first
+(`eval/lighton_pilot.py`, both `--page-dir`s), and count how many joins it removes on a whole
+volume (`reocr_pair.py joins`) before and after: a large number means it is cutting real run-overs.
+
 ## Medium effort, high information
 
 **5. Does the `44` finding generalize?** It is measured on one volume, one OCR engine, one adapter.

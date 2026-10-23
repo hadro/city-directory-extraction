@@ -68,10 +68,10 @@ def pilot_volumes() -> list:
     return sorted({k.split("/")[0] for k in boxes if not k.startswith("nypl_")})
 
 
-def derive(work: Path) -> None:
+def derive(work: Path, page_dir: Path) -> None:
     vols = pilot_volumes()
     subprocess.run([sys.executable, str(REPO / "data_prep/reocr_pair.py"), "dump", SLUG,
-                    "--root", str(DATA / "reocr_pilot"), "--page-dir", str(DATA / "reocr_pilot_pages"),
+                    "--root", str(DATA / "reocr_pilot"), "--page-dir", str(page_dir),
                     "--ids", ",".join(vols), "--out-dir", str(work)], check=True, cwd=REPO)
     import survey_harvest as sh
     sh.OUT = work
@@ -152,11 +152,14 @@ def main(argv=None) -> int:
     ap.add_argument("--skip-derive", action="store_true",
                     help="reuse --work as it is: rebuild the panel and score")
     ap.add_argument("--diff-against", help="a saved copy of a panel dir to compare row by row")
+    ap.add_argument("--page-dir", default=str(DATA / "reocr_pilot_pages"),
+                    help="the word layer: fresh tesseract (default), or data/reocr_pilot_pages_ia, "
+                         "IA's words, the layer production book scans pair against")
     args = ap.parse_args(argv)
     work, panel_dir = Path(args.work).resolve(), Path(args.panel_dir).resolve()
     work.mkdir(parents=True, exist_ok=True)
     if not args.skip_derive:
-        derive(work)
+        derive(work, Path(args.page_dir).resolve())
     import ia_panel
     ia_panel.OCR, ia_panel.PANEL_DIR, ia_panel.MANIFEST = work, panel_dir, panel_dir / "manifest.json"
     ia_panel.build()

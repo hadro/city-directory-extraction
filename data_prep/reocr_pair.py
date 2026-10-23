@@ -62,6 +62,10 @@ from survey_twins import eligible, norm  # noqa: E402
 PAIR = 0.6              # a model line and a run of printed lines are one entry at this similarity
 RUN = 3                 # ...a run of at most this many printed lines
 RUN_COST = 0.01         # what each printed line past the first costs a run
+ROW_SHARE = 0.5         # two pieces of a column share a printed row when their middles are this
+                        # share of the shorter's height apart or less (boxed_lines)...
+ROW_HEIGHTS = 0.5       # ...and the shorter is at least this share of the taller: a margin bracket
+                        # three lines tall (Ogden 1839 leaf 237) is level with the middle one's middle
 MARKS = set("E€©&ᴱ®")   # what tesseract makes of the small E
 MARK_H = 0.8            # a separate mark is shorter than this share of the page's median word
 HYPHENS = "-—–¬"
@@ -342,11 +346,21 @@ def mark_of(words: list, median_h: float, name: str) -> bool:
 EGLYPH = re.compile(r"^\s*[\^£=≡■†€©®ᴱ](?=[A-Z][a-z])")
 
 
-def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = False) -> list:
+def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = False,
+              rows: list = None) -> list:
     """One tile: tesseract's printed lines (word lists, top to bottom) and the model's lines.
     -> [{"text", "words", "source", "mark", "start", "bullet"}] in printed order, model-only
     lines in place. model_marks: the model writes E marks itself (Churro), so a leading "E " is
     one.
+
+    `rows`: each line's printed row (boxed_lines). A word layer cuts some printed lines in two at
+    a wide justified space: IA's ABBYY reads Longworth 1826 leaf 409's "Dyckman William,
+    shoemaker rear 230 Spring" as "Dyckman William, shoemaker" and, beside it, "cea> i>30 Spring"
+    (601 such lines in that volume, 626 in Trow 1907 p3, 2026-10-23). Where one model line covers
+    pieces of one row, they are one printed line and get its whole text; otherwise `split` cut the
+    entry at the gap and its tail became a nameless row of its own. Only the model's reading
+    joins them: a column's row also holds specks and margin marks ("o", "■"; ~30,000 beside lines
+    in Brooklyn 1909) that no model line covers, and they stay apart.
 
     An entry the model broke over two of its own lines leaves both rows `start` True, which no
     downstream signal can undo; `mark_continuations` marks the second a run-over once the rows
@@ -372,11 +386,18 @@ def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = Fals
         body = strip_mark(line) if model_marks else line
         first = re.sub(r"[^\w'-]", "", body.split()[0]) if body.split() else ""
         mark = bool(glyph) or body != line or mark_of(tess[i0], median_h, first)
-        for t, piece in enumerate(split(body, texts[i0:i1])):
-            text = piece if piece is not None else texts[i0 + t]
+        group = [[i0]]                        # the run's printed lines: pieces of a row as one
+        for i in range(i0 + 1, i1):
+            if rows is not None and rows[i] == rows[i - 1]:
+                group[-1].append(i)
+            else:
+                group.append([i])
+        parts = [" ".join(texts[i] for i in g) for g in group]
+        for t, piece in enumerate(split(body, parts)):
+            text = piece if piece is not None else parts[t]
             if t == 0 and mark:
                 text = f"E {text}"
-            out.append({"text": text, "words": tess[i0 + t], "source": "model",
+            out.append({"text": text, "words": [w for i in group[t] for w in tess[i]], "source": "model",
                         "mark": mark and t == 0, "start": t == 0, "bullet": bullet and t == 0})
     mark_continuations(out)
     return out
@@ -763,7 +784,12 @@ def boxed_lines(rec: dict, tiles: dict) -> list:
     turned upright by the tiles' angle. Each column's edges are its tiles' box less the padding
     the staging added, so this is column_lines' own assignment over the columns as they were cut,
     by whichever rule (peaks for the microfilm, a book scan's gutters at its volume's count). The
-    import then follows the staging, and cannot disagree with it if a column rule changes."""
+    import then follows the staging, and cannot disagree with it if a column rule changes.
+
+    -> (column, upright top, words, row): pieces of a column whose middles sit within ROW_SHARE of
+    the shorter's height, side by side, share a `row` and come left to right, at the row's top.
+    Whether they are one printed line is pair_tile's to decide, from the model's reading; a piece
+    a pixel higher than its left neighbour no longer comes before it."""
     from reocr_columns import PAD
     from reocr_volumes import turn
     W = rec["page_size"][0]
@@ -783,13 +809,35 @@ def boxed_lines(rec: dict, tiles: dict) -> list:
         mid = (u[0] + u[2]) / 2
         return min(range(len(cols)), key=lambda i: 0 if cols[i][0] <= mid < cols[i][1]
                    else min(abs(mid - cols[i][0]), abs(mid - cols[i][1])))
-    out = []
+    pieces = collections.defaultdict(list)
     for ws, us in zip(rec["lines"], upright):
         parts = collections.defaultdict(list)
         for w, u in zip(ws, us):
             parts[ks[col(u)]].append((w, u))
-        out += [(k, min(u[1] for _w, u in wu), [w for w, _u in wu]) for k, wu in parts.items()]
-    out.sort(key=lambda kyw: kyw[:2])
+        for k, wu in parts.items():
+            box = [min(u[0] for _w, u in wu), min(u[1] for _w, u in wu),
+                   max(u[2] for _w, u in wu), max(u[3] for _w, u in wu)]
+            pieces[k].append((box, [w for w, _u in wu]))
+    out, row = [], 0
+    for k, ps in pieces.items():
+        rows = []                             # [anchor box, boxes, pieces], by middle
+        for box, ws in sorted(ps, key=lambda p: p[0][1] + p[0][3]):
+            mid, h = (box[1] + box[3]) / 2, box[3] - box[1]
+            for r in rows[-3:]:
+                a = r[0]
+                lo, hi = sorted((h, a[3] - a[1]))
+                if (abs(mid - (a[1] + a[3]) / 2) <= ROW_SHARE * lo and lo >= ROW_HEIGHTS * hi
+                        and all(box[0] >= b[2] or box[2] <= b[0] for b in r[1])):
+                    r[1].append(box)
+                    r[2].append((box, ws))
+                    break
+            else:
+                rows.append([box, [box], [(box, ws)]])
+        for r in rows:
+            top = min(b[1] for b in r[1])
+            out += [(k, top, ws, row) for _b, ws in sorted(r[2], key=lambda p: p[0][0])]
+            row += 1
+    out.sort(key=lambda kywr: (kywr[0], kywr[1], kywr[3]))   # a row's pieces stay left to right
     return out
 
 
@@ -799,23 +847,24 @@ def page_rows(rec: dict, tiles: dict, answers: dict, marks: frozenset = frozense
     where the model has no answer (that tile keeps tesseract's lines). `marks`: the volume's
     confirmed ditto forms (confirmed_marks)."""
     keyed = boxed_lines(rec, tiles)
-    hs = sorted(w[3] - w[1] for _k, _y, ws in keyed for w in ws)
+    hs = sorted(w[3] - w[1] for _k, _y, ws, _r in keyed for w in ws)
     median_h = hs[len(hs) // 2] if hs else 30
-    widths = sorted((w[2] - w[0]) / max(len(w[5]), 1) for _k, _y, ws in keyed for w in ws if len(w[5]) >= 3)
+    widths = sorted((w[2] - w[0]) / max(len(w[5]), 1) for _k, _y, ws, _r in keyed for w in ws if len(w[5]) >= 3)
     char_w = widths[len(widths) // 2] if widths else 0.5 * median_h
     rows = []
     for name in sorted(tiles, key=lambda n: (int(n[1:].split("_")[0]), n)):
         k = int(name[1:].split("_")[0])
         j = int(name.split("_h")[1]) if "_h" in name else None
         cut = tiles.get(f"c{k}_h0", [0, 0, 0, 0])[3]
-        tess = [ws for kk, y, ws in keyed if kk == k and (j is None or (j == 0) == (y < cut))]
+        mine = [(ws, r) for kk, y, ws, r in keyed if kk == k and (j is None or (j == 0) == (y < cut))]
+        tess = [ws for ws, _r in mine]
         got = answers.get(name)
         if got is None:
             rows += [{"text": " ".join(w[5] for w in ws), "words": ws, "source": "tesseract",
                       "x0": tiles[name][0], "x1": tiles[name][2]} for ws in tess]
             continue
         model, bleed = got
-        for r in pair_tile(tess, model, median_h):
+        for r in pair_tile(tess, model, median_h, rows=[r for _ws, r in mine]):
             r["source"] = "bleed" if bleed and r["source"] != "tesseract" else r["source"]
             r["x0"], r["x1"] = tiles[name][0], tiles[name][2]
             rows.append(r)
@@ -1288,12 +1337,13 @@ def screen(args) -> int:
     for (vol, stem), named in sorted(pages.items()):
         rec = json.loads((page_dir / vol / f"{stem}.json").read_text(encoding="utf-8"))
         keyed = boxed_lines(rec, named)
-        hs = sorted(w[3] - w[1] for _k, _y, ws in keyed for w in ws)
+        hs = sorted(w[3] - w[1] for _k, _y, ws, _r in keyed for w in ws)
         median_h = hs[len(hs) // 2] if hs else 1
         for name in sorted(named):
             k, j = int(name[1:].split("_h")[0]), int(name.split("_h")[1])
             cut = named.get(f"c{k}_h0", [0, 0, 0, 0])[3]
-            tess = [ws for kk, y, ws in keyed if kk == k and (j == 0) == (y < cut)]
+            mine = [(ws, r) for kk, y, ws, r in keyed if kk == k and (j == 0) == (y < cut)]
+            tess = [ws for ws, _r in mine]
             base = root / vol / f"{stem}_{name}"
             meta_f = base.with_name(f"{base.name}_{args.slug}.meta.json")
             meta = json.loads(meta_f.read_text(encoding="utf-8")) if meta_f.exists() else {}
@@ -1306,7 +1356,7 @@ def screen(args) -> int:
                    "looped": bool(meta.get("looped")), "timed_out": bool(meta.get("timed_out")),
                    "missing": model is None}
             if model is not None:
-                pr = pair_tile(tess, model, median_h)
+                pr = pair_tile(tess, model, median_h, rows=[r for _ws, r in mine])
                 src = collections.Counter(r["source"] for r in pr)
                 m_chars = sum(len(t) for t in model)
                 t_med = sorted(len(t) for t in t_lines)[len(t_lines) // 2] if t_lines else 0
@@ -1515,6 +1565,14 @@ def _self_test() -> int:
         assert rows[0]["text"] == "E Ford George, engineer" and rows[0]["mark"], rows[0]
     rows = pair_tile([[w("FORSTER"), w("JAMES,")]], ["=FORSTER JAMES, feathers"], 48)
     assert rows[0]["text"].startswith("=FORSTER") and not rows[0]["mark"], "not before capitals"
+    # ABBYY's two pieces of one printed line (Longworth 1826 leaf 409), then the next entry
+    pieces = [[w("Dyckman"), w("William,"), w("shoemaker")], [w("cea>"), w("i>30"), w("Spring")],
+              [w("Dyckman"), w("jr."), w("William"), w("N."), w("attor.")]]
+    model = ["Dyckman William, shoemaker rear 230 Spring", "Dyckman jr. William N. attor."]
+    rows = pair_tile(pieces, model, 48, rows=[0, 0, 1])
+    assert [r["text"] for r in rows] == model and len(rows[0]["words"]) == 6, rows
+    rows = pair_tile(pieces, model, 48, rows=[0, 1, 2])
+    assert rows[0]["text"] != model[0] and len(rows) == 3, "pieces of two rows: still split"
     assert turnovers(["Napier John, merchant, 75 Washington, store 10", "[Cedar-street New-York",
                       "Nassau Whiting Factory"]) == [
         "Napier John, merchant, 75 Washington, store 10 Cedar-street New-York", "",

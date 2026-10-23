@@ -140,7 +140,9 @@ over the re-OCR'd tiers (~300+ GPU-hours).
      (`https://iiif.archive.org/iiif/<id>$<leaf>/full/max/0/default.jpg`).
 6. **Commit** the sidecars and `results/adleaf_inventory.json`, with the per-volume numbers in the
    message and a short record in PIPELINE #27.
-7. **The other two tiers** need only new records: `python3 data_prep/reocr_books.py records --tier
+7. **The other two tiers** — first do PIPELINE #31 (parallel dumps and two no-change speedups):
+   the damaged tier's import ran 4.5 h on one core, and these two tiers are about twice its pages.
+   They need only new records: `python3 data_prep/reocr_books.py records --tier
    first` (and `abbyy8-clean`), a tar of the new `data/reocr_books_records/*.records.jsonl.gz` +
    `volumes_<tier>.tsv` (plus `data_prep/*.py` and the five hpc files if any changed since
    6002d70), and the same runbook with the tier's name. first: 58 volumes, ~37 GB of zips,

@@ -1254,6 +1254,48 @@ test on the banner's own shape, not a tighter indent. Measure it on the pilot fi
 (`eval/lighton_pilot.py`, both `--page-dir`s), and count how many joins it removes on a whole
 volume (`reocr_pair.py joins`) before and after: a large number means it is cutting real run-overs.
 
+**31. Make the re-OCR import use more than one core. Do it before importing the `first` and
+`abbyy8-clean` tiers.** The abbyy8-damaged import (2026-10-23, 35 volumes, ~17,600 pages) took about
+7.7 minutes a volume, 4.5 h in all for the dumps, in ONE process at 98% of one core on an 8-core Mac
+(4 performance + 4 efficiency). The next two tiers are 75 volumes, about twice the pages: ~6-8 h
+serial, ~2 h parallel.
+
+Where the time goes (cProfile, `reocr_pair.page_dump` over 4 pages of trowsgeneraldir1905p1trow,
+12.4 s profiled): **91% in `align`**, almost all of it in `fast_sim` -> `difflib` (~50,000
+similarity calls a page). `align` fills the whole grid, every model line against every run of 1-3
+layer lines in the tile (~60 x 60 x 3 on a Trow tile), though both sides are in reading order and
+near one-to-one, so cells far from the diagonal never lie on the answer. About a third of the
+`difflib` time is `__chain_b`, the second string re-indexed on every call. The tesseract-layer
+volumes pay about three times over: `better_layer` pairs each page against both layers
+(`page_rows` twice) and `page_dump` pairs the winner again.
+
+In order, safest first. The first three must leave every output byte-identical. Check by re-dumping
+one IA-layer volume and one tesseract-layer volume with `dump --out-dir` and comparing the files
+with the production dumps, and `reocr_pair.py --self-test`.
+1. **Volumes in parallel** in `reocr_books.import_volumes`: run the per-volume `dump` subprocesses
+   N at a time (`--workers`, default 4: the performance cores). Each writes only its own
+   `data/survey_ocr/<id>_words.jsonl.gz` and its own sidecar's `reocr` block, and renames its own IA
+   dump once, so they do not collide. Keep everything after the dumps (`--rederive`,
+   `survey_derive.py`, `survey_adleaves.py features --merge` and `inventory --write`) as it is:
+   one call each over all the ids. `features --merge` and `inventory --write` write corpus-wide
+   files and must never run concurrently. Keep each dump's output lines together in the log (capture
+   per process, print on finish), since the per-volume line is what step 5 of BOOKSCAN_HANDOFF
+   reads. Expect ~3-4x. (Pages within a volume in a pool would do the same and also help one big
+   volume, but per-volume is the smaller change.)
+2. **Index each model line once per tile** in `align`: build one `difflib.SequenceMatcher` per model
+   line with it as `seq2` (`set_seq2` once), and vary `seq1` across the layer runs, so `__chain_b`
+   runs m times a tile, not n x m x RUN. `ratio()` is symmetric in value only up to difflib's junk
+   heuristic, so check the self-test and the byte-identical re-dump; `fast_sim`'s length and
+   `quick_ratio` pre-checks stay in front. Expect ~1.3-1.5x on top.
+3. **Pair the chosen layer once**: `better_layer` already computes `page_rows` for both layers; have
+   it return the winner's rows so `page_dump` does not pair the page a third time. ~1.5x on the
+   tesseract-layer volumes only.
+4. **Only then, and only measured: a banded `align`.** Restrict cells to |i - j x n/m| <= a band
+   (say 8 lines, widened where a tile's n and m differ a lot) to cut `align` ~5x more. This CAN
+   change pairings (a model line that skipped many layer lines, as on bleed-through pages), so it
+   needs `eval/lighton_pilot.py` on both `--page-dir`s with `--diff-against` saved panels, as the
+   same-row fix had (`de9521a`), and the per-volume line counts against the production dumps.
+
 ## Medium effort, high information
 
 **5. Does the `44` finding generalize?** It is measured on one volume, one OCR engine, one adapter.

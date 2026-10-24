@@ -332,17 +332,17 @@
    "publisher_tag_note": null,
    "year_tag": "1905",
    "hocr_lines": 189588,
-   "wrap_joins": 27023,
-   "candidates": 162565,
+   "wrap_joins": 27009,
+   "candidates": 162579,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 160390,
+    "pairs": 160393,
     "mark_share": 0.3326,
     "mode": 1.25,
-    "mode_pairs": 7686,
+    "mode_pairs": 7683,
     "trough": 0.75,
-    "trough_pairs": 459,
+    "trough_pairs": 464,
     "reason": "ditto marks: a dropped mark indents like a runover"
    },
    "model_runovers": 23381,
@@ -357,11 +357,11 @@
    },
    "marker_fixes": 17,
    "digit_fixes": 377,
-   "kept": 142660,
+   "kept": 142684,
    "keep_rate": 0.8776,
    "dropped": {
-    "short": 8455,
-    "banner": 5963,
+    "short": 8454,
+    "banner": 5954,
     "allcaps": 4400,
     "bigtype": 597,
     "nonascii": 488,
@@ -371,13 +371,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 59084,
+   "ditto_applied": 59113,
    "band": {
     "leaves_banded": 410,
     "head": 2458,
-    "body": 108963,
+    "body": 108988,
     "foot": 1911,
-    "unbanded": 29328
+    "unbanded": 29327
    },
    "top_ad_leaves": [
     429,
@@ -391,18 +391,18 @@
     1089,
     1049
    ],
-   "filters_at": "b092193-dirty",
-   "derived": "2026-10-23"
+   "filters_at": "071e202-dirty",
+   "derived": "2026-10-24"
   },
-  "words_gz_bytes": 11748592,
+  "words_gz_bytes": 11748551,
   "hocr_deleted": true,
   "elapsed_s": 30
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-23",
-  "code_at": "b092193-dirty",
+  "derived": "2026-10-24",
+  "code_at": "071e202-dirty",
   "start_leaf": 9,
   "end_leaf": 809,
   "first_letter": "R",
@@ -575,8 +575,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-23",
-  "code_at": "b092193-dirty",
+  "derived": "2026-10-24",
+  "code_at": "071e202-dirty",
   "content_leaves": 562,
   "fitted_leaves": 546,
   "read_leaves": 284,
@@ -617,8 +617,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-23",
-  "code_at": "b092193-dirty",
+  "derived": "2026-10-24",
+  "code_at": "071e202-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -751,8 +751,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-23",
-  "code_at": "b092193-dirty",
+  "derived": "2026-10-24",
+  "code_at": "071e202-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1905p3trow_listing.jsonl.gz",
   "sections": [
    {
@@ -761,11 +761,11 @@
     "end_leaf": 809
    }
   ],
-  "kept": 109339,
+  "kept": 109363,
   "dropped": 33321,
-  "kept_share": 0.7664,
+  "kept_share": 0.7665,
   "kept_by_section": {
-   "listing": 109339
+   "listing": 109363
   }
  },
  "non_entry_pages": {
@@ -799,6 +799,6 @@
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 402
   },
-  "dumped": "2026-10-23"
+  "dumped": "2026-10-24"
  }
 }

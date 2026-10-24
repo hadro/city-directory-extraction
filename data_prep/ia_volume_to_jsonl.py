@@ -330,6 +330,8 @@ DEEP_INDENT = 4.4
 # ...and a line a re-OCR'd page's own model read as a run-over needs only this much. It is a
 # margin guard, not a threshold: see join_wraps, "THE MODEL'S OWN READING".
 MODEL_INDENT = 0.5
+# ...measured from where the entry's TEXT begins for a line that opens like a name (join_wraps).
+ENTRY_OPENING = re.compile(r"^[A-Z][a-z'’]+[A-Za-z'’-]*\s+(?:[A-Z][a-z]*\.?|&)(?:\s|$)")
 
 
 def word_parent(text):
@@ -365,7 +367,17 @@ def word_parent(text):
             and not DITTO_SHAPE.match(t[0]) and not text.rstrip().endswith("-"))
 
 
-def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=None):
+def text_start(ws):
+    """Where a line's TEXT begins, for join_wraps' margin guard: the x of its first word after any
+    leading ditto marks (DITTO_SHAPE, digits excluded: `84 William` is an address), or None when
+    the line does not open with a mark and its box already says it."""
+    for k, w in enumerate(ws):
+        if not (DITTO_SHAPE.match(w[5]) and not any(c.isdigit() for c in w[5])):
+            return w[0] if k else None
+    return None
+
+
+def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=None, text_x=None):
     """Join wrapped entries into one line. Returns ([(box, text, height)], n_joins).
 
     `indent_ratio` replaces INDENT_RATIO for one volume; `calibrate_indent` reads it off the
@@ -487,15 +499,37 @@ def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=
 
     `cont` also overrides the deep-indent gate, which is a guess at the same question from
     geometry alone. The survey never turns that gate on, so this is theory, not a measured case.
+
+    THE GUARD MEASURES FROM THE TEXT, NOT THE BOX (`text_x`, LINE_ASSEMBLY_HANDOFF step 2). Trow
+    hangs its ditto dash in the margin: on Trow 1909 vol 1 leaf 97 a ditto line's box starts at
+    x 746 and its name at 775, so an entry AT the margin sits ~1.7 line heights right of the box
+    of a ditto line above it and cleared 0.5. Any false `cont` 1 there glued two people: a table
+    cell holding two entries (`— Philippa sec 51 Front h Mt Vernon N Y` + `Abbihl Jacob H h 408 W
+    150th`), a model line that ran two entries together. So a join on `cont` ALONE, of a line that
+    opens like a name (ENTRY_OPENING: `Abbihl Jacob`, `Slaymaker Saml E`), measures its indent from
+    where the entry's text begins (`text_x`, per line, None where the line opens with no mark).
+    The indent rule keeps the box, and a page without `cont` is unchanged.
+
+    The name test is load-bearing. Measuring every `cont` join from the text (2026-10-24) removed
+    1,168 joins on five Trow and Brooklyn parts, and a uniform image-read sample of 40 found 22
+    glued entries and 18 REAL run-overs: on these respelled pages run-overs print at or near the
+    name's x (`4th av Bklyn`, `& 110 Crosby`), and the dump's boxes are a line height off in places.
+    With the name test: 436 joins removed (Trow 1909 vol 1 179, 1908 p2 130, 1907 vol 3 102, 1903
+    p1 23, Brooklyn 1905 p1 2, 1876BPL 0), and a fresh uniform sample of 32 read 30 glued entries
+    and two lines a place name opens (`Glen Ridge N J`, a run-over; `St Nicholas av`, the end of
+    a printed line the dump split in two).
     """
-    out, joins = [], 0
+    out, starts, joins = [], [], 0
     for i, (box, text) in enumerate(lines):
         if out:
             pb, pt, ph = out[-1]
             floor = DEEP_INDENT if (deep_indent and word_parent(pt)) else indent_ratio
-            if cont is not None and cont[i]:
-                floor = min(floor, MODEL_INDENT)
-            if (box[0] - pb[0] > floor * med_h
+            indent = box[0] - pb[0]
+            if cont is not None and cont[i] and indent <= floor * med_h:
+                floor = MODEL_INDENT                    # on the model's word alone
+                if starts[-1] is not None and ENTRY_OPENING.match(text):
+                    indent = box[0] - starts[-1]
+            if (indent > floor * med_h
                     and 0 < box[1] - pb[1] < VGAP_RATIO * med_h
                     and min(box[2], pb[2]) - max(box[0], pb[0]) > OVERLAP_FRAC * (box[2] - box[0])):
                 sep = "" if pt.endswith("-") else " "
@@ -504,6 +538,7 @@ def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=
                 joins += 1
                 continue
         out.append((box, text, box[3] - box[1]))
+        starts.append(text_x[i] if text_x is not None else None)
     return out, joins
 
 
@@ -1290,6 +1325,33 @@ def leaf_bands(buffered, marks, pad=BAND_PAD, min_lines=BAND_MIN_DITTO_LINES):
             for leaf, v in ys.items() if len(v) >= min_lines}
 
 
+def page_raw(item, leaf, split_columns, stats):
+    """One leaf's lines as join_wraps takes them: (raw, dims, cont, text_x). sweep's first step,
+    and eval/line_assembly.py `joins`', so a joiner change is measured on exactly what it reads.
+    Counts side bands, column splits and dropped `cont` into `stats`."""
+    if not split_columns:
+        raw, dims = item.page_lines(leaf)
+        return raw, dims, None, None
+    words, dims = item.page_words(leaf)
+    # the model's own line structure, where the dump carries one (join_wraps). It is read now,
+    # while the lines are still the dump's: strip_side_bands returns one line per line, but a
+    # column split re-cuts and re-orders them, so the flag is dropped for a leaf that splits and
+    # that leaf joins on the indent alone.
+    cont = item.page_cont(leaf) if hasattr(item, "page_cont") else None
+    words, banded = strip_side_bands(words, dims) if words else (words, 0)
+    stats["band_words"] += banded
+    stats["band_leaves"] += bool(banded)
+    words, cut = split_merged_columns(words, dims) if words else (words, 0)
+    raw = words_to_lines(words) if words else None
+    stats["splits"] += cut
+    stats["split_leaves"] += bool(cut)
+    if cont is not None and raw and (cut or len(cont) != len(raw)):
+        stats["cont_dropped_leaves"] += 1
+        cont = None
+    text_x = [text_start(ws) for ws in words] if cont is not None and raw else None
+    return raw, dims, cont, text_x
+
+
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
           normalize_dittos=True, confirmed_marks=(), band=True, deep_indent=False,
           holdout=None, indent_ratio=INDENT_RATIO, split_columns=False, digit_s=False):
@@ -1312,26 +1374,7 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
              "model_runovers": 0, "cont_dropped_leaves": 0}
     reasons, ad_scores, buffered = {}, [], []
     for n, leaf in enumerate(leaves, 1):
-        cont = None
-        if split_columns:
-            words, dims = item.page_words(leaf)
-            # the model's own line structure, where the dump carries one (join_wraps). It is
-            # read now, while the lines are still the dump's: strip_side_bands returns one line
-            # per line, but a column split re-cuts and re-orders them, so the flag is dropped
-            # for a leaf that splits and that leaf joins on the indent alone.
-            cont = item.page_cont(leaf) if hasattr(item, "page_cont") else None
-            words, banded = strip_side_bands(words, dims) if words else (words, 0)
-            stats["band_words"] += banded
-            stats["band_leaves"] += bool(banded)
-            words, cut = split_merged_columns(words, dims) if words else (words, 0)
-            raw = words_to_lines(words) if words else None
-            stats["splits"] += cut
-            stats["split_leaves"] += bool(cut)
-            if cont is not None and raw and (cut or len(cont) != len(raw)):
-                stats["cont_dropped_leaves"] += 1
-                cont = None
-        else:
-            raw, dims = item.page_lines(leaf)
+        raw, dims, cont, text_x = page_raw(item, leaf, split_columns, stats)
         if not raw:
             continue
         stats["leaves"] += 1
@@ -1341,7 +1384,7 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
         # filter would discard it, and the entry it belongs to would silently lose its address.
         med_h_raw = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
         if join:
-            lines, joins = join_wraps(raw, med_h_raw, deep_indent, indent_ratio, cont)
+            lines, joins = join_wraps(raw, med_h_raw, deep_indent, indent_ratio, cont, text_x)
             stats["joins"] += joins
             stats["model_runovers"] += sum(cont) if cont else 0
         else:
@@ -1583,6 +1626,27 @@ def _self_test() -> int:
     margin = [((100, 100, 400, 118), "Boyd Valentine, ship joiner, h. 114 Adams"),
               ((100, 122, 390, 140), "Boyd William, baker, 41 Gold")]    # indent 0
     assert join_wraps(margin, 18, cont=[0, 1])[1] == 0, "two entries, not an entry and its tail"
+    # ...and on a join on the model's word alone the margin is where the entry's TEXT begins.
+    # Trow hangs its ditto dash (Trow 1909 vol 1 leaf 97: dash at 746, name at 774), so an entry
+    # at the margin sat 1.6 line heights right of a ditto line's box. LightOn's table cell held
+    # both entries, so the second was marked a run-over and glued on.
+    hang = [((746, 1866, 1319, 1890), "— Philippa sec 51 Front h Mt Vernon N Y"),
+            ((775, 1888, 1194, 1908), "Abbihl Jacob H h 408 W 150th")]
+    assert join_wraps(hang, 18, cont=[0, 1])[1] == 1, "measured from the dash"
+    assert join_wraps(hang, 18, cont=[0, 1], text_x=[774, None])[1] == 0, "from the name: two people"
+    # a real run-over under a ditto line sits a line height past the name and still joins (leaf 347)
+    under = [((785, 562, 1298, 580), "— Ferdinand flowers 686 Bway h 30"),
+             ((830, 584, 923, 601), "W 127th")]
+    assert join_wraps(under, 18, cont=[0, 1], text_x=[813, None])[1] == 1, "an entry and its tail"
+    # ...and so does one printed AT the name's x, as Trow often sets them (leaf 671, read off the
+    # image: dash 1302, `Wm` 1320, `4th` 1320): only a line that opens like a name is measured
+    # from the text
+    at_name = [((1302, 950, 1690, 968), "— Wm G Z coffee 54 Stone R 23 A h 42"),
+               ((1320, 972, 1540, 990), "4th av Bklyn")]
+    assert join_wraps(at_name, 18, cont=[0, 1], text_x=[1320, None])[1] == 1, "a run-over at the name"
+    assert text_start([[746, 0, 760, 9, 0, "—"], [774, 0, 830, 9, 0, "Philippa"]]) == 774
+    assert text_start([[100, 0, 120, 9, 0, "84"], [130, 0, 190, 9, 0, "William"]]) is None
+    assert text_start([[100, 0, 160, 9, 0, "Abbihl"]]) is None
     # a start the model wrote as a line of its own ("Brunt", "derbilt av.", Smith 1855) keeps
     # the indent rule as its fallback: cont says start, the indent says run-over
     assert join_wraps(wrapped, 18, cont=[0, 0, 0])[1] == 1, "the indent rule still runs"

@@ -41,6 +41,14 @@ from the dash (what the guard measures) and from the ditto line's NAME, the firs
 a mark: glue sits near 0 from the name, a real run-over about 1 line height past it. Reads the
 production dumps, or a scratch dir of re-dumped ones.
 
+`joins REV VOL ... [--dir DIR] [--sample N]`: the survey's wrap-joins (join_wraps) under
+ia_volume_to_jsonl.py at git revision REV and in the working tree, on identical input: the working
+tree's `page_raw` over the volume's word dump, with the volume's own calibrated indent, exactly as
+survey_harvest.derive feeds sweep. Per volume, the joins each side makes that the other does not,
+and a uniform sample of the removed ones with each line's indent (from the entry's box and from
+where its text begins, in line heights) and an IIIF crop URL to read it on the page. A joiner
+change is judged on what it REMOVES (join_wraps' deep-indent story), so read the sample.
+
 `panel A B [--list]`: two panel dirs (eval/ia_panel.build's output) compared by gold row: rows
 dropped, added, re-matched to another line, and exact rows lost or gained (exact after
 lighton_pilot.canon's typography). Counts, not rates: dropping inexact rows raises a rate with
@@ -139,14 +147,15 @@ def page(args) -> int:
 
 
 def proxy(args) -> int:
+    src = Path(args.dir) if args.dir else DATA / "survey_ocr"
     for vol in args.vols:
         n = hit = 0
-        with gzip.open(DATA / "survey_ocr" / f"{vol}_listing.jsonl.gz", "rt", encoding="utf-8") as fh:
+        with gzip.open(src / f"{vol}_{args.kind}.jsonl.gz", "rt", encoding="utf-8") as fh:
             for line in fh:
                 t = json.loads(line)["raw_line"]
                 n += 1
                 hit += bool(MID_DITTO.search(t))
-        print(f"{vol:28s} {n:8,d} listing lines  mid-line ditto {hit:6,d} ({100 * hit / max(n, 1):.2f}%)")
+        print(f"{vol:28s} {n:8,d} {args.kind} lines  mid-line ditto {hit:6,d} ({100 * hit / max(n, 1):.2f}%)")
     return 0
 
 
@@ -271,6 +280,86 @@ def glue(args) -> int:
     return 0
 
 
+def _joined(fn, raw, med_h, ratio, extra: dict) -> dict:
+    """{line index: index of the first line of the entry it joined}, from one join_wraps.
+    join_wraps joins only consecutive lines, in order, as `entry + " " + line` (a hyphen closes
+    up), so replaying that on the input recovers which lines each entry holds. The text is passed
+    untouched: join_wraps' rules read it. Keyword arguments the function does not take are left
+    out."""
+    import inspect
+    params = inspect.signature(fn).parameters
+    out, _ = fn(raw, med_h, False, ratio, **{k: v for k, v in extra.items() if k in params})
+    got, i = {}, 0
+    for _box, entry, _h in out:
+        head, acc = i, raw[i][1]
+        i += 1
+        while acc != entry:
+            if i >= len(raw) or len(acc) > len(entry):
+                raise SystemExit(f"cannot replay join_wraps' entry {entry[:60]!r}")
+            acc = (acc[:-1] if acc.endswith("-") else acc + " ") + raw[i][1]
+            got[i] = head
+            i += 1
+    return got
+
+
+def joins(args) -> int:
+    import random
+    import statistics
+    import ia_volume_to_jsonl as new
+    from survey_harvest import MIN_CHARS_LEAF, WordDump
+    text = subprocess.run(["git", "show", f"{args.rev}:data_prep/ia_volume_to_jsonl.py"], cwd=REPO,
+                          capture_output=True, text=True, check=True).stdout
+    tmp = REPO / "data_prep" / f"_ia_volume_to_jsonl_at_{re.sub(r'\W', '_', args.rev)}.py"
+    tmp.write_text(text, encoding="utf-8")
+    src = Path(args.dir) if args.dir else DATA / "survey_ocr"
+    try:
+        old = importlib.import_module(tmp.stem)
+        for vol in args.vols:
+            dump = WordDump(src / f"{vol}_words.jsonl.gz", vol)
+            content = [r["leaf"] for r in dump.records() if r["chars"] > MIN_CHARS_LEAF]
+            ratio = new.calibrate_indent(dump, content, split_columns=True)["indent_ratio"]
+            stats = collections.Counter()
+            removed, added, n_old, n_new = [], [], 0, 0
+            for leaf in content:
+                raw, dims, cont, text_x = new.page_raw(dump, leaf, True, stats)
+                if not raw:
+                    continue
+                med_h = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
+                extra = {"cont": cont, "text_x": text_x}
+                a = _joined(old.join_wraps, raw, med_h, ratio, extra)
+                b = _joined(new.join_wraps, raw, med_h, ratio, extra)
+                n_old, n_new = n_old + len(a), n_new + len(b)
+                for side, got, other in (("removed", a, b), ("added", b, a)):
+                    for i in sorted(set(got) - set(other)):
+                        h = got[i]
+                        tx = (text_x[h] if text_x and text_x[h] is not None else raw[h][0][0])
+                        (removed if side == "removed" else added).append({
+                            "leaf": leaf, "line": i, "cont": cont[i] if cont else None,
+                            "box": round((raw[i][0][0] - raw[h][0][0]) / med_h, 2),
+                            "text": round((raw[i][0][0] - tx) / med_h, 2),
+                            "entry": raw[h][1], "joined": raw[i][1],
+                            "crop": (min(raw[h][0][0], raw[i][0][0]) - 30, raw[h][0][1] - 15,
+                                     max(raw[h][0][2], raw[i][0][2]) + 30, raw[i][0][3] + 15)})
+            dump.close()
+            print(f"{vol:28s} joins {n_old:,} -> {n_new:,}  removed {len(removed):,}  added {len(added):,}"
+                  f"  (indent ratio {ratio})")
+            for side, rows in (("removed", removed), ("added", added)):
+                pick = random.Random(args.seed).sample(rows, min(args.sample, len(rows)))
+                for r in sorted(pick, key=lambda r: (r["leaf"], r["line"])):
+                    x0, y0, x1, y1 = r["crop"]
+                    print(f"  {side} leaf {r['leaf']:4d} line {r['line']:3d}  from box {r['box']:5.2f} "
+                          f"from text {r['text']:5.2f}  {r['entry'][:48]!r} + {r['joined'][:48]!r}")
+                    if args.urls:
+                        print(f"      https://iiif.archive.org/iiif/{vol}${r['leaf']}/"
+                              f"{max(x0, 0)},{max(y0, 0)},{x1 - max(x0, 0)},{y1 - max(y0, 0)}/full/0/default.jpg")
+            if args.out:
+                with open(Path(args.out) / f"{vol}_joins.json", "w", encoding="utf-8") as fh:
+                    json.dump({"removed": removed, "added": added}, fh, ensure_ascii=False)
+    finally:
+        tmp.unlink(missing_ok=True)
+    return 0
+
+
 def panel(args) -> int:
     from lighton_pilot import canon, load
     a_dir, b_dir = Path(args.a), Path(args.b)
@@ -325,6 +414,9 @@ def main(argv=None) -> int:
     p.add_argument("--slug", default=SLUG)
     p = sub.add_parser("proxy")
     p.add_argument("vols", nargs="+")
+    p.add_argument("--dir", help="read DIR instead of data/survey_ocr (e.g. a scratch re-derive)")
+    p.add_argument("--kind", default="listing", choices=["listing", "lines"],
+                   help="lines: before section scoping, what a scratch survey re-derive writes")
     p = sub.add_parser("moved")
     p.add_argument("dir")
     p.add_argument("vols", nargs="+")
@@ -338,6 +430,14 @@ def main(argv=None) -> int:
     p.add_argument("vols", nargs="+")
     p.add_argument("--dir", help="word dumps to read instead of data/survey_ocr")
     p.add_argument("--examples", type=int, default=6)
+    p = sub.add_parser("joins")
+    p.add_argument("rev")
+    p.add_argument("vols", nargs="+")
+    p.add_argument("--dir", help="word dumps to read instead of data/survey_ocr")
+    p.add_argument("--sample", type=int, default=10)
+    p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--urls", action="store_true", help="an IIIF crop URL under each sampled join")
+    p.add_argument("--out", help="a dir to write every removed/added join to, as <vol>_joins.json")
     p = sub.add_parser("panel")
     p.add_argument("a")
     p.add_argument("b")
@@ -345,7 +445,7 @@ def main(argv=None) -> int:
     p.add_argument("--all", action="store_true", help="a line for every set, changed or not")
     args = ap.parse_args(argv)
     return {"page": page, "proxy": proxy, "moved": moved, "same": same, "tables": tables,
-            "glue": glue, "panel": panel}[args.cmd](args)
+            "glue": glue, "joins": joins, "panel": panel}[args.cmd](args)
 
 
 if __name__ == "__main__":

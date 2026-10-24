@@ -1382,6 +1382,35 @@ plus a ditto or capitalised-surname opening should veto an indent join when the 
 right of its neighbours' by more than the indent but its text begins like an entry. Measure on the
 pilot (both `--page-dir`s) and by the proxy on these two volumes.
 
+**(f) The joiner's margin guard measured from a hanging ditto dash. DONE 2026-10-24 for lines that
+open like a name** (found while checking (b); LINE_ASSEMBLY_HANDOFF §2 and step 2). `join_wraps`
+lets a model run-over (`cont` 1) join at `MODEL_INDENT` 0.5 line heights, measured from the box of
+the entry above; Trow hangs its ditto dash in the margin, so an entry at the margin under a ditto
+line cleared it, and any false `cont` 1 (a table cell holding two entries, a model line running two
+together) glued two people: `— Philippa sec 51 Front h Mt Vernon N Y Abbihl Jacob H h 408 W 150th`.
+Now a `cont`-only join of a line that opens like a name (`Surname Given`) is measured from where
+the entry's TEXT begins (the first word after its leading marks). Re-derived into scratch:
+
+| volume | joins removed | kept lines |
+|---|---|---|
+| Trow 1909 vol 1 | 179 (165 net of re-joins) | 149,758 -> 149,918 |
+| Trow 1908 p2 | 130 (114) | 140,242 -> 140,368 |
+| Trow 1907 vol 3 | 102 (90) | 136,529 -> 136,627 |
+| Trow 1903 p1 | 23 (18) | 151,421 -> 151,442 |
+| Brooklyn 1905 p1 | 2 | 91,172 -> 91,174 |
+| 1876BPL (control; prints every surname) | 0 | unchanged |
+
+A uniform image-read sample of 32 removed joins: 30 two entries glued, 2 wrongly cut (a place-name
+run-over `Glen Ridge N J`; `St Nicholas av`, the end of a printed line the dump had split). The
+plan's version, every `cont` join measured from the text with no name test, was measured first and
+REJECTED: 1,168 joins removed, and of 40 sampled, 22 glue and 18 real run-overs, because on these
+respelled pages run-overs print at or near the name's x (`4th av Bklyn`, `& 110 Crosby`) and the
+dump's boxes are a line height off in places. Pilot on both layers: no row changed. #32 (a)'s
+proxy unchanged (it counts a different glue). Applies at a survey re-derive: D's import does one;
+the damaged tier keeps its derive until one is decided (LINE_ASSEMBLY_HANDOFF step 8). Remaining:
+glued lines that open with `&` or a given name only (a ditto entry whose dash was lost: `& Klute
+plumbers`, `C & Co wines`), which this cannot tell from a run-over.
+
 **(b) LightOn in table mode merges entries in one cell and drops ditto dashes.** Same leaf 97,
 tile c1_h1 (a Markdown table): `| Philippa sec 51 Front h Mt Vernon N Y Abbihl Jacob H h 408 W
 150th |`, and `| Chas I ice 314 W 16th ... |` for a printed `—Chas I ice ...`. The import cannot

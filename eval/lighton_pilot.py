@@ -6,6 +6,8 @@ production path, with line-level scores beside IA's OCR.
     python3 eval/lighton_pilot.py                          # import, derive, build, score
     python3 eval/lighton_pilot.py --skip-derive            # rebuild the panel and score only
     python3 eval/lighton_pilot.py --diff-against D         # ...and list rows that changed vs D
+    python3 eval/lighton_pilot.py --work W2 --survey-only W1   # a survey-side change: W1's dumps,
+                                                           # the survey re-run into W2
 
 WHAT IT RUNS. The pilot pages of the panel's 16 IA book-scan volumes were staged on 2026-10-15
 (scratch tools, not in the repo) and read by LightOn on the M2:
@@ -68,11 +70,12 @@ def pilot_volumes() -> list:
     return sorted({k.split("/")[0] for k in boxes if not k.startswith("nypl_")})
 
 
-def derive(work: Path, page_dir: Path) -> None:
+def derive(work: Path, page_dir: Path, dump: bool = True) -> None:
     vols = pilot_volumes()
-    subprocess.run([sys.executable, str(REPO / "data_prep/reocr_pair.py"), "dump", SLUG,
-                    "--root", str(DATA / "reocr_pilot"), "--page-dir", str(page_dir),
-                    "--ids", ",".join(vols), "--out-dir", str(work)], check=True, cwd=REPO)
+    if dump:
+        subprocess.run([sys.executable, str(REPO / "data_prep/reocr_pair.py"), "dump", SLUG,
+                        "--root", str(DATA / "reocr_pilot"), "--page-dir", str(page_dir),
+                        "--ids", ",".join(vols), "--out-dir", str(work)], check=True, cwd=REPO)
     import survey_harvest as sh
     sh.OUT = work
     for ident in vols:
@@ -151,6 +154,9 @@ def main(argv=None) -> int:
                     help="inside the repo: ia_panel records each set's file relative to it")
     ap.add_argument("--skip-derive", action="store_true",
                     help="reuse --work as it is: rebuild the panel and score")
+    ap.add_argument("--survey-only", metavar="DUMPS",
+                    help="for a change to the survey's joiner or filters: copy the word dumps from "
+                         "the work dir DUMPS into --work and re-run only the survey over them")
     ap.add_argument("--diff-against", help="a saved copy of a panel dir to compare row by row")
     ap.add_argument("--page-dir", default=str(DATA / "reocr_pilot_pages"),
                     help="the word layer: fresh tesseract (default), or data/reocr_pilot_pages_ia, "
@@ -158,7 +164,11 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     work, panel_dir = Path(args.work).resolve(), Path(args.panel_dir).resolve()
     work.mkdir(parents=True, exist_ok=True)
-    if not args.skip_derive:
+    if args.survey_only:
+        for f in Path(args.survey_only).resolve().glob("*_words.jsonl.gz"):
+            shutil.copy2(f, work / f.name)
+        derive(work, Path(args.page_dir).resolve(), dump=False)
+    elif not args.skip_derive:
         derive(work, Path(args.page_dir).resolve())
     import ia_panel
     ia_panel.OCR, ia_panel.PANEL_DIR, ia_panel.MANIFEST = work, panel_dir, panel_dir / "manifest.json"

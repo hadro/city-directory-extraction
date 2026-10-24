@@ -202,11 +202,17 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
 
 **Progress** (newest last; numbers in each commit and in PIPELINE #30/#32):
 - Step 0 DONE (a52dd99): self-tests pass, drift check clean, `glue` and `panel` added.
-- Step 1 DONE: the veto, with two rules beyond refinements 1-4 (PIPELINE #30). **Diff later steps
+- Step 1 DONE (e6084c4): the veto, with two rules beyond refinements 1-4 (PIPELINE #30). **Diff later steps
   against `data/iapanel_lighton_post30_{ia,tess}`** (pilot: IA's words 2,059 rows, 1,730 exact;
   fresh tesseract 2,056, 1,715) and `data/iapanel_post30` (production lines, 2,352 rows, 1,394
   exact), not the `_pull_` panels. `eval/ia_panel.py build --ocr DIR --panel-dir DIR` builds a
   panel elsewhere than `data/iapanel`.
+- Step 2 DONE, CHANGED from the plan (PIPELINE #32 (f)): measured from the text only for a line
+  that opens like a name. The plan's version cut 18 real run-overs in 40 sampled: §2's "real
+  run-overs sit ~1 line height past the name" holds on 1903 p1 but not on the respelled parts,
+  where they print at the name's x. New tools: `line_assembly.py joins REV VOL` (the joins a
+  joiner change removes, on identical input, with crop URLs), `proxy --dir --kind lines`, and
+  `lighton_pilot.py --survey-only DUMPS` (re-runs the survey alone, for steps 2 and 6).
 
 Where each step lands:
 

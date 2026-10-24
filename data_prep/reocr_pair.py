@@ -226,6 +226,21 @@ def align(tess: list, model: list, floor: float = PAIR) -> list:
     runs = {(i, k): norm(joint(tess[i:i + k])) for i in range(n) for k in range(1, RUN + 1)
             if i + k <= n}
     nm = [norm(strip_mark(t)) for t in model]
+    # fast_sim(nm[j], run), with each run's SequenceMatcher kept across the model lines: difflib
+    # indexes its second string (__chain_b) on every new matcher, a third of the import's time
+    # (PIPELINE #31), and the run is that second string, so it is indexed once a tile, not once a
+    # model line. Same orientation as fast_sim, so the same ratio to the bit.
+    matchers = {}
+
+    def run_sim(a: str, ik: tuple) -> float:
+        b = runs[ik]
+        if not a or not b:
+            return 0.0
+        sm = matchers.get(ik)
+        if sm is None:
+            sm = matchers[ik] = difflib.SequenceMatcher(None, "", b, autojunk=False)
+        sm.set_seq1(a)
+        return sm.ratio() if sm.real_quick_ratio() >= floor and sm.quick_ratio() >= floor else 0.0
     neg = float("-inf")
     best = [[neg] * (m + 1) for _ in range(n + 1)]
     back = [[None] * (m + 1) for _ in range(n + 1)]
@@ -243,7 +258,7 @@ def align(tess: list, model: list, floor: float = PAIR) -> list:
                 for k in range(1, RUN + 1):
                     if i + k > n:
                         break
-                    r = fast_sim(nm[j], runs[(i, k)], floor)
+                    r = run_sim(nm[j], (i, k))
                     # each extra printed line costs a little, so a run takes a line only when
                     # it reads better with it (a junk line normalises to "" and ties otherwise)
                     if r >= floor and s + r - RUN_COST * (k - 1) > best[i + k][j + 1]:
@@ -872,7 +887,7 @@ def page_rows(rec: dict, tiles: dict, answers: dict, marks: frozenset = frozense
 
 
 def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False,
-              marks: frozenset = frozenset()) -> tuple:
+              marks: frozenset = frozenset(), paired: tuple = None) -> tuple:
     """One re-OCR'd page as a word-dump record's lines: (lines, sources). The page's rows
     (page_rows) put through the post-passes in reading order, then every line's text spread over
     its tesseract words (respell), or given boxes where tesseract never saw it (synth_line).
@@ -893,8 +908,10 @@ def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False,
     within MARGIN_SPAN line heights of the line. A column's edge drifts down a skewed page (Trow
     1917 leaf 688, a camera frame: x 196 at the top, 122 at the foot), and one margin for the
     whole column (146) put the top's pulled starts 50 px into blank paper, left of the starts
-    tesseract read at 196, which then looked indented and were joined on as run-overs."""
-    rows, median_h, char_w = page_rows(rec, tiles, answers, marks)
+    tesseract read at 196, which then looked indented and were joined on as run-overs.
+
+    `paired`: page_rows' result for `rec`, where the caller has it already (better_layer)."""
+    rows, median_h, char_w = paired or page_rows(rec, tiles, answers, marks)
     texts = post([r["text"] for r in rows])
     built = []
     for i, (r, text) in enumerate(zip(rows, texts)):
@@ -973,8 +990,10 @@ ALT_GAIN = 0.05         # the second word layer is taken where it pairs this sha
 ALT_MIN = 5             # ...rows (and at least this many) than the first
 
 
-def better_layer(rec: dict, alt: dict, tiles: dict, answers: dict, marks: frozenset) -> dict:
-    """The page record whose words pair more of the model's lines: `rec` unless `alt` leaves
+def better_layer(rec: dict, alt: dict, tiles: dict, answers: dict, marks: frozenset) -> tuple:
+    """(record, its page_rows or None): the page record whose words pair more of the model's
+    lines, and the pairing it was judged by, so page_dump need not pair the page again (PIPELINE
+    #31: the tesseract-layer volumes paired each page three times). `rec` unless `alt` leaves
     ALT_MIN lines and ALT_GAIN of the page fewer `model-only`. A model-only line has no OCR words
     under it, so it is given boxes under its neighbour (synth_line): no indent for the joiner, and
     a crop that is not the line. On a book scan whose IA OCR failed page by page (Trow 1907 p3,
@@ -983,17 +1002,13 @@ def better_layer(rec: dict, alt: dict, tiles: dict, answers: dict, marks: frozen
     it stays, since on the pilot it paired as well as tesseract and read slightly better (83.6% of
     gold entries exact against 82.8%)."""
     if not alt.get("lines"):
-        return rec
-
-    def unpaired(r):
-        if not r.get("lines"):
-            return None
-        rows = page_rows(r, tiles, answers, marks)[0]
-        return sum(x["source"] == "model-only" for x in rows), len(rows)
-    a, b = unpaired(rec), unpaired(alt)
-    if a is None:
-        return alt
-    return alt if b[0] < a[0] - max(ALT_MIN, ALT_GAIN * a[1]) else rec
+        return rec, None
+    pa = page_rows(rec, tiles, answers, marks) if rec.get("lines") else None
+    pb = page_rows(alt, tiles, answers, marks)
+    if pa is None:
+        return alt, pb
+    a, b = (sum(x["source"] == "model-only" for x in p[0]) for p in (pa, pb))
+    return (alt, pb) if b < a - max(ALT_MIN, ALT_GAIN * len(pa[0])) else (rec, pa)
 
 
 def dump(args) -> int:
@@ -1047,10 +1062,12 @@ def dump(args) -> int:
                 stats["bleed_retry"] += bool(meta.get("bleed_retry"))
                 stats["loop_truncated"] += bool(meta.get("loop_truncated"))
                 stats["table_mode"] += bool(meta.get("table_mode"))
+            paired = None
             if alt_f and alt_f.exists():
-                rec = better_layer(rec, json.loads(alt_f.read_text(encoding="utf-8")), tiles,
-                                   answers, marks)
-            lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True, marks=marks)
+                rec, paired = better_layer(rec, json.loads(alt_f.read_text(encoding="utf-8")),
+                                           tiles, answers, marks)
+            lines, sources, starts = page_dump(rec, tiles, answers, with_starts=True, marks=marks,
+                                               paired=paired)
             # 1 only where the MODEL read the line as part of the entry above. A tesseract line
             # (a tile with no answer, or one the model skipped) carries no start flag and no
             # reading either, so it is 0: the joiner keeps the indent rule for it.

@@ -1254,8 +1254,14 @@ test on the banner's own shape, not a tighter indent. Measure it on the pilot fi
 (`eval/lighton_pilot.py`, both `--page-dir`s), and count how many joins it removes on a whole
 volume (`reocr_pair.py joins`) before and after: a large number means it is cutting real run-overs.
 
-**31. Make the re-OCR import use more than one core. Do it before importing the `first` and
-`abbyy8-clean` tiers.** The abbyy8-damaged import (2026-10-23, 35 volumes, ~17,600 pages) took about
+**31. Make the re-OCR import use more than one core. Steps 1-3 DONE 2026-10-23; step 4 open.**
+Measured with the output unchanged: re-dumps of longworthsameric1798newy (IA's words) and
+trowsgeneraldire19073trow (tesseract layer) are record-for-record identical to the production dumps
+(642 and 1,268 records, decompressed sha1), and `import --ids longworthsameric1798newy,
+trowsgeneraldir1904p3trow --workers 2` leaves both sidecars identical but for their `code_at`
+stamps. One process: Longworth 1798 18 -> 14 s, Trow 1907 vol 3 (tesseract layer) **1,013 -> 439
+s**; then `--workers` volumes at a time (default 6) on top. The original plan follows.
+**Do it before importing the `first` and `abbyy8-clean` tiers.** The abbyy8-damaged import (2026-10-23, 35 volumes, ~17,600 pages) took about
 7.7 minutes a volume, 4.5 h in all for the dumps, in ONE process at 98% of one core on an 8-core Mac
 (4 performance + 4 efficiency). The next two tiers are 75 volumes, about twice the pages: ~6-8 h
 serial, ~2 h parallel.

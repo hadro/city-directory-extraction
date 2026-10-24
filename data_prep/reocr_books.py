@@ -350,8 +350,15 @@ def import_volumes(args) -> int:
     --rederive`, `survey_derive.py` bounds/pages/sections/scope, and the non-entry pages
     (`survey_adleaves.py features --merge`, `inventory --write`). Then `facts --against HEAD`, and
     the volumes whose model-only share says they want the tesseract layer. Commit the sidecars
-    before running it, so HEAD is the before."""
+    before running it, so HEAD is the before.
+
+    The dumps run --workers at a time (PIPELINE #31: one process on one core took the damaged
+    tier's import 4.5 h). Each writes only its own volume's dump and sidecar `reocr` block, so they
+    cannot collide; each one's output is printed whole when it finishes. Everything after the dumps
+    runs once over all the volumes, as before: `features --merge` and `inventory --write` write
+    corpus-wide files and must never run side by side."""
     import subprocess
+    from concurrent.futures import ThreadPoolExecutor, as_completed
     py, ids = sys.executable, []
     for ident in volumes_of(args):
         if (REPO / args.root.format(id=ident) / "boxes.json").exists():
@@ -364,13 +371,24 @@ def import_volumes(args) -> int:
     def run(*cmd):
         print("$ " + " ".join(cmd[1:]), file=sys.stderr, flush=True)
         subprocess.run(list(cmd), cwd=REPO, check=True)
-    for ident in ids:
+    def dump_one(ident):
         root = args.root.format(id=ident)
         cmd = [py, "data_prep/reocr_pair.py", "dump", args.slug, "--root", root,
                "--page-dir", args.page_dir, "--ids", ident]
         if (REPO / args.alt_page_dir / ident).exists():
             cmd += ["--alt-page-dir", args.alt_page_dir]
-        run(*cmd)
+        return cmd, subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
+    failed = []
+    with ThreadPoolExecutor(max(1, args.workers)) as pool:
+        for fut in as_completed([pool.submit(dump_one, ident) for ident in ids]):
+            cmd, done = fut.result()
+            print("$ " + " ".join(cmd[1:]), file=sys.stderr)
+            sys.stderr.write(done.stdout + done.stderr)
+            sys.stderr.flush()
+            if done.returncode:
+                failed.append(cmd[cmd.index("--ids") + 1])
+    if failed:
+        raise SystemExit(f"dump failed for {', '.join(failed)}: nothing after the dumps was run")
     joined = ",".join(ids)
     run(py, "data_prep/survey_harvest.py", "--rederive", "--ids", joined)
     for step in ("bounds", "pages", "sections", "scope"):
@@ -412,7 +430,8 @@ def main(argv=None) -> int:
     ap.add_argument("--alt-page-dir", default="data/reocr_books_tess",
                     help="import: the tesseract layer, used for a volume that has it")
     ap.add_argument("--slug", default="lightonocr-3-1b-greedy-vllm", help="import: the answers' slug")
-    ap.add_argument("--workers", type=int, default=6)
+    ap.add_argument("--workers", type=int, default=6,
+                    help="pages/tesseract: processes; import: volumes dumped at a time")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args(argv)
     if args.self_test:

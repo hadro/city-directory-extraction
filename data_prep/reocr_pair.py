@@ -695,6 +695,9 @@ LOOP_LOOK = 0.02        # a volume is worth a look past this share of looped til
 TABLE_LOOK = 0.15       # ...or this share in table mode (twice the bench's 10 of 138)
 TALL = 1.8              # a word this many times the line's median height is clamped to the line
 MARGIN_REACH = 8        # an entry's first word this many characters in from the margin is moved to it
+MARGIN_FAR = 30         # ...or up to this many, for a ditto line hung on a word the layer read as
+MISSED = 3              # something else, at least this many in from the margin
+DITTO_OPEN = re.compile(r"^\s*[—–\-\"“”„]")  # a ditto line opens an entry; a run-over never does
 MARGIN_SPAN = 12        # ...the margin there read off the entry starts within this many line heights
 CONF_MODEL = 90         # a word the vision model read: well above CRUMB_CONF (5), where a word
 CONF_BLEED = 30         # ...with an odd character is taken for banner crumbs; a bleed_retry tile's
@@ -939,10 +942,14 @@ def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False,
     begins = collections.defaultdict(list)
     for r, ws in built:
         if ws and r.get("start") and r["source"] != "tesseract":
-            begins[r["x0"]].append((min(w[1] for w in ws), min(w[0] for w in ws)))
+            begins[r["x0"]].append((min(w[1] for w in ws), min(w[0] for w in ws), r["source"]))
 
-    def margin(x0, top):
-        near = sorted(x for y, x in begins.get(x0, ()) if abs(y - top) <= MARGIN_SPAN * median_h)
+    def margin(x0, top, measured=False):
+        # measured: only starts whose place the layer read, not a model-only line's synth_line
+        # box at the tile's edge (Brooklyn 1905's banner ad atop every page, x 30, put the
+        # margin there for the page's first entries)
+        near = sorted(x for y, x, src in begins.get(x0, ()) if abs(y - top) <= MARGIN_SPAN * median_h
+                      and not (measured and src == "model-only"))
         return near[len(near) // 5] if len(near) >= 5 else None
     lines, sources, starts = [], [], []
     for r, ws in built:
@@ -955,7 +962,23 @@ def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False,
             # print starts, and a run-over LightOn wrote as a line of its own ("Brunt",
             # "derbilt av.", Smith 1855) keeps the indent that joins it to its entry
             read = {(w[0], w[2]) for w in r["words"]}
-            if (ws[first][0], ws[first][2]) not in read and m < ws[first][0] <= m + MARGIN_REACH * char_w:
+            x = ws[first][0]
+            pull = (x, ws[first][2]) not in read and m < x <= m + MARGIN_REACH * char_w
+            # ...and a ditto line, which is always an entry's start, whose first word respell hung
+            # on a word the layer read as something else, mid-line. Where the layer caught only
+            # the line's tail (Trow 1909 vol 1 leaf 97: "—Kate B h 733 Prospect av" over
+            # tesseract's "Too Bruspect_av", x 1519 against a margin of 1321) the line looked
+            # indented, and the joiner glued it onto the entry above (PIPELINE #32 (a)). Only
+            # ditto lines: widening this to any entry-like opening also moved centred ads and a
+            # quarter of a Trow part's lines (2026-10-24). By where the layer's word begins,
+            # since respell may share one layer box among several model words.
+            said = {w[0]: w[5] for w in r["words"]}.get(x)
+            if (not pull and said is not None and DITTO_OPEN.match(ws[first][5])
+                    and sim(norm(said), norm(ws[first][5])) < PAIR):
+                m2 = margin(r["x0"], min(w[1] for w in ws), measured=True)
+                if m2 is not None and m2 + MISSED * char_w <= x <= m2 + MARGIN_FAR * char_w:
+                    pull, m = True, m2
+            if pull:
                 ws = [list(w) for w in ws]
                 ws[first][0] = int(m)
         lines.append(ws)

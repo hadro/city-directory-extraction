@@ -1308,7 +1308,21 @@ run `page_dump` under the code before and after `de9521a` (the same-row fix). Or
 cost the 4B. **Before this tier is staged, decide what to do about (a)**: it makes one record of
 two people.
 
-**(a) The wrap-joiner glues separate entries where the layer missed a line's opening.** Trow 1909
+**(a) FIXED 2026-10-24 for ditto lines** (`reocr_pair.page_dump`'s margin pull). Where the layer
+read only a line's tail, respell hung the model's first word on a mid-line word the layer read as
+something else ("Too" for "—Kate"), and the pull, which refuses to move a word the layer read, left
+it there. A ditto line (always an entry's start) whose first word sits on such a word, 3-30
+characters in from the margin, is now pulled to it, the margin read from starts the layer placed
+(not model-only lines' synth boxes: Brooklyn 1905's banner ad atop every page put it at x 30). The
+existing rule is untouched. Glued-entry proxy: trowsgeneraldire19091trow 1.18% -> **0.39%**,
+trowsgeneraldire19073trow 1.00% -> **0.31%** (joins 38,082 -> 36,938 and 31,359 -> 30,482; scoped
+lines +1,186 and +950); line starts moved elsewhere: 181 (Trow 1905 p1), 234 (Brooklyn 1905 p1), 542
+(Trow 1908 p2), all ditto lines. Pilot: IA's words 83.7 -> 83.7% (no exact row changed), fresh
+tesseract 83.0 -> 83.1% (3 gained, 0 lost). Three wider versions were measured and rejected: any
+entry-like opening moved centred ads and, by changing the existing rule's "read" test, a quarter
+of a Trow part's line starts; a text-width estimate was too coarse at 3 characters. Joins without
+a ditto (`Steinbruck Max ... Steinbrugge Edwd`) remain. The original finding:
+**The wrap-joiner glues separate entries where the layer missed a line's opening.** Trow 1909
 vol 1 leaf 97: `—Julian H agent 90 West R 1908 h Hopatcong N J —Kate B h 733 Prospect av`, `—Robt
 clerk h 150 W 105th —Robt B notary public 150 Nassau R 1106 ...`; Trow 1907 vol 3 leaf 463:
 `Steinbruck Max police h 510 W 151st Steinbrugge Edwd (estate of) mers 29 Bway`. LightOn read each

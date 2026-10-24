@@ -446,19 +446,123 @@ def bpl_labels(rows: list) -> dict:
     return out
 
 
+_MARK = re.compile(r"^\s*(?:E|[*•†‡§✱©€&])\s+(?=[A-Z])")             # Eastern District E, a star
+_DITTO = re.compile(r"""^\s*(?:[-—–~_=]+|["“”„«»]|,,|''|ii\b|n\b)\s*""")  # a printed ditto, any form
+_WORD = re.compile(r"[A-Za-z][A-Za-z'’]*")
+SAME_SURNAME = 0.8      # a mark followed by this close a reading of the gold's surname is a speck
+HEAD_MATCH = 0.85       # a single line longer than the gold whose head reads this close to it
+SPLIT_GIVEN = 0.75      # a given name OCR split in two must read this close when rejoined
+
+
+def _name_words(raw: str, limit: int = 6) -> tuple:
+    """(ditto-led, [(letters, capitalised)]) for a line's opening words, after an E or star mark.
+    Words are split at punctuation as well as spaces (`Hiigh,mercht.` is two) and compared as
+    letters only (`Han'ison`, `Fred’k`)."""
+    s = _MARK.sub("", raw)
+    m = _DITTO.match(s)
+    words = [(re.sub(r"[^a-z]", "", w.lower()), w[0].isupper())
+             for w in _WORD.findall(s[m.end():] if m else s)[:limit]]
+    return bool(m), [w for w in words if w[0]]
+
+
+def _subseq(a: str, b: str) -> bool:
+    it = iter(b)
+    return all(ch in it for ch in a)
+
+
+def given_ok(a: str, b: str) -> bool:
+    """Whether two given names could be one person's: equal, an initial or a truncation, an
+    abbreviation (Chas/Charles, Wm/William: letters in order, keeping the FIRST letter, so `C`
+    is not Richard), or OCR noise (ratio >= 0.5). Two names of three letters or fewer are never
+    evidence either way: `Vi'm` is Wm and `KUO` is GEO."""
+    if not a or not b or a == b or a.startswith(b) or b.startswith(a):
+        return True
+    if len(a) <= 3 and len(b) <= 3:
+        return True
+    if a[0] == b[0] and (_subseq(a, b) or _subseq(b, a)):
+        return True
+    return _ratio(a, b) >= 0.5
+
+
+def other_person(gold_raw: str, line_raw: str) -> bool:
+    """True only on EVIDENCE that the line names someone other than the gold row: a given name
+    that cannot be the gold's, or an unrelated surname on a line that has not merely lost it.
+    PIPELINE #30 and LINE_ASSEMBLY_HANDOFF §2: text similarity alone matched boyd1890's
+    `McElroy John A, news agent, h 84 Bradford ave` to `McElroy Bernard E, bill poster, h 84
+    Bradford ave`, and lain's `Jimenez Tony, liquors, 118 E. N. Y. av` to `Kaplon Solomon,
+    liquors, ...`: the same address makes a neighbour's line score like the gold's own.
+
+    A GATE (the line must show the gold's name) was simulated first and rejected: it drops the
+    right person's line wherever OCR garbled or lost the name (`Werts Albert` for Alberts
+    Albert, `Henry, lawyer, 9 Court` for Hagner Henry), and those are the rows the panel exists to
+    charge the pipeline for. So the rule vetoes, and every case of doubt keeps the match:
+    * a ditto-led gold row is left to the ratio (its surname is not on its line);
+    * a mark before the gold's own surname is a speck, not a ditto (`-Altz`, `_ Holstrom`);
+    * where the given name agrees, a surname disagreement is OCR (`Wm Albert` for Albin Albert);
+    * a line that lost its surname opens on the gold's given name, or on a later word of the
+      gold's (`Ocean Parkway opp. Brighton race-`, the run-over of `ABRAMS SMITH, hotel`, whose
+      first line the layer lost; `C. fancygoods, 1694 Grand`), and a lowercase opening has no
+      name to disagree with;
+    * a ditto line is judged on its given name alone. Most older gold sets type a printed ditto
+      as the surname (smith1855: `Farrell Dominick` for `— Dominick`), so a ditto line can be a
+      surname-led gold row's own line.
+    What it cannot see: a gold row's own printed line that came out carrying a neighbour's name
+    (lain, the pilot: `Abrahann George, mason, h 421 Hicks` on Abrahansen Jacob's line). It is
+    vetoed like a neighbour's line, and another candidate may take its place."""
+    gd, gw = _name_words(gold_raw, limit=99)
+    if gd or not gw:
+        return False
+    sur = gw[0][0]
+    given = gw[1][0] if len(gw) > 1 and gw[1][1] else None
+    ld, lw = _name_words(line_raw)
+    if not lw:
+        return False
+    if ld and _ratio(sur, lw[0][0]) >= SAME_SURNAME:
+        ld = False
+    lt, lc = [w for w, _ in lw], [c for _, c in lw]
+
+    def agrees(k: int) -> bool:          # the given name over one word, or two read closely
+        return lc[k] and (given_ok(given, lt[k]) or         # (`Ki chard`, not `C. merchant`)
+                          (k + 1 < len(lt) and _ratio(given, lt[k] + lt[k + 1]) >= SPLIT_GIVEN))
+
+    if ld:                               # a ditto line: its first word is a given name
+        return bool(given and lc[0] and not agrees(0))
+    best, k = -1.0, 1                    # the line's surname: its first 1-3 words, best reading
+    for n in range(1, min(3, len(lt)) + 1):
+        r = _ratio(sur, "".join(lt[:n]))
+        if r > best:
+            best, k = r, n
+    if len(lt[0]) >= len(sur) + 2 and _ratio(sur, lt[0][:len(sur)]) >= HEAD_MATCH:
+        best, k = 1.0, 1                 # glued: `McElroyJohn`
+        lt, lc = [lt[0][:len(sur)], lt[0][len(sur):]] + lt[1:], [lc[0], True] + lc[1:]
+    if best < 0.5:
+        if given and any(agrees(j) for j in range(min(3, len(lt)))):
+            return False
+        return lc[0] and lt[0] not in {w for w, _ in gw[2:]}
+    return bool(given and len(lt) > k and not agrees(k) and lc[k])
+
+
 def align(gold_rows: list, cand_idx: list, rows: list) -> list:
     """Greedy one-to-one match of gold rows to an OCR line or a line + the next one (a gold entry
-    typed as one row may be two printed lines). Returns [(gold i, (line j, ...), ratio)]."""
+    typed as one row may be two printed lines). Returns [(gold i, (line j, ...), ratio)].
+
+    A candidate needs a text ratio of MATCH_MIN and no evidence of another person on its FIRST
+    line (other_person, PIPELINE #30). A single line much longer than the gold row is admitted
+    when its head reads as the gold (HEAD_MATCH over the gold's length): the gold's own line with
+    the next entry glued on is still the gold's line, and the panel should charge the glue."""
     cands = [(j,) for j in cand_idx] + [(a, b) for a, b in zip(cand_idx, cand_idx[1:])]
     text = {c: _key(" ".join(rows[j][0]["raw_line"] for j in c)) for c in cands}
     scored = []
     for gi, g in enumerate(gold_rows):
         gk = _key(g["raw_line"])
         for c in cands:
-            if abs(len(text[c]) - len(gk)) <= max(12, 0.6 * len(gk)):
-                r = _ratio(gk, text[c])
-                if r >= MATCH_MIN:
-                    scored.append((r, len(c) == 1, gi, c))
+            t = text[c]
+            if not (abs(len(t) - len(gk)) <= max(12, 0.6 * len(gk))
+                    or (len(c) == 1 and len(t) > len(gk) and _ratio(gk, t[:len(gk)]) >= HEAD_MATCH)):
+                continue
+            r = _ratio(gk, t)
+            if r >= MATCH_MIN and not other_person(g["raw_line"], rows[c[0]][0]["raw_line"]):
+                scored.append((r, len(c) == 1, gi, c))
     scored.sort(key=lambda t: (-t[0], not t[1]))
     used_g, used_l, out = set(), set(), []
     for r, _, gi, c in scored:
@@ -684,6 +788,40 @@ def _self_test() -> int:
             {"raw_line": "Holmes James M. fish, 42 Water, N. Y. h. Washington av. n. Lafayette av"}]
     m = align(gold, [0, 1, 2], rows)
     assert [(g, c) for g, c, _ in m] == [(0, (2,)), (1, (0, 1))], m
+    # PIPELINE #30: a neighbour's line at the same address is vetoed, and the gold's own line,
+    # glued to the next entry and too long for the length window, is admitted on its head
+    # (boyd1890 leaf 105, the LightOn pilot on IA's words)
+    rows = [({"raw_line": t}, {}) for t in
+            ["McElroy Bernard E, bill poster, h 84 Bradford ave",
+             "McElroy John A, news agent, h 84 Bradford ave LLIOTT, Plumbing, Steam and Gas Fitt"]]
+    m = align([{"raw_line": "McElroy John A, news agent, h 84 Bradford ave"}], [0, 1], rows)
+    assert [(g, c) for g, c, _ in m] == [(0, (1,))], m
+    vetoed = [  # (gold, line): evidence of another person, LINE_ASSEMBLY_HANDOFF §2
+        ("McElroy John A, news agent, h 84 Bradford ave", "McElroy Bernard E, bill poster, h 84 Bradford ave"),
+        ("Harrison Richard, esq. 186, Water-street", "Harris C. merchant, 93, Wm. street"),
+        ("Jimenez Tony, liquors, 118 E. N. Y. av", "Kaplon Solomon, liquors, 118 E. N. Y. av"),
+        ("Ageliar Romia, cigarmkr. h 683 Atlantic av", "Agen H’y, clk. h 683 Atlantic av"),
+        ("Rogers F, carpenter 154 Johnson", "Rogers Lewis, carpenter 290 Hudson av"),
+        ("Crawford John W, (label cutter N Y), h 34 N Parsons ave", "Crawford Miss Susie L, h 34 N Parsons ave"),
+    ]
+    kept = [  # garbled, lost or misread names on the gold's own line
+        ("Alberts Albert, cab'tmkr. h 157 Norman av", "Werts Albert, cab'tmkr. h 157 Norman av"),
+        ("Altz Francis W. engineer, h 191 High", "-Altz Francis W. engineer, h 191 High"),
+        ("Hagner Henry, lawyer, 9 Court, h. 90 Johnson", "Henry, lawyer, 9 Court, h. 90 Johnson"),
+        ("Harrison Richard, esq. 186, Water-street", "Han'ison Ki chard, esq. 18 6, Water-street"),
+        ("Henderson Hugh, mercht. 24, Queen-street", "Henderlbn Hiigh,mercht. 24,Queen-ftreet"),
+        ("Albin Albert, salesman, h 38 Willow pl", "Wm Albert, salesman, h 38 Willow pl"),
+        ("Brooks Wm C. shoemaker 57 Allen", "Brooks Vi'm C. shoemaker 67 Allen"),
+        ("ADAMS GEO. C. cashier, Brooklyn Daily Eagle, h 25 Herkimer",
+         "ADAMS KUO. C. cashier, Brooklyn^ Daily Eagle, h 25 Herkimer"),
+        ("*Simmons Elizabeth, 1 York", '"Simmons Elizabeth, 1 York'),
+        ("ABRAMS SMITH, hotel, Ocean Parkway opp. Brighton racetrack", "Ocean Parkway opp. Brighton race-"),
+        ("Cooke Joseph C. fancygoods, 169 Grand, h. 70 S. Ninth", "C. fancygoods, 1694 Grand, h. 70"),
+        ("Farrell Dominick, gardener, h. Walworth st. n. Myrtle av.", "— Dominick, gardener, h. Walworth st. n. av. ."),
+        ('" Jas M (F R Emmons & Bro) 32 Warren R2', '" Francis R (F R Emmons & Bro) h21 W73d'),  # ratio alone
+    ]
+    assert [g for g, ln in vetoed if not other_person(g, ln)] == [], "should veto"
+    assert [g for g, ln in kept if other_person(g, ln)] == [], "should keep"
     # invented tokens: repair passes, conjured first names do not
     assert invented_tokens("Lane Margaret", "Lane M irgaret, widow of Joseph, 201 Varick") == []
     assert invented_tokens("Holith Thaddeus", "Hol lith , 26 N. Y.") == ["thaddeus"]

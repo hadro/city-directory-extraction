@@ -275,6 +275,14 @@ above in the backups and nowhere else in the 21 sets. It cannot see a mark both 
 scan that found polk1933si 42 and queens1933 51 is a heuristic, and a crop review of every
 markless person row in the 7 ditto-convention sets (about 100) would settle the rest.
 
+**Open, not fixed (found 2026-10-24 by the panel matcher, PIPELINE #30):** lain rows 75, 90 and 194
+each hold two printed entries in one `raw_line` (`Aacklender August, tailor, h 255 Ten Eyck Aalholm
+Jos. J. toilet articles, …`; `Abatz Hyman, h 496 Stone av Abbe Richard F. civil engineer, …`;
+`Ackerson Edw'd C. broker, N. Y. h 50 St Felix " Felix`). Not checked on the image. Also, lain's gold
+holds 2 ditto-led rows in 800 while Lain 1897 dittos repeated surnames: the set samples lines and
+leaves most ditto lines out (leaf 32 prints `“ Seth R. mgr, h 428 Lewis av` between rows 146 and 147),
+so the panel finds ungolded ditto lines beside the gold rows, free for a row to claim by text alone.
+
 ## Reading F1 vs EM (for scoring runs)
 For **sparse fields** (spouse/employer/race/home), read **F1 (non-empty), not EM** — high EM there
 is just empty-matches-empty. `evaluate.py` separates them.

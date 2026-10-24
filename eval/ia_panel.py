@@ -8,6 +8,8 @@ A panel on the model's REAL input: the gold records, paired with the line the pi
 produces for each from IA's OCR, instead of the hand-corrected text the panel feeds it.
 
     python3 eval/ia_panel.py build                   # -> data/iapanel/iapanel_<set>.jsonl + manifest
+    python3 eval/ia_panel.py build --panel-dir data/iapanel_X [--ocr DIR]   # a new panel dir,
+                                                     # its manifest inside it, not in results/
     python3 eval/ia_panel.py score --run 4b-100k     # after a prediction run over those files
     python3 eval/ia_panel.py --self-test
 
@@ -307,6 +309,9 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("cmd", nargs="?", choices=["build", "score"])
+    ap.add_argument("--ocr", help="build: the survey lines to pair with (default data/survey_ocr)")
+    ap.add_argument("--panel-dir", help="build/score: a panel dir inside the repo other than "
+                                        "data/iapanel; its manifest is written into it")
     ap.add_argument("--run", default="4b-100k")
     ap.add_argument("--preds-dir", default=str(DATA / "volumes"))
     ap.add_argument("--out", help="score: write the result as JSON")
@@ -314,6 +319,12 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     if args.self_test:
         return _self_test()
+    global OCR, PANEL_DIR, MANIFEST
+    if args.ocr:
+        OCR = Path(args.ocr).resolve()
+    if args.panel_dir:
+        PANEL_DIR = Path(args.panel_dir).resolve()
+        MANIFEST = PANEL_DIR / "manifest.json"
     if args.cmd == "build":
         build()
     elif args.cmd == "score":

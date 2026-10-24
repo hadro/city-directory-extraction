@@ -304,7 +304,7 @@ def panel(args) -> int:
         if rows or args.all:
             print(f"{set_name:42s} {c['A']:5d} {c['B']:5d} {c['exA']:5d} {c['exB']:5d}  {c['dropped']:7d} "
                   f"{c['added']:5d} {c['rematched']:9d}  {c['exact_lost']:10d} {c['exact_gained']:12d}")
-        if args.list:
+        if args.list and rows:
             print("\n".join(rows))
     print(f"{'POOLED':42s} {tot['A']:5d} {tot['B']:5d} {tot['exA']:5d} {tot['exB']:5d}  {tot['dropped']:7d} "
           f"{tot['added']:5d} {tot['rematched']:9d}  {tot['exact_lost']:10d} {tot['exact_gained']:12d}")

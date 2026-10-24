@@ -200,6 +200,14 @@ The indent rule joins it.
 In this order. Steps 1-6 can all land before D returns. Each step's "before" is the previous step's
 "after". Each needs §4's checks plus what is listed under it.
 
+**Progress** (newest last; numbers in each commit and in PIPELINE #30/#32):
+- Step 0 DONE (a52dd99): self-tests pass, drift check clean, `glue` and `panel` added.
+- Step 1 DONE: the veto, with two rules beyond refinements 1-4 (PIPELINE #30). **Diff later steps
+  against `data/iapanel_lighton_post30_{ia,tess}`** (pilot: IA's words 2,059 rows, 1,730 exact;
+  fresh tesseract 2,056, 1,715) and `data/iapanel_post30` (production lines, 2,352 rows, 1,394
+  exact), not the `_pull_` panels. `eval/ia_panel.py build --ocr DIR --panel-dir DIR` builds a
+  panel elsewhere than `data/iapanel`.
+
 Where each step lands:
 
 | step | lands in | applied by |

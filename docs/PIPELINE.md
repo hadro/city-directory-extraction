@@ -1207,6 +1207,43 @@ gluing a display banner onto an entry.** (Handed to another agent 2026-10-24 wit
 present before and after the same-row fix of that day. Two defects stacked; the first is the cheap,
 general one.
 
+**Panel half DONE 2026-10-24** (`volume_run_report.other_person`, a VETO in `align`; LINE_ASSEMBLY_HANDOFF
+step 1). The name GATE recommended below was simulated first and rejected: it drops the right
+person's line wherever OCR garbled or lost the name. The veto rejects a candidate only on evidence of
+another person (a given name that cannot be the gold's, or an unrelated capitalised surname on a line
+that has not merely lost it), checks a pair on its first line, and admits a single line longer than
+the gold when its head reads as the gold (0.85), so a glued line still claims its row. Measured
+against panels rebuilt at the previous commit, in rows (exact after typography):
+
+| panel | matched | exact | dropped / added / re-matched |
+|---|---|---|---|
+| LightOn pilot, IA's words | 2,066 -> 2,059 | 1,730 -> 1,730 | 7 / 0 / 5 |
+| LightOn pilot, fresh tesseract | 2,064 -> 2,056 | 1,715 -> 1,715 | 8 / 0 / 3 |
+| production lines (`data/survey_ocr`, 21 sets) | 2,363 -> 2,352 | 1,394 -> 1,394 | 12 / 1 / 2 |
+
+No exact row changed on any panel. Every wrong-person row of LINE_ASSEMBLY_HANDOFF §2 is now unmatched
+or matched to the gold's own line (McElroy and Polk 1917 row 27 to their glued lines; Crawford/Susie,
+Seabury/Samuel, Ammons/Fred'k, Kaplon, Agen H'y, Fordham/Charles, Rogers/Lewis, Farrel/Brid unmatched),
+as are hopehenderson1856 row 6 (`*Hales John` -> its own glued line), smith1855 twin row 82 and lain
+row 75. The right person's line is still lost on: destroyed names (`Paley Gears`, `Eyes ase`, `Ed ape`,
+`Foote Beitetitn`, lain 571 `" Fre»SaS-,CarD'r'` and 575 `"SeTfcnAni0n'`, both the gold's own line
+by LightOn's reading of the page); smith1855 row 175 (another entry's tail before the gold's, name
+lost); hopehenderson1856 row 7 (its line is glued under row 6's head, which now takes it); and, on the
+pilot, lain rows 141 and 373, where the import put a NEIGHBOUR's name on the gold's own printed line
+(`Abrahann George, mason, h 421 Hicks`; `John, clk. h 156 Buffalo` where IA reads `Ahrend Geo.`).
+No text rule can tell those from a neighbour's line, and on row 141 another person's ditto line
+(`“ Jacob, tailor, h 138 Ten Eyck`, a column away) takes the freed row: the one wrong-person match
+the veto creates. Rules beyond the handoff's four refinements, each from a measured row: a line whose
+first word occurs later in the gold has lost its head (`Ocean Parkway opp. Brighton race-`, the
+run-over of `ABRAMS SMITH, hotel`; `C. fancygoods`); a given name OCR split in two must reread at 0.75
+(`Ki chard`, not `C. merchant`). A stricter ditto rule (a ditto line never claims a surname-led gold
+row) was measured and dropped: most older gold sets type a printed ditto as the surname (smith1855
+`Farrell Dominick` for `— Dominick`). Post-#30 baselines, for every later diff:
+`data/iapanel_lighton_post30_{ia,tess}` (work dirs `data/lighton_pilot_pull_{ia,tess}`) and
+`data/iapanel_post30` (`ia_panel.py build --panel-dir`, new). The 4B's existing panel predictions
+still line up with unchanged rows; a row whose line changed needs a Torch run to score. The joiner
+half is LINE_ASSEMBLY_HANDOFF step 6.
+
 The row: gold `McElroy John A, news agent, h 84 Bradford ave`; the panel's line `McElroy Bernard
 E, bill poster, h 84 Bradford ave`, match 0.622. LightOn and the dump read the page right, as
 separate lines: line 50 the entry (x=561), line 51 `LLIOTT, Plumbing, Steam and Gas Fitt` (an ad

@@ -33,6 +33,18 @@ volume (PIPELINE #31).
 
 `tables [VOL ...]`: per volume, the tiles LightOn answered in table mode and the column-header
 lines it invented there ("Name, Address"), which untable keeps as lines (PIPELINE #32 (b), #27).
+
+`glue [--dir DIR] VOL ...`: the hanging-dash census (LINE_ASSEMBLY_HANDOFF §2, "the joiner's margin
+guard"). Model-read lines with `cont` 1 that open `Surname Given` and sit 0.5-3 line heights right
+of a ditto line above, which join_wraps joins on `cont` alone. Each candidate's indent is given
+from the dash (what the guard measures) and from the ditto line's NAME, the first word that is not
+a mark: glue sits near 0 from the name, a real run-over about 1 line height past it. Reads the
+production dumps, or a scratch dir of re-dumped ones.
+
+`panel A B [--list]`: two panel dirs (eval/ia_panel.build's output) compared by gold row: rows
+dropped, added, re-matched to another line, and exact rows lost or gained (exact after
+lighton_pilot.canon's typography). Counts, not rates: dropping inexact rows raises a rate with
+nothing fixed.
 """
 from __future__ import annotations
 
@@ -206,6 +218,99 @@ def tables(args) -> int:
     return 0
 
 
+DITTO_LED = re.compile(r'^\s*(?:[—–\-"“”„]|ii\b|n\b)')
+ENTRY_HEAD = re.compile(r"^[A-Z][a-z'’]+[A-Za-z'’-]*\s+(?:[A-Z][a-z]*\.?|&)(?:\s|$)")
+
+
+def name_x(ws: list) -> int:
+    """Where a ditto line's text begins: its first word that is not a mark."""
+    from ia_volume_to_jsonl import DITTO_SHAPE
+    for k, w in enumerate(ws):
+        if not (DITTO_SHAPE.match(w[5]) or (k == 0 and w[5] in ("ii", "n"))):
+            return w[0]
+    return ws[0][0]
+
+
+def glue(args) -> int:
+    import statistics
+    src = Path(args.dir) if args.dir else DATA / "survey_ocr"
+    edges = [-1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 3.0]
+    for vol in args.vols:
+        n = hits = 0
+        bins, examples = collections.Counter(), []
+        with gzip.open(src / f"{vol}_words.jsonl.gz", "rt", encoding="utf-8") as fh:
+            for r in map(json.loads, fh):
+                if "cont" not in r:
+                    continue
+                L = r["lines"]
+                hs = [w[3] - w[1] for ws in L for w in ws]
+                mh = statistics.median(hs) if hs else 20
+                for i, ws in enumerate(L):
+                    if not ws:
+                        continue
+                    n += 1
+                    if not (i and L[i - 1] and r["cont"][i] == 1 and r["sources"][i] != "tesseract"):
+                        continue
+                    prev, text = L[i - 1], " ".join(w[5] for w in ws)
+                    pt = " ".join(w[5] for w in prev)
+                    x = min(w[0] for w in ws)
+                    d = (x - min(w[0] for w in prev)) / mh
+                    if not (0.5 < d <= 3.0 and ENTRY_HEAD.match(text) and DITTO_LED.match(pt)):
+                        continue
+                    hits += 1
+                    dn = (x - name_x(prev)) / mh
+                    b = next((f"<{e:g}" for e in edges if dn < e), f">={edges[-1]:g}")
+                    bins[b] += 1
+                    examples.append((r["leaf"], round(d, 2), round(dn, 2), pt[:40], text[:45]))
+        order = [f"<{e:g}" for e in edges] + [f">={edges[-1]:g}"]
+        print(f"{vol:28s} {n:9,d} lines  candidates {hits:5,d}   indent from the name, line heights: "
+              + "  ".join(f"{b} {bins[b]}" for b in order if bins[b]))
+        step = max(1, len(examples) // max(args.examples, 1))
+        for e in examples[::step][:args.examples]:
+            print(f"    leaf {e[0]:4d}  dash {e[1]:5.2f} name {e[2]:5.2f}  {e[3]!r:44s} + {e[4]!r}")
+    return 0
+
+
+def panel(args) -> int:
+    from lighton_pilot import canon, load
+    a_dir, b_dir = Path(args.a), Path(args.b)
+    exact = lambda r: r is not None and canon(r["raw_line"]) == canon(r["context"]["gold_raw_line"])
+    tot = collections.Counter()
+    names = sorted({p.name for d in (a_dir, b_dir) for p in d.glob("iapanel_*.jsonl")})
+    print(f"{'set':42s} {'A':>5s} {'B':>5s} {'exA':>5s} {'exB':>5s}  dropped added rematched  "
+          f"exact-lost exact-gained")
+    for name in names:
+        a = {r["context"]["gold_row"]: r for r in load(a_dir / name)}
+        b = {r["context"]["gold_row"]: r for r in load(b_dir / name)}
+        c, rows = collections.Counter(), []
+        for g in sorted(set(a) | set(b)):
+            ra, rb = a.get(g), b.get(g)
+            ea, eb = exact(ra), exact(rb)
+            c["exA"] += ea
+            c["exB"] += eb
+            if (ra or {}).get("raw_line") == (rb or {}).get("raw_line"):
+                continue
+            kind = "dropped" if rb is None else "added" if ra is None else "rematched"
+            c[kind] += 1
+            c["exact_lost"] += ea and not eb
+            c["exact_gained"] += eb and not ea
+            rows.append(f"  row {g:3d} {kind:9s}{' EXACT LOST' if ea and not eb else ''}"
+                        f"  gold {(ra or rb)['context']['gold_raw_line'][:70]!r}\n"
+                        f"      A {(ra or {}).get('raw_line', '')[:100]!r}\n"
+                        f"      B {(rb or {}).get('raw_line', '')[:100]!r}")
+        c["A"], c["B"] = len(a), len(b)
+        tot.update(c)
+        set_name = name[len("iapanel_"):-len(".jsonl")]
+        if rows or args.all:
+            print(f"{set_name:42s} {c['A']:5d} {c['B']:5d} {c['exA']:5d} {c['exB']:5d}  {c['dropped']:7d} "
+                  f"{c['added']:5d} {c['rematched']:9d}  {c['exact_lost']:10d} {c['exact_gained']:12d}")
+        if args.list:
+            print("\n".join(rows))
+    print(f"{'POOLED':42s} {tot['A']:5d} {tot['B']:5d} {tot['exA']:5d} {tot['exB']:5d}  {tot['dropped']:7d} "
+          f"{tot['added']:5d} {tot['rematched']:9d}  {tot['exact_lost']:10d} {tot['exact_gained']:12d}")
+    return 1 if tot["exact_lost"] else 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -229,8 +334,18 @@ def main(argv=None) -> int:
     p.add_argument("b")
     p = sub.add_parser("tables")
     p.add_argument("vols", nargs="*")
+    p = sub.add_parser("glue")
+    p.add_argument("vols", nargs="+")
+    p.add_argument("--dir", help="word dumps to read instead of data/survey_ocr")
+    p.add_argument("--examples", type=int, default=6)
+    p = sub.add_parser("panel")
+    p.add_argument("a")
+    p.add_argument("b")
+    p.add_argument("--list", action="store_true", help="every changed row, A's line and B's")
+    p.add_argument("--all", action="store_true", help="a line for every set, changed or not")
     args = ap.parse_args(argv)
-    return {"page": page, "proxy": proxy, "moved": moved, "same": same, "tables": tables}[args.cmd](args)
+    return {"page": page, "proxy": proxy, "moved": moved, "same": same, "tables": tables,
+            "glue": glue, "panel": panel}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -409,21 +409,21 @@
    "publisher_tag": "doggett",
    "publisher_tag_note": null,
    "year_tag": "1845",
-   "hocr_lines": 77961,
-   "wrap_joins": 5349,
-   "candidates": 72612,
+   "hocr_lines": 77708,
+   "wrap_joins": 5233,
+   "candidates": 72475,
    "wrap_calibration": {
-    "indent_ratio": 1.5,
+    "indent_ratio": 1.75,
     "calibrated": true,
-    "pairs": 69478,
-    "mark_share": 0.0087,
+    "pairs": 69493,
+    "mark_share": 0.0086,
     "mode": 2.0,
-    "mode_pairs": 2852,
-    "trough": 1.5,
-    "trough_pairs": 115,
+    "mode_pairs": 2854,
+    "trough": 1.75,
+    "trough_pairs": 133,
     "reason": "sharp runover mode"
    },
-   "model_runovers": 4236,
+   "model_runovers": 4182,
    "cont_dropped_leaves": 1,
    "column_splits": {
     "lines": 37,
@@ -434,14 +434,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 65612,
-   "keep_rate": 0.9036,
+   "kept": 65678,
+   "keep_rate": 0.9062,
    "dropped": {
-    "short": 4535,
-    "banner": 1554,
+    "short": 4327,
+    "banner": 1558,
     "allcaps": 813,
     "nonascii": 52,
-    "bigtype": 39,
+    "bigtype": 40,
     "pagenum": 7
    },
    "ditto_marks": [],
@@ -456,27 +456,27 @@
    "top_ad_leaves": [
     5,
     454,
+    1,
     482,
     460,
-    1,
     436,
     136,
     453,
     441,
-    459
+    138
    ],
-   "filters_at": "facd160-dirty",
-   "derived": "2026-10-21"
+   "filters_at": "fc87abb-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 5323517,
+  "words_gz_bytes": 5317881,
   "hocr_deleted": true,
   "elapsed_s": 13
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-21",
-  "code_at": "facd160-dirty",
+  "derived": "2026-10-23",
+  "code_at": "fc87abb-dirty",
   "start_leaf": 19,
   "end_leaf": 423,
   "first_letter": "A",
@@ -658,35 +658,91 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-21",
-  "code_at": "facd160-dirty",
+  "derived": "2026-10-23",
+  "code_at": "fc87abb-dirty",
   "content_leaves": 478,
-  "fitted_leaves": 442,
-  "read_leaves": 355,
+  "fitted_leaves": 440,
+  "read_leaves": 336,
   "segments": [
    {
     "first_leaf": 11,
-    "last_leaf": 145,
+    "last_leaf": 105,
     "first_page": 5,
-    "last_page": 135,
-    "leaves": 131,
-    "read": 109
+    "last_page": 99,
+    "leaves": 95,
+    "read": 86
    },
    {
-    "first_leaf": 149,
+    "first_leaf": 106,
+    "last_leaf": 133,
+    "first_page": 0,
+    "last_page": 27,
+    "leaves": 28,
+    "read": 19
+   },
+   {
+    "first_leaf": 140,
     "last_leaf": 195,
-    "first_page": 37,
+    "first_page": 30,
     "last_page": 83,
-    "leaves": 47,
-    "read": 40
+    "leaves": 54,
+    "read": 45
    },
    {
     "first_leaf": 196,
-    "last_leaf": 452,
+    "last_leaf": 222,
     "first_page": 184,
+    "last_page": 210,
+    "leaves": 27,
+    "read": 15
+   },
+   {
+    "first_leaf": 223,
+    "last_leaf": 236,
+    "first_page": 11,
+    "last_page": 24,
+    "leaves": 14,
+    "read": 11
+   },
+   {
+    "first_leaf": 237,
+    "last_leaf": 343,
+    "first_page": 225,
+    "last_page": 327,
+    "leaves": 103,
+    "read": 70
+   },
+   {
+    "first_leaf": 344,
+    "last_leaf": 357,
+    "first_page": 28,
+    "last_page": 41,
+    "leaves": 14,
+    "read": 12
+   },
+   {
+    "first_leaf": 358,
+    "last_leaf": 392,
+    "first_page": 342,
+    "last_page": 376,
+    "leaves": 35,
+    "read": 20
+   },
+   {
+    "first_leaf": 393,
+    "last_leaf": 410,
+    "first_page": 77,
+    "last_page": 94,
+    "leaves": 18,
+    "read": 12
+   },
+   {
+    "first_leaf": 412,
+    "last_leaf": 452,
+    "first_page": 396,
     "last_page": 434,
-    "leaves": 251,
-    "read": 193
+    "leaves": 39,
+    "read": 33
    },
    {
     "first_leaf": 467,
@@ -708,8 +764,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-21",
-  "code_at": "facd160-dirty",
+  "derived": "2026-10-23",
+  "code_at": "fc87abb-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -835,8 +891,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-21",
-  "code_at": "facd160-dirty",
+  "derived": "2026-10-23",
+  "code_at": "fc87abb-dirty",
   "file": "data/survey_ocr/doggettsnewyorkc1845dogg_listing.jsonl.gz",
   "sections": [
    {
@@ -850,19 +906,19 @@
     "end_leaf": 423
    }
   ],
-  "kept": 61403,
-  "dropped": 4209,
-  "kept_share": 0.9359,
+  "kept": 61457,
+  "dropped": 4221,
+  "kept_share": 0.9357,
   "kept_by_section": {
    "late_names": 94,
-   "listing": 61309
+   "listing": 61363
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-21",
+  "derived": "2026-10-23",
   "entry_min": 0.15,
-  "scoped_lines": 406,
+  "scoped_lines": 394,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    17,
@@ -888,11 +944,14 @@
   "loop_truncated": 0,
   "table_mode": 133,
   "pages": 407,
-  "lines_runover": 4252,
-  "lines_model": 66951,
-  "lines_model-only": 681,
-  "lines_tesseract": 733,
+  "lines_runover": 4197,
+  "lines_model": 67066,
+  "lines_model-only": 513,
+  "lines_tesseract": 533,
   "leaves_replaced": 407,
-  "dumped": "2026-10-21"
+  "layers": {
+   "ia-words (IA OCR)": 407
+  },
+  "dumped": "2026-10-23"
  }
 }

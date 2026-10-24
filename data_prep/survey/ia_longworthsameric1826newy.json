@@ -377,21 +377,21 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1826",
-   "hocr_lines": 35461,
-   "wrap_joins": 1019,
-   "candidates": 34442,
+   "hocr_lines": 33488,
+   "wrap_joins": 956,
+   "candidates": 32532,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 28513,
-    "mark_share": 0.0233,
+    "pairs": 29222,
+    "mark_share": 0.0232,
     "mode": 2.0,
     "mode_pairs": 238,
     "trough": 1.75,
-    "trough_pairs": 82,
+    "trough_pairs": 85,
     "reason": "runover mode not isolated from the next-entry band"
    },
-   "model_runovers": 1768,
+   "model_runovers": 220,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -402,16 +402,16 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "digit_fixes": 14,
-   "kept": 29043,
-   "keep_rate": 0.8432,
+   "digit_fixes": 13,
+   "kept": 28457,
+   "keep_rate": 0.8747,
    "dropped": {
-    "short": 2897,
-    "banner": 1653,
-    "allcaps": 786,
-    "nonascii": 41,
+    "short": 1909,
+    "banner": 1340,
+    "allcaps": 768,
+    "nonascii": 37,
     "bigtype": 15,
-    "pagenum": 7
+    "pagenum": 6
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -423,29 +423,29 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    615,
     55,
     59,
     143,
-    887,
     39,
     53,
     57,
     41,
-    105
+    105,
+    61,
+    141
    ],
-   "filters_at": "facd160-dirty",
-   "derived": "2026-10-21"
+   "filters_at": "fc87abb-dirty",
+   "derived": "2026-10-23"
   },
-  "words_gz_bytes": 2196486,
+  "words_gz_bytes": 2179609,
   "hocr_deleted": true,
   "elapsed_s": 12
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-21",
-  "code_at": "facd160-dirty",
+  "derived": "2026-10-23",
+  "code_at": "fc87abb-dirty",
   "start_leaf": 151,
   "end_leaf": 1123,
   "first_letter": "A",
@@ -846,11 +846,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-21",
-  "code_at": "facd160-dirty",
+  "derived": "2026-10-23",
+  "code_at": "fc87abb-dirty",
   "content_leaves": 568,
   "fitted_leaves": 534,
-  "read_leaves": 207,
+  "read_leaves": 172,
   "segments": [
    {
     "first_leaf": 29,
@@ -866,7 +866,7 @@
     "first_page": 53,
     "last_page": 540,
     "leaves": 488,
-    "read": 199
+    "read": 164
    }
   ],
   "ia_comparison": {
@@ -880,8 +880,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-21",
-  "code_at": "facd160-dirty",
+  "derived": "2026-10-23",
+  "code_at": "fc87abb-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -966,8 +966,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-21",
-  "code_at": "facd160-dirty",
+  "derived": "2026-10-23",
+  "code_at": "fc87abb-dirty",
   "file": "data/survey_ocr/longworthsameric1826newy_listing.jsonl.gz",
   "sections": [
    {
@@ -976,18 +976,18 @@
     "end_leaf": 1123
    }
   ],
-  "kept": 26464,
+  "kept": 25878,
   "dropped": 2579,
-  "kept_share": 0.9112,
+  "kept_share": 0.9094,
   "kept_by_section": {
-   "listing": 26464
+   "listing": 25878
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-21",
+  "derived": "2026-10-23",
   "entry_min": 0.15,
-  "scoped_lines": 21,
+  "scoped_lines": 24,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    769
@@ -1003,12 +1003,15 @@
   "loop_truncated": 2,
   "table_mode": 2,
   "pages": 485,
-  "lines_runover": 1768,
-  "lines_model": 28579,
-  "lines_tesseract": 1680,
-  "lines_model-only": 519,
-  "lines_bleed": 39,
+  "lines_runover": 220,
+  "lines_model": 27039,
+  "lines_tesseract": 1242,
+  "lines_model-only": 530,
+  "lines_bleed": 33,
   "leaves_replaced": 485,
-  "dumped": "2026-10-21"
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 485
+  },
+  "dumped": "2026-10-23"
  }
 }

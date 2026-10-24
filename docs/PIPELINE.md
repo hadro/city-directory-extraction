@@ -2110,15 +2110,16 @@ not reach `usable`; both are fixable by re-import alone (it re-flattens from `.r
 Brooklyn 1905s also leave the most IA lines unpaired (38-40k against 17-28k): partly specks, perhaps
 entries table mode dropped; read a few pages against their images before the 4B.
 
-**Staged for the 4B 2026-10-23 (hadro's option B):** `data/volumes_books_damaged`, 37 volumes,
-4,399,755 lines, 242 tasks of 20,000, ~97 GPU-hours at 12.6 rows/s; `cde-volumes-books-damaged.tar.gz`
-(143 MB, sha256 21f665a9...9121), `code_at` 29942fd (the "-dirty" is two untracked files). It is 33
-of the tier's 35 volumes, holding back trowsgeneraldire19073trow and trowsgeneraldire19091trow
-until #32 (a) is fixed, plus the canary's four again, re-imported with the same-row fix (29942fd:
-Longworth's scoped lines 26,464 -> 25,878 as split tails rejoin their entries), to measure the fix
-in records against job 3. Runbook: the damaged-tier page, https://claude.ai/artifact/L5hhRFvo22384GUDwNkQZa,
-"Next job". Predictions come back into `data/volumes_books_damaged/` (never `data/volumes/`);
-assemble into a separate `--out` so job 3's `data/records_canary` stays the before.
+**Staged for the 4B 2026-10-24:** `data/volumes_books_damaged_v2`, 39 volumes, 4,671,559 lines,
+258 tasks of 20,000, ~103 GPU-hours at 12.6 rows/s; `cde-volumes-books-damaged-v2.tar.gz` (152 MB,
+sha256 39b19059...8610), `code_at` da3ca91 (the "-dirty" is untracked files). All 35 of the tier's
+volumes, every one rebuilt with the same-row fix (de9521a) and the ditto pull (071e202), plus the
+canary's four again, to measure those fixes in records against job 3 (Longworth's scoped lines
+26,464 -> 25,879 as split tails rejoin their entries). A first, 37-volume staging held back the two
+"generaldire" Trow volumes until #32 (a) was fixed; it was never sent and is deleted. Runbook: the
+damaged-tier page, https://claude.ai/artifact/L5hhRFvo22384GUDwNkQZa, "Next job". Predictions come
+back into `data/volumes_books_damaged_v2/` (never `data/volumes/`); assemble into a separate `--out`
+so job 3's `data/records_canary` stays the before.
 
 **THE FULL BOOK-SCAN RE-OCR, STAGED ON TORCH (built 2026-10-22).** The tiers' images are ~75 GB,
 which the Mac cannot hold, so Torch fetches and cuts them, and only words and answers cross:

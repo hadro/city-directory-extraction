@@ -45,11 +45,12 @@ no faster than an L40S without them, unmeasured with them).
 | **B. abbyy8-damaged re-OCR** | `cde-books-damaged.tar` (358 MB, sha256 1f8d8fa7...7291): code at 6002d70 + 35 volumes' word records | https://claude.ai/artifact/L5hhRFvo22384GUDwNkQZa | `data/reocr_tiers/answers_abbyy8-damaged/<id>.tar` (one per volume, possibly in batches) + `lighton-abbyy8-damaged-logs.tar` + a summary line |
 
 **Update 2026-10-23: A and B are back and done** (canary scored, tier imported: PIPELINE #27). Out
-now: **C. the 4B over the damaged tier** (33 volumes + the canary's 4 again), `cde-volumes-books-damaged.tar.gz`
-(sha256 21f665a9...9121, 242 tasks), comes back as `books-damaged-4b-preds.tar`; install into
-`data/volumes_books_damaged/`, verify the 242 `.sha1`s as in section 3 step 1, guard, and assemble with
-`--out data/records_books_damaged`. Judge the canary four against job 3 (`results/records_books_canary.json`:
-Longworth 0.859 should rise), and read #32 before trusting the two held-back Trow volumes' absence.
+now: **C. the 4B over the damaged tier** (all 35 volumes + the canary's 4 again, 2026-10-24),
+`cde-volumes-books-damaged-v2.tar.gz` (sha256 39b19059...8610, 258 tasks), comes back as
+`books-damaged-4b-preds.tar`; install into `data/volumes_books_damaged_v2/`, verify the 258 `.sha1`s as in
+section 3 step 1, guard, and assemble with `--out data/records_books_damaged`. Judge the canary four
+against job 3 (`results/records_books_canary.json`: Longworth 0.859 should rise), and the two
+"generaldire" Trow volumes by the glued-entry proxy in PIPELINE #32 (a).
 Also out: **D. the LightOn re-read of the last two tiers**, `cde-books-first-clean.tar` (875 MB,
 sha256 25754bd7...7ae4: word positions for 58 `first` + 17 `abbyy8-clean` volumes, written at 32ebc26;
 Torch code unchanged since 6002d70), same runbook page, "Also next". ~165k + ~70k tiles, ~39 GPU-h.

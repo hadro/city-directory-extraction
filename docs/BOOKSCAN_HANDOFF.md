@@ -50,6 +50,13 @@ now: **C. the 4B over the damaged tier** (33 volumes + the canary's 4 again), `c
 `data/volumes_books_damaged/`, verify the 242 `.sha1`s as in section 3 step 1, guard, and assemble with
 `--out data/records_books_damaged`. Judge the canary four against job 3 (`results/records_books_canary.json`:
 Longworth 0.859 should rise), and read #32 before trusting the two held-back Trow volumes' absence.
+Also out: **D. the LightOn re-read of the last two tiers**, `cde-books-first-clean.tar` (875 MB,
+sha256 25754bd7...7ae4: word positions for 58 `first` + 17 `abbyy8-clean` volumes, written at 32ebc26;
+Torch code unchanged since 6002d70), same runbook page, "Also next". ~165k + ~70k tiles, ~39 GPU-h.
+Comes back as `answers_first/` and `answers_abbyy8-clean/` volume tars: receive and import as in
+section 4, after PIPELINE #31 (the import on one core would take ~9 h). Watch Trow 1915/1917 (the
+`_jp2.tar` frame check has seen one page) and the coverage flags (Bronx 1871, Trow 1863/1876, Trow
+1914 p2).
 
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an

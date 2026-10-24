@@ -1296,6 +1296,76 @@ with the production dumps, and `reocr_pair.py --self-test`.
    needs `eval/lighton_pilot.py` on both `--page-dir`s with `--diff-against` saved panels, as the
    same-row fix had (`de9521a`), and the per-volume line counts against the production dumps.
 
+**32. Five line-assembly defects found by reading the abbyy8-damaged import against page images
+(2026-10-23, hadro).** Each was traced to its stage on the page itself; the "old/new" comparisons
+run `page_dump` under the code before and after `de9521a` (the same-row fix). Ordered by what they
+cost the 4B. **Before this tier is staged, decide what to do about (a)**: it makes one record of
+two people.
+
+**(a) The wrap-joiner glues separate entries where the layer missed a line's opening.** Trow 1909
+vol 1 leaf 97: `—Julian H agent 90 West R 1908 h Hopatcong N J —Kate B h 733 Prospect av`, `—Robt
+clerk h 150 W 105th —Robt B notary public 150 Nassau R 1106 ...`; Trow 1907 vol 3 leaf 463:
+`Steinbruck Max police h 510 W 151st Steinbrugge Edwd (estate of) mers 29 Bway`. LightOn read each
+entry as its own line (tile c2_h1's raw answer is clean), and the dump flags the second a start
+(`cont` 0), so `join_wraps` fell back to its indent rule, and the second line's box starts late:
+`—Kate B` at x=1519 where its neighbour `—Katharine H` starts at 1350. The layer missed the line's
+opening, `respell` hung the text on the words it did find, and the line looks indented. The
+margin pull (`6a5837e`, "pull ONLY where tesseract missed the line's opening") should catch
+exactly this and did not. **Size**, by a proxy (a ditto dash opening a second entry mid-line,
+`\S\s+[—–]\s*[A-Z][a-z]`, in `_listing.jsonl.gz`): trowsgeneraldire19091trow 1,668 of 140,915
+lines (1.2%), trowsgeneraldire19073trow 1,244 (1.0%), against 0.2-0.5% in every other Trow part
+checked, the other two tesseract-layer volumes included (1908 p2 0.4%, p3 0.3%). So it belongs to
+those two scans ("generaldire", a different series), not to the tesseract layer as such; the
+proxy misses joins without a ditto (Steinbrugge), so the true count is higher. Same tree as #28's
+warning: do not lower the indent threshold. **Recommended:** find why the margin pull did not fire
+on leaf 97 (it reads the margin locally, +-12 line heights, `fc46ac8`), and whether a start flag
+plus a ditto or capitalised-surname opening should veto an indent join when the line's box begins
+right of its neighbours' by more than the indent but its text begins like an entry. Measure on the
+pilot (both `--page-dir`s) and by the proxy on these two volumes.
+
+**(b) LightOn in table mode merges entries in one cell and drops ditto dashes.** Same leaf 97,
+tile c1_h1 (a Markdown table): `| Philippa sec 51 Front h Mt Vernon N Y Abbihl Jacob H h 408 W
+150th |`, and `| Chas I ice 314 W 16th ... |` for a printed `—Chas I ice ...`. The import cannot
+split what the model wrote as one cell. Table mode ran 20-25% of tiles on five volumes of this
+tier (Brooklyn 1905 p1 and c1905, Trow 1903 p1-p3; see #27). **Recommended:** count, per volume, the
+table-mode tiles whose cells hold two entries (a mid-cell `Surname Given` after an address), and if
+it is more than a handful, re-read those tiles on Torch with a prompt or sampling that discourages
+tables (a few hundred tiles, minutes of GPU), rather than trying to split cells on the Mac.
+
+**(c) `respell` places unmatched words left of the column, and the banner filter then drops the
+line.** Trow 1909 vol 1 leaf 95, `Aal Siegfried clerk h 2 W 118th`: IA's words have nothing under
+the name ("clerk h 2 W llStb" only), so `respell` runs `Aal Siegfried` leftwards from the first
+matched word at a character width inflated by the garbled words, to x = -43; the line is then too
+wide and `survey_harvest` drops it as `banner`. Present before and after `de9521a` (lines off the
+page's left edge: Longworth 1826 11 and 11, Trow 1907 p3 47 and 47; 107 of 195,359 in Trow 1909 vol
+1), about 0.05%. **Recommended (cheap, safe):** clamp a line's words to its tile's left edge (each
+row already carries `x0`), and cap `respell`'s per-character width at the page's median `char_w`.
+A re-import applies it; no GPU.
+
+**(d) A hyphenated word's tail, set as its own layer piece, is dropped as `short`.** Brooklyn 1905
+p1 leaf 563: LightOn read `Dornheim Chas lithographer 4 New Chambers Mhtn h 155 Cornelia`; IA's
+layer has `... 4 New Cham-`, then `bers` as a separate piece (x 338-401), then `Mhtn h 155
+Cornelia`, so `split` gives `bers` a row of its own and the survey's `short` filter drops it,
+leaving `... 4 New Cham-` / `Mhtn h 155 Cornelia`. `bers` and `Mhtn ...` miss the same-row rule by
+half a pixel (middles 12 px apart, limit 11.5). Unchanged by `de9521a`. **Recommended:** a model
+line's piece too short to stand (under ~5 characters, no digit) joins the neighbouring piece of the
+same run rather than becoming a row; or, more simply, `split` never hands a single short fragment
+its own row when the run has a longer neighbour on either side.
+
+**(e) The same-row rule assumes a level line; on a tilted page a right-hand piece joins the wrong
+row.** Longworth 1826 leaf 409 (IA's words, badly garbled there): the printed line `Eakins John,
+carpenter & grocer 219 Hester h. Rhynder` is three layer pieces, and the right-hand one sits 15-20
+px off its left partners; the rule (middles within half the shorter height) groups some pieces with
+the line above or below. Grouping reordered two pieces (`ilU carpenter &` before `219 Hester ...`),
+and `align`, a global best path over the tile, shifted three lines up: `Eager & Tompkins, grocers
+162 Spring`, one line before `de9521a`, became `Eager` / `& Tompkins ...`, and `Eakins Archibald`
+went model-only. Caused by `de9521a`; rare (it needs a garbled layer and a tilted page), and the
+volume's net is strongly positive (1,118 split lines repaired, 438 fewer unpaired layer lines, 11
+more model-only). **Recommended:** compare a piece's middle with its row's anchor *after*
+correcting for the column's measured line slope (fit it from the pieces' left and right ends, or
+take `tiles`' angle when it is nonzero), and do not reorder pieces between rows whose membership
+is borderline (within, say, 20% of the limit): keep the old top-to-bottom order there.
+
 ## Medium effort, high information
 
 **5. Does the `44` finding generalize?** It is measured on one volume, one OCR engine, one adapter.

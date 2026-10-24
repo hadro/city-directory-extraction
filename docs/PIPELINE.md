@@ -1202,7 +1202,8 @@ Both standing checks hold:
 - `copy_guard.py --check-panel 4b-100k`: **broken 0** on clean text, 280 fixed over 4,613 rows.
 
 **30. Stop the panel scoring a gold row against a different person's line; and stop the joiner
-gluing a display banner onto an entry.** Found 2026-10-23 on boyd1890 gold row 73 (leaf 105), and
+gluing a display banner onto an entry.** (Handed to another agent 2026-10-24 with #32 (b)-(e): start at
+[LINE_ASSEMBLY_HANDOFF.md](LINE_ASSEMBLY_HANDOFF.md).) Found 2026-10-23 on boyd1890 gold row 73 (leaf 105), and
 present before and after the same-row fix of that day. Two defects stacked; the first is the cheap,
 general one.
 
@@ -1303,7 +1304,8 @@ with the production dumps, and `reocr_pair.py --self-test`.
    same-row fix had (`de9521a`), and the per-volume line counts against the production dumps.
 
 **32. Five line-assembly defects found by reading the abbyy8-damaged import against page images
-(2026-10-23, hadro).** Each was traced to its stage on the page itself; the "old/new" comparisons
+(2026-10-23, hadro).** (a) is fixed (071e202); (b)-(e) are handed on with #30: the working guide,
+baselines and tool (`eval/line_assembly.py`) are in [LINE_ASSEMBLY_HANDOFF.md](LINE_ASSEMBLY_HANDOFF.md). Each was traced to its stage on the page itself; the "old/new" comparisons
 run `page_dump` under the code before and after `de9521a` (the same-row fix). Ordered by what they
 cost the 4B. **Before this tier is staged, decide what to do about (a)**: it makes one record of
 two people.

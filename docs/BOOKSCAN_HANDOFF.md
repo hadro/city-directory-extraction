@@ -51,6 +51,8 @@ now: **C. the 4B over the damaged tier** (all 35 volumes + the canary's 4 again,
 section 3 step 1, guard, and assemble with `--out data/records_books_damaged`. Judge the canary four
 against job 3 (`results/records_books_canary.json`: Longworth 0.859 should rise), and the two
 "generaldire" Trow volumes by the glued-entry proxy in PIPELINE #32 (a).
+Line-assembly work in progress elsewhere (PIPELINE #30, #32 (b)-(e)): [LINE_ASSEMBLY_HANDOFF.md](LINE_ASSEMBLY_HANDOFF.md);
+fixes committed before D returns reach D's import for free.
 Also out: **D. the LightOn re-read of the last two tiers**, `cde-books-first-clean.tar` (875 MB,
 sha256 25754bd7...7ae4: word positions for 58 `first` + 17 `abbyy8-clean` volumes, written at 32ebc26;
 Torch code unchanged since 6002d70), same runbook page, "Also next". ~165k + ~70k tiles, ~39 GPU-h.

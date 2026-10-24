@@ -44,6 +44,13 @@ no faster than an L40S without them, unmeasured with them).
 | **A. job 3: the canary's 4B pass** | `cde-volumes-books-canary.tar.gz` (9.6 MB, sha256 cd23bf11...6923): `data/volumes_books_canary` at f68b067, 19 tasks, 312,660 lines | https://claude.ai/artifact/9jx1ZeAycJR572kHrWdYv5 (job 3) | `canary-4b-preds.tar`: `data/volumes/<id>/chunk_NNN.preds_4b-100k.txt` + `.sha1`, `logs/vol-<job>_*.out` |
 | **B. abbyy8-damaged re-OCR** | `cde-books-damaged.tar` (358 MB, sha256 1f8d8fa7...7291): code at 6002d70 + 35 volumes' word records | https://claude.ai/artifact/L5hhRFvo22384GUDwNkQZa | `data/reocr_tiers/answers_abbyy8-damaged/<id>.tar` (one per volume, possibly in batches) + `lighton-abbyy8-damaged-logs.tar` + a summary line |
 
+**Update 2026-10-23: A and B are back and done** (canary scored, tier imported: PIPELINE #27). Out
+now: **C. the 4B over the damaged tier** (33 volumes + the canary's 4 again), `cde-volumes-books-damaged.tar.gz`
+(sha256 21f665a9...9121, 242 tasks), comes back as `books-damaged-4b-preds.tar`; install into
+`data/volumes_books_damaged/`, verify the 242 `.sha1`s as in section 3 step 1, guard, and assemble with
+`--out data/records_books_damaged`. Judge the canary four against job 3 (`results/records_books_canary.json`:
+Longworth 0.859 should rise), and read #32 before trusting the two held-back Trow volumes' absence.
+
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an
 empty scratch directory first to look at the paths before anything goes into the repo.

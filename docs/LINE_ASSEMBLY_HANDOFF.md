@@ -222,6 +222,9 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
 - Step 4 DONE as planned (PIPELINE #32 (d)); it rejoins far more than hyphen tails on Brooklyn
   1905. `moved` overcounts a change that reorders rows (it compares by line index): read the
   derived differences instead. New: `fragments`, `moved --base DIR`, `tables --damage` (step 5b).
+- Step 5a DONE, minimal (PIPELINE #32 (b)): the heading row is left out of untable's text but kept
+  in its margin and packing counts, so no other line on any tile changes. 5b measured (numbers in
+  #32 (b)). 5c is Torch-only and waits for D's table rate; the recommendation is there.
 
 Where each step lands:
 

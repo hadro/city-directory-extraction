@@ -77,9 +77,15 @@ DATA = REPO / "data"
 sys.path.insert(0, str(REPO / "data_prep"))
 SLUG = "lightonocr-3-1b-greedy-vllm"
 MID_DITTO = re.compile(r"\S\s+[—–]\s*[A-Z][a-z]")
-HEADER_WORD = r"(name|names|occupation|address|details|residence|business|description|notes|" \
-              r"location|info|information|street|number|trade)"
-HEADER = re.compile(rf"^{HEADER_WORD}(, {HEADER_WORD})+$", re.I)
+
+
+def header_line(line: str) -> bool:
+    """A flattened line made only of the column words LightOn invents for a table's heading
+    ("Name, Occupation, Address"; untable's field-split join puts the commas in). The words are
+    the runner's own (hpc/lightonocr_tiles.HEADER_WORDS), whose rows untable now leaves out."""
+    import reocr_pair as rp
+    words = [w.strip().strip("*").lower() for w in line.strip().split(",")]
+    return bool(line.strip()) and all(w in rp.runner().HEADER_WORDS for w in words)
 
 
 def volume_paths(vol: str, args) -> tuple:
@@ -299,7 +305,7 @@ def tables(args) -> int:
                 continue
             c["table"] += 1
             stem = f.with_name(f.name[:-len(f"_{SLUG}.meta.json")])
-            heads = [ln for ln in rp.model_lines(stem, SLUG, False) or [] if HEADER.match(ln.strip())]
+            heads = [ln for ln in rp.model_lines(stem, SLUG, False) or [] if header_line(ln)]
             c["header"] += len(heads)
             seen.update(heads)
         if args.damage and c["table"]:

@@ -95,6 +95,11 @@ _ENTRY_START = re.compile(r"^[A-Z][a-z'’]+[A-Za-z'’-]*\s+(?:&\s+)?[A-Z]")
 _HTML_ROW = re.compile(r"<tr\b[^>]*>(.*?)</tr\s*>", re.S | re.I)
 _HTML_CELL = re.compile(r"<t[dh]\b[^>]*>(.*?)</t[dh]\s*>", re.S | re.I)
 _MARGIN = re.compile(r"^\S{1,3}$")       # "H", "S", "1-", "2a", "79": no field of an entry
+# A column heading LightOn invents ("Name | Occupation | Address"): every word of the heading rows
+# in the abbyy8-damaged tier's and the canary's tables (2026-10-24)
+HEADER_WORDS = {"name", "names", "address", "occupation", "details", "notes", "age", "location",
+                "place", "title", "relation", "reference", "position", "role", "code", "item",
+                "description", "entry", "price", "office", "number", "year", "term", "rank"}
 
 
 def html_rows(raw: str) -> str:
@@ -165,6 +170,13 @@ def untable(raw: str) -> tuple[str, bool]:
             continue
         if i in rows:
             table = True
+            if rows[i] and all(c.strip("*").lower() in HEADER_WORDS for c in rows[i]):
+                # the model's own heading as a row (HTML's <th> row, which no rule line marks):
+                # left out of the text but not of the margin and packing counts above, so the rest
+                # of the tile reads exactly as before (PIPELINE #32 (b): 157 such lines on the
+                # abbyy8-damaged tier and the canary, "Name, Address" 30, "Name, Occupation,
+                # Address" 26, each a line downstream that read like an entry)
+                continue
             if packed:
                 out.extend(rows[i])
                 continue

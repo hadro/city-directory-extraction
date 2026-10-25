@@ -1866,6 +1866,16 @@ def _self_test() -> int:
     assert [(r["text"], r["source"]) for r in rows] == [
         ("Dornheim Chas lithographer 4 New Cham-", "model"), ("bers Mhtn h 155 Cornelia", "model"),
         ("U)", "tesseract")], rows
+    # PIPELINE #32 (b): the heading LightOn invents over an HTML table is left out of the text, and
+    # the rest of the tile reads as before; a <th> row that is an entry stays (the runner's untable)
+    got, _ = runner().to_lines("<table><thead><tr><th>Name</th><th>Occupation</th><th>Address</th></tr>"
+                               "</thead><tbody><tr><td>Abbihl Jacob H</td><td></td><td>h 408 W 150th</td>"
+                               "</tr></tbody></table>")
+    assert got == ["Abbihl Jacob H, h 408 W 150th"], got
+    got, _ = runner().to_lines("<table><tr><th>Fagans Julius, segars, 145 Ewen</th><th>Falconer David, "
+                               "salesman, 66 S. 5th</th></tr><tr><td>Fanjoy & Enoch, grocers</td>"
+                               "<td>Farrell Dominick, gardener</td></tr></table>")
+    assert got[:2] == ["Fagans Julius, segars, 145 Ewen", "Falconer David, salesman, 66 S. 5th"], got
     print("self-test ok")
     return 0
 

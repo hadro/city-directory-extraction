@@ -1411,6 +1411,36 @@ the damaged tier keeps its derive until one is decided (LINE_ASSEMBLY_HANDOFF st
 glued lines that open with `&` or a given name only (a ditto entry whose dash was lost: `& Klute
 plumbers`, `C & Co wines`), which this cannot tell from a run-over.
 
+**(b) The invented heading DONE 2026-10-24; the rest measured, for a Torch decision** (LINE_ASSEMBLY_HANDOFF
+step 5; in D's import). 5a: `untable` (hpc/lightonocr_tiles.py, which the import re-runs on every
+`.raw.txt`) leaves out a row whose cells are all column words (`HEADER_WORDS`, counted from the
+tier's own `<th>` rows: `Name | Address` 30, `Name | Occupation | Address` 26, `... | Notes`, `Name |
+Age | Place`, `Name | Details` ...), while still counting it where it decides margins and packing,
+so nothing else on any tile moves: over 7,951 table answers (this tier, the canary, the pilot), 171
+tiles changed by exactly their heading lines, 177 -> 4 (the old count, 76, used a narrower word
+list); pilot on both layers, no row changed. A first version that dropped the `<th>` row before
+those counts flipped one Brooklyn tile's margin vote and lost its surnames, which exposed the next
+item. 5b, per volume (`line_assembly.py tables --damage`; dashes by a 30-page sample a volume):
+- **Cells holding two entries** (a model run-over in a table tile opening `Surname Given` within
+  half a line height of the line above's text): 1,754 in 6,318 table tiles, 0.28 a tile, against
+  0.16 a tile in plain ones, so ~740 more than plain tiles would hold; Trow 1903 p1-p3 (198, 148,
+  116) and Brooklyn 1905 p1/c1905 (76, 83) lead. #32 (f) takes apart the ones under a ditto line.
+- **`, ` invented by the field-split join**: 40,242 across the tier (Trow and Brooklyn print no comma
+  after a name: `Abbihl Jacob H, h 408 W 150th`).
+- **Ditto marks lost with a surname column**: untable drops a column of mostly 1-3 character cells
+  as the next column's sliver, and a column of `“` dittos with a few surnames qualifies: 408 marks
+  and 25 surnames, Brooklyn 1905 p1 237, c1909 71, c1905 66, Trow 1909 p2 34. Keeping such columns
+  on the Mac was tried and rejected the same day: real slivers also hold the next column's dashes
+  and surnames (`, B`, `, Brooklyn` appended to entries), and forcing field split joined a surname
+  heading to its entry.
+- **Dashes the layer saw that the cell dropped**: no more than in plain rows (table rows 0.05-1.2%,
+  plain 0.05-2.2%); Trow 1909 vol 1 loses ~2% of its plain rows' dashes too, a `dittos` matter on
+  its tesseract layer, not a table one.
+Recommendation for 5c: the damage worth a re-read is the two-entry cells and the commas, on Trow
+1903 p1-p3 and Brooklyn 1905 p1/c1905 above all (20-26% of their tiles in table mode). Re-read with
+table output banned in decoding (vLLM `bad_words` on `|` and `<table`), first on the bench's 10
+table tiles against gold, then this tier's 6,318 and D's table tiles in one job, once D's table
+rate is known. Not run: Torch only. The original finding:
 **(b) LightOn in table mode merges entries in one cell and drops ditto dashes.** Same leaf 97,
 tile c1_h1 (a Markdown table): `| Philippa sec 51 Front h Mt Vernon N Y Abbihl Jacob H h 408 W
 150th |`, and `| Chas I ice 314 W 16th ... |` for a printed `—Chas I ice ...`. The import cannot

@@ -3,6 +3,11 @@
 # requires-python = ">=3.12"
 # dependencies = [
 #   "vllm==0.30.0",
+#   # NYU 2026-10-16: vllm 0.30.0 declares transformers>=5.10.4 (open upper bound) but its
+#   # pixtral.py imports PixtralRotaryEmbedding, which transformers renamed to
+#   # PixtralVisionRotaryEmbedding by 5.19. Unpinned, uv resolved 5.20.1 and the LightOnOCR
+#   # architecture failed inspection before the engine started. 5.14.1 still has the old name.
+#   "transformers==5.14.1",
 #   "pillow==12.3.0",
 # ]
 # ///

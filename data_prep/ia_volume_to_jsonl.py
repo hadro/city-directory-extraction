@@ -377,7 +377,8 @@ def text_start(ws):
     return None
 
 
-def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=None, text_x=None):
+def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=None, text_x=None,
+               sources=None, start_cap=None, seen=None):
     """Join wrapped entries into one line. Returns ([(box, text, height)], n_joins).
 
     `indent_ratio` replaces INDENT_RATIO for one volume; `calibrate_indent` reads it off the
@@ -518,6 +519,16 @@ def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=
     p1 23, Brooklyn 1905 p1 2, 1876BPL 0), and a fresh uniform sample of 32 read 30 glued entries
     and two lines a place name opens (`Glen Ridge N J`, a run-over; `St Nicholas av`, the end of
     a printed line the dump split in two).
+
+    A MODEL-READ START JOINS ON THE INDENT ONLY SO FAR (`sources`, `start_cap`; PIPELINE #30,
+    LINE_ASSEMBLY_HANDOFF step 6). A line the model read as an entry's start (`cont` 0, source
+    `model`) keeps the indent rule, for the run-overs it writes as lines of their own, but not past
+    `start_cap` line heights: the volume's own model-confirmed run-overs' reach (start_cap). Past it
+    the indent was joining display type and the next column's entries: boyd1890 leaf 105's banner
+    `LLIOTT, Plumbing, Steam and Gas Fitt` onto `McElroy John A, news agent, ...`; Trow 1909 vol 1
+    `— G S & Co printers 168 Duane` + `— L L & Co brokers 27 William R 704`, 63 line heights in. No
+    test on the text, and the lower threshold (#28) is untouched. `seen`, a list, gets
+    (indent in line heights, cont, source) for every join made: start_cap reads it.
     """
     out, starts, joins = [], [], 0
     for i, (box, text) in enumerate(lines):
@@ -529,9 +540,14 @@ def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=
                 floor = MODEL_INDENT                    # on the model's word alone
                 if starts[-1] is not None and ENTRY_OPENING.match(text):
                     indent = box[0] - starts[-1]
-            if (indent > floor * med_h
+            capped = (start_cap is not None and cont is not None and sources is not None and not cont[i]
+                      and sources[i] == "model" and indent > start_cap * med_h)
+            if (not capped and indent > floor * med_h
                     and 0 < box[1] - pb[1] < VGAP_RATIO * med_h
                     and min(box[2], pb[2]) - max(box[0], pb[0]) > OVERLAP_FRAC * (box[2] - box[0])):
+                if seen is not None:
+                    seen.append(((box[0] - pb[0]) / med_h, cont[i] if cont else None,
+                                 sources[i] if sources else None))
                 sep = "" if pt.endswith("-") else " "
                 out[-1] = ((min(pb[0], box[0]), pb[1], max(pb[2], box[2]), box[3]),
                            (pt[:-1] if pt.endswith("-") else pt) + sep + text, ph)
@@ -1325,19 +1341,41 @@ def leaf_bands(buffered, marks, pad=BAND_PAD, min_lines=BAND_MIN_DITTO_LINES):
             for leaf, v in ys.items() if len(v) >= min_lines}
 
 
+START_CAP_Q = 0.99      # start_cap: this quantile of the volume's model run-overs' join indents...
+START_CAP_MIN = 1000    # ...measured over at least this many of them, or no cap (Longworth 1826's 51
+                        # put the 99th percentile at 182 line heights; the pilot's Boyd has one)
+
+
+def start_cap(item, leaves, indent_ratio=INDENT_RATIO) -> dict:
+    """How far right a model-read start may still join on the indent (join_wraps): the
+    START_CAP_Q quantile of the indents at which the volume's model run-overs (`cont` 1) join,
+    the run-overs the model itself confirms, in line heights. A pass of the joiner, uncapped, over
+    the leaves as sweep reads them. {"start_cap": float or None, "run_over_joins": n}."""
+    seen, stats = [], Counter()
+    for leaf in leaves:
+        raw, _dims, cont, text_x, sources = page_raw(item, leaf, True, stats)
+        if raw and cont is not None:
+            med_h = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
+            join_wraps(raw, med_h, False, indent_ratio, cont, text_x, sources, None, seen)
+    runs = sorted(d for d, c, _s in seen if c)
+    cap = round(runs[int(START_CAP_Q * (len(runs) - 1))], 2) if len(runs) >= START_CAP_MIN else None
+    return {"start_cap": cap, "run_over_joins": len(runs)}
+
+
 def page_raw(item, leaf, split_columns, stats):
-    """One leaf's lines as join_wraps takes them: (raw, dims, cont, text_x). sweep's first step,
-    and eval/line_assembly.py `joins`', so a joiner change is measured on exactly what it reads.
-    Counts side bands, column splits and dropped `cont` into `stats`."""
+    """One leaf's lines as join_wraps takes them: (raw, dims, cont, text_x, sources). sweep's first
+    step, start_cap's and eval/line_assembly.py `joins`', so a joiner change is measured on exactly
+    what it reads. Counts side bands, column splits and dropped `cont` into `stats`."""
     if not split_columns:
         raw, dims = item.page_lines(leaf)
-        return raw, dims, None, None
+        return raw, dims, None, None, None
     words, dims = item.page_words(leaf)
     # the model's own line structure, where the dump carries one (join_wraps). It is read now,
     # while the lines are still the dump's: strip_side_bands returns one line per line, but a
     # column split re-cuts and re-orders them, so the flag is dropped for a leaf that splits and
     # that leaf joins on the indent alone.
     cont = item.page_cont(leaf) if hasattr(item, "page_cont") else None
+    sources = item.page_sources(leaf) if hasattr(item, "page_sources") else None
     words, banded = strip_side_bands(words, dims) if words else (words, 0)
     stats["band_words"] += banded
     stats["band_leaves"] += bool(banded)
@@ -1348,16 +1386,20 @@ def page_raw(item, leaf, split_columns, stats):
     if cont is not None and raw and (cut or len(cont) != len(raw)):
         stats["cont_dropped_leaves"] += 1
         cont = None
+    if cont is None or sources is None or len(sources) != len(cont):
+        sources = None                                # dropped wherever cont is
     text_x = [text_start(ws) for ws in words] if cont is not None and raw else None
-    return raw, dims, cont, text_x
+    return raw, dims, cont, text_x, sources
 
 
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
           normalize_dittos=True, confirmed_marks=(), band=True, deep_indent=False,
-          holdout=None, indent_ratio=INDENT_RATIO, split_columns=False, digit_s=False):
+          holdout=None, indent_ratio=INDENT_RATIO, split_columns=False, digit_s=False,
+          model_start_cap=None):
     """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
 
-    `indent_ratio` is the wrap-join threshold (see calibrate_indent). `split_columns` cuts hOCR
+    `indent_ratio` is the wrap-join threshold (see calibrate_indent); `model_start_cap` how far a
+    model-read start may still join on it (start_cap, join_wraps). `split_columns` cuts hOCR
     lines that run across a two-column page's gutter (see split_merged_columns); it reads words
     through `item.page_words`, and counts cut lines in stats["splits"].
 
@@ -1374,7 +1416,7 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
              "model_runovers": 0, "cont_dropped_leaves": 0}
     reasons, ad_scores, buffered = {}, [], []
     for n, leaf in enumerate(leaves, 1):
-        raw, dims, cont, text_x = page_raw(item, leaf, split_columns, stats)
+        raw, dims, cont, text_x, sources = page_raw(item, leaf, split_columns, stats)
         if not raw:
             continue
         stats["leaves"] += 1
@@ -1384,7 +1426,8 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
         # filter would discard it, and the entry it belongs to would silently lose its address.
         med_h_raw = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
         if join:
-            lines, joins = join_wraps(raw, med_h_raw, deep_indent, indent_ratio, cont, text_x)
+            lines, joins = join_wraps(raw, med_h_raw, deep_indent, indent_ratio, cont, text_x,
+                                      sources, model_start_cap)
             stats["joins"] += joins
             stats["model_runovers"] += sum(cont) if cont else 0
         else:
@@ -1644,6 +1687,18 @@ def _self_test() -> int:
     at_name = [((1302, 950, 1690, 968), "— Wm G Z coffee 54 Stone R 23 A h 42"),
                ((1320, 972, 1540, 990), "4th av Bklyn")]
     assert join_wraps(at_name, 18, cont=[0, 1], text_x=[1320, None])[1] == 1, "a run-over at the name"
+    # PIPELINE #30, joiner half: a line the model read as a start joins on the indent only up to
+    # the volume's start_cap. boyd1890 leaf 105 (the LightOn pilot): a banner beside the drop cap
+    # ELLIOTT, read as a start, 6 line heights in, under McElroy John A
+    mcelroy = [((561, 3688, 2123, 3763), "McElroy John A, news agent, h 84 Bradford ave"),
+               ((891, 3802, 2458, 3857), "LLIOTT, Plumbing, Steam and Gas Fitt")]
+    assert join_wraps(mcelroy, 54, cont=[0, 0], sources=["model", "model"])[1] == 1, "the indent alone"
+    assert join_wraps(mcelroy, 54, cont=[0, 0], sources=["model", "model"], start_cap=4.0)[1] == 0
+    assert join_wraps(mcelroy, 54, cont=[0, 0], sources=["model", "tesseract"], start_cap=4.0)[1] == 1, \
+        "only a line the model read"
+    seen = []
+    join_wraps(shallow, 18, cont=[0, 1], sources=["model", "model"], seen=seen)
+    assert seen == [(2.0, 1, "model")], seen
     assert text_start([[746, 0, 760, 9, 0, "—"], [774, 0, 830, 9, 0, "Philippa"]]) == 774
     assert text_start([[100, 0, 120, 9, 0, "84"], [130, 0, 190, 9, 0, "William"]]) is None
     assert text_start([[100, 0, 160, 9, 0, "Abbihl"]]) is None

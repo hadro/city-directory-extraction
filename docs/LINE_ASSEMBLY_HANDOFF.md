@@ -225,6 +225,10 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
 - Step 5a DONE, minimal (PIPELINE #32 (b)): the heading row is left out of untable's text but kept
   in its margin and packing counts, so no other line on any tile changes. 5b measured (numbers in
   #32 (b)). 5c is Torch-only and waits for D's table rate; the recommendation is there.
+- Step 6 DONE (PIPELINE #30, joiner half): the cap is the p99 of the volume's model run-over JOIN
+  indents (not all `cont` 1 lines: their tail is layout noise, p99 9-34 line heights), and only
+  over 1,000 or more of them. The pilot cannot test it (no pilot volume has that many).
+- Step 7 NOT DONE, by its own rule: the count does not say so (PIPELINE #32 (e); `samerow`).
 
 Where each step lands:
 

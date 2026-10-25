@@ -57,7 +57,8 @@ far:** the joiner's margin guard measured from the text for name-shaped lines (P
 survey; ~100-180 two-person composites a Trow part fewer); unread words placed where the print has
 room, and leading runs kept on their tile (#32 (c), import); a side banner's glyph no longer
 splits an entry from its run-over (#32 (d), import); LightOn's invented table headings ("Name,
-Address") are left out (#32 (b), import). When D lands, run `line_assembly.py tables --damage` on its
+Address") are left out (#32 (b), import); a model-read start no longer joins on the indent past the
+volume's own run-overs' reach (#30, survey: banners and the next column's entries). When D lands, run `line_assembly.py tables --damage` on its
 volumes: its table rate decides the Torch re-read of table tiles (#32 (b), 5c). #30's panel veto is eval-only. Not in
 the damaged tier (C), which keeps the derive it was staged with.
 Also out: **D. the LightOn re-read of the last two tiers**, `cde-books-first-clean.tar` (875 MB,

@@ -81,8 +81,8 @@ REPO = HERE.parent
 sys.path.insert(0, str(HERE))
 
 from ia_volume_to_jsonl import (MIN_CHARS_LEAF, Item, calibrate_indent,  # noqa: E402
-                                hocr_words, lookup_master, page_dims, sweep, tag_publisher,
-                                words_to_lines)
+                                hocr_words, lookup_master, page_dims, start_cap, sweep,
+                                tag_publisher, words_to_lines)
 from verify_harvest_leakage import BANNED_IA_ITEMS, gold_pages, page_id  # noqa: E402
 
 SIDECARS = HERE / "survey"
@@ -145,6 +145,13 @@ class WordDump:
         if self._rec is None or self._rec["leaf"] != leaf:
             return None
         return self._rec.get("cont")
+
+    def page_sources(self, leaf: int):
+        """Per line, who read it (`model`, `model-only`, `tesseract`, `bleed`), beside `cont`, or
+        None. The joiner caps a model-read start's indent join with it (join_wraps)."""
+        if self._rec is None or self._rec["leaf"] != leaf:
+            return None
+        return self._rec.get("sources")
 
     def close(self):
         if self._fh:
@@ -526,10 +533,16 @@ def derive(ident: str, holdout: dict) -> dict:
             or {}).get("ocr") or "") if side.exists() else ""
     abbyy8 = ocr.startswith("ABBYY FineReader 8")   # fix_digit_s was measured on this engine
     dump = WordDump(p["words.jsonl.gz"], ident)
-    content = [r["leaf"] for r in dump.records() if r["chars"] > MIN_CHARS_LEAF]
+    content, reocr = [], False
+    for r in dump.records():
+        if r["chars"] > MIN_CHARS_LEAF:
+            content.append(r["leaf"])
+        reocr = reocr or "cont" in r
     catalog_pub, year = lookup_master(ident)
     publisher, why = tag_publisher(catalog_pub)
     wraps = calibrate_indent(dump, content, split_columns=True)
+    if reocr:                    # a re-OCR'd volume: how far its model-read starts may join
+        wraps.update(start_cap(dump, content, wraps["indent_ratio"]))
     tmp_l = p["lines.jsonl.gz"].with_suffix(".tmp")
     tmp_d = p["dropped.txt.gz"].with_suffix(".tmp")
     with gzip.open(tmp_l, "wt", encoding="utf-8") as out_fh, \
@@ -537,7 +550,7 @@ def derive(ident: str, holdout: dict) -> dict:
         stats, reasons, ad_scores, ditto, band = sweep(
             dump, publisher, year, content, True, None, True, dropped_fh, out_fh,
             holdout=holdout, indent_ratio=wraps["indent_ratio"], split_columns=True,
-            confirmed_marks=confirmed, digit_s=abbyy8)
+            confirmed_marks=confirmed, digit_s=abbyy8, model_start_cap=wraps.get("start_cap"))
     dump.close()
     tmp_l.rename(p["lines.jsonl.gz"])
     tmp_d.rename(p["dropped.txt.gz"])

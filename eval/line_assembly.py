@@ -54,6 +54,11 @@ or fewer, no digit, `cont` 1) whose next line is a run-over (`cont` 1) they do n
 horizontally: an entry's text handed to a stray layer piece beside it (Brooklyn 1905 p1 leaf 563,
 `bers` on a side banner's `U)`), which the joiner cannot reach and the survey drops as `short`.
 
+`samerow [--dir DIR] VOL ...`: consecutive model lines of a dump that sit on one printed row (they
+overlap vertically by half the shorter's height or more, and the second begins right of the first's
+end within SAMEROW_CHARS characters): one printed line cut in two, the shape the same-row rule
+(de9521a: Longworth 1826 1,159 -> 41) and PIPELINE #32 (e) are about.
+
 `panel A B [--list]`: two panel dirs (eval/ia_panel.build's output) compared by gold row: rows
 dropped, added, re-matched to another line, and exact rows lost or gained (exact after
 lighton_pilot.canon's typography). Counts, not rates: dropping inexact rows raises a rate with
@@ -407,6 +412,41 @@ def fragments(args) -> int:
     return 0
 
 
+SAMEROW_CHARS = 6
+
+
+def samerow(args) -> int:
+    src = Path(args.dir) if args.dir else DATA / "survey_ocr"
+    for vol in args.vols:
+        n = hit = 0
+        examples = []
+        with gzip.open(src / f"{vol}_words.jsonl.gz", "rt", encoding="utf-8") as fh:
+            for r in map(json.loads, fh):
+                if "sources" not in r:
+                    continue
+                L = r["lines"]
+                widths = sorted((w[2] - w[0]) / len(w[5]) for ws in L for w in ws if len(w[5]) >= 3)
+                cw = widths[len(widths) // 2] if widths else 10
+                for i in range(len(L) - 1):
+                    a, b = L[i], L[i + 1]
+                    if not a or not b or r["sources"][i] == "tesseract" or r["sources"][i + 1] == "tesseract":
+                        continue
+                    n += 1
+                    ay0, ay1 = min(w[1] for w in a), max(w[3] for w in a)
+                    by0, by1 = min(w[1] for w in b), max(w[3] for w in b)
+                    gap = min(w[0] for w in b) - max(w[2] for w in a)
+                    if (min(ay1, by1) - max(ay0, by0) >= 0.5 * min(ay1 - ay0, by1 - by0)
+                            and -cw <= gap <= SAMEROW_CHARS * cw):
+                        hit += 1
+                        if len(examples) < args.examples:
+                            examples.append((r["leaf"], " ".join(w[5] for w in a)[-40:],
+                                             " ".join(w[5] for w in b)[:40]))
+        print(f"{vol:28s} {n:9,d} model line pairs  on one printed row {hit:6,d}")
+        for e in examples:
+            print(f"    leaf {e[0]:4d}  {e[1]!r} | {e[2]!r}")
+    return 0
+
+
 def _joined(fn, raw, med_h, ratio, extra: dict) -> dict:
     """{line index: index of the first line of the entry it joined}, from one join_wraps.
     join_wraps joins only consecutive lines, in order, as `entry + " " + line` (a hyphen closes
@@ -445,14 +485,16 @@ def joins(args) -> int:
             dump = WordDump(src / f"{vol}_words.jsonl.gz", vol)
             content = [r["leaf"] for r in dump.records() if r["chars"] > MIN_CHARS_LEAF]
             ratio = new.calibrate_indent(dump, content, split_columns=True)["indent_ratio"]
+            cap = new.start_cap(dump, content, ratio) if hasattr(new, "start_cap") else {}
             stats = collections.Counter()
             removed, added, n_old, n_new = [], [], 0, 0
             for leaf in content:
-                raw, dims, cont, text_x = new.page_raw(dump, leaf, True, stats)
+                raw, dims, cont, text_x, sources = new.page_raw(dump, leaf, True, stats)
                 if not raw:
                     continue
                 med_h = statistics.median([b[3] - b[1] for b, _ in raw]) or 1.0
-                extra = {"cont": cont, "text_x": text_x}
+                extra = {"cont": cont, "text_x": text_x, "sources": sources,
+                         "start_cap": cap.get("start_cap")}
                 a = _joined(old.join_wraps, raw, med_h, ratio, extra)
                 b = _joined(new.join_wraps, raw, med_h, ratio, extra)
                 n_old, n_new = n_old + len(a), n_new + len(b)
@@ -469,7 +511,8 @@ def joins(args) -> int:
                                      max(raw[h][0][2], raw[i][0][2]) + 30, raw[i][0][3] + 15)})
             dump.close()
             print(f"{vol:28s} joins {n_old:,} -> {n_new:,}  removed {len(removed):,}  added {len(added):,}"
-                  f"  (indent ratio {ratio})")
+                  f"  (indent ratio {ratio}" + (f", start cap {cap.get('start_cap')} over "
+                                                f"{cap.get('run_over_joins'):,} run-over joins" if cap else "") + ")")
             for side, rows in (("removed", removed), ("added", added)):
                 pick = random.Random(args.seed).sample(rows, min(args.sample, len(rows)))
                 for r in sorted(pick, key=lambda r: (r["leaf"], r["line"])):
@@ -571,6 +614,10 @@ def main(argv=None) -> int:
     p.add_argument("vols", nargs="+")
     p.add_argument("--dir", help="word dumps to read instead of data/survey_ocr")
     p.add_argument("--examples", type=int, default=6)
+    p = sub.add_parser("samerow")
+    p.add_argument("vols", nargs="+")
+    p.add_argument("--dir", help="word dumps to read instead of data/survey_ocr")
+    p.add_argument("--examples", type=int, default=4)
     p = sub.add_parser("panel")
     p.add_argument("a")
     p.add_argument("b")
@@ -578,7 +625,8 @@ def main(argv=None) -> int:
     p.add_argument("--all", action="store_true", help="a line for every set, changed or not")
     args = ap.parse_args(argv)
     return {"page": page, "proxy": proxy, "moved": moved, "same": same, "tables": tables,
-            "glue": glue, "joins": joins, "fragments": fragments, "panel": panel}[args.cmd](args)
+            "glue": glue, "joins": joins, "fragments": fragments, "samerow": samerow,
+            "panel": panel}[args.cmd](args)
 
 
 if __name__ == "__main__":

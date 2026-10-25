@@ -1241,8 +1241,22 @@ row) was measured and dropped: most older gold sets type a printed ditto as the 
 `Farrell Dominick` for `— Dominick`). Post-#30 baselines, for every later diff:
 `data/iapanel_lighton_post30_{ia,tess}` (work dirs `data/lighton_pilot_pull_{ia,tess}`) and
 `data/iapanel_post30` (`ia_panel.py build --panel-dir`, new). The 4B's existing panel predictions
-still line up with unchanged rows; a row whose line changed needs a Torch run to score. The joiner
-half is LINE_ASSEMBLY_HANDOFF step 6.
+still line up with unchanged rows; a row whose line changed needs a Torch run to score.
+
+**Joiner half DONE 2026-10-24** (`join_wraps` `start_cap`; LINE_ASSEMBLY_HANDOFF step 6; survey, so
+in D's import). A line the model read as a start (`cont` 0, source `model`; `sources` now reaches
+the joiner beside `cont`, dropped wherever `cont` is) joins on the indent alone only up to the
+volume's `start_cap`: the 99th percentile of the indents at which its model run-overs (`cont` 1)
+join, measured in a pre-pass (`ia_volume_to_jsonl.start_cap`) over at least 1,000 of them, else no
+cap, and stored in the sidecar's `wrap_calibration`. No test on the text; #28's lower threshold
+untouched. Joins removed: Trow 1909 vol 1 254 (cap 16.4 line heights over 26,657 run-over joins),
+Trow 1903 p1 468 (10.42), 1876BPL 236 (8.13), Hope & Henderson 1856 162 (5.96), Brooklyn 1905 p1 84
+(16.68), Longworth 1826 0 (51 run-over joins: no cap). A uniform image-read sample of 40 removed:
+12 two entries glued (`Farrell Jno., spinner ...` + `Farrell Joseph, baker ...`; `" Ada hairdresser
+...` + `" Albert E salesman ...`), 28 display or ad type (banners, page numbers, `NAMES TOO LATE FOR`
++ `C.`), no real run-over. Pilot on both layers: no row changed, because no pilot volume has 1,000
+model run-overs, so the pilot never sets a cap: McElroy's banner stays glued there. Production
+Boyd is IA-only (no `cont`); it would be capped only once read whole by the re-OCR.
 
 The row: gold `McElroy John A, news agent, h 84 Bradford ave`; the panel's line `McElroy Bernard
 E, bill poster, h 84 Bradford ave`, match 0.622. LightOn and the dump read the page right, as

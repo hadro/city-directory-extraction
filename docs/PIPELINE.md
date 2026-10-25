@@ -1528,6 +1528,15 @@ line's piece too short to stand (under ~5 characters, no digit) joins the neighb
 same run rather than becoming a row; or, more simply, `split` never hands a single short fragment
 its own row when the run has a longer neighbour on either side.
 
+**(e) Counted 2026-10-24 and left, by LINE_ASSEMBLY_HANDOFF step 7's own rule** (its §2: mostly a
+broken layer, the tilt part small). `line_assembly.py samerow` counts consecutive model lines of a
+dump on one printed row (overlapping vertically by half the shorter height or more, the second
+starting within 6 characters of the first's end): Longworth 1826 48 of 26,637 pairs (de9521a's
+measure said 41), Trow 1907 p3 232 of 129,098, 1876BPL 174, Doggett 1845 25, Trow 1909 vol 1 735 of
+169,041, Brooklyn 1905 p1 458 of 92,327, Trow 1905 p1 99, Longworth 1798 38: 0.05-0.5%, much of it ad
+type set side by side. And these are not the tilt case: with equal heights, overlapping by half is
+the same-row rule's own test, so such pieces were row-mates that no one model line covered (a
+pairing matter); tilt can only leave a piece out of its row with unequal heights. The original:
 **(e) The same-row rule assumes a level line; on a tilted page a right-hand piece joins the wrong
 row.** Longworth 1826 leaf 409 (IA's words, badly garbled there): the printed line `Eakins John,
 carpenter & grocer 219 Hester h. Rhynder` is three layer pieces, and the right-hand one sits 15-20

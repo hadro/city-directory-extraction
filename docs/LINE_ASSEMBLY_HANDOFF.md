@@ -207,28 +207,34 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
   fresh tesseract 2,056, 1,715) and `data/iapanel_post30` (production lines, 2,352 rows, 1,394
   exact), not the `_pull_` panels. `eval/ia_panel.py build --ocr DIR --panel-dir DIR` builds a
   panel elsewhere than `data/iapanel`.
-- Step 2 DONE, CHANGED from the plan (PIPELINE #32 (f)): measured from the text only for a line
+- Step 2 DONE (08911f5), CHANGED from the plan (PIPELINE #32 (f)): measured from the text only for a line
   that opens like a name. The plan's version cut 18 real run-overs in 40 sampled: §2's "real
   run-overs sit ~1 line height past the name" holds on 1903 p1 but not on the respelled parts,
   where they print at the name's x. New tools: `line_assembly.py joins REV VOL` (the joins a
   joiner change removes, on identical input, with crop URLs), `proxy --dir --kind lines`, and
   `lighton_pilot.py --survey-only DUMPS` (re-runs the survey alone, for steps 2 and 6).
-- Step 3 DONE, CHANGED (PIPELINE #32 (c)): `split`'s room rule takes the layer's unread print
+- Step 3 DONE (8100ced), CHANGED (PIPELINE #32 (c)): `split`'s room rule takes the layer's unread print
   before line t+1 first, then the end of line t (leaf 245 showed the plan's order wrong); the
   `respell` width cap was measured and rejected (51,834 starts moved, a wash downstream), replaced
   by a clamp to the tile edge for non-ditto leading runs that fit. Measuring a dump change needs a
   survey re-derive and an image-read sample of the derived differences, not only `moved`: the
   scratch scripts used are described in the step's commit.
-- Step 4 DONE as planned (PIPELINE #32 (d)); it rejoins far more than hyphen tails on Brooklyn
+- Step 4 DONE (fece5b8) as planned (PIPELINE #32 (d)); it rejoins far more than hyphen tails on Brooklyn
   1905. `moved` overcounts a change that reorders rows (it compares by line index): read the
   derived differences instead. New: `fragments`, `moved --base DIR`, `tables --damage` (step 5b).
-- Step 5a DONE, minimal (PIPELINE #32 (b)): the heading row is left out of untable's text but kept
+- Step 5a DONE (4274724), minimal (PIPELINE #32 (b)): the heading row is left out of untable's text but kept
   in its margin and packing counts, so no other line on any tile changes. 5b measured (numbers in
   #32 (b)). 5c is Torch-only and waits for D's table rate; the recommendation is there.
-- Step 6 DONE (PIPELINE #30, joiner half): the cap is the p99 of the volume's model run-over JOIN
+- Step 6 DONE (22590c8) (PIPELINE #30, joiner half): the cap is the p99 of the volume's model run-over JOIN
   indents (not all `cont` 1 lines: their tail is layout noise, p99 9-34 line heights), and only
   over 1,000 or more of them. The pilot cannot test it (no pilot volume has that many).
 - Step 7 NOT DONE, by its own rule: the count does not say so (PIPELINE #32 (e); `samerow`).
+- Steps 2-6 together, pilot against the post-#30 baselines: no exact row lost or gained on either
+  layer; IA's words 1 row re-read (better), fresh tesseract 3 (inexact both ways). **The baselines
+  for further work are now `data/iapanel_lighton_s6_{ia,tess}`** (work dirs
+  `data/lighton_pilot_s6_{ia,tess}`, at 22590c8). Step 8: every step is in D's import and none in
+  the damaged tier as sent (C); when C is back, decide once whether a re-derive (steps 2, 6) and
+  a re-import (3, 4, 5a) of its 39 volumes, into NEW staging, are worth another ~103 GPU-h 4B run.
 
 Where each step lands:
 

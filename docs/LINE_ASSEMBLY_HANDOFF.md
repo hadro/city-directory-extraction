@@ -232,9 +232,11 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
 - Steps 2-6 together, pilot against the post-#30 baselines: no exact row lost or gained on either
   layer; IA's words 1 row re-read (better), fresh tesseract 3 (inexact both ways). **The baselines
   for further work are now `data/iapanel_lighton_s6_{ia,tess}`** (work dirs
-  `data/lighton_pilot_s6_{ia,tess}`, at 22590c8). Step 8: every step is in D's import and none in
-  the damaged tier as sent (C); when C is back, decide once whether a re-derive (steps 2, 6) and
-  a re-import (3, 4, 5a) of its 39 volumes, into NEW staging, are worth another ~103 GPU-h 4B run.
+  `data/lighton_pilot_s6_{ia,tess}`, at 22590c8). Step 8: every step is in D's import, and C had
+  not been sent, so its 39 volumes were re-imported (629b27f) and restaged as
+  `data/volumes_books_damaged_v3` (BOOKSCAN_HANDOFF §2): no second 4B run is needed for them. The
+  re-import flipped 1876BPL's wrap calibration on a knife edge (`survey_harvest.WRAP_PINS`); the
+  rule wants hysteresis before the next import (PIPELINE #32, open).
 
 Where each step lands:
 

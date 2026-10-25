@@ -1551,6 +1551,19 @@ correcting for the column's measured line slope (fit it from the pieces' left an
 take `tiles`' angle when it is nonzero), and do not reorder pieces between rows whose membership
 is borderline (within, say, 20% of the limit): keep the old top-to-bottom order there.
 
+**Open, found by the restage of 2026-10-25: `calibrate_indent` flips on a knife edge.** Re-importing
+the 39 volumes of the 4B package with (c)-(f) moved a few dozen of 1876BPL's line pairs, and its
+trough fell from 5.13% of the run-over mode to 4.98%, under `CAL_TROUGH_SHARE`'s 5%: the wrap
+threshold went 3.0 -> 1.5 and added 3,497 joins. An image-read sample of 32: 12 real run-overs, 8
+harmful (each listing page's running head, `858 STE`, glued onto its first entry; banners onto
+entries; two entries), 12 neutral. Doggett 1845's trough moved between two near-equal bins (1.75
+-> 1.5). Both are held where they were (`survey_harvest.WRAP_PINS`) and the package went out so.
+**Before D's import:** give the rule hysteresis (decline within a band around 5%, and prefer the
+earlier trough bin on a near-tie), list every volume whose sidecar sits in that band, and consider
+whether a re-OCR'd volume, whose model run-overs join on `cont` anyway, should lower its threshold
+at all (#28: model starts share the run-overs' band). A running head should also never take a run-
+over: it is the first line of a leaf, and `join_wraps` joins before the filters that would drop it.
+
 ## Medium effort, high information
 
 **5. Does the `44` finding generalize?** It is measured on one volume, one OCR engine, one adapter.

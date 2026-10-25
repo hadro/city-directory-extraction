@@ -45,12 +45,23 @@ no faster than an L40S without them, unmeasured with them).
 | **B. abbyy8-damaged re-OCR** | `cde-books-damaged.tar` (358 MB, sha256 1f8d8fa7...7291): code at 6002d70 + 35 volumes' word records | https://claude.ai/artifact/L5hhRFvo22384GUDwNkQZa | `data/reocr_tiers/answers_abbyy8-damaged/<id>.tar` (one per volume, possibly in batches) + `lighton-abbyy8-damaged-logs.tar` + a summary line |
 
 **Update 2026-10-23: A and B are back and done** (canary scored, tier imported: PIPELINE #27). Out
-now: **C. the 4B over the damaged tier** (all 35 volumes + the canary's 4 again, 2026-10-24),
-`cde-volumes-books-damaged-v2.tar.gz` (sha256 39b19059...8610, 258 tasks), comes back as
-`books-damaged-4b-preds.tar`; install into `data/volumes_books_damaged_v2/`, verify the 258 `.sha1`s as in
-section 3 step 1, guard, and assemble with `--out data/records_books_damaged`. Judge the canary four
-against job 3 (`results/records_books_canary.json`: Longworth 0.859 should rise), and the two
-"generaldire" Trow volumes by the glued-entry proxy in PIPELINE #32 (a).
+now: **C. the 4B over the damaged tier** (all 35 volumes + the canary's 4 again), RESTAGED
+2026-10-25 before sending with every line-assembly fix below (re-import 629b27f):
+`cde-volumes-books-damaged-v3.tar.gz` (152 MB, sha256 682c1cba...d650a, 258 tasks, 4,677,035 lines,
+~103 GPU-h; v2 was never sent and is deleted). Comes back as `books-damaged-4b-preds.tar`; install
+into `data/volumes_books_damaged_v3/`, verify the 258 `.sha1`s as in section 3 step 1, guard, and
+assemble with `--out data/records_books_damaged`. Judge the canary four against job 3
+(`results/records_books_canary.json`: Longworth 0.859 should rise), and the two "generaldire" Trow
+volumes by the glued-entry proxy in PIPELINE #32 (a). 1876BPL and Doggett 1845 keep their earlier
+wrap indent (`survey_harvest.WRAP_PINS`: a knife-edge calibration flip, measured harmful).
+Also with D, optional: **the table test**, `cde-table-test.tar` (194 MB, sha256 ef27dde3...8c9a):
+`hpc/lightonocr_vllm_notables.py` + `hpc/43_lightonocr_notables.sbatch` re-read task 0 (the bench's
+138 gold tiles and 188 screen tiles) with table output banned, a separate job that touches nothing
+D uses. Back as `notables-answers.tar`; score the slug `lightonocr-3-1b-greedy-vllm-notables` as the
+vLLM parity run was (`reocr_pair.py bench <slug> --kind halves`, `post`, `score`) beside
+`-vllm`, the 11 table tiles above all: the first step of PIPELINE #32 (b) 5c. NYU's copy of
+`hpc/lightonocr_vllm.py` carries their `transformers==5.14.1` pin (now in ours too): never send a
+copy without it.
 Line-assembly work in progress elsewhere (PIPELINE #30, #32 (b)-(e)): [LINE_ASSEMBLY_HANDOFF.md](LINE_ASSEMBLY_HANDOFF.md);
 fixes committed before D returns reach D's import for free. **In the code D's import will use, so
 far:** the joiner's margin guard measured from the text for name-shaped lines (PIPELINE #32 (f),
@@ -59,8 +70,8 @@ room, and leading runs kept on their tile (#32 (c), import); a side banner's gly
 splits an entry from its run-over (#32 (d), import); LightOn's invented table headings ("Name,
 Address") are left out (#32 (b), import); a model-read start no longer joins on the indent past the
 volume's own run-overs' reach (#30, survey: banners and the next column's entries). When D lands, run `line_assembly.py tables --damage` on its
-volumes: its table rate decides the Torch re-read of table tiles (#32 (b), 5c). #30's panel veto is eval-only. Not in
-the damaged tier (C), which keeps the derive it was staged with.
+volumes: its table rate decides the Torch re-read of table tiles (#32 (b), 5c). #30's panel veto is eval-only. All of
+it is in C too, restaged before sending.
 Also out: **D. the LightOn re-read of the last two tiers**, `cde-books-first-clean.tar` (875 MB,
 sha256 25754bd7...7ae4: word positions for 58 `first` + 17 `abbyy8-clean` volumes, written at 32ebc26;
 Torch code unchanged since 6002d70), same runbook page, "Also next". ~165k + ~70k tiles, ~39 GPU-h.

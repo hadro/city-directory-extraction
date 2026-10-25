@@ -219,6 +219,9 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
   by a clamp to the tile edge for non-ditto leading runs that fit. Measuring a dump change needs a
   survey re-derive and an image-read sample of the derived differences, not only `moved`: the
   scratch scripts used are described in the step's commit.
+- Step 4 DONE as planned (PIPELINE #32 (d)); it rejoins far more than hyphen tails on Brooklyn
+  1905. `moved` overcounts a change that reorders rows (it compares by line index): read the
+  derived differences instead. New: `fragments`, `moved --base DIR`, `tables --damage` (step 5b).
 
 Where each step lands:
 

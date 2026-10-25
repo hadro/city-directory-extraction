@@ -398,7 +398,29 @@ def split(text: str, parts: list, part_words: list = None, char_w: float = 0.0,
         if cut < len(head) and sim(norm(head[:cut]), norm(stem)) >= PAIR:
             pieces[t] = f"{pieces[t]} {head[:cut]}-"
             pieces[t + 1] = (head[cut:] + (f" {rest}" if rest else "")).strip()
+    if part_words is not None:
+        strays(words, parts, pieces, part_words)
     return pieces
+
+
+def strays(words: list, parts: list, pieces: list, part_words: list) -> None:
+    """An inner printed line of the entry's run that is not the entry's: its layer text pairs
+    with none of the entry's words, and what split gave it is in a neighbour's layer text. It
+    gives that back and gets "" (pair_tile keeps it as a layer row after the entry). Brooklyn
+    1905 p1 leaf 563 (PIPELINE #32 (d)): the layer's pieces are `Dornheim Chas lithographer 4
+    New Cham-`, `U)` (the rotated `S.` of a side banner, its top between the entry's two
+    printed lines) and `bers Mhtn h 155 Cornelia`; split had to give `U)` a word, gave it `bers`,
+    and the joiner, which looks only at the entry above, could not reach it across `U)`."""
+    entry = [norm(t) for t in words]
+    for t in range(1, len(parts) - 1):
+        got = norm(pieces[t] or "")
+        if len(got.replace(" ", "")) < 3 or pair_words([norm(w[5]) for w in part_words[t]], entry):
+            continue
+        for nb in (t + 1, t - 1):
+            if pieces[nb] and f" {got} " in f" {norm(parts[nb])} ":
+                pieces[nb] = f"{pieces[t]} {pieces[nb]}" if nb > t else f"{pieces[nb]} {pieces[t]}"
+                pieces[t] = ""
+                break
 
 
 def mark_of(words: list, median_h: float, name: str) -> bool:
@@ -470,12 +492,18 @@ def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = Fals
                 group.append([i])
         parts = [" ".join(texts[i] for i in g) for g in group]
         part_words = [[w for i in g for w in tess[i]] for g in group]
+        stray = []
         for t, piece in enumerate(split(body, parts, part_words, char_w, col_right)):
+            if piece == "":                   # not the entry's (strays): after it, so the
+                stray.append({"text": parts[t], "words": part_words[t], "source": "tesseract",
+                              "mark": False})  # entry's printed lines stay together
+                continue
             text = piece if piece is not None else parts[t]
             if t == 0 and mark:
                 text = f"E {text}"
             out.append({"text": text, "words": [w for i in group[t] for w in tess[i]], "source": "model",
                         "mark": mark and t == 0, "start": t == 0, "bullet": bullet and t == 0})
+        out += stray
     mark_continuations(out)
     return out
 
@@ -1825,6 +1853,19 @@ def _self_test() -> int:
     assert respell(clerk, "Aal Siegfried clerk h 2 W 118th", 90, 789)[0][0] < 0
     rs = respell(clerk, "Aal Siegfried clerk h 2 W 118th", 90, 789, 14.75, 173)
     assert rs[0][0] == 173 and rs[2][:4] == clerk[0][:4], rs
+    # PIPELINE #32 (d), Brooklyn 1905 p1 leaf 563: a side banner's `U)` between the entry's two
+    # printed lines is not the entry's; `bers` goes back to `bers Mhtn`, U) after the entry
+    dorn = [[[511, 3036, 674, 3058, 0, "Dornheim"], [674, 3036, 769, 3057, 0, "Chas"],
+             [769, 3035, 978, 3059, 0, "lithographer"], [978, 3034, 1014, 3056, 0, "4"],
+             [1014, 3034, 1102, 3056, 0, "New"], [1102, 3035, 1205, 3056, 0, "Cham-"]],
+            [[338, 3047, 366, 3074, 0, "U)"]],
+            [[720, 3063, 818, 3084, 0, "bers Mhtn"], [818, 3062, 854, 3083, 0, "h"],
+             [854, 3062, 919, 3084, 0, "155"], [919, 3061, 1045, 3083, 0, "Cornelia"]]]
+    rows = pair_tile(dorn, ["Dornheim Chas lithographer 4 New Chambers Mhtn h 155 Cornelia"], 22,
+                     char_w=12.0, col_right=1205)
+    assert [(r["text"], r["source"]) for r in rows] == [
+        ("Dornheim Chas lithographer 4 New Cham-", "model"), ("bers Mhtn h 155 Cornelia", "model"),
+        ("U)", "tesseract")], rows
     print("self-test ok")
     return 0
 

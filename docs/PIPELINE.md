@@ -1460,6 +1460,20 @@ page's left edge: Longworth 1826 11 and 11, Trow 1907 p3 47 and 47; 107 of 195,3
 row already carries `x0`), and cap `respell`'s per-character width at the page's median `char_w`.
 A re-import applies it; no GPU.
 
+**(d) DONE 2026-10-24, as LINE_ASSEMBLY_HANDOFF §2 rediagnosed it** (a side banner's glyph inside an
+entry's run, not a hyphen tail; step 4; in D's import). `reocr_pair.strays`: an inner printed line
+of a model line's run whose layer text pairs with none of the entry's words, while what `split`
+gave it is in a neighbour's layer text (`bers` in `bers Mhtn`), gives it back and is kept as a layer
+row AFTER the entry's rows, so the entry's printed lines stay together for the joiner. Leaf 563 now
+reads `Dornheim Chas lithographer 4 New Cham-` + `bers Mhtn h 155 Cornelia` (closed up by the joiner),
+`U)` after. It reaches beyond the hyphen: Brooklyn 1905's banners split entries all down its pages.
+Against step 3: survey joins +298 / kept -193 (Brooklyn 1905 p1), +29 / -17 (Trow 1909 vol 1), and
+image-read samples of the derived differences, 12 of 12 (Brooklyn) and 5 of 6 (Trow, the other an
+ad) an entry rejoined with its run-over (`CREIGHTON JOHN B sec Brooklyn League 44 Court h 148
+Monroe`, `Otto razors 8 Reade Mhtn h 1010 Liberty av`); short fragments beside their run-over
+(`line_assembly.py fragments`) 336 -> 273 and 157 -> 146 (most of the rest are real text the layer
+held apart: `Mhtn`, `h`, `ton`). Pilot: IA's words one row better (lain 597 `... h 1875 Atlan-` ->
+`... h 1875 Atlantic av`), fresh tesseract none changed; no exact row on either. The original finding:
 **(d) A hyphenated word's tail, set as its own layer piece, is dropped as `short`.** Brooklyn 1905
 p1 leaf 563: LightOn read `Dornheim Chas lithographer 4 New Chambers Mhtn h 155 Cornelia`; IA's
 layer has `... 4 New Cham-`, then `bers` as a separate piece (x 338-401), then `Mhtn h 155

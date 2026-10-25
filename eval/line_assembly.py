@@ -49,6 +49,11 @@ and a uniform sample of the removed ones with each line's indent (from the entry
 where its text begins, in line heights) and an IIIF crop URL to read it on the page. A joiner
 change is judged on what it REMOVES (join_wraps' deep-indent story), so read the sample.
 
+`fragments [--dir DIR] VOL ...`: PIPELINE #32 (d)'s shape. Short model fragments (5 characters
+or fewer, no digit, `cont` 1) whose next line is a run-over (`cont` 1) they do not overlap
+horizontally: an entry's text handed to a stray layer piece beside it (Brooklyn 1905 p1 leaf 563,
+`bers` on a side banner's `U)`), which the joiner cannot reach and the survey drops as `short`.
+
 `panel A B [--list]`: two panel dirs (eval/ia_panel.build's output) compared by gold row: rows
 dropped, added, re-matched to another line, and exact rows lost or gained (exact after
 lighton_pilot.canon's typography). Counts, not rates: dropping inexact rows raises a rate with
@@ -166,7 +171,8 @@ def _replaced(path: Path) -> dict:
 
 def moved(args) -> int:
     for vol in args.vols:
-        a, b = _replaced(DATA / "survey_ocr" / f"{vol}_words.jsonl.gz"), _replaced(Path(args.dir) / f"{vol}_words.jsonl.gz")
+        base = Path(args.base) if args.base else DATA / "survey_ocr"
+        a, b = _replaced(base / f"{vol}_words.jsonl.gz"), _replaced(Path(args.dir) / f"{vol}_words.jsonl.gz")
         n = m = 0
         examples = []
         for leaf, r in sorted(b.items()):
@@ -202,6 +208,85 @@ def same(args) -> int:
     return 0 if a == b else 1
 
 
+def table_damage(vol: str) -> collections.Counter:
+    """PIPELINE #32 (b), what table mode costs a volume, for the Torch re-read decision
+    (LINE_ASSEMBLY_HANDOFF step 5). From the raw answers, through the runner's own untable:
+    `comma` lines where the field-split join put ", " after a cell (Trow and Brooklyn print no
+    comma after a name), `ditto_lost` ditto marks in a column untable dropped as a margin sliver
+    that also held surnames, `surname_lost` those surnames. From the production dump: `two`
+    model run-overs (cont 1) in a table-mode tile that open `Surname Given` within half a line
+    height of where the line above's text begins (a cell holding two entries), and `two_plain`
+    the same in the volume's other tiles, its base rate."""
+    import statistics
+    import reocr_pair as rp
+    run = rp.runner()
+    c, mode = collections.Counter(), {}
+    root = DATA / "reocr_tiers" / vol
+    for f in (root / vol).glob(f"*_{SLUG}.meta.json"):
+        stem = f.name[:-len(f"_{SLUG}.meta.json")]
+        mode[stem] = bool(json.loads(f.read_text(encoding="utf-8")).get("table_mode"))
+        if not mode[stem]:
+            continue
+        raw_f = f.with_name(f"{stem}_{SLUG}.raw.txt")
+        if not raw_f.exists():
+            continue
+        raw = raw_f.read_text(encoding="utf-8")
+        lines, rows = run.html_rows(raw).splitlines(), {}
+        for i, line in enumerate(lines):
+            m = run._ROW.match(line)
+            if m and not (i + 1 < len(lines) and run._SEP.match(lines[i + 1]) and "|" in lines[i + 1]):
+                rows[i] = [x.strip() for x in m.group(1).split("|")]
+        cols = {}
+        for cells in rows.values():
+            for k, x in enumerate(cells):
+                if x:
+                    cols.setdefault(k, []).append(x)
+        margin = {k for k, col in cols.items() if 5 * sum(bool(run._MARGIN.match(x)) for x in col) >= 4 * len(col)}
+        if len(margin) == len(cols):
+            margin = set()
+        for k in margin:
+            dit = sum(bool(re.fullmatch(r"[\"“”„«»]+|[—–-]+", x)) for x in cols[k])
+            sur = sum(bool(re.fullmatch(r"[A-Z][A-Za-z'’-]{3,}", x)) for x in cols[k])
+            if 3 * dit >= len(cols[k]) and sur:
+                c["ditto_lost"] += dit
+                c["surname_lost"] += sur
+        kept = [[x for k, x in enumerate(cells) if x and k not in margin] for cells in rows.values()]
+        later = [x for cells in kept for x in cells[1:]]
+        if later and 2 * sum(bool(run._ENTRY_START.match(x)) for x in later) >= len(later):
+            continue                                  # packed: each cell its own line, no join
+        for cells in kept:                            # untable's field-split join, counted
+            entry = ""
+            for x in cells:
+                if entry and not (entry[-1] in ",.;:" or entry[-1].isdigit()):
+                    c["comma"] += 1
+                entry = x if not entry else entry + " " + x
+    boxes = json.loads((root / "boxes.json").read_text(encoding="utf-8"))
+    tiles = collections.defaultdict(list)
+    for key, entry in boxes.items():
+        v, fname = key.split("/")
+        if v == vol:
+            stem = fname[:-4]
+            tiles[int(stem.rsplit("_c", 1)[0].rsplit("_", 1)[1])].append((entry[:4], mode.get(stem, False)))
+    with gzip.open(DATA / "survey_ocr" / f"{vol}_words.jsonl.gz", "rt", encoding="utf-8") as fh:
+        for r in map(json.loads, fh):
+            if "cont" not in r:
+                continue
+            L = r["lines"]
+            mh = statistics.median([w[3] - w[1] for ws in L for w in ws] or [20])
+            for i, ws in enumerate(L):
+                if not (i and ws and L[i - 1] and r["cont"][i] == 1 and r["sources"][i] == "model"):
+                    continue
+                if not ENTRY_HEAD.match(" ".join(w[5] for w in ws)):
+                    continue
+                x = min(w[0] for w in ws)
+                if x - name_x(L[i - 1]) > 0.5 * mh:
+                    continue
+                mx, my = (x + max(w[2] for w in ws)) / 2, (min(w[1] for w in ws) + max(w[3] for w in ws)) / 2
+                t = next((m for b, m in tiles[r["leaf"]] if b[0] <= mx <= b[2] and b[1] <= my <= b[3]), False)
+                c["two" if t else "two_plain"] += 1
+    return c
+
+
 def tables(args) -> int:
     import reocr_pair as rp
     vols = args.vols or sorted(p.name for p in (DATA / "reocr_tiers").iterdir() if (p / "boxes.json").exists())
@@ -217,9 +302,14 @@ def tables(args) -> int:
             heads = [ln for ln in rp.model_lines(stem, SLUG, False) or [] if HEADER.match(ln.strip())]
             c["header"] += len(heads)
             seen.update(heads)
+        if args.damage and c["table"]:
+            c.update(table_damage(vol))
         if c["tiles"]:
             print(f"{vol:28s} tiles {c['tiles']:5d}  table mode {c['table']:4d} "
-                  f"({100 * c['table'] / c['tiles']:4.1f}%)  header lines {c['header']}")
+                  f"({100 * c['table'] / c['tiles']:4.1f}%)  header lines {c['header']}"
+                  + (f"  two-entry cells {c['two']:4d} (plain tiles {c['two_plain']:4d})  ', ' added "
+                     f"{c['comma']:5d}  ditto marks lost {c['ditto_lost']:4d} (+{c['surname_lost']} "
+                     f"surnames)" if args.damage else ""))
         total.update(c)
     print(f"ALL: {total['tiles']:,} tiles, {total['table']:,} in table mode, {total['header']} header lines")
     for line, k in seen.most_common(8):
@@ -277,6 +367,37 @@ def glue(args) -> int:
         step = max(1, len(examples) // max(args.examples, 1))
         for e in examples[::step][:args.examples]:
             print(f"    leaf {e[0]:4d}  dash {e[1]:5.2f} name {e[2]:5.2f}  {e[3]!r:44s} + {e[4]!r}")
+    return 0
+
+
+def fragments(args) -> int:
+    src = Path(args.dir) if args.dir else DATA / "survey_ocr"
+    for vol in args.vols:
+        n = hit = 0
+        examples = []
+        with gzip.open(src / f"{vol}_words.jsonl.gz", "rt", encoding="utf-8") as fh:
+            for r in map(json.loads, fh):
+                if "cont" not in r:
+                    continue
+                L = r["lines"]
+                for i, ws in enumerate(L):
+                    if not ws:
+                        continue
+                    n += 1
+                    t = " ".join(w[5] for w in ws)
+                    if not (r["cont"][i] == 1 and r["sources"][i] != "tesseract" and len(t) <= 5
+                            and not re.search(r"\d", t) and i + 1 < len(L) and L[i + 1]
+                            and r["cont"][i + 1] == 1):
+                        continue
+                    nx0, nx1 = min(w[0] for w in L[i + 1]), max(w[2] for w in L[i + 1])
+                    if min(nx1, max(w[2] for w in ws)) - max(nx0, min(w[0] for w in ws)) <= 0:
+                        hit += 1
+                        if len(examples) < args.examples:
+                            prev = " ".join(w[5] for w in L[i - 1])[-30:] if i else ""
+                            examples.append((r["leaf"], prev, t, " ".join(w[5] for w in L[i + 1])[:30]))
+        print(f"{vol:28s} {n:9,d} lines  short fragments beside their run-over {hit:5,d}")
+        for e in examples:
+            print(f"    leaf {e[0]:4d}  {e[1]!r} | {e[2]!r} | {e[3]!r}")
     return 0
 
 
@@ -421,11 +542,13 @@ def main(argv=None) -> int:
     p.add_argument("dir")
     p.add_argument("vols", nargs="+")
     p.add_argument("--examples", type=int, default=4)
+    p.add_argument("--base", help="the dumps to compare against instead of the production ones")
     p = sub.add_parser("same")
     p.add_argument("a")
     p.add_argument("b")
     p = sub.add_parser("tables")
     p.add_argument("vols", nargs="*")
+    p.add_argument("--damage", action="store_true", help="also count what table mode costs (table_damage)")
     p = sub.add_parser("glue")
     p.add_argument("vols", nargs="+")
     p.add_argument("--dir", help="word dumps to read instead of data/survey_ocr")
@@ -438,6 +561,10 @@ def main(argv=None) -> int:
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--urls", action="store_true", help="an IIIF crop URL under each sampled join")
     p.add_argument("--out", help="a dir to write every removed/added join to, as <vol>_joins.json")
+    p = sub.add_parser("fragments")
+    p.add_argument("vols", nargs="+")
+    p.add_argument("--dir", help="word dumps to read instead of data/survey_ocr")
+    p.add_argument("--examples", type=int, default=6)
     p = sub.add_parser("panel")
     p.add_argument("a")
     p.add_argument("b")
@@ -445,7 +572,7 @@ def main(argv=None) -> int:
     p.add_argument("--all", action="store_true", help="a line for every set, changed or not")
     args = ap.parse_args(argv)
     return {"page": page, "proxy": proxy, "moved": moved, "same": same, "tables": tables,
-            "glue": glue, "joins": joins, "panel": panel}[args.cmd](args)
+            "glue": glue, "joins": joins, "fragments": fragments, "panel": panel}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -351,21 +351,23 @@
    "publisher_tag": "upington",
    "publisher_tag_note": null,
    "year_tag": "1905",
-   "hocr_lines": 183701,
-   "wrap_joins": 16347,
-   "candidates": 167354,
+   "hocr_lines": 183679,
+   "wrap_joins": 16481,
+   "candidates": 167198,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 90811,
-    "mark_share": 0.3897,
+    "pairs": 91015,
+    "mark_share": 0.3899,
     "mode": 1.25,
-    "mode_pairs": 3254,
+    "mode_pairs": 3284,
     "trough": 0.5,
-    "trough_pairs": 278,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 281,
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": 16.08,
+    "run_over_joins": 12491
    },
-   "model_runovers": 16629,
+   "model_runovers": 16287,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -377,27 +379,27 @@
    },
    "marker_fixes": 2,
    "digit_fixes": 178,
-   "kept": 109465,
+   "kept": 109371,
    "keep_rate": 0.6541,
    "dropped": {
-    "short": 43698,
-    "allcaps": 10657,
-    "banner": 2566,
-    "bigtype": 631,
-    "nonascii": 328,
+    "short": 43651,
+    "allcaps": 10714,
+    "banner": 2530,
+    "bigtype": 597,
+    "nonascii": 326,
     "pagenum": 9
    },
    "ditto_marks": [
     "\"",
     "\u201c"
    ],
-   "ditto_applied": 38729,
+   "ditto_applied": 38763,
    "band": {
     "leaves_banded": 557,
-    "head": 2016,
-    "body": 91240,
-    "foot": 1984,
-    "unbanded": 14225
+    "head": 2026,
+    "body": 91102,
+    "foot": 2000,
+    "unbanded": 14243
    },
    "top_ad_leaves": [
     383,
@@ -409,20 +411,20 @@
     1159,
     485,
     7,
-    193
+    1163
    ],
-   "filters_at": "071e202-dirty",
-   "derived": "2026-10-24"
+   "filters_at": "d4ef214-dirty",
+   "derived": "2026-10-25"
   },
-  "words_gz_bytes": 9331683,
+  "words_gz_bytes": 9334337,
   "hocr_deleted": true,
   "elapsed_s": 79
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "start_leaf": 9,
   "end_leaf": 1153,
   "first_letter": "K",
@@ -683,11 +685,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "content_leaves": 616,
-  "fitted_leaves": 375,
-  "read_leaves": 204,
+  "fitted_leaves": 379,
+  "read_leaves": 202,
   "segments": [
    {
     "first_leaf": 27,
@@ -995,19 +997,11 @@
    },
    {
     "first_leaf": 927,
-    "last_leaf": 937,
+    "last_leaf": 957,
     "first_page": 0,
-    "last_page": 5,
-    "leaves": 6,
-    "read": 3
-   },
-   {
-    "first_leaf": 939,
-    "last_leaf": 949,
-    "first_page": 3,
-    "last_page": 8,
-    "leaves": 6,
-    "read": 3
+    "last_page": 15,
+    "leaves": 16,
+    "read": 4
    },
    {
     "first_leaf": 969,
@@ -1101,8 +1095,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -1179,8 +1173,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1905geor_listing.jsonl.gz",
   "sections": [
    {
@@ -1189,18 +1183,18 @@
     "end_leaf": 1153
    }
   ],
-  "kept": 96077,
+  "kept": 95983,
   "dropped": 13388,
-  "kept_share": 0.8777,
+  "kept_share": 0.8776,
   "kept_by_section": {
-   "listing": 96077
+   "listing": 95983
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-23",
+  "derived": "2026-10-25",
   "entry_min": 0.15,
-  "scoped_lines": 180,
+  "scoped_lines": 181,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    181,
@@ -1226,15 +1220,15 @@
   "loop_truncated": 1,
   "table_mode": 538,
   "pages": 573,
-  "lines_runover": 16629,
-  "lines_model": 114929,
-  "lines_tesseract": 40430,
-  "lines_model-only": 9970,
-  "lines_bleed": 732,
+  "lines_runover": 16287,
+  "lines_model": 114569,
+  "lines_tesseract": 40792,
+  "lines_model-only": 9948,
+  "lines_bleed": 730,
   "leaves_replaced": 573,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 573
   },
-  "dumped": "2026-10-24"
+  "dumped": "2026-10-25"
  }
 }

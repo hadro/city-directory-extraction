@@ -353,21 +353,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1908",
-   "hocr_lines": 186643,
-   "wrap_joins": 31446,
-   "candidates": 155197,
+   "hocr_lines": 186640,
+   "wrap_joins": 31057,
+   "candidates": 155583,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 150598,
+    "pairs": 150597,
     "mark_share": 0.421,
     "mode": 1.5,
-    "mode_pairs": 3037,
+    "mode_pairs": 3026,
     "trough": 1.0,
-    "trough_pairs": 824,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 826,
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": 8.0,
+    "run_over_joins": 27350
    },
-   "model_runovers": 30527,
+   "model_runovers": 30487,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -379,26 +381,26 @@
    },
    "marker_fixes": 1,
    "digit_fixes": 217,
-   "kept": 140242,
-   "keep_rate": 0.9036,
+   "kept": 140557,
+   "keep_rate": 0.9034,
    "dropped": {
-    "short": 8127,
-    "allcaps": 4835,
-    "bigtype": 1186,
-    "banner": 777,
-    "nonascii": 30
+    "short": 8182,
+    "allcaps": 4913,
+    "bigtype": 1161,
+    "banner": 739,
+    "nonascii": 31
    },
    "ditto_marks": [
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 75329,
+   "ditto_applied": 75392,
    "band": {
     "leaves_banded": 503,
-    "head": 2294,
-    "body": 133145,
-    "foot": 2932,
-    "unbanded": 1871
+    "head": 2341,
+    "body": 133382,
+    "foot": 2962,
+    "unbanded": 1872
    },
    "top_ad_leaves": [
     405,
@@ -410,27 +412,27 @@
     591,
     759,
     115,
-    631
+    145
    ],
-   "filters_at": "071e202-dirty",
-   "derived": "2026-10-24"
+   "filters_at": "d4ef214-dirty",
+   "derived": "2026-10-25"
   },
-  "words_gz_bytes": 12948924,
+  "words_gz_bytes": 12948749,
   "hocr_deleted": true,
   "elapsed_s": 20
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "start_leaf": 15,
   "end_leaf": 1037,
   "first_letter": "F",
   "last_letter": "L",
   "letters_present": "FGHIJKL",
   "missing_letters": "ABCDEMNOPQRSTUVWXYZ",
-  "voting_density": 0.389,
+  "voting_density": 0.388,
   "flags": [
    "partial-alphabet"
   ],
@@ -448,7 +450,7 @@
    {
     "start_leaf": 15,
     "end_leaf": 1037,
-    "voting_leaves": 398,
+    "voting_leaves": 397,
     "first_letter": "F",
     "last_letter": "L",
     "letters": "FGHIJKL",
@@ -525,7 +527,7 @@
    "H": [
     435,
     593,
-    69
+    68
    ],
    "I": [
     631,
@@ -572,8 +574,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "content_leaves": 516,
   "fitted_leaves": 467,
   "read_leaves": 128,
@@ -606,8 +608,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -646,8 +648,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1908p2trow_listing.jsonl.gz",
   "sections": [
    {
@@ -656,11 +658,11 @@
     "end_leaf": 1037
    }
   ],
-  "kept": 140043,
+  "kept": 140358,
   "dropped": 199,
   "kept_share": 0.9986,
   "kept_by_section": {
-   "listing": 140043
+   "listing": 140358
   }
  },
  "non_entry_pages": {
@@ -684,16 +686,16 @@
   "loop_truncated": 6,
   "table_mode": 116,
   "pages": 511,
-  "lines_runover": 30527,
-  "lines_model": 174241,
-  "lines_model-only": 3377,
-  "lines_tesseract": 8333,
+  "lines_runover": 30487,
+  "lines_model": 174204,
+  "lines_model-only": 3374,
+  "lines_tesseract": 8370,
   "lines_bleed": 290,
   "leaves_replaced": 511,
   "layers": {
    "tesseract-5.5 merge": 509,
    "ia-words (ABBYY FineReader 8.0)": 2
   },
-  "dumped": "2026-10-24"
+  "dumped": "2026-10-25"
  }
 }

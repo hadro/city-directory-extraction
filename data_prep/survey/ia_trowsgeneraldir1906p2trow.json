@@ -389,20 +389,22 @@
    "publisher_tag_note": null,
    "year_tag": "1906",
    "hocr_lines": 208967,
-   "wrap_joins": 36273,
-   "candidates": 172694,
+   "wrap_joins": 35961,
+   "candidates": 173006,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 177449,
-    "mark_share": 0.4309,
+    "pairs": 177460,
+    "mark_share": 0.4308,
     "mode": 2.0,
-    "mode_pairs": 9824,
+    "mode_pairs": 9844,
     "trough": 1.5,
-    "trough_pairs": 1435,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 1427,
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": 9.26,
+    "run_over_joins": 33242
    },
-   "model_runovers": 35742,
+   "model_runovers": 35734,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -412,28 +414,28 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 8,
-   "digit_fixes": 135,
-   "kept": 162429,
-   "keep_rate": 0.9406,
+   "marker_fixes": 9,
+   "digit_fixes": 136,
+   "kept": 162750,
+   "keep_rate": 0.9407,
    "dropped": {
-    "allcaps": 4934,
-    "short": 3545,
-    "banner": 974,
-    "bigtype": 803,
-    "nonascii": 9
+    "allcaps": 5015,
+    "short": 3569,
+    "banner": 919,
+    "bigtype": 743,
+    "nonascii": 10
    },
    "ditto_marks": [
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 87666,
+   "ditto_applied": 87672,
    "band": {
     "leaves_banded": 581,
-    "head": 2720,
-    "body": 154580,
-    "foot": 3069,
-    "unbanded": 2060
+    "head": 2892,
+    "body": 154679,
+    "foot": 3116,
+    "unbanded": 2063
    },
    "top_ad_leaves": [
     7,
@@ -443,22 +445,22 @@
     467,
     1023,
     33,
-    591,
-    751,
-    75
+    117,
+    539,
+    53
    ],
-   "filters_at": "071e202-dirty",
-   "derived": "2026-10-24"
+   "filters_at": "d4ef214-dirty",
+   "derived": "2026-10-25"
   },
-  "words_gz_bytes": 13833719,
+  "words_gz_bytes": 13833160,
   "hocr_deleted": true,
   "elapsed_s": 33
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "start_leaf": 9,
   "end_leaf": 1191,
   "first_letter": "G",
@@ -649,8 +651,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "content_leaves": 593,
   "fitted_leaves": 586,
   "read_leaves": 122,
@@ -675,8 +677,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -715,8 +717,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1906p2trow_listing.jsonl.gz",
   "sections": [
    {
@@ -725,18 +727,18 @@
     "end_leaf": 1191
    }
   ],
-  "kept": 162420,
+  "kept": 162741,
   "dropped": 9,
   "kept_share": 0.9999,
   "kept_by_section": {
-   "listing": 162420
+   "listing": 162741
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-23",
+  "derived": "2026-10-25",
   "entry_min": 0.15,
-  "scoped_lines": 228,
+  "scoped_lines": 229,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    1029
@@ -752,15 +754,15 @@
   "loop_truncated": 0,
   "table_mode": 183,
   "pages": 589,
-  "lines_runover": 35742,
-  "lines_model": 204458,
+  "lines_runover": 35734,
+  "lines_model": 204448,
   "lines_model-only": 1921,
-  "lines_tesseract": 2504,
+  "lines_tesseract": 2514,
   "lines_bleed": 59,
   "leaves_replaced": 589,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 589
   },
-  "dumped": "2026-10-24"
+  "dumped": "2026-10-25"
  }
 }

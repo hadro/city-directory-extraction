@@ -297,21 +297,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1907",
-   "hocr_lines": 192236,
-   "wrap_joins": 30482,
-   "candidates": 161754,
+   "hocr_lines": 192233,
+   "wrap_joins": 30170,
+   "candidates": 162063,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 136099,
-    "mark_share": 0.3468,
+    "pairs": 136082,
+    "mark_share": 0.3467,
     "mode": 1.25,
-    "mode_pairs": 3102,
+    "mode_pairs": 3088,
     "trough": 0.75,
-    "trough_pairs": 844,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 831,
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": 16.08,
+    "run_over_joins": 20890
    },
-   "model_runovers": 25487,
+   "model_runovers": 25436,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -322,14 +324,14 @@
     "leaves": 0
    },
    "marker_fixes": 10,
-   "digit_fixes": 1144,
-   "kept": 136529,
-   "keep_rate": 0.8441,
+   "digit_fixes": 1148,
+   "kept": 136902,
+   "keep_rate": 0.8447,
    "dropped": {
-    "short": 13568,
-    "banner": 5312,
-    "allcaps": 4751,
-    "bigtype": 1465,
+    "short": 13536,
+    "banner": 5265,
+    "allcaps": 4773,
+    "bigtype": 1458,
     "nonascii": 111,
     "pagenum": 18
    },
@@ -337,13 +339,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 59762,
+   "ditto_applied": 59907,
    "band": {
-    "leaves_banded": 443,
-    "head": 2462,
-    "body": 116903,
-    "foot": 3245,
-    "unbanded": 13919
+    "leaves_banded": 442,
+    "head": 2431,
+    "body": 117034,
+    "foot": 3253,
+    "unbanded": 14184
    },
    "top_ad_leaves": [
     1201,
@@ -357,18 +359,18 @@
     1159,
     481
    ],
-   "filters_at": "b88ecda-dirty",
-   "derived": "2026-10-24"
+   "filters_at": "d4ef214-dirty",
+   "derived": "2026-10-25"
   },
-  "words_gz_bytes": 12471959,
+  "words_gz_bytes": 12471869,
   "hocr_deleted": true,
   "elapsed_s": 25
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-24",
-  "code_at": "b88ecda-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "start_leaf": 9,
   "end_leaf": 913,
   "first_letter": "R",
@@ -531,8 +533,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-24",
-  "code_at": "b88ecda-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "content_leaves": 625,
   "fitted_leaves": 455,
   "read_leaves": 123,
@@ -589,8 +591,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-24",
-  "code_at": "b88ecda-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -679,8 +681,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-24",
-  "code_at": "b88ecda-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "file": "data/survey_ocr/trowsgeneraldire19073trow_listing.jsonl.gz",
   "sections": [
    {
@@ -689,18 +691,18 @@
     "end_leaf": 913
    }
   ],
-  "kept": 124754,
+  "kept": 125127,
   "dropped": 11775,
-  "kept_share": 0.9138,
+  "kept_share": 0.914,
   "kept_by_section": {
-   "listing": 124754
+   "listing": 125127
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-24",
+  "derived": "2026-10-25",
   "entry_min": 0.15,
-  "scoped_lines": 59,
+  "scoped_lines": 60,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    481,
@@ -718,16 +720,16 @@
   "loop_truncated": 6,
   "table_mode": 144,
   "pages": 455,
-  "lines_runover": 25487,
-  "lines_model": 147928,
-  "lines_tesseract": 17834,
+  "lines_runover": 25436,
+  "lines_model": 147881,
+  "lines_tesseract": 17881,
   "lines_bleed": 190,
-  "lines_model-only": 6044,
+  "lines_model-only": 6041,
   "leaves_replaced": 455,
   "layers": {
    "tesseract-5.5 merge": 449,
    "ia-words (ABBYY FineReader 8.0)": 6
   },
-  "dumped": "2026-10-24"
+  "dumped": "2026-10-25"
  }
 }

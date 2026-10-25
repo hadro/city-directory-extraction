@@ -314,21 +314,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1906",
-   "hocr_lines": 188212,
-   "wrap_joins": 33253,
-   "candidates": 154959,
+   "hocr_lines": 188210,
+   "wrap_joins": 32933,
+   "candidates": 155277,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 158190,
-    "mark_share": 0.3986,
+    "pairs": 158203,
+    "mark_share": 0.3984,
     "mode": 2.0,
-    "mode_pairs": 8869,
+    "mode_pairs": 8858,
     "trough": 1.5,
-    "trough_pairs": 955,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "trough_pairs": 941,
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": 9.2,
+    "run_over_joins": 30000
    },
-   "model_runovers": 32406,
+   "model_runovers": 32401,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -340,13 +342,13 @@
    },
    "marker_fixes": 6,
    "digit_fixes": 219,
-   "kept": 144181,
-   "keep_rate": 0.9304,
+   "kept": 144494,
+   "keep_rate": 0.9306,
    "dropped": {
-    "allcaps": 4942,
-    "short": 3699,
-    "banner": 1158,
-    "bigtype": 956,
+    "allcaps": 5031,
+    "short": 3720,
+    "banner": 1107,
+    "bigtype": 902,
     "nonascii": 18,
     "pagenum": 5
    },
@@ -354,13 +356,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 72653,
+   "ditto_applied": 72664,
    "band": {
     "leaves_banded": 514,
-    "head": 3242,
-    "body": 134354,
-    "foot": 3285,
-    "unbanded": 3300
+    "head": 3384,
+    "body": 134476,
+    "foot": 3331,
+    "unbanded": 3303
    },
    "top_ad_leaves": [
     1123,
@@ -374,18 +376,18 @@
     61,
     21
    ],
-   "filters_at": "071e202-dirty",
-   "derived": "2026-10-24"
+   "filters_at": "d4ef214-dirty",
+   "derived": "2026-10-25"
   },
-  "words_gz_bytes": 12474710,
+  "words_gz_bytes": 12473991,
   "hocr_deleted": true,
   "elapsed_s": 48
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "start_leaf": 107,
   "end_leaf": 1165,
   "first_letter": "A",
@@ -536,8 +538,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "content_leaves": 578,
   "fitted_leaves": 547,
   "read_leaves": 306,
@@ -570,8 +572,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -695,8 +697,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-24",
-  "code_at": "071e202-dirty",
+  "derived": "2026-10-25",
+  "code_at": "d4ef214-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1906p1trow_listing.jsonl.gz",
   "sections": [
    {
@@ -710,19 +712,19 @@
     "end_leaf": 1165
    }
   ],
-  "kept": 143129,
+  "kept": 143442,
   "dropped": 1052,
   "kept_share": 0.9927,
   "kept_by_section": {
    "late_names": 146,
-   "listing": 142983
+   "listing": 143296
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-23",
+  "derived": "2026-10-25",
   "entry_min": 0.15,
-  "scoped_lines": 96,
+  "scoped_lines": 97,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    433,
@@ -743,15 +745,15 @@
   "loop_truncated": 2,
   "table_mode": 237,
   "pages": 529,
-  "lines_runover": 32406,
-  "lines_model": 180885,
-  "lines_tesseract": 3179,
-  "lines_model-only": 1983,
+  "lines_runover": 32401,
+  "lines_model": 180881,
+  "lines_tesseract": 3183,
+  "lines_model-only": 1981,
   "lines_bleed": 62,
   "leaves_replaced": 529,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 529
   },
-  "dumped": "2026-10-24"
+  "dumped": "2026-10-25"
  }
 }

@@ -93,6 +93,15 @@ UA = "city-directory-survey/1.0 (+research; serial, one volume at a time)"
 
 DEAD_OCR_RATIO = 0.1     # chars/content-leaf below this share of the engine-class median
 HOLDOUT_WINDOW = 3       # search this many leaves either side of the jp2 number for the gold leaf
+# Volumes whose wrap threshold is held where it was, against calibrate_indent's own reading, and
+# why. 2026-10-25, the damaged tier's restage: the line-assembly fixes of that week (PIPELINE #32
+# (c), (d)) moved a few dozen of 1876BPL's line pairs, and its trough went from 5.13% of the
+# run-over mode to 4.98%, under CAL_TROUGH_SHARE's 5%: calibrated 3.0 -> 1.5, +3,497 joins. An
+# image-read sample of 32 of them: 12 real run-overs, 8 harmful (each listing page's running head,
+# `858 STE`, glued onto its first entry; ad banners onto entries; two entries), 12 neutral. Doggett
+# 1845's trough moved between two near-equal bins, 1.75 -> 1.5 (+117 joins, unmeasured). A knife
+# edge is no reason to change a volume's joins; the rule wants hysteresis (PIPELINE #32, open).
+WRAP_PINS = {"1876BPL": 3.0, "doggettsnewyorkc1845dogg": 1.75}
 
 
 # ==============================================================================================
@@ -541,6 +550,8 @@ def derive(ident: str, holdout: dict) -> dict:
     catalog_pub, year = lookup_master(ident)
     publisher, why = tag_publisher(catalog_pub)
     wraps = calibrate_indent(dump, content, split_columns=True)
+    if ident in WRAP_PINS:       # held where it was (WRAP_PINS); the calibration stays on record
+        wraps.update({"indent_ratio": WRAP_PINS[ident], "pinned": True})
     if reocr:                    # a re-OCR'd volume: how far its model-read starts may join
         wraps.update(start_cap(dump, content, wraps["indent_ratio"]))
     tmp_l = p["lines.jsonl.gz"].with_suffix(".tmp")

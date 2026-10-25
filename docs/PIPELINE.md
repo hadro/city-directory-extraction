@@ -1420,7 +1420,37 @@ table-mode tiles whose cells hold two entries (a mid-cell `Surname Given` after 
 it is more than a handful, re-read those tiles on Torch with a prompt or sampling that discourages
 tables (a few hundred tiles, minutes of GPU), rather than trying to split cells on the Mac.
 
-**(c) `respell` places unmatched words left of the column, and the banner filter then drops the
+**(c) DONE 2026-10-24, narrower than recommended** (LINE_ASSEMBLY_HANDOFF §2 and step 3; in D's
+import). Two causes on leaf 95, two changes in `reocr_pair.py`:
+1. `split` gave words the layer never read to the longer piece by text likeness (`Fire Ins Co S4
+   William` to a run-over whose first read word sits at the indent). `room_cuts` now puts them
+   where the print has room: first where the layer saw print it could not read before line t+1's
+   first read word (back only as far as the unread words could reach: a `«` in the margin 27
+   characters out is not the line's opening, Brooklyn 1905 p1 leaf 163), then the end of line t
+   up to the column edge. In that order because empty paper after line t is only room: where the
+   model ran two entries together, line t is the first one's short last line (Trow 1909 vol 1 leaf
+   245, `h,` + `—Edwd A salesman h 1537`). An image-read sample of what it changes at the survey: 10
+   of 12 rejoin a run-over its entry had lost (`—Wilber W lawyer & notary` + `99 Nassau R 402 h New
+   Rochelle N Y`).
+2. `respell` laid unread words out at the line's own character width, inflated where ABBYY 8's
+   boxes abut. Capping that width at the page's `char_w` (the recommendation) was measured and
+   REJECTED: it moved 51,834 of Trow 1909 vol 1's line starts (mostly unread ditto dashes) and a
+   sample of 24 survey-level changes read ~11 better, ~10 worse (a dash laid too far left had been
+   keeping false run-overs below it from joining; an off-page line was what dropped a pairing
+   failure's four-entry composite, leaf 681). Instead, only a leading run that would start left of
+   its tile begins at the tile's edge, and only where it fits there at `char_w` and does not open
+   with a ditto mark (a run that does not fit is not the line's text; a hanging dash belongs
+   outside the column).
+Leaf 95 now reads `Aabv ...` at the tile edge, `Aachen & Munich Fire Ins Co S4 William` + its
+run-over `R 902, 95 William & 871 Brook av` (x 281, was -64), `Aal Siegfried` at the edge (was -43).
+Lines off the page: Trow 1909 vol 1 107 -> 94, Longworth 1826 11 -> 9 (the rest open with a dash or
+do not fit). Starts moved: 1,909 (Trow 1909 vol 1), 958 (1905 p1), 1,212 (Brooklyn 1905 p1), 27
+(Longworth 1798), 64 (Longworth 1826). Survey, against #32 (f) alone: joins -53 / kept +99 (Trow
+1909 vol 1), -42 / +30 (Brooklyn 1905 p1), -12 / +25 (Longworth 1826); samples on Trow 1909 vol 1
+(12: 8 better, 4 neutral, 0 worse, e.g. leaf 161's two composites now six entries) and Brooklyn (12:
+better or neutral). Pilot: IA's words no row changed; fresh tesseract 3 inexact rows re-read, no
+exact row lost or gained. The original finding:
+**`respell` places unmatched words left of the column, and the banner filter then drops the
 line.** Trow 1909 vol 1 leaf 95, `Aal Siegfried clerk h 2 W 118th`: IA's words have nothing under
 the name ("clerk h 2 W llStb" only), so `respell` runs `Aal Siegfried` leftwards from the first
 matched word at a character width inflated by the garbled words, to x = -43; the line is then too

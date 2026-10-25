@@ -213,6 +213,12 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
   where they print at the name's x. New tools: `line_assembly.py joins REV VOL` (the joins a
   joiner change removes, on identical input, with crop URLs), `proxy --dir --kind lines`, and
   `lighton_pilot.py --survey-only DUMPS` (re-runs the survey alone, for steps 2 and 6).
+- Step 3 DONE, CHANGED (PIPELINE #32 (c)): `split`'s room rule takes the layer's unread print
+  before line t+1 first, then the end of line t (leaf 245 showed the plan's order wrong); the
+  `respell` width cap was measured and rejected (51,834 starts moved, a wash downstream), replaced
+  by a clamp to the tile edge for non-ditto leading runs that fit. Measuring a dump change needs a
+  survey re-derive and an image-read sample of the derived differences, not only `moved`: the
+  scratch scripts used are described in the step's commit.
 
 Where each step lands:
 

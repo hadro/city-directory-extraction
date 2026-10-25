@@ -54,7 +54,8 @@ against job 3 (`results/records_books_canary.json`: Longworth 0.859 should rise)
 Line-assembly work in progress elsewhere (PIPELINE #30, #32 (b)-(e)): [LINE_ASSEMBLY_HANDOFF.md](LINE_ASSEMBLY_HANDOFF.md);
 fixes committed before D returns reach D's import for free. **In the code D's import will use, so
 far:** the joiner's margin guard measured from the text for name-shaped lines (PIPELINE #32 (f),
-survey; ~100-180 two-person composites a Trow part fewer). #30's panel veto is eval-only. Not in
+survey; ~100-180 two-person composites a Trow part fewer); unread words placed where the print has
+room, and leading runs kept on their tile (#32 (c), import). #30's panel veto is eval-only. Not in
 the damaged tier (C), which keeps the derive it was staged with.
 Also out: **D. the LightOn re-read of the last two tiers**, `cde-books-first-clean.tar` (875 MB,
 sha256 25754bd7...7ae4: word positions for 58 `first` + 17 `abbyy8-clean` volumes, written at 32ebc26;

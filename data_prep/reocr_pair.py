@@ -309,10 +309,69 @@ def fill_gaps(segs: list, tess: list, model: list) -> list:
     return out
 
 
-def split(text: str, parts: list) -> list:
+ROOM_SLACK = 0.1        # room_cuts: a page's char_w (median over words) runs ~6% wide of a printed
+                        # line's own pitch (Trow 1909 vol 1 leaf 95: 14.8 against 13.9), plus a char
+
+def room_cuts(words: list, b: list, part_words: list, char_w: float, col_right: float) -> list:
+    """split's cuts, with the words the layer never read between two printed lines' read words
+    put where the print has room for them (PIPELINE #32 (c)): first where the layer saw print it
+    could not read before line t+1's first read word (that word's x less where the layer saw the
+    line begin), then the end of line t, up to the column's edge at `char_w` a character. In that
+    order because empty paper after line t is only room, not print: where the model ran two
+    entries together, line t is the first one's short last line (Trow 1909 vol 1 leaf 245: `h,`
+    and then `—Edwd A salesman h 1537`, the dash name over a garbled layer word). Text likeness alone gave them to
+    the longer piece, where unread words cost less ratio: on Trow 1909 vol 1 leaf 95 the layer
+    read only `Aachen & J unloh` of `Aachen & Munich Fire Ins Co 84 William`, and `Fire Ins Co S4
+    William` went to the run-over, whose first read word (`R`, x 281) sits at the run-over
+    indent with no room before it. Laid out leftwards from there the line began at x -64, could
+    not join its entry, and was dropped. A cut that disagrees with the layer's reading, or a
+    remainder that fits nowhere, keeps the likeness choice; where every word is read nothing moves."""
+    nt = [norm(t) for t in words]
+    for t in range(len(b) - 2):
+        wa = sorted(part_words[t], key=lambda w: w[0])
+        wb = sorted(part_words[t + 1], key=lambda w: w[0])
+        lo, hi = b[t], b[t + 2]
+        if not wa or not wb or hi - lo < 2:
+            continue
+        pair = pair_words([norm(w[5]) for w in wa + wb], nt[lo:hi])
+        in_a = [j for j, i in pair.items() if i < len(wa)]
+        in_b = [j for j, i in pair.items() if i >= len(wa)]
+        if not in_a or not in_b:
+            continue
+        last, first = max(in_a), min(in_b)
+        if not (lo + last < b[t + 1] <= lo + first) or first - last <= 1:
+            continue
+        unread = words[lo + last + 1:lo + first]
+        slack = 1 + ROOM_SLACK
+        # where the layer saw line t+1 begin: its words before the first read one, back as far as
+        # all the unread words could reach. A speck further out is not the line's opening
+        # (Brooklyn 1905 p1 leaf 163: one at x 221, 27 characters before `Taylor`, took a lone `c`,
+        # and respell began the line there, where the entries below glued onto it)
+        f = pair[first] - len(wa)
+        reach = sum(len(w) + 1 for w in unread) * slack + 1
+        begin = f
+        while begin > 0 and (wb[f][0] - wb[begin - 1][0]) / char_w <= reach:
+            begin -= 1
+        room_start = (wb[f][0] - wb[begin][0]) / char_w * slack + 1
+        room_end = (col_right - wa[pair[last]][2]) / char_w * slack + 1
+        at_start, used = 0, 0
+        for w in reversed(unread):
+            if used + len(w) + 1 > room_start:
+                break
+            used, at_start = used + len(w) + 1, at_start + 1
+        rest = len(unread) - at_start
+        if sum(len(w) + 1 for w in unread[:rest]) <= room_end:
+            b[t + 1] = lo + last + 1 + rest
+    return b
+
+
+def split(text: str, parts: list, part_words: list = None, char_w: float = 0.0,
+          col_right: float = 0.0) -> list:
     """A model entry spread back over the k printed lines it covers: the word boundaries that
     make each piece most like its line, then tesseract's hyphen where the print broke a word.
-    None where the entry has too few words to give that line any (tesseract's text stays)."""
+    None where the entry has too few words to give that line any (tesseract's text stays).
+    With each part's layer words, the page's `char_w` and the column's right edge, words the
+    layer never read go where the print has room for them (room_cuts)."""
     k, words = len(parts), text.split()
     if k == 1:
         return [text]
@@ -322,11 +381,13 @@ def split(text: str, parts: list) -> list:
     best = None
     for cuts in itertools.combinations(range(1, len(words)), k - 1):
         b = (0,) + cuts + (len(words),)
-        pieces = [" ".join(words[b[t]:b[t + 1]]) for t in range(k)]
-        s = sum(sim(norm(p), q) for p, q in zip(pieces, nparts))
+        s = sum(sim(norm(" ".join(words[b[t]:b[t + 1]])), q) for t, q in enumerate(nparts))
         if best is None or s > best[0]:
-            best = (s, pieces)
-    pieces = best[1]
+            best = (s, b)
+    b = list(best[1])
+    if part_words is not None and char_w and col_right:
+        b = room_cuts(words, b, part_words, char_w, col_right)
+    pieces = [" ".join(words[b[t]:b[t + 1]]) for t in range(k)]
     for t in range(k - 1):
         m = re.search(r"(\w+)[" + HYPHENS + r"]$", parts[t].strip())
         if not m or not pieces[t + 1]:
@@ -362,7 +423,7 @@ EGLYPH = re.compile(r"^\s*[\^£=≡■†€©®ᴱ](?=[A-Z][a-z])")
 
 
 def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = False,
-              rows: list = None) -> list:
+              rows: list = None, char_w: float = 0.0, col_right: float = 0.0) -> list:
     """One tile: tesseract's printed lines (word lists, top to bottom) and the model's lines.
     -> [{"text", "words", "source", "mark", "start", "bullet"}] in printed order, model-only
     lines in place. model_marks: the model writes E marks itself (Churro), so a leading "E " is
@@ -408,7 +469,8 @@ def pair_tile(tess: list, model: list, median_h: float, model_marks: bool = Fals
             else:
                 group.append([i])
         parts = [" ".join(texts[i] for i in g) for g in group]
-        for t, piece in enumerate(split(body, parts)):
+        part_words = [[w for i in g for w in tess[i]] for g in group]
+        for t, piece in enumerate(split(body, parts, part_words, char_w, col_right)):
             text = piece if piece is not None else parts[t]
             if t == 0 and mark:
                 text = f"E {text}"
@@ -704,21 +766,11 @@ CONF_BLEED = 30         # ...with an odd character is taken for banner crumbs; a
                         # words are less sure (house numbers off by a digit on 0047 leaf 90)
 
 
-def respell(words: list, text: str, conf: int, limit: float = 0.0) -> list:
-    """Tesseract's words for one printed line, spelled as `text` (the model's piece of the line,
-    after the post-passes). Each tesseract word is paired, in order, with the model token most
-    like it (similarity >= 0.5; the in-order pairing of greatest total similarity, so "capmker"
-    still anchors "capmaker"), and a paired token takes that word's box, its confidence at least
-    `conf`. Unpaired tokens fill the gap between their paired neighbours, by length: an "E" mark
-    before the name goes just left of it, words tesseract never read ("60 Ewen") run on past its
-    last word at the line's character width. A word the model did not read is dropped. Boxes
-    stay tesseract's, so the line keeps its place and its indent."""
-    toks = text.split()
-    if not words or not toks:
-        return []
-    ws = sorted(words, key=lambda w: w[0])
-    nw, nt = [norm(w[5]) for w in ws], [norm(t) for t in toks]
-    n, m = len(ws), len(toks)
+def pair_words(nw: list, nt: list) -> dict:
+    """{token index: word index}: layer words (normalised, in reading order) paired in order with
+    the model's tokens, each pair at similarity >= 0.5, the in-order pairing of greatest total
+    similarity. A token with no pair is a word the layer never read."""
+    n, m = len(nw), len(nt)
     best = [[0.0] * (m + 1) for _ in range(n + 1)]
     for i in range(n - 1, -1, -1):
         for j in range(m - 1, -1, -1):
@@ -734,6 +786,37 @@ def respell(words: list, text: str, conf: int, limit: float = 0.0) -> list:
             i += 1
         else:
             j += 1
+    return pair
+
+
+def respell(words: list, text: str, conf: int, limit: float = 0.0, char_w: float = 0.0,
+            left_edge: float = None) -> list:
+    """Tesseract's words for one printed line, spelled as `text` (the model's piece of the line,
+    after the post-passes). Each tesseract word is paired, in order, with the model token most
+    like it (similarity >= 0.5; the in-order pairing of greatest total similarity, so "capmker"
+    still anchors "capmaker"), and a paired token takes that word's box, its confidence at least
+    `conf`. Unpaired tokens fill the gap between their paired neighbours, by length: an "E" mark
+    before the name goes just left of it, words tesseract never read ("60 Ewen") run on past its
+    last word at the line's character width. A word the model did not read is dropped. Boxes
+    stay tesseract's, so the line keeps its place and its indent.
+
+    `left_edge` (the column tile's) and `char_w` (the page's): a line's opening the layer never
+    read, laid out leftwards from its first read word, starts no further left than the tile's
+    edge, where it fits there (PIPELINE #32 (c)). The line's own width is inflated where the
+    layer's boxes abut: ABBYY 8 on Trow 1909 vol 1 leaf 95 gives each word the space after it, so
+    a one-letter word measured ~31 px a character against the page's 14.8, and `Aal Siegfried`
+    ran leftwards from `clerk` to x -43, off the page. Capping that width instead (at char_w, the
+    first version, 2026-10-24) moved 51,834 of Trow 1909 vol 1's line starts, mostly unread ditto
+    dashes, and an image-read sample of what it changed downstream was as often worse as better:
+    a dash laid too far left had been keeping false run-overs below it from joining, and a line
+    off the page was what dropped a pairing failure's composite (leaf 681). Words the layer read
+    keep their boxes exactly."""
+    toks = text.split()
+    if not words or not toks:
+        return []
+    ws = sorted(words, key=lambda w: w[0])
+    m = len(toks)
+    pair = pair_words([norm(w[5]) for w in ws], [norm(t) for t in toks])
     # a token far taller than the line's words (a blot, or a rule tesseract read with the line:
     # "mr Walter 721" Minette da -" stood three rows tall on Trow 1917 leaf 688) takes the line's
     # height, or the survey drops the whole line as large type
@@ -764,6 +847,14 @@ def respell(words: list, text: str, conf: int, limit: float = 0.0) -> list:
             # long name over ABBYY's "i !^U«S-£has-" (Lain 1897 leaf 45, "Allenburg Chas.") began
             # 140 px left of its column's margin, and the joiner glued three entries together
             left = ws[0][0]
+        elif (not prev and nxt and left_edge is not None and left < left_edge and char_w
+              and not DITTO_OPEN.match(run[0])
+              and char_w * (sum(len(t) for t in run) + len(run)) <= (nxt[0] - left_edge) * (1 + ROOM_SLACK) + char_w):
+            # ...and a run that would start left of its column's tile begins at the tile's edge,
+            # where it fits there at the page's char_w (PIPELINE #32 (c)), so a name the layer never
+            # read does not run off the page. A run that would not fit is not this line's text, and
+            # a ditto dash belongs outside the column, so both are left as they were.
+            left = left_edge
         right = nxt[0] - cw / 2 if nxt else max(left + need, ws[-1][2] if not prev else left + need)
         if limit and not nxt and right > limit:
             # words tesseract never read, run on past its last: kept inside the column's tile,
@@ -864,6 +955,7 @@ def page_rows(rec: dict, tiles: dict, answers: dict, marks: frozenset = frozense
     maps a tile name (c0_h0, ...) to its box; `answers` maps it to (model lines, bleed) or to None
     where the model has no answer (that tile keeps tesseract's lines). `marks`: the volume's
     confirmed ditto forms (confirmed_marks)."""
+    from reocr_columns import PAD
     keyed = boxed_lines(rec, tiles)
     hs = sorted(w[3] - w[1] for _k, _y, ws, _r in keyed for w in ws)
     median_h = hs[len(hs) // 2] if hs else 30
@@ -882,7 +974,11 @@ def page_rows(rec: dict, tiles: dict, answers: dict, marks: frozenset = frozense
                       "x0": tiles[name][0], "x1": tiles[name][2]} for ws in tess]
             continue
         model, bleed = got
-        for r in pair_tile(tess, model, median_h, rows=[r for _ws, r in mine]):
+        # the column's right edge, the staging's padding off (as boxed_lines takes it)
+        x1, pad = tiles[name][2], int(PAD * rec["page_size"][0])
+        col_right = x1 - pad if x1 < rec["page_size"][0] else x1
+        for r in pair_tile(tess, model, median_h, rows=[r for _ws, r in mine], char_w=char_w,
+                           col_right=col_right):
             r["source"] = "bleed" if bleed and r["source"] != "tesseract" else r["source"]
             r["x0"], r["x1"] = tiles[name][0], tiles[name][2]
             rows.append(r)
@@ -922,7 +1018,7 @@ def page_dump(rec: dict, tiles: dict, answers: dict, with_starts: bool = False,
         if r["source"] == "tesseract":
             ws = respell(r["words"], text, 0) if text != r["text"] else r["words"]
         elif r["words"]:
-            ws = respell(r["words"], text, conf, r.get("x1", 0))
+            ws = respell(r["words"], text, conf, r.get("x1", 0), char_w, r.get("x0"))
             # normal-width letters in boxes far taller than the page's lines: tesseract boxed
             # several printed rows as one (Trow 1917 leaf 688: three lines ~70 px against 22),
             # and the survey drops the line as large type. Large type is wide too, and is left
@@ -1687,6 +1783,48 @@ def _self_test() -> int:
         "a name over garbled words takes their place, not the margin's left"
     sl = synth_line("Hess Peter, h. 3", [100, 10, 400, 40], None, 100, 12.0, 30, 90)
     assert [w[5] for w in sl] == ["Hess", "Peter,", "h.", "3"] and sl[0][1] > 40 and sl[0][0] == 100
+    # PIPELINE #32 (c), Trow 1909 vol 1 leaf 95 (IA's ABBYY 8 words, char_w 14.75, column edge
+    # 768): the layer read `Aachen & J unloh` of the first printed line and nothing of `Fire Ins
+    # Co 84 William`, and the run-over's first read word `R` sits where the layer saw it begin
+    aachen = [[211, 2984, 315, 3001, 0, "Aachen"], [315, 2984, 348, 3001, 0, "&"],
+              [348, 2984, 370, 3001, 0, "J"], [370, 2984, 430, 3001, 0, "unloh"]]
+    r902 = [[281, 3003, 319, 3022, 0, "R"], [319, 3003, 364, 3022, 0, "H02."], [387, 3003, 432, 3022, 0, "1.5"],
+            [432, 3003, 500, 3022, 0, "Willi."], [505, 3003, 545, 3022, 0, "m"], [545, 3003, 581, 3022, 0, "A"],
+            [581, 3003, 641, 3022, 0, "S471"], [641, 3003, 726, 3022, 0, "Brook"], [726, 3003, 751, 3022, 0, "av"]]
+    entry, parts = "Aachen & Munich Fire Ins Co S4 William R 902, 95 William & 871 Brook av", \
+        ["Aachen & J unloh", "R H02. 1.5 Willi. m A S471 Brook av"]
+    assert split(entry, parts)[0] == "Aachen & Munich", "by likeness alone: the run-over takes them"
+    assert split(entry, parts, [aachen, r902], 14.75, 768) == \
+        ["Aachen & Munich Fire Ins Co S4 William", "R 902, 95 William & 871 Brook av"]
+    # ...but print the layer saw and could not read comes first (leaf 245, the tesseract layer):
+    # the model ran `h,` (the last line of one entry) and `—Edwd A salesman ...` together, and the
+    # dash sits over a speck at 848, not in the room after `h`
+    got = split("h, —Edwd A salesman h 1537 Benson av", ["h", ". Ac salesman hot", "ae nsun ay"],
+                [[[1162, 532, 1174, 548, 0, "h"]],
+                 [[848, 559, 851, 563, 0, "."], [919, 549, 934, 564, 0, "Ac"],
+                  [954, 549, 1059, 565, 0, "salesman"], [1079, 550, 1116, 567, 0, "hot"]],
+                 [[1169, 552, 1207, 587, 0, "ae"], [1212, 556, 1262, 568, 0, "nsun"],
+                  [1280, 555, 1306, 568, 0, "ay"]]], 14.8, 1320)
+    assert got[0] == "h," and got[1].startswith("—Edwd A"), got
+    # ...as far back as the unread words could reach: a `«` in the margin 27 characters before
+    # `Taylor` is not where the run-over begins (Brooklyn 1905 p1 leaf 163; `c` is ABBYY's `o`)
+    got = split("Harry W fireproofing Wash'n av c Taylor h 26 Edgecombe av Mhtn",
+                ["0 h Harry W fireprooflng Wash'n av o", "« Taylor h 26 Edgecombe av Mhtn"],
+                [[[278, 980, 327, 1016, 0, "0"], [327, 982, 348, 1008, 0, "h"],
+                  [503, 976, 626, 1001, 0, "Harry"], [626, 976, 687, 998, 0, "W"],
+                  [687, 976, 887, 1001, 0, "fireprooflng"], [887, 975, 1032, 997, 0, "Wash'n"],
+                  [1032, 980, 1097, 997, 0, "av"], [1097, 981, 1112, 998, 0, "o"]],
+                 [[221, 1006, 252, 1032, 0, "«"], [545, 1003, 662, 1028, 0, "Taylor"],
+                  [662, 1004, 696, 1025, 0, "h"], [696, 1003, 745, 1025, 0, "26"],
+                  [745, 1003, 932, 1028, 0, "Edgecombe"], [932, 1003, 984, 1024, 0, "av"],
+                  [984, 1002, 1064, 1024, 0, "Mhtn"]]], 12.0, 1133)
+    assert got == ["Harry W fireproofing Wash'n av c", "Taylor h 26 Edgecombe av Mhtn"], got
+    # ...and a name the layer never read starts at its tile's edge, not off the page (x -43)
+    clerk = [[391, 3024, 464, 3043, 0, "clerk"], [464, 3024, 495, 3043, 0, "h"], [495, 3024, 526, 3043, 0, "2"],
+             [526, 3024, 566, 3043, 0, "W"], [566, 3024, 628, 3043, 0, "llStb"]]
+    assert respell(clerk, "Aal Siegfried clerk h 2 W 118th", 90, 789)[0][0] < 0
+    rs = respell(clerk, "Aal Siegfried clerk h 2 W 118th", 90, 789, 14.75, 173)
+    assert rs[0][0] == 173 and rs[2][:4] == clerk[0][:4], rs
     print("self-test ok")
     return 0
 

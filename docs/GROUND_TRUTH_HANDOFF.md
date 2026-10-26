@@ -261,11 +261,18 @@ original under `data/_gold_backup/` and names the image that settled it.
 | 2026-10-14 | queens1933 · line 51 (`raw_line`, `name`, `address`) | `Harold A 197-15 97th av, Ozone Pk` / `Harold A` / `197-15 97th av Ozone Pk` | `" Harold A r97-15 97th av, Ozone Pk` / `" Harold A` / `r97-15 97th av Ozone Pk` | the page (`0022_58082931.jpg`) prints `" Harold A r97-15`: the ditto both fields had lost, and Surya's `1` for the resides marker `r`. Found by the same scan |
 | 2026-10-17 | **minneapolis · 95 of 230 rows** (`name`) | `Abbott Albert A` / `Mabel Mrs Mary E` / `Novelty Rev Charles H` | `Albert A` / `Mrs Mary E` / `Rev Charles H` | Minneapolis 1900 prints a surname once and drops it from the entries beneath, and `harvest_minneapolis.py` RESOLVED that inherited surname into `name` — asking the model for a word absent from its input, against the contract every other panel volume follows (polk1917 gold reads `" Jno H`, trow1913 `-Adolph A`). The 4B scored a structural **0.0% row EM on those 95** against 60.0% on the other 135. The converter's own docstring flagged it as "[review item #1]" and `validate_gold` had been emitting 95 `name tokens not in raw_line` warnings all along; nobody had measured it. Found by `evaluate.py --by-volume` (PIPELINE #14) flagging the set 42 points below the panel median. **The dropped surname is preserved in `context.inherited_surname`**, not in `record`, so a future surname-carry evaluation keeps its target. hadro approved 2026-10-17 |
 
+| 2026-10-25 | **lain · 13 rows** (`raw_line` only): 75, 76, 81, 90, 194, 279, 676 (a second entry appended) and 128, 205, 385, 452, 474, 696 (ad copy appended, four of them Gemini's synthetic `=== ADVERTISEMENT ===` block) | e.g. `Aacklender August, tailor, h 255 Ten Eyck Aalholm Jos. J. toilet articles, 104 Wil-` | `Aacklender August, tailor, h 255 Ten Eyck`: each row cut at the end of its own entry, which its record already describes | each on its page (1897BPL leaves 28-46: crops at directory-pipeline's aligned boxes, row 194 at the pilot's): every dropped tail is a separate printed entry or an advertisement. Row 194's first `Felix` is its own run-over (`h 50 St` / `Felix`) and stays. Cause: `harvest_own.py` builds a row from an entry's headline to the next one's, so a missed headline merges two (found by the panel matcher, PIPELINE #30). hadro approved |
+
 What a fix leaves stale, until re-run: clean-panel predictions for the row (the model read the
 old `raw_line`), `results/implied_surname_validation.json` (it lists this row as an illustrative
 false negative; no headline count includes it), and the `historical-ocr-eval` bench, which reads
 gold from this directory. The copy in `data/iapanel/iapanel_polk1917__trowsgeneraldire1917trow.jsonl`
 (`context.gold_raw_line`) was updated with it.
+
+The 2026-10-25 lain trims leave stale the clean-panel predictions for those 13 rows and every saved
+panel's `context.gold_raw_line` for them (`data/iapanel*`, the LightOn pilot baselines
+`data/iapanel_lighton_s6_*` included): a panel rebuilt now differs from those on exactly these rows,
+and its pooled exact rate moves with them. Diff by `gold_row` and read past them.
 
 The 2026-10-14 fixes leave stale the NER predictions and scores on trow1907, trow1913, polk1925,
 polk1933si and queens1933 (`results/scores.jsonl`), and the historical-ocr-eval bench's saved
@@ -275,13 +282,23 @@ above in the backups and nowhere else in the 21 sets. It cannot see a mark both 
 scan that found polk1933si 42 and queens1933 51 is a heuristic, and a crop review of every
 markless person row in the 7 ditto-convention sets (about 100) would settle the rest.
 
-**Open, not fixed (found 2026-10-24 by the panel matcher, PIPELINE #30):** lain rows 75, 90 and 194
-each hold two printed entries in one `raw_line` (`Aacklender August, tailor, h 255 Ten Eyck Aalholm
-Jos. J. toilet articles, …`; `Abatz Hyman, h 496 Stone av Abbe Richard F. civil engineer, …`;
-`Ackerson Edw'd C. broker, N. Y. h 50 St Felix " Felix`). Not checked on the image. Also, lain's gold
-holds 2 ditto-led rows in 800 while Lain 1897 dittos repeated surnames: the set samples lines and
-leaves most ditto lines out (leaf 32 prints `“ Seth R. mgr, h 428 Lewis av` between rows 146 and 147),
-so the panel finds ungolded ditto lines beside the gold rows, free for a row to claim by text alone.
+**lain and tulsa, the harvest's two artifacts (found 2026-10-24 by the panel matcher, PIPELINE #30;
+causes found 2026-10-25).** Both sets are `harvest_own.py` output (directory-pipeline's Gemini
+extraction, human-reviewed), and it leaves two marks:
+- **Merged rows.** A row runs from an entry's headline to the next one's, so a missed headline puts
+  two printed entries (or an entry and an ad) in one row. lain's 13 are trimmed (table above).
+  tulsa has more of them (a scan of text past each record's last field: ~60 of 1,500, e.g. row 31
+  holds two `Abbott Harry` entries, row 63 two `Adair James`, rows 10 and 17 an ad) and is left as
+  it is: the project's interest is the NYC directories (hadro, 2026-10-25).
+- **Ditto lines left out of lain.** `_recoverable()` keeps a row only when its gold name is in the
+  line, and Gemini gave ditto lines the inherited surname, so nearly all were dropped: lain holds 2
+  ditto-led rows in 800 while Lain 1897 dittos repeated surnames, and both break the convention
+  (`validate_gold` ERRORs on rows 205 and 756, 0-based: `" Printing Co.` named `Acme`, `" Fred'k`
+  named `Ament Fred'k`). The pilot panel's largest set therefore tests no ditto line, and the panel
+  finds ungolded ditto lines beside its rows (leaf 32 prints `“ Seth R. mgr, h 428 Lewis av`
+  between rows 146 and 147). **To do (hadro, 2026-10-25: later):** re-harvest lain keeping ditto
+  lines under the other sets' convention (`" Jacob`, the surname in `context.inherited_surname` as
+  for minneapolis), review the new rows, and append them so existing row numbers stay.
 
 ## Reading F1 vs EM (for scoring runs)
 For **sparse fields** (spouse/employer/race/home), read **F1 (non-empty), not EM** — high EM there

@@ -1605,6 +1605,16 @@ derived-line differences (1907 p2 18, 1903 p1 6), 22 take apart glued entries (`
 `Thos A plumber` + `Thos C butcher`) and 2 make a new one, where a dittoed line's dash hangs left of
 a line whose own dash box the layer put late (`— Francis real estate` + `— Francis tailor`).
 Pilot on both layers against `s8`: no row changed.
+The re-import at 78c43be then moved Trow 1905 p1's listing start from leaf 117 (page 17: title,
+abbreviations, then the first A entries) to 119. Two of the page's lines had become dittos,
+`Aalholm Jos J` and the abbreviation `Atty`, whose layer tokens `-'Atlbolm` and `-'Attjr` pass
+`tlead`'s standalone test on the whole word's box; without their A keys the page fell from 13 of
+52 to 11 of 50 under `extend_edges`' 0.25. So "standing alone" is now `lone_dash`: the dash run
+followed by nothing, by a mark Trow sets after its ditto (`—,` `—(` `—&`), by a speck read as `.`,
+or by a lone `'`. Measured against 78c43be on four volumes: 6 dittos taken back, 5 of them heads
+(`Aalholm`, `Atty`, `Oak` read `~>ak`, `Piemullo` and `Plate` read `-■`), one a real ditto
+(`—Bertha pres`, Trow 1909 vol 1). A dashes-only test was tried first and rejected: it took back
+17, 11 of them real (`—, Breitman & Co`, `—(apartments)`, `—Potito` read `-'`).
 
 **Open: the joiner still glues a lost-dash line under a dash-led entry** (found with the above).
 On Trow 1907 p2, 915 joins of a model-read start (`cont` 0) under a line that opens with a mark sit

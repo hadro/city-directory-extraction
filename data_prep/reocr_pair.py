@@ -532,6 +532,7 @@ QUOTE_ONLY = re.compile(r"^(?:[\"“”„«»]+|''|,,)$")   # ...as a token of 
 QUOTE_DITTO = re.compile(r"^\s*[\"“”„]\s+[A-Z]")      # LightOn's own `" Chas P r10 W43d`
 QUOTE_SHARE = 0.2
 DASH_SHARE = 0.1        # dittos: a dash page, where tesseract's dash leads this share of entries
+LONE_TAIL = re.compile(r"^(?:[,.(&].*|')?$")    # ...and what may follow a standalone dash (lone_dash)
 DITTO_DECISIONS = HERE / "ditto_decisions.json"
 _GIVEN = None
 
@@ -623,6 +624,16 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
     def tdash(r):
         return tlead(r) is not None
 
+    def lone_dash(r):
+        """Tesseract's first token is a dash standing alone: dashes, then nothing, a mark Trow
+        sets after its ditto dash (`—, Breitman & Co`, `—(apartments)`, `—& Country Home Co`), a
+        speck read as `.` (`—.Margaret`) or a lone `'` (`-'` before "Potito"). Not a speck's
+        glyph (`-■` before "Piemullo", `~>ak` for "Oak") or an apostrophe before a word
+        (`-'Atlbolm` for "Aalholm"), each a head (Trow 1907 p2, 1905 p1)."""
+        ws = sorted(r["words"], key=lambda w: w[0]) if r["words"] else []
+        lead = DASH.match(ws[0][5]) if ws else None
+        return lead is not None and LONE_TAIL.match(ws[0][5][lead.end():]) is not None
+
     def tquote_token(r):
         """Tesseract's first token is a quote mark standing alone, as a `"` ditto reads (Trow
         and Polk from the 1910s: `"`, `«`, `»`, `|"`), not glued to a word as a quotation is."""
@@ -687,7 +698,7 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
             # no given name: a head the page sets out of order ("Smeloft" after "Smeltzer")
             clean = (evidence and not tmark(r) and bool(r["words"]) and len(k) > 1 and k not in given
                      and sorted(r["words"], key=lambda w: w[0])[0][5] == body.split()[0])
-            if evidence and dash_page and tdash(r):
+            if evidence and dash_page and (tlead(r) == "glued" or tlead(r) == "alone" and lone_dash(r)):
                 # on a page that dittos with dashes, tesseract's dash, on the word or standing
                 # alone, is a ditto even where the word fits the chain: firms under a firm name
                 # are alphabetical too (Trow 1909 vol 1 leaf 149, under "American": "—Rubber Co",
@@ -697,7 +708,9 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
                 # under a "Ma" surname, the dash alone, 1907 p2 leaf 803). Only there: where a
                 # page prints every surname, a "glued dash" is a speck or a star mark
                 # ("—Alexander Malcolm" on 1876BPL, "*Townsend" on Hope & Henderson 1856), and the
-                # chain is right to overrule it. The chain stays put either way
+                # chain is right to overrule it. The chain stays put either way. "Alone" is
+                # lone_dash's: "-'Atlbolm" (Aalholm, Trow 1905 p1 leaf 117) also passes tlead's
+                # shape test, on the whole word's box, and is a head
                 r["ditto"] = True
             elif evidence and not clean:
                 if follows or (head is None and not tmark(r)):
@@ -1851,6 +1864,23 @@ def _self_test() -> int:
                           ("Michael tailor 2 Hester", [w("—Michael")])]]
     got = [r["text"].split(" ")[0] for r in dittos(rows)]
     assert got == ["Marks", "—", "—", "—", "—", "—"], got
+    # ...but not a dash with a word after it that is not glued to it ("-'Atlbolm" for Aalholm, a
+    # head that follows the chain, Trow 1905 p1 leaf 117): its "alone" box is the whole word's
+    rows = [{"text": t, "words": ws, "start": True, "bullet": False, "mark": False}
+            for t, ws in [("Aachen & Munich Fire Ins Co", [w("Aacben")]), ("Jos manager h 9 Bway", [w("—Jos")]),
+                          ("Aalholm Jos J toiletgds 83 John", [[70, 10, 210, 38, 90, "-'Atlbolm"]]),
+                          ("Chas E pres 9 Ferry", [w("—Chas")]), ("David trimmings 55 W 26th", [w("—David")]),
+                          ("Dora tailor 62 E 13th", [w("—Dora")]), ("Edwd mers 15 Wall", [w("—Edwd")])]]
+    got = [r["text"].split(" ")[0] for r in dittos(rows)]
+    assert got[2] == "Aalholm", got
+    # ...while a firm under a firm name, Trow's "—, Breitman & Co" read "—,", is a ditto
+    rows[2] = {"text": "Breitman & Co furs 7 Bleecker", "words": [[70, 10, 100, 14, 90, "—,"], w("Breitman")],
+               "start": True, "bullet": False, "mark": False}
+    rows[0]["text"], rows[0]["words"] = "Bernstein Abr tailor", [w("Bernstein")]
+    for r in rows[1:]:
+        r["text"] = r["text"].lstrip("— ")
+    got = [r["text"].split(" ")[0] for r in dittos(rows)]
+    assert got[2] == "—", got
     junk = ["Gittens Josiah, clerk, 130 Grand", "Glacken Mic clad Hirer 26 8 eT fopirne",
             "Glass John, cartman, 18 Sobwrot"]
     good = ["Gittens Josiah, clerk, 130 Grand", "Glacken Michael, laborer, 125 Stagg",

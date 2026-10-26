@@ -46,10 +46,11 @@ no faster than an L40S without them, unmeasured with them).
 
 **Update 2026-10-23: A and B are back and done** (canary scored, tier imported: PIPELINE #27). Out
 now: **C. the 4B over the damaged tier** (all 35 volumes + the canary's 4 again), RESTAGED
-2026-10-25 before sending with every line-assembly fix below (re-import 629b27f):
-`cde-volumes-books-damaged-v3.tar.gz` (152 MB, sha256 682c1cba...d650a, 258 tasks, 4,677,035 lines,
-~103 GPU-h; v2 was never sent and is deleted). Comes back as `books-damaged-4b-preds.tar`; install
-into `data/volumes_books_damaged_v3/`, verify the 258 `.sha1`s as in section 3 step 1, guard, and
+2026-10-26 before sending with every line-assembly fix below and PIPELINE #32 (g)'s ditto dashes
+(re-import 657e9c4): `cde-volumes-books-damaged-v4.tar.gz` (152 MB, sha256 f7d04180...ededf4, 258
+tasks, 4,678,164 lines, ~103 GPU-h; v2 and v3 were never sent and are deleted). Comes back as
+`books-damaged-4b-preds.tar`; install into `data/volumes_books_damaged_v4/`, verify the 258
+`.sha1`s as in section 3 step 1, guard, and
 assemble with `--out data/records_books_damaged`. Judge the canary four against job 3
 (`results/records_books_canary.json`: Longworth 0.859 should rise), and the two "generaldire" Trow
 volumes by the glued-entry proxy in PIPELINE #32 (a). 1876BPL and Doggett 1845 keep their earlier

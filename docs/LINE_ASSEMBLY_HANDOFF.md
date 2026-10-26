@@ -234,7 +234,8 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
   for further work are now `data/iapanel_lighton_s6_{ia,tess}`** (work dirs
   `data/lighton_pilot_s6_{ia,tess}`, at 22590c8). Step 8: every step is in D's import, and C had
   not been sent, so its 39 volumes were re-imported (629b27f) and restaged as
-  `data/volumes_books_damaged_v3` (BOOKSCAN_HANDOFF §2): no second 4B run is needed for them. The
+  `data/volumes_books_damaged_v3`, since replaced by v4 with #32 (g) (657e9c4; BOOKSCAN_HANDOFF
+  §2): no second 4B run is needed for them. The
   re-import flipped 1876BPL's wrap calibration on a knife edge (`survey_harvest.WRAP_PINS`); the
   rule wants hysteresis before the next import (PIPELINE #32, open).
 - After step 8, PIPELINE #32 (g) (2026-10-25): on a dash page, a dash tesseract glued to the word is a

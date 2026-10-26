@@ -397,17 +397,17 @@
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
    "hocr_lines": 130722,
-   "wrap_joins": 8776,
-   "candidates": 121946,
+   "wrap_joins": 8778,
+   "candidates": 121944,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
     "pairs": 83714,
-    "mark_share": 0.3973,
+    "mark_share": 0.3989,
     "mode": 1.75,
-    "mode_pairs": 4662,
+    "mode_pairs": 4681,
     "trough": 0.75,
-    "trough_pairs": 271,
+    "trough_pairs": 272,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": 27.4,
     "run_over_joins": 7235
@@ -424,11 +424,11 @@
    },
    "marker_fixes": 5,
    "digit_fixes": 46,
-   "kept": 86296,
-   "keep_rate": 0.7077,
+   "kept": 86291,
+   "keep_rate": 0.7076,
    "dropped": {
     "short": 19631,
-    "banner": 8579,
+    "banner": 8582,
     "allcaps": 6479,
     "bigtype": 923,
     "nonascii": 31,
@@ -437,12 +437,12 @@
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 44503,
+   "ditto_applied": 44693,
    "band": {
     "leaves_banded": 498,
-    "head": 3086,
-    "body": 71871,
-    "foot": 6768,
+    "head": 3083,
+    "body": 71865,
+    "foot": 6772,
     "unbanded": 4571
    },
    "top_ad_leaves": [
@@ -457,25 +457,25 @@
     211,
     399
    ],
-   "filters_at": "d4ef214-dirty",
-   "derived": "2026-10-25"
+   "filters_at": "8064b0b-dirty",
+   "derived": "2026-10-26"
   },
-  "words_gz_bytes": 7571983,
+  "words_gz_bytes": 7573757,
   "hocr_deleted": true,
   "elapsed_s": 44
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "start_leaf": 15,
   "end_leaf": 1079,
   "first_letter": "A",
   "last_letter": "H",
   "letters_present": "ABCDEFGH",
   "missing_letters": "IJKLMNOPQRSTUVWXYZ",
-  "voting_density": 0.428,
+  "voting_density": 0.423,
   "flags": [
    "partial-alphabet"
   ],
@@ -493,7 +493,7 @@
    {
     "start_leaf": 15,
     "end_leaf": 1079,
-    "voting_leaves": 456,
+    "voting_leaves": 450,
     "first_letter": "A",
     "last_letter": "H",
     "letters": "ABCDEFGH",
@@ -506,9 +506,9 @@
      "A",
      "B"
     ],
-    "start_leaf": 58,
-    "end_leaf": 94,
-    "leaves": 37
+    "start_leaf": 56,
+    "end_leaf": 152,
+    "leaves": 97
    },
    {
     "between": [
@@ -568,18 +568,18 @@
   "letter_blocks": {
    "A": [
     15,
-    57,
+    55,
     20
    ],
    "B": [
-    95,
+    153,
     287,
-    88
+    63
    ],
    "C": [
     467,
     549,
-    38
+    36
    ],
    "D": [
     573,
@@ -589,12 +589,12 @@
    "E": [
     687,
     741,
-    28
+    27
    ],
    "F": [
     743,
     867,
-    56
+    55
    ],
    "G": [
     869,
@@ -604,10 +604,10 @@
    "H": [
     1015,
     1079,
-    29
+    28
    ]
   },
-  "skipped_votes": 1,
+  "skipped_votes": 2,
   "voted_bounds": [
    15,
    1079
@@ -631,8 +631,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "content_leaves": 540,
   "fitted_leaves": 522,
   "read_leaves": 397,
@@ -689,8 +689,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -742,8 +742,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc00broo_listing.jsonl.gz",
   "sections": [
    {
@@ -752,11 +752,11 @@
     "end_leaf": 1079
    }
   ],
-  "kept": 86173,
+  "kept": 86168,
   "dropped": 123,
   "kept_share": 0.9986,
   "kept_by_section": {
-   "listing": 86173
+   "listing": 86168
   }
  },
  "non_entry_pages": {
@@ -795,6 +795,6 @@
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 533
   },
-  "dumped": "2026-10-25"
+  "dumped": "2026-10-26"
  }
 }

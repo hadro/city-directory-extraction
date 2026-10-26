@@ -293,20 +293,20 @@
    "publisher_tag_note": null,
    "year_tag": "1907",
    "hocr_lines": 171616,
-   "wrap_joins": 26344,
-   "candidates": 145272,
+   "wrap_joins": 26343,
+   "candidates": 145273,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 130982,
-    "mark_share": 0.3354,
+    "pairs": 130977,
+    "mark_share": 0.3378,
     "mode": 1.5,
-    "mode_pairs": 3486,
+    "mode_pairs": 3456,
     "trough": 0.75,
-    "trough_pairs": 581,
+    "trough_pairs": 574,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 7.92,
-    "run_over_joins": 21415
+    "start_cap": 7.96,
+    "run_over_joins": 21418
    },
    "model_runovers": 23876,
    "cont_dropped_leaves": 0,
@@ -320,12 +320,12 @@
    },
    "marker_fixes": 101,
    "digit_fixes": 667,
-   "kept": 126752,
-   "keep_rate": 0.8725,
+   "kept": 126777,
+   "keep_rate": 0.8727,
    "dropped": {
-    "short": 9166,
-    "allcaps": 4654,
-    "banner": 3261,
+    "short": 9169,
+    "allcaps": 4649,
+    "banner": 3239,
     "bigtype": 1347,
     "nonascii": 86,
     "pagenum": 6
@@ -334,12 +334,12 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 52885,
+   "ditto_applied": 53309,
    "band": {
     "leaves_banded": 380,
-    "head": 1986,
-    "body": 98213,
-    "foot": 3192,
+    "head": 1915,
+    "body": 98351,
+    "foot": 3150,
     "unbanded": 23361
    },
    "top_ad_leaves": [
@@ -354,25 +354,25 @@
     103,
     141
    ],
-   "filters_at": "d4ef214-dirty",
-   "derived": "2026-10-25"
+   "filters_at": "8064b0b-dirty",
+   "derived": "2026-10-26"
   },
-  "words_gz_bytes": 11432285,
+  "words_gz_bytes": 11435153,
   "hocr_deleted": true,
   "elapsed_s": 58
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "start_leaf": 151,
   "end_leaf": 915,
   "first_letter": "R",
   "last_letter": "Z",
   "letters_present": "RSTUVWYZ",
   "missing_letters": "ABCDEFGHIJKLMNOPQX",
-  "voting_density": 0.382,
+  "voting_density": 0.376,
   "flags": [
    "partial-alphabet"
   ],
@@ -390,7 +390,7 @@
    {
     "start_leaf": 151,
     "end_leaf": 915,
-    "voting_leaves": 292,
+    "voting_leaves": 288,
     "first_letter": "R",
     "last_letter": "Z",
     "letters": "RSTUVWYZ",
@@ -412,9 +412,9 @@
      "S",
      "T"
     ],
-    "start_leaf": 358,
+    "start_leaf": 274,
     "end_leaf": 542,
-    "leaves": 185
+    "leaves": 269
    },
    {
     "between": [
@@ -466,17 +466,17 @@
    "R": [
     151,
     169,
-    8
+    7
    ],
    "S": [
     171,
-    357,
-    84
+    273,
+    47
    ],
    "T": [
     543,
     633,
-    40
+    39
    ],
    "U": [
     635,
@@ -504,7 +504,7 @@
     9
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 1,
   "voted_bounds": [
    151,
    915
@@ -528,8 +528,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "content_leaves": 625,
   "fitted_leaves": 358,
   "read_leaves": 67,
@@ -570,8 +570,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -673,8 +673,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1907p3trow_listing.jsonl.gz",
   "sections": [
    {
@@ -683,11 +683,11 @@
     "end_leaf": 915
    }
   ],
-  "kept": 104079,
+  "kept": 104104,
   "dropped": 22673,
-  "kept_share": 0.8211,
+  "kept_share": 0.8212,
   "kept_by_section": {
-   "listing": 104079
+   "listing": 104104
   }
  },
  "non_entry_pages": {
@@ -721,6 +721,6 @@
    "tesseract-5.5 merge": 381,
    "ia-words (ABBYY FineReader 8.0)": 2
   },
-  "dumped": "2026-10-25"
+  "dumped": "2026-10-26"
  }
 }

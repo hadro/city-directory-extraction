@@ -298,20 +298,20 @@
    "publisher_tag_note": null,
    "year_tag": "1907",
    "hocr_lines": 192233,
-   "wrap_joins": 30170,
-   "candidates": 162063,
+   "wrap_joins": 30175,
+   "candidates": 162058,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 136082,
-    "mark_share": 0.3467,
+    "pairs": 136086,
+    "mark_share": 0.3507,
     "mode": 1.25,
-    "mode_pairs": 3088,
+    "mode_pairs": 3030,
     "trough": 0.75,
-    "trough_pairs": 831,
+    "trough_pairs": 827,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": 16.08,
-    "run_over_joins": 20890
+    "run_over_joins": 20894
    },
    "model_runovers": 25436,
    "cont_dropped_leaves": 0,
@@ -324,12 +324,12 @@
     "leaves": 0
    },
    "marker_fixes": 10,
-   "digit_fixes": 1148,
-   "kept": 136902,
-   "keep_rate": 0.8447,
+   "digit_fixes": 1149,
+   "kept": 136907,
+   "keep_rate": 0.8448,
    "dropped": {
     "short": 13536,
-    "banner": 5265,
+    "banner": 5255,
     "allcaps": 4773,
     "bigtype": 1458,
     "nonascii": 111,
@@ -339,13 +339,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 59907,
+   "ditto_applied": 60659,
    "band": {
-    "leaves_banded": 442,
-    "head": 2431,
-    "body": 117034,
-    "foot": 3253,
-    "unbanded": 14184
+    "leaves_banded": 443,
+    "head": 2306,
+    "body": 117408,
+    "foot": 3266,
+    "unbanded": 13927
    },
    "top_ad_leaves": [
     1201,
@@ -359,25 +359,25 @@
     1159,
     481
    ],
-   "filters_at": "d4ef214-dirty",
-   "derived": "2026-10-25"
+   "filters_at": "8064b0b-dirty",
+   "derived": "2026-10-26"
   },
-  "words_gz_bytes": 12471869,
+  "words_gz_bytes": 12476806,
   "hocr_deleted": true,
   "elapsed_s": 25
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "start_leaf": 9,
   "end_leaf": 913,
   "first_letter": "R",
   "last_letter": "Z",
   "letters_present": "RSTUVWYZ",
   "missing_letters": "ABCDEFGHIJKLMNOPQX",
-  "voting_density": 0.362,
+  "voting_density": 0.365,
   "flags": [
    "partial-alphabet"
   ],
@@ -395,7 +395,7 @@
    {
     "start_leaf": 9,
     "end_leaf": 913,
-    "voting_leaves": 328,
+    "voting_leaves": 330,
     "first_letter": "R",
     "last_letter": "Z",
     "letters": "RSTUVWYZ",
@@ -408,9 +408,9 @@
      "R",
      "S"
     ],
-    "start_leaf": 56,
-    "end_leaf": 240,
-    "leaves": 185
+    "start_leaf": 78,
+    "end_leaf": 278,
+    "leaves": 201
    },
    {
     "between": [
@@ -470,13 +470,13 @@
   "letter_blocks": {
    "R": [
     9,
-    55,
-    20
+    77,
+    29
    ],
    "S": [
-    241,
+    279,
     355,
-    49
+    35
    ],
    "T": [
     579,
@@ -491,12 +491,12 @@
    "V": [
     649,
     689,
-    20
+    21
    ],
    "W": [
     839,
     883,
-    18
+    19
    ],
    "Y": [
     885,
@@ -509,7 +509,7 @@
     9
    ]
   },
-  "skipped_votes": 10,
+  "skipped_votes": 4,
   "voted_bounds": [
    9,
    913
@@ -533,8 +533,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "content_leaves": 625,
   "fitted_leaves": 455,
   "read_leaves": 123,
@@ -591,8 +591,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -681,8 +681,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "file": "data/survey_ocr/trowsgeneraldire19073trow_listing.jsonl.gz",
   "sections": [
    {
@@ -691,11 +691,11 @@
     "end_leaf": 913
    }
   ],
-  "kept": 125127,
+  "kept": 125132,
   "dropped": 11775,
   "kept_share": 0.914,
   "kept_by_section": {
-   "listing": 125127
+   "listing": 125132
   }
  },
  "non_entry_pages": {
@@ -730,6 +730,6 @@
    "tesseract-5.5 merge": 449,
    "ia-words (ABBYY FineReader 8.0)": 6
   },
-  "dumped": "2026-10-25"
+  "dumped": "2026-10-26"
  }
 }

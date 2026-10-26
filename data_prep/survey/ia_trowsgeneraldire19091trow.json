@@ -340,20 +340,20 @@
    "publisher_tag_note": null,
    "year_tag": "1909",
    "hocr_lines": 209039,
-   "wrap_joins": 36530,
-   "candidates": 172509,
+   "wrap_joins": 36538,
+   "candidates": 172501,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 158149,
-    "mark_share": 0.3415,
+    "pairs": 158153,
+    "mark_share": 0.3459,
     "mode": 1.5,
-    "mode_pairs": 3447,
+    "mode_pairs": 3401,
     "trough": 1.0,
-    "trough_pairs": 618,
+    "trough_pairs": 615,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 16.42,
-    "run_over_joins": 26785
+    "start_cap": 16.4,
+    "run_over_joins": 26790
    },
    "model_runovers": 32182,
    "cont_dropped_leaves": 0,
@@ -368,12 +368,12 @@
    "marker_fixes": 202,
    "digit_fixes": 892,
    "kept": 150208,
-   "keep_rate": 0.8707,
+   "keep_rate": 0.8708,
    "dropped": {
-    "short": 11981,
+    "short": 11975,
     "allcaps": 5067,
-    "banner": 3117,
-    "bigtype": 2045,
+    "banner": 3114,
+    "bigtype": 2046,
     "nonascii": 84,
     "pagenum": 7
    },
@@ -381,13 +381,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 66681,
+   "ditto_applied": 67594,
    "band": {
-    "leaves_banded": 469,
-    "head": 2189,
-    "body": 133841,
-    "foot": 3805,
-    "unbanded": 10373
+    "leaves_banded": 470,
+    "head": 2198,
+    "body": 134183,
+    "foot": 3779,
+    "unbanded": 10048
    },
    "top_ad_leaves": [
     1217,
@@ -401,25 +401,25 @@
     1249,
     1207
    ],
-   "filters_at": "d4ef214-dirty",
-   "derived": "2026-10-25"
+   "filters_at": "8064b0b-dirty",
+   "derived": "2026-10-26"
   },
-  "words_gz_bytes": 13869512,
+  "words_gz_bytes": 13876048,
   "hocr_deleted": true,
   "elapsed_s": 13
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "start_leaf": 95,
   "end_leaf": 1053,
   "first_letter": "A",
   "last_letter": "F",
   "letters_present": "ABCDEF",
   "missing_letters": "GHIJKLMNOPQRSTUVWXYZ",
-  "voting_density": 0.385,
+  "voting_density": 0.386,
   "flags": [
    "partial-alphabet"
   ],
@@ -437,7 +437,7 @@
    {
     "start_leaf": 97,
     "end_leaf": 1053,
-    "voting_leaves": 368,
+    "voting_leaves": 369,
     "first_letter": "A",
     "last_letter": "F",
     "letters": "ABCDEF",
@@ -459,9 +459,9 @@
      "B",
      "C"
     ],
-    "start_leaf": 426,
+    "start_leaf": 428,
     "end_leaf": 484,
-    "leaves": 59
+    "leaves": 57
    },
    {
     "between": [
@@ -477,9 +477,9 @@
      "D",
      "E"
     ],
-    "start_leaf": 842,
+    "start_leaf": 790,
     "end_leaf": 850,
-    "leaves": 9
+    "leaves": 61
    },
    {
     "between": [
@@ -499,8 +499,8 @@
    ],
    "B": [
     197,
-    425,
-    99
+    427,
+    101
    ],
    "C": [
     485,
@@ -509,8 +509,8 @@
    ],
    "D": [
     723,
-    841,
-    52
+    789,
+    32
    ],
    "E": [
     851,
@@ -523,7 +523,7 @@
     29
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 1,
   "voted_bounds": [
    97,
    1053
@@ -549,8 +549,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "content_leaves": 625,
   "fitted_leaves": 290,
   "read_leaves": 80,
@@ -591,8 +591,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -704,8 +704,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "file": "data/survey_ocr/trowsgeneraldire19091trow_listing.jsonl.gz",
   "sections": [
    {
@@ -759,6 +759,6 @@
    "tesseract-5.5 merge": 476,
    "ia-words (ABBYY FineReader 8.0)": 5
   },
-  "dumped": "2026-10-25"
+  "dumped": "2026-10-26"
  }
 }

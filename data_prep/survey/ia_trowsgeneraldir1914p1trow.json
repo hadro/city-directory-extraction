@@ -388,20 +388,20 @@
    "publisher_tag_note": null,
    "year_tag": "1914",
    "hocr_lines": 234617,
-   "wrap_joins": 13627,
-   "candidates": 220990,
+   "wrap_joins": 13625,
+   "candidates": 220992,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 217076,
-    "mark_share": 0.5277,
+    "pairs": 217075,
+    "mark_share": 0.5355,
     "mode": 1.25,
-    "mode_pairs": 24859,
+    "mode_pairs": 24823,
     "trough": 0.75,
     "trough_pairs": 671,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": 8.62,
-    "run_over_joins": 11830
+    "run_over_joins": 11829
    },
    "model_runovers": 13577,
    "cont_dropped_leaves": 0,
@@ -415,10 +415,10 @@
    },
    "marker_fixes": 6,
    "digit_fixes": 17,
-   "kept": 186321,
-   "keep_rate": 0.8431,
+   "kept": 186360,
+   "keep_rate": 0.8433,
    "dropped": {
-    "banner": 25055,
+    "banner": 25018,
     "allcaps": 4454,
     "short": 4390,
     "bigtype": 736,
@@ -429,12 +429,12 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 107307,
+   "ditto_applied": 109022,
    "band": {
     "leaves_banded": 499,
-    "head": 1152,
-    "body": 182831,
-    "foot": 1734,
+    "head": 1147,
+    "body": 182874,
+    "foot": 1735,
     "unbanded": 604
    },
    "top_ad_leaves": [
@@ -444,30 +444,30 @@
     25,
     137,
     481,
-    385,
     225,
     311,
+    385,
     635
    ],
-   "filters_at": "d4ef214-dirty",
-   "derived": "2026-10-25"
+   "filters_at": "8064b0b-dirty",
+   "derived": "2026-10-26"
   },
-  "words_gz_bytes": 15657886,
+  "words_gz_bytes": 15672749,
   "hocr_deleted": true,
   "elapsed_s": 58
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "start_leaf": 25,
   "end_leaf": 1029,
   "first_letter": "A",
   "last_letter": "H",
   "letters_present": "ABCDEFGH",
   "missing_letters": "IJKLMNOPQRSTUVWXYZ",
-  "voting_density": 0.438,
+  "voting_density": 0.442,
   "flags": [
    "partial-alphabet"
   ],
@@ -485,7 +485,7 @@
    {
     "start_leaf": 27,
     "end_leaf": 1029,
-    "voting_leaves": 439,
+    "voting_leaves": 443,
     "first_letter": "A",
     "last_letter": "H",
     "letters": "ABCDEFGH",
@@ -507,9 +507,9 @@
      "B",
      "C"
     ],
-    "start_leaf": 306,
+    "start_leaf": 308,
     "end_leaf": 458,
-    "leaves": 153
+    "leaves": 151
    },
    {
     "between": [
@@ -565,8 +565,8 @@
    ],
    "B": [
     111,
-    305,
-    93
+    307,
+    94
    ],
    "C": [
     459,
@@ -576,7 +576,7 @@
    "D": [
     563,
     663,
-    49
+    50
    ],
    "E": [
     667,
@@ -586,12 +586,12 @@
    "F": [
     727,
     857,
-    57
+    58
    ],
    "G": [
     859,
     927,
-    34
+    35
    ],
    "H": [
     1025,
@@ -599,7 +599,7 @@
     3
    ]
   },
-  "skipped_votes": 18,
+  "skipped_votes": 13,
   "voted_bounds": [
    27,
    1029
@@ -625,8 +625,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "content_leaves": 513,
   "fitted_leaves": 409,
   "read_leaves": 109,
@@ -667,8 +667,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -733,8 +733,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-25",
-  "code_at": "d4ef214-dirty",
+  "derived": "2026-10-26",
+  "code_at": "8064b0b-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1914p1trow_listing.jsonl.gz",
   "sections": [
    {
@@ -748,12 +748,12 @@
     "end_leaf": 1029
    }
   ],
-  "kept": 186143,
+  "kept": 186182,
   "dropped": 178,
   "kept_share": 0.999,
   "kept_by_section": {
    "late_names": 211,
-   "listing": 185932
+   "listing": 185971
   }
  },
  "non_entry_pages": {
@@ -785,6 +785,6 @@
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 502
   },
-  "dumped": "2026-10-25"
+  "dumped": "2026-10-26"
  }
 }

@@ -1449,7 +1449,7 @@ item. 5b, per volume (`line_assembly.py tables --damage`; dashes by a 30-page sa
   heading to its entry.
 - **Dashes the layer saw that the cell dropped**: no more than in plain rows (table rows 0.05-1.2%,
   plain 0.05-2.2%); Trow 1909 vol 1 loses ~2% of its plain rows' dashes too, a `dittos` matter on
-  its tesseract layer, not a table one.
+  its tesseract layer, not a table one (fixed: (g)).
 Recommendation for 5c: the damage worth a re-read is the two-entry cells and the commas, on Trow
 1903 p1-p3 and Brooklyn 1905 p1/c1905 above all (20-26% of their tiles in table mode). Re-read with
 table output banned in decoding (vLLM `bad_words` on `|` and `<table`), first on the bench's 10
@@ -1551,13 +1551,37 @@ correcting for the column's measured line slope (fit it from the pieces' left an
 take `tiles`' angle when it is nonzero), and do not reorder pieces between rows whose membership
 is borderline (within, say, 20% of the limit): keep the old top-to-bottom order there.
 
+**(g) DONE 2026-10-25: firms under a firm name lost their ditto dashes on a dash page** (found by
+5b's dash count; in C's re-import and D's import). `reocr_pair.dittos` follows a page's surname
+chain and lets the chain overrule a dash the layer read when the word after it fits the chain. But
+firms under a firm name are alphabetical too: Trow 1909 vol 1 leaf 149 prints, under `American`,
+`—Round Bale Press Co`, `—Rubber Co`, `—Rug Co`, `—Safe Deposit Co`; once one of them was taken for
+the head, the rest followed it and lost their dashes. Now, on a page where tesseract's dash leads a
+tenth of the entries or more (`DASH_SHARE`, and at least 5), a dash glued to the word as tesseract
+read it is a ditto whatever the chain says; the chain itself does not move. The gate is needed: a
+first version without it made false dittos where a page prints every surname, from specks and star
+marks (`—Alexander Malcolm` on 1876BPL 59 times, `*Townsend` on micro_IABROOKLYN_0035 17, Brooklyn
+1905 p1's ad lines 7). Per page, glued-dash shares run 25-71% on Trow and 0.7-2.1% on those two.
+Against the production dumps (629b27f), by line, the rest of the text identical:
+
+| volume | ditto gained | ditto lost |
+|---|---|---|
+| Trow 1909 vol 1 | 788 | 20 |
+| Trow 1903 p1 | 167 | 2 |
+| Brooklyn 1905 p1, 1876BPL, micro_IABROOKLYN_0035 | 0 | 0 |
+
+Image-read: 38 of 38 sampled gains print the dash (`—Printing Press & Mfg Co`, `—Ladies Waist Co`,
+`—Cornelius J clerk`); of the 22 losses, 21 are heads the old chain had wrongly dittoed, and one
+(`Stamp Co 79 Nassau`) may be wrong. Pilot on both layers against `s6`: no row changed apart from
+the 13 lain gold rows trimmed the same day (GROUND_TRUTH_HANDOFF).
+
 **Open, found by the restage of 2026-10-25: `calibrate_indent` flips on a knife edge.** Re-importing
 the 39 volumes of the 4B package with (c)-(f) moved a few dozen of 1876BPL's line pairs, and its
 trough fell from 5.13% of the run-over mode to 4.98%, under `CAL_TROUGH_SHARE`'s 5%: the wrap
 threshold went 3.0 -> 1.5 and added 3,497 joins. An image-read sample of 32: 12 real run-overs, 8
 harmful (each listing page's running head, `858 STE`, glued onto its first entry; banners onto
 entries; two entries), 12 neutral. Doggett 1845's trough moved between two near-equal bins (1.75
--> 1.5). Both are held where they were (`survey_harvest.WRAP_PINS`) and the package went out so.
+-> 1.5). Both are held where they were (`survey_harvest.WRAP_PINS`) and the package was staged so.
 **Before D's import:** give the rule hysteresis (decline within a band around 5%, and prefer the
 earlier trough bin on a near-tie), list every volume whose sidecar sits in that band, and consider
 whether a re-OCR'd volume, whose model run-overs join on `cont` anyway, should lower its threshold

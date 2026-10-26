@@ -237,6 +237,11 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
   `data/volumes_books_damaged_v3` (BOOKSCAN_HANDOFF §2): no second 4B run is needed for them. The
   re-import flipped 1876BPL's wrap calibration on a knife edge (`survey_harvest.WRAP_PINS`); the
   rule wants hysteresis before the next import (PIPELINE #32, open).
+- After step 8, PIPELINE #32 (g) (2026-10-25): on a dash page, a dash tesseract glued to the word is a
+  ditto even where the word fits the surname chain (Trow 1909 vol 1 +788 dittos, 1903 p1 +167). C
+  was held for it and re-imported again. **Baselines now `data/iapanel_lighton_s8_{ia,tess}`**
+  (work dirs `data/lighton_pilot_s8_{ia,tess}`), which also carry the 13 trimmed lain gold rows:
+  IA's words 2,064 rows, 1,738 exact; fresh tesseract 2,061, 1,723.
 
 Where each step lands:
 

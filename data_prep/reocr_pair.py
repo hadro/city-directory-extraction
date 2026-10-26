@@ -531,6 +531,7 @@ QUOTE_MARK = re.compile(r"^(?:[\"“”„«»]|''|,,)")  # a printed `"` ditto 
 QUOTE_ONLY = re.compile(r"^(?:[\"“”„«»]+|''|,,)$")   # ...as a token of its own
 QUOTE_DITTO = re.compile(r"^\s*[\"“”„]\s+[A-Z]")      # LightOn's own `" Chas P r10 W43d`
 QUOTE_SHARE = 0.2
+DASH_SHARE = 0.1        # dittos: a dash page, where tesseract's dash leads this share of entries
 DITTO_DECISIONS = HERE / "ditto_decisions.json"
 _GIVEN = None
 
@@ -650,6 +651,10 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
     # dash elsewhere (1912 Brooklyn)
     dashes = sum(tdash(r) or DASH.match(r["text"].lstrip()) is not None for r in starts)
     glyph = '"' if quote_page and sum(tquote(r) or mquote(r) for r in starts) > dashes else "—"
+    # a page that dittos with dashes: tesseract's dash leads a tenth of its entries or more. Trow
+    # 1903-1909's pages run 25-71%; pages that print every surname run 0.7-2.1% (1876BPL, Hope &
+    # Henderson 1856), specks and star marks
+    dash_page = sum(tdash(r) for r in starts) >= max(5, DASH_SHARE * len(starts))
     given = given_names()
     head = None
     for r in starts:
@@ -682,7 +687,17 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
             # no given name: a head the page sets out of order ("Smeloft" after "Smeltzer")
             clean = (evidence and not tmark(r) and bool(r["words"]) and len(k) > 1 and k not in given
                      and sorted(r["words"], key=lambda w: w[0])[0][5] == body.split()[0])
-            if evidence and not clean:
+            if evidence and dash_page and tlead(r) == "glued":
+                # on a page that dittos with dashes, the dash on the word itself, as tesseract
+                # read it, is a ditto even where the word fits the chain: firms under a firm name
+                # are alphabetical too (Trow 1909 vol 1 leaf 149, under "American": "—Rubber Co",
+                # "—Rug Co", "—Safe Deposit Co"), and once one of them was taken for the head, the
+                # rest followed it and lost their dashes (788 lines in that volume). Only there:
+                # where a page prints every surname, a "glued dash" is a speck or a star mark
+                # ("—Alexander Malcolm" on 1876BPL, "*Townsend" on Hope & Henderson 1856), and the
+                # chain is right to overrule it. The chain stays put either way
+                r["ditto"] = True
+            elif evidence and not clean:
                 if follows or (head is None and not tmark(r)):
                     head = k         # a head after all (bulleted Smalley; a page's first line)
                 else:
@@ -1790,6 +1805,23 @@ def _self_test() -> int:
     assert not any(r["ditto"] for r in dittos([dict(r) for r in rows])), "no marks: ABBYY's ii is a word"
     got = [r["text"].split(" ")[0] for r in dittos(rows, marks=frozenset({"ii", "n"}))]
     assert got == ["Emmons", '"', '"', '"', '"', '"', "Emmott"], got
+    # a dash page's firm run under "American" (Trow 1909 vol 1 leaf 149, tesseract's words): the
+    # firms are alphabetical, so the chain took "Rubber" for a head and then "Rug", "Safe",
+    # "Safety", "Sales" followed it. The dash tesseract read on each word is the ditto
+    rows = [{"text": t, "words": [w(f)], "start": True, "bullet": False, "mark": False}
+            for t, f in [("Round Bale Press Co 49 Wall R 417", "Round"), ("Rubber Co 42 Bway R 1200", "—Rubber"),
+                         ("Rug Co 310 E 96th", "—Rug"), ("Sabbath Union 203 Bway R 604", "Sabbath"),
+                         ("Safe Deposit Co 501 5th av", "—Sate"), ("Safety Appliance Co 210 Centre", "—Satety"),
+                         ("Sales Book Co 90 W Bway R 79", "—Sales")]]
+    got = [r["text"].split(" ")[0] for r in dittos(rows)]
+    assert got == ["Round", "—", "—", "Sabbath", "—", "—", "—"], got
+    # ...but on a page that prints every surname, a "glued dash" is a speck (1876BPL leaf 38,
+    # "—Alexander Malcolm"), and the chain keeps the line a head
+    rows = [{"text": t, "words": [w(f)], "start": True, "bullet": False, "mark": False}
+            for t, f in [("Aldrich John, lab. h 12 York", "Aldrich"), ("Alexander Malcolm, engineer, h 179 York", "-Alexander"),
+                         ("Allen Wm. carp'r, h 5 Gold", "Allen"), ("Alley Jas. h 9 Bridge", "Alley"),
+                         ("Allison Geo. clk. h 3 Front", "Allison"), ("Alvord Chas. h 7 Pearl", "Alvord")]]
+    assert not any(r["ditto"] for r in dittos(rows)), "a speck on a surname page is no ditto"
     junk = ["Gittens Josiah, clerk, 130 Grand", "Glacken Mic clad Hirer 26 8 eT fopirne",
             "Glass John, cartman, 18 Sobwrot"]
     good = ["Gittens Josiah, clerk, 130 Grand", "Glacken Michael, laborer, 125 Stagg",

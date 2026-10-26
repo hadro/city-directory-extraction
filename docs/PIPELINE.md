@@ -1575,6 +1575,49 @@ Image-read: 38 of 38 sampled gains print the dash (`—Printing Press & Mfg Co`,
 (`Stamp Co 79 Nassau`) may be wrong. Pilot on both layers against `s6`: no row changed apart from
 the 13 lain gold rows trimmed the same day (GROUND_TRUTH_HANDOFF).
 
+**(g) widened 2026-10-26, after C's re-import showed what the first version did to the joiner.**
+C's 39 volumes re-imported at c07fe78 gained 25-115 joins a Trow part (Trow 1907 p2 40,793 ->
+40,907). A line that gains its dash gains a box one dash left of its name, and a line under it
+whose dash the layer did not read, its first word respelled a line height right of the name
+margin, cleared the joiner's 3.0 (3.0-3.75 line heights from the dash box, 1.0-1.4 from the name):
+`— Kaufman real estate 34 W 116th` + `Kever barber h 229 Henry`. 89 of 1907 p2's 104 new joins are
+that. The lower lines are dittos the chain kept as heads, in two ways, and each is now a ditto:
+1. **A dash tesseract read standing alone** (it passes `DASH_W`/`DASH_FLAT`) counts as the glued
+   one does: under a surname that shares the given name's first letters (`— Max` under a `Ma`
+   surname, leaf 803) the word follows the chain, and the chain overruled the dash.
+2. **The given name of the ditto line just above**, with no dash evidence at all (the layer read
+   `ax`), on a dash page: a second entry under that name (`— Moses clerk h 111 E 96th`, `Moses
+   real estate h 268 E Bway`). It was "ambiguous" and kept a head.
+Against the c07fe78 dumps, by line:
+
+| volume | ditto gained | ditto lost | joins (before (g) / c07fe78 / now) |
+|---|---|---|---|
+| Trow 1907 p2 | 526 | 84 | 40,793 / 40,907 / **40,702** |
+| Trow 1909 vol 1 | 157 | 0 | 36,530 / 36,548 / 36,538 |
+| Trow 1903 p1 | 164 | 9 | 36,297 / 36,322 / **36,264** |
+| Brooklyn c1912 | 132 | 21 | 8,850 / 8,872 / 8,857 |
+| Brooklyn 1905 p1, 1876BPL, micro_IABROOKLYN_0035 | 0 | 0 | |
+
+Image-read, uniform: 24 of 24 gains print the dash (`—Mfg Co faucets`, `—Hungaria`, `—Cath
+dressmkr`), and 24 of 24 losses are heads printed without one (`Manookian Mousa`, `Pines Abraham`),
+which a dash line taken for a head had put out of the chain's reach; rule 2 alone, 24 of 24. Of 24
+derived-line differences (1907 p2 18, 1903 p1 6), 22 take apart glued entries (`— Thos artist` +
+`Thos A plumber` + `Thos C butcher`) and 2 make a new one, where a dittoed line's dash hangs left of
+a line whose own dash box the layer put late (`— Francis real estate` + `— Francis tailor`).
+Pilot on both layers against `s8`: no row changed.
+
+**Open: the joiner still glues a lost-dash line under a dash-led entry** (found with the above).
+On Trow 1907 p2, 915 joins of a model-read start (`cont` 0) under a line that opens with a mark sit
+under 3.0 line heights from that entry's TEXT; an image-read sample of 32 held 20 glued entries, 3
+ads and 9 real run-overs (`Canaan Ct`, `Ridge N J`), so a text-measured floor would cost run-overs;
+a floor of 1.75 suits Trow and not Brooklyn 1905, whose run-overs sit at 1.5-1.8 from the text
+(`Mhtn h 50 Willow`), where Trow's glue sits. An entry-shaped text test (a capitalised word, three
+or more tokens, a digit) fails there too (10 of 16 Brooklyn removals were run-overs the model wrote
+as lines of their own). The model's `cont` separates them on Trow (9 of 10 run-overs `cont` 1, 6 of
+6 glue `cont` 0) but not on Brooklyn. What is left is mostly a lost-dash given name the chain kept
+"ambiguous" (2,156 such lines on 1907 p2, about 6 in 30 dittos; the rest ads, display heads and
+run-overs, so "ambiguous on a dash page" is no rule).
+
 **Open, found by the restage of 2026-10-25: `calibrate_indent` flips on a knife edge.** Re-importing
 the 39 volumes of the 4B package with (c)-(f) moved a few dozen of 1876BPL's line pairs, and its
 trough fell from 5.13% of the run-over mode to 4.98%, under `CAL_TROUGH_SHARE`'s 5%: the wrap

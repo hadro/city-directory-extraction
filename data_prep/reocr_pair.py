@@ -656,7 +656,7 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
     # Henderson 1856), specks and star marks
     dash_page = sum(tdash(r) for r in starts) >= max(5, DASH_SHARE * len(starts))
     given = given_names()
-    head = None
+    head, prev = None, None          # prev: the last start's (key, ditto)
     for r in starts:
         k = name_key(r["text"], r.get("mark"))
         r["ditto"] = r["ambiguous"] = False
@@ -687,13 +687,15 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
             # no given name: a head the page sets out of order ("Smeloft" after "Smeltzer")
             clean = (evidence and not tmark(r) and bool(r["words"]) and len(k) > 1 and k not in given
                      and sorted(r["words"], key=lambda w: w[0])[0][5] == body.split()[0])
-            if evidence and dash_page and tlead(r) == "glued":
-                # on a page that dittos with dashes, the dash on the word itself, as tesseract
-                # read it, is a ditto even where the word fits the chain: firms under a firm name
+            if evidence and dash_page and tdash(r):
+                # on a page that dittos with dashes, tesseract's dash, on the word or standing
+                # alone, is a ditto even where the word fits the chain: firms under a firm name
                 # are alphabetical too (Trow 1909 vol 1 leaf 149, under "American": "—Rubber Co",
                 # "—Rug Co", "—Safe Deposit Co"), and once one of them was taken for the head, the
-                # rest followed it and lost their dashes (788 lines in that volume). Only there:
-                # where a page prints every surname, a "glued dash" is a speck or a star mark
+                # rest followed it and lost their dashes (788 lines in that volume); so are given
+                # names that share the surname's first letters ("— Max real estate 422 W 148th"
+                # under a "Ma" surname, the dash alone, 1907 p2 leaf 803). Only there: where a
+                # page prints every surname, a "glued dash" is a speck or a star mark
                 # ("—Alexander Malcolm" on 1876BPL, "*Townsend" on Hope & Henderson 1856), and the
                 # chain is right to overrule it. The chain stays put either way
                 r["ditto"] = True
@@ -704,9 +706,17 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
                     r["ditto"] = True
             elif follows or clean or k not in given:
                 head = k             # no dash evidence: downstream will take it as a head too
+            elif dash_page and not caps and prev == (k, True):
+                # ...but on a dash page, the given name of the ditto line just above is a second
+                # entry under that name, which Trow sets with its own dash: "— Max real estate 311
+                # E 57th", "Max real estate 422 W 148th" (1907 p2 leaf 803, the layer read "ax").
+                # Kept a head, its first word respelled a line height right of the margin and,
+                # under the dash above, cleared the joiner's indent: two people in one line
+                r["ditto"] = True
             else:
                 r["ambiguous"] = True    # a given name with no dash: a ditto both readings
                                          # missed, or a head; kept a head, the chain stays put
+        prev = (k, r["ditto"])
         if r["ditto"]:
             r["text"] = (f"E {glyph} {r['text'][2:]}" if r["text"].startswith("E ") and r.get("mark")
                          else f"{glyph} {r['text']}")
@@ -1822,6 +1832,25 @@ def _self_test() -> int:
                          ("Allen Wm. carp'r, h 5 Gold", "Allen"), ("Alley Jas. h 9 Bridge", "Alley"),
                          ("Allison Geo. clk. h 3 Front", "Allison"), ("Alvord Chas. h 7 Pearl", "Alvord")]]
     assert not any(r["ditto"] for r in dittos(rows)), "a speck on a surname page is no ditto"
+    # a dash page's second "Max" under "Mayer", its dash unread (Trow 1907 p2 leaf 803): the given
+    # name of the ditto line above is a ditto too; a given name after a head stays a head
+    rows = [{"text": t, "words": [w(f)], "start": True, "bullet": False, "mark": False}
+            for t, f in [("Mayer Abr tailor h 9 Ludlow", "Mayer"), ("Max dyer 318 W 36th", "—Max"),
+                         ("Max real estate 311 E 57th", "—Max"), ("Max real estate 422 W 148th", "ax"),
+                         ("Meyer clothing 32 6th av", "—Meyer"), ("Meyer B h 4 Pike", "—Meyer"),
+                         ("Michael tailor 2 Hester", "—Michael"), ("Michl h 9 Bowery", "Michl"),
+                         ("Mayo Jas clerk h 4 Pell", "Mayo"), ("Michl bkpr h 3 Pell", "Michl")]]
+    got = [r["text"].split(" ")[0] for r in dittos(rows)]
+    assert got == ["Mayer", "—", "—", "—", "—", "—", "—", "Michl", "Mayo", "Michl"], got
+    # ...and a dash tesseract read standing alone counts as the glued one does, where the given
+    # name fits the chain (a "Ma" surname's "Max"); the first "Max" is a ditto above it
+    rows = [{"text": t, "words": ws, "start": True, "bullet": False, "mark": False}
+            for t, ws in [("Marks Abr tailor h 9 Ludlow", [w("Marks")]), ("Max dyer 318 W 36th", [w("—Max")]),
+                          ("Max real estate 422 W 148th", [[70, 10, 100, 14, 90, "—"], w("Max")]),
+                          ("Meyer clothing 32 6th av", [w("—Meyer")]), ("Meyer B h 4 Pike", [w("—Meyer")]),
+                          ("Michael tailor 2 Hester", [w("—Michael")])]]
+    got = [r["text"].split(" ")[0] for r in dittos(rows)]
+    assert got == ["Marks", "—", "—", "—", "—", "—"], got
     junk = ["Gittens Josiah, clerk, 130 Grand", "Glacken Mic clad Hirer 26 8 eT fopirne",
             "Glass John, cartman, 18 Sobwrot"]
     good = ["Gittens Josiah, clerk, 130 Grand", "Glacken Michael, laborer, 125 Stagg",

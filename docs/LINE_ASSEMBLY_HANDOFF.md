@@ -242,6 +242,10 @@ In this order. Steps 1-6 can all land before D returns. Each step's "before" is 
   was held for it and re-imported again. **Baselines now `data/iapanel_lighton_s8_{ia,tess}`**
   (work dirs `data/lighton_pilot_s8_{ia,tess}`), which also carry the 13 trimmed lain gold rows:
   IA's words 2,064 rows, 1,738 exact; fresh tesseract 2,061, 1,723.
+- (g) widened 2026-10-26 (a standalone dash, and the given name of the ditto line above), after C's
+  re-import showed the first version gluing lost-dash lines under newly dittoed ones; pilot
+  `data/iapanel_lighton_s9_{ia,tess}` identical to s8. Open there: the joiner's lost-dash glue under
+  dash-led entries, which neither the indent nor the text's shape separates from run-overs.
 
 Where each step lands:
 

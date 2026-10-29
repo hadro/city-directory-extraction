@@ -17,10 +17,10 @@
 facets = ["root", "volume", "role", "usable"]
 filters = ["root", "run", "volume", "section", "role", "usable", "entry_shaped", "non_entry_page",
            "eval_holdout", "address_ditto", "printed_page_how", "is_business", "year",
-           "publisher", "scan"]
+           "publisher", "scan", "line_source"]
 index = ["record_id", ["volume", "leaf"], "run", "section", "entry_shaped", "non_entry_page",
          "eval_holdout", "address_ditto", "printed_page_how", "is_business", "year", "publisher",
-         "district", "name_mark"]
+         "district", "name_mark", "line_source"]
 fts = ["raw_line", "name_resolved", "occupation_role", "employer", "address_resolved",
        "home_address_resolved", "spouse_name"]
 

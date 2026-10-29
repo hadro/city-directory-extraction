@@ -151,6 +151,8 @@ VIEWER = """<!doctype html>
   .line { font-family: ui-monospace, Menlo, monospace; background: #fff; padding: 6px 8px;
           border: 1px solid #ddd; display: inline-block; margin: 4px 0 10px }
   #status { color: #a40; margin: 6px 0 }
+  .stand-in { background: #fff4d6; border-left: 3px solid #c80; padding: 6px 10px; margin: 0 0 8px;
+              max-width: 60em }
   .page { position: relative; display: inline-block; box-shadow: 0 1px 4px rgba(0,0,0,.2) }
   .page img { display: block; max-width: none }
   #mark { position: absolute; display: none; border: 2px solid #d4002a;
@@ -160,7 +162,7 @@ VIEWER = """<!doctype html>
 </style></head><body>
 <div><a href="%RECORD%">%RID%</a> · <a href="%LEAF%">every line of this leaf</a></div>
 <div class="line">%RAW%</div>
-<div id="status"></div>
+%NOTE%<div id="status"></div>
 <div class="page"><img id="page" alt="the page"><div id="mark"></div></div>
 <div class="direct">IA's image server fails some requests; straight to the image:
   %DIRECT%</div>
@@ -195,6 +197,13 @@ VIEWER = """<!doctype html>
 </script></body></html>"""
 
 
+# A `model-only` line is one LightOn read and no word layer did (IA's OCR lost it, often a whole
+# column), so the import gave it a box at its tile's edge: the box drawn is not the line.
+STAND_IN = ('<div class="stand-in">No OCR layer read this line, so its box is a stand-in at the '
+            "edge of its column, not the line itself. Find the line on the page by its text. "
+            "(<code>line_source = model-only</code>)</div>")
+
+
 async def line_page(request, datasette):
     """/-/line-page?db=<database>&record_id=<id>[&run=<run>]: the record's whole page, its box
     drawn on it."""
@@ -204,9 +213,13 @@ async def line_page(request, datasette):
         db = datasette.get_database(db_name)
     except KeyError:
         return Response.html("<p>No such database.</p>", status=404)
-    sql = ("SELECT record_id, volume, leaf, run, raw_line, crop FROM records WHERE record_id = ?"
-           + (" AND run = ?" if run else "") + " LIMIT 1")
-    row = (await db.execute(sql, [rid, run] if run else [rid])).first()
+    where = " FROM records WHERE record_id = ?" + (" AND run = ?" if run else "") + " LIMIT 1"
+    try:                                  # line_source: assemble_records.py from 2026-10-29
+        row = (await db.execute("SELECT record_id, volume, leaf, run, raw_line, crop, line_source"
+                                + where, [rid, run] if run else [rid])).first()
+    except Exception:
+        row = (await db.execute("SELECT record_id, volume, leaf, run, raw_line, crop" + where,
+                                [rid, run] if run else [rid])).first()
     if not row or not str(row["crop"] or "").startswith(IIIF):
         return Response.html("<p>No such record, or it has no image.</p>", status=404)
     parts = row["crop"].split("/")
@@ -231,6 +244,7 @@ async def line_page(request, datasette):
             .replace("%RECORD%", str(escape(record_url))).replace("%LEAF%", str(escape(leaf_url)))
             .replace("%RID%", str(escape(row["record_id"])))
             .replace("%RAW%", str(escape(row["raw_line"] or "")))
+            .replace("%NOTE%", STAND_IN if _get(row, "line_source") == "model-only" else "")
             .replace("%DIRECT%", direct).replace("%PARAMS%", params))
     return Response.html(html)
 

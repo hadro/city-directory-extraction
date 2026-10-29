@@ -59,6 +59,12 @@ AND WHAT IT KNOWS ABOUT THE LINE, AS FLAGS, NOT FILTERS
                         full-page ad, or a page whose OCR failed
     eval_holdout        gold / adjacent / volume: measurement lines, never to be published as
                         records or trained on
+    line_source         on a re-OCR'd volume, whose reading the line's first printed line is
+                        (reocr_pair.py dump's `sources`): `model` (LightOn's text on the word
+                        layer's box), `tesseract` (the layer's own text; no model answer),
+                        `bleed`, or `model-only` -- a line no layer read, whose box is a STAND-IN
+                        at its tile's edge, so xywh and crop do not show it (2026-10-29: Brooklyn
+                        1909 p1 leaf 901, where IA's OCR lost a whole column). Null elsewhere
     root                the --root the volume was assembled from. One <run> directory can hold
                         volumes from several roots (4b-100k+guard holds run 1's five and the
                         reocr tier's 39), and this is the only thing on the row that says which
@@ -100,7 +106,8 @@ CSV_COLUMNS = (["record_id", "volume", "leaf", "printed_page", "printed_page_how
                 "canvas", "xywh", "raw_line"] + FIELDS +
                ["name_resolved", "address_resolved", "address_ditto", "home_address_resolved",
                 "ditto_source", "ditto_flags", "role", "entry_shaped", "non_entry_page",
-                "eval_holdout", "usable", "root", "ditto_header", "name_mark", "district"])
+                "eval_holdout", "usable", "root", "ditto_header", "name_mark", "district",
+                "line_source"])
 
 
 class Incomplete(Exception):
@@ -207,6 +214,34 @@ def dropped_headers(ident: str, lines: list) -> dict:
 EAST_MARKS = frozenset({"E", "Æ", "©", "€", "®", '"', "“", "”", "'", "‘", "’"})
 
 
+def line_sources(ident: str, lines: list) -> list:
+    """Each line's `line_source` (see the module docstring), or None where the volume's word dump
+    carries no `sources` (not re-OCR'd). An entry's box opens at its first printed line's (run-overs
+    are indented), so it is found by leaf, top edge and left edge within 40 px (side-band
+    stripping can trim a leading word): all of 95,258 + 150,944 + 142,492 lines matched on three
+    damaged-tier volumes."""
+    path = OCR / f"{ident}_words.jsonl.gz"
+    if not path.exists():
+        return [None] * len(lines)
+    by_leaf = collections.defaultdict(list)
+    with gzip.open(path, "rt", encoding="utf-8") as fh:
+        for raw in fh:
+            r = json.loads(raw)
+            for ws, src in zip(r["lines"], r.get("sources") or []):
+                if ws:
+                    by_leaf[r["leaf"]].append((min(w[0] for w in ws), min(w[1] for w in ws), src))
+    out = []
+    for ln in lines:
+        ctx = ln.get("context") or {}
+        bbox = ctx.get("bbox") or []
+        hit = None
+        if len(bbox) == 4:
+            hit = next((s for x, y, s in by_leaf.get(ctx.get("leaf"), ())
+                        if y == bbox[1] and abs(x - bbox[0]) <= 40), None)
+        out.append(hit)
+    return out
+
+
 def is_east(mark: str | None) -> bool:
     return bool(mark) and any(p in EAST_MARKS for p in mark.split())
 
@@ -268,10 +303,11 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
     east = "E" in markers                        # this volume marks Eastern District residents
     carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True, markers=markers))
     addresses = list(resolve_address_run(rec.get("address") for _ln, rec in pairs))
+    sources = line_sources(ident, lines)
 
     rows, last_surname = [], None
-    for i, ((ln, rec), cr, role, (addr, addr_status)) in enumerate(
-            zip(pairs, carry, roles, addresses)):
+    for i, ((ln, rec), cr, role, (addr, addr_status), line_source) in enumerate(
+            zip(pairs, carry, roles, addresses, sources)):
         ctx = ln.get("context") or {}
         leaf = ctx.get("leaf")
         if cr["status"] == "not_ditto" and cr["resolved"]:
@@ -310,7 +346,7 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
             "ditto_header": cr.get("header"),
             "name_mark": mark, "district": district,
             "role": role, "entry_shaped": entry, "non_entry_page": leaf in non_entry,
-            "eval_holdout": held, "usable": usable, "root": root})
+            "eval_holdout": held, "usable": usable, "root": root, "line_source": line_source})
 
     stated = (doc.get("book_says") or {}).get("stated_name_count") or {}
     usable_n = sum(r["usable"] for r in rows)
@@ -322,6 +358,7 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
         "non_entry_page_rows": sum(r["non_entry_page"] for r in rows),
         "eval_holdout_rows": sum(1 for r in rows if r["eval_holdout"]),
         "printed_page_known": sum(1 for r in rows if r["printed_page"] is not None),
+        "line_source": dict(collections.Counter(r["line_source"] for r in rows if r["line_source"])),
         "ditto": {"carried": sum(1 for c in carry if c["status"] == "resolved"),
                   "orphan": sum(1 for c in carry if c["status"] == "orphan"),
                   "disputed": sum(1 for c in carry if c["status"] == "resolved" and c["flags"]),
@@ -373,6 +410,7 @@ def _self_test() -> int:
     assert rows[1]["home_address_resolved"] == "3 Oak"
     assert rows[1]["address_resolved"] == "3 Oak" and rows[1]["address_ditto"] == "not_ditto"
     assert rows[0]["xywh"] == "100,100,500,20"
+    assert rows[0]["line_source"] is None, "no word dump: not a re-OCR'd volume"
     assert rows[1]["name"] == '" Wm', "the model's field stays verbatim"
     assert s["ditto"]["carried"] == 1 and s["rows"] == 2
     assert strip_mark("E Cox L.", "E") == "Cox L."

@@ -1644,6 +1644,25 @@ over: it is the first line of a leaf, and `join_wraps` joins before the filters 
 import moved five thresholds -- 1869BPL and 1871BPL 3.0 -> 1.75, 1879BPL 1.25 -> 1.5, Trow 1915
 1.5 -> 3.0, Trow 1917 1.75 -> 3.0 (Trow 1915/1917's joins fell 13%, BPL 1869/1871's rose ~6x
 with `cont`). Each wants the image-read sample above before it stands.
+**DONE 2026-10-29.** Each move read on a uniform sample of the joins only the lower threshold
+makes (scratch `ratio_joins.py` + contact sheets through `iiif_frame.crop_url`, which Trow
+1915/1917's camera frames need). The verdicts split, so no single rule decides: Trow 1915 and 1917
+had gone to 3.0 because LightOn reads their `"` dittos (mark share 4% -> 41%), and 21 of 21 joins
+that lost were real run-overs ("291 Bway R507", "jail h1431 Longfellow av"); Brooklyn c1910 (in C)
+went 2.0 -> 3.0 the same way and was RIGHT to (4 of 4 entry joins at 2.0 glued two ditto entries:
+its layer's box starts after the `"`, Trow's includes it). 1869BPL/1871BPL (mark share under 5%,
+3.0 -> 1.75): 6 run-overs, 3 harmful (Eastern District `E` lines glued, a banner), 4 ad lines --
+back to 3.0. 1879BPL 1.25 -> 1.5 was right (5 of 5 joins only 1.25 made glued the running head
+onto the page's first entry). All six are in `survey_harvest.WRAP_PINS` with that evidence.
+`calibrate_indent(prev=)` now has hysteresis (CAL_BAND 4.0-6.25% around both 5% gates, CAL_TIE 10%
+on the trough bin), and `derive` prints `!!` for any volume whose threshold moves. The four D
+volumes re-derived under the pins: Trow 1915 joins 270,985 -> 348,073 (scoped 1,068,146 ->
+1,034,236), 1917 315,346 -> 397,184, 1869BPL 21,316 -> 19,453, 1871BPL 24,245 -> 21,394.
+Found on the way, not fixed: (1) a page's running head is joined onto its first entry whenever
+the threshold is low enough (1879BPL at 1.25); (2) Trow's firm entries under a surname print
+"—, Goldfarb & Metzger" (= Blumner, Goldfarb & Metzger), and where the dash is lost the line
+opens ", " -- 7,930 such starts, 200-330 a Trow part, each naming the firm without its surname:
+a #32 (g) lost-dash case for the comma form.
 
 **33. A run-over LightOn wrote as its own bulleted line stays a separate record (found 2026-10-29,
 hadro, browsing).** `micro_IABROOKLYN_0043` leaf 110 (reocr tier): "PAYSON HENRY, Fire Insurance

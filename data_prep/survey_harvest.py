@@ -100,8 +100,23 @@ HOLDOUT_WINDOW = 3       # search this many leaves either side of the jp2 number
 # image-read sample of 32 of them: 12 real run-overs, 8 harmful (each listing page's running head,
 # `858 STE`, glued onto its first entry; ad banners onto entries; two entries), 12 neutral. Doggett
 # 1845's trough moved between two near-equal bins, 1.75 -> 1.5 (+117 joins, unmeasured). A knife
-# edge is no reason to change a volume's joins; the rule wants hysteresis (PIPELINE #32, open).
-WRAP_PINS = {"1876BPL": 3.0, "doggettsnewyorkc1845dogg": 1.75}
+# edge is no reason to change a volume's joins; the rule wants hysteresis (PIPELINE #32: added to
+# calibrate_indent 2026-10-29).
+# 2026-10-29, after the re-OCR imports moved six thresholds, each judged on a uniform sample of
+# the joins only the lower threshold makes, read on the page (scratch ratio_joins.py):
+#   Trow 1915 1.5 and 1917 1.75: re-OCR'd, their mark share went 4% -> 41% (LightOn reads the `"`)
+#     and the gate sent both to 3.0, dropping 79,156 and 83,547 joins; 21 of 21 read were real
+#     run-overs ("291 Bway R507", "jail h1431 Longfellow av"), so they are held where they were.
+#   1869BPL and 1871BPL 3.0: their mark share fell under 5% (5.9 -> 4.9, 5.4 -> 4.2) and 1.75
+#     added 1,898 and 2,907 joins: 6 real run-overs, 3 harmful (two Eastern District entries glued:
+#     the `E` pushes a line right; a banner onto an entry), 4 ad lines. Held at 3.0.
+#   1879BPL 1.5 (moved from 1.25: right -- 5 of 5 joins only 1.25 made glued the running head,
+#     "917 SMI", onto the page's first entry) and Brooklyn c1910 3.0 (moved from 2.0: right -- 4 of
+#     4 entry joins only 2.0 made glued two ditto entries, "Chas clk h 1424 Greene av" + "Chas L
+#     autos"; its layer's box starts after the `"`, Trow's includes it). Pinned so they stay.
+WRAP_PINS = {"1876BPL": 3.0, "doggettsnewyorkc1845dogg": 1.75,
+             "trowsgeneraldire1915trow": 1.5, "trowsgeneraldire1917trow": 1.75,
+             "1869BPL": 3.0, "1871BPL": 3.0, "1879BPL": 1.5, "brooklynnewyorkc1910geor": 3.0}
 
 
 # ==============================================================================================
@@ -538,8 +553,9 @@ def derive(ident: str, holdout: dict) -> dict:
     p = paths(ident)
     confirmed = confirmed_dittos(ident)
     side = SIDECARS / f"ia_{ident}.json"
-    ocr = (((json.loads(side.read_text(encoding="utf-8")).get("catalog_says") or {}).get("ia")
-            or {}).get("ocr") or "") if side.exists() else ""
+    side_doc = json.loads(side.read_text(encoding="utf-8")) if side.exists() else {}
+    ocr = ((side_doc.get("catalog_says") or {}).get("ia") or {}).get("ocr") or ""
+    prev = ((side_doc.get("harvest") or {}).get("filtered") or {}).get("wrap_calibration")
     abbyy8 = ocr.startswith("ABBYY FineReader 8")   # fix_digit_s was measured on this engine
     dump = WordDump(p["words.jsonl.gz"], ident)
     content, reocr = [], False
@@ -549,9 +565,17 @@ def derive(ident: str, holdout: dict) -> dict:
         reocr = reocr or "cont" in r
     catalog_pub, year = lookup_master(ident)
     publisher, why = tag_publisher(catalog_pub)
-    wraps = calibrate_indent(dump, content, split_columns=True)
+    wraps = calibrate_indent(dump, content, split_columns=True, prev=prev)
     if ident in WRAP_PINS:       # held where it was (WRAP_PINS); the calibration stays on record
         wraps.update({"indent_ratio": WRAP_PINS[ident], "pinned": True})
+    if prev and prev.get("indent_ratio") != wraps["indent_ratio"]:
+        # never silently: each move so far needed an image check to judge (WRAP_PINS)
+        print(f"  !! {ident}: wrap threshold {prev.get('indent_ratio')} -> {wraps['indent_ratio']} "
+              + ("(WRAP_PINS)" if wraps.get("pinned") else
+                 f"({wraps.get('reason')}; mark share {wraps.get('mark_share')}, trough "
+                 f"{wraps.get('trough_pairs')}/{wraps.get('mode_pairs')}) -- read a sample of the "
+                 f"joins that change before it stands, or pin it"), file=sys.stderr, flush=True)
+        wraps["moved_from"] = prev.get("indent_ratio")
     if reocr:                    # a re-OCR'd volume: how far its model-read starts may join
         wraps.update(start_cap(dump, content, wraps["indent_ratio"]))
     tmp_l = p["lines.jsonl.gz"].with_suffix(".tmp")

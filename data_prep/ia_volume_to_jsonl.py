@@ -564,6 +564,13 @@ CAL_MODE_RANGE = (1.25, 3.0)   # where a runover mode shallower than INDENT_RATI
 CAL_MIN_MODE = 100             # line pairs in the mode bin before the volume's own mode is believed
 CAL_TROUGH_SHARE = 0.05        # the trough below it must fall to this share of the mode
 CAL_MAX_MARK_SHARE = 0.05      # lines opening with a ditto mark: at or above this, keep the default
+# Hysteresis (PIPELINE #32, 2026-10-29). With the volume's previous calibration given, a measure
+# inside this band around its gate keeps the previous side of that gate, and a trough bin within
+# CAL_TIE of the emptiest keeps the previous bin: 1876BPL's trough went 5.13% -> 4.98% of the mode
+# and 1869BPL's mark share 5.9% -> 4.9% on line-assembly and OCR changes alone, each flipping
+# thousands of joins (1876BPL: 8 harmful in 32 read).
+CAL_BAND = (0.8, 1.25)         # x the gate: 4.0-6.25% for both 5% gates
+CAL_TIE = 1.10                 # a previous trough bin with at most 10% more pairs than the emptiest
 
 
 def _indent_pairs(raw, med_h):
@@ -575,7 +582,7 @@ def _indent_pairs(raw, med_h):
             yield (b[0] - pb[0]) / med_h
 
 
-def calibrate_indent(item, leaves, split_columns=False) -> dict:
+def calibrate_indent(item, leaves, split_columns=False, prev: dict | None = None) -> dict:
     """The wrap threshold for THIS volume, from its own indent histogram. No labels.
 
     INDENT_RATIO = 3.0 was calibrated on 1906BPL, whose runovers sit at 3.9-5.2 line heights.
@@ -595,7 +602,20 @@ def calibrate_indent(item, leaves, split_columns=False) -> dict:
         `—` or nothing, so its shallow band mixes real runovers with the next entry. The mark
         share cannot see that (2.0% -- the marks are gone); the histogram's shape can.
     The threshold is the trough: the emptiest bin within one line height below the mode.
+
+    `prev`, the volume's last calibration (its sidecar's), adds hysteresis: a mark share or
+    trough share inside CAL_BAND around its 5% gate stays on the side of the gate `prev` was on,
+    and a near-tied trough bin stays `prev`'s (`held` in the result says which). It cannot judge
+    a real move: re-OCR moved the mark share of Trow 1915/1917 4% -> 41% (LightOn reads their `"`)
+    and of Brooklyn c1910 5% -> 48%, and the default 3.0 was wrong for the first two (21/21 joins
+    lost were run-overs) and right for the third (4/4 joins at 2.0 glued ditto entries). Those are
+    pinned in survey_harvest.WRAP_PINS, which also reports every volume whose threshold moved.
     """
+    prev_cal = bool(prev and prev.get("calibrated"))
+    held = []
+
+    def near(value, gate):
+        return prev is not None and value is not None and CAL_BAND[0] * gate <= value <= CAL_BAND[1] * gate
     hist, pairs, marks, n_lines = Counter(), 0, 0, 0
     for leaf in leaves:
         if split_columns:
@@ -623,15 +643,37 @@ def calibrate_indent(item, leaves, split_columns=False) -> dict:
     below = {b: hist.get(b, 0) for b in
              [round(mode - k * CAL_BIN, 4) for k in range(1, int(1 / CAL_BIN) + 1)] if b > 0}
     trough = min(below, key=lambda b: (below[b], -b)) if below else None
+    p_trough = prev.get("trough") if prev_cal else None
+    if (trough is not None and p_trough is not None and p_trough != trough and p_trough in below
+            and below[p_trough] <= CAL_TIE * below[trough]):
+        trough = p_trough
+        held.append("trough bin")
     out.update({"mode": mode, "mode_pairs": hist[mode], "trough": trough,
                 "trough_pairs": below.get(trough)})
-    if out["mark_share"] is not None and out["mark_share"] >= CAL_MAX_MARK_SHARE:
-        return {**out, "reason": "ditto marks: a dropped mark indents like a runover"}
+
+    def done(res):
+        return {**res, "held": held} if held else res
+    marks = out["mark_share"]
+    if near(marks, CAL_MAX_MARK_SHARE):
+        if not prev_cal:
+            held.append("mark share")
+            return done({**out, "reason": "ditto marks: a dropped mark indents like a runover"})
+        if marks >= CAL_MAX_MARK_SHARE:
+            held.append("mark share")
+    elif marks is not None and marks >= CAL_MAX_MARK_SHARE:
+        return done({**out, "reason": "ditto marks: a dropped mark indents like a runover"})
     if hist[mode] < CAL_MIN_MODE:
-        return {**out, "reason": "too few runovers to read a mode"}
-    if trough is None or below[trough] > CAL_TROUGH_SHARE * hist[mode]:
-        return {**out, "reason": "runover mode not isolated from the next-entry band"}
-    return {**out, "indent_ratio": trough, "calibrated": True, "reason": "sharp runover mode"}
+        return done({**out, "reason": "too few runovers to read a mode"})
+    share = below[trough] / hist[mode] if trough is not None else None
+    if near(share, CAL_TROUGH_SHARE):
+        if not prev_cal:
+            held.append("trough share")
+            return done({**out, "reason": "runover mode not isolated from the next-entry band"})
+        if share > CAL_TROUGH_SHARE:
+            held.append("trough share")
+    elif trough is None or share > CAL_TROUGH_SHARE:
+        return done({**out, "reason": "runover mode not isolated from the next-entry band"})
+    return done({**out, "indent_ratio": trough, "calibrated": True, "reason": "sharp runover mode"})
 
 
 # Column-merged microfilm lines
@@ -1938,6 +1980,19 @@ def _self_test() -> int:
     assert join_wraps(item.pages[0], 20)[1] == 0, "the default 3.0 joins none of them"
     ditto = FakeItem({L: leaf_lines(first='" ') for L in range(10)})
     assert not calibrate_indent(ditto, range(10))["calibrated"], "a ditto volume keeps 3.0"
+    # hysteresis: a mark share of 4.6% (11 of 240 lines) is under the 5% gate but inside the band
+    edge = {L: leaf_lines() for L in range(10)}
+    edge[0] = [((b, ('" ' + t) if k < 22 and k % 2 == 0 else t)) for k, (b, t) in enumerate(edge[0])]
+    edge = FakeItem(edge)
+    free = calibrate_indent(edge, range(10))
+    assert free["calibrated"] and 0.04 < free["mark_share"] < 0.05, free
+    kept = calibrate_indent(edge, range(10), prev={"calibrated": False, "indent_ratio": 3.0})
+    assert not kept["calibrated"] and kept["held"] == ["mark share"], "declined before: stays declined"
+    moved = calibrate_indent(edge, range(10), prev={"calibrated": True, "indent_ratio": 1.75,
+                                                    "trough": free["trough"]})
+    assert moved["calibrated"] and "held" not in moved, "calibrated before, under the gate: as before"
+    far = calibrate_indent(item, range(10), prev={"calibrated": False, "indent_ratio": 3.0})
+    assert far["calibrated"], "a share far from the gate (0%) is not held"
 
     print("self-test OK", file=sys.stderr)
     return 0

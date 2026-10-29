@@ -96,7 +96,7 @@
    "canvas": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$418/canvas",
    "image": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$418/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'396' in the head margin",
+   "quote": "'396.' in the head margin",
    "method": "hocr-geometry",
    "confidence": "high",
    "attestation": "read",
@@ -349,20 +349,24 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
    "year_tag": "1850",
-   "hocr_lines": 21417,
-   "wrap_joins": 699,
-   "candidates": 20718,
+   "hocr_lines": 21078,
+   "wrap_joins": 746,
+   "candidates": 20332,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 18961,
-    "mark_share": 0.008,
+    "pairs": 19141,
+    "mark_share": 0.0037,
     "mode": 1.75,
-    "mode_pairs": 71,
+    "mode_pairs": 81,
     "trough": 0.75,
-    "trough_pairs": 30,
-    "reason": "too few runovers to read a mode"
+    "trough_pairs": 29,
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 314
    },
+   "model_runovers": 346,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -371,12 +375,12 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 29,
-   "kept": 17149,
-   "keep_rate": 0.8277,
+   "marker_fixes": 1,
+   "kept": 17316,
+   "keep_rate": 0.8517,
    "dropped": {
-    "short": 1413,
-    "banner": 1317,
+    "banner": 1110,
+    "short": 1067,
     "allcaps": 826,
     "bigtype": 9,
     "nonascii": 4
@@ -402,30 +406,30 @@
     18,
     423
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 1576808,
+  "words_gz_bytes": 1478065,
   "hocr_deleted": true,
   "elapsed_s": 85
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 25,
   "end_leaf": 418,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
   "missing_letters": "XZ",
-  "voting_density": 0.964,
+  "voting_density": 0.962,
   "flags": [],
   "start": {
    "leaf": 25,
    "image": "https://iiif.archive.org/iiif/hearnesbrooklync1850unse$25/full/!1400,1400/0/default.jpg",
-   "quote": "Abbreviations : h. stands for house, n, for near, c. for corner, op. for"
+   "quote": "Abbreviations: h. stands for house, n, for near, c. for corner, op. for"
   },
   "end": {
    "leaf": 418,
@@ -436,7 +440,7 @@
    {
     "start_leaf": 25,
     "end_leaf": 418,
-    "voting_leaves": 380,
+    "voting_leaves": 379,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
@@ -508,7 +512,7 @@
    "M": [
     244,
     291,
-    46
+    45
    ],
    "N": [
     292,
@@ -590,11 +594,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 475,
   "fitted_leaves": 464,
-  "read_leaves": 436,
+  "read_leaves": 448,
   "segments": [
    {
     "first_leaf": 13,
@@ -602,7 +606,7 @@
     "first_page": 5,
     "last_page": 396,
     "leaves": 392,
-    "read": 370
+    "read": 382
    },
    {
     "first_leaf": 423,
@@ -632,8 +636,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -734,8 +738,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/hearnesbrooklync1850unse_listing.jsonl.gz",
   "sections": [
    {
@@ -744,11 +748,11 @@
     "end_leaf": 418
    }
   ],
-  "kept": 14844,
+  "kept": 15011,
   "dropped": 2305,
-  "kept_share": 0.8656,
+  "kept_share": 0.8669,
   "kept_by_section": {
-   "listing": 14844
+   "listing": 15011
   }
  },
  "run_set": {
@@ -758,5 +762,25 @@
   "basis": "the book scan; the microfilm copy delivers 50% of its lines per page",
   "decision": "data_prep/survey_runset.json",
   "role": "run"
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/hearnesbrooklync1850unse",
+  "ia_dump": "data/survey_ocr/hearnesbrooklync1850unse_words.ia.jsonl.gz",
+  "tiles": 760,
+  "tiles_answered": 760,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 380,
+  "lines_runover": 346,
+  "lines_model": 16333,
+  "lines_tesseract": 12,
+  "lines_model-only": 15,
+  "leaves_replaced": 380,
+  "layers": {
+   "ia-words (IA OCR)": 380
+  },
+  "dumped": "2026-10-29"
  }
 }

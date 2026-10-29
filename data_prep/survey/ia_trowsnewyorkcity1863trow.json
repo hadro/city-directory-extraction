@@ -328,37 +328,41 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1863",
-   "hocr_lines": 196957,
-   "wrap_joins": 18964,
-   "candidates": 177993,
+   "hocr_lines": 199765,
+   "wrap_joins": 19963,
+   "candidates": 179802,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 177162,
-    "mark_share": 0.0053,
+    "pairs": 178816,
+    "mark_share": 0.0049,
     "mode": 2.0,
-    "mode_pairs": 14360,
+    "mode_pairs": 14135,
     "trough": 1.5,
-    "trough_pairs": 222,
-    "reason": "sharp runover mode"
+    "trough_pairs": 293,
+    "reason": "sharp runover mode",
+    "start_cap": 5.76,
+    "run_over_joins": 15199
    },
+   "model_runovers": 16166,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 6,
-    "leaves": 1
+    "words": 0,
+    "leaves": 0
    },
-   "marker_fixes": 1005,
-   "kept": 167544,
-   "keep_rate": 0.9413,
+   "marker_fixes": 1,
+   "kept": 168878,
+   "keep_rate": 0.9392,
    "dropped": {
-    "short": 4963,
-    "banner": 2756,
-    "allcaps": 2650,
-    "bigtype": 45,
-    "nonascii": 35
+    "short": 5676,
+    "allcaps": 3464,
+    "banner": 1711,
+    "bigtype": 39,
+    "nonascii": 34
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -378,44 +382,44 @@
     1107,
     1114,
     1053,
-    10,
-    1049
+    409,
+    444
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 15237553,
+  "words_gz_bytes": 14180622,
   "hocr_deleted": true,
   "elapsed_s": 92
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 21,
   "end_leaf": 982,
   "first_letter": "A",
   "last_letter": "Z",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
   "missing_letters": "X",
-  "voting_density": 0.943,
+  "voting_density": 0.947,
   "flags": [],
   "start": {
    "leaf": 21,
    "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$21/full/!1400,1400/0/default.jpg",
-   "quote": "Aaron Aaron J. exchance, h 222 W. ICth"
+   "quote": "Aaron Aaron J. exchange, h 222 W. 16th"
   },
   "end": {
    "leaf": 982,
    "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$982/full/!1400,1400/0/default.jpg",
-   "quote": "Zwisler Martin, foundry, h r 431 Fifth"
+   "quote": "Zwizzler Valentine, liquors, 96 Willett"
   },
   "sections": [
    {
     "start_leaf": 21,
     "end_leaf": 982,
-    "voting_leaves": 907,
+    "voting_leaves": 911,
     "first_letter": "A",
     "last_letter": "Z",
     "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
@@ -431,15 +435,6 @@
     "start_leaf": 553,
     "end_leaf": 583,
     "leaves": 31
-   },
-   {
-    "between": [
-     "Y",
-     "Z"
-    ],
-    "start_leaf": 978,
-    "end_leaf": 978,
-    "leaves": 1
    }
   ],
   "letter_blocks": {
@@ -531,7 +526,7 @@
    "R": [
     727,
     774,
-    42
+    46
    ],
    "S": [
     775,
@@ -560,8 +555,8 @@
    ],
    "Y": [
     976,
-    977,
-    2
+    978,
+    3
    ],
    "Z": [
     979,
@@ -569,7 +564,7 @@
     4
    ]
   },
-  "skipped_votes": 11,
+  "skipped_votes": 7,
   "voted_bounds": [
    21,
    982
@@ -593,11 +588,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 1113,
-  "fitted_leaves": 1063,
-  "read_leaves": 990,
+  "fitted_leaves": 1060,
+  "read_leaves": 769,
   "segments": [
    {
     "first_leaf": 8,
@@ -609,35 +604,115 @@
    },
    {
     "first_leaf": 22,
-    "last_leaf": 30,
+    "last_leaf": 103,
     "first_page": 22,
-    "last_page": 30,
-    "leaves": 9,
-    "read": 9
+    "last_page": 99,
+    "leaves": 78,
+    "read": 77
    },
    {
-    "first_leaf": 34,
-    "last_leaf": 191,
-    "first_page": 32,
-    "last_page": 185,
-    "leaves": 154,
-    "read": 135
+    "first_leaf": 104,
+    "last_leaf": 156,
+    "first_page": 0,
+    "last_page": 52,
+    "leaves": 53,
+    "read": 44
    },
    {
-    "first_leaf": 195,
+    "first_leaf": 160,
+    "last_leaf": 198,
+    "first_page": 54,
+    "last_page": 90,
+    "leaves": 37,
+    "read": 26
+   },
+   {
+    "first_leaf": 199,
     "last_leaf": 274,
-    "first_page": 187,
+    "first_page": 191,
     "last_page": 266,
-    "leaves": 80,
-    "read": 80
+    "leaves": 76,
+    "read": 61
    },
    {
-    "first_leaf": 281,
-    "last_leaf": 981,
-    "first_page": 269,
-    "last_page": 961,
-    "leaves": 693,
-    "read": 663
+    "first_leaf": 276,
+    "last_leaf": 283,
+    "first_page": 64,
+    "last_page": 71,
+    "leaves": 8,
+    "read": 4
+   },
+   {
+    "first_leaf": 284,
+    "last_leaf": 406,
+    "first_page": 272,
+    "last_page": 394,
+    "leaves": 123,
+    "read": 96
+   },
+   {
+    "first_leaf": 411,
+    "last_leaf": 442,
+    "first_page": 397,
+    "last_page": 428,
+    "leaves": 32,
+    "read": 21
+   },
+   {
+    "first_leaf": 447,
+    "last_leaf": 463,
+    "first_page": 31,
+    "last_page": 47,
+    "leaves": 17,
+    "read": 13
+   },
+   {
+    "first_leaf": 464,
+    "last_leaf": 658,
+    "first_page": 448,
+    "last_page": 642,
+    "leaves": 195,
+    "read": 127
+   },
+   {
+    "first_leaf": 659,
+    "last_leaf": 673,
+    "first_page": 43,
+    "last_page": 57,
+    "leaves": 15,
+    "read": 7
+   },
+   {
+    "first_leaf": 676,
+    "last_leaf": 714,
+    "first_page": 660,
+    "last_page": 698,
+    "leaves": 39,
+    "read": 18
+   },
+   {
+    "first_leaf": 716,
+    "last_leaf": 755,
+    "first_page": 0,
+    "last_page": 39,
+    "leaves": 40,
+    "read": 24
+   },
+   {
+    "first_leaf": 759,
+    "last_leaf": 816,
+    "first_page": 41,
+    "last_page": 98,
+    "leaves": 58,
+    "read": 41
+   },
+   {
+    "first_leaf": 817,
+    "last_leaf": 980,
+    "first_page": 799,
+    "last_page": 960,
+    "leaves": 162,
+    "read": 107
    },
    {
     "first_leaf": 985,
@@ -658,17 +733,19 @@
   ],
   "ia_comparison": {
    "ia_read_leaves": 385,
-   "both": 384,
-   "agree": 384,
-   "agree_rate": 1.0,
+   "both": 379,
+   "agree": 280,
+   "agree_rate": 0.739,
    "ia_page_equals_leaf": 0.0
   },
-  "flags": []
+  "flags": [
+   "ia-disagrees"
+  ]
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -768,7 +845,7 @@
     "end_leaf": 20,
     "title": {
      "leaf": 20,
-     "quote": "NAMES TOO LATE FOR INSERTION\", CORRECTIONS,",
+     "quote": "NAMES TOO LATE FOR IN",
      "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1863trow$20/full/!1400,1400/0/default.jpg"
     },
     "leaves": 1,
@@ -788,8 +865,8 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 981,
-      "page": 961,
+      "leaf": 980,
+      "page": 960,
       "attestation": "read"
      }
     }
@@ -940,8 +1017,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/trowsnewyorkcity1863trow_listing.jsonl.gz",
   "sections": [
    {
@@ -955,19 +1032,19 @@
     "end_leaf": 982
    }
   ],
-  "kept": 152970,
+  "kept": 154304,
   "dropped": 14574,
-  "kept_share": 0.913,
+  "kept_share": 0.9137,
   "kept_by_section": {
    "late_names": 146,
-   "listing": 152824
+   "listing": 154158
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 317,
+  "scoped_lines": 280,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    31,
@@ -987,5 +1064,25 @@
    758,
    971
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/trowsnewyorkcity1863trow",
+  "ia_dump": "data/survey_ocr/trowsnewyorkcity1863trow_words.ia.jsonl.gz",
+  "tiles": 3806,
+  "tiles_answered": 3806,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 142,
+  "pages": 959,
+  "lines_runover": 16166,
+  "lines_model": 175599,
+  "lines_model-only": 1012,
+  "lines_tesseract": 348,
+  "leaves_replaced": 959,
+  "layers": {
+   "ia-words (ABBYY FineReader 9.0)": 959
+  },
+  "dumped": "2026-10-29"
  }
 }

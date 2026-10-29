@@ -397,37 +397,41 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'flushing journal' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1890",
-   "hocr_lines": 4940,
-   "wrap_joins": 192,
-   "candidates": 4748,
+   "hocr_lines": 5212,
+   "wrap_joins": 368,
+   "candidates": 4844,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 4149,
-    "mark_share": 0.068,
+    "pairs": 4079,
+    "mark_share": 0.0263,
     "mode": 2.0,
-    "mode_pairs": 114,
-    "trough": 1.0,
-    "trough_pairs": 9,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "mode_pairs": 139,
+    "trough": 1.25,
+    "trough_pairs": 8,
+    "reason": "runover mode not isolated from the next-entry band",
+    "start_cap": null,
+    "run_over_joins": 161
    },
+   "model_runovers": 240,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 2030,
-    "leaves": 70
+    "words": 327,
+    "leaves": 14
    },
-   "marker_fixes": 528,
-   "kept": 3849,
-   "keep_rate": 0.8107,
+   "marker_fixes": 0,
+   "kept": 3824,
+   "keep_rate": 0.7894,
    "dropped": {
-    "short": 363,
-    "allcaps": 329,
-    "banner": 166,
-    "bigtype": 32,
-    "nonascii": 9
+    "allcaps": 479,
+    "short": 335,
+    "banner": 180,
+    "bigtype": 24,
+    "nonascii": 2
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -444,48 +448,48 @@
     11,
     219,
     221,
-    17,
     9,
+    17,
     193,
-    141,
+    93,
     133
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 410776
+  "words_gz_bytes": 381046
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 15,
-  "end_leaf": 171,
+  "end_leaf": 169,
   "first_letter": "A",
-  "last_letter": "Y",
-  "letters_present": "ABCDEFGHJKLMNPRSTVWY",
-  "missing_letters": "IOQUXZ",
-  "voting_density": 0.465,
+  "last_letter": "W",
+  "letters_present": "ABCDEFGHJKLMNPRSTVW",
+  "missing_letters": "IOQUXYZ",
+  "voting_density": 0.484,
   "flags": [],
   "start": {
    "leaf": 15,
    "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$15/full/!1400,1400/0/default.jpg",
-   "quote": "Abbott Noah, gardener, h 24 S. Prince C/2"
+   "quote": "Abbott Noah, gardener, h 24 S. Prince"
   },
   "end": {
-   "leaf": 171,
-   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$171/full/!1400,1400/0/default.jpg",
-   "quote": "Young Wm L, painter, h 42 Madison ave 5\u00a7"
+   "leaf": 169,
+   "image": "https://iiif.archive.org/iiif/flushingnewyorkc00boyd$169/full/!1400,1400/0/default.jpg",
+   "quote": "Wright Thos H, plumber, h 59 Linden ave"
   },
   "sections": [
    {
     "start_leaf": 15,
-    "end_leaf": 171,
-    "voting_leaves": 73,
+    "end_leaf": 169,
+    "voting_leaves": 75,
     "first_letter": "A",
-    "last_letter": "Y",
-    "letters": "ABCDEFGHJKLMNPRSTVWY",
+    "last_letter": "W",
+    "letters": "ABCDEFGHJKLMNPRSTVW",
     "is_listing": true
    }
   ],
@@ -495,17 +499,17 @@
      "A",
      "B"
     ],
-    "start_leaf": 16,
+    "start_leaf": 18,
     "end_leaf": 18,
-    "leaves": 3
+    "leaves": 1
    },
    {
     "between": [
      "B",
      "C"
     ],
-    "start_leaf": 32,
-    "end_leaf": 32,
+    "start_leaf": 34,
+    "end_leaf": 34,
     "leaves": 1
    },
    {
@@ -621,9 +625,9 @@
      "R",
      "S"
     ],
-    "start_leaf": 126,
+    "start_leaf": 134,
     "end_leaf": 134,
-    "leaves": 9
+    "leaves": 1
    },
    {
     "between": [
@@ -651,32 +655,23 @@
     "start_leaf": 160,
     "end_leaf": 160,
     "leaves": 1
-   },
-   {
-    "between": [
-     "W",
-     "Y"
-    ],
-    "start_leaf": 170,
-    "end_leaf": 170,
-    "leaves": 1
    }
   ],
   "letter_blocks": {
    "A": [
     15,
-    15,
-    1
+    17,
+    2
    ],
    "B": [
     19,
-    31,
-    7
+    33,
+    8
    ],
    "C": [
-    33,
+    35,
     47,
-    8
+    7
    ],
    "D": [
     49,
@@ -735,8 +730,8 @@
    ],
    "R": [
     125,
-    125,
-    1
+    133,
+    4
    ],
    "S": [
     135,
@@ -757,17 +752,12 @@
     161,
     169,
     5
-   ],
-   "Y": [
-    171,
-    171,
-    1
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 0,
   "voted_bounds": [
    15,
-   171
+   169
   ],
   "extended": {
    "start": [],
@@ -776,7 +766,7 @@
   "cross_check": {
    "source": "lines",
    "start_leaf": 15,
-   "end_leaf": 171
+   "end_leaf": 169
   },
   "params": {
    "min_chars": 400,
@@ -788,8 +778,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 109,
   "fitted_leaves": 0,
   "read_leaves": 0,
@@ -807,8 +797,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -821,10 +811,18 @@
    {
     "kind": "listing",
     "start_leaf": 15,
+    "end_leaf": 169,
+    "title": null,
+    "leaves": 78,
+    "residential": true
+   },
+   {
+    "kind": "back_matter",
+    "start_leaf": 171,
     "end_leaf": 171,
     "title": null,
-    "leaves": 79,
-    "residential": true
+    "leaves": 1,
+    "residential": false
    },
    {
     "kind": "business",
@@ -841,6 +839,7 @@
   ],
   "has_business": true,
   "kinds": [
+   "back_matter",
    "business",
    "front_matter",
    "listing"
@@ -848,21 +847,41 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/flushingnewyorkc00boyd_listing.jsonl.gz",
   "sections": [
    {
     "kind": "listing",
     "start_leaf": 15,
-    "end_leaf": 171
+    "end_leaf": 169
    }
   ],
-  "kept": 3078,
-  "dropped": 771,
-  "kept_share": 0.7997,
+  "kept": 3039,
+  "dropped": 785,
+  "kept_share": 0.7947,
   "kept_by_section": {
-   "listing": 3078
+   "listing": 3039
   }
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/flushingnewyorkc00boyd",
+  "ia_dump": "data/survey_ocr/flushingnewyorkc00boyd_words.ia.jsonl.gz",
+  "tiles": 158,
+  "tiles_answered": 158,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 79,
+  "lines_runover": 240,
+  "lines_tesseract": 313,
+  "lines_model": 3513,
+  "lines_model-only": 276,
+  "leaves_replaced": 79,
+  "layers": {
+   "ia-words (IA OCR)": 79
+  },
+  "dumped": "2026-10-29"
  }
 }

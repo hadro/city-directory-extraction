@@ -390,19 +390,23 @@
    "publisher_tag_note": null,
    "year_tag": "1786",
    "hocr_lines": 6319,
-   "wrap_joins": 126,
-   "candidates": 6193,
+   "wrap_joins": 164,
+   "candidates": 6155,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 2800,
-    "mark_share": 0.0193,
+    "pairs": 2802,
+    "mark_share": 0.0195,
     "mode": 2.0,
     "mode_pairs": 15,
     "trough": 1.75,
-    "trough_pairs": 6,
-    "reason": "too few runovers to read a mode"
+    "trough_pairs": 7,
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 49
    },
+   "model_runovers": 51,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -412,14 +416,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 1840,
-   "keep_rate": 0.2971,
+   "kept": 1804,
+   "keep_rate": 0.2931,
    "dropped": {
     "short": 3850,
     "banner": 413,
     "allcaps": 79,
-    "bigtype": 7,
-    "pagenum": 3,
+    "bigtype": 6,
+    "pagenum": 2,
     "nonascii": 1
    },
    "ditto_marks": [],
@@ -443,10 +447,10 @@
     88,
     24
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 187428,
+  "words_gz_bytes": 183011,
   "hocr_deleted": true,
   "elapsed_s": 5,
   "eval_holdout": {
@@ -520,8 +524,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 30,
   "end_leaf": 62,
   "first_letter": "A",
@@ -533,7 +537,7 @@
   "start": {
    "leaf": 30,
    "image": "https://iiif.archive.org/iiif/newyorkdirectory00durs_0$30/full/!1400,1400/0/default.jpg",
-   "quote": "Asli Tho. Winds, cliair maker, 31, John-st"
+   "quote": "Ash Tho. Winds. chair maker, 31, John-st"
   },
   "end": {
    "leaf": 62,
@@ -630,13 +634,13 @@
    ],
    "S": [
     55,
-    57,
-    3
+    58,
+    4
    ],
    "T": [
-    58,
     59,
-    2
+    59,
+    1
    ],
    "V": [
     60,
@@ -673,11 +677,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 86,
   "fitted_leaves": 80,
-  "read_leaves": 66,
+  "read_leaves": 67,
   "segments": [
    {
     "first_leaf": 13,
@@ -685,7 +689,7 @@
     "first_page": 3,
     "last_page": 82,
     "leaves": 80,
-    "read": 66
+    "read": 67
    }
   ],
   "ia_comparison": {
@@ -699,8 +703,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -772,8 +776,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/newyorkdirectory00durs_0_listing.jsonl.gz",
   "sections": [
    {
@@ -782,11 +786,11 @@
     "end_leaf": 62
    }
   ],
-  "kept": 905,
+  "kept": 869,
   "dropped": 935,
-  "kept_share": 0.4918,
+  "kept_share": 0.4817,
   "kept_by_section": {
-   "listing": 905
+   "listing": 869
   }
  },
  "run_set": {
@@ -796,5 +800,23 @@
   "basis": "the 1851 reprint, reset with a modern s: reads 57% of the franks1786 gold lines exactly against 5% or less for the three long-s copies. Records cite the 1851 reprint's pages",
   "decision": "data_prep/survey_runset.json",
   "role": "run"
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/newyorkdirectory00durs_0",
+  "ia_dump": "data/survey_ocr/newyorkdirectory00durs_0_words.ia.jsonl.gz",
+  "tiles": 66,
+  "tiles_answered": 66,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 33,
+  "lines_runover": 51,
+  "lines_model": 985,
+  "leaves_replaced": 33,
+  "layers": {
+   "ia-words (IA OCR)": 33
+  },
+  "dumped": "2026-10-29"
  }
 }

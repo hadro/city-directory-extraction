@@ -2376,6 +2376,49 @@ damaged-tier page, https://claude.ai/artifact/L5hhRFvo22384GUDwNkQZa, "Next job"
 back into `data/volumes_books_damaged_v2/` (never `data/volumes/`); assemble into a separate `--out`
 so job 3's `data/records_canary` stays the before.
 
+**C, the 4B over the damaged tier, back 2026-10-29** (sent as v4, staged at 657e9c4; NYU job
+21014769, all 258 tasks on L40S, `venv-kernels` at batch 64, 11.4 rows/s overall, 114 decode-hours).
+All 258 predictions match their chunks (sha1 and count, 4,678,164). Installed into
+`data/volumes_books_damaged_v4/` (logs in `logs/` there), guarded, assembled to
+`data/records_books_damaged/`, summary `results/records_books_damaged.json`: 4,284,970 usable of
+4,678,164 rows. Against job 3 (usable per printed name): Doggett 1845 0.981 -> **0.982** (IA run 1
+0.984), Longworth 1826 0.859 -> **0.897** (the split tails rejoined; still short of ~0.95), 1876BPL
+0.979 -> 0.982, Trow 1907 p3 usable 98,767 -> 99,690. The 1903 parts: 390,604 usable for 405,264
+printed names (0.964). Glued-entry proxy on the two "generaldire" volumes 0.36% and 0.28%, the Trow
+floor (siblings 0.20-0.35%): #32 (a) held.
+
+**D, the LightOn re-read of `first` and `abbyy8-clean`, imported 2026-10-29** (NYU jobs 21115799 and
+21115800, L40S, vLLM; 198,811 tiles in 61 volumes, 63 EMPTY, 0.23%/0.43% looped). 14 BPL volumes
+were not cut: the pinned Pillow 10.4.0 (openjpeg 2.5.2) cannot decode 802 of their 12,908 pages
+(1866BPL 81%, 1867BPL 28%), the Mac's copy fails them too, and Pillow 12.3.0 (openjpeg 2.5.4) reads
+them all. Where both decode, the pixels AND the quality-92 JPEG bytes are identical (checked on
+1866BPL), so those 14 are tiled under 12.3.0 with no parity question (hadro, 2026-10-29). The import
+(`reocr_books.py import --ids <61>`, 6 workers, 3 h 18 min) moved scoped lines 8,610,756 ->
+8,605,974; listing bounds moved once (Flushing c00 end 171 -> 169). Two patterns, both checked:
+- **Joins up, lines down where IA's joiner missed run-overs.** Trow 1922/23 p1/p2 joins 17.6k ->
+  142k and 18.8k -> 159k, scoped -16%; BPL 1858-1871 joins ~6x, scoped -8 to -14%; Trow 1865/66
+  (bub_gb) -5%. 1862BPL leaf 256 against its image: one line a printed entry, every run-over joined.
+  A `"` ditto opening a second entry mid-line: 0.16% of 1922/23 p1's lines, 0.02% of 1917's. A line
+  repeating its own entry after `, ` (LightOn table cells): 1,081 in all 61 volumes, under 0.1% each.
+- **BPL 1878-1887 scoped lines per printed name rose 1.00-1.04 -> 1.04-1.08:** the margin ads,
+  as 1876BPL's 1.054 that came to 0.982 usable after the 4B.
+The coverage flags on Trow 1859/1863/1876 were the proxy's line pitch: model-only under 1%. The
+model-only flag (>10%) asks the tesseract layer for **Trow 1914 vol 2 "19142"** (64.5%; IA's OCR
+failed, 206 of 489 pages under 0.5), **Flushing 1891/92** (12.5%) and **Ogden** (16.8%). **Ogden's
+show-through versos are back in scope:** the entry-shape flag held 135 leaves on IA's text and 58 on
+LightOn's, which reads the reversed text, loops on it (90 of its 506 tiles; NYU's 50 EMPTY are
+also versos) or invents ("Table of Contents / 1. Books ..." on leaf 112): 3,548 scoped lines on even
+leaves. Keep Ogden out of any staging until its versos are excluded by leaf.
+**Table mode: 41,904 of 198,811 tiles (21%)**, ~50% on Trow 1915 and 1922/23, 42% on 1917, 17-33%
+on BPL 1878-1887. `line_assembly.py tables --damage`: two-entry cells barely above plain tiles' rate
+(1922/23 p1 0.58 a table tile vs 0.39 plain; 1915 0.43 vs 0.36; BPL table tiles below plain), but
+the invented `, ` after the name runs 28,494 on 1915, 24,437 on 1917, 12,548 on 1922/23 p1, and
+ditto marks lost 1,239 (1922/23 p1), 722 (1917), 678 (1915). **The table test (NYU job 21116104,
+`hpc/lightonocr_vllm_notables.py` with NYU's `SamplingParams` subclass fix)** re-read task 0 with
+`|` and `<table` banned: no output holds either; gold entries 93.6 -> 93.4% exact (one line), book
+74.4 -> 74.1%; on the 9 bench pages with table tiles 94.4 -> 94.0% gold, book exact 78.5 -> 77.5%,
+close 99.1 -> 99.8%. Safe, but the bench holds none of the damage above, so it cannot show the gain.
+
 **THE FULL BOOK-SCAN RE-OCR, STAGED ON TORCH (built 2026-10-22).** The tiers' images are ~75 GB,
 which the Mac cannot hold, so Torch fetches and cuts them, and only words and answers cross:
 

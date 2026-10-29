@@ -342,20 +342,24 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1836",
-   "hocr_lines": 47546,
-   "wrap_joins": 662,
-   "candidates": 46884,
+   "hocr_lines": 47099,
+   "wrap_joins": 732,
+   "candidates": 46367,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 43258,
-    "mark_share": 0.0049,
+    "pairs": 43403,
+    "mark_share": 0.0042,
     "mode": 2.0,
-    "mode_pairs": 90,
-    "trough": 1.75,
-    "trough_pairs": 40,
-    "reason": "too few runovers to read a mode"
+    "mode_pairs": 91,
+    "trough": 1.5,
+    "trough_pairs": 48,
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 212
    },
+   "model_runovers": 232,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -365,12 +369,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 39526,
-   "keep_rate": 0.8431,
+   "kept": 39245,
+   "keep_rate": 0.8464,
    "dropped": {
-    "short": 4502,
-    "banner": 1882,
-    "allcaps": 963,
+    "short": 4146,
+    "banner": 1974,
+    "allcaps": 991,
     "bigtype": 10,
     "nonascii": 1
    },
@@ -395,18 +399,18 @@
     719,
     754
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 3238562,
+  "words_gz_bytes": 2983504,
   "hocr_deleted": true,
   "elapsed_s": 27
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 42,
   "end_leaf": 711,
   "first_letter": "A",
@@ -423,7 +427,7 @@
   "end": {
    "leaf": 711,
    "image": "https://iiif.archive.org/iiif/longworthsameric6118long$711/full/!1400,1400/0/default.jpg",
-   "quote": "Zwahlen Lewis, surgic. pumpmaker 43 Ann h. 24 James"
+   "quote": "Zwehlen Rodolph, cabinetmaker 189 Reade"
   },
   "sections": [
    {
@@ -495,13 +499,13 @@
    ],
    "L": [
     375,
-    406,
-    32
+    405,
+    31
    ],
    "M": [
-    407,
+    406,
     469,
-    63
+    64
    ],
    "N": [
     470,
@@ -583,11 +587,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 767,
-  "fitted_leaves": 750,
-  "read_leaves": 602,
+  "fitted_leaves": 752,
+  "read_leaves": 694,
   "segments": [
    {
     "first_leaf": 13,
@@ -603,15 +607,15 @@
     "first_page": 51,
     "last_page": 479,
     "leaves": 429,
-    "read": 348
+    "read": 403
    },
    {
-    "first_leaf": 474,
+    "first_leaf": 472,
     "last_leaf": 519,
-    "first_page": 490,
+    "first_page": 488,
     "last_page": 535,
-    "leaves": 46,
-    "read": 41
+    "leaves": 48,
+    "read": 45
    },
    {
     "first_leaf": 521,
@@ -619,7 +623,7 @@
     "first_page": 541,
     "last_page": 549,
     "leaves": 9,
-    "read": 8
+    "read": 9
    },
    {
     "first_leaf": 530,
@@ -627,7 +631,7 @@
     "first_page": 560,
     "last_page": 764,
     "leaves": 205,
-    "read": 156
+    "read": 188
    },
    {
     "first_leaf": 738,
@@ -649,8 +653,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -800,8 +804,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/longworthsameric6118long_listing.jsonl.gz",
   "sections": [
    {
@@ -815,12 +819,33 @@
     "end_leaf": 714
    }
   ],
-  "kept": 36213,
+  "kept": 35932,
   "dropped": 3313,
-  "kept_share": 0.9162,
+  "kept_share": 0.9156,
   "kept_by_section": {
-   "listing": 36090,
-   "late_names": 123
+   "listing": 35810,
+   "late_names": 122
   }
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/longworthsameric6118long",
+  "ia_dump": "data/survey_ocr/longworthsameric6118long_words.ia.jsonl.gz",
+  "tiles": 1346,
+  "tiles_answered": 1346,
+  "bleed_retry": 1,
+  "loop_truncated": 1,
+  "table_mode": 1,
+  "pages": 673,
+  "lines_runover": 232,
+  "lines_tesseract": 67,
+  "lines_model": 37609,
+  "lines_model-only": 22,
+  "lines_bleed": 34,
+  "leaves_replaced": 673,
+  "layers": {
+   "ia-words (ABBYY FineReader 9.0)": 673
+  },
+  "dumped": "2026-10-29"
  }
 }

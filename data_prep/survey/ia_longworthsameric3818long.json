@@ -336,20 +336,24 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1813",
-   "hocr_lines": 19208,
-   "wrap_joins": 206,
-   "candidates": 19002,
+   "hocr_lines": 19021,
+   "wrap_joins": 222,
+   "candidates": 18799,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 17598,
-    "mark_share": 0.006,
-    "mode": 1.75,
-    "mode_pairs": 27,
-    "trough": 1.25,
-    "trough_pairs": 24,
-    "reason": "too few runovers to read a mode"
+    "pairs": 17711,
+    "mark_share": 0.0053,
+    "mode": 1.25,
+    "mode_pairs": 99,
+    "trough": 0.5,
+    "trough_pairs": 39,
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 15
    },
+   "model_runovers": 32,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -358,13 +362,13 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 1,
-   "kept": 15682,
-   "keep_rate": 0.8253,
+   "marker_fixes": 0,
+   "kept": 15546,
+   "keep_rate": 0.827,
    "dropped": {
-    "short": 1916,
-    "banner": 1004,
-    "allcaps": 393,
+    "short": 1725,
+    "banner": 1026,
+    "allcaps": 495,
     "bigtype": 7
    },
    "ditto_marks": [],
@@ -388,41 +392,41 @@
     28,
     21
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 1259245,
+  "words_gz_bytes": 1160750,
   "hocr_deleted": true,
   "elapsed_s": 10
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 61,
   "end_leaf": 358,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
   "missing_letters": "XZ",
-  "voting_density": 1.0,
+  "voting_density": 0.997,
   "flags": [],
   "start": {
    "leaf": 61,
    "image": "https://iiif.archive.org/iiif/longworthsameric3818long$61/full/!1400,1400/0/default.jpg",
-   "quote": "Abbot Robert, merchant 82 Chamber"
+   "quote": "Abraham Moses, 115 Broad is Broad-street\u2014Beaver is Beaver-street, &c."
   },
   "end": {
    "leaf": 358,
    "image": "https://iiif.archive.org/iiif/longworthsameric3818long$358/full/!1400,1400/0/default.jpg",
-   "quote": "Yronnet John, tobacconist Rhynders"
+   "quote": "Yvonnet John, tobacconist Rhynders"
   },
   "sections": [
    {
     "start_leaf": 61,
     "end_leaf": 357,
-    "voting_leaves": 297,
+    "voting_leaves": 296,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
@@ -494,7 +498,7 @@
    "M": [
     223,
     249,
-    27
+    26
    ],
    "N": [
     250,
@@ -578,11 +582,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 349,
   "fitted_leaves": 337,
-  "read_leaves": 197,
+  "read_leaves": 307,
   "segments": [
    {
     "first_leaf": 19,
@@ -606,7 +610,7 @@
     "first_page": 22,
     "last_page": 346,
     "leaves": 325,
-    "read": 186
+    "read": 296
    }
   ],
   "ia_comparison": {
@@ -620,8 +624,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "register",
@@ -685,8 +689,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/longworthsameric3818long_listing.jsonl.gz",
   "sections": [
    {
@@ -695,11 +699,31 @@
     "end_leaf": 358
    }
   ],
-  "kept": 14184,
+  "kept": 14048,
   "dropped": 1498,
-  "kept_share": 0.9045,
+  "kept_share": 0.9036,
   "kept_by_section": {
-   "listing": 14184
+   "listing": 14048
   }
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/longworthsameric3818long",
+  "ia_dump": "data/survey_ocr/longworthsameric3818long_words.ia.jsonl.gz",
+  "tiles": 596,
+  "tiles_answered": 596,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 298,
+  "lines_runover": 32,
+  "lines_model": 14990,
+  "lines_tesseract": 21,
+  "lines_model-only": 11,
+  "leaves_replaced": 298,
+  "layers": {
+   "ia-words (IA OCR)": 298
+  },
+  "dumped": "2026-10-29"
  }
 }

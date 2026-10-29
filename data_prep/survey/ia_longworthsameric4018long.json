@@ -327,20 +327,24 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1815",
-   "hocr_lines": 28829,
-   "wrap_joins": 396,
-   "candidates": 28433,
+   "hocr_lines": 28642,
+   "wrap_joins": 426,
+   "candidates": 28216,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 23133,
-    "mark_share": 0.0111,
+    "pairs": 23284,
+    "mark_share": 0.0097,
     "mode": 1.25,
-    "mode_pairs": 93,
+    "mode_pairs": 320,
     "trough": 0.75,
-    "trough_pairs": 82,
-    "reason": "too few runovers to read a mode"
+    "trough_pairs": 128,
+    "reason": "runover mode not isolated from the next-entry band",
+    "start_cap": null,
+    "run_over_joins": 23
    },
+   "model_runovers": 61,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -349,15 +353,15 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 1,
-   "kept": 21545,
-   "keep_rate": 0.7577,
+   "marker_fixes": 0,
+   "kept": 21463,
+   "keep_rate": 0.7607,
    "dropped": {
-    "short": 4652,
-    "banner": 1790,
-    "allcaps": 413,
+    "short": 4464,
+    "banner": 1701,
+    "allcaps": 554,
     "bigtype": 29,
-    "nonascii": 3,
+    "nonascii": 4,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -381,18 +385,18 @@
     35,
     23
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 1805944,
+  "words_gz_bytes": 1653170,
   "hocr_deleted": true,
   "elapsed_s": 22
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 115,
   "end_leaf": 463,
   "first_letter": "A",
@@ -406,12 +410,12 @@
   "start": {
    "leaf": 115,
    "image": "https://iiif.archive.org/iiif/longworthsameric4018long$115/full/!1400,1400/0/default.jpg",
-   "quote": "Abhatt Robert, marchant ;i36 Pearl"
+   "quote": "Abbatt Robert, merchant 336 Pearl"
   },
   "end": {
    "leaf": 463,
    "image": "https://iiif.archive.org/iiif/longworthsameric4018long$463/full/!1400,1400/0/default.jpg",
-   "quote": "Yvonnet John, 69 Chapel"
+   "quote": "Yvonnet Jobu, 69 Chapel"
   },
   "sections": [
    {
@@ -437,13 +441,13 @@
   "letter_blocks": {
    "A": [
     115,
-    126,
-    12
+    125,
+    11
    ],
    "B": [
-    127,
+    126,
     161,
-    34
+    36
    ],
    "C": [
     162,
@@ -473,7 +477,7 @@
    "H": [
     242,
     267,
-    25
+    26
    ],
    "I": [
     268,
@@ -498,7 +502,7 @@
    "M": [
     302,
     333,
-    32
+    30
    ],
    "N": [
     334,
@@ -556,7 +560,7 @@
     2
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 0,
   "voted_bounds": [
    115,
    463
@@ -580,11 +584,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 473,
-  "fitted_leaves": 445,
-  "read_leaves": 223,
+  "fitted_leaves": 443,
+  "read_leaves": 345,
   "segments": [
    {
     "first_leaf": 20,
@@ -619,20 +623,12 @@
     "read": 16
    },
    {
-    "first_leaf": 113,
-    "last_leaf": 116,
-    "first_page": 1,
-    "last_page": 4,
-    "leaves": 4,
-    "read": 3
-   },
-   {
-    "first_leaf": 118,
+    "first_leaf": 116,
     "last_leaf": 463,
-    "first_page": 108,
+    "first_page": 106,
     "last_page": 451,
-    "leaves": 344,
-    "read": 181
+    "leaves": 346,
+    "read": 306
    },
    {
     "first_leaf": 467,
@@ -654,8 +650,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -683,8 +679,8 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 114,
-      "page": 2,
+      "leaf": 110,
+      "page": 102,
       "attestation": "read"
      }
     }
@@ -698,9 +694,9 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 115,
-      "page": 3,
-      "attestation": "inferred"
+      "leaf": 116,
+      "page": 106,
+      "attestation": "read"
      },
      "last": {
       "leaf": 463,
@@ -747,8 +743,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/longworthsameric4018long_listing.jsonl.gz",
   "sections": [
    {
@@ -757,11 +753,41 @@
     "end_leaf": 463
    }
   ],
-  "kept": 16861,
+  "kept": 16779,
   "dropped": 4684,
-  "kept_share": 0.7826,
+  "kept_share": 0.7818,
   "kept_by_section": {
-   "listing": 16861
+   "listing": 16779
   }
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/longworthsameric4018long",
+  "ia_dump": "data/survey_ocr/longworthsameric4018long_words.ia.jsonl.gz",
+  "tiles": 694,
+  "tiles_answered": 694,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 347,
+  "lines_runover": 61,
+  "lines_model": 18165,
+  "lines_model-only": 33,
+  "lines_tesseract": 48,
+  "leaves_replaced": 347,
+  "layers": {
+   "ia-words (IA OCR)": 347
+  },
+  "dumped": "2026-10-29"
+ },
+ "non_entry_pages": {
+  "method": "entry-shape",
+  "derived": "2026-10-29",
+  "entry_min": 0.15,
+  "scoped_lines": 50,
+  "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
+  "leaves": [
+   309
+  ]
  }
 }

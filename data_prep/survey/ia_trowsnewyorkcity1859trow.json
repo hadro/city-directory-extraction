@@ -96,21 +96,6 @@
    ],
    "note": "COLUMN COUNT AUDIT. Read at leaf 323 = printed p.317 (GAS-GAY) -- the exact anchor the CSV note cites. The offset checks out (+6) and the column count does NOT: the page is TWO columns, not the recorded 3. The note's claim that 'the 2->3 transition is 1857->1859' is therefore wrong; 1859 is still 2-column. The page also carries two conventions: '(col'd)' after a name as a race marker -- 'Gaskin Joseph (col'd), barber, h 41 Watts' -- which the project has documented for BROOKLYN (Hearne/Ogden '*', Hope & Henderson) but not for Manhattan Trow; and '(refused)' -- 'Gatty (refused), 169 Monroe' -- for a resident who declined to give information."
   },
-  "end_page": {
-   "value": 937,
-   "leaf": 955,
-   "canvas": "https://iiif.archive.org/iiif/trowsnewyorkcity1859trow$955/canvas",
-   "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1859trow$955/full/!1400,1400/0/default.jpg",
-   "evidence_type": "folio",
-   "quote": "'937' in the head margin",
-   "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
-   "ia_page": null,
-   "page_offset": 18,
-   "listing_flags": [],
-   "doubts": []
-  },
   "start_page": {
    "value": null,
    "leaf": 21,
@@ -390,20 +375,24 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1859",
-   "hocr_lines": 189676,
-   "wrap_joins": 20306,
-   "candidates": 169370,
+   "hocr_lines": 190572,
+   "wrap_joins": 20711,
+   "candidates": 169861,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 168880,
-    "mark_share": 0.0057,
+    "pairs": 168782,
+    "mark_share": 0.0055,
     "mode": 2.0,
-    "mode_pairs": 15908,
+    "mode_pairs": 15664,
     "trough": 1.5,
-    "trough_pairs": 156,
-    "reason": "sharp runover mode"
+    "trough_pairs": 195,
+    "reason": "sharp runover mode",
+    "start_cap": 5.79,
+    "run_over_joins": 16909
    },
+   "model_runovers": 17432,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -412,15 +401,15 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 884,
-   "kept": 160818,
-   "keep_rate": 0.9495,
+   "marker_fixes": 2,
+   "kept": 160253,
+   "keep_rate": 0.9434,
    "dropped": {
-    "short": 5410,
-    "allcaps": 1653,
-    "banner": 1427,
-    "bigtype": 31,
-    "nonascii": 31
+    "short": 6316,
+    "allcaps": 1682,
+    "banner": 1542,
+    "nonascii": 38,
+    "bigtype": 30
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -435,38 +424,38 @@
     989,
     1019,
     1020,
+    368,
     991,
     967,
     1029,
     18,
     1065,
-    368,
-    1063
+    424
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 14265994,
+  "words_gz_bytes": 13298700,
   "hocr_deleted": true,
   "elapsed_s": 1918
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 21,
   "end_leaf": 955,
   "first_letter": "A",
   "last_letter": "Z",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
   "missing_letters": "X",
-  "voting_density": 0.94,
+  "voting_density": 0.947,
   "flags": [],
   "start": {
    "leaf": 21,
    "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1859trow$21/full/!1400,1400/0/default.jpg",
-   "quote": "Aal Charles, painter, h G2 Cannon"
+   "quote": "Aal Charles, painter, h 62 Cannon"
   },
   "end": {
    "leaf": 955,
@@ -477,7 +466,7 @@
    {
     "start_leaf": 21,
     "end_leaf": 955,
-    "voting_leaves": 879,
+    "voting_leaves": 885,
     "first_letter": "A",
     "last_letter": "Z",
     "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
@@ -493,15 +482,6 @@
     "start_leaf": 541,
     "end_leaf": 571,
     "leaves": 31
-   },
-   {
-    "between": [
-     "R",
-     "S"
-    ],
-    "start_leaf": 753,
-    "end_leaf": 754,
-    "leaves": 2
    }
   ],
   "letter_blocks": {
@@ -592,8 +572,8 @@
    ],
    "R": [
     710,
-    752,
-    38
+    754,
+    45
    ],
    "S": [
     755,
@@ -612,13 +592,13 @@
    ],
    "V": [
     877,
-    890,
-    14
+    889,
+    13
    ],
    "W": [
-    891,
+    890,
     949,
-    57
+    58
    ],
    "Y": [
     950,
@@ -631,7 +611,7 @@
     3
    ]
   },
-  "skipped_votes": 15,
+  "skipped_votes": 4,
   "voted_bounds": [
    21,
    955
@@ -655,11 +635,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 1060,
-  "fitted_leaves": 1019,
-  "read_leaves": 954,
+  "fitted_leaves": 1013,
+  "read_leaves": 714,
   "segments": [
    {
     "first_leaf": 8,
@@ -671,19 +651,107 @@
    },
    {
     "first_leaf": 22,
-    "last_leaf": 24,
+    "last_leaf": 104,
     "first_page": 22,
-    "last_page": 24,
-    "leaves": 3,
-    "read": 3
+    "last_page": 100,
+    "leaves": 79,
+    "read": 78
    },
    {
-    "first_leaf": 29,
-    "last_leaf": 955,
-    "first_page": 27,
-    "last_page": 937,
-    "leaves": 911,
-    "read": 860
+    "first_leaf": 105,
+    "last_leaf": 186,
+    "first_page": 1,
+    "last_page": 82,
+    "leaves": 82,
+    "read": 68
+   },
+   {
+    "first_leaf": 187,
+    "last_leaf": 366,
+    "first_page": 183,
+    "last_page": 360,
+    "leaves": 178,
+    "read": 124
+   },
+   {
+    "first_leaf": 370,
+    "last_leaf": 374,
+    "first_page": 62,
+    "last_page": 66,
+    "leaves": 5,
+    "read": 5
+   },
+   {
+    "first_leaf": 375,
+    "last_leaf": 422,
+    "first_page": 367,
+    "last_page": 414,
+    "leaves": 48,
+    "read": 32
+   },
+   {
+    "first_leaf": 427,
+    "last_leaf": 447,
+    "first_page": 17,
+    "last_page": 37,
+    "leaves": 21,
+    "read": 13
+   },
+   {
+    "first_leaf": 451,
+    "last_leaf": 618,
+    "first_page": 439,
+    "last_page": 604,
+    "leaves": 166,
+    "read": 106
+   },
+   {
+    "first_leaf": 620,
+    "last_leaf": 633,
+    "first_page": 6,
+    "last_page": 19,
+    "leaves": 14,
+    "read": 9
+   },
+   {
+    "first_leaf": 634,
+    "last_leaf": 758,
+    "first_page": 620,
+    "last_page": 744,
+    "leaves": 125,
+    "read": 65
+   },
+   {
+    "first_leaf": 761,
+    "last_leaf": 772,
+    "first_page": 45,
+    "last_page": 56,
+    "leaves": 12,
+    "read": 9
+   },
+   {
+    "first_leaf": 773,
+    "last_leaf": 790,
+    "first_page": 757,
+    "last_page": 774,
+    "leaves": 18,
+    "read": 9
+   },
+   {
+    "first_leaf": 791,
+    "last_leaf": 813,
+    "first_page": 75,
+    "last_page": 97,
+    "leaves": 23,
+    "read": 15
+   },
+   {
+    "first_leaf": 814,
+    "last_leaf": 952,
+    "first_page": 798,
+    "last_page": 934,
+    "leaves": 137,
+    "read": 90
    },
    {
     "first_leaf": 960,
@@ -705,16 +773,18 @@
   "ia_comparison": {
    "ia_read_leaves": 405,
    "both": 405,
-   "agree": 405,
-   "agree_rate": 1.0,
+   "agree": 351,
+   "agree_rate": 0.867,
    "ia_page_equals_leaf": 0.0
   },
-  "flags": []
+  "flags": [
+   "ia-disagrees"
+  ]
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -790,7 +860,7 @@
     "end_leaf": 20,
     "title": {
      "leaf": 20,
-     "quote": "NAMES TOO LATE FOR INSERTION.",
+     "quote": "NAMES TOO LATE",
      "image": "https://iiif.archive.org/iiif/trowsnewyorkcity1859trow$20/full/!1400,1400/0/default.jpg"
     },
     "leaves": 1,
@@ -822,8 +892,8 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 955,
-      "page": 937,
+      "leaf": 952,
+      "page": 934,
       "attestation": "read"
      }
     }
@@ -962,8 +1032,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/trowsnewyorkcity1859trow_listing.jsonl.gz",
   "sections": [
    {
@@ -977,19 +1047,19 @@
     "end_leaf": 955
    }
   ],
-  "kept": 146937,
+  "kept": 146372,
   "dropped": 13881,
-  "kept_share": 0.9137,
+  "kept_share": 0.9134,
   "kept_by_section": {
-   "late_names": 165,
-   "listing": 146772
+   "late_names": 141,
+   "listing": 146231
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 382,
+  "scoped_lines": 360,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    27,
@@ -1007,5 +1077,25 @@
    759,
    946
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/trowsnewyorkcity1859trow",
+  "ia_dump": "data/survey_ocr/trowsnewyorkcity1859trow_words.ia.jsonl.gz",
+  "tiles": 3700,
+  "tiles_answered": 3700,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 99,
+  "pages": 931,
+  "lines_runover": 17432,
+  "lines_model": 167780,
+  "lines_tesseract": 320,
+  "lines_model-only": 1019,
+  "leaves_replaced": 931,
+  "layers": {
+   "ia-words (ABBYY FineReader 9.0)": 931
+  },
+  "dumped": "2026-10-29"
  }
 }

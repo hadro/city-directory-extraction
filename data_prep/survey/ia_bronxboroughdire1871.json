@@ -8,10 +8,10 @@
    "canvas": "https://iiif.archive.org/iiif/bronxboroughdire1871$161/canvas",
    "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$161/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "no folio printed on leaf 161; page 111 INFERRED from the sequence of folios around it",
+   "quote": "'111' in the head margin",
    "method": "hocr-geometry",
-   "confidence": "low",
-   "attestation": "inferred",
+   "confidence": "high",
+   "attestation": "read",
    "ia_page": null,
    "page_offset": 50,
    "listing_flags": [],
@@ -268,20 +268,24 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "no publisher in the catalog",
    "year_tag": "1871",
-   "hocr_lines": 8032,
-   "wrap_joins": 707,
-   "candidates": 7325,
+   "hocr_lines": 8125,
+   "wrap_joins": 703,
+   "candidates": 7422,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 7001,
-    "mark_share": 0.0098,
+    "pairs": 6984,
+    "mark_share": 0.0096,
     "mode": 2.25,
-    "mode_pairs": 212,
+    "mode_pairs": 201,
     "trough": 1.5,
-    "trough_pairs": 7,
-    "reason": "sharp runover mode"
+    "trough_pairs": 5,
+    "reason": "sharp runover mode",
+    "start_cap": null,
+    "run_over_joins": 364
    },
+   "model_runovers": 379,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -290,14 +294,14 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 2,
-   "kept": 6839,
-   "keep_rate": 0.9337,
+   "marker_fixes": 0,
+   "kept": 6783,
+   "keep_rate": 0.9139,
    "dropped": {
-    "allcaps": 232,
-    "short": 180,
-    "banner": 55,
-    "bigtype": 18,
+    "allcaps": 361,
+    "short": 210,
+    "banner": 54,
+    "bigtype": 13,
     "nonascii": 1
    },
    "ditto_marks": [],
@@ -311,53 +315,53 @@
    },
    "top_ad_leaves": [
     0,
-    176,
-    109,
+    110,
     1,
+    145,
+    109,
+    75,
     86,
     21,
-    110,
     76,
-    9,
-    128
+    9
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 888115,
+  "words_gz_bytes": 840334,
   "hocr_deleted": true,
   "elapsed_s": 6
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 39,
   "end_leaf": 161,
   "first_letter": "A",
   "last_letter": "Z",
   "letters_present": "ABCDEFGHIJKLMNOPRSTVWYZ",
   "missing_letters": "QUX",
-  "voting_density": 0.886,
+  "voting_density": 0.894,
   "flags": [
    "multi-section"
   ],
   "start": {
    "leaf": 39,
    "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$39/full/!1400,1400/0/default.jpg",
-   "quote": "Abrams Albert T, hardware, n s Wall '2d h e Boston road"
+   "quote": "Abrams Albert T, hardware, n s Wall 2d h e Boston road"
   },
   "end": {
    "leaf": 161,
    "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$161/full/!1400,1400/0/default.jpg",
-   "quote": "Zwmk John, iiuih., w s R R av 4th h s Wash'n av"
+   "quote": "Zwink John, milk, w s R R av 4th h s Wash\u2019n av"
   },
   "sections": [
    {
     "start_leaf": 39,
     "end_leaf": 161,
-    "voting_leaves": 109,
+    "voting_leaves": 110,
     "first_letter": "A",
     "last_letter": "Z",
     "letters": "ABCDEFGHIJKLMNOPRSTVWYZ",
@@ -366,24 +370,14 @@
    {
     "start_leaf": 168,
     "end_leaf": 182,
-    "voting_leaves": 10,
+    "voting_leaves": 11,
     "first_letter": "B",
     "last_letter": "W",
-    "letters": "BCDGHKMSW",
+    "letters": "BCDGHKMRSW",
     "is_listing": false
    }
   ],
-  "gaps": [
-   {
-    "between": [
-     "P",
-     "R"
-    ],
-    "start_leaf": 127,
-    "end_leaf": 128,
-    "leaves": 2
-   }
-  ],
+  "gaps": [],
   "letter_blocks": {
    "A": [
     39,
@@ -462,13 +456,13 @@
    ],
    "P": [
     123,
-    126,
-    4
+    125,
+    3
    ],
    "R": [
-    129,
+    126,
     133,
-    4
+    6
    ],
    "S": [
     134,
@@ -501,7 +495,7 @@
     1
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 1,
   "voted_bounds": [
    39,
    161
@@ -525,67 +519,27 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-24",
-  "code_at": "b4ac266-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 192,
-  "fitted_leaves": 121,
-  "read_leaves": 86,
+  "fitted_leaves": 136,
+  "read_leaves": 133,
   "segments": [
    {
     "first_leaf": 40,
-    "last_leaf": 72,
-    "first_page": 2,
-    "last_page": 34,
-    "leaves": 33,
-    "read": 25
-   },
-   {
-    "first_leaf": 81,
-    "last_leaf": 84,
-    "first_page": 41,
-    "last_page": 44,
-    "leaves": 4,
-    "read": 3
-   },
-   {
-    "first_leaf": 88,
-    "last_leaf": 107,
-    "first_page": 46,
-    "last_page": 63,
-    "leaves": 18,
-    "read": 13
-   },
-   {
-    "first_leaf": 112,
-    "last_leaf": 125,
-    "first_page": 66,
-    "last_page": 79,
-    "leaves": 14,
-    "read": 12
-   },
-   {
-    "first_leaf": 129,
-    "last_leaf": 143,
-    "first_page": 81,
-    "last_page": 95,
-    "leaves": 15,
-    "read": 9
-   },
-   {
-    "first_leaf": 147,
     "last_leaf": 167,
-    "first_page": 97,
+    "first_page": 2,
     "last_page": 117,
-    "leaves": 21,
-    "read": 12
+    "leaves": 116,
+    "read": 116
    },
    {
-    "first_leaf": 177,
+    "first_leaf": 171,
     "last_leaf": 192,
-    "first_page": 123,
+    "first_page": 119,
     "last_page": 138,
-    "leaves": 16,
-    "read": 12
+    "leaves": 20,
+    "read": 17
    }
   ],
   "ia_comparison": {
@@ -599,8 +553,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -626,7 +580,7 @@
      "last": {
       "leaf": 161,
       "page": 111,
-      "attestation": "inferred"
+      "attestation": "read"
      }
     }
    },
@@ -636,14 +590,14 @@
     "end_leaf": 182,
     "title": {
      "leaf": 162,
-     "quote": "IT'i HIOUBKIDGEVILLE DIEECTORY",
+     "quote": "112 HIGHBRIDGEVILLE DIRECTORY.",
      "image": "https://iiif.archive.org/iiif/bronxboroughdire1871$162/full/!1400,1400/0/default.jpg"
     },
     "alphabets": [
      {
       "start_leaf": 168,
       "end_leaf": 182,
-      "letters": "BCDGHKMSW"
+      "letters": "BCDGHKMRSW"
      }
     ],
     "leaves": 21,
@@ -652,7 +606,7 @@
      "first": {
       "leaf": 162,
       "page": 112,
-      "attestation": "inferred"
+      "attestation": "read"
      },
      "last": {
       "leaf": 182,
@@ -721,8 +675,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/bronxboroughdire1871_listing.jsonl.gz",
   "sections": [
    {
@@ -736,19 +690,19 @@
     "end_leaf": 182
    }
   ],
-  "kept": 5267,
+  "kept": 5211,
   "dropped": 1572,
-  "kept_share": 0.7701,
+  "kept_share": 0.7682,
   "kept_by_section": {
-   "listing": 4675,
-   "place_directory: IT'i HIOUBKIDGEVILLE DIEECTORY": 592
+   "listing": 4622,
+   "place_directory: 112 HIGHBRIDGEVILLE DIRECTORY.": 589
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 146,
+  "scoped_lines": 137,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    75,
@@ -767,5 +721,25 @@
    170,
    176
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/bronxboroughdire1871",
+  "ia_dump": "data/survey_ocr/bronxboroughdire1871_words.ia.jsonl.gz",
+  "tiles": 288,
+  "tiles_answered": 288,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 144,
+  "lines_runover": 379,
+  "lines_model": 6010,
+  "lines_model-only": 113,
+  "lines_tesseract": 29,
+  "leaves_replaced": 144,
+  "layers": {
+   "ia-words (IA OCR)": 144
+  },
+  "dumped": "2026-10-29"
  }
 }

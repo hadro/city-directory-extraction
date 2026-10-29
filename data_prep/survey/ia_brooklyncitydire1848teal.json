@@ -390,20 +390,24 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1848",
-   "hocr_lines": 22626,
-   "wrap_joins": 652,
-   "candidates": 21974,
+   "hocr_lines": 22592,
+   "wrap_joins": 653,
+   "candidates": 21939,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 19883,
-    "mark_share": 0.0081,
+    "pairs": 19803,
+    "mark_share": 0.0062,
     "mode": 1.25,
-    "mode_pairs": 231,
+    "mode_pairs": 241,
     "trough": 0.75,
-    "trough_pairs": 75,
-    "reason": "runover mode not isolated from the next-entry band"
+    "trough_pairs": 81,
+    "reason": "runover mode not isolated from the next-entry band",
+    "start_cap": null,
+    "run_over_joins": 5
    },
+   "model_runovers": 22,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -412,14 +416,14 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 5,
-   "kept": 18849,
-   "keep_rate": 0.8578,
+   "marker_fixes": 0,
+   "kept": 18901,
+   "keep_rate": 0.8615,
    "dropped": {
-    "short": 1564,
-    "banner": 1200,
-    "allcaps": 350,
-    "bigtype": 10,
+    "short": 1538,
+    "banner": 1139,
+    "allcaps": 351,
+    "bigtype": 9,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -443,46 +447,46 @@
     321,
     468
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 1702825,
+  "words_gz_bytes": 1622781,
   "hocr_deleted": true,
   "elapsed_s": 25
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 11,
   "end_leaf": 260,
   "first_letter": "A",
-  "last_letter": "Z",
-  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
-  "missing_letters": "X",
-  "voting_density": 0.94,
+  "last_letter": "Y",
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
+  "missing_letters": "XZ",
+  "voting_density": 0.944,
   "flags": [
    "multi-section"
   ],
   "start": {
    "leaf": 11,
    "image": "https://iiif.archive.org/iiif/brooklyncitydire1848teal$11/full/!1400,1400/0/default.jpg",
-   "quote": "Abbreviations, \u2014 k\" rtands for house, n for near, cor for corner, op for og-"
+   "quote": "Abberly Richard, shoemaker 143 Hudson av"
   },
   "end": {
    "leaf": 260,
    "image": "https://iiif.archive.org/iiif/brooklyncitydire1848teal$260/full/!1400,1400/0/default.jpg",
-   "quote": "Zuntz Phoebe, 91 State."
+   "quote": "Yuley James, plasterer 269 Adams"
   },
   "sections": [
    {
     "start_leaf": 11,
     "end_leaf": 260,
-    "voting_leaves": 235,
+    "voting_leaves": 236,
     "first_letter": "A",
-    "last_letter": "Z",
-    "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "last_letter": "Y",
+    "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
     "is_listing": true
    },
    {
@@ -520,7 +524,7 @@
    "C": [
     44,
     65,
-    21
+    22
    ],
    "D": [
     66,
@@ -624,13 +628,8 @@
    ],
    "Y": [
     259,
-    259,
-    1
-   ],
-   "Z": [
     260,
-    260,
-    1
+    2
    ]
   },
   "skipped_votes": 12,
@@ -657,11 +656,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 479,
   "fitted_leaves": 468,
-  "read_leaves": 317,
+  "read_leaves": 381,
   "segments": [
    {
     "first_leaf": 12,
@@ -669,7 +668,7 @@
     "first_page": 4,
     "last_page": 255,
     "leaves": 252,
-    "read": 154
+    "read": 218
    },
    {
     "first_leaf": 267,
@@ -707,8 +706,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "register",
@@ -803,8 +802,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/brooklyncitydire1848teal_listing.jsonl.gz",
   "sections": [
    {
@@ -813,11 +812,11 @@
     "end_leaf": 260
    }
   ],
-  "kept": 11682,
+  "kept": 11734,
   "dropped": 7167,
-  "kept_share": 0.6198,
+  "kept_share": 0.6208,
   "kept_by_section": {
-   "listing": 11682
+   "listing": 11734
   }
  },
  "run_set": {
@@ -827,5 +826,25 @@
   "basis": "the book scan; the microfilm copy delivers 66% of its lines per page",
   "decision": "data_prep/survey_runset.json",
   "role": "run"
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/brooklyncitydire1848teal",
+  "ia_dump": "data/survey_ocr/brooklyncitydire1848teal_words.ia.jsonl.gz",
+  "tiles": 496,
+  "tiles_answered": 496,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 248,
+  "lines_runover": 22,
+  "lines_model": 12799,
+  "lines_tesseract": 42,
+  "lines_model-only": 15,
+  "leaves_replaced": 248,
+  "layers": {
+   "ia-words (IA OCR)": 248
+  },
+  "dumped": "2026-10-29"
  }
 }

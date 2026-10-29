@@ -100,14 +100,16 @@
    "canvas": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$467/canvas",
    "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$467/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'455' in the head margin",
+   "quote": "no folio printed on leaf 467; page 455 INFERRED from the sequence of folios around it",
    "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
+   "confidence": "low",
+   "attestation": "inferred",
    "ia_page": null,
    "page_offset": 12,
    "listing_flags": [],
-   "doubts": []
+   "doubts": [
+    "sequence read on only 4 leaves"
+   ]
   },
   "start_page": {
    "value": null,
@@ -376,20 +378,24 @@
    "publisher_tag": "doggett",
    "publisher_tag_note": null,
    "year_tag": "1847",
-   "hocr_lines": 86284,
-   "wrap_joins": 6023,
-   "candidates": 80261,
+   "hocr_lines": 86789,
+   "wrap_joins": 6257,
+   "candidates": 80532,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 78956,
-    "mark_share": 0.0071,
+    "pairs": 78884,
+    "mark_share": 0.006,
     "mode": 2.0,
-    "mode_pairs": 3840,
+    "mode_pairs": 3748,
     "trough": 1.5,
-    "trough_pairs": 46,
-    "reason": "sharp runover mode"
+    "trough_pairs": 107,
+    "reason": "sharp runover mode",
+    "start_cap": 6.37,
+    "run_over_joins": 4668
    },
+   "model_runovers": 5056,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -398,13 +404,13 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 12,
-   "kept": 73919,
-   "keep_rate": 0.921,
+   "marker_fixes": 0,
+   "kept": 73646,
+   "keep_rate": 0.9145,
    "dropped": {
-    "short": 3829,
-    "banner": 1534,
-    "allcaps": 943,
+    "short": 4241,
+    "banner": 1639,
+    "allcaps": 970,
     "bigtype": 30,
     "nonascii": 6
    },
@@ -418,29 +424,29 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    105,
     5,
+    24,
+    106,
     480,
     20,
+    462,
     472,
     4,
-    106,
     476,
-    507,
-    10
+    507
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 6557473,
+  "words_gz_bytes": 6118392,
   "hocr_deleted": true,
   "elapsed_s": 51
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 25,
   "end_leaf": 467,
   "first_letter": "A",
@@ -452,7 +458,7 @@
   "start": {
    "leaf": 25,
    "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$25/full/!1400,1400/0/default.jpg",
-   "quote": "Aaron Eiias E. late com. mer. h. 161 Allen"
+   "quote": "Aaron Elias E. late com. mer. h. 161 Allen"
   },
   "end": {
    "leaf": 467,
@@ -632,19 +638,83 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 525,
-  "fitted_leaves": 504,
-  "read_leaves": 467,
+  "fitted_leaves": 499,
+  "read_leaves": 392,
   "segments": [
    {
     "first_leaf": 12,
-    "last_leaf": 468,
+    "last_leaf": 103,
     "first_page": 8,
+    "last_page": 99,
+    "leaves": 92,
+    "read": 75
+   },
+   {
+    "first_leaf": 110,
+    "last_leaf": 197,
+    "first_page": 4,
+    "last_page": 91,
+    "leaves": 88,
+    "read": 66
+   },
+   {
+    "first_leaf": 198,
+    "last_leaf": 372,
+    "first_page": 192,
+    "last_page": 364,
+    "leaves": 173,
+    "read": 133
+   },
+   {
+    "first_leaf": 373,
+    "last_leaf": 404,
+    "first_page": 65,
+    "last_page": 96,
+    "leaves": 32,
+    "read": 21
+   },
+   {
+    "first_leaf": 407,
+    "last_leaf": 414,
+    "first_page": 397,
+    "last_page": 404,
+    "leaves": 8,
+    "read": 7
+   },
+   {
+    "first_leaf": 415,
+    "last_leaf": 443,
+    "first_page": 5,
+    "last_page": 33,
+    "leaves": 29,
+    "read": 24
+   },
+   {
+    "first_leaf": 444,
+    "last_leaf": 451,
+    "first_page": 434,
+    "last_page": 441,
+    "leaves": 8,
+    "read": 7
+   },
+   {
+    "first_leaf": 452,
+    "last_leaf": 459,
+    "first_page": 42,
+    "last_page": 49,
+    "leaves": 8,
+    "read": 7
+   },
+   {
+    "first_leaf": 463,
+    "last_leaf": 468,
+    "first_page": 451,
     "last_page": 456,
-    "leaves": 449,
-    "read": 419
+    "leaves": 6,
+    "read": 4
    },
    {
     "first_leaf": 469,
@@ -666,16 +736,18 @@
   "ia_comparison": {
    "ia_read_leaves": 45,
    "both": 45,
-   "agree": 45,
-   "agree_rate": 1.0,
+   "agree": 27,
+   "agree_rate": 0.6,
    "ia_page_equals_leaf": 0.0
   },
-  "flags": []
+  "flags": [
+   "ia-disagrees"
+  ]
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -688,43 +760,19 @@
    {
     "kind": "appendix",
     "start_leaf": 11,
-    "end_leaf": 22,
+    "end_leaf": 24,
     "title": {
      "leaf": 11,
      "quote": "Advertisements . Appendix, 1",
      "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$11/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 12,
+    "leaves": 14,
     "residential": false,
     "pages": {
      "first": {
       "leaf": 12,
       "page": 8,
       "attestation": "read"
-     },
-     "last": {
-      "leaf": 22,
-      "page": 18,
-      "attestation": "inferred"
-     }
-    }
-   },
-   {
-    "kind": "late_names",
-    "start_leaf": 23,
-    "end_leaf": 24,
-    "title": {
-     "leaf": 23,
-     "quote": "REMOVALS,",
-     "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1847dogg$23/full/!1400,1400/0/default.jpg"
-    },
-    "leaves": 2,
-    "residential": true,
-    "pages": {
-     "first": {
-      "leaf": 23,
-      "page": 19,
-      "attestation": "inferred"
      },
      "last": {
       "leaf": 24,
@@ -749,7 +797,7 @@
      "last": {
       "leaf": 467,
       "page": 455,
-      "attestation": "read"
+      "attestation": "inferred"
      }
     }
    },
@@ -974,7 +1022,6 @@
   "kinds": [
    "appendix",
    "front_matter",
-   "late_names",
    "listing",
    "nurses",
    "register",
@@ -983,37 +1030,30 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/doggettsnewyorkc1847dogg_listing.jsonl.gz",
   "sections": [
-   {
-    "kind": "late_names",
-    "start_leaf": 23,
-    "end_leaf": 24
-   },
    {
     "kind": "listing",
     "start_leaf": 25,
     "end_leaf": 467
    }
   ],
-  "kept": 67284,
-  "dropped": 6635,
-  "kept_share": 0.9102,
+  "kept": 66876,
+  "dropped": 6770,
+  "kept_share": 0.9081,
   "kept_by_section": {
-   "late_names": 143,
-   "listing": 67141
+   "listing": 66876
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 184,
+  "scoped_lines": 126,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
-   24,
    105,
    106,
    295,
@@ -1022,5 +1062,25 @@
    461,
    462
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/doggettsnewyorkc1847dogg",
+  "ia_dump": "data/survey_ocr/doggettsnewyorkc1847dogg_words.ia.jsonl.gz",
+  "tiles": 1760,
+  "tiles_answered": 1759,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 168,
+  "pages": 444,
+  "lines_runover": 5056,
+  "lines_model": 73428,
+  "lines_model-only": 519,
+  "lines_tesseract": 319,
+  "leaves_replaced": 444,
+  "layers": {
+   "ia-words (ABBYY FineReader 9.0)": 444
+  },
+  "dumped": "2026-10-29"
  }
 }

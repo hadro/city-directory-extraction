@@ -307,38 +307,42 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1813",
-   "hocr_lines": 24024,
-   "wrap_joins": 328,
-   "candidates": 23696,
+   "hocr_lines": 24030,
+   "wrap_joins": 315,
+   "candidates": 23715,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 20458,
-    "mark_share": 0.0214,
-    "mode": 2.0,
-    "mode_pairs": 44,
-    "trough": 1.75,
-    "trough_pairs": 32,
-    "reason": "too few runovers to read a mode"
+    "pairs": 20437,
+    "mark_share": 0.0151,
+    "mode": 1.25,
+    "mode_pairs": 101,
+    "trough": 0.75,
+    "trough_pairs": 52,
+    "reason": "runover mode not isolated from the next-entry band",
+    "start_cap": null,
+    "run_over_joins": 17
    },
+   "model_runovers": 42,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 3,
-    "leaves": 1
+    "words": 0,
+    "leaves": 0
    },
    "marker_fixes": 1,
-   "digit_fixes": 165,
-   "kept": 19471,
-   "keep_rate": 0.8217,
+   "digit_fixes": 11,
+   "kept": 19238,
+   "keep_rate": 0.8112,
    "dropped": {
-    "short": 2352,
-    "banner": 1369,
-    "allcaps": 485,
-    "nonascii": 14,
-    "bigtype": 5
+    "short": 2361,
+    "banner": 1436,
+    "allcaps": 665,
+    "nonascii": 11,
+    "bigtype": 4
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -361,41 +365,41 @@
     23,
     25
    ],
-   "filters_at": "ef1d8e8-dirty",
-   "derived": "2026-10-06"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 1611389,
+  "words_gz_bytes": 1481764,
   "hocr_deleted": true,
   "elapsed_s": 7
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 129,
   "end_leaf": 839,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWY",
   "missing_letters": "XZ",
-  "voting_density": 0.498,
+  "voting_density": 0.499,
   "flags": [],
   "start": {
    "leaf": 129,
    "image": "https://iiif.archive.org/iiif/longworthsameric1813newy$129/full/!1400,1400/0/default.jpg",
-   "quote": "Abraham Moses, 115 Broad is Bread street \u2014"
+   "quote": "Abraham Moses, 115 Broad is Broad street\u2014Beaver is Beazer-street, &c."
   },
   "end": {
    "leaf": 839,
    "image": "https://iiif.archive.org/iiif/longworthsameric1813newy$839/full/!1400,1400/0/default.jpg",
-   "quote": "Yourt Archibald, tailor 70 Cherry \u00bb"
+   "quote": "Yvonnet John, tobacconist 102 Bowery"
   },
   "sections": [
    {
     "start_leaf": 129,
     "end_leaf": 839,
-    "voting_leaves": 354,
+    "voting_leaves": 355,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHIJKLMNOPQRSTUVWY",
@@ -705,7 +709,7 @@
    "S": [
     671,
     735,
-    32
+    33
    ],
    "T": [
     737,
@@ -733,7 +737,7 @@
     1
    ]
   },
-  "skipped_votes": 1,
+  "skipped_votes": 0,
   "voted_bounds": [
    129,
    839
@@ -757,11 +761,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 422,
-  "fitted_leaves": 400,
-  "read_leaves": 188,
+  "fitted_leaves": 404,
+  "read_leaves": 332,
   "segments": [
    {
     "first_leaf": 15,
@@ -789,11 +793,11 @@
    },
    {
     "first_leaf": 131,
-    "last_leaf": 831,
+    "last_leaf": 839,
     "first_page": 2,
-    "last_page": 351,
-    "leaves": 350,
-    "read": 160
+    "last_page": 355,
+    "leaves": 354,
+    "read": 304
    }
   ],
   "ia_comparison": {
@@ -807,8 +811,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -856,8 +860,8 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 831,
-      "page": 351,
+      "leaf": 839,
+      "page": 355,
       "attestation": "read"
      }
     }
@@ -881,8 +885,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-06",
-  "code_at": "f5deb88-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/longworthsameric1813newy_listing.jsonl.gz",
   "sections": [
    {
@@ -891,11 +895,31 @@
     "end_leaf": 839
    }
   ],
-  "kept": 17283,
+  "kept": 17050,
   "dropped": 2188,
-  "kept_share": 0.8876,
+  "kept_share": 0.8863,
   "kept_by_section": {
-   "listing": 17283
+   "listing": 17050
   }
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/longworthsameric1813newy",
+  "ia_dump": "data/survey_ocr/longworthsameric1813newy_words.ia.jsonl.gz",
+  "tiles": 710,
+  "tiles_answered": 710,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 1,
+  "pages": 355,
+  "lines_runover": 42,
+  "lines_model": 18251,
+  "lines_tesseract": 53,
+  "lines_model-only": 39,
+  "leaves_replaced": 355,
+  "layers": {
+   "ia-words (ABBYY FineReader 8.0)": 355
+  },
+  "dumped": "2026-10-29"
  }
 }

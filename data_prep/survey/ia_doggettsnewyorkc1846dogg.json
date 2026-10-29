@@ -363,20 +363,24 @@
    "publisher_tag": "doggett",
    "publisher_tag_note": null,
    "year_tag": "1846",
-   "hocr_lines": 84111,
-   "wrap_joins": 5592,
-   "candidates": 78519,
+   "hocr_lines": 84228,
+   "wrap_joins": 5849,
+   "candidates": 78379,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 77128,
-    "mark_share": 0.0121,
+    "pairs": 76331,
+    "mark_share": 0.006,
     "mode": 2.0,
-    "mode_pairs": 3460,
+    "mode_pairs": 3401,
     "trough": 1.5,
-    "trough_pairs": 37,
-    "reason": "sharp runover mode"
+    "trough_pairs": 98,
+    "reason": "sharp runover mode",
+    "start_cap": 6.95,
+    "run_over_joins": 4260
    },
+   "model_runovers": 4636,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -385,14 +389,14 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 3,
-   "kept": 72472,
-   "keep_rate": 0.923,
+   "marker_fixes": 0,
+   "kept": 72423,
+   "keep_rate": 0.924,
    "dropped": {
-    "short": 3696,
-    "banner": 1327,
-    "allcaps": 984,
-    "bigtype": 32,
+    "short": 3415,
+    "banner": 1492,
+    "allcaps": 1013,
+    "bigtype": 28,
     "nonascii": 8
    },
    "ditto_marks": [],
@@ -410,24 +414,24 @@
     459,
     1,
     516,
+    22,
+    17,
     515,
-    514,
-    466,
-    6,
-    480
+    18,
+    514
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 6315202,
+  "words_gz_bytes": 5925905,
   "hocr_deleted": true,
   "elapsed_s": 42
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 23,
   "end_leaf": 454,
   "first_letter": "A",
@@ -439,12 +443,12 @@
   "start": {
    "leaf": 23,
    "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$23/full/!1400,1400/0/default.jpg",
-   "quote": "Aaron Elias E. com. mer. 91 Maiden 1. h. 161 Allen"
+   "quote": "Aaron Elias E. com. mer. 91 Maiden l. h. 161 Allen"
   },
   "end": {
    "leaf": 454,
    "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$454/full/!1400,1400/0/default.jpg",
-   "quote": "Zwhaleu Rodolphe, cabinetmaker, 6 E. Clinton pi"
+   "quote": "Zwhalen Rodolphe, cabinetmaker, 6 E. Clinton pl"
   },
   "sections": [
    {
@@ -546,13 +550,13 @@
    ],
    "R": [
     337,
-    357,
-    21
+    356,
+    20
    ],
    "S": [
-    358,
+    357,
     396,
-    39
+    40
    ],
    "T": [
     397,
@@ -609,11 +613,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 514,
-  "fitted_leaves": 488,
-  "read_leaves": 449,
+  "fitted_leaves": 484,
+  "read_leaves": 379,
   "segments": [
    {
     "first_leaf": 8,
@@ -625,11 +629,67 @@
    },
    {
     "first_leaf": 24,
-    "last_leaf": 456,
+    "last_leaf": 113,
     "first_page": 14,
+    "last_page": 103,
+    "leaves": 90,
+    "read": 86
+   },
+   {
+    "first_leaf": 114,
+    "last_leaf": 174,
+    "first_page": 4,
+    "last_page": 64,
+    "leaves": 61,
+    "read": 46
+   },
+   {
+    "first_leaf": 179,
+    "last_leaf": 213,
+    "first_page": 67,
+    "last_page": 99,
+    "leaves": 33,
+    "read": 31
+   },
+   {
+    "first_leaf": 214,
+    "last_leaf": 288,
+    "first_page": 200,
+    "last_page": 274,
+    "leaves": 75,
+    "read": 51
+   },
+   {
+    "first_leaf": 293,
+    "last_leaf": 376,
+    "first_page": 277,
+    "last_page": 360,
+    "leaves": 84,
+    "read": 51
+   },
+   {
+    "first_leaf": 377,
+    "last_leaf": 415,
+    "first_page": 61,
+    "last_page": 99,
+    "leaves": 39,
+    "read": 29
+   },
+   {
+    "first_leaf": 416,
+    "last_leaf": 439,
+    "first_page": 0,
+    "last_page": 23,
+    "leaves": 24,
+    "read": 17
+   },
+   {
+    "first_leaf": 440,
+    "last_leaf": 456,
+    "first_page": 424,
     "last_page": 440,
-    "leaves": 427,
-    "read": 396
+    "leaves": 17,
+    "read": 15
    },
    {
     "first_leaf": 459,
@@ -651,8 +711,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -692,7 +752,7 @@
     "end_leaf": 22,
     "title": {
      "leaf": 16,
-     "quote": "NAMES TOO LATE FOR INSERTION,",
+     "quote": "NAMES TOO LATE",
      "image": "https://iiif.archive.org/iiif/doggettsnewyorkc1846dogg$16/full/!1400,1400/0/default.jpg"
     },
     "leaves": 7,
@@ -912,8 +972,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/doggettsnewyorkc1846dogg_listing.jsonl.gz",
   "sections": [
    {
@@ -927,19 +987,19 @@
     "end_leaf": 454
    }
   ],
-  "kept": 66263,
+  "kept": 66214,
   "dropped": 6209,
   "kept_share": 0.9143,
   "kept_by_section": {
-   "late_names": 311,
-   "listing": 65952
+   "late_names": 330,
+   "listing": 65884
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 463,
+  "scoped_lines": 465,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    17,
@@ -954,5 +1014,26 @@
    291,
    292
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/doggettsnewyorkc1846dogg",
+  "ia_dump": "data/survey_ocr/doggettsnewyorkc1846dogg_words.ia.jsonl.gz",
+  "tiles": 1740,
+  "tiles_answered": 1740,
+  "bleed_retry": 1,
+  "loop_truncated": 1,
+  "table_mode": 159,
+  "pages": 438,
+  "lines_runover": 4636,
+  "lines_model": 72308,
+  "lines_tesseract": 728,
+  "lines_model-only": 543,
+  "lines_bleed": 43,
+  "leaves_replaced": 438,
+  "layers": {
+   "ia-words (ABBYY FineReader 9.0)": 438
+  },
+  "dumped": "2026-10-29"
  }
 }

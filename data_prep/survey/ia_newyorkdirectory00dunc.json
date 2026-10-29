@@ -345,37 +345,40 @@
    "publisher_tag": "duncan",
    "publisher_tag_note": null,
    "year_tag": "1794",
-   "hocr_lines": 12017,
-   "wrap_joins": 419,
-   "candidates": 11598,
+   "hocr_lines": 12058,
+   "wrap_joins": 1250,
+   "candidates": 10808,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 10877,
-    "mark_share": 0.0106,
+    "pairs": 10712,
+    "mark_share": 0.006,
     "mode": 1.25,
-    "mode_pairs": 80,
+    "mode_pairs": 84,
     "trough": 0.5,
-    "trough_pairs": 52,
-    "reason": "too few runovers to read a mode"
+    "trough_pairs": 38,
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 862
    },
+   "model_runovers": 897,
+   "cont_dropped_leaves": 3,
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
+    "lines": 42,
+    "leaves": 3
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 10889,
-   "keep_rate": 0.9389,
+   "kept": 10232,
+   "keep_rate": 0.9467,
    "dropped": {
-    "short": 320,
-    "allcaps": 259,
-    "banner": 125,
-    "bigtype": 3,
-    "nonascii": 2
+    "allcaps": 280,
+    "banner": 166,
+    "short": 128,
+    "bigtype": 2
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -390,26 +393,26 @@
     232,
     258,
     254,
+    235,
     287,
     259,
+    236,
     291,
     284,
-    267,
-    310,
-    277
+    267
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 764387,
+  "words_gz_bytes": 706943,
   "hocr_deleted": true,
   "elapsed_s": 9
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 23,
   "end_leaf": 237,
   "first_letter": "A",
@@ -421,12 +424,12 @@
   "start": {
    "leaf": 23,
    "image": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$23/full/!1400,1400/0/default.jpg",
-   "quote": "Aaronfred, Cocr.rad, taylor, 28 Bowery-lane."
+   "quote": "Aaronfred, C\u0153nrad, taylor, 28 Bowery-lane."
   },
   "end": {
    "leaf": 237,
    "image": "https://iiif.archive.org/iiif/newyorkdirectory00dunc$237/full/!1400,1400/0/default.jpg",
-   "quote": "Wrighi, William."
+   "quote": "Willbn, John."
   },
   "sections": [
    {
@@ -442,11 +445,11 @@
   "gaps": [
    {
     "between": [
-     "I",
-     "J"
+     "S",
+     "T"
     ],
-    "start_leaf": 115,
-    "end_leaf": 115,
+    "start_leaf": 201,
+    "end_leaf": 201,
     "leaves": 1
    }
   ],
@@ -463,13 +466,13 @@
    ],
    "C": [
     51,
-    67,
-    17
+    68,
+    18
    ],
    "D": [
-    68,
+    69,
     80,
-    11
+    10
    ],
    "E": [
     81,
@@ -497,9 +500,9 @@
     1
    ],
    "J": [
-    116,
+    115,
     119,
-    4
+    5
    ],
    "K": [
     120,
@@ -543,8 +546,8 @@
    ],
    "S": [
     183,
-    201,
-    19
+    200,
+    18
    ],
    "T": [
     202,
@@ -562,7 +565,7 @@
     13
    ]
   },
-  "skipped_votes": 4,
+  "skipped_votes": 6,
   "voted_bounds": [
    23,
    237
@@ -586,11 +589,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 294,
-  "fitted_leaves": 271,
-  "read_leaves": 145,
+  "fitted_leaves": 274,
+  "read_leaves": 238,
   "segments": [
    {
     "first_leaf": 24,
@@ -598,31 +601,15 @@
     "first_page": 2,
     "last_page": 56,
     "leaves": 55,
-    "read": 40
+    "read": 54
    },
    {
-    "first_leaf": 83,
-    "last_leaf": 174,
-    "first_page": 63,
-    "last_page": 154,
-    "leaves": 92,
-    "read": 47
-   },
-   {
-    "first_leaf": 175,
-    "last_leaf": 205,
-    "first_page": 55,
-    "last_page": 85,
-    "leaves": 31,
-    "read": 11
-   },
-   {
-    "first_leaf": 207,
+    "first_leaf": 81,
     "last_leaf": 237,
-    "first_page": 187,
+    "first_page": 61,
     "last_page": 215,
-    "leaves": 29,
-    "read": 13
+    "leaves": 155,
+    "read": 150
    },
    {
     "first_leaf": 241,
@@ -636,16 +623,16 @@
   "ia_comparison": {
    "ia_read_leaves": 60,
    "both": 59,
-   "agree": 57,
-   "agree_rate": 0.966,
+   "agree": 59,
+   "agree_rate": 1.0,
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -721,8 +708,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/newyorkdirectory00dunc_listing.jsonl.gz",
   "sections": [
    {
@@ -731,21 +718,20 @@
     "end_leaf": 237
    }
   ],
-  "kept": 8210,
+  "kept": 7553,
   "dropped": 2679,
-  "kept_share": 0.754,
+  "kept_share": 0.7382,
   "kept_by_section": {
-   "listing": 8210
+   "listing": 7553
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 396,
+  "scoped_lines": 402,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
-   115,
    232,
    233,
    234,
@@ -753,5 +739,25 @@
    236,
    237
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/newyorkdirectory00dunc",
+  "ia_dump": "data/survey_ocr/newyorkdirectory00dunc_words.ia.jsonl.gz",
+  "tiles": 422,
+  "tiles_answered": 422,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 5,
+  "pages": 211,
+  "lines_runover": 905,
+  "lines_model": 8534,
+  "lines_tesseract": 136,
+  "lines_model-only": 129,
+  "leaves_replaced": 211,
+  "layers": {
+   "ia-words (IA OCR)": 211
+  },
+  "dumped": "2026-10-29"
  }
 }

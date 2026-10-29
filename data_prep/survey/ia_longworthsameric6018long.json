@@ -328,20 +328,24 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1835",
-   "hocr_lines": 50064,
-   "wrap_joins": 689,
-   "candidates": 49375,
+   "hocr_lines": 49549,
+   "wrap_joins": 730,
+   "candidates": 48819,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 46023,
-    "mark_share": 0.0048,
+    "pairs": 45950,
+    "mark_share": 0.0043,
     "mode": 1.25,
-    "mode_pairs": 97,
+    "mode_pairs": 112,
     "trough": 0.75,
-    "trough_pairs": 89,
-    "reason": "too few runovers to read a mode"
+    "trough_pairs": 95,
+    "reason": "runover mode not isolated from the next-entry band",
+    "start_cap": null,
+    "run_over_joins": 180
    },
+   "model_runovers": 207,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -351,15 +355,15 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 41277,
-   "keep_rate": 0.836,
+   "kept": 41132,
+   "keep_rate": 0.8425,
    "dropped": {
-    "short": 4484,
-    "banner": 2357,
-    "allcaps": 1246,
-    "bigtype": 5,
-    "nonascii": 4,
-    "pagenum": 2
+    "short": 4066,
+    "banner": 2352,
+    "allcaps": 1260,
+    "nonascii": 5,
+    "bigtype": 3,
+    "pagenum": 1
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -371,7 +375,6 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    805,
     748,
     781,
     22,
@@ -380,45 +383,46 @@
     30,
     784,
     749,
-    788
+    788,
+    19
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 3432412,
+  "words_gz_bytes": 3177108,
   "hocr_deleted": true,
   "elapsed_s": 92
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 58,
   "end_leaf": 742,
   "first_letter": "A",
   "last_letter": "Z",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
   "missing_letters": "X",
-  "voting_density": 0.975,
+  "voting_density": 0.974,
   "flags": [
    "multi-section"
   ],
   "start": {
    "leaf": 58,
    "image": "https://iiif.archive.org/iiif/longworthsameric6018long$58/full/!1400,1400/0/default.jpg",
-   "quote": "Any person who act ually finds, or thinks that he has"
+   "quote": "Any person who actually finds, or thinks that he has"
   },
   "end": {
    "leaf": 742,
    "image": "https://iiif.archive.org/iiif/longworthsameric6018long$742/full/!1400,1400/0/default.jpg",
-   "quote": "ZwaMen Lewis, surgic. pumpmaker 43 Ann h. 24 James"
+   "quote": "Zwahlen Lewis, surgic. pumpmaker 43 Ann h. 24 James"
   },
   "sections": [
    {
     "start_leaf": 58,
     "end_leaf": 742,
-    "voting_leaves": 668,
+    "voting_leaves": 667,
     "first_letter": "A",
     "last_letter": "Z",
     "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
@@ -441,8 +445,8 @@
      "M"
     ],
     "start_leaf": 427,
-    "end_leaf": 438,
-    "leaves": 12
+    "end_leaf": 444,
+    "leaves": 18
    }
   ],
   "letter_blocks": {
@@ -507,9 +511,9 @@
     31
    ],
    "M": [
-    439,
+    445,
     494,
-    51
+    50
    ],
    "N": [
     495,
@@ -596,11 +600,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 817,
   "fitted_leaves": 800,
-  "read_leaves": 716,
+  "read_leaves": 775,
   "segments": [
    {
     "first_leaf": 17,
@@ -624,7 +628,7 @@
     "first_page": 24,
     "last_page": 751,
     "leaves": 728,
-    "read": 661
+    "read": 718
    },
    {
     "first_leaf": 766,
@@ -648,7 +652,7 @@
     "first_page": 1,
     "last_page": 24,
     "leaves": 24,
-    "read": 17
+    "read": 19
    }
   ],
   "ia_comparison": {
@@ -662,8 +666,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -713,7 +717,7 @@
      "last": {
       "leaf": 742,
       "page": 734,
-      "attestation": "inferred"
+      "attestation": "read"
      }
     }
    },
@@ -723,7 +727,7 @@
     "end_leaf": 744,
     "title": {
      "leaf": 743,
-     "quote": "Additional Names, Removals & Corrections)",
+     "quote": "Additional Names, Removals & Corrections,",
      "image": "https://iiif.archive.org/iiif/longworthsameric6018long$743/full/!1400,1400/0/default.jpg"
     },
     "leaves": 2,
@@ -807,8 +811,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/longworthsameric6018long_listing.jsonl.gz",
   "sections": [
    {
@@ -827,19 +831,19 @@
     "end_leaf": 830
    }
   ],
-  "kept": 37651,
+  "kept": 37506,
   "dropped": 3626,
-  "kept_share": 0.9122,
+  "kept_share": 0.9118,
   "kept_by_section": {
-   "listing": 36522,
-   "late_names": 1129
+   "listing": 36400,
+   "late_names": 1106
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 54,
+  "scoped_lines": 36,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    805,
@@ -847,5 +851,26 @@
    828,
    830
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/longworthsameric6018long",
+  "ia_dump": "data/survey_ocr/longworthsameric6018long_words.ia.jsonl.gz",
+  "tiles": 1422,
+  "tiles_answered": 1422,
+  "bleed_retry": 1,
+  "loop_truncated": 1,
+  "table_mode": 4,
+  "pages": 711,
+  "lines_runover": 208,
+  "lines_model": 39501,
+  "lines_tesseract": 135,
+  "lines_model-only": 46,
+  "lines_bleed": 28,
+  "leaves_replaced": 711,
+  "layers": {
+   "ia-words (ABBYY FineReader 9.0)": 711
+  },
+  "dumped": "2026-10-29"
  }
 }

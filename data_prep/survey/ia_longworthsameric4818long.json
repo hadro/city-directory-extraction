@@ -322,20 +322,24 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1823",
-   "hocr_lines": 22934,
-   "wrap_joins": 111,
-   "candidates": 22823,
+   "hocr_lines": 22652,
+   "wrap_joins": 149,
+   "candidates": 22503,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 21517,
-    "mark_share": 0.0047,
-    "mode": 1.5,
-    "mode_pairs": 12,
-    "trough": 1.25,
-    "trough_pairs": 3,
-    "reason": "too few runovers to read a mode"
+    "pairs": 21699,
+    "mark_share": 0.0024,
+    "mode": 1.25,
+    "mode_pairs": 166,
+    "trough": 0.5,
+    "trough_pairs": 41,
+    "reason": "runover mode not isolated from the next-entry band",
+    "start_cap": null,
+    "run_over_joins": 9
    },
+   "model_runovers": 17,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -344,14 +348,14 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 17,
-   "kept": 20698,
-   "keep_rate": 0.9069,
+   "marker_fixes": 0,
+   "kept": 20430,
+   "keep_rate": 0.9079,
    "dropped": {
-    "short": 1254,
-    "banner": 649,
-    "allcaps": 219,
-    "nonascii": 2,
+    "short": 966,
+    "banner": 637,
+    "allcaps": 468,
+    "nonascii": 1,
     "bigtype": 1
    },
    "ditto_marks": [],
@@ -368,48 +372,48 @@
     8,
     9,
     6,
-    24,
+    166,
     264,
     7,
     10,
-    66,
-    11
+    11,
+    82
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 1606048,
+  "words_gz_bytes": 1388250,
   "hocr_deleted": true,
   "elapsed_s": 10
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 13,
   "end_leaf": 390,
   "first_letter": "A",
   "last_letter": "Z",
   "letters_present": "ABCDEFGHIJKLMOPQRSTUVWYZ",
   "missing_letters": "NX",
-  "voting_density": 0.971,
+  "voting_density": 0.979,
   "flags": [],
   "start": {
    "leaf": 13,
    "image": "https://iiif.archive.org/iiif/longworthsameric4818long$13/full/!1400,1400/0/default.jpg",
-   "quote": "Allaire James P. brass & iron found. 444 Cherry 4' 167"
+   "quote": "Allaire James P. brass & iron found. 444 Cherry & 167"
   },
   "end": {
    "leaf": 390,
    "image": "https://iiif.archive.org/iiif/longworthsameric4818long$390/full/!1400,1400/0/default.jpg",
-   "quote": "Zuntz widow of Alexander, i2B William"
+   "quote": "Zuntz widow of Alexander, 28 William"
   },
   "sections": [
    {
     "start_leaf": 13,
     "end_leaf": 390,
-    "voting_leaves": 367,
+    "voting_leaves": 370,
     "first_letter": "A",
     "last_letter": "Z",
     "letters": "ABCDEFGHIJKLMOPQRSTUVWYZ",
@@ -516,12 +520,12 @@
    "S": [
     296,
     330,
-    34
+    35
    ],
    "T": [
     331,
     347,
-    16
+    17
    ],
    "U": [
     348,
@@ -536,7 +540,7 @@
    "W": [
     361,
     388,
-    27
+    28
    ],
    "Y": [
     389,
@@ -549,7 +553,7 @@
     1
    ]
   },
-  "skipped_votes": 3,
+  "skipped_votes": 0,
   "voted_bounds": [
    13,
    390
@@ -573,11 +577,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 379,
-  "fitted_leaves": 366,
-  "read_leaves": 216,
+  "fitted_leaves": 374,
+  "read_leaves": 339,
   "segments": [
    {
     "first_leaf": 5,
@@ -588,36 +592,36 @@
     "read": 7
    },
    {
-    "first_leaf": 14,
+    "first_leaf": 13,
     "last_leaf": 84,
-    "first_page": 56,
+    "first_page": 55,
     "last_page": 124,
-    "leaves": 69,
-    "read": 44
+    "leaves": 70,
+    "read": 62
    },
    {
     "first_leaf": 85,
-    "last_leaf": 158,
+    "last_leaf": 156,
     "first_page": 137,
-    "last_page": 208,
-    "leaves": 72,
-    "read": 40
+    "last_page": 206,
+    "leaves": 70,
+    "read": 63
    },
    {
-    "first_leaf": 161,
+    "first_leaf": 158,
     "last_leaf": 251,
-    "first_page": 227,
+    "first_page": 224,
     "last_page": 313,
-    "leaves": 87,
-    "read": 49
+    "leaves": 90,
+    "read": 85
    },
    {
-    "first_leaf": 253,
+    "first_leaf": 252,
     "last_leaf": 327,
-    "first_page": 343,
+    "first_page": 342,
     "last_page": 417,
-    "leaves": 75,
-    "read": 41
+    "leaves": 76,
+    "read": 70
    },
    {
     "first_leaf": 330,
@@ -625,7 +629,15 @@
     "first_page": 424,
     "last_page": 478,
     "leaves": 55,
-    "read": 35
+    "read": 47
+   },
+   {
+    "first_leaf": 386,
+    "last_leaf": 390,
+    "first_page": 484,
+    "last_page": 488,
+    "leaves": 5,
+    "read": 5
    }
   ],
   "ia_comparison": {
@@ -639,8 +651,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -671,13 +683,13 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 14,
-      "page": 56,
+      "leaf": 13,
+      "page": 55,
       "attestation": "read"
      },
      "last": {
-      "leaf": 384,
-      "page": 478,
+      "leaf": 390,
+      "page": 488,
       "attestation": "read"
      }
     }
@@ -691,8 +703,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/longworthsameric4818long_listing.jsonl.gz",
   "sections": [
    {
@@ -701,11 +713,31 @@
     "end_leaf": 390
    }
   ],
-  "kept": 20549,
+  "kept": 20281,
   "dropped": 149,
-  "kept_share": 0.9928,
+  "kept_share": 0.9927,
   "kept_by_section": {
-   "listing": 20549
+   "listing": 20281
   }
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/longworthsameric4818long",
+  "ia_dump": "data/survey_ocr/longworthsameric4818long_words.ia.jsonl.gz",
+  "tiles": 740,
+  "tiles_answered": 740,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 370,
+  "lines_runover": 17,
+  "lines_model": 21157,
+  "lines_tesseract": 24,
+  "lines_model-only": 18,
+  "leaves_replaced": 370,
+  "layers": {
+   "ia-words (IA OCR)": 370
+  },
+  "dumped": "2026-10-29"
  }
 }

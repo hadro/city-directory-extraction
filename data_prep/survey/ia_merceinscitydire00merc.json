@@ -378,20 +378,24 @@
    "publisher_tag": "mercein",
    "publisher_tag_note": null,
    "year_tag": "1820",
-   "hocr_lines": 28658,
-   "wrap_joins": 440,
-   "candidates": 28218,
+   "hocr_lines": 28677,
+   "wrap_joins": 488,
+   "candidates": 28189,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 25593,
-    "mark_share": 0.0088,
+    "pairs": 25533,
+    "mark_share": 0.0073,
     "mode": 1.25,
-    "mode_pairs": 104,
+    "mode_pairs": 138,
     "trough": 0.75,
-    "trough_pairs": 67,
-    "reason": "runover mode not isolated from the next-entry band"
+    "trough_pairs": 86,
+    "reason": "runover mode not isolated from the next-entry band",
+    "start_cap": null,
+    "run_over_joins": 56
    },
+   "model_runovers": 102,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
@@ -400,16 +404,15 @@
     "words": 30,
     "leaves": 2
    },
-   "marker_fixes": 11,
-   "kept": 23773,
-   "keep_rate": 0.8425,
+   "marker_fixes": 1,
+   "kept": 23540,
+   "keep_rate": 0.8351,
    "dropped": {
     "short": 2778,
-    "banner": 1065,
-    "allcaps": 547,
-    "bigtype": 40,
-    "nonascii": 14,
-    "pagenum": 1
+    "banner": 1222,
+    "allcaps": 610,
+    "bigtype": 26,
+    "nonascii": 13
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -429,21 +432,21 @@
     42,
     35,
     49,
-    326,
-    33
+    33,
+    37
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 1818586,
+  "words_gz_bytes": 1685318,
   "hocr_deleted": true,
   "elapsed_s": 32
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 104,
   "end_leaf": 448,
   "first_letter": "A",
@@ -455,7 +458,7 @@
   "start": {
    "leaf": 104,
    "image": "https://iiif.archive.org/iiif/merceinscitydire00merc$104/full/!1400,1400/0/default.jpg",
-   "quote": "Acbeson Hugh, cartman 39 Lombard)'"
+   "quote": "Acheson Hugh, cartman 39 Lombardy"
   },
   "end": {
    "leaf": 448,
@@ -620,11 +623,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 445,
   "fitted_leaves": 427,
-  "read_leaves": 193,
+  "read_leaves": 333,
   "segments": [
    {
     "first_leaf": 9,
@@ -656,7 +659,7 @@
     "first_page": 106,
     "last_page": 449,
     "leaves": 344,
-    "read": 162
+    "read": 302
    }
   ],
   "ia_comparison": {
@@ -670,31 +673,31 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "late_names",
     "start_leaf": 2,
-    "end_leaf": 7,
+    "end_leaf": 4,
     "title": {
      "leaf": 2,
      "quote": "ADDITIONAL NAMES.",
      "image": "https://iiif.archive.org/iiif/merceinscitydire00merc$2/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 6,
+    "leaves": 3,
     "residential": true
    },
    {
     "kind": "register",
-    "start_leaf": 8,
+    "start_leaf": 5,
     "end_leaf": 103,
     "title": {
-     "leaf": 8,
-     "quote": "Register Act 82",
-     "image": "https://iiif.archive.org/iiif/merceinscitydire00merc$8/full/!1400,1400/0/default.jpg"
+     "leaf": 5,
+     "quote": "CITY DIRECTORY, NEW-YORK REGISTER, AND ALMANAC,",
+     "image": "https://iiif.archive.org/iiif/merceinscitydire00merc$5/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 94,
+    "leaves": 97,
     "residential": false,
     "pages": {
      "first": {
@@ -760,14 +763,14 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/merceinscitydire00merc_listing.jsonl.gz",
   "sections": [
    {
     "kind": "late_names",
     "start_leaf": 2,
-    "end_leaf": 7
+    "end_leaf": 4
    },
    {
     "kind": "listing",
@@ -775,26 +778,44 @@
     "end_leaf": 448
    }
   ],
-  "kept": 20366,
-  "dropped": 3407,
-  "kept_share": 0.8567,
+  "kept": 20053,
+  "dropped": 3487,
+  "kept_share": 0.8519,
   "kept_by_section": {
-   "late_names": 169,
-   "listing": 20197
+   "late_names": 44,
+   "listing": 20009
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 125,
+  "scoped_lines": 0,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    3,
-   4,
-   5,
-   6,
-   7
+   4
   ]
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/merceinscitydire00merc",
+  "ia_dump": "data/survey_ocr/merceinscitydire00merc_words.ia.jsonl.gz",
+  "tiles": 698,
+  "tiles_answered": 698,
+  "bleed_retry": 1,
+  "loop_truncated": 0,
+  "table_mode": 11,
+  "pages": 349,
+  "lines_runover": 104,
+  "lines_model": 20891,
+  "lines_model-only": 138,
+  "lines_tesseract": 118,
+  "lines_bleed": 32,
+  "leaves_replaced": 349,
+  "layers": {
+   "ia-words (IA OCR)": 349
+  },
+  "dumped": "2026-10-29"
  }
 }

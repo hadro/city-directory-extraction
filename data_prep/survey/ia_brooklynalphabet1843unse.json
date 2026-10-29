@@ -359,34 +359,38 @@
    "publisher_tag": "hearne",
    "publisher_tag_note": "'leslie/hearnes' tagged as its trained partner 'hearne'",
    "year_tag": "1843",
-   "hocr_lines": 11559,
-   "wrap_joins": 379,
-   "candidates": 11180,
+   "hocr_lines": 11422,
+   "wrap_joins": 386,
+   "candidates": 11036,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 10327,
-    "mark_share": 0.0092,
+    "pairs": 10403,
+    "mark_share": 0.0015,
     "mode": 1.25,
-    "mode_pairs": 132,
+    "mode_pairs": 131,
     "trough": 0.75,
-    "trough_pairs": 28,
-    "reason": "runover mode not isolated from the next-entry band"
+    "trough_pairs": 20,
+    "reason": "runover mode not isolated from the next-entry band",
+    "start_cap": null,
+    "run_over_joins": 65
    },
+   "model_runovers": 85,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 6,
-    "leaves": 1
+    "words": 0,
+    "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 9229,
-   "keep_rate": 0.8255,
+   "kept": 9225,
+   "keep_rate": 0.8359,
    "dropped": {
-    "short": 789,
-    "allcaps": 584,
+    "short": 650,
+    "allcaps": 583,
     "banner": 567,
     "bigtype": 8,
     "nonascii": 3
@@ -412,18 +416,18 @@
     213,
     201
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 807138,
+  "words_gz_bytes": 759678,
   "hocr_deleted": true,
   "elapsed_s": 7
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 17,
   "end_leaf": 197,
   "first_letter": "A",
@@ -595,11 +599,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 258,
   "fitted_leaves": 251,
-  "read_leaves": 198,
+  "read_leaves": 230,
   "segments": [
    {
     "first_leaf": 10,
@@ -607,7 +611,7 @@
     "first_page": 6,
     "last_page": 256,
     "leaves": 251,
-    "read": 198
+    "read": 230
    }
   ],
   "ia_comparison": {
@@ -621,8 +625,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -735,8 +739,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/brooklynalphabet1843unse_listing.jsonl.gz",
   "sections": [
    {
@@ -745,11 +749,11 @@
     "end_leaf": 197
    }
   ],
-  "kept": 7394,
+  "kept": 7390,
   "dropped": 1835,
-  "kept_share": 0.8012,
+  "kept_share": 0.8011,
   "kept_by_section": {
-   "listing": 7394
+   "listing": 7390
   }
  },
  "run_set": {
@@ -759,5 +763,25 @@
   "basis": "the book scan: 47% more entry-shaped lines (6,846 against 4,666); the microfilm OCR drops and merges lines, and the pairs pass chose it only because its later frames hold two pages each",
   "decision": "data_prep/survey_runset.json",
   "role": "run"
+ },
+ "reocr": {
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/brooklynalphabet1843unse",
+  "ia_dump": "data/survey_ocr/brooklynalphabet1843unse_words.ia.jsonl.gz",
+  "tiles": 362,
+  "tiles_answered": 362,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 181,
+  "lines_runover": 85,
+  "lines_model": 7950,
+  "lines_tesseract": 8,
+  "lines_model-only": 6,
+  "leaves_replaced": 181,
+  "layers": {
+   "ia-words (IA OCR)": 181
+  },
+  "dumped": "2026-10-29"
  }
 }

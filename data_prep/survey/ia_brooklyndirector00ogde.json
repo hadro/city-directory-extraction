@@ -367,37 +367,41 @@
    "publisher_tag": "ogden",
    "publisher_tag_note": null,
    "year_tag": "1839",
-   "hocr_lines": 13304,
-   "wrap_joins": 1459,
-   "candidates": 11845,
+   "hocr_lines": 15497,
+   "wrap_joins": 1534,
+   "candidates": 13963,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 10345,
-    "mark_share": 0.1457,
+    "pairs": 9838,
+    "mark_share": 0.0882,
     "mode": 1.25,
-    "mode_pairs": 95,
-    "trough": 0.75,
-    "trough_pairs": 141,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "mode_pairs": 74,
+    "trough": 1.0,
+    "trough_pairs": 125,
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": null,
+    "run_over_joins": 193
    },
+   "model_runovers": 585,
+   "cont_dropped_leaves": 2,
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
+    "lines": 66,
+    "leaves": 2
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 8727,
-   "keep_rate": 0.7368,
+   "kept": 9900,
+   "keep_rate": 0.709,
    "dropped": {
-    "short": 1475,
-    "bigtype": 848,
-    "banner": 550,
-    "allcaps": 182,
-    "nonascii": 62,
+    "short": 1512,
+    "bigtype": 1042,
+    "banner": 906,
+    "allcaps": 557,
+    "nonascii": 45,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -410,41 +414,41 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    78,
+    206,
     316,
     324,
-    204,
     306,
-    220,
-    96,
-    38,
+    174,
+    204,
+    104,
+    256,
     1,
-    234
+    194
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "0c1fb38-dirty",
+   "derived": "2026-10-29"
   },
-  "words_gz_bytes": 1042391,
+  "words_gz_bytes": 1103681,
   "hocr_deleted": true,
   "elapsed_s": 8
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "start_leaf": 9,
   "end_leaf": 293,
   "first_letter": "A",
   "last_letter": "Y",
-  "letters_present": "ABCDEFGHJKLMNOPRSTVWY",
-  "missing_letters": "IQUXZ",
-  "voting_density": 0.481,
+  "letters_present": "ABCDEFGHIJKLMNOPQRSTVWY",
+  "missing_letters": "UXZ",
+  "voting_density": 0.744,
   "flags": [],
   "start": {
    "leaf": 9,
    "image": "https://iiif.archive.org/iiif/brooklyndirector00ogde$9/full/!1400,1400/0/default.jpg",
-   "quote": "Abbreviations\u2014h. stands for house, n. for near, c, for corner, op. for"
+   "quote": "Abbot's Dictionary"
   },
   "end": {
    "leaf": 293,
@@ -455,23 +459,14 @@
    {
     "start_leaf": 9,
     "end_leaf": 293,
-    "voting_leaves": 137,
+    "voting_leaves": 212,
     "first_letter": "A",
     "last_letter": "Y",
-    "letters": "ABCDEFGHJKLMNOPRSTVWY",
+    "letters": "ABCDEFGHIJKLMNOPQRSTVWY",
     "is_listing": true
    }
   ],
   "gaps": [
-   {
-    "between": [
-     "A",
-     "B"
-    ],
-    "start_leaf": 14,
-    "end_leaf": 14,
-    "leaves": 1
-   },
    {
     "between": [
      "B",
@@ -479,15 +474,6 @@
     ],
     "start_leaf": 46,
     "end_leaf": 46,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "C",
-     "D"
-    ],
-    "start_leaf": 72,
-    "end_leaf": 72,
     "leaves": 1
    },
    {
@@ -519,17 +505,8 @@
    },
    {
     "between": [
-     "G",
-     "H"
-    ],
-    "start_leaf": 116,
-    "end_leaf": 116,
-    "leaves": 1
-   },
-   {
-    "between": [
      "H",
-     "J"
+     "I"
     ],
     "start_leaf": 136,
     "end_leaf": 136,
@@ -537,11 +514,11 @@
    },
    {
     "between": [
-     "J",
-     "K"
+     "I",
+     "J"
     ],
-    "start_leaf": 144,
-    "end_leaf": 144,
+    "start_leaf": 138,
+    "end_leaf": 138,
     "leaves": 1
    },
    {
@@ -551,15 +528,6 @@
     ],
     "start_leaf": 150,
     "end_leaf": 150,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "L",
-     "M"
-    ],
-    "start_leaf": 162,
-    "end_leaf": 162,
     "leaves": 1
    },
    {
@@ -582,21 +550,21 @@
    },
    {
     "between": [
-     "O",
-     "P"
+     "P",
+     "Q"
     ],
-    "start_leaf": 200,
-    "end_leaf": 200,
+    "start_leaf": 214,
+    "end_leaf": 214,
     "leaves": 1
    },
    {
     "between": [
-     "P",
+     "Q",
      "R"
     ],
-    "start_leaf": 214,
+    "start_leaf": 216,
     "end_leaf": 216,
-    "leaves": 3
+    "leaves": 1
    },
    {
     "between": [
@@ -606,64 +574,28 @@
     "start_leaf": 230,
     "end_leaf": 230,
     "leaves": 1
-   },
-   {
-    "between": [
-     "S",
-     "T"
-    ],
-    "start_leaf": 256,
-    "end_leaf": 256,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "T",
-     "V"
-    ],
-    "start_leaf": 266,
-    "end_leaf": 266,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "V",
-     "W"
-    ],
-    "start_leaf": 272,
-    "end_leaf": 272,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "W",
-     "Y"
-    ],
-    "start_leaf": 292,
-    "end_leaf": 292,
-    "leaves": 1
    }
   ],
   "letter_blocks": {
    "A": [
     9,
-    13,
-    3
+    14,
+    5
    ],
    "B": [
     15,
     45,
-    16
+    21
    ],
    "C": [
     47,
-    71,
-    13
+    72,
+    19
    ],
    "D": [
     73,
     89,
-    9
+    14
    ],
    "E": [
     91,
@@ -673,37 +605,42 @@
    "F": [
     95,
     105,
-    6
+    8
    ],
    "G": [
     107,
-    115,
-    5
+    116,
+    6
    ],
    "H": [
     117,
     135,
-    10
+    17
+   ],
+   "I": [
+    137,
+    137,
+    1
    ],
    "J": [
-    137,
+    139,
     143,
     4
    ],
    "K": [
-    145,
+    144,
     149,
-    3
+    6
    ],
    "L": [
     151,
-    161,
-    6
+    162,
+    12
    ],
    "M": [
     163,
     181,
-    10
+    15
    ],
    "N": [
     193,
@@ -712,38 +649,43 @@
    ],
    "O": [
     197,
-    199,
-    2
+    200,
+    4
    ],
    "P": [
     201,
     213,
-    7
+    9
+   ],
+   "Q": [
+    215,
+    215,
+    1
    ],
    "R": [
     217,
     229,
-    7
+    9
    ],
    "S": [
     231,
-    255,
-    13
+    256,
+    22
    ],
    "T": [
     257,
-    265,
-    5
+    266,
+    10
    ],
    "V": [
     267,
-    271,
-    3
+    272,
+    6
    ],
    "W": [
     273,
-    291,
-    10
+    292,
+    18
    ],
    "Y": [
     293,
@@ -751,7 +693,7 @@
     1
    ]
   },
-  "skipped_votes": 3,
+  "skipped_votes": 16,
   "voted_bounds": [
    9,
    293
@@ -775,8 +717,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "content_leaves": 322,
   "fitted_leaves": 0,
   "read_leaves": 0,
@@ -794,8 +736,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -831,8 +773,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-29",
+  "code_at": "0c1fb38-dirty",
   "file": "data/survey_ocr/brooklyndirector00ogde_listing.jsonl.gz",
   "sections": [
    {
@@ -841,55 +783,33 @@
     "end_leaf": 293
    }
   ],
-  "kept": 7666,
+  "kept": 8839,
   "dropped": 1061,
-  "kept_share": 0.8784,
+  "kept_share": 0.8928,
   "kept_by_section": {
-   "listing": 7666
+   "listing": 8839
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-29",
   "entry_min": 0.15,
-  "scoped_lines": 2396,
+  "scoped_lines": 1523,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
-   10,
    12,
-   14,
-   16,
-   20,
    22,
    24,
    26,
-   28,
-   30,
    32,
-   38,
-   40,
-   42,
-   44,
    46,
-   48,
    52,
-   54,
-   56,
-   58,
    60,
-   62,
    66,
-   68,
    70,
-   72,
-   74,
-   76,
    78,
-   80,
-   82,
    84,
    86,
-   88,
    90,
    92,
    94,
@@ -899,97 +819,42 @@
    102,
    104,
    106,
-   108,
-   110,
    112,
    114,
    116,
    118,
-   120,
    122,
    124,
    126,
-   128,
-   130,
    132,
    134,
    136,
    138,
-   140,
-   142,
-   144,
-   146,
-   148,
    150,
-   152,
-   154,
-   156,
-   158,
-   160,
-   162,
    164,
    166,
    168,
    170,
-   172,
-   174,
    176,
-   178,
    182,
-   184,
-   186,
    188,
-   190,
-   192,
    194,
    196,
-   198,
-   200,
-   202,
-   204,
    206,
-   208,
-   210,
-   212,
-   214,
    216,
    220,
    222,
-   224,
-   226,
-   228,
    230,
    232,
    234,
    236,
-   238,
-   240,
    242,
    244,
-   246,
-   248,
    250,
-   252,
-   254,
-   256,
-   258,
-   260,
-   262,
-   264,
-   266,
    268,
    270,
-   272,
-   274,
-   276,
-   278,
-   280,
-   282,
-   284,
    286,
-   288,
-   290,
-   292
+   288
   ]
  },
  "run_set": {
@@ -1001,5 +866,26 @@
   "role": "run",
   "skip_non_entry_pages": true,
   "skip_reason": "every even leaf 10-292 is a blank verso; on 135 the OCR read the facing page through the paper (2,396 scoped lines)"
+ },
+ "reocr": {
+  "engine": "ia-words (tesseract 5.3.0-3-g9920) + lightonocr-3-1b-greedy-vllm",
+  "root": "data/reocr_tiers/brooklyndirector00ogde",
+  "ia_dump": "data/survey_ocr/brooklyndirector00ogde_words.ia.jsonl.gz",
+  "tiles": 556,
+  "tiles_answered": 506,
+  "bleed_retry": 38,
+  "loop_truncated": 52,
+  "table_mode": 3,
+  "pages": 278,
+  "lines_runover": 599,
+  "lines_model": 7682,
+  "lines_tesseract": 3935,
+  "lines_model-only": 1556,
+  "lines_bleed": 727,
+  "leaves_replaced": 278,
+  "layers": {
+   "ia-words (tesseract 5.3.0-3-g9920)": 278
+  },
+  "dumped": "2026-10-29"
  }
 }

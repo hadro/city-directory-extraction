@@ -81,6 +81,28 @@ section 4, after PIPELINE #31 (the import on one core would take ~9 h). Watch Tr
 `_jp2.tar` frame check has seen one page) and the coverage flags (Bronx 1871, Trow 1863/1876, Trow
 1914 p2).
 
+**Update 2026-10-29: C and D are back** (C assembled to `data/records_books_damaged`, D's 61 volumes
+imported, 6f5ca31; the record is in PIPELINE #27 after "Staged for the 4B 2026-10-24"). Out now:
+**round 11**, `cde-table-reread.tar` (3.9 MB, sha256 6cb34058...2673, code at 0c31a09), runbook
+section "Round 11" on the damaged-tier page (v7): (a) the 41,904 tiles of D that LightOn read as
+tables, re-read with tables banned (slug `lightonocr-3-1b-greedy-vllm-notables`; PIPELINE #32 (b)
+5c); (b) the 14 BPL volumes Pillow 10.4.0 cannot decode, tiled under 12.3.0 (hadro, 2026-10-29: same
+pixels and JPEG bytes where both decode) and read whole under the same slug. Comes back as
+`answers-round11.tar` (= `data/reocr_tiers/answers_first-bpl14/<id>.tar` + the re-read's answer files
+at their own paths) and `logs-round11.tar`. On arrival: untar the outer into scratch, check paths,
+extract; then
+```bash
+python3 data_prep/reocr_books.py import --ids <D's 61> --prefer lightonocr-3-1b-greedy-vllm-notables
+python3 data_prep/reocr_books.py import --ids <the 14 BPL> --slug lightonocr-3-1b-greedy-vllm-notables
+```
+Judge the re-read against this import (commit first, then `facts --against HEAD`), and by
+`eval/line_assembly.py tables --damage` on Trow 1915, 1917 and 1922/23 p1: the invented `, ` (28,494
+/ 24,437 / 12,548) and lost ditto marks (678 / 722 / 1,239) should fall. If it shows a clear gain,
+consider the damaged tier's 6,318 table tiles too (its zips are pruned; hadro: only on a clear gain).
+NYU must NOT prune the first / abbyy8-clean / BPL tiers until round 11 is imported; confirm then.
+Ogden's versos are now non-entry by leaf (eec4bf0). Still to do on the Mac: the tesseract layer for
+`trowsgeneraldire19142trow` and `flushingnewyork189192boyd`, then `import --ids` them again.
+
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an
 empty scratch directory first to look at the paths before anything goes into the repo.

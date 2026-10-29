@@ -4,6 +4,7 @@ Stage book-scan volumes for the LightOn re-OCR over IA's own words: no tesseract
 
     python3 data_prep/reocr_books.py download --ids a,b        # each volume's _jp2.zip, whole
     python3 data_prep/reocr_books.py pages --ids a,b [--workers 6]   # -> data/reocr_books/<id>/
+    python3 data_prep/reocr_books.py pages --ids a,b --failed       # only pages IA failed in part
     python3 data_prep/reocr_books.py tesseract --ids a,b         # -> data/reocr_books_tess/<id>/
     python3 data_prep/reocr_books.py records --tier abbyy8-damaged  # -> data/reocr_books_records/ (Torch)
     python3 data_prep/reocr_books.py coverage --tier abbyy8-damaged   # whose IA OCR failed, page by page
@@ -89,6 +90,32 @@ def page_image(job) -> tuple:
         return ident, leaf, f"error {type(e).__name__}: {e}"[:300]
 
 
+FAILED_SHARE = 0.30     # pages --failed: model-only lines over this share of a page's lines...
+FAILED_MIN = 20         # ...of at least this many
+
+
+def failed_leaves(ident: str) -> list:
+    """Listing leaves where IA's OCR failed in part, read off the imported dump: more than
+    FAILED_SHARE of the page's lines are `model-only` (LightOn read them, the word layer has
+    nothing there, so they carry stand-in boxes). The volume-wide coverage flag misses these: a
+    page that lost one column of two stays near 0.5 (Brooklyn 1909 p1 leaf 901: IA read 7 junk
+    lines of the right column's ~70). Measured 2026-10-29: 56 such pages in the damaged tier, 82 in
+    the first + abbyy8-clean tiers (Trow 1914 p2 21). Non-entry pages are left out (Ogden's
+    show-through versos)."""
+    side = json.loads((HERE / "survey" / f"ia_{ident}.json").read_text(encoding="utf-8"))
+    skip = set((side.get("non_entry_pages") or {}).get("leaves") or [])
+    out = []
+    with gzip.open(OCR / f"{ident}_words.jsonl.gz", "rt", encoding="utf-8") as fh:
+        for line in fh:
+            rec = json.loads(line)
+            src = rec.get("sources") or []
+            if rec["leaf"] in skip or len(src) < FAILED_MIN:
+                continue
+            if sum(s == "model-only" for s in src) > FAILED_SHARE * len(src):
+                out.append(rec["leaf"])
+    return out
+
+
 def write_pages(args) -> int:
     jobs = []
     for ident in args.ids.split(","):
@@ -98,6 +125,11 @@ def write_pages(args) -> int:
         side = json.loads((HERE / "survey" / f"ia_{ident}.json").read_text(encoding="utf-8"))
         engine = ((side.get("catalog_says") or {}).get("ia") or {}).get("ocr") or "IA OCR"
         want = set(rv.pages(ident))
+        if args.failed:
+            want &= set(failed_leaves(ident))
+            if not want:
+                print(f"{ident}: no failed pages", file=sys.stderr)
+                continue
         d = BOOKS / ident
         d.mkdir(parents=True, exist_ok=True)
         n = 0
@@ -434,6 +466,9 @@ def main(argv=None) -> int:
     ap.add_argument("--slug", default="lightonocr-3-1b-greedy-vllm", help="import: the answers' slug")
     ap.add_argument("--prefer", help="import: a second slug a tile takes where it has an answer "
                                      "(the table re-read, PIPELINE #32 (b) 5c: lightonocr-3-1b-greedy-vllm-notables)")
+    ap.add_argument("--failed", action="store_true",
+                    help="pages: only the leaves whose imported dump is over 30%% model-only "
+                         "(failed_leaves); the tesseract layer then covers just those")
     ap.add_argument("--workers", type=int, default=6,
                     help="pages/tesseract: processes; import: volumes dumped at a time")
     ap.add_argument("--self-test", action="store_true")

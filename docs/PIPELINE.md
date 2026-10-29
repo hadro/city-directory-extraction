@@ -1640,6 +1640,24 @@ earlier trough bin on a near-tie), list every volume whose sidecar sits in that 
 whether a re-OCR'd volume, whose model run-overs join on `cont` anyway, should lower its threshold
 at all (#28: model starts share the run-overs' band). A running head should also never take a run-
 over: it is the first line of a leaf, and `join_wraps` joins before the filters that would drop it.
+**NOT done before D's import (2026-10-29), so do it before D's re-import after round 11:** that
+import moved five thresholds -- 1869BPL and 1871BPL 3.0 -> 1.75, 1879BPL 1.25 -> 1.5, Trow 1915
+1.5 -> 3.0, Trow 1917 1.75 -> 3.0 (Trow 1915/1917's joins fell 13%, BPL 1869/1871's rose ~6x
+with `cont`). Each wants the image-read sample above before it stands.
+
+**33. A run-over LightOn wrote as its own bulleted line stays a separate record (found 2026-10-29,
+hadro, browsing).** `micro_IABROOKLYN_0043` leaf 110 (reocr tier): "PAYSON HENRY, Fire Insurance
+agent, office Peck" / "• Slip ferry, h. 163 South 5th" -- the office is at Peck Slip ferry. Two
+records, neither usable, the second named "-Slip". In the dump the second line is `model`, `cont`
+0: LightOn's answer (`..._0110_c0_h0_lightonocr-3-1b-greedy-torch.txt`) writes "• Slip ferry" as a
+new list item. Its indent is 277 px, ~3.6 line heights over the volume's 3.0, so the indent alone
+would join it, but #30's `start_cap` keeps a model start from joining past the volume's run-over
+reach, and `mark_continuations` (the split-entry pass, #28) did not flip it. To find out: which
+guard refused it there (the leading "•"? `entry_shaped` on the ALL-CAPS line above? the leaf's
+first entry?); then count, per re-OCR'd volume, model starts that open with a bullet ("•", "·", a
+lone "-") and do NOT fit the alphabet between their neighbours -- a run-over's first word ("Slip"
+after "PAYSON", before "Peacock") rarely does -- and read a sample against the images. Like the
+ditto bullets (#27 "Dittos"), LightOn's bullet is list markup, not evidence of a new entry.
 
 ## Medium effort, high information
 

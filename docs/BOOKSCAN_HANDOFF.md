@@ -102,7 +102,11 @@ consider the damaged tier's 6,318 table tiles too (its zips are pruned; hadro: o
 NYU must NOT prune the first / abbyy8-clean / BPL tiers until round 11 is imported; confirm then.
 Ogden's versos are now non-entry by leaf (eec4bf0). The tesseract layer is done (f2e86c3): Trow
 1914 vol 2 model-only 64.5% -> 6.0%; Flushing 1891/92's 12.5% is margin ads, not a failed layer.
-Re-importing D after round 11 keeps both (the import uses `data/reocr_books_tess/` wherever it
+**Before D's re-import after round 11, two things** (PIPELINE #32's
+`calibrate_indent` hysteresis, which D's first import skipped and which moved five volumes'
+wrap thresholds; and #33, the bulleted run-over, if it is understood by then). The page-level
+tesseract layer for pages IA failed in part (`reocr_books.py pages --failed`, 2026-10-29) is
+built for D and is picked up by that re-import. Re-importing D after round 11 keeps both (the import uses `data/reocr_books_tess/` wherever it
 exists). The runbook sent to NYU is `hpc/runbooks/round11.md` (068cae3).
 
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have

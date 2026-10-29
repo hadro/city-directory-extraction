@@ -69,6 +69,12 @@ ENTRY_REL = 0.30        # ...or, in a volume whose narrow columns split entries 
                         # share of its median page: Trow 1922/23's five columns median 0.28-0.31
 ENTRY_FLOOR = 0.05      # below this a page is never listing, whatever its volume: an ad reads 0.0,
                         # a page the OCR failed on 0.03-0.08 (Trow 1910 p2 leaf 59, micro 0040 leaf 26)
+# Volumes whose blank backs show the next page through the paper, by leaf parity: every such leaf is
+# non-entry whatever its text says. Ogden's book scan photographed each verso (2026-10-29): IA's
+# OCR left 135 of its 142 even listing leaves under the entry bar, LightOn's only 58, because it
+# reads the reversed print as entries, loops on it, or invents a page ("Table of Contents / 1.
+# Books" on leaf 112). Leaves 64, 90 and 180 checked on the image: all show-through.
+SHOW_THROUGH = {"brooklyndirector00ogde": 0}     # leaf % 2 == this
 # An entry-shaped line, in any era. Needed because a listing page of dittos barely votes a
 # letter: 1906BPL leaf 139 has 351 lines and 12 voters. Ad copy rarely has any of these shapes:
 #  - a residence marker before a number or a street ("h 241 Hull", "r. 12 Pine", "bds 59
@@ -191,8 +197,11 @@ def inventory(args) -> int:
     for ident, rs in sorted(rows.items()):
         shares = sorted(r["entry_share"] for r in rs if not r["blank"])
         median = shares[len(shares) // 2] if shares else 0.0
-        kinds = collections.Counter(page_kind(r, median) for r in rs)
-        bad = [r for r in rs if page_kind(r, median) == "non-entry"]
+        verso = SHOW_THROUGH.get(ident)
+        kind = {r["leaf"]: "non-entry" if verso is not None and r["leaf"] % 2 == verso and not r["blank"]
+                else page_kind(r, median) for r in rs}
+        kinds = collections.Counter(kind.values())
+        bad = [r for r in rs if kind[r["leaf"]] == "non-entry"]
         scoped = sum(r["scoped"] for r in rs)
         lost = sum(r["scoped"] for r in bad)
         total += scoped

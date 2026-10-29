@@ -2408,7 +2408,15 @@ failed, 206 of 489 pages under 0.5), **Flushing 1891/92** (12.5%) and **Ogden** 
 show-through versos are back in scope:** the entry-shape flag held 135 leaves on IA's text and 58 on
 LightOn's, which reads the reversed text, loops on it (90 of its 506 tiles; NYU's 50 EMPTY are
 also versos) or invents ("Table of Contents / 1. Books ..." on leaf 112): 3,548 scoped lines on even
-leaves. Keep Ogden out of any staging until its versos are excluded by leaf.
+leaves. Keep Ogden out of any staging until its versos are excluded by leaf. **Done the same day:**
+Ogden's versos are non-entry by leaf parity (eec4bf0, `survey_adleaves.SHOW_THROUGH`; rectos 1.8%
+model-only, so no tesseract layer). The tesseract layer re-import: **Trow 1914 vol 2** model-only
+64.5% -> 6.0%, scoped 168,717 -> 175,786 (IA's own OCR: 56,076; its twin 1914 p2 187,541).
+**Flushing 1891/92** is unchanged: `better_layer` kept IA's words on all 92 pages, because its
+12.5% model-only are not a failed layer but banner and margin ads LightOn reads and IA's words
+lack ("SEWING MACHINES.", "Easy payments accepted,", and one LightOn note, "Note: The vertical
+text on the right side ..."). 409 of its 3,442 scoped lines are such copy, 36 of them entry-shaped:
+BOOKSCAN_HANDOFF proposal 2 (margin ads), to read in its records after the 4B.
 **Table mode: 41,904 of 198,811 tiles (21%)**, ~50% on Trow 1915 and 1922/23, 42% on 1917, 17-33%
 on BPL 1878-1887. `line_assembly.py tables --damage`: two-entry cells barely above plain tiles' rate
 (1922/23 p1 0.58 a table tile vs 0.39 plain; 1915 0.43 vs 0.36; BPL table tiles below plain), but

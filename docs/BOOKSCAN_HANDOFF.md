@@ -100,8 +100,10 @@ Judge the re-read against this import (commit first, then `facts --against HEAD`
 / 24,437 / 12,548) and lost ditto marks (678 / 722 / 1,239) should fall. If it shows a clear gain,
 consider the damaged tier's 6,318 table tiles too (its zips are pruned; hadro: only on a clear gain).
 NYU must NOT prune the first / abbyy8-clean / BPL tiers until round 11 is imported; confirm then.
-Ogden's versos are now non-entry by leaf (eec4bf0). Still to do on the Mac: the tesseract layer for
-`trowsgeneraldire19142trow` and `flushingnewyork189192boyd`, then `import --ids` them again.
+Ogden's versos are now non-entry by leaf (eec4bf0). The tesseract layer is done (f2e86c3): Trow
+1914 vol 2 model-only 64.5% -> 6.0%; Flushing 1891/92's 12.5% is margin ads, not a failed layer.
+Re-importing D after round 11 keeps both (the import uses `data/reocr_books_tess/` wherever it
+exists). The runbook sent to NYU is `hpc/runbooks/round11.md` (068cae3).
 
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an

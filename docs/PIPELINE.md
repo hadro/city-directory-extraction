@@ -1677,6 +1677,17 @@ first entry?); then count, per re-OCR'd volume, model starts that open with a bu
 lone "-") and do NOT fit the alphabet between their neighbours -- a run-over's first word ("Slip"
 after "PAYSON", before "Peacock") rarely does -- and read a sample against the images. Like the
 ditto bullets (#27 "Dittos"), LightOn's bullet is list markup, not evidence of a new entry.
+**CLOSED 2026-10-29, not fixable by rule.** The dot is PRINTED (or a film speck) and LightOn
+copied it; it is not list markup (`BULLET` in reocr_pair matches only Markdown's "- "). The pass
+never proposed the join: no grammar signal fires ("office Peck" is no ENTRY_TAIL, "• Slip" no
+ENTRY_HEAD), and the dot leaves `name_key` empty, so the alphabet cannot speak either. Sized over
+every re-OCR'd dump: 358 model starts open with a dot glyph (• · ∙ ● ▪ ◦), 209 not fitting the
+alphabet. Read on the page (8 legible of 10): 7 are REAL entries, because Trow prints "•" before an
+advertiser's name ("•Steil Dederick, produce", "•FORD FRANCIS W., city surveyor", "•VALLEAU MFG.
+CO.", "•Berkefeld Filter Co 4 Cedar"); 1 is a speck before a run-over ("•Bklyn"). Joining dot-led
+lines would glue far more than it saves. Two by-products: (1) Trow's "•" is an advertiser mark and
+belongs with assemble_records' `name_mark` (strip it from name_resolved, as `*`); (2) a wider
+first count, which let "," and "." lead, found the Trow firm-entry lost dash recorded under #32.
 
 ## Medium effort, high information
 

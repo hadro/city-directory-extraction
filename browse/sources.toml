@@ -34,6 +34,14 @@ glob = "data/records/*/*.jsonl.gz"
 # get it from whichever of these directories holds the volume's chunks. They do not overlap.
 infer_root = ["data/volumes_run1", "data/volumes_reocr"]
 
+# The 4B over the re-OCR'd abbyy8-damaged tier (job 21014769, 2026-10-29; `root`
+# data/volumes_books_damaged_v4): 39 volumes, 4.68M rows. Its own directory, so run 1's IA-text
+# records of Doggett 1845 stay beside it (the same volume twice; facet `root`). The canary's job-3
+# records (data/records_canary) are superseded by these and are not loaded.
+[[sources]]
+table = "records"
+glob = "data/records_books_damaged/*/*.jsonl.gz"
+
 # What the repo knows about each volume (browse/volumes.py: the catalog, IA's metadata, the
 # survey sidecar) goes in a `volumes` table, one row per volume, rewritten on every build. The
 # `copy` columns of it also go onto every record of the volume, so they can be filtered, sorted

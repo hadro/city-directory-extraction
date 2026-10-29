@@ -377,6 +377,8 @@ def import_volumes(args) -> int:
                "--page-dir", args.page_dir, "--ids", ident]
         if (REPO / args.alt_page_dir / ident).exists():
             cmd += ["--alt-page-dir", args.alt_page_dir]
+        if args.prefer:
+            cmd += ["--prefer", args.prefer]
         return cmd, subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
     failed = []
     with ThreadPoolExecutor(max(1, args.workers)) as pool:
@@ -430,6 +432,8 @@ def main(argv=None) -> int:
     ap.add_argument("--alt-page-dir", default="data/reocr_books_tess",
                     help="import: the tesseract layer, used for a volume that has it")
     ap.add_argument("--slug", default="lightonocr-3-1b-greedy-vllm", help="import: the answers' slug")
+    ap.add_argument("--prefer", help="import: a second slug a tile takes where it has an answer "
+                                     "(the table re-read, PIPELINE #32 (b) 5c: lightonocr-3-1b-greedy-vllm-notables)")
     ap.add_argument("--workers", type=int, default=6,
                     help="pages/tesseract: processes; import: volumes dumped at a time")
     ap.add_argument("--self-test", action="store_true")

@@ -1238,11 +1238,13 @@ def dump(args) -> int:
             answers = {}
             for name in tiles:
                 base = root / vol / f"{stem}_{name}"
-                lines = model_lines(base, args.slug, False)
-                meta_f = base.with_name(f"{base.name}_{args.slug}.meta.json")
+                slug = tile_slug(base, args.slug, getattr(args, "prefer", None))
+                lines = model_lines(base, slug, False)
+                meta_f = base.with_name(f"{base.name}_{slug}.meta.json")
                 meta = json.loads(meta_f.read_text(encoding="utf-8")) if meta_f.exists() else {}
                 answers[name] = None if lines is None else (lines, bool(meta.get("bleed_retry")))
                 stats["tiles"] += 1
+                stats["tiles_preferred"] += slug != args.slug
                 stats["tiles_answered"] += lines is not None
                 stats["bleed_retry"] += bool(meta.get("bleed_retry"))
                 stats["loop_truncated"] += bool(meta.get("loop_truncated"))
@@ -1276,7 +1278,8 @@ def dump(args) -> int:
                     lines, sources, cont, size, layer = replaced[r["leaf"]]
                     r.update(lines=lines, sources=sources, cont=cont, page_size=size,
                              chars=sum(len(w[5]) for ws in lines for w in ws),
-                             ocr=f"reocr: {layer} + {args.slug}")
+                             ocr=f"reocr: {layer} + {args.slug}"
+                                 + (f" / {args.prefer}" if getattr(args, "prefer", None) else ""))
                     stats["leaves_replaced"] += 1
                 out.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
         if args.out_dir is None and src.name.endswith("_words.jsonl.gz"):
@@ -1285,7 +1288,8 @@ def dump(args) -> int:
         if args.out_dir is None:
             side = HERE / "survey" / f"ia_{vol}.json"
             doc = json.loads(side.read_text(encoding="utf-8"))
-            doc["reocr"] = {"engine": f"{' / '.join(sorted(layers))} + {args.slug}",
+            doc["reocr"] = {"engine": f"{' / '.join(sorted(layers))} + {args.slug}"
+                                      + (f" / {args.prefer}" if getattr(args, "prefer", None) else ""),
                             "root": str(root.relative_to(REPO)),
                             "ia_dump": f"data/survey_ocr/{vol}_words.ia.jsonl.gz", **dict(stats),
                             "layers": dict(layers),
@@ -1306,6 +1310,7 @@ def dump(args) -> int:
         warn = looped > LOOP_LOOK * n or table > TABLE_LOOK * n
         print(f"    looped {looped} ({stats['bleed_retry']} bleed-retried, {stats['loop_truncated']} "
               f"truncated), table mode {table} of {n} tiles"
+              + (f", {stats['tiles_preferred']} read as {args.prefer}" if getattr(args, "prefer", None) else "")
               + ("  <- look at this volume's pages" if warn else ""), file=sys.stderr)
     return 0
 
@@ -1443,6 +1448,16 @@ def runner():
         _RUNNER = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(_RUNNER)
     return _RUNNER
+
+
+def tile_slug(path_stem: Path, slug: str, prefer: str | None) -> str:
+    """Whose answer a tile takes: `prefer`'s where it has a finished one (its .txt), else `slug`'s.
+    The table re-read (PIPELINE #32 (b) 5c, 2026-10-29) answers only the tiles LightOn first read
+    as a table, under `-vllm-notables`; every other tile keeps its first answer. An EMPTY re-read
+    (meta, no .txt) falls back to the first answer rather than to the layer's words."""
+    if prefer and path_stem.with_name(f"{path_stem.name}_{prefer}.txt").exists():
+        return prefer
+    return slug
 
 
 def model_lines(path_stem: Path, slug: str, raw: bool):
@@ -1982,6 +1997,8 @@ def main(argv=None) -> int:
     ap.add_argument("--root", default="data/reocr_screen", help="screen/dump/joins: the staged half tiles")
     ap.add_argument("--ids", help="dump/joins: only these volumes")
     ap.add_argument("--out-dir", help="dump: write here instead (a dry run: no swap, no sidecar)")
+    ap.add_argument("--prefer", help="dump: a second slug whose answer a tile takes where it has one "
+                                     "(the table re-read: lightonocr-3-1b-greedy-vllm-notables)")
     ap.add_argument("--page-dir", default="data/reocr",
                     help="screen/dump: the pages' tesseract records, <dir>/<id>/<id>_<leaf>.json")
     ap.add_argument("--alt-page-dir", help="dump: a second word layer for the same pages (a book "

@@ -42,14 +42,20 @@ BANNED = ["|", "<table"]
 
 def main() -> int:
     import vllm
-    plain = vllm.SamplingParams
+    from vllm.sampling_params import SamplingParams as plain
 
-    def banned(*args, **kw):
-        kw.setdefault("bad_words", BANNED)
-        return plain(*args, **kw)
+    # A subclass, not a function (NYU, jobs 21014768 and 21114786, 2026-10-27): vLLM evaluates
+    # `SamplingParams | PoolingParams` on import and its warm-up calls
+    # SamplingParams.for_sampler_warmup(), and a function supports neither. Only the default of
+    # bad_words changes; an explicit one is left alone, and clone() keeps it.
+    class Banned(plain):
+        def __post_init__(self):
+            if not self.bad_words:
+                self.bad_words = list(BANNED)
+            super().__post_init__()
 
     # lightonocr_vllm.main imports SamplingParams from vllm when it runs, so it gets this one
-    vllm.SamplingParams = banned
+    vllm.SamplingParams = Banned
     print(f"table output banned: bad_words={BANNED}", flush=True)
     import lightonocr_vllm
     return lightonocr_vllm.main()

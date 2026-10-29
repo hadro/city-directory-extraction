@@ -22,6 +22,12 @@
 #     sbatch --account=$SLURM_ACCOUNT --export=ALL,VOLS=data/reocr_books_records/volumes_abbyy8-damaged.tsv \
 #         --array=0-<N-1> hpc/42_books_tiles.sbatch
 #
+# PILLOW=12.3.0 (with --export) runs it under that Pillow instead of the pinned 10.4.0, for the
+# 14 BPL volumes whose JPEG 2000 pages 10.4.0's openjpeg 2.5.2 cannot decode (802 of 12,908 pages;
+# NYU job 21116115). Where both decode, 10.4.0 and 12.3.0 give the same pixels and the same JPEG
+# bytes (checked on 1866BPL, 2026-10-29), so a tile cut either way is the same tile. Cache it once
+# on a login node:  $PROJECT/bin/uv run --python 3.12 --no-project --with pillow==12.3.0 --with numpy==2.0.2 \
+#                       python hpc/books_tiles.py --self-test
 # Writes data/reocr_tiers/<id>/ (tiles, boxes.json, columns.json, STAGED). Resumable: a volume
 # with STAGED is skipped, so re-submitting the same --array redoes only what is missing. A task
 # whose archive is not yet complete stops at once and says so; re-submit it after the download.
@@ -47,5 +53,11 @@ A="data/reocr_zips/$ARCHIVE"
 got=$( [ -f "$A" ] && wc -c < "$A" | tr -d ' ' || echo 0 )
 [ "$got" = "$BYTES" ] || { echo "$A: $got of $BYTES bytes -- not downloaded yet (hpc/41_books_download.sh)" >&2; exit 1; }
 
-"$UV" run hpc/books_tiles.py "$IDENT" --workers "${SLURM_CPUS_PER_TASK:-8}"
+if [ -n "${PILLOW:-}" ]; then
+    # `uv run python <script>` ignores the script's inline pins, so these replace them
+    "$UV" run --python 3.12 --no-project --with "pillow==$PILLOW" --with numpy==2.0.2 \
+        python hpc/books_tiles.py "$IDENT" --workers "${SLURM_CPUS_PER_TASK:-8}"
+else
+    "$UV" run hpc/books_tiles.py "$IDENT" --workers "${SLURM_CPUS_PER_TASK:-8}"
+fi
 echo "=== done $(date) ==="

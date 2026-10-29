@@ -5,6 +5,7 @@ Standard library only; run on a login node while or after hpc/39_lightonocr.sbat
 
     python3 hpc/books_pack.py data/reocr_books_records/volumes_abbyy8-damaged.tsv
     python3 hpc/books_pack.py <TSV> --prune      # ...and delete the tiles of volumes packed before
+    python3 hpc/books_pack.py <TSV> --slug lightonocr-3-1b-greedy-vllm-notables   # volumes read with tables banned
 
 A volume is finished when every tile has its .meta.json (a tile LightOn left EMPTY has a meta and
 no .txt, and counts as finished: the import keeps IA's words there). Its tar,
@@ -29,6 +30,8 @@ def main(argv=None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("vols", help="the volumes TSV (data_prep/reocr_books.py records)")
     ap.add_argument("--prune", action="store_true", help="delete the tiles of volumes packed before")
+    ap.add_argument("--slug", default=SLUG, help="the answers to pack (a volume is finished when each "
+                                                 "tile has this slug's .meta.json)")
     args = ap.parse_args(argv)
     vols = Path(args.vols)
     label = vols.stem.removeprefix("volumes_")
@@ -47,7 +50,7 @@ def main(argv=None) -> int:
         if not (root / "STAGED").exists():
             counts["not cut"] += 1
             continue
-        tiles, left = tiles_of(ident)
+        tiles, left = tiles_of(ident, args.slug)
         if left:
             counts["reading"] += 1
             print(f"{ident:32s} {len(tiles) - len(left):6,} of {len(tiles):6,} tiles answered")
@@ -57,7 +60,7 @@ def main(argv=None) -> int:
             for name in ("boxes.json", "columns.json", "STAGED"):
                 if (root / name).exists():
                     tf.add(root / name, arcname=str((root / name).relative_to(REPO)))
-            for f in sorted((root / ident).glob(f"*_{SLUG}.*")):
+            for f in sorted((root / ident).glob(f"*_{args.slug}.*")):
                 tf.add(f, arcname=str(f.relative_to(REPO)))
         tmp.rename(tar)
         counts["packed now"] += 1

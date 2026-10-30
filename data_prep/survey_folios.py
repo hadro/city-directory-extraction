@@ -146,7 +146,8 @@ def load(ident: str):
 
 
 def fit(leaves: list, cands: dict) -> dict:
-    """-> {leaf: (page, "read"|"inferred")} for every leaf inside a supported segment."""
+    """-> {leaf: (page, "read"|"repaired"|"inferred")} for every leaf inside a supported segment;
+    `repaired`: the margin's number with a dropped leading digit put back (repair_leading)."""
     n = len(leaves)
     props = collections.Counter(v - i for i, leaf in enumerate(leaves) for v in cands[leaf])
     states = [o for o, k in props.items() if k >= MIN_PROPOSALS]
@@ -181,7 +182,7 @@ def fit(leaves: list, cands: dict) -> dict:
     path.reverse()
 
     # segments; drop those read on fewer than MIN_SUPPORT leaves
-    out, i = {}, 0
+    segs, i = [], 0
     while i < n:
         j = i
         while j + 1 < n and path[j + 1] == path[i]:
@@ -195,10 +196,57 @@ def fit(leaves: list, cands: dict) -> dict:
             # which is the error survey_pagenumbers.py retracted from the CSV. Between two reads
             # a leaf is `inferred`; outside them it has no page.
             if len(reads) >= MIN_SUPPORT:
-                for k in range(reads[0], reads[-1] + 1):
-                    out[leaves[k]] = (k + o, "read" if k in reads else "inferred")
+                segs.append([o, reads, 0])
         i = j + 1
+    repair_leading(segs)
+    out = {}
+    for o, reads, add in segs:
+        for k in range(reads[0], reads[-1] + 1):
+            out[leaves[k]] = (k + o + add, ("repaired" if add else "read") if k in reads else "inferred")
     return out
+
+
+LEAD_STEPS = (100, 1000)  # what a dropped leading digit is worth: a hundreds or a thousands digit
+LEAD_SLACK = 10           # pages the continuation may be off by: unnumbered plates between runs
+                          # (Brooklyn 1909 p1: 6 between its pages 134 and 135)
+LEAD_MIN_READS = 5        # reads a segment needs to be repaired...
+ANCHOR_MIN_READS = 10     # ...and to be what the next one is measured from
+
+
+def repair_leading(segs: list) -> None:
+    """Put back folios' dropped LEADING digit, in place: [offset, read indices, added] per segment.
+
+    ABBYY-8 drops the hundreds digit of whole runs of folios, and each run reads as a sequence of
+    its own: Brooklyn 1909 p1 fitted 5-99, 0-99, 202-235, 36-96, 297-321, 22-94, 0-90, 491-582 where
+    the book runs on (leaf 901 prints 445 and was given 45; PIPELINE #32, hadro, 2026-10-29). A
+    segment whose numbers continue the last trusted segment, once 100 or 1000 x m is added, within
+    LEAD_SLACK pages, is that run: its reads become `repaired`. Short segments (a few junk reads)
+    are neither repaired nor trusted as the anchor. A real restart (a second alphabet, a new part
+    numbered from 1) can look the same, so a run opening on 1-9 is left alone (below). Checked
+    over the corpus against IA's read numbers and the page images (2026-10-29)."""
+    anchor = last = None
+    for seg in segs:
+        o, reads, _ = seg
+        # a run opening on 1-9 may be a restart: 1856BPL and 1863BPL number their street guides
+        # from 1 right where the listing ended near a hundred (leaf 587 "3", leaf 496 "2"), and the
+        # numbers fit a dropped digit exactly. A run that lost its hundreds digit at the boundary
+        # opens on 0 ("00"), a number no page prints
+        restart = 1 <= reads[0] + o <= 9
+        # nor a run that continues the segment just before it as it reads: 1875BPL's street
+        # directory runs 4-16 then 18-38 (leaf 1164 prints 19), and measured from the section
+        # before it (42-96) the second run "lacked" 100
+        follows = last is not None and abs(last - o) <= LEAD_SLACK
+        if anchor is not None and len(reads) >= LEAD_MIN_READS and not restart and not follows:
+            diff = anchor - o            # what this segment lacks to continue the anchor's offset
+            fits = sorted({m for step in LEAD_STEPS for m in [round(diff / step) * step]
+                           if m > 0 and abs(diff - m) <= LEAD_SLACK
+                           and max(k + o for k in reads) < step})
+            if len(fits) == 1:
+                seg[2] = fits[0]
+        if len(reads) >= ANCHOR_MIN_READS:
+            anchor = o + seg[2]
+        if len(reads) >= LEAD_MIN_READS:
+            last = o + seg[2]
 
 
 def segments(folios: dict) -> list:
@@ -210,10 +258,10 @@ def segments(folios: dict) -> list:
             s = segs[-1]
             s["last_leaf"], s["last_page"] = leaf, page
             s["leaves"] += 1
-            s["read"] += att == "read"
+            s["read"] += att in ("read", "repaired")
         else:
             segs.append({"first_leaf": leaf, "last_leaf": leaf, "first_page": page,
-                         "last_page": page, "leaves": 1, "read": int(att == "read")})
+                         "last_page": page, "leaves": 1, "read": int(att in ("read", "repaired"))})
     return segs
 
 

@@ -589,10 +589,10 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "code_at": "2e12fad-dirty",
   "content_leaves": 1113,
   "fitted_leaves": 1060,
-  "read_leaves": 769,
+  "read_leaves": 618,
   "segments": [
    {
     "first_leaf": 8,
@@ -604,27 +604,27 @@
    },
    {
     "first_leaf": 22,
-    "last_leaf": 103,
-    "first_page": 22,
-    "last_page": 99,
-    "leaves": 78,
-    "read": 77
-   },
-   {
-    "first_leaf": 104,
     "last_leaf": 156,
-    "first_page": 0,
-    "last_page": 52,
-    "leaves": 53,
-    "read": 44
+    "first_page": 22,
+    "last_page": 152,
+    "leaves": 131,
+    "read": 121
    },
    {
     "first_leaf": 160,
+    "last_leaf": 192,
+    "first_page": 154,
+    "last_page": 186,
+    "leaves": 33,
+    "read": 22
+   },
+   {
+    "first_leaf": 195,
     "last_leaf": 198,
-    "first_page": 54,
+    "first_page": 87,
     "last_page": 90,
-    "leaves": 37,
-    "read": 26
+    "leaves": 4,
+    "read": 4
    },
    {
     "first_leaf": 199,
@@ -660,27 +660,11 @@
    },
    {
     "first_leaf": 447,
-    "last_leaf": 463,
-    "first_page": 31,
-    "last_page": 47,
-    "leaves": 17,
-    "read": 13
-   },
-   {
-    "first_leaf": 464,
-    "last_leaf": 658,
-    "first_page": 448,
-    "last_page": 642,
-    "leaves": 195,
-    "read": 127
-   },
-   {
-    "first_leaf": 659,
     "last_leaf": 673,
-    "first_page": 43,
-    "last_page": 57,
-    "leaves": 15,
-    "read": 7
+    "first_page": 431,
+    "last_page": 657,
+    "leaves": 227,
+    "read": 147
    },
    {
     "first_leaf": 676,
@@ -693,26 +677,18 @@
    {
     "first_leaf": 716,
     "last_leaf": 755,
-    "first_page": 0,
-    "last_page": 39,
+    "first_page": 700,
+    "last_page": 739,
     "leaves": 40,
     "read": 24
    },
    {
     "first_leaf": 759,
-    "last_leaf": 816,
-    "first_page": 41,
-    "last_page": 98,
-    "leaves": 58,
-    "read": 41
-   },
-   {
-    "first_leaf": 817,
     "last_leaf": 980,
-    "first_page": 799,
+    "first_page": 741,
     "last_page": 960,
-    "leaves": 162,
-    "read": 107
+    "leaves": 220,
+    "read": 148
    },
    {
     "first_leaf": 985,
@@ -734,13 +710,11 @@
   "ia_comparison": {
    "ia_read_leaves": 385,
    "both": 379,
-   "agree": 280,
-   "agree_rate": 0.739,
+   "agree": 375,
+   "agree_rate": 0.989,
    "ia_page_equals_leaf": 0.0
   },
-  "flags": [
-   "ia-disagrees"
-  ]
+  "flags": []
  },
  "sections": {
   "method": "title-pages",

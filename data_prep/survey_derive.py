@@ -262,6 +262,8 @@ def pages(v: dict) -> tuple[dict, dict]:
         page, att = f[leaf]
         ia_page = ia.get(leaf)
         why = doubts(key, leaf, page)
+        if att == "repaired":
+            why.append("leading digit put back from the sequence (survey_folios.repair_leading)")
         if att == "inferred" or any(w.startswith(("sequence-break", "page ")) for w in why):
             level = "low"
         elif weak_bounds or why or (ia_page is not None and ia_page != page):

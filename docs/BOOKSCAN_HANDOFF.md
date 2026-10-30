@@ -114,9 +114,16 @@ re-imported with the re-read preferred, the 14 BPL volumes imported for the firs
 bounds moved; two-entry cells on Trow 1915/1917/1922-23 fell 39-43%. Banning tables pushes 0.43% of
 tiles into a `<figure>` description (and 0.27% of ordinary first reads already were): the import now
 treats such an answer as no reading (`reocr_pair.figure_only`). 1875BPL's threshold move to 3.0 was
-read on the page and pinned. **Next, in this order:** (1) tell NYU they may prune the first,
-abbyy8-clean and BPL tiers and delete their zips, keeping every `answers_*` tar; (2) round 12: the
-damaged tier's 6,318 table tiles, same re-read (its zips need re-downloading); (3) when it lands,
+read on the page and pinned. **Next, in this order:** (1)+(2) STAGED 2026-10-30, for hadro to
+send: **round 12**, `hpc/runbooks/round12.md` + runbook page v8 section "Round 12", package
+`cde-round12.tar` (0.7 MB, sha256 5dd1c569...9eac7: only the shard lists, 6,318 tiles in 4 tasks,
+built by `books_shards.py volumes_abbyy8-damaged.tsv --slug ...-notables --tables`). Step 1 tells
+NYU to prune the first, abbyy8-clean and BPL tiers and delete their zips (keep every `answers_*`
+tar); steps 2-5 re-download the damaged tier's 35 zips, re-cut (STAGED moved aside; boxes.json and
+columns.json must compare equal to the saved copies before reading), re-read with tables banned,
+and send back `answers-round12.tar` (the re-read's answer files at their own paths). On arrival:
+check paths, extract, `reocr_books.py import --tier abbyy8-damaged --prefer
+lightonocr-3-1b-greedy-vllm-notables` (save the before dumps first; commit first); (3) when it lands,
 re-import the damaged tier once (re-read + the figure fix) and send a DELTA 4B job, only the lines
 with no prediction in `data/volumes_books_damaged_v4` (~1% of its 4.68M lines by D's measure; the
 delta script is not written yet, see PIPELINE #27 "What a re-import would cost the 4B"); the canary

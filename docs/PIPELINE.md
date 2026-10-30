@@ -1658,8 +1658,15 @@ onto the page's first entry). All six are in `survey_harvest.WRAP_PINS` with tha
 on the trough bin), and `derive` prints `!!` for any volume whose threshold moves. The four D
 volumes re-derived under the pins: Trow 1915 joins 270,985 -> 348,073 (scoped 1,068,146 ->
 1,034,236), 1917 315,346 -> 397,184, 1869BPL 21,316 -> 19,453, 1871BPL 24,245 -> 21,394.
-Found on the way, not fixed: (1) a page's running head is joined onto its first entry whenever
-the threshold is low enough (1879BPL at 1.25); (2) Trow's firm entries under a surname print
+Found on the way: (1) a page's running head is joined onto its first entry whenever the threshold
+is low enough (1879BPL at 1.25) -- **DONE 2026-10-29 (2e12fad)**, `join_wraps` refuses a run-over to
+a page's first line when it is RUNNING_HEAD-shaped; at current thresholds it removes 25 joins over
+eight volumes, all ad banners joined to ad fragments, so it is a safety net. And the browsing
+report of the same day, a printed page of 45 for a page printing 445 (Brooklyn 1909 p1 leaf 901):
+**DONE (427d31b)**, `survey_folios.repair_leading` puts back a dropped leading digit from the
+sequence (1,970 leaves in 31 volumes, 198 of 203 agree with IA's read numbers, three wrong repairs
+read on the page and guarded against: street guides that restart at 1); `printed_page_how`
+gains `repaired`; (2) Trow's firm entries under a surname print
 "—, Goldfarb & Metzger" (= Blumner, Goldfarb & Metzger), and where the dash is lost the line
 opens ", " -- 7,930 such starts, 200-330 a Trow part, each naming the firm without its surname:
 a #32 (g) lost-dash case for the comma form. **(2) DONE 2026-10-29 (6e2621c)**: `dittos` writes the

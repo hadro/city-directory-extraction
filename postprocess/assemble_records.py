@@ -23,7 +23,9 @@ EVERY ROW CARRIES
                         182 of 184 volumes; Trow 1915 and 1917 OCR'd a cropped, turned page, and
                         data_prep/iiif_frame.py maps their boxes onto the camera image
     printed_page        the folio the survey's margin fit gives the leaf, and printed_page_how:
-                        `read` off its margin, or `inferred` from the sequence around it
+                        `read` off its margin, `repaired` (the margin's number with a leading digit
+                        the OCR dropped put back from the sequence: survey_folios.repair_leading),
+                        or `inferred` from the sequence around it
     section             the residential run the line came from (`listing`, `late_names`, ...)
     raw_line            what the model read, verbatim
     the 8 fields        what the model wrote, verbatim: the panel measures exactly this, so it

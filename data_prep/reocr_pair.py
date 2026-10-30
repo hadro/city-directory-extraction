@@ -527,6 +527,7 @@ DASH_W = 0.15           # a dash token standing alone is evidence if at least th
 DASH_FLAT = 1.5         # page's median word height wide and this many times wider than tall
 LONE_LETTER = re.compile(r"^[A-Z]\.?$")      # a section's letter ("D"), never an entry
 AMPERSAND = re.compile(r"^&\s+\S")            # "& Oest grocers": a firm under the surname above
+FIRM_COMMA = re.compile(r"^\s*,\s*[A-Z]")       # ", Goldfarb & Metzger": the same, Trow's "—," form
 QUOTE_MARK = re.compile(r"^(?:[\"“”„«»]|''|,,)")  # a printed `"` ditto as tesseract reads it
 QUOTE_ONLY = re.compile(r"^(?:[\"“”„«»]+|''|,,)$")   # ...as a token of its own
 QUOTE_DITTO = re.compile(r"^\s*[\"“”„]\s+[A-Z]")      # LightOn's own `" Chas P r10 W43d`
@@ -672,6 +673,16 @@ def dittos(rows: list, median_h: float = 0.0, marks: frozenset = frozenset()) ->
         k = name_key(r["text"], r.get("mark"))
         r["ditto"] = r["ambiguous"] = False
         body = r["text"][2:] if r.get("mark") and r["text"].startswith("E ") else r["text"]
+        if FIRM_COMMA.match(body) and (dash_page or quote_page):
+            # A firm under the surname above, which Trow prints "—, Goldfarb & Metzger furs 47 E9th"
+            # (Blumner, Goldfarb & Metzger; `",` in 1917). LightOn reads it without the dash, and so
+            # does the layer, which was respelled from LightOn: 7,930 starts open ", " in the
+            # re-OCR'd Trow parts (PIPELINE #32, 2026-10-29). No evidence is asked for, unlike "&":
+            # a printed line opens on a comma no other way. Written back as printed, no space
+            r["ditto"] = True
+            r["text"] = (f"E {glyph}{body.lstrip()}" if body is not r["text"] else f"{glyph}{body.lstrip()}")
+            prev = (k, True)
+            continue
         if AMPERSAND.match(body):
             # A firm under the surname above, which 1912 prints "— & Oest grocers 1508 Bway" and
             # LightOn reads without its dash. On evidence the dash goes back; left bare, the

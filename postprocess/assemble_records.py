@@ -102,6 +102,9 @@ from volume_run_report import layout_roles  # noqa: E402
 SIDECARS = REPO / "data_prep" / "survey"
 OCR = REPO / "data" / "survey_ocr"
 IIIF = "https://iiif.archive.org/iiif"
+FIRM_COMMA = re.compile(r"^\s*,\s*[A-Z]")      # a firm line whose ditto was lost ("—, Goldfarb & Metzger")
+FIRM_LEAD = re.compile(r"^[\s,\-—\"“”«»]+")     # what the model may keep of it in `name`
+ADVERTISER_MARKS = ("•",)                         # Trow's mark before an advertiser's name
 CSV_COLUMNS = (["record_id", "volume", "leaf", "printed_page", "printed_page_how", "section",
                 "canvas", "xywh", "raw_line"] + FIELDS +
                ["name_resolved", "address_resolved", "address_ditto", "home_address_resolved",
@@ -294,12 +297,24 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
     # the surname carry over the whole volume, in reading order
     seq = [(ln["context"]["leaf"], ln.get("raw_line") or "") for ln in lines]
     glued = tuple(m for m, d in classify_glued_marks(seq).items() if d["verdict"] == "DITTO")
+    # A firm under the surname above prints "—, Goldfarb & Metzger" (Blumner, Goldfarb & Metzger;
+    # `",` in Trow 1917), and the re-OCR loses the dash: 7,930 lines open ", " in the re-OCR'd
+    # Trow parts (PIPELINE #32 (g)). A printed line cannot otherwise open on a comma, so in a
+    # volume that dittos, the volume's own mark goes back in front for the carry
+    firm = {i for i, (_l, t) in enumerate(seq) if FIRM_COMMA.match(t)} if glued else set()
+    for i in firm:
+        seq[i] = (seq[i][0], glued[0] + seq[i][1].lstrip())
     # the dropped surname headers put back, and only lines that can be a surname setting it
     # (resolve_dittos.can_set_carry); measured in results/carry_rules.py
     heads = dropped_headers(ident, lines)
     # leading markers, per volume, by what follows them (resolve_dittos.classify_lead_marks)
     mark_verdicts = classify_lead_marks(seq) if lead_marks else {}
     markers = tuple(m for m, d in mark_verdicts.items() if d["verdict"] == "MARKER")
+    if lead_marks:
+        # Trow prints "•" before an advertiser's name ("•FORD FRANCIS W., city surveyor", "•Berkefeld
+        # Filter Co"; PIPELINE #33, read on the page 2026-10-29): a marker wherever it opens a line,
+        # though a handful a volume never reaches classify_lead_marks' min_n
+        markers += tuple(m for m in ADVERTISER_MARKS if m not in markers)
     east = "E" in markers                        # this volume marks Eastern District residents
     carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True, markers=markers))
     addresses = list(resolve_address_run(rec.get("address") for _ln, rec in pairs))
@@ -312,7 +327,12 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
         leaf = ctx.get("leaf")
         if cr["status"] == "not_ditto" and cr["resolved"]:
             last_surname = rids[i]
-        if cr["status"] == "resolved":
+        if cr["status"] == "resolved" and i in firm:
+            # the firm's name as printed: "Blumner, Goldfarb & Metzger"
+            given = FIRM_LEAD.sub("", rec.get("name") or "")
+            name_resolved = f"{cr['resolved']}, {given}".strip(", ")
+            source = None if cr.get("header") else last_surname
+        elif cr["status"] == "resolved":
             given = strip_lead(rec.get("name"), cr["lead"])
             name_resolved = f"{cr['resolved']} {given}".strip()
             source = None if cr.get("header") else last_surname
@@ -365,7 +385,8 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
                   "glued_marks": list(glued),
                   "headers_placed": len(heads),
                   "from_header": sum(1 for c in carry if c.get("header")),
-                  "lead_marks": {m: mark_verdicts[m]["n"] for m in markers},
+                  "lead_marks": {m: (mark_verdicts.get(m) or {}).get("n") or sum(1 for c in carry if c.get("mark") == m)
+                                for m in markers if m in mark_verdicts or any(c.get("mark") == m for c in carry)},
                   "marked_lines": sum(1 for c in carry if c.get("mark")),
                   "district_eastern": sum(1 for r in rows if r["district"] == "Eastern"),
                   "address_slots": sum(1 for _a, st in addresses if st.startswith("resolved")),

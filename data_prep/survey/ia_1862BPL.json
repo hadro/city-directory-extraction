@@ -337,23 +337,23 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1862",
-   "hocr_lines": 84683,
-   "wrap_joins": 15107,
-   "candidates": 69576,
+   "hocr_lines": 84745,
+   "wrap_joins": 15102,
+   "candidates": 69643,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 68843,
-    "mark_share": 0.0739,
+    "pairs": 68840,
+    "mark_share": 0.0738,
     "mode": 2.0,
-    "mode_pairs": 7318,
+    "mode_pairs": 7317,
     "trough": 1.75,
     "trough_pairs": 110,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": 5.77,
-    "run_over_joins": 14244
+    "run_over_joins": 14240
    },
-   "model_runovers": 14328,
+   "model_runovers": 14326,
    "cont_dropped_leaves": 3,
    "column_splits": {
     "lines": 96,
@@ -364,12 +364,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 59807,
-   "keep_rate": 0.8596,
+   "kept": 59849,
+   "keep_rate": 0.8594,
    "dropped": {
-    "short": 3549,
-    "nonascii": 3147,
-    "banner": 2213,
+    "short": 3550,
+    "nonascii": 3145,
+    "banner": 2239,
     "allcaps": 829,
     "bigtype": 31
    },
@@ -384,28 +384,28 @@
    },
    "top_ad_leaves": [
     606,
-    437,
     419,
+    236,
     2,
     598,
+    437,
     577,
     579,
     567,
-    562,
-    576
+    562
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 4810255,
+  "words_gz_bytes": 4808537,
   "hocr_deleted": true,
   "elapsed_s": 42
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 5,
   "end_leaf": 508,
   "first_letter": "A",
@@ -417,7 +417,7 @@
   "start": {
    "leaf": 5,
    "image": "https://iiif.archive.org/iiif/1862BPL$5/full/!1400,1400/0/default.jpg",
-   "quote": "Abbott James, clerk, h. 471 Columbia Abbott John, clerk, h. 317 Gold Abbott M liquors, 12 Fulton, N. Y. h. 4 Lafayette a"
+   "quote": "Abbott James, clerk, h. 471 Columbia"
   },
   "end": {
    "leaf": 508,
@@ -615,8 +615,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "2e12fad-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 607,
   "fitted_leaves": 565,
   "read_leaves": 343,
@@ -737,8 +737,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -902,8 +902,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1862BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -917,19 +917,19 @@
     "end_leaf": 510
    }
   ],
-  "kept": 51382,
+  "kept": 51424,
   "dropped": 8425,
-  "kept_share": 0.8591,
+  "kept_share": 0.8592,
   "kept_by_section": {
-   "listing": 51261,
+   "listing": 51303,
    "late_names": 121
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 238,
+  "scoped_lines": 268,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    21,
@@ -950,23 +950,25 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/1862BPL",
   "ia_dump": "data/survey_ocr/1862BPL_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 1978,
+  "tiles_preferred": 37,
   "tiles_answered": 1978,
   "bleed_retry": 0,
   "loop_truncated": 0,
-  "table_mode": 37,
+  "table_mode": 0,
   "pages": 502,
-  "lines_runover": 14401,
-  "lines_model": 67443,
-  "lines_model-only": 354,
-  "lines_tesseract": 177,
+  "lines_runover": 14399,
+  "lines_model": 67482,
+  "lines_tesseract": 148,
+  "lines_model-only": 406,
   "leaves_replaced": 502,
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 502
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

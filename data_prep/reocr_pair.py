@@ -1250,7 +1250,9 @@ def dump(args) -> int:
             for name in tiles:
                 base = root / vol / f"{stem}_{name}"
                 slug = tile_slug(base, args.slug, getattr(args, "prefer", None))
-                lines = model_lines(base, slug, False)
+                figure = figure_only(base, slug)
+                lines = None if figure else model_lines(base, slug, False)
+                stats["tiles_figure"] += figure
                 meta_f = base.with_name(f"{base.name}_{slug}.meta.json")
                 meta = json.loads(meta_f.read_text(encoding="utf-8")) if meta_f.exists() else {}
                 answers[name] = None if lines is None else (lines, bool(meta.get("bleed_retry")))
@@ -1320,7 +1322,8 @@ def dump(args) -> int:
         looped, table = stats["bleed_retry"] + stats["loop_truncated"], stats["table_mode"]
         warn = looped > LOOP_LOOK * n or table > TABLE_LOOK * n
         print(f"    looped {looped} ({stats['bleed_retry']} bleed-retried, {stats['loop_truncated']} "
-              f"truncated), table mode {table} of {n} tiles"
+              f"truncated), table mode {table} of {n} tiles, {stats['tiles_figure']} figure-only "
+              f"(the layer's words)"
               + (f", {stats['tiles_preferred']} read as {args.prefer}" if getattr(args, "prefer", None) else "")
               + ("  <- look at this volume's pages" if warn else ""), file=sys.stderr)
     return 0
@@ -1461,13 +1464,40 @@ def runner():
     return _RUNNER
 
 
+FIGURE = re.compile(r"<figure.*?(?:</figure>|$)", re.S)
+
+
+def figure_only(path_stem: Path, slug: str) -> bool:
+    """LightOn sometimes describes a tile instead of reading it: "<figure> ### Figure – Bank of New
+    York Organized 1839 *Type: other* The image is a list of names and addresses ... such as "Marie
+    Mrs midwife r40 Macdougal," ..." (Trow 1915 leaf 1467). The entries are in it, but as one
+    quoted paragraph under an invented caption. 1,018 of the 1,019 such answers in the first and
+    abbyy8-clean tiers hold nothing outside the figure (the other a folio and a heading scrap):
+    537 of the first read's 198,874 tiles, 182 of the 41,904 table tiles re-read with tables banned,
+    178 of the 14 BPL volumes' 50,792 (round 11, 2026-10-30). Such a tile has no reading: the dump
+    takes the first answer under --prefer, else the layer's words, as for an EMPTY tile."""
+    f = path_stem.with_name(f"{path_stem.name}_{slug}.raw.txt")
+    if "lightonocr" not in slug or not f.exists():
+        return False
+    raw = f.read_text(encoding="utf-8")
+    return "<figure" in raw and sum(1 for t in FIGURE.sub("", raw).splitlines() if t.strip()) < 3
+
+
 def tile_slug(path_stem: Path, slug: str, prefer: str | None) -> str:
     """Whose answer a tile takes: `prefer`'s where it has a finished one (its .txt), else `slug`'s.
     The table re-read (PIPELINE #32 (b) 5c, 2026-10-29) answers only the tiles LightOn first read
     as a table, under `-vllm-notables`; every other tile keeps its first answer. An EMPTY re-read
-    (meta, no .txt) falls back to the first answer rather than to the layer's words."""
-    if prefer and path_stem.with_name(f"{path_stem.name}_{prefer}.txt").exists():
-        return prefer
+    (meta, no .txt) falls back to the first answer rather than to the layer's words. So does a
+    re-read that is a figure description (figure_only), or one that stopped short, under half the
+    first answer's characters: 56 of round 11's 41,904 (1879BPL leaf 508 read 2 entries of 28,
+    1885BPL leaf 29 only the ad banner above them)."""
+    if prefer:
+        got = path_stem.with_name(f"{path_stem.name}_{prefer}.txt")
+        first = path_stem.with_name(f"{path_stem.name}_{slug}.txt")
+        if got.exists() and not figure_only(path_stem, prefer) and not (
+                first.exists() and 2 * len(got.read_text(encoding="utf-8"))
+                < len(first.read_text(encoding="utf-8"))):
+            return prefer
     return slug
 
 
@@ -1993,6 +2023,27 @@ def _self_test() -> int:
                                "salesman, 66 S. 5th</th></tr><tr><td>Fanjoy & Enoch, grocers</td>"
                                "<td>Farrell Dominick, gardener</td></tr></table>")
     assert got[:2] == ["Fagans Julius, segars, 145 Ewen", "Falconer David, salesman, 66 S. 5th"], got
+    # round 11: a figure description is no reading, and a re-read that stopped short loses to the
+    # first answer (tile_slug); otherwise the re-read wins
+    import tempfile
+    first, re_read = "lightonocr-3-1b-greedy-vllm", "lightonocr-3-1b-greedy-vllm-notables"
+    with tempfile.TemporaryDirectory() as d:
+        base = Path(d) / "v_0001_c0_h0"
+        def answer(slug, raw):
+            base.with_name(f"{base.name}_{slug}.raw.txt").write_text(raw, encoding="utf-8")
+            base.with_name(f"{base.name}_{slug}.txt").write_text(raw, encoding="utf-8")
+        entries = "".join(f"Santore Michl lab h{n} E106th\n" for n in range(20))
+        answer(first, entries)
+        answer(re_read, '<figure>\n### Figure – Bank of New York Organized 1839\n*Type: other*\n\n'
+                        'The text includes names such as "Marie Mrs midwife r40 Macdougal," ...\n</figure>')
+        assert figure_only(base, re_read) and not figure_only(base, first)
+        assert tile_slug(base, first, re_read) == first, "a figure re-read keeps the first answer"
+        answer(re_read, "Santore Michl lab h0 E106th\nSantore Michl lab h1 E106th\n")
+        assert tile_slug(base, first, re_read) == first, "a re-read 2 lines of 20 stopped short"
+        answer(re_read, entries.replace("lab", '" lab'))
+        assert tile_slug(base, first, re_read) == re_read
+        answer(re_read, '159\nOVALS, ALTERATIONS AND OM\n<figure>\n### Figure – An advertisement\n</figure>')
+        assert figure_only(base, re_read), "a folio and a heading scrap beside the figure are no reading"
     print("self-test ok")
     return 0
 

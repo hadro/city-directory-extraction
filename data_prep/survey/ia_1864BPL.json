@@ -352,23 +352,23 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1864",
-   "hocr_lines": 90110,
-   "wrap_joins": 13264,
-   "candidates": 76846,
+   "hocr_lines": 90248,
+   "wrap_joins": 13258,
+   "candidates": 76990,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 76888,
-    "mark_share": 0.07,
+    "pairs": 76879,
+    "mark_share": 0.0699,
     "mode": 2.0,
-    "mode_pairs": 7104,
+    "mode_pairs": 7111,
     "trough": 1.75,
-    "trough_pairs": 152,
+    "trough_pairs": 151,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": 5.8,
-    "run_over_joins": 12174
+    "run_over_joins": 12173
    },
-   "model_runovers": 12549,
+   "model_runovers": 12553,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -379,14 +379,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 67444,
-   "keep_rate": 0.8777,
+   "kept": 67458,
+   "keep_rate": 0.8762,
    "dropped": {
     "nonascii": 3122,
-    "short": 2493,
-    "banner": 2192,
-    "allcaps": 1540,
-    "bigtype": 55
+    "short": 2499,
+    "banner": 2235,
+    "allcaps": 1617,
+    "bigtype": 59
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -400,27 +400,27 @@
    "top_ad_leaves": [
     601,
     7,
+    486,
     417,
+    210,
     648,
     650,
+    252,
     281,
-    253,
-    352,
-    643,
-    93
+    253
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 5417896,
+  "words_gz_bytes": 5411714,
   "hocr_deleted": true,
   "elapsed_s": 32
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 8,
   "end_leaf": 559,
   "first_letter": "A",
@@ -432,7 +432,7 @@
   "start": {
    "leaf": 8,
    "image": "https://iiif.archive.org/iiif/1864BPL$8/full/!1400,1400/0/default.jpg",
-   "quote": "Abbott Catharine, wid. furniture, 61 Prospect Abbott George, butcher, h. 259 Bridge Abbott Hannah, wid. h. 153 Elliott p"
+   "quote": "Abbott Catharine, wid. furniture, 61 Prospect"
   },
   "end": {
    "leaf": 559,
@@ -488,13 +488,13 @@
    ],
    "D": [
     120,
-    150,
-    29
+    149,
+    28
    ],
    "E": [
-    151,
+    150,
     158,
-    8
+    9
    ],
    "F": [
     159,
@@ -621,8 +621,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "2e12fad-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 651,
   "fitted_leaves": 577,
   "read_leaves": 383,
@@ -761,8 +761,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -999,8 +999,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1864BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -1014,19 +1014,19 @@
     "end_leaf": 561
    }
   ],
-  "kept": 59266,
+  "kept": 59280,
   "dropped": 8178,
-  "kept_share": 0.8787,
+  "kept_share": 0.8788,
   "kept_by_section": {
-   "listing": 59137,
+   "listing": 59151,
    "late_names": 129
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 511,
+  "scoped_lines": 507,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    40,
@@ -1067,23 +1067,25 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/1864BPL",
   "ia_dump": "data/survey_ocr/1864BPL_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 2136,
+  "tiles_preferred": 45,
   "tiles_answered": 2136,
   "bleed_retry": 0,
   "loop_truncated": 0,
-  "table_mode": 45,
+  "table_mode": 0,
   "pages": 553,
-  "lines_runover": 12549,
-  "lines_model": 74084,
-  "lines_model-only": 569,
-  "lines_tesseract": 293,
+  "lines_runover": 12553,
+  "lines_model": 74165,
+  "lines_tesseract": 221,
+  "lines_model-only": 698,
   "leaves_replaced": 553,
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 553
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

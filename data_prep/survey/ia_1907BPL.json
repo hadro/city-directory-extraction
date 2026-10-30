@@ -125,14 +125,16 @@
    "canvas": "https://iiif.archive.org/iiif/1907BPL$1103/canvas",
    "image": "https://iiif.archive.org/iiif/1907BPL$1103/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'1089' in the foot margin",
+   "quote": "no folio printed on leaf 1103; page 1089 INFERRED from the sequence of folios around it",
    "method": "hocr-geometry",
-   "confidence": "high",
-   "attestation": "read",
+   "confidence": "medium",
+   "attestation": "repaired",
    "ia_page": 1089,
    "page_offset": 14,
    "listing_flags": [],
-   "doubts": []
+   "doubts": [
+    "leading digit put back from the sequence (survey_folios.repair_leading)"
+   ]
   }
  },
  "survey_status": "frontmatter-done",
@@ -378,83 +380,86 @@
    "publisher_tag": "upington",
    "publisher_tag_note": null,
    "year_tag": "1907",
-   "hocr_lines": 297690,
-   "wrap_joins": 32209,
-   "candidates": 265481,
+   "hocr_lines": 314344,
+   "wrap_joins": 32670,
+   "candidates": 281674,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 235071,
-    "mark_share": 0.1367,
+    "pairs": 181539,
+    "mark_share": 0.3275,
     "mode": 1.25,
-    "mode_pairs": 8156,
-    "trough": 0.75,
-    "trough_pairs": 486,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "mode_pairs": 4630,
+    "trough": 0.5,
+    "trough_pairs": 408,
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": 12.7,
+    "run_over_joins": 23921
    },
+   "model_runovers": 28406,
+   "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
     "leaves": 0
    },
    "side_bands": {
-    "words": 28,
-    "leaves": 2
+    "words": 0,
+    "leaves": 0
    },
-   "marker_fixes": 135,
-   "kept": 194165,
-   "keep_rate": 0.7314,
+   "marker_fixes": 0,
+   "kept": 198044,
+   "keep_rate": 0.7031,
    "dropped": {
-    "short": 56391,
-    "allcaps": 6420,
-    "banner": 4586,
-    "bigtype": 3343,
-    "nonascii": 573,
+    "short": 59390,
+    "allcaps": 15560,
+    "banner": 5856,
+    "bigtype": 2263,
+    "nonascii": 558,
     "pagenum": 3
    },
    "ditto_marks": [
-    "**",
-    "44",
+    "\"",
     "\u201c"
    ],
-   "ditto_applied": 123013,
+   "ditto_applied": 58509,
    "band": {
-    "leaves_banded": 1059,
-    "head": 1841,
-    "body": 173127,
-    "foot": 2190,
-    "unbanded": 17007
+    "leaves_banded": 1001,
+    "head": 4967,
+    "body": 161419,
+    "foot": 4627,
+    "unbanded": 27031
    },
    "top_ad_leaves": [
-    1,
-    195,
-    7,
     551,
+    1,
     526,
-    128,
+    7,
     1105,
-    716,
+    552,
     125,
-    1113
+    1113,
+    128,
+    8
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 17270466,
+  "words_gz_bytes": 16892994,
   "hocr_deleted": true,
   "elapsed_s": 59
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 15,
   "end_leaf": 1103,
   "first_letter": "A",
   "last_letter": "Z",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
   "missing_letters": "X",
-  "voting_density": 0.794,
+  "voting_density": 0.605,
   "flags": [],
   "start": {
    "leaf": 15,
@@ -470,7 +475,7 @@
    {
     "start_leaf": 15,
     "end_leaf": 1103,
-    "voting_leaves": 865,
+    "voting_leaves": 659,
     "first_letter": "A",
     "last_letter": "Z",
     "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
@@ -484,8 +489,17 @@
      "C"
     ],
     "start_leaf": 120,
-    "end_leaf": 153,
-    "leaves": 34
+    "end_leaf": 154,
+    "leaves": 35
+   },
+   {
+    "between": [
+     "C",
+     "D"
+    ],
+    "start_leaf": 188,
+    "end_leaf": 224,
+    "leaves": 37
    },
    {
     "between": [
@@ -502,17 +516,26 @@
      "J"
     ],
     "start_leaf": 475,
-    "end_leaf": 475,
-    "leaves": 1
+    "end_leaf": 477,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "J",
+     "K"
+    ],
+    "start_leaf": 484,
+    "end_leaf": 494,
+    "leaves": 11
    },
    {
     "between": [
      "L",
      "M"
     ],
-    "start_leaf": 601,
+    "start_leaf": 600,
     "end_leaf": 602,
-    "leaves": 2
+    "leaves": 3
    },
    {
     "between": [
@@ -525,54 +548,117 @@
    },
    {
     "between": [
+     "O",
+     "P"
+    ],
+    "start_leaf": 753,
+    "end_leaf": 755,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "P",
+     "Q"
+    ],
+    "start_leaf": 797,
+    "end_leaf": 797,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Q",
+     "R"
+    ],
+    "start_leaf": 800,
+    "end_leaf": 800,
+    "leaves": 1
+   },
+   {
+    "between": [
      "S",
      "T"
     ],
-    "start_leaf": 924,
-    "end_leaf": 977,
+    "start_leaf": 923,
+    "end_leaf": 976,
     "leaves": 54
+   },
+   {
+    "between": [
+     "U",
+     "V"
+    ],
+    "start_leaf": 1011,
+    "end_leaf": 1011,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "V",
+     "W"
+    ],
+    "start_leaf": 1025,
+    "end_leaf": 1027,
+    "leaves": 3
+   },
+   {
+    "between": [
+     "W",
+     "Y"
+    ],
+    "start_leaf": 1094,
+    "end_leaf": 1094,
+    "leaves": 1
+   },
+   {
+    "between": [
+     "Y",
+     "Z"
+    ],
+    "start_leaf": 1096,
+    "end_leaf": 1097,
+    "leaves": 2
    }
   ],
   "letter_blocks": {
    "A": [
     15,
     43,
-    23
+    19
    ],
    "B": [
     44,
     119,
-    71
+    47
    ],
    "C": [
-    154,
-    224,
-    56
+    155,
+    187,
+    22
    ],
    "D": [
     225,
     273,
-    42
+    34
    ],
    "E": [
     275,
     294,
-    18
+    14
    ],
    "F": [
     295,
     338,
-    38
+    34
    ],
    "G": [
     339,
     390,
-    43
+    36
    ],
    "H": [
     391,
     469,
-    71
+    57
    ],
    "I": [
     470,
@@ -580,87 +666,87 @@
     4
    ],
    "J": [
-    476,
-    494,
-    12
+    478,
+    483,
+    5
    ],
    "K": [
     495,
     549,
-    42
+    36
    ],
    "L": [
     550,
-    600,
-    46
+    599,
+    36
    ],
    "M": [
     603,
     633,
-    26
+    19
    ],
    "N": [
     714,
     734,
-    16
+    10
    ],
    "O": [
     735,
-    755,
-    15
+    752,
+    6
    ],
    "P": [
     756,
-    797,
-    38
+    796,
+    31
    ],
    "Q": [
     798,
-    800,
-    3
+    799,
+    2
    ],
    "R": [
     801,
     857,
-    48
+    34
    ],
    "S": [
     858,
-    923,
-    58
+    922,
+    50
    ],
    "T": [
-    978,
+    977,
     1006,
-    24
+    22
    ],
    "U": [
     1007,
     1010,
-    4
+    3
    ],
    "V": [
-    1011,
-    1025,
-    14
+    1012,
+    1024,
+    11
    ],
    "W": [
-    1026,
+    1028,
     1093,
-    50
+    36
    ],
    "Y": [
-    1094,
-    1097,
-    3
+    1095,
+    1095,
+    1
    ],
    "Z": [
     1098,
     1103,
-    5
+    6
    ]
   },
-  "skipped_votes": 7,
+  "skipped_votes": 28,
   "voted_bounds": [
    15,
    1103
@@ -684,11 +770,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 1155,
-  "fitted_leaves": 1110,
-  "read_leaves": 890,
+  "fitted_leaves": 1097,
+  "read_leaves": 548,
   "segments": [
    {
     "first_leaf": 1,
@@ -700,19 +786,35 @@
    },
    {
     "first_leaf": 15,
-    "last_leaf": 192,
+    "last_leaf": 183,
     "first_page": 21,
+    "last_page": 183,
+    "leaves": 163,
+    "read": 134
+   },
+   {
+    "first_leaf": 186,
+    "last_leaf": 192,
+    "first_page": 186,
     "last_page": 192,
-    "leaves": 172,
-    "read": 145
+    "leaves": 7,
+    "read": 5
    },
    {
     "first_leaf": 197,
-    "last_leaf": 461,
+    "last_leaf": 310,
     "first_page": 195,
-    "last_page": 459,
-    "leaves": 265,
-    "read": 216
+    "last_page": 308,
+    "leaves": 114,
+    "read": 91
+   },
+   {
+    "first_leaf": 312,
+    "last_leaf": 460,
+    "first_page": 310,
+    "last_page": 458,
+    "leaves": 149,
+    "read": 102
    },
    {
     "first_leaf": 463,
@@ -720,23 +822,151 @@
     "first_page": 461,
     "last_page": 543,
     "leaves": 83,
-    "read": 76
+    "read": 57
    },
    {
     "first_leaf": 553,
-    "last_leaf": 905,
+    "last_leaf": 615,
     "first_page": 545,
-    "last_page": 891,
-    "leaves": 347,
-    "read": 281
+    "last_page": 607,
+    "leaves": 63,
+    "read": 43
+   },
+   {
+    "first_leaf": 620,
+    "last_leaf": 628,
+    "first_page": 610,
+    "last_page": 618,
+    "leaves": 9,
+    "read": 8
+   },
+   {
+    "first_leaf": 629,
+    "last_leaf": 636,
+    "first_page": 319,
+    "last_page": 326,
+    "leaves": 8,
+    "read": 6
+   },
+   {
+    "first_leaf": 637,
+    "last_leaf": 655,
+    "first_page": 627,
+    "last_page": 645,
+    "leaves": 19,
+    "read": 13
+   },
+   {
+    "first_leaf": 656,
+    "last_leaf": 673,
+    "first_page": 346,
+    "last_page": 363,
+    "leaves": 18,
+    "read": 10
+   },
+   {
+    "first_leaf": 675,
+    "last_leaf": 705,
+    "first_page": 365,
+    "last_page": 395,
+    "leaves": 31,
+    "read": 15
+   },
+   {
+    "first_leaf": 708,
+    "last_leaf": 720,
+    "first_page": 698,
+    "last_page": 710,
+    "leaves": 13,
+    "read": 9
+   },
+   {
+    "first_leaf": 721,
+    "last_leaf": 740,
+    "first_page": 411,
+    "last_page": 430,
+    "leaves": 20,
+    "read": 18
+   },
+   {
+    "first_leaf": 743,
+    "last_leaf": 834,
+    "first_page": 731,
+    "last_page": 822,
+    "leaves": 92,
+    "read": 60
+   },
+   {
+    "first_leaf": 836,
+    "last_leaf": 839,
+    "first_page": 24,
+    "last_page": 27,
+    "leaves": 4,
+    "read": 4
+   },
+   {
+    "first_leaf": 840,
+    "last_leaf": 851,
+    "first_page": 328,
+    "last_page": 339,
+    "leaves": 12,
+    "read": 8
+   },
+   {
+    "first_leaf": 852,
+    "last_leaf": 904,
+    "first_page": 840,
+    "last_page": 890,
+    "leaves": 51,
+    "read": 28
    },
    {
     "first_leaf": 907,
+    "last_leaf": 912,
+    "first_page": 393,
+    "last_page": 398,
+    "leaves": 6,
+    "read": 5
+   },
+   {
+    "first_leaf": 913,
+    "last_leaf": 921,
+    "first_page": 899,
+    "last_page": 907,
+    "leaves": 9,
+    "read": 8
+   },
+   {
+    "first_leaf": 922,
+    "last_leaf": 959,
+    "first_page": 8,
+    "last_page": 45,
+    "leaves": 38,
+    "read": 22
+   },
+   {
+    "first_leaf": 960,
+    "last_leaf": 990,
+    "first_page": 946,
+    "last_page": 976,
+    "leaves": 31,
+    "read": 18
+   },
+   {
+    "first_leaf": 992,
+    "last_leaf": 1004,
+    "first_page": 1978,
+    "last_page": 1990,
+    "leaves": 13,
+    "read": 7
+   },
+   {
+    "first_leaf": 1006,
     "last_leaf": 1103,
-    "first_page": 893,
+    "first_page": 992,
     "last_page": 1089,
-    "leaves": 197,
-    "read": 138
+    "leaves": 98,
+    "read": 79
    },
    {
     "first_leaf": 1114,
@@ -749,17 +979,19 @@
   ],
   "ia_comparison": {
    "ia_read_leaves": 352,
-   "both": 352,
-   "agree": 351,
-   "agree_rate": 0.997,
+   "both": 347,
+   "agree": 303,
+   "agree_rate": 0.873,
    "ia_page_equals_leaf": 0.14
   },
-  "flags": []
+  "flags": [
+   "ia-disagrees"
+  ]
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -784,26 +1016,14 @@
    {
     "kind": "index",
     "start_leaf": 11,
-    "end_leaf": 13,
+    "end_leaf": 14,
     "title": {
      "leaf": 11,
      "quote": "INDEX TO ADVERTISEMENTS",
      "image": "https://iiif.archive.org/iiif/1907BPL$11/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 3,
+    "leaves": 4,
     "residential": false
-   },
-   {
-    "kind": "late_names",
-    "start_leaf": 14,
-    "end_leaf": 14,
-    "title": {
-     "leaf": 14,
-     "quote": "Names too Late for Classification",
-     "image": "https://iiif.archive.org/iiif/1907BPL$14/full/!1400,1400/0/default.jpg"
-    },
-    "leaves": 1,
-    "residential": true
    },
    {
     "kind": "listing",
@@ -821,7 +1041,7 @@
      "last": {
       "leaf": 1103,
       "page": 1089,
-      "attestation": "read"
+      "attestation": "repaired"
      }
     }
    },
@@ -875,7 +1095,6 @@
    "back_matter",
    "front_matter",
    "index",
-   "late_names",
    "listing",
    "register",
    "street_guide"
@@ -883,45 +1102,36 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1907BPL_listing.jsonl.gz",
   "sections": [
-   {
-    "kind": "late_names",
-    "start_leaf": 14,
-    "end_leaf": 14
-   },
    {
     "kind": "listing",
     "start_leaf": 15,
     "end_leaf": 1103
    }
   ],
-  "kept": 178020,
-  "dropped": 16145,
-  "kept_share": 0.9168,
+  "kept": 181783,
+  "dropped": 16261,
+  "kept_share": 0.9179,
   "kept_by_section": {
-   "late_names": 115,
-   "listing": 177905
+   "listing": 181783
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 584,
+  "scoped_lines": 290,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
-   120,
    121,
    122,
    123,
    124,
    125,
    126,
-   127,
-   128,
    195,
    196,
    523,
@@ -948,5 +1158,28 @@
   "basis": "the only whole alphabet; each geor scan is half of the same edition",
   "decision": "data_prep/survey_runset.json",
   "role": "run"
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 11.0) + lightonocr-3-1b-greedy-vllm-notables",
+  "root": "data/reocr_tiers/1907BPL",
+  "ia_dump": "data/survey_ocr/1907BPL_words.ia.jsonl.gz",
+  "tiles_figure": 18,
+  "tiles": 4296,
+  "tiles_preferred": 0,
+  "tiles_answered": 4278,
+  "bleed_retry": 6,
+  "loop_truncated": 17,
+  "table_mode": 0,
+  "pages": 1087,
+  "lines_runover": 28407,
+  "lines_model": 221064,
+  "lines_tesseract": 47529,
+  "lines_model-only": 13896,
+  "lines_bleed": 361,
+  "leaves_replaced": 1087,
+  "layers": {
+   "ia-words (ABBYY FineReader 11.0)": 1087
+  },
+  "dumped": "2026-10-30"
  }
 }

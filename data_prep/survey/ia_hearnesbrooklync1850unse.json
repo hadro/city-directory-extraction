@@ -350,8 +350,8 @@
    "publisher_tag_note": "'hearnes' normalised to the trained token 'hearne'",
    "year_tag": "1850",
    "hocr_lines": 21078,
-   "wrap_joins": 746,
-   "candidates": 20332,
+   "wrap_joins": 743,
+   "candidates": 20335,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -377,10 +377,10 @@
    },
    "marker_fixes": 1,
    "kept": 17316,
-   "keep_rate": 0.8517,
+   "keep_rate": 0.8515,
    "dropped": {
     "banner": 1110,
-    "short": 1067,
+    "short": 1070,
     "allcaps": 826,
     "bigtype": 9,
     "nonascii": 4
@@ -406,18 +406,18 @@
     18,
     423
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 1478065,
+  "words_gz_bytes": 1478568,
   "hocr_deleted": true,
   "elapsed_s": 85
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 25,
   "end_leaf": 418,
   "first_letter": "A",
@@ -594,8 +594,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 475,
   "fitted_leaves": 464,
   "read_leaves": 448,
@@ -636,8 +636,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -738,8 +738,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/hearnesbrooklync1850unse_listing.jsonl.gz",
   "sections": [
    {
@@ -764,10 +764,12 @@
   "role": "run"
  },
  "reocr": {
-  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/hearnesbrooklync1850unse",
   "ia_dump": "data/survey_ocr/hearnesbrooklync1850unse_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 760,
+  "tiles_preferred": 0,
   "tiles_answered": 760,
   "bleed_retry": 0,
   "loop_truncated": 0,
@@ -781,6 +783,6 @@
   "layers": {
    "ia-words (IA OCR)": 380
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

@@ -328,23 +328,26 @@
    "publisher_tag": "boyd",
    "publisher_tag_note": null,
    "year_tag": "1891",
-   "hocr_lines": 7933,
-   "wrap_joins": 614,
-   "candidates": 7319,
+   "hocr_lines": 7942,
+   "wrap_joins": 609,
+   "candidates": 7333,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 4109,
-    "mark_share": 0.0571,
+    "pairs": 4105,
+    "mark_share": 0.057,
     "mode": 1.25,
     "mode_pairs": 56,
     "trough": 0.5,
     "trough_pairs": 10,
     "reason": "ditto marks: a dropped mark indents like a runover",
+    "held": [
+     "mark share"
+    ],
     "start_cap": null,
-    "run_over_joins": 267
+    "run_over_joins": 263
    },
-   "model_runovers": 400,
+   "model_runovers": 396,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -355,12 +358,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 4164,
-   "keep_rate": 0.5689,
+   "kept": 4174,
+   "keep_rate": 0.5692,
    "dropped": {
-    "short": 1965,
-    "allcaps": 705,
-    "banner": 401,
+    "short": 1964,
+    "allcaps": 712,
+    "banner": 399,
     "bigtype": 77,
     "nonascii": 4,
     "pagenum": 3
@@ -386,18 +389,18 @@
     233,
     249
    ],
-   "filters_at": "068cae3-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 464320,
+  "words_gz_bytes": 464578,
   "hocr_deleted": true,
   "elapsed_s": 12
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "068cae3-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 15,
   "end_leaf": 197,
   "first_letter": "A",
@@ -742,8 +745,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "068cae3-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 125,
   "fitted_leaves": 114,
   "read_leaves": 29,
@@ -768,8 +771,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "068cae3-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -884,8 +887,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "068cae3-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/flushingnewyork189192boyd_listing.jsonl.gz",
   "sections": [
    {
@@ -894,32 +897,33 @@
     "end_leaf": 197
    }
   ],
-  "kept": 3442,
+  "kept": 3452,
   "dropped": 722,
-  "kept_share": 0.8266,
+  "kept_share": 0.827,
   "kept_by_section": {
-   "listing": 3442
+   "listing": 3452
   }
  },
  "reocr": {
-  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/flushingnewyork189192boyd",
   "ia_dump": "data/survey_ocr/flushingnewyork189192boyd_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 184,
-  "tiles_preferred": 0,
+  "tiles_preferred": 3,
   "tiles_answered": 184,
   "bleed_retry": 0,
   "loop_truncated": 0,
-  "table_mode": 3,
+  "table_mode": 0,
   "pages": 92,
-  "lines_runover": 400,
-  "lines_model": 4070,
-  "lines_model-only": 581,
-  "lines_tesseract": 1751,
+  "lines_runover": 396,
+  "lines_model": 4074,
+  "lines_model-only": 590,
+  "lines_tesseract": 1747,
   "leaves_replaced": 92,
   "layers": {
    "ia-words (IA OCR)": 92
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

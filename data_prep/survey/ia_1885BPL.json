@@ -367,40 +367,40 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1884/85",
-   "hocr_lines": 248120,
-   "wrap_joins": 35831,
-   "candidates": 212289,
+   "hocr_lines": 248578,
+   "wrap_joins": 35517,
+   "candidates": 213061,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 184206,
+    "pairs": 184222,
     "mark_share": 0.0142,
     "mode": 2.0,
-    "mode_pairs": 25856,
+    "mode_pairs": 25736,
     "trough": 1.5,
-    "trough_pairs": 580,
+    "trough_pairs": 554,
     "reason": "sharp runover mode",
-    "start_cap": 8.31,
-    "run_over_joins": 29007
+    "start_cap": 7.62,
+    "run_over_joins": 28828
    },
-   "model_runovers": 31447,
+   "model_runovers": 31198,
    "cont_dropped_leaves": 1,
    "column_splits": {
-    "lines": 25,
+    "lines": 32,
     "leaves": 1
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 156,
-   "kept": 179173,
-   "keep_rate": 0.844,
+   "marker_fixes": 192,
+   "kept": 179490,
+   "keep_rate": 0.8424,
    "dropped": {
-    "short": 18836,
-    "allcaps": 11921,
-    "banner": 1947,
-    "bigtype": 323,
+    "short": 19029,
+    "allcaps": 12358,
+    "banner": 1794,
+    "bigtype": 301,
     "nonascii": 88,
     "pagenum": 1
    },
@@ -419,24 +419,24 @@
     278,
     12,
     147,
+    646,
     1533,
     139,
     752,
-    500,
-    140
+    500
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 14556382,
+  "words_gz_bytes": 14404246,
   "hocr_deleted": true,
   "elapsed_s": 49
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 1,
   "end_leaf": 1512,
   "first_letter": "A",
@@ -448,7 +448,7 @@
   "start": {
    "leaf": 1,
    "image": "https://iiif.archive.org/iiif/1885BPL$1/full/!1400,1400/0/default.jpg",
-   "quote": "Aab George, machinist, h 204 Stockton"
+   "quote": "Aass Peter, baker, 253 Gold"
   },
   "end": {
    "leaf": 1512,
@@ -637,11 +637,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "2e12fad-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 1557,
-  "fitted_leaves": 1267,
-  "read_leaves": 316,
+  "fitted_leaves": 1210,
+  "read_leaves": 312,
   "segments": [
    {
     "first_leaf": 5,
@@ -693,11 +693,11 @@
    },
    {
     "first_leaf": 284,
-    "last_leaf": 436,
+    "last_leaf": 432,
     "first_page": 258,
-    "last_page": 410,
-    "leaves": 153,
-    "read": 31
+    "last_page": 406,
+    "leaves": 149,
+    "read": 33
    },
    {
     "first_leaf": 444,
@@ -713,15 +713,15 @@
     "first_page": 476,
     "last_page": 564,
     "leaves": 89,
-    "read": 16
+    "read": 19
    },
    {
     "first_leaf": 601,
-    "last_leaf": 640,
+    "last_leaf": 641,
     "first_page": 569,
-    "last_page": 608,
-    "leaves": 40,
-    "read": 14
+    "last_page": 609,
+    "leaves": 41,
+    "read": 15
    },
    {
     "first_leaf": 652,
@@ -753,7 +753,7 @@
     "first_page": 786,
     "last_page": 814,
     "leaves": 29,
-    "read": 11
+    "read": 12
    },
    {
     "first_leaf": 870,
@@ -769,7 +769,7 @@
     "first_page": 914,
     "last_page": 1029,
     "leaves": 116,
-    "read": 27
+    "read": 28
    },
    {
     "first_leaf": 1083,
@@ -789,19 +789,27 @@
    },
    {
     "first_leaf": 1124,
-    "last_leaf": 1316,
+    "last_leaf": 1132,
     "first_page": 1074,
-    "last_page": 1266,
-    "leaves": 193,
-    "read": 27
+    "last_page": 1082,
+    "leaves": 9,
+    "read": 5
    },
    {
-    "first_leaf": 1330,
-    "last_leaf": 1377,
-    "first_page": 1278,
-    "last_page": 1325,
-    "leaves": 48,
-    "read": 7
+    "first_leaf": 1136,
+    "last_leaf": 1199,
+    "first_page": 1086,
+    "last_page": 1149,
+    "leaves": 64,
+    "read": 10
+   },
+   {
+    "first_leaf": 1203,
+    "last_leaf": 1316,
+    "first_page": 1153,
+    "last_page": 1266,
+    "leaves": 114,
+    "read": 17
    },
    {
     "first_leaf": 1387,
@@ -847,8 +855,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -962,8 +970,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1885BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -972,18 +980,18 @@
     "end_leaf": 1512
    }
   ],
-  "kept": 168588,
+  "kept": 168905,
   "dropped": 10585,
-  "kept_share": 0.9409,
+  "kept_share": 0.941,
   "kept_by_section": {
-   "listing": 168588
+   "listing": 168905
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 836,
+  "scoped_lines": 843,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    12,
@@ -1045,24 +1053,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/1885BPL",
   "ia_dump": "data/survey_ocr/1885BPL_words.ia.jsonl.gz",
+  "tiles_figure": 94,
   "tiles": 5904,
-  "tiles_answered": 5903,
-  "bleed_retry": 6,
+  "tiles_preferred": 1183,
+  "tiles_answered": 5810,
+  "bleed_retry": 5,
   "loop_truncated": 2,
-  "table_mode": 1201,
+  "table_mode": 18,
   "pages": 1505,
-  "lines_runover": 31463,
-  "lines_model": 205571,
-  "lines_tesseract": 19175,
-  "lines_model-only": 9975,
-  "lines_bleed": 166,
+  "lines_runover": 31222,
+  "lines_model": 205634,
+  "lines_tesseract": 19233,
+  "lines_model-only": 10365,
+  "lines_bleed": 115,
   "leaves_replaced": 1505,
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 1505
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

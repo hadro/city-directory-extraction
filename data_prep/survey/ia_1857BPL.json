@@ -119,7 +119,7 @@
    "canvas": "https://iiif.archive.org/iiif/1857BPL$345/canvas",
    "image": "https://iiif.archive.org/iiif/1857BPL$345/full/!1400,1400/0/default.jpg",
    "evidence_type": "folio",
-   "quote": "'323' in the head margin",
+   "quote": "'323' in the foot margin",
    "method": "hocr-geometry",
    "confidence": "high",
    "attestation": "read",
@@ -372,37 +372,41 @@
    "publisher_tag": "smith",
    "publisher_tag_note": null,
    "year_tag": "1857",
-   "hocr_lines": 69980,
-   "wrap_joins": 12551,
-   "candidates": 57429,
+   "hocr_lines": 70523,
+   "wrap_joins": 12843,
+   "candidates": 57680,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 58749,
-    "mark_share": 0.0069,
+    "pairs": 58376,
+    "mark_share": 0.0049,
     "mode": 2.0,
-    "mode_pairs": 9298,
+    "mode_pairs": 9237,
     "trough": 1.5,
-    "trough_pairs": 76,
-    "reason": "sharp runover mode"
+    "trough_pairs": 156,
+    "reason": "sharp runover mode",
+    "start_cap": 5.65,
+    "run_over_joins": 11020
    },
+   "model_runovers": 11299,
+   "cont_dropped_leaves": 1,
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
-   },
-   "side_bands": {
-    "words": 1,
+    "lines": 29,
     "leaves": 1
    },
+   "side_bands": {
+    "words": 0,
+    "leaves": 0
+   },
    "marker_fixes": 0,
-   "kept": 52787,
-   "keep_rate": 0.9192,
+   "kept": 52590,
+   "keep_rate": 0.9118,
    "dropped": {
-    "short": 2227,
-    "banner": 1305,
-    "allcaps": 1033,
-    "bigtype": 72,
-    "nonascii": 5
+    "short": 2023,
+    "allcaps": 1605,
+    "banner": 1407,
+    "bigtype": 48,
+    "nonascii": 7
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -414,21 +418,21 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
-    256,
-    100,
-    326,
-    378,
-    221,
     170,
+    256,
+    378,
+    326,
+    412,
     539,
-    47,
     118,
-    273
+    100,
+    273,
+    477
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 4471939,
+  "words_gz_bytes": 4206833,
   "eval_holdout": {
    "sets": [
     "smith1856_eval.jsonl"
@@ -474,15 +478,15 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 31,
   "end_leaf": 345,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHJKLMNOPQRSTUVWY",
   "missing_letters": "IXZ",
-  "voting_density": 0.86,
+  "voting_density": 0.87,
   "flags": [
    "multi-section"
   ],
@@ -494,13 +498,13 @@
   "end": {
    "leaf": 345,
    "image": "https://iiif.archive.org/iiif/1857BPL$345/full/!1400,1400/0/default.jpg",
-   "quote": "Youuil James, plasterer, Bond, n. State"
+   "quote": "Younil James, plasterer, Bond, n. State"
   },
   "sections": [
    {
     "start_leaf": 31,
     "end_leaf": 345,
-    "voting_leaves": 271,
+    "voting_leaves": 274,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHJKLMNOPQRSTUVWY",
@@ -509,7 +513,7 @@
    {
     "start_leaf": 347,
     "end_leaf": 475,
-    "voting_leaves": 115,
+    "voting_leaves": 117,
     "first_letter": "A",
     "last_letter": "Z",
     "letters": "ABCDEFGHJKLMNOPRSTVWZ",
@@ -519,21 +523,21 @@
   "gaps": [
    {
     "between": [
+     "H",
+     "J"
+    ],
+    "start_leaf": 172,
+    "end_leaf": 172,
+    "leaves": 1
+   },
+   {
+    "between": [
      "L",
      "M"
     ],
     "start_leaf": 203,
-    "end_leaf": 222,
-    "leaves": 20
-   },
-   {
-    "between": [
-     "R",
-     "S"
-    ],
-    "start_leaf": 281,
-    "end_leaf": 281,
-    "leaves": 1
+    "end_leaf": 227,
+    "leaves": 25
    },
    {
     "between": [
@@ -583,8 +587,8 @@
    ],
    "H": [
     146,
-    172,
-    23
+    171,
+    22
    ],
    "J": [
     173,
@@ -602,9 +606,9 @@
     13
    ],
    "M": [
-    223,
+    228,
     241,
-    15
+    14
    ],
    "N": [
     242,
@@ -628,8 +632,8 @@
    ],
    "R": [
     266,
-    280,
-    9
+    281,
+    14
    ],
    "S": [
     282,
@@ -662,7 +666,7 @@
     1
    ]
   },
-  "skipped_votes": 4,
+  "skipped_votes": 2,
   "voted_bounds": [
    31,
    345
@@ -686,43 +690,123 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 544,
-  "fitted_leaves": 487,
-  "read_leaves": 452,
+  "fitted_leaves": 465,
+  "read_leaves": 310,
   "segments": [
    {
     "first_leaf": 4,
-    "last_leaf": 272,
+    "last_leaf": 46,
     "first_page": 6,
-    "last_page": 256,
-    "leaves": 251,
-    "read": 236
+    "last_page": 48,
+    "leaves": 43,
+    "read": 32
    },
    {
-    "first_leaf": 276,
+    "first_leaf": 50,
+    "last_leaf": 64,
+    "first_page": 50,
+    "last_page": 64,
+    "leaves": 15,
+    "read": 7
+   },
+   {
+    "first_leaf": 68,
+    "last_leaf": 114,
+    "first_page": 66,
+    "last_page": 110,
+    "leaves": 45,
+    "read": 28
+   },
+   {
+    "first_leaf": 120,
+    "last_leaf": 150,
+    "first_page": 114,
+    "last_page": 144,
+    "leaves": 31,
+    "read": 17
+   },
+   {
+    "first_leaf": 154,
+    "last_leaf": 168,
+    "first_page": 146,
+    "last_page": 160,
+    "leaves": 15,
+    "read": 8
+   },
+   {
+    "first_leaf": 172,
+    "last_leaf": 202,
+    "first_page": 162,
+    "last_page": 192,
+    "leaves": 31,
+    "read": 18
+   },
+   {
+    "first_leaf": 206,
+    "last_leaf": 220,
+    "first_page": 194,
+    "last_page": 208,
+    "leaves": 15,
+    "read": 9
+   },
+   {
+    "first_leaf": 224,
+    "last_leaf": 254,
+    "first_page": 210,
+    "last_page": 240,
+    "leaves": 31,
+    "read": 20
+   },
+   {
+    "first_leaf": 258,
+    "last_leaf": 271,
+    "first_page": 242,
+    "last_page": 255,
+    "leaves": 14,
+    "read": 9
+   },
+   {
+    "first_leaf": 280,
     "last_leaf": 345,
-    "first_page": 258,
+    "first_page": 262,
     "last_page": 323,
-    "leaves": 66,
-    "read": 63
+    "leaves": 62,
+    "read": 41
    },
    {
     "first_leaf": 348,
-    "last_leaf": 428,
+    "last_leaf": 358,
     "first_page": 2,
-    "last_page": 76,
-    "leaves": 75,
-    "read": 69
+    "last_page": 12,
+    "leaves": 11,
+    "read": 7
+   },
+   {
+    "first_leaf": 364,
+    "last_leaf": 376,
+    "first_page": 16,
+    "last_page": 28,
+    "leaves": 13,
+    "read": 9
+   },
+   {
+    "first_leaf": 380,
+    "last_leaf": 426,
+    "first_page": 30,
+    "last_page": 74,
+    "leaves": 45,
+    "read": 32
    },
    {
     "first_leaf": 432,
-    "last_leaf": 475,
+    "last_leaf": 474,
     "first_page": 78,
-    "last_page": 121,
-    "leaves": 44,
-    "read": 38
+    "last_page": 120,
+    "leaves": 43,
+    "read": 27
    },
    {
     "first_leaf": 478,
@@ -751,17 +835,17 @@
   ],
   "ia_comparison": {
    "ia_read_leaves": 514,
-   "both": 484,
-   "agree": 471,
-   "agree_rate": 0.973,
+   "both": 462,
+   "agree": 449,
+   "agree_rate": 0.972,
    "ia_page_equals_leaf": 0.04
   },
   "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -860,8 +944,8 @@
       "attestation": "read"
      },
      "last": {
-      "leaf": 475,
-      "page": 121,
+      "leaf": 474,
+      "page": 120,
       "attestation": "read"
      }
     }
@@ -869,42 +953,30 @@
    {
     "kind": "late_names",
     "start_leaf": 476,
-    "end_leaf": 478,
+    "end_leaf": 476,
     "title": {
      "leaf": 476,
-     "quote": "NAMES, &c,TOO LATE FOR INSERTION IN -REGULAR ORDER,",
+     "quote": "NAMES, &c., TOO LATE FOR INS",
      "image": "https://iiif.archive.org/iiif/1857BPL$476/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 3,
-    "residential": true,
-    "pages": {
-     "first": {
-      "leaf": 478,
-      "page": 2,
-      "attestation": "read"
-     },
-     "last": {
-      "leaf": 478,
-      "page": 2,
-      "attestation": "read"
-     }
-    }
+    "leaves": 1,
+    "residential": true
    },
    {
     "kind": "district",
-    "start_leaf": 479,
+    "start_leaf": 477,
     "end_leaf": 492,
     "title": {
-     "leaf": 479,
-     "quote": "STKEET AND AVENUE GUIDE: WESTERN DISTRICT.",
-     "image": "https://iiif.archive.org/iiif/1857BPL$479/full/!1400,1400/0/default.jpg"
+     "leaf": 477,
+     "quote": "(WESTERN DISTRICT),",
+     "image": "https://iiif.archive.org/iiif/1857BPL$477/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 14,
+    "leaves": 16,
     "residential": false,
     "pages": {
      "first": {
-      "leaf": 479,
-      "page": 3,
+      "leaf": 478,
+      "page": 2,
       "attestation": "read"
      },
      "last": {
@@ -1002,8 +1074,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1857BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -1019,23 +1091,23 @@
    {
     "kind": "late_names",
     "start_leaf": 476,
-    "end_leaf": 478
+    "end_leaf": 476
    }
   ],
-  "kept": 46677,
-  "dropped": 6110,
-  "kept_share": 0.8843,
+  "kept": 46260,
+  "dropped": 6330,
+  "kept_share": 0.8796,
   "kept_by_section": {
-   "listing": 32214,
-   "district: EASTERN DISTRICT,": 14293,
-   "late_names": 170
+   "listing": 31961,
+   "district: EASTERN DISTRICT,": 14255,
+   "late_names": 44
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 534,
+  "scoped_lines": 439,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    47,
@@ -1069,9 +1141,7 @@
    411,
    412,
    429,
-   430,
-   477,
-   478
+   430
   ]
  },
  "run_set": {
@@ -1081,5 +1151,27 @@
   "basis": "the book scan; the microfilm copy delivers 45% of its lines per page",
   "decision": "data_prep/survey_runset.json",
   "role": "run"
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm-notables",
+  "root": "data/reocr_tiers/1857BPL",
+  "ia_dump": "data/survey_ocr/1857BPL_words.ia.jsonl.gz",
+  "tiles_figure": 0,
+  "tiles": 1718,
+  "tiles_preferred": 0,
+  "tiles_answered": 1718,
+  "bleed_retry": 0,
+  "loop_truncated": 3,
+  "table_mode": 0,
+  "pages": 446,
+  "lines_runover": 11323,
+  "lines_model": 59213,
+  "lines_tesseract": 774,
+  "lines_model-only": 442,
+  "leaves_replaced": 446,
+  "layers": {
+   "ia-words (ABBYY FineReader 9.0)": 446
+  },
+  "dumped": "2026-10-30"
  }
 }

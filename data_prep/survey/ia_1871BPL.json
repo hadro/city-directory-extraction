@@ -344,43 +344,42 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1871",
-   "hocr_lines": 163330,
-   "wrap_joins": 21394,
-   "candidates": 141936,
+   "hocr_lines": 163496,
+   "wrap_joins": 21295,
+   "candidates": 142201,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": true,
-    "pairs": 126034,
-    "mark_share": 0.0419,
+    "pairs": 126008,
+    "mark_share": 0.0417,
     "mode": 2.25,
-    "mode_pairs": 9093,
+    "mode_pairs": 9101,
     "trough": 1.75,
-    "trough_pairs": 373,
+    "trough_pairs": 375,
     "reason": "sharp runover mode",
     "pinned": true,
-    "moved_from": 1.75,
-    "start_cap": 7.15,
-    "run_over_joins": 18823
+    "start_cap": 7.1,
+    "run_over_joins": 18737
    },
-   "model_runovers": 20417,
-   "cont_dropped_leaves": 2,
+   "model_runovers": 20290,
+   "cont_dropped_leaves": 3,
    "column_splits": {
-    "lines": 63,
-    "leaves": 2
+    "lines": 95,
+    "leaves": 3
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 5,
-   "kept": 117545,
-   "keep_rate": 0.8282,
+   "kept": 117693,
+   "keep_rate": 0.8277,
    "dropped": {
-    "short": 11805,
-    "allcaps": 5943,
-    "nonascii": 3259,
-    "banner": 2747,
-    "bigtype": 637
+    "short": 11871,
+    "allcaps": 6025,
+    "nonascii": 3260,
+    "banner": 2716,
+    "bigtype": 636
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -393,28 +392,28 @@
    },
    "top_ad_leaves": [
     371,
-    585,
     998,
     8,
     1009,
+    585,
     444,
     500,
     7,
     977,
     294
    ],
-   "filters_at": "9d68ba4-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 9651032,
+  "words_gz_bytes": 9618213,
   "hocr_deleted": true,
   "elapsed_s": 56
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "9d68ba4-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 13,
   "end_leaf": 842,
   "first_letter": "A",
@@ -602,7 +601,7 @@
     2
    ]
   },
-  "skipped_votes": 6,
+  "skipped_votes": 4,
   "voted_bounds": [
    13,
    842
@@ -626,11 +625,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "9d68ba4-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 1012,
   "fitted_leaves": 551,
-  "read_leaves": 177,
+  "read_leaves": 178,
   "segments": [
    {
     "first_leaf": 4,
@@ -646,7 +645,7 @@
     "first_page": 1,
     "last_page": 71,
     "leaves": 71,
-    "read": 31
+    "read": 30
    },
    {
     "first_leaf": 92,
@@ -662,7 +661,7 @@
     "first_page": 99,
     "last_page": 123,
     "leaves": 25,
-    "read": 7
+    "read": 8
    },
    {
     "first_leaf": 151,
@@ -718,7 +717,7 @@
     "first_page": 674,
     "last_page": 717,
     "leaves": 44,
-    "read": 8
+    "read": 9
    },
    {
     "first_leaf": 937,
@@ -756,8 +755,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "9d68ba4-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -965,8 +964,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "9d68ba4-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1871BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -980,19 +979,19 @@
     "end_leaf": 843
    }
   ],
-  "kept": 91939,
+  "kept": 92087,
   "dropped": 25606,
-  "kept_share": 0.7822,
+  "kept_share": 0.7824,
   "kept_by_section": {
-   "listing": 91898,
+   "listing": 92046,
    "late_names": 41
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 370,
+  "scoped_lines": 448,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    77,
@@ -1019,6 +1018,8 @@
    485,
    500,
    501,
+   530,
+   531,
    584,
    585,
    666,
@@ -1030,24 +1031,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/1871BPL",
   "ia_dump": "data/survey_ocr/1871BPL_words.ia.jsonl.gz",
+  "tiles_figure": 11,
   "tiles": 3256,
-  "tiles_answered": 3256,
-  "bleed_retry": 7,
+  "tiles_preferred": 352,
+  "tiles_answered": 3245,
+  "bleed_retry": 8,
   "loop_truncated": 0,
-  "table_mode": 354,
+  "table_mode": 2,
   "pages": 831,
-  "lines_runover": 20463,
-  "lines_model": 115945,
-  "lines_tesseract": 7247,
-  "lines_model-only": 3863,
-  "lines_bleed": 270,
+  "lines_runover": 20373,
+  "lines_model": 115948,
+  "lines_tesseract": 7215,
+  "lines_model-only": 3988,
+  "lines_bleed": 308,
   "leaves_replaced": 831,
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 831
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

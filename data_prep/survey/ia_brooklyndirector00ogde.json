@@ -367,23 +367,23 @@
    "publisher_tag": "ogden",
    "publisher_tag_note": null,
    "year_tag": "1839",
-   "hocr_lines": 15497,
-   "wrap_joins": 1534,
-   "candidates": 13963,
+   "hocr_lines": 15734,
+   "wrap_joins": 1528,
+   "candidates": 14206,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 9838,
-    "mark_share": 0.0882,
+    "pairs": 9839,
+    "mark_share": 0.0869,
     "mode": 1.25,
     "mode_pairs": 74,
     "trough": 1.0,
     "trough_pairs": 125,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": null,
-    "run_over_joins": 193
+    "run_over_joins": 192
    },
-   "model_runovers": 585,
+   "model_runovers": 581,
    "cont_dropped_leaves": 2,
    "column_splits": {
     "lines": 66,
@@ -394,13 +394,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 9900,
-   "keep_rate": 0.709,
+   "kept": 10136,
+   "keep_rate": 0.7135,
    "dropped": {
-    "short": 1512,
-    "bigtype": 1042,
-    "banner": 906,
-    "allcaps": 557,
+    "short": 1514,
+    "bigtype": 1045,
+    "banner": 905,
+    "allcaps": 560,
     "nonascii": 45,
     "pagenum": 1
    },
@@ -425,25 +425,25 @@
     1,
     194
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 1103681,
+  "words_gz_bytes": 1106908,
   "hocr_deleted": true,
   "elapsed_s": 8
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 9,
   "end_leaf": 293,
   "first_letter": "A",
   "last_letter": "Y",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTVWY",
   "missing_letters": "UXZ",
-  "voting_density": 0.744,
+  "voting_density": 0.751,
   "flags": [],
   "start": {
    "leaf": 9,
@@ -459,7 +459,7 @@
    {
     "start_leaf": 9,
     "end_leaf": 293,
-    "voting_leaves": 212,
+    "voting_leaves": 214,
     "first_letter": "A",
     "last_letter": "Y",
     "letters": "ABCDEFGHIJKLMNOPQRSTVWY",
@@ -483,15 +483,6 @@
     ],
     "start_leaf": 90,
     "end_leaf": 90,
-    "leaves": 1
-   },
-   {
-    "between": [
-     "E",
-     "F"
-    ],
-    "start_leaf": 94,
-    "end_leaf": 94,
     "leaves": 1
    },
    {
@@ -585,7 +576,7 @@
    "B": [
     15,
     45,
-    21
+    22
    ],
    "C": [
     47,
@@ -599,8 +590,8 @@
    ],
    "E": [
     91,
-    93,
-    2
+    94,
+    3
    ],
    "F": [
     95,
@@ -693,7 +684,7 @@
     1
    ]
   },
-  "skipped_votes": 16,
+  "skipped_votes": 15,
   "voted_bounds": [
    9,
    293
@@ -717,8 +708,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 322,
   "fitted_leaves": 0,
   "read_leaves": 0,
@@ -736,8 +727,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -773,8 +764,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/brooklyndirector00ogde_listing.jsonl.gz",
   "sections": [
    {
@@ -783,18 +774,18 @@
     "end_leaf": 293
    }
   ],
-  "kept": 8839,
+  "kept": 9075,
   "dropped": 1061,
-  "kept_share": 0.8928,
+  "kept_share": 0.8953,
   "kept_by_section": {
-   "listing": 8839
+   "listing": 9075
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 3548,
+  "scoped_lines": 3785,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    10,
@@ -945,24 +936,26 @@
   "skip_reason": "every even leaf 10-292 is a blank verso; on 135 the OCR read the facing page through the paper (2,396 scoped lines)"
  },
  "reocr": {
-  "engine": "ia-words (tesseract 5.3.0-3-g9920) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (tesseract 5.3.0-3-g9920) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/brooklyndirector00ogde",
   "ia_dump": "data/survey_ocr/brooklyndirector00ogde_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 556,
+  "tiles_preferred": 3,
   "tiles_answered": 506,
-  "bleed_retry": 38,
-  "loop_truncated": 52,
-  "table_mode": 3,
+  "bleed_retry": 37,
+  "loop_truncated": 51,
+  "table_mode": 0,
   "pages": 278,
-  "lines_runover": 599,
-  "lines_model": 7682,
-  "lines_tesseract": 3935,
-  "lines_model-only": 1556,
-  "lines_bleed": 727,
+  "lines_runover": 595,
+  "lines_model": 7681,
+  "lines_tesseract": 3942,
+  "lines_model-only": 1799,
+  "lines_bleed": 715,
   "leaves_replaced": 278,
   "layers": {
    "ia-words (tesseract 5.3.0-3-g9920)": 278
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

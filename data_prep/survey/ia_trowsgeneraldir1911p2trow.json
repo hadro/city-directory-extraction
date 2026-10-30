@@ -331,23 +331,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1911",
-   "hocr_lines": 241689,
-   "wrap_joins": 30959,
-   "candidates": 210730,
+   "hocr_lines": 241770,
+   "wrap_joins": 30888,
+   "candidates": 210882,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 207480,
-    "mark_share": 0.5074,
+    "pairs": 207432,
+    "mark_share": 0.5095,
     "mode": 1.75,
-    "mode_pairs": 14319,
+    "mode_pairs": 14397,
     "trough": 0.75,
-    "trough_pairs": 789,
+    "trough_pairs": 779,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 12.87,
-    "run_over_joins": 28798
+    "start_cap": 12.36,
+    "run_over_joins": 28795
    },
-   "model_runovers": 30861,
+   "model_runovers": 30843,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -359,26 +359,26 @@
    },
    "marker_fixes": 0,
    "digit_fixes": 2,
-   "kept": 193223,
+   "kept": 193353,
    "keep_rate": 0.9169,
    "dropped": {
-    "short": 6482,
-    "allcaps": 6057,
-    "banner": 3493,
-    "bigtype": 1436,
+    "short": 6499,
+    "allcaps": 6091,
+    "banner": 3466,
+    "bigtype": 1434,
     "nonascii": 37,
     "pagenum": 2
    },
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 117169,
+   "ditto_applied": 117728,
    "band": {
     "leaves_banded": 601,
-    "head": 2936,
-    "body": 182492,
-    "foot": 6535,
-    "unbanded": 1260
+    "head": 2671,
+    "body": 182736,
+    "foot": 6688,
+    "unbanded": 1258
    },
    "top_ad_leaves": [
     7,
@@ -392,18 +392,18 @@
     757,
     1013
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 14815230,
+  "words_gz_bytes": 14823458,
   "hocr_deleted": true,
   "elapsed_s": 84
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 9,
   "end_leaf": 1217,
   "first_letter": "H",
@@ -584,7 +584,7 @@
     14
    ]
   },
-  "skipped_votes": 3,
+  "skipped_votes": 1,
   "voted_bounds": [
    9,
    1215
@@ -598,7 +598,7 @@
   "cross_check": {
    "source": "lines",
    "start_leaf": 9,
-   "end_leaf": 1215
+   "end_leaf": 1217
   },
   "params": {
    "min_chars": 400,
@@ -610,11 +610,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 608,
   "fitted_leaves": 598,
-  "read_leaves": 351,
+  "read_leaves": 353,
   "segments": [
    {
     "first_leaf": 9,
@@ -622,7 +622,7 @@
     "first_page": 604,
     "last_page": 900,
     "leaves": 297,
-    "read": 179
+    "read": 180
    },
    {
     "first_leaf": 603,
@@ -654,7 +654,7 @@
     "first_page": 977,
     "last_page": 1204,
     "leaves": 228,
-    "read": 139
+    "read": 140
    }
   ],
   "ia_comparison": {
@@ -668,8 +668,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -708,8 +708,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1911p2trow_listing.jsonl.gz",
   "sections": [
    {
@@ -718,31 +718,33 @@
     "end_leaf": 1217
    }
   ],
-  "kept": 193221,
+  "kept": 193351,
   "dropped": 2,
   "kept_share": 1.0,
   "kept_by_section": {
-   "listing": 193221
+   "listing": 193351
   }
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/trowsgeneraldir1911p2trow",
   "ia_dump": "data/survey_ocr/trowsgeneraldir1911p2trow_words.ia.jsonl.gz",
+  "tiles_figure": 2,
   "tiles": 3630,
-  "tiles_answered": 3630,
+  "tiles_preferred": 60,
+  "tiles_answered": 3628,
   "bleed_retry": 0,
   "loop_truncated": 1,
-  "table_mode": 60,
+  "table_mode": 0,
   "pages": 605,
-  "lines_runover": 30861,
-  "lines_model": 235200,
-  "lines_tesseract": 4118,
-  "lines_model-only": 2345,
+  "lines_runover": 30843,
+  "lines_model": 235272,
+  "lines_tesseract": 4083,
+  "lines_model-only": 2389,
   "leaves_replaced": 605,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 605
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

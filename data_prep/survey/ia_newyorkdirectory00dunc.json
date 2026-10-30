@@ -345,39 +345,39 @@
    "publisher_tag": "duncan",
    "publisher_tag_note": null,
    "year_tag": "1794",
-   "hocr_lines": 12058,
-   "wrap_joins": 1250,
-   "candidates": 10808,
+   "hocr_lines": 12160,
+   "wrap_joins": 1240,
+   "candidates": 10920,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 10712,
-    "mark_share": 0.006,
+    "pairs": 10548,
+    "mark_share": 0.0059,
     "mode": 1.25,
-    "mode_pairs": 84,
+    "mode_pairs": 83,
     "trough": 0.5,
     "trough_pairs": 38,
     "reason": "too few runovers to read a mode",
     "start_cap": null,
-    "run_over_joins": 862
+    "run_over_joins": 867
    },
-   "model_runovers": 897,
-   "cont_dropped_leaves": 3,
+   "model_runovers": 902,
+   "cont_dropped_leaves": 0,
    "column_splits": {
-    "lines": 42,
-    "leaves": 3
+    "lines": 0,
+    "leaves": 0
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 10232,
-   "keep_rate": 0.9467,
+   "kept": 10354,
+   "keep_rate": 0.9482,
    "dropped": {
-    "allcaps": 280,
-    "banner": 166,
-    "short": 128,
+    "allcaps": 287,
+    "short": 145,
+    "banner": 132,
     "bigtype": 2
    },
    "ditto_marks": [],
@@ -393,26 +393,26 @@
     232,
     258,
     254,
-    235,
     287,
     259,
-    236,
     291,
     284,
-    267
+    267,
+    310,
+    277
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 706943,
+  "words_gz_bytes": 708414,
   "hocr_deleted": true,
   "elapsed_s": 9
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 23,
   "end_leaf": 237,
   "first_letter": "A",
@@ -565,7 +565,7 @@
     13
    ]
   },
-  "skipped_votes": 6,
+  "skipped_votes": 5,
   "voted_bounds": [
    23,
    237
@@ -589,8 +589,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 294,
   "fitted_leaves": 274,
   "read_leaves": 238,
@@ -631,8 +631,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -708,8 +708,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/newyorkdirectory00dunc_listing.jsonl.gz",
   "sections": [
    {
@@ -718,18 +718,18 @@
     "end_leaf": 237
    }
   ],
-  "kept": 7553,
+  "kept": 7675,
   "dropped": 2679,
-  "kept_share": 0.7382,
+  "kept_share": 0.7413,
   "kept_by_section": {
-   "listing": 7553
+   "listing": 7675
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 402,
+  "scoped_lines": 524,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    232,
@@ -741,23 +741,25 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/newyorkdirectory00dunc",
   "ia_dump": "data/survey_ocr/newyorkdirectory00dunc_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 422,
+  "tiles_preferred": 5,
   "tiles_answered": 422,
   "bleed_retry": 0,
   "loop_truncated": 0,
-  "table_mode": 5,
+  "table_mode": 0,
   "pages": 211,
-  "lines_runover": 905,
-  "lines_model": 8534,
-  "lines_tesseract": 136,
-  "lines_model-only": 129,
+  "lines_runover": 902,
+  "lines_model": 8540,
+  "lines_tesseract": 203,
+  "lines_model-only": 200,
   "leaves_replaced": 211,
   "layers": {
    "ia-words (IA OCR)": 211
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

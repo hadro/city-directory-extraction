@@ -393,24 +393,24 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1879",
-   "hocr_lines": 198504,
-   "wrap_joins": 22671,
-   "candidates": 175833,
+   "hocr_lines": 199031,
+   "wrap_joins": 22542,
+   "candidates": 176489,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 147035,
+    "pairs": 146991,
     "mark_share": 0.0167,
     "mode": 2.0,
-    "mode_pairs": 15902,
+    "mode_pairs": 15799,
     "trough": 1.5,
-    "trough_pairs": 624,
+    "trough_pairs": 613,
     "reason": "sharp runover mode",
     "pinned": true,
-    "start_cap": 6.42,
-    "run_over_joins": 18355
+    "start_cap": 6.31,
+    "run_over_joins": 18200
    },
-   "model_runovers": 20095,
+   "model_runovers": 19904,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -420,14 +420,14 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 6,
-   "kept": 141036,
-   "keep_rate": 0.8021,
+   "marker_fixes": 8,
+   "kept": 141291,
+   "keep_rate": 0.8006,
    "dropped": {
-    "short": 20256,
-    "allcaps": 11973,
-    "banner": 2270,
-    "bigtype": 214,
+    "short": 20431,
+    "allcaps": 12254,
+    "banner": 2223,
+    "bigtype": 206,
     "nonascii": 83,
     "pagenum": 1
    },
@@ -441,6 +441,7 @@
     "unbanded": 0
    },
    "top_ad_leaves": [
+    505,
     7,
     1159,
     12,
@@ -448,22 +449,21 @@
     808,
     133,
     35,
-    505,
     662,
     1144
    ],
-   "filters_at": "9d68ba4-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 11337920,
+  "words_gz_bytes": 11324925,
   "hocr_deleted": true,
   "elapsed_s": 117
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "9d68ba4-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 27,
   "end_leaf": 1142,
   "first_letter": "A",
@@ -475,7 +475,7 @@
   "start": {
    "leaf": 27,
    "image": "https://iiif.archive.org/iiif/1879BPL$27/full/!1400,1400/0/default.jpg",
-   "quote": "Aab George, engineer, h 152 Hopkins"
+   "quote": "Abbey Westminster S. h 279 Union"
   },
   "end": {
    "leaf": 1142,
@@ -640,7 +640,7 @@
     3
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 1,
   "voted_bounds": [
    27,
    1142
@@ -664,8 +664,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "9d68ba4-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 1202,
   "fitted_leaves": 130,
   "read_leaves": 67,
@@ -706,8 +706,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "9d68ba4-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -892,8 +892,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "9d68ba4-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1879BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -907,19 +907,19 @@
     "end_leaf": 1142
    }
   ],
-  "kept": 128901,
+  "kept": 129156,
   "dropped": 12135,
-  "kept_share": 0.914,
+  "kept_share": 0.9141,
   "kept_by_section": {
-   "late_names": 190,
-   "listing": 128711
+   "late_names": 210,
+   "listing": 128946
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 388,
+  "scoped_lines": 406,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    23,
@@ -959,24 +959,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/1879BPL",
   "ia_dump": "data/survey_ocr/1879BPL_words.ia.jsonl.gz",
+  "tiles_figure": 15,
   "tiles": 4382,
-  "tiles_answered": 4382,
-  "bleed_retry": 1,
+  "tiles_preferred": 918,
+  "tiles_answered": 4367,
+  "bleed_retry": 2,
   "loop_truncated": 2,
-  "table_mode": 919,
+  "table_mode": 1,
   "pages": 1116,
-  "lines_runover": 20095,
-  "lines_model": 158002,
-  "lines_model-only": 5410,
-  "lines_tesseract": 17783,
-  "lines_bleed": 36,
+  "lines_runover": 19904,
+  "lines_model": 158211,
+  "lines_model-only": 5825,
+  "lines_tesseract": 17653,
+  "lines_bleed": 69,
   "leaves_replaced": 1116,
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 1116
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

@@ -378,23 +378,23 @@
    "publisher_tag": "mercein",
    "publisher_tag_note": null,
    "year_tag": "1820",
-   "hocr_lines": 28677,
-   "wrap_joins": 488,
-   "candidates": 28189,
+   "hocr_lines": 28728,
+   "wrap_joins": 483,
+   "candidates": 28245,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 25533,
+    "pairs": 25527,
     "mark_share": 0.0073,
     "mode": 1.25,
-    "mode_pairs": 138,
+    "mode_pairs": 136,
     "trough": 0.75,
-    "trough_pairs": 86,
+    "trough_pairs": 84,
     "reason": "runover mode not isolated from the next-entry band",
     "start_cap": null,
-    "run_over_joins": 56
+    "run_over_joins": 54
    },
-   "model_runovers": 102,
+   "model_runovers": 101,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -405,13 +405,13 @@
     "leaves": 2
    },
    "marker_fixes": 1,
-   "kept": 23540,
-   "keep_rate": 0.8351,
+   "kept": 23564,
+   "keep_rate": 0.8343,
    "dropped": {
-    "short": 2778,
-    "banner": 1222,
-    "allcaps": 610,
-    "bigtype": 26,
+    "short": 2812,
+    "banner": 1209,
+    "allcaps": 619,
+    "bigtype": 28,
     "nonascii": 13
    },
    "ditto_marks": [],
@@ -435,18 +435,18 @@
     33,
     37
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 1685318,
+  "words_gz_bytes": 1684382,
   "hocr_deleted": true,
   "elapsed_s": 32
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 104,
   "end_leaf": 448,
   "first_letter": "A",
@@ -623,8 +623,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 445,
   "fitted_leaves": 427,
   "read_leaves": 333,
@@ -673,8 +673,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "late_names",
@@ -763,8 +763,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/merceinscitydire00merc_listing.jsonl.gz",
   "sections": [
    {
@@ -778,12 +778,12 @@
     "end_leaf": 448
    }
   ],
-  "kept": 20053,
-  "dropped": 3487,
-  "kept_share": 0.8519,
+  "kept": 20072,
+  "dropped": 3492,
+  "kept_share": 0.8518,
   "kept_by_section": {
    "late_names": 44,
-   "listing": 20009
+   "listing": 20028
   }
  },
  "non_entry_pages": {
@@ -798,24 +798,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/merceinscitydire00merc",
   "ia_dump": "data/survey_ocr/merceinscitydire00merc_words.ia.jsonl.gz",
+  "tiles_figure": 1,
   "tiles": 698,
-  "tiles_answered": 698,
+  "tiles_preferred": 11,
+  "tiles_answered": 697,
   "bleed_retry": 1,
   "loop_truncated": 0,
-  "table_mode": 11,
+  "table_mode": 0,
   "pages": 349,
-  "lines_runover": 104,
-  "lines_model": 20891,
-  "lines_model-only": 138,
-  "lines_tesseract": 118,
+  "lines_runover": 103,
+  "lines_model": 20907,
+  "lines_model-only": 190,
+  "lines_tesseract": 101,
   "lines_bleed": 32,
   "leaves_replaced": 349,
   "layers": {
    "ia-words (IA OCR)": 349
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

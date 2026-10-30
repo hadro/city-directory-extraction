@@ -328,13 +328,13 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1835",
-   "hocr_lines": 49549,
-   "wrap_joins": 730,
-   "candidates": 48819,
+   "hocr_lines": 49518,
+   "wrap_joins": 728,
+   "candidates": 48790,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 45950,
+    "pairs": 45976,
     "mark_share": 0.0043,
     "mode": 1.25,
     "mode_pairs": 112,
@@ -344,7 +344,7 @@
     "start_cap": null,
     "run_over_joins": 180
    },
-   "model_runovers": 207,
+   "model_runovers": 206,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -355,15 +355,14 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 41132,
-   "keep_rate": 0.8425,
+   "kept": 41159,
+   "keep_rate": 0.8436,
    "dropped": {
-    "short": 4066,
-    "banner": 2352,
+    "short": 4024,
+    "banner": 2339,
     "allcaps": 1260,
     "nonascii": 5,
-    "bigtype": 3,
-    "pagenum": 1
+    "bigtype": 3
    },
    "ditto_marks": [],
    "ditto_applied": 0,
@@ -386,18 +385,18 @@
     788,
     19
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 3177108,
+  "words_gz_bytes": 3178266,
   "hocr_deleted": true,
   "elapsed_s": 92
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 58,
   "end_leaf": 742,
   "first_letter": "A",
@@ -600,8 +599,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 817,
   "fitted_leaves": 800,
   "read_leaves": 775,
@@ -666,8 +665,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -811,8 +810,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/longworthsameric6018long_listing.jsonl.gz",
   "sections": [
    {
@@ -831,19 +830,19 @@
     "end_leaf": 830
    }
   ],
-  "kept": 37506,
+  "kept": 37533,
   "dropped": 3626,
-  "kept_share": 0.9118,
+  "kept_share": 0.9119,
   "kept_by_section": {
    "listing": 36400,
-   "late_names": 1106
+   "late_names": 1133
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 36,
+  "scoped_lines": 63,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    805,
@@ -853,24 +852,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/longworthsameric6018long",
   "ia_dump": "data/survey_ocr/longworthsameric6018long_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 1422,
+  "tiles_preferred": 4,
   "tiles_answered": 1422,
   "bleed_retry": 1,
   "loop_truncated": 1,
-  "table_mode": 4,
+  "table_mode": 0,
   "pages": 711,
-  "lines_runover": 208,
-  "lines_model": 39501,
-  "lines_tesseract": 135,
+  "lines_runover": 207,
+  "lines_model": 39502,
+  "lines_tesseract": 103,
   "lines_model-only": 46,
   "lines_bleed": 28,
   "leaves_replaced": 711,
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 711
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

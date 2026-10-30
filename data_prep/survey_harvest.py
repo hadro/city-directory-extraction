@@ -114,9 +114,17 @@ HOLDOUT_WINDOW = 3       # search this many leaves either side of the jp2 number
 #     "917 SMI", onto the page's first entry) and Brooklyn c1910 3.0 (moved from 2.0: right -- 4 of
 #     4 entry joins only 2.0 made glued two ditto entries, "Chas clk h 1424 Greene av" + "Chas L
 #     autos"; its layer's box starts after the `"`, Trow's includes it). Pinned so they stay.
+# 2026-10-30, round 11's import of the 14 BPL volumes (their first re-OCR):
+#   1875BPL 3.0 (moved from 1.5 on IA's text: right -- of 13 sampled listing joins only 1.5 makes,
+#     read on the page, 6 harmful (Fry Samuel + Fry William T., Starr & Adams + Starran Ann E, and
+#     the running heads "414 JAH—JAM" and "888 WAT—WAY" onto each page's first entry: join_wraps'
+#     running-head guard looks only at a page's first line, and margin-ad lines come before
+#     these heads in reading order (line 104 and 92)), 3 real run-overs
+#     ("Rollhaus Philip ... N. Y. h." + "293 Livingston"), 4 ads or scraps). Pinned so it stays.
 WRAP_PINS = {"1876BPL": 3.0, "doggettsnewyorkc1845dogg": 1.75,
              "trowsgeneraldire1915trow": 1.5, "trowsgeneraldire1917trow": 1.75,
-             "1869BPL": 3.0, "1871BPL": 3.0, "1879BPL": 1.5, "brooklynnewyorkc1910geor": 3.0}
+             "1869BPL": 3.0, "1871BPL": 3.0, "1879BPL": 1.5, "brooklynnewyorkc1910geor": 3.0,
+             "1875BPL": 3.0}
 
 
 # ==============================================================================================

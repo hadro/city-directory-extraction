@@ -354,40 +354,40 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1858",
-   "hocr_lines": 75825,
-   "wrap_joins": 12500,
-   "candidates": 63325,
+   "hocr_lines": 75908,
+   "wrap_joins": 12478,
+   "candidates": 63430,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 63639,
+    "pairs": 63603,
     "mark_share": 0.0815,
     "mode": 2.0,
-    "mode_pairs": 7142,
+    "mode_pairs": 7150,
     "trough": 1.5,
     "trough_pairs": 141,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 5.71,
-    "run_over_joins": 11521
+    "start_cap": 5.68,
+    "run_over_joins": 11494
    },
-   "model_runovers": 11682,
-   "cont_dropped_leaves": 1,
+   "model_runovers": 11657,
+   "cont_dropped_leaves": 2,
    "column_splits": {
-    "lines": 29,
-    "leaves": 1
+    "lines": 69,
+    "leaves": 2
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 55044,
-   "keep_rate": 0.8692,
+   "kept": 55108,
+   "keep_rate": 0.8688,
    "dropped": {
     "nonascii": 2890,
-    "banner": 2336,
-    "short": 2110,
-    "allcaps": 899,
+    "banner": 2328,
+    "short": 2152,
+    "allcaps": 906,
     "bigtype": 46
    },
    "ditto_marks": [],
@@ -411,18 +411,18 @@
     522,
     529
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 4577353,
+  "words_gz_bytes": 4575554,
   "hocr_deleted": true,
   "elapsed_s": 16
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 7,
   "end_leaf": 436,
   "first_letter": "A",
@@ -614,8 +614,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "2e12fad-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 541,
   "fitted_leaves": 486,
   "read_leaves": 316,
@@ -736,8 +736,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -889,8 +889,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1858BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -904,19 +904,19 @@
     "end_leaf": 436
    }
   ],
-  "kept": 45372,
+  "kept": 45436,
   "dropped": 9672,
-  "kept_share": 0.8243,
+  "kept_share": 0.8245,
   "kept_by_section": {
    "late_names": 78,
-   "listing": 45294
+   "listing": 45358
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 271,
+  "scoped_lines": 263,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    6,
@@ -950,23 +950,25 @@
   "role": "run"
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/1858BPL",
   "ia_dump": "data/survey_ocr/1858BPL_words.ia.jsonl.gz",
+  "tiles_figure": 2,
   "tiles": 1680,
-  "tiles_answered": 1680,
+  "tiles_preferred": 35,
+  "tiles_answered": 1678,
   "bleed_retry": 0,
   "loop_truncated": 3,
-  "table_mode": 35,
+  "table_mode": 0,
   "pages": 430,
-  "lines_runover": 11716,
-  "lines_model": 58408,
-  "lines_tesseract": 259,
-  "lines_model-only": 244,
+  "lines_runover": 11711,
+  "lines_model": 58363,
+  "lines_tesseract": 292,
+  "lines_model-only": 299,
   "leaves_replaced": 430,
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 430
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

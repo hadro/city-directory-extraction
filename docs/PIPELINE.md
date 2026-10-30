@@ -1454,7 +1454,10 @@ Recommendation for 5c: the damage worth a re-read is the two-entry cells and the
 1903 p1-p3 and Brooklyn 1905 p1/c1905 above all (20-26% of their tiles in table mode). Re-read with
 table output banned in decoding (vLLM `bad_words` on `|` and `<table`), first on the bench's 10
 table tiles against gold, then this tier's 6,318 and D's table tiles in one job, once D's table
-rate is known. Not run: Torch only. The original finding:
+rate is known. **D's 41,904 table tiles DONE 2026-10-30 (round 11, recorded in #27 after the
+table test): a clear gain, two-entry cells -39 to -43% on Trow 1915/1917/1922-23; banning tables
+pushes 0.43% of tiles into a figure description, which the import now drops (`figure_only`).
+This tier's 6,318 are next (a re-download at NYU).** The original finding:
 **(b) LightOn in table mode merges entries in one cell and drops ditto dashes.** Same leaf 97,
 tile c1_h1 (a Markdown table): `| Philippa sec 51 Front h Mt Vernon N Y Abbihl Jacob H h 408 W
 150th |`, and `| Chas I ice 314 W 16th ... |` for a printed `—Chas I ice ...`. The import cannot
@@ -2485,6 +2488,50 @@ ditto marks lost 1,239 (1922/23 p1), 722 (1917), 678 (1915). **The table test (N
 `|` and `<table` banned: no output holds either; gold entries 93.6 -> 93.4% exact (one line), book
 74.4 -> 74.1%; on the 9 bench pages with table tiles 94.4 -> 94.0% gold, book exact 78.5 -> 77.5%,
 close 99.1 -> 99.8%. Safe, but the bench holds none of the damage above, so it cannot show the gain.
+
+**Round 11, imported 2026-10-30** (NYU jobs 21406288/89 re-read, 21406291 cut, 21406439 read; all
+L40S, 14.6 GPU-h; sha256s checked, every path under `data/reocr_tiers/`, nothing overwritten). (a)
+**The 41,904 table tiles re-read with tables banned** (`-vllm-notables`), exactly the shard lists,
+0 EMPTY, 514 looped (1.9% on Trow 1915/1917/1922-23, 3x the first read, NYU's flag). The loops cost
+nothing against the table reading: those 514 tiles give 32,523 lines for the first read's 30,157.
+In all, +5.8% lines and ditto-bearing lines 776k -> 1.27M. **But the ban pushes 182 tiles (0.43%)
+into a figure description**: `<figure> ### Figure – Bank of New York Organized 1839 *Type: other*
+... names such as "Marie Mrs midwife r40 Macdougal," ...` (Trow 1915 leaf 1467), the whole tile's
+entries as one quoted paragraph, 7,722 of the first read's lines. Not new: **the first read has 537
+(0.27% of 198,874 tiles), already in D's import, and the 14 BPL volumes 178**; 1,018 of 1,019 hold
+nothing outside the figure. `reocr_pair.figure_only` now treats such an answer as no reading (the
+first answer under `--prefer`, else the layer's words, as an EMPTY tile), and `tile_slug` also keeps
+the first answer where the re-read has under half its characters (56 tiles: early stops, 1879BPL
+leaf 508 2 entries of 28; 1885BPL leaf 29 the ad banner only). (b) **The 14 BPL volumes** cut under
+Pillow 12.3.0 (all 802 failed pages now cut; 50,792 tiles, 0 EMPTY, 0.20% looped) and read whole
+under `-vllm-notables`.
+Imported: `import --ids <D's 61> --prefer lightonocr-3-1b-greedy-vllm-notables` (4 h 10 min; Trow
+1915/1917's dumps alone ~2.5 h), then `import --ids <the 14> --slug lightonocr-3-1b-greedy-vllm-notables`
+(1 h). **No listing bounds moved** in any of the 75. On the 18,140 leaves holding a re-read tile
+(the before dumps saved first): lines 6,789,481 -> 6,805,176, lines read from the layer 261,957 ->
+224,609, ditto-led lines 2,412,274 -> 2,518,318 (Trow 1917 +44k, 1915 +32k, 1922/23 p2 +17k); every
+other leaf unchanged (5,835,283 -> 5,835,021). `tables --damage`'s **two-entry cells: 1915 3,987 ->
+2,326, 1917 3,360 -> 2,058, 1922/23 p1 2,299 -> 1,412, p2 2,673 -> 1,523** (plain tiles' base rate
+flat, 3,164 -> 3,156 on 1915); the glued-ditto proxy fell in every volume (Trow 1914 vol 2 534 ->
+418). Trow 1922/23 joins 141,778 -> 134,071 and 159,374 -> 149,976 (the table reading's glued lines
+now come apart). The invented `, ` cannot arise without tables. **A clear gain**, so the damaged
+tier's 6,318 table tiles are worth the same re-read (its zips are pruned at NYU: a re-download).
+The 14 BPL volumes (IA OCR -> LightOn): 1863-1868BPL joins ~2-3k -> 11-17k, scoped -6 to -10%, as
+BPL 1858-1871 in D; 1868BPL scoped per printed name 1.158 -> 1.067, 1875BPL 1.031 -> 1.054 and
+1889BPL 1.028 -> 1.054 (margin ads, as 1876BPL); model-only 0.3-6.5%, none flagged. **1875BPL's wrap
+threshold moved 1.5 -> 3.0** (joins 20,097 at 1.5, 17,071 at 3.0): 13 sampled listing joins only 1.5
+makes, read on the page, 6 harmful (two entries glued, two running heads onto a first entry), 3 real
+run-overs, 4 ads or scraps; right, and pinned (`survey_harvest.WRAP_PINS`). Found on the way:
+**join_wraps' running-head guard sees only a page's first line**, and on BPL pages with margin ads
+the head ("414 JAH—JAM") comes ~100 lines into reading order; harmless at 3.0, open.
+**What a re-import would cost the 4B**, measured on D's (the before dumps against the after, per
+volume, the model's whole input `(publisher, year, raw_line)` as a multiset): 93.2% of 8,581,037
+listing lines unchanged; 99.8% on leaves without a re-read tile, 88.5% on those with one (Trow
+1922/23 78-80%, 1915/1917 85-87%). The damaged tier's figure fix and survey drift are the "without"
+case: ~1% of its 4.68M lines, so a delta 4B job (stage only lines with no earlier prediction, reuse
+the rest: the 4B is greedy and sees nothing but that input) is ~1-2 GPU-h against ~103. Not written
+yet; `prep_volumes.py` stages whole volumes and `assemble_records.load_run` wants one prediction per
+chunk line, checked by the chunk's sha1.
 
 **THE FULL BOOK-SCAN RE-OCR, STAGED ON TORCH (built 2026-10-22).** The tiers' images are ~75 GB,
 which the Mac cannot hold, so Torch fetches and cuts them, and only words and answers cross:

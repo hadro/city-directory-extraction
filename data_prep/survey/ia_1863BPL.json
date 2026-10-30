@@ -339,36 +339,40 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1863",
-   "hocr_lines": 83114,
-   "wrap_joins": 2015,
-   "candidates": 81099,
+   "hocr_lines": 84465,
+   "wrap_joins": 11468,
+   "candidates": 72997,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 71786,
-    "mark_share": 0.0753,
+    "pairs": 72761,
+    "mark_share": 0.0741,
     "mode": 2.25,
-    "mode_pairs": 5930,
-    "trough": 1.5,
-    "trough_pairs": 87,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "mode_pairs": 5112,
+    "trough": 1.75,
+    "trough_pairs": 98,
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": 6.07,
+    "run_over_joins": 10689
    },
+   "model_runovers": 10779,
+   "cont_dropped_leaves": 10,
    "column_splits": {
-    "lines": 0,
-    "leaves": 0
+    "lines": 309,
+    "leaves": 10
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 1,
-   "kept": 69668,
-   "keep_rate": 0.859,
+   "marker_fixes": 0,
+   "kept": 62795,
+   "keep_rate": 0.8602,
    "dropped": {
-    "short": 4813,
-    "nonascii": 3089,
-    "banner": 2681,
-    "allcaps": 831,
+    "nonascii": 3088,
+    "short": 2662,
+    "allcaps": 2328,
+    "banner": 2107,
     "bigtype": 17
    },
    "ditto_marks": [],
@@ -392,30 +396,30 @@
     548,
     0
    ],
-   "filters_at": "572efd7-dirty",
-   "derived": "2026-10-05"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 5320358,
+  "words_gz_bytes": 5048035,
   "hocr_deleted": true,
   "elapsed_s": 31
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 5,
   "end_leaf": 490,
   "first_letter": "A",
   "last_letter": "Z",
   "letters_present": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
   "missing_letters": "X",
-  "voting_density": 0.94,
+  "voting_density": 0.959,
   "flags": [],
   "start": {
    "leaf": 5,
    "image": "https://iiif.archive.org/iiif/1863BPL$5/full/!1400,1400/0/default.jpg",
-   "quote": "Aaron Isaac D. & Co. auctioneers, 120 Fulton,"
+   "quote": "Abbott Hannah, wid. h. 102 Elliott pi."
   },
   "end": {
    "leaf": 490,
@@ -426,7 +430,7 @@
    {
     "start_leaf": 5,
     "end_leaf": 490,
-    "voting_leaves": 457,
+    "voting_leaves": 466,
     "first_letter": "A",
     "last_letter": "Z",
     "letters": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
@@ -442,15 +446,6 @@
     "start_leaf": 266,
     "end_leaf": 298,
     "leaves": 33
-   },
-   {
-    "between": [
-     "R",
-     "S"
-    ],
-    "start_leaf": 383,
-    "end_leaf": 383,
-    "leaves": 1
    }
   ],
   "letter_blocks": {
@@ -541,8 +536,8 @@
    ],
    "R": [
     360,
-    382,
-    14
+    383,
+    24
    ],
    "S": [
     384,
@@ -580,7 +575,7 @@
     1
    ]
   },
-  "skipped_votes": 7,
+  "skipped_votes": 0,
   "voted_bounds": [
    5,
    490
@@ -604,35 +599,19 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-09-23",
-  "code_at": "3528867-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 560,
-  "fitted_leaves": 553,
-  "read_leaves": 479,
+  "fitted_leaves": 554,
+  "read_leaves": 363,
   "segments": [
    {
-    "first_leaf": 6,
-    "last_leaf": 474,
-    "first_page": 2,
-    "last_page": 470,
-    "leaves": 469,
-    "read": 407
-   },
-   {
-    "first_leaf": 475,
-    "last_leaf": 483,
-    "first_page": 411,
-    "last_page": 419,
-    "leaves": 9,
-    "read": 6
-   },
-   {
-    "first_leaf": 484,
+    "first_leaf": 5,
     "last_leaf": 494,
-    "first_page": 480,
+    "first_page": 1,
     "last_page": 490,
-    "leaves": 11,
-    "read": 7
+    "leaves": 490,
+    "read": 332
    },
    {
     "first_leaf": 495,
@@ -654,16 +633,16 @@
   "ia_comparison": {
    "ia_read_leaves": 553,
    "both": 553,
-   "agree": 544,
-   "agree_rate": 0.984,
+   "agree": 553,
+   "agree_rate": 1.0,
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -682,8 +661,8 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 6,
-      "page": 2,
+      "leaf": 5,
+      "page": 1,
       "attestation": "read"
      },
      "last": {
@@ -699,7 +678,7 @@
     "end_leaf": 491,
     "title": {
      "leaf": 491,
-     "quote": "NAMES TOO LATE FOR INSERTION IN REGULAR ORDER.",
+     "quote": "NAMES TOO LATE FOR INSE",
      "image": "https://iiif.archive.org/iiif/1863BPL$491/full/!1400,1400/0/default.jpg"
     },
     "leaves": 1,
@@ -876,8 +855,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-05",
-  "code_at": "572efd7-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1863BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -891,12 +870,34 @@
     "end_leaf": 491
    }
   ],
-  "kept": 61664,
+  "kept": 54791,
   "dropped": 8004,
-  "kept_share": 0.8851,
+  "kept_share": 0.8725,
   "kept_by_section": {
-   "listing": 61628,
-   "late_names": 36
+   "listing": 54758,
+   "late_names": 33
   }
+ },
+ "reocr": {
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm-notables",
+  "root": "data/reocr_tiers/1863BPL",
+  "ia_dump": "data/survey_ocr/1863BPL_words.ia.jsonl.gz",
+  "tiles_figure": 1,
+  "tiles": 1946,
+  "tiles_preferred": 0,
+  "tiles_answered": 1945,
+  "bleed_retry": 0,
+  "loop_truncated": 0,
+  "table_mode": 0,
+  "pages": 487,
+  "lines_runover": 10992,
+  "lines_model": 68967,
+  "lines_tesseract": 110,
+  "lines_model-only": 333,
+  "leaves_replaced": 487,
+  "layers": {
+   "ia-words (ABBYY FineReader 9.0)": 487
+  },
+  "dumped": "2026-10-30"
  }
 }

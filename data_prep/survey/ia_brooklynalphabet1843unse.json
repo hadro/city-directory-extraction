@@ -360,8 +360,8 @@
    "publisher_tag_note": "'leslie/hearnes' tagged as its trained partner 'hearne'",
    "year_tag": "1843",
    "hocr_lines": 11422,
-   "wrap_joins": 386,
-   "candidates": 11036,
+   "wrap_joins": 383,
+   "candidates": 11039,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -386,12 +386,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 9225,
-   "keep_rate": 0.8359,
+   "kept": 9226,
+   "keep_rate": 0.8358,
    "dropped": {
     "short": 650,
-    "allcaps": 583,
-    "banner": 567,
+    "allcaps": 586,
+    "banner": 566,
     "bigtype": 8,
     "nonascii": 3
    },
@@ -416,18 +416,18 @@
     213,
     201
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 759678,
+  "words_gz_bytes": 759894,
   "hocr_deleted": true,
   "elapsed_s": 7
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 17,
   "end_leaf": 197,
   "first_letter": "A",
@@ -599,8 +599,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 258,
   "fitted_leaves": 251,
   "read_leaves": 230,
@@ -625,8 +625,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -739,8 +739,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/brooklynalphabet1843unse_listing.jsonl.gz",
   "sections": [
    {
@@ -750,8 +750,8 @@
    }
   ],
   "kept": 7390,
-  "dropped": 1835,
-  "kept_share": 0.8011,
+  "dropped": 1836,
+  "kept_share": 0.801,
   "kept_by_section": {
    "listing": 7390
   }
@@ -765,10 +765,12 @@
   "role": "run"
  },
  "reocr": {
-  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (IA OCR) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/brooklynalphabet1843unse",
   "ia_dump": "data/survey_ocr/brooklynalphabet1843unse_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 362,
+  "tiles_preferred": 0,
   "tiles_answered": 362,
   "bleed_retry": 0,
   "loop_truncated": 0,
@@ -782,6 +784,6 @@
   "layers": {
    "ia-words (IA OCR)": 181
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

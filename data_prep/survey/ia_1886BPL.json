@@ -327,40 +327,40 @@
    "publisher_tag": "lain",
    "publisher_tag_note": null,
    "year_tag": "1886",
-   "hocr_lines": 239770,
-   "wrap_joins": 26996,
-   "candidates": 212774,
+   "hocr_lines": 240285,
+   "wrap_joins": 26880,
+   "candidates": 213405,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 190325,
+    "pairs": 190160,
     "mark_share": 0.0135,
     "mode": 2.0,
-    "mode_pairs": 17611,
+    "mode_pairs": 17567,
     "trough": 1.5,
-    "trough_pairs": 533,
+    "trough_pairs": 536,
     "reason": "sharp runover mode",
-    "start_cap": 9.22,
-    "run_over_joins": 21142
+    "start_cap": 8.5,
+    "run_over_joins": 20964
    },
-   "model_runovers": 23638,
-   "cont_dropped_leaves": 1,
+   "model_runovers": 23390,
+   "cont_dropped_leaves": 8,
    "column_splits": {
-    "lines": 40,
-    "leaves": 1
+    "lines": 336,
+    "leaves": 8
    },
    "side_bands": {
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 26,
-   "kept": 185898,
-   "keep_rate": 0.8737,
+   "marker_fixes": 30,
+   "kept": 186079,
+   "keep_rate": 0.872,
    "dropped": {
-    "short": 13838,
-    "allcaps": 9855,
-    "banner": 1894,
-    "bigtype": 1174,
+    "short": 14198,
+    "allcaps": 10029,
+    "banner": 1811,
+    "bigtype": 1173,
     "nonascii": 113,
     "pagenum": 2
    },
@@ -375,28 +375,28 @@
    },
    "top_ad_leaves": [
     152,
+    553,
     34,
+    703,
     10,
     3,
-    553,
     19,
     1105,
     44,
-    703,
-    11
+    907
    ],
-   "filters_at": "0c1fb38-dirty",
-   "derived": "2026-10-29"
+   "filters_at": "ad23a97-dirty",
+   "derived": "2026-10-30"
   },
-  "words_gz_bytes": 14689129,
+  "words_gz_bytes": 14628149,
   "hocr_deleted": true,
   "elapsed_s": 33
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "start_leaf": 35,
   "end_leaf": 1256,
   "first_letter": "A",
@@ -408,7 +408,7 @@
   "start": {
    "leaf": 35,
    "image": "https://iiif.archive.org/iiif/1886BPL$35/full/!1400,1400/0/default.jpg",
-   "quote": "Aalbue Ole, machinist, h 130 Wolcott"
+   "quote": "Abbey Charles P. salesman, h 431 5th"
   },
   "end": {
    "leaf": 1256,
@@ -573,7 +573,7 @@
     4
    ]
   },
-  "skipped_votes": 7,
+  "skipped_votes": 2,
   "voted_bounds": [
    35,
    1256
@@ -597,11 +597,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "content_leaves": 1316,
-  "fitted_leaves": 1114,
-  "read_leaves": 286,
+  "fitted_leaves": 1059,
+  "read_leaves": 279,
   "segments": [
    {
     "first_leaf": 28,
@@ -628,14 +628,6 @@
     "read": 18
    },
    {
-    "first_leaf": 157,
-    "last_leaf": 211,
-    "first_page": 3,
-    "last_page": 57,
-    "leaves": 55,
-    "read": 9
-   },
-   {
     "first_leaf": 224,
     "last_leaf": 254,
     "first_page": 166,
@@ -657,7 +649,7 @@
     "first_page": 510,
     "last_page": 559,
     "leaves": 50,
-    "read": 11
+    "read": 10
    },
    {
     "first_leaf": 646,
@@ -705,7 +697,7 @@
     "first_page": 884,
     "last_page": 964,
     "leaves": 81,
-    "read": 15
+    "read": 16
    },
    {
     "first_leaf": 1049,
@@ -721,7 +713,7 @@
     "first_page": 5,
     "last_page": 21,
     "leaves": 17,
-    "read": 5
+    "read": 6
    },
    {
     "first_leaf": 1113,
@@ -729,7 +721,7 @@
     "first_page": 29,
     "last_page": 165,
     "leaves": 137,
-    "read": 20
+    "read": 21
    },
    {
     "first_leaf": 1258,
@@ -759,8 +751,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -935,8 +927,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-29",
-  "code_at": "0c1fb38-dirty",
+  "derived": "2026-10-30",
+  "code_at": "ad23a97-dirty",
   "file": "data/survey_ocr/1886BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -945,18 +937,18 @@
     "end_leaf": 1256
    }
   ],
-  "kept": 172457,
-  "dropped": 13441,
-  "kept_share": 0.9277,
+  "kept": 172639,
+  "dropped": 13440,
+  "kept_share": 0.9278,
   "kept_by_section": {
-   "listing": 172457
+   "listing": 172639
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-29",
+  "derived": "2026-10-30",
   "entry_min": 0.15,
-  "scoped_lines": 544,
+  "scoped_lines": 535,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    43,
@@ -1016,24 +1008,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 9.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/1886BPL",
   "ia_dump": "data/survey_ocr/1886BPL_words.ia.jsonl.gz",
+  "tiles_figure": 45,
   "tiles": 4764,
-  "tiles_answered": 4764,
-  "bleed_retry": 3,
+  "tiles_preferred": 802,
+  "tiles_answered": 4719,
+  "bleed_retry": 4,
   "loop_truncated": 2,
-  "table_mode": 803,
+  "table_mode": 1,
   "pages": 1219,
-  "lines_runover": 23668,
-  "lines_tesseract": 12428,
-  "lines_model": 203254,
-  "lines_model-only": 6686,
-  "lines_bleed": 88,
+  "lines_runover": 23554,
+  "lines_tesseract": 12413,
+  "lines_model": 203230,
+  "lines_model-only": 6885,
+  "lines_bleed": 147,
   "leaves_replaced": 1219,
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 1219
   },
-  "dumped": "2026-10-29"
+  "dumped": "2026-10-30"
  }
 }

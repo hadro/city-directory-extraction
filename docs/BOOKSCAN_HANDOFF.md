@@ -109,6 +109,21 @@ tesseract layer for pages IA failed in part (`reocr_books.py pages --failed`, 20
 built for D and is picked up by that re-import. Re-importing D after round 11 keeps both (the import uses `data/reocr_books_tess/` wherever it
 exists). The runbook sent to NYU is `hpc/runbooks/round11.md` (068cae3).
 
+**Update 2026-10-30: round 11 is back and imported** (PIPELINE #27, "Round 11"). D's 61 volumes
+re-imported with the re-read preferred, the 14 BPL volumes imported for the first time; no listing
+bounds moved; two-entry cells on Trow 1915/1917/1922-23 fell 39-43%. Banning tables pushes 0.43% of
+tiles into a `<figure>` description (and 0.27% of ordinary first reads already were): the import now
+treats such an answer as no reading (`reocr_pair.figure_only`). 1875BPL's threshold move to 3.0 was
+read on the page and pinned. **Next, in this order:** (1) tell NYU they may prune the first,
+abbyy8-clean and BPL tiers and delete their zips, keeping every `answers_*` tar; (2) round 12: the
+damaged tier's 6,318 table tiles, same re-read (its zips need re-downloading); (3) when it lands,
+re-import the damaged tier once (re-read + the figure fix) and send a DELTA 4B job, only the lines
+with no prediction in `data/volumes_books_damaged_v4` (~1% of its 4.68M lines by D's measure; the
+delta script is not written yet, see PIPELINE #27 "What a re-import would cost the 4B"); the canary
+(4 volumes, 22 figure tiles) likewise, with `--root data/reocr_books_halves`; (4) the 4B over D's
+61 + the 14 BPL (a full first pass: 8,564,738 + 1,840,829 lines, ~189 + ~41 GPU-h at 12.6 rows/s,
+`prep_volumes.py --plan`).
+
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an
 empty scratch directory first to look at the paths before anything goes into the repo.

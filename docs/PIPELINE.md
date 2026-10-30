@@ -1662,7 +1662,11 @@ Found on the way, not fixed: (1) a page's running head is joined onto its first 
 the threshold is low enough (1879BPL at 1.25); (2) Trow's firm entries under a surname print
 "—, Goldfarb & Metzger" (= Blumner, Goldfarb & Metzger), and where the dash is lost the line
 opens ", " -- 7,930 such starts, 200-330 a Trow part, each naming the firm without its surname:
-a #32 (g) lost-dash case for the comma form.
+a #32 (g) lost-dash case for the comma form. **(2) DONE 2026-10-29 (6e2621c)**: `dittos` writes the
+mark back at import (FIRM_COMMA on a dash or quote page, no evidence needed: a printed line opens
+on a comma no other way; Trow 1910 p1 dry run: its 223 comma lines and nothing else), and
+assemble_records restores it for the carry with the comma kept ("Hammel, Riglander & Co"), so C's
+records are right without a re-run. With it, "•" became a fixed lead marker (#33).
 
 **33. A run-over LightOn wrote as its own bulleted line stays a separate record (found 2026-10-29,
 hadro, browsing).** `micro_IABROOKLYN_0043` leaf 110 (reocr tier): "PAYSON HENRY, Fire Insurance

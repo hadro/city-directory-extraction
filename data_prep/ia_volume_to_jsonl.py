@@ -330,6 +330,10 @@ DEEP_INDENT = 4.4
 # ...and a line a re-OCR'd page's own model read as a run-over needs only this much. It is a
 # margin guard, not a threshold: see join_wraps, "THE MODEL'S OWN READING".
 MODEL_INDENT = 0.5
+# A running head as join_wraps sees it: no lowercase, up to six tokens, a page number and a run of
+# capitals ("917 SMI", "SAC—SAF 854", "10 AHE-AHR 1896", "98. WILLIAMSBURGH"); not a display
+# entry broken at a hyphen ("BLANCHARD BROS INC 1903-")
+RUNNING_HEAD = re.compile(r"^(?=.*\b\d{1,4}\b)(?=.*[A-Z]{2})(?!.*[a-z])(?!.*-\s*$)\S+(?:\s+\S+){0,5}\s*$")
 # ...measured from where the entry's TEXT begins for a line that opens like a name (join_wraps).
 ENTRY_OPENING = re.compile(r"^[A-Z][a-z'’]+[A-Za-z'’-]*\s+(?:[A-Z][a-z]*\.?|&)(?:\s|$)")
 
@@ -542,6 +546,11 @@ def join_wraps(lines, med_h, deep_indent=False, indent_ratio=INDENT_RATIO, cont=
                     indent = box[0] - starts[-1]
             capped = (start_cap is not None and cont is not None and sources is not None and not cont[i]
                       and sources[i] == "model" and indent > start_cap * med_h)
+            # A page's running head takes no run-over: it is the leaf's first line, its page
+            # number at the margin puts the first entry an indent to the right of it, and
+            # join_wraps runs before the filters that drop it (1879BPL at 1.25: "917 SMI" + "Smith
+            # John, mason, h 72 Greenpoint av", 5 of 5 sampled joins; PIPELINE #32, 2026-10-29)
+            capped = capped or (len(out) == 1 and RUNNING_HEAD.match(pt) is not None)
             if (not capped and indent > floor * med_h
                     and 0 < box[1] - pb[1] < VGAP_RATIO * med_h
                     and min(box[2], pb[2]) - max(box[0], pb[0]) > OVERLAP_FRAC * (box[2] - box[0])):

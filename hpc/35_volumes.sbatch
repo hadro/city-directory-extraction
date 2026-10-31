@@ -34,7 +34,7 @@ source hpc/env.sh
 RUN_NAME="${RUN_NAME:-4b-100k}"
 ADAPTER="${ADAPTER:-$OUT/$RUN_NAME}"
 BATCH="${BATCH:-32}"                      # 32 on L40S (as measured); 64 is safe on H200
-VOL="$DATA/volumes"
+VOL="${VOL:-$DATA/volumes}"               # a delta job (hpc/delta_volumes.py) has its own
 export HF_HUB_OFFLINE=1
 export TOKENIZERS_PARALLELISM=false
 

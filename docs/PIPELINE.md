@@ -2529,9 +2529,14 @@ volume, the model's whole input `(publisher, year, raw_line)` as a multiset): 93
 listing lines unchanged; 99.8% on leaves without a re-read tile, 88.5% on those with one (Trow
 1922/23 78-80%, 1915/1917 85-87%). The damaged tier's figure fix and survey drift are the "without"
 case: ~1% of its 4.68M lines, so a delta 4B job (stage only lines with no earlier prediction, reuse
-the rest: the 4B is greedy and sees nothing but that input) is ~1-2 GPU-h against ~103. Not written
-yet; `prep_volumes.py` stages whole volumes and `assemble_records.load_run` wants one prediction per
-chunk line, checked by the chunk's sha1.
+the rest: the 4B is greedy and sees nothing but that input) is ~1-2 GPU-h against ~103. WRITTEN
+2026-10-31 (bef90f5): `hpc/delta_volumes.py stage` stages only a new staging's unseen prompts,
+`merge` writes every chunk's prediction file and sha1 from old + delta records, so copy_guard and
+`assemble_records.load_run` run unchanged. The k-th copy of a prompt takes the k-th old record,
+because copies decode differently in different batches (8 of 20,000 records in 1876BPL's first
+chunk); with that, an unchanged volume merges byte-identical, and the v4 staging against itself
+reuses all 4,678,164 lines. `35_volumes.sbatch` now takes `VOL`; ship it with the first delta
+package (NYU's copy has the fixed `$DATA/volumes`).
 
 **THE FULL BOOK-SCAN RE-OCR, STAGED ON TORCH (built 2026-10-22).** The tiers' images are ~75 GB,
 which the Mac cannot hold, so Torch fetches and cuts them, and only words and answers cross:

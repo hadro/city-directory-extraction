@@ -131,6 +131,24 @@ delta script is not written yet, see PIPELINE #27 "What a re-import would cost t
 61 + the 14 BPL (a full first pass: 8,564,738 + 1,840,829 lines, ~189 + ~41 GPU-h at 12.6 rows/s,
 `prep_volumes.py --plan`).
 
+**Update 2026-10-31: (4) is STAGED and added to round 12, and (3)'s delta tool is written.**
+hadro sends both packages together. The 4B package: `data/volumes_books_first_clean` (lines staged
+at 0e384e7; 75 volumes = `volumes_first.tsv` + `volumes_abbyy8-clean.tsv`, 557 tasks of 20,000,
+10,405,567 lines, ~229 GPU-h), `cde-volumes-books-first-clean.tar.gz` (318 MB, sha256
+c1680577...228ea9), steps 6-9 of `hpc/runbooks/round12.md` and runbook page v9. It comes back as
+`first-clean-4b-preds.tar`: check its paths in scratch, install into
+`data/volumes_books_first_clean/` (never another staging), check the 557 `.sha1`s, then
+`copy_guard.py --volumes data/volumes_books_first_clean --run 4b-100k` and assemble with
+`--root data/volumes_books_first_clean --out data/records_books_first_clean`. **This staging is
+the release freeze for line assembly** (hadro, 2026-10-31; the plan is the "Two-Week Release
+Plan" doc): a fix after 0e384e7 reaches these volumes through a delta job, never a restage.
+The delta (PIPELINE #27, "What a re-import would cost the 4B"): `hpc/delta_volumes.py` (bef90f5).
+When round 12 is back and the damaged tier is re-imported, stage the 39 in full as
+`data/volumes_books_damaged_v5`, then `delta_volumes.py stage --new data/volumes_books_damaged_v5
+--old data/volumes_books_damaged_v4 --out data/volumes_delta_damaged`; pack it with
+`hpc/35_volumes.sbatch` (it takes `VOL` now) so it runs as `VOL=$DATA/volumes_delta` beside the
+big job; on return, `merge` into `_v5`, then guard and assemble as usual.
+
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an
 empty scratch directory first to look at the paths before anything goes into the repo.

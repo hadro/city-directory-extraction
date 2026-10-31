@@ -63,8 +63,11 @@ The 4B was trained on the records serialized as YAML (`--target yaml`).
 
 ## What it imitates
 
-Seventeen publisher styles: sixteen from New York and Brooklyn, 1786–1933, and Tulsa's 1921 Polk
-directory. In v7:
+Three quarters New York and Brooklyn, one quarter Tulsa. The New York and Brooklyn lines come in
+sixteen publisher styles, 1786–1933; the Tulsa lines imitate the 1921 Polk directory, the best
+grounded style (48,000 real published rows) and the one that teaches the `employer` field. The
+share is the generator's `--mix-weight` (0.75 New York since the third cycle; it was half before).
+In v7:
 
 | Publisher style | Rows |
 |---|---|

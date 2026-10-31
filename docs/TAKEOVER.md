@@ -213,6 +213,10 @@ See "⛔ STOP CHASING PUNCTUATION" in HANDOFF.md before proposing any convention
 
 ## The single most important fact
 
+> **2026-10-31: resolved.** The Hub's `synth_train.jsonl` is now byte-identical to
+> `synth_train_v7.jsonl`, the file `4b-100k` trained on (sha256 509d8f4ce1a99a53...). The warning
+> below describes the upload as it stood on 2026-09-01.
+
 **The training data published on `hadro/city-directory-synth` PREDATES the last two generator
 fixes.** Verified 2026-09-01:
 

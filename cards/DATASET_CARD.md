@@ -9,89 +9,123 @@ tags:
   - synthetic
   - structured-extraction
   - named-entity-recognition
-pretty_name: City Directory Persons — Synthetic Extraction Pairs
+pretty_name: City Directory Lines, Synthetic Extraction Pairs
 task_categories:
   - text-generation
 size_categories:
   - 100K<n<1M
 ---
 
-# City Directory Persons — Synthetic Extraction Pairs
+<!-- DRAFT 2026-10-31. For hadro/city-directory-synth, which is public but has no README yet.
+The licence (cc-by-4.0) is the earlier draft's choice; confirm it with the release licence
+decision. The GitHub links assume the repo is public by release. -->
 
-Synthetic (line → structured record) pairs for training a model to extract person records
-from historical US city directories. **Synthetic and fully owned**, so it can be released
-permissively — the real gold sets below are kept for *evaluation only*.
+# City Directory Lines, Synthetic Extraction Pairs
 
-## Schema
+Synthetic directory lines, each paired with the eight-field record a reader would extract from
+it. This is the training set of the
+[City Directory Extractor 4B](https://huggingface.co/<namespace>/city-directory-extractor-4b). No
+line is copied from a real directory, so the set and models trained on it can be released
+openly; real hand-labeled lines are kept for evaluation only.
 
-Each row: `{raw_line, context, record}`.
-- `raw_line` — a directory entry as printed, with optional injected OCR noise (the model input).
-- `record` — the clean target, fields:
-  `name, is_business, spouse_name, race_designation, occupation_role, employer, address, home_address`.
-- `context` — `{dialect, alphabetical_range, directory_year}` (page-level metadata fed in the
-  prompt, not predicted from the line).
+## Files
 
-Serialize the target as pipe-delimited (default) or YAML — JSON is avoided (small models
-break its syntax; see references).
+| File | Rows | What it is |
+|---|---|---|
+| `synth_train_v7.jsonl` | 100,000 | **The 4B's training set** (sha256 `509d8f4ce1a99a53…`). `synth_train.jsonl` is the same file |
+| `synth_train_250k.jsonl` | 250,000 | The same generator and seed run longer; its first 100,000 rows are v7's. Trained the volume experiment, which made the 0.8B worse |
+| `synth_train_v3.jsonl` … `_v6.jsonl` | 100,000 each | Earlier generator versions, for reproducing the 0.8B's cycles |
+| `synth_smoke.jsonl` | 3,000 | A smoke-test set (seed 7) |
 
-## Dialects & grounding
+The 1,000-row dev set (seed 99) is with the evaluation sets in the gated
+[`hadro/cde-evals`](https://huggingface.co/datasets/hadro/cde-evals). Train, dev and smoke share
+no line, and every `raw_line` in the 250k set is distinct.
 
-Two real "dialects" are modeled, with schema, abbreviations, and field distributions matched
-to real sources:
+## A row
 
-- **Tulsa 1921** (Polk-Hoffhine) — `r/b/rms/rear/h` residency codes, separate `employer`,
-  `(c)` race marker, oil-town occupations/streets. Grounded on the published Tulsa explorer
-  data (`1921.csv`, ~48k rows) and the directory's own ABBREVIATIONS key.
-- **NYC Doggett/Trow 1850–1890** — surname-first, separate work/`h.` home address, `wid`
-  widows, rare `col'd`/`colored` markers, no employer field. Grounded on the NYU NDJSON's
-  `complete_entry` lines + `labeled_entry` parses.
+```json
+{"raw_line": "Schofield Faye, dressmaker rear 510 Catharine.",
+ "context": {"publisher": "doggett", "alphabetical_range": "SCH", "directory_year": "1842"},
+ "record": {"name": "Schofield Faye", "is_business": false, "spouse_name": "",
+            "race_designation": "", "occupation_role": "dressmaker", "employer": "",
+            "address": "rear 510 Catharine", "home_address": ""}}
+```
 
-  > **Caveat (2026-08-04) — this grounding is partly on *derived* labels.** NYU's records have no
-  > race or spouse field; those labels are reconstructed downstream by regex, and the
-  > reconstruction **strips the printed parentheses** (`(col'd)` → `col'd`) and **normalizes the
-  > widow form** (`widow of Jeremy` → `wid Jeremy`). Our own page-verified style card for the very
-  > volume NYU is drawn from (Doggett 1850/51,
-  > [`doggett_manhattan_1840s.md`](../data_prep/style_profiles/doggett_manhattan_1840s.md)) records
-  > the printed forms as `Fox Charles, (co'd) seamn, …` and `Fox Ann, widow of Jeremy, …`.
-  > So the generator's paren-less NYC race vocabulary is inherited from a derived label, not from
-  > the page. Known open item: gate the race-marker form on the publisher/era context tag (the
-  > `*`-marker already is), rather than emitting `(c)` / `(co'd)` / `col` / `col'd` / `colored`
-  > indiscriminately. See docs/GROUND_TRUTH_HANDOFF.md §"Derived vs transcribed gold".
+- `raw_line`: the line as a directory would print it, sometimes with OCR-style noise added. This
+  is the model's input.
+- `context`: the publisher's style, the page's alphabetical range and the year. Publisher and year
+  go into the prompt.
+- `record`: the target. Values are copied from the line, so most of extraction is choosing what
+  to copy. Where the labeling conventions change the printed form (a trailing period dropped, as
+  above), the record shows the change.
 
-Generated by [`synth_persons.py`](https://github.com/<you>/city-directory-extraction)
-(`--profile {tulsa,nyc,mix}`); zero third-party deps; reproducible via `--seed`.
+The 4B was trained on the records serialized as YAML (`--target yaml`).
 
-## Splits
+## What it imitates
 
-<FILL: e.g. train = N synthetic (mix); held-out dev = N synthetic.> The real-gold eval sets
-are separate (below), not included here.
+Seventeen publisher styles: sixteen from New York and Brooklyn, 1786–1933, and Tulsa's 1921 Polk
+directory. In v7:
 
-## Companion EVALUATION sets (not training data)
+| Publisher style | Rows |
+|---|---|
+| `trow` | 34,397 |
+| `polk-tulsa` | 25,051 |
+| `lain` | 9,812 |
+| `polk` | 9,097 |
+| `longworth` | 8,584 |
+| `doggett` | 3,020 |
+| `duncan`, `upington`, `hopehenderson`, `smith`, `boyd`, `hearne`, `mb`, `mercein`, `rode`, `franks`, `ogden` | 10,039 together |
 
-| Set | Source | License | Notes |
+Each style's layout, abbreviations, address forms and ditto marks come from reading its pages
+(the profiles in `data_prep/style_profiles/`). Surnames mix census frequencies with names
+harvested from the directories themselves; occupations come from directory volumes that are not
+used for evaluation. Field rates in v7: home address 14.6% of rows, spouse or widow marker
+15.7%, employer 12.7%, ditto-led name 12.6%, business 3.7%, race marker 2.9%.
+
+The rates matter less than the forms. The trained models copied what each line contained, not
+how often the generator emitted a field. What a model could not learn without examples was a
+transformation the gold makes to the printed line, such as dropping the comma in Franks'
+`95, Water-street`.
+
+## How to regenerate
+
+```bash
+python3 data_prep/synth_persons.py --profile mix --n 100000 --seed 13 --target yaml --out synth_train.jsonl
+python3 data_prep/synth_persons.py --profile mix --n 3000   --seed 7  --target yaml --out synth_smoke.jsonl
+python3 data_prep/synth_persons.py --profile mix --n 1000   --seed 99 --target yaml --out synth_dev.jsonl
+```
+
+From [city-directory-extraction](https://github.com/hadro/city-directory-extraction); the
+generator has no dependencies beyond Python. Byte-identical output needs the generator's commit
+of the v7 build.
+
+## Evaluation sets (not training data)
+
+| Set | Lines | Licence | Where |
 |---|---|---|---|
-| NYU NYC 1850–1890 | [archive.nyu.edu/handle/2451/61521](https://archive.nyu.edu/handle/2451/61521) | **CC-BY-SA-NC 4.0** | **Eval only.** Non-commercial + share-alike — *not* used for training, so this dataset and the trained model stay permissively reusable. Build with `nyu_to_eval.py`. |
-| French Trade Directories | [zenodo.org/records/8167628](https://zenodo.org/records/8167628) | open (CC) | Cross-lingual transfer eval. Build with `ftd_to_eval.py`. |
-| Tulsa 1921 (in-domain) | own `directory-pipeline` output | yours | Real OCR + Gemini-extracted (silver) labels. Build with `harvest_own.py`. |
+| Gold panel: 21 New York and Brooklyn volumes, 1786–1933/34, hand-labeled | 1,583 | ours | `hadro/cde-evals` (gated) |
+| NYU NYC directories 1850–1890 | 500 | CC BY-NC-SA 4.0: evaluation only | `hadro/cde-evals` (gated); source [archive.nyu.edu](https://archive.nyu.edu/handle/2451/61521) |
+| Tulsa 1921 (Polk), Gemini-extracted (silver) | 1,500 | ours | `hadro/cde-evals` (gated) |
+| Lain's Brooklyn 1897 | 800 | ours | `hadro/cde-evals` (gated) |
+| Minneapolis 1900 | 230 | MIT | `hadro/cde-evals` (gated); source [DirCity](https://github.com/adamrangwala/DirCity_Directory_Crop-out-with-Key-Lines) |
 
-## Licensing rationale
-
-The training rows are **synthetic and authored here**, released under CC-BY-4.0 (attribution).
-No non-commercial or share-alike source data is mixed into the training set, so models trained
-on it are not encumbered by the NYU CC-BY-SA-NC terms. The NYU and SODUCO datasets are used
-**only** to evaluate, and are obtained directly from their sources under their own licenses.
+`hadro/cde-evals` is gated rather than open because it includes the NYU set, whose licence is
+non-commercial. None of these sets is in the training data.
 
 ## Limitations
 
-- Synthetic data can miss real OCR failure modes and long-tail formatting; always validate on
-  the real-gold eval sets.
-- Coverage is two dialects/eras; not representative of all US (or non-US) directories.
-- Field distributions approximate the real sources (within ~1–2 points) but are not exact.
+- Synthetic lines miss some of what real OCR does. The 4B scores 82.0 row EM on hand-corrected
+  gold lines and 67.0 end to end on real scans (see the model card).
+- The styles cover New York, Brooklyn and Tulsa. Other cities' directories are out of
+  distribution where their conventions differ.
+- Race markers are generated only in forms the directories print (none unattested in the 250k
+  set). Some NYC forms were first taken from NYU's parsed records rather than read off the page,
+  so the 250k set was checked against the directories for that reason.
 
-## Citation & sources
+## Citation and sources
 
-<FILL: your citation.> Grounding sources: Tulsa 1921 Polk-Hoffhine City Directory (Tulsa
-City-County Library); NYU "NYC Directories Extracted Persons Entries, 1850–1890" (Wolf, Chioh,
-Balogh, Spaan, 2020); SODUCO French Trade Directories (Zenodo 8167628). Method inspired by
-W.J.B. Mattingly, "Parsing 3.6M Historical Names with Small Models," and Daniel van Strien's
-small-models-for-glam work.
+<FILL: citation.> Grounding sources: the Tulsa 1921 Polk-Hoffhine City Directory (Tulsa
+City-County Library); the NYU "NYC Directories Extracted Persons Entries, 1850–1890" (Wolf,
+Chioh, Balogh, Spaan, 2020), for vocabulary only; and page reads of the directories themselves.
+Method after W.J.B. Mattingly's "Parsing 3.6M Historical Names with Small Models" and Daniel van
+Strien's small-models-for-glam work.

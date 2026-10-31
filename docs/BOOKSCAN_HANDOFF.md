@@ -140,8 +140,9 @@ c1680577...228ea9), steps 6-9 of `hpc/runbooks/round12.md` and runbook page v9. 
 `data/volumes_books_first_clean/` (never another staging), check the 557 `.sha1`s, then
 `copy_guard.py --volumes data/volumes_books_first_clean --run 4b-100k` and assemble with
 `--root data/volumes_books_first_clean --out data/records_books_first_clean`. **This staging is
-the release freeze for line assembly** (hadro, 2026-10-31; the plan is the "Two-Week Release
-Plan" doc): a fix after 0e384e7 reaches these volumes through a delta job, never a restage.
+the release freeze for line assembly** (the "Two-Week Release Plan" doc's recommendation,
+applied when hadro said go ahead on 2026-10-31): a fix after 0e384e7 reaches these volumes
+through a delta job, never a restage.
 The delta (PIPELINE #27, "What a re-import would cost the 4B"): `hpc/delta_volumes.py` (bef90f5).
 When round 12 is back and the damaged tier is re-imported, stage the 39 in full as
 `data/volumes_books_damaged_v5`, then `delta_volumes.py stage --new data/volumes_books_damaged_v5

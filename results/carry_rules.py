@@ -69,12 +69,16 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path[:0] = [str(REPO / "postprocess"), str(REPO / "eval"), str(REPO / "data_prep")]
 from assemble_records import Incomplete, dropped_headers, load_run  # noqa: E402
 from entry_rate import is_entry  # noqa: E402
-from resolve_dittos import classify_glued_marks, leaf_letter_ranges, resolve_cross_line  # noqa: E402
+from resolve_dittos import (classify_glued_marks, given_only_names, leaf_letter_ranges,  # noqa: E402
+                            resolve_cross_line)
 
-ROOTS = ("data/volumes_run1", "data/volumes_reocr")
+# the damaged tier (Upington's Brooklyn, most of Trow) added 2026-11-01 for #34
+ROOTS = ("data/volumes_run1", "data/volumes_reocr", "data/volumes_books_damaged_v4")
+GIVEN = given_only_names()
 
 
-def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rng) -> dict:
+def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rng,
+           given_examples: list) -> dict:
     pairs = load_run(root / ident, run)
     lines = [ln for ln, _ in pairs]
     seq = [(ln["context"]["leaf"], ln.get("raw_line") or "") for ln in lines]
@@ -83,6 +87,25 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
     old = list(resolve_cross_line(seq, glued))
     tight = list(resolve_cross_line(seq, glued, strict=True))
     new = list(resolve_cross_line(seq, glued, heads=heads, strict=True))
+    # #34: `given` on top of what assemble_records ran until 2026-11-01 (strict + heads)
+    tight_g = list(resolve_cross_line(seq, glued, strict=True, given=GIVEN))
+    new_g = list(resolve_cross_line(seq, glued, heads=heads, strict=True, given=GIVEN))
+    given_changes = collections.Counter()
+    for i, (n, g) in enumerate(zip(new, new_g)):
+        if "mark_lost" in g["flags"]:
+            cause = "mark_lost: took the carry"
+        elif n["resolved"] != g["resolved"] and "resolved" in (n["status"], g["status"]):
+            cause = ("ditto surname changed" if n["status"] == g["status"] == "resolved"
+                     else f"{n['status']} -> {g['status']}")
+        elif n["status"] == "not_ditto" and n["resolved"] and not g["resolved"]:
+            cause = "a given name no longer sets the carry"
+        else:
+            continue
+        given_changes[cause] += 1
+        if rng.random() < 0.002:
+            given_examples.append({"volume": ident, "row": i, "leaf": seq[i][0],
+                                   "raw_line": seq[i][1][:70], "before": n["resolved"],
+                                   "after": g["resolved"], "cause": cause})
 
     def rate(rows):
         res = [r for r in rows if r["status"] == "resolved"]
@@ -92,13 +115,14 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
                 if res else None}
 
     applied = sum(1 for i in heads if new[i].get("header") == heads[i])
-    agree = {"old": 0, "strict": 0, "n": 0}
+    agree = {"old": 0, "strict": 0, "given": 0, "n": 0}
     for i, h in heads.items():
         if new[i].get("header") != h:
             continue                                   # the gate refused this header
         agree["n"] += 1
         agree["old"] += old[i]["resolved"].lower() == h.lower()
         agree["strict"] += tight[i]["resolved"].lower() == h.lower()
+        agree["given"] += tight_g[i]["resolved"].lower() == h.lower()
     # Only a DITTO row's record changes: a line made transparent keeps its own name (assemble
     # uses the model's `name` for every not_ditto row), it just stops passing it on.
     changed = collections.Counter()
@@ -130,9 +154,12 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
             "header_agreement": {"n": agree["n"],
                                  "old": round(agree["old"] / agree["n"], 4) if agree["n"] else None,
                                  "strict": round(agree["strict"] / agree["n"], 4)
+                                 if agree["n"] else None,
+                                 "given": round(agree["given"] / agree["n"], 4)
                                  if agree["n"] else None},
             "setters_made_transparent": dict(refused),
-            "ditto_surname_changed": dict(changed)}
+            "ditto_surname_changed": dict(changed),
+            "given_changes": dict(given_changes)}
 
 
 def main(argv=None) -> int:
@@ -144,7 +171,7 @@ def main(argv=None) -> int:
     ap.add_argument("--out")
     args = ap.parse_args(argv)
     rng = random.Random(20261020)
-    report, examples = {"run": args.run, "volumes": {}}, []
+    report, examples, given_examples = {"run": args.run, "volumes": {}}, [], []
     for root in map(lambda r: REPO / r, ROOTS):
         for d in sorted(p for p in root.iterdir() if p.is_dir()):
             if args.ids and d.name not in args.ids.split(","):
@@ -153,7 +180,7 @@ def main(argv=None) -> int:
                 continue
             try:
                 report["volumes"][d.name] = volume(d.name, root, args.run, examples,
-                                                   args.examples, rng)
+                                                   args.examples, rng, given_examples)
             except Incomplete as e:
                 print(f"{d.name}: INCOMPLETE {e}")
                 continue
@@ -162,13 +189,16 @@ def main(argv=None) -> int:
             print(f"{d.name:28s} dispute {v['old']['dispute_rate']} -> {v['new']['dispute_rate']}"
                   f"  orphans {v['old']['orphan']} -> {v['new']['orphan']}"
                   f"  headers {v['headers_applied']}/{v['headers_placed']}"
-                  f"  agree old {ha['old']} strict {ha['strict']}"
-                  f"  ditto surnames changed {sum(v['ditto_surname_changed'].values()):,}")
+                  f"  agree old {ha['old']} strict {ha['strict']} given {ha['given']}"
+                  f"  ditto surnames changed {sum(v['ditto_surname_changed'].values()):,}"
+                  f"  #34 {sum(v['given_changes'].values()):,}")
     tot, changed, refused = collections.Counter(), collections.Counter(), collections.Counter()
+    given_total = collections.Counter()
     for v in report["volumes"].values():
         changed.update(v["ditto_surname_changed"])
         refused.update(v["setters_made_transparent"])
-        for k in ("old", "strict"):
+        given_total.update(v["given_changes"])
+        for k in ("old", "strict", "given"):
             tot[f"agree_{k}"] += round((v["header_agreement"][k] or 0)
                                        * v["header_agreement"]["n"])
         tot["agree_n"] += v["header_agreement"]["n"]
@@ -181,11 +211,14 @@ def main(argv=None) -> int:
         "ditto_surname_changed": dict(changed),
         "setters_made_transparent": dict(refused),
         "header_agreement": {"n": int(n), "old": round(tot["agree_old"] / n, 4) if n else None,
-                             "strict": round(tot["agree_strict"] / n, 4) if n else None},
+                             "strict": round(tot["agree_strict"] / n, 4) if n else None,
+                             "given": round(tot["agree_given"] / n, 4) if n else None},
+        "given_changes": dict(given_total),
         "dispute_rate": {"old": round(tot["old_disputed"] / tot["old_resolved"], 4),
                          "new": round(tot["new_disputed"] / tot["new_resolved"], 4)},
         "orphans": {"old": tot["old_orphan"], "new": tot["new_orphan"]}}
     report["examples"] = examples
+    report["given_examples"] = given_examples
     print(json.dumps(report["total"], indent=1))
     if args.out:
         Path(args.out).write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n",

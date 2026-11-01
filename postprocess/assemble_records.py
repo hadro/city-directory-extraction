@@ -46,7 +46,9 @@ EVERY ROW CARRIES
                         carries the mark, or the line is in a section printed for that district
                         (micro_IABROOKLYN_0036's); else null
     ditto_flags         resolve_dittos.resolve_cross_line's review flags: cross_leaf,
-                        letter_conflict, orphan. Kept, never acted on. The carry is `strict` from
+                        letter_conflict, orphan, and mark_lost (from 2026-11-01, PIPELINE #34: no
+                        ditto mark read, but the line opens on a given name such as `Wm`, so it
+                        took the carry; a given name never sets it). Kept, never acted on. The carry is `strict` from
                         2026-10-20 (only a capitalised surname inside its leaf's letters sets it)
                         and reads the headers; 1906BPL's disputed share went 23.2% -> 6.6%, much
                         of that by construction -- results/carry_rules.py has the evidence that
@@ -97,7 +99,8 @@ from entry_rate import is_entry  # noqa: E402
 from iiif_frame import crop_url, xywh as canvas_xywh  # noqa: E402
 from evaluate import FIELDS, load_pred  # noqa: E402
 from resolve_dittos import (annotate, classify_glued_marks, classify_lead_marks,  # noqa: E402
-                           resolve_address_run, resolve_cross_line, surname_token)
+                           given_only_names, resolve_address_run, resolve_cross_line,
+                           surname_token)
 from survey_folios import fit as fit_folios, load as load_folios  # noqa: E402
 from volume_run_report import layout_roles  # noqa: E402
 
@@ -318,7 +321,9 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
         # though a handful a volume never reaches classify_lead_marks' min_n
         markers += tuple(m for m in ADVERTISER_MARKS if m not in markers)
     east = "E" in markers                        # this volume marks Eastern District residents
-    carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True, markers=markers))
+    # a given name where the surname goes is a lost ditto mark (#34, 2026-11-01)
+    carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True, markers=markers,
+                                    given=given_only_names()))
     addresses = list(resolve_address_run(rec.get("address") for _ln, rec in pairs))
     sources = line_sources(ident, lines)
 

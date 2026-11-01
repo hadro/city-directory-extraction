@@ -69,6 +69,7 @@ import json
 import re
 import sys
 import collections
+from pathlib import Path
 from collections import Counter
 
 FIELDS = ["name", "is_business", "spouse_name", "race_designation",
@@ -466,7 +467,46 @@ def split_lead_mark(raw_line: str, marks=()):
     return (" ".join(found), rest) if found else None
 
 
-def can_set_carry(sur: str, leaf, ranges) -> bool:
+# GIVEN-ONLY NAMES (PIPELINE.md #34, 2026-11-01): a given name the census surname list never has
+# (Wm, Jas, Robt, Saml, Margt, Cath, Lillian ...). A line opening with one is a ditto line whose
+# mark the OCR lost or misread, never a surname line, so it must not set the carry ("Robt" on an
+# R page passed both of can_set_carry's tests and made `" Wm E` "Robt Wm E"), and under a carry it
+# takes the carried surname (`Wm S printer` -> "Saddington Wm S"), flagged `mark_lost`. Kept out
+# though they pass the list: titles (Mrs, Rev, Jr), a block's head word (`Virginia Iron, Coal &
+# Coke Co` dittos as Virginia), an OCR fragment (Path), and given names this city printed as
+# surnames too (Leon, Felix, Elias, Clarence, Emil, Gustav, Antonio, Maria, Theo).
+NAMES = Path(__file__).resolve().parent.parent / "data_prep" / "names"
+NOT_GIVEN_ONLY = frozenset({"Mrs", "Rev", "Jr", "Path", "Virginia", "Leon", "Felix", "Elias",
+                            "Clarence", "Emil", "Gustav", "Antonio", "Maria", "Theo"})
+
+
+def given_only_names(min_n: int = 20) -> frozenset:
+    """given_harvested.tsv's names seen `min_n` times or more, less every surname in
+    surnames.tsv and NOT_GIVEN_ONLY; spelled as the harvest has them (Wm, H'y)."""
+    import csv
+    sur = {r[0].lower() for r in csv.reader(open(NAMES / "surnames.tsv", encoding="utf-8"),
+                                            delimiter="\t") if r}
+    out = set()
+    for r in csv.reader(open(NAMES / "given_harvested.tsv", encoding="utf-8"), delimiter="\t"):
+        if len(r) < 2 or int(r[1]) < min_n:
+            continue
+        name = r[0].replace("’", "'")
+        if (name[:1].isupper() and name.replace("'", "").isalpha() and name.lower() not in sur
+                and name not in NOT_GIVEN_ONLY):
+            out.add(name)
+    return frozenset(out)
+
+
+def _given(word: str, given) -> bool:
+    return bool(given) and word.strip(".,;:").replace("’", "'") in given
+
+
+# the first word of a line whose lead is punctuation the volume does not read as a ditto:
+# `•* Wm S letter carrier` (1906BPL), `{ Jas ...`
+FIRST_WORD = re.compile(r"^(?P<lead>[^A-Za-z]*?)\s*(?P<word>[A-Za-z][\w'’]*)")
+
+
+def can_set_carry(sur: str, leaf, ranges, given=frozenset()) -> bool:
     """May this surname-shaped lead become the carry? The `strict` rule (2026-10-20).
 
     `surname_token` alone lets any line whose first word looks sortable reset the carry, and on a
@@ -487,14 +527,17 @@ def can_set_carry(sur: str, leaf, ranges) -> bool:
     between two entries of one block. Not used: `entry_shaped` (it would block 1,057 real
     surname lines of micro_IABROOKLYN_0039 such as `Abbott Moses, keeper city hall.`) and the
     layout role (0039 has 1,252 real entries labelled runover).
+
+    A third test when `given` (given_only_names) is passed: a given name never sets the carry,
+    inside the leaf's letters or not (#34).
     """
-    if not sur or not sur[0].isupper():
+    if not sur or not sur[0].isupper() or _given(sur, given):
         return False
     lo, hi = ranges.get(leaf, ("A", "Z"))
     return lo <= sur[0].upper() <= hi
 
 
-def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=()):
+def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), given=frozenset()):
     """Sequential surname carry over `rows` = [(leaf, raw_line), ...] in reading order.
 
     `glued` is the per-volume set of marks printed without a space (Trow's `-`), empty by default
@@ -517,11 +560,17 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=()):
     Yields one dict per row: the verbatim leading token, the resolved surname, and FLAGS. It
     never drops a row and never silently picks between candidates.
 
+    `given` (given_only_names; default empty, so every number before 2026-11-01 reproduces) reads
+    a line that opens on a given name, with no mark or with punctuation the volume does not read
+    as one, as a ditto whose mark the OCR lost: it takes the carry, flagged `mark_lost`, and never
+    sets it (#34).
+
     Flags, any of which may be set together:
       cross_leaf      the antecedent came from a previous leaf -- a page boundary was crossed
       letter_conflict the carried surname disagrees with this leaf's own modal letter, on a leaf
                       that does not legitimately span two letters
       orphan          no antecedent exists yet (nothing to carry); resolved is left empty
+      mark_lost       no ditto mark read, but the line opens on a given name (`given`)
 
     Callers should treat `cross_leaf` and `letter_conflict` as review queues, not as errors --
     on 1906BPL they are 15.1% and 15.1% of dittos respectively and overlap only 28%, so together
@@ -532,6 +581,19 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=()):
     ranges = leaf_letter_ranges(rows) if (strict or markers) else {}
     heads = heads or {}
     prev, prev_leaf, prev_header = None, None, None
+
+    def carried(leaf, raw, lead, extra=()):
+        """A row that takes the carry (prev is set)."""
+        flags = ["cross_leaf"] if prev_leaf != leaf else []
+        m = modal.get(leaf)
+        if m and not m[1] and prev[0].upper() != m[0]:
+            flags.append("letter_conflict")
+        out = {"leaf": leaf, "raw_line": raw, "lead": lead, "resolved": prev,
+               "status": "resolved", "flags": flags + list(extra)}
+        if prev_header:
+            out["header"] = prev_header
+        return out
+
     for i, (leaf, raw) in enumerate(rows):
         if i in heads and (not strict or can_set_carry(heads[i], leaf, ranges)):
             prev, prev_leaf, prev_header = heads[i], leaf, heads[i]
@@ -558,7 +620,15 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=()):
                        "status": "not_ditto", "flags": [], "mark": mk[0]}
                 continue
         sur = None if gl else surname_token(raw)
-        if sur is not None and strict and not can_set_carry(sur, leaf, ranges):
+        if sur is not None and _given(sur, given):
+            # a given name in the surname's place: its ditto mark was lost (#34)
+            if prev is not None:
+                yield carried(leaf, raw, "", ["mark_lost"])
+            else:
+                yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": "",
+                       "status": "not_ditto", "flags": []}
+            continue
+        if sur is not None and strict and not can_set_carry(sur, leaf, ranges, given):
             yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": "",
                    "status": "not_ditto", "flags": []}
             continue
@@ -568,26 +638,22 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=()):
                    "status": "not_ditto", "flags": []}
             continue
         if not gl and not is_ditto_lead(raw):
+            fw = FIRST_WORD.match(raw) if given else None
+            if fw and prev is not None and _given(fw.group("word"), given):
+                # `Wm S printer` (first_letter abstains on a two-letter `Wm`) or `•* Wm S`: a
+                # ditto whose mark the OCR lost or read as something else (#34)
+                yield carried(leaf, raw, fw.group("lead").strip(), ["mark_lost"])
+                continue
             yield {"leaf": leaf, "raw_line": raw, "lead": raw.split()[0] if raw.split() else "",
                    "resolved": "", "status": "not_ditto", "flags": []}
             continue
 
         lead = gl[0] if gl else raw.split()[0]
-        flags = []
         if prev is None:
             yield {"leaf": leaf, "raw_line": raw, "lead": lead, "resolved": "",
                    "status": "orphan", "flags": ["orphan"]}
             continue
-        if prev_leaf != leaf:
-            flags.append("cross_leaf")
-        m = modal.get(leaf)
-        if m and not m[1] and prev[0].upper() != m[0]:
-            flags.append("letter_conflict")
-        out = {"leaf": leaf, "raw_line": raw, "lead": lead, "resolved": prev,
-               "status": "resolved", "flags": flags}
-        if prev_header:
-            out["header"] = prev_header
-        yield out
+        yield carried(leaf, raw, lead)
 
 
 # --------------------------------------------------------------------------------------------
@@ -916,6 +982,29 @@ def self_test() -> int:
                                   heads={2: "Anderson"}))
     check("the next real surname ends the header's run", (got[5]["resolved"], got[5].get("header")),
           ("Archer", None))
+
+    # `given` (#34): a given name where the surname goes is a lost ditto mark
+    g = frozenset({"Wm", "Robt", "Jas", "Cath"})
+    r_page = [(5, f"R{s} Jas h {n} Main") for n, s in enumerate(
+        ("aab", "abe", "ace", "ade", "aff", "ain", "ake", "and", "app", "ash", "eed", "ice",
+         "ich", "ile", "obb", "oss"))]
+    lost = r_page + [(5, "Roberts Saml clerk h 4 Pine"), (5, "Robt shoes h 9 Elm"),
+                     (5, '" Wm E cottongds 54 Leonard'), (5, "Wm S printer h 45 Fort Greene pl"),
+                     (5, "•* Jas letter carrier h 596 Franklin av")]
+    old = list(resolve_cross_line(lost, strict=True))
+    got = list(resolve_cross_line(lost, strict=True, given=g))
+    check("without `given`, Robt on an R page sets the carry", old[-3]["resolved"], "Robt")
+    check("a given name never sets the carry", got[-3]["resolved"], "Roberts")
+    check("...and takes it, flagged", (got[-4]["resolved"], got[-4]["flags"]),
+          ("Roberts", ["mark_lost"]))
+    check("Wm, which first_letter abstains on", (got[-2]["resolved"], got[-2]["lead"],
+                                                 got[-2]["flags"]), ("Roberts", "", ["mark_lost"]))
+    check("a misread mark before a given name", (got[-1]["resolved"], got[-1]["lead"]),
+          ("Roberts", "•*"))
+    check("no carry yet: left alone", [x["status"] for x in resolve_cross_line(
+        [(5, "Robt shoes h 9 Elm")], strict=True, given=g)], ["not_ditto"])
+    check("given_only_names reads the lists", {"Wm", "Robt", "Saml"} <= given_only_names()
+          and not {"Mrs", "Smith", "Virginia"} & given_only_names(), True)
 
     # the address slot grammar, on duncan1794's gold addresses in their printed order
     duncan = ["71 Dey-street.", "27 Ann do.", "11 Rector do.", "30 Ferry-street", "Mott do.",

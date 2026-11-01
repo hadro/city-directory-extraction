@@ -1703,6 +1703,58 @@ lines would glue far more than it saves. Two by-products: (1) Trow's "•" is an
 belongs with assemble_records' `name_mark` (strip it from name_resolved, as `*`); (2) a wider
 first count, which let "," and "." lead, found the Trow firm-entry lost dash recorded under #32.
 
+**34. Records whose name_resolved has no surname, and the carry they poison (found 2026-11-01,
+hadro, tracing the residents of 596 Franklin av in the address finder, `space/`).** The trace of
+"Saddington Wm S" also traced "Wm S", which matches 35 lines in 13 volumes, every one a ditto line
+that kept its given names alone. Over the 5.41M rows of the address finder's Parquet (holdouts
+and the run-1 Doggett copy out), **22,846 named lines (0.43%; 16,652 `usable`) resolve to a name
+that opens with a given name the census list never has as a surname** (Wm, Jas, Chas, Robt,
+Saml, Thos, Hy, Margt, Cath ...: `data_prep/names/given_harvested.tsv` with count >= 20, less
+`surnames.tsv`; John, James and the like are not counted, so it is a floor). Upington's Brooklyn
+1905-1910 run 1.5-2.0% a volume (3,118-3,796), Trow 0.09-0.46%, the early volumes under 0.1%.
+Three ways, all in `resolve_dittos` (`can_set_carry`, `resolve_cross_line`):
+1. **The mark lost or misread, and the line keeps its given names** (13,750 open on a letter,
+   `Wm S printer h 45 Fort Greene pi`; misread marks such as 1906BPL's `•* Wm S letter carrier h
+   596 Franklin av`, where `•` is now the advertiser mark (#33) and `*` is not a ditto). The strict
+   gate makes such a line TRANSPARENT, so the carry is right below it, but the line itself never
+   takes the carried surname.
+2. **A given name inside the leaf's letters sets the carry** ("Robt" on an R page passes both of
+   `can_set_carry`'s tests), and every ditto under it is wrong: `" Wm E cottongds 54 Leonard` ->
+   "Robt Wm E", `" Hy smith` -> "Cath Hy", `" Thos C clk` -> "Thos Thos C". Most of the ~9,100
+   ditto-marked lines with a given name where the surname goes (7,048 open on `"`).
+3. **A first-letter misread across a page fails the leaf-letter gate for real surnames.** 1906BPL
+   leaf 575 reads K as R (`Rerby Chas`, `Rerans Frank L`, `Rerbel Benj`); each is transparent, so
+   the carry runs on from `Keohan` 47 lines up and `" Frank E ins 1 Madison av` comes out "Keohan
+   Frank E" (Kerby in every other year). 1906BPL is run 1's IA text, which D replaces, but the
+   gate is the same everywhere.
+The OCR side is known and separate (table-mode tiles drop ditto columns, BOOKSCAN_HANDOFF; #32
+(g) restores tesseract-read dashes at import for the re-OCR'd Trow parts); this is the assembly
+side, and covers every tier. **Plan:** (a) a given-only name cannot set the carry; (b) a line with
+no ditto mark that opens on a given-only name, under a carry, takes the carried surname and a new
+`ditto_flags` entry `mark_lost`; (c) maybe: let the leaf-letter test accept a lead whose first
+letter is a common OCR confusion of the leaf's (K/R, E/F, C/G), measured before it is kept.
+Measure each against `results/carry_rules.py` (agreement with the printed headers) and the gold
+before re-assembling the tiers; then rebuild `browse.db` and `data/space/records.parquet`.
+**(a) + (b) BUILT 2026-11-01, not yet re-assembled.** `resolve_dittos.given_only_names()` (55
+names: given_harvested >= 20, less surnames.tsv, less `NOT_GIVEN_ONLY` -- titles, `Virginia`
+which heads the "Virginia Iron, Coal & Coke Co" block, and given names the city printed as
+surnames too, Leon, Felix, Elias ...), passed as `resolve_cross_line(given=)`; default empty, so
+every earlier number reproduces. `assemble_records` passes it. `carry_rules.py` (now over the
+damaged tier too, 82 volumes) against strict + heads: **13,009 lines take the carry
+(`mark_lost`), 6,022 dittos change surname** (1906BPL 2,753 + 120; Upington's 1905-1910
+1,137-1,617 each). Agreement with the printed headers 81.94 -> 82.14% (n = 31,040; 20 volumes up,
+none down) -- headers open blocks, where this rarely acts, so it is a floor test, not the gain.
+Read on the page (8 at random, context crops): 2 confirmed (`—Thos h 119 E 95th` under the
+printed THORP header, was "Thos"; `" Wm H acct` in the Janes block, was "Jas"); 5 replace a
+given name or nothing with the block's carry, whose head is above the crop; **1 wrong**: Brooklyn
+c1905 leaf 1105 is a block of lost-mark lines whose given names are also surnames (`Webster M`,
+`Wellington`, `Western W`, `Wilbur`), so `Wilbur` still sets the carry and `Wm brass` becomes
+"Wilbur Wm" (it was "Wm"). Known costs: ad copy opening on a listed name takes a surname too
+(`Charlotte Russe` -> "Murphy Charlotte Russe"; not entry-shaped, so not `usable`); a given
+name under the 20-count cut still sets the carry (`Susan`, `Marg’t`). Open: (c), and a block of
+lost marks whose given names are surnames as well (the Wilbur case; maybe the given-name ORDER
+inside a block, which is sorted by given name, can tell it from a run of surnames).
+
 ## Medium effort, high information
 
 **5. Does the `44` finding generalize?** It is measured on one volume, one OCR engine, one adapter.

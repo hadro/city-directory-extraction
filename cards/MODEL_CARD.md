@@ -41,7 +41,7 @@ Evaluation); what differs is the hardware each needs.
 | Size | Adapter | Seconds per line on a 16 GB Apple laptop | Use it for |
 |---|---|---|---|
 | **4B** (this repo) | 143 MB | ~100 | Whole volumes on a GPU. It built the records dataset, and it is the only size scored end to end on real scans |
-| [2B](https://huggingface.co/<namespace>/city-directory-extractor-2b) | 83 MB | ~5 | A laptop, or half the GPU cost: within a point of the 4B on the gold panel |
+| [2B](https://huggingface.co/<namespace>/city-directory-extractor-2b) | 83 MB | ~5 | A laptop or a smaller GPU: within a point of the 4B on the gold panel |
 | [0.8B](https://huggingface.co/<namespace>/city-directory-extractor-0.8b) | 60 MB | ~3 | The smallest machines and quick trials; about four points behind the 4B |
 
 The laptop times are one line at a time on an M2 with 16 GB; batching helps (the 2B has reached

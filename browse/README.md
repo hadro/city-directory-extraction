@@ -169,9 +169,13 @@ python3 browse/find_address.py --self-test
 
 Lists every line that may give an address, with a link per grade that opens those rows, crops
 and all, in the browser. It reads the search index's word list for spellings of the street word
-within two edits (Leflerts, Lefferta, Leffert©) and for the number's look-alikes (I66, hl66). Then
-it reads number-then-street in `raw_line` and the resolved addresses, rejoining a split word,
-and follows a line that ends on the number into the next line. Grades:
+(Leflerts, Lefferta, Leffert©) and for the number's look-alikes (I66, hl66). A spelling may be
+two edits off for a street word of eight letters or more, one for a shorter word: two edits turn
+Forest into First. A spelling at least a quarter as common as the street word is another street
+(Classon for Clarkson), and is listed as not searched. Then it reads number-then-street in
+`raw_line` and the resolved addresses, and follows a line that ends on the number into the next
+line. It rejoins a split word ("Lef ferts") only within one edit, so "John, N." is not Johnson.
+Grades:
 
 - **exact:** the number and street as asked.
 - **street:** the number as asked, the street misspelled or split.
@@ -180,13 +184,18 @@ and follows a line that ends on the number into the next line. Grades:
 - **near:** one digit off. These are mostly real neighbours. The ones whose name or surname is
   at the exact address in another volume are flagged, with their own link.
 
-A line naming another street type (166 Lefferts av when asked for pl) is a different street, and
-is marked `TYPE av`. `--people` lists each resident's line in every volume, so a year whose line
+A line naming another street type (166 Lefferts av when asked for pl) or direction (131 E 110th
+when asked for West) is a different street, and is marked `OTHER STREET (av)` or `(E)`; a line
+that leaves the direction out is not. A numbered street ("131 West 110th st") matches by its
+digits, look-alikes folded (11Oth), never by edits, since 111th is another street. `--people` lists each resident's line in every volume, so a year whose line
 read the address too badly to match shows as another address or a gap.
 
 It finds nothing where the number was dropped, or the street word is more than two edits off. For
 a street of several words (De Kalb av) it matches the longest word. It opens the database
 read-only, so Datasette can keep serving.
+
+`space/` has the same search as a web page, with the line images, on DuckDB over a Parquet copy
+(~1 s a search). See `space/README.md`.
 
 ## Giving someone a copy
 

@@ -160,6 +160,16 @@ gold exactly in all eight fields (17 sets, 2,062 lines; model card, "End to end"
 Lines on the pages that serve as this project's evaluation gold, and on the pages beside them,
 are left out, so the gold stays unseen: <FILL: N> lines (1,798 in the first 78 volumes).
 <!-- The export must drop rows with eval_holdout set; assemble_records keeps them, flagged. -->
+<!-- The export must also keep ONE copy of each volume. Doggett 1845 (doggettsnewyorkc1845dogg)
+     is assembled twice: run 1's IA-text reading (root data/volumes_run1, data/records/) and the
+     damaged tier's re-OCR (root data/volumes_books_damaged_v4, data/records_books_damaged/).
+     browse/ loads both on purpose (browse/sources.toml); a release must not. Keep the re-OCR,
+     which the 0.982 above is computed from (60,199 usable / 61,333 printed names); both copies
+     together read 1.966. space/build_parquet.py's SUPERSEDED applies the same rule. -->
+<!-- The 1,798 lines (78 volumes) count the reocr and damaged-tier roots only. Run 1's root
+     holds 12,793 more held-out lines (gold 4,445, adjacent 8,348) in its own volumes; if any of
+     run 1's volumes ship, count those too. -->
+
 <FILL: if decided, the OCR text layer (every line LightOn read, with word positions) as a
 separate configuration.>
 

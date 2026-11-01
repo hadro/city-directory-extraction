@@ -24,8 +24,10 @@ Each line gets the best of these grades:
   number    the number in look-alike characters (I66), the street within --dist
   wrapped   the number at the end of a line, the street at the start of the next
   near      one digit off (106, 165, 16): usually a real neighbour, sometimes a misread
-and a note where the line names another street type (166 Lefferts av when asked for pl), which
-is a different street, not a misreading. A near line whose name (SAME NAME) or surname (SURNAME)
+and a note where the line names another street type (166 Lefferts av when asked for pl) or
+direction (131 E 110th when asked for West), which is a different street, not a misreading. A
+direction left out of a line is no difference. A numbered street (110th, 3d) matches by its digits
+with look-alikes folded (11Oth), never by edits: 111th is another street. A near line whose name (SAME NAME) or surname (SURNAME)
 is at the address in another volume is flagged, with a link to just those: the same household
 one digit off is the likeliest misread.
 
@@ -54,6 +56,9 @@ FOLD = str.maketrans({"i": "1", "l": "1", "I": "1", "|": "1", "!": "1", "]": "1"
                       "z": "2", "Z": "2"})
 FIELDS = ["raw_line", "address_resolved", "home_address_resolved"]
 LINK_IDS = 150          # record ids per link: a longer URL is past the server's request-line limit
+COMMON_SHARE = 0.25     # a spelling this common relative to the street word is another street
+DIRECTIONS = {"w": "w", "west": "w", "e": "e", "east": "e", "n": "n", "north": "n", "s": "s",
+              "south": "s"}
 
 
 def lev(a: str, b: str, cap: int = 99) -> int:
@@ -90,13 +95,39 @@ def street_type(word: str) -> str:
 
 
 def parse(address: str):
-    """'166 Lefferts pl' -> ('166', ['lefferts'], 'pl')"""
+    """'166 Lefferts pl' -> ('166', ['lefferts'], 'pl'); a direction leads the words, as one
+    letter: '131 West 110th st' -> ('131', ['w', '110th'], 'st')"""
     toks = address.split()
     if len(toks) < 2 or not toks[0].isdigit():
         raise SystemExit(f'give a house number and a street: "166 Lefferts pl", not {address!r}')
     kind = street_type(toks[-1]) if len(toks) > 2 else ""
-    words = [re.sub(r"[^a-z]", "", t.lower()) for t in (toks[1:-1] if kind else toks[1:])]
-    return toks[0], [w for w in words if w], kind
+    words = [re.sub(r"[^a-z0-9]", "", t.lower()) for t in (toks[1:-1] if kind else toks[1:])]
+    words = [w for w in words if w]
+    if len(words) > 1 and words[0] in DIRECTIONS:
+        words[0] = DIRECTIONS[words[0]]
+    return toks[0], words, kind
+
+
+def split_direction(words: list) -> tuple:
+    """(direction, the street's own words): ('w', ['110th']) from ['w', '110th']"""
+    if len(words) > 1 and words[0] in DIRECTIONS.values():
+        return words[0], words[1:]
+    return "", words
+
+
+def anchor_of(words: list) -> str:
+    """The word a line is matched on: the street's longest ('kalb' of De Kalb)."""
+    return max(split_direction(words)[1], key=len)
+
+
+def ordinal(word: str) -> str | None:
+    """A numbered street's digits, look-alikes folded: '110th' and '11oth' -> '110'; None for a
+    word that is not one. 110th and 111th are different streets, so these are never fuzzed."""
+    m = re.fullmatch(r"([0-9ilogbsz|]+?)(st|nd|rd|th|d|h|t)?", word)
+    if not m or not any(c.isdigit() for c in m.group(1)):
+        return None
+    f = m.group(1).translate(FOLD)
+    return f if f.isdigit() else None
 
 
 def as_number(tok: str) -> str | None:
@@ -111,14 +142,29 @@ def as_number(tok: str) -> str | None:
     return f if f.isdigit() and len(f) <= 5 else None
 
 
-def match_tokens(toks: list, number: str, words: list, kind: str, dist: int, cut: int | None = None):
-    """The best reading of number-then-street in `toks` as (grade, how, type) or None. `cut` is
-    where the second of two lines starts: only a reading across it counts (grade wrapped)."""
-    anchor = max(words, key=len)
-    k = words.index(anchor)
+def street_dist(anchor: str, dist: int) -> int:
+    """The edits allowed in the street word: `dist`, but 1 below eight letters -- two edits turn
+    Forest into First and Fulton into Milton."""
+    return min(dist, 1 if len(anchor) < 8 else 2 if len(anchor) < 12 else 3)
+
+
+def match_tokens(toks: list, number: str, words: list, kind: str, dist: int, cut: int | None = None,
+                 skip=frozenset()):
+    """The best reading of number-then-street in `toks` as (grade, how, note, tail) or None;
+    `note` names what makes it another street: another type (av for pl) or direction (E for W);
+    `tail` is the three tokens after the street and its type, where a place marker goes. `cut`
+    is where the second of two lines starts: only a reading across it counts (grade wrapped).
+    `skip` is spellings that are other streets (other_streets). A direction in the line is
+    optional: "131 110th" may be West 110th."""
+    direction, street = split_direction(words)
+    anchor = anchor_of(words)
+    k = street.index(anchor)
+    numbered = ordinal(anchor)
+    dist = street_dist(anchor, dist)
+    clean = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())   # noqa: E731
     best = None
     for i, tok in enumerate(toks):
-        if cut is not None and i < cut - 2:
+        if cut is not None and not cut - 2 <= i < cut:     # the number ends the first line
             continue
         n = as_number(tok)
         if n is None:
@@ -134,17 +180,29 @@ def match_tokens(toks: list, number: str, words: list, kind: str, dist: int, cut
             ngrade = "near"
         else:
             continue
-        j = i + 1 + k
+        start, line_dir = i + 1, ""
+        if start + 1 < len(toks) and clean(toks[start]) in DIRECTIONS:
+            line_dir = DIRECTIONS[clean(toks[start])]
+            start += 1
+        j = start + k
         if j >= len(toks):
             continue
-        clean = lambda t: re.sub(r"[^a-z]", "", t.lower())   # noqa: E731
         options = [(clean(toks[j]), j)]
         if j + 1 < len(toks):
             options.append((clean(toks[j]) + clean(toks[j + 1]), j + 1))
         for s, end in options:
-            d = lev(s, anchor, dist)
-            if d > dist:
-                continue
+            if numbered:
+                if ordinal(s) != numbered:
+                    continue
+                d = 0 if s == anchor else 1
+            else:
+                d = lev(s, anchor, dist)
+                if d > dist or s in skip:
+                    continue
+                # a word rejoined from two is held to one edit unless the first part ends in a
+                # hyphen: "John, N." is not Johnson
+                if end > j and d > 1 and not toks[j].endswith("-"):
+                    continue
             if cut is not None and end < cut:
                 continue
             if cut is not None:
@@ -154,21 +212,45 @@ def match_tokens(toks: list, number: str, words: list, kind: str, dist: int, cut
             else:
                 grade = ngrade
             line_kind = street_type(toks[end + 1]) if end + 1 < len(toks) else ""
-            note = "" if not kind or not line_kind or line_kind == kind else line_kind
-            cand = (GRADES.index(grade), d, grade, f"{tok} {' '.join(toks[j:end + 1])}", note)
+            # another direction is another street when one was asked for, or the street is
+            # named (W Broadway); "131 110th st" asks for either side
+            other_dir = line_dir and line_dir != direction and (direction or not numbered)
+            note = " ".join(x for x in (
+                line_dir.upper() if other_dir else "",
+                line_kind if kind and line_kind and line_kind != kind else "") if x)
+            after = end + 1 + (1 if line_kind else 0)
+            tail = " ".join(toks[after:after + 3])      # where a place marker would be: "Bklyn"
+            cand = (GRADES.index(grade), d, grade, f"{tok} {' '.join(toks[j:end + 1])}", note, tail)
             if best is None or cand[:2] < best[:2]:
                 best = cand
     return best and best[2:]
 
 
+def other_streets(streets: list, anchor: str) -> tuple:
+    """(kept, dropped) of [(term, count)]: a spelling at least COMMON_SHARE as common as the
+    street word itself is another street, not a misreading of it -- Classon for Clarkson,
+    Monroe for Montrose, both two edits off. A numbered street's spellings all fold to its own
+    digits, so none is dropped."""
+    if ordinal(anchor):
+        return streets, []
+    own = max([n for t, n in streets if t == anchor], default=0)
+    kept = [(t, n) for t, n in streets if t == anchor or n < COMMON_SHARE * own or own < 20]
+    return kept, [s for s in streets if s not in kept]
+
+
 def vocab_terms(con, number: str, anchor: str, dist: int):
     """The index's words that may be the street word or the number."""
     con.execute("CREATE VIRTUAL TABLE IF NOT EXISTS temp.vocab USING fts5vocab(main, records_fts, row)")
+    dist = street_dist(anchor, dist)
+    numbered = ordinal(anchor)
     streets, numbers = [], []
     lo, hi = min(len(anchor) - dist, len(number) - 1), max(len(anchor) + dist, len(number) + 2)
     for term, n in con.execute("SELECT term, doc FROM temp.vocab WHERE length(term) BETWEEN ? AND ?",
                                (lo, hi)):
-        if term.isalpha() and abs(len(term) - len(anchor)) <= dist and lev(term, anchor, dist) <= dist:
+        if numbered and ordinal(term) == numbered and term != number:
+            streets.append((term, n))
+        elif (not numbered and term.isalpha() and abs(len(term) - len(anchor)) <= dist
+              and lev(term, anchor, dist) <= dist):
             streets.append((term, n))
         elif as_number(term) == number:
             numbers.append((term, n))
@@ -194,27 +276,47 @@ def next_line(con, record_id: str):
                        (f"{vol}:{leaf}:{int(n) + 1}",)).fetchone()
 
 
+def best_reading(r, number: str, words: list, kind: str, dist: int, skip=frozenset()):
+    """The best grade any of a row's FIELDS gives, as match_tokens returns it, or None."""
+    best = None
+    for f in FIELDS:
+        m = match_tokens((r[f] or "").split(), number, words, kind, dist, skip=skip)
+        if m and (best is None or GRADES.index(m[0]) < GRADES.index(best[0])):
+            best = m
+    return best
+
+
+def ends_on_number(r) -> bool:
+    """The line may wrap the address: a number among its last two tokens."""
+    return any(as_number(t) for t in (r["raw_line"] or "").split()[-2:])
+
+
+def read_wrapped(r, next_raw: str, number: str, words: list, kind: str, dist: int,
+                 skip=frozenset()):
+    toks = (r["raw_line"] or "").split()
+    return match_tokens(toks + (next_raw or "").split(), number, words, kind, dist, cut=len(toks),
+                        skip=skip)
+
+
 def find(con, address: str, dist: int) -> list:
     number, words, kind = parse(address)
-    anchor = max(words, key=len)
+    anchor = anchor_of(words)
     streets, numbers = vocab_terms(con, number, anchor, dist)
+    streets, dropped = other_streets(streets, anchor)
     print(f"street words within {dist} of {anchor!r}: "
           + ", ".join(f"{t} ({n})" for t, n in sorted(streets, key=lambda x: -x[1])[:40])
           + (" ..." if len(streets) > 40 else ""))
+    if dropped:
+        print("not searched, as common as another street: "
+              + ", ".join(f"{t} ({n})" for t, n in dropped))
     print(f"number forms of {number}: " + ", ".join(f"{t} ({n})" for t, n in numbers))
     rows = fts_rows(con, [t for t, _ in streets + numbers])
+    skip = frozenset(t for t, _ in dropped)
     hits = []
     for r in rows.values():
-        best = None
-        for f in FIELDS:
-            m = match_tokens((r[f] or "").split(), number, words, kind, dist)
-            if m and (best is None or GRADES.index(m[0]) < GRADES.index(best[0])):
-                best = m
-        if best is None:                               # the number last, the street on the next line
-            toks = (r["raw_line"] or "").split()
-            if any(as_number(t) for t in toks[-2:]) and (nxt := next_line(con, r["record_id"])):
-                best = match_tokens(toks + (nxt[0] or "").split(), number, words, kind, dist,
-                                    cut=len(toks))
+        best = best_reading(r, number, words, kind, dist, skip)
+        if best is None and ends_on_number(r) and (nxt := next_line(con, r["record_id"])):
+            best = read_wrapped(r, nxt[0], number, words, kind, dist, skip)
         if best:
             hits.append((best, r))
     return hits
@@ -230,29 +332,40 @@ def name_of(r) -> tuple:
     return tuple(re.sub(r"[^a-z ]", "", (r["name_resolved"] or "").lower()).split())
 
 
+def residents_at(hits: list) -> set:
+    """The names on the lines that give the address (every grade but near, same street type)."""
+    return {name_of(h) for (g, _, n, *_), h in hits if g != "near" and not n and len(name_of(h)) >= 2}
+
+
+def flag_of(grade: str, note: str, r, at: set) -> str:
+    """OTHER STREET (<note>) for another street type or direction; for a near line, SAME NAME or
+    SURNAME when that person, or their surname, is at the address in some other volume (`at`:
+    residents_at) -- the same household one digit off is more likely a misread than a move."""
+    if note:
+        return f"OTHER STREET ({note})"
+    if grade != "near" or len(name_of(r)) < 2:        # "119 Fulton" in the name field is no name
+        return ""
+    return ("SAME NAME" if name_of(r) in at
+            else "SURNAME" if name_of(r)[0] in {n[0] for n in at} else "")
+
+
 def report(con, hits: list, base: str, people: bool, address: str, dist: int):
     by = collections.defaultdict(list)
-    for (grade, how, note), r in hits:
+    for (grade, how, note, *_), r in hits:
         by[grade].append((r["year"] or 0, r["record_id"], how, note, r))
-    # a near line is worth a look when its person, or their surname, is at the address in some
-    # other volume: the same household one digit off is more likely a misread than a move
-    at = {name_of(r) for g in GRADES[:4] for *_, note, r in by[g] if not note and name_of(r)}
-    surnames = {n[0] for n in at}
+    at = residents_at(hits)
     for g in GRADES:
         if not by[g]:
             continue
         rows = sorted(by[g])
         print(f"\n== {g}: {len(rows)} ==")
         for year, rid, how, note, r in rows:
-            flag = ("TYPE " + note if note else "SAME NAME" if g == "near" and name_of(r) in at
-                    else "SURNAME" if g == "near" and name_of(r)[:1] and name_of(r)[0] in surnames
-                    else "")
+            flag = flag_of(g, note, r, at)
             print(f"{year} {rid:40} u={r['usable']} {how!r:24} {flag:9} {(r['raw_line'] or '')[:90]}")
         for url in links(base, [rid for _, rid, *_ in rows]):
             print(url)
         if g == "near":
-            look = [rid for _, rid, _, note, r in rows if not note and name_of(r)[:1]
-                    and name_of(r)[0] in surnames]
+            look = [rid for _, rid, _, note, r in rows if flag_of(g, note, r, at)]
             if look:
                 print(f"near lines whose name or surname is at the address elsewhere ({len(look)}):")
                 for url in links(base, look):
@@ -293,9 +406,41 @@ def self_test():
     line, nxt = "Cotte Josephine L h 166".split(), "Lefferts pl".split()
     assert m(" ".join(line + nxt), cut=len(line))[0] == "wrapped"
     assert m("Jones h 166 Lefferts pl and 4 Main", cut=6) is None, "within one line is not a wrap"
+    line = "Mills Abraham painter h 151 Lorimer".split()
+    assert m(" ".join(line + '" Alex soapmkr h 166 Lefferts pl'.split()), cut=len(line)) is None, \
+        "the address on the next line alone is not a wrap"
+    assert match_tokens(
+        "h 151 Classon av".split(), "151", ["clarkson"], "av", 2, skip={"classon"}) is None
+    assert match_tokens("Archer h 32 John, N. Y.".split(), "32", ["johnson"], "av", 2) is None
+    assert match_tokens("h 924 First av".split(), "924", ["forest"], "av", 2) is None, \
+        "a six-letter street gets one edit"
+    assert match_tokens("h 924 Forst av".split(), "924", ["forest"], "av", 2)[0] == "street"
+    w110 = lambda s, cut=None: match_tokens(s.split(), "131", ["w", "110th"], "st", 2, cut)  # noqa
+    assert parse("131 West 110th st") == ("131", ["w", "110th"], "st")
+    assert parse("12 South st") == ("12", ["south"], "st"), "a one-word street is no direction"
+    assert ordinal("110th") == ordinal("11oth") == ordinal("110") == "110" and ordinal("west") is None
+    assert ordinal("21st") == "21" and ordinal("52d") == "52"
+    assert w110("Smith John clerk h 131 W 110th")[0] == "exact"
+    assert w110("Smith John h 131 West 110th st")[0] == "exact"
+    assert w110("Smith John h 131 110th")[0] == "exact", "the direction may be left out"
+    assert w110("Smith John h 131 W 11Oth")[0] == "street"
+    assert w110("Smith John h 131 W 111th") is None, "111th is another street, never a misreading"
+    assert w110("Smith John h 131 E 110th")[2] == "E", "East 110th is another street"
+    assert w110("Smith John h 131 W 110th av")[2] == "av"
+    assert match_tokens("Smith h 131 E 110th".split(), "131", ["110th"], "st", 2)[2] == "", \
+        "no direction asked: either side"
+    assert w110("Smith John h 131 Westervelt av") is None
+    assert match_tokens("Jones h 12 W Broadway".split(), "12", ["broadway"], "", 2)[2] == "W", \
+        "West Broadway is not Broadway"
+    assert other_streets([("110th", 900), ("110", 30000)], "110th") == \
+        ([("110th", 900), ("110", 30000)], [])
+    assert other_streets([("clarkson", 400), ("classon", 3000), ("clarkon", 3)], "clarkson") == \
+        ([("clarkson", 400), ("clarkon", 3)], [("classon", 3000)])
     assert parse("166 Lefferts pl") == ("166", ["lefferts"], "pl")
     assert parse("12 De Kalb av") == ("12", ["de", "kalb"], "av")
     assert m("h 166 Lefferts pl")[1] == "166 Lefferts"
+    assert m("Jas mech eng 220 Bway h 166 Lefferts pl Bklyn")[3] == "Bklyn"
+    assert m("Wm H banker 683 B'way Mhtn h 166 Lefferts pl")[3] == "", "Mhtn is the other address's"
     assert match_tokens("h 12 De Kalb av".split(), "12", ["de", "kalb"], "av", 1)[0] == "exact"
     assert as_number("h166") == "166" and as_number("lGG") is None and as_number("l6G") == "166"
     assert as_number("hl66") == "166" and m("Cotte J hl66 Lefferts pl")[0] == "number"

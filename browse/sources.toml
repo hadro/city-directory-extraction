@@ -11,7 +11,8 @@
 # walks the facet column's own index to skip a sort and looks up every row to test the filter.
 # `index` is plain indexes, for filters on a rare value (eval_holdout=gold); a list is composite.
 # `fts` columns go into the search box. A "contains" filter cannot use any of this (~2 s a
-# query over the whole table); the search box can.
+# query over the whole table at 0.8M rows, ~20 s at 5.5M, past the 5 s limit); the search box
+# can. A sort on a column needs an index led by it, or it times out over the whole table.
 [tables.records]
 # (the order columns are SHOWN in is `column_order` in browse/metadata.yml, not set here)
 facets = ["root", "volume", "role", "usable"]

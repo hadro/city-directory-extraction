@@ -135,9 +135,20 @@ order. A URL with `_col=` keeps the order it gives, and the plugin leaves it alo
   the common filters. That's because each has a covering index; see `sources.toml`. You can add
   a facet on any other column from its header menu. It works, but may take a second or two.
 - **Search box:** full-text search over `raw_line`, the resolved name and addresses, occupation,
-  employer and spouse. To search a single column, use `?_search_occupation_role=carman`.
-- **"contains" filters:** these read every row. Over the whole table that's ~10 s a page; within
-  one volume it's well under a second. **Prefer the search box, or filter to a volume first.**
+  employer and spouse. It matches whole words in any order and any of those columns. For one
+  column, a phrase or a prefix, add `&_searchmode=raw` to the URL once (the form keeps it) and
+  type the search with FTS5 syntax: `address_resolved:"6 Lefferts P"*` finds "6 Lefferts pl"
+  and the misread "pi" in 0.2 s, not "56 Lefferts". Raw mode reads punctuation as syntax, so
+  quote anything with a hyphen or apostrophe (`"Ann-street"`). `?_search_occupation_role=carman`
+  also searches one column, without the syntax.
+- **"contains" filters:** these read every row. At 5.5M rows that's ~20 s, past the 5 s limit, so
+  over the whole table they time out. Within one volume they're well under a second. **Use the
+  search box, or filter to a volume first.** "contains" also matches inside numbers: "6 Lefferts"
+  finds 56, 146 and 226 Lefferts.
+- **Sorting:** a sort on a column with no index (`_sort=spouse_name`) sorts every matching row
+  and times out over the whole table. An index on the column fixes it: `["spouse_name",
+  "entry_shaped"]` in `sources.toml`'s `index` list made that sort 0.45 s and its count 0.38 s
+  (59 MB), against ~23 s. Including the filter column is what makes the count fast.
 - **Bookmarks:** bookmark a row by its `record_id` filter (`?record_id=1906BPL:9:11`), not by
   its row URL. Row numbers change when a file is reloaded.
 - **Exports:** every view has CSV/JSON export links. "View and edit SQL" opens the query behind
@@ -147,6 +158,35 @@ order. A URL with `_col=` keeps the order it gives, and the plugin leaves it alo
   back to the other size after that wait. The plugin's docstring has the URLs I probed. "Show
   all" loads images only as they scroll into view, so a 200-row leaf doesn't fire 200 requests
   at once.
+
+## Finding an address, misreadings included
+
+```bash
+python3 browse/find_address.py "166 Lefferts pl"            # ~13 s
+python3 browse/find_address.py "166 Lefferts pl" --people   # also each resident in every volume
+python3 browse/find_address.py --self-test
+```
+
+Lists every line that may give an address, with a link per grade that opens those rows, crops
+and all, in the browser. It reads the search index's word list for spellings of the street word
+within two edits (Leflerts, Lefferta, Leffert©) and for the number's look-alikes (I66, hl66). Then
+it reads number-then-street in `raw_line` and the resolved addresses, rejoining a split word,
+and follows a line that ends on the number into the next line. Grades:
+
+- **exact:** the number and street as asked.
+- **street:** the number as asked, the street misspelled or split.
+- **number:** the number in look-alike characters.
+- **wrapped:** the number at a line's end, the street on the next line.
+- **near:** one digit off. These are mostly real neighbours. The ones whose name or surname is
+  at the exact address in another volume are flagged, with their own link.
+
+A line naming another street type (166 Lefferts av when asked for pl) is a different street, and
+is marked `TYPE av`. `--people` lists each resident's line in every volume, so a year whose line
+read the address too badly to match shows as another address or a gap.
+
+It finds nothing where the number was dropped, or the street word is more than two edits off. For
+a street of several words (De Kalb av) it matches the longest word. It opens the database
+read-only, so Datasette can keep serving.
 
 ## Giving someone a copy
 
@@ -188,6 +228,15 @@ Written down 2026-10-20, none of it built yet:
 6. **Sharing wider than two people.** `datasette publish` (Cloud Run, Fly), or a static Parquet
    file with a DuckDB-WASM page. First drop the `eval_holdout` rows and settle what the records
    may be published under.
+   Measured 2026-11-01 on a 0.31 GB Parquet export of the 5.5M rows: `find_address.py`'s steps
+   in DuckDB, with no full-text index, take ~1 s a query, against 13 s here. The word list takes
+   1.9 s to build, once. The steps after it take 0.03 s (`levenshtein()` over the list) and 0.6 s
+   (a whole-word regex over every row). So a Hugging Face Space running DuckDB over the Parquet
+   release can serve the address finder. HF's own dataset search (DuckDB FTS, BM25, English
+   stemming, every string column, 100 rows a request) can't: it has no fuzzy matching and no
+   word list. It suits a plain keyword box over a text-only copy, without the URL columns.
+   Order the release by year, volume, leaf and line, the line parsed from `record_id`: HF's
+   search returns rows in file order.
 7. **Scale.** The remaining tiers are several times this size. Re-time the facets when they
    land. The options, in order: more covering indexes (`facets` in `sources.toml`), a table per
    tier, or DuckDB, which Datasette doesn't serve natively.

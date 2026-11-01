@@ -23,8 +23,10 @@ decision. The GitHub links assume the repo is public by release. -->
 # City Directory Lines, Synthetic Extraction Pairs
 
 Synthetic directory lines, each paired with the eight-field record a reader would extract from
-it. This is the training set of the
-[City Directory Extractor 4B](https://huggingface.co/<namespace>/city-directory-extractor-4b). No
+it. This is the training set of the City Directory Extractor at all three sizes
+([0.8B](https://huggingface.co/<namespace>/city-directory-extractor-0.8b),
+[2B](https://huggingface.co/<namespace>/city-directory-extractor-2b),
+[4B](https://huggingface.co/<namespace>/city-directory-extractor-4b)). No
 line is copied from a real directory, so the set and models trained on it can be released
 openly; real hand-labeled lines are kept for evaluation only.
 
@@ -32,7 +34,7 @@ openly; real hand-labeled lines are kept for evaluation only.
 
 | File | Rows | What it is |
 |---|---|---|
-| `synth_train_v7.jsonl` | 100,000 | **The 4B's training set** (sha256 `509d8f4ce1a99a53…`). `synth_train.jsonl` is the same file |
+| `synth_train_v7.jsonl` | 100,000 | **The released models' training set**, all three sizes (sha256 `509d8f4ce1a99a53…`). `synth_train.jsonl` is the same file |
 | `synth_train_250k.jsonl` | 250,000 | The same generator and seed run longer; its first 100,000 rows are v7's. Trained the volume experiment, which made the 0.8B worse |
 | `synth_train_v3.jsonl` … `_v6.jsonl` | 100,000 each | Earlier generator versions, for reproducing the 0.8B's cycles |
 | `synth_smoke.jsonl` | 3,000 | A smoke-test set (seed 7) |

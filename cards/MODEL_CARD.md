@@ -21,7 +21,9 @@ datasets:
 namespace (<namespace> below), the licence (apache-2.0 above is the recommendation: the base
 model is Apache-2.0 and the training data is synthetic and ours), and the records dataset's
 name. Fill <FILL> marks from the release audit. The GitHub links assume the repo is public by
-then. Run name in this repo: 4b-100k. -->
+then. One card serves all three repos: for the 2B and the 0.8B, change `base_model`, the title,
+"(this repo)" in the sizes table, and BASE / ADAPTER in the snippet. Run names in this repo and
+private backups: 4b-100k (hadro/cde-4b-100k), 2b-100k (hadro/cde-2b-100k), v7 (hadro/cde-0.8b-v7). -->
 
 # City Directory Extractor 4B
 
@@ -30,6 +32,21 @@ a historical US city directory** into a structured record of eight fields, copyi
 printed. It was trained only on synthetic lines, and evaluated on hand-labeled lines from 21 New
 York and Brooklyn directories printed between 1786 and 1933, plus four other collections. It
 produced the records in [`<namespace>/<records dataset>`](https://huggingface.co/datasets/<namespace>/<records dataset>).
+
+## Three sizes
+
+The same training on the same data, at three sizes of Qwen3.5. Accuracy is close (see
+Evaluation); what differs is the hardware each needs.
+
+| Size | Adapter | Seconds per line on a 16 GB Apple laptop | Use it for |
+|---|---|---|---|
+| **4B** (this repo) | 143 MB | ~100 | Whole volumes on a GPU. It built the records dataset, and it is the only size scored end to end on real scans |
+| [2B](https://huggingface.co/<namespace>/city-directory-extractor-2b) | 83 MB | ~5 | A laptop, or half the GPU cost: within a point of the 4B on the gold panel |
+| [0.8B](https://huggingface.co/<namespace>/city-directory-extractor-0.8b) | 60 MB | ~3 | The smallest machines and quick trials; about four points behind the 4B |
+
+The laptop times are one line at a time on an M2 with 16 GB; batching helps (the 2B has reached
+about half a line a second). Even so, a laptop is for trying lines, not for corpora: a
+100,000-line volume would take days. On a GPU, see Throughput below.
 
 ## What it does
 
@@ -107,15 +124,17 @@ Three settings matter:
 - **Keep the first record only.** Parse key by key and stop at the first repeated key; the
   repo's `eval/qwen_predict.py` (`parse_completion`) does this.
 
+The 0.8B and 2B were checked to stop cleanly after one record even without the stop tokens (24
+gold lines each, `results/stop_test.py`); the settings above are still the safe default.
+
 The tag carries the publisher and year when you know them (`[publisher=?; year=?]` otherwise). The
 publisher names seen in training are `trow`, `polk-tulsa`, `lain`, `polk`, `longworth`, `doggett`,
 `duncan`, `upington`, `hopehenderson`, `smith`, `boyd`, `hearne`, `mb`, `mercein`, `rode`, `franks`
 and `ogden`. An ablation found the publisher tag made no measurable difference on the 2B and 4B.
 
-**Throughput.** 12.6 lines a second on one L40S at batch 64 with
+**Throughput (4B).** 12.6 lines a second on one L40S at batch 64 with
 [flash-linear-attention](https://github.com/fla-org/flash-linear-attention) installed, 7.2
-without it. It needs a CUDA GPU at any real scale: on a 16 GB Apple laptop it ran at 0.01 lines
-a second.
+without it. No GPU speed was recorded for the 2B and 0.8B.
 
 ## Training
 
@@ -127,6 +146,7 @@ a second.
 - **Method:** TRL `SFTTrainer`, LoRA r=16, α=32, dropout 0.05, on every linear layer of the
   language model (the vision tower excluded); loss on the completion only; 3 epochs, learning
   rate 2e-4, effective batch 64, sequences up to 512 tokens. One GPU on NYU's Torch cluster.
+  All three sizes were trained this way, on the same file.
 
 ## Evaluation
 
@@ -135,17 +155,17 @@ All scores are whole-row exact match: every one of the eight fields must equal t
 **Hand-labeled gold, 21 New York and Brooklyn volumes, 1786–1933/34 (1,583 lines).** The labelers
 corrected OCR misreads in the input lines, so this measures extraction on clean text.
 
-| Model | Row EM, verbatim | Row EM, abbreviation periods ignored | `name` F1 |
-|---|---|---|---|
-| **This model (4B)** | **78.4** | **82.0** | **0.952** |
-| Same recipe, 2B | 77.8 | 81.1 | 0.942 |
-| Same recipe, 0.8B (v6) | 75.2 | 78.6 | 0.943 |
-| Gemini 3.1 Flash-Lite, prompted with the labeling conventions | 61.7 | — | — |
+| Model | Row EM, verbatim | Row EM, abbreviation periods ignored | `name` F1 | Four other collections, periods ignored |
+|---|---|---|---|---|
+| **4B** | **78.4** | **82.0** | **0.952** | **62.8** |
+| 2B | 77.8 | 81.1 | 0.942 | 61.0 |
+| 0.8B | 74.5 | 77.6 | 0.939 | 58.7 |
+| Gemini 3.1 Flash-Lite, prompted with the labeling conventions | 61.7 | — | — | — |
 
-More synthetic data did not help: 250,000 lines made the 0.8B worse (74.8 normalized). Capacity
-did.
+More synthetic data did not help: 250,000 lines made the 0.8B worse (74.8 with periods ignored).
+Size did.
 
-**Other collections (row EM, verbatim).**
+**Other collections, 4B (row EM, verbatim).**
 
 | Set | Lines | Row EM | Note |
 |---|---|---|---|
@@ -154,12 +174,12 @@ did.
 | Minneapolis 1900 | 230 | 64.8 | after a gold correction (2026-10-17) |
 | NYU NYC directories 1850–1890 | 500 | 56.0 | three of its fields are derived by regex, not transcribed |
 
-**End to end, on real scans.** Through the whole pipeline (LightOnOCR-3 re-OCR of the page, line
+**End to end, on real scans (4B only).** Through the whole pipeline (LightOnOCR-3 re-OCR of the page, line
 assembly, this model, and the copy guard below) on 17 book-scan gold sets: **67.0** row EM over
 2,062 gold lines, from 50.0 to 88.0 by set. The same panel through the Internet Archive's own
 OCR scored 55.2. Here the OCR, not the model, sets most of the ceiling.
 
-**Whole volumes.** Where a directory prints its own count of names, usable records per printed
+**Whole volumes (4B only).** Where a directory prints its own count of names, usable records per printed
 name: Doggett 1845 0.982, Brooklyn (Lain) 1876 0.982, Longworth 1826 0.897.
 
 <FILL: the release audit: N records sampled across the corpus, checked against the page image,
@@ -174,6 +194,9 @@ X% correct (95% interval), by tier.>
 - **It sometimes rewrites a printed word** into a more familiar one: `Mhtn` to `Mthn`, `Degraw` to
   `Delaware`, `Bancker` to `Banker`. The repo's `postprocess/copy_guard.py` puts the printed word
   back from the line; the end-to-end score above includes it.
+- **It sometimes changes a number.** On the hand-labeled panel, about 2% of the 4B's lines came
+  back with a house number's digits swapped or changed (`731` to `371`, `r8512` to `r2851`).
+  Check numbers against the line, or the page, before relying on an address.
 - **It can invent a given name** where the directory prints a widow under her husband's name
   without one of her own.
 - **Two copies of the same line can come out differently** depending on the batch they were

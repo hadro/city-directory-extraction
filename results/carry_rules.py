@@ -90,6 +90,25 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
     # #34: `given` on top of what assemble_records ran until 2026-11-01 (strict + heads)
     tight_g = list(resolve_cross_line(seq, glued, strict=True, given=GIVEN))
     new_g = list(resolve_cross_line(seq, glued, heads=heads, strict=True, given=GIVEN))
+    # #34's lone names (`Wilbur electrician`), on top of `given`
+    tight_l = list(resolve_cross_line(seq, glued, strict=True, given=GIVEN, lone=True))
+    new_l = list(resolve_cross_line(seq, glued, heads=heads, strict=True, given=GIVEN, lone=True))
+    lone_changes = collections.Counter()
+    for i, (g, n) in enumerate(zip(new_g, new_l)):
+        if g["resolved"] == n["resolved"] and g["status"] == n["status"]:
+            continue
+        cause = ("lone name took the carry" if "mark_lost" in n["flags"]
+                 and "mark_lost" not in g["flags"] else
+                 "ditto surname changed" if g["status"] == n["status"] == "resolved"
+                 else f"{g['status']} -> {n['status']}")
+        lone_changes[cause] += 1
+        if cause == "lone name took the carry":
+            lone_changes["  of them entry-shaped" if is_entry(pairs[i][1]) else
+                         "  of them not entry-shaped"] += 1
+        if cause == "lone name took the carry" and rng.random() < 0.01:
+            given_examples.append({"volume": ident, "row": i, "leaf": seq[i][0],
+                                   "raw_line": seq[i][1][:70], "before": g["resolved"],
+                                   "after": n["resolved"], "cause": "LONE " + cause})
     given_changes = collections.Counter()
     for i, (n, g) in enumerate(zip(new, new_g)):
         if "mark_lost" in g["flags"]:
@@ -115,7 +134,7 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
                 if res else None}
 
     applied = sum(1 for i in heads if new[i].get("header") == heads[i])
-    agree = {"old": 0, "strict": 0, "given": 0, "n": 0}
+    agree = {"old": 0, "strict": 0, "given": 0, "lone": 0, "n": 0}
     for i, h in heads.items():
         if new[i].get("header") != h:
             continue                                   # the gate refused this header
@@ -123,6 +142,7 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
         agree["old"] += old[i]["resolved"].lower() == h.lower()
         agree["strict"] += tight[i]["resolved"].lower() == h.lower()
         agree["given"] += tight_g[i]["resolved"].lower() == h.lower()
+        agree["lone"] += tight_l[i]["resolved"].lower() == h.lower()
     # Only a DITTO row's record changes: a line made transparent keeps its own name (assemble
     # uses the model's `name` for every not_ditto row), it just stops passing it on.
     changed = collections.Counter()
@@ -156,10 +176,13 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
                                  "strict": round(agree["strict"] / agree["n"], 4)
                                  if agree["n"] else None,
                                  "given": round(agree["given"] / agree["n"], 4)
+                                 if agree["n"] else None,
+                                 "lone": round(agree["lone"] / agree["n"], 4)
                                  if agree["n"] else None},
             "setters_made_transparent": dict(refused),
             "ditto_surname_changed": dict(changed),
-            "given_changes": dict(given_changes)}
+            "given_changes": dict(given_changes),
+            "lone_changes": dict(lone_changes)}
 
 
 def main(argv=None) -> int:
@@ -189,16 +212,17 @@ def main(argv=None) -> int:
             print(f"{d.name:28s} dispute {v['old']['dispute_rate']} -> {v['new']['dispute_rate']}"
                   f"  orphans {v['old']['orphan']} -> {v['new']['orphan']}"
                   f"  headers {v['headers_applied']}/{v['headers_placed']}"
-                  f"  agree old {ha['old']} strict {ha['strict']} given {ha['given']}"
+                  f"  agree old {ha['old']} strict {ha['strict']} given {ha['given']} lone {ha['lone']}"
                   f"  ditto surnames changed {sum(v['ditto_surname_changed'].values()):,}"
                   f"  #34 {sum(v['given_changes'].values()):,}")
     tot, changed, refused = collections.Counter(), collections.Counter(), collections.Counter()
-    given_total = collections.Counter()
+    given_total, lone_total = collections.Counter(), collections.Counter()
     for v in report["volumes"].values():
         changed.update(v["ditto_surname_changed"])
         refused.update(v["setters_made_transparent"])
         given_total.update(v["given_changes"])
-        for k in ("old", "strict", "given"):
+        lone_total.update(v["lone_changes"])
+        for k in ("old", "strict", "given", "lone"):
             tot[f"agree_{k}"] += round((v["header_agreement"][k] or 0)
                                        * v["header_agreement"]["n"])
         tot["agree_n"] += v["header_agreement"]["n"]
@@ -212,8 +236,10 @@ def main(argv=None) -> int:
         "setters_made_transparent": dict(refused),
         "header_agreement": {"n": int(n), "old": round(tot["agree_old"] / n, 4) if n else None,
                              "strict": round(tot["agree_strict"] / n, 4) if n else None,
-                             "given": round(tot["agree_given"] / n, 4) if n else None},
+                             "given": round(tot["agree_given"] / n, 4) if n else None,
+                             "lone": round(tot["agree_lone"] / n, 4) if n else None},
         "given_changes": dict(given_total),
+        "lone_changes": dict(lone_total),
         "dispute_rate": {"old": round(tot["old_disputed"] / tot["old_resolved"], 4),
                          "new": round(tot["new_disputed"] / tot["new_resolved"], 4)},
         "orphans": {"old": tot["old_orphan"], "new": tot["new_orphan"]}}

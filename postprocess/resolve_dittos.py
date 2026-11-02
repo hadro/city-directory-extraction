@@ -482,7 +482,8 @@ NOT_GIVEN_ONLY = frozenset({"Mrs", "Rev", "Jr", "Path", "Virginia", "Leon", "Fel
 
 def given_only_names(min_n: int = 20) -> frozenset:
     """given_harvested.tsv's names seen `min_n` times or more, less every surname in
-    surnames.tsv and NOT_GIVEN_ONLY; spelled as the harvest has them (Wm, H'y)."""
+    surnames.tsv and NOT_GIVEN_ONLY; without apostrophes, since Upington prints `Edw'd`,
+    `Dan'l`, `Rob't` where Trow prints `Edwd`, `Danl`, `Robt` (the harvest has both kinds)."""
     import csv
     sur = {r[0].lower() for r in csv.reader(open(NAMES / "surnames.tsv", encoding="utf-8"),
                                             delimiter="\t") if r}
@@ -490,20 +491,45 @@ def given_only_names(min_n: int = 20) -> frozenset:
     for r in csv.reader(open(NAMES / "given_harvested.tsv", encoding="utf-8"), delimiter="\t"):
         if len(r) < 2 or int(r[1]) < min_n:
             continue
-        name = r[0].replace("’", "'")
-        if (name[:1].isupper() and name.replace("'", "").isalpha() and name.lower() not in sur
+        name = r[0].replace("’", "").replace("'", "")
+        if (name[:1].isupper() and name.isalpha() and name.lower() not in sur
                 and name not in NOT_GIVEN_ONLY):
             out.add(name)
     return frozenset(out)
 
 
 def _given(word: str, given) -> bool:
-    return bool(given) and word.strip(".,;:").replace("’", "'") in given
+    return bool(given) and word.strip(".,;:").replace("’", "").replace("'", "") in given
 
 
 # the first word of a line whose lead is punctuation the volume does not read as a ditto:
 # `•* Wm S letter carrier` (1906BPL), `{ Jas ...`
 FIRST_WORD = re.compile(r"^(?P<lead>[^A-Za-z]*?)\s*(?P<word>[A-Za-z][\w'’]*)")
+
+# A LONE NAME (#34, the Wilbur case): one capitalised word and straight on to a lowercase one --
+# `Wilbur electrician h 111 Vand't av`, `Kate wid Geo h 245 10th`, `Terence h Emmons av`. A
+# surname line names a given name or an initial after the surname, so under a carry this is a
+# ditto line whose mark was lost, whatever the word (Wilbur, Webster are surnames too, which is
+# why no list can catch them). Not a street run-over (`Driggs av`, `Classon av`) or a phrase.
+LONE_NAME = re.compile(r"^(?P<word>[A-Z][a-z][a-z'’]+)\s+(?P<next>[a-z][a-z'’.]*)(?:\s|$)")
+NOT_AFTER_A_NAME = frozenset(
+    "av ave avenue st street pl place rd road ct court sq square ter terrace la lane al alley "
+    "dr drive blvd slip row pk park bridge and of the in at for to by on with or co bros".split())
+
+
+# ...but only in a volume that dittos. The early directories print a surname line as `Hoyt widow
+# Catharine`, `Roe jun. David`, which is the same shape; there a lone-name rule turned Grissim
+# into Griscom and Dealy into Dealing (1,899 lines of Longworth 1826). Measured 2026-11-01 over
+# 82 volumes, the share of ditto-led lines is <= 2.5% in every early and microfiche volume and
+# >= 63% in every Trow's, Upington and 1906BPL, so any cut between holds.
+LONE_MIN_DITTO_SHARE = 0.25
+
+
+def lone_name(raw: str) -> str | None:
+    m = LONE_NAME.match(raw or "")
+    if not m or m.group("next").rstrip(".") in NOT_AFTER_A_NAME:
+        return None
+    return m.group("word")
 
 
 def can_set_carry(sur: str, leaf, ranges, given=frozenset()) -> bool:
@@ -537,7 +563,8 @@ def can_set_carry(sur: str, leaf, ranges, given=frozenset()) -> bool:
     return lo <= sur[0].upper() <= hi
 
 
-def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), given=frozenset()):
+def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), given=frozenset(),
+                       lone=False):
     """Sequential surname carry over `rows` = [(leaf, raw_line), ...] in reading order.
 
     `glued` is the per-volume set of marks printed without a space (Trow's `-`), empty by default
@@ -565,6 +592,10 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
     as one, as a ditto whose mark the OCR lost: it takes the carry, flagged `mark_lost`, and never
     sets it (#34).
 
+    `lone` (default off) does the same for a LONE NAME (lone_name: `Wilbur electrician`) under a
+    carry set on the same leaf, whatever the word -- in a volume whose ditto-led lines are at
+    least LONE_MIN_DITTO_SHARE of its rows.
+
     Flags, any of which may be set together:
       cross_leaf      the antecedent came from a previous leaf -- a page boundary was crossed
       letter_conflict the carried surname disagrees with this leaf's own modal letter, on a leaf
@@ -581,6 +612,8 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
     ranges = leaf_letter_ranges(rows) if (strict or markers) else {}
     heads = heads or {}
     prev, prev_leaf, prev_header = None, None, None
+    if lone and rows:
+        lone = sum(is_ditto_lead(raw, glued) for _l, raw in rows) / len(rows) >= LONE_MIN_DITTO_SHARE
 
     def carried(leaf, raw, lead, extra=()):
         """A row that takes the carry (prev is set)."""
@@ -620,6 +653,10 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
                        "status": "not_ditto", "flags": [], "mark": mk[0]}
                 continue
         sur = None if gl else surname_token(raw)
+        if lone and not gl and prev is not None and lone_name(raw):
+            # `Wilbur electrician` under a block: a given name whose mark was lost (#34)
+            yield carried(leaf, raw, "", ["mark_lost"])
+            continue
         if sur is not None and _given(sur, given):
             # a given name in the surname's place: its ditto mark was lost (#34)
             if prev is not None:
@@ -1003,8 +1040,27 @@ def self_test() -> int:
           ("Roberts", "•*"))
     check("no carry yet: left alone", [x["status"] for x in resolve_cross_line(
         [(5, "Robt shoes h 9 Elm")], strict=True, given=g)], ["not_ditto"])
-    check("given_only_names reads the lists", {"Wm", "Robt", "Saml"} <= given_only_names()
+    w_page = [(9, f"W{s} Jas h {n} Main") for n, s in enumerate(
+        ("ade", "agner", "alker", "allace", "alsh", "ard", "arner", "arren", "atson", "eaver",
+         "ebb", "eber", "ells", "elsh", "est", "hite"))]
+    block = w_page + [(9, "Williams Geo clerk h 2 Pine")] + [(9, '" Jas h 4 Elm')] * 12 + [
+        (9, "Wilbur electrician h 111 Vand't av"), (9, "Wm brass h 989 Laf av"),
+        (9, "Washington av c Fulton"), (9, '" Wm h 3 Main')]
+    got = list(resolve_cross_line(block, strict=True, given=g, lone=True))
+    check("a lone name under a block takes it", (got[-4]["resolved"], got[-4]["flags"]),
+          ("Williams", ["mark_lost"]))
+    check("...and the line after it too", got[-3]["resolved"], "Williams")
+    check("not a street run-over", got[-2]["status"], "not_ditto")
+    check("lone off: Wilbur sets the carry", list(resolve_cross_line(
+        block, strict=True, given=g))[-3]["resolved"], "Wilbur")
+    early = w_page + [(9, "Williams Geo clerk"), (9, "Wilbur widow Sarah, 4 Lewis")]
+    check("not in a volume that does not ditto", list(resolve_cross_line(
+        early, strict=True, given=g, lone=True))[-1]["resolved"], "Wilbur")
+    check("given_only_names reads the lists", {"Wm", "Robt", "Saml", "Hy"} <= given_only_names()
           and not {"Mrs", "Smith", "Virginia"} & given_only_names(), True)
+    check("Upington's apostrophes", [_given(w, given_only_names()) for w in
+                                     ("Dan'l", "Edw’d", "Rob't", "H'y", "Smith")],
+          [True, True, True, True, False])
 
     # the address slot grammar, on duncan1794's gold addresses in their printed order
     duncan = ["71 Dey-street.", "27 Ann do.", "11 Rector do.", "30 Ferry-street", "Mott do.",

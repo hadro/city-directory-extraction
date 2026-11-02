@@ -1763,6 +1763,37 @@ c1905 leaf 1105 is a block of lost-mark lines whose given names are also surname
 name under the 20-count cut still sets the carry (`Susan`, `Marg’t`). Open: (c), and a block of
 lost marks whose given names are surnames as well (the Wilbur case; maybe the given-name ORDER
 inside a block, which is sorted by given name, can tell it from a run of surnames).
+**(c) MEASURED, NOT BUILT (2026-11-01).** Lines the gate refuses whose first letter, swapped for
+one in the leaf's range, gives a known surname (census + harvest, 20x the read word's count):
+219 run 1, 392 reocr, 2,005 damaged, with 292 / 144 / 9,771 dittos carried past them; few are
+systematic (210 of the damaged tier's sit on leaves with 3+). Run 1's are real (ABBYY 1906BPL:
+`Bberle`, `Reough`, `Bricson`, `Renyon` -- the K-as-R leaf 575), and D replaces run 1; the reocr
+and damaged ones are mostly junk that swaps into a surname (`Phone Main`, `Real Estate`, `Better
+than the Best`, `Driggs av`, `Kate wid Geo`): about 4 in 30 genuine in the damaged tier
+(`Kinkbeiner`, `Eaverty`). Not worth a rule for the tiers that ship.
+**(d) The Wilbur case: BUILT 2026-11-01 (1551f7d), a LONE NAME.** A surname line names a given
+name or an initial after the surname, so a line that is one capitalised word and straight on to
+a lowercase one (`Wilbur electrician`, `Kate wid Geo`, `Terence h Emmons av`; not before a street
+word, `Driggs av`) is a ditto line whose mark was lost, whatever the word: `resolve_cross_line
+(lone=True)` carries onto it, flagged mark_lost, and never lets it set the carry. Only in a volume
+that dittos (ditto-led lines >= 25% of rows): the early directories print `Hoyt widow Catharine`,
+`Roe jun. David`, the same shape, and a first run turned Grissim into Griscom across 1,899 lines of
+Longworth 1826; every early and microfiche volume is <= 2.5%, every Trow's, Upington and 1906BPL
+>= 63%. A first version also wanted the carry set on the same leaf; dropping that let a lone name
+at a leaf's top stop setting it (`Matthew`, `Jerome`), header agreement 82.75 -> 83.02%. With it,
+`given_only_names` compares without apostrophes (Upington's `Edw'd`, `Dan'l`, `Rob't`). Over 82
+volumes against (a)+(b): **header agreement 82.14 -> 83.02%** (31 volumes up; trowsgeneraldir
+1906p2trow 87.56 -> 87.22%); (a)+(b) now 15,660 mark_lost, (d) adds 20,558 (14,789 entry-shaped)
+and moves 25,244 ditto surnames. Read on the page, 12 at random: 6 right (Stark, Schiffman,
+Timoney, Rigoulot confirmed; Meyer and Ralph plausible), 2 wrong -- "Herbert Howard", whose carry
+a `Herbert B clk` line still sets (given name + initial is the shape of surname + initial, so no
+rule here), and "Emdon Emelene", a one-word shop printed at the surname margin (`Emelene milliner`,
+`Marquise waists`), which (d) makes worse -- 3 not entries, 1 not checkable.
+**RE-ASSEMBLED with (a)+(b)+(d) the same day**, then browse.db and the address finder's Parquet:
+`usable` and `named` unchanged in every tier; mark_lost 6,315 (run 1) / 1,861 (reocr) / 28,024
+(damaged); carried dittos reocr 35,830 -> 36,911, damaged 3,398,026 -> 3,416,603; `disputed`
+2,134 -> 2,282 and 172,263 -> 175,722. **Named lines opening on a given-only name: 22,846 (0.43%)
+before #34 -> 5,469 after (a)+(b) -> 1,787 (0.03%; 1,534 `usable`) now.**
 
 ## Medium effort, high information
 

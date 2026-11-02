@@ -1735,7 +1735,16 @@ no ditto mark that opens on a given-only name, under a carry, takes the carried 
 letter is a common OCR confusion of the leaf's (K/R, E/F, C/G), measured before it is kept.
 Measure each against `results/carry_rules.py` (agreement with the printed headers) and the gold
 before re-assembling the tiers; then rebuild `browse.db` and `data/space/records.parquet`.
-**(a) + (b) BUILT 2026-11-01, not yet re-assembled.** `resolve_dittos.given_only_names()` (55
+**(a) + (b) BUILT 2026-11-01 and RE-ASSEMBLED the same day** (run 1, reocr, damaged tiers):
+`usable` and `named` unchanged in every tier; `mark_lost` 2,764 (run 1) / 780 (reocr) / 9,447
+(damaged); carried dittos reocr 35,025 -> 35,830, damaged 3,388,579 -> 3,398,026. The summary's
+`disputed` keeps its meaning (cross_leaf / letter_conflict only; `mark_lost` is counted apart) and
+moves 1,995 -> 2,134 and 170,205 -> 172,263, the new carries' own page and letter flags.
+Re-counted the same way as the 22,846 above (browse.db and the address finder's Parquet rebuilt):
+**5,469 named lines (0.10%) now open on a given-only name, 4,066 `usable` (were 22,846 / 16,652)**.
+596 Franklin av traces cleanly: 1906BPL's `•* Wm S letter carrier` is Saddington Wm S, and no
+"Wm S" trace; its `" Frank E` (leaf 575) is still wrong, "Keough Frank E" now -- way 3, open.
+The build, as measured before it: `resolve_dittos.given_only_names()` (55
 names: given_harvested >= 20, less surnames.tsv, less `NOT_GIVEN_ONLY` -- titles, `Virginia`
 which heads the "Virginia Iron, Coal & Coke Co" block, and given names the city printed as
 surnames too, Leon, Felix, Elias ...), passed as `resolve_cross_line(given=)`; default empty, so

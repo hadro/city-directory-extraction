@@ -388,7 +388,10 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
         "line_source": dict(collections.Counter(r["line_source"] for r in rows if r["line_source"])),
         "ditto": {"carried": sum(1 for c in carry if c["status"] == "resolved"),
                   "orphan": sum(1 for c in carry if c["status"] == "orphan"),
-                  "disputed": sum(1 for c in carry if c["status"] == "resolved" and c["flags"]),
+                  # cross_leaf / letter_conflict, as before #34; mark_lost is counted apart
+                  "disputed": sum(1 for c in carry if c["status"] == "resolved"
+                                  and set(c["flags"]) - {"mark_lost"}),
+                  "mark_lost": sum(1 for c in carry if "mark_lost" in c["flags"]),
                   "glued_marks": list(glued),
                   "headers_placed": len(heads),
                   "from_header": sum(1 for c in carry if c.get("header")),

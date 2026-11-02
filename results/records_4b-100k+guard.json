@@ -1,5 +1,5 @@
 {
- "derived": "2026-10-20",
+ "derived": "2026-11-01",
  "run": "4b-100k+guard",
  "root": "data/volumes_reocr",
  "volumes": {
@@ -16,10 +16,17 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 47464,
+   "line_source": {
+    "model": 48851,
+    "tesseract": 3650,
+    "model-only": 1125,
+    "bleed": 224
+   },
    "ditto": {
-    "carried": 34094,
+    "carried": 34828,
     "orphan": 0,
-    "disputed": 1864,
+    "disputed": 1993,
+    "mark_lost": 731,
     "glued_marks": [
      "\"",
      "\u2014",
@@ -35,7 +42,7 @@
      "\u2019"
     ],
     "headers_placed": 706,
-    "from_header": 9590,
+    "from_header": 9878,
     "lead_marks": {},
     "marked_lines": 0,
     "district_eastern": 0,
@@ -59,10 +66,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 941,
+   "line_source": {
+    "model": 995,
+    "tesseract": 7,
+    "model-only": 5
+   },
    "ditto": {
     "carried": 2,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 0,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
@@ -89,10 +102,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 1029,
+   "line_source": {
+    "tesseract": 30,
+    "model": 1158,
+    "model-only": 15
+   },
    "ditto": {
     "carried": 4,
     "orphan": 0,
     "disputed": 1,
+    "mark_lost": 0,
     "glued_marks": [
      "\u2018"
     ],
@@ -121,10 +140,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 790,
+   "line_source": {
+    "model": 1252,
+    "tesseract": 12,
+    "model-only": 10
+   },
    "ditto": {
-    "carried": 0,
+    "carried": 1,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 1,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
@@ -151,10 +176,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 1197,
+   "line_source": {
+    "tesseract": 28,
+    "model": 1469,
+    "model-only": 17
+   },
    "ditto": {
-    "carried": 2,
+    "carried": 3,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 1,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
@@ -181,10 +212,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 1917,
+   "line_source": {
+    "model": 1885,
+    "tesseract": 18,
+    "model-only": 14
+   },
    "ditto": {
-    "carried": 2,
+    "carried": 3,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 1,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
@@ -211,10 +248,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 1912,
+   "line_source": {
+    "model": 1884,
+    "tesseract": 20,
+    "model-only": 8
+   },
    "ditto": {
     "carried": 1,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 0,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
@@ -243,10 +286,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 2306,
+   "line_source": {
+    "model": 2314,
+    "tesseract": 8,
+    "model-only": 9
+   },
    "ditto": {
     "carried": 22,
     "orphan": 0,
     "disputed": 22,
+    "mark_lost": 0,
     "glued_marks": [
      "'"
     ],
@@ -278,10 +327,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 1970,
+   "line_source": {
+    "model": 2359,
+    "tesseract": 22,
+    "model-only": 49
+   },
    "ditto": {
-    "carried": 0,
+    "carried": 1,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 1,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
@@ -310,17 +365,24 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 2619,
+   "line_source": {
+    "model": 2599,
+    "tesseract": 31,
+    "model-only": 21
+   },
    "ditto": {
     "carried": 4,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 0,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
     "lead_marks": {
-     "*": 116
+     "*": 116,
+     "\u2022": 1
     },
-    "marked_lines": 116,
+    "marked_lines": 117,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -342,10 +404,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 3112,
+   "line_source": {
+    "model": 3116,
+    "tesseract": 13,
+    "model-only": 11
+   },
    "ditto": {
     "carried": 5,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 0,
     "glued_marks": [
      "\""
     ],
@@ -376,10 +444,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 2867,
+   "line_source": {
+    "model": 2999,
+    "tesseract": 37,
+    "model-only": 93
+   },
    "ditto": {
     "carried": 13,
     "orphan": 0,
     "disputed": 1,
+    "mark_lost": 0,
     "glued_marks": [
      "\""
     ],
@@ -410,10 +484,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 2141,
+   "line_source": {
+    "model": 3393,
+    "tesseract": 50,
+    "model-only": 51
+   },
    "ditto": {
     "carried": 6,
     "orphan": 0,
     "disputed": 1,
+    "mark_lost": 0,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
@@ -442,10 +522,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 302,
    "printed_page_known": 1737,
+   "line_source": {
+    "model": 3552,
+    "model-only": 123,
+    "tesseract": 137
+   },
    "ditto": {
     "carried": 18,
     "orphan": 0,
     "disputed": 6,
+    "mark_lost": 0,
     "glued_marks": [
      "-",
      "\""
@@ -477,10 +563,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 864,
+   "line_source": {
+    "tesseract": 191,
+    "model": 3594,
+    "model-only": 79
+   },
    "ditto": {
     "carried": 23,
     "orphan": 0,
     "disputed": 7,
+    "mark_lost": 0,
     "glued_marks": [
      "-",
      "\"",
@@ -489,9 +581,10 @@
     "headers_placed": 1,
     "from_header": 0,
     "lead_marks": {
-     "*": 90
+     "*": 90,
+     "\u2022": 1
     },
-    "marked_lines": 90,
+    "marked_lines": 91,
     "district_eastern": 0,
     "address_slots": 1,
     "address_no_antecedent": 0
@@ -513,17 +606,24 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 0,
+   "line_source": {
+    "model": 4052,
+    "tesseract": 107,
+    "model-only": 162
+   },
    "ditto": {
     "carried": 5,
     "orphan": 0,
     "disputed": 2,
+    "mark_lost": 0,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
     "lead_marks": {
-     "*": 98
+     "*": 98,
+     "\u2022": 5
     },
-    "marked_lines": 98,
+    "marked_lines": 103,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -545,10 +645,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 5613,
+   "line_source": {
+    "model": 5500,
+    "tesseract": 187,
+    "model-only": 117
+   },
    "ditto": {
     "carried": 21,
     "orphan": 0,
     "disputed": 3,
+    "mark_lost": 0,
     "glued_marks": [
      "-",
      "\u2018"
@@ -580,17 +686,24 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 6739,
+   "line_source": {
+    "model": 6721,
+    "tesseract": 72,
+    "model-only": 48
+   },
    "ditto": {
     "carried": 12,
     "orphan": 0,
     "disputed": 2,
+    "mark_lost": 0,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
     "lead_marks": {
-     "*": 219
+     "*": 219,
+     "\u2022": 2
     },
-    "marked_lines": 219,
+    "marked_lines": 221,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -612,10 +725,17 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 8107,
+   "line_source": {
+    "tesseract": 138,
+    "model": 7853,
+    "model-only": 95,
+    "bleed": 21
+   },
    "ditto": {
-    "carried": 22,
+    "carried": 23,
     "orphan": 0,
     "disputed": 1,
+    "mark_lost": 0,
     "glued_marks": [
      "\u2018",
      "-"
@@ -623,9 +743,10 @@
     "headers_placed": 0,
     "from_header": 0,
     "lead_marks": {
-     "*": 111
+     "*": 111,
+     "\u2022": 3
     },
-    "marked_lines": 111,
+    "marked_lines": 114,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -648,10 +769,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 8315,
+   "line_source": {
+    "model": 8134,
+    "tesseract": 337,
+    "model-only": 329
+   },
    "ditto": {
-    "carried": 26,
+    "carried": 30,
     "orphan": 0,
     "disputed": 1,
+    "mark_lost": 2,
     "glued_marks": [
      "-",
      "\u2014"
@@ -683,10 +810,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 6966,
+   "line_source": {
+    "model": 6389,
+    "tesseract": 321,
+    "model-only": 523
+   },
    "ditto": {
-    "carried": 13,
+    "carried": 14,
     "orphan": 0,
     "disputed": 1,
+    "mark_lost": 1,
     "glued_marks": [
      "\u2018"
     ],
@@ -715,10 +848,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 10429,
+   "line_source": {
+    "tesseract": 155,
+    "model": 10206,
+    "model-only": 68
+   },
    "ditto": {
     "carried": 12,
     "orphan": 0,
     "disputed": 8,
+    "mark_lost": 0,
     "glued_marks": [],
     "headers_placed": 0,
     "from_header": 0,
@@ -747,10 +886,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 10127,
+   "line_source": {
+    "tesseract": 138,
+    "model": 9887,
+    "model-only": 95
+   },
    "ditto": {
     "carried": 15,
     "orphan": 0,
     "disputed": 3,
+    "mark_lost": 0,
     "glued_marks": [
      "'"
     ],
@@ -781,10 +926,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 10384,
+   "line_source": {
+    "tesseract": 242,
+    "model": 12368,
+    "model-only": 231
+   },
    "ditto": {
-    "carried": 39,
+    "carried": 40,
     "orphan": 0,
     "disputed": 7,
+    "mark_lost": 1,
     "glued_marks": [
      "\u201c",
      "-",
@@ -817,19 +968,26 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 9741,
+   "line_source": {
+    "model": 12848,
+    "tesseract": 280,
+    "model-only": 271
+   },
    "ditto": {
     "carried": 20,
     "orphan": 0,
     "disputed": 2,
+    "mark_lost": 0,
     "glued_marks": [
      "\u201c"
     ],
     "headers_placed": 2,
     "from_header": 0,
     "lead_marks": {
-     "*": 182
+     "*": 182,
+     "\u2022": 1
     },
-    "marked_lines": 182,
+    "marked_lines": 183,
     "district_eastern": 0,
     "address_slots": 1,
     "address_no_antecedent": 0
@@ -851,10 +1009,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 13132,
+   "line_source": {
+    "model": 15972,
+    "tesseract": 165,
+    "model-only": 134
+   },
    "ditto": {
     "carried": 14,
     "orphan": 0,
     "disputed": 2,
+    "mark_lost": 0,
     "glued_marks": [
      "\u2018"
     ],
@@ -885,10 +1049,17 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 20707,
+   "line_source": {
+    "model": 21614,
+    "model-only": 629,
+    "tesseract": 529,
+    "bleed": 90
+   },
    "ditto": {
-    "carried": 48,
+    "carried": 52,
     "orphan": 0,
-    "disputed": 10,
+    "disputed": 11,
+    "mark_lost": 0,
     "glued_marks": [
      "\u201d",
      "\""
@@ -896,9 +1067,10 @@
     "headers_placed": 2,
     "from_header": 0,
     "lead_marks": {
-     "*": 349
+     "*": 349,
+     "\u2022": 1
     },
-    "marked_lines": 349,
+    "marked_lines": 350,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -920,17 +1092,25 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 18805,
+   "line_source": {
+    "model": 20767,
+    "tesseract": 352,
+    "model-only": 321,
+    "bleed": 16
+   },
    "ditto": {
-    "carried": 32,
+    "carried": 33,
     "orphan": 0,
     "disputed": 2,
+    "mark_lost": 1,
     "glued_marks": [],
     "headers_placed": 1,
     "from_header": 0,
     "lead_marks": {
-     "*": 211
+     "*": 211,
+     "\u2022": 1
     },
-    "marked_lines": 211,
+    "marked_lines": 212,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -952,10 +1132,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 24247,
+   "line_source": {
+    "model": 24611,
+    "tesseract": 385,
+    "model-only": 279
+   },
    "ditto": {
-    "carried": 23,
+    "carried": 24,
     "orphan": 0,
     "disputed": 4,
+    "mark_lost": 1,
     "glued_marks": [],
     "headers_placed": 1,
     "from_header": 0,
@@ -982,10 +1168,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 511,
    "printed_page_known": 46287,
+   "line_source": {
+    "tesseract": 1255,
+    "model": 45096,
+    "model-only": 1028
+   },
    "ditto": {
-    "carried": 78,
+    "carried": 81,
     "orphan": 0,
     "disputed": 5,
+    "mark_lost": 3,
     "glued_marks": [
      "-",
      "\u2018"
@@ -1019,10 +1211,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 47827,
+   "line_source": {
+    "tesseract": 2723,
+    "model": 44541,
+    "model-only": 3190
+   },
    "ditto": {
-    "carried": 150,
+    "carried": 161,
     "orphan": 0,
     "disputed": 3,
+    "mark_lost": 6,
     "glued_marks": [
      "\u2014",
      "\u2018",
@@ -1065,10 +1263,17 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 33548,
+   "line_source": {
+    "model": 44351,
+    "tesseract": 3015,
+    "model-only": 2851,
+    "bleed": 27
+   },
    "ditto": {
-    "carried": 162,
+    "carried": 177,
     "orphan": 1,
-    "disputed": 6,
+    "disputed": 9,
+    "mark_lost": 11,
     "glued_marks": [
      "\u2014",
      "-",
@@ -1114,10 +1319,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 52432,
+   "line_source": {
+    "model": 49793,
+    "tesseract": 1225,
+    "model-only": 3537
+   },
    "ditto": {
-    "carried": 38,
+    "carried": 56,
     "orphan": 0,
-    "disputed": 1,
+    "disputed": 3,
+    "mark_lost": 16,
     "glued_marks": [
      "\u2014",
      "-"
@@ -1130,9 +1341,10 @@
      "*": 199,
      "\"": 21,
      "\u00a9": 23,
-     "|": 24
+     "|": 24,
+     "\u2022": 2
     },
-    "marked_lines": 11454,
+    "marked_lines": 11456,
     "district_eastern": 11227,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -1154,19 +1366,26 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 4333,
+   "line_source": {
+    "model": 4490,
+    "tesseract": 42,
+    "model-only": 26
+   },
    "ditto": {
     "carried": 8,
     "orphan": 0,
     "disputed": 1,
+    "mark_lost": 0,
     "glued_marks": [
      "\u2014"
     ],
     "headers_placed": 2,
     "from_header": 0,
     "lead_marks": {
-     "*": 133
+     "*": 133,
+     "\u2022": 1
     },
-    "marked_lines": 133,
+    "marked_lines": 134,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -1189,19 +1408,26 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 5211,
+   "line_source": {
+    "tesseract": 112,
+    "model": 5207,
+    "model-only": 62
+   },
    "ditto": {
     "carried": 5,
     "orphan": 0,
     "disputed": 0,
+    "mark_lost": 0,
     "glued_marks": [
      "-"
     ],
     "headers_placed": 3,
     "from_header": 0,
     "lead_marks": {
-     "*": 57
+     "*": 57,
+     "\u2022": 11
     },
-    "marked_lines": 59,
+    "marked_lines": 70,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -1223,19 +1449,27 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 801,
+   "line_source": {
+    "model": 3521,
+    "model-only": 427,
+    "tesseract": 89,
+    "bleed": 88
+   },
    "ditto": {
     "carried": 15,
     "orphan": 0,
     "disputed": 3,
+    "mark_lost": 0,
     "glued_marks": [
      "\u201c"
     ],
     "headers_placed": 14,
     "from_header": 0,
     "lead_marks": {
-     "*": 61
+     "*": 61,
+     "\u2022": 1
     },
-    "marked_lines": 63,
+    "marked_lines": 64,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -1257,10 +1491,16 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 4827,
+   "line_source": {
+    "model": 5788,
+    "model-only": 90,
+    "tesseract": 100
+   },
    "ditto": {
-    "carried": 12,
+    "carried": 15,
     "orphan": 0,
-    "disputed": 4,
+    "disputed": 7,
+    "mark_lost": 3,
     "glued_marks": [
      "\u2014",
      "\u201c"
@@ -1268,9 +1508,10 @@
     "headers_placed": 6,
     "from_header": 0,
     "lead_marks": {
-     "*": 67
+     "*": 67,
+     "\u2022": 1
     },
-    "marked_lines": 68,
+    "marked_lines": 69,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -1292,10 +1533,17 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 6676,
+   "line_source": {
+    "model": 5675,
+    "tesseract": 501,
+    "model-only": 617,
+    "bleed": 186
+   },
    "ditto": {
-    "carried": 43,
+    "carried": 47,
     "orphan": 0,
-    "disputed": 18,
+    "disputed": 19,
+    "mark_lost": 0,
     "glued_marks": [
      "\u2018",
      "\"",
@@ -1330,10 +1578,17 @@
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 3880,
+   "line_source": {
+    "model": 7033,
+    "model-only": 141,
+    "tesseract": 123,
+    "bleed": 8
+   },
    "ditto": {
     "carried": 16,
     "orphan": 0,
     "disputed": 4,
+    "mark_lost": 0,
     "glued_marks": [
      "-",
      "\u2018"
@@ -1341,9 +1596,10 @@
     "headers_placed": 8,
     "from_header": 0,
     "lead_marks": {
-     "*": 83
+     "*": 83,
+     "\u2022": 3
     },
-    "marked_lines": 83,
+    "marked_lines": 86,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0

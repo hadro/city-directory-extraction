@@ -40,13 +40,14 @@ Evaluation); what differs is the hardware each needs.
 
 | Size | Adapter | Seconds per line on a 16 GB Apple laptop | Use it for |
 |---|---|---|---|
-| **4B** (this repo) | 143 MB | ~100 | Whole volumes on a GPU. It built the records dataset, and it is the only size scored end to end on real scans |
+| **4B** (this repo) | 143 MB | ~11 | Whole volumes on a GPU. It built the records dataset, and it is the only size scored end to end on real scans |
 | [2B](https://huggingface.co/<namespace>/city-directory-extractor-2b) | 83 MB | ~5 | A laptop or a smaller GPU: within a point of the 4B on the gold panel |
 | [0.8B](https://huggingface.co/<namespace>/city-directory-extractor-0.8b) | 60 MB | ~3 | The smallest machines and quick trials; about four points behind the 4B |
 
-The laptop times are one line at a time on an M2 with 16 GB; batching helps (the 2B has reached
-about half a line a second). Even so, a laptop is for trying lines, not for corpora: a
-100,000-line volume would take days. On a GPU, see Throughput below.
+The laptop times are one line at a time on an M2 with 16 GB (transformers 5.14.1, PyTorch on
+Apple's GPU, measured 2026-11-02); batching helps (the 2B has reached about half a line a second).
+Even so, a laptop is for trying lines, not for corpora: a 100,000-line volume would take days
+even on the 0.8B. On a GPU, see Throughput below.
 
 ## What it does
 
@@ -124,8 +125,9 @@ Three settings matter:
 - **Keep the first record only.** Parse key by key and stop at the first repeated key; the
   repo's `eval/qwen_predict.py` (`parse_completion`) does this.
 
-The 0.8B and 2B were checked to stop cleanly after one record even without the stop tokens (24
-gold lines each, `results/stop_test.py`); the settings above are still the safe default.
+All three sizes were checked to stop cleanly after one record even without the stop tokens (24
+gold lines from 12 volumes each, `results/stop_test.py`); the settings above are still the safe
+default.
 
 The tag carries the publisher and year when you know them (`[publisher=?; year=?]` otherwise). The
 publisher names seen in training are `trow`, `polk-tulsa`, `lain`, `polk`, `longworth`, `doggett`,

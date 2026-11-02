@@ -26,6 +26,7 @@ COLS = ["record_id", "volume", "leaf", "line", "year", "label", "usable", "name_
         "occupation_role", "raw_line", "address_resolved", "home_address_resolved", "crop", "city",
         "borough"]
 PLACES = ["Manhattan", "Brooklyn", "Elsewhere"]
+TRACE_YEARS = 10       # a traced line further than this from every year at the address is left out
 # Place markers as the directories print them after an address, letters only, lowercased: Trow's
 # (Manhattan) "h 168 Lefferts pl Bklyn", a Brooklyn directory's "107 Fulton, N. Y.". OCR forms
 # seen in the lines: Eklyn, Bkn, B'klyn.
@@ -128,20 +129,42 @@ class Records:
 
     def residents(self, hits: list, number, words, kind, dist) -> dict:
         """Each person found at the address, in every volume: a year whose line read the address
-        too badly to match shows up at another address, or not at all."""
-        names = []
+        too badly to match shows up at another address, or not at all.
+
+        The name alone gathers namesakes ("Williams William" at 155 Franklin: every William
+        Williams from 1798), so each line not at the address gets `left_out`, why it is probably
+        someone else: its home is in another place than any of the person's lines at the
+        address, or it is more than TRACE_YEARS from all of them. Nothing is dropped; the page
+        and the CSV decide what to show."""
+        names, anchors = [], {}
         for h in hits:
             n = fa.name_of(h)
-            if h["grade"] != "near" and not h["flag"] and len(n) >= 2 and n not in names:
-                names.append(n)
+            if h["grade"] != "near" and not h["flag"] and len(n) >= 2:
+                if n not in names:
+                    names.append(n)
+                years, places = anchors.setdefault(n, (set(), set()))
+                years.add(h["year"])
+                places.add(h["place"])
         out = {}
         for n in names[:12]:
             rows = self._dicts(
                 f"SELECT {', '.join(COLS)} FROM r WHERE lower(name_resolved) LIKE ? "
                 "ORDER BY year, volume, leaf, line", [n[0] + "%"])
-            out[" ".join(n)] = [dict(p, grade=(fa.best_reading(p, number, words, kind, dist)
-                                               or ("",))[0])
-                                for p in rows if fa.name_of(p) == n]
+            years, places = anchors[n]
+            traced = []
+            for p in rows:
+                if fa.name_of(p) != n:
+                    continue
+                p = dict(p, grade=(fa.best_reading(p, number, words, kind, dist) or ("",))[0])
+                p["place"], p["marker"] = home_place_of(p)
+                gap = min((abs(p["year"] - y) for y in years if y and p["year"]), default=None)
+                p["left_out"] = ("" if p["grade"] else
+                                 ("elsewhere" if p["place"] == "Elsewhere" else f"in {p['place']}")
+                                 if p["place"] not in places else
+                                 f"{gap} years from the address" if gap is not None
+                                 and gap > TRACE_YEARS else "")
+                traced.append(p)
+            out[" ".join(n)] = traced
         return out
 
 
@@ -166,6 +189,29 @@ def place_of(tail: str, r) -> tuple:
         for place, pat in MARKERS.items():
             if pat.fullmatch(cand):
                 return place, " ".join(shown)
+    return home_place(r), ""
+
+
+STREET_WORD = re.compile(r"(av|ave|avenue|st|street|pl|place|rd|road|ct|court|turnpike|tpke)\.?",
+                         re.I)
+
+
+def home_place_of(r) -> tuple:
+    """(place, marker) of the line's HOME, for a line that does not give the address searched:
+    the part after its last `h` (Trow's "h 228 Lenox av Bklyn"), or the whole line if it has
+    none; the first place marker there, else the directory's own place. A marker followed by a
+    street word is a street, not a place: "h 167 N Y av", "Flushing av" and "Jamaica av" are
+    Brooklyn's."""
+    toks = (r.get("raw_line") or "").split()
+    hs = [i for i, t in enumerate(toks) if t.rstrip(".,") in ("h", "r", "res")]
+    seg = toks[hs[-1] + 1:] if hs else toks
+    for i in range(len(seg)):
+        place, marker = place_of(" ".join(seg[i:i + 2]), r)
+        if not marker:
+            continue
+        after = seg[i + len(marker.split())] if i + len(marker.split()) < len(seg) else ""
+        if not STREET_WORD.fullmatch(after.rstrip(",")):
+            return place, marker
     return home_place(r), ""
 
 

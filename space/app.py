@@ -19,7 +19,7 @@ from pathlib import Path
 
 import gradio as gr
 
-from search import PLACES, Records, fa
+from search import PLACES, TRACE_YEARS, Records, fa
 
 PARQUET = os.environ.get("RECORDS_PARQUET", str(
     Path(__file__).resolve().parent.parent / "data" / "space" / "records.parquet"))
@@ -46,6 +46,7 @@ CSS = """
         border: 1px solid var(--border-color-primary); white-space: nowrap; }
 .flag.look { border-color: #d97706; color: #d97706; }
 .terms { color: var(--body-text-color-subdued); font-size: 13px; }
+details.aside { margin: 4px 0 12px 16px; color: var(--body-text-color-subdued); }
 """
 
 # Line images ask IA's image server for nothing until they are on screen. An image carries its
@@ -140,7 +141,7 @@ def row_html(h: dict, show_grade: bool = False) -> str:
             f'{links(h.get("crop"))}{badge}</div></td></tr>')
 
 
-def render(res: dict, places: list) -> str:
+def render(res: dict, places: list, narrow: bool = True) -> str:
     e = html.escape
     hidden = collections.Counter(h["place"] for h in res["hits"] if h["place"] not in places)
     shown_hits = [h for h in res["hits"] if h["place"] in places]
@@ -188,10 +189,23 @@ def render(res: dict, places: list) -> str:
     people = {n: rows for n, rows in res["people"].items() if n in names}
     if people:
         out.append("<h3>The residents, in every volume</h3><p class='terms'>A year whose line "
-                   "reads another address, or is missing, may be a misreading.</p>")
+                   "reads another address, or is missing, may be a misreading."
+                   + (f" Narrowed: a line whose home is in another place than the person's lines "
+                      f"at the address, or more than {TRACE_YEARS} years from them, is probably a "
+                      f"namesake and is set aside below each person." if narrow else "")
+                   + "</p>")
         for name, rows in people.items():
-            out.append(f'<details open><summary><b>{e(name.title())}</b>: {len(rows)} lines</summary>'
-                       f'<table class="hits">{"".join(row_html(p, True) for p in rows)}</table></details>')
+            kept = [p for p in rows if not (narrow and p["left_out"])]
+            out_rows = [p for p in rows if narrow and p["left_out"]]
+            out.append(f'<details open><summary><b>{e(name.title())}</b>: {len(kept)} lines'
+                       + (f" ({len(out_rows)} set aside)" if out_rows else "") + '</summary>'
+                       f'<table class="hits">{"".join(row_html(p, True) for p in kept)}</table>')
+            if out_rows:
+                out.append(f'<details class="aside"><summary>{len(out_rows)} set aside, probably '
+                           f'namesakes</summary><table class="hits">'
+                           f'{"".join(row_html(dict(p, flag="SET ASIDE: " + p["left_out"]), True) for p in out_rows)}'
+                           f'</table></details>')
+            out.append("</details>")
     return "".join(out)
 
 
@@ -199,8 +213,9 @@ MATCH_COLUMNS = ["grade", "flag", "place", "place_marker", "year", "directory", 
                  "record_id", "name_resolved", "occupation_role", "matched", "raw_line",
                  "address_resolved", "home_address_resolved", "line_image", "page_image"]
 TRACE_COLUMNS = ["traced_name", "year", "directory", "volume", "record_id", "gives_address",
-                 "name_resolved", "occupation_role", "raw_line", "address_resolved",
-                 "home_address_resolved", "line_image", "page_image"]
+                 "left_out", "place", "place_marker", "name_resolved", "occupation_role",
+                 "raw_line", "address_resolved", "home_address_resolved", "line_image",
+                 "page_image"]
 
 
 def page_image(crop: str) -> str:
@@ -227,14 +242,16 @@ def exports(res: dict, places: list) -> tuple:
                     line_image=h.get("crop"), page_image=page_image(h.get("crop")))
                for h in shown]
     names = {" ".join(fa.name_of(h)) for h in shown if h["grade"] != "near"}
+    # every traced line, the set-aside ones too: `left_out` says why, so a reader can filter
     trace = [dict(p, traced_name=name, directory=p.get("label"), gives_address=p["grade"] or "no",
-                  line_image=p.get("crop"), page_image=page_image(p.get("crop")))
+                  place_marker=p["marker"], line_image=p.get("crop"),
+                  page_image=page_image(p.get("crop")))
              for name, rows in res["people"].items() if name in names for p in rows]
     return (write_csv(res["address"], "matches", MATCH_COLUMNS, matches) if matches else None,
             write_csv(res["address"], "residents", TRACE_COLUMNS, trace) if trace else None)
 
 
-def search(address: str, dist: int, people: bool, places: list):
+def search(address: str, dist: int, people: bool, places: list, narrow: bool = True):
     """The results page, then the two downloads (each hidden when there is nothing in it)."""
     hide = gr.DownloadButton(visible=False)
     if not (address or "").strip():
@@ -244,7 +261,7 @@ def search(address: str, dist: int, people: bool, places: list):
     except SystemExit as err:                     # find_address.parse's message for a bad address
         return f"<p>{html.escape(str(err))}</p>", hide, hide
     matches, trace = exports(res, places or [])
-    return (render(res, places or []),
+    return (render(res, places or [], narrow),
             gr.DownloadButton(value=matches, visible=bool(matches)),
             gr.DownloadButton(value=trace, visible=bool(trace)))
 
@@ -259,7 +276,10 @@ with gr.Blocks(title="City directory address finder") as demo:
     with gr.Row():
         address = gr.Textbox(label="Address", placeholder="155 Franklin", scale=3)
         dist = gr.Slider(1, 3, value=2, step=1, label="Street spelling distance", scale=1)
-        people = gr.Checkbox(label="Trace the residents", value=False, scale=1)
+        with gr.Column(scale=1, min_width=160):
+            people = gr.Checkbox(label="Trace the residents", value=False)
+            narrow = gr.Checkbox(label=f"Set aside likely namesakes (another place, or "
+                                       f"over {TRACE_YEARS} years away)", value=True)
     places = gr.CheckboxGroup(
         PLACES, value=PLACES, label="Where the address is",
         info="A place printed after the address decides (Bklyn, Mhtn, N. Y., N J); without one, "
@@ -277,10 +297,10 @@ with gr.Blocks(title="City directory address finder") as demo:
     # Clear first: gr.HTML patches the old DOM node by node, so a new search would reuse the
     # old <img> elements, which keep showing the old line until IA serves the new one
     hidden = (gr.DownloadButton(visible=False), gr.DownloadButton(visible=False))
-    for trigger in (go.click, address.submit, places.change):
+    for trigger in (go.click, address.submit, places.change, narrow.change):
         trigger(lambda: ('<p class="terms">Searching…</p>', *hidden), None,
                 [result, get_matches, get_trace]).then(
-            search, [address, dist, people, places], [result, get_matches, get_trace])
+            search, [address, dist, people, places, narrow], [result, get_matches, get_trace])
 
 if __name__ == "__main__":
     demo.launch(server_name="127.0.0.1", server_port=int(os.environ.get("PORT", 7860)), css=CSS,

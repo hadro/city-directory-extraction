@@ -54,9 +54,19 @@ misses included (the page shows at most 300 of those), with the place filter app
 flag, place and its marker, directory, record id, resolved name and occupation, the line, its
 resolved addresses, and the line and page image URLs. With "Trace the residents" ticked,
 "Download the resident trace" gives each traced person's line in every volume, and whether it
-gives the address (`gives_address`: its grade, or `no`). The trace matches on the resolved name
-alone, so a common one gathers namesakes: "Williams William" at 155 Franklin brings every
-William Williams from 1798 on.
+gives the address (`gives_address`: its grade, or `no`).
+
+**Namesakes in the trace.** The trace matches on the resolved name alone, so a common one gathers
+namesakes: "Williams William" at 155 Franklin brings 141 lines, every William Williams from 1798
+on. "Set aside likely namesakes" (on by default) moves a traced line that does not give the
+address under its person, closed, when its HOME is in another place than all of the person's
+lines at the address (the part after its last `h`, read for a marker as above, a marker before
+a street word being a street: "N Y av" and "Jamaica av" are Brooklyn's), or it is more than
+`TRACE_YEARS` (10) from all of them. Williams William keeps 17, Donovan John J 25 of 103. The
+CSV keeps every line, with `left_out` saying why ("in Manhattan", "elsewhere", "28 years from
+the address") and the line's `place`. What it cannot tell: a namesake in the same borough and
+years ("Keiser August mechanic h 1096 Halsey" beside the optician at 62 Euclid av), which only
+the occupation or the home could separate.
 
 **Being kind to IA's image server.** A line image is fetched only when its row is on screen (within
 200 px), so nothing in a closed section is requested until it's opened. At most 4 requests are in

@@ -964,6 +964,64 @@ def synth_line(text: str, above, below, x0: int, char_w: float, line_h: int, con
     return out
 
 
+CUT_REACH = 1.0         # a layer word that begins this many characters left of its tile was cut off
+CUT_GLUE = 0.3          # ...and one that abuts the next word closer than this is one word with it
+CUT_SPACE = 2.0         # ...and none is the line's that sits further than this from the words the tile showed
+
+
+def uncut(row: dict, tile_x0: int, char_w: float) -> bool:
+    """A printed line the column's tile cut into: the layer's words that begin left of the tile,
+    pasted back over the model's reading of their stubs (PIPELINE #35 (6a)). The column rule set
+    Trow 1909 vol 1 leaf 479's c0 tiles at x 265 and the column's text at 205, so LightOn saw the
+    tail of each `—Wm` and read `n` (`n H h 70 W 55th`), and `—Willard` as `llard`; 88 such tiles
+    in the damaged tier, where the layer read the whole word. The model's tokens before its first
+    one paired with a word the tile showed are the stubs; they become the layer's words that began
+    outside it (one with the next where the layer split them at no space: `—w alter`). True where
+    the row changed. Not a mark row, nor where the stubs are more tokens than the words outside."""
+    if row.get("mark") or not row.get("words") or not char_w:
+        return False
+    ws = sorted(row["words"], key=lambda w: w[0])
+    s = next((i for i, w in enumerate(ws) if w[0] >= tile_x0 - CUT_REACH * char_w), len(ws))
+    # cut text runs on into the line; a speck out in the margin is not the line's
+    if s == 0 or s == len(ws) or ws[s][0] - ws[s - 1][2] > CUT_SPACE * char_w:
+        return False
+    toks = row["text"].split()
+    pair = pair_words([norm(w[5]) for w in ws], [norm(t) for t in toks])
+    j = next((j for j in sorted(pair) if pair[j] >= s), None)
+    if j is None or j > s + 1:
+        return False
+    # the model saw every word that began outside: its token is as long as the layer's, give or
+    # take a letter, and like it (`Isaac` over `—Isaaec`, `Terminal` over `Tarmlnai`). It keeps its
+    # reading, and gets back only a ditto dash it could not see
+    seen = {pair[t]: t for t in range(j) if t in pair and pair[t] < s}
+    if len(seen) == s and all(len(norm(toks[t])) >= len(norm(ws[i][5])) - 1
+                              and sim(norm(toks[t]), norm(ws[i][5])) >= PAIR for i, t in seen.items()):
+        if DITTO_OPEN.match(ws[0][5]) and not DITTO_OPEN.match(toks[0]):
+            row["text"] = f"—{row['text'].lstrip()}"
+            return True
+        return False
+    out = []
+    for i, w in enumerate(ws[:s]):
+        if out and w[0] - ws[i - 1][2] < CUT_GLUE * char_w:
+            out[-1] += w[5]
+        else:
+            out.append(w[5])
+    # at most one stub a word outside: the model token after it is the line's own (`n J manager`
+    # over the layer's `—Wm.` and no `J`)
+    k = min(j, s)
+    if (k == j and pair[j] == s and ws[s][0] - ws[s - 1][2] < CUT_GLUE * char_w
+            and len(re.sub(r"\W", "", out[-1])) <= 2):
+        out[-1] += toks[j]
+        k += 1
+    if DITTO_OPEN.match(toks[0]) and not DITTO_OPEN.match(out[0]):
+        out[0] = f"—{out[0]}"                 # the model saw the dash (`—W H` over the layer's `WOM`)
+    text = " ".join(out + toks[k:])
+    if text == row["text"]:
+        return False
+    row["text"] = text
+    return True
+
+
 def boxed_lines(rec: dict, tiles: dict) -> list:
     """reocr_volumes.column_lines(keyed=True) read off the staged tiles' own boxes: (column,
     upright top, words) per line piece, each word to the column whose tiles hold it on the page
@@ -1058,6 +1116,8 @@ def page_rows(rec: dict, tiles: dict, answers: dict, marks: frozenset = frozense
                            col_right=col_right):
             r["source"] = "bleed" if bleed and r["source"] != "tesseract" else r["source"]
             r["x0"], r["x1"] = tiles[name][0], tiles[name][2]
+            if r["source"] != "tesseract" and tiles[name][0] > 0:
+                uncut(r, tiles[name][0], char_w)
             rows.append(r)
     return dittos(rows, median_h, marks), median_h, char_w
 
@@ -2026,6 +2086,29 @@ def _self_test() -> int:
     # round 11: a figure description is no reading, and a re-read that stopped short loses to the
     # first answer (tile_slug); otherwise the re-read wins
     import tempfile
+    # --- uncut: a column tile cut into its lines (Trow 1909 vol 1 leaf 479, tile x 265) ---------
+    def cut_row(text, words):
+        return {"text": text, "source": "model", "mark": False,
+                "words": [[x0, 0, x1, 17, 90, t] for x0, x1, t in words]}
+    r = cut_row("n H h 70 W 55th", [(205, 276, "—Wm"), (297, 315, "H"), (336, 348, "h"),
+                                    (366, 390, "70"), (405, 420, "W"), (436, 480, "55th")])
+    assert uncut(r, 265, 14.0) and r["text"] == "—Wm H h 70 W 55th", r
+    r = cut_row("n J manager 135 W 23d", [(204, 279, "—Wm."), (296, 386, "manager"), (406, 446, "135")])
+    assert uncut(r, 265, 14.0) and r["text"] == "—Wm. J manager 135 W 23d", "the J is the line's own"
+    r = cut_row("alter G lawyer", [(205, 254, "—w"), (258, 311, "alter"), (321, 327, "G"), (351, 434, "lawyer")])
+    assert uncut(r, 265, 14.0) and r["text"] == "—walter G lawyer", "split at no space: one word"
+    r = cut_row("TON'S ICE CR", [(205, 330, "HORTONS"), (332, 380, "ICE"), (400, 430, "CR")])
+    assert uncut(r, 265, 14.0) and r["text"] == "HORTONS ICE CR", "a whole word is not glued on"
+    r = cut_row("Isaac lawyer 61 Park row", [(200, 290, "—Isaaec"), (305, 380, "lawyer"), (395, 420, "61")])
+    assert uncut(r, 265, 14.0) and r["text"] == "—Isaac lawyer 61 Park row", "read whole: the dash only"
+    r = cut_row("Terminal Building", [(200, 320, "Tarmlnai"), (335, 450, "Building")])
+    assert not uncut(r, 265, 14.0), "read whole: the model's reading stands"
+    r = cut_row("Hagedorn Adolph broker",[(266, 380, "Hagedorn"), (390, 470, "Adolph"), (480, 560, "broker")])
+    assert not uncut(r, 265, 14.0), "a line inside its tile is left alone"
+    r = cut_row("Smith John h 4 Main", [(150, 230, "xx"), (232, 250, "yy"), (300, 400, "Smitb"),
+                                        (410, 470, "John"), (480, 490, "h")])
+    assert not uncut(r, 265, 14.0), "more words outside than stubs: nothing to put back"
+
     first, re_read = "lightonocr-3-1b-greedy-vllm", "lightonocr-3-1b-greedy-vllm-notables"
     with tempfile.TemporaryDirectory() as d:
         base = Path(d) / "v_0001_c0_h0"

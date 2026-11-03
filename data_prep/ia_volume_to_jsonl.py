@@ -144,7 +144,15 @@ BIG_RATIO = 2.0          # a line this many times the page's median line HEIGHT 
 # NORMALIZER was contaminated; see page_geometry.body_width(). Against `body_width` the same
 # separation needs only 1.4. See BODY_WIDTH_FLOOR for the measurement table.
 WIDE_RATIO = 1.4
-MIN_CHARS_LEAF = 200     # below this a leaf is a blank verso or a plate, not a listing page
+# ...except, on a re-OCR'd leaf, a line no wider than the leaf's widest column tile that reads like
+# an entry (a capitalised word, after any ditto dash, then lowercase and a digit; PIPELINE #35
+# (6b)). On a page of short ditto lines the body width is the dittos' (`—Wm h 12 X`) and a
+# full-column entry runs past 1.4 of it: Trow 1914's three parts lost 9-12% of their lines as
+# banners, Brooklyn 1912's copies ~7.5% (`ALFORD F. A. CO., fixtures, 1029`, `Molther Wm R
+# cashier 29 W 34th Mhtn h 522 Greene av`). Over the 123 re-OCR'd book volumes 165,290 banner
+# drops fit a tile column and read so; 36,748 fit one and do not, nearly all ad copy, and stay cut.
+BANNER_ENTRY = re.compile(r"^(?:[—\-–\"“]+\s*)?[A-Z][A-Za-z'’]+\b.*[a-z].*\d")
+MIN_CHARS_LEAF = 200    # below this a leaf is a blank verso or a plate, not a listing page
 
 
 # ==============================================================================================
@@ -1046,10 +1054,12 @@ def page_geometry(lines):
     return med_h, med_w, big + wide
 
 
-def geom_reject(box, height, med_h, med_w):
+def geom_reject(box, height, med_h, med_w, col_w=None, text=""):
     """Reason this line's geometry says it is not a body entry, or None to keep it.
 
     `med_w` must come from page_geometry, i.e. be a `body_width` and not a plain median.
+    `col_w`: a re-OCR'd leaf's widest column tile, inside which an entry-like line is no banner
+    (BANNER_ENTRY).
 
     ⚠️ THE SIX-LEAF "NO FALSE POSITIVES FOUND" CLAIM WAS WRONG, and it is worth knowing how it
     got made. The original note here read: 28 drops in 1,557 lines, every one inspected a running
@@ -1070,6 +1080,8 @@ def geom_reject(box, height, med_h, med_w):
     if height > med_h * BIG_RATIO:
         return "bigtype"
     if (box[2] - box[0]) > med_w * WIDE_RATIO:
+        if col_w and box[2] - box[0] <= col_w and BANNER_ENTRY.match(text):
+            return None
         return "banner"
     return None
 
@@ -1446,8 +1458,10 @@ def page_raw(item, leaf, split_columns, stats):
 def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped_fh, out_fh,
           normalize_dittos=True, confirmed_marks=(), band=True, deep_indent=False,
           holdout=None, indent_ratio=INDENT_RATIO, split_columns=False, digit_s=False,
-          model_start_cap=None):
+          model_start_cap=None, col_widths=None):
     """Walk leaves, emit kept lines, return (stats, reasons, ad_scores, ditto_report).
+
+    `col_widths`: {leaf: its widest column tile's width}, for the re-OCR'd leaves (geom_reject).
 
     `indent_ratio` is the wrap-join threshold (see calibrate_indent); `model_start_cap` how far a
     model-read start may still join on it (start_cap, join_wraps). `split_columns` cuts hOCR
@@ -1491,7 +1505,7 @@ def sweep(item, publisher, year, leaves, use_geometry, margin_tol, join, dropped
         for box, text, height in lines:
             why = text_reject(text)
             if why is None and use_geometry:
-                why = geom_reject(box, height, med_h, med_w)
+                why = geom_reject(box, height, med_h, med_w, (col_widths or {}).get(leaf), text)
             if why is None and margin_tol is not None:
                 why = margin_reject(box, margins, margin_tol)
             if why is not None:
@@ -1617,6 +1631,14 @@ def _self_test() -> int:
     assert geom_reject((100, 50, 400, 140), 90, med_h, med_w) == "bigtype"
     # a normal-height line running far wider than the page's own body lines
     assert geom_reject((100, 50, 1180, 68), 18, med_h, med_w) == "banner"
+    # a re-OCR'd leaf's full-column entry over a body of ditto stubs (Brooklyn 1912 leaf 41)
+    full = (1271, 1253, 1965, 1278)
+    assert geom_reject(full, 25, 26, 475, None, "—Frank J realestate 43 Woodbine h 496 Hart") == "banner"
+    assert geom_reject(full, 25, 26, 475, 910, "—Frank J realestate 43 Woodbine h 496 Hart") is None
+    assert geom_reject(full, 25, 26, 475, 910, "ALFORD F. A. CO., fixtures, 1029") is None
+    assert geom_reject(full, 25, 26, 475, 910, "The only Publication that will give you") == "banner"
+    assert geom_reject(full, 25, 26, 475, 600, "—Frank J realestate 43 Woodbine h 496 Hart") == "banner", \
+        "wider than any column: across the gutter"
 
     # ---- body_width: the BIMODAL page, which is what a real listing leaf looks like and what
     # the plain median got wrong. Proportions are 1906BPL leaf 83: ~40% short fragments (wrap

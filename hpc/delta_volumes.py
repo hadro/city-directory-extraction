@@ -107,11 +107,14 @@ def git_rev() -> str:
         return "unknown"
 
 
-def stage(new: Path, olds: list, out: Path, run: str, chunk: int) -> dict:
+def stage(news: list, olds: list, out: Path, run: str, chunk: int) -> dict:
+    """One delta over one or more new stagings (PIPELINE #35: the three re-OCR'd tiers in one
+    job). A prompt is the same prompt in any tier, so each new staging later merges from the
+    one delta, run by run (`merge --new <one staging>`)."""
     if (out / "tasks.txt").exists():
         raise SystemExit(f"{out} is already staged: a delta goes in a NEW directory")
     todo, seen, lines_new, reused, unusable = [], set(), 0, 0, []
-    for ident in volumes(new):
+    for new, ident in ((n, i) for n in news for i in volumes(n)):
         idx, bad = index([o / ident for o in olds], run)
         unusable += bad
         for c in sorted((new / ident).glob("chunk_*.jsonl")):
@@ -134,9 +137,10 @@ def stage(new: Path, olds: list, out: Path, run: str, chunk: int) -> dict:
     (out / "tasks.txt").write_text("".join(f"{DELTA} {c['path']} {c['lines']}\n" for c in chunks),
                                    encoding="utf-8")
     (out / "manifest.json").write_text(json.dumps(
-        {DELTA: {"source": str(new), "lines": len(todo), "chunks": chunks}}, indent=1),
+        {DELTA: {"source": " ".join(map(str, news)), "lines": len(todo), "chunks": chunks}}, indent=1),
         encoding="utf-8")
-    summary = {"staged": _dt.date.today().isoformat(), "code_at": git_rev(), "delta_of": str(new),
+    summary = {"staged": _dt.date.today().isoformat(), "code_at": git_rev(),
+               "delta_of": str(news[0]) if len(news) == 1 else [str(n) for n in news],
                "old": [str(o) for o in olds], "run": run, "chunk": chunk, "volumes": 1,
                "lines": len(todo), "tasks": len(chunks), "new_lines": lines_new,
                "reused": reused, "unusable_old_chunks": unusable}
@@ -186,7 +190,8 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("cmd", nargs="?", choices=["stage", "merge"])
-    ap.add_argument("--new", help="the new full staging (hpc/prep_volumes.py --out)")
+    ap.add_argument("--new", nargs="+", help="the new full staging (hpc/prep_volumes.py --out); "
+                                             "stage takes several, merge one")
     ap.add_argument("--old", nargs="+", default=[],
                     help="earlier stagings whose predictions are reused")
     ap.add_argument("--out", help="stage: the delta staging to write (a new directory)")
@@ -201,12 +206,12 @@ def main(argv=None) -> int:
         return _self_test()
     if not args.cmd or not args.new or not args.old:
         ap.error("stage or merge, with --new and --old")
-    new, olds = Path(args.new), [Path(o) for o in args.old]
+    news, olds = [Path(n) for n in args.new], [Path(o) for o in args.old]
     if args.cmd == "stage":
         if not args.out:
             ap.error("stage needs --out")
-        s = stage(new, olds, Path(args.out), args.run, args.chunk)
-        print(f"{s['new_lines']:,} lines in {new}: {s['reused']:,} reuse a prediction, "
+        s = stage(news, olds, Path(args.out), args.run, args.chunk)
+        print(f"{s['new_lines']:,} lines in {' '.join(map(str, news))}: {s['reused']:,} reuse a prediction, "
               f"{s['lines']:,} prompts to predict in {s['tasks']} tasks "
               f"(~{s['lines'] / 12.6 / 3600:.1f} GPU-h at 12.6 rows/s)", file=sys.stderr)
         if s["unusable_old_chunks"]:
@@ -220,7 +225,9 @@ def main(argv=None) -> int:
     else:
         if not args.delta:
             ap.error("merge needs --delta")
-        m = merge(new, olds, Path(args.delta), args.run, args.overwrite)
+        if len(news) != 1:
+            ap.error("merge takes one --new: merge each staging from the delta in turn")
+        m = merge(news[0], olds, Path(args.delta), args.run, args.overwrite)
         print(f"{m['chunks']} chunks: {m['from_old']:,} records reused, {m['from_delta']:,} from "
               f"the delta", file=sys.stderr)
     return 0
@@ -259,12 +266,12 @@ def _self_test() -> int:
     # the re-import: one line respelled, one gone, one added twice, the rest as they were
     staging(new, [[line("Abel John, clk"), line("Abbott Mary, wid"), line("Ace Jas, carman"),
                    line("Ace Jas, carman")], [line("Acker Hy, tailor", 2)]])
-    s = stage(new, [old], tmp / "delta", "4b-100k", chunk=1)
+    s = stage([new], [old], tmp / "delta", "4b-100k", chunk=1)
     assert (s["new_lines"], s["reused"], s["lines"], s["tasks"]) == (5, 2, 2, 2), s
     assert (tmp / "delta" / "tasks.txt").read_text().splitlines() == [
         "delta delta/chunk_000.jsonl 1", "delta delta/chunk_001.jsonl 1"]
     try:
-        stage(new, [old], tmp / "delta", "4b-100k", chunk=1)
+        stage([new], [old], tmp / "delta", "4b-100k", chunk=1)
         raise AssertionError("a second stage into the same directory must refuse")
     except SystemExit:
         pass
@@ -288,7 +295,7 @@ def _self_test() -> int:
         hashlib.sha1(raw).hexdigest(), "the sha1 is the new chunk's, as the cluster writes it"
     # a stale old prediction (made from another staging of its chunk) is never reused
     (old / "v" / "chunk_001.preds_4b-100k.txt.sha1").write_text("0" * 40 + "\n")
-    s2 = stage(new, [old], tmp / "delta2", "4b-100k", chunk=10)
+    s2 = stage([new], [old], tmp / "delta2", "4b-100k", chunk=10)
     assert s2["lines"] == 3 and len(s2["unusable_old_chunks"]) == 1, s2
     # two copies of one prompt decoded differently: the k-th copy keeps the k-th record
     old3, new3 = tmp / "old3", tmp / "new3"

@@ -556,6 +556,24 @@ def confirmed_dittos(ident: str) -> tuple:
     return tuple(vol.get("confirmed") or ())
 
 
+def column_widths(ident: str, side_doc: dict) -> dict:
+    """{leaf: its widest column tile's width} for a re-OCR'd volume, from the staging's boxes.json
+    under the sidecar's `reocr.root` (sweep's `col_widths`, PIPELINE #35 (6b)); {} for any other.
+    A tile's box is its column padded on both sides, so a line inside it fits the column."""
+    root = (side_doc.get("reocr") or {}).get("root")
+    f = REPO / root / "boxes.json" if root else None
+    if f is None or not f.exists():
+        return {}
+    out = {}
+    for key, box in json.loads(f.read_text(encoding="utf-8")).items():
+        vol, fname = key.split("/")
+        if vol != ident:
+            continue
+        leaf = int(fname[:-4].rsplit("_c", 1)[0].rsplit("_", 1)[1])
+        out[leaf] = max(out.get(leaf, 0), box[2] - box[0])
+    return out
+
+
 def derive(ident: str, holdout: dict) -> dict:
     """Filter the dump into candidate lines. Offline; the same code path as a live harvest."""
     p = paths(ident)
@@ -586,6 +604,7 @@ def derive(ident: str, holdout: dict) -> dict:
         wraps["moved_from"] = prev.get("indent_ratio")
     if reocr:                    # a re-OCR'd volume: how far its model-read starts may join
         wraps.update(start_cap(dump, content, wraps["indent_ratio"]))
+    col_widths = column_widths(ident, side_doc)
     tmp_l = p["lines.jsonl.gz"].with_suffix(".tmp")
     tmp_d = p["dropped.txt.gz"].with_suffix(".tmp")
     with gzip.open(tmp_l, "wt", encoding="utf-8") as out_fh, \
@@ -593,7 +612,8 @@ def derive(ident: str, holdout: dict) -> dict:
         stats, reasons, ad_scores, ditto, band = sweep(
             dump, publisher, year, content, True, None, True, dropped_fh, out_fh,
             holdout=holdout, indent_ratio=wraps["indent_ratio"], split_columns=True,
-            confirmed_marks=confirmed, digit_s=abbyy8, model_start_cap=wraps.get("start_cap"))
+            confirmed_marks=confirmed, digit_s=abbyy8, model_start_cap=wraps.get("start_cap"),
+            col_widths=col_widths)
     dump.close()
     tmp_l.rename(p["lines.jsonl.gz"])
     tmp_d.rename(p["dropped.txt.gz"])

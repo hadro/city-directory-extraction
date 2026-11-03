@@ -366,23 +366,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1904",
-   "hocr_lines": 188840,
-   "wrap_joins": 28355,
-   "candidates": 160485,
+   "hocr_lines": 188879,
+   "wrap_joins": 28275,
+   "candidates": 160604,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 159767,
-    "mark_share": 0.425,
+    "pairs": 159751,
+    "mark_share": 0.4241,
     "mode": 2.0,
-    "mode_pairs": 9922,
+    "mode_pairs": 9915,
     "trough": 1.5,
-    "trough_pairs": 930,
+    "trough_pairs": 942,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 9.33,
-    "run_over_joins": 25644
+    "start_cap": 9.25,
+    "run_over_joins": 25650
    },
-   "model_runovers": 27253,
+   "model_runovers": 27213,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -392,15 +392,15 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 6,
-   "digit_fixes": 170,
-   "kept": 148835,
-   "keep_rate": 0.9274,
+   "marker_fixes": 5,
+   "digit_fixes": 166,
+   "kept": 148900,
+   "keep_rate": 0.9271,
    "dropped": {
-    "allcaps": 5174,
-    "short": 4226,
+    "allcaps": 5247,
+    "short": 4292,
     "bigtype": 1140,
-    "banner": 1050,
+    "banner": 965,
     "pagenum": 32,
     "nonascii": 28
    },
@@ -408,13 +408,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 78155,
+   "ditto_applied": 78009,
    "band": {
-    "leaves_banded": 520,
-    "head": 2381,
-    "body": 140050,
-    "foot": 3867,
-    "unbanded": 2537
+    "leaves_banded": 518,
+    "head": 2297,
+    "body": 139713,
+    "foot": 3886,
+    "unbanded": 3004
    },
    "top_ad_leaves": [
     61,
@@ -428,32 +428,32 @@
     69,
     53
    ],
-   "filters_at": "8064b0b-dirty",
-   "derived": "2026-10-26"
+   "filters_at": "b6c44a2-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 12450689,
+  "words_gz_bytes": 12402945,
   "hocr_deleted": true,
   "elapsed_s": 92
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "start_leaf": 139,
   "end_leaf": 1195,
   "first_letter": "A",
   "last_letter": "H",
   "letters_present": "ABCDEFGH",
   "missing_letters": "IJKLMNOPQRSTUVWXYZ",
-  "voting_density": 0.436,
+  "voting_density": 0.437,
   "flags": [
    "partial-alphabet"
   ],
   "start": {
    "leaf": 139,
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1904p1trow$139/full/!1400,1400/0/default.jpg",
-   "quote": "Alex, \u201c Alexander. elec eng"
+   "quote": "Alex \" Alexander."
   },
   "end": {
    "leaf": 1195,
@@ -464,7 +464,7 @@
    {
     "start_leaf": 141,
     "end_leaf": 1195,
-    "voting_leaves": 460,
+    "voting_leaves": 461,
     "first_letter": "A",
     "last_letter": "H",
     "letters": "ABCDEFGH",
@@ -550,7 +550,7 @@
    "C": [
     587,
     667,
-    38
+    39
    ],
    "D": [
     693,
@@ -578,7 +578,7 @@
     20
    ]
   },
-  "skipped_votes": 4,
+  "skipped_votes": 3,
   "voted_bounds": [
    141,
    1195
@@ -604,11 +604,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "content_leaves": 593,
   "fitted_leaves": 564,
-  "read_leaves": 422,
+  "read_leaves": 426,
   "segments": [
    {
     "first_leaf": 39,
@@ -624,7 +624,7 @@
     "first_page": 17,
     "last_page": 269,
     "leaves": 253,
-    "read": 177
+    "read": 179
    },
    {
     "first_leaf": 649,
@@ -632,7 +632,7 @@
     "first_page": 271,
     "last_page": 345,
     "leaves": 75,
-    "read": 65
+    "read": 66
    },
    {
     "first_leaf": 805,
@@ -640,7 +640,7 @@
     "first_page": 347,
     "last_page": 465,
     "leaves": 119,
-    "read": 91
+    "read": 92
    },
    {
     "first_leaf": 1049,
@@ -662,8 +662,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -778,8 +778,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1904p1trow_listing.jsonl.gz",
   "sections": [
    {
@@ -793,19 +793,19 @@
     "end_leaf": 1195
    }
   ],
-  "kept": 147370,
+  "kept": 147435,
   "dropped": 1465,
   "kept_share": 0.9902,
   "kept_by_section": {
-   "late_names": 182,
-   "listing": 147188
+   "late_names": 183,
+   "listing": 147252
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-23",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 105,
+  "scoped_lines": 91,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    179,
@@ -816,24 +816,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/trowsgeneraldir1904p1trow",
   "ia_dump": "data/survey_ocr/trowsgeneraldir1904p1trow_words.ia.jsonl.gz",
+  "tiles_figure": 17,
   "tiles": 3162,
-  "tiles_answered": 3162,
+  "tiles_preferred": 141,
+  "tiles_answered": 3145,
   "bleed_retry": 3,
   "loop_truncated": 0,
-  "table_mode": 143,
+  "table_mode": 2,
   "pages": 529,
-  "lines_runover": 27253,
-  "lines_model": 180119,
-  "lines_model-only": 1513,
-  "lines_tesseract": 3946,
+  "lines_runover": 27213,
+  "lines_model": 181124,
+  "lines_model-only": 1553,
+  "lines_tesseract": 2940,
   "lines_bleed": 127,
   "leaves_replaced": 529,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 529
   },
-  "dumped": "2026-10-26"
+  "dumped": "2026-11-03"
  }
 }

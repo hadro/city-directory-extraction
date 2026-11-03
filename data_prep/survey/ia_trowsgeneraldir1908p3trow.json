@@ -322,23 +322,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1908",
-   "hocr_lines": 175513,
-   "wrap_joins": 29083,
-   "candidates": 146430,
+   "hocr_lines": 175685,
+   "wrap_joins": 29072,
+   "candidates": 146613,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 144184,
-    "mark_share": 0.4335,
+    "pairs": 144257,
+    "mark_share": 0.4332,
     "mode": 1.5,
-    "mode_pairs": 3367,
-    "trough": 0.75,
-    "trough_pairs": 876,
+    "mode_pairs": 3332,
+    "trough": 1.0,
+    "trough_pairs": 881,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 7.88,
-    "run_over_joins": 25853
+    "start_cap": 7.83,
+    "run_over_joins": 25839
    },
-   "model_runovers": 28733,
+   "model_runovers": 28661,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -349,14 +349,14 @@
     "leaves": 0
    },
    "marker_fixes": 49,
-   "digit_fixes": 189,
-   "kept": 133567,
-   "keep_rate": 0.9122,
+   "digit_fixes": 190,
+   "kept": 133691,
+   "keep_rate": 0.9119,
    "dropped": {
-    "short": 6118,
-    "allcaps": 4524,
-    "bigtype": 1319,
-    "banner": 872,
+    "short": 6217,
+    "allcaps": 4546,
+    "bigtype": 1276,
+    "banner": 853,
     "nonascii": 27,
     "pagenum": 3
    },
@@ -364,13 +364,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 73501,
+   "ditto_applied": 73462,
    "band": {
     "leaves_banded": 470,
-    "head": 2386,
-    "body": 125257,
-    "foot": 2360,
-    "unbanded": 3564
+    "head": 2577,
+    "body": 124989,
+    "foot": 2532,
+    "unbanded": 3593
    },
    "top_ad_leaves": [
     9,
@@ -384,18 +384,18 @@
     21,
     29
    ],
-   "filters_at": "8064b0b-dirty",
-   "derived": "2026-10-26"
+   "filters_at": "b6c44a2-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 12334624,
+  "words_gz_bytes": 12321775,
   "hocr_deleted": true,
   "elapsed_s": 26
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "start_leaf": 43,
   "end_leaf": 993,
   "first_letter": "L",
@@ -558,11 +558,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "content_leaves": 500,
   "fitted_leaves": 474,
-  "read_leaves": 212,
+  "read_leaves": 211,
   "segments": [
    {
     "first_leaf": 43,
@@ -570,7 +570,7 @@
     "first_page": 1017,
     "last_page": 1237,
     "leaves": 221,
-    "read": 95
+    "read": 94
    },
    {
     "first_leaf": 489,
@@ -592,8 +592,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -641,8 +641,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1908p3trow_listing.jsonl.gz",
   "sections": [
    {
@@ -651,43 +651,45 @@
     "end_leaf": 993
    }
   ],
-  "kept": 131396,
+  "kept": 131520,
   "dropped": 2171,
-  "kept_share": 0.9837,
+  "kept_share": 0.9838,
   "kept_by_section": {
-   "listing": 131396
+   "listing": 131520
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-25",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 230,
+  "scoped_lines": 231,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    451
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 8.0) / tesseract-5.5 merge + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 8.0) / tesseract-5.5 merge + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/trowsgeneraldir1908p3trow",
   "ia_dump": "data/survey_ocr/trowsgeneraldir1908p3trow_words.ia.jsonl.gz",
+  "tiles_figure": 7,
   "tiles": 2848,
-  "tiles_answered": 2848,
+  "tiles_preferred": 85,
+  "tiles_answered": 2841,
   "bleed_retry": 1,
-  "loop_truncated": 4,
-  "table_mode": 85,
+  "loop_truncated": 5,
+  "table_mode": 0,
   "pages": 476,
-  "lines_runover": 28733,
-  "lines_model": 163731,
-  "lines_tesseract": 6327,
-  "lines_model-only": 1919,
+  "lines_runover": 28661,
+  "lines_model": 163995,
+  "lines_tesseract": 6068,
+  "lines_model-only": 2086,
   "lines_bleed": 59,
   "leaves_replaced": 476,
   "layers": {
    "tesseract-5.5 merge": 474,
    "ia-words (ABBYY FineReader 8.0)": 2
   },
-  "dumped": "2026-10-26"
+  "dumped": "2026-11-03"
  }
 }

@@ -360,8 +360,8 @@
    "publisher_tag_note": null,
    "year_tag": "1798",
    "hocr_lines": 17020,
-   "wrap_joins": 536,
-   "candidates": 16484,
+   "wrap_joins": 535,
+   "candidates": 16485,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -388,11 +388,11 @@
    "marker_fixes": 0,
    "digit_fixes": 39,
    "kept": 12165,
-   "keep_rate": 0.738,
+   "keep_rate": 0.7379,
    "dropped": {
     "short": 2879,
     "banner": 976,
-    "allcaps": 427,
+    "allcaps": 428,
     "nonascii": 17,
     "pagenum": 12,
     "bigtype": 8
@@ -418,17 +418,17 @@
     59,
     167
    ],
-   "filters_at": "8064b0b-dirty",
-   "derived": "2026-10-26"
+   "filters_at": "b6c44a2-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 896641,
+  "words_gz_bytes": 896995,
   "elapsed_s": 1
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "start_leaf": 185,
   "end_leaf": 627,
   "first_letter": "A",
@@ -813,8 +813,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "content_leaves": 315,
   "fitted_leaves": 67,
   "read_leaves": 22,
@@ -847,8 +847,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -909,8 +909,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "file": "data/survey_ocr/longworthsameric1798newy_listing.jsonl.gz",
   "sections": [
    {
@@ -927,10 +927,12 @@
   }
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/longworthsameric1798newy",
   "ia_dump": "data/survey_ocr/longworthsameric1798newy_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 444,
+  "tiles_preferred": 0,
   "tiles_answered": 444,
   "bleed_retry": 0,
   "loop_truncated": 0,
@@ -944,6 +946,6 @@
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 222
   },
-  "dumped": "2026-10-26"
+  "dumped": "2026-11-03"
  }
 }

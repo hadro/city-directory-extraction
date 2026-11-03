@@ -396,23 +396,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
-   "hocr_lines": 130722,
-   "wrap_joins": 8778,
-   "candidates": 121944,
+   "hocr_lines": 130778,
+   "wrap_joins": 8773,
+   "candidates": 122005,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 83714,
-    "mark_share": 0.3989,
+    "pairs": 83713,
+    "mark_share": 0.4018,
     "mode": 1.75,
-    "mode_pairs": 4681,
+    "mode_pairs": 4723,
     "trough": 0.75,
     "trough_pairs": 272,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": 27.4,
-    "run_over_joins": 7235
+    "run_over_joins": 7238
    },
-   "model_runovers": 9213,
+   "model_runovers": 9210,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -423,27 +423,27 @@
     "leaves": 0
    },
    "marker_fixes": 5,
-   "digit_fixes": 46,
-   "kept": 86291,
-   "keep_rate": 0.7076,
+   "digit_fixes": 44,
+   "kept": 86354,
+   "keep_rate": 0.7078,
    "dropped": {
-    "short": 19631,
-    "banner": 8582,
-    "allcaps": 6479,
-    "bigtype": 923,
+    "short": 19645,
+    "banner": 8561,
+    "allcaps": 6487,
+    "bigtype": 920,
     "nonascii": 31,
     "pagenum": 7
    },
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 44693,
+   "ditto_applied": 45062,
    "band": {
     "leaves_banded": 498,
-    "head": 3083,
-    "body": 71865,
-    "foot": 6772,
-    "unbanded": 4571
+    "head": 3086,
+    "body": 72188,
+    "foot": 6494,
+    "unbanded": 4586
    },
    "top_ad_leaves": [
     295,
@@ -457,18 +457,18 @@
     211,
     399
    ],
-   "filters_at": "8064b0b-dirty",
-   "derived": "2026-10-26"
+   "filters_at": "b6c44a2-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 7573757,
+  "words_gz_bytes": 7577406,
   "hocr_deleted": true,
   "elapsed_s": 44
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "start_leaf": 15,
   "end_leaf": 1079,
   "first_letter": "A",
@@ -631,8 +631,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "2e12fad-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "content_leaves": 540,
   "fitted_leaves": 522,
   "read_leaves": 377,
@@ -673,8 +673,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -726,8 +726,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc00broo_listing.jsonl.gz",
   "sections": [
    {
@@ -736,18 +736,18 @@
     "end_leaf": 1079
    }
   ],
-  "kept": 86168,
+  "kept": 86231,
   "dropped": 123,
   "kept_share": 0.9986,
   "kept_by_section": {
-   "listing": 86168
+   "listing": 86231
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-23",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 79,
+  "scoped_lines": 88,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    291,
@@ -761,24 +761,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/brooklynnewyorkc00broo",
   "ia_dump": "data/survey_ocr/brooklynnewyorkc00broo_words.ia.jsonl.gz",
+  "tiles_figure": 1,
   "tiles": 2114,
-  "tiles_answered": 2114,
+  "tiles_preferred": 19,
+  "tiles_answered": 2113,
   "bleed_retry": 8,
   "loop_truncated": 0,
-  "table_mode": 19,
+  "table_mode": 0,
   "pages": 533,
-  "lines_runover": 9213,
-  "lines_model": 105578,
-  "lines_tesseract": 18366,
-  "lines_model-only": 6271,
+  "lines_runover": 9210,
+  "lines_model": 105634,
+  "lines_tesseract": 18310,
+  "lines_model-only": 6327,
   "lines_bleed": 352,
   "leaves_replaced": 533,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 533
   },
-  "dumped": "2026-10-26"
+  "dumped": "2026-11-03"
  }
 }

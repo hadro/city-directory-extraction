@@ -343,23 +343,23 @@
    "publisher_tag": "upington",
    "publisher_tag_note": null,
    "year_tag": "1910",
-   "hocr_lines": 188216,
-   "wrap_joins": 18925,
-   "candidates": 169291,
+   "hocr_lines": 188236,
+   "wrap_joins": 18822,
+   "candidates": 169414,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 118342,
-    "mark_share": 0.4346,
+    "pairs": 118340,
+    "mark_share": 0.4349,
     "mode": 2.75,
-    "mode_pairs": 5960,
+    "mode_pairs": 5953,
     "trough": 2.0,
-    "trough_pairs": 265,
+    "trough_pairs": 266,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 10.88,
-    "run_over_joins": 16012
+    "start_cap": 9.81,
+    "run_over_joins": 15951
    },
-   "model_runovers": 18336,
+   "model_runovers": 18270,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -369,15 +369,15 @@
     "words": 6,
     "leaves": 1
    },
-   "marker_fixes": 22,
+   "marker_fixes": 23,
    "digit_fixes": 622,
-   "kept": 123363,
+   "kept": 123452,
    "keep_rate": 0.7287,
    "dropped": {
-    "short": 32382,
-    "allcaps": 8627,
-    "banner": 3511,
-    "bigtype": 994,
+    "short": 32425,
+    "allcaps": 8675,
+    "banner": 3472,
+    "bigtype": 976,
     "nonascii": 407,
     "pagenum": 7
    },
@@ -390,7 +390,7 @@
     "n",
     "ti"
    ],
-   "ditto_applied": 418,
+   "ditto_applied": 440,
    "ditto_confirmed": [
     "ii",
     "n",
@@ -406,9 +406,9 @@
    ],
    "band": {
     "leaves_banded": 625,
-    "head": 1516,
-    "body": 101207,
-    "foot": 2521,
+    "head": 1515,
+    "body": 101300,
+    "foot": 2518,
     "unbanded": 18119
    },
    "top_ad_leaves": [
@@ -423,18 +423,18 @@
     1261,
     1287
    ],
-   "filters_at": "8064b0b-dirty",
-   "derived": "2026-10-26"
+   "filters_at": "b6c44a2-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 9995391,
+  "words_gz_bytes": 9974323,
   "hocr_deleted": true,
   "elapsed_s": 78
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "start_leaf": 7,
   "end_leaf": 1261,
   "first_letter": "L",
@@ -681,8 +681,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "2e12fad-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "content_leaves": 687,
   "fitted_leaves": 667,
   "read_leaves": 322,
@@ -693,7 +693,7 @@
     "first_page": 650,
     "last_page": 1205,
     "leaves": 556,
-    "read": 375
+    "read": 376
    },
    {
     "first_leaf": 1127,
@@ -731,8 +731,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -818,8 +818,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "file": "data/survey_ocr/brooklynnewyork1910p2geor_listing.jsonl.gz",
   "sections": [
    {
@@ -828,11 +828,11 @@
     "end_leaf": 1261
    }
   ],
-  "kept": 105635,
+  "kept": 105724,
   "dropped": 17728,
-  "kept_share": 0.8563,
+  "kept_share": 0.8564,
   "kept_by_section": {
-   "listing": 105635
+   "listing": 105724
   }
  },
  "non_entry_pages": {
@@ -846,24 +846,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/brooklynnewyork1910p2geor",
   "ia_dump": "data/survey_ocr/brooklynnewyork1910p2geor_words.ia.jsonl.gz",
+  "tiles_figure": 14,
   "tiles": 2514,
-  "tiles_answered": 2514,
+  "tiles_preferred": 46,
+  "tiles_answered": 2500,
   "bleed_retry": 5,
   "loop_truncated": 12,
-  "table_mode": 46,
+  "table_mode": 0,
   "pages": 629,
-  "lines_runover": 18336,
-  "lines_model-only": 8146,
-  "lines_model": 128303,
-  "lines_tesseract": 24218,
+  "lines_runover": 18270,
+  "lines_model-only": 8163,
+  "lines_model": 128244,
+  "lines_tesseract": 24280,
   "lines_bleed": 281,
   "leaves_replaced": 629,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 629
   },
-  "dumped": "2026-10-26"
+  "dumped": "2026-11-03"
  }
 }

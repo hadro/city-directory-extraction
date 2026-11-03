@@ -378,8 +378,8 @@
    "publisher_tag_note": null,
    "year_tag": "1826",
    "hocr_lines": 33488,
-   "wrap_joins": 943,
-   "candidates": 32545,
+   "wrap_joins": 938,
+   "candidates": 32550,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -405,12 +405,12 @@
    },
    "marker_fixes": 0,
    "digit_fixes": 13,
-   "kept": 28483,
-   "keep_rate": 0.8752,
+   "kept": 28484,
+   "keep_rate": 0.8751,
    "dropped": {
-    "short": 1900,
-    "banner": 1337,
-    "allcaps": 768,
+    "short": 1901,
+    "banner": 1336,
+    "allcaps": 772,
     "nonascii": 37,
     "bigtype": 14,
     "pagenum": 6
@@ -436,8 +436,8 @@
     61,
     141
    ],
-   "filters_at": "8064b0b-dirty",
-   "derived": "2026-10-26"
+   "filters_at": "b6c44a2-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 2179541,
   "hocr_deleted": true,
@@ -446,8 +446,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "start_leaf": 151,
   "end_leaf": 1123,
   "first_letter": "A",
@@ -848,8 +848,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "content_leaves": 568,
   "fitted_leaves": 534,
   "read_leaves": 172,
@@ -882,8 +882,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -968,8 +968,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "file": "data/survey_ocr/longworthsameric1826newy_listing.jsonl.gz",
   "sections": [
    {
@@ -978,11 +978,11 @@
     "end_leaf": 1123
    }
   ],
-  "kept": 25904,
+  "kept": 25905,
   "dropped": 2579,
   "kept_share": 0.9095,
   "kept_by_section": {
-   "listing": 25904
+   "listing": 25905
   }
  },
  "non_entry_pages": {
@@ -999,7 +999,9 @@
   "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
   "root": "data/reocr_books_halves",
   "ia_dump": "data/survey_ocr/longworthsameric1826newy_words.ia.jsonl.gz",
+  "tiles_figure": 0,
   "tiles": 970,
+  "tiles_preferred": 0,
   "tiles_answered": 970,
   "bleed_retry": 1,
   "loop_truncated": 2,
@@ -1014,6 +1016,6 @@
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 485
   },
-  "dumped": "2026-10-26"
+  "dumped": "2026-11-03"
  }
 }

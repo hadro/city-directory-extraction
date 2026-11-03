@@ -314,23 +314,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1906",
-   "hocr_lines": 188210,
-   "wrap_joins": 32897,
-   "candidates": 155313,
+   "hocr_lines": 188533,
+   "wrap_joins": 32778,
+   "candidates": 155755,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 158202,
-    "mark_share": 0.4008,
+    "pairs": 158243,
+    "mark_share": 0.3997,
     "mode": 2.0,
-    "mode_pairs": 8928,
+    "mode_pairs": 8914,
     "trough": 1.5,
-    "trough_pairs": 937,
+    "trough_pairs": 930,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": 9.2,
-    "run_over_joins": 30003
+    "run_over_joins": 29912
    },
-   "model_runovers": 32401,
+   "model_runovers": 32278,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -340,35 +340,35 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 6,
-   "digit_fixes": 219,
-   "kept": 144531,
-   "keep_rate": 0.9306,
+   "marker_fixes": 2,
+   "digit_fixes": 213,
+   "kept": 144715,
+   "keep_rate": 0.9291,
    "dropped": {
-    "allcaps": 5031,
-    "short": 3719,
-    "banner": 1107,
-    "bigtype": 902,
-    "nonascii": 18,
+    "allcaps": 5170,
+    "short": 3823,
+    "banner": 1136,
+    "bigtype": 889,
+    "nonascii": 17,
     "pagenum": 5
    },
    "ditto_marks": [
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 73110,
+   "ditto_applied": 72993,
    "band": {
-    "leaves_banded": 514,
-    "head": 3382,
-    "body": 134520,
-    "foot": 3326,
-    "unbanded": 3303
+    "leaves_banded": 513,
+    "head": 2952,
+    "body": 134822,
+    "foot": 3294,
+    "unbanded": 3647
    },
    "top_ad_leaves": [
     1123,
     79,
-    45,
     55,
+    45,
     65,
     81,
     85,
@@ -376,18 +376,18 @@
     61,
     21
    ],
-   "filters_at": "8064b0b-dirty",
-   "derived": "2026-10-26"
+   "filters_at": "b6c44a2-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 12477723,
+  "words_gz_bytes": 12454075,
   "hocr_deleted": true,
   "elapsed_s": 48
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "start_leaf": 107,
   "end_leaf": 1165,
   "first_letter": "A",
@@ -401,7 +401,7 @@
   "start": {
    "leaf": 107,
    "image": "https://iiif.archive.org/iiif/trowsgeneraldir1906p1trow$107/full/!1400,1400/0/default.jpg",
-   "quote": "Alex, \" Alexander. elec eng"
+   "quote": "Alex \" Alexander."
   },
   "end": {
    "leaf": 1165,
@@ -499,7 +499,7 @@
    "E": [
     849,
     915,
-    30
+    29
    ],
    "F": [
     917,
@@ -512,7 +512,7 @@
     35
    ]
   },
-  "skipped_votes": 2,
+  "skipped_votes": 1,
   "voted_bounds": [
    109,
    1165
@@ -538,11 +538,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "content_leaves": 578,
-  "fitted_leaves": 547,
-  "read_leaves": 306,
+  "fitted_leaves": 548,
+  "read_leaves": 315,
   "segments": [
    {
     "first_leaf": 37,
@@ -553,12 +553,12 @@
     "read": 27
    },
    {
-    "first_leaf": 115,
+    "first_leaf": 113,
     "last_leaf": 1165,
-    "first_page": 21,
+    "first_page": 20,
     "last_page": 538,
-    "leaves": 518,
-    "read": 279
+    "leaves": 519,
+    "read": 288
    }
   ],
   "ia_comparison": {
@@ -572,8 +572,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -664,8 +664,8 @@
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 115,
-      "page": 21,
+      "leaf": 113,
+      "page": 20,
       "attestation": "read"
      },
      "last": {
@@ -697,8 +697,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1906p1trow_listing.jsonl.gz",
   "sections": [
    {
@@ -712,21 +712,22 @@
     "end_leaf": 1165
    }
   ],
-  "kept": 143479,
+  "kept": 143663,
   "dropped": 1052,
   "kept_share": 0.9927,
   "kept_by_section": {
    "late_names": 146,
-   "listing": 143333
+   "listing": 143517
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-25",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 97,
+  "scoped_lines": 306,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
+   107,
    433,
    435,
    851,
@@ -736,24 +737,26 @@
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/trowsgeneraldir1906p1trow",
   "ia_dump": "data/survey_ocr/trowsgeneraldir1906p1trow_words.ia.jsonl.gz",
+  "tiles_figure": 7,
   "tiles": 3146,
-  "tiles_answered": 3146,
+  "tiles_preferred": 235,
+  "tiles_answered": 3139,
   "bleed_retry": 1,
   "loop_truncated": 2,
-  "table_mode": 237,
+  "table_mode": 2,
   "pages": 529,
-  "lines_runover": 32401,
-  "lines_model": 180881,
-  "lines_tesseract": 3183,
-  "lines_model-only": 1981,
+  "lines_runover": 32278,
+  "lines_model": 181706,
+  "lines_tesseract": 2388,
+  "lines_model-only": 2274,
   "lines_bleed": 62,
   "leaves_replaced": 529,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 529
   },
-  "dumped": "2026-10-26"
+  "dumped": "2026-11-03"
  }
 }

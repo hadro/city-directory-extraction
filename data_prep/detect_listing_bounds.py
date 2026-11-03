@@ -405,10 +405,18 @@ EDGE_KEY_RE = re.compile(r"^[*\u2022\"'`]*([A-Z])(?:[a-z']+|\s[A-Z&]\b|&|\.)")
 EXTEND_GAP = 3           # the next page may be this many leaves away (blank versos between)
 EXTEND_MIN = 5           # a page needs this many lines keyed on the edge letter...
 EXTEND_SHARE = 0.25      # ...making up this share of its keyed lines
-# ...or, at a START only, be a caption page ("DIRECTORY" in its first 12 lines) above this share.
-# The margin is narrow and measured: title pages 0.049-0.083, the weakest real caption page
+# ...or, at a START only, be a caption page (a CAPTION_MARKS word in its first 12 lines) above this
+# share. The margin is narrow and measured: title pages 0.049-0.083, the weakest real caption page
 # (trowsgeneraldir1905p1trow leaf 117, 5 of 50) 0.100.
 CAPTION_SHARE = 0.09
+# "DIRECTORY" is the running caption IA's OCR read whole. LightOn reads the Trow p1 caption page
+# column tile by column tile, so its heading arrives as "GENER" / "MANHAT" and the page qualified
+# only as plain listing, on a knife edge: the abbreviation key keys on every letter, and round 12's
+# re-read of its table tiles took 1905/1906/1908 p1 from 0.250-0.312 under EXTEND_SHARE (2026-11-03).
+# The "Names Received too Late" box Trow prints on that same page is whole in every reading. Over all
+# 186 sidecars it moves four starts, each opened on its lines: 1905/1906/1908 p1 back to the caption
+# page they had, and 1907 p1 107 -> 105, a caption page missed since the tier's first import.
+CAPTION_MARKS = ("DIRECTORY", "NAMES RECEIVED TOO")
 
 
 def edge_page(lines):
@@ -416,7 +424,7 @@ def edge_page(lines):
     refuses and a listing's first page is full of: corporate names (`A A Automatic Mfg Co`,
     `A&B`) and initials. ALL-CAPS lines never key -- they are headings and banners."""
     keys = [m.group(1) for t in lines if (m := EDGE_KEY_RE.match(t.strip())) and not t.isupper()]
-    return keys, any("DIRECTORY" in t.upper() for t in lines[:12])
+    return keys, any(mark in t.upper() for t in lines[:12] for mark in CAPTION_MARKS)
 
 
 def extend_edges(start, end, first_letter, last_letter, pages):
@@ -614,6 +622,11 @@ def _self_test():
         "a title-and-abbreviations page is refused (share under CAPTION_SHARE)"
     assert extend_edges(9, 11, "A", "Z", {9: body, 11: body, 30: body})[1] == 11, \
         "too far away to be the next page"
+    # LightOn's Trow p1 caption page: the heading split by column, the late-names box whole, and
+    # the abbreviation key keying on every letter (share under EXTEND_SHARE)
+    split = {7: ["GENER", "MANHAT", "Names Received too Late"] + ["Bway Broadway"] * 20
+                + ["Aaron A h 1 B"] * 6, 9: body, 11: body}
+    assert extend_edges(9, 11, "A", "Z", split)[0] == 7, "the late-names box marks a caption page"
 
     res, _bm, _k = detect(two, 500, "test")
     assert (res["start_leaf"], res["end_leaf"]) == (100, 178), res["start_leaf"]

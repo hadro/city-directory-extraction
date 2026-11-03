@@ -355,23 +355,23 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1903",
-   "hocr_lines": 198597,
-   "wrap_joins": 36264,
-   "candidates": 162333,
+   "hocr_lines": 198802,
+   "wrap_joins": 35761,
+   "candidates": 163041,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 165636,
-    "mark_share": 0.2429,
+    "pairs": 165690,
+    "mark_share": 0.2387,
     "mode": 1.25,
-    "mode_pairs": 11792,
+    "mode_pairs": 11951,
     "trough": 0.75,
-    "trough_pairs": 339,
+    "trough_pairs": 341,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 10.46,
-    "run_over_joins": 32430
+    "start_cap": 9.17,
+    "run_over_joins": 32085
    },
-   "model_runovers": 34444,
+   "model_runovers": 33938,
    "cont_dropped_leaves": 0,
    "column_splits": {
     "lines": 0,
@@ -381,68 +381,68 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 21,
-   "digit_fixes": 171,
-   "kept": 151625,
-   "keep_rate": 0.934,
+   "marker_fixes": 7,
+   "digit_fixes": 134,
+   "kept": 151967,
+   "keep_rate": 0.9321,
    "dropped": {
-    "allcaps": 5463,
-    "short": 3959,
-    "banner": 833,
-    "bigtype": 428,
-    "nonascii": 23,
+    "allcaps": 5643,
+    "short": 4352,
+    "banner": 671,
+    "bigtype": 386,
+    "nonascii": 20,
     "pagenum": 2
    },
    "ditto_marks": [
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 46257,
+   "ditto_applied": 45508,
    "band": {
-    "leaves_banded": 515,
-    "head": 17005,
-    "body": 119338,
-    "foot": 2467,
-    "unbanded": 12815
+    "leaves_banded": 512,
+    "head": 17963,
+    "body": 118012,
+    "foot": 2345,
+    "unbanded": 13647
    },
    "top_ad_leaves": [
     15,
-    31,
     11,
-    77,
-    26,
-    7,
+    31,
     75,
+    7,
+    77,
     523,
     205,
-    331
+    331,
+    1079
    ],
-   "filters_at": "8064b0b-dirty",
-   "derived": "2026-10-26"
+   "filters_at": "b6c44a2-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 12544462,
+  "words_gz_bytes": 12405416,
   "hocr_deleted": true,
   "elapsed_s": 65
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
-  "start_leaf": 33,
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
+  "start_leaf": 31,
   "end_leaf": 1155,
   "first_letter": "A",
   "last_letter": "H",
   "letters_present": "ABCDEFGH",
   "missing_letters": "IJKLMNOPQRSTUVWXYZ",
-  "voting_density": 0.43,
+  "voting_density": 0.427,
   "flags": [
    "partial-alphabet"
   ],
   "start": {
-   "leaf": 33,
-   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$33/full/!1400,1400/0/default.jpg",
-   "quote": "Aarons Alfd E h 200 W 70th"
+   "leaf": 31,
+   "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$31/full/!1400,1400/0/default.jpg",
+   "quote": "Alex \" Alexander."
   },
   "end": {
    "leaf": 1155,
@@ -453,7 +453,7 @@
    {
     "start_leaf": 35,
     "end_leaf": 1155,
-    "voting_leaves": 482,
+    "voting_leaves": 479,
     "first_letter": "A",
     "last_letter": "H",
     "letters": "ABCDEFGH",
@@ -539,12 +539,12 @@
    "C": [
     519,
     609,
-    40
+    39
    ],
    "D": [
     637,
     753,
-    57
+    56
    ],
    "E": [
     755,
@@ -574,7 +574,8 @@
   ],
   "extended": {
    "start": [
-    33
+    33,
+    31
    ],
    "end": []
   },
@@ -593,11 +594,11 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "content_leaves": 577,
   "fitted_leaves": 571,
-  "read_leaves": 525,
+  "read_leaves": 558,
   "segments": [
    {
     "first_leaf": 7,
@@ -605,7 +606,7 @@
     "first_page": 7,
     "last_page": 577,
     "leaves": 571,
-    "read": 525
+    "read": 558
    }
   ],
   "ia_comparison": {
@@ -619,8 +620,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -669,13 +670,13 @@
    {
     "kind": "late_names",
     "start_leaf": 23,
-    "end_leaf": 31,
+    "end_leaf": 26,
     "title": {
      "leaf": 23,
      "quote": "NAMES TOO LATE FOR IN",
      "image": "https://iiif.archive.org/iiif/trowsgeneraldir1903p1trow$23/full/!1400,1400/0/default.jpg"
     },
-    "leaves": 3,
+    "leaves": 2,
     "residential": true,
     "pages": {
      "first": {
@@ -684,24 +685,24 @@
       "attestation": "inferred"
      },
      "last": {
-      "leaf": 31,
-      "page": 17,
+      "leaf": 26,
+      "page": 16,
       "attestation": "inferred"
      }
     }
    },
    {
     "kind": "listing",
-    "start_leaf": 33,
+    "start_leaf": 31,
     "end_leaf": 1155,
     "title": null,
-    "leaves": 562,
+    "leaves": 563,
     "residential": true,
     "pages": {
      "first": {
-      "leaf": 33,
-      "page": 18,
-      "attestation": "read"
+      "leaf": 31,
+      "page": 17,
+      "attestation": "inferred"
      },
      "last": {
       "leaf": 1155,
@@ -730,61 +731,61 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-26",
-  "code_at": "8064b0b-dirty",
+  "derived": "2026-11-03",
+  "code_at": "b6c44a2-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1903p1trow_listing.jsonl.gz",
   "sections": [
    {
     "kind": "late_names",
     "start_leaf": 23,
-    "end_leaf": 31
+    "end_leaf": 26
    },
    {
     "kind": "listing",
-    "start_leaf": 33,
+    "start_leaf": 31,
     "end_leaf": 1155
    }
   ],
-  "kept": 151118,
+  "kept": 151460,
   "dropped": 507,
   "kept_share": 0.9967,
   "kept_by_section": {
-   "late_names": 281,
-   "listing": 150837
+   "late_names": 144,
+   "listing": 151316
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-25",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 174,
+  "scoped_lines": 32,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    26,
-   31,
    75,
    77
   ]
  },
  "reocr": {
-  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm",
+  "engine": "ia-words (ABBYY FineReader 8.0) + lightonocr-3-1b-greedy-vllm / lightonocr-3-1b-greedy-vllm-notables",
   "root": "data/reocr_tiers/trowsgeneraldir1903p1trow",
   "ia_dump": "data/survey_ocr/trowsgeneraldir1903p1trow_words.ia.jsonl.gz",
+  "tiles_figure": 19,
   "tiles": 3386,
-  "tiles_answered": 3386,
+  "tiles_preferred": 720,
+  "tiles_answered": 3367,
   "bleed_retry": 3,
-  "loop_truncated": 2,
-  "table_mode": 722,
+  "loop_truncated": 3,
+  "table_mode": 2,
   "pages": 565,
-  "lines_runover": 34444,
-  "lines_model": 190624,
-  "lines_tesseract": 5265,
-  "lines_bleed": 12,
-  "lines_model-only": 2039,
+  "lines_runover": 33938,
+  "lines_model": 193379,
+  "lines_tesseract": 2511,
+  "lines_model-only": 2267,
   "leaves_replaced": 565,
   "layers": {
    "ia-words (ABBYY FineReader 8.0)": 565
   },
-  "dumped": "2026-10-26"
+  "dumped": "2026-11-03"
  }
 }

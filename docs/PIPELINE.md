@@ -1904,6 +1904,31 @@ Becker A (Upington 1910 leaf 155) right; `EHowe Phili` a duplicate; the three `n
 Central Vending unchanged, as printed; Bernard John F, Uman Wm and 1906BPL's John F wait for batch
 2 (`Bernard J` still sets the carry). Known costs: the La America firm block; a rare surname the
 OCR set wholly lowercase (`bourdett Edward`) loses its name.
+**Batch 2 BUILT and RE-ASSEMBLED 2026-11-03: the order of a block's given names**
+(`resolve_cross_line(order=, harvest=given_harvest())`, default off; three rules, each read on the
+given names of up to 3 rows either side on the line's own leaf). A line that would set the carry
+but opens on a harvested given name (`Bernard`, which the census also has as a surname) takes the
+carry, mark_lost, where the order holds only if it is a ditto (Benj <= Bernard <= Bertha, while
+as a surname line its given name J would come after Bertha). A line the letter gate refuses that
+opens on one, followed by an initial or a lowercase word, takes it where it fits the order
+(1906BPL `John F brewer` on a B leaf; not an ad's `Thomas Dimon`, `John Cornish, Manager`). A
+ditto-led line whose word after the mark is a common surname (census >= 2,000) that is no given
+name even at count 3, followed by a given name or an initial, and that breaks the order as a ditto
+but keeps it as a surname line, SETS the carry, new flag mark_spurious (`" Ulmer A liquors`,
+`" Slattery Cornelius`, `" Raab Adolph`); its name loses the mark. A first version without the
+ditto-volume cut, the census count and the follower test LOST ground (header agreement 83.29 ->
+83.07%, 20 volumes down): early books sort `Martin Sheldon` as a surname line, firm blocks read
+`" Press Co`, `" Buffet (periodical)` as surnames, misread given names (`—Perey`, `—Etta C`) and
+titles (`Miss`) became blocks. As built: **header agreement 83.29 -> 83.62%** (n = 31,040; 27
+volumes up, none down), 3,933 given-name lines take the carry, 562 spurious marks set it, 7,979
+ditto surnames change; read on the page, Upington 1905 `John B h 564 Wash'n av` inside a run of
+`John` lines and Trow 1914 `—John J carrier` (dash lost) are block members, and the sampled
+spurious marks are new blocks (Barbieri, Lieberman, Larkins, Howarth, Mangan). Re-assembled:
+**12,331 names change (10,266 `usable`)**; mark_lost 7,048 / 1,994 / 31,088 (run 1 / reocr /
+damaged), `disputed` 8,658 / 2,238 / 134,397; `usable` and `named` unchanged. hadro's lines now:
+Becker John F (Upington 1910, was Bernard), Ulmer Wm (Brooklyn 1912 p3, was Uman), Becker John F
+(1906BPL, had no surname). Left: `Uman Bernard` (Ulman misread) and the rare surnames the census
+cut leaves as dittos (`" Pfiser John`, `" Froude Eleanor`). Batch 3 (the import) stays open.
 
 ## Medium effort, high information
 

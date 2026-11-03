@@ -69,12 +69,13 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path[:0] = [str(REPO / "postprocess"), str(REPO / "eval"), str(REPO / "data_prep")]
 from assemble_records import Incomplete, dropped_headers, load_run  # noqa: E402
 from entry_rate import is_entry  # noqa: E402
-from resolve_dittos import (classify_glued_marks, given_only_names, leaf_letter_ranges,  # noqa: E402
-                            resolve_cross_line)
+from resolve_dittos import (classify_glued_marks, given_harvest, given_only_names,  # noqa: E402
+                            leaf_letter_ranges, resolve_cross_line)
 
 # the damaged tier (Upington's Brooklyn, most of Trow) added 2026-11-01 for #34
 ROOTS = ("data/volumes_run1", "data/volumes_reocr", "data/volumes_books_damaged_v4")
 GIVEN = given_only_names()
+HARVEST = given_harvest()
 
 
 def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rng,
@@ -98,6 +99,25 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
                                       prefixed=True, streets=True))
     new_p = list(resolve_cross_line(seq, glued, heads=heads, strict=True, given=GIVEN, lone=True,
                                     prefixed=True, streets=True))
+    # #35 batch 2: the order of a block's given names, on top of prefixed + streets
+    tight_o = list(resolve_cross_line(seq, glued, strict=True, given=GIVEN, lone=True, prefixed=True,
+                                      streets=True, order=True, harvest=HARVEST))
+    new_o = list(resolve_cross_line(seq, glued, heads=heads, strict=True, given=GIVEN, lone=True,
+                                    prefixed=True, streets=True, order=True, harvest=HARVEST))
+    order_changes = collections.Counter()
+    for i, (p, o) in enumerate(zip(new_p, new_o)):
+        if p["resolved"] == o["resolved"] and p["status"] == o["status"]:
+            continue
+        cause = ("mark_spurious: sets the carry" if "mark_spurious" in o["flags"] else
+                 "mark_lost: a given name takes the carry" if "mark_lost" in o["flags"]
+                 and "mark_lost" not in p["flags"] else
+                 "ditto surname changed" if p["status"] == o["status"] == "resolved"
+                 else f"{p['status']} -> {o['status']}")
+        order_changes[cause] += 1
+        if rng.random() < (0.003 if cause == "ditto surname changed" else 0.03):
+            given_examples.append({"volume": ident, "row": i, "leaf": seq[i][0],
+                                   "raw_line": seq[i][1][:70], "before": p["resolved"],
+                                   "after": o["resolved"], "cause": "ORDER " + cause})
     pre_changes = collections.Counter()
     for i, (l, p) in enumerate(zip(new_l, new_p)):
         if l["resolved"] == p["resolved"] and l["status"] == p["status"]:
@@ -158,7 +178,7 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
                 if res else None}
 
     applied = sum(1 for i in heads if new[i].get("header") == heads[i])
-    agree = {"old": 0, "strict": 0, "given": 0, "lone": 0, "pre": 0, "n": 0}
+    agree = {"old": 0, "strict": 0, "given": 0, "lone": 0, "pre": 0, "order": 0, "n": 0}
     for i, h in heads.items():
         if new[i].get("header") != h:
             continue                                   # the gate refused this header
@@ -168,6 +188,7 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
         agree["given"] += tight_g[i]["resolved"].lower() == h.lower()
         agree["lone"] += tight_l[i]["resolved"].lower() == h.lower()
         agree["pre"] += tight_p[i]["resolved"].lower() == h.lower()
+        agree["order"] += tight_o[i]["resolved"].lower() == h.lower()
     # Only a DITTO row's record changes: a line made transparent keeps its own name (assemble
     # uses the model's `name` for every not_ditto row), it just stops passing it on.
     changed = collections.Counter()
@@ -205,12 +226,15 @@ def volume(ident: str, root: Path, run: str, examples: list, n_examples: int, rn
                                  "lone": round(agree["lone"] / agree["n"], 4)
                                  if agree["n"] else None,
                                  "pre": round(agree["pre"] / agree["n"], 4)
+                                 if agree["n"] else None,
+                                 "order": round(agree["order"] / agree["n"], 4)
                                  if agree["n"] else None},
             "setters_made_transparent": dict(refused),
             "ditto_surname_changed": dict(changed),
             "given_changes": dict(given_changes),
             "lone_changes": dict(lone_changes),
-            "pre_changes": dict(pre_changes)}
+            "pre_changes": dict(pre_changes),
+            "order_changes": dict(order_changes)}
 
 
 def main(argv=None) -> int:
@@ -240,18 +264,20 @@ def main(argv=None) -> int:
             print(f"{d.name:28s} dispute {v['old']['dispute_rate']} -> {v['new']['dispute_rate']}"
                   f"  orphans {v['old']['orphan']} -> {v['new']['orphan']}"
                   f"  headers {v['headers_applied']}/{v['headers_placed']}"
-                  f"  agree old {ha['old']} strict {ha['strict']} given {ha['given']} lone {ha['lone']} pre {ha['pre']}"
+                  f"  agree old {ha['old']} strict {ha['strict']} given {ha['given']} lone {ha['lone']} pre {ha['pre']} order {ha['order']}"
                   f"  ditto surnames changed {sum(v['ditto_surname_changed'].values()):,}"
                   f"  #34 {sum(v['given_changes'].values()):,}")
     tot, changed, refused = collections.Counter(), collections.Counter(), collections.Counter()
     given_total, lone_total, pre_total = collections.Counter(), collections.Counter(), collections.Counter()
+    order_total = collections.Counter()
     for v in report["volumes"].values():
         changed.update(v["ditto_surname_changed"])
         refused.update(v["setters_made_transparent"])
         given_total.update(v["given_changes"])
         lone_total.update(v["lone_changes"])
         pre_total.update(v["pre_changes"])
-        for k in ("old", "strict", "given", "lone", "pre"):
+        order_total.update(v["order_changes"])
+        for k in ("old", "strict", "given", "lone", "pre", "order"):
             tot[f"agree_{k}"] += round((v["header_agreement"][k] or 0)
                                        * v["header_agreement"]["n"])
         tot["agree_n"] += v["header_agreement"]["n"]
@@ -267,10 +293,12 @@ def main(argv=None) -> int:
                              "strict": round(tot["agree_strict"] / n, 4) if n else None,
                              "given": round(tot["agree_given"] / n, 4) if n else None,
                              "lone": round(tot["agree_lone"] / n, 4) if n else None,
-                             "pre": round(tot["agree_pre"] / n, 4) if n else None},
+                             "pre": round(tot["agree_pre"] / n, 4) if n else None,
+                             "order": round(tot["agree_order"] / n, 4) if n else None},
         "given_changes": dict(given_total),
         "lone_changes": dict(lone_total),
         "pre_changes": dict(pre_total),
+        "order_changes": dict(order_total),
         "dispute_rate": {"old": round(tot["old_disputed"] / tot["old_resolved"], 4),
                          "new": round(tot["new_disputed"] / tot["new_resolved"], 4)},
         "orphans": {"old": tot["old_orphan"], "new": tot["new_orphan"]}}

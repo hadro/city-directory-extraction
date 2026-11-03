@@ -50,7 +50,9 @@ EVERY ROW CARRIES
                         ditto mark read, but the line opens on a given name such as `Wm`, or, in
                         a volume that dittos, on one name and straight on to its occupation
                         (`Wilbur electrician`), so it took the carry; neither sets it). Kept,
-                        never acted on. The carry is `strict` from
+                        never acted on; and mark_spurious (#35): a ditto mark read before a surname that opens a
+                        new block (`" Ulmer A`, a broken capital), so the line sets the carry. The
+                        carry is `strict` from
                         2026-10-20 (only a capitalised surname inside its leaf's letters sets it)
                         and reads the headers; 1906BPL's disputed share went 23.2% -> 6.6%, much
                         of that by construction -- results/carry_rules.py has the evidence that
@@ -109,7 +111,7 @@ from entry_rate import is_entry  # noqa: E402
 from iiif_frame import crop_url, xywh as canvas_xywh  # noqa: E402
 from evaluate import FIELDS, load_pred  # noqa: E402
 from resolve_dittos import (annotate, classify_glued_marks, classify_lead_marks,  # noqa: E402
-                           given_only_names, prefixed_surname, resolve_address_run,
+                           given_harvest, given_only_names, prefixed_surname, resolve_address_run,
                            resolve_cross_line, surname_token)
 from survey_folios import fit as fit_folios, load as load_folios  # noqa: E402
 from volume_run_report import layout_roles  # noqa: E402
@@ -418,7 +420,8 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
     # a given name where the surname goes, or a lone name under a block in a volume that dittos,
     # is a lost ditto mark (#34, 2026-11-01)
     carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True, markers=markers,
-                                    given=given_only_names(), lone=True, prefixed=True, streets=True))
+                                    given=given_only_names(), lone=True, prefixed=True, streets=True,
+                                    order=True, harvest=given_harvest()))
     addresses = list(resolve_address_run(rec.get("address") for _ln, rec in pairs))
     sources = line_sources(ident, lines)
     dups = tesseract_duplicates(lines, sources)
@@ -443,6 +446,9 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
             name_resolved = "" if cr["status"] == "orphan" else (rec.get("name") or "")
             if cr.get("mark"):
                 name_resolved = strip_mark(name_resolved, cr["mark"])
+            elif "mark_spurious" in cr["flags"]:
+                # `" Ulmer A liquors`: a broken capital read as a ditto mark (#35)
+                name_resolved = strip_lead(rec.get("name"), cr["lead"])
             source = None
         fragment = name_fragment(name_resolved)
         if fragment:

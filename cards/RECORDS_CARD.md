@@ -98,7 +98,7 @@ Open `crop` to see the printed line.
 | `name`, `is_business`, `spouse_name`, `race_designation`, `occupation_role`, `employer`, `address`, `home_address` | The model's eight fields, verbatim from the line (see the model card) |
 | `name_resolved` | The name with a ditto mark replaced by the surname it repeats; otherwise `name`. Empty where `name_fragment` is set |
 | `address_resolved`, `home_address_resolved` | The address with a ditto (`do.`) expanded where the early directories use one |
-| `ditto_source`, `ditto_header`, `ditto_flags` | Where a resolved surname came from (another record, or a surname header over the column), and review flags (`cross_leaf`, `letter_conflict`, `orphan`, and `mark_lost`: no ditto mark was read, but the line opens on a given name, so it took the surname above) |
+| `ditto_source`, `ditto_header`, `ditto_flags` | Where a resolved surname came from (another record, or a surname header over the column), and review flags (`cross_leaf`, `letter_conflict`, `orphan`, and `mark_lost`: no ditto mark was read, but the line opens on a given name, so it took the surname above; `mark_spurious`: a ditto mark was read before a surname that opens a new block, a broken capital, so the line sets the surname) |
 | `name_mark`, `district` | A marker the line opens with (Brooklyn's Eastern District `E`, a `*`), and `Eastern` where it marks an Eastern District resident |
 
 **How far to trust it**

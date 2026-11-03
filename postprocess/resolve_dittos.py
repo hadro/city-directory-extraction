@@ -577,6 +577,69 @@ def street_runover(raw_line: str, sur: str) -> bool:
     return len(toks) > k and toks[k].rstrip(".,;") in STREET_WORDS
 
 
+# THE ORDER OF A BLOCK'S GIVEN NAMES (#35, batch 2). A block prints its people sorted by given
+# name, so a line can be read two ways and the order says which: as a ditto (its first word a given
+# name) or as a new surname (its SECOND word the given name). `Bernard J lawyer` between `Benj H` and
+# `Bertha` in the Becker block keeps the order as a ditto (Benj <= Bernard <= Bertha) and breaks it
+# as a surname line (J, then Bertha); `" Ulmer A liquors` before `" A liquors`, under "Uman", breaks
+# it as a ditto and keeps it as a surname line (a broken capital U read as a mark).
+GIVEN_ORDER_KEY = {"wm": "william", "jas": "james", "chas": "charles", "thos": "thomas",
+                   "geo": "george", "jno": "john", "saml": "samuel", "robt": "robert",
+                   "hy": "henry", "benj": "benjamin", "fredk": "frederick", "edwd": "edward",
+                   "danl": "daniel", "jos": "joseph", "richd": "richard", "margt": "margaret",
+                   "cath": "catharine", "michl": "michael", "patk": "patrick", "andw": "andrew",
+                   "alex": "alexander", "alexr": "alexander", "nathl": "nathaniel", "wid": None}
+ORDER_WINDOW = 3                                 # rows to look for a neighbour's given name
+
+
+def given_key(word: str):
+    """The sort key of a given name as the directory files it: `Wm` under William."""
+    w = (word or "").strip(".,;:").replace("’", "").replace("'", "").lower()
+    return GIVEN_ORDER_KEY.get(w, w) if w else None
+
+
+def given_harvest(min_n: int = 20) -> frozenset:
+    """given_harvested.tsv's names seen `min_n` times or more, surnames among them (`Bernard`,
+    `John`): what given_only_names leaves out, because a surname line can open on them too."""
+    import csv
+    out = set()
+    for r in csv.reader(open(NAMES / "given_harvested.tsv", encoding="utf-8"), delimiter="\t"):
+        if len(r) >= 2 and r[1].isdigit() and int(r[1]) >= min_n:
+            name = r[0].replace("’", "").replace("'", "")
+            if name[:1].isupper() and name.isalpha():
+                out.add(name)
+    return frozenset(out)
+
+
+# A word after a mark opens a new block only if it is a common surname (census count; the list's
+# tail holds given names and words: Etta, Buffet) that is no given name even at a low count
+# (Perey, Urlah = Percy, Uriah misread), and is followed by a given name or an initial -- not by
+# `Co`, an occupation or `h`. Titles never.
+SPURIOUS_MIN_SURNAME = 2000
+TITLES = frozenset("Miss Mrs Mr Dr Rev Capt Col Gen Hon Prof Madame Mme Sister".split())
+_SURNAME_COUNTS = None
+
+
+def surname_count(word: str) -> int:
+    global _SURNAME_COUNTS
+    if _SURNAME_COUNTS is None:
+        import csv
+        _SURNAME_COUNTS = {r[0].lower(): int(r[1]) for r in csv.reader(
+            open(NAMES / "surnames.tsv", encoding="utf-8"), delimiter="\t")
+            if len(r) > 1 and r[1].isdigit()}
+    return _SURNAME_COUNTS.get((word or "").lower(), 0)
+
+
+def _words_after_mark(raw: str, glued=()) -> list:
+    """The words of a ditto-led line after its mark (`" Ulmer A liquors` -> Ulmer, A, ...)."""
+    gl = split_glued_mark(raw, glued)
+    if gl:
+        return gl[1].split()
+    if is_ditto_lead(raw):
+        return raw.split()[1:]
+    return []
+
+
 def can_set_carry(sur: str, leaf, ranges, given=frozenset()) -> bool:
     """May this surname-shaped lead become the carry? The `strict` rule (2026-10-20).
 
@@ -609,7 +672,8 @@ def can_set_carry(sur: str, leaf, ranges, given=frozenset()) -> bool:
 
 
 def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), given=frozenset(),
-                       lone=False, prefixed=False, streets=False):
+                       lone=False, prefixed=False, streets=False, order=False,
+                       harvest=frozenset()):
     """Sequential surname carry over `rows` = [(leaf, raw_line), ...] in reading order.
 
     `glued` is the per-volume set of marks printed without a space (Trow's `-`), empty by default
@@ -646,12 +710,21 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
     (default off) keeps a street run-over (street_runover: `Atlantic av,`) from setting it, the
     run-over transparent like a line the gate refuses (#35).
 
+    `order` (default off; `harvest` is given_harvest()) reads the order of the block's given
+    names on the line's leaf, under a carry (#35 batch 2): a line that would set the carry but
+    opens on a harvested given name and keeps the order only as a ditto takes the carry
+    (mark_lost); so does one the letter gate refuses (`John F brewer` on a B leaf) that fits the
+    order; and a ditto-led line whose word after the mark is no given name, breaks the order as a
+    ditto and keeps it as a surname line, sets the carry (mark_spurious: `" Ulmer A liquors`).
+
     Flags, any of which may be set together:
       cross_leaf      the antecedent came from a previous leaf -- a page boundary was crossed
       letter_conflict the carried surname disagrees with this leaf's own modal letter, on a leaf
                       that does not legitimately span two letters
       orphan          no antecedent exists yet (nothing to carry); resolved is left empty
       mark_lost       no ditto mark read, but the line opens on a given name (`given`)
+      mark_spurious   a ditto mark read before a surname that opens a new block (`order`); the
+                      line SETS the carry, status not_ditto
 
     Callers should treat `cross_leaf` and `letter_conflict` as review queues, not as errors --
     on 1906BPL they are 15.1% and 15.1% of dittos respectively and overlap only 28%, so together
@@ -664,6 +737,27 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
     prev, prev_leaf, prev_header = None, None, None
     if lone and rows:
         lone = sum(is_ditto_lead(raw, glued) for _l, raw in rows) / len(rows) >= LONE_MIN_DITTO_SHARE
+    gkey = []                                    # each row's given name, as a sort key, or None
+    if order and rows:
+        # only where blocks print given names under a ditto: the early books sort `Martin
+        # Sheldon`, `Lewis Reuben` as surname lines, the same shape (LONE_MIN_DITTO_SHARE)
+        order = sum(is_ditto_lead(raw, glued) for _l, raw in rows) / len(rows) >= LONE_MIN_DITTO_SHARE
+        loose = given_harvest(3)
+    if order:
+        for _l, raw in rows:
+            after = _words_after_mark(raw, glued)
+            fw = None if after else FIRST_WORD.match(raw or "")
+            w = after[0] if after else fw.group("word") if fw and _given(fw.group("word"), harvest) else None
+            gkey.append(given_key(w) if w and w[:1].isupper() else None)
+
+    def neighbour(i, step):
+        """The given name of the nearest row on i's leaf, ORDER_WINDOW rows up (-1) or down (+1)."""
+        for k in range(i + step, i + step * (ORDER_WINDOW + 1), step):
+            if not 0 <= k < len(rows) or rows[k][0] != rows[i][0]:
+                return None
+            if gkey[k]:
+                return gkey[k]
+        return None
 
     def carried(leaf, raw, lead, extra=()):
         """A row that takes the carry (prev is set)."""
@@ -724,10 +818,29 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
                 yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": "",
                        "status": "not_ditto", "flags": []}
             continue
+        in_block = order and prev is not None
         if sur is not None and strict and not can_set_carry(sur, leaf, ranges, given):
+            toks = raw.split()
+            nxt = toks[1] if len(toks) > 1 else ""
+            # an initial or the occupation next (`John F brewer`, `Frank teacher`); not an ad's
+            # signature (`Thomas Dimon`, `John Cornish, Manager`)
+            if in_block and _given(sur, harvest) and (re.fullmatch(r"[A-Z]\.?", nxt) or nxt[:1].islower()):
+                # `John F brewer` on a B leaf: no surname here, and it fits the block's order
+                pg, ng, k = neighbour(i, -1), neighbour(i, 1), given_key(sur)
+                if pg and pg <= k and (ng is None or k <= ng):
+                    yield carried(leaf, raw, "", ["mark_lost"])
+                    continue
             yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": "",
                    "status": "not_ditto", "flags": []}
             continue
+        if sur is not None and in_block and _given(sur, harvest) and " " not in sur:
+            # `Bernard J lawyer` in the Becker block: the order holds only if it is a ditto
+            toks = raw.split()
+            pg, ng, k = neighbour(i, -1), neighbour(i, 1), given_key(sur)
+            second = given_key(toks[1]) if len(toks) > 1 else None
+            if pg and ng and second and pg <= k <= ng and ng < second:
+                yield carried(leaf, raw, "", ["mark_lost"])
+                continue
         if sur is not None:
             prev, prev_leaf, prev_header = sur, leaf, None
             yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": sur,
@@ -749,6 +862,21 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
             yield {"leaf": leaf, "raw_line": raw, "lead": lead, "resolved": "",
                    "status": "orphan", "flags": ["orphan"]}
             continue
+        if order:
+            after = [w.strip(".,;:") for w in _words_after_mark(raw, glued)[:2]]
+            x = after[0] if after else ""
+            y_ok = len(after) == 2 and (re.fullmatch(r"[A-Z]\.?", after[1]) or _given(after[1], harvest))
+            if (y_ok and len(x) >= 3 and x.isalpha() and x[0].isupper() and x[1:].islower()
+                    and x not in TITLES and not _given(x, loose)
+                    and surname_count(x) >= SPURIOUS_MIN_SURNAME and x.lower() != prev.lower()
+                    and (not strict or can_set_carry(x, leaf, ranges, given))):
+                pg, ng, k, y = neighbour(i, -1), neighbour(i, 1), given_key(x), given_key(after[1])
+                if pg and ng and y and (k < pg or k > ng) and y <= ng:
+                    # `" Ulmer A liquors` before `" A liquors`: a new block, the mark misread
+                    prev, prev_leaf, prev_header = x, leaf, None
+                    yield {"leaf": leaf, "raw_line": raw, "lead": lead, "resolved": x,
+                           "status": "not_ditto", "flags": ["mark_spurious"]}
+                    continue
         yield carried(leaf, raw, lead)
 
 
@@ -1153,6 +1281,51 @@ def self_test() -> int:
     check("particle_surname", [particle_surname(s, g) for s in
                                ("De Witt Jas h 3", "La Rue, Jas", "Van Wm", "Vance Jas", "Ten Eyck")],
           ["De Witt", "La Rue", None, None, "Ten Eyck"])
+    # #35 batch 2: the order of a block's given names (Upington 1910 leaf 155, Brooklyn 1912 p3
+    # leaf 503, 1906BPL leaf 68)
+    h = given_harvest()
+    on = dict(strict=True, given=g, lone=True, prefixed=True, streets=True, order=True, harvest=h)
+    b_page = [(155, f"B{s} Jas h {n} Main") for n, s in enumerate(
+        ("aker", "arnes", "artlett", "axter", "eck", "ell", "enson", "erg", "ird", "lack", "rown",
+         "urke"))]
+    b_page = [r for row in b_page for r in (row, (155, '" Wm h 1 Main'))]   # a volume that dittos
+    becker = b_page + [(155, "Becker August salesman h 2221 Beverley rd"),
+                       (155, '" Augusta dressmkr 1190 Greene av'), (155, "Bedford av"),
+                       (155, '" A picture frames h 145 31st'), (155, '" Barnet delicatessen 234 Myrtle av'),
+                       (155, "Benj H glass 148 Union av"), (155, "Bernard J lawyer 375 Fulton h 233 17th"),
+                       (155, '" Bertha baker 247 Hoyt h 120 Douglass'), (155, '" Carl coal h 1007 Putnam av')]
+    got = list(resolve_cross_line(becker, **on))
+    check("Bernard J in the Becker block is a lost mark", (got[-3]["resolved"], got[-3]["flags"]),
+          ("Becker", ["mark_lost"]))
+    check("...so the block carries on", got[-1]["resolved"], "Becker")
+    check("order off: Bernard sets it", list(resolve_cross_line(
+        becker, **dict(on, order=False)))[-1]["resolved"], "Bernard")
+    new_block = becker[:-4] + [(155, "Benj H glass 148 Union av"), (155, "Bernard Carl coal h 1"),
+                               (155, '" Chas clk h 2'), (155, '" Edwd h 3')]
+    check("a real Bernard block still opens", list(resolve_cross_line(new_block, **on))[-1]["resolved"],
+          "Bernard")
+    u_page = [(503, f"U{s} Jas h {n} Main") for n, s in enumerate(
+        ("hl", "lrich", "nderhill", "nger", "pton", "rban", "tter"))]
+    ulmer = u_page + [(503, "Uman Bernard stationer 109 Utica av"), (503, '" Saml S liquors h 547 Barbey'),
+                      (503, '" David meat 1622 Newkirk av'), (503, '" D h 236 Prospect Pk W'),
+                      (503, '" Ulmer A liquors h 24 Vandt'), (503, '" A liquors 2 E 2d'),
+                      (503, '" Albert carpr 34 Vandt'), (503, '" Wm Brewery brewers 31 Belvidere')]
+    got = list(resolve_cross_line(ulmer, **on))
+    check("a broken U read as a mark", (got[-4]["status"], got[-4]["resolved"], got[-4]["flags"]),
+          ("not_ditto", "Ulmer", ["mark_spurious"]))
+    check("...and the Ulmer block follows", got[-1]["resolved"], "Ulmer")
+    central = [(541, f"C{s} Jas h {n} Main") for n, s in enumerate(("arr", "ase", "ole", "ook", "ox"))] + [
+        (541, "Central Bank 1 Wall"), (541, "—Typewriter Exchange 181 Bway R 28"),
+        (541, "—Union Gas Co 350 Alex av"), (541, "—Vending Machine Co 114 W 14th"),
+        (541, "—Vermont Railway Co 82 Wall")]
+    check("a firm block in order is left alone", list(resolve_cross_line(central, glued=("—",), **on))[-2]["resolved"],
+          "Central")
+    bpl = b_page + [(68, "Becker John mason h 165 Ashford"), (68, '" John police h 1234 Putnam av'),
+                    (68, "John tailor h 1344 Gates av"), (68, "John F brewer 31 Belvidere h 25 Bel-"),
+                    (68, "John F realestate h 58 Bremen")]
+    got = list(resolve_cross_line([(68, r) if l == 155 else (l, r) for l, r in bpl], **on))
+    check("John F on a B leaf takes the carry", (got[-2]["resolved"], got[-2]["flags"]),
+          ("Becker", ["mark_lost"]))
     check("a firm on a street still sets it", list(resolve_cross_line(
         m_page + [(12, "Morningside Avenue Garage 12 W 110th"), (12, '" Co h 3 Main')],
         strict=True, streets=True))[-1]["resolved"], "Morningside")

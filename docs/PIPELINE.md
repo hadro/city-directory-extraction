@@ -2740,6 +2740,37 @@ chunk); with that, an unchanged volume merges byte-identical, and the v4 staging
 reuses all 4,678,164 lines. `35_volumes.sbatch` now takes `VOL`; ship it with the first delta
 package (NYU's copy has the fixed `$DATA/volumes`).
 
+**Round 12, imported 2026-11-03** (NYU jobs 21642172 re-cut, 21642602 re-read, 21644178 + 21649976
+the 4B: Torch's `gpu48` QOS queues at most 500 jobs a user, so an array over 500 tasks must be
+split). (a) **The 4B over the 75 volumes of rounds 10-11** (staged at 0e384e7): all 557 predictions
+match their chunks, 12.32 rows/s median on L40S, 235 GPU-h. Guarded, assembled to
+`data/records_books_first_clean`: 10,405,567 rows, 9,131,916 usable (87.8%). Usable per printed name
+0.94-1.005 on BPL 1868-1899, Doggett 1846-48 and Trow 1857-63; Longworth 1813/00newy ~0.90; Trow
+1912's three parts 504,750 for its stated 550,000 (0.92). 1897BPL is 0 by design (the held-out Lain
+eval volume: every row `eval_holdout` "volume"). **Trow 1915 is 0.786 and Trow 1917 similar, and
+the cause is layout, not extraction:** 96,317 of 1915's rows have role `other` (8.0% of 1917's),
+81,935 of them entry-shaped (`" Jos foreman h707 E187th`), against 4.0% on Trow 1914 p2. Bimodal by
+leaf: half the leaves have none, a quarter 17-20%. These are the two camera-frame volumes (boxes
+tall and narrow on the IIIF canvas), so suspect `layout_roles`' margin on the turned frame. OPEN;
+the role is not in the 4B's input, so a fix needs a re-derive and re-assembly, no GPU.
+(b) **The damaged tier's 6,318 table tiles re-read** (34 volumes; Longworth 1798 had none; 0 EMPTY,
+36 looped): `import --ids <35> --prefer lightonocr-3-1b-greedy-vllm-notables`, then the canary's 4
+for the figure fix (`--root data/reocr_books_halves --page-dir data/reocr_books`). On the 4,794
+leaves with a re-read tile: lines 1,246,982 -> 1,250,932, ditto-led 930,030 -> 937,092, 92.0%
+unchanged; elsewhere 99.8%. A smaller gain than round 11's, as expected: this tier's table rate was
+6.6%, not 21%. **It moved three Trow p1 listing starts a page late** (1905 117 -> 119, 1906 107 ->
+109, 1908 111 -> 113). The caption page (abbreviation key, the "Names Received too Late" box, then
+the first A entries) never passed the caption test, because LightOn reads the "GENERAL DIRECTORY"
+heading tile by tile ("GENER", "MANHAT"); it qualified as plain listing at an A share of
+0.250-0.312, and the re-read split the key into more lines (0.23). Now the late-names box marks a
+caption page too (`detect_listing_bounds.CAPTION_MARKS`). Measured over all 186 sidecars before
+writing anything: four starts move, each read on its lines (those three back, and Trow 1907 p1
+107 -> 105, a caption page missed since the first import). Trow 1903 p1 33 -> 31 was the re-read's
+own correction: leaf 31 ends in `Aaron David L`. (c) **Delta staged:** `data/volumes_books_damaged_v5`
+(39 volumes, 4,682,308 lines, at f92f7b7) against v4: 4,581,067 lines reuse a prediction, 99,968
+prompts in 5 tasks (~2.2 GPU-h), `cde-round13.tar.gz` + `hpc/runbooks/round13.md` (BOOKSCAN_HANDOFF,
+"Update 2026-11-03").
+
 **THE FULL BOOK-SCAN RE-OCR, STAGED ON TORCH (built 2026-10-22).** The tiers' images are ~75 GB,
 which the Mac cannot hold, so Torch fetches and cuts them, and only words and answers cross:
 

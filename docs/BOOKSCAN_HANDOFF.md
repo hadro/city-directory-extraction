@@ -150,6 +150,26 @@ When round 12 is back and the damaged tier is re-imported, stage the 39 in full 
 `hpc/35_volumes.sbatch` (it takes `VOL` now) so it runs as `VOL=$DATA/volumes_delta` beside the
 big job; on return, `merge` into `_v5`, then guard and assemble as usual.
 
+**Update 2026-11-03: round 12 is back and imported (f92f7b7); round 13 is staged, NOT SENT.**
+Both halves arrived (`~/Downloads/to_josh_20261102` re-read, `_20261103` the 4B; all sha256s match).
+(1) The 4B over the 75 volumes: 557 predictions in `data/volumes_books_first_clean/` (sha1 + counts
+all match; logs in `data/nyu_logs/round12/`), guarded, assembled to `data/records_books_first_clean`
+(summary `results/records_books_first_clean.json`: 10,405,567 rows, 9,131,916 usable). (2) The
+damaged tier re-imported with the re-read preferred, the canary re-imported for the figure fix
+(`--root data/reocr_books_halves --page-dir data/reocr_books`: the canary's page layer is NOT the
+default); a caption-page rule came with it (PIPELINE #27, "Round 12"). (3) Staged for the delta:
+`data/volumes_books_damaged_v5` (39 volumes, 4,682,308 lines, at f92f7b7) and
+`data/volumes_delta_damaged` (99,968 prompts, 5 tasks, ~2.2 GPU-h), packed as `cde-round13.tar.gz`
+(3.4 MB, sha256 fb90b429...0d0c6, with the `VOL`-aware `35_volumes.sbatch`); runbook
+`hpc/runbooks/round13.md` + page v10 "Round 13" (also tells NYU to prune the damaged tier and
+delete its zips). **On return** (`delta-4b-preds.tar`): check paths in scratch, put the 5
+predictions + sha1s into `data/volumes_delta_damaged/delta/`, then
+`python3 hpc/delta_volumes.py merge --new data/volumes_books_damaged_v5 --old
+data/volumes_books_damaged_v4 --delta data/volumes_delta_damaged`, `copy_guard.py --volumes
+data/volumes_books_damaged_v5 --run 4b-100k`, and assemble with `--root
+data/volumes_books_damaged_v5 --out data/records_books_damaged` (v5 replaces v4 as that tier's
+root; the export rule's "newest re-OCR only" then reads v5).
+
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an
 empty scratch directory first to look at the paths before anything goes into the repo.

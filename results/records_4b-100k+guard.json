@@ -1,11 +1,11 @@
 {
- "derived": "2026-11-01",
+ "derived": "2026-11-03",
  "run": "4b-100k+guard",
  "root": "data/volumes_reocr",
  "volumes": {
   "brooklynnewyorkc19123broo": {
    "rows": 53850,
-   "usable": 44780,
+   "usable": 44747,
    "named": 52236,
    "entry_shaped": 47230,
    "roles": {
@@ -22,10 +22,12 @@
     "model-only": 1125,
     "bleed": 224
    },
+   "duplicates": 260,
+   "name_fragment": 1034,
    "ditto": {
     "carried": 35908,
     "orphan": 0,
-    "disputed": 2141,
+    "disputed": 2102,
     "mark_lost": 1811,
     "glued_marks": [
      "\"",
@@ -42,7 +44,7 @@
      "\u2019"
     ],
     "headers_placed": 706,
-    "from_header": 10204,
+    "from_header": 10543,
     "lead_marks": {},
     "marked_lines": 0,
     "district_eastern": 0,
@@ -55,7 +57,7 @@
   },
   "micro_IABROOKLYN_0001": {
    "rows": 1007,
-   "usable": 944,
+   "usable": 941,
    "named": 1007,
    "entry_shaped": 960,
    "roles": {
@@ -71,6 +73,8 @@
     "tesseract": 7,
     "model-only": 5
    },
+   "duplicates": 3,
+   "name_fragment": 3,
    "ditto": {
     "carried": 2,
     "orphan": 0,
@@ -91,7 +95,7 @@
   },
   "micro_IABROOKLYN_0002": {
    "rows": 1203,
-   "usable": 1015,
+   "usable": 1006,
    "named": 1199,
    "entry_shaped": 1056,
    "roles": {
@@ -107,6 +111,8 @@
     "model": 1158,
     "model-only": 15
    },
+   "duplicates": 11,
+   "name_fragment": 6,
    "ditto": {
     "carried": 4,
     "orphan": 0,
@@ -129,7 +135,7 @@
   },
   "micro_IABROOKLYN_0003": {
    "rows": 1274,
-   "usable": 1031,
+   "usable": 1028,
    "named": 1274,
    "entry_shaped": 1042,
    "roles": {
@@ -145,6 +151,8 @@
     "tesseract": 12,
     "model-only": 10
    },
+   "duplicates": 4,
+   "name_fragment": 4,
    "ditto": {
     "carried": 1,
     "orphan": 0,
@@ -165,7 +173,7 @@
   },
   "micro_IABROOKLYN_0004": {
    "rows": 1514,
-   "usable": 1345,
+   "usable": 1334,
    "named": 1504,
    "entry_shaped": 1367,
    "roles": {
@@ -181,6 +189,8 @@
     "model": 1469,
     "model-only": 17
    },
+   "duplicates": 13,
+   "name_fragment": 4,
    "ditto": {
     "carried": 3,
     "orphan": 0,
@@ -201,7 +211,7 @@
   },
   "micro_IABROOKLYN_0005": {
    "rows": 1917,
-   "usable": 1794,
+   "usable": 1786,
    "named": 1916,
    "entry_shaped": 1819,
    "roles": {
@@ -217,6 +227,8 @@
     "tesseract": 18,
     "model-only": 14
    },
+   "duplicates": 10,
+   "name_fragment": 0,
    "ditto": {
     "carried": 3,
     "orphan": 0,
@@ -237,7 +249,7 @@
   },
   "micro_IABROOKLYN_0006": {
    "rows": 1912,
-   "usable": 1789,
+   "usable": 1787,
    "named": 1907,
    "entry_shaped": 1809,
    "roles": {
@@ -253,6 +265,8 @@
     "tesseract": 20,
     "model-only": 8
    },
+   "duplicates": 4,
+   "name_fragment": 13,
    "ditto": {
     "carried": 1,
     "orphan": 0,
@@ -275,7 +289,7 @@
   },
   "micro_IABROOKLYN_0007": {
    "rows": 2331,
-   "usable": 2129,
+   "usable": 2127,
    "named": 2325,
    "entry_shaped": 2230,
    "roles": {
@@ -291,6 +305,8 @@
     "tesseract": 8,
     "model-only": 9
    },
+   "duplicates": 3,
+   "name_fragment": 2,
    "ditto": {
     "carried": 22,
     "orphan": 0,
@@ -316,7 +332,7 @@
   },
   "micro_IABROOKLYN_0008": {
    "rows": 2430,
-   "usable": 2254,
+   "usable": 2251,
    "named": 2427,
    "entry_shaped": 2328,
    "roles": {
@@ -332,6 +348,8 @@
     "tesseract": 22,
     "model-only": 49
    },
+   "duplicates": 6,
+   "name_fragment": 34,
    "ditto": {
     "carried": 1,
     "orphan": 0,
@@ -354,7 +372,7 @@
   },
   "micro_IABROOKLYN_0009": {
    "rows": 2651,
-   "usable": 2492,
+   "usable": 2477,
    "named": 2648,
    "entry_shaped": 2554,
    "roles": {
@@ -370,6 +388,8 @@
     "tesseract": 31,
     "model-only": 21
    },
+   "duplicates": 17,
+   "name_fragment": 2,
    "ditto": {
     "carried": 4,
     "orphan": 0,
@@ -393,7 +413,7 @@
   },
   "micro_IABROOKLYN_0010": {
    "rows": 3140,
-   "usable": 2878,
+   "usable": 2867,
    "named": 3139,
    "entry_shaped": 2970,
    "roles": {
@@ -409,6 +429,8 @@
     "tesseract": 13,
     "model-only": 11
    },
+   "duplicates": 11,
+   "name_fragment": 2,
    "ditto": {
     "carried": 5,
     "orphan": 0,
@@ -433,7 +455,7 @@
   },
   "micro_IABROOKLYN_0011": {
    "rows": 3129,
-   "usable": 2936,
+   "usable": 2928,
    "named": 3127,
    "entry_shaped": 3018,
    "roles": {
@@ -449,6 +471,8 @@
     "tesseract": 37,
     "model-only": 93
    },
+   "duplicates": 11,
+   "name_fragment": 6,
    "ditto": {
     "carried": 13,
     "orphan": 0,
@@ -473,7 +497,7 @@
   },
   "micro_IABROOKLYN_0012": {
    "rows": 3494,
-   "usable": 3222,
+   "usable": 3189,
    "named": 3491,
    "entry_shaped": 3322,
    "roles": {
@@ -489,6 +513,8 @@
     "tesseract": 50,
     "model-only": 51
    },
+   "duplicates": 39,
+   "name_fragment": 6,
    "ditto": {
     "carried": 6,
     "orphan": 0,
@@ -511,7 +537,7 @@
   },
   "micro_IABROOKLYN_0013": {
    "rows": 3812,
-   "usable": 3187,
+   "usable": 3162,
    "named": 3798,
    "entry_shaped": 3613,
    "roles": {
@@ -527,6 +553,8 @@
     "model-only": 123,
     "tesseract": 137
    },
+   "duplicates": 46,
+   "name_fragment": 41,
    "ditto": {
     "carried": 18,
     "orphan": 0,
@@ -552,7 +580,7 @@
   },
   "micro_IABROOKLYN_0014": {
    "rows": 3864,
-   "usable": 3425,
+   "usable": 3390,
    "named": 3831,
    "entry_shaped": 3578,
    "roles": {
@@ -568,6 +596,8 @@
     "model": 3594,
     "model-only": 79
    },
+   "duplicates": 49,
+   "name_fragment": 79,
    "ditto": {
     "carried": 23,
     "orphan": 0,
@@ -595,7 +625,7 @@
   },
   "micro_IABROOKLYN_0015": {
    "rows": 4321,
-   "usable": 4085,
+   "usable": 4059,
    "named": 4313,
    "entry_shaped": 4135,
    "roles": {
@@ -611,6 +641,8 @@
     "tesseract": 107,
     "model-only": 162
    },
+   "duplicates": 37,
+   "name_fragment": 36,
    "ditto": {
     "carried": 5,
     "orphan": 0,
@@ -634,7 +666,7 @@
   },
   "micro_IABROOKLYN_0017": {
    "rows": 5804,
-   "usable": 5120,
+   "usable": 5097,
    "named": 5778,
    "entry_shaped": 5361,
    "roles": {
@@ -650,6 +682,8 @@
     "tesseract": 187,
     "model-only": 117
    },
+   "duplicates": 38,
+   "name_fragment": 73,
    "ditto": {
     "carried": 21,
     "orphan": 0,
@@ -675,7 +709,7 @@
   },
   "micro_IABROOKLYN_0018": {
    "rows": 6841,
-   "usable": 6327,
+   "usable": 6298,
    "named": 6829,
    "entry_shaped": 6500,
    "roles": {
@@ -691,6 +725,8 @@
     "tesseract": 72,
     "model-only": 48
    },
+   "duplicates": 38,
+   "name_fragment": 9,
    "ditto": {
     "carried": 12,
     "orphan": 0,
@@ -714,7 +750,7 @@
   },
   "micro_IABROOKLYN_0020": {
    "rows": 8107,
-   "usable": 7604,
+   "usable": 7576,
    "named": 8104,
    "entry_shaped": 7791,
    "roles": {
@@ -731,6 +767,8 @@
     "model-only": 95,
     "bleed": 21
    },
+   "duplicates": 35,
+   "name_fragment": 44,
    "ditto": {
     "carried": 23,
     "orphan": 0,
@@ -757,7 +795,7 @@
   },
   "micro_IABROOKLYN_0021": {
    "rows": 8800,
-   "usable": 8001,
+   "usable": 7962,
    "named": 8788,
    "entry_shaped": 8280,
    "roles": {
@@ -774,6 +812,8 @@
     "tesseract": 337,
     "model-only": 329
    },
+   "duplicates": 71,
+   "name_fragment": 138,
    "ditto": {
     "carried": 30,
     "orphan": 0,
@@ -799,7 +839,7 @@
   },
   "micro_IABROOKLYN_0022": {
    "rows": 7233,
-   "usable": 6581,
+   "usable": 6497,
    "named": 7215,
    "entry_shaped": 6797,
    "roles": {
@@ -815,6 +855,8 @@
     "tesseract": 321,
     "model-only": 523
    },
+   "duplicates": 156,
+   "name_fragment": 60,
    "ditto": {
     "carried": 14,
     "orphan": 0,
@@ -837,7 +879,7 @@
   },
   "micro_IABROOKLYN_0023": {
    "rows": 10429,
-   "usable": 9968,
+   "usable": 9923,
    "named": 10417,
    "entry_shaped": 10123,
    "roles": {
@@ -853,10 +895,12 @@
     "model": 10206,
     "model-only": 68
    },
+   "duplicates": 54,
+   "name_fragment": 52,
    "ditto": {
     "carried": 12,
     "orphan": 0,
-    "disputed": 8,
+    "disputed": 7,
     "mark_lost": 0,
     "glued_marks": [],
     "headers_placed": 0,
@@ -875,7 +919,7 @@
   },
   "micro_IABROOKLYN_0024": {
    "rows": 10127,
-   "usable": 9657,
+   "usable": 9616,
    "named": 10121,
    "entry_shaped": 9801,
    "roles": {
@@ -891,6 +935,8 @@
     "model": 9887,
     "model-only": 95
    },
+   "duplicates": 55,
+   "name_fragment": 56,
    "ditto": {
     "carried": 15,
     "orphan": 0,
@@ -915,7 +961,7 @@
   },
   "micro_IABROOKLYN_0025": {
    "rows": 12864,
-   "usable": 11994,
+   "usable": 11914,
    "named": 12830,
    "entry_shaped": 12295,
    "roles": {
@@ -931,6 +977,8 @@
     "model": 12368,
     "model-only": 231
    },
+   "duplicates": 101,
+   "name_fragment": 58,
    "ditto": {
     "carried": 40,
     "orphan": 0,
@@ -957,7 +1005,7 @@
   },
   "micro_IABROOKLYN_0027": {
    "rows": 13413,
-   "usable": 12555,
+   "usable": 12446,
    "named": 13393,
    "entry_shaped": 12869,
    "roles": {
@@ -973,6 +1021,8 @@
     "tesseract": 280,
     "model-only": 271
    },
+   "duplicates": 145,
+   "name_fragment": 76,
    "ditto": {
     "carried": 20,
     "orphan": 0,
@@ -998,7 +1048,7 @@
   },
   "micro_IABROOKLYN_0029": {
    "rows": 16271,
-   "usable": 15617,
+   "usable": 15535,
    "named": 16227,
    "entry_shaped": 15868,
    "roles": {
@@ -1014,6 +1064,8 @@
     "tesseract": 165,
     "model-only": 134
    },
+   "duplicates": 95,
+   "name_fragment": 33,
    "ditto": {
     "carried": 14,
     "orphan": 0,
@@ -1038,7 +1090,7 @@
   },
   "micro_IABROOKLYN_0031": {
    "rows": 22921,
-   "usable": 21506,
+   "usable": 21336,
    "named": 22854,
    "entry_shaped": 21965,
    "roles": {
@@ -1055,6 +1107,8 @@
     "tesseract": 529,
     "bleed": 90
    },
+   "duplicates": 205,
+   "name_fragment": 142,
    "ditto": {
     "carried": 52,
     "orphan": 0,
@@ -1081,7 +1135,7 @@
   },
   "micro_IABROOKLYN_0032": {
    "rows": 21456,
-   "usable": 20082,
+   "usable": 19940,
    "named": 21360,
    "entry_shaped": 20554,
    "roles": {
@@ -1098,6 +1152,8 @@
     "model-only": 321,
     "bleed": 16
    },
+   "duplicates": 197,
+   "name_fragment": 94,
    "ditto": {
     "carried": 33,
     "orphan": 0,
@@ -1121,7 +1177,7 @@
   },
   "micro_IABROOKLYN_0033": {
    "rows": 25275,
-   "usable": 22539,
+   "usable": 22411,
    "named": 25219,
    "entry_shaped": 23000,
    "roles": {
@@ -1137,10 +1193,12 @@
     "tesseract": 385,
     "model-only": 279
    },
+   "duplicates": 199,
+   "name_fragment": 387,
    "ditto": {
     "carried": 24,
     "orphan": 0,
-    "disputed": 4,
+    "disputed": 2,
     "mark_lost": 1,
     "glued_marks": [],
     "headers_placed": 1,
@@ -1157,7 +1215,7 @@
   },
   "micro_IABROOKLYN_0035": {
    "rows": 47379,
-   "usable": 42416,
+   "usable": 42226,
    "named": 46232,
    "entry_shaped": 44097,
    "roles": {
@@ -1173,10 +1231,12 @@
     "model": 45096,
     "model-only": 1028
    },
+   "duplicates": 617,
+   "name_fragment": 618,
    "ditto": {
     "carried": 81,
     "orphan": 0,
-    "disputed": 5,
+    "disputed": 2,
     "mark_lost": 3,
     "glued_marks": [
      "-",
@@ -1200,7 +1260,7 @@
   },
   "micro_IABROOKLYN_0039": {
    "rows": 50454,
-   "usable": 43033,
+   "usable": 42587,
    "named": 49756,
    "entry_shaped": 46206,
    "roles": {
@@ -1216,10 +1276,12 @@
     "model": 44541,
     "model-only": 3190
    },
+   "duplicates": 1021,
+   "name_fragment": 1288,
    "ditto": {
     "carried": 161,
     "orphan": 0,
-    "disputed": 3,
+    "disputed": 2,
     "mark_lost": 6,
     "glued_marks": [
      "\u2014",
@@ -1248,11 +1310,11 @@
    },
    "stated_name_count": 50000,
    "stated_approximate": true,
-   "usable_per_stated_name": 0.861
+   "usable_per_stated_name": 0.852
   },
   "micro_IABROOKLYN_0040": {
    "rows": 50244,
-   "usable": 42549,
+   "usable": 42102,
    "named": 49355,
    "entry_shaped": 45490,
    "roles": {
@@ -1269,10 +1331,12 @@
     "model-only": 2851,
     "bleed": 27
    },
+   "duplicates": 1099,
+   "name_fragment": 1281,
    "ditto": {
     "carried": 178,
     "orphan": 1,
-    "disputed": 9,
+    "disputed": 0,
     "mark_lost": 12,
     "glued_marks": [
      "\u2014",
@@ -1308,7 +1372,7 @@
   },
   "micro_IABROOKLYN_0042": {
    "rows": 54585,
-   "usable": 49025,
+   "usable": 48707,
    "named": 53941,
    "entry_shaped": 51881,
    "roles": {
@@ -1324,10 +1388,12 @@
     "tesseract": 1225,
     "model-only": 3537
    },
+   "duplicates": 742,
+   "name_fragment": 501,
    "ditto": {
-    "carried": 56,
+    "carried": 55,
     "orphan": 0,
-    "disputed": 3,
+    "disputed": 0,
     "mark_lost": 16,
     "glued_marks": [
      "\u2014",
@@ -1344,8 +1410,8 @@
      "|": 24,
      "\u2022": 2
     },
-    "marked_lines": 11456,
-    "district_eastern": 11227,
+    "marked_lines": 11457,
+    "district_eastern": 11228,
     "address_slots": 0,
     "address_no_antecedent": 0
    },
@@ -1355,7 +1421,7 @@
   },
   "micro_IABROOKLYN_0043": {
    "rows": 4558,
-   "usable": 4387,
+   "usable": 4382,
    "named": 4539,
    "entry_shaped": 4473,
    "roles": {
@@ -1371,6 +1437,8 @@
     "tesseract": 42,
     "model-only": 26
    },
+   "duplicates": 6,
+   "name_fragment": 13,
    "ditto": {
     "carried": 8,
     "orphan": 0,
@@ -1396,7 +1464,7 @@
   },
   "micro_IABROOKLYN_0044": {
    "rows": 5381,
-   "usable": 5118,
+   "usable": 5098,
    "named": 5348,
    "entry_shaped": 5210,
    "roles": {
@@ -1413,6 +1481,8 @@
     "model": 5207,
     "model-only": 62
    },
+   "duplicates": 29,
+   "name_fragment": 36,
    "ditto": {
     "carried": 5,
     "orphan": 0,
@@ -1438,7 +1508,7 @@
   },
   "micro_IABROOKLYN_0045": {
    "rows": 4125,
-   "usable": 3927,
+   "usable": 3923,
    "named": 4108,
    "entry_shaped": 4005,
    "roles": {
@@ -1455,6 +1525,8 @@
     "tesseract": 89,
     "bleed": 88
    },
+   "duplicates": 5,
+   "name_fragment": 39,
    "ditto": {
     "carried": 15,
     "orphan": 0,
@@ -1480,7 +1552,7 @@
   },
   "micro_IABROOKLYN_0046": {
    "rows": 5978,
-   "usable": 5302,
+   "usable": 5277,
    "named": 5716,
    "entry_shaped": 5432,
    "roles": {
@@ -1496,6 +1568,8 @@
     "model-only": 90,
     "tesseract": 100
    },
+   "duplicates": 36,
+   "name_fragment": 40,
    "ditto": {
     "carried": 15,
     "orphan": 0,
@@ -1518,11 +1592,11 @@
    },
    "stated_name_count": 7345,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.722
+   "usable_per_stated_name": 0.718
   },
   "micro_IABROOKLYN_0047": {
    "rows": 6979,
-   "usable": 5429,
+   "usable": 5421,
    "named": 6806,
    "entry_shaped": 6050,
    "roles": {
@@ -1539,10 +1613,12 @@
     "model-only": 617,
     "bleed": 186
    },
+   "duplicates": 27,
+   "name_fragment": 228,
    "ditto": {
     "carried": 47,
     "orphan": 0,
-    "disputed": 19,
+    "disputed": 16,
     "mark_lost": 0,
     "glued_marks": [
      "\u2018",
@@ -1567,7 +1643,7 @@
   },
   "micro_IABROOKLYN_0048": {
    "rows": 7317,
-   "usable": 6743,
+   "usable": 6718,
    "named": 7180,
    "entry_shaped": 6935,
    "roles": {
@@ -1584,10 +1660,12 @@
     "tesseract": 123,
     "bleed": 8
    },
+   "duplicates": 30,
+   "name_fragment": 38,
    "ditto": {
     "carried": 16,
     "orphan": 0,
-    "disputed": 4,
+    "disputed": 3,
     "mark_lost": 0,
     "glued_marks": [
      "-",

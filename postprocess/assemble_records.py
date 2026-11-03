@@ -71,12 +71,20 @@ AND WHAT IT KNOWS ABOUT THE LINE, AS FLAGS, NOT FILTERS
                         `bleed`, or `model-only` -- a line no layer read, whose box is a STAND-IN
                         at its tile's edge, so xywh and crop do not show it (2026-10-29: Brooklyn
                         1909 p1 leaf 901, where IA's OCR lost a whole column). Null elsewhere
+    duplicate_of        on a re-OCR'd volume, the record_id of the model line a `tesseract` line
+                        repeats (reocr_pair left the two unpaired: LightOn's `Howe Philip, grocer,
+                        34 Grand` and tesseract's `EHowe Phili 34 Grand 2`, PIPELINE #35); such a
+                        row is never `usable`. Null elsewhere
+    name_fragment       the name read opens on a lowercase word that is no particle (`n H` for a
+                        cut `—Wm H`, `rank` for Frank, a run-over's `of Old New Yorkers`): the tile
+                        or the scan cut the line's start, or it is not a name at all (#35), so
+                        name_resolved is left empty; `name` keeps the model's reading
     root                the --root the volume was assembled from. One <run> directory can hold
                         volumes from several roots (4b-100k+guard holds run 1's five and the
                         reocr tier's 39), and this is the only thing on the row that says which
 
 `usable` is the conservative export: entry-shaped, a start (or thin) line, on a listing page, not
-held out. Nothing is dropped; a consumer filters on the flags.
+held out, not a duplicate. Nothing is dropped; a consumer filters on the flags.
 
 The summary sets usable records against the volume's printed name count
 (book_says.stated_name_count, survey_counts.py): on Doggett 1845 run 1's named start lines came
@@ -101,8 +109,8 @@ from entry_rate import is_entry  # noqa: E402
 from iiif_frame import crop_url, xywh as canvas_xywh  # noqa: E402
 from evaluate import FIELDS, load_pred  # noqa: E402
 from resolve_dittos import (annotate, classify_glued_marks, classify_lead_marks,  # noqa: E402
-                           given_only_names, resolve_address_run, resolve_cross_line,
-                           surname_token)
+                           given_only_names, prefixed_surname, resolve_address_run,
+                           resolve_cross_line, surname_token)
 from survey_folios import fit as fit_folios, load as load_folios  # noqa: E402
 from volume_run_report import layout_roles  # noqa: E402
 
@@ -117,7 +125,7 @@ CSV_COLUMNS = (["record_id", "volume", "leaf", "printed_page", "printed_page_how
                ["name_resolved", "address_resolved", "address_ditto", "home_address_resolved",
                 "ditto_source", "ditto_flags", "role", "entry_shaped", "non_entry_page",
                 "eval_holdout", "usable", "root", "ditto_header", "name_mark", "district",
-                "line_source"])
+                "line_source", "duplicate_of", "name_fragment"])
 
 
 class Incomplete(Exception):
@@ -199,7 +207,7 @@ def dropped_headers(ident: str, lines: list) -> dict:
         ctx = ln.get("context") or {}
         if ctx.get("leaf") in found and len(ctx.get("bbox") or []) == 4:
             by_leaf[ctx["leaf"]].append((i, ctx["bbox"], (ctx.get("page_size") or [2500])[0]))
-        sur = surname_token(ln.get("raw_line") or "")
+        sur = surname_token(ln.get("raw_line") or "") or prefixed_surname(ln.get("raw_line"))
         if sur and sur[0].isupper():
             spellings[sur.lower()][sur] += 1
     heads = {}
@@ -250,6 +258,90 @@ def line_sources(ident: str, lines: list) -> list:
                         if y == bbox[1] and abs(x - bbox[0]) <= 40), None)
         out.append(hit)
     return out
+
+
+# A tesseract line repeats a model line when, within DUP_WINDOW rows on its leaf, most of its
+# characters fall in the model line (DUP_SHARE of them, in order: the model writes more, `grocer,`
+# that tesseract lost) and every number of two digits or more in it is the model's too (`Coles
+# William E. clerk, h 69` is not `Coles William, clerk, h. 266 Degraw`). Measured 2026-11-02:
+# ~2,100 `usable` rows, 1,658 in the reocr tier (PIPELINE #35).
+DUP_WINDOW, DUP_SHARE, DUP_MIN = 3, 0.8, 8
+NUMBER = re.compile(r"\d{2,}")
+
+
+def _alnum(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def tesseract_duplicates(lines: list, sources: list) -> dict:
+    """{index of a `tesseract` line: index of the model line it repeats}."""
+    import difflib
+    out = {}
+    for i, (ln, src) in enumerate(zip(lines, sources)):
+        if src != "tesseract":
+            continue
+        raw = ln.get("raw_line") or ""
+        a, leaf = _alnum(raw), (ln.get("context") or {}).get("leaf")
+        if len(a) < DUP_MIN:
+            continue
+        nums = NUMBER.findall(raw)
+        for j in sorted(range(max(0, i - DUP_WINDOW), min(len(lines), i + DUP_WINDOW + 1)),
+                        key=lambda j: abs(j - i)):
+            if j == i or sources[j] not in ("model", "model-only") \
+                    or (lines[j].get("context") or {}).get("leaf") != leaf:
+                continue
+            other = lines[j].get("raw_line") or ""
+            if not set(nums) <= set(NUMBER.findall(other)):
+                continue
+            b = _alnum(other)
+            sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
+            if sum(m.size for m in sm.get_matching_blocks()) / len(a) < DUP_SHARE:
+                continue
+            # ...and the same printed line: the boxes overlap where the model's box is real (a
+            # model-only box is a stand-in), or the model line's opening is in tesseract's text.
+            # `" Elise M W cards 75 Spring h 1145 Laf av` is not `Evertz Carl A cards 75 Spring
+            # h 1145 Laf av` three lines up (Trow 1903 p1 leaf 815)
+            bi = (ln.get("context") or {}).get("bbox") or []
+            bj = (lines[j].get("context") or {}).get("bbox") or []
+            overlap = (sources[j] == "model" and len(bi) == len(bj) == 4
+                       and min(bi[3], bj[3]) > max(bi[1], bj[1]))
+            if overlap or b[:5] in a:
+                out[i] = j
+                break
+    return out
+
+
+# The lowercase words a name may open on (`de Glanville Wm`, `van Wyck`); any other is a fragment
+NAME_PARTICLES = frozenset("de van von du da di del della des la le ten ter ver vander vanden".split())
+ELIDED = re.compile(r"^[dlo]['’][A-Z]")
+
+
+_SURNAMES = None
+
+
+# The census list holds 40,000 names, fragments among them (Rank 3,339, Arter, Ates, Clerk, Shed);
+# a surname the OCR set whole in lowercase is a common one (Butler 218,847)
+COMMON_SURNAME = 5000
+
+
+def _surnames() -> frozenset:
+    global _SURNAMES
+    if _SURNAMES is None:
+        with open(REPO / "data_prep" / "names" / "surnames.tsv", encoding="utf-8") as fh:
+            _SURNAMES = frozenset(r[0].lower() for r in csv.reader(fh, delimiter="\t")
+                                  if len(r) > 1 and r[1].isdigit() and int(r[1]) >= COMMON_SURNAME)
+    return _SURNAMES
+
+
+def name_fragment(name: str) -> bool:
+    """Does this name open on a lowercase word that no name opens on (#35)? A whole surname the
+    OCR set lowercase (`butler Edward` on the early microfilm) is a name in the wrong case, not a
+    cut: four letters or more and a COMMON_SURNAME, it stays."""
+    first = (name or "").split()[0] if (name or "").split() else ""
+    if not first or not first[0].islower() or first.lower() in NAME_PARTICLES or ELIDED.match(first):
+        return False
+    word = first.strip(".,;:")
+    return not (len(word) >= 4 and word.isalpha() and word.lower() in _surnames())
 
 
 def is_east(mark: str | None) -> bool:
@@ -326,9 +418,10 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
     # a given name where the surname goes, or a lone name under a block in a volume that dittos,
     # is a lost ditto mark (#34, 2026-11-01)
     carry = list(resolve_cross_line(seq, glued, heads=heads, strict=True, markers=markers,
-                                    given=given_only_names(), lone=True))
+                                    given=given_only_names(), lone=True, prefixed=True, streets=True))
     addresses = list(resolve_address_run(rec.get("address") for _ln, rec in pairs))
     sources = line_sources(ident, lines)
+    dups = tesseract_duplicates(lines, sources)
 
     rows, last_surname = [], None
     for i, ((ln, rec), cr, role, (addr, addr_status), line_source) in enumerate(
@@ -351,6 +444,9 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
             if cr.get("mark"):
                 name_resolved = strip_mark(name_resolved, cr["mark"])
             source = None
+        fragment = name_fragment(name_resolved)
+        if fragment:
+            name_resolved = ""
         mark = cr.get("mark")
         district = ("Eastern" if (east and is_east(mark))
                     or "EASTERN" in str(ctx.get("section") or "").upper() else None)
@@ -359,7 +455,8 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
         xywh = canvas_xywh(ident, leaf, bbox) if bbox and len(bbox) == 4 else None
         entry = is_entry(rec)
         held = ctx.get("eval_holdout")
-        usable = bool(entry and role in ("start", "thin") and leaf not in non_entry and not held)
+        usable = bool(entry and role in ("start", "thin") and leaf not in non_entry and not held
+                      and i not in dups)
         rows.append({
             "record_id": rids[i], "volume": ident, "leaf": leaf,
             "printed_page": (folios.get(leaf) or (None, None))[0],
@@ -376,7 +473,8 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
             "ditto_header": cr.get("header"),
             "name_mark": mark, "district": district,
             "role": role, "entry_shaped": entry, "non_entry_page": leaf in non_entry,
-            "eval_holdout": held, "usable": usable, "root": root, "line_source": line_source})
+            "eval_holdout": held, "usable": usable, "root": root, "line_source": line_source,
+            "duplicate_of": rids[dups[i]] if i in dups else None, "name_fragment": fragment})
 
     stated = (doc.get("book_says") or {}).get("stated_name_count") or {}
     usable_n = sum(r["usable"] for r in rows)
@@ -389,6 +487,8 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
         "eval_holdout_rows": sum(1 for r in rows if r["eval_holdout"]),
         "printed_page_known": sum(1 for r in rows if r["printed_page"] is not None),
         "line_source": dict(collections.Counter(r["line_source"] for r in rows if r["line_source"])),
+        "duplicates": len(dups),
+        "name_fragment": sum(1 for r in rows if r["name_fragment"]),
         "ditto": {"carried": sum(1 for c in carry if c["status"] == "resolved"),
                   "orphan": sum(1 for c in carry if c["status"] == "orphan"),
                   # cross_leaf / letter_conflict, as before #34; mark_lost is counted apart
@@ -456,6 +556,23 @@ def _self_test() -> int:
     assert strip_mark("E Bennett William J.", "E *") == "Bennett William J.", "stacked marks"
     assert strip_mark("E Edwards John", "E") == "Edwards John"
     assert is_east("E *") and is_east("©") and not is_east("*") and not is_east(None)
+    # #35, micro_IABROOKLYN_0039 leaf 207 and 82: a repeat, and a namesake that is not one
+    dl = [{"raw_line": t, "context": {"leaf": 207}} for t in
+          ("Howe Philip, grocer, 34 Grand", "Howe Richard M. furniture, 87 Grand, h. 86 S.",
+           "EHowe Phili 34 Grand 2", "Coles William, clerk, h. 266 Degraw",
+           "EColes William E. clerk, h, 69 8. 3d")]
+    assert tesseract_duplicates(dl, ["model-only", "model", "tesseract", "model", "tesseract"]) \
+        == {2: 0}
+    assert tesseract_duplicates(dl, [None] * 5) == {}, "not a re-OCR'd volume"
+    tr = [{"raw_line": "Evertz Carl A cards 75 Spring h 1145 Laf av Bklyn",
+           "context": {"leaf": 815, "bbox": [304, 1270, 916, 1320]}},
+          {"raw_line": '" Elise M W cards 75 Spring h 1145 Laf av Bkl',
+           "context": {"leaf": 815, "bbox": [305, 1352, 916, 1403]}}]
+    assert tesseract_duplicates(tr, ["model", "tesseract"]) == {}, "another man, three lines down"
+    assert [name_fragment(n) for n in ("n H", "rank", "of Old New Yorkers", "de Glanville Wm",
+                                       "d’Este Jos", "Smith John", "", "McMahon Patrick",
+                                       "butler Edward", "ardeles John")] \
+        == [True, True, True, False, False, False, False, False, False, True]
     print("self-test ok")
     return 0
 

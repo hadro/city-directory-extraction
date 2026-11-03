@@ -1795,6 +1795,116 @@ rule here), and "Emdon Emelene", a one-word shop printed at the surname margin (
 2,134 -> 2,282 and 172,263 -> 175,722. **Named lines opening on a given-only name: 22,846 (0.43%)
 before #34 -> 5,469 after (a)+(b) -> 1,787 (0.03%; 1,534 `usable`) now.**
 
+**35. Ten wrong names from the address finder, seven causes (found 2026-11-02, hadro, tracing
+31 Belvidere, 114 W 14th and 34 Grand in `space/`).** Each was read on its page image (IIIF crops
+of the line's neighbourhood) and traced back to the stage that made it. Counts are over
+browse.db, one root per volume as the Parquet keeps them, holdouts out.
+1. **Central Vending Machine Co (Trow 1909 p1, leaf 541): no error.** The page prints
+   `—Vending Machine Co 114 W 14th` inside the CENTRAL block, between Central Union Gas and
+   Central Vermont; other years print Century. The record is the page; a cross-year trace is
+   where the disagreement shows, and that is the finder's job, not the assembler's.
+2. **A surname with a prefix never sets the carry.** `surname_token` delegates to
+   alpha_run_filter.first_letter, an anchored capital and two lowercase letters, which abstains
+   on `McMahon`, `DeKalb`, `LaRue`. So a Mc block's dittos take whatever surname was set last: a
+   McLaughlin block comes out "Mcknight" (an OCR'd lowercase `Mck` passes) or "Mazzone", a DeKalb
+   block "Hamilton", and in Trow 1903 p2 the junk line `Morningside av E` named 1,416 dittos across
+   12 leaves of the McM section. **~54,600 dittos in 41 volumes (51,500 `usable`): Mc 48,614, De
+   4,095, La 587, Du 546, Le 519, Di 244**; the Trow p2s worst (5,000-6,000 each), then Brooklyn
+   1912 (3,397); 2,930 in run 1, 78 in the reocr tier (the early books seldom ditto). Not found
+   by any report; found chasing (3).
+3. **A street run-over sets the carry.** `Atlantic av, tel Prospct 2325` (Brooklyn 1912, leaf 41)
+   is the second line of a bold `ALFORD F. A. CO., fixtures, 1029` whose first line was lost (6);
+   `Atlantic` is capitalised and on an A leaf, so it passed both of `can_set_carry`'s tests and
+   `—Frank fixtures 1029 Atlantic av` became "Atlantic Frank" (Alford Frank). Upington 1910 leaf
+   155: `Bedford av` turned a Becker block into Bedfords. Lines whose second word is a lowercase
+   street abbreviation (av, st, pl, rd, ...) and which changed the carry: **~283, behind ~8,700
+   dittos**, many in Mc sections (2) so that fix shrinks this one. Firm names that open on a
+   street (`Fourth Avenue Auction Rooms`, `Tilbury Court`) are capitalised and must keep setting
+   it.
+4. **A given name the surname list also has sets the carry inside a block.** The same Becker
+   block: `Bernard J lawyer 375 Fulton` is Becker Bernard J with its mark lost, but `Bernard` is a
+   surname too (#34's known cost, `Herbert B clk`), so 200-odd lines over leaves 155 and 157
+   (156 is not in the volume) became "Bernard John F" ... -- hadro's "Becker John F brewer 31
+   Belvidere". 1906BPL leaf 68 is the converse: `John F brewer 31 Belvidere` (the same man) has
+   lost its mark, `John` fails the B leaf's letters, so the line is transparent and keeps "John F"
+   with no surname. A crude count (a harvested given name + an initial that sorts between its
+   neighbours' given names) puts ~130 setters behind ~2,300 dittos. Two candidate rules: the
+   given-name ORDER inside a block (a real new surname restarts its given names at A); and a
+   line the letter gate refuses that opens on a harvested given name + an initial takes the carry,
+   flagged mark_lost (it cannot be a surname on this leaf).
+5. **A broken capital read as a ditto mark.** Brooklyn 1912 p3 leaf 503 prints its U's broken;
+   LightOn read them as `"` (`" Ulmer A liquors`, `" Ullwin John`, `" Ulm Aug`) and `Ulman` as
+   `Uman`, so the carry from "Uman" ran through the Ulmer block ("Uman Wm Brewery"). It also dropped
+   two printed lines on that tile (`—H Chas lawyer`, `Ulmann Alex meat`). A first count (a census
+   surname that is never a harvested given name, after a mark) finds 20,580 lines but reads 2 of 14
+   right: most are given names that are surnames too (`" Leander K`, `—Wendell P`). Needs an
+   order test like (4); size unknown.
+6. **The re-OCR'd book tiers lose text at their tile edges** (OCR side; the damaged tier).
+   (a) A COLUMN TILE CUT INTO THE LINE: Trow 1909 leaf 479's tile c0_h1 starts at x=265, the
+   printed `—Wm H h 70 W 55th` at x~205, and LightOn read the stub of the `m` as `n`: `n H`.
+   Trow 1907 p3 leaf 869 lost `—Joh` off every line of its second column (`n B diamonds`, `n H
+   carpets`) and the starts of its first. Tiles with 5+ lines opening on a word fragment then a
+   capital: 179; **88 are tile cuts** (the text is on the scan; Trow 1909 p1 23, 1907 c3 24, ...),
+   **91 sit at the page edge, where the SCAN cut the column at the binding** (Trow 1914 p3 43;
+   leaf 317 starts at x=1: `n Hannah`, `is H clerk`): nothing re-reads those from these scans. A
+   clipped surname cannot set the carry either, so the dittos below inherit the block before.
+   (b) A LINE AT THE HALF-TILE SEAM IS DROPPED BY THE IMPORT: LightOn read `ALFORD F. A. CO.,
+   fixtures, 1029` at the foot of leaf 41's c1_h0, and it never reached the model's input. Of the
+   last line of an upper half 11.3% is missing from the input, of the first line of a lower half
+   8.0%, against 2.0% for a line mid-tile: **~7,300 lines over the expected loss**, about half of
+   them entries (`—Allan manager 156 Bway`, `—Bernard cigars 104 W 25th`, `Molther Wm R cashier`;
+   checked absent). Cause not yet found in reocr_pair.
+7. **A tesseract line duplicates a model line.** micro_IABROOKLYN_0039 leaf 207 prints `EHowe
+   Philip, grocer, 34 Grand` once; the records hold LightOn's `Howe Philip, grocer, 34 Grand`
+   (model-only) and tesseract's `EHowe Phili 34 Grand 2` (tesseract, the 2 its noise), which
+   reocr_pair failed to pair. Tesseract-only `usable` lines repeating a model line within 3 rows
+   (same numbers, most words): ~2,100, of them 1,658 in the reocr tier -- 27% of its 6,193.
+Also seen: names that open on a lowercase word (`n H`, `rank` = Frank, `hn` = John, `of Old New
+Yorkers`, ad copy) are 12,893 `usable` rows; apart from particles (`de Glanville Wm`) none is a
+name, and in the finder each matches every other line cut the same way.
+
+**Plan, in three batches.** Batch 1, assembly only (resolve_dittos + assemble_records, then
+re-assemble the three tiers, browse.db, the Parquet): (2) prefixed surnames set the carry,
+inside the carry only -- first_letter itself is left alone, the listing bounds use it; (3) a
+street run-over cannot set it; (7) a tesseract-only line that repeats a model line is not
+`usable`, with the line it repeats; a lowercase-led name that is not a particle is left out of
+name_resolved, flagged. Batch 2, measured before built: (4) and (5). Batch 3, the import, before
+the damaged tier is re-imported after round 12 so that its lines ride the delta 4B: (6a) paste
+back tesseract's words left of a cutting tile's edge, as #32 (g) puts back the dash; (6b) find
+the seam loss. Round 12 itself needs no change. Not fixable here: (1), the page-edge tiles,
+`Uman` for `Ulman`, LightOn's dropped lines on a damaged scan.
+**Batch 1 BUILT and RE-ASSEMBLED 2026-11-03** (run 1, reocr, damaged; then browse.db and the
+Parquet). `resolve_cross_line(prefixed=, streets=)`, both default off so every earlier number
+reproduces; assemble_records turns them on. Building (2) found a fourth way of the same kind: a
+SURNAME IN TWO WORDS carried its first word alone (`Van Alen Garret` -> dittos "Van Gilbert R",
+"Van Mary A": 3,693 dittos under Van, Von and Ten lines, none right), and a two-letter particle
+(`De Witt`, `La Rue`) never set the carry; `particle_surname` carries it whole, unless the second
+word is a given name (`Van Wm`). The street test reads the word after the whole surname, so `De
+Kalb av` is a run-over too. Measured with carry_rules.py (82 volumes) on top of #34: **header
+agreement 83.02 -> 83.29%** (n = 31,040; 23 volumes up, none down); 31,761 prefixed lines now set
+the carry, 5,807 two-word surnames are carried whole, 487 street run-overs no longer set it, and
+**90,674 ditto surnames change** (89,698 entry-shaped). Read on the page: 1906BPL leaf 707's
+`" Patrick truckman h 112 India` sits under a printed McALLISTER (was "Mazzotta", now McAllister);
+three more plausible, each now carrying its own block's surname where the old one came from junk or
+a run-over (Morningside -> McMahon, Long -> McKay, `Gates av` -> Green); one wrong in a new way:
+Trow 1905 p2's `—Reine Skirt Co` under a `La America` firm line comes out "La America Reine"
+(La Reine; it was "Kyte"). The duplicates: `duplicate_of` (records card, browse metadata) needs most
+of the tesseract line in the model line, its numbers, and the SAME PRINTED LINE -- the boxes
+overlap where the model's box is real, or the model line's opening is in tesseract's text: a first
+version without that matched `" Elise M W cards 75 Spring h 1145 Laf av` to `Evertz Carl A cards 75
+Spring ...` three lines up (9 of 10 sampled were true repeats). `name_fragment`: a name opening on a
+lowercase word that is no particle, and not a whole common surname the OCR set lowercase
+(`butler Edward`, census count >= 5,000; the list's tail holds Rank, Arter, Clerk, Shed), is left
+out of name_resolved. Over the 5.47M rows (holdouts out): **90,863 dittos change surname (84,661
+`usable`); 8,615 rows are duplicates, 3,437 of them were `usable`** (reocr 444,786 -> 442,071,
+damaged 4,284,970 -> 4,284,248; run 1 has 1); **36,787 names are fragments (12,256 `usable`)**;
+`named` unchanged in every tier; `disputed` 175,722 -> 134,044 (damaged) and 2,282 -> 2,220
+(reocr), the Mc blocks' surnames now agreeing with their leaves. hadro's cases: Alford Frank and
+Becker A (Upington 1910 leaf 155) right; `EHowe Phili` a duplicate; the three `n H` lines nameless;
+Central Vending unchanged, as printed; Bernard John F, Uman Wm and 1906BPL's John F wait for batch
+2 (`Bernard J` still sets the carry). Known costs: the La America firm block; a rare surname the
+OCR set wholly lowercase (`bourdett Edward`) loses its name.
+
 ## Medium effort, high information
 
 **5. Does the `44` finding generalize?** It is measured on one volume, one OCR engine, one adapter.

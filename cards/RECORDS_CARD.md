@@ -96,20 +96,22 @@ Open `crop` to see the printed line.
 |---|---|
 | `raw_line` | The line as read, wrapped run-overs joined, verbatim |
 | `name`, `is_business`, `spouse_name`, `race_designation`, `occupation_role`, `employer`, `address`, `home_address` | The model's eight fields, verbatim from the line (see the model card) |
-| `name_resolved` | The name with a ditto mark replaced by the surname it repeats; otherwise `name` |
+| `name_resolved` | The name with a ditto mark replaced by the surname it repeats; otherwise `name`. Empty where `name_fragment` is set |
 | `address_resolved`, `home_address_resolved` | The address with a ditto (`do.`) expanded where the early directories use one |
-| `ditto_source`, `ditto_header`, `ditto_flags` | Where a resolved surname came from (another record, or a surname header over the column), and review flags (`cross_leaf`, `letter_conflict`, `orphan`) |
+| `ditto_source`, `ditto_header`, `ditto_flags` | Where a resolved surname came from (another record, or a surname header over the column), and review flags (`cross_leaf`, `letter_conflict`, `orphan`, and `mark_lost`: no ditto mark was read, but the line opens on a given name, so it took the surname above) |
 | `name_mark`, `district` | A marker the line opens with (Brooklyn's Eastern District `E`, a `*`), and `Eastern` where it marks an Eastern District resident |
 
 **How far to trust it**
 
 | Field | Meaning |
 |---|---|
-| `usable` | **The recommended filter.** True when the line is entry-shaped, starts an entry, and sits on a listing page |
+| `usable` | **The recommended filter.** True when the line is entry-shaped, starts an entry, sits on a listing page, and is not a `duplicate_of` another record |
 | `role` | `start`, `runover` (the tail of the entry above), `other` or `thin`, from the line's position |
 | `entry_shaped` | The record has a name and an address-like field |
 | `non_entry_page` | The leaf was flagged as an advertisement page or a failed reading |
 | `line_source` | Whose reading the line is: `model` (LightOn's text on the word layer's box), `tesseract`, `bleed`, or `model-only`, a line no word layer found, whose box is a stand-in at its tile's edge, so `crop` does not show it |
+| `duplicate_of` | A `tesseract` line that repeats the model's reading of the same printed line: the `record_id` of that record. Never `usable` |
+| `name_fragment` | The name opens on a lowercase word that no name opens on: the start of the line was cut off in the scan or the OCR (`n H` for `—Wm H`), or the line is not a name. `name_resolved` is empty; `name` keeps the reading |
 
 Nothing is dropped except evaluation lines (below). A record that is not `usable` is kept with its
 flags, so a different filter can be built.

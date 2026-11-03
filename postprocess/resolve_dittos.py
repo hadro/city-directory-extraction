@@ -532,6 +532,51 @@ def lone_name(raw: str) -> str | None:
     return m.group("word")
 
 
+# A SURNAME WITH A PREFIX (#35): `McMahon`, `DeKalb`, `LaRue`, `DuBois` open on a capital, one
+# lowercase letter and a capital, so first_letter abstains on them and `surname_token` with it,
+# and a Mc block's dittos took whatever surname came before (a McLaughlin block came out
+# "Mcknight", "Mazzone"): ~54,600 dittos in 41 volumes. Read for the carry only; first_letter is
+# left alone, because the listing bounds use it.
+PREFIXED = re.compile(r"^(?:Mc|De|Di|Du|Da|La|Le)[A-Z][a-z]+[’']?[a-z]*")
+
+
+def prefixed_surname(raw_line: str) -> str | None:
+    """`McMahon` from `McMahon Patrick feed 22 Mulberry`, else None."""
+    w = (raw_line or "").split()[0] if (raw_line or "").split() else ""
+    m = PREFIXED.match(w)
+    return m.group(0) if m else None
+
+
+# A SURNAME IN TWO WORDS (#35): `Van Alen Garret printer` carried "Van" alone, so its dittos came
+# out "Van Gilbert R", "Van Mary A" (3,693 dittos under Van, Von and Ten lines, none right), and a
+# two-letter particle (`De Witt`, `La Rue`) never set the carry at all. Not when the second word
+# is a given name (`Van Wm`, a man named Van).
+PARTICLE = re.compile(r"^(?P<p>Van|Von|Ten|Ver|De|Du|Da|Di|Del|La|Le)\s+(?P<rest>[A-Z][a-z]+(?:['’][A-Za-z]+)?)"
+                      r"(?=[\s,.]|$)")
+
+
+def particle_surname(raw_line: str, given=frozenset()) -> str | None:
+    """`Van Alen` from `Van Alen Garret printer h 311 Hicks`, else None."""
+    m = PARTICLE.match(raw_line or "")
+    if not m or _given(m.group("rest"), given):
+        return None
+    return f"{m.group('p')} {m.group('rest')}"
+
+
+# A STREET RUN-OVER (#35): `Atlantic av, tel Prospct 2325`, `Bedford av`, the second line of an
+# entry whose address wrapped. Capitalised and inside its leaf's letters, so it set the carry:
+# "Atlantic Frank" for Alford Frank, ~283 such lines behind ~8,700 dittos. Only a LOWERCASE street
+# word after the would-be surname (`De Kalb av` too): a firm that opens on a street (`Fourth
+# Avenue Auction Rooms`, `Tilbury Court`) is printed capitalised and still sets it.
+STREET_WORDS = frozenset("av ave st pl rd ct sq la al dr blvd pk".split())
+
+
+def street_runover(raw_line: str, sur: str) -> bool:
+    toks = (raw_line or "").split()
+    k = len(sur.split())
+    return len(toks) > k and toks[k].rstrip(".,;") in STREET_WORDS
+
+
 def can_set_carry(sur: str, leaf, ranges, given=frozenset()) -> bool:
     """May this surname-shaped lead become the carry? The `strict` rule (2026-10-20).
 
@@ -564,7 +609,7 @@ def can_set_carry(sur: str, leaf, ranges, given=frozenset()) -> bool:
 
 
 def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), given=frozenset(),
-                       lone=False):
+                       lone=False, prefixed=False, streets=False):
     """Sequential surname carry over `rows` = [(leaf, raw_line), ...] in reading order.
 
     `glued` is the per-volume set of marks printed without a space (Trow's `-`), empty by default
@@ -595,6 +640,11 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
     `lone` (default off) does the same for a LONE NAME (lone_name: `Wilbur electrician`) under a
     carry set on the same leaf, whatever the word -- in a volume whose ditto-led lines are at
     least LONE_MIN_DITTO_SHARE of its rows.
+
+    `prefixed` (default off) lets a surname with a prefix (prefixed_surname: `McMahon`) set the
+    carry, and carries a surname in two words whole (particle_surname: `Van Alen`); `streets`
+    (default off) keeps a street run-over (street_runover: `Atlantic av,`) from setting it, the
+    run-over transparent like a line the gate refuses (#35).
 
     Flags, any of which may be set together:
       cross_leaf      the antecedent came from a previous leaf -- a page boundary was crossed
@@ -639,6 +689,8 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
         mk = None if gl else split_lead_mark(raw, markers)
         if mk:
             sur = surname_token(mk[1])
+            if prefixed:
+                sur = particle_surname(mk[1], given) or sur or prefixed_surname(mk[1])
             if is_ditto_lead(raw) and not (sur and can_set_carry(sur, leaf, ranges)):
                 mk = None                              # a ditto after all: fall through
             elif not sur or (strict and not can_set_carry(sur, leaf, ranges)):
@@ -653,6 +705,13 @@ def resolve_cross_line(rows, glued=(), heads=None, strict=False, markers=(), giv
                        "status": "not_ditto", "flags": [], "mark": mk[0]}
                 continue
         sur = None if gl else surname_token(raw)
+        if prefixed and not gl:
+            sur = particle_surname(raw, given) or sur or prefixed_surname(raw)
+        if streets and sur is not None and street_runover(raw, sur):
+            # `Atlantic av, tel Prospct 2325`: the run-over of an address, never a surname (#35)
+            yield {"leaf": leaf, "raw_line": raw, "lead": sur, "resolved": "",
+                   "status": "not_ditto", "flags": []}
+            continue
         if lone and not gl and prev is not None and lone_name(raw):
             # `Wilbur electrician` under a block: a given name whose mark was lost (#34)
             yield carried(leaf, raw, "", ["mark_lost"])
@@ -1061,6 +1120,42 @@ def self_test() -> int:
     check("Upington's apostrophes", [_given(w, given_only_names()) for w in
                                      ("Dan'l", "Edw’d", "Rob't", "H'y", "Smith")],
           [True, True, True, True, False])
+    # #35: a surname with a prefix sets the carry; a street run-over does not
+    m_page = [(12, f"M{s} Jas h {n} Main") for n, s in enumerate(
+        ("ack", "ahon", "alone", "ann", "arsh", "artin", "ason", "ayer", "eyer", "iller", "oore",
+         "orris", "urphy", "yers"))]
+    mc = m_page + [(12, "McMahon Patrick feed 22 Mulberry"), (12, '" Jas clerk h 4 Elm'),
+                   (12, "Mcknight Chas h 8 Oak"), (12, "McManus Alex clerk h 506 Robbins av"),
+                   (12, '" Wm h 3 Main'), (12, "Morris av c Elliott av"), (12, '" Hugh h 9 Pine')]
+    got = list(resolve_cross_line(mc, strict=True, given=g, lone=True, prefixed=True,
+                                  streets=True))
+    check("McMahon sets the carry", got[-6]["resolved"], "McMahon")
+    check("McManus after Mcknight", got[-3]["resolved"], "McManus")
+    check("a street run-over is transparent", (got[-2]["status"], got[-2]["resolved"]),
+          ("not_ditto", ""))
+    check("...and the carry runs past it", got[-1]["resolved"], "McManus")
+    old = list(resolve_cross_line(mc, strict=True, given=g, lone=True))
+    check("prefixed off: the old carry", (old[-6]["resolved"], old[-1]["resolved"]),
+          ("Myers", "Morris"))
+    check("prefixed_surname", [prefixed_surname(w) for w in
+                               ("DeKalb Wm h 1", "LaRue Jas", "Mcknight Chas", "Dean John",
+                                "De Witt Jas", '" McMahon')],
+          ["DeKalb", "LaRue", None, None, None, None])
+    v_page = [(14, f"V{s} Jas h {n} Main") for n, s in enumerate(
+        ("ail", "alentine", "ance", "aughan", "ernon", "ogel", "oss"))]
+    van = v_page + [(14, "Van Alen Garret printer h 311 Hicks"), (14, '" Gilbert R clk h 2 Elm'),
+                    (14, "Van Wm h 3 Elm"), (14, '" Jas h 4 Elm'),
+                    (14, "De Kalb av c Fulton"), (14, '" Mary A h 5 Elm')]
+    got = list(resolve_cross_line(van, strict=True, given=g, prefixed=True, streets=True))
+    check("a surname in two words carries whole", got[-5]["resolved"], "Van Alen")
+    check("not when the second word is a given name", got[-3]["resolved"], "Van")
+    check("a two-word street run-over", (got[-2]["resolved"], got[-1]["resolved"]), ("", "Van"))
+    check("particle_surname", [particle_surname(s, g) for s in
+                               ("De Witt Jas h 3", "La Rue, Jas", "Van Wm", "Vance Jas", "Ten Eyck")],
+          ["De Witt", "La Rue", None, None, "Ten Eyck"])
+    check("a firm on a street still sets it", list(resolve_cross_line(
+        m_page + [(12, "Morningside Avenue Garage 12 W 110th"), (12, '" Co h 3 Main')],
+        strict=True, streets=True))[-1]["resolved"], "Morningside")
 
     # the address slot grammar, on duncan1794's gold addresses in their printed order
     duncan = ["71 Dey-street.", "27 Ann do.", "11 Rector do.", "30 Ferry-street", "Mott do.",

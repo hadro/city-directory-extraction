@@ -36,8 +36,8 @@ COLUMNS = ["record_id", "volume", "leaf", "year", "publisher", "city", "borough"
 # volume in the export") is the same, except that the release ships nothing from run 1's root,
 # while this stand-in keeps a volume run 1 alone has (1906BPL until D lands, and the 0030/0036
 # scans outside the run set).
-ROOTS_NEWEST_FIRST = ["data/volumes_books_first_clean", "data/volumes_books_damaged_v4",
-                      "data/volumes_reocr", "data/volumes_run1"]
+ROOTS_NEWEST_FIRST = ["data/volumes_books_first_clean_v2", "data/volumes_books_damaged_v6",
+                      "data/volumes_reocr_v2", "data/volumes_run1"]
 # The same edition under another volume id: a survey sidecar's `duplicate-of:<id>` (0030 is
 # another scan of Hearne 1852, 0036 of 1857BPL). The release never ships these
 # (hpc/prep_volumes.corpus_ids); this stand-in drops one once its edition is loaded under the

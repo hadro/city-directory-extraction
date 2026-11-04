@@ -3303,6 +3303,41 @@ canary volume (Brooklyn 1912) is simply the short one. And the longest lines are
 at all — they are LightOn repetition loops ("North 6th & 5th & 6th & 7th & 8th &" counting up to
 the cap), six lines, every one in `micro_IABROOKLYN_0045`, whose loop detection missed them.
 
+**38. ~~A column's modal edge is not always its margin.~~ DONE 2026-11-04 (found by round 13's one
+lost volume, hadro chose the fix).** Round 13 cost Trow 1909 p1 187 usable rows while every other
+volume gained: 206 whole ditto entries (`" Gustav clerk h 573 S Boulevard`) went `start` -> `runover`
+on ~10 leaves, with no box or text changed. `layout_roles` seeds a column's margin on its MODAL left
+edge (2026-10-20, for the hanging Eastern District `E`), which assumes the lines left of the text
+are a minority. On leaf 521's third column 55 of ~100 boxes start ~45 px into the gutter, though the
+page prints every dash and surname at one x (read on the image; the first column does the same into
+blank margin, so it is not neighbour bleed alone -- WHY half the boxes start left of their ink is
+OPEN). Two new lines tipped the near-tie; the 45 lines at the ink, Carrington and Carroll among
+them, measured +21 per-mille and became `runover`. The tie had broken the right way before only by
+luck, and elsewhere it had not: the first column of the same leaf was already wrong.
+
+The fix (`eval/volume_run_report.layout_roles`, self-tested on both geometries): name-led lines
+(`NAME_LED`, a capitalised word then a capital: surnames, and given names whose ditto mark the OCR
+lost) seed a SECOND margin where their mode lies right of the column's by at most the hanging
+allowance (40 per-mille), and a line at EITHER margin is a `start`. Two designs failed first, both
+measured by `results/role_seed.py` and read on images:
+- moving the one margin to the name seed: right on Trow, but in ditto-heavy BPL columns the seed
+  lands on lost-mark given names ~45 px right of the `"` boxes, and surnames ~90 px left of it fell
+  past OUTDENT into `other` -- 13 of 17 `start -> other` read were real entries (`Mitko Jos
+  jeweler`, `Jordan Albert clk`); only 4 were ads.
+- the same, seeding on surnames only (a first word the volume prints more often second, like
+  `Chas`, excluded): halved `start -> other` but also dropped ~22k BPL `runover -> start` flips that
+  were right -- a BPL ditto column boxes some `"` lines from the mark and some from the given name,
+  and both are entries.
+
+Shipped (two margins): over the four roots 146,911 lines change role and NONE leaves `start`:
+`runover -> start` 145,541 (damaged 83,822, first/clean 58,458, reocr 2,732, run 1 529), `other ->
+runover` 1,121 (true tails and ad lines, neither usable), `other -> start` 188, `runover -> other` 61. Read on images: 33 of
+34 uniform `runover -> start` right (the miss a real Trow 1922/23 tail, `Audubon av`), 18 of 18 BPL,
+11 of 11 1868BPL. Usable: damaged +81,762, first/clean +54,664, reocr +2,564; rows unchanged; Doggett
+1845 and 1876BPL hold at 0.982 per printed name, 0039 0.854 -> 0.867, 1868BPL 0.983 -> 1.008 (all 11
+read were real entries between hanging `E`s, so its printed count is likely low). Run 1's records
+were NOT re-assembled (529 lines; the export excludes that root).
+
 ## Larger, and the ones that unblock claims
 
 **10. A whole-volume gold slice.** Hand-label ~200 lines sampled across one volume's *listing*

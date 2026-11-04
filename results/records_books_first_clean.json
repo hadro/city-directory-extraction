@@ -1,25 +1,25 @@
 {
- "derived": "2026-11-03",
+ "derived": "2026-11-04",
  "run": "4b-100k+guard",
- "root": "data/volumes_books_first_clean",
+ "root": "data/volumes_books_first_clean_v2",
  "volumes": {
   "1856BPL": {
-   "rows": 42771,
-   "usable": 41302,
-   "named": 42688,
-   "entry_shaped": 42044,
+   "rows": 42779,
+   "usable": 41310,
+   "named": 42696,
+   "entry_shaped": 42052,
    "roles": {
     "other": 138,
     "runover": 205,
-    "start": 42428
+    "start": 42436
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 560,
-   "printed_page_known": 40905,
+   "printed_page_known": 40911,
    "line_source": {
     "model": 42582,
     "tesseract": 155,
-    "model-only": 34
+    "model-only": 42
    },
    "duplicates": 12,
    "name_fragment": 72,
@@ -35,7 +35,7 @@
     "from_header": 0,
     "lead_marks": {},
     "marked_lines": 0,
-    "district_eastern": 15214,
+    "district_eastern": 15216,
     "address_slots": 0,
     "address_no_antecedent": 0
    },
@@ -44,25 +44,25 @@
    "usable_per_stated_name": null
   },
   "1857BPL": {
-   "rows": 45821,
-   "usable": 44075,
-   "named": 45721,
-   "entry_shaped": 44988,
+   "rows": 45844,
+   "usable": 44117,
+   "named": 45747,
+   "entry_shaped": 45008,
    "roles": {
-    "start": 45376,
-    "runover": 313,
-    "other": 132
+    "start": 45418,
+    "runover": 315,
+    "other": 111
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 677,
-   "printed_page_known": 43117,
+   "printed_page_known": 43135,
    "line_source": {
-    "model": 45477,
-    "model-only": 45,
+    "model": 45492,
+    "model-only": 53,
     "tesseract": 271
    },
-   "duplicates": 49,
-   "name_fragment": 89,
+   "duplicates": 52,
+   "name_fragment": 90,
    "ditto": {
     "carried": 15,
     "orphan": 0,
@@ -77,7 +77,7 @@
      "\u2022": 1
     },
     "marked_lines": 1,
-    "district_eastern": 14130,
+    "district_eastern": 14137,
     "address_slots": 0,
     "address_no_antecedent": 0
    },
@@ -86,24 +86,24 @@
    "usable_per_stated_name": null
   },
   "1858BPL": {
-   "rows": 45173,
-   "usable": 43076,
-   "named": 45033,
-   "entry_shaped": 44105,
+   "rows": 45178,
+   "usable": 43825,
+   "named": 45038,
+   "entry_shaped": 44110,
    "roles": {
-    "start": 43850,
-    "runover": 1249,
-    "other": 74
+    "start": 44611,
+    "runover": 504,
+    "other": 63
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 42822,
+   "printed_page_known": 42827,
    "line_source": {
-    "model": 44886,
+    "model": 44887,
     "tesseract": 188,
-    "model-only": 45
+    "model-only": 49
    },
-   "duplicates": 6,
+   "duplicates": 7,
    "name_fragment": 54,
    "ditto": {
     "carried": 2,
@@ -127,22 +127,22 @@
    "usable_per_stated_name": null
   },
   "1862BPL": {
-   "rows": 51156,
-   "usable": 48837,
-   "named": 51071,
-   "entry_shaped": 50527,
+   "rows": 51160,
+   "usable": 50382,
+   "named": 51075,
+   "entry_shaped": 50530,
    "roles": {
-    "runover": 1883,
-    "start": 49218,
-    "other": 55
+    "runover": 341,
+    "start": 50770,
+    "other": 49
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 50050,
+   "printed_page_known": 50054,
    "line_source": {
     "model": 51097,
     "tesseract": 34,
-    "model-only": 25
+    "model-only": 29
    },
    "duplicates": 1,
    "name_fragment": 41,
@@ -168,22 +168,22 @@
    "usable_per_stated_name": null
   },
   "1863BPL": {
-   "rows": 54791,
-   "usable": 52797,
-   "named": 54649,
-   "entry_shaped": 54020,
+   "rows": 54855,
+   "usable": 53797,
+   "named": 54713,
+   "entry_shaped": 54083,
    "roles": {
-    "start": 53201,
-    "runover": 1502,
-    "other": 88
+    "start": 54214,
+    "runover": 500,
+    "other": 141
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 54791,
+   "printed_page_known": 54855,
    "line_source": {
     "tesseract": 80,
-    "model": 54657,
-    "model-only": 27
+    "model": 54720,
+    "model-only": 28
    },
    "duplicates": 3,
    "name_fragment": 50,
@@ -209,27 +209,27 @@
    "usable_per_stated_name": null
   },
   "1864BPL": {
-   "rows": 58773,
-   "usable": 55620,
-   "named": 58377,
-   "entry_shaped": 57095,
+   "rows": 58791,
+   "usable": 56765,
+   "named": 58402,
+   "entry_shaped": 57114,
    "roles": {
-    "start": 56771,
-    "runover": 1609,
-    "other": 393
+    "start": 57924,
+    "runover": 478,
+    "other": 389
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 56462,
+   "printed_page_known": 56476,
    "line_source": {
-    "tesseract": 47,
-    "model": 58585,
-    "model-only": 141
+    "tesseract": 51,
+    "model": 58593,
+    "model-only": 147
    },
    "duplicates": 2,
-   "name_fragment": 299,
+   "name_fragment": 302,
    "ditto": {
-    "carried": 7,
+    "carried": 9,
     "orphan": 0,
     "disputed": 0,
     "mark_lost": 2,
@@ -252,32 +252,33 @@
    "usable_per_stated_name": null
   },
   "1865BPL": {
-   "rows": 52145,
-   "usable": 47700,
-   "named": 51499,
-   "entry_shaped": 49650,
+   "rows": 52157,
+   "usable": 48638,
+   "named": 51510,
+   "entry_shaped": 49661,
    "roles": {
-    "start": 48871,
-    "runover": 1548,
-    "other": 1726
+    "start": 49819,
+    "runover": 614,
+    "other": 1724
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 48928,
+   "printed_page_known": 48936,
    "line_source": {
     "tesseract": 196,
-    "model": 51024,
-    "model-only": 896,
+    "model": 51027,
+    "model-only": 905,
     "bleed": 29
    },
-   "duplicates": 18,
-   "name_fragment": 400,
+   "duplicates": 19,
+   "name_fragment": 392,
    "ditto": {
     "carried": 53,
     "orphan": 0,
     "disputed": 0,
     "mark_lost": 1,
     "glued_marks": [
+     "\u2014",
      "-"
     ],
     "headers_placed": 2,
@@ -297,35 +298,35 @@
    "usable_per_stated_name": null
   },
   "1866BPL": {
-   "rows": 66053,
-   "usable": 60495,
-   "named": 65217,
-   "entry_shaped": 63144,
+   "rows": 66076,
+   "usable": 61195,
+   "named": 65269,
+   "entry_shaped": 63163,
    "roles": {
-    "start": 62237,
-    "runover": 2087,
-    "other": 1729
+    "runover": 1397,
+    "start": 62943,
+    "other": 1736
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 3554,
+   "printed_page_known": 3561,
    "line_source": {
-    "model-only": 901,
+    "model": 64546,
+    "model-only": 908,
     "tesseract": 538,
-    "model": 64530,
     "bleed": 84
    },
    "duplicates": 19,
-   "name_fragment": 646,
+   "name_fragment": 565,
    "ditto": {
-    "carried": 49,
+    "carried": 50,
     "orphan": 0,
     "disputed": 1,
     "mark_lost": 2,
     "glued_marks": [
-     "-",
      "\u2014",
-     "'"
+     "'",
+     "-"
     ],
     "headers_placed": 4,
     "from_header": 0,
@@ -346,33 +347,34 @@
    "usable_per_stated_name": null
   },
   "1867BPL": {
-   "rows": 75144,
-   "usable": 69262,
-   "named": 74049,
-   "entry_shaped": 71232,
+   "rows": 75251,
+   "usable": 69972,
+   "named": 74205,
+   "entry_shaped": 71257,
    "roles": {
-    "other": 1728,
-    "start": 71739,
-    "runover": 1677
+    "other": 1815,
+    "runover": 950,
+    "start": 72486
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 14434,
+   "printed_page_known": 14456,
    "line_source": {
-    "model": 73869,
-    "tesseract": 281,
-    "model-only": 932,
+    "model": 73972,
+    "tesseract": 282,
+    "model-only": 935,
     "bleed": 61
    },
    "duplicates": 20,
-   "name_fragment": 406,
+   "name_fragment": 285,
    "ditto": {
-    "carried": 18,
+    "carried": 22,
     "orphan": 0,
     "disputed": 0,
     "mark_lost": 1,
     "glued_marks": [
-     "\u2014"
+     "\u2014",
+     "'"
     ],
     "headers_placed": 4,
     "from_header": 0,
@@ -385,8 +387,8 @@
      "\u2261": 39,
      "\u2022": 1
     },
-    "marked_lines": 11648,
-    "district_eastern": 11449,
+    "marked_lines": 11649,
+    "district_eastern": 11450,
     "address_slots": 0,
     "address_no_antecedent": 0
    },
@@ -395,33 +397,35 @@
    "usable_per_stated_name": null
   },
   "1868BPL": {
-   "rows": 78786,
-   "usable": 72837,
-   "named": 77873,
-   "entry_shaped": 76053,
+   "rows": 78856,
+   "usable": 74741,
+   "named": 77963,
+   "entry_shaped": 76119,
    "roles": {
-    "start": 74253,
-    "runover": 3023,
-    "other": 1510
+    "start": 76189,
+    "runover": 1116,
+    "other": 1551
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 8951,
+   "printed_page_known": 8955,
    "line_source": {
-    "model": 77408,
+    "model": 77477,
     "tesseract": 612,
-    "model-only": 713,
+    "model-only": 714,
     "bleed": 33
    },
-   "duplicates": 17,
+   "duplicates": 21,
    "name_fragment": 389,
    "ditto": {
-    "carried": 29,
+    "carried": 36,
     "orphan": 0,
     "disputed": 0,
     "mark_lost": 3,
     "glued_marks": [
-     "\u2014"
+     "\u2014",
+     "\"",
+     "'"
     ],
     "headers_placed": 31,
     "from_header": 0,
@@ -437,29 +441,29 @@
    },
    "stated_name_count": 74120,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.983
+   "usable_per_stated_name": 1.008
   },
   "1869BPL": {
-   "rows": 78480,
-   "usable": 71387,
-   "named": 77025,
-   "entry_shaped": 75220,
+   "rows": 78521,
+   "usable": 73840,
+   "named": 77070,
+   "entry_shaped": 75248,
    "roles": {
-    "start": 73284,
-    "runover": 3461,
-    "other": 1735
+    "start": 75785,
+    "runover": 977,
+    "other": 1759
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 22398,
+   "printed_page_known": 22407,
    "line_source": {
-    "model": 77058,
-    "model-only": 814,
+    "model": 77094,
+    "model-only": 819,
     "tesseract": 574,
     "bleed": 11
    },
-   "duplicates": 10,
-   "name_fragment": 479,
+   "duplicates": 12,
+   "name_fragment": 462,
    "ditto": {
     "carried": 46,
     "orphan": 0,
@@ -469,7 +473,7 @@
      "*",
      "\u2014"
     ],
-    "headers_placed": 63,
+    "headers_placed": 60,
     "from_header": 0,
     "lead_marks": {
      "E": 18616,
@@ -488,26 +492,26 @@
    "usable_per_stated_name": null
   },
   "1871BPL": {
-   "rows": 91639,
-   "usable": 82843,
-   "named": 90020,
-   "entry_shaped": 87477,
+   "rows": 91679,
+   "usable": 85771,
+   "named": 90061,
+   "entry_shaped": 87504,
    "roles": {
-    "start": 85248,
-    "runover": 4038,
-    "other": 2353
+    "start": 88232,
+    "runover": 1101,
+    "other": 2346
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 55525,
+   "printed_page_known": 55550,
    "line_source": {
-    "tesseract": 534,
-    "model": 89575,
-    "model-only": 1268,
+    "model": 89606,
+    "tesseract": 535,
+    "model-only": 1276,
     "bleed": 235
    },
-   "duplicates": 45,
-   "name_fragment": 570,
+   "duplicates": 48,
+   "name_fragment": 571,
    "ditto": {
     "carried": 47,
     "orphan": 0,
@@ -520,12 +524,12 @@
     "headers_placed": 28,
     "from_header": 0,
     "lead_marks": {
-     "E": 20664,
+     "E": 20663,
      "\u00c6": 48,
      "\u2261": 49
     },
-    "marked_lines": 22050,
-    "district_eastern": 22001,
+    "marked_lines": 22049,
+    "district_eastern": 22000,
     "address_slots": 0,
     "address_no_antecedent": 0
    },
@@ -534,26 +538,26 @@
    "usable_per_stated_name": null
   },
   "1875BPL": {
-   "rows": 115109,
-   "usable": 107998,
-   "named": 113446,
-   "entry_shaped": 109101,
+   "rows": 115258,
+   "usable": 108059,
+   "named": 113576,
+   "entry_shaped": 109163,
    "roles": {
-    "start": 111241,
-    "runover": 1734,
-    "other": 2134
+    "start": 111311,
+    "runover": 1723,
+    "other": 2224
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 88311,
+   "printed_page_known": 88421,
    "line_source": {
-    "model": 112520,
-    "tesseract": 753,
-    "model-only": 1801,
-    "bleed": 35
+    "model": 112639,
+    "tesseract": 752,
+    "model-only": 1833,
+    "bleed": 34
    },
-   "duplicates": 33,
-   "name_fragment": 237,
+   "duplicates": 39,
+   "name_fragment": 217,
    "ditto": {
     "carried": 46,
     "orphan": 0,
@@ -578,27 +582,27 @@
    "usable_per_stated_name": 0.984
   },
   "1878BPL": {
-   "rows": 123391,
-   "usable": 113083,
-   "named": 120921,
-   "entry_shaped": 115239,
+   "rows": 123840,
+   "usable": 113321,
+   "named": 121391,
+   "entry_shaped": 115517,
    "roles": {
-    "other": 5430,
-    "start": 116866,
-    "runover": 1095
+    "other": 5799,
+    "start": 116919,
+    "runover": 1122
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 121623,
+   "printed_page_known": 122062,
    "line_source": {
-    "model": 119462,
-    "tesseract": 1570,
-    "model-only": 2359
+    "model": 119835,
+    "tesseract": 1552,
+    "model-only": 2418
    },
    "duplicates": 112,
-   "name_fragment": 1367,
+   "name_fragment": 1621,
    "ditto": {
-    "carried": 56,
+    "carried": 58,
     "orphan": 0,
     "disputed": 6,
     "mark_lost": 6,
@@ -609,7 +613,7 @@
      "\u201c",
      "\u2014"
     ],
-    "headers_placed": 523,
+    "headers_placed": 469,
     "from_header": 0,
     "lead_marks": {
      "\u2022": 2
@@ -621,29 +625,29 @@
    },
    "stated_name_count": 118320,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.956
+   "usable_per_stated_name": 0.958
   },
   "1879BPL": {
-   "rows": 128750,
-   "usable": 122507,
-   "named": 127509,
-   "entry_shaped": 123661,
+   "rows": 129145,
+   "usable": 122652,
+   "named": 127904,
+   "entry_shaped": 123787,
    "roles": {
-    "start": 125063,
-    "runover": 1352,
-    "other": 2335
+    "start": 125214,
+    "runover": 1361,
+    "other": 2570
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 8612,
+   "printed_page_known": 8637,
    "line_source": {
-    "model": 125556,
+    "model": 125883,
     "tesseract": 1089,
-    "model-only": 2054,
+    "model-only": 2122,
     "bleed": 51
    },
-   "duplicates": 58,
-   "name_fragment": 475,
+   "duplicates": 62,
+   "name_fragment": 745,
    "ditto": {
     "carried": 28,
     "orphan": 0,
@@ -667,28 +671,28 @@
    "usable_per_stated_name": null
   },
   "1880BPL": {
-   "rows": 132314,
-   "usable": 124555,
-   "named": 129251,
-   "entry_shaped": 125551,
+   "rows": 132394,
+   "usable": 124669,
+   "named": 129403,
+   "entry_shaped": 125529,
    "roles": {
-    "start": 128971,
-    "other": 2287,
-    "runover": 1056
+    "start": 129083,
+    "other": 2368,
+    "runover": 943
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 95659,
+   "printed_page_known": 95707,
    "line_source": {
-    "model": 128466,
+    "model": 128522,
     "tesseract": 842,
-    "model-only": 2796,
+    "model-only": 2820,
     "bleed": 179
    },
    "duplicates": 24,
-   "name_fragment": 518,
+   "name_fragment": 578,
    "ditto": {
-    "carried": 70,
+    "carried": 72,
     "orphan": 0,
     "disputed": 2,
     "mark_lost": 8,
@@ -711,33 +715,33 @@
    },
    "stated_name_count": 125440,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.993
+   "usable_per_stated_name": 0.994
   },
   "1883BPL": {
-   "rows": 154150,
-   "usable": 143089,
-   "named": 150812,
-   "entry_shaped": 144939,
+   "rows": 154291,
+   "usable": 143264,
+   "named": 150967,
+   "entry_shaped": 145058,
    "roles": {
-    "start": 148892,
-    "other": 3594,
-    "runover": 1664
+    "start": 149065,
+    "other": 3650,
+    "runover": 1576
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 143690,
+   "printed_page_known": 143822,
    "line_source": {
-    "model-only": 4054,
-    "tesseract": 843,
-    "model": 149039,
+    "model-only": 4102,
+    "tesseract": 836,
+    "model": 149139,
     "bleed": 214
    },
    "duplicates": 72,
-   "name_fragment": 1294,
+   "name_fragment": 1314,
    "ditto": {
-    "carried": 366,
+    "carried": 368,
     "orphan": 1,
-    "disputed": 4,
+    "disputed": 3,
     "mark_lost": 5,
     "glued_marks": [
      "\u201c",
@@ -761,37 +765,38 @@
    },
    "stated_name_count": 142371,
    "stated_approximate": false,
-   "usable_per_stated_name": 1.005
+   "usable_per_stated_name": 1.006
   },
   "1884BPL": {
-   "rows": 159516,
-   "usable": 147857,
-   "named": 155866,
-   "entry_shaped": 150061,
+   "rows": 159783,
+   "usable": 148170,
+   "named": 156143,
+   "entry_shaped": 150253,
    "roles": {
-    "other": 4786,
-    "runover": 2280,
-    "start": 152450
+    "other": 4923,
+    "runover": 2084,
+    "start": 152776
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 54129,
+   "printed_page_known": 54213,
    "line_source": {
-    "model": 154324,
-    "tesseract": 1528,
-    "model-only": 3495,
+    "model": 154495,
+    "tesseract": 1524,
+    "model-only": 3595,
     "bleed": 77
    },
-   "duplicates": 98,
-   "name_fragment": 590,
+   "duplicates": 101,
+   "name_fragment": 627,
    "ditto": {
-    "carried": 118,
+    "carried": 120,
     "orphan": 0,
     "disputed": 8,
     "mark_lost": 13,
     "glued_marks": [
      "-",
      "*",
+     "\"",
      "'",
      "\u2014",
      "\u201c"
@@ -801,40 +806,40 @@
     "lead_marks": {
      "5": 24,
      "1": 63,
-     "\u2022": 1
+     "\u2022": 2
     },
-    "marked_lines": 143,
+    "marked_lines": 144,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
    },
    "stated_name_count": 152290,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.971
+   "usable_per_stated_name": 0.973
   },
   "1885BPL": {
-   "rows": 168062,
-   "usable": 156968,
-   "named": 163735,
-   "entry_shaped": 159117,
+   "rows": 168265,
+   "usable": 157322,
+   "named": 163997,
+   "entry_shaped": 159285,
    "roles": {
-    "other": 4324,
-    "start": 161779,
-    "runover": 1959
+    "other": 4411,
+    "start": 162126,
+    "runover": 1728
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 134302,
+   "printed_page_known": 134452,
    "line_source": {
-    "model": 161142,
-    "tesseract": 3450,
-    "model-only": 3364,
+    "model": 161270,
+    "tesseract": 3446,
+    "model-only": 3443,
     "bleed": 74
    },
-   "duplicates": 74,
-   "name_fragment": 622,
+   "duplicates": 82,
+   "name_fragment": 628,
    "ditto": {
-    "carried": 182,
+    "carried": 183,
     "orphan": 0,
     "disputed": 5,
     "mark_lost": 10,
@@ -859,28 +864,28 @@
    "usable_per_stated_name": null
   },
   "1886BPL": {
-   "rows": 172104,
-   "usable": 163621,
-   "named": 169400,
-   "entry_shaped": 164991,
+   "rows": 172279,
+   "usable": 163910,
+   "named": 169637,
+   "entry_shaped": 165204,
    "roles": {
-    "other": 2451,
-    "runover": 1887,
-    "start": 167766
+    "other": 2538,
+    "runover": 1688,
+    "start": 168053
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 146261,
+   "printed_page_known": 146418,
    "line_source": {
-    "model": 167049,
-    "tesseract": 1869,
-    "model-only": 2808,
+    "model": 167128,
+    "tesseract": 1874,
+    "model-only": 2899,
     "bleed": 112
    },
-   "duplicates": 61,
-   "name_fragment": 358,
+   "duplicates": 71,
+   "name_fragment": 362,
    "ditto": {
-    "carried": 225,
+    "carried": 226,
     "orphan": 0,
     "disputed": 39,
     "mark_lost": 9,
@@ -894,10 +899,10 @@
      "'",
      "\"\""
     ],
-    "headers_placed": 215,
+    "headers_placed": 217,
     "from_header": 1,
     "lead_marks": {
-     "*": 57,
+     "*": 58,
      "\u2022": 2
     },
     "marked_lines": 2,
@@ -907,86 +912,88 @@
    },
    "stated_name_count": 163934,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.998
+   "usable_per_stated_name": 1.0
   },
   "1887BPL": {
-   "rows": 186258,
-   "usable": 176043,
-   "named": 182540,
-   "entry_shaped": 177564,
+   "rows": 186590,
+   "usable": 176592,
+   "named": 182905,
+   "entry_shaped": 177920,
    "roles": {
-    "runover": 1828,
-    "start": 181275,
-    "other": 3155
+    "runover": 1568,
+    "start": 181789,
+    "other": 3233
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 162292,
+   "printed_page_known": 162570,
    "line_source": {
-    "tesseract": 2650,
-    "model": 180273,
-    "model-only": 3114,
-    "bleed": 183
+    "tesseract": 2652,
+    "model": 180566,
+    "model-only": 3149,
+    "bleed": 184
    },
-   "duplicates": 149,
-   "name_fragment": 706,
+   "duplicates": 164,
+   "name_fragment": 695,
    "ditto": {
-    "carried": 151,
+    "carried": 161,
     "orphan": 0,
-    "disputed": 14,
+    "disputed": 16,
     "mark_lost": 26,
     "glued_marks": [
      "*",
      "'\u00ab",
+     "\u00ab",
      "'",
      "\u2014",
+     "-",
      "\u201c",
-     "\"*",
-     "-"
+     "**",
+     "\"*"
     ],
-    "headers_placed": 180,
+    "headers_placed": 181,
     "from_header": 0,
     "lead_marks": {
-     "1": 52,
+     "1": 53,
      "7": 51,
      "\"": 22,
      "\u2022": 3
     },
-    "marked_lines": 155,
+    "marked_lines": 156,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
    },
    "stated_name_count": 175761,
    "stated_approximate": false,
-   "usable_per_stated_name": 1.002
+   "usable_per_stated_name": 1.005
   },
   "1889BPL": {
-   "rows": 197725,
-   "usable": 188005,
-   "named": 194583,
-   "entry_shaped": 189772,
+   "rows": 198028,
+   "usable": 188191,
+   "named": 194885,
+   "entry_shaped": 190019,
    "roles": {
-    "start": 192793,
-    "other": 3230,
-    "runover": 1702
+    "start": 193010,
+    "other": 3350,
+    "runover": 1668
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 180015,
+   "printed_page_known": 180290,
    "line_source": {
-    "model": 190920,
+    "model": 191151,
     "tesseract": 3265,
-    "model-only": 3117,
+    "model-only": 3189,
     "bleed": 306
    },
-   "duplicates": 103,
+   "duplicates": 117,
    "name_fragment": 721,
    "ditto": {
     "carried": 265,
     "orphan": 0,
     "disputed": 28,
-    "mark_lost": 42,
+    "mark_lost": 41,
     "glued_marks": [
      "'",
      "\"",
@@ -997,7 +1004,7 @@
      "\"*",
      "\u00ab"
     ],
-    "headers_placed": 231,
+    "headers_placed": 233,
     "from_header": 0,
     "lead_marks": {
      "*": 29,
@@ -1010,34 +1017,34 @@
    },
    "stated_name_count": 188074,
    "stated_approximate": false,
-   "usable_per_stated_name": 1.0
+   "usable_per_stated_name": 1.001
   },
   "1897BPL": {
-   "rows": 259266,
+   "rows": 259714,
    "usable": 0,
-   "named": 253358,
-   "entry_shaped": 245323,
+   "named": 253827,
+   "entry_shaped": 245780,
    "roles": {
-    "start": 245693,
-    "other": 5814,
-    "runover": 7759
+    "start": 246644,
+    "other": 5957,
+    "runover": 7113
    },
    "non_entry_page_rows": 0,
-   "eval_holdout_rows": 259266,
-   "printed_page_known": 1565,
+   "eval_holdout_rows": 259714,
+   "printed_page_known": 1566,
    "line_source": {
-    "model": 251387,
-    "model-only": 4607,
-    "tesseract": 2936,
-    "bleed": 336
+    "model": 251646,
+    "model-only": 4788,
+    "tesseract": 2939,
+    "bleed": 341
    },
-   "duplicates": 124,
-   "name_fragment": 1176,
+   "duplicates": 154,
+   "name_fragment": 1160,
    "ditto": {
-    "carried": 187682,
+    "carried": 187846,
     "orphan": 0,
-    "disputed": 11453,
-    "mark_lost": 6331,
+    "disputed": 11178,
+    "mark_lost": 6337,
     "glued_marks": [
      "\"",
      "\u201c",
@@ -1049,8 +1056,8 @@
      "'*",
      "\u2014"
     ],
-    "headers_placed": 498,
-    "from_header": 260,
+    "headers_placed": 503,
+    "from_header": 221,
     "lead_marks": {
      "\u2022": 23
     },
@@ -1064,45 +1071,45 @@
    "usable_per_stated_name": 0.0
   },
   "1899xBPL": {
-   "rows": 291187,
-   "usable": 262445,
-   "named": 286087,
-   "entry_shaped": 277791,
+   "rows": 291971,
+   "usable": 266832,
+   "named": 286852,
+   "entry_shaped": 278488,
    "roles": {
-    "start": 268223,
-    "other": 8128,
-    "runover": 14836
+    "start": 272727,
+    "other": 8374,
+    "runover": 10870
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 0,
    "line_source": {
-    "model": 277347,
-    "tesseract": 5045,
-    "model-only": 6518,
-    "bleed": 2277
+    "model": 277872,
+    "tesseract": 5111,
+    "model-only": 6694,
+    "bleed": 2294
    },
-   "duplicates": 202,
-   "name_fragment": 1609,
+   "duplicates": 289,
+   "name_fragment": 1588,
    "ditto": {
-    "carried": 209307,
+    "carried": 209626,
     "orphan": 0,
-    "disputed": 16506,
-    "mark_lost": 12102,
+    "disputed": 15759,
+    "mark_lost": 12135,
     "glued_marks": [
      "\u201c",
      "\"",
+     "\u2018",
      "*",
      "**",
      "\u2014",
      "-",
-     "\u2018",
      "\u201d",
      "\u00ab",
      "'"
     ],
-    "headers_placed": 650,
-    "from_header": 470,
+    "headers_placed": 658,
+    "from_header": 475,
     "lead_marks": {
      "4": 20,
      "\u2022": 3
@@ -1114,44 +1121,45 @@
    },
    "stated_name_count": 271797,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.966
+   "usable_per_stated_name": 0.982
   },
   "1902BPL": {
-   "rows": 168887,
-   "usable": 156211,
-   "named": 164648,
-   "entry_shaped": 159223,
+   "rows": 169851,
+   "usable": 157525,
+   "named": 165627,
+   "entry_shaped": 160182,
    "roles": {
-    "start": 160534,
-    "runover": 4264,
-    "other": 4089
+    "start": 161921,
+    "runover": 3577,
+    "other": 4353
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 0,
    "line_source": {
-    "model-only": 3365,
-    "model": 163685,
-    "tesseract": 1616,
-    "bleed": 221
+    "model-only": 3502,
+    "model": 164484,
+    "tesseract": 1618,
+    "bleed": 247
    },
-   "duplicates": 92,
-   "name_fragment": 723,
+   "duplicates": 206,
+   "name_fragment": 726,
    "ditto": {
-    "carried": 120734,
+    "carried": 121182,
     "orphan": 0,
-    "disputed": 4994,
-    "mark_lost": 2759,
+    "disputed": 4705,
+    "mark_lost": 2771,
     "glued_marks": [
      "-",
      "\"",
      "\u201c",
      "*",
      "\u2019",
+     "\u2014",
      "'"
     ],
-    "headers_placed": 737,
-    "from_header": 496,
+    "headers_placed": 745,
+    "from_header": 498,
     "lead_marks": {
      "\u2022": 1
     },
@@ -1165,37 +1173,37 @@
    "usable_per_stated_name": null
   },
   "1903BPL": {
-   "rows": 174055,
-   "usable": 156244,
-   "named": 169016,
-   "entry_shaped": 160019,
+   "rows": 175211,
+   "usable": 157940,
+   "named": 170103,
+   "entry_shaped": 161114,
    "roles": {
-    "runover": 5867,
-    "start": 162559,
-    "other": 5629
+    "runover": 5188,
+    "start": 164306,
+    "other": 5717
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 5957,
+   "printed_page_known": 5985,
    "line_source": {
-    "model": 165960,
-    "tesseract": 2095,
-    "model-only": 5767,
-    "bleed": 233
+    "model": 166864,
+    "tesseract": 2099,
+    "model-only": 6011,
+    "bleed": 237
    },
-   "duplicates": 172,
+   "duplicates": 300,
    "name_fragment": 974,
    "ditto": {
-    "carried": 119727,
+    "carried": 120421,
     "orphan": 0,
-    "disputed": 4213,
-    "mark_lost": 2754,
+    "disputed": 4075,
+    "mark_lost": 2839,
     "glued_marks": [
      "\"",
      "\u201c",
      "'",
-     "-",
      "*",
+     "-",
      "\u2019",
      "\u2014"
     ],
@@ -1214,31 +1222,31 @@
    "usable_per_stated_name": null
   },
   "1904BPL": {
-   "rows": 169005,
-   "usable": 153833,
-   "named": 164387,
-   "entry_shaped": 157550,
+   "rows": 169959,
+   "usable": 155279,
+   "named": 165325,
+   "entry_shaped": 158453,
    "roles": {
-    "runover": 5406,
-    "start": 158248,
-    "other": 5351
+    "runover": 4462,
+    "start": 159822,
+    "other": 5675
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 0,
    "line_source": {
-    "tesseract": 2013,
-    "model": 161966,
-    "model-only": 4663,
-    "bleed": 363
+    "tesseract": 2016,
+    "model": 162784,
+    "model-only": 4790,
+    "bleed": 369
    },
-   "duplicates": 165,
-   "name_fragment": 1064,
+   "duplicates": 230,
+   "name_fragment": 1066,
    "ditto": {
-    "carried": 117941,
+    "carried": 118417,
     "orphan": 0,
-    "disputed": 4197,
-    "mark_lost": 2928,
+    "disputed": 4010,
+    "mark_lost": 2934,
     "glued_marks": [
      "\"",
      "-",
@@ -1247,10 +1255,11 @@
      "**",
      "\u00ab",
      "'*",
-     "'"
+     "'",
+     "\u2014"
     ],
-    "headers_placed": 839,
-    "from_header": 570,
+    "headers_placed": 841,
+    "from_header": 575,
     "lead_marks": {
      "\u2022": 2
     },
@@ -1264,31 +1273,31 @@
    "usable_per_stated_name": null
   },
   "1906BPL": {
-   "rows": 201825,
-   "usable": 162051,
-   "named": 196889,
-   "entry_shaped": 189109,
+   "rows": 202980,
+   "usable": 167714,
+   "named": 198037,
+   "entry_shaped": 190237,
    "roles": {
-    "start": 177683,
-    "runover": 17030,
-    "other": 7112
+    "start": 183723,
+    "runover": 11911,
+    "other": 7346
    },
    "non_entry_page_rows": 0,
-   "eval_holdout_rows": 12594,
-   "printed_page_known": 199518,
+   "eval_holdout_rows": 12664,
+   "printed_page_known": 200626,
    "line_source": {
-    "model-only": 5448,
-    "model": 192425,
-    "tesseract": 3445,
-    "bleed": 507
+    "model-only": 5691,
+    "model": 193313,
+    "tesseract": 3460,
+    "bleed": 516
    },
-   "duplicates": 295,
-   "name_fragment": 1259,
+   "duplicates": 391,
+   "name_fragment": 1251,
    "ditto": {
-    "carried": 140760,
+    "carried": 141322,
     "orphan": 0,
-    "disputed": 11481,
-    "mark_lost": 23637,
+    "disputed": 11621,
+    "mark_lost": 23770,
     "glued_marks": [
      "\"",
      "\u201c",
@@ -1300,8 +1309,8 @@
      "**",
      "\u2014"
     ],
-    "headers_placed": 2783,
-    "from_header": 38712,
+    "headers_placed": 2798,
+    "from_header": 38655,
     "lead_marks": {
      "\u2022": 12
     },
@@ -1315,31 +1324,31 @@
    "usable_per_stated_name": null
   },
   "1907BPL": {
-   "rows": 181493,
-   "usable": 151767,
-   "named": 177066,
-   "entry_shaped": 170748,
+   "rows": 182503,
+   "usable": 158080,
+   "named": 178063,
+   "entry_shaped": 171718,
    "roles": {
-    "start": 156052,
-    "runover": 19332,
-    "other": 6109
+    "start": 162456,
+    "runover": 13857,
+    "other": 6190
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 178939,
+   "printed_page_known": 179929,
    "line_source": {
-    "model-only": 3974,
-    "model": 174278,
-    "tesseract": 2988,
-    "bleed": 253
+    "model-only": 4110,
+    "model": 175144,
+    "tesseract": 2993,
+    "bleed": 256
    },
-   "duplicates": 162,
-   "name_fragment": 886,
+   "duplicates": 239,
+   "name_fragment": 889,
    "ditto": {
-    "carried": 123247,
+    "carried": 123709,
     "orphan": 0,
-    "disputed": 9434,
-    "mark_lost": 29993,
+    "disputed": 10137,
+    "mark_lost": 30114,
     "glued_marks": [
      "\"",
      "-",
@@ -1349,11 +1358,11 @@
      "'",
      "**",
      "\u2014",
-     "\u2019",
-     "\u00ab"
+     "\u00ab",
+     "\u2019"
     ],
-    "headers_placed": 2552,
-    "from_header": 31579,
+    "headers_placed": 2563,
+    "from_header": 31687,
     "lead_marks": {
      "\u2022": 11
     },
@@ -1367,31 +1376,31 @@
    "usable_per_stated_name": null
   },
   "1908BPL": {
-   "rows": 179103,
-   "usable": 152360,
-   "named": 174732,
-   "entry_shaped": 168851,
+   "rows": 180516,
+   "usable": 158832,
+   "named": 176178,
+   "entry_shaped": 170290,
    "roles": {
-    "other": 6198,
-    "start": 156139,
-    "runover": 16766
+    "other": 6380,
+    "runover": 11424,
+    "start": 162712
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 175911,
+   "printed_page_known": 177302,
    "line_source": {
-    "model-only": 4320,
-    "model": 172095,
-    "tesseract": 2303,
-    "bleed": 385
+    "model-only": 4426,
+    "model": 173384,
+    "tesseract": 2314,
+    "bleed": 392
    },
-   "duplicates": 186,
-   "name_fragment": 801,
+   "duplicates": 316,
+   "name_fragment": 805,
    "ditto": {
-    "carried": 122433,
+    "carried": 123162,
     "orphan": 0,
-    "disputed": 8620,
-    "mark_lost": 25151,
+    "disputed": 8897,
+    "mark_lost": 25343,
     "glued_marks": [
      "\"",
      "*",
@@ -1402,12 +1411,12 @@
      "\u2014",
      "'"
     ],
-    "headers_placed": 2641,
-    "from_header": 29398,
+    "headers_placed": 2648,
+    "from_header": 29578,
     "lead_marks": {
      "\u2022": 10
     },
-    "marked_lines": 13,
+    "marked_lines": 14,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -1455,20 +1464,20 @@
    "usable_per_stated_name": null
   },
   "brooklynalphabet1843unse": {
-   "rows": 7390,
-   "usable": 7130,
-   "named": 7389,
-   "entry_shaped": 7157,
+   "rows": 7519,
+   "usable": 7258,
+   "named": 7518,
+   "entry_shaped": 7286,
    "roles": {
-    "other": 13,
+    "other": 14,
     "runover": 19,
-    "start": 7358
+    "start": 7486
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 7390,
+   "printed_page_known": 7519,
    "line_source": {
-    "model": 7387,
+    "model": 7516,
     "tesseract": 1,
     "model-only": 2
    },
@@ -1495,20 +1504,20 @@
    "usable_per_stated_name": null
   },
   "brooklyncitydire1848teal": {
-   "rows": 11734,
-   "usable": 11356,
-   "named": 11732,
-   "entry_shaped": 11497,
+   "rows": 12251,
+   "usable": 11865,
+   "named": 12249,
+   "entry_shaped": 12014,
    "roles": {
-    "runover": 129,
-    "start": 11589,
-    "other": 16
+    "runover": 135,
+    "start": 12097,
+    "other": 19
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 11708,
+   "printed_page_known": 12224,
    "line_source": {
-    "model": 11731,
+    "model": 12248,
     "tesseract": 1,
     "model-only": 2
    },
@@ -1535,22 +1544,22 @@
    "usable_per_stated_name": null
   },
   "brooklyndirector00ogde": {
-   "rows": 5290,
-   "usable": 4750,
-   "named": 5288,
-   "entry_shaped": 4996,
+   "rows": 5502,
+   "usable": 4941,
+   "named": 5500,
+   "entry_shaped": 5208,
    "roles": {
-    "start": 5065,
-    "other": 107,
-    "runover": 118
+    "start": 5263,
+    "other": 116,
+    "runover": 123
    },
    "non_entry_page_rows": 0,
-   "eval_holdout_rows": 74,
+   "eval_holdout_rows": 81,
    "printed_page_known": 0,
    "line_source": {
-    "tesseract": 58,
-    "model": 5156,
-    "model-only": 76
+    "tesseract": 60,
+    "model": 5349,
+    "model-only": 93
    },
    "duplicates": 3,
    "name_fragment": 29,
@@ -1579,30 +1588,30 @@
    "usable_per_stated_name": null
   },
   "bub_gb_hY4tAAAAYAAJ": {
-   "rows": 153719,
-   "usable": 145200,
-   "named": 151840,
-   "entry_shaped": 148396,
+   "rows": 156729,
+   "usable": 147939,
+   "named": 154854,
+   "entry_shaped": 151368,
    "roles": {
-    "runover": 2939,
-    "start": 148035,
-    "other": 2745
+    "runover": 2917,
+    "start": 150779,
+    "other": 3033
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 111556,
+   "printed_page_known": 112094,
    "line_source": {
-    "model": 148362,
-    "model-only": 3626,
-    "tesseract": 1575,
+    "model": 151081,
+    "model-only": 3916,
+    "tesseract": 1576,
     "bleed": 156
    },
-   "duplicates": 51,
-   "name_fragment": 652,
+   "duplicates": 73,
+   "name_fragment": 666,
    "ditto": {
-    "carried": 401,
+    "carried": 405,
     "orphan": 0,
-    "disputed": 81,
+    "disputed": 82,
     "mark_lost": 17,
     "glued_marks": [
      "\u2014",
@@ -1629,26 +1638,26 @@
    "usable_per_stated_name": null
   },
   "doggettsnewyorkc1846dogg": {
-   "rows": 65827,
-   "usable": 64877,
-   "named": 65771,
-   "entry_shaped": 65530,
+   "rows": 65929,
+   "usable": 64958,
+   "named": 65873,
+   "entry_shaped": 65632,
    "roles": {
-    "start": 65577,
-    "runover": 223,
-    "other": 27
+    "start": 65658,
+    "runover": 234,
+    "other": 37
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 469,
-   "printed_page_known": 65043,
+   "printed_page_known": 65143,
    "line_source": {
-    "model": 65360,
+    "model": 65443,
     "tesseract": 186,
-    "model-only": 126,
+    "model-only": 145,
     "bleed": 37
    },
-   "duplicates": 8,
-   "name_fragment": 31,
+   "duplicates": 9,
+   "name_fragment": 32,
    "ditto": {
     "carried": 3,
     "orphan": 0,
@@ -1667,28 +1676,28 @@
    },
    "stated_name_count": 65838,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.985
+   "usable_per_stated_name": 0.987
   },
   "doggettsnewyorkc1847dogg": {
-   "rows": 66741,
-   "usable": 66194,
-   "named": 66683,
-   "entry_shaped": 66442,
+   "rows": 66854,
+   "usable": 66281,
+   "named": 66796,
+   "entry_shaped": 66554,
    "roles": {
     "runover": 257,
-    "start": 66436,
-    "other": 48
+    "start": 66523,
+    "other": 74
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 65978,
+   "printed_page_known": 66089,
    "line_source": {
-    "model": 66448,
+    "model": 66552,
     "tesseract": 182,
-    "model-only": 73
+    "model-only": 81
    },
-   "duplicates": 0,
-   "name_fragment": 32,
+   "duplicates": 1,
+   "name_fragment": 33,
    "ditto": {
     "carried": 0,
     "orphan": 0,
@@ -1707,23 +1716,23 @@
    },
    "stated_name_count": 68159,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.971
+   "usable_per_stated_name": 0.972
   },
   "doggettsnewyorkc1848dogg": {
-   "rows": 67083,
-   "usable": 66544,
-   "named": 67039,
-   "entry_shaped": 66809,
+   "rows": 67112,
+   "usable": 66564,
+   "named": 67068,
+   "entry_shaped": 66838,
    "roles": {
-    "start": 66767,
+    "start": 66787,
     "runover": 268,
-    "other": 48
+    "other": 57
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 66144,
+   "printed_page_known": 66172,
    "line_source": {
-    "model": 66871,
+    "model": 66900,
     "tesseract": 87,
     "model-only": 50,
     "bleed": 41
@@ -1749,22 +1758,22 @@
    "usable_per_stated_name": 0.99
   },
   "flushingnewyork188586boyd": {
-   "rows": 2287,
-   "usable": 1743,
-   "named": 2201,
-   "entry_shaped": 1828,
+   "rows": 2296,
+   "usable": 1749,
+   "named": 2210,
+   "entry_shaped": 1837,
    "roles": {
-    "start": 2057,
-    "other": 162,
+    "start": 2063,
+    "other": 165,
     "runover": 64,
     "thin": 4
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 2125,
+   "printed_page_known": 2134,
    "line_source": {
-    "model": 2111,
-    "model-only": 120,
+    "model": 2118,
+    "model-only": 122,
     "tesseract": 56
    },
    "duplicates": 7,
@@ -1790,31 +1799,30 @@
    "usable_per_stated_name": null
   },
   "flushingnewyork189192boyd": {
-   "rows": 3452,
-   "usable": 2584,
-   "named": 3272,
-   "entry_shaped": 2755,
+   "rows": 3630,
+   "usable": 2752,
+   "named": 3450,
+   "entry_shaped": 2932,
    "roles": {
-    "other": 460,
-    "start": 2916,
-    "runover": 71,
-    "thin": 5
+    "other": 484,
+    "start": 3077,
+    "runover": 69
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 3418,
+   "printed_page_known": 3596,
    "line_source": {
-    "model": 3091,
-    "model-only": 276,
+    "model": 3266,
+    "model-only": 279,
     "tesseract": 85
    },
-   "duplicates": 13,
+   "duplicates": 20,
    "name_fragment": 44,
    "ditto": {
-    "carried": 35,
+    "carried": 41,
     "orphan": 0,
-    "disputed": 15,
-    "mark_lost": 11,
+    "disputed": 20,
+    "mark_lost": 16,
     "glued_marks": [
      "\u2014",
      "\u201c",
@@ -1833,25 +1841,25 @@
    "usable_per_stated_name": null
   },
   "flushingnewyorkc00boyd": {
-   "rows": 3040,
-   "usable": 2441,
-   "named": 2969,
-   "entry_shaped": 2726,
+   "rows": 3122,
+   "usable": 2513,
+   "named": 3051,
+   "entry_shaped": 2807,
    "roles": {
-    "start": 2658,
-    "runover": 28,
-    "other": 354
+    "start": 2735,
+    "runover": 24,
+    "other": 363
    },
    "non_entry_page_rows": 0,
-   "eval_holdout_rows": 128,
+   "eval_holdout_rows": 132,
    "printed_page_known": 0,
    "line_source": {
-    "model": 2884,
+    "model": 2965,
     "model-only": 144,
-    "tesseract": 12
+    "tesseract": 13
    },
    "duplicates": 2,
-   "name_fragment": 6,
+   "name_fragment": 7,
    "ditto": {
     "carried": 3,
     "orphan": 1,
@@ -1871,20 +1879,20 @@
    "usable_per_stated_name": null
   },
   "hearnesbrooklync1850unse": {
-   "rows": 15011,
-   "usable": 14603,
-   "named": 15007,
-   "entry_shaped": 14726,
+   "rows": 15380,
+   "usable": 14971,
+   "named": 15376,
+   "entry_shaped": 15094,
    "roles": {
     "other": 38,
-    "start": 14881,
+    "start": 15250,
     "runover": 92
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 15011,
+   "printed_page_known": 15380,
    "line_source": {
-    "model": 15004,
+    "model": 15373,
     "tesseract": 1,
     "model-only": 6
    },
@@ -1911,20 +1919,20 @@
    "usable_per_stated_name": null
   },
   "hearnesbrooklync1852unse": {
-   "rows": 20165,
-   "usable": 19348,
-   "named": 20162,
-   "entry_shaped": 19670,
+   "rows": 20379,
+   "usable": 19561,
+   "named": 20376,
+   "entry_shaped": 19884,
    "roles": {
     "other": 21,
-    "start": 20079,
+    "start": 20293,
     "runover": 65
    },
    "non_entry_page_rows": 0,
-   "eval_holdout_rows": 256,
-   "printed_page_known": 20165,
+   "eval_holdout_rows": 257,
+   "printed_page_known": 20379,
    "line_source": {
-    "model": 20161,
+    "model": 20375,
     "tesseract": 3,
     "model-only": 1
    },
@@ -1951,24 +1959,24 @@
    "usable_per_stated_name": null
   },
   "longworthsameric00newy": {
-   "rows": 35494,
-   "usable": 35247,
-   "named": 35471,
-   "entry_shaped": 35345,
+   "rows": 37095,
+   "usable": 36843,
+   "named": 37072,
+   "entry_shaped": 36944,
    "roles": {
-    "start": 35363,
+    "start": 36961,
     "runover": 91,
-    "other": 40
+    "other": 43
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 35494,
+   "printed_page_known": 37095,
    "line_source": {
     "tesseract": 16,
-    "model": 35469,
+    "model": 37070,
     "model-only": 9
    },
-   "duplicates": 2,
+   "duplicates": 3,
    "name_fragment": 5,
    "ditto": {
     "carried": 1,
@@ -1990,30 +1998,30 @@
    },
    "stated_name_count": 39000,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.904
+   "usable_per_stated_name": 0.945
   },
   "longworthsameric1813newy": {
-   "rows": 17049,
-   "usable": 15925,
-   "named": 17040,
-   "entry_shaped": 16154,
+   "rows": 17678,
+   "usable": 16547,
+   "named": 17669,
+   "entry_shaped": 16783,
    "roles": {
-    "other": 33,
-    "runover": 224,
-    "start": 16792
+    "other": 39,
+    "runover": 225,
+    "start": 17414
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 17025,
+   "printed_page_known": 17653,
    "line_source": {
-    "model": 17026,
+    "model": 17655,
     "tesseract": 15,
     "model-only": 8
    },
    "duplicates": 0,
-   "name_fragment": 4,
+   "name_fragment": 5,
    "ditto": {
-    "carried": 4,
+    "carried": 5,
     "orphan": 0,
     "disputed": 1,
     "mark_lost": 1,
@@ -2030,27 +2038,27 @@
    },
    "stated_name_count": 17750,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.897
+   "usable_per_stated_name": 0.932
   },
   "longworthsameric2618long": {
-   "rows": 9538,
-   "usable": 7328,
-   "named": 9537,
-   "entry_shaped": 7480,
+   "rows": 10008,
+   "usable": 7790,
+   "named": 10007,
+   "entry_shaped": 7950,
    "roles": {
-    "start": 9347,
-    "other": 39,
-    "runover": 152
+    "start": 9810,
+    "other": 44,
+    "runover": 154
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 9493,
+   "printed_page_known": 9962,
    "line_source": {
-    "model": 9491,
-    "model-only": 27,
-    "tesseract": 20
+    "model": 9959,
+    "model-only": 28,
+    "tesseract": 21
    },
-   "duplicates": 12,
+   "duplicates": 13,
    "name_fragment": 147,
    "ditto": {
     "carried": 1,
@@ -2071,20 +2079,20 @@
    "usable_per_stated_name": null
   },
   "longworthsameric3818long": {
-   "rows": 14048,
-   "usable": 13087,
-   "named": 14036,
-   "entry_shaped": 13360,
+   "rows": 14499,
+   "usable": 13535,
+   "named": 14487,
+   "entry_shaped": 13811,
    "roles": {
-    "other": 69,
-    "runover": 225,
-    "start": 13754
+    "other": 70,
+    "runover": 227,
+    "start": 14202
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 14048,
+   "printed_page_known": 14499,
    "line_source": {
-    "model": 14036,
+    "model": 14487,
     "tesseract": 10,
     "model-only": 2
    },
@@ -2109,27 +2117,27 @@
    "usable_per_stated_name": null
   },
   "longworthsameric4018long": {
-   "rows": 16731,
-   "usable": 15214,
-   "named": 16698,
-   "entry_shaped": 16090,
+   "rows": 17486,
+   "usable": 15948,
+   "named": 17453,
+   "entry_shaped": 16845,
    "roles": {
-    "runover": 815,
-    "other": 111,
-    "start": 15805
+    "runover": 834,
+    "other": 113,
+    "start": 16539
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 16689,
+   "printed_page_known": 17444,
    "line_source": {
-    "model": 16702,
+    "model": 17455,
     "tesseract": 23,
-    "model-only": 6
+    "model-only": 8
    },
    "duplicates": 1,
    "name_fragment": 10,
    "ditto": {
-    "carried": 4,
+    "carried": 5,
     "orphan": 0,
     "disputed": 2,
     "mark_lost": 1,
@@ -2149,22 +2157,22 @@
    "usable_per_stated_name": null
   },
   "longworthsameric4818long": {
-   "rows": 20280,
-   "usable": 19315,
-   "named": 20279,
-   "entry_shaped": 19981,
+   "rows": 20626,
+   "usable": 19643,
+   "named": 20625,
+   "entry_shaped": 20325,
    "roles": {
-    "start": 19600,
-    "runover": 625,
-    "other": 55
+    "start": 19929,
+    "runover": 634,
+    "other": 63
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 20056,
+   "printed_page_known": 20402,
    "line_source": {
-    "model": 20262,
+    "model": 20607,
     "tesseract": 6,
-    "model-only": 12
+    "model-only": 13
    },
    "duplicates": 4,
    "name_fragment": 3,
@@ -2187,25 +2195,25 @@
    "usable_per_stated_name": null
   },
   "longworthsameric6018long": {
-   "rows": 37470,
-   "usable": 37012,
-   "named": 37447,
-   "entry_shaped": 37236,
+   "rows": 38327,
+   "usable": 37859,
+   "named": 38304,
+   "entry_shaped": 38093,
    "roles": {
-    "start": 37217,
-    "runover": 189,
-    "other": 64
+    "start": 38065,
+    "runover": 190,
+    "other": 72
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 37470,
+   "printed_page_known": 38327,
    "line_source": {
     "tesseract": 38,
-    "model": 37398,
-    "bleed": 28,
-    "model-only": 6
+    "model": 38253,
+    "model-only": 8,
+    "bleed": 28
    },
-   "duplicates": 4,
+   "duplicates": 7,
    "name_fragment": 14,
    "ditto": {
     "carried": 1,
@@ -2226,23 +2234,23 @@
    "usable_per_stated_name": null
   },
   "longworthsameric6118long": {
-   "rows": 35933,
-   "usable": 35527,
-   "named": 35906,
-   "entry_shaped": 35685,
+   "rows": 36533,
+   "usable": 36116,
+   "named": 36506,
+   "entry_shaped": 36285,
    "roles": {
-    "start": 35738,
-    "runover": 152,
-    "other": 43
+    "start": 36327,
+    "runover": 153,
+    "other": 53
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 35833,
+   "printed_page_known": 36432,
    "line_source": {
-    "tesseract": 39,
-    "model": 35862,
+    "tesseract": 40,
+    "model": 36457,
     "model-only": 3,
-    "bleed": 29
+    "bleed": 33
    },
    "duplicates": 1,
    "name_fragment": 14,
@@ -2267,24 +2275,24 @@
    "usable_per_stated_name": null
   },
   "longworthsameric6518long": {
-   "rows": 34204,
-   "usable": 33933,
-   "named": 34168,
-   "entry_shaped": 34011,
+   "rows": 35798,
+   "usable": 35526,
+   "named": 35762,
+   "entry_shaped": 35605,
    "roles": {
-    "start": 34078,
+    "start": 35671,
     "runover": 54,
-    "other": 72
+    "other": 73
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 34204,
+   "printed_page_known": 35798,
    "line_source": {
     "tesseract": 9,
-    "model": 34190,
+    "model": 35784,
     "model-only": 5
    },
-   "duplicates": 1,
+   "duplicates": 2,
    "name_fragment": 6,
    "ditto": {
     "carried": 4,
@@ -2305,20 +2313,20 @@
    "usable_per_stated_name": null
   },
   "merceinscitydire00merc": {
-   "rows": 20072,
-   "usable": 18552,
-   "named": 20056,
-   "entry_shaped": 19067,
+   "rows": 20315,
+   "usable": 18788,
+   "named": 20299,
+   "entry_shaped": 19310,
    "roles": {
-    "start": 19771,
-    "other": 116,
-    "runover": 185
+    "start": 20010,
+    "other": 119,
+    "runover": 186
    },
    "non_entry_page_rows": 0,
-   "eval_holdout_rows": 353,
-   "printed_page_known": 20028,
+   "eval_holdout_rows": 356,
+   "printed_page_known": 20264,
    "line_source": {
-    "model": 19955,
+    "model": 20198,
     "tesseract": 24,
     "model-only": 63,
     "bleed": 30
@@ -2344,24 +2352,24 @@
    "usable_per_stated_name": null
   },
   "newyorkcitydirec00rode": {
-   "rows": 108037,
-   "usable": 106591,
-   "named": 107931,
-   "entry_shaped": 107482,
+   "rows": 108162,
+   "usable": 106698,
+   "named": 108055,
+   "entry_shaped": 107605,
    "roles": {
-    "start": 107446,
-    "other": 127,
-    "runover": 464
+    "start": 107553,
+    "other": 142,
+    "runover": 467
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 432,
-   "printed_page_known": 107058,
+   "printed_page_known": 107183,
    "line_source": {
-    "model": 107427,
-    "model-only": 245,
+    "model": 107537,
+    "model-only": 260,
     "tesseract": 294
    },
-   "duplicates": 22,
+   "duplicates": 27,
    "name_fragment": 424,
    "ditto": {
     "carried": 55,
@@ -2387,20 +2395,20 @@
    "usable_per_stated_name": null
   },
   "newyorkdirectory00dunc": {
-   "rows": 7151,
-   "usable": 6338,
-   "named": 7086,
-   "entry_shaped": 6606,
+   "rows": 7152,
+   "usable": 6339,
+   "named": 7087,
+   "entry_shaped": 6607,
    "roles": {
-    "start": 6954,
+    "start": 6955,
     "runover": 168,
     "other": 29
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 202,
-   "printed_page_known": 7127,
+   "printed_page_known": 7128,
    "line_source": {
-    "model": 7143,
+    "model": 7144,
     "tesseract": 6,
     "model-only": 2
    },
@@ -2417,7 +2425,7 @@
     "lead_marks": {},
     "marked_lines": 0,
     "district_eastern": 0,
-    "address_slots": 3681,
+    "address_slots": 3682,
     "address_no_antecedent": 390
    },
    "stated_name_count": null,
@@ -2461,40 +2469,41 @@
    "usable_per_stated_name": null
   },
   "trowsgenerald192223p1trow": {
-   "rows": 461180,
-   "usable": 352035,
-   "named": 450033,
-   "entry_shaped": 382452,
+   "rows": 464946,
+   "usable": 355928,
+   "named": 453799,
+   "entry_shaped": 386158,
    "roles": {
-    "start": 417588,
-    "runover": 10614,
-    "other": 32978
+    "start": 422351,
+    "runover": 9324,
+    "other": 33271
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 460593,
+   "printed_page_known": 464359,
    "line_source": {
-    "tesseract": 6994,
-    "model": 449574,
-    "model-only": 1671,
-    "bleed": 2941
+    "tesseract": 7007,
+    "model": 453272,
+    "model-only": 1719,
+    "bleed": 2948
    },
-   "duplicates": 297,
-   "name_fragment": 9924,
+   "duplicates": 314,
+   "name_fragment": 9926,
    "ditto": {
-    "carried": 340164,
+    "carried": 343429,
     "orphan": 0,
-    "disputed": 30387,
-    "mark_lost": 12102,
+    "disputed": 30810,
+    "mark_lost": 12151,
     "glued_marks": [
      "\"",
+     "\u2014",
      "*",
      "-",
      "'",
      "\"-"
     ],
-    "headers_placed": 3822,
-    "from_header": 140454,
+    "headers_placed": 3855,
+    "from_header": 143413,
     "lead_marks": {
      "0": 20,
      ")": 20,
@@ -2510,31 +2519,31 @@
    "usable_per_stated_name": null
   },
   "trowsgenerald192223p2trow": {
-   "rows": 510001,
-   "usable": 389459,
-   "named": 498296,
-   "entry_shaped": 427055,
+   "rows": 515698,
+   "usable": 395398,
+   "named": 503985,
+   "entry_shaped": 432704,
    "roles": {
-    "start": 458934,
-    "runover": 9577,
-    "other": 41490
+    "start": 465684,
+    "runover": 8304,
+    "other": 41710
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 503231,
+   "printed_page_known": 508902,
    "line_source": {
-    "model": 489831,
-    "tesseract": 8476,
-    "model-only": 8043,
-    "bleed": 3651
+    "model": 495157,
+    "tesseract": 8502,
+    "model-only": 8362,
+    "bleed": 3677
    },
-   "duplicates": 282,
-   "name_fragment": 8579,
+   "duplicates": 293,
+   "name_fragment": 8588,
    "ditto": {
-    "carried": 375999,
+    "carried": 381034,
     "orphan": 0,
-    "disputed": 42232,
-    "mark_lost": 12951,
+    "disputed": 43373,
+    "mark_lost": 13055,
     "glued_marks": [
      "\"",
      "\"-",
@@ -2543,15 +2552,15 @@
      "*",
      "\u2014"
     ],
-    "headers_placed": 3667,
-    "from_header": 132436,
+    "headers_placed": 3683,
+    "from_header": 134146,
     "lead_marks": {
      ")": 38,
      "\u2022": 4
     },
     "marked_lines": 47,
     "district_eastern": 0,
-    "address_slots": 4,
+    "address_slots": 5,
     "address_no_antecedent": 10
    },
    "stated_name_count": null,
@@ -2559,44 +2568,44 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1910p1trow": {
-   "rows": 171418,
-   "usable": 162464,
-   "named": 170600,
-   "entry_shaped": 168354,
+   "rows": 173866,
+   "usable": 167582,
+   "named": 173025,
+   "entry_shaped": 170786,
    "roles": {
-    "start": 164334,
-    "other": 864,
-    "runover": 6220
+    "start": 169526,
+    "other": 905,
+    "runover": 3435
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 169797,
+   "printed_page_known": 172231,
    "line_source": {
-    "model": 170372,
+    "model": 172810,
     "tesseract": 607,
-    "model-only": 387,
-    "bleed": 52
+    "model-only": 395,
+    "bleed": 54
    },
-   "duplicates": 47,
-   "name_fragment": 389,
+   "duplicates": 52,
+   "name_fragment": 387,
    "ditto": {
-    "carried": 134938,
+    "carried": 137270,
     "orphan": 1,
-    "disputed": 2476,
-    "mark_lost": 236,
+    "disputed": 2598,
+    "mark_lost": 246,
     "glued_marks": [
      "\"",
      "\u2014",
      "'",
      "-"
     ],
-    "headers_placed": 1663,
-    "from_header": 49416,
+    "headers_placed": 1668,
+    "from_header": 50967,
     "lead_marks": {
      "*": 38,
-     "\u2022": 2
+     "\u2022": 5
     },
-    "marked_lines": 59,
+    "marked_lines": 62,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -2606,31 +2615,31 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1910p2trow": {
-   "rows": 179688,
-   "usable": 171765,
-   "named": 178828,
-   "entry_shaped": 176359,
+   "rows": 182754,
+   "usable": 175975,
+   "named": 181877,
+   "entry_shaped": 179425,
    "roles": {
-    "start": 173909,
-    "other": 1059,
-    "runover": 4720
+    "start": 178145,
+    "other": 1166,
+    "runover": 3443
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 146454,
+   "printed_page_known": 149060,
    "line_source": {
-    "model": 177850,
-    "tesseract": 809,
-    "model-only": 1028,
+    "model": 180866,
+    "tesseract": 818,
+    "model-only": 1069,
     "bleed": 1
    },
-   "duplicates": 45,
-   "name_fragment": 516,
+   "duplicates": 50,
+   "name_fragment": 511,
    "ditto": {
-    "carried": 142381,
+    "carried": 145285,
     "orphan": 47,
-    "disputed": 7539,
-    "mark_lost": 434,
+    "disputed": 8349,
+    "mark_lost": 453,
     "glued_marks": [
      "\"",
      "\u2014",
@@ -2638,13 +2647,13 @@
      "'",
      "\u2019"
     ],
-    "headers_placed": 1643,
-    "from_header": 52770,
+    "headers_placed": 1649,
+    "from_header": 54561,
     "lead_marks": {
      "*": 37,
-     "\u2022": 4
+     "\u2022": 6
     },
-    "marked_lines": 65,
+    "marked_lines": 68,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -2654,30 +2663,30 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1910p3trow": {
-   "rows": 151685,
-   "usable": 144857,
-   "named": 150923,
-   "entry_shaped": 148837,
+   "rows": 154043,
+   "usable": 147766,
+   "named": 153274,
+   "entry_shaped": 151198,
    "roles": {
-    "runover": 3522,
-    "start": 146599,
-    "other": 1564
+    "runover": 2805,
+    "start": 149542,
+    "other": 1696
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 150255,
+   "printed_page_known": 152605,
    "line_source": {
-    "model": 150093,
-    "model-only": 714,
+    "model": 152339,
+    "model-only": 826,
     "tesseract": 878
    },
-   "duplicates": 72,
-   "name_fragment": 372,
+   "duplicates": 82,
+   "name_fragment": 367,
    "ditto": {
-    "carried": 117118,
+    "carried": 119276,
     "orphan": 0,
-    "disputed": 5100,
-    "mark_lost": 421,
+    "disputed": 4719,
+    "mark_lost": 427,
     "glued_marks": [
      "\u2014",
      "\"",
@@ -2686,8 +2695,8 @@
      "\"\"",
      "\u201c"
     ],
-    "headers_placed": 1459,
-    "from_header": 44994,
+    "headers_placed": 1469,
+    "from_header": 46436,
     "lead_marks": {
      "*": 39,
      "\u2022": 2
@@ -2702,31 +2711,31 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1911p1trow": {
-   "rows": 186583,
-   "usable": 180962,
-   "named": 185455,
-   "entry_shaped": 182031,
+   "rows": 188045,
+   "usable": 182591,
+   "named": 186886,
+   "entry_shaped": 183493,
    "roles": {
-    "start": 183816,
-    "runover": 1614,
-    "other": 1153
+    "start": 185546,
+    "runover": 1343,
+    "other": 1156
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 186379,
+   "printed_page_known": 187841,
    "line_source": {
-    "model": 184886,
-    "model-only": 661,
-    "tesseract": 878,
-    "bleed": 158
+    "model": 186323,
+    "model-only": 681,
+    "tesseract": 882,
+    "bleed": 159
    },
-   "duplicates": 57,
-   "name_fragment": 704,
+   "duplicates": 68,
+   "name_fragment": 703,
    "ditto": {
-    "carried": 146054,
+    "carried": 147426,
     "orphan": 0,
-    "disputed": 3639,
-    "mark_lost": 227,
+    "disputed": 3514,
+    "mark_lost": 240,
     "glued_marks": [
      "\u2014",
      "\"",
@@ -2734,8 +2743,8 @@
      "-",
      "'"
     ],
-    "headers_placed": 1917,
-    "from_header": 55739,
+    "headers_placed": 1926,
+    "from_header": 56768,
     "lead_marks": {
      "*": 44,
      "\u2022": 3
@@ -2750,38 +2759,39 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1911p2trow": {
-   "rows": 193351,
-   "usable": 187788,
-   "named": 192275,
-   "entry_shaped": 188970,
+   "rows": 196183,
+   "usable": 191033,
+   "named": 195082,
+   "entry_shaped": 191812,
    "roles": {
-    "start": 190567,
-    "other": 1076,
-    "runover": 1708
+    "start": 193874,
+    "other": 966,
+    "runover": 1343
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 191103,
+   "printed_page_known": 193907,
    "line_source": {
-    "model": 191734,
-    "model-only": 666,
-    "tesseract": 951
+    "model": 194553,
+    "model-only": 676,
+    "tesseract": 954
    },
-   "duplicates": 64,
-   "name_fragment": 569,
+   "duplicates": 80,
+   "name_fragment": 570,
    "ditto": {
-    "carried": 151425,
+    "carried": 154115,
     "orphan": 0,
-    "disputed": 5441,
-    "mark_lost": 270,
+    "disputed": 6969,
+    "mark_lost": 280,
     "glued_marks": [
      "\"",
      "\u2014",
      "'",
-     "-"
+     "-",
+     "**"
     ],
-    "headers_placed": 1899,
-    "from_header": 55253,
+    "headers_placed": 1905,
+    "from_header": 56562,
     "lead_marks": {
      "*": 36,
      "\u2022": 2
@@ -2796,30 +2806,30 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1911p3trow": {
-   "rows": 139756,
-   "usable": 133934,
-   "named": 138993,
-   "entry_shaped": 136648,
+   "rows": 141316,
+   "usable": 136533,
+   "named": 140532,
+   "entry_shaped": 138234,
    "roles": {
-    "runover": 3085,
-    "start": 135878,
-    "other": 793
+    "runover": 2001,
+    "start": 138540,
+    "other": 775
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 106101,
+   "printed_page_known": 107272,
    "line_source": {
-    "model": 138648,
-    "model-only": 547,
+    "model": 140200,
+    "model-only": 555,
     "tesseract": 561
    },
-   "duplicates": 44,
-   "name_fragment": 292,
+   "duplicates": 60,
+   "name_fragment": 291,
    "ditto": {
-    "carried": 108458,
+    "carried": 109936,
     "orphan": 0,
-    "disputed": 2042,
-    "mark_lost": 157,
+    "disputed": 1850,
+    "mark_lost": 161,
     "glued_marks": [
      "\"",
      "\u2014",
@@ -2827,8 +2837,8 @@
      "-",
      "\u201c"
     ],
-    "headers_placed": 1453,
-    "from_header": 43931,
+    "headers_placed": 1460,
+    "from_header": 45102,
     "lead_marks": {
      "*": 33,
      "\u2022": 1
@@ -2843,31 +2853,31 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1912p1trow": {
-   "rows": 197048,
-   "usable": 186860,
-   "named": 195529,
-   "entry_shaped": 192247,
+   "rows": 198183,
+   "usable": 190122,
+   "named": 196647,
+   "entry_shaped": 193365,
    "roles": {
-    "start": 189407,
-    "other": 1779,
-    "runover": 5862
+    "start": 192727,
+    "other": 1793,
+    "runover": 3663
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 148194,
+   "printed_page_known": 148899,
    "line_source": {
-    "model": 194541,
-    "tesseract": 1496,
-    "model-only": 850,
+    "model": 195604,
+    "tesseract": 1507,
+    "model-only": 911,
     "bleed": 161
    },
-   "duplicates": 70,
-   "name_fragment": 731,
+   "duplicates": 78,
+   "name_fragment": 728,
    "ditto": {
-    "carried": 153812,
+    "carried": 154757,
     "orphan": 0,
-    "disputed": 4979,
-    "mark_lost": 242,
+    "disputed": 4405,
+    "mark_lost": 249,
     "glued_marks": [
      "\u2014",
      "\"",
@@ -2875,8 +2885,8 @@
      "-",
      "'"
     ],
-    "headers_placed": 1996,
-    "from_header": 58401,
+    "headers_placed": 1998,
+    "from_header": 58945,
     "lead_marks": {
      "*": 33,
      "\u2022": 5
@@ -2888,34 +2898,34 @@
    },
    "stated_name_count": 550000,
    "stated_approximate": true,
-   "usable_per_stated_name": 0.34
+   "usable_per_stated_name": 0.346
   },
   "trowsgeneraldir1912p2trow": {
-   "rows": 195874,
-   "usable": 187168,
-   "named": 194371,
-   "entry_shaped": 191269,
+   "rows": 196984,
+   "usable": 189737,
+   "named": 195463,
+   "entry_shaped": 192379,
    "roles": {
-    "start": 189630,
-    "other": 1671,
-    "runover": 4573
+    "start": 192276,
+    "other": 1666,
+    "runover": 3042
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 163549,
+   "printed_page_known": 164436,
    "line_source": {
-    "model": 193202,
-    "model-only": 1324,
-    "tesseract": 1188,
+    "model": 194241,
+    "model-only": 1394,
+    "tesseract": 1189,
     "bleed": 160
    },
-   "duplicates": 48,
-   "name_fragment": 543,
+   "duplicates": 52,
+   "name_fragment": 541,
    "ditto": {
-    "carried": 153420,
+    "carried": 154353,
     "orphan": 0,
-    "disputed": 8037,
-    "mark_lost": 541,
+    "disputed": 8211,
+    "mark_lost": 571,
     "glued_marks": [
      "\"",
      "\u2014",
@@ -2923,13 +2933,13 @@
      "'",
      "\u201c"
     ],
-    "headers_placed": 1993,
-    "from_header": 57334,
+    "headers_placed": 2009,
+    "from_header": 57947,
     "lead_marks": {
      "*": 39,
-     "\u2022": 3
+     "\u2022": 5
     },
-    "marked_lines": 55,
+    "marked_lines": 57,
     "district_eastern": 0,
     "address_slots": 0,
     "address_no_antecedent": 0
@@ -2939,31 +2949,31 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1912p3trow": {
-   "rows": 142196,
-   "usable": 130722,
-   "named": 141105,
-   "entry_shaped": 138903,
+   "rows": 142963,
+   "usable": 134701,
+   "named": 141863,
+   "entry_shaped": 139671,
    "roles": {
-    "start": 132496,
-    "other": 1617,
-    "runover": 8083
+    "start": 136518,
+    "other": 1634,
+    "runover": 4811
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 109387,
+   "printed_page_known": 109962,
    "line_source": {
-    "model-only": 1501,
-    "model": 140043,
-    "tesseract": 602,
-    "bleed": 50
+    "model-only": 1596,
+    "model": 140713,
+    "tesseract": 603,
+    "bleed": 51
    },
-   "duplicates": 29,
-   "name_fragment": 383,
+   "duplicates": 33,
+   "name_fragment": 379,
    "ditto": {
-    "carried": 109603,
+    "carried": 110212,
     "orphan": 0,
-    "disputed": 4445,
-    "mark_lost": 728,
+    "disputed": 3758,
+    "mark_lost": 770,
     "glued_marks": [
      "\u2014",
      "\"",
@@ -2971,8 +2981,8 @@
      "'",
      "\u201c"
     ],
-    "headers_placed": 1529,
-    "from_header": 44776,
+    "headers_placed": 1532,
+    "from_header": 45170,
     "lead_marks": {
      "*": 32,
      "\u2022": 3
@@ -2987,31 +2997,31 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldir1914p2trow": {
-   "rows": 187462,
-   "usable": 175203,
-   "named": 185988,
-   "entry_shaped": 182604,
+   "rows": 207766,
+   "usable": 196805,
+   "named": 206277,
+   "entry_shaped": 202889,
    "roles": {
-    "runover": 1995,
-    "start": 177905,
-    "other": 7562
+    "other": 6267,
+    "start": 199542,
+    "runover": 1957
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 96309,
+   "printed_page_known": 106487,
    "line_source": {
-    "model": 168513,
-    "tesseract": 5591,
-    "model-only": 13153,
-    "bleed": 205
+    "model": 187069,
+    "tesseract": 5880,
+    "model-only": 14591,
+    "bleed": 226
    },
-   "duplicates": 28,
-   "name_fragment": 924,
+   "duplicates": 31,
+   "name_fragment": 913,
    "ditto": {
-    "carried": 149647,
+    "carried": 165833,
     "orphan": 0,
-    "disputed": 9868,
-    "mark_lost": 2959,
+    "disputed": 9168,
+    "mark_lost": 3142,
     "glued_marks": [
      "\"",
      "\u2014",
@@ -3022,8 +3032,8 @@
      "---",
      "\"\""
     ],
-    "headers_placed": 1955,
-    "from_header": 56872,
+    "headers_placed": 1996,
+    "from_header": 63333,
     "lead_marks": {
      "*": 20,
      "\u2022": 15
@@ -3038,31 +3048,31 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldire19142trow": {
-   "rows": 175880,
-   "usable": 158286,
-   "named": 174336,
-   "entry_shaped": 169299,
+   "rows": 197381,
+   "usable": 181079,
+   "named": 195862,
+   "entry_shaped": 190843,
    "roles": {
-    "other": 10944,
-    "start": 161753,
-    "runover": 3183
+    "other": 9615,
+    "start": 184527,
+    "runover": 3239
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
    "printed_page_known": 0,
    "line_source": {
-    "model": 158924,
-    "model-only": 9626,
-    "tesseract": 6698,
-    "bleed": 632
+    "model": 179638,
+    "model-only": 9944,
+    "tesseract": 7075,
+    "bleed": 724
    },
-   "duplicates": 267,
-   "name_fragment": 2375,
+   "duplicates": 389,
+   "name_fragment": 2080,
    "ditto": {
-    "carried": 135818,
+    "carried": 152956,
     "orphan": 0,
-    "disputed": 7099,
-    "mark_lost": 2593,
+    "disputed": 8524,
+    "mark_lost": 2833,
     "glued_marks": [
      "\"",
      "\u2014",
@@ -3071,17 +3081,18 @@
      "-\u2014",
      "-",
      "\u2014\u2014",
+     "\u201c\u2014",
      "\u2018",
-     "--",
-     "\u2014-"
+     "\u2014-",
+     "--"
     ],
-    "headers_placed": 1854,
-    "from_header": 49602,
+    "headers_placed": 1891,
+    "from_header": 55641,
     "lead_marks": {
-     "*": 26,
+     "*": 27,
      "\u2022": 1
     },
-    "marked_lines": 30,
+    "marked_lines": 31,
     "district_eastern": 0,
     "address_slots": 1,
     "address_no_antecedent": 0
@@ -3091,31 +3102,31 @@
    "usable_per_stated_name": null
   },
   "trowsgeneraldire1915trow": {
-   "rows": 1036242,
-   "usable": 867885,
-   "named": 1026560,
-   "entry_shaped": 951711,
+   "rows": 1041950,
+   "usable": 872601,
+   "named": 1032348,
+   "entry_shaped": 957425,
    "roles": {
-    "start": 936452,
-    "runover": 3473,
-    "other": 96317
+    "start": 941400,
+    "runover": 3048,
+    "other": 97502
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 1035626,
+   "printed_page_known": 1041329,
    "line_source": {
-    "model": 1008931,
-    "tesseract": 11535,
-    "model-only": 3748,
-    "bleed": 12028
+    "model": 1014528,
+    "tesseract": 11543,
+    "model-only": 3814,
+    "bleed": 12065
    },
-   "duplicates": 930,
-   "name_fragment": 8177,
+   "duplicates": 1009,
+   "name_fragment": 8150,
    "ditto": {
-    "carried": 781941,
+    "carried": 786919,
     "orphan": 0,
-    "disputed": 56466,
-    "mark_lost": 71919,
+    "disputed": 59107,
+    "mark_lost": 72049,
     "glued_marks": [
      "\"",
      "\u201d",
@@ -3123,10 +3134,11 @@
      "\u201c",
      "\"-",
      "'",
-     "*"
+     "*",
+     "\u00ab"
     ],
-    "headers_placed": 9558,
-    "from_header": 306664,
+    "headers_placed": 9654,
+    "from_header": 312740,
     "lead_marks": {
      "\u2022": 18
     },
@@ -3137,34 +3149,34 @@
    },
    "stated_name_count": 1104676,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.786
+   "usable_per_stated_name": 0.79
   },
   "trowsgeneraldire1917trow": {
-   "rows": 1104225,
-   "usable": 940572,
-   "named": 1097563,
-   "entry_shaped": 1020946,
+   "rows": 1112536,
+   "usable": 946275,
+   "named": 1105875,
+   "entry_shaped": 1029163,
    "roles": {
-    "start": 1012576,
-    "runover": 4003,
-    "other": 87646
+    "start": 1018378,
+    "runover": 3675,
+    "other": 90483
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 1437,
-   "printed_page_known": 1104225,
+   "printed_page_known": 1112536,
    "line_source": {
-    "model": 1077954,
-    "tesseract": 12368,
-    "model-only": 3853,
-    "bleed": 10050
+    "model": 1086122,
+    "tesseract": 12372,
+    "model-only": 3935,
+    "bleed": 10107
    },
-   "duplicates": 800,
-   "name_fragment": 7777,
+   "duplicates": 905,
+   "name_fragment": 7753,
    "ditto": {
-    "carried": 845153,
+    "carried": 852256,
     "orphan": 0,
-    "disputed": 66934,
-    "mark_lost": 88501,
+    "disputed": 70334,
+    "mark_lost": 89091,
     "glued_marks": [
      "\"",
      "-",
@@ -3176,8 +3188,8 @@
      "*",
      "''"
     ],
-    "headers_placed": 9296,
-    "from_header": 337880,
+    "headers_placed": 9396,
+    "from_header": 344846,
     "lead_marks": {
      "\u2022": 12
     },
@@ -3191,25 +3203,25 @@
    "usable_per_stated_name": null
   },
   "trowsnewyorkcity1857trow": {
-   "rows": 142115,
-   "usable": 140957,
-   "named": 141979,
-   "entry_shaped": 141403,
+   "rows": 142271,
+   "usable": 141088,
+   "named": 142135,
+   "entry_shaped": 141559,
    "roles": {
-    "start": 141522,
+    "start": 141654,
     "runover": 498,
-    "other": 95
+    "other": 119
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 140696,
+   "printed_page_known": 140847,
    "line_source": {
-    "model": 141820,
+    "model": 141973,
     "tesseract": 139,
-    "model-only": 117
+    "model-only": 120
    },
-   "duplicates": 25,
-   "name_fragment": 1237,
+   "duplicates": 31,
+   "name_fragment": 1238,
    "ditto": {
     "carried": 75,
     "orphan": 0,
@@ -3228,27 +3240,27 @@
    },
    "stated_name_count": 150000,
    "stated_approximate": true,
-   "usable_per_stated_name": 0.94
+   "usable_per_stated_name": 0.941
   },
   "trowsnewyorkcity1859trow": {
-   "rows": 146056,
-   "usable": 145209,
-   "named": 145901,
-   "entry_shaped": 145479,
+   "rows": 146202,
+   "usable": 145341,
+   "named": 146047,
+   "entry_shaped": 145625,
    "roles": {
-    "start": 145693,
-    "other": 91,
+    "start": 145826,
+    "other": 104,
     "runover": 272
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 144723,
+   "printed_page_known": 145177,
    "line_source": {
-    "model": 145883,
+    "model": 146028,
     "tesseract": 121,
-    "model-only": 52
+    "model-only": 53
    },
-   "duplicates": 23,
+   "duplicates": 27,
    "name_fragment": 159,
    "ditto": {
     "carried": 35,
@@ -3268,28 +3280,28 @@
    },
    "stated_name_count": 147325,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.986
+   "usable_per_stated_name": 0.987
   },
   "trowsnewyorkcity1863trow": {
-   "rows": 154031,
-   "usable": 151244,
-   "named": 153270,
-   "entry_shaped": 151896,
+   "rows": 154257,
+   "usable": 151575,
+   "named": 153490,
+   "entry_shaped": 152115,
    "roles": {
-    "start": 152733,
-    "runover": 915,
-    "other": 383
+    "start": 153069,
+    "runover": 784,
+    "other": 404
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 152081,
+   "printed_page_known": 151972,
    "line_source": {
-    "model": 153769,
-    "model-only": 36,
+    "model": 153993,
+    "model-only": 37,
     "tesseract": 102
    },
-   "duplicates": 13,
-   "name_fragment": 279,
+   "duplicates": 16,
+   "name_fragment": 248,
    "ditto": {
     "carried": 150,
     "orphan": 0,
@@ -3311,31 +3323,31 @@
    },
    "stated_name_count": 153186,
    "stated_approximate": false,
-   "usable_per_stated_name": 0.987
+   "usable_per_stated_name": 0.989
   },
   "trowsnewyorkcity1876trow": {
-   "rows": 244156,
-   "usable": 239380,
-   "named": 243535,
-   "entry_shaped": 240627,
+   "rows": 244515,
+   "usable": 239669,
+   "named": 243890,
+   "entry_shaped": 240876,
    "roles": {
-    "start": 242142,
-    "other": 1286,
-    "runover": 728
+    "start": 242441,
+    "other": 1441,
+    "runover": 633
    },
    "non_entry_page_rows": 0,
    "eval_holdout_rows": 0,
-   "printed_page_known": 223813,
+   "printed_page_known": 224137,
    "line_source": {
-    "model": 242688,
-    "model-only": 613,
-    "tesseract": 287,
+    "model": 243031,
+    "model-only": 628,
+    "tesseract": 288,
     "bleed": 42
    },
-   "duplicates": 12,
-   "name_fragment": 295,
+   "duplicates": 13,
+   "name_fragment": 299,
    "ditto": {
-    "carried": 16,
+    "carried": 18,
     "orphan": 0,
     "disputed": 0,
     "mark_lost": 6,
@@ -3343,7 +3355,7 @@
      "\u2014",
      "\""
     ],
-    "headers_placed": 357,
+    "headers_placed": 358,
     "from_header": 0,
     "lead_marks": {
      "*": 244,

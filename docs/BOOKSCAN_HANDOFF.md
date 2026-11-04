@@ -194,6 +194,29 @@ data/records_books_first_clean`, and the reocr tier `--root data/volumes_reocr_v
 `data/volumes_reocr` assembled (`data/records/4b-100k+guard`; check its summary before
 overwriting). Then the release's export rule must read the new roots.
 
+**Update 2026-11-04: round 13 is back and assembled; the paragraph above is done.**
+`~/Downloads/to_josh_20261104` (sha256 `0d640062...5e1e61e1fa` matches; NYU job 21824354, 15 tasks,
+8.2 GPU-h on L40S at 9.77 rows/s against round 12's 12.31, cause unknown; logs in
+`data/nyu_logs/round13/`). NYU's tar says `data/volumes_delta/`: the 15 predictions went into
+`data/volumes_delta_round13/delta/`, every sha1, chunk and count matching (287,920). The three merges
+reused 15,472,635 predictions (exactly the staged `reused`) and took 303,571 lines from the delta
+(some prompts recur). Guarded, assembled to the three new roots, and then re-assembled after
+PIPELINE #38 (a second column margin seeded by surname lines). Usable, round 12 -> round 13 ->
+round 13 with #38:
+
+| tier | round 12 | round 13 | + #38 |
+|---|---|---|---|
+| damaged (`_v6`) | 4,284,248 | 4,357,546 | 4,439,308 |
+| first + clean + BPL14 (`first_clean_v2`) | 9,131,916 | 9,228,283 | 9,282,947 |
+| reocr (`reocr_v2`) | 442,071 | 451,946 | 454,510 |
+
+Round 13's own gains are #35 batch 3's: Trow 1914 p1/p2/p3 +12-14% usable each, Longworth
+1798-1840 +4-6% (1826 0.897 -> 0.921, 1813 0.897 -> 0.932 per printed name). Doggett 1845 and 1876BPL
+hold at 0.982. The only volume down was Trow 1909 p1 (-187), which is how #38 was found. `_v5` and
+`data/volumes_delta_damaged` are deleted. NOT YET DONE: browse.db and the finder's Parquet (the
+first/clean tier now goes into browse.db too, `browse/sources.toml`, ~17 GB more; the build was
+stopped at 15 GB free, Time Machine snapshots holding the rest), and the release export's roots.
+
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an
 empty scratch directory first to look at the paths before anything goes into the repo.

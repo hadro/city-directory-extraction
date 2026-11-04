@@ -72,6 +72,9 @@ BPL_LABELS = REPO / "data" / "entry_labels_1906BPL.jsonl"
 # `other`. A column gutter is ~500 per-mille away, so -40 is nowhere near admitting a neighbour.
 START_MAX, RUNOVER_MAX, OUTDENT = 18, 60, -40
 MODE_BIN = 0.01          # page-width bins for the modal left edge; see layout_roles
+# A line that opens on a surname ("Carrington Augustus B", "Carr-Lourey Glass Co"): it starts at
+# the text margin. Not "E Smith" (a marker), not a ditto dash, not a lowercase tail.
+NAME_LED = re.compile(r"^[A-Z][A-Za-z'’-]*[a-z],? [A-Z&]")
 MATCH_MIN = 0.6                     # fuzzy ratio for a gold row to claim an OCR line (or pair)
 
 
@@ -117,9 +120,10 @@ def _fit(pts):
     return mx - b * my, b
 
 
-def layout_roles(lines: list) -> list:
+def layout_roles(lines: list, names: bool = True) -> list:
     """Role of each line from its box alone: start | runover | other | thin (too few lines on the
-    leaf or in the column to fit a margin)."""
+    leaf or in the column to fit a margin). `names=False` skips the surname seed (below), for
+    results/role_seed.py's before/after."""
     roles = ["thin"] * len(lines)
     by_leaf = defaultdict(list)
     for i, ln in enumerate(lines):
@@ -160,16 +164,38 @@ def layout_roles(lines: list) -> list:
             xbins = Counter(int(x[i] / MODE_BIN) for i in grp)
             seed = (max(xbins, key=lambda b: (xbins[b] + xbins.get(b - 1, 0) + xbins.get(b + 1, 0),
                                               -b)) + 0.5) * MODE_BIN
-            keep = [(y[i], x[i]) for i in grp if abs(x[i] - seed) <= 0.012]
-            a, b = _fit(keep or [(y[i], x[i]) for i in grp])
-            for _ in range(2):
-                near = [(y[i], x[i]) for i in grp if abs(x[i] - (a + b * y[i])) <= 0.012]
-                if len(near) >= 3:
-                    a, b = _fit(near)
+            # But the mode is not always the only margin. Trow 1909 p1 leaf 521: 55 of a
+            # column's ~100 boxes start ~45 px into the gutter (the page prints every dash and
+            # surname at one x), the mode took them, and the 45 at the ink -- Carrington, Carroll
+            # among them -- came out `runover`. And a ditto-heavy BPL column boxes some `"` lines
+            # from the mark and some from the given name ~45 px right, both entries. So the
+            # name-led lines (surnames, and given names whose mark the OCR lost) seed a SECOND
+            # margin where their mode is right of the column's by no more than a hanging
+            # allowance, and a line at either margin is a `start`. It only adds starts: moving
+            # the one margin instead pushed surnames left of it past OUTDENT into `other`.
+            fits = [seed]
+            nbins = Counter(int(x[i] / MODE_BIN) for i in grp
+                            if names and NAME_LED.match(lines[i].get("raw_line") or ""))
+            if sum(nbins.values()) >= 3:
+                nseed = (max(nbins, key=lambda b: (nbins[b] + nbins.get(b - 1, 0)
+                                                   + nbins.get(b + 1, 0), -b)) + 0.5) * MODE_BIN
+                if 0 < nseed - seed <= -OUTDENT / 1000:
+                    fits.append(nseed)
+            ds = []
+            for s in fits:
+                keep = [(y[i], x[i]) for i in grp if abs(x[i] - s) <= 0.012]
+                a, b = _fit(keep or [(y[i], x[i]) for i in grp])
+                for _ in range(2):
+                    near = [(y[i], x[i]) for i in grp if abs(x[i] - (a + b * y[i])) <= 0.012]
+                    if len(near) >= 3:
+                        a, b = _fit(near)
+                ds.append({i: (x[i] - (a + b * y[i])) * 1000 for i in grp})
             for i in grp:
-                d = (x[i] - (a + b * y[i])) * 1000
-                roles[i] = ("start" if OUTDENT <= d <= START_MAX else
-                            "runover" if START_MAX < d <= RUNOVER_MAX else "other")
+                if any(OUTDENT <= d[i] <= START_MAX for d in ds):
+                    roles[i] = "start"
+                else:
+                    d = ds[-1][i]
+                    roles[i] = "runover" if START_MAX < d <= RUNOVER_MAX else "other"
     return roles
 
 
@@ -780,6 +806,28 @@ def _self_test() -> int:
     assert roles[:45].count("start") == 45, f"the margin entries: {Counter(roles[:45])}"
     assert roles[45:59].count("start") == 14, f"the hanging mark: {Counter(roles[45:59])}"
     assert roles[59:] == ["runover", "runover"], roles[59:]
+    # BOXES LEFT OF THEIR INK must not capture the margin either. Trow 1909 p1 leaf 521, third
+    # column: 55 boxes at x ~1459 (into the gutter), 45 at the ink ~1508, 8 of those surname-led.
+    # The mode alone called the 45 `runover`; the surname lines seed a second margin at the ink.
+    bleed = [(1459 + k % 9, '" Jas clerk') for k in range(55)]
+    bleed += [(1507 + k % 6, "Carroll Alex plumber" if k < 8 else '" Wm T h 121 Madison av')
+              for k in range(45)]
+    lines = [{"raw_line": t, "context": {"leaf": 3, "page_size": [2300, 3600],
+                                         "bbox": [x0, 300 + 25 * k, x0 + 600, 322 + 25 * k]}}
+             for k, (x0, t) in enumerate(bleed)]
+    assert Counter(layout_roles(lines)) == {"start": 100}, Counter(layout_roles(lines))
+    assert Counter(layout_roles(lines, names=False))["runover"] == 45   # the defect it fixes
+    # ...and a second margin must not take starts away from the first. 1908BPL: a ditto-heavy
+    # column's mode is its `"` boxes, surnames sit ~45 px left, lost-mark `Chas J` lines ~45
+    # right and seed there. Moving the one margin to them put Mitko 90 px left of it: `other`.
+    bpl = ([(215 + k % 5, '" Chas J clk h 173') for k in range(40)] +
+           [(168 + k % 4, "Mitko Jos jeweler") for k in range(5)] +
+           [(262 + k % 4, "Chas J clk h 173") for k in range(8)])
+    lines = [{"raw_line": t, "context": {"leaf": 4, "page_size": [2000, 3000],
+                                         "bbox": [x0, 300 + 25 * k, x0 + 600, 322 + 25 * k]}}
+             for k, (x0, t) in enumerate(bpl)]
+    roles = layout_roles(lines)
+    assert roles[40:45] == ["start"] * 5, roles[40:45]
     # align: a gold entry typed as one row matches a start + runover pair
     rows = [({"raw_line": t}, {}) for t in
             ["Holmes James M. fish, 42 Water, N. V. bh. Wash-", "ington av. n. Lafayette av",

@@ -213,9 +213,13 @@ round 13 with #38:
 Round 13's own gains are #35 batch 3's: Trow 1914 p1/p2/p3 +12-14% usable each, Longworth
 1798-1840 +4-6% (1826 0.897 -> 0.921, 1813 0.897 -> 0.932 per printed name). Doggett 1845 and 1876BPL
 hold at 0.982. The only volume down was Trow 1909 p1 (-187), which is how #38 was found. `_v5` and
-`data/volumes_delta_damaged` are deleted. NOT YET DONE: browse.db and the finder's Parquet (the
-first/clean tier now goes into browse.db too, `browse/sources.toml`, ~17 GB more; the build was
-stopped at 15 GB free, Time Machine snapshots holding the rest), and the release export's roots.
+`data/volumes_delta_damaged` are deleted, and so are the three stagings round 13 replaced
+(`data/volumes_books_damaged_v4`, `data/volumes_books_first_clean`, `data/volumes_reocr`, deleted
+by hadro): the next delta's `--old` is the three new roots. browse.db now holds the first/clean
+tier too (`browse/sources.toml`): 16,087,138 rows, 25.7 GB, every root's count equal to its
+summary. The finder's Parquet: 15,497,151 rows, 547 MB, the new root kept for Doggett 1845,
+1906BPL and Mercein; searching it is now 9-14 s (PIPELINE #39, open). NOT YET DONE: the release
+export's roots.
 
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an

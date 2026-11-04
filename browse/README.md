@@ -31,6 +31,12 @@ changed, and removes the rows of files that have gone. At 0.8M rows:
 | `--rebuild` (start over; also compacts the file) | ~40–60 s |
 | `data/browse.db` | ~1.1 GB (gitignored) |
 
+At 16.09M rows (2026-11-04, all three re-OCR'd tiers and run 1): re-loading the damaged and reocr
+tiers and adding the first/clean tier's 75 files (15.27M rows in 114 files) took 54 min, and
+`data/browse.db` is 25.7 GB, ~1.6 KB a row with its indexes. Check free space with `df`, not
+Finder: the build needs the growth on disk, and Finder counts Time Machine's local snapshots as
+free (`tmutil listlocalsnapshots /`; deleted files stay pinned until those are deleted).
+
 Each file is swapped in one transaction, so the browser shows the old rows or the new ones, never
 half. A file that can't be read whole (because `assemble_records.py` is still writing it, say)
 keeps its old rows and is retried next time.
@@ -48,7 +54,8 @@ There's no file watcher. Run the build after an assemble step.
 
 ## What's in it
 
-**`sources.toml`** says which files are loaded: today `data/records/*/*.jsonl.gz`, one table,
+**`sources.toml`** says which files are loaded: today `data/records/*/*.jsonl.gz` (run 1 and the
+reocr tier), `data/records_books_damaged/` and `data/records_books_first_clean/`, one table,
 `records`. To load another folder (including one outside this repo), add a `[[sources]]` block.
 A file whose rows have a different shape goes in a table of its own. A new key in a file
 becomes a new column.

@@ -12,14 +12,16 @@ pinned: false
 
 `browse/find_address.py`'s search as a web page: every line that may give an address, OCR
 misreadings included, each with its line image from the Internet Archive. It runs on DuckDB over
-the records Parquet, with no SQLite and no full-text index. At 5.5M rows it starts in ~2 s
-(building the word list) and searches in ~1–1.5 s, against ~13 s for the SQLite script. A street
-as common as "45 Fulton" takes ~5 s.
+the records Parquet, with no SQLite and no full-text index. At 5.5M rows it started in ~2 s
+(building the word list) and searched in ~1–1.5 s, against ~13 s for the SQLite script; "45
+Fulton" took ~5 s. **At 15.5M rows (2026-11-04, all three tiers) it is too slow**: it starts in
+~6-9 s, and a search with the resident trace takes 9-14 s. PIPELINE #39 has the breakdown and is
+open.
 
 ## Running it locally
 
 ```bash
-uv run space/build_parquet.py        # data/browse.db -> data/space/records.parquet, ~35 s, ~190 MB
+uv run space/build_parquet.py        # data/browse.db -> data/space/records.parquet, ~4 min, ~550 MB
 uv run --with-requirements space/requirements.txt python space/app.py
 open http://127.0.0.1:7860
 ```
@@ -91,5 +93,6 @@ The page and the script differ only in the held-out rows. For example, the scrip
 2. **The code.** A Space repo holding `app.py`, `search.py`, `requirements.txt`, this README
    (its header is the Space config), and a copy of `browse/find_address.py`. `search.py`
    imports that copy when it's beside it.
-3. **Hardware.** The free CPU tier should do (2 vCPU, 16 GB). At the full corpus (~15.6M rows,
-   ~3× today) expect a few seconds a search there.
+3. **Hardware.** The free CPU tier (2 vCPU, 16 GB) was expected to do at a few seconds a search.
+   At the full corpus (15.5M rows) the laptop already takes 9-14 s a search, so fix PIPELINE #39
+   before choosing hardware.

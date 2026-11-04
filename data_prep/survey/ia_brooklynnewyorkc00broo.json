@@ -397,20 +397,20 @@
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
    "hocr_lines": 130778,
-   "wrap_joins": 8773,
-   "candidates": 122005,
+   "wrap_joins": 8785,
+   "candidates": 121993,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 83713,
+    "pairs": 83728,
     "mark_share": 0.4018,
     "mode": 1.75,
-    "mode_pairs": 4723,
+    "mode_pairs": 4730,
     "trough": 0.75,
     "trough_pairs": 272,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 27.4,
-    "run_over_joins": 7238
+    "start_cap": 27.48,
+    "run_over_joins": 7234
    },
    "model_runovers": 9210,
    "cont_dropped_leaves": 0,
@@ -422,28 +422,28 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 5,
-   "digit_fixes": 44,
-   "kept": 86354,
-   "keep_rate": 0.7078,
+   "marker_fixes": 7,
+   "digit_fixes": 53,
+   "kept": 92773,
+   "keep_rate": 0.7605,
    "dropped": {
-    "short": 19645,
-    "banner": 8561,
-    "allcaps": 6487,
-    "bigtype": 920,
+    "short": 19633,
+    "allcaps": 6485,
+    "banner": 2139,
+    "bigtype": 925,
     "nonascii": 31,
     "pagenum": 7
    },
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 45062,
+   "ditto_applied": 49076,
    "band": {
-    "leaves_banded": 498,
-    "head": 3086,
-    "body": 72188,
-    "foot": 6494,
-    "unbanded": 4586
+    "leaves_banded": 503,
+    "head": 3392,
+    "body": 78176,
+    "foot": 7207,
+    "unbanded": 3998
    },
    "top_ad_leaves": [
     295,
@@ -457,10 +457,10 @@
     211,
     399
    ],
-   "filters_at": "b6c44a2-dirty",
+   "filters_at": "dec98af-dirty",
    "derived": "2026-11-03"
   },
-  "words_gz_bytes": 7577406,
+  "words_gz_bytes": 7577762,
   "hocr_deleted": true,
   "elapsed_s": 44
  },
@@ -468,7 +468,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "start_leaf": 15,
   "end_leaf": 1079,
   "first_letter": "A",
@@ -632,7 +632,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "content_leaves": 540,
   "fitted_leaves": 522,
   "read_leaves": 377,
@@ -674,7 +674,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -727,7 +727,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc00broo_listing.jsonl.gz",
   "sections": [
    {
@@ -736,18 +736,18 @@
     "end_leaf": 1079
    }
   ],
-  "kept": 86231,
+  "kept": 92650,
   "dropped": 123,
-  "kept_share": 0.9986,
+  "kept_share": 0.9987,
   "kept_by_section": {
-   "listing": 86231
+   "listing": 92650
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
   "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 88,
+  "scoped_lines": 90,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    291,

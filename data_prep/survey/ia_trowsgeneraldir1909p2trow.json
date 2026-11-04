@@ -304,20 +304,20 @@
    "publisher_tag_note": null,
    "year_tag": "1909",
    "hocr_lines": 231287,
-   "wrap_joins": 44901,
-   "candidates": 186386,
+   "wrap_joins": 44920,
+   "candidates": 186367,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 194683,
+    "pairs": 194704,
     "mark_share": 0.3971,
     "mode": 2.0,
-    "mode_pairs": 9291,
+    "mode_pairs": 9288,
     "trough": 1.0,
     "trough_pairs": 922,
     "reason": "ditto marks: a dropped mark indents like a runover",
     "start_cap": 9.43,
-    "run_over_joins": 41664
+    "run_over_joins": 41672
    },
    "model_runovers": 44912,
    "cont_dropped_leaves": 0,
@@ -329,15 +329,15 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 18,
-   "digit_fixes": 199,
-   "kept": 175725,
-   "keep_rate": 0.9428,
+   "marker_fixes": 19,
+   "digit_fixes": 200,
+   "kept": 175845,
+   "keep_rate": 0.9435,
    "dropped": {
-    "allcaps": 5051,
-    "short": 4436,
-    "bigtype": 597,
-    "banner": 511,
+    "allcaps": 5041,
+    "short": 4437,
+    "bigtype": 595,
+    "banner": 383,
     "nonascii": 63,
     "pagenum": 3
    },
@@ -345,13 +345,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 89455,
+   "ditto_applied": 89548,
    "band": {
     "leaves_banded": 583,
-    "head": 3005,
-    "body": 165067,
-    "foot": 5118,
-    "unbanded": 2535
+    "head": 3017,
+    "body": 165186,
+    "foot": 5106,
+    "unbanded": 2536
    },
    "top_ad_leaves": [
     69,
@@ -360,15 +360,15 @@
     211,
     139,
     43,
-    49,
     119,
     183,
-    261
+    261,
+    689
    ],
-   "filters_at": "b6c44a2-dirty",
+   "filters_at": "dec98af-dirty",
    "derived": "2026-11-03"
   },
-  "words_gz_bytes": 15066461,
+  "words_gz_bytes": 15067081,
   "hocr_deleted": true,
   "elapsed_s": 906
  },
@@ -376,7 +376,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "start_leaf": 11,
   "end_leaf": 1191,
   "first_letter": "H",
@@ -582,7 +582,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "content_leaves": 597,
   "fitted_leaves": 514,
   "read_leaves": 141,
@@ -608,7 +608,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -657,7 +657,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1909p2trow_listing.jsonl.gz",
   "sections": [
    {
@@ -666,11 +666,11 @@
     "end_leaf": 1191
    }
   ],
-  "kept": 175424,
+  "kept": 175544,
   "dropped": 301,
   "kept_share": 0.9983,
   "kept_by_section": {
-   "listing": 175424
+   "listing": 175544
   }
  },
  "reocr": {

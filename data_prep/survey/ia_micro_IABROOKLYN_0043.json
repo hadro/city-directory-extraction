@@ -350,8 +350,8 @@
    "publisher_tag_note": "'payson' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1849/50",
    "hocr_lines": 8448,
-   "wrap_joins": 390,
-   "candidates": 8058,
+   "wrap_joins": 387,
+   "candidates": 8061,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -361,7 +361,12 @@
     "mode_pairs": 41,
     "trough": 1.0,
     "trough_pairs": 64,
-    "reason": "too few runovers to read a mode"
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "held": [
+     "mark share"
+    ],
+    "start_cap": null,
+    "run_over_joins": 42
    },
    "model_runovers": 103,
    "cont_dropped_leaves": 0,
@@ -374,13 +379,13 @@
     "leaves": 0
    },
    "marker_fixes": 1,
-   "kept": 6371,
-   "keep_rate": 0.7906,
+   "kept": 6533,
+   "keep_rate": 0.8104,
    "dropped": {
-    "short": 751,
-    "allcaps": 505,
-    "banner": 247,
+    "short": 753,
+    "allcaps": 508,
     "bigtype": 171,
+    "banner": 83,
     "nonascii": 11,
     "pagenum": 2
    },
@@ -405,8 +410,8 @@
     187,
     112
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 669607,
   "hocr_deleted": true,
@@ -415,8 +420,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 4,
   "end_leaf": 164,
   "first_letter": "A",
@@ -602,8 +607,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 241,
   "fitted_leaves": 191,
   "read_leaves": 126,
@@ -660,8 +665,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -738,8 +743,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0043_listing.jsonl.gz",
   "sections": [
    {
@@ -748,18 +753,18 @@
     "end_leaf": 164
    }
   ],
-  "kept": 4733,
-  "dropped": 1638,
-  "kept_share": 0.7429,
+  "kept": 4896,
+  "dropped": 1637,
+  "kept_share": 0.7494,
   "kept_by_section": {
-   "listing": 4733
+   "listing": 4896
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 176,
+  "scoped_lines": 175,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    87,

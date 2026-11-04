@@ -366,21 +366,21 @@
    "publisher_tag": "trow",
    "publisher_tag_note": null,
    "year_tag": "1904",
-   "hocr_lines": 188879,
-   "wrap_joins": 28275,
-   "candidates": 160604,
+   "hocr_lines": 188877,
+   "wrap_joins": 28290,
+   "candidates": 160587,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 159751,
+    "pairs": 159774,
     "mark_share": 0.4241,
     "mode": 2.0,
-    "mode_pairs": 9915,
+    "mode_pairs": 9916,
     "trough": 1.5,
     "trough_pairs": 942,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 9.25,
-    "run_over_joins": 25650
+    "start_cap": 9.38,
+    "run_over_joins": 25653
    },
    "model_runovers": 27213,
    "cont_dropped_leaves": 0,
@@ -394,13 +394,13 @@
    },
    "marker_fixes": 5,
    "digit_fixes": 166,
-   "kept": 148900,
-   "keep_rate": 0.9271,
+   "kept": 149206,
+   "keep_rate": 0.9291,
    "dropped": {
-    "allcaps": 5247,
+    "allcaps": 5236,
     "short": 4292,
-    "bigtype": 1140,
-    "banner": 965,
+    "bigtype": 1149,
+    "banner": 644,
     "pagenum": 32,
     "nonascii": 28
    },
@@ -408,13 +408,13 @@
     "\u2014",
     "\u2014&"
    ],
-   "ditto_applied": 78009,
+   "ditto_applied": 78325,
    "band": {
     "leaves_banded": 518,
-    "head": 2297,
-    "body": 139713,
-    "foot": 3886,
-    "unbanded": 3004
+    "head": 2262,
+    "body": 140062,
+    "foot": 3867,
+    "unbanded": 3015
    },
    "top_ad_leaves": [
     61,
@@ -428,10 +428,10 @@
     69,
     53
    ],
-   "filters_at": "b6c44a2-dirty",
+   "filters_at": "dec98af-dirty",
    "derived": "2026-11-03"
   },
-  "words_gz_bytes": 12402945,
+  "words_gz_bytes": 12404417,
   "hocr_deleted": true,
   "elapsed_s": 92
  },
@@ -439,7 +439,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "start_leaf": 139,
   "end_leaf": 1195,
   "first_letter": "A",
@@ -605,7 +605,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "content_leaves": 593,
   "fitted_leaves": 564,
   "read_leaves": 426,
@@ -663,7 +663,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -779,7 +779,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/trowsgeneraldir1904p1trow_listing.jsonl.gz",
   "sections": [
    {
@@ -793,19 +793,19 @@
     "end_leaf": 1195
    }
   ],
-  "kept": 147435,
+  "kept": 147741,
   "dropped": 1465,
   "kept_share": 0.9902,
   "kept_by_section": {
    "late_names": 183,
-   "listing": 147252
+   "listing": 147558
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
   "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 91,
+  "scoped_lines": 93,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    179,
@@ -828,7 +828,7 @@
   "table_mode": 2,
   "pages": 529,
   "lines_runover": 27213,
-  "lines_model": 181124,
+  "lines_model": 181122,
   "lines_model-only": 1553,
   "lines_tesseract": 2940,
   "lines_bleed": 127,

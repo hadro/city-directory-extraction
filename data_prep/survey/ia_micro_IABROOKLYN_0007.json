@@ -366,8 +366,8 @@
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1830",
    "hocr_lines": 3227,
-   "wrap_joins": 81,
-   "candidates": 3146,
+   "wrap_joins": 79,
+   "candidates": 3148,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -377,7 +377,9 @@
     "mode_pairs": 11,
     "trough": 2.0,
     "trough_pairs": 4,
-    "reason": "too few runovers to read a mode"
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 26
    },
    "model_runovers": 36,
    "cont_dropped_leaves": 0,
@@ -390,12 +392,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2718,
-   "keep_rate": 0.864,
+   "kept": 2812,
+   "keep_rate": 0.8933,
    "dropped": {
-    "banner": 150,
-    "short": 128,
-    "allcaps": 124,
+    "short": 129,
+    "allcaps": 125,
+    "banner": 56,
     "bigtype": 18,
     "nonascii": 7,
     "pagenum": 1
@@ -412,8 +414,8 @@
    "top_ad_leaves": [
     88,
     85,
-    83,
     36,
+    83,
     23,
     55,
     60,
@@ -421,8 +423,8 @@
     12,
     26
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 220755,
   "hocr_deleted": true,
@@ -431,8 +433,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 5,
   "end_leaf": 75,
   "first_letter": "A",
@@ -589,8 +591,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 87,
   "fitted_leaves": 78,
   "read_leaves": 55,
@@ -615,8 +617,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -689,8 +691,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0007_listing.jsonl.gz",
   "sections": [
    {
@@ -699,11 +701,11 @@
     "end_leaf": 75
    }
   ],
-  "kept": 2331,
+  "kept": 2425,
   "dropped": 387,
-  "kept_share": 0.8576,
+  "kept_share": 0.8624,
   "kept_by_section": {
-   "listing": 2331
+   "listing": 2425
   }
  },
  "reocr": {

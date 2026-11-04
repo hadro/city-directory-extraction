@@ -378,7 +378,12 @@
     "mode_pairs": 88,
     "trough": 1.5,
     "trough_pairs": 50,
-    "reason": "too few runovers to read a mode"
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "held": [
+     "mark share"
+    ],
+    "start_cap": null,
+    "run_over_joins": 130
    },
    "model_runovers": 230,
    "cont_dropped_leaves": 0,
@@ -391,13 +396,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 7812,
-   "keep_rate": 0.8804,
+   "kept": 7832,
+   "keep_rate": 0.8827,
    "dropped": {
     "short": 736,
     "allcaps": 141,
     "bigtype": 95,
-    "banner": 80,
+    "banner": 60,
     "nonascii": 7,
     "pagenum": 2
    },
@@ -422,8 +427,8 @@
     64,
     66
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 626932,
   "hocr_deleted": true,
@@ -432,8 +437,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 4,
   "end_leaf": 51,
   "first_letter": "A",
@@ -590,8 +595,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 81,
   "fitted_leaves": 46,
   "read_leaves": 32,
@@ -616,8 +621,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -678,8 +683,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0022_listing.jsonl.gz",
   "sections": [
    {
@@ -688,11 +693,11 @@
     "end_leaf": 51
    }
   ],
-  "kept": 7233,
+  "kept": 7253,
   "dropped": 579,
-  "kept_share": 0.9259,
+  "kept_share": 0.9261,
   "kept_by_section": {
-   "listing": 7233
+   "listing": 7253
   }
  },
  "reocr": {

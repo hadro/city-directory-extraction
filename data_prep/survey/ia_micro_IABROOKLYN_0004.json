@@ -377,8 +377,8 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1825",
    "hocr_lines": 2458,
-   "wrap_joins": 75,
-   "candidates": 2383,
+   "wrap_joins": 72,
+   "candidates": 2386,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -388,7 +388,9 @@
     "mode_pairs": 12,
     "trough": 1.75,
     "trough_pairs": 4,
-    "reason": "too few runovers to read a mode"
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 19
    },
    "model_runovers": 29,
    "cont_dropped_leaves": 0,
@@ -401,13 +403,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2026,
-   "keep_rate": 0.8502,
+   "kept": 2080,
+   "keep_rate": 0.8718,
    "dropped": {
-    "short": 129,
-    "banner": 129,
-    "allcaps": 80,
-    "bigtype": 17,
+    "short": 132,
+    "allcaps": 81,
+    "banner": 72,
+    "bigtype": 19,
     "nonascii": 2
    },
    "ditto_marks": [],
@@ -421,18 +423,18 @@
    },
    "top_ad_leaves": [
     3,
+    61,
     54,
     58,
     50,
-    61,
     57,
     56,
     59,
     4,
-    26
+    8
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 167178,
   "hocr_deleted": true,
@@ -441,8 +443,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 5,
   "end_leaf": 42,
   "first_letter": "A",
@@ -591,8 +593,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 59,
   "fitted_leaves": 50,
   "read_leaves": 34,
@@ -633,8 +635,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -694,8 +696,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0004_listing.jsonl.gz",
   "sections": [
    {
@@ -704,11 +706,11 @@
     "end_leaf": 42
    }
   ],
-  "kept": 1514,
-  "dropped": 512,
-  "kept_share": 0.7473,
+  "kept": 1571,
+  "dropped": 509,
+  "kept_share": 0.7553,
   "kept_by_section": {
-   "listing": 1514
+   "listing": 1571
   }
  },
  "reocr": {

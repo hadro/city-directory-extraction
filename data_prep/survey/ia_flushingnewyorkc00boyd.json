@@ -427,12 +427,12 @@
     "leaves": 14
    },
    "marker_fixes": 0,
-   "kept": 3825,
-   "keep_rate": 0.7895,
+   "kept": 3907,
+   "keep_rate": 0.8064,
    "dropped": {
-    "allcaps": 479,
+    "allcaps": 478,
     "short": 335,
-    "banner": 180,
+    "banner": 99,
     "bigtype": 24,
     "nonascii": 2
    },
@@ -457,16 +457,16 @@
     93,
     133
    ],
-   "filters_at": "ad23a97-dirty",
-   "derived": "2026-10-30"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 381083
+  "words_gz_bytes": 381087
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 15,
   "end_leaf": 169,
   "first_letter": "A",
@@ -781,8 +781,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 109,
   "fitted_leaves": 0,
   "read_leaves": 0,
@@ -800,8 +800,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -850,8 +850,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/flushingnewyorkc00boyd_listing.jsonl.gz",
   "sections": [
    {
@@ -860,11 +860,11 @@
     "end_leaf": 169
    }
   ],
-  "kept": 3040,
+  "kept": 3122,
   "dropped": 785,
-  "kept_share": 0.7948,
+  "kept_share": 0.7991,
   "kept_by_section": {
-   "listing": 3040
+   "listing": 3122
   }
  },
  "reocr": {
@@ -887,6 +887,6 @@
   "layers": {
    "ia-words (IA OCR)": 79
   },
-  "dumped": "2026-10-30"
+  "dumped": "2026-11-03"
  }
 }

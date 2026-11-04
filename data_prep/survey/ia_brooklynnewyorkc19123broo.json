@@ -369,8 +369,8 @@
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
    "hocr_lines": 94363,
-   "wrap_joins": 6648,
-   "candidates": 87715,
+   "wrap_joins": 6582,
+   "candidates": 87781,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -380,7 +380,9 @@
     "mode_pairs": 2318,
     "trough": 0.75,
     "trough_pairs": 702,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": 25.65,
+    "run_over_joins": 3399
    },
    "model_runovers": 8186,
    "cont_dropped_leaves": 0,
@@ -393,27 +395,27 @@
     "leaves": 4
    },
    "marker_fixes": 71,
-   "digit_fixes": 290,
-   "kept": 59308,
-   "keep_rate": 0.6761,
+   "digit_fixes": 306,
+   "kept": 62914,
+   "keep_rate": 0.7167,
    "dropped": {
-    "short": 10901,
-    "allcaps": 8151,
-    "banner": 5702,
-    "bigtype": 3549,
+    "short": 10947,
+    "allcaps": 8159,
+    "bigtype": 3550,
+    "banner": 2107,
     "nonascii": 92,
     "pagenum": 12
    },
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 24652,
+   "ditto_applied": 26797,
    "band": {
-    "leaves_banded": 290,
-    "head": 1379,
-    "body": 43466,
-    "foot": 4325,
-    "unbanded": 10138
+    "leaves_banded": 294,
+    "head": 1433,
+    "body": 47179,
+    "foot": 4560,
+    "unbanded": 9742
    },
    "top_ad_leaves": [
     491,
@@ -427,8 +429,8 @@
     981,
     31
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 5666014,
   "hocr_deleted": true,
@@ -437,8 +439,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 113,
   "end_leaf": 749,
   "first_letter": "S",
@@ -587,8 +589,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-29",
-  "code_at": "2e12fad-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 586,
   "fitted_leaves": 317,
   "read_leaves": 189,
@@ -773,8 +775,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -872,8 +874,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc19123broo_listing.jsonl.gz",
   "sections": [
    {
@@ -882,18 +884,18 @@
     "end_leaf": 749
    }
   ],
-  "kept": 53854,
+  "kept": 57460,
   "dropped": 5454,
-  "kept_share": 0.908,
+  "kept_share": 0.9133,
   "kept_by_section": {
-   "listing": 53854
+   "listing": 57460
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 4,
+  "scoped_lines": 6,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    140,

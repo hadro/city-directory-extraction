@@ -329,12 +329,12 @@
    "publisher_tag_note": null,
    "year_tag": "1863",
    "hocr_lines": 199889,
-   "wrap_joins": 19975,
-   "candidates": 179914,
+   "wrap_joins": 19978,
+   "candidates": 179911,
    "wrap_calibration": {
     "indent_ratio": 1.5,
     "calibrated": true,
-    "pairs": 178735,
+    "pairs": 178738,
     "mark_share": 0.0049,
     "mode": 2.0,
     "mode_pairs": 14119,
@@ -342,7 +342,7 @@
     "trough_pairs": 292,
     "reason": "sharp runover mode",
     "start_cap": 5.76,
-    "run_over_joins": 15119
+    "run_over_joins": 15118
    },
    "model_runovers": 16091,
    "cont_dropped_leaves": 3,
@@ -355,12 +355,12 @@
     "leaves": 0
    },
    "marker_fixes": 1,
-   "kept": 168876,
-   "keep_rate": 0.9386,
+   "kept": 169103,
+   "keep_rate": 0.9399,
    "dropped": {
-    "short": 5770,
-    "allcaps": 3465,
-    "banner": 1722,
+    "short": 5765,
+    "allcaps": 3466,
+    "banner": 1496,
     "nonascii": 42,
     "bigtype": 39
    },
@@ -385,18 +385,18 @@
     409,
     444
    ],
-   "filters_at": "ad23a97-dirty",
-   "derived": "2026-10-30"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 14193337,
+  "words_gz_bytes": 14193521,
   "hocr_deleted": true,
   "elapsed_s": 92
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 21,
   "end_leaf": 982,
   "first_letter": "A",
@@ -564,7 +564,7 @@
     4
    ]
   },
-  "skipped_votes": 6,
+  "skipped_votes": 5,
   "voted_bounds": [
    21,
    982
@@ -588,10 +588,10 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 1113,
-  "fitted_leaves": 1060,
+  "fitted_leaves": 1055,
   "read_leaves": 617,
   "segments": [
    {
@@ -635,20 +635,12 @@
     "read": 60
    },
    {
-    "first_leaf": 276,
-    "last_leaf": 283,
-    "first_page": 64,
-    "last_page": 71,
-    "leaves": 8,
-    "read": 4
-   },
-   {
-    "first_leaf": 284,
+    "first_leaf": 281,
     "last_leaf": 406,
-    "first_page": 272,
+    "first_page": 269,
     "last_page": 394,
-    "leaves": 123,
-    "read": 96
+    "leaves": 126,
+    "read": 99
    },
    {
     "first_leaf": 411,
@@ -672,7 +664,7 @@
     "first_page": 660,
     "last_page": 698,
     "leaves": 39,
-    "read": 18
+    "read": 19
    },
    {
     "first_leaf": 716,
@@ -710,16 +702,16 @@
   "ia_comparison": {
    "ia_read_leaves": 385,
    "both": 379,
-   "agree": 375,
-   "agree_rate": 0.989,
+   "agree": 377,
+   "agree_rate": 0.995,
    "ia_page_equals_leaf": 0.0
   },
   "flags": []
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -991,8 +983,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/trowsnewyorkcity1863trow_listing.jsonl.gz",
   "sections": [
    {
@@ -1006,19 +998,19 @@
     "end_leaf": 982
    }
   ],
-  "kept": 154302,
+  "kept": 154529,
   "dropped": 14574,
-  "kept_share": 0.9137,
+  "kept_share": 0.9138,
   "kept_by_section": {
    "late_names": 146,
-   "listing": 154156
+   "listing": 154383
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-30",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 271,
+  "scoped_lines": 272,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    31,
@@ -1059,6 +1051,6 @@
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 959
   },
-  "dumped": "2026-10-30"
+  "dumped": "2026-11-03"
  }
 }

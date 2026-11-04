@@ -1929,6 +1929,51 @@ damaged), `disputed` 8,658 / 2,238 / 134,397; `usable` and `named` unchanged. ha
 Becker John F (Upington 1910, was Bernard), Ulmer Wm (Brooklyn 1912 p3, was Uman), Becker John F
 (1906BPL, had no surname). Left: `Uman Bernard` (Ulman misread) and the rare surnames the census
 cut leaves as dittos (`" Pfiser John`, `" Froude Eleanor`). Batch 3 (the import) stays open.
+**Batch 3 BUILT and RE-IMPORTED 2026-11-03 (dec98af), staged as round 13, records wait for it.**
+Two import-side causes of case 6. (a) **Cut tiles** (`reocr_pair.uncut`): where a tile's left
+edge cut a line, the layer's words left of the edge go back in front of the model's text, unless
+the model read them whole (then only a lost ditto dash returns: `Isaac`, `Terminal` stand).
+`n H real estate` -> `—Wm H real estate`, `s h 809 Elton av` -> `—Thos h 809 Elton av`, `" Co boxes
+135 Park row` -> `—& Co boxes 135 Park row`; where tesseract misread the word too, it stays wrong
+(`pee C bldr`). 38,535 of 22.6M word-layer lines changed over the 114 re-dumped book volumes
+(0.17%; Trow 1914 p2 0.71%); on 14 leaves an ad's two lines became one. (b) **The half-tile seam
+was not the loss**: entries kept at a half's last line 80.1%, its first 74.8%, mid-tile 75.5%. The
+loss was the harvest's `banner` rule dropping full-column entries on single-column re-OCR'd pages
+(a line wider than 1.4x the body width). On re-OCR'd volumes a line no wider than its column tile
+(`boxes.json`) that reads as an entry (`BANNER_ENTRY`) is now kept; elsewhere the rule is as was.
+Lines harvested: **+180,098 over the book volumes** (Trow 1914's four parts +16.6k to +23.1k
+each, 1917 +8.3k, Brooklyn 1912 and c00broo +6.4k each), **+~11k over the microfilm**
+(brooklynnewyorkc19123broo +3,606, its banners 5,702 -> 2,107); samples read as entries. The
+microfilm was re-harvested, NOT re-dumped (it would bring #32's import changes, untested there):
+open. Round 13 restaged as one delta over the three tiers (BOOKSCAN_HANDOFF, update 2026-11-03
+evening): 287,920 prompts, 15 tasks.
+
+**36. The rest of the re-OCR import in parallel (found 2026-11-03, #35 batch 3's re-import; after
+round 13 is sent).** #31 step 1 put the dumps on `--workers`; the rest is still serial. Measured on
+the batch 3 re-import of 153 volumes (96 + 14 + 4 book-scan volumes re-dumped, 39 microfilm
+re-harvested), on this laptop (8 cores, 16 GB): the 96 volumes' dumps at `--workers 6` took about
+5 h (six dumps cut off by an interrupted session and redone included), the last five of them the 30-40-minute Trow volumes running on their own (1915, 1917, the
+1859/1863/1876 city volumes), with load 10-22 and swap 17.5 of 18.4 GB in use. Three changes, each
+leaving every output byte-identical (check as #31 did: a re-import with and without, compared file
+by file):
+1. **The per-volume steps after the dumps on `--workers`.** `survey_harvest.py --rederive` and
+   `survey_derive.py` bounds/pages/sections/scope loop over the ids one at a time, and each volume
+   writes only its own `_lines`/`_dropped` files and sidecar, so they can run as the dumps do (a
+   pool of per-volume subprocesses, output printed whole on finish). `survey_adleaves.py features
+   --merge` and `inventory --write` write corpus-wide files: keep them single, once, at the end.
+   Timed on this run, they are cheap: all of them over 61 book volumes took 11 min, over the 39
+   microfilm 1.3 min, against hours of dumps. Worth doing only after 2 and 3.
+2. **All groups in one import.** The four groups (a1, a2, the canary, the microfilm) run one after
+   the other because each takes different `--root`/`--slug`/`--prefer`/`--page-dir`. Read them per
+   volume from the sidecar's `reocr` block (it records how the volume was last imported), so one
+   `import --ids all` fills one pool, and the corpus-wide steps run once, not once per group.
+3. **Largest volume first.** The dumps are submitted in id order, so the biggest volumes can land
+   last and run alone. Submit by descending tile count (`boxes.json` size), so the tail is the
+   small volumes.
+
+Worker count: #31 chose 4, the performance cores; this run used 6 and was swapping, so measure 4
+against 6 before raising it. Past these three, the next speed-up is running the import on Torch's
+CPU nodes rather than on a laptop.
 
 ## Medium effort, high information
 

@@ -352,8 +352,8 @@
    "publisher_tag_note": "'leslie/chichester' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1840/41",
    "hocr_lines": 9698,
-   "wrap_joins": 397,
-   "candidates": 9301,
+   "wrap_joins": 392,
+   "candidates": 9306,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -363,7 +363,9 @@
     "mode_pairs": 68,
     "trough": 1.0,
     "trough_pairs": 63,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": null,
+    "run_over_joins": 20
    },
    "model_runovers": 96,
    "cont_dropped_leaves": 0,
@@ -376,13 +378,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 6946,
-   "keep_rate": 0.7468,
+   "kept": 7190,
+   "keep_rate": 0.7726,
    "dropped": {
-    "short": 1258,
-    "banner": 584,
-    "bigtype": 245,
-    "allcaps": 239,
+    "short": 1261,
+    "banner": 338,
+    "bigtype": 246,
+    "allcaps": 242,
     "nonascii": 27,
     "pagenum": 2
    },
@@ -407,8 +409,8 @@
     192,
     239
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 680992,
   "hocr_deleted": true,
@@ -417,8 +419,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 8,
   "end_leaf": 143,
   "first_letter": "A",
@@ -585,8 +587,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 295,
   "fitted_leaves": 126,
   "read_leaves": 90,
@@ -643,8 +645,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -718,8 +720,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0017_listing.jsonl.gz",
   "sections": [
    {
@@ -728,11 +730,11 @@
     "end_leaf": 143
    }
   ],
-  "kept": 5804,
-  "dropped": 1142,
-  "kept_share": 0.8356,
+  "kept": 6049,
+  "dropped": 1141,
+  "kept_share": 0.8413,
   "kept_by_section": {
-   "listing": 5804
+   "listing": 6049
   }
  },
  "reocr": {

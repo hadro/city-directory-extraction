@@ -376,12 +376,12 @@
     "leaves": 0
    },
    "marker_fixes": 1,
-   "kept": 17316,
-   "keep_rate": 0.8515,
+   "kept": 17685,
+   "keep_rate": 0.8697,
    "dropped": {
-    "banner": 1110,
     "short": 1070,
     "allcaps": 826,
+    "banner": 741,
     "bigtype": 9,
     "nonascii": 4
    },
@@ -406,8 +406,8 @@
     18,
     423
    ],
-   "filters_at": "ad23a97-dirty",
-   "derived": "2026-10-30"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 1478568,
   "hocr_deleted": true,
@@ -416,8 +416,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 25,
   "end_leaf": 418,
   "first_letter": "A",
@@ -594,8 +594,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 475,
   "fitted_leaves": 464,
   "read_leaves": 448,
@@ -636,8 +636,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -738,8 +738,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/hearnesbrooklync1850unse_listing.jsonl.gz",
   "sections": [
    {
@@ -748,11 +748,11 @@
     "end_leaf": 418
    }
   ],
-  "kept": 15011,
+  "kept": 15380,
   "dropped": 2305,
-  "kept_share": 0.8669,
+  "kept_share": 0.8697,
   "kept_by_section": {
-   "listing": 15011
+   "listing": 15380
   }
  },
  "run_set": {
@@ -783,6 +783,6 @@
   "layers": {
    "ia-words (IA OCR)": 380
   },
-  "dumped": "2026-10-30"
+  "dumped": "2026-11-03"
  }
 }

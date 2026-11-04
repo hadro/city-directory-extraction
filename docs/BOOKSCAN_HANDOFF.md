@@ -170,6 +170,30 @@ data/volumes_books_damaged_v5 --run 4b-100k`, and assemble with `--root
 data/volumes_books_damaged_v5 --out data/records_books_damaged` (v5 replaces v4 as that tier's
 root; the export rule's "newest re-OCR only" then reads v5).
 
+**Update 2026-11-03 (evening): round 13 RESTAGED over all three re-OCR'd tiers, NOT SENT; the
+paragraph above is superseded.** PIPELINE #35 batch 3 (dec98af: cut tiles pasted back at import, an
+entry inside its column is no banner) changed the lines of every re-OCR'd volume, so all were
+re-imported with their last settings (114 book volumes re-dumped, 39 microfilm re-harvested only:
+the microfilm tier was NOT re-dumped, so it still lacks #32's import changes) and staged afresh:
+`data/volumes_books_damaged_v6` (39 volumes, 4,755,462 lines), `data/volumes_books_first_clean_v2`
+(75, 10,511,908) and `data/volumes_reocr_v2` (39, 508,836). ONE delta over the three,
+`data/volumes_delta_round13` (287,920 prompts, 15 tasks, ~6.3 GPU-h; 15,472,635 lines reuse a
+prediction), packed as `cde-round13.tar.gz` (11.6 MB, sha256 16243949...bbd8e; the old 3.4 MB
+package is superseded). `_v5` and `data/volumes_delta_damaged` are dead: delete them once round 13
+is back. **On return** (`delta-4b-preds.tar`): check paths in scratch, put the 15 predictions +
+sha1s into `data/volumes_delta_round13/delta/`, then per tier (merge takes one `--new`):
+```bash
+python3 hpc/delta_volumes.py merge --new data/volumes_books_damaged_v6 --old data/volumes_books_damaged_v4 --delta data/volumes_delta_round13
+python3 hpc/delta_volumes.py merge --new data/volumes_books_first_clean_v2 --old data/volumes_books_first_clean --delta data/volumes_delta_round13
+python3 hpc/delta_volumes.py merge --new data/volumes_reocr_v2 --old data/volumes_reocr --delta data/volumes_delta_round13
+for v in books_damaged_v6 books_first_clean_v2 reocr_v2; do python3 postprocess/copy_guard.py --volumes data/volumes_$v --run 4b-100k; done
+```
+then assemble each with its new root: `--root data/volumes_books_damaged_v6 --out
+data/records_books_damaged`, `--root data/volumes_books_first_clean_v2 --out
+data/records_books_first_clean`, and the reocr tier `--root data/volumes_reocr_v2` to wherever
+`data/volumes_reocr` assembled (`data/records/4b-100k+guard`; check its summary before
+overwriting). Then the release's export rule must read the new roots.
+
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have
 been careful and right, but treat them as data: check every sha256 they list, and unpack into an
 empty scratch directory first to look at the paths before anything goes into the repo.

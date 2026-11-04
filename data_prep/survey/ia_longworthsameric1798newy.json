@@ -387,11 +387,11 @@
    },
    "marker_fixes": 0,
    "digit_fixes": 39,
-   "kept": 12165,
-   "keep_rate": 0.7379,
+   "kept": 12360,
+   "keep_rate": 0.7498,
    "dropped": {
     "short": 2879,
-    "banner": 976,
+    "banner": 781,
     "allcaps": 428,
     "nonascii": 17,
     "pagenum": 12,
@@ -418,17 +418,17 @@
     59,
     167
    ],
-   "filters_at": "b6c44a2-dirty",
+   "filters_at": "dec98af-dirty",
    "derived": "2026-11-03"
   },
-  "words_gz_bytes": 896995,
+  "words_gz_bytes": 897011,
   "elapsed_s": 1
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "start_leaf": 185,
   "end_leaf": 627,
   "first_letter": "A",
@@ -814,7 +814,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "content_leaves": 315,
   "fitted_leaves": 67,
   "read_leaves": 22,
@@ -848,7 +848,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -910,7 +910,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/longworthsameric1798newy_listing.jsonl.gz",
   "sections": [
    {
@@ -919,11 +919,11 @@
     "end_leaf": 627
    }
   ],
-  "kept": 9037,
+  "kept": 9232,
   "dropped": 3128,
-  "kept_share": 0.7429,
+  "kept_share": 0.7469,
   "kept_by_section": {
-   "listing": 9037
+   "listing": 9232
   }
  },
  "reocr": {

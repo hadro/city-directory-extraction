@@ -343,7 +343,9 @@
     "mode_pairs": 9,
     "trough": 1.75,
     "trough_pairs": 7,
-    "reason": "too few runovers to read a mode"
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 18
    },
    "model_runovers": 24,
    "cont_dropped_leaves": 0,
@@ -356,12 +358,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 1875,
-   "keep_rate": 0.848,
+   "kept": 1925,
+   "keep_rate": 0.8706,
    "dropped": {
-    "banner": 126,
     "short": 110,
     "allcaps": 80,
+    "banner": 76,
     "bigtype": 20
    },
    "ditto_marks": [],
@@ -385,8 +387,8 @@
     44,
     42
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 164429,
   "hocr_deleted": true,
@@ -395,8 +397,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 5,
   "end_leaf": 32,
   "first_letter": "A",
@@ -533,8 +535,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 53,
   "fitted_leaves": 40,
   "read_leaves": 31,
@@ -567,8 +569,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -653,8 +655,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0003_listing.jsonl.gz",
   "sections": [
    {
@@ -663,11 +665,11 @@
     "end_leaf": 32
    }
   ],
-  "kept": 1274,
+  "kept": 1324,
   "dropped": 601,
-  "kept_share": 0.6795,
+  "kept_share": 0.6878,
   "kept_by_section": {
-   "listing": 1274
+   "listing": 1324
   }
  },
  "reocr": {

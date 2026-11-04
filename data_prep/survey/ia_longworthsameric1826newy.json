@@ -377,14 +377,14 @@
    "publisher_tag": "longworth",
    "publisher_tag_note": null,
    "year_tag": "1826",
-   "hocr_lines": 33488,
-   "wrap_joins": 938,
-   "candidates": 32550,
+   "hocr_lines": 33487,
+   "wrap_joins": 951,
+   "candidates": 32536,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 29224,
-    "mark_share": 0.0232,
+    "pairs": 29223,
+    "mark_share": 0.0234,
     "mode": 2.0,
     "mode_pairs": 237,
     "trough": 1.75,
@@ -405,12 +405,12 @@
    },
    "marker_fixes": 0,
    "digit_fixes": 13,
-   "kept": 28484,
-   "keep_rate": 0.8751,
+   "kept": 29187,
+   "keep_rate": 0.8971,
    "dropped": {
-    "short": 1901,
-    "banner": 1336,
+    "short": 1902,
     "allcaps": 772,
+    "banner": 618,
     "nonascii": 37,
     "bigtype": 14,
     "pagenum": 6
@@ -436,10 +436,10 @@
     61,
     141
    ],
-   "filters_at": "b6c44a2-dirty",
+   "filters_at": "dec98af-dirty",
    "derived": "2026-11-03"
   },
-  "words_gz_bytes": 2179541,
+  "words_gz_bytes": 2179866,
   "hocr_deleted": true,
   "elapsed_s": 12
  },
@@ -447,7 +447,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "start_leaf": 151,
   "end_leaf": 1123,
   "first_letter": "A",
@@ -849,7 +849,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "content_leaves": 568,
   "fitted_leaves": 534,
   "read_leaves": 172,
@@ -883,7 +883,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -969,7 +969,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/longworthsameric1826newy_listing.jsonl.gz",
   "sections": [
    {
@@ -978,11 +978,11 @@
     "end_leaf": 1123
    }
   ],
-  "kept": 25905,
+  "kept": 26608,
   "dropped": 2579,
-  "kept_share": 0.9095,
+  "kept_share": 0.9116,
   "kept_by_section": {
-   "listing": 25905
+   "listing": 26608
   }
  },
  "non_entry_pages": {
@@ -1008,7 +1008,7 @@
   "table_mode": 2,
   "pages": 485,
   "lines_runover": 220,
-  "lines_model": 27039,
+  "lines_model": 27038,
   "lines_tesseract": 1242,
   "lines_model-only": 530,
   "lines_bleed": 33,

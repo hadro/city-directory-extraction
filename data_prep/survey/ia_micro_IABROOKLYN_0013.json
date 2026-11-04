@@ -500,8 +500,8 @@
    "publisher_tag_note": "'nichols' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1836/37",
    "hocr_lines": 5400,
-   "wrap_joins": 187,
-   "candidates": 5213,
+   "wrap_joins": 185,
+   "candidates": 5215,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -511,7 +511,9 @@
     "mode_pairs": 35,
     "trough": 1.0,
     "trough_pairs": 42,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "start_cap": null,
+    "run_over_joins": 10
    },
    "model_runovers": 37,
    "cont_dropped_leaves": 0,
@@ -524,13 +526,13 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 4256,
-   "keep_rate": 0.8164,
+   "kept": 4306,
+   "keep_rate": 0.8257,
    "dropped": {
-    "short": 593,
-    "allcaps": 143,
-    "banner": 117,
+    "short": 595,
+    "allcaps": 144,
     "bigtype": 92,
+    "banner": 66,
     "nonascii": 11,
     "pagenum": 1
    },
@@ -555,16 +557,16 @@
     100,
     16
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 349683
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 18,
   "end_leaf": 97,
   "first_letter": "B",
@@ -726,8 +728,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 105,
   "fitted_leaves": 47,
   "read_leaves": 19,
@@ -760,8 +762,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -809,8 +811,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0013_listing.jsonl.gz",
   "sections": [
    {
@@ -819,11 +821,11 @@
     "end_leaf": 97
    }
   ],
-  "kept": 3812,
+  "kept": 3862,
   "dropped": 444,
-  "kept_share": 0.8957,
+  "kept_share": 0.8969,
   "kept_by_section": {
-   "listing": 3812
+   "listing": 3862
   }
  },
  "reocr": {

@@ -356,8 +356,8 @@
    "publisher_tag_note": "'stevens/marschalk' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1838/39",
    "hocr_lines": 6233,
-   "wrap_joins": 190,
-   "candidates": 6043,
+   "wrap_joins": 184,
+   "candidates": 6049,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -367,7 +367,12 @@
     "mode_pairs": 17,
     "trough": 2.5,
     "trough_pairs": 7,
-    "reason": "too few runovers to read a mode"
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "held": [
+     "mark share"
+    ],
+    "start_cap": null,
+    "run_over_joins": 3
    },
    "model_runovers": 29,
    "cont_dropped_leaves": 0,
@@ -380,12 +385,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 5101,
-   "keep_rate": 0.8441,
+   "kept": 5217,
+   "keep_rate": 0.8625,
    "dropped": {
-    "short": 468,
-    "banner": 248,
-    "allcaps": 176,
+    "short": 471,
+    "allcaps": 179,
+    "banner": 132,
     "bigtype": 35,
     "nonascii": 14,
     "pagenum": 1
@@ -411,8 +416,8 @@
     17,
     30
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 443235,
   "hocr_deleted": true,
@@ -421,8 +426,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 21,
   "end_leaf": 80,
   "first_letter": "A",
@@ -589,8 +594,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 78,
   "fitted_leaves": 0,
   "read_leaves": 0,
@@ -608,8 +613,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -645,8 +650,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0015_listing.jsonl.gz",
   "sections": [
    {
@@ -655,11 +660,11 @@
     "end_leaf": 80
    }
   ],
-  "kept": 4321,
+  "kept": 4437,
   "dropped": 780,
-  "kept_share": 0.8471,
+  "kept_share": 0.8505,
   "kept_by_section": {
-   "listing": 4321
+   "listing": 4437
   }
  },
  "reocr": {

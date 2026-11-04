@@ -370,8 +370,8 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1826",
    "hocr_lines": 2831,
-   "wrap_joins": 120,
-   "candidates": 2711,
+   "wrap_joins": 115,
+   "candidates": 2716,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -381,7 +381,12 @@
     "mode_pairs": 15,
     "trough": 1.25,
     "trough_pairs": 5,
-    "reason": "too few runovers to read a mode"
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "held": [
+     "mark share"
+    ],
+    "start_cap": null,
+    "run_over_joins": 19
    },
    "model_runovers": 27,
    "cont_dropped_leaves": 0,
@@ -394,11 +399,11 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2414,
-   "keep_rate": 0.8904,
+   "kept": 2413,
+   "keep_rate": 0.8884,
    "dropped": {
-    "short": 154,
-    "allcaps": 90,
+    "short": 158,
+    "allcaps": 92,
     "bigtype": 29,
     "banner": 19,
     "nonascii": 4,
@@ -425,8 +430,8 @@
     63,
     11
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 198138,
   "hocr_deleted": true,
@@ -435,8 +440,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 5,
   "end_leaf": 60,
   "first_letter": "A",
@@ -588,8 +593,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 78,
   "fitted_leaves": 67,
   "read_leaves": 46,
@@ -614,8 +619,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -687,8 +692,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0005_listing.jsonl.gz",
   "sections": [
    {
@@ -697,11 +702,11 @@
     "end_leaf": 60
    }
   ],
-  "kept": 1917,
+  "kept": 1916,
   "dropped": 497,
-  "kept_share": 0.7941,
+  "kept_share": 0.794,
   "kept_by_section": {
-   "listing": 1917
+   "listing": 1916
   }
  },
  "reocr": {

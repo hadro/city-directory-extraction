@@ -364,8 +364,8 @@
    "publisher_tag_note": "'spooner' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1822",
    "hocr_lines": 2574,
-   "wrap_joins": 75,
-   "candidates": 2499,
+   "wrap_joins": 70,
+   "candidates": 2504,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -375,7 +375,9 @@
     "mode_pairs": 11,
     "trough": 1.25,
     "trough_pairs": 10,
-    "reason": "too few runovers to read a mode"
+    "reason": "too few runovers to read a mode",
+    "start_cap": null,
+    "run_over_joins": 2
    },
    "model_runovers": 14,
    "cont_dropped_leaves": 0,
@@ -388,12 +390,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 2156,
-   "keep_rate": 0.8627,
+   "kept": 2188,
+   "keep_rate": 0.8738,
    "dropped": {
-    "short": 140,
-    "allcaps": 93,
-    "banner": 85,
+    "short": 143,
+    "allcaps": 95,
+    "banner": 53,
     "bigtype": 22,
     "nonascii": 3
    },
@@ -411,15 +413,15 @@
     44,
     53,
     58,
-    46,
     24,
+    46,
     71,
     41,
     7,
     25
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 189442,
   "hocr_deleted": true,
@@ -428,8 +430,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 5,
   "end_leaf": 31,
   "first_letter": "A",
@@ -571,8 +573,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 70,
   "fitted_leaves": 62,
   "read_leaves": 28,
@@ -597,8 +599,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -683,8 +685,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0001_listing.jsonl.gz",
   "sections": [
    {
@@ -693,11 +695,11 @@
     "end_leaf": 31
    }
   ],
-  "kept": 1007,
+  "kept": 1039,
   "dropped": 1149,
-  "kept_share": 0.4671,
+  "kept_share": 0.4749,
   "kept_by_section": {
-   "listing": 1007
+   "listing": 1039
   }
  },
  "reocr": {

@@ -405,11 +405,11 @@
     "leaves": 2
    },
    "marker_fixes": 1,
-   "kept": 23564,
-   "keep_rate": 0.8343,
+   "kept": 23822,
+   "keep_rate": 0.8434,
    "dropped": {
     "short": 2812,
-    "banner": 1209,
+    "banner": 951,
     "allcaps": 619,
     "bigtype": 28,
     "nonascii": 13
@@ -435,18 +435,18 @@
     33,
     37
    ],
-   "filters_at": "ad23a97-dirty",
-   "derived": "2026-10-30"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 1684382,
+  "words_gz_bytes": 1684395,
   "hocr_deleted": true,
   "elapsed_s": 32
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 104,
   "end_leaf": 448,
   "first_letter": "A",
@@ -623,8 +623,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 445,
   "fitted_leaves": 427,
   "read_leaves": 333,
@@ -673,8 +673,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "late_names",
@@ -763,8 +763,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/merceinscitydire00merc_listing.jsonl.gz",
   "sections": [
    {
@@ -778,12 +778,12 @@
     "end_leaf": 448
    }
   ],
-  "kept": 20072,
-  "dropped": 3492,
-  "kept_share": 0.8518,
+  "kept": 20315,
+  "dropped": 3507,
+  "kept_share": 0.8528,
   "kept_by_section": {
-   "late_names": 44,
-   "listing": 20028
+   "late_names": 51,
+   "listing": 20264
   }
  },
  "non_entry_pages": {
@@ -818,6 +818,6 @@
   "layers": {
    "ia-words (IA OCR)": 349
   },
-  "dumped": "2026-10-30"
+  "dumped": "2026-11-03"
  }
 }

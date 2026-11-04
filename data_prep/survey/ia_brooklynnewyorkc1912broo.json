@@ -410,20 +410,20 @@
    "publisher_tag_note": "'brooklyn directory co' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1912",
    "hocr_lines": 129201,
-   "wrap_joins": 8836,
-   "candidates": 120365,
+   "wrap_joins": 8849,
+   "candidates": 120352,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
-    "pairs": 85201,
+    "pairs": 85209,
     "mark_share": 0.429,
     "mode": 1.75,
-    "mode_pairs": 4618,
+    "mode_pairs": 4624,
     "trough": 0.75,
     "trough_pairs": 521,
     "reason": "ditto marks: a dropped mark indents like a runover",
-    "start_cap": 27.0,
-    "run_over_joins": 7290
+    "start_cap": 27.12,
+    "run_over_joins": 7289
    },
    "model_runovers": 9138,
    "cont_dropped_leaves": 0,
@@ -435,28 +435,28 @@
     "words": 0,
     "leaves": 0
    },
-   "marker_fixes": 65,
-   "digit_fixes": 56,
-   "kept": 86750,
-   "keep_rate": 0.7207,
+   "marker_fixes": 67,
+   "digit_fixes": 63,
+   "kept": 93243,
+   "keep_rate": 0.7748,
    "dropped": {
-    "short": 17835,
-    "banner": 8516,
-    "allcaps": 6245,
-    "bigtype": 988,
+    "short": 17823,
+    "allcaps": 6229,
+    "banner": 2036,
+    "bigtype": 990,
     "nonascii": 29,
     "pagenum": 2
    },
    "ditto_marks": [
     "\u2014"
    ],
-   "ditto_applied": 48143,
+   "ditto_applied": 52422,
    "band": {
-    "leaves_banded": 507,
-    "head": 3120,
-    "body": 74979,
-    "foot": 5204,
-    "unbanded": 3447
+    "leaves_banded": 510,
+    "head": 3545,
+    "body": 80999,
+    "foot": 5518,
+    "unbanded": 3181
    },
    "top_ad_leaves": [
     19,
@@ -470,10 +470,10 @@
     263,
     249
    ],
-   "filters_at": "b6c44a2-dirty",
+   "filters_at": "dec98af-dirty",
    "derived": "2026-11-03"
   },
-  "words_gz_bytes": 7604871,
+  "words_gz_bytes": 7605241,
   "hocr_deleted": true,
   "elapsed_s": 66
  },
@@ -481,7 +481,7 @@
   "method": "letter-votes",
   "source": "dump",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "start_leaf": 9,
   "end_leaf": 1063,
   "first_letter": "H",
@@ -687,7 +687,7 @@
  "folios": {
   "method": "margin-fit",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "content_leaves": 531,
   "fitted_leaves": 525,
   "read_leaves": 250,
@@ -721,7 +721,7 @@
  "sections": {
   "method": "title-pages",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -761,7 +761,7 @@
  "scope": {
   "method": "residential-sections",
   "derived": "2026-11-03",
-  "code_at": "b6c44a2-dirty",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/brooklynnewyorkc1912broo_listing.jsonl.gz",
   "sections": [
    {
@@ -770,11 +770,11 @@
     "end_leaf": 1063
    }
   ],
-  "kept": 86748,
+  "kept": 93241,
   "dropped": 2,
   "kept_share": 1.0,
   "kept_by_section": {
-   "listing": 86748
+   "listing": 93241
   }
  },
  "reocr": {

@@ -332,8 +332,8 @@
    "publisher_tag_note": "'reynolds' is not in the trained vocabulary -- falling back to 'trow'",
    "year_tag": "1854",
    "hocr_lines": 10985,
-   "wrap_joins": 452,
-   "candidates": 10533,
+   "wrap_joins": 450,
+   "candidates": 10535,
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": false,
@@ -343,7 +343,12 @@
     "mode_pairs": 47,
     "trough": 1.5,
     "trough_pairs": 31,
-    "reason": "ditto marks: a dropped mark indents like a runover"
+    "reason": "ditto marks: a dropped mark indents like a runover",
+    "held": [
+     "mark share"
+    ],
+    "start_cap": null,
+    "run_over_joins": 65
    },
    "model_runovers": 158,
    "cont_dropped_leaves": 1,
@@ -356,12 +361,12 @@
     "leaves": 0
    },
    "marker_fixes": 0,
-   "kept": 8399,
-   "keep_rate": 0.7974,
+   "kept": 8572,
+   "keep_rate": 0.8137,
    "dropped": {
     "short": 973,
-    "allcaps": 605,
-    "banner": 371,
+    "allcaps": 607,
+    "banner": 198,
     "bigtype": 170,
     "nonascii": 14,
     "pagenum": 1
@@ -387,8 +392,8 @@
     24,
     40
    ],
-   "filters_at": "1eada69-dirty",
-   "derived": "2026-10-16"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
   "words_gz_bytes": 830108,
   "hocr_deleted": true,
@@ -397,8 +402,8 @@
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 52,
   "end_leaf": 306,
   "first_letter": "C",
@@ -649,8 +654,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 315,
   "fitted_leaves": 109,
   "read_leaves": 64,
@@ -771,8 +776,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -840,8 +845,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-16",
-  "code_at": "1eada69-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/micro_IABROOKLYN_0048_listing.jsonl.gz",
   "sections": [
    {
@@ -850,18 +855,18 @@
     "end_leaf": 306
    }
   ],
-  "kept": 7352,
+  "kept": 7525,
   "dropped": 1047,
-  "kept_share": 0.8753,
+  "kept_share": 0.8779,
   "kept_by_section": {
-   "listing": 7352
+   "listing": 7525
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-16",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 37,
+  "scoped_lines": 35,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    117,

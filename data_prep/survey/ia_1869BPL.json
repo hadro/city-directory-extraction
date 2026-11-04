@@ -359,16 +359,16 @@
    "wrap_calibration": {
     "indent_ratio": 3.0,
     "calibrated": true,
-    "pairs": 113856,
+    "pairs": 113849,
     "mark_share": 0.049,
     "mode": 2.0,
-    "mode_pairs": 9670,
+    "mode_pairs": 9638,
     "trough": 1.75,
-    "trough_pairs": 406,
+    "trough_pairs": 415,
     "reason": "sharp runover mode",
     "pinned": true,
     "start_cap": 6.45,
-    "run_over_joins": 17124
+    "run_over_joins": 17123
    },
    "model_runovers": 18493,
    "cont_dropped_leaves": 2,
@@ -381,14 +381,14 @@
     "leaves": 1
    },
    "marker_fixes": 2,
-   "kept": 100566,
-   "keep_rate": 0.8469,
+   "kept": 100620,
+   "keep_rate": 0.8473,
    "dropped": {
-    "short": 5169,
-    "allcaps": 4904,
-    "banner": 3646,
+    "short": 5159,
+    "allcaps": 4914,
+    "banner": 3618,
     "nonascii": 3353,
-    "bigtype": 1111,
+    "bigtype": 1085,
     "pagenum": 1
    },
    "ditto_marks": [],
@@ -412,18 +412,18 @@
     910,
     364
    ],
-   "filters_at": "ad23a97-dirty",
-   "derived": "2026-10-30"
+   "filters_at": "dec98af-dirty",
+   "derived": "2026-11-03"
   },
-  "words_gz_bytes": 8254398,
+  "words_gz_bytes": 8253916,
   "hocr_deleted": true,
   "elapsed_s": 30
  },
  "listing": {
   "method": "letter-votes",
   "source": "dump",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "start_leaf": 12,
   "end_leaf": 738,
   "first_letter": "A",
@@ -653,8 +653,8 @@
  },
  "folios": {
   "method": "margin-fit",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "content_leaves": 927,
   "fitted_leaves": 295,
   "read_leaves": 122,
@@ -767,8 +767,8 @@
  },
  "sections": {
   "method": "title-pages",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "runs": [
    {
     "kind": "front_matter",
@@ -998,8 +998,8 @@
  },
  "scope": {
   "method": "residential-sections",
-  "derived": "2026-10-30",
-  "code_at": "ad23a97-dirty",
+  "derived": "2026-11-03",
+  "code_at": "dec98af-dirty",
   "file": "data/survey_ocr/1869BPL_listing.jsonl.gz",
   "sections": [
    {
@@ -1013,19 +1013,19 @@
     "end_leaf": 852
    }
   ],
-  "kept": 78797,
+  "kept": 78851,
   "dropped": 21769,
-  "kept_share": 0.7835,
+  "kept_share": 0.7837,
   "kept_by_section": {
-   "listing": 78676,
+   "listing": 78730,
    "late_names": 121
   }
  },
  "non_entry_pages": {
   "method": "entry-shape",
-  "derived": "2026-10-30",
+  "derived": "2026-11-03",
   "entry_min": 0.15,
-  "scoped_lines": 317,
+  "scoped_lines": 330,
   "note": "pages inside residential runs whose OCR lines are not entry-shaped: full-page ads, blank pages read through the paper, or listing pages the OCR failed on. scope keeps them; hpc/prep_volumes.py skips them by default, and they are the re-OCR queue.",
   "leaves": [
    48,
@@ -1082,6 +1082,6 @@
   "layers": {
    "ia-words (ABBYY FineReader 9.0)": 729
   },
-  "dumped": "2026-10-30"
+  "dumped": "2026-11-03"
  }
 }

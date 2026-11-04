@@ -3338,6 +3338,41 @@ runover` 1,121 (true tails and ad lines, neither usable), `other -> start` 188, 
 read were real entries between hanging `E`s, so its printed count is likely low). Run 1's records
 were NOT re-assembled (529 lines; the export excludes that root).
 
+**39. The address finder is too slow at the full corpus (found 2026-11-04, after round 13; hadro is
+handing it to another agent).** `space/` (Gradio + DuckDB over `data/space/records.parquet`) was
+built and timed at 5.5M rows: ~2 s to start, ~1-1.5 s a search (space/README). Round 13's rebuild
+put the first/clean tier in for the first time: 15,497,151 rows, 547 MB. Measured on the laptop
+(M2, 8 cores) with `results/finder_timing.py`, warm, one connection:
+
+| query | candidate scan | candidates | `find` | with the resident trace |
+|---|---|---|---|---|
+| 155 Franklin | 2.60 s | 123,675 | 4.87 s (3,362 hits) | 11.19 s |
+| 166 Lefferts pl | 2.20 s | 35,420 | 3.32 s (745) | 9.40 s |
+| 45 Fulton | 2.67 s | 281,735 | 7.70 s (12,195) | 13.95 s |
+| 62 Euclid av | 2.25 s | 49,494 | 4.31 s (142) | 9.45 s |
+
+Start-up (the `vocab` table, one `unnest` of every row's words) is 6-9 s. The vocabulary lookup
+(`terms`) is 0.04-0.07 s and not the problem. Where the rest goes, in `space/search.py`:
+1. **The candidate scan, ~2.5 s.** `find` runs ONE `regexp_matches` over the lowercased
+   raw_line + address_resolved + home_address_resolved of every row, for `\b(any street spelling |
+   any number look-alike)\b`. It scales with the corpus (~0.6 s at 5.5M).
+2. **Grading in Python, ~1-5 s, linear in candidates.** The pattern is an OR, so a row with the
+   NUMBER alone is a candidate: every "155" anywhere in 15.5M lines. "Franklin" also gained a
+   Manhattan Franklin St with the Trow volumes. `fa.best_reading` then rejects most of them one by
+   one. The OR is there on purpose: `ends_on_number` rows (number last, street on the NEXT line,
+   joined by `next_id`) must reach the wrap pass, so requiring both words in SQL would lose them
+   unless they get a query of their own.
+3. **The resident trace, ~5-6 s.** `residents` runs up to 12 queries, each `lower(name_resolved)
+   LIKE '<surname>%'` over every row, i.e. 12 full scans.
+Ideas, none tried: precompute at start-up a word -> row table (or keep `vocab`'s unnest with row
+ids) so the scan becomes a join; require street AND number in SQL, plus a separate cheap query for
+rows that end on a matching number; one trace query for all names (`IN`, or a name-prefix column
+sorted for zone maps). Constraints: the page must give the same hits as `browse/find_address.py`
+(search.py grades with its readers on purpose); the Space is meant for the free CPU tier (2 vCPU,
+16 GB), so start-up memory and time count too; the release Parquet will replace this stand-in, so
+anything precomputed must be built at start-up or shipped beside it. The CLI `browse/find_address.py`
+reads browse.db (now 25.7 GB) and was ~13 s at 5.5M rows; not re-timed.
+
 ## Larger, and the ones that unblock claims
 
 **10. A whole-volume gold slice.** Hand-label ~200 lines sampled across one volume's *listing*

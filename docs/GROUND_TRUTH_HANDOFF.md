@@ -27,6 +27,7 @@ publisher — the prompt tag is `[publisher=trow; year=1913/14]`; the validator 
 | `sample_volumes.py` | stratified selector → `gold_sample/worklist.csv` (42 reps; publisher×col, deep/std targets) + `WORKLIST.md` checklist |
 | `run_surya_on_samples.py` | batch Surya OCR (gpu env) over the worklist dirs; listing-pages-only, blank-skip, resumable, per-image load |
 | `make_gold_tool.py` | builds the self-contained HTML editor from Surya JSON + manifest; line-crop · raw_line · 8 fields; autosave/Import; **cols/year auto-resolve from master_directories.csv**; `--max-lines N` |
+| `gold_from_lines.py` | (2026-11-01) the same editor seeded from an ingested `<id>_lines.jsonl` + IIIF images: no Surya, no `directory-pipeline`. Draws listing leaves (seeded), keeps emission order, exports `context.ocr_line` (+ `ia_id`/`leaf`/`bbox`); `--ocr-input` gives the real-input twin. **Cannot see lines lost before the model**: see its docstring |
 | `validate_gold.py` | QA on the export — ERRORS (break evaluate.py) + WARNINGS (drift/convention slips) + fill-rates |
 
 **Per-volume loop** (run from `directory-pipeline/`; Surya needs `uv sync --extra gpu`, and is

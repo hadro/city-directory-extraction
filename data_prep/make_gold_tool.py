@@ -7,7 +7,9 @@ Build a self-contained HTML tool for hand-creating GOLD ground-truth eval lines
 from sampled directory pages.
 
 Input  : one or more sampled volume dirs (../directory-pipeline/output/<slug>/)
-         that have been OCR'd with Surya (run_surya_ocr.py -> {stem}_surya.json).
+         that have been OCR'd with Surya (run_surya_ocr.py -> {stem}_surya.json),
+         or a dir staged by data_prep/gold_from_lines.py from an ingested volume's own
+         lines ({stem}_ocr.json: IA's OCR, in reading order, each line's context kept).
 Output : a single .html file (no server, no deps) that shows, per OCR'd line:
              [ cropped line image ] [ raw_line (editable) ] [ 8 field cells ]
          ordered column-then-top-to-bottom, low-confidence lines tinted.
@@ -187,12 +189,13 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines
             meta["year"] = row["year"].strip()
         meta["publisher"] = _publisher_slug(row.get("publisher", "")) if row else ""
         print(f"  {d.name}: cols={cols} [{src}] publisher={meta['publisher'] or '?'}", file=sys.stderr)
-        sjsons = sorted(d.glob("*_surya.json"))
+        sjsons = sorted(d.glob("*_surya.json")) + sorted(d.glob("*_ocr.json"))
         if not sjsons:
-            print(f"  ! no *_surya.json in {d} (run run_surya_ocr.py first)", file=sys.stderr)
+            print(f"  ! no *_surya.json or *_ocr.json in {d} (run run_surya_ocr.py or "
+                  f"gold_from_lines.py first)", file=sys.stderr)
             continue
         for sj in sjsons:
-            stem = sj.name[:-len("_surya.json")]
+            stem = sj.name.rsplit("_", 1)[0]
             jpg = next((d / f"{stem}{ext}" for ext in (".jpg", ".jpeg", ".JPG")
                         if (d / f"{stem}{ext}").exists()), None)
             if jpg is None:
@@ -208,20 +211,26 @@ def _collect(dirs: list, cols_override, min_conf: float, master: dict, max_lines
                 continue
             if not width:
                 width = img.size[0]
-            order = _order_lines(lines, width, cols)
+            # hOCR emission order is already reading order; re-bucketing it by column would not be
+            order = (list(range(len(lines))) if data.get("reading_order")
+                     else _order_lines(lines, width, cols))
             rows = []
             for i in order:
                 if max_lines and taken >= max_lines:
                     break
                 ln = lines[i]
-                if (ln.get("confidence") or 0) < min_conf:
+                conf = ln.get("confidence")          # None: the OCR gave none (IA lines)
+                if conf is not None and conf < min_conf:
                     continue
                 txt = (ln.get("text") or "").strip()
                 if not txt:
                     continue
-                rows.append({"raw": txt, "conf": round(ln.get("confidence") or 0, 3),
-                             "col": _colidx(ln["bbox"], width, cols),
-                             "crop": _crop_b64(img, ln["bbox"])})
+                row = {"raw": txt, "conf": None if conf is None else round(conf, 3),
+                       "col": _colidx(ln["bbox"], width, cols),
+                       "crop": _crop_b64(img, ln["bbox"])}
+                if ln.get("context"):
+                    row["ctx"] = ln["context"]       # merged into the exported context
+                rows.append(row)
                 taken += 1
             if rows:
                 pages.append({"image": jpg.name, "year": meta["year"],
@@ -392,7 +401,7 @@ const FIELDS = DATA.fields;
 // ---- state ----
 const entries = [];
 PAGES.forEach((pg, pi) => pg.rows.forEach((r, ri) => entries.push({
-  pi, ri, col: r.col || 0, raw: r.raw, conf: r.conf, crop: r.crop, skip: false,
+  pi, ri, col: r.col || 0, raw: r.raw, conf: r.conf, crop: r.crop, ctx: r.ctx || null, skip: false,
   rec: Object.fromEntries(FIELDS.map(f => [f, f === 'is_business' ? false : '']))
 })));
 const arState = {};           // page index -> alphabetical_range
@@ -419,7 +428,7 @@ publisherInput.oninput = () => { publisher = publisherInput.value; scheduleSave(
 
 // ---- card (shared by both modes) ----
 function card(en) {
-  const wrap = el('div', {class: 'card' + (en.skip ? ' skip' : '') + (en.conf < 0.7 ? ' lowconf' : '')});
+  const wrap = el('div', {class: 'card' + (en.skip ? ' skip' : '') + (en.conf != null && en.conf < 0.7 ? ' lowconf' : '')});
 
   const strip = el('div', {class: 'strip'});
   if (en.crop) strip.appendChild(el('img', {src: 'data:image/jpeg;base64,' + en.crop}));
@@ -431,7 +440,7 @@ function card(en) {
   skipBox.onchange = () => { en.skip = skipBox.checked; wrap.classList.toggle('skip', en.skip); updateStat(); };
   wrap.appendChild(el('div', {class: 'metarow'}, [
     el('label', {}, [skipBox, ' skip (not an entry)']),
-    `conf ${en.conf}`,
+    en.conf == null ? '' : `conf ${en.conf}`,
     `${PAGES[en.pi].image}`
   ]));
 
@@ -571,12 +580,12 @@ function exportGold() {
     FIELDS.forEach(f => rec[f] = (f === 'is_business') ? en.rec[f] : String(en.rec[f]).trim());
     lines.push(JSON.stringify({
       raw_line: en.raw.trim(),
-      context: {
+      context: Object.assign({}, en.ctx || {}, {
         publisher: publisher.trim(),
         alphabetical_range: (arState[en.pi] || '').trim(),
         directory_year: String(PAGES[en.pi].year || ''),
         image: PAGES[en.pi].image
-      },
+      }),
       record: rec
     }));
   });

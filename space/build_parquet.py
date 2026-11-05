@@ -33,9 +33,10 @@ DB = REPO / "data" / "browse.db"
 OUT = REPO / "data" / "space" / "records.parquet"
 COLUMNS = ["record_id", "volume", "leaf", "year", "publisher", "city", "borough", "raw_line", "name_resolved",
            "occupation_role", "address_resolved", "home_address_resolved", "usable", "crop"]
-# A volume assembled from two roots is in browse.db twice (Doggett 1845 now: run 1's IA-text
-# reading and the damaged tier's re-OCR, browse/sources.toml; 1906BPL and Mercein once D's
-# first/clean tier lands). Keep one copy, from the root earliest in this list, newest first. A
+# A volume assembled from two roots was in browse.db's records twice until PIPELINE #41, which
+# moved the older copies to records_superseded ([one_copy] in browse/sources.toml, the same list
+# as this one); this guard is kept for a database built before that, or without [one_copy]. Keep
+# one copy, from the root earliest in this list, newest first. A
 # volume under a root not listed stops the build. The release plan's rule ("One reading per
 # volume in the export") is the same, except that the release ships nothing from run 1's root,
 # while this stand-in keeps a volume run 1 alone has (1906BPL until D lands, and the 0030/0036

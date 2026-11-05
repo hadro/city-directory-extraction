@@ -24,6 +24,28 @@ index = ["record_id", ["volume", "leaf"], "run", "section", "entry_shaped", "non
          "district", "name_mark", "line_source"]
 fts = ["raw_line", "name_resolved", "occupation_role", "employer", "address_resolved",
        "home_address_resolved", "spouse_name"]
+# a value twice fails a build that changed the table (~15 s by the record_id index at 15.8M
+# rows): [one_copy] below is what keeps it so
+unique = ["record_id"]
+
+# The copies [one_copy] sets aside: still browsable, and still read by results/
+# usable_vs_entry_labels_1906BPL.py and the blog figures. A ditto_source here names a line of
+# this table, not of records. Two of one volume's copies here could share an id.
+[tables.records_superseded]
+index = ["record_id", ["volume", "leaf"], "root", "usable"]
+
+# One copy of each volume in records (PIPELINE #41). A volume assembled under two roots keeps the
+# copy from the root earliest here; the others go to records_superseded. So does a volume whose
+# survey sidecar says `duplicate-of:<id>` with <id> loaded (0030 is another scan of Hearne 1852,
+# 0036 of 1857BPL). A volume in two files under a root not listed stops the build: add the root.
+# space/build_parquet.py's ROOTS_NEWEST_FIRST and the release plan ("one reading per volume") are
+# the same rule.
+[one_copy]
+table = "records"
+superseded = "records_superseded"
+roots_newest_first = ["data/volumes_books_first_clean_v2", "data/volumes_books_damaged_v6",
+                      "data/volumes_reocr_v2", "data/volumes_run1"]
+duplicate_sidecar = "data_prep/survey/ia_{volume}.json"
 
 # One [[sources]] per set of files: .jsonl or .jsonl.gz, one JSON object per line. Every row
 # gets `run` (the file's parent directory unless `run` is set here) and `source_file`. Rows with
@@ -37,7 +59,7 @@ infer_root = ["data/volumes_run1", "data/volumes_reocr"]
 
 # The 4B over the re-OCR'd abbyy8-damaged tier (job 21014769, 2026-10-29, plus round 13's delta
 # job 21824354, 2026-11-04; `root` data/volumes_books_damaged_v6): 39 volumes, 4.76M rows. Its own directory, so run 1's IA-text
-# records of Doggett 1845 stay beside it (the same volume twice; facet `root`). The canary's job-3
+# records of Doggett 1845 stay on disk beside it ([one_copy] puts them in records_superseded). The canary's job-3
 # records (data/records_canary) are superseded by these and are not loaded.
 [[sources]]
 table = "records"
@@ -46,7 +68,7 @@ glob = "data/records_books_damaged/*/*.jsonl.gz"
 # The 4B over the re-OCR'd first and abbyy8-clean tiers plus the 14 BPL volumes (round 12, job
 # 2026-11-02, plus round 13's delta; `root` data/volumes_books_first_clean_v2): 75 volumes, 10.51M
 # rows. Doubles browse.db (~17 GB more at ~1.6 KB a row). Its 1906BPL and Mercein are also run
-# 1's; space/build_parquet.py keeps this copy.
+# 1's; records holds this copy, records_superseded run 1's ([one_copy]).
 [[sources]]
 table = "records"
 glob = "data/records_books_first_clean/*/*.jsonl.gz"

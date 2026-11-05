@@ -28,7 +28,15 @@ no boolean) and lists become JSON text (`ditto_flags`, which Datasette can facet
 Every row also gets `run` (the file's directory, unless the source sets one), `source_file`, and
 `root` where the row lacks it and the source says where to look (`infer_root`).
 
-rowids are not stable across reloads, so a Datasette row URL is not a bookmark; record_id is.
+A volume is in `records` once ([one_copy], PIPELINE #41). Assembled under two roots, it keeps the
+newest root's copy there and the other goes to `records_superseded`, as does an edition already
+loaded under another id; the build stops on a volume under a root the config does not rank. A
+`unique` column that holds a value twice fails the build.
+
+rowids are not stable across reloads, so a Datasette row URL is not a bookmark. record_id is, as
+long as the volume's copy comes from the same root: it is the line's position in that root's own
+line files, so a copy from a newer root numbers its lines afresh, and the superseded copy's
+`1906BPL:42:85` is another line than the kept copy's.
 """
 from __future__ import annotations
 
@@ -90,6 +98,14 @@ def read_rows(path: Path):
         for line in fh:
             if line.strip():
                 yield json.loads(line)
+
+
+def first_row(path: Path) -> dict:
+    """The file's first row, or {} where there is none to read (load_file reports why)."""
+    try:
+        return next(read_rows(path), {})
+    except UNREADABLE:
+        return {}
 
 
 def columns(con, table: str) -> list:
@@ -238,6 +254,66 @@ class VolumeMeta:
 
     def refs(self) -> dict:
         return {self.key: ("volumes", "volume")}
+
+
+class OneCopy:
+    """[one_copy] in sources.toml (PIPELINE #41): each volume once in `table`. Where its files
+    were assembled under two roots, the copy from the root earliest in `roots_newest_first` stays
+    and the others go to `superseded`; so does every copy of a volume whose survey sidecar
+    (`duplicate_sidecar`, a path with {volume} in it) says `duplicate-of:<id>` with <id> loaded,
+    the same edition under another id. In `table` they would count the volume twice, and two
+    roots' copies share record_ids that name different lines. A file is taken to hold one volume,
+    as assemble_records.py writes them, and is known by its first row."""
+
+    def __init__(self, ocfg: dict):
+        self.table = ocfg.get("table", "records")
+        self.key = ocfg.get("key", "volume")
+        self.superseded = ocfg["superseded"]
+        self.rank = {r: i for i, r in enumerate(ocfg["roots_newest_first"])}
+        self.sidecar = ocfg.get("duplicate_sidecar")
+
+    def duplicate_of(self, volume):
+        p = resolve(self.sidecar.format(volume=volume)) if self.sidecar else None
+        if not p or not p.exists():
+            return None
+        status = str(json.loads(p.read_text(encoding="utf-8")).get("survey_status") or "")
+        return status.split(":", 1)[1] if status.startswith("duplicate-of:") else None
+
+    def route(self, files: list) -> dict:
+        """[(key, path, find_root)] bound for `table` -> {key: volume} of the ones that go to
+        `superseded`. Stops the build, before it changes anything, on a volume in two files
+        under a root it cannot rank, or under the same root twice."""
+        by_vol = collections.defaultdict(list)
+        for key, path, find_root in files:
+            row = first_row(path)
+            vol = row.get(self.key)
+            if vol is not None:
+                by_vol[vol].append((row.get("root") or (find_root(vol) if find_root else None),
+                                    key))
+        out = {}
+        for vol, copies in by_vol.items():
+            if len(copies) < 2:
+                continue
+            unranked = sorted(f"{k} ({r})" for r, k in copies if r not in self.rank)
+            if unranked:
+                raise SystemExit(f"{vol} is in {len(copies)} files, and roots_newest_first in "
+                                 f"[one_copy] does not rank the root of {', '.join(unranked)}")
+            copies.sort(key=lambda c: self.rank[c[0]])
+            if copies[0][0] == copies[1][0]:
+                raise SystemExit(f"{vol} is twice under {copies[0][0]}: {copies[0][1]}, "
+                                 f"{copies[1][1]}; which is its copy cannot be told. Two runs "
+                                 f"over the same lines go in two tables (`table` in [[sources]])")
+            out.update({k: vol for _r, k in copies[1:]})
+        for vol, copies in by_vol.items():
+            if self.duplicate_of(vol) in by_vol:
+                out.update({k: vol for _r, k in copies})
+        return out
+
+
+def duplicated(con, table: str, col: str) -> list:
+    """The values of `col` that `table` holds more than once (~3 s over 16M rows by its index)."""
+    return [r[0] for r in con.execute(f"SELECT {q(col)} FROM {q(table)} WHERE {q(col)} IS NOT "
+                                      f"NULL GROUP BY {q(col)} HAVING count(*) > 1")]
 
 
 def write_volumes(con, meta: VolumeMeta):
@@ -401,10 +477,14 @@ def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BUL
     loaded = {r[0]: r for r in con.execute(
         "SELECT path, tbl, size, mtime_ns, source, volumes, meta FROM loaded_files")}
     meta = VolumeMeta(cfg["volumes"]) if cfg.get("volumes") else None
+    one = OneCopy(cfg["one_copy"]) if cfg.get("one_copy") else None
+    # the tables whose rows get [volumes]' columns: its own, and where its copies are set aside
+    described = ({meta.table} | ({one.superseded} if one and one.table == meta.table else set())
+                 if meta else set())
     t0 = time.time()
     n_stale = 0
     seen, empty_sources, touched = set(), set(), set()
-    todo, total_bytes, changed_bytes = [], collections.Counter(), collections.Counter()
+    files_in = []
     for src in cfg.get("sources", []):
         table = src.get("table", "records")
         files = sorted(Path(p) for p in glob.glob(str(resolve(src["glob"]))))
@@ -418,21 +498,33 @@ def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BUL
             if key in seen:
                 continue
             seen.add(key)
-            st = path.stat()
-            total_bytes[table] += st.st_size
-            prev = loaded.get(key)
-            if prev and prev[1] == table and (prev[2], prev[3]) == (st.st_size, st.st_mtime_ns):
-                if not (meta and table == meta.table
-                        and prev[6] != meta.fingerprint(json.loads(prev[5] or "[]"))):
-                    continue
-                n_stale += 1                        # same file, its volumes' metadata changed
-            changed_bytes[table] += st.st_size
-            todo.append((table, path, key, src, find_root, prev[1] if prev else None))
+            files_in.append((table, path, key, src, find_root))
+    if one:
+        aside = one.route([(k, p, f) for t, p, k, _s, f in files_in if t == one.table])
+        files_in = [(one.superseded if k in aside else t, p, k, s, f)
+                    for t, p, k, s, f in files_in]
+        if aside:
+            print(f"  in {one.superseded}, another copy of the volume or its edition being in "
+                  f"{one.table}: {', '.join(sorted(set(aside.values())))}")
+    todo, total_bytes, changed_bytes = [], collections.Counter(), collections.Counter()
+    for table, path, key, src, find_root in files_in:
+        st = path.stat()
+        total_bytes[table] += st.st_size
+        prev = loaded.get(key)
+        if prev and prev[1] == table and (prev[2], prev[3]) == (st.st_size, st.st_mtime_ns):
+            if not (table in described
+                    and prev[6] != meta.fingerprint(json.loads(prev[5] or "[]"))):
+                continue
+            n_stale += 1                            # same file, its volumes' metadata changed
+        changed_bytes[table] += st.st_size
+        todo.append((table, path, key, src, find_root, prev[1] if prev else None))
     if n_stale:
         print(f"  {n_stale} files to reload for changed volume metadata ([volumes] in the config, "
               f"or the catalog, census or survey sidecars)")
     gone = [k for k, row in loaded.items() if k not in seen and row[4] not in empty_sources]
-    for table in {t for t, *_ in todo} | {loaded[k][1] for k in gone}:
+    # every table whose rows change: loaded into, left by a file moving table, or a file gone
+    for table in ({t for t, *_ in todo} | {p for *_, p in todo if p}
+                  | {loaded[k][1] for k in gone}):
         drop_facet_counts(con, table)
     present = tables(con)
     for table in changed_bytes:
@@ -444,11 +536,11 @@ def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BUL
     for table, path, key, src, find_root, prev_table in todo:
         extra = {"run": src.get("run") or path.parent.name, "source_file": key}
         n = load_file(con, table, cfg.get("tables", {}).get(table, {}), path, extra, src["glob"],
-                      find_root, prev_table, meta if meta and table == meta.table else None)
+                      find_root, prev_table, meta if table in described else None)
         if n is None:
             n_skipped += 1
             continue
-        touched.add(table)
+        touched.update({table, prev_table} - {None})
         n_loaded += 1
         n_rows += n
         print(f"  loaded {key}  {n:,} rows -> {table} (run {extra['run']})")
@@ -470,6 +562,13 @@ def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BUL
             touched.add(table)
         if ensure_indexes(con, table, cfg.get("tables", {}).get(table, {})):
             touched.add(table)
+    # only where rows changed: ~15 s a column at 15.8M rows
+    twice = {(t, c): d for t, tcfg in cfg.get("tables", {}).items() if t in present & touched
+             for c in tcfg.get("unique", []) if c in columns(con, t)
+             for d in [duplicated(con, t, c)] if d}
+    for (t, c), d in twice.items():
+        print(f"  NOT UNIQUE: {len(d):,} values of {t}.{c} occur more than once, e.g. "
+              f"{', '.join(map(str, d[:3]))}")
     if meta:
         write_volumes(con, meta)                     # after the indexes: its counts read one
     if touched:
@@ -490,7 +589,9 @@ def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BUL
           f"[{rel(db)}, {time.time() - t0:.1f}s]")
     if n_skipped:
         print(f"{n_skipped} files skipped: see above")
-    return 1 if n_skipped else 0
+    if twice:
+        print(f"FAILED: {', '.join(f'{t}.{c}' for t, c in twice)} not unique: see above")
+    return 1 if n_skipped or twice else 0
 
 
 def _self_test() -> int:
@@ -640,6 +741,55 @@ def _self_test() -> int:
         assert columns(con, "records") == ["record_id", "volume", "raw_line", "scan", "ia_url",
                                            "run", "source_file"], \
             "the files' order, then what [volumes] copies; no root found, no column"
+
+        # [one_copy] (PIPELINE #41): a volume under two roots, whose copies share an id that
+        # names different lines, and an edition loaded again under another id
+        old, new = tmp / "records2" / "old", tmp / "records2" / "new"
+        old.mkdir(parents=True)
+        new.mkdir()
+
+        def put(d, name, rows):
+            (d / name).write_bytes(gzip.compress("".join(json.dumps(r) + "\n" for r in rows)
+                                                 .encode()))
+        put(old, "volD.jsonl.gz", [{"record_id": "volD:1:0", "volume": "volD", "root": "r_old",
+                                    "raw_line": "Ames Jos, carman"}])
+        put(new, "volD.jsonl.gz", [{"record_id": "volD:1:0", "volume": "volD", "root": "r_new",
+                                    "raw_line": "Framing our Specialty."}])
+        put(old, "volE.jsonl.gz", [{"record_id": "volE:1:0", "volume": "volE", "root": "r_old",
+                                    "raw_line": "Bell Ann, widow"}])
+        (tmp / "ia_volE.json").write_text('{"survey_status": "duplicate-of:volD"}')
+        base = (f'[tables.records]\nindex = ["record_id"]\nunique = ["record_id"]\n'
+                f'facets = ["volume"]\n'
+                f'[[sources]]\nglob = "{tmp / "records2"}/*/*.jsonl.gz"\n')
+        oc = (f'[one_copy]\nsuperseded = "records_superseded"\n'
+              f'roots_newest_first = ["r_new", "r_old"]\n'
+              f'duplicate_sidecar = "{tmp}/ia_{{volume}}.json"\n')
+        db2 = tmp / "c.db"
+        got = lambda t: sqlite3.connect(db2).execute(  # noqa: E731
+            f"SELECT record_id, raw_line FROM {t} ORDER BY rowid").fetchall()
+        cfg.write_text(base)
+        assert build(cfg, db2) == 1, "an id twice fails the build"
+        cfg.write_text(base + oc)
+        assert build(cfg, db2) == 0
+        assert got("records") == [("volD:1:0", "Framing our Specialty.")], "the newest root's copy"
+        assert got("records_superseded") == [("volD:1:0", "Ames Jos, carman"),
+                                              ("volE:1:0", "Bell Ann, widow")], "moved, not lost"
+        assert sqlite3.connect(db2).execute(
+            "SELECT value, count FROM facet_counts WHERE tbl = 'records'").fetchall() == [
+            ("volD", 1)], "the table the copies left is counted again"
+        (new / "volD.jsonl.gz").unlink()
+        assert build(cfg, db2) == 0
+        assert got("records") == [("volD:1:0", "Ames Jos, carman")], "the older copy is the copy"
+        assert got("records_superseded") == [("volE:1:0", "Bell Ann, widow")]
+        put(new, "volD.jsonl.gz", [{"record_id": "volD:1:0", "volume": "volD", "root": "r_new",
+                                    "raw_line": "x"}])
+        cfg.write_text(base + oc.replace('"r_new", "r_old"', '"r_new"'))
+        try:
+            build(cfg, db2)
+            raise AssertionError("an unranked root went through")
+        except SystemExit as e:
+            assert "r_old" in str(e), e
+        assert got("records") == [("volD:1:0", "Ames Jos, carman")], "stopped before any change"
     print("self-test ok")
     return 0
 

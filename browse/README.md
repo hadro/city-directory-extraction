@@ -55,8 +55,8 @@ There's no file watcher. Run the build after an assemble step.
 ## What's in it
 
 **`sources.toml`** says which files are loaded: today `data/records/*/*.jsonl.gz` (run 1 and the
-reocr tier), `data/records_books_damaged/` and `data/records_books_first_clean/`, one table,
-`records`. To load another folder (including one outside this repo), add a `[[sources]]` block.
+reocr tier), `data/records_books_damaged/` and `data/records_books_first_clean/`, into
+`records`, with superseded copies in `records_superseded` (below). To load another folder (including one outside this repo), add a `[[sources]]` block.
 A file whose rows have a different shape goes in a table of its own. A new key in a file
 becomes a new column.
 
@@ -67,9 +67,16 @@ The rows are the files' own values, plus three columns:
   roots.** `4b-100k+guard` holds run 1's five volumes (`data/volumes_run1`) and the reocr tier's
   39 (`data/volumes_reocr`), so split a run's totals by `root`. `assemble_records.py` writes
   `root` on every row from 2026-10-20 on. For files assembled before that, it's inferred from
-  `infer_root` in `sources.toml`. **Known problem:** three volumes (`1906BPL`, Doggett 1845,
-  Mercein 1820) are loaded under two roots, so their counts are doubled and their `record_id`s are
-  not unique (not fixed; PIPELINE #41). Filter on `root` until it is.
+  `infer_root` in `sources.toml`.
+- **One copy of a volume in `records`** (`[one_copy]` in `sources.toml`, PIPELINE #41). A volume
+  assembled under two roots keeps the newest root's copy in `records`. The other copy goes to
+  **`records_superseded`**, as does an edition already loaded under another id (a survey
+  sidecar's `duplicate-of`). Today that table holds run 1's five volumes: `1906BPL`, Doggett
+  1845 and Mercein 1820 (each also in a re-OCR'd tier), and `micro_IABROOKLYN_0030` and `_0036`
+  (other scans of Hearne 1852 and `1857BPL`). The two copies share `record_id`s that name
+  different lines, so look a superseded row's `ditto_source` up in `records_superseded`. A
+  volume in two files under a root `roots_newest_first` doesn't list stops the build, and a
+  `record_id` in `records` twice fails it.
 - **`source_file`**: where the row came from. The `loaded_files` table lists every file, with
   when it was loaded and its row count.
 
@@ -192,8 +199,8 @@ Lists every line that may give an address, with a link per grade that opens thos
 and all, in the browser. It searches the address finder's records Parquet
 (`data/space/records.parquet`; make it, and its word index, with `uv run
 space/build_parquet.py` after a build) with the finder's own search, `space/search.py`, so the
-script and the page give the same lines. That Parquet holds one copy of a volume loaded twice
-and no `eval_holdout` rows, so neither do the script's lines. It says so when browse.db is newer
+script and the page give the same lines. That Parquet holds no `eval_holdout` rows, so neither
+do the script's lines. It says so when browse.db is newer
 than the Parquet. Until 2026-11-04 it read browse.db's full-text index: 15-56 s a search at 16M
 rows, and it crashed on a volume loaded twice, since two copies of a line sorted as equal. It reads the word index's word list for spellings of the street word
 (Leflerts, Lefferta, Leffert©) and for the number's look-alikes (I66, hl66). A spelling may be
@@ -246,7 +253,9 @@ Written down 2026-10-20, none of it built yet:
    (`data/*_eval.jsonl`), the prediction files, and the alignment `eval/evaluate.py` already
    does. This would be the most useful addition for model work.
 2. **Run against run.** Every row carries `run`, so two runs over the same lines can be joined
-   on `record_id`. For example, assemble `4b-100k` next to `4b-100k+guard` to see the 32,941
+   on `record_id`, the second loaded into a table of its own (`table` in its `[[sources]]`
+   block: in `records`, `[one_copy]` stops the build on a volume under one root twice). For
+   example, assemble `4b-100k` next to `4b-100k+guard` to see the 32,941
    reocr-tier records the guard changed. That join could be saved as a view showing only the
    fields that differ.
    `record_id` is stable only across runs over the same lines. After a re-OCR the ids no longer

@@ -3546,8 +3546,9 @@ Open:
 - Pre-1898 lines would be better served by period maps than by today's (the NYPL Map Warper
   atlases) or by OldNYC's geocoded photos; not looked at.
 
-**41. browse.db holds three volumes twice, and `record_id` is not unique there (found 2026-11-05,
-while checking figures for the second blog post; NOT FIXED, for the next agent).**
+**41. ~~browse.db holds three volumes twice, and `record_id` is not unique there~~ FIXED 2026-11-05
+(found the same day, while checking figures for the second blog post): one copy of a volume in
+`records`, the rest in `records_superseded`; see *Why it happened* and *Fixed* below.**
 `data/browse.db` has 16,087,138 rows. The three re-OCR'd tiers (`data/volumes_books_damaged_v6`,
 `data/volumes_books_first_clean_v2`, `data/volumes_reocr_v2`) have 15,776,206. The 310,932 rows
 between are `data/volumes_run1`: run 1's five volumes, loaded from `data/records/4b-100k+guard/`
@@ -3589,22 +3590,54 @@ sqlite3 -readonly data/browse.db "select root, count(*) from records group by ro
 sqlite3 -readonly data/browse.db "select count(*) from (select 1 from records group by record_id having count(*) > 1)"
 ```
 
-Open:
-- **Decide the rule, then make browse.db follow it** (hadro's call; the Parquet's rule is the obvious
-  one): one copy per volume, newest root first, applied in `browse/build_db.py`, either by not loading
-  the superseded copy or by loading it with a flag the default facets exclude. `browse/build_db.py`
-  and `browse/README.md` carry uncommitted edits from other sessions; read `git diff` first.
-- **Keep run 1's record files on disk.** `results/usable_vs_entry_labels_1906BPL.py` and the other
-  run-1 measurements read that copy by `root`. Do not renumber ids: `ditto_source` and the Parquet
-  use them as they are.
-- **Add a check that fails the build when `record_id` is not unique** within a table (the query above
-  takes about 3 s), and correct the "record_id is" sentence in `build_db.py`'s help.
-- **Re-run `write_facet_counts` and recompute `volumes.records`** after the change. Dropping five
-  files' rows is a delete, not a reload, but watch disk (22 GiB free of 926 on 2026-11-05, with a
-  25.7 GB file), `df` rather than Finder. hadro's Datasette on :8001 keeps the file open: leave it
-  running, stop nothing by name pattern, and say if it needs a restart.
-- **Not looked at:** whether the cards (`RECORDS_CARD.md`, `DATASET_CARD.md`) or the first blog
-  post quote a count that came from browse.db with run 1 still in it.
+*Why it happened.* `build_db.py` knew files, not volumes: it keys `loaded_files` by path and loads
+whatever the `[[sources]]` globs match. `data/records/*/*.jsonl.gz` matches all 44 files of
+`4b-100k+guard`, run 1's five beside the reocr tier's 39, and no glob can split one directory. When
+the damaged and first/clean tiers came in as their own sources (0ed396b, 2026-10-29; round 12),
+their 1906BPL, Doggett and Mercein were new paths, so both copies loaded. It was on purpose at the
+time: `sources.toml` said "the same volume twice; facet `root`", and left the one-copy rule to
+`space/build_parquet.py`. Nothing objected, because `record_id` has no root in it and its index is
+not UNIQUE.
+
+*Fixed 2026-11-05 (hadro's call: the Parquet's rule).* `[one_copy]` in `browse/sources.toml`, applied
+by `build_db.py`'s `OneCopy`, before anything is written. Each file's volume and root come from its
+first row (or `infer_root`). A volume in two files keeps the copy from the root earliest in
+`roots_newest_first`, the same list as `ROOTS_NEWEST_FIRST`. The others go to a new table,
+**`records_superseded`**, and so does a volume whose sidecar says `duplicate-of:<id>` with <id>
+loaded. Superseded copies are moved to that table, not dropped, because
+`results/usable_vs_entry_labels_1906BPL.py` and both blog posts' figure scripts read run 1's copies.
+They now name that table. A volume in two files under an unranked root, or twice under one root,
+stops the build with the files named. `unique = ["record_id"]` on `records` fails any build that
+changed the table and left a value twice (~15 s at 15.8M rows, not the 3 s guessed above). Ids
+are untouched, and run 1's files stay on disk.
+
+The build moved 5 files (310,932 rows) in 255 s. Disk 17 GiB free after; the file did not grow.
+`records` is 15,776,206 rows: 4,755,462 damaged, 10,511,908 first/clean, 508,836 reocr. It has 0
+duplicate ids, 14,176,765 `usable` (89.9%) and 15,497,151 outside `eval_holdout`, which is the
+Parquet's count, so the Parquet does not need rebuilding. `volumes` gives 1906BPL 202,980 under one
+root (it was 397,181), and the `volumes` rows sum to 15,776,206 over 153 volumes. `facet_counts`
+sums to 15,776,206 per column. The `usable_vs_entry_labels_1906BPL` run reproduces its result file
+exactly.
+
+What the fix itself got wrong first:
+- **The facet counts went stale.** `drop_facet_counts` ran only for the tables files loaded *into*,
+  so `records`, which the moved rows left, kept 16,087,138. Fixed (a moved file's old table counts
+  as changed, and as touched), with a self-test case for it. The real counts were rewritten once by
+  hand with the same two functions.
+- **A figure was already reading the wrong line by luck.** The first post's copy-guard figure
+  (`make_figures.py`, "George" for "Goerck") looks up `doggettsnewyorkc1845dogg:19:64` with
+  `limit 1`. That returned run 1's "Abraams Isaac, shoemaker, 45 Goerck" only because run 1 loaded
+  first. In the damaged tier that id is "Aborn Robert W. mer. 148 Pearl", and Abraams is `:19:65`.
+  The lookup now reads `records_superseded` first, so the figure is unchanged.
+
+Not done:
+- `space/build_parquet.py` keeps its own one-copy guard, now a no-op on this database (its comment
+  says so).
+- `browse/README.md`'s "Run against run" idea now needs the second run in its own table. The
+  README and the build's error message say how.
+- The cards quote no browse.db count with run 1 in it. The first blog post's "15.6 million lines"
+  is not a browse.db number either way (the three tiers are 15.78M, the Parquet 15.50M), but it
+  matches neither. It already carries a TKTK.
 
 ## Larger, and the ones that unblock claims
 

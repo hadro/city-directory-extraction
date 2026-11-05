@@ -84,6 +84,16 @@ databases:
           root: "the chunk directory the volume was assembled from (assemble_records.py --root); inferred from browse/sources.toml for files assembled before 2026-10-20"
           run: the prediction run, the records directory the file sits in
           source_file: the file this row was loaded from
+      records_superseded:
+        size: 50
+        column_order: [record_id, crop, raw_line, name_resolved, address_resolved, root, volume,
+                       usable, role]
+        description_html: |-
+          The copies of a volume that <code>records</code> does not hold (<code>[one_copy]</code>
+          in <code>browse/sources.toml</code>, PIPELINE #41): an older root's assembly of a volume
+          a newer root has too, or an edition loaded again under another id. Today run 1's five
+          volumes. Their <code>record_id</code>s are the same as the kept copy's and name other
+          lines, and a <code>ditto_source</code> here names a row of this table.
       volumes:
         size: 100
         sort: year
@@ -126,8 +136,8 @@ databases:
           stated_approximate: whether the book's count is approximate
           ia_url: the item on archive.org
           catalog_notes: the catalog's notes
-          records: "rows of the volume in the records table (all runs); click for them"
-          usable: usable rows of the volume (all runs)
+          records: "rows of the volume in the records table (one copy, records_superseded aside); click for them"
+          usable: usable rows of the volume in the records table
           usable_per_stated_name: "usable rows per name the book states, where it states one and the volume is in a single run"
           runs: the runs the volume's records come from
           roots: the chunk directories they were assembled from

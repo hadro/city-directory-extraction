@@ -137,7 +137,9 @@ The second prints the point and, on its second line, the Street View link: `None
 has no panorama of its own within 50 m, and `no GOOGLE_MAPS_API_KEY` means the key wasn't read.
 As of 2026-11-04 the check had been tested only against mocked metadata answers (Google's own
 panorama 29 m off, linked with heading 30°; a user's photosphere, one ~110 m off, and
-ZERO_RESULTS, none linked), never against Google itself.
+ZERO_RESULTS, none linked), never against Google itself. On 2026-11-05 it worked against Google
+on the test Space (key as a Space secret): "155 Franklin" gave a Street View link for each pin,
+Manhattan's Franklin St (heading 188°) and Brooklyn's Franklin Av (97°), with no key in the page.
 
 The page and the script give the same lines: since 2026-11-04 the script runs this search over
 the same Parquet. So neither shows a held-out row, such as "h 76 Leffert© pi" (1906BPL:1193:111,

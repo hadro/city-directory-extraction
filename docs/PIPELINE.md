@@ -3338,8 +3338,41 @@ runover` 1,121 (true tails and ad lines, neither usable), `other -> start` 188, 
 read were real entries between hanging `E`s, so its printed count is likely low). Run 1's records
 were NOT re-assembled (529 lines; the export excludes that root).
 
-**39. The address finder is too slow at the full corpus (found 2026-11-04, after round 13; hadro is
-handing it to another agent).** `space/` (Gradio + DuckDB over `data/space/records.parquet`) was
+**39. ~~The address finder is too slow at the full corpus~~ FIXED 2026-11-04 (found the same day,
+after round 13).** On the laptop held to 2 threads (the free tier's count): start-up
+6-9 s (8 threads) -> **8.4 s on 2** (it was ~12-24 s on 2), ~2 GB; with the trace, 155 Franklin 11.19
+-> **2.48 s**, 166 Lefferts pl 9.40 -> 1.46, 45 Fulton 13.95 -> 2.37, 62 Euclid av 9.45 -> 1.66 (the
+"before" column is 8 threads). The heaviest seen is 100 5th av (23,633 hits) at 4.0 s.
+What changed, in `space/search.py`:
+- **A word index shipped beside the records** (`records.words.parquet`: 105M (word, row) pairs, 143 MB
+  as Parquet v2, ~1 min to build in `build_parquet.py`, `--index-only` for an existing file). It is
+  sorted by word, so a lookup reads only its own row groups (0.02-0.04 s). It is stamped with the row
+  count and an order-sensitive fingerprint of the record ids; a missing or stale index is rebuilt in
+  memory at start-up with a warning. The vocabulary comes from it in 0.4 s, replacing the 6-12 s
+  `unnest`.
+- **The records in memory.** A fetch by row number from the Parquet cost ~1.6 s on 2 threads; from
+  memory ~0.15 s. Only the 4 grading columns are fetched for candidates, and all of COLS for hits
+  only, because every projected column costs a pass over 15.5M rows (`crop`, 90 chars, is the widest).
+- **Two necessary conditions, so the hits are unchanged.** (a) Candidates = rows with a street or
+  number word (as before) that ALSO hold a word reading as the number or one digit off
+  (`near_terms`: as_number + lev 1, b as 6 or 8). Every grade needs such a token, wrapped and near
+  included. The ~9K rows whose number could be read through `| ! ]` or a non-ASCII numeral, which the
+  word split breaks, are always candidates (pseudo-word `~odd`). 45 Fulton: 281,735 -> 80,905.
+  (b) Python grades only rows where that token is followed within 2+k tokens by an unbroken piece of
+  the street word (`address_shape`). The pieces: split into d+1, a word within d edits keeps one
+  whole; a numbered street keeps its folded digits. 45 Fulton: 80,905 -> 18,476 graded, 62 Euclid
+  av: 47,084 -> 164. (c) Only lines whose last two tokens hold a near number go to the wrap pass,
+  which is what `read_wrapped` needs.
+- **The trace is one scan** (a `^(surname|...)` regex on `lower(name_resolved)`) instead of 12 `LIKE`s.
+**Checked:** 17 addresses against the committed scanning version, all hits with grade, how, flag,
+place and marker, and every traced line. 16 were identical, including 1 Wall st (28,549 hits),
+100 5th av, 131 E/West 110th st, 12 De Kalb av and 16 Ely pl. The 17th, "24 Lef ferts pl", differs
+by design: the vocabulary now counts rows holding a word, as the CLI's `fts5vocab` `doc` does, not
+occurrences. That tipped `ferns` over `other_streets`' 25% line, and two `near` lines on Ferns went.
+Open: time it on the real free tier (its cores are slower than an M2's). The wrap pass is now the
+largest share (13-27K lines a query, each needing its next line); `address_shape` on line + next
+line before `read_wrapped` would cut it, not done. The CLI `browse/find_address.py` (browse.db, FTS5)
+is untouched and not re-timed. *As found:* `space/` (Gradio + DuckDB over `data/space/records.parquet`) was
 built and timed at 5.5M rows: ~2 s to start, ~1-1.5 s a search (space/README). Round 13's rebuild
 put the first/clean tier in for the first time: 15,497,151 rows, 547 MB. Measured on the laptop
 (M2, 8 cores) with `results/finder_timing.py`, warm, one connection:

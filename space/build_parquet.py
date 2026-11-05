@@ -8,11 +8,13 @@ A local stand-in for the records release, for running the address-search Space (
 before the release is on Hugging Face.
 
     uv run space/build_parquet.py            # data/browse.db -> data/space/records.parquet
+    uv run space/build_parquet.py --index-only     # only records.words.parquet, for an existing file
 
 Only the columns the Space reads, the eval_holdout rows dropped (they are never published), one
 copy of a volume that is in browse.db twice (ROOTS_NEWEST_FIRST), in the release's planned order:
 year, volume, leaf, line. Not a release: the release is built from
-the record files, with its own columns and card (cards/RECORDS_CARD.md).
+the record files, with its own columns and card (cards/RECORDS_CARD.md). Then the Space's word
+index beside it (search.write_index), which the Space would otherwise build at every start.
 """
 from __future__ import annotations
 
@@ -23,6 +25,8 @@ import time
 from pathlib import Path
 
 import duckdb
+
+import search
 
 REPO = Path(__file__).resolve().parent.parent
 DB = REPO / "data" / "browse.db"
@@ -61,8 +65,11 @@ def main(argv=None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--db", default=str(DB))
     ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--index-only", action="store_true", help="write only the word index of --out")
     a = ap.parse_args(argv)
     out = Path(a.out)
+    if a.index_only:
+        return index(out)
     out.parent.mkdir(parents=True, exist_ok=True)
     t = time.time()
     con = duckdb.connect()
@@ -102,6 +109,13 @@ def main(argv=None) -> int:
           f"of {', '.join(twice) or 'no volume'} dropped; editions loaded twice under two ids: "
           f"{', '.join(f'{v} (a copy of {t})' for v, t in copies.items()) or 'none'}), "
           f"{out.stat().st_size / 2**20:.0f} MB, {time.time() - t:.0f} s")
+    return index(out)
+
+
+def index(out: Path) -> int:
+    t = time.time()
+    path = search.write_index(str(out))
+    print(f"{path}: {path.stat().st_size / 2**20:.0f} MB, {time.time() - t:.0f} s")
     return 0
 
 

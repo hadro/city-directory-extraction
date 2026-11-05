@@ -218,7 +218,8 @@ hold at 0.982. The only volume down was Trow 1909 p1 (-187), which is how #38 wa
 by hadro): the next delta's `--old` is the three new roots. browse.db now holds the first/clean
 tier too (`browse/sources.toml`): 16,087,138 rows, 25.7 GB, every root's count equal to its
 summary. The finder's Parquet: 15,497,151 rows, 547 MB, the new root kept for Doggett 1845,
-1906BPL and Mercein; searching it is now 9-14 s (PIPELINE #39, open). NOT YET DONE: the release
+1906BPL and Mercein; searching it took 9-14 s until PIPELINE #39 (fixed 2026-11-04: a word
+index beside it, `records.words.parquet`, 1.5-2.5 s on 2 threads). NOT YET DONE: the release
 export's roots.
 
 NYU's returns land in `~/Downloads/to_josh_YYYYMMDD[a-z]/` with a `NOTES-*.md`. Their notes have

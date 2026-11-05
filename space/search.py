@@ -1,14 +1,18 @@
 """
-browse/find_address.py's search in DuckDB over the records Parquet: no SQLite, no full-text index.
+browse/find_address.py's search in DuckDB over the records Parquet: no SQLite.
 
-The word list of the three address-bearing columns is built once (~2 s at 5.5M rows); a search
-then picks the street word's spellings and the number's look-alikes from it, pulls every row
-holding one as a whole word (~0.6 s), and grades them with find_address's own readers, so the
-two give the same answer. Wrapped lines are read with the next line by record_id, never by row
-order.
+The records are held in memory (~5 s at 15.5M rows on 2 threads, ~2 GB), and a word index
+(every word of the three address-bearing columns -> the rows holding it) is read from a Parquet
+beside them, records.words.parquet, which build_parquet.py writes. A search picks the street
+word's spellings and the number's look-alikes from the index's word list, takes the rows holding
+one of them AND a word that reads as the number or one digit off (no grade is possible without
+one, PIPELINE #39), and grades those with find_address's own readers, so the two give the same
+answer. A full scan per search took ~3 s on 2 threads at 15.5M rows; the index takes ~0.05 s.
+Wrapped lines are read with the next line by record_id, never by row order.
 """
 from __future__ import annotations
 
+import itertools
 import re
 import sys
 import time
@@ -42,18 +46,140 @@ MARKERS = {
 TEXT = "lower(coalesce(raw_line, '') || ' ' || coalesce(address_resolved, '') || ' ' " \
        "|| coalesce(home_address_resolved, ''))"
 WORDS = f"regexp_split_to_array({TEXT}, '[^a-z0-9]+')"
+# The index's word for a row whose number may be read through a character the word split breaks
+# on: as_number reads | ! ] as 1, and str.isdigit is true of non-ASCII numerals (2026-11-04: 8,961
+# rows). These rows are always candidates, so the near-number test below misses no line.
+ODD = "~odd"
+INDEX_SQL = f"""
+    SELECT DISTINCT w AS term, CAST(rid AS UINTEGER) AS rid
+    FROM (SELECT rowid AS rid, unnest({WORDS}) AS w FROM r) WHERE w <> ''
+    UNION ALL
+    SELECT '{ODD}', CAST(rowid AS UINTEGER) FROM r
+    WHERE regexp_matches({TEXT}, '[|!\\]]')
+       OR regexp_matches(regexp_replace({TEXT}, '[0-9]', '', 'g'), '\\p{{N}}')"""
+# What grading reads; the other COLS are fetched for the hits only (a column costs a pass over
+# every row in memory, and crop is the widest).
+GRADE_COLS = ["record_id", *fa.FIELDS]
+# What a lowercased character may be read as, as FOLD reads it (B is 8, b is 6). In a whole token
+# (as_number), | ! ] are 1 too and any non-ASCII numeral is a digit; in a cleaned street word
+# (ordinal), they are gone.
+LOOK = {"0": "0o", "1": "1il", "2": "2z", "5": "5s", "6": "6gb", "8": "8b"}
+DIGITISH = r"(?:[0-9ilogbsz|!\]]|[^\x00-\x7f])"
+STRIP = r"[.:;,'\"()]*"                         # what as_number strips from a token's ends
+
+
+def looks(d: str, token: bool = True) -> str:
+    """The characters that may be the digit d: in a whole token, or in a cleaned word."""
+    extra = r"|!\]" if token and d == "1" else ""
+    return "[" + d + LOOK.get(d, "") + extra + "]"
+
+
+def near_token(number: str) -> str:
+    """A whitespace token of a lowercased line that as_number may read as `number` or one digit
+    off: a pattern every grade needs, `near` and `wrapped` included."""
+    digits = [looks(d) for d in number]
+    forms = {"".join(digits)}
+    for p in range(len(number) + 1):
+        if p < len(number):
+            forms.add("".join(digits[:p]) + DIGITISH + "".join(digits[p + 1:]))
+            forms.add("".join(digits[:p] + digits[p + 1:]))
+        forms.add("".join(digits[:p]) + DIGITISH + "".join(digits[p:]))
+    forms.discard("")
+    return rf"(?<!\S){STRIP}[hr]?(?:{'|'.join(sorted(forms))}){STRIP}(?!\S)"
+
+
+def address_shape(number: str, words: list, dist: int):
+    """A pattern every line match_tokens reads the address in matches, lowercased: a near-number
+    token, at most 2 + k tokens (a direction, the street's words before its anchor, the first of
+    two rejoined parts), then a piece of the street word kept whole. Split into d + 1 pieces, a
+    word within d edits keeps at least one of them; a numbered street keeps its folded digits. A
+    piece may run across a hyphen or the gap of a word the OCR split. None where no piece can be
+    told (an anchor shorter than d + 1): every candidate is graded then."""
+    anchor = fa.anchor_of(words)
+    k = fa.split_direction(words)[1].index(anchor)
+    gap = "[^a-z0-9]*"
+    if (numbered := fa.ordinal(anchor)):
+        pieces = [gap.join(looks(d, token=False) for d in numbered)]
+    else:
+        d = fa.street_dist(anchor, dist)
+        if len(anchor) < d + 1:
+            return None
+        size = len(anchor) / (d + 1)
+        pieces = [gap.join(re.escape(c) for c in anchor[round(i * size):round((i + 1) * size)])
+                  for i in range(d + 1)]
+    return re.compile(rf"{near_token(number)}(?:\s+\S+){{0,{2 + k}}}\s+\S*?(?:{'|'.join(pieces)})")
+
+
+def ends_near(r, number: str) -> bool:
+    """A number or one digit off among the line's last two tokens: what read_wrapped needs."""
+    return any(n is not None and fa.lev(n, number, 1) <= 1
+               for n in map(fa.as_number, (r["raw_line"] or "").split()[-2:]))
+
+
+def index_path(parquet: str) -> Path:
+    """records.parquet -> records.words.parquet, beside it."""
+    return Path(parquet).with_suffix(".words.parquet")
+
+
+def sql_str(s) -> str:
+    return "'" + str(s).replace("'", "''") + "'"
+
+
+def load_records(con, parquet: str) -> tuple:
+    """Table r: the records in memory, in the file's order (rowid = row number). Returns (rows,
+    volumes, fingerprint): the fingerprint ties an index to this order of these record ids."""
+    con.execute(f"CREATE TABLE r AS SELECT {', '.join(COLS)} FROM read_parquet({sql_str(parquet)})")
+    return con.execute("SELECT count(*), count(DISTINCT volume), "
+                       "CAST(bit_xor(hash(rowid, record_id)) AS VARCHAR) FROM r").fetchone()
+
+
+def write_index(parquet: str, out: str | None = None) -> Path:
+    """The word index of `parquet`, sorted by word so a search reads only the row groups of its
+    own words. ~1 min on 8 threads at 15.5M rows, 143 MB."""
+    out = Path(out) if out else index_path(parquet)
+    con = duckdb.connect()
+    rows, _, fingerprint = load_records(con, parquet)
+    tmp = out.with_suffix(".tmp")
+    con.execute(f"""COPY ({INDEX_SQL} ORDER BY term, rid) TO {sql_str(tmp)}
+                    (FORMAT parquet, COMPRESSION zstd, ROW_GROUP_SIZE 122880, PARQUET_VERSION v2,
+                     KV_METADATA {{rows: '{rows}', fingerprint: '{fingerprint}'}})""")
+    tmp.replace(out)
+    return out
+
+
+def index_stamp(path: Path) -> tuple | None:
+    """(rows, fingerprint) an index was built for, or None if there is none."""
+    if not path.exists():
+        return None
+    kv = {k.decode(): v.decode() for k, v in duckdb.execute(
+        "SELECT key, value FROM parquet_kv_metadata(?)", [str(path)]).fetchall()}
+    return (int(kv["rows"]), kv["fingerprint"]) if "rows" in kv else None
+
+
+def quoted(terms) -> str:
+    """An SQL list of index words, inlined so the Parquet reader prunes row groups by them."""
+    terms = list(terms)
+    assert all(re.fullmatch(r"[a-z0-9]+|" + ODD, t) for t in terms), terms
+    return ", ".join(f"'{t}'" for t in terms)
 
 
 class Records:
-    def __init__(self, parquet: str):
-        self.con = duckdb.connect()
-        src = parquet.replace("'", "''")
-        self.con.execute(f"CREATE VIEW r AS SELECT * FROM read_parquet('{src}')")
+    def __init__(self, parquet: str, index: str | None = None, threads: int | None = None):
+        self.con = duckdb.connect(config={"threads": threads} if threads else {})
         t = time.time()
-        self.con.execute(f"""CREATE TABLE vocab AS SELECT w AS term, count(*) AS n
-                             FROM (SELECT unnest({WORDS}) AS w FROM r) WHERE w <> '' GROUP BY w""")
-        self.rows, self.volumes = self.con.execute(
-            "SELECT count(*), count(DISTINCT volume) FROM r").fetchone()
+        self.rows, self.volumes, fingerprint = load_records(self.con, parquet)
+        path = Path(index) if index else index_path(parquet)
+        if index_stamp(path) == (self.rows, fingerprint):
+            self.con.execute(f"CREATE VIEW words AS SELECT * FROM read_parquet({sql_str(path)})")
+            self.index = str(path)
+        else:                                     # minutes on 2 vCPU: ship the index instead
+            print(f"{path} is missing or was built for other records: building the word index "
+                  "in memory (space/build_parquet.py --index-only writes it)", file=sys.stderr)
+            self.con.execute(f"CREATE TABLE words AS {INDEX_SQL} ORDER BY term, rid")
+            self.index = "built at start-up"
+        # rows holding the word, as the CLI's fts5vocab `doc` counts it
+        self.con.execute(f"CREATE TABLE vocab AS SELECT term, count(*) AS n FROM words "
+                         f"WHERE term <> '{ODD}' GROUP BY term")
         self.words = self.con.execute("SELECT count(*) FROM vocab").fetchone()[0]
         self.load_s = time.time() - t
 
@@ -82,23 +208,55 @@ class Records:
             if fa.as_number(t) == number]
         return streets, numbers
 
+    def near_terms(self, number: str) -> list:
+        """Every word that may hold the number or one digit off, read as match_tokens reads a
+        token (as_number, then lev 1). Every grade needs such a token, `wrapped` and `near`
+        included. The index is lowercased, so a b may have been a B: as_number reads b as 6, B
+        as 8, and either counts."""
+        out = []
+        for t, in self.con.execute(
+                "SELECT term FROM vocab WHERE length(term) BETWEEN ? AND ? "
+                "AND regexp_full_match(term, '[hr]?[0-9ilogbsz]+') AND regexp_matches(term, '[0-9]')",
+                [len(number) - 1, len(number) + 2]).fetchall():
+            bs = [i for i, c in enumerate(t) if c == "b"]
+            for upper in itertools.product((False, True), repeat=len(bs)):
+                v = "".join("B" if i in bs and upper[bs.index(i)] else c for i, c in enumerate(t))
+                n = fa.as_number(v)
+                if n is not None and fa.lev(n, number, 1) <= 1:
+                    out.append(t)
+                    break
+        return out
+
+    def candidates(self, number: str, streets: list, numbers: list) -> list:
+        """The rows holding a street spelling or a number form (the rows find_address's full-text
+        query returns) that also hold a near-number word: the rest can take no grade."""
+        if not streets and not numbers:
+            return []
+        return self._dicts(f"""
+            SELECT rowid AS rid, {', '.join(GRADE_COLS)} FROM r SEMI JOIN (
+                SELECT rid FROM words WHERE term IN ({quoted(t for t, _ in streets + numbers)})
+                INTERSECT
+                SELECT rid FROM words WHERE term IN ({quoted(self.near_terms(number) + [ODD])})
+            ) c ON r.rowid = c.rid""")
+
     def find(self, address: str, dist: int = 2, people: bool = False) -> dict:
         number, words, kind = fa.parse(address)
         anchor = fa.anchor_of(words)
         t = time.time()
         streets, numbers = self.terms(number, anchor, dist)
         streets, dropped = fa.other_streets(streets, anchor)
-        pat =r"\b(" + "|".join(t for t, _ in streets + numbers) + r")\b"
-        # \b on the lowercased text finds the same rows as the word split, ~6x faster
-        rows = self._dicts(f"SELECT {', '.join(COLS)} FROM r WHERE regexp_matches({TEXT}, ?)",
-                           [pat]) if streets or numbers else []
+        rows = self.candidates(number, streets, numbers)
         skip = frozenset(t for t, _ in dropped)
-        hits, wrap = [], []
+        shape = address_shape(number, words, dist)
+        hits, wrap, graded = [], [], 0
         for r in rows:
-            best = fa.best_reading(r, number, words, kind, dist, skip)
+            best = None
+            if shape is None or shape.search(" ".join(r[f] or "" for f in fa.FIELDS).lower()):
+                graded += 1
+                best = fa.best_reading(r, number, words, kind, dist, skip)
             if best:
                 hits.append((best, r))
-            elif fa.ends_on_number(r):
+            elif ends_near(r, number):
                 wrap.append(r)
         if wrap:                                  # the number last, the street on the next line
             nxt = {x["record_id"]: x["raw_line"] for x in self._dicts(
@@ -110,6 +268,10 @@ class Records:
                                            dist, skip)
                     if best:
                         hits.append((best, r))
+        full = {x.pop("rid"): x for x in self._dicts(
+            f"SELECT rowid AS rid, {', '.join(COLS)} FROM r WHERE rowid IN (SELECT unnest(?))",
+            [[r["rid"] for _, r in hits]])} if hits else {}
+        hits = [(best, full[r["rid"]]) for best, r in hits]
         at = fa.residents_at(hits)
         out = []
         for (grade, how, note, tail), r in hits:
@@ -120,7 +282,7 @@ class Records:
                                 h["leaf"], h["line"]))
         res = {"address": address, "number": number, "anchor": anchor, "kind": kind,
                "streets": streets, "dropped": dropped, "numbers": numbers,
-               "candidates": len(rows), "hits": out,
+               "candidates": len(rows), "graded": graded, "wrap": len(wrap), "hits": out,
                "seconds": time.time() - t, "people": {}}
         if people:
             res["people"] = self.residents(out, number, words, kind, dist)
@@ -145,16 +307,25 @@ class Records:
                 years, places = anchors.setdefault(n, (set(), set()))
                 years.add(h["year"])
                 places.add(h["place"])
+        names = names[:12]
+        # one scan for every name: the lines whose name starts with one of the surnames (O'Brien
+        # is not obrien%), then the whole rows of the ones with the very name
+        want = set(names)
+        rids = [rid for rid, name, lname in self.con.execute(
+            "SELECT rowid, name_resolved, lower(name_resolved) FROM r "
+            "WHERE regexp_matches(lower(name_resolved), ?)",
+            ["^(" + "|".join(sorted({n[0] for n in names})) + ")"]).fetchall()
+            if (n := fa.name_of({"name_resolved": name})) in want and lname.startswith(n[0])
+        ] if names else []
+        by_name = {}
+        for p in self._dicts(f"SELECT {', '.join(COLS)} FROM r WHERE rowid IN (SELECT unnest(?)) "
+                             "ORDER BY year, volume, leaf, line", [rids]) if rids else []:
+            by_name.setdefault(fa.name_of(p), []).append(p)
         out = {}
-        for n in names[:12]:
-            rows = self._dicts(
-                f"SELECT {', '.join(COLS)} FROM r WHERE lower(name_resolved) LIKE ? "
-                "ORDER BY year, volume, leaf, line", [n[0] + "%"])
+        for n in names:
             years, places = anchors[n]
             traced = []
-            for p in rows:
-                if fa.name_of(p) != n:
-                    continue
+            for p in by_name.get(n, []):
                 p = dict(p, grade=(fa.best_reading(p, number, words, kind, dist) or ("",))[0])
                 p["place"], p["marker"] = home_place_of(p)
                 gap = min((abs(p["year"] - y) for y in years if y and p["year"]), default=None)
@@ -222,9 +393,11 @@ def next_id(record_id: str) -> str:
 
 if __name__ == "__main__":
     recs = Records(sys.argv[1])
-    print(f"{recs.rows:,} rows, {recs.words:,} words, loaded in {recs.load_s:.1f} s")
+    print(f"{recs.rows:,} rows, {recs.words:,} words, loaded in {recs.load_s:.1f} s "
+          f"(index: {recs.index})")
     res = recs.find(sys.argv[2], people=True)
-    print(f"{len(res['hits'])} hits from {res['candidates']} candidates in {res['seconds']:.2f} s")
+    print(f"{len(res['hits'])} hits from {res['candidates']} candidates ({res['graded']} graded) "
+          f"in {res['seconds']:.2f} s")
     for h in res["hits"]:
         if h["grade"] != "near" or h["flag"]:
             print(h["grade"], h["flag"], h["year"], h["record_id"], h["raw_line"])

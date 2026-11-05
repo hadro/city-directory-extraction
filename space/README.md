@@ -12,24 +12,40 @@ pinned: false
 
 `browse/find_address.py`'s search as a web page: every line that may give an address, OCR
 misreadings included, each with its line image from the Internet Archive. It runs on DuckDB over
-the records Parquet, with no SQLite and no full-text index. At 5.5M rows it started in ~2 s
-(building the word list) and searched in ~1–1.5 s, against ~13 s for the SQLite script; "45
-Fulton" took ~5 s. **At 15.5M rows (2026-11-04, all three tiers) it is too slow**: it starts in
-~6-9 s, and a search with the resident trace takes 9-14 s. PIPELINE #39 has the breakdown and is
-open.
+the records Parquet and a word index beside it, with no SQLite. At 15.5M rows (2026-11-04, all
+three tiers), on the laptop held to 2 threads (the free CPU tier's count): it starts in ~8 s and
+~2 GB (the records go into memory), and a search with the resident trace takes 1.5-2.5 s ("100
+5th av", 23,633 hits, 4 s). The full scan it replaced took 9-14 s on 8 threads (PIPELINE #39).
 
 ## Running it locally
 
 ```bash
-uv run space/build_parquet.py        # data/browse.db -> data/space/records.parquet, ~4 min, ~550 MB
+uv run space/build_parquet.py        # data/browse.db -> data/space/records.parquet (~4 min, ~550 MB)
+                                     #   + records.words.parquet (~1 min, ~143 MB)
 uv run --with-requirements space/requirements.txt python space/app.py
 open http://127.0.0.1:7860
 ```
 
 `build_parquet.py` makes a stand-in for the release: only the columns the app reads, the
-`eval_holdout` rows dropped, ordered by year, volume, leaf and line. Rebuild it after
-`browse/build_db.py` picks up new records. `RECORDS_PARQUET` points the app at another file;
+`eval_holdout` rows dropped, ordered by year, volume, leaf and line. Then it writes the word index
+beside it (`--index-only` writes just the index, for a Parquet that is already there). Rebuild both
+after `browse/build_db.py` picks up new records. `RECORDS_PARQUET` points the app at another file;
 `PORT` changes the port.
+
+**The word index.** `records.words.parquet` lists every word of `raw_line`, `address_resolved` and
+`home_address_resolved` (lowercased, split on anything but a-z and 0-9) with the row numbers holding
+it, sorted by word, so a search reads only the row groups of its own words. It is stamped with the
+records' row count and a fingerprint of their record ids in order. An index that is missing or
+stamped for other records is rebuilt in memory at start-up, with a warning; that takes about a
+minute on 8 threads and several on 2, so ship it beside the records. A search takes the rows
+holding a street spelling or a number form that also hold a word reading as the number or one
+digit off (every grade needs one). Of those it grades only the ones where such a token is followed,
+within a few tokens, by a piece of the street word (`address_shape` in `search.py`). Both tests are
+conditions every match meets, so the hits are the same as a full scan's: checked on 17 addresses
+against the scanning version on 2026-11-04. The word counts behind `other_streets` are now rows
+holding the word, the same count the CLI uses (`fts5vocab`'s `doc`), not occurrences. On one of the
+17 that dropped one more spelling as another street: "24 Lef ferts pl" lost two `near` lines on
+Ferns.
 
 The files:
 
@@ -127,12 +143,15 @@ The page and the script differ only in the held-out rows. For example, the scrip
    `raw_line`, `address_resolved`, `home_address_resolved`, `crop`. If the release lacks `line`
    or `label`, derive them: `line` from `record_id`, `label` from the volumes table. Download the
    files to the Space's disk at startup (`huggingface_hub.snapshot_download`) rather than reading
-   `hf://` paths. Every search scans the address columns, and over HTTP that would be every
-   query.
+   `hf://` paths: the records go into memory, and every search reads the word index. Ship
+   `records.words.parquet` beside the records, built with `build_parquet.py --index-only --out
+   <the release Parquet>`. It is tied to that file's rows and their order, so rebuild it whenever
+   the release changes. The index names one file; a release in several files needs one index
+   built over them in the order `read_parquet` reads them.
 2. **The code.** A Space repo holding `app.py`, `search.py`, `where.py`, `requirements.txt`,
    this README (its header is the Space config), and a copy of `browse/find_address.py`.
    `search.py` imports that copy when it's beside it. Set `GOOGLE_MAPS_API_KEY` as a Space
    secret for the Street View links ("Where it is today" above).
-3. **Hardware.** The free CPU tier (2 vCPU, 16 GB) was expected to do at a few seconds a search.
-   At the full corpus (15.5M rows) the laptop already takes 9-14 s a search, so fix PIPELINE #39
-   before choosing hardware.
+3. **Hardware.** The free CPU tier (2 vCPU, 16 GB) should do. The laptop held to 2 threads takes
+   1.5-4 s a search and ~2 GB of memory at 15.5M rows. The tier's cores are slower than an M2's,
+   so time it there before calling it done.

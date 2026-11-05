@@ -1486,6 +1486,18 @@ No OCR at all, so no Phase 1 or 2 — every field costs an image read. Run it **
 
 NYPL's existing fill is already partial (`start_page` ~86/151 from earlier visual work).
 
+**Measured 2026-10-27: the cross-fill reaches 39 of the 151, not "many".** By catalog match
+(`results/nypl_ia_overlap.py`: publisher series plus the edition year the IA volume prints) 39 NYPL
+rows are the same edition as a run-set IA volume, an upper bound since NYPL Trow/Wilson 1865/66
+and IA's Trow 1865-66 proved a neighbouring printing; **112 have no IA counterpart**, about 110
+distinct editions (nearly all of Trow/Wilson 1852-81 and Trow 1882-1902, the Longworth years IA
+lacks, everything after 1918). The 111 with an id have 122,916 canvases
+(`data_prep/nypl_manifests.py`; cache `data/nypl_manifests/`, index
+`data_prep/nypl_canvas_index.json.gz`), and OCRing them with LightOn on HF Jobs is estimated at
+$134-155 on one L40S, plus ~$563 for the 4B over their ~14M lines
+(`results/nypl_ocr_cost.py`; speed from NYU's L40S, not measured on HF). Tile cutting needs a
+gutter finder, since IA's tiles used IA's word positions.
+
 ---
 
 ## Writeback discipline

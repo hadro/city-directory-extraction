@@ -1,0 +1,467 @@
+{
+ "run": "4b-100k",
+ "panel": [
+  "boyd1890",
+  "doggett1846",
+  "duncan1794",
+  "franks1786",
+  "hearne1852",
+  "hopehenderson1856",
+  "lain1876",
+  "longworth1818",
+  "mb1931",
+  "mercein1820",
+  "ogden1839",
+  "polk1917",
+  "polk1925",
+  "polk1933bk",
+  "polk1933si",
+  "queens1933",
+  "rode1851",
+  "trow1884",
+  "trow1907",
+  "trow1913",
+  "trowwilson1865"
+ ],
+ "gold_sha256_16": {
+  "boyd1890": "8b6377cf08ee4bdb",
+  "doggett1846": "d9f598f5be89a4eb",
+  "duncan1794": "33b297bf9c70a9f3",
+  "franks1786": "b2e39f07f2306336",
+  "hearne1852": "890ad6bf7a512f09",
+  "hopehenderson1856": "0cbd61f7cb3e568e",
+  "lain1876": "ffd36aab1665f647",
+  "longworth1818": "d0f13587bc51c6ee",
+  "mb1931": "a65a67643dcbd411",
+  "mercein1820": "227a88073d9d5ba4",
+  "ogden1839": "9ab79da88e079e6c",
+  "polk1917": "68b1cb9063d0a918",
+  "polk1925": "8b05f8bf919548cb",
+  "polk1933bk": "c3cc203fa8a8b696",
+  "polk1933si": "946c6aab559f471a",
+  "queens1933": "315bf9843d14d312",
+  "rode1851": "2f3caf97a208ec35",
+  "trow1884": "0d72b38f134ea671",
+  "trow1907": "ed205a72516b5c08",
+  "trow1913": "6a219820b4725c3b",
+  "trowwilson1865": "369218de0dcb73e2"
+ },
+ "model": {
+  "rows": 1583,
+  "exact_normalized": 1297,
+  "exact_normalized_pct": 81.9,
+  "field_accuracy_pct": {
+   "name": 95.3,
+   "is_business": 99.2,
+   "spouse_name": 98.9,
+   "race_designation": 100.0,
+   "occupation_role": 94.4,
+   "employer": 98.0,
+   "address": 90.9,
+   "home_address": 96.7,
+   "ALL": 96.7
+  },
+  "field_accuracy_filled_pct": {
+   "name": 95.3,
+   "is_business": 80.9,
+   "spouse_name": 91.8,
+   "race_designation": 100.0,
+   "occupation_role": 92.7,
+   "employer": 56.9,
+   "address": 90.9,
+   "home_address": 80.7,
+   "ALL": 91.6
+  },
+  "filled_cells": {
+   "name": 1583,
+   "spouse_name": 208,
+   "address": 1583,
+   "occupation_role": 1222,
+   "home_address": 274,
+   "employer": 72,
+   "is_business": 68,
+   "race_designation": 8,
+   "ALL": 5018
+  },
+  "wrong_rows": 286,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 86,
+    "pct_of_wrong": 30.1,
+    "pct_of_all": 5.4
+   },
+   "small letters": {
+    "rows": 76,
+    "pct_of_wrong": 26.6,
+    "pct_of_all": 4.8
+   },
+   "content": {
+    "rows": 124,
+    "pct_of_wrong": 43.4,
+    "pct_of_all": 7.8
+   }
+  },
+  "same_words_split": {
+   "words moved between fields": 49,
+   "punctuation only": 33,
+   "ditto mark dropped or added": 4
+  },
+  "content_fields": {
+   "address": 80,
+   "home_address": 32,
+   "occupation_role": 31,
+   "name": 29,
+   "is_business": 13,
+   "employer": 12,
+   "spouse_name": 7
+  },
+  "digit_transpositions": 22,
+  "examples": {
+   "content": [
+    {
+     "volume": "boyd1890",
+     "raw_line": "Crawford John W, (label cutter N Y), h 34 N Parsons ave",
+     "diff": {
+      "occupation_role": [
+       "(label cutter n y)",
+       "label cutter"
+      ],
+      "address": [
+       "h 34 parsons ave",
+       "n y"
+      ],
+      "home_address": [
+       "",
+       "34 n parsons ave"
+      ]
+     }
+    },
+    {
+     "volume": "boyd1890",
+     "raw_line": "Harding Robert C, (real estate B'klyn), h 43 N Parsons ave",
+     "diff": {
+      "occupation_role": [
+       "(real estate b'klyn)",
+       "real estate"
+      ],
+      "address": [
+       "h 43 n parsons ave",
+       "(b'klyn)"
+      ],
+      "home_address": [
+       "",
+       "43 n parsons ave"
+      ]
+     }
+    },
+    {
+     "volume": "boyd1890",
+     "raw_line": "Harrison George W, (school principal N Y), h 259 Amity",
+     "diff": {
+      "occupation_role": [
+       "(school principal n y)",
+       "school principal"
+      ],
+      "address": [
+       "h 259 amity",
+       "n y"
+      ],
+      "home_address": [
+       "",
+       "259 amity"
+      ]
+     }
+    }
+   ],
+   "same words": [
+    {
+     "volume": "boyd1890",
+     "raw_line": "Harris Calvin P, (manager N Y), h 94 Madison ave",
+     "diff": {
+      "occupation_role": [
+       "(manager n y)",
+       "manager"
+      ],
+      "employer": [
+       "",
+       "n y"
+      ]
+     }
+    },
+    {
+     "volume": "doggett1846",
+     "raw_line": "Foster Samuel H. senr. 224 Thompson",
+     "diff": {
+      "name": [
+       "foster samuel h",
+       "foster samuel h senr"
+      ],
+      "occupation_role": [
+       "senr",
+       ""
+      ]
+     }
+    },
+    {
+     "volume": "duncan1794",
+     "raw_line": "Wheeler, Richard, carman, 5 Division-street, (Bowery.)",
+     "diff": {
+      "address": [
+       "5 division-street, (bowery.)",
+       "5 division-street"
+      ],
+      "home_address": [
+       "",
+       "bowery"
+      ]
+     }
+    }
+   ],
+   "small letters": [
+    {
+     "volume": "doggett1846",
+     "raw_line": "Foster James, shoemaker, 886 B.way, h. 19th n. B.way",
+     "diff": {
+      "address": [
+       "886 b.way",
+       "886 bway"
+      ],
+      "home_address": [
+       "19th n b.way",
+       "19th n bway"
+      ]
+     }
+    },
+    {
+     "volume": "doggett1846",
+     "raw_line": "Foster John, shipcarpenter, 84 West, h. 170 Franklin",
+     "diff": {
+      "home_address": [
+       "170 franlin",
+       "170 franklin"
+      ]
+     }
+    },
+    {
+     "volume": "doggett1846",
+     "raw_line": "Foster Wm. & Co. shipwr'ts, 84 West, h. 174 Franklin",
+     "diff": {
+      "occupation_role": [
+       "shipwr'ts",
+       "shipw'ts"
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "model+guard": {
+  "rows": 1583,
+  "exact_normalized": 1363,
+  "exact_normalized_pct": 86.1,
+  "field_accuracy_pct": {
+   "name": 96.3,
+   "is_business": 99.2,
+   "spouse_name": 98.9,
+   "race_designation": 100.0,
+   "occupation_role": 94.8,
+   "employer": 98.0,
+   "address": 94.1,
+   "home_address": 96.9,
+   "ALL": 97.3
+  },
+  "field_accuracy_filled_pct": {
+   "name": 96.3,
+   "is_business": 80.9,
+   "spouse_name": 91.8,
+   "race_designation": 100.0,
+   "occupation_role": 93.2,
+   "employer": 56.9,
+   "address": 94.1,
+   "home_address": 82.1,
+   "ALL": 93.1
+  },
+  "filled_cells": {
+   "name": 1583,
+   "spouse_name": 208,
+   "address": 1583,
+   "occupation_role": 1222,
+   "home_address": 274,
+   "employer": 72,
+   "is_business": 68,
+   "race_designation": 8,
+   "ALL": 5018
+  },
+  "wrong_rows": 220,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 95,
+    "pct_of_wrong": 43.2,
+    "pct_of_all": 6.0
+   },
+   "small letters": {
+    "rows": 47,
+    "pct_of_wrong": 21.4,
+    "pct_of_all": 3.0
+   },
+   "content": {
+    "rows": 78,
+    "pct_of_wrong": 35.5,
+    "pct_of_all": 4.9
+   }
+  },
+  "same_words_split": {
+   "words moved between fields": 49,
+   "punctuation only": 41,
+   "ditto mark dropped or added": 5
+  },
+  "content_fields": {
+   "address": 41,
+   "home_address": 29,
+   "occupation_role": 28,
+   "name": 21,
+   "is_business": 13,
+   "employer": 12,
+   "spouse_name": 7
+  },
+  "digit_transpositions": 0,
+  "examples": {
+   "content": [
+    {
+     "volume": "boyd1890",
+     "raw_line": "Crawford John W, (label cutter N Y), h 34 N Parsons ave",
+     "diff": {
+      "occupation_role": [
+       "(label cutter n y)",
+       "label cutter"
+      ],
+      "address": [
+       "h 34 parsons ave",
+       "n y"
+      ],
+      "home_address": [
+       "",
+       "34 n parsons ave"
+      ]
+     }
+    },
+    {
+     "volume": "boyd1890",
+     "raw_line": "Harding Robert C, (real estate B'klyn), h 43 N Parsons ave",
+     "diff": {
+      "occupation_role": [
+       "(real estate b'klyn)",
+       "real estate"
+      ],
+      "address": [
+       "h 43 n parsons ave",
+       "(b'klyn)"
+      ],
+      "home_address": [
+       "",
+       "43 n parsons ave"
+      ]
+     }
+    },
+    {
+     "volume": "boyd1890",
+     "raw_line": "Harrison George W, (school principal N Y), h 259 Amity",
+     "diff": {
+      "occupation_role": [
+       "(school principal n y)",
+       "school principal"
+      ],
+      "address": [
+       "h 259 amity",
+       "n y"
+      ],
+      "home_address": [
+       "",
+       "259 amity"
+      ]
+     }
+    }
+   ],
+   "same words": [
+    {
+     "volume": "boyd1890",
+     "raw_line": "Harris Calvin P, (manager N Y), h 94 Madison ave",
+     "diff": {
+      "occupation_role": [
+       "(manager n y)",
+       "manager"
+      ],
+      "employer": [
+       "",
+       "n y"
+      ]
+     }
+    },
+    {
+     "volume": "doggett1846",
+     "raw_line": "Foster Samuel H. senr. 224 Thompson",
+     "diff": {
+      "name": [
+       "foster samuel h",
+       "foster samuel h senr"
+      ],
+      "occupation_role": [
+       "senr",
+       ""
+      ]
+     }
+    },
+    {
+     "volume": "duncan1794",
+     "raw_line": "Wheeler, Richard, carman, 5 Division-street, (Bowery.)",
+     "diff": {
+      "address": [
+       "5 division-street, (bowery.)",
+       "5 division-street"
+      ],
+      "home_address": [
+       "",
+       "bowery"
+      ]
+     }
+    }
+   ],
+   "small letters": [
+    {
+     "volume": "doggett1846",
+     "raw_line": "Foster James, shoemaker, 886 B.way, h. 19th n. B.way",
+     "diff": {
+      "address": [
+       "886 b.way",
+       "886 bway"
+      ],
+      "home_address": [
+       "19th n b.way",
+       "19th n bway"
+      ]
+     }
+    },
+    {
+     "volume": "doggett1846",
+     "raw_line": "Foster John, shipcarpenter, 84 West, h. 170 Franklin",
+     "diff": {
+      "home_address": [
+       "170 franlin",
+       "170 franklin"
+      ]
+     }
+    },
+    {
+     "volume": "doggett1846",
+     "raw_line": "Foster Wm. & Co. shipwr'ts, 84 West, h. 174 Franklin",
+     "diff": {
+      "occupation_role": [
+       "shipwr'ts",
+       "shipw'ts"
+      ]
+     }
+    }
+   ]
+  }
+ }
+}

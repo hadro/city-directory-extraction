@@ -1,0 +1,108 @@
+[
+ {
+  "volume": "1906BPL",
+  "root": "data/volumes_run1",
+  "labels": 140,
+  "joined": 104,
+  "unmatched": 33,
+  "not_entry": {
+   "removed_by_usable": 61,
+   "kept_as_usable": 4,
+   "removed_pct": 93.8
+  },
+  "entry": {
+   "usable": 36,
+   "not_usable": 3
+  },
+  "by_band": {
+   "body": {
+    "not-entry:usable": 1,
+    "entry:usable": 32,
+    "entry:not_usable": 2
+   },
+   "foot": {
+    "entry:usable": 3,
+    "not-entry:usable": 2,
+    "not-entry:not_usable": 28
+   },
+   "head": {
+    "not-entry:not_usable": 32,
+    "not-entry:usable": 1,
+    "entry:not_usable": 1
+   },
+   "None": {
+    "entry:usable": 1,
+    "not-entry:not_usable": 1
+   }
+  },
+  "survivors": [
+   {
+    "raw_line": "\" H’y elk h 120 3d pi",
+    "category": "ocr-garbage",
+    "band": "body"
+   },
+   {
+    "raw_line": "Aurora Grata Club 1160 Bedford av",
+    "category": "business-directory",
+    "band": "foot"
+   },
+   {
+    "raw_line": "GATES D. FAHNESTOCK, 2d-Vice-Pres.",
+    "category": "business-directory",
+    "band": "head"
+   },
+   {
+    "raw_line": "Telephome Call, 269 Bedford Brooklyn, N.Y, 58S",
+    "category": "ocr-garbage",
+    "band": "foot"
+   }
+  ]
+ },
+ {
+  "volume": "1906BPL",
+  "root": "data/volumes_books_first_clean_v2",
+  "labels": 140,
+  "joined": 53,
+  "unmatched": 84,
+  "not_entry": {
+   "removed_by_usable": 23,
+   "kept_as_usable": 3,
+   "removed_pct": 88.5
+  },
+  "entry": {
+   "usable": 24,
+   "not_usable": 3
+  },
+  "by_band": {
+   "foot": {
+    "not-entry:usable": 3,
+    "not-entry:not_usable": 9,
+    "entry:usable": 1
+   },
+   "head": {
+    "not-entry:not_usable": 14
+   },
+   "body": {
+    "entry:usable": 23,
+    "entry:not_usable": 3
+   }
+  },
+  "survivors": [
+   {
+    "raw_line": "Aurora Grata Club 1160 Bedford av",
+    "category": "business-directory",
+    "band": "foot"
+   },
+   {
+    "raw_line": "270 Court",
+    "category": "ocr-garbage",
+    "band": "foot"
+   },
+   {
+    "raw_line": "1 330 Lenox Ave.",
+    "category": "ocr-garbage",
+    "band": "foot"
+   }
+  ]
+ }
+]

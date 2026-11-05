@@ -14,7 +14,7 @@ pinned: false
 `browse/find_address.py`'s search as a web page: every line that may give an address, OCR
 misreadings included, each with its line image from the Internet Archive. It runs on DuckDB over
 the records Parquet and a word index beside it, with no SQLite. At 15.5M rows (2026-11-04, all
-three tiers), on the laptop held to 2 threads (the free CPU tier's count): it starts in ~8 s and
+three tiers), on the laptop held to 2 threads (the free CPU tier's count, the tier first planned for; it now needs PRO, "Hardware" below): it starts in ~8 s and
 ~2 GB (the records go into memory), and a search with the resident trace takes 0.9-1.9 s ("100
 5th av", 23,633 hits, 3.1 s). The full scan it replaced took 9-14 s on 8 threads (PIPELINE #39).
 `browse/find_address.py` runs this same search, reading the file instead of loading it (~3 s for
@@ -60,6 +60,8 @@ The files:
   `uv run --with duckdb==2.0.0 python space/search.py data/space/records.parquet "166 Lefferts pl"`.
 - **`app.py`:** the Gradio page.
 - **`build_parquet.py`:** the local stand-in above.
+- **`timing_start.py`:** the test Space's start-up script, which runs the timing before the app
+  ("The test Space" below).
 - **`where.py`:** where the address is today (below). Run it directly to test one borough:
   `uv run --with duckdb==2.0.0 python space/where.py "155 Franklin av" Brooklyn`.
 
@@ -145,7 +147,7 @@ The page and the script give the same lines: since 2026-11-04 the script runs th
 the same Parquet. So neither shows a held-out row, such as "h 76 Leffert© pi" (1906BPL:1193:111,
 an `adjacent` holdout), which the script found when it read browse.db.
 
-## Putting it on Hugging Face (not done yet)
+## Putting it on Hugging Face (tested in a private Space; nothing public yet)
 
 1. **The data.** The release Parquet, once it's up. The app reads these columns: `record_id`,
    `volume`, `leaf`, `line`, `year`, `label`, `usable`, `name_resolved`, `occupation_role`,
@@ -171,3 +173,72 @@ an `adjacent` holdout), which the script found when it read browse.db.
    never-called `@spaces.GPU` function in `app.py`: without one ZeroGPU stops the Space once it
    has started ("No @spaces.GPU function detected during startup", tried). Hosting a
    CPU-only app on ZeroGPU may be outside that program's intent; HF says nothing either way.
+4. **Before it goes public:** the Space's name, namespace, visibility and data source are
+   hadro's to decide, with the release (the memory's release-open-decisions; ask before any
+   public upload). The data can sit in the Space repo, as in the test (724 MB was accepted; the
+   1 GB cap on a Space repo comes from forum threads, not HF's docs), or in a dataset repo
+   downloaded at start-up (item 1), which a private dataset can only be with a token as a
+   secret. Use `app.py` as the app_file, not `timing_start.py`.
+
+### The test Space: hadro/cde-finder-timing
+
+Private, on ZeroGPU, made 2026-11-05 to time the finder (PIPELINE #39). hadro: keep it for now,
+it may be overwritten later. It sleeps after 48 h without visitors and wakes on the next visit.
+
+**What is on it** (Space commit e614373):
+- `start.py`, which is `timing_start.py` here but runs only "155 Franklin" and "62 Euclid av" at
+  the default threads.
+- `app.py`, `search.py` and `where.py` from 82769e8. Its `app.py` has neither the `@spaces.GPU`
+  stub nor the GRADIO_SERVER_NAME launch, since `start.py` provides both.
+- `find_address.py` (from `browse/`) and `finder_timing.py` (from `results/`).
+- `requirements.txt` and a README holding only the header: `app_file: start.py`,
+  `python_version: "3.12"`, `sdk_version: 6.31.0`.
+- The secret `GOOGLE_MAPS_API_KEY`, added by hadro. Adding a secret restarts the Space; no
+  rebuild is needed, and the Street View links worked.
+
+**Its data** is `data/space/records.parquet` and `records.words.parquet` as `build_parquet.py`
+wrote them on 2026-11-04 (15:29 and 16:10):
+- 15,497,151 lines from 152 volumes, 1786-1922, with 14,176,765 of them usable.
+- That is every row of browse.db except the `eval_holdout` ones. After #41, browse.db has
+  15,776,206 rows, 279,055 of them held out.
+- 1897BPL is the one volume missing: all 259,714 of its lines are held out. About 19,000 more
+  held-out lines are spread over other volumes.
+- The three volumes browse.db had twice are in it once (`ROOTS_NEWEST_FIRST`).
+- It predates #37's re-assembly of the three tiers. That re-assembly added
+  `race_designation_resolved`, which the finder does not read; the other columns were not
+  compared with it.
+- Rebuild both files with `build_parquet.py` after the next `build_db.py` run, then upload them
+  again.
+
+**To change it**, stage the files in one folder (data files can be hard links) and upload
+them with the library. `hf upload` re-creates the repo without the ZeroGPU flavour and
+gets 402:
+
+```bash
+uv run --with huggingface_hub python -c "
+from huggingface_hub import HfApi
+HfApi().upload_folder(repo_id='hadro/cde-finder-timing', repo_type='space', folder_path='<staging>',
+                      commit_message='...')"
+```
+
+A single file goes up with `upload_file(path_or_fileobj=..., path_in_repo=...)`. A push rebuilds
+and restarts the Space: about 1 min to build, plus about 1-2 min to start with the timing. The
+first build, which cached nothing, took about 3 min.
+
+**To watch it:**
+- `HfApi().space_info('hadro/cde-finder-timing').runtime` gives the `stage` (BUILDING,
+  APP_STARTING, RUNNING_APP_STARTING, RUNNING, BUILD_ERROR, RUNTIME_ERROR) and `raw['errorMessage']`.
+- The logs are server-sent events; strip the `data: ` prefix and read each line's JSON `data`.
+  `curl -s -N -m 25 -H "Authorization: Bearer $(hf auth token)"` against
+  `https://huggingface.co/api/spaces/hadro/cde-finder-timing/logs/run` (or `/logs/build`)
+  returns them. If `hf auth token` is missing, use `huggingface_hub.get_token()`.
+- `start.py` prints its timings to the run log.
+- Two pieces of noise after launch are harmless: the asyncio tracebacks ending in "Invalid file
+  descriptor: -1", and "GRADIO_HOT_RELOAD: Launching demo not found in __main__".
+
+**To time it from outside**, use `gradio_client` with hadro's token:
+- `Client('hadro/cde-finder-timing', token=get_token())`.
+- `predict(address, 2, people, ['Manhattan', 'Brooklyn', 'Elsewhere'], True,
+  api_name='/search')` returns the page, the two downloads and the found state.
+- `predict(places, api_name='/where_html')` on the same client then gives the map and the Street
+  View links.

@@ -3477,6 +3477,14 @@ the page's API from here, network and a 0.1-1.3 MB result page included: 0.7-1.5
 3.3 s for 45 Fulton, 5.1-6.2 s for the two heavy ones. Hits equal the laptop's. Python grading
 (`grade`, ~2.4 s) is what is left in the heavy two, and it does not use the extra cores. Hosting a
 CPU-only app on ZeroGPU may be outside that program's intent; HF says nothing either way.
+hadro then added `GOOGLE_MAPS_API_KEY` as a secret, and the Street View links worked against
+Google for the first time. The Space is kept for now, and may be overwritten. space/README ("The
+test Space") records what it holds and how to change, watch and time it:
+- its data is the 2026-11-04 stand-in: 152 volumes, every non-holdout row; 1897BPL is all held out;
+- it predates #37's re-assembly;
+- push with `HfApi.upload_folder`, since `hf upload` answers 402.
+
+Going public waits on hadro's release decisions.
 **Open:** the trace scan (a name index shipped beside the records would make it a lookup); facets
 under large filters; Python grading on the heavy queries. *As found:* `space/` (Gradio + DuckDB over `data/space/records.parquet`) was
 built and timed at 5.5M rows: ~2 s to start, ~1-1.5 s a search (space/README). Round 13's rebuild

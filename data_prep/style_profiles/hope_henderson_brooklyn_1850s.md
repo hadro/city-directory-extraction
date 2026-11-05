@@ -22,7 +22,9 @@ Title block: *"Hope & Henderson's (Consolidated) Brooklyn City Directory. 1856�
 
 - **`*` (leading) = Eastern District** (Williamsburgh/ED Brooklyn) — a *geographic* marker, **NOT
   race**. The 8-field schema has no district field, so **drop the `*`** (remove from `name`, store
-  nowhere). race_designation stays empty for starred entries.
+  nowhere). race_designation stays empty for starred entries. (The records do keep it: from
+  2026-11-04 assemble_records sets `district = Eastern` from the star, by the sidecar's
+  `star_meaning` claim, PIPELINE #37. micro 0035 leaf 38 prints the note.)
 - **`col'd` = colored** → this is the race marker here → `race_designation` = `col'd` (verbatim).
 - Contrast with Ogden 1839 Brooklyn, where `*` = colored. **Same symbol, different meaning — always
   read the volume's own key** (this is the cautionary case for that rule).

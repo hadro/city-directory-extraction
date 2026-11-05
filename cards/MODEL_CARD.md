@@ -201,6 +201,11 @@ X% correct (95% interval), by tier.>
   Check numbers against the line, or the page, before relying on an address.
 - **It can invent a given name** where the directory prints a widow under her husband's name
   without one of her own.
+- **It cannot tell what a leading `*` means.** Some directories star colored residents, others
+  star firms, advertisers or Eastern District addresses, and the model sees one line, not the
+  volume's key. Over the released records it set `race_designation` on 6,698 lines that carry no
+  race mark and left it empty on 2,628 that do. The records dataset resolves this per volume
+  (`race_designation_resolved`); on other directories, read the volume's key before trusting `*`.
 - **Two copies of the same line can come out differently** depending on the batch they were
   decoded in (bf16): 8 of 20,000 records in one test chunk.
 - **Coverage.** Trained on New York, Brooklyn and Tulsa conventions, English only. Other cities'
@@ -213,7 +218,7 @@ X% correct (95% interval), by tier.>
 
 The directories record the social categories of their time. The model copies them as printed:
 `race_designation` holds the markers directories used to set Black residents apart (`col'd`,
-`(c)`, `colored`), and `spouse_name` holds widowhood. Faithful copies serve historical and
+`(c)`, `colored`, a leading `*` in some directories), and `spouse_name` holds widowhood. Faithful copies serve historical and
 genealogical research, including research on segregation itself. Treat these fields as
 historical evidence, not as descriptions of people, and give them that context wherever they are
 shown.

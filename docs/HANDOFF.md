@@ -779,6 +779,11 @@ closes ~a quarter of the NYU gap — **it does not overturn it.** Gemini still l
 gap (21 genuinely-wrong qwen rows vs Gemini's 5) is real model quality.
 → **FIX: era/publisher-gate the directional form.** The mechanism exists — the `*` race marker is
 already era-gated (ogden vs hopehenderson).
+*(2026-11-04, PIPELINE #37: that gate covers two publishers only. In the real volumes `*` is also
+race in Spooner/Hearnes/Reynolds and a firm or advertiser in Trow/Lain/Upington, and the 4B sets
+race on firms' stars and misses half the colored residents' stars. The records now resolve `*` by
+rule from each volume's key (`docs/RACE_MARKERS_HANDOFF.md`); a next training set should gate `*`
+by volume family and include starred firm and Eastern District lines with race empty.)*
 
 **2. `publisher=polk` CONFLATES TULSA 1921 WITH FIVE NYC POLK VOLUMES.**
 The prompt tag is `[publisher=polk; year=1917]` for NYC and `[publisher=polk; year=1921]` for Tulsa

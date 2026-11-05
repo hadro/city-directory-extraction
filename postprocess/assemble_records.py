@@ -44,7 +44,18 @@ EVERY ROW CARRIES
                         classify_lead_marks. It is stripped from name_resolved, never from `name`
     district            `Eastern` where the volume marks Eastern District residents and this line
                         carries the mark, or the line is in a section printed for that district
-                        (micro_IABROOKLYN_0036's); else null
+                        (micro_IABROOKLYN_0036's); else null. From 2026-11-04 (PIPELINE #37) a
+                        star marks it too where the sidecar's `star_meaning` is
+                        `eastern_district` (Hope & Henderson's printed `*`; the raised E the OCR
+                        reads as `*` in micro 0039/0040/0042 and Lain 1866)
+    race_designation_resolved   the model's race_designation where the volume's own convention
+                        supports it, else empty (PIPELINE #37, race_resolved). What marks a
+                        colored person is the volume's, read into the sidecar by
+                        data_prep/survey_race_markers.py: in the 32 `*` volumes it is `*` wherever
+                        the line opens on a star, whatever the model did (it left half of them
+                        empty); in the 31 textual ones, the model's value where it is a form of
+                        "colored"; in every other volume, empty -- a firm's star, Colorado
+                        (`(Col)`), a collector (`col.`)
     ditto_flags         resolve_dittos.resolve_cross_line's review flags: cross_leaf,
                         letter_conflict, orphan, and mark_lost (from 2026-11-01, PIPELINE #34: no
                         ditto mark read, but the line opens on a given name such as `Wm`, or, in
@@ -127,7 +138,7 @@ CSV_COLUMNS = (["record_id", "volume", "leaf", "printed_page", "printed_page_how
                ["name_resolved", "address_resolved", "address_ditto", "home_address_resolved",
                 "ditto_source", "ditto_flags", "role", "entry_shaped", "non_entry_page",
                 "eval_holdout", "usable", "root", "ditto_header", "name_mark", "district",
-                "line_source", "duplicate_of", "name_fragment"])
+                "line_source", "duplicate_of", "name_fragment", "race_designation_resolved"])
 
 
 class Incomplete(Exception):
@@ -350,6 +361,65 @@ def is_east(mark: str | None) -> bool:
     return bool(mark) and any(p in EAST_MARKS for p in mark.split())
 
 
+# PIPELINE #37: a form of "colored" as the 4B copies it into race_designation. Read off the 31
+# textual volumes' values 2026-11-04: `(col'd)` 13,017, `(col.)` 6,783, `colored`, `(colored)`,
+# `col.`, and the OCR's damage to them (`(col d)`, `(cold.)`, `(col:)`, `(col')`). Not `colr` or
+# `coll.` (a collector in Trow 1917 and Lain 1875), nor `(c)` (Trow 1857's broken `Mc`)
+RACE_TEXT = re.compile(r"^\(?\s*(rev\.?\s+)?(col(or(ed|['’]d)?|oured|['’]?d\.?|['’:]|\s+d)?"
+                       r"|co['’]d|color['’]d|cold(['’]d)?)\s*\.?\s*\)?$", re.I)
+# The star as the OCR reads it at a line's head: `•` in micro 0015 and nine more `*` volumes
+STAR_GLYPHS = frozenset("*•")
+# (after at most one stray character: `E *Taylor J. W. A. waiter`, micro 0043, where nothing
+# else marks the line; not a star after the address, `Jackman Peter, tailor 109 Atlantic 11*`)
+STAR_LEAD = re.compile(r"^\s*(?:\S\s*)?[*•]\s*[A-Z]")
+# ...and the form in a textual volume's printed line, where the model did not copy it
+# (`Jewell William, col. driver`: Lain 1862's 371; `*Jones Thomas, (col.) steward`, where it
+# copied the Eastern District mark instead). It follows the name: before the first digit, and a
+# bare one, in lowercase, within four words and before a lowercase word -- not `tax col. office`,
+# `dep. col.`, `pres. col. ins. co.` (the Columbian), `Whiting Henry, Col. assistant Q. M. Gen.`,
+# 1856BPL's "See advertisement on colored page", or a second entry run into the line. Never the
+# abbreviations key (`col. colored; com. commission`), which `usable` can let through
+LINE_FORM = re.compile(r"(?i:\((?:col['’]?\s?d|col|colou?red|co['’]d|cold)\s*\.?\s*\))"
+                       r"|(?<=[\s,])(?:col['’]d\.?|col\.|colou?red)(?=,?\s+[a-z])"
+                       r"(?!,?\s+(?:ins|coll?|paper|page|glass)\b)")
+KEY_GLOSS = re.compile(r"\bcol(?:['’]d|\.)?\s*,?\s*colou?red\b", re.I)
+NOT_RACE_BEFORE = re.compile(r"\b(?:dep|dept|deputy|tax|ass['’]?t|agt|pres|prof|Columbia)\.?,?\s*$",
+                             re.I)
+
+
+def line_form(raw: str) -> str:
+    """The "colored" form a textual volume's line prints after its name, or ''."""
+    if not raw or KEY_GLOSS.search(raw):
+        return ""
+    for m in LINE_FORM.finditer(raw):
+        before = raw[:m.start()]
+        if re.search(r"\d", before):
+            return ""
+        if m.group(0).startswith("(") or (len(before.split()) <= 4
+                                          and not NOT_RACE_BEFORE.search(before)):
+            return m.group(0)
+    return ""
+
+
+def starred(mark: str | None, raw: str | None) -> bool:
+    """Does the line open on a star: the assembly's mark, or the raw line where the mark
+    classifier passed it by (`*M'Garrell Thomas, steward`, micro 0029)?"""
+    return any(g in (mark or "") for g in STAR_GLYPHS) or bool(STAR_LEAD.match(raw or ""))
+
+
+def race_resolved(model: str | None, mark: str | None, raw: str | None, form: str | None) -> str:
+    """race_designation_resolved for one line; `form` is the volume's `race_marker` (None where it
+    prints none). A `*` volume: `*` where the line opens on a star or the model read one, else
+    empty. A textual volume: the model's value where it is a form of "colored" (RACE_TEXT), else
+    the form as the line prints it (LINE_FORM)."""
+    model = (model or "").strip()
+    if not form:
+        return ""
+    if form == "*":
+        return "*" if starred(mark, raw) or model in STAR_GLYPHS else ""
+    return model if RACE_TEXT.match(model) else line_form(raw)
+
+
 def strip_mark(name: str, mark: str) -> str:
     """The model's `name` less its leading marker(s). The model re-spells the E's misreadings (it
     writes `" Kleinschnitz George` for `“Kleinschnitz`, `EE Adams` for `E EAdams`), so any of
@@ -383,6 +453,9 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
     doc = json.loads(side.read_text(encoding="utf-8")) if side.exists() else {}
     folios = printed_pages(ident)
     non_entry = set((doc.get("non_entry_pages") or {}).get("leaves") or [])
+    book = doc.get("book_says") or {}
+    race_form = (book.get("race_marker") or {}).get("value")
+    star_east = (book.get("star_meaning") or {}).get("value") == "eastern_district"
     lines = [ln for ln, _ in pairs]
     roles = layout_roles(lines) if all((ln.get("context") or {}).get("page_size")
                                        for ln in lines) else ["thin"] * len(lines)
@@ -455,6 +528,7 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
             name_resolved = ""
         mark = cr.get("mark")
         district = ("Eastern" if (east and is_east(mark))
+                    or (star_east and starred(mark, ln.get("raw_line")))
                     or "EASTERN" in str(ctx.get("section") or "").upper() else None)
         ann = annotate(rec)
         bbox = ctx.get("bbox")
@@ -475,6 +549,8 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
             "name_resolved": name_resolved,
             "address_resolved": addr, "address_ditto": addr_status,
             "home_address_resolved": ann["home_address_resolved"],
+            "race_designation_resolved": race_resolved(rec.get("race_designation"), mark,
+                                                       ln.get("raw_line"), race_form),
             "ditto_source": source, "ditto_flags": cr["flags"],
             "ditto_header": cr.get("header"),
             "name_mark": mark, "district": district,
@@ -495,6 +571,12 @@ def assemble(ident: str, pairs: list, root: str | None = None, lead_marks: bool 
         "line_source": dict(collections.Counter(r["line_source"] for r in rows if r["line_source"])),
         "duplicates": len(dups),
         "name_fragment": sum(1 for r in rows if r["name_fragment"]),
+        # PIPELINE #37: the volume's convention, and the usable rows it marks, against the model's
+        "race": {"form": race_form, "star_meaning": (book.get("star_meaning") or {}).get("value"),
+                 "usable_marked": sum(1 for r in rows if r["usable"]
+                                      and r["race_designation_resolved"]),
+                 "usable_model_set": sum(1 for r in rows if r["usable"]
+                                         and (r["race_designation"] or "").strip())},
         "ditto": {"carried": sum(1 for c in carry if c["status"] == "resolved"),
                   "orphan": sum(1 for c in carry if c["status"] == "orphan"),
                   # cross_leaf / letter_conflict, as before #34; mark_lost is counted apart
@@ -579,6 +661,47 @@ def _self_test() -> int:
                                        "d’Este Jos", "Smith John", "", "McMahon Patrick",
                                        "butler Edward", "ardeles John")] \
         == [True, True, True, False, False, False, False, False, False, True]
+    # PIPELINE #37, lines read 2026-11-04
+    assert race_resolved("", "*", "*Lewis Elizabeth, washerwoman 56 Talman", "*") == "*", \
+        "a star volume: the model left it empty"
+    assert race_resolved("", "•", "•Philips Henry, laborer 103 Nassau", "*") == "*", "0015's star"
+    assert race_resolved("", None, "*M'Garrell Thomas, steward 11 Stewart", "*") == "*"
+    assert race_resolved("'", None, "'Millen Wm. millwright 14 James", "*") == "", "Ogden's M'"
+    assert race_resolved("*", "*", "*Globe Clock Co 50 Maiden la", None) == "", "a firm's star"
+    assert race_resolved("*", "E *", "E *Russ George, carpenter, h. 10 Cook", "(col.)") == "", \
+        "0039: the raised E, read as a star"
+    assert [race_resolved(m, None, "", "(col'd)") for m in
+            ("(col'd)", "(col d)", "(cold.)", "(Rev. col.)", "(Col)", "colored", "col.")] \
+        == ["(col'd)", "(col d)", "(cold.)", "(Rev. col.)", "(Col)", "colored", "col."]
+    assert [race_resolved(m, None, "", "(col'd)") for m in
+            ("colr", "coll.", "(c)", "(German)", "*", "wid Max")] == [""] * 6
+    assert race_resolved("(Col)", None, '" Mine Co (Col) Franklin Lynch pres', None) == "", \
+        "Colorado, in a volume that prints no race"
+    assert race_resolved("*", "*", "*Jones Thomas, (col.) steward, h. r. Broadway", "(col.)") \
+        == "(col.)", "0039: the model copied the E's star, not the race"
+    assert race_resolved("", None, "Moore Richard, col. laborer, h. r. Tillary", "(col.)") == "col."
+    assert race_resolved("", None, "al. alley; av. avenue; bldg. building; col. colored; com.",
+                         "(col.)") == "", "the abbreviations key"
+    assert race_resolved("", None, "Colyer Ezra, collector, 12 Pine", "(col.)") == ""
+    assert race_resolved("", None, "Wilson Wm, teacher Colored Orphan Asylum", "(col'd)") == ""
+    assert [line_form(t) for t in (
+        "Estabrook Ethan, assess clk. tax col. office City Hall, h. 274 Adams",
+        "Dunshee Sam'l, dep. col. ass. 7 Hall Rec. h. 199 Hester",
+        "Shotwell John, fancygds, 32 College pl. h. 32 Col. pl.",
+        "HAVEN HENRY, grates, 243 Water, N. Y. See advertisement on colored page",
+        "JACKSON CHARLES H. physician, medicated, vapor & cold water shower baths",
+        "Hutchins Charles, boatman, h 39 West Hutchins Christopher J. (col'd), waiter",
+        "Miner William, pres. col. ins. co. 63 Wall",
+        "BAUER & BODEN, colored paper and fancy paper boxes, 74 Fulton",
+        "Dunshee Saml. dept. col. ass. 7 Hall Rec. h. 199 Hester",
+        "Whiting Henry, Col. assistant Q. M. Gen. 60 G.wich",
+        "Drisler Henry, prof Columbia col. h 3 W. 24th",
+        "Adams Caroline R. wid. Wm. (col'd), h 71 Thompson",
+        "E Richardson Harriet, col. wid. laundress, h. 13 Marshall",
+        "Lee Peter, (Rev.) col. h. 324 Broadway")] \
+        == [""] * 11 + ["(col'd)", "col.", "col."]
+    assert starred(None, "E *Taylor J. W. A. waiter, 284 South 4th")
+    assert not starred(None, "Jackman Peter, tailor 109 Atlantic 11*")
     print("self-test ok")
     return 0
 

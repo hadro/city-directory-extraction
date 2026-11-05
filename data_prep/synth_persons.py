@@ -65,7 +65,9 @@ NYC era gating (features measured from the 18-volume gold panel + style cards)
     fusion differences (polk1933bk fuses markers but spaces ordinals).
   * '*' race marker is publisher-keyed (the reason the tag exists): ogden -> race "*"
     (star fused to the name in raw); hopehenderson -> raw-only star, record DROPS it
-    (Eastern District, conv #16) and colored prints col'd.
+    (Eastern District, conv #16) and colored prints col'd. Real volumes star more than these
+    two (2026-11-04, PIPELINE #37): race in Spooner/Hearnes/Reynolds, firms in Trow/Lain/
+    Upington. See docs/RACE_MARKERS_HANDOFF.md before the next training set.
   * employer (conv #7/#13): polk-late "v-p Genl Electric Co" / "tchr P S" + principal
     "(Emmons & Roberts)" paren-firms; hearne-mid "foreman white lead factory" /
     "pastor of 1st Unitarian Church" (raw keeps "of"; employer field drops it).

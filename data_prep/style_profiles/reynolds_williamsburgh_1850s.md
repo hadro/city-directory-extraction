@@ -18,6 +18,18 @@ directly after the ads with no head-note (unlike Ogden / the Spooner-era Brookly
 abbreviation grammar is inferred from the entries and follows the standard Brooklyn/Williamsburgh
 street-relation conventions.
 
+**But the run does print one, and `*` = colored (read 2026-11-04, PIPELINE #37).** The 1850-51
+volume (micro 0044, leaf 16) heads its listing with "NOTE.—Names having a * are those of colored
+people. *Abbreviations.*—av. stands for avenue, b. for between, c. for corner, carp. for
+carpenter, com. for commission, h. for house, manf. for manufacturer, lab. for laborer, mert. for
+merchant, mkr. for maker, n. for near, op. for opposite, N. for north, and S. for [...]", and the
+1849-50 Williamsburgh directory (micro 0043, leaf 4) prints the same note. 0045, 0047 and 0048
+start mid-listing on the film; 0046's starred lines (`*Merritt John, gasfitter, Marshall n.
+Leonard`, `*Jackson Percy, cook`) are the same households as 0045's. So the `*` is the Ogden /
+Spooner / Hearnes sense, a race marker (`race_designation` = `*`), and **not** the Eastern
+District sense of Hope & Henderson 1856, although Williamsburgh became the Eastern District.
+The sidecars' `book_says.race_marker` records it (data_prep/survey_race_markers.py).
+
 ## Entry format
 
 `Surname Given, occupation, [N.Y. h.] address`

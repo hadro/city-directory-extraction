@@ -3303,6 +3303,69 @@ canary volume (Brooklyn 1912) is simply the short one. And the longest lines are
 at all — they are LightOn repetition loops ("North 6th & 5th & 6th & 7th & 8th &" counting up to
 the cap), six lines, every one in `micro_IABROOKLYN_0045`, whose loop detection missed them.
 
+**37. ~~Race markers: what each volume prints, and what the data says~~ BUILT 2026-11-04 (found
+2026-11-03, dug and fixed 2026-11-04).** Summary of the fix first; the dig follows, corrected where
+the fix's reading overturned it. **`race_designation_resolved`** (assemble_records.race_resolved)
+holds the printed marker where the volume's own convention supports it: **26,107 usable rows in 63
+volumes** (4,199 `*` in 32, 21,908 textual in 31), against the model's 30,177. Model -> resolved:
+23,471 kept, 6,698 cleared (firms' and Eastern District stars, Colorado, collectors), 2,628 added
+(2,191 stars the model left empty; 437 textual forms taken from the line, 371 of them Lain 1862's
+bare `col.`), 8 changed; `district = Eastern` from the star on 13,649 more rows. The convention is
+two cited sidecar claims per volume, `book_says.race_marker` and `star_meaning`
+(data_prep/survey_race_markers.py; 63 + 60 claims, key pages read on the image in 25 volumes). The
+dig's guesses that the reading changed: **Reynolds' Williamsburgh star is RACE** (0044's key: "Names
+having a * are those of colored people"; 0043 the same), not "probably ED"; **micro 0039/0040/0042's
+star is the OCR's reading of the raised E** (crops), and Lain 1866's too; Lain 1876/78's `col.` is
+collector and Trow 1915-22's `(Col)` Colorado, so the textual forms count only in the claimed volumes.
+**No retrain, and no targeted re-run of the ~26K lines** (hadro asked 2026-11-04): the model reads
+OCR text, so a star the OCR kept is caught by rule and one it lost is beyond any text model; the
+residual a better model could touch is <= 101 textual and 167 star lines, mostly not race; a re-run
+of the marked lines cannot reach misses, which carry no value. Training-set fix for the next model
+recorded in docs/RACE_MARKERS_HANDOFF.md. Records re-assembled 2026-11-04, verified row by row
+(15,776,206 rows: every other field equal, `district` only None -> Eastern, on 14,560 rows of which
+13,649 usable; `results/race_reassembly_check.py`); `results/race_rule.py` is the before/after (run
+it BEFORE re-assembling). The three cards say it (records: the column and "count this, not
+`race_designation`"; model: a limitation; training set: the generator's two-publisher `*`).
+Open: browse.db rebuild (the 15:26 build predates the column; disk), which column the release ships
+(hadro), and the blog draft's sentence (an older copy replaced the edited file the same day).
+
+*The dig, as written that morning (`results/race_markers.py`, now superseded for the count):* The
+post says "about 9,800 usable records, in 68 of the 82 volumes processed". Over round 13 (+ #38), all
+153 volumes, 30,177 usable rows have a non-empty `race_designation`, but that field is not a race count.
+What a volume prints decides:
+- **Textual forms, 21,644 rows, reliable.** `(col'd)` Doggett, Trow 1857-65, Rode, Hope & Henderson 1856;
+  `(col.)`/`(col)` Lain 1858-71 and the Consolidated 1858-60 microfilm; `colored` Smith 1855-57 and
+  Longworth 1835-36; `col.` Lain 1862. Pre-1850 volumes and everything after Lain 1871 print none.
+- **A bare `*` means colored only in the Ogden/Spooner/Hearnes run** (key pages read in 14 volumes: Ogden
+  1839, Spooner 1843/1848 and nine microfilm volumes 1830-49, Hearnes 1850/1852). 3,692 starred lines in
+  32 volumes by `name_mark`, but **the 4B set `race_designation` on only 1,793 (49%)**: microfilm 0009-0018,
+  0025 (1832-42, 1848/49), and the Hearnes microfilm 0029/0031/0032 have the star in `name_mark` and an
+  empty field (e.g. 0025: 216 stars, 0 set). Fix by rule, not model: in those volumes set
+  `race_designation="*"` from `name_mark` (see "Not yet done" below).
+- **A bare `*` means something else elsewhere**, and the model labels it race anyway:
+  Eastern District in Hope & Henderson 1856/57 and the Consolidated microfilm (0035/0039/0040/0042: 14,325
+  stars, 1,754 wrongly set as race; read on lines: Calyer, Metropolitan av, Guernsey are all Eastern
+  District addresses); a firm/advertiser star in Trow 1876 and 1903-14 (2,274 rows, **all** set as race;
+  read on lines: `*Boston Clock Co`, `*Fry Art Co.`, `*Gossweiler Cafe`), and in Lain 1884-89 and
+  Upington 1902-08. The Trow/Lain/Upington key pages were NOT read for this: the claim rests on the lines
+  read (no person among them is plausibly a race mark), so read one key page each before relying on it.
+  Reynolds Williamsburgh 1850-54 (5 volumes, 308 stars, 195 set) is unresolved: no key page, ED is its
+  whole territory, so a star there is probably not race, but nothing reads it.
+- **Noise, about 1,250 rows**: `(Ill)`, `(O)`, `collr` (Trow 1915/17/22, ~250 each), `(German)`,
+  `wid Max`, surnames that begin Col- (Colden, Colton), OCR `'` for a star in Ogden (43).
+**Defensible number: about 25,300 usable race-marked records in 64 volumes** (21,644 textual + 3,692
+stars in the star-is-race run, counting the mark the assembly saw); 38 volumes print at least 5 textual
+forms, 26 the star. Not 9,800 and not 30,177. The old 9,800 was likely textual forms only, on a partial
+run. Do not report the `race_designation` column's own count.
+**Full write-up, decision and fix design: `docs/RACE_MARKERS_HANDOFF.md`. Decision (hadro asked 2026-11-04): fix in
+post-processing, not by retraining** (the model gets textual forms at 99.3-100%, `results/race_marker_recall.py`;
+the star's meaning is the volume's, not the line's).
+The morning's to-do list, as resolved: (1) the rule is built (above); (2) the Trow/Lain/Upington key
+pages were not read -- their starred lines are firms, and anything not race resolves empty either way;
+(3) the generator's publisher-keyed `*` stays a next-model fix; (4) the post's sentence takes "about
+26,000 usable records, in 63 of the 153 volumes" (NOT yet in the draft: see Open above). The post's other TKTKs are links, the licence and
+NYU's GPU-hours (see `release-open-decisions`).
+
 **38. ~~A column's modal edge is not always its margin.~~ DONE 2026-11-04 (found by round 13's one
 lost volume, hadro chose the fix).** Round 13 cost Trow 1909 p1 187 usable rows while every other
 volume gained: 206 whole ditto entries (`" Gustav clerk h 573 S Boulevard`) went `start` -> `runover`

@@ -99,7 +99,8 @@ Open `crop` to see the printed line.
 | `name_resolved` | The name with a ditto mark replaced by the surname it repeats; otherwise `name`. Empty where `name_fragment` is set |
 | `address_resolved`, `home_address_resolved` | The address with a ditto (`do.`) expanded where the early directories use one |
 | `ditto_source`, `ditto_header`, `ditto_flags` | Where a resolved surname came from (another record, or a surname header over the column), and review flags (`cross_leaf`, `letter_conflict`, `orphan`, and `mark_lost`: no ditto mark was read, but the line opens on a given name, so it took the surname above; `mark_spurious`: a ditto mark was read before a surname that opens a new block, a broken capital, so the line sets the surname) |
-| `name_mark`, `district` | A marker the line opens with (Brooklyn's Eastern District `E`, a `*`), and `Eastern` where it marks an Eastern District resident |
+| `name_mark`, `district` | A marker the line opens with (Brooklyn's Eastern District `E`, a `*`), and `Eastern` where it marks an Eastern District resident: the `E`, or the `*` in the five volumes whose key says the star means the Eastern District |
+| `race_designation_resolved` | The race marker as printed, kept only where the volume's own key or listings show that form marks colored residents: a leading `*` in 32 Brooklyn and Williamsburgh volumes (1829-1855), or `(col'd)`, `(col.)`, `col.` or `colored` in 31 others. Empty everywhere else. **Count this column, not `race_designation`**: the same `*` marks firms, advertisers or the Eastern District in other volumes, and the model's field does not know which. 26,107 `usable` records in 63 volumes carry one |
 
 **How far to trust it**
 
@@ -185,8 +186,10 @@ records are released under <FILL: licence>.
 ## Ethical considerations
 
 The directories record the social categories of their time, and this dataset copies them as
-printed. `race_designation` holds the markers directories used to set Black residents apart
-(`col'd`, `(c)`, `colored`). `spouse_name` holds widowhood. Occupations and addresses reflect
+printed. `race_designation_resolved` holds the markers directories used to set Black residents
+apart (`(col'd)`, `(col.)`, `colored`, and in the early Brooklyn and Williamsburgh directories a
+leading `*`), copied verbatim and never expanded; `race_designation` is the model's own reading,
+kept for audit. `spouse_name` holds widowhood. Occupations and addresses reflect
 who a directory canvasser recorded, and who they missed. The people listed lived between the
 1780s and the 1920s. These are public commercial publications of their day, kept here for
 historical and genealogical research. Use these fields as historical evidence, not as

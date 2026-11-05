@@ -126,6 +126,11 @@ non-commercial. None of these sets is in the training data.
 - Race markers are generated only in forms the directories print (none unattested in the 250k
   set). Some NYC forms were first taken from NYU's parsed records rather than read off the page,
   so the 250k set was checked against the directories for that reason.
+- A leading `*` is generated only as Ogden 1839's race mark and Hope & Henderson's Eastern
+  District mark. Real directories also star colored residents under other publishers (Spooner,
+  Hearnes, Reynolds) and star firms and advertisers (Trow, Lain, Upington), which the set never
+  shows, so the model sets race on some firms' stars and misses some colored residents' stars.
+  The records dataset resolves `*` per volume from each volume's key.
 
 ## Citation and sources
 

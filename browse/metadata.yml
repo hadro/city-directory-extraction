@@ -14,8 +14,9 @@ databases:
         # and reload the page (serve.sh restarts Datasette on any change to this file). Display
         # only: exports keep the table's order unless the URL picks columns with ?_col=.
         column_order: [record_id, crop, raw_line, name_resolved, address_resolved,
-                       home_address_resolved, name, is_business, spouse_name, race_designation,
-                       occupation_role, employer, address, home_address, role, usable, line_source,
+                       home_address_resolved, race_designation_resolved, name, is_business,
+                       spouse_name, race_designation, occupation_role, employer, address,
+                       home_address, role, usable, line_source,
                        volume, year, publisher, district, name_mark, ditto_source, ditto_header,
                        ditto_flags]
         # keep in step with `facets` in browse/sources.toml, which gives each one its index
@@ -58,7 +59,7 @@ databases:
           name: model field, verbatim (never overwritten)
           is_business: "model field, verbatim: the strings True / False"
           spouse_name: model field, verbatim
-          race_designation: model field, verbatim
+          race_designation: "model field, verbatim. Not a race count: it holds firms' stars, Colorado `(Col)`, collectors `col.` (PIPELINE #37); use race_designation_resolved"
           occupation_role: model field, verbatim
           employer: model field, verbatim
           address: model field, verbatim
@@ -67,10 +68,11 @@ databases:
           address_resolved: "the early volumes' slot grammar (`27 Ann do.` -> `27 Ann-street`)"
           address_ditto: the status of address_resolved
           home_address_resolved: "the within-line expansion of `h do`"
+          race_designation_resolved: "the printed race marker, verbatim (`*`, `(col'd)`, `(col.)`, `colored`), only in the 63 volumes whose key or lines show one marks a colored person (the sidecar's race_marker claim, data_prep/survey_race_markers.py). In the 32 `*` volumes it is set wherever the line opens on a star; elsewhere a `*` marks a firm or the Eastern District, and the field is empty"
           ditto_source: "the record_id the surname was carried from, with that line's text under it (click to open it). Empty where it came from a dropped header (ditto_header)"
           ditto_header: "the surname block header the surname came from (ANDERSON over a column, as the page prints it, spelled as the volume's entries spell it). Ingest drops every header; assemble_records puts them back for the carry"
           name_mark: "a leading mark the line opens with, as the OCR printed it, found per volume by what follows it: the Eastern District E and its misreadings (Æ © € ® or a quote), a column rule (| I ! or 1), a * . Stripped from name_resolved, never from name"
-          district: "Eastern where the volume marks Eastern District residents (0039, 0040, 0042: 'Names marked thus (E) are persons residing in the Eastern District') and this line carries the mark, or the line is in a section printed for that district (0036's); else empty"
+          district: "Eastern where the volume marks Eastern District residents (0039, 0040, 0042: 'Names marked thus (E) are persons residing in the Eastern District') and this line carries the mark -- the E, or the `*` the OCR reads it as, and Hope & Henderson 1856's printed `*` (0035) -- or the line is in a section printed for that district (0036's); else empty"
           duplicate_of: "re-OCR'd volumes only: the record_id of the model line this tesseract line repeats (the two were left unpaired). Never usable"
           name_fragment: "the name opens on a lowercase word no name opens on (n H for a cut —Wm H, rank for Frank, of Old New Yorkers): the line's start was cut in the scan or the OCR, or it is not a name. name_resolved is left empty; name keeps the reading"
           ditto_flags: "review flags on the carry: cross_leaf, letter_conflict, orphan; mark_lost where no ditto mark was read but the line opens on a given name and took the surname above; mark_spurious where a mark was read before a surname that opens a new block (a broken capital) and the line set the surname. Kept, never acted on. Since the 2026-10-20 carry rules 6.6% of 1906BPL's dittos are flagged (it was ~23%), much of that drop by construction; results/carry_rules.py has the evidence that is not"

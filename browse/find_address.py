@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.11"
-# dependencies = []
+# dependencies = ["duckdb==2.0.0"]
 # ///
 """
-Every line in data/browse.db that may give an address, OCR misreadings included, with a link to
+Every line of the records that may give an address, OCR misreadings included, with a link to
 check them in the browser (browse/README.md).
 
-    python3 browse/find_address.py "166 Lefferts pl"
-    python3 browse/find_address.py "166 Lefferts pl" --people     # also trace who lived there
+    uv run browse/find_address.py "166 Lefferts pl"
+    uv run browse/find_address.py "166 Lefferts pl" --people     # also trace who lived there
     python3 browse/find_address.py --self-test
 
+It searches the address finder's records Parquet (data/space/records.parquet, which
+space/build_parquet.py makes from data/browse.db) with the finder's own search (space/search.py),
+so the two give the same lines: one copy of a volume loaded twice, the eval_holdout rows left
+out. This file holds the readers both use.
+
 A "contains" filter both misses and over-matches: it skips a misread line, and "6 Lefferts" is
-in "56 Lefferts". This reads the full-text index's word list instead -- the street word's
+in "56 Lefferts". This reads the word index's word list instead -- the street word's
 spellings within --dist edits (Leflerts, Lefferta) and the number's look-alikes (I66, l6G) --
 then reads every line holding one as number-then-street, in raw_line and the two resolved
 address columns, rejoining a street the OCR split (Lef-ferts, Lef ferts). A line that ends on
@@ -32,22 +37,22 @@ is at the address in another volume is flagged, with a link to just those: the s
 one digit off is the likeliest misread.
 
 --people looks up each person found at the address in every volume. A year whose line read the
-address too badly to match shows up as that person at another address, or missing.
-
-Reads the database only; Datasette can keep serving it.
+address too badly to match shows up as that person at another address, or missing. A line that
+is probably a namesake says why (search.Records.residents).
 """
 from __future__ import annotations
 
 import argparse
 import collections
 import re
-import sqlite3
 import sys
+import time
 import urllib.parse
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 DB = REPO / "data" / "browse.db"
+PARQUET = REPO / "data" / "space" / "records.parquet"
 BASE = "http://127.0.0.1:8001/browse/records"
 GRADES = ["exact", "street", "number", "wrapped", "near"]
 # characters OCR reads for digits, folded to them (the FTS words are lowercased)
@@ -238,44 +243,6 @@ def other_streets(streets: list, anchor: str) -> tuple:
     return kept, [s for s in streets if s not in kept]
 
 
-def vocab_terms(con, number: str, anchor: str, dist: int):
-    """The index's words that may be the street word or the number."""
-    con.execute("CREATE VIRTUAL TABLE IF NOT EXISTS temp.vocab USING fts5vocab(main, records_fts, row)")
-    dist = street_dist(anchor, dist)
-    numbered = ordinal(anchor)
-    streets, numbers = [], []
-    lo, hi = min(len(anchor) - dist, len(number) - 1), max(len(anchor) + dist, len(number) + 2)
-    for term, n in con.execute("SELECT term, doc FROM temp.vocab WHERE length(term) BETWEEN ? AND ?",
-                               (lo, hi)):
-        if numbered and ordinal(term) == numbered and term != number:
-            streets.append((term, n))
-        elif (not numbered and term.isalpha() and abs(len(term) - len(anchor)) <= dist
-              and lev(term, anchor, dist) <= dist):
-            streets.append((term, n))
-        elif as_number(term) == number:
-            numbers.append((term, n))
-    return streets, numbers
-
-
-def fts_rows(con, terms: list) -> dict:
-    out = {}
-    for i in range(0, len(terms), 200):
-        q = " OR ".join(f'"{t}"' for t in terms[i:i + 200])
-        for r in con.execute(
-                "SELECT r.rowid, r.record_id, r.year, r.usable, r.name_resolved, "
-                + ", ".join(f"r.{f}" for f in FIELDS)
-                + " FROM records_fts f JOIN records r ON r.rowid = f.rowid WHERE records_fts MATCH ?",
-                (q,)):
-            out[r["rowid"]] = r
-    return out
-
-
-def next_line(con, record_id: str):
-    vol, leaf, n = record_id.rsplit(":", 2)
-    return con.execute("SELECT raw_line FROM records WHERE record_id = ?",
-                       (f"{vol}:{leaf}:{int(n) + 1}",)).fetchone()
-
-
 def best_reading(r, number: str, words: list, kind: str, dist: int, skip=frozenset()):
     """The best grade any of a row's FIELDS gives, as match_tokens returns it, or None."""
     best = None
@@ -286,40 +253,11 @@ def best_reading(r, number: str, words: list, kind: str, dist: int, skip=frozens
     return best
 
 
-def ends_on_number(r) -> bool:
-    """The line may wrap the address: a number among its last two tokens."""
-    return any(as_number(t) for t in (r["raw_line"] or "").split()[-2:])
-
-
 def read_wrapped(r, next_raw: str, number: str, words: list, kind: str, dist: int,
                  skip=frozenset()):
     toks = (r["raw_line"] or "").split()
     return match_tokens(toks + (next_raw or "").split(), number, words, kind, dist, cut=len(toks),
                         skip=skip)
-
-
-def find(con, address: str, dist: int) -> list:
-    number, words, kind = parse(address)
-    anchor = anchor_of(words)
-    streets, numbers = vocab_terms(con, number, anchor, dist)
-    streets, dropped = other_streets(streets, anchor)
-    print(f"street words within {dist} of {anchor!r}: "
-          + ", ".join(f"{t} ({n})" for t, n in sorted(streets, key=lambda x: -x[1])[:40])
-          + (" ..." if len(streets) > 40 else ""))
-    if dropped:
-        print("not searched, as common as another street: "
-              + ", ".join(f"{t} ({n})" for t, n in dropped))
-    print(f"number forms of {number}: " + ", ".join(f"{t} ({n})" for t, n in numbers))
-    rows = fts_rows(con, [t for t, _ in streets + numbers])
-    skip = frozenset(t for t, _ in dropped)
-    hits = []
-    for r in rows.values():
-        best = best_reading(r, number, words, kind, dist, skip)
-        if best is None and ends_on_number(r) and (nxt := next_line(con, r["record_id"])):
-            best = read_wrapped(r, nxt[0], number, words, kind, dist, skip)
-        if best:
-            hits.append((best, r))
-    return hits
 
 
 def links(base: str, ids: list) -> list:
@@ -349,47 +287,42 @@ def flag_of(grade: str, note: str, r, at: set) -> str:
             else "SURNAME" if name_of(r)[0] in {n[0] for n in at} else "")
 
 
-def report(con, hits: list, base: str, people: bool, address: str, dist: int):
+def report(res: dict, base: str, people: bool, dist: int):
+    """Print a search.Records.find result: the spellings searched, each grade's lines with a link
+    to them in the browser, and with --people each traced person's lines."""
+    print(f"street words within {street_dist(res['anchor'], dist)} of {res['anchor']!r}: "
+          + ", ".join(f"{t} ({n})" for t, n in sorted(res["streets"], key=lambda x: -x[1])[:40])
+          + (" ..." if len(res["streets"]) > 40 else ""))
+    if res["dropped"]:
+        print("not searched, as common as another street: "
+              + ", ".join(f"{t} ({n})" for t, n in res["dropped"]))
+    print(f"number forms of {res['number']}: " + ", ".join(f"{t} ({n})" for t, n in res["numbers"]))
     by = collections.defaultdict(list)
-    for (grade, how, note, *_), r in hits:
-        by[grade].append((r["year"] or 0, r["record_id"], how, note, r))
-    at = residents_at(hits)
+    for h in res["hits"]:
+        by[h["grade"]].append(h)
     for g in GRADES:
         if not by[g]:
             continue
-        rows = sorted(by[g])
-        print(f"\n== {g}: {len(rows)} ==")
-        for year, rid, how, note, r in rows:
-            flag = flag_of(g, note, r, at)
-            print(f"{year} {rid:40} u={r['usable']} {how!r:24} {flag:9} {(r['raw_line'] or '')[:90]}")
-        for url in links(base, [rid for _, rid, *_ in rows]):
+        print(f"\n== {g}: {len(by[g])} ==")
+        for h in by[g]:
+            print(f"{h['year']} {h['record_id']:40} u={h['usable']} {h['how']!r:24} {h['flag']:9} "
+                  f"{(h['raw_line'] or '')[:90]}")
+        for url in links(base, [h["record_id"] for h in by[g]]):
             print(url)
         if g == "near":
-            look = [rid for _, rid, _, note, r in rows if flag_of(g, note, r, at)]
+            look = [h["record_id"] for h in by[g] if h["flag"]]
             if look:
                 print(f"near lines whose name or surname is at the address elsewhere ({len(look)}):")
                 for url in links(base, look):
                     print(url)
     if not people:
         return
-    number, words, kind = parse(address)
-    seen = set()
     print("\n== the people at it, in every volume ==")
-    for g in ("exact", "street", "number", "wrapped"):
-        for _, _, _, note, r in sorted(by[g]):
-            name = name_of(r)
-            if note or len(name) < 2 or name in seen:
-                continue
-            seen.add(name)
-            print(f"\n{' '.join(name)}")
-            for p in con.execute(
-                    "SELECT r.year, r.record_id, r.name_resolved, r.raw_line FROM records_fts f "
-                    "JOIN records r ON r.rowid = f.rowid WHERE records_fts MATCH ? ORDER BY r.year",
-                    (f'name_resolved: "{name[0]}"',)):
-                if name_of(p) == name:
-                    at = match_tokens((p["raw_line"] or "").split(), number, words, kind, dist)
-                    print(f"  {p['year']} {p['record_id']:40} {(at[0] if at else ''):7} "
-                          f"{(p['raw_line'] or '')[:80]}")
+    for name, lines in res["people"].items():
+        print(f"\n{name}")
+        for p in lines:
+            print(f"  {p['year']} {p['record_id']:40} {p['grade']:7} {p['left_out'] or '':24} "
+                  f"{(p['raw_line'] or '')[:80]}")
 
 
 def self_test():
@@ -454,7 +387,8 @@ def main(argv=None) -> int:
     ap.add_argument("--dist", type=int, default=2,
                     help="edits allowed in the street word (default 2; 1 for a short word)")
     ap.add_argument("--people", action="store_true", help="trace each person found at it")
-    ap.add_argument("--db", default=str(DB))
+    ap.add_argument("--parquet", default=str(PARQUET),
+                    help="the records (space/build_parquet.py), with records.words.parquet beside")
     ap.add_argument("--base", default=BASE, help="the records table's URL in the browser")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args(argv)
@@ -463,10 +397,18 @@ def main(argv=None) -> int:
         return 0
     if not a.address:
         ap.error("give an address")
-    con = sqlite3.connect(f"file:{a.db}?mode=ro", uri=True)
-    con.row_factory = sqlite3.Row
-    hits = find(con, a.address, a.dist)
-    report(con, hits, a.base, a.people, a.address, a.dist)
+    parquet = Path(a.parquet)
+    if not parquet.exists():
+        raise SystemExit(f"{parquet} is missing: make it with `uv run space/build_parquet.py`")
+    if DB.exists() and DB.stat().st_mtime > parquet.stat().st_mtime:
+        print(f"note: {DB.name} is newer than {parquet.name}; lines loaded since are not searched "
+              "(`uv run space/build_parquet.py`)", file=sys.stderr)
+    sys.path.insert(0, str(REPO / "space"))
+    import search                                 # DuckDB; the readers above need nothing
+    t = time.time()
+    res = search.Records(str(parquet), memory=False).find(a.address, a.dist, people=a.people)
+    report(res, a.base, a.people, a.dist)
+    print(f"\n{len(res['hits']):,} lines in {time.time() - t:.1f} s", file=sys.stderr)
     return 0
 
 

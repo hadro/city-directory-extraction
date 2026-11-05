@@ -67,7 +67,9 @@ The rows are the files' own values, plus three columns:
   roots.** `4b-100k+guard` holds run 1's five volumes (`data/volumes_run1`) and the reocr tier's
   39 (`data/volumes_reocr`), so split a run's totals by `root`. `assemble_records.py` writes
   `root` on every row from 2026-10-20 on. For files assembled before that, it's inferred from
-  `infer_root` in `sources.toml`.
+  `infer_root` in `sources.toml`. **Known problem:** three volumes (`1906BPL`, Doggett 1845,
+  Mercein 1820) are loaded under two roots, so their counts are doubled and their `record_id`s are
+  not unique (not fixed; PIPELINE #41). Filter on `root` until it is.
 - **`source_file`**: where the row came from. The `loaded_files` table lists every file, with
   when it was loaded and its row count.
 
@@ -102,6 +104,14 @@ the catalog marks it unverified; IA's publisher column has "J. Lain and Company"
 
 Column descriptions are in the "Column descriptions" toggle above the table and in each column's
 header menu. They come from `assemble_records.py`'s docstring, via `metadata.yml`.
+
+**`plugins/facet_counts.py`** answers a table's default facets over the whole table, with no
+filter, from the counts the build keeps (`facet_counts`), not from a scan. At 16M rows the scan
+took 1.6 s a facet warm and ~6 s cold, past the 3 s facet limit, so the first records page took
+~11 s and showed only `volume`. With the counts it takes ~0.1-0.25 s and shows all four
+(2026-11-04). Any filter or search is counted by Datasette as before. The build deletes a table's
+counts before it changes its rows and writes them again at the end (one GROUP BY, ~18 s at 16M
+rows), so during a build the browser counts live and is slow again, but never shows old counts.
 
 **`plugins/records_cells.py`** changes how the pages display, and nothing in the database:
 
@@ -138,9 +148,13 @@ order. A URL with `_col=` keeps the order it gives, and the plugin leaves it alo
 
 ## Using it
 
-- **Facets:** `root`, `volume`, `role` and `usable` come back in ~0.1–0.3 s under any mix of
-  the common filters. That's because each has a covering index; see `sources.toml`. You can add
-  a facet on any other column from its header menu. It works, but may take a second or two.
+- **Facets:** over the whole table, `root`, `volume`, `role` and `usable` come from the build's
+  counts (`plugins/facet_counts.py`, above). Under a filter, each has a covering index (see
+  `sources.toml`), which made them ~0.1–0.3 s at 0.8M rows. That holds for a filter matching a
+  volume's worth of rows. A filter matching millions does not: at 16M rows, `usable=0` (1.6M
+  rows) takes ~7 s and its `role` and `volume` facets time out. Filter to a volume or a root
+  first. You can add a facet on any other column from its header menu. It works, but may take a
+  second or two, and over the whole table it times out.
 - **Search box:** full-text search over `raw_line`, the resolved name and addresses, occupation,
   employer and spouse. It matches whole words in any order and any of those columns. For one
   column, a phrase or a prefix, add `&_searchmode=raw` to the URL once (the form keeps it) and
@@ -169,13 +183,19 @@ order. A URL with `_col=` keeps the order it gives, and the plugin leaves it alo
 ## Finding an address, misreadings included
 
 ```bash
-python3 browse/find_address.py "166 Lefferts pl"            # ~13 s
-python3 browse/find_address.py "166 Lefferts pl" --people   # also each resident in every volume
+uv run browse/find_address.py "166 Lefferts pl"            # ~3 s
+uv run browse/find_address.py "166 Lefferts pl" --people   # also each resident in every volume
 python3 browse/find_address.py --self-test
 ```
 
 Lists every line that may give an address, with a link per grade that opens those rows, crops
-and all, in the browser. It reads the search index's word list for spellings of the street word
+and all, in the browser. It searches the address finder's records Parquet
+(`data/space/records.parquet`; make it, and its word index, with `uv run
+space/build_parquet.py` after a build) with the finder's own search, `space/search.py`, so the
+script and the page give the same lines. That Parquet holds one copy of a volume loaded twice
+and no `eval_holdout` rows, so neither do the script's lines. It says so when browse.db is newer
+than the Parquet. Until 2026-11-04 it read browse.db's full-text index: 15-56 s a search at 16M
+rows, and it crashed on a volume loaded twice, since two copies of a line sorted as equal. It reads the word index's word list for spellings of the street word
 (Leflerts, Lefferta, Leffert©) and for the number's look-alikes (I66, hl66). A spelling may be
 two edits off for a street word of eight letters or more, one for a shorter word: two edits turn
 Forest into First. A spelling at least a quarter as common as the street word is another street
@@ -198,11 +218,10 @@ digits, look-alikes folded (11Oth), never by edits, since 111th is another stree
 read the address too badly to match shows as another address or a gap.
 
 It finds nothing where the number was dropped, or the street word is more than two edits off. For
-a street of several words (De Kalb av) it matches the longest word. It opens the database
-read-only, so Datasette can keep serving.
+a street of several words (De Kalb av) it matches the longest word. `--people` marks a line that
+is probably a namesake and says why (another borough, or years from the address).
 
-`space/` has the same search as a web page, with the line images, on DuckDB over a Parquet copy
-(~1 s a search). See `space/README.md`.
+`space/` is the same search as a web page, with the line images. See `space/README.md`.
 
 ## Giving someone a copy
 
@@ -253,9 +272,11 @@ Written down 2026-10-20, none of it built yet:
    word list. It suits a plain keyword box over a text-only copy, without the URL columns.
    Order the release by year, volume, leaf and line, the line parsed from `record_id`: HF's
    search returns rows in file order.
-7. **Scale.** The remaining tiers are several times this size. Re-time the facets when they
-   land. The options, in order: more covering indexes (`facets` in `sources.toml`), a table per
-   tier, or DuckDB, which Datasette doesn't serve natively.
+7. **Scale.** Re-timed at 16M rows (2026-11-04): the unfiltered facets now come from the build's
+   counts (`plugins/facet_counts.py`). A filter matching millions of rows is still seconds and
+   times out its facets. The options left: the counts per combination of the facet columns
+   (`write_facet_counts` already groups by all four, so `usable=0` could be answered from them),
+   a table per tier, or DuckDB, which Datasette doesn't serve natively.
 8. **Corrections from browsing.** A way to mark a row wrong while looking at it, kept in a
    separate table, that feeds gold fixes.
 9. **The `crop` size `assemble_records.py` writes.** It writes `full`, which IA serves

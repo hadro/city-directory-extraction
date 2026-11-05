@@ -14,8 +14,10 @@ pinned: false
 misreadings included, each with its line image from the Internet Archive. It runs on DuckDB over
 the records Parquet and a word index beside it, with no SQLite. At 15.5M rows (2026-11-04, all
 three tiers), on the laptop held to 2 threads (the free CPU tier's count): it starts in ~8 s and
-~2 GB (the records go into memory), and a search with the resident trace takes 1.5-2.5 s ("100
-5th av", 23,633 hits, 4 s). The full scan it replaced took 9-14 s on 8 threads (PIPELINE #39).
+~2 GB (the records go into memory), and a search with the resident trace takes 0.9-1.9 s ("100
+5th av", 23,633 hits, 3.1 s). The full scan it replaced took 9-14 s on 8 threads (PIPELINE #39).
+`browse/find_address.py` runs this same search, reading the file instead of loading it (~3 s for
+one search).
 
 ## Running it locally
 
@@ -40,9 +42,12 @@ stamped for other records is rebuilt in memory at start-up, with a warning; that
 minute on 8 threads and several on 2, so ship it beside the records. A search takes the rows
 holding a street spelling or a number form that also hold a word reading as the number or one
 digit off (every grade needs one). Of those it grades only the ones where such a token is followed,
-within a few tokens, by a piece of the street word (`address_shape` in `search.py`). Both tests are
+within a few tokens, by a piece of the street word (`address_shape` in `search.py`). A line that
+may wrap the address (a near number among its last two tokens) is read on into its next line only
+when the two lines together have that shape. Both shape tests run in DuckDB, as RE2 patterns
+translated from the Python ones (`re2`), so the rest never reach Python. All of these are
 conditions every match meets, so the hits are the same as a full scan's: checked on 17 addresses
-against the scanning version on 2026-11-04. The word counts behind `other_streets` are now rows
+against the scanning version on 2026-11-04, and on 40 after the shape tests moved into DuckDB. The word counts behind `other_streets` are now rows
 holding the word, the same count the CLI uses (`fts5vocab`'s `doc`), not occurrences. On one of the
 17 that dropped one more spelling as another street: "24 Lef ferts pl" lost two `near` lines on
 Ferns.
@@ -133,8 +138,9 @@ As of 2026-11-04 the check had been tested only against mocked metadata answers 
 panorama 29 m off, linked with heading 30°; a user's photosphere, one ~110 m off, and
 ZERO_RESULTS, none linked), never against Google itself.
 
-The page and the script differ only in the held-out rows. For example, the script's
-"h 76 Leffert© pi" (1906BPL:1193:111) is an `adjacent` holdout, so the page doesn't show it.
+The page and the script give the same lines: since 2026-11-04 the script runs this search over
+the same Parquet. So neither shows a held-out row, such as "h 76 Leffert© pi" (1906BPL:1193:111,
+an `adjacent` holdout), which the script found when it read browse.db.
 
 ## Putting it on Hugging Face (not done yet)
 
@@ -153,5 +159,5 @@ The page and the script differ only in the held-out rows. For example, the scrip
    `search.py` imports that copy when it's beside it. Set `GOOGLE_MAPS_API_KEY` as a Space
    secret for the Street View links ("Where it is today" above).
 3. **Hardware.** The free CPU tier (2 vCPU, 16 GB) should do. The laptop held to 2 threads takes
-   1.5-4 s a search and ~2 GB of memory at 15.5M rows. The tier's cores are slower than an M2's,
+   0.9-3.1 s a search and ~2 GB of memory at 15.5M rows. The tier's cores are slower than an M2's,
    so time it there before calling it done.

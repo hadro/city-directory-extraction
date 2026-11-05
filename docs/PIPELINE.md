@@ -3432,10 +3432,39 @@ place and marker, and every traced line. 16 were identical, including 1 Wall st 
 100 5th av, 131 E/West 110th st, 12 De Kalb av and 16 Ely pl. The 17th, "24 Lef ferts pl", differs
 by design: the vocabulary now counts rows holding a word, as the CLI's `fts5vocab` `doc` does, not
 occurrences. That tipped `ferns` over `other_streets`' 25% line, and two `near` lines on Ferns went.
-Open: time it on the real free tier (its cores are slower than an M2's). The wrap pass is now the
-largest share (13-27K lines a query, each needing its next line); `address_shape` on line + next
-line before `read_wrapped` would cut it, not done. The CLI `browse/find_address.py` (browse.db, FTS5)
-is untouched and not re-timed. *As found:* `space/` (Gradio + DuckDB over `data/space/records.parquet`) was
+**Follow-up, the same night.** (1) *The wrap pass.* A shape test in Python before `read_wrapped`
+saved little: the regex costs about what the reader does, per line. So both shape tests now run in
+DuckDB, as RE2 patterns translated from the Python ones (`search.re2`: no lookarounds, and `\s` as
+`str.split`'s whitespace, since RE2's is ASCII only). Only the candidates in the address's shape
+are fetched to grade (the same count as the Python test on every address checked). A line goes to
+the wrap pass only if its tail holds a near number and it has the shape together with its next
+line, joined by record_id in SQL. A rowid+1 join was tried and was slower. Wrap lines per search:
+13-34K -> mostly a few hundred (62 Euclid av 16; 10-22K left only for "1 Wall st", "100 5th av",
+"8 Ann st", "5 Jay st"). On 2 threads with the trace: 155 Franklin 2.48 -> **1.32 s**, 166 Lefferts
+pl 1.46 -> 1.05, 45 Fulton 2.37 -> 1.88, 62 Euclid av 1.66 -> 0.90, 100 5th av 4.0 -> 3.1. Over 40
+addresses (hits with grade, how, flag, place and marker, and every traced line): all identical to
+ef9d189's, 78.8 -> 60.2 s in all. `find` now returns `phases`, and `results/finder_timing.py`
+prints them. For 155 Franklin: terms 0.10, candidates 0.22, grade 0.22, wrap 0.20, hits 0.06,
+trace 0.52. The trace's one regex scan of 15.5M names is now the largest phase of a typical
+search, and grading in Python is for a heavy one (1.2-1.4 s for 1 Wall st and 100 5th av).
+(2) *The CLI* was broken as well as slow. browse.db holds a volume loaded from two roots twice
+(1906BPL, Mercein, Doggett 1845), and two copies of a line tied in `report`'s sort down to the
+`sqlite3.Row`, a TypeError. Its time was the `fts5vocab` scan (7-14 s), the FTS rows (5-25 s) and
+one query per line ending on a number (4-19 s): 15 s for 166 Lefferts pl, ~56 s for 45 Fulton.
+It now runs `search.Records` over the records Parquet, reading the file rather than loading it
+(`memory=False`, a `file_row_number` view): 3.6-4.0 s wall, with the trace. It gives the page's
+lines exactly (checked on the 40), with no held-out rows and one copy of each volume, and it warns
+when browse.db is newer than the Parquet. (3) *Datasette.* The first records page took ~11 s and
+showed only `volume`: `root`, `role` and `usable` each scanned a 16-column index (1.6 s warm, ~6 s
+cold) and hit the 3 s facet limit. `build_db.py` now keeps `facet_counts` (one GROUP BY, 17.8 s at
+16M rows, deleted before a table's rows change), and `browse/plugins/facet_counts.py` answers the
+unfiltered facets from it: 0.1-0.25 s, all four, counts equal to the live ones. Filtered views are
+unchanged: `usable=0` (1.6M rows) is still ~7 s with two facets timed out. The counts were written
+into the current browse.db by `write_facet_counts` alone, not a build, because the #37
+re-assembly makes the next build a ~54 min reload. :8001 needs `serve.sh` restarted to load the
+plugin. **Open:** time it on the real free tier (its cores are slower than an M2's); the trace
+scan (a name index shipped beside the records would make it a lookup); facets under large
+filters. *As found:* `space/` (Gradio + DuckDB over `data/space/records.parquet`) was
 built and timed at 5.5M rows: ~2 s to start, ~1-1.5 s a search (space/README). Round 13's rebuild
 put the first/clean tier in for the first time: 15,497,151 rows, 547 MB. Measured on the laptop
 (M2, 8 cores) with `results/finder_timing.py`, warm, one connection:
@@ -3502,6 +3531,66 @@ Open:
 - Read the terms before any embed.
 - Pre-1898 lines would be better served by period maps than by today's (the NYPL Map Warper
   atlases) or by OldNYC's geocoded photos; not looked at.
+
+**41. browse.db holds three volumes twice, and `record_id` is not unique there (found 2026-11-05,
+while checking figures for the second blog post; NOT FIXED, for the next agent).**
+`data/browse.db` has 16,087,138 rows. The three re-OCR'd tiers (`data/volumes_books_damaged_v6`,
+`data/volumes_books_first_clean_v2`, `data/volumes_reocr_v2`) have 15,776,206. The 310,932 rows
+between are `data/volumes_run1`: run 1's five volumes, loaded from `data/records/4b-100k+guard/`
+beside the reocr tier's 39. Three of the five were assembled again later under a newer root, so
+each is in browse.db twice:
+
+| volume | run 1 copy | newer copy |
+|---|---|---|
+| `1906BPL` | 194,201 | 202,980 (first/clean tier) |
+| `doggettsnewyorkc1845dogg` | 64,580 | 61,129 (damaged tier) |
+| `merceinscitydire00merc` | 20,366 | 20,315 (first/clean tier) |
+
+The other two, `micro_IABROOKLYN_0030` (14,250) and `_0036` (17,535), exist only under run 1.
+They are `duplicate-of` the book scans `hearnesbrooklync1852unse` and `1857BPL`
+(`data_prep/survey_runset.json`) and never ship.
+
+*What goes wrong:*
+- **`record_id` collides.** 274,330 ids occur twice (548,660 rows: 1906BPL 386,150, Doggett 1845
+  122,224, Mercein 40,286), and the two rows of one id are different lines, because an id is the
+  line's position in that root's own line file. `1906BPL:42:85` is "Jos supt h 242 92d" in the run-1
+  copy and "Artistic Picture Framing our Specialty." in the first/clean copy. `build_db.py --help`
+  says "record_id is" a stable key, as the README's refresh notes do; it is not for these three
+  volumes. `ditto_source` holds a record_id, so anything that looks a record up by id alone can
+  land on the other copy's line.
+- **Datasette counts those volumes twice.** The `volumes` table's `records` column (1906BPL shows
+  397,181), the facets, the `usable` totals and any per-volume or whole-corpus figure quoted from
+  browse.db. For the release the figures are the three tiers': 15,776,206 records, 14,176,765
+  `usable` (89.9%). Check any count quoted from browse.db in the cards and blog drafts against those.
+
+*Already right:* `data/space/records.parquet` (15,497,151 rows, which is the 15,776,206 less the
+279,055 `eval_holdout` rows). `space/build_parquet.py` keeps one copy of a volume, newest root
+first (`ROOTS_NEWEST_FIRST`), and drops the two microfilm duplicates once their book scans are
+loaded. The release plan's rule, "one reading per volume in the export", is the same, and the
+release ships nothing from run 1's root. The finder is not affected.
+
+*Reproduce, read-only (both fast; the second uses the `record_id` index):*
+```
+sqlite3 -readonly data/browse.db "select root, count(*) from records group by root"
+sqlite3 -readonly data/browse.db "select count(*) from (select 1 from records group by record_id having count(*) > 1)"
+```
+
+Open:
+- **Decide the rule, then make browse.db follow it** (hadro's call; the Parquet's rule is the obvious
+  one): one copy per volume, newest root first, applied in `browse/build_db.py`, either by not loading
+  the superseded copy or by loading it with a flag the default facets exclude. `browse/build_db.py`
+  and `browse/README.md` carry uncommitted edits from other sessions; read `git diff` first.
+- **Keep run 1's record files on disk.** `results/usable_vs_entry_labels_1906BPL.py` and the other
+  run-1 measurements read that copy by `root`. Do not renumber ids: `ditto_source` and the Parquet
+  use them as they are.
+- **Add a check that fails the build when `record_id` is not unique** within a table (the query above
+  takes about 3 s), and correct the "record_id is" sentence in `build_db.py`'s help.
+- **Re-run `write_facet_counts` and recompute `volumes.records`** after the change. Dropping five
+  files' rows is a delete, not a reload, but watch disk (22 GiB free of 926 on 2026-11-05, with a
+  25.7 GB file), `df` rather than Finder. hadro's Datasette on :8001 keeps the file open: leave it
+  running, stop nothing by name pattern, and say if it needs a restart.
+- **Not looked at:** whether the cards (`RECORDS_CARD.md`, `DATASET_CARD.md`) or the first blog
+  post quote a count that came from browse.db with run 1 still in it.
 
 ## Larger, and the ones that unblock claims
 

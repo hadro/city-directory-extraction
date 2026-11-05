@@ -6,9 +6,11 @@ The records are held in memory (~5 s at 15.5M rows on 2 threads, ~2 GB), and a w
 beside them, records.words.parquet, which build_parquet.py writes. A search picks the street
 word's spellings and the number's look-alikes from the index's word list, takes the rows holding
 one of them AND a word that reads as the number or one digit off (no grade is possible without
-one, PIPELINE #39), and grades those with find_address's own readers, so the two give the same
-answer. A full scan per search took ~3 s on 2 threads at 15.5M rows; the index takes ~0.05 s.
-Wrapped lines are read with the next line by record_id, never by row order.
+one, PIPELINE #39), and grades those in the address's shape with find_address's own readers, so
+the two give the same answer. A full scan per search took ~3 s on 2 threads at 15.5M rows; the
+index takes ~0.05 s. The shape tests run in DuckDB, so only lines that may match reach Python.
+Wrapped lines are read with the next line by record_id, never by row order. The CLI
+(browse/find_address.py) runs this search over the file without loading it (memory=False).
 """
 from __future__ import annotations
 
@@ -66,6 +68,8 @@ GRADE_COLS = ["record_id", *fa.FIELDS]
 LOOK = {"0": "0o", "1": "1il", "2": "2z", "5": "5s", "6": "6gb", "8": "8b"}
 DIGITISH = r"(?:[0-9ilogbsz|!\]]|[^\x00-\x7f])"
 STRIP = r"[.:;,'\"()]*"                         # what as_number strips from a token's ends
+# What str.split splits on (str.isspace), for RE2, whose \s is ASCII only and lacks \v
+WS = r"[\t-\r\x1c-\x1f\x85\p{Z}]"
 
 
 def looks(d: str, token: bool = True) -> str:
@@ -110,10 +114,21 @@ def address_shape(number: str, words: list, dist: int):
     return re.compile(rf"{near_token(number)}(?:\s+\S+){{0,{2 + k}}}\s+\S*?(?:{'|'.join(pieces)})")
 
 
-def ends_near(r, number: str) -> bool:
-    """A number or one digit off among the line's last two tokens: what read_wrapped needs."""
-    return any(n is not None and fa.lev(n, number, 1) <= 1
-               for n in map(fa.as_number, (r["raw_line"] or "").split()[-2:]))
+def ends_near(number: str) -> str:
+    """A pattern of a lowercased line with a near-number token among its last two: what
+    read_wrapped needs (the number ends the first line)."""
+    return rf"{near_token(number)}(?:\s+\S+)?\s*$"
+
+
+def re2(pattern: str) -> str:
+    """A pattern built here, as DuckDB's RE2 reads it: no lookarounds, and \\s and \\S split as
+    str.split splits, so a row SQL leaves out is one the Python pattern leaves out too. A
+    lookahead (?!\\S) followed by whitespace is dropped (the whitespace says it), and at the end
+    becomes whitespace-or-end; a lookbehind (?<!\\S) can only lead the pattern, as it does here."""
+    pattern = re.sub(r"\(\?!\\S\)(?=\(\?:\\s|\\s)", "", pattern)
+    assert pattern.count(r"(?<!\S)") <= 1 and pattern.find(r"(?<!\S)") <= 0, pattern
+    return (pattern.replace(r"(?<!\S)", f"(?:^|{WS})").replace(r"(?!\S)", f"(?:{WS}|$)")
+            .replace(r"\s", WS).replace(r"\S", "[^" + WS[1:]))
 
 
 def index_path(parquet: str) -> Path:
@@ -125,10 +140,16 @@ def sql_str(s) -> str:
     return "'" + str(s).replace("'", "''") + "'"
 
 
-def load_records(con, parquet: str) -> tuple:
-    """Table r: the records in memory, in the file's order (rowid = row number). Returns (rows,
-    volumes, fingerprint): the fingerprint ties an index to this order of these record ids."""
-    con.execute(f"CREATE TABLE r AS SELECT {', '.join(COLS)} FROM read_parquet({sql_str(parquet)})")
+def load_records(con, parquet: str, memory: bool = True) -> tuple:
+    """r: the records in the file's order (rowid = row number), a table in memory, or with
+    memory=False a view of the file (no start-up; each search reads the file, ~1 s more: for one
+    search, as browse/find_address.py makes). Returns (rows, volumes, fingerprint): the
+    fingerprint ties an index to this order of these record ids."""
+    if memory:
+        con.execute(f"CREATE TABLE r AS SELECT {', '.join(COLS)} FROM read_parquet({sql_str(parquet)})")
+    else:
+        con.execute(f"CREATE VIEW r AS SELECT file_row_number AS rowid, {', '.join(COLS)} "
+                    f"FROM read_parquet({sql_str(parquet)}, file_row_number = true)")
     return con.execute("SELECT count(*), count(DISTINCT volume), "
                        "CAST(bit_xor(hash(rowid, record_id)) AS VARCHAR) FROM r").fetchone()
 
@@ -164,10 +185,11 @@ def quoted(terms) -> str:
 
 
 class Records:
-    def __init__(self, parquet: str, index: str | None = None, threads: int | None = None):
+    def __init__(self, parquet: str, index: str | None = None, threads: int | None = None,
+                 memory: bool = True):
         self.con = duckdb.connect(config={"threads": threads} if threads else {})
         t = time.time()
-        self.rows, self.volumes, fingerprint = load_records(self.con, parquet)
+        self.rows, self.volumes, fingerprint = load_records(self.con, parquet, memory)
         path = Path(index) if index else index_path(parquet)
         if index_stamp(path) == (self.rows, fingerprint):
             self.con.execute(f"CREATE VIEW words AS SELECT * FROM read_parquet({sql_str(path)})")
@@ -228,46 +250,68 @@ class Records:
         return out
 
     def candidates(self, number: str, streets: list, numbers: list) -> list:
-        """The rows holding a street spelling or a number form (the rows find_address's full-text
-        query returns) that also hold a near-number word: the rest can take no grade."""
+        """The row numbers holding a street spelling or a number form (the rows find_address's
+        full-text query returns) that also hold a near-number word: the rest can take no grade."""
         if not streets and not numbers:
             return []
+        return [rid for rid, in self.con.execute(f"""
+            SELECT rid FROM words WHERE term IN ({quoted(t for t, _ in streets + numbers)})
+            INTERSECT
+            SELECT rid FROM words WHERE term IN ({quoted(self.near_terms(number) + [ODD])})
+            """).fetchall()]
+
+    def to_grade(self, rids: list, shape) -> list:
+        """The candidates in the address's shape, to grade: the shape test runs in DuckDB, so
+        the rest never reach Python."""
+        where = f"AND regexp_matches({TEXT}, {sql_str(re2(shape.pattern))})" if shape else ""
+        return self._dicts(f"SELECT rowid AS rid, {', '.join(GRADE_COLS)} FROM r "
+                           f"WHERE rowid IN (SELECT unnest(?)) {where}", [rids])
+
+    def to_read_wrapped(self, rids: list, number: str, shape) -> list:
+        """The candidates that may wrap the address, each with its next line (`next_raw`, by
+        record_id): a near number among the line's last two tokens, and the address's shape across
+        the two lines. Both are what read_wrapped needs."""
+        nid = "regexp_replace(a.record_id, '[0-9]+$', '') || " \
+              "(TRY_CAST(regexp_extract(a.record_id, '[0-9]+$') AS BIGINT) + 1)"
+        across = f"AND regexp_matches(lower(coalesce(a.raw_line, '') || ' ' || " \
+                 f"coalesce(n.raw_line, '')), {sql_str(re2(shape.pattern))})" if shape else ""
         return self._dicts(f"""
-            SELECT rowid AS rid, {', '.join(GRADE_COLS)} FROM r SEMI JOIN (
-                SELECT rid FROM words WHERE term IN ({quoted(t for t, _ in streets + numbers)})
-                INTERSECT
-                SELECT rid FROM words WHERE term IN ({quoted(self.near_terms(number) + [ODD])})
-            ) c ON r.rowid = c.rid""")
+            SELECT a.rid, {', '.join('a.' + c for c in GRADE_COLS)}, n.raw_line AS next_raw
+            FROM (SELECT rowid AS rid, {', '.join(GRADE_COLS)} FROM r WHERE rowid IN (SELECT unnest(?))
+                  AND regexp_matches(lower(coalesce(raw_line, '')), {sql_str(re2(ends_near(number)))})
+                 ) a JOIN r n ON n.record_id = {nid}
+            WHERE true {across}""", [rids])
 
     def find(self, address: str, dist: int = 2, people: bool = False) -> dict:
         number, words, kind = fa.parse(address)
         anchor = fa.anchor_of(words)
         t = time.time()
+        phases, mark = {}, [t]
+
+        def lap(name):                            # seconds per phase, for results/finder_timing.py
+            phases[name] = time.time() - mark[0]
+            mark[0] = time.time()
         streets, numbers = self.terms(number, anchor, dist)
         streets, dropped = fa.other_streets(streets, anchor)
-        rows = self.candidates(number, streets, numbers)
+        lap("terms")
+        rids = self.candidates(number, streets, numbers)
+        lap("candidates")
         skip = frozenset(t for t, _ in dropped)
         shape = address_shape(number, words, dist)
-        hits, wrap, graded = [], [], 0
-        for r in rows:
-            best = None
-            if shape is None or shape.search(" ".join(r[f] or "" for f in fa.FIELDS).lower()):
-                graded += 1
-                best = fa.best_reading(r, number, words, kind, dist, skip)
-            if best:
+        hits = []
+        graded = self.to_grade(rids, shape) if rids else []
+        for r in graded:
+            if (best := fa.best_reading(r, number, words, kind, dist, skip)):
                 hits.append((best, r))
-            elif ends_near(r, number):
-                wrap.append(r)
-        if wrap:                                  # the number last, the street on the next line
-            nxt = {x["record_id"]: x["raw_line"] for x in self._dicts(
-                "SELECT record_id, raw_line FROM r WHERE record_id IN (SELECT unnest(?))",
-                [[next_id(r["record_id"]) for r in wrap]])}
-            for r in wrap:
-                if next_id(r["record_id"]) in nxt:
-                    best = fa.read_wrapped(r, nxt[next_id(r["record_id"])], number, words, kind,
-                                           dist, skip)
-                    if best:
-                        hits.append((best, r))
+        lap("grade")
+        found = {r["rid"] for _, r in hits}
+        # the number last, the street on the next line
+        wrap = [r for r in (self.to_read_wrapped(rids, number, shape) if rids else [])
+                if r["rid"] not in found]
+        for r in wrap:
+            if (best := fa.read_wrapped(r, r.pop("next_raw"), number, words, kind, dist, skip)):
+                hits.append((best, r))
+        lap("wrap")
         full = {x.pop("rid"): x for x in self._dicts(
             f"SELECT rowid AS rid, {', '.join(COLS)} FROM r WHERE rowid IN (SELECT unnest(?))",
             [[r["rid"] for _, r in hits]])} if hits else {}
@@ -280,12 +324,14 @@ class Records:
                             place=place, marker=marker))
         out.sort(key=lambda h: (fa.GRADES.index(h["grade"]), h["year"] or 0, h["volume"],
                                 h["leaf"], h["line"]))
+        lap("hits")
         res = {"address": address, "number": number, "anchor": anchor, "kind": kind,
                "streets": streets, "dropped": dropped, "numbers": numbers,
-               "candidates": len(rows), "graded": graded, "wrap": len(wrap), "hits": out,
-               "seconds": time.time() - t, "people": {}}
+               "candidates": len(rids), "graded": len(graded), "wrap": len(wrap), "hits": out,
+               "seconds": time.time() - t, "people": {}, "phases": phases}
         if people:
             res["people"] = self.residents(out, number, words, kind, dist)
+            lap("trace")
             res["seconds"] = time.time() - t
         return res
 
@@ -384,11 +430,6 @@ def home_place_of(r) -> tuple:
         if not STREET_WORD.fullmatch(after.rstrip(",")):
             return place, marker
     return home_place(r), ""
-
-
-def next_id(record_id: str) -> str:
-    vol, leaf, n = record_id.rsplit(":", 2)
-    return f"{vol}:{leaf}:{int(n) + 1}"
 
 
 if __name__ == "__main__":

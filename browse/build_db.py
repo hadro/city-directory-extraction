@@ -347,6 +347,38 @@ def tables(con) -> set:
     return {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
 
 
+def drop_facet_counts(con, table: str):
+    """Before a table's rows change: its counts go, so a build cut off midway leaves the browser
+    counting live (slow, right), never serving old counts."""
+    if "facet_counts" in tables(con):
+        con.execute("DELETE FROM facet_counts WHERE tbl = ?", (table,))
+
+
+def write_facet_counts(con, table: str, facets: list) -> bool:
+    """facet_counts: every value of each `facets` column over the whole table, with its count, for
+    browse/plugins/facet_counts.py to serve the table's default facets unfiltered. At 16M rows
+    Datasette's own count read a 16-column index per facet, 1.6 s warm and ~6 s cold, past the
+    3 s facet limit. One GROUP BY over all of them (a facet index carries every filter column),
+    summed per column. Written when missing or for other columns than the config's; True if so."""
+    cols = [c for c in facets if c in columns(con, table)]
+    con.execute("CREATE TABLE IF NOT EXISTS facet_counts (tbl TEXT, col TEXT, value, count INTEGER)")
+    have = {r[0] for r in con.execute("SELECT DISTINCT col FROM facet_counts WHERE tbl = ?", (table,))}
+    if have == set(cols):
+        return False
+    sums = {c: collections.Counter() for c in cols}
+    for row in con.execute(f"SELECT {', '.join(q(c) for c in cols)}, count(*) FROM {q(table)} "
+                           f"GROUP BY {', '.join(q(c) for c in cols)}") if cols else []:
+        for c, v in zip(cols, row):
+            if v is not None:                        # as Datasette's facet: `where col is not null`
+                sums[c][v] += row[-1]
+    con.execute("BEGIN")
+    con.execute("DELETE FROM facet_counts WHERE tbl = ?", (table,))
+    con.executemany("INSERT INTO facet_counts VALUES (?, ?, ?, ?)",
+                    [(table, c, v, n) for c in cols for v, n in sums[c].items()])
+    con.execute("COMMIT")
+    return True
+
+
 def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BULK_SHARE) -> int:
     cfg = tomllib.loads(config.read_text(encoding="utf-8"))
     if rebuild:
@@ -399,6 +431,9 @@ def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BUL
     if n_stale:
         print(f"  {n_stale} files to reload for changed volume metadata ([volumes] in the config, "
               f"or the catalog, census or survey sidecars)")
+    gone = [k for k, row in loaded.items() if k not in seen and row[4] not in empty_sources]
+    for table in {t for t, *_ in todo} | {loaded[k][1] for k in gone}:
+        drop_facet_counts(con, table)
     present = tables(con)
     for table in changed_bytes:
         if table in present and changed_bytes[table] > bulk_share * total_bytes[table]:
@@ -418,9 +453,8 @@ def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BUL
         n_rows += n
         print(f"  loaded {key}  {n:,} rows -> {table} (run {extra['run']})")
     n_removed = 0
-    for key, (_p, table, _s, _m, source, _v, _h) in loaded.items():
-        if key in seen or source in empty_sources:
-            continue
+    for key in gone:
+        table = loaded[key][1]
         con.execute("BEGIN")
         if table in tables(con):
             con.execute(f"DELETE FROM {q(table)} WHERE source_file = ?", (key,))
@@ -442,12 +476,16 @@ def build(config: Path, db: Path, rebuild: bool = False, bulk_share: float = BUL
         # a full ANALYZE (~3 s at 0.8M rows), never a sampled one: on a sample the planner took
         # the entry_shaped index (94% of rows) for role=runover&entry_shaped=1, 6.9 s against 0.4
         con.execute("ANALYZE")
+    counted = [t for t in sorted(present & {t for t, c in cfg.get("tables", {}).items()
+                                            if c.get("facets")})
+               if write_facet_counts(con, t, cfg["tables"][t]["facets"])]
     counts = {t: con.execute(f"SELECT count(*) FROM {q(t)}").fetchone()[0]
               for (t,) in con.execute("SELECT DISTINCT tbl FROM loaded_files ORDER BY tbl")
               if t in present}
     con.close()
     state = (f"{n_loaded} files loaded ({n_rows:,} rows), {n_removed} removed"
-             if n_loaded or n_removed else "indexes updated" if touched else "up to date")
+             if n_loaded or n_removed else "indexes updated" if touched
+             else "facet counts written" if counted else "up to date")
     print(f"{state}; {', '.join(f'{t} {c:,} rows' for t, c in counts.items()) or 'empty'}  "
           f"[{rel(db)}, {time.time() - t0:.1f}s]")
     if n_skipped:
@@ -505,6 +543,9 @@ def _self_test() -> int:
         assert "COVERING INDEX idx_records_facet_volume" in con.execute(
             "EXPLAIN QUERY PLAN SELECT volume, count(*) FROM records WHERE usable = 1 AND "
             "run = 'runX' GROUP BY volume").fetchall()[-1][3], "a facet count reads its index alone"
+        fc = lambda: sqlite3.connect(db).execute(  # noqa: E731
+            "SELECT col, value, count FROM facet_counts ORDER BY col, value").fetchall()
+        assert fc() == [("volume", "volA", 2), ("volume", "volB", 1)], "the unfiltered facets' counts"
         # Datasette's filters arrive as text: a column null in the first file is still typed
         assert con.execute("SELECT count(*) FROM records WHERE usable = '1'").fetchone()[0] == 2
         assert con.execute("SELECT record_id FROM records WHERE printed_page = '7'"
@@ -542,8 +583,11 @@ def _self_test() -> int:
         # indexes and FTS triggers stay up throughout)
         write("volB.jsonl.gz", [{"record_id": "volB:3:0", "volume": "volB", "raw_line":
                                  "Jones Mary, milliner", "usable": True, "new_field": "x"}])
+        con.execute("DELETE FROM facet_counts WHERE value = 'volB'")       # stale on purpose
+        con.commit()
         assert build(cfg, db, bulk_share=2) == 0
         assert [r[0] for r in rows()] == ["volA:1:0", "volA:1:1", "volB:3:0"]
+        assert fc() == [("volume", "volA", 2), ("volume", "volB", 1)], "a load rewrites the counts"
         assert fts("widow") == [] and fts("milliner") == ["volB:3:0"], "FTS follows the swap"
 
         # most of the table changed: loaded without indexes or triggers, both rebuilt after
@@ -581,6 +625,7 @@ def _self_test() -> int:
         (run / "volA.jsonl.gz").unlink()
         assert build(cfg, db) == 0
         assert [r[0] for r in rows()] == ["volB:3:0"]
+        assert fc() == [("volume", "volB", 1)], "the counts follow a removal"
         (run / "volB.jsonl.gz").unlink()
         assert build(cfg, db) == 0
         assert [r[0] for r in rows()] == ["volB:3:0"], "an absent copy of the data is not a wipe"

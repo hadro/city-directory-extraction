@@ -104,6 +104,16 @@ LAZY_JS = """
 
 records = Records(PARQUET)
 
+try:
+    import spaces       # on Hugging Face ZeroGPU, the one Gradio hardware a free account may use
+except ImportError:
+    spaces = None
+if spaces:
+    @spaces.GPU
+    def _never_called():
+        """ZeroGPU stops a Space with no GPU function ("No @spaces.GPU function detected during
+        startup"); the search uses none, so this one is never called."""
+
 
 def resize(url: str, upright: str, turned: str) -> str:
     """The crop at another IIIF size. browse/plugins/records_cells.py's rule: `full` (what
@@ -366,5 +376,6 @@ with gr.Blocks(title="City directory address finder") as demo:
             where_html, [found, places], today)
 
 if __name__ == "__main__":
-    demo.launch(server_name="127.0.0.1", server_port=int(os.environ.get("PORT", 7860)), css=CSS,
+    # A Space sets GRADIO_SERVER_NAME=0.0.0.0; an explicit 127.0.0.1 would override it
+    demo.launch(server_name=os.environ.get("GRADIO_SERVER_NAME", "127.0.0.1"), server_port=int(os.environ.get("PORT", 7860)), css=CSS,
                 head=LAZY_JS)

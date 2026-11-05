@@ -4,6 +4,7 @@ colorFrom: gray
 colorTo: blue
 sdk: gradio
 sdk_version: 6.31.0
+python_version: "3.12"
 app_file: app.py
 pinned: false
 ---
@@ -158,6 +159,13 @@ an `adjacent` holdout), which the script found when it read browse.db.
    this README (its header is the Space config), and a copy of `browse/find_address.py`.
    `search.py` imports that copy when it's beside it. Set `GOOGLE_MAPS_API_KEY` as a Space
    secret for the Street View links ("Where it is today" above).
-3. **Hardware.** The free CPU tier (2 vCPU, 16 GB) should do. The laptop held to 2 threads takes
-   0.9-3.1 s a search and ~2 GB of memory at 15.5M rows. The tier's cores are slower than an M2's,
-   so time it there before calling it done.
+3. **Hardware.** ZeroGPU, the one Gradio hardware a free account may use (up to 2 Spaces; the free
+   CPU tier now needs PRO: creating a cpu-basic Gradio Space answers 402). Timed there on
+   2026-11-05 in a private Space, `hadro/cde-finder-timing`, with the code and both Parquets in
+   the Space repo (724 MB, accepted). The container had a 16-CPU quota and 104 GB: start-up 2.7 s;
+   a search with the trace 0.4-1.9 s ("1 Wall st", "100 5th av" ~4 s), and 0.7-3.3 s (5-6 s)
+   through the page from outside. Held to 2 threads it is slower than the laptop's 2. The header's
+   `python_version: "3.12"` matters: the image's default 3.10 has no duckdb 2.0.0. So does the
+   never-called `@spaces.GPU` function in `app.py`: without one ZeroGPU stops the Space once it
+   has started ("No @spaces.GPU function detected during startup", tried). Hosting a
+   CPU-only app on ZeroGPU may be outside that program's intent; HF says nothing either way.

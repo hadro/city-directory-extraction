@@ -3462,9 +3462,23 @@ unfiltered facets from it: 0.1-0.25 s, all four, counts equal to the live ones. 
 unchanged: `usable=0` (1.6M rows) is still ~7 s with two facets timed out. The counts were written
 into the current browse.db by `write_facet_counts` alone, not a build, because the #37
 re-assembly makes the next build a ~54 min reload. :8001 needs `serve.sh` restarted to load the
-plugin. **Open:** time it on the real free tier (its cores are slower than an M2's); the trace
-scan (a name index shipped beside the records would make it a lookup); facets under large
-filters. *As found:* `space/` (Gradio + DuckDB over `data/space/records.parquet`) was
+plugin. *Timed on Hugging Face, 2026-11-05 (82769e8's code):* the free CPU tier is not open to
+hadro's account (creating a cpu-basic Gradio Space answers 402, "requires a PRO subscription"), but
+a free account may host 2 Gradio Spaces on ZeroGPU, and the finder runs there unchanged: private
+Space `hadro/cde-finder-timing`, the code and both Parquets in the Space repo (724 MB, accepted),
+`python_version: "3.12"` (the default 3.10 has no duckdb 2.0.0), and a never-called
+`@spaces.GPU` function (needed: without one the Space stops after starting, "No @spaces.GPU
+function detected during startup"; `space/app.py` now defines one when `spaces` imports). The container is no small tier: a
+16-CPU cgroup quota (Xeon 8559C; DuckDB defaults to 16 threads) and 104 GB memory.max. At its
+default threads: start-up 2.7 s; `find` with the trace 0.39 s (62 Euclid av), 0.67 (166 Lefferts
+pl), 1.20 (155 Franklin), 1.92 (45 Fulton), 3.9-4.0 (1 Wall st, 100 5th av); held to 2 threads
+1.3-2.7 s and 5.0-5.2 s, slower than the laptop's 2 (a Xeon core is slower than an M2's). Through
+the page's API from here, network and a 0.1-1.3 MB result page included: 0.7-1.5 s for the four,
+3.3 s for 45 Fulton, 5.1-6.2 s for the two heavy ones. Hits equal the laptop's. Python grading
+(`grade`, ~2.4 s) is what is left in the heavy two, and it does not use the extra cores. Hosting a
+CPU-only app on ZeroGPU may be outside that program's intent; HF says nothing either way.
+**Open:** the trace scan (a name index shipped beside the records would make it a lookup); facets
+under large filters; Python grading on the heavy queries. *As found:* `space/` (Gradio + DuckDB over `data/space/records.parquet`) was
 built and timed at 5.5M rows: ~2 s to start, ~1-1.5 s a search (space/README). Round 13's rebuild
 put the first/clean tier in for the first time: 15,497,151 rows, 547 MB. Measured on the laptop
 (M2, 8 cores) with `results/finder_timing.py`, warm, one connection:

@@ -15,10 +15,12 @@ import html
 import os
 import re
 import tempfile
+import urllib.parse
 from pathlib import Path
 
 import gradio as gr
 
+import where
 from search import PLACES, TRACE_YEARS, Records, fa
 
 PARQUET = os.environ.get("RECORDS_PARQUET", str(
@@ -47,7 +49,15 @@ CSS = """
 .flag.look { border-color: #d97706; color: #d97706; }
 .terms { color: var(--body-text-color-subdued); font-size: 13px; }
 details.aside { margin: 4px 0 12px 16px; color: var(--body-text-color-subdued); }
+.where { display: flex; flex-wrap: wrap; gap: 16px; }
+.where > div { flex: 1 1 320px; min-width: 0; }
+.where iframe { width: 100%; height: 260px; border: 1px solid var(--border-color-primary); }
 """
+# Where the address is today, below each map: the reason the map comes with no claim about the
+# line's own building
+TODAY = ("Where this address is today, from NYC GeoSearch. Streets were renumbered, renamed and "
+         "cut through over the years these directories cover, so for an older line it may not be "
+         "the same building, or even the same block.")
 
 # Line images ask IA's image server for nothing until they are on screen. An image carries its
 # URL in data-src; this sets src once the image is within 200px of the viewport, at most
@@ -209,6 +219,51 @@ def render(res: dict, places: list, narrow: bool = True) -> str:
     return "".join(out)
 
 
+def osm_search(text: str) -> str:
+    return "https://www.openstreetmap.org/search?query=" + urllib.parse.quote(text)
+
+
+def where_html(res: dict | None, places: list) -> str:
+    """A map of the address today for each borough it is found in, or why there is none."""
+    if not res:
+        return ""
+    e = html.escape
+    out = []
+    for w in where.locate(res, places or []):
+        named = w["label"].split(",")[0].title() if "lat" in w else w["query"]   # GeoSearch's own
+        head = f'<p><b>{e(named)}, {e(w["place"])}, today</b></p>'
+        if "error" in w:
+            out.append(f'<div>{head}<p class="terms">NYC GeoSearch did not answer. '
+                       f'<a href="{osm_search(w["query"] + ", " + w["place"])}" target="_blank">'
+                       f'Search OpenStreetMap ↗</a></p></div>')
+        elif "lat" in w:
+            lat, lon = w["lat"], w["lon"]
+            bbox = ",".join(f"{v:.6f}"
+                            for v in (lon - 0.004, lat - 0.003, lon + 0.004, lat + 0.003))
+            embed = (f"https://www.openstreetmap.org/export/embed.html?bbox={bbox}"
+                     f"&layer=mapnik&marker={lat},{lon}")
+            big = f"https://www.openstreetmap.org/?mlat={lat}&mlon={lon}#map=18/{lat}/{lon}"
+            sv = w.get("street_view")
+            sv = (f' · <a href="{e(sv["url"])}" target="_blank">Street View'
+                  f'{" (" + e(sv["date"]) + ")" if sv["date"] else ""} ↗</a>' if sv else "")
+            out.append(f'<div>{head}<iframe src="{e(embed)}" loading="lazy" '
+                       f'title="{e(w["label"])} on OpenStreetMap"></iframe>'
+                       f'<p class="terms">{e(TODAY)} '
+                       f'<a href="{e(big)}" target="_blank">Larger map ↗</a>{sv}</p></div>')
+        elif w["streets"]:
+            out.append(f'<div>{head}<p class="terms">{e(w["place"])} has more than one street by '
+                       f'that name today, and the lines found don\'t say which: '
+                       + ", ".join(f'<a href="{osm_search(s)}" target="_blank">'
+                                   f'{e(s.split(",")[0].title())}</a>' for s in w["streets"])
+                       + '.</p></div>')
+        else:
+            out.append(f'<div>{head}<p class="terms">No such address in {e(w["place"])} today: the '
+                       f'street may have been renamed or renumbered, or be gone. '
+                       f'<a href="{osm_search(w["query"] + ", " + w["place"])}" target="_blank">'
+                       f'Search OpenStreetMap ↗</a></p></div>')
+    return f'<div class="where">{"".join(out)}</div>' if out else ""
+
+
 MATCH_COLUMNS = ["grade", "flag", "place", "place_marker", "year", "directory", "volume",
                  "record_id", "name_resolved", "occupation_role", "matched", "raw_line",
                  "address_resolved", "home_address_resolved", "line_image", "page_image"]
@@ -252,18 +307,22 @@ def exports(res: dict, places: list) -> tuple:
 
 
 def search(address: str, dist: int, people: bool, places: list, narrow: bool = True):
-    """The results page, then the two downloads (each hidden when there is nothing in it)."""
+    """The results page, then the two downloads (each hidden when there is nothing in it), then
+    the result for the map to be drawn from."""
     hide = gr.DownloadButton(visible=False)
     if not (address or "").strip():
-        return "", hide, hide
+        return "", hide, hide, None
     try:
         res = records.find(address.strip(), int(dist), people)
     except SystemExit as err:                     # find_address.parse's message for a bad address
-        return f"<p>{html.escape(str(err))}</p>", hide, hide
+        return f"<p>{html.escape(str(err))}</p>", hide, hide, None
     matches, trace = exports(res, places or [])
     return (render(res, places or [], narrow),
             gr.DownloadButton(value=matches, visible=bool(matches)),
-            gr.DownloadButton(value=trace, visible=bool(trace)))
+            gr.DownloadButton(value=trace, visible=bool(trace)),
+            {"address": res["address"], "hits": [
+                {k: h.get(k) for k in ("place", "grade", "flag", "how", *fa.FIELDS)}
+                for h in res["hits"]]})
 
 
 with gr.Blocks(title="City directory address finder") as demo:
@@ -293,14 +352,18 @@ with gr.Blocks(title="City directory address finder") as demo:
     with gr.Row():
         get_matches = gr.DownloadButton("Download the matches (CSV)", visible=False, size="sm")
         get_trace = gr.DownloadButton("Download the resident trace (CSV)", visible=False, size="sm")
+    found = gr.State()
+    today = gr.HTML()       # after the lines, from GeoSearch, so it never holds them up
     result = gr.HTML()
     # Clear first: gr.HTML patches the old DOM node by node, so a new search would reuse the
     # old <img> elements, which keep showing the old line until IA serves the new one
     hidden = (gr.DownloadButton(visible=False), gr.DownloadButton(visible=False))
     for trigger in (go.click, address.submit, places.change, narrow.change):
-        trigger(lambda: ('<p class="terms">Searching…</p>', *hidden), None,
-                [result, get_matches, get_trace]).then(
-            search, [address, dist, people, places, narrow], [result, get_matches, get_trace])
+        trigger(lambda: ('<p class="terms">Searching…</p>', *hidden, ""), None,
+                [result, get_matches, get_trace, today]).then(
+            search, [address, dist, people, places, narrow],
+            [result, get_matches, get_trace, found]).then(
+            where_html, [found, places], today)
 
 if __name__ == "__main__":
     demo.launch(server_name="127.0.0.1", server_port=int(os.environ.get("PORT", 7860)), css=CSS,

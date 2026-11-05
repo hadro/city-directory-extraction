@@ -38,6 +38,8 @@ The files:
   `uv run --with duckdb==2.0.0 python space/search.py data/space/records.parquet "166 Lefferts pl"`.
 - **`app.py`:** the Gradio page.
 - **`build_parquet.py`:** the local stand-in above.
+- **`where.py`:** where the address is today (below). Run it directly to test one borough:
+  `uv run --with duckdb==2.0.0 python space/where.py "155 Franklin av" Brooklyn`.
 
 **Where an address is.** The "Where the address is" boxes (Manhattan, Brooklyn, Elsewhere) filter
 on each line's own place, not its directory's. A marker printed right after the matched street
@@ -78,6 +80,43 @@ request IA leaves hanging frees its slot after 15 s. The context and page links 
 clicked. Measured in headless Chrome on 2026-11-01: no image in a closed section was requested,
 and none from a previous search. IA took 10–25 s an image that day, so rows fill in slowly.
 
+**Where it is today.** After the lines come up, `where.py` puts a map of the address as it is
+today above them, one per borough with lines found (Manhattan, Brooklyn; not "Elsewhere"). The
+point comes from NYC GeoSearch (NYC Planning Labs, open data, no key), and the map is an
+OpenStreetMap embed. Each map carries the caveat that streets were renumbered, renamed and cut
+through, so an old line's building may not be the one pinned. A map is pinned only when
+GeoSearch has ONE street today with the borough, the number, the street's name and its type. The
+type is the one asked, or else the one the lines found print most often. Otherwise the page says
+why there is no pin:
+- "155 Franklin" in Brooklyn's lines is Franklin av, and pins there, though Brooklyn also has a
+  Franklin st.
+- "131 110th st" is East or West, so there's no pin, and both are listed.
+- Brooklyn's 45 Fulton is not there today: GeoSearch answers 415 Fulton and Manhattan's 45
+  Fulton, which is why its own `match_type` is not trusted.
+
+With `GOOGLE_MAPS_API_KEY` set (on the Space, a secret), each pin also gets a "Street View ↗"
+link. It appears only when Google's metadata request, which is free, finds Google's own outdoor
+panorama within 50 m, and the link opens it turned toward the address. It is a link, not an
+embed, because Google's Maps Platform terms restrict its content beside a non-Google map; check
+those terms before embedding it. The key never reaches the page. Without a key there is no link.
+Restrict the key to the Street View Static API, and give it no website (HTTP referrer)
+restriction: the request comes from the Python server, which sends no referrer, so it would be
+refused. Answers are cached for the server's lifetime, and a GeoSearch failure is not cached.
+
+Locally, the key goes in `.env` at the repo root (git ignores it) as
+`GOOGLE_MAPS_API_KEY=...`, and uv passes it in:
+
+```bash
+uv run --env-file .env --with-requirements space/requirements.txt python space/app.py
+uv run --env-file .env --with duckdb==2.0.0 python space/where.py "155 Franklin av" Brooklyn
+```
+
+The second prints the point and, on its second line, the Street View link: `None` means Google
+has no panorama of its own within 50 m, and `no GOOGLE_MAPS_API_KEY` means the key wasn't read.
+As of 2026-11-04 the check had been tested only against mocked metadata answers (Google's own
+panorama 29 m off, linked with heading 30°; a user's photosphere, one ~110 m off, and
+ZERO_RESULTS, none linked), never against Google itself.
+
 The page and the script differ only in the held-out rows. For example, the script's
 "h 76 Leffert© pi" (1906BPL:1193:111) is an `adjacent` holdout, so the page doesn't show it.
 
@@ -90,9 +129,10 @@ The page and the script differ only in the held-out rows. For example, the scrip
    files to the Space's disk at startup (`huggingface_hub.snapshot_download`) rather than reading
    `hf://` paths. Every search scans the address columns, and over HTTP that would be every
    query.
-2. **The code.** A Space repo holding `app.py`, `search.py`, `requirements.txt`, this README
-   (its header is the Space config), and a copy of `browse/find_address.py`. `search.py`
-   imports that copy when it's beside it.
+2. **The code.** A Space repo holding `app.py`, `search.py`, `where.py`, `requirements.txt`,
+   this README (its header is the Space config), and a copy of `browse/find_address.py`.
+   `search.py` imports that copy when it's beside it. Set `GOOGLE_MAPS_API_KEY` as a Space
+   secret for the Street View links ("Where it is today" above).
 3. **Hardware.** The free CPU tier (2 vCPU, 16 GB) was expected to do at a few seconds a search.
    At the full corpus (15.5M rows) the laptop already takes 9-14 s a search, so fix PIPELINE #39
    before choosing hardware.

@@ -3373,6 +3373,40 @@ sorted for zone maps). Constraints: the page must give the same hits as `browse/
 anything precomputed must be built at start-up or shipped beside it. The CLI `browse/find_address.py`
 reads browse.db (now 25.7 GB) and was ~13 s at 5.5M rows; not re-timed.
 
+**40. ~~The address finder: where the address is today~~ BUILT 2026-11-04 (asked by hadro).**
+After a search, `space/where.py` puts an OpenStreetMap embed of the address as it is today above
+the lines, one per borough with lines found (Manhattan, Brooklyn; never "Elsewhere"), with the
+caveat that streets were renumbered, renamed and cut through. The map embed and its caveat
+follow the Green Book explorer's detail map (`~/github/green-books/explorer.html`,
+`renderDetailMap`). The point comes from NYC GeoSearch rather than Nominatim, as green-books' NYC
+geocodes do: it is better for NYC addresses, needs no key, and returns the borough. Its
+`match_type` is not trusted. It says "fallback" of exact answers, and for "45 Fulton Street,
+Brooklyn" it answers Manhattan's 45 Fulton and Brooklyn's 415. A pin is placed only when its
+answers hold ONE street with the borough, the number, the name and the type. The type is the
+one asked, else the commonest the lines found print after the street (`line_kind`, from each
+hit's `how`). Checked in headless Chrome, and the last three with `where.py` alone:
+- 155 Franklin pins Franklin St in Manhattan and Franklin Av in Brooklyn, chosen by the lines,
+  though Brooklyn has a Franklin St too.
+- 45 Fulton pins Manhattan, and says there is no such address in Brooklyn today.
+- 131 110th st gives no pin and lists East and West. A numbered street asked without a
+  direction is asked both ways.
+- 131 W 110th st and 166 Lefferts pl pin; so do 269 Broadway, 100 De Kalb av and 62 Euclid av.
+
+The lookup runs as a `.then()` after the lines, so it never holds them up. Answers are cached per
+process.
+
+**Street View**, with `GOOGLE_MAPS_API_KEY` set. The page shows a link only, never an embed:
+Google's Maps Platform terms restrict its content beside a non-Google map, and the exact clause
+is unchecked. The free metadata request has to find Google's own outdoor panorama (a user's
+photosphere doesn't count) within 50 m, and the link opens it turned toward the point. The key
+stays on the server. Setup and the `.env` route for local use are in space/README.
+Open:
+- Not yet tried against Google: no key existed on 2026-11-04, and only mocked answers were
+  tested.
+- Read the terms before any embed.
+- Pre-1898 lines would be better served by period maps than by today's (the NYPL Map Warper
+  atlases) or by OldNYC's geocoded photos; not looked at.
+
 ## Larger, and the ones that unblock claims
 
 **10. A whole-volume gold slice.** Hand-label ~200 lines sampled across one volume's *listing*

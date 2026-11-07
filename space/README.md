@@ -20,18 +20,23 @@ three tiers), on the laptop held to 2 threads (the free CPU tier's count, the ti
 `browse/find_address.py` runs this same search, reading the file instead of loading it (~3 s for
 one search).
 
+A second tab, **Browse** (`browse.py`, 2026-11-07), is a faceted browser over all the lines: what
+browse.db's Datasette does, on the same DuckDB table, as a prototype for a hosted data browser
+(Datasette needs a Docker Space, which needs a paid plan). See "The Browse tab" below.
+
 ## Running it locally
 
 ```bash
-uv run space/build_parquet.py        # data/browse.db -> data/space/records.parquet (~4 min, ~550 MB)
+uv run space/build_parquet.py        # data/browse.db -> data/space/records.parquet (~4 min, ~560 MB)
                                      #   + records.words.parquet (~1 min, ~143 MB)
+                                     #   + records.terms.parquet (~1 min, ~146 MB)
 uv run --with-requirements space/requirements.txt python space/app.py
 open http://127.0.0.1:7860
 ```
 
 `build_parquet.py` makes a stand-in for the release: only the columns the app reads, the
-`eval_holdout` rows dropped, ordered by year, volume, leaf and line. Then it writes the word index
-beside it (`--index-only` writes just the index, for a Parquet that is already there). Rebuild both
+`eval_holdout` rows dropped, ordered by year, volume, leaf and line. Then it writes the two word
+indexes beside it (`--index-only` writes just those, for a Parquet that is already there). Rebuild both
 after `browse/build_db.py` picks up new records. `RECORDS_PARQUET` points the app at another file;
 `PORT` changes the port.
 
@@ -58,7 +63,9 @@ The files:
 - **`search.py`:** the DuckDB search. It grades lines with `find_address`'s own readers, so the
   script and the page agree. Run it directly to test without the page:
   `uv run --with duckdb==2.0.0 python space/search.py data/space/records.parquet "166 Lefferts pl"`.
-- **`app.py`:** the Gradio page.
+- **`app.py`:** the Gradio page, both tabs.
+- **`browse.py`:** the Browse tab's queries. Run it directly to time searches without the page:
+  `uv run --with duckdb==2.0.0 python space/browse.py data/space/records.parquet "smith grocer"`.
 - **`build_parquet.py`:** the local stand-in above.
 - **`timing_start.py`:** the test Space's start-up script, which runs the timing before the app
   ("The test Space" below).
@@ -147,19 +154,56 @@ The page and the script give the same lines: since 2026-11-04 the script runs th
 the same Parquet. So neither shows a held-out row, such as "h 76 Leffert© pi" (1906BPL:1193:111,
 an `adjacent` holdout), which the script found when it read browse.db.
 
+## The Browse tab
+
+A prototype, 2026-11-07, of a hosted stand-in for browse.db's Datasette: search every text column,
+narrow by year, usable lines and facets with counts, page through, download a CSV. It reads the
+finder's table `r` (the records in memory), so it costs no second copy of the data.
+
+- **Search.** Every word must be in the line, in any of the `fts` columns of
+  `browse/sources.toml` (`TERM_COLS`: the line, resolved name, occupation, employer, both
+  addresses, spouse), or in the one picked under "Search in". `groc*` is any word starting `groc`
+  (at most 300 of them, the commonest first). "1 letter off" or "2 letters off" takes every word
+  within that many edits, for the OCR's misreadings: `petzholt` at 1 also finds petzhold,
+  petzholdt, betzholt and petzolt. Words under 4 letters and numbers are always exact. The page
+  lists the spellings searched and marks them in the lines.
+- **Its index** is `records.terms.parquet`: every word of `TERM_COLS` with the rows holding it,
+  sorted by word and stamped like the finder's. It is separate from the finder's
+  `records.words.parquet`, which covers only the three address columns, because the finder's word
+  counts decide which spellings are another street. If it is missing, it is built in memory at
+  start-up with a warning.
+- **Facets** (`FACETS` in `browse.py`): directory, decade, role, occupation (the 100 commonest;
+  any other can be typed), publisher, the directory's city, scan. Each facet's counts are taken
+  under every other choice but its own, so choosing one value leaves the others in the list to
+  add. Values within a facet are OR, facets are AND.
+- **Order**: the directories' own (year, volume, leaf, line), newest first, or name A-Z. 50 lines
+  a page. The CSV is the first 50,000 lines of the search, with the line and page image URLs.
+- **Timing**, on the laptop held to 2 threads over 15,497,151 lines (2026-11-07): start-up
+  9.6 s for the records plus 2.0 s for the browser (its word list and the unfiltered counts),
+  2.0 GB in all. A first search with every facet's counts: "grocer" 0.28 s, "john" (1.2M lines)
+  0.59 s, "lawyer" in occupation 0.99 s, "smith" sorted by name 1.1 s, a volume or a decade
+  ~0.15 s. Any later page or the same search again: ~0.02 s (the counts of the last 64 searches
+  are kept). Through the page, from a headless browser: "smith grocer" 1.7 s, then the 1850 decade
+  0.4 s and the next page 0.2 s.
+- **Not done yet:** a link to a search (Datasette's URLs), phrase search, `race_designation_resolved`
+  (left out until the release decides on it), and the model's own (unresolved) fields. The facet
+  counts show when a facet's list is opened, not beside it.
+
 ## Putting it on Hugging Face (tested in a private Space; nothing public yet)
 
 1. **The data.** The release Parquet, once it's up. The app reads these columns: `record_id`,
    `volume`, `leaf`, `line`, `year`, `label`, `usable`, `name_resolved`, `occupation_role`,
-   `raw_line`, `address_resolved`, `home_address_resolved`, `crop`. If the release lacks `line`
+   `raw_line`, `address_resolved`, `home_address_resolved`, `crop`, and for the Browse tab
+   `publisher`, `role`, `scan`, `employer`, `spouse_name`, `printed_page` (a facet or column
+   the file lacks is left out of the tab). If the release lacks `line`
    or `label`, derive them: `line` from `record_id`, `label` from the volumes table. Download the
    files to the Space's disk at startup (`huggingface_hub.snapshot_download`) rather than reading
    `hf://` paths: the records go into memory, and every search reads the word index. Ship
-   `records.words.parquet` beside the records, built with `build_parquet.py --index-only --out
-   <the release Parquet>`. It is tied to that file's rows and their order, so rebuild it whenever
+   `records.words.parquet` and `records.terms.parquet` beside the records, built with
+   `build_parquet.py --index-only --out <the release Parquet>`. It is tied to that file's rows and their order, so rebuild it whenever
    the release changes. The index names one file; a release in several files needs one index
    built over them in the order `read_parquet` reads them.
-2. **The code.** A Space repo holding `app.py`, `search.py`, `where.py`, `requirements.txt`,
+2. **The code.** A Space repo holding `app.py`, `search.py`, `browse.py`, `where.py`, `requirements.txt`,
    this README (its header is the Space config), and a copy of `browse/find_address.py`.
    `search.py` imports that copy when it's beside it. Set `GOOGLE_MAPS_API_KEY` as a Space
    secret for the Street View links ("Where it is today" above).

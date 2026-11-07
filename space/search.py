@@ -31,6 +31,8 @@ except ImportError:                               # in the repo: browse/find_add
 COLS = ["record_id", "volume", "leaf", "line", "year", "label", "usable", "name_resolved",
         "occupation_role", "raw_line", "address_resolved", "home_address_resolved", "crop", "city",
         "borough"]
+# The Browse tab's columns (browse.py), loaded too when the file has them
+EXTRA_COLS = ["publisher", "role", "scan", "employer", "spouse_name", "printed_page"]
 PLACES = ["Manhattan", "Brooklyn", "Elsewhere"]
 TRACE_YEARS = 10       # a traced line further than this from every year at the address is left out
 # Place markers as the directories print them after an address, letters only, lowercased: Trow's
@@ -140,15 +142,16 @@ def sql_str(s) -> str:
     return "'" + str(s).replace("'", "''") + "'"
 
 
-def load_records(con, parquet: str, memory: bool = True) -> tuple:
+def load_records(con, parquet: str, memory: bool = True, extra=()) -> tuple:
     """r: the records in the file's order (rowid = row number), a table in memory, or with
     memory=False a view of the file (no start-up; each search reads the file, ~1 s more: for one
-    search, as browse/find_address.py makes). Returns (rows, volumes, fingerprint): the
-    fingerprint ties an index to this order of these record ids."""
+    search, as browse/find_address.py makes). `extra`: columns beyond COLS. Returns (rows,
+    volumes, fingerprint): the fingerprint ties an index to this order of these record ids."""
+    cols = ", ".join(COLS + [c for c in extra if c not in COLS])
     if memory:
-        con.execute(f"CREATE TABLE r AS SELECT {', '.join(COLS)} FROM read_parquet({sql_str(parquet)})")
+        con.execute(f"CREATE TABLE r AS SELECT {cols} FROM read_parquet({sql_str(parquet)})")
     else:
-        con.execute(f"CREATE VIEW r AS SELECT file_row_number AS rowid, {', '.join(COLS)} "
+        con.execute(f"CREATE VIEW r AS SELECT file_row_number AS rowid, {cols} "
                     f"FROM read_parquet({sql_str(parquet)}, file_row_number = true)")
     return con.execute("SELECT count(*), count(DISTINCT volume), "
                        "CAST(bit_xor(hash(rowid, record_id)) AS VARCHAR) FROM r").fetchone()
@@ -189,7 +192,11 @@ class Records:
                  memory: bool = True):
         self.con = duckdb.connect(config={"threads": threads} if threads else {})
         t = time.time()
-        self.rows, self.volumes, fingerprint = load_records(self.con, parquet, memory)
+        have = {c for c, *_ in self.con.execute(
+            f"DESCRIBE SELECT * FROM read_parquet({sql_str(parquet)})").fetchall()}
+        self.rows, self.volumes, fingerprint = load_records(
+            self.con, parquet, memory, extra=[c for c in EXTRA_COLS if c in have])
+        self.fingerprint = fingerprint
         path = Path(index) if index else index_path(parquet)
         if index_stamp(path) == (self.rows, fingerprint):
             self.con.execute(f"CREATE VIEW words AS SELECT * FROM read_parquet({sql_str(path)})")

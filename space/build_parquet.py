@@ -8,13 +8,15 @@ A local stand-in for the records release, for running the address-search Space (
 before the release is on Hugging Face.
 
     uv run space/build_parquet.py            # data/browse.db -> data/space/records.parquet
-    uv run space/build_parquet.py --index-only     # only records.words.parquet, for an existing file
+    uv run space/build_parquet.py --index-only     # only the two indexes, for an existing file
 
 Only the columns the Space reads, the eval_holdout rows dropped (they are never published), one
 copy of a volume that is in browse.db twice (ROOTS_NEWEST_FIRST), in the release's planned order:
 year, volume, leaf, line. Not a release: the release is built from
-the record files, with its own columns and card (cards/RECORDS_CARD.md). Then the Space's word
-index beside it (search.write_index), which the Space would otherwise build at every start.
+the record files, with its own columns and card (cards/RECORDS_CARD.md). Then the Space's two word
+indexes beside it, which the Space would otherwise build at every start: the finder's
+(search.write_index, records.words.parquet) and the Browse tab's (browse.write_terms,
+records.terms.parquet).
 """
 from __future__ import annotations
 
@@ -26,13 +28,15 @@ from pathlib import Path
 
 import duckdb
 
+import browse
 import search
 
 REPO = Path(__file__).resolve().parent.parent
 DB = REPO / "data" / "browse.db"
 OUT = REPO / "data" / "space" / "records.parquet"
 COLUMNS = ["record_id", "volume", "leaf", "year", "publisher", "city", "borough", "raw_line", "name_resolved",
-           "occupation_role", "address_resolved", "home_address_resolved", "usable", "crop"]
+           "occupation_role", "address_resolved", "home_address_resolved", "usable", "crop",
+           "role", "scan", "employer", "spouse_name", "printed_page"]      # the last five: browse.py
 # A volume assembled from two roots was in browse.db's records twice until PIPELINE #41, which
 # moved the older copies to records_superseded ([one_copy] in browse/sources.toml, the same list
 # as this one); this guard is kept for a database built before that, or without [one_copy]. Keep
@@ -114,9 +118,10 @@ def main(argv=None) -> int:
 
 
 def index(out: Path) -> int:
-    t = time.time()
-    path = search.write_index(str(out))
-    print(f"{path}: {path.stat().st_size / 2**20:.0f} MB, {time.time() - t:.0f} s")
+    for write in (search.write_index, browse.write_terms):
+        t = time.time()
+        path = write(str(out))
+        print(f"{path}: {path.stat().st_size / 2**20:.0f} MB, {time.time() - t:.0f} s")
     return 0
 
 

@@ -15,7 +15,9 @@ import csv
 import html
 import os
 import re
+import shutil
 import tempfile
+import time
 import urllib.parse
 from pathlib import Path
 
@@ -23,13 +25,25 @@ import gradio as gr
 
 import browse
 import where
-from search import PLACES, TRACE_YEARS, Records, fa
+from search import PLACES, TRACE_YEARS, Records, fa, index_path
 
 HERE = Path(__file__).resolve().parent
 # deployed, the records sit beside this file; in the repo, build_parquet.py's output
 PARQUET = os.environ.get("RECORDS_PARQUET") or str(
     HERE / "records.parquet" if (HERE / "records.parquet").exists()
     else HERE.parent / "data" / "space" / "records.parquet")
+# RECORDS_COPY_TO: copy the records and both indexes there first and read the copies. On the test
+# Space the data is a dataset mounted over the network, where every search's first read of its
+# part of an index took 4-5 s (~1 s once read).
+if os.environ.get("RECORDS_COPY_TO"):
+    t = time.time()
+    dest = Path(os.environ["RECORDS_COPY_TO"])
+    dest.mkdir(parents=True, exist_ok=True)
+    for src in (Path(PARQUET), index_path(PARQUET), browse.terms_path(PARQUET)):
+        if src.exists():
+            shutil.copyfile(src, dest / src.name)
+    PARQUET = str(dest / Path(PARQUET).name)
+    print(f"records and indexes copied to {dest} in {time.time() - t:.0f} s", flush=True)
 NEAR_SHOWN = 300
 ABOUT = {
     "exact": "The number and the street as asked.",

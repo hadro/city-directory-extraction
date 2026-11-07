@@ -219,40 +219,53 @@ finder's table `r` (the records in memory), so it costs no second copy of the da
    CPU-only app on ZeroGPU may be outside that program's intent; HF says nothing either way.
 4. **Before it goes public:** the Space's name, namespace, visibility and data source are
    hadro's to decide, with the release (the memory's release-open-decisions; ask before any
-   public upload). The data can sit in the Space repo, as in the test (724 MB was accepted; the
-   1 GB cap on a Space repo comes from forum threads, not HF's docs), or in a dataset repo
-   downloaded at start-up (item 1), which a private dataset can only be with a token as a
-   secret. Use `app.py` as the app_file, not `timing_start.py`.
+   public upload). The data cannot sit in the Space repo: it is capped at 1 GB, history included
+   (tried 2026-11-07, "Storage limit reached for this space (Max: 1 GB)"), and the code plus the
+   three Parquets is ~890 MB. Mount a dataset repo as a volume instead, as the test Space does
+   (below): no token needed, even for a private dataset of the same owner. Use `app.py` as the
+   app_file, not `timing_start.py`.
 
 ### The test Space: hadro/cde-finder-timing
 
 Private, on ZeroGPU, made 2026-11-05 to time the finder (PIPELINE #39). hadro: keep it for now,
 it may be overwritten later. It sleeps after 48 h without visitors and wakes on the next visit.
 
-**What is on it** (Space commit e614373):
-- `start.py`, which is `timing_start.py` here but runs only "155 Franklin" and "62 Euclid av" at
-  the default threads.
-- `app.py`, `search.py` and `where.py` from 82769e8. Its `app.py` has neither the `@spaces.GPU`
-  stub nor the GRADIO_SERVER_NAME launch, since `start.py` provides both.
-- `find_address.py` (from `browse/`) and `finder_timing.py` (from `results/`).
-- `requirements.txt` and a README holding only the header: `app_file: start.py`,
-  `python_version: "3.12"`, `sdk_version: 6.31.0`.
+**What is on it** (since 2026-11-07; Space history squashed that day, see below):
+- `app.py`, `search.py`, `browse.py` and `where.py` from c52e1fb plus the RECORDS_COPY_TO
+  change (the commit after it). The README header says `app_file: app.py`, `python_version:
+  "3.12"`, `sdk_version: 6.31.0`.
+- `find_address.py` (from `browse/`) and `requirements.txt`.
+- `start.py` and `finder_timing.py`, from the 2026-11-05 timing, kept but not run.
 - The secret `GOOGLE_MAPS_API_KEY`, added by hadro. Adding a secret restarts the Space; no
   rebuild is needed, and the Street View links worked.
+- The variables `RECORDS_PARQUET=/data/records.parquet` and `RECORDS_COPY_TO=/tmp/records`.
+- A volume: the private dataset `hadro/cde-space-data`, mounted read-only at `/data`
+  (`HfApi().set_space_volumes`, a `Volume(type='dataset', ...)`). `get_space_runtime().volumes`
+  reads None, but the mount works.
 
-**Its data** is `data/space/records.parquet` and `records.words.parquet` as `build_parquet.py`
-wrote them on 2026-11-04 (15:29 and 16:10):
+**Its data** is the three files of `data/space/` as `build_parquet.py` wrote them on 2026-11-07
+(83c8cce), in the dataset `hadro/cde-space-data`:
 - 15,497,151 lines from 152 volumes, 1786-1922, with 14,176,765 of them usable.
 - That is every row of browse.db except the `eval_holdout` ones. After #41, browse.db has
   15,776,206 rows, 279,055 of them held out.
 - 1897BPL is the one volume missing: all 259,714 of its lines are held out. About 19,000 more
   held-out lines are spread over other volumes.
 - The three volumes browse.db had twice are in it once (`ROOTS_NEWEST_FIRST`).
-- It predates #37's re-assembly of the three tiers. That re-assembly added
-  `race_designation_resolved`, which the finder does not read; the other columns were not
-  compared with it.
-- Rebuild both files with `build_parquet.py` after the next `build_db.py` run, then upload them
-  again.
+- Rebuild the files with `build_parquet.py` after the next `build_db.py` run, then upload them
+  to the dataset (`upload_folder(repo_id='hadro/cde-space-data', repo_type='dataset', ...)`) and
+  restart the Space.
+
+**Why the data is in a dataset** (2026-11-07). The rebuilt Parquets (~890 MB) would not go into
+the Space repo, which held the old ones (724 MB). The 1 GB cap counts history; an upload is
+checked against what is stored now plus its own size, before it replaces anything; and the
+storage figure (`space_info(...).used_storage`) had not dropped 10 minutes after the old files
+were deleted and the history squashed. Read straight from the mount, each search's first read of
+its part of an index took 4-5 s (the first search after start-up 15 s), so `RECORDS_COPY_TO`
+copies the three files to the Space's own disk at start-up: 4 s.
+
+**Timed there on 2026-11-07**, through `gradio_client`, server time (wall clock adds ~0.3-1 s):
+the finder with the trace 0.4-1.1 s ("45 Fulton" 1.6 s, "1 Wall st" 3.9 s, as before); Browse,
+a first search right after start-up, 0.1-0.2 s ("grocer", "smith john", "john", "baker*").
 
 **To change it**, stage the files in one folder (data files can be hard links) and upload
 them with the library. `hf upload` re-creates the repo without the ZeroGPU flavour and
@@ -266,8 +279,7 @@ HfApi().upload_folder(repo_id='hadro/cde-finder-timing', repo_type='space', fold
 ```
 
 A single file goes up with `upload_file(path_or_fileobj=..., path_in_repo=...)`. A push rebuilds
-and restarts the Space: about 1 min to build, plus about 1-2 min to start with the timing. The
-first build, which cached nothing, took about 3 min.
+and restarts the Space, in under a minute on 2026-11-07.
 
 **To watch it:**
 - `HfApi().space_info('hadro/cde-finder-timing').runtime` gives the `stage` (BUILDING,
@@ -276,7 +288,7 @@ first build, which cached nothing, took about 3 min.
   `curl -s -N -m 25 -H "Authorization: Bearer $(hf auth token)"` against
   `https://huggingface.co/api/spaces/hadro/cde-finder-timing/logs/run` (or `/logs/build`)
   returns them. If `hf auth token` is missing, use `huggingface_hub.get_token()`.
-- `start.py` prints its timings to the run log.
+- `app.py` prints the copy's time to the run log ("records and indexes copied to ...").
 - Two pieces of noise after launch are harmless: the asyncio tracebacks ending in "Invalid file
   descriptor: -1", and "GRADIO_HOT_RELOAD: Launching demo not found in __main__".
 
@@ -286,3 +298,6 @@ first build, which cached nothing, took about 3 min.
   api_name='/search')` returns the page, the two downloads and the found state.
 - `predict(places, api_name='/where_html')` on the same client then gives the map and the Street
   View links.
+- The Browse tab's handlers are lambdas, so Gradio numbers them: `predict(query, in_col, dist,
+  year_from, year_to, usable, sort, *([],) * 7, api_name='/lambda_23')` runs a search from its
+  first page (`view_api()` lists the rest).

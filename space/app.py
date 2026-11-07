@@ -5,8 +5,8 @@ tab, Browse (space/browse.py), searches every text column and narrows by facets.
 
     uv run --with-requirements space/requirements.txt python space/app.py     # http://127.0.0.1:7860
 
-RECORDS_PARQUET names the records file (default data/space/records.parquet, which
-space/build_parquet.py makes); on Hugging Face it will be the release's hf:// path.
+RECORDS_PARQUET names the records file (default: a records.parquet beside this file, as on the
+test Space, else data/space/records.parquet, which space/build_parquet.py makes).
 """
 from __future__ import annotations
 
@@ -25,8 +25,11 @@ import browse
 import where
 from search import PLACES, TRACE_YEARS, Records, fa
 
-PARQUET = os.environ.get("RECORDS_PARQUET", str(
-    Path(__file__).resolve().parent.parent / "data" / "space" / "records.parquet"))
+HERE = Path(__file__).resolve().parent
+# deployed, the records sit beside this file; in the repo, build_parquet.py's output
+PARQUET = os.environ.get("RECORDS_PARQUET") or str(
+    HERE / "records.parquet" if (HERE / "records.parquet").exists()
+    else HERE.parent / "data" / "space" / "records.parquet")
 NEAR_SHOWN = 300
 ABOUT = {
     "exact": "The number and the street as asked.",

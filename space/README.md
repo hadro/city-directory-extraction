@@ -172,10 +172,22 @@ finder's table `r` (the records in memory), so it costs no second copy of the da
   `records.words.parquet`, which covers only the three address columns, because the finder's word
   counts decide which spellings are another street. If it is missing, it is built in memory at
   start-up with a warning.
-- **Facets** (`FACETS` in `browse.py`): directory, decade, role, occupation (the 100 commonest;
-  any other can be typed), publisher, the directory's city, scan. Each facet's counts are taken
-  under every other choice but its own, so choosing one value leaves the others in the list to
-  add. Values within a facet are OR, facets are AND.
+- **Facets** (`FACETS` in `browse.py`): decade (shown as its years, 1850–1859), then the
+  directory's city, publisher and directory, a chain in which each narrows the next one's list
+  (Trow leaves Trow's volumes), then occupation (the 100 commonest; any other can be typed),
+  line position, scan. Line position is `role`, where the line sits in its column from its box
+  alone (`layout_roles`): starts an entry, continues the entry above, or other (headings, ads);
+  `ROLES` in `app.py` words them, and a row is flagged unless it starts an entry. Each facet's
+  counts are taken under every other choice but its own, so choosing one value leaves the others
+  in the list to add. Values within a facet are OR, facets are AND.
+- **Line images**, as browse.db's Datasette draws them (`browse/plugins/records_cells.py`): none
+  is fetched until asked for. A row's `show` loads its image (and then reads `hide`), `open` is
+  the line at full size, and `page` opens the line's whole page in an overlay with its box drawn
+  on it, trying IA's sizes in turn as Datasette's page viewer does (Escape or a click outside
+  closes it). "Show all line images" above the results shows every row's, and stays on for the
+  next pages until pressed again. A shown image is fetched by `LAZY_JS`, so still at most 4 at a
+  time and only on screen. All in `CROP_JS` in `app.py`; the finder tab still shows its images
+  without a click. Checked in headless Chromium on 2026-11-08: no request to IA before a click.
 - **Order**: the directories' own (year, volume, leaf, line), newest first, or name A-Z. 50 lines
   a page. The CSV is the first 50,000 lines of the search, with the line and page image URLs.
 - **Timing**, on the laptop held to 2 threads over 15,497,151 lines (2026-11-07): start-up

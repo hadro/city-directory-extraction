@@ -31,14 +31,16 @@ TERM_COLS = ["raw_line", "name_resolved", "occupation_role", "employer", "addres
 IN_COLUMNS = {"any column": None, "name": ["name_resolved"], "occupation": ["occupation_role"],
               "employer": ["employer"], "address": ["address_resolved", "home_address_resolved"],
               "the line as printed": ["raw_line"], "spouse": ["spouse_name"]}
-# facet -> (label, SQL of its value as text, order of its choices, at most this many choices)
+# facet -> (label, SQL of its value as text, order of its choices, at most this many choices).
+# The directory's city, its publisher and the directory itself are a chain: each narrows the
+# next one's list (Trow -> Trow's 50 volumes), so they sit together, broadest first.
 FACETS = {
-    "volume": ("Directory", "volume", "year", 400),
     "decade": ("Decade", "CAST(year // 10 * 10 AS VARCHAR)", "value", 50),
-    "role": ("Role", "role", "count", 50),
-    "occupation": ("Occupation", "occupation_role", "count", 100),
-    "publisher": ("Publisher", "publisher", "count", 100),
     "city": ("Directory's city", "city", "count", 20),
+    "publisher": ("Publisher", "publisher", "count", 100),
+    "volume": ("Directory", "volume", "year", 400),
+    "occupation": ("Occupation", "occupation_role", "count", 100),
+    "role": ("Line position", "role", "count", 50),
     "scan": ("Scan", "scan", "count", 20),
 }
 SORTS = {"directory order": "rowid", "newest first": "year DESC, rowid",

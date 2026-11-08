@@ -53,4 +53,4 @@ for threads in (["--threads", "2"], []):
 
 import app  # noqa: E402
 
-app.demo.launch(css=app.CSS, head=app.LAZY_JS)
+app.demo.launch(css=app.CSS, head=app.HEAD)

@@ -13,6 +13,7 @@ from __future__ import annotations
 import collections
 import csv
 import html
+import json
 import os
 import re
 import shutil
@@ -121,6 +122,145 @@ LAZY_JS = """
 })();
 </script>
 """ % IMG_AT_ONCE
+
+# The Browse tab's line images, as browse.db's Datasette draws them (browse/plugins/
+# records_cells.py): none is fetched until asked for, a row's with its `show` (which then reads
+# `hide`), or every row's with the "Show all line images" button above the results, which stays
+# on for the next pages until it is pressed again. `open` is the line at full size; `page` shows
+# the line's whole page in an overlay with the line's box drawn on it, walking IA's sizes as
+# records_cells' viewer does (IA fails a given size at random). A shown image is an
+# <img data-src>, so LAZY_JS fetches it, within its limit.
+CROP_JS = """
+<style>
+/* !important: Gradio's own button styles would make these large grey buttons */
+.crop-links button { font: inherit !important; color: var(--link-text-color, #2563eb) !important;
+                     background: none !important; border: 0 !important; padding: 0 !important;
+                     margin: 0 !important; min-width: 0 !important; height: auto !important;
+                     box-shadow: none !important; cursor: pointer; text-decoration: underline; }
+button.crop-all { font-size: 13px !important; font-weight: 400 !important; padding: 2px 10px !important;
+                  margin-left: 12px !important; min-width: 0 !important; height: auto !important;
+                  border: 1px solid var(--border-color-primary) !important; border-radius: 6px !important;
+                  background: var(--background-fill-secondary) !important; box-shadow: none !important;
+                  color: var(--body-text-color) !important; cursor: pointer; }
+.pageview { position: fixed; inset: 0; z-index: 1000; background: rgba(0, 0, 0, .55);
+            display: flex; justify-content: center; padding: 24px; }
+.pv-panel { background: var(--background-fill-primary, #fff); color: var(--body-text-color, #222);
+            border-radius: 8px; display: flex; flex-direction: column; width: 1100px;
+            max-width: 100%; overflow: hidden; }
+.pv-head { padding: 10px 14px; border-bottom: 1px solid var(--border-color-primary, #ddd); }
+.pv-head .pv-line { font-family: var(--font-mono, monospace); margin-top: 4px; }
+.pv-head .pv-status { color: #b45309; font-size: 13px; }
+.pv-close { float: right; cursor: pointer; font-size: 13px; padding: 2px 10px; }
+.pv-scroll { overflow: auto; flex: 1; padding: 12px; background: #888; }
+.pv-page { position: relative; display: inline-block; }
+.pv-page img { display: block; max-width: none !important; height: auto; }
+.pv-mark { position: absolute; display: none; border: 2px solid #d4002a; box-sizing: border-box;
+           background: rgba(255, 220, 0, .25); pointer-events: none; }
+.pv-direct { padding: 6px 14px; font-size: 13px; color: var(--body-text-color-subdued, #666); }
+</style>
+<script>
+(() => {
+  let all = false;
+  const label = b => { b.textContent = all ? 'Hide line images' : 'Show all line images'; };
+  const show = row => {
+    const slot = row.querySelector('.crop-slot');
+    if (!slot || slot.querySelector('img')) return;
+    const a = document.createElement('a'), img = document.createElement('img');
+    a.href = row.dataset.big; a.target = '_blank'; a.rel = 'noopener';
+    img.alt = 'line image'; img.dataset.src = row.dataset.thumb; img.dataset.fallback = row.dataset.big;
+    a.appendChild(img); slot.replaceChildren(a);
+    row.querySelector('.crop-show').textContent = 'hide';
+  };
+  const hide = row => {
+    row.querySelector('.crop-slot').replaceChildren();
+    row.querySelector('.crop-show').textContent = 'show';
+  };
+  // new results: every row shown if "show all" is on, and the button saying which it is
+  new MutationObserver(ms => {
+    for (const m of ms) for (const n of m.addedNodes) {
+      if (n.nodeType !== 1) continue;
+      if (all) n.querySelectorAll('tr.line-crop').forEach(show);
+      n.querySelectorAll('button.crop-all').forEach(label);
+      if (n.matches('button.crop-all')) label(n);
+    }
+  }).observe(document.documentElement, {childList: true, subtree: true});
+
+  const PCTS = [40, 45, 35, 50, 30], TRY_MS = 10000;
+  let ov = null, timer = null;
+  const close = () => { clearTimeout(timer); if (ov) { ov.remove(); ov = null; } };
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text) e.textContent = text;
+    return e;
+  };
+  const page = row => {
+    close();
+    const P = JSON.parse(row.dataset.page);
+    ov = el('div', 'pageview');
+    const panel = el('div', 'pv-panel'), head = el('div', 'pv-head');
+    const shut = el('button', 'pv-close', 'Close ✕'); shut.type = 'button'; shut.onclick = close;
+    const status = el('div', 'pv-status');
+    head.append(shut, el('div', '', P.rid), el('div', 'pv-line', P.raw), status);
+    const scroll = el('div', 'pv-scroll'), pg = el('div', 'pv-page');
+    const img = el('img'), mark = el('div', 'pv-mark');
+    img.alt = 'the page'; pg.append(img, mark); scroll.append(pg);
+    const direct = el('div', 'pv-direct', "IA's image server fails some requests; straight to the image: ");
+    const turned = P.rot === '90' || P.rot === '270';
+    [['1400 px', turned ? ',1400' : '1400,'], ['1200 px', turned ? ',1200' : '1200,'],
+     ['full size', 'max']].forEach(([t, s], i) => {
+      const a = el('a', '', t); a.href = P.base + '/full/' + s + '/' + P.rot + '/default.jpg';
+      a.target = '_blank'; a.rel = 'noopener';
+      if (i) direct.append(' · ');
+      direct.append(a);
+    });
+    panel.append(head, scroll, direct); ov.append(panel);
+    ov.addEventListener('click', e => { if (e.target === ov) close(); });
+    document.body.append(ov);
+    let k = 0;
+    const place = pct => {
+      if (P.rot !== '0' || !P.box) return;      // a turned page: no box (its frame differs)
+      const s = pct / 100, b = P.box;
+      mark.style.left = b[0] * s - 4 + 'px'; mark.style.top = b[1] * s - 4 + 'px';
+      mark.style.width = b[2] * s + 8 + 'px'; mark.style.height = b[3] * s + 8 + 'px';
+      mark.style.display = 'block';
+      mark.scrollIntoView({block: 'center', inline: 'center'});
+    };
+    const next = () => {
+      clearTimeout(timer);
+      if (k >= PCTS.length) {
+        status.textContent = 'IA did not return the page at any size; try the links below.';
+        return;
+      }
+      const pct = PCTS[k++];
+      status.textContent = 'loading the page at ' + pct + '%' + (k > 1 ? ' (the last size failed)' : '') + '…';
+      img.onload = () => { clearTimeout(timer); status.textContent = ''; place(pct); };
+      img.onerror = next;
+      timer = setTimeout(next, TRY_MS);
+      img.src = P.base + '/full/pct:' + pct + '/' + P.rot + '/default.jpg';
+    };
+    next();
+  };
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('.crop-show, .crop-page, .crop-all');
+    if (!b) return;
+    if (b.matches('.crop-all')) {
+      all = !all;
+      document.querySelectorAll('tr.line-crop').forEach(all ? show : hide);
+      document.querySelectorAll('button.crop-all').forEach(label);
+      return;
+    }
+    const row = b.closest('tr.line-crop');
+    if (b.matches('.crop-page')) page(row);
+    else if (row.querySelector('.crop-slot img')) hide(row);
+    else show(row);
+  });
+})();
+</script>
+"""
+HEAD = LAZY_JS + CROP_JS
 
 records = Records(PARQUET)
 browser = browse.Browser(records, PARQUET)
@@ -371,25 +511,40 @@ def browse_row(h: dict, marks: set) -> str:
                                     h.get("home_address_resolved")
                                     and "h " + marked(h["home_address_resolved"], marks)) if x)
     spouse = f' · spouse {marked(h["spouse_name"], marks)}' if h.get("spouse_name") else ""
-    img = ""
-    if h.get("crop"):
-        img = (f'<img data-src="{e(resize(h["crop"], ",64", "64,"))}" '
-               f'data-fallback="{e(resize(h["crop"], "max", "max"))}" alt="line image">')
+    # the line image only when asked for (CROP_JS): the row carries its URLs, the slot takes it
+    row, crop = "<tr>", ""
+    if (h.get("crop") or "").startswith("https://iiif.archive.org/iiif/"):
+        parts = h["crop"].split("/")
+        try:
+            box = [int(v) for v in parts[-4].split(",")]
+        except ValueError:
+            box = None
+        view = json.dumps({"base": "/".join(parts[:-4]), "rot": parts[-2], "box": box,
+                           "rid": h["record_id"], "raw": h["raw_line"] or ""})
+        big = resize(h["crop"], "max", "max")
+        row = (f'<tr class="line-crop" data-thumb="{e(resize(h["crop"], ",64", "64,"))}" '
+               f'data-big="{e(big)}" data-page="{e(view)}">')
+        crop = (' · <span class="crop-links">line image: <button type="button" class="crop-show">'
+                f'show</button> · <a href="{e(big)}" target="_blank" rel="noopener">open</a> · '
+                '<button type="button" class="crop-page" title="the whole page, this line '
+                'outlined">page</button></span>')
     page = f'p. {h["printed_page"]} · ' if h.get("printed_page") else ""
     flags = " ".join(f'<span class="flag">{e(x)}</span>' for x in
-                     (h.get("role"), "not usable" if h.get("usable") == 0 else "") if x)
-    return (f'<tr><td class="y">{h["year"] or ""}</td><td><div class="name">{name}{occ}</div>'
+                     (ROLE_FLAG.get(h.get("role"), ""), "not usable" if h.get("usable") == 0 else "") if x)
+    return (f'{row}<td class="y">{h["year"] or ""}</td><td><div class="name">{name}{occ}</div>'
             + (f'<div class="meta">{where_}{spouse}</div>' if where_ or spouse else "")
-            + f'{img}<div class="raw">{marked(h["raw_line"], marks)}</div>'
+            + f'<div class="crop-slot"></div><div class="raw">{marked(h["raw_line"], marks)}</div>'
             f'<div class="meta">{e(browser.labels.get(h["volume"], (h["volume"],))[0])} · {page}'
-            f'{e(h["record_id"])} · {links(h.get("crop"))} {flags}</div></td></tr>')
+            f'{e(h["record_id"])}{crop} {flags}</div></td></tr>')
 
 
 def browse_html(res: dict) -> str:
     e = html.escape
     marks = {t for terms in res["spellings"] for t, _ in terms}
     pages = f' · page {res["page"] + 1:,} of {res["pages"]:,}' if res["pages"] > 1 else ""
-    out = [f'<p><b>{res["total"]:,} lines</b>{pages} · {res["seconds"]:.1f} s</p>']
+    toggle = ('<button type="button" class="crop-all">Show all line images</button>'
+              if any(h.get("crop") for h in res["rows"]) else "")
+    out = [f'<p><b>{res["total"]:,} lines</b>{pages} · {res["seconds"]:.1f} s{toggle}</p>']
     if res["spellings"] and any(len(t) != 1 for t in res["spellings"]):
         out.append('<p class="terms">Words searched: ' + "; ".join(
             ", ".join(f"{e(t)} ({n:,})" for t, n in terms[:12]) + (" …" if len(terms) > 12 else "")
@@ -401,9 +556,28 @@ def browse_html(res: dict) -> str:
     return "".join(out)
 
 
+# `role` is where the line sits in its column, from its box alone (layout_roles in
+# eval/volume_run_report.py): what each value means, in the facet and on a row
+ROLES = {"start": "starts an entry (at the column's margin)",
+         "runover": "continues the entry above (indented)",
+         "other": "other: headings, ads, lines off the margins",
+         "thin": "too few lines on the page to tell"}
+ROLE_FLAG = {"runover": "continues the entry above", "other": "heading, ad or other",
+             "thin": "position unknown"}
+
+
+def facet_value(f: str, v: str) -> str:
+    if f == "volume":
+        return browser.labels.get(v, (v,))[0]
+    if f == "decade" and v.isdigit():
+        return f"{v}–{int(v) + 9}"
+    if f == "role":
+        return ROLES.get(v, v)
+    return v
+
+
 def facet_choices(f: str, counts: list) -> list:
-    shown = (lambda v: browser.labels.get(v, (v,))[0]) if f == "volume" else (lambda v: v)
-    return [(f"{shown(v) if v else '(blank)'} ({n:,})", v) for v, n in counts]
+    return [(f"{facet_value(f, v) if v else '(blank)'} ({n:,})", v) for v, n in counts]
 
 
 def browse_args(query, in_col, dist, y0, y1, usable, sort, *chosen):
@@ -536,4 +710,4 @@ with gr.Blocks(title="City directories") as demo:
 if __name__ == "__main__":
     # A Space sets GRADIO_SERVER_NAME=0.0.0.0; an explicit 127.0.0.1 would override it
     demo.launch(server_name=os.environ.get("GRADIO_SERVER_NAME", "127.0.0.1"), server_port=int(os.environ.get("PORT", 7860)), css=CSS,
-                head=LAZY_JS)
+                head=HEAD)

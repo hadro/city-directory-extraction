@@ -24,3 +24,9 @@ Every other minneapolis cell — `v-fixed`, `v2`, `v3`, `v4`, `v5`, `v5-torch`, 
 the correction and is **not comparable** with the four above. Read down that row only among
 cells of the same vintage, or re-run the older models to replace them. No other eval set is
 affected; the rest of the table is on one footing.
+
+**minneapolis — the gold was corrected against the page (2026-11-09).** The book prints a ditto
+mark before every repeated surname, which DirCity's transcription had dropped; 185 marks, 14 words
+and one lost headline were put back from scans (`data_prep/minneapolis_page_check.py`, PIPELINE.md
+"Minneapolis read against the page"). Every minneapolis cell above is on the old lines unless
+re-scored: 4b-100k 64.8 → **75.2**, 2b-100k 65.7 → **67.4**, v7 63.0 → **65.2** (`results/minneapolis_rescore_*.json`).

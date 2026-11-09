@@ -276,6 +276,7 @@ python3 data_prep/nyu_to_eval.py  --in data/1850.ndjson --out data/nyu_eval.json
 python3 data_prep/ftd_to_eval.py  --in data/ftd.json    --out data/ftd_eval.jsonl
 python3 data_prep/harvest_own.py  --dir ../directory-pipeline/output/tulsa_1921 --out data/tulsa_eval.jsonl
 python3 data_prep/harvest_minneapolis.py --dir data/minneapolis/ground_truth --out data/minneapolis_eval.jsonl
+python3 data_prep/minneapolis_page_check.py   # then restore what the page prints (ditto marks, 14 words): the gold's lines are checked against scans
 
 # 2) fine-tune. Cheapest measured cloud path: HF Jobs rtx-pro-6000, batch 64, --packing (~$6 for
 #    0.8B/100k×3). Free/cheap alternatives (Colab T4 notebook, Kaggle, local MLX): docs/TRAINING_OPTIONS.md

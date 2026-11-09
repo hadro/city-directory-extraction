@@ -1,0 +1,527 @@
+{
+ "parity": {
+  "unchanged_rows": 42,
+  "laptop_equals_stored_gpu": 42,
+  "differing_rows": []
+ },
+ "before, all 230": {
+  "rows": 230,
+  "exact_normalized": 151,
+  "exact_normalized_pct": 65.7,
+  "field_accuracy_pct": {
+   "name": 90.9,
+   "is_business": 95.7,
+   "spouse_name": 99.6,
+   "race_designation": 100.0,
+   "occupation_role": 89.1,
+   "employer": 83.9,
+   "address": 81.3,
+   "home_address": 94.3,
+   "ALL": 91.8
+  },
+  "field_accuracy_filled_pct": {
+   "name": 90.9,
+   "is_business": 33.3,
+   "spouse_name": 93.3,
+   "race_designation": null,
+   "occupation_role": 87.1,
+   "employer": 68.1,
+   "address": 81.3,
+   "home_address": 63.9,
+   "ALL": 82.1
+  },
+  "filled_cells": {
+   "name": 230,
+   "occupation_role": 194,
+   "employer": 116,
+   "address": 230,
+   "home_address": 36,
+   "spouse_name": 15,
+   "is_business": 15,
+   "ALL": 836
+  },
+  "wrong_rows": 79,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 28,
+    "pct_of_wrong": 35.4,
+    "pct_of_all": 12.2
+   },
+   "small letters": {
+    "rows": 18,
+    "pct_of_wrong": 22.8,
+    "pct_of_all": 7.8
+   },
+   "content": {
+    "rows": 33,
+    "pct_of_wrong": 41.8,
+    "pct_of_all": 14.3
+   }
+  },
+  "content_fields": {
+   "employer": 18,
+   "address": 17,
+   "name": 16,
+   "home_address": 12,
+   "occupation_role": 11,
+   "is_business": 10
+  },
+  "name_padded_rows": 4
+ },
+ "after, all 230": {
+  "rows": 230,
+  "exact_normalized": 155,
+  "exact_normalized_pct": 67.4,
+  "field_accuracy_pct": {
+   "name": 93.9,
+   "is_business": 95.7,
+   "spouse_name": 99.6,
+   "race_designation": 100.0,
+   "occupation_role": 89.1,
+   "employer": 83.5,
+   "address": 82.2,
+   "home_address": 94.3,
+   "ALL": 92.3
+  },
+  "field_accuracy_filled_pct": {
+   "name": 93.9,
+   "is_business": 28.6,
+   "spouse_name": 93.3,
+   "race_designation": null,
+   "occupation_role": 87.2,
+   "employer": 67.8,
+   "address": 82.2,
+   "home_address": 63.9,
+   "ALL": 83.1
+  },
+  "filled_cells": {
+   "name": 230,
+   "occupation_role": 195,
+   "employer": 118,
+   "address": 230,
+   "home_address": 36,
+   "spouse_name": 15,
+   "is_business": 14,
+   "ALL": 838
+  },
+  "wrong_rows": 75,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 30,
+    "pct_of_wrong": 40.0,
+    "pct_of_all": 13.0
+   },
+   "small letters": {
+    "rows": 15,
+    "pct_of_wrong": 20.0,
+    "pct_of_all": 6.5
+   },
+   "content": {
+    "rows": 30,
+    "pct_of_wrong": 40.0,
+    "pct_of_all": 13.0
+   }
+  },
+  "content_fields": {
+   "employer": 18,
+   "address": 16,
+   "occupation_role": 12,
+   "home_address": 12,
+   "name": 11,
+   "is_business": 10
+  },
+  "name_padded_rows": 0
+ },
+ "before, page 0113": {
+  "rows": 76,
+  "exact_normalized": 50,
+  "exact_normalized_pct": 65.8,
+  "field_accuracy_pct": {
+   "name": 93.4,
+   "is_business": 97.4,
+   "spouse_name": 100.0,
+   "race_designation": 100.0,
+   "occupation_role": 88.2,
+   "employer": 88.2,
+   "address": 82.9,
+   "home_address": 98.7,
+   "ALL": 93.6
+  },
+  "field_accuracy_filled_pct": {
+   "name": 93.4,
+   "is_business": 50.0,
+   "spouse_name": 100.0,
+   "race_designation": null,
+   "occupation_role": 85.9,
+   "employer": 75.7,
+   "address": 82.9,
+   "home_address": 91.7,
+   "ALL": 85.8
+  },
+  "filled_cells": {
+   "name": 76,
+   "occupation_role": 64,
+   "employer": 37,
+   "address": 76,
+   "home_address": 12,
+   "spouse_name": 6,
+   "is_business": 4,
+   "ALL": 275
+  },
+  "wrong_rows": 26,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 8,
+    "pct_of_wrong": 30.8,
+    "pct_of_all": 10.5
+   },
+   "small letters": {
+    "rows": 10,
+    "pct_of_wrong": 38.5,
+    "pct_of_all": 13.2
+   },
+   "content": {
+    "rows": 8,
+    "pct_of_wrong": 30.8,
+    "pct_of_all": 10.5
+   }
+  },
+  "content_fields": {
+   "name": 5,
+   "address": 4,
+   "occupation_role": 3,
+   "is_business": 2,
+   "employer": 2,
+   "home_address": 1
+  },
+  "name_padded_rows": 0
+ },
+ "after, page 0113": {
+  "rows": 76,
+  "exact_normalized": 51,
+  "exact_normalized_pct": 67.1,
+  "field_accuracy_pct": {
+   "name": 93.4,
+   "is_business": 97.4,
+   "spouse_name": 100.0,
+   "race_designation": 100.0,
+   "occupation_role": 88.2,
+   "employer": 86.8,
+   "address": 84.2,
+   "home_address": 97.4,
+   "ALL": 93.4
+  },
+  "field_accuracy_filled_pct": {
+   "name": 93.4,
+   "is_business": 50.0,
+   "spouse_name": 100.0,
+   "race_designation": null,
+   "occupation_role": 85.9,
+   "employer": 73.7,
+   "address": 84.2,
+   "home_address": 84.6,
+   "ALL": 85.6
+  },
+  "filled_cells": {
+   "name": 76,
+   "occupation_role": 64,
+   "employer": 38,
+   "address": 76,
+   "home_address": 13,
+   "spouse_name": 6,
+   "is_business": 4,
+   "ALL": 277
+  },
+  "wrong_rows": 25,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 8,
+    "pct_of_wrong": 32.0,
+    "pct_of_all": 10.5
+   },
+   "small letters": {
+    "rows": 9,
+    "pct_of_wrong": 36.0,
+    "pct_of_all": 11.8
+   },
+   "content": {
+    "rows": 8,
+    "pct_of_wrong": 32.0,
+    "pct_of_all": 10.5
+   }
+  },
+  "content_fields": {
+   "address": 5,
+   "occupation_role": 4,
+   "name": 4,
+   "home_address": 2,
+   "is_business": 2,
+   "employer": 2
+  },
+  "name_padded_rows": 0
+ },
+ "before, page 0362": {
+  "rows": 78,
+  "exact_normalized": 55,
+  "exact_normalized_pct": 70.5,
+  "field_accuracy_pct": {
+   "name": 93.6,
+   "is_business": 97.4,
+   "spouse_name": 98.7,
+   "race_designation": 100.0,
+   "occupation_role": 89.7,
+   "employer": 87.2,
+   "address": 79.5,
+   "home_address": 92.3,
+   "ALL": 92.3
+  },
+  "field_accuracy_filled_pct": {
+   "name": 93.6,
+   "is_business": 50.0,
+   "spouse_name": 85.7,
+   "race_designation": null,
+   "occupation_role": 88.1,
+   "employer": 76.2,
+   "address": 79.5,
+   "home_address": 45.5,
+   "ALL": 83.3
+  },
+  "filled_cells": {
+   "name": 78,
+   "occupation_role": 67,
+   "employer": 42,
+   "address": 78,
+   "home_address": 11,
+   "is_business": 4,
+   "spouse_name": 7,
+   "ALL": 287
+  },
+  "wrong_rows": 23,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 12,
+    "pct_of_wrong": 52.2,
+    "pct_of_all": 15.4
+   },
+   "small letters": {
+    "rows": 2,
+    "pct_of_wrong": 8.7,
+    "pct_of_all": 2.6
+   },
+   "content": {
+    "rows": 9,
+    "pct_of_wrong": 39.1,
+    "pct_of_all": 11.5
+   }
+  },
+  "content_fields": {
+   "employer": 5,
+   "address": 5,
+   "home_address": 5,
+   "name": 4,
+   "occupation_role": 4,
+   "is_business": 2
+  },
+  "name_padded_rows": 2
+ },
+ "after, page 0362": {
+  "rows": 78,
+  "exact_normalized": 55,
+  "exact_normalized_pct": 70.5,
+  "field_accuracy_pct": {
+   "name": 97.4,
+   "is_business": 97.4,
+   "spouse_name": 98.7,
+   "race_designation": 100.0,
+   "occupation_role": 91.0,
+   "employer": 87.2,
+   "address": 78.2,
+   "home_address": 92.3,
+   "ALL": 92.8
+  },
+  "field_accuracy_filled_pct": {
+   "name": 97.4,
+   "is_business": 50.0,
+   "spouse_name": 85.7,
+   "race_designation": null,
+   "occupation_role": 89.6,
+   "employer": 76.2,
+   "address": 78.2,
+   "home_address": 45.5,
+   "ALL": 84.3
+  },
+  "filled_cells": {
+   "name": 78,
+   "occupation_role": 67,
+   "employer": 42,
+   "address": 78,
+   "home_address": 11,
+   "is_business": 4,
+   "spouse_name": 7,
+   "ALL": 287
+  },
+  "wrong_rows": 23,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 13,
+    "pct_of_wrong": 56.5,
+    "pct_of_all": 16.7
+   },
+   "small letters": {
+    "rows": 2,
+    "pct_of_wrong": 8.7,
+    "pct_of_all": 2.6
+   },
+   "content": {
+    "rows": 8,
+    "pct_of_wrong": 34.8,
+    "pct_of_all": 10.3
+   }
+  },
+  "content_fields": {
+   "employer": 5,
+   "address": 5,
+   "home_address": 5,
+   "occupation_role": 3,
+   "name": 2,
+   "is_business": 2
+  },
+  "name_padded_rows": 0
+ },
+ "before, page 0562": {
+  "rows": 76,
+  "exact_normalized": 46,
+  "exact_normalized_pct": 60.5,
+  "field_accuracy_pct": {
+   "name": 85.5,
+   "is_business": 92.1,
+   "spouse_name": 100.0,
+   "race_designation": 100.0,
+   "occupation_role": 89.5,
+   "employer": 76.3,
+   "address": 81.6,
+   "home_address": 92.1,
+   "ALL": 89.6
+  },
+  "field_accuracy_filled_pct": {
+   "name": 85.5,
+   "is_business": 14.3,
+   "spouse_name": 100.0,
+   "race_designation": null,
+   "occupation_role": 87.3,
+   "employer": 51.4,
+   "address": 81.6,
+   "home_address": 53.8,
+   "ALL": 77.0
+  },
+  "filled_cells": {
+   "name": 76,
+   "is_business": 7,
+   "employer": 37,
+   "address": 76,
+   "occupation_role": 63,
+   "home_address": 13,
+   "spouse_name": 2,
+   "ALL": 274
+  },
+  "wrong_rows": 30,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 8,
+    "pct_of_wrong": 26.7,
+    "pct_of_all": 10.5
+   },
+   "small letters": {
+    "rows": 6,
+    "pct_of_wrong": 20.0,
+    "pct_of_all": 7.9
+   },
+   "content": {
+    "rows": 16,
+    "pct_of_wrong": 53.3,
+    "pct_of_all": 21.1
+   }
+  },
+  "content_fields": {
+   "employer": 11,
+   "address": 8,
+   "name": 7,
+   "is_business": 6,
+   "home_address": 6,
+   "occupation_role": 4
+  },
+  "name_padded_rows": 2
+ },
+ "after, page 0562": {
+  "rows": 76,
+  "exact_normalized": 49,
+  "exact_normalized_pct": 64.5,
+  "field_accuracy_pct": {
+   "name": 90.8,
+   "is_business": 92.1,
+   "spouse_name": 100.0,
+   "race_designation": 100.0,
+   "occupation_role": 88.2,
+   "employer": 76.3,
+   "address": 84.2,
+   "home_address": 93.4,
+   "ALL": 90.6
+  },
+  "field_accuracy_filled_pct": {
+   "name": 90.8,
+   "is_business": 0.0,
+   "spouse_name": 100.0,
+   "race_designation": null,
+   "occupation_role": 85.9,
+   "employer": 52.6,
+   "address": 84.2,
+   "home_address": 58.3,
+   "ALL": 79.2
+  },
+  "filled_cells": {
+   "name": 76,
+   "is_business": 6,
+   "employer": 38,
+   "address": 76,
+   "occupation_role": 64,
+   "home_address": 12,
+   "spouse_name": 2,
+   "ALL": 274
+  },
+  "wrong_rows": 27,
+  "wrong_by_kind": {
+   "same words": {
+    "rows": 9,
+    "pct_of_wrong": 33.3,
+    "pct_of_all": 11.8
+   },
+   "small letters": {
+    "rows": 4,
+    "pct_of_wrong": 14.8,
+    "pct_of_all": 5.3
+   },
+   "content": {
+    "rows": 14,
+    "pct_of_wrong": 51.9,
+    "pct_of_all": 18.4
+   }
+  },
+  "content_fields": {
+   "employer": 11,
+   "is_business": 6,
+   "address": 6,
+   "name": 5,
+   "home_address": 5,
+   "occupation_role": 5
+  },
+  "name_padded_rows": 0
+ },
+ "evaluate.py, after, all 230": {
+  "verbatim": 67.4,
+  "normalized": 67.4
+ },
+ "evaluate.py, before, all 230": {
+  "verbatim": 65.7,
+  "normalized": 65.7
+ }
+}

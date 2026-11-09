@@ -1087,9 +1087,14 @@ afterwards, and `validate_gold`'s 95 standing `name tokens not in raw_line` warn
 `--surname`, so a re-run cannot reintroduce it. Logged in GROUND_TRUTH_HANDOFF's corrections
 table; the original is `data/_gold_backup/minneapolis_eval.2026-10-17.jsonl`.
 
-Minneapolis prints no repeat mark at all, unlike polk1917's `"` or trow1913's `-`, so there is
+~~Minneapolis prints no repeat mark at all, unlike polk1917's `"` or trow1913's `-`, so there is
 nothing for `resolve_dittos.py` to key on and the surname genuinely is not recoverable
-downstream. That is a property of the book, not something the gold should paper over.
+downstream. That is a property of the book, not something the gold should paper over.~~
+**WRONG, corrected 2026-11-09:** the book prints `“` before every repeated-surname line, like
+polk1917's `"`; DirCity's transcription dropped the marks (and joined run-overs, misread 14
+words and lost one entry's headline). Seen on scans of all three pages (0113, 0362, 0562); the gold
+was corrected against them (`data_prep/minneapolis_page_check.py`, GROUND_TRUTH_HANDOFF 2026-11-09)
+and re-scored: see "Minneapolis read against the page" below this section.
 
 | minneapolis row EM | before | after |
 |---|---|---|
@@ -1114,6 +1119,44 @@ directory-pipeline's aligned JSON by `harvest_own.py`, and a sibling session rep
 alignment can bind the wrong line on dense pages. It does not reach these: the surname and the
 address appear in their own `raw_line` on 100% of rows in both sets, so the `#xywh=` join held.
 They remain silver by provenance (labels are Gemini's), not by defect.
+
+**Minneapolis read against the page (2026-11-09, hadro's call).** Checked while making a blog
+figure of the Minneapolis page: the book prints a ditto mark (`“`) before every line that repeats
+the surname above, and indents its run-overs, as polk1917 does. DirCity's transcription, which is
+this set's `raw_line`, dropped every mark. With scans of all three pages (0113 and 0362 from
+github.com/adamrangwala/Minneapolis-1900-directory-ocr @3f84ebb, MIT; 0562 stitched by hadro from
+Hennepin County Library's viewer tiles), `data_prep/minneapolis_page_check.py` rebuilt the gold
+from the backup: 185 marks put back (`" ` in `raw_line` and `name`, as polk1917), 14 misread words
+fixed (two house numbers, a whole street), one row whose capitals headline was lost rebuilt, and
+six `name`s that still held a surname the line does not print. Every row carries
+`context.checked_against_page`; the change log is `results/minneapolis_page_check_2026-11-09.tsv`.
+
+Re-scored with the released adapters run on the laptop (MPS; transformers 5.14.1, peft 0.20.0):
+`results/minneapolis_rescore.py` → `results/minneapolis_rescore_{4b-100k,2b-100k,v7}.json`. Row EM with
+abbreviation periods ignored (`panel_error_kinds.py`'s scoring; `evaluate.py` gives the same):
+
+| minneapolis, 230 rows | before (transcription) | after (page) | padded names |
+|---|---|---|---|
+| 4b-100k | 64.8 | **75.2** (76.5 with the copy guard) | 27 → 0 |
+| 2b-100k | 65.7 | **67.4** | 4 → 0 |
+| v7 (0.8B) | 63.0 | **65.2** | 5 → 0 |
+
+Per page for the 4B: 0113 68.4 → 73.7, 0362 71.8 → 84.6, 0562 53.9 → 67.1. Field accuracy
+counting blanks 91.4 → 93.4 (NYC panel 96.7); non-blank 81.0 → 85.4 (91.6); `name` non-blank
+80.9 → 93.0. Parity: on the 42 rows whose line did not change, the laptop reproduced the stored
+GPU predictions on 42 (v7, 2B) and 41 (4B; one `Lbr` → `Lab`, a numerics difference that costs the
+"after" one row). 27 rows went wrong → right and 3 right → wrong for the 4B.
+
+What the 4B got wrong on the transcription was mostly the transcription: on a line opening with a
+bare given name it padded the name (`Abel lab`, `Joseph Joseph`, `Mathias Thomas` from `tmstr`),
+a form the page never prints and the generator never writes. Of the 57 rows still wrong, many are
+the silver labels' field splits (`Golla John, lab M & St L R R, …` files the railroad as the
+address), so 75.2 is if anything low. The 4B's lead over the 0.8B, near nothing on the
+transcription (64.8 against 63.0), is ten points on the page. Propagated to `cards/MODEL_CARD.md`
+(Minneapolis 75.2; the pooled "four other collections" column recomputed from the stored
+predictions with only the Minneapolis part changed: 4B 62.8 → 65.8, 2B 61.0 → 63.5, 0.8B 58.7 → 61.2;
+NYU is kept at the board's 500-row count, since `data/nyu_eval.jsonl` has changed since).
+Not propagated: `results/eval_table.md` (its other models have no predictions on the new lines).
 
 The original item follows. It currently pools TP/FP/FN across
 the whole panel and prints macro/micro F1 and whole-row EM — one number per field, no distribution.

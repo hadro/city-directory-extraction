@@ -159,10 +159,13 @@ corrected OCR misreads in the input lines, so this measures extraction on clean 
 
 | Model | Row EM, verbatim | Row EM, abbreviation periods ignored | `name` F1 | Four other collections, periods ignored |
 |---|---|---|---|---|
-| **4B** | **78.4** | **82.0** | **0.952** | **62.8** |
-| 2B | 77.8 | 81.1 | 0.942 | 61.0 |
-| 0.8B | 74.5 | 77.6 | 0.939 | 58.7 |
+| **4B** | **78.4** | **82.0** | **0.952** | **65.8** |
+| 2B | 77.8 | 81.1 | 0.942 | 63.5 |
+| 0.8B | 74.5 | 77.6 | 0.939 | 61.2 |
 | Gemini 3.1 Flash-Lite, prompted with the labeling conventions | 61.7 | — | — | — |
+
+The last column pools the four collections below (3,030 lines). Minneapolis's lines and labels
+were checked against the page images (2026-11-09).
 
 More synthetic data did not help: 250,000 lines made the 0.8B worse (74.8 with periods ignored).
 Size did.
@@ -173,7 +176,7 @@ Size did.
 |---|---|---|---|
 | Tulsa 1921 (Polk) | 1,500 | 67.5 | labels from a Gemini extraction (silver) |
 | Lain's Brooklyn 1897 | 800 | 65.8 | |
-| Minneapolis 1900 | 230 | 64.8 | after a gold correction (2026-10-17) |
+| Minneapolis 1900 | 230 | 75.2 | lines and labels checked against the page images (2026-11-09) |
 | NYU NYC directories 1850–1890 | 500 | 56.0 | three of its fields are derived by regex, not transcribed |
 
 **End to end, on real scans (4B only).** Through the whole pipeline (LightOnOCR-3 re-OCR of the page, line

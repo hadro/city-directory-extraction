@@ -36,9 +36,10 @@ Dialect notes (Minneapolis 1900), grounded on the real `ground_truth/*.txt` line
     The carry was also often simply wrong ("Mabel Mrs Mary E", "Novelty Rev Charles H").
     SO: if you re-run this converter, emit the printed name only and put any surname you infer
     in `context.inherited_surname`, as the corrected file does -- do NOT use --surname to write
-    it into `name`. Minneapolis prints no repeat mark at all, so there is nothing for
-    resolve_dittos.py to key on and the surname is simply not recoverable downstream; that is a
-    property of the book, not something gold should paper over.
+    it into `name`. CORRECTED 2026-11-09: the book DOES print a repeat mark (`“`) before every
+    such line, and indents run-overs; DirCity's transcriptions dropped both. So `" ` belongs at
+    the start of the line and of `name`, as data_prep/minneapolis_page_check.py restored against
+    scans of all three pages. A re-run of this converter loses the marks again: run that script after it.
   * residency codes r / b / bds / rms / res / h / rear (like Tulsa's r/b/rms), kept verbatim in
     the address value to match how Tulsa is stored.
   * widow spouse marker "(wid George A)"; titles "Mrs"/"Miss"; employer embedded in the

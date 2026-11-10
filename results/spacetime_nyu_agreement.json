@@ -1,0 +1,57 @@
+{
+ "volume": "4adf9ec0-317a-0134-03ad-00505686a51c (Doggett 1850/51)",
+ "lines": {
+  "nyu": 78016,
+  "spacetime": 76271
+ },
+ "pages": {
+  "nyu": 540,
+  "spacetime": 521,
+  "both": 521
+ },
+ "nyu_lines_paired": {
+  "identical_text": 42495,
+  "near_text_ge_0.9": 27697,
+  "unpaired": 7824
+ },
+ "field_agreement_identical_text": {
+  "n": 42493,
+  "name": 0.9879,
+  "occupation_role": 0.9368,
+  "address": 0.9859,
+  "home_address": 0.9956,
+  "all_four": 0.9226
+ },
+ "field_agreement_identical_text_gated": {
+  "n": 11367,
+  "name": 0.9906,
+  "occupation_role": 0.9681,
+  "address": 0.9949,
+  "home_address": 0.9984,
+  "all_four": 0.9568
+ },
+ "field_agreement_near_text": {
+  "n": 27682,
+  "name": 0.8107,
+  "occupation_role": 0.8595,
+  "address": 0.4175,
+  "home_address": 0.7315,
+  "all_four": 0.0517
+ },
+ "eval_rows": {
+  "n": 3000,
+  "twin": {
+   "exact": 1949,
+   "near": 835,
+   "none": 216
+  },
+  "field_agreement_with_twin": {
+   "n": 2784,
+   "name": 0.9303,
+   "occupation_role": 0.9389,
+   "address": 0.7985,
+   "home_address": 0.9454,
+   "all_four": 0.6764
+  }
+ }
+}

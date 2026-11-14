@@ -1,7 +1,8 @@
 """
 A Gradio page over space/search.py: every line in the city directories that may give an
-address, OCR misreadings included, each with its line image from the Internet Archive. A second
-tab, Browse (space/browse.py), searches every text column and narrows by facets.
+address, OCR misreadings included, each with its line image from the Internet Archive. "Search
+where I'm standing" takes the phone's location to the building in front of it (space/here.py). A
+second tab, Browse (space/browse.py), searches every text column and narrows by facets.
 
     uv run --with-requirements space/requirements.txt python space/app.py     # http://127.0.0.1:7860
 
@@ -25,6 +26,7 @@ from pathlib import Path
 import gradio as gr
 
 import browse
+import here
 import where
 from search import PLACES, TRACE_YEARS, Records, fa, index_path
 
@@ -73,7 +75,31 @@ details.aside { margin: 4px 0 12px 16px; color: var(--body-text-color-subdued); 
 .where > div { flex: 1 1 320px; min-width: 0; }
 .where iframe { width: 100%; height: 260px; border: 1px solid var(--border-color-primary); }
 .hits mark { background: #fde68a; color: #111; padding: 0 1px; }
+.here { border: 1px solid var(--border-color-primary); border-radius: 8px; padding: 6px 12px;
+        background: var(--background-fill-secondary); }
+.here p { margin: 4px 0; }
 """
+# "Search where I'm standing": the phone's location, as JSON for where_am_i, or why there is none.
+# A page inside another (the Space's page on huggingface.co holds the app in an iframe) may only
+# ask where the outer page allows it, so `framed` and the app's own address go along, for a link
+# to open it on its own.
+GEO_JS = """
+() => new Promise(resolve => {
+  const done = o => resolve(JSON.stringify(Object.assign(o, {
+    framed: window.top !== window.self, href: location.href, t: Date.now()})));
+  if (!window.isSecureContext) return done({error: 'insecure'});
+  if (!navigator.geolocation) return done({error: 'unsupported'});
+  navigator.geolocation.getCurrentPosition(
+    p => done({lat: p.coords.latitude, lon: p.coords.longitude, acc: p.coords.accuracy}),
+    e => done({error: ['', 'denied', 'unavailable', 'timeout'][e.code] || 'unavailable',
+               message: e.message}),
+    {enableHighAccuracy: true, timeout: 20000, maximumAge: 30000});
+})
+"""
+LOT_M = 8              # about a city lot's frontage (25 ft): a fix wider than this may be next door
+BUILT = ("The year is PLUTO's (NYC Planning), the lot's, and for an old building often "
+         "approximate. A line from before it was about an earlier building here or, where the "
+         "street was renumbered, on another lot.")
 # Where the address is today, below each map: the reason the map comes with no claim about the
 # line's own building
 TODAY = ("Where this address is today, from NYC GeoSearch. Streets were renumbered, renamed and "
@@ -492,8 +518,135 @@ def search(address: str, dist: int, people: bool, places: list, narrow: bool = T
             gr.DownloadButton(value=matches, visible=bool(matches)),
             gr.DownloadButton(value=trace, visible=bool(trace)),
             {"address": res["address"], "hits": [
-                {k: h.get(k) for k in ("place", "grade", "flag", "how", *fa.FIELDS)}
+                {k: h.get(k) for k in ("place", "grade", "flag", "how", "year", *fa.FIELDS)}
                 for h in res["hits"]]})
+
+
+def location_error(p: dict) -> str:
+    """Why the page has no location, as the note's HTML. Inside another page that does not pass
+    the permission on, Chromium says "disabled in this document by permissions policy" (a person
+    saying no is "User denied Geolocation"); other browsers may not say, so a page in a frame
+    offers the link whenever it was refused."""
+    e = html.escape
+    href = p.get("href") or ""
+    link = (f'<a href="{e(href)}" target="_blank">open the finder on its own</a>'
+            if re.match(r"https://|http://(127\.0\.0\.1|localhost)[:/]", href) else "")
+    if p.get("error") == "denied" and "policy" in (p.get("message") or "").lower():
+        return ("The page this finder sits in doesn't let it ask for your location"
+                + (f": {link} and try there." if link else "."))
+    why = {
+        "insecure": "This page can ask for your location only over https.",
+        "unsupported": "This browser can't share its location.",
+        "unavailable": "Your phone couldn't tell where you are. Outdoors, or in a moment, it may.",
+        "timeout": "Your phone took too long to find where you are. Try again; outdoors it is "
+                   "quicker.",
+    }.get(p.get("error"), "The browser didn't share your location. If you said no by mistake, "
+                          "allow location for this site in the browser's settings and try again.")
+    if p.get("error") == "denied" and p.get("framed") and link:
+        why += f" If it never asked, the page this one sits in may not let it: {link} and try there."
+    return why
+
+
+def building_choices(near: dict) -> list:
+    """The buildings, for the picker: ("17 m · 649 Classon av · built 1930", key)."""
+    out = []
+    for b in near["buildings"]:
+        lot = b["pluto"] or {}
+        more = len(b["addresses"]) - 1
+        out.append((f'{b["metres"]} m · {b["first"]}'
+                    + (f' (+{more} more)' if more else "")
+                    + (f' · built {lot["year"]}' if lot.get("year") else ""), b["key"]))
+    return out
+
+
+def building(near: dict | None, key: str | None) -> dict | None:
+    return next((b for b in (near or {}).get("buildings", []) if b["key"] == key), None)
+
+
+def addresses_radio(b: dict):
+    """The building's addresses, when it has more than one (a corner, a large building)."""
+    return gr.Radio(choices=b["addresses"], value=b["first"], visible=len(b["addresses"]) > 1)
+
+
+def where_am_i(loc: str):
+    """From the page's location (GEO_JS's JSON): the buildings near it, the two pickers, the
+    note above the lines, and the address to search with its borough. With no building, the
+    note says why and the address is emptied, so nothing is searched."""
+    off = (gr.Radio(visible=False), gr.Radio(visible=False))
+    try:
+        p = json.loads(loc or "{}")
+    except ValueError:
+        p = {"error": "unavailable"}
+    if "lat" not in p:
+        return {"error": location_error(p)}, *off, "", gr.skip()
+    try:
+        near = here.nearby(float(p["lat"]), float(p["lon"]), records.street_lines)
+    except (OSError, ValueError, KeyError):
+        return {"error": "NYC GeoSearch, the city's address lookup, did not answer. Try again in "
+                         "a moment, or type the address."}, *off, "", gr.skip()
+    near["acc"] = p.get("acc")
+    if not near["buildings"]:
+        borough = near["borough"]
+        why = ("NYC GeoSearch finds no New York City address near you." if not borough else
+               f"NYC GeoSearch puts you in {html.escape(borough)}." if borough not in here.COVERED
+               else "There is no numbered building near you to search (a park, or a block "
+                    "without one).")
+        return {"error": why + " These directories cover Manhattan and Brooklyn."}, *off, "", \
+            gr.skip()
+    b = near["buildings"][0]
+    return (near, gr.Radio(choices=building_choices(near), value=b["key"], visible=True),
+            addresses_radio(b), b["first"], [b["borough"]])
+
+
+def pick_building(key: str, near: dict):
+    """Another building from the list: its addresses, and the first to search."""
+    b = building(near, key)
+    if not b:
+        return gr.skip(), gr.skip(), gr.skip()
+    return addresses_radio(b), b["first"], [b["borough"]]
+
+
+def here_html(near: dict | None, key: str | None, found: dict | None) -> str:
+    """The note above the lines, after a located search: the building, how far, when PLUTO says
+    it went up, and how many of the lines found are from before that."""
+    if not near:
+        return ""
+    if near.get("error"):
+        return f'<div class="here"><p>{near["error"]}</p></div>'     # written above, escaped
+    b = building(near, key)
+    if not b:
+        return ""
+    e = html.escape
+    acc, lot = near.get("acc"), b["pluto"]
+    out = [f'<p><b>{e(b["first"])}, {e(b["borough"])}</b>: about {b["metres"]} m from you'
+           + (f" (your phone's fix: ±{round(acc)} m)" if acc else "") + "</p>"]
+    if acc and acc > LOT_M * 2:
+        out.append(f'<p class="terms">A fix of ±{round(acc)} m spans several buildings (a lot is '
+                   f'about {LOT_M} m wide). If this isn\'t the one in front of you, pick it from '
+                   f'the list.</p>')
+    if lot is None:
+        facts = "PLUTO has no year for this lot (a condominium is filed there under another lot)."
+    elif not lot["year"] and not lot["floors"]:
+        facts = "PLUTO lists no building on this lot."
+    else:
+        bits = [f'Built {lot["year"]}' if lot["year"] else "Year built not known",
+                f'{lot["floors"]} floor{"s" if lot["floors"] != 1 else ""}' if lot["floors"] else "",
+                lot["landmark"].capitalize(), lot["district"]]
+        facts = " · ".join(e(x) for x in bits if x) + "."
+    out.append(f"<p>{facts}</p>")
+    year = (lot or {}).get("year")
+    if year and found and found["address"] in b["addresses"]:
+        hits = [h for h in found["hits"] if h["place"] == b["borough"] and h["grade"] != "near"
+                and not (h["flag"] or "").startswith("OTHER STREET")]
+        before = sum(1 for h in hits if h.get("year") and h["year"] < year)
+        if hits:
+            out.append("<p>" + (
+                f"All {len(hits):,} lines found are from before {year}." if before == len(hits)
+                else f"{before:,} of the {len(hits):,} lines found are from before {year}."
+                if before else f"All {len(hits):,} lines found are from {year} or later.")
+                + "</p>")
+    out.append(f'<p class="terms">{e(BUILT)}</p>' if year else "")
+    return f'<div class="here">{"".join(out)}</div>'
 
 
 def marked(text: str, marks: set) -> str:
@@ -614,6 +767,18 @@ with gr.Blocks(title="City directories") as demo:
             f"({records.rows:,} lines) that may give an address, including the ones the OCR misread: "
             "a misspelled street, a number in look-alike characters, or an address split across "
             "two lines. Each line shows its image from the Internet Archive scan, to check against.")
+        # On a phone in Manhattan or Brooklyn: the building in front of you (here.py)
+        locate = gr.Button("📍 Search where I'm standing")
+        gr.HTML('<p class="terms">Asks your browser for your location, finds the nearest '
+                'buildings with NYC GeoSearch (the city\'s address lookup), and searches the '
+                'nearest one. This page keeps nothing.</p>')
+        here_box = gr.HTML()
+        b_pick = gr.Radio(label="Buildings near you, nearest first", visible=False,
+                          info="Your phone's fix can be off by a building or two.")
+        a_pick = gr.Radio(label="This building's addresses", visible=False,
+                          info="A corner or a large building has several; a line may give any.")
+        loc = gr.Textbox(visible="hidden")      # GEO_JS's answer
+        near = gr.State()
         with gr.Row():
             address = gr.Textbox(label="Address", placeholder="155 Franklin", scale=3)
             dist = gr.Slider(1, 3, value=2, step=1, label="Street spelling distance", scale=1)
@@ -640,12 +805,29 @@ with gr.Blocks(title="City directories") as demo:
         # Clear first: gr.HTML patches the old DOM node by node, so a new search would reuse the
         # old <img> elements, which keep showing the old line until IA serves the new one
         hidden = (gr.DownloadButton(visible=False), gr.DownloadButton(visible=False))
-        for trigger in (go.click, address.submit, places.change, narrow.change):
-            trigger(lambda: ('<p class="terms">Searching…</p>', *hidden, ""), None,
-                    [result, get_matches, get_trace, today]).then(
+
+        def searched(event):
+            """The search's steps after `event`: the building's note (when located), clear, the
+            lines, the map, the note again with the lines counted."""
+            return event.then(here_html, [near, b_pick, found], here_box).then(
+                lambda: ('<p class="terms">Searching…</p>', *hidden, ""), None,
+                [result, get_matches, get_trace, today]).then(
                 search, [address, dist, people, places, narrow],
                 [result, get_matches, get_trace, found]).then(
-                where_html, [found, places], today)
+                where_html, [found, places], today).then(
+                here_html, [near, b_pick, found], here_box)
+        # A typed address forgets the location, and the borough it set the places to. `places.input`,
+        # not `.change`: a located search sets the places, and must not search again for it.
+        forget = lambda n: (None, gr.Radio(visible=False), gr.Radio(visible=False),  # noqa: E731
+                            PLACES if n and not n.get("error") else gr.skip())
+        for trigger in (go.click, address.submit):
+            searched(trigger(forget, near, [near, b_pick, a_pick, places]))
+        for trigger in (places.input, narrow.change):
+            searched(trigger(lambda: None, None, None))
+        searched(locate.click(None, None, loc, js=GEO_JS).then(
+            where_am_i, loc, [near, b_pick, a_pick, address, places]))
+        searched(b_pick.input(pick_building, [b_pick, near], [a_pick, address, places]))
+        searched(a_pick.input(lambda a: a, a_pick, address))
 
     with gr.Tab("Browse"):
         gr.Markdown(

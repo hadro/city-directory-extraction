@@ -237,6 +237,13 @@ class Records:
             if fa.as_number(t) == number]
         return streets, numbers
 
+    def street_lines(self, address: str) -> int:
+        """The lines holding the address's street word (its anchor): which of a street's
+        spellings the directories print most, for here.py."""
+        row = self.con.execute("SELECT n FROM vocab WHERE term = ?",
+                               [fa.anchor_of(fa.parse(address)[1])]).fetchone()
+        return row[0] if row else 0
+
     def near_terms(self, number: str) -> list:
         """Every word that may hold the number or one digit off, read as match_tokens reads a
         token (as_number, then lev 1). Every grade needs such a token, `wrapped` and `near`

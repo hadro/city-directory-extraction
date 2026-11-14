@@ -71,6 +71,8 @@ The files:
   ("The test Space" below).
 - **`where.py`:** where the address is today (below). Run it directly to test one borough:
   `uv run --with duckdb==2.0.0 python space/where.py "155 Franklin av" Brooklyn`.
+- **`here.py`:** the buildings where you're standing (below). Run it directly with a point:
+  `uv run --with duckdb==2.0.0 python space/here.py 40.78002 -73.97748`.
 
 **Where an address is.** The "Where the address is" boxes (Manhattan, Brooklyn, Elsewhere) filter
 on each line's own place, not its directory's. A marker printed right after the matched street
@@ -150,6 +152,53 @@ ZERO_RESULTS, none linked), never against Google itself. On 2026-11-05 it worked
 on the test Space (key as a Space secret): "155 Franklin" gave a Street View link for each pin,
 Manhattan's Franklin St (heading 188°) and Brooklyn's Franklin Av (97°), with no key in the page.
 
+**Where you're standing** (`here.py`, 2026-11-14). "📍 Search where I'm standing", at the top of
+the finder, asks the browser for its location and searches the building in front of it.
+- **The buildings.** GeoSearch's reverse lookup (`/v2/reverse`, the same service, no key) answers
+  the 40 address points nearest a point, each with its building (BIN) and lot (BBL) from the
+  city's Property Address Directory, which lists every address of a building: 11 Wall st's is
+  9-21 Wall st, 2-6 Broad st and 6 New st. They are grouped by building, nearest first. A
+  placeholder BIN (1000000, 3000000: no building) groups by lot. A big building can take all 40
+  points, so when an answer holds fewer than 6 buildings, four more points 35 m away are asked too.
+- **Which name.** The directory lists other names for an address: old ones (340 Lenox av beside
+  Malcolm X Blvd, 836 6 Avenue beside Avenue of the Americas), spellings (Mac Donough, Mc Donough,
+  Macdonough), short forms (B'way). Names given after 1922 are dropped (`CO_NAMES`). Spellings of
+  one street (one letter apart, words joined) are one, under the spelling whose street word the
+  directories print most (`Records.street_lines`, from the word index). Other names at one number
+  are kept: 649 Classon av is also 649 Union pl. Numbered streets as the lines print them: WEST 76
+  STREET is W 76th st.
+- **The page.** The nearest building is searched at once, with its address in the box and the
+  places set to its borough. Below the note, the six nearest buildings ("17 m · 649 Classon av (+4
+  more) · built 1930") and the chosen one's addresses can be tapped for another. A phone's fix is
+  often 5-15 m outdoors and worse among tall buildings, while a lot is about 8 m wide; the note
+  says so when the fix is over 16 m. A typed address forgets the location and sets the places back
+  to all three. The places now search on `.input`, not `.change`, so a located search setting them
+  does not search twice.
+- **When it was built.** PLUTO (NYC Planning's tax-lot data, NYC Open Data `64uk-42ks`, no key),
+  one request for all six lots: year built, floors, landmark status, historic district. After the
+  search the note counts the lines found from before that year ("17 of the 24 lines found are
+  from before 1901"). The year is the lot's (its main building's where there are several) and
+  approximate for many old buildings. A condominium is filed under another lot, so it has none,
+  and a vacant lot says so. The building footprints dataset (`5zhs-2jue`) has a year per building
+  that differs at times (11 Wall: 1904 there, 1901 in PLUTO); PLUTO is the one shown.
+- **Privacy.** Nothing is asked until the button is pressed. The location goes from the browser to
+  the Space, and from there to GeoSearch; nothing logs or keeps it.
+- **Inside the Space's page.** A browser lets a page in an iframe ask for the location only when
+  the outer page allows it (`allow="geolocation"`), and on huggingface.co the app is in an iframe.
+  Not yet checked there. Where it is refused, Chromium says "disabled in this document by
+  permissions policy" (a person's no is "User denied Geolocation"), and the note links to the app
+  on its own page (its hf.space address), where it can ask.
+- **Timing and checks**, 2026-11-14, in headless Chromium at an iPhone 13's size with a simulated
+  location, against the live GeoSearch and PLUTO over a made-up records file: tap to lines 1.9 s
+  (Upper West Side, a Brooklyn corner), 3.4 s at Wall st (the four more points). Also checked:
+  Queens and Jersey City (the note says the directories cover Manhattan and Brooklyn), a refusal,
+  the app in a cross-origin iframe without `allow="geolocation"`, tapping another building and
+  another address, and a typed search after a located one. Not yet on a phone or on the Space.
+- **Not handled.** The finder's address reader takes "Avenue B" as the street "avenue", so
+  Manhattan's lettered avenues and Brooklyn's (Avenue J) search badly, typed or located. Renamings
+  within the directories' years (Columbus av was 9th av until 1890) are only there when the
+  city's address list kept the old name; the address box can be edited.
+
 The page and the script give the same lines: since 2026-11-04 the script runs this search over
 the same Parquet. So neither shows a held-out row, such as "h 76 Leffert© pi" (1906BPL:1193:111,
 an `adjacent` holdout), which the script found when it read browse.db.
@@ -215,7 +264,7 @@ finder's table `r` (the records in memory), so it costs no second copy of the da
    `build_parquet.py --index-only --out <the release Parquet>`. It is tied to that file's rows and their order, so rebuild it whenever
    the release changes. The index names one file; a release in several files needs one index
    built over them in the order `read_parquet` reads them.
-2. **The code.** A Space repo holding `app.py`, `search.py`, `browse.py`, `where.py`, `requirements.txt`,
+2. **The code.** A Space repo holding `app.py`, `search.py`, `browse.py`, `where.py`, `here.py`, `requirements.txt`,
    this README (its header is the Space config), and a copy of `browse/find_address.py`.
    `search.py` imports that copy when it's beside it. Set `GOOGLE_MAPS_API_KEY` as a Space
    secret for the Street View links ("Where it is today" above).

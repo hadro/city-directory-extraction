@@ -97,9 +97,27 @@ GEO_JS = """
 })
 """
 LOT_M = 8              # about a city lot's frontage (25 ft): a fix wider than this may be next door
-BUILT = ("The year is PLUTO's (NYC Planning), the lot's, and for an old building often "
-         "approximate. A line from before it was about an earlier building here or, where the "
-         "street was renumbered, on another lot.")
+BUILT = {"PLUTO": "The year is PLUTO's (NYC Planning), the lot's, and for an old building often "
+                  "approximate.",
+         "footprints": "The year is the city's building footprints', for an old building often "
+                       "approximate."}
+BEFORE = ("A line from before it was about an earlier building here or, where the street was "
+          "renumbered, on another lot.")
+
+
+def year_built(b: dict) -> tuple:
+    """(year, source): PLUTO's year for the lot, else the footprint's (a condominium, filed in
+    PLUTO under another lot); (0, "") with neither."""
+    if (b["pluto"] or {}).get("year"):
+        return b["pluto"]["year"], "PLUTO"
+    return (b["footprint_year"], "footprints") if b.get("footprint_year") else (0, "")
+
+
+def how_far(b: dict) -> str:
+    """'at it', '8 m from its wall', or '27 m from its address' (no footprint)."""
+    if b.get("walls"):
+        return "at it" if b["metres"] < 1 else f'{b["metres"]} m from its wall'
+    return f'{b["metres"]} m from its address'
 # Where the address is today, below each map: the reason the map comes with no claim about the
 # line's own building
 TODAY = ("Where this address is today, from NYC GeoSearch. Streets were renumbered, renamed and "
@@ -548,14 +566,14 @@ def location_error(p: dict) -> str:
 
 
 def building_choices(near: dict) -> list:
-    """The buildings, for the picker: ("17 m · 649 Classon av · built 1930", key)."""
+    """The buildings, for the picker: ("10 m · 649 Classon av (+4 more) · built 1930", key)."""
     out = []
     for b in near["buildings"]:
-        lot = b["pluto"] or {}
+        year = year_built(b)[0]
         more = len(b["addresses"]) - 1
-        out.append((f'{b["metres"]} m · {b["first"]}'
-                    + (f' (+{more} more)' if more else "")
-                    + (f' · built {lot["year"]}' if lot.get("year") else ""), b["key"]))
+        out.append((("here" if b.get("walls") and b["metres"] < 1 else f'{b["metres"]} m')
+                    + f' · {b["first"]}' + (f' (+{more} more)' if more else "")
+                    + (f' · built {year}' if year else ""), b["key"]))
     return out
 
 
@@ -598,6 +616,15 @@ def where_am_i(loc: str):
             addresses_radio(b), b["first"], [b["borough"]])
 
 
+def fill_lots(near: dict | None, key: str | None):
+    """PLUTO's part, when it was too slow for where_am_i (here.LOTS_WAIT): asked again beside the
+    search, then the picker's years. Nothing to do otherwise."""
+    if not near or not near.get("lots_pending"):
+        return gr.skip(), gr.skip()
+    here.with_lots(near)
+    return near, gr.Radio(choices=building_choices(near), value=key)
+
+
 def pick_building(key: str, near: dict):
     """Another building from the list: its addresses, and the first to search."""
     b = building(near, key)
@@ -618,23 +645,28 @@ def here_html(near: dict | None, key: str | None, found: dict | None) -> str:
         return ""
     e = html.escape
     acc, lot = near.get("acc"), b["pluto"]
-    out = [f'<p><b>{e(b["first"])}, {e(b["borough"])}</b>: about {b["metres"]} m from you'
+    year, source = year_built(b)
+    far = how_far(b)
+    out = [f'<p><b>{e(b["first"])}, {e(b["borough"])}</b>: '
+           + ("you're at it" if far == "at it" else f"about {far}")
            + (f" (your phone's fix: ±{round(acc)} m)" if acc else "") + "</p>"]
     if acc and acc > LOT_M * 2:
         out.append(f'<p class="terms">A fix of ±{round(acc)} m spans several buildings (a lot is '
                    f'about {LOT_M} m wide). If this isn\'t the one in front of you, pick it from '
                    f'the list.</p>')
-    if lot is None:
+    if near.get("lots_pending") and not year:
+        facts = "Looking up when it was built…"
+    elif not lot and not year:
         facts = "PLUTO has no year for this lot (a condominium is filed there under another lot)."
-    elif not lot["year"] and not lot["floors"]:
+    elif lot and not lot["floors"] and not year:
         facts = "PLUTO lists no building on this lot."
     else:
-        bits = [f'Built {lot["year"]}' if lot["year"] else "Year built not known",
+        lot = lot or {"floors": 0, "landmark": "", "district": ""}
+        bits = [f"Built {year}" if year else "Year built not known",
                 f'{lot["floors"]} floor{"s" if lot["floors"] != 1 else ""}' if lot["floors"] else "",
                 lot["landmark"].capitalize(), lot["district"]]
         facts = " · ".join(e(x) for x in bits if x) + "."
     out.append(f"<p>{facts}</p>")
-    year = (lot or {}).get("year")
     if year and found and found["address"] in b["addresses"]:
         hits = [h for h in found["hits"] if h["place"] == b["borough"] and h["grade"] != "near"
                 and not (h["flag"] or "").startswith("OTHER STREET")]
@@ -645,7 +677,7 @@ def here_html(near: dict | None, key: str | None, found: dict | None) -> str:
                 else f"{before:,} of the {len(hits):,} lines found are from before {year}."
                 if before else f"All {len(hits):,} lines found are from {year} or later.")
                 + "</p>")
-    out.append(f'<p class="terms">{e(BUILT)}</p>' if year else "")
+    out.append(f'<p class="terms">{e(BUILT[source])} {e(BEFORE)}</p>' if year else "")
     return f'<div class="here">{"".join(out)}</div>'
 
 
@@ -824,8 +856,12 @@ with gr.Blocks(title="City directories") as demo:
             searched(trigger(forget, near, [near, b_pick, a_pick, places]))
         for trigger in (places.input, narrow.change):
             searched(trigger(lambda: None, None, None))
-        searched(locate.click(None, None, loc, js=GEO_JS).then(
-            where_am_i, loc, [near, b_pick, a_pick, address, places]))
+        located = locate.click(None, None, loc, js=GEO_JS).then(
+            where_am_i, loc, [near, b_pick, a_pick, address, places])
+        searched(located)
+        # beside the search, not before it: PLUTO, when it was slow; the note again when it's in
+        located.then(fill_lots, [near, b_pick], [near, b_pick]).then(
+            here_html, [near, b_pick, found], here_box)
         searched(b_pick.input(pick_building, [b_pick, near], [a_pick, address, places]))
         searched(a_pick.input(lambda a: a, a_pick, address))
 

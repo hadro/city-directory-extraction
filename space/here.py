@@ -20,10 +20,19 @@ are one, under the spelling whose street word the directories print most (`count
 takes from the finder's word index). Other names at the same number are kept, the commonest first:
 649 Classon av is also 649 Union pl, and which one a line used is the lines' to say.
 
+The buildings are ranked by how far the point is from each one's nearest wall, from the city's
+building footprints (NYC Open Data, no key): an address point can be far from where a big
+building's wall is (at Wall and Broad, 11 Wall st's is 31 m off and 23 New st's 56 m, while
+their walls are 8 m and 6 m away). A building with no footprint (a placeholder BIN, a new one)
+keeps its address point's distance. The footprints are asked by BIN: their `within_circle` leaves
+out a building that reaches past the circle (none within 80 m of Times Square).
+
 PLUTO (NYC Planning's tax lot data, on NYC Open Data, no key) gives the lot's year built, floors,
 landmark and historic district. The year is the lot's (the main building's where a lot has
 several), and for an old building it is often approximate. A condominium's lot is filed under
-another number in PLUTO, so it has none here.
+another number in PLUTO, so it has none here; the footprint's year (`footprint_year`) is there
+for that case. Elsewhere the two agree but for a few (the Stock Exchange: 1901 in PLUTO, 1904
+in the footprints), and PLUTO's is the one shown.
 
 The point goes from the page to this server, and from here to GeoSearch; nothing keeps it. A
 failure raises (OSError, ValueError, KeyError), so it is not cached.
@@ -36,6 +45,7 @@ import json
 import math
 import re
 import sys
+import time
 import urllib.parse
 
 import where
@@ -43,17 +53,26 @@ from search import fa
 
 REVERSE = "https://geosearch.planninglabs.nyc/v2/reverse"
 PLUTO = "https://data.cityofnewyork.us/resource/64uk-42ks.json"
+FOOTPRINTS = "https://data.cityofnewyork.us/resource/5zhs-2jue.json"
 BUILDINGS = 6          # buildings offered, nearest first
 OFFSET = 35            # metres from the point to the four more points asked, when one is short
+# NYC Open Data answers a query it has not seen in ~0.3 s, but about one in three took 3-6 s
+# (2026-11-14, any form of the query), and one it has seen in ~0.25 s. So the search does not wait
+# long: without footprints by FOOT_WAIT the buildings rank by address point; without PLUTO by
+# LOTS_WAIT the lines come first, and app.py asks PLUTO the same query again after (`lots_pending`,
+# `lot_bbls`), by then usually answered and cached.
+FOOT_WAIT = 2.5       # seconds from asking, both
+LOTS_WAIT = 1.5
 COVERED = ("Manhattan", "Brooklyn")
 # Words of names given to streets after 1922, which no line prints: Avenue of the Americas (6th
 # av), Malcolm X Blvd (Lenox av; Brooklyn's Reid av), Adam Clayton Powell Jr Blvd (7th av),
 # Frederick Douglass Blvd (8th av), Marcus Garvey Blvd (Sumner av), Duke Ellington Blvd (W 106th),
 # Little Brazil St (W 46th), Fashion av (7th av), Martin Luther King Jr Blvd (W 125th). Only
 # dropped where the address has another name.
-# Canyon of Heroes (lower Broadway).
+# Canyon of Heroes (lower Broadway), G Abbott Way (W 44th). A name ending in the word "Way" is
+# one of these too: the directories' streets were st, av, pl and the like.
 CO_NAMES = {"americas", "malcolm", "malcom", "clayton", "douglass", "garvey", "ellington", "brazil",
-            "fashion", "luther", "canyon", "heroes"}
+            "fashion", "luther", "canyon", "heroes", "abbott"}
 SPELLED = {"first": "1", "second": "2", "third": "3", "fourth": "4", "fifth": "5", "sixth": "6",
            "seventh": "7", "eighth": "8", "ninth": "9", "tenth": "10", "eleventh": "11",
            "twelfth": "12"}
@@ -155,32 +174,85 @@ def street_key(form: str) -> str:
     return "".join(fa.parse(form)[1])
 
 
+def same_street(a: str, b: str) -> bool:
+    """Two keys spelling one street: a letter apart (mcdonough, macdonough), but a numbered
+    street only as itself (w45th is not w46th)."""
+    if any(c.isdigit() for c in a + b):
+        return a == b
+    return fa.lev(a, b, 1) <= 1
+
+
+def footprints(bins: list) -> dict:
+    """{bin: {"year", "geom"}}: each building's footprint (a GeoJSON MultiPolygon) and the year
+    the footprints give it (0 for none), in one request."""
+    bins = [b for b in dict.fromkeys(bins)
+            if re.fullmatch(r"\d{7}", b or "") and not PLACEHOLDER_BIN.fullmatch(b)]
+    if not bins:
+        return {}
+    rows = where.fetch(FOOTPRINTS + "?" + urllib.parse.urlencode({
+        "$select": "bin,construction_year,the_geom", "$where": f"bin in({','.join(bins)})",
+        "$limit": 1000}))
+    out = {}
+    for r in rows:
+        if r.get("the_geom") and r["bin"] not in out:
+            out[r["bin"]] = {"geom": r["the_geom"],
+                             "year": int(float(r["construction_year"]))
+                             if r.get("construction_year") else 0}
+    return out
+
+
+def wall_metres(lat: float, lon: float, geom: dict) -> float:
+    """Metres from the point to a footprint's nearest wall, 0 inside it. Flat over a block's
+    distances: x east and y north of the point, in metres."""
+    ky = math.radians(1) * 6371000
+    kx = ky * math.cos(math.radians(lat))
+    coords = geom["coordinates"] if geom["type"] == "MultiPolygon" else [geom["coordinates"]]
+    polys = [[[((x - lon) * kx, (y - lat) * ky) for x, y in ring] for ring in poly]
+             for poly in coords]
+    edges = lambda rings: (e for r in rings for e in zip(r, r[1:] + r[:1]))   # noqa: E731
+    for rings in polys:               # inside: an odd number of edges crossed going east
+        if sum((y1 > 0) != (y2 > 0) and x1 + (x2 - x1) * -y1 / (y2 - y1) > 0
+               for (x1, y1), (x2, y2) in edges(rings)) % 2:
+            return 0.0
+
+    def to_edge(a, b):
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        t = max(0.0, min(1.0, -(a[0] * dx + a[1] * dy) / (dx * dx + dy * dy or 1)))
+        return math.hypot(a[0] + t * dx, a[1] + t * dy)
+    return min(to_edge(a, b) for rings in polys for a, b in edges(rings))
+
+
 def names(addresses: list, count=None) -> list:
     """A building's addresses as the finder takes them: [(number, street), ...] in, ['106 W 76th
     st', ...] out. CO_NAMES dropped (unless nothing else is left); spellings of one street are
     one, the one `count` (an address -> lines) finds most; other names at a number kept, the
     commonest first. Numbers in the order they first come."""
     forms = list(dict.fromkeys(f for n, s in addresses if (f := directory_form(n, s))))
-    plain = [f for f in forms if not CO_NAMES & {w.lower() for w in f.split()}] or forms
+    plain = [f for f in forms if not CO_NAMES & {w.lower() for w in f.split()}
+             and f.split()[-1] != "Way"] or forms
     score = {f: (count(f) if count else 0, -i) for i, f in enumerate(plain)}
     spelling = {}                                 # a street's key -> its commonest spelling
     for f in sorted(plain, key=score.get, reverse=True):
         k = street_key(f)
-        if not any(fa.lev(k, s, 1) <= 1 for s in spelling):
+        if not any(same_street(k, s) for s in spelling):
             spelling[k] = f.split(" ", 1)[1]
 
     def respelled(f: str) -> str:
         k = street_key(f)
-        return f.split()[0] + " " + next(v for s, v in spelling.items() if fa.lev(k, s, 1) <= 1)
+        return f.split()[0] + " " + next(v for s, v in spelling.items() if same_street(k, s))
     return list(dict.fromkeys(map(respelled, plain)))
 
 
 def nearby(lat: float, lon: float, count=None) -> dict:
     """The buildings nearest the point, nearest first: {"borough": the nearest address's,
-    "buildings": [{"key", "bin", "bbl", "borough", "metres", "addresses", "first", "pluto"}]},
-    up to BUILDINGS of them, in the boroughs the directories cover. `addresses` is every address
-    of the building as the finder takes it, `first` the one to search first: PLUTO's address
-    for the lot where it is one of them, else the nearest. `count`: see names()."""
+    "buildings": [{"key", "bin", "bbl", "borough", "metres", "walls", "addresses", "first",
+    "pluto", "footprint_year"}]}, up to BUILDINGS of them, in the boroughs the directories
+    cover. `metres` is to the nearest wall where `walls` (there is a footprint), else to the
+    nearest address point. `addresses` is every address of the building as the finder takes it,
+    `first` the one to search first: PLUTO's address for the lot where it is one of them, else
+    the nearest. `count`: see names(). The footprints and PLUTO are asked at once, and either
+    failing leaves its part out; PLUTO not answering by LOTS_WAIT sets "lots_pending", with the
+    lots asked in "lot_bbls" for app.py to ask again (with_lots)."""
     points = around(lat, lon)
     groups = {}
     for borough, number, street, bin_, bbl, plat, plon in points:
@@ -191,11 +263,22 @@ def nearby(lat: float, lon: float, count=None) -> dict:
         g["raw"].append((number, street))
     ranked = sorted(groups.values(), key=lambda g: g["metres"])
     borough = ranked[0]["borough"] if ranked else None
-    shown = [g for g in ranked if g["borough"] in COVERED][:BUILDINGS]
-    try:
-        lots = pluto([g["bbl"] for g in shown])
-    except (OSError, ValueError, KeyError):
-        lots = {}
+    near = [g for g in ranked if g["borough"] in COVERED]
+    lot_bbls = [g["bbl"] for g in near]
+    pool = concurrent.futures.ThreadPoolExecutor(2)
+    asked = time.monotonic()
+    asked_feet = pool.submit(footprints, [g["bin"] for g in near])
+    asked_lots = pool.submit(pluto, lot_bbls)
+    pool.shutdown(wait=False)                     # a slow answer is left to finish on its own
+    feet = answer(asked_feet, FOOT_WAIT) or {}
+    lots = answer(asked_lots, max(0.0, asked + LOTS_WAIT - time.monotonic()))
+    for g in near:
+        foot = feet.get(g["bin"])
+        g["walls"] = bool(foot)
+        g["footprint_year"] = foot["year"] if foot else 0
+        if foot:
+            g["metres"] = wall_metres(lat, lon, foot["geom"])
+    shown = sorted(near, key=lambda g: g["metres"])[:BUILDINGS]
     out, seen = [], set()
     for g in shown:
         addresses = names(g.pop("raw"), count)
@@ -203,7 +286,7 @@ def nearby(lat: float, lon: float, count=None) -> dict:
         if not addresses or tuple(addresses) in seen:
             continue
         seen.add(tuple(addresses))
-        lot = lots.get(g["bbl"])
+        lot = (lots or {}).get(g["bbl"])
         primary = directory_form(*lot["address"].split(" ", 1)) if lot and \
             " " in lot["address"] else None
         first = primary if primary in addresses else addresses[0]
@@ -212,9 +295,36 @@ def nearby(lat: float, lon: float, count=None) -> dict:
         addresses.sort(key=lambda a: (a != first, streets.index(street_key(a)), int(a.split()[0])))
         out.append(dict(g, metres=round(g["metres"]), addresses=addresses, first=first,
                         pluto=lot))
-    return {"borough": borough, "buildings": out}
+    return {"borough": borough, "buildings": out, "lots_pending": lots is None and bool(out),
+            "lot_bbls": lot_bbls}
+
+
+def answer(asked: concurrent.futures.Future, wait: float):
+    """A request's answer within `wait` seconds; None if it failed or is still out."""
+    try:
+        return asked.result(timeout=wait)
+    except (concurrent.futures.TimeoutError, OSError, ValueError, KeyError):
+        return None
+
+
+def with_lots(near: dict) -> dict:
+    """`near` with PLUTO's answer filled in, where it was still out (lots_pending): the same
+    query again, which NYC Open Data has usually answered and cached by then. Changed in place."""
+    if near.get("lots_pending"):
+        try:
+            lots = pluto(near["lot_bbls"])
+        except (OSError, ValueError, KeyError):
+            lots = {}
+        for b in near["buildings"]:
+            b["pluto"] = lots.get(b["bbl"])
+        near["lots_pending"] = False
+    return near
 
 
 if __name__ == "__main__":
     near = nearby(float(sys.argv[1]), float(sys.argv[2]))
     print(json.dumps(near, indent=1))
+    print("\n".join(f'{b["metres"]:>4} m {"to its wall" if b["walls"] else "to its address"}: '
+                    f'{b["first"]} (+{len(b["addresses"]) - 1}), PLUTO '
+                    f'{(b["pluto"] or {}).get("year")}, footprint {b["footprint_year"]}'
+                    for b in near["buildings"]), file=sys.stderr)

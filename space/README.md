@@ -157,9 +157,18 @@ the finder, asks the browser for its location and searches the building in front
 - **The buildings.** GeoSearch's reverse lookup (`/v2/reverse`, the same service, no key) answers
   the 40 address points nearest a point, each with its building (BIN) and lot (BBL) from the
   city's Property Address Directory, which lists every address of a building: 11 Wall st's is
-  9-21 Wall st, 2-6 Broad st and 6 New st. They are grouped by building, nearest first. A
-  placeholder BIN (1000000, 3000000: no building) groups by lot. A big building can take all 40
-  points, so when an answer holds fewer than 6 buildings, four more points 35 m away are asked too.
+  9-21 Wall st, 2-6 Broad st and 6 New st. They are grouped by building. A placeholder BIN
+  (1000000, 3000000: no building) groups by lot. A big building can take all 40 points, so when an
+  answer holds fewer than 6 buildings, four more points 35 m away are asked too.
+- **Nearest by its walls.** The buildings are ranked by the distance to their nearest wall, from
+  the city's building footprints (NYC Open Data `5zhs-2jue`, no key, asked by BIN in one request):
+  an address point can be far from a big building's wall. At Wall and Broad, 11 Wall st's address
+  point is 31 m off and 23 New st's 56 m (4th), while their walls are 8 m and 6 m away (1st);
+  near Times Square 1540 Broadway goes from 58 m to 14 m. Inside a footprint is 0 m ("you're at
+  it"). A building with no footprint (a placeholder BIN, a new building) keeps its address point's
+  distance, and the note says which it is. The footprints' `within_circle` is not used: it leaves
+  out a building reaching past the circle (none within 80 m of Times Square). They hold today's
+  buildings only (14 of 1.08M are demolitions), so they say nothing of the ones before.
 - **Which name.** The directory lists other names for an address: old ones (340 Lenox av beside
   Malcolm X Blvd, 836 6 Avenue beside Avenue of the Americas), spellings (Mac Donough, Mc Donough,
   Macdonough), short forms (B'way). Names given after 1922 are dropped (`CO_NAMES`). Spellings of
@@ -178,9 +187,17 @@ the finder, asks the browser for its location and searches the building in front
   one request for all six lots: year built, floors, landmark status, historic district. After the
   search the note counts the lines found from before that year ("17 of the 24 lines found are
   from before 1901"). The year is the lot's (its main building's where there are several) and
-  approximate for many old buildings. A condominium is filed under another lot, so it has none,
-  and a vacant lot says so. The building footprints dataset (`5zhs-2jue`) has a year per building
-  that differs at times (11 Wall: 1904 there, 1901 in PLUTO); PLUTO is the one shown.
+  approximate for many old buildings. A condominium is filed under another lot, so it has none
+  (the footprint's year is shown then, where it has one), and a vacant lot says so. The footprints
+  give a year per building, the same as PLUTO's for all but 2 of ~25 checked (the Stock
+  Exchange's two: 1901 in PLUTO, 1904 there); PLUTO's is the one shown. 21% of Brooklyn's lots
+  have more than one building (6% of Manhattan's), mostly, it seems, a rear garage or shed.
+- **Not waiting on NYC Open Data.** It answers a query it has not seen in ~0.3 s, but about one in
+  three took 3-6 s on 2026-11-14 (whatever the form of the query), and one it has seen in ~0.25 s.
+  So the footprints get 2.5 s (else the buildings rank by address point) and PLUTO 1.5 s from
+  when both are asked. Without PLUTO by then, the lines are searched at once (the nearest address
+  first, not PLUTO's), and PLUTO is asked the same query again beside the search (`fill_lots`),
+  then the note and the list get its years.
 - **Privacy.** Nothing is asked until the button is pressed. The location goes from the browser to
   the Space, and from there to GeoSearch; nothing logs or keeps it.
 - **Inside the Space's page.** A browser lets a page in an iframe ask for the location only when
@@ -189,8 +206,10 @@ the finder, asks the browser for its location and searches the building in front
   permissions policy" (a person's no is "User denied Geolocation"), and the note links to the app
   on its own page (its hf.space address), where it can ask.
 - **Timing and checks**, 2026-11-14, in headless Chromium at an iPhone 13's size with a simulated
-  location, against the live GeoSearch and PLUTO over a made-up records file: tap to lines 1.9 s
-  (Upper West Side, a Brooklyn corner), 3.4 s at Wall st (the four more points). Also checked:
+  location, against the live GeoSearch, footprints and PLUTO over a made-up records file: tap to
+  lines and the full note 1.4-2.2 s (Upper West Side, Lenox av, a Brooklyn corner), 2.4 s at Wall
+  st (the four more points); with PLUTO made always late, the same, its part arriving after.
+  Also checked:
   Queens and Jersey City (the note says the directories cover Manhattan and Brooklyn), a refusal,
   the app in a cross-origin iframe without `allow="geolocation"`, tapping another building and
   another address, and a typed search after a located one. Not yet on a phone or on the Space.

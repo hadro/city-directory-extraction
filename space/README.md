@@ -202,9 +202,11 @@ the finder, asks the browser for its location and searches the building in front
   the Space, and from there to GeoSearch; nothing logs or keeps it.
 - **Inside the Space's page.** A browser lets a page in an iframe ask for the location only when
   the outer page allows it (`allow="geolocation"`), and on huggingface.co the app is in an iframe.
-  Not yet checked there. Where it is refused, Chromium says "disabled in this document by
-  permissions policy" (a person's no is "User denied Geolocation"), and the note links to the app
-  on its own page (its hf.space address), where it can ask.
+  Hugging Face's iframe allows it: its `allow` list holds `geolocation` (2026-11-14, read from a
+  public Space's page; a private Space's page answers an API token 401, it wants a browser login).
+  Where a page refuses it, Chromium says "disabled in this document by permissions policy" (a
+  person's no is "User denied Geolocation"), and the note links to the app on its own page (its
+  hf.space address), where it can ask.
 - **Timing and checks**, 2026-11-14, in headless Chromium at an iPhone 13's size with a simulated
   location, against the live GeoSearch, footprints and PLUTO over a made-up records file: tap to
   lines and the full note 1.4-2.2 s (Upper West Side, Lenox av, a Brooklyn corner), 2.4 s at Wall
@@ -212,7 +214,8 @@ the finder, asks the browser for its location and searches the building in front
   Also checked:
   Queens and Jersey City (the note says the directories cover Manhattan and Brooklyn), a refusal,
   the app in a cross-origin iframe without `allow="geolocation"`, tapping another building and
-  another address, and a typed search after a located one. Not yet on a phone or on the Space.
+  another address, and a typed search after a located one. On the test Space since 2026-11-14
+  (below), built and running; not yet tried there or on a phone.
 - **Not handled.** The finder's address reader takes "Avenue B" as the street "avenue", so
   Manhattan's lettered avenues and Brooklyn's (Avenue J) search badly, typed or located. Renamings
   within the directories' years (Columbus av was 9th av until 1890) are only there when the
@@ -311,9 +314,13 @@ Private, on ZeroGPU, made 2026-11-05 to time the finder (PIPELINE #39). hadro: k
 it may be overwritten later. It sleeps after 48 h without visitors and wakes on the next visit.
 
 **What is on it** (since 2026-11-07; Space history squashed that day, see below):
-- `app.py`, `search.py`, `browse.py` and `where.py` from c52e1fb plus the RECORDS_COPY_TO
-  change (the commit after it). The README header says `app_file: app.py`, `python_version:
-  "3.12"`, `sdk_version: 6.31.0`.
+- Since 2026-11-14 (Space commit dce3f32): `app.py`, `search.py` and `here.py` from c4da8a6, the
+  location search. Before it, checked against the repo: `app.py` and `browse.py` were fc53696's,
+  `search.py` 83c8cce's, `where.py` 3fe99b1's, `find_address.py` 82769e8's, and the last four
+  were unchanged since, so they stayed. Built and running 98 s after the push.
+- Before that, `app.py`, `search.py`, `browse.py` and `where.py` from c52e1fb plus the
+  RECORDS_COPY_TO change (the commit after it). The README header says `app_file: app.py`,
+  `python_version: "3.12"`, `sdk_version: 6.31.0`.
 - `find_address.py` (from `browse/`) and `requirements.txt`.
 - `start.py` and `finder_timing.py`, from the 2026-11-05 timing, kept but not run.
 - The secret `GOOGLE_MAPS_API_KEY`, added by hadro. Adding a secret restarts the Space; no

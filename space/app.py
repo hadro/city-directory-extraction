@@ -573,7 +573,8 @@ def building_choices(near: dict) -> list:
         more = len(b["addresses"]) - 1
         out.append((("here" if b.get("walls") and b["metres"] < 1 else f'{b["metres"]} m')
                     + f' · {b["first"]}' + (f' (+{more} more)' if more else "")
-                    + (f' · built {year}' if year else ""), b["key"]))
+                    + (f' · built {year}' + ("?" if year in here.ESTIMATED else "")
+                       if year else ""), b["key"]))
     return out
 
 
@@ -662,11 +663,21 @@ def here_html(near: dict | None, key: str | None, found: dict | None) -> str:
         facts = "PLUTO lists no building on this lot."
     else:
         lot = lot or {"floors": 0, "landmark": "", "district": ""}
-        bits = [f"Built {year}" if year else "Year built not known",
+        bits = [(f"Built {year}" + (", likely an estimate" if year in here.ESTIMATED else ""))
+                if year else "Year built not known",
                 f'{lot["floors"]} floor{"s" if lot["floors"] != 1 else ""}' if lot["floors"] else "",
                 lot["landmark"].capitalize(), lot["district"]]
         facts = " · ".join(e(x) for x in bits if x) + "."
     out.append(f"<p>{facts}</p>")
+    if year in here.ESTIMATED:                   # says little: no count, no "earlier building"
+        lots, beside = here.ESTIMATED[year]
+        out.append(f'<p class="terms">The city\'s tax-lot data gives {year} to {lots:,} lots in '
+                   f'Manhattan and Brooklyn, against about {beside:,} for each year around it: a '
+                   f'year filled in where the real one isn\'t recorded'
+                   + (', standing for "1899 or earlier"' if year == 1899 else "")
+                   + '. The building may be decades older, so it doesn\'t tell which lines were '
+                     'about it.</p>')
+        return f'<div class="here">{"".join(out)}</div>'
     if year and found and found["address"] in b["addresses"]:
         hits = [h for h in found["hits"] if h["place"] == b["borough"] and h["grade"] != "near"
                 and not (h["flag"] or "").startswith("OTHER STREET")]

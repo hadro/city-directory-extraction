@@ -192,6 +192,17 @@ the finder, asks the browser for its location and searches the building in front
   give a year per building, the same as PLUTO's for all but 2 of ~25 checked (the Stock
   Exchange's two: 1901 in PLUTO, 1904 there); PLUTO's is the one shown. 21% of Brooklyn's lots
   have more than one building (6% of Manhattan's), mostly, it seems, a rear garage or shed.
+- **Years that are estimates.** Many of PLUTO's years are filled in, not known: 1899 holds 16,745
+  of Manhattan's and Brooklyn's lots and 1898 434; 1931 17,996 and 1932 400. Every year with 1,000+
+  lots and over 4 times the years around it is in `here.ESTIMATED`: 1899, 1900, 1901, 1905, then
+  every fifth year to 1970, and 1931. Only 8,103 lots have a year before 1880, so 1899 reads as "1899
+  or earlier". Found at 462 Court st (hadro's photo, 2026-11-14): an older-looking rowhouse of 3
+  floors with stone lintels and a bracketed cornice, "1931" with no alteration on record, like the
+  five lots beside it, while 35 of the block's 60 lots are "1899". Such a year is shown as "Built 1931,
+  likely an estimate" ("built 1931?" in the list), with the counts, and the note neither counts
+  the lines before it nor calls them an earlier building's. The six "1931" lots are the block's
+  row with shops below (tax classes S1, S2); the year may be when the row was re-recorded, but
+  nothing on record says so.
 - **Not waiting on NYC Open Data.** It answers a query it has not seen in ~0.3 s, but about one in
   three took 3-6 s on 2026-11-14 (whatever the form of the query), and one it has seen in ~0.25 s.
   So the footprints get 2.5 s (else the buildings rank by address point) and PLUTO 1.5 s from

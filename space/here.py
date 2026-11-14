@@ -63,6 +63,18 @@ OFFSET = 35            # metres from the point to the four more points asked, wh
 # `lot_bbls`), by then usually answered and cached.
 FOOT_WAIT = 2.5       # seconds from asking, both
 LOTS_WAIT = 1.5
+# Years built that PLUTO fills in where the real one isn't recorded: {year: (Manhattan and
+# Brooklyn lots with it, the median of the three years either side)}, every year with 1,000+
+# lots and over 4 times its neighbours (PLUTO 26v2, 2026-11-14: `$select=yearbuilt, count(*)`
+# `$where=borough in('BK','MN')`, `$group=yearbuilt`). 462 Court st, an older-looking rowhouse
+# with no alteration on record, is "1931", like the five beside it; the side-street houses
+# behind it are "1899". Only 8,103 lots carry a year before 1880, so 1899 reads as "1899 or
+# earlier". The footprints' years are the same as PLUTO's nearly everywhere.
+ESTIMATED = {1899: (16745, 595), 1900: (5922, 512), 1901: (13659, 429), 1905: (5104, 448),
+             1910: (27048, 586), 1915: (6302, 368), 1920: (33195, 472), 1925: (28786, 1356),
+             1930: (29366, 1136), 1931: (17996, 692), 1935: (5926, 239), 1940: (8348, 179),
+             1945: (3777, 68), 1950: (5714, 140), 1955: (5285, 202), 1960: (11053, 274),
+             1965: (4128, 214), 1970: (2513, 164)}
 COVERED = ("Manhattan", "Brooklyn")
 # Words of names given to streets after 1922, which no line prints: Avenue of the Americas (6th
 # av), Malcolm X Blvd (Lenox av; Brooklyn's Reid av), Adam Clayton Powell Jr Blvd (7th av),

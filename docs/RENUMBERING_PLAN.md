@@ -69,6 +69,27 @@ renumbering), and Brooklyn 1856-1908 as PDFs.
   new ones by frontage, and the fit (Phase 3) has to be a rising curve through corners and
   stayers with the new side learnt from the stayers, per street.
 
+### Phase 3: a first fit
+
+- **`addresses/fit.py`** fits **chains**, not offsets: sets of stayer anchors in one order
+  (rising or falling), neighbours no more than 100 apart and plausibly spaced, the heaviest
+  taken out first, then the next. 816 chains over the 605 events (`addresses/tables/chains.csv`,
+  `data/addresses/anchors.parquet`); Brooklyn 1871-75 has 227 on 147 streets.
+- **A street often had more than one run of old numbers**, which is what the multiple chains
+  are. Court St 1871: a main run (216 → 294), a second (old 290-387 → new 222-296, 13 anchors),
+  and the south end (643-651 → 459-467). Myrtle Av: its main run and a second (167-198 →
+  623-682). So an old number can be two houses; a new number has one old number per chain.
+- **What it answers:** 462 Court St was 643-651 before 1871-75 (one chain; the plan's hand
+  reading said 646-654). 676 Myrtle Av was 708-731, or 192 on the second run. 181 Bridge St was
+  153-173.
+- **Held back** (fit on four fifths of a street's anchors, test the rest, ±2): Brooklyn 1871-75
+  places 87% of held-back stayers on a chain and 70% of those land where the chain says; the
+  Bronx 1907-08, 89% and 90%; Manhattan 1865-76, 48% and 53% (eleven years apart: most "stayers"
+  moved). The test anchors include people who moved along the street and misread numbers (15%
+  of pairs change number in an ordinary year on Court St), so 70% is against a ceiling near 85%,
+  not 100%. Not yet done: weighting by how many directories a person is seen in on each side,
+  the guide corners and the 1855 atlas as anchors, grades.
+
 ### What changed from the plan as written
 
 1. **Everything is re-runnable** (hadro, 2026-11-15): volumes will be added to the records over

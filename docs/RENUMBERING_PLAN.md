@@ -49,6 +49,26 @@ renumbering), and Brooklyn 1856-1908 as PDFs.
   Berry 1887 reversed). Renamings are not detected yet.
 - **1.2 the registry** is not built: streets are keyed by `streets.read`'s key as it stands.
 
+### Phase 2: started
+
+- **2C `addresses/guides.py`** rebuilds each guide's rows from the OCR words by column and
+  height and reads them as entries: 5,244 rows on 407 streets (`1869BPL`), 5,458 on 433
+  (`1871BPL`), 5,244 on 392 (`1875BPL`), 5,633 on 417 (`1876BPL`). The guides before the
+  renumbering print a number on only about a fifth of their rows (1,139 and 1,230), the ones after
+  on nearly all. Each number is marked on or off its side's run (rising, one parity): 11-12% are
+  off in 1869/71, 4-5% in 1875/76. Known gaps: an entry whose heading is not read is dropped
+  (about a quarter of the "Left. Rt." headers; Court is missed in `1876BPL`); no agent reading yet.
+- **`addresses/anchors_guides.py`** pairs corners across the two guides: 467 corners with a
+  number in both of 1871 and 1875, on 86 streets. **Against the stayers: of 2,928 stayers lying
+  between two paired corners, 85% have their new number between the same two corners (±8)**, 39
+  of 75 streets at 90% or more. Under G2's 90%, so the sources of the misses come first (Court
+  48%: its "stayers" include people at 166-176 who turn up in the 400s and 500s).
+- **Sides cannot be carried across the renumbering.** On Bridge St the stayers at old even
+  numbers have new odd ones and the other way round, all along the street, while Court keeps its
+  parity. So the mapping is not an offset per side: the old numbers ran house by house and the
+  new ones by frontage, and the fit (Phase 3) has to be a rising curve through corners and
+  stayers with the new side learnt from the stayers, per street.
+
 ### What changed from the plan as written
 
 1. **Everything is re-runnable** (hadro, 2026-11-15): volumes will be added to the records over

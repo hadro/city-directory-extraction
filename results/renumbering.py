@@ -23,8 +23,9 @@ renumbering_manhattan.txt), over the Space's records (15,497,151 lines):
 - Court st, Brooklyn: renumbered between the 1871 and 1875 directories (none for 1872-74 here):
   of 118 names on it in both, 3 kept their number; every other pair of years, 70-98% kept it. Not
   one shift: 216 -> 294 and 224 -> 302 near the north end, 643 -> 459, 645 -> 465, 651 -> 467
-  further south (people followed across it), so today's 462 was in the old 640s. Everyone
-  followed there is on the odd side, so which even number is for a scan or an atlas to say.
+  further south (people followed across it), and 742 -> 550, 744 -> 552 on the even side, so
+  today's 462 was an even number near old 646-654. Everyone followed near it is on the odd side,
+  so which even number is for a scan or an atlas to say.
 - Brooklyn, 1871-1875: 103 streets, the city-wide renumbering local histories date to 1870-71.
   Williamsburg, 1887-1889: Berry, Driggs, Havemeyer and Roebling reversed (in order 0.02-0.06),
   Bedford, Wythe, Keap, Hewes and Clymer renumbered in order. Also 1824-25 (Fulton, Front, Main,

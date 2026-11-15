@@ -1,11 +1,77 @@
 # Plan — addresses across renumberings, and the hand-off to Sanborn maps and Allmaps
 
 **For:** an orchestrating agent session on hadro's computer (where the data is), and hadro.
-**Status:** not started. Written 2026-11-15, at the end of the cloud session that built the location
-search (`space/here.py`) and `results/renumbering.py`.
+**Status:** Phase 0 done and G0 decided (2026-11-15, on hadro's computer); Phase 1 under way. See
+"Where it stands" just below; the rest of the plan is as written at the end of the cloud session
+that built the location search (`space/here.py`) and `results/renumbering.py`, except where that
+section says it changed.
 **Branch:** `claude/tender-planck-rcrih6`. Everything this plan cites is committed there.
 **Read first:** `results/renumbering.py` (its docstring holds the findings), `space/README.md`
 ("Where you're standing"), and "Starting on hadro's computer" at the end of this file.
+
+---
+
+## Where it stands (2026-11-15)
+
+### Phase 0: done
+
+| # | output | what it found |
+|---|---|---|
+| 0.1 | `results/spacetime_inventory.py`, `.json`; the files in `data/spacetime/x_<name>/` | Six datasets, each one's counts equal to its data package's. **Brooklyn's 1855 Perris atlas is there** (Map Warper layer 860): 12,643 buildings, and in `addresses` 6,068 house numbers with street and point on 159 streets. Court St has 128, up to about no. 247. Manhattan: 1857 Perris (35,854 addresses) and 1854 Perris footprints (62,701 addresses). The joined address set is published as `addresses`, not `building-inspector-nyc-streets` (that name is refused). |
+| 0.2 | `docs/STREET_GUIDES.md` | **A guide prints the left and right house number at each cross street**, in walking order. 1869 and 1871 are the same on Court St; 1875 differs at every corner (Joralemon 18/17 → 45/46, Union 265/269 → 343/346, which is the stayers' +78). The 1871 guide says of one street "the new numbers are not ready": the renumbering came after it. `1871BPL` leaf 935, "STREET DIRECTORY CHANGES.", is 31 street **renamings**, no numbers. The 1869/71 guides print dashes south of Carroll St, so old numbers there rest on stayers. OCR: both numbers right on 93% (1869), 95% (1871), 85% (1875) of 81-85 rows. Which side "Left" is: not settled. |
+| 0.3 | `results/renumbering_phase0.py`, `results/printed_pairs.json` | "old No." 3,578 lines (3,565 in `1887BPL`); "formerly" + number 346; every other form under 30. |
+| 0.4 | the same script, `data/addresses/street_strings.parquet` | 71,920 rows (place, decade, street string). |
+| 0.5 | `docs/RENUMBERING_SOURCES.md` | No ordinance text or conversion table found for any event. One primary source: Lain's 1887 preface (the Eastern District streets "were renamed, but not renumbered" yet). Secondary sources date Brooklyn's renumbering 1870 to 1871-72. Not opened by the orchestrator. |
+| 0.6 | `docs/ATLAS_INVENTORY.md`; `results/allmaps_coverage.py`, `.json` | Before 1871: Perris 1855. After: Hopkins 1880 vol. 5 plate O (Court, Lorraine, Columbia, Carroll), Robinson 1886. Map Warper is retired, but **its georeferences are in Allmaps**: asked by IIIF image address (`annotations.allmaps.org/?url=https://iiif.nypl.org/iiif/3/<imageId>`), 298 of the first 302 sheets sampled across atlases answered with a georeference annotation. So 6.2's first step (turning control points into annotations) is already done by others. |
+| 0.7 | `results/city_data_inventory.json`, `data/city/` | Address points (`uf93-f8nk`, 967,871 rows) and street centerline (`inkn-q76z`, 122,312 rows) downloaded. The Property Address Directory was not found. |
+
+Also on hand, on hadro's NAS (`/Volumes/NYPL stuff/CityDirectories`): New York directories 1849-1923
+as PDF and text, **including every year 1866-75** (the gap that hides Manhattan's avenue
+renumbering), and Brooklyn 1856-1908 as PDFs.
+
+### G0
+
+- Brooklyn 1855 atlas in the data: **yes**. Evidence D joins version 1 where the atlas reaches.
+- Guides give a number at each cross street: **yes**. Evidence B is version 1's backbone.
+- The 1871 section a table of renumberings: **no**, renamings. It feeds the street registry.
+
+### Phase 1: so far
+
+- **1.1 `addresses/streets.py`** reads an address into number, street key, district, place.
+  42 test lines pass. Over the records: 95.1% of Brooklyn's address lines that hold a digit are
+  read and 90.6% of Manhattan's (the rest are mostly advertisement text); 69 of 70 random readings
+  right by eye. The plan's 2,000-string Haiku check was not run.
+- **1.3 `addresses/events.py`** finds events for every street and pair of years, judged against
+  the street's own usual rate: 605 events in `addresses/tables/events.csv`, and every followed
+  name in `data/addresses/stayers.parquet`. Brooklyn 1871-75: 147 streets (135 in order, 5
+  reversed, 7 mixed). Williamsburg 1887-89: 14 (4 reversed). The Bronx 1907-08: 82. Manhattan
+  1865-76: 114, weak. Its tests are the cases measured by hand (Court 1871 found, Court 1907 not,
+  Berry 1887 reversed). Renamings are not detected yet.
+- **1.2 the registry** is not built: streets are keyed by `streets.read`'s key as it stands.
+
+### What changed from the plan as written
+
+1. **Everything is re-runnable** (hadro, 2026-11-15): volumes will be added to the records over
+   the coming months. Every step is a script that takes the records file; nothing is edited by
+   hand (a human decision goes in a small overrides file the script reads); anything an agent
+   reads is cached per volume and leaf, so a re-run reads only new leaves; one `build.py` redoes
+   the lot. A new directory year inside 1872-74 would date Brooklyn's renumbering by itself.
+2. **Fewer agents.** The three research notes and the guide reading went to agents; the queries,
+   `streets.py` and `events.py` were written by the orchestrator, which was quicker than a
+   packet and a review. Web research is over; later phases fetch only from named hosts (the
+   Internet Archive, NYC Open Data, Allmaps, NYPL's image server).
+3. **6.2 starts from Allmaps**, not from Map Warper's control points.
+4. It is for **every street**, not Court St: Court is the worked example the numbers were first
+   measured on.
+
+### Next
+
+1. 2C: parse the four guides (`1869BPL`, `1871BPL`, `1875BPL`, `1876BPL`) into rows from the OCR
+   words by position, with the gate; failed streets to an agent with the image, cached.
+2. 2A stayers as anchors (from `stayers.parquet`); 2D the 1855 atlas numbers against today's
+   address points; the Phase 2 report and G2.
+3. 1.2 the registry, starting from the 1871 renamings table and the guides' own street list.
+4. Phase 3, the fit, on Brooklyn 1871-75.
 
 ---
 

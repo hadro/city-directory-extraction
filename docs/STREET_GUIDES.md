@@ -101,12 +101,48 @@ none in the Court or Dean entries on the image. So the 1875 guide does not use "
 
 ### Which side is "Left"?
 
-The note does not say. By its own rule (numbers "commence westward, and northward from the opening of the street",
-odd on the left, even on the right) the numbering starts at the "from" end of the heading. The simplest reading is
-that Left and Right are as you face the other way along the street, but I could not check this offline against a
-map, and the one outside hint I have (the park sits west of Court Street; the guide puts `Pk.` in the Left column
-of a street whose heading runs "S.") would point to Left = west for Court. **Left/Right orientation is unverified**;
-it does not matter for matching one volume to another, because all three use the same convention.
+**Settled (2026-11-15): Left is the walker's left hand, walking in the direction the heading gives** ("S." means
+facing south, so Left is the east side). The note does not say; the 1855 Perris atlas and today's address points do.
+The earlier guess from the park (Left = west for Court) was wrong, and "as you face the other way" is not what the
+guides do. Measured with `addresses/atlas.py` and scratch code that is not kept (the steps below):
+
+1. The heading's compass word ("S.", "S. W.", "E.", the first leg when there are two) gives the walking direction.
+   The street's line near a point is the principal axis of today's address points on that street within 150 m,
+   pointed the way the heading says; a point is on the walker's left when it lies left of that line.
+2. **Before the renumbering, with the atlas** (`1869BPL` and `1871BPL`, which agree cell for cell): a guide number
+   (a cell not marked `*`, on its side's run) is looked up among the 1855 atlas points of that street with exactly that
+   number; with more than one, the one nearest the cross street. 65 numbers in `1869BPL` and 76 in `1871BPL` found a
+   point: **54 of 65 and 66 of 76 are on the side the walker's-left reading says** (Left numbers on the left, Right on
+   the right); over both guides 87 of 97 when the point is 6 m or more off the line. Corners with both numbers found: 9 of 10 and 11 of 13
+   on opposite sides, the way round the reading says, and none the other way round (the others have both points
+   on one side of a line that today's points put badly: Willow at Poplar, Hudson av at Marshall, where today's
+   buildings stand on one side only). Corners used, left/right number at the cross street (street, then
+   direction walked): Henry (S. W.) 97/94 Clark; Clinton (S. W.) 75/74 Livingston; Smith (S. W.) 105/104 Pacific;
+   Hoyt (S. W.) 59/58 Dean; Bond (S.) 47/50 Atlantic av; Willow (S. W.) 81/82 Clark, 47/48 Orange, 65/66
+   Pineapple; Hicks (S. W.) 103/104 Clark, 55/56 Cranberry, 71/72 Orange, 87/88 Pineapple; Orange (E.) 91/90 Henry;
+   Summit (S. E.) 54/59 Hicks; Pierrepont (E.) 33/38 Hicks; Atlantic (S. E.) 381/382 Bond. Court (S.), one number at a
+   corner: Left 113 at Bergen and 199 at Douglass, Right 68 at Schermerhorn, 128 at Pacific, 144 at Amity, 226 at
+   Degraw, all on the sides the reading says. The 11 misses of `1869BPL` are one on each of 11 streets (Duffield, Myrtle av, Nelson,
+   Pacific, Plymouth, Poplar, Sackett, Union, Water, Willow, York), most within 14 m of the line, where the line itself
+   is the doubtful part; no street is wrong throughout.
+3. **After it, with today's points** (`1875BPL` and `1876BPL`, whose numbers are today's on streets not renumbered
+   again): a guide number with an address point of today's with that number within 60 m of the cross street. 454
+   corners with both numbers found, on 133 streets, walked on seven of the eight 45-degree bearings (every one but
+   W.; the bearing is the line's, pointed by the heading): **453 have Left on the walker's
+   left and Right on the right; one has both on one side; none has them the other way round.** The two guides
+   overlap, so this is about 220 corners counted twice at most. Examples, by the heading's word: N., Graham av 1/2
+   at Broadway; N. E., Eldert 113/114 at Evergreen av; E., Beadel 1/2 at Kingsland av; S., Albany av 127/126 at Dean;
+   S. W., Henry 53/52 at Cranberry; N. W., Commerce 1/2 at Columbia.
+4. The atlas alone does not separate the walker's left from a fixed side ("east or north"), because every street it
+   covers (but one, Hanover pl, N. E.) is walked E., S. E., S. or S. W.; the 1875/76 streets walked N., N. E. and
+   N. W. do.
+5. **Odd is on the left** in the printed rule and nearly always: Left numbers are odd in 80% of the 961 usable
+   cells of `1869BPL` (764; the rest are streets numbered the other way round) and 99.97% in `1875BPL`; Right
+   numbers are even in 84% and 100%. The guide's own example ("105 Bridge is on the left-hand ... 129 Bridge is on
+   the left-hand corner of Sands") agrees: both odd.
+
+It did not matter for matching one volume to another, since all volumes use one convention; it matters for putting a
+number on a side of the street on a map, and for the atlas and today's address points as anchors.
 
 ### Numbers at every cross street or only some?
 

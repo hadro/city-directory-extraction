@@ -3,8 +3,13 @@
     uv run --with duckdb==2.0.0 python addresses/fit.py            # every event in events.csv
     python3 addresses/fit.py --self-test
 
-For each event (a street renumbered between two directory years) the anchors are the stayers'
-(old number, new number) pairs from data/addresses/stayers.parquet. A **chain** is a set of
+For each event (a street renumbered between two directory years) an anchor is a person on the
+street at one number in every directory of the YEARS up to the event that lists them there, and
+at one other number in every directory of the YEARS after (data/addresses/people.parquet). Its
+weight is the number of directories that say so, less one, so someone seen once on each side
+weighs 1 and someone seen three times on each weighs 5. An anchor is strong when someone is seen
+twice or more on both sides: those are the ones the held-back check is scored on, since a person
+seen once each side may have moved. A **chain** is a set of
 anchors in one order from end to end (rising, or falling on a street numbered from the other end)
 in which neighbours are plausibly neighbours: the new numbers between two anchors span no more
 than SLOPE times the old ones plus SLACK, and the other way round, and no two neighbours are
@@ -19,10 +24,20 @@ Gowanus have new numbers 437-556 and people at 621-645 have 433-465; Myrtle av h
 answers separately. Why not an offset per side: on Bridge st the old even numbers became odd.
 A chain is only an order, with the new side read off its nearest anchors.
 
+The old odd numbers and the old even ones are fitted apart: the two sides of a street were
+numbered house by house, each at its own pace, so 219 need not lie past 216 (Brooklyn 1871-75,
+strong anchors held back: 83% right fitted together, 87% apart). Across an ordinary gap of three
+years (Brooklyn 1880-83, streets with no event) 9.5% of strong stayers change number anyway, 7.7%
+by more than 2, so about 90% is as high as this check can read.
+
+A street guide's corners (anchors_guides.py: the numbers at a cross street before and after)
+join the anchors where there are any, each old number at a corner with each new one, weight 1,
+for the chain to take the pairing that fits; `corner` marks them in the output.
+
 Anchors off every chain (people who moved along the street, namesakes, misread numbers) are kept,
 with chain -1.
 
-Writes data/addresses/anchors.parquet (place, street, y0, y1, old, new, weight, chain) and
+Writes data/addresses/anchors.parquet (place, street, y0, y1, old, new, weight, chain, corner) and
 addresses/tables/chains.csv (one row per chain: its direction, the old and new numbers it spans,
 its anchors). `across(chain_points, number)` gives the new numbers an old one falls between;
 `back` the other way. Prints the held-back check: fit on four fifths of a street's anchors, and
@@ -30,6 +45,7 @@ see whether each of the rest falls where its chain says (within TOLERANCE).
 """
 import bisect
 import csv
+import json
 import sys
 import zlib
 from pathlib import Path
@@ -40,6 +56,7 @@ MIN_POINTS = 5
 GAP = 100          # neighbours in a chain are no further apart than this, in either numbering
 SPARSE = 20        # a chain averages an anchor at least every so many old numbers
 TOLERANCE = 2
+YEARS = 5
 
 
 def heaviest_chain(points: list) -> tuple:
@@ -99,21 +116,28 @@ def across(chain: list, number: int, col: int = 0) -> tuple | None:
 
 
 def back(chain: list, number: int) -> tuple | None:
-    return across(chain, number, col=1)
+    """The old (low, high) for a new number, from the chain's anchors on the new number's own
+    side (its odd or even): a chain is one old side, but which new side that became is for
+    its anchors to say (Bridge st's old even numbers are new odd ones)."""
+    side = [p for p in chain if p[1] % 2 == number % 2]
+    if 2 * len(side) < len(chain):        # a few strays on the other side: not this chain's side
+        return None
+    return across(side, number, col=1)
 
 
-def held_back(points: list, folds: int = 5) -> tuple:
-    """(asked, placed, right): anchors held back, those a chain fitted on the rest reaches, and
-    those whose new number is where that chain says. An anchor is counted weight times."""
+def held_back(points: list, strong: set, folds: int = 5) -> tuple:
+    """(asked, placed, right): strong anchors held back, those a chain fitted on the rest
+    reaches, and those whose new number is where that chain says."""
     asked = placed = right = 0
     for fold in range(folds):
         test = [p for p in points if zlib.crc32(repr(p[:2]).encode()) % folds == fold]
         fitted, _ = chains([p for p in points if p not in test])
-        for old, new, weight in test:
-            asked += weight
-            spans = [s for _, c in fitted if (s := across(c, old))]
-            placed += weight * bool(spans)
-            right += weight * any(lo - TOLERANCE <= new <= hi + TOLERANCE for lo, hi in spans)
+        for old, new, _ in test:
+            if (old, new) in strong:
+                asked += 1
+                spans = [s for _, c in fitted if (s := across(c, old))]
+                placed += bool(spans)
+                right += any(lo - TOLERANCE <= new <= hi + TOLERANCE for lo, hi in spans)
     return asked, placed, right
 
 
@@ -126,6 +150,7 @@ def self_test():
     assert [len(c) for _, c in found] == [len(main), len(second)] and len(left) == 2
     assert across(found[0][1], 153) == (228, 234) and across(found[0][1], 156) == (234, 234)
     assert back(found[0][1], 230) == (150, 156) and across(found[0][1], 100) is None
+    assert back(found[0][1], 231) is None             # the chain's new numbers are all even
     reverse = [(n, 400 - n, 1) for n in range(10, 120, 8)]
     (sign, chain), = chains(reverse)[0]
     assert sign == -1 and across(chain, 14) == (382, 390)
@@ -136,40 +161,64 @@ def main():
     import duckdb
     events = list(csv.DictReader(open(HERE / "tables/events.csv")))
     con = duckdb.connect()
-    con.execute(f"CREATE VIEW s AS SELECT * FROM '{HERE.parent}/data/addresses/stayers.parquet'")
+    con.execute(f"CREATE TABLE p AS SELECT * FROM '{HERE.parent}/data/addresses/people.parquet'")
+    corners = {}          # guide corners (anchors_guides.py), by (place, street, last old year)
+    for path in sorted((HERE.parent / "data/addresses").glob("corners_*.jsonl")):
+        for line in open(path):
+            c = json.loads(line)
+            corners.setdefault((c["place"], c["street"], c["y0"]), []).append(c)
     anchors, summary, totals = [], [], {}
     for e in events:
         key = (e["place"], e["street"], int(e["last_old_year"]), int(e["first_new_year"]))
-        points = con.execute("""SELECT n0, n1, count(*) FROM s WHERE place = ? AND street = ?
-                                AND y0 = ? AND n0 <> n1 GROUP BY ALL""", list(key[:3])).fetchall()
-        found, left = chains(points)
+        rows = con.execute(f"""
+            WITH mine AS (SELECT * FROM p WHERE place = $1 AND street = $2),
+            pre AS (SELECT name, min(number) AS n0, count(*) AS k0 FROM mine
+                    WHERE year BETWEEN $3 - {YEARS} AND $3 GROUP BY name
+                    HAVING min(number) = max(number)),
+            post AS (SELECT name, min(number) AS n1, count(*) AS k1 FROM mine
+                     WHERE year BETWEEN $4 AND $4 + {YEARS} GROUP BY name
+                     HAVING min(number) = max(number))
+            SELECT n0, n1, sum(k0 + k1 - 1), max((k0 >= 2 AND k1 >= 2)::INT)
+            FROM pre JOIN post USING (name) WHERE n0 <> n1 GROUP BY ALL""", list(key)).fetchall()
+        points = [r[:3] for r in rows]
+        strong = {r[:2] for r in rows if r[3]}
+        have = {p[:2] for p in points}
+        corner = {(o, n) for c in corners.get(key[:3], []) for o in c["old"] for n in c["new"]
+                  if o != n} - have
+        points += [(o, n, 1) for o, n in sorted(corner)]
+        found, left, check = [], [], [0, 0, 0]
+        for odd in (1, 0):                 # the old odd numbers and the old even ones apart
+            side = [p for p in points if p[0] % 2 == odd]
+            f, rest = chains(side)
+            found, left = found + f, left + rest
+            check = [a + b for a, b in zip(check, held_back(side, strong))]
         for k, (sign, chain) in enumerate(found):
-            anchors += [(*key, old, new, w, k) for old, new, w in chain]
+            anchors += [(*key, old, new, w, k, (old, new) in corner) for old, new, w in chain]
             olds, news = [p[0] for p in chain], [p[1] for p in chain]
             summary.append({"place": key[0], "street": key[1], "last_old_year": key[2],
                             "first_new_year": key[3], "chain": k,
-                            "direction": sign, "old_from": min(olds), "old_to": max(olds),
+                            "old_side": "odd" if olds[0] % 2 else "even", "direction": sign, "old_from": min(olds), "old_to": max(olds),
                             "new_from": min(news), "new_to": max(news), "anchors": len(chain),
                             "stayers": sum(p[2] for p in chain)})
-        anchors += [(*key, old, new, w, -1) for old, new, w in left]
+        anchors += [(*key, old, new, w, -1, (old, new) in corner) for old, new, w in left]
         t = totals.setdefault(key[:1] + key[2:], [0] * 7)
         on = sum(p[2] for _, c in found for p in c)
-        for i, v in enumerate((1, len(found), on, *held_back(points), sum(p[2] for p in points))):
+        for i, v in enumerate((1, len(found), on, *check, sum(p[2] for p in points))):
             t[i] += v
     con.execute("""CREATE TABLE a (place VARCHAR, street VARCHAR, y0 INT, y1 INT, old INT,
-                                   new INT, weight INT, chain INT)""")
-    con.executemany("INSERT INTO a VALUES (?, ?, ?, ?, ?, ?, ?, ?)", anchors)
+                                   new INT, weight INT, chain INT, corner BOOLEAN)""")
+    con.executemany("INSERT INTO a VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", anchors)
     con.execute(f"COPY a TO '{HERE.parent}/data/addresses/anchors.parquet' (FORMAT parquet)")
     with open(HERE / "tables/chains.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(summary[0]))
         w.writeheader()
         w.writerows(summary)
     print(f"{len(summary)} chains on {len(events)} events -> addresses/tables/chains.csv")
-    print(" event                 streets chains  stayers on a chain   held back: placed   right of placed")
+    print(" event                 streets chains  weight on a chain    strong held back  placed  right of placed")
     for (place, y0, y1), (n, c, on, asked, placed, right, total) in sorted(totals.items()):
         if n >= 5:
             print(f" {place:<10} {y0}-{y1} {n:>7} {c:>6}  {on:>6} of {total:<6} {on / total:>4.0%}"
-                  f"   {placed / max(1, asked):>6.0%}   {right / max(1, placed):>8.0%}")
+                  f"   {asked:>8}      {placed / max(1, asked):>6.0%}   {right / max(1, placed):>8.0%}")
 
 
 if __name__ == "__main__":

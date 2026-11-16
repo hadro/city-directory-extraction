@@ -9,9 +9,10 @@ A pair of years is an event when at least MIN_BOTH names are followed, at least 
 number, and that is CLEAR above the street's own usual share (its median over its other pairs:
 people moving along a street and misread numbers).
 
-Writes addresses/tables/events.csv (every event, both places) and
-data/addresses/stayers.parquet (every followed name: place, street, y0, y1, name, n0, n1), which
-the anchors are built from. Everything is recomputed from the records file, so a re-run on a
+Writes addresses/tables/events.csv (every event, both places),
+data/addresses/stayers.parquet (every followed name: place, street, y0, y1, name, n0, n1) and
+data/addresses/people.parquet (place, year, name, street, number: a name once on a street in a
+year), which the anchors are built from. Everything is recomputed from the records file, so a re-run on a
 records file with more volumes redoes the lot; a new directory year inside a gap narrows the
 event's dates by itself.
 
@@ -110,6 +111,7 @@ def main(parquet: str):
     load(con, parquet)
     (HERE.parent / "data/addresses").mkdir(parents=True, exist_ok=True)
     con.execute("COPY pairs TO 'data/addresses/stayers.parquet' (FORMAT parquet)")
+    con.execute("COPY a TO 'data/addresses/people.parquet' (FORMAT parquet)")
     found = events(con)
     (HERE / "tables").mkdir(exist_ok=True)
     with open(HERE / "tables/events.csv", "w", newline="") as f:

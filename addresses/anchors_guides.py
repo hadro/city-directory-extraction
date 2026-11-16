@@ -7,7 +7,7 @@ Reads data/addresses/guides/<volume>.jsonl (guides.py) for the two volumes and p
 crossings on the cross street's name (two letters' slack: "sackctt"). A corner keeps both sides'
 numbers together, since sides are not to be trusted across a renumbering: on Bridge st the people
 at old odd numbers have new even ones. Writes data/addresses/corners_<old>_<new>.jsonl: street,
-cross, old (numbers at the corner), new.
+cross, old (numbers at the corner), new, and the event's place and last old year, which fit.py reads them by.
 
 The check, against data/addresses/stayers.parquet (events.py) for the place and the event's last
 old year: a stayer whose old number lies between two paired corners should have a new number
@@ -74,7 +74,7 @@ def check(found: list, place: str, year: int):
 
 if __name__ == "__main__":
     old, new, place, year = sys.argv[1:5]
-    found = corners(load(old), load(new))
+    found = [dict(c, place=place, y0=int(year)) for c in corners(load(old), load(new))]
     with open(REPO / f"data/addresses/corners_{old}_{new}.jsonl", "w") as f:
         f.writelines(json.dumps(c) + "\n" for c in found)
     print(f"{len(found)} corners with a number in both guides, on "

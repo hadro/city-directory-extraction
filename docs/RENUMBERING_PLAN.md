@@ -79,16 +79,29 @@ renumbering), and Brooklyn 1856-1908 as PDFs.
   are. Court St 1871: a main run (216 → 294), a second (old 290-387 → new 222-296, 13 anchors),
   and the south end (643-651 → 459-467). Myrtle Av: its main run and a second (167-198 →
   623-682). So an old number can be two houses; a new number has one old number per chain.
-- **What it answers:** 462 Court St was 643-651 before 1871-75 (one chain; the plan's hand
-  reading said 646-654). 676 Myrtle Av was 708-731, or 192 on the second run. 181 Bridge St was
-  153-173.
-- **Held back** (fit on four fifths of a street's anchors, test the rest, ±2): Brooklyn 1871-75
-  places 87% of held-back stayers on a chain and 70% of those land where the chain says; the
-  Bronx 1907-08, 89% and 90%; Manhattan 1865-76, 48% and 53% (eleven years apart: most "stayers"
-  moved). The test anchors include people who moved along the street and misread numbers (15%
-  of pairs change number in an ordinary year on Court St), so 70% is against a ceiling near 85%,
-  not 100%. Not yet done: weighting by how many directories a person is seen in on each side,
-  the guide corners and the 1855 atlas as anchors, grades.
+- **What it answers:** 462 Court St was 644-696 before 1871-75 (few even-side people were
+  followed there; 465 was 643-651). 294 Court St was 216. 181 Bridge St was 156-170 (old even).
+  677 Myrtle Av was 687-731, or 893-967 on a second run.
+- **Anchors are weighted** by the directories that back them (someone at one number in every
+  directory of the five years before and one number in every directory of the five after), and
+  the **old odd and old even numbers are fitted apart**: each side was numbered house by house
+  at its own pace. A new number is looked up only in chains whose anchors are on its own side.
+  The 1871/1875 guide corners join as anchors (500 pairings on a chain); they add reach, not
+  accuracy.
+- **Held back** (fit on four fifths of a street's anchors, test the strong ones of the rest,
+  people seen twice or more on both sides, ±2): Brooklyn 1871-75, 3,222 strong anchors, 92%
+  reached by a chain and **86% of those where the chain says**; the Bronx 1907-08, 2,592, 83%
+  and 93%. Manhattan 1865-76 has no strong anchors (no directory in between). **The ceiling is
+  about 90%**: across an ordinary three-year gap (Brooklyn 1880-83, streets with no event) 9.5%
+  of strong stayers change number anyway, 7.7% by more than 2.
+- **One command**: `addresses/build.py <records.parquet>` runs events, guides, corners and fit
+  (a minute). `addresses/tables/guide_pairs.csv` names the guide before and after an event; add
+  a row when a volume with a guide comes in.
+- Allmaps, finished: of 6,031 Map Warper sheets in 148 atlases (1850-1925, New York City), 740
+  were asked and **734 are in Allmaps**, 642 with the same number of control points
+  (`results/allmaps_coverage.json`).
+- Not yet done: grades on an answer; the 1855 atlas as anchors; the registry; renamings; the
+  guide entries the parser drops.
 
 ### What changed from the plan as written
 

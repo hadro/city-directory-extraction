@@ -156,6 +156,36 @@ The figures above this section are the earlier ones; these replace them where th
   crosswalk's and move when a rebuild moves an anchor. 181 Bridge st now gives old 158 (grade
   A), not the 156-170 above.
 
+### 2026-11-16, later: the registry in use, `chain.py`, the finder faster
+
+- **The registry's renamings and overrides are used by the events** (f6a6974; not its spelling
+  merges). `events.py` is two steps, `events.py people <records>` and `events.py`, with
+  `registry.py` between: the build is still one command and gives the same files run twice.
+  `street` in the stayers, events, anchors, chains and crosswalk is now the registry's id;
+  `street0`/`street1` (stayers) and `old_street` (anchors, chains, crosswalk) are the keys as
+  printed. A chain is of one printed old key, so East and West Baltic (each numbered from 1)
+  are never pooled.
+- **Brooklyn 1871-75 now: 149 streets, 432 chains, 3,450 strong anchors held back, 91% placed,
+  85% right** (was 147, 407, 3,222, 93%, 86%). The 228 new strong anchors are on streets that
+  had no answer before and are placed 63% of the time: Fulton av's old numbers run to 2,586
+  and 244 of its 263 anchors are on no chain (one odd chain, 1173-1363 -> 985-1129, no even
+  one); Atlantic av is 55% right of placed. Baltic: E five chains, W two, W falling (one street
+  numbered from the west, Court near 255-270). Warren: W's four chains RISE, which does not
+  fit "each half numbered from Court" in the override's note: the 1869 guide page was not
+  checked.
+- **`chain.py` (item 5).** An address in any era as its form in every other, the worst grade
+  kept; `tables/eras.csv`, 1,659 eras on 1,053 streets. 400 Pacific (1875 on) was 366 in
+  1859-71 and 368-384 before 1859. **Is the last directory's numbering today's?** Only the
+  1855 atlas can say, and it covers 159 streets: yes on 40 Brooklyn streets (7% of the last
+  directories' addresses; Court 88%, Henry 95%, Hicks 97%), no on 19 (Union, Carlton av,
+  Adelphi, Degraw, Bridge, Duffield and others: renumbered after 1912, or an event the
+  directories missed), **unchecked on 683 (90% of addresses)**. "The number exists today" was
+  tried and does not tell the two apart.
+- **The finder's speed** (7843642). A bracket's old numbers are searched together
+  (`find_numbers`): 465 Court st two eras 2.33 -> 1.06 s; 43 Atlantic av 5.81 -> 4.01 s, still
+  over 2 s (grading in `browse/find_address.py`). A bare street name means the st (Brooklyn
+  prints an avenue's type 95-99% of the time), so "155 Franklin" gets no old numbers.
+
 ### Picking it up in a new session
 
 Everything is committed on `claude/tender-planck-rcrih6`. **Not pushed**: hadro pushes later.
@@ -184,18 +214,21 @@ Everything is committed on `claude/tender-planck-rcrih6`. **Not pushed**: hadro 
 - hadro's NAS, `/Volumes/NYPL stuff/CityDirectories` (when mounted).
 
 **Next, in order**
-1. In progress 2026-11-16, uncommitted if the session died (see `git status`): the registry's
-   renamings and overrides used by `events.py`; `chain.py` (Phase 4: eras composed to today, is
-   the last directory's numbering today's?); the finder's speed on a bracket (0.5 s an old
-   number: 465 Court st 2.9 s) and a bare "155 Franklin" taken for Franklin av.
+1. In progress 2026-11-16, uncommitted if the session died (see `git status`): the finder
+   using the crosswalk's `old_street` (the old group searched and titled under the street the
+   old numbers were printed on; a typed "Elliott pl" reaching the id "s elliott pl").
 2. hadro tries the finder locally on a renumbered street (G5), then it goes to the test Space.
 3. `1869BPL` and `1876BPL` off-run numbers re-read (`guides.py --to-read`); the non-guide pages
    filtered out; the doubtful snaps and spelling merges looked at.
 4. Why half the post-1875 addresses are grade C; Union, Duffield, Adelphi, Lawrence against
    the atlas.
-5. The finder for the other events (Williamsburg 1887-89, the Bronx 1907-08), once Brooklyn
+5. Fulton av's old numbers (thin, to 2,586: the greedy fit drops a chain that takes good
+   anchors with it); West Warren's rising chains against the 1869 guide; today's numbering
+   outside the atlas's 159 streets (needs another source: a later atlas, or the city's
+   address points with a year).
+6. The finder for the other events (Williamsburg 1887-89, the Bronx 1907-08), once Brooklyn
    1871-75 is tried.
-6. Manhattan 1865-76 needs the 1866-75 volumes (hadro's NAS has PDFs and 2016 text; running
+7. Manhattan 1865-76 needs the 1866-75 volumes (hadro's NAS has PDFs and 2016 text; running
    them through the pipeline is outside this plan).
 
 **Traps met**

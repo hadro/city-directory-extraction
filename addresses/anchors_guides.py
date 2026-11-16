@@ -10,8 +10,9 @@ at old odd numbers have new even ones. Writes data/addresses/corners_<old>_<new>
 cross, old (numbers at the corner), new, and the event's place and last old year, which fit.py reads them by.
 
 The check, against data/addresses/stayers.parquet (events.py) for the place and the event's last
-old year: a stayer whose old number lies between two paired corners should have a new number
-between the same two corners (TOLERANCE either way). Prints the share that do, and the streets
+old year (a stayer by the key printed in that year, street0; `street` is the registry's id): a
+stayer whose old number lies between two paired corners should have a new number between the same
+two corners (TOLERANCE either way). Prints the share that do, and the streets
 where fewest do. Stayers who moved along the street, namesakes and misread numbers count against.
 """
 import collections
@@ -54,7 +55,7 @@ def check(found: list, place: str, year: int):
     by = collections.defaultdict(list)
     for c in found:
         by[c["street"]].append(c)
-    stayers = duckdb.sql(f"""SELECT street, n0, n1 FROM '{REPO}/data/addresses/stayers.parquet'
+    stayers = duckdb.sql(f"""SELECT street0, n0, n1 FROM '{REPO}/data/addresses/stayers.parquet'
                              WHERE place = '{place}' AND y0 = {year} AND n0 <> n1""").fetchall()
     asked, agreed = collections.Counter(), collections.Counter()
     for street, n0, n1 in stayers:

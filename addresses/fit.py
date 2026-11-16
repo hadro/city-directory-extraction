@@ -37,9 +37,15 @@ for the chain to take the pairing that fits; `corner` marks them in the output.
 Anchors off every chain (people who moved along the street, namesakes, misread numbers) are kept,
 with chain -1.
 
-Writes data/addresses/anchors.parquet (place, street, y0, y1, old, new, weight, chain, corner) and
-addresses/tables/chains.csv (one row per chain: its direction, the old and new numbers it spans,
-its anchors). `across(chain_points, number)` gives the new numbers an old one falls between;
+The events are of a street id (registry.py: renamings and overrides, not spellings), and the
+people on it are those of all the keys that id has in the event's new year. A chain is of one
+old key, `old_street`, the key the old numbers were printed under: old "Fulton av" numbers and old
+"Fulton" ones are two runs, and so are the halves of Baltic and Warren (East and West, each from 1
+at Court st until 1871, one street from 1875). Where an id has one key, all this changes nothing.
+
+Writes data/addresses/anchors.parquet (place, street, y0, y1, old, new, weight, chain, corner,
+old_street) and addresses/tables/chains.csv (one row per chain: its direction, the old and new
+numbers it spans, its anchors, old_street). `across(chain_points, number)` gives the new numbers an old one falls between;
 `back` the other way. Prints the held-back check: fit on four fifths of a street's anchors, and
 see whether each of the rest falls where its chain says (within TOLERANCE).
 """
@@ -185,55 +191,64 @@ def self_test():
 
 def main():
     import duckdb
+    import registry
     events = list(csv.DictReader(open(HERE / "tables/events.csv")))
-    con = duckdb.connect()
+    con = duckdb.connect(config={"memory_limit": "2GB", "threads": 2})
     con.execute(f"CREATE TABLE p AS SELECT * FROM '{HERE.parent}/data/addresses/people.parquet'")
-    corners = {}          # guide corners (anchors_guides.py), by (place, street, last old year)
+    corners = {}          # guide corners (anchors_guides.py), by (place, last old year)
     for path in sorted((HERE.parent / "data/addresses").glob("corners_*.jsonl")):
         for line in open(path):
             c = json.loads(line)
-            corners.setdefault((c["place"], c["street"], c["y0"]), []).append(c)
+            corners.setdefault((c["place"], c["y0"]), []).append(c)
     anchors, summary, totals = [], [], {}
     for e in events:
         key = (e["place"], e["street"], int(e["last_old_year"]), int(e["first_new_year"]))
+        ids = registry.keys(key[0], key[1], key[3])      # the street's printed keys (renamings, overrides)
         rows = con.execute(f"""
-            WITH mine AS (SELECT * FROM p WHERE place = $1 AND street = $2),
-            pre AS (SELECT name, min(number) AS n0, count(*) AS k0 FROM mine
-                    WHERE year BETWEEN $3 - {YEARS} AND $3 GROUP BY name
+            WITH mine AS (SELECT * FROM p WHERE place = $1 AND list_contains($2, street)),
+            pre AS (SELECT name, street AS old_street, min(number) AS n0, count(*) AS k0 FROM mine
+                    WHERE year BETWEEN $3 - {YEARS} AND $3 GROUP BY name, street
                     HAVING min(number) = max(number)),
             post AS (SELECT name, min(number) AS n1, count(*) AS k1 FROM mine
                      WHERE year BETWEEN $4 AND $4 + {YEARS} GROUP BY name
                      HAVING min(number) = max(number))
-            SELECT n0, n1, sum(k0 + k1 - 1), max((k0 >= 2 AND k1 >= 2)::INT)
-            FROM pre JOIN post USING (name) WHERE n0 <> n1 GROUP BY ALL""", list(key)).fetchall()
-        points = [r[:3] for r in rows]
-        strong = {r[:2] for r in rows if r[3]}
-        have = {p[:2] for p in points}
-        corner = {(o, n) for c in corners.get(key[:3], []) for o in c["old"] for n in c["new"]
-                  if o != n} - have
-        points += [(o, n, 1) for o, n in sorted(corner)]
-        found, left, check = [], [], [0, 0, 0]
-        for odd in (1, 0):                 # the old odd numbers and the old even ones apart
-            side = [p for p in points if p[0] % 2 == odd]
-            f, rest = chains(side)
-            found, left = found + f, left + rest
-            check = [a + b for a, b in zip(check, held_back(side, strong))]
-        for k, (sign, chain) in enumerate(found):
-            anchors += [(*key, old, new, w, k, (old, new) in corner) for old, new, w in chain]
+            SELECT n0, n1, sum(k0 + k1 - 1), max((k0 >= 2 AND k1 >= 2)::INT), old_street
+            FROM pre JOIN post USING (name) WHERE n0 <> n1 GROUP BY ALL""", [key[0], ids, *key[2:]]).fetchall()
+        cs = [c for c in corners.get((key[0], key[2]), []) if c["street"] in ids]
+        found, left, corner, check, total = [], [], set(), [0, 0, 0], 0
+        # each printed key's numbers are fitted apart (East and West Baltic were two runs from 1
+        # at Court st until 1871), and on it the old odd numbers and the old even ones apart
+        for old in sorted({r[4] for r in rows} | {c["street"] for c in cs}):
+            mine = [r for r in rows if r[4] == old]
+            near = {(o, n) for c in cs if c["street"] == old for o in c["old"] for n in c["new"]
+                    if o != n} - {r[:2] for r in mine}
+            corner |= {(old, o, n) for o, n in near}
+            points = [r[:3] for r in mine] + [(o, n, 1) for o, n in sorted(near)]
+            strong = {r[:2] for r in mine if r[3]}
+            total += sum(p[2] for p in points)
+            for odd in (1, 0):
+                side = [p for p in points if p[0] % 2 == odd]
+                f, rest = chains(side)
+                found, left = found + [(s, c, old) for s, c in f], left + [(p, old) for p in rest]
+                check = [a + b for a, b in zip(check, held_back(side, strong))]
+        for k, (sign, chain, old_street) in enumerate(found):
+            anchors += [(*key, old, new, w, k, (old_street, old, new) in corner, old_street)
+                        for old, new, w in chain]
             olds, news = [p[0] for p in chain], [p[1] for p in chain]
             summary.append({"place": key[0], "street": key[1], "last_old_year": key[2],
                             "first_new_year": key[3], "chain": k,
                             "old_side": "odd" if olds[0] % 2 else "even", "direction": sign, "old_from": min(olds), "old_to": max(olds),
                             "new_from": min(news), "new_to": max(news), "anchors": len(chain),
-                            "stayers": sum(p[2] for p in chain)})
-        anchors += [(*key, old, new, w, -1, (old, new) in corner) for old, new, w in left]
+                            "stayers": sum(p[2] for p in chain), "old_street": old_street})
+        anchors += [(*key, old, new, w, -1, (old_street, old, new) in corner, old_street)
+                    for (old, new, w), old_street in left]
         t = totals.setdefault(key[:1] + key[2:], [0] * 7)
-        on = sum(p[2] for _, c in found for p in c)
-        for i, v in enumerate((1, len(found), on, *check, sum(p[2] for p in points))):
+        on = sum(p[2] for _, c, _ in found for p in c)
+        for i, v in enumerate((1, len(found), on, *check, total)):
             t[i] += v
     con.execute("""CREATE TABLE a (place VARCHAR, street VARCHAR, y0 INT, y1 INT, old INT,
-                                   new INT, weight INT, chain INT, corner BOOLEAN)""")
-    con.executemany("INSERT INTO a VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", anchors)
+                                   new INT, weight INT, chain INT, corner BOOLEAN, old_street VARCHAR)""")
+    con.executemany("INSERT INTO a VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", anchors)
     con.execute(f"COPY a TO '{HERE.parent}/data/addresses/anchors.parquet' (FORMAT parquet)")
     with open(HERE / "tables/chains.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(summary[0]))

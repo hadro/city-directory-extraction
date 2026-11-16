@@ -232,10 +232,10 @@ def carry(chains: dict, number: float) -> list:
 
 def check_c(con, near: dict) -> None:
     once, between = events_by_street()
-    rows = con.execute(f"SELECT street, chain, old, new, weight FROM '{ANCHORS}' WHERE place = 'Brooklyn' "
+    rows = con.execute(f"SELECT old_street, chain, old, new, weight FROM '{ANCHORS}' WHERE place = 'Brooklyn' "
                        f"AND y0 = 1871 AND y1 = 1875 AND chain >= 0").fetchall()
     by = defaultdict(lambda: defaultdict(list))
-    for s, c, o, nw, w in rows:
+    for s, c, o, nw, w in rows:      # by the key the old numbers were printed under, as the atlas's are
         by[s][c].append((o, nw, w))
     print("\ncheck c: the 1855 number carried across the 1871-75 chains against today's number")
     print(f"streets with a 1871-75 event and none later: {len(once)}; of those with an event between "

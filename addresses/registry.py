@@ -5,8 +5,10 @@
 
 `canon(place, key, year)` -> the street's id, a street key (the preferred one, so an unknown key
 is its own id). streets.read keys a street as printed, so one street under two spellings, or two
-names, is two streets, and everyone who lived on it across the change is lost. The ids merge
-keys, from the most to the least trusted evidence (each row of tables/streets.csv says which):
+names, is two streets, and everyone who lived on it across the change is lost. events.py and
+fit.py use the renaming and override ids (USED), not the spelling ones; `keys` gives the printed
+keys of one id, in a year. The ids merge keys, from the most to the least trusted evidence (each
+row of tables/streets.csv says which):
 
   override   tables/street_overrides.csv, a human decision with its `why`, read by this script:
              what the data cannot decide (the East and West halves of Baltic and Warren became
@@ -32,8 +34,9 @@ ask for the OLD key's id in the NEW year: canon(place, key0, year1) == canon(pla
 
 Writes tables/streets.csv: street_id, place, key, first_seen and last_seen (years in the records),
 since, name (as the guides print it), why (itself, spelling, renaming, override). Keys seen fewer
-than MIN_LISTED times and in no merge are not listed: canon gives them back as they are. Then
-prints what using the registry would change (the measures asked for in the plan's step 1.2).
+than MIN_LISTED times and in no merge are not listed: canon gives them back as they are. It reads
+data/addresses/people.parquet (events.py people), and nothing events.py writes after it. Then
+prints each renaming against the records.
 """
 import csv
 import json
@@ -47,6 +50,8 @@ import streets  # noqa: E402
 REPO = Path(__file__).resolve().parent.parent
 TABLES = Path(__file__).resolve().parent / "tables"
 PEOPLE = REPO / "data/addresses/people.parquet"
+USED = ("renaming", "override")   # the merges events.py and fit.py follow people across; spelling
+                                  # merges are not used: some are wrong (walter -> water, dev -> dey)
 MIN_LISTED = 20     # records; a key seen less, and in no merge, is not a row
 SHARE = 0.25        # of a rare spelling's records found on the commoner key in another year
 RETIRED = 0.2       # an old name's records per directory after the change, of before it
@@ -68,6 +73,13 @@ def lookup(place: str, k: str, year: int, kinds=None) -> str:
             _table.setdefault((r["place"], r["key"]), []).append((int(r["since"] or 0), r["street_id"], r["why"]))
     ok = [(s, i) for s, i, w in _table.get((place, k), []) if s <= year and (kinds is None or w in kinds or w == "itself")]
     return max(ok)[1] if ok else k
+
+
+def keys(place: str, street_id: str, year: int) -> list:
+    """The printed keys that are street `street_id` in `year`, by the merges in USED."""
+    own = lookup(place, street_id, year, USED) == street_id      # loads the table
+    here = {k for p, k in _table if p == place and lookup(p, k, year, USED) == street_id}
+    return sorted(here | ({street_id} if own else set()))
 
 
 def canon(place: str, k: str, year: int) -> str:
@@ -198,8 +210,7 @@ def build(con) -> tuple:
 
 
 def measure(con, found):
-    """What using the registry would change: the renamings against the records, Brooklyn 1871-75's
-    stayers, the events that are one street under two keys."""
+    """The renamings against the records."""
     _table.clear()
     print("\n(a) renamings (1871 table, then the guides' '(late X)'): the old key's records a directory before and "
           "from four years after, the new key's after; followed = names once on the old key in one directory and "
@@ -220,37 +231,10 @@ def measure(con, found):
               f"followed {n:>3}, same {same:>3}   {r['use']} {flag}")
     print(f"  {total[0]} followed in all, {total[1]} at the same number")
 
-    print("\n(b) Brooklyn 1871 -> 1875: stayers (a name once on one street in each year, the same street), and the events")
-    a, b = 1871, 1875
-    keys = [s for s, in con.execute("SELECT DISTINCT street FROM p WHERE place = 'Brooklyn' AND year IN (?, ?)", [a, b]).fetchall()]
-    evs = [e for e in csv.DictReader(open(TABLES / "events.csv")) if e["place"] == "Brooklyn" and int(e["last_old_year"]) == a]
-    q = f"""SELECT k, count(*) FROM (SELECT a.name, {{s}} AS k FROM p a {{j}} WHERE a.place = 'Brooklyn' AND a.year = {a}
-             GROUP BY ALL HAVING count(*) = 1) x JOIN (SELECT a.name, {{s}} AS k FROM p a {{j}}
-             WHERE a.place = 'Brooklyn' AND a.year = {b} GROUP BY ALL HAVING count(*) = 1) y USING (name, k) GROUP BY 1"""
-    now = dict(con.execute(q.format(s="a.street", j="")).fetchall())
-    print(f"  now: {sum(now.values())} stayers on {len(now)} streets; the {len(evs)} events have {sum(int(e['stayers']) for e in evs)}")
-    for kinds in (("spelling",), ("renaming",), ("override",), None):
-        con.execute("DROP TABLE IF EXISTS m")
-        con.execute("CREATE TABLE m (street VARCHAR, id VARCHAR)")
-        con.executemany("INSERT INTO m VALUES (?, ?)", [(s, lookup("Brooklyn", s, b, kinds)) for s in keys])
-        new = dict(con.execute(q.format(s="m.id", j="JOIN m ON m.street = a.street")).fetchall())
-        gain = {e["street"]: new.get(lookup("Brooklyn", e["street"], b, kinds), 0) - int(e["stayers"]) for e in evs}
-        print(f"  {'+'.join(kinds) if kinds else 'all merges':<10}: {sum(new.values()) - sum(now.values()):+d} stayers over Brooklyn, "
-              f"{sum(g for g in gain.values() if g > 0):+d} in {sum(g > 0 for g in gain.values())} events: "
-              + ", ".join(f"{s} {g:+d}" for s, g in sorted(gain.items(), key=lambda x: -x[1])[:8] if g > 0))
-    for label, year in (("as of each event's new year", None), ("the key's last id, whatever the year", 9999)):
-        groups = {}
-        for e in csv.DictReader(open(TABLES / "events.csv")):
-            groups.setdefault((e["place"], e["last_old_year"], e["first_new_year"],
-                               canon(e["place"], e["street"], year or int(e["first_new_year"]))), []).append(e["street"])
-        two = {g: s for g, s in groups.items() if len(s) > 1}
-        print(f"  events.csv {label}: {sum(len(s) for s in two.values())} events are {len(two)} streets under two keys: "
-              + "; ".join(f"{g[0]} {g[1]}-{g[2]} {s}" for g, s in two.items()))
-
 
 def main():
     import duckdb
-    con = duckdb.connect()
+    con = duckdb.connect(config={"memory_limit": "2GB", "threads": 2})
     con.execute(f"CREATE VIEW p AS SELECT * FROM read_parquet('{PEOPLE}')")
     con.execute("CREATE TABLE c AS SELECT place, street, year, count(*) AS n FROM p GROUP BY ALL")
     con.execute("CREATE TABLE k AS SELECT place, street AS key, sum(n) AS n, min(year) AS y0, max(year) AS y1 FROM c GROUP BY ALL")
@@ -268,6 +252,8 @@ def main():
 
 
 def self_test():
+    assert keys("Brooklyn", "fulton", 1875) == ["fulton", "fulton av"] and keys("Brooklyn", "fulton", 1871) == ["fulton"]
+    assert keys("Brooklyn", "baltic", 1875) == ["baltic", "e baltic", "w baltic"]
     assert canon("Brooklyn", "marshall", 1869) == canon("Brooklyn", "seigel", 1880) == "seigel"   # a renaming
     assert canon("Brooklyn", "stanton", 1860) == "stanton" and canon("Brooklyn", "stanton", 1871) == "duffield"
     assert canon("Brooklyn", "siegel", 1880) == "seigel"                                           # a spelling

@@ -254,6 +254,22 @@ numbers, only a note that the mapping does not reach). Brooklyn 1871-75 only.
   Without it the finder is as it was. A Space takes `eras.py`, `crosswalk.csv` and `addresses/fit.py`
   (stdlib only, imported by `eras.py` as `search.py` imports `find_address.py`); `RECORDS_COPY_TO`
   copies the CSV with the records.
+- **Renamed and merged streets (2026-11-16).** `crosswalk.csv`'s `street` is the registry's id
+  (addresses/registry.py), not always a key as printed; its last two columns say the rest. `old_street`
+  is the key a chain's old numbers were printed under: a group is titled with it and searched on it
+  ("As 1173 Fulton av, before 1871-75" for a Fulton st address; Atlantic av's old numbers are on
+  "Atlantic" and on "Atlantic av", two searches; one Baltic or Warren number was two houses, so one
+  group per half, "As 13 E Baltic st" and "As 13 W Baltic st"). `keys` is the id's other printed keys
+  (`registry.keys` in the later year, USED merges): a typed "Elliott pl" or "Atlantic" reaches "s
+  elliott pl" or "atlantic av" through it, and a typed "E Baltic st, before 1871-75" range (a bracket
+  link's form) through "e baltic". Nothing from addresses/ is read at run time. A file without the
+  columns reads as before. A typed "13 E Baltic st" is the old form of a half, not a new number: no
+  groups, as before. In the "1875 on" group a Brooklyn line printed "E. Baltic" or "W. Baltic" (or "S.
+  Elliott pl" for a typed "Elliott pl") is not flagged another street: after 1875 it is the same
+  number on the one run (Hirsh 303 E. Baltic 1875, 303 Baltic 1876-78; Schilling 247 Baltic 1878-83,
+  247 W. Baltic 1880; Burke 154 W. Baltic = 154 Baltic 1884; about 35 lines of E./W. 1875-89 against
+  ~700 plain a directory). Fulton av and the other type renamings are left alone: not measured
+  ("985 Fulton" after 1875 is printed bare, never "985 Fulton av", but that is one number).
 - **Which forms.** `eras.forms`: per chain of the street, `fit.graded(chain, number, 1)`. A or B gives
   a bracket of old numbers, searched on the old side the chain is for, at most 5
   either side of its middle; a bracket wider than `WIDE` (20) is a note with a link, which types
@@ -285,7 +301,9 @@ numbers, only a note that the mapping does not reach). Brooklyn 1871-75 only.
 - **Downloads.** The matches CSV gains `searched_as`, `era`, `crosswalk_grade` when there are groups.
 - **Checks.** `eras.py` (asserts), `addresses/fit.py --self-test`, and `check_eras.py` against a
   server of your own (465/462/294 Court st, 181 Bridge st, 677 Myrtle av, 43 Atlantic av, 155
-  Franklin (no groups: a st), the range link; 62 Euclid av and 1 Wall st print what the page printed before, apart from the
+  Franklin (no groups: a st), the range link, and the renamed streets: 11 and 985 Fulton st, 13
+  Atlantic av, 146 and 271 Baltic st, 49 Elliott pl and 49 S Elliott pl, each with a person's line
+  before and after in the open; 62 Euclid av and 1 Wall st print what the page printed before, apart from the
   order of equally common spellings).
 
 ## The Browse tab

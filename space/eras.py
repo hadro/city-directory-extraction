@@ -11,7 +11,16 @@ number in the years after the change, and each run of old numbers in the years b
 is a bracket from fit.graded (new to old): its numbers searched together (search.find_numbers) on
 the old side the chain is for, unless it is wider than WIDE, when it is a note and a link that runs
 the search on the range.
-Without the file the finder works as it did: `load` gives {} and `forms` None.
+Without the file the finder works as it did: `load` gives {} and `forms` None; a file from before
+its `old_street` and `keys` columns reads as old numbers under the street's own key and no other
+keys.
+
+The crosswalk's street is the registry's id (addresses/registry.py), which is not always a key as
+printed. A chain's old numbers were printed under `old_street` ("fulton av" for some of Fulton's,
+"e baltic" and "w baltic" for the two halves of Baltic, each numbered from 1 at Court st until 1875):
+that is what its group is titled with and searched under. `keys` are the other printed keys of
+the id, so a typed "Elliott pl" reaches "s elliott pl" and a line printed "E. Baltic" in 1875-89 is
+the new number's, not another street's (measured: Hirsh 303 E. Baltic 1875 is 303 Baltic 1876-78).
 
 fit.py is imported, not copied: it holds across/back/graded and needs only the standard library,
 so a Space takes it beside this file as it takes find_address.py. A typed range, "644-696 Court
@@ -23,6 +32,7 @@ from __future__ import annotations
 import csv
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 try:
@@ -42,6 +52,7 @@ SPELLED = {"first": "1", "second": "2", "third": "3", "fourth": "4", "fifth": "5
            "twelfth": "12", "thirteenth": "13", "bway": "broadway"}     # fa.parse reads b'way as bway
 # streets.py's: "56 Bedford av, E. D."
 DISTRICT = re.compile(r"[, ]+([ew])\.? ?d\.?$", re.I)
+KINDS = {"av", "pl", "rd", "ct", "sq", "te", "al", "la", "dr", "bl", "ro", "co"}   # registry.KIND
 RANGE = re.compile(r"(\d+)-(\d+)\s+(.+?)(?:,?\s+before\s+(\d{4})(?:-\d+)?)?")
 NOTE = ("{street} was renumbered between the {y0} and {y1} directories, and this number is past "
         "what the mapping reaches (or on a side it has no answer for): a line from before {y1} "
@@ -49,17 +60,19 @@ NOTE = ("{street} was renumbered between the {y0} and {y1} directories, and this
 
 
 def load(path) -> dict:
-    """{(place, street): (y0, y1, [chain, ...])}, a chain [(old, new, corner), ...]; {} if the
-    file is not there."""
+    """{(place, street): (y0, y1, [chain, ...], [old_street, ...], [other key, ...])}, a chain
+    [(old, new, corner), ...] and its old_street; {} if the file is not there."""
     if not Path(path).exists():
         return {}
-    events, chains = {}, {}
+    events, chains, olds, keys = {}, {}, {}, {}
     for r in csv.DictReader(open(path)):
         key = (r["place"], r["street"])
         events[key] = (int(r["y0"]), int(r["y1"]))
         chains.setdefault(key, {}).setdefault(int(r["chain"]), []).append(
             (int(r["old"]), int(r["new"]), r["corner"] == "true"))
-    return {k: (*events[k], list(chains[k].values())) for k in events}
+        olds.setdefault(key, {})[int(r["chain"])] = r.get("old_street") or r["street"]
+        keys[key] = (r.get("keys") or "").split(";") if r.get("keys") else []
+    return {k: (*events[k], list(chains[k].values()), list(olds[k].values()), keys[k]) for k in events}
 
 
 def split_district(address: str) -> tuple:
@@ -86,7 +99,17 @@ def street_of(cw: dict, place: str, words: list, kind: str, district: str = "") 
     type (Myrtle av 95%, Bedford av 96%; the rest is mostly another street, Union st, Columbia st),
     so '155 Franklin' is not Franklin av's."""
     key = street_key(words, kind, district)
-    return key if (place, key) in cw else None
+    # else the id this printed key is another name of (Elliott pl: s elliott pl)
+    return key if (place, key) in cw else next((s for (p, s), v in cw.items()
+                                                if p == place and key in v[4]), None)
+
+
+def printed(key: str) -> str:
+    """The street as a person types it, from a key: 'e baltic' -> 'E Baltic st', 'fulton av' ->
+    'Fulton av' (a key leaves the st off)."""
+    words = key.split()
+    kind = words.pop() if len(words) > 1 and words[-1] in KINDS else "st"
+    return " ".join([w.capitalize() for w in words] + [kind])
 
 
 def rests_on(chain: list, number: int, grade: str) -> str:
@@ -123,14 +146,16 @@ def forms(cw: dict, address: str, place: str = "Brooklyn") -> dict | None:
     search; none for a bracket wider than WIDE, which has its `span` and a `link`, the range as a
     typed address), years (low, high), only (old numbers are Brooklyn's lines only; the new
     number keeps every other place's lines of any year), era, grade and rests (what it stands
-    on). The new number is the first form: searched as typed."""
+    on). The new number is the first form: searched as typed; its `same` is the directions its lines may lead the
+    street with and still be the street ("E", "W" for Baltic). An old form's street is the key
+    its chain's old numbers were printed under (`old_street`), as a person types it."""
     address, district = split_district(address)
     if (m := RANGE.fullmatch(address)):
         lo, hi, rest = int(m[1]), int(m[2]), m[3]
         street = street_of(cw, place, *fa.parse(f"1 {rest}")[1:], district)
         if not street or not lo < hi or (hi - lo) // 2 + 1 > RANGE_MAX:
             return None
-        y0, y1, _ = cw[(place, street)]
+        y0, y1 = cw[(place, street)][:2]
         when = f"{y0}-{str(y1)[2:]}"
         return {"forms": [dict(old_form(list(range(lo, hi + 1, 2)), rest, when,
                                         {"years": (None, y0), "era": f"before {when}",
@@ -139,39 +164,51 @@ def forms(cw: dict, address: str, place: str = "Brooklyn") -> dict | None:
                 "range": True}
     number, words, kind = fa.parse(address)
     rest = address.split(None, 1)[1]
-    if not (street := street_of(cw, place, words, kind, district)):
+    typed = street_key(words, kind, district)
+    street = street_of(cw, place, words, kind, district)
+    # "13 E Baltic st" is a half's old form, not a new number: no groups, as before
+    if not street or (typed != street and typed.partition(" ")[2] == street):
         return None
-    y0, y1, chains = cw[(place, street)]
+    y0, y1, chains, olds, others = cw[(place, street)]
     when = f"{y0}-{str(y1)[2:]}"
     old = []
-    answered = False
-    for chain in chains:
+    for chain, old_key in zip(chains, olds):
         g = fit.graded(chain, int(number), 1)
         if g and g[2] in "AB":
             lo, hi, grade = g
+            # the street the old numbers were printed under: what was typed unless that is another
+            at = rest if old_key == typed else printed(old_key)
             base = {"years": (None, y0), "era": f"before {when}", "grade": grade,
                     "rests": rests_on(chain, int(number), grade)}
             if hi - lo > WIDE:
-                form = old_form([lo, hi], rest, when, base)
-                form.update(numbers=[], span=(lo, hi), link=f"{lo}-{hi} {rest}, before {when}")
+                form = old_form([lo, hi], at, when, base)
+                form.update(numbers=[], span=(lo, hi), link=f"{lo}-{hi} {at}, before {when}")
             else:
-                form = old_form(list(range(lo, hi + 1, 2)), rest, when, base)
+                form = old_form(list(range(lo, hi + 1, 2)), at, when, base)
             old.append(form)
     if not old:
         return {"forms": [], "note": NOTE.format(street=street.title(), y0=y0, y1=y1)}
+    # the directions the id's other keys lead the typed one with: "E. Baltic" lines are Baltic's
+    same = sorted({k[:-len(typed)].strip().upper() for k in [street, *others]
+                   if k.endswith(" " + typed)})
     new = {"title": f"As {number} {rest}, {y1} on", "street": rest, "numbers": [int(number)],
-           "years": (y1, None), "only": False, "era": f"{y1} on",
+           "years": (y1, None), "only": False, "era": f"{y1} on", "same": same,
            "grade": "", "rests": "Brooklyn's lines from before the change are not here: they used the "
                                   "old numbers, below. Other places' lines are here in every year."}
     return {"forms": [new, *old], "note": ""}
 
 
+def five(cw: dict) -> dict:
+    """The test entries as `load` gives them: old numbers under the street's own key, no other keys."""
+    return {k: (*v, [k[1]] * len(v[2]), []) for k, v in cw.items()}
+
+
 def self_test():
-    cw = {("Brooklyn", "court"): (1871, 1875, [
+    cw = five({("Brooklyn", "court"): (1871, 1875, [
               [(216, 294, False), (222, 296, False), (210, 288, False), (230, 300, True)],
               [(643, 459, False), (651, 467, False), (647, 463, True), (660, 470, False)]]),
           ("Brooklyn", "myrtle av"): (1871, 1875, [[(687, 677, False), (731, 679, False)],
-                                                  [(893, 673, False), (967, 681, False)]])}
+                                                  [(893, 673, False), (967, 681, False)]])})
     p = forms(cw, "294 Court st")
     assert [f["title"] for f in p["forms"]] == [
         "As 294 Court st, 1875 on",
@@ -195,15 +232,69 @@ def self_test():
     assert forms(ed, "677 Myrtle av, E. D.")["forms"][1]["street"] == "Myrtle av"
     assert forms(ed, "677 Myrtle av") is None and forms(cw, "677 Myrtle av, E. D.") is None
     # a wide bracket is a note with the link that searches the range
-    wide = {("Brooklyn", "x"): (1871, 1875, [[(100, 10, False), (160, 20, False), (200, 40, False)]])}
+    wide = five({("Brooklyn", "x"): (1871, 1875, [[(100, 10, False), (160, 20, False), (200, 40, False)]])})
     f = forms(wide, "30 X st")["forms"][1]
     assert f["numbers"] == [] and f["link"] == "160-200 X st, before 1871-75", f
-    narrow = {("Brooklyn", "x"): (1871, 1875, [[(100, 10, False), (110, 20, False)]])}
+    narrow = five({("Brooklyn", "x"): (1871, 1875, [[(100, 10, False), (110, 20, False)]])})
     assert forms(narrow, "14 X st")["forms"][1]["numbers"] == [100, 102, 104, 106, 108, 110]
     # the link's form: every other number of the range, in the old years
     r = forms(wide, "100-120 X st, before 1871-75")["forms"][0]
     assert r["numbers"] == list(range(100, 121, 2)) and r["years"] == (None, 1871)
     assert forms(wide, "100-9000 X st") is None
+    # the renamed and merged streets, made up: each of old_street's numbers is the new number's,
+    # one chain per old street, as export_crosswalk.py writes them (id, [(old_street, old)], new, keys)
+    shapes = [("fulton", [("fulton", 52), ("fulton av", 1174)], 100, "fulton av"),
+              ("baltic", [("e baltic", 13), ("w baltic", 13)], 13, "e baltic;w baltic"),
+              ("warren", [("e warren", 13), ("w warren", 13)], 13, "e warren;w warren"),
+              ("atlantic av", [("atlantic", 37), ("atlantic av", 107)], 43, "atlantic"),
+              ("carroll", [("carroll park", 5)], 9, "carroll park;carroll pl"),
+              ("duffield", [("stanton", 5)], 9, "stanton"),
+              ("fleet pl", [("carll", 5), ("fleet pl", 7)], 9, "carll"),
+              ("s elliott pl", [("elliott pl", 20)], 30, "elliott pl")]
+    with tempfile.TemporaryDirectory() as d:
+        new = Path(d) / "new.csv"
+        new.write_text("place,street,y0,y1,chain,old,new,corner,old_street,keys\n" + "".join(
+            f"Brooklyn,{i},1871,1875,{c},{old},{n},false,{o},{keys}\n"
+            for i, chains, n, keys in shapes for c, (o, old) in enumerate(chains)))
+        was = Path(d) / "was.csv"                 # a file from before old_street and keys
+        was.write_text("place,street,y0,y1,chain,old,new,corner\n" + "".join(
+            f"Brooklyn,{i},1871,1875,{c},{old},{n},false\n"
+            for i, chains, n, _ in shapes for c, (o, old) in enumerate(chains)))
+        cw8, cw0 = load(new), load(was)
+    assert load(Path(new).parent / "none.csv") == {}
+    assert cw0[("Brooklyn", "baltic")][3:] == (["baltic"] * 2, []), "no columns: as before"
+    assert cw8[("Brooklyn", "baltic")][3:] == (["e baltic", "w baltic"], ["e baltic", "w baltic"])
+
+    def heads(cw, text):
+        p = forms(cw, text)
+        return p and [f["title"].split(", before")[0] for f in p["forms"][1:]], p and p["forms"][0]
+    when = "before 1871-75 (renumbered between those directories)"
+    # a Fulton av number is searched on Fulton av; a typed Fulton st keeps its own old numbers
+    assert forms(cw8, "100 Fulton st")["forms"][1]["title"] == f"As 52 Fulton st, {when}"
+    assert forms(cw8, "100 Fulton st")["forms"][2]["title"] == f"As 1174 Fulton av, {when}"
+    assert forms(cw8, "100 Fulton st")["forms"][2]["street"] == "Fulton av"
+    assert heads(cw8, "100 Fulton av")[0] == ["As 52 Fulton st", "As 1174 Fulton av"], "typed av reaches fulton"
+    # Baltic: "13 Baltic" was two houses; "E. Baltic" lines after 1875 are the new number's
+    h, new_form = heads(cw8, "13 Baltic st")
+    assert h == ["As 13 E Baltic st", "As 13 W Baltic st"] and new_form["same"] == ["E", "W"], h
+    assert heads(cw8, "13 Warren st")[0] == ["As 13 E Warren st", "As 13 W Warren st"]
+    assert forms(cw8, "13 E Baltic st") is None, "an old form typed is not a new number"
+    r = forms(cw8, "1-9 E Baltic st, before 1871-75")["forms"][0]
+    assert r["street"] == "E Baltic st" and r["numbers"] == [1, 3, 5, 7, 9], r
+    # Atlantic av: old numbers on Atlantic st and on Atlantic av, two streets; Atlantic st finds it
+    assert heads(cw8, "43 Atlantic av")[0] == ["As 37 Atlantic st", "As 107 Atlantic av"]
+    assert heads(cw8, "43 Atlantic")[0] == ["As 37 Atlantic", "As 107 Atlantic av"]   # typed as typed
+    assert heads(cw8, "9 Carroll pl")[0] == ["As 5 Carroll Park st"]
+    assert heads(cw8, "9 Duffield st")[0] == ["As 5 Stanton st"]
+    assert heads(cw8, "9 Fleet pl")[0] == ["As 5 Carll st", "As 7 Fleet pl"]
+    # Elliott pl is S Elliott pl: typed either way, one old street, no direction to forgive in the
+    # typed street's own key
+    assert heads(cw8, "30 Elliott pl")[0] == heads(cw8, "30 S Elliott pl")[0] == ["As 20 Elliott pl"]
+    assert heads(cw8, "30 Elliott pl")[1]["same"] == ["S"] and heads(cw8, "30 S Elliott pl")[1]["same"] == []
+    assert forms(cw0, "13 Baltic st")["forms"][1]["title"] == f"As 13 Baltic st, {when}", "old file"
+    assert forms(cw0, "13 E Baltic st") is None
+    assert printed("e baltic") == "E Baltic st" and printed("fulton av") == "Fulton av"
+    assert fa.parse("13 " + printed("e baltic")) == ("13", ["e", "baltic"], "st")
     # the typed street to the crosswalk's key, as addresses/streets.py reads the same text
     try:
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "addresses"))

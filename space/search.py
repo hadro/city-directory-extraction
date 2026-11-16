@@ -381,20 +381,28 @@ class Records:
         of each form, in the form's own years (find_numbers: one search for the bracket):
         res["groups"] holds one group per form (title, rests, link, hits), res["hits"] all their
         lines, each marked searched_as, era and crosswalk_grade. A line found under two numbers
-        of one form keeps its best grade. The residents are traced for the new number only."""
+        of one form keeps its best grade. A Brooklyn line of the new number printed with a
+        direction the plan says is the same street (E. Baltic) is not flagged another street.
+        The residents are traced for the new number only."""
         if not plan or not plan["forms"]:
             return dict(self.find(address, dist, people), note=(plan or {}).get("note", ""))
         t, base, groups = time.time(), None, []
-        # the old forms share a street and years: one search of all their numbers
-        olds = sorted({str(n) for f in plan["forms"] if f["only"] for n in f["numbers"]}, key=int)
-        street, years = next(((f["street"], f["years"]) for f in plan["forms"] if f["only"]), (0, 0))
-        by_number = dict(zip(olds, self.find_numbers(f"{olds[0]} {street}", olds, dist, years))) \
-            if olds else {}
+        # the old forms share their years, not always their street (Atlantic av's old numbers were
+        # on "Atlantic" and on "Atlantic av"): one search of all the numbers of each street
+        by_number = {}
+        for street in {f["street"] for f in plan["forms"] if f["only"]}:
+            olds = sorted({str(n) for f in plan["forms"] if f["only"] and f["street"] == street
+                           for n in f["numbers"]}, key=int)
+            if olds:                                  # a bracket too wide to search has none
+                years = next(f["years"] for f in plan["forms"] if f["only"])
+                by_number.update(((street, n), r) for n, r in zip(
+                    olds, self.find_numbers(f"{olds[0]} {street}", olds, dist, years)))
         for f in plan["forms"]:
             lo, hi = f["years"][0] or 0, f["years"][1] or 9999
             nums = [str(n) for n in f["numbers"]] if f["only"] else [None]
-            results = [by_number[n] for n in nums] if f["only"] else [self.find(address, dist, people)]
-            hits = []
+            results = [by_number[f["street"], n] for n in nums] if f["only"] \
+                else [self.find(address, dist, people)]
+            hits, same = [], {f"OTHER STREET ({d})" for d in f.get("same", ())}
             for n, res in zip(nums, results):
                 typed = f"{n} {f['street']}" if f["only"] else address
                 base = base or res
@@ -403,7 +411,8 @@ class Records:
                     # an old number is Brooklyn's lines; the new one keeps other places' lines of any year
                     if inside and h["place"] == "Brooklyn" if f["only"] else inside or h["place"] != "Brooklyn":
                         era = f["era"] if f["only"] or h["place"] == "Brooklyn" else ""
-                        hits.append(dict(h, searched_as=typed, era=era, crosswalk_grade=f["grade"]))
+                        hits.append(dict(h, searched_as=typed, era=era, crosswalk_grade=f["grade"],
+                                         flag="" if era and h["flag"] in same else h["flag"]))
             hits.sort(key=lambda h: (fa.GRADES.index(h["grade"]), h["year"] or 0, h["volume"],
                                      h["leaf"], h["line"]))
             best = {}

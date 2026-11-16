@@ -214,10 +214,15 @@ Everything is committed on `claude/tender-planck-rcrih6`. **Not pushed**: hadro 
 - hadro's NAS, `/Volumes/NYPL stuff/CityDirectories` (when mounted).
 
 **Next, in order**
-1. In progress 2026-11-16, uncommitted if the session died (see `git status`): the finder
-   using the crosswalk's `old_street` (the old group searched and titled under the street the
-   old numbers were printed on; a typed "Elliott pl" reaching the id "s elliott pl").
-2. hadro tries the finder locally on a renumbered street (G5), then it goes to the test Space.
+1. Done 2026-11-16: the finder follows the renamed streets. An old group is searched and
+   titled under the street its numbers were printed on ("As 1173 Fulton av" for 985 Fulton st,
+   "As 96 W Baltic st" for 146 Baltic st); a typed "Elliott pl" reaches "s elliott pl" through
+   the crosswalk's `keys` column; E./W. Baltic lines after 1875 (about 35 a directory, the
+   same numbers as plain Baltic) count as the street. Each case in `space/check_eras.py` was
+   checked on a person found in both groups. Not looked at: E/W Warren after 1875; a new
+   Baltic number that reaches both an East and a West group (none found; asserts only).
+2. hadro tries the finder locally on a renumbered street (G5), then it goes to the test Space
+   (which needs the new `crosswalk.csv`, `eras.py`, `search.py`, `app.py` and `fit.py`).
 3. `1869BPL` and `1876BPL` off-run numbers re-read (`guides.py --to-read`); the non-guide pages
    filtered out; the doubtful snaps and spelling merges looked at.
 4. Why half the post-1875 addresses are grade C; Union, Duffield, Adelphi, Lawrence against

@@ -103,21 +103,79 @@ renumbering), and Brooklyn 1856-1908 as PDFs.
 - Not yet done: grades on an answer; the 1855 atlas as anchors; the registry; renamings; the
   guide entries the parser drops.
 
+### 2026-11-16: items 1-4 and 6 of the old list, and the finder
+
+Done by four agents (Sonnet), reviewed, built and committed (447fa3a, 1b42ea9, e84a80a, 2dba2f6).
+The figures above this section are the earlier ones; these replace them where they differ.
+
+- **Guides (item 1, `guides.py`).** Headings with no street read: 126-141 a volume -> 4-14.
+  Rows: 6,653 (`1869BPL`), 6,611 (`1871BPL`), 6,787 (`1875BPL`), 6,981 (`1876BPL`), on 532-545
+  streets. Off-run numbers were re-read from the page image for `1871BPL` (206 rows, 77
+  changed, 127 as printed) and `1875BPL` (505 rows, 343 changed, 38 unread), cached in
+  `data/addresses/work/guide_read/<volume>_<leaf>.json` (**not in git: 71 files, an agent's
+  reading; back them up**) and applied before the gate. `guides.py --to-read <volume>` lists
+  what is left: nothing for those two, about 1,400 numbers for `1869BPL` and `1876BPL`. Off
+  their run now: 7.4% (`1871BPL`, mostly real misprints and starred "nearest" numbers), 1.2%
+  (`1875BPL`). Corners paired 1871/1875: **648 on 131 streets** (was 467 on 86); stayers
+  between the same corners 86%; Court still 48%, so that is not a parsing problem. The
+  readings were not checked against a second source. A misspelled heading is snapped to a
+  cross street one letter off it; a few snaps look wrong (newell -> newel, mckibben ->
+  mckibbin). Non-guide pages (`1875BPL` 1161, `1871BPL` 976) still give false rows.
+- **Fit after the rebuild.** Brooklyn 1871-75: 407 chains on 147 streets, 3,222 strong anchors
+  held back, 93% placed, 86% right. No better than before: the corners add reach, not accuracy.
+- **Grades (item 2, `fit.graded`).** A: an anchor's own number, or anchors within 10 on both
+  sides. B: a wider bracket. C: past the chain's end, **no numbers** (predicting past the end
+  is right 96% within 5 numbers of it, 43% at 21-40, 20% beyond). Of 60,827 addresses listed
+  after 1875 on the event streets: A 15,092, B 11,879, C 30,221, none 3,635. Why half are C is
+  not checked (streets built past their 1871 extent is the guess).
+- **1855 atlas (item 3, `atlas.py`).** 3,031 of 6,068 atlas numbers pair with a point of
+  today's within 15 m on the same street. Carried across the 1871-75 chains, streets with no
+  event between 1855 and 1871: **80% within 2 of today's number, 91% within 10** (Court 88%,
+  95%); with an event between, 32%. Union, Duffield, Adelphi and Lawrence disagree with no
+  known event between: open. The atlas's Court stops near today's 340, north of Carroll. Not
+  joined to the fit (worth it only on streets with no event between, at low weight).
+- **Left (item 6).** The walker's left, facing the way the heading says: 453 of 454 corners of
+  `1875BPL`/`1876BPL` against today's points, none reversed. In `docs/STREET_GUIDES.md`. The
+  test was scratch code, not kept.
+- **Registry (item 4, `registry.py`).** 6,059 ids over 6,374 keys. The 1871 table is **65
+  renamings on leaves 934-935**, not 31 (`tables/renamings.csv`, read by eye from the images);
+  with the guides' "(late X)", 75, of which 22 merge and 53 are old names another street kept.
+  The records contradict 21 of the 65 (the directories kept printing the old name). Fulton av
+  joins Fulton from 1875; East/West Baltic and Warren, each half numbered from 1 at Court st
+  until 1871, are one street from 1875 (the four rows of `tables/street_overrides.csv`). 301
+  spelling merges rest on shared people; a few look wrong (walter -> water, clifton av ->
+  clinton av, dev -> dey). Using it would add 420 stayers to Brooklyn 1871-75 (Fulton 156,
+  Baltic and Warren 195).
+- **The finder (Phase 5), local only, not deployed.** hadro answered 2026-11-15: old-number
+  hits as groups; 20 numbers is the cutoff for now (`eras.py`, a named constant). Built:
+  `space/eras.py`, `find(years=)`, `find_eras`, the groups, the rests-on line, the note with a
+  link for a wide bracket, a typed range ("644-696 Court st, before 1871-75", which the link
+  needed), CSV columns `searched_as`, `era`, `crosswalk_grade`. `addresses/export_crosswalk.py`
+  writes `data/space/crosswalk.csv`; the finder is unchanged without it. Checks:
+  `space/check_eras.py` (headless Chrome) passes; its expected brackets are the built
+  crosswalk's and move when a rebuild moves an anchor. 181 Bridge st now gives old 158 (grade
+  A), not the 156-170 above.
+
 ### Picking it up in a new session
 
-Everything is committed on `claude/tender-planck-rcrih6` (last: the commit that added this
-section). **Not pushed**: hadro pushes later. `main` is 6+ commits behind, a fast-forward.
+Everything is committed on `claude/tender-planck-rcrih6`. **Not pushed**: hadro pushes later.
 
-**To rebuild everything** (a minute; needs `data/space/records.parquet`, `data/survey_ocr/`,
-`data_prep/survey/`):
+**To rebuild everything** (two minutes; needs `data/space/records.parquet`, `data/survey_ocr/`,
+`data_prep/survey/`, `data/spacetime/x_addresses/`, `data/city/uf93-f8nk.csv`):
 
     uv run --with duckdb==2.0.0 python addresses/build.py data/space/records.parquet
 
+**To check the finder** (a port of your own, never 8001; stop it by PID):
+
+    PORT=7873 uv run --with-requirements space/requirements.txt python space/app.py
+    uv run --with playwright python space/check_eras.py http://127.0.0.1:7873
+
 **On disk, not in git** (gitignored `data/`):
-- `data/addresses/`: `people.parquet`, `stayers.parquet`, `anchors.parquet`, `guides/<vol>.jsonl`,
-  `corners_1871BPL_1875BPL.jsonl`, `street_strings.parquet` (all rebuilt by build.py or
-  `results/renumbering_phase0.py`); `work/guide_format/` (the 12 page images and per-leaf OCR text
-  the guide reading used).
+- `data/addresses/`: `people.parquet`, `stayers.parquet`, `anchors.parquet`,
+  `atlas_1855.parquet`, `guides/<vol>.jsonl`, `corners_1871BPL_1875BPL.jsonl`,
+  `street_strings.parquet` (all rebuilt by build.py or `results/renumbering_phase0.py`);
+  `work/guide_read/` (the readings: NOT rebuilt), `work/guide_crops/`, `work/guide_format/`.
+- `data/space/crosswalk.csv` (rebuilt by build.py).
 - `data/spacetime/`: the six Space/Time zips, unpacked in `x_<name>/`, and `allmaps_cache.json`.
   Re-fetch: `http://s3.amazonaws.com/spacetime-nypl-org/datasets/<name>/<name>.zip` for
   `building-inspector`, `addresses`, `perris-atlas-footprints`, `nyc-streets`, `mapwarper`,
@@ -125,32 +183,19 @@ section). **Not pushed**: hadro pushes later. `main` is 6+ commits behind, a fas
 - `data/city/`: `uf93-f8nk.csv` (address points), `inkn-q76z.csv` (centerline).
 - hadro's NAS, `/Volumes/NYPL stuff/CityDirectories` (when mounted).
 
-**Waiting on hadro** (asked 2026-11-15, not answered): the finder design.
-1. A search on a renumbered street, for an address inside a chain, also searches the old
-   number(s), each form only in its own years.
-2. Results in groups: "As 465 Court st, 1875 on" and "As 643-651 Court st, before 1871-75
-   (renumbered between those directories)", with a line saying what the old group rests on.
-   The question: groups, or one list with a marker?
-3. A bracket is searched number by number, at most five either side of its middle; one wider than
-   20 numbers (462 Court: 644-696) is a note with a link, not results. The question: is 20 right?
-4. Two runs of old numbers: a group each. The CSV gains `searched_as` and `era`.
-5. Brooklyn 1871-75 first, tested locally, not deployed to the test Space until hadro has tried it.
-Do not build the finder part before hadro answers.
-
-**Next, in order** (none needs hadro):
-1. `guides.py` drops an entry whose heading it cannot read (about a quarter; Court in `1876BPL`).
-   Headings like "Lincoln pl., Degraw, from", "Fairfax (late Elizabeth), from". Then the entries
-   whose numbers are off their run go to an agent with the page image, cached per volume and
-   leaf under `data/addresses/work/`.
-2. Grades on an answer (A an anchor's own number or anchors within 10 both sides; B a wider
-   bracket; C past the chain's end), written with `fit.across` / `fit.back`.
-3. The 1855 atlas (2D): `data/spacetime/x_addresses` Brooklyn points against
-   `data/city/uf93-f8nk.csv` within 15 m on the same street; an anchor straight from 1855 to today.
-4. The registry (1.2): spellings merged, the 31 renamings on `1871BPL` leaf 935, East/West
-   Baltic and Warren (one street after 1871-75), "fulton" and "fulton av".
-5. `chain.py` (Phase 4): eras composed to today; is the last directory's numbering today's?
-6. Which side "Left" is in the guides: one corner against the 1855 atlas points.
-7. Manhattan 1865-76 needs the 1866-75 volumes (hadro's NAS has PDFs and 2016 text; running
+**Next, in order**
+1. In progress 2026-11-16, uncommitted if the session died (see `git status`): the registry's
+   renamings and overrides used by `events.py`; `chain.py` (Phase 4: eras composed to today, is
+   the last directory's numbering today's?); the finder's speed on a bracket (0.5 s an old
+   number: 465 Court st 2.9 s) and a bare "155 Franklin" taken for Franklin av.
+2. hadro tries the finder locally on a renumbered street (G5), then it goes to the test Space.
+3. `1869BPL` and `1876BPL` off-run numbers re-read (`guides.py --to-read`); the non-guide pages
+   filtered out; the doubtful snaps and spelling merges looked at.
+4. Why half the post-1875 addresses are grade C; Union, Duffield, Adelphi, Lawrence against
+   the atlas.
+5. The finder for the other events (Williamsburg 1887-89, the Bronx 1907-08), once Brooklyn
+   1871-75 is tried.
+6. Manhattan 1865-76 needs the 1866-75 volumes (hadro's NAS has PDFs and 2016 text; running
    them through the pipeline is outside this plan).
 
 **Traps met**

@@ -255,7 +255,7 @@ numbers, only a note that the mapping does not reach). Brooklyn 1871-75 only.
   (stdlib only, imported by `eras.py` as `search.py` imports `find_address.py`); `RECORDS_COPY_TO`
   copies the CSV with the records.
 - **Which forms.** `eras.forms`: per chain of the street, `fit.graded(chain, number, 1)`. A or B gives
-  a bracket of old numbers, searched number by number on the old side the chain is for, at most 5
+  a bracket of old numbers, searched on the old side the chain is for, at most 5
   either side of its middle; a bracket wider than `WIDE` (20) is a note with a link, which types
   "644-696 Court st, before 1871-75" into the box (a range address, every other number, the old
   years). Two chains reaching one new number are two groups. Only when Brooklyn is among the places.
@@ -263,15 +263,29 @@ numbers, only a note that the mapping does not reach). Brooklyn 1871-75 only.
   lines kept only where they are Brooklyn's (the marker rule). The new number is searched as
   before and Brooklyn's lines before 1875 dropped after grading, because "place" is decided from the
   marker in the line, which SQL cannot see; a Manhattan "100 Fulton st" keeps every year.
+- **One search for the numbers.** `Records.find_numbers` searches several numbers of one street
+  together, and `find_eras` hands it every old number of the plan at once: the street's spellings,
+  the vocabulary's number forms and the read of each wrap candidate's next line (a join over all
+  the records) are done once, not once per number; each number is still graded on its own, so the
+  lines are the same as one `find` per number (checked 2026-11-16 on 465 Court st, 294 Court st,
+  43 Atlantic av and the typed range 644-696: every line, grade, flag and place identical, and 31
+  plain searches identical to the version before). Two-era 465 Court st went 2.3 s -> 1.1 s, the
+  27-number range 3.4 -> 1.2 s, with one era 0.4-0.6 s; 43 Atlantic av 5.8 -> 4.0 s (one era 1.0):
+  what is left there is Python grading 3,000-4,000 lines a number, `find_address`'s readers.
 - **Street key.** `eras.street_key(fa.parse(...))` gives addresses/streets.py's key ("court",
-  "myrtle av", "5 av", "n 2"); `eras.py`'s asserts compare it with `streets.read` on 18 typed forms.
-  A bare name ("677 Myrtle") finds the one crosswalk street that is that name and a type. Fails: a
-  place or district typed after the street, "b'way", a half number, a bare name where two streets
-  share it (Franklin st is taken for Franklin av).
+  "myrtle av", "5 av", "n 2", "broadway" for B'way); `eras.py`'s asserts compare it with
+  `streets.read` on 24 typed forms. A bare name is the st: "155 Franklin" is "franklin", which is
+  not Franklin av, so a crosswalk with no Franklin st gives it no old numbers (it did take the av
+  until 2026-11-16). Brooklyn's records print an avenue with its type (Myrtle av 95%, Bedford av
+  96%, Gates, Putnam, Hudson 99%); where a bare name is common it is a st of its own (Union,
+  Washington, Columbia, Boerum st). A district typed after the street ("56 Bedford av, E. D.") is
+  read and keys "bedford av (e.d.)", another street than its namesake, as events.py keys it; the
+  crosswalk has no such street yet (none has a chain), so it gives no groups. Fails: a place
+  typed after the street, a half number.
 - **Downloads.** The matches CSV gains `searched_as`, `era`, `crosswalk_grade` when there are groups.
 - **Checks.** `eras.py` (asserts), `addresses/fit.py --self-test`, and `check_eras.py` against a
   server of your own (465/462/294 Court st, 181 Bridge st, 677 Myrtle av, 43 Atlantic av, 155
-  Franklin, the range link; 62 Euclid av and 1 Wall st print what the page printed before, apart from the
+  Franklin (no groups: a st), the range link; 62 Euclid av and 1 Wall st print what the page printed before, apart from the
   order of equally common spellings).
 
 ## The Browse tab

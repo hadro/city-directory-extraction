@@ -223,25 +223,42 @@ class Records:
         names = [d[0] for d in cur.description]
         return [dict(zip(names, row)) for row in cur.fetchall()]
 
-    def terms(self, number: str, anchor: str, dist: int):
+    def terms(self, numbers: list, anchor: str, dist: int):
+        """(the street's spellings, {number: its look-alike forms in the index}, {number: every
+        word that may hold it or one digit off, read as match_tokens reads a token (as_number,
+        then lev 1)}). Every grade needs such a token, `wrapped` and `near` included. The index
+        is lowercased, so a b may have been a B: as_number reads b as 6, B as 8, and either
+        counts. The street is the same for a bracket of numbers (find_numbers), so it is read
+        once; SQL keeps the vocabulary to the words near_token's pattern lets through."""
         dist = fa.street_dist(anchor, dist)
         if fa.ordinal(anchor):                    # a numbered street: its digits, look-alikes folded
             streets = [(t, n) for t, n in self.con.execute(
                 "SELECT term, n FROM vocab WHERE length(term) BETWEEN ? AND ? "
                 "AND regexp_full_match(term, '[0-9ilogbsz]+(st|nd|rd|th|d|h|t)?') ORDER BY n DESC",
                 [len(anchor) - 2, len(anchor) + 1]).fetchall()
-                if fa.ordinal(t) == fa.ordinal(anchor) and t != number]
+                if fa.ordinal(t) == fa.ordinal(anchor)]
         else:
             streets = self.con.execute(
                 "SELECT term, n FROM vocab WHERE length(term) BETWEEN ? AND ? "
                 "AND levenshtein(term, ?) <= ? AND regexp_full_match(term, '[a-z]+') ORDER BY n DESC",
                 [len(anchor) - dist, len(anchor) + dist, anchor, dist]).fetchall()
-        numbers = [(t, n) for t, n in self.con.execute(
-            "SELECT term, n FROM vocab WHERE length(term) BETWEEN ? AND ? "
-            "AND regexp_full_match(term, '[hr]?[0-9ilogbsz]+') AND regexp_matches(term, '[0-9]') "
-            "ORDER BY n DESC", [len(number) - 1, len(number) + 2]).fetchall()
-            if fa.as_number(t) == number]
-        return streets, numbers
+        forms, near = {n: [] for n in numbers}, {n: [] for n in numbers}
+        like = "|".join(f"({re2(near_token(n))})" for n in numbers)
+        for t, count in self.con.execute(
+                "SELECT term, n FROM vocab WHERE length(term) BETWEEN ? AND ? "
+                "AND regexp_full_match(term, '[hr]?[0-9ilogbsz]+') AND regexp_matches(term, '[0-9]') "
+                f"AND regexp_matches(term, {sql_str(like)}) ORDER BY n DESC",
+                [min(map(len, numbers)) - 1, max(map(len, numbers)) + 2]).fetchall():
+            bs = [i for i, c in enumerate(t) if c == "b"]
+            reads = {fa.as_number("".join("B" if i in bs and upper[bs.index(i)] else c
+                                          for i, c in enumerate(t)))
+                     for upper in itertools.product((False, True), repeat=len(bs))} - {None}
+            for n in numbers:
+                if fa.as_number(t) == n:
+                    forms[n].append((t, count))
+                if any(fa.lev(r, n, 1) <= 1 for r in reads):
+                    near[n].append(t)
+        return streets, forms, near
 
     def street_lines(self, address: str) -> int:
         """The lines holding the address's street word (its anchor): which of a street's
@@ -250,26 +267,7 @@ class Records:
                                [fa.anchor_of(fa.parse(address)[1])]).fetchone()
         return row[0] if row else 0
 
-    def near_terms(self, number: str) -> list:
-        """Every word that may hold the number or one digit off, read as match_tokens reads a
-        token (as_number, then lev 1). Every grade needs such a token, `wrapped` and `near`
-        included. The index is lowercased, so a b may have been a B: as_number reads b as 6, B
-        as 8, and either counts."""
-        out = []
-        for t, in self.con.execute(
-                "SELECT term FROM vocab WHERE length(term) BETWEEN ? AND ? "
-                "AND regexp_full_match(term, '[hr]?[0-9ilogbsz]+') AND regexp_matches(term, '[0-9]')",
-                [len(number) - 1, len(number) + 2]).fetchall():
-            bs = [i for i, c in enumerate(t) if c == "b"]
-            for upper in itertools.product((False, True), repeat=len(bs)):
-                v = "".join("B" if i in bs and upper[bs.index(i)] else c for i, c in enumerate(t))
-                n = fa.as_number(v)
-                if n is not None and fa.lev(n, number, 1) <= 1:
-                    out.append(t)
-                    break
-        return out
-
-    def candidates(self, number: str, streets: list, numbers: list) -> list:
+    def candidates(self, streets: list, numbers: list, near: list) -> list:
         """The row numbers holding a street spelling or a number form (the rows find_address's
         full-text query returns) that also hold a near-number word: the rest can take no grade."""
         if not streets and not numbers:
@@ -277,7 +275,7 @@ class Records:
         return [rid for rid, in self.con.execute(f"""
             SELECT rid FROM words WHERE term IN ({quoted(t for t, _ in streets + numbers)})
             INTERSECT
-            SELECT rid FROM words WHERE term IN ({quoted(self.near_terms(number) + [ODD])})
+            SELECT rid FROM words WHERE term IN ({quoted(near + [ODD])})
             """).fetchall()]
 
     def to_grade(self, rids: list, shape, years=None) -> list:
@@ -288,25 +286,44 @@ class Records:
         return self._dicts(f"SELECT rowid AS rid, {', '.join(GRADE_COLS)} FROM r "
                            f"WHERE rowid IN (SELECT unnest(?)) {where}", [rids])
 
-    def to_read_wrapped(self, rids: list, number: str, shape, years=None) -> list:
-        """The candidates that may wrap the address, each with its next line (`next_raw`, by
-        record_id): a near number among the line's last two tokens, and the address's shape across
-        the two lines. Both are what read_wrapped needs."""
+    def to_read_wrapped(self, jobs: list, years=None) -> list:
+        """For each job (number, shape, candidates) the candidates that may wrap its address, each
+        with its next line (`next_raw`, by record_id): a near number among the line's last two
+        tokens, and the address's shape across the two lines. Both are what read_wrapped needs.
+        The next lines are read once for every job: that join over all the records is the cost."""
+        ends = [[rid for rid, in self.con.execute(
+            f"SELECT rowid FROM r WHERE rowid IN (SELECT unnest(?)) AND regexp_matches("
+            f"lower(coalesce(raw_line, '')), {sql_str(re2(ends_near(number)))}){year_clause(years)}",
+            [rids]).fetchall()] if rids else [] for number, _, rids in jobs]
         nid = "regexp_replace(a.record_id, '[0-9]+$', '') || " \
               "(TRY_CAST(regexp_extract(a.record_id, '[0-9]+$') AS BIGINT) + 1)"
-        across = f"AND regexp_matches(lower(coalesce(a.raw_line, '') || ' ' || " \
-                 f"coalesce(n.raw_line, '')), {sql_str(re2(shape.pattern))})" if shape else ""
-        return self._dicts(f"""
-            SELECT a.rid, {', '.join('a.' + c for c in GRADE_COLS)}, n.raw_line AS next_raw
-            FROM (SELECT rowid AS rid, {', '.join(GRADE_COLS)} FROM r WHERE rowid IN (SELECT unnest(?))
-                  AND regexp_matches(lower(coalesce(raw_line, '')), {sql_str(re2(ends_near(number)))}){year_clause(years)}
-                 ) a JOIN r n ON n.record_id = {nid}
-            WHERE true {across}""", [rids])
+        rows = {x["rid"]: x for x in self._dicts(
+            f"SELECT a.rowid AS rid, {', '.join('a.' + c for c in GRADE_COLS)}, "
+            f"n.raw_line AS next_raw FROM r a JOIN r n ON n.record_id = {nid} "
+            "WHERE a.rowid IN (SELECT unnest(?))", [sorted(set().union(*ends))])}
+        return [[rows[i] for i in e if i in rows and (not shape or shape.search(
+            f"{rows[i]['raw_line'] or ''} {rows[i]['next_raw'] or ''}".lower()))]
+            for e, (_, shape, _) in zip(ends, jobs)]
 
     def find(self, address: str, dist: int = 2, people: bool = False, years=None) -> dict:
         """The lines that give the address; `years` (low, high), either None, keeps only the
         lines of those years, decided in SQL before any grading."""
+        t = time.time()
         number, words, kind = fa.parse(address)
+        res = self.find_numbers(address, [number], dist, years)[0]
+        if people:
+            t2 = time.time()
+            res["people"] = self.residents(res["hits"], number, words, kind, dist)
+            res["phases"]["trace"] = time.time() - t2
+            res["seconds"] = time.time() - t
+        return res
+
+    def find_numbers(self, address: str, numbers: list, dist: int = 2, years=None) -> list:
+        """find() for several house numbers of the address's street at once, one result per
+        number (the address's own number is not searched unless it is listed): the street's
+        spellings, the vocabulary's number forms, and the read of the next lines are done once for
+        all of them, not once each. The phases and seconds are the whole call's."""
+        _, words, kind = fa.parse(address)
         anchor = fa.anchor_of(words)
         t = time.time()
         phases, mark = {}, [t]
@@ -314,65 +331,72 @@ class Records:
         def lap(name):                            # seconds per phase, for results/finder_timing.py
             phases[name] = time.time() - mark[0]
             mark[0] = time.time()
-        streets, numbers = self.terms(number, anchor, dist)
-        streets, dropped = fa.other_streets(streets, anchor)
+        all_streets, forms, near = self.terms(numbers, anchor, dist)
+        all_streets, dropped = fa.other_streets(all_streets, anchor)
         lap("terms")
-        rids = self.candidates(number, streets, numbers)
+        # a numbered street's own spelling is never the house number
+        streets = {n: [s for s in all_streets if s[0] != n] if fa.ordinal(anchor) else all_streets
+                   for n in numbers}
+        rids = {n: self.candidates(streets[n], forms[n], near[n]) for n in numbers}
         lap("candidates")
         skip = frozenset(t for t, _ in dropped)
-        shape = address_shape(number, words, dist)
-        hits = []
-        graded = self.to_grade(rids, shape, years) if rids else []
-        for r in graded:
-            if (best := fa.best_reading(r, number, words, kind, dist, skip)):
-                hits.append((best, r))
+        shapes = {n: address_shape(n, words, dist) for n in numbers}
+        graded = {n: self.to_grade(rids[n], shapes[n], years) if rids[n] else [] for n in numbers}
+        hits = {n: [(best, r) for r in graded[n]
+                    if (best := fa.best_reading(r, n, words, kind, dist, skip))] for n in numbers}
         lap("grade")
-        found = {r["rid"] for _, r in hits}
+        found = {n: {r["rid"] for _, r in hits[n]} for n in numbers}
         # the number last, the street on the next line
-        wrap = [r for r in (self.to_read_wrapped(rids, number, shape, years) if rids else [])
-                if r["rid"] not in found]
-        for r in wrap:
-            if (best := fa.read_wrapped(r, r.pop("next_raw"), number, words, kind, dist, skip)):
-                hits.append((best, r))
+        wrap = dict(zip(numbers, self.to_read_wrapped([(n, shapes[n], rids[n]) for n in numbers], years)))
+        for n in numbers:
+            wrap[n] = [r for r in wrap[n] if r["rid"] not in found[n]]
+            for r in wrap[n]:
+                if (best := fa.read_wrapped(r, r["next_raw"], n, words, kind, dist, skip)):
+                    hits[n].append((best, r))
         lap("wrap")
+        wanted = sorted({r["rid"] for n in numbers for _, r in hits[n]})
         full = {x.pop("rid"): x for x in self._dicts(
             f"SELECT rowid AS rid, {', '.join(COLS)} FROM r WHERE rowid IN (SELECT unnest(?))",
-            [[r["rid"] for _, r in hits]])} if hits else {}
-        hits = [(best, full[r["rid"]]) for best, r in hits]
-        at = fa.residents_at(hits)
+            [wanted])} if wanted else {}
         out = []
-        for (grade, how, note, tail), r in hits:
-            place, marker = place_of(tail, r)
-            out.append(dict(r, grade=grade, how=how, flag=fa.flag_of(grade, note, r, at),
-                            place=place, marker=marker))
-        out.sort(key=lambda h: (fa.GRADES.index(h["grade"]), h["year"] or 0, h["volume"],
-                                h["leaf"], h["line"]))
+        for n in numbers:
+            mine = [(best, full[r["rid"]]) for best, r in hits[n]]
+            at = fa.residents_at(mine)
+            lines = []
+            for (grade, how, note, tail), r in mine:
+                place, marker = place_of(tail, r)
+                lines.append(dict(r, grade=grade, how=how, flag=fa.flag_of(grade, note, r, at),
+                                  place=place, marker=marker))
+            lines.sort(key=lambda h: (fa.GRADES.index(h["grade"]), h["year"] or 0, h["volume"],
+                                      h["leaf"], h["line"]))
+            out.append({"address": address, "number": n, "anchor": anchor, "kind": kind,
+                        "streets": streets[n], "dropped": dropped, "numbers": forms[n],
+                        "candidates": len(rids[n]), "graded": len(graded[n]),
+                        "wrap": len(wrap[n]), "hits": lines, "people": {}, "phases": phases})
         lap("hits")
-        res = {"address": address, "number": number, "anchor": anchor, "kind": kind,
-               "streets": streets, "dropped": dropped, "numbers": numbers,
-               "candidates": len(rids), "graded": len(graded), "wrap": len(wrap), "hits": out,
-               "seconds": time.time() - t, "people": {}, "phases": phases}
-        if people:
-            res["people"] = self.residents(out, number, words, kind, dist)
-            lap("trace")
-            res["seconds"] = time.time() - t
-        return res
+        return [dict(res, seconds=time.time() - t) for res in out]
 
     def find_eras(self, address: str, dist: int = 2, people: bool = False, plan=None) -> dict:
-        """find(), and for a renumbered street (space/eras.py's `plan`) one find() per number of
-        each form, in the form's own years: res["groups"] holds one group per form (title,
-        rests, link, hits), res["hits"] all their lines, each marked searched_as, era and
-        crosswalk_grade. A line found under two numbers of one form keeps its best grade. The
-        residents are traced for the new number only."""
+        """find(), and for a renumbered street (space/eras.py's `plan`) a search of the numbers
+        of each form, in the form's own years (find_numbers: one search for the bracket):
+        res["groups"] holds one group per form (title, rests, link, hits), res["hits"] all their
+        lines, each marked searched_as, era and crosswalk_grade. A line found under two numbers
+        of one form keeps its best grade. The residents are traced for the new number only."""
         if not plan or not plan["forms"]:
             return dict(self.find(address, dist, people), note=(plan or {}).get("note", ""))
         t, base, groups = time.time(), None, []
+        # the old forms share a street and years: one search of all their numbers
+        olds = sorted({str(n) for f in plan["forms"] if f["only"] for n in f["numbers"]}, key=int)
+        street, years = next(((f["street"], f["years"]) for f in plan["forms"] if f["only"]), (0, 0))
+        by_number = dict(zip(olds, self.find_numbers(f"{olds[0]} {street}", olds, dist, years))) \
+            if olds else {}
         for f in plan["forms"]:
             lo, hi = f["years"][0] or 0, f["years"][1] or 9999
+            nums = [str(n) for n in f["numbers"]] if f["only"] else [None]
+            results = [by_number[n] for n in nums] if f["only"] else [self.find(address, dist, people)]
             hits = []
-            for n in f["numbers"]:
+            for n, res in zip(nums, results):
                 typed = f"{n} {f['street']}" if f["only"] else address
-                res = self.find(typed, dist, people and not f["only"], f["years"] if f["only"] else None)
                 base = base or res
                 for h in res["hits"]:
                     inside = lo <= (h["year"] or 0) <= hi

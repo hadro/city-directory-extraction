@@ -431,8 +431,8 @@ def group_html(g: dict, places: list) -> str:
         lo, hi = g["span"]
         out.append(f'<p class="terms">Not searched: {hi - lo} numbers wide, more than {eras.WIDE}. '
                    f'<a href="#" class="era-run" data-address="{e(g["link"])}">Search the range '
-                   f'{lo}-{hi} anyway</a> ({(hi - lo) // 2 + 1} searches, one per number: it '
-                   f'takes a while).</p>')
+                   f'{lo}-{hi} anyway</a> ({(hi - lo) // 2 + 1} numbers, searched together: it '
+                   f'takes a few seconds).</p>')
     else:
         out += lines_html([h for h in g["hits"] if h["place"] in places])
     return "".join(out)

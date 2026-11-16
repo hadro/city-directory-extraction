@@ -29,9 +29,9 @@ CASES = {
     "181 Bridge st": ([NEW.format(a="181 Bridge st"), OLD.format(a="158 Bridge st")], 0),
     "677 Myrtle av": ([NEW.format(a="677 Myrtle av"), OLD.format(a="689-731 Myrtle av"),
                        OLD.format(a="893-967 Myrtle av")], 2),
-    "43 Atlantic av": ([NEW.format(a="43 Atlantic av"), OLD.format(a="37-47 Atlantic av"),
-                        OLD.format(a="107 Atlantic av")], 0),
-    "155 Franklin": ([NEW.format(a="155 Franklin"), OLD.format(a="82-142 Franklin")], 1),   # av, untyped
+    "43 Atlantic av": ([NEW.format(a="43 Atlantic av"), OLD.format(a="37 Atlantic av"),
+                        OLD.format(a="37-47 Atlantic av"), OLD.format(a="107 Atlantic av")], 0),
+    "155 Franklin": ([], 0),             # untyped is a st, not Franklin av: the page as it was
     "62 Euclid av": ([], 0),                                    # no event: the page as it was
     "1 Wall st": ([], 0),                                       # Manhattan
 }

@@ -8,8 +8,9 @@ no. 643-651, and a search for 465 alone misses everyone listed there.
 `load` reads crosswalk.csv, which addresses/export_crosswalk.py writes from the fitted chains
 (data/space/, beside the records), and `forms` says, for a typed address, what to search: the new
 number in the years after the change, and each run of old numbers in the years before it. Each run
-is a bracket from fit.graded (new to old): searched number by number on the old side the chain is
-for, unless it is wider than WIDE, when it is a note and a link that runs the search on the range.
+is a bracket from fit.graded (new to old): its numbers searched together (search.find_numbers) on
+the old side the chain is for, unless it is wider than WIDE, when it is a note and a link that runs
+the search on the range.
 Without the file the finder works as it did: `load` gives {} and `forms` None.
 
 fit.py is imported, not copied: it holds across/back/graded and needs only the standard library,
@@ -34,11 +35,13 @@ from search import fa
 
 WIDE = 20          # a bracket of old numbers wider than this is a note and a link, not a search
 AROUND = 5         # a longer one is searched at most this many numbers either side of its middle
-RANGE_MAX = 60     # numbers in a typed range: each is a search, ~0.5 s
+RANGE_MAX = 60     # numbers in a typed range: one search, ~0.05-0.4 s a number (street size)
 # addresses/streets.py's SPELLED: "Fourth av" is street "4 av"
 SPELLED = {"first": "1", "second": "2", "third": "3", "fourth": "4", "fifth": "5", "sixth": "6",
            "seventh": "7", "eighth": "8", "ninth": "9", "tenth": "10", "eleventh": "11",
-           "twelfth": "12", "thirteenth": "13"}
+           "twelfth": "12", "thirteenth": "13", "bway": "broadway"}     # fa.parse reads b'way as bway
+# streets.py's: "56 Bedford av, E. D."
+DISTRICT = re.compile(r"[, ]+([ew])\.? ?d\.?$", re.I)
 RANGE = re.compile(r"(\d+)-(\d+)\s+(.+?)(?:,?\s+before\s+(\d{4})(?:-\d+)?)?")
 NOTE = ("{street} was renumbered between the {y0} and {y1} directories, and this number is past "
         "what the mapping reaches (or on a side it has no answer for): a line from before {y1} "
@@ -59,23 +62,31 @@ def load(path) -> dict:
     return {k: (*events[k], list(chains[k].values())) for k in events}
 
 
-def street_key(words: list, kind: str) -> str:
-    """The crosswalk's key (addresses/streets.py's) from fa.parse's reading of what was typed:
-    'Court st' -> 'court', 'Myrtle av' -> 'myrtle av', '5th av' -> '5 av', 'N 2d' -> 'n 2'. The
-    checks hold it to streets.read. It does not read a place or district after the street, a
-    'b'way', or a 1/2."""
+def split_district(address: str) -> tuple:
+    """('56 Bedford av', 'e') from '56 Bedford av, E. D.': fa.parse cannot read the district."""
+    address = address.strip()
+    return (address[:m.start()], m[1].lower()) if (m := DISTRICT.search(address)) else (address, "")
+
+
+def street_key(words: list, kind: str, district: str = "") -> str:
+    """The crosswalk's key (addresses/streets.py's, events.py's) from fa.parse's reading of what
+    was typed: 'Court st' -> 'court', 'Myrtle av' -> 'myrtle av', '5th av' -> '5 av', 'N 2d' ->
+    'n 2', "B'way" -> 'broadway'. A street printed with no type is a st, which the key leaves
+    off ('Franklin' is 'franklin', not 'franklin av': two streets); an Eastern District street is
+    another street than its namesake and its key says so ('bedford av (e.d.)'). The checks hold
+    it to streets.read. It does not read a place after the street or a 1/2."""
     words = [SPELLED.get(w) or fa.ordinal(w) or w for w in words]
-    return " ".join(words + ([kind] if kind not in ("", "st") else []))
+    return " ".join(words + ([kind] if kind not in ("", "st") else [])) + \
+        (" (e.d.)" if district == "e" else "")
 
 
-def street_of(cw: dict, place: str, words: list, kind: str) -> str | None:
-    """The crosswalk's street for a typed one: its key, or with no type typed ("677 Myrtle") the
-    one street that is that name and a type ("myrtle av")."""
-    key = street_key(words, kind)
-    if (place, key) in cw:
-        return key
-    typed = [k for p, k in cw if p == place and k.rsplit(" ", 1)[0] == key]
-    return typed[0] if not kind and len(typed) == 1 else None
+def street_of(cw: dict, place: str, words: list, kind: str, district: str = "") -> str | None:
+    """The crosswalk's street for a typed one, or None. A bare name is the st, never the one
+    street of that name and another type: in Brooklyn's records an avenue is printed with its
+    type (Myrtle av 95%, Bedford av 96%; the rest is mostly another street, Union st, Columbia st),
+    so '155 Franklin' is not Franklin av's."""
+    key = street_key(words, kind, district)
+    return key if (place, key) in cw else None
 
 
 def rests_on(chain: list, number: int, grade: str) -> str:
@@ -113,9 +124,10 @@ def forms(cw: dict, address: str, place: str = "Brooklyn") -> dict | None:
     typed address), years (low, high), only (old numbers are Brooklyn's lines only; the new
     number keeps every other place's lines of any year), era, grade and rests (what it stands
     on). The new number is the first form: searched as typed."""
-    if (m := RANGE.fullmatch(address.strip())):
+    address, district = split_district(address)
+    if (m := RANGE.fullmatch(address)):
         lo, hi, rest = int(m[1]), int(m[2]), m[3]
-        street = street_of(cw, place, *fa.parse(f"1 {rest}")[1:])
+        street = street_of(cw, place, *fa.parse(f"1 {rest}")[1:], district)
         if not street or not lo < hi or (hi - lo) // 2 + 1 > RANGE_MAX:
             return None
         y0, y1, _ = cw[(place, street)]
@@ -127,7 +139,7 @@ def forms(cw: dict, address: str, place: str = "Brooklyn") -> dict | None:
                 "range": True}
     number, words, kind = fa.parse(address)
     rest = address.split(None, 1)[1]
-    if not (street := street_of(cw, place, words, kind)):
+    if not (street := street_of(cw, place, words, kind, district)):
         return None
     y0, y1, chains = cw[(place, street)]
     when = f"{y0}-{str(y1)[2:]}"
@@ -169,10 +181,19 @@ def self_test():
     assert forms(cw, "100 Fulton st") is None and forms({}, "294 Court st") is None
     assert forms(cw, "9999 Court st")["forms"] == [] and "past what the mapping reaches" in \
         forms(cw, "9999 Court st")["note"]
-    # a bare name finds the one street of that name and a type; a typed type must match
-    assert street_of(cw, "Brooklyn", ["myrtle"], "") == "myrtle av"
+    # a bare name is the st, never the one other type there is; a typed type must match
+    assert street_of(cw, "Brooklyn", ["myrtle"], "av") == "myrtle av"
+    assert street_of(cw, "Brooklyn", ["myrtle"], "") is None
     assert street_of(cw, "Brooklyn", ["myrtle"], "st") is None
+    assert street_of(cw, "Brooklyn", ["court"], "") == "court"
     assert street_of(cw, "Brooklyn", ["court"], "pl") is None
+    # a district is part of the key, and its namesake is another street
+    assert split_district("56 Bedford av, E. D.") == ("56 Bedford av", "e")
+    assert split_district("56 Bedford av E.D.") == ("56 Bedford av", "e")
+    assert split_district("56 Bedford av") == ("56 Bedford av", "")
+    ed = {("Brooklyn", "myrtle av (e.d.)"): cw[("Brooklyn", "myrtle av")]}
+    assert forms(ed, "677 Myrtle av, E. D.")["forms"][1]["street"] == "Myrtle av"
+    assert forms(ed, "677 Myrtle av") is None and forms(cw, "677 Myrtle av, E. D.") is None
     # a wide bracket is a note with the link that searches the range
     wide = {("Brooklyn", "x"): (1871, 1875, [[(100, 10, False), (160, 20, False), (200, 40, False)]])}
     f = forms(wide, "30 X st")["forms"][1]
@@ -192,10 +213,13 @@ def self_test():
     for text in ("465 Court st", "465 Court", "677 Myrtle av", "12 Myrtle Avenue", "5 Hicks street",
                  "14 Lefferts pl", "30 Clinton Place", "100 15th st", "100 5th av", "7 Fourth av",
                  "125 S 4th st", "125 South 4th", "338 N. 2d", "9 East 110th st", "12 De Kalb av",
-                 "5 Broadway", "20 Montague court", "3 Atlantic ave"):
-        number, words, kind = fa.parse(text)
+                 "5 Broadway", "20 Montague court", "3 Atlantic ave", "155 Franklin",
+                 "155 Franklin av", "56 Bedford av, E. D.", "29 4th E.D.", "320 B'way", "320 Bway"):
+        number, words, kind = fa.parse(split_district(text)[0])
         if streets:
-            assert street_key(words, kind) == streets.read(text)["street"], text
+            read = streets.read(text)
+            assert street_key(words, kind, split_district(text)[1]) == \
+                read["street"] + " (e.d.)" * (read["district"] == "e"), text
     print("eras self-test passes" + ("" if streets else " (streets.py not found: keys unchecked)"))
 
 

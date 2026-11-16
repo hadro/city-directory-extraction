@@ -103,6 +103,76 @@ renumbering), and Brooklyn 1856-1908 as PDFs.
 - Not yet done: grades on an answer; the 1855 atlas as anchors; the registry; renamings; the
   guide entries the parser drops.
 
+### Picking it up in a new session
+
+Everything is committed on `claude/tender-planck-rcrih6` (last: the commit that added this
+section). **Not pushed**: hadro pushes later. `main` is 6+ commits behind, a fast-forward.
+
+**To rebuild everything** (a minute; needs `data/space/records.parquet`, `data/survey_ocr/`,
+`data_prep/survey/`):
+
+    uv run --with duckdb==2.0.0 python addresses/build.py data/space/records.parquet
+
+**On disk, not in git** (gitignored `data/`):
+- `data/addresses/`: `people.parquet`, `stayers.parquet`, `anchors.parquet`, `guides/<vol>.jsonl`,
+  `corners_1871BPL_1875BPL.jsonl`, `street_strings.parquet` (all rebuilt by build.py or
+  `results/renumbering_phase0.py`); `work/guide_format/` (the 12 page images and per-leaf OCR text
+  the guide reading used).
+- `data/spacetime/`: the six Space/Time zips, unpacked in `x_<name>/`, and `allmaps_cache.json`.
+  Re-fetch: `http://s3.amazonaws.com/spacetime-nypl-org/datasets/<name>/<name>.zip` for
+  `building-inspector`, `addresses`, `perris-atlas-footprints`, `nyc-streets`, `mapwarper`,
+  `nyc-wards`; unzip each into its own `x_<name>/`.
+- `data/city/`: `uf93-f8nk.csv` (address points), `inkn-q76z.csv` (centerline).
+- hadro's NAS, `/Volumes/NYPL stuff/CityDirectories` (when mounted).
+
+**Waiting on hadro** (asked 2026-11-15, not answered): the finder design.
+1. A search on a renumbered street, for an address inside a chain, also searches the old
+   number(s), each form only in its own years.
+2. Results in groups: "As 465 Court st, 1875 on" and "As 643-651 Court st, before 1871-75
+   (renumbered between those directories)", with a line saying what the old group rests on.
+   The question: groups, or one list with a marker?
+3. A bracket is searched number by number, at most five either side of its middle; one wider than
+   20 numbers (462 Court: 644-696) is a note with a link, not results. The question: is 20 right?
+4. Two runs of old numbers: a group each. The CSV gains `searched_as` and `era`.
+5. Brooklyn 1871-75 first, tested locally, not deployed to the test Space until hadro has tried it.
+Do not build the finder part before hadro answers.
+
+**Next, in order** (none needs hadro):
+1. `guides.py` drops an entry whose heading it cannot read (about a quarter; Court in `1876BPL`).
+   Headings like "Lincoln pl., Degraw, from", "Fairfax (late Elizabeth), from". Then the entries
+   whose numbers are off their run go to an agent with the page image, cached per volume and
+   leaf under `data/addresses/work/`.
+2. Grades on an answer (A an anchor's own number or anchors within 10 both sides; B a wider
+   bracket; C past the chain's end), written with `fit.across` / `fit.back`.
+3. The 1855 atlas (2D): `data/spacetime/x_addresses` Brooklyn points against
+   `data/city/uf93-f8nk.csv` within 15 m on the same street; an anchor straight from 1855 to today.
+4. The registry (1.2): spellings merged, the 31 renamings on `1871BPL` leaf 935, East/West
+   Baltic and Warren (one street after 1871-75), "fulton" and "fulton av".
+5. `chain.py` (Phase 4): eras composed to today; is the last directory's numbering today's?
+6. Which side "Left" is in the guides: one corner against the 1855 atlas points.
+7. Manhattan 1865-76 needs the 1866-75 volumes (hadro's NAS has PDFs and 2016 text; running
+   them through the pipeline is outside this plan).
+
+**Traps met**
+- The plan's Phase 3 below (segments with an offset per side) is superseded by chains: sides do
+  not carry across (Bridge st), and a street can have several runs of old numbers (Court st).
+- `results/renumbering.py` folds "st" and "av" together; `addresses/streets.py` does not
+  (Franklin and Franklin av are two streets). Use the latter.
+- The Bronx's streets sit under place "Manhattan" (Trow's lists them there).
+- urllib's default agent gets a 403 from annotations.allmaps.org; the service is slow (0.5-4 s a
+  request, timeouts), so `allmaps_coverage.py` caches.
+- IA's IIIF image server times out on some leaves (`1875BPL` 1146 and 1153 never came).
+- oldmapsonline.org refuses automated readers (403).
+- The two web-research notes (`RENUMBERING_SOURCES.md`, `ATLAS_INVENTORY.md`) were written by
+  agents and their sources were not opened by the orchestrator.
+
+**A first message for the next session**
+
+> Read "Where it stands" in `docs/RENUMBERING_PLAN.md` (down to "What changed from the plan as
+> written"). Check `git status` and that `data/addresses/anchors.parquet` exists (if not, run
+> `addresses/build.py`). Then carry on with "Next, in order" from item 1. Ask me about the finder
+> design before building any of it. Keep everything re-runnable from the records file.
+
 ### What changed from the plan as written
 
 1. **Everything is re-runnable** (hadro, 2026-11-15): volumes will be added to the records over

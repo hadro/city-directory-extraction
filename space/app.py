@@ -26,6 +26,7 @@ from pathlib import Path
 import gradio as gr
 
 import browse
+import eras
 import here
 import where
 from search import PLACES, TRACE_YEARS, Records, fa, index_path
@@ -42,11 +43,14 @@ if os.environ.get("RECORDS_COPY_TO"):
     t = time.time()
     dest = Path(os.environ["RECORDS_COPY_TO"])
     dest.mkdir(parents=True, exist_ok=True)
-    for src in (Path(PARQUET), index_path(PARQUET), browse.terms_path(PARQUET)):
+    for src in (Path(PARQUET), index_path(PARQUET), browse.terms_path(PARQUET),
+                Path(PARQUET).with_name("crosswalk.csv")):
         if src.exists():
             shutil.copyfile(src, dest / src.name)
     PARQUET = str(dest / Path(PARQUET).name)
     print(f"records and indexes copied to {dest} in {time.time() - t:.0f} s", flush=True)
+# renumbered streets' old numbers (eras.py), from addresses/export_crosswalk.py; {} without the file
+CROSSWALK = eras.load(Path(PARQUET).with_name("crosswalk.csv"))
 NEAR_SHOWN = 300
 ABOUT = {
     "exact": "The number and the street as asked.",
@@ -304,7 +308,22 @@ button.crop-all { font-size: 13px !important; font-weight: 400 !important; paddi
 })();
 </script>
 """
-HEAD = LAZY_JS + CROP_JS
+# A too-wide bracket's link (group_html) types its range into the address box, as a typed address
+# that eras.py reads, and presses Search.
+ERA_JS = """
+<script>
+document.addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('a.era-run');
+  if (!a) return;
+  e.preventDefault();
+  const box = document.querySelector('#address textarea, #address input');
+  box.value = a.dataset.address;
+  box.dispatchEvent(new Event('input', {bubbles: true}));
+  document.querySelector('#go').click();
+});
+</script>
+"""
+HEAD = LAZY_JS + CROP_JS + ERA_JS
 
 records = Records(PARQUET)
 browser = browse.Browser(records, PARQUET)
@@ -366,25 +385,13 @@ def row_html(h: dict, show_grade: bool = False) -> str:
             f'{links(h.get("crop"))}{badge}</div></td></tr>')
 
 
-def render(res: dict, places: list, narrow: bool = True) -> str:
+def lines_html(shown_hits: list) -> list:
+    """The lines of one search, by grade, then the other streets' (the whole page of an ordinary
+    search, a group of a renumbered street's)."""
     e = html.escape
-    hidden = collections.Counter(h["place"] for h in res["hits"] if h["place"] not in places)
-    shown_hits = [h for h in res["hits"] if h["place"] in places]
     other = [h for h in shown_hits if h["flag"].startswith("OTHER STREET")]
     hits = [h for h in shown_hits if not h["flag"].startswith("OTHER STREET")]
-    counts = {g: sum(h["grade"] == g for h in hits) for g in fa.GRADES}
-    out = [f'<p><b>{len(hits):,} lines</b> in {res["seconds"]:.1f} s, from '
-           f'{res["candidates"]:,} holding a spelling below. '
-           + " · ".join(f"{g} {n:,}" for g, n in counts.items() if n)
-           + (f" · another street {len(other):,}" if other else "")
-           + (" · not shown, in " + ", ".join(f"{p} {n:,}" for p, n in hidden.items()) if hidden else "")
-           + "</p>",
-           '<p class="terms">Street spellings searched: '
-           + e(", ".join(f"{t} ({n:,})" for t, n in res["streets"][:30]))
-           + (" …" if len(res["streets"]) > 30 else "")
-           + ("<br>Not searched, common enough to be another street: "
-              + e(", ".join(f"{t} ({n:,})" for t, n in res["dropped"])) if res["dropped"] else "")
-           + "<br>Number forms: " + e(", ".join(f"{t} ({n:,})" for t, n in res["numbers"])) + "</p>"]
+    out = []
     if not hits:
         out.append("<p>Nothing at this address. Try a larger spelling distance, or drop the street "
                    "type" + (", or see the same number on another street below" if other else "")
@@ -410,6 +417,52 @@ def render(res: dict, places: list, narrow: bool = True) -> str:
                    f'(E 110th for W 110th, Lefferts av for Lefferts pl): a different street, not a '
                    f'misreading.</summary><table class="hits">'
                    f'{"".join(row_html(h, True) for h in shown)}</table></details>')
+    return out
+
+
+def group_html(g: dict, places: list) -> str:
+    """A group of a renumbered street (eras.py): its heading, what it rests on, and its lines, or
+    for a bracket too wide to search the note and the link that runs the range."""
+    e = html.escape
+    out = [f'<h2>{e(g["title"])}</h2>']
+    if g["rests"]:
+        out.append(f'<p class="terms">{e(g["rests"])}</p>')
+    if g.get("link"):
+        lo, hi = g["span"]
+        out.append(f'<p class="terms">Not searched: {hi - lo} numbers wide, more than {eras.WIDE}. '
+                   f'<a href="#" class="era-run" data-address="{e(g["link"])}">Search the range '
+                   f'{lo}-{hi} anyway</a> ({(hi - lo) // 2 + 1} searches, one per number: it '
+                   f'takes a while).</p>')
+    else:
+        out += lines_html([h for h in g["hits"] if h["place"] in places])
+    return "".join(out)
+
+
+def render(res: dict, places: list, narrow: bool = True) -> str:
+    e = html.escape
+    hidden = collections.Counter(h["place"] for h in res["hits"] if h["place"] not in places)
+    shown_hits = [h for h in res["hits"] if h["place"] in places]
+    other = [h for h in shown_hits if h["flag"].startswith("OTHER STREET")]
+    hits = [h for h in shown_hits if not h["flag"].startswith("OTHER STREET")]
+    counts = {g: sum(h["grade"] == g for h in hits) for g in fa.GRADES}
+    out = [f'<p><b>{len(hits):,} lines</b> in {res["seconds"]:.1f} s, from '
+           f'{res["candidates"]:,} holding a spelling below. '
+           + " · ".join(f"{g} {n:,}" for g, n in counts.items() if n)
+           + (f" · another street {len(other):,}" if other else "")
+           + (" · not shown, in " + ", ".join(f"{p} {n:,}" for p, n in hidden.items()) if hidden else "")
+           + "</p>",
+           '<p class="terms">Street spellings searched: '
+           + e(", ".join(f"{t} ({n:,})" for t, n in res["streets"][:30]))
+           + (" …" if len(res["streets"]) > 30 else "")
+           + ("<br>Not searched, common enough to be another street: "
+              + e(", ".join(f"{t} ({n:,})" for t, n in res["dropped"])) if res["dropped"] else "")
+           + "<br>Number forms: " + e(", ".join(f"{t} ({n:,})" for t, n in res["numbers"])) + "</p>"]
+    if res.get("note"):
+        out.append(f'<p class="terms">{e(res["note"])}</p>')
+    if "groups" in res:
+        out += [group_html(g, places) for g in res["groups"]]
+    else:
+        out += lines_html(shown_hits)
     names = {" ".join(fa.name_of(h)) for h in hits}      # residents found in the places shown
     people = {n: rows for n, rows in res["people"].items() if n in names}
     if people:
@@ -482,6 +535,8 @@ def where_html(res: dict | None, places: list) -> str:
 MATCH_COLUMNS = ["grade", "flag", "place", "place_marker", "year", "directory", "volume",
                  "record_id", "name_resolved", "occupation_role", "matched", "raw_line",
                  "address_resolved", "home_address_resolved", "line_image", "page_image"]
+# a search of a renumbered street (eras.py): the address a line was found as, and the mapping's grade
+ERA_COLUMNS = ["searched_as", "era", "crosswalk_grade"]
 TRACE_COLUMNS = ["traced_name", "year", "directory", "volume", "record_id", "gives_address",
                  "left_out", "place", "place_marker", "name_resolved", "occupation_role",
                  "raw_line", "address_resolved", "home_address_resolved", "line_image",
@@ -517,7 +572,8 @@ def exports(res: dict, places: list) -> tuple:
                   place_marker=p["marker"], line_image=p.get("crop"),
                   page_image=page_image(p.get("crop")))
              for name, rows in res["people"].items() if name in names for p in rows]
-    return (write_csv(res["address"], "matches", MATCH_COLUMNS, matches) if matches else None,
+    columns = MATCH_COLUMNS + (ERA_COLUMNS if "groups" in res else [])
+    return (write_csv(res["address"], "matches", columns, matches) if matches else None,
             write_csv(res["address"], "residents", TRACE_COLUMNS, trace) if trace else None)
 
 
@@ -528,14 +584,18 @@ def search(address: str, dist: int, people: bool, places: list, narrow: bool = T
     if not (address or "").strip():
         return "", hide, hide, None
     try:
-        res = records.find(address.strip(), int(dist), people)
+        # Brooklyn's old numbers only where Brooklyn is searched (eras.py: None where it has none)
+        plan = eras.forms(CROSSWALK, address.strip()) if CROSSWALK and "Brooklyn" in (places or []) \
+            else None
+        res = records.find_eras(address.strip(), int(dist), people, plan)
     except SystemExit as err:                     # find_address.parse's message for a bad address
         return f"<p>{html.escape(str(err))}</p>", hide, hide, None
     matches, trace = exports(res, places or [])
     return (render(res, places or [], narrow),
             gr.DownloadButton(value=matches, visible=bool(matches)),
             gr.DownloadButton(value=trace, visible=bool(trace)),
-            {"address": res["address"], "hits": [
+            # a typed range has no address to put on a map
+            None if plan and plan.get("range") else {"address": res["address"], "hits": [
                 {k: h.get(k) for k in ("place", "grade", "flag", "how", "year", *fa.FIELDS)}
                 for h in res["hits"]]})
 
@@ -823,7 +883,8 @@ with gr.Blocks(title="City directories") as demo:
         loc = gr.Textbox(visible="hidden")      # GEO_JS's answer
         near = gr.State()
         with gr.Row():
-            address = gr.Textbox(label="Address", placeholder="155 Franklin", scale=3)
+            address = gr.Textbox(label="Address", placeholder="155 Franklin", scale=3,
+                                 elem_id="address")
             dist = gr.Slider(1, 3, value=2, step=1, label="Street spelling distance", scale=1)
             with gr.Column(scale=1, min_width=160):
                 people = gr.Checkbox(label="Trace the residents", value=False)
@@ -835,7 +896,7 @@ with gr.Blocks(title="City directories") as demo:
                  "it is the directory's own city. Trow's lists Brooklyn homes marked Bklyn; Brooklyn's "
                  "directories mark New York addresses N. Y. or Mhtn. Before 1898 \"Manhattan\" is the "
                  "City of New York.")
-        go = gr.Button("Search", variant="primary")
+        go = gr.Button("Search", variant="primary", elem_id="go")
         # 155 Franklin: 20 lines 1845-1912, and Petzholt's laundry at 165 in 1906, 155 after.
         # 62 Euclid av: "Euelid" (1912), and Keiser August at "02 Euclid av" (1906), 62 elsewhere.
         gr.Examples([["155 Franklin"], ["62 Euclid av"], ["269 Broadway"]], inputs=[address])
@@ -844,7 +905,7 @@ with gr.Blocks(title="City directories") as demo:
             get_trace = gr.DownloadButton("Download the resident trace (CSV)", visible=False, size="sm")
         found = gr.State()
         today = gr.HTML()       # after the lines, from GeoSearch, so it never holds them up
-        result = gr.HTML()
+        result = gr.HTML(elem_id="result")
         # Clear first: gr.HTML patches the old DOM node by node, so a new search would reuse the
         # old <img> elements, which keep showing the old line until IA serves the new one
         hidden = (gr.DownloadButton(visible=False), gr.DownloadButton(visible=False))

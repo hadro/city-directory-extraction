@@ -142,6 +142,12 @@ def sql_str(s) -> str:
     return "'" + str(s).replace("'", "''") + "'"
 
 
+def year_clause(years) -> str:
+    """SQL to AND to a query on r: only the lines of years (low, high), either end None."""
+    lo, hi = years or (None, None)
+    return "".join(f" AND year {op} {int(y)}" for op, y in ((">=", lo), ("<=", hi)) if y is not None)
+
+
 def load_records(con, parquet: str, memory: bool = True, extra=()) -> tuple:
     """r: the records in the file's order (rowid = row number), a table in memory, or with
     memory=False a view of the file (no start-up; each search reads the file, ~1 s more: for one
@@ -274,14 +280,15 @@ class Records:
             SELECT rid FROM words WHERE term IN ({quoted(self.near_terms(number) + [ODD])})
             """).fetchall()]
 
-    def to_grade(self, rids: list, shape) -> list:
+    def to_grade(self, rids: list, shape, years=None) -> list:
         """The candidates in the address's shape, to grade: the shape test runs in DuckDB, so
-        the rest never reach Python."""
-        where = f"AND regexp_matches({TEXT}, {sql_str(re2(shape.pattern))})" if shape else ""
+        the rest never reach Python. So does the year range."""
+        where = (f"AND regexp_matches({TEXT}, {sql_str(re2(shape.pattern))})" if shape else "") \
+            + year_clause(years)
         return self._dicts(f"SELECT rowid AS rid, {', '.join(GRADE_COLS)} FROM r "
                            f"WHERE rowid IN (SELECT unnest(?)) {where}", [rids])
 
-    def to_read_wrapped(self, rids: list, number: str, shape) -> list:
+    def to_read_wrapped(self, rids: list, number: str, shape, years=None) -> list:
         """The candidates that may wrap the address, each with its next line (`next_raw`, by
         record_id): a near number among the line's last two tokens, and the address's shape across
         the two lines. Both are what read_wrapped needs."""
@@ -292,11 +299,13 @@ class Records:
         return self._dicts(f"""
             SELECT a.rid, {', '.join('a.' + c for c in GRADE_COLS)}, n.raw_line AS next_raw
             FROM (SELECT rowid AS rid, {', '.join(GRADE_COLS)} FROM r WHERE rowid IN (SELECT unnest(?))
-                  AND regexp_matches(lower(coalesce(raw_line, '')), {sql_str(re2(ends_near(number)))})
+                  AND regexp_matches(lower(coalesce(raw_line, '')), {sql_str(re2(ends_near(number)))}){year_clause(years)}
                  ) a JOIN r n ON n.record_id = {nid}
             WHERE true {across}""", [rids])
 
-    def find(self, address: str, dist: int = 2, people: bool = False) -> dict:
+    def find(self, address: str, dist: int = 2, people: bool = False, years=None) -> dict:
+        """The lines that give the address; `years` (low, high), either None, keeps only the
+        lines of those years, decided in SQL before any grading."""
         number, words, kind = fa.parse(address)
         anchor = fa.anchor_of(words)
         t = time.time()
@@ -313,14 +322,14 @@ class Records:
         skip = frozenset(t for t, _ in dropped)
         shape = address_shape(number, words, dist)
         hits = []
-        graded = self.to_grade(rids, shape) if rids else []
+        graded = self.to_grade(rids, shape, years) if rids else []
         for r in graded:
             if (best := fa.best_reading(r, number, words, kind, dist, skip)):
                 hits.append((best, r))
         lap("grade")
         found = {r["rid"] for _, r in hits}
         # the number last, the street on the next line
-        wrap = [r for r in (self.to_read_wrapped(rids, number, shape) if rids else [])
+        wrap = [r for r in (self.to_read_wrapped(rids, number, shape, years) if rids else [])
                 if r["rid"] not in found]
         for r in wrap:
             if (best := fa.read_wrapped(r, r.pop("next_raw"), number, words, kind, dist, skip)):
@@ -348,6 +357,38 @@ class Records:
             lap("trace")
             res["seconds"] = time.time() - t
         return res
+
+    def find_eras(self, address: str, dist: int = 2, people: bool = False, plan=None) -> dict:
+        """find(), and for a renumbered street (space/eras.py's `plan`) one find() per number of
+        each form, in the form's own years: res["groups"] holds one group per form (title,
+        rests, link, hits), res["hits"] all their lines, each marked searched_as, era and
+        crosswalk_grade. A line found under two numbers of one form keeps its best grade. The
+        residents are traced for the new number only."""
+        if not plan or not plan["forms"]:
+            return dict(self.find(address, dist, people), note=(plan or {}).get("note", ""))
+        t, base, groups = time.time(), None, []
+        for f in plan["forms"]:
+            lo, hi = f["years"][0] or 0, f["years"][1] or 9999
+            hits = []
+            for n in f["numbers"]:
+                typed = f"{n} {f['street']}" if f["only"] else address
+                res = self.find(typed, dist, people and not f["only"], f["years"] if f["only"] else None)
+                base = base or res
+                for h in res["hits"]:
+                    inside = lo <= (h["year"] or 0) <= hi
+                    # an old number is Brooklyn's lines; the new one keeps other places' lines of any year
+                    if inside and h["place"] == "Brooklyn" if f["only"] else inside or h["place"] != "Brooklyn":
+                        era = f["era"] if f["only"] or h["place"] == "Brooklyn" else ""
+                        hits.append(dict(h, searched_as=typed, era=era, crosswalk_grade=f["grade"]))
+            hits.sort(key=lambda h: (fa.GRADES.index(h["grade"]), h["year"] or 0, h["volume"],
+                                     h["leaf"], h["line"]))
+            best = {}
+            for h in hits:                      # sorted, so the first of a line is its best grade
+                best.setdefault(h["record_id"], h)
+            groups.append(dict(f, hits=list(best.values())))
+        main = dict(base, address=address) if plan["forms"][0]["only"] else base
+        return dict(main, groups=groups, hits=[h for g in groups for h in g["hits"]], note="",
+                    seconds=time.time() - t)
 
     def residents(self, hits: list, number, words, kind, dist) -> dict:
         """Each person found at the address, in every volume: a year whose line read the address

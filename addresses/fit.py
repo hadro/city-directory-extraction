@@ -57,6 +57,7 @@ GAP = 100          # neighbours in a chain are no further apart than this, in ei
 SPARSE = 20        # a chain averages an anchor at least every so many old numbers
 TOLERANCE = 2
 YEARS = 5
+NEAR = 10          # a grade A has anchors this close on both sides of the number, or its own
 
 
 def heaviest_chain(points: list) -> tuple:
@@ -125,6 +126,26 @@ def back(chain: list, number: int) -> tuple | None:
     return across(side, number, col=1)
 
 
+def graded(chain: list, number: int, col: int = 0) -> tuple | None:
+    """(low, high, grade) for across (col 0) or back (col 1). A: the number is an anchor's own or
+    has anchors within NEAR on both sides; B: a wider bracket; C: past the chain's end, with no
+    numbers (None, None). None where the chain is not for this number's side (back's rule).
+
+    Why C gives no numbers (Brooklyn 1871-75: each chain side's end anchors held back and
+    predicted from the next one in, the same distance along, +-5 numbers): right 96% within 5
+    numbers past the end, 93% at 6-10, 69% at 11-20, 43% at 21-40, 20% at 41-100. Of the 60,827
+    new numbers people are listed at, 30,221 are past the end of every chain that is for their
+    side and only 1,437 of those within 10 of it."""
+    side = sorted(p[col] for p in chain if col == 0 or p[1] % 2 == number % 2)
+    if 2 * len(side) < len(chain):
+        return None
+    if not (span := across(chain, number) if col == 0 else back(chain, number)):
+        return None, None, "C"
+    lo = max((k for k in side if k <= number), default=None)
+    hi = min((k for k in side if k >= number), default=None)
+    return *span, "A" if number - lo <= NEAR and hi - number <= NEAR else "B"
+
+
 def held_back(points: list, strong: set, folds: int = 5) -> tuple:
     """(asked, placed, right): strong anchors held back, those a chain fitted on the rest
     reaches, and those whose new number is where that chain says."""
@@ -151,6 +172,11 @@ def self_test():
     assert across(found[0][1], 153) == (228, 234) and across(found[0][1], 156) == (234, 234)
     assert back(found[0][1], 230) == (150, 156) and across(found[0][1], 100) is None
     assert back(found[0][1], 231) is None             # the chain's new numbers are all even
+    assert graded(found[0][1], 153) == (228, 234, "A") and graded(found[0][1], 230, 1) == (150, 156, "A")
+    assert graded(found[0][1], 156) == (234, 234, "A") and graded(found[0][1], 100) == (None, None, "C")
+    assert graded(found[0][1], 231, 1) is None and graded(found[0][1], 400, 1) == (None, None, "C")
+    wide = [(n, n + 78, 1) for n in range(100, 400, 30)]
+    assert graded(wide, 120) == (178, 208, "B") and graded(wide, 130) == (208, 208, "A")
     reverse = [(n, 400 - n, 1) for n in range(10, 120, 8)]
     (sign, chain), = chains(reverse)[0]
     assert sign == -1 and across(chain, 14) == (382, 390)

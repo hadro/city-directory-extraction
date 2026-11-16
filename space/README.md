@@ -71,6 +71,9 @@ The files:
   ("The test Space" below).
 - **`where.py`:** where the address is today (below). Run it directly to test one borough:
   `uv run --with duckdb==2.0.0 python space/where.py "155 Franklin av" Brooklyn`.
+- **`eras.py`:** a renumbered street's old numbers (below). `uv run --with duckdb==2.0.0 python
+  space/eras.py` runs its asserts.
+- **`check_eras.py`:** the headless-Chrome cases for it (below).
 - **`here.py`:** the buildings where you're standing (below). Run it directly with a point:
   `uv run --with duckdb==2.0.0 python space/here.py 40.78002 -73.97748`.
 
@@ -236,6 +239,41 @@ The page and the script give the same lines: since 2026-11-04 the script runs th
 the same Parquet. So neither shows a held-out row, such as "h 76 Leffert© pi" (1906BPL:1193:111,
 an `adjacent` holdout), which the script found when it read browse.db.
 
+## Old numbers on renumbered streets (2026-11-15, local only, not on the test Space)
+
+Brooklyn renumbered most streets between its 1871 and 1875 directories (docs/RENUMBERING_PLAN.md),
+so "465 Court st" before the change was about 643-651. For a Brooklyn address inside a fitted chain
+the finder also searches the old numbers, each form only in its own years, and shows GROUPS:
+"As 465 Court st, 1875 on" and "As 643-651 Court st, before 1871-75 (renumbered between those
+directories)", the old one with a line on what it rests on and the grade (A: an anchor's own
+number or anchors within 10 on both sides; B: a wider bracket; C, past a chain's end, gives no
+numbers, only a note that the mapping does not reach). Brooklyn 1871-75 only.
+
+- **Data.** `crosswalk.csv` beside the records (`uv run --with duckdb==2.0.0 python
+  addresses/export_crosswalk.py`, from `data/addresses/anchors.parquet`; 8,225 anchors, 344 KB).
+  Without it the finder is as it was. A Space takes `eras.py`, `crosswalk.csv` and `addresses/fit.py`
+  (stdlib only, imported by `eras.py` as `search.py` imports `find_address.py`); `RECORDS_COPY_TO`
+  copies the CSV with the records.
+- **Which forms.** `eras.forms`: per chain of the street, `fit.graded(chain, number, 1)`. A or B gives
+  a bracket of old numbers, searched number by number on the old side the chain is for, at most 5
+  either side of its middle; a bracket wider than `WIDE` (20) is a note with a link, which types
+  "644-696 Court st, before 1871-75" into the box (a range address, every other number, the old
+  years). Two chains reaching one new number are two groups. Only when Brooklyn is among the places.
+- **Years.** An old number is searched with `years=(None, 1871)` in SQL (`find(years=...)`), and its
+  lines kept only where they are Brooklyn's (the marker rule). The new number is searched as
+  before and Brooklyn's lines before 1875 dropped after grading, because "place" is decided from the
+  marker in the line, which SQL cannot see; a Manhattan "100 Fulton st" keeps every year.
+- **Street key.** `eras.street_key(fa.parse(...))` gives addresses/streets.py's key ("court",
+  "myrtle av", "5 av", "n 2"); `eras.py`'s asserts compare it with `streets.read` on 18 typed forms.
+  A bare name ("677 Myrtle") finds the one crosswalk street that is that name and a type. Fails: a
+  place or district typed after the street, "b'way", a half number, a bare name where two streets
+  share it (Franklin st is taken for Franklin av).
+- **Downloads.** The matches CSV gains `searched_as`, `era`, `crosswalk_grade` when there are groups.
+- **Checks.** `eras.py` (asserts), `addresses/fit.py --self-test`, and `check_eras.py` against a
+  server of your own (465/462/294 Court st, 181 Bridge st, 677 Myrtle av, 43 Atlantic av, 155
+  Franklin, the range link; 62 Euclid av and 1 Wall st print what the page printed before, apart from the
+  order of equally common spellings).
+
 ## The Browse tab
 
 A prototype, 2026-11-07, of a hosted stand-in for browse.db's Datasette: search every text column,
@@ -298,7 +336,8 @@ finder's table `r` (the records in memory), so it costs no second copy of the da
    the release changes. The index names one file; a release in several files needs one index
    built over them in the order `read_parquet` reads them.
 2. **The code.** A Space repo holding `app.py`, `search.py`, `browse.py`, `where.py`, `here.py`, `requirements.txt`,
-   this README (its header is the Space config), and a copy of `browse/find_address.py`.
+   this README (its header is the Space config), and a copy of `browse/find_address.py`, and for the old numbers `eras.py`, `addresses/fit.py` and
+   `crosswalk.csv`.
    `search.py` imports that copy when it's beside it. Set `GOOGLE_MAPS_API_KEY` as a Space
    secret for the Street View links ("Where it is today" above).
 3. **Hardware.** ZeroGPU, the one Gradio hardware a free account may use (up to 2 Spaces; the free

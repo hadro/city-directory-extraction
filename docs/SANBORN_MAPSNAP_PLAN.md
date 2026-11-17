@@ -3,7 +3,8 @@
 **Date:** 2026-11-16. **For:** hadro, and any session picking up Phase 6 of `docs/RENUMBERING_PLAN.md`.
 **Also kept as a Claude Doc:** https://claude.ai/artifact/7YA4cKqXtUKgh6JEzZk3TB (same content, with the
 diagram and the two crops shown).
-**Status:** research and plan only. Nothing here is built; the lookup below was a scratch script, not kept.
+**Status:** plan, plus the spot check of mapsnap's NYC placements (2026-11-17, `results/sanborn_spotcheck.py`;
+see "Spot check of the placements"). The 462 Court St lookup further down was a scratch script, not kept.
 
 ## Summary
 
@@ -23,9 +24,67 @@ Allmaps-ready IIIF georeference.
 - **There are ideas to borrow and something to give back.** We can borrow its two methods: reading text
   against a known vocabulary, and carrying a placement from one edition of a sheet to the next. Our street
   registry of renamings is the kind of data mapsnap says it lacks.
-- **Main caveats:** mapsnap's NYC accuracy is untested against human placements except for Brooklyn 1939.
-  Its annotations are licensed ODbL (share-alike). Its mirrored images are a quarter of full size, too small
-  to read house numbers, so readings need the Library of Congress originals.
+- **The placements are good above mapsnap's own confidence of 0.9** (spot check, next section): 46 of 48
+  checkable sheets put the address within two lots of its printed number. Below 0.9, 12 of 23.
+- **Main caveats:** its annotations are licensed ODbL (share-alike). Its mirrored images are a quarter of
+  full size, too small to read house numbers, so readings need the Library of Congress originals.
+
+## Spot check of the placements (2026-11-17)
+
+Above a confidence of 0.9, mapsnap's NYC placements are good enough to use: 46 of 48 checkable sheets put
+the address within two lots of where its number is printed, and one sheet was in the wrong place. Below
+0.9, only 12 of 23 were within two lots and 7 were in the wrong place.
+
+**Method.** `results/sanborn_spotcheck.py` (`fetch`, `sample`, `summary`; seed 20261116, run v2.0). It took
+30 sheets per group at random, each one whose placed outline holds one of today's address points whose
+number should be the one printed on the sheet. In Brooklyn that means the 40 streets `chain.py` says kept
+their numbering since 1875 (`eras.csv`, `today=yes`); in Manhattan, any street. For each it fetched a
+1000 px crop of the LoC scan centred on mapsnap's pixel for that point. One reader (Claude, by eye) noted
+where the expected number is printed: on the lot or its line, 1-2 lots off, further, or in another place.
+Readings: `results/sanborn_spotcheck_readings.csv`; totals: `results/sanborn_spotcheck.json`; crops:
+`data/sanborn/spotcheck/crops/` (not in git; `sample` rebuilds them).
+
+| Group | conf >= 0.9: within 2 lots | wrong place | conf < 0.9: within 2 lots | wrong place | Sheets at >= 0.9 in the group |
+| --- | --- | --- | --- | --- | --- |
+| Brooklyn 1886-88 | 12 of 12 | 0 | 7 of 13 | 5 | 107 of 248 (43%) |
+| Brooklyn 1904-09 | 16 of 17 | 1 | 2 of 6 | 1 | 1,161 of 1,527 (76%) |
+| Manhattan and Bronx 1890-1922 | 18 of 19 | 0 | 3 of 4 | 1 | 1,325 of 2,186 (61%) |
+| All | 46 of 48 (96%; 95% interval 86-99%) | 1 | 12 of 23 (52%; 33-71%) | 7 | |
+
+"Checkable" means the crop shows where the expected number is or should be. The other 19 of the 90: in 6
+the place is right but no number is printed (vacant lots, a key map), and in 13 the crop shows no numbers
+to judge by.
+
+**What it decides:**
+
+- **Use a confidence floor of 0.9.** It keeps 43% of the 1886-88 Brooklyn sheets, 76% of 1904-09 and 61% of
+  Manhattan 1890-1922. Above it, 38 of 48 points fell on the lot or its line and 8 more one or two lots
+  off, so a crop a few lots wide shows the right building.
+- **The weak 1886-88 edition is fine above the floor** (12 of 12). Its problem is that fewer than half its
+  sheets reach the floor.
+- **Skip two Brooklyn volumes for crops:** sanborn05791_029 (1905) and sanborn05791_030 (1909) are
+  block-dimension maps with no house numbers. They account for 3 of the 13 unjudgeable crops.
+- **Confidence is a guide, not a guarantee.** The one wrong placement above the floor was Brooklyn 1908
+  vol. 7 sheet 5 at 0.94: Pacific St 1307-1321 where 1421 should be, about 50 lots off. Meanwhile Manhattan
+  1894 vol. 1 sheet [2] at 0.19 was on the lot.
+
+**Other findings:**
+
+- **Manhattan's numbering held.** None of the 30 Manhattan crops showed a different run of numbers, so the
+  assumption that today's numbers are the sheet's held wherever it could be tested.
+- **Some Brooklyn sheets print two columns of house numbers.** Brooklyn 1904 vol. 1 sheet 53 (Douglass St:
+  92-106½ beside 94-106) and 1906 vol. 6 sheet 62 (Carroll St: 647/651 down to 655/657). In both, the second
+  column is today's number. So Sanborn did record some renumberings on the sheet. These stretches of
+  Douglass and Carroll may also have been renumbered after 1875, which `chain.py` marks as unchanged
+  because it judges the whole street by the downtown 1855 atlas. That is a lead for the crosswalk; it was
+  not checked further.
+
+**Limits:**
+
+- One reader, by eye, with no second reading.
+- A sheet placed far from every qualifying address is never sampled, so gross misplacements are
+  undercounted, especially in Brooklyn, where the qualifying streets are downtown and their extensions.
+- The 96% rests on 48 sheets.
 
 ## What mapsnap does
 
@@ -216,8 +275,8 @@ A addresses.
 
 **Risks**
 
-- **Accuracy is unmeasured in NYC.** Only Brooklyn 1939 vols. 1-2 have volunteer truth. Our grade A
-  crosswalk points are an independent check, and nobody else has one.
+- **Accuracy was unmeasured in NYC** (only Brooklyn 1939 vols. 1-2 have volunteer truth). The spot check
+  above now measures it, with a confidence floor of 0.9 as its answer.
 - **A lot is about the size of the error.** A within-25-ft placement on a 20-25 ft lot needs the printed
   number to pick the lot. Without a reading, the lookup gives a block face.
 - **Licence.** The annotations are ODbL 1.0, so a published database built on their geometry must carry ODbL
@@ -235,8 +294,9 @@ A addresses.
 
 **Open questions**
 
-- After a renumbering, did Sanborn print the old numbers too, or only the new? Look at Bronx sheets after
-  1907-08 and Williamsburg sheets after 1887-89.
+- After a renumbering, did Sanborn print the old numbers too? Partly answered: two 1904-06 Brooklyn sheets
+  print two columns (see the spot check). Still open: how many sheets do, and whether Bronx sheets after
+  1907-08 and Williamsburg sheets after 1887-89 do.
 - Which "New York" volumes cover the Bronx? The item titles don't say.
 - Would Dan Vanderkam share NYC text boxes, and would he take an alias table?
 
@@ -247,9 +307,8 @@ A addresses.
    where `<main>` is the `main` column of `items.tsv`. It writes a sheet table with item, year, volume,
    sheet, confidence, ground polygon and transform. It must be re-runnable, like everything in
    `addresses/`.
-2. **Spot check (a day).** Draw 50 grade A Brooklyn addresses across 1886-1912 and crop each from the
-   nearest-year sheet at full resolution. Read the number by eye or with Sonnet. Measure the share that lands
-   on the right building, by edition and confidence.
+2. **Spot check.** Done 2026-11-17, as 90 sheets in three groups rather than 50 grade A addresses; see "Spot
+   check of the placements". Experiment 1 is done too, inside the same script (`fetch`).
 3. **Finder crop, local only.** Add "On the Sanborn, 1906" beside each line, with no new library.
 4. **The Phase 6.3 pilot on Sanborns.** Read every number on one block face in 1886 and 1904, and compare it
    with the crosswalk.

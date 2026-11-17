@@ -1,0 +1,151 @@
+{
+ "run": "v2.0",
+ "seed": 20261116,
+ "per_stratum": 30,
+ "table": {
+  "bk1886": {
+   "at": 11,
+   "near": 8,
+   "block": 1,
+   "off": 5,
+   "renumbered": 0,
+   "missing": 3,
+   "unread": 2,
+   "n": 30,
+   "within_2_lots": 0.76,
+   "wrong_place": 0.2
+  },
+  "bk1886 conf < 0.9": {
+   "at": 3,
+   "near": 4,
+   "block": 1,
+   "off": 5,
+   "renumbered": 0,
+   "missing": 3,
+   "unread": 1,
+   "n": 17,
+   "within_2_lots": 0.54,
+   "wrong_place": 0.38
+  },
+  "all": {
+   "at": 45,
+   "near": 13,
+   "block": 5,
+   "off": 8,
+   "renumbered": 0,
+   "missing": 6,
+   "unread": 13,
+   "n": 90,
+   "within_2_lots": 0.82,
+   "wrong_place": 0.11
+  },
+  "all conf < 0.9": {
+   "at": 7,
+   "near": 5,
+   "block": 4,
+   "off": 7,
+   "renumbered": 0,
+   "missing": 5,
+   "unread": 10,
+   "n": 38,
+   "within_2_lots": 0.52,
+   "wrong_place": 0.3
+  },
+  "bk1886 conf >= 0.9": {
+   "at": 8,
+   "near": 4,
+   "block": 0,
+   "off": 0,
+   "renumbered": 0,
+   "missing": 0,
+   "unread": 1,
+   "n": 13,
+   "within_2_lots": 1.0,
+   "wrong_place": 0.0
+  },
+  "all conf >= 0.9": {
+   "at": 38,
+   "near": 8,
+   "block": 1,
+   "off": 1,
+   "renumbered": 0,
+   "missing": 1,
+   "unread": 3,
+   "n": 52,
+   "within_2_lots": 0.96,
+   "wrong_place": 0.02
+  },
+  "bk1904": {
+   "at": 15,
+   "near": 3,
+   "block": 3,
+   "off": 2,
+   "renumbered": 0,
+   "missing": 0,
+   "unread": 7,
+   "n": 30,
+   "within_2_lots": 0.78,
+   "wrong_place": 0.09
+  },
+  "bk1904 conf >= 0.9": {
+   "at": 14,
+   "near": 2,
+   "block": 0,
+   "off": 1,
+   "renumbered": 0,
+   "missing": 0,
+   "unread": 1,
+   "n": 18,
+   "within_2_lots": 0.94,
+   "wrong_place": 0.06
+  },
+  "bk1904 conf < 0.9": {
+   "at": 1,
+   "near": 1,
+   "block": 3,
+   "off": 1,
+   "renumbered": 0,
+   "missing": 0,
+   "unread": 6,
+   "n": 12,
+   "within_2_lots": 0.33,
+   "wrong_place": 0.17
+  },
+  "mn": {
+   "at": 19,
+   "near": 2,
+   "block": 1,
+   "off": 1,
+   "renumbered": 0,
+   "missing": 3,
+   "unread": 4,
+   "n": 30,
+   "within_2_lots": 0.91,
+   "wrong_place": 0.04
+  },
+  "mn conf >= 0.9": {
+   "at": 16,
+   "near": 2,
+   "block": 1,
+   "off": 0,
+   "renumbered": 0,
+   "missing": 1,
+   "unread": 1,
+   "n": 21,
+   "within_2_lots": 0.95,
+   "wrong_place": 0.0
+  },
+  "mn conf < 0.9": {
+   "at": 3,
+   "near": 0,
+   "block": 0,
+   "off": 1,
+   "renumbered": 0,
+   "missing": 2,
+   "unread": 3,
+   "n": 9,
+   "within_2_lots": 0.75,
+   "wrong_place": 0.25
+  }
+ }
+}

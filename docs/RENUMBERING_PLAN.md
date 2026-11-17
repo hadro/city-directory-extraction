@@ -789,7 +789,8 @@ groups; a street with no event shows one; a reversed street (Berry) maps the rig
 1. Sheets NYPL's Map Warper already rectified: turn their control points into Allmaps
    georeference annotations on NYPL's IIIF images. A script.
 2. Library of Congress Sanborn volumes through `danvk/mapsnap`, which writes Allmaps annotations.
-   Tried on one Brooklyn volume first.
+   Tried on one Brooklyn volume first. (2026-11-16: its published v2.0 run already places 9,332 of
+   12,362 NYC sheets; see `docs/SANBORN_MAPSNAP_PLAN.md`.)
 3. The Allmaps editor by hand, for what neither gives.
 - The test of a georeferenced sheet: the crosswalk's grade A points, drawn on it, land on the
   buildings carrying those numbers.

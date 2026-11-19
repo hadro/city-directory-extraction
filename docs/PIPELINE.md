@@ -3447,7 +3447,7 @@ were NOT re-assembled (529 lines; the export excludes that root).
 **39. ~~The address finder is too slow at the full corpus~~ FIXED 2026-11-04 (found the same day,
 after round 13).** On the laptop held to 2 threads (the free tier's count): start-up
 6-9 s (8 threads) -> **8.4 s on 2** (it was ~12-24 s on 2), ~2 GB; with the trace, 155 Franklin 11.19
--> **2.48 s**, 166 Lefferts pl 9.40 -> 1.46, 45 Fulton 13.95 -> 2.37, 62 Euclid av 9.45 -> 1.66 (the
+-> **2.48 s**, a Brooklyn address 9.40 -> 1.46, 45 Fulton 13.95 -> 2.37, 62 Euclid av 9.45 -> 1.66 (the
 "before" column is 8 threads). The heaviest seen is 100 5th av (23,633 hits) at 4.0 s.
 What changed, in `space/search.py`:
 - **A word index shipped beside the records** (`records.words.parquet`: 105M (word, row) pairs, 143 MB
@@ -3483,8 +3483,8 @@ are fetched to grade (the same count as the Python test on every address checked
 the wrap pass only if its tail holds a near number and it has the shape together with its next
 line, joined by record_id in SQL. A rowid+1 join was tried and was slower. Wrap lines per search:
 13-34K -> mostly a few hundred (62 Euclid av 16; 10-22K left only for "1 Wall st", "100 5th av",
-"8 Ann st", "5 Jay st"). On 2 threads with the trace: 155 Franklin 2.48 -> **1.32 s**, 166 Lefferts
-pl 1.46 -> 1.05, 45 Fulton 2.37 -> 1.88, 62 Euclid av 1.66 -> 0.90, 100 5th av 4.0 -> 3.1. Over 40
+"8 Ann st", "5 Jay st"). On 2 threads with the trace: 155 Franklin 2.48 -> **1.32 s**, a Brooklyn
+address 1.46 -> 1.05, 45 Fulton 2.37 -> 1.88, 62 Euclid av 1.66 -> 0.90, 100 5th av 4.0 -> 3.1. Over 40
 addresses (hits with grade, how, flag, place and marker, and every traced line): all identical to
 ef9d189's, 78.8 -> 60.2 s in all. `find` now returns `phases`, and `results/finder_timing.py`
 prints them. For 155 Franklin: terms 0.10, candidates 0.22, grade 0.22, wrap 0.20, hits 0.06,
@@ -3493,7 +3493,7 @@ search, and grading in Python is for a heavy one (1.2-1.4 s for 1 Wall st and 10
 (2) *The CLI* was broken as well as slow. browse.db holds a volume loaded from two roots twice
 (1906BPL, Mercein, Doggett 1845), and two copies of a line tied in `report`'s sort down to the
 `sqlite3.Row`, a TypeError. Its time was the `fts5vocab` scan (7-14 s), the FTS rows (5-25 s) and
-one query per line ending on a number (4-19 s): 15 s for 166 Lefferts pl, ~56 s for 45 Fulton.
+one query per line ending on a number (4-19 s): 15 s for a Brooklyn address, ~56 s for 45 Fulton.
 It now runs `search.Records` over the records Parquet, reading the file rather than loading it
 (`memory=False`, a `file_row_number` view): 3.6-4.0 s wall, with the trace. It gives the page's
 lines exactly (checked on the 40), with no held-out rows and one copy of each volume, and it warns
@@ -3513,8 +3513,8 @@ Space `hadro/cde-finder-timing`, the code and both Parquets in the Space repo (7
 `@spaces.GPU` function (needed: without one the Space stops after starting, "No @spaces.GPU
 function detected during startup"; `space/app.py` now defines one when `spaces` imports). The container is no small tier: a
 16-CPU cgroup quota (Xeon 8559C; DuckDB defaults to 16 threads) and 104 GB memory.max. At its
-default threads: start-up 2.7 s; `find` with the trace 0.39 s (62 Euclid av), 0.67 (166 Lefferts
-pl), 1.20 (155 Franklin), 1.92 (45 Fulton), 3.9-4.0 (1 Wall st, 100 5th av); held to 2 threads
+default threads: start-up 2.7 s; `find` with the trace 0.39 s (62 Euclid av), 0.67 (a Brooklyn
+address), 1.20 (155 Franklin), 1.92 (45 Fulton), 3.9-4.0 (1 Wall st, 100 5th av); held to 2 threads
 1.3-2.7 s and 5.0-5.2 s, slower than the laptop's 2 (a Xeon core is slower than an M2's). Through
 the page's API from here, network and a 0.1-1.3 MB result page included: 0.7-1.5 s for the four,
 3.3 s for 45 Fulton, 5.1-6.2 s for the two heavy ones. Hits equal the laptop's. Python grading
@@ -3537,7 +3537,7 @@ put the first/clean tier in for the first time: 15,497,151 rows, 547 MB. Measure
 | query | candidate scan | candidates | `find` | with the resident trace |
 |---|---|---|---|---|
 | 155 Franklin | 2.60 s | 123,675 | 4.87 s (3,362 hits) | 11.19 s |
-| 166 Lefferts pl | 2.20 s | 35,420 | 3.32 s (745) | 9.40 s |
+| a Brooklyn address | 2.20 s | 35,420 | 3.32 s (745) | 9.40 s |
 | 45 Fulton | 2.67 s | 281,735 | 7.70 s (12,195) | 13.95 s |
 | 62 Euclid av | 2.25 s | 49,494 | 4.31 s (142) | 9.45 s |
 
@@ -3580,7 +3580,7 @@ hit's `how`). Checked in headless Chrome, and the last three with `where.py` alo
 - 45 Fulton pins Manhattan, and says there is no such address in Brooklyn today.
 - 131 110th st gives no pin and lists East and West. A numbered street asked without a
   direction is asked both ways.
-- 131 W 110th st and 166 Lefferts pl pin; so do 269 Broadway, 100 De Kalb av and 62 Euclid av.
+- 131 W 110th st and a Brooklyn address pin; so do 269 Broadway, 100 De Kalb av and 62 Euclid av.
 
 The lookup runs as a `.then()` after the lines, so it never holds them up. Answers are cached per
 process.

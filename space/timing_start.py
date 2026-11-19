@@ -43,7 +43,7 @@ print("duckdb", duckdb.__version__, "default threads",
 
 import finder_timing  # noqa: E402
 
-QUERIES = ["155 Franklin", "166 Lefferts pl", "45 Fulton", "62 Euclid av", "1 Wall st", "100 5th av"]
+QUERIES = ["155 Franklin", "217 Berkeley pl", "45 Fulton", "62 Euclid av", "1 Wall st", "100 5th av"]
 for threads in (["--threads", "2"], []):
     t = time.time()
     print("== finder_timing", threads or "default threads", flush=True)

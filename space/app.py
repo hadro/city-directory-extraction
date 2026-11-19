@@ -49,7 +49,7 @@ NEAR_SHOWN = 300
 ABOUT = {
     "exact": "The number and the street as asked.",
     "street": "The number as asked; the street misspelled or split by the OCR.",
-    "number": "The number in look-alike characters (I66, hl66).",
+    "number": "The number in look-alike characters (I46, hl46).",
     "wrapped": "The number at the end of a line, the street at the start of the next.",
     "near": "One digit off. Mostly real neighbours: the ones flagged SAME NAME or SURNAME have "
             "that person, or surname, at the exact address in another year, and are the "
@@ -363,7 +363,7 @@ def render(res: dict, places: list, narrow: bool = True) -> str:
         shown = other[:NEAR_SHOWN]
         out.append(f'<details{" open" if not hits else ""}><summary><b>Another street: '
                    f'{len(other):,}</b>. The same number and name with another direction or type '
-                   f'(E 110th for W 110th, Lefferts av for Lefferts pl): a different street, not a '
+                   f'(E 110th for W 110th, Park av for Park pl): a different street, not a '
                    f'misreading.</summary><table class="hits">'
                    f'{"".join(row_html(h, True) for h in shown)}</table></details>')
     names = {" ".join(fa.name_of(h)) for h in hits}      # residents found in the places shown

@@ -7,8 +7,8 @@
 Every line of the records that may give an address, OCR misreadings included, with a link to
 check them in the browser (browse/README.md).
 
-    uv run browse/find_address.py "166 Lefferts pl"
-    uv run browse/find_address.py "166 Lefferts pl" --people     # also trace who lived there
+    uv run browse/find_address.py "146 Berkeley pl"
+    uv run browse/find_address.py "146 Berkeley pl" --people     # also trace who lived there
     python3 browse/find_address.py --self-test
 
 It searches the address finder's records Parquet (data/space/records.parquet, which
@@ -16,20 +16,20 @@ space/build_parquet.py makes from data/browse.db) with the finder's own search (
 so the two give the same lines: one copy of a volume loaded twice, the eval_holdout rows left
 out. This file holds the readers both use.
 
-A "contains" filter both misses and over-matches: it skips a misread line, and "6 Lefferts" is
-in "56 Lefferts". This reads the word index's word list instead -- the street word's
-spellings within --dist edits (Leflerts, Lefferta) and the number's look-alikes (I66, l6G) --
+A "contains" filter both misses and over-matches: it skips a misread line, and "6 Berkeley" is
+in "56 Berkeley". This reads the word index's word list instead -- the street word's
+spellings within --dist edits (Bcrkeley, Berkelcy) and the number's look-alikes (I46, l4G) --
 then reads every line holding one as number-then-street, in raw_line and the two resolved
-address columns, rejoining a street the OCR split (Lef-ferts, Lef ferts). A line that ends on
+address columns, rejoining a street the OCR split (Berk-eley, Berk eley). A line that ends on
 the number is read on into the next line of its leaf.
 
 Each line gets the best of these grades:
   exact     the number and the street as asked
   street    the number as asked, the street misspelled or split
-  number    the number in look-alike characters (I66), the street within --dist
+  number    the number in look-alike characters (I46), the street within --dist
   wrapped   the number at the end of a line, the street at the start of the next
   near      one digit off (106, 165, 16): usually a real neighbour, sometimes a misread
-and a note where the line names another street type (166 Lefferts av when asked for pl) or
+and a note where the line names another street type (146 Berkeley av when asked for pl) or
 direction (131 E 110th when asked for West), which is a different street, not a misreading. A
 direction left out of a line is no difference. A numbered street (110th, 3d) matches by its digits
 with look-alikes folded (11Oth), never by edits: 111th is another street. A near line whose name (SAME NAME) or surname (SURNAME)
@@ -100,11 +100,11 @@ def street_type(word: str) -> str:
 
 
 def parse(address: str):
-    """'166 Lefferts pl' -> ('166', ['lefferts'], 'pl'); a direction leads the words, as one
+    """'146 Berkeley pl' -> ('146', ['berkeley'], 'pl'); a direction leads the words, as one
     letter: '131 West 110th st' -> ('131', ['w', '110th'], 'st')"""
     toks = address.split()
     if len(toks) < 2 or not toks[0].isdigit():
-        raise SystemExit(f'give a house number and a street: "166 Lefferts pl", not {address!r}')
+        raise SystemExit(f'give a house number and a street: "146 Berkeley pl", not {address!r}')
     kind = street_type(toks[-1]) if len(toks) > 2 else ""
     words = [re.sub(r"[^a-z0-9]", "", t.lower()) for t in (toks[1:-1] if kind else toks[1:])]
     words = [w for w in words if w]
@@ -136,10 +136,10 @@ def ordinal(word: str) -> str | None:
 
 
 def as_number(tok: str) -> str | None:
-    """A line's token as a house number, look-alikes folded ('I66' -> '166', 'h186' -> '186');
+    """A line's token as a house number, look-alikes folded ('I46' -> '146', 'h186' -> '186');
     None unless it holds a real digit."""
     t = tok.strip(".:;,'\"()")
-    if len(t) > 1 and t[0] in "hr" and t[1:].translate(FOLD).isdigit():    # h166, hl66
+    if len(t) > 1 and t[0] in "hr" and t[1:].translate(FOLD).isdigit():    # h146, hl46
         t = t[1:]
     if not any(c.isdigit() for c in t):
         return None
@@ -326,21 +326,21 @@ def report(res: dict, base: str, people: bool, dist: int):
 
 
 def self_test():
-    words = ["lefferts"]
-    m = lambda s, cut=None: match_tokens(s.split(), "166", words, "pl", 2, cut)  # noqa: E731
-    assert m("Crowell W. R. ins. h 166 Lefferts pl")[:1] == ("exact",)
-    assert m("Cotte J h 166 Lef-ferts pl")[0] == "exact", "a hyphen within the word is no misreading"
-    assert m("Cotte J h 166 Lef ferts pl")[0] == "street"
-    assert m("Cotte J h I66 Leflerts pi")[0] == "number"
-    assert m("Cotte J h186 Lefferts pl")[0] == "near"
-    assert m("Cotte J h 6 Lefferts pl") is None, "two digits off is another house"
-    assert m("Lemcke Albert h 166 Lefferts av")[2] == "av", "another street type is noted"
-    assert m("Cotte J h 166 Lefferts")[2] == "", "no type in the line is no note"
-    line, nxt = "Cotte Josephine L h 166".split(), "Lefferts pl".split()
+    words = ["berkeley"]
+    m = lambda s, cut=None: match_tokens(s.split(), "146", words, "pl", 2, cut)  # noqa: E731
+    assert m("Crowell W. R. ins. h 146 Berkeley pl")[:1] == ("exact",)
+    assert m("Cotte J h 146 Berk-eley pl")[0] == "exact", "a hyphen within the word is no misreading"
+    assert m("Cotte J h 146 Berk eley pl")[0] == "street"
+    assert m("Cotte J h I46 Bcrkeley pi")[0] == "number"
+    assert m("Cotte J h186 Berkeley pl")[0] == "near"
+    assert m("Cotte J h 6 Berkeley pl") is None, "two digits off is another house"
+    assert m("Lemcke Albert h 146 Berkeley av")[2] == "av", "another street type is noted"
+    assert m("Cotte J h 146 Berkeley")[2] == "", "no type in the line is no note"
+    line, nxt = "Cotte Josephine L h 146".split(), "Berkeley pl".split()
     assert m(" ".join(line + nxt), cut=len(line))[0] == "wrapped"
-    assert m("Jones h 166 Lefferts pl and 4 Main", cut=6) is None, "within one line is not a wrap"
+    assert m("Jones h 146 Berkeley pl and 4 Main", cut=6) is None, "within one line is not a wrap"
     line = "Mills Abraham painter h 151 Lorimer".split()
-    assert m(" ".join(line + '" Alex soapmkr h 166 Lefferts pl'.split()), cut=len(line)) is None, \
+    assert m(" ".join(line + '" Alex soapmkr h 146 Berkeley pl'.split()), cut=len(line)) is None, \
         "the address on the next line alone is not a wrap"
     assert match_tokens(
         "h 151 Classon av".split(), "151", ["clarkson"], "av", 2, skip={"classon"}) is None
@@ -369,21 +369,21 @@ def self_test():
         ([("110th", 900), ("110", 30000)], [])
     assert other_streets([("clarkson", 400), ("classon", 3000), ("clarkon", 3)], "clarkson") == \
         ([("clarkson", 400), ("clarkon", 3)], [("classon", 3000)])
-    assert parse("166 Lefferts pl") == ("166", ["lefferts"], "pl")
+    assert parse("146 Berkeley pl") == ("146", ["berkeley"], "pl")
     assert parse("12 De Kalb av") == ("12", ["de", "kalb"], "av")
-    assert m("h 166 Lefferts pl")[1] == "166 Lefferts"
-    assert m("Jas mech eng 220 Bway h 166 Lefferts pl Bklyn")[3] == "Bklyn"
-    assert m("Wm H banker 683 B'way Mhtn h 166 Lefferts pl")[3] == "", "Mhtn is the other address's"
+    assert m("h 146 Berkeley pl")[1] == "146 Berkeley"
+    assert m("Jas mech eng 220 Bway h 146 Berkeley pl Bklyn")[3] == "Bklyn"
+    assert m("Wm H banker 683 B'way Mhtn h 146 Berkeley pl")[3] == "", "Mhtn is the other address's"
     assert match_tokens("h 12 De Kalb av".split(), "12", ["de", "kalb"], "av", 1)[0] == "exact"
-    assert as_number("h166") == "166" and as_number("lGG") is None and as_number("l6G") == "166"
-    assert as_number("hl66") == "166" and m("Cotte J hl66 Lefferts pl")[0] == "number"
+    assert as_number("h146") == "146" and as_number("lGG") is None and as_number("l4G") == "146"
+    assert as_number("hl46") == "146" and m("Cotte J hl46 Berkeley pl")[0] == "number"
     print("self-test ok")
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("address", nargs="?", help='a house number and a street: "166 Lefferts pl"')
+    ap.add_argument("address", nargs="?", help='a house number and a street: "146 Berkeley pl"')
     ap.add_argument("--dist", type=int, default=2,
                     help="edits allowed in the street word (default 2; 1 for a short word)")
     ap.add_argument("--people", action="store_true", help="trace each person found at it")

@@ -36,7 +36,7 @@ EXTRA_COLS = ["publisher", "role", "scan", "employer", "spouse_name", "printed_p
 PLACES = ["Manhattan", "Brooklyn", "Elsewhere"]
 TRACE_YEARS = 10       # a traced line further than this from every year at the address is left out
 # Place markers as the directories print them after an address, letters only, lowercased: Trow's
-# (Manhattan) "h 168 Lefferts pl Bklyn", a Brooklyn directory's "107 Fulton, N. Y.". OCR forms
+# (Manhattan) "h 217 Berkeley pl Bklyn", a Brooklyn directory's "107 Fulton, N. Y.". OCR forms
 # seen in the lines: Eklyn, Bkn, B'klyn.
 MARKERS = {
     "Brooklyn": re.compile(r"[be]k?l[yi]?n|[be]kn|bk[yi]n|bklyn\w*|brklyn|brooklyn|wmsburgh?"
@@ -404,7 +404,7 @@ def home_place(r) -> str:
 def place_of(tail: str, r) -> tuple:
     """(place, the marker that says so, or '' where it is the directory's own place). Only the
     first one or two tokens after the street count: a marker further on belongs to another
-    address in the line ("683 B'way Mhtn h 106 Lefferts pl")."""
+    address in the line ("683 B'way Mhtn h 106 Berkeley pl")."""
     toks = [re.sub(r"[^a-z]", "", t.lower()) for t in tail.split()[:2]]
     for cand, shown in ((toks[0] if toks else "", tail.split()[:1]),
                         ("".join(toks), tail.split()[:2])):          # "N Y", "L I", "Jersey City"

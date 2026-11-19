@@ -1,5 +1,15 @@
 # city-directory-extraction
 
+> [!IMPORTANT]
+> **This is the rough working scratchpad, not the release.**
+>
+> This repository is the day-to-day lab where the project was built: experiments, dead ends,
+> handoff notes and half-finished tools. Much of it is superseded, and its numbers and plans go
+> stale. Please don't build on it or cite it.
+>
+> **The formally published datasets, model and code are coming soon.** This note will link to
+> them once they are out.
+
 One project, two halves, aimed at **extracting structured person records from historical US city
 directories** and releasing the results to the community:
 

@@ -23,7 +23,7 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path[:0] = [str(REPO / "space"), str(REPO / "browse")]
 import search  # noqa: E402
 
-QUERIES = ["155 Franklin", "166 Lefferts pl", "45 Fulton", "62 Euclid av"]
+QUERIES = ["155 Franklin", "217 Berkeley pl", "45 Fulton", "62 Euclid av"]
 
 
 def main(argv: list) -> int:

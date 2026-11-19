@@ -62,7 +62,7 @@ The files:
 
 - **`search.py`:** the DuckDB search. It grades lines with `find_address`'s own readers, so the
   script and the page agree. Run it directly to test without the page:
-  `uv run --with duckdb==2.0.0 python space/search.py data/space/records.parquet "166 Lefferts pl"`.
+  `uv run --with duckdb==2.0.0 python space/search.py data/space/records.parquet "45 Fulton"`.
 - **`app.py`:** the Gradio page, both tabs.
 - **`browse.py`:** the Browse tab's queries. Run it directly to time searches without the page:
   `uv run --with duckdb==2.0.0 python space/browse.py data/space/records.parquet "smith grocer"`.
@@ -79,14 +79,14 @@ The files:
 
 **Where an address is.** The "Where the address is" boxes (Manhattan, Brooklyn, Elsewhere) filter
 on each line's own place, not its directory's. A marker printed right after the matched street
-decides it: Trow's prints Brooklyn homes as "h 168 Lefferts pl Bklyn", and Brooklyn's
+decides it: Trow's prints Brooklyn homes as "h 217 Berkeley pl Bklyn", and Brooklyn's
 directories print New York addresses as "107 Fulton, N. Y." or "Mhtn" (`MARKERS` in `search.py`,
 with OCR forms such as Eklyn and Mhta). A marker further along the line belongs to another
-address in it ("683 B'way Mhtn h 106 Lefferts pl"), so it doesn't count. Without a marker, an
+address in it ("683 B'way Mhtn h 106 Berkeley pl"), so it doesn't count. Without a marker, an
 address takes its directory's city: Brooklyn or Williamsburgh for theirs, Manhattan for New
 York's, which before 1898 was the City of New York. Each line's badge says which way it was
 decided. Where a directory left the marker out, or the OCR lost it, the line goes to the
-directory's city: 2 Trow's lines for Lefferts Pl, a Brooklyn street, show as Manhattan.
+directory's city: 2 Trow's lines for one Brooklyn street show as Manhattan.
 "45 Fulton" splits 2,318 Brooklyn / 1,711 Manhattan / 15 elsewhere.
 
 **Downloads.** After a search, "Download the matches" gives every line found as a CSV, near
@@ -236,8 +236,8 @@ the finder, asks the browser for its location and searches the building in front
   city's address list kept the old name; the address box can be edited.
 
 The page and the script give the same lines: since 2026-11-04 the script runs this search over
-the same Parquet. So neither shows a held-out row, such as "h 76 Leffert© pi" (1906BPL:1193:111,
-an `adjacent` holdout), which the script found when it read browse.db.
+the same Parquet. So neither shows a held-out row, such as line 1906BPL:1193:111
+(an `adjacent` holdout), which the script found when it read browse.db.
 
 ## Old numbers on renumbered streets (2026-11-15, local only, not on the test Space)
 

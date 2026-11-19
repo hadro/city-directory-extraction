@@ -97,7 +97,7 @@ CASES = [   # real lines from the records, and the plan's own
     ("12 Avenue B", (12, "b av", "")),
     ("h 12 av. B", (12, "b av", "")),
     ("107 Fulton, N. Y.", (107, "fulton", "")),
-    ("h 168 Lefferts pl Bklyn", (168, "lefferts pl", "")),
+    ("h 217 Berkeley pl Bklyn", (217, "berkeley pl", "")),
     ("56 Bedford av, E. D.", (56, "bedford av", "e")),
     ("h 258 Fourth", (258, "4", "")),
     ("h436 E138th", (436, "e 138", "")),

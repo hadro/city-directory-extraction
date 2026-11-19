@@ -302,7 +302,7 @@ def self_test():
     except ImportError:
         streets = None
     for text in ("465 Court st", "465 Court", "677 Myrtle av", "12 Myrtle Avenue", "5 Hicks street",
-                 "14 Lefferts pl", "30 Clinton Place", "100 15th st", "100 5th av", "7 Fourth av",
+                 "14 Berkeley pl", "30 Clinton Place", "100 15th st", "100 5th av", "7 Fourth av",
                  "125 S 4th st", "125 South 4th", "338 N. 2d", "9 East 110th st", "12 De Kalb av",
                  "5 Broadway", "20 Montague court", "3 Atlantic ave", "155 Franklin",
                  "155 Franklin av", "56 Bedford av, E. D.", "29 4th E.D.", "320 B'way", "320 Bway"):

@@ -165,14 +165,14 @@ order. A URL with `_col=` keeps the order it gives, and the plugin leaves it alo
 - **Search box:** full-text search over `raw_line`, the resolved name and addresses, occupation,
   employer and spouse. It matches whole words in any order and any of those columns. For one
   column, a phrase or a prefix, add `&_searchmode=raw` to the URL once (the form keeps it) and
-  type the search with FTS5 syntax: `address_resolved:"6 Lefferts P"*` finds "6 Lefferts pl"
-  and the misread "pi" in 0.2 s, not "56 Lefferts". Raw mode reads punctuation as syntax, so
+  type the search with FTS5 syntax: `address_resolved:"6 Berkeley P"*` finds "6 Berkeley pl"
+  and the misread "pi", not "56 Berkeley". Raw mode reads punctuation as syntax, so
   quote anything with a hyphen or apostrophe (`"Ann-street"`). `?_search_occupation_role=carman`
   also searches one column, without the syntax.
 - **"contains" filters:** these read every row. At 5.5M rows that's ~20 s, past the 5 s limit, so
   over the whole table they time out. Within one volume they're well under a second. **Use the
-  search box, or filter to a volume first.** "contains" also matches inside numbers: "6 Lefferts"
-  finds 56, 146 and 226 Lefferts.
+  search box, or filter to a volume first.** "contains" also matches inside numbers: "6 Berkeley"
+  matches 56 and 146 Berkeley too.
 - **Sorting:** a sort on a column with no index (`_sort=spouse_name`) sorts every matching row
   and times out over the whole table. An index on the column fixes it: `["spouse_name",
   "entry_shaped"]` in `sources.toml`'s `index` list made that sort 0.45 s and its count 0.38 s
@@ -190,8 +190,8 @@ order. A URL with `_col=` keeps the order it gives, and the plugin leaves it alo
 ## Finding an address, misreadings included
 
 ```bash
-uv run browse/find_address.py "166 Lefferts pl"            # ~3 s
-uv run browse/find_address.py "166 Lefferts pl" --people   # also each resident in every volume
+uv run browse/find_address.py "146 Berkeley pl"            # ~3 s
+uv run browse/find_address.py "146 Berkeley pl" --people   # also each resident in every volume
 python3 browse/find_address.py --self-test
 ```
 
@@ -203,7 +203,7 @@ script and the page give the same lines. That Parquet holds no `eval_holdout` ro
 do the script's lines. It says so when browse.db is newer
 than the Parquet. Until 2026-11-04 it read browse.db's full-text index: 15-56 s a search at 16M
 rows, and it crashed on a volume loaded twice, since two copies of a line sorted as equal. It reads the word index's word list for spellings of the street word
-(Leflerts, Lefferta, Leffert©) and for the number's look-alikes (I66, hl66). A spelling may be
+(Bcrkeley, Berkelcy, Berke1ey) and for the number's look-alikes (I46, hl46). A spelling may be
 two edits off for a street word of eight letters or more, one for a shorter word: two edits turn
 Forest into First. A spelling at least a quarter as common as the street word is another street
 (Classon for Clarkson), and is listed as not searched. Then it reads number-then-street in
@@ -218,7 +218,7 @@ Grades:
 - **near:** one digit off. These are mostly real neighbours. The ones whose name or surname is
   at the exact address in another volume are flagged, with their own link.
 
-A line naming another street type (166 Lefferts av when asked for pl) or direction (131 E 110th
+A line naming another street type (146 Berkeley av when asked for pl) or direction (131 E 110th
 when asked for West) is a different street, and is marked `OTHER STREET (av)` or `(E)`; a line
 that leaves the direction out is not. A numbered street ("131 West 110th st") matches by its
 digits, look-alikes folded (11Oth), never by edits, since 111th is another street. `--people` lists each resident's line in every volume, so a year whose line
